@@ -43,15 +43,6 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/betos_classification.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/by_geography.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/by_provider.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/by_service.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/calculations.html</loc>
   </url>
   <url>
@@ -119,6 +110,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/utilization.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/years.html</loc>

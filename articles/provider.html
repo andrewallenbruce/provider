@@ -154,13 +154,13 @@ before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
-<span><span class="co">#&gt;   npi        first last    service                   status</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B           TRUE  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency        TRUE  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment TRUE  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices    TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
+<span><span class="co">#&gt;   npi        first last    service                  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices</span></span></code></pre></div>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
@@ -234,11 +234,11 @@ linking.</li>
 <p>The following return yearly Provider-specific stats:</p>
 <ul>
 <li>
-<code><a href="../reference/by_provider.html">by_provider()</a></code>: Utilization summary.</li>
+<code><a href="../reference/utilization.html">by_provider()</a></code>: Utilization summary.</li>
 <li>
-<code><a href="../reference/by_service.html">by_service()</a></code>: Utilization detail.</li>
+<code><a href="../reference/utilization.html">by_service()</a></code>: Utilization detail.</li>
 <li>
-<code><a href="../reference/by_geography.html">by_geography()</a></code>: National/state/county utilization
+<code><a href="../reference/utilization.html">by_geography()</a></code>: National/state/county utilization
 summary.</li>
 <li>
 <code><a href="../reference/quality_payment.html">quality_payment()</a></code>: QPP/MIPS performance.</li>
@@ -345,9 +345,7 @@ under different circumstances.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
+<span><span class="co">#&gt; Error in affiliations(pac_ind = 123456789): unused argument (pac_ind = 123456789)</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
@@ -363,9 +361,7 @@ of benefits) is linked through the Enrollment ID.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id_ind <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="color: #0000BB;">&lt;character&gt;</span> vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
+<span><span class="co">#&gt; Error in clinicians(enroll_id_ind = 123456789123456): unused argument (enroll_id_ind = 123456789123456)</span></span>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
 <span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>

@@ -123,74 +123,77 @@
 <h2 id="individual-provider">Individual Provider<a class="anchor" aria-label="anchor" href="#individual-provider"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">:::</span><span class="fu">individuals</span><span class="op">(</span><span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt; : missing value where TRUE/FALSE needed</span></span></code></pre>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 10</span></span></span>
+<span><span class="co">#&gt;   npi    pac   enroll_id specialty_code specialty_description state first middle</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 10432… 7810… I2003112… 14-22          PRACTITIONER - PATHO… VT    MARK  K     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: last &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
-<span>  <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 29</span></span>
-<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657"</span></span>
-<span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009"</span></span>
-<span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
-<span><span class="co">#&gt; $ specialty_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22"</span></span>
-<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY"</span></span>
-<span><span class="co">#&gt; $ state                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
-<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK"</span></span>
-<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
-<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG"</span></span>
-<span><span class="co">#&gt; $ gender                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M"</span></span>
-<span><span class="co">#&gt; $ enrollment_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B"</span></span>
-<span><span class="co">#&gt; $ reassignments_ind     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ organization          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC"</span></span>
-<span><span class="co">#&gt; $ pac_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071"</span></span>
-<span><span class="co">#&gt; $ enroll_id_org         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040"</span></span>
-<span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
-<span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99</span></span>
-<span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment"</span></span>
-<span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD"</span></span>
-<span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"</span></span>
-<span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999</span></span>
-<span><span class="co">#&gt; $ specialty             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PATHOLOGY"</span></span>
-<span><span class="co">#&gt; $ members_org           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 951</span></span>
-<span><span class="co">#&gt; $ address_org           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "111 COLCHESTER AVE"</span></span>
-<span><span class="co">#&gt; $ city_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BURLINGTON"</span></span>
-<span><span class="co">#&gt; $ zip_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "054011473"</span></span>
-<span><span class="co">#&gt; $ phone_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8028470000"</span></span>
-<span><span class="co">#&gt; $ assign_ind            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y"</span></span>
-<span><span class="co">#&gt; $ assign_org            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y"</span></span></code></pre>
-<p><br></p>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">enroll_id</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;   npi        enroll_id       first last  state enrollment_type reassignments_ind</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 I20031120000251 MARK  FUNG  VT    Non-DME Part B                  1</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span></span>
-<span><span class="co">#&gt;   npi        pac_ind    first middle last  facility_type facility_ccn</span></span>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">rv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
+<span><span class="co">#&gt;   npi        pac    enroll_id first last  reassignments_ind organization pac_org</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 78108… I2003112… MARK  FUNG                  1 UNIVERSITY … 377949…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: enroll_id_org &lt;chr&gt;, state_org &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   reassignments_org &lt;int&gt;, record_type &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in clinicians(pac_ind = p$pac): unused argument (pac_ind = p$pac)</span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
+<span><span class="co">#&gt;   npi        pac        first middle last  facility_type facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      470003      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      330250      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      470001</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      330084      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      470001</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 20</span></span></span>
 <span><span class="co">#&gt;   npi        organization   doing_business_as pac_org enroll_id_org facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1568419976 UNIVERSITY OF… UNIVERSITY OF VE… 377949… O20021111000… 470003      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1568419976 UNIVERSITY OF… UNIVERSITY OF VE… 377949… O20021111000… 470003      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1033270699 CHAMPLAIN VAL… THE UNIVERSITY O… 276939… O20120110000… 330250      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1891785184 ELIZABETHTOWN… <span style="color: #BB0000;">NA</span>                357755… O20101110000… 331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1508845637 CENTRAL VERMO… <span style="color: #BB0000;">NA</span>                933513… O20050809000… 470001      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1114954682 ALICE HYDE ME… <span style="color: #BB0000;">NA</span>                408252… O20101129000… 330084      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1114954682 ALICE HYDE ME… <span style="color: #BB0000;">NA</span>                408252… O20101129000… 330084      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1508845637 CENTRAL VERMO… <span style="color: #BB0000;">NA</span>                933513… O20050809000… 470001      </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   enroll_state &lt;chr&gt;, incorporation_date &lt;date&gt;, incorporation_state &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organization_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   zip &lt;int&gt;, location_type &lt;chr&gt;, location_other &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   proprietary_nonprofit &lt;chr&gt;, status &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">rd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">rv</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'cl' not found</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in clinicians(pac_ind = 7810891009): unused argument (pac_ind = 7810891009)</span></span></code></pre>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>
@@ -198,7 +201,7 @@ insights. For example, there is a hospital in New York named
 <p>Looking it up in the <strong>Provider Enrollment</strong> API gives
 us several avenues to go down:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span></span>
 <span><span class="co">#&gt;   npi    pac   enroll_id specialty_code specialty_description state organization</span></span>
@@ -207,7 +210,7 @@ us several avenues to go down:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 18917… 3577… O2010111… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 14879… 3577… O2019071… 12-59          PART B SUPPLIER - AM… NY    ELIZABETHTO…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 14070… 3577… O2022082… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">specialty</span>, <span class="va">proprietary_nonprofit</span><span class="op">:</span><span class="va">status</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 9</span></span></span>
@@ -223,29 +226,29 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 172 × 8</span></span></span>
-<span><span class="co">#&gt;    npi        pac_ind    first    middle last  suffix facility_type facility_ccn</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003815184 4082693676 ARMIN    <span style="color: #BB0000;">NA</span>     AFSA… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1023076643 5698798452 JOHN     N      HENRY <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1023377843 6901115278 LINDSEY  B      WILH… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1043245657 7810891009 MARK     K      FUNG  <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1043397656 4183764558 ANTHONY  F      TRAM… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1043630510 2365749389 RYAN     <span style="color: #BB0000;">NA</span>     WOLFE <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1043672140 7214229350 VANESSA  FIORI… FURT… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1053596122 5193802213 TANYA    JEAN   FINCH <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1053863100 8729362207 MATTHEW  D      FARN… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1063851673 1557630613 TERRENCE <span style="color: #BB0000;">NA</span>     O CO… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 162 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 167 × 8</span></span></span>
+<span><span class="co">#&gt;    npi        pac        first   middle last   suffix facility_type facility_ccn</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003815184 4082693676 ARMIN   <span style="color: #BB0000;">NA</span>     AFSAR… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1023076643 5698798452 JOHN    N      HENRY  <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1023377843 6901115278 LINDSEY B      WILHE… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1043245657 7810891009 MARK    K      FUNG   <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1043397656 4183764558 ANTHONY F      TRAMO… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1043630510 2365749389 RYAN    <span style="color: #BB0000;">NA</span>     WOLFE  <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1043672140 7214229350 VANESSA <span style="color: #BB0000;">NA</span>     FIORI… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1053596122 5193802213 TANYA   JEAN   FINCH  <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1053863100 8729362207 MATTHEW D      FARNS… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1063536886 0941434435 ELENA   <span style="color: #BB0000;">NA</span>     BOLAND <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 157 more rows</span></span></span></code></pre>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
-<span><span class="co">#&gt;   npi        pac_ind    first middle last  facility_type facility_ccn parent_ccn</span></span>
+<span><span class="co">#&gt;   npi        pac        first middle last  facility_type facility_ccn parent_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1396989059 8921259557 MARY  K      HALL… Nursing home  33Z302       331302    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1538173869 0547299091 IL    JUN    CHON  Nursing home  33Z302       331302    </span></span>
