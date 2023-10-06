@@ -119,10 +119,11 @@ order_refer <- function(npi   = NULL,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(
-        dplyr::contains(c("partb", "hha", "dme", "pmd")), yn_logical)) |>
-      ord_cols()
+        dplyr::contains(c("partb", "hha", "dme", "pmd")), yn_logical))
+
     if (pivot) {
-      results <- tidyr::pivot_longer(results, cols = !c(npi, first, last),
+      results <-  ord_cols(results) |>
+        tidyr::pivot_longer(cols = !c(npi, first, last),
                           names_to = "service",
                           values_to = "status") |>
         dplyr::filter(status == TRUE) |>

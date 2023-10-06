@@ -19,6 +19,7 @@ Imports:
     anytime,
     cli,
     dplyr,
+    forcats,
     httr2,
     janitor,
     lubridate,

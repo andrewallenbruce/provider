@@ -57,7 +57,8 @@ compare_hcpcs <- function(df) {
                     category, subcategory, family, procedure,
                     beneficiaries,
                     services,
-                    dplyr::contains("avg_")))
+                    dplyr::contains("avg_"))) |>
+    dplyr::mutate(level = forcats::fct_inorder(level))
 
   return(results)
 

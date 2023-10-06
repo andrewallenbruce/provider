@@ -40,7 +40,7 @@ library(purrr)
 (rv <- revalidation_reassign(pac_ind = p$pac))
 ```
 ```{r}
-(cl <- clinicians(pac_ind = p$pac))
+(cl <- clinicians(pac = p$pac))
 ```
 <br>
 
@@ -75,7 +75,7 @@ full_join(
   providers(pac = 7810891009), 
   revalidation_date(enroll_id = "I20031120000251")) |> 
 full_join(revalidation_reassign(pac_ind = 7810891009)) |> 
-  full_join(clinicians(pac_ind = 7810891009)) |> 
+  full_join(clinicians(pac = 7810891009)) |> 
   glimpse()
 ```
 

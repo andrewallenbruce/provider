@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 library(provider)
 library(tidyverse)
 library(gt)
-library(ggthemes)
 ```
 
 
@@ -34,65 +33,6 @@ df <- map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643))
 
 
 ### Counts & Amounts
-
-```{r}
-select(df, 
-       year, 
-       Charges = tot_charges,
-       Allowed = tot_allowed,
-       Payment = tot_payment) |> 
-  ggplot() +
-  geom_line(aes(year, Charges), color = "gray70", linewidth = 1) +
-  geom_line(aes(year, Allowed), color = "gray50", linewidth = 1) +
-  geom_line(aes(year, Payment), color = "gray10", linewidth = 1) +
-  geom_hline(yintercept = mean(df$tot_charges), color = "gray70", linetype = "dashed") +
-  geom_hline(yintercept = mean(df$tot_allowed), color = "gray50", linetype = "dashed") +
-  geom_hline(yintercept = mean(df$tot_payment), color = "gray10", linetype = "dashed") +
-  labs(x = NULL, y = NULL) +
-  scale_x_continuous(breaks = c(2013:2019)) +
-  scale_y_continuous(labels = scales::label_dollar(scale = 1)) +
-  ggthemes::theme_fivethirtyeight()
-```
-
-<br>
-
-```{r}
-select(df, 
-       year, 
-       Beneficiaries = tot_benes,
-       Services = tot_srvcs) |> 
-  ggplot() +
-  geom_line(aes(year, Beneficiaries), color = "gray50", linewidth = 1) +
-  geom_line(aes(year, Services), color = "gray", linewidth = 1) +
-  geom_hline(yintercept = mean(df$tot_benes), color = "gray50", linetype = "dashed") +
-  geom_hline(yintercept = mean(df$tot_srvcs), color = "gray", linetype = "dashed") +
-  labs(x = NULL, y = NULL) +
-  scale_x_continuous(breaks = c(2013:2019)) +
-  scale_y_continuous(labels = scales::label_comma()) +
-  ggthemes::theme_fivethirtyeight()
-```
-<br>
-
-```{r}
-select(df, 
-       year, 
-       Beneficiaries = tot_benes,
-       Services = tot_srvcs,
-       Payment = tot_payment) |> 
-  change(c(Beneficiaries, Services, Payment)) |> 
-  ggplot() +
-  geom_line(aes(year, Beneficiaries_chg_cum), color = "gray50", linewidth = 1) +
-  geom_line(aes(year, Services_chg_cum), color = "gray30", linewidth = 1) +
-  #geom_line(aes(year, Payment_chg_cum), color = "gray10", linewidth = 1) +
-  #geom_hline(yintercept = mean(df$tot_benes), color = "gray50", linetype = "dashed") +
-  #geom_hline(yintercept = mean(df$tot_srvcs), color = "gray", linetype = "dashed") +
-  labs(x = NULL, y = NULL) +
-  scale_x_continuous(breaks = c(2013:2019)) +
-  #scale_y_continuous(labels = scales::label_percent()) +
-  ggthemes::theme_fivethirtyeight()
-```
-
-<br>
 
 ```{r}
 select(df, 
@@ -196,7 +136,7 @@ select(df,
     new_col_name = "nanoplots",
     new_col_label = md("*TREND*"),
     reference_line = "mean",
-    height = "3em",
+    plot_height = "3em",
     options = nanoplot_options(
       data_line_stroke_color = "black",
       show_reference_line = TRUE,
@@ -229,7 +169,7 @@ chronic |>
     new_col_name = "provider_plot",
     new_col_label = md("*Provider*"),
     missing_vals = "remove",
-    height = "3em",
+    plot_height = "3em",
     options = nanoplot_options(
       data_line_stroke_color = "black",
       show_reference_line = TRUE,
@@ -240,7 +180,7 @@ chronic |>
     new_col_name = "state_plot",
     new_col_label = md("*State*"),
     missing_vals = "remove",
-    height = "3em",
+    plot_height = "3em",
     options = nanoplot_options(
       data_line_stroke_color = "black",
       show_reference_line = TRUE,
@@ -251,7 +191,7 @@ chronic |>
     new_col_name = "national_plot",
     new_col_label = md("*National*"),
     missing_vals = "remove",
-    height = "3em",
+    plot_height = "3em",
     options = nanoplot_options(
       data_line_stroke_color = "black",
       show_reference_line = TRUE,
@@ -276,24 +216,41 @@ chronic |>
 ```{r}
 hcpcs <- prac_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
-  list_rbind()
+  list_rbind() |> 
+  compare_hcpcs()
+
 hcpcs
 ```
 
-<br>
 
+
+<br><br>
 
 ```{r}
-hcpcs_compare <- hcpcs |> compare_hcpcs()
-hcpcs_compare
+hcpcs |> 
+  group_by(year, level, family) |>
+  summarise(beneficiaries = sum(beneficiaries),
+            services = sum(services),
+            "Average Payment" = mean(avg_payment), .groups = "drop") |>
+  arrange(year, family) |>
+  gt() |> 
+  fmt_integer(columns = c(beneficiaries, services)) |> 
+  fmt_currency(columns = c('Average Payment'), decimals = 2) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Medicare Part B** Utilization")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  tab_options(table.width = pct(50),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
 ```
 
 
-
-<br>
+<br><br>
 
 ```{r}
-hcpcs_compare |>
+hcpcs |>
 select(year, 
          level, 
          HCPCS = hcpcs_code,
@@ -307,13 +264,7 @@ select(year,
                values_to = "amount") |> 
   pivot_wider(names_from = level, 
               values_from = amount) |> 
-  arrange(stat, HCPCS)
-```
-
-<br>
-
-```{r}
-hcpcs |> 
+  arrange(stat, HCPCS) |>
   filter(stat %in% c("Average Payment")) |> 
   gt(rowname_col = "year") |> 
   fmt_currency(columns = c(Provider, State, National), decimals = 2) |> 
@@ -330,11 +281,24 @@ hcpcs |>
               heading.background.color = "black",
               heading.align = "left")
 ```
-
-<br>
+<br><br>
 
 ```{r}
-hcpcs |> 
+hcpcs |>
+select(year, 
+         level, 
+         HCPCS = hcpcs_code,
+         beneficiaries,
+         services, 
+         "Average Payment" = avg_payment) |> 
+  mutate("Services Per Beneficiary" = services/beneficiaries) |> 
+  select(-c(beneficiaries, services)) |> 
+  pivot_longer(!year:HCPCS, 
+               names_to = "stat", 
+               values_to = "amount") |> 
+  pivot_wider(names_from = level, 
+              values_from = amount) |> 
+  arrange(stat, HCPCS) |> 
   filter(stat %in% c("Services Per Beneficiary")) |> 
   gt(rowname_col = "year") |> 
   fmt_number(columns = c(Provider, State, National), decimals = 2) |> 
@@ -351,3 +315,5 @@ hcpcs |>
               heading.background.color = "black",
               heading.align = "left")
 ```
+
+<br>
