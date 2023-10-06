@@ -6,25 +6,6 @@ utils::globalVariables(c(
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
   "bene_fips_cd", # <beneficiaries>
-  "state.abb", # <by_geography>
-  "state.name", # <by_geography>
-  "x", # <by_geography>
-  "y", # <by_geography>
-  "distro", # <by_geography>
-  "hcpcs_drug_ind", # <by_geography>
-  "place_of_srvc", # <by_geography>
-  "distro", # <by_provider>
-  "y", # <by_provider>
-  "rndrng_prvdr_crdntls", # <by_provider>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
-  "rndrng_prvdr_ent_cd", # <by_provider>
-  "distro", # <by_service>
-  "y", # <by_service>
-  "rndrng_prvdr_crdntls", # <by_service>
-  "rndrng_prvdr_ent_cd", # <by_service>
-  "place_of_srvc", # <by_service>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
-  "hcpcs_drug_ind", # <by_service>
   "year", # <change_year>
   ":=", # <change_year>
   "state.abb", # <cc_specific>
@@ -60,6 +41,10 @@ utils::globalVariables(c(
   "hcpcs_code", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
   "level", # <compare_hcpcs>
+  "category", # <compare_hcpcs>
+  "subcategory", # <compare_hcpcs>
+  "family", # <compare_hcpcs>
+  "procedure", # <compare_hcpcs>
   "tot_benes", # <compare_hcpcs>
   "tot_srvcs", # <compare_hcpcs>
   "tot_provs", # <compare_hcpcs>
@@ -298,6 +283,33 @@ utils::globalVariables(c(
   "code", # <download_nucc_csv>
   "y", # <betos_classification>
   "rbcs_major_ind", # <betos_classification>
+  "distro", # <by_provider>
+  "y", # <by_provider>
+  "rndrng_prvdr_crdntls", # <by_provider>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
+  "rndrng_prvdr_ent_cd", # <by_provider>
+  "distro", # <by_service>
+  "y", # <by_service>
+  "rndrng_prvdr_crdntls", # <by_service>
+  "rndrng_prvdr_ent_cd", # <by_service>
+  "place_of_srvc", # <by_service>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
+  "hcpcs_drug_ind", # <by_service>
+  "category", # <by_service>
+  "subcategory", # <by_service>
+  "family", # <by_service>
+  "procedure", # <by_service>
+  "state.abb", # <by_geography>
+  "state.name", # <by_geography>
+  "x", # <by_geography>
+  "y", # <by_geography>
+  "distro", # <by_geography>
+  "hcpcs_drug_ind", # <by_geography>
+  "place_of_srvc", # <by_geography>
+  "category", # <by_geography>
+  "subcategory", # <by_geography>
+  "family", # <by_geography>
+  "procedure", # <by_geography>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

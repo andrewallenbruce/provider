@@ -6,8 +6,8 @@
 \usage{
 clinicians(
   npi = NULL,
-  pac_ind = NULL,
-  enroll_id_ind = NULL,
+  pac = NULL,
+  enroll_id = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
@@ -28,10 +28,10 @@ clinicians(
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_ind}{< \emph{integer} > 10-digit individual provider associate-level
+\item{pac}{< \emph{integer} > 10-digit individual provider associate-level
 control identifier}
 
-\item{enroll_id_ind}{< \emph{character} > 15-digit individual provider Medicare
+\item{enroll_id}{< \emph{character} > 15-digit individual provider Medicare
 enrollment identifier; begins with capital "I"}
 
 \item{first, middle, last}{< \emph{character} > Individual provider's first,
@@ -69,8 +69,8 @@ associate-level control identifier}
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit individual NPI \cr
-   \code{pac_ind} \tab 10-digit individual PAC ID \cr
-   \code{enroll_id_ind} \tab 15-digit individual enrollment ID \cr
+   \code{pac} \tab 10-digit individual PAC ID \cr
+   \code{enroll_id} \tab 15-digit individual enrollment ID \cr
    \code{first} \tab Provider's first name \cr
    \code{middle} \tab Provider's middle name \cr
    \code{last} \tab Provider's last name \cr

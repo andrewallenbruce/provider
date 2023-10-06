@@ -276,9 +276,25 @@ chronic |>
 ```{r}
 hcpcs <- prac_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
-  list_rbind() |> 
-  compare_hcpcs() |> 
-  select(year, 
+  list_rbind()
+hcpcs
+```
+
+<br>
+
+
+```{r}
+hcpcs_compare <- hcpcs |> compare_hcpcs()
+hcpcs_compare
+```
+
+
+
+<br>
+
+```{r}
+hcpcs_compare |>
+select(year, 
          level, 
          HCPCS = hcpcs_code,
          beneficiaries,

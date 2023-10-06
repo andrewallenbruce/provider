@@ -13,7 +13,7 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac_ind < *integer* > 10-digit individual provider associate level variable
+#' @param pac < *integer* > 10-digit individual provider associate level variable
 #' Links all entity-level information and may be associated with multiple
 #' enrollment IDs if the individual or organization enrolled multiple times
 #' @param first,middle,last < *character* > Individual provider's first, middle,
@@ -40,7 +40,7 @@
 #' |**Field**       |**Description**                   |
 #' |:---------------|:---------------------------------|
 #' |`npi`           |10-digit NPI                      |
-#' |`pac_ind`       |10-digit individual PAC ID        |
+#' |`pac`           |10-digit individual PAC ID        |
 #' |`first`         |Individual provider's first name  |
 #' |`middle`        |Individual provider's middle name |
 #' |`last`          |Individual provider's last name   |
@@ -56,7 +56,7 @@
 #' @autoglobal
 #' @export
 affiliations <- function(npi = NULL,
-                         pac_ind = NULL,
+                         pac = NULL,
                          first = NULL,
                          middle = NULL,
                          last = NULL,
@@ -68,7 +68,7 @@ affiliations <- function(npi = NULL,
                          na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac_ind))       {pac_ind      <- pac_check(pac_ind)}
+  if (!is.null(pac))           {pac          <- pac_check(pac)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
 
@@ -96,7 +96,7 @@ affiliations <- function(npi = NULL,
   args <- dplyr::tribble(
     ~param,                                         ~arg,
     "npi",                                          npi,
-    "ind_pac_id",                                   pac_ind,
+    "ind_pac_id",                                   pac,
     "frst_nm",                                      first,
     "mid_nm",                                       middle,
     "lst_nm",                                       last,
@@ -117,7 +117,7 @@ affiliations <- function(npi = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "pac_ind",       pac_ind,
+      "pac",           pac,
       "first",         first,
       "middle",        middle,
       "last",          last,
@@ -146,7 +146,7 @@ affiliations <- function(npi = NULL,
 aff_cols <- function(df) {
 
   cols <- c("npi",
-            "pac_ind"      = "ind_pac_id",
+            "pac"      = "ind_pac_id",
             "first"        = "frst_nm",
             "middle"       = "mid_nm",
             "last"         = "lst_nm",

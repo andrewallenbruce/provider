@@ -45,7 +45,7 @@
 #' - `hha`: Home Health Agency
 #' - `pmd`: Power Mobility Devices
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param pivot Pivot output; default is `TRUE`
+#' @param pivot < *boolean* > Pivot output; default is `TRUE`
 #'
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -124,7 +124,9 @@ order_refer <- function(npi   = NULL,
     if (pivot) {
       results <- tidyr::pivot_longer(results, cols = !c(npi, first, last),
                           names_to = "service",
-                          values_to = "status")
+                          values_to = "status") |>
+        dplyr::filter(status == TRUE) |>
+        dplyr::mutate(status = NULL)
       }
     }
   return(results)

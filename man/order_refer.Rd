@@ -32,7 +32,7 @@ order and refer to:
 
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
 
-\item{pivot}{Pivot output; default is \code{TRUE}}
+\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

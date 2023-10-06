@@ -27,7 +27,7 @@ individuals <- function(pac) {
                    call = rlang::caller_env())
   }
 
-  c <- clinicians(pac_ind = pac)
+  c <- clinicians(pac = pac)
 
   if (isTRUE(vctrs::vec_is_empty(c))) {
     cli::cli_abort(c("x" = "{.val {pac}} returned no results."),

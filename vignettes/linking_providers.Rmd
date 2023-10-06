@@ -31,9 +31,44 @@ library(purrr)
 ## Individual Provider
 
 ```{r}
-provider:::individuals(7810891009)
+(p <- providers(pac = 7810891009))
+```
+```{r}
+(rd <- revalidation_date(enroll_id = p$enroll_id))
+```
+```{r}
+(rv <- revalidation_reassign(pac_ind = p$pac))
+```
+```{r}
+(cl <- clinicians(pac_ind = p$pac))
+```
+<br>
+
+```{r}
+(a <- affiliations(pac = p$pac))
 ```
 
+<br>
+
+<br>
+
+```{r}
+(h <- affiliations(pac = p$pac) |> 
+  pull(facility_ccn) |>
+  map_dfr(~hospitals(facility_ccn = .x)))
+```
+
+
+
+```{r}
+full_join(p, rd) |> 
+  full_join(rv) |> 
+  full_join(cl) |> 
+  full_join(a) |> 
+  full_join(h) |> 
+  glimpse()
+
+```
 
 ```{r}
 full_join(
@@ -44,19 +79,10 @@ full_join(revalidation_reassign(pac_ind = 7810891009)) |>
   glimpse()
 ```
 
-<br>
 
-```{r}
-affiliations(pac_ind = 7810891009)
-```
 
-<br>
 
-```{r}
-affiliations(pac_ind = 7810891009) |> 
-  pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x))
-```
+
 
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 

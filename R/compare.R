@@ -32,6 +32,7 @@ compare_hcpcs <- function(df) {
                   level,
                   hcpcs_code,
                   pos,
+                  category, subcategory, family, procedure,
                   beneficiaries = tot_benes,
                   services = tot_srvcs,
                   dplyr::contains("avg_")),
@@ -42,6 +43,7 @@ compare_hcpcs <- function(df) {
                     level,
                     hcpcs_code,
                     pos,
+                    category, subcategory, family, procedure,
                     beneficiaries,
                     services,
                     dplyr::contains("avg_")),
@@ -52,6 +54,7 @@ compare_hcpcs <- function(df) {
                     level,
                     hcpcs_code,
                     pos,
+                    category, subcategory, family, procedure,
                     beneficiaries,
                     services,
                     dplyr::contains("avg_")))

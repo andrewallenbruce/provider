@@ -12,9 +12,9 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac_ind < *integer* > 10-digit individual provider associate-level
+#' @param pac < *integer* > 10-digit individual provider associate-level
 #' control identifier
-#' @param enroll_id_ind < *character* > 15-digit individual provider Medicare
+#' @param enroll_id < *character* > 15-digit individual provider Medicare
 #' enrollment identifier; begins with capital "I"
 #' @param first,middle,last < *character* > Individual provider's first,
 #' middle, or last name
@@ -40,8 +40,8 @@
 #' |**Field**       |**Description**                                       |
 #' |:---------------|:-----------------------------------------------------|
 #' |`npi`           |10-digit individual NPI                               |
-#' |`pac_ind`       |10-digit individual PAC ID                            |
-#' |`enroll_id_ind` |15-digit individual enrollment ID                     |
+#' |`pac`           |10-digit individual PAC ID                            |
+#' |`enroll_id`     |15-digit individual enrollment ID                     |
 #' |`first`         |Provider's first name                                 |
 #' |`middle`        |Provider's middle name                                |
 #' |`last`          |Provider's last name                                  |
@@ -72,8 +72,8 @@
 #' @autoglobal
 #' @export
 clinicians <- function(npi = NULL,
-                       pac_ind = NULL,
-                       enroll_id_ind = NULL,
+                       pac = NULL,
+                       enroll_id = NULL,
                        first = NULL,
                        middle = NULL,
                        last = NULL,
@@ -91,19 +91,19 @@ clinicians <- function(npi = NULL,
                        na.rm = TRUE) {
 
   if (!is.null(npi))           {npi        <- npi_check(npi)}
-  if (!is.null(pac_ind))       {pac_id_ind <- pac_check(pac_ind)}
-  if (!is.null(pac_org))       {pac_id_org <- pac_check(pac_org)}
-  if (!is.null(enroll_id_ind)) {enroll_check(enroll_id_ind)}
-  if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
+  if (!is.null(pac))           {pac        <- pac_check(pac)}
+  if (!is.null(pac_org))       {pac_org    <- pac_check(pac_org)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
   if (!is.null(zip))           {zip        <- as.character(zip)}
+  if (!is.null(enroll_id))     {enroll_check(enroll_id)}
+  if (!is.null(enroll_id))     {enroll_ind_check(enroll_id)}
   if (!is.null(gender))        {rlang::arg_match(gender, c("F", "M"))}
 
   args <- dplyr::tribble(
     ~param,               ~arg,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_ind,
-    "Ind_enrl_ID",        enroll_id_ind,
+    "Ind_PAC_ID",         pac,
+    "Ind_enrl_ID",        enroll_id,
     "frst_nm",            first,
     "mid_nm",             middle,
     "lst_nm",             last,
@@ -130,8 +130,8 @@ clinicians <- function(npi = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "pac_ind",       pac_ind,
-      "enroll_id_ind", enroll_id_ind,
+      "pac",           pac,
+      "enroll_id",     enroll_id,
       "first",         first,
       "middle",        middle,
       "last",          last,
