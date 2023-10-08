@@ -110,7 +110,8 @@ by provider, service and geography.</p>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  nest <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">by_service</span><span class="op">(</span></span>
@@ -154,20 +155,18 @@ by provider, service and geography.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> Year in <code>YYYY</code> format. Run helper
-function <code><a href="years.html">prac_years()</a></code> to return a vector of the years currently available.</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> Year data was reported, in <code>YYYY</code>
+format. Run helper function <code><a href="years.html">prac_years()</a></code> to return a vector of the years
+currently available.</p></dd>
 
 
 <dt>npi</dt>
 <dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
 
 
-<dt>first, last</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's name</p></dd>
-
-
-<dt>organization</dt>
-<dd><p>&lt; <em>character</em> &gt; Organizational provider's name</p></dd>
+<dt>first, last, organization</dt>
+<dd><p>&lt; <em>character</em> &gt; Individual/Organizational
+provider's name</p></dd>
 
 
 <dt>credential</dt>
@@ -205,63 +204,32 @@ blank when reported at the national level.</p></dd>
 
 
 <dt>ruca</dt>
-<dd><p>&lt; <em>character</em> &gt; Rural-Urban Commuting Area Code (RUCA):
-- <strong>Metro Area Core</strong>
-- <code>"1"</code>: Primary flow within Urbanized Area (UA)
-- <code>"1.1"</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area High Commuting</strong>
-- <code>"2"</code>: Primary flow 30% or more to UA
-- <code>"2.1"</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area Low Commuting</strong>
-- <code>3</code>: Primary flow 10-30% to UA
-- <strong>Micro Area Core</strong>
-- <code>4</code>: Primary flow within large Urban Cluster (10k - 49k)
-- <code>4.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro High Commuting</strong>
-- <code>5</code>: Primary flow 30% or more to large UC
-- <code>5.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro Low Commuting</strong>
-- <code>6</code>: Primary flow 10-30% to large UC
-- <strong>Small Town Core</strong>
-- <code>7</code>: Primary flow within small UC (2.5k - 9.9k)
-- <code>7.1</code>: Secondary flow 30-50% to UA
-- <code>7.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town High Commuting</strong>
-- <code>8</code>: Primary flow 30% or more to small UC
-- <code>8.1</code>: Secondary flow 30-50% to UA
-- <code>8.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town Low Commuting</strong>
-- <code>9</code>: Primary flow 10-30% to small UC
-- <strong>Rural Areas</strong>
-- <code>10</code>: Primary flow to tract outside a UA or UC
-- <code>10.1</code>: Secondary flow 30-50% to UA
-- <code>10.2</code>: Secondary flow 30-50% to large UC
-- <code>10.3</code>: Secondary flow 30-50% to small UC
-- <code>99</code>: Zero population and no rural-urban identifier information</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Provider’s RUCA code</p></dd>
 
 
 <dt>country</dt>
-<dd><p>&lt; <em>character</em> &gt; Country where provider is located.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Country where provider is located</p></dd>
 
 
 <dt>specialty</dt>
-<dd><p>&lt; <em>character</em> &gt; Provider specialty code reported on the largest number of
-claims submitted.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Provider specialty code reported on the
+largest number of claims submitted</p></dd>
 
 
 <dt>par</dt>
-<dd><p>Identifies whether the provider participates in Medicare
-and/or accepts assignment of Medicare allowed amounts. The value will
-be <code>Y</code> for any provider that had at least one claim identifying the
-provider as participating in Medicare or accepting assignment of
-Medicare allowed amounts within HCPCS code and place of service. A
-non-participating provider may elect to accept Medicare allowed amounts
-for some services and not accept Medicare allowed amounts for other
-services.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Identifies whether the provider participates in
+Medicare and/or accepts assignment of Medicare allowed amounts. A
+non-participating provider may elect to accept Medicare allowed amounts for
+some services and not accept Medicare allowed amounts for other services.</p></dd>
 
 
 <dt>tidy</dt>
 <dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
+
+
+<dt>nest</dt>
+<dd><p>&lt; <em>boolean</em> &gt; Nest <code>hcpcs_detailed</code>, <code>demographics</code> and
+<code>conditions</code> columns; default is <code>TRUE</code></p></dd>
 
 
 <dt>hcpcs_code</dt>
@@ -285,10 +253,10 @@ codes; default is <code>TRUE</code></p></dd>
 
 
 <dt>level</dt>
-<dd><p>&lt; <em>character</em> &gt; Level of geography by which the data will be aggregated. <code>State</code>
-indicates the data is aggregated to a single state identified in the Rendering Provider
-State column. <code>National</code> indicates the data is aggregated across all states for a
-given HCPCS Code Level.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Geographic level by which the data will be
+aggregated:</p><ul><li><p><code>"State"</code>: Data is aggregated for each state</p></li>
+<li><p><code>National</code>: Data is aggregated across all states for a given HCPCS Code</p></li>
+</ul></dd>
 
 
 <dt>hcpcs_desc</dt>
@@ -300,14 +268,7 @@ service furnished by the provider.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-
-
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-
-
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-    </div>
+<p><code>by_provider()</code> returns a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Year data was reported</td></tr><tr><td><code>npi</code></td><td>10-digit national provider identifier</td></tr><tr><td><code>entity_type</code></td><td>Provider's entity/enumeration type</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name/Organization's name</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr><tr><td><code>credential</code></td><td>Individual provider's credential</td></tr><tr><td><code>specialty</code></td><td>Provider's specialty</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>fips</code></td><td>Provider's state's FIPS code</td></tr><tr><td><code>ruca</code></td><td>Provider's RUCA code</td></tr><tr><td><code>country</code></td><td>Provider's country</td></tr><tr><td><code>par</code></td><td>Indicates if provider participates in and/or accepts Medicare assignment</td></tr><tr><td><code>tot_hcpcs</code></td><td>Total number of <em>unique</em> HCPCS codes submitted</td></tr><tr><td><code>tot_benes</code></td><td>Total Medicare beneficiaries receiving services from the provider</td></tr><tr><td><code>tot_srvcs</code></td><td>Total services provided to beneficiaries by the provider</td></tr><tr><td><code>tot_charges</code></td><td>Total charges that the provider submitted for all services</td></tr><tr><td><code>tot_allowed</code></td><td>Total allowed amount for all services; the sum of Medicare reimbursement, deductible, coinsurance, etc.</td></tr><tr><td><code>tot_payment</code></td><td>Total amount Medicare paid, less any deductible and coinsurance</td></tr><tr><td><code>tot_std_pymt</code></td><td>Total amount Medicare paid, standardized to account for geographic differences</td></tr><tr><td><code>hcc_risk_avg</code></td><td>Average Hierarchical Condition Category (HCC) risk score of beneficiaries</td></tr><tr><td><code>hcpcs_detailed</code></td><td>Nested list columns <code>drug</code> &amp; <code>medical</code>, offering further detail about the HCPCS codes submitted</td></tr><tr><td><code>demographics</code></td><td>Nested list column containing demographic data about the beneficiaries seen by the provider</td></tr><tr><td><code>conditions</code></td><td>Nested list column containing data about beneficiaries' chronic conditions</td></tr></table></div>
     <div class="section level2">
     <h2 id="by-provider-"><code>by_provider()</code><a class="anchor" aria-label="anchor" href="#by-provider-"></a></h2>
     
@@ -338,7 +299,49 @@ of service submitted on the claim is facility or non-facility.</p>
 <p>The <strong>Geography and Service</strong> subset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally
 and state-wide by HCPCS code and place of service.</p>
-<p>Links:</p><ul><li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider API</a></p></li>
+    </div>
+    <div class="section level2">
+    <h2 id="rural-urban-commuting-area-codes-ruca-">Rural-Urban Commuting Area Codes (RUCA)<a class="anchor" aria-label="anchor" href="#rural-urban-commuting-area-codes-ruca-"></a></h2>
+    
+
+<p>- <strong>Metro Area Core</strong>
+- <code>"1"</code>: Primary flow within Urbanized Area (UA)
+- <code>"1.1"</code>: Secondary flow 30-50% to larger UA
+- <strong>Metro Area High Commuting</strong>
+- <code>"2"</code>: Primary flow 30% or more to UA
+- <code>"2.1"</code>: Secondary flow 30-50% to larger UA
+- <strong>Metro Area Low Commuting</strong>
+- <code>3</code>: Primary flow 10-30% to UA
+- <strong>Micro Area Core</strong>
+- <code>4</code>: Primary flow within large Urban Cluster (10k - 49k)
+- <code>4.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro High Commuting</strong>
+- <code>5</code>: Primary flow 30% or more to large UC
+- <code>5.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro Low Commuting</strong>
+- <code>6</code>: Primary flow 10-30% to large UC
+- <strong>Small Town Core</strong>
+- <code>7</code>: Primary flow within small UC (2.5k - 9.9k)
+- <code>7.1</code>: Secondary flow 30-50% to UA
+- <code>7.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town High Commuting</strong>
+- <code>8</code>: Primary flow 30% or more to small UC
+- <code>8.1</code>: Secondary flow 30-50% to UA
+- <code>8.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town Low Commuting</strong>
+- <code>9</code>: Primary flow 10-30% to small UC
+- <strong>Rural Areas</strong>
+- <code>10</code>: Primary flow to tract outside a UA or UC
+- <code>10.1</code>: Secondary flow 30-50% to UA
+- <code>10.2</code>: Secondary flow 30-50% to large UC
+- <code>10.3</code>: Secondary flow 30-50% to small UC
+- <code>99</code>: Zero population and no rural-urban identifier information</p>
+    </div>
+    <div class="section level2">
+    <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
+    
+
+<ul><li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider API</a></p></li>
 <li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider and Service API</a></p></li>
 <li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Geography and Service API</a></p></li>
 </ul><p><em>Update Frequency:</em> <strong>Annually</strong></p>
