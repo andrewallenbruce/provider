@@ -31,7 +31,41 @@
 #' allowed amount, Medicare payment, and submitted charges organized nationally
 #' and state-wide by HCPCS code and place of service.
 #'
-#' Links:
+#' @section Rural-Urban Commuting Area Codes (RUCA):
+#'      - **Metro Area Core**
+#'          - `"1"`: Primary flow within Urbanized Area (UA)
+#'          - `"1.1"`: Secondary flow 30-50% to larger UA
+#'      - **Metro Area High Commuting**
+#'          - `"2"`: Primary flow 30% or more to UA
+#'          - `"2.1"`: Secondary flow 30-50% to larger UA
+#'      - **Metro Area Low Commuting**
+#'          - `3`: Primary flow 10-30% to UA
+#'      - **Micro Area Core**
+#'          - `4`: Primary flow within large Urban Cluster (10k - 49k)
+#'          - `4.1`: Secondary flow 30-50% to UA
+#'      - **Micro High Commuting**
+#'          - `5`: Primary flow 30% or more to large UC
+#'          - `5.1`: Secondary flow 30-50% to UA
+#'      - **Micro Low Commuting**
+#'          - `6`: Primary flow 10-30% to large UC
+#'      - **Small Town Core**
+#'          - `7`: Primary flow within small UC (2.5k - 9.9k)
+#'          - `7.1`: Secondary flow 30-50% to UA
+#'          - `7.2`: Secondary flow 30-50% to large UC
+#'      - **Small Town High Commuting**
+#'          - `8`: Primary flow 30% or more to small UC
+#'          - `8.1`: Secondary flow 30-50% to UA
+#'          - `8.2`: Secondary flow 30-50% to large UC
+#'      - **Small Town Low Commuting**
+#'          - `9`: Primary flow 10-30% to small UC
+#'      - **Rural Areas**
+#'          - `10`: Primary flow to tract outside a UA or UC
+#'          - `10.1`: Secondary flow 30-50% to UA
+#'          - `10.2`: Secondary flow 30-50% to large UC
+#'          - `10.3`: Secondary flow 30-50% to small UC
+#'      - `99`: Zero population and no rural-urban identifier information
+#'
+#' @section Links:
 #'
 #'   - [Medicare Physician & Other Practitioners: by Provider API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)
 #'   - [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
@@ -50,14 +84,49 @@
 #' by_service(year = 2019, npi = 1003000126)
 #'
 #' by_geography(year = 2020, hcpcs_code = "0002A")
+#'
+#' @returns
+#' `by_provider()` returns a [tibble][tibble::tibble-package] with the columns:
+#' |**Field**        |**Description**                                                                                         |
+#' |:----------------|:-------------------------------------------------------------------------------------------------------|
+#' |`year`           |Year data was reported                                                                                  |
+#' |`npi`            |10-digit national provider identifier                                                                   |
+#' |`entity_type`    |Provider's entity/enumeration type                                                                      |
+#' |`first`          |Individual provider's first name                                                                        |
+#' |`middle`         |Individual provider's middle name                                                                       |
+#' |`last`           |Individual provider's last name/Organization's name                                                     |
+#' |`gender`         |Individual provider's gender                                                                            |
+#' |`credential`     |Individual provider's credential                                                                        |
+#' |`specialty`      |Provider's specialty                                                                                    |
+#' |`address`        |Provider's street address                                                                               |
+#' |`city`           |Provider's city                                                                                         |
+#' |`state`          |Provider's state                                                                                        |
+#' |`zip`            |Provider's zip code                                                                                     |
+#' |`fips`           |Provider's state's FIPS code                                                                            |
+#' |`ruca`           |Provider's RUCA code                                                                                    |
+#' |`country`        |Provider's country                                                                                      |
+#' |`par`            |Indicates if provider participates in and/or accepts Medicare assignment                                |
+#' |`tot_hcpcs`      |Total number of *unique* HCPCS codes submitted                                                          |
+#' |`tot_benes`      |Total Medicare beneficiaries receiving services from the provider                                       |
+#' |`tot_srvcs`      |Total services provided to beneficiaries by the provider                                                |
+#' |`tot_charges`    |Total charges that the provider submitted for all services                                              |
+#' |`tot_allowed`    |Total allowed amount for all services; the sum of Medicare reimbursement, deductible, coinsurance, etc. |
+#' |`tot_payment`    |Total amount Medicare paid, less any deductible and coinsurance                                         |
+#' |`tot_std_pymt`   |Total amount Medicare paid, standardized to account for geographic differences                          |
+#' |`hcc_risk_avg`   |Average Hierarchical Condition Category (HCC) risk score of beneficiaries                               |
+#' |`hcpcs_detailed` |Nested list columns `drug` & `medical`, offering further detail about the HCPCS codes submitted         |
+#' |`demographics`   |Nested list column containing demographic data about the beneficiaries seen by the provider             |
+#' |`conditions`     |Nested list column containing data about beneficiaries' chronic conditions                              |
+#'
 #' @name utilization
 NULL
 
-#' @param year < *integer* > // **required** Year in `YYYY` format. Run helper
-#' function `prac_years()` to return a vector of the years currently available.
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run helper function `prac_years()` to return a vector of the years
+#' currently available.
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param first,last < *character* > Individual provider's name
-#' @param organization < *character* > Organizational provider's name
+#' @param first,last,organization < *character* > Individual/Organizational
+#' provider's name
 #' @param credential < *character* > Individual provider's credentials
 #' @param gender < *character* > Individual provider's gender; `"F"` (Female),
 #' `"M"` (Male)
@@ -65,62 +134,27 @@ NULL
 #' `"O"` (Organization)
 #' @param city < *character* > City where provider is located
 #' @param state < *character* > State where provider is located
-#' @param fips < *character* > Provider's state FIPS code
+#' @param fips < *character* > Provider's state's FIPS code
 #' @param zip < *character* > Provider’s zip code
-#' @param ruca < *character* > Rural-Urban Commuting Area Code (RUCA):
-#'     - **Metro Area Core**
-#'        - `"1"`: Primary flow within Urbanized Area (UA)
-#'        - `"1.1"`: Secondary flow 30-50% to larger UA
-#'     - **Metro Area High Commuting**
-#'        - `"2"`: Primary flow 30% or more to UA
-#'        - `"2.1"`: Secondary flow 30-50% to larger UA
-#'     - **Metro Area Low Commuting**
-#'        - `3`: Primary flow 10-30% to UA
-#'     - **Micro Area Core**
-#'        - `4`: Primary flow within large Urban Cluster (10k - 49k)
-#'        - `4.1`: Secondary flow 30-50% to UA
-#'     - **Micro High Commuting**
-#'        - `5`: Primary flow 30% or more to large UC
-#'        - `5.1`: Secondary flow 30-50% to UA
-#'     - **Micro Low Commuting**
-#'        - `6`: Primary flow 10-30% to large UC
-#'     - **Small Town Core**
-#'        - `7`: Primary flow within small UC (2.5k - 9.9k)
-#'        - `7.1`: Secondary flow 30-50% to UA
-#'        - `7.2`: Secondary flow 30-50% to large UC
-#'     - **Small Town High Commuting**
-#'        - `8`: Primary flow 30% or more to small UC
-#'        - `8.1`: Secondary flow 30-50% to UA
-#'        - `8.2`: Secondary flow 30-50% to large UC
-#'     - **Small Town Low Commuting**
-#'        - `9`: Primary flow 10-30% to small UC
-#'     - **Rural Areas**
-#'        - `10`: Primary flow to tract outside a UA or UC
-#'        - `10.1`: Secondary flow 30-50% to UA
-#'        - `10.2`: Secondary flow 30-50% to large UC
-#'        - `10.3`: Secondary flow 30-50% to small UC
-#'     - `99`: Zero population and no rural-urban identifier information
+#' @param ruca < *character* > Provider’s RUCA code
 #' @param country < *character* > Country where provider is located
-#' @param specialty < *character* > Provider specialty code reported on the largest number of claims submitted
-#' @param par Identifies whether the provider participates in Medicare
-#'    and/or accepts assignment of Medicare allowed amounts. The value will
-#'    be `Y` for any provider that had at least one claim identifying the
-#'    provider as participating in Medicare or accepting assignment of
-#'    Medicare allowed amounts within HCPCS code and place of service. A
-#'    non-participating provider may elect to accept Medicare allowed amounts
-#'    for some services and not accept Medicare allowed amounts for other
-#'    services.
+#' @param specialty < *character* > Provider specialty code reported on the
+#' largest number of claims submitted
+#' @param par < *boolean* > Identifies whether the provider participates in
+#' Medicare and/or accepts assignment of Medicare allowed amounts. A
+#' non-participating provider may elect to accept Medicare allowed amounts for
+#' some services and not accept Medicare allowed amounts for other services.
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @param nest < *boolean* > Nest `hcpcs_detailed`, `demographics` and
+#' `conditions` columns; default is `TRUE`
 #'
 #' @rdname utilization
 #' @autoglobal
 #' @export
 by_provider <- function(year,
                         npi = NULL,
-                        first  = NULL,
-                        last   = NULL,
+                        first = NULL,
+                        last = NULL,
                         organization = NULL,
                         credential  = NULL,
                         gender = NULL,
@@ -133,17 +167,18 @@ by_provider <- function(year,
                         country = NULL,
                         specialty = NULL,
                         par = NULL,
-                        tidy = TRUE) {
+                        tidy = TRUE,
+                        nest = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
   year <- rlang::arg_match(year, as.character(prac_years()))
 
-  if (!is.null(npi))  {npi <- npi_check(npi)}
-  if (!is.null(zip))  {zip <- as.character(zip)}
+  if (!is.null(npi))  {npi  <- npi_check(npi)}
+  if (!is.null(zip))  {zip  <- as.character(zip)}
   if (!is.null(fips)) {fips <- as.character(fips)}
   if (!is.null(ruca)) {ruca <- as.character(ruca)}
-  if (!is.null(par))  {par <- tf_2_yn(par)}
+  if (!is.null(par))  {par  <- tf_2_yn(par)}
 
   id <- api_years("prv") |>
     dplyr::filter(year == {{ year }}) |>
@@ -214,11 +249,16 @@ by_provider <- function(year,
                    remove = TRUE,
                    na.rm = TRUE,
                    sep = " ") |>
-      prov_cols() |>
-      tidyr::nest(medical = dplyr::starts_with("med_"),
-                  drug = dplyr::starts_with("drug_"),
-                  demographics = dplyr::starts_with("bene_"),
-                  conditions = dplyr::starts_with("cc_"))
+      prov_cols()
+
+    if (nest) {
+      results <- results |>
+        tidyr::nest(medical = dplyr::starts_with("med_"),
+                    drug = dplyr::starts_with("drug_"),
+                    demographics = dplyr::starts_with("bene_"),
+                    conditions = dplyr::starts_with("cc_")) |>
+        tidyr::nest(hcpcs_detailed = c(medical, drug))
+        }
 
   }
   return(results)
@@ -231,21 +271,21 @@ prov_cols <- function(df) {
 
   cols <- c("year",
             "npi" = "rndrng_npi",
+            "entity_type" = "rndrng_prvdr_ent_cd",
             "first" = "rndrng_prvdr_first_name",
             "middle" = "rndrng_prvdr_mi",
             "last" = "rndrng_prvdr_last_org_name",
-            "credential" = "rndrng_prvdr_crdntls",
             "gender" = "rndrng_prvdr_gndr",
-            "entity_type" = "rndrng_prvdr_ent_cd",
+            "credential" = "rndrng_prvdr_crdntls",
+            "specialty" = "rndrng_prvdr_type",
             "address",
             "city" = "rndrng_prvdr_city",
             "state" = "rndrng_prvdr_state_abrvtn",
-            "fips" = "rndrng_prvdr_state_fips",
             "zip" = "rndrng_prvdr_zip5",
+            "fips" = "rndrng_prvdr_state_fips",
             "ruca" = "rndrng_prvdr_ruca",
             # "ruca_desc" = "rndrng_prvdr_ruca_desc",
             "country" = "rndrng_prvdr_cntry",
-            "specialty" = "rndrng_prvdr_type",
             "par" = "rndrng_prvdr_mdcr_prtcptg_ind",
             "tot_hcpcs" = "tot_hcpcs_cds",
             "tot_benes",
@@ -305,11 +345,12 @@ prov_cols <- function(df) {
 
 }
 
-#' @param year < *integer* > // **required** Year in `YYYY` format. Run helper
-#' function `prac_years()` to return a vector of the years currently available.
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run helper function `prac_years()` to return a vector of the years
+#' currently available.
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param first,last < *character* > Individual provider's name
-#' @param organization < *character* > Organizational provider's name
+#' @param first,last,organization < *character* > Individual/Organizational
+#' provider's name
 #' @param credential < *character* > Individual provider's credentials
 #' @param gender < *character* > Individual provider's gender; `"F"` (Female),
 #' `"M"` (Male)
@@ -319,65 +360,25 @@ prov_cols <- function(df) {
 #' @param state < *character* > State where provider is located
 #' @param fips < *character* > Provider's state FIPS code
 #' @param zip < *character* > Provider’s zip code
-#' @param ruca < *character* > Rural-Urban Commuting Area Code (RUCA):
-#'     - **Metro Area Core**
-#'        - `"1"`: Primary flow within Urbanized Area (UA)
-#'        - `"1.1"`: Secondary flow 30-50% to larger UA
-#'     - **Metro Area High Commuting**
-#'        - `"2"`: Primary flow 30% or more to UA
-#'        - `"2.1"`: Secondary flow 30-50% to larger UA
-#'     - **Metro Area Low Commuting**
-#'        - `3`: Primary flow 10-30% to UA
-#'     - **Micro Area Core**
-#'        - `4`: Primary flow within large Urban Cluster (10k - 49k)
-#'        - `4.1`: Secondary flow 30-50% to UA
-#'     - **Micro High Commuting**
-#'        - `5`: Primary flow 30% or more to large UC
-#'        - `5.1`: Secondary flow 30-50% to UA
-#'     - **Micro Low Commuting**
-#'        - `6`: Primary flow 10-30% to large UC
-#'     - **Small Town Core**
-#'        - `7`: Primary flow within small UC (2.5k - 9.9k)
-#'        - `7.1`: Secondary flow 30-50% to UA
-#'        - `7.2`: Secondary flow 30-50% to large UC
-#'     - **Small Town High Commuting**
-#'        - `8`: Primary flow 30% or more to small UC
-#'        - `8.1`: Secondary flow 30-50% to UA
-#'        - `8.2`: Secondary flow 30-50% to large UC
-#'     - **Small Town Low Commuting**
-#'        - `9`: Primary flow 10-30% to small UC
-#'     - **Rural Areas**
-#'        - `10`: Primary flow to tract outside a UA or UC
-#'        - `10.1`: Secondary flow 30-50% to UA
-#'        - `10.2`: Secondary flow 30-50% to large UC
-#'        - `10.3`: Secondary flow 30-50% to small UC
-#'     - `99`: Zero population and no rural-urban identifier information
-#' @param country < *character* > Country where provider is located.
-#' @param specialty < *character* > Provider specialty code reported on the largest number of
-#'    claims submitted.
-#' @param par Identifies whether the provider participates in Medicare
-#'    and/or accepts assignment of Medicare allowed amounts. The value will
-#'    be `Y` for any provider that had at least one claim identifying the
-#'    provider as participating in Medicare or accepting assignment of
-#'    Medicare allowed amounts within HCPCS code and place of service. A
-#'    non-participating provider may elect to accept Medicare allowed amounts
-#'    for some services and not accept Medicare allowed amounts for other
-#'    services.
-#' @param hcpcs_code < *character* > HCPCS code used to identify the specific medical service
-#'    furnished by the provider. HCPCS codes include two levels. Level I codes
-#'    are the Current Procedural Terminology (CPT) codes that are maintained
-#'    by the American Medical Association and Level II codes are created by
-#'    CMS to identify products, supplies and services not covered by the CPT
-#'    codes (such as ambulance services).
-#' @param drug Identifies whether the HCPCS code for the specific service
-#'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
-#'    Average Sales Price (ASP) File.
-#' @param pos < *character* > Identifies whether the place of service submitted on the claims is a facility (`"F"`) or non-facility (`"O"`). Non-facility is generally an office setting; however other entities are included in non-facility.
+#' @param ruca < *character* > Provider’s RUCA code
+#' @param country < *character* > Country where provider is located
+#' @param specialty < *character* > Provider specialty code reported on the
+#' largest number of claims submitted
+#' @param par < *boolean* > Identifies whether the provider participates in
+#' Medicare and/or accepts assignment of Medicare allowed amounts. A
+#' non-participating provider may elect to accept Medicare allowed amounts for
+#' some services and not accept Medicare allowed amounts for other services.
+#' @param hcpcs_code < *character* > HCPCS code used to identify the specific
+#' medical service furnished by the provider
+#' @param drug < *boolean* > Identifies whether the HCPCS code is listed in the
+#' Medicare Part B Drug Average Sales Price (ASP) File
+#' @param pos < *character* > Identifies whether the Place of Service (POS)
+#' submitted on the claims is a:
+#'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
+#'    + Non-facility (`"O"`): Office, Home, etc.
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS
 #' codes; default is `TRUE`
-#'
-#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @rdname utilization
 #' @autoglobal
@@ -500,17 +501,25 @@ by_service <- function(year,
         dplyr::distinct(hcpcs_code) |>
         dplyr::pull(hcpcs_code) |>
         purrr::map(\(x) betos_classification(hcpcs_code = x)) |>
-        purrr::list_rbind() |>
-        dplyr::select(hcpcs_code,
-                      category,
-                      subcategory,
-                      family,
-                      procedure)
+        purrr::list_rbind()
 
-      results <- dplyr::full_join(results,
-                                  rbcs,
-                                  by = dplyr::join_by(hcpcs_code))
+      if (isTRUE(vctrs::vec_is_empty(rbcs))) {
 
+        results
+
+      } else {
+
+        rbcs <- dplyr::select(rbcs,
+                              hcpcs_code,
+                              category,
+                              subcategory,
+                              family,
+                              procedure)
+
+        results <- dplyr::full_join(results,
+                                    rbcs,
+                                    by = dplyr::join_by(hcpcs_code))
+      }
     }
   }
   return(results)
@@ -560,12 +569,13 @@ serv_cols <- function(df) {
 
 }
 
-#' @param year < *integer* > // **required** Year in `YYYY` format. Run helper
-#' function `prac_years()` to return a vector of the years currently available.
-#' @param level < *character* > Level of geography by which the data will be aggregated. `State`
-#'    indicates the data is aggregated to a single state identified in the Rendering Provider
-#'    State column. `National` indicates the data is aggregated across all states for a
-#'    given HCPCS Code Level.
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run helper function `prac_years()` to return a vector of the years
+#' currently available.
+#' @param level < *character* > Geographic level by which the data will be
+#' aggregated:
+#'    + `"State"`: Data is aggregated for each state
+#'    + `National`: Data is aggregated across all states for a given HCPCS Code
 #' @param state < *character* > State where the provider is located, as reported
 #'    in NPPES. Values include the 50 United States, District of Columbia,
 #'    U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
@@ -583,8 +593,6 @@ serv_cols <- function(df) {
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS
 #' codes; default is `TRUE`
-#'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @rdname utilization
 #' @autoglobal
@@ -677,19 +685,26 @@ by_geography <- function(year,
         dplyr::distinct(hcpcs_code) |>
         dplyr::pull(hcpcs_code) |>
         purrr::map(\(x) betos_classification(hcpcs_code = x)) |>
-        purrr::list_rbind() |>
-        dplyr::select(hcpcs_code,
-                      category,
-                      subcategory,
-                      family,
-                      procedure)
+        purrr::list_rbind()
 
-      results <- dplyr::left_join(results,
+      if (isTRUE(vctrs::vec_is_empty(rbcs))) {
+
+        results
+
+      } else {
+
+        rbcs <- dplyr::select(rbcs,
+                              hcpcs_code,
+                              category,
+                              subcategory,
+                              family,
+                              procedure)
+
+      results <- dplyr::full_join(results,
                                   rbcs,
                                   by = dplyr::join_by(hcpcs_code))
-
+      }
     }
-
   }
   return(results)
 }

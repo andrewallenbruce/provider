@@ -24,7 +24,8 @@ by_provider(
   country = NULL,
   specialty = NULL,
   par = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  nest = TRUE
 )
 
 by_service(
@@ -65,14 +66,14 @@ by_geography(
 )
 }
 \arguments{
-\item{year}{< \emph{integer} > // \strong{required} Year in \code{YYYY} format. Run helper
-function \code{prac_years()} to return a vector of the years currently available.}
+\item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
+format. Run helper function \code{prac_years()} to return a vector of the years
+currently available.}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{first, last}{< \emph{character} > Individual provider's name}
-
-\item{organization}{< \emph{character} > Organizational provider's name}
+\item{first, last, organization}{< \emph{character} > Individual/Organizational
+provider's name}
 
 \item{credential}{< \emph{character} > Individual provider's credentials}
 
@@ -94,55 +95,22 @@ aggregated at the National level are identified by the word 'National'.}
 \item{fips}{< \emph{character} > FIPS code of the referring provider state. This variable is
 blank when reported at the national level.}
 
-\item{ruca}{< \emph{character} > Rural-Urban Commuting Area Code (RUCA):
-- \strong{Metro Area Core}
-- \code{"1"}: Primary flow within Urbanized Area (UA)
-- \code{"1.1"}: Secondary flow 30-50\% to larger UA
-- \strong{Metro Area High Commuting}
-- \code{"2"}: Primary flow 30\% or more to UA
-- \code{"2.1"}: Secondary flow 30-50\% to larger UA
-- \strong{Metro Area Low Commuting}
-- \code{3}: Primary flow 10-30\% to UA
-- \strong{Micro Area Core}
-- \code{4}: Primary flow within large Urban Cluster (10k - 49k)
-- \code{4.1}: Secondary flow 30-50\% to UA
-- \strong{Micro High Commuting}
-- \code{5}: Primary flow 30\% or more to large UC
-- \code{5.1}: Secondary flow 30-50\% to UA
-- \strong{Micro Low Commuting}
-- \code{6}: Primary flow 10-30\% to large UC
-- \strong{Small Town Core}
-- \code{7}: Primary flow within small UC (2.5k - 9.9k)
-- \code{7.1}: Secondary flow 30-50\% to UA
-- \code{7.2}: Secondary flow 30-50\% to large UC
-- \strong{Small Town High Commuting}
-- \code{8}: Primary flow 30\% or more to small UC
-- \code{8.1}: Secondary flow 30-50\% to UA
-- \code{8.2}: Secondary flow 30-50\% to large UC
-- \strong{Small Town Low Commuting}
-- \code{9}: Primary flow 10-30\% to small UC
-- \strong{Rural Areas}
-- \code{10}: Primary flow to tract outside a UA or UC
-- \code{10.1}: Secondary flow 30-50\% to UA
-- \code{10.2}: Secondary flow 30-50\% to large UC
-- \code{10.3}: Secondary flow 30-50\% to small UC
-- \code{99}: Zero population and no rural-urban identifier information}
+\item{ruca}{< \emph{character} > Provider’s RUCA code}
 
-\item{country}{< \emph{character} > Country where provider is located.}
+\item{country}{< \emph{character} > Country where provider is located}
 
-\item{specialty}{< \emph{character} > Provider specialty code reported on the largest number of
-claims submitted.}
+\item{specialty}{< \emph{character} > Provider specialty code reported on the
+largest number of claims submitted}
 
-\item{par}{Identifies whether the provider participates in Medicare
-and/or accepts assignment of Medicare allowed amounts. The value will
-be \code{Y} for any provider that had at least one claim identifying the
-provider as participating in Medicare or accepting assignment of
-Medicare allowed amounts within HCPCS code and place of service. A
-non-participating provider may elect to accept Medicare allowed amounts
-for some services and not accept Medicare allowed amounts for other
-services.}
+\item{par}{< \emph{boolean} > Identifies whether the provider participates in
+Medicare and/or accepts assignment of Medicare allowed amounts. A
+non-participating provider may elect to accept Medicare allowed amounts for
+some services and not accept Medicare allowed amounts for other services.}
 
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+
+\item{nest}{< \emph{boolean} > Nest \code{hcpcs_detailed}, \code{demographics} and
+\code{conditions} columns; default is \code{TRUE}}
 
 \item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific medical service
 furnished by the provider.}
@@ -156,20 +124,48 @@ B Drug Average Sales Price (ASP) File.}
 \item{rbcs}{< \emph{boolean} > Add Restructured BETOS Classifications to HCPCS
 codes; default is \code{TRUE}}
 
-\item{level}{< \emph{character} > Level of geography by which the data will be aggregated. \code{State}
-indicates the data is aggregated to a single state identified in the Rendering Provider
-State column. \code{National} indicates the data is aggregated across all states for a
-given HCPCS Code Level.}
+\item{level}{< \emph{character} > Geographic level by which the data will be
+aggregated:
+\itemize{
+\item \code{"State"}: Data is aggregated for each state
+\item \code{National}: Data is aggregated across all states for a given HCPCS Code
+}}
 
 \item{hcpcs_desc}{< \emph{character} > Description of the HCPCS code for the specific medical
 service furnished by the provider.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
-
-A \link[tibble:tibble-package]{tibble} containing the search results.
-
-A \link[tibble:tibble-package]{tibble} containing the search results.
+\code{by_provider()} returns a \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{year} \tab Year data was reported \cr
+   \code{npi} \tab 10-digit national provider identifier \cr
+   \code{entity_type} \tab Provider's entity/enumeration type \cr
+   \code{first} \tab Individual provider's first name \cr
+   \code{middle} \tab Individual provider's middle name \cr
+   \code{last} \tab Individual provider's last name/Organization's name \cr
+   \code{gender} \tab Individual provider's gender \cr
+   \code{credential} \tab Individual provider's credential \cr
+   \code{specialty} \tab Provider's specialty \cr
+   \code{address} \tab Provider's street address \cr
+   \code{city} \tab Provider's city \cr
+   \code{state} \tab Provider's state \cr
+   \code{zip} \tab Provider's zip code \cr
+   \code{fips} \tab Provider's state's FIPS code \cr
+   \code{ruca} \tab Provider's RUCA code \cr
+   \code{country} \tab Provider's country \cr
+   \code{par} \tab Indicates if provider participates in and/or accepts Medicare assignment \cr
+   \code{tot_hcpcs} \tab Total number of \emph{unique} HCPCS codes submitted \cr
+   \code{tot_benes} \tab Total Medicare beneficiaries receiving services from the provider \cr
+   \code{tot_srvcs} \tab Total services provided to beneficiaries by the provider \cr
+   \code{tot_charges} \tab Total charges that the provider submitted for all services \cr
+   \code{tot_allowed} \tab Total allowed amount for all services; the sum of Medicare reimbursement, deductible, coinsurance, etc. \cr
+   \code{tot_payment} \tab Total amount Medicare paid, less any deductible and coinsurance \cr
+   \code{tot_std_pymt} \tab Total amount Medicare paid, standardized to account for geographic differences \cr
+   \code{hcc_risk_avg} \tab Average Hierarchical Condition Category (HCC) risk score of beneficiaries \cr
+   \code{hcpcs_detailed} \tab Nested list columns \code{drug} & \code{medical}, offering further detail about the HCPCS codes submitted \cr
+   \code{demographics} \tab Nested list column containing demographic data about the beneficiaries seen by the provider \cr
+   \code{conditions} \tab Nested list column containing data about beneficiaries' chronic conditions \cr
+}
 }
 \description{
 These functions allow the user access to information on services and
@@ -207,8 +203,46 @@ of service submitted on the claim is facility or non-facility.
 The \strong{Geography and Service} subset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally
 and state-wide by HCPCS code and place of service.
+}
 
-Links:
+\section{Rural-Urban Commuting Area Codes (RUCA)}{
+
+- \strong{Metro Area Core}
+- \code{"1"}: Primary flow within Urbanized Area (UA)
+- \code{"1.1"}: Secondary flow 30-50\% to larger UA
+- \strong{Metro Area High Commuting}
+- \code{"2"}: Primary flow 30\% or more to UA
+- \code{"2.1"}: Secondary flow 30-50\% to larger UA
+- \strong{Metro Area Low Commuting}
+- \code{3}: Primary flow 10-30\% to UA
+- \strong{Micro Area Core}
+- \code{4}: Primary flow within large Urban Cluster (10k - 49k)
+- \code{4.1}: Secondary flow 30-50\% to UA
+- \strong{Micro High Commuting}
+- \code{5}: Primary flow 30\% or more to large UC
+- \code{5.1}: Secondary flow 30-50\% to UA
+- \strong{Micro Low Commuting}
+- \code{6}: Primary flow 10-30\% to large UC
+- \strong{Small Town Core}
+- \code{7}: Primary flow within small UC (2.5k - 9.9k)
+- \code{7.1}: Secondary flow 30-50\% to UA
+- \code{7.2}: Secondary flow 30-50\% to large UC
+- \strong{Small Town High Commuting}
+- \code{8}: Primary flow 30\% or more to small UC
+- \code{8.1}: Secondary flow 30-50\% to UA
+- \code{8.2}: Secondary flow 30-50\% to large UC
+- \strong{Small Town Low Commuting}
+- \code{9}: Primary flow 10-30\% to small UC
+- \strong{Rural Areas}
+- \code{10}: Primary flow to tract outside a UA or UC
+- \code{10.1}: Secondary flow 30-50\% to UA
+- \code{10.2}: Secondary flow 30-50\% to large UC
+- \code{10.3}: Secondary flow 30-50\% to small UC
+- \code{99}: Zero population and no rural-urban identifier information
+}
+
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}{Medicare Physician & Other Practitioners: by Provider API}
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}{Medicare Physician & Other Practitioners: by Provider and Service API}

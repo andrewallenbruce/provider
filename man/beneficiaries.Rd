@@ -18,8 +18,8 @@ beneficiaries(
 \item{year}{Calendar year of Medicare enrollment; current years can be
 checked with:
 \itemize{
-\item \code{beneficiaries_years("year")}: Years available for all 12 months
-\item \code{beneficiaries_years("month")}: Years available for individual months
+\item \code{bene_years("year")}: Years available for all 12 months
+\item \code{bene_years("month")}: Years available for individual months
 }}
 
 \item{period}{Time frame of Medicare enrollment; options are:
@@ -48,8 +48,8 @@ checked with:
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{beneficiaries()} allows you to access current data on enrolled
-Medicare beneficiaries.
+\code{beneficiaries()} allows the user access current data on enrolled Medicare
+beneficiaries.
 \subsection{Medicare Monthly Enrollment}{
 
 Current monthly information on the number of Medicare beneficiaries with
@@ -64,9 +64,8 @@ Prescription Drug plans.
 
 The dataset includes enrollee counts on a \emph{rolling 12 month basis} and also
 provides information on yearly trends.
-}
 
-\subsection{Links}{
+Links:
 \itemize{
 \item \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment}{Medicare Monthly Enrollment}
 }

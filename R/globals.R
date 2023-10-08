@@ -288,6 +288,8 @@ utils::globalVariables(c(
   "rndrng_prvdr_crdntls", # <by_provider>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
   "rndrng_prvdr_ent_cd", # <by_provider>
+  "medical", # <by_provider>
+  "drug", # <by_provider>
   "distro", # <by_service>
   "y", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>

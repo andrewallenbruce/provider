@@ -1,7 +1,8 @@
 #' Beneficiary Enrollment in Medicare
 #'
-#' @description `beneficiaries()` allows you to access current data on enrolled
-#' Medicare beneficiaries.
+#' @description
+#' `beneficiaries()` allows the user access current data on enrolled Medicare
+#' beneficiaries.
 #'
 #' ### Medicare Monthly Enrollment
 #' Current monthly information on the number of Medicare beneficiaries with
@@ -17,15 +18,15 @@
 #' The dataset includes enrollee counts on a *rolling 12 month basis* and also
 #' provides information on yearly trends.
 #'
-#' ### Links
+#' Links:
 #'    * [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)
 #'
 #' *Update Frequency:* **Monthly**
 #'
 #' @param year Calendar year of Medicare enrollment; current years can be
 #' checked with:
-#'    * `beneficiaries_years("year")`: Years available for all 12 months
-#'    * `beneficiaries_years("month")`: Years available for individual months
+#'    * `bene_years("year")`: Years available for all 12 months
+#'    * `bene_years("month")`: Years available for individual months
 #' @param period Time frame of Medicare enrollment; options are:
 #'    * `Year`
 #'    * `Month`
@@ -135,7 +136,6 @@ beneficiaries <- function(year        = NULL,
     }
   return(results)
 }
-
 
 #' @param df data frame
 #' @autoglobal

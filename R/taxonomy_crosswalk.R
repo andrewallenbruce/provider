@@ -336,9 +336,8 @@ betos_classification <- function(hcpcs_code = NULL,
       "RBCS_Major_Ind",   procedure)
 
     response <- httr2::request(build_url("bet", args)) |> httr2::req_perform()
-    results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
@@ -354,6 +353,8 @@ betos_classification <- function(hcpcs_code = NULL,
     return(invisible(NULL))
 
   }
+
+    results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
     results <- tidyup(results) |>
