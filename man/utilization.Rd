@@ -59,7 +59,6 @@ by_geography(
   pos = NULL,
   level = NULL,
   fips = NULL,
-  hcpcs_desc = NULL,
   drug = NULL,
   tidy = TRUE,
   rbcs = TRUE
@@ -85,15 +84,11 @@ provider's name}
 
 \item{city}{< \emph{character} > City where provider is located}
 
-\item{state}{< \emph{character} > State where the provider is located, as reported
-in NPPES. Values include the 50 United States, District of Columbia,
-U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
-aggregated at the National level are identified by the word 'National'.}
+\item{state}{< \emph{character} > State where provider is located}
 
 \item{zip}{< \emph{character} > Provider’s zip code}
 
-\item{fips}{< \emph{character} > FIPS code of the referring provider state. This variable is
-blank when reported at the national level.}
+\item{fips}{< \emph{character} > Provider's state FIPS code}
 
 \item{ruca}{< \emph{character} > Provider’s RUCA code}
 
@@ -103,26 +98,28 @@ blank when reported at the national level.}
 largest number of claims submitted}
 
 \item{par}{< \emph{boolean} > Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts. A
-non-participating provider may elect to accept Medicare allowed amounts for
-some services and not accept Medicare allowed amounts for other services.}
+Medicare and/or accepts assignment of Medicare allowed amounts}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \emph{default is} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > Nest \code{hcpcs_detailed}, \code{demographics} and
-\code{conditions} columns; default is \code{TRUE}}
+\item{nest}{< \emph{boolean} > // \emph{default:} \code{TRUE} Nest \code{hcpcs_detailed},
+\code{demographics} and \code{conditions} columns}
 
-\item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific medical service
-furnished by the provider.}
+\item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific
+medical service furnished by the provider}
 
-\item{drug}{< \emph{boolean} > Flag that identifies whether the HCPCS code for the specific
-service furnished by the provider is a HCPCS listed on the Medicare Part
-B Drug Average Sales Price (ASP) File.}
+\item{drug}{< \emph{boolean} > Identifies whether the HCPCS code is listed in the
+Medicare Part B Drug Average Sales Price (ASP) File}
 
-\item{pos}{< \emph{character} > Identifies whether the place of service submitted on the claims is a facility (\code{"F"}) or non-facility (\code{"O"}). Non-facility is generally an office setting; however other entities are included in non-facility.}
+\item{pos}{< \emph{character} > Identifies whether the Place of Service (POS)
+submitted on the claims is a:
+\itemize{
+\item Facility (\code{"F"}): Hospital, Skilled Nursing Facility, etc.
+\item Non-facility (\code{"O"}): Office, Home, etc.
+}}
 
-\item{rbcs}{< \emph{boolean} > Add Restructured BETOS Classifications to HCPCS
-codes; default is \code{TRUE}}
+\item{rbcs}{< \emph{boolean} > // \emph{default is} \code{TRUE} Add Restructured BETOS
+Classifications to HCPCS codes}
 
 \item{level}{< \emph{character} > Geographic level by which the data will be
 aggregated:
@@ -130,9 +127,6 @@ aggregated:
 \item \code{"State"}: Data is aggregated for each state
 \item \code{National}: Data is aggregated across all states for a given HCPCS Code
 }}
-
-\item{hcpcs_desc}{< \emph{character} > Description of the HCPCS code for the specific medical
-service furnished by the provider.}
 }
 \value{
 \code{by_provider()} returns a \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -166,6 +160,69 @@ service furnished by the provider.}
    \code{demographics} \tab Nested list column containing demographic data about the beneficiaries seen by the provider \cr
    \code{conditions} \tab Nested list column containing data about beneficiaries' chronic conditions \cr
 }
+
+
+\code{by_service()} returns a \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{year} \tab Year data was reported \cr
+   \code{npi} \tab 10-digit national provider identifier \cr
+   \code{level} \tab Data aggregation level, will always be "Provider" here \cr
+   \code{entity_type} \tab Provider's entity/enumeration type \cr
+   \code{first} \tab Individual provider's first name \cr
+   \code{middle} \tab Individual provider's middle name \cr
+   \code{last} \tab Individual provider's last name/Organization's name \cr
+   \code{gender} \tab Individual provider's gender \cr
+   \code{credential} \tab Individual provider's credential \cr
+   \code{specialty} \tab Provider's specialty \cr
+   \code{address} \tab Provider's street address \cr
+   \code{city} \tab Provider's city \cr
+   \code{state} \tab Provider's state \cr
+   \code{zip} \tab Provider's zip code \cr
+   \code{fips} \tab Provider's state's FIPS code \cr
+   \code{ruca} \tab Provider's RUCA code \cr
+   \code{country} \tab Provider's country \cr
+   \code{par} \tab Indicates if the provider participates in and/or accepts Medicare assignment \cr
+   \code{hcpcs_code} \tab HCPCS code used to identify the specific medical service furnished by the provider \cr
+   \code{hcpcs_desc} \tab Consumer Friendly Description of the HCPCS code \cr
+   \code{category} \tab Restructured BETOS Classification System Category \cr
+   \code{subcategory} \tab Restructured BETOS Classification System Subcategory \cr
+   \code{family} \tab Restructured BETOS Classification System Family \cr
+   \code{procedure} \tab Restructured BETOS Classification System Major Procedure Indicator \cr
+   \code{drug} \tab Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File \cr
+   \code{pos} \tab Identifies the Place of Service (POS) submitted on the claim \cr
+   \code{tot_benes} \tab Distinct number of Medicare beneficiaries for each HCPCS code/POS combination \cr
+   \code{tot_srvcs} \tab Number of services provided for each HCPCS code/POS combination \cr
+   \code{tot_day} \tab Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination \cr
+   \code{avg_charge} \tab Average charge that the provider submitted for the service \cr
+   \code{avg_allowed} \tab Average of the Medicare allowed amount for the service \cr
+   \code{avg_payment} \tab Average amount Medicare paid, less any deductible and coinsurance \cr
+   \code{avg_std_pymt} \tab Average amount Medicare paid, standardized to account for geographic differences \cr
+}
+
+
+\code{by_geography()} returns a \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{year} \tab Year data was reported \cr
+   \code{level} \tab Data aggregation level, either "National" or "State" \cr
+   \code{state} \tab Provider's state \cr
+   \code{fips} \tab Provider's state's FIPS code \cr
+   \code{hcpcs_code} \tab HCPCS code used to identify the specific medical service furnished \cr
+   \code{hcpcs_desc} \tab Consumer Friendly Description of the HCPCS code \cr
+   \code{category} \tab Restructured BETOS Classification System Category \cr
+   \code{subcategory} \tab Restructured BETOS Classification System Subcategory \cr
+   \code{family} \tab Restructured BETOS Classification System Family \cr
+   \code{procedure} \tab Restructured BETOS Classification System Major Procedure Indicator \cr
+   \code{drug} \tab Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File \cr
+   \code{pos} \tab Identifies the Place of Service (POS) submitted on the claim \cr
+   \code{tot_provs} \tab Number of providers that submitted each HCPCS code/POS combination \cr
+   \code{tot_benes} \tab Distinct number of Medicare beneficiaries for each HCPCS code/POS combination \cr
+   \code{tot_srvcs} \tab Number of services provided for each HCPCS code/POS combination \cr
+   \code{tot_day} \tab Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination \cr
+   \code{avg_charge} \tab Average charge submitted for the service \cr
+   \code{avg_allowed} \tab Average of the Medicare allowed amount for the service \cr
+   \code{avg_payment} \tab Average amount Medicare paid, less any deductible and coinsurance \cr
+   \code{avg_std_pymt} \tab Average amount Medicare paid, standardized to account for geographic differences \cr
+}
 }
 \description{
 These functions allow the user access to information on services and
@@ -175,7 +232,8 @@ by provider, service and geography.
 }
 \section{\code{by_provider()}}{
 
-The \strong{Provider and Service} dataset allows the user access to data such as
+
+The \strong{Provider} dataset allows the user access to data such as
 services and procedures performed; charges submitted and payment received;
 and beneficiary demographic and health characteristics for providers
 treating Original Medicare (fee-for-service) Part B beneficiaries,
@@ -184,11 +242,12 @@ aggregated by year.
 
 \section{\code{by_service()}}{
 
-The \strong{Provider and Service} dataset is aggregated by the following:
+
+The \strong{Provider and Service} dataset is aggregated by:
 \enumerate{
-\item the NPI for the performing provider,
-\item the Healthcare Common Procedure Coding System (HCPCS) code, and
-\item the place of service (either facility or non-facility).
+\item Rendering provider's NPI
+\item Healthcare Common Procedure Coding System (HCPCS) code
+\item Place of Service (Facility or Non-facility)
 }
 
 There can be multiple records for a given NPI based on the number of
@@ -200,45 +259,68 @@ of service submitted on the claim is facility or non-facility.
 
 \section{\code{by_geography()}}{
 
-The \strong{Geography and Service} subset contains information on utilization,
+
+The \strong{Geography and Service} dataset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally
 and state-wide by HCPCS code and place of service.
 }
 
 \section{Rural-Urban Commuting Area Codes (RUCA)}{
 
-- \strong{Metro Area Core}
-- \code{"1"}: Primary flow within Urbanized Area (UA)
-- \code{"1.1"}: Secondary flow 30-50\% to larger UA
-- \strong{Metro Area High Commuting}
-- \code{"2"}: Primary flow 30\% or more to UA
-- \code{"2.1"}: Secondary flow 30-50\% to larger UA
-- \strong{Metro Area Low Commuting}
-- \code{3}: Primary flow 10-30\% to UA
-- \strong{Micro Area Core}
-- \code{4}: Primary flow within large Urban Cluster (10k - 49k)
-- \code{4.1}: Secondary flow 30-50\% to UA
-- \strong{Micro High Commuting}
-- \code{5}: Primary flow 30\% or more to large UC
-- \code{5.1}: Secondary flow 30-50\% to UA
-- \strong{Micro Low Commuting}
-- \code{6}: Primary flow 10-30\% to large UC
-- \strong{Small Town Core}
-- \code{7}: Primary flow within small UC (2.5k - 9.9k)
-- \code{7.1}: Secondary flow 30-50\% to UA
-- \code{7.2}: Secondary flow 30-50\% to large UC
-- \strong{Small Town High Commuting}
-- \code{8}: Primary flow 30\% or more to small UC
-- \code{8.1}: Secondary flow 30-50\% to UA
-- \code{8.2}: Secondary flow 30-50\% to large UC
-- \strong{Small Town Low Commuting}
-- \code{9}: Primary flow 10-30\% to small UC
-- \strong{Rural Areas}
-- \code{10}: Primary flow to tract outside a UA or UC
-- \code{10.1}: Secondary flow 30-50\% to UA
-- \code{10.2}: Secondary flow 30-50\% to large UC
-- \code{10.3}: Secondary flow 30-50\% to small UC
-- \code{99}: Zero population and no rural-urban identifier information
+\itemize{
+\item \strong{Metro Area Core}
+\itemize{
+\item \code{"1"}: Primary flow within Urbanized Area (UA)
+\item \code{"1.1"}: Secondary flow 30-50\% to larger UA
+}
+\item \strong{Metro Area High Commuting}
+\itemize{
+\item \code{"2"}: Primary flow 30\% or more to UA
+\item \code{"2.1"}: Secondary flow 30-50\% to larger UA
+}
+\item \strong{Metro Area Low Commuting}
+\itemize{
+\item \code{"3"}: Primary flow 10-30\% to UA
+}
+\item \strong{Micro Area Core}
+\itemize{
+\item \code{"4"}: Primary flow within large Urban Cluster (10k - 49k)
+\item \code{"4.1"}: Secondary flow 30-50\% to UA
+}
+\item \strong{Micro High Commuting}
+\itemize{
+\item \code{"5"}: Primary flow 30\% or more to large UC
+\item \code{"5.1"}: Secondary flow 30-50\% to UA
+}
+\item \strong{Micro Low Commuting}
+\itemize{
+\item \code{"6"}: Primary flow 10-30\% to large UC
+}
+\item \strong{Small Town Core}
+\itemize{
+\item \code{"7"}: Primary flow within small UC (2.5k - 9.9k)
+\item \code{"7.1"}: Secondary flow 30-50\% to UA
+\item \code{"7.2"}: Secondary flow 30-50\% to large UC
+}
+\item \strong{Small Town High Commuting}
+\itemize{
+\item \code{"8"}: Primary flow 30\% or more to small UC
+\item \code{"8.1"}: Secondary flow 30-50\% to UA
+\item \code{"8.2"}: Secondary flow 30-50\% to large UC
+}
+\item \strong{Small Town Low Commuting}
+\itemize{
+\item \code{"9"}: Primary flow 10-30\% to small UC
+}
+\item \strong{Rural Areas}
+\itemize{
+\item \code{"10"}: Primary flow to tract outside a UA or UC
+\item \code{"10.1"}: Secondary flow 30-50\% to UA
+\item \code{"10.2"}: Secondary flow 30-50\% to large UC
+\item \code{"10.3"}: Secondary flow 30-50\% to small UC
+}
+\item \code{"99"}: Zero population and no rural-urban identifier information
+}
 }
 
 \section{Links}{
@@ -256,13 +338,13 @@ and state-wide by HCPCS code and place of service.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 by_provider(year = 2020, npi = 1003000423)
 
+by_service(year = 2019, npi = 1003000126)
+
+by_geography(year = 2020, hcpcs_code = "0002A")
+
 # Use the years helper function to retrieve results for every year:
 prac_years() |>
 map(\(x) by_provider(year = x, npi = 1043477615)) |>
 list_rbind()
-
-by_service(year = 2019, npi = 1003000126)
-
-by_geography(year = 2020, hcpcs_code = "0002A")
 \dontshow{\}) # examplesIf}
 }

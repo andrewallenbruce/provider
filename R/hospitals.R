@@ -18,7 +18,7 @@
 #' enrollment identifier; begins with capital "O"
 #' @param enroll_state < *character* > Hospital’s enrollment state
 #' @param specialty_code < *character* > Enrollment specialty type code
-#' @param pac_id_org < *integer* > 10-digit organizational/group provider
+#' @param pac_org < *integer* > 10-digit organizational/group provider
 #' associate-level control identifier
 #' @param organization < *character* > Hospital’s legal business name
 #' @param doing_business_as < *character* > Hospital’s doing-business-as name
@@ -63,7 +63,7 @@
 #' @seealso [clinicians()], [providers()], [affiliations()]
 #'
 #' @examples
-#' hospitals(pac_id_org = 6103733050)
+#' hospitals(pac_org = 6103733050)
 #'
 #' hospitals(state = "GA", reh_conversion = TRUE)
 #' @autoglobal
@@ -73,7 +73,7 @@ hospitals <- function(npi = NULL,
                       enroll_id_org = NULL,
                       enroll_state = NULL,
                       specialty_code = NULL,
-                      pac_id_org = NULL,
+                      pac_org = NULL,
                       organization = NULL,
                       doing_business_as = NULL,
                       city = NULL,
@@ -99,7 +99,7 @@ hospitals <- function(npi = NULL,
                       na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac_id_org))    {pac_id_org   <- pac_check(pac_id_org)}
+  if (!is.null(pac_org))       {pac_org      <- pac_check(pac_org)}
   if (!is.null(zip))           {zip          <- as.character(zip)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(enroll_id_org)) {enroll_check(enroll_id_org)}
@@ -129,7 +129,7 @@ hospitals <- function(npi = NULL,
     "ENROLLMENT ID",                  enroll_id_org,
     "ENROLLMENT STATE",               enroll_state,
     "PROVIDER TYPE CODE",             specialty_code,
-    "ASSOCIATE ID",                   pac_id_org,
+    "ASSOCIATE ID",                   pac_org,
     "ORGANIZATION NAME",              organization,
     "DOING BUSINESS AS NAME",         doing_business_as,
     "CITY",                           city,
@@ -163,7 +163,7 @@ hospitals <- function(npi = NULL,
       "enroll_id_org",         enroll_id_org,
       "enroll_state",          enroll_state,
       "specialty_code",        specialty_code,
-      "pac_id_org",            pac_id_org,
+      "pac_org",               pac_org,
       "organization",          organization,
       "doing_business_as",     doing_business_as,
       "city",                  city,

@@ -3,7 +3,7 @@
 export(affiliations)
 export(bene_years)
 export(beneficiaries)
-export(betos_classification)
+export(betos)
 export(by_geography)
 export(by_provider)
 export(by_service)

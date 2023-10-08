@@ -10,7 +10,7 @@ hospitals(
   enroll_id_org = NULL,
   enroll_state = NULL,
   specialty_code = NULL,
-  pac_id_org = NULL,
+  pac_org = NULL,
   organization = NULL,
   doing_business_as = NULL,
   city = NULL,
@@ -48,7 +48,7 @@ enrollment identifier; begins with capital "O"}
 
 \item{specialty_code}{< \emph{character} > Enrollment specialty type code}
 
-\item{pac_id_org}{< \emph{integer} > 10-digit organizational/group provider
+\item{pac_org}{< \emph{integer} > 10-digit organizational/group provider
 associate-level control identifier}
 
 \item{organization}{< \emph{character} > Hospital’s legal business name}
@@ -128,7 +128,7 @@ Links:
 \emph{Update Frequency:} \strong{Monthly}
 }
 \examples{
-hospitals(pac_id_org = 6103733050)
+hospitals(pac_org = 6103733050)
 
 hospitals(state = "GA", reh_conversion = TRUE)
 }

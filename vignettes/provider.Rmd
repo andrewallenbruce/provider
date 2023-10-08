@@ -165,7 +165,7 @@ pending(npi = 001234569123, type = "physician")
 
 ```{r}
 # Must be 10 digits long
-affiliations(pac_ind = 0123456789)
+affiliations(pac = 0123456789)
 
 # Must be numeric
 hospitals(pac_org = "O12345678912")

@@ -6,6 +6,8 @@ utils::globalVariables(c(
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
   "bene_fips_cd", # <beneficiaries>
+  "y", # <betos>
+  "rbcs_major_ind", # <betos>
   "year", # <change_year>
   ":=", # <change_year>
   "state.abb", # <cc_specific>
@@ -281,8 +283,6 @@ utils::globalVariables(c(
   "classification", # <download_nucc_csv>
   "specialization", # <download_nucc_csv>
   "code", # <download_nucc_csv>
-  "y", # <betos_classification>
-  "rbcs_major_ind", # <betos_classification>
   "distro", # <by_provider>
   "y", # <by_provider>
   "rndrng_prvdr_crdntls", # <by_provider>
@@ -306,6 +306,7 @@ utils::globalVariables(c(
   "x", # <by_geography>
   "y", # <by_geography>
   "distro", # <by_geography>
+  "hcpcs_desc", # <by_geography>
   "hcpcs_drug_ind", # <by_geography>
   "place_of_srvc", # <by_geography>
   "category", # <by_geography>

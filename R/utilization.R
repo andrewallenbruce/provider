@@ -7,18 +7,20 @@
 #' by provider, service and geography.
 #'
 #' @section `by_provider()`:
-#' The **Provider and Service** dataset allows the user access to data such as
+#'
+#' The **Provider** dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
 #' and beneficiary demographic and health characteristics for providers
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
 #'
 #' @section `by_service()`:
-#' The **Provider and Service** dataset is aggregated by the following:
 #'
-#'    1. the NPI for the performing provider,
-#'    2. the Healthcare Common Procedure Coding System (HCPCS) code, and
-#'    3. the place of service (either facility or non-facility).
+#' The **Provider and Service** dataset is aggregated by:
+#'
+#'    1. Rendering provider's NPI
+#'    2. Healthcare Common Procedure Coding System (HCPCS) code
+#'    3. Place of Service (Facility or Non-facility)
 #'
 #' There can be multiple records for a given NPI based on the number of
 #' distinct HCPCS codes that were billed and where the services were
@@ -27,43 +29,45 @@
 #' of service submitted on the claim is facility or non-facility.
 #'
 #' @section `by_geography()`:
-#' The **Geography and Service** subset contains information on utilization,
+#'
+#' The **Geography and Service** dataset contains information on utilization,
 #' allowed amount, Medicare payment, and submitted charges organized nationally
 #' and state-wide by HCPCS code and place of service.
 #'
 #' @section Rural-Urban Commuting Area Codes (RUCA):
-#'      - **Metro Area Core**
-#'          - `"1"`: Primary flow within Urbanized Area (UA)
-#'          - `"1.1"`: Secondary flow 30-50% to larger UA
-#'      - **Metro Area High Commuting**
-#'          - `"2"`: Primary flow 30% or more to UA
-#'          - `"2.1"`: Secondary flow 30-50% to larger UA
-#'      - **Metro Area Low Commuting**
-#'          - `3`: Primary flow 10-30% to UA
-#'      - **Micro Area Core**
-#'          - `4`: Primary flow within large Urban Cluster (10k - 49k)
-#'          - `4.1`: Secondary flow 30-50% to UA
-#'      - **Micro High Commuting**
-#'          - `5`: Primary flow 30% or more to large UC
-#'          - `5.1`: Secondary flow 30-50% to UA
-#'      - **Micro Low Commuting**
-#'          - `6`: Primary flow 10-30% to large UC
-#'      - **Small Town Core**
-#'          - `7`: Primary flow within small UC (2.5k - 9.9k)
-#'          - `7.1`: Secondary flow 30-50% to UA
-#'          - `7.2`: Secondary flow 30-50% to large UC
-#'      - **Small Town High Commuting**
-#'          - `8`: Primary flow 30% or more to small UC
-#'          - `8.1`: Secondary flow 30-50% to UA
-#'          - `8.2`: Secondary flow 30-50% to large UC
-#'      - **Small Town Low Commuting**
-#'          - `9`: Primary flow 10-30% to small UC
-#'      - **Rural Areas**
-#'          - `10`: Primary flow to tract outside a UA or UC
-#'          - `10.1`: Secondary flow 30-50% to UA
-#'          - `10.2`: Secondary flow 30-50% to large UC
-#'          - `10.3`: Secondary flow 30-50% to small UC
-#'      - `99`: Zero population and no rural-urban identifier information
+#'
+#' + **Metro Area Core**
+#'   + `"1"`: Primary flow within Urbanized Area (UA)
+#'   + `"1.1"`: Secondary flow 30-50% to larger UA
+#' + **Metro Area High Commuting**
+#'   + `"2"`: Primary flow 30% or more to UA
+#'   + `"2.1"`: Secondary flow 30-50% to larger UA
+#' + **Metro Area Low Commuting**
+#'   + `"3"`: Primary flow 10-30% to UA
+#' + **Micro Area Core**
+#'   + `"4"`: Primary flow within large Urban Cluster (10k - 49k)
+#'   + `"4.1"`: Secondary flow 30-50% to UA
+#' + **Micro High Commuting**
+#'   + `"5"`: Primary flow 30% or more to large UC
+#'   + `"5.1"`: Secondary flow 30-50% to UA
+#' + **Micro Low Commuting**
+#'   + `"6"`: Primary flow 10-30% to large UC
+#' + **Small Town Core**
+#'   + `"7"`: Primary flow within small UC (2.5k - 9.9k)
+#'   + `"7.1"`: Secondary flow 30-50% to UA
+#'   + `"7.2"`: Secondary flow 30-50% to large UC
+#' + **Small Town High Commuting**
+#'   + `"8"`: Primary flow 30% or more to small UC
+#'   + `"8.1"`: Secondary flow 30-50% to UA
+#'   + `"8.2"`: Secondary flow 30-50% to large UC
+#' + **Small Town Low Commuting**
+#'   + `"9"`: Primary flow 10-30% to small UC
+#' + **Rural Areas**
+#'   + `"10"`: Primary flow to tract outside a UA or UC
+#'   + `"10.1"`: Secondary flow 30-50% to UA
+#'   + `"10.2"`: Secondary flow 30-50% to large UC
+#'   + `"10.3"`: Secondary flow 30-50% to small UC
+#' + `"99"`: Zero population and no rural-urban identifier information
 #'
 #' @section Links:
 #'
@@ -76,14 +80,14 @@
 #' @examplesIf interactive()
 #' by_provider(year = 2020, npi = 1003000423)
 #'
+#' by_service(year = 2019, npi = 1003000126)
+#'
+#' by_geography(year = 2020, hcpcs_code = "0002A")
+#'
 #' # Use the years helper function to retrieve results for every year:
 #' prac_years() |>
 #' map(\(x) by_provider(year = x, npi = 1043477615)) |>
 #' list_rbind()
-#'
-#' by_service(year = 2019, npi = 1003000126)
-#'
-#' by_geography(year = 2020, hcpcs_code = "0002A")
 #'
 #' @returns
 #' `by_provider()` returns a [tibble][tibble::tibble-package] with the columns:
@@ -118,6 +122,67 @@
 #' |`demographics`   |Nested list column containing demographic data about the beneficiaries seen by the provider             |
 #' |`conditions`     |Nested list column containing data about beneficiaries' chronic conditions                              |
 #'
+#' `by_service()` returns a [tibble][tibble::tibble-package] with the columns:
+#' |**Field**        |**Description**                                                                                  |
+#' |:----------------|:------------------------------------------------------------------------------------------------|
+#' |`year`           |Year data was reported                                                                           |
+#' |`npi`            |10-digit national provider identifier                                                            |
+#' |`level`          |Data aggregation level, will always be "Provider" here                                           |
+#' |`entity_type`    |Provider's entity/enumeration type                                                               |
+#' |`first`          |Individual provider's first name                                                                 |
+#' |`middle`         |Individual provider's middle name                                                                |
+#' |`last`           |Individual provider's last name/Organization's name                                              |
+#' |`gender`         |Individual provider's gender                                                                     |
+#' |`credential`     |Individual provider's credential                                                                 |
+#' |`specialty`      |Provider's specialty                                                                             |
+#' |`address`        |Provider's street address                                                                        |
+#' |`city`           |Provider's city                                                                                  |
+#' |`state`          |Provider's state                                                                                 |
+#' |`zip`            |Provider's zip code                                                                              |
+#' |`fips`           |Provider's state's FIPS code                                                                     |
+#' |`ruca`           |Provider's RUCA code                                                                             |
+#' |`country`        |Provider's country                                                                               |
+#' |`par`            |Indicates if the provider participates in and/or accepts Medicare assignment                     |
+#' |`hcpcs_code`     |HCPCS code used to identify the specific medical service furnished by the provider               |
+#' |`hcpcs_desc`     |Consumer Friendly Description of the HCPCS code                                                  |
+#' |`category`       |Restructured BETOS Classification System Category                                                |
+#' |`subcategory`    |Restructured BETOS Classification System Subcategory                                             |
+#' |`family`         |Restructured BETOS Classification System Family                                                  |
+#' |`procedure`      |Restructured BETOS Classification System Major Procedure Indicator                               |
+#' |`drug`           |Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File |
+#' |`pos`            |Identifies the Place of Service (POS) submitted on the claim                                     |
+#' |`tot_benes`      |Distinct number of Medicare beneficiaries for each HCPCS code/POS combination                    |
+#' |`tot_srvcs`      |Number of services provided for each HCPCS code/POS combination                                  |
+#' |`tot_day`        |Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination     |
+#' |`avg_charge`     |Average charge that the provider submitted for the service                                       |
+#' |`avg_allowed`    |Average of the Medicare allowed amount for the service                                           |
+#' |`avg_payment`    |Average amount Medicare paid, less any deductible and coinsurance                                |
+#' |`avg_std_pymt`   |Average amount Medicare paid, standardized to account for geographic differences                 |
+#'
+#' `by_geography()` returns a [tibble][tibble::tibble-package] with the columns:
+#' |**Field**        |**Description**                                                                                  |
+#' |:----------------|:------------------------------------------------------------------------------------------------|
+#' |`year`           |Year data was reported                                                                           |
+#' |`level`          |Data aggregation level, either "National" or "State"                                             |
+#' |`state`          |Provider's state                                                                                 |
+#' |`fips`           |Provider's state's FIPS code                                                                     |
+#' |`hcpcs_code`     |HCPCS code used to identify the specific medical service furnished                               |
+#' |`hcpcs_desc`     |Consumer Friendly Description of the HCPCS code                                                  |
+#' |`category`       |Restructured BETOS Classification System Category                                                |
+#' |`subcategory`    |Restructured BETOS Classification System Subcategory                                             |
+#' |`family`         |Restructured BETOS Classification System Family                                                  |
+#' |`procedure`      |Restructured BETOS Classification System Major Procedure Indicator                               |
+#' |`drug`           |Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File |
+#' |`pos`            |Identifies the Place of Service (POS) submitted on the claim                                     |
+#' |`tot_provs`      |Number of providers that submitted each HCPCS code/POS combination                               |
+#' |`tot_benes`      |Distinct number of Medicare beneficiaries for each HCPCS code/POS combination                    |
+#' |`tot_srvcs`      |Number of services provided for each HCPCS code/POS combination                                  |
+#' |`tot_day`        |Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination     |
+#' |`avg_charge`     |Average charge submitted for the service                                                         |
+#' |`avg_allowed`    |Average of the Medicare allowed amount for the service                                           |
+#' |`avg_payment`    |Average amount Medicare paid, less any deductible and coinsurance                                |
+#' |`avg_std_pymt`   |Average amount Medicare paid, standardized to account for geographic differences                 |
+#'
 #' @name utilization
 NULL
 
@@ -141,13 +206,10 @@ NULL
 #' @param specialty < *character* > Provider specialty code reported on the
 #' largest number of claims submitted
 #' @param par < *boolean* > Identifies whether the provider participates in
-#' Medicare and/or accepts assignment of Medicare allowed amounts. A
-#' non-participating provider may elect to accept Medicare allowed amounts for
-#' some services and not accept Medicare allowed amounts for other services.
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param nest < *boolean* > Nest `hcpcs_detailed`, `demographics` and
-#' `conditions` columns; default is `TRUE`
-#'
+#' Medicare and/or accepts assignment of Medicare allowed amounts
+#' @param tidy < *boolean* > // _default:_ `TRUE` Tidy output
+#' @param nest < *boolean* > // _default:_ `TRUE` Nest `hcpcs_detailed`,
+#' `demographics` and `conditions` columns
 #' @rdname utilization
 #' @autoglobal
 #' @export
@@ -185,21 +247,21 @@ by_provider <- function(year,
     dplyr::pull(distro)
 
   args <- dplyr::tribble(
-    ~param, ~arg,
-    "Rndrng_NPI",  npi,
-    "Rndrng_Prvdr_First_Name",  first,
-    "Rndrng_Prvdr_Last_Org_Name",  last,
-    "Rndrng_Prvdr_Last_Org_Name",  organization,
-    "Rndrng_Prvdr_Crdntls",  credential,
-    "Rndrng_Prvdr_Gndr",  gender,
-    "Rndrng_Prvdr_Ent_Cd",  entype,
-    "Rndrng_Prvdr_City",  city,
-    "Rndrng_Prvdr_State_Abrvtn",  state,
-    "Rndrng_Prvdr_State_FIPS",  fips,
-    "Rndrng_Prvdr_Zip5",  zip,
-    "Rndrng_Prvdr_RUCA",  ruca,
-    "Rndrng_Prvdr_Cntry",  country,
-    "Rndrng_Prvdr_Type",  specialty,
+    ~param,                           ~arg,
+    "Rndrng_NPI",                     npi,
+    "Rndrng_Prvdr_First_Name",        first,
+    "Rndrng_Prvdr_Last_Org_Name",     last,
+    "Rndrng_Prvdr_Last_Org_Name",     organization,
+    "Rndrng_Prvdr_Crdntls",           credential,
+    "Rndrng_Prvdr_Gndr",              gender,
+    "Rndrng_Prvdr_Ent_Cd",            entype,
+    "Rndrng_Prvdr_City",              city,
+    "Rndrng_Prvdr_State_Abrvtn",      state,
+    "Rndrng_Prvdr_State_FIPS",        fips,
+    "Rndrng_Prvdr_Zip5",              zip,
+    "Rndrng_Prvdr_RUCA",              ruca,
+    "Rndrng_Prvdr_Cntry",             country,
+    "Rndrng_Prvdr_Type",              specialty,
     "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
@@ -270,32 +332,32 @@ by_provider <- function(year,
 prov_cols <- function(df) {
 
   cols <- c("year",
-            "npi" = "rndrng_npi",
-            "entity_type" = "rndrng_prvdr_ent_cd",
-            "first" = "rndrng_prvdr_first_name",
-            "middle" = "rndrng_prvdr_mi",
-            "last" = "rndrng_prvdr_last_org_name",
-            "gender" = "rndrng_prvdr_gndr",
-            "credential" = "rndrng_prvdr_crdntls",
-            "specialty" = "rndrng_prvdr_type",
+            "npi"            = "rndrng_npi",
+            "entity_type"    = "rndrng_prvdr_ent_cd",
+            "first"          = "rndrng_prvdr_first_name",
+            "middle"         = "rndrng_prvdr_mi",
+            "last"           = "rndrng_prvdr_last_org_name",
+            "gender"         = "rndrng_prvdr_gndr",
+            "credential"     = "rndrng_prvdr_crdntls",
+            "specialty"      = "rndrng_prvdr_type",
             "address",
-            "city" = "rndrng_prvdr_city",
-            "state" = "rndrng_prvdr_state_abrvtn",
-            "zip" = "rndrng_prvdr_zip5",
-            "fips" = "rndrng_prvdr_state_fips",
-            "ruca" = "rndrng_prvdr_ruca",
-            # "ruca_desc" = "rndrng_prvdr_ruca_desc",
-            "country" = "rndrng_prvdr_cntry",
-            "par" = "rndrng_prvdr_mdcr_prtcptg_ind",
-            "tot_hcpcs" = "tot_hcpcs_cds",
+            "city"           = "rndrng_prvdr_city",
+            "state"          = "rndrng_prvdr_state_abrvtn",
+            "zip"            = "rndrng_prvdr_zip5",
+            "fips"           = "rndrng_prvdr_state_fips",
+            "ruca"           = "rndrng_prvdr_ruca",
+            # "ruca_desc"    = "rndrng_prvdr_ruca_desc",
+            "country"        = "rndrng_prvdr_cntry",
+            "par"            = "rndrng_prvdr_mdcr_prtcptg_ind",
+            "tot_hcpcs"      = "tot_hcpcs_cds",
             "tot_benes",
             "tot_srvcs",
-            "tot_charges" = "tot_sbmtd_chrg",
-            "tot_allowed" = "tot_mdcr_alowd_amt",
-            "tot_payment" = "tot_mdcr_pymt_amt",
-            "tot_std_pymt" = "tot_mdcr_stdzd_amt",
-            "drug_hcpcs" = "drug_tot_hcpcs_cds",
-            "drug_benes" = "drug_tot_benes",
+            "tot_charges"    = "tot_sbmtd_chrg",
+            "tot_allowed"    = "tot_mdcr_alowd_amt",
+            "tot_payment"    = "tot_mdcr_pymt_amt",
+            "tot_std_pymt"   = "tot_mdcr_stdzd_amt",
+            "drug_hcpcs"     = "drug_tot_hcpcs_cds",
+            "drug_benes"     = "drug_tot_benes",
             "drug_srvcs"     = "drug_tot_srvcs",
             "drug_charges"   = "drug_sbmtd_chrg",
             "drug_allowed"   = "drug_mdcr_alowd_amt",
@@ -323,23 +385,23 @@ prov_cols <- function(df) {
             "bene_race_oth"  = "bene_race_othr_cnt",
             "bene_dual"      = "bene_dual_cnt",
             "bene_ndual"     = "bene_ndual_cnt",
-            "cc_af"     = "bene_cc_af_pct",
-            "cc_alz"    = "bene_cc_alzhmr_pct",
-            "cc_asth"   = "bene_cc_asthma_pct",
-            "cc_canc"   = "bene_cc_cncr_pct",
-            "cc_chf"    = "bene_cc_chf_pct",
-            "cc_ckd"    = "bene_cc_ckd_pct",
-            "cc_copd"   = "bene_cc_copd_pct",
-            "cc_dep"    = "bene_cc_dprssn_pct",
-            "cc_diab"   = "bene_cc_dbts_pct",
-            "cc_hplip"  = "bene_cc_hyplpdma_pct",
-            "cc_hpten"  = "bene_cc_hyprtnsn_pct",
-            "cc_ihd"    = "bene_cc_ihd_pct",
-            "cc_opo"    = "bene_cc_opo_pct",
-            "cc_raoa"   = "bene_cc_raoa_pct",
-            "cc_sz"     = "bene_cc_sz_pct",
-            "cc_strk"   = "bene_cc_strok_pct",
-            "hcc_risk_avg"  = "bene_avg_risk_scre")
+            "cc_af"          = "bene_cc_af_pct",
+            "cc_alz"         = "bene_cc_alzhmr_pct",
+            "cc_asth"        = "bene_cc_asthma_pct",
+            "cc_canc"        = "bene_cc_cncr_pct",
+            "cc_chf"         = "bene_cc_chf_pct",
+            "cc_ckd"         = "bene_cc_ckd_pct",
+            "cc_copd"        = "bene_cc_copd_pct",
+            "cc_dep"         = "bene_cc_dprssn_pct",
+            "cc_diab"        = "bene_cc_dbts_pct",
+            "cc_hplip"       = "bene_cc_hyplpdma_pct",
+            "cc_hpten"       = "bene_cc_hyprtnsn_pct",
+            "cc_ihd"         = "bene_cc_ihd_pct",
+            "cc_opo"         = "bene_cc_opo_pct",
+            "cc_raoa"        = "bene_cc_raoa_pct",
+            "cc_sz"          = "bene_cc_sz_pct",
+            "cc_strk"        = "bene_cc_strok_pct",
+            "hcc_risk_avg"   = "bene_avg_risk_scre")
 
   df |> dplyr::select(dplyr::all_of(cols))
 
@@ -365,9 +427,7 @@ prov_cols <- function(df) {
 #' @param specialty < *character* > Provider specialty code reported on the
 #' largest number of claims submitted
 #' @param par < *boolean* > Identifies whether the provider participates in
-#' Medicare and/or accepts assignment of Medicare allowed amounts. A
-#' non-participating provider may elect to accept Medicare allowed amounts for
-#' some services and not accept Medicare allowed amounts for other services.
+#' Medicare and/or accepts assignment of Medicare allowed amounts
 #' @param hcpcs_code < *character* > HCPCS code used to identify the specific
 #' medical service furnished by the provider
 #' @param drug < *boolean* > Identifies whether the HCPCS code is listed in the
@@ -376,10 +436,9 @@ prov_cols <- function(df) {
 #' submitted on the claims is a:
 #'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
 #'    + Non-facility (`"O"`): Office, Home, etc.
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS
-#' codes; default is `TRUE`
-#'
+#' @param tidy < *boolean* > // _default:_ `TRUE` Tidy output
+#' @param rbcs < *boolean* > // _default:_ `TRUE` Add Restructured BETOS
+#' Classifications to HCPCS codes
 #' @rdname utilization
 #' @autoglobal
 #' @export
@@ -409,14 +468,14 @@ by_service <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(prac_years()))
 
-  if (!is.null(npi))        {npi <- npi_check(npi)}
+  if (!is.null(npi))        {npi        <- npi_check(npi)}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
-  if (!is.null(pos))        {pos <- pos_char(pos)}
-  if (!is.null(zip))        {zip <- as.character(zip)}
-  if (!is.null(fips))       {fips <- as.character(fips)}
-  if (!is.null(ruca))       {ruca <- as.character(ruca)}
-  if (!is.null(par))        {par <- tf_2_yn(par)}
-  if (!is.null(drug))       {drug <- tf_2_yn(drug)}
+  if (!is.null(pos))        {pos        <- pos_char(pos)}
+  if (!is.null(zip))        {zip        <- as.character(zip)}
+  if (!is.null(fips))       {fips       <- as.character(fips)}
+  if (!is.null(ruca))       {ruca       <- as.character(ruca)}
+  if (!is.null(par))        {par        <- tf_2_yn(par)}
+  if (!is.null(drug))       {drug       <- tf_2_yn(drug)}
 
   id <- api_years("srv") |>
     dplyr::filter(year == {{ year }}) |>
@@ -500,7 +559,7 @@ by_service <- function(year,
       rbcs <- results |>
         dplyr::distinct(hcpcs_code) |>
         dplyr::pull(hcpcs_code) |>
-        purrr::map(\(x) betos_classification(hcpcs_code = x)) |>
+        purrr::map(\(x) betos(hcpcs_code = x)) |>
         purrr::list_rbind()
 
       if (isTRUE(vctrs::vec_is_empty(rbcs))) {
@@ -516,9 +575,9 @@ by_service <- function(year,
                               family,
                               procedure)
 
-        results <- dplyr::full_join(results,
-                                    rbcs,
-                                    by = dplyr::join_by(hcpcs_code))
+        results <- dplyr::full_join(results, rbcs,
+                   by = dplyr::join_by(hcpcs_code)) |>
+          serv_cols2()
       }
     }
   }
@@ -533,18 +592,18 @@ serv_cols <- function(df) {
   cols <- c('year',
             'npi' = 'rndrng_npi',
             'level',
-            'entype' = 'rndrng_prvdr_ent_cd',
+            'entity_type' = 'rndrng_prvdr_ent_cd',
             'first' = 'rndrng_prvdr_first_name',
             'middle' = 'rndrng_prvdr_mi',
             'last' = 'rndrng_prvdr_last_org_name',
-            'credential' = 'rndrng_prvdr_crdntls',
             'gender' = 'rndrng_prvdr_gndr',
+            'credential' = 'rndrng_prvdr_crdntls',
             'specialty' = 'rndrng_prvdr_type',
             'address',
             'city' = 'rndrng_prvdr_city',
             'state' = 'rndrng_prvdr_state_abrvtn',
-            'fips' = 'rndrng_prvdr_state_fips',
             'zip' = 'rndrng_prvdr_zip5',
+            'fips' = 'rndrng_prvdr_state_fips',
             'ruca' = 'rndrng_prvdr_ruca',
             # 'ruca_desc' = 'rndrng_prvdr_ruca_desc',
             'country' = 'rndrng_prvdr_cntry',
@@ -569,6 +628,50 @@ serv_cols <- function(df) {
 
 }
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+serv_cols2 <- function(df) {
+
+  cols <- c('year',
+            'npi',
+            'level',
+            'entype',
+            'first',
+            'middle',
+            'last',
+            'gender',
+            'credential',
+            'specialty',
+            'address',
+            'city',
+            'state',
+            'zip',
+            'fips',
+            'ruca',
+            # 'ruca_desc',
+            'country',
+            'par',
+            'hcpcs_code',
+            'hcpcs_desc',
+            'category',
+            'subcategory',
+            'family',
+            'procedure',
+            'drug',
+            'pos',
+            'tot_benes',
+            'tot_srvcs',
+            'tot_day',
+            'avg_charge',
+            'avg_allowed',
+            'avg_payment',
+            'avg_std_pymt')
+
+  df |> dplyr::select(dplyr::any_of(cols))
+
+}
+
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run helper function `prac_years()` to return a vector of the years
 #' currently available.
@@ -576,37 +679,31 @@ serv_cols <- function(df) {
 #' aggregated:
 #'    + `"State"`: Data is aggregated for each state
 #'    + `National`: Data is aggregated across all states for a given HCPCS Code
-#' @param state < *character* > State where the provider is located, as reported
-#'    in NPPES. Values include the 50 United States, District of Columbia,
-#'    U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
-#'    aggregated at the National level are identified by the word 'National'.
-#' @param fips < *character* > FIPS code of the referring provider state. This variable is
-#'    blank when reported at the national level.
-#' @param hcpcs_code < *character* > HCPCS code used to identify the specific medical service
-#'    furnished by the provider.
-#' @param hcpcs_desc < *character* > Description of the HCPCS code for the specific medical
-#'    service furnished by the provider.
-#' @param drug < *boolean* > Flag that identifies whether the HCPCS code for the specific
-#'    service furnished by the provider is a HCPCS listed on the Medicare Part
-#'    B Drug Average Sales Price (ASP) File.
-#' @param pos < *character* > Identifies whether the place of service submitted on the claims is a facility (`"F"`) or non-facility (`"O"`). Non-facility is generally an office setting; however other entities are included in non-facility.
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS
-#' codes; default is `TRUE`
-#'
+#' @param state < *character* > State where provider is located
+#' @param fips < *character* > Provider's state FIPS code
+#' @param hcpcs_code < *character* > HCPCS code used to identify the specific
+#' medical service furnished by the provider
+#' @param drug < *boolean* > Identifies whether the HCPCS code is listed in the
+#' Medicare Part B Drug Average Sales Price (ASP) File
+#' @param pos < *character* > Identifies whether the Place of Service (POS)
+#' submitted on the claims is a:
+#'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
+#'    + Non-facility (`"O"`): Office, Home, etc.
+#' @param tidy < *boolean* > // _default is_ `TRUE` Tidy output
+#' @param rbcs < *boolean* > // _default is_ `TRUE` Add Restructured BETOS
+#' Classifications to HCPCS codes
 #' @rdname utilization
 #' @autoglobal
 #' @export
 by_geography <- function(year,
-                         state         = NULL,
-                         hcpcs_code    = NULL,
-                         pos           = NULL,
-                         level         = NULL,
-                         fips          = NULL,
-                         hcpcs_desc    = NULL,
-                         drug          = NULL,
-                         tidy          = TRUE,
-                         rbcs          = TRUE) {
+                         state = NULL,
+                         hcpcs_code = NULL,
+                         pos = NULL,
+                         level = NULL,
+                         fips = NULL,
+                         drug = NULL,
+                         tidy = TRUE,
+                         rbcs = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -622,7 +719,6 @@ by_geography <- function(year,
     rlang::arg_match(pos, c("F", "O"))
   }
 
-
   if (!is.null(state) && (state %in% state.abb)) {
     state <- dplyr::tibble(x = state.abb,
                            y = state.name) |>
@@ -635,14 +731,13 @@ by_geography <- function(year,
     dplyr::pull(distro)
 
   args <- dplyr::tribble(
-    ~param,      ~arg,
-    "Rndrng_Prvdr_Geo_Lvl",       level,
-    "Rndrng_Prvdr_Geo_Desc",       state,
-    "Rndrng_Prvdr_Geo_Cd",       fips,
-    "HCPCS_Cd",       hcpcs_code,
-    "HCPCS_Desc",       hcpcs_desc,
-    "HCPCS_Drug_Ind",       drug,
-    "Place_Of_Srvc",       pos)
+    ~param,                  ~arg,
+    "Rndrng_Prvdr_Geo_Lvl",  level,
+    "Rndrng_Prvdr_Geo_Desc", state,
+    "Rndrng_Prvdr_Geo_Cd",   fips,
+    "HCPCS_Cd",              hcpcs_code,
+    "HCPCS_Drug_Ind",        drug,
+    "Place_Of_Srvc",         pos)
 
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
@@ -684,7 +779,7 @@ by_geography <- function(year,
       rbcs <- results |>
         dplyr::distinct(hcpcs_code) |>
         dplyr::pull(hcpcs_code) |>
-        purrr::map(\(x) betos_classification(hcpcs_code = x)) |>
+        purrr::map(\(x) betos(hcpcs_code = x)) |>
         purrr::list_rbind()
 
       if (isTRUE(vctrs::vec_is_empty(rbcs))) {
@@ -700,9 +795,9 @@ by_geography <- function(year,
                               family,
                               procedure)
 
-      results <- dplyr::full_join(results,
-                                  rbcs,
-                                  by = dplyr::join_by(hcpcs_code))
+        results <- dplyr::full_join(results, rbcs,
+                   by = dplyr::join_by(hcpcs_code)) |>
+          geo_cols2()
       }
     }
   }
@@ -715,25 +810,51 @@ by_geography <- function(year,
 geo_cols <- function(df) {
 
   cols <- c("year",
-            "level" = "rndrng_prvdr_geo_lvl",
-            "state" = "rndrng_prvdr_geo_desc",
-            "fips" = "rndrng_prvdr_geo_cd",
-            "hcpcs_code" = "hcpcs_cd",
+            "level"        = "rndrng_prvdr_geo_lvl",
+            "state"        = "rndrng_prvdr_geo_desc",
+            "fips"         = "rndrng_prvdr_geo_cd",
+            "hcpcs_code"   = "hcpcs_cd",
+            "hcpcs_desc",
+            "drug"         = "hcpcs_drug_ind",
+            "pos"          = "place_of_srvc",
+            "tot_provs"    = "tot_rndrng_prvdrs",
+            "tot_benes",
+            "tot_srvcs",
+            "tot_day"      = "tot_bene_day_srvcs",
+            "avg_charge"   = "avg_sbmtd_chrg",
+            "avg_allowed"  = "avg_mdcr_alowd_amt",
+            "avg_payment"  = "avg_mdcr_pymt_amt",
+            "avg_std_pymt" = "avg_mdcr_stdzd_amt")
+
+  df |> dplyr::select(dplyr::any_of(cols))
+
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+geo_cols2 <- function(df) {
+
+  cols <- c("year",
+            "level",
+            "state",
+            "fips",
+            "hcpcs_code",
             "hcpcs_desc",
             'category',
             'subcategory',
             'family',
             'procedure',
-            "drug" = "hcpcs_drug_ind",
-            "pos" = "place_of_srvc",
-            "tot_provs" = "tot_rndrng_prvdrs",
+            "drug",
+            "pos",
+            "tot_provs",
             "tot_benes",
             "tot_srvcs",
-            "tot_day" = "tot_bene_day_srvcs",
-            "avg_charge" = "avg_sbmtd_chrg",
-            "avg_allowed" = "avg_mdcr_alowd_amt",
-            "avg_payment" = "avg_mdcr_pymt_amt",
-            "avg_std_pymt" = "avg_mdcr_stdzd_amt")
+            "tot_day",
+            "avg_charge",
+            "avg_allowed",
+            "avg_payment",
+            "avg_std_pymt")
 
   df |> dplyr::select(dplyr::any_of(cols))
 
