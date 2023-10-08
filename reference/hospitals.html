@@ -111,7 +111,7 @@ type and address.</p>
 <span>  enroll_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  doing_business_as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -161,7 +161,7 @@ enrollment identifier; begins with capital "O"</p></dd>
 <dd><p>&lt; <em>character</em> &gt; Enrollment specialty type code</p></dd>
 
 
-<dt>pac_id_org</dt>
+<dt>pac_org</dt>
 <dd><p>&lt; <em>integer</em> &gt; 10-digit organizational/group provider
 associate-level control identifier</p></dd>
 
@@ -285,7 +285,7 @@ Access Hospital that converted to a Rural Emergency Hospital</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi   organization pac_org enroll_id_org facility_ccn specialty_code specialty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>

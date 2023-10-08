@@ -342,12 +342,16 @@ under different circumstances.</p>
 </blockquote>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
-<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in affiliations(pac_ind = 123456789): unused argument (pac_ind = 123456789)</span></span>
+<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in hospitals(pac_org = "O12345678912"): unused argument (pac_org = "O12345678912")</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a

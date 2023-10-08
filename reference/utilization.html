@@ -145,7 +145,6 @@ by provider, service and geography.</p>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hcpcs_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -188,10 +187,7 @@ provider's name</p></dd>
 
 
 <dt>state</dt>
-<dd><p>&lt; <em>character</em> &gt; State where the provider is located, as reported
-in NPPES. Values include the 50 United States, District of Columbia,
-U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
-aggregated at the National level are identified by the word 'National'.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; State where provider is located</p></dd>
 
 
 <dt>zip</dt>
@@ -199,8 +195,7 @@ aggregated at the National level are identified by the word 'National'.</p></dd>
 
 
 <dt>fips</dt>
-<dd><p>&lt; <em>character</em> &gt; FIPS code of the referring provider state. This variable is
-blank when reported at the national level.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Provider's state FIPS code</p></dd>
 
 
 <dt>ruca</dt>
@@ -218,38 +213,38 @@ largest number of claims submitted</p></dd>
 
 <dt>par</dt>
 <dd><p>&lt; <em>boolean</em> &gt; Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts. A
-non-participating provider may elect to accept Medicare allowed amounts for
-some services and not accept Medicare allowed amounts for other services.</p></dd>
+Medicare and/or accepts assignment of Medicare allowed amounts</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <em>default is</em> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt>nest</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Nest <code>hcpcs_detailed</code>, <code>demographics</code> and
-<code>conditions</code> columns; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <em>default:</em> <code>TRUE</code> Nest <code>hcpcs_detailed</code>,
+<code>demographics</code> and <code>conditions</code> columns</p></dd>
 
 
 <dt>hcpcs_code</dt>
-<dd><p>&lt; <em>character</em> &gt; HCPCS code used to identify the specific medical service
-furnished by the provider.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; HCPCS code used to identify the specific
+medical service furnished by the provider</p></dd>
 
 
 <dt>drug</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Flag that identifies whether the HCPCS code for the specific
-service furnished by the provider is a HCPCS listed on the Medicare Part
-B Drug Average Sales Price (ASP) File.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Identifies whether the HCPCS code is listed in the
+Medicare Part B Drug Average Sales Price (ASP) File</p></dd>
 
 
 <dt>pos</dt>
-<dd><p>&lt; <em>character</em> &gt; Identifies whether the place of service submitted on the claims is a facility (<code>"F"</code>) or non-facility (<code>"O"</code>). Non-facility is generally an office setting; however other entities are included in non-facility.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Identifies whether the Place of Service (POS)
+submitted on the claims is a:</p><ul><li><p>Facility (<code>"F"</code>): Hospital, Skilled Nursing Facility, etc.</p></li>
+<li><p>Non-facility (<code>"O"</code>): Office, Home, etc.</p></li>
+</ul></dd>
 
 
 <dt>rbcs</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Add Restructured BETOS Classifications to HCPCS
-codes; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <em>default is</em> <code>TRUE</code> Add Restructured BETOS
+Classifications to HCPCS codes</p></dd>
 
 
 <dt>level</dt>
@@ -258,22 +253,18 @@ aggregated:</p><ul><li><p><code>"State"</code>: Data is aggregated for each stat
 <li><p><code>National</code>: Data is aggregated across all states for a given HCPCS Code</p></li>
 </ul></dd>
 
-
-<dt>hcpcs_desc</dt>
-<dd><p>&lt; <em>character</em> &gt; Description of the HCPCS code for the specific medical
-service furnished by the provider.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p><code>by_provider()</code> returns a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Year data was reported</td></tr><tr><td><code>npi</code></td><td>10-digit national provider identifier</td></tr><tr><td><code>entity_type</code></td><td>Provider's entity/enumeration type</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name/Organization's name</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr><tr><td><code>credential</code></td><td>Individual provider's credential</td></tr><tr><td><code>specialty</code></td><td>Provider's specialty</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>fips</code></td><td>Provider's state's FIPS code</td></tr><tr><td><code>ruca</code></td><td>Provider's RUCA code</td></tr><tr><td><code>country</code></td><td>Provider's country</td></tr><tr><td><code>par</code></td><td>Indicates if provider participates in and/or accepts Medicare assignment</td></tr><tr><td><code>tot_hcpcs</code></td><td>Total number of <em>unique</em> HCPCS codes submitted</td></tr><tr><td><code>tot_benes</code></td><td>Total Medicare beneficiaries receiving services from the provider</td></tr><tr><td><code>tot_srvcs</code></td><td>Total services provided to beneficiaries by the provider</td></tr><tr><td><code>tot_charges</code></td><td>Total charges that the provider submitted for all services</td></tr><tr><td><code>tot_allowed</code></td><td>Total allowed amount for all services; the sum of Medicare reimbursement, deductible, coinsurance, etc.</td></tr><tr><td><code>tot_payment</code></td><td>Total amount Medicare paid, less any deductible and coinsurance</td></tr><tr><td><code>tot_std_pymt</code></td><td>Total amount Medicare paid, standardized to account for geographic differences</td></tr><tr><td><code>hcc_risk_avg</code></td><td>Average Hierarchical Condition Category (HCC) risk score of beneficiaries</td></tr><tr><td><code>hcpcs_detailed</code></td><td>Nested list columns <code>drug</code> &amp; <code>medical</code>, offering further detail about the HCPCS codes submitted</td></tr><tr><td><code>demographics</code></td><td>Nested list column containing demographic data about the beneficiaries seen by the provider</td></tr><tr><td><code>conditions</code></td><td>Nested list column containing data about beneficiaries' chronic conditions</td></tr></table></div>
+<p><code>by_provider()</code> returns a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Year data was reported</td></tr><tr><td><code>npi</code></td><td>10-digit national provider identifier</td></tr><tr><td><code>entity_type</code></td><td>Provider's entity/enumeration type</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name/Organization's name</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr><tr><td><code>credential</code></td><td>Individual provider's credential</td></tr><tr><td><code>specialty</code></td><td>Provider's specialty</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>fips</code></td><td>Provider's state's FIPS code</td></tr><tr><td><code>ruca</code></td><td>Provider's RUCA code</td></tr><tr><td><code>country</code></td><td>Provider's country</td></tr><tr><td><code>par</code></td><td>Indicates if provider participates in and/or accepts Medicare assignment</td></tr><tr><td><code>tot_hcpcs</code></td><td>Total number of <em>unique</em> HCPCS codes submitted</td></tr><tr><td><code>tot_benes</code></td><td>Total Medicare beneficiaries receiving services from the provider</td></tr><tr><td><code>tot_srvcs</code></td><td>Total services provided to beneficiaries by the provider</td></tr><tr><td><code>tot_charges</code></td><td>Total charges that the provider submitted for all services</td></tr><tr><td><code>tot_allowed</code></td><td>Total allowed amount for all services; the sum of Medicare reimbursement, deductible, coinsurance, etc.</td></tr><tr><td><code>tot_payment</code></td><td>Total amount Medicare paid, less any deductible and coinsurance</td></tr><tr><td><code>tot_std_pymt</code></td><td>Total amount Medicare paid, standardized to account for geographic differences</td></tr><tr><td><code>hcc_risk_avg</code></td><td>Average Hierarchical Condition Category (HCC) risk score of beneficiaries</td></tr><tr><td><code>hcpcs_detailed</code></td><td>Nested list columns <code>drug</code> &amp; <code>medical</code>, offering further detail about the HCPCS codes submitted</td></tr><tr><td><code>demographics</code></td><td>Nested list column containing demographic data about the beneficiaries seen by the provider</td></tr><tr><td><code>conditions</code></td><td>Nested list column containing data about beneficiaries' chronic conditions</td></tr></table><p><code>by_service()</code> returns a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Year data was reported</td></tr><tr><td><code>npi</code></td><td>10-digit national provider identifier</td></tr><tr><td><code>level</code></td><td>Data aggregation level, will always be "Provider" here</td></tr><tr><td><code>entity_type</code></td><td>Provider's entity/enumeration type</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name/Organization's name</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr><tr><td><code>credential</code></td><td>Individual provider's credential</td></tr><tr><td><code>specialty</code></td><td>Provider's specialty</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>fips</code></td><td>Provider's state's FIPS code</td></tr><tr><td><code>ruca</code></td><td>Provider's RUCA code</td></tr><tr><td><code>country</code></td><td>Provider's country</td></tr><tr><td><code>par</code></td><td>Indicates if the provider participates in and/or accepts Medicare assignment</td></tr><tr><td><code>hcpcs_code</code></td><td>HCPCS code used to identify the specific medical service furnished by the provider</td></tr><tr><td><code>hcpcs_desc</code></td><td>Consumer Friendly Description of the HCPCS code</td></tr><tr><td><code>category</code></td><td>Restructured BETOS Classification System Category</td></tr><tr><td><code>subcategory</code></td><td>Restructured BETOS Classification System Subcategory</td></tr><tr><td><code>family</code></td><td>Restructured BETOS Classification System Family</td></tr><tr><td><code>procedure</code></td><td>Restructured BETOS Classification System Major Procedure Indicator</td></tr><tr><td><code>drug</code></td><td>Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File</td></tr><tr><td><code>pos</code></td><td>Identifies the Place of Service (POS) submitted on the claim</td></tr><tr><td><code>tot_benes</code></td><td>Distinct number of Medicare beneficiaries for each HCPCS code/POS combination</td></tr><tr><td><code>tot_srvcs</code></td><td>Number of services provided for each HCPCS code/POS combination</td></tr><tr><td><code>tot_day</code></td><td>Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination</td></tr><tr><td><code>avg_charge</code></td><td>Average charge that the provider submitted for the service</td></tr><tr><td><code>avg_allowed</code></td><td>Average of the Medicare allowed amount for the service</td></tr><tr><td><code>avg_payment</code></td><td>Average amount Medicare paid, less any deductible and coinsurance</td></tr><tr><td><code>avg_std_pymt</code></td><td>Average amount Medicare paid, standardized to account for geographic differences</td></tr></table><p><code>by_geography()</code> returns a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Year data was reported</td></tr><tr><td><code>level</code></td><td>Data aggregation level, either "National" or "State"</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>fips</code></td><td>Provider's state's FIPS code</td></tr><tr><td><code>hcpcs_code</code></td><td>HCPCS code used to identify the specific medical service furnished</td></tr><tr><td><code>hcpcs_desc</code></td><td>Consumer Friendly Description of the HCPCS code</td></tr><tr><td><code>category</code></td><td>Restructured BETOS Classification System Category</td></tr><tr><td><code>subcategory</code></td><td>Restructured BETOS Classification System Subcategory</td></tr><tr><td><code>family</code></td><td>Restructured BETOS Classification System Family</td></tr><tr><td><code>procedure</code></td><td>Restructured BETOS Classification System Major Procedure Indicator</td></tr><tr><td><code>drug</code></td><td>Indicates if the HCPCS code is listed in the Medicare Part B Drug Average Sales Price (ASP) File</td></tr><tr><td><code>pos</code></td><td>Identifies the Place of Service (POS) submitted on the claim</td></tr><tr><td><code>tot_provs</code></td><td>Number of providers that submitted each HCPCS code/POS combination</td></tr><tr><td><code>tot_benes</code></td><td>Distinct number of Medicare beneficiaries for each HCPCS code/POS combination</td></tr><tr><td><code>tot_srvcs</code></td><td>Number of services provided for each HCPCS code/POS combination</td></tr><tr><td><code>tot_day</code></td><td>Number of distinct Medicare beneficiary/per day services for each HCPCS code/POS combination</td></tr><tr><td><code>avg_charge</code></td><td>Average charge submitted for the service</td></tr><tr><td><code>avg_allowed</code></td><td>Average of the Medicare allowed amount for the service</td></tr><tr><td><code>avg_payment</code></td><td>Average amount Medicare paid, less any deductible and coinsurance</td></tr><tr><td><code>avg_std_pymt</code></td><td>Average amount Medicare paid, standardized to account for geographic differences</td></tr></table></div>
     <div class="section level2">
     <h2 id="by-provider-"><code>by_provider()</code><a class="anchor" aria-label="anchor" href="#by-provider-"></a></h2>
     
 
-<p>The <strong>Provider and Service</strong> dataset allows the user access to data such as
+
+<p>The <strong>Provider</strong> dataset allows the user access to data such as
 services and procedures performed; charges submitted and payment received;
 and beneficiary demographic and health characteristics for providers
 treating Original Medicare (fee-for-service) Part B beneficiaries,
@@ -283,9 +274,10 @@ aggregated by year.</p>
     <h2 id="by-service-"><code>by_service()</code><a class="anchor" aria-label="anchor" href="#by-service-"></a></h2>
     
 
-<p>The <strong>Provider and Service</strong> dataset is aggregated by the following:</p><ol><li><p>the NPI for the performing provider,</p></li>
-<li><p>the Healthcare Common Procedure Coding System (HCPCS) code, and</p></li>
-<li><p>the place of service (either facility or non-facility).</p></li>
+
+<p>The <strong>Provider and Service</strong> dataset is aggregated by:</p><ol><li><p>Rendering provider's NPI</p></li>
+<li><p>Healthcare Common Procedure Coding System (HCPCS) code</p></li>
+<li><p>Place of Service (Facility or Non-facility)</p></li>
 </ol><p>There can be multiple records for a given NPI based on the number of
 distinct HCPCS codes that were billed and where the services were
 provided. Data have been aggregated based on the place of service
@@ -296,7 +288,8 @@ of service submitted on the claim is facility or non-facility.</p>
     <h2 id="by-geography-"><code>by_geography()</code><a class="anchor" aria-label="anchor" href="#by-geography-"></a></h2>
     
 
-<p>The <strong>Geography and Service</strong> subset contains information on utilization,
+
+<p>The <strong>Geography and Service</strong> dataset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally
 and state-wide by HCPCS code and place of service.</p>
     </div>
@@ -304,39 +297,39 @@ and state-wide by HCPCS code and place of service.</p>
     <h2 id="rural-urban-commuting-area-codes-ruca-">Rural-Urban Commuting Area Codes (RUCA)<a class="anchor" aria-label="anchor" href="#rural-urban-commuting-area-codes-ruca-"></a></h2>
     
 
-<p>- <strong>Metro Area Core</strong>
-- <code>"1"</code>: Primary flow within Urbanized Area (UA)
-- <code>"1.1"</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area High Commuting</strong>
-- <code>"2"</code>: Primary flow 30% or more to UA
-- <code>"2.1"</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area Low Commuting</strong>
-- <code>3</code>: Primary flow 10-30% to UA
-- <strong>Micro Area Core</strong>
-- <code>4</code>: Primary flow within large Urban Cluster (10k - 49k)
-- <code>4.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro High Commuting</strong>
-- <code>5</code>: Primary flow 30% or more to large UC
-- <code>5.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro Low Commuting</strong>
-- <code>6</code>: Primary flow 10-30% to large UC
-- <strong>Small Town Core</strong>
-- <code>7</code>: Primary flow within small UC (2.5k - 9.9k)
-- <code>7.1</code>: Secondary flow 30-50% to UA
-- <code>7.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town High Commuting</strong>
-- <code>8</code>: Primary flow 30% or more to small UC
-- <code>8.1</code>: Secondary flow 30-50% to UA
-- <code>8.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town Low Commuting</strong>
-- <code>9</code>: Primary flow 10-30% to small UC
-- <strong>Rural Areas</strong>
-- <code>10</code>: Primary flow to tract outside a UA or UC
-- <code>10.1</code>: Secondary flow 30-50% to UA
-- <code>10.2</code>: Secondary flow 30-50% to large UC
-- <code>10.3</code>: Secondary flow 30-50% to small UC
-- <code>99</code>: Zero population and no rural-urban identifier information</p>
-    </div>
+<ul><li><p><strong>Metro Area Core</strong></p><ul><li><p><code>"1"</code>: Primary flow within Urbanized Area (UA)</p></li>
+<li><p><code>"1.1"</code>: Secondary flow 30-50% to larger UA</p></li>
+</ul></li>
+<li><p><strong>Metro Area High Commuting</strong></p><ul><li><p><code>"2"</code>: Primary flow 30% or more to UA</p></li>
+<li><p><code>"2.1"</code>: Secondary flow 30-50% to larger UA</p></li>
+</ul></li>
+<li><p><strong>Metro Area Low Commuting</strong></p><ul><li><p><code>"3"</code>: Primary flow 10-30% to UA</p></li>
+</ul></li>
+<li><p><strong>Micro Area Core</strong></p><ul><li><p><code>"4"</code>: Primary flow within large Urban Cluster (10k - 49k)</p></li>
+<li><p><code>"4.1"</code>: Secondary flow 30-50% to UA</p></li>
+</ul></li>
+<li><p><strong>Micro High Commuting</strong></p><ul><li><p><code>"5"</code>: Primary flow 30% or more to large UC</p></li>
+<li><p><code>"5.1"</code>: Secondary flow 30-50% to UA</p></li>
+</ul></li>
+<li><p><strong>Micro Low Commuting</strong></p><ul><li><p><code>"6"</code>: Primary flow 10-30% to large UC</p></li>
+</ul></li>
+<li><p><strong>Small Town Core</strong></p><ul><li><p><code>"7"</code>: Primary flow within small UC (2.5k - 9.9k)</p></li>
+<li><p><code>"7.1"</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>"7.2"</code>: Secondary flow 30-50% to large UC</p></li>
+</ul></li>
+<li><p><strong>Small Town High Commuting</strong></p><ul><li><p><code>"8"</code>: Primary flow 30% or more to small UC</p></li>
+<li><p><code>"8.1"</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>"8.2"</code>: Secondary flow 30-50% to large UC</p></li>
+</ul></li>
+<li><p><strong>Small Town Low Commuting</strong></p><ul><li><p><code>"9"</code>: Primary flow 10-30% to small UC</p></li>
+</ul></li>
+<li><p><strong>Rural Areas</strong></p><ul><li><p><code>"10"</code>: Primary flow to tract outside a UA or UC</p></li>
+<li><p><code>"10.1"</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>"10.2"</code>: Secondary flow 30-50% to large UC</p></li>
+<li><p><code>"10.3"</code>: Secondary flow 30-50% to small UC</p></li>
+</ul></li>
+<li><p><code>"99"</code>: Zero population and no rural-urban identifier information</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
     
@@ -352,14 +345,14 @@ and state-wide by HCPCS code and place of service.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">by_provider</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">by_geography</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use the years helper function to retrieve results for every year:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="years.html">prac_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">by_provider</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">by_geography</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
