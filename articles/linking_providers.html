@@ -146,9 +146,9 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
-<span><span class="co">#&gt;   npi      pac   enroll_id first middle last  gender credential school grad_year</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245… 7810… I2003112… MARK  K      FUNG  M      MD         UNIVE…      <span style="text-decoration: underline;">1</span>999</span></span>
+<span><span class="co">#&gt;   npi        pac     enid  first middle last  gender credential school grad_year</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 781089… I200… MARK  K      FUNG  M      MD         UNIVE…      <span style="text-decoration: underline;">1</span>999</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: specialty &lt;chr&gt;, organization &lt;chr&gt;, pac_org &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   members_org &lt;int&gt;, address_org &lt;chr&gt;, city_org &lt;chr&gt;, state_org &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   zip_org &lt;chr&gt;, phone_org &lt;chr&gt;, assign_ind &lt;chr&gt;, assign_org &lt;chr&gt;</span></span></span></code></pre>
@@ -191,7 +191,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 12</span></span>
-<span><span class="co">#&gt; Columns: 43</span></span>
+<span><span class="co">#&gt; Columns: 44</span></span>
 <span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657", "1043245657", "1043245657", "10432…</span></span>
 <span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009", "7810891009", "7810891009", "78108…</span></span>
 <span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I20031120…</span></span>
@@ -210,6 +210,7 @@
 <span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99, 99, 99, 99, 99, NA, NA, NA, NA, NA, NA, NA</span></span>
 <span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment", "Reassignment", "Reassignment", …</span></span>
+<span><span class="co">#&gt; $ enid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I20031120…</span></span>
 <span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD", "MD", "MD", "MD", "MD", NA, NA, NA, NA, NA…</span></span>
 <span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE", "UNI…</span></span>
 <span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999, 1999, 1999, 1999, 1999, NA, NA, NA, NA, NA…</span></span>
@@ -243,7 +244,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 29</span></span>
+<span><span class="co">#&gt; Columns: 30</span></span>
 <span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657"</span></span>
 <span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009"</span></span>
 <span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
@@ -262,6 +263,7 @@
 <span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
 <span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99</span></span>
 <span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment"</span></span>
+<span><span class="co">#&gt; $ enid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
 <span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD"</span></span>
 <span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"</span></span>
 <span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999</span></span>

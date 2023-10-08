@@ -105,7 +105,7 @@ Medicare, including the medical school that they attended and the year they grad
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">clinicians</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -127,22 +127,19 @@ Medicare, including the medical school that they attended and the year they grad
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
+<dd><p>&lt; <em>integer|character</em> &gt; 10-digit Individual National Provider Identifier</p></dd>
 
 
 <dt>pac</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit individual provider associate-level
-control identifier</p></dd>
+<dd><p>&lt; <em>integer|character</em> &gt; 10-digit Individual PECOS Associate Control ID</p></dd>
 
 
-<dt>enroll_id</dt>
-<dd><p>&lt; <em>character</em> &gt; 15-digit individual provider Medicare
-enrollment identifier; begins with capital "I"</p></dd>
+<dt>enid</dt>
+<dd><p>&lt; <em>character</em> &gt; 15-digit Individual Medicare Enrollment ID</p></dd>
 
 
 <dt>first, middle, last</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's first,
-middle, or last name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Individual provider's name</p></dd>
 
 
 <dt>gender</dt>
@@ -169,8 +166,8 @@ individual provider</p></dd>
 
 
 <dt>pac_org</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit organizational/group provider
-associate-level control identifier</p></dd>
+<dd><p>&lt; <em>integer|character</em> &gt; 10-digit Organizational PECOS
+Associate Control ID</p></dd>
 
 
 <dt>city</dt>
@@ -186,22 +183,22 @@ associate-level control identifier</p></dd>
 
 
 <dt>offset</dt>
-<dd><p>&lt; <em>integer</em> &gt; offset; API pagination</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; // <strong>default:</strong> <code>0L</code> API pagination</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt>na.rm</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit individual NPI</td></tr><tr><td><code>pac</code></td><td>10-digit individual PAC ID</td></tr><tr><td><code>enroll_id</code></td><td>15-digit individual enrollment ID</td></tr><tr><td><code>first</code></td><td>Provider's first name</td></tr><tr><td><code>middle</code></td><td>Provider's middle name</td></tr><tr><td><code>last</code></td><td>Provider's last name</td></tr><tr><td><code>suffix</code></td><td>Provider's name suffix</td></tr><tr><td><code>gender</code></td><td>Provider's gender</td></tr><tr><td><code>credential</code></td><td>Provider's credential</td></tr><tr><td><code>school</code></td><td>Provider's medical school</td></tr><tr><td><code>grad_year</code></td><td>Provider's graduation year</td></tr><tr><td><code>specialty</code></td><td>Provider's primary specialty</td></tr><tr><td><code>specialty_sec</code></td><td>Provider's secondary specialty</td></tr><tr><td><code>facility_name</code></td><td>Facility associated with provider</td></tr><tr><td><code>pac_org</code></td><td>Facility's 10-digit PAC ID</td></tr><tr><td><code>members</code></td><td>Number of providers associated with facility's PAC ID</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>phone</code></td><td>Provider's phone number</td></tr><tr><td><code>telehealth</code></td><td>Indicates if provider offers telehealth services</td></tr><tr><td><code>assign_ind</code></td><td>Indicates if provider accepts Medicare assignment</td></tr><tr><td><code>assign_org</code></td><td>Indicates if facility accepts Medicare assignment</td></tr></table></div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit individual NPI</td></tr><tr><td><code>pac</code></td><td>10-digit individual PAC ID</td></tr><tr><td><code>enid</code></td><td>15-digit individual enrollment ID</td></tr><tr><td><code>first</code></td><td>Provider's first name</td></tr><tr><td><code>middle</code></td><td>Provider's middle name</td></tr><tr><td><code>last</code></td><td>Provider's last name</td></tr><tr><td><code>suffix</code></td><td>Provider's name suffix</td></tr><tr><td><code>gender</code></td><td>Provider's gender</td></tr><tr><td><code>credential</code></td><td>Provider's credential</td></tr><tr><td><code>school</code></td><td>Provider's medical school</td></tr><tr><td><code>grad_year</code></td><td>Provider's graduation year</td></tr><tr><td><code>specialty</code></td><td>Provider's primary specialty</td></tr><tr><td><code>specialty_sec</code></td><td>Provider's secondary specialty</td></tr><tr><td><code>facility_name</code></td><td>Facility associated with provider</td></tr><tr><td><code>pac_org</code></td><td>Facility's 10-digit PAC ID</td></tr><tr><td><code>members</code></td><td>Number of providers associated with facility's PAC ID</td></tr><tr><td><code>address</code></td><td>Provider's street address</td></tr><tr><td><code>city</code></td><td>Provider's city</td></tr><tr><td><code>state</code></td><td>Provider's state</td></tr><tr><td><code>zip</code></td><td>Provider's zip code</td></tr><tr><td><code>phone</code></td><td>Provider's phone number</td></tr><tr><td><code>telehealth</code></td><td>Indicates if provider offers telehealth services</td></tr><tr><td><code>assign_ind</code></td><td>Indicates if provider accepts Medicare assignment</td></tr><tr><td><code>assign_org</code></td><td>Indicates if facility accepts Medicare assignment</td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="hospitals.html">hospitals()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="affiliations.html">affiliations()</a></code></p></div>

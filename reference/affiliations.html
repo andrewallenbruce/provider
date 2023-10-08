@@ -120,18 +120,15 @@ facility affiliations</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
+<dd><p>&lt; <em>integer|character</em> &gt; 10-digit Individual National Provider Identifier</p></dd>
 
 
 <dt>pac</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit individual provider associate level variable
-Links all entity-level information and may be associated with multiple
-enrollment IDs if the individual or organization enrolled multiple times</p></dd>
+<dd><p>&lt; <em>integer|character</em> &gt; 10-digit Individual PECOS Associate Control ID</p></dd>
 
 
 <dt>first, middle, last</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's first, middle,
-or last name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Individual provider's name</p></dd>
 
 
 <dt>facility_type</dt>
@@ -147,7 +144,7 @@ or last name</p></dd>
 
 
 <dt>facility_ccn</dt>
-<dd><p>&lt; <em>character</em> &gt; 6-digit CMS Certification Number of
+<dd><p>&lt; <em>integer|character</em> &gt; 6-digit CMS Certification Number of
 facility or unit within hospital where an individual provider provides service</p></dd>
 
 
@@ -157,15 +154,15 @@ sub-unit's primary hospital, should the provider provide services in said unit</
 
 
 <dt>offset</dt>
-<dd><p>&lt; <em>integer</em> &gt; offset; API pagination</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; // <strong>default:</strong> <code>0L</code> API pagination</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt>na.rm</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 </dl></div>
     <div class="section level2">
