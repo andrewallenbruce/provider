@@ -7,31 +7,31 @@
 hospitals(
   npi = NULL,
   facility_ccn = NULL,
-  enroll_id_org = NULL,
+  enid_org = NULL,
   enroll_state = NULL,
-  specialty_code = NULL,
   pac_org = NULL,
+  specialty_code = NULL,
   organization = NULL,
-  doing_business_as = NULL,
+  dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  proprietary_nonprofit = NULL,
-  multiple_npis = NULL,
-  general = NULL,
-  acute_care = NULL,
-  alcohol_drug = NULL,
-  childrens = NULL,
-  long_term = NULL,
-  psychiatric = NULL,
-  rehabilitation = NULL,
-  short_term = NULL,
-  swing_bed = NULL,
+  registration = NULL,
+  multi = NULL,
+  gen = NULL,
+  acute = NULL,
+  alc_drug = NULL,
+  child = NULL,
+  long = NULL,
+  short = NULL,
+  psych = NULL,
+  rehab = NULL,
+  swing = NULL,
   psych_unit = NULL,
   rehab_unit = NULL,
-  specialty_hospital = NULL,
+  spec = NULL,
   other = NULL,
-  reh_conversion = NULL,
+  reh = NULL,
   tidy = TRUE,
   pivot = TRUE,
   na.rm = TRUE
@@ -40,21 +40,40 @@ hospitals(
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of hospital}
+\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number}
 
-\item{enroll_id_org}{< \emph{character} > 15-digit organizational provider Medicare
-enrollment identifier; begins with capital "O"}
+\item{enid_org}{< \emph{character} > 15-digit organizational provider Medicare
+enrollment identifier}
 
 \item{enroll_state}{< \emph{character} > Hospital’s enrollment state}
-
-\item{specialty_code}{< \emph{character} > Enrollment specialty type code}
 
 \item{pac_org}{< \emph{integer} > 10-digit organizational/group provider
 associate-level control identifier}
 
+\item{specialty_code}{< \emph{character} > Medicare Part A Provider specialty code:
+\itemize{
+\item \code{"00-00"}: RELIGIOUS NON-MEDICAL HEALTH CARE INSTITUTION (RNHCI)
+\item \code{"00-01"}: COMMUNITY MENTAL HEALTH CENTER
+\item \code{"00-02"}: COMPREHENSIVE OUTPATIENT REHABILITATION FACILITY
+\item \code{"00-03"}: END-STAGE RENAL DISEASE FACILITY (ESRD)
+\item \code{"00-04"}: FEDERALLY QUALIFIED HEALTH CENTER (FQHC)
+\item \code{"00-05"}: HISTOCOMPATIBILITY LABORATORY
+\item \code{"00-06"}: HOME HEALTH AGENCY
+\item \code{"00-08"}: HOSPICE
+\item \code{"00-09"}: HOSPITAL
+\item \code{"00-10"}: INDIAN HEALTH SERVICES FACILITY
+\item \code{"00-13"}: ORGAN PROCUREMENT ORGANIZATION (OPO)
+\item \code{"00-14"}: OUTPATIENT PHYSICAL THERAPY/OCCUPATIONAL THERAPY/SPEECH PATHOLOGY SERVICES
+\item \code{"00-17"}: RURAL HEALTH CLINIC (RHC)
+\item \code{"00-18"}: SKILLED NURSING FACILITY (SNF)
+\item \code{"00-19"}: OTHER
+\item \code{"00-24"}: RURAL EMERGENCY HOSPITAL
+\item \code{"00-85"}: CRITICAL ACCESS HOSPITAL (CAH)
+}}
+
 \item{organization}{< \emph{character} > Hospital’s legal business name}
 
-\item{doing_business_as}{< \emph{character} > Hospital’s doing-business-as name}
+\item{dba}{< \emph{character} > Hospital’s doing-business-as name}
 
 \item{city}{< \emph{character} > City of the hospital’s practice location}
 
@@ -62,51 +81,34 @@ associate-level control identifier}
 
 \item{zip}{< \emph{character} > Zip code of the hospital’s practice location}
 
-\item{proprietary_nonprofit}{< \emph{character} > \code{"P"} if hospital registered as
-proprietor with the IRS; \code{"N"} if registered as non-profit}
+\item{registration}{< \emph{character} > Hospital's IRS designation:
+\itemize{
+\item \code{"P"}: Registered as \strong{Proprietor}
+\item \code{"N"}: Registered as \strong{Non-Profit}
+}}
 
-\item{multiple_npis}{< \emph{boolean} > Indicates hospital has more than one NPI}
+\item{multi}{< \emph{boolean} > Indicates hospital has more than one NPI}
 
-\item{general}{< \emph{boolean} > Indicates hospital’s subgroup/unit is General}
+\item{gen, acute, alc_drug, child, long, short, psych, rehab, swing, psych_unit, rehab_unit, spec, other}{< \emph{boolean} >
+Indicates hospital’s subgroup/unit designation:
+\itemize{
+\item \code{acute}: Acute Care
+\item \code{alc_drug}: Alcohol/Drug
+\item \code{child}: Children's Hospital
+\item \code{gen}: General
+\item \code{long}: Long-Term
+\item \code{short}: Short-Term
+\item \code{psych}: Psychiatric
+\item \code{rehab}: Rehabilitation
+\item \code{swing}: Swing-Bed Approved
+\item \code{psych_unit}: Psychiatric Unit
+\item \code{rehab_unit}: Rehabilitation Unit
+\item \code{spec}: Specialty Hospital
+\item \code{other}: Not listed on CMS form
+}}
 
-\item{acute_care}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Acute Care}
-
-\item{alcohol_drug}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Alcohol/Drug}
-
-\item{childrens}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Children's Hospital}
-
-\item{long_term}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Long-Term}
-
-\item{psychiatric}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Psychiatric}
-
-\item{rehabilitation}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Rehabilitation}
-
-\item{short_term}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Short-Term}
-
-\item{swing_bed}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Swing-Bed Approved}
-
-\item{psych_unit}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Psychiatric Unit}
-
-\item{rehab_unit}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
-Rehabilitation Unit}
-
-\item{specialty_hospital}{< \emph{boolean} > Indicates hospital’s subgroup/unit
-is Specialty Hospital}
-
-\item{other}{< \emph{boolean} > Indicates hospital’s subgroup/unit is not listed
-on the CMS form}
-
-\item{reh_conversion}{< \emph{boolean} > Indicates a former Hospital or Critical
-Access Hospital that converted to a Rural Emergency Hospital}
+\item{reh}{< \emph{boolean} > Indicates a former Hospital or Critical Access
+Hospital (CAH) that converted to a Rural Emergency Hospital (REH)}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -115,7 +117,30 @@ Access Hospital that converted to a Rural Emergency Hospital}
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab Hospital's 10-digit National Provider Identifier \cr
+   \code{pac_org} \tab Hospital’s 10-digit PECOS Associate Control ID \cr
+   \code{enid_org} \tab Hospital’s 15-digit Enrollment ID \cr
+   \code{enid_state} \tab Hospital’s Enrollment State \cr
+   \code{facility_ccn} \tab Hospital’s CMS Certification Number \cr
+   \code{organization} \tab Hospital’s Legal Business Name \cr
+   \code{doing_business_as} \tab Hospital’s Doing-Business-As Name \cr
+   \code{specialty_code} \tab Hospital’s Medicare Part A Provider Specialty Code \cr
+   \code{specialty} \tab Specialty Code Description \cr
+   \code{incorporation_date} \tab Date the Business was Incorporated \cr
+   \code{incorporation_state} \tab State in which the Business was Incorporated \cr
+   \code{structure} \tab Hospital’s Organization Structure Type \cr
+   \code{address} \tab Hospital’s Practice Location Address \cr
+   \code{city} \tab Hospital’s Practice Location City \cr
+   \code{state} \tab Hospital’s Practice Location State \cr
+   \code{zip} \tab Hospital’s Practice Location Zip Code \cr
+   \code{location_type} \tab Practice Location Type \cr
+   \code{reh_conversion_date} \tab Date the Hospital/CAH converted to an REH \cr
+   \code{associated_ccns} \tab CCNs associated with the Hospital/CAH that converted to an REH \cr
+   \code{registration} \tab Hospital’s IRS Registration Status; \strong{Proprietary} or \strong{Non-Profit} \cr
+   \code{designations} \tab Hospital's Subgroup/Unit Designations, Multiple NPIs, REH Conversion \cr
+}
 }
 \description{
 \code{hospitals()} allows you to search for information on all hospitals
@@ -133,7 +158,7 @@ Links:
 \examples{
 hospitals(pac_org = 6103733050)
 
-hospitals(state = "GA", reh_conversion = TRUE)
+hospitals(state = "GA", reh = TRUE)
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}

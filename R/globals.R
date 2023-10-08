@@ -98,6 +98,8 @@ utils::globalVariables(c(
   "organization_name", # <asc_ifed_enrollment>
   "zip_code", # <asc_ifed_enrollment>
   "y", # <hospitals>
+  "proprietary_nonprofit", # <hospitals>
+  "zip_code", # <hospitals>
   "address_line_1", # <hospitals>
   "address_line_2", # <hospitals>
   "organization_type_structure", # <hospitals>
