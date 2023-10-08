@@ -169,7 +169,7 @@
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 20</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 19</span></span></span>
 <span><span class="co">#&gt;   npi        organization   doing_business_as pac_org enroll_id_org facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1568419976 UNIVERSITY OF… UNIVERSITY OF VE… 377949… O20021111000… 470003      </span></span>
@@ -179,11 +179,10 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1114954682 ALICE HYDE ME… <span style="color: #BB0000;">NA</span>                408252… O20101129000… 330084      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1114954682 ALICE HYDE ME… <span style="color: #BB0000;">NA</span>                408252… O20101129000… 330084      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1508845637 CENTRAL VERMO… <span style="color: #BB0000;">NA</span>                933513… O20050809000… 470001      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   enroll_state &lt;chr&gt;, incorporation_date &lt;date&gt;, incorporation_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   organization_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zip &lt;int&gt;, location_type &lt;chr&gt;, location_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   proprietary_nonprofit &lt;chr&gt;, status &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_type &lt;chr&gt;, proprietary_nonprofit &lt;chr&gt;, status &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">rd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">rv</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -192,50 +191,49 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 12</span></span>
-<span><span class="co">#&gt; Columns: 43</span></span>
-<span><span class="co">#&gt; $ npi                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657", "1043245657", "1043245657", "1043…</span></span>
-<span><span class="co">#&gt; $ pac                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009", "7810891009", "7810891009", "7810…</span></span>
-<span><span class="co">#&gt; $ enroll_id              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I2003112…</span></span>
-<span><span class="co">#&gt; $ specialty_code         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22", "14-22", "14-22", "14-22", "14-22", "0…</span></span>
-<span><span class="co">#&gt; $ specialty_description  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY", "PRACTITIONER - PAT…</span></span>
-<span><span class="co">#&gt; $ state                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", "VT", "VT", "NY",…</span></span>
-<span><span class="co">#&gt; $ first                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK", "MARK", "MARK", "MARK", "MARK", NA, NA,…</span></span>
-<span><span class="co">#&gt; $ middle                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K", "K", "K", "K", "K", NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ last                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG", "FUNG", "FUNG", "FUNG", "FUNG", NA, NA,…</span></span>
-<span><span class="co">#&gt; $ gender                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M", "M", "M", "M", "M", NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ enrollment_type        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B", "Non-DME Part B", "Non-DME Pa…</span></span>
-<span><span class="co">#&gt; $ reassignments_ind      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">#&gt; $ organization           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC", "UN…</span></span>
-<span><span class="co">#&gt; $ pac_org                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071", "3779491071", "3779491071", "3779…</span></span>
-<span><span class="co">#&gt; $ enroll_id_org          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040", "O20060822000040", "O2006082…</span></span>
-<span><span class="co">#&gt; $ state_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", NA, NA, NA, NA, N…</span></span>
-<span><span class="co">#&gt; $ reassignments_org      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99, 99, 99, 99, 99, NA, NA, NA, NA, NA, NA, NA</span></span>
-<span><span class="co">#&gt; $ record_type            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment", "Reassignment", "Reassignment",…</span></span>
-<span><span class="co">#&gt; $ credential             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD", "MD", "MD", "MD", "MD", NA, NA, NA, NA, N…</span></span>
-<span><span class="co">#&gt; $ school                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE", "UN…</span></span>
-<span><span class="co">#&gt; $ grad_year              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999, 1999, 1999, 1999, 1999, NA, NA, NA, NA, N…</span></span>
-<span><span class="co">#&gt; $ specialty              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PATHOLOGY", "PATHOLOGY", "PATHOLOGY", "PATHOLO…</span></span>
-<span><span class="co">#&gt; $ members_org            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 958, 958, 958, 958, 958, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ address_org            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "111 COLCHESTER AVE", "111 COLCHESTER AVE", "11…</span></span>
-<span><span class="co">#&gt; $ city_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BURLINGTON", "BURLINGTON", "BURLINGTON", "BURL…</span></span>
-<span><span class="co">#&gt; $ zip_org                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "054011473", "054011473", "054011473", "0540114…</span></span>
-<span><span class="co">#&gt; $ phone_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8028470000", "8028470000", "8028470000", "8028…</span></span>
-<span><span class="co">#&gt; $ assign_ind             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ assign_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ facility_type          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hospital", "Hospital", "Hospital", "Hospital",…</span></span>
-<span><span class="co">#&gt; $ facility_ccn           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "470003", "330250", "331302", "330084", "470001…</span></span>
-<span><span class="co">#&gt; $ doing_business_as      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "UNIVERSITY OF VERMONT MEDI…</span></span>
-<span><span class="co">#&gt; $ enroll_state           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "NY", "NY", "NY…</span></span>
-<span><span class="co">#&gt; $ incorporation_date     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA, NA, NA, NA, NA, 1995-01-01, 1995-01-01, 192…</span></span>
-<span><span class="co">#&gt; $ incorporation_state    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "NY", "NY", "NY…</span></span>
-<span><span class="co">#&gt; $ organization_structure <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "CORPORATION", "CORPORATIO…</span></span>
-<span><span class="co">#&gt; $ address                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "111 COLCHESTER AVE", "111 …</span></span>
-<span><span class="co">#&gt; $ city                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "BURLINGTON", "BURLINGTON",…</span></span>
-<span><span class="co">#&gt; $ zip                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, NA, NA, NA, NA, 54011473, 54011473, 1290114…</span></span>
-<span><span class="co">#&gt; $ location_type          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "OTHER HOSPITAL PRACTICE LO…</span></span>
-<span><span class="co">#&gt; $ location_other         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "HOSPITAL - GENERAL PRACTIC…</span></span>
-<span><span class="co">#&gt; $ proprietary_nonprofit  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "Non-Profit", "Non-Profit",…</span></span>
-<span><span class="co">#&gt; $ status                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "Subgroup Acute Care", "Sub…</span></span></code></pre>
+<span><span class="co">#&gt; Columns: 42</span></span>
+<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657", "1043245657", "1043245657", "10432…</span></span>
+<span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009", "7810891009", "7810891009", "78108…</span></span>
+<span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I20031120…</span></span>
+<span><span class="co">#&gt; $ specialty_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22", "14-22", "14-22", "14-22", "14-22", "00…</span></span>
+<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY", "PRACTITIONER - PATH…</span></span>
+<span><span class="co">#&gt; $ state                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", "VT", "VT", "NY", …</span></span>
+<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK", "MARK", "MARK", "MARK", "MARK", NA, NA, …</span></span>
+<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K", "K", "K", "K", "K", NA, NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG", "FUNG", "FUNG", "FUNG", "FUNG", NA, NA, …</span></span>
+<span><span class="co">#&gt; $ gender                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M", "M", "M", "M", "M", NA, NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ enrollment_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B", "Non-DME Part B", "Non-DME Par…</span></span>
+<span><span class="co">#&gt; $ reassignments_ind     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ organization          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC", "UNI…</span></span>
+<span><span class="co">#&gt; $ pac_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071", "3779491071", "3779491071", "37794…</span></span>
+<span><span class="co">#&gt; $ enroll_id_org         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040", "O20060822000040", "O20060822…</span></span>
+<span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99, 99, 99, 99, 99, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment", "Reassignment", "Reassignment", …</span></span>
+<span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD", "MD", "MD", "MD", "MD", NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE", "UNI…</span></span>
+<span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999, 1999, 1999, 1999, 1999, NA, NA, NA, NA, NA…</span></span>
+<span><span class="co">#&gt; $ specialty             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PATHOLOGY", "PATHOLOGY", "PATHOLOGY", "PATHOLOG…</span></span>
+<span><span class="co">#&gt; $ members_org           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 958, 958, 958, 958, 958, NA, NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ address_org           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "111 COLCHESTER AVE", "111 COLCHESTER AVE", "111…</span></span>
+<span><span class="co">#&gt; $ city_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BURLINGTON", "BURLINGTON", "BURLINGTON", "BURLI…</span></span>
+<span><span class="co">#&gt; $ zip_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "054011473", "054011473", "054011473", "05401147…</span></span>
+<span><span class="co">#&gt; $ phone_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8028470000", "8028470000", "8028470000", "80284…</span></span>
+<span><span class="co">#&gt; $ assign_ind            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ assign_org            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA,…</span></span>
+<span><span class="co">#&gt; $ facility_type         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hospital", "Hospital", "Hospital", "Hospital", …</span></span>
+<span><span class="co">#&gt; $ facility_ccn          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "470003", "330250", "331302", "330084", "470001"…</span></span>
+<span><span class="co">#&gt; $ doing_business_as     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "UNIVERSITY OF VERMONT MEDIC…</span></span>
+<span><span class="co">#&gt; $ enroll_state          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "NY", "NY", "NY"…</span></span>
+<span><span class="co">#&gt; $ incorporation_date    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA, NA, NA, NA, NA, 1995-01-01, 1995-01-01, 1926…</span></span>
+<span><span class="co">#&gt; $ incorporation_state   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "NY", "NY", "NY"…</span></span>
+<span><span class="co">#&gt; $ org_structure         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "CORPORATION", "CORPORATION…</span></span>
+<span><span class="co">#&gt; $ address               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "111 COLCHESTER AVE", "111 C…</span></span>
+<span><span class="co">#&gt; $ city                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "BURLINGTON", "BURLINGTON", …</span></span>
+<span><span class="co">#&gt; $ zip                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, NA, NA, NA, NA, 54011473, 54011473, 12901143…</span></span>
+<span><span class="co">#&gt; $ location_type         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "OTHER HOSPITAL PRACTICE LOC…</span></span>
+<span><span class="co">#&gt; $ proprietary_nonprofit <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "Non-Profit", "Non-Profit", …</span></span>
+<span><span class="co">#&gt; $ status                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "Subgroup Acute Care", "Subg…</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
