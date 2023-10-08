@@ -19,14 +19,11 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{< \emph{integer|character} > 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer} > 10-digit individual provider associate level variable
-Links all entity-level information and may be associated with multiple
-enrollment IDs if the individual or organization enrolled multiple times}
+\item{pac}{< \emph{integer|character} > 10-digit Individual PECOS Associate Control ID}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's first, middle,
-or last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's name}
 
 \item{facility_type}{< \emph{character} >
 \itemize{
@@ -40,17 +37,17 @@ or last name}
 \item \code{"Dialysis facility"} or \code{"df"}
 }}
 
-\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of
+\item{facility_ccn}{< \emph{integer|character} > 6-digit CMS Certification Number of
 facility or unit within hospital where an individual provider provides service}
 
 \item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a
 sub-unit's primary hospital, should the provider provide services in said unit}
 
-\item{offset}{< \emph{integer} > offset; API pagination}
+\item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

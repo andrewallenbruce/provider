@@ -12,28 +12,25 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac < *integer* > 10-digit individual provider associate level variable
-#' Links all entity-level information and may be associated with multiple
-#' enrollment IDs if the individual or organization enrolled multiple times
-#' @param first,middle,last < *character* > Individual provider's first, middle,
-#' or last name
+#' @param npi < *integer|character* > 10-digit Individual National Provider Identifier
+#' @param pac < *integer|character* > 10-digit Individual PECOS Associate Control ID
+#' @param first,middle,last < *character* > Individual provider's name
 #' @param facility_type < *character* >
-#'    - `"Hospital"` or `"hp"`
-#'    - `"Long-term care hospital"` or `"ltch"`
-#'    - `"Nursing home"` or `"nh"`
-#'    - `"Inpatient rehabilitation facility"` or `"irf"`
-#'    - `"Home health agency"` or `"hha"`
-#'    - `"Skilled nursing facility"` or `"snf"`
-#'    - `"Hospice"` or `"hs"`
-#'    - `"Dialysis facility"` or `"df"`
-#' @param facility_ccn < *character* > 6-digit CMS Certification Number of
+#' + `"Hospital"` or `"hp"`
+#' + `"Long-term care hospital"` or `"ltch"`
+#' + `"Nursing home"` or `"nh"`
+#' + `"Inpatient rehabilitation facility"` or `"irf"`
+#' + `"Home health agency"` or `"hha"`
+#' + `"Skilled nursing facility"` or `"snf"`
+#' + `"Hospice"` or `"hs"`
+#' + `"Dialysis facility"` or `"df"`
+#' @param facility_ccn < *integer|character* > 6-digit CMS Certification Number of
 #' facility or unit within hospital where an individual provider provides service
 #' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a
 #' sub-unit's primary hospital, should the provider provide services in said unit
-#' @param offset < *integer* > offset; API pagination
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
+#' @param offset < *integer* > // __default:__ `0L` API pagination
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -146,7 +143,7 @@ affiliations <- function(npi = NULL,
 aff_cols <- function(df) {
 
   cols <- c("npi",
-            "pac"      = "ind_pac_id",
+            "pac"          = "ind_pac_id",
             "first"        = "frst_nm",
             "middle"       = "mid_nm",
             "last"         = "lst_nm",
@@ -155,6 +152,6 @@ aff_cols <- function(df) {
             "facility_ccn" = "facility_affiliations_certification_number",
             "parent_ccn"   = "facility_type_certification_number")
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

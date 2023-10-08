@@ -1,7 +1,5 @@
 #' Hospitals Enrolled in Medicare
 #'
-#' @description
-#'
 #' `hospitals()` allows you to search for information on all hospitals
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization
@@ -10,33 +8,33 @@
 #' Links:
 #'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
+#' `r badger::badge_custom("Update Frequency", "Monthly", "blue")`
+#'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier
+#' @param npi < *integer|character* > 10-digit Organizational National Provider Identifier
 #' @param facility_ccn < *character* > 6-digit CMS Certification Number
-#' @param enid_org < *character* > 15-digit organizational provider Medicare
-#' enrollment identifier
+#' @param enid_org < *character* > 15-digit Organizational Medicare Enrollment ID
 #' @param enroll_state < *character* > Hospital’s enrollment state
 #' @param specialty_code < *character* > Medicare Part A Provider specialty code:
-#' + `"00-00"`: RELIGIOUS NON-MEDICAL HEALTH CARE INSTITUTION (RNHCI)
-#' + `"00-01"`: COMMUNITY MENTAL HEALTH CENTER
-#' + `"00-02"`: COMPREHENSIVE OUTPATIENT REHABILITATION FACILITY
-#' + `"00-03"`: END-STAGE RENAL DISEASE FACILITY (ESRD)
-#' + `"00-04"`: FEDERALLY QUALIFIED HEALTH CENTER (FQHC)
-#' + `"00-05"`: HISTOCOMPATIBILITY LABORATORY
-#' + `"00-06"`: HOME HEALTH AGENCY
-#' + `"00-08"`: HOSPICE
-#' + `"00-09"`: HOSPITAL
-#' + `"00-10"`: INDIAN HEALTH SERVICES FACILITY
-#' + `"00-13"`: ORGAN PROCUREMENT ORGANIZATION (OPO)
-#' + `"00-14"`: OUTPATIENT PHYSICAL THERAPY/OCCUPATIONAL THERAPY/SPEECH PATHOLOGY SERVICES
-#' + `"00-17"`: RURAL HEALTH CLINIC (RHC)
-#' + `"00-18"`: SKILLED NURSING FACILITY (SNF)
-#' + `"00-19"`: OTHER
-#' + `"00-24"`: RURAL EMERGENCY HOSPITAL
-#' + `"00-85"`: CRITICAL ACCESS HOSPITAL (CAH)
-#' @param pac_org < *integer* > 10-digit organizational/group provider
-#' associate-level control identifier
+#' + `"00-00"`: Religious Non-Medical Healthcare Institution (RNHCI)
+#' + `"00-01"`: Community Mental Health Center
+#' + `"00-02"`: Comprehensive Outpatient Rehabilitation Facility (CORF)
+#' + `"00-03"`: End-Stage Renal Disease Facility (ESRD)
+#' + `"00-04"`: Federally Qualified Health Center (FQHC)
+#' + `"00-05"`: Histocompatibility Laboratory
+#' + `"00-06"`: Home Health Agency (HHA)
+#' + `"00-08"`: Hospice
+#' + `"00-09"`: Hospital
+#' + `"00-10"`: Indian Health Services Facility
+#' + `"00-13"`: Organ Procurement Organization (OPO)
+#' + `"00-14"`: Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services
+#' + `"00-17"`: Rural Health Clinic (RHC)
+#' + `"00-18"`: Skilled Nursing Facility (SNF)
+#' + `"00-19"`: Other
+#' + `"00-24"`: Rural Emergency Hospital (REH)
+#' + `"00-85"`: Critical Access Hospital (CAH)
+#' @param pac_org < *integer|character* > 10-digit Organizational PECOS Associate Control ID
 #' @param organization < *character* > Hospital’s legal business name
 #' @param dba < *character* > Hospital’s doing-business-as name
 #' @param city < *character* > City of the hospital’s practice location

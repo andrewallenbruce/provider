@@ -38,37 +38,35 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{< \emph{integer|character} > 10-digit Organizational National Provider Identifier}
 
 \item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number}
 
-\item{enid_org}{< \emph{character} > 15-digit organizational provider Medicare
-enrollment identifier}
+\item{enid_org}{< \emph{character} > 15-digit Organizational Medicare Enrollment ID}
 
 \item{enroll_state}{< \emph{character} > Hospital’s enrollment state}
 
-\item{pac_org}{< \emph{integer} > 10-digit organizational/group provider
-associate-level control identifier}
+\item{pac_org}{< \emph{integer|character} > 10-digit Organizational PECOS Associate Control ID}
 
 \item{specialty_code}{< \emph{character} > Medicare Part A Provider specialty code:
 \itemize{
-\item \code{"00-00"}: RELIGIOUS NON-MEDICAL HEALTH CARE INSTITUTION (RNHCI)
-\item \code{"00-01"}: COMMUNITY MENTAL HEALTH CENTER
-\item \code{"00-02"}: COMPREHENSIVE OUTPATIENT REHABILITATION FACILITY
-\item \code{"00-03"}: END-STAGE RENAL DISEASE FACILITY (ESRD)
-\item \code{"00-04"}: FEDERALLY QUALIFIED HEALTH CENTER (FQHC)
-\item \code{"00-05"}: HISTOCOMPATIBILITY LABORATORY
-\item \code{"00-06"}: HOME HEALTH AGENCY
-\item \code{"00-08"}: HOSPICE
-\item \code{"00-09"}: HOSPITAL
-\item \code{"00-10"}: INDIAN HEALTH SERVICES FACILITY
-\item \code{"00-13"}: ORGAN PROCUREMENT ORGANIZATION (OPO)
-\item \code{"00-14"}: OUTPATIENT PHYSICAL THERAPY/OCCUPATIONAL THERAPY/SPEECH PATHOLOGY SERVICES
-\item \code{"00-17"}: RURAL HEALTH CLINIC (RHC)
-\item \code{"00-18"}: SKILLED NURSING FACILITY (SNF)
-\item \code{"00-19"}: OTHER
-\item \code{"00-24"}: RURAL EMERGENCY HOSPITAL
-\item \code{"00-85"}: CRITICAL ACCESS HOSPITAL (CAH)
+\item \code{"00-00"}: Religious Non-Medical Healthcare Institution (RNHCI)
+\item \code{"00-01"}: Community Mental Health Center
+\item \code{"00-02"}: Comprehensive Outpatient Rehabilitation Facility (CORF)
+\item \code{"00-03"}: End-Stage Renal Disease Facility (ESRD)
+\item \code{"00-04"}: Federally Qualified Health Center (FQHC)
+\item \code{"00-05"}: Histocompatibility Laboratory
+\item \code{"00-06"}: Home Health Agency (HHA)
+\item \code{"00-08"}: Hospice
+\item \code{"00-09"}: Hospital
+\item \code{"00-10"}: Indian Health Services Facility
+\item \code{"00-13"}: Organ Procurement Organization (OPO)
+\item \code{"00-14"}: Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services
+\item \code{"00-17"}: Rural Health Clinic (RHC)
+\item \code{"00-18"}: Skilled Nursing Facility (SNF)
+\item \code{"00-19"}: Other
+\item \code{"00-24"}: Rural Emergency Hospital (REH)
+\item \code{"00-85"}: Critical Access Hospital (CAH)
 }}
 
 \item{organization}{< \emph{character} > Hospital’s legal business name}
@@ -147,13 +145,9 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization
 type and address.
-
-Links:
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
+\details{
 
-\emph{Update Frequency:} \strong{Monthly}
 }
 \examples{
 hospitals(pac_org = 6103733050)

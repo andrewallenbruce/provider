@@ -7,7 +7,7 @@
 clinicians(
   npi = NULL,
   pac = NULL,
-  enroll_id = NULL,
+  enid = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
@@ -26,16 +26,13 @@ clinicians(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{< \emph{integer|character} > 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer} > 10-digit individual provider associate-level
-control identifier}
+\item{pac}{< \emph{integer|character} > 10-digit Individual PECOS Associate Control ID}
 
-\item{enroll_id}{< \emph{character} > 15-digit individual provider Medicare
-enrollment identifier; begins with capital "I"}
+\item{enid}{< \emph{character} > 15-digit Individual Medicare Enrollment ID}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's first,
-middle, or last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's name}
 
 \item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female)
 or \code{"M"} (Male)}
@@ -50,8 +47,8 @@ specialty reported in the selected enrollment}
 \item{facility_name}{< \emph{character} > Name of facility associated with the
 individual provider}
 
-\item{pac_org}{< \emph{integer} > 10-digit organizational/group provider
-associate-level control identifier}
+\item{pac_org}{< \emph{integer|character} > 10-digit Organizational PECOS
+Associate Control ID}
 
 \item{city}{< \emph{character} > Provider's city}
 
@@ -59,18 +56,18 @@ associate-level control identifier}
 
 \item{zip}{< \emph{character} > Provider's ZIP code}
 
-\item{offset}{< \emph{integer} > offset; API pagination}
+\item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit individual NPI \cr
    \code{pac} \tab 10-digit individual PAC ID \cr
-   \code{enroll_id} \tab 15-digit individual enrollment ID \cr
+   \code{enid} \tab 15-digit individual enrollment ID \cr
    \code{first} \tab Provider's first name \cr
    \code{middle} \tab Provider's middle name \cr
    \code{last} \tab Provider's last name \cr

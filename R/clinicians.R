@@ -11,13 +11,10 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac < *integer* > 10-digit individual provider associate-level
-#' control identifier
-#' @param enroll_id < *character* > 15-digit individual provider Medicare
-#' enrollment identifier; begins with capital "I"
-#' @param first,middle,last < *character* > Individual provider's first,
-#' middle, or last name
+#' @param npi < *integer|character* > 10-digit Individual National Provider Identifier
+#' @param pac < *integer|character* > 10-digit Individual PECOS Associate Control ID
+#' @param enid < *character* > 15-digit Individual Medicare Enrollment ID
+#' @param first,middle,last < *character* > Individual provider's name
 #' @param gender < *character* > Individual provider's gender; `"F"` (Female)
 #' or `"M"` (Male)
 #' @param school < *character* > Individual provider’s medical school
@@ -26,14 +23,14 @@
 #' specialty reported in the selected enrollment
 #' @param facility_name < *character* > Name of facility associated with the
 #' individual provider
-#' @param pac_org < *integer* > 10-digit organizational/group provider
-#' associate-level control identifier
+#' @param pac_org < *integer|character* > 10-digit Organizational PECOS
+#' Associate Control ID
 #' @param city < *character* > Provider's city
 #' @param state < *character* > Provider's state
 #' @param zip < *character* > Provider's ZIP code
-#' @param offset < *integer* > offset; API pagination
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
+#' @param offset < *integer* > // __default:__ `0L` API pagination
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -41,7 +38,7 @@
 #' |:---------------|:-----------------------------------------------------|
 #' |`npi`           |10-digit individual NPI                               |
 #' |`pac`           |10-digit individual PAC ID                            |
-#' |`enroll_id`     |15-digit individual enrollment ID                     |
+#' |`enid`          |15-digit individual enrollment ID                     |
 #' |`first`         |Provider's first name                                 |
 #' |`middle`        |Provider's middle name                                |
 #' |`last`          |Provider's last name                                  |
@@ -73,7 +70,7 @@
 #' @export
 clinicians <- function(npi = NULL,
                        pac = NULL,
-                       enroll_id = NULL,
+                       enid = NULL,
                        first = NULL,
                        middle = NULL,
                        last = NULL,
@@ -95,15 +92,18 @@ clinicians <- function(npi = NULL,
   if (!is.null(pac_org))       {pac_org    <- pac_check(pac_org)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
   if (!is.null(zip))           {zip        <- as.character(zip)}
-  if (!is.null(enroll_id))     {enroll_check(enroll_id)}
-  if (!is.null(enroll_id))     {enroll_ind_check(enroll_id)}
   if (!is.null(gender))        {rlang::arg_match(gender, c("F", "M"))}
+
+  if (!is.null(enid)) {
+    enroll_check(enid)
+    enroll_ind_check(enid)
+    }
 
   args <- dplyr::tribble(
     ~param,               ~arg,
     "NPI",                npi,
     "Ind_PAC_ID",         pac,
-    "Ind_enrl_ID",        enroll_id,
+    "Ind_enrl_ID",        enid,
     "frst_nm",            first,
     "mid_nm",             middle,
     "lst_nm",             last,
@@ -131,7 +131,7 @@ clinicians <- function(npi = NULL,
       ~x,              ~y,
       "npi",           npi,
       "pac",           pac,
-      "enroll_id",     enroll_id,
+      "enid",          enid,
       "first",         first,
       "middle",        middle,
       "last",          last,
@@ -173,7 +173,7 @@ clin_cols <- function(df) {
 
   cols <- c('npi',
             'pac' = 'ind_pac_id',
-            'enroll_id' = 'ind_enrl_id',
+            'enid' = 'ind_enrl_id',
             'first' = 'frst_nm',
             'middle' = 'mid_nm',
             'last' = 'lst_nm',
@@ -197,6 +197,6 @@ clin_cols <- function(df) {
             'assign_ind' = 'ind_assgn',
             'assign_org' = 'grp_assgn')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }
