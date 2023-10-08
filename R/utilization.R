@@ -207,8 +207,8 @@ NULL
 #' largest number of claims submitted
 #' @param par < *boolean* > Identifies whether the provider participates in
 #' Medicare and/or accepts assignment of Medicare allowed amounts
-#' @param tidy < *boolean* > // _default:_ `TRUE` Tidy output
-#' @param nest < *boolean* > // _default:_ `TRUE` Nest `hcpcs_detailed`,
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest `hcpcs_detailed`,
 #' `demographics` and `conditions` columns
 #' @rdname utilization
 #' @autoglobal
@@ -436,8 +436,8 @@ prov_cols <- function(df) {
 #' submitted on the claims is a:
 #'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
 #'    + Non-facility (`"O"`): Office, Home, etc.
-#' @param tidy < *boolean* > // _default:_ `TRUE` Tidy output
-#' @param rbcs < *boolean* > // _default:_ `TRUE` Add Restructured BETOS
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes
 #' @rdname utilization
 #' @autoglobal
@@ -689,8 +689,8 @@ serv_cols2 <- function(df) {
 #' submitted on the claims is a:
 #'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
 #'    + Non-facility (`"O"`): Office, Home, etc.
-#' @param tidy < *boolean* > // _default is_ `TRUE` Tidy output
-#' @param rbcs < *boolean* > // _default is_ `TRUE` Add Restructured BETOS
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes
 #' @rdname utilization
 #' @autoglobal

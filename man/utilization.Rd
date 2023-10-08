@@ -100,9 +100,9 @@ largest number of claims submitted}
 \item{par}{< \emph{boolean} > Identifies whether the provider participates in
 Medicare and/or accepts assignment of Medicare allowed amounts}
 
-\item{tidy}{< \emph{boolean} > // \emph{default is} \code{TRUE} Tidy output}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \emph{default:} \code{TRUE} Nest \code{hcpcs_detailed},
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{hcpcs_detailed},
 \code{demographics} and \code{conditions} columns}
 
 \item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific
@@ -118,7 +118,7 @@ submitted on the claims is a:
 \item Non-facility (\code{"O"}): Office, Home, etc.
 }}
 
-\item{rbcs}{< \emph{boolean} > // \emph{default is} \code{TRUE} Add Restructured BETOS
+\item{rbcs}{< \emph{boolean} > // \strong{default:} \code{TRUE} Add Restructured BETOS
 Classifications to HCPCS codes}
 
 \item{level}{< \emph{character} > Geographic level by which the data will be

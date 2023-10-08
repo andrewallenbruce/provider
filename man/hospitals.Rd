@@ -33,6 +33,7 @@ hospitals(
   other = NULL,
   reh_conversion = NULL,
   tidy = TRUE,
+  pivot = TRUE,
   na.rm = TRUE
 )
 }
@@ -107,9 +108,11 @@ on the CMS form}
 \item{reh_conversion}{< \emph{boolean} > Indicates a former Hospital or Critical
 Access Hospital that converted to a Rural Emergency Hospital}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

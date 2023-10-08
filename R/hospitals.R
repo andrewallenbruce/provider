@@ -55,8 +55,9 @@
 #' on the CMS form
 #' @param reh_conversion < *boolean* > Indicates a former Hospital or Critical
 #' Access Hospital that converted to a Rural Emergency Hospital
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -96,6 +97,7 @@ hospitals <- function(npi = NULL,
                       other = NULL,
                       reh_conversion = NULL,
                       tidy = TRUE,
+                      pivot = TRUE,
                       na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
@@ -106,37 +108,37 @@ hospitals <- function(npi = NULL,
   if (!is.null(enroll_id_org)) {enroll_org_check(enroll_id_org)}
   if (!is.null(proprietary_nonprofit)) {rlang::arg_match(proprietary_nonprofit, c("P", "N"))}
 
-  if (!is.null(multiple_npis)) {multiple_npis <- tf_2_yn(multiple_npis)}
-  if (!is.null(general)) {general <- tf_2_yn(general)}
-  if (!is.null(acute_care)) {acute_care <- tf_2_yn(acute_care)}
-  if (!is.null(alcohol_drug)) {alcohol_drug <- tf_2_yn(alcohol_drug)}
-  if (!is.null(childrens)) {childrens <- tf_2_yn(childrens)}
-  if (!is.null(long_term)) {long_term <- tf_2_yn(long_term)}
-  if (!is.null(psychiatric)) {psychiatric <- tf_2_yn(psychiatric)}
-  if (!is.null(rehabilitation)) {rehabilitation <- tf_2_yn(rehabilitation)}
-  if (!is.null(short_term)) {short_term <- tf_2_yn(short_term)}
-  if (!is.null(swing_bed)) {swing_bed <- tf_2_yn(swing_bed)}
-  if (!is.null(psych_unit)) {psych_unit <- tf_2_yn(psych_unit)}
-  if (!is.null(rehab_unit)) {rehab_unit <- tf_2_yn(rehab_unit)}
+  if (!is.null(multiple_npis))      {multiple_npis <- tf_2_yn(multiple_npis)}
+  if (!is.null(general))            {general <- tf_2_yn(general)}
+  if (!is.null(acute_care))         {acute_care <- tf_2_yn(acute_care)}
+  if (!is.null(alcohol_drug))       {alcohol_drug <- tf_2_yn(alcohol_drug)}
+  if (!is.null(childrens))          {childrens <- tf_2_yn(childrens)}
+  if (!is.null(long_term))          {long_term <- tf_2_yn(long_term)}
+  if (!is.null(psychiatric))        {psychiatric <- tf_2_yn(psychiatric)}
+  if (!is.null(rehabilitation))     {rehabilitation <- tf_2_yn(rehabilitation)}
+  if (!is.null(short_term))         {short_term <- tf_2_yn(short_term)}
+  if (!is.null(swing_bed))          {swing_bed <- tf_2_yn(swing_bed)}
+  if (!is.null(psych_unit))         {psych_unit <- tf_2_yn(psych_unit)}
+  if (!is.null(rehab_unit))         {rehab_unit <- tf_2_yn(rehab_unit)}
   if (!is.null(specialty_hospital)) {specialty_hospital <- tf_2_yn(specialty_hospital)}
-  if (!is.null(other)) {other <- tf_2_yn(other)}
-  if (!is.null(reh_conversion)) {reh_conversion <- tf_2_yn(reh_conversion)}
+  if (!is.null(other))              {other <- tf_2_yn(other)}
+  if (!is.null(reh_conversion))     {reh_conversion <- tf_2_yn(reh_conversion)}
 
   args <- dplyr::tribble(
-    ~param,                           ~arg,
-    "NPI",                            npi,
-    "CCN",                            facility_ccn,
-    "ENROLLMENT ID",                  enroll_id_org,
-    "ENROLLMENT STATE",               enroll_state,
-    "PROVIDER TYPE CODE",             specialty_code,
-    "ASSOCIATE ID",                   pac_org,
-    "ORGANIZATION NAME",              organization,
-    "DOING BUSINESS AS NAME",         doing_business_as,
-    "CITY",                           city,
-    "STATE",                          state,
-    "ZIP CODE",                       zip,
-    "PROPRIETARY_NONPROFIT",          proprietary_nonprofit,
-    "MULTIPLE NPI FLAG",              multiple_npis,
+    ~param,                             ~arg,
+    "NPI",                              npi,
+    "CCN",                              facility_ccn,
+    "ENROLLMENT ID",                    enroll_id_org,
+    "ENROLLMENT STATE",                 enroll_state,
+    "PROVIDER TYPE CODE",               specialty_code,
+    "ASSOCIATE ID",                     pac_org,
+    "ORGANIZATION NAME",                organization,
+    "DOING BUSINESS AS NAME",           doing_business_as,
+    "CITY",                             city,
+    "STATE",                            state,
+    "ZIP CODE",                         zip,
+    "PROPRIETARY_NONPROFIT",            proprietary_nonprofit,
+    "MULTIPLE NPI FLAG",                multiple_npis,
     "SUBGROUP %2D GENERAL",             general,
     "SUBGROUP %2D ACUTE CARE",          acute_care,
     "SUBGROUP %2D ALCOHOL DRUG",        alcohol_drug,
@@ -150,7 +152,7 @@ hospitals <- function(npi = NULL,
     "SUBGROUP %2D REHABILITATION UNIT", rehab_unit,
     "SUBGROUP %2D SPECIALTY HOSPITAL",  specialty_hospital,
     "SUBGROUP %2D OTHER",               other,
-    "REH CONVERSION FLAG",            reh_conversion)
+    "REH CONVERSION FLAG",              reh_conversion)
 
   response <- httr2::request(build_url("hos", args)) |> httr2::req_perform()
 
@@ -207,19 +209,28 @@ hospitals <- function(npi = NULL,
       tidyr::unite("address",
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
-      hosp_cols() |>
-      tidyr::pivot_longer(
-        cols = c("Multiple NPIs",
-                 "REH Conversion",
-                 dplyr::contains("Subgroup")),
+      tidyr::unite("org_structure",
+                   organization_type_structure:organization_other_type_text,
+                   remove = TRUE, na.rm = TRUE, sep = ": ") |>
+      tidyr::unite("location_type",
+                   practice_location_type:location_other_type_text,
+                   remove = TRUE, na.rm = TRUE, sep = ": ") |>
+      hosp_cols()
+
+    if (pivot) {
+      results <- hosp_cols2(results) |>
+        tidyr::pivot_longer(cols = c("Multiple NPIs", "REH Conversion",
+                                     dplyr::contains("Subgroup")),
         names_to = "status",
         values_to = "flag") |>
       dplyr::filter(flag == TRUE) |>
       dplyr::mutate(flag = NULL)
+    }
 
     if (na.rm) {results <- janitor::remove_empty(results,
-                              which = c("rows", "cols"))}
+                              which = c("rows", "cols"))
     }
+  }
   return(results)
 }
 
@@ -239,15 +250,59 @@ hosp_cols <- function(df) {
             'enroll_state' = 'enrollment_state',
             'incorporation_date',
             'incorporation_state',
-            'organization_structure' = 'organization_type_structure',
-            'org_other' = 'organization_other_type_text',
+            'org_structure',
             'address',
             'city',
             'state',
             'zip' = 'zip_code',
-            'location_type' = 'practice_location_type',
-            'location_other' = 'location_other_type_text',
-            'cah_or_hospital_ccn',
+            'location_type',
+            'associated_ccn' = 'cah_or_hospital_ccn',
+            'reh_conversion_date',
+            'proprietary_nonprofit',
+            'multiple_npi_flag',
+            'reh_conversion_flag',
+            'subgroup_general',
+            'subgroup_acute_care',
+            'subgroup_alcohol_drug',
+            'subgroup_childrens',
+            'subgroup_long_term',
+            'subgroup_psychiatric',
+            'subgroup_rehabilitation',
+            'subgroup_short_term',
+            'subgroup_swing_bed_approved',
+            'subgroup_psychiatric_unit',
+            'subgroup_rehabilitation_unit',
+            'subgroup_specialty_hospital',
+            'subgroup_other',
+            'subgroup_other_text')
+
+  df |> dplyr::select(dplyr::any_of(cols))
+
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+hosp_cols2 <- function(df) {
+
+  cols <- c('npi',
+            'organization',
+            'doing_business_as',
+            'pac_org',
+            'enroll_id_org',
+            'facility_ccn',
+            'specialty_code',
+            'specialty',
+            'enroll_state',
+            'incorporation_date',
+            'incorporation_state',
+            'org_structure',
+            'address',
+            'city',
+            'state',
+            'zip',
+            'location_type',
+            'associated_ccn',
             'reh_conversion_date',
             'proprietary_nonprofit',
             "Multiple NPIs" = 'multiple_npi_flag',
@@ -266,6 +321,6 @@ hosp_cols <- function(df) {
             "Subgroup Specialty Hospital" = 'subgroup_specialty_hospital',
             "Subgroup Other" = 'subgroup_other')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

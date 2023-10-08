@@ -100,6 +100,10 @@ utils::globalVariables(c(
   "y", # <hospitals>
   "address_line_1", # <hospitals>
   "address_line_2", # <hospitals>
+  "organization_type_structure", # <hospitals>
+  "organization_other_type_text", # <hospitals>
+  "practice_location_type", # <hospitals>
+  "location_other_type_text", # <hospitals>
   "flag", # <hospitals>
   "y", # <laboratories>
   "pgm_trmntn_cd", # <laboratories>
