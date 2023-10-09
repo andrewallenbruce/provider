@@ -41,3 +41,4 @@ change(df, c(charges, payment))
 dplyr::tibble(date = lubridate::today() - 366) |>
 years_df(date_col = date)
 }
+\keyword{internal}

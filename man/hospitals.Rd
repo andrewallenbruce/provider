@@ -38,7 +38,7 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer|character} > 10-digit Organizational National Provider Identifier}
+\item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
 
 \item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number}
 
@@ -46,7 +46,7 @@ hospitals(
 
 \item{enroll_state}{< \emph{character} > Hospital’s enrollment state}
 
-\item{pac_org}{< \emph{integer|character} > 10-digit Organizational PECOS Associate Control ID}
+\item{pac_org}{< \emph{integer | character} > 10-digit Organizational PECOS Associate Control ID}
 
 \item{specialty_code}{< \emph{character} > Medicare Part A Provider specialty code:
 \itemize{
@@ -141,13 +141,17 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{hospitals()} allows you to search for information on all hospitals
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization
 type and address.
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
-\details{
 
+\emph{Update Frequency:} \strong{Monthly}
 }
 \examples{
 hospitals(pac_org = 6103733050)

@@ -107,6 +107,7 @@ utils::globalVariables(c(
   "practice_location_type", # <hospitals>
   "location_other_type_text", # <hospitals>
   "flag", # <hospitals>
+  "subgroup", # <hospitals>
   "y", # <laboratories>
   "pgm_trmntn_cd", # <laboratories>
   "crtfctn_actn_type_cd", # <laboratories>
@@ -160,25 +161,15 @@ utils::globalVariables(c(
   "type_of_action", # <laboratories>
   "y", # <missing_endpoints>
   "y", # <nppes>
-  "number", # <nppes>
-  "enumeration_type", # <nppes>
+  "basic", # <nppes>
   "addresses", # <nppes>
-  "taxonomies", # <nppes>
-  "practiceLocations", # <nppes>
-  "other_names", # <nppes>
-  "practice_locations", # <nppes>
-  "country_code", # <nppes>
-  "telephone_number", # <nppes>
-  "postal_code", # <nppes>
-  "address_purpose", # <nppes>
   "purpose", # <nppes>
-  "address_1", # <nppes>
-  "code", # <nppes>
-  "desc", # <nppes>
-  "taxonomy_group", # <nppes>
-  "primary", # <nppes>
-  "issuer", # <nppes>
-  "identifier", # <nppes>
+  "tx", # <nppes>
+  "id", # <nppes>
+  "pr", # <nppes>
+  "on", # <nppes>
+  "ep", # <nppes>
+  "entity_type", # <nppes>
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>

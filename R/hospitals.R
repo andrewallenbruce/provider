@@ -1,18 +1,21 @@
 #' Hospitals Enrolled in Medicare
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#'
 #' `hospitals()` allows you to search for information on all hospitals
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#' Links:
-#'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' `r badger::badge_custom("Update Frequency", "Monthly", "blue")`
+#'
+#'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer|character* > 10-digit Organizational National Provider Identifier
+#' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
 #' @param facility_ccn < *character* > 6-digit CMS Certification Number
 #' @param enid_org < *character* > 15-digit Organizational Medicare Enrollment ID
 #' @param enroll_state < *character* > Hospital’s enrollment state
@@ -34,7 +37,7 @@
 #' + `"00-19"`: Other
 #' + `"00-24"`: Rural Emergency Hospital (REH)
 #' + `"00-85"`: Critical Access Hospital (CAH)
-#' @param pac_org < *integer|character* > 10-digit Organizational PECOS Associate Control ID
+#' @param pac_org < *integer | character* > 10-digit Organizational PECOS Associate Control ID
 #' @param organization < *character* > Hospital’s legal business name
 #' @param dba < *character* > Hospital’s doing-business-as name
 #' @param city < *character* > City of the hospital’s practice location
@@ -234,6 +237,7 @@ hospitals <- function(npi = NULL,
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup")), yn_logical),
                     dplyr::across(dplyr::contains("date"), anytime::anydate),
+                    dplyr::across(dplyr::contains("location"), stringr::str_squish),
                     proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
                       "P" ~ "Proprietary", "N" ~ "Non-Profit", .default = NA),
                     zip_code = as.character(zip_code)) |>
@@ -250,13 +254,12 @@ hospitals <- function(npi = NULL,
 
     if (pivot) {
       results <- hosp_cols2(results) |>
-        tidyr::pivot_longer(cols = c("Multiple NPIs",
-                                     "REH Conversion",
-                                     dplyr::contains("Subgroup")),
-        names_to = "designations",
+        tidyr::pivot_longer(cols = c(dplyr::contains("Subgroup")),
+        names_to = "subgroup",
         values_to = "flag") |>
       dplyr::filter(flag == TRUE) |>
-      dplyr::mutate(flag = NULL)
+      dplyr::mutate(flag = NULL,
+                    subgroup = stringr::str_remove(subgroup, "Subgroup "))
     }
 
     if (na.rm) {results <- janitor::remove_empty(results,
@@ -280,19 +283,19 @@ hosp_cols <- function(df) {
             'doing_business_as' = 'doing_business_as_name',
             'specialty_code' = 'provider_type_code',
             'specialty' = 'provider_type_text',
-            'incorporation_date',
-            'incorporation_state',
+            'incorp_date' = 'incorporation_date',
+            'incorp_state' = 'incorporation_state',
             'structure',
             'address',
             'city',
             'state',
             'zip' = 'zip_code',
             'location_type',
-            'associated_ccns' = 'cah_or_hospital_ccn',
-            'reh_conversion_date',
             'registration' = 'proprietary_nonprofit',
-            'multiple_npi_flag',
-            'reh_conversion_flag',
+            'multi_npi' = 'multiple_npi_flag',
+            'reh_conversion' = 'reh_conversion_flag',
+            'reh_date' = 'reh_conversion_date',
+            'reh_ccns' = 'cah_or_hospital_ccn',
             'subgroup_general',
             'subgroup_acute_care',
             'subgroup_alcohol_drug',
@@ -326,19 +329,18 @@ hosp_cols2 <- function(df) {
             'doing_business_as',
             'specialty_code',
             'specialty',
-            'incorporation_date',
-            'incorporation_state',
+            'incorp_date',
+            'incorp_state',
             'structure',
             'address',
             'city',
             'state',
             'zip',
             'location_type',
-            'associated_ccns',
-            'reh_conversion_date',
-            'registration',
-            "Multiple NPIs" = 'multiple_npi_flag',
-            "REH Conversion" = 'reh_conversion_flag',
+            'multi_npi',
+            'reh_conversion',
+            'reh_date',
+            'reh_ccns',
             "Subgroup General" = 'subgroup_general',
             "Subgroup Acute Care" = 'subgroup_acute_care',
             "Subgroup Alcohol Drug" = 'subgroup_alcohol_drug',

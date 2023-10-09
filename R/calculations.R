@@ -16,6 +16,7 @@
 #' dplyr::tibble(date = lubridate::today() - 366) |>
 #' years_df(date_col = date)
 #' @name calculations
+#' @keywords internal
 NULL
 
 #' @param df data frame
@@ -23,6 +24,7 @@ NULL
 #' @param digits Number of digits to round to, default is 3
 #' @returns A `tibble`
 #' @rdname calculations
+#' @keywords internal
 #' @autoglobal
 #' @export
 change <- function(df, cols, digits = 3) {
@@ -108,6 +110,7 @@ change_year <- function(df, col, by = year, digits = 3) {
 #' @param date_col date column
 #' @returns number of years since today's date
 #' @rdname calculations
+#' @keywords internal
 #' @autoglobal
 #' @export
 years_df <- function(df, date_col) {

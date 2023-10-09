@@ -20,13 +20,16 @@ nppes(
   country = NULL,
   limit = 1200,
   skip = NULL,
-  tidy = TRUE
+  unnest = TRUE,
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI)}
 
-\item{entype}{Entity/enumeration type. \emph{Cannot be the only criteria entered.}
+\item{entype}{Entity/enumeration type
+. \emph{Cannot be the only criteria entered.}
 \itemize{
 \item \code{"I"}: Individual provider (NPI-1)
 \item \code{"O"}: Organizational provider (NPI-2)
@@ -79,7 +82,11 @@ selected \emph{is not} \code{"US"} (United States).}
 
 \item{skip}{Number of results to skip after those set in \code{limit}.}
 
+\item{unnest}{Unnest output; default is \code{TRUE}.}
+
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
