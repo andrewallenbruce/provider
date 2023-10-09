@@ -298,7 +298,9 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">1200</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -309,7 +311,8 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 
 
 <dt>entype</dt>
-<dd><p>Entity/enumeration type. <em>Cannot be the only criteria entered.</em></p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
+<dd><p>Entity/enumeration type
+. <em>Cannot be the only criteria entered.</em></p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
 <li><p><code>"O"</code>: Organizational provider (NPI-2)</p></li>
 </ul></dd>
 
@@ -381,8 +384,16 @@ selected <em>is not</em> <code>"US"</code> (United States).</p></dd>
 <dd><p>Number of results to skip after those set in <code>limit</code>.</p></dd>
 
 
+<dt>unnest</dt>
+<dd><p>Unnest output; default is <code>TRUE</code>.</p></dd>
+
+
 <dt>tidy</dt>
 <dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 </dl></div>
     <div class="section level2">
