@@ -219,12 +219,9 @@ open_payments <- function(year,
   }
 
   if (tidy) {
-    results <- tidyup(results) |>
+    results <- tidyup(results, yn = c("_indicator")) |>
       dplyr::mutate(program_year = as.integer(program_year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
-                    dplyr::across(dplyr::contains("date"), anytime::anydate),
                     dplyr::across(dplyr::contains("dollars"), as.double),
-                    dplyr::across(dplyr::contains("_indicator"), yn_logical),
                     change_type = changed_logical(change_type),
                     covered_recipient_type = dplyr::case_match(covered_recipient_type,
                                                  "Covered Recipient Physician" ~ "Physician",
@@ -234,10 +231,8 @@ open_payments <- function(year,
                     nature_of_payment_or_transfer_of_value = dplyr::case_match(nature_of_payment_or_transfer_of_value,
                                                    "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation (Other)",
                                                    .default = nature_of_payment_or_transfer_of_value)) |>
-      tidyr::unite("address",
-                   dplyr::any_of(c("recipient_primary_business_street_address_line1",
-                                   "recipient_primary_business_street_address_line2")),
-                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+      address(c("recipient_primary_business_street_address_line1",
+                "recipient_primary_business_street_address_line2")) |>
       tidyr::unite("primary_other",
                    dplyr::any_of(c("covered_recipient_primary_type_2",
                                    "covered_recipient_primary_type_3",

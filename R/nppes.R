@@ -197,12 +197,10 @@ nppes <- function(npi = NULL,
                         tidyr::unnest_longer(ep, keep_empty = TRUE) |>
                                tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
-      results <- tidyup(results) |>
-        dplyr::mutate(dplyr::across(dplyr::contains("date"), anytime::anydate),
-                      dplyr::across(dplyr::where(is.character), clean_credentials),
+      results <- tidyup(results, yn = c("sole_prop", "org_part")) |>
+        dplyr::mutate(dplyr::across(dplyr::where(is.character), clean_credentials),
                       entity_type = entype_char(entity_type),
-                      purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
-                      dplyr::across(dplyr::any_of(c("sole_prop", "org_part")), yn_logical)) |>
+                      purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
         cols_nppes2()
 
       if (na.rm) {
@@ -358,8 +356,7 @@ cols_nppes2 <- function(df) {
 
             'on_type',
             'on_code',
-            'on_organization_name'
-            )
+            'on_organization_name')
 
   df |> dplyr::select(dplyr::any_of(cols))
 

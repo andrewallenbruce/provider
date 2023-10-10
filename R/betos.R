@@ -1,19 +1,21 @@
-#' Restructured BETOS Classification System
+#' Restructured BETOS Classification for HCPCS
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' `betos_classification()` allows the user to group HCPCS codes into clinically
-#' meaningful categories based on the original Berenson-Eggers Type of Service
-#' (BETOS) classification. Users may use the RBCS to analyze trends and perform
-#' other types of health services analytic work.
+#' [betos()] allows the user to group HCPCS codes into clinically
+#' meaningful categories based on the original _Berenson-Eggers Type of Service_
+#' (BETOS) classification.
 #'
-#' ## BETOS
+#' @section From BETOS to RBCS:
+#'
 #' The Restructured BETOS Classification System (RBCS) is a taxonomy that allows
-#' researchers to group healthcare service codes for Medicare Part B services
-#' into clinically meaningful categories and subcategories. It is based on the
-#' original Berenson-Eggers Type of Service (BETOS) classification created in
-#' the 1980s, and includes notable updates such as Part B non-physician services.
-#' The RBCS will undergo annual updates by a technical expert panel of
+#' researchers to group Medicare Part B healthcare service codes into clinically
+#' meaningful categories and subcategories.
+#'
+#' Based on the original Berenson-Eggers Type of Service (BETOS) classification
+#' created in the 1980s, it includes notable updates such as Part B non-physician
+#' services and undergoes annual updates by a technical expert panel of
 #' researchers and clinicians.
 #'
 #' The general framework for grouping service codes into the new RBCS taxonomy
@@ -26,8 +28,8 @@
 #'
 #' Links:
 #'
-#' - [Restructured BETOS Classification System](https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system)
-#' - [Restructured BETOS Classification System Data Dictionary](https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary)
+#' + [Restructured BETOS Classification System](https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system)
+#' + [RBCS Data Dictionary](https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary)
 #'
 #' *Update Frequency:* **Annually**
 #'
@@ -37,7 +39,7 @@
 #' @param family < *character* > RBCS Family Description
 #' @param procedure < *character* > Whether the HCPCS code is a Major (`"M"`),
 #' Other (`"O"`), or Non-Procedure code (`"N"`).
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -99,10 +101,8 @@ betos <- function(hcpcs_code = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
-                    dplyr::across(dplyr::contains("dt"), anytime::anydate),
-                    rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
+    results <- tidyup(results, dt = c("dt")) |>
+      dplyr::mutate(rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
                                                        "N" ~ "Non-procedure",
                                                        "M" ~ "Major",
                                                        "O" ~ "Other")) |>
@@ -130,6 +130,6 @@ betos_cols <- function(df) {
             'rbcs_start_date' = 'rbcs_assignment_eff_dt',
             'rbcs_end_date' = 'rbcs_assignment_end_dt')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

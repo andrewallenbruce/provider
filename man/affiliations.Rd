@@ -19,9 +19,9 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer | character} > 10-digit Individual National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer | character} > 10-digit Individual PECOS Associate Control ID}
+\item{pac}{< \emph{integer} > 10-digit Individual PECOS Associate Control ID}
 
 \item{first, middle, last}{< \emph{character} > Individual Provider's name}
 
@@ -37,7 +37,7 @@ affiliations(
 \item \code{"Dialysis facility"} or \code{"df"}
 }}
 
-\item{facility_ccn}{< \emph{integer | character} > 6-digit CMS Certification Number of
+\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of
 facility or unit within hospital where an individual provider provides service}
 
 \item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a sub-unit's

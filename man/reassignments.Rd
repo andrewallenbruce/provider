@@ -2,7 +2,7 @@
 % Please edit documentation in R/reassignments.R
 \name{reassignments}
 \alias{reassignments}
-\title{Search the Medicare Revalidation Reassignment List API}
+\title{Reassignment of Benefits}
 \usage{
 reassignments(
   npi = NULL,
@@ -16,48 +16,49 @@ reassignments(
   pac_org = NULL,
   enid_org = NULL,
   state_org = NULL,
-  record_type = NULL,
+  record = NULL,
   tidy = TRUE,
   na.rm = TRUE
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier of individual provider reassigning benefits or an employee}
+\item{npi}{< \emph{integer} > Individual provider's 10-digit National Provider Identifier}
 
-\item{pac}{< \emph{integer} > 10-digit provider associate level variable of individual provider reassigning benefits or an employee}
+\item{pac}{< \emph{integer} > Individual provider's 10-digit PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > 15-digit enrollment ID of individual provider reassigning benefits or an employee}
+\item{enid}{< \emph{character} > Individual provider's 15-digit Medicare Enrollment ID}
 
-\item{first, last}{< \emph{character} > First/last name of individual provider reassigning benefits or an employee}
+\item{first, last}{< \emph{character} > Individual provider's name}
 
-\item{state}{< \emph{character} > Enrollment state of individual provider reassigning benefits or an employee}
+\item{state}{< \emph{character} > Individual provider's enrollment state}
 
-\item{specialty}{< \emph{character} > Enrollment specialty of individual provider reassigning benefits or an employee}
+\item{specialty}{< \emph{character} > Individual provider's enrollment specialty}
 
-\item{organization}{< \emph{character} > Legal business name of organizational provider receiving reassignment or is the employer}
+\item{organization}{< \emph{character} > Organizational provider's legal business name}
 
-\item{pac_org}{< \emph{integer} > 10-digit provider associate level variable of organizational provider receiving reassignment or is the employer}
+\item{pac_org}{< \emph{integer} > Organizational provider's 10-digit PECOS Associate Control ID}
 
-\item{enid_org}{Enrollment ID of organizational provider receiving reassignment or is the employer}
+\item{enid_org}{< \emph{character} > Organizational provider's 15-digit Medicare Enrollment ID}
 
-\item{state_org}{< \emph{character} > Enrollment state of organizational provider receiving reassignment or is the employer}
+\item{state_org}{< \emph{character} > Organizational provider's enrollment state}
 
-\item{record_type}{< \emph{character} > Identifies whether the record is for a reassignment
-(\code{"Reassignment"}) or employment (\code{"Physician Assistant"})}
+\item{record}{< \emph{character} > Identifies whether the record is for reassignment (\code{"R"}) or employment (\code{"E"})}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Reassignments of Providers who are due for Revalidation.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{\link[=reassignments]{reassignments()}} returns information about:
+\itemize{
+\item Individual providers who are reassigning benefits or are an employee of
+\item Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 }
-\details{
-The Revalidation Reassignment List dataset provides information on
-reassignments of providers who are due for revalidation.
 
 Links:
 \itemize{
@@ -68,8 +69,8 @@ Links:
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-revalidation_reassign(enid = "I20200929003184")
-revalidation_reassign(pac = 9830437441)
-revalidation_reassign(pac_org = 3173525888)
+reassignments(enid = "I20200929003184")
+reassignments(pac = 9830437441)
+reassignments(pac_org = 3173525888)
 \dontshow{\}) # examplesIf}
 }

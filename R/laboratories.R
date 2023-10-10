@@ -1,21 +1,27 @@
 #' Clinical Laboratories
 #'
 #' @description
-#' `laboratories()` allows you to search for information on clinical laboratories
+#' `r lifecycle::badge("experimental")`
+#'
+#' [laboratories()] allows you to search for information on clinical laboratories
 #' including demographics and the type of testing services the facility provides.
 #'
-#' #### Clinical Laboratory Improvement Amendments (CLIA)
+#' @section Clinical Laboratory Improvement Amendments (CLIA):
+#'
 #' CMS regulates all laboratory testing (except research) performed on humans
 #' in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
-#' In total, CLIA covers approximately 320,000 laboratory entities. The Division
-#' of Clinical Laboratory Improvement & Quality, within the Quality, Safety &
-#' Oversight Group, under the Center for Clinical Standards and Quality (CCSQ)
-#' has the responsibility for implementing the CLIA Program. Although all
-#' clinical laboratories must be properly certified to receive Medicare or
-#' Medicaid payments, CLIA has no direct Medicare or Medicaid program
-#' responsibilities.
+#' In total, CLIA covers approximately 320,000 laboratory entities.
 #'
-#' #### CLIA Certificates
+#' The Division of Clinical Laboratory Improvement & Quality, within the Quality,
+#' Safety & Oversight Group, under the Center for Clinical Standards and Quality
+#' (CCSQ) has the responsibility for implementing the CLIA Program.
+#'
+#' Although all clinical laboratories must be properly certified to receive
+#' Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
+#' program responsibilities.
+#'
+#' @section CLIA Certificates:
+#'
 #' There are five CLIA certificate types all of which are effective for a
 #' period of two years. They are as follows, in order of increasing complexity:
 #'
@@ -46,13 +52,13 @@
 #' Compliance, except that the laboratory must be accredited by one of the
 #' following CMS-approved accreditation organizations:
 #'
-#'    * [American Association for Laboratory Accreditation](https://a2la.org/) (A2LA)
-#'    * [Association for the Advancement of Blood & Biotherapies](https://www.aabb.org/) (AABB)
-#'    * [American Osteopathic Association](https://osteopathic.org/) (AOA)
-#'    * [American Society for Histocompatibility and Immunogenetics](https://www.ashi-hla.org/) (ASHI)
-#'    * [College of American Pathologists](https://www.cap.org/) (CAP)
-#'    * [Commission on Office Laboratory Accreditation](https://www.cola.org/) (COLA)
-#'    * [The Joint Commission](https://www.jointcommission.org/) (JCAHO)
+#' + [American Association for Laboratory Accreditation](https://a2la.org/) (A2LA)
+#' + [Association for the Advancement of Blood & Biotherapies](https://www.aabb.org/) (AABB)
+#' + [American Osteopathic Association](https://osteopathic.org/) (AOA)
+#' + [American Society for Histocompatibility and Immunogenetics](https://www.ashi-hla.org/) (ASHI)
+#' + [College of American Pathologists](https://www.cap.org/) (CAP)
+#' + [Commission on Office Laboratory Accreditation](https://www.cola.org/) (COLA)
+#' + [The Joint Commission](https://www.jointcommission.org/) (JCAHO)
 #'
 #' Links:
 #'   - [Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
@@ -62,18 +68,18 @@
 #' @param name < *character* > Provider or clinical laboratory's name
 #' @param clia < *character* > 10-character CLIA number
 #' @param certificate < *character* > CLIA certificate type:
-#'    * `"waiver"`
-#'    * `"ppm"` (Provider-Performed Microscopy Procedures)
-#'    * `"registration"`
-#'    * `"compliance"`
-#'    * `"accreditation"`
+#' + `"waiver"`
+#' + `"ppm"`
+#' + `"registration"`
+#' + `"compliance"`
+#' + `"accreditation"`
 #' @param city < *character* > City
 #' @param state < *character* > State
 #' @param zip < *character* > Zip code
-#' @param active < *boolean* > Search for Active providers only? dedault is `FALSE`
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
-#' @param pivot < *boolean* > Pivot output; default is `TRUE`
+#' @param active < *boolean* > // __default:__ `FALSE` Return only active providers
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -138,51 +144,49 @@ laboratories <- function(name = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::contains("_dt"), anytime::anydate),
-                    dplyr::across(dplyr::contains("_sw"), yn_logical),
-                    pgm_trmntn_cd = termcd(pgm_trmntn_cd),
-                    crtfctn_actn_type_cd = toa(crtfctn_actn_type_cd),
-                    cmplnc_stus_cd = status(cmplnc_stus_cd),
-                    rgn_cd = region(rgn_cd),
-                    gnrl_cntl_type_cd = owner(gnrl_cntl_type_cd),
-                    crtfct_type_cd = app(crtfct_type_cd),
-                    gnrl_fac_type_cd = factype(gnrl_fac_type_cd),
+    results <- tidyup(results, dt = c("_dt"), yn = c("_sw")) |>
+      dplyr::mutate(pgm_trmntn_cd               = termcd(pgm_trmntn_cd),
+                    crtfctn_actn_type_cd        = toa(crtfctn_actn_type_cd),
+                    cmplnc_stus_cd              = status(cmplnc_stus_cd),
+                    rgn_cd                      = region(rgn_cd),
+                    gnrl_cntl_type_cd           = owner(gnrl_cntl_type_cd),
+                    crtfct_type_cd              = app(crtfct_type_cd),
+                    gnrl_fac_type_cd            = factype(gnrl_fac_type_cd),
                     current_clia_lab_clsfctn_cd = labclass(current_clia_lab_clsfctn_cd),
-                    prvdr_ctgry_cd = labclass(prvdr_ctgry_cd),
-                    prvdr_ctgry_sbtyp_cd = labclass(prvdr_ctgry_sbtyp_cd),
-                    duration = duration_vec(trmntn_exprtn_dt),
-                    expired = dplyr::if_else(duration < 0, TRUE, FALSE),
-                    duration = NULL) |>
+                    prvdr_ctgry_cd              = labclass(prvdr_ctgry_cd),
+                    prvdr_ctgry_sbtyp_cd        = labclass(prvdr_ctgry_sbtyp_cd),
+                    duration                    = duration_vec(trmntn_exprtn_dt),
+                    expired                     = dplyr::if_else(duration < 0, TRUE, FALSE),
+                    duration                    = NULL) |>
       tidyr::unite("name", c(fac_name, addtnl_fac_name), na.rm = TRUE) |>
       tidyr::unite("address", c(st_adr, addtnl_st_adr), na.rm = TRUE) |>
-      lab_cols()
+      cols_lab()
 
     if (pivot) {
       res <- dplyr::select(results, -dplyr::starts_with("acr_"))
 
       acr <- dplyr::select(results, clia_number, dplyr::starts_with("acr_")) |>
         dplyr::select(clia_number,
-                      a2la = acr_a2la,
-                      a2la_ind = acr_a2la_ind,
-                      a2la_date = acr_a2la_date,
-                      aabb = acr_aabb,
-                      aabb_ind = acr_aabb_ind,
-                      aabb_date = acr_aabb_date,
-                      aoa = acr_aoa,
-                      aoa_ind = acr_aoa_ind,
-                      aoa_date = acr_aoa_date,
-                      ashi = acr_ashi,
-                      ashi_ind = acr_ashi_ind,
-                      ashi_date = acr_ashi_date,
-                      cap = acr_cap,
-                      cap_ind = acr_cap_ind,
-                      cap_date = acr_cap_date,
-                      cola = acr_cola,
-                      cola_ind = acr_cola_ind,
-                      cola_date = acr_cola_date,
-                      jcaho = acr_jcaho,
-                      jcaho_ind = acr_jcaho_ind,
+                      a2la       = acr_a2la,
+                      a2la_ind   = acr_a2la_ind,
+                      a2la_date  = acr_a2la_date,
+                      aabb       = acr_aabb,
+                      aabb_ind   = acr_aabb_ind,
+                      aabb_date  = acr_aabb_date,
+                      aoa        = acr_aoa,
+                      aoa_ind    = acr_aoa_ind,
+                      aoa_date   = acr_aoa_date,
+                      ashi       = acr_ashi,
+                      ashi_ind   = acr_ashi_ind,
+                      ashi_date  = acr_ashi_date,
+                      cap        = acr_cap,
+                      cap_ind    = acr_cap_ind,
+                      cap_date   = acr_cap_date,
+                      cola       = acr_cola,
+                      cola_ind   = acr_cola_ind,
+                      cola_date  = acr_cola_date,
+                      jcaho      = acr_jcaho,
+                      jcaho_ind  = acr_jcaho_ind,
                       jcaho_date = acr_jcaho_date)
 
       org <- acr |>
@@ -244,7 +248,6 @@ laboratories <- function(name = NULL,
     if (na.rm) {
       results <- janitor::remove_empty(results, which = c("rows", "cols"))
     }
-
   }
   return(results)
 }
@@ -252,7 +255,7 @@ laboratories <- function(name = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-lab_cols <- function(df) {
+cols_lab <- function(df) {
 
   cols <- c('name',
             'clia_number' = 'prvdr_num',
@@ -352,8 +355,7 @@ lab_cols <- function(df) {
 
             'clia_class_current' = 'current_clia_lab_clsfctn_cd')
 
-  df |> dplyr::select(
-    dplyr::all_of(cols),
+  df |> dplyr::select(dplyr::all_of(cols),
     # dplyr::starts_with("clia_lab_classification_cd_"),
     dplyr::contains("_provider_number_"))
 

@@ -1,6 +1,7 @@
 #' Provider Enrollment in Medicare
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #'
 #' `providers()` allows you to access enrollment level data on individual and
 #' organizational providers that are actively approved to bill Medicare.
@@ -12,33 +13,27 @@
 #' *Update Frequency:* **Quarterly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac < *integer* > 10-digit provider associate level variable. Links
-#' all entity-level information and may be associated with multiple enrollment
-#' IDs if the individual or organization enrolled multiple times.
-#' @param enroll_id < *character* > 15-digit provider enrollment ID. Assigned to
-#' each new provider enrollment application. Links all enrollment-level
-#' information (enrollment type, state, reassignment of benefits).
-#' @param specialty_code < *character* > Enrollment primary specialty type code
-#' @param specialty_description < *character* > Enrollment specialty type description
-#' @param state < *character* > Enrollment state abbreviation/full name.
-#' Providers enroll at the state level, so a PAC ID can be associated with
-#' multiple enrollment IDs and states.
-#' @param first,middle,last < *character* > Individual provider's first/middle/last name
+#' @param pac < *integer* > 10-digit PECOS Associate Control ID
+#' @param enid < *character* > 15-digit Medicare Enrollment ID
+#' @param specialty_code < *character* > Enrollment specialty code
+#' @param specialty_description < *character* > Enrollment specialty description
+#' @param state < *character* > Enrollment state, full or abbreviation
+#' @param first,middle,last < *character* > Individual provider's name
 #' @param organization < *character* > Organizational provider's name
-#' @param gender < *character* > Individual provider's gender. Options are:
-#'    * `"F"`: Female
-#'    * `"M"`: Male
-#'    * `"9"`: Unknown (or Organizational provider)
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
+#' @param gender < *character* > Provider's gender:
+#' + `"F"`: Female
+#' + `"M"`: Male
+#' + `"9"`: Unknown (or Organizational provider)
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**               |**Description**                        |
 #' |:-----------------------|:--------------------------------------|
 #' |`npi`                   |10-digit NPI                           |
-#' |`pac_id`                |10-digit PAC ID                        |
-#' |`enroll_id`             |15-digit provider enrollment ID        |
+#' |`pac`                   |10-digit PAC ID                        |
+#' |`enid`                  |15-digit provider enrollment ID        |
 #' |`specialty_code`        |Enrollment primary specialty type code |
 #' |`specialty_description` |Enrollment specialty type description  |
 #' |`first`                 |Individual provider's first name       |
@@ -57,7 +52,7 @@
 #' @export
 providers <- function(npi = NULL,
                       pac = NULL,
-                      enroll_id = NULL,
+                      enid = NULL,
                       specialty_code = NULL,
                       specialty_description = NULL,
                       first = NULL,
@@ -69,16 +64,16 @@ providers <- function(npi = NULL,
                       tidy = TRUE,
                       na.rm = TRUE) {
 
-  if (!is.null(npi))       {npi    <- npi_check(npi)}
-  if (!is.null(pac))       {pac_id <- pac_check(pac)}
-  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
-  if (!is.null(gender))    {rlang::arg_match(gender, c("F", "M", "9"))}
+  if (!is.null(npi))    {npi    <- npi_check(npi)}
+  if (!is.null(pac))    {pac_id <- pac_check(pac)}
+  if (!is.null(enid))   {enroll_check(enid)}
+  if (!is.null(gender)) {rlang::arg_match(gender, c("F", "M", "9"))}
 
   args <- dplyr::tribble(
                         ~param,  ~arg,
                           "NPI", npi,
            "PECOS_ASCT_CNTL_ID", pac,
-                    "ENRLMT_ID", enroll_id,
+                    "ENRLMT_ID", enid,
              "PROVIDER_TYPE_CD", specialty_code,
            "PROVIDER_TYPE_DESC", specialty_description,
                      "STATE_CD", state,
@@ -97,7 +92,7 @@ providers <- function(npi = NULL,
       ~x,                      ~y,
       "npi",                   npi,
       "pac",                   pac,
-      "enroll_id",             enroll_id,
+      "enid",                  enid,
       "specialty_code",        specialty_code,
       "specialty_description", specialty_description,
       "state",                 state,
@@ -109,19 +104,13 @@ providers <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
-
   }
-
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |> pros_cols()
-
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))
-    }
+    results <- cols_pros(tidyup(results))
+    if (na.rm) {results <- janitor::remove_empty(results, which = c("rows", "cols"))}
   }
   return(results)
 }
@@ -129,11 +118,11 @@ providers <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-pros_cols <- function(df) {
+cols_pros <- function(df) {
 
   cols <- c('npi',
             'pac'                   = 'pecos_asct_cntl_id',
-            'enroll_id'             = 'enrlmt_id',
+            'enid'                  = 'enrlmt_id',
             'specialty_code'        = 'provider_type_cd',
             'specialty_description' = 'provider_type_desc',
             'state'                 = 'state_cd',
@@ -143,6 +132,6 @@ pros_cols <- function(df) {
             'last'                  = 'last_name',
             'gender'                = 'gndr_sw')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

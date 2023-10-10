@@ -30,9 +30,9 @@ order and refer to:
 \item \code{pmd}: Power Mobility Devices
 }}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -44,11 +44,13 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\code{order_refer()} returns a provider's eligibility status concerning ordering
-and referring within Medicare to:
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{order_refer()} returns a provider's eligibility to order and refer within
+Medicare to:
 \itemize{
 \item \strong{Part B}: Clinical Laboratory Services, Imaging Services
-\item \strong{DME}: Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+\item \strong{DME}: Durable Medical Equipment, Prosthetics, Orthotics, & Supplies (DMEPOS)
 \item \strong{Part A}: Home Health Services
 }
 
@@ -66,8 +68,16 @@ Medicare may reimburse on behalf of its beneficiaries.
 
 \strong{Opt-Out Providers}: Providers who have opted out of Medicare may still
 order and refer. They can also enroll solely to order and refer.
+}
+\examples{
+order_refer(npi = 1003026055)
 
-Links:
+# Filter for certain privileges
+order_refer(last = "Smith", partb = FALSE, hha = TRUE)
+
+}
+\references{
+links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
@@ -75,12 +85,6 @@ Links:
 }
 
 \emph{Update Frequency:} \strong{Twice Weekly}
-}
-\examples{
-order_refer(npi = 1003026055)
-
-## Filter for certain privileges
-order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 }
 \seealso{
 \code{\link[=providers]{providers()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending]{pending()}}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/taxonomy_crosswalk.R
 \name{taxonomy_crosswalk}
 \alias{taxonomy_crosswalk}
-\title{Taxonomy to Medicare Specialty Crosswalk}
+\title{Taxonomy <-> Medicare Specialty}
 \usage{
 taxonomy_crosswalk(
   taxonomy_code = NULL,
@@ -24,7 +24,7 @@ taxonomy_crosswalk(
 
 \item{keyword_search}{< \emph{character} > Search term to use for quick full-text search.}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -36,6 +36,8 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{taxonomy_crosswalk()} allows you to search the types of providers and
 suppliers eligible for Medicare programs by taxonomy code or Medicare
 specialty type code.

@@ -1,61 +1,60 @@
-#' Providers with Pending Medicare Enrollment Applications
+#' Pending Medicare Enrollment Applications
 #'
 #' @description
-#' `pending()` allows you to search for physicians & non-physicians with
-#' pending Medicare enrollment applications.
+#' `r lifecycle::badge("questioning")`
 #'
-#' ### Links:
-#'  - [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
-#'  - [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
+#' `pending()` allows the user to search for providers with pending Medicare
+#' enrollment applications.
+#'
+#' @references APIs:
+#' + [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
+#' + [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param npi National Provider Identifier (NPI) number
-#' @param last_name Last name of provider
-#' @param first_name First name of provider
-#' @param type `physician` or `non-physician`
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param type < *character* > // __required__ Physician ("`P`") or
+#' Non-physician ("`N`")
+#' @param npi < *integer* > 10-digit National Provider Identifier
+#' @param first,last < *character* > Provider's name
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' pending(last_name = "Smith", type = "non-physician")
-#' pending(first_name = "John", type = "physician")
+#' pending(type = "N", last = "Smith")
+#'
+#' pending(type = "P", first = "John")
 #'
 #' @autoglobal
 #' @export
 pending <- function(type,
-                    npi         = NULL,
-                    last_name   = NULL,
-                    first_name  = NULL,
-                    tidy        = TRUE) {
+                    npi = NULL,
+                    first = NULL,
+                    last = NULL,
+                    tidy = TRUE) {
 
-  type <- rlang::arg_match(type, c("physician", "non-physician"))
+  type <- rlang::arg_match(type, c("P", "N"))
   if (!is.null(npi)) {npi <- npi_check(npi)}
 
-  # args tribble
   args <- dplyr::tribble(
-    ~param,       ~args,
+    ~param,       ~arg,
     "NPI",        npi,
-    "LAST_NAME",  last_name,
-    "FIRST_NAME", first_name)
+    "LAST_NAME",  last,
+    "FIRST_NAME", first)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                id, "/data.json?", encode_param(args))
-
-  if (type == "physician") {
-    response <- httr2::request(build_url("ppe", args)) |> httr2::req_perform()}
-  if (type == "non-physician") {
-    response <- httr2::request(build_url("npe", args)) |> httr2::req_perform()}
+  if (type == "P") {
+    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))}
+  if (type == "N") {
+    response <- httr2::req_perform(httr2::request(build_url("npe", args)))}
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
-      ~x,               ~y,
-      "npi",            npi,
-      "last_name",      last_name,
-      "first_name",     first_name,
-      "type",           type) |>
+      ~x,      ~y,
+      "type",  type,
+      "npi",   npi,
+      "first", first,
+      "last",  last) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -67,7 +66,18 @@ pending <- function(type,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(type = toupper(type))
+      dplyr::mutate(type = dplyr::if_else(type == "P",
+                                          "Physician",
+                                          "Non-Physician")) |>
+      cols_pen()
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_pen <- function(df) {
+  cols <- c('npi', 'first' = 'first_name', 'last' = 'last_name', 'type')
+  df |> dplyr::select(dplyr::any_of(cols))
 }

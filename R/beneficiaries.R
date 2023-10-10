@@ -48,13 +48,13 @@
 #' beneficiaries(level = "State", fips = "10")
 #' @autoglobal
 #' @export
-beneficiaries <- function(year        = NULL,
-                          period      = NULL,
-                          level       = NULL,
-                          state       = NULL,
-                          county      = NULL,
-                          fips        = NULL,
-                          tidy        = TRUE) {
+beneficiaries <- function(year = NULL,
+                          period = NULL,
+                          level = NULL,
+                          state = NULL,
+                          county = NULL,
+                          fips = NULL,
+                          tidy = TRUE) {
 
   if (!is.null(year)) {
     year <- as.character(year)
@@ -115,7 +115,6 @@ beneficiaries <- function(year        = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
 
   }
@@ -125,8 +124,6 @@ beneficiaries <- function(year        = NULL,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    bene_fips_cd = stringr::str_squish(bene_fips_cd),
-                    dplyr::across(dplyr::where(is.character), na_star),
                     dplyr::across(dplyr::contains("_benes"), as.integer)) |>
       bene_cols()
 
@@ -169,6 +166,6 @@ bene_cols <- function(df) {
             "bene_rx_lis_part"  = "prscrptn_drug_partial_lis_benes",
             "bene_rx_lis_no"    = "prscrptn_drug_no_lis_benes")
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

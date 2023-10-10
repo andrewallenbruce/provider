@@ -25,7 +25,7 @@ laboratories(
 \item{certificate}{< \emph{character} > CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
-\item \code{"ppm"} (Provider-Performed Microscopy Procedures)
+\item \code{"ppm"}
 \item \code{"registration"}
 \item \code{"compliance"}
 \item \code{"accreditation"}
@@ -37,34 +37,41 @@ laboratories(
 
 \item{zip}{< \emph{character} > Zip code}
 
-\item{active}{< \emph{boolean} > Search for Active providers only? dedault is \code{FALSE}}
+\item{active}{< \emph{boolean} > // \strong{default:} \code{FALSE} Return only active providers}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
-\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{laboratories()} allows you to search for information on clinical laboratories
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{\link[=laboratories]{laboratories()}} allows you to search for information on clinical laboratories
 including demographics and the type of testing services the facility provides.
-\subsection{Clinical Laboratory Improvement Amendments (CLIA)}{
+}
+\section{Clinical Laboratory Improvement Amendments (CLIA)}{
+
 
 CMS regulates all laboratory testing (except research) performed on humans
 in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
-In total, CLIA covers approximately 320,000 laboratory entities. The Division
-of Clinical Laboratory Improvement & Quality, within the Quality, Safety &
-Oversight Group, under the Center for Clinical Standards and Quality (CCSQ)
-has the responsibility for implementing the CLIA Program. Although all
-clinical laboratories must be properly certified to receive Medicare or
-Medicaid payments, CLIA has no direct Medicare or Medicaid program
-responsibilities.
+In total, CLIA covers approximately 320,000 laboratory entities.
+
+The Division of Clinical Laboratory Improvement & Quality, within the Quality,
+Safety & Oversight Group, under the Center for Clinical Standards and Quality
+(CCSQ) has the responsibility for implementing the CLIA Program.
+
+Although all clinical laboratories must be properly certified to receive
+Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
+program responsibilities.
 }
 
-\subsection{CLIA Certificates}{
+\section{CLIA Certificates}{
+
 
 There are five CLIA certificate types all of which are effective for a
 period of two years. They are as follows, in order of increasing complexity:
@@ -91,6 +98,7 @@ and waived testing.
 \item Certificate of \strong{Accreditation}: Exactly the same as the Certificate of
 Compliance, except that the laboratory must be accredited by one of the
 following CMS-approved accreditation organizations:
+}
 \itemize{
 \item \href{https://a2la.org/}{American Association for Laboratory Accreditation} (A2LA)
 \item \href{https://www.aabb.org/}{Association for the Advancement of Blood & Biotherapies} (AABB)
@@ -100,7 +108,6 @@ following CMS-approved accreditation organizations:
 \item \href{https://www.cola.org/}{Commission on Office Laboratory Accreditation} (COLA)
 \item \href{https://www.jointcommission.org/}{The Joint Commission} (JCAHO)
 }
-}
 
 Links:
 \itemize{
@@ -109,7 +116,7 @@ Links:
 
 \emph{Update Frequency:} \strong{Quarterly}
 }
-}
+
 \examples{
 laboratories(clia = "11D0265516")
 }

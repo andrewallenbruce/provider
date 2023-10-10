@@ -1,38 +1,39 @@
-#' Providers That Have Opted Out of Medicare
+#' Providers Opted Out of Medicare
 #'
 #' @description
-#' `opt_out()` allows you to search for information on providers who have
-#' decided not to participate in Medicare.
+#' `r lifecycle::badge("experimental")`
 #'
-#' ## Opting Out
-#' Providers who do not wish to enroll in the Medicare program may “opt-out” of Medicare. This means that neither the physician,
-#' nor the beneficiary submits the bill to Medicare for services rendered.
-#' Instead, the beneficiary pays the physician out-of-pocket and neither party
-#' is reimbursed by Medicare. A private contract is signed between the physician
-#' and the beneficiary that states that neither one can receive payment from
-#' Medicare for the services that were performed.
+#' `opt_out()` allows the user to access information on providers who have
+#' decided not to participate in Medicare.
+#' [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#'
+#' @section Opting Out:
+#'
+#' Providers who do not wish to enroll in the Medicare program may “opt-out”,
+#' meaning neither they nor the beneficiary can bill Medicare for services rendered.
+#'
+#' Instead, a private contract between provider and beneficiary is signed,
+#' neither party is reimbursed by Medicare and the beneficiary pays
+#' the provider out-of-pocket.
 #'
 #' To opt out, a provider must:
 #'
-#'   - Be of an *eligible specialty* type
-#'   - Submit an *opt-out affidavit* to Medicare
-#'   - Enter into a *private contract* with their Medicare patients, reflecting
-#'   the agreement that they will pay out-of-pocket for services, and that no
-#'   one will submit the bill to Medicare for reimbursement
-#'   - Contact their Medicare Administrative Contractor (MAC) for
-#'   *instruction on information* that should be included in their opt-out
-#'   affidavit and private contract
+#' + Be of an *eligible specialty* type
+#' + Submit an *opt-out affidavit* to Medicare
+#' + Enter into a *private contract* with their Medicare patients, reflecting
+#'   the agreement that they will pay out-of-pocket and that no one will submit
+#'   the bill to Medicare for reimbursement
 #'
-#' ## Opt-Out Periods
+#' @section Opt-Out Periods:
+#'
 #' Opt-out periods last for two years and cannot be terminated early unless the
 #' provider is opting out for the very first time and terminates the opt-out no
 #' later than 90 days after the opt-out period's effective date.
 #'
-#' Opt-out statuses are effective for two years and automatically renew every
-#' two years. Providers that do not want to extend their opt-out status at the
-#' end of an opt-out period may cancel by notifying all Medicare contractors an
-#' affidavit was filed with at least 30 days prior to the start of the next
-#' opt-out period.
+#' Opt-out statuses are also effective for two years and automatically renew.
+#' Providers that do not want to extend their opt-out status at the end of an
+#' opt-out period may cancel by notifying all MACs an affidavit was filed at
+#' least 30 days prior to the start of the next opt-out period.
 #'
 #' If a provider retires, surrenders their license, or no longer wants to
 #' participate in the Medicare program, they must officially withdraw within 90
@@ -42,21 +43,17 @@
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
-#' ### Links:
-#'    - [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
-#'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier
-#' @param first,last < *character* > Opt-out provider's first/last name
+#' @param npi < *integer* > 10-digit Opt-out National Provider Identifier
+#' @param first,last < *character* > Opt-out provider's name
 #' @param specialty < *character* > Opt-out provider's specialty
 #' @param address < *character* > Opt-out provider's address
 #' @param city < *character* > Opt-out provider's city
 #' @param state < *character* > Opt-out provider's state abbreviation
 #' @param zip < *character* > Opt-out provider's zip code
-#' @param order_refer < *boolean* > Indicates if the provider is eligible to
-#' order and refer
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param order_refer < *boolean* > Indicates order and refer eligibility
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -81,8 +78,9 @@
 #' opt_out(npi = 1043522824)
 #'
 #' @examplesIf  interactive()
-#' # For opt-out providers that are eligible to order and refer,
-#' # use `order_refer()` to look up their eligibility status:
+#' # For opt-out providers eligible
+#' # to order and refer, use [order_refer()]
+#' to look up their eligibility status:
 #'
 #' opt_out(npi = 1043522824) |>
 #'         pull(npi) |>
@@ -117,7 +115,8 @@ opt_out <- function(npi = NULL,
     "Zip code",                      zip,
     "Eligible to Order and Refer",   order_refer)
 
-  response <- httr2::request(build_url("opt", args)) |> httr2::req_perform()
+  response <- httr2::request(build_url("opt", args)) |>
+    httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
@@ -143,15 +142,10 @@ opt_out <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(npi = as.character(npi),
-                    dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), anytime::anydate)) |>
-      tidyr::unite("address",
-                   dplyr::any_of(c("first_line_street_address",
-                                   "second_line_street_address")),
-                   remove = TRUE, na.rm = TRUE, sep = " ") |>
-      opt_cols()
+    results <- tidyup(results, yn = c("eligible")) |>
+      dplyr::mutate(npi = as.character(npi)) |>
+      address(c("first_line_street_address", "second_line_street_address")) |>
+      cols_opt()
     }
   return(results)
 }
@@ -159,21 +153,20 @@ opt_out <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-opt_cols <- function(df) {
+cols_opt <- function(df) {
 
   cols <- c('npi',
-            'first' = 'first_name',
-            'last' = 'last_name',
+            'first'             = 'first_name',
+            'last'              = 'last_name',
             'specialty',
-            'order_refer' = 'eligible_to_order_and_refer',
+            'order_refer'       = 'eligible_to_order_and_refer',
             'optout_start_date' = 'optout_effective_date',
             'optout_end_date',
             'last_updated',
             'address',
-            'city' = 'city_name',
-            'state' = 'state_code',
-            'zip' = 'zip_code')
+            'city'              = 'city_name',
+            'state'             = 'state_code',
+            'zip'               = 'zip_code')
 
-  df |> dplyr::select(dplyr::all_of(cols))
-
+  df |> dplyr::select(dplyr::any_of(cols))
 }

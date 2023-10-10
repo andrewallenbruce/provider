@@ -114,7 +114,6 @@ pos_char <- function(x) {
       .default = NULL)
   }
 
-#' display_long
 #' @param df data frame
 #' @autoglobal
 #' @noRd
@@ -125,17 +124,39 @@ display_long <- function(df) {
         tidyr::pivot_longer(dplyr::everything())
 }
 
-#' tidyup
 #' @param df data frame
+#' @param dt date columns
+#' @param yn columns to convert to logical
 #' @autoglobal
 #' @noRd
-tidyup <- function(df) {
+tidyup <- function(df,
+                   dt = c("date"),
+                   yn = NULL) {
 
-  janitor::clean_names(df) |>
+  results <- janitor::clean_names(df) |>
     dplyr::tibble() |>
-    dplyr::mutate(
-      dplyr::across(dplyr::where(is.character), na_blank))
+    dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
+                  dplyr::across(dplyr::where(is.character), na_blank),
+                  dplyr::across(dplyr::contains(dt), anytime::anydate))
 
+  if (!is.null(yn)) {
+    results <- dplyr::mutate(results,
+               dplyr::across(dplyr::contains(yn), yn_logical))
+  }
+  return(results)
+}
+
+#' @param df data frame
+#' @param cols description
+#' @autoglobal
+#' @noRd
+address <- function(df, cols) {
+
+  tidyr::unite(df, "address",
+               dplyr::any_of(cols),
+               remove = TRUE,
+               na.rm = TRUE,
+               sep = " ")
 }
 
 # create_tribble <- function(names = c("param", "arg"), nrows = 4){
@@ -157,51 +178,4 @@ tidyup <- function(df) {
 #   writeLines(out)
 #   invisible(out)
 #
-# }
-
-# tidyup <- function(df) {
-#
-#   janitor::clean_names(df) |>
-#     dplyr::tibble() |>
-#     dplyr::mutate(
-#       dplyr::across(dplyr::where(is.character), na_blank),
-#       dplyr::across(dplyr::where(is.character), na_star),
-#
-#       dplyr::across(dplyr::contains(c("date", "dt")), anytime::anydate),
-#
-#       dplyr::across(dplyr::contains(c("pac_id", "npi", "enroll_id")), as.character),
-#
-#       dplyr::across(dplyr::contains(c("tot_", "_hcpcs_cds", "_benes", "_srvcs", "_cnt", "num_org_mem", "grd_yr", "practice_size",
-#                                       "years_in_medicare",
-#                                       "medicare_patients",
-#                                       "services")), as.integer),
-#       dplyr::across(dplyr::contains(c("avg_", "amt", "chrg", "pct", "dollars", "prvlnc", "tot_mdcr_stdzd_pymt_pc", "tot_mdcr_pymt_pc", "hosp_readmsn_rate", "er_visits_per_1000_benes", "allowed_charges",
-#                                       "payment_adjustment_percentage",
-#                                       dplyr::contains("_score"),
-#                                       "complex_patient_bonus",
-#                                       "quality_improvement_bonus")), as.double),
-#
-#       dplyr::across(dplyr::any_of(c("entype", "rndrng_prvdr_ent_cd")), entype_char),
-#       dplyr::across(dplyr::any_of("place_of_srvc"), pos_char),
-#
-#       dplyr::across(dplyr::contains(c("flag", "subgroup", "propriet", "subpart", "_ind", "telehlth", "partb", "hha", "dme", "pmd", "_sw", "eligible", "engaged",
-#                                       "opted_into_mips",
-#                                       "small_practitioner",
-#                                       "rural_clinician",
-#                                       "hpsa_clinician",
-#                                       "ambulatory_surgical_center",
-#                                       "hospital_based_clinician",
-#                                       "non_patient_facing",
-#                                       "facility_based",
-#                                       "extreme_hardship",
-#                                       "extreme_hardship_quality",
-#                                       "quality_bonus",
-#                                       "extreme_hardship_pi",
-#                                       "pi_hardship",
-#                                       "pi_reweighting",
-#                                       "pi_bonus",
-#                                       "extreme_hardship_ia",
-#                                       "ia_study",
-#                                       "extreme_hardship_cost")), yn_logical)
-#     )
 # }

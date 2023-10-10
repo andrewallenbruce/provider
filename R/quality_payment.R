@@ -92,7 +92,6 @@ quality_payment <- function(year,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::any_of(c("practice_size",
                                                   "years_in_medicare",
                                                   "medicare_patients",

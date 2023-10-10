@@ -26,9 +26,9 @@ clinicians(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer|character} > 10-digit Individual National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer|character} > 10-digit Individual PECOS Associate Control ID}
+\item{pac}{< \emph{integer} > 10-digit Individual PECOS Associate Control ID}
 
 \item{enid}{< \emph{character} > 15-digit Individual Medicare Enrollment ID}
 
@@ -47,7 +47,7 @@ specialty reported in the selected enrollment}
 \item{facility_name}{< \emph{character} > Name of facility associated with the
 individual provider}
 
-\item{pac_org}{< \emph{integer|character} > 10-digit Organizational PECOS
+\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS
 Associate Control ID}
 
 \item{city}{< \emph{character} > Provider's city}
@@ -105,7 +105,7 @@ Links:
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-clinicians(enroll_id_ind = "I20081002000549")
+clinicians(enid = "I20081002000549")
 clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 \dontshow{\}) # examplesIf}
 }

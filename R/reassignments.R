@@ -1,36 +1,37 @@
-#' Search the Medicare Revalidation Reassignment List API
+#' Reassignment of Benefits
 #'
-#' @description Reassignments of Providers who are due for Revalidation.
+#' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' @details The Revalidation Reassignment List dataset provides information on
-#'    reassignments of providers who are due for revalidation.
+#' [reassignments()] returns information about:
+#' + Individual providers who are reassigning benefits or are an employee of
+#' + Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 #'
 #' Links:
 #' * [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier of individual provider reassigning benefits or an employee
-#' @param pac < *integer* > 10-digit provider associate level variable of individual provider reassigning benefits or an employee
-#' @param enid < *character* > 15-digit enrollment ID of individual provider reassigning benefits or an employee
-#' @param first,last < *character* > First/last name of individual provider reassigning benefits or an employee
-#' @param state < *character* > Enrollment state of individual provider reassigning benefits or an employee
-#' @param specialty < *character* > Enrollment specialty of individual provider reassigning benefits or an employee
-#' @param organization < *character* > Legal business name of organizational provider receiving reassignment or is the employer
-#' @param pac_org < *integer* > 10-digit provider associate level variable of organizational provider receiving reassignment or is the employer
-#' @param enid_org Enrollment ID of organizational provider receiving reassignment or is the employer
-#' @param state_org < *character* > Enrollment state of organizational provider receiving reassignment or is the employer
-#' @param record_type < *character* > Identifies whether the record is for a reassignment
-#'    (`"Reassignment"`) or employment (`"Physician Assistant"`)
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
+#' @param npi < *integer* > Individual provider's 10-digit National Provider Identifier
+#' @param pac < *integer* > Individual provider's 10-digit PECOS Associate Control ID
+#' @param enid < *character* > Individual provider's 15-digit Medicare Enrollment ID
+#' @param first,last < *character* > Individual provider's name
+#' @param state < *character* > Individual provider's enrollment state
+#' @param specialty < *character* > Individual provider's enrollment specialty
+#' @param organization < *character* > Organizational provider's legal business name
+#' @param pac_org < *integer* > Organizational provider's 10-digit PECOS Associate Control ID
+#' @param enid_org < *character* > Organizational provider's 15-digit Medicare Enrollment ID
+#' @param state_org < *character* > Organizational provider's enrollment state
+#' @param record < *character* > Identifies whether the record is for reassignment (`"R"`) or employment (`"E"`)
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' revalidation_reassign(enid = "I20200929003184")
-#' revalidation_reassign(pac = 9830437441)
-#' revalidation_reassign(pac_org = 3173525888)
+#' reassignments(enid = "I20200929003184")
+#' reassignments(pac = 9830437441)
+#' reassignments(pac_org = 3173525888)
 #' @autoglobal
 #' @export
 reassignments <- function(npi = NULL,
@@ -44,24 +45,21 @@ reassignments <- function(npi = NULL,
                           pac_org = NULL,
                           enid_org = NULL,
                           state_org = NULL,
-                          record_type = NULL,
+                          record = NULL,
                           tidy = TRUE,
                           na.rm = TRUE) {
 
-  if (!is.null(npi)) {npi <- npi_check(npi)}
-  if (!is.null(pac)) {pac <- pac_check(pac)}
-  if (!is.null(pac_org)) {pac_org <- pac_check(pac_org)}
+  if (!is.null(npi))      {npi <- npi_check(npi)}
+  if (!is.null(pac))      {pac <- pac_check(pac)}
+  if (!is.null(pac_org))  {pac_org <- pac_check(pac_org)}
+  if (!is.null(enid))     {enroll_check(enid)}
+  if (!is.null(enid_org)) {enroll_check(enid_org)}
 
-  if (!is.null(enid)) {
-    enroll_check(enid)
-    enroll_ind_check(enid)}
-
-  # if (!is.null(enroll_id_org)) {
-  #   enroll_check(enroll_id_org)
-  #   enroll_org_check(enroll_id_org)}
-
-  if (!is.null(record_type)) {
-    rlang::arg_match(record_type, c("Physician Assistant", "Reassignment"))}
+  if (!is.null(record)) {
+    rlang::arg_match(record, c("E", "R"))
+    dplyr::case_match(record,
+                      "E" ~ "Physician Assistant",
+                      "R" ~ "Reassignment")}
 
   args <- dplyr::tribble(
     ~param,                            ~arg,
@@ -76,7 +74,7 @@ reassignments <- function(npi = NULL,
     "Group PAC ID",                     pac_org,
     "Group Enrollment ID",              enid_org,
     "Group State Code",                 state_org,
-    "Record Type",                      record_type)
+    "Record Type",                      record)
 
   response <- httr2::request(build_url("ras", args)) |>
     httr2::req_perform()
@@ -96,7 +94,7 @@ reassignments <- function(npi = NULL,
       "pac_id_org",             pac_org,
       "enroll_id_org",          enid_org,
       "state_org",              state_org,
-      "record_type",            record_type) |>
+      "record",                 record) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -110,13 +108,11 @@ reassignments <- function(npi = NULL,
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::everything(), as.character),
                     dplyr::across(dplyr::contains("ass"), as.integer),
-                    dplyr::across(dplyr::contains("date"), anytime::anydate),
                     dplyr::across(dplyr::contains("name"), toupper)) |>
-      rass_cols()
+      cols_reas()
 
     if (na.rm) {
       results <- janitor::remove_empty(results, which = c("rows", "cols"))}
-
     }
   return(results)
 }
@@ -124,25 +120,25 @@ reassignments <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-rass_cols <- function(df) {
+cols_reas <- function(df) {
 
   cols <- c('npi' = 'individual_npi',
             'pac' = 'individual_pac_id',
             'enid' = 'individual_enrollment_id',
             'first' = 'individual_first_name',
             'last' = 'individual_last_name',
-            # 'state_ind' = 'individual_state_code',
-            # 'specialty_description' = 'individual_specialty_description',
             'associations' = 'individual_total_employer_associations',
             'organization' = 'group_legal_business_name',
             'pac_org' = 'group_pac_id',
             'enid_org' = 'group_enrollment_id',
             'state_org' = 'group_state_code',
             'reassignments' = 'group_reassignments_and_physician_assistants',
+            # 'state_ind' = 'individual_state_code',
+            # 'specialty_description' = 'individual_specialty_description',
             # 'due_date_ind' = 'individual_due_date',
             # 'due_date_org' = 'group_due_date',
-            'record_type')
+            'record' = 'record_type')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

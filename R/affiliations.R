@@ -13,8 +13,8 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer | character* > 10-digit Individual National Provider Identifier
-#' @param pac < *integer | character* > 10-digit Individual PECOS Associate Control ID
+#' @param npi < *integer* > 10-digit Individual National Provider Identifier
+#' @param pac < *integer* > 10-digit Individual PECOS Associate Control ID
 #' @param first,middle,last < *character* > Individual Provider's name
 #' @param facility_type < *character* >
 #' + `"Hospital"` or `"hp"`
@@ -25,7 +25,7 @@
 #' + `"Skilled nursing facility"` or `"snf"`
 #' + `"Hospice"` or `"hs"`
 #' + `"Dialysis facility"` or `"df"`
-#' @param facility_ccn < *integer | character* > 6-digit CMS Certification Number of
+#' @param facility_ccn < *character* > 6-digit CMS Certification Number of
 #' facility or unit within hospital where an individual provider provides service
 #' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a sub-unit's
 #' primary hospital, should the provider provide services in said unit

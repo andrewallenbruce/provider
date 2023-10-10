@@ -2,7 +2,7 @@
 % Please edit documentation in R/betos.R
 \name{betos}
 \alias{betos}
-\title{Restructured BETOS Classification System}
+\title{Restructured BETOS Classification for HCPCS}
 \usage{
 betos(
   hcpcs_code = NULL,
@@ -25,7 +25,7 @@ betos(
 \item{procedure}{< \emph{character} > Whether the HCPCS code is a Major (\code{"M"}),
 Other (\code{"O"}), or Non-Procedure code (\code{"N"}).}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -43,18 +43,22 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\code{betos_classification()} allows the user to group HCPCS codes into clinically
-meaningful categories based on the original Berenson-Eggers Type of Service
-(BETOS) classification. Users may use the RBCS to analyze trends and perform
-other types of health services analytic work.
-\subsection{BETOS}{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{\link[=betos]{betos()}} allows the user to group HCPCS codes into clinically
+meaningful categories based on the original \emph{Berenson-Eggers Type of Service}
+(BETOS) classification.
+}
+\section{From BETOS to RBCS}{
+
 
 The Restructured BETOS Classification System (RBCS) is a taxonomy that allows
-researchers to group healthcare service codes for Medicare Part B services
-into clinically meaningful categories and subcategories. It is based on the
-original Berenson-Eggers Type of Service (BETOS) classification created in
-the 1980s, and includes notable updates such as Part B non-physician services.
-The RBCS will undergo annual updates by a technical expert panel of
+researchers to group Medicare Part B healthcare service codes into clinically
+meaningful categories and subcategories.
+
+Based on the original Berenson-Eggers Type of Service (BETOS) classification
+created in the 1980s, it includes notable updates such as Part B non-physician
+services and undergoes annual updates by a technical expert panel of
 researchers and clinicians.
 
 The general framework for grouping service codes into the new RBCS taxonomy
@@ -68,12 +72,12 @@ assigned to a 6-character RBCS taxonomy code.
 Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system}{Restructured BETOS Classification System}
-\item \href{https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary}{Restructured BETOS Classification System Data Dictionary}
+\item \href{https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary}{RBCS Data Dictionary}
 }
 
 \emph{Update Frequency:} \strong{Annually}
 }
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 betos(hcpcs_code = "0001U")

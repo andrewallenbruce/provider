@@ -1,6 +1,7 @@
-#' Taxonomy to Medicare Specialty Crosswalk
+#' Taxonomy <-> Medicare Specialty
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #'
 #' `taxonomy_crosswalk()` allows you to search the types of providers and
 #' suppliers eligible for Medicare programs by taxonomy code or Medicare
@@ -32,7 +33,7 @@
 #' @param taxonomy_code < *character* > 10-digit taxonomy code
 #' @param taxonomy_description < *character* > Provider's taxonomy description
 #' @param keyword_search < *character* > Search term to use for quick full-text search.
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -89,30 +90,23 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
-
   }
-
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish)) |>
-      cross_cols()
-  }
+  if (tidy) {results <- cols_cross(tidyup(results))}
   return(results)
 }
 
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-cross_cols <- function(df) {
+cols_cross <- function(df) {
 
   cols <- c('specialty_code'        = 'medicare_specialty_code',
             'specialty_description' = 'medicare_provider_supplier_type',
             'taxonomy_code'         = 'provider_taxonomy_code',
             'taxonomy_description'  = 'provider_taxonomy_description_type_classification_specialization')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }
 

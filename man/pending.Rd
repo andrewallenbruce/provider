@@ -2,39 +2,42 @@
 % Please edit documentation in R/pending.R
 \name{pending}
 \alias{pending}
-\title{Providers with Pending Medicare Enrollment Applications}
+\title{Pending Medicare Enrollment Applications}
 \usage{
-pending(type, npi = NULL, last_name = NULL, first_name = NULL, tidy = TRUE)
+pending(type, npi = NULL, first = NULL, last = NULL, tidy = TRUE)
 }
 \arguments{
-\item{type}{\code{physician} or \code{non-physician}}
+\item{type}{< \emph{character} > // \strong{required} Physician ("\code{P}") or
+Non-physician ("\code{N}")}
 
-\item{npi}{National Provider Identifier (NPI) number}
+\item{npi}{< \emph{integer} > 10-digit National Provider Identifier}
 
-\item{last_name}{Last name of provider}
+\item{first, last}{< \emph{character} > Provider's name}
 
-\item{first_name}{First name of provider}
-
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{pending()} allows you to search for physicians & non-physicians with
-pending Medicare enrollment applications.
-\subsection{Links:}{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
+
+\code{pending()} allows the user to search for providers with pending Medicare
+enrollment applications.
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+pending(type = "N", last = "Smith")
+
+pending(type = "P", first = "John")
+\dontshow{\}) # examplesIf}
+}
+\references{
+APIs:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
 }
 
 \emph{Update Frequency:} \strong{Weekly}
-}
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-pending(last_name = "Smith", type = "non-physician")
-pending(first_name = "John", type = "physician")
-\dontshow{\}) # examplesIf}
 }

@@ -38,15 +38,15 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit Organizational National Provider Identifier}
 
-\item{facility_ccn}{< \emph{integer | character} > 6-digit CMS Certification Number}
+\item{facility_ccn}{< \emph{integer} > 6-digit CMS Certification Number}
 
 \item{enid_org}{< \emph{character} > 15-digit Organizational Medicare Enrollment ID}
 
 \item{enid_state}{< \emph{character} > Hospital’s enrollment state}
 
-\item{pac_org}{< \emph{integer | character} > 10-digit Organizational PECOS Associate Control ID}
+\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS Associate Control ID}
 
 \item{specialty_code}{< \emph{character} > Medicare Part A Provider specialty code:
 \itemize{
@@ -77,7 +77,7 @@ hospitals(
 
 \item{state}{< \emph{character} > State of the hospital’s practice location}
 
-\item{zip}{< \emph{integer | character} > Zip code of the hospital’s practice location}
+\item{zip}{< \emph{integer} > Zip code of the hospital’s practice location}
 
 \item{registration}{< \emph{character} > Hospital's IRS designation:
 \itemize{
@@ -159,6 +159,7 @@ type and address.
 hospitals(pac_org = 6103733050)
 
 hospitals(state = "GA", reh = TRUE)
+
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}

@@ -11,8 +11,8 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer|character* > 10-digit Individual National Provider Identifier
-#' @param pac < *integer|character* > 10-digit Individual PECOS Associate Control ID
+#' @param npi < *integer* > 10-digit Individual National Provider Identifier
+#' @param pac < *integer* > 10-digit Individual PECOS Associate Control ID
 #' @param enid < *character* > 15-digit Individual Medicare Enrollment ID
 #' @param first,middle,last < *character* > Individual provider's name
 #' @param gender < *character* > Individual provider's gender; `"F"` (Female)
@@ -23,7 +23,7 @@
 #' specialty reported in the selected enrollment
 #' @param facility_name < *character* > Name of facility associated with the
 #' individual provider
-#' @param pac_org < *integer|character* > 10-digit Organizational PECOS
+#' @param pac_org < *integer* > 10-digit Organizational PECOS
 #' Associate Control ID
 #' @param city < *character* > Provider's city
 #' @param state < *character* > Provider's state
@@ -64,7 +64,7 @@
 #' @seealso [hospitals()], [providers()], [affiliations()]
 #'
 #' @examplesIf interactive()
-#' clinicians(enroll_id_ind = "I20081002000549")
+#' clinicians(enid = "I20081002000549")
 #' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' @autoglobal
 #' @export
@@ -152,13 +152,10 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results) |>
-      tidyr::unite("address_org", adr_ln_1:adr_ln_2,
-                   remove = TRUE, na.rm = TRUE, sep = " ") |>
-      dplyr::mutate(address_org = stringr::str_squish(address_org),
-                    num_org_mem = as.integer(num_org_mem),
-                    grd_yr = as.integer(grd_yr),
-                    telehlth = yn_logical(telehlth)) |>
+    results <- tidyup(results, yn = c("telehlth")) |>
+      address(c("adr_ln_1", "adr_ln_2")) |>
+      dplyr::mutate(num_org_mem = as.integer(num_org_mem),
+                    grd_yr = as.integer(grd_yr)) |>
       clin_cols()
     if (na.rm) {
       results <- janitor::remove_empty(results, which = c("rows", "cols"))}
@@ -187,7 +184,7 @@ clin_cols <- function(df) {
             'organization' = 'facility_name',
             'pac_org' = 'org_pac_id',
             'members_org' = 'num_org_mem',
-            'address_org',
+            'address_org' = 'address',
             # 'address_id' = 'adrs_id',
             'city_org' = 'city_town',
             'state_org' = 'state',

@@ -7,7 +7,7 @@
 providers(
   npi = NULL,
   pac = NULL,
-  enroll_id = NULL,
+  enid = NULL,
   specialty_code = NULL,
   specialty_description = NULL,
   first = NULL,
@@ -23,43 +23,37 @@ providers(
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac}{< \emph{integer} > 10-digit provider associate level variable. Links
-all entity-level information and may be associated with multiple enrollment
-IDs if the individual or organization enrolled multiple times.}
+\item{pac}{< \emph{integer} > 10-digit PECOS Associate Control ID}
 
-\item{enroll_id}{< \emph{character} > 15-digit provider enrollment ID. Assigned to
-each new provider enrollment application. Links all enrollment-level
-information (enrollment type, state, reassignment of benefits).}
+\item{enid}{< \emph{character} > 15-digit Medicare Enrollment ID}
 
-\item{specialty_code}{< \emph{character} > Enrollment primary specialty type code}
+\item{specialty_code}{< \emph{character} > Enrollment specialty code}
 
-\item{specialty_description}{< \emph{character} > Enrollment specialty type description}
+\item{specialty_description}{< \emph{character} > Enrollment specialty description}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's first/middle/last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's name}
 
 \item{organization}{< \emph{character} > Organizational provider's name}
 
-\item{state}{< \emph{character} > Enrollment state abbreviation/full name.
-Providers enroll at the state level, so a PAC ID can be associated with
-multiple enrollment IDs and states.}
+\item{state}{< \emph{character} > Enrollment state, full or abbreviation}
 
-\item{gender}{< \emph{character} > Individual provider's gender. Options are:
+\item{gender}{< \emph{character} > Provider's gender:
 \itemize{
 \item \code{"F"}: Female
 \item \code{"M"}: Male
 \item \code{"9"}: Unknown (or Organizational provider)
 }}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit NPI \cr
-   \code{pac_id} \tab 10-digit PAC ID \cr
-   \code{enroll_id} \tab 15-digit provider enrollment ID \cr
+   \code{pac} \tab 10-digit PAC ID \cr
+   \code{enid} \tab 15-digit provider enrollment ID \cr
    \code{specialty_code} \tab Enrollment primary specialty type code \cr
    \code{specialty_description} \tab Enrollment specialty type description \cr
    \code{first} \tab Individual provider's first name \cr
@@ -71,6 +65,8 @@ multiple enrollment IDs and states.}
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{providers()} allows you to access enrollment level data on individual and
 organizational providers that are actively approved to bill Medicare.
 

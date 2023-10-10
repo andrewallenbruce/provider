@@ -3,7 +3,6 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#'
 #' [hospitals()] allows the user to search for information on all hospitals
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization
@@ -13,11 +12,11 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
-#' @param pac_org < *integer | character* > 10-digit Organizational PECOS Associate Control ID
+#' @param npi < *integer* > 10-digit Organizational National Provider Identifier
+#' @param pac_org < *integer* > 10-digit Organizational PECOS Associate Control ID
 #' @param enid_org < *character* > 15-digit Organizational Medicare Enrollment ID
 #' @param enid_state < *character* > Hospital’s enrollment state
-#' @param facility_ccn < *integer | character* > 6-digit CMS Certification Number
+#' @param facility_ccn < *integer* > 6-digit CMS Certification Number
 #' @param specialty_code < *character* > Medicare Part A Provider specialty code:
 #' + `"00-00"`: Religious Non-Medical Healthcare Institution (RNHCI)
 #' + `"00-01"`: Community Mental Health Center
@@ -40,7 +39,7 @@
 #' @param dba < *character* > Hospital’s doing-business-as name
 #' @param city < *character* > City of the hospital’s practice location
 #' @param state < *character* > State of the hospital’s practice location
-#' @param zip < *integer | character* > Zip code of the hospital’s practice location
+#' @param zip < *integer* > Zip code of the hospital’s practice location
 #' @param registration < *character* > Hospital's IRS designation:
 #' + `"P"`: Registered as __Proprietor__
 #' + `"N"`: Registered as __Non-Profit__
@@ -101,6 +100,7 @@
 #' hospitals(pac_org = 6103733050)
 #'
 #' hospitals(state = "GA", reh = TRUE)
+#'
 #' @autoglobal
 #' @export
 hospitals <- function(npi = NULL,
@@ -235,16 +235,11 @@ hospitals <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup")), yn_logical),
-                    dplyr::across(dplyr::contains("date"), anytime::anydate),
-                    dplyr::across(dplyr::contains("location"), stringr::str_squish),
-                    proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
+    results <- tidyup(results, yn = c("flag", "subgroup")) |>
+      dplyr::mutate(roprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
                       "P" ~ "Proprietary", "N" ~ "Non-Profit", .default = NA),
                     zip_code = as.character(zip_code)) |>
-      tidyr::unite("address",
-                   address_line_1:address_line_2,
-                   remove = TRUE, na.rm = TRUE) |>
+      address(c("address_line_1", "address_line_2")) |>
       tidyr::unite("structure",
                    organization_type_structure:organization_other_type_text,
                    remove = TRUE, na.rm = TRUE, sep = ": ") |>
