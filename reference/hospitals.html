@@ -109,7 +109,7 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enid_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enid_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -118,7 +118,7 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  registration <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multi_npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gen <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  acute <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alc_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -146,14 +146,14 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 
 
 <dt>facility_ccn</dt>
-<dd><p>&lt; <em>character</em> &gt; 6-digit CMS Certification Number</p></dd>
+<dd><p>&lt; <em>integer | character</em> &gt; 6-digit CMS Certification Number</p></dd>
 
 
 <dt>enid_org</dt>
 <dd><p>&lt; <em>character</em> &gt; 15-digit Organizational Medicare Enrollment ID</p></dd>
 
 
-<dt>enroll_state</dt>
+<dt>enid_state</dt>
 <dd><p>&lt; <em>character</em> &gt; Hospital’s enrollment state</p></dd>
 
 
@@ -173,7 +173,7 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 <li><p><code>"00-09"</code>: Hospital</p></li>
 <li><p><code>"00-10"</code>: Indian Health Services Facility</p></li>
 <li><p><code>"00-13"</code>: Organ Procurement Organization (OPO)</p></li>
-<li><p><code>"00-14"</code>: Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services</p></li>
+<li><p><code>"00-14"</code>: Outpatient PT/Occupational Therapy/Speech Pathology</p></li>
 <li><p><code>"00-17"</code>: Rural Health Clinic (RHC)</p></li>
 <li><p><code>"00-18"</code>: Skilled Nursing Facility (SNF)</p></li>
 <li><p><code>"00-19"</code>: Other</p></li>
@@ -199,7 +199,7 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 
 
 <dt>zip</dt>
-<dd><p>&lt; <em>character</em> &gt; Zip code of the hospital’s practice location</p></dd>
+<dd><p>&lt; <em>integer | character</em> &gt; Zip code of the hospital’s practice location</p></dd>
 
 
 <dt>registration</dt>
@@ -208,7 +208,7 @@ type and address.</p><ul><li><p><a href="https://data.cms.gov/provider-character
 </ul></dd>
 
 
-<dt>multi</dt>
+<dt>multi_npi</dt>
 <dd><p>&lt; <em>boolean</em> &gt; Indicates hospital has more than one NPI</p></dd>
 
 
@@ -251,26 +251,57 @@ Hospital (CAH) that converted to a Rural Emergency Hospital (REH)</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>Hospital's 10-digit National Provider Identifier</td></tr><tr><td><code>pac_org</code></td><td>Hospital’s 10-digit PECOS Associate Control ID</td></tr><tr><td><code>enid_org</code></td><td>Hospital’s 15-digit Enrollment ID</td></tr><tr><td><code>enid_state</code></td><td>Hospital’s Enrollment State</td></tr><tr><td><code>facility_ccn</code></td><td>Hospital’s CMS Certification Number</td></tr><tr><td><code>organization</code></td><td>Hospital’s Legal Business Name</td></tr><tr><td><code>doing_business_as</code></td><td>Hospital’s Doing-Business-As Name</td></tr><tr><td><code>specialty_code</code></td><td>Hospital’s Medicare Part A Provider Specialty Code</td></tr><tr><td><code>specialty</code></td><td>Specialty Code Description</td></tr><tr><td><code>incorporation_date</code></td><td>Date the Business was Incorporated</td></tr><tr><td><code>incorporation_state</code></td><td>State in which the Business was Incorporated</td></tr><tr><td><code>structure</code></td><td>Hospital’s Organization Structure Type</td></tr><tr><td><code>address</code></td><td>Hospital’s Practice Location Address</td></tr><tr><td><code>city</code></td><td>Hospital’s Practice Location City</td></tr><tr><td><code>state</code></td><td>Hospital’s Practice Location State</td></tr><tr><td><code>zip</code></td><td>Hospital’s Practice Location Zip Code</td></tr><tr><td><code>location_type</code></td><td>Practice Location Type</td></tr><tr><td><code>reh_conversion_date</code></td><td>Date the Hospital/CAH converted to an REH</td></tr><tr><td><code>associated_ccns</code></td><td>CCNs associated with the Hospital/CAH that converted to an REH</td></tr><tr><td><code>registration</code></td><td>Hospital’s IRS Registration Status; <strong>Proprietary</strong> or <strong>Non-Profit</strong></td></tr><tr><td><code>designations</code></td><td>Hospital's Subgroup/Unit Designations, Multiple NPIs, REH Conversion</td></tr></table></div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>Hospital's 10-digit National Provider Identifier</td></tr><tr><td><code>pac_org</code></td><td>Hospital’s 10-digit PECOS Associate Control ID</td></tr><tr><td><code>enid_org</code></td><td>Hospital’s 15-digit Enrollment ID</td></tr><tr><td><code>enid_state</code></td><td>Hospital’s Enrollment State</td></tr><tr><td><code>facility_ccn</code></td><td>Hospital’s CMS Certification Number</td></tr><tr><td><code>organization</code></td><td>Hospital’s Legal Business Name</td></tr><tr><td><code>doing_business_as</code></td><td>Hospital’s Doing-Business-As Name</td></tr><tr><td><code>specialty_code</code></td><td>Hospital’s Medicare Part A Provider Specialty Code</td></tr><tr><td><code>specialty</code></td><td>Specialty Code Description</td></tr><tr><td><code>incorp_date</code></td><td>Date the Business was Incorporated</td></tr><tr><td><code>incorp_state</code></td><td>State in which the Business was Incorporated</td></tr><tr><td><code>structure</code></td><td>Hospital’s Organization Structure Type</td></tr><tr><td><code>address</code></td><td>Hospital’s Practice Location Address</td></tr><tr><td><code>city</code></td><td>Hospital’s Practice Location City</td></tr><tr><td><code>state</code></td><td>Hospital’s Practice Location State</td></tr><tr><td><code>zip</code></td><td>Hospital’s Practice Location Zip Code</td></tr><tr><td><code>location_type</code></td><td>Practice Location Type</td></tr><tr><td><code>multi_npi</code></td><td>Indicates Hospital has more than one NPI</td></tr><tr><td><code>reh_date</code></td><td>Date the Hospital/CAH converted to an REH</td></tr><tr><td><code>reh_ccns</code></td><td>CCNs associated with the Hospital/CAH that converted to an REH</td></tr><tr><td><code>registration</code></td><td>Hospital’s IRS Registration Status</td></tr><tr><td><code>subgroup</code></td><td>Hospital's Subgroup/Unit Designations, REH Conversion Status</td></tr><tr><td><code>other</code></td><td>If <code>subgroup</code> is <code>"Other"</code>, description of Subgroup/Unit</td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="clinicians.html">clinicians()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="affiliations.html">affiliations()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="clinicians.html">clinicians()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="affiliations.html">affiliations()</a></code></p>
+<p>Other api: 
+<code><a href="nppes.html">nppes</a>()</code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi       pac_org enid_org enid_state facility_ccn organization specialty_code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11644815… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 12250976… 610373… O200904… NY         33T246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 19</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi      pac_org enid_org enid_state facility_ccn organization specialty_code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: specialty &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;, reh_conversion &lt;lgl&gt;, subgroup &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;, subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, reh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 21</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi   pac_org enid_org enid_state facility_ccn organization doing_business_as</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorp_state &lt;chr&gt;, structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_date &lt;date&gt;, reh_ccns &lt;chr&gt;, subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

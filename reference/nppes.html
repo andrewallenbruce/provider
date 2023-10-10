@@ -287,16 +287,14 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 <span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  alias <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  name_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  address_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">1200</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fl">1200L</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -307,12 +305,11 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>10-digit National Provider Identifier (NPI)</p></dd>
+<dd><p>&lt; <em>integer | character</em> &gt; 10-digit Organizational National Provider Identifier</p></dd>
 
 
 <dt>entype</dt>
-<dd><p>Entity/enumeration type
-. <em>Cannot be the only criteria entered.</em></p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
+<dd><p>Entity/enumeration type <em>Cannot be the only criteria entered.</em></p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
 <li><p><code>"O"</code>: Organizational provider (NPI-2)</p></li>
 </ul></dd>
 
@@ -320,12 +317,6 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 <dt>first, last</dt>
 <dd><p>Individual provider's first/last name.
 <em>Trailing Wildcard Allowed</em></p></dd>
-
-
-<dt>alias</dt>
-<dd><p><code>"TRUE"</code>/<code>"FALSE"</code>. Applies to authorized officials and individual providers when
-not doing a wildcard search. When set to <code>"TRUE"</code>, the results will include
-providers with similar first names.</p></dd>
 
 
 <dt>organization</dt>
@@ -336,21 +327,13 @@ name different from the one entered. <em>Trailing Wildcard Allowed</em></p></dd>
 
 <dt>name_type</dt>
 <dd><p>Type of name the <code>first</code>/<code>last</code> arguments pertain to:</p><ul><li><p><code>"AO"</code>: search Authorized Officials only</p></li>
-<li><p><code>"Provider"</code>: search Individual Providers only <em>(default)</em></p></li>
+<li><p><code>"Provider"</code>: search Individual Providers only</p></li>
 </ul></dd>
 
 
 <dt>taxonomy_desc</dt>
 <dd><p>Provider's taxonomy description, e.g. <code>"Pharmacist"</code>,
 <code>"Pediatrics"</code></p></dd>
-
-
-<dt>address_type</dt>
-<dd><p>Address type of provider; options are:</p><ul><li><p><code>"location"</code> (Practice location)</p></li>
-<li><p><code>"mailing"</code></p></li>
-<li><p><code>"primary"</code></p></li>
-<li><p><code>"secondary"</code></p></li>
-</ul></dd>
 
 
 <dt>city</dt>
@@ -385,11 +368,11 @@ selected <em>is not</em> <code>"US"</code> (United States).</p></dd>
 
 
 <dt>unnest</dt>
-<dd><p>Unnest output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Unnest list columns</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt>na.rm</dt>
@@ -402,11 +385,16 @@ selected <em>is not</em> <code>"US"</code> (United States).</p></dd>
 
 <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other api: 
+<code><a href="hospitals.html">hospitals</a>()</code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
