@@ -109,7 +109,7 @@ opt_out(npi = 1043522824)
 \dontshow{if ( interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # For opt-out providers eligible
 # to order and refer, use [order_refer()]
-to look up their eligibility status:
+# to look up their eligibility status:
 
 opt_out(npi = 1043522824) |>
         pull(npi) |>
