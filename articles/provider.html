@@ -328,8 +328,7 @@ job or location changes.</p>
 <span><span class="co"># Must pass Luhn check</span></span>
 <span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"physician"</span>, npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `type` must be one of "P" or "N", not "physician".</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
@@ -373,7 +372,9 @@ of benefits) is linked through the Enrollment ID.</p>
 <span></span>
 <span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
 <span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in providers(enid = "012345678912345"): unused argument (enid = "012345678912345")</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `providers()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`I`</span> or <span style="font-weight: bold;">`O`</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span>
 <span></span>
 <span><span class="co"># Some functions require one of ID types</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>enid_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
