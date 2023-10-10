@@ -130,19 +130,11 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 10432… 7810… I2003112… 14-22          PRACTITIONER - PATHO… VT    MARK  K     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: last &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">enroll_id</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
-<span><span class="co">#&gt;   npi        enroll_id       first last  state enrollment_type reassignments_ind</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 I20031120000251 MARK  FUNG  VT    Non-DME Part B                  1</span></span></code></pre>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">enroll_id</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in revalidation_date(enroll_id = p$enroll_id): could not find function "revalidation_date"</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">rv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
-<span><span class="co">#&gt;   npi        pac    enroll_id first last  reassignments_ind organization pac_org</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 78108… I2003112… MARK  FUNG                  1 UNIVERSITY … 377949…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: enroll_id_org &lt;chr&gt;, state_org &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   reassignments_org &lt;int&gt;, record_type &lt;chr&gt;</span></span></span></code></pre>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">rv</span> <span class="op">&lt;-</span> <span class="fu">revalidation_reassign</span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in revalidation_reassign(pac_ind = p$pac): could not find function "revalidation_reassign"</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
@@ -194,92 +186,15 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 75</span></span>
-<span><span class="co">#&gt; Columns: 45</span></span>
-<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657", "1043245657", "1043245657", "10432…</span></span>
-<span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009", "7810891009", "7810891009", "78108…</span></span>
-<span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I20031120…</span></span>
-<span><span class="co">#&gt; $ specialty_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22", "14-22", "14-22", "14-22", "14-22", "00…</span></span>
-<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY", "PRACTITIONER - PATH…</span></span>
-<span><span class="co">#&gt; $ state                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", "VT", "VT", "VT", …</span></span>
-<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK", "MARK", "MARK", "MARK", "MARK", NA, NA, …</span></span>
-<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K", "K", "K", "K", "K", NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG", "FUNG", "FUNG", "FUNG", "FUNG", NA, NA, …</span></span>
-<span><span class="co">#&gt; $ gender                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M", "M", "M", "M", "M", NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">#&gt; $ enrollment_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B", "Non-DME Part B", "Non-DME Par…</span></span>
-<span><span class="co">#&gt; $ reassignments_ind     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, NA, NA, NA, NA, NA, NA, NA, NA, N…</span></span>
-<span><span class="co">#&gt; $ organization          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC", "UNI…</span></span>
-<span><span class="co">#&gt; $ pac_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071", "3779491071", "3779491071", "37794…</span></span>
-<span><span class="co">#&gt; $ enroll_id_org         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040", "O20060822000040", "O20060822…</span></span>
-<span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT", "VT", "VT", "VT", "VT", NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99, 99, 99, 99, 99, NA, NA, NA, NA, NA, NA, NA, …</span></span>
-<span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment", "Reassignment", "Reassignment", …</span></span>
-<span><span class="co">#&gt; $ enid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251", "I20031120000251", "I20031120…</span></span>
-<span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD", "MD", "MD", "MD", "MD", NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE", "UNI…</span></span>
-<span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999, 1999, 1999, 1999, 1999, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ specialty             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PATHOLOGY", "PATHOLOGY", "PATHOLOGY", "PATHOLOG…</span></span>
-<span><span class="co">#&gt; $ members_org           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 958, 958, 958, 958, 958, NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">#&gt; $ address_org           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "111 COLCHESTER AVE", "111 COLCHESTER AVE", "111…</span></span>
-<span><span class="co">#&gt; $ city_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BURLINGTON", "BURLINGTON", "BURLINGTON", "BURLI…</span></span>
-<span><span class="co">#&gt; $ zip_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "054011473", "054011473", "054011473", "05401147…</span></span>
-<span><span class="co">#&gt; $ phone_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8028470000", "8028470000", "8028470000", "80284…</span></span>
-<span><span class="co">#&gt; $ assign_ind            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">#&gt; $ assign_org            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y", "Y", "Y", "Y", "Y", NA, NA, NA, NA, NA, NA,…</span></span>
-<span><span class="co">#&gt; $ facility_type         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hospital", "Hospital", "Hospital", "Hospital", …</span></span>
-<span><span class="co">#&gt; $ facility_ccn          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "470003", "330250", "331302", "330084", "470001"…</span></span>
-<span><span class="co">#&gt; $ enid_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "O20021111000009", "O2002111…</span></span>
-<span><span class="co">#&gt; $ enid_state            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "VT", "VT", "VT"…</span></span>
-<span><span class="co">#&gt; $ doing_business_as     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "UNIVERSITY OF VERMONT MEDIC…</span></span>
-<span><span class="co">#&gt; $ incorp_date           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> NA, NA, NA, NA, NA, 1995-01-01, 1995-01-01, 199…</span></span>
-<span><span class="co">#&gt; $ incorp_state          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "VT", "VT", "VT", "VT", "VT"…</span></span>
-<span><span class="co">#&gt; $ structure             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "CORPORATION", "CORPORATION"…</span></span>
-<span><span class="co">#&gt; $ address               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "111 COLCHESTER AVE", "111 C…</span></span>
-<span><span class="co">#&gt; $ city                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "BURLINGTON", "BURLINGTON", …</span></span>
-<span><span class="co">#&gt; $ zip                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "54011473", "54011473", "540…</span></span>
-<span><span class="co">#&gt; $ location_type         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "OTHER HOSPITAL PRACTICE LOC…</span></span>
-<span><span class="co">#&gt; $ multi_npi             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, FALSE, FALSE, FALSE, FALSE, …</span></span>
-<span><span class="co">#&gt; $ subgroup              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, NA, "REH Conversion", "General",…</span></span>
-<span><span class="co">#&gt; $ flag                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, FALSE, FALSE, TRUE, FALSE, F…</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'rd' not found</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
-<span>  <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 30</span></span>
-<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657"</span></span>
-<span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009"</span></span>
-<span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
-<span><span class="co">#&gt; $ specialty_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22"</span></span>
-<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY"</span></span>
-<span><span class="co">#&gt; $ state                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
-<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK"</span></span>
-<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
-<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG"</span></span>
-<span><span class="co">#&gt; $ gender                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M"</span></span>
-<span><span class="co">#&gt; $ enrollment_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B"</span></span>
-<span><span class="co">#&gt; $ reassignments_ind     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ organization          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC"</span></span>
-<span><span class="co">#&gt; $ pac_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071"</span></span>
-<span><span class="co">#&gt; $ enroll_id_org         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040"</span></span>
-<span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
-<span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99</span></span>
-<span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment"</span></span>
-<span><span class="co">#&gt; $ enid                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
-<span><span class="co">#&gt; $ credential            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD"</span></span>
-<span><span class="co">#&gt; $ school                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"</span></span>
-<span><span class="co">#&gt; $ grad_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1999</span></span>
-<span><span class="co">#&gt; $ specialty             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PATHOLOGY"</span></span>
-<span><span class="co">#&gt; $ members_org           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 958</span></span>
-<span><span class="co">#&gt; $ address_org           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "111 COLCHESTER AVE"</span></span>
-<span><span class="co">#&gt; $ city_org              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BURLINGTON"</span></span>
-<span><span class="co">#&gt; $ zip_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "054011473"</span></span>
-<span><span class="co">#&gt; $ phone_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8028470000"</span></span>
-<span><span class="co">#&gt; $ assign_ind            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y"</span></span>
-<span><span class="co">#&gt; $ assign_org            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Y"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in revalidation_date(enroll_id = "I20031120000251"): could not find function "revalidation_date"</span></span></code></pre>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>

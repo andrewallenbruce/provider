@@ -55,10 +55,7 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/clinicians.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/compare_conditions.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/compare_hcpcs.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/compare.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/download_nucc_csv.html</loc>
@@ -100,10 +97,7 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/quality_payment.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_date.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_reassign.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/reassignments.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
