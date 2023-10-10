@@ -2,7 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Open Payments}
+\title{Provider Financial Relationships}
 \usage{
 open_payments(
   year,
@@ -24,11 +24,10 @@ open_payments(
 )
 }
 \arguments{
-\item{year}{< \emph{integer} > Program reporting year. Run the helper function
-\code{open_payments_years()} to return a vector of currently
-available years.}
+\item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
+format. Run \code{\link[=open_years]{open_years()}} to return a vector of the years currently available.}
 
-\item{npi}{< \emph{integer} > Covered recipient's 10-digit national provider identifier}
+\item{npi}{< \emph{integer} > Covered recipient's 10-digit National Provider Identifier}
 
 \item{covered_type}{< \emph{character} > Type of covered recipient:
 \itemize{
@@ -37,7 +36,7 @@ available years.}
 \item \code{"Teaching Hospital"}
 }}
 
-\item{first, last}{< \emph{character} > Covered recipient's first/last name}
+\item{first, last}{< \emph{character} > Covered recipient's name}
 
 \item{city}{< \emph{character} > Covered recipient's city}
 
@@ -46,9 +45,11 @@ available years.}
 \item{zip}{< \emph{character} > Covered recipient's zip code}
 
 \item{teaching_hospital}{< \emph{character} > Name of teaching hospital, e.g.
-\verb{Vanderbilt University Medical Center}}
+\itemize{
+\item \code{"Vanderbilt University Medical Center"}
+}}
 
-\item{payer}{< \emph{character} > Paying entity's name; examples:
+\item{payer}{< \emph{character} > Paying entity's name, e.g.
 \itemize{
 \item \code{"Pharmacosmos Therapeutics Inc."}
 \item \code{"Getinge USA Sales, LLC"}
@@ -58,14 +59,14 @@ available years.}
 
 \item{payer_id}{< \emph{integer} > Paying entity's unique Open Payments ID}
 
-\item{pay_form}{< \emph{character} > Form of payment, examples:
+\item{pay_form}{< \emph{character} > Form of payment:
 \itemize{
 \item \code{"Stock option"}
 \item \code{"Cash or cash equivalent"}
 \item \code{"In-kind items and services"}
 }}
 
-\item{pay_nature}{< \emph{character} > Nature of payment or transfer of value; examples:
+\item{pay_nature}{< \emph{character} > Nature of payment or transfer of value:
 \itemize{
 \item \code{"Royalty or License"}
 \item \code{"Charitable Contribution"}
@@ -73,17 +74,19 @@ available years.}
 \item \code{"Food and Beverage"}
 }}
 
-\item{offset}{< \emph{integer} > offset; API pagination}
+\item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}.}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{\link[=open_payments]{open_payments()}} allows you to search CMS' Open Payments Program API
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{\link[=open_payments]{open_payments()}} allows the user access to CMS' Open Payments Program API
 
 The Open Payments program is a national disclosure program that collects and
 publishes information about financial relationships between drug and medical

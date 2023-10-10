@@ -1,7 +1,9 @@
-#' Open Payments
+#' Provider Financial Relationships
 #'
 #' @description
-#' [open_payments()] allows you to search CMS' Open Payments Program API
+#' `r lifecycle::badge("experimental")`
+#'
+#' [open_payments()] allows the user access to CMS' Open Payments Program API
 #'
 #' The Open Payments program is a national disclosure program that collects and
 #' publishes information about financial relationships between drug and medical
@@ -89,38 +91,37 @@
 #'
 #' *Update Frequency:* **Yearly**
 #'
-#' @param year < *integer* > Program reporting year. Run the helper function
-#'    `open_payments_years()` to return a vector of currently
-#'    available years.
-#' @param npi < *integer* > Covered recipient's 10-digit national provider identifier
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run [open_years()] to return a vector of the years currently available.
+#' @param npi < *integer* > Covered recipient's 10-digit National Provider Identifier
 #' @param covered_type < *character* > Type of covered recipient:
-#'    * `"Physician"`
-#'    * `"Non-Physician Practitioner"`
-#'    * `"Teaching Hospital"`
+#' + `"Physician"`
+#' + `"Non-Physician Practitioner"`
+#' + `"Teaching Hospital"`
 #' @param teaching_hospital < *character* > Name of teaching hospital, e.g.
-#'    `Vanderbilt University Medical Center`
-#' @param first,last < *character* > Covered recipient's first/last name
+#' + `"Vanderbilt University Medical Center"`
+#' @param first,last < *character* > Covered recipient's name
 #' @param city < *character* > Covered recipient's city
 #' @param state < *character* > Covered recipient's state abbreviation
 #' @param zip < *character* > Covered recipient's zip code
-#' @param payer < *character* > Paying entity's name; examples:
-#'    * `"Pharmacosmos Therapeutics Inc."`
-#'    * `"Getinge USA Sales, LLC"`
-#'    * `"Agiliti Health, Inc."`
-#'    * `"OrthoScan, Inc."`
+#' @param payer < *character* > Paying entity's name, e.g.
+#' + `"Pharmacosmos Therapeutics Inc."`
+#' + `"Getinge USA Sales, LLC"`
+#' + `"Agiliti Health, Inc."`
+#' + `"OrthoScan, Inc."`
 #' @param payer_id < *integer* > Paying entity's unique Open Payments ID
-#' @param pay_form < *character* > Form of payment, examples:
-#'    * `"Stock option"`
-#'    * `"Cash or cash equivalent"`
-#'    * `"In-kind items and services"`
-#' @param pay_nature < *character* > Nature of payment or transfer of value; examples:
-#'    * `"Royalty or License"`
-#'    * `"Charitable Contribution"`
-#'    * `"Current or prospective ownership or investment interest"`
-#'    * `"Food and Beverage"`
-#' @param offset < *integer* > offset; API pagination
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
-#' @param pivot < *boolean* > Pivot output; default is `TRUE`.
+#' @param pay_form < *character* > Form of payment:
+#' + `"Stock option"`
+#' + `"Cash or cash equivalent"`
+#' + `"In-kind items and services"`
+#' @param pay_nature < *character* > Nature of payment or transfer of value:
+#' + `"Royalty or License"`
+#' + `"Charitable Contribution"`
+#' + `"Current or prospective ownership or investment interest"`
+#' + `"Food and Beverage"`
+#' @param offset < *integer* > // __default:__ `0L` API pagination
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -257,7 +258,7 @@ open_payments <- function(year,
                                    "covered_recipient_license_state_code4",
                                    "covered_recipient_license_state_code5")),
                    remove = TRUE, na.rm = TRUE, sep = ", ") |>
-      open_cols()
+      cols_open()
 
     if (pivot) {
       results <- results |>
@@ -318,98 +319,92 @@ open_payments_error <- function(response) {
 #' @autoglobal
 #' @noRd
 changed_logical <- function(x){
-
-  dplyr::case_match(
-    x,
-    "CHANGED" ~ TRUE,
-    "UNCHANGED" ~ FALSE,
-    .default = NA
-    )
+  dplyr::case_match(x, "CHANGED" ~ TRUE, "UNCHANGED" ~ FALSE, .default = NA)
 }
 
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-open_cols <- function(df) {
+cols_open <- function(df) {
 
   cols <- c('program_year',
-            'npi' = 'covered_recipient_npi',
-            'changed' = 'change_type',
-            'covered_recipient' = 'covered_recipient_type',
-            'teaching_ccn' = 'teaching_hospital_ccn',
-            'teaching_id' = 'teaching_hospital_id',
-            'teaching_name' = 'teaching_hospital_name',
-            'first' = 'covered_recipient_first_name',
-            'middle' = 'covered_recipient_middle_name',
-            'last' = 'covered_recipient_last_name',
-            'suffix' = 'covered_recipient_name_suffix',
+            'npi'                   = 'covered_recipient_npi',
+            'changed'               = 'change_type',
+            'covered_recipient'     = 'covered_recipient_type',
+            'teaching_ccn'          = 'teaching_hospital_ccn',
+            'teaching_id'           = 'teaching_hospital_id',
+            'teaching_name'         = 'teaching_hospital_name',
+            'first'                 = 'covered_recipient_first_name',
+            'middle'                = 'covered_recipient_middle_name',
+            'last'                  = 'covered_recipient_last_name',
+            'suffix'                = 'covered_recipient_name_suffix',
             'address',
-            'city' = 'recipient_city',
-            'state' = 'recipient_state',
-            'zip' = 'recipient_zip_code',
-            'postal' = 'recipient_postal_code',
-            'country' = 'recipient_country',
-            'province' = 'recipient_province',
-            'primary' = 'covered_recipient_primary_type_1',
+            'city'                  = 'recipient_city',
+            'state'                 = 'recipient_state',
+            'zip'                   = 'recipient_zip_code',
+            'postal'                = 'recipient_postal_code',
+            'country'               = 'recipient_country',
+            'province'              = 'recipient_province',
+            'primary'               = 'covered_recipient_primary_type_1',
             'primary_other',
-            'specialty' = 'covered_recipient_specialty_1',
+            'specialty'             = 'covered_recipient_specialty_1',
             'specialty_other',
-            'license_state' = 'covered_recipient_license_state_code1',
+            'license_state'         = 'covered_recipient_license_state_code1',
             'license_state_other',
-            'payer_id' = 'applicable_manufacturer_or_applicable_gpo_making_payment_id',
-            'payer_sub' = 'submitting_applicable_manufacturer_or_applicable_gpo_name',
-            'payer_name' = 'applicable_manufacturer_or_applicable_gpo_making_payment_name',
-            'payer_state' = 'applicable_manufacturer_or_applicable_gpo_making_payment_state',
-            'payer_country' = 'applicable_manufacturer_or_applicable_gpo_making_payment_country',
-            'pay_total' = 'total_amount_of_payment_us_dollars',
-            'pay_date' = 'date_of_payment',
-            'pay_count' = 'number_of_payments_included_in_total_amount',
-            'pay_form' = 'form_of_payment_or_transfer_of_value',
-            'pay_nature' = 'nature_of_payment_or_transfer_of_value',
-            'travel_city' = 'city_of_travel',
-            'travel_state' = 'state_of_travel',
-            'travel_country' = 'country_of_travel',
-            'physician_ownership' = 'physician_ownership_indicator',
-            'third_party_payment' = 'third_party_payment_recipient_indicator',
-            'third_party_name' = 'name_of_third_party_entity_receiving_payment_or_transfer_of_value',
+            'payer_id'              = 'applicable_manufacturer_or_applicable_gpo_making_payment_id',
+            'payer_sub'             = 'submitting_applicable_manufacturer_or_applicable_gpo_name',
+            'payer_name'            = 'applicable_manufacturer_or_applicable_gpo_making_payment_name',
+            'payer_state'           = 'applicable_manufacturer_or_applicable_gpo_making_payment_state',
+            'payer_country'         = 'applicable_manufacturer_or_applicable_gpo_making_payment_country',
+            'pay_total'             = 'total_amount_of_payment_us_dollars',
+            'pay_date'              = 'date_of_payment',
+            'pay_count'             = 'number_of_payments_included_in_total_amount',
+            'pay_form'              = 'form_of_payment_or_transfer_of_value',
+            'pay_nature'            = 'nature_of_payment_or_transfer_of_value',
+            'travel_city'           = 'city_of_travel',
+            'travel_state'          = 'state_of_travel',
+            'travel_country'        = 'country_of_travel',
+            'physician_ownership'   = 'physician_ownership_indicator',
+            'third_party_payment'   = 'third_party_payment_recipient_indicator',
+            'third_party_name'      = 'name_of_third_party_entity_receiving_payment_or_transfer_of_value',
             'third_party_recipient' = 'third_party_equals_covered_recipient_indicator',
-            'charity' = 'charity_indicator',
-            'context' = 'contextual_information',
-            'publish_date' = 'payment_publication_date',
-            'publish_delay' = 'delay_in_publication_indicator',
-            'publish_dispute' = 'dispute_status_for_publication',
-            'related_product' = 'related_product_indicator',
-            'name_1' = 'name_of_drug_or_biological_or_device_or_medical_supply_1',
-            'covered_1' = 'covered_or_noncovered_indicator_1',
-            'type_1' = 'indicate_drug_or_biological_or_device_or_medical_supply_1',
-            'category_1' = 'product_category_or_therapeutic_area_1',
-            'ndc_1' = 'associated_drug_or_biological_ndc_1',
-            'pdi_1' = 'associated_device_or_medical_supply_pdi_1',
-            'name_2' = 'name_of_drug_or_biological_or_device_or_medical_supply_2',
-            'covered_2' = 'covered_or_noncovered_indicator_2',
-            'type_2' = 'indicate_drug_or_biological_or_device_or_medical_supply_2',
-            'category_2' = 'product_category_or_therapeutic_area_2',
-            'ndc_2' = 'associated_drug_or_biological_ndc_2',
-            'pdi_2' = 'associated_device_or_medical_supply_pdi_2',
-            'name_3' = 'name_of_drug_or_biological_or_device_or_medical_supply_3',
-            'covered_3' = 'covered_or_noncovered_indicator_3',
-            'type_3' = 'indicate_drug_or_biological_or_device_or_medical_supply_3',
-            'category_3' = 'product_category_or_therapeutic_area_3',
-            'ndc_3' = 'associated_drug_or_biological_ndc_3',
-            'pdi_3' = 'associated_device_or_medical_supply_pdi_3',
-            'name_4' = 'name_of_drug_or_biological_or_device_or_medical_supply_4',
-            'covered_4' = 'covered_or_noncovered_indicator_4',
-            'type_4' = 'indicate_drug_or_biological_or_device_or_medical_supply_4',
-            'category_4' = 'product_category_or_therapeutic_area_4',
-            'ndc_4' = 'associated_drug_or_biological_ndc_4',
-            'pdi_4' = 'associated_device_or_medical_supply_pdi_4',
-            'name_5' = 'name_of_drug_or_biological_or_device_or_medical_supply_5',
-            'covered_5' = 'covered_or_noncovered_indicator_5',
-            'type_5' = 'indicate_drug_or_biological_or_device_or_medical_supply_5',
-            'category_5' = 'product_category_or_therapeutic_area_5',
-            'ndc_5' = 'associated_drug_or_biological_ndc_5',
-            'pdi_5' = 'associated_device_or_medical_supply_pdi_5')
+            'charity'               = 'charity_indicator',
+            'context'               = 'contextual_information',
+            'publish_date'          = 'payment_publication_date',
+            'publish_delay'         = 'delay_in_publication_indicator',
+            'publish_dispute'       = 'dispute_status_for_publication',
+            'related_product'       = 'related_product_indicator',
+            'name_1'                = 'name_of_drug_or_biological_or_device_or_medical_supply_1',
+            'covered_1'             = 'covered_or_noncovered_indicator_1',
+            'type_1'                = 'indicate_drug_or_biological_or_device_or_medical_supply_1',
+            'category_1'            = 'product_category_or_therapeutic_area_1',
+            'ndc_1'                 = 'associated_drug_or_biological_ndc_1',
+            'pdi_1'                 = 'associated_device_or_medical_supply_pdi_1',
+            'name_2'                = 'name_of_drug_or_biological_or_device_or_medical_supply_2',
+            'covered_2'             = 'covered_or_noncovered_indicator_2',
+            'type_2'                = 'indicate_drug_or_biological_or_device_or_medical_supply_2',
+            'category_2'            = 'product_category_or_therapeutic_area_2',
+            'ndc_2'                 = 'associated_drug_or_biological_ndc_2',
+            'pdi_2'                 = 'associated_device_or_medical_supply_pdi_2',
+            'name_3'                = 'name_of_drug_or_biological_or_device_or_medical_supply_3',
+            'covered_3'             = 'covered_or_noncovered_indicator_3',
+            'type_3'                = 'indicate_drug_or_biological_or_device_or_medical_supply_3',
+            'category_3'            = 'product_category_or_therapeutic_area_3',
+            'ndc_3'                 = 'associated_drug_or_biological_ndc_3',
+            'pdi_3'                 = 'associated_device_or_medical_supply_pdi_3',
+            'name_4'                = 'name_of_drug_or_biological_or_device_or_medical_supply_4',
+            'covered_4'             = 'covered_or_noncovered_indicator_4',
+            'type_4'                = 'indicate_drug_or_biological_or_device_or_medical_supply_4',
+            'category_4'            = 'product_category_or_therapeutic_area_4',
+            'ndc_4'                 = 'associated_drug_or_biological_ndc_4',
+            'pdi_4'                 = 'associated_device_or_medical_supply_pdi_4',
+            'name_5'                = 'name_of_drug_or_biological_or_device_or_medical_supply_5',
+            'covered_5'             = 'covered_or_noncovered_indicator_5',
+            'type_5'                = 'indicate_drug_or_biological_or_device_or_medical_supply_5',
+            'category_5'            = 'product_category_or_therapeutic_area_5',
+            'ndc_5'                 = 'associated_drug_or_biological_ndc_5',
+            'pdi_5'                 = 'associated_device_or_medical_supply_pdi_5')
 
-  df |> dplyr::select(dplyr::all_of(cols))
+  df |> dplyr::select(dplyr::any_of(cols))
 
 }

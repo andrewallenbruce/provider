@@ -2,7 +2,7 @@
 % Please edit documentation in R/affiliations.R
 \name{affiliations}
 \alias{affiliations}
-\title{Facility Affiliations}
+\title{Provider Facility Affiliations}
 \usage{
 affiliations(
   npi = NULL,
@@ -19,11 +19,11 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer|character} > 10-digit Individual National Provider Identifier}
+\item{npi}{< \emph{integer | character} > 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer|character} > 10-digit Individual PECOS Associate Control ID}
+\item{pac}{< \emph{integer | character} > 10-digit Individual PECOS Associate Control ID}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's name}
+\item{first, middle, last}{< \emph{character} > Individual Provider's name}
 
 \item{facility_type}{< \emph{character} >
 \itemize{
@@ -37,11 +37,11 @@ affiliations(
 \item \code{"Dialysis facility"} or \code{"df"}
 }}
 
-\item{facility_ccn}{< \emph{integer|character} > 6-digit CMS Certification Number of
+\item{facility_ccn}{< \emph{integer | character} > 6-digit CMS Certification Number of
 facility or unit within hospital where an individual provider provides service}
 
-\item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a
-sub-unit's primary hospital, should the provider provide services in said unit}
+\item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a sub-unit's
+primary hospital, should the provider provide services in said unit}
 
 \item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
 
@@ -64,7 +64,9 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\code{\link[=affiliations]{affiliations()}} allows you to access information concerning providers'
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{\link[=affiliations]{affiliations()}} allows the user access to data concerning providers'
 facility affiliations
 
 Links:

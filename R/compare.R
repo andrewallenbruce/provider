@@ -116,9 +116,9 @@ compare_conditions <- function(tbl) {
     dplyr::mutate(national = cc_specific(year,
                                          condition,
                                          sublevel = "National",
-                                         demographic = "All",
+                                         demo = "All",
                                          subdemo = "All",
-                                         age_group = "All"), .keep = "none")
+                                         age = "All"), .keep = "none")
 
   s <- dplyr::left_join(dplyr::select(p, year, condition),
                         dplyr::select(tbl, year, sublevel = state),
@@ -127,9 +127,9 @@ compare_conditions <- function(tbl) {
     dplyr::mutate(statewide = cc_specific(year,
                                           condition,
                                           sublevel,
-                                          demographic = "All",
+                                          demo = "All",
                                           subdemo = "All",
-                                          age_group = "All"), .keep = "none")
+                                          age = "All"), .keep = "none")
 
   results <- vctrs::vec_rbind(p,
                    dplyr::select(s$statewide,

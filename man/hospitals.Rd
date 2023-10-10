@@ -145,7 +145,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{hospitals()} allows you to search for information on all hospitals
+\code{\link[=hospitals]{hospitals()}} allows the user to search for information on all hospitals
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization
 type and address.

@@ -1,8 +1,9 @@
-#' Facility Affiliations
+#' Provider Facility Affiliations
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' [affiliations()] allows you to access information concerning providers'
+#' [affiliations()] allows the user access to data concerning providers'
 #' facility affiliations
 #'
 #' Links:
@@ -12,9 +13,9 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer|character* > 10-digit Individual National Provider Identifier
-#' @param pac < *integer|character* > 10-digit Individual PECOS Associate Control ID
-#' @param first,middle,last < *character* > Individual provider's name
+#' @param npi < *integer | character* > 10-digit Individual National Provider Identifier
+#' @param pac < *integer | character* > 10-digit Individual PECOS Associate Control ID
+#' @param first,middle,last < *character* > Individual Provider's name
 #' @param facility_type < *character* >
 #' + `"Hospital"` or `"hp"`
 #' + `"Long-term care hospital"` or `"ltch"`
@@ -24,10 +25,10 @@
 #' + `"Skilled nursing facility"` or `"snf"`
 #' + `"Hospice"` or `"hs"`
 #' + `"Dialysis facility"` or `"df"`
-#' @param facility_ccn < *integer|character* > 6-digit CMS Certification Number of
+#' @param facility_ccn < *integer | character* > 6-digit CMS Certification Number of
 #' facility or unit within hospital where an individual provider provides service
-#' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a
-#' sub-unit's primary hospital, should the provider provide services in said unit
+#' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a sub-unit's
+#' primary hospital, should the provider provide services in said unit
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
@@ -129,7 +130,7 @@ affiliations <- function(npi = NULL,
 
   }
 
-  if (tidy) {results <- tidyup(results) |> aff_cols()
+  if (tidy) {results <- tidyup(results) |> cols_aff()
   if (na.rm) {
     results <- janitor::remove_empty(results, which = c("rows", "cols"))}
   }
@@ -140,7 +141,7 @@ affiliations <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-aff_cols <- function(df) {
+cols_aff <- function(df) {
 
   cols <- c("npi",
             "pac"          = "ind_pac_id",

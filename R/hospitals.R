@@ -4,14 +4,12 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #'
-#' `hospitals()` allows you to search for information on all hospitals
+#' [hospitals()] allows the user to search for information on all hospitals
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#'
-#'
-#'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' *Update Frequency:* **Monthly**
 #'

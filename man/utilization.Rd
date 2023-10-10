@@ -5,7 +5,7 @@
 \alias{by_provider}
 \alias{by_service}
 \alias{by_geography}
-\title{Utilization Statistics for Medicare Part B Providers}
+\title{Provider Utilization & Demographics}
 \usage{
 by_provider(
   year,
@@ -66,8 +66,7 @@ by_geography(
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
-format. Run helper function \code{prac_years()} to return a vector of the years
-currently available.}
+format. Run \code{\link[=prac_years]{prac_years()}} to return a vector of the years currently available.}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
@@ -225,6 +224,8 @@ aggregated:
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 These functions allow the user access to information on services and
 procedures provided to Original Medicare (fee-for-service) Part B
 beneficiaries by physicians and other healthcare professionals; aggregated
