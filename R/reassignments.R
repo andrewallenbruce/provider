@@ -11,14 +11,14 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier of individual provider reassigning benefits or an employee
-#' @param pac_ind < *integer* > 10-digit provider associate level variable of individual provider reassigning benefits or an employee
-#' @param enroll_id_ind < *character* > 15-digit enrollment ID of individual provider reassigning benefits or an employee
+#' @param pac < *integer* > 10-digit provider associate level variable of individual provider reassigning benefits or an employee
+#' @param enid < *character* > 15-digit enrollment ID of individual provider reassigning benefits or an employee
 #' @param first,last < *character* > First/last name of individual provider reassigning benefits or an employee
-#' @param state_ind < *character* > Enrollment state of individual provider reassigning benefits or an employee
-#' @param specialty_description < *character* > Enrollment specialty of individual provider reassigning benefits or an employee
+#' @param state < *character* > Enrollment state of individual provider reassigning benefits or an employee
+#' @param specialty < *character* > Enrollment specialty of individual provider reassigning benefits or an employee
 #' @param organization < *character* > Legal business name of organizational provider receiving reassignment or is the employer
 #' @param pac_org < *integer* > 10-digit provider associate level variable of organizational provider receiving reassignment or is the employer
-#' @param enroll_id_org Enrollment ID of organizational provider receiving reassignment or is the employer
+#' @param enid_org Enrollment ID of organizational provider receiving reassignment or is the employer
 #' @param state_org < *character* > Enrollment state of organizational provider receiving reassignment or is the employer
 #' @param record_type < *character* > Identifies whether the record is for a reassignment
 #'    (`"Reassignment"`) or employment (`"Physician Assistant"`)
@@ -28,33 +28,33 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' revalidation_reassign(enroll_id_ind = "I20200929003184")
-#' revalidation_reassign(pac_ind = 9830437441)
+#' revalidation_reassign(enid = "I20200929003184")
+#' revalidation_reassign(pac = 9830437441)
 #' revalidation_reassign(pac_org = 3173525888)
 #' @autoglobal
 #' @export
-revalidation_reassign <- function(npi = NULL,
-                                  pac_ind = NULL,
-                                  enroll_id_ind = NULL,
-                                  first = NULL,
-                                  last = NULL,
-                                  state_ind = NULL,
-                                  specialty_description = NULL,
-                                  organization = NULL,
-                                  pac_org = NULL,
-                                  enroll_id_org = NULL,
-                                  state_org = NULL,
-                                  record_type = NULL,
-                                  tidy = TRUE,
-                                  na.rm = TRUE) {
+reassignments <- function(npi = NULL,
+                          pac = NULL,
+                          enid = NULL,
+                          first = NULL,
+                          last = NULL,
+                          state = NULL,
+                          specialty = NULL,
+                          organization = NULL,
+                          pac_org = NULL,
+                          enid_org = NULL,
+                          state_org = NULL,
+                          record_type = NULL,
+                          tidy = TRUE,
+                          na.rm = TRUE) {
 
   if (!is.null(npi)) {npi <- npi_check(npi)}
-  if (!is.null(pac_ind)) {pac_ind <- pac_check(pac_ind)}
+  if (!is.null(pac)) {pac <- pac_check(pac)}
   if (!is.null(pac_org)) {pac_org <- pac_check(pac_org)}
 
-  if (!is.null(enroll_id_ind)) {
-    enroll_check(enroll_id_ind)
-    enroll_ind_check(enroll_id_ind)}
+  if (!is.null(enid)) {
+    enroll_check(enid)
+    enroll_ind_check(enid)}
 
   # if (!is.null(enroll_id_org)) {
   #   enroll_check(enroll_id_org)
@@ -66,15 +66,15 @@ revalidation_reassign <- function(npi = NULL,
   args <- dplyr::tribble(
     ~param,                            ~arg,
     "Individual NPI",                   npi,
-    "Individual PAC ID",                pac_ind,
-    "Individual Enrollment ID",         enroll_id_ind,
+    "Individual PAC ID",                pac,
+    "Individual Enrollment ID",         enid,
     "Individual First Name",            first,
     "Individual Last Name",             last,
-    "Individual State Code",            state_ind,
-    "Individual Specialty Description", specialty_description,
-    "Group PAC ID",                     pac_org,
-    "Group Enrollment ID",              enroll_id_org,
+    "Individual State Code",            state,
+    "Individual Specialty Description", specialty,
     "Group Legal Business Name",        organization,
+    "Group PAC ID",                     pac_org,
+    "Group Enrollment ID",              enid_org,
     "Group State Code",                 state_org,
     "Record Type",                      record_type)
 
@@ -86,16 +86,16 @@ revalidation_reassign <- function(npi = NULL,
     cli_args <- dplyr::tribble(
       ~x,                       ~y,
       "npi",                    npi,
-      "pac_id_ind",             pac_ind,
-      "enroll_id_ind",          enroll_id_ind,
+      "pac_id_ind",             pac,
+      "enroll_id_ind",          enid,
       "first",                  first,
       "last",                   last,
-      "state_ind",              state_ind,
-      "specialty_description",  specialty_description,
-      "pac_id_org",             pac_org,
-      "enroll_id_org",          enroll_id_org,
-      "state_org",              state_org,
+      "state_ind",              state,
+      "specialty_description",  specialty,
       "business_name",          organization,
+      "pac_id_org",             pac_org,
+      "enroll_id_org",          enid_org,
+      "state_org",              state_org,
       "record_type",            record_type) |>
       tidyr::unnest(cols = c(y))
 
@@ -128,17 +128,17 @@ rass_cols <- function(df) {
 
   cols <- c('npi' = 'individual_npi',
             'pac' = 'individual_pac_id',
-            'enroll_id' = 'individual_enrollment_id',
+            'enid' = 'individual_enrollment_id',
             'first' = 'individual_first_name',
             'last' = 'individual_last_name',
             # 'state_ind' = 'individual_state_code',
             # 'specialty_description' = 'individual_specialty_description',
-            'reassignments_ind' = 'individual_total_employer_associations',
+            'associations' = 'individual_total_employer_associations',
             'organization' = 'group_legal_business_name',
             'pac_org' = 'group_pac_id',
-            'enroll_id_org' = 'group_enrollment_id',
+            'enid_org' = 'group_enrollment_id',
             'state_org' = 'group_state_code',
-            'reassignments_org' = 'group_reassignments_and_physician_assistants',
+            'reassignments' = 'group_reassignments_and_physician_assistants',
             # 'due_date_ind' = 'individual_due_date',
             # 'due_date_org' = 'group_due_date',
             'record_type')

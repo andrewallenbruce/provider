@@ -2,7 +2,7 @@
 % Please edit documentation in R/nppes.R
 \name{nppes}
 \alias{nppes}
-\title{National Registry of All Health Care Providers}
+\title{National Registry of Health Care Providers}
 \usage{
 nppes(
   npi = NULL,
@@ -17,7 +17,7 @@ nppes(
   zip = NULL,
   country = NULL,
   limit = 1200L,
-  skip = NULL,
+  skip = 0L,
   unnest = TRUE,
   tidy = TRUE,
   na.rm = TRUE
@@ -26,46 +26,43 @@ nppes(
 \arguments{
 \item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
 
-\item{entype}{Entity/enumeration type \emph{Cannot be the only criteria entered.}
+\item{entype}{< \emph{character} > Entity/enumeration type \emph{Cannot be the only criteria entered.}
 \itemize{
 \item \code{"I"}: Individual provider (NPI-1)
 \item \code{"O"}: Organizational provider (NPI-2)
 }}
 
-\item{first, last}{Individual provider's first/last name.
-\emph{Trailing Wildcard Allowed}}
+\item{first, last}{< \emph{character} > // \strong{WC} Individual provider's name}
 
-\item{organization}{Healthcare organization's name. Many types of names (LBN,
-DBA, Former LBN, Other Name) may match. As such, the results might contain a
-name different from the one entered. \emph{Trailing Wildcard Allowed}}
+\item{organization}{< \emph{character} > // \strong{WC} Organization's name. Many
+types of names (LBN, DBA, Former LBN, Other Name) may match. As such, the
+results might contain a name different from the one entered.}
 
-\item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to:
+\item{name_type}{< \emph{character} > Type of individual the name arguments
+refer to:
 \itemize{
 \item \code{"AO"}: search Authorized Officials only
 \item \code{"Provider"}: search Individual Providers only
 }}
 
-\item{taxonomy_desc}{Provider's taxonomy description, e.g. \code{"Pharmacist"},
-\code{"Pediatrics"}}
+\item{taxonomy_desc}{< \emph{character} > Provider's taxonomy description,
+e.g. \code{"Pharmacist"}, \code{"Pediatrics"}}
 
-\item{city}{City associated with the provider's address. To search for a
-military address, enter either \code{"APO"} or \code{"FPO"}.}
+\item{city}{< \emph{character} > Provider's city. To search for a military
+address, enter either \code{"APO"} or \code{"FPO"}.}
 
-\item{state}{State abbreviation associated with the provider's address. If
-this field is used, at least one other field, besides the \code{entype} and
-\code{country}, must be populated.}
+\item{state}{< \emph{character} > Provider's state abbreviation. If the only
+input, one other param besides \code{entype} and \code{country} must be input.}
 
-\item{zip}{Zip code associated with the provider's address. If a 5 digit zip
-is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
-the data. \emph{Trailing Wildcard Allowed}}
+\item{zip}{< \emph{character} > // \strong{WC} Provider's zip code}
 
-\item{country}{Country abbreviation associated with the provider's
-address. \strong{Can} be used as the only input criterion, as long as the value
-selected \emph{is not} \code{"US"} (United States).}
+\item{country}{< \emph{character} > Provider's country code. Can be used as the
+only input, as long as the input \emph{is not} \code{"US"}.}
 
-\item{limit}{Maximum number of results to return; default is \code{1200}.}
+\item{limit}{< \emph{integer} > // \strong{default:} \code{1200L} Max results to return}
 
-\item{skip}{Number of results to skip after those set in \code{limit}.}
+\item{skip}{< \emph{integer} > // \strong{default:} \code{0L} Number of results to skip
+after those returned}
 
 \item{unnest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Unnest list columns}
 
@@ -77,49 +74,45 @@ selected \emph{is not} \code{"US"} (United States).}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{nppes()} allows you to search the National Plan and Provider Enumeration
-System (NPPES) NPI Registry's public API, a free directory of all active
-National Provider Identifier (NPI) records.
+\code{nppes()} allows the user to search the National Plan and Provider
+Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
+records.
 
-\strong{National Provider Identifier} \if{html}{\out{<br>}}
+\strong{National Provider Identifier (NPI)}
 Healthcare providers acquire their unique 10-digit NPIs to identify
 themselves in a standard way throughout their industry. Once CMS supplies
 an NPI, they publish the parts of the NPI record that have public relevance,
 including the provider’s name, taxonomy and practice address.
 
-\strong{Enumeration Type} \if{html}{\out{<br>}}
+\strong{Entity/Enumeration Type}
 Two categories of health care providers exist for NPI enumeration purposes:
 
-\strong{Entity Type 1} \if{html}{\out{<br>}}
-Individual health care providers (including sole proprietors) may get an
-NPI as \strong{Entity Type 1}. As a sole proprietor, they must apply for the NPI
-using their own SSN, not an Employer Identification Number (EIN) even if
-they have an EIN. As a sole proprietor, they may get only one NPI, just like
-any other individual. The following factors \strong{do not} affect whether a sole
-proprietor is an Entity Type 1:
+\strong{Type 1}: Individual providers may get an NPI as \emph{Entity Type 1}.
+
+\emph{Sole Proprietorship}
+A sole proprietor is one who does not conduct business as a corporation and,
+thus, \strong{is not} an incorporated individual.
+
+An \strong{incorporated individual} is an individual provider who forms and
+conducts business under a corporation. This provider may have a Type 1 NPI
+while the corporation has its own Type 2 NPI.
+
+A solo practitioner is not necessarily a sole proprietor, and vice versa. The
+following factors do not affect whether a sole proprietor is a Type 1 entity:
 \itemize{
-\item Number of different office locations
-\item Whether they have employees
-\item Whether the IRS issued them an EIN
+\item Multiple office locations
+\item Having employees
+\item Having an EIN
 }
 
-An \strong{incorporated individual} is a single health care provider who forms
-and conducts business under a corporation. A sole proprietor \strong{is not} an
-incorporated individual because the sole proprietor didn't form a
-corporation. If you're a sole/solo practitioner, it doesn't necessarily mean
-you're a sole proprietor, and vice versa. If you're an individual health care
-provider who's incorporated, you may need to get an NPI for yourself
-(Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).\if{html}{\out{
-<br>
-}}
+\strong{Type 2}: Organizational providers are eligible for \emph{Entity Type 2} NPIs.
 
+Organizational or Group providers may have a single employee or thousands of employees.
+An example is an \strong{incorporated individual} who is an organization's only
+employee.
 
-\strong{Entity Type 2} \if{html}{\out{<br>}}
-Organizational health care providers are group health care providers eligible
-for NPIs as Entity Type 2. Organization health care providers may have a
-single employee or thousands of employees. An example is an incorporated
-individual who is an organization's only employee. Some organization health
-care providers are made up of parts that work somewhat independently from
+Some organization health care providers are made up of parts that work
+somewhat independently from
 their parent organization. These parts may offer different types of health
 care or offer health care in separate physical locations. These parts and
 their physical locations aren't themselves legal entities but are part of
@@ -152,14 +145,16 @@ statutes, regulations, and program instructions of the Medicare program.
 
 \strong{Trailing Wildcard Entries}
 Arguments that allow trailing wildcard entries are denoted in the parameter
-description with \emph{Trailing Wildcard Allowed}. Wildcard entries require at
-least two characters to be entered, e.g. \code{"jo*"}
+description with \verb{// __WC__}. Wildcard entries require at least two
+characters to be entered, e.g. \code{"jo*"}
 
 \emph{Update Frequency:} \strong{Weekly}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes(npi = 1528060837)
+
+nppes(city = "CARROLLTON", state = "GA", zip = 301173889)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -1,107 +1,110 @@
-#' Compare Yearly HCPCS Utilization Data
+#' Compare Yearly Provider Data To State And National Averages
 #'
 #' @description
-#' `compare_hcpcs()` allows you to compare yearly HCPCS utilization by provider,
-#' state and national averages
+#' + `compare_hcpcs()` allows the user to compare a provider's yearly HCPCS
+#' utilization data to state and national averages
 #'
-#' @param df data frame returned by `by_service()`
-#' @return A [tibble][tibble::tibble-package] containing the results.
+#' + `compare_conditions()` allows the user to compare the average yearly
+#' prevalence of chronic conditions among a provider's patient mix to state and
+#' national averages
 #'
+#' @return A [tibble][tibble::tibble-package] containing:
+#' + `compare_hcpcs()`
+#' + `compare_conditions()`
 #' @examplesIf interactive()
-#' prac_years() |>
-#' map(\(x) by_service(year = x, npi = 1023076643)) |>
-#' list_rbind() |>
+#' compare_hcpcs(by_service(year = 2018, npi = 1023076643))
+#'
+#' map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)) |>
 #' compare_hcpcs()
+#'
+#' map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)) |>
+#' compare_conditions()
+#' @name compare
+NULL
+
+#' @param tbl A [tibble][tibble::tibble-package] returned from [by_service()]
+#' @rdname compare
 #' @autoglobal
 #' @export
-compare_hcpcs <- function(df) {
+compare_hcpcs <- function(tbl) {
 
-  g <- df |>
+  x <- tbl |>
     dplyr::select(year, state, hcpcs_code, pos) |>
     dplyr::rowwise() |>
     dplyr::mutate(state = by_geography(year, state, hcpcs_code, pos),
-                  national = by_geography(year,
-                                          state = "National",
-                                          hcpcs_code,
-                                          pos),
-                  .keep = "none")
+                  national = by_geography(year, state = "National",
+                                          hcpcs_code, pos), .keep = "none")
 
   results <- vctrs::vec_rbind(
-    dplyr::select(df,
-                  year,
-                  level,
-                  hcpcs_code,
-                  pos,
-                  category, subcategory, family, procedure,
+    dplyr::rename(tbl,
                   beneficiaries = tot_benes,
-                  services = tot_srvcs,
-                  dplyr::contains("avg_")),
-    dplyr::mutate(g$state,
+                  services = tot_srvcs) |>
+      cols_hcpcs(),
+
+    dplyr::mutate(x$state,
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
-      dplyr::select(year,
-                    level,
-                    hcpcs_code,
-                    pos,
-                    category, subcategory, family, procedure,
-                    beneficiaries,
-                    services,
-                    dplyr::contains("avg_")),
-    dplyr::mutate(g$national,
+      cols_hcpcs(),
+
+    dplyr::mutate(x$national,
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
-      dplyr::select(year,
-                    level,
-                    hcpcs_code,
-                    pos,
-                    category, subcategory, family, procedure,
-                    beneficiaries,
-                    services,
-                    dplyr::contains("avg_"))) |>
+      cols_hcpcs()) |>
     dplyr::mutate(level = forcats::fct_inorder(level))
 
   return(results)
 
 }
 
-#' Compare Yearly Chronic Condition Prevalence Data
-#'
-#' @description
-#' `compare_conditions()` allows you to compare yearly chronic condition
-#' prevalence by provider, state and national averages
-#'
-#' @param df data frame returned by `by_provider()`
-#' @return A [tibble][tibble::tibble-package] containing the results.
-#'
-#' @examplesIf interactive()
-#' prac_years() |>
-#' map(\(x) by_provider(year = x, npi = 1023076643)) |>
-#' list_rbind() |>
-#' compare_conditions()
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_hcpcs <- function(df) {
+
+  cols <- c('year',
+            'level',
+            'hcpcs_code',
+            'pos',
+            'category',
+            'subcategory',
+            'family',
+            'procedure',
+            'beneficiaries',
+            'services',
+            'avg_charge',
+            'avg_allowed',
+            'avg_payment',
+            'avg_std_pymt')
+
+  df |> dplyr::select(dplyr::any_of(cols))
+}
+
+#' @param tbl A [tibble][tibble::tibble-package] returned from [by_provider()]
+#' @rdname compare
 #' @autoglobal
 #' @export
+compare_conditions <- function(tbl) {
 
-compare_conditions <- function(df) {
-
-  p <- dplyr::select(df, year, conditions) |>
+  p <- dplyr::select(tbl, year, conditions) |>
     tidyr::unnest(conditions) |>
     dplyr::mutate(level = "Provider", .after = year) |>
-    dplyr::rename("Atrial Fibrillation" = cc_af,
-           "Alzheimer's Disease/Dementia" = cc_alz,
-           "Asthma" = cc_asth,
-           "Cancer" = cc_canc,
-           "Heart Failure" = cc_chf,
-           "Chronic Kidney Disease" = cc_ckd,
-           "COPD" = cc_copd,
-           "Depression" = cc_dep,
-           "Diabetes" = cc_diab,
-           "Hyperlipidemia" = cc_hplip,
-           "Hypertension" = cc_hpten,
-           "Ischemic Heart Disease" = cc_ihd,
-           "Osteoporosis" = cc_opo,
-           "Arthritis" = cc_raoa,
-           "Schizophrenia and Other Psychotic Disorders" = cc_sz,
-           "Stroke" = cc_strk) |>
+    dplyr::rename(
+      "Atrial Fibrillation" = cc_af,
+      "Alzheimer's Disease/Dementia" = cc_alz,
+      "Asthma" = cc_asth,
+      "Cancer" = cc_canc,
+      "Heart Failure" = cc_chf,
+      "Chronic Kidney Disease" = cc_ckd,
+      "COPD" = cc_copd,
+      "Depression" = cc_dep,
+      "Diabetes" = cc_diab,
+      "Hyperlipidemia" = cc_hplip,
+      "Hypertension" = cc_hpten,
+      "Ischemic Heart Disease" = cc_ihd,
+      "Osteoporosis" = cc_opo,
+      "Arthritis" = cc_raoa,
+      "Schizophrenia and Other Psychotic Disorders" = cc_sz,
+      "Stroke" = cc_strk) |>
     tidyr::pivot_longer(cols = !c(year, level),
                  names_to = "condition",
                  values_to = "prevalence") |>
@@ -118,7 +121,7 @@ compare_conditions <- function(df) {
                                          age_group = "All"), .keep = "none")
 
   s <- dplyr::left_join(dplyr::select(p, year, condition),
-                        dplyr::select(df, year, sublevel = state),
+                        dplyr::select(tbl, year, sublevel = state),
                         by = dplyr::join_by(year)) |>
     dplyr::rowwise() |>
     dplyr::mutate(statewide = cc_specific(year,

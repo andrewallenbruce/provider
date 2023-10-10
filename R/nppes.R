@@ -1,47 +1,43 @@
-#' National Registry of All Health Care Providers
+#' National Registry of Health Care Providers
 #'
 #' @description
-#' `nppes()` allows you to search the National Plan and Provider Enumeration
-#' System (NPPES) NPI Registry's public API, a free directory of all active
-#' National Provider Identifier (NPI) records.
+#' `nppes()` allows the user to search the National Plan and Provider
+#' Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
+#' records.
 #'
-#' **National Provider Identifier** <br>
+#' __National Provider Identifier (NPI)__
 #' Healthcare providers acquire their unique 10-digit NPIs to identify
 #' themselves in a standard way throughout their industry. Once CMS supplies
 #' an NPI, they publish the parts of the NPI record that have public relevance,
 #' including the provider’s name, taxonomy and practice address.
 #'
-#' **Enumeration Type** <br>
+#' __Entity/Enumeration Type__
 #' Two categories of health care providers exist for NPI enumeration purposes:
 #'
-#' **Entity Type 1** <br>
-#' Individual health care providers (including sole proprietors) may get an
-#' NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI
-#' using their own SSN, not an Employer Identification Number (EIN) even if
-#' they have an EIN. As a sole proprietor, they may get only one NPI, just like
-#' any other individual. The following factors **do not** affect whether a sole
-#' proprietor is an Entity Type 1:
+#' __Type 1__: Individual providers may get an NPI as _Entity Type 1_.
 #'
-#'    - Number of different office locations
-#'    - Whether they have employees
-#'    - Whether the IRS issued them an EIN
+#' _Sole Proprietorship_
+#' A sole proprietor is one who does not conduct business as a corporation and,
+#' thus, __is not__ an incorporated individual.
 #'
-#' An **incorporated individual** is a single health care provider who forms
-#' and conducts business under a corporation. A sole proprietor **is not** an
-#' incorporated individual because the sole proprietor didn't form a
-#' corporation. If you're a sole/solo practitioner, it doesn't necessarily mean
-#' you're a sole proprietor, and vice versa. If you're an individual health care
-#' provider who's incorporated, you may need to get an NPI for yourself
-#' (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+#' An __incorporated individual__ is an individual provider who forms and
+#' conducts business under a corporation. This provider may have a Type 1 NPI
+#' while the corporation has its own Type 2 NPI.
 #'
-#' <br>
+#' A solo practitioner is not necessarily a sole proprietor, and vice versa. The
+#' following factors do not affect whether a sole proprietor is a Type 1 entity:
+#' + Multiple office locations
+#' + Having employees
+#' + Having an EIN
 #'
-#' **Entity Type 2** <br>
-#' Organizational health care providers are group health care providers eligible
-#' for NPIs as Entity Type 2. Organization health care providers may have a
-#' single employee or thousands of employees. An example is an incorporated
-#' individual who is an organization's only employee. Some organization health
-#' care providers are made up of parts that work somewhat independently from
+#' __Type 2__: Organizational providers are eligible for _Entity Type 2_ NPIs.
+#'
+#' Organizational or Group providers may have a single employee or thousands of employees.
+#' An example is an __incorporated individual__ who is an organization's only
+#' employee.
+#'
+#' Some organization health care providers are made up of parts that work
+#' somewhat independently from
 #' their parent organization. These parts may offer different types of health
 #' care or offer health care in separate physical locations. These parts and
 #' their physical locations aren't themselves legal entities but are part of
@@ -72,38 +68,35 @@
 #'
 #' **Trailing Wildcard Entries**
 #' Arguments that allow trailing wildcard entries are denoted in the parameter
-#' description with _Trailing Wildcard Allowed_. Wildcard entries require at
-#' least two characters to be entered, e.g. `"jo*"`
+#' description with `// __WC__`. Wildcard entries require at least two
+#' characters to be entered, e.g. `"jo*"`
 #'
 #' *Update Frequency:* **Weekly**
 #'
 #' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
-#' @param entype Entity/enumeration type _Cannot be the only criteria entered._
+#' @param entype < *character* > Entity/enumeration type _Cannot be the only criteria entered._
 #'   * `"I"`: Individual provider (NPI-1)
 #'   * `"O"`: Organizational provider (NPI-2)
-#' @param first,last Individual provider's first/last name.
-#' _Trailing Wildcard Allowed_
-#' @param name_type Type of name the `first`/`last` arguments pertain to:
+#' @param first,last < *character* > // __WC__ Individual provider's name
+#' @param name_type < *character* > Type of individual the name arguments
+#' refer to:
 #'   * `"AO"`: search Authorized Officials only
 #'   * `"Provider"`: search Individual Providers only
-#' @param organization Healthcare organization's name. Many types of names (LBN,
-#' DBA, Former LBN, Other Name) may match. As such, the results might contain a
-#'  name different from the one entered. _Trailing Wildcard Allowed_
-#' @param taxonomy_desc Provider's taxonomy description, e.g. `"Pharmacist"`,
-#' `"Pediatrics"`
-#' @param city City associated with the provider's address. To search for a
-#'    military address, enter either `"APO"` or `"FPO"`.
-#' @param state State abbreviation associated with the provider's address. If
-#' this field is used, at least one other field, besides the `entype` and
-#' `country`, must be populated.
-#' @param zip Zip code associated with the provider's address. If a 5 digit zip
-#' is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
-#' the data. _Trailing Wildcard Allowed_
-#' @param country Country abbreviation associated with the provider's
-#' address. **Can** be used as the only input criterion, as long as the value
-#' selected *is not* `"US"` (United States).
-#' @param limit Maximum number of results to return; default is `1200`.
-#' @param skip Number of results to skip after those set in `limit`.
+#' @param organization < *character* > // __WC__ Organization's name. Many
+#' types of names (LBN, DBA, Former LBN, Other Name) may match. As such, the
+#' results might contain a name different from the one entered.
+#' @param taxonomy_desc < *character* > Provider's taxonomy description,
+#' e.g. `"Pharmacist"`, `"Pediatrics"`
+#' @param city < *character* > Provider's city. To search for a military
+#' address, enter either `"APO"` or `"FPO"`.
+#' @param state < *character* > Provider's state abbreviation. If the only
+#' input, one other param besides `entype` and `country` must be input.
+#' @param zip < *character* > // __WC__ Provider's zip code
+#' @param country < *character* > Provider's country code. Can be used as the
+#' only input, as long as the input *is not* `"US"`.
+#' @param limit < *integer* > // __default:__ `1200L` Max results to return
+#' @param skip < *integer* > // __default:__ `0L` Number of results to skip
+#' after those returned
 #' @param unnest < *boolean* > // __default:__ `TRUE` Unnest list columns
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
@@ -113,6 +106,8 @@
 #' @family api
 #' @examplesIf interactive()
 #' nppes(npi = 1528060837)
+#'
+#' nppes(city = "CARROLLTON", state = "GA", zip = 301173889)
 #' @autoglobal
 #' @export
 nppes <- function(npi = NULL,
@@ -127,7 +122,7 @@ nppes <- function(npi = NULL,
                   zip = NULL,
                   country = NULL,
                   limit = 1200L,
-                  skip = NULL,
+                  skip = 0L,
                   unnest = TRUE,
                   tidy = TRUE,
                   na.rm = TRUE) {
