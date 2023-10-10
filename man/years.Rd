@@ -41,3 +41,4 @@ quality_years()
 \seealso{
 \code{\link[=open_payments]{open_payments()}}, \code{\link[=by_geography]{by_geography()}}, \code{\link[=by_provider]{by_provider()}}, \code{\link[=by_service]{by_service()}}, \code{\link[=quality_payment]{quality_payment()}}, \code{\link[=quality_eligibility]{quality_eligibility()}}, \code{\link[=quality_stats]{quality_stats()}}, \code{\link[=beneficiaries]{beneficiaries()}}
 }
+\keyword{internal}

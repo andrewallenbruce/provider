@@ -77,29 +77,20 @@
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param npi 10-digit National Provider Identifier (NPI)
-#' @param entype Entity/enumeration type
-#' . _Cannot be the only criteria entered._
+#' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
+#' @param entype Entity/enumeration type _Cannot be the only criteria entered._
 #'   * `"I"`: Individual provider (NPI-1)
 #'   * `"O"`: Organizational provider (NPI-2)
 #' @param first,last Individual provider's first/last name.
 #' _Trailing Wildcard Allowed_
-#' @param alias `"TRUE"`/`"FALSE"`. Applies to authorized officials and individual providers when
-#' not doing a wildcard search. When set to `"TRUE"`, the results will include
-#' providers with similar first names.
 #' @param name_type Type of name the `first`/`last` arguments pertain to:
 #'   * `"AO"`: search Authorized Officials only
-#'   * `"Provider"`: search Individual Providers only _(default)_
+#'   * `"Provider"`: search Individual Providers only
 #' @param organization Healthcare organization's name. Many types of names (LBN,
 #' DBA, Former LBN, Other Name) may match. As such, the results might contain a
 #'  name different from the one entered. _Trailing Wildcard Allowed_
 #' @param taxonomy_desc Provider's taxonomy description, e.g. `"Pharmacist"`,
 #' `"Pediatrics"`
-#' @param address_type Address type of provider; options are:
-#'    * `"location"` (Practice location)
-#'    * `"mailing"`
-#'    * `"primary"`
-#'    * `"secondary"`
 #' @param city City associated with the provider's address. To search for a
 #'    military address, enter either `"APO"` or `"FPO"`.
 #' @param state State abbreviation associated with the provider's address. If
@@ -113,30 +104,29 @@
 #' selected *is not* `"US"` (United States).
 #' @param limit Maximum number of results to return; default is `1200`.
 #' @param skip Number of results to skip after those set in `limit`.
-#' @param unnest Unnest output; default is `TRUE`.
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param unnest < *boolean* > // __default:__ `TRUE` Unnest list columns
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
+#' @family api
 #' @examplesIf interactive()
-#' nppes(npi = 1528060837, tidy = FALSE)
+#' nppes(npi = 1528060837)
 #' @autoglobal
 #' @export
 nppes <- function(npi = NULL,
                   entype = NULL,
                   first = NULL,
                   last = NULL,
-                  alias = TRUE,
                   organization = NULL,
                   name_type = NULL,
                   taxonomy_desc  = NULL,
-                  address_type = NULL,
                   city = NULL,
                   state = NULL,
                   zip = NULL,
                   country = NULL,
-                  limit = 1200,
+                  limit = 1200L,
                   skip = NULL,
                   unnest = TRUE,
                   tidy = TRUE,
@@ -145,13 +135,6 @@ nppes <- function(npi = NULL,
   if (!is.null(npi))       {npi <- npi_check(npi)}
   if (!is.null(name_type)) {rlang::arg_match(name_type, c("AO", "Provider"))}
   if (!is.null(zip))       {zip <- as.character(zip)}
-  if (!is.null(alias) && isTRUE(alias))  {alias <- "True"}
-  if (!is.null(alias) && isFALSE(alias)) {alias <- "False"}
-
-  if (!is.null(address_type)) {
-    rlang::arg_match(address_type,
-    c("LOCATION", "MAILING", "PRIMARY", "SECONDARY"))
-    address_type <- toupper(address_type)}
 
   if (!is.null(entype)) {
     rlang::arg_match(entype, c("I", "O"))
@@ -162,11 +145,9 @@ nppes <- function(npi = NULL,
                          enumeration_type     = entype,
                          first_name           = first,
                          last_name            = last,
-                         use_first_name_alias = alias,
                          name_purpose         = name_type,
                          organization_name    = organization,
                          taxonomy_description = taxonomy_desc,
-                         address_purpose      = address_type,
                          city                 = city,
                          state                = state,
                          postal_code          = zip,
@@ -186,11 +167,9 @@ nppes <- function(npi = NULL,
       "entype",        entype,
       "first",         first,
       "last",          last,
-      "alias",         alias,
       "name_type",     name_type,
       "organization",  organization,
       "taxonomy_desc", taxonomy_desc,
-      "address_type",  address_type,
       "city",          city,
       "state",         state,
       "zip",           zip,
@@ -209,7 +188,7 @@ nppes <- function(npi = NULL,
                    remove = TRUE,
                    na.rm = TRUE,
                    sep = " ") |>
-      nppes_cols() |>
+      cols_nppes() |>
       dplyr::filter(purpose != "MAILING")
 
     results <- tidyr::unnest_longer(results, tx, keep_empty = TRUE) |>
@@ -222,18 +201,16 @@ nppes <- function(npi = NULL,
                                tidyr::unpack(on, names_sep = ".") |>
                         tidyr::unnest_longer(ep, keep_empty = TRUE) |>
                                tidyr::unpack(ep, names_sep = ".")
-
     if (tidy) {
-
       results <- tidyup(results) |>
         dplyr::mutate(dplyr::across(dplyr::contains("date"), anytime::anydate),
                       dplyr::across(dplyr::where(is.character), clean_credentials),
                       entity_type = entype_char(entity_type),
                       purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
-                      dplyr::across(dplyr::any_of(c("sole_prop", "org_subpart")), yn_logical))
+                      dplyr::across(dplyr::any_of(c("sole_prop", "org_part")), yn_logical)) |>
+        cols_nppes2()
 
       if (na.rm) {
-
         results <- janitor::remove_empty(results, which = c("rows", "cols"))
       }
     }
@@ -241,130 +218,8 @@ nppes <- function(npi = NULL,
   return(results)
 }
 
-
-
-
   # results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
-  #
-  #
-  #   key <- dplyr::join_by(npi)
-  #
-  #   # basic ------------------------------------------------------------------
-  #   basic <- results |>
-  #     dplyr::select(!c(addresses,
-  #                      taxonomy,
-  #                      identifiers,
-  #                      endpoints,
-  #                      practice_locations,
-  #                      other_names))
-  #
-  #   # addresses --------------------------------------------------------------
-  #   address <- results |>
-  #     dplyr::select(npi, addresses) |>
-  #     tidyr::unnest(c(addresses)) |>
-  #     dplyr::mutate(address_type = NULL,
-  #                   country_name = NULL) |>
-  #     dplyr::rename(country = country_code,
-  #                   phone = telephone_number,
-  #                   zip = postal_code,
-  #                   purpose = address_purpose) |>
-  #     dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION",
-  #                                            "PRACTICE",
-  #                                            purpose))
-  #
-  #
-  #   # practice locations ------------------------------------------------------
-  #   pracloc <- results |>
-  #     dplyr::select(npi, practice_locations) |>
-  #     tidyr::unnest(c(practice_locations))
-  #
-  #   if (ncol(pracloc) > 2) {
-  #
-  #     pracloc <- pracloc |>
-  #       dplyr::mutate(address_type = NULL,
-  #                     country_name = NULL) |>
-  #       dplyr::rename(country = country_code,
-  #                     phone = telephone_number,
-  #                     zip = postal_code,
-  #                     purpose = address_purpose,
-  #                     street = address_1)
-  #
-  #     address <- dplyr::bind_rows(address, pracloc)
-  #   }
-  #
-  #   final <- dplyr::left_join(basic, address, key)
-  #
-  #   # taxonomy ----------------------------------------------------------------
-  #   taxonomy <- results |>
-  #     dplyr::select(npi, taxonomy) |>
-  #     tidyr::unnest(c(taxonomy))
-  #
-  #   if (ncol(taxonomy) > 2) {
-  #
-  #     taxonomy <- taxonomy |>
-  #       dplyr::select(npi,
-  #                     code,
-  #                     desc,
-  #                     group = taxonomy_group,
-  #                     state,
-  #                     license,
-  #                     primary)
-  #
-  #     names(taxonomy) <- c("npi",
-  #           paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
-  #
-  #     final <- dplyr::left_join(final, taxonomy, key)
-  #   }
-  #
-  #   # identifiers -------------------------------------------------------------
-  #   identifiers <- results |>
-  #     dplyr::select(npi, identifiers) |>
-  #     tidyr::unnest(c(identifiers))
-  #
-  #   if (ncol(identifiers) > 2) {
-  #
-  #     identifiers <- identifiers |>
-  #       dplyr::select(npi,
-  #                     id_desc = desc,
-  #                     id_issuer = issuer,
-  #                     id_identifier = identifier,
-  #                     id_state = state)
-  #
-  #     final <- dplyr::left_join(final, identifiers, key)
-  #   }
-  #
-  #   # endpoints ---------------------------------------------------------------
-  #   endpoints <- results |>
-  #     dplyr::select(npi, endpoints) |>
-  #     tidyr::unnest(c(endpoints))
-  #
-  #   if (ncol(endpoints) > 2) {
-  #
-  #     endpoints <- endpoints |>
-  #       tidyr::unite("street",
-  #                    dplyr::any_of(c("address_1", "address_2")),
-  #                    remove = TRUE,
-  #                    na.rm = TRUE,
-  #                    sep = " ")
-  #
-  #     names(endpoints) <- c("npi",
-  #           paste0("end_", names(endpoints)[2:length(names(endpoints))]))
-  #
-  #     final <- dplyr::left_join(final, endpoints, key)
-  #   }
-  #
-  #   # other names -------------------------------------------------------------
-  #   other <- results |>
-  #     dplyr::select(npi, other_names) |>
-  #     tidyr::unnest(c(other_names))
-  #
-  #   if (ncol(other) > 2) {
-  #
-  #     names(other) <- c("npi",
-  #          paste0("other_", names(other)[2:length(names(other))]))
-  #
-  #     final <- dplyr::left_join(final, other, key)
-  #   }
+  # names(taxonomy) <- c("npi", paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
 
 #' @param x vector
 #' @autoglobal
@@ -397,7 +252,7 @@ entype_char <- function(x) {
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-nppes_cols <- function(df) {
+cols_nppes <- function(df) {
 
   cols <- c('npi' = 'number',
             'entity_type' = 'enumeration_type',
@@ -406,8 +261,6 @@ nppes_cols <- function(df) {
             'last_update' = 'last_updated',
             'status',
 
-            # 'basic',
-            # 'addresses',
             'tx' = 'taxonomies',
             'id' = 'identifiers',
             'pr' = 'practiceLocations',
@@ -421,30 +274,96 @@ nppes_cols <- function(df) {
             'gender',
             'credential',
             'sole_prop' = 'sole_proprietor',
-
             'organization' = 'organization_name',
-            'org_parent_name' = 'parent_organization_legal_business_name',
-            'org_subpart' = 'organizational_subpart',
-            'org_ao_prefix' = 'authorized_official_name_prefix',
-            'org_ao_first' = 'authorized_official_first_name',
-            'org_ao_middle' = 'authorized_official_middle_name',
-            'org_ao_last' = 'authorized_official_last_name',
-            'org_ao_suffix' = 'authorized_official_name_suffix',
-            'org_ao_title' = 'authorized_official_title_or_position',
-            'org_ao_phone' = 'authorized_official_telephone_number',
-            'org_ao_fax' = 'authorized_official_fax_number',
+            'org_parent' = 'parent_organization_legal_business_name',
+            'org_part' = 'organizational_subpart',
 
-            # 'country_name',
+            'ao_prefix' = 'authorized_official_name_prefix',
+            'ao_first' = 'authorized_official_first_name',
+            'ao_middle' = 'authorized_official_middle_name',
+            'ao_last' = 'authorized_official_last_name',
+            'ao_suffix' = 'authorized_official_name_suffix',
+            'ao_title' = 'authorized_official_title_or_position',
+            'ao_phone' = 'authorized_official_telephone_number',
+            'ao_fax' = 'authorized_official_fax_number',
+
             'purpose' = 'address_purpose',
-            # 'address_type',
             'address',
             'city',
             'state',
             'zip' = 'postal_code',
             'country' = 'country_code',
             'phone' = 'telephone_number',
-            'fax' = 'fax_number'
+            'fax' = 'fax_number')
 
+  df |> dplyr::select(dplyr::any_of(cols))
+
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_nppes2 <- function(df) {
+
+  cols <- c('npi',
+            'entity_type',
+            'enum_date',
+            'cert_date',
+            'last_update',
+            'status',
+            'prefix',
+            'first',
+            'middle',
+            'last',
+            'gender',
+            'credential',
+            'sole_prop',
+            'organization',
+            'org_parent',
+            'org_part',
+            'purpose',
+            'address',
+            'city',
+            'state',
+            'zip',
+            'country',
+            'phone',
+            'fax',
+            'ao_prefix',
+            'ao_first',
+            'ao_middle',
+            'ao_last',
+            'ao_suffix',
+            'ao_title',
+            'ao_phone',
+            'ao_fax',
+
+            'tx_code',
+            'tx_primary',
+            'tx_group' = 'tx_taxonomy_group',
+            'tx_desc',
+            'tx_license',
+            'tx_state',
+
+            'id_code',
+            'id_desc',
+            'id_state',
+            'id_issuer',
+            'id_state',
+            'id_identifier',
+
+            'pr_country' = 'pr_country_code',
+            'pr_purpose' = 'pr_address_purpose',
+            'pr_address' = 'pr_address_1',
+            'pr_city',
+            'pr_state',
+            'pr_zip' = 'pr_postal_code',
+            'pr_phone' = 'pr_telephone_number',
+            'pr_fax' = 'pr_fax_number',
+
+            'on_type',
+            'on_code',
+            'on_organization_name'
             )
 
   df |> dplyr::select(dplyr::any_of(cols))

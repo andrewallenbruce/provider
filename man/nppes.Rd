@@ -9,16 +9,14 @@ nppes(
   entype = NULL,
   first = NULL,
   last = NULL,
-  alias = TRUE,
   organization = NULL,
   name_type = NULL,
   taxonomy_desc = NULL,
-  address_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   country = NULL,
-  limit = 1200,
+  limit = 1200L,
   skip = NULL,
   unnest = TRUE,
   tidy = TRUE,
@@ -26,10 +24,9 @@ nppes(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI)}
+\item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
 
-\item{entype}{Entity/enumeration type
-. \emph{Cannot be the only criteria entered.}
+\item{entype}{Entity/enumeration type \emph{Cannot be the only criteria entered.}
 \itemize{
 \item \code{"I"}: Individual provider (NPI-1)
 \item \code{"O"}: Organizational provider (NPI-2)
@@ -38,10 +35,6 @@ nppes(
 \item{first, last}{Individual provider's first/last name.
 \emph{Trailing Wildcard Allowed}}
 
-\item{alias}{\code{"TRUE"}/\code{"FALSE"}. Applies to authorized officials and individual providers when
-not doing a wildcard search. When set to \code{"TRUE"}, the results will include
-providers with similar first names.}
-
 \item{organization}{Healthcare organization's name. Many types of names (LBN,
 DBA, Former LBN, Other Name) may match. As such, the results might contain a
 name different from the one entered. \emph{Trailing Wildcard Allowed}}
@@ -49,19 +42,11 @@ name different from the one entered. \emph{Trailing Wildcard Allowed}}
 \item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to:
 \itemize{
 \item \code{"AO"}: search Authorized Officials only
-\item \code{"Provider"}: search Individual Providers only \emph{(default)}
+\item \code{"Provider"}: search Individual Providers only
 }}
 
 \item{taxonomy_desc}{Provider's taxonomy description, e.g. \code{"Pharmacist"},
 \code{"Pediatrics"}}
-
-\item{address_type}{Address type of provider; options are:
-\itemize{
-\item \code{"location"} (Practice location)
-\item \code{"mailing"}
-\item \code{"primary"}
-\item \code{"secondary"}
-}}
 
 \item{city}{City associated with the provider's address. To search for a
 military address, enter either \code{"APO"} or \code{"FPO"}.}
@@ -82,9 +67,9 @@ selected \emph{is not} \code{"US"} (United States).}
 
 \item{skip}{Number of results to skip after those set in \code{limit}.}
 
-\item{unnest}{Unnest output; default is \code{TRUE}.}
+\item{unnest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Unnest list columns}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
@@ -174,6 +159,11 @@ least two characters to be entered, e.g. \code{"jo*"}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-nppes(npi = 1528060837, tidy = FALSE)
+nppes(npi = 1528060837)
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other api: 
+\code{\link{hospitals}()}
+}
+\concept{api}

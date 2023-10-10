@@ -8,7 +8,7 @@ hospitals(
   npi = NULL,
   facility_ccn = NULL,
   enid_org = NULL,
-  enroll_state = NULL,
+  enid_state = NULL,
   pac_org = NULL,
   specialty_code = NULL,
   organization = NULL,
@@ -17,7 +17,7 @@ hospitals(
   state = NULL,
   zip = NULL,
   registration = NULL,
-  multi = NULL,
+  multi_npi = NULL,
   gen = NULL,
   acute = NULL,
   alc_drug = NULL,
@@ -40,11 +40,11 @@ hospitals(
 \arguments{
 \item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
 
-\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number}
+\item{facility_ccn}{< \emph{integer | character} > 6-digit CMS Certification Number}
 
 \item{enid_org}{< \emph{character} > 15-digit Organizational Medicare Enrollment ID}
 
-\item{enroll_state}{< \emph{character} > Hospital’s enrollment state}
+\item{enid_state}{< \emph{character} > Hospital’s enrollment state}
 
 \item{pac_org}{< \emph{integer | character} > 10-digit Organizational PECOS Associate Control ID}
 
@@ -61,7 +61,7 @@ hospitals(
 \item \code{"00-09"}: Hospital
 \item \code{"00-10"}: Indian Health Services Facility
 \item \code{"00-13"}: Organ Procurement Organization (OPO)
-\item \code{"00-14"}: Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services
+\item \code{"00-14"}: Outpatient PT/Occupational Therapy/Speech Pathology
 \item \code{"00-17"}: Rural Health Clinic (RHC)
 \item \code{"00-18"}: Skilled Nursing Facility (SNF)
 \item \code{"00-19"}: Other
@@ -77,7 +77,7 @@ hospitals(
 
 \item{state}{< \emph{character} > State of the hospital’s practice location}
 
-\item{zip}{< \emph{character} > Zip code of the hospital’s practice location}
+\item{zip}{< \emph{integer | character} > Zip code of the hospital’s practice location}
 
 \item{registration}{< \emph{character} > Hospital's IRS designation:
 \itemize{
@@ -85,7 +85,7 @@ hospitals(
 \item \code{"N"}: Registered as \strong{Non-Profit}
 }}
 
-\item{multi}{< \emph{boolean} > Indicates hospital has more than one NPI}
+\item{multi_npi}{< \emph{boolean} > Indicates hospital has more than one NPI}
 
 \item{gen, acute, alc_drug, child, long, short, psych, rehab, swing, psych_unit, rehab_unit, spec, other}{< \emph{boolean} >
 Indicates hospital’s subgroup/unit designation:
@@ -126,18 +126,20 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{doing_business_as} \tab Hospital’s Doing-Business-As Name \cr
    \code{specialty_code} \tab Hospital’s Medicare Part A Provider Specialty Code \cr
    \code{specialty} \tab Specialty Code Description \cr
-   \code{incorporation_date} \tab Date the Business was Incorporated \cr
-   \code{incorporation_state} \tab State in which the Business was Incorporated \cr
+   \code{incorp_date} \tab Date the Business was Incorporated \cr
+   \code{incorp_state} \tab State in which the Business was Incorporated \cr
    \code{structure} \tab Hospital’s Organization Structure Type \cr
    \code{address} \tab Hospital’s Practice Location Address \cr
    \code{city} \tab Hospital’s Practice Location City \cr
    \code{state} \tab Hospital’s Practice Location State \cr
    \code{zip} \tab Hospital’s Practice Location Zip Code \cr
    \code{location_type} \tab Practice Location Type \cr
-   \code{reh_conversion_date} \tab Date the Hospital/CAH converted to an REH \cr
-   \code{associated_ccns} \tab CCNs associated with the Hospital/CAH that converted to an REH \cr
-   \code{registration} \tab Hospital’s IRS Registration Status; \strong{Proprietary} or \strong{Non-Profit} \cr
-   \code{designations} \tab Hospital's Subgroup/Unit Designations, Multiple NPIs, REH Conversion \cr
+   \code{multi_npi} \tab Indicates Hospital has more than one NPI \cr
+   \code{reh_date} \tab Date the Hospital/CAH converted to an REH \cr
+   \code{reh_ccns} \tab CCNs associated with the Hospital/CAH that converted to an REH \cr
+   \code{registration} \tab Hospital’s IRS Registration Status \cr
+   \code{subgroup} \tab Hospital's Subgroup/Unit Designations, REH Conversion Status \cr
+   \code{other} \tab If \code{subgroup} is \code{"Other"}, description of Subgroup/Unit \cr
 }
 }
 \description{
@@ -160,4 +162,8 @@ hospitals(state = "GA", reh = TRUE)
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}
+
+Other api: 
+\code{\link{nppes}()}
 }
+\concept{api}

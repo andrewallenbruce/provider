@@ -16,9 +16,10 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
-#' @param facility_ccn < *character* > 6-digit CMS Certification Number
+#' @param pac_org < *integer | character* > 10-digit Organizational PECOS Associate Control ID
 #' @param enid_org < *character* > 15-digit Organizational Medicare Enrollment ID
-#' @param enroll_state < *character* > Hospital’s enrollment state
+#' @param enid_state < *character* > Hospital’s enrollment state
+#' @param facility_ccn < *integer | character* > 6-digit CMS Certification Number
 #' @param specialty_code < *character* > Medicare Part A Provider specialty code:
 #' + `"00-00"`: Religious Non-Medical Healthcare Institution (RNHCI)
 #' + `"00-01"`: Community Mental Health Center
@@ -31,22 +32,21 @@
 #' + `"00-09"`: Hospital
 #' + `"00-10"`: Indian Health Services Facility
 #' + `"00-13"`: Organ Procurement Organization (OPO)
-#' + `"00-14"`: Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services
+#' + `"00-14"`: Outpatient PT/Occupational Therapy/Speech Pathology
 #' + `"00-17"`: Rural Health Clinic (RHC)
 #' + `"00-18"`: Skilled Nursing Facility (SNF)
 #' + `"00-19"`: Other
 #' + `"00-24"`: Rural Emergency Hospital (REH)
 #' + `"00-85"`: Critical Access Hospital (CAH)
-#' @param pac_org < *integer | character* > 10-digit Organizational PECOS Associate Control ID
 #' @param organization < *character* > Hospital’s legal business name
 #' @param dba < *character* > Hospital’s doing-business-as name
 #' @param city < *character* > City of the hospital’s practice location
 #' @param state < *character* > State of the hospital’s practice location
-#' @param zip < *character* > Zip code of the hospital’s practice location
+#' @param zip < *integer | character* > Zip code of the hospital’s practice location
 #' @param registration < *character* > Hospital's IRS designation:
 #' + `"P"`: Registered as __Proprietor__
 #' + `"N"`: Registered as __Non-Profit__
-#' @param multi < *boolean* > Indicates hospital has more than one NPI
+#' @param multi_npi < *boolean* > Indicates hospital has more than one NPI
 #' @param gen,acute,alc_drug,child,long,short,psych,rehab,swing,psych_unit,rehab_unit,spec,other < *boolean* >
 #' Indicates hospital’s subgroup/unit designation:
 #' + `acute`: Acute Care
@@ -70,31 +70,34 @@
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
-#' |**Field**             |**Description**                                                       |
-#' |:---------------------|:---------------------------------------------------------------------|
-#' |`npi`                 |Hospital's 10-digit National Provider Identifier                      |
-#' |`pac_org`             |Hospital’s 10-digit PECOS Associate Control ID                        |
-#' |`enid_org`            |Hospital’s 15-digit Enrollment ID                                     |
-#' |`enid_state`          |Hospital’s Enrollment State                                           |
-#' |`facility_ccn`        |Hospital’s CMS Certification Number                                   |
-#' |`organization`        |Hospital’s Legal Business Name                                        |
-#' |`doing_business_as`   |Hospital’s Doing-Business-As Name                                     |
-#' |`specialty_code`      |Hospital’s Medicare Part A Provider Specialty Code                    |
-#' |`specialty`           |Specialty Code Description                                            |
-#' |`incorporation_date`  |Date the Business was Incorporated                                    |
-#' |`incorporation_state` |State in which the Business was Incorporated                          |
-#' |`structure`           |Hospital’s Organization Structure Type                                |
-#' |`address`             |Hospital’s Practice Location Address                                  |
-#' |`city`                |Hospital’s Practice Location City                                     |
-#' |`state`               |Hospital’s Practice Location State                                    |
-#' |`zip`                 |Hospital’s Practice Location Zip Code                                 |
-#' |`location_type`       |Practice Location Type                                                |
-#' |`reh_conversion_date` |Date the Hospital/CAH converted to an REH                             |
-#' |`associated_ccns`     |CCNs associated with the Hospital/CAH that converted to an REH        |
-#' |`registration`        |Hospital’s IRS Registration Status; __Proprietary__ or __Non-Profit__ |
-#' |`designations`        |Hospital's Subgroup/Unit Designations, Multiple NPIs, REH Conversion  |
+#' |**Field**           |**Description**                                                |
+#' |:-------------------|:--------------------------------------------------------------|
+#' |`npi`               |Hospital's 10-digit National Provider Identifier               |
+#' |`pac_org`           |Hospital’s 10-digit PECOS Associate Control ID                 |
+#' |`enid_org`          |Hospital’s 15-digit Enrollment ID                              |
+#' |`enid_state`        |Hospital’s Enrollment State                                    |
+#' |`facility_ccn`      |Hospital’s CMS Certification Number                            |
+#' |`organization`      |Hospital’s Legal Business Name                                 |
+#' |`doing_business_as` |Hospital’s Doing-Business-As Name                              |
+#' |`specialty_code`    |Hospital’s Medicare Part A Provider Specialty Code             |
+#' |`specialty`         |Specialty Code Description                                     |
+#' |`incorp_date`       |Date the Business was Incorporated                             |
+#' |`incorp_state`      |State in which the Business was Incorporated                   |
+#' |`structure`         |Hospital’s Organization Structure Type                         |
+#' |`address`           |Hospital’s Practice Location Address                           |
+#' |`city`              |Hospital’s Practice Location City                              |
+#' |`state`             |Hospital’s Practice Location State                             |
+#' |`zip`               |Hospital’s Practice Location Zip Code                          |
+#' |`location_type`     |Practice Location Type                                         |
+#' |`multi_npi`         |Indicates Hospital has more than one NPI                       |
+#' |`reh_date`          |Date the Hospital/CAH converted to an REH                      |
+#' |`reh_ccns`          |CCNs associated with the Hospital/CAH that converted to an REH |
+#' |`registration`      |Hospital’s IRS Registration Status                             |
+#' |`subgroup`          |Hospital's Subgroup/Unit Designations, REH Conversion Status   |
+#' |`other`             |If `subgroup` is `"Other"`, description of Subgroup/Unit       |
 #'
 #' @seealso [clinicians()], [providers()], [affiliations()]
+#' @family api
 #'
 #' @examples
 #' hospitals(pac_org = 6103733050)
@@ -105,7 +108,7 @@
 hospitals <- function(npi = NULL,
                       facility_ccn = NULL,
                       enid_org = NULL,
-                      enroll_state = NULL,
+                      enid_state = NULL,
                       pac_org = NULL,
                       specialty_code = NULL,
                       organization = NULL,
@@ -114,7 +117,7 @@ hospitals <- function(npi = NULL,
                       state = NULL,
                       zip = NULL,
                       registration = NULL,
-                      multi = NULL,
+                      multi_npi = NULL,
                       gen = NULL,
                       acute = NULL,
                       alc_drug = NULL,
@@ -144,7 +147,7 @@ hospitals <- function(npi = NULL,
 
   if (!is.null(registration)) {rlang::arg_match(registration, c("P", "N"))}
 
-  if (!is.null(multi))      {multi <- tf_2_yn(multi)}
+  if (!is.null(multi_npi))  {multi_npi <- tf_2_yn(multi_npi)}
   if (!is.null(gen))        {gen <- tf_2_yn(gen)}
   if (!is.null(acute))      {acute <- tf_2_yn(acute)}
   if (!is.null(alc_drug))   {alc_drug <- tf_2_yn(alc_drug)}
@@ -165,7 +168,7 @@ hospitals <- function(npi = NULL,
     "NPI",                              npi,
     "CCN",                              facility_ccn,
     "ENROLLMENT ID",                    enid_org,
-    "ENROLLMENT STATE",                 enroll_state,
+    "ENROLLMENT STATE",                 enid_state,
     "PROVIDER TYPE CODE",               specialty_code,
     "ASSOCIATE ID",                     pac_org,
     "ORGANIZATION NAME",                organization,
@@ -174,7 +177,7 @@ hospitals <- function(npi = NULL,
     "STATE",                            state,
     "ZIP CODE",                         zip,
     "PROPRIETARY_NONPROFIT",            registration,
-    "MULTIPLE NPI FLAG",                multi,
+    "MULTIPLE NPI FLAG",                multi_npi,
     "SUBGROUP %2D GENERAL",             gen,
     "SUBGROUP %2D ACUTE CARE",          acute,
     "SUBGROUP %2D ALCOHOL DRUG",        alc_drug,
@@ -195,34 +198,34 @@ hospitals <- function(npi = NULL,
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
-      ~x,                      ~y,
-      "npi",                   npi,
-      "facility_ccn",          facility_ccn,
-      "enroll_id_org",         enid_org,
-      "enroll_state",          enroll_state,
-      "specialty_code",        specialty_code,
-      "pac_org",               pac_org,
-      "organization",          organization,
-      "doing_business_as",     dba,
-      "city",                  city,
-      "state",                 state,
-      "zip",                   zip,
-      "registration",          registration,
-      "multiple_npis",         multi,
-      "general",               gen,
-      "acute_care",            acute,
-      "alcohol_drug",          alc_drug,
-      "childrens",             child,
-      "long_term",             long,
-      "psychiatric",           psych,
-      "rehabilitation",        rehab,
-      "short_term",            short,
-      "swing_bed",             swing,
-      "psych_unit",            psych_unit,
-      "rehab_unit",            rehab_unit,
-      "specialty_hospital",    spec,
-      "other",                 other,
-      "reh",        reh) |>
+      ~x,               ~y,
+      "npi",            npi,
+      "facility_ccn",   facility_ccn,
+      "enid_org",       enid_org,
+      "enid_state",     enid_state,
+      "specialty_code", specialty_code,
+      "pac_org",        pac_org,
+      "organization",   organization,
+      "dba",            dba,
+      "city",           city,
+      "state",          state,
+      "zip",            zip,
+      "registration",   registration,
+      "multi_npi",      multi_npi,
+      "gen",            gen,
+      "acute",          acute,
+      "alc_drug",       alc_drug,
+      "child",          child,
+      "long",           long,
+      "psych",          psych,
+      "rehab",          rehab,
+      "short",          short,
+      "swing",          swing,
+      "psych_unit",     psych_unit,
+      "rehab_unit",     rehab_unit,
+      "spec",           spec,
+      "other",          other,
+      "reh",            reh) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -254,16 +257,16 @@ hospitals <- function(npi = NULL,
 
     if (pivot) {
       results <- hosp_cols2(results) |>
-        tidyr::pivot_longer(cols = c(dplyr::contains("Subgroup")),
-        names_to = "subgroup",
-        values_to = "flag") |>
-      dplyr::filter(flag == TRUE) |>
-      dplyr::mutate(flag = NULL,
-                    subgroup = stringr::str_remove(subgroup, "Subgroup "))
+        tidyr::pivot_longer(cols = c('REH Conversion',
+                                     dplyr::contains("Subgroup")),
+                            names_to = "subgroup",
+                            values_to = "flag") |>
+        dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup "))
+
     }
 
-    if (na.rm) {results <- janitor::remove_empty(results,
-                              which = c("rows", "cols"))
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))
     }
   }
   return(results)
@@ -275,27 +278,27 @@ hospitals <- function(npi = NULL,
 hosp_cols <- function(df) {
 
   cols <- c('npi',
-            'pac_org' = 'associate_id',
-            'enid_org' = 'enrollment_id',
-            'enid_state' = 'enrollment_state',
-            'facility_ccn' = 'ccn',
-            'organization' = 'organization_name',
+            'pac_org'           = 'associate_id',
+            'enid_org'          = 'enrollment_id',
+            'enid_state'        = 'enrollment_state',
+            'facility_ccn'      = 'ccn',
+            'organization'      = 'organization_name',
             'doing_business_as' = 'doing_business_as_name',
-            'specialty_code' = 'provider_type_code',
-            'specialty' = 'provider_type_text',
-            'incorp_date' = 'incorporation_date',
-            'incorp_state' = 'incorporation_state',
+            'specialty_code'    = 'provider_type_code',
+            'specialty'         = 'provider_type_text',
+            'incorp_date'       = 'incorporation_date',
+            'incorp_state'      = 'incorporation_state',
             'structure',
             'address',
             'city',
             'state',
-            'zip' = 'zip_code',
+            'zip'               = 'zip_code',
             'location_type',
-            'registration' = 'proprietary_nonprofit',
-            'multi_npi' = 'multiple_npi_flag',
-            'reh_conversion' = 'reh_conversion_flag',
-            'reh_date' = 'reh_conversion_date',
-            'reh_ccns' = 'cah_or_hospital_ccn',
+            'registration'      = 'proprietary_nonprofit',
+            'multi_npi'         = 'multiple_npi_flag',
+            'reh_conversion'    = 'reh_conversion_flag',
+            'reh_date'          = 'reh_conversion_date',
+            'reh_ccns'          = 'cah_or_hospital_ccn',
             'subgroup_general',
             'subgroup_acute_care',
             'subgroup_alcohol_drug',
@@ -309,7 +312,7 @@ hosp_cols <- function(df) {
             'subgroup_rehabilitation_unit',
             'subgroup_specialty_hospital',
             'subgroup_other',
-            'other_text' = 'subgroup_other_text')
+            'other'             = 'subgroup_other_text')
 
   df |> dplyr::select(dplyr::any_of(cols))
 
@@ -338,23 +341,23 @@ hosp_cols2 <- function(df) {
             'zip',
             'location_type',
             'multi_npi',
-            'reh_conversion',
             'reh_date',
             'reh_ccns',
-            "Subgroup General" = 'subgroup_general',
-            "Subgroup Acute Care" = 'subgroup_acute_care',
-            "Subgroup Alcohol Drug" = 'subgroup_alcohol_drug',
+            'REH Conversion'               = 'reh_conversion',
+            "Subgroup General"             = 'subgroup_general',
+            "Subgroup Acute Care"          = 'subgroup_acute_care',
+            "Subgroup Alcohol Drug"        = 'subgroup_alcohol_drug',
             "Subgroup Childrens' Hospital" = 'subgroup_childrens',
-            "Subgroup Long-term" = 'subgroup_long_term',
-            "Subgroup Psychiatric" = 'subgroup_psychiatric',
-            "Subgroup Rehabilitation" = 'subgroup_rehabilitation',
-            "Subgroup Short-Term" = 'subgroup_short_term',
-            "Subgroup Swing-Bed Approved" = 'subgroup_swing_bed_approved',
-            "Subgroup Psychiatric Unit" = 'subgroup_psychiatric_unit',
+            "Subgroup Long-term"           = 'subgroup_long_term',
+            "Subgroup Psychiatric"         = 'subgroup_psychiatric',
+            "Subgroup Rehabilitation"      = 'subgroup_rehabilitation',
+            "Subgroup Short-Term"          = 'subgroup_short_term',
+            "Subgroup Swing-Bed Approved"  = 'subgroup_swing_bed_approved',
+            "Subgroup Psychiatric Unit"    = 'subgroup_psychiatric_unit',
             "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
-            "Subgroup Specialty Hospital" = 'subgroup_specialty_hospital',
-            "Subgroup Other" = 'subgroup_other',
-            'other_text')
+            "Subgroup Specialty Hospital"  = 'subgroup_specialty_hospital',
+            "Subgroup Other"               = 'subgroup_other',
+            'other')
 
   df |> dplyr::select(dplyr::any_of(cols))
 

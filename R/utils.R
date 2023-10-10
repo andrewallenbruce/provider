@@ -58,7 +58,15 @@ tf_logical <- function(x) {
 #' @param x vector
 #' @autoglobal
 #' @noRd
-na_blank <- function(x) {dplyr::na_if(x, "")}
+na_blank <- function(x) {
+
+  x <- dplyr::na_if(x, "")
+  x <- dplyr::na_if(x, " ")
+  x <- dplyr::na_if(x, "*")
+  x <- dplyr::na_if(x, "--")
+
+  return(x)
+}
 
 #' Convert "*" char values to NA
 #' @param x vector

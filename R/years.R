@@ -12,16 +12,19 @@
 #' cc_years()
 #' quality_years()
 #' @name years
+#' @keywords internal
 NULL
 
 #' @rdname years
 #' @autoglobal
 #' @export
+#' @keywords internal
 open_years <- function() {sort(open_ids("General Payment Data")$year)}
 
 #' @rdname years
 #' @autoglobal
 #' @export
+#' @keywords internal
 prac_years <- function() {
   as.integer(cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
 }
@@ -29,6 +32,7 @@ prac_years <- function() {
 #' @rdname years
 #' @autoglobal
 #' @export
+#' @keywords internal
 cc_years <- function() {
   as.integer(cms_update("Specific Chronic Conditions", "years"))
 }
@@ -36,6 +40,7 @@ cc_years <- function() {
 #' @autoglobal
 #' @rdname years
 #' @export
+#' @keywords internal
 quality_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
 }
@@ -44,6 +49,7 @@ quality_years <- function() {
 #' @rdname years
 #' @autoglobal
 #' @export
+#' @keywords internal
 bene_years <- function(period = c("year", "month")) {
 
   if (period == "year") {
