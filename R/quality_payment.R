@@ -19,7 +19,7 @@
 #' @section Update Frequency: **Annually**
 #'
 #' @param year integer, YYYY, QPP Performance year. Run the helper function
-#'    `quality_years()` to return a vector of currently
+#'    [qpp_years()] to return a vector of currently
 #'    available years.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
@@ -52,7 +52,7 @@ quality_payment <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_years()))
+  rlang::arg_match(year, values = as.character(qpp_years()))
 
   args <- dplyr::tribble(
     ~param,                          ~arg,
@@ -119,7 +119,7 @@ quality_payment <- function(year,
                                                   "pi_bonus",
                                                   "extreme_hardship_ia",
                                                   "ia_study",
-                                                  "extreme_hardship_cost")), tf_logical)) |>
+                                                  "extreme_hardship_cost")), yn_logical)) |>
       dplyr::select(year,
                     npi,
                     state                        = practice_state_or_us_territory,
@@ -215,7 +215,7 @@ quality_eligibility <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_years()))
+  rlang::arg_match(year, values = as.character(qpp_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
 
@@ -291,7 +291,7 @@ quality_stats <- function(year) {
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_years()))
+  rlang::arg_match(year, values = as.character(qpp_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
 

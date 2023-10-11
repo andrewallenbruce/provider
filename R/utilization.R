@@ -188,7 +188,7 @@
 NULL
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [prac_years()] to return a vector of the years currently available.
+#' format. Run [pop_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
 #' provider's name
@@ -234,7 +234,7 @@ by_provider <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, as.character(prac_years()))
+  year <- rlang::arg_match(year, as.character(pop_years()))
 
   if (!is.null(npi))  {npi  <- npi_check(npi)}
   if (!is.null(zip))  {zip  <- as.character(zip)}
@@ -408,7 +408,7 @@ cols_prov <- function(df) {
 }
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [prac_years()] to return a vector of the years currently available.
+#' format. Run [pop_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
 #' provider's name
@@ -465,7 +465,7 @@ by_service <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, as.character(prac_years()))
+  rlang::arg_match(year, as.character(pop_years()))
 
   if (!is.null(npi))        {npi        <- npi_check(npi)}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
@@ -672,7 +672,7 @@ cols_serv2 <- function(df) {
 }
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [prac_years()] to return a vector of the years currently available.
+#' format. Run [pop_years()] to return a vector of the years currently available.
 #' @param level < *character* > Geographic level by which the data will be
 #' aggregated:
 #' + `"State"`: Data is aggregated for each state
@@ -705,7 +705,7 @@ by_geography <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, as.character(prac_years()))
+  rlang::arg_match(year, as.character(pop_years()))
 
   if (!is.null(level))      {rlang::arg_match(level, c("National", "State"))}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}

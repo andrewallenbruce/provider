@@ -66,7 +66,7 @@ by_geography(
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
-format. Run \code{\link[=prac_years]{prac_years()}} to return a vector of the years currently available.}
+format. Run \code{\link[=pop_years]{pop_years()}} to return a vector of the years currently available.}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 

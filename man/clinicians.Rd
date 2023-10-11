@@ -92,7 +92,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\code{clinicians()} allows you to access information about providers enrolled in
+\code{\link[=clinicians]{clinicians()}} allows you to access information about providers enrolled in
 Medicare, including the medical school that they attended and the year they graduated
 
 Links:

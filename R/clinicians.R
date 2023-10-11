@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `clinicians()` allows you to access information about providers enrolled in
+#' [clinicians()] allows you to access information about providers enrolled in
 #' Medicare, including the medical school that they attended and the year they graduated
 #'
 #' Links:
@@ -147,18 +147,16 @@ clinicians <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = c("telehlth")) |>
+    results <- tidyup(results, yn = c("telehlth"),
+                      int = c("num_org_mem", "grd_yr")) |>
       address(c("adr_ln_1", "adr_ln_2")) |>
-      dplyr::mutate(num_org_mem = as.integer(num_org_mem),
-                    grd_yr = as.integer(grd_yr)) |>
-      clin_cols()
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))}
+      cols_clin()
+
+    if (na.rm) {results <- narm(results)}
     }
   return(results)
 }
@@ -166,7 +164,7 @@ clinicians <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-clin_cols <- function(df) {
+cols_clin <- function(df) {
 
   cols <- c('npi',
             'pac' = 'ind_pac_id',
@@ -185,14 +183,14 @@ clin_cols <- function(df) {
             'pac_org' = 'org_pac_id',
             'members_org' = 'num_org_mem',
             'address_org' = 'address',
-            # 'address_id' = 'adrs_id',
             'city_org' = 'city_town',
             'state_org' = 'state',
             'zip_org' = 'zip_code',
-            'phone_org' = 'telephone_number',
-            'telehealth' = 'telehlth',
-            'assign_ind' = 'ind_assgn',
-            'assign_org' = 'grp_assgn')
+            'phone_org' = 'telephone_number')
+            # 'address_id' = 'adrs_id',
+            # 'telehealth' = 'telehlth',
+            # 'assign_ind' = 'ind_assgn',
+            # 'assign_org' = 'grp_assgn'
 
   df |> dplyr::select(dplyr::any_of(cols))
 

@@ -133,7 +133,7 @@ quality_years()
 These can also be used in a pipeline, for searching all available years:
 
 ```{r}
-map_dfr(quality_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
+map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
   select(year:final_score)
 ```
 
@@ -181,7 +181,7 @@ hospitals(pac_org = "O12345678912")
 clinicians(enid = 0123456789123456)
 
 # Must be 15 characters long
-revalidation_date(enid = "I123456789123456")
+reassignments(enid = "I123456789123456")
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
 providers(enid = "012345678912345")

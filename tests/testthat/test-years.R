@@ -6,11 +6,11 @@ test_that("open_years() works", {
 
 })
 
-test_that("prac_years() works", {
+test_that("pop_years() works", {
 
-  prac <- prac_years()
-  expect_equal(prac, 2013:2021)
-  expect_vector(prac, ptype = integer(), size = 9)
+  pop <- pop_years()
+  expect_equal(pop, 2013:2021)
+  expect_vector(pop, ptype = integer(), size = 9)
 
 })
 
@@ -22,11 +22,11 @@ test_that("cc_years() works", {
 
 })
 
-test_that("quality_years() works", {
+test_that("qpp_years() works", {
 
-  quality <- quality_years()
-  expect_equal(quality, 2017:2021)
-  expect_vector(quality, ptype = integer(), size = 5)
+  qpp <- qpp_years()
+  expect_equal(qpp, 2017:2021)
+  expect_vector(qpp, ptype = integer(), size = 5)
 
 })
 

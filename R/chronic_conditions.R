@@ -116,6 +116,7 @@ cc_multiple <- function(year,
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age)) {rlang::arg_match(age, c("All", "<65", "65+"))}
   if (!is.null(demo)) {rlang::arg_match(demo, c("All", "Dual Status", "Sex", "Race"))}
+  if (!is.null(subdemo)) {rlang::arg_match(subdemo, subdemo())}
   if (!is.null(mcc)) {rlang::arg_match(mcc, c("0 to 1", "2 to 3", "4 to 5", "6+"))}
   if (!is.null(fips)) {fips <- as.character(fips)}
 
@@ -124,11 +125,6 @@ cc_multiple <- function(year,
       dplyr::filter(x == state) |>
       dplyr::pull(y)
   }
-
-  if (!is.null(subdemo)) {rlang::arg_match(subdemo,
-     c("All", "Medicare Only", "Medicare and Medicaid", "Female", "Male",
-       "Asian Pacific Islander", "Hispanic", "Native American",
-       "non-Hispanic Black", "non-Hispanic White"))}
 
   args <- dplyr::tribble(
     ~param,            ~arg,
@@ -164,23 +160,13 @@ cc_multiple <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    dplyr::across(c(prvlnc,
-                                    tot_mdcr_stdzd_pymt_pc,
-                                    tot_mdcr_pymt_pc,
-                                    hosp_readmsn_rate,
-                                    er_visits_per_1000_benes),
-                                  as.double)) |>
-      cols_cc()
-  }
+  if (tidy) {results <- cols_cc(tidyup(results, int = c("year"),
+                                       dbl = c("prvlnc", "_pc", "er_")))}
   return(results)
 }
 
@@ -198,10 +184,10 @@ cc_multiple <- function(year,
 #' + `"<65"`
 #' + `"65+"`
 #' @param demo,subdemo < *character* > Demographic level of aggregation
-#' + `"All"`
-#' + `"Sex"` /// `"Male"` // `"Female"`
-#' + `"Race"` /// `"non-Hispanic White"` // `"non-Hispanic Black"` // `"Asian Pacific Islander"` // `"Hispanic"` // `"Native American"`
-#' + `"Dual Status"` /// `"Medicare and Medicaid"` // `"Medicare Only"`
+#' + __`"All"`__
+#' + __`"Sex"`__: `"Male"`, `"Female"`
+#' + __`"Race"`__: `"non-Hispanic White"`, `"non-Hispanic Black"`, `"Asian Pacific Islander"`, `"Hispanic"`, `"Native American"`
+#' + __`"Dual Status"`__: `"Medicare and Medicaid"`, `"Medicare Only"`
 #' @param condition < *character* > Chronic condition for which the prevalence
 #' and utilization is compiled
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
@@ -225,17 +211,14 @@ cc_specific <- function(year,
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age)) {rlang::arg_match(age, c("All", "<65", "65+"))}
   if (!is.null(demo)) {rlang::arg_match(demo, c("All", "Dual Status", "Sex", "Race"))}
-  if (!is.null(fips))        {fips <- as.character(fips)}
+  if (!is.null(subdemo)) {rlang::arg_match(subdemo, subdemo())}
+  if (!is.null(fips)) {fips <- as.character(fips)}
 
   if (!is.null(sublevel) && (sublevel %in% state.abb)) {
     sublevel <- dplyr::tibble(x = state.abb, y = state.name) |>
       dplyr::filter(x == sublevel) |>
       dplyr::pull(y)
   }
-
-  if (!is.null(subdemo)) {rlang::arg_match(subdemo, c("All", "Medicare Only",
-  "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
-  "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
 
   args <- dplyr::tribble(
     ~param,            ~arg,
@@ -277,19 +260,25 @@ cc_specific <- function(year,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    dplyr::across(c(prvlnc,
-                                    tot_mdcr_stdzd_pymt_pc,
-                                    tot_mdcr_pymt_pc,
-                                    hosp_readmsn_rate,
-                                    er_visits_per_1000_benes),
-                                  as.double)) |>
-      cols_cc()
-
-  }
+  if (tidy) {results <- cols_cc(tidyup(results, int = c("year"),
+                              dbl = c("prvlnc", "_pc", "er_")))}
   return(results)
+}
+
+#' @autoglobal
+#' @noRd
+subdemo <- function(df) {
+
+  c("All",
+    "Medicare Only",
+    "Medicare and Medicaid",
+    "Female",
+    "Male",
+    "Asian Pacific Islander",
+    "Hispanic",
+    "Native American",
+    "non-Hispanic Black",
+    "non-Hispanic White")
 }
 
 #' @param df data frame

@@ -1,10 +1,12 @@
 #' Beneficiary Enrollment in Medicare
 #'
 #' @description
-#' `beneficiaries()` allows the user access current data on enrolled Medicare
+#' `r lifecycle::badge("questioning")`
+#'
+#' [beneficiaries()] allows the user access current data on enrolled Medicare
 #' beneficiaries.
 #'
-#' ### Medicare Monthly Enrollment
+#' @section Medicare Monthly Enrollment:
 #' Current monthly information on the number of Medicare beneficiaries with
 #' hospital/medical coverage and prescription drug coverage, available for
 #' several geographic areas including national, state and county.
@@ -18,8 +20,8 @@
 #' The dataset includes enrollee counts on a *rolling 12 month basis* and also
 #' provides information on yearly trends.
 #'
-#' Links:
-#'    * [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)
+#' @section Links:
+#' + [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)
 #'
 #' *Update Frequency:* **Monthly**
 #'
@@ -60,31 +62,25 @@ beneficiaries <- function(year = NULL,
     year <- as.character(year)
 
     if (!is.null(period) && period %in% c("Year")) {
-    rlang::arg_match(year, as.character(
-      beneficiaries(period = "Year", level = "National")$year))
-      }
+    rlang::arg_match(year, as.character(bene_years("year")))}
 
     if (!is.null(period) && period %in% c("Month", month.name)) {
-      rlang::arg_match(year, as.character(
-        beneficiaries(period = "January", level = "National")$year))
-    }
+      rlang::arg_match(year, as.character(bene_years("month")))}
   }
 
   if (!is.null(period)) {
     rlang::arg_match(period, c("Year", "Month", month.name))
-    if (!is.null(period) && period == "Month") {period <- NULL}
+    if (period == "Month") {period <- NULL}
   }
 
-  if (!is.null(level)) {
-    rlang::arg_match(level, c("National", "State", "County"))
-  }
+  if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
 
   if (!is.null(state)) {
     rlang::arg_match(state, c(state.abb, state.name, "US"))
 
     if (state %in% c(state.name, "United States")) {
       state_name <- state
-      state <- NULL
+      state      <- NULL
     }
   }
 
@@ -100,7 +96,8 @@ beneficiaries <- function(year = NULL,
      "BENE_COUNTY_DESC",     county,
          "BENE_FIPS_CD",       fips)
 
-  response <- httr2::request(build_url("ben", args)) |> httr2::req_perform()
+  response <- httr2::request(build_url("ben", args)) |>
+    httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
@@ -121,15 +118,10 @@ beneficiaries <- function(year = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::contains("_benes"), as.integer)) |>
-      bene_cols()
+  if (tidy) {results <- bene_cols(tidyup(results, int = c("year", "_benes")))}
 
-  }
-    if (!is.null(period) && period == "Month") {
-      results <- dplyr::filter(results, period %in% month.name)
+  if (!is.null(period) && period == "Month") {
+    results <- dplyr::filter(results, period %in% month.name)
     }
   return(results)
 }

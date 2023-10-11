@@ -39,17 +39,17 @@ compare_hcpcs <- function(tbl) {
     dplyr::rename(tbl,
                   beneficiaries = tot_benes,
                   services = tot_srvcs) |>
-      cols_hcpcs(),
+      hcpcs_cols(),
 
     dplyr::mutate(x$state,
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
-      cols_hcpcs(),
+      hcpcs_cols(),
 
     dplyr::mutate(x$national,
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
-      cols_hcpcs()) |>
+      hcpcs_cols()) |>
     dplyr::mutate(level = forcats::fct_inorder(level))
 
   return(results)
@@ -59,7 +59,7 @@ compare_hcpcs <- function(tbl) {
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-cols_hcpcs <- function(df) {
+hcpcs_cols <- function(df) {
 
   cols <- c('year',
             'level',

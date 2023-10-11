@@ -25,73 +25,70 @@ knitr::opts_chunk$set(
 library(provider)
 library(dplyr)
 library(purrr)
+library(DiagrammeR)
 ```
 
+
+```{r}
+grViz("
+      digraph {
+      graph [rankdir=LR]
+      node [shape = Mrecord]
+      0 [label = 'PAC ID | Organization' 
+      color = 'white' 
+      fillcolor = 'red' 
+      style = filled
+      fontcolor = 'white']
+      1 [label = 'Enrollment ID | Organization | Hospital']
+      2 [label = 'Enrollment ID | Individual']
+      3 [label = 'NPI | Organization']
+      4 [label = 'NPI | Individual']
+      0 -> {1 2} [arrowhead = none]
+      1 -> 3 [arrowhead = none]
+      2 -> 4 [arrowhead = none]
+      }",
+      height = 300, width = 450)
+```
+
+<br>
 
 ## Individual Provider
 
 ```{r}
-(p <- providers(pac = 7810891009))
-```
-```{r}
-(rd <- revalidation_date(enroll_id = p$enroll_id))
-```
-```{r}
-(rv <- revalidation_reassign(pac_ind = p$pac))
-```
-```{r}
-(cl <- clinicians(pac = p$pac))
+providers(pac = 7810891009)
 ```
 <br>
 
 ```{r}
-(a <- affiliations(pac = p$pac))
+reassignments(pac = 7810891009)
+```
+<br>
+
+```{r}
+clinicians(pac = 7810891009)
 ```
 
 <br>
 
+```{r}
+affiliations(pac = 7810891009)
+```
+
 <br>
 
 ```{r}
-(h <- affiliations(pac = p$pac) |> 
+a <- affiliations(pac = 7810891009) |> 
   pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x)))
+  map_dfr(~hospitals(facility_ccn = .x, pivot = FALSE))
+
+a |> group_by(enid_org) |> 
+  #filter(multi_npi | flag == TRUE)
+  distinct(npi, .keep_all = TRUE)
 ```
 
-
-
-```{r}
-full_join(p, rd) |> 
-  full_join(rv) |> 
-  full_join(cl) |> 
-  full_join(a) |> 
-  full_join(h) |> 
-  glimpse()
-
-```
-
-```{r}
-full_join(
-  providers(pac = 7810891009), 
-  revalidation_date(enroll_id = "I20031120000251")) |> 
-full_join(revalidation_reassign(pac_ind = 7810891009)) |> 
-  full_join(clinicians(pac = 7810891009)) |> 
-  glimpse()
-```
-
-
-
-
-
-
+<br>
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
-
-<br>
-
-Looking it up in the **Provider Enrollment** API gives us several avenues to go down:
-
-<br>
 
 ```{r}
 providers(organization = "Elizabethtown Community Hospital")
@@ -100,8 +97,7 @@ providers(organization = "Elizabethtown Community Hospital")
 
 
 ```{r}
-hospitals(organization = "Elizabethtown Community Hospital") |> 
-  select(npi:specialty, proprietary_nonprofit:status)
+hospitals(organization = "Elizabethtown Community Hospital")
 ```
 
 <br>

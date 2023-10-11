@@ -130,10 +130,8 @@ affiliations <- function(npi = NULL,
 
   }
 
-  if (tidy) {results <- tidyup(results) |> cols_aff()
-  if (na.rm) {
-    results <- janitor::remove_empty(results, which = c("rows", "cols"))}
-  }
+  if (tidy)  {results <- cols_aff(tidyup(results))
+  if (na.rm) {results <- narm(results)}}
 
   return(results)
 }

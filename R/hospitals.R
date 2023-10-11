@@ -227,19 +227,17 @@ hospitals <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
-
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
     results <- tidyup(results, yn = c("flag", "subgroup")) |>
-      dplyr::mutate(roprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
+      address(c("address_line_1", "address_line_2")) |>
+      dplyr::mutate(proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
                       "P" ~ "Proprietary", "N" ~ "Non-Profit", .default = NA),
                     zip_code = as.character(zip_code)) |>
-      address(c("address_line_1", "address_line_2")) |>
       tidyr::unite("structure",
                    organization_type_structure:organization_other_type_text,
                    remove = TRUE, na.rm = TRUE, sep = ": ") |>
@@ -257,10 +255,7 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup "))
 
     }
-
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))
-    }
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
 }
@@ -353,5 +348,4 @@ hosp_cols2 <- function(df) {
             'other')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

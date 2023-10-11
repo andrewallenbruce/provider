@@ -136,15 +136,14 @@ laboratories <- function(name = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
-
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
     results <- tidyup(results, dt = c("_dt"), yn = c("_sw")) |>
+      address(c("st_adr", "addtnl_st_adr")) |>
       dplyr::mutate(pgm_trmntn_cd               = termcd(pgm_trmntn_cd),
                     crtfctn_actn_type_cd        = toa(crtfctn_actn_type_cd),
                     cmplnc_stus_cd              = status(cmplnc_stus_cd),
@@ -159,7 +158,6 @@ laboratories <- function(name = NULL,
                     expired                     = dplyr::if_else(duration < 0, TRUE, FALSE),
                     duration                    = NULL) |>
       tidyr::unite("name", c(fac_name, addtnl_fac_name), na.rm = TRUE) |>
-      tidyr::unite("address", c(st_adr, addtnl_st_adr), na.rm = TRUE) |>
       cols_lab()
 
     if (pivot) {
@@ -244,10 +242,7 @@ laboratories <- function(name = NULL,
                                   aff,
                                   by = dplyr::join_by(clia_number))
     }
-
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))
-    }
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
 }

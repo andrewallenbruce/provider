@@ -64,10 +64,10 @@ currently available years.}
 
 \item{demo, subdemo}{< \emph{character} > Demographic level of aggregation
 \itemize{
-\item \code{"All"}
-\item \code{"Sex"} /// \code{"Male"} // \code{"Female"}
-\item \code{"Race"} /// \code{"non-Hispanic White"} // \code{"non-Hispanic Black"} // \code{"Asian Pacific Islander"} // \code{"Hispanic"} // \code{"Native American"}
-\item \code{"Dual Status"} /// \code{"Medicare and Medicaid"} // \code{"Medicare Only"}
+\item \strong{\code{"All"}}
+\item \strong{\code{"Sex"}}: \code{"Male"}, \code{"Female"}
+\item \strong{\code{"Race"}}: \code{"non-Hispanic White"}, \code{"non-Hispanic Black"}, \code{"Asian Pacific Islander"}, \code{"Hispanic"}, \code{"Native American"}
+\item \strong{\code{"Dual Status"}}: \code{"Medicare and Medicaid"}, \code{"Medicare Only"}
 }}
 
 \item{mcc}{< \emph{character} > Number of chronic conditions

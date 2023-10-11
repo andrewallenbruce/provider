@@ -3,19 +3,19 @@
 \name{years}
 \alias{years}
 \alias{open_years}
-\alias{prac_years}
+\alias{pop_years}
 \alias{cc_years}
-\alias{quality_years}
+\alias{qpp_years}
 \alias{bene_years}
 \title{Years Currently Searchable for APIs}
 \usage{
 open_years()
 
-prac_years()
+pop_years()
 
 cc_years()
 
-quality_years()
+qpp_years()
 
 bene_years(period = c("year", "month"))
 }
@@ -33,12 +33,9 @@ Years Currently Searchable for APIs
 bene_years("year")
 bene_years("month")
 open_years()
-prac_years()
+pop_years()
 cc_years()
-quality_years()
+qpp_years()
 \dontshow{\}) # examplesIf}
-}
-\seealso{
-\code{\link[=open_payments]{open_payments()}}, \code{\link[=by_geography]{by_geography()}}, \code{\link[=by_provider]{by_provider()}}, \code{\link[=by_service]{by_service()}}, \code{\link[=quality_payment]{quality_payment()}}, \code{\link[=quality_eligibility]{quality_eligibility()}}, \code{\link[=quality_stats]{quality_stats()}}, \code{\link[=beneficiaries]{beneficiaries()}}
 }
 \keyword{internal}
