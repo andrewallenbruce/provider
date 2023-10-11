@@ -118,35 +118,61 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rich-iannone/DiagrammeR" class="external-link">DiagrammeR</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in library(DiagrammeR): there is no package called 'DiagrammeR'</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">grViz</span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="st">      digraph {</span></span>
+<span><span class="st">      graph [rankdir=LR]</span></span>
+<span><span class="st">      node [shape = Mrecord]</span></span>
+<span><span class="st">      0 [label = 'PAC ID | Organization' </span></span>
+<span><span class="st">      color = 'white' </span></span>
+<span><span class="st">      fillcolor = 'red' </span></span>
+<span><span class="st">      style = filled</span></span>
+<span><span class="st">      fontcolor = 'white']</span></span>
+<span><span class="st">      1 [label = 'Enrollment ID | Organization | Hospital']</span></span>
+<span><span class="st">      2 [label = 'Enrollment ID | Individual']</span></span>
+<span><span class="st">      3 [label = 'NPI | Organization']</span></span>
+<span><span class="st">      4 [label = 'NPI | Individual']</span></span>
+<span><span class="st">      0 -&gt; {1 2} [arrowhead = none]</span></span>
+<span><span class="st">      1 -&gt; 3 [arrowhead = none]</span></span>
+<span><span class="st">      2 -&gt; 4 [arrowhead = none]</span></span>
+<span><span class="st">      }"</span>,</span>
+<span>      height <span class="op">=</span> <span class="fl">300</span>, width <span class="op">=</span> <span class="fl">450</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in grViz("\n      digraph {\n      graph [rankdir=LR]\n      node [shape = Mrecord]\n      0 [label = 'PAC ID | Organization' \n      color = 'white' \n      fillcolor = 'red' \n      style = filled\n      fontcolor = 'white']\n      1 [label = 'Enrollment ID | Organization | Hospital']\n      2 [label = 'Enrollment ID | Individual']\n      3 [label = 'NPI | Organization']\n      4 [label = 'NPI | Individual']\n      0 -&gt; {1 2} [arrowhead = none]\n      1 -&gt; 3 [arrowhead = none]\n      2 -&gt; 4 [arrowhead = none]\n      }", : could not find function "grViz"</span></span></code></pre>
+<p><br></p>
 <div class="section level2">
 <h2 id="individual-provider">Individual Provider<a class="anchor" aria-label="anchor" href="#individual-provider"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 10</span></span></span>
 <span><span class="co">#&gt;   npi        pac   enid  specialty_code specialty_description state first middle</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 7810… I200… 14-22          PRACTITIONER - PATHO… VT    MARK  K     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: last &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">rd</span> <span class="op">&lt;-</span> <span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">enroll_id</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in revalidation_date(enroll_id = p$enroll_id): could not find function "revalidation_date"</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">rv</span> <span class="op">&lt;-</span> <span class="fu">revalidation_reassign</span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in revalidation_reassign(pac_ind = p$pac): could not find function "revalidation_reassign"</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
+<span><span class="co">#&gt;   npi        pac    enid  first last  associations organization pac_org enid_org</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 78108… I200… MARK  FUNG             1 UNIVERSITY … 377949… O200608…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: state_org &lt;chr&gt;, reassignments &lt;int&gt;, record &lt;chr&gt;</span></span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
 <span><span class="co">#&gt;   npi        pac     enid  first middle last  gender credential school grad_year</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 781089… I200… MARK  K      FUNG  M      MD         UNIVE…      <span style="text-decoration: underline;">1</span>999</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: specialty &lt;chr&gt;, organization &lt;chr&gt;, pac_org &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: specialty &lt;chr&gt;, organization &lt;chr&gt;, pac_org &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   members_org &lt;int&gt;, address_org &lt;chr&gt;, city_org &lt;chr&gt;, state_org &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zip_org &lt;chr&gt;, phone_org &lt;chr&gt;, assign_ind &lt;chr&gt;, assign_org &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   zip_org &lt;chr&gt;, phone_org &lt;chr&gt;</span></span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
 <span><span class="co">#&gt;   npi        pac        first middle last  facility_type facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
@@ -156,53 +182,35 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      330084      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1043245657 7810891009 MARK  K      FUNG  Hospital      470001</span></span></code></pre>
 <p><br></p>
-<p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="va">p</span><span class="op">$</span><span class="va">pac</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 70 × 20</span></span></span>
-<span><span class="co">#&gt;    npi   pac_org enid_org enid_state facility_ccn organization doing_business_as</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1568… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">enid_org</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co">#filter(multi_npi | flag == TRUE)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">npi</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 33</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   enid_org [5]</span></span></span>
+<span><span class="co">#&gt;   npi    pac_org enid_org enid_state facility_ccn organization doing_business_as</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 15684… 377949… O200211… VT         470003       UNIVERSITY … UNIVERSITY OF VE…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 10332… 276939… O201201… NY         330250       CHAMPLAIN V… THE UNIVERSITY O…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 18917… 357755… O201011… NY         331302       ELIZABETHTO… <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 11149… 408252… O201011… NY         330084       ALICE HYDE … <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 15088… 933513… O200508… VT         470001       CENTRAL VER… <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 26 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;, structure &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">rd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">rv</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'rd' not found</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
-<span>  <span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in revalidation_date(enroll_id = "I20031120000251"): could not find function "revalidation_date"</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   registration &lt;chr&gt;, multi_npi &lt;lgl&gt;, reh_conversion &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   subgroup_general &lt;lgl&gt;, subgroup_acute_care &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   subgroup_alcohol_drug &lt;lgl&gt;, subgroup_childrens &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   subgroup_long_term &lt;lgl&gt;, subgroup_psychiatric &lt;lgl&gt;, …</span></span></span></code></pre>
+<p><br></p>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>
-<p><br></p>
-<p>Looking it up in the <strong>Provider Enrollment</strong> API gives
-us several avenues to go down:</p>
-<p><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span></span>
 <span><span class="co">#&gt;   npi        pac   enid  specialty_code specialty_description state organization</span></span>
@@ -211,12 +219,25 @@ us several avenues to go down:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1891785184 3577… O201… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1487923637 3577… O201… 12-59          PART B SUPPLIER - AM… NY    ELIZABETHTO…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1407061591 3577… O202… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">specialty</span>, <span class="va">proprietary_nonprofit</span><span class="op">:</span><span class="va">status</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `proprietary_nonprofit` doesn't exist.</span></span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 28 × 19</span></span></span>
+<span><span class="co">#&gt;    npi      pac_org enid_org enid_state facility_ccn organization specialty_code</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1891785… 357755… O201011… NY         331302       ELIZABETHTO… 00-85         </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more variables: specialty &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;, subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -225,7 +246,7 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 167 × 8</span></span></span>
 <span><span class="co">#&gt;    npi        pac        first   middle last   suffix facility_type facility_ccn</span></span>
@@ -244,7 +265,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
 <span><span class="co">#&gt;   npi        pac        first middle last  facility_type facility_ccn parent_ccn</span></span>

@@ -278,12 +278,12 @@ is an accompanying helper function to retrieve the years available, in
 the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 <code><a href="../reference/quality_payment.html">quality_payment()</a></code>’s is:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">quality_years</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in quality_years(): could not find function "quality_years"</span></span></code></pre></div>
 <p>These can also be used in a pipeline, for searching all available
 years:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 11</span></span></span>
 <span><span class="co">#&gt;    year npi        state  size clinician_specialty       years_in_medicare</span></span>
@@ -367,8 +367,10 @@ of benefits) is linked through the Enrollment ID.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
-<span><span class="fu">revalidation_date</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in revalidation_date(enid = "I123456789123456"): could not find function "revalidation_date"</span></span>
+<span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reassignments()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be <span style="font-style: italic;">15 characters long</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
 <span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>

@@ -158,7 +158,7 @@ by provider, service and geography.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> Year data was reported, in <code>YYYY</code>
-format. Run <code><a href="years.html">prac_years()</a></code> to return a vector of the years currently available.</p></dd>
+format. Run <code><a href="years.html">pop_years()</a></code> to return a vector of the years currently available.</p></dd>
 
 
 <dt>npi</dt>
@@ -352,7 +352,7 @@ and state-wide by HCPCS code and place of service.</p>
 <span class="r-in"><span><span class="fu">by_geography</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use the years helper function to retrieve results for every year:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="years.html">prac_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">prac_years</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">by_provider</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
