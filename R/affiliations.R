@@ -65,8 +65,8 @@ affiliations <- function(npi = NULL,
                          tidy = TRUE,
                          na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac))           {pac          <- pac_check(pac)}
+  if (!is.null(npi))           {npi          <- check_npi(npi)}
+  if (!is.null(pac))           {pac          <- check_pac(pac)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
 

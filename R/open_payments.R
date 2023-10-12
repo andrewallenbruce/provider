@@ -155,7 +155,7 @@ open_payments <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(open_years()))
 
-  if (!is.null(npi)) {npi  <- npi_check(npi)}
+  if (!is.null(npi)) {npi  <- check_npi(npi)}
   if (!is.null(zip)) {zip <- as.character(zip)}
 
   if (!is.null(covered_type)) {
@@ -401,5 +401,4 @@ cols_open <- function(df) {
             'pdi_5'                 = 'associated_device_or_medical_supply_pdi_5')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

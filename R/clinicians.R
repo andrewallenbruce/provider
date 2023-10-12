@@ -87,17 +87,13 @@ clinicians <- function(npi = NULL,
                        tidy = TRUE,
                        na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi        <- npi_check(npi)}
-  if (!is.null(pac))           {pac        <- pac_check(pac)}
-  if (!is.null(pac_org))       {pac_org    <- pac_check(pac_org)}
+  if (!is.null(npi))           {npi        <- check_npi(npi)}
+  if (!is.null(pac))           {pac        <- check_pac(pac)}
+  if (!is.null(pac_org))       {pac_org    <- check_pac(pac_org)}
+  if (!is.null(enid))          {check_enid(enid)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
   if (!is.null(zip))           {zip        <- as.character(zip)}
   if (!is.null(gender))        {rlang::arg_match(gender, c("F", "M"))}
-
-  if (!is.null(enid)) {
-    enroll_check(enid)
-    enroll_ind_check(enid)
-    }
 
   args <- dplyr::tribble(
     ~param,               ~arg,
@@ -151,7 +147,8 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = c("telehlth"),
+    results <- tidyup(results,
+                      yn = c("telehlth"),
                       int = c("num_org_mem", "grd_yr")) |>
       address(c("adr_ln_1", "adr_ln_2")) |>
       cols_clin()
@@ -193,5 +190,4 @@ cols_clin <- function(df) {
             # 'assign_org' = 'grp_assgn'
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

@@ -53,8 +53,8 @@ revalidation_date <- function(npi = NULL,
                               tidy = TRUE,
                               na.rm = TRUE) {
 
-  if (!is.null(npi))    {npi <- npi_check(npi)}
-  if (!is.null(enid))   {enroll_check(enid)}
+  if (!is.null(npi))    {npi <- check_npi(npi)}
+  if (!is.null(enid))   {check_enid(enid)}
 
   if (!is.null(enrollment_type)) {
     enrollment_type <- as.character(enrollment_type)
@@ -199,10 +199,10 @@ revalidation_group <- function(npi             = NULL,
                                record_type     = NULL,
                                tidy            = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
-  if (!is.null(enroll_id_group)) {enroll_check(enroll_id_group)}
-  if (!is.null(pac_id_group)) {pac_check(pac_id_group)}
+  if (!is.null(npi)) {check_npi(npi)}
+  if (!is.null(enroll_id)) {check_enid(enroll_id)}
+  if (!is.null(enroll_id_group)) {check_enid(enroll_id_group)}
+  if (!is.null(pac_id_group)) {check_pac(pac_id_group)}
 
   args <- dplyr::tribble(
     ~param,                             ~arg,
@@ -320,8 +320,8 @@ asc_ifed_enrollment <- function(npi            = NULL,
                                 zip            = NULL,
                                 tidy           = TRUE) {
 
-  if (!is.null(npi))       {npi <- npi_check(npi)}
-  if (!is.null(enroll_id)) {enroll_id <- enroll_check(enroll_id)}
+  if (!is.null(npi))       {npi <- check_npi(npi)}
+  if (!is.null(enroll_id)) {enroll_id <- check_enid(enroll_id)}
 
   args <- dplyr::tribble(
     ~param,                  ~arg,
@@ -449,7 +449,7 @@ missing_endpoints <- function(npi  = NULL,
                               name = NULL,
                               tidy = TRUE) {
 
-  if (!is.null(npi))  {npi <- npi_check(npi)}
+  if (!is.null(npi))  {npi <- check_npi(npi)}
   if (!is.null(name)) {name <- stringr::str_replace(name, " ", "")}
 
   args <- dplyr::tribble(

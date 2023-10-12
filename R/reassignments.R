@@ -49,15 +49,15 @@ reassignments <- function(npi = NULL,
                           tidy = TRUE,
                           na.rm = TRUE) {
 
-  if (!is.null(npi))      {npi <- npi_check(npi)}
-  if (!is.null(pac))      {pac <- pac_check(pac)}
-  if (!is.null(pac_org))  {pac_org <- pac_check(pac_org)}
-  if (!is.null(enid))     {enroll_check(enid)}
-  if (!is.null(enid_org)) {enroll_check(enid_org)}
+  if (!is.null(npi))      {npi <- check_npi(npi)}
+  if (!is.null(pac))      {pac <- check_pac(pac)}
+  if (!is.null(pac_org))  {pac_org <- check_pac(pac_org)}
+  if (!is.null(enid))     {check_enid(enid)}
+  if (!is.null(enid_org)) {check_enid(enid_org)}
 
   if (!is.null(record)) {
     rlang::arg_match(record, c("E", "R"))
-    dplyr::case_match(record,
+    record <- dplyr::case_match(record,
                       "E" ~ "Physician Assistant",
                       "R" ~ "Reassignment")}
 
@@ -111,8 +111,7 @@ reassignments <- function(npi = NULL,
                     dplyr::across(dplyr::contains("name"), toupper)) |>
       cols_reas()
 
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))}
+    if (na.rm) {results <- narm(results)}
     }
   return(results)
 }

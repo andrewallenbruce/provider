@@ -70,7 +70,7 @@ order_refer <- function(npi   = NULL,
                         tidy  = TRUE,
                         pivot = TRUE) {
 
-  if (!is.null(npi))   {npi   <- npi_check(npi)}
+  if (!is.null(npi))   {npi   <- check_npi(npi)}
   if (!is.null(partb)) {partb <- tf_2_yn(partb)}
   if (!is.null(dme))   {dme   <- tf_2_yn(dme)}
   if (!is.null(hha))   {hha   <- tf_2_yn(hha)}

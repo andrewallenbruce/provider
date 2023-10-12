@@ -2,66 +2,72 @@
 #'
 #' @description checks validity of NPI input against CMS requirements.
 #'
-#' ## Links
-#'  * [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
-#'  * [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
+#' @section National Provider Identifier (NPI):
+#' + [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+#' + [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
 #'
-#' @param npi 10-digit National Provider Identifier (NPI).
-#' @return boolean, `TRUE` or `FALSE`
+#' @param x 10-digit National Provider Identifier (NPI)
+#' @return character vector
 #' @examplesIf interactive()
 #' # Valid:
-#' npi_check(1528060837)
-#' npi_check("1528060837")
+#' check_npi(1528060837)
+#' check_npi("1528060837")
 #'
 #' # Invalid:
-#' npi_check(1234567891)
-#' npi_check(123456789)
-#' npi_check("152806O837")
+#' check_npi(1234567891)
+#' check_npi(123456789)
+#' check_npi("152806O837")
 #' @autoglobal
 #' @noRd
-npi_check <- function(npi,
-                      arg = rlang::caller_arg(npi),
+check_npi <- function(x,
+                      arg = rlang::caller_arg(x),
                       call = rlang::caller_env()) {
 
-  # Return FALSE if not a number
-  if (grepl("^[[:digit:]]+$", npi) == FALSE) {
+  #------------------------------------------Must be numeric
+  if (grepl("^[[:digit:]]+$", x) == FALSE) {
     cli::cli_abort(c(
       "An {.strong NPI} must be {.emph numeric}.",
-      "x" = "{.val {npi}} contains {.emph non-numeric} characters."), call = call)
+      "x" = "{.val {x}} contains {.emph non-numeric} characters."),
+      call = call)
   }
 
-  # Must be 10 char length
-  if (nchar(npi) != 10L) {
+  #------------------------------------------Must be 10 char length
+  if (nchar(x) != 10L) {
     cli::cli_abort(c(
       "An {.strong NPI} must be {.emph 10 digits long}.",
-      "x" = "{.val {npi}} contains {.val {nchar(npi)}} digit{?s}."), call = call)
+      "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."),
+      call = call)
   }
 
-  # Strip whitespace
-  npi_luhn <- gsub(pattern = " ", replacement = "", npi)
+  #------------------------------------------Must pass Luhn algorithm
+  # 1. Strip whitespace and convert to character vector
+  luhn <- gsub(pattern = " ", replacement = "", x)
 
-  # Paste 80840 to each NPI number, per CMS documentation
-  npi_luhn <- paste0("80840", npi_luhn)
+  # 2. Paste 80840 to each NPI number, per CMS documentation
+  luhn <- paste0("80840", luhn)
 
-  # Split string, Convert to list and reverse
-  npi_luhn <- unlist(strsplit(npi_luhn, ""))
-  npi_luhn <- npi_luhn[length(npi_luhn):1]
-  to_replace <- seq(2, length(npi_luhn), 2)
-  npi_luhn[to_replace] <- as.numeric(npi_luhn[to_replace]) * 2
+  # 3. Split and unlist string
+  luhn <- unlist(strsplit(luhn, ""))
+
+  # 4. Reverse order
+  luhn <- luhn[length(luhn):1]
+  replace <- seq(2, length(luhn), 2)
+  luhn[replace] <- as.numeric(luhn[replace]) * 2
 
   # Convert to numeric
-  npi_luhn <- as.numeric(npi_luhn)
+  luhn <- as.numeric(luhn)
 
   # Must be a single digit, any that are > 9, subtract 9
-  npi_luhn <- ifelse(npi_luhn > 9, npi_luhn - 9, npi_luhn)
+  luhn <- ifelse(luhn > 9, luhn - 9, luhn)
 
   # Check if the sum divides by 10
-  if ((sum(npi_luhn) %% 10) != 0) {
+  if ((sum(luhn) %% 10) != 0) {
     cli::cli_abort(c(
       "An {.strong NPI} must pass {.emph Luhn algorithm}.",
-      "x" = "{.val {npi}} {.emph fails} Luhn check."), call = call)
+      "x" = "{.val {x}} {.emph fails} Luhn check."),
+      call = call)
   }
-  return(as.character(npi))
+  return(as.character(x))
 }
 
 #' PAC ID Validation Check
@@ -89,24 +95,24 @@ npi_check <- function(npi,
 #' pac_check("152806O837")
 #' @autoglobal
 #' @noRd
-pac_check <- function(pac_id,
-                      arg = rlang::caller_arg(pac_id),
+check_pac <- function(x,
+                      arg = rlang::caller_arg(x),
                       call = rlang::caller_env()) {
 
   # Return FALSE if not a number
-  if (grepl("^[[:digit:]]+$", pac_id) == FALSE) {
+  if (grepl("^[[:digit:]]+$", x) == FALSE) {
     cli::cli_abort(c(
       "A {.strong PAC ID} must be {.emph numeric}.",
-      "x" = "{.val {pac_id}} contains {.emph non-numeric} characters."), call = call)
+      "x" = "{.val {x}} contains {.emph non-numeric} characters."), call = call)
   }
 
   # Must be 10 char length
-  if (nchar(pac_id) != 10L) {
+  if (nchar(x) != 10L) {
     cli::cli_abort(c(
       "A {.strong PAC ID} must be {.emph 10 digits long}.",
-      "x" = "{.val {pac_id}} contains {.val {nchar(pac_id)}} digit{?s}."), call = call)
+      "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."), call = call)
   }
-  return(as.character(pac_id))
+  return(as.character(x))
 }
 
 #' Enrollment ID Validation Check
@@ -124,40 +130,48 @@ pac_check <- function(pac_id,
 #' @return boolean, `TRUE` or `FALSE`
 #' @examplesIf interactive()
 #' # Valid:
-#' enroll_check(1528060837)
-#' enroll_check("1528060837")
+#' enid_check(1528060837)
+#' enid_check("1528060837")
 #'
 #' # Invalid:
-#' enroll_check(1234567891)
-#' enroll_check(123456789)
-#' enroll_check("152806O837")
+#' enid_check(0123456789123456)
+#' enid_check("0123456789123456")
+#' enid_check("I123456789123456")
+#' enid_check("152806O837")
 #' @autoglobal
 #' @noRd
-enroll_check <- function(enroll_id,
-                         arg = rlang::caller_arg(enroll_id),
-                         call = rlang::caller_env()) {
+check_enid <- function(x,
+                       arg = rlang::caller_arg(x),
+                       call = rlang::caller_env()) {
 
-  # Abort if numeric
-  if (is.numeric(enroll_id) == TRUE) {
+  # Abort if not character vector
+  if (is.character(x) != TRUE) {
     cli::cli_abort(c(
       "An {.strong Enrollment ID} must be a {.cls character} vector.",
-      "x" = "{.val {enroll_id}} is a {.cls {class(enroll_id)}} vector."), call = call)
+      "x" = "{.val {x}} is a {.cls {class(x)}} vector."), call = call)
+  }
+
+  # Return TRUE if not a number
+  if (grepl("^[[:digit:]]+$", x) == TRUE) {
+    cli::cli_abort(c(
+      "An {.strong Enrollment ID} must be {.emph numeric}.",
+      "x" = "{.val {x}} contains {.emph non-numeric} characters."), call = call)
   }
 
   # Must be 15 char length
-  if (nchar(enroll_id) != 15L) {
+  if (nchar(x) != 15L) {
     cli::cli_abort(c(
       "An {.strong Enrollment ID} must be {.emph 15 characters long}.",
-      "x" = "{.val {enroll_id}} contains {.val {nchar(enroll_id)}} character{?s}."), call = call)
+      "x" = "{.val {x}} contains {.val {nchar(x)}} character{?s}."), call = call)
   }
 
-  first <- unlist(strsplit(enroll_id, ""))[1]
+  first <- unlist(strsplit(x, ""))[1]
 
   if ((first %in% c("I", "O")) != TRUE) {
 
     cli::cli_abort(c(
       "An {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
-      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
+      "x" = "{.val {x}} begins with {.val {first}}."), call = call)
 
   }
 }

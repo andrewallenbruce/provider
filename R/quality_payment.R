@@ -48,7 +48,7 @@ quality_payment <- function(year,
                             participation_type = NULL,
                             tidy               = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi)) {check_npi(npi)}
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -211,7 +211,7 @@ quality_eligibility <- function(year,
                                 npi = NULL,
                                 tidy = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi)) {check_npi(npi)}
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -360,8 +360,8 @@ mips_2021 <- function(facility_name = NULL,
 
     id <- mips_2021_id("ind")
 
-    if (!is.null(npi)) {npi <- npi_check(npi)}
-    if (!is.null(pac_id_ind)) {pac_id_ind <- pac_check(pac_id_ind)}
+    if (!is.null(npi)) {npi <- check_npi(npi)}
+    if (!is.null(pac_id_ind)) {pac_id_ind <- check_pac(pac_id_ind)}
 
   }
 
@@ -373,7 +373,7 @@ mips_2021 <- function(facility_name = NULL,
 
     id <- mips_2021_id("group")
 
-    if (!is.null(pac_id_org)) {pac_id_org <- pac_check(pac_id_org)}
+    if (!is.null(pac_id_org)) {pac_id_org <- check_pac(pac_id_org)}
   }
 
   args <- dplyr::tribble(

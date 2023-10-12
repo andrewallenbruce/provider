@@ -236,7 +236,7 @@ by_provider <- function(year,
   year <- as.character(year)
   year <- rlang::arg_match(year, as.character(pop_years()))
 
-  if (!is.null(npi))  {npi  <- npi_check(npi)}
+  if (!is.null(npi))  {npi  <- check_npi(npi)}
   if (!is.null(zip))  {zip  <- as.character(zip)}
   if (!is.null(fips)) {fips <- as.character(fips)}
   if (!is.null(ruca)) {ruca <- as.character(ruca)}
@@ -467,7 +467,7 @@ by_service <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(pop_years()))
 
-  if (!is.null(npi))        {npi        <- npi_check(npi)}
+  if (!is.null(npi))        {npi        <- check_npi(npi)}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
   if (!is.null(pos))        {pos        <- pos_char(pos)}
   if (!is.null(zip))        {zip        <- as.character(zip)}

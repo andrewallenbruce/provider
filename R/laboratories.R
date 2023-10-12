@@ -105,8 +105,11 @@ laboratories <- function(name = NULL,
   }
 
   if (!is.null(zip)) {zip <- as.character(zip)}
-  if (isTRUE(active)) {active <- "00"}
-  if (!isTRUE(active)) {active <- NULL}
+  if (isTRUE(active)) {
+    active <- "00"
+    } else {
+      active <- NULL
+      }
 
   args <- dplyr::tribble(
     ~param,          ~arg,
@@ -118,7 +121,8 @@ laboratories <- function(name = NULL,
     "ZIP_CD",         zip,
     "PGM_TRMNTN_CD",  active)
 
-  response <- httr2::request(build_url("lab", args)) |> httr2::req_perform()
+  response <- httr2::request(build_url("lab", args)) |>
+    httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 

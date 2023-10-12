@@ -34,7 +34,7 @@ pending <- function(type,
                     tidy = TRUE) {
 
   type <- rlang::arg_match(type, c("P", "N"))
-  if (!is.null(npi)) {npi <- npi_check(npi)}
+  if (!is.null(npi)) {npi <- check_npi(npi)}
 
   args <- dplyr::tribble(
     ~param,       ~arg,

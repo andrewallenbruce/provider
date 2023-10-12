@@ -134,12 +134,12 @@ hospitals <- function(npi = NULL,
                       pivot = TRUE,
                       na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac_org))       {pac_org      <- pac_check(pac_org)}
+  if (!is.null(npi))           {npi          <- check_npi(npi)}
+  if (!is.null(pac_org))       {pac_org      <- check_pac(pac_org)}
   if (!is.null(zip))           {zip          <- as.character(zip)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(enid_org)) {
-    enroll_check(enid_org)
+    check_enid(enid_org)
     enroll_org_check(enid_org)
   }
 
@@ -191,7 +191,8 @@ hospitals <- function(npi = NULL,
     "SUBGROUP %2D OTHER",               other,
     "REH CONVERSION FLAG",              reh)
 
-  response <- httr2::request(build_url("hos", args)) |> httr2::req_perform()
+  response <- httr2::request(build_url("hos", args)) |>
+    httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 

@@ -107,7 +107,6 @@ cols_cross <- function(df) {
             'taxonomy_description'  = 'provider_taxonomy_description_type_classification_specialization')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }
 
 #' Download Current NUCC Taxonomy CSV

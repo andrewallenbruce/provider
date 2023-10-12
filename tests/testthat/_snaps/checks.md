@@ -1,7 +1,7 @@
-# npi_check() works
+# check_npi() works
 
     Code
-      npi_check(1234567891)
+      check_npi(1234567891)
     Condition
       Error:
       ! An NPI must pass Luhn algorithm.
@@ -10,7 +10,7 @@
 ---
 
     Code
-      npi_check(12345691234)
+      check_npi(12345691234)
     Condition
       Error:
       ! An NPI must be 10 digits long.
@@ -19,16 +19,16 @@
 ---
 
     Code
-      npi_check("O12345678912")
+      check_npi("O12345678912")
     Condition
       Error:
       ! An NPI must be numeric.
       x "O12345678912" contains non-numeric characters.
 
-# pac_check() works
+# check_pac() works
 
     Code
-      pac_check(123456789)
+      check_pac(123456789)
     Condition
       Error:
       ! A PAC ID must be 10 digits long.
@@ -37,16 +37,16 @@
 ---
 
     Code
-      pac_check("O12345678912")
+      check_pac("O12345678912")
     Condition
       Error:
       ! A PAC ID must be numeric.
       x "O12345678912" contains non-numeric characters.
 
-# enroll_check() works
+# check_enid() works
 
     Code
-      enroll_check(123456789123456)
+      check_enid(123456789123456)
     Condition
       Error:
       ! An Enrollment ID must be a <character> vector.
@@ -55,7 +55,7 @@
 ---
 
     Code
-      enroll_check("I123456789123456")
+      check_enid("I123456789123456")
     Condition
       Error:
       ! An Enrollment ID must be 15 characters long.
@@ -64,27 +64,18 @@
 ---
 
     Code
-      enroll_check("012345678912345")
+      check_enid("012345678912345")
+    Condition
+      Error:
+      ! An Enrollment ID must be numeric.
+      x "012345678912345" contains non-numeric characters.
+
+---
+
+    Code
+      check_enid("L20031110000070")
     Condition
       Error:
       ! An Enrollment ID must begin with a capital `I` or `O`.
-      x "012345678912345" begins with "0".
-
-# enroll_org_check() works
-
-    Code
-      enroll_org_check("I20031110000070")
-    Condition
-      Error:
-      ! An org/group Enrollment ID must begin with a capital `O`.
-      x "I20031110000070" begins with "I".
-
-# enroll_ind_check() works
-
-    Code
-      enroll_ind_check("O20031110000070")
-    Condition
-      Error:
-      ! An individual Enrollment ID must begin with a capital `I`.
-      x "O20031110000070" begins with "O".
+      x "L20031110000070" begins with "L".
 

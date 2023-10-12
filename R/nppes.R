@@ -127,7 +127,7 @@ nppes <- function(npi = NULL,
                   tidy = TRUE,
                   na.rm = TRUE) {
 
-  if (!is.null(npi))       {npi <- npi_check(npi)}
+  if (!is.null(npi))       {npi <- check_npi(npi)}
   if (!is.null(name_type)) {rlang::arg_match(name_type, c("AO", "Provider"))}
   if (!is.null(zip))       {zip <- as.character(zip)}
 
@@ -178,11 +178,7 @@ nppes <- function(npi = NULL,
 
   if (unnest) {
     results <- tidyr::unnest(results, c(basic, addresses)) |>
-      tidyr::unite("address",
-                   dplyr::any_of(c("address_1", "address_2")),
-                   remove = TRUE,
-                   na.rm = TRUE,
-                   sep = " ") |>
+      address(c("address_1", "address_2")) |>
       cols_nppes() |>
       dplyr::filter(purpose != "MAILING")
 
@@ -203,9 +199,7 @@ nppes <- function(npi = NULL,
                       purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
         cols_nppes2()
 
-      if (na.rm) {
-        results <- janitor::remove_empty(results, which = c("rows", "cols"))
-      }
+      if (na.rm) {results <- narm(results)}
     }
   }
   return(results)
@@ -359,5 +353,4 @@ cols_nppes2 <- function(df) {
             'on_organization_name')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }
