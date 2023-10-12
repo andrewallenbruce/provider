@@ -152,5 +152,4 @@ cols_aff <- function(df) {
             "parent_ccn"   = "facility_type_certification_number")
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

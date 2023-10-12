@@ -185,9 +185,9 @@ Links:
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 open_payments(year = 2021, npi = 1043218118)
-open_payments(pay_nature = "Royalty or License")
-open_payments(pay_form = "Stock option")
-open_payments(payer = "Adaptive Biotechnologies Corporation")
-open_payments(teaching_hospital = "Nyu Langone Hospitals")
+open_payments(year = 2021, pay_nature = "Royalty or License")
+open_payments(year = 2021, pay_form = "Stock option")
+open_payments(year = 2021, payer = "Adaptive Biotechnologies Corporation")
+open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
 \dontshow{\}) # examplesIf}
 }

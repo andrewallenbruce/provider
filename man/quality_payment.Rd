@@ -12,7 +12,9 @@ quality_payment(
   state = NULL,
   specialty = NULL,
   participation_type = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  nest = TRUE,
+  na.rm = TRUE
 )
 
 quality_eligibility(year, npi = NULL, tidy = TRUE)
@@ -37,6 +39,10 @@ clinician. This information drives the data displayed for most of the
 remaining fields in this report.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest output}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -18,9 +18,8 @@
 #'
 #' @section Update Frequency: **Annually**
 #'
-#' @param year integer, YYYY, QPP Performance year. Run the helper function
-#'    [qpp_years()] to return a vector of currently
-#'    available years.
+#' @param year < *integer* > // **required** QPP performance year, in `YYYY`format.
+#' Run [qpp_years()] to return a vector of the years currently available.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
 #' @param state The State or US territory code location of the
@@ -32,7 +31,9 @@
 #'    collected, submitted or reported for the final score attributed to the
 #'    clinician. This information drives the data displayed for most of the
 #'    remaining fields in this report.
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -42,11 +43,13 @@
 #' @autoglobal
 #' @export
 quality_payment <- function(year,
-                            npi                = NULL,
-                            state              = NULL,
-                            specialty          = NULL,
+                            npi = NULL,
+                            state = NULL,
+                            specialty = NULL,
                             participation_type = NULL,
-                            tidy               = TRUE) {
+                            tidy = TRUE,
+                            nest = TRUE,
+                            na.rm = TRUE) {
 
   if (!is.null(npi)) {check_npi(npi)}
 
@@ -82,7 +85,6 @@ quality_payment <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
 
   }
@@ -90,83 +92,105 @@ quality_payment <- function(year,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::any_of(c("practice_size",
-                                                  "years_in_medicare",
-                                                  "medicare_patients",
-                                                  "services")), as.integer),
-                    dplyr::across(dplyr::any_of(c("allowed_charges",
-                                                  "payment_adjustment_percentage",
-                                                  dplyr::contains("_score"),
-                                                  "complex_patient_bonus",
-                                                  "quality_improvement_bonus")), as.double),
-                    dplyr::across(dplyr::any_of(c("engaged",
-                                                  "opted_into_mips",
-                                                  "small_practitioner",
-                                                  "rural_clinician",
-                                                  "hpsa_clinician",
-                                                  "ambulatory_surgical_center",
-                                                  "hospital_based_clinician",
-                                                  "non_patient_facing",
-                                                  "facility_based",
-                                                  "extreme_hardship",
-                                                  "extreme_hardship_quality",
-                                                  "quality_bonus",
-                                                  "extreme_hardship_pi",
-                                                  "pi_hardship",
-                                                  "pi_reweighting",
-                                                  "pi_bonus",
-                                                  "extreme_hardship_ia",
-                                                  "ia_study",
-                                                  "extreme_hardship_cost")), yn_logical)) |>
-      dplyr::select(year,
-                    npi,
-                    state                        = practice_state_or_us_territory,
-                    size                         = practice_size,
-                    clinician_specialty,
-                    years_in_medicare,
-                    participation_type,
-                    beneficiaries                = medicare_patients,
-                    services,
-                    allowed_charges,
-                    final_score,
-                    payment_adjustment           = payment_adjustment_percentage,
-                    quality_score                = quality_category_score,
-                    pi_score                     = promoting_interoperability_pi_category_score,
-                    ia_score,
-                    cost_score,
-                    complex_patient_bonus,
-                    quality_improvement_bonus,
-                    ind_quality_bonus            = quality_bonus,
-                    ind_engaged                  = engaged,
-                    ind_opted_into_mips          = opted_into_mips,
-                    ind_small_practitioner       = small_practitioner,
-                    ind_rural                    = rural_clinician,
-                    ind_hpsa                     = hpsa_clinician,
-                    ind_asc                      = ambulatory_surgical_center,
-                    ind_hospital_based           = hospital_based_clinician,
-                    ind_non_patient_facing       = non_patient_facing,
-                    ind_facility_based           = facility_based,
-                    ind_extreme_hardship         = extreme_hardship,
-                    ind_extreme_hardship_quality = extreme_hardship_quality,
-                    ind_extreme_hardship_pi      = extreme_hardship_pi,
-                    ind_pi_hardship              = pi_hardship,
-                    ind_pi_reweighting           = pi_reweighting,
-                    ind_pi_bonus                 = pi_bonus,
-                    ind_pi_cehrt_id              = pi_cehrt_id,
-                    ind_extreme_hardship_ia      = extreme_hardship_ia,
-                    ind_ia_study                 = ia_study,
-                    ind_extreme_hardship_cost    = extreme_hardship_cost,
-                    dplyr::contains("quality_measure_"),
-                    dplyr::contains("pi_measure_"),
-                    dplyr::contains("ia_measure_"),
-                    dplyr::contains("cost_measure_"),
-                    dplyr::everything()) |>
-      tidyr::nest(special_statuses = dplyr::contains("ind_"),
-                  measures = dplyr::contains("measure_"))
+    results <- tidyup(results,
+                      int = c("practice_size",
+                              "years_in_medicare",
+                              "medicare_patients",
+                              "services"),
+                      dbl = c("allowed_charges",
+                              "payment_adjustment_percentage",
+                              "final_score",
+                              "quality_category_score",
+                              "promoting_interoperability_pi_category_score",
+                              "ia_score",
+                              "cost_score",
+                              "complex_patient_bonus",
+                              "quality_improvement_bonus"),
+                      yn = c("engaged",
+                             "opted_into_mips",
+                             "small_practitioner",
+                             "rural_clinician",
+                             "hpsa_clinician",
+                             "ambulatory_surgical_center",
+                             "hospital_based_clinician",
+                             "non_patient_facing",
+                             "facility_based",
+                             "extreme_hardship",
+                             "extreme_hardship_quality",
+                             "quality_bonus",
+                             "extreme_hardship_pi",
+                             "pi_hardship",
+                             "pi_reweighting",
+                             "pi_bonus",
+                             "extreme_hardship_ia",
+                             "ia_study",
+                             "extreme_hardship_cost")) |>
+      dplyr::mutate(year = as.integer(year)) |>
+      cols_qpp()
+
+      if (nest) {
+        results <- tidyr::nest(results,
+                               special_statuses = dplyr::contains("ind_"),
+                               measures = dplyr::contains("measure_"))
+      }
+      if (na.rm) {results <- narm(results)}
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_qpp <- function(df) {
+
+  cols <- c('year',
+            'npi',
+            'state' = 'practice_state_or_us_territory',
+            'practice_size',
+            'clinician_specialty',
+            'years_in_medicare',
+            'participation_type',
+            'beneficiaries' = 'medicare_patients',
+            'services',
+            'allowed_charges',
+            'final_score',
+            'payment_adjustment' = 'payment_adjustment_percentage',
+            'quality_score' = 'quality_category_score',
+            'pi_score' = 'promoting_interoperability_pi_category_score',
+            'ia_score',
+            'cost_score',
+            'complex_patient_bonus',
+            'quality_improvement_bonus',
+            'ind_quality_bonus' = 'quality_bonus',
+            'ind_engaged' = 'engaged',
+            'ind_opted_into_mips' = 'opted_into_mips',
+            'ind_small_practitioner' = 'small_practitioner',
+            'ind_rural' = 'rural_clinician',
+            'ind_hpsa' = 'hpsa_clinician',
+            'ind_asc' = 'ambulatory_surgical_center',
+            'ind_hospital_based' = 'hospital_based_clinician',
+            'ind_non_patient_facing' = 'non_patient_facing',
+            'ind_facility_based' = 'facility_based',
+            'ind_extreme_hardship' = 'extreme_hardship',
+            'ind_extreme_hardship_quality' = 'extreme_hardship_quality',
+            'ind_extreme_hardship_pi' = 'extreme_hardship_pi',
+            'ind_pi_hardship' = 'pi_hardship',
+            'ind_pi_reweighting' = 'pi_reweighting',
+            'ind_pi_bonus' = 'pi_bonus',
+            'ind_pi_cehrt_id' = 'pi_cehrt_id',
+            'ind_extreme_hardship_ia' = 'extreme_hardship_ia',
+            'ind_ia_study' = 'ia_study',
+            'ind_extreme_hardship_cost' = 'extreme_hardship_cost',
+            paste0('quality_measure_id_', 1:10),
+            paste0('quality_measure_score_', 1:10),
+            paste0('pi_measure_id_', 1:11),
+            paste0('pi_measure_score_', 1:11),
+            paste0('ia_measure_id_', 1:4),
+            paste0('ia_measure_score_', 1:4),
+            paste0('cost_measure_id_', 1:2),
+            paste0('cost_measure_score_', 1:2))
+
+  df |> dplyr::select(dplyr::any_of(cols))
 }
 
 #' Quality Payment Program Eligibility

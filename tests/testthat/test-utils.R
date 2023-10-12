@@ -28,6 +28,26 @@ test_that("tf_2_yn() works", {
   expect_equal(tf_2_yn(x), y)
 })
 
+test_that("pos_char() works", {
+  x <- c("facility", "Facility", "F", "f", "office", "Office", "O", "o")
+  y <- c("F", "F", "F", "F", "O", "O", "O", "O")
+  expect_equal(pos_char(x), y)
+})
+
+test_that("display_long() works", {
+
+  df <- dplyr::tribble(
+    ~x,      ~y,
+    "NPI",   "1144544834")
+
+  lng <- dplyr::tribble(
+    ~name,  ~value,
+    "x",    "NPI",
+    "y",    "1144544834")
+
+  expect_equal(display_long(df), lng)
+})
+
 test_that("encode_param() works", {
   args <- dplyr::tribble(
     ~param,      ~arg,

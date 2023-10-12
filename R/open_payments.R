@@ -128,10 +128,10 @@
 #'
 #' @examplesIf interactive()
 #' open_payments(year = 2021, npi = 1043218118)
-#' open_payments(pay_nature = "Royalty or License")
-#' open_payments(pay_form = "Stock option")
-#' open_payments(payer = "Adaptive Biotechnologies Corporation")
-#' open_payments(teaching_hospital = "Nyu Langone Hospitals")
+#' open_payments(year = 2021, pay_nature = "Royalty or License")
+#' open_payments(year = 2021, pay_form = "Stock option")
+#' open_payments(year = 2021, payer = "Adaptive Biotechnologies Corporation")
+#' open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
 #' @autoglobal
 #' @export
 open_payments <- function(year,
@@ -216,7 +216,6 @@ open_payments <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
@@ -225,25 +224,12 @@ open_payments <- function(year,
       dplyr::mutate(program_year = as.integer(program_year),
                     change_type = changed_logical(change_type),
                     covered_recipient_type = covered_recipient(covered_recipient_type),
-                    nature_of_payment_or_transfer_of_value = dplyr::case_match(nature_of_payment_or_transfer_of_value,
-                                                   "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation (Other)",
-                                                   .default = nature_of_payment_or_transfer_of_value)) |>
+                    nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>
       address(c("recipient_primary_business_street_address_line1",
                 "recipient_primary_business_street_address_line2")) |>
-      combine("primary_other", c("covered_recipient_primary_type_2",
-                                 "covered_recipient_primary_type_3",
-                                 "covered_recipient_primary_type_4",
-                                 "covered_recipient_primary_type_5",
-                                 "covered_recipient_primary_type_6")) |>
-      combine("specialty_other", c("covered_recipient_specialty_2",
-                                   "covered_recipient_specialty_3",
-                                   "covered_recipient_specialty_4",
-                                   "covered_recipient_specialty_5",
-                                   "covered_recipient_specialty_6")) |>
-      combine("license_state_other", c("covered_recipient_license_state_code2",
-                                       "covered_recipient_license_state_code3",
-                                       "covered_recipient_license_state_code4",
-                                       "covered_recipient_license_state_code5")) |>
+      combine("primary_other", c(paste0("covered_recipient_primary_type_", 2:6))) |>
+      combine("specialty_other", c(paste0("covered_recipient_specialty_", 2:6))) |>
+      combine("license_state_other", c(paste0("covered_recipient_license_state_code_", 2:6))) |>
       cols_open()
 
     if (pivot) {
@@ -306,7 +292,7 @@ open_payments_error <- function(response) {
 changed_logical <- function(x){
   dplyr::case_match(x, "CHANGED" ~ TRUE,
                        "UNCHANGED" ~ FALSE,
-                       .default = x)
+                       .default = NA)
 }
 
 #' @param x vector
@@ -318,6 +304,16 @@ covered_recipient <- function(x){
         "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician",
         "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
         .default = x)
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+nature <- function(x){
+  dplyr::case_match(
+    x,
+    "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation Other Than Consulting",
+    .default = x)
 }
 
 #' @param df data frame
