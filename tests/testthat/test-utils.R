@@ -49,18 +49,27 @@ test_that("display_long() works", {
 })
 
 test_that("tidyup() works", {
+  df <- dplyr::tibble(
+    name = "John Doe ",
+    date = "1981/03/07",
+    int = "123456789",
+    dbl = "12.34",
+    yn = "Y",
+    blank = "",
+    space = " ",
+    star = "*",
+    dash = "--")
 
-  df <- dplyr::tribble(
-    ~name,      ~date,         ~int,      ~dbl,      ~yn,
-    "John Doe ", "1981/03/07",  "123456789", "12.34", "Y")
-
-  tidy <- dplyr::tribble(
-    ~name, ~date, ~int, ~dbl, ~yn,
-    "JOHN DOE",
-    anytime::anydate("1981/03/07"),
-    as.integer("123456789"),
-    as.double("12.34"),
-    TRUE)
+  tidy <- dplyr::tibble(
+    name = "JOHN DOE",
+    date = anytime::anydate("1981/03/07"),
+    int = 123456789,
+    dbl = 12.34,
+    yn = TRUE,
+    blank = NA_character_,
+    space = NA_character_,
+    star = NA_character_,
+    dash = NA_character_)
 
   expect_equal(tidyup(df,
                       yn = "yn",
@@ -70,16 +79,15 @@ test_that("tidyup() works", {
 })
 
 test_that("address() works", {
+  df <- dplyr::tibble(
+    x = "1234 Address Lane",
+    y = "STE 123",
+    z = NA)
 
-  df <- dplyr::tribble(
-    ~x,      ~y,
-    "1234 Address Lane", "STE 123")
+  add <- dplyr::tibble(
+    address = "1234 Address Lane STE 123")
 
-  add <- dplyr::tribble(
-    ~address,
-    "1234 Address Lane STE 123")
-
-  expect_equal(address(df, c("x", "y")), add)
+  expect_equal(address(df, c("x", "y", "z")), add)
 })
 
 test_that("encode_param() works", {
