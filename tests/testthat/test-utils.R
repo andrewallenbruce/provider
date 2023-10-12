@@ -48,6 +48,40 @@ test_that("display_long() works", {
   expect_equal(display_long(df), lng)
 })
 
+test_that("tidyup() works", {
+
+  df <- dplyr::tribble(
+    ~name,      ~date,         ~int,      ~dbl,      ~yn,
+    "John Doe ", "1981/03/07",  "123456789", "12.34", "Y")
+
+  tidy <- dplyr::tribble(
+    ~name, ~date, ~int, ~dbl, ~yn,
+    "JOHN DOE",
+    anytime::anydate("1981/03/07"),
+    as.integer("123456789"),
+    as.double("12.34"),
+    TRUE)
+
+  expect_equal(tidyup(df,
+                      yn = "yn",
+                      int = "int",
+                      dbl = "dbl",
+                      up = "name"), tidy)
+})
+
+test_that("address() works", {
+
+  df <- dplyr::tribble(
+    ~x,      ~y,
+    "1234 Address Lane", "STE 123")
+
+  add <- dplyr::tribble(
+    ~address,
+    "1234 Address Lane STE 123")
+
+  expect_equal(address(df, c("x", "y")), add)
+})
+
 test_that("encode_param() works", {
   args <- dplyr::tribble(
     ~param,      ~arg,
