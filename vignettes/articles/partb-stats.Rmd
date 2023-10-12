@@ -27,7 +27,7 @@ library(gt)
 ## Provider Utilization Summary
 
 ```{r}
-df <- map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643))
+df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
 ```
 
 
@@ -214,7 +214,7 @@ chronic |>
 ## HCPCS Utilization Data
 
 ```{r}
-hcpcs <- prac_years() |> 
+hcpcs <- pop_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
   compare_hcpcs()
