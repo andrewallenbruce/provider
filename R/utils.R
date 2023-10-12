@@ -19,19 +19,13 @@ format_zipcode <- function(zip) {
   }
 }
 
-#' Clean up credentials
-#' @param x Character vector of credentials
-#' @return List of cleaned character vectors, with one list element per element
-#'   of `x`
+#' Remove periods from credentials
+#' @param x Character vector
+#' @return Character vector with periods removed
 #' @autoglobal
 #' @noRd
 clean_credentials <- function(x) {
-
-  if (!is.character(x)) {stop("x must be a character vector")}
-
-  out <- gsub("\\.", "", x)
-
-  return(out)
+  gsub("\\.", "", x)
 }
 
 #' Convert empty char values to NA
@@ -70,8 +64,8 @@ tf_2_yn <- function(x) {
 
   dplyr::case_match(
     x,
-    c(TRUE) ~ "Y",
-    c(FALSE) ~ "N",
+    TRUE ~ "Y",
+    FALSE ~ "N",
     .default = NULL
   )
 }
