@@ -184,7 +184,7 @@ clinicians(enid = 0123456789123456)
 reassignments(enid = "I123456789123456")
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
-providers(enid = "012345678912345")
+providers(enid = "L12345678912345")
 
 # Some functions require one of ID types
 hospitals(enid_org = "I20180115000174")

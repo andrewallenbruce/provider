@@ -20,7 +20,8 @@ open_payments(
   pay_nature = NULL,
   offset = 0L,
   tidy = TRUE,
-  pivot = FALSE
+  pivot = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
@@ -79,6 +80,8 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

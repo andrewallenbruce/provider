@@ -12,17 +12,17 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > Individual provider's 10-digit National Provider Identifier
-#' @param pac < *integer* > Individual provider's 10-digit PECOS Associate Control ID
-#' @param enid < *character* > Individual provider's 15-digit Medicare Enrollment ID
-#' @param first,last < *character* > Individual provider's name
-#' @param state < *character* > Individual provider's enrollment state
-#' @param specialty < *character* > Individual provider's enrollment specialty
-#' @param organization < *character* > Organizational provider's legal business name
-#' @param pac_org < *integer* > Organizational provider's 10-digit PECOS Associate Control ID
-#' @param enid_org < *character* > Organizational provider's 15-digit Medicare Enrollment ID
-#' @param state_org < *character* > Organizational provider's enrollment state
-#' @param record < *character* > Identifies whether the record is for reassignment (`"R"`) or employment (`"E"`)
+#' @param npi < *integer* > __Individual__ National Provider Identifier
+#' @param pac < *integer* > __Individual__ PECOS Associate Control ID
+#' @param enid < *character* > __Individual__ Medicare Enrollment ID
+#' @param first,last < *character* > __Individual__ Provider's name
+#' @param state < *character* > __Individual__ Enrollment state
+#' @param specialty < *character* > __Individual__ Enrollment specialty
+#' @param organization < *character* > __Organizational__ Legal business name
+#' @param pac_org < *integer* > __Organizational__ PECOS Associate Control ID
+#' @param enid_org < *character* > __Organizational__ Medicare Enrollment ID
+#' @param state_org < *character* > __Organizational__ Enrollment state
+#' @param entry < *character* > Entry type, reassignment (`"R"`) or employment (`"E"`)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
@@ -45,7 +45,7 @@ reassignments <- function(npi = NULL,
                           pac_org = NULL,
                           enid_org = NULL,
                           state_org = NULL,
-                          record = NULL,
+                          entry = NULL,
                           tidy = TRUE,
                           na.rm = TRUE) {
 
@@ -55,9 +55,9 @@ reassignments <- function(npi = NULL,
   if (!is.null(enid))     {check_enid(enid)}
   if (!is.null(enid_org)) {check_enid(enid_org)}
 
-  if (!is.null(record)) {
-    rlang::arg_match(record, c("E", "R"))
-    record <- dplyr::case_match(record,
+  if (!is.null(entry)) {
+    rlang::arg_match(entry, c("E", "R"))
+    entry <- dplyr::case_match(entry,
                       "E" ~ "Physician Assistant",
                       "R" ~ "Reassignment")}
 
@@ -74,7 +74,7 @@ reassignments <- function(npi = NULL,
     "Group PAC ID",                     pac_org,
     "Group Enrollment ID",              enid_org,
     "Group State Code",                 state_org,
-    "Record Type",                      record)
+    "Record Type",                      entry)
 
   response <- httr2::request(build_url("ras", args)) |>
     httr2::req_perform()
@@ -94,24 +94,20 @@ reassignments <- function(npi = NULL,
       "pac_id_org",             pac_org,
       "enroll_id_org",          enid_org,
       "state_org",              state_org,
-      "record",                 record) |>
+      "entry",                  entry) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::everything(), as.character),
-                    dplyr::across(dplyr::contains("ass"), as.integer),
-                    dplyr::across(dplyr::contains("name"), toupper)) |>
-      cols_reas()
+  if (tidy)  {
+    results <- cols_reas(tidyup(results, int = "ass", up = "name")) |>
+      dplyr::mutate(entry = record_type(entry))
 
-    if (na.rm) {results <- narm(results)}
+  if (na.rm) {results <- narm(results)}
     }
   return(results)
 }
@@ -121,23 +117,29 @@ reassignments <- function(npi = NULL,
 #' @noRd
 cols_reas <- function(df) {
 
-  cols <- c('npi' = 'individual_npi',
-            'pac' = 'individual_pac_id',
-            'enid' = 'individual_enrollment_id',
-            'first' = 'individual_first_name',
-            'last' = 'individual_last_name',
-            'associations' = 'individual_total_employer_associations',
-            'organization' = 'group_legal_business_name',
-            'pac_org' = 'group_pac_id',
-            'enid_org' = 'group_enrollment_id',
-            'state_org' = 'group_state_code',
-            'reassignments' = 'group_reassignments_and_physician_assistants',
-            # 'state_ind' = 'individual_state_code',
+  cols <- c('npi'                     = 'individual_npi',
+            'pac'                     = 'individual_pac_id',
+            'enid'                    = 'individual_enrollment_id',
+            'first'                   = 'individual_first_name',
+            'last'                    = 'individual_last_name',
+            'associations'            = 'individual_total_employer_associations',
+            'organization'            = 'group_legal_business_name',
+            'pac_org'                 = 'group_pac_id',
+            'enid_org'                = 'group_enrollment_id',
+            'state_org'               = 'group_state_code',
+            'reassignments'           = 'group_reassignments_and_physician_assistants',
+            # 'state_ind'             = 'individual_state_code',
             # 'specialty_description' = 'individual_specialty_description',
-            # 'due_date_ind' = 'individual_due_date',
-            # 'due_date_org' = 'group_due_date',
-            'record' = 'record_type')
+            # 'due_date_ind'          = 'individual_due_date',
+            # 'due_date_org'          = 'group_due_date',
+            'entry'                   = 'record_type')
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+record_type <- function(x) {
+  dplyr::case_match(x, "Physician Assistant" ~ "Employment", .default = x)
 }

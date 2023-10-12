@@ -122,6 +122,7 @@
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -148,7 +149,8 @@ open_payments <- function(year,
                           pay_nature = NULL,
                           offset = 0L,
                           tidy = TRUE,
-                          pivot = FALSE) {
+                          pivot = TRUE,
+                          na.rm = TRUE) {
 
 
   rlang::check_required(year)
@@ -219,58 +221,46 @@ open_payments <- function(year,
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = c("_indicator")) |>
+    results <- tidyup(results, yn = "_indicator", dbl = "dollars") |>
       dplyr::mutate(program_year = as.integer(program_year),
-                    dplyr::across(dplyr::contains("dollars"), as.double),
                     change_type = changed_logical(change_type),
-                    covered_recipient_type = dplyr::case_match(covered_recipient_type,
-                                                 "Covered Recipient Physician" ~ "Physician",
-                                                 "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician Practitioner",
-                                                 "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
-                                                 .default = covered_recipient_type),
+                    covered_recipient_type = covered_recipient(covered_recipient_type),
                     nature_of_payment_or_transfer_of_value = dplyr::case_match(nature_of_payment_or_transfer_of_value,
                                                    "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation (Other)",
                                                    .default = nature_of_payment_or_transfer_of_value)) |>
       address(c("recipient_primary_business_street_address_line1",
                 "recipient_primary_business_street_address_line2")) |>
-      tidyr::unite("primary_other",
-                   dplyr::any_of(c("covered_recipient_primary_type_2",
-                                   "covered_recipient_primary_type_3",
-                                   "covered_recipient_primary_type_4",
-                                   "covered_recipient_primary_type_5",
-                                   "covered_recipient_primary_type_6")),
-                   remove = TRUE, na.rm = TRUE, sep = ", ") |>
-      tidyr::unite("specialty_other",
-                   dplyr::any_of(c("covered_recipient_specialty_2",
+      combine("primary_other", c("covered_recipient_primary_type_2",
+                                 "covered_recipient_primary_type_3",
+                                 "covered_recipient_primary_type_4",
+                                 "covered_recipient_primary_type_5",
+                                 "covered_recipient_primary_type_6")) |>
+      combine("specialty_other", c("covered_recipient_specialty_2",
                                    "covered_recipient_specialty_3",
                                    "covered_recipient_specialty_4",
                                    "covered_recipient_specialty_5",
-                                   "covered_recipient_specialty_6")),
-                   remove = TRUE, na.rm = TRUE, sep = ", ") |>
-      tidyr::unite("license_state_other",
-                   dplyr::any_of(c("covered_recipient_license_state_code2",
-                                   "covered_recipient_license_state_code3",
-                                   "covered_recipient_license_state_code4",
-                                   "covered_recipient_license_state_code5")),
-                   remove = TRUE, na.rm = TRUE, sep = ", ") |>
+                                   "covered_recipient_specialty_6")) |>
+      combine("license_state_other", c("covered_recipient_license_state_code2",
+                                       "covered_recipient_license_state_code3",
+                                       "covered_recipient_license_state_code4",
+                                       "covered_recipient_license_state_code5")) |>
       cols_open()
 
     if (pivot) {
-      results <- results |>
-        tidyr::pivot_longer(cols = name_1:pdi_5,
-                            names_to = c("attr", "group"),
-                            names_pattern = "(.*)_(.)",
-                            values_to = "val") |>
+      results <- tidyr::pivot_longer(
+        results,
+        cols = name_1:pdi_5,
+        names_to = c("attr", "group"),
+        names_pattern = "(.*)_(.)",
+        values_to = "val") |>
         tidyr::pivot_wider(names_from = attr,
                            values_from = val,
                            values_fn = list) |>
         tidyr::unnest(cols = c(name, type, category, ndc, pdi)) |>
-        dplyr::mutate(covered = dplyr::case_match(covered,
-                                                  "Covered" ~ TRUE,
-                                                  "Non-Covered" ~ FALSE,
-                                                  .default = NA),
+        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA),
                       pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
     }
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
 }
@@ -314,7 +304,20 @@ open_payments_error <- function(response) {
 #' @autoglobal
 #' @noRd
 changed_logical <- function(x){
-  dplyr::case_match(x, "CHANGED" ~ TRUE, "UNCHANGED" ~ FALSE, .default = NA)
+  dplyr::case_match(x, "CHANGED" ~ TRUE,
+                       "UNCHANGED" ~ FALSE,
+                       .default = x)
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+covered_recipient <- function(x){
+  dplyr::case_match(x,
+        "Covered Recipient Physician" ~ "Physician",
+        "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician",
+        "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
+        .default = x)
 }
 
 #' @param df data frame

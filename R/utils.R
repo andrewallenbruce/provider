@@ -109,22 +109,24 @@ tidyup <- function(df,
                    dt = c("date"),
                    yn = NULL,
                    int = NULL,
-                   dbl = NULL) {
+                   dbl = NULL,
+                   up = NULL) {
 
-  results <- janitor::clean_names(df) |>
+  x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
     dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
                   dplyr::across(dplyr::where(is.character), na_blank),
                   dplyr::across(dplyr::contains(dt), anytime::anydate))
 
-  if (!is.null(yn)) {results <- dplyr::mutate(results, dplyr::across(dplyr::contains(yn), yn_logical))}
-  if (!is.null(int)) {results <- dplyr::mutate(results, dplyr::across(dplyr::contains(int), as.integer))}
-  if (!is.null(dbl)) {results <- dplyr::mutate(results, dplyr::across(dplyr::contains(dbl), as.double))}
-  return(results)
+  if (!is.null(yn))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))}
+  if (!is.null(int)) {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int), as.integer))}
+  if (!is.null(dbl)) {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl), as.double))}
+  if (!is.null(up))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
+  return(x)
 }
 
 #' @param df data frame
-#' @param cols description
+#' @param cols address columns
 #' @autoglobal
 #' @noRd
 address <- function(df, cols) {
@@ -134,6 +136,23 @@ address <- function(df, cols) {
                remove = TRUE,
                na.rm = TRUE,
                sep = " ")
+}
+
+#' @param df data frame
+#' @param nm new col name
+#' @param cols description
+#' @param sep separator
+#' @autoglobal
+#' @noRd
+combine <- function(df, nm, cols, sep = ", ") {
+
+  tidyr::unite(df,
+               nm,
+  dplyr::any_of(c(cols)),
+  remove = TRUE,
+  na.rm = TRUE,
+  sep = sep)
+
 }
 
 #' @param df data frame

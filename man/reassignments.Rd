@@ -16,33 +16,33 @@ reassignments(
   pac_org = NULL,
   enid_org = NULL,
   state_org = NULL,
-  record = NULL,
+  entry = NULL,
   tidy = TRUE,
   na.rm = TRUE
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > Individual provider's 10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > \strong{Individual} National Provider Identifier}
 
-\item{pac}{< \emph{integer} > Individual provider's 10-digit PECOS Associate Control ID}
+\item{pac}{< \emph{integer} > \strong{Individual} PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > Individual provider's 15-digit Medicare Enrollment ID}
+\item{enid}{< \emph{character} > \strong{Individual} Medicare Enrollment ID}
 
-\item{first, last}{< \emph{character} > Individual provider's name}
+\item{first, last}{< \emph{character} > \strong{Individual} Provider's name}
 
-\item{state}{< \emph{character} > Individual provider's enrollment state}
+\item{state}{< \emph{character} > \strong{Individual} Enrollment state}
 
-\item{specialty}{< \emph{character} > Individual provider's enrollment specialty}
+\item{specialty}{< \emph{character} > \strong{Individual} Enrollment specialty}
 
-\item{organization}{< \emph{character} > Organizational provider's legal business name}
+\item{organization}{< \emph{character} > \strong{Organizational} Legal business name}
 
-\item{pac_org}{< \emph{integer} > Organizational provider's 10-digit PECOS Associate Control ID}
+\item{pac_org}{< \emph{integer} > \strong{Organizational} PECOS Associate Control ID}
 
-\item{enid_org}{< \emph{character} > Organizational provider's 15-digit Medicare Enrollment ID}
+\item{enid_org}{< \emph{character} > \strong{Organizational} Medicare Enrollment ID}
 
-\item{state_org}{< \emph{character} > Organizational provider's enrollment state}
+\item{state_org}{< \emph{character} > \strong{Organizational} Enrollment state}
 
-\item{record}{< \emph{character} > Identifies whether the record is for reassignment (\code{"R"}) or employment (\code{"E"})}
+\item{entry}{< \emph{character} > Entry type, reassignment (\code{"R"}) or employment (\code{"E"})}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
