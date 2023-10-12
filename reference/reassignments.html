@@ -120,7 +120,7 @@ Update Frequency: Monthly"><meta property="og:image" content="https://andrewalle
 <span>  pac_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enid_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  record <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entry <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -129,47 +129,47 @@ Update Frequency: Monthly"><meta property="og:image" content="https://andrewalle
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>&lt; <em>integer</em> &gt; Individual provider's 10-digit National Provider Identifier</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; <strong>Individual</strong> National Provider Identifier</p></dd>
 
 
 <dt>pac</dt>
-<dd><p>&lt; <em>integer</em> &gt; Individual provider's 10-digit PECOS Associate Control ID</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; <strong>Individual</strong> PECOS Associate Control ID</p></dd>
 
 
 <dt>enid</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's 15-digit Medicare Enrollment ID</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Individual</strong> Medicare Enrollment ID</p></dd>
 
 
 <dt>first, last</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Individual</strong> Provider's name</p></dd>
 
 
 <dt>state</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's enrollment state</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Individual</strong> Enrollment state</p></dd>
 
 
 <dt>specialty</dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's enrollment specialty</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Individual</strong> Enrollment specialty</p></dd>
 
 
 <dt>organization</dt>
-<dd><p>&lt; <em>character</em> &gt; Organizational provider's legal business name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Organizational</strong> Legal business name</p></dd>
 
 
 <dt>pac_org</dt>
-<dd><p>&lt; <em>integer</em> &gt; Organizational provider's 10-digit PECOS Associate Control ID</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; <strong>Organizational</strong> PECOS Associate Control ID</p></dd>
 
 
 <dt>enid_org</dt>
-<dd><p>&lt; <em>character</em> &gt; Organizational provider's 15-digit Medicare Enrollment ID</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Organizational</strong> Medicare Enrollment ID</p></dd>
 
 
 <dt>state_org</dt>
-<dd><p>&lt; <em>character</em> &gt; Organizational provider's enrollment state</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Organizational</strong> Enrollment state</p></dd>
 
 
-<dt>record</dt>
-<dd><p>&lt; <em>character</em> &gt; Identifies whether the record is for reassignment (<code>"R"</code>) or employment (<code>"E"</code>)</p></dd>
+<dt>entry</dt>
+<dd><p>&lt; <em>character</em> &gt; Entry type, reassignment (<code>"R"</code>) or employment (<code>"E"</code>)</p></dd>
 
 
 <dt>tidy</dt>
