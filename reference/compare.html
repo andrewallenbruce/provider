@@ -107,17 +107,21 @@ national averages</p></li>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="va">serv_tbl</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">compare_conditions</span><span class="op">(</span><span class="va">prov_tbl</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">compare_conditions</span><span class="op">(</span><span class="va">prov_tbl</span>, pivot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>serv_tbl</dt>
-<dd><p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_service()</a></code></p></dd>
+<dd><p>&lt; <em>tbl_df</em> &gt; // <strong>required</strong> <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_service()</a></code></p></dd>
 
 
 <dt>prov_tbl</dt>
-<dd><p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_provider()</a></code></p></dd>
+<dd><p>&lt; <em>tbl_df</em> &gt; // <strong>required</strong> <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_provider()</a></code></p></dd>
+
+
+<dt>pivot</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Pivot output</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -132,12 +136,10 @@ national averages</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="fu"><a href="utilization.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">compare_conditions</span><span class="op">(</span><span class="fu"><a href="utilization.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">prac_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="utilization.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">prac_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="utilization.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">compare_conditions</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">prac_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="utilization.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">compare_conditions</span><span class="op">(</span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">prac_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="utilization.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

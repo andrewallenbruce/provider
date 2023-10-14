@@ -94,7 +94,7 @@ among Original Medicare (or fee-for-service) beneficiaries.</p>
 <span>  <span class="va">year</span>,</span>
 <span>  condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sublevel <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"multiple"</span>, <span class="st">"specific"</span><span class="op">)</span>,</span>
+<span>  set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"multiple"</span>, <span class="st">"specific"</span><span class="op">)</span>,</span>
 <span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  age <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -123,8 +123,8 @@ and utilization is compiled (see above for list of conditions)</p></dd>
 <dd><p>&lt; <em>character</em> &gt; Beneficiary's state or county</p></dd>
 
 
-<dt>type</dt>
-<dd><p><code>"multiple"</code> or <code>"specific"</code></p></dd>
+<dt>set</dt>
+<dd><p>&lt; <em>character</em> &gt; // <strong>required</strong> <code>"multiple"</code> or <code>"specific"</code></p></dd>
 
 
 <dt>level</dt>
@@ -140,13 +140,13 @@ and utilization is compiled (see above for list of conditions)</p></dd>
 
 
 <dt>demo, subdemo</dt>
-<dd><p>&lt; <em>character</em> &gt; Demographic/subdemographic level of
-aggregation: <code>"all"</code>, <code>"sex"</code> (<code>"male"</code>, <code>"female"</code>), <code>"race"</code> (<code>"white"</code>,
-<code>"black"</code>, <code>"island"</code>, <code>"hispanic"</code>, <code>"native"</code>), <code>"dual"</code> (<code>"nondual"</code>, <code>"dual"</code>).</p></dd>
+<dd><p>&lt; <em>character</em> &gt; <strong>Demographic</strong>, <em>subdemographic</em> level of
+aggregation: <strong><code>"all"</code></strong>, <strong><code>"sex"</code></strong> (<code>"male"</code>, <code>"female"</code>), <strong><code>"race"</code></strong> (<code>"white"</code>,
+<code>"black"</code>, <code>"island"</code>, <code>"hispanic"</code>, <code>"native"</code>), <strong><code>"dual"</code></strong> (<code>"nondual"</code>, <code>"dual"</code>).</p></dd>
 
 
 <dt>mcc</dt>
-<dd><p>&lt; <em>character</em> &gt; Number of chronic conditions: <code>"0_1"</code>, <code>"2_3"</code>, <code>"4_5"</code>, <code>"6_"</code></p></dd>
+<dd><p>&lt; <em>character</em> &gt; Number of chronic conditions: <code>"0-1"</code>, <code>"2-3"</code>, <code>"4-5"</code>, <code>"6+"</code></p></dd>
 
 
 <dt>tidy</dt>
@@ -164,7 +164,7 @@ aggregation: <code>"all"</code>, <code>"sex"</code> (<code>"male"</code>, <code>
 <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the following columns:</p>
     </div>
     <div class="section level2">
-    <h2 id="type-specific-"><code>type = "specific"</code><a class="anchor" aria-label="anchor" href="#type-specific-"></a></h2>
+    <h2 id="set-specific-"><code>set = "specific"</code><a class="anchor" aria-label="anchor" href="#set-specific-"></a></h2>
     
 
 
@@ -193,7 +193,7 @@ conditions among Original Medicare beneficiaries:</p><ol><li><p>Alcohol Abuse</p
 <li><p>Stroke</p></li>
 </ol></div>
     <div class="section level2">
-    <h2 id="type-multiple-"><code>type = "multiple"</code><a class="anchor" aria-label="anchor" href="#type-multiple-"></a></h2>
+    <h2 id="set-multiple-"><code>set = "multiple"</code><a class="anchor" aria-label="anchor" href="#set-multiple-"></a></h2>
     
 
 
@@ -252,11 +252,12 @@ geographic areas in health care use among beneficiaries.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">chronic_conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, type <span class="op">=</span> <span class="st">"specific"</span>, level <span class="op">=</span> <span class="st">"state"</span>, sublevel <span class="op">=</span> <span class="st">"CA"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">chronic_conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, level <span class="op">=</span> <span class="st">"state"</span>, sublevel <span class="op">=</span> <span class="st">"California"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, set <span class="op">=</span> <span class="st">"specific"</span>, sublevel <span class="op">=</span> <span class="st">"CA"</span>, demo <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, set <span class="op">=</span> <span class="st">"specific"</span>, sublevel <span class="op">=</span> <span class="st">"CA"</span>, subdemo <span class="op">=</span> <span class="st">"female"</span>, age <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, set <span class="op">=</span> <span class="st">"multiple"</span>, sublevel <span class="op">=</span> <span class="st">"California"</span>, subdemo <span class="op">=</span> <span class="st">"female"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">chronic_conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, type <span class="op">=</span> <span class="st">"specific"</span>, level <span class="op">=</span> <span class="st">"national"</span>, demo <span class="op">=</span> <span class="st">"race"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">chronic_conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, type <span class="op">=</span> <span class="st">"multiple"</span>, level <span class="op">=</span> <span class="st">"national"</span>, demo <span class="op">=</span> <span class="st">"race"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, set <span class="op">=</span> <span class="st">"specific"</span>, level <span class="op">=</span> <span class="st">"national"</span>, demo <span class="op">=</span> <span class="st">"race"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">conditions</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, set <span class="op">=</span> <span class="st">"multiple"</span>, level <span class="op">=</span> <span class="st">"national"</span>, demo <span class="op">=</span> <span class="st">"race"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

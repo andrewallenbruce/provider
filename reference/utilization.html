@@ -114,7 +114,9 @@ by provider, service and geography.</p>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  nest <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  nest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  detailed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">by_service</span><span class="op">(</span></span>
@@ -138,7 +140,8 @@ by provider, service and geography.</p>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">by_geography</span><span class="op">(</span></span>
@@ -150,7 +153,8 @@ by provider, service and geography.</p>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -223,8 +227,15 @@ Medicare and/or accepts assignment of Medicare allowed amounts</p></dd>
 
 
 <dt>nest</dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest <code>hcpcs_detailed</code>,
-<code>demographics</code> and <code>conditions</code> columns</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest <code>demographics</code> and <code>conditions</code></p></dd>
+
+
+<dt>detailed</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>FALSE</code> Include <code>detailed</code> column</p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 
 <dt>hcpcs_code</dt>
