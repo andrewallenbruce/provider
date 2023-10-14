@@ -127,14 +127,16 @@ The following return yearly Provider-specific stats:
 Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
 
 ```{r}
-quality_years()
+qpp_years()
 ```
 
 These can also be used in a pipeline, for searching all available years:
 
 ```{r}
 map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
-  select(year:final_score)
+  select(year, practice_size:payment_adjustment) |> 
+  gt_preview(top_n = 20) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
 <br>
@@ -154,7 +156,7 @@ open_payments(year = 2021, npi = 12345691234)
 nppes(npi = "O12345678912")
 
 # Must pass Luhn check
-pending(type = "physician", npi = 001234569123)
+pending(type = "P", npi = 001234569123)
 ```
 
 <br>

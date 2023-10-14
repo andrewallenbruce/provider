@@ -27,37 +27,39 @@ library(gt)
 ## Provider Utilization Summary
 
 ```{r}
-df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
+df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1043245657))
+# df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
 ```
+
 
 <br>
 
 ```{r}
-select(df, year, entity_type, specialty, city:state, ruca, tot_hcpcs:tot_std_pymt) |>
+select(df, year, entity_type, credential, specialty, city:state, tot_hcpcs:tot_payment) |>
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  fmt_currency(columns = c(tot_charges, tot_allowed, tot_payment, tot_std_pymt), decimals = 2)
+  fmt_currency(columns = c(tot_charges, tot_allowed, tot_payment), decimals = 0)
 ```
 
 <br>
 
 ```{r}
-select(df, year, demographics) |> 
+select(df, year, tot_benes, demographics) |> 
   unnest(demographics) |>
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  sub_missing()
+  sub_missing(missing_text = "-")
 ```
 
 <br>
 
 ```{r}
-select(df, year, hcc_risk_avg, conditions) |> 
+select(df, year, hcc_risk_avg, tot_benes, conditions) |> 
   unnest(conditions) |>
   gt_preview(top_n = 10) |> 
   fmt_percent(columns = starts_with("cc_"), decimals = 0) |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  sub_missing()
+  sub_missing(missing_text = "-")
 ```
 
 <br><br>
@@ -68,74 +70,72 @@ select(df, year, hcc_risk_avg, conditions) |>
 select(df, year, starts_with("tot_")) |> 
   select(-tot_hcpcs, -tot_std_pymt) |> 
   change(starts_with("tot_")) |> 
+  select(-ends_with("_cum")) |> 
   gt(rowname_col = "year") |> 
   fmt_integer(columns = c(tot_benes, 
                           tot_srvcs, 
                           tot_benes_chg, 
-                          tot_srvcs_chg)) |> 
-  fmt_currency(columns = c(tot_charges, 
-                           tot_allowed, 
-                           tot_payment, 
+                          tot_srvcs_chg, 
                            tot_charges_chg, 
                            tot_allowed_chg, 
-                           tot_payment_chg, 
-                           tot_charges_chg_cum, 
-                           tot_allowed_chg_cum, 
-                           tot_payment_chg_cum), decimals = 0, suffixing = TRUE) |> 
+                           tot_payment_chg), suffixing = TRUE) |> 
+  fmt_currency(columns = c(tot_charges, 
+                           tot_allowed, 
+                           tot_payment), decimals = 0, suffixing = TRUE) |> 
   fmt_percent(columns = contains("pct"), decimals = 0, force_sign = TRUE) |>
   sub_zero(zero_text = "") |> 
   grand_summary_rows(columns = c(tot_benes, 
-                                 tot_srvcs, 
-                                 tot_benes_chg, 
-                                 tot_srvcs_chg),
+                                 tot_srvcs),
                      fns =  list(label = md("**Avg**"), 
                                  id = "average", fn = "mean"),
                      fmt = ~ fmt_integer(.), 
                      missing_text = "") |> 
   grand_summary_rows(columns = c(tot_charges, 
                                  tot_allowed, 
-                                 tot_payment, 
-                           tot_charges_chg, 
-                           tot_allowed_chg, 
-                           tot_payment_chg, 
-                           tot_charges_chg_cum, 
-                           tot_allowed_chg_cum, 
-                           tot_payment_chg_cum),
+                                 tot_payment),
                      fns =  list(label = md("**Avg**"), 
                                  id = "average", fn = "mean"),
                      fmt = ~ fmt_currency(., decimals = 0, suffixing = TRUE), 
                      missing_text = "") |> 
+  grand_summary_rows(columns = c(tot_benes_chg, 
+                                 tot_srvcs_chg,
+                                 tot_charges_chg, 
+                                 tot_allowed_chg, 
+                                 tot_payment_chg),
+                     fns =  list(label = md("**Sum**"), 
+                                 id = "sum", fn = "sum"),
+                     fmt = ~ fmt_integer(., suffixing = TRUE), 
+                     missing_text = "") |> 
+  grand_summary_rows(columns = c(tot_benes_pct,
+                                 tot_srvcs_pct,
+                                 tot_charges_pct, 
+                                 tot_allowed_pct, 
+                                 tot_payment_pct),
+                     fns =  list(label = md("**Sum**"), 
+                                 id = "sum", fn = "sum"),
+                     fmt = ~ fmt_percent(., decimals = 0, force_sign = TRUE), 
+                     missing_text = "") |> 
   tab_spanner(label = "Beneficiaries",columns = contains("bene")) |> 
   tab_spanner(label = "Services", columns = contains("srvcs")) |> 
-  tab_spanner(label = "Submitted Charges", columns = contains("charges")) |> 
-  tab_spanner(label = "Amount Allowed", columns = contains("allowed")) |> 
-  tab_spanner(label = "Net Payment", columns = contains("payment")) |> 
+  tab_spanner(label = "Charges", columns = contains("charges")) |> 
+  tab_spanner(label = "Allowed", columns = contains("allowed")) |> 
+  tab_spanner(label = "Payment", columns = contains("payment")) |> 
   cols_label(
-    tot_benes = ("Tot"),
-    tot_benes_chg = ("YOY"),
-    tot_benes_chg_cum = ("Cum"),
-    tot_benes_pct = ("Pct"),
-    tot_benes_pct_cum = ("Cum"),
-    tot_srvcs = ("Tot"),
-    tot_srvcs_chg = ("YOY"),
-    tot_srvcs_chg_cum = ("Cum"),
-    tot_srvcs_pct = ("Pct"),
-    tot_srvcs_pct_cum = ("Cum"),
-    tot_charges = ("Tot"),
-    tot_charges_chg = ("YOY"),
-    tot_charges_chg_cum = ("Cum"),
-    tot_charges_pct = ("Pct"),
-    tot_charges_pct_cum = ("Cum"),
-    tot_allowed = ("Tot"),
-    tot_allowed_chg = ("YOY"),
-    tot_allowed_chg_cum = ("Cum"),
-    tot_allowed_pct = ("Pct"),
-    tot_allowed_pct_cum = ("Cum"),
-    tot_payment = ("Tot"),
-    tot_payment_chg = ("YOY"),
-    tot_payment_chg_cum = ("Cum"),
-    tot_payment_pct = ("Pct"),
-    tot_payment_pct_cum = ("Cum")
+    tot_benes       = ("Tot"),
+    tot_benes_chg   = ("YoY"),
+    tot_benes_pct   = ("(%)"),
+    tot_srvcs       = ("Tot"),
+    tot_srvcs_chg   = ("YoY"),
+    tot_srvcs_pct   = ("(%)"),
+    tot_charges     = ("Tot"),
+    tot_charges_chg = ("YoY"),
+    tot_charges_pct = ("(%)"),
+    tot_allowed     = ("Tot"),
+    tot_allowed_chg = ("YoY"),
+    tot_allowed_pct = ("(%)"),
+    tot_payment     = ("Tot"),
+    tot_payment_chg = ("YoY"),
+    tot_payment_pct = ("(%)")
     ) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
   tab_header(title = md("**Medicare Part B** Utilization"),
@@ -143,26 +143,26 @@ select(df, year, starts_with("tot_")) |>
   data_color(columns = c(tot_benes, tot_srvcs, tot_charges, tot_allowed, tot_payment),
              method = "numeric",
              palette = "Reds") |> 
-  data_color(columns = c(tot_benes_chg, tot_benes_chg_cum, tot_benes_pct, tot_benes_pct_cum),
+  data_color(columns = c(tot_benes_chg, tot_benes_pct),
              rows = tot_benes_chg < 0,
              method = "numeric",
-             palette = "red", 
+             palette = "red2", 
              apply_to = "text") |> 
-  data_color(columns = c(tot_benes_chg, tot_benes_chg_cum, tot_benes_pct, tot_benes_pct_cum),
+  data_color(columns = c(tot_benes_chg, tot_benes_pct),
              rows = tot_benes_chg > 0,
              method = "numeric",
-             palette = "gray50", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_srvcs_chg, tot_srvcs_chg_cum, tot_srvcs_pct, tot_srvcs_pct_cum),
+             palette = "gray90", 
+             apply_to = "fill") |> 
+  data_color(columns = c(tot_srvcs_chg, tot_srvcs_pct),
              rows = tot_srvcs_chg < 0,
              method = "numeric",
-             palette = "red", 
+             palette = "red2", 
              apply_to = "text") |> 
-  data_color(columns = c(tot_srvcs_chg, tot_srvcs_chg_cum, tot_srvcs_pct, tot_srvcs_pct_cum),
+  data_color(columns = c(tot_srvcs_chg, tot_srvcs_pct),
              rows = tot_srvcs_chg > 0,
              method = "numeric",
-             palette = "gray50", 
-             apply_to = "text") |> 
+             palette = "gray90", 
+             apply_to = "fill") |> 
   tab_options(table.width = pct(100),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
@@ -214,14 +214,12 @@ select(df,
 ```{r}
 select(df, 
        year, 
-       HCPCS = tot_hcpcs,
        Beneficiaries = tot_benes,
        Services = tot_srvcs,
        Charges = tot_charges,
        Allowed = tot_allowed,
        Payment = tot_payment) |> 
-  pivot_longer(cols = c(HCPCS, 
-                        Beneficiaries, 
+  pivot_longer(cols = c(Beneficiaries, 
                         Services, 
                         Charges, 
                         Allowed, 
@@ -231,8 +229,8 @@ select(df,
   pivot_wider(names_from = year, 
               values_from = Amount) |> 
   gt(rowname_col = "Type") |> 
-  tab_stubhead(label = md("**Measures**")) |>
-  cols_hide(columns = matches("2014|2015|2016|2017|2018")) |>
+  fmt_integer(columns = matches("2014|2021")) |>
+  cols_hide(columns = matches("2015|2016|2017|2018|2019|2020")) |>
   cols_nanoplot(
     columns = contains("20"),
     new_col_name = "nanoplots",
@@ -245,9 +243,9 @@ select(df,
       show_reference_area = FALSE)) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
   tab_header(title = md("**Medicare Part B** Utilization"),
-             subtitle = md("Trends, 2013-2019")) |> 
+             subtitle = md("Trends, 2014-2021")) |> 
   opt_horizontal_padding(scale = 2) |> 
-  tab_options(table.width = pct(50),
+  tab_options(table.width = pct(75),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",
@@ -259,15 +257,34 @@ select(df,
 ### Chronic Condition Prevalence
 
 ```{r}
-chronic <- compare_conditions(df)
+chronic1 <- compare_conditions(df, pivot = FALSE)
+chronic2 <- compare_conditions(df, pivot = TRUE)
+```
+<br>
 
-chronic
+```{r}
+chronic1 |>
+  gt_preview(top_n = 10) |> 
+  fmt_percent(columns = sc(prevalence), decimals = 0) |>
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  sub_missing(missing_text = "-")
 ```
 
 <br>
 
 ```{r}
-gt(chronic) |> 
+chronic2 |>
+  gt_preview(top_n = 20) |> 
+  fmt_percent(columns = starts_with("20"), decimals = 0) |>
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  sub_missing(missing_text = "-")
+```
+
+<br>
+
+
+```{r}
+gt(chronic2) |> 
   cols_nanoplot(
     columns = contains("Provider"),
     reference_line = "mean",
@@ -319,22 +336,27 @@ gt(chronic) |>
 ## HCPCS Utilization Data
 
 ```{r}
-srvc <- map_dfr(pop_years(), ~by_service(year = .x, npi = 1023076643))
+srvc <- map_dfr(pop_years(), ~by_service(year = .x, npi = 1043245657))
+# srvc <- map_dfr(pop_years(), ~by_service(year = .x, npi = 1023076643))
 
 srvc
 ```
 
 <br>
 
+
 ```{r}
 hcpcs <- compare_hcpcs(srvc)
 
-hcpcs
+hcpcs |> 
+  gt_preview(top_n = 30) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  sub_missing(missing_text = "-")
 ```
 
 
 
-<br><br>
+<br>
 
 ```{r}
 hcpcs |> 
@@ -361,30 +383,21 @@ hcpcs |>
 
 ```{r}
 hcpcs |>
-select(year, 
+  select(year, 
          level, 
          HCPCS = hcpcs_code,
-         beneficiaries,
-         services, 
          "Average Payment" = avg_payment) |> 
-  mutate("Services Per Beneficiary" = services/beneficiaries) |> 
-  select(-c(beneficiaries, services)) |> 
-  pivot_longer(!year:HCPCS, 
-               names_to = "stat", 
-               values_to = "amount") |> 
-  pivot_wider(names_from = level, 
-              values_from = amount) |> 
-  arrange(stat, HCPCS) |>
-  filter(stat %in% c("Average Payment")) |> 
+  distinct() |> 
+  arrange(year, HCPCS) |>
   gt(rowname_col = "year") |> 
-  fmt_currency(columns = c(Provider, State, National), decimals = 2) |> 
+  fmt_currency(columns = c("Average Payment"), decimals = 2) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
   tab_header(title = md("**Average Payment** By HCPCS")) |> 
-  cols_hide(stat) |> 
-  data_color(columns = c(Provider, State, National),
-             direction = "row",
-             method = "numeric",
-             palette = "Reds") |> 
+  #cols_hide(stat) |> 
+  #data_color(columns = c(Provider, State, National),
+  #           direction = "row",
+  #           method = "numeric",
+  #           palette = "Reds") |> 
   tab_options(table.width = pct(75),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
@@ -394,36 +407,36 @@ select(year,
 <br><br>
 
 ```{r}
-hcpcs |>
-select(year, 
-         level, 
-         HCPCS = hcpcs_code,
-         beneficiaries,
-         services, 
-         "Average Payment" = avg_payment) |> 
-  mutate("Services Per Beneficiary" = services/beneficiaries) |> 
-  select(-c(beneficiaries, services)) |> 
-  pivot_longer(!year:HCPCS, 
-               names_to = "stat", 
-               values_to = "amount") |> 
-  pivot_wider(names_from = level, 
-              values_from = amount) |> 
-  arrange(stat, HCPCS) |> 
-  filter(stat %in% c("Services Per Beneficiary")) |> 
-  gt(rowname_col = "year") |> 
-  fmt_number(columns = c(Provider, State, National), decimals = 2) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Services Per Beneficiary** By HCPCS")) |> 
-  cols_hide(stat) |> 
-  data_color(columns = c(Provider, State, National),
-             direction = "row",
-             method = "numeric",
-             palette = "Reds") |> 
-  tab_options(table.width = pct(75),
-              column_labels.font.weight = "bold",
-              row_group.font.weight = "bold",
-              heading.background.color = "black",
-              heading.align = "left")
+# hcpcs |>
+# select(year, 
+#          level, 
+#          HCPCS = hcpcs_code,
+#          beneficiaries,
+#          services, 
+#          "Average Payment" = avg_payment) |> 
+#   mutate("Services Per Beneficiary" = services/beneficiaries) |> 
+#   select(-c(beneficiaries, services)) |> 
+#   pivot_longer(!year:HCPCS, 
+#                names_to = "stat", 
+#                values_to = "amount") |> 
+#   pivot_wider(names_from = level, 
+#               values_from = amount) |> 
+#   arrange(stat, HCPCS) |> 
+#   filter(stat %in% c("Services Per Beneficiary")) |> 
+#   gt(rowname_col = "year") |> 
+#   fmt_number(columns = c(Provider, State, National), decimals = 2) |> 
+#   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+#   tab_header(title = md("**Services Per Beneficiary** By HCPCS")) |> 
+#   cols_hide(stat) |> 
+#   data_color(columns = c(Provider, State, National),
+#              direction = "row",
+#              method = "numeric",
+#              palette = "Reds") |> 
+#   tab_options(table.width = pct(75),
+#               column_labels.font.weight = "bold",
+#               row_group.font.weight = "bold",
+#               heading.background.color = "black",
+#               heading.align = "left")
 ```
 
 <br>

@@ -126,7 +126,10 @@ check_pac <- function(x,
 #'    provider specialty and reassignment of benefits) is linked through the
 #'    Enrollment ID.
 #'
-#' @param enroll_id 15-digit unique alphanumeric identifier
+#' @param x 15-digit unique alphanumeric identifier
+#' @param arg description
+#' @param call description
+#' @param type ind or org
 #' @return boolean, `TRUE` or `FALSE`
 #' @examplesIf interactive()
 #' # Valid:
@@ -142,7 +145,8 @@ check_pac <- function(x,
 #' @noRd
 check_enid <- function(x,
                        arg = rlang::caller_arg(x),
-                       call = rlang::caller_env()) {
+                       call = rlang::caller_env(),
+                       type = NULL) {
 
   # Abort if not character vector
   if (is.character(x) != TRUE) {
@@ -173,6 +177,24 @@ check_enid <- function(x,
       "An {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
       "x" = "{.val {x}} begins with {.val {first}}."), call = call)
 
+  }
+
+  if (!is.null(type) && type %in% "ind") {
+    first <- unlist(strsplit(x, ""))[1]
+    if (first != "I") {
+      cli::cli_abort(c(
+        "An {.strong Individual Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
+        "x" = "{.val {x}} begins with {.val {first}}."), call = call)
+    }
+  }
+
+  if (!is.null(type) && type %in% "org") {
+    first <- unlist(strsplit(x, ""))[1]
+    if (first != "O") {
+      cli::cli_abort(c(
+        "An {.strong Organizational Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
+        "x" = "{.val {x}} begins with {.val {first}}."), call = call)
+    }
   }
 }
 

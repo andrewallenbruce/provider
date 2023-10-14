@@ -28,18 +28,10 @@ test_that("check_enid() works", {
   expect_snapshot(check_enid("012345678912345"), error = TRUE)
   expect_snapshot(check_enid("L20031110000070"), error = TRUE)
 
-})
+  expect_equal(check_enid("O20031110000070", type = "org"), NULL)
+  expect_snapshot(check_enid("I20031110000070", type = "org"), error = TRUE)
 
-# test_that("enroll_org_check() works", {
-#
-#   expect_equal(enroll_org_check("O20031110000070"), NULL)
-#   expect_snapshot(enroll_org_check("I20031110000070"), error = TRUE)
-#
-# })
-#
-# test_that("enroll_ind_check() works", {
-#
-#   expect_equal(enroll_ind_check("I20031110000070"), NULL)
-#   expect_snapshot(enroll_ind_check("O20031110000070"), error = TRUE)
-#
-# })
+  expect_equal(check_enid("I20031110000070", type = "ind"), NULL)
+  expect_snapshot(check_enid("O20031110000070", type = "ind"), error = TRUE)
+
+})

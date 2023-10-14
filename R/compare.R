@@ -29,9 +29,8 @@ compare_hcpcs <- function(serv_tbl) {
   x <- serv_tbl |>
     dplyr::select(year, state, hcpcs_code, pos) |>
     dplyr::rowwise() |>
-    dplyr::mutate(state = by_geography(year, state, hcpcs_code, pos),
-                  national = by_geography(year, state = "National",
-                                          hcpcs_code, pos), .keep = "none")
+    dplyr::mutate(state = list(by_geography(year, state, hcpcs_code, pos)),
+                  national = list(by_geography(year, state = "National", hcpcs_code, pos)), .keep = "none")
 
   results <- vctrs::vec_rbind(
     dplyr::rename(serv_tbl,
@@ -39,16 +38,17 @@ compare_hcpcs <- function(serv_tbl) {
                   services = tot_srvcs) |>
       hcpcs_cols(),
 
-    dplyr::mutate(x$state,
+    dplyr::mutate(purrr::list_rbind(x$state),
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
       hcpcs_cols(),
 
-    dplyr::mutate(x$national,
+    dplyr::mutate(purrr::list_rbind(x$national),
                   beneficiaries = tot_benes / tot_provs,
                   services = tot_srvcs / tot_provs) |>
       hcpcs_cols()) |>
-    dplyr::mutate(level = forcats::fct_inorder(level))
+    dplyr::mutate(level = forcats::fct_inorder(level)) |>
+    dplyr::filter(family != "No RBCS Family")
 
   return(results)
 

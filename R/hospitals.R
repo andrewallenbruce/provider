@@ -138,10 +138,7 @@ hospitals <- function(npi = NULL,
   if (!is.null(pac_org))       {pac_org      <- check_pac(pac_org)}
   if (!is.null(zip))           {zip          <- as.character(zip)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
-  if (!is.null(enid_org)) {
-    check_enid(enid_org)
-    enroll_org_check(enid_org)
-  }
+  if (!is.null(enid_org))      {check_enid(enid_org, type = "org")}
 
   if (!is.null(registration)) {rlang::arg_match(registration, c("P", "N"))}
 

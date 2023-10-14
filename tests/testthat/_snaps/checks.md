@@ -79,3 +79,21 @@
       ! An Enrollment ID must begin with a capital `I` or `O`.
       x "L20031110000070" begins with "L".
 
+---
+
+    Code
+      check_enid("I20031110000070", type = "org")
+    Condition
+      Error:
+      ! An Organizational Enrollment ID must begin with a capital `O`.
+      x "I20031110000070" begins with "I".
+
+---
+
+    Code
+      check_enid("O20031110000070", type = "ind")
+    Condition
+      Error:
+      ! An Individual Enrollment ID must begin with a capital `I`.
+      x "O20031110000070" begins with "O".
+
