@@ -495,3 +495,203 @@ miss_cols <- function(df) {
   df |> dplyr::select(dplyr::all_of(cols))
 
 }
+
+#' @param year < *integer* > // **required** Calendar year of Medicare
+#' enrollment, in `YYYY` format. Run [cc_years()] to return a vector of
+#' currently available years.
+#' @param level < *character* > Geographic level of aggregation
+#' + `"national"`
+#' + `"state"`
+#' + `"county"`
+#' @param sublevel < *character* > Beneficiary's state or county
+#' @param fips < *character* > Beneficiary's state or county FIPS code
+#' @param age < *character* > Age group level of aggregation
+#' + `"All"`
+#' + `"<65"`
+#' + `"65+"`
+#' @param demo,subdemo < *character* > Demographic level of aggregation
+#' + `"All"`
+#' + `"Sex"` /// `"Male"` // `"Female"`
+#' + `"Race"` /// `"non-Hispanic White"` // `"non-Hispanic Black"` // `"Asian Pacific Islander"` // `"Hispanic"` // `"Native American"`
+#' + `"Dual Status"` /// `"Medicare and Medicaid"` // `"Medicare Only"`
+#' @param mcc < *character* > Number of chronic conditions
+#' + `"0-1"`
+#' + `"2-3"`
+#' + `"4-5"`
+#' + `"6+"`
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @autoglobal
+#' @noRd
+cc_multiple <- function(year,
+                        level = NULL,
+                        sublevel = NULL,
+                        fips = NULL,
+                        age = NULL,
+                        demo = NULL,
+                        subdemo = NULL,
+                        mcc = NULL,
+                        tidy = TRUE) {
+
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, as.character(cc_years()))
+
+  if (!is.null(level)) {
+    rlang::arg_match(level, levels())
+    level <- stringr::str_to_title(level)
+  }
+  if (!is.null(age)) {rlang::arg_match(age, ages())}
+  if (!is.null(demo)) {rlang::arg_match(demo, demo())}
+  if (!is.null(subdemo)) {rlang::arg_match(subdemo, subdemo())}
+  if (!is.null(mcc)) {rlang::arg_match(mcc, mcc())}
+  if (!is.null(fips)) {fips <- as.character(fips)}
+
+  if (!is.null(sublevel) && (sublevel %in% state.abb)) {
+    sublevel <- abb2full(sublevel)
+  }
+
+  args <- dplyr::tribble(
+    ~param,            ~arg,
+    "Bene_Geo_Lvl",     level,
+    "Bene_Geo_Desc",    sublevel,
+    "Bene_Geo_Cd",      fips,
+    "Bene_Age_Lvl",     age,
+    "Bene_Demo_Lvl",    demo,
+    "Bene_Demo_Desc",   subdemo,
+    "Bene_MCC",         mcc)
+
+  id <- api_years("mcc") |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
+
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
+
+  response <- httr2::request(url) |> httr2::req_perform()
+
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+
+    cli_args <- dplyr::tribble(
+      ~x,             ~y,
+      "year",         year,
+      "level",        level,
+      "sublevel",     sublevel,
+      "fips",         fips,
+      "age",          age,
+      "demo",         demo,
+      "subdemo",      subdemo,
+      "mcc",          mcc) |>
+      tidyr::unnest(cols = c(y))
+
+    format_cli(cli_args)
+    return(invisible(NULL))
+  }
+
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+
+  if (tidy) {results <- cols_cc(tidyup(results, int = c("year"),
+                                       dbl = c("prvlnc", "_pc", "er_")))}
+  return(results)
+}
+
+#' @param year < *integer* > // **required** Calendar year of Medicare
+#' enrollment, in `YYYY` format. Run [cc_years()] to return a vector of
+#' currently available years.
+#' @param level < *character* > Geographic level of aggregation: `"national"`, `"state"`, or `"county"`
+#' @param sublevel < *character* > Beneficiary's state or county
+#' @param fips < *character* > Beneficiary's state or county FIPS code
+#' @param age < *character* > Age level of aggregation: `"all"`, `"<65"`, or `"65+"`
+#' @param demo,subdemo < *character* > Demographic level of aggregation
+#' + __`"All"`__
+#' + __`"Sex"`__: `"Male"`, `"Female"`
+#' + __`"Race"`__: `"non-Hispanic White"`, `"non-Hispanic Black"`, `"Asian Pacific Islander"`, `"Hispanic"`, `"Native American"`
+#' + __`"Dual Status"`__: `"Medicare and Medicaid"`, `"Medicare Only"`
+#' @param condition < *character* > Chronic condition for which the prevalence
+#' and utilization is compiled
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @autoglobal
+#' @noRd
+cc_specific <- function(year,
+                        condition = NULL,
+                        sublevel = NULL,
+                        level = NULL,
+                        fips = NULL,
+                        age = NULL,
+                        demo = NULL,
+                        subdemo = NULL,
+                        tidy = TRUE) {
+
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, as.character(cc_years()))
+
+  if (!is.null(level)) {
+    rlang::arg_match(level, levels())
+    level <- stringr::str_to_title(level)
+  }
+
+  if (!is.null(age)) {
+    rlang::arg_match(age, ages())
+    if (age == "all") {age <- "All"}
+  }
+
+  if (!is.null(demo)) {
+    rlang::arg_match(demo, demo())
+    demo <- demo_convert(demo)
+  }
+
+  if (!is.null(subdemo)) {
+    rlang::arg_match(subdemo, subdemo())
+    subdemo <- subdemo_convert(subdemo)
+  }
+
+  if (!is.null(sublevel) && (sublevel %in% state.abb)) {
+    sublevel <- abb2full(sublevel)
+  }
+
+  if (!is.null(fips)) {fips <- as.character(fips)}
+
+  args <- dplyr::tribble(
+    ~param,            ~arg,
+    "Bene_Geo_Lvl",     level,
+    "Bene_Geo_Desc",    sublevel,
+    "Bene_Geo_Cd",      fips,
+    "Bene_Age_Lvl",     age,
+    "Bene_Demo_Lvl",    demo,
+    "Bene_Demo_Desc",   subdemo,
+    "Bene_Cond",        condition)
+
+  id <- api_years("scc") |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
+
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
+
+  response <- httr2::request(url) |> httr2::req_perform()
+
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+
+    cli_args <- dplyr::tribble(
+      ~x,             ~y,
+      "year",         year,
+      "level",        level,
+      "sublevel",     sublevel,
+      "fips",         fips,
+      "age",          age,
+      "demo",         demo,
+      "subdemo",      subdemo,
+      "condition",    condition) |>
+      tidyr::unnest(cols = c(y))
+
+    format_cli(cli_args)
+
+    return(invisible(NULL))
+  }
+
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+
+  if (tidy) {results <- cols_cc(tidyup(results, int = c("year"),
+                                       dbl = c("prvlnc", "_pc", "er_")))}
+  return(results)
+}

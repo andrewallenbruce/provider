@@ -22,13 +22,13 @@
 #' @name compare
 NULL
 
-#' @param tbl A [tibble][tibble::tibble-package] returned from [by_service()]
+#' @param serv_tbl A [tibble][tibble::tibble-package] returned from [by_service()]
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_hcpcs <- function(tbl) {
+compare_hcpcs <- function(serv_tbl) {
 
-  x <- tbl |>
+  x <- serv_tbl |>
     dplyr::select(year, state, hcpcs_code, pos) |>
     dplyr::rowwise() |>
     dplyr::mutate(state = by_geography(year, state, hcpcs_code, pos),
@@ -36,7 +36,7 @@ compare_hcpcs <- function(tbl) {
                                           hcpcs_code, pos), .keep = "none")
 
   results <- vctrs::vec_rbind(
-    dplyr::rename(tbl,
+    dplyr::rename(serv_tbl,
                   beneficiaries = tot_benes,
                   services = tot_srvcs) |>
       hcpcs_cols(),
@@ -79,32 +79,32 @@ hcpcs_cols <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param tbl A [tibble][tibble::tibble-package] returned from [by_provider()]
+#' @param prov_tbl A [tibble][tibble::tibble-package] returned from [by_provider()]
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_conditions <- function(tbl) {
+compare_conditions <- function(prov_tbl) {
 
-  p <- dplyr::select(tbl, year, conditions) |>
+  p <- dplyr::select(prov_tbl, year, conditions) |>
     tidyr::unnest(conditions) |>
     dplyr::mutate(level = "Provider", .after = year) |>
     dplyr::rename(
-      "Atrial Fibrillation" = cc_af,
-      "Alzheimer's Disease/Dementia" = cc_alz,
-      "Asthma" = cc_asth,
-      "Cancer" = cc_canc,
-      "Heart Failure" = cc_chf,
-      "Chronic Kidney Disease" = cc_ckd,
-      "COPD" = cc_copd,
-      "Depression" = cc_dep,
-      "Diabetes" = cc_diab,
-      "Hyperlipidemia" = cc_hplip,
-      "Hypertension" = cc_hpten,
-      "Ischemic Heart Disease" = cc_ihd,
-      "Osteoporosis" = cc_opo,
-      "Arthritis" = cc_raoa,
+      "Atrial Fibrillation"                         = cc_af,
+      "Alzheimer's Disease/Dementia"                = cc_alz,
+      "Asthma"                                      = cc_asth,
+      "Cancer"                                      = cc_canc,
+      "Heart Failure"                               = cc_chf,
+      "Chronic Kidney Disease"                      = cc_ckd,
+      "COPD"                                        = cc_copd,
+      "Depression"                                  = cc_dep,
+      "Diabetes"                                    = cc_diab,
+      "Hyperlipidemia"                              = cc_hplip,
+      "Hypertension"                                = cc_hpten,
+      "Ischemic Heart Disease"                      = cc_ihd,
+      "Osteoporosis"                                = cc_opo,
+      "Arthritis"                                   = cc_raoa,
       "Schizophrenia and Other Psychotic Disorders" = cc_sz,
-      "Stroke" = cc_strk) |>
+      "Stroke"                                      = cc_strk) |>
     tidyr::pivot_longer(cols = !c(year, level),
                  names_to = "condition",
                  values_to = "prevalence") |>
@@ -113,23 +113,27 @@ compare_conditions <- function(tbl) {
 
   n <- dplyr::select(p, year, condition) |>
     dplyr::rowwise() |>
-    dplyr::mutate(national = cc_specific(year,
-                                         condition,
-                                         sublevel = "National",
-                                         demo = "All",
-                                         subdemo = "All",
-                                         age = "All"), .keep = "none")
+    dplyr::mutate(national = conditions(year,
+                                        condition,
+                                        type = "specific",
+                                        sublevel = "national",
+                                        demo = "all",
+                                        subdemo = "all",
+                                        age = "all"),
+                  .keep = "none")
 
   s <- dplyr::left_join(dplyr::select(p, year, condition),
-                        dplyr::select(tbl, year, sublevel = state),
+                        dplyr::select(prov_tbl, year, sublevel = state),
                         by = dplyr::join_by(year)) |>
     dplyr::rowwise() |>
-    dplyr::mutate(statewide = cc_specific(year,
-                                          condition,
-                                          sublevel,
-                                          demo = "All",
-                                          subdemo = "All",
-                                          age = "All"), .keep = "none")
+    dplyr::mutate(statewide = conditions(year,
+                                         condition,
+                                         sublevel,
+                                         type = "specific",
+                                         demo = "all",
+                                         subdemo = "all",
+                                         age = "all"),
+                  .keep = "none")
 
   results <- vctrs::vec_rbind(p,
                    dplyr::select(s$statewide,

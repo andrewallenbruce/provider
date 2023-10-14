@@ -6,12 +6,14 @@
 \alias{compare_conditions}
 \title{Compare Yearly Provider Data To State And National Averages}
 \usage{
-compare_hcpcs(tbl)
+compare_hcpcs(serv_tbl)
 
-compare_conditions(tbl)
+compare_conditions(prov_tbl)
 }
 \arguments{
-\item{tbl}{A \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_provider]{by_provider()}}}
+\item{serv_tbl}{A \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_service]{by_service()}}}
+
+\item{prov_tbl}{A \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_provider]{by_provider()}}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing:

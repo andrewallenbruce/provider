@@ -86,7 +86,7 @@
 #' by_geography(year = 2020, hcpcs_code = "0002A")
 #'
 #' # Use the years helper function to retrieve results for every year:
-#' prac_years() |>
+#' pop_years() |>
 #' map(\(x) by_provider(year = x, npi = 1043477615)) |>
 #' list_rbind()
 #'
