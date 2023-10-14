@@ -105,14 +105,18 @@ national averages</p></li>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_hcpcs</span><span class="op">(</span><span class="va">serv_tbl</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">compare_conditions</span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">compare_conditions</span><span class="op">(</span><span class="va">prov_tbl</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>tbl</dt>
+    <dl><dt>serv_tbl</dt>
+<dd><p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_service()</a></code></p></dd>
+
+
+<dt>prov_tbl</dt>
 <dd><p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> returned from <code><a href="utilization.html">by_provider()</a></code></p></dd>
 
 </dl></div>
