@@ -208,8 +208,9 @@ NULL
 #' @param par < *boolean* > Identifies whether the provider participates in
 #' Medicare and/or accepts assignment of Medicare allowed amounts
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest `hcpcs_detailed`,
-#' `demographics` and `conditions` columns
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest `demographics` and `conditions`
+#' @param detailed < *boolean* > // __default:__ `FALSE` Include `detailed` column
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @rdname utilization
 #' @autoglobal
 #' @export
@@ -230,7 +231,9 @@ by_provider <- function(year,
                         specialty = NULL,
                         par = NULL,
                         tidy = TRUE,
-                        nest = TRUE) {
+                        nest = TRUE,
+                        detailed = FALSE,
+                        na.rm = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -292,36 +295,39 @@ by_provider <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
-                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
-                    rndrng_prvdr_ent_cd = entype_char(rndrng_prvdr_ent_cd),
-                    dplyr::across(dplyr::ends_with(c("_hcpcs_cds", "_benes", "_srvcs", "_cnt")), as.integer),
-                    dplyr::across(dplyr::ends_with(c("amt", "chrg", "pct")), as.double)) |>
-      tidyr::unite("address",
-                   dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
-                   remove = TRUE,
-                   na.rm = TRUE,
-                   sep = " ") |>
-      cols_prov()
+    results$year <- year
+    results <- janitor::clean_names(results) |>
+      cols_prov() |>
+      tidyup(yn = c("par"),
+             int = c("year", "_hcpcs", "bene", "_srvcs"),
+             dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc")) |>
+      address(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")) |>
+      dplyr::mutate(credential = clean_credentials(credential),
+                    entity_type = entype_char(entity_type))
 
     if (nest) {
-      results <- results |>
-        tidyr::nest(medical        = dplyr::starts_with("med_"),
-                    drug           = dplyr::starts_with("drug_"),
+      results <- tidyr::nest(results,
                     demographics   = dplyr::starts_with("bene_"),
-                    conditions     = dplyr::starts_with("cc_")) |>
-        tidyr::nest(hcpcs_detailed = c(medical, drug))
-        }
-
+                    conditions     = dplyr::starts_with("cc_"))
+    }
+    if (detailed) {
+      results <- tidyr::nest(results,
+                             medical = dplyr::starts_with("med_"),
+                             drug = dplyr::starts_with("drug_")) |>
+        tidyr::nest(results,
+                    detailed = c(medical, drug))
+    } else {
+      results <- dplyr::select(results,
+                               -dplyr::starts_with("med_"),
+                               -dplyr::starts_with("drug_"))
+    }
+      if (na.rm) {results <- narm(results)}
   }
   return(results)
 }
@@ -340,13 +346,13 @@ cols_prov <- function(df) {
             "gender"         = "rndrng_prvdr_gndr",
             "credential"     = "rndrng_prvdr_crdntls",
             "specialty"      = "rndrng_prvdr_type",
-            "address",
+            'rndrng_prvdr_st1',
+            'rndrng_prvdr_st2',
             "city"           = "rndrng_prvdr_city",
             "state"          = "rndrng_prvdr_state_abrvtn",
             "zip"            = "rndrng_prvdr_zip5",
             "fips"           = "rndrng_prvdr_state_fips",
             "ruca"           = "rndrng_prvdr_ruca",
-            # "ruca_desc"    = "rndrng_prvdr_ruca_desc",
             "country"        = "rndrng_prvdr_cntry",
             "par"            = "rndrng_prvdr_mdcr_prtcptg_ind",
             "tot_hcpcs"      = "tot_hcpcs_cds",
@@ -375,12 +381,12 @@ cols_prov <- function(df) {
             "bene_age_65_74" = "bene_age_65_74_cnt",
             "bene_age_75_84" = "bene_age_75_84_cnt",
             "bene_age_gt84"  = "bene_age_gt_84_cnt",
-            "bene_female"    = "bene_feml_cnt",
-            "bene_male"      = "bene_male_cnt",
+            "bene_gen_female"    = "bene_feml_cnt",
+            "bene_gen_male"      = "bene_male_cnt",
             "bene_race_wht"  = "bene_race_wht_cnt",
             "bene_race_blk"  = "bene_race_black_cnt",
             "bene_race_api"  = "bene_race_api_cnt",
-            "bene_race_span" = "bene_race_hspnc_cnt",
+            "bene_race_hisp" = "bene_race_hspnc_cnt",
             "bene_race_nat"  = "bene_race_nat_ind_cnt",
             "bene_race_oth"  = "bene_race_othr_cnt",
             "bene_dual"      = "bene_dual_cnt",
@@ -404,7 +410,6 @@ cols_prov <- function(df) {
             "hcc_risk_avg"   = "bene_avg_risk_scre")
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
@@ -438,6 +443,7 @@ cols_prov <- function(df) {
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @rdname utilization
 #' @autoglobal
 #' @export
@@ -461,7 +467,8 @@ by_service <- function(year,
                        drug = NULL,
                        pos = NULL,
                        tidy = TRUE,
-                       rbcs = TRUE) {
+                       rbcs = TRUE,
+                       na.rm = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -532,55 +539,54 @@ by_service <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    level = "Provider",
-                    dplyr::across(dplyr::starts_with("tot_"), as.integer),
-                    dplyr::across(dplyr::starts_with("avg_"), as.double),
-                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
-                    rndrng_prvdr_ent_cd = entype_char(rndrng_prvdr_ent_cd),
-                    place_of_srvc = pos_char(place_of_srvc),
-                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
-                    hcpcs_drug_ind = yn_logical(hcpcs_drug_ind)) |>
-      tidyr::unite("address",
-                   dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
-                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+    results$year <- year
+    results$level <- "Provider"
+
+    results <- tidyup(results,
+                      yn = c("_ind"),
+                      int = c("year", "tot_"),
+                      dbl = c("avg_")) |>
+      address(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")) |>
       cols_serv()
 
-    if (rbcs) {
-      rbcs <- results |>
-        dplyr::distinct(hcpcs_code) |>
-        dplyr::pull(hcpcs_code) |>
-        purrr::map(\(x) betos(hcpcs_code = x)) |>
-        purrr::list_rbind()
-
-      if (isTRUE(vctrs::vec_is_empty(rbcs))) {
-
-        results
-
-      } else {
-
-        rbcs <- dplyr::select(rbcs,
-                              hcpcs_code,
-                              category,
-                              subcategory,
-                              family,
-                              procedure)
-
-        results <- dplyr::full_join(results, rbcs,
-                   by = dplyr::join_by(hcpcs_code)) |>
-          cols_serv2()
-      }
-    }
+    if (rbcs) {results <- rbcs_util(results)}
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+rbcs_util <- function(df) {
+
+  rbcs <- df |>
+    dplyr::distinct(hcpcs_code) |>
+    dplyr::pull(hcpcs_code) |>
+    purrr::map(\(x) betos(hcpcs_code = x)) |>
+    purrr::list_rbind()
+
+  if (vctrs::vec_is_empty(rbcs)) {
+
+    return(df)
+
+  } else {
+
+    rbcs <- dplyr::select(rbcs,
+                          hcpcs_code,
+                          category,
+                          subcategory,
+                          family,
+                          procedure)
+
+    cols_rbcs(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs_code)))
+  }
 }
 
 #' @param df data frame
@@ -630,7 +636,7 @@ cols_serv <- function(df) {
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-cols_serv2 <- function(df) {
+cols_rbcs <- function(df) {
 
   cols <- c('year',
             'npi',
@@ -648,7 +654,6 @@ cols_serv2 <- function(df) {
             'zip',
             'fips',
             'ruca',
-            # 'ruca_desc',
             'country',
             'par',
             'hcpcs_code',
@@ -659,6 +664,7 @@ cols_serv2 <- function(df) {
             'procedure',
             'drug',
             'pos',
+            'tot_provs',
             'tot_benes',
             'tot_srvcs',
             'tot_day',
@@ -668,7 +674,6 @@ cols_serv2 <- function(df) {
             'avg_std_pymt')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
@@ -690,6 +695,7 @@ cols_serv2 <- function(df) {
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @rdname utilization
 #' @autoglobal
 #' @export
@@ -701,7 +707,8 @@ by_geography <- function(year,
                          fips = NULL,
                          drug = NULL,
                          tidy = TRUE,
-                         rbcs = TRUE) {
+                         rbcs = TRUE,
+                         na.rm = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -717,12 +724,7 @@ by_geography <- function(year,
     rlang::arg_match(pos, c("F", "O"))
   }
 
-  if (!is.null(state) && (state %in% state.abb)) {
-    state <- dplyr::tibble(x = state.abb,
-                           y = state.name) |>
-      dplyr::filter(x == state) |>
-      dplyr::pull(y)
-  }
+  if (!is.null(state) && (state %in% state.abb)) {state <- abb2full(state)}
 
   args <- dplyr::tribble(
     ~param,                  ~arg,
@@ -764,39 +766,16 @@ by_geography <- function(year,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    hcpcs_drug_ind = yn_logical(hcpcs_drug_ind),
-                    place_of_srvc  = pos_char(place_of_srvc),
-                    dplyr::across(dplyr::starts_with("tot_"), as.integer),
-                    dplyr::across(dplyr::starts_with("avg_"), as.double)) |>
+    results$year <- year
+    results <- tidyup(results,
+                      yn = c("_ind"),
+                      int = c("year", "tot_"),
+                      dbl = c("avg_")) |>
+      dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
       cols_geo()
 
-    if (rbcs) {
-      rbcs <- results |>
-        dplyr::distinct(hcpcs_code) |>
-        dplyr::pull(hcpcs_code) |>
-        purrr::map(\(x) betos(hcpcs_code = x)) |>
-        purrr::list_rbind()
-
-      if (isTRUE(vctrs::vec_is_empty(rbcs))) {
-
-        results
-
-      } else {
-
-        rbcs <- dplyr::select(rbcs,
-                              hcpcs_code,
-                              category,
-                              subcategory,
-                              family,
-                              procedure)
-
-        results <- dplyr::full_join(results, rbcs,
-                   by = dplyr::join_by(hcpcs_code)) |>
-          cols_geo2()
-      }
-    }
+    if (rbcs) {results <- rbcs_util(results)}
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
 }
@@ -824,35 +803,4 @@ cols_geo <- function(df) {
             "avg_std_pymt" = "avg_mdcr_stdzd_amt")
 
   df |> dplyr::select(dplyr::any_of(cols))
-
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_geo2 <- function(df) {
-
-  cols <- c("year",
-            "level",
-            "state",
-            "fips",
-            "hcpcs_code",
-            "hcpcs_desc",
-            'category',
-            'subcategory',
-            'family',
-            'procedure',
-            "drug",
-            "pos",
-            "tot_provs",
-            "tot_benes",
-            "tot_srvcs",
-            "tot_day",
-            "avg_charge",
-            "avg_allowed",
-            "avg_payment",
-            "avg_std_pymt")
-
-  df |> dplyr::select(dplyr::any_of(cols))
-
 }

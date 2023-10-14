@@ -6,7 +6,7 @@
 #' [conditions()] allows the user access to data concerning chronic conditions
 #' among Original Medicare (or fee-for-service) beneficiaries.
 #'
-#' @section `type = "specific"`:
+#' @section `set = "specific"`:
 #'
 #' The __Specific Chronic Conditions__ dataset provides information on
 #' prevalence, use and spending organized by geography and 21 distinct chronic
@@ -34,7 +34,7 @@
 #' 1. Schizophrenia and Other Psychotic Disorders
 #' 1. Stroke
 #'
-#' @section `type = "multiple"`:
+#' @section `set = "multiple"`:
 #'
 #' The __Multiple Chronic Conditions__ dataset provides information on
 #' prevalence, use and spending organized by geography and the count of chronic
@@ -77,15 +77,15 @@
 #' @param year < *integer* > // **required** Calendar year of Medicare
 #' enrollment, in `YYYY` format. Run [cc_years()] to return a vector of
 #' currently available years.
-#' @param type `"multiple"` or `"specific"`
+#' @param set < *character* > // **required** `"multiple"` or `"specific"`
 #' @param level < *character* > Geographic level of aggregation: `"national"`, `"state"`, or `"county"`
 #' @param sublevel < *character* > Beneficiary's state or county
 #' @param fips < *character* > Beneficiary's state or county FIPS code
 #' @param age < *character* > Age level of aggregation: `"all"`, `"<65"`, or `"65+"`
-#' @param demo,subdemo < *character* > Demographic/subdemographic level of
-#' aggregation: `"all"`, `"sex"` (`"male"`, `"female"`), `"race"` (`"white"`,
-#' `"black"`, `"island"`, `"hispanic"`, `"native"`), `"dual"` (`"nondual"`, `"dual"`).
-#' @param mcc < *character* > Number of chronic conditions: `"0_1"`, `"2_3"`, `"4_5"`, `"6_"`
+#' @param demo,subdemo < *character* > __Demographic__, _subdemographic_ level of
+#' aggregation: __`"all"`__, __`"sex"`__ (`"male"`, `"female"`), __`"race"`__ (`"white"`,
+#' `"black"`, `"island"`, `"hispanic"`, `"native"`), __`"dual"`__ (`"nondual"`, `"dual"`).
+#' @param mcc < *character* > Number of chronic conditions: `"0-1"`, `"2-3"`, `"4-5"`, `"6+"`
 #' @param condition < *character* > Chronic condition for which the prevalence
 #' and utilization is compiled (see above for list of conditions)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
@@ -94,17 +94,18 @@
 #' @returns A [tibble][tibble::tibble-package] with the following columns:
 #'
 #' @examplesIf interactive()
-#' chronic_conditions(year = 2018, type = "specific", level = "state", sublevel = "CA")
-#' chronic_conditions(year = 2018, type = "multiple", level = "state", sublevel = "California")
+#' conditions(year = 2018, set = "specific", sublevel = "CA", demo = "all")
+#' conditions(year = 2018, set = "specific", sublevel = "CA", subdemo = "female", age = "all")
+#' conditions(year = 2018, set = "multiple", sublevel = "California", subdemo = "female")
 #'
-#' chronic_conditions(year = 2007, type = "specific", level = "national", demo = "race")
-#' chronic_conditions(year = 2007, type = "multiple", level = "national", demo = "race")
+#' conditions(year = 2007, set = "specific", level = "national", demo = "race")
+#' conditions(year = 2007, set = "multiple", level = "national", demo = "race")
 #' @autoglobal
 #' @export
 conditions <- function(year,
                        condition = NULL,
                        sublevel = NULL,
-                       type = c("multiple", "specific"),
+                       set = c("multiple", "specific"),
                        level = NULL,
                        fips = NULL,
                        age = NULL,
@@ -115,12 +116,12 @@ conditions <- function(year,
                        na.rm = TRUE) {
 
   rlang::check_required(year)
-  rlang::check_required(type)
+  rlang::check_required(set)
 
   year <- as.character(year)
 
   rlang::arg_match(year, as.character(cc_years()))
-  rlang::arg_match(type, c("multiple", "specific"))
+  rlang::arg_match(set, c("multiple", "specific"))
 
   if (!is.null(mcc)) {
     if (type == "specific") {
@@ -130,9 +131,8 @@ conditions <- function(year,
   }
 
   if (!is.null(condition)) {
-    if (type == "multiple") {cli::cli_abort(c("{.arg condition} is only available for {.arg type = 'multiple'}."))}
-    # rlang::arg_match(condition, c(conds("abb"), conds("full")))
-    # if (condition %in% conds("abb")) condition <- cond_convert(condition)
+    if (type == "multiple") {
+      cli::cli_abort(c("{.arg condition} is only available for {.arg type = 'multiple'}."))}
   }
 
   if (!is.null(level)) {
@@ -172,10 +172,10 @@ conditions <- function(year,
     "Bene_MCC",         mcc,
     "Bene_Cond",        condition)
 
-  if (type == "multiple") df <- api_years("mcc")
-  if (type == "specific") df <- api_years("scc")
+  if (set == "multiple") yr <- api_years("mcc")
+  if (set == "specific") yr <- api_years("scc")
 
-  id <- dplyr::filter(df, year == {{ year }}) |> dplyr::pull(distro)
+  id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                 id, "/data.json?", encode_param(args))
@@ -202,8 +202,11 @@ conditions <- function(year,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {results <- cols_cc(tidyup(results, int = c("year"),
-                                       dbl = c("prvlnc", "_pc", "er_")))
+  if (tidy) {
+    results$year <- year
+    results <- cols_cc(tidyup(results,
+                              int = "year",
+                              dbl = c("prvlnc", "_pc", "er_")))
   if (na.rm) {results <- narm(results)}}
   return(results)
 }
@@ -229,17 +232,6 @@ cols_cc <- function(df) {
             'er_visits_per_1k'    = 'er_visits_per_1000_benes')
 
   df |> dplyr::select(dplyr::any_of(cols))
-}
-
-#' @param abb state abbreviation
-#' @return state full name
-#' @autoglobal
-#' @noRd
-abb2full <- function(abb) {
-  dplyr::tibble(x = state.abb,
-                y = state.name) |>
-    dplyr::filter(x == abb) |>
-    dplyr::pull(y)
 }
 
 #' @autoglobal
@@ -304,7 +296,7 @@ subdemo_convert <- function(x) {
 
 #' @autoglobal
 #' @noRd
-mcc <- function() {c("0_1", "2_3", "4_5", "6+")}
+mcc <- function() {c("0-1", "2-3", "4-5", "6+")}
 
 #' @param x mcc arg
 #' @return mcc arg

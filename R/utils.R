@@ -70,6 +70,17 @@ tf_2_yn <- function(x) {
   )
 }
 
+#' @param abb state abbreviation
+#' @return state full name
+#' @autoglobal
+#' @noRd
+abb2full <- function(abb) {
+  dplyr::tibble(x = state.abb,
+                y = state.name) |>
+    dplyr::filter(x == abb) |>
+    dplyr::pull(y)
+}
+
 #' Convert Place of Service values
 #' @param x vector
 #' @autoglobal

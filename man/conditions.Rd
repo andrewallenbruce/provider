@@ -8,7 +8,7 @@ conditions(
   year,
   condition = NULL,
   sublevel = NULL,
-  type = c("multiple", "specific"),
+  set = c("multiple", "specific"),
   level = NULL,
   fips = NULL,
   age = NULL,
@@ -29,7 +29,7 @@ and utilization is compiled (see above for list of conditions)}
 
 \item{sublevel}{< \emph{character} > Beneficiary's state or county}
 
-\item{type}{\code{"multiple"} or \code{"specific"}}
+\item{set}{< \emph{character} > // \strong{required} \code{"multiple"} or \code{"specific"}}
 
 \item{level}{< \emph{character} > Geographic level of aggregation: \code{"national"}, \code{"state"}, or \code{"county"}}
 
@@ -37,11 +37,11 @@ and utilization is compiled (see above for list of conditions)}
 
 \item{age}{< \emph{character} > Age level of aggregation: \code{"all"}, \code{"<65"}, or \code{"65+"}}
 
-\item{demo, subdemo}{< \emph{character} > Demographic/subdemographic level of
-aggregation: \code{"all"}, \code{"sex"} (\code{"male"}, \code{"female"}), \code{"race"} (\code{"white"},
-\code{"black"}, \code{"island"}, \code{"hispanic"}, \code{"native"}), \code{"dual"} (\code{"nondual"}, \code{"dual"}).}
+\item{demo, subdemo}{< \emph{character} > \strong{Demographic}, \emph{subdemographic} level of
+aggregation: \strong{\code{"all"}}, \strong{\code{"sex"}} (\code{"male"}, \code{"female"}), \strong{\code{"race"}} (\code{"white"},
+\code{"black"}, \code{"island"}, \code{"hispanic"}, \code{"native"}), \strong{\code{"dual"}} (\code{"nondual"}, \code{"dual"}).}
 
-\item{mcc}{< \emph{character} > Number of chronic conditions: \code{"0_1"}, \code{"2_3"}, \code{"4_5"}, \code{"6_"}}
+\item{mcc}{< \emph{character} > Number of chronic conditions: \code{"0-1"}, \code{"2-3"}, \code{"4-5"}, \code{"6+"}}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -56,7 +56,7 @@ A \link[tibble:tibble-package]{tibble} with the following columns:
 \code{\link[=conditions]{conditions()}} allows the user access to data concerning chronic conditions
 among Original Medicare (or fee-for-service) beneficiaries.
 }
-\section{\code{type = "specific"}}{
+\section{\code{set = "specific"}}{
 
 
 The \strong{Specific Chronic Conditions} dataset provides information on
@@ -87,7 +87,7 @@ conditions among Original Medicare beneficiaries:
 }
 }
 
-\section{\code{type = "multiple"}}{
+\section{\code{set = "multiple"}}{
 
 
 The \strong{Multiple Chronic Conditions} dataset provides information on
@@ -144,10 +144,11 @@ geographic areas in health care use among beneficiaries.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-chronic_conditions(year = 2018, type = "specific", level = "state", sublevel = "CA")
-chronic_conditions(year = 2018, type = "multiple", level = "state", sublevel = "California")
+conditions(year = 2018, set = "specific", sublevel = "CA", demo = "all")
+conditions(year = 2018, set = "specific", sublevel = "CA", subdemo = "female", age = "all")
+conditions(year = 2018, set = "multiple", sublevel = "California", subdemo = "female")
 
-chronic_conditions(year = 2007, type = "specific", level = "national", demo = "race")
-chronic_conditions(year = 2007, type = "multiple", level = "national", demo = "race")
+conditions(year = 2007, set = "specific", level = "national", demo = "race")
+conditions(year = 2007, set = "multiple", level = "national", demo = "race")
 \dontshow{\}) # examplesIf}
 }

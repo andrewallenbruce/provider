@@ -25,7 +25,9 @@ by_provider(
   specialty = NULL,
   par = NULL,
   tidy = TRUE,
-  nest = TRUE
+  nest = TRUE,
+  detailed = FALSE,
+  na.rm = TRUE
 )
 
 by_service(
@@ -49,7 +51,8 @@ by_service(
   drug = NULL,
   pos = NULL,
   tidy = TRUE,
-  rbcs = TRUE
+  rbcs = TRUE,
+  na.rm = TRUE
 )
 
 by_geography(
@@ -61,7 +64,8 @@ by_geography(
   fips = NULL,
   drug = NULL,
   tidy = TRUE,
-  rbcs = TRUE
+  rbcs = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
@@ -101,8 +105,11 @@ Medicare and/or accepts assignment of Medicare allowed amounts}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{hcpcs_detailed},
-\code{demographics} and \code{conditions} columns}
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{demographics} and \code{conditions}}
+
+\item{detailed}{< \emph{boolean} > // \strong{default:} \code{FALSE} Include \code{detailed} column}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific
 medical service furnished by the provider}

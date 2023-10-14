@@ -8,12 +8,14 @@
 \usage{
 compare_hcpcs(serv_tbl)
 
-compare_conditions(prov_tbl)
+compare_conditions(prov_tbl, pivot = TRUE)
 }
 \arguments{
-\item{serv_tbl}{A \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_service]{by_service()}}}
+\item{serv_tbl}{< \emph{tbl_df} > // \strong{required} \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_service]{by_service()}}}
 
-\item{prov_tbl}{A \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_provider]{by_provider()}}}
+\item{prov_tbl}{< \emph{tbl_df} > // \strong{required} \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_provider]{by_provider()}}}
+
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing:
@@ -34,11 +36,9 @@ national averages
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 compare_hcpcs(by_service(year = 2018, npi = 1023076643))
+compare_conditions(by_provider(year = 2018, npi = 1023076643))
 
-map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)) |>
-compare_hcpcs()
-
-map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)) |>
-compare_conditions()
+compare_hcpcs(map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)))
+compare_conditions(map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)))
 \dontshow{\}) # examplesIf}
 }

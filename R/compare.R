@@ -13,16 +13,14 @@
 #' + `compare_conditions()`
 #' @examplesIf interactive()
 #' compare_hcpcs(by_service(year = 2018, npi = 1023076643))
+#' compare_conditions(by_provider(year = 2018, npi = 1023076643))
 #'
-#' map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)) |>
-#' compare_hcpcs()
-#'
-#' map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)) |>
-#' compare_conditions()
+#' compare_hcpcs(map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)))
+#' compare_conditions(map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)))
 #' @name compare
 NULL
 
-#' @param serv_tbl A [tibble][tibble::tibble-package] returned from [by_service()]
+#' @param serv_tbl < *tbl_df* > // **required** [tibble][tibble::tibble-package] returned from [by_service()]
 #' @rdname compare
 #' @autoglobal
 #' @export
@@ -79,11 +77,13 @@ hcpcs_cols <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param prov_tbl A [tibble][tibble::tibble-package] returned from [by_provider()]
+#' @param prov_tbl < *tbl_df* > // **required** [tibble][tibble::tibble-package] returned from [by_provider()]
+#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_conditions <- function(prov_tbl) {
+compare_conditions <- function(prov_tbl,
+                               pivot = TRUE) {
 
   p <- dplyr::select(prov_tbl, year, conditions) |>
     tidyr::unnest(conditions) |>
@@ -115,8 +115,8 @@ compare_conditions <- function(prov_tbl) {
     dplyr::rowwise() |>
     dplyr::mutate(national = conditions(year,
                                         condition,
-                                        type = "specific",
                                         sublevel = "national",
+                                        set = "specific",
                                         demo = "all",
                                         subdemo = "all",
                                         age = "all"),
@@ -129,7 +129,7 @@ compare_conditions <- function(prov_tbl) {
     dplyr::mutate(statewide = conditions(year,
                                          condition,
                                          sublevel,
-                                         type = "specific",
+                                         set = "specific",
                                          demo = "all",
                                          subdemo = "all",
                                          age = "all"),
@@ -148,5 +148,10 @@ compare_conditions <- function(prov_tbl) {
                                  prevalence)) |>
     dplyr::arrange(year, condition)
 
+  if (pivot) {
+    results <- tidyr::pivot_wider(results,
+                                  names_from = c(year, level),
+                                  values_from = prevalence)
+  }
   return(results)
 }
