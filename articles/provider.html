@@ -118,23 +118,36 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The overarching goal of <code>provider</code> is to make the
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
+<p>The overarching goal of <a href="https://andrewallenbruce.github.io/provider/">provider</a> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
-through the following general goals, where possible:</p>
+through the following goals:</p>
 <ul>
-<li><p><strong>Tidy Output</strong>, with an option to turn it off by
-setting <code>tidy = FALSE</code>.</p></li>
+<li><p>Non-Destructive <strong>Tidy Output</strong>, with an option to
+turn it off by setting a function’s <code>tidy</code> parameter to
+<code>FALSE</code>.</p></li>
 <li><p><strong>Variable Standardization</strong>, for the express
 purpose of making it easier to understand (and make connections between)
-each API’s output. This will also allow for removal of duplicate
-information across API output, if desired.</p></li>
+each API’s output. This will also allow for the removal of duplicate
+information and greatly simplify the process of merging data across
+outputs.</p></li>
 <li><p><strong>Input Validation</strong>. Not only is this simply good
 practice, it also prevents unnecessary querying of APIs.</p></li>
-<li><p><strong>Helpful Documentation</strong>. Each API’s output can be
-difficult to understand, even for someone with expertise in R,
-healthcare, or both.</p></li>
+<li><p><strong>Helpful Documentation</strong>. The impetus for this
+package was to cobble together a motivating example of using a
+programming language to streamline the process of data acquisition for,
+among other things, medical coding, billing, and healthcare revenue
+cycle management. Though it’s now grown beyond that, the intended
+audience remiains the same: non-programmers in healthcare who are
+interested in what a programming language like R can do to make their
+work easier. As such, the documentation is written with in a way that
+assumes no prior knowledge of R or programming in general.
+Domain-specific terminology and concepts are explained in detail, as
+there is not one person in existence that understands every aspect of
+the business of health care, including the author of this
+package.</p></li>
 </ul>
 <p><br></p>
 <div class="section level2">
@@ -150,7 +163,7 @@ every <strong>row</strong> is an <em>observation</em>, and every
 <li>Storing multiple variables in one column</li>
 </ul>
 <p>To remedy this, there is some post-processing done to the output
-before it is returned. Each function has a <code>tidy</code> argument
+before it is returned. Each function has a <code>tidy</code> parameter
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
@@ -162,15 +175,15 @@ that is set to <code>TRUE</code> by default:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices</span></span></code></pre></div>
 <p><br></p>
-<p>Setting it to <code>FALSE</code> will return the un-processed
-output:</p>
+<p>Setting <code>tidy</code> to <code>FALSE</code> will return a
+data.frame of the API’s un-processed output:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD</span></span>
 <span><span class="co">#&gt; 1 1043477615   HUSSAIN      SARAH     Y   Y   Y   Y</span></span></code></pre></div>
 <p><br></p>
-<p>Setting it to <code>FALSE</code> will return the un-processed
-output:</p>
+<p>Several functions also have arguments that implement additional
+optional transformations to the output, such as <code>pivot</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
@@ -286,8 +299,525 @@ years:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">practice_size</span><span class="op">:</span><span class="va">payment_adjustment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in opt_table_font(gt_preview(select(map_dfr(qpp_years(), ~quality_payment(year = .x, : could not find function "opt_table_font"</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="iayxhewelw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#iayxhewelw table {
+  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iayxhewelw thead, #iayxhewelw tbody, #iayxhewelw tfoot, #iayxhewelw tr, #iayxhewelw td, #iayxhewelw th {
+  border-style: none;
+}
+
+#iayxhewelw p {
+  margin: 0;
+  padding: 0;
+}
+
+#iayxhewelw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iayxhewelw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iayxhewelw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iayxhewelw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iayxhewelw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iayxhewelw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iayxhewelw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iayxhewelw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iayxhewelw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iayxhewelw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iayxhewelw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iayxhewelw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iayxhewelw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iayxhewelw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iayxhewelw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iayxhewelw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iayxhewelw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iayxhewelw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iayxhewelw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iayxhewelw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iayxhewelw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iayxhewelw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iayxhewelw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iayxhewelw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iayxhewelw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iayxhewelw .gt_left {
+  text-align: left;
+}
+
+#iayxhewelw .gt_center {
+  text-align: center;
+}
+
+#iayxhewelw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iayxhewelw .gt_font_normal {
+  font-weight: normal;
+}
+
+#iayxhewelw .gt_font_bold {
+  font-weight: bold;
+}
+
+#iayxhewelw .gt_font_italic {
+  font-style: italic;
+}
+
+#iayxhewelw .gt_super {
+  font-size: 65%;
+}
+
+#iayxhewelw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iayxhewelw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iayxhewelw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iayxhewelw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iayxhewelw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iayxhewelw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iayxhewelw .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="practice_size">practice_size</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="clinician_specialty">clinician_specialty</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="years_in_medicare">years_in_medicare</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="participation_type">participation_type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="beneficiaries">beneficiaries</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="allowed_charges">allowed_charges</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="final_score">final_score</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="payment_adjustment">payment_adjustment</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
+<td headers="stub_1_1 year" class="gt_row gt_right">2017</td>
+<td headers="stub_1_1 practice_size" class="gt_row gt_right">1394</td>
+<td headers="stub_1_1 clinician_specialty" class="gt_row gt_left">Cardiac Electrophysiology</td>
+<td headers="stub_1_1 years_in_medicare" class="gt_row gt_right">5</td>
+<td headers="stub_1_1 participation_type" class="gt_row gt_left">MIPS APM</td>
+<td headers="stub_1_1 beneficiaries" class="gt_row gt_right">43007</td>
+<td headers="stub_1_1 allowed_charges" class="gt_row gt_right">36391760</td>
+<td headers="stub_1_1 final_score" class="gt_row gt_right">97.09</td>
+<td headers="stub_1_1 payment_adjustment" class="gt_row gt_right">1.72</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
+<td headers="stub_1_2 year" class="gt_row gt_right">2018</td>
+<td headers="stub_1_2 practice_size" class="gt_row gt_right">1297</td>
+<td headers="stub_1_2 clinician_specialty" class="gt_row gt_left">Cardiac Electrophysiology</td>
+<td headers="stub_1_2 years_in_medicare" class="gt_row gt_right">5</td>
+<td headers="stub_1_2 participation_type" class="gt_row gt_left">MIPS APM</td>
+<td headers="stub_1_2 beneficiaries" class="gt_row gt_right">41034</td>
+<td headers="stub_1_2 allowed_charges" class="gt_row gt_right">35008312</td>
+<td headers="stub_1_2 final_score" class="gt_row gt_right">100.00</td>
+<td headers="stub_1_2 payment_adjustment" class="gt_row gt_right">1.68</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
+<td headers="stub_1_3 year" class="gt_row gt_right">2019</td>
+<td headers="stub_1_3 practice_size" class="gt_row gt_right">1344</td>
+<td headers="stub_1_3 clinician_specialty" class="gt_row gt_left">Cardiac Electrophysiology</td>
+<td headers="stub_1_3 years_in_medicare" class="gt_row gt_right">6</td>
+<td headers="stub_1_3 participation_type" class="gt_row gt_left">MIPS APM</td>
+<td headers="stub_1_3 beneficiaries" class="gt_row gt_right">42222</td>
+<td headers="stub_1_3 allowed_charges" class="gt_row gt_right">36899498</td>
+<td headers="stub_1_3 final_score" class="gt_row gt_right">95.12</td>
+<td headers="stub_1_3 payment_adjustment" class="gt_row gt_right">1.46</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
+<td headers="stub_1_4 year" class="gt_row gt_right">2020</td>
+<td headers="stub_1_4 practice_size" class="gt_row gt_right">1440</td>
+<td headers="stub_1_4 clinician_specialty" class="gt_row gt_left">Cardiac Electrophysiology</td>
+<td headers="stub_1_4 years_in_medicare" class="gt_row gt_right">7</td>
+<td headers="stub_1_4 participation_type" class="gt_row gt_left">MIPS APM</td>
+<td headers="stub_1_4 beneficiaries" class="gt_row gt_right">39624</td>
+<td headers="stub_1_4 allowed_charges" class="gt_row gt_right">33458425</td>
+<td headers="stub_1_4 final_score" class="gt_row gt_right">96.70</td>
+<td headers="stub_1_4 payment_adjustment" class="gt_row gt_right">1.48</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
+<td headers="stub_1_5 year" class="gt_row gt_right">2021</td>
+<td headers="stub_1_5 practice_size" class="gt_row gt_right">1940</td>
+<td headers="stub_1_5 clinician_specialty" class="gt_row gt_left">Cardiac Electrophysiology</td>
+<td headers="stub_1_5 years_in_medicare" class="gt_row gt_right">8</td>
+<td headers="stub_1_5 participation_type" class="gt_row gt_left">MIPS APM</td>
+<td headers="stub_1_5 beneficiaries" class="gt_row gt_right">41404</td>
+<td headers="stub_1_5 allowed_charges" class="gt_row gt_right">35627551</td>
+<td headers="stub_1_5 final_score" class="gt_row gt_right">97.25</td>
+<td headers="stub_1_5 payment_adjustment" class="gt_row gt_right">1.94</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><br></p>
 </div>
 <div class="section level2">
