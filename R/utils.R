@@ -125,6 +125,7 @@ display_long <- function(df) {
 #' @param up cols to convert to upper case
 #' @param cred cols to remove periods from
 #' @param ent cols to convert to NPI entity type
+#' @param yr cols to convert to year with [dint::as_date_y()]
 #' @autoglobal
 #' @noRd
 tidyup <- function(df,
@@ -135,7 +136,8 @@ tidyup <- function(df,
                    chr = NULL,
                    up = NULL,
                    cred = NULL,
-                   ent = NULL) {
+                   ent = NULL,
+                   yr = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -150,6 +152,7 @@ tidyup <- function(df,
   if (!is.null(up))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
   if (!is.null(cred))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))}
   if (!is.null(ent))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent), entype_char))}
+  if (!is.null(yr))   {x <- dplyr::mutate(x, dplyr::across(dplyr::any_of(yr), dint::as_date_y))}
   return(x)
 }
 
@@ -175,28 +178,28 @@ narm <- function(df) {
   janitor::remove_empty(df, which = c("rows", "cols"))
 }
 
-#' Format Parameters and Arguments
 #' @param param API parameter
 #' @param arg API function arg
-#' @param filter description
-#' @param sql description
+#' @param type format type, `filter`, `sql`, default is `filter`
 #' @return formatted API filters
 #' @autoglobal
 #' @noRd
 format_param <- function(param,
                          arg,
-                         filter = FALSE,
-                         sql = FALSE) {
+                         type = "filter") {
 
-  if (isTRUE(filter)) {param <- paste0("filter[", param, "]=", arg)}
-  if (isTRUE(sql))    {param <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}
+  rlang::check_required(param)
+  rlang::check_required(arg)
+  rlang::arg_match(type, c("filter", "sql"))
+
+  if (type %in% 'filter') {out <- paste0("filter[", param, "]=", arg)}
+  if (type %in% 'sql')    {out <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}
   # %22 url encoding for double quote (")
 
-  return(param)
+  return(out)
 }
 
-#' encode_param
-#' @param args tibble with two columns: param and args
+#' @param args tibble with two columns: 'param' and 'args'
 #' @param type format type, `filter`, `sql`, default is `filter`
 #' @examples
 #' args <- dplyr::tribble(
@@ -212,20 +215,19 @@ format_param <- function(param,
 #' @noRd
 encode_param <- function(args, type = "filter") {
 
+  rlang::check_required(args)
+  rlang::arg_match(type, c("filter", "sql"))
+
   args <- tidyr::unnest(args, arg)
 
   if (type == "filter") {
-    args$filter <- TRUE
-    args$sql    <- FALSE
-
     args <- purrr::pmap(args, format_param) |>
       unlist() |>
       stringr::str_c(collapse = "&")
   }
 
   if (type == "sql") {
-    args$filter <- FALSE
-    args$sql    <- TRUE
+    args$type <- "sql"
 
     args <- purrr::pmap(args, format_param) |>
       unlist() |>
@@ -242,7 +244,6 @@ encode_param <- function(args, type = "filter") {
   return(args)
 }
 
-#' encode_url
 #' @param url parameter with a space
 #' @return parameter formatted with "%20" in lieu of a space
 #' @autoglobal

@@ -49,12 +49,7 @@ qpp_years <- function() {
 #' @export
 #' @keywords internal
 bene_years <- function(period = c("year", "month")) {
-
-  if (period == "year") {
-    return(beneficiaries(period = "Year",
-                         level = "National")$year)}
-
-  if (period == "month") {
-    return(beneficiaries(period = "January",
-                         level = "National")$year)}
+  if (period == "year") {out <- beneficiaries(period = "Year", level = "National")$year}
+  if (period == "month") {out <- beneficiaries(period = "January", level = "National")$year}
+  return(as.integer(out))
 }

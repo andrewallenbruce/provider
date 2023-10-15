@@ -220,7 +220,6 @@ open_payments <- function(year,
   }
 
   if (tidy) {
-    results$program_year <- year
     results <- tidyup(results,
                       yn = "_indicator",
                       dbl = "dollars",
@@ -231,22 +230,30 @@ open_payments <- function(year,
       combine(address, c('recipient_primary_business_street_address_line1', 'recipient_primary_business_street_address_line2')) |>
       combine(primary_other, c(paste0('covered_recipient_primary_type_', 2:6))) |>
       combine(specialty_other, c(paste0('covered_recipient_specialty_', 2:6))) |>
-      combine(license_state_other, c(paste0('covered_recipient_license_state_code_', 2:6))) |>
-      cols_open()
+      combine(license_state_other, c(paste0('covered_recipient_license_state_code', 2:6))) |>
+      cols_open() |>
+      tidyup(int = "program_year")
 
     if (pivot) {
+      pcol <- c(paste0('name_', 1:5),
+                paste0('covered_', 1:5),
+                paste0('type_', 1:5),
+                paste0('category_', 1:5),
+                paste0('ndc_', 1:5),
+                paste0('pdi_', 1:5))
+
       results <- tidyr::pivot_longer(
         results,
-        cols = name_1:pdi_5,
+        cols = dplyr::any_of(pcol),
         names_to = c("attr", "group"),
         names_pattern = "(.*)_(.)",
         values_to = "val") |>
         tidyr::pivot_wider(names_from = attr,
                            values_from = val,
                            values_fn = list) |>
-        tidyr::unnest(cols = c(name, type, category, ndc, pdi)) |>
-        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA),
-                      pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
+        tidyr::unnest(cols = dplyr::any_of(c('name', 'type', 'category', 'ndc', 'pdi'))) # |>
+        # dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA),
+        #               pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
     }
     if (na.rm) {results <- narm(results)}
   }

@@ -8,17 +8,14 @@ test_that("clean_credentials() works", {
 })
 
 test_that("na_blank() works", {
-  expect_equal(na_blank(""), NA_character_)
-  expect_equal(na_blank(" "), NA_character_)
-  expect_equal(na_blank("*"), NA_character_)
-  expect_equal(na_blank("--"), NA_character_)
+  x <- c("", " ", "*", "--")
+  expect_equal(na_blank(x), rep(NA_character_, 4))
 })
 
 test_that("yn_logical() works", {
   x <- c("Y", "YES", "Yes", "yes", "y", "True",
          "N", "NO", "No", "no", "n", "False")
-  y <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
-    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
+  y <- c(rep(TRUE, 6), rep(FALSE, 6))
   expect_equal(yn_logical(x), y)
 })
 
@@ -30,27 +27,26 @@ test_that("tf_2_yn() works", {
 
 test_that("pos_char() works", {
   x <- c("facility", "Facility", "F", "f", "office", "Office", "O", "o")
-  y <- c("F", "F", "F", "F", "O", "O", "O", "O")
+  y <- c(rep("F", 4), rep("O", 4))
   expect_equal(pos_char(x), y)
 })
 
+test_that("entype_char() works", {
+  x <- c("NPI-1", "I", "NPI-2", "O", "Group")
+  y <- c(rep("Individual", 2), rep("Organization", 2), "Group")
+  expect_equal(entype_char(x), y)
+})
+
 test_that("display_long() works", {
-
-  df <- dplyr::tribble(
-    ~x,      ~y,
-    "NPI",   "1144544834")
-
-  lng <- dplyr::tribble(
-    ~name,  ~value,
-    "x",    "NPI",
-    "y",    "1144544834")
-
-  expect_equal(display_long(df), lng)
+  x <- dplyr::tibble(x = "NPI", y = "1144544834")
+  y <- dplyr::tibble(name = c("x", "y"), value = c("NPI", "1144544834"))
+  expect_equal(display_long(x), y)
 })
 
 test_that("tidyup() works", {
   df <- dplyr::tibble(
     name = "John Doe ",
+    year = "1981",
     date = "1981/03/07",
     int = "123456789",
     dbl = "12.34",
@@ -65,6 +61,7 @@ test_that("tidyup() works", {
 
   tidy <- dplyr::tibble(
     name = "JOHN DOE",
+    year = dint::as_date_y(1981),
     date = anytime::anydate("1981/03/07"),
     int = 123456789,
     dbl = 12.34,
@@ -77,28 +74,42 @@ test_that("tidyup() works", {
     star = NA_character_,
     dash = NA_character_)
 
-  expect_equal(
-    tidyup(df, yn = "yn", int = "int", dbl = "dbl",
-           up = "name", cred = "cred", ent = c("ind", "org")), tidy)
+  expect_equal(tidyup(df, yn = "yn", int = c("int", "year"),
+                      dbl = "dbl", yr = "year", up = "name",
+                      cred = "cred", ent = c("ind", "org")), tidy)
 })
 
 test_that("combine() works", {
-  df <- dplyr::tibble(
-    x = "1234 Address Lane",
-    y = "STE 123",
-    z = NA)
+  x <- dplyr::tibble(x = "1234 Address Lane", y = "STE 123", z = NA)
+  y <- dplyr::tibble(address = "1234 Address Lane STE 123")
+  expect_equal(combine(x, address, c('x', 'y', 'z')), y)
+})
 
-  add <- dplyr::tibble(
-    address = "1234 Address Lane STE 123")
+test_that("narm() works", {
+  x <- dplyr::tibble(x = "1234 Address Lane", y = "STE 123", z = NA, a = NA)
+  y <- dplyr::tibble(x = "1234 Address Lane", y = "STE 123")
+  expect_equal(narm(x), y)
+})
 
-  expect_equal(combine(df, address, c('x', 'y', 'z')), add)
+test_that("format_param() works", {
+  a <- "npi"
+  b <- "1234567891"
+  y <- "filter[npi]=1234567891"
+  z <- "[WHERE npi = %221234567891%22]"
+
+  expect_equal(format_param(a, b), y)
+  expect_equal(format_param(a, b, "sql"), z)
+  expect_snapshot(format_param(), error = TRUE)
+  expect_snapshot(format_param(param = a), error = TRUE)
+  expect_snapshot(format_param(arg = b), error = TRUE)
+  expect_snapshot(format_param(a, b, "filthy"), error = TRUE)
 })
 
 test_that("encode_param() works", {
-  args <- dplyr::tribble(
-    ~param,      ~arg,
-    "NPI",       "1144544834")
+  args <- dplyr::tibble(param = "NPI", arg = "1144544834")
+  a <- "filter%5BNPI%5D=1144544834"
+  b <- "%5BWHERE%20NPI%20=%20%221144544834%22%5D"
 
-  expect_equal(encode_param(args), "filter%5BNPI%5D=1144544834")
-  expect_equal(encode_param(args, "sql"), "%5BWHERE%20NPI%20=%20%221144544834%22%5D")
+  expect_equal(encode_param(args), a)
+  expect_equal(encode_param(args, "sql"), b)
 })

@@ -99,7 +99,7 @@ beneficiaries <- function(year = NULL,
   response <- httr2::request(build_url("ben", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,           ~y,
@@ -118,7 +118,7 @@ beneficiaries <- function(year = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {results <- bene_cols(tidyup(results, int = c("year", "_benes")))}
+  if (tidy) {results <- bene_cols(tidyup(results, int = c("year", "_benes"), yr = 'year'))}
 
   if (!is.null(period) && period == "Month") {
     results <- dplyr::filter(results, period %in% month.name)
