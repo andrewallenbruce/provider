@@ -25,19 +25,20 @@ knitr::opts_chunk$set(
 library(provider)
 library(purrr)
 library(dplyr)
+library(gt)
 ```
 
 
-The overarching goal of `provider` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:
+The overarching goal of `{provider}` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following goals:
 
 
-   - **Tidy Output**, with an option to turn it off by setting `tidy = FALSE`.
+   + Non-Destructive **Tidy Output**, with an option to turn it off by setting a function's `tidy` parameter to `FALSE`.
 
-   - **Variable Standardization**, for the express purpose of making it easier to understand (and make connections between) each API's output. This will also allow for removal of duplicate information across API output, if desired.
+   + **Variable Standardization**, for the express purpose of making it easier to understand (and make connections between) each API's output. This will also allow for the removal of duplicate information and greatly simplify the process of merging data across outputs.
    
-   - **Input Validation**. Not only is this simply good practice, it also prevents unnecessary querying of APIs.
+   + **Input Validation**. Not only is this simply good practice, it also prevents unnecessary querying of APIs.
    
-   - **Helpful Documentation**. Each API's output can be difficult to understand, even for someone with expertise in R, healthcare, or both.
+   + **Helpful Documentation**. The impetus for this package was to cobble together a motivating example of using a programming language to streamline the process of data acquisition for, among other things, medical coding, billing, and healthcare revenue cycle management. Though it's now grown beyond that, the intended audience remiains the same: non-programmers in healthcare who are interested in what a programming language like R can do to make their work easier. As such, the documentation is written with in a way that assumes no prior knowledge of R or programming in general. Domain-specific terminology and concepts are explained in detail, as there is not one person in existence that understands every aspect of the business of health care, including the author of this package.
 
 <br>
 
@@ -50,7 +51,7 @@ Many of the outputs of these APIs violate this form by
    - Storing column headers as values, not variable names
    - Storing multiple variables in one column
 
-To remedy this, there is some post-processing done to the output before it is returned. Each function has a `tidy` argument that is set to `TRUE` by default:
+To remedy this, there is some post-processing done to the output before it is returned. Each function has a `tidy` parameter that is set to `TRUE` by default:
 
 ```{r}
 order_refer(npi = 1043477615)
@@ -58,7 +59,7 @@ order_refer(npi = 1043477615)
 
 <br>
 
-Setting it to `FALSE` will return the un-processed output:
+Setting `tidy` to `FALSE` will return a data.frame of the API's un-processed output:
 
 ```{r}
 order_refer(npi = 1043477615, tidy = FALSE)
@@ -66,7 +67,7 @@ order_refer(npi = 1043477615, tidy = FALSE)
 
 <br>
 
-Setting it to `FALSE` will return the un-processed output:
+Several functions also have arguments that implement additional optional transformations to the output, such as `pivot`:
 
 ```{r}
 order_refer(npi = 1043477615, pivot = FALSE)

@@ -1,0 +1,9 @@
+file: taxonomy_codes.qs
+file_size: 86289
+pin_hash: 2e167766cda01940
+type: qs
+title: 'taxonomy_codes: a pinned 874 x 9 data frame'
+description: NUCC Health Care Provider Taxonomy code set
+tags: ~
+created: 20231015T181028Z
+api_version: 1

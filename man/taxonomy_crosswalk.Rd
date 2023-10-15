@@ -2,7 +2,7 @@
 % Please edit documentation in R/taxonomy_crosswalk.R
 \name{taxonomy_crosswalk}
 \alias{taxonomy_crosswalk}
-\title{Taxonomy <-> Medicare Specialty}
+\title{Taxonomy Code // Medicare Specialty}
 \usage{
 taxonomy_crosswalk(
   taxonomy_code = NULL,
