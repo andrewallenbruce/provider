@@ -1,4 +1,4 @@
-#' Chronic Conditions
+#' Benficiary Chronic Conditions
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`

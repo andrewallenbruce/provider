@@ -118,5 +118,8 @@ Links:
 }
 
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 laboratories(clia = "11D0265516")
+laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
+\dontshow{\}) # examplesIf}
 }

@@ -147,10 +147,9 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results,
-                      yn = c("telehlth"),
+    results <- tidyup(results, yn = c("telehlth"),
                       int = c("num_org_mem", "grd_yr")) |>
-      address(c("adr_ln_1", "adr_ln_2")) |>
+      combine(address, c('adr_ln_1', 'adr_ln_2')) |>
       cols_clin()
 
     if (na.rm) {results <- narm(results)}

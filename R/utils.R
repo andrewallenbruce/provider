@@ -91,7 +91,20 @@ pos_char <- function(x) {
       c("facility", "Facility", "F", "f") ~ "F",
       c("office", "Office", "O", "o") ~ "O",
       .default = NULL)
-  }
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+entype_char <- function(x) {
+
+  dplyr::case_match(
+    x,
+    c("NPI-1", "I") ~ "Individual",
+    c("NPI-2", "O") ~ "Organization",
+    .default = x
+  )
+}
 
 #' @param df data frame
 #' @autoglobal
@@ -104,10 +117,14 @@ display_long <- function(df) {
 }
 
 #' @param df data frame
-#' @param dt date columns
-#' @param yn columns to convert to logical
-#' @param int columns to convert to integer
-#' @param dbl columns to convert to double
+#' @param dt cols to convert to date
+#' @param yn cols to convert to logical
+#' @param int cols to convert to integer
+#' @param dbl cols to convert to double
+#' @param chr cols to convert to character
+#' @param up cols to convert to upper case
+#' @param cred cols to remove periods from
+#' @param ent cols to convert to NPI entity type
 #' @autoglobal
 #' @noRd
 tidyup <- function(df,
@@ -115,7 +132,10 @@ tidyup <- function(df,
                    yn = NULL,
                    int = NULL,
                    dbl = NULL,
-                   up = NULL) {
+                   chr = NULL,
+                   up = NULL,
+                   cred = NULL,
+                   ent = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -123,24 +143,14 @@ tidyup <- function(df,
                   dplyr::across(dplyr::where(is.character), na_blank),
                   dplyr::across(dplyr::contains(dt), anytime::anydate))
 
-  if (!is.null(yn))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))}
-  if (!is.null(int)) {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int), as.integer))}
-  if (!is.null(dbl)) {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl), as.double))}
-  if (!is.null(up))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
+  if (!is.null(yn))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))}
+  if (!is.null(int))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int), as.integer))}
+  if (!is.null(dbl))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl), as.double))}
+  if (!is.null(chr))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr), as.character))}
+  if (!is.null(up))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
+  if (!is.null(cred))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))}
+  if (!is.null(ent))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent), entype_char))}
   return(x)
-}
-
-#' @param df data frame
-#' @param cols address columns
-#' @autoglobal
-#' @noRd
-address <- function(df, cols) {
-
-  tidyr::unite(df, "address",
-               dplyr::any_of(cols),
-               remove = TRUE,
-               na.rm = TRUE,
-               sep = " ")
 }
 
 #' @param df data frame
@@ -149,15 +159,13 @@ address <- function(df, cols) {
 #' @param sep separator
 #' @autoglobal
 #' @noRd
-combine <- function(df, nm, cols, sep = ", ") {
-
+combine <- function(df, nm, cols, sep = " ") {
   tidyr::unite(df,
-               nm,
-  dplyr::any_of(c(cols)),
-  remove = TRUE,
-  na.rm = TRUE,
-  sep = sep)
-
+               col = {{ nm }},
+               dplyr::any_of({{ cols }}),
+               remove = TRUE,
+               na.rm = TRUE,
+               sep = sep)
 }
 
 #' @param df data frame

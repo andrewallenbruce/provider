@@ -60,8 +60,7 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
 
   if (!is.null(keyword_search)) {
 
-    response <- httr2::request(encode_url(paste0(
-      build_url("tax"), keyword_search))) |>
+    response <- httr2::request(encode_url(paste0(build_url("tax"), keyword_search))) |>
       httr2::req_perform()
 
     } else {
@@ -78,7 +77,7 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (vctrs::vec_is_empty(results)) {
 
     cli_args <- dplyr::tribble(
       ~x,                     ~y,
@@ -221,11 +220,10 @@ cols_cross <- function(df) {
 #' download_nucc_csv()
 #' @autoglobal
 #' @export
+#' @keywords internal
 download_nucc_csv <- function() {
 
-  url <- "https://www.nucc.org"
-
-  x <- rvest::session(url) |>
+  x <- rvest::session("https://www.nucc.org") |>
        rvest::session_follow_link("Code Sets") |>
        rvest::session_follow_link("Taxonomy") |>
        rvest::session_follow_link("CSV") |>
@@ -234,7 +232,7 @@ download_nucc_csv <- function() {
        stringr::str_subset("taxonomy") |>
        stringr::str_subset("csv")
 
-  x <- rvest::session(paste0(url, x)) |>
+  x <- rvest::session(paste0("https://www.nucc.org", x)) |>
        rvest::session_follow_link("Version")
 
   x <- x$response$url
@@ -242,16 +240,14 @@ download_nucc_csv <- function() {
   x <- data.table::fread(x) |>
     dplyr::tibble() |>
     janitor::clean_names() |>
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::everything(), ~dplyr::na_if(., "")),
-      dplyr::across(
-        dplyr::everything(), ~stringr::str_squish(.))) |>
-    dplyr::select(category = section,
-                  grouping,
-                  classification,
-                  specialization,
-                  # display_name, definition,
-                  taxonomy = code)
+    dplyr::mutate(dplyr::across(dplyr::everything(), ~dplyr::na_if(., "")),
+      dplyr::across(dplyr::everything(), ~stringr::str_squish(.))) |>
+    dplyr::select(taxonomy_code = code,
+                  taxonomy_category = section,
+                  taxonomy_grouping = grouping,
+                  taxonomy_classification = classification,
+                  taxonomy_specialization = specialization,
+                  taxonomy_display_name = display_name,
+                  taxonomy_definition = definition)
   return(x)
 }

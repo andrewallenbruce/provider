@@ -58,7 +58,6 @@ pending <- function(type,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 

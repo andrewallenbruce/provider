@@ -55,6 +55,9 @@ test_that("tidyup() works", {
     int = "123456789",
     dbl = "12.34",
     yn = "Y",
+    cred = "M.D.",
+    ind = "NPI-1",
+    org = "NPI-2",
     blank = "",
     space = " ",
     star = "*",
@@ -66,19 +69,20 @@ test_that("tidyup() works", {
     int = 123456789,
     dbl = 12.34,
     yn = TRUE,
+    cred = "MD",
+    ind = "Individual",
+    org = "Organization",
     blank = NA_character_,
     space = NA_character_,
     star = NA_character_,
     dash = NA_character_)
 
-  expect_equal(tidyup(df,
-                      yn = "yn",
-                      int = "int",
-                      dbl = "dbl",
-                      up = "name"), tidy)
+  expect_equal(
+    tidyup(df, yn = "yn", int = "int", dbl = "dbl",
+           up = "name", cred = "cred", ent = c("ind", "org")), tidy)
 })
 
-test_that("address() works", {
+test_that("combine() works", {
   df <- dplyr::tibble(
     x = "1234 Address Lane",
     y = "STE 123",
@@ -87,7 +91,7 @@ test_that("address() works", {
   add <- dplyr::tibble(
     address = "1234 Address Lane STE 123")
 
-  expect_equal(address(df, c("x", "y", "z")), add)
+  expect_equal(combine(df, address, c('x', 'y', 'z')), add)
 })
 
 test_that("encode_param() works", {

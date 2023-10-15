@@ -125,7 +125,6 @@ affiliations <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
 
   }

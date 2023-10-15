@@ -83,8 +83,9 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' laboratories(clia = "11D0265516")
+#' laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 #' @autoglobal
 #' @export
 laboratories <- function(name = NULL,
@@ -147,7 +148,8 @@ laboratories <- function(name = NULL,
 
   if (tidy) {
     results <- tidyup(results, dt = c("_dt"), yn = c("_sw")) |>
-      address(c("st_adr", "addtnl_st_adr")) |>
+      combine(address, c('st_adr', 'addtnl_st_adr')) |>
+      combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
       dplyr::mutate(pgm_trmntn_cd               = termcd(pgm_trmntn_cd),
                     crtfctn_actn_type_cd        = toa(crtfctn_actn_type_cd),
                     cmplnc_stus_cd              = status(cmplnc_stus_cd),
@@ -161,13 +163,14 @@ laboratories <- function(name = NULL,
                     duration                    = duration_vec(trmntn_exprtn_dt),
                     expired                     = dplyr::if_else(duration < 0, TRUE, FALSE),
                     duration                    = NULL) |>
-      tidyr::unite("name", c(fac_name, addtnl_fac_name), na.rm = TRUE) |>
       cols_lab()
 
     if (pivot) {
       res <- dplyr::select(results, -dplyr::starts_with("acr_"))
 
-      acr <- dplyr::select(results, clia_number, dplyr::starts_with("acr_")) |>
+      acr <- dplyr::select(results,
+                           clia_number,
+                           dplyr::starts_with("acr_")) |>
         dplyr::select(clia_number,
                       a2la       = acr_a2la,
                       a2la_ind   = acr_a2la_ind,
@@ -256,60 +259,60 @@ laboratories <- function(name = NULL,
 #' @noRd
 cols_lab <- function(df) {
 
-  cols <- c('name',
-            'clia_number' = 'prvdr_num',
-            'certificate' = 'crtfct_type_cd',
-            # 'clia_medicare' = 'clia_mdcr_num',
-            # 'application' = 'aplctn_type_cd',
-            'effective_date' = 'crtfct_efctv_dt',
-            'expiration_date' = 'trmntn_exprtn_dt',
+  cols <- c('provider_name',
+            'clia_number'           = 'prvdr_num',
+            'certificate'           = 'crtfct_type_cd',
+            # 'clia_medicare'       = 'clia_mdcr_num',
+            # 'application'         = 'aplctn_type_cd',
+            'effective_date'        = 'crtfct_efctv_dt',
+            'expiration_date'       = 'trmntn_exprtn_dt',
             'expired',
-            'termination_reason' = 'pgm_trmntn_cd',
-            'status' = 'cmplnc_stus_cd',
-            'poc_ind' = 'acptbl_poc_sw',
-            # 'termination_code' = 'clia_trmntn_cd',
-            'type_of_action' = 'crtfctn_actn_type_cd',
-            'ownership_type' = 'gnrl_cntl_type_cd',
-            'facility_type' = 'gnrl_fac_type_cd',
+            'termination_reason'    = 'pgm_trmntn_cd',
+            'status'                = 'cmplnc_stus_cd',
+            'poc_ind'               = 'acptbl_poc_sw',
+            # 'termination_code'    = 'clia_trmntn_cd',
+            'type_of_action'        = 'crtfctn_actn_type_cd',
+            'ownership_type'        = 'gnrl_cntl_type_cd',
+            'facility_type'         = 'gnrl_fac_type_cd',
             'director_affiliations' = 'drctly_afltd_lab_cnt',
-            # 'category' = 'prvdr_ctgry_cd',
-            # 'subcategory' = 'prvdr_ctgry_sbtyp_cd',
+            # 'category'            = 'prvdr_ctgry_cd',
+            # 'subcategory'         = 'prvdr_ctgry_sbtyp_cd',
 
             'address',
-            'city' = 'city_name',
-            'state' = 'state_cd',
-            'zip' = 'zip_cd',
-            'phone' = 'phne_num',
-            'fax' = 'fax_phne_num',
-            'orig_part_date' = 'orgnl_prtcptn_dt',
-            'application_date' = 'aplctn_rcvd_dt',
-            'certification_date' = 'crtfctn_dt',
-            'mailed_date' = 'crtfct_mail_dt',
+            'city'                  = 'city_name',
+            'state'                 = 'state_cd',
+            'zip'                   = 'zip_cd',
+            'phone'                 = 'phne_num',
+            'fax'                   = 'fax_phne_num',
+            'orig_part_date'        = 'orgnl_prtcptn_dt',
+            'application_date'      = 'aplctn_rcvd_dt',
+            'certification_date'    = 'crtfctn_dt',
+            'mailed_date'           = 'crtfct_mail_dt',
 
-            # 'region' = 'rgn_cd',
-            # 'state_region' = 'state_rgn_cd',
-            # 'fips_county' = 'fips_cnty_cd',
-            # 'fips_state' = 'fips_state_cd',
-            # 'cbsa' = 'cbsa_cd',
-            # 'cbsa_ind' = 'cbsa_urbn_rrl_ind',
-            # 'carrier' = 'intrmdry_carr_cd',
-            # 'carrier_prior' = 'intrmdry_carr_prior_cd',
-            # 'medicaid_vendor' = 'mdcd_vndr_num',
-            # 'chow_count' = 'chow_cnt',
-            # 'chow_date_prev' = 'chow_prior_dt',
-            # 'chow_date' = 'chow_dt',
-            # 'fiscal_year_end' = 'fy_end_mo_day_cd',
-            # 'eligible_ind' = 'elgblty_sw',
-            # 'skeleton_ind' = 'skltn_rec_sw',
-            # 'multi_site_ind' = 'mlt_site_excptn_sw',
-            # 'hosp_campus_ind' = 'hosp_lab_excptn_sw',
-            # 'pub_health_ind' = 'non_prft_excptn_sw',
-            # 'tmp_test_site_ind' = 'lab_temp_tstg_site_sw',
-            # 'shared_lab_ind' = 'shr_lab_sw',
+            # 'region'              = 'rgn_cd',
+            # 'state_region'        = 'state_rgn_cd',
+            # 'fips_county'         = 'fips_cnty_cd',
+            # 'fips_state'          = 'fips_state_cd',
+            # 'cbsa'                = 'cbsa_cd',
+            # 'cbsa_ind'            = 'cbsa_urbn_rrl_ind',
+            # 'carrier'             = 'intrmdry_carr_cd',
+            # 'carrier_prior'       = 'intrmdry_carr_prior_cd',
+            # 'medicaid_vendor'     = 'mdcd_vndr_num',
+            # 'chow_count'          = 'chow_cnt',
+            # 'chow_date_prev'      = 'chow_prior_dt',
+            # 'chow_date'           = 'chow_dt',
+            # 'fiscal_year_end'     = 'fy_end_mo_day_cd',
+            # 'eligible_ind'        = 'elgblty_sw',
+            # 'skeleton_ind'        = 'skltn_rec_sw',
+            # 'multi_site_ind'      = 'mlt_site_excptn_sw',
+            # 'hosp_campus_ind'     = 'hosp_lab_excptn_sw',
+            # 'pub_health_ind'      = 'non_prft_excptn_sw',
+            # 'tmp_test_site_ind'   = 'lab_temp_tstg_site_sw',
+            # 'shared_lab_ind'      = 'shr_lab_sw',
             # 'shared_lab_xref_number',
-            # 'lab_site_count' = 'lab_site_cnt',
-            # 'ppm_test_count' = 'ppmp_test_vol_cnt',
-            # 'acc_sched' = 'acrdtn_schdl_cd',
+            # 'lab_site_count'      = 'lab_site_cnt',
+            # 'ppm_test_count'      = 'ppmp_test_vol_cnt',
+            # 'acc_sched'           = 'acrdtn_schdl_cd',
             # 'form_116_acrdtd_test_vol_cnt',
             # 'form_116_test_vol_cnt',
             # 'form_1557_crtfct_schdl_cd',
@@ -318,218 +321,199 @@ cols_lab <- function(df) {
             # 'wvd_test_vol_cnt',
 
             # American Association for Laboratory Accreditation
-            'acr_a2la' = 'a2la_acrdtd_cd',
-            'acr_a2la_ind' = 'a2la_acrdtd_y_match_sw',
-            'acr_a2la_date' = 'a2la_acrdtd_y_match_dt',
+            'acr_a2la'              = 'a2la_acrdtd_cd',
+            'acr_a2la_ind'          = 'a2la_acrdtd_y_match_sw',
+            'acr_a2la_date'         = 'a2la_acrdtd_y_match_dt',
 
             # American Association of Blood Banks
-            'acr_aabb' = 'aabb_acrdtd_cd',
-            'acr_aabb_ind' = 'aabb_acrdtd_y_match_sw',
-            'acr_aabb_date' = 'aabb_acrdtd_y_match_dt',
+            'acr_aabb'              = 'aabb_acrdtd_cd',
+            'acr_aabb_ind'          = 'aabb_acrdtd_y_match_sw',
+            'acr_aabb_date'         = 'aabb_acrdtd_y_match_dt',
 
             # American Osteopathic Association
-            'acr_aoa' = 'aoa_acrdtd_cd',
-            'acr_aoa_ind' = 'aoa_acrdtd_y_match_sw',
-            'acr_aoa_date' = 'aoa_acrdtd_y_match_dt',
+            'acr_aoa'               = 'aoa_acrdtd_cd',
+            'acr_aoa_ind'           = 'aoa_acrdtd_y_match_sw',
+            'acr_aoa_date'          = 'aoa_acrdtd_y_match_dt',
 
             # American Society for Histocompatibility and Immunogenetics
-            'acr_ashi' = 'ashi_acrdtd_cd',
-            'acr_ashi_ind' = 'ashi_acrdtd_y_match_sw',
-            'acr_ashi_date' = 'ashi_acrdtd_y_match_dt',
+            'acr_ashi'              = 'ashi_acrdtd_cd',
+            'acr_ashi_ind'          = 'ashi_acrdtd_y_match_sw',
+            'acr_ashi_date'         = 'ashi_acrdtd_y_match_dt',
 
             # College of American Pathologists
-            'acr_cap' = 'cap_acrdtd_cd',
-            'acr_cap_ind' = 'cap_acrdtd_y_match_sw',
-            'acr_cap_date' = 'cap_acrdtd_y_match_dt',
+            'acr_cap'               = 'cap_acrdtd_cd',
+            'acr_cap_ind'           = 'cap_acrdtd_y_match_sw',
+            'acr_cap_date'          = 'cap_acrdtd_y_match_dt',
 
             # Commission on Office Laboratory Accreditation
-            'acr_cola' = 'cola_acrdtd_cd',
-            'acr_cola_ind' = 'cola_acrdtd_y_match_sw',
-            'acr_cola_date' = 'cola_acrdtd_y_match_dt',
+            'acr_cola'              = 'cola_acrdtd_cd',
+            'acr_cola_ind'          = 'cola_acrdtd_y_match_sw',
+            'acr_cola_date'         = 'cola_acrdtd_y_match_dt',
 
             # the Joint Commission
-            'acr_jcaho' = 'jcaho_acrdtd_cd',
-            'acr_jcaho_ind' = 'jcaho_acrdtd_y_match_sw',
-            'acr_jcaho_date' = 'jcaho_acrdtd_y_match_dt',
+            'acr_jcaho'             = 'jcaho_acrdtd_cd',
+            'acr_jcaho_ind'         = 'jcaho_acrdtd_y_match_sw',
+            'acr_jcaho_date'        = 'jcaho_acrdtd_y_match_dt',
 
-            'clia_class_current' = 'current_clia_lab_clsfctn_cd')
+            'clia_class_current'    = 'current_clia_lab_clsfctn_cd')
 
-  df |> dplyr::select(dplyr::all_of(cols),
+  df |> dplyr::select(dplyr::any_of(cols),
     # dplyr::starts_with("clia_lab_classification_cd_"),
     dplyr::contains("_provider_number_"))
-
 }
 
 #' @autoglobal
 #' @noRd
 toa <- function(x) {
-
   dplyr::case_match(x,
-                    "1" ~ "Initial",
-                    "2" ~ "Recertification",
-                    "3" ~ "Termination",
-                    "4" ~ "Change of Ownership",
-                    "5" ~ "Validation",
-                    "8" ~ "Full Survey After Complaint",
-                    .default = x
-  )
+      "1" ~ "Initial",
+      "2" ~ "Recertification",
+      "3" ~ "Termination",
+      "4" ~ "Change of Ownership",
+      "5" ~ "Validation",
+      "8" ~ "Full Survey After Complaint",
+      .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 app <- function(x) {
-
   dplyr::case_match(x,
-                    "1" ~ "Compliance",
-                    "2" ~ "Waiver",
-                    "3" ~ "Accreditation",
-                    "4" ~ "PPM",
-                    "9" ~ "Registration",
-                    .default = x
-  )
+      "1" ~ "Compliance",
+      "2" ~ "Waiver",
+      "3" ~ "Accreditation",
+      "4" ~ "PPM",
+      "9" ~ "Registration",
+      .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 cert <- function(x) {
-
   dplyr::case_match(x,
-                    "compliance"    ~ "1",
-                    "waiver"        ~ "2",
-                    "accreditation" ~ "3",
-                    "ppm"           ~ "4",
-                    "registration"  ~ "9",
-                    .default = x
-  )
+      "compliance"    ~ "1",
+      "waiver"        ~ "2",
+      "accreditation" ~ "3",
+      "ppm"           ~ "4",
+      "registration"  ~ "9",
+      .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 status <- function(x) {
-
   dplyr::case_match(x,
-                    "A" ~ "In Compliance",
-                    "B" ~ "Not In Compliance",
-                    .default = x
-  )
+      "A" ~ "In Compliance",
+      "B" ~ "Not In Compliance",
+      .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 region <- function(x) {
-
   dplyr::case_match(x,
-                    "01" ~ "Boston",
-                    "02" ~ "New York",
-                    "03" ~ "Philadelphia",
-                    "04" ~ "Atlanta",
-                    "05" ~ "Chicago",
-                    "06" ~ "Dallas",
-                    "07" ~ "Kansas City",
-                    "08" ~ "Denver",
-                    "09" ~ "San Francisco",
-                    "10" ~ "Seattle",
-                    .default = x
-  )
+      "01" ~ "Boston",
+      "02" ~ "New York",
+      "03" ~ "Philadelphia",
+      "04" ~ "Atlanta",
+      "05" ~ "Chicago",
+      "06" ~ "Dallas",
+      "07" ~ "Kansas City",
+      "08" ~ "Denver",
+      "09" ~ "San Francisco",
+      "10" ~ "Seattle",
+      .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 owner <- function(x) {
-
   dplyr::case_match(x,
-                    "01" ~ "Religious Affiliation",
-                    "02" ~ "Private",
-                    "03" ~ "Other",
-                    "04" ~ "Proprietary",
-                    "05" ~ "Govt: City",
-                    "06" ~ "Govt: County",
-                    "07" ~ "Govt: State",
-                    "08" ~ "Govt: Federal",
-                    "09" ~ "Govt: Other",
-                    "10" ~ "Unknown",
-                    .default = x
-  )
+    "01" ~ "Religious Affiliation",
+    "02" ~ "Private",
+    "03" ~ "Other",
+    "04" ~ "Proprietary",
+    "05" ~ "Govt: City",
+    "06" ~ "Govt: County",
+    "07" ~ "Govt: State",
+    "08" ~ "Govt: Federal",
+    "09" ~ "Govt: Other",
+    "10" ~ "Unknown",
+    .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 factype <- function(x) {
-
   dplyr::case_match(x,
-                    "01" ~ "Ambulance",
-                    "02" ~ "Ambulatory Surgical Center",
-                    "03" ~ "Ancillary Test Site",
-                    "04" ~ "Assisted Living Facility",
-                    "05" ~ "Blood Banks",
-                    "06" ~ "Community Clinic",
-                    "07" ~ "Comprehensive Outpatient Rehab",
-                    "08" ~ "End-Stage Renal Disease Dialysis",
-                    "09" ~ "Federally Qualified Health Center",
-                    "10" ~ "Health Fair",
-                    "11" ~ "Health Maintenance Organization",
-                    "12" ~ "Home Health Agency",
-                    "13" ~ "Hospice",
-                    "14" ~ "Hospital",
-                    "15" ~ "Independent",
-                    "16" ~ "Industrial",
-                    "17" ~ "Insurance",
-                    "18" ~ "Intermediate Care Facility/Individuals with Intellectual Disabilities",
-                    "19" ~ "Mobile Lab",
-                    "20" ~ "Pharmacy",
-                    "21" ~ "Physician Office",
-                    "22" ~ "Other Practitioner",
-                    "23" ~ "Prison",
-                    "24" ~ "Public Health Laboratory",
-                    "25" ~ "Rural Health Clinic",
-                    "26" ~ "School/Student Health Service",
-                    "27" ~ "Skilled Nursing Facility",
-                    "28" ~ "Tissue Bank/Repositories",
-                    "29" ~ "Other",
-                    .default = x
-  )
+    "01" ~ "Ambulance",
+    "02" ~ "Ambulatory Surgical Center",
+    "03" ~ "Ancillary Test Site",
+    "04" ~ "Assisted Living Facility",
+    "05" ~ "Blood Banks",
+    "06" ~ "Community Clinic",
+    "07" ~ "Comprehensive Outpatient Rehab",
+    "08" ~ "End-Stage Renal Disease Dialysis",
+    "09" ~ "Federally Qualified Health Center",
+    "10" ~ "Health Fair",
+    "11" ~ "Health Maintenance Organization",
+    "12" ~ "Home Health Agency",
+    "13" ~ "Hospice",
+    "14" ~ "Hospital",
+    "15" ~ "Independent",
+    "16" ~ "Industrial",
+    "17" ~ "Insurance",
+    "18" ~ "Intermediate Care Facility/Individuals with Intellectual Disabilities",
+    "19" ~ "Mobile Lab",
+    "20" ~ "Pharmacy",
+    "21" ~ "Physician Office",
+    "22" ~ "Other Practitioner",
+    "23" ~ "Prison",
+    "24" ~ "Public Health Laboratory",
+    "25" ~ "Rural Health Clinic",
+    "26" ~ "School/Student Health Service",
+    "27" ~ "Skilled Nursing Facility",
+    "28" ~ "Tissue Bank/Repositories",
+    "29" ~ "Other",
+    .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 labclass <- function(x) {
-
   dplyr::case_match(x,
-                    c("00", "22") ~ "CLIA Lab",
-                    "01" ~ "CLIA88 Lab",
-                    "05" ~ "CLIA Exempt Lab",
-                    "10" ~ "CLIA VA Lab",
-                    .default = x
-  )
+    c("00", "22") ~ "CLIA Lab",
+    "01" ~ "CLIA88 Lab",
+    "05" ~ "CLIA Exempt Lab",
+    "10" ~ "CLIA VA Lab",
+    .default = x)
 }
 
 #' @autoglobal
 #' @noRd
 termcd <- function(x) {
-
   dplyr::case_match(x,
-                    "00" ~ "Active Provider",
-                    "01" ~ "Voluntary: Merger, Closure",
-                    "02" ~ "Voluntary: Dissatisfaction with Reimbursement",
-                    "03" ~ "Voluntary: Risk of Involuntary Termination",
-                    "04" ~ "Voluntary: Other Reason for Withdrawal",
-                    "05" ~ "Involuntary: Failure to Meet Health-Safety Req",
-                    "06" ~ "Involuntary: Failure to Meet Agreement",
-                    "07" ~ "Other: Provider Status Change",
-                    "08" ~ "Nonpayment of Fees (CLIA Only)",
-                    "09" ~ "Rev/Unsuccessful Participation in PT (CLIA Only)",
-                    "10" ~ "Rev/Other Reason (CLIA Only)",
-                    "11" ~ "Incomplete CLIA Application Information (CLIA Only)",
-                    "12" ~ "No Longer Performing Tests (CLIA Only)",
-                    "13" ~ "Multiple to Single Site Certificate (CLIA Only)",
-                    "14" ~ "Shared Laboratory (CLIA Only)",
-                    "15" ~ "Failure to Renew Waiver PPM Certificate (CLIA Only)",
-                    "16" ~ "Duplicate CLIA Number (CLIA Only)",
-                    "17" ~ "Mail Returned No Forward Address Cert Ended (CLIA Only)",
-                    "20" ~ "Notification Bankruptcy (CLIA Only)",
-                    "33" ~ "Accreditation Not Confirmed (CLIA Only)",
-                    "80" ~ "Awaiting State Approval",
-                    "99" ~ "OIG Action Do Not Activate (CLIA Only)",
-                    .default = x
-  )
+    "00" ~ "Active Provider",
+    "01" ~ "Voluntary: Merger, Closure",
+    "02" ~ "Voluntary: Dissatisfaction with Reimbursement",
+    "03" ~ "Voluntary: Risk of Involuntary Termination",
+    "04" ~ "Voluntary: Other Reason for Withdrawal",
+    "05" ~ "Involuntary: Failure to Meet Health-Safety Req",
+    "06" ~ "Involuntary: Failure to Meet Agreement",
+    "07" ~ "Other: Provider Status Change",
+    "08" ~ "Nonpayment of Fees (CLIA Only)",
+    "09" ~ "Rev/Unsuccessful Participation in PT (CLIA Only)",
+    "10" ~ "Rev/Other Reason (CLIA Only)",
+    "11" ~ "Incomplete CLIA Application Information (CLIA Only)",
+    "12" ~ "No Longer Performing Tests (CLIA Only)",
+    "13" ~ "Multiple to Single Site Certificate (CLIA Only)",
+    "14" ~ "Shared Laboratory (CLIA Only)",
+    "15" ~ "Failure to Renew Waiver PPM Certificate (CLIA Only)",
+    "16" ~ "Duplicate CLIA Number (CLIA Only)",
+    "17" ~ "Mail Returned No Forward Address Cert Ended (CLIA Only)",
+    "20" ~ "Notification Bankruptcy (CLIA Only)",
+    "33" ~ "Accreditation Not Confirmed (CLIA Only)",
+    "80" ~ "Awaiting State Approval",
+    "99" ~ "OIG Action Do Not Activate (CLIA Only)",
+    .default = x)
 }

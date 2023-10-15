@@ -159,5 +159,4 @@ bene_cols <- function(df) {
             "bene_rx_lis_no"    = "prscrptn_drug_no_lis_benes")
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

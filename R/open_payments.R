@@ -220,16 +220,18 @@ open_payments <- function(year,
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = "_indicator", dbl = "dollars") |>
-      dplyr::mutate(program_year = as.integer(program_year),
-                    change_type = changed_logical(change_type),
+    results$program_year <- year
+    results <- tidyup(results,
+                      yn = "_indicator",
+                      dbl = "dollars",
+                      int = "program_year") |>
+      dplyr::mutate(change_type = changed_logical(change_type),
                     covered_recipient_type = covered_recipient(covered_recipient_type),
                     nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>
-      address(c("recipient_primary_business_street_address_line1",
-                "recipient_primary_business_street_address_line2")) |>
-      combine("primary_other", c(paste0("covered_recipient_primary_type_", 2:6))) |>
-      combine("specialty_other", c(paste0("covered_recipient_specialty_", 2:6))) |>
-      combine("license_state_other", c(paste0("covered_recipient_license_state_code_", 2:6))) |>
+      combine(address, c('recipient_primary_business_street_address_line1', 'recipient_primary_business_street_address_line2')) |>
+      combine(primary_other, c(paste0('covered_recipient_primary_type_', 2:6))) |>
+      combine(specialty_other, c(paste0('covered_recipient_specialty_', 2:6))) |>
+      combine(license_state_other, c(paste0('covered_recipient_license_state_code_', 2:6))) |>
       cols_open()
 
     if (pivot) {

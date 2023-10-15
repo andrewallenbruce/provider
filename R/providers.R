@@ -86,7 +86,7 @@ providers <- function(npi = NULL,
   response <- httr2::request(build_url("pro", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,                      ~y,
@@ -110,7 +110,7 @@ providers <- function(npi = NULL,
 
   if (tidy) {
     results <- cols_pros(tidyup(results))
-    if (na.rm) {results <- janitor::remove_empty(results, which = c("rows", "cols"))}
+    if (na.rm) {results <- narm(results)}
   }
   return(results)
 }
@@ -133,5 +133,4 @@ cols_pros <- function(df) {
             'gender'                = 'gndr_sw')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

@@ -272,7 +272,7 @@ by_provider <- function(year,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
@@ -304,12 +304,12 @@ by_provider <- function(year,
     results$year <- year
     results <- janitor::clean_names(results) |>
       cols_prov() |>
-      tidyup(yn = c("par"),
+      tidyup(yn = "par",
              int = c("year", "_hcpcs", "bene", "_srvcs"),
-             dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc")) |>
-      address(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")) |>
-      dplyr::mutate(credential = clean_credentials(credential),
-                    entity_type = entype_char(entity_type))
+             dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
+             cred = "credential",
+             ent = "entity_type") |>
+      combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2'))
 
     if (nest) {
       results <- tidyr::nest(results,
@@ -513,7 +513,7 @@ by_service <- function(year,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
@@ -552,7 +552,7 @@ by_service <- function(year,
                       yn = c("_ind"),
                       int = c("year", "tot_"),
                       dbl = c("avg_")) |>
-      address(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")) |>
+      combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
       cols_serv()
 
     if (rbcs) {results <- rbcs_util(results)}
@@ -630,7 +630,6 @@ cols_serv <- function(df) {
             'avg_std_pymt' = 'avg_mdcr_stdzd_amt')
 
   df |> dplyr::select(dplyr::any_of(cols))
-
 }
 
 #' @param df data frame
@@ -744,7 +743,7 @@ by_geography <- function(year,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,               ~y,
@@ -759,7 +758,6 @@ by_geography <- function(year,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 

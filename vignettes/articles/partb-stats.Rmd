@@ -365,7 +365,8 @@ hcpcs |>
             Services = sum(services),
             "Average Payment" = mean(avg_payment), .groups = "drop") |>
   arrange(year, family) |>
-  gt() |> 
+  gt(rowname_col = "year") |> 
+  cols_align("left", level) |> 
   fmt_integer(columns = c(Beneficiaries, Services)) |> 
   fmt_currency(columns = c('Average Payment'), decimals = 2) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>

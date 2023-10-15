@@ -134,7 +134,6 @@ opt_out <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
 
   }
@@ -142,9 +141,8 @@ opt_out <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, yn = c("eligible")) |>
-      dplyr::mutate(npi = as.character(npi)) |>
-      address(c("first_line_street_address", "second_line_street_address")) |>
+    results <- tidyup(results, yn = "eligible", chr = "npi") |>
+      combine(address, c('first_line_street_address', 'second_line_street_address')) |>
       cols_opt()
     }
   return(results)

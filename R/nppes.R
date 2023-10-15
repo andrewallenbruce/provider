@@ -178,7 +178,7 @@ nppes <- function(npi = NULL,
 
   if (unnest) {
     results <- tidyr::unnest(results, c(basic, addresses)) |>
-      address(c("address_1", "address_2")) |>
+      combine(address, c('address_1', 'address_2')) |>
       cols_nppes() |>
       dplyr::filter(purpose != "MAILING")
 
@@ -193,10 +193,11 @@ nppes <- function(npi = NULL,
                         tidyr::unnest_longer(ep, keep_empty = TRUE) |>
                                tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
-      results <- tidyup(results, yn = c("sole_prop", "org_part")) |>
-        dplyr::mutate(dplyr::across(dplyr::where(is.character), clean_credentials),
-                      entity_type = entype_char(entity_type),
-                      purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
+      results <- tidyup(results,
+                        yn = c("sole_prop", "org_part"),
+                        cred = "credential",
+                        ent = "entity_type") |>
+        dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
         cols_nppes2()
 
       if (na.rm) {results <- narm(results)}
@@ -223,65 +224,48 @@ entype_arg <- function(x) {
   )
 }
 
-#' @param x vector
-#' @autoglobal
-#' @noRd
-entype_char <- function(x) {
-
-  dplyr::case_match(
-    x,
-    c("NPI-1", "I") ~ "Individual",
-    c("NPI-2", "O") ~ "Organization",
-    .default = x
-  )
-}
-
 #' @param df data frame
 #' @autoglobal
 #' @noRd
 cols_nppes <- function(df) {
 
-  cols <- c('npi' = 'number',
-            'entity_type' = 'enumeration_type',
-            'enum_date' = 'enumeration_date',
-            'cert_date' = 'certification_date',
-            'last_update' = 'last_updated',
+  cols <- c('npi'          = 'number',
+            'entity_type'  = 'enumeration_type',
+            'enum_date'    = 'enumeration_date',
+            'cert_date'    = 'certification_date',
+            'last_update'  = 'last_updated',
             'status',
-
-            'tx' = 'taxonomies',
-            'id' = 'identifiers',
-            'pr' = 'practiceLocations',
-            'on' = 'other_names',
-            'ep' = 'endpoints',
-
-            'prefix' = 'name_prefix',
-            'first' = 'first_name',
-            'middle' = 'middle_name',
-            'last' = 'last_name',
+            'tx'           = 'taxonomies',
+            'id'           = 'identifiers',
+            'pr'           = 'practiceLocations',
+            'on'           = 'other_names',
+            'ep'           = 'endpoints',
+            'prefix'       = 'name_prefix',
+            'first'        = 'first_name',
+            'middle'       = 'middle_name',
+            'last'         = 'last_name',
             'gender',
             'credential',
-            'sole_prop' = 'sole_proprietor',
+            'sole_prop'    = 'sole_proprietor',
             'organization' = 'organization_name',
-            'org_parent' = 'parent_organization_legal_business_name',
-            'org_part' = 'organizational_subpart',
-
-            'ao_prefix' = 'authorized_official_name_prefix',
-            'ao_first' = 'authorized_official_first_name',
-            'ao_middle' = 'authorized_official_middle_name',
-            'ao_last' = 'authorized_official_last_name',
-            'ao_suffix' = 'authorized_official_name_suffix',
-            'ao_title' = 'authorized_official_title_or_position',
-            'ao_phone' = 'authorized_official_telephone_number',
-            'ao_fax' = 'authorized_official_fax_number',
-
-            'purpose' = 'address_purpose',
+            'org_parent'   = 'parent_organization_legal_business_name',
+            'org_part'     = 'organizational_subpart',
+            'ao_prefix'    = 'authorized_official_name_prefix',
+            'ao_first'     = 'authorized_official_first_name',
+            'ao_middle'    = 'authorized_official_middle_name',
+            'ao_last'      = 'authorized_official_last_name',
+            'ao_suffix'    = 'authorized_official_name_suffix',
+            'ao_title'     = 'authorized_official_title_or_position',
+            'ao_phone'     = 'authorized_official_telephone_number',
+            'ao_fax'       = 'authorized_official_fax_number',
+            'purpose'      = 'address_purpose',
             'address',
             'city',
             'state',
-            'zip' = 'postal_code',
-            'country' = 'country_code',
-            'phone' = 'telephone_number',
-            'fax' = 'fax_number')
+            'zip'          = 'postal_code',
+            'country'      = 'country_code',
+            'phone'        = 'telephone_number',
+            'fax'          = 'fax_number')
 
   df |> dplyr::select(dplyr::any_of(cols))
 
@@ -324,33 +308,29 @@ cols_nppes2 <- function(df) {
             'ao_title',
             'ao_phone',
             'ao_fax',
-
             'tx_code',
             'tx_primary',
-            'tx_group' = 'tx_taxonomy_group',
+            'tx_group'      = 'tx_taxonomy_group',
             'tx_desc',
             'tx_license',
             'tx_state',
-
             'id_code',
             'id_desc',
             'id_state',
             'id_issuer',
             'id_state',
             'id_identifier',
-
-            'pr_country' = 'pr_country_code',
-            'pr_purpose' = 'pr_address_purpose',
-            'pr_address' = 'pr_address_1',
+            'pr_country'    = 'pr_country_code',
+            'pr_purpose'    = 'pr_address_purpose',
+            'pr_address'    = 'pr_address_1',
             'pr_city',
             'pr_state',
-            'pr_zip' = 'pr_postal_code',
-            'pr_phone' = 'pr_telephone_number',
-            'pr_fax' = 'pr_fax_number',
-
+            'pr_zip'        = 'pr_postal_code',
+            'pr_phone'      = 'pr_telephone_number',
+            'pr_fax'        = 'pr_fax_number',
             'on_type',
             'on_code',
-            'on_organization_name')
+            'on_org_name'   = 'on_organization_name')
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

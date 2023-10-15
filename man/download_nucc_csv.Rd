@@ -136,3 +136,4 @@ The \strong{Non-Individual Category} includes:
 download_nucc_csv()
 \dontshow{\}) # examplesIf}
 }
+\keyword{internal}

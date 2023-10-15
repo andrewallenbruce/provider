@@ -231,17 +231,14 @@ hospitals <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, yn = c("flag", "subgroup")) |>
-      address(c("address_line_1", "address_line_2")) |>
+    results <- tidyup(results, yn = c("flag", "subgroup"), chr = "zip_code") |>
+      combine(address, c('address_line_1', 'address_line_2')) |>
+      combine(structure, c('organization_type_structure', 'organization_other_type_text'), sep = ": ") |>
+      combine(location_type, c('practice_location_type', 'location_other_type_text'), sep = ": ") |>
       dplyr::mutate(proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
-                      "P" ~ "Proprietary", "N" ~ "Non-Profit", .default = NA),
-                    zip_code = as.character(zip_code)) |>
-      tidyr::unite("structure",
-                   organization_type_structure:organization_other_type_text,
-                   remove = TRUE, na.rm = TRUE, sep = ": ") |>
-      tidyr::unite("location_type",
-                   practice_location_type:location_other_type_text,
-                   remove = TRUE, na.rm = TRUE, sep = ": ") |>
+                      "P" ~ "Proprietary",
+                      "N" ~ "Non-Profit",
+                      .default = NA)) |>
       hosp_cols()
 
     if (pivot) {

@@ -73,7 +73,7 @@ quality_payment <- function(year,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,                               ~y,
@@ -92,8 +92,10 @@ quality_payment <- function(year,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
+    results$year <- year
     results <- tidyup(results,
-                      int = c("practice_size",
+                      int = c("year",
+                              "practice_size",
                               "years_in_medicare",
                               "medicare_patients",
                               "services"),
@@ -125,7 +127,6 @@ quality_payment <- function(year,
                              "extreme_hardship_ia",
                              "ia_study",
                              "extreme_hardship_cost")) |>
-      dplyr::mutate(year = as.integer(year)) |>
       cols_qpp()
 
       if (nest) {
@@ -231,6 +232,7 @@ cols_qpp <- function(df) {
 #' @rdname quality_payment
 #' @autoglobal
 #' @export
+#' @keywords internal
 quality_eligibility <- function(year,
                                 npi = NULL,
                                 tidy = TRUE) {
@@ -311,6 +313,7 @@ quality_eligibility <- function(year,
 #' @rdname quality_payment
 #' @autoglobal
 #' @export
+#' @keywords internal
 quality_stats <- function(year) {
 
   rlang::check_required(year)
@@ -364,6 +367,7 @@ quality_stats <- function(year) {
 #' mips_2021(npi = 1316172182)
 #' @autoglobal
 #' @export
+#' @keywords internal
 mips_2021 <- function(facility_name = NULL,
                       pac_id_org = NULL,
                       npi = NULL,
@@ -416,7 +420,7 @@ mips_2021 <- function(facility_name = NULL,
 
   response <- httr2::request(encode_url(url)) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -429,7 +433,6 @@ mips_2021 <- function(facility_name = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
