@@ -4,7 +4,7 @@
 \alias{calculations}
 \alias{change}
 \alias{years_df}
-\title{Calculations for Providers' stats}
+\title{Utility Functions}
 \usage{
 change(df, cols, digits = 3)
 
@@ -25,20 +25,33 @@ A \code{tibble}
 number of years since today's date
 }
 \description{
-Functions for calculating lagged changes and elapsed duration
-between dates.
+Common utility functions
 }
 \examples{
-df <- dplyr::tibble(year = 2015:2020,
-                    charges = sample(1000:2000, size = 6),
-                    payment = sample(1000:2000, size = 6))
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-# Calculate the lagged absolute/relative change
-# and the cumulative sum of both:
-change(df, c(charges, payment))
+# Lagged absolute/relative change
+# and cumulative sum of both:
 
-# Calculate the number of years between dates:
+dplyr::tibble(year = 2015:2020,
+              pay  = sample(1000:2000, 6)) |>
+change(c(pay))
+
+# When performing a `group_by()`, watch for
+# the correct order of the variables you're
+# lagging by:
+
+dplyr::tibble(year = rep(2020:2021, each = 2),
+              grp = rep(c("a", "b"), 2),
+              pay = sample(1000:2000, 4)) |>
+dplyr::arrange(year) |>
+dplyr::group_by(grp) |>
+change(c(pay))
+\dontshow{\}) # examplesIf}
+# Count of the number of years between dates:
+
 dplyr::tibble(date = lubridate::today() - 366) |>
-years_df(date_col = date)
+years_df(date)
+
 }
 \keyword{internal}

@@ -308,7 +308,8 @@ by_provider <- function(year,
              int = c("year", "_hcpcs", "bene", "_srvcs"),
              dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
              cred = "credential",
-             ent = "entity_type") |>
+             ent = "entity_type",
+             yr = 'year') |>
       combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2'))
 
     if (nest) {
@@ -549,9 +550,10 @@ by_service <- function(year,
     results$level <- "Provider"
 
     results <- tidyup(results,
-                      yn = c("_ind"),
+                      yn = "_ind",
                       int = c("year", "tot_"),
-                      dbl = c("avg_")) |>
+                      dbl = "avg_",
+                      yr = 'year') |>
       combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
       cols_serv()
 
@@ -766,9 +768,10 @@ by_geography <- function(year,
   if (tidy) {
     results$year <- year
     results <- tidyup(results,
-                      yn = c("_ind"),
+                      yn = "_ind",
                       int = c("year", "tot_"),
-                      dbl = c("avg_")) |>
+                      dbl = "avg_",
+                      yr = 'year') |>
       dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
       cols_geo()
 

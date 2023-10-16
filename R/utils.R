@@ -199,7 +199,7 @@ format_param <- function(param,
   return(out)
 }
 
-#' @param args tibble with two columns: 'param' and 'args'
+#' @param args tibble with two columns: `param` and `args`
 #' @param type format type, `filter`, `sql`, default is `filter`
 #' @examples
 #' args <- dplyr::tribble(

@@ -1,17 +1,19 @@
 ---
-title: "Provider Analysis"
+title: "provider for Analysis"
+description: "Demographics, Patient Mix, and Performance"
+author: "Andrew Bruce"
 output: html_document
 ---
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = TRUE,
+  collapse  = FALSE,
   echo      = TRUE, 
   message   = FALSE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
-  dpi       = 300, 
+  dpi       = 600, 
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
@@ -23,21 +25,133 @@ library(tidyverse)
 library(gt)
 ```
 
+<br>
+
+```{r}
+val <- map_dfr(pop_years(), ~by_provider(year = .x, city = "Valdosta", state = "GA"))
+```
+
+<br>
+
+```{r}
+val |> 
+  group_by(year) |> 
+  summarise(
+    hcpcs = mean(tot_hcpcs),
+    benes = mean(tot_benes),
+    srvcs = mean(tot_srvcs),
+    charges = mean(tot_charges),
+    allowed = mean(tot_allowed),
+    payment = mean(tot_payment),
+    hcc = mean(hcc_risk_avg)) |> 
+  change(!c('year')) |> 
+  select(year, 
+         'HCC RISK AVG' = hcc_chg,
+         HCPCS = hcpcs_chg,
+         SERVICES = srvcs_chg,
+         CHARGES = charges_chg,
+         ALLOWED = allowed_chg,
+         PAYMENT = payment_chg) |> 
+  pivot_longer(cols = !year, 
+               names_to = "metric", 
+               values_to = "value") |>
+  filter(year != 2013) |> 
+  pivot_wider(names_from = year, values_from = value) |> 
+  gt(rowname_col = "metric") |> 
+  fmt_number(columns = contains('20'), 
+             decimals = 2, 
+             sep_mark = "", 
+             force_sign = TRUE, 
+             suffixing = TRUE) |>
+  opt_table_font(font = google_font(name = "Kanit")) |> 
+  cols_hide(columns = contains('20')) |>
+  cols_nanoplot(
+    columns = starts_with("20"),
+    plot_type = "bar",
+    plot_height = "4.5em",
+    new_col_name = "change",
+    new_col_label = "change",
+    missing_vals = "remove",
+    options = nanoplot_options(
+      show_data_line = FALSE,
+      show_data_area = FALSE,
+      data_bar_stroke_color = "transparent",
+      data_bar_negative_stroke_color = "transparent",
+      data_bar_fill_color = "grey",
+      data_bar_negative_fill_color = "red")) |> 
+  cols_move_to_start(change) |> 
+  cols_align(columns = change, align = "center") |> 
+  tab_options(table.width = px(500),
+              column_labels.hidden = TRUE) |> 
+  # opt_all_caps() |> 
+  opt_stylize(color = "red", add_row_striping = FALSE)
+```
+
+<br><br>
+
+```{r}
+val |> 
+  group_by(year, entity_type) |> 
+  summarise(
+    n = n(),
+    avg_hcpcs = mean(tot_hcpcs),
+    avg_benes = mean(tot_benes),
+    avg_srvcs = mean(tot_srvcs),
+    avg_charges = mean(tot_charges),
+    avg_allowed = mean(tot_allowed),
+    avg_payment = mean(tot_payment),
+    avg_hcc = mean(hcc_risk_avg), .groups = "drop") |> 
+  arrange(entity_type) |>
+  group_by(entity_type) |>
+  change(c(n, starts_with("avg_"))) |> 
+  ungroup() |>
+  select(-ends_with("_cum")) |> 
+  select(year, entity_type, ends_with("_chg")) |> 
+  filter(year != 2013) |>
+  gt(rowname_col = "year", groupname_col = "entity_type") |> 
+  fmt_number(columns = !year, 
+             decimals = 2, 
+             sep_mark = "", 
+             force_sign = TRUE, 
+             suffixing = TRUE) |>
+  opt_table_font(font = google_font(name = "Fira Code")) |> 
+  # cols_hide(columns = contains('20')) |>
+  # cols_nanoplot(
+  #   columns = starts_with("20"),
+  #   plot_type = "bar",
+  #   plot_height = "3em",
+  #   new_col_name = "change",
+  #   new_col_label = "change",
+  #   missing_vals = "remove",
+  #   options = nanoplot_options(
+  #     show_data_line = FALSE,
+  #     show_data_area = FALSE,
+  #     data_bar_stroke_color = "transparent",
+  #     data_bar_fill_color = "red")) |> 
+  # cols_move_to_start(change) |> 
+  # cols_align(columns = change, align = "center") |> 
+  # tab_options(table.width = px(400),
+  #             column_labels.hidden = TRUE) |> 
+  # opt_all_caps() |> 
+  opt_stylize(color = "red", add_row_striping = FALSE)
+```
+
+
 
 ## Provider Utilization Summary
 
 ```{r}
-df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1043245657))
-# df <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
+ind <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1043245657))
+# ind <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
 ```
 
 
 <br>
 
-Provider Information
+__Provider Information__
 
 ```{r}
-select(df, npi:specialty, city:state) |>
+select(ind, npi:specialty, city:state) |>
   distinct() |> 
   provider:::display_long() |> 
   gt_preview(top_n = 10) |> 
@@ -50,7 +164,7 @@ select(df, npi:specialty, city:state) |>
 Provider Performance
 
 ```{r}
-select(df, year, tot_hcpcs:tot_payment) |>
+select(ind, year, tot_hcpcs:tot_payment) |>
   gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
   fmt_currency(columns = c(tot_charges, tot_allowed, tot_payment), decimals = 0) |> 
@@ -93,35 +207,81 @@ select(df, year, tot_hcpcs:tot_payment) |>
 Beneficiary Demographics
 
 ```{r}
-select(df, year, tot_benes, demographics) |> 
+check_xmark <- function(gt_tbl, cols) {
+
+  gt_tbl |>
+    gt::text_case_when(
+      x == TRUE ~ gt::html(
+        fontawesome::fa("check",
+                        prefer_type = "solid",
+                        fill = "black")),
+      x == FALSE ~ gt::html(
+        fontawesome::fa("xmark",
+                        prefer_type = "solid",
+                        fill = "red")),
+      .default = NA,
+      .locations = gt::cells_body(
+        columns = {{ cols }}))
+}
+
+select(ind, year, tot_benes, demographics) |> 
   unnest(demographics) |>
   select(-contains("race")) |>
+  mutate(across(c(bene_age_lt65:bene_ndual), \(x) coalesce(x, 0))) |> 
+  rowwise() |>
+  mutate(tot_bene_age = sum(c_across(bene_age_lt65:bene_age_gt84), na.rm = TRUE), 
+         tot_bene_gen = sum(c_across(bene_gen_female:bene_gen_male), na.rm = TRUE), 
+         tot_bene_dual = sum(c_across(bene_dual:bene_ndual), na.rm = TRUE),
+         tot_age_eq = if_else(tot_benes == tot_bene_age, TRUE, FALSE),
+         tot_gen_eq = if_else(tot_benes == tot_bene_gen, TRUE, FALSE),
+         tot_dual_eq = if_else(tot_benes == tot_bene_dual, TRUE, FALSE),
+         verdict = if_else(isTRUE(tot_age_eq) && isTRUE(tot_gen_eq) && isTRUE(tot_dual_eq), TRUE, FALSE),
+         .after = tot_benes) |> 
+  select(year, 
+         tot_benes, 
+         tot_bene_age, 
+         tot_age_eq, 
+         tot_bene_gen, 
+         tot_gen_eq, 
+         tot_bene_dual, 
+         tot_dual_eq, 
+         verdict, 
+         bene_age_avg:bene_ndual) |>
+  # filter(verdict ==TRUE) |> 
   gt(rowname_col = "year") |> 
   cols_label(
     tot_benes = "Total",
+    tot_bene_age = "A",
+    tot_age_eq = "",
+    tot_bene_gen = "G",
+    tot_gen_eq = "",
+    tot_bene_dual = "D",
+    tot_dual_eq = "",
     bene_age_avg = "Avg",
     bene_age_lt65 = "<65", 
     bene_age_65_74 = "65-74", 
     bene_age_75_84 = "75-84", 
     bene_age_gt84 = ">84",
-    bene_gen_male = "Male", 
-    bene_gen_female = "Female",
-    bene_dual = "Dual", 
-    bene_ndual = "Non-Dual") |> 
+    bene_gen_male = "M", 
+    bene_gen_female = "F",
+    bene_dual = "1", 
+    bene_ndual = "2") |> 
   tab_spanner(label = "Age", columns = c(bene_age_lt65, bene_age_65_74, bene_age_75_84, bene_age_gt84)) |> 
   tab_spanner(label = "Gender", columns = c(bene_gen_male, bene_gen_female)) |> 
   tab_spanner(label = "Dual Status", columns = c(bene_dual, bene_ndual)) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
   sub_missing(missing_text = "") |>
   sub_zero(zero_text = "") |>
-  opt_all_caps()
+  opt_all_caps() |> 
+  check_xmark(cols = c(tot_age_eq, tot_gen_eq, tot_dual_eq, verdict)) |> 
+  opt_stylize(color = "gray")
 ```
 
-<br>
+<br><br>
 
-Beneficiary Health data
+__Beneficiary Health data__
 
-rowwise()/c_across() function to calculate actual number of beneficiaries, e.g. tot_benes * cc_af
+_`rowwise()`/`c_across()` function to calculate actual number of beneficiaries, e.g. tot_benes * cc_af_
 
 ```{r}
 select(df, year, tot_benes, conditions) |> 
@@ -522,6 +682,7 @@ hcpcs |>
 
 
 
+<br>
 <br>
 
 ```{r}

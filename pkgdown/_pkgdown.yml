@@ -3,6 +3,11 @@ url: https://andrewallenbruce.github.io/provider/
 template:
   bootstrap: 5
   bootswatch: simplex
+  bslib:
+    font_scale: 1.2
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "Kanit"}
+    code_font: {google: "Fira Code"}
 #pkgdown-nav-height: 100px
 
 home:

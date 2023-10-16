@@ -1,20 +1,33 @@
-#' Calculations for Providers' stats
+#' Utility Functions
 #'
-#' @description Functions for calculating lagged changes and elapsed duration
-#' between dates.
+#' @description Common utility functions
+#'
+#' @examplesIf interactive()
+#'
+#' # Lagged absolute/relative change
+#' # and cumulative sum of both:
+#'
+#' dplyr::tibble(year = 2015:2020,
+#'               pay  = sample(1000:2000, 6)) |>
+#' change(c(pay))
+#'
+#' # When performing a `group_by()`, watch for
+#' # the correct order of the variables you're
+#' # lagging by:
+#'
+#' dplyr::tibble(year = rep(2020:2021, each = 2),
+#'               grp = rep(c("a", "b"), 2),
+#'               pay = sample(1000:2000, 4)) |>
+#' dplyr::arrange(year) |>
+#' dplyr::group_by(grp) |>
+#' change(c(pay))
 #'
 #' @examples
-#' df <- dplyr::tibble(year = 2015:2020,
-#'                     charges = sample(1000:2000, size = 6),
-#'                     payment = sample(1000:2000, size = 6))
+#' # Count of the number of years between dates:
 #'
-#' # Calculate the lagged absolute/relative change
-#' # and the cumulative sum of both:
-#' change(df, c(charges, payment))
-#'
-#' # Calculate the number of years between dates:
 #' dplyr::tibble(date = lubridate::today() - 366) |>
-#' years_df(date_col = date)
+#' years_df(date)
+#'
 #' @name calculations
 #' @keywords internal
 NULL
@@ -30,15 +43,16 @@ NULL
 change <- function(df, cols, digits = 3) {
 
   dplyr::mutate(df,
-    dplyr::across({{ cols }},
-      list(chg = \(x) chg(x),
-           pct = \(x) pct(x)), .names = "{.col}_{.fn}")) |>
-    dplyr::mutate(dplyr::across(
-      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits))) |>
-    dplyr::mutate(dplyr::across(
-      dplyr::contains(c("_chg", "_pct")), ~cumsum(.), .names = "{.col}_cum")) |>
-    dplyr::relocate(dplyr::contains("_chg"), dplyr::contains("_pct"),
-                    .after = dplyr::last_col())
+  dplyr::across({{ cols }}, list(chg = \(x) chg(x), pct = \(x) pct(x)),
+                .names = "{.col}_{.fn}")) |>
+  dplyr::mutate(
+  dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(.,
+                digits = digits))) |>
+  dplyr::mutate(
+  dplyr::across(dplyr::contains(c("_chg", "_pct")), ~cumsum(.),
+                .names = "{.col}_cum")) |>
+  dplyr::relocate(dplyr::contains("_chg"), dplyr::contains("_pct"),
+                .after = dplyr::last_col())
 
 }
 
