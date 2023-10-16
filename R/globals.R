@@ -5,54 +5,22 @@ utils::globalVariables(c(
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
-  "bene_fips_cd", # <beneficiaries>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
   "year", # <change_year>
   ":=", # <change_year>
-  "state.abb", # <cc_specific>
-  "state.name", # <cc_specific>
-  "x", # <cc_specific>
-  "y", # <cc_specific>
-  "distro", # <cc_specific>
-  "prvlnc", # <cc_specific>
-  "tot_mdcr_stdzd_pymt_pc", # <cc_specific>
-  "tot_mdcr_pymt_pc", # <cc_specific>
-  "hosp_readmsn_rate", # <cc_specific>
-  "er_visits_per_1000_benes", # <cc_specific>
-  "state.abb", # <cc_multiple>
-  "state.name", # <cc_multiple>
-  "x", # <cc_multiple>
-  "state", # <cc_multiple>
-  "y", # <cc_multiple>
-  "distro", # <cc_multiple>
-  "prvlnc", # <cc_multiple>
-  "tot_mdcr_stdzd_pymt_pc", # <cc_multiple>
-  "tot_mdcr_pymt_pc", # <cc_multiple>
-  "hosp_readmsn_rate", # <cc_multiple>
-  "er_visits_per_1000_benes", # <cc_multiple>
   "y", # <clinicians>
-  "adr_ln_1", # <clinicians>
-  "adr_ln_2", # <clinicians>
-  "address_org", # <clinicians>
-  "num_org_mem", # <clinicians>
-  "grd_yr", # <clinicians>
-  "telehlth", # <clinicians>
+  "address", # <clinicians>
   "year", # <compare_hcpcs>
   "state", # <compare_hcpcs>
   "hcpcs_code", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
-  "level", # <compare_hcpcs>
-  "category", # <compare_hcpcs>
-  "subcategory", # <compare_hcpcs>
-  "family", # <compare_hcpcs>
-  "procedure", # <compare_hcpcs>
   "tot_benes", # <compare_hcpcs>
   "tot_srvcs", # <compare_hcpcs>
   "tot_provs", # <compare_hcpcs>
-  "services", # <compare_hcpcs>
+  "level", # <compare_hcpcs>
+  "family", # <compare_hcpcs>
   "year", # <compare_conditions>
-  "conditions", # <compare_conditions>
   "cc_af", # <compare_conditions>
   "cc_alz", # <compare_conditions>
   "cc_asth", # <compare_conditions>
@@ -74,6 +42,13 @@ utils::globalVariables(c(
   "condition", # <compare_conditions>
   "state", # <compare_conditions>
   "sublevel", # <compare_conditions>
+  "state.abb", # <conditions>
+  "distro", # <conditions>
+  "y", # <conditions>
+  "y", # <demo_convert>
+  "y", # <subdemo_convert>
+  "y", # <mcc_convert>
+  "y", # <revalidation_date>
   "y", # <revalidation_group>
   "group_pac_id", # <revalidation_group>
   "individual_npi", # <revalidation_group>
@@ -97,18 +72,21 @@ utils::globalVariables(c(
   "type", # <asc_ifed_enrollment>
   "organization_name", # <asc_ifed_enrollment>
   "zip_code", # <asc_ifed_enrollment>
+  "y", # <missing_endpoints>
+  "state.abb", # <cc_multiple>
+  "distro", # <cc_multiple>
+  "y", # <cc_multiple>
+  "state.abb", # <cc_specific>
+  "distro", # <cc_specific>
+  "y", # <cc_specific>
   "y", # <hospitals>
+  "address", # <hospitals>
+  "location_type", # <hospitals>
   "proprietary_nonprofit", # <hospitals>
-  "zip_code", # <hospitals>
-  "address_line_1", # <hospitals>
-  "address_line_2", # <hospitals>
-  "organization_type_structure", # <hospitals>
-  "organization_other_type_text", # <hospitals>
-  "practice_location_type", # <hospitals>
-  "location_other_type_text", # <hospitals>
-  "flag", # <hospitals>
   "subgroup", # <hospitals>
   "y", # <laboratories>
+  "address", # <laboratories>
+  "provider_name", # <laboratories>
   "pgm_trmntn_cd", # <laboratories>
   "crtfctn_actn_type_cd", # <laboratories>
   "cmplnc_stus_cd", # <laboratories>
@@ -121,10 +99,6 @@ utils::globalVariables(c(
   "prvdr_ctgry_sbtyp_cd", # <laboratories>
   "trmntn_exprtn_dt", # <laboratories>
   "duration", # <laboratories>
-  "fac_name", # <laboratories>
-  "addtnl_fac_name", # <laboratories>
-  "st_adr", # <laboratories>
-  "addtnl_st_adr", # <laboratories>
   "clia_number", # <laboratories>
   "acr_a2la", # <laboratories>
   "acr_a2la_ind", # <laboratories>
@@ -159,34 +133,26 @@ utils::globalVariables(c(
   "confirmed", # <laboratories>
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
-  "y", # <missing_endpoints>
   "y", # <nppes>
   "basic", # <nppes>
   "addresses", # <nppes>
+  "address", # <nppes>
   "purpose", # <nppes>
   "tx", # <nppes>
   "id", # <nppes>
   "pr", # <nppes>
   "on", # <nppes>
   "ep", # <nppes>
-  "entity_type", # <nppes>
   "identifier", # <open_payments>
   "y", # <open_payments>
-  "program_year", # <open_payments>
   "change_type", # <open_payments>
   "covered_recipient_type", # <open_payments>
   "nature_of_payment_or_transfer_of_value", # <open_payments>
-  "name_1", # <open_payments>
-  "pdi_5", # <open_payments>
+  "address", # <open_payments>
+  "primary_other", # <open_payments>
+  "specialty_other", # <open_payments>
+  "license_state_other", # <open_payments>
   "val", # <open_payments>
-  "name", # <open_payments>
-  "type", # <open_payments>
-  "category", # <open_payments>
-  "ndc", # <open_payments>
-  "pdi", # <open_payments>
-  "covered", # <open_payments>
-  "group", # <open_payments>
-  "pay_total", # <open_payments>
   "title", # <open_ids>
   "modified", # <open_ids>
   "distribution", # <open_ids>
@@ -196,46 +162,10 @@ utils::globalVariables(c(
   "identifier", # <open_ids>
   "y", # <opt_out>
   "y", # <order_refer>
-  "id", # <pending>
   "y", # <pending>
   "y", # <providers>
   "distro", # <quality_payment>
   "y", # <quality_payment>
-  "practice_state_or_us_territory", # <quality_payment>
-  "practice_size", # <quality_payment>
-  "clinician_specialty", # <quality_payment>
-  "years_in_medicare", # <quality_payment>
-  "medicare_patients", # <quality_payment>
-  "services", # <quality_payment>
-  "allowed_charges", # <quality_payment>
-  "final_score", # <quality_payment>
-  "payment_adjustment_percentage", # <quality_payment>
-  "quality_category_score", # <quality_payment>
-  "promoting_interoperability_pi_category_score", # <quality_payment>
-  "ia_score", # <quality_payment>
-  "cost_score", # <quality_payment>
-  "complex_patient_bonus", # <quality_payment>
-  "quality_improvement_bonus", # <quality_payment>
-  "quality_bonus", # <quality_payment>
-  "engaged", # <quality_payment>
-  "opted_into_mips", # <quality_payment>
-  "small_practitioner", # <quality_payment>
-  "rural_clinician", # <quality_payment>
-  "hpsa_clinician", # <quality_payment>
-  "ambulatory_surgical_center", # <quality_payment>
-  "hospital_based_clinician", # <quality_payment>
-  "non_patient_facing", # <quality_payment>
-  "facility_based", # <quality_payment>
-  "extreme_hardship", # <quality_payment>
-  "extreme_hardship_quality", # <quality_payment>
-  "extreme_hardship_pi", # <quality_payment>
-  "pi_hardship", # <quality_payment>
-  "pi_reweighting", # <quality_payment>
-  "pi_bonus", # <quality_payment>
-  "pi_cehrt_id", # <quality_payment>
-  "extreme_hardship_ia", # <quality_payment>
-  "ia_study", # <quality_payment>
-  "extreme_hardship_cost", # <quality_payment>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
   "group_scenario", # <quality_eligibility>
@@ -273,43 +203,33 @@ utils::globalVariables(c(
   "apm_affl_1", # <mips_2021>
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
-  "y", # <revalidation_date>
-  "y", # <revalidation_reassign>
-  "y", # <taxonomy_crosswalk>
+  "y", # <reassignments>
+  "code", # <download_nucc_csv>
   "section", # <download_nucc_csv>
   "classification", # <download_nucc_csv>
   "specialization", # <download_nucc_csv>
-  "code", # <download_nucc_csv>
+  "display_name", # <download_nucc_csv>
+  "definition", # <download_nucc_csv>
+  "y", # <taxonomy_crosswalk>
   "distro", # <by_provider>
   "y", # <by_provider>
-  "rndrng_prvdr_crdntls", # <by_provider>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
-  "rndrng_prvdr_ent_cd", # <by_provider>
+  "address", # <by_provider>
   "medical", # <by_provider>
   "drug", # <by_provider>
   "distro", # <by_service>
   "y", # <by_service>
-  "rndrng_prvdr_crdntls", # <by_service>
-  "rndrng_prvdr_ent_cd", # <by_service>
-  "place_of_srvc", # <by_service>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
-  "hcpcs_drug_ind", # <by_service>
-  "category", # <by_service>
-  "subcategory", # <by_service>
-  "family", # <by_service>
-  "procedure", # <by_service>
+  "address", # <by_service>
+  "hcpcs_code", # <rbcs_util>
+  "category", # <rbcs_util>
+  "subcategory", # <rbcs_util>
+  "family", # <rbcs_util>
+  "procedure", # <rbcs_util>
   "state.abb", # <by_geography>
-  "state.name", # <by_geography>
-  "x", # <by_geography>
-  "y", # <by_geography>
   "distro", # <by_geography>
   "hcpcs_desc", # <by_geography>
-  "hcpcs_drug_ind", # <by_geography>
+  "y", # <by_geography>
   "place_of_srvc", # <by_geography>
-  "category", # <by_geography>
-  "subcategory", # <by_geography>
-  "family", # <by_geography>
-  "procedure", # <by_geography>
+  "arg", # <encode_param>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>
@@ -337,9 +257,13 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
-  "arg", # <encode_param>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>
+  "state.abb", # <abb2full>
+  "state.name", # <abb2full>
+  "x", # <abb2full>
+  "y", # <abb2full>
+  "arg", # <encode_param>
   NULL
 ))

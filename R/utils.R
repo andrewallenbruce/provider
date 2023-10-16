@@ -265,8 +265,11 @@ encode_url <- function(url) {
 #' @autoglobal
 #' @noRd
 file_url <- function(fn = c("c", "a"), args, offset) {
+
   if (fn == "a") {uuid <- "27ea-46a8"}
+
   if (fn == "c") {uuid <- "mj5m-pzi6"}
+
   id <- httr2::request(
     glue::glue("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/{uuid}?show-reference-ids=true")) |>
     httr2::req_perform() |>
