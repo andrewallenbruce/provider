@@ -74,9 +74,8 @@
 #' + [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
 #' + [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)
 #'
-#' @param year < *integer* > // **required** Calendar year of Medicare
-#' enrollment, in `YYYY` format. Run [cc_years()] to return a vector of
-#' currently available years.
+#' @param year < *integer* > Calendar year of Medicare enrollment, in `YYYY`
+#' format. Run [cc_years()] to return a vector of currently available years.
 #' @param set < *character* > // **required** `"multiple"` or `"specific"`
 #' @param level < *character* > Geographic level of aggregation: `"national"`, `"state"`, or `"county"`
 #' @param sublevel < *character* > Beneficiary's state or county
@@ -206,7 +205,8 @@ conditions <- function(year,
     results$year <- year
     results <- cols_cc(tidyup(results,
                               int = "year",
-                              dbl = c("prvlnc", "_pc", "er_")))
+                              dbl = c("prvlnc", "_pc", "er_"),
+                              yr = "year"))
   if (na.rm) {results <- narm(results)}}
   return(results)
 }

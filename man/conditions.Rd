@@ -20,9 +20,8 @@ conditions(
 )
 }
 \arguments{
-\item{year}{< \emph{integer} > // \strong{required} Calendar year of Medicare
-enrollment, in \code{YYYY} format. Run \code{\link[=cc_years]{cc_years()}} to return a vector of
-currently available years.}
+\item{year}{< \emph{integer} > Calendar year of Medicare enrollment, in \code{YYYY}
+format. Run \code{\link[=cc_years]{cc_years()}} to return a vector of currently available years.}
 
 \item{condition}{< \emph{character} > Chronic condition for which the prevalence
 and utilization is compiled (see above for list of conditions)}

@@ -126,7 +126,8 @@ quality_payment <- function(year,
                              "pi_bonus",
                              "extreme_hardship_ia",
                              "ia_study",
-                             "extreme_hardship_cost")) |>
+                             "extreme_hardship_cost"),
+                      yr = 'year') |>
       cols_qpp()
 
       if (nest) {

@@ -133,6 +133,11 @@ utils::globalVariables(c(
   "confirmed", # <laboratories>
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
+  "y", # <medline>
+  "title", # <medline>
+  "title._value", # <medline>
+  "summary._value", # <medline>
+  "html", # <medline>
   "y", # <nppes>
   "basic", # <nppes>
   "addresses", # <nppes>
