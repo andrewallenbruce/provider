@@ -53,9 +53,9 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    anthonynorth/roxyglobals,
-    nt-williams/rxnorm
-    rstudio/gt
+    github::anthonynorth/roxyglobals,
+    github::nt-williams/rxnorm,
+    github::rstudio/gt
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

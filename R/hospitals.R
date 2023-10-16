@@ -96,9 +96,8 @@
 #' @seealso [clinicians()], [providers()], [affiliations()]
 #' @family api
 #'
-#' @examples
+#' @examplesIf interactive()
 #' hospitals(pac_org = 6103733050)
-#'
 #' hospitals(state = "GA", reh = TRUE)
 #'
 #' @autoglobal

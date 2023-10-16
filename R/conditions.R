@@ -1,4 +1,4 @@
-#' Benficiary Chronic Conditions
+#' Beneficiary Chronic Conditions Prevalence
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
