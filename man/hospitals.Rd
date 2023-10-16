@@ -156,10 +156,11 @@ type and address.
 \emph{Update Frequency:} \strong{Monthly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 hospitals(pac_org = 6103733050)
-
 hospitals(state = "GA", reh = TRUE)
-
+hospitals(city = "Savannah", state = "GA")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}

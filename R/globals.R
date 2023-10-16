@@ -83,7 +83,11 @@ utils::globalVariables(c(
   "address", # <hospitals>
   "location_type", # <hospitals>
   "proprietary_nonprofit", # <hospitals>
+  "subgroup_general", # <hospitals>
+  "subgroup_other", # <hospitals>
+  "subtotal", # <hospitals>
   "subgroup", # <hospitals>
+  "flag", # <hospitals>
   "y", # <laboratories>
   "address", # <laboratories>
   "provider_name", # <laboratories>

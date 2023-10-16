@@ -106,9 +106,11 @@ entype_char <- function(x) {
   )
 }
 
+#' Pivot data frame to long format for easy printing
 #' @param df data frame
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 display_long <- function(df) {
 
   df |> dplyr::mutate(dplyr::across(dplyr::everything(),
@@ -117,7 +119,7 @@ display_long <- function(df) {
 }
 
 #' @param df data frame
-#' @param dt cols to convert to date
+#' @param dt cols to convert to date with [anytime::anydate()]
 #' @param yn cols to convert to logical
 #' @param int cols to convert to integer
 #' @param dbl cols to convert to double
@@ -152,7 +154,7 @@ tidyup <- function(df,
   if (!is.null(up))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
   if (!is.null(cred))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))}
   if (!is.null(ent))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent), entype_char))}
-  if (!is.null(yr))   {x <- dplyr::mutate(x, dplyr::across(dplyr::any_of(yr), dint::as_date_y))}
+  if (!is.null(yr))    {x <- dplyr::mutate(x, dplyr::across(dplyr::any_of(yr), dint::as_date_y))}
   return(x)
 }
 

@@ -99,7 +99,7 @@
 #' @examplesIf interactive()
 #' hospitals(pac_org = 6103733050)
 #' hospitals(state = "GA", reh = TRUE)
-#'
+#' hospitals(city = "Savannah", state = "GA")
 #' @autoglobal
 #' @export
 hospitals <- function(npi = NULL,
@@ -190,7 +190,7 @@ hospitals <- function(npi = NULL,
   response <- httr2::request(build_url("hos", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,               ~y,
@@ -241,12 +241,18 @@ hospitals <- function(npi = NULL,
       hosp_cols()
 
     if (pivot) {
-      results <- hosp_cols2(results) |>
-        tidyr::pivot_longer(cols = c('REH Conversion',
-                                     dplyr::contains("Subgroup")),
+      results <- results |>
+        dplyr::rowwise() |>
+        dplyr::mutate(subtotal = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
+                      subgroup_none = dplyr::if_else(subtotal == 0, TRUE, FALSE),
+                      subtotal = NULL) |>
+        hosp_cols2() |>
+        tidyr::pivot_longer(cols = dplyr::contains("Subgroup"),
                             names_to = "subgroup",
                             values_to = "flag") |>
-        dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup "))
+        dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup ")) |>
+        dplyr::filter(flag == TRUE) |>
+        dplyr::mutate(flag = NULL)
 
     }
     if (na.rm) {results <- narm(results)}
@@ -325,7 +331,7 @@ hosp_cols2 <- function(df) {
             'multi_npi',
             'reh_date',
             'reh_ccns',
-            'REH Conversion'               = 'reh_conversion',
+            'reh_conversion',
             "Subgroup General"             = 'subgroup_general',
             "Subgroup Acute Care"          = 'subgroup_acute_care',
             "Subgroup Alcohol Drug"        = 'subgroup_alcohol_drug',
@@ -339,6 +345,7 @@ hosp_cols2 <- function(df) {
             "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
             "Subgroup Specialty Hospital"  = 'subgroup_specialty_hospital',
             "Subgroup Other"               = 'subgroup_other',
+            "Subgroup None"                = 'subgroup_none',
             'other')
 
   df |> dplyr::select(dplyr::any_of(cols))

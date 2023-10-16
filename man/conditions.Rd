@@ -2,7 +2,7 @@
 % Please edit documentation in R/conditions.R
 \name{conditions}
 \alias{conditions}
-\title{Benficiary Chronic Conditions}
+\title{Beneficiary Chronic Conditions Prevalence}
 \usage{
 conditions(
   year,
