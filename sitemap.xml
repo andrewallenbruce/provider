@@ -67,7 +67,13 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/laboratories.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/medline.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/mips_2021.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/ndc_lookup.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes.html</loc>
@@ -95,6 +101,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/reassignments.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/rxnorm.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
