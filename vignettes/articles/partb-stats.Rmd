@@ -284,7 +284,7 @@ __Beneficiary Health data__
 _`rowwise()`/`c_across()` function to calculate actual number of beneficiaries, e.g. tot_benes * cc_af_
 
 ```{r}
-select(df, year, tot_benes, conditions) |> 
+select(ind, year, tot_benes, conditions) |> 
   unnest(conditions) |>
   gt(rowname_col = "year") |> 
   cols_label(tot_benes = "Total") |>  
@@ -298,7 +298,7 @@ select(df, year, tot_benes, conditions) |>
 <br><br>
 
 ```{r}
-select(df, year, starts_with("tot_")) |> 
+select(ind, year, starts_with("tot_")) |> 
   select(-tot_hcpcs, -tot_std_pymt) |> 
   change(starts_with("tot_")) |> 
   select(-ends_with("_cum")) |> 
@@ -422,7 +422,7 @@ select(df, year, starts_with("tot_")) |>
 <br><br>
 
 ```{r}
-select(df, 
+select(ind, 
        year, 
        Beneficiaries = tot_benes,
        Services = tot_srvcs,
@@ -466,8 +466,8 @@ select(df,
 ### Chronic Condition Prevalence
 
 ```{r}
-chronic1 <- compare_conditions(df, pivot = FALSE)
-chronic2 <- compare_conditions(df, pivot = TRUE)
+chronic1 <- compare_conditions(ind, pivot = FALSE)
+chronic2 <- compare_conditions(ind, pivot = TRUE)
 ```
 
 <br>
