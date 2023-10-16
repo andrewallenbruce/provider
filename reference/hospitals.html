@@ -261,45 +261,11 @@ Hospital (CAH) that converted to a Rural Emergency Hospital (REH)</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    npi      pac_org enid_org enid_state facility_ccn organization specialty_code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1164481… 610373… O200209… NY         330246       ST CHARLES … 00-09         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: specialty &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;, subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, reh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    npi   pac_org enid_org enid_state facility_ccn organization doing_business_as</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1720… 761895… O202303… GA         110779       IRWIN COUNT… PROGRESSIVE MEDI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;, structure &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;, multi_npi &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_date &lt;date&gt;, reh_ccns &lt;chr&gt;, subgroup &lt;chr&gt;, flag &lt;lgl&gt;</span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Savannah"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
