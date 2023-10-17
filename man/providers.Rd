@@ -21,7 +21,7 @@ providers(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
 
 \item{pac}{< \emph{integer} > 10-digit PECOS Associate Control ID}
 
@@ -37,12 +37,8 @@ providers(
 
 \item{state}{< \emph{character} > Enrollment state, full or abbreviation}
 
-\item{gender}{< \emph{character} > Provider's gender:
-\itemize{
-\item \code{"F"}: Female
-\item \code{"M"}: Male
-\item \code{"9"}: Unknown (or Organizational provider)
-}}
+\item{gender}{< \emph{character} > Individual provider's gender: \code{"F"} (Female),
+\code{"M"} (Male), \code{"9"} (Unknown/Organization)}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -69,8 +65,9 @@ providers(
 
 \code{providers()} allows you to access enrollment level data on individual and
 organizational providers that are actively approved to bill Medicare.
+}
+\section{Links}{
 
-Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
 \item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
@@ -78,6 +75,7 @@ Links:
 
 \emph{Update Frequency:} \strong{Quarterly}
 }
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 providers(npi = 1417918293, specialty_code = "14-41")

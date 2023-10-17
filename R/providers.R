@@ -6,13 +6,13 @@
 #' `providers()` allows you to access enrollment level data on individual and
 #' organizational providers that are actively approved to bill Medicare.
 #'
-#' Links:
-#' - [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
-#' - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
+#' @section Links:
+#' + [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+#' + [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
 #' *Update Frequency:* **Quarterly**
 #'
-#' @param npi < *integer* > 10-digit national provider identifier
+#' @param npi < *integer* > 10-digit Individual National Provider Identifier
 #' @param pac < *integer* > 10-digit PECOS Associate Control ID
 #' @param enid < *character* > 15-digit Medicare Enrollment ID
 #' @param specialty_code < *character* > Enrollment specialty code
@@ -20,10 +20,8 @@
 #' @param state < *character* > Enrollment state, full or abbreviation
 #' @param first,middle,last < *character* > Individual provider's name
 #' @param organization < *character* > Organizational provider's name
-#' @param gender < *character* > Provider's gender:
-#' + `"F"`: Female
-#' + `"M"`: Male
-#' + `"9"`: Unknown (or Organizational provider)
+#' @param gender < *character* > Individual provider's gender: `"F"` (Female),
+#' `"M"` (Male), `"9"` (Unknown/Organization)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'

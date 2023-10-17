@@ -159,18 +159,28 @@ tidyup <- function(df,
 }
 
 #' @param df data frame
-#' @param nm new col name
-#' @param cols description
+#' @param nm new col name, unquoted
+#' @param cols columns to combine
 #' @param sep separator
+#' @param type "bare" or "any"
 #' @autoglobal
 #' @noRd
-combine <- function(df, nm, cols, sep = " ") {
-  tidyr::unite(df,
-               col = {{ nm }},
-               dplyr::any_of({{ cols }}),
-               remove = TRUE,
-               na.rm = TRUE,
-               sep = sep)
+combine <- function(df, nm, cols, sep = " ", type = "any") {
+
+  if (type == "any") {
+  return(tidyr::unite(df, col = {{ nm }},
+                      dplyr::any_of(cols),
+                      remove = TRUE,
+                      na.rm = TRUE,
+                      sep = sep))}
+
+  if (type == "bare") {
+  return(tidyr::unite(df, col = {{ nm }},
+                      {{ cols }},
+                      remove = TRUE,
+                      na.rm = TRUE,
+                      sep = sep))}
+
 }
 
 #' @param df data frame
@@ -186,9 +196,7 @@ narm <- function(df) {
 #' @return formatted API filters
 #' @autoglobal
 #' @noRd
-format_param <- function(param,
-                         arg,
-                         type = "filter") {
+format_param <- function(param, arg, type = "filter") {
 
   rlang::check_required(param)
   rlang::check_required(arg)

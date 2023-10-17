@@ -7,8 +7,8 @@
 #' + Individual providers who are reassigning benefits or are an employee of
 #' + Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 #'
-#' Links:
-#' * [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
+#' @section Links:
+#' + [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
 #' *Update Frequency:* **Monthly**
 #'
@@ -137,7 +137,7 @@ cols_reas <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param df data frame
+#' @param x vector
 #' @autoglobal
 #' @noRd
 record_type <- function(x) {

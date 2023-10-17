@@ -220,19 +220,25 @@ open_payments <- function(year,
   }
 
   if (tidy) {
+    yncols <- c('physician_ownership_indicator',
+                'charity_indicator',
+                'delay_in_publication_indicator',
+                'dispute_status_for_publication',
+                'related_product_indicator')
+
     results <- tidyup(results,
-                      yn = "_indicator",
+                      # yn = c(yncols),
                       dbl = "dollars",
-                      int = "program_year") |>
-      dplyr::mutate(change_type = changed_logical(change_type),
-                    covered_recipient_type = covered_recipient(covered_recipient_type),
+                      int = "program_year",
+                      yr  = "program_year") |>
+      dplyr::mutate(change_type                            = changed_logical(change_type),
+                    covered_recipient_type                 = covered_recipient(covered_recipient_type),
                     nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>
-      combine(address, c('recipient_primary_business_street_address_line1', 'recipient_primary_business_street_address_line2')) |>
-      combine(primary_other, c(paste0('covered_recipient_primary_type_', 2:6))) |>
-      combine(specialty_other, c(paste0('covered_recipient_specialty_', 2:6))) |>
-      combine(license_state_other, c(paste0('covered_recipient_license_state_code', 2:6))) |>
+      combine(address,
+              c('recipient_primary_business_street_address_line1',
+                'recipient_primary_business_street_address_line2')) |>
       cols_open() |>
-      tidyup(int = "program_year")
+      narm()
 
     if (pivot) {
       pcol <- c(paste0('name_', 1:5),
@@ -251,9 +257,8 @@ open_payments <- function(year,
         tidyr::pivot_wider(names_from = attr,
                            values_from = val,
                            values_fn = list) |>
-        tidyr::unnest(cols = dplyr::any_of(c('name', 'type', 'category', 'ndc', 'pdi'))) # |>
-        # dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA),
-        #               pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
+        tidyr::unnest(cols = dplyr::any_of(c('name', 'covered', 'type', 'category', 'ndc', 'pdi'))) |>
+        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA))
     }
     if (na.rm) {results <- narm(results)}
   }
@@ -349,11 +354,25 @@ cols_open <- function(df) {
             'country'               = 'recipient_country',
             'province'              = 'recipient_province',
             'primary'               = 'covered_recipient_primary_type_1',
-            'primary_other',
+            'primary2'               = 'covered_recipient_primary_type_2',
+            'primary3'               = 'covered_recipient_primary_type_3',
+            'primary4'               = 'covered_recipient_primary_type_4',
+            'primary5'               = 'covered_recipient_primary_type_5',
+            'primary6'               = 'covered_recipient_primary_type_6',
+            # 'primary_other',
             'specialty'             = 'covered_recipient_specialty_1',
-            'specialty_other',
+            'specialty2'             = 'covered_recipient_specialty_2',
+            'specialty3'             = 'covered_recipient_specialty_3',
+            'specialty4'             = 'covered_recipient_specialty_4',
+            'specialty5'             = 'covered_recipient_specialty_5',
+            'specialty6'             = 'covered_recipient_specialty_6',
+            # 'specialty_other',
             'license_state'         = 'covered_recipient_license_state_code1',
-            'license_state_other',
+            'license_state2'         = 'covered_recipient_license_state_code2',
+            'license_state3'         = 'covered_recipient_license_state_code3',
+            'license_state4'         = 'covered_recipient_license_state_code4',
+            'license_state5'         = 'covered_recipient_license_state_code5',
+            # 'license_state_other',
             'payer_id'              = 'applicable_manufacturer_or_applicable_gpo_making_payment_id',
             'payer_sub'             = 'submitting_applicable_manufacturer_or_applicable_gpo_name',
             'payer_name'            = 'applicable_manufacturer_or_applicable_gpo_making_payment_name',

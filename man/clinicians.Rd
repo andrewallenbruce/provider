@@ -92,17 +92,21 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{\link[=clinicians]{clinicians()}} allows you to access information about providers enrolled in
 Medicare, including the medical school that they attended and the year they graduated
 
-Links:
+\emph{Update Frequency:} \strong{Monthly}
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}
 \item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
 }
-
-\emph{Update Frequency:} \strong{Monthly}
 }
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 clinicians(enid = "I20081002000549")

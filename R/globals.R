@@ -158,10 +158,8 @@ utils::globalVariables(c(
   "covered_recipient_type", # <open_payments>
   "nature_of_payment_or_transfer_of_value", # <open_payments>
   "address", # <open_payments>
-  "primary_other", # <open_payments>
-  "specialty_other", # <open_payments>
-  "license_state_other", # <open_payments>
   "val", # <open_payments>
+  "covered", # <open_payments>
   "title", # <open_ids>
   "modified", # <open_ids>
   "distribution", # <open_ids>
@@ -238,7 +236,6 @@ utils::globalVariables(c(
   "hcpcs_desc", # <by_geography>
   "y", # <by_geography>
   "place_of_srvc", # <by_geography>
-  "arg", # <encode_param>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

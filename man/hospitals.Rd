@@ -149,12 +149,16 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization
 type and address.
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
-}
 
 \emph{Update Frequency:} \strong{Monthly}
 }
+\section{Links}{
+
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
+}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 hospitals(pac_org = 6103733050)

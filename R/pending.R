@@ -1,4 +1,4 @@
-#' Pending Medicare Enrollment Applications
+#' Pending Medicare Applications
 #'
 #' @description
 #' `r lifecycle::badge("questioning")`
@@ -10,30 +10,37 @@
 #' + [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #' + [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
-#' *Update Frequency:* **Weekly**
+#' | __Update Frequency__ |
+#' |:--------------------:|
+#' |      QUARTERLY       |
 #'
-#' @param type < *character* > // __required__ Physician ("`P`") or
-#' Non-physician ("`N`")
+#' @param type < *character* > // __default:__ `"p"` Physician (`p`) or Non-physician (`n`)
 #' @param npi < *integer* > 10-digit National Provider Identifier
 #' @param first,last < *character* > Provider's name
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field** |**Description**         |
+#' |:---------|:-----------------------|
+#' |`npi`     |10-digit individual NPI |
+#' |`first`   |Provider's first name   |
+#' |`last`    |Provider's last name    |
+#' |`type`    |Type of Provider        |
 #'
 #' @examplesIf interactive()
-#' pending(type = "N", last = "Smith")
-#'
-#' pending(type = "P", first = "John")
+#' pending(type = "p", first = "John")
+#' pending(type = "n", last = "Smith")
 #'
 #' @autoglobal
 #' @export
-pending <- function(type,
+pending <- function(type = "p",
                     npi = NULL,
                     first = NULL,
                     last = NULL,
                     tidy = TRUE) {
 
-  type <- rlang::arg_match(type, c("P", "N"))
+  type <- rlang::arg_match(type, c("p", "n"))
   if (!is.null(npi)) {npi <- check_npi(npi)}
 
   args <- dplyr::tribble(
@@ -42,12 +49,12 @@ pending <- function(type,
     "LAST_NAME",  last,
     "FIRST_NAME", first)
 
-  if (type == "P") {
-    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))}
-  if (type == "N") {
+  if (type == "n") {
     response <- httr2::req_perform(httr2::request(build_url("npe", args)))}
+  if (type == "p") {
+    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))}
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,      ~y,
@@ -65,7 +72,7 @@ pending <- function(type,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(type = dplyr::if_else(type == "P",
+      dplyr::mutate(type = dplyr::if_else(type == "p",
                                           "Physician",
                                           "Non-Physician")) |>
       cols_pen()

@@ -42,6 +42,7 @@ Suggests:
     gt,
     gtExtras,
     htmltools,
+    httptest2,
     knitr,
     printr,
     rmarkdown,

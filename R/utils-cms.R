@@ -2,7 +2,7 @@
 #' @param api name of the api
 #' @param check `"base"`, `"id"`, or `"years"`, default is `"id"`
 #' @return A [tibble][tibble::tibble-package] containing the updated ids.
-#' @examples
+#' @examplesIf interactive()
 #' cms_update("Provider of Services File - Clinical Laboratories", "base")
 #' cms_update("Provider of Services File - Clinical Laboratories", "id")
 #' cms_update("Provider of Services File - Clinical Laboratories", "years")
@@ -69,26 +69,11 @@ cms_match <- function(api, year) {
 }
 
 #' Update CMS.gov API distribution IDs
-#'
-#' @description [cms_update_ids()] allows you to update CMS.gov APIs
-#'    distribution IDs.
-#'
-#' @details The Open Payments program is a national disclosure program that
-#'    promotes a more transparent and accountable health care system. Open
-#'    Payments houses a publicly accessible database of payments that reporting
-#'    entities, including drug and medical device companies, make to covered
-#'    recipients like physicians. Please note that CMS does not comment on
-#'    what relationships may be beneficial or potential conflicts of interest.
-#'    CMS publishes the data attested to by reporting entities. The data is
-#'    open to individual interpretation.
-#'
 #' @param api name of the api
 #' @return A [tibble][tibble::tibble-package] containing the updated ids.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider")
 #' cms_update_ids(api = "Specific Chronic Conditions")
-#' }
 #' @autoglobal
 #' @noRd
 cms_update_ids <- function(api = NULL) {

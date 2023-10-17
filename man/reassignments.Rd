@@ -59,14 +59,16 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \item Individual providers who are reassigning benefits or are an employee of
 \item Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 }
+}
+\section{Links}{
 
-Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
 }
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 reassignments(enid = "I20200929003184")

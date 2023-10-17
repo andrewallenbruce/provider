@@ -1,15 +1,17 @@
 #' Clinicians Enrolled in Medicare
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #'
 #' [clinicians()] allows you to access information about providers enrolled in
 #' Medicare, including the medical school that they attended and the year they graduated
 #'
-#' Links:
-#'   - [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
-#'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
-#'
 #' *Update Frequency:* **Monthly**
+#'
+#' @section Links:
+#' + [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+#' + [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+#'
 #'
 #' @param npi < *integer* > 10-digit Individual National Provider Identifier
 #' @param pac < *integer* > 10-digit Individual PECOS Associate Control ID
@@ -121,7 +123,7 @@ clinicians <- function(npi = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (vctrs::vec_is_empty(results)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -147,8 +149,10 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = c("telehlth"),
-                      int = c("num_org_mem", "grd_yr")) |>
+    results <- tidyup(results,
+                      yn = 'telehlth',
+                      int = c('num_org_mem', 'grd_yr'),
+                      yr = 'grd_yr') |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
       cols_clin()
 
@@ -163,30 +167,30 @@ clinicians <- function(npi = NULL,
 cols_clin <- function(df) {
 
   cols <- c('npi',
-            'pac' = 'ind_pac_id',
-            'enid' = 'ind_enrl_id',
-            'first' = 'frst_nm',
-            'middle' = 'mid_nm',
-            'last' = 'lst_nm',
-            'suffix' = 'suff',
-            'gender' = 'gndr',
-            'credential' = 'cred',
-            'school' = 'med_sch',
-            'grad_year' = 'grd_yr',
-            'specialty' = 'pri_spec',
+            'pac'           = 'ind_pac_id',
+            'enid'          = 'ind_enrl_id',
+            'first'         = 'frst_nm',
+            'middle'        = 'mid_nm',
+            'last'          = 'lst_nm',
+            'suffix'        = 'suff',
+            'gender'        = 'gndr',
+            'credential'    = 'cred',
+            'school'        = 'med_sch',
+            'grad_year'     = 'grd_yr',
+            'specialty'     = 'pri_spec',
             'specialty_sec' = 'sec_spec_all',
-            'organization' = 'facility_name',
-            'pac_org' = 'org_pac_id',
-            'members_org' = 'num_org_mem',
-            'address_org' = 'address',
-            'city_org' = 'city_town',
-            'state_org' = 'state',
-            'zip_org' = 'zip_code',
-            'phone_org' = 'telephone_number')
-            # 'address_id' = 'adrs_id',
-            # 'telehealth' = 'telehlth',
-            # 'assign_ind' = 'ind_assgn',
-            # 'assign_org' = 'grp_assgn'
+            'organization'  = 'facility_name',
+            'pac_org'       = 'org_pac_id',
+            'members_org'   = 'num_org_mem',
+            'address_org'   = 'address',
+            'city_org'      = 'city_town',
+            'state_org'     = 'state',
+            'zip_org'       = 'zip_code',
+            'phone_org'     = 'telephone_number')
+            # 'address_id'  = 'adrs_id',
+            # 'telehealth'  = 'telehlth',
+            # 'assign_ind'  = 'ind_assgn',
+            # 'assign_org'  = 'grp_assgn'
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

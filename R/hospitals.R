@@ -8,9 +8,10 @@
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
-#'
 #' *Update Frequency:* **Monthly**
+#'
+#' @section Links:
+#' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi < *integer* > 10-digit Organizational National Provider Identifier
 #' @param pac_org < *integer* > 10-digit Organizational PECOS Associate Control ID

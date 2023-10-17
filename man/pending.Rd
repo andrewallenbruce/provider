@@ -2,13 +2,12 @@
 % Please edit documentation in R/pending.R
 \name{pending}
 \alias{pending}
-\title{Pending Medicare Enrollment Applications}
+\title{Pending Medicare Applications}
 \usage{
-pending(type, npi = NULL, first = NULL, last = NULL, tidy = TRUE)
+pending(type = "p", npi = NULL, first = NULL, last = NULL, tidy = TRUE)
 }
 \arguments{
-\item{type}{< \emph{character} > // \strong{required} Physician ("\code{P}") or
-Non-physician ("\code{N}")}
+\item{type}{< \emph{character} > // \strong{default:} \code{"p"} Physician (\code{p}) or Non-physician (\code{n})}
 
 \item{npi}{< \emph{integer} > 10-digit National Provider Identifier}
 
@@ -17,7 +16,13 @@ Non-physician ("\code{N}")}
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab 10-digit individual NPI \cr
+   \code{first} \tab Provider's first name \cr
+   \code{last} \tab Provider's last name \cr
+   \code{type} \tab Type of Provider \cr
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
@@ -27,9 +32,8 @@ enrollment applications.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-pending(type = "N", last = "Smith")
-
-pending(type = "P", first = "John")
+pending(type = "p", first = "John")
+pending(type = "n", last = "Smith")
 \dontshow{\}) # examplesIf}
 }
 \references{
@@ -37,7 +41,8 @@ APIs:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
+}\tabular{c}{
+   \strong{Update Frequency} \cr
+   QUARTERLY \cr
 }
-
-\emph{Update Frequency:} \strong{Weekly}
 }
