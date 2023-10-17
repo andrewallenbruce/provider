@@ -82,30 +82,31 @@
 #' 1. Suppliers
 #' 1. Transportation Services
 #'
-#' @section Description:
-#' + `code`: Taxonomy Code
-#' + `grouping`: Level I, Provider Grouping
-#' + `classification`: Level II, Classification
-#' + `specialization`: Level III, Area of Specialization
-#' + `definition`: Definition of Taxonomy
-#' + `notes`: Notes pertaining to Taxonomy, e.g. sources, date modified, date implemented, etc.
-#' + `display_name`: A more consumer-friendly name for the taxonomy code; a combination of the code name and the Level in which the code is nested.
-#' + `section`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
+#' @section Display Name:
+#' The display name is a combination of the code name and the Level in
+#' which the code is nested, which more precisely identifies the code.
 #'
-#' @note The "230" designation indicates the version of the code set. NUCC
-#' updates the set every six months. The "23" indicates the year and the "0"
-#' indicates the first update of the year.
-#'
-#' @note The taxonomy code display name is a more consumer-friendly name for the
-#' code. The display name is a combination of the code name and the Level in
-#' which the code is nested, which more precisely identifies the code.  For
-#' example, Addiction Medicine is a physician subspecialty in Anesthesiology,
+#' For example, Addiction Medicine is a physician subspecialty in Anesthesiology,
 #' Family Medicine, Internal Medicine, Preventive Medicine, and Psychiatry &
-#' Neurology. Seeing “Addiction Medicine” does not identify the specialty of
-#' the physician, but the display name of “Addiction Medicine (Internal
-#' Medicine) Physician” clearly does. In another example, the code
-#' “Radiology” could be confused with several codes, but “Radiology
-#' Chiropractor” specifies the exact provider.
+#' Neurology.
+#'
+#' "Addiction Medicine" does not identify the specialty of
+#' the physician, but the display name of "Addiction Medicine (Internal
+#' Medicine) Physician" clearly does.
+#'
+#' In another example, "Radiology" could be confused with several
+#' taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
+#'
+#' @section Description:
+#' + `taxonomy_code`: Provider Taxonomy Code
+#' + `taxonomy_category`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
+#' + `taxonomy_grouping`: Level I, Provider Grouping
+#' + `taxonomy_classification`: Level II, Classification
+#' + `taxonomy_specialization`: Level III, Area of Specialization
+#' + `taxonomy_display_name`: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
+#' + `taxonomy_definition`: Definition of Taxonomy
+#' + `version`: Three digit version of the code set. The first two digits indicate the year and the third digit indicates either the first release of the year ("0") or the second release of the year ("1").
+#' + `release_date`: Date the version of the code set was released
 #'
 #' @source
 #' <https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57>

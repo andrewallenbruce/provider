@@ -98,7 +98,7 @@ reference:
   - open_payments
   - quality_payment
   - by_provider
-  - by_services
+  - by_service
   - by_geography
 
 - title: Classifications
