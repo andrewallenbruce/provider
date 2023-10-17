@@ -7,6 +7,9 @@ utils::globalVariables(c(
   "y", # <beneficiaries>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
+  "copy", # <ror>
+  ":=", # <ror>
+  "lg", # <ror>
   "year", # <change_year>
   ":=", # <change_year>
   "y", # <clinicians>

@@ -37,13 +37,15 @@ NULL
 #' @param digits Number of digits to round to, default is 3
 #' @returns A `tibble`
 #' @rdname calculations
-#' @keywords internal
 #' @autoglobal
 #' @export
+#' @keywords internal
 change <- function(df, cols, digits = 3) {
 
-  dplyr::mutate(df,
-  dplyr::across({{ cols }}, list(chg = \(x) chg(x), pct = \(x) pct(x)),
+  x <- dplyr::mutate(df,
+  dplyr::across({{ cols }}, list(
+    chg = \(x) chg(x),
+    pct = \(x) pct(x)),
                 .names = "{.col}_{.fn}")) |>
   dplyr::mutate(
   dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(.,
@@ -51,22 +53,24 @@ change <- function(df, cols, digits = 3) {
   dplyr::mutate(
   dplyr::across(dplyr::contains(c("_chg", "_pct")), ~cumsum(.),
                 .names = "{.col}_cum")) |>
-  dplyr::relocate(dplyr::contains("_chg"), dplyr::contains("_pct"),
+  dplyr::relocate(dplyr::contains("_chg"),
+                  dplyr::contains("_pct"),
                 .after = dplyr::last_col())
 
 }
 
-#' Calculate absolute change
+#' Calculate lagged change
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
 #' @returns numeric vector
-#' @examples
+#' @examplesIf interactive()
 #' dplyr::tibble(year = 2015:2020,
 #'               pay = 1000:1005) |>
-#' dplyr::mutate(change = chg(pay)
+#' dplyr::mutate(change = chg(pay))
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 chg <- function(x, n = 1L, fill_na = 0L) {
   lg  <- dplyr::lag(x, n = n)
   res <- (x - lg)
@@ -74,22 +78,60 @@ chg <- function(x, n = 1L, fill_na = 0L) {
   return(res)
 }
 
-#' Calculate relative change
+#' Calculate lagged percentage change
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
 #' @returns numeric vector
-#' @examples
+#' @examplesIf interactive()
 #' dplyr::tibble(year = 2015:2020,
 #'               pay = 1000:1005) |>
-#' dplyr::mutate(pct_change = pct(pay)
+#' dplyr::mutate(pct_change = pct(pay))
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 pct <- function(x, n = 1L, fill_na = 0L) {
   lg <- dplyr::lag(x, n = n)
   res <- (x - lg) / lg
   if (!is.na(fill_na)) res[is.na(res)] <- fill_na
   return(res)
+}
+
+#' Calculate lagged rate of return
+#' @param df numeric vector
+#' @param col column
+#' @param n values to offset
+#' @returns numeric vector
+#' @examplesIf interactive()
+#' dplyr::tibble(year = 2021:2023,
+#'               pay = c(2000, 2200, 1980)) |>
+#' ror(pay)
+#' @autoglobal
+#' @export
+#' @keywords internal
+ror <- function(df, col, n = 1L) {
+  dplyr::mutate(df,
+                copy = dplyr::if_else({{ col }} == 0, 1, {{ col }}),
+                lg = dplyr::lag(copy, n = n),
+                "{{ col }}_ror" := copy / lg,
+                copy = NULL,
+                lg = NULL)
+}
+
+#' Calculate geometric mean (average rate of return)
+#' For use in conjunction with [ror()]
+#' @param x numeric vector
+#' @returns numeric vector
+#' @examplesIf interactive()
+#' dplyr::tibble(year = 2015:2020,
+#'               pay = c(2000, 2200, 1980, 3000, 2500, 2700)) |>
+#' ror(pay) |>
+#' dplyr::summarise(gmean = geomean(ror))
+#' @autoglobal
+#' @export
+#' @keywords internal
+geomean <- function(x) {
+  exp(mean(log(x), na.rm = TRUE))
 }
 
 #' Calculate lagged values by column
@@ -98,12 +140,13 @@ pct <- function(x, n = 1L, fill_na = 0L) {
 #' @param by column to calculate lag by
 #' @param digits Number of digits to round to
 #' @returns A `tibble`
-#' @examples
+#' @examplesIf interactive()
 #' dplyr::tibble(year = 2015:2020,
 #'               pay = 1000:1005) |>
 #' change_year(pay, year)
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 change_year <- function(df, col, by = year, digits = 3) {
 
   newcol <- rlang::englue("{{col}}_chg")
@@ -124,9 +167,9 @@ change_year <- function(df, col, by = year, digits = 3) {
 #' @param date_col date column
 #' @returns number of years since today's date
 #' @rdname calculations
-#' @keywords internal
 #' @autoglobal
 #' @export
+#' @keywords internal
 years_df <- function(df, date_col) {
 
   df |>
@@ -144,11 +187,13 @@ years_df <- function(df, date_col) {
 #' Calculate number of years since today's date
 #' @param date date column
 #' @returns number of years since today's date
-#' @examples
+#' @rdname calculations
+#' @examplesIf interactive()
 #' dplyr::tibble(date = lubridate::today() - 366) |>
 #' dplyr::mutate(years_passed = years_vec(date = date))
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 years_vec <- function(date) {
   round(
     as.double(
@@ -162,13 +207,14 @@ years_vec <- function(date) {
 #' Calculate number of years since today's date
 #' @param date date column
 #' @returns number of years since today's date
-#' @examples
+#' @rdname calculations
+#' @examplesIf interactive()
 #' dplyr::tibble(date = lubridate::today() - 366) |>
 #' dplyr::mutate(years_passed = years_vec(date = date))
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 duration_vec <- function(date) {
-
   date <- difftime(date, lubridate::today(), units = "auto", tz = "UTC")
   date <- lubridate::as.duration(date)
   return(date)
@@ -183,6 +229,7 @@ duration_vec <- function(date) {
 #' @param arr column to arrange data by, i.e. `cost`
 #' @param digits Number of digits to round to, default is 3
 #' @return A `tibble` containing the summary stats
+#' @rdname calculations
 #' @examplesIf interactive()
 #' dplyr::tibble(
 #' provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
@@ -194,7 +241,8 @@ duration_vec <- function(date) {
 #'               summary_vars = c(charges, payment),
 #'               arr = provider)
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 summary_stats <- function(df,
                           condition = NULL,
                           group_vars = NULL,

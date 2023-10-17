@@ -27,6 +27,8 @@ library(gt)
 
 <br>
 
+
+
 ```{r}
 val <- map_dfr(pop_years(), ~by_provider(year = .x, city = "Valdosta", state = "GA"))
 ```
@@ -37,6 +39,7 @@ val <- map_dfr(pop_years(), ~by_provider(year = .x, city = "Valdosta", state = "
 val |> 
   group_by(year) |> 
   summarise(
+    n = n(),
     hcpcs = mean(tot_hcpcs),
     benes = mean(tot_benes),
     srvcs = mean(tot_srvcs),
@@ -46,12 +49,12 @@ val |>
     hcc = mean(hcc_risk_avg)) |> 
   change(!c('year')) |> 
   select(year, 
-         'HCC RISK AVG' = hcc_chg,
-         HCPCS = hcpcs_chg,
-         SERVICES = srvcs_chg,
-         CHARGES = charges_chg,
-         ALLOWED = allowed_chg,
-         PAYMENT = payment_chg) |> 
+         PROVIDERS = n_ror,
+         HCPCS = hcpcs_ror,
+         SERVICES = srvcs_ror,
+         CHARGES = charges_ror,
+         ALLOWED = allowed_ror,
+         PAYMENT = payment_ror) |> 
   pivot_longer(cols = !year, 
                names_to = "metric", 
                values_to = "value") |>
@@ -61,36 +64,14 @@ val |>
   fmt_number(columns = contains('20'), 
              decimals = 2, 
              sep_mark = "", 
-             force_sign = TRUE, 
              suffixing = TRUE) |>
-  opt_table_font(font = google_font(name = "Kanit")) |> 
-  cols_hide(columns = contains('20')) |>
-  cols_nanoplot(
-    columns = starts_with("20"),
-    plot_type = "bar",
-    plot_height = "4.5em",
-    new_col_name = "change",
-    new_col_label = "change",
-    missing_vals = "remove",
-    options = nanoplot_options(
-      show_data_line = FALSE,
-      show_data_area = FALSE,
-      data_bar_stroke_color = "transparent",
-      data_bar_negative_stroke_color = "transparent",
-      data_bar_fill_color = "grey",
-      data_bar_negative_fill_color = "red")) |> 
-  cols_move_to_start(change) |> 
-  cols_align(columns = change, align = "center") |> 
-  tab_options(table.width = px(500),
-              column_labels.hidden = TRUE) |> 
-  # opt_all_caps() |> 
-  opt_stylize(color = "red", add_row_striping = FALSE)
+  opt_table_font(font = google_font(name = "Kanit"))
 ```
 
 <br><br>
 
 ```{r}
-val |> 
+x <- val |> 
   group_by(year, entity_type) |> 
   summarise(
     n = n(),
@@ -104,7 +85,7 @@ val |>
   arrange(entity_type) |>
   group_by(entity_type) |>
   change(c(n, starts_with("avg_"))) |> 
-  ungroup() |>
+  ungroup() |> 
   select(-ends_with("_cum")) |> 
   select(year, entity_type, ends_with("_chg")) |> 
   filter(year != 2013) |>

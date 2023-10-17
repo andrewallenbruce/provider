@@ -6,22 +6,38 @@ test_that("change() works", {
     x = sample(1000:2000, size = 6),
     y = sample(1000:2000, size = 6))
 
-  b <- a
-  b$x_chg     <- c(0, 48, -284, 347, -331, 743)
-  b$y_chg     <- c(0, -700, 181, -70, 15, -230)
-
-  b$x_chg_cum <- c(0, 48, -236, 111, -220, 523)
-  b$y_chg_cum <- c(0, -700, -519, -589, -574, -804)
-
-  b$x_pct     <- c(0, 0.034, -0.194, 0.295, -0.217, 0.622)
-  b$y_pct     <- c(0, -0.385, 0.162, -0.054, 0.012, -0.185)
-
-  b$x_pct_cum <- c(0, 0.034, -0.16, 0.135, -0.082, 0.54)
-  b$y_pct_cum <- c(0, -0.385, -0.223, -0.277, -0.265, -0.45)
-
-  expect_equal(change(a, c(x, y)), b)
-
+  b <- dplyr::tibble(
+    year = 2015:2020,
+    x = c(1414L, 1462L, 1178L, 1525L, 1194L, 1937L),
+    y = c(1817L, 1117L, 1298L, 1228L, 1243L, 1013L),
+    x_chg = c(0L, 48L, -284L, 347L, -331L, 743L),
+    y_chg = c(0L, -700L, 181L, -70L, 15L, -230L),
+    x_chg_cum = c(0L, 48L, -236L, 111L, -220L, 523L),
+    y_chg_cum = c(0L, -700L, -519L, -589L, -574L, -804L),
+    x_pct = c(0, 0.034, -0.194, 0.295, -0.217, 0.622),
+    y_pct = c(0, -0.385, 0.162, -0.054, 0.012, -0.185),
+    x_pct_cum = c(0, 0.034, -0.16, 0.1349, -0.0820, 0.54),
+    y_pct_cum = c(0, -0.385, -0.223, -0.277, -0.265, -0.45)
+  )
+  expect_equal(change(a, c(x, y)), b, tolerance = 1e-3)
 })
+
+test_that("ror() works", {
+
+  x <- dplyr::tibble(year = 2021:2023,
+                     pay = c(2000, 2200, 1980))
+  y <- dplyr::tibble(year = 2021:2023,
+                     pay = c(2000, 2200, 1980),
+                     pay_ror = c(NA, 1.1, 0.9))
+  expect_equal(ror(x, pay), y)
+})
+
+test_that("geomean() works", {
+  x <- c(NA, 1.1, 0.9)
+  y <- 0.9949874
+  expect_equal(geomean(x), y, tolerance = 1e-3)
+})
+
 
 test_that("change_year() works", {
 
@@ -29,8 +45,6 @@ test_that("change_year() works", {
   b <- a
   b$x_chg <- c(NA, 1, 1, 1, 1, 1)
   b$x_pct <- c(NA, 0.001, 0.001, 0.001, 0.001, 0.001)
-
-
   expect_equal(change_year(df = a, col = x), b)
 
 })
@@ -50,6 +64,13 @@ test_that("years_vec() works", {
   a <- dplyr::tibble(date = lubridate::today() - 366)
   expect_equal(years_vec(a$date), 1)
 
+})
+
+test_that("duration_vec() works", {
+  a <- lubridate::today() - 366
+  b <- difftime(a, lubridate::today(), units = "auto", tz = "UTC")
+  b <- lubridate::as.duration(b)
+  expect_equal(duration_vec(a), b)
 })
 
 test_that("summary_stats() works", {

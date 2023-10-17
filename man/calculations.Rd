@@ -4,11 +4,27 @@
 \alias{calculations}
 \alias{change}
 \alias{years_df}
+\alias{years_vec}
+\alias{duration_vec}
+\alias{summary_stats}
 \title{Utility Functions}
 \usage{
 change(df, cols, digits = 3)
 
 years_df(df, date_col)
+
+years_vec(date)
+
+duration_vec(date)
+
+summary_stats(
+  df,
+  condition = NULL,
+  group_vars = NULL,
+  summary_vars = NULL,
+  arr = NULL,
+  digits = 3
+)
 }
 \arguments{
 \item{df}{data frame}
@@ -18,14 +34,32 @@ years_df(df, date_col)
 \item{digits}{Number of digits to round to, default is 3}
 
 \item{date_col}{date column}
+
+\item{date}{date column}
+
+\item{condition}{filter condition, i.e. \code{patient == "new"}}
+
+\item{group_vars}{variables to group by, i.e. \code{c(specialty, state, hcpcs, cost)}}
+
+\item{summary_vars}{variables to summarise, i.e. \code{c(min, max, mode, range)}}
+
+\item{arr}{column to arrange data by, i.e. \code{cost}}
 }
 \value{
 A \code{tibble}
 
 number of years since today's date
+
+number of years since today's date
+
+number of years since today's date
+
+A \code{tibble} containing the summary stats
 }
 \description{
 Common utility functions
+
+Returns a tibble of summary stats
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -53,5 +87,24 @@ change(c(pay))
 dplyr::tibble(date = lubridate::today() - 366) |>
 years_df(date)
 
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::tibble(date = lubridate::today() - 366) |>
+dplyr::mutate(years_passed = years_vec(date = date))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::tibble(date = lubridate::today() - 366) |>
+dplyr::mutate(years_passed = years_vec(date = date))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::tibble(
+provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
+city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
+charges = sample(1000:2000, size = 200),
+payment = sample(1000:2000, size = 200)) |>
+summary_stats(condition = city == "ATL",
+              group_vars = provider,
+              summary_vars = c(charges, payment),
+              arr = provider)
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}
