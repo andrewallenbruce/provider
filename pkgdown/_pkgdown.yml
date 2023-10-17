@@ -11,6 +11,12 @@ template:
 #pkgdown-nav-height: 100px
 
 home:
+  title: nflplotR • Plot NFL Team Logos
+  description: >
+    A set of functions to visualize National Football
+    League analysis in 'ggplot2'.
+
+home:
   sidebar:
     structure: [links, license, community, citation, authors, dev]
 
