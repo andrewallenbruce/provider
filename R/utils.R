@@ -186,9 +186,14 @@ combine <- function(df, nm, cols, sep = " ", type = "any") {
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-narm <- function(df) {
-  janitor::remove_empty(df, which = c("rows", "cols"))
-}
+narm <- function(df) janitor::remove_empty(df, which = c("rows", "cols"))
+
+#' @param x url
+#' @examplesIf interactive()
+#' github_raw("andrewallenbruce/provider/")
+#' @autoglobal
+#' @noRd
+github_raw <- function(x) paste0("https://raw.githubusercontent.com/", x)
 
 #' @param param API parameter
 #' @param arg API function arg

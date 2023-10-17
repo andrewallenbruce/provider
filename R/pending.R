@@ -6,13 +6,14 @@
 #' `pending()` allows the user to search for providers with pending Medicare
 #' enrollment applications.
 #'
+#' +:----------------------+:----------+
+#' | __Update Frequency:__ | QUARTERLY |
+#' +-----------------------+-----------+
+#'
 #' @references APIs:
 #' + [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #' + [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
-#' | __Update Frequency__ |
-#' |:--------------------:|
-#' |      QUARTERLY       |
 #'
 #' @param type < *character* > // __default:__ `"p"` Physician (`p`) or Non-physician (`n`)
 #' @param npi < *integer* > 10-digit National Provider Identifier

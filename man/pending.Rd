@@ -29,6 +29,10 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 
 \code{pending()} allows the user to search for providers with pending Medicare
 enrollment applications.
+
++:----------------------+:----------+
+| \strong{Update Frequency:} | QUARTERLY |
++-----------------------+-----------+
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -41,8 +45,5 @@ APIs:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
-}\tabular{c}{
-   \strong{Update Frequency} \cr
-   QUARTERLY \cr
 }
 }

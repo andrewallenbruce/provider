@@ -8,15 +8,11 @@ template:
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
-#pkgdown-nav-height: 100px
 
 home:
-  title: nflplotR • Plot NFL Team Logos
+  title: provider • Access Healthcare Provider Data
   description: >
-    A set of functions to visualize National Football
-    League analysis in 'ggplot2'.
-
-home:
+    Functions for accessing and retrieving healthcare provider data.
   sidebar:
     structure: [links, license, community, citation, authors, dev]
 
@@ -73,3 +69,55 @@ navbar:
       creator: "@aabrucehimni"
       site: "@aabrucehimni"
       card: summary_large_image
+
+reference:
+
+- title: Administrative
+  desc: >
+    Access a provider's administrative data.
+  contents:
+  - affiliations
+  - clinicians
+  - hospitals
+  - laboratories
+  - nppes
+  - opt_out
+  - order_refer
+  - pending
+  - providers
+  - reassignments
+
+- title: Provider Statistics
+  desc: >
+    Access a provider's statistical data.
+  contents:
+  - beneficiaries
+  - compare_hcpcs
+  - compare_conditions
+  - conditions
+  - open_payments
+  - quality_payment
+  - by_provider
+  - by_services
+  - by_geography
+
+- title: Classifications
+  desc: >
+    Classification systems for added context and dimensionality reduction.
+  contents:
+  - betos
+  - ndc_lookup
+  - taxonomy_codes
+  - taxonomy_crosswalk
+
+- title: Utilities
+  desc: >
+    Various helper functions.
+  contents:
+  - change
+  - display_long
+  - bene_years
+  - open_years
+  - pop_years
+  - cc_years
+  - qpp_years
