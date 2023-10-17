@@ -58,9 +58,6 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/display_long.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/download_nucc_csv.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/hospitals.html</loc>
   </url>
   <url>
@@ -107,6 +104,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/rxnorm.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_codes.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>

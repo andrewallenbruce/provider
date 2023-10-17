@@ -69,3 +69,20 @@ dd > p:nth-child(1) {
 dd > p:nth-child(2) {
   margin-left: -6px !important;
 }
+
+.row > main {
+  max-width: 100%;
+}
+
+@media only screen and (min-width: 640px) {
+  main + .col-md-3 {
+    margin-left: unset;
+    padding-left: 5rem;
+    max-width: 75%;
+  }
+}
+
+h4.author,h4.date {
+  padding-top:0px;
+  margin-top:0px;
+}
