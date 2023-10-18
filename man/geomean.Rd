@@ -10,19 +10,8 @@ geomean(x)
 \arguments{
 \item{x}{numeric vector}
 }
-\value{
-numeric vector
-}
 \description{
 Calculate geometric mean (average rate of return)
 For use in conjunction with \code{\link[=ror]{ror()}}
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(year = 2015:2020,
-              pay = c(2000, 2200, 1980, 3000, 2500, 2700)) |>
-ror(pay) |>
-dplyr::summarise(gmean = geomean(ror))
-\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

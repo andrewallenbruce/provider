@@ -13,17 +13,7 @@ chg(x, n = 1L, fill_na = 0L)
 
 \item{fill_na}{fill value for any NAs; default is 0}
 }
-\value{
-numeric vector
-}
 \description{
 Calculate lagged change
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(year = 2015:2020,
-              pay = 1000:1005) |>
-dplyr::mutate(change = chg(pay))
-\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

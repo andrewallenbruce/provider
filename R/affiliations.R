@@ -65,10 +65,10 @@ affiliations <- function(npi = NULL,
                          tidy = TRUE,
                          na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi          <- check_npi(npi)}
-  if (!is.null(pac))           {pac          <- check_pac(pac)}
-  if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
-  if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
+  npi <- npi %nn% check_npi(npi)
+  pac <- pac %nn% check_pac(pac)
+  facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
+  parent_ccn   <- parent_ccn %nn% as.character(parent_ccn)
 
   if (!is.null(facility_type)) {
     facility_type <- dplyr::case_match(facility_type,
@@ -89,7 +89,8 @@ affiliations <- function(npi = NULL,
                                       "Home health agency",
                                       "Skilled nursing facility",
                                       "Hospice",
-                                      "Dialysis facility"))}
+                                      "Dialysis facility"))
+    }
 
   args <- dplyr::tribble(
     ~param,                                         ~arg,
@@ -102,7 +103,7 @@ affiliations <- function(npi = NULL,
     "facility_affiliations_certification_number",   facility_ccn,
     "facility_type_certification_number",           parent_ccn)
 
-  error_body <- function(response) {httr2::resp_body_json(response)$message}
+  error_body <- function(response) httr2::resp_body_json(response)$message
 
   response <- httr2::request(file_url("a", args, offset)) |>
     httr2::req_error(body = error_body) |>
@@ -110,7 +111,7 @@ affiliations <- function(npi = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (vctrs::vec_is_empty(results)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -128,10 +129,8 @@ affiliations <- function(npi = NULL,
     return(invisible(NULL))
 
   }
-
   if (tidy)  {results <- cols_aff(tidyup(results))
   if (na.rm) {results <- narm(results)}}
-
   return(results)
 }
 

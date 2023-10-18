@@ -15,17 +15,7 @@ change_year(df, col, by = year, digits = 3)
 
 \item{digits}{Number of digits to round to}
 }
-\value{
-A \code{tibble}
-}
 \description{
 Calculate lagged values by column
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(year = 2015:2020,
-              pay = 1000:1005) |>
-change_year(pay, year)
-\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

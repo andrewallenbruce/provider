@@ -17,37 +17,68 @@
 #' stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage
 #' Prescription Drug plans.
 #'
-#' The dataset includes enrollee counts on a *rolling 12 month basis* and also
-#' provides information on yearly trends.
+#' The dataset includes enrollee counts on a *rolling 12 month basis*.
 #'
 #' @section Links:
 #' + [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param year Calendar year of Medicare enrollment; current years can be
+#' @param year < *integer* > Calendar year of Medicare enrollment; current years can be
 #' checked with:
 #'    * `bene_years("year")`: Years available for all 12 months
 #'    * `bene_years("month")`: Years available for individual months
-#' @param period Time frame of Medicare enrollment; options are:
+#' @param period < *character* > Time frame of Medicare enrollment; options are:
 #'    * `Year`
 #'    * `Month`
 #'    * Any individual month name
-#' @param level Geographic level of data; options are:
+#' @param level < *character* > Geographic level of data; options are:
 #'    * `National`
 #'    * `State`
 #'    * `County`
-#' @param state Full state name or abbreviation of beneficiary residence
-#' @param county County of beneficiary residence
-#' @param fips FIPS code of beneficiary residence
-#' @param tidy Tidy output; default is `TRUE`
+#' @param state < *character* > Full state name or abbreviation of beneficiary residence
+#' @param county < *character* > County of beneficiary residence
+#' @param fips < *character* > FIPS code of beneficiary residence
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**           |**Description**                                         |
+#' |:-------------------|:-------------------------------------------------------|
+#' |`year`              |Enrollment calendar year                                |
+#' |`period`            |Enrollment time frame                                   |
+#' |`level`             |Geographic level of data                                |
+#' |`state`             |Beneficiary residence state                             |
+#' |`state_name`        |Beneficiary residence state name                        |
+#' |`county`            |Beneficiary residence county                            |
+#' |`fips`              |Beneficiary residence FIPS code                         |
+#' |`bene_total`        |Total Medicare beneficiaries                            |
+#' |`bene_orig`         |Original Medicare beneficiaries                         |
+#' |`bene_ma_oth`       |Medicare Advantage beneficiaries                        |
+#' |`bene_total_aged`   |Aged beneficiaries                                      |
+#' |`bene_aged_esrd`    |Aged beneficiaries with ESRD                            |
+#' |`bene_aged_no_esrd` |Aged beneficiaries without ESRD                         |
+#' |`bene_total_dsb`    |Disabled beneficiaries                                  |
+#' |`bene_dsb_esrd`     |Disabled with ESRD and ESRD-only beneficiaries          |
+#' |`bene_dsb_no_esrd`  |Disabled beneficiaries without ESRD                     |
+#' |`bene_total_ab`     |Total Medicare Part A and B beneficiaries               |
+#' |`bene_ab_orig`      |Original Medicare Part A and B beneficiaries            |
+#' |`bene_ab_ma_oth`    |Medicare Advantage Part A and B beneficiaries           |
+#' |`bene_total_rx`     |Total Medicare Part D beneficiaries                     |
+#' |`bene_rx_pdp`       |Medicare Prescription Drug Plan beneficiaries           |
+#' |`bene_rx_mapd`      |Medicare Advantage Prescription Drug Plan beneficiaries |
+#' |`bene_rx_lis_elig`  |Part D Low Income Subsidy Eligible (Full) Beneficiaries |
+#' |`bene_rx_lis_full`  |Part D Low Income Subsidy Full Beneficiaries            |
+#' |`bene_rx_lis_part`  |Part D Low Income Subsidy Partial Beneficiaries         |
+#' |`bene_rx_lis_no`    |Part D No Low Income Subsidy Beneficiaries              |
 #'
 #' @examplesIf interactive()
 #' beneficiaries(year = 2022, period = "Year", level = "County", county = "Autauga")
+#'
 #' beneficiaries(year = 2022, period = "July", state = "Georgia")
+#'
 #' beneficiaries(level = "State", fips = "10")
+#'
 #' @autoglobal
 #' @export
 beneficiaries <- function(year = NULL,
@@ -62,7 +93,7 @@ beneficiaries <- function(year = NULL,
     year <- as.character(year)
 
     if (!is.null(period) && period %in% c("Year")) {
-    rlang::arg_match(year, as.character(bene_years("year")))}
+      rlang::arg_match(year, as.character(bene_years("year")))}
 
     if (!is.null(period) && period %in% c("Month", month.name)) {
       rlang::arg_match(year, as.character(bene_years("month")))}
@@ -113,16 +144,11 @@ beneficiaries <- function(year = NULL,
 
     format_cli(cli_args)
     return(invisible(NULL))
-
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-
   if (tidy) {results <- bene_cols(tidyup(results, int = c("year", "_benes"), yr = 'year'))}
-
-  if (!is.null(period) && period == "Month") {
-    results <- dplyr::filter(results, period %in% month.name)
-    }
+  if (!is.null(period) && period == "Month") {results <- dplyr::filter(results, period %in% month.name)}
   return(results)
 }
 

@@ -13,9 +13,9 @@ change(df, cols, digits = 3)
 
 years_df(df, date_col)
 
-years_vec(date)
+years_vec(date_col)
 
-duration_vec(date)
+duration_vec(date_col)
 
 summary_stats(
   df,
@@ -35,8 +35,6 @@ summary_stats(
 
 \item{date_col}{date column}
 
-\item{date}{date column}
-
 \item{condition}{filter condition, i.e. \code{patient == "new"}}
 
 \item{group_vars}{variables to group by, i.e. \code{c(specialty, state, hcpcs, cost)}}
@@ -46,15 +44,7 @@ summary_stats(
 \item{arr}{column to arrange data by, i.e. \code{cost}}
 }
 \value{
-A \code{tibble}
-
-number of years since today's date
-
-number of years since today's date
-
-number of years since today's date
-
-A \code{tibble} containing the summary stats
+\code{\link[=tibble]{tibble()}} or vector
 }
 \description{
 Common utility functions
@@ -62,49 +52,81 @@ Common utility functions
 Returns a tibble of summary stats
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+## Lagged Calculations
 
-# Lagged absolute/relative change
-# and cumulative sum of both:
+ex <- dplyr::tibble(
+              year = rep(2020:2021, each = 4),
+              grp = rep(c("a", "b"), 4),
+              pay = sample(1000:2000, 8))
+ex
 
-dplyr::tibble(year = 2015:2020,
-              pay  = sample(1000:2000, 6)) |>
+# `change()` # Change, percentage change, and cumulative sum
+
+dplyr::filter(ex, grp == "a") |>
 change(c(pay))
 
 # When performing a `group_by()`, watch for
-# the correct order of the variables you're
-# lagging by:
+# the correct order of the variables
 
-dplyr::tibble(year = rep(2020:2021, each = 2),
-              grp = rep(c("a", "b"), 2),
-              pay = sample(1000:2000, 4)) |>
-dplyr::arrange(year) |>
+dplyr::arrange(ex, year) |>
 dplyr::group_by(grp) |>
 change(c(pay))
-\dontshow{\}) # examplesIf}
-# Count of the number of years between dates:
 
-dplyr::tibble(date = lubridate::today() - 366) |>
-years_df(date)
+# `chg()` # Change over a vector
 
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(date = lubridate::today() - 366) |>
-dplyr::mutate(years_passed = years_vec(date = date))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(date = lubridate::today() - 366) |>
-dplyr::mutate(years_passed = years_vec(date = date))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(
-provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
-city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
-charges = sample(1000:2000, size = 200),
-payment = sample(1000:2000, size = 200)) |>
-summary_stats(condition = city == "ATL",
+dplyr::filter(ex, grp == "a") |>
+dplyr::mutate(change = chg(pay))
+
+# `pct()` # Percentage change over a vector
+
+dplyr::filter(ex, grp == "a") |>
+dplyr::mutate(pct_change = pct(pay))
+
+# `ror()` # Rate of return
+
+dplyr::filter(ex, grp == "a") |>
+ror(pay)
+
+# `geomean()` # Geometric mean
+
+dplyr::filter(ex, grp == "a") |>
+ror(pay) |>
+dplyr::summarise(gmean = geomean(pay_ror))
+
+# `change_year()` # Lagged change by column
+
+dplyr::filter(ex, grp == "a") |>
+change_year(pay, year)
+
+
+## Calculating Timespans
+dt <- dplyr::tibble(date = lubridate::today() - 366)
+dt
+
+# `years_df()`/`years_vec()` # Years passed
+
+years_df(dt, date)
+
+dplyr::mutate(dt, years = years_vec(date))
+
+# `duration_vec()` # Duration since date
+
+dplyr::mutate(dt, dur = duration_vec(date))
+
+
+## Summary Statistics
+sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
+                    city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
+                    charges = sample(1000:2000, size = 200),
+                    payment = sample(1000:2000, size = 200))
+
+head(sm)
+
+summary_stats(sm,
+              condition = city == "ATL",
               group_vars = provider,
               summary_vars = c(charges, payment),
               arr = provider)
-\dontshow{\}) # examplesIf}
+
 }
 \keyword{internal}

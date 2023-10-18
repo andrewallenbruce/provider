@@ -1,10 +1,9 @@
 test_that("change() works", {
 
-  set.seed(123)
   a <- dplyr::tibble(
     year = 2015:2020,
-    x = sample(1000:2000, size = 6),
-    y = sample(1000:2000, size = 6))
+    x = c(1414L, 1462L, 1178L, 1525L, 1194L, 1937L),
+    y = c(1817L, 1117L, 1298L, 1228L, 1243L, 1013L))
 
   b <- dplyr::tibble(
     year = 2015:2020,
@@ -17,8 +16,8 @@ test_that("change() works", {
     x_pct = c(0, 0.034, -0.194, 0.295, -0.217, 0.622),
     y_pct = c(0, -0.385, 0.162, -0.054, 0.012, -0.185),
     x_pct_cum = c(0, 0.034, -0.16, 0.1349, -0.0820, 0.54),
-    y_pct_cum = c(0, -0.385, -0.223, -0.277, -0.265, -0.45)
-  )
+    y_pct_cum = c(0, -0.385, -0.223, -0.277, -0.265, -0.45))
+
   expect_equal(change(a, c(x, y)), b, tolerance = 1e-3)
 })
 
@@ -40,30 +39,23 @@ test_that("geomean() works", {
 
 
 test_that("change_year() works", {
-
   a <- dplyr::tibble(year = 2015:2020, x = 1000:1005)
   b <- a
   b$x_chg <- c(NA, 1, 1, 1, 1, 1)
   b$x_pct <- c(NA, 0.001, 0.001, 0.001, 0.001, 0.001)
   expect_equal(change_year(df = a, col = x), b)
-
 })
 
 test_that("years_df() works", {
-
   a <- dplyr::tibble(date = lubridate::today() - 366)
   b <- a
   b$years_passed <- as.double(1)
-
   expect_equal(years_df(a, date), b)
-
 })
 
 test_that("years_vec() works", {
-
   a <- dplyr::tibble(date = lubridate::today() - 366)
   expect_equal(years_vec(a$date), 1)
-
 })
 
 test_that("duration_vec() works", {
@@ -100,5 +92,4 @@ test_that("summary_stats() works", {
     n              = c(12, 7, 6))
 
   expect_equal(sm, b)
-
 })

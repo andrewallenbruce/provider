@@ -7,23 +7,13 @@
 ror(df, col, n = 1L)
 }
 \arguments{
-\item{df}{numeric vector}
+\item{df}{data frame}
 
-\item{col}{column}
+\item{col}{numeric column}
 
 \item{n}{values to offset}
 }
-\value{
-numeric vector
-}
 \description{
 Calculate lagged rate of return
-}
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(year = 2021:2023,
-              pay = c(2000, 2200, 1980)) |>
-ror(pay)
-\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

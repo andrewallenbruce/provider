@@ -2,32 +2,84 @@
 #'
 #' @description Common utility functions
 #'
-#' @examplesIf interactive()
+#' @examples
+#' ## Lagged Calculations
 #'
-#' # Lagged absolute/relative change
-#' # and cumulative sum of both:
+#' ex <- dplyr::tibble(
+#'               year = rep(2020:2021, each = 4),
+#'               grp = rep(c("a", "b"), 4),
+#'               pay = sample(1000:2000, 8))
+#' ex
 #'
-#' dplyr::tibble(year = 2015:2020,
-#'               pay  = sample(1000:2000, 6)) |>
+#' # `change()` # Change, percentage change, and cumulative sum
+#'
+#' dplyr::filter(ex, grp == "a") |>
 #' change(c(pay))
 #'
 #' # When performing a `group_by()`, watch for
-#' # the correct order of the variables you're
-#' # lagging by:
+#' # the correct order of the variables
 #'
-#' dplyr::tibble(year = rep(2020:2021, each = 2),
-#'               grp = rep(c("a", "b"), 2),
-#'               pay = sample(1000:2000, 4)) |>
-#' dplyr::arrange(year) |>
+#' dplyr::arrange(ex, year) |>
 #' dplyr::group_by(grp) |>
 #' change(c(pay))
 #'
-#' @examples
-#' # Count of the number of years between dates:
+#' # `chg()` # Change over a vector
 #'
-#' dplyr::tibble(date = lubridate::today() - 366) |>
-#' years_df(date)
+#' dplyr::filter(ex, grp == "a") |>
+#' dplyr::mutate(change = chg(pay))
 #'
+#' # `pct()` # Percentage change over a vector
+#'
+#' dplyr::filter(ex, grp == "a") |>
+#' dplyr::mutate(pct_change = pct(pay))
+#'
+#' # `ror()` # Rate of return
+#'
+#' dplyr::filter(ex, grp == "a") |>
+#' ror(pay)
+#'
+#' # `geomean()` # Geometric mean
+#'
+#' dplyr::filter(ex, grp == "a") |>
+#' ror(pay) |>
+#' dplyr::summarise(gmean = geomean(pay_ror))
+#'
+#' # `change_year()` # Lagged change by column
+#'
+#' dplyr::filter(ex, grp == "a") |>
+#' change_year(pay, year)
+#'
+#'
+#' ## Calculating Timespans
+#' dt <- dplyr::tibble(date = lubridate::today() - 366)
+#' dt
+#'
+#' # `years_df()`/`years_vec()` # Years passed
+#'
+#' years_df(dt, date)
+#'
+#' dplyr::mutate(dt, years = years_vec(date))
+#'
+#' # `duration_vec()` # Duration since date
+#'
+#' dplyr::mutate(dt, dur = duration_vec(date))
+#'
+#'
+#' ## Summary Statistics
+#' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
+#'                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
+#'                     charges = sample(1000:2000, size = 200),
+#'                     payment = sample(1000:2000, size = 200))
+#'
+#' head(sm)
+#'
+#' summary_stats(sm,
+#'               condition = city == "ATL",
+#'               group_vars = provider,
+#'               summary_vars = c(charges, payment),
+#'               arr = provider)
+#'
+#' @returns [tibble()] or vector
 #' @name calculations
 #' @keywords internal
 NULL
@@ -35,14 +87,13 @@ NULL
 #' @param df data frame
 #' @param cols numeric columns
 #' @param digits Number of digits to round to, default is 3
-#' @returns A `tibble`
 #' @rdname calculations
 #' @autoglobal
 #' @export
 #' @keywords internal
 change <- function(df, cols, digits = 3) {
 
-  x <- dplyr::mutate(df,
+  dplyr::mutate(df,
   dplyr::across({{ cols }}, list(
     chg = \(x) chg(x),
     pct = \(x) pct(x)),
@@ -63,11 +114,6 @@ change <- function(df, cols, digits = 3) {
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
-#' @returns numeric vector
-#' @examplesIf interactive()
-#' dplyr::tibble(year = 2015:2020,
-#'               pay = 1000:1005) |>
-#' dplyr::mutate(change = chg(pay))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -82,11 +128,6 @@ chg <- function(x, n = 1L, fill_na = 0L) {
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
-#' @returns numeric vector
-#' @examplesIf interactive()
-#' dplyr::tibble(year = 2015:2020,
-#'               pay = 1000:1005) |>
-#' dplyr::mutate(pct_change = pct(pay))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -98,14 +139,9 @@ pct <- function(x, n = 1L, fill_na = 0L) {
 }
 
 #' Calculate lagged rate of return
-#' @param df numeric vector
-#' @param col column
+#' @param df data frame
+#' @param col numeric column
 #' @param n values to offset
-#' @returns numeric vector
-#' @examplesIf interactive()
-#' dplyr::tibble(year = 2021:2023,
-#'               pay = c(2000, 2200, 1980)) |>
-#' ror(pay)
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -121,12 +157,6 @@ ror <- function(df, col, n = 1L) {
 #' Calculate geometric mean (average rate of return)
 #' For use in conjunction with [ror()]
 #' @param x numeric vector
-#' @returns numeric vector
-#' @examplesIf interactive()
-#' dplyr::tibble(year = 2015:2020,
-#'               pay = c(2000, 2200, 1980, 3000, 2500, 2700)) |>
-#' ror(pay) |>
-#' dplyr::summarise(gmean = geomean(ror))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -139,11 +169,6 @@ geomean <- function(x) {
 #' @param col column of numeric values to calculate lag
 #' @param by column to calculate lag by
 #' @param digits Number of digits to round to
-#' @returns A `tibble`
-#' @examplesIf interactive()
-#' dplyr::tibble(year = 2015:2020,
-#'               pay = 1000:1005) |>
-#' change_year(pay, year)
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -165,7 +190,6 @@ change_year <- function(df, col, by = year, digits = 3) {
 #' Calculate number of years since today's date
 #' @param df data frame
 #' @param date_col date column
-#' @returns number of years since today's date
 #' @rdname calculations
 #' @autoglobal
 #' @export
@@ -185,37 +209,29 @@ years_df <- function(df, date_col) {
 }
 
 #' Calculate number of years since today's date
-#' @param date date column
-#' @returns number of years since today's date
+#' @param date_col date column
 #' @rdname calculations
-#' @examplesIf interactive()
-#' dplyr::tibble(date = lubridate::today() - 366) |>
-#' dplyr::mutate(years_passed = years_vec(date = date))
 #' @autoglobal
 #' @export
 #' @keywords internal
-years_vec <- function(date) {
+years_vec <- function(date_col) {
   round(
     as.double(
       difftime(
         lubridate::today(),
-        date,
+        date_col,
         units = "weeks",
         tz = "UTC")) / 52.17857, 2)
 }
 
-#' Calculate number of years since today's date
-#' @param date date column
-#' @returns number of years since today's date
+#' Calculate duration since today's date
+#' @param date_col date column
 #' @rdname calculations
-#' @examplesIf interactive()
-#' dplyr::tibble(date = lubridate::today() - 366) |>
-#' dplyr::mutate(years_passed = years_vec(date = date))
 #' @autoglobal
 #' @export
 #' @keywords internal
-duration_vec <- function(date) {
-  date <- difftime(date, lubridate::today(), units = "auto", tz = "UTC")
+duration_vec <- function(date_col) {
+  date <- difftime(date_col, lubridate::today(), units = "auto", tz = "UTC")
   date <- lubridate::as.duration(date)
   return(date)
 }
@@ -228,18 +244,7 @@ duration_vec <- function(date) {
 #' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
 #' @param arr column to arrange data by, i.e. `cost`
 #' @param digits Number of digits to round to, default is 3
-#' @return A `tibble` containing the summary stats
 #' @rdname calculations
-#' @examplesIf interactive()
-#' dplyr::tibble(
-#' provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
-#' city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
-#' charges = sample(1000:2000, size = 200),
-#' payment = sample(1000:2000, size = 200)) |>
-#' summary_stats(condition = city == "ATL",
-#'               group_vars = provider,
-#'               summary_vars = c(charges, payment),
-#'               arr = provider)
 #' @autoglobal
 #' @export
 #' @keywords internal

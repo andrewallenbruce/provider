@@ -17,7 +17,7 @@ NULL
 #' @autoglobal
 #' @export
 #' @keywords internal
-open_years <- function() {sort(open_ids("General Payment Data")$year)}
+open_years <- function() sort(open_ids("General Payment Data")$year)
 
 #' @rdname years
 #' @autoglobal
@@ -31,17 +31,13 @@ pop_years <- function() {
 #' @autoglobal
 #' @export
 #' @keywords internal
-cc_years <- function() {
-  as.integer(cms_update("Specific Chronic Conditions", "years"))
-}
+cc_years <- function() as.integer(cms_update("Specific Chronic Conditions", "years"))
 
-#' @autoglobal
 #' @rdname years
+#' @autoglobal
 #' @export
 #' @keywords internal
-qpp_years <- function() {
-  as.integer(cms_update("Quality Payment Program Experience", "years"))
-}
+qpp_years <- function() as.integer(cms_update("Quality Payment Program Experience", "years"))
 
 #' @param period One of `"year"` or `"month"`
 #' @rdname years
@@ -49,7 +45,7 @@ qpp_years <- function() {
 #' @export
 #' @keywords internal
 bene_years <- function(period = c("year", "month")) {
-  if (period == "year") {out <- beneficiaries(period = "Year", level = "National")$year}
+  if (period == "year")  {out <- beneficiaries(period = "Year", level = "National")$year}
   if (period == "month") {out <- beneficiaries(period = "January", level = "National")$year}
   return(as.integer(out))
 }

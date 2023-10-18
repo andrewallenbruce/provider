@@ -15,37 +15,65 @@ beneficiaries(
 )
 }
 \arguments{
-\item{year}{Calendar year of Medicare enrollment; current years can be
+\item{year}{< \emph{integer} > Calendar year of Medicare enrollment; current years can be
 checked with:
 \itemize{
 \item \code{bene_years("year")}: Years available for all 12 months
 \item \code{bene_years("month")}: Years available for individual months
 }}
 
-\item{period}{Time frame of Medicare enrollment; options are:
+\item{period}{< \emph{character} > Time frame of Medicare enrollment; options are:
 \itemize{
 \item \code{Year}
 \item \code{Month}
 \item Any individual month name
 }}
 
-\item{level}{Geographic level of data; options are:
+\item{level}{< \emph{character} > Geographic level of data; options are:
 \itemize{
 \item \code{National}
 \item \code{State}
 \item \code{County}
 }}
 
-\item{state}{Full state name or abbreviation of beneficiary residence}
+\item{state}{< \emph{character} > Full state name or abbreviation of beneficiary residence}
 
-\item{county}{County of beneficiary residence}
+\item{county}{< \emph{character} > County of beneficiary residence}
 
-\item{fips}{FIPS code of beneficiary residence}
+\item{fips}{< \emph{character} > FIPS code of beneficiary residence}
 
-\item{tidy}{Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{year} \tab Enrollment calendar year \cr
+   \code{period} \tab Enrollment time frame \cr
+   \code{level} \tab Geographic level of data \cr
+   \code{state} \tab Beneficiary residence state \cr
+   \code{state_name} \tab Beneficiary residence state name \cr
+   \code{county} \tab Beneficiary residence county \cr
+   \code{fips} \tab Beneficiary residence FIPS code \cr
+   \code{bene_total} \tab Total Medicare beneficiaries \cr
+   \code{bene_orig} \tab Original Medicare beneficiaries \cr
+   \code{bene_ma_oth} \tab Medicare Advantage beneficiaries \cr
+   \code{bene_total_aged} \tab Aged beneficiaries \cr
+   \code{bene_aged_esrd} \tab Aged beneficiaries with ESRD \cr
+   \code{bene_aged_no_esrd} \tab Aged beneficiaries without ESRD \cr
+   \code{bene_total_dsb} \tab Disabled beneficiaries \cr
+   \code{bene_dsb_esrd} \tab Disabled with ESRD and ESRD-only beneficiaries \cr
+   \code{bene_dsb_no_esrd} \tab Disabled beneficiaries without ESRD \cr
+   \code{bene_total_ab} \tab Total Medicare Part A and B beneficiaries \cr
+   \code{bene_ab_orig} \tab Original Medicare Part A and B beneficiaries \cr
+   \code{bene_ab_ma_oth} \tab Medicare Advantage Part A and B beneficiaries \cr
+   \code{bene_total_rx} \tab Total Medicare Part D beneficiaries \cr
+   \code{bene_rx_pdp} \tab Medicare Prescription Drug Plan beneficiaries \cr
+   \code{bene_rx_mapd} \tab Medicare Advantage Prescription Drug Plan beneficiaries \cr
+   \code{bene_rx_lis_elig} \tab Part D Low Income Subsidy Eligible (Full) Beneficiaries \cr
+   \code{bene_rx_lis_full} \tab Part D Low Income Subsidy Full Beneficiaries \cr
+   \code{bene_rx_lis_part} \tab Part D Low Income Subsidy Partial Beneficiaries \cr
+   \code{bene_rx_lis_no} \tab Part D No Low Income Subsidy Beneficiaries \cr
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
@@ -65,8 +93,7 @@ and the prescription drug coverage data can be examined by those enrolled in
 stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage
 Prescription Drug plans.
 
-The dataset includes enrollee counts on a \emph{rolling 12 month basis} and also
-provides information on yearly trends.
+The dataset includes enrollee counts on a \emph{rolling 12 month basis}.
 }
 
 \section{Links}{
@@ -81,7 +108,9 @@ provides information on yearly trends.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 beneficiaries(year = 2022, period = "Year", level = "County", county = "Autauga")
+
 beneficiaries(year = 2022, period = "July", state = "Georgia")
+
 beneficiaries(level = "State", fips = "10")
 \dontshow{\}) # examplesIf}
 }

@@ -27,8 +27,6 @@ library(gt)
 
 <br>
 
-
-
 ```{r}
 val <- map_dfr(pop_years(), ~by_provider(year = .x, city = "Valdosta", state = "GA"))
 ```
