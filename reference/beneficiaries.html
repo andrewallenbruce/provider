@@ -104,48 +104,47 @@ beneficiaries.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>Calendar year of Medicare enrollment; current years can be
+<dd><p>&lt; <em>integer</em> &gt; Calendar year of Medicare enrollment; current years can be
 checked with:</p><ul><li><p><code>bene_years("year")</code>: Years available for all 12 months</p></li>
 <li><p><code>bene_years("month")</code>: Years available for individual months</p></li>
 </ul></dd>
 
 
 <dt>period</dt>
-<dd><p>Time frame of Medicare enrollment; options are:</p><ul><li><p><code>Year</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Time frame of Medicare enrollment; options are:</p><ul><li><p><code>Year</code></p></li>
 <li><p><code>Month</code></p></li>
 <li><p>Any individual month name</p></li>
 </ul></dd>
 
 
 <dt>level</dt>
-<dd><p>Geographic level of data; options are:</p><ul><li><p><code>National</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Geographic level of data; options are:</p><ul><li><p><code>National</code></p></li>
 <li><p><code>State</code></p></li>
 <li><p><code>County</code></p></li>
 </ul></dd>
 
 
 <dt>state</dt>
-<dd><p>Full state name or abbreviation of beneficiary residence</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Full state name or abbreviation of beneficiary residence</p></dd>
 
 
 <dt>county</dt>
-<dd><p>County of beneficiary residence</p></dd>
+<dd><p>&lt; <em>character</em> &gt; County of beneficiary residence</p></dd>
 
 
 <dt>fips</dt>
-<dd><p>FIPS code of beneficiary residence</p></dd>
+<dd><p>&lt; <em>character</em> &gt; FIPS code of beneficiary residence</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>Tidy output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-    </div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>year</code></td><td>Enrollment calendar year</td></tr><tr><td><code>period</code></td><td>Enrollment time frame</td></tr><tr><td><code>level</code></td><td>Geographic level of data</td></tr><tr><td><code>state</code></td><td>Beneficiary residence state</td></tr><tr><td><code>state_name</code></td><td>Beneficiary residence state name</td></tr><tr><td><code>county</code></td><td>Beneficiary residence county</td></tr><tr><td><code>fips</code></td><td>Beneficiary residence FIPS code</td></tr><tr><td><code>bene_total</code></td><td>Total Medicare beneficiaries</td></tr><tr><td><code>bene_orig</code></td><td>Original Medicare beneficiaries</td></tr><tr><td><code>bene_ma_oth</code></td><td>Medicare Advantage beneficiaries</td></tr><tr><td><code>bene_total_aged</code></td><td>Aged beneficiaries</td></tr><tr><td><code>bene_aged_esrd</code></td><td>Aged beneficiaries with ESRD</td></tr><tr><td><code>bene_aged_no_esrd</code></td><td>Aged beneficiaries without ESRD</td></tr><tr><td><code>bene_total_dsb</code></td><td>Disabled beneficiaries</td></tr><tr><td><code>bene_dsb_esrd</code></td><td>Disabled with ESRD and ESRD-only beneficiaries</td></tr><tr><td><code>bene_dsb_no_esrd</code></td><td>Disabled beneficiaries without ESRD</td></tr><tr><td><code>bene_total_ab</code></td><td>Total Medicare Part A and B beneficiaries</td></tr><tr><td><code>bene_ab_orig</code></td><td>Original Medicare Part A and B beneficiaries</td></tr><tr><td><code>bene_ab_ma_oth</code></td><td>Medicare Advantage Part A and B beneficiaries</td></tr><tr><td><code>bene_total_rx</code></td><td>Total Medicare Part D beneficiaries</td></tr><tr><td><code>bene_rx_pdp</code></td><td>Medicare Prescription Drug Plan beneficiaries</td></tr><tr><td><code>bene_rx_mapd</code></td><td>Medicare Advantage Prescription Drug Plan beneficiaries</td></tr><tr><td><code>bene_rx_lis_elig</code></td><td>Part D Low Income Subsidy Eligible (Full) Beneficiaries</td></tr><tr><td><code>bene_rx_lis_full</code></td><td>Part D Low Income Subsidy Full Beneficiaries</td></tr><tr><td><code>bene_rx_lis_part</code></td><td>Part D Low Income Subsidy Partial Beneficiaries</td></tr><tr><td><code>bene_rx_lis_no</code></td><td>Part D No Low Income Subsidy Beneficiaries</td></tr></table></div>
     <div class="section level2">
     <h2 id="medicare-monthly-enrollment">Medicare Monthly Enrollment<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment"></a></h2>
     
@@ -158,8 +157,7 @@ delivery (Original Medicare versus Medicare Advantage and Other Health Plans)
 and the prescription drug coverage data can be examined by those enrolled in
 stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage
 Prescription Drug plans.</p>
-<p>The dataset includes enrollee counts on a <em>rolling 12 month basis</em> and also
-provides information on yearly trends.</p>
+<p>The dataset includes enrollee counts on a <em>rolling 12 month basis</em>.</p>
     </div>
     <div class="section level2">
     <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
@@ -173,7 +171,9 @@ provides information on yearly trends.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">beneficiaries</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, period <span class="op">=</span> <span class="st">"Year"</span>, level <span class="op">=</span> <span class="st">"County"</span>, county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiaries</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, period <span class="op">=</span> <span class="st">"July"</span>, state <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiaries</span><span class="op">(</span>level <span class="op">=</span> <span class="st">"State"</span>, fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
