@@ -5,7 +5,11 @@
 #'
 #' [reassignments()] returns information about:
 #' + Individual providers who are reassigning benefits or are an employee of
-#' + Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
+#' + Organizational/Group providers who are receiving reassignment of benefits
+#' from or are the employer of the individual provider
+#'
+#' It provides information regarding the physician and the group practice they
+#' reassign their billing to, including individual employer association counts.
 #'
 #' @section Links:
 #' + [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
@@ -30,8 +34,11 @@
 #'
 #' @examplesIf interactive()
 #' reassignments(enid = "I20200929003184")
+#'
 #' reassignments(pac = 9830437441)
+#'
 #' reassignments(pac_org = 3173525888)
+#'
 #' @autoglobal
 #' @export
 reassignments <- function(npi = NULL,
@@ -107,7 +114,7 @@ reassignments <- function(npi = NULL,
     results <- cols_reas(tidyup(results, int = "ass", up = "name")) |>
       dplyr::mutate(entry = record_type(entry))
 
-  if (na.rm) {results <- narm(results)}
+  if (na.rm) results <- narm(results)
     }
   return(results)
 }

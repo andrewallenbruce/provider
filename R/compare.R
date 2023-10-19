@@ -15,8 +15,8 @@
 #' compare_hcpcs(by_service(year = 2018, npi = 1023076643))
 #' compare_conditions(by_provider(year = 2018, npi = 1023076643))
 #'
-#' compare_hcpcs(map_dfr(prac_years(), ~by_service(year = .x, npi = 1023076643)))
-#' compare_conditions(map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643)))
+#' compare_hcpcs(map_dfr(pop_years(), ~by_service(year = .x, npi = 1023076643)))
+#' compare_conditions(map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643)))
 #' @name compare
 NULL
 

@@ -3,69 +3,76 @@
 #' @description Common utility functions
 #'
 #' @examples
-#' ## Lagged Calculations
-#'
-#' ex <- dplyr::tibble(
-#'               year = rep(2020:2021, each = 4),
-#'               grp = rep(c("a", "b"), 4),
-#'               pay = sample(1000:2000, 8))
+#' # Example data
+#' ex <- gen_data(2020:2025)
 #' ex
 #'
+#' # Lagged calculations
 #' # `change()` # Change, percentage change, and cumulative sum
+#' ex |>
+#' dplyr::filter(group == "A") |>
+#' change(pay)
 #'
-#' dplyr::filter(ex, grp == "a") |>
-#' change(c(pay))
-#'
-#' # When performing a `group_by()`, watch for
-#' # the correct order of the variables
-#'
-#' dplyr::arrange(ex, year) |>
-#' dplyr::group_by(grp) |>
-#' change(c(pay))
-#'
-#' # `chg()` # Change over a vector
-#'
-#' dplyr::filter(ex, grp == "a") |>
+#' # `chg()` # Absolute change for a vector
+#' ex |>
+#' dplyr::filter(group == "A") |>
 #' dplyr::mutate(change = chg(pay))
 #'
-#' # `pct()` # Percentage change over a vector
-#'
-#' dplyr::filter(ex, grp == "a") |>
+#' # `pct()` # Percentage change for a vector
+#' ex |>
+#' dplyr::filter(group == "A") |>
 #' dplyr::mutate(pct_change = pct(pay))
 #'
 #' # `ror()` # Rate of return
-#'
-#' dplyr::filter(ex, grp == "a") |>
+#' ex |>
+#' dplyr::filter(group == "A") |>
 #' ror(pay)
 #'
 #' # `geomean()` # Geometric mean
-#'
-#' dplyr::filter(ex, grp == "a") |>
+#' ex |>
+#' dplyr::filter(group == "A") |>
 #' ror(pay) |>
 #' dplyr::summarise(gmean = geomean(pay_ror))
 #'
 #' # `change_year()` # Lagged change by column
-#'
-#' dplyr::filter(ex, grp == "a") |>
+#' ex |>
+#' dplyr::filter(group == "A") |>
 #' change_year(pay, year)
 #'
+#' #' # When performing a `group_by()`, watch for
+#' # the correct order of the variables
+#' ex |>
+#' dplyr::group_by(group) |>
+#' change(pay)
 #'
-#' ## Calculating Timespans
+#' ex |>
+#' dplyr::group_by(group) |>
+#' ror(pay)
+#'
+#' ex |>
+#' dplyr::group_by(group) |>
+#' ror(pay) |>
+#' change(pay)
+#'
+#' ex |>
+#' dplyr::group_by(group) |>
+#' ror(pay) |>
+#' dplyr::summarise(gmean = geomean(pay_ror))
+#'
+#' # Calculating Timespans
 #' dt <- dplyr::tibble(date = lubridate::today() - 366)
 #' dt
 #'
 #' # `years_df()`/`years_vec()` # Years passed
-#'
 #' years_df(dt, date)
 #'
 #' dplyr::mutate(dt, years = years_vec(date))
 #'
 #' # `duration_vec()` # Duration since date
-#'
 #' dplyr::mutate(dt, dur = duration_vec(date))
 #'
 #'
-#' ## Summary Statistics
+#' # Summary Statistics
 #' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
 #'                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
 #'                     charges = sample(1000:2000, size = 200),
@@ -151,7 +158,7 @@ ror <- function(df, col, n = 1L) {
                 lg = dplyr::lag(copy, n = n),
                 "{{ col }}_ror" := copy / lg,
                 copy = NULL,
-                lg = NULL)
+                lg = NULL, .after = {{ col }})
 }
 
 #' Calculate geometric mean (average rate of return)
@@ -270,4 +277,20 @@ summary_stats <- function(df,
       dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
 
   return(results)
+}
+
+
+#' Generate tibble of data for testing
+#' @param years sequence of years, e.g. `2010:2020`
+#' @rdname calculations
+#' @returns tibble
+#' @autoglobal
+#' @export
+#' @keywords internal
+gen_data <- function(years) {
+  lng <- length(years) * 2
+  vctrs::vec_rbind(
+    dplyr::tibble(year = {{ years }}, group = "A"),
+    dplyr::tibble(year = {{ years }}, group = "B")) |>
+    dplyr::mutate(pay = sample(1000:2000, lng))
 }

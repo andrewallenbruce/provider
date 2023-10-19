@@ -86,13 +86,13 @@ check_npi <- function(x,
 #' @return boolean, `TRUE` or `FALSE`
 #' @examplesIf interactive()
 #' # Valid:
-#' pac_check(1528060837)
-#' pac_check("1528060837")
+#' check_pac(1528060837)
+#' check_pac("1528060837")
 #'
 #' # Invalid:
-#' pac_check(1234567891)
-#' pac_check(123456789)
-#' pac_check("152806O837")
+#' check_pac(1234567891)
+#' check_pac(123456789)
+#' check_pac("152806O837")
 #' @autoglobal
 #' @noRd
 check_pac <- function(x,
@@ -129,18 +129,18 @@ check_pac <- function(x,
 #' @param x 15-digit unique alphanumeric identifier
 #' @param arg description
 #' @param call description
-#' @param type ind or org
+#' @param type `"ind"` or `"org"`
 #' @return boolean, `TRUE` or `FALSE`
 #' @examplesIf interactive()
 #' # Valid:
-#' enid_check(1528060837)
-#' enid_check("1528060837")
+#' check_enid(1528060837)
+#' check_enid("1528060837")
 #'
 #' # Invalid:
-#' enid_check(0123456789123456)
-#' enid_check("0123456789123456")
-#' enid_check("I123456789123456")
-#' enid_check("152806O837")
+#' check_enid(0123456789123456)
+#' check_enid("0123456789123456")
+#' check_enid("I123456789123456")
+#' check_enid("152806O837")
 #' @autoglobal
 #' @noRd
 check_enid <- function(x,
@@ -195,83 +195,5 @@ check_enid <- function(x,
         "An {.strong Organizational Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
         "x" = "{.val {x}} begins with {.val {first}}."), call = call)
     }
-  }
-}
-
-#' Organizational/Group Enrollment ID Validation Check
-#'
-#' @description checks validity of Organizational/Group provider enrollment ID
-#'    input against CMS requirements.
-#'
-#' @details An Enrollment ID is a 15-digit unique alphanumeric identifier that
-#'    is assigned to each new provider enrollment application. All
-#'    enrollment-level information (e.g., enrollment type, enrollment state,
-#'    provider specialty and reassignment of benefits) is linked through the
-#'    Enrollment ID.
-#'
-#' @param enroll_id 15-digit unique alphanumeric identifier
-#' @return boolean, `TRUE` or `FALSE`
-#' @examplesIf interactive()
-#' # Valid:
-#' enroll_check(1528060837)
-#' enroll_check("1528060837")
-#'
-#' # Invalid:
-#' enroll_check(1234567891)
-#' enroll_check(123456789)
-#' enroll_check("152806O837")
-#' @autoglobal
-#' @noRd
-enroll_org_check <- function(enroll_id,
-                             arg = rlang::caller_arg(enroll_id),
-                             call = rlang::caller_env()) {
-
-  first <- unlist(strsplit(enroll_id, ""))[1]
-
-  if ((first %in% c("O")) != TRUE) {
-
-    cli::cli_abort(c(
-      "An {.emph org/group} {.strong Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
-      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
-
-  }
-}
-
-#' Individual Enrollment ID Validation Check
-#'
-#' @description checks validity of Individual provider enrollment ID
-#'    input against CMS requirements.
-#'
-#' @details An Enrollment ID is a 15-digit unique alphanumeric identifier that
-#'    is assigned to each new provider enrollment application. All
-#'    enrollment-level information (e.g., enrollment type, enrollment state,
-#'    provider specialty and reassignment of benefits) is linked through the
-#'    Enrollment ID.
-#'
-#' @param enroll_id 15-digit unique alphanumeric identifier
-#' @return boolean, `TRUE` or `FALSE`
-#' @examplesIf interactive()
-#' # Valid:
-#' enroll_check(1528060837)
-#' enroll_check("1528060837")
-#'
-#' # Invalid:
-#' enroll_check(1234567891)
-#' enroll_check(123456789)
-#' enroll_check("152806O837")
-#' @autoglobal
-#' @noRd
-enroll_ind_check <- function(enroll_id,
-                             arg = rlang::caller_arg(enroll_id),
-                             call = rlang::caller_env()) {
-
-  first <- unlist(strsplit(enroll_id, ""))[1]
-
-  if ((first %in% c("I")) != TRUE) {
-
-    cli::cli_abort(c(
-      "An {.emph individual} {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
-      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
-
   }
 }

@@ -57,8 +57,12 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \code{\link[=reassignments]{reassignments()}} returns information about:
 \itemize{
 \item Individual providers who are reassigning benefits or are an employee of
-\item Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
+\item Organizational/Group providers who are receiving reassignment of benefits
+from or are the employer of the individual provider
 }
+
+It provides information regarding the physician and the group practice they
+reassign their billing to, including individual employer association counts.
 }
 \section{Links}{
 
@@ -72,7 +76,9 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 reassignments(enid = "I20200929003184")
+
 reassignments(pac = 9830437441)
+
 reassignments(pac_org = 3173525888)
 \dontshow{\}) # examplesIf}
 }

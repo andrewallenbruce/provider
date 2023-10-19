@@ -110,14 +110,28 @@ reference:
   - taxonomy_codes
   - taxonomy_crosswalk
 
-- title: Utilities
+- title: Years
   desc: >
-    Various helper functions.
+    Years available to query for search functions.
   contents:
-  - change
-  - display_long
   - bene_years
   - open_years
   - pop_years
   - cc_years
   - qpp_years
+
+- title: Utilities
+  desc: >
+    Various helper functions.
+  contents:
+  - change
+  - change_year
+  - chg
+  - pct
+  - ror
+  - geomean
+  - display_long
+  - years_df
+  - years_vec
+  - duration_vec
+  - summary_stats

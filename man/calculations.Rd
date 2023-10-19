@@ -7,6 +7,7 @@
 \alias{years_vec}
 \alias{duration_vec}
 \alias{summary_stats}
+\alias{gen_data}
 \title{Utility Functions}
 \usage{
 change(df, cols, digits = 3)
@@ -25,6 +26,8 @@ summary_stats(
   arr = NULL,
   digits = 3
 )
+
+gen_data(years)
 }
 \arguments{
 \item{df}{data frame}
@@ -42,9 +45,13 @@ summary_stats(
 \item{summary_vars}{variables to summarise, i.e. \code{c(min, max, mode, range)}}
 
 \item{arr}{column to arrange data by, i.e. \code{cost}}
+
+\item{years}{sequence of years, e.g. \code{2010:2020}}
 }
 \value{
 \code{\link[=tibble]{tibble()}} or vector
+
+tibble
 }
 \description{
 Common utility functions
@@ -52,69 +59,76 @@ Common utility functions
 Returns a tibble of summary stats
 }
 \examples{
-## Lagged Calculations
-
-ex <- dplyr::tibble(
-              year = rep(2020:2021, each = 4),
-              grp = rep(c("a", "b"), 4),
-              pay = sample(1000:2000, 8))
+# Example data
+ex <- gen_data(2020:2025)
 ex
 
+# Lagged calculations
 # `change()` # Change, percentage change, and cumulative sum
+ex |>
+dplyr::filter(group == "A") |>
+change(pay)
 
-dplyr::filter(ex, grp == "a") |>
-change(c(pay))
-
-# When performing a `group_by()`, watch for
-# the correct order of the variables
-
-dplyr::arrange(ex, year) |>
-dplyr::group_by(grp) |>
-change(c(pay))
-
-# `chg()` # Change over a vector
-
-dplyr::filter(ex, grp == "a") |>
+# `chg()` # Absolute change for a vector
+ex |>
+dplyr::filter(group == "A") |>
 dplyr::mutate(change = chg(pay))
 
-# `pct()` # Percentage change over a vector
-
-dplyr::filter(ex, grp == "a") |>
+# `pct()` # Percentage change for a vector
+ex |>
+dplyr::filter(group == "A") |>
 dplyr::mutate(pct_change = pct(pay))
 
 # `ror()` # Rate of return
-
-dplyr::filter(ex, grp == "a") |>
+ex |>
+dplyr::filter(group == "A") |>
 ror(pay)
 
 # `geomean()` # Geometric mean
-
-dplyr::filter(ex, grp == "a") |>
+ex |>
+dplyr::filter(group == "A") |>
 ror(pay) |>
 dplyr::summarise(gmean = geomean(pay_ror))
 
 # `change_year()` # Lagged change by column
-
-dplyr::filter(ex, grp == "a") |>
+ex |>
+dplyr::filter(group == "A") |>
 change_year(pay, year)
 
+#' # When performing a `group_by()`, watch for
+# the correct order of the variables
+ex |>
+dplyr::group_by(group) |>
+change(pay)
 
-## Calculating Timespans
+ex |>
+dplyr::group_by(group) |>
+ror(pay)
+
+ex |>
+dplyr::group_by(group) |>
+ror(pay) |>
+change(pay)
+
+ex |>
+dplyr::group_by(group) |>
+ror(pay) |>
+dplyr::summarise(gmean = geomean(pay_ror))
+
+# Calculating Timespans
 dt <- dplyr::tibble(date = lubridate::today() - 366)
 dt
 
 # `years_df()`/`years_vec()` # Years passed
-
 years_df(dt, date)
 
 dplyr::mutate(dt, years = years_vec(date))
 
 # `duration_vec()` # Duration since date
-
 dplyr::mutate(dt, dur = duration_vec(date))
 
 
-## Summary Statistics
+# Summary Statistics
 sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
                     charges = sample(1000:2000, size = 200),
