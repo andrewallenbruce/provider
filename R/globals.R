@@ -89,7 +89,6 @@ utils::globalVariables(c(
   "subgroup_general", # <hospitals>
   "subgroup_other", # <hospitals>
   "subtotal", # <hospitals>
-  "subgroup", # <hospitals>
   "flag", # <hospitals>
   "y", # <laboratories>
   "address", # <laboratories>

@@ -45,7 +45,7 @@
 #' + `"P"`: Registered as __Proprietor__
 #' + `"N"`: Registered as __Non-Profit__
 #' @param multi_npi < *boolean* > Indicates hospital has more than one NPI
-#' @param gen,acute,alc_drug,child,long,short,psych,rehab,swing,psych_unit,rehab_unit,spec,other < *boolean* >
+#' @param subgroup < *list* > `subgroup = list(acute = TRUE, swing = FALSE)`
 #' Indicates hospital’s subgroup/unit designation:
 #' + `acute`: Acute Care
 #' + `alc_drug`: Alcohol/Drug
@@ -97,10 +97,22 @@
 #' @seealso [clinicians()], [providers()], [affiliations()]
 #' @family api
 #'
+#' @examples
+#' hospitals(city = "Savannah", state = "GA") |>
+#'           dplyr::select(organization, subgroup)
+#'
+#' hospitals(city = "Savannah", state = "GA",
+#'           subgroup = list(acute = FALSE)) |>
+#'           dplyr::select(organization, subgroup)
+#'
+#' hospitals(city = "Savannah", state = "GA",
+#'           subgroup = list(gen = TRUE, rehab = FALSE)) |>
+#'           dplyr::select(organization, subgroup)
 #' @examplesIf interactive()
 #' hospitals(pac_org = 6103733050)
+#'
 #' hospitals(state = "GA", reh = TRUE)
-#' hospitals(city = "Savannah", state = "GA")
+#'
 #' @autoglobal
 #' @export
 hospitals <- function(npi = NULL,
@@ -116,47 +128,37 @@ hospitals <- function(npi = NULL,
                       zip = NULL,
                       registration = NULL,
                       multi_npi = NULL,
-                      gen = NULL,
-                      acute = NULL,
-                      alc_drug = NULL,
-                      child = NULL,
-                      long = NULL,
-                      short = NULL,
-                      psych = NULL,
-                      rehab = NULL,
-                      swing = NULL,
-                      psych_unit = NULL,
-                      rehab_unit = NULL,
-                      spec = NULL,
-                      other = NULL,
                       reh = NULL,
+                      subgroup = list(),
                       tidy = TRUE,
                       pivot = TRUE,
                       na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi          <- check_npi(npi)}
-  if (!is.null(pac_org))       {pac_org      <- check_pac(pac_org)}
-  if (!is.null(zip))           {zip          <- as.character(zip)}
-  if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
-  if (!is.null(enid_org))      {check_enid(enid_org, type = "org")}
+  npi          <- npi %nn% check_npi(npi)
+  pac_org      <- pac_org %nn% check_pac(pac_org)
+  enid_org     <- enid_org %nn% check_enid(enid_org, type = "org")
+  zip          <- zip %nn% as.character(zip)
+  facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
+  registration <- registration %nn% rlang::arg_match(registration, c("P", "N"))
+  multi_npi    <- multi_npi %nn% tf_2_yn(multi_npi)
+  reh          <- multi_npi %nn% tf_2_yn(reh)
 
-  if (!is.null(registration)) {rlang::arg_match(registration, c("P", "N"))}
+  # if (!is.null(gen))        {gen <- tf_2_yn(gen)}
+  # if (!is.null(acute))      {acute <- tf_2_yn(acute)}
+  # if (!is.null(alc_drug))   {alc_drug <- tf_2_yn(alc_drug)}
+  # if (!is.null(child))      {child <- tf_2_yn(child)}
+  # if (!is.null(long))       {long <- tf_2_yn(long)}
+  # if (!is.null(psych))      {psych <- tf_2_yn(psych)}
+  # if (!is.null(rehab))      {rehab <- tf_2_yn(rehab)}
+  # if (!is.null(short))      {short <- tf_2_yn(short)}
+  # if (!is.null(swing))      {swing <- tf_2_yn(swing)}
+  # if (!is.null(psych_unit)) {psych_unit <- tf_2_yn(psych_unit)}
+  # if (!is.null(rehab_unit)) {rehab_unit <- tf_2_yn(rehab_unit)}
+  # if (!is.null(spec))       {spec <- tf_2_yn(spec)}
+  # if (!is.null(other))      {other <- tf_2_yn(other)}
+  # if (!is.null(reh))        {reh <- tf_2_yn(reh)}
 
-  if (!is.null(multi_npi))  {multi_npi <- tf_2_yn(multi_npi)}
-  if (!is.null(gen))        {gen <- tf_2_yn(gen)}
-  if (!is.null(acute))      {acute <- tf_2_yn(acute)}
-  if (!is.null(alc_drug))   {alc_drug <- tf_2_yn(alc_drug)}
-  if (!is.null(child))      {child <- tf_2_yn(child)}
-  if (!is.null(long))       {long <- tf_2_yn(long)}
-  if (!is.null(psych))      {psych <- tf_2_yn(psych)}
-  if (!is.null(rehab))      {rehab <- tf_2_yn(rehab)}
-  if (!is.null(short))      {short <- tf_2_yn(short)}
-  if (!is.null(swing))      {swing <- tf_2_yn(swing)}
-  if (!is.null(psych_unit)) {psych_unit <- tf_2_yn(psych_unit)}
-  if (!is.null(rehab_unit)) {rehab_unit <- tf_2_yn(rehab_unit)}
-  if (!is.null(spec))       {spec <- tf_2_yn(spec)}
-  if (!is.null(other))      {other <- tf_2_yn(other)}
-  if (!is.null(reh))        {reh <- tf_2_yn(reh)}
+  sg <- purrr::compact(subgroup) |> purrr::map(tf_2_yn)
 
   args <- dplyr::tribble(
     ~param,                             ~arg,
@@ -173,20 +175,20 @@ hospitals <- function(npi = NULL,
     "ZIP CODE",                         zip,
     "PROPRIETARY_NONPROFIT",            registration,
     "MULTIPLE NPI FLAG",                multi_npi,
-    "SUBGROUP %2D GENERAL",             gen,
-    "SUBGROUP %2D ACUTE CARE",          acute,
-    "SUBGROUP %2D ALCOHOL DRUG",        alc_drug,
-    "SUBGROUP %2D CHILDRENS",           child,
-    "SUBGROUP %2D LONG-TERM",           long,
-    "SUBGROUP %2D PSYCHIATRIC",         psych,
-    "SUBGROUP %2D REHABILITATION",      rehab,
-    "SUBGROUP %2D SHORT-TERM",          short,
-    "SUBGROUP %2D SWING-BED APPROVED",  swing,
-    "SUBGROUP %2D PSYCHIATRIC UNIT",    psych_unit,
-    "SUBGROUP %2D REHABILITATION UNIT", rehab_unit,
-    "SUBGROUP %2D SPECIALTY HOSPITAL",  spec,
-    "SUBGROUP %2D OTHER",               other,
-    "REH CONVERSION FLAG",              reh)
+    "REH CONVERSION FLAG",              reh,
+    "SUBGROUP %2D GENERAL",             sg$gen,
+    "SUBGROUP %2D ACUTE CARE",          sg$acute,
+    "SUBGROUP %2D ALCOHOL DRUG",        sg$alc_drug,
+    "SUBGROUP %2D CHILDRENS",           sg$child,
+    "SUBGROUP %2D LONG-TERM",           sg$long,
+    "SUBGROUP %2D PSYCHIATRIC",         sg$psych,
+    "SUBGROUP %2D REHABILITATION",      sg$rehab,
+    "SUBGROUP %2D SHORT-TERM",          sg$short,
+    "SUBGROUP %2D SWING-BED APPROVED",  sg$swing,
+    "SUBGROUP %2D PSYCHIATRIC UNIT",    sg$psych_unit,
+    "SUBGROUP %2D REHABILITATION UNIT", sg$rehab_unit,
+    "SUBGROUP %2D SPECIALTY HOSPITAL",  sg$spec,
+    "SUBGROUP %2D OTHER",               sg$other)
 
   response <- httr2::request(build_url("hos", args)) |>
     httr2::req_perform()
@@ -208,20 +210,20 @@ hospitals <- function(npi = NULL,
       "zip",            zip,
       "registration",   registration,
       "multi_npi",      multi_npi,
-      "gen",            gen,
-      "acute",          acute,
-      "alc_drug",       alc_drug,
-      "child",          child,
-      "long",           long,
-      "psych",          psych,
-      "rehab",          rehab,
-      "short",          short,
-      "swing",          swing,
-      "psych_unit",     psych_unit,
-      "rehab_unit",     rehab_unit,
-      "spec",           spec,
-      "other",          other,
-      "reh",            reh) |>
+      "reh",            reh,
+      "gen",            sg$gen,
+      "acute",          sg$acute,
+      "alc_drug",       sg$alc_drug,
+      "child",          sg$child,
+      "long",           sg$long,
+      "psych",          sg$psych,
+      "rehab",          sg$rehab,
+      "short",          sg$short,
+      "swing",          sg$swing,
+      "psych_unit",     sg$psych_unit,
+      "rehab_unit",     sg$rehab_unit,
+      "spec",           sg$spec,
+      "other",          sg$other) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -231,10 +233,15 @@ hospitals <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, yn = c("flag", "subgroup"), chr = "zip_code") |>
-      combine(address, c('address_line_1', 'address_line_2')) |>
-      combine(structure, c('organization_type_structure', 'organization_other_type_text'), sep = ": ") |>
-      combine(location_type, c('practice_location_type', 'location_other_type_text'), sep = ": ") |>
+    results <- tidyup(results,
+                      yn = c("flag", "subgroup"),
+                      chr = "zip_code") |>
+      combine(address, c('address_line_1',
+                         'address_line_2')) |>
+      combine(structure, c('organization_type_structure',
+                           'organization_other_type_text'), sep = ": ") |>
+      combine(location_type, c('practice_location_type',
+                               'location_other_type_text'), sep = ": ") |>
       dplyr::mutate(proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
                       "P" ~ "Proprietary",
                       "N" ~ "Non-Profit",
@@ -256,7 +263,7 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(flag = NULL)
 
     }
-    if (na.rm) {results <- narm(results)}
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }

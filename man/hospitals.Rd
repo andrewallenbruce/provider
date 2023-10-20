@@ -18,20 +18,8 @@ hospitals(
   zip = NULL,
   registration = NULL,
   multi_npi = NULL,
-  gen = NULL,
-  acute = NULL,
-  alc_drug = NULL,
-  child = NULL,
-  long = NULL,
-  short = NULL,
-  psych = NULL,
-  rehab = NULL,
-  swing = NULL,
-  psych_unit = NULL,
-  rehab_unit = NULL,
-  spec = NULL,
-  other = NULL,
   reh = NULL,
+  subgroup = list(),
   tidy = TRUE,
   pivot = TRUE,
   na.rm = TRUE
@@ -87,7 +75,10 @@ hospitals(
 
 \item{multi_npi}{< \emph{boolean} > Indicates hospital has more than one NPI}
 
-\item{gen, acute, alc_drug, child, long, short, psych, rehab, swing, psych_unit, rehab_unit, spec, other}{< \emph{boolean} >
+\item{reh}{< \emph{boolean} > Indicates a former Hospital or Critical Access
+Hospital (CAH) that converted to a Rural Emergency Hospital (REH)}
+
+\item{subgroup}{< \emph{list} > \code{subgroup = list(acute = TRUE, swing = FALSE)}
 Indicates hospital’s subgroup/unit designation:
 \itemize{
 \item \code{acute}: Acute Care
@@ -104,9 +95,6 @@ Indicates hospital’s subgroup/unit designation:
 \item \code{spec}: Specialty Hospital
 \item \code{other}: Not listed on CMS form
 }}
-
-\item{reh}{< \emph{boolean} > Indicates a former Hospital or Critical Access
-Hospital (CAH) that converted to a Rural Emergency Hospital (REH)}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -160,10 +148,20 @@ type and address.
 }
 
 \examples{
+hospitals(city = "Savannah", state = "GA") |>
+          dplyr::select(organization, subgroup)
+
+hospitals(city = "Savannah", state = "GA",
+          subgroup = list(acute = FALSE)) |>
+          dplyr::select(organization, subgroup)
+
+hospitals(city = "Savannah", state = "GA",
+          subgroup = list(gen = TRUE, rehab = FALSE)) |>
+          dplyr::select(organization, subgroup)
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 hospitals(pac_org = 6103733050)
+
 hospitals(state = "GA", reh = TRUE)
-hospitals(city = "Savannah", state = "GA")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

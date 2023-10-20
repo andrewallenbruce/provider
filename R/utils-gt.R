@@ -1,6 +1,8 @@
+#' @name gt_entype_badge
+#' @title entity type badge
 #' @param x column
 #' @autoglobal
-#' @noRd
+#' @keywords internal
 gt_entype_badge <- function(x) {
 
   add_color <- if (x == "Ind") {
@@ -23,10 +25,12 @@ gt_entype_badge <- function(x) {
   as.character(div_out) |> gt::html()
 }
 
+#' @name gt_check_xmark
+#' @title check or x mark icon
 #' @param gt_tbl gt_tbl object
 #' @param cols columns in data frame
 #' @autoglobal
-#' @noRd
+#' @keywords internal
 gt_check_xmark <- function(gt_tbl, cols) {
 
   gt_tbl |>
@@ -48,10 +52,12 @@ gt_check_xmark <- function(gt_tbl, cols) {
         columns = {{ cols }}))
 }
 
+#' @name gt_qmark
+#' @title check, x, question mark
 #' @param gt_tbl gt_tbl object
 #' @param cols columns in data frame
 #' @autoglobal
-#' @noRd
+#' @keywords internal
 gt_qmark <- function(gt_tbl, cols) {
 
   gt_tbl |>
@@ -79,9 +85,11 @@ gt_qmark <- function(gt_tbl, cols) {
         columns = {{ cols }}))
 }
 
+#' @name gt_datadict
+#' @title data dictionary theme
 #' @param df data frame
 #' @autoglobal
-#' @noRd
+#' @keywords internal
 gt_datadict <- function(df) {
 
   df |>
@@ -109,6 +117,8 @@ gt_datadict <- function(df) {
 
 }
 
+#' @name gt_prov
+#' @title gt theme
 #' @param df data frame
 #' @param divider description
 #' @param title description
@@ -120,7 +130,7 @@ gt_datadict <- function(df) {
 #' @param pct description
 #' @param pctchg description
 #' @autoglobal
-#' @noRd
+#' @keywords internal
 gt_prov <- function(df,
                     divider   = NULL,
                     title     = NULL,

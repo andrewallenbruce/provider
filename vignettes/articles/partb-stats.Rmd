@@ -24,6 +24,7 @@ options(scipen = 999)
 library(provider)
 library(tidyverse)
 library(gt)
+library(gtExtras)
 ```
 
 <br>
@@ -39,8 +40,20 @@ val |>
          gender, 
          specialty, 
          tot_hcpcs:bene_age_avg) |> 
-  group_by(year) |> 
-  count(entity_type, specialty, sort = TRUE)
+  group_by(year, entity_type) |> 
+  summarise(providers = n(),
+            hcpcs = mean(tot_hcpcs, na.rm = TRUE),
+            benes = mean(tot_benes, na.rm = TRUE),
+            srvcs = mean(tot_srvcs, na.rm = TRUE),
+            payment = mean(tot_payment, na.rm = TRUE),
+            hcc = mean(hcc_risk_avg, na.rm = TRUE),
+            age = mean(bene_age_avg, na.rm = TRUE)) |> 
+  gt::gt() |> 
+  gtExtras::gt_plt_dumbbell(hcpcs, 
+                            benes,
+                            label = "Unique HCPCS -- Beneficiaries",
+                            text_size = 3, 
+                            width = 50)
 ```
 
 <br>
@@ -116,8 +129,8 @@ val |>
 ## Provider Utilization Summary
 
 ```{r}
-ind <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1043245657))
-# ind <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
+ind1 <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1043245657))
+ind2 <- map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643))
 ```
 
 <br>
