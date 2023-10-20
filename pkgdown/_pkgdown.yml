@@ -125,13 +125,8 @@ reference:
     Various helper functions.
   contents:
   - change
-  - change_year
-  - chg
-  - pct
-  - ror
   - geomean
   - display_long
   - years_df
-  - years_vec
   - duration_vec
   - summary_stats
