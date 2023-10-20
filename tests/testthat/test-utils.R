@@ -120,8 +120,10 @@ test_that("encode_url() works", {
 
 test_that("file_url() works", {
   args <- dplyr::tibble(param = "NPI", arg = "1144544834")
-  c <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%2011b43516-3559-5a36-94be-7d5bab6a0548%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
-  a <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%20cdc08a02-00a0-5f77-8d0a-f87c8eccea32%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
+  c <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%209b86bb13-9701-5081-88ac-5b095abf95fc%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
+  # c <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%2011b43516-3559-5a36-94be-7d5bab6a0548%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
+  a <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%20865f5fa3-dd0c-53be-abcd-595e21790407%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
+  # a <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%20cdc08a02-00a0-5f77-8d0a-f87c8eccea32%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D"
   expect_equal(file_url(fn = "c", args = args, offset = 0L), c)
   expect_equal(file_url(fn = "a", args = args, offset = 0L), a)
 })

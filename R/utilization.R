@@ -310,7 +310,8 @@ by_provider <- function(year,
              cred = "credential",
              ent = "entity_type",
              yr = 'year') |>
-      combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2'))
+      combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
+      dplyr::mutate(specialty = correct_specialty(specialty))
 
     if (nest) {
       results <- tidyr::nest(results,
@@ -328,7 +329,7 @@ by_provider <- function(year,
                                -dplyr::starts_with("med_"),
                                -dplyr::starts_with("drug_"))
     }
-      if (na.rm) {results <- narm(results)}
+      if (na.rm) results <- narm(results)
   }
   return(results)
 }
@@ -555,10 +556,11 @@ by_service <- function(year,
                       dbl = "avg_",
                       yr = 'year') |>
       combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
-      cols_serv()
+      cols_serv() |>
+      dplyr::mutate(specialty = correct_specialty(specialty))
 
-    if (rbcs) {results <- rbcs_util(results)}
-    if (na.rm) {results <- narm(results)}
+    if (rbcs)  results <- rbcs_util(results)
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }
@@ -775,8 +777,8 @@ by_geography <- function(year,
       dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
       cols_geo()
 
-    if (rbcs) {results <- rbcs_util(results)}
-    if (na.rm) {results <- narm(results)}
+    if (rbcs)  results <- rbcs_util(results)
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }
@@ -804,4 +806,20 @@ cols_geo <- function(df) {
             "avg_std_pymt" = "avg_mdcr_stdzd_amt")
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+correct_specialty <- function(x) {
+    dplyr::case_match(x,
+                      "Allergy/ Immunology" ~ "Allergy/Immunology",
+                      "Obstetrics & Gynecology" ~ "Obstetrics/Gynecology",
+                      "Hematology-Oncology" ~ "Hematology/Oncology",
+                      "Independent Diagnostic Testing Facility (IDTF)" ~ "Independent Diagnostic Testing Facility",
+                      "Mass Immunizer Roster Biller" ~ "Mass Immunization Roster Biller",
+                      "Anesthesiologist Assistants" ~ "Anesthesiology Assistant",
+                      "Occupational therapist" ~ "Occupational Therapist",
+                      "Psychologist, Clinical" ~ "Clinical Psychologist",
+                      .default = x)
 }

@@ -293,7 +293,6 @@ encode_url <- function(url) {
 file_url <- function(fn = c("c", "a"), args, offset) {
 
   if (fn == "a") {uuid <- "27ea-46a8"}
-
   if (fn == "c") {uuid <- "mj5m-pzi6"}
 
   id <- httr2::request(

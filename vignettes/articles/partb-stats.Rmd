@@ -30,6 +30,17 @@ library(gt)
 
 ```{r}
 val <- map_dfr(pop_years(), ~by_provider(year = .x, city = "Valdosta", state = "GA"))
+
+val |> 
+  unnest(demographics) |> 
+  mutate(year = as.integer(year)) |> 
+  select(year, 
+         entity_type, 
+         gender, 
+         specialty, 
+         tot_hcpcs:bene_age_avg) |> 
+  group_by(year) |> 
+  count(entity_type, specialty, sort = TRUE)
 ```
 
 <br>
@@ -39,47 +50,40 @@ val |>
   group_by(year) |> 
   summarise(
     provs = n(),
-    hcpcs = sum(tot_hcpcs),
     benes = sum(tot_benes),
-    srvcs = sum(tot_srvcs)) |> 
-  change(!c('year')) |> 
-  ror(provs) |> 
-  ror(hcpcs) |> 
-  ror(benes) |> 
-  ror(srvcs) |> 
+    srvcs = sum(tot_srvcs), 
+    pymt = sum(tot_payment),
+    .groups = "drop") |> 
+  change(!year) |> 
   select(year,
          provs,
          provs_chg,
-         provs_ror,
          provs_pct,
-         hcpcs,
-         hcpcs_chg,
-         hcpcs_ror,
-         hcpcs_pct,
+         provs_ror = provs_pct_ror,
          benes,
          benes_chg,
-         benes_ror,
          benes_pct,
+         benes_ror = benes_pct_ror,
          srvcs,
          srvcs_chg,
-         srvcs_ror,
-         srvcs_pct) |> 
+         srvcs_pct,
+         srvcs_ror = srvcs_pct_ror,
+         pymt,
+         pymt_chg,
+         pymt_pct,
+         pymt_ror = pymt_pct_ror,) |> 
   gt(rowname_col = "year") |> 
   sub_zero(zero_text = "") |> 
   sub_missing(missing_text = "") |>
-  fmt_integer(columns = c(provs, hcpcs, benes, srvcs), sep_mark = ",") |>
-  fmt_integer(columns = ends_with("chg"), force_sign = TRUE) |>
-  fmt_percent(columns = ends_with("ror")) |>
-  fmt_percent(columns = ends_with("pct"), force_sign = TRUE) |>
+  fmt_integer(columns = c(provs, benes, srvcs, pymt), sep_mark = ",", suffixing = TRUE) |>
+  fmt_integer(columns = ends_with("chg"), force_sign = TRUE, sep_mark = ",", suffixing = TRUE) |>
+  fmt_percent(columns = ends_with("pct"), force_sign = TRUE, decimals = 1) |>
+  fmt_percent(columns = ends_with("ror"), decimals = 1) |>
   cols_label(
     provs = "Tot",
     provs_chg = "Abs",
     provs_ror = "RoR",
     provs_pct = "%",
-    hcpcs = "Tot",
-    hcpcs_chg = "Abs",
-    hcpcs_ror = "RoR",
-    hcpcs_pct = "%",
     benes = "Tot",
     benes_chg = "Abs",
     benes_ror = "RoR",
@@ -87,18 +91,23 @@ val |>
     srvcs = "Tot",
     srvcs_chg = "Abs",
     srvcs_ror = "RoR",
-    srvcs_pct = "%") |> 
+    srvcs_pct = "%",
+    pymt = "Tot",
+    pymt_chg = "Abs",
+    pymt_ror = "RoR",
+    pymt_pct = "%") |> 
+  cols_hide(columns = c(benes, srvcs, pymt)) |> 
   tab_spanner(label = "Providers",
     columns = c(provs, provs_chg, provs_ror, provs_pct)) |> 
-  tab_spanner(label = "HCPCS",
-    columns = c(hcpcs, hcpcs_chg, hcpcs_ror, hcpcs_pct)) |>
+  tab_spanner(label = "Payment",
+    columns = c(pymt, pymt_chg, pymt_ror, pymt_pct)) |>
   tab_spanner(label = "Beneficiaries",
     columns = c(benes, benes_chg, benes_ror, benes_pct)) |>
   tab_spanner(label = "Services",
     columns = c(srvcs, srvcs_chg, srvcs_ror, srvcs_pct)) |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
   opt_all_caps() |> 
-  opt_stylize(color = "gray")
+  opt_stylize(color = "red")
 ```
 
 <br><br>

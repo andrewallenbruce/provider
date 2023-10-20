@@ -3,6 +3,10 @@
 \name{calculations}
 \alias{calculations}
 \alias{change}
+\alias{chg}
+\alias{pct}
+\alias{ror}
+\alias{geomean}
 \alias{years_df}
 \alias{years_vec}
 \alias{duration_vec}
@@ -10,7 +14,15 @@
 \alias{gen_data}
 \title{Utility Functions}
 \usage{
-change(df, cols, digits = 3)
+change(df, cols, digits = 5)
+
+chg(x, n = 1L, fill_na = 0L)
+
+pct(x, n = 1L, fill_na = 0L)
+
+ror(df, col, n = 1L)
+
+geomean(x)
 
 years_df(df, date_col)
 
@@ -36,6 +48,14 @@ gen_data(years)
 
 \item{digits}{Number of digits to round to, default is 3}
 
+\item{x}{numeric vector}
+
+\item{n}{values to offset}
+
+\item{fill_na}{fill value for any NAs; default is 0}
+
+\item{col}{numeric column}
+
 \item{date_col}{date column}
 
 \item{condition}{filter condition, i.e. \code{patient == "new"}}
@@ -55,34 +75,16 @@ tibble
 }
 \description{
 Common utility functions
-
-Returns a tibble of summary stats
 }
 \examples{
 # Example data
 ex <- gen_data(2020:2025)
-ex
+head(ex)
 
-# Lagged calculations
-# `change()` # Change, percentage change, and cumulative sum
-ex |>
-dplyr::filter(group == "A") |>
+# Lagged absolute/percentage change, rate of return and cumulative sum
+# `change()`
+dplyr::filter(ex, group == "A") |>
 change(pay)
-
-# `chg()` # Absolute change for a vector
-ex |>
-dplyr::filter(group == "A") |>
-dplyr::mutate(change = chg(pay))
-
-# `pct()` # Percentage change for a vector
-ex |>
-dplyr::filter(group == "A") |>
-dplyr::mutate(pct_change = pct(pay))
-
-# `ror()` # Rate of return
-ex |>
-dplyr::filter(group == "A") |>
-ror(pay)
 
 # `geomean()` # Geometric mean
 ex |>
@@ -90,12 +92,7 @@ dplyr::filter(group == "A") |>
 ror(pay) |>
 dplyr::summarise(gmean = geomean(pay_ror))
 
-# `change_year()` # Lagged change by column
-ex |>
-dplyr::filter(group == "A") |>
-change_year(pay, year)
-
-#' # When performing a `group_by()`, watch for
+# When performing a `group_by()`, watch for
 # the correct order of the variables
 ex |>
 dplyr::group_by(group) |>
@@ -103,30 +100,22 @@ change(pay)
 
 ex |>
 dplyr::group_by(group) |>
-ror(pay)
+change(pay) |>
+dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
+csm_chg  = sum(pay_chg_csm),
+csm_pct  = sum(pay_pct_csm),
+mean_ror = mean(pay_pct_ror, na.rm = TRUE),
+geomean  = geomean(pay_pct_ror))
 
-ex |>
-dplyr::group_by(group) |>
-ror(pay) |>
-change(pay)
-
-ex |>
-dplyr::group_by(group) |>
-ror(pay) |>
-dplyr::summarise(gmean = geomean(pay_ror))
-
-# Calculating Timespans
+# Timespans
 dt <- dplyr::tibble(date = lubridate::today() - 366)
 dt
 
-# `years_df()`/`years_vec()` # Years passed
+# `years_df()`
 years_df(dt, date)
 
-dplyr::mutate(dt, years = years_vec(date))
-
-# `duration_vec()` # Duration since date
+# `duration_vec()`
 dplyr::mutate(dt, dur = duration_vec(date))
-
 
 # Summary Statistics
 sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
@@ -137,10 +126,50 @@ sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TR
 head(sm)
 
 summary_stats(sm,
-              condition = city == "ATL",
-              group_vars = provider,
+              condition    = city == "ATL",
+              group_vars   = provider,
               summary_vars = c(charges, payment),
-              arr = provider)
+              arr          = provider)
 
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::filter(ex, group == "A") |>
+change(pay)
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::filter(ex, group == "A") |>
+dplyr::mutate(change = chg(pay))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::filter(ex, group == "A") |>
+dplyr::mutate(pct_change = pct(pay))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::filter(ex, group == "A") |>
+ror(pay)
+
+ex |>
+dplyr::group_by(group) |>
+ror(pay)
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::filter(ex, group == "A") |>
+ror(pay) |>
+dplyr::summarise(gmean = geomean(pay_ror))
+
+ex |>
+dplyr::group_by(group) |>
+ror(pay) |>
+dplyr::summarise(gmean = geomean(pay_ror))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dt <- dplyr::tibble(date = lubridate::today() - 366)
+dplyr::mutate(dt, years = years_vec(date))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dplyr::tibble(date = lubridate::today() - 366,
+              date2 = date - 789) |>
+dplyr::mutate(dur = duration_vec(date),
+              dur2 = duration_vec(date2))
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

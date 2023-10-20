@@ -5,28 +5,12 @@
 #' @examples
 #' # Example data
 #' ex <- gen_data(2020:2025)
-#' ex
+#' head(ex)
 #'
-#' # Lagged calculations
-#' # `change()` # Change, percentage change, and cumulative sum
-#' ex |>
-#' dplyr::filter(group == "A") |>
+#' # Lagged absolute/percentage change, rate of return and cumulative sum
+#' # `change()`
+#' dplyr::filter(ex, group == "A") |>
 #' change(pay)
-#'
-#' # `chg()` # Absolute change for a vector
-#' ex |>
-#' dplyr::filter(group == "A") |>
-#' dplyr::mutate(change = chg(pay))
-#'
-#' # `pct()` # Percentage change for a vector
-#' ex |>
-#' dplyr::filter(group == "A") |>
-#' dplyr::mutate(pct_change = pct(pay))
-#'
-#' # `ror()` # Rate of return
-#' ex |>
-#' dplyr::filter(group == "A") |>
-#' ror(pay)
 #'
 #' # `geomean()` # Geometric mean
 #' ex |>
@@ -34,12 +18,7 @@
 #' ror(pay) |>
 #' dplyr::summarise(gmean = geomean(pay_ror))
 #'
-#' # `change_year()` # Lagged change by column
-#' ex |>
-#' dplyr::filter(group == "A") |>
-#' change_year(pay, year)
-#'
-#' #' # When performing a `group_by()`, watch for
+#' # When performing a `group_by()`, watch for
 #' # the correct order of the variables
 #' ex |>
 #' dplyr::group_by(group) |>
@@ -47,30 +26,22 @@
 #'
 #' ex |>
 #' dplyr::group_by(group) |>
-#' ror(pay)
+#' change(pay) |>
+#' dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
+#' csm_chg  = sum(pay_chg_csm),
+#' csm_pct  = sum(pay_pct_csm),
+#' mean_ror = mean(pay_pct_ror, na.rm = TRUE),
+#' geomean  = geomean(pay_pct_ror))
 #'
-#' ex |>
-#' dplyr::group_by(group) |>
-#' ror(pay) |>
-#' change(pay)
-#'
-#' ex |>
-#' dplyr::group_by(group) |>
-#' ror(pay) |>
-#' dplyr::summarise(gmean = geomean(pay_ror))
-#'
-#' # Calculating Timespans
+#' # Timespans
 #' dt <- dplyr::tibble(date = lubridate::today() - 366)
 #' dt
 #'
-#' # `years_df()`/`years_vec()` # Years passed
+#' # `years_df()`
 #' years_df(dt, date)
 #'
-#' dplyr::mutate(dt, years = years_vec(date))
-#'
-#' # `duration_vec()` # Duration since date
+#' # `duration_vec()`
 #' dplyr::mutate(dt, dur = duration_vec(date))
-#'
 #'
 #' # Summary Statistics
 #' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
@@ -81,10 +52,10 @@
 #' head(sm)
 #'
 #' summary_stats(sm,
-#'               condition = city == "ATL",
-#'               group_vars = provider,
+#'               condition    = city == "ATL",
+#'               group_vars   = provider,
 #'               summary_vars = c(charges, payment),
-#'               arr = provider)
+#'               arr          = provider)
 #'
 #' @returns [tibble()] or vector
 #' @name calculations
@@ -95,32 +66,32 @@ NULL
 #' @param cols numeric columns
 #' @param digits Number of digits to round to, default is 3
 #' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' change(pay)
 #' @autoglobal
 #' @export
 #' @keywords internal
-change <- function(df, cols, digits = 3) {
-
+change <- function(df, cols, digits = 5) {
   dplyr::mutate(df,
-  dplyr::across({{ cols }}, list(
-    chg = \(x) chg(x),
-    pct = \(x) pct(x)),
-                .names = "{.col}_{.fn}")) |>
-  dplyr::mutate(
-  dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(.,
-                digits = digits))) |>
-  dplyr::mutate(
-  dplyr::across(dplyr::contains(c("_chg", "_pct")), ~cumsum(.),
-                .names = "{.col}_cum")) |>
-  dplyr::relocate(dplyr::contains("_chg"),
-                  dplyr::contains("_pct"),
-                .after = dplyr::last_col())
-
+    dplyr::across({{ cols }}, list(
+      chg = \(x) chg(x),
+      pct = \(x) pct(x)),
+      .names = "{.col}_{.fn}")) |>
+    dplyr::mutate(dplyr::across(dplyr::ends_with("_pct"), ~ .x + 1, .names = "{.col}_ror")) |>
+    dplyr::mutate(dplyr::across(dplyr::ends_with(c("_chg", "_pct")), ~cumsum(.), .names = "{.col}_csm")) |>
+    dplyr::mutate(dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(., digits = digits))) |>
+    dplyr::relocate(dplyr::ends_with("_chg"), dplyr::ends_with("_pct"), .after = {{ cols }})
 }
 
-#' Calculate lagged change
+#' Lagged absolute change
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' dplyr::mutate(change = chg(pay))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -131,10 +102,14 @@ chg <- function(x, n = 1L, fill_na = 0L) {
   return(res)
 }
 
-#' Calculate lagged percentage change
+#' Lagged percentage change
 #' @param x numeric vector
 #' @param n values to offset
 #' @param fill_na fill value for any NAs; default is 0
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' dplyr::mutate(pct_change = pct(pay))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -145,10 +120,18 @@ pct <- function(x, n = 1L, fill_na = 0L) {
   return(res)
 }
 
-#' Calculate lagged rate of return
+#' Lagged rate of return
 #' @param df data frame
 #' @param col numeric column
 #' @param n values to offset
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' ror(pay)
+#'
+#' ex |>
+#' dplyr::group_by(group) |>
+#' ror(pay)
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -164,21 +147,32 @@ ror <- function(df, col, n = 1L) {
 #' Calculate geometric mean (average rate of return)
 #' For use in conjunction with [ror()]
 #' @param x numeric vector
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' ror(pay) |>
+#' dplyr::summarise(gmean = geomean(pay_ror))
+#'
+#' ex |>
+#' dplyr::group_by(group) |>
+#' ror(pay) |>
+#' dplyr::summarise(gmean = geomean(pay_ror))
 #' @autoglobal
 #' @export
 #' @keywords internal
-geomean <- function(x) {
-  exp(mean(log(x), na.rm = TRUE))
-}
+geomean <- function(x) exp(mean(log(x), na.rm = TRUE))
 
 #' Calculate lagged values by column
 #' @param df data frame
 #' @param col column of numeric values to calculate lag
 #' @param by column to calculate lag by
 #' @param digits Number of digits to round to
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::filter(ex, group == "A") |>
+#' change_year(pay, year)
 #' @autoglobal
-#' @export
-#' @keywords internal
+#' @noRd
 change_year <- function(df, col, by = year, digits = 3) {
 
   newcol <- rlang::englue("{{col}}_chg")
@@ -218,6 +212,9 @@ years_df <- function(df, date_col) {
 #' Calculate number of years since today's date
 #' @param date_col date column
 #' @rdname calculations
+#' @examplesIf interactive()
+#' dt <- dplyr::tibble(date = lubridate::today() - 366)
+#' dplyr::mutate(dt, years = years_vec(date))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -234,6 +231,11 @@ years_vec <- function(date_col) {
 #' Calculate duration since today's date
 #' @param date_col date column
 #' @rdname calculations
+#' @examplesIf interactive()
+#' dplyr::tibble(date = lubridate::today() - 366,
+#'               date2 = date - 789) |>
+#' dplyr::mutate(dur = duration_vec(date),
+#'               dur2 = duration_vec(date2))
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -244,7 +246,6 @@ duration_vec <- function(date_col) {
 }
 
 #' Summary stats
-#' @description Returns a tibble of summary stats
 #' @param df data frame
 #' @param condition filter condition, i.e. `patient == "new"`
 #' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
