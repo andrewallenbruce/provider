@@ -2,6 +2,7 @@
 #' @title entity type badge
 #' @param x column
 #' @autoglobal
+#' @export
 #' @keywords internal
 gt_entype_badge <- function(x) {
 
@@ -30,23 +31,20 @@ gt_entype_badge <- function(x) {
 #' @param gt_tbl gt_tbl object
 #' @param cols columns in data frame
 #' @autoglobal
+#' @export
 #' @keywords internal
 gt_check_xmark <- function(gt_tbl, cols) {
 
   gt_tbl |>
     gt::text_case_when(
       x == TRUE ~ gt::html(
-        fontawesome::fa("circle-check",
+        fontawesome::fa("check",
                         prefer_type = "solid",
-                        fill = "black",
-                        height = "1.75em",
-                        width = "1.75em")),
+                        fill = "black")),
       x == FALSE ~ gt::html(
-        fontawesome::fa("circle-xmark",
+        fontawesome::fa("xmark",
                         prefer_type = "solid",
-                        fill = "red",
-                        height = "1.75em",
-                        width = "1.75em")),
+                        fill = "red")),
       .default = NA,
       .locations = gt::cells_body(
         columns = {{ cols }}))
@@ -57,6 +55,7 @@ gt_check_xmark <- function(gt_tbl, cols) {
 #' @param gt_tbl gt_tbl object
 #' @param cols columns in data frame
 #' @autoglobal
+#' @export
 #' @keywords internal
 gt_qmark <- function(gt_tbl, cols) {
 
@@ -89,6 +88,7 @@ gt_qmark <- function(gt_tbl, cols) {
 #' @title data dictionary theme
 #' @param df data frame
 #' @autoglobal
+#' @export
 #' @keywords internal
 gt_datadict <- function(df) {
 
@@ -130,6 +130,7 @@ gt_datadict <- function(df) {
 #' @param pct description
 #' @param pctchg description
 #' @autoglobal
+#' @export
 #' @keywords internal
 gt_prov <- function(df,
                     divider   = NULL,

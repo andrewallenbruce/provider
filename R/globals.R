@@ -12,6 +12,7 @@ utils::globalVariables(c(
   "lg", # <ror>
   "year", # <change_year>
   ":=", # <change_year>
+  "interval", # <make_interval>
   "y", # <clinicians>
   "address", # <clinicians>
   "year", # <compare_hcpcs>

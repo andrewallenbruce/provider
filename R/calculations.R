@@ -28,14 +28,13 @@
 #' dplyr::group_by(group) |>
 #' change(pay) |>
 #' dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
-#' csm_chg  = sum(pay_chg_csm),
-#' csm_pct  = sum(pay_pct_csm),
-#' mean_ror = mean(pay_pct_ror, na.rm = TRUE),
-#' geomean  = geomean(pay_pct_ror))
+#'                  csm_chg  = sum(pay_chg),
+#'                  csm_pct  = sum(pay_pct),
+#'                  mean_ror = mean(pay_pct_ror, na.rm = TRUE),
+#'                  geomean  = geomean(pay_pct_ror))
 #'
 #' # Timespans
 #' dt <- dplyr::tibble(date = lubridate::today() - 366)
-#' dt
 #'
 #' # `years_df()`
 #' years_df(dt, date)
@@ -43,7 +42,12 @@
 #' # `duration_vec()`
 #' dplyr::mutate(dt, dur = duration_vec(date))
 #'
-#' # Summary Statistics
+#' # `make_interval`
+#' dplyr::tibble(date = lubridate::today() - 1000) |>
+#' make_interval(start = date, end = lubridate::today() - 500)
+#'
+#'
+#' # `summary_stats`
 #' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
 #'                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
 #'                     charges = sample(1000:2000, size = 200),
@@ -243,6 +247,25 @@ duration_vec <- function(date_col) {
   date <- difftime(date_col, lubridate::today(), units = "auto", tz = "UTC")
   date <- lubridate::as.duration(date)
   return(date)
+}
+
+#' Create interval and period columns from a start and end date
+#' @param df data frame
+#' @param start start date column
+#' @param end end date column
+#' @rdname calculations
+#' @examplesIf interactive()
+#' dt <- dplyr::tibble(date = lubridate::today() - 366)
+#' make_interval(dt, start = lubridate::today() - 1000)
+#' @autoglobal
+#' @export
+#' @keywords internal
+make_interval <- function(df, start, end = lubridate::today()) {
+  dplyr::mutate(df,
+                interval = lubridate::interval(
+                  lubridate::ymd({{ start }}), lubridate::ymd({{ end }})),
+                period = lubridate::as.period(interval),
+                timelength_days = lubridate::time_length(interval, unit = "days"))
 }
 
 #' Summary stats

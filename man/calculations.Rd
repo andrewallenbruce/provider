@@ -10,6 +10,7 @@
 \alias{years_df}
 \alias{years_vec}
 \alias{duration_vec}
+\alias{make_interval}
 \alias{summary_stats}
 \alias{gen_data}
 \title{Utility Functions}
@@ -29,6 +30,8 @@ years_df(df, date_col)
 years_vec(date_col)
 
 duration_vec(date_col)
+
+make_interval(df, start, end = lubridate::today())
 
 summary_stats(
   df,
@@ -57,6 +60,10 @@ gen_data(years)
 \item{col}{numeric column}
 
 \item{date_col}{date column}
+
+\item{start}{start date column}
+
+\item{end}{end date column}
 
 \item{condition}{filter condition, i.e. \code{patient == "new"}}
 
@@ -102,14 +109,13 @@ ex |>
 dplyr::group_by(group) |>
 change(pay) |>
 dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
-csm_chg  = sum(pay_chg_csm),
-csm_pct  = sum(pay_pct_csm),
-mean_ror = mean(pay_pct_ror, na.rm = TRUE),
-geomean  = geomean(pay_pct_ror))
+                 csm_chg  = sum(pay_chg),
+                 csm_pct  = sum(pay_pct),
+                 mean_ror = mean(pay_pct_ror, na.rm = TRUE),
+                 geomean  = geomean(pay_pct_ror))
 
 # Timespans
 dt <- dplyr::tibble(date = lubridate::today() - 366)
-dt
 
 # `years_df()`
 years_df(dt, date)
@@ -117,7 +123,12 @@ years_df(dt, date)
 # `duration_vec()`
 dplyr::mutate(dt, dur = duration_vec(date))
 
-# Summary Statistics
+# `make_interval`
+dplyr::tibble(date = lubridate::today() - 1000) |>
+make_interval(start = date, end = lubridate::today() - 500)
+
+
+# `summary_stats`
 sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
                     charges = sample(1000:2000, size = 200),
@@ -170,6 +181,10 @@ dplyr::tibble(date = lubridate::today() - 366,
               date2 = date - 789) |>
 dplyr::mutate(dur = duration_vec(date),
               dur2 = duration_vec(date2))
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dt <- dplyr::tibble(date = lubridate::today() - 366)
+make_interval(dt, start = lubridate::today() - 1000)
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}
