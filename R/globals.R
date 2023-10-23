@@ -240,9 +240,18 @@ utils::globalVariables(c(
   "procedure", # <rbcs_util>
   "state.abb", # <by_geography>
   "distro", # <by_geography>
-  "hcpcs_desc", # <by_geography>
   "y", # <by_geography>
   "place_of_srvc", # <by_geography>
+  "state.abb", # <utilization>
+  "distro", # <utilization>
+  "y", # <utilization>
+  "address", # <tidyup.provider>
+  "specialty", # <tidyup.provider>
+  "medical", # <tidyup.provider>
+  "drug", # <tidyup.provider>
+  "address", # <tidyup.services>
+  "specialty", # <tidyup.services>
+  "place_of_srvc", # <tidyup.geography>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

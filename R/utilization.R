@@ -330,6 +330,7 @@ by_provider <- function(year,
     }
       if (na.rm) results <- narm(results)
   }
+  class(results) <- c("provider_by_prov", class(results))
   return(results)
 }
 
@@ -479,8 +480,8 @@ by_service <- function(year,
   zip   <- zip %nn% as.character(zip)
   fips  <- fips %nn% as.character(fips)
   ruca  <- ruca %nn% as.character(ruca)
-  hcpcs_code <- hcpcs_code %nn% as.character(hcpcs_code)
   par   <- par %nn% tf_2_yn(par)
+  hcpcs_code <- hcpcs_code %nn% as.character(hcpcs_code)
   drug  <- drug %nn% tf_2_yn(drug)
   pos   <- pos %nn% pos_char(pos)
 
@@ -521,8 +522,8 @@ by_service <- function(year,
       ~x,             ~y,
       "year",         year,
       "npi",          npi,
-      "last",         last,
       "first",        first,
+      "last",         last,
       "organization", organization,
       "credential",   credential,
       "gender",       gender,
@@ -562,6 +563,7 @@ by_service <- function(year,
     if (rbcs)  results <- rbcs_util(results)
     if (na.rm) results <- narm(results)
   }
+  class(results) <- c("provider_by_serv", class(results))
   return(results)
 }
 
@@ -589,7 +591,7 @@ rbcs_util <- function(df) {
                           family,
                           procedure)
 
-    cols_rbcs(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs_code)))
+    cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs_code)), "rbcs")
   }
 }
 
@@ -756,7 +758,6 @@ by_geography <- function(year,
       "state",          state,
       "fips",           fips,
       "hcpcs_code",     hcpcs_code,
-      "hcpcs_desc",     hcpcs_desc,
       "drug",           drug,
       "pos",            pos) |>
       tidyr::unnest(cols = c(y))
@@ -780,6 +781,7 @@ by_geography <- function(year,
     if (rbcs)  results <- rbcs_util(results)
     if (na.rm) results <- narm(results)
   }
+  class(results) <- c("provider_by_geo", class(results))
   return(results)
 }
 
@@ -806,20 +808,4 @@ cols_geo <- function(df) {
             "avg_std_pymt" = "avg_mdcr_stdzd_amt")
 
   df |> dplyr::select(dplyr::any_of(cols))
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-correct_specialty <- function(x) {
-    dplyr::case_match(x,
-                      "Allergy/ Immunology" ~ "Allergy/Immunology",
-                      "Obstetrics & Gynecology" ~ "Obstetrics/Gynecology",
-                      "Hematology-Oncology" ~ "Hematology/Oncology",
-                      "Independent Diagnostic Testing Facility (IDTF)" ~ "Independent Diagnostic Testing Facility",
-                      "Mass Immunizer Roster Biller" ~ "Mass Immunization Roster Biller",
-                      "Anesthesiologist Assistants" ~ "Anesthesiology Assistant",
-                      "Occupational therapist" ~ "Occupational Therapist",
-                      "Psychologist, Clinical" ~ "Clinical Psychologist",
-                      .default = x)
 }

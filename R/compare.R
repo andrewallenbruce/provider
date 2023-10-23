@@ -26,6 +26,12 @@ NULL
 #' @export
 compare_hcpcs <- function(serv_tbl) {
 
+  if (!inherits(serv_tbl, "provider_by_serv")) {
+    cli::cli_abort(c(
+      "{.var serv_tbl} must be of class {.cls 'provider_by_serv'}.",
+      "x" = "{.var serv_tbl} is of class {.cls {class(serv_tbl)}}."))
+  }
+
   x <- serv_tbl |>
     dplyr::select(year, state, hcpcs_code, pos) |>
     dplyr::rowwise() |>
@@ -82,8 +88,13 @@ hcpcs_cols <- function(df) {
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_conditions <- function(prov_tbl,
-                               pivot = TRUE) {
+compare_conditions <- function(prov_tbl, pivot = TRUE) {
+
+  if (!inherits(prov_tbl, "provider_by_prov")) {
+    cli::cli_abort(c(
+      "{.var prov_tbl} must be of class {.cls 'provider_by_prov'}.",
+      "x" = "{.var prov_tbl} is of class {.cls {class(prov_tbl)}}."))
+  }
 
   p <- dplyr::select(prov_tbl, year, conditions) |>
     tidyr::unnest(conditions) |>

@@ -97,6 +97,7 @@ reference:
   - conditions
   - open_payments
   - quality_payment
+  - utilization
   - by_provider
   - by_service
   - by_geography
