@@ -141,22 +141,7 @@ hospitals <- function(npi = NULL,
   facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
   registration <- registration %nn% rlang::arg_match(registration, c("P", "N"))
   multi_npi    <- multi_npi %nn% tf_2_yn(multi_npi)
-  reh          <- multi_npi %nn% tf_2_yn(reh)
-
-  # if (!is.null(gen))        {gen <- tf_2_yn(gen)}
-  # if (!is.null(acute))      {acute <- tf_2_yn(acute)}
-  # if (!is.null(alc_drug))   {alc_drug <- tf_2_yn(alc_drug)}
-  # if (!is.null(child))      {child <- tf_2_yn(child)}
-  # if (!is.null(long))       {long <- tf_2_yn(long)}
-  # if (!is.null(psych))      {psych <- tf_2_yn(psych)}
-  # if (!is.null(rehab))      {rehab <- tf_2_yn(rehab)}
-  # if (!is.null(short))      {short <- tf_2_yn(short)}
-  # if (!is.null(swing))      {swing <- tf_2_yn(swing)}
-  # if (!is.null(psych_unit)) {psych_unit <- tf_2_yn(psych_unit)}
-  # if (!is.null(rehab_unit)) {rehab_unit <- tf_2_yn(rehab_unit)}
-  # if (!is.null(spec))       {spec <- tf_2_yn(spec)}
-  # if (!is.null(other))      {other <- tf_2_yn(other)}
-  # if (!is.null(reh))        {reh <- tf_2_yn(reh)}
+  reh          <- reh %nn% tf_2_yn(reh)
 
   sg <- purrr::compact(subgroup) |> purrr::map(tf_2_yn)
 

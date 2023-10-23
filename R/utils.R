@@ -1,6 +1,6 @@
-#' Infix operator for `if (!is.null(x))` statements
+#' Infix operator for `if (!is.null(x)) y else x` statements
 #' @param x,y description
-#' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
+#' @return description
 #' @examples
 #' ccn <- 123456
 #' ccn <- ccn %nn% as.character(ccn)

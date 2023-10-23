@@ -89,13 +89,13 @@ clinicians <- function(npi = NULL,
                        tidy = TRUE,
                        na.rm = TRUE) {
 
-  if (!is.null(npi))           {npi        <- check_npi(npi)}
-  if (!is.null(pac))           {pac        <- check_pac(pac)}
-  if (!is.null(pac_org))       {pac_org    <- check_pac(pac_org)}
-  if (!is.null(enid))          {check_enid(enid)}
-  if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
-  if (!is.null(zip))           {zip        <- as.character(zip)}
-  if (!is.null(gender))        {rlang::arg_match(gender, c("F", "M"))}
+  npi       <- npi %nn% check_npi(npi)
+  pac       <- pac %nn% check_pac(pac)
+  pac_org   <- pac_org %nn% check_pac(pac_org)
+  enid      <- enid %nn% check_enid(enid)
+  grad_year <- grad_year %nn% as.character(grad_year)
+  zip       <- zip %nn% as.character(zip)
+  gender    <- gender %nn% rlang::arg_match(gender, c("F", "M"))
 
   args <- dplyr::tribble(
     ~param,               ~arg,
@@ -156,7 +156,7 @@ clinicians <- function(npi = NULL,
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
       cols_clin()
 
-    if (na.rm) {results <- narm(results)}
+    if (na.rm) results <- narm(results)
     }
   return(results)
 }

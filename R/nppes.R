@@ -5,13 +5,13 @@
 #' Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
 #' records.
 #'
-#' __National Provider Identifier (NPI)__
+#' @section __National Provider Identifier (NPI)__:
 #' Healthcare providers acquire their unique 10-digit NPIs to identify
 #' themselves in a standard way throughout their industry. Once CMS supplies
 #' an NPI, they publish the parts of the NPI record that have public relevance,
 #' including the provider’s name, taxonomy and practice address.
 #'
-#' __Entity/Enumeration Type__
+#' @section __Entity/Enumeration Type__:
 #' Two categories of health care providers exist for NPI enumeration purposes:
 #'
 #' __Type 1__: Individual providers may get an NPI as _Entity Type 1_.
@@ -62,16 +62,16 @@
 #' Medicare program, and to commit the organization to fully abide by the
 #' statutes, regulations, and program instructions of the Medicare program.
 #'
-#' **Links**
+#' @section Links:
 #' - [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
 #' - [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
 #'
-#' **Trailing Wildcard Entries**
+#' @section Trailing Wildcard Entries:
 #' Arguments that allow trailing wildcard entries are denoted in the parameter
 #' description with `// __WC__`. Wildcard entries require at least two
 #' characters to be entered, e.g. `"jo*"`
 #'
-#' *Update Frequency:* **Weekly**
+#' @section Update Frequency: __Weekly__
 #'
 #' @param npi < *integer | character* > 10-digit Organizational National Provider Identifier
 #' @param entype < *character* > Entity/enumeration type _Cannot be the only criteria entered._
@@ -127,12 +127,12 @@ nppes <- function(npi = NULL,
                   tidy = TRUE,
                   na.rm = TRUE) {
 
-  if (!is.null(npi))       {npi <- check_npi(npi)}
-  if (!is.null(name_type)) {rlang::arg_match(name_type, c("AO", "Provider"))}
-  if (!is.null(zip))       {zip <- as.character(zip)}
+  npi       <- npi %nn% check_npi(npi)
+  name_type <- name_type %nn% rlang::arg_match(name_type, c("AO", "Provider"))
+  zip       <- zip %nn% as.character(zip)
 
   if (!is.null(entype)) {
-    rlang::arg_match(entype, c("I", "O"))
+    entype <- rlang::arg_match(entype, c("I", "O"))
     entype <- entype_arg(entype)}
 
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
@@ -154,7 +154,7 @@ nppes <- function(npi = NULL,
   response <- httr2::resp_body_json(request, simplifyVector = TRUE)
   results  <- response$results
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (vctrs::vec_is_empty(results)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -172,7 +172,6 @@ nppes <- function(npi = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
-
     return(invisible(NULL))
   }
 
@@ -200,7 +199,7 @@ nppes <- function(npi = NULL,
         dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
         cols_nppes2()
 
-      if (na.rm) {results <- narm(results)}
+      if (na.rm) results <- narm(results)
     }
   }
   return(results)
@@ -214,14 +213,12 @@ nppes <- function(npi = NULL,
 #' @noRd
 entype_arg <- function(x) {
 
-  x <- if (is.numeric(x)) as.character(x)
+  x <- if (is.integer(x)) as.character(x)
 
   dplyr::case_match(
     x,
     c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-    c("O", "o", "Org", "org", "2") ~ "NPI-2",
-    .default = NULL
-  )
+    c("O", "o", "Org", "org", "2") ~ "NPI-2")
 }
 
 #' @param df data frame

@@ -129,8 +129,8 @@ affiliations <- function(npi = NULL,
     return(invisible(NULL))
 
   }
-  if (tidy)  {results <- cols_aff(tidyup(results))
-  if (na.rm) {results <- narm(results)}}
+  if (tidy)  results <- cols_aff(tidyup(results))
+  if (na.rm) results <- narm(results)
   return(results)
 }
 

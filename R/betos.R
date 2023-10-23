@@ -81,7 +81,7 @@ betos <- function(hcpcs_code = NULL,
 
   response <- httr2::request(build_url("bet", args)) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,

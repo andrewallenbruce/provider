@@ -77,14 +77,17 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \code{nppes()} allows the user to search the National Plan and Provider
 Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
 records.
+}
+\section{\strong{National Provider Identifier (NPI)}}{
 
-\strong{National Provider Identifier (NPI)}
 Healthcare providers acquire their unique 10-digit NPIs to identify
 themselves in a standard way throughout their industry. Once CMS supplies
 an NPI, they publish the parts of the NPI record that have public relevance,
 including the provider’s name, taxonomy and practice address.
+}
 
-\strong{Entity/Enumeration Type}
+\section{\strong{Entity/Enumeration Type}}{
+
 Two categories of health care providers exist for NPI enumeration purposes:
 
 \strong{Type 1}: Individual providers may get an NPI as \emph{Entity Type 1}.
@@ -136,20 +139,27 @@ organization has granted the legal authority to enroll it in the Medicare
 program, to make changes or updates to the organization's status in the
 Medicare program, and to commit the organization to fully abide by the
 statutes, regulations, and program instructions of the Medicare program.
+}
 
-\strong{Links}
+\section{Links}{
+
 \itemize{
 \item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API Documentation}
 \item \href{https://npiregistry.cms.hhs.gov/demo-api}{NPPES NPI Registry API Demo}
 }
+}
 
-\strong{Trailing Wildcard Entries}
+\section{Trailing Wildcard Entries}{
+
 Arguments that allow trailing wildcard entries are denoted in the parameter
 description with \verb{// __WC__}. Wildcard entries require at least two
 characters to be entered, e.g. \code{"jo*"}
-
-\emph{Update Frequency:} \strong{Weekly}
 }
+
+\section{Update Frequency}{
+ \strong{Weekly}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes(npi = 1528060837)

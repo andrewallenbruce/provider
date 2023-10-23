@@ -105,7 +105,8 @@ laboratories <- function(name = NULL,
     certificate <- cert(certificate)
   }
 
-  if (!is.null(zip)) {zip <- as.character(zip)}
+  zip <- zip %nn% as.character(zip)
+
   if (isTRUE(active)) {
     active <- "00"
     } else {
@@ -125,7 +126,7 @@ laboratories <- function(name = NULL,
   response <- httr2::request(build_url("lab", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     if (active == "00") {active <- TRUE}
 

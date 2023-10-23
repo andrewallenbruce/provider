@@ -104,7 +104,7 @@ beneficiaries <- function(year = NULL,
     if (period == "Month") {period <- NULL}
   }
 
-  if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
+  level <- level %nn% rlang::arg_match(level, c("National", "State", "County"))
 
   if (!is.null(state)) {
     rlang::arg_match(state, c(state.abb, state.name, "US"))
@@ -115,7 +115,7 @@ beneficiaries <- function(year = NULL,
     }
   }
 
-  if (is.null(state)) {state_name <- NULL}
+  if (is.null(state)) state_name <- NULL
 
   args <- dplyr::tribble(
                  ~param,       ~arg,
@@ -147,8 +147,10 @@ beneficiaries <- function(year = NULL,
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-  if (tidy) {results <- bene_cols(tidyup(results, int = c("year", "_benes"), yr = 'year'))}
-  if (!is.null(period) && period == "Month") {results <- dplyr::filter(results, period %in% month.name)}
+
+  if (tidy) results <- bene_cols(tidyup(results, int = c("year", "_benes"), yr = 'year'))
+  if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
+
   return(results)
 }
 

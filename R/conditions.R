@@ -158,7 +158,7 @@ conditions <- function(year,
     sublevel <- abb2full(sublevel)
   }
 
-  if (!is.null(fips)) {fips <- as.character(fips)}
+  fips <- fips %nn% as.character(fips)
 
   args <- dplyr::tribble(
     ~param,            ~arg,
@@ -181,7 +181,7 @@ conditions <- function(year,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
