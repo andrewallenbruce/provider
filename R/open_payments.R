@@ -1,23 +1,26 @@
-#' Provider Financial Relationships
+#' Provider Financial Relationships with Drug & Medical Device Companies
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
 #' [open_payments()] allows the user access to CMS' Open Payments Program API
 #'
-#' The Open Payments program is a national disclosure program that collects and
+#' The __Open Payments__ program is a national disclosure program that collects and
 #' publishes information about financial relationships between drug and medical
 #' device companies (referred to as "reporting entities") and certain health
 #' care providers (referred to as "covered recipients"). These relationships may
 #' involve payments to providers for things including but not limited to
 #' research, meals, travel, gifts or speaking fees.
 #'
-#' **Applicable Group Purchasing Organizations** (GPOs): Entities that operate
+#' @section Terminology:
+#' __Reporting Entities__: Applicable manufacturers or GPOs.
+#'
+#' __Applicable Group Purchasing Organizations__ (GPOs) are entities that operate
 #' in the United States and purchase, arrange for or negotiate the purchase of
 #' covered drugs, devices, biologicals, or medical supplies for a group of
 #' individuals or entities, but not solely for use by the entity itself.
 #'
-#' **Applicable Manufacturers**: Entities that operate in the United States and
+#' __Applicable Manufacturers__ are entities that operate in the United States and
 #' are (1) engaged in the production, preparation, propagation, compounding, or
 #' conversion of a covered drug, device, biological, or medical supply, but not
 #' if such covered drug, device, biological or medical supply is solely for use
@@ -31,65 +34,62 @@
 #' marketing, promotion, sale, or distribution of a covered drug, device,
 #' biological or medical supply.
 #'
-#' **Reporting Entities**: Applicable manufacturers or GPOs.
-#'
-#' **Covered Recipients**: Any physician, physician assistant, nurse
+#' __Covered Recipients__ are any physician, physician assistant, nurse
 #' practitioner, clinical nurse specialist, certified registered nurse
 #' anesthetist, or certified nurse-midwife who is not a bona fide employee of
 #' the applicable manufacturer that is reporting the payment; or a teaching
 #' hospital, which is any institution that received a payment.
 #'
-#' **Teaching Hospitals**: Hospitals that receive payment for Medicare direct
+#' __Teaching Hospitals__ are hospitals that receive payment for Medicare direct
 #' graduate medical education (GME), IPPS indirect medical education (IME), or
 #' psychiatric hospital IME programs.
 #'
-#' **Natures of Payment**: Categories that must be used to describe why a
+#' __Natures of Payment__ are categories that must be used to describe why a
 #' payment or other transfer of value was made. They are only applicable to
 #' the “general” payment type, not research or ownership. The categories are:
 #'
-#'   * Acquisitions (2021 - current)
-#'   * Charitable contributions
-#'   * Compensation for services other than consulting
-#'   * Compensation for serving as faculty or speaker for:
-#'      * An accredited or certified continuing education program (2013 - 2020)
-#'      * An unaccredited and non-certified continuing education program (2013 - 2020)
-#'      * A medical education program (2021 - current)
-#'   * Consulting fees
-#'   * Current or prospective ownership or investment interest (prior to 2023)
-#'   * Debt Forgiveness (2021 - current)
-#'   * Education
-#'   * Entertainment
-#'   * Food and beverage
-#'   * Gift
-#'   * Grant
-#'   * Honoraria
-#'   * Long-term medical supply or device loan (2021 - current)
-#'   * Royalty or license
-#'   * Space rental or facility fees (Teaching Hospitals only)
-#'   * Travel and lodging
+#' + Acquisitions (2021 - current)
+#' + Charitable contributions:
+#'   + Compensation for services other than consulting
+#'   + Compensation for serving as faculty or speaker for:
+#'      + An accredited or certified continuing education program (2013 - 2020)
+#'      + An unaccredited and non-certified continuing education program (2013 - 2020)
+#'      + A medical education program (2021 - current)
+#' + Consulting fees
+#' + Current or prospective ownership or investment interest (prior to 2023)
+#' + Debt Forgiveness (2021 - current)
+#' + Education
+#' + Entertainment
+#' + Food and beverage
+#' + Gift
+#' + Grant
+#' + Honoraria
+#' + Long-term medical supply or device loan (2021 - current)
+#' + Royalty or license
+#' + Space rental or facility fees (Teaching Hospitals only)
+#' + Travel and lodging
 #'
-#' **Transfers of Value**: Anything of value given by an applicable manufacturer
+#' __Transfers of Value__ are anything of value given by an applicable manufacturer
 #' or applicable GPO to a covered recipient or physician owner/investor that
 #' does not fall within one of the excluded categories in the rule.
 #'
-#' **Ownership and Investment Interests** include, but are not limited to:
-#'
-#'   * Stock
-#'   * Stock option(s) (not received as compensation, until they are exercised)
-#'   * Partnership share(s)
-#'   * Limited liability company membership(s)
-#'   * Loans
-#'   * Bonds
-#'   * Financial instruments secured with an entity’s property or revenue
+#' __Ownership and Investment Interests__ include, but are not limited to:
+#' + Stock
+#' + Stock option(s) (not received as compensation, until they are exercised)
+#' + Partnership share(s)
+#' + Limited liability company membership(s)
+#' + Loans
+#' + Bonds
+#' + Financial instruments secured with an entity’s property or revenue
 #'
 #' This may be direct or indirect and through debt, equity or other means.
 #'
-#' Links:
+#' @section Links:
+#' + [What is the Open Payments Program?](https://www.cms.gov/priorities/key-initiatives/open-payments)
+#' + [Open Payments: General Resources](https://www.cms.gov/OpenPayments/Resources)
 #'
-#'  * [What is the Open Payments Program?](https://www.cms.gov/priorities/key-initiatives/open-payments)
-#'  * [Open Payments: General Resources](https://www.cms.gov/OpenPayments/Resources)
-#'
-#' *Update Frequency:* **Yearly**
+#' @section Update Frequency:
+#' Yearly
 #'
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
@@ -132,6 +132,11 @@
 #' open_payments(year = 2021, pay_form = "Stock option")
 #' open_payments(year = 2021, payer = "Adaptive Biotechnologies Corporation")
 #' open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
+#'
+#' # Use the years helper function to retrieve results for all avaliable years:
+#' open_years() |>
+#' map(\(x) open_payments(year = x, npi = 1043477615)) |>
+#' list_rbind()
 #' @autoglobal
 #' @export
 open_payments <- function(year,
@@ -157,8 +162,8 @@ open_payments <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(open_years()))
 
-  if (!is.null(npi)) {npi  <- check_npi(npi)}
-  if (!is.null(zip)) {zip <- as.character(zip)}
+  npi <- npi %nn% check_npi(npi)
+  zip <- zip %nn% as.character(zip)
 
   if (!is.null(covered_type)) {
     rlang::arg_match(covered_type, c("Physician",
@@ -197,7 +202,7 @@ open_payments <- function(year,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (isTRUE(vctrs::vec_is_empty(results))) {
+  if (vctrs::vec_is_empty(results)) {
 
     cli_args <- dplyr::tribble(
       ~x,                  ~y,
@@ -248,19 +253,24 @@ open_payments <- function(year,
                 paste0('ndc_', 1:5),
                 paste0('pdi_', 1:5))
 
-      results <- tidyr::pivot_longer(
-        results,
-        cols = dplyr::any_of(pcol),
-        names_to = c("attr", "group"),
-        names_pattern = "(.*)_(.)",
-        values_to = "val") |>
+      results <- results |>
+        dplyr::mutate(id = dplyr::row_number(), .before = name_1) |>
+        tidyr::pivot_longer(
+          cols = dplyr::any_of(pcol),
+          names_to = c("attr", "group"),
+          names_pattern = "(.*)_(.)",
+          values_to = "val") |>
+        dplyr::arrange(id) |>
         tidyr::pivot_wider(names_from = attr,
                            values_from = val,
                            values_fn = list) |>
         tidyr::unnest(cols = dplyr::any_of(c('name', 'covered', 'type', 'category', 'ndc', 'pdi'))) |>
-        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA))
+        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA)) |>
+        dplyr::filter(!is.na(name)) |>
+        dplyr::mutate(group = as.integer(group),
+                      pay_total = dplyr::if_else(group > 1, NA, pay_total))
     }
-    if (na.rm) {results <- narm(results)}
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }

@@ -148,6 +148,11 @@ type and address.
 }
 
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+hospitals(pac_org = 6103733050)
+
+hospitals(state = "GA", reh = TRUE)
+
 hospitals(city = "Savannah", state = "GA") |>
           dplyr::select(organization, subgroup)
 
@@ -158,10 +163,6 @@ hospitals(city = "Savannah", state = "GA",
 hospitals(city = "Savannah", state = "GA",
           subgroup = list(gen = TRUE, rehab = FALSE)) |>
           dplyr::select(organization, subgroup)
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-hospitals(pac_org = 6103733050)
-
-hospitals(state = "GA", reh = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -164,7 +164,7 @@ characters to be entered, e.g. \code{"jo*"}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes(npi = 1528060837)
 
-nppes(city = "CARROLLTON", state = "GA", zip = 301173889)
+nppes(city = "CARROLLTON", state = "GA", zip = 301173889, entype = "I")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

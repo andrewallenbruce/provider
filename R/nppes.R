@@ -107,7 +107,7 @@
 #' @examplesIf interactive()
 #' nppes(npi = 1528060837)
 #'
-#' nppes(city = "CARROLLTON", state = "GA", zip = 301173889)
+#' nppes(city = "CARROLLTON", state = "GA", zip = 301173889, entype = "I")
 #' @autoglobal
 #' @export
 nppes <- function(npi = NULL,
@@ -133,7 +133,8 @@ nppes <- function(npi = NULL,
 
   if (!is.null(entype)) {
     entype <- rlang::arg_match(entype, c("I", "O"))
-    entype <- entype_arg(entype)}
+    entype <- dplyr::case_when(entype == "I" ~ "NPI-1", entype == "O" ~ "NPI-2")
+  }
 
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,

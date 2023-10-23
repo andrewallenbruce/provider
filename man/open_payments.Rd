@@ -2,7 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Provider Financial Relationships}
+\title{Provider Financial Relationships with Drug & Medical Device Companies}
 \usage{
 open_payments(
   year,
@@ -91,19 +91,23 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 
 \code{\link[=open_payments]{open_payments()}} allows the user access to CMS' Open Payments Program API
 
-The Open Payments program is a national disclosure program that collects and
+The \strong{Open Payments} program is a national disclosure program that collects and
 publishes information about financial relationships between drug and medical
 device companies (referred to as "reporting entities") and certain health
 care providers (referred to as "covered recipients"). These relationships may
 involve payments to providers for things including but not limited to
 research, meals, travel, gifts or speaking fees.
+}
+\section{Terminology}{
 
-\strong{Applicable Group Purchasing Organizations} (GPOs): Entities that operate
+\strong{Reporting Entities}: Applicable manufacturers or GPOs.
+
+\strong{Applicable Group Purchasing Organizations} (GPOs) are entities that operate
 in the United States and purchase, arrange for or negotiate the purchase of
 covered drugs, devices, biologicals, or medical supplies for a group of
 individuals or entities, but not solely for use by the entity itself.
 
-\strong{Applicable Manufacturers}: Entities that operate in the United States and
+\strong{Applicable Manufacturers} are entities that operate in the United States and
 are (1) engaged in the production, preparation, propagation, compounding, or
 conversion of a covered drug, device, biological, or medical supply, but not
 if such covered drug, device, biological or medical supply is solely for use
@@ -117,30 +121,30 @@ respect to the production, preparation, propagation, compounding, conversion,
 marketing, promotion, sale, or distribution of a covered drug, device,
 biological or medical supply.
 
-\strong{Reporting Entities}: Applicable manufacturers or GPOs.
-
-\strong{Covered Recipients}: Any physician, physician assistant, nurse
+\strong{Covered Recipients} are any physician, physician assistant, nurse
 practitioner, clinical nurse specialist, certified registered nurse
 anesthetist, or certified nurse-midwife who is not a bona fide employee of
 the applicable manufacturer that is reporting the payment; or a teaching
 hospital, which is any institution that received a payment.
 
-\strong{Teaching Hospitals}: Hospitals that receive payment for Medicare direct
+\strong{Teaching Hospitals} are hospitals that receive payment for Medicare direct
 graduate medical education (GME), IPPS indirect medical education (IME), or
 psychiatric hospital IME programs.
 
-\strong{Natures of Payment}: Categories that must be used to describe why a
+\strong{Natures of Payment} are categories that must be used to describe why a
 payment or other transfer of value was made. They are only applicable to
 the “general” payment type, not research or ownership. The categories are:
 \itemize{
 \item Acquisitions (2021 - current)
-\item Charitable contributions
+\item Charitable contributions:
+\itemize{
 \item Compensation for services other than consulting
 \item Compensation for serving as faculty or speaker for:
 \itemize{
 \item An accredited or certified continuing education program (2013 - 2020)
 \item An unaccredited and non-certified continuing education program (2013 - 2020)
 \item A medical education program (2021 - current)
+}
 }
 \item Consulting fees
 \item Current or prospective ownership or investment interest (prior to 2023)
@@ -157,7 +161,7 @@ the “general” payment type, not research or ownership. The categories are:
 \item Travel and lodging
 }
 
-\strong{Transfers of Value}: Anything of value given by an applicable manufacturer
+\strong{Transfers of Value} are anything of value given by an applicable manufacturer
 or applicable GPO to a covered recipient or physician owner/investor that
 does not fall within one of the excluded categories in the rule.
 
@@ -173,15 +177,21 @@ does not fall within one of the excluded categories in the rule.
 }
 
 This may be direct or indirect and through debt, equity or other means.
+}
 
-Links:
+\section{Links}{
+
 \itemize{
 \item \href{https://www.cms.gov/priorities/key-initiatives/open-payments}{What is the Open Payments Program?}
 \item \href{https://www.cms.gov/OpenPayments/Resources}{Open Payments: General Resources}
 }
-
-\emph{Update Frequency:} \strong{Yearly}
 }
+
+\section{Update Frequency}{
+
+Yearly
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 open_payments(year = 2021, npi = 1043218118)
@@ -189,5 +199,10 @@ open_payments(year = 2021, pay_nature = "Royalty or License")
 open_payments(year = 2021, pay_form = "Stock option")
 open_payments(year = 2021, payer = "Adaptive Biotechnologies Corporation")
 open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
+
+# Use the years helper function to retrieve results for all avaliable years:
+open_years() |>
+map(\(x) open_payments(year = x, npi = 1043477615)) |>
+list_rbind()
 \dontshow{\}) # examplesIf}
 }

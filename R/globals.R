@@ -161,8 +161,12 @@ utils::globalVariables(c(
   "covered_recipient_type", # <open_payments>
   "nature_of_payment_or_transfer_of_value", # <open_payments>
   "address", # <open_payments>
+  "name_1", # <open_payments>
   "val", # <open_payments>
   "covered", # <open_payments>
+  "name", # <open_payments>
+  "group", # <open_payments>
+  "pay_total", # <open_payments>
   "title", # <open_ids>
   "modified", # <open_ids>
   "distribution", # <open_ids>

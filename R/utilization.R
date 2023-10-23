@@ -238,12 +238,11 @@ by_provider <- function(year,
   rlang::check_required(year)
   year <- as.character(year)
   year <- rlang::arg_match(year, as.character(pop_years()))
-
-  if (!is.null(npi))  {npi  <- check_npi(npi)}
-  if (!is.null(zip))  {zip  <- as.character(zip)}
-  if (!is.null(fips)) {fips <- as.character(fips)}
-  if (!is.null(ruca)) {ruca <- as.character(ruca)}
-  if (!is.null(par))  {par  <- tf_2_yn(par)}
+  npi  <- npi %nn% check_npi(npi)
+  zip  <- zip %nn% as.character(zip)
+  fips <- fips %nn% as.character(fips)
+  ruca <- ruca %nn% as.character(ruca)
+  par  <- par %nn% tf_2_yn(par)
 
   args <- dplyr::tribble(
     ~param,                           ~arg,
@@ -476,14 +475,15 @@ by_service <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(pop_years()))
 
-  if (!is.null(npi))        {npi        <- check_npi(npi)}
-  if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
-  if (!is.null(pos))        {pos        <- pos_char(pos)}
-  if (!is.null(zip))        {zip        <- as.character(zip)}
-  if (!is.null(fips))       {fips       <- as.character(fips)}
-  if (!is.null(ruca))       {ruca       <- as.character(ruca)}
-  if (!is.null(par))        {par        <- tf_2_yn(par)}
-  if (!is.null(drug))       {drug       <- tf_2_yn(drug)}
+  npi   <- npi %nn% check_npi(npi)
+  zip   <- zip %nn% as.character(zip)
+  fips  <- fips %nn% as.character(fips)
+  ruca  <- ruca %nn% as.character(ruca)
+  hcpcs_code <- hcpcs_code %nn% as.character(hcpcs_code)
+  par   <- par %nn% tf_2_yn(par)
+  drug  <- drug %nn% tf_2_yn(drug)
+  pos   <- pos %nn% pos_char(pos)
+
 
   args <- dplyr::tribble(
                            ~param,  ~arg,
@@ -717,17 +717,17 @@ by_geography <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(pop_years()))
 
-  if (!is.null(level))      {rlang::arg_match(level, c("National", "State"))}
-  if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
-  if (!is.null(fips))       {fips <- as.character(fips)}
-  if (!is.null(drug))       {drug <- tf_2_yn(drug)}
+  level  <- level %nn% rlang::arg_match(level, c("National", "State"))
+  fips   <- fips %nn% as.character(fips)
+  hcpcs_code <- hcpcs_code %nn% as.character(hcpcs_code)
+  drug   <- drug %nn% tf_2_yn(drug)
 
   if (!is.null(pos)) {
     pos <- pos_char(pos)
     rlang::arg_match(pos, c("F", "O"))
   }
 
-  if (!is.null(state) && (state %in% state.abb)) {state <- abb2full(state)}
+  if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
 
   args <- dplyr::tribble(
     ~param,                  ~arg,

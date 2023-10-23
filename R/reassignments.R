@@ -56,11 +56,11 @@ reassignments <- function(npi = NULL,
                           tidy = TRUE,
                           na.rm = TRUE) {
 
-  if (!is.null(npi))      {npi <- check_npi(npi)}
-  if (!is.null(pac))      {pac <- check_pac(pac)}
-  if (!is.null(pac_org))  {pac_org <- check_pac(pac_org)}
-  if (!is.null(enid))     {check_enid(enid)}
-  if (!is.null(enid_org)) {check_enid(enid_org)}
+  npi      <- npi %nn% check_npi(npi)
+  pac      <- pac %nn% check_pac(pac)
+  pac_org  <- pac_org %nn% check_pac(pac_org)
+  enid     <- enid %nn% check_enid(enid)
+  enid_org <- enid_org %nn% check_enid(enid_org)
 
   if (!is.null(entry)) {
     rlang::arg_match(entry, c("E", "R"))
