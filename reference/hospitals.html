@@ -249,54 +249,21 @@ Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</cod
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Savannah"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, reh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Savannah"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>          <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">organization</span>, <span class="va">subgroup</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    organization                                                         subgroup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SELECT SPECIALTY HOSPITAL - SAVANNAH INC                             Long-te…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SAINT JOSEPHS HOSPITAL INC                                           General </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SAINT JOSEPHS HOSPITAL INC                                           Acute C…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> UHS OF SAVANNAH LLC                                                  Psychia…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CANDLER HOSPITAL INCORPORATED                                        Acute C…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> CANDLER HOSPITAL INCORPORATED                                        Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SAINT JOSEPHS HOSPITAL INC                                           Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> GEORGIA DEPARTMENT OF BEHAVIORAL HEALTH AND DEVELOPMENTAL DISABILIT… Psychia…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> CANDLER HOSPITAL INCORPORATED                                        General </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> CANDLER HOSPITAL INCORPORATED                                        Acute C…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> CANDLER HOSPITAL INCORPORATED                                        Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ENCOMPASS HEALTH REHABILITATION HOSPITAL OF SAVANNAH, LLC            Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> LANDMARK HOSPITAL OF SAVANNAH LLC                                    Long-te…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> SAVANNAH HEALTH SERVICES, LLC                                        General </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> SAVANNAH HEALTH SERVICES, LLC                                        Acute C…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Savannah"</span>, state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
 <span class="r-in"><span>          subgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>          <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">organization</span>, <span class="va">subgroup</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   organization                                                          subgroup</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> SELECT SPECIALTY HOSPITAL - SAVANNAH INC                              Long-te…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF SAVANNAH LLC                                                   Psychia…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> SAINT JOSEPHS HOSPITAL INC                                            Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GEORGIA DEPARTMENT OF BEHAVIORAL HEALTH AND DEVELOPMENTAL DISABILITI… Psychia…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ENCOMPASS HEALTH REHABILITATION HOSPITAL OF SAVANNAH, LLC             Rehabil…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> LANDMARK HOSPITAL OF SAVANNAH LLC                                     Long-te…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Savannah"</span>, state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
 <span class="r-in"><span>          subgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>gen <span class="op">=</span> <span class="cn">TRUE</span>, rehab <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>          <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">organization</span>, <span class="va">subgroup</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   organization                  subgroup  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> SAINT JOSEPHS HOSPITAL INC    General   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> SAINT JOSEPHS HOSPITAL INC    Acute Care</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> SAVANNAH HEALTH SERVICES, LLC General   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> SAVANNAH HEALTH SERVICES, LLC Acute Care</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, reh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
