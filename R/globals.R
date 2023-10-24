@@ -61,7 +61,6 @@ utils::globalVariables(c(
   "level", # <compare_conditions>
   "prevalence", # <compare_conditions>
   "condition", # <compare_conditions>
-  "prov_tbl", # <compare_conditions>
   "state", # <compare_conditions>
   "sublevel", # <compare_conditions>
   "state.abb", # <conditions>

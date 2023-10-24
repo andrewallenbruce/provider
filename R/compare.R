@@ -139,7 +139,7 @@ compare_conditions <- function(df, pivot = FALSE) {
                   .keep = "none")
 
   s <- dplyr::left_join(dplyr::select(p, year, condition),
-                        dplyr::select(prov_tbl, year, sublevel = state),
+                        dplyr::select(df, year, sublevel = state),
                         by = dplyr::join_by(year)) |>
     dplyr::rowwise() |>
     dplyr::mutate(statewide = conditions(year,

@@ -138,6 +138,7 @@ display_long <- function(df) {
         tidyr::pivot_longer(dplyr::everything())
 }
 
+#' Tidy a Data Frame
 #' @param df data frame
 #' @param dt cols to convert to date with [anytime::anydate()]
 #' @param yn cols to convert to logical
@@ -148,8 +149,10 @@ display_long <- function(df) {
 #' @param cred cols to remove periods from
 #' @param ent cols to convert to NPI entity type
 #' @param yr cols to convert to year with [dint::as_date_y()]
+#' @returns tidy data frame
 #' @autoglobal
-#' @noRd
+#' @export
+#' @keywords internal
 tidyup <- function(df,
                    dt = c("date"),
                    yn = NULL,
@@ -203,17 +206,24 @@ combine <- function(df, nm, cols, sep = " ", type = "any") {
 
 }
 
+#' Remove empty rows and columns
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-narm <- function(df) janitor::remove_empty(df, which = c("rows", "cols"))
+narm <- function(df) {
+  janitor::remove_empty(df, which = c("rows", "cols"))
+}
 
+#' Return GitHub raw url
 #' @param x url
+#' @returns raw url
 #' @examplesIf interactive()
 #' github_raw("andrewallenbruce/provider/")
 #' @autoglobal
 #' @noRd
-github_raw <- function(x) paste0("https://raw.githubusercontent.com/", x)
+github_raw <- function(x) {
+  paste0("https://raw.githubusercontent.com/", x)
+}
 
 #' @param param API parameter
 #' @param arg API function arg

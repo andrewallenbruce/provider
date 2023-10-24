@@ -39,3 +39,10 @@
       ! `type` must be one of "filter" or "sql", not "filthy".
       i Did you mean "filter"?
 
+# format_cli() works
+
+    Code
+      format_cli(args)
+    Message
+      x No results for NPI = 1144544834
+

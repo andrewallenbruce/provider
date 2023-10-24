@@ -34,6 +34,7 @@ library(gt)
 
 ```{r}
 providers(pac = 7810891009) |> 
+  display_long() |> 
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
@@ -41,6 +42,7 @@ providers(pac = 7810891009) |>
 
 ```{r}
 reassignments(pac = 7810891009) |>
+  display_long() |> 
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
@@ -48,6 +50,7 @@ reassignments(pac = 7810891009) |>
 
 ```{r}
 clinicians(pac = 7810891009) |> 
+  display_long() |> 
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
@@ -65,7 +68,7 @@ affiliations(pac = 7810891009) |>
 ```{r}
 a <- affiliations(pac = 7810891009) |> 
   pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x, pivot = FALSE))
+  map_dfr(~hospitals(facility_ccn = .x))
 
 a |> gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
@@ -84,7 +87,7 @@ providers(organization = "Elizabethtown Community Hospital") |>
 
 
 ```{r}
-hospitals(organization = "Elizabethtown Community Hospital", pivot = FALSE) |> 
+hospitals(organization = "Elizabethtown Community Hospital") |> 
   gt_preview(top_n = 10) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
