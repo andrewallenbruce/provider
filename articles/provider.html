@@ -303,12 +303,9 @@ years:</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">practice_size</span><span class="op">:</span><span class="va">payment_adjustment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `npi_id = dplyr:consecutive_id(npi)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'dplyr' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()` at gt/R/gt_preview.R:103:2:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `practice_size` doesn't exist.</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
