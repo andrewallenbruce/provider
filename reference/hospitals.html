@@ -124,27 +124,33 @@ type and address.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit Organizational National Provider Identifier</p></dd>
+<dd><p>&lt; <em>integer</em> &gt;</p>
+<p>10-digit Organizational National Provider Identifier</p></dd>
 
 
 <dt>facility_ccn</dt>
-<dd><p>&lt; <em>integer</em> &gt; 6-digit CMS Certification Number</p></dd>
+<dd><p>&lt; <em>integer</em> &gt;</p>
+<p>6-digit CMS Certification Number</p></dd>
 
 
 <dt>enid_org</dt>
-<dd><p>&lt; <em>character</em> &gt; 15-digit Organizational Medicare Enrollment ID</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>15-digit Organizational Medicare Enrollment ID</p></dd>
 
 
 <dt>enid_state</dt>
-<dd><p>&lt; <em>character</em> &gt; Hospital’s enrollment state</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>Hospital’s enrollment state</p></dd>
 
 
 <dt>pac_org</dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit Organizational PECOS Associate Control ID</p></dd>
+<dd><p>&lt; <em>integer</em> &gt;</p>
+<p>10-digit Organizational PECOS Associate Control ID</p></dd>
 
 
 <dt>specialty_code</dt>
-<dd><p>&lt; <em>character</em> &gt; Medicare Part A Provider specialty code:</p><ul><li><p><code>"00-00"</code>: Religious Non-Medical Healthcare Institution (RNHCI)</p></li>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>Medicare Part A Provider specialty code:</p><ul><li><p><code>"00-00"</code>: Religious Non-Medical Healthcare Institution (RNHCI)</p></li>
 <li><p><code>"00-01"</code>: Community Mental Health Center</p></li>
 <li><p><code>"00-02"</code>: Comprehensive Outpatient Rehabilitation Facility (CORF)</p></li>
 <li><p><code>"00-03"</code>: End-Stage Renal Disease Facility (ESRD)</p></li>
@@ -165,43 +171,52 @@ type and address.</p>
 
 
 <dt>organization</dt>
-<dd><p>&lt; <em>character</em> &gt; Hospital’s legal business name</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>Hospital’s legal business name</p></dd>
 
 
 <dt>dba</dt>
-<dd><p>&lt; <em>character</em> &gt; Hospital’s doing-business-as name</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>Hospital’s doing-business-as name</p></dd>
 
 
 <dt>city</dt>
-<dd><p>&lt; <em>character</em> &gt; City of the hospital’s practice location</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>City of the hospital’s practice location</p></dd>
 
 
 <dt>state</dt>
-<dd><p>&lt; <em>character</em> &gt; State of the hospital’s practice location</p></dd>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>State of the hospital’s practice location</p></dd>
 
 
 <dt>zip</dt>
-<dd><p>&lt; <em>integer</em> &gt; Zip code of the hospital’s practice location</p></dd>
+<dd><p>&lt; <em>integer</em> &gt;</p>
+<p>Zip code of the hospital’s practice location</p></dd>
 
 
 <dt>registration</dt>
-<dd><p>&lt; <em>character</em> &gt; Hospital's IRS designation:</p><ul><li><p><code>"P"</code>: Registered as <strong>Proprietor</strong></p></li>
+<dd><p>&lt; <em>character</em> &gt;</p>
+<p>Hospital's IRS designation:</p><ul><li><p><code>"P"</code>: Registered as <strong>Proprietor</strong></p></li>
 <li><p><code>"N"</code>: Registered as <strong>Non-Profit</strong></p></li>
 </ul></dd>
 
 
 <dt>multi_npi</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Indicates hospital has more than one NPI</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt;</p>
+<p>Indicates hospital has more than one NPI</p></dd>
 
 
 <dt>reh</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Indicates a former Hospital or Critical Access
-Hospital (CAH) that converted to a Rural Emergency Hospital (REH)</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt;</p>
+<p>Indicates a former Hospital or Critical Access Hospital (CAH) that
+converted to a Rural Emergency Hospital (REH)</p></dd>
 
 
 <dt>subgroup</dt>
-<dd><p>&lt; <em>list</em> &gt; <code>subgroup = list(acute = TRUE, swing = FALSE)</code>
-Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
+<dd><p>&lt; <em>list</em> &gt;</p>
+<p><code>subgroup = list(acute = TRUE, swing = FALSE)</code></p>
+<p>Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
 <li><p><code>alc_drug</code>: Alcohol/Drug</p></li>
 <li><p><code>child</code>: Children's Hospital</p></li>
 <li><p><code>gen</code>: General</p></li>
@@ -218,15 +233,18 @@ Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</cod
 
 
 <dt>tidy</dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<p>Tidy output</p></dd>
 
 
 <dt>pivot</dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Pivot output</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<p>Pivot output</p></dd>
 
 
 <dt>na.rm</dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<p>Remove empty rows and columns</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -240,12 +258,6 @@ Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</cod
 
 <ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments" class="external-link">Hospital Enrollments</a></p></li>
 </ul></div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="clinicians.html">clinicians()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="affiliations.html">affiliations()</a></code></p>
-<p>Other api: 
-<code><a href="nppes.html">nppes</a>()</code></p></div>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

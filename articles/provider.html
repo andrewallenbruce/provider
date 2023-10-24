@@ -339,8 +339,8 @@ job or location changes.</p>
 <span><span class="co"># Must pass Luhn check</span></span>
 <span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"P"</span>, npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `type` must be one of "p" or "n", not "P".</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mean "p"?</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
