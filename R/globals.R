@@ -7,6 +7,23 @@ utils::globalVariables(c(
   "y", # <beneficiaries>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
+  "distro", # <by_provider>
+  "y", # <by_provider>
+  "address", # <by_provider>
+  "medical", # <by_provider>
+  "drug", # <by_provider>
+  "distro", # <by_service>
+  "y", # <by_service>
+  "address", # <by_service>
+  "hcpcs_code", # <rbcs_util>
+  "category", # <rbcs_util>
+  "subcategory", # <rbcs_util>
+  "family", # <rbcs_util>
+  "procedure", # <rbcs_util>
+  "state.abb", # <by_geography>
+  "distro", # <by_geography>
+  "y", # <by_geography>
+  "place_of_srvc", # <by_geography>
   "copy", # <ror>
   ":=", # <ror>
   "lg", # <ror>
@@ -225,23 +242,6 @@ utils::globalVariables(c(
   "display_name", # <download_nucc_csv>
   "definition", # <download_nucc_csv>
   "y", # <taxonomy_crosswalk>
-  "distro", # <by_provider>
-  "y", # <by_provider>
-  "address", # <by_provider>
-  "medical", # <by_provider>
-  "drug", # <by_provider>
-  "distro", # <by_service>
-  "y", # <by_service>
-  "address", # <by_service>
-  "hcpcs_code", # <rbcs_util>
-  "category", # <rbcs_util>
-  "subcategory", # <rbcs_util>
-  "family", # <rbcs_util>
-  "procedure", # <rbcs_util>
-  "state.abb", # <by_geography>
-  "distro", # <by_geography>
-  "y", # <by_geography>
-  "place_of_srvc", # <by_geography>
   "state.abb", # <utilization>
   "distro", # <utilization>
   "y", # <utilization>

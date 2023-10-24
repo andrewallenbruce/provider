@@ -26,7 +26,7 @@
 #' All Medicare Part B service codes, including non-physician services, are
 #' assigned to a 6-character RBCS taxonomy code.
 #'
-#' Links:
+#' @section Links:
 #'
 #' + [Restructured BETOS Classification System](https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system)
 #' + [RBCS Data Dictionary](https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary)

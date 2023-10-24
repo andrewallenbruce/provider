@@ -98,9 +98,6 @@ reference:
   - open_payments
   - quality_payment
   - utilization
-  - by_provider
-  - by_service
-  - by_geography
 
 - title: Classifications
   desc: >

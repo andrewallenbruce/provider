@@ -68,8 +68,10 @@ as the most aggregate level and families as the more granular level.
 
 All Medicare Part B service codes, including non-physician services, are
 assigned to a 6-character RBCS taxonomy code.
+}
 
-Links:
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system}{Restructured BETOS Classification System}
 \item \href{https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary}{RBCS Data Dictionary}

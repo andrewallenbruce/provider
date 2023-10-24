@@ -99,9 +99,9 @@ opt_out <- function(npi = NULL,
                     order_refer = NULL,
                     tidy = TRUE) {
 
-  if (!is.null(npi))         {npi         <- check_npi(npi)}
-  if (!is.null(order_refer)) {order_refer <- tf_2_yn(order_refer)}
-  if (!is.null(zip))         {zip         <- as.character(zip)}
+  npi         <- npi %nn% validate_npi(npi)
+  order_refer <- order_refer %nn% tf_2_yn(order_refer)
+  zip         <- zip %nn% as.character(zip)
 
   args <- dplyr::tribble(
     ~param,                         ~arg,

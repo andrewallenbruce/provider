@@ -25,6 +25,33 @@
       ! An NPI must be numeric.
       x "O12345678912" contains non-numeric characters.
 
+# validate_npi() works
+
+    Code
+      validate_npi(1234567891)
+    Condition
+      Error:
+      ! "1234567891" is not a valid NPI.
+      > Did you mean "1234567893"?
+
+---
+
+    Code
+      validate_npi(12345691234)
+    Condition
+      Error:
+      ! An NPI must be 10 digits long.
+      x 12345691234 contains 11 digits.
+
+---
+
+    Code
+      validate_npi("O12345678912")
+    Condition
+      Error:
+      ! An NPI must be numeric.
+      x "O12345678912" contains non-numeric characters.
+
 # check_pac() works
 
     Code

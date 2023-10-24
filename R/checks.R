@@ -1,4 +1,93 @@
-#' NPI Validation Check
+#' NPI Validation Check Version 2
+#'
+#' @description
+#' [validate_npi()] checks validity of NPI input against CMS requirements,
+#' using the Modulus 10 “double-add-double” Check Digit variation of the Luhn algorithm
+#'
+#' @section National Provider Identifier (NPI):
+#' + [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+#' + [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
+#'
+#' @param npi 10-digit National Provider Identifier (NPI)
+#' @return character vector
+#' @examplesIf interactive()
+#' # Valid:
+#' validate_npi(1528060837)
+#' validate_npi("1528060837")
+#'
+#' # Invalid:
+#' validate_npi(1234567891)
+#' validate_npi(123456789)
+#' validate_npi("152806O837")
+#' @autoglobal
+#' @noRd
+validate_npi <- function(npi,
+                         arg = rlang::caller_arg(npi),
+                         call = rlang::caller_env()) {
+
+  # Must be numeric
+  if (grepl("^[[:digit:]]+$", npi) == FALSE) {
+    cli::cli_abort(c(
+      "An {.strong NPI} must be {.emph numeric}.",
+      "x" = "{.val {npi}} contains {.emph non-numeric} characters."),
+      call = call)
+  }
+
+  # Must be 10 char length
+  if (nchar(npi) != 10L) {
+    cli::cli_abort(c(
+      "An {.strong NPI} must be {.emph 10 digits long}.",
+      "x" = "{.val {npi}} contains {.val {nchar(npi)}} digit{?s}."),
+      call = call)
+  }
+
+  # Must pass Luhn algorithm
+  npi_test <- as.character(npi)
+
+  # Remove the 10th digit to create the 9-position identifier part of the NPI
+  id <- unlist(strsplit(npi_test, ""), use.names = FALSE)[1:9]
+
+  # Reverse order of digits
+  x <- rev(id)
+
+  # Select index of every other digit
+  idx <- seq(1, length(x), 2)
+
+  # Double the value of the alternate digits
+  x[idx] <- as.numeric(x[idx]) * 2
+
+  # Reverse order of digits again
+  x <- rev(x)
+
+  # Split and unlist to separate digits
+  x <- unlist(strsplit(x, ""), use.names = FALSE)
+
+  # Add constant 24 to the sum of the digits
+  x <- sum(as.numeric(x)) + 24
+
+  # Find the next higher number ending in zero
+  y <- ceiling(x / 10) * 10
+
+  # Find the check digit by subtracting x from y
+  z <- y - x
+
+  # Append the check digit to the end of the 9-digit identifier
+  id[10] <- z
+
+  # Collapse the vector into a single string
+  npi_valid <- paste0(id, collapse = "")
+
+  # Is the syntactically valid NPI identical to the test NPI?
+  if (!identical(npi_valid, npi_test)) {
+    cli::cli_abort(c(
+      "{.val {npi_test}} is not a valid NPI.",
+      ">" = "Did you mean {.val {npi_valid}}?"),
+      call = call)
+  }
+  return(npi_test)
+}
+
+#' NPI Validation Check Version 1
 #'
 #' @description checks validity of NPI input against CMS requirements.
 #'
@@ -169,7 +258,7 @@ check_enid <- function(x,
       "x" = "{.val {x}} contains {.val {nchar(x)}} character{?s}."), call = call)
   }
 
-  first <- unlist(strsplit(x, ""))[1]
+  first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
 
   if ((first %in% c("I", "O")) != TRUE) {
 
@@ -180,7 +269,7 @@ check_enid <- function(x,
   }
 
   if (!is.null(type) && type %in% "ind") {
-    first <- unlist(strsplit(x, ""))[1]
+    first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
     if (first != "I") {
       cli::cli_abort(c(
         "An {.strong Individual Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
@@ -189,7 +278,7 @@ check_enid <- function(x,
   }
 
   if (!is.null(type) && type %in% "org") {
-    first <- unlist(strsplit(x, ""))[1]
+    first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
     if (first != "O") {
       cli::cli_abort(c(
         "An {.strong Organizational Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
