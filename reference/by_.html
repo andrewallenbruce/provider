@@ -82,7 +82,7 @@ by provider, service and geography."><meta property="og:image" content="https://
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Provider Utilization &amp; Demographics Individual Functions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/R/by_.R" class="external-link"><code>R/by_.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/R/deprecated.R" class="external-link"><code>R/deprecated.R</code></a></small>
       <div class="d-none name"><code>by_.Rd</code></div>
     </div>
 
@@ -116,7 +116,8 @@ by provider, service and geography.</p>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  nest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  detailed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">by_service</span><span class="op">(</span></span>
@@ -141,7 +142,8 @@ by provider, service and geography.</p>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">by_geography</span><span class="op">(</span></span>
@@ -154,7 +156,8 @@ by provider, service and geography.</p>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -236,6 +239,10 @@ Medicare and/or accepts assignment of Medicare allowed amounts</p></dd>
 
 <dt>na.rm</dt>
 <dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
+
+
+<dt>...</dt>
+<dd><p>description</p></dd>
 
 
 <dt>hcpcs_code</dt>
