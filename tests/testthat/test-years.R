@@ -1,3 +1,11 @@
+test_that("pop_years() works", {
+
+  pop <- pop_years()
+  expect_equal(pop, 2013:2021)
+  expect_vector(pop, ptype = integer(), size = 9)
+
+})
+
 test_that("open_years() works", {
 
   open <- open_years()
@@ -6,11 +14,12 @@ test_that("open_years() works", {
 
 })
 
-test_that("pop_years() works", {
 
-  pop <- pop_years()
-  expect_equal(pop, 2013:2021)
-  expect_vector(pop, ptype = integer(), size = 9)
+test_that("util_years() works", {
+
+  util <- util_years()
+  expect_equal(util, 2013:2021)
+  expect_vector(util, ptype = integer(), size = 9)
 
 })
 

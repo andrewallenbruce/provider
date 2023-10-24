@@ -2,16 +2,19 @@
 % Please edit documentation in R/years.R
 \name{years}
 \alias{years}
-\alias{open_years}
 \alias{pop_years}
+\alias{open_years}
+\alias{util_years}
 \alias{cc_years}
 \alias{qpp_years}
 \alias{bene_years}
 \title{Years Currently Searchable for APIs}
 \usage{
+pop_years()
+
 open_years()
 
-pop_years()
+util_years()
 
 cc_years()
 
@@ -30,11 +33,20 @@ Years Currently Searchable for APIs
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# `beneficiaries()`
 bene_years("year")
 bene_years("month")
+
+# `open_payments()`
 open_years()
-pop_years()
+
+# `utilization()`
+util_years()
+
+# `conditions()`
 cc_years()
+
+# `quality_payment()`
 qpp_years()
 \dontshow{\}) # examplesIf}
 }

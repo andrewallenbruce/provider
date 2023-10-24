@@ -1,3 +1,11 @@
+# abb2full() works
+
+    Code
+      abb2full("YN")
+    Condition
+      Error:
+      ! "YN" is not a valid state abbreviation.
+
 # format_param() works
 
     Code

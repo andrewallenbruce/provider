@@ -74,7 +74,7 @@ after those returned}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{nppes()} allows the user to search the National Plan and Provider
+\code{\link[=nppes]{nppes()}} allows the user to search the National Plan and Provider
 Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
 records.
 }
@@ -152,7 +152,7 @@ statutes, regulations, and program instructions of the Medicare program.
 \section{Trailing Wildcard Entries}{
 
 Arguments that allow trailing wildcard entries are denoted in the parameter
-description with \verb{// __WC__}. Wildcard entries require at least two
+description with \strong{WC}. Wildcard entries require at least two
 characters to be entered, e.g. \code{"jo*"}
 }
 

@@ -1,7 +1,7 @@
 #' National Registry of Health Care Providers
 #'
 #' @description
-#' `nppes()` allows the user to search the National Plan and Provider
+#' [nppes()] allows the user to search the National Plan and Provider
 #' Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
 #' records.
 #'
@@ -68,7 +68,7 @@
 #'
 #' @section Trailing Wildcard Entries:
 #' Arguments that allow trailing wildcard entries are denoted in the parameter
-#' description with `// __WC__`. Wildcard entries require at least two
+#' description with __WC__. Wildcard entries require at least two
 #' characters to be entered, e.g. `"jo*"`
 #'
 #' @section Update Frequency: __Weekly__
@@ -127,7 +127,7 @@ nppes <- function(npi = NULL,
                   tidy = TRUE,
                   na.rm = TRUE) {
 
-  npi       <- npi %nn% check_npi(npi)
+  npi       <- npi %nn% validate_npi(npi)
   name_type <- name_type %nn% rlang::arg_match(name_type, c("AO", "Provider"))
   zip       <- zip %nn% as.character(zip)
 

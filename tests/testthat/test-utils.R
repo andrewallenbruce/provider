@@ -25,6 +25,11 @@ test_that("tf_2_yn() works", {
   expect_equal(tf_2_yn(x), y)
 })
 
+test_that("abb2full() works", {
+  expect_equal(abb2full("GA"), "Georgia")
+  expect_snapshot(abb2full("YN"), error = TRUE)
+})
+
 test_that("pos_char() works", {
   x <- c("facility", "Facility", "F", "f", "office", "Office", "O", "o")
   y <- c(rep("F", 4), rep("O", 4))

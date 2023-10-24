@@ -85,11 +85,20 @@ tf_2_yn <- function(x) {
 #' @return state full name
 #' @autoglobal
 #' @noRd
-abb2full <- function(abb) {
-  dplyr::tibble(x = state.abb,
-                y = state.name) |>
+abb2full <- function(abb,
+                     arg = rlang::caller_arg(abb),
+                     call = rlang::caller_env()) {
+
+  results <- dplyr::tibble(x = state.abb,
+                           y = state.name) |>
     dplyr::filter(x == abb) |>
     dplyr::pull(y)
+
+  if (vctrs::vec_is_empty(results)) {
+    cli::cli_abort(c("{.val {abb}} is not a valid state abbreviation."),
+                   call = call)
+  }
+  return(results)
 }
 
 #' Convert Place of Service values

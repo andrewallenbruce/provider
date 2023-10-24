@@ -3,15 +3,33 @@
 #' @returns integer vector of years available to search
 #'
 #' @examplesIf interactive()
+#' # `beneficiaries()`
 #' bene_years("year")
 #' bene_years("month")
+#'
+#' # `open_payments()`
 #' open_years()
-#' pop_years()
+#'
+#' # `utilization()`
+#' util_years()
+#'
+#' # `conditions()`
 #' cc_years()
+#'
+#' # `quality_payment()`
 #' qpp_years()
+#'
 #' @name years
 #' @keywords internal
 NULL
+
+#' @rdname years
+#' @autoglobal
+#' @export
+#' @keywords internal
+pop_years <- function() {
+  as.integer(cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
+}
 
 #' @rdname years
 #' @autoglobal
@@ -23,7 +41,7 @@ open_years <- function() sort(open_ids("General Payment Data")$year)
 #' @autoglobal
 #' @export
 #' @keywords internal
-pop_years <- function() {
+util_years <- function() {
   as.integer(cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
 }
 
