@@ -46,11 +46,11 @@
 #' + [ATCs](https://www.whocc.no/atc/structure_and_principles/)
 #' + [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/overview.html)
 #'
-#' @examples
+#' @examplesIf interactive()
 #' ndc_lookup("0002-1433-80")
 #'
-#' @examplesIf interactive()
 #' medline("0002-1433-80")
+#'
 #' rxnorm("0002-1433-80")
 #'
 #' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code

@@ -7,23 +7,6 @@ utils::globalVariables(c(
   "y", # <beneficiaries>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
-  "distro", # <by_provider>
-  "y", # <by_provider>
-  "address", # <by_provider>
-  "medical", # <by_provider>
-  "drug", # <by_provider>
-  "distro", # <by_service>
-  "y", # <by_service>
-  "address", # <by_service>
-  "hcpcs_code", # <rbcs_util>
-  "category", # <rbcs_util>
-  "subcategory", # <rbcs_util>
-  "family", # <rbcs_util>
-  "procedure", # <rbcs_util>
-  "state.abb", # <by_geography>
-  "distro", # <by_geography>
-  "y", # <by_geography>
-  "place_of_srvc", # <by_geography>
   "copy", # <ror>
   ":=", # <ror>
   "lg", # <ror>
@@ -33,14 +16,9 @@ utils::globalVariables(c(
   "y", # <clinicians>
   "address", # <clinicians>
   "year", # <compare_hcpcs>
-  "state", # <compare_hcpcs>
   "hcpcs_code", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
-  "tot_benes", # <compare_hcpcs>
-  "tot_srvcs", # <compare_hcpcs>
-  "tot_provs", # <compare_hcpcs>
   "level", # <compare_hcpcs>
-  "family", # <compare_hcpcs>
   "year", # <compare_conditions>
   "cc_af", # <compare_conditions>
   "cc_alz", # <compare_conditions>
@@ -100,6 +78,23 @@ utils::globalVariables(c(
   "state.abb", # <cc_specific>
   "distro", # <cc_specific>
   "y", # <cc_specific>
+  "distro", # <by_provider>
+  "y", # <by_provider>
+  "address", # <by_provider>
+  "medical", # <by_provider>
+  "drug", # <by_provider>
+  "distro", # <by_service>
+  "y", # <by_service>
+  "address", # <by_service>
+  "hcpcs_code", # <rbcs_util>
+  "category", # <rbcs_util>
+  "subcategory", # <rbcs_util>
+  "family", # <rbcs_util>
+  "procedure", # <rbcs_util>
+  "state.abb", # <by_geography>
+  "distro", # <by_geography>
+  "y", # <by_geography>
+  "place_of_srvc", # <by_geography>
   "y", # <hospitals>
   "address", # <hospitals>
   "location_type", # <hospitals>

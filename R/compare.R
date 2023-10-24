@@ -25,10 +25,11 @@ NULL
 
 #' @param df < *tbl_df* > // **required** [tibble][tibble::tibble-package]
 #' returned from `utilization(type = "service")`
+#' @param ... For future use.
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_hcpcs <- function(df) {
+compare_hcpcs <- function(df, ...) {
 
   if (!inherits(df, "utilization_service")) {
     cli::cli_abort(c(
@@ -36,32 +37,22 @@ compare_hcpcs <- function(df) {
       "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  x <- df |>
-    dplyr::select(year, state, hcpcs_code, pos) |>
-    dplyr::rowwise() |>
-    dplyr::mutate(state = list(by_geography(year, state, hcpcs_code, pos)),
-                  national = list(by_geography(year, state = "National", hcpcs_code, pos)), .keep = "none")
+  x <- df |> dplyr::select(year, state, hcpcs_code, pos)
 
-  results <- vctrs::vec_rbind(
-    dplyr::rename(df,
-                  beneficiaries = tot_benes,
-                  services = tot_srvcs) |>
-      hcpcs_cols(),
+  x$type <- "geography"
 
-    dplyr::mutate(purrr::list_rbind(x$state),
-                  beneficiaries = tot_benes / tot_provs,
-                  services = tot_srvcs / tot_provs) |>
-      hcpcs_cols(),
+  state <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
-    dplyr::mutate(purrr::list_rbind(x$national),
-                  beneficiaries = tot_benes / tot_provs,
-                  services = tot_srvcs / tot_provs) |>
-      hcpcs_cols()) |>
+  x$state <- "National"
+
+  national <- purrr::pmap(x, by_geography) |> purrr::list_rbind()
+
+  vctrs::vec_rbind(
+    hcpcs_cols(df),
+    hcpcs_cols(state),
+    hcpcs_cols(national)) |>
     dplyr::mutate(level = forcats::fct_inorder(level)) |>
-    dplyr::filter(family != "No RBCS Family")
-
-  return(results)
-
+    dplyr::relocate(providers, .before = beneficiaries)
 }
 
 #' @param df data frame
@@ -71,14 +62,15 @@ hcpcs_cols <- function(df) {
 
   cols <- c('year',
             'level',
-            'hcpcs_code',
+            'hcpcs' = 'hcpcs_code',
             'pos',
             'category',
             'subcategory',
             'family',
             'procedure',
-            'beneficiaries',
-            'services',
+            'providers' ='tot_provs',
+            'beneficiaries' = 'tot_benes',
+            'services' = 'tot_srvcs',
             'avg_charge',
             'avg_allowed',
             'avg_payment',

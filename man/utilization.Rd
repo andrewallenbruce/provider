@@ -30,7 +30,8 @@ utilization(
   nest = TRUE,
   detailed = FALSE,
   rbcs = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -100,6 +101,8 @@ submitted on the claims is a:
 Classifications to HCPCS codes}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+
+\item{...}{For future use.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

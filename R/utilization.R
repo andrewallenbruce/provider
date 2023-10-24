@@ -94,6 +94,7 @@
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest `demographics` and `conditions`
 #' @param detailed < *boolean* > // __default:__ `FALSE` Include `detailed` column
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... For future use.
 #' @autoglobal
 #' @export
 utilization <- function(year,
@@ -121,7 +122,8 @@ utilization <- function(year,
                         nest = TRUE,
                         detailed = FALSE,
                         rbcs = TRUE,
-                        na.rm = TRUE) {
+                        na.rm = TRUE,
+                        ...) {
 
   rlang::check_required(year)
   year <- as.character(year)
