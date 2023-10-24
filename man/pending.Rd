@@ -2,21 +2,29 @@
 % Please edit documentation in R/pending.R
 \name{pending}
 \alias{pending}
-\title{Pending Medicare Applications}
+\title{Pending Medicare Enrollment Applications}
 \usage{
-pending(type = "p", npi = NULL, first = NULL, last = NULL, tidy = TRUE)
+pending(type = "P", npi = NULL, first = NULL, last = NULL, tidy = TRUE)
 }
 \arguments{
-\item{type}{< \emph{character} > // \strong{default:} \code{"p"} Physician (\code{p}) or Non-physician (\code{n})}
+\item{type}{< \code{character} > // \strong{default:} \code{"P"}
 
-\item{npi}{< \emph{integer} > 10-digit National Provider Identifier}
+Physician (\code{P}) or Non-physician (\code{N})}
 
-\item{first, last}{< \emph{character} > Provider's name}
+\item{npi}{< \code{integer} >
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+10-digit National Provider Identifier}
+
+\item{first, last}{< \code{character} >
+
+Provider's name}
+
+\item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE}
+
+Tidy output}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+A \code{\link[=tibble]{tibble()}} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit individual NPI \cr
    \code{first} \tab Provider's first name \cr
@@ -27,21 +35,23 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
 
-\code{pending()} allows the user to search for providers with pending Medicare
+\code{\link[=pending]{pending()}} allows the user to search for providers with pending Medicare
 enrollment applications.
-
-+:----------------------+:----------+
-| \strong{Update Frequency:} | QUARTERLY |
-+-----------------------+-----------+
 }
+\section{Update Frequency}{
+
+\strong{QUARTERLY}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-pending(type = "p", first = "John")
-pending(type = "n", last = "Smith")
+
+pending(type = "P", first = "John")
+
+pending(type = "N", last = "Smith")
 \dontshow{\}) # examplesIf}
 }
 \references{
-APIs:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}

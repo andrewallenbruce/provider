@@ -11,22 +11,29 @@
 #' @return A [tibble][tibble::tibble-package] containing:
 #' + `compare_hcpcs()`
 #' + `compare_conditions()`
-#' @examplesIf interactive()
-#' compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
-#' compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
-#'
-#' compare_hcpcs(map_dfr(
-#' util_years(), ~utilization(year = .x, npi = 1023076643, type = "service")))
-#'
-#' compare_conditions(map_dfr(
-#' util_years(), ~utilization(year = .x, npi = 1023076643, type = "provider")))
 #' @name compare
 NULL
 
-#' @param df < *tbl_df* > // **required** [tibble][tibble::tibble-package]
-#' returned from `utilization(type = "service")`
+#' @param df < *tbl_df* > // **required**
+#'
 #' @param ... For future use.
-#' @rdname compare
+#'
+#'
+#' [tibble()] returned from `utilization(type = "service")`
+#'
+#' @examplesIf interactive()
+#'
+#' compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
+#'
+#' map_dfr(
+#'  util_years(), ~utilization(year = .x,
+#'                             npi = 1023076643,
+#'                             type = "service")) |>
+#'  compare_hcpcs()
+#'
+#'
+#' @describeIn compare performance detail
+#'
 #' @autoglobal
 #' @export
 compare_hcpcs <- function(df, ...) {
@@ -79,10 +86,22 @@ hcpcs_cols <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param df < *tbl_df* > // **required** [tibble][tibble::tibble-package]
-#' returned from `utilization(type = "provider")`
+#' @param df < *tbl_df* > // **required** [tibble()] returned from `utilization(type = "provider")`
+#'
 #' @param pivot < *boolean* > // __default:__ `FALSE` Pivot output
-#' @rdname compare
+#'
+#' @describeIn compare chronic condition prevalence
+#'
+#' @examplesIf interactive()
+#'
+#' compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
+#'
+#' map_dfr(
+#'   util_years(), ~utilization(year = .x,
+#'                              npi = 1023076643,
+#'                              type = "provider")) |>
+#'   compare_conditions()
+#'
 #' @autoglobal
 #' @export
 compare_conditions <- function(df, pivot = FALSE) {

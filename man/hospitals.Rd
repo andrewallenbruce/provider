@@ -26,17 +26,29 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit Organizational National Provider Identifier}
+\item{npi}{< \emph{integer} >
 
-\item{facility_ccn}{< \emph{integer} > 6-digit CMS Certification Number}
+10-digit Organizational National Provider Identifier}
 
-\item{enid_org}{< \emph{character} > 15-digit Organizational Medicare Enrollment ID}
+\item{facility_ccn}{< \emph{integer} >
 
-\item{enid_state}{< \emph{character} > Hospital’s enrollment state}
+6-digit CMS Certification Number}
 
-\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS Associate Control ID}
+\item{enid_org}{< \emph{character} >
 
-\item{specialty_code}{< \emph{character} > Medicare Part A Provider specialty code:
+15-digit Organizational Medicare Enrollment ID}
+
+\item{enid_state}{< \emph{character} >
+
+Hospital’s enrollment state}
+
+\item{pac_org}{< \emph{integer} >
+
+10-digit Organizational PECOS Associate Control ID}
+
+\item{specialty_code}{< \emph{character} >
+
+Medicare Part A Provider specialty code:
 \itemize{
 \item \code{"00-00"}: Religious Non-Medical Healthcare Institution (RNHCI)
 \item \code{"00-01"}: Community Mental Health Center
@@ -57,28 +69,47 @@ hospitals(
 \item \code{"00-85"}: Critical Access Hospital (CAH)
 }}
 
-\item{organization}{< \emph{character} > Hospital’s legal business name}
+\item{organization}{< \emph{character} >
 
-\item{dba}{< \emph{character} > Hospital’s doing-business-as name}
+Hospital’s legal business name}
 
-\item{city}{< \emph{character} > City of the hospital’s practice location}
+\item{dba}{< \emph{character} >
 
-\item{state}{< \emph{character} > State of the hospital’s practice location}
+Hospital’s doing-business-as name}
 
-\item{zip}{< \emph{integer} > Zip code of the hospital’s practice location}
+\item{city}{< \emph{character} >
 
-\item{registration}{< \emph{character} > Hospital's IRS designation:
+City of the hospital’s practice location}
+
+\item{state}{< \emph{character} >
+
+State of the hospital’s practice location}
+
+\item{zip}{< \emph{integer} >
+
+Zip code of the hospital’s practice location}
+
+\item{registration}{< \emph{character} >
+
+Hospital's IRS designation:
 \itemize{
 \item \code{"P"}: Registered as \strong{Proprietor}
 \item \code{"N"}: Registered as \strong{Non-Profit}
 }}
 
-\item{multi_npi}{< \emph{boolean} > Indicates hospital has more than one NPI}
+\item{multi_npi}{< \emph{boolean} >
 
-\item{reh}{< \emph{boolean} > Indicates a former Hospital or Critical Access
-Hospital (CAH) that converted to a Rural Emergency Hospital (REH)}
+Indicates hospital has more than one NPI}
 
-\item{subgroup}{< \emph{list} > \code{subgroup = list(acute = TRUE, swing = FALSE)}
+\item{reh}{< \emph{boolean} >
+
+Indicates a former Hospital or Critical Access Hospital (CAH) that
+converted to a Rural Emergency Hospital (REH)}
+
+\item{subgroup}{< \emph{list} >
+
+\code{subgroup = list(acute = TRUE, swing = FALSE)}
+
 Indicates hospital’s subgroup/unit designation:
 \itemize{
 \item \code{acute}: Acute Care
@@ -96,11 +127,17 @@ Indicates hospital’s subgroup/unit designation:
 \item \code{other}: Not listed on CMS form
 }}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE}
 
-\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+Tidy output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE}
+
+Pivot output}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE}
+
+Remove empty rows and columns}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -165,10 +202,3 @@ hospitals(city = "Savannah", state = "GA",
           dplyr::select(organization, subgroup)
 \dontshow{\}) # examplesIf}
 }
-\seealso{
-\code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}
-
-Other api: 
-\code{\link{nppes}()}
-}
-\concept{api}

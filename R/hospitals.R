@@ -13,12 +13,30 @@
 #' @section Links:
 #' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' @param npi < *integer* > 10-digit Organizational National Provider Identifier
-#' @param pac_org < *integer* > 10-digit Organizational PECOS Associate Control ID
-#' @param enid_org < *character* > 15-digit Organizational Medicare Enrollment ID
-#' @param enid_state < *character* > Hospital’s enrollment state
-#' @param facility_ccn < *integer* > 6-digit CMS Certification Number
-#' @param specialty_code < *character* > Medicare Part A Provider specialty code:
+#' @param npi < *integer* >
+#'
+#' 10-digit Organizational National Provider Identifier
+#'
+#' @param pac_org < *integer* >
+#'
+#' 10-digit Organizational PECOS Associate Control ID
+#'
+#' @param enid_org < *character* >
+#'
+#' 15-digit Organizational Medicare Enrollment ID
+#'
+#' @param enid_state < *character* >
+#'
+#' Hospital’s enrollment state
+#'
+#' @param facility_ccn < *integer* >
+#'
+#' 6-digit CMS Certification Number
+#'
+#' @param specialty_code < *character* >
+#'
+#' Medicare Part A Provider specialty code:
+#'
 #' + `"00-00"`: Religious Non-Medical Healthcare Institution (RNHCI)
 #' + `"00-01"`: Community Mental Health Center
 #' + `"00-02"`: Comprehensive Outpatient Rehabilitation Facility (CORF)
@@ -36,17 +54,45 @@
 #' + `"00-19"`: Other
 #' + `"00-24"`: Rural Emergency Hospital (REH)
 #' + `"00-85"`: Critical Access Hospital (CAH)
-#' @param organization < *character* > Hospital’s legal business name
-#' @param dba < *character* > Hospital’s doing-business-as name
-#' @param city < *character* > City of the hospital’s practice location
-#' @param state < *character* > State of the hospital’s practice location
-#' @param zip < *integer* > Zip code of the hospital’s practice location
-#' @param registration < *character* > Hospital's IRS designation:
+#'
+#' @param organization < *character* >
+#'
+#' Hospital’s legal business name
+#'
+#' @param dba < *character* >
+#'
+#' Hospital’s doing-business-as name
+#'
+#' @param city < *character* >
+#'
+#' City of the hospital’s practice location
+#'
+#' @param state < *character* >
+#'
+#' State of the hospital’s practice location
+#'
+#' @param zip < *integer* >
+#'
+#' Zip code of the hospital’s practice location
+#'
+#' @param registration < *character* >
+#'
+#' Hospital's IRS designation:
+#'
 #' + `"P"`: Registered as __Proprietor__
+#'
 #' + `"N"`: Registered as __Non-Profit__
-#' @param multi_npi < *boolean* > Indicates hospital has more than one NPI
-#' @param subgroup < *list* > `subgroup = list(acute = TRUE, swing = FALSE)`
+#'
+#' @param multi_npi < *boolean* >
+#'
+#' Indicates hospital has more than one NPI
+#'
+#' @param subgroup < *list* >
+#'
+#' `subgroup = list(acute = TRUE, swing = FALSE)`
+#'
 #' Indicates hospital’s subgroup/unit designation:
+#'
 #' + `acute`: Acute Care
 #' + `alc_drug`: Alcohol/Drug
 #' + `child`: Children's Hospital
@@ -60,11 +106,23 @@
 #' + `rehab_unit`: Rehabilitation Unit
 #' + `spec`: Specialty Hospital
 #' + `other`: Not listed on CMS form
-#' @param reh < *boolean* > Indicates a former Hospital or Critical Access
-#' Hospital (CAH) that converted to a Rural Emergency Hospital (REH)
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#'
+#' @param reh < *boolean* >
+#'
+#' Indicates a former Hospital or Critical Access Hospital (CAH) that
+#' converted to a Rural Emergency Hospital (REH)
+#'
+#' @param tidy < *boolean* > // __default:__ `TRUE`
+#'
+#' Tidy output
+#'
+#' @param pivot < *boolean* > // __default:__ `TRUE`
+#'
+#' Pivot output
+#'
+#' @param na.rm < *boolean* > // __default:__ `TRUE`
+#'
+#' Remove empty rows and columns
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -93,9 +151,6 @@
 #' |`registration`      |Hospital’s IRS Registration Status                             |
 #' |`subgroup`          |Hospital's Subgroup/Unit Designations, REH Conversion Status   |
 #' |`other`             |If `subgroup` is `"Other"`, description of Subgroup/Unit       |
-#'
-#' @seealso [clinicians()], [providers()], [affiliations()]
-#' @family api
 #'
 #' @examplesIf interactive()
 #' hospitals(pac_org = 6103733050)
@@ -304,7 +359,7 @@ hosp_cols <- function(df) {
 #' @noRd
 hosp_cols2 <- function(df) {
 
-  cols <- c('npi',
+  cols <- c('npi_org' = 'npi',
             'pac_org',
             'enid_org',
             'enid_state',

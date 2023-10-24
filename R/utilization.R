@@ -130,18 +130,8 @@ utilization <- function(year,
   year <- rlang::arg_match(year, as.character(util_years()))
   type <- rlang::arg_match(type, c("provider", "service", "geography"))
 
-  if (type != "provider") {
-    nest       <- FALSE
-    detailed   <- FALSE
-  }
-
-  if (type == "provider") {
-    rbcs       <- FALSE
-    hcpcs_code <- NULL
-    pos        <- NULL
-    drug       <- NULL
-  }
-
+  if (type != "provider") c(nest, detailed) %<-% c(FALSE, FALSE)
+  if (type == "provider") c(rbcs, hcpcs_code = NULL, pos = NULL, drug = NULL) %<-% c(FALSE)
   if (type != "geography") level <- NULL
 
   if (type == "geography") {

@@ -33,46 +33,33 @@ library(gt)
 ## Individual Provider
 
 ```{r}
-providers(pac = 7810891009) |> 
+p <- providers(pac = 7810891009) |> mutate(source = '`providers()`', .before = 1)
+r <- reassignments(pac = 7810891009) |> mutate(source = '`reassignments()`')
+c <- clinicians(pac = 7810891009) |> mutate(source = '`clinicians()`')
+
+full_join(p, r) |> 
+  full_join(c) |>
+  pivot_longer(!source) |> 
   display_long() |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
-```
-<br>
-
-```{r}
-reassignments(pac = 7810891009) |>
-  display_long() |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
-```
-<br>
-
-```{r}
-clinicians(pac = 7810891009) |> 
-  display_long() |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+  gt_preview(top_n = 50) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  tab_options(column_labels.hidden = TRUE)
 ```
 
 <br>
 
 ```{r}
-affiliations(pac = 7810891009) |> 
-  gt_preview(top_n = 10) |> 
+a <- affiliations(pac = 7810891009) |> select(-facility_type)
+
+h <- a |> pull(facility_ccn) |>
+  map_dfr(~hospitals(facility_ccn = .x)) |> 
+  select(-reh_conversion)
+
+full_join(a, h) |> 
+  gt_preview(top_n = 30) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-<br>
-
-```{r}
-a <- affiliations(pac = 7810891009) |> 
-  pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x))
-
-a |> gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
-```
 
 <br>
 

@@ -167,8 +167,4 @@ nppes(npi = 1528060837)
 nppes(city = "CARROLLTON", state = "GA", zip = 301173889, entype = "I")
 \dontshow{\}) # examplesIf}
 }
-\seealso{
-Other api: 
-\code{\link{hospitals}()}
-}
 \concept{api}

@@ -32,7 +32,8 @@ Imports:
     strex,
     stringr,
     tidyr,
-    vctrs
+    vctrs,
+    zeallot
 Suggests: 
     covr,
     data.table,

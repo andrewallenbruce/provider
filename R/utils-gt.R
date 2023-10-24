@@ -4,6 +4,7 @@
 #' @autoglobal
 #' @export
 #' @keywords internal
+# nocov start
 gt_entype_badge <- function(x) {
 
   add_color <- if (x == "Ind") {
@@ -212,3 +213,4 @@ gt_prov <- function(df,
   }
   return(results)
 }
+# nocov end

@@ -1,26 +1,36 @@
-#' Pending Medicare Applications
+#' Pending Medicare Enrollment Applications
 #'
 #' @description
 #' `r lifecycle::badge("questioning")`
 #'
-#' `pending()` allows the user to search for providers with pending Medicare
+#' [pending()] allows the user to search for providers with pending Medicare
 #' enrollment applications.
 #'
-#' +:----------------------+:----------+
-#' | __Update Frequency:__ | QUARTERLY |
-#' +-----------------------+-----------+
+#' @references
 #'
-#' @references APIs:
 #' + [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #' + [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
+#' @section Update Frequency:
+#' __QUARTERLY__
 #'
-#' @param type < *character* > // __default:__ `"p"` Physician (`p`) or Non-physician (`n`)
-#' @param npi < *integer* > 10-digit National Provider Identifier
-#' @param first,last < *character* > Provider's name
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param type < `character` > // __default:__ `"P"`
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' Physician (`P`) or Non-physician (`N`)
+#'
+#' @param npi < `integer` >
+#'
+#' 10-digit National Provider Identifier
+#'
+#' @param first,last < `character` >
+#'
+#' Provider's name
+#'
+#' @param tidy < `boolean` > // __default:__ `TRUE`
+#'
+#' Tidy output
+#'
+#' @return A [tibble()] with the columns:
 #'
 #' |**Field** |**Description**         |
 #' |:---------|:-----------------------|
@@ -30,19 +40,21 @@
 #' |`type`    |Type of Provider        |
 #'
 #' @examplesIf interactive()
-#' pending(type = "p", first = "John")
-#' pending(type = "n", last = "Smith")
+#'
+#' pending(type = "P", first = "John")
+#'
+#' pending(type = "N", last = "Smith")
 #'
 #' @autoglobal
 #' @export
-pending <- function(type = "p",
+pending <- function(type = "P",
                     npi = NULL,
                     first = NULL,
                     last = NULL,
                     tidy = TRUE) {
 
-  type <- rlang::arg_match(type, c("p", "n"))
-  if (!is.null(npi)) {npi <- check_npi(npi)}
+  type <- rlang::arg_match(type, c("P", "N"))
+  npi  <- npi %nn% check_npi(npi)
 
   args <- dplyr::tribble(
     ~param,       ~arg,

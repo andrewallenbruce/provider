@@ -124,7 +124,6 @@ reference:
   contents:
   - change
   - geomean
-  - display_long
   - years_df
   - duration_vec
   - summary_stats
