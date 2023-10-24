@@ -35,7 +35,7 @@ utilization(
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
-format. Run \code{\link[=pop_years]{pop_years()}} to return a vector of the years currently available.}
+format. Run \code{\link[=util_years]{util_years()}} to return a vector of the years currently available.}
 
 \item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"provider"}, \code{"service"}, \code{"geography"}}
 
@@ -109,7 +109,7 @@ procedures provided to Original Medicare (fee-for-service) Part B
 beneficiaries by physicians and other healthcare professionals; aggregated
 by provider, service and geography.
 }
-\section{\code{"provider"}}{
+\section{\code{type = "provider"}}{
 
 
 The \strong{Provider} dataset allows the user access to data such as
@@ -119,7 +119,7 @@ treating Original Medicare (fee-for-service) Part B beneficiaries,
 aggregated by year.
 }
 
-\section{\code{"services"}}{
+\section{\code{type = "service"}}{
 
 
 The \strong{Provider and Service} dataset is aggregated by:
@@ -136,7 +136,7 @@ because separate fee schedules apply depending on whether the place
 of service submitted on the claim is facility or non-facility.
 }
 
-\section{\code{"geography"}}{
+\section{\code{type = "geography"}}{
 
 
 The \strong{Geography and Service} dataset contains information on utilization,
@@ -159,12 +159,12 @@ and state-wide by HCPCS code and place of service.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 utilization(year = 2020, type = "provider", npi = 1003000423)
 
-utilization(year = 2019, type = "services", npi = 1003000126)
+utilization(year = 2019, type = "service", npi = 1003000126)
 
 utilization(year = 2020, type = "geography", hcpcs_code = "0002A")
 
 # Use the years helper function to retrieve results for every year:
-pop_years() |>
+util_years() |>
 map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
 list_rbind()
 \dontshow{\}) # examplesIf}

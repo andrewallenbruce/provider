@@ -157,7 +157,7 @@ quality_payment <- function(year,
         top <- results |>
           dplyr::select(-c(dplyr::contains("measure_"),
                            dplyr::contains("ind_"))) |>
-          dplyr::mutate(npi_id = dplyr:consecutive_id(npi), .after = npi)
+          dplyr::mutate(npi_id = dplyr::consecutive_id(npi), .after = npi)
 
         measures <- dplyr::select(results, year, npi,
                                   dplyr::contains("measure_")) |>

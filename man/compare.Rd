@@ -4,18 +4,17 @@
 \alias{compare}
 \alias{compare_hcpcs}
 \alias{compare_conditions}
-\title{Compare Yearly Provider Data To State And National Averages}
+\title{Compare Providers to State and National Benchmarks}
 \usage{
-compare_hcpcs(serv_tbl)
+compare_hcpcs(df)
 
-compare_conditions(prov_tbl, pivot = TRUE)
+compare_conditions(df, pivot = FALSE)
 }
 \arguments{
-\item{serv_tbl}{< \emph{tbl_df} > // \strong{required} \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_service]{by_service()}}}
+\item{df}{< \emph{tbl_df} > // \strong{required} \link[tibble:tibble-package]{tibble}
+returned from \code{utilization(type = "provider")}}
 
-\item{prov_tbl}{< \emph{tbl_df} > // \strong{required} \link[tibble:tibble-package]{tibble} returned from \code{\link[=by_provider]{by_provider()}}}
-
-\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{FALSE} Pivot output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing:
@@ -35,10 +34,13 @@ national averages
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-compare_hcpcs(by_service(year = 2018, npi = 1023076643))
-compare_conditions(by_provider(year = 2018, npi = 1023076643))
+compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
+compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
 
-compare_hcpcs(map_dfr(pop_years(), ~by_service(year = .x, npi = 1023076643)))
-compare_conditions(map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643)))
+compare_hcpcs(map_dfr(
+util_years(), ~utilization(year = .x, npi = 1023076643, type = "service")))
+
+compare_conditions(map_dfr(
+util_years(), ~utilization(year = .x, npi = 1023076643, type = "provider")))
 \dontshow{\}) # examplesIf}
 }

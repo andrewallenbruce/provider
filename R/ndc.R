@@ -49,8 +49,8 @@
 #' @examples
 #' ndc_lookup("0002-1433-80")
 #'
+#' @examplesIf interactive()
 #' medline("0002-1433-80")
-#'
 #' rxnorm("0002-1433-80")
 #'
 #' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code

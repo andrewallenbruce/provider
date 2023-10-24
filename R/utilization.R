@@ -8,7 +8,7 @@
 #' beneficiaries by physicians and other healthcare professionals; aggregated
 #' by provider, service and geography.
 #'
-#' @section `"provider"`:
+#' @section `type = "provider"`:
 #'
 #' The **Provider** dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
@@ -16,7 +16,7 @@
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
 #'
-#' @section `"services"`:
+#' @section `type = "service"`:
 #'
 #' The **Provider and Service** dataset is aggregated by:
 #'
@@ -30,7 +30,7 @@
 #' because separate fee schedules apply depending on whether the place
 #' of service submitted on the claim is facility or non-facility.
 #'
-#' @section `"geography"`:
+#' @section `type = "geography"`:
 #'
 #' The **Geography and Service** dataset contains information on utilization,
 #' allowed amount, Medicare payment, and submitted charges organized nationally
@@ -46,17 +46,17 @@
 #' @examplesIf interactive()
 #' utilization(year = 2020, type = "provider", npi = 1003000423)
 #'
-#' utilization(year = 2019, type = "services", npi = 1003000126)
+#' utilization(year = 2019, type = "service", npi = 1003000126)
 #'
 #' utilization(year = 2020, type = "geography", hcpcs_code = "0002A")
 #'
 #' # Use the years helper function to retrieve results for every year:
-#' pop_years() |>
+#' util_years() |>
 #' map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
 #' list_rbind()
 #'
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [pop_years()] to return a vector of the years currently available.
+#' format. Run [util_years()] to return a vector of the years currently available.
 #' @param type < *character* > // **required** dataset to query, `"provider"`, `"service"`, `"geography"`
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
@@ -125,7 +125,7 @@ utilization <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, as.character(pop_years()))
+  year <- rlang::arg_match(year, as.character(util_years()))
   type <- rlang::arg_match(type, c("provider", "service", "geography"))
 
   if (type != "provider") {
@@ -198,7 +198,7 @@ utilization <- function(year,
     "Rndrng_Prvdr_Geo_Cd",            fips)
 
   if (type == "provider")   yr <- api_years("prv")
-  if (type == "services")   yr <- api_years("srv")
+  if (type == "service")    yr <- api_years("srv")
   if (type == "geography")  yr <- api_years("geo")
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
@@ -243,7 +243,7 @@ utilization <- function(year,
   if (tidy) {
     results$year <- year
     if (type == "provider")  results <- tidyup.provider(results, nest = nest, detailed = detailed)
-    if (type == "services")  results <- tidyup.services(results, rbcs = rbcs)
+    if (type == "service")   results <- tidyup.service(results, rbcs = rbcs)
     if (type == "geography") results <- tidyup.geography(results, rbcs = rbcs)
     if (na.rm)               results <- narm(results)
   }
@@ -292,11 +292,11 @@ tidyup.provider <- function(results, nest, detailed) {
   return(results)
 }
 
-#' @param results data frame from [utilization(type = "services")]
+#' @param results data frame from [utilization(type = "service")]
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
-tidyup.services <- function(results, rbcs) {
+tidyup.service <- function(results, rbcs) {
 
   results$level <- "Provider"
 
@@ -306,12 +306,12 @@ tidyup.services <- function(results, rbcs) {
                     dbl = "avg_",
                     yr = 'year') |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
-    cols_util("services") |>
+    cols_util("service") |>
     dplyr::mutate(specialty = correct_specialty(specialty))
 
   if (rbcs) results <- rbcs_util(results)
 
-  class(results) <- c("utilization_services", class(results))
+  class(results) <- c("utilization_service", class(results))
   return(results)
 }
 
@@ -336,12 +336,12 @@ tidyup.geography <- function(results, rbcs) {
 }
 
 #' @param df data frame
-#' @param type 'provider', 'services', 'geography' or 'rbcs'
+#' @param type 'provider', 'service', 'geography' or 'rbcs'
 #' @autoglobal
 #' @noRd
 cols_util <- function(df,
                       type = c("provider",
-                               "services",
+                               "service",
                                "geography",
                                "rbcs")) {
 
@@ -365,7 +365,7 @@ cols_util <- function(df,
               "avg_std_pymt" = "avg_mdcr_stdzd_amt")
   }
 
-  if (type == "services") {
+  if (type == "service") {
 
     cols <- c('year',
               'npi'          = 'rndrng_npi',

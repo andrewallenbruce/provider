@@ -61,6 +61,7 @@ utils::globalVariables(c(
   "level", # <compare_conditions>
   "prevalence", # <compare_conditions>
   "condition", # <compare_conditions>
+  "prov_tbl", # <compare_conditions>
   "state", # <compare_conditions>
   "sublevel", # <compare_conditions>
   "state.abb", # <conditions>
@@ -251,8 +252,8 @@ utils::globalVariables(c(
   "specialty", # <tidyup.provider>
   "medical", # <tidyup.provider>
   "drug", # <tidyup.provider>
-  "address", # <tidyup.services>
-  "specialty", # <tidyup.services>
+  "address", # <tidyup.service>
+  "specialty", # <tidyup.service>
   "place_of_srvc", # <tidyup.geography>
   "title", # <cms_update>
   "modified", # <cms_update>

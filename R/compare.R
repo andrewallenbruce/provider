@@ -1,4 +1,4 @@
-#' Compare Yearly Provider Data To State And National Averages
+#' Compare Providers to State and National Benchmarks
 #'
 #' @description
 #' + `compare_hcpcs()` allows the user to compare a provider's yearly HCPCS
@@ -12,34 +12,38 @@
 #' + `compare_hcpcs()`
 #' + `compare_conditions()`
 #' @examplesIf interactive()
-#' compare_hcpcs(by_service(year = 2018, npi = 1023076643))
-#' compare_conditions(by_provider(year = 2018, npi = 1023076643))
+#' compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
+#' compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
 #'
-#' compare_hcpcs(map_dfr(pop_years(), ~by_service(year = .x, npi = 1023076643)))
-#' compare_conditions(map_dfr(pop_years(), ~by_provider(year = .x, npi = 1023076643)))
+#' compare_hcpcs(map_dfr(
+#' util_years(), ~utilization(year = .x, npi = 1023076643, type = "service")))
+#'
+#' compare_conditions(map_dfr(
+#' util_years(), ~utilization(year = .x, npi = 1023076643, type = "provider")))
 #' @name compare
 NULL
 
-#' @param serv_tbl < *tbl_df* > // **required** [tibble][tibble::tibble-package] returned from [by_service()]
+#' @param df < *tbl_df* > // **required** [tibble][tibble::tibble-package]
+#' returned from `utilization(type = "service")`
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_hcpcs <- function(serv_tbl) {
+compare_hcpcs <- function(df) {
 
-  if (!inherits(serv_tbl, "provider_by_serv")) {
+  if (!inherits(df, "utilization_service")) {
     cli::cli_abort(c(
-      "{.var serv_tbl} must be of class {.cls 'provider_by_serv'}.",
-      "x" = "{.var serv_tbl} is of class {.cls {class(serv_tbl)}}."))
+      "{.var df} must be of class {.cls 'utilization_service'}.",
+      "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  x <- serv_tbl |>
+  x <- df |>
     dplyr::select(year, state, hcpcs_code, pos) |>
     dplyr::rowwise() |>
     dplyr::mutate(state = list(by_geography(year, state, hcpcs_code, pos)),
                   national = list(by_geography(year, state = "National", hcpcs_code, pos)), .keep = "none")
 
   results <- vctrs::vec_rbind(
-    dplyr::rename(serv_tbl,
+    dplyr::rename(df,
                   beneficiaries = tot_benes,
                   services = tot_srvcs) |>
       hcpcs_cols(),
@@ -83,20 +87,21 @@ hcpcs_cols <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param prov_tbl < *tbl_df* > // **required** [tibble][tibble::tibble-package] returned from [by_provider()]
-#' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param df < *tbl_df* > // **required** [tibble][tibble::tibble-package]
+#' returned from `utilization(type = "provider")`
+#' @param pivot < *boolean* > // __default:__ `FALSE` Pivot output
 #' @rdname compare
 #' @autoglobal
 #' @export
-compare_conditions <- function(prov_tbl, pivot = TRUE) {
+compare_conditions <- function(df, pivot = FALSE) {
 
-  if (!inherits(prov_tbl, "provider_by_prov")) {
+  if (!inherits(df, "utilization_provider")) {
     cli::cli_abort(c(
-      "{.var prov_tbl} must be of class {.cls 'provider_by_prov'}.",
-      "x" = "{.var prov_tbl} is of class {.cls {class(prov_tbl)}}."))
+      "{.var df} must be of class {.cls 'utilization_provider'}.",
+      "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  p <- dplyr::select(prov_tbl, year, conditions) |>
+  p <- dplyr::select(df, year, conditions) |>
     tidyr::unnest(conditions) |>
     dplyr::mutate(level = "Provider", .after = year) |>
     dplyr::rename(
