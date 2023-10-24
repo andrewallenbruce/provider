@@ -65,8 +65,8 @@ affiliations <- function(npi = NULL,
                          tidy = TRUE,
                          na.rm = TRUE) {
 
-  npi <- npi %nn% check_npi(npi)
-  pac <- pac %nn% check_pac(pac)
+  npi          <- npi %nn% validate_npi(npi)
+  pac          <- pac %nn% check_pac(pac)
   facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
   parent_ccn   <- parent_ccn %nn% as.character(parent_ccn)
 
@@ -82,7 +82,7 @@ affiliations <- function(npi = NULL,
                                        "df" ~ "Dialysis facility",
                                        .default = facility_type)
 
-    rlang::arg_match(facility_type, c("Hospital",
+    facility_type <- rlang::arg_match(facility_type, c("Hospital",
                                       "Long-term care hospital",
                                       "Nursing home",
                                       "Inpatient rehabilitation facility",

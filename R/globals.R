@@ -195,8 +195,6 @@ utils::globalVariables(c(
   "y", # <order_refer>
   "y", # <pending>
   "y", # <providers>
-  "distro", # <quality_payment>
-  "y", # <quality_payment>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
   "group_scenario", # <quality_eligibility>
@@ -234,6 +232,10 @@ utils::globalVariables(c(
   "apm_affl_1", # <mips_2021>
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
+  "distro", # <quality_payment>
+  "y", # <quality_payment>
+  "val", # <quality_payment>
+  "score", # <quality_payment>
   "y", # <reassignments>
   "code", # <download_nucc_csv>
   "section", # <download_nucc_csv>

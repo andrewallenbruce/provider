@@ -2,8 +2,6 @@
 % Please edit documentation in R/quality_payment.R
 \name{quality_payment}
 \alias{quality_payment}
-\alias{quality_eligibility}
-\alias{quality_stats}
 \title{Quality Payment Program Experience}
 \usage{
 quality_payment(
@@ -11,34 +9,48 @@ quality_payment(
   npi = NULL,
   state = NULL,
   specialty = NULL,
-  participation_type = NULL,
+  type = NULL,
   tidy = TRUE,
   nest = TRUE,
   na.rm = TRUE
 )
-
-quality_eligibility(year, npi = NULL, tidy = TRUE)
-
-quality_stats(year)
 }
 \arguments{
-\item{year}{QPP program year}
+\item{year}{< \emph{integer} > // \strong{required} QPP performance year, in \code{YYYY}format.
+Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
 
-\item{npi}{NPI assigned to the clinician when they enrolled in Medicare.}
+\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier
+assigned to the clinician when they enrolled in Medicare. Multiple rows for
+the same NPI indicate multiple TIN/NPI combinations.}
 
-\item{state}{The State or US territory code location of the
-TIN associated with the clinician.}
+\item{state}{< \emph{character} > State or US territory code location of the TIN
+associated with the clinician.}
 
-\item{specialty}{The specialty description is an identifier corresponding to
-the type of service that the clinician submitted most on their Medicare
-Part B claims for this TIN/NPI combination.}
+\item{specialty}{< \emph{character} > Specialty corresponding to the type of
+service that the clinician submitted most on their Medicare Part B claims
+for this TIN/NPI combination.
+\itemize{
+\item Nurse Practitioner
+\item Internal Medicine
+\item Physician Assistant
+\item Family Practice
+\item Emergency Medicine
+\item Diagnostic Radiology
+\item Anesthesiology
+\item Neurology
+\item Cardiology
+}}
 
-\item{participation_type}{Indicates the level at which performance data was
-collected, submitted or reported for the final score attributed to the
-clinician. This information drives the data displayed for most of the
-remaining fields in this report.}
+\item{type}{< \emph{character} > Participation type; level at which the performance data
+was collected, submitted or reported for the final score attributed to the
+clinician; drives most of the data returned.
+\itemize{
+\item \code{"Group"}
+\item \code{"Individual"}
+\item \code{"MIPS APM"}
+}}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest output}
 
@@ -46,83 +58,37 @@ remaining fields in this report.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
-
-A \link[tibble:tibble-package]{tibble} containing the search results.
-
-A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on participation and performance in the Merit-based
-Incentive Payment System (MIPS) and Advanced Alternative Payment Models
-(APMs) tracks.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Data pulled from across CMS that is used to create an
-eligibility determination for a clinician. Using what CMS knows about a
-clinician from their billing patterns and enrollments, eligibility is
-"calculated" multiple times before and during the performance year.
-
-Data pulled from across CMS that is used to create an
-eligibility determination for a clinician. Using what CMS knows about a
-clinician from their billing patterns and enrollments, eligibility is
-"calculated" multiple times before and during the performance year.
+\code{\link[=quality_payment]{quality_payment()}}  allows the user access to information on participation
+and performance in the Merit-based Incentive Payment System (MIPS) and
+Advanced Alternative Payment Models (APMs) tracks.
 }
-\details{
-The Quality Payment Program (QPP) Experience dataset provides
-participation and performance information in the Merit-based Incentive
-Payment System (MIPS) during each performance year. They cover
-eligibility and participation, performance categories, and final score
-and payment adjustments. The dataset provides additional details at the
+\section{Quality Payment Program (QPP) Experience}{
+
+The QPP dataset provides participation and performance information in the
+Merit-based Incentive Payment System (MIPS) during each performance year.
+They cover eligibility and participation, performance categories, final
+score and payment adjustments. The dataset provides additional details at the
 TIN/NPI level on what was published in the previous performance year.
-You can sort the data by variables like clinician type, practice size,
-scores, and payment adjustments.
-
-The Quality Payment Program (QPP) Eligibility System pulls together
-data from across the Centers for Medicare and Medicaid Services (CMS) to
-create an eligibility determination for every clinician in the system.
-Using what CMS knows about a clinician from their billing patterns and
-enrollments, eligibility is "calculated" multiple times before and during
-the performance year. Information can be obtained primarily by the
-Clinician type. You can query the Clinician type by passing in an National
-Provider Identifier, or NPI. This number is a unique 10-digit
-identification number issued to health care providers in the United
-States by CMS. The information contained in these endpoints includes
-basic enrollment information, associated organizations, information
-about those organizations, individual and group special status
-information, and in the future, any available Alternative Payment Model
-(APM) affiliations.
 }
+
 \section{Links}{
 
 \itemize{
 \item \href{https://data.cms.gov/quality-of-care/quality-payment-program-experience}{Quality Payment Program Experience}
 }
-
-
-\itemize{
-\item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
-}
-
-
-\itemize{
-\item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
-}
 }
 
 \section{Update Frequency}{
- \strong{Annually}
 
- \strong{Annually}
-
- \strong{Annually}
+\strong{Annually}
 }
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_payment(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-quality_eligibility(year = 2020, npi = 1144544834)
-\dontshow{\}) # examplesIf}
-quality_stats(year = 2020)
 }
-\keyword{internal}
