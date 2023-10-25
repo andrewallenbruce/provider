@@ -8,7 +8,7 @@
 #' beneficiaries by physicians and other healthcare professionals; aggregated
 #' by provider, service and geography.
 #'
-#' @section `type = "provider"`:
+#' @section __type =__ `"provider"`:
 #'
 #' The **Provider** dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
@@ -16,7 +16,7 @@
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
 #'
-#' @section `type = "service"`:
+#' @section __type =__ `"service"`:
 #'
 #' The **Provider and Service** dataset is aggregated by:
 #'
@@ -30,7 +30,7 @@
 #' because separate fee schedules apply depending on whether the place
 #' of service submitted on the claim is facility or non-facility.
 #'
-#' @section `type = "geography"`:
+#' @section __type =__ `"geography"`:
 #'
 #' The **Geography and Service** dataset contains information on utilization,
 #' allowed amount, Medicare payment, and submitted charges organized nationally
@@ -517,13 +517,13 @@ cols_util <- function(df,
 #' @noRd
 correct_specialty <- function(x) {
   dplyr::case_match(x,
-                    "Allergy/ Immunology" ~ "Allergy/Immunology",
-                    "Obstetrics & Gynecology" ~ "Obstetrics/Gynecology",
-                    "Hematology-Oncology" ~ "Hematology/Oncology",
-                    "Independent Diagnostic Testing Facility (IDTF)" ~ "Independent Diagnostic Testing Facility",
-                    "Mass Immunizer Roster Biller" ~ "Mass Immunization Roster Biller",
-                    "Anesthesiologist Assistants" ~ "Anesthesiology Assistant",
-                    "Occupational therapist" ~ "Occupational Therapist",
-                    "Psychologist, Clinical" ~ "Clinical Psychologist",
-                    .default = x)
+    "Allergy/ Immunology" ~ "Allergy/Immunology",
+    "Obstetrics & Gynecology" ~ "Obstetrics/Gynecology",
+    "Hematology-Oncology" ~ "Hematology/Oncology",
+    "Independent Diagnostic Testing Facility (IDTF)" ~ "Independent Diagnostic Testing Facility",
+    "Mass Immunizer Roster Biller" ~ "Mass Immunization Roster Biller",
+    "Anesthesiologist Assistants" ~ "Anesthesiology Assistant",
+    "Occupational therapist" ~ "Occupational Therapist",
+    "Psychologist, Clinical" ~ "Clinical Psychologist",
+    .default = x)
 }

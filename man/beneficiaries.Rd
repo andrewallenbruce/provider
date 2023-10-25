@@ -15,28 +15,21 @@ beneficiaries(
 )
 }
 \arguments{
-\item{year}{< \emph{integer} > Calendar year of Medicare enrollment; current years can be
-checked with:
+\item{year}{< \emph{integer} > Calendar year of Medicare enrollment; current years
+can be checked with:
 \itemize{
 \item \code{bene_years("year")}: Years available for all 12 months
 \item \code{bene_years("month")}: Years available for individual months
 }}
 
-\item{period}{< \emph{character} > Time frame of Medicare enrollment; options are:
-\itemize{
-\item \code{Year}
-\item \code{Month}
-\item Any individual month name
-}}
+\item{period}{< \emph{character} > Time frame of Medicare enrollment; options
+are \code{"Year"}, \code{Month}, or any individual month name}
 
-\item{level}{< \emph{character} > Geographic level of data; options are:
-\itemize{
-\item \code{National}
-\item \code{State}
-\item \code{County}
-}}
+\item{level}{< \emph{character} > Geographic level of data; options are
+\code{"National"}, \code{"State"}, or \code{County}}
 
-\item{state}{< \emph{character} > Full state name or abbreviation of beneficiary residence}
+\item{state}{< \emph{character} > Full state name or abbreviation of
+beneficiary residence}
 
 \item{county}{< \emph{character} > County of beneficiary residence}
 

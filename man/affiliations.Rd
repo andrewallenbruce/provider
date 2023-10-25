@@ -82,6 +82,3 @@ Links:
 affiliations(parent_ccn = 670055)
 \dontshow{\}) # examplesIf}
 }
-\seealso{
-\code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=hospitals]{hospitals()}}
-}

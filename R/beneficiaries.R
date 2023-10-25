@@ -24,19 +24,16 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param year < *integer* > Calendar year of Medicare enrollment; current years can be
-#' checked with:
-#'    * `bene_years("year")`: Years available for all 12 months
-#'    * `bene_years("month")`: Years available for individual months
-#' @param period < *character* > Time frame of Medicare enrollment; options are:
-#'    * `Year`
-#'    * `Month`
-#'    * Any individual month name
-#' @param level < *character* > Geographic level of data; options are:
-#'    * `National`
-#'    * `State`
-#'    * `County`
-#' @param state < *character* > Full state name or abbreviation of beneficiary residence
+#' @param year < *integer* > Calendar year of Medicare enrollment; current years
+#' can be checked with:
+#' + `bene_years("year")`: Years available for all 12 months
+#' + `bene_years("month")`: Years available for individual months
+#' @param period < *character* > Time frame of Medicare enrollment; options
+#' are `"Year"`, `Month`, or any individual month name
+#' @param level < *character* > Geographic level of data; options are
+#' `"National"`, `"State"`, or `County`
+#' @param state < *character* > Full state name or abbreviation of
+#' beneficiary residence
 #' @param county < *character* > County of beneficiary residence
 #' @param fips < *character* > FIPS code of beneficiary residence
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output

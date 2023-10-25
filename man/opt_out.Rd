@@ -18,23 +18,23 @@ opt_out(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit Opt-out National Provider Identifier}
+\item{npi}{< \code{integer} > 10-digit Opt-out National Provider Identifier}
 
-\item{first, last}{< \emph{character} > Opt-out provider's name}
+\item{first, last}{< \code{character} > Opt-out provider's name}
 
-\item{specialty}{< \emph{character} > Opt-out provider's specialty}
+\item{specialty}{< \code{character} > Opt-out provider's specialty}
 
-\item{address}{< \emph{character} > Opt-out provider's address}
+\item{address}{< \code{character} > Opt-out provider's address}
 
-\item{city}{< \emph{character} > Opt-out provider's city}
+\item{city}{< \code{character} > Opt-out provider's city}
 
-\item{state}{< \emph{character} > Opt-out provider's state abbreviation}
+\item{state}{< \code{character} > Opt-out provider's state abbreviation}
 
-\item{zip}{< \emph{character} > Opt-out provider's zip code}
+\item{zip}{< \code{character} > Opt-out provider's zip code}
 
-\item{order_refer}{< \emph{boolean} > Indicates order and refer eligibility}
+\item{order_refer}{< \code{boolean} > Indicates order and refer eligibility}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -58,7 +58,6 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 
 \code{opt_out()} allows the user to access information on providers who have
 decided not to participate in Medicare.
-\href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}{Medicare Opt Out Affidavits API}
 }
 \section{Opting Out}{
 
@@ -117,6 +116,8 @@ opt_out(npi = 1043522824) |>
         list_rbind()
 \dontshow{\}) # examplesIf}
 }
-\seealso{
-\code{\link[=order_refer]{order_refer()}}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}{Medicare Opt Out Affidavits API}
+}
 }

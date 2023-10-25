@@ -5,7 +5,9 @@
 #'
 #' `opt_out()` allows the user to access information on providers who have
 #' decided not to participate in Medicare.
-#' [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#'
+#' @references
+#' + [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
 #'
 #' @section Opting Out:
 #'
@@ -45,15 +47,15 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit Opt-out National Provider Identifier
-#' @param first,last < *character* > Opt-out provider's name
-#' @param specialty < *character* > Opt-out provider's specialty
-#' @param address < *character* > Opt-out provider's address
-#' @param city < *character* > Opt-out provider's city
-#' @param state < *character* > Opt-out provider's state abbreviation
-#' @param zip < *character* > Opt-out provider's zip code
-#' @param order_refer < *boolean* > Indicates order and refer eligibility
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param npi < `integer` > 10-digit Opt-out National Provider Identifier
+#' @param first,last < `character` > Opt-out provider's name
+#' @param specialty < `character` > Opt-out provider's specialty
+#' @param address < `character` > Opt-out provider's address
+#' @param city < `character` > Opt-out provider's city
+#' @param state < `character` > Opt-out provider's state abbreviation
+#' @param zip < `character` > Opt-out provider's zip code
+#' @param order_refer < `boolean` > Indicates order and refer eligibility
+#' @param tidy < `boolean` > // __default:__ `TRUE` Tidy output
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -71,8 +73,6 @@
 #' |`city`              |Opt-out provider's city                       |
 #' |`state`             |Opt-out provider's state                      |
 #' |`zip`               |Opt-out provider's zip code                   |
-#'
-#' @seealso [order_refer()]
 #'
 #' @examples
 #' opt_out(npi = 1043522824)
@@ -118,7 +118,7 @@ opt_out <- function(npi = NULL,
   response <- httr2::request(build_url("opt", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -142,7 +142,8 @@ opt_out <- function(npi = NULL,
 
   if (tidy) {
     results <- tidyup(results, yn = "eligible", chr = "npi") |>
-      combine(address, c('first_line_street_address', 'second_line_street_address')) |>
+      combine(address, c('first_line_street_address',
+                         'second_line_street_address')) |>
       cols_opt()
     }
   return(results)

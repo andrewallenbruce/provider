@@ -47,8 +47,6 @@
 #' |`facility_ccn`  |Facility's 6-digit CCN            |
 #' |`parent_ccn`    |Primary facility's 6-digit CCN    |
 #'
-#' @seealso [clinicians()], [providers()], [hospitals()]
-#'
 #' @examplesIf interactive()
 #' affiliations(parent_ccn = 670055)
 #' @autoglobal
@@ -71,25 +69,28 @@ affiliations <- function(npi = NULL,
   parent_ccn   <- parent_ccn %nn% as.character(parent_ccn)
 
   if (!is.null(facility_type)) {
-    facility_type <- dplyr::case_match(facility_type,
-                                       "hp" ~ "Hospital",
-                                       "ltch" ~ "Long-term care hospital",
-                                       "nh" ~ "Nursing home",
-                                       "irf" ~ "Inpatient rehabilitation facility",
-                                       "hha" ~ "Home health agency",
-                                       "snf" ~ "Skilled nursing facility",
-                                       "hs" ~ "Hospice",
-                                       "df" ~ "Dialysis facility",
-                                       .default = facility_type)
 
-    facility_type <- rlang::arg_match(facility_type, c("Hospital",
-                                      "Long-term care hospital",
-                                      "Nursing home",
-                                      "Inpatient rehabilitation facility",
-                                      "Home health agency",
-                                      "Skilled nursing facility",
-                                      "Hospice",
-                                      "Dialysis facility"))
+    facility_type <- dplyr::case_match(
+      facility_type,
+      "hp" ~ "Hospital",
+      "ltch" ~ "Long-term care hospital",
+      "nh" ~ "Nursing home",
+      "irf" ~ "Inpatient rehabilitation facility",
+      "hha" ~ "Home health agency",
+      "snf" ~ "Skilled nursing facility",
+      "hs" ~ "Hospice",
+      "df" ~ "Dialysis facility",
+      .default = facility_type)
+
+    facility_type <- rlang::arg_match(
+      facility_type, c("Hospital",
+                       "Long-term care hospital",
+                       "Nursing home",
+                       "Inpatient rehabilitation facility",
+                       "Home health agency",
+                       "Skilled nursing facility",
+                       "Hospice",
+                       "Dialysis facility"))
     }
 
   args <- dplyr::tribble(
