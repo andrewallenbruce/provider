@@ -16,7 +16,7 @@ utils::globalVariables(c(
   "y", # <clinicians>
   "address", # <clinicians>
   "year", # <compare_hcpcs>
-  "hcpcs_code", # <compare_hcpcs>
+  "hcpcs", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
   "level", # <compare_hcpcs>
   "year", # <compare_conditions>
@@ -86,11 +86,6 @@ utils::globalVariables(c(
   "distro", # <by_service>
   "y", # <by_service>
   "address", # <by_service>
-  "hcpcs_code", # <rbcs_util>
-  "category", # <rbcs_util>
-  "subcategory", # <rbcs_util>
-  "family", # <rbcs_util>
-  "procedure", # <rbcs_util>
   "state.abb", # <by_geography>
   "distro", # <by_geography>
   "y", # <by_geography>
@@ -229,6 +224,7 @@ utils::globalVariables(c(
   "apm_affl_3", # <mips_2021>
   "distro", # <quality_payment>
   "y", # <quality_payment>
+  "set", # <quality_payment>
   "val", # <quality_payment>
   "score", # <quality_payment>
   "y", # <reassignments>
@@ -249,6 +245,11 @@ utils::globalVariables(c(
   "address", # <tidyup.service>
   "specialty", # <tidyup.service>
   "place_of_srvc", # <tidyup.geography>
+  "hcpcs", # <rbcs_util>
+  "category", # <rbcs_util>
+  "subcategory", # <rbcs_util>
+  "family", # <rbcs_util>
+  "procedure", # <rbcs_util>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

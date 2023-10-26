@@ -42,12 +42,12 @@
 #' # `duration_vec()`
 #' dplyr::mutate(dt, dur = duration_vec(date))
 #'
-#' # `make_interval`
+#' # `make_interval()`
 #' dplyr::tibble(date = lubridate::today() - 1000) |>
 #' make_interval(start = date, end = lubridate::today() - 500)
 #'
 #'
-#' # `summary_stats`
+#' # `summary_stats()`
 #' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
 #'                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
 #'                     charges = sample(1000:2000, size = 200),

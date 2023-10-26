@@ -33,7 +33,7 @@
 #'
 #' *Update Frequency:* **Annually**
 #'
-#' @param hcpcs_code < *character* > HCPCS or CPT code
+#' @param hcpcs < *character* > HCPCS or CPT code
 #' @param category < *character* > RBCS Category Description
 #' @param subcategory < *character* > RBCS Subcategory Description
 #' @param family < *character* > RBCS Family Description
@@ -45,7 +45,7 @@
 #'
 #' |**Field**          |**Description**                              |
 #' |:------------------|:--------------------------------------------|
-#' |`hcpcs_code`       |HCPCS or CPT code                            |
+#' |`hcpcs`            |HCPCS or CPT code                            |
 #' |`rbcs_id`          |RBCS Identifier                              |
 #' |`category`         |RBCS Category                                |
 #' |`subcategory`      |RBCS Subcategory                             |
@@ -57,14 +57,14 @@
 #' |`rbcs_end_date`    |Latest Date that the RBCS ID can be applied  |
 #'
 #' @examplesIf interactive()
-#' betos(hcpcs_code = "0001U")
+#' betos(hcpcs = "0001U")
 #' betos(category = "Test")
 #' betos(subcategory = "General Laboratory")
 #' betos(family = "Immunoassay")
 #' betos(procedure = "M")
 #' @autoglobal
 #' @export
-betos <- function(hcpcs_code = NULL,
+betos <- function(hcpcs = NULL,
                   category = NULL,
                   subcategory = NULL,
                   family = NULL,
@@ -73,7 +73,7 @@ betos <- function(hcpcs_code = NULL,
 
   args <- dplyr::tribble(
     ~param,             ~arg,
-    "HCPCS_Cd",         hcpcs_code,
+    "HCPCS_Cd",         hcpcs,
     "RBCS_Cat_Desc",    category,
     "RBCS_Subcat_Desc", subcategory,
     "RBCS_Family_Desc", family,
@@ -85,7 +85,7 @@ betos <- function(hcpcs_code = NULL,
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
-      "hcpcs_code",   hcpcs_code,
+      "hcpcs",        hcpcs,
       "category",     category,
       "subcategory",  subcategory,
       "family",       family,
@@ -115,7 +115,7 @@ betos <- function(hcpcs_code = NULL,
 #' @noRd
 betos_cols <- function(df) {
 
-  cols <- c('hcpcs_code' = 'hcpcs_cd',
+  cols <- c('hcpcs' = 'hcpcs_cd',
             'rbcs_id',
             # 'rbcs_cat',
             'category' = 'rbcs_cat_desc',

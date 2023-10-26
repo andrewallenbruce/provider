@@ -5,7 +5,7 @@
 \title{Restructured BETOS Classification for HCPCS}
 \usage{
 betos(
-  hcpcs_code = NULL,
+  hcpcs = NULL,
   category = NULL,
   subcategory = NULL,
   family = NULL,
@@ -14,7 +14,7 @@ betos(
 )
 }
 \arguments{
-\item{hcpcs_code}{< \emph{character} > HCPCS or CPT code}
+\item{hcpcs}{< \emph{character} > HCPCS or CPT code}
 
 \item{category}{< \emph{character} > RBCS Category Description}
 
@@ -30,7 +30,7 @@ Other (\code{"O"}), or Non-Procedure code (\code{"N"}).}
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
-   \code{hcpcs_code} \tab HCPCS or CPT code \cr
+   \code{hcpcs} \tab HCPCS or CPT code \cr
    \code{rbcs_id} \tab RBCS Identifier \cr
    \code{category} \tab RBCS Category \cr
    \code{subcategory} \tab RBCS Subcategory \cr
@@ -82,7 +82,7 @@ assigned to a 6-character RBCS taxonomy code.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-betos(hcpcs_code = "0001U")
+betos(hcpcs = "0001U")
 betos(category = "Test")
 betos(subcategory = "General Laboratory")
 betos(family = "Immunoassay")

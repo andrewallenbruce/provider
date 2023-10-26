@@ -44,7 +44,7 @@ compare_hcpcs <- function(df, ...) {
       "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  x <- df |> dplyr::select(year, state, hcpcs_code, pos)
+  x <- df |> dplyr::select(year, state, hcpcs, pos)
 
   x$type <- "geography"
 
@@ -69,7 +69,7 @@ hcpcs_cols <- function(df) {
 
   cols <- c('year',
             'level',
-            'hcpcs' = 'hcpcs_code',
+            'hcpcs',
             'pos',
             'category',
             'subcategory',

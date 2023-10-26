@@ -30,6 +30,7 @@ Imports:
     rlang,
     rxnorm,
     strex,
+    stringi,
     stringr,
     tidyr,
     vctrs,

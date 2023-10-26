@@ -1275,34 +1275,6 @@ by_service <- function(year,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-rbcs_util <- function(df) {
-
-  rbcs <- df |>
-    dplyr::distinct(hcpcs_code) |>
-    dplyr::pull(hcpcs_code) |>
-    purrr::map(\(x) betos(hcpcs_code = x)) |>
-    purrr::list_rbind()
-
-  if (vctrs::vec_is_empty(rbcs)) {
-
-    return(df)
-
-  } else {
-
-    rbcs <- dplyr::select(rbcs,
-                          hcpcs_code,
-                          category,
-                          subcategory,
-                          family,
-                          procedure)
-
-    cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs_code)), "rbcs")
-  }
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
 cols_serv <- function(df) {
 
   cols <- c('year',
@@ -1366,7 +1338,7 @@ cols_rbcs <- function(df) {
             'ruca',
             'country',
             'par',
-            'hcpcs_code',
+            'hcpcs',
             'hcpcs_desc',
             'category',
             'subcategory',

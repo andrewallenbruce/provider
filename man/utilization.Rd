@@ -23,7 +23,7 @@ utilization(
   specialty = NULL,
   par = NULL,
   level = NULL,
-  hcpcs_code = NULL,
+  hcpcs = NULL,
   drug = NULL,
   pos = NULL,
   tidy = TRUE,
@@ -78,7 +78,7 @@ aggregated:
 \item \code{National}: Data is aggregated across all states for a given HCPCS Code
 }}
 
-\item{hcpcs_code}{< \emph{character} > HCPCS code used to identify the specific
+\item{hcpcs}{< \emph{character} > HCPCS code used to identify the specific
 medical service furnished by the provider}
 
 \item{drug}{< \emph{boolean} > Identifies whether the HCPCS code is listed in the
@@ -164,7 +164,7 @@ utilization(year = 2020, type = "provider", npi = 1003000423)
 
 utilization(year = 2019, type = "service", npi = 1003000126)
 
-utilization(year = 2020, type = "geography", hcpcs_code = "0002A")
+utilization(year = 2020, type = "geography", hcpcs = "0002A")
 
 # Use the years helper function to retrieve results for every year:
 util_years() |>
