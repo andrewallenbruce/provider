@@ -115,7 +115,7 @@ by provider, service and geography.</p>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -202,7 +202,7 @@ aggregated:</p><ul><li><p><code>"State"</code>: Data is aggregated for each stat
 </ul></dd>
 
 
-<dt>hcpcs_code</dt>
+<dt>hcpcs</dt>
 <dd><p>&lt; <em>character</em> &gt; HCPCS code used to identify the specific
 medical service furnished by the provider</p></dd>
 
@@ -295,7 +295,7 @@ and state-wide by HCPCS code and place of service.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">utilization</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, type <span class="op">=</span> <span class="st">"service"</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">utilization</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, type <span class="op">=</span> <span class="st">"geography"</span>, hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">utilization</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, type <span class="op">=</span> <span class="st">"geography"</span>, hcpcs <span class="op">=</span> <span class="st">"0002A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use the years helper function to retrieve results for every year:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="years.html">util_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
