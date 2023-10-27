@@ -91,7 +91,7 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
     format_cli(cli_args)
     return(invisible(NULL))
   }
-  if (tidy) {results <- cols_cross(tidyup(results))}
+  if (tidy) results <- cols_cross(tidyup(results))
   return(results)
 }
 

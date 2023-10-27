@@ -70,11 +70,11 @@ order_refer <- function(npi   = NULL,
                         tidy  = TRUE,
                         pivot = TRUE) {
 
-  if (!is.null(npi))   {npi   <- validate_npi(npi)}
-  if (!is.null(partb)) {partb <- tf_2_yn(partb)}
-  if (!is.null(dme))   {dme   <- tf_2_yn(dme)}
-  if (!is.null(hha))   {hha   <- tf_2_yn(hha)}
-  if (!is.null(pmd))   {pmd   <- tf_2_yn(pmd)}
+  npi   <- npi %nn% validate_npi(npi)
+  partb <- partb %nn% tf_2_yn(partb)
+  dme   <- dme %nn% tf_2_yn(dme)
+  hha   <- hha %nn% tf_2_yn(hha)
+  pmd   <- pmd %nn% tf_2_yn(pmd)
 
   args <- dplyr::tribble(
     ~param,      ~arg,
@@ -89,7 +89,7 @@ order_refer <- function(npi   = NULL,
   response <- httr2::request(build_url("ord", args)) |>
     httr2::req_perform()
 
-  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+  if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,

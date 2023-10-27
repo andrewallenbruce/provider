@@ -62,10 +62,10 @@ providers <- function(npi = NULL,
                       tidy = TRUE,
                       na.rm = TRUE) {
 
-  if (!is.null(npi))    {npi    <- validate_npi(npi)}
-  if (!is.null(pac))    {pac_id <- check_pac(pac)}
-  if (!is.null(enid))   {check_enid(enid)}
-  if (!is.null(gender)) {rlang::arg_match(gender, c("F", "M", "9"))}
+  npi    <- npi %nn% validate_npi(npi)
+  pac    <- pac %nn% check_pac(pac)
+  enid   <- enid %nn% check_enid(enid)
+  gender <- gender %nn% rlang::arg_match(gender, c("F", "M", "9"))
 
   args <- dplyr::tribble(
                         ~param,  ~arg,
@@ -106,10 +106,8 @@ providers <- function(npi = NULL,
   }
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- cols_pros(tidyup(results))
-    if (na.rm) {results <- narm(results)}
-  }
+  if (tidy)  results <- cols_pros(tidyup(results))
+  if (na.rm) results <- narm(results)
   return(results)
 }
 
