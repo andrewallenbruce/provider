@@ -1,6 +1,7 @@
 #' Compare Providers to State and National Benchmarks
 #'
 #' @description
+#'
 #' + `compare_hcpcs()` allows the user to compare a provider's yearly HCPCS
 #' utilization data to state and national averages
 #'
@@ -25,12 +26,10 @@ NULL
 #'
 #' compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
 #'
-#' map_dfr(
-#'  util_years(), ~utilization(year = .x,
-#'                             npi = 1023076643,
-#'                             type = "service")) |>
-#'  compare_hcpcs()
-#'
+#' map_dfr(util_years(), ~utilization(year = .x,
+#'                                    npi = 1023076643,
+#'                                    type = "service")) |>
+#' compare_hcpcs()
 #'
 #' @describeIn compare performance detail
 #'
@@ -52,7 +51,7 @@ compare_hcpcs <- function(df, ...) {
 
   x$state <- "National"
 
-  national <- purrr::pmap(x, by_geography) |> purrr::list_rbind()
+  national <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   vctrs::vec_rbind(
     hcpcs_cols(df),
@@ -75,9 +74,9 @@ hcpcs_cols <- function(df) {
             'subcategory',
             'family',
             'procedure',
-            'providers' ='tot_provs',
+            'providers'     ='tot_provs',
             'beneficiaries' = 'tot_benes',
-            'services' = 'tot_srvcs',
+            'services'      = 'tot_srvcs',
             'avg_charge',
             'avg_allowed',
             'avg_payment',
@@ -96,11 +95,10 @@ hcpcs_cols <- function(df) {
 #'
 #' compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
 #'
-#' map_dfr(
-#'   util_years(), ~utilization(year = .x,
-#'                              npi = 1023076643,
-#'                              type = "provider")) |>
-#'   compare_conditions()
+#' map_dfr(util_years(), ~utilization(year = .x,
+#'                                    npi = 1023076643,
+#'                                    type = "provider")) |>
+#' compare_conditions()
 #'
 #' @autoglobal
 #' @export
@@ -112,67 +110,36 @@ compare_conditions <- function(df, pivot = FALSE) {
       "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  p <- dplyr::select(df, year, conditions) |>
+  x <- dplyr::select(df, year, sublevel = state, conditions) |>
     tidyr::unnest(conditions) |>
     dplyr::mutate(level = "Provider", .after = year) |>
-    dplyr::rename(
-      "Atrial Fibrillation"                         = cc_af,
-      "Alzheimer's Disease/Dementia"                = cc_alz,
-      "Asthma"                                      = cc_asth,
-      "Cancer"                                      = cc_canc,
-      "Heart Failure"                               = cc_chf,
-      "Chronic Kidney Disease"                      = cc_ckd,
-      "COPD"                                        = cc_copd,
-      "Depression"                                  = cc_dep,
-      "Diabetes"                                    = cc_diab,
-      "Hyperlipidemia"                              = cc_hplip,
-      "Hypertension"                                = cc_hpten,
-      "Ischemic Heart Disease"                      = cc_ihd,
-      "Osteoporosis"                                = cc_opo,
-      "Arthritis"                                   = cc_raoa,
-      "Schizophrenia and Other Psychotic Disorders" = cc_sz,
-      "Stroke"                                      = cc_strk) |>
-    tidyr::pivot_longer(cols = !c(year, level),
-                 names_to = "condition",
-                 values_to = "prevalence") |>
+    cnd_rename() |>
+    tidyr::pivot_longer(cols = !c(year, level, sublevel),
+                        names_to = "condition",
+                        values_to = "prevalence") |>
     dplyr::filter(!is.na(prevalence),
-           year %in% cc_years())
+                  year %in% cc_years())
 
-  n <- dplyr::select(p, year, condition) |>
-    dplyr::rowwise() |>
-    dplyr::mutate(national = conditions(year,
-                                        condition,
-                                        sublevel = "national",
-                                        set = "specific",
-                                        demo = "all",
-                                        subdemo = "all",
-                                        age = "all"),
-                  .keep = "none")
+  y <- dplyr::select(x, year, condition, sublevel) |>
+    dplyr::mutate(set = "specific",
+                  demo = "all",
+                  subdemo = "all",
+                  age = "all")
 
-  s <- dplyr::left_join(dplyr::select(p, year, condition),
-                        dplyr::select(df, year, sublevel = state),
-                        by = dplyr::join_by(year)) |>
-    dplyr::rowwise() |>
-    dplyr::mutate(statewide = conditions(year,
-                                         condition,
-                                         sublevel,
-                                         set = "specific",
-                                         demo = "all",
-                                         subdemo = "all",
-                                         age = "all"),
-                  .keep = "none")
+  state <- purrr::pmap(y, conditions) |>
+    purrr::list_rbind() |>
+    dplyr::select(year, level, condition, prevalence)
 
-  results <- vctrs::vec_rbind(p,
-                   dplyr::select(s$statewide,
-                                 year,
-                                 level,
-                                 condition,
-                                 prevalence),
-                   dplyr::select(n$national,
-                                 year,
-                                 level,
-                                 condition,
-                                 prevalence)) |>
+  y$sublevel <- "national"
+
+  national <- purrr::pmap(y, conditions) |>
+    purrr::list_rbind() |>
+    dplyr::select(year, level, condition, prevalence)
+
+  x$sublevel <- NULL
+
+  vctrs::vec_rbind(x, state, national) |>
+    dplyr::mutate(level = forcats::fct_inorder(level)) |>
     dplyr::arrange(year, condition)
 
   if (pivot) {
@@ -181,4 +148,30 @@ compare_conditions <- function(df, pivot = FALSE) {
                                   values_from = prevalence)
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cnd_rename <- function(df) {
+
+  cols <- c('Atrial Fibrillation'                         = 'cc_af',
+            "Alzheimer's Disease/Dementia"                = 'cc_alz',
+            'Asthma'                                      = 'cc_asth',
+            'Cancer'                                      = 'cc_canc',
+            'Heart Failure'                               = 'cc_chf',
+            'Chronic Kidney Disease'                      = 'cc_ckd',
+            'COPD'                                        = 'cc_copd',
+            'Depression'                                  = 'cc_dep',
+            'Diabetes'                                    = 'cc_diab',
+            'Hyperlipidemia'                              = 'cc_hplip',
+            'Hypertension'                                = 'cc_hpten',
+            'Ischemic Heart Disease'                      = 'cc_ihd',
+            'Osteoporosis'                                = 'cc_opo',
+            'Arthritis'                                   = 'cc_raoa',
+            'Schizophrenia and Other Psychotic Disorders' = 'cc_sz',
+            'Stroke'                                      = 'cc_strk')
+
+  df |> dplyr::rename(dplyr::any_of(cols))
+
 }

@@ -20,27 +20,10 @@ utils::globalVariables(c(
   "pos", # <compare_hcpcs>
   "level", # <compare_hcpcs>
   "year", # <compare_conditions>
-  "cc_af", # <compare_conditions>
-  "cc_alz", # <compare_conditions>
-  "cc_asth", # <compare_conditions>
-  "cc_canc", # <compare_conditions>
-  "cc_chf", # <compare_conditions>
-  "cc_ckd", # <compare_conditions>
-  "cc_copd", # <compare_conditions>
-  "cc_dep", # <compare_conditions>
-  "cc_diab", # <compare_conditions>
-  "cc_hplip", # <compare_conditions>
-  "cc_hpten", # <compare_conditions>
-  "cc_ihd", # <compare_conditions>
-  "cc_opo", # <compare_conditions>
-  "cc_raoa", # <compare_conditions>
-  "cc_sz", # <compare_conditions>
-  "cc_strk", # <compare_conditions>
   "level", # <compare_conditions>
+  "sublevel", # <compare_conditions>
   "prevalence", # <compare_conditions>
   "condition", # <compare_conditions>
-  "state", # <compare_conditions>
-  "sublevel", # <compare_conditions>
   "state.abb", # <conditions>
   "distro", # <conditions>
   "y", # <conditions>
@@ -240,6 +223,11 @@ utils::globalVariables(c(
   "y", # <utilization>
   "address", # <tidyup.provider>
   "specialty", # <tidyup.provider>
+  "tot_allowed", # <tidyup.provider>
+  "tot_payment", # <tidyup.provider>
+  "tot_srvcs", # <tidyup.provider>
+  "tot_benes", # <tidyup.provider>
+  "hcc_risk_avg", # <tidyup.provider>
   "medical", # <tidyup.provider>
   "drug", # <tidyup.provider>
   "address", # <tidyup.service>

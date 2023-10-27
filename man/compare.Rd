@@ -47,21 +47,18 @@ national averages
 
 compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
 
-map_dfr(
- util_years(), ~utilization(year = .x,
-                            npi = 1023076643,
-                            type = "service")) |>
- compare_hcpcs()
-
+map_dfr(util_years(), ~utilization(year = .x,
+                                   npi = 1023076643,
+                                   type = "service")) |>
+compare_hcpcs()
 \dontshow{\}) # examplesIf}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
 
-map_dfr(
-  util_years(), ~utilization(year = .x,
-                             npi = 1023076643,
-                             type = "provider")) |>
-  compare_conditions()
+map_dfr(util_years(), ~utilization(year = .x,
+                                   npi = 1023076643,
+                                   type = "provider")) |>
+compare_conditions()
 \dontshow{\}) # examplesIf}
 }

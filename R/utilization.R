@@ -251,34 +251,34 @@ tidyup.provider <- function(results, nest, detailed) {
 
   results <- janitor::clean_names(results) |>
     cols_util("provider") |>
-    tidyup(yn = "par",
-           int = c("year", "_hcpcs", "bene", "_srvcs"),
-           dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
+    tidyup(yn   = "par",
+           int  = c("year", "_hcpcs", "bene", "_srvcs"),
+           dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
            cred = "credential",
-           ent = "entity_type",
-           yr = 'year') |>
+           ent  = "entity_type",
+           yr   = 'year') |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
-    dplyr::mutate(specialty = correct_specialty(specialty))
+    dplyr::mutate(specialty       = correct_specialty(specialty),
+                  .copay_deduct   = tot_allowed - tot_payment,
+                  .srvcs_per_bene = tot_srvcs   / tot_benes,
+                  .pymt_per_bene  = tot_payment / tot_benes,
+                  .pymt_per_srvc  = tot_payment / tot_srvcs)
 
   if (nest) {
     results <- tidyr::nest(
       results,
+      performance    = c(dplyr::starts_with("tot_"), dplyr::starts_with(".")),
       demographics   = dplyr::starts_with("bene_"),
-      conditions     = dplyr::starts_with("cc_"))
+      conditions     = c(hcc_risk_avg, dplyr::starts_with("cc_")))
   }
   if (detailed) {
-    results <- tidyr::nest(
-      results,
-      medical = dplyr::starts_with("med_"),
-      drug = dplyr::starts_with("drug_")) |>
-      tidyr::nest(
-        results,
-        detailed = c(medical, drug))
+    results <- tidyr::nest(results, medical  = dplyr::starts_with("med_"),
+                                    drug     = dplyr::starts_with("drug_")) |>
+               tidyr::nest(results, detailed = c(medical, drug))
   } else {
-    results <- dplyr::select(
-      results,
-      -dplyr::starts_with("med_"),
-      -dplyr::starts_with("drug_"))
+    results <- dplyr::select(results,
+                             -dplyr::starts_with("med_"),
+                             -dplyr::starts_with("drug_"))
   }
   class(results) <- c("utilization_provider", class(results))
   return(results)
@@ -293,10 +293,10 @@ tidyup.service <- function(results, rbcs) {
   results$level <- "Provider"
 
   results <- tidyup(results,
-                    yn = "_ind",
-                    int = c("year", "tot_"),
-                    dbl = "avg_",
-                    yr = 'year') |>
+                    yn      = "_ind",
+                    int     = c("year", "tot_"),
+                    dbl     = "avg_",
+                    yr      = 'year') |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     cols_util("service") |>
     dplyr::mutate(specialty = correct_specialty(specialty))
@@ -314,10 +314,10 @@ tidyup.service <- function(results, rbcs) {
 tidyup.geography <- function(results, rbcs) {
 
   results <- tidyup(results,
-                    yn = "_ind",
-                    int = c("year", "tot_"),
-                    dbl = "avg_",
-                    yr = 'year') |>
+                    yn           = "_ind",
+                    int          = c("year", "tot_"),
+                    dbl          = "avg_",
+                    yr           = 'year') |>
     dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
     cols_util("geography")
 
@@ -331,11 +331,7 @@ tidyup.geography <- function(results, rbcs) {
 #' @param type 'provider', 'service', 'geography' or 'rbcs'
 #' @autoglobal
 #' @noRd
-cols_util <- function(df,
-                      type = c("provider",
-                               "service",
-                               "geography",
-                               "rbcs")) {
+cols_util <- function(df, type) {
 
   if (type == "geography") {
 
@@ -529,15 +525,8 @@ rbcs_util <- function(df) {
 
   } else {
 
-    rbcs <- dplyr::select(rbcs,
-                          hcpcs,
-                          category,
-                          subcategory,
-                          family,
-                          procedure)
-
-    cols_util(dplyr::full_join(df, rbcs,
-    by = dplyr::join_by(hcpcs)), "rbcs")
+    rbcs <- dplyr::select(rbcs, hcpcs, category, subcategory, family, procedure)
+    cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs)), "rbcs")
   }
 }
 
