@@ -32,32 +32,48 @@ library(gt)
 
 ## Individual Provider
 
-```{r}
-p <- providers(pac = 7810891009) |> mutate(source = '`providers()`', .before = 1)
-r <- reassignments(pac = 7810891009) |> mutate(source = '`reassignments()`')
-c <- clinicians(pac = 7810891009) |> mutate(source = '`clinicians()`')
 
-full_join(p, r) |> 
-  full_join(c) |>
-  pivot_longer(!source) |> 
-  display_long() |> 
-  gt_preview(top_n = 50) |> 
+```{r}
+vctrs::vec_rbind(
+  display_long(providers(pac = 7810891009)) |> tibble::add_column(source = "`providers()`"),
+  display_long(reassignments(pac = 7810891009)) |> tibble::add_column(source = "`reassignments()`"),
+  display_long(clinicians(pac = 7810891009)) |> tibble::add_column(source = "`clinicians()`"),
+  display_long(nppes(npi = 1043245657)) |> tibble::add_column(source = "`nppes()`"),
+  display_long(order_refer(npi = 1043245657)) |> tibble::add_column(source = "`order_refer()`")) |> 
+  distinct(name, value, .keep_all = TRUE) |> 
+  gt(groupname_col = "source", 
+     row_group_as_column = TRUE, process_md = TRUE) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  tab_options(column_labels.hidden = TRUE)
+  tab_options(column_labels.hidden = TRUE, 
+              table.width = px(600),
+              heading.background.color = "black",
+              heading.align = "left", 
+              stub_row_group.font.weight = "bold") |> 
+  tab_header(title = md("**PROVIDER**: Mark, K. Fung, M.D.")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  opt_all_caps()
 ```
 
 <br>
 
 ```{r}
-a <- affiliations(pac = 7810891009) |> select(-facility_type)
-
-h <- a |> pull(facility_ccn) |>
+affiliations(pac = 7810891009) |> 
+  pull(facility_ccn) |>
   map_dfr(~hospitals(facility_ccn = .x)) |> 
-  select(-reh_conversion)
-
-full_join(a, h) |> 
-  gt_preview(top_n = 30) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+  select(-reh_conversion) |> 
+  display_long(cols = !organization) |> 
+  filter(!is.na(value)) |> 
+  gt(groupname_col = "organization", 
+     row_group_as_column = TRUE) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  tab_options(column_labels.hidden = TRUE, 
+              table.width = px(800),
+              heading.background.color = "black",
+              heading.align = "left", 
+              stub_row_group.font.weight = "bold") |> 
+  tab_header(title = md("**FACILITY** AFFILIATIONS")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  opt_all_caps()
 ```
 
 

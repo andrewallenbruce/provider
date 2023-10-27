@@ -189,7 +189,7 @@ hospitals <- function(npi = NULL,
                       pivot = TRUE,
                       na.rm = TRUE) {
 
-  npi          <- npi %nn% check_npi(npi)
+  npi          <- npi %nn% validate_npi(npi)
   pac_org      <- pac_org %nn% check_pac(pac_org)
   enid_org     <- enid_org %nn% check_enid(enid_org, type = "org")
   zip          <- zip %nn% as.character(zip)

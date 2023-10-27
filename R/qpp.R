@@ -35,6 +35,7 @@
 #' quality_eligibility(year = 2020, npi = 1144544834)
 #' @autoglobal
 #' @noRd
+# nocov start
 quality_eligibility <- function(year, npi = NULL, tidy = TRUE) {
 
   rlang::check_required(year)
@@ -186,7 +187,7 @@ mips_2021 <- function(facility_name = NULL,
 
     id <- mips_2021_id("ind")
 
-    if (!is.null(npi)) {npi <- check_npi(npi)}
+    if (!is.null(npi)) {npi <- validate_npi(npi)}
     if (!is.null(pac_id_ind)) {pac_id_ind <- check_pac(pac_id_ind)}
 
   }
@@ -301,3 +302,4 @@ mips_2021_id <- function(type = c("ind", "group")) {
 
   return(response$distribution$identifier)
 }
+# nocov end

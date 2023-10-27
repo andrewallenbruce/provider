@@ -62,7 +62,7 @@ providers <- function(npi = NULL,
                       tidy = TRUE,
                       na.rm = TRUE) {
 
-  if (!is.null(npi))    {npi    <- check_npi(npi)}
+  if (!is.null(npi))    {npi    <- validate_npi(npi)}
   if (!is.null(pac))    {pac_id <- check_pac(pac)}
   if (!is.null(enid))   {check_enid(enid)}
   if (!is.null(gender)) {rlang::arg_match(gender, c("F", "M", "9"))}

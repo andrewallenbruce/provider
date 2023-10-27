@@ -162,7 +162,7 @@ open_payments <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, as.character(open_years()))
 
-  npi <- npi %nn% check_npi(npi)
+  npi <- npi %nn% validate_npi(npi)
   zip <- zip %nn% as.character(zip)
 
   if (!is.null(covered_type)) {

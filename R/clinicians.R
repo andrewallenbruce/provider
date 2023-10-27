@@ -89,7 +89,7 @@ clinicians <- function(npi = NULL,
                        tidy = TRUE,
                        na.rm = TRUE) {
 
-  npi       <- npi %nn% check_npi(npi)
+  npi       <- npi %nn% validate_npi(npi)
   pac       <- pac %nn% check_pac(pac)
   pac_org   <- pac_org %nn% check_pac(pac_org)
   enid      <- enid %nn% check_enid(enid)

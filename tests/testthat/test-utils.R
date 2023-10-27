@@ -43,9 +43,11 @@ test_that("entype_char() works", {
 })
 
 test_that("display_long() works", {
-  x <- dplyr::tibble(x = "NPI", y = "1144544834")
-  y <- dplyr::tibble(name = c("x", "y"), value = c("NPI", "1144544834"))
+  x <- dplyr::tibble(x = "NPI", y = "1144544834", id = 1)
+  y <- dplyr::tibble(name = c("x", "y", "id"), value = c("NPI", "1144544834", "1"))
+  z <- dplyr::tibble(id = c("1", "1"), name = c("x", "y"), value = c("NPI", "1144544834"))
   expect_equal(display_long(x), y)
+  expect_equal(display_long(x, cols = !id), z)
 })
 
 test_that("tidyup() works", {

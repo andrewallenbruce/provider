@@ -152,13 +152,13 @@ utilization <- function(year,
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
-  npi        <- npi %nn% validate_npi(npi)
-  zip        <- zip %nn% as.character(zip)
-  fips       <- fips %nn% as.character(fips)
-  ruca       <- ruca %nn% as.character(ruca)
-  par        <- par %nn% tf_2_yn(par)
+  npi   <- npi %nn% validate_npi(npi)
+  zip   <- zip %nn% as.character(zip)
+  fips  <- fips %nn% as.character(fips)
+  ruca  <- ruca %nn% as.character(ruca)
+  par   <- par %nn% tf_2_yn(par)
   hcpcs <- hcpcs %nn% as.character(hcpcs)
-  drug       <- drug %nn% tf_2_yn(drug)
+  drug  <- drug %nn% tf_2_yn(drug)
 
   if (!is.null(pos)) {
     rlang::arg_match(pos, c("F", "O"))
