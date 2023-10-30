@@ -200,7 +200,8 @@ open_payments <- function(year,
     httr2::req_error(body = open_payments_error) |>
     httr2::req_perform()
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE) |>
+    df2chr()
 
   if (vctrs::vec_is_empty(results)) {
 

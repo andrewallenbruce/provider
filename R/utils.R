@@ -138,6 +138,17 @@ display_long <- function(df, cols = dplyr::everything()) {
         tidyr::pivot_longer({{ cols }})
 }
 
+
+#' Convert data.frame cols to character
+#' @param df data frame
+#' @autoglobal
+#' @export
+#' @keywords internal
+df2chr <- function(df) {
+
+  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+}
+
 #' Tidy a Data Frame
 #' @param df data frame
 #' @param dt cols to convert to date with [anytime::anydate()]

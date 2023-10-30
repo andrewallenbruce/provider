@@ -230,7 +230,8 @@ utilization <- function(year,
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE) |>
+    df2chr()
 
   if (tidy) {
     results$year <- year
