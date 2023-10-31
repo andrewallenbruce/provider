@@ -31,7 +31,7 @@
 #' @param period < *character* > Time frame of Medicare enrollment; options
 #' are `"Year"`, `Month`, or any individual month name
 #' @param level < *character* > Geographic level of data; options are
-#' `"National"`, `"State"`, or `County`
+#' `"National"`, `"State"`, or `"County"`
 #' @param state < *character* > Full state name or abbreviation of
 #' beneficiary residence
 #' @param county < *character* > County of beneficiary residence
@@ -86,6 +86,8 @@ beneficiaries <- function(year = NULL,
                           fips = NULL,
                           tidy = TRUE) {
 
+  state_name <- NULL
+
   if (!is.null(year)) {
     year <- as.character(year)
 
@@ -104,7 +106,7 @@ beneficiaries <- function(year = NULL,
   level <- level %nn% rlang::arg_match(level, c("National", "State", "County"))
 
   if (!is.null(state)) {
-    rlang::arg_match(state, c(state.abb, state.name, "US"))
+    state <- rlang::arg_match(state, c(state.abb, state.name, "US"))
 
     if (state %in% c(state.name, "United States")) {
       state_name <- state

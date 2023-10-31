@@ -26,7 +26,7 @@ can be checked with:
 are \code{"Year"}, \code{Month}, or any individual month name}
 
 \item{level}{< \emph{character} > Geographic level of data; options are
-\code{"National"}, \code{"State"}, or \code{County}}
+\code{"National"}, \code{"State"}, or \code{"County"}}
 
 \item{state}{< \emph{character} > Full state name or abbreviation of
 beneficiary residence}
