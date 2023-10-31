@@ -108,14 +108,13 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.svg" class="logo" alt=""><h1 id="provider-">
-<code>{provider}</code> <a class="anchor" aria-label="anchor" href="#provider-"></a>
+<img src="logo.svg" class="logo" alt=""><h1 id="provider-">provider <a class="anchor" aria-label="anchor" href="#provider-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
 <blockquote>
-<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources.</p>
+<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs.</p>
 </blockquote>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -126,23 +125,10 @@
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The overarching goal of <code>provider</code> is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:</p>
-<ul>
-<li><p><em>Structuring output in the <strong>tidy</strong> framework</em> as much as is reasonably possible, with an option to turn it off by setting <code>tidy = FALSE</code>.</p></li>
-<li><p><em>Harmonization of variable names</em>, for the express purpose of making it easier to understand (and make connections between) each API’s output. This will also allow for removal of duplicate information across API output, if desired.</p></li>
-<li><p><em>Validation checks of inputs</em>, as is reasonable (e.g, identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only is this simply good practice, it will also prevent unnecessary querying of the APIs.</p></li>
-<li><p><em>Well-written documentation</em>, containing as many examples as is necessary. Each API’s output can be difficult to understand, even for someone with expertise in R, healthcare, or both.</p></li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="exported-functions">Exported Functions<a class="anchor" aria-label="anchor" href="#exported-functions"></a>
-</h2>
-<p>API Search functions can be grouped according to the type of data they return about a provider: <em>administrative</em>, <em>statistical</em>, and <em>auxiliary.</em></p>
-<div class="section level3">
-<h3 id="administrative">Administrative<a class="anchor" aria-label="anchor" href="#administrative"></a>
-</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
 <code><a href="reference/nppes.html">nppes()</a></code>: Registry of all healthcare providers.</li>
@@ -151,59 +137,41 @@
 <li>
 <code><a href="reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of Medicare.</li>
 <li>
-<code>revalidation_*()</code>: Link Type-1 and Type-2 providers.</li>
+<code><a href="reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and refer?</li>
+<li>
+<code>reassignments</code>()`: Link Type-1 and Type-2 providers.</li>
 <li>
 <code><a href="reference/clinicians.html">clinicians()</a></code>: Provider school, graduation year, linking.</li>
 <li>
 <code><a href="reference/affiliations.html">affiliations()</a></code>: Linking providers to Facilities.</li>
 <li>
-<code><a href="reference/hospitals.html">hospitals()</a></code>: Facilities linked to providers.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="statistical">Statistical<a class="anchor" aria-label="anchor" href="#statistical"></a>
-</h3>
-<p>The following return provider-specific stats:</p>
-<ul>
+<code><a href="reference/hospitals.html">hospitals()</a></code>: Hospitals actively enrolled in Medicare.</li>
 <li>
-<code><a href="reference/by_.html">by_provider()</a></code>: Yearly high-level utilization data.</li>
-<li>
-<code><a href="reference/by_.html">by_service()</a></code>: Yearly detailed utilization data.</li>
+<code><a href="reference/utilization.html">utilization()</a></code>: Yearly high-level utilization data.</li>
 <li>
 <code><a href="reference/quality_payment.html">quality_payment()</a></code>: Yearly QPP/MIPS performance data.</li>
 <li>
-<code>quality_eligibility()</code>: Yearly QPP/MIPS eligibility data.</li>
-<li>
 <code><a href="reference/open_payments.html">open_payments()</a></code>: Yearly Open Payments reporting data.</li>
+<li><code><a href="reference/beneficiaries.html">beneficiaries()</a></code></li>
+<li><code><a href="reference/conditions.html">conditions()</a></code></li>
 </ul>
-<p>The following return yearly stats useful for comparison against data returned from <code><a href="reference/by_.html">by_service()</a></code>:</p>
-<ul>
-<li><code>geography()</code></li>
-<li><code>beneficiary()</code></li>
-<li><code>chronic_multiple()</code></li>
-<li><code>chronic_specific()</code></li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="auxiliary">Auxiliary<a class="anchor" aria-label="anchor" href="#auxiliary"></a>
-</h3>
-<ul>
-<li>
-<code><a href="reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and refer?</li>
-<li>
-<code>missing_endpoints()</code>: Is a provider missing Endpoints in the NPPES NPI Registry?</li>
-<li>
-<code>pending_applications()</code>: Has a provider’s Medicare application been processed?</li>
-<li>
-<code><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty eligible to enroll in Medicare?</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/providers.html">providers</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"ANDREW"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, specialty_code <span class="op">=</span> <span class="st">"14-93"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 29 × 10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    npi       pac   enid  specialty_code specialty_description state first middle</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 18211979… 6507… I200… 14-93          PRACTITIONER - EMERG… GA    ANDR… S     </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 16290504… 1557… I200… 14-93          PRACTITIONER - EMERG… GA    ANDR… K     </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 14575504… 2769… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… PATRI…</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 10230036… 6608… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… G     </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 10636636… 4880… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… &lt;NA&gt;  </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 16997185… 1759… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… A     </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 13061595… 5991… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… M     </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 16394605… 3274… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… JAMES </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 17203772… 7719… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… R     </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 13465008… 6305… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… &lt;NA&gt;  </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 19 more rows</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: last &lt;chr&gt;, gender &lt;chr&gt;</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
