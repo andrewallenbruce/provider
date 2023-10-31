@@ -6,16 +6,12 @@
 \alias{compare_conditions}
 \title{Compare Providers to State and National Benchmarks}
 \usage{
-compare_hcpcs(df, ...)
+compare_hcpcs(df)
 
 compare_conditions(df, pivot = FALSE)
 }
 \arguments{
 \item{df}{< \emph{tbl_df} > // \strong{required} \code{\link[=tibble]{tibble()}} returned from \code{utilization(type = "provider")}}
-
-\item{...}{For future use.
-
-\code{\link[=tibble]{tibble()}} returned from \code{utilization(type = "service")}}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{FALSE} Pivot output}
 }

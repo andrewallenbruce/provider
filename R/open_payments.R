@@ -200,8 +200,7 @@ open_payments <- function(year,
     httr2::req_error(body = open_payments_error) |>
     httr2::req_perform()
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE) |>
-    df2chr()
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (vctrs::vec_is_empty(results)) {
 
@@ -224,6 +223,8 @@ open_payments <- function(year,
     format_cli(cli_args)
     return(invisible(NULL))
   }
+
+  if (!tidy) results <- df2chr(results)
 
   if (tidy) {
     yncols <- c('physician_ownership_indicator',

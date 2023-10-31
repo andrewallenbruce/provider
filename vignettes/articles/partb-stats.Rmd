@@ -25,108 +25,61 @@ library(provider)
 library(tidyverse)
 library(gt)
 library(gtExtras)
+library(tictoc)
 ```
+
+
+
+## `utilization()`
+
+
+```{r}
+tic()
+ind     <- map_dfr(util_years(), ~utilization(year = .x, npi = 1043477615, type = "provider"))
+srvc    <- map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "service"))
+chronic <- compare_conditions(ind)
+hcpcs   <- compare_hcpcs(srvc)
+toc()
+
+## 292.17 sec elapsed
+## 4.8695 min
+```
+
+
 
 <br>
 
-```{r}
-val <- map_dfr(util_years(), ~utilization(year = .x, city = "Valdosta", state = "GA", type = "provider")) |> 
-  select(year, entity_type, gender, credential, specialty, par:conditions)
+### Provider Performance Data
 
-val |> 
-  mutate(coin_deduct = tot_allowed - tot_payment, .after = tot_payment) |> 
-  mutate(srvcs_per_bene = tot_srvcs / tot_benes, .after = tot_srvcs) |> 
-  mutate(pay_per_srvc = tot_payment / tot_srvcs, .after = tot_srvcs) |> 
-  select(-c(par, demographics, conditions)) |> 
-  gt_preview(top_n = 10, bottom_n = 10) |> 
-  opt_table_font(font = google_font(name = "Fira Code")) |> 
-  opt_stylize() |> 
+```{r}
+ind |> 
+  unnest(performance) |> 
+  select(year, tot_hcpcs:.pymt_per_srvc)
+```
+
+
+### Beneficiary Demographics
+
+```{r}
+ind |> 
+  unnest(performance, demographics) |> 
+  select(year, tot_benes, starts_with("bene_")) |> 
+  gt(rowname_col = "year") |> 
+  cols_label(tot_benes = "Total") |>  
+  fmt_percent(columns = starts_with("cc_"), decimals = 0) |>
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
+  sub_missing(missing_text = "") |>
+  sub_zero(zero_text = "") |>
   opt_all_caps()
 ```
 
 
+### Beneficiary Chronic Conditions Data
 
 ```{r}
-val |> 
-  group_by(year) |> 
-  summarise(
-    provs = n(),
-    benes = sum(tot_benes),
-    srvcs = sum(tot_srvcs), 
-    pymt = sum(tot_payment),
-    .groups = "drop") |> 
-  change(!year) |> 
-  select(year,
-         provs,
-         provs_chg,
-         provs_pct,
-         provs_ror = provs_pct_ror,
-         benes,
-         benes_chg,
-         benes_pct,
-         benes_ror = benes_pct_ror,
-         srvcs,
-         srvcs_chg,
-         srvcs_pct,
-         srvcs_ror = srvcs_pct_ror,
-         pymt,
-         pymt_chg,
-         pymt_pct,
-         pymt_ror = pymt_pct_ror,) |> 
-  gt(rowname_col = "year") |> 
-  sub_zero(zero_text = "") |> 
-  sub_missing(missing_text = "") |>
-  fmt_integer(columns = c(provs, benes, srvcs, pymt), sep_mark = ",", suffixing = TRUE) |>
-  fmt_integer(columns = ends_with("chg"), force_sign = TRUE, sep_mark = ",", suffixing = TRUE) |>
-  fmt_percent(columns = ends_with("pct"), force_sign = TRUE, decimals = 1) |>
-  fmt_percent(columns = ends_with("ror"), decimals = 1) |>
-  cols_label(
-    provs = "Tot",
-    provs_chg = "Abs",
-    provs_ror = "RoR",
-    provs_pct = "%",
-    benes = "Tot",
-    benes_chg = "Abs",
-    benes_ror = "RoR",
-    benes_pct = "%",
-    srvcs = "Tot",
-    srvcs_chg = "Abs",
-    srvcs_ror = "RoR",
-    srvcs_pct = "%",
-    pymt = "Tot",
-    pymt_chg = "Abs",
-    pymt_ror = "RoR",
-    pymt_pct = "%") |> 
-  cols_hide(columns = c(benes, srvcs, pymt)) |> 
-  tab_spanner(label = "Providers",
-    columns = c(provs, provs_chg, provs_ror, provs_pct)) |> 
-  tab_spanner(label = "Payment",
-    columns = c(pymt, pymt_chg, pymt_ror, pymt_pct)) |>
-  tab_spanner(label = "Beneficiaries",
-    columns = c(benes, benes_chg, benes_ror, benes_pct)) |>
-  tab_spanner(label = "Services",
-    columns = c(srvcs, srvcs_chg, srvcs_ror, srvcs_pct)) |>
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  opt_all_caps() |> 
-  opt_stylize(color = "red")
-```
-
-
-## Provider Utilization Summary
-
-```{r}
-ind1 <- map_dfr(util_years(), ~utilization(year = .x, npi = 1043245657, type = "provider"))
-ind2 <- map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "provider"))
-```
-
-<br>
-
-__Beneficiary Health data__
-
-_`rowwise()`/`c_across()` function to calculate actual number of beneficiaries, e.g. tot_benes * cc_af_
-
-```{r}
-select(ind1, year, tot_benes, conditions) |> 
+ind |> 
+  unnest(performance) |> 
+  select(year, tot_benes, conditions) |> 
   unnest(conditions) |>
   gt(rowname_col = "year") |> 
   cols_label(tot_benes = "Total") |>  
@@ -137,176 +90,14 @@ select(ind1, year, tot_benes, conditions) |>
   opt_all_caps()
 ```
 
-<br><br>
-
-<details><summary>Code</summary>
-<p>
-
-```{r}
-rnk <- select(ind1, year, starts_with("tot_")) |> 
-  select(-tot_hcpcs, -tot_std_pymt) |> 
-  change(starts_with("tot_")) |>
-  select(-ends_with("_csm")) |> 
-  gt(rowname_col = "year") |> 
-  gtExtras::gt_duplicate_column(tot_benes_pct, after = tot_benes_pct_ror, dupe_name = "benes_pct") |> 
-  gtExtras::gt_fa_rank_change(benes_pct, font_color = "match", show_text = FALSE, palette = c("#FEC1A5FF", "lightgrey", "#BF714DFF")) |>
-  gtExtras::gt_duplicate_column(tot_srvcs_pct, after = tot_srvcs, dupe_name = "srvcs_pct") |> 
-  gtExtras::gt_fa_rank_change(srvcs_pct, font_color = "match", show_text = FALSE, palette = c("#FEC1A5FF", "lightgrey", "#BF714DFF")) |>
-  gtExtras::gt_duplicate_column(tot_charges_pct, after = tot_charges, dupe_name = "charges_pct") |> 
-  gtExtras::gt_fa_rank_change(charges_pct, font_color = "match", show_text = FALSE, palette = c("#FEC1A5FF", "lightgrey", "#BF714DFF")) |>
-  gtExtras::gt_duplicate_column(tot_allowed_pct, after = tot_allowed, dupe_name = "allowed_pct") |> 
-  gtExtras::gt_fa_rank_change(allowed_pct, font_color = "match", show_text = FALSE, palette = c("#FEC1A5FF", "lightgrey", "#BF714DFF")) |>
-  gtExtras::gt_duplicate_column(tot_payment_pct, after = tot_payment, dupe_name = "payment_pct") |> 
-  gtExtras::gt_fa_rank_change(payment_pct, font_color = "match", show_text = FALSE, palette = c("#FEC1A5FF", "lightgrey", "#BF714DFF")) |>
-  fmt_percent(columns = ends_with("_pct_ror"), decimals = 0) |>
-  fmt_percent(columns = ends_with("_pct"), decimals = 0, force_sign = TRUE) |>
-  fmt_integer(columns = c(tot_benes, 
-                          tot_srvcs, 
-                          tot_benes_chg, 
-                          tot_srvcs_chg, 
-                          tot_charges_chg, 
-                          tot_allowed_chg, 
-                          tot_payment_chg), suffixing = TRUE) |> 
-  fmt_currency(columns = c(tot_charges, 
-                           tot_allowed, 
-                           tot_payment), decimals = 0, suffixing = TRUE) |> 
-  sub_zero(zero_text = "") |> 
-  grand_summary_rows(columns = ends_with("_pct_ror"),
-                     fns =  list(label = md("**Geo**"), 
-                                 id = "mean", fn = "provider::geomean"),
-                     fmt = ~ fmt_percent(., decimals = 0), 
-                     missing_text = "") |> 
-  grand_summary_rows(columns = c(tot_benes_pct,
-                                 tot_srvcs_pct,
-                                 tot_charges_pct, 
-                                 tot_allowed_pct, 
-                                 tot_payment_pct),
-                     fns =  list(label = md("**Sum**"), 
-                                 id = "sum", fn = "sum"),
-                     fmt = ~ fmt_percent(., decimals = 0, force_sign = TRUE), 
-                     missing_text = "") |> 
-  tab_spanner(label = "Beneficiaries", columns = contains("benes")) |> 
-  tab_spanner(label = "Services", columns = contains("srvcs")) |> 
-  tab_spanner(label = "Charges", columns = contains("charges")) |> 
-  tab_spanner(label = "Allowed", columns = contains("allowed")) |> 
-  tab_spanner(label = "Payment", columns = contains("payment")) |> 
-  cols_label(
-    benes_pct = "",
-    srvcs_pct = "",
-    charges_pct = "",
-    allowed_pct = "",
-    payment_pct = "",
-    tot_benes_pct_ror = "RoR",
-    tot_srvcs_pct_ror = "RoR",
-    tot_charges_pct_ror = "RoR",
-    tot_allowed_pct_ror = "RoR",
-    tot_payment_pct_ror = "RoR",
-    tot_benes       = ("Tot"),
-    tot_benes_pct   = ("(%)"),
-    tot_srvcs       = ("Tot"),
-    tot_srvcs_pct   = ("(%)"),
-    tot_charges     = ("Tot"),
-    tot_charges_pct = ("(%)"),
-    tot_allowed     = ("Tot"),
-    tot_allowed_pct = ("(%)"),
-    tot_payment     = ("Tot"),
-    tot_payment_pct = ("(%)")) |> 
-  cols_hide(columns = ends_with("_chg")) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Medicare Part B** Utilization"),
-             subtitle = md("Counts & Amounts, 2013-2019")) |> 
-  data_color(columns = c(tot_benes, tot_srvcs, tot_charges, tot_allowed, tot_payment),
-             method = "numeric",
-             palette = "Reds") |> 
-  data_color(columns = c(tot_benes_chg, tot_benes_pct),
-             rows = tot_benes_chg < 0,
-             method = "numeric",
-             palette = "red2", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_benes_chg, tot_benes_pct),
-             rows = tot_benes_chg > 0,
-             method = "numeric",
-             palette = "gray90", 
-             apply_to = "fill") |> 
-  data_color(columns = c(tot_srvcs_chg, tot_srvcs_pct),
-             rows = tot_srvcs_chg < 0,
-             method = "numeric",
-             palette = "red2", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_srvcs_chg, tot_srvcs_pct),
-             rows = tot_srvcs_chg > 0,
-             method = "numeric",
-             palette = "gray90", 
-             apply_to = "fill") |> 
-  data_color(columns = c(tot_charges_chg, tot_charges_pct),
-             rows = tot_charges_chg < 0,
-             method = "numeric",
-             palette = "red2", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_charges_chg, tot_charges_pct),
-             rows = tot_charges_chg > 0,
-             method = "numeric",
-             palette = "gray90", 
-             apply_to = "fill") |> 
-  data_color(columns = c(tot_allowed_chg, tot_allowed_pct),
-             rows = tot_allowed_chg < 0,
-             method = "numeric",
-             palette = "red2", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_allowed_chg, tot_allowed_pct),
-             rows = tot_allowed_chg > 0,
-             method = "numeric",
-             palette = "gray90", 
-             apply_to = "fill") |> 
-  data_color(columns = c(tot_payment_chg, tot_payment_pct),
-             rows = tot_payment_chg < 0,
-             method = "numeric",
-             palette = "red2", 
-             apply_to = "text") |> 
-  data_color(columns = c(tot_payment_chg, tot_payment_pct),
-             rows = tot_payment_chg > 0,
-             method = "numeric",
-             palette = "gray90", 
-             apply_to = "fill") |> 
-  tab_options(table.width = pct(100),
-              column_labels.font.weight = "bold",
-              row_group.font.weight = "bold",
-              heading.background.color = "black",
-              heading.align = "left") |> 
-  tab_header(title = md("**Medicare Part B** Utilization")) |> 
-  opt_horizontal_padding(scale = 2) |> 
-  tab_options(table.width = pct(50),
-              column_labels.font.weight = "bold",
-              row_group.font.weight = "bold",
-              heading.background.color = "black",
-              heading.align = "left") |> 
-  opt_all_caps()
-```
-
-</p>
-</details> 
-
-
-```{r echo=FALSE, eval=TRUE}
-rnk
-```
-
 
 <br>
 
 ### Chronic Condition Prevalence
 
-```{r}
-chronic1 <- compare_conditions(ind1, pivot = FALSE)
-chronic2 <- compare_conditions(ind1, pivot = TRUE)
-```
-
-<br>
-
-
 
 ```{r}
-chronic1 |>
+chronic |>
   # filter(prevalence > 0)
   # filter(!if_any(contains("20"), ~ . <= 0)) |>
   pivot_wider(names_from = year, 
@@ -335,8 +126,6 @@ chronic1 |>
 ## HCPCS Utilization Data
 
 ```{r}
-srvc <- purrr::map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "service"))
-
 srvc |> 
   dplyr::group_by(year, family) |> 
   dplyr::mutate(hcpcs_level = dplyr::min_rank(dplyr::pick(avg_allowed, avg_payment))) |> 
@@ -382,8 +171,6 @@ srvc |>
 
 
 ```{r}
-hcpcs <- compare_hcpcs(srvc)
-
 hcpcs |> 
   select(year, 
          level,

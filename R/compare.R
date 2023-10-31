@@ -17,9 +17,6 @@ NULL
 
 #' @param df < *tbl_df* > // **required**
 #'
-#' @param ... For future use.
-#'
-#'
 #' [tibble()] returned from `utilization(type = "service")`
 #'
 #' @examplesIf interactive()
@@ -35,7 +32,7 @@ NULL
 #'
 #' @autoglobal
 #' @export
-compare_hcpcs <- function(df, ...) {
+compare_hcpcs <- function(df) {
 
   if (!inherits(df, "utilization_service")) {
     cli::cli_abort(c(
@@ -117,8 +114,7 @@ compare_conditions <- function(df, pivot = FALSE) {
     tidyr::pivot_longer(cols = !c(year, level, sublevel),
                         names_to = "condition",
                         values_to = "prevalence") |>
-    dplyr::filter(!is.na(prevalence),
-                  year %in% cc_years())
+    dplyr::filter(!is.na(prevalence), year %in% cc_years())
 
   y <- dplyr::select(x, year, condition, sublevel) |>
     dplyr::mutate(set = "specific",
@@ -138,7 +134,7 @@ compare_conditions <- function(df, pivot = FALSE) {
 
   x$sublevel <- NULL
 
-  vctrs::vec_rbind(x, state, national) |>
+  results <- vctrs::vec_rbind(x, state, national) |>
     dplyr::mutate(level = forcats::fct_inorder(level)) |>
     dplyr::arrange(year, condition)
 

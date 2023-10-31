@@ -146,7 +146,7 @@ display_long <- function(df, cols = dplyr::everything()) {
 #' @keywords internal
 df2chr <- function(df) {
 
-  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+  df |> dplyr::mutate(dplyr::across(dplyr::where(is.numeric), as.character))
 }
 
 #' Tidy a Data Frame
@@ -180,6 +180,9 @@ tidyup <- function(df,
     dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
                   dplyr::across(dplyr::where(is.character), na_blank),
                   dplyr::across(dplyr::contains(dt), anytime::anydate))
+
+  # `%nn%` <- function(x, y) if (!is.null(x)) y else x
+  # x <- yn %nn% dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))
 
   if (!is.null(yn))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))}
   if (!is.null(int))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int), as.integer))}

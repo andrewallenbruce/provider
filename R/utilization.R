@@ -189,9 +189,10 @@ utilization <- function(year,
     "Rndrng_Prvdr_Geo_Desc",          state,
     "Rndrng_Prvdr_Geo_Cd",            fips)
 
-  if (type == "provider")   yr <- api_years("prv")
-  if (type == "service")    yr <- api_years("srv")
-  if (type == "geography")  yr <- api_years("geo")
+  yr <- switch(type,
+    "provider"   = api_years("prv"),
+    "service"    = api_years("srv"),
+    "geography"  = api_years("geo"))
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
@@ -230,15 +231,20 @@ utilization <- function(year,
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE) |>
-    df2chr()
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+
+  if (!tidy) results <- df2chr(results)
 
   if (tidy) {
+
     results$year <- year
-    if (type == "provider")  results <- tidyup.provider(results, nest = nest, detailed = detailed)
-    if (type == "service")   results <- tidyup.service(results, rbcs = rbcs)
-    if (type == "geography") results <- tidyup.geography(results, rbcs = rbcs)
-    if (na.rm)               results <- narm(results)
+
+    results <- switch(type,
+      "provider"  = tidyup_provider(results, nest = nest, detailed = detailed),
+      "service"   = tidyup_service(results, rbcs = rbcs),
+      "geography" = tidyup_geography(results, rbcs = rbcs))
+
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }
@@ -248,7 +254,7 @@ utilization <- function(year,
 #' @param detailed < *boolean* > Include `detailed` column
 #' @autoglobal
 #' @noRd
-tidyup.provider <- function(results, nest, detailed) {
+tidyup_provider <- function(results, nest, detailed) {
 
   results <- janitor::clean_names(results) |>
     cols_util("provider") |>
@@ -289,7 +295,7 @@ tidyup.provider <- function(results, nest, detailed) {
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
-tidyup.service <- function(results, rbcs) {
+tidyup_service <- function(results, rbcs) {
 
   results$level <- "Provider"
 
@@ -312,7 +318,7 @@ tidyup.service <- function(results, rbcs) {
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
-tidyup.geography <- function(results, rbcs) {
+tidyup_geography <- function(results, rbcs) {
 
   results <- tidyup(results,
                     yn           = "_ind",

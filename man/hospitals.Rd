@@ -198,7 +198,8 @@ hospitals(city = "Savannah", state = "GA",
           dplyr::select(organization, subgroup)
 
 hospitals(city = "Savannah", state = "GA",
-          subgroup = list(gen = TRUE, rehab = FALSE)) |>
+          subgroup = list(gen = TRUE,
+          rehab = FALSE)) |>
           dplyr::select(organization, subgroup)
 \dontshow{\}) # examplesIf}
 }

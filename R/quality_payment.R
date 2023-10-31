@@ -101,8 +101,9 @@ quality_payment <- function(year,
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE) |>
-    df2chr()
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+
+  if (!tidy) results <- df2chr(results)
 
   if (tidy) {
     results$year <- year

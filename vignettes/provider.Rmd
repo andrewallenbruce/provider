@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 library(provider)
 library(purrr)
 library(dplyr)
-library(gt)
 ```
 
 
@@ -90,36 +89,23 @@ However, in the event that you would prefer to do your own transformations, simp
 
 The API Search functions can be grouped according to the type of data that they return about a Provider: *administrative*, *statistical*, and *auxiliary.*
 
-### Administrative
-
    * `nppes()`: Registry of all healthcare providers.
    * `providers()`: Providers actively enrolled in Medicare.
    * `opt_out()`: Providers currently opted out of Medicare.
-   * `revalidation()`: Link Type-1 and Type-2 providers.
+   * `reassignments()`: Link Type-1 and Type-2 providers.
    * `clinicians()`: Provider school, graduation year, linking.
    * `affiliations()`: Linking providers to Facilities.
    * `hospitals()`: Facilities linked to providers.
    * `laboratories()`: Clinical laboratories.
-
-### Statistical
-
-The following return yearly Provider-specific stats:
-
-   * `by_provider()`: Utilization summary.
-   * `by_service()`: Utilization detail.
-   * `by_geography()`: National/state/county utilization summary.
+   * `utilization()`: Utilization summary.
    * `quality_payment()`: QPP/MIPS performance.
-   * `quality_eligibility()`: QPP/MIPS eligibility.
    * `open_payments()`: Open Payments reporting.
    * `beneficiaries()`: Medicare enrollment.
-   * `chronic_conditions`: Chronic condition prevalence.
-
-### Auxiliary
-
+   * `conditions`: Chronic condition prevalence.
    * `order_refer()`: Is a provider eligible to order and refer?
    * `pending()`: Has a provider's Medicare application been processed?
-   * `taxonomy()`: Is a provider's specialty eligible to enroll in Medicare?
-   * `quality_stats()`: Yearly QPP/MIPS performance data.
+   * `taxonomy_crosswalk()`: Is a provider's specialty eligible to enroll in Medicare?
+   * `taxonomy_codes()`:
 
 <br>
 
@@ -135,9 +121,7 @@ These can also be used in a pipeline, for searching all available years:
 
 ```{r}
 map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
-  select(year, practice_size:payment_adjustment) |> 
-  gt_preview(top_n = 20) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+  select(year, size:pay_adjust)
 ```
 
 <br>

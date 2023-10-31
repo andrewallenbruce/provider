@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `{provider}` <img src="man/figures/logo.svg" align="right" height="200" />
+# provider <img src="man/figures/logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
 
@@ -24,7 +24,7 @@ milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/pr
 
 > Providing easy access to [healthcare
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-> through publicly available APIs & sources.
+> through publicly available APIs.
 
 ## Installation
 
@@ -35,80 +35,45 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-## Motivation
-
-The overarching goal of `provider` is to make the experience of
-accessing publicly-available Provider data easier and more consistent
-across a variety of sources. It aims to accomplish this through the
-following general goals, where possible:
-
-- *Structuring output in the **tidy** framework* as much as is
-  reasonably possible, with an option to turn it off by setting
-  `tidy = FALSE`.
-
-- *Harmonization of variable names*, for the express purpose of making
-  it easier to understand (and make connections between) each API’s
-  output. This will also allow for removal of duplicate information
-  across API output, if desired.
-
-- *Validation checks of inputs*, as is reasonable (e.g, identifiers such
-  as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only
-  is this simply good practice, it will also prevent unnecessary
-  querying of the APIs.
-
-- *Well-written documentation*, containing as many examples as is
-  necessary. Each API’s output can be difficult to understand, even for
-  someone with expertise in R, healthcare, or both.
-
-## Exported Functions
-
-API Search functions can be grouped according to the type of data they
-return about a provider: *administrative*, *statistical*, and
-*auxiliary.*
-
-### Administrative
-
-- `nppes()`: Registry of all healthcare providers.
-- `providers()`: Providers actively enrolled in Medicare.
-- `opt_out()`: Providers currently opted out of Medicare.
-- `revalidation_*()`: Link Type-1 and Type-2 providers.
-- `clinicians()`: Provider school, graduation year, linking.
-- `affiliations()`: Linking providers to Facilities.
-- `hospitals()`: Facilities linked to providers.
-
-### Statistical
-
-The following return provider-specific stats:
-
-- `by_provider()`: Yearly high-level utilization data.
-- `by_service()`: Yearly detailed utilization data.
-- `quality_payment()`: Yearly QPP/MIPS performance data.
-- `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
-- `open_payments()`: Yearly Open Payments reporting data.
-
-The following return yearly stats useful for comparison against data
-returned from `by_service()`:
-
-- `geography()`
-- `beneficiary()`
-- `chronic_multiple()`
-- `chronic_specific()`
-
-### Auxiliary
-
-- `order_refer()`: Is a provider eligible to order and refer?
-- `missing_endpoints()`: Is a provider missing Endpoints in the NPPES
-  NPI Registry?
-- `pending_applications()`: Has a provider’s Medicare application been
-  processed?
-- `taxonomy_crosswalk()`: Is a provider’s specialty eligible to enroll
-  in Medicare?
-
 ## Usage
 
 ``` r
 library(provider)
 ```
+
+- `nppes()`: Registry of all healthcare providers.
+- `providers()`: Providers actively enrolled in Medicare.
+- `opt_out()`: Providers currently opted out of Medicare.
+- `order_refer()`: Is a provider eligible to order and refer?
+- `reassignments`()\`: Link Type-1 and Type-2 providers.
+- `clinicians()`: Provider school, graduation year, linking.
+- `affiliations()`: Linking providers to Facilities.
+- `hospitals()`: Hospitals actively enrolled in Medicare.
+- `utilization()`: Yearly high-level utilization data.
+- `quality_payment()`: Yearly QPP/MIPS performance data.
+- `open_payments()`: Yearly Open Payments reporting data.
+- `beneficiaries()`
+- `conditions()`
+
+``` r
+providers(first = "ANDREW", state = "GA", specialty_code = "14-93")
+```
+
+    #> # A tibble: 29 × 10
+    #>    npi       pac   enid  specialty_code specialty_description state first middle
+    #>    <chr>     <chr> <chr> <chr>          <chr>                 <chr> <chr> <chr> 
+    #>  1 18211979… 6507… I200… 14-93          PRACTITIONER - EMERG… GA    ANDR… S     
+    #>  2 16290504… 1557… I200… 14-93          PRACTITIONER - EMERG… GA    ANDR… K     
+    #>  3 14575504… 2769… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… PATRI…
+    #>  4 10230036… 6608… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… G     
+    #>  5 10636636… 4880… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… <NA>  
+    #>  6 16997185… 1759… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… A     
+    #>  7 13061595… 5991… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… M     
+    #>  8 16394605… 3274… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… JAMES 
+    #>  9 17203772… 7719… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… R     
+    #> 10 13465008… 6305… I201… 14-93          PRACTITIONER - EMERG… GA    ANDR… <NA>  
+    #> # ℹ 19 more rows
+    #> # ℹ 2 more variables: last <chr>, gender <chr>
 
 ------------------------------------------------------------------------
 

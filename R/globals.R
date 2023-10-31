@@ -30,49 +30,6 @@ utils::globalVariables(c(
   "y", # <demo_convert>
   "y", # <subdemo_convert>
   "y", # <mcc_convert>
-  "y", # <revalidation_date>
-  "y", # <revalidation_group>
-  "group_pac_id", # <revalidation_group>
-  "individual_npi", # <revalidation_group>
-  "individual_enrollment_id", # <revalidation_group>
-  "individual_first_name", # <revalidation_group>
-  "individual_last_name", # <revalidation_group>
-  "individual_state_code", # <revalidation_group>
-  "individual_specialty_description", # <revalidation_group>
-  "individual_total_employer_associations", # <revalidation_group>
-  "group_enrollment_id", # <revalidation_group>
-  "group_legal_business_name", # <revalidation_group>
-  "group_state_code", # <revalidation_group>
-  "group_reassignments_and_physician_assistants", # <revalidation_group>
-  "individual_due_date", # <revalidation_group>
-  "group_due_date", # <revalidation_group>
-  "y", # <asc_ifed_enrollment>
-  "line_1_st_adr", # <asc_ifed_enrollment>
-  "line_2_st_adr", # <asc_ifed_enrollment>
-  "enrollment_id", # <asc_ifed_enrollment>
-  "enrollment_state", # <asc_ifed_enrollment>
-  "type", # <asc_ifed_enrollment>
-  "organization_name", # <asc_ifed_enrollment>
-  "zip_code", # <asc_ifed_enrollment>
-  "y", # <missing_endpoints>
-  "state.abb", # <cc_multiple>
-  "distro", # <cc_multiple>
-  "y", # <cc_multiple>
-  "state.abb", # <cc_specific>
-  "distro", # <cc_specific>
-  "y", # <cc_specific>
-  "distro", # <by_provider>
-  "y", # <by_provider>
-  "address", # <by_provider>
-  "medical", # <by_provider>
-  "drug", # <by_provider>
-  "distro", # <by_service>
-  "y", # <by_service>
-  "address", # <by_service>
-  "state.abb", # <by_geography>
-  "distro", # <by_geography>
-  "y", # <by_geography>
-  "place_of_srvc", # <by_geography>
   "y", # <hospitals>
   "address", # <hospitals>
   "location_type", # <hospitals>
@@ -221,18 +178,18 @@ utils::globalVariables(c(
   "state.abb", # <utilization>
   "distro", # <utilization>
   "y", # <utilization>
-  "address", # <tidyup.provider>
-  "specialty", # <tidyup.provider>
-  "tot_allowed", # <tidyup.provider>
-  "tot_payment", # <tidyup.provider>
-  "tot_srvcs", # <tidyup.provider>
-  "tot_benes", # <tidyup.provider>
-  "hcc_risk_avg", # <tidyup.provider>
-  "medical", # <tidyup.provider>
-  "drug", # <tidyup.provider>
-  "address", # <tidyup.service>
-  "specialty", # <tidyup.service>
-  "place_of_srvc", # <tidyup.geography>
+  "address", # <tidyup_provider>
+  "specialty", # <tidyup_provider>
+  "tot_allowed", # <tidyup_provider>
+  "tot_payment", # <tidyup_provider>
+  "tot_srvcs", # <tidyup_provider>
+  "tot_benes", # <tidyup_provider>
+  "hcc_risk_avg", # <tidyup_provider>
+  "medical", # <tidyup_provider>
+  "drug", # <tidyup_provider>
+  "address", # <tidyup_service>
+  "specialty", # <tidyup_service>
+  "place_of_srvc", # <tidyup_geography>
   "hcpcs", # <rbcs_util>
   "category", # <rbcs_util>
   "subcategory", # <rbcs_util>
