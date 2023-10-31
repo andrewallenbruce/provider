@@ -87,6 +87,11 @@ utils::globalVariables(c(
   "confirmed", # <laboratories>
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
+  "number", # <download_msdrg>
+  "mdc", # <download_msdrg>
+  "mdc_description", # <download_msdrg>
+  "drg_type", # <download_msdrg>
+  "drg_abbrev", # <download_msdrg>
   "y", # <medline>
   "title", # <medline>
   "title._value", # <medline>
