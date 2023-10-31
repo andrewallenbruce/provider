@@ -413,6 +413,8 @@ api_years <- function(fn) {
                            "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
                            "srv" ~ "Medicare Physician & Other Practitioners - by Provider and Service",
                            "prv" ~ "Medicare Physician & Other Practitioners - by Provider",
+                           "outps" ~ "Medicare Outpatient Hospitals - by Provider and Service",
+                           "outgs" ~ "Medicare Outpatient Hospitals - by Geography and Service",
                            "scc" ~ "Specific Chronic Conditions",
                            "mcc" ~ "Multiple Chronic Conditions",
                            "qpp" ~ "Quality Payment Program Experience",

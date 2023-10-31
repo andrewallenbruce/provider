@@ -2,17 +2,17 @@
 % Please edit documentation in R/years.R
 \name{years}
 \alias{years}
-\alias{pop_years}
 \alias{open_years}
+\alias{out_years}
 \alias{util_years}
 \alias{cc_years}
 \alias{qpp_years}
 \alias{bene_years}
 \title{Years Currently Searchable for APIs}
 \usage{
-pop_years()
-
 open_years()
+
+out_years()
 
 util_years()
 
@@ -48,6 +48,9 @@ cc_years()
 
 # `quality_payment()`
 qpp_years()
+
+# `outpatient()`
+out_years
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

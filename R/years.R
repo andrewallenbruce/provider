@@ -19,17 +19,12 @@
 #' # `quality_payment()`
 #' qpp_years()
 #'
+#' # `outpatient()`
+#' out_years
+#'
 #' @name years
 #' @keywords internal
 NULL
-
-#' @rdname years
-#' @autoglobal
-#' @export
-#' @keywords internal
-pop_years <- function() {
-  as.integer(cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
-}
 
 #' @rdname years
 #' @autoglobal
@@ -41,8 +36,16 @@ open_years <- function() sort(open_ids("General Payment Data")$year)
 #' @autoglobal
 #' @export
 #' @keywords internal
+out_years <- function() {
+  as.integer(cms_update("Medicare Outpatient Hospitals - by Provider and Service", "years"))
+}
+
+#' @rdname years
+#' @autoglobal
+#' @export
+#' @keywords internal
 util_years <- function() {
-  as.integer(cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
+  as.integer(cms_update("Medicare Physician & Other Practitioners - by Provider", "years"))
 }
 
 #' @rdname years

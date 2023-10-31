@@ -83,6 +83,7 @@ reference:
   - nppes
   - opt_out
   - order_refer
+  - outpatient
   - pending
   - providers
   - reassignments
@@ -92,12 +93,12 @@ reference:
     Access a provider's statistical data.
   contents:
   - beneficiaries
-  - compare_hcpcs
-  - compare_conditions
   - conditions
   - open_payments
   - quality_payment
   - utilization
+  - compare_hcpcs
+  - compare_conditions
 
 - title: Classifications
   desc: >
@@ -113,10 +114,11 @@ reference:
     Years available to query for search functions.
   contents:
   - bene_years
-  - open_years
-  - pop_years
   - cc_years
+  - open_years
+  - out_years
   - qpp_years
+  - util_years
 
 - title: Utilities
   desc: >

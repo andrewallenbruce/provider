@@ -287,7 +287,7 @@ hospitals <- function(npi = NULL,
                       "P" ~ "Proprietary",
                       "N" ~ "Non-Profit",
                       .default = NA)) |>
-      hosp_cols()
+      cols_hosp()
 
     if (pivot) {
       results <- results |>
@@ -295,7 +295,7 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(subtotal = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
                       subgroup_none = dplyr::if_else(subtotal == 0, TRUE, FALSE),
                       subtotal = NULL) |>
-        hosp_cols2() |>
+        cols_hosp2() |>
         tidyr::pivot_longer(cols = dplyr::contains("Subgroup"),
                             names_to = "subgroup",
                             values_to = "flag") |>
@@ -312,7 +312,7 @@ hospitals <- function(npi = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-hosp_cols <- function(df) {
+cols_hosp <- function(df) {
 
   cols <- c('npi',
             'pac_org'           = 'associate_id',
@@ -358,7 +358,7 @@ hosp_cols <- function(df) {
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-hosp_cols2 <- function(df) {
+cols_hosp2 <- function(df) {
 
   cols <- c('npi_org' = 'npi',
             'pac_org',

@@ -128,6 +128,8 @@ utils::globalVariables(c(
   "identifier", # <open_ids>
   "y", # <opt_out>
   "y", # <order_refer>
+  "distro", # <outpatient>
+  "y", # <outpatient>
   "y", # <pending>
   "y", # <providers>
   "apms", # <quality_eligibility>

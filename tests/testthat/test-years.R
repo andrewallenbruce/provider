@@ -1,8 +1,8 @@
-test_that("pop_years() works", {
+test_that("out_years() works", {
 
-  pop <- pop_years()
-  expect_equal(pop, 2013:2021)
-  expect_vector(pop, ptype = integer(), size = 9)
+  out <- out_years()
+  expect_equal(out, 2015:2021)
+  expect_vector(out, ptype = integer(), size = 7)
 
 })
 
