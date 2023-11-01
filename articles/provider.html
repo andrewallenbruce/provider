@@ -120,7 +120,6 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The overarching goal of <a href="https://andrewallenbruce.github.io/provider/">provider</a> is to make the
 experience of accessing publicly-available Provider data easier and more
@@ -276,15 +275,23 @@ years:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">size</span><span class="op">:</span><span class="va">pay_adjust</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 10</span></span></span>
-<span><span class="co">#&gt;   year     size specialty med_years type  beneficiaries services allowed_charges</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2017     <span style="text-decoration: underline;">1</span>394 Cardiac …         5 MIPS…         <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span>        36<span style="text-decoration: underline;">391</span>760</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2018     <span style="text-decoration: underline;">1</span>297 Cardiac …         5 MIPS…         <span style="text-decoration: underline;">41</span>034        0        35<span style="text-decoration: underline;">008</span>312</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2019     <span style="text-decoration: underline;">1</span>344 Cardiac …         6 MIPS…         <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298        36<span style="text-decoration: underline;">899</span>498</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020     <span style="text-decoration: underline;">1</span>440 Cardiac …         7 MIPS…         <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278        33<span style="text-decoration: underline;">458</span>425</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021     <span style="text-decoration: underline;">1</span>940 Cardiac …         8 MIPS…         <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720        35<span style="text-decoration: underline;">627</span>551</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: final_score &lt;dbl&gt;, pay_adjust &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; Error in map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)): could not find function "map_dfr"</span></span></code></pre></div>
+<p>Several functions have parallelized versions, denoted by an
+underscore at the end of their name (<code>_</code>):</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment_.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
+<span><span class="co">#&gt;   year     npi      state  size specialty med_years type  beneficiaries services</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date_y&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2017     1043477… PA     <span style="text-decoration: underline;">1</span>394 Cardiac …         5 MIPS…         <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2018     1043477… PA     <span style="text-decoration: underline;">1</span>297 Cardiac …         5 MIPS…         <span style="text-decoration: underline;">41</span>034        0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2019     1043477… PA     <span style="text-decoration: underline;">1</span>344 Cardiac …         6 MIPS…         <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020     1043477… PA     <span style="text-decoration: underline;">1</span>440 Cardiac …         7 MIPS…         <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021     1043477… PA     <span style="text-decoration: underline;">1</span>940 Cardiac …         8 MIPS…         <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: allowed_charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -302,7 +309,7 @@ providers or organizations must obtain an NPI. Once assigned, a
 provider’s NPI is permanent and remains with the provider regardless of
 job or location changes.</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
@@ -330,7 +337,7 @@ numbers and organizational names) and may be associated with multiple
 enrollment IDs if the individual or organization enrolled multiple times
 under different circumstances.</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
@@ -350,7 +357,7 @@ provider enrollment application. All enrollment-level information (e.g.,
 enrollment type, enrollment state, provider specialty and reassignment
 of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
@@ -381,7 +388,7 @@ vector when it’s evaluated.</em> Parameters that contain leading zeros
 must be input as a character vector:</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Leading zeros are dropped in an integer vector:</span></span>
 <span><span class="fl">0001</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>

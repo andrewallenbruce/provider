@@ -122,7 +122,8 @@ research, meals, travel, gifts or speaking fees.</p>
 <span>  offset <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pivot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -206,6 +207,10 @@ format. Run <code><a href="years.html">open_years()</a></code> to return a vecto
 
 <dt>na.rm</dt>
 <dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
+
+
+<dt>...</dt>
+<dd><p>For future use.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -305,6 +310,9 @@ does not fall within one of the excluded categories in the rule.</p>
 <span class="r-in"><span><span class="fu"><a href="years.html">open_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Parallelized</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="open_payments_.html">open_payments_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
