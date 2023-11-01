@@ -254,7 +254,7 @@ utilization <- function(year,
   return(results)
 }
 
-#' Parallelized version of [utilization()], using furrr & future
+#' Parallelized [utilization()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [util_years()] to return a vector of the years currently available.
 #' @param ... Pass arguments to [utilization()].

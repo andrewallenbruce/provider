@@ -1,10 +1,8 @@
 ---
 title: "Linking Providers"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Linking Providers}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+description: "NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More"
+author: "Andrew Bruce"
+output: html_document
 ---
 
 ```{r setup, include = FALSE}
@@ -15,15 +13,21 @@ knitr::opts_chunk$set(
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
-  dpi       = 300, 
+  dpi       = 600, 
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+options(scipen = 999)
 ```
+
+
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
-library(tidyverse)
+library(tibble)
+library(vctrs)
+library(dplyr)
+library(purrr)
 library(gt)
 ```
 
@@ -31,7 +35,6 @@ library(gt)
 <br>
 
 ## Individual Provider
-
 
 ```{r}
 vctrs::vec_rbind(

@@ -287,7 +287,7 @@ hospitals <- function(npi = NULL,
                       "P" ~ "Proprietary",
                       "N" ~ "Non-Profit",
                       .default = NA)) |>
-      cols_hosp()
+      cols_hosp(1)
 
     if (pivot) {
       results <- results |>
@@ -295,7 +295,7 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(subtotal = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
                       subgroup_none = dplyr::if_else(subtotal == 0, TRUE, FALSE),
                       subtotal = NULL) |>
-        cols_hosp2() |>
+        cols_hosp(2) |>
         tidyr::pivot_longer(cols = dplyr::contains("Subgroup"),
                             names_to = "subgroup",
                             values_to = "flag") |>
@@ -310,10 +310,12 @@ hospitals <- function(npi = NULL,
 }
 
 #' @param df data frame
+#' @param step step 1 or 2 in pipeline
 #' @autoglobal
 #' @noRd
-cols_hosp <- function(df) {
+cols_hosp <- function(df, step = c(1, 2)) {
 
+  if (step == 1) {
   cols <- c('npi',
             'pac_org'           = 'associate_id',
             'enid_org'          = 'enrollment_id',
@@ -350,52 +352,46 @@ cols_hosp <- function(df) {
             'subgroup_specialty_hospital',
             'subgroup_other',
             'other'             = 'subgroup_other_text')
+  }
+  if (step == 2) {
+    cols <- c('npi_org' = 'npi',
+              'pac_org',
+              'enid_org',
+              'enid_state',
+              'facility_ccn',
+              'organization',
+              'doing_business_as',
+              'specialty_code',
+              'specialty',
+              'incorp_date',
+              'incorp_state',
+              'structure',
+              'address',
+              'city',
+              'state',
+              'zip',
+              'location_type',
+              'multi_npi',
+              'reh_date',
+              'reh_ccns',
+              'reh_conversion',
+              "Subgroup General"             = 'subgroup_general',
+              "Subgroup Acute Care"          = 'subgroup_acute_care',
+              "Subgroup Alcohol Drug"        = 'subgroup_alcohol_drug',
+              "Subgroup Childrens' Hospital" = 'subgroup_childrens',
+              "Subgroup Long-term"           = 'subgroup_long_term',
+              "Subgroup Psychiatric"         = 'subgroup_psychiatric',
+              "Subgroup Rehabilitation"      = 'subgroup_rehabilitation',
+              "Subgroup Short-Term"          = 'subgroup_short_term',
+              "Subgroup Swing-Bed Approved"  = 'subgroup_swing_bed_approved',
+              "Subgroup Psychiatric Unit"    = 'subgroup_psychiatric_unit',
+              "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
+              "Subgroup Specialty Hospital"  = 'subgroup_specialty_hospital',
+              "Subgroup Other"               = 'subgroup_other',
+              "Subgroup None"                = 'subgroup_none',
+              'other')
+  }
 
   df |> dplyr::select(dplyr::any_of(cols))
 
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_hosp2 <- function(df) {
-
-  cols <- c('npi_org' = 'npi',
-            'pac_org',
-            'enid_org',
-            'enid_state',
-            'facility_ccn',
-            'organization',
-            'doing_business_as',
-            'specialty_code',
-            'specialty',
-            'incorp_date',
-            'incorp_state',
-            'structure',
-            'address',
-            'city',
-            'state',
-            'zip',
-            'location_type',
-            'multi_npi',
-            'reh_date',
-            'reh_ccns',
-            'reh_conversion',
-            "Subgroup General"             = 'subgroup_general',
-            "Subgroup Acute Care"          = 'subgroup_acute_care',
-            "Subgroup Alcohol Drug"        = 'subgroup_alcohol_drug',
-            "Subgroup Childrens' Hospital" = 'subgroup_childrens',
-            "Subgroup Long-term"           = 'subgroup_long_term',
-            "Subgroup Psychiatric"         = 'subgroup_psychiatric',
-            "Subgroup Rehabilitation"      = 'subgroup_rehabilitation',
-            "Subgroup Short-Term"          = 'subgroup_short_term',
-            "Subgroup Swing-Bed Approved"  = 'subgroup_swing_bed_approved',
-            "Subgroup Psychiatric Unit"    = 'subgroup_psychiatric_unit',
-            "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
-            "Subgroup Specialty Hospital"  = 'subgroup_specialty_hospital',
-            "Subgroup Other"               = 'subgroup_other',
-            "Subgroup None"                = 'subgroup_none',
-            'other')
-
-  df |> dplyr::select(dplyr::any_of(cols))
 }

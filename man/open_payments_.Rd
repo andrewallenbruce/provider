@@ -2,7 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments_}
 \alias{open_payments_}
-\title{Parallelized version of \code{\link[=open_payments]{open_payments()}}, using furrr & future}
+\title{Parallelized \code{\link[=open_payments]{open_payments()}}}
 \usage{
 open_payments_(year = open_years(), ...)
 }
@@ -13,5 +13,5 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 \item{...}{Pass arguments to \code{\link[=open_payments]{open_payments()}}.}
 }
 \description{
-Parallelized version of \code{\link[=open_payments]{open_payments()}}, using furrr & future
+Parallelized \code{\link[=open_payments]{open_payments()}}
 }

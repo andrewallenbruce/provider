@@ -21,7 +21,7 @@ test_that("cols_aff() works", {
   expect_equal(cols_aff(x), y)
 })
 
-test_that("bene_cols() works", {
+test_that("cols_bene() works", {
   x <- dplyr::tibble(
     year                                         = 1,
     month                                        = 1,
@@ -76,10 +76,10 @@ test_that("bene_cols() works", {
                      bene_rx_lis_full  = 1,
                      bene_rx_lis_part  = 1,
                      bene_rx_lis_no    = 1)
-  expect_equal(bene_cols(x), y)
+  expect_equal(cols_bene(x), y)
 })
 
-test_that("betos_cols() works", {
+test_that("cols_betos() works", {
 x <- dplyr::tibble(
     hcpcs_cd               = 1,
     rbcs_id                = 1,
@@ -105,5 +105,531 @@ x <- dplyr::tibble(
                      hcpcs_end_date   = 1,
                      rbcs_start_date  = 1,
                      rbcs_end_date    = 1)
-  expect_equal(betos_cols(x), y)
+  expect_equal(cols_betos(x), y)
 })
+
+test_that("cols_clin() works", {
+  x <- dplyr::tibble(
+    npi              = 1,
+    ind_pac_id       = 1,
+    ind_enrl_id      = 1,
+    frst_nm          = 1,
+    mid_nm           = 1,
+    lst_nm           = 1,
+    suff             = 1,
+    gndr             = 1,
+    cred             = 1,
+    med_sch          = 1,
+    grd_yr           = 1,
+    pri_spec         = 1,
+    sec_spec_all     = 1,
+    facility_name    = 1,
+    org_pac_id       = 1,
+    num_org_mem      = 1,
+    address          = 1,
+    city_town        = 1,
+    state            = 1,
+    zip_code         = 1,
+    telephone_number = 1,
+    adrs_id          = 1,
+    telehlth         = 1,
+    ind_assgn        = 1,
+    grp_assgn        = 1,
+  )
+
+  y <- dplyr::tibble(
+    npi           = 1,
+    pac           = 1,
+    enid          = 1,
+    first         = 1,
+    middle        = 1,
+    last          = 1,
+    suffix        = 1,
+    gender        = 1,
+    credential    = 1,
+    school        = 1,
+    grad_year     = 1,
+    specialty     = 1,
+    specialty_sec = 1,
+    organization  = 1,
+    pac_org       = 1,
+    members_org   = 1,
+    address_org   = 1,
+    city_org      = 1,
+    state_org     = 1,
+    zip_org       = 1,
+    phone_org     = 1
+    # address_id  = 1,
+    # telehealth  = 1,
+    # assign_ind  = 1,
+    # assign_org  = 1
+    )
+  expect_equal(cols_clin(x), y)
+})
+
+test_that("cols_cc() works", {
+  x <- dplyr::tibble(
+    year                     = 1,
+    bene_geo_lvl             = 1,
+    bene_geo_desc            = 1,
+    bene_geo_cd              = 1,
+    bene_age_lvl             = 1,
+    bene_demo_lvl            = 1,
+    bene_demo_desc           = 1,
+    bene_mcc                 = 1,
+    bene_cond                = 1,
+    prvlnc                   = 1,
+    tot_mdcr_pymt_pc         = 1,
+    tot_mdcr_stdzd_pymt_pc   = 1,
+    hosp_readmsn_rate        = 1,
+    er_visits_per_1000_benes = 1)
+
+  y <- dplyr::tibble(
+    year                = 1,
+    level               = 1,
+    sublevel            = 1,
+    fips                = 1,
+    age                 = 1,
+    demographic         = 1,
+    subdemo             = 1,
+    mcc                 = 1,
+    condition           = 1,
+    prevalence          = 1,
+    tot_pymt_percap     = 1,
+    tot_std_pymt_percap = 1,
+    hosp_readmit_rate   = 1,
+    er_visits_per_1k    = 1)
+
+  expect_equal(cols_cc(x), y)
+})
+
+test_that("cols_hosp() works", {
+  x <- dplyr::tibble(
+    npi                          = 1,
+    associate_id                 = 1,
+    enrollment_id                = 1,
+    enrollment_state             = 1,
+    ccn                          = 1,
+    organization_name            = 1,
+    doing_business_as_name       = 1,
+    provider_type_code           = 1,
+    provider_type_text           = 1,
+    incorporation_date           = 1,
+    incorporation_state          = 1,
+    structure                    = 1,
+    address                      = 1,
+    city                         = 1,
+    state                        = 1,
+    zip_code                     = 1,
+    location_type                = 1,
+    proprietary_nonprofit        = 1,
+    multiple_npi_flag            = 1,
+    reh_conversion_flag          = 1,
+    reh_conversion_date          = 1,
+    cah_or_hospital_ccn          = 1,
+    subgroup_general             = 1,
+    subgroup_acute_care          = 1,
+    subgroup_alcohol_drug        = 1,
+    subgroup_childrens           = 1,
+    subgroup_long_term           = 1,
+    subgroup_psychiatric         = 1,
+    subgroup_rehabilitation      = 1,
+    subgroup_short_term          = 1,
+    subgroup_swing_bed_approved  = 1,
+    subgroup_psychiatric_unit    = 1,
+    subgroup_rehabilitation_unit = 1,
+    subgroup_specialty_hospital  = 1,
+    subgroup_other               = 1,
+    subgroup_other_text          = 1)
+
+  y <- dplyr::tibble(
+    npi                          = 1,
+    pac_org                      = 1,
+    enid_org                     = 1,
+    enid_state                   = 1,
+    facility_ccn                 = 1,
+    organization                 = 1,
+    doing_business_as            = 1,
+    specialty_code               = 1,
+    specialty                    = 1,
+    incorp_date                  = 1,
+    incorp_state                 = 1,
+    structure                    = 1,
+    address                      = 1,
+    city                         = 1,
+    state                        = 1,
+    zip                          = 1,
+    location_type                = 1,
+    registration                 = 1,
+    multi_npi                    = 1,
+    reh_conversion               = 1,
+    reh_date                     = 1,
+    reh_ccns                     = 1,
+    subgroup_general             = 1,
+    subgroup_acute_care          = 1,
+    subgroup_alcohol_drug        = 1,
+    subgroup_childrens           = 1,
+    subgroup_long_term           = 1,
+    subgroup_psychiatric         = 1,
+    subgroup_rehabilitation      = 1,
+    subgroup_short_term          = 1,
+    subgroup_swing_bed_approved  = 1,
+    subgroup_psychiatric_unit    = 1,
+    subgroup_rehabilitation_unit = 1,
+    subgroup_specialty_hospital  = 1,
+    subgroup_other               = 1,
+    other                        = 1)
+
+  yy <- dplyr::tibble(
+    npi_org                        = 1,
+    pac_org                        = 1,
+    enid_org                       = 1,
+    enid_state                     = 1,
+    facility_ccn                   = 1,
+    organization                   = 1,
+    doing_business_as              = 1,
+    specialty_code                 = 1,
+    specialty                      = 1,
+    incorp_date                    = 1,
+    incorp_state                   = 1,
+    structure                      = 1,
+    address                        = 1,
+    city                           = 1,
+    state                          = 1,
+    zip                            = 1,
+    location_type                  = 1,
+    multi_npi                      = 1,
+    reh_date                       = 1,
+    reh_ccns                       = 1,
+    reh_conversion                 = 1,
+    `Subgroup General`             = 1,
+    `Subgroup Acute Care`          = 1,
+    `Subgroup Alcohol Drug`        = 1,
+    `Subgroup Childrens' Hospital` = 1,
+    `Subgroup Long-term`           = 1,
+    `Subgroup Psychiatric`         = 1,
+    `Subgroup Rehabilitation`      = 1,
+    `Subgroup Short-Term`          = 1,
+    `Subgroup Swing-Bed Approved`  = 1,
+    `Subgroup Psychiatric Unit`    = 1,
+    `Subgroup Rehabilitation Unit` = 1,
+    `Subgroup Specialty Hospital`  = 1,
+    `Subgroup Other`               = 1,
+    other                          = 1)
+
+  expect_equal(cols_hosp(x, 1), y)
+  expect_equal(cols_hosp(y, 2), yy)
+})
+
+test_that("cols_open() works", {
+  x <- dplyr::tibble(
+    program_year                                                      = 1,
+    covered_recipient_npi                                             = 1,
+    change_type                                                       = 1,
+    covered_recipient_type                                            = 1,
+    teaching_hospital_ccn                                             = 1,
+    teaching_hospital_id                                              = 1,
+    teaching_hospital_name                                            = 1,
+    covered_recipient_first_name                                      = 1,
+    covered_recipient_middle_name                                     = 1,
+    covered_recipient_last_name                                       = 1,
+    covered_recipient_name_suffix                                     = 1,
+    address                                                           = 1,
+    recipient_city                                                    = 1,
+    recipient_state                                                   = 1,
+    recipient_zip_code                                                = 1,
+    recipient_postal_code                                             = 1,
+    recipient_country                                                 = 1,
+    recipient_province                                                = 1,
+    covered_recipient_primary_type_1                                  = 1,
+    covered_recipient_primary_type_2                                  = 1,
+    covered_recipient_primary_type_3                                  = 1,
+    covered_recipient_primary_type_4                                  = 1,
+    covered_recipient_primary_type_5                                  = 1,
+    covered_recipient_primary_type_6                                  = 1,
+    covered_recipient_specialty_1                                     = 1,
+    covered_recipient_specialty_2                                     = 1,
+    covered_recipient_specialty_3                                     = 1,
+    covered_recipient_specialty_4                                     = 1,
+    covered_recipient_specialty_5                                     = 1,
+    covered_recipient_specialty_6                                     = 1,
+    covered_recipient_license_state_code1                             = 1,
+    covered_recipient_license_state_code2                             = 1,
+    covered_recipient_license_state_code3                             = 1,
+    covered_recipient_license_state_code4                             = 1,
+    covered_recipient_license_state_code5                             = 1,
+    applicable_manufacturer_or_applicable_gpo_making_payment_id       = 1,
+    submitting_applicable_manufacturer_or_applicable_gpo_name         = 1,
+    applicable_manufacturer_or_applicable_gpo_making_payment_name     = 1,
+    applicable_manufacturer_or_applicable_gpo_making_payment_state    = 1,
+    applicable_manufacturer_or_applicable_gpo_making_payment_country  = 1,
+    total_amount_of_payment_us_dollars                                = 1,
+    date_of_payment                                                   = 1,
+    number_of_payments_included_in_total_amount                       = 1,
+    form_of_payment_or_transfer_of_value                              = 1,
+    nature_of_payment_or_transfer_of_value                            = 1,
+    city_of_travel                                                    = 1,
+    state_of_travel                                                   = 1,
+    country_of_travel                                                 = 1,
+    physician_ownership_indicator                                     = 1,
+    third_party_payment_recipient_indicator                           = 1,
+    name_of_third_party_entity_receiving_payment_or_transfer_of_value = 1,
+    third_party_equals_covered_recipient_indicator                    = 1,
+    charity_indicator                                                 = 1,
+    contextual_information                                            = 1,
+    payment_publication_date                                          = 1,
+    delay_in_publication_indicator                                    = 1,
+    dispute_status_for_publication                                    = 1,
+    related_product_indicator                                         = 1,
+    name_of_drug_or_biological_or_device_or_medical_supply_1          = 1,
+    covered_or_noncovered_indicator_1                                 = 1,
+    indicate_drug_or_biological_or_device_or_medical_supply_1         = 1,
+    product_category_or_therapeutic_area_1                            = 1,
+    associated_drug_or_biological_ndc_1                               = 1,
+    associated_device_or_medical_supply_pdi_1                         = 1,
+    name_of_drug_or_biological_or_device_or_medical_supply_2          = 1,
+    covered_or_noncovered_indicator_2                                 = 1,
+    indicate_drug_or_biological_or_device_or_medical_supply_2         = 1,
+    product_category_or_therapeutic_area_2                            = 1,
+    associated_drug_or_biological_ndc_2                               = 1,
+    associated_device_or_medical_supply_pdi_2                         = 1,
+    name_of_drug_or_biological_or_device_or_medical_supply_3          = 1,
+    covered_or_noncovered_indicator_3                                 = 1,
+    indicate_drug_or_biological_or_device_or_medical_supply_3         = 1,
+    product_category_or_therapeutic_area_3                            = 1,
+    associated_drug_or_biological_ndc_3                               = 1,
+    associated_device_or_medical_supply_pdi_3                         = 1,
+    name_of_drug_or_biological_or_device_or_medical_supply_4          = 1,
+    covered_or_noncovered_indicator_4                                 = 1,
+    indicate_drug_or_biological_or_device_or_medical_supply_4         = 1,
+    product_category_or_therapeutic_area_4                            = 1,
+    associated_drug_or_biological_ndc_4                               = 1,
+    associated_device_or_medical_supply_pdi_4                         = 1,
+    name_of_drug_or_biological_or_device_or_medical_supply_5          = 1,
+    covered_or_noncovered_indicator_5                                 = 1,
+    indicate_drug_or_biological_or_device_or_medical_supply_5         = 1,
+    product_category_or_therapeutic_area_5                            = 1,
+    associated_drug_or_biological_ndc_5                               = 1,
+    associated_device_or_medical_supply_pdi_5                         = 1)
+
+  y <- dplyr::tibble(
+    program_year          = 1,
+    npi                   = 1,
+    changed               = 1,
+    covered_recipient     = 1,
+    teaching_ccn          = 1,
+    teaching_id           = 1,
+    teaching_name         = 1,
+    first                 = 1,
+    middle                = 1,
+    last                  = 1,
+    suffix                = 1,
+    address               = 1,
+    city                  = 1,
+    state                 = 1,
+    zip                   = 1,
+    postal                = 1,
+    country               = 1,
+    province              = 1,
+    primary               = 1,
+    primary2              = 1,
+    primary3              = 1,
+    primary4              = 1,
+    primary5              = 1,
+    primary6              = 1,
+    specialty             = 1,
+    specialty2            = 1,
+    specialty3            = 1,
+    specialty4            = 1,
+    specialty5            = 1,
+    specialty6            = 1,
+    license_state         = 1,
+    license_state2        = 1,
+    license_state3        = 1,
+    license_state4        = 1,
+    license_state5        = 1,
+    payer_id              = 1,
+    payer_sub             = 1,
+    payer_name            = 1,
+    payer_state           = 1,
+    payer_country         = 1,
+    pay_total             = 1,
+    pay_date              = 1,
+    pay_count             = 1,
+    pay_form              = 1,
+    pay_nature            = 1,
+    travel_city           = 1,
+    travel_state          = 1,
+    travel_country        = 1,
+    physician_ownership   = 1,
+    third_party_payment   = 1,
+    third_party_name      = 1,
+    third_party_recipient = 1,
+    charity               = 1,
+    context               = 1,
+    publish_date          = 1,
+    publish_delay         = 1,
+    publish_dispute       = 1,
+    related_product       = 1,
+    name_1                = 1,
+    covered_1             = 1,
+    type_1                = 1,
+    category_1            = 1,
+    ndc_1                 = 1,
+    pdi_1                 = 1,
+    name_2                = 1,
+    covered_2             = 1,
+    type_2                = 1,
+    category_2            = 1,
+    ndc_2                 = 1,
+    pdi_2                 = 1,
+    name_3                = 1,
+    covered_3             = 1,
+    type_3                = 1,
+    category_3            = 1,
+    ndc_3                 = 1,
+    pdi_3                 = 1,
+    name_4                = 1,
+    covered_4             = 1,
+    type_4                = 1,
+    category_4            = 1,
+    ndc_4                 = 1,
+    pdi_4                 = 1,
+    name_5                = 1,
+    covered_5             = 1,
+    type_5                = 1,
+    category_5            = 1,
+    ndc_5                 = 1,
+    pdi_5                 = 1)
+
+  expect_equal(cols_open(x), y)
+})
+
+test_that("cols_opt() works", {
+  x <- dplyr::tibble(
+    npi                         = 1,
+    first_name                  = 1,
+    last_name                   = 1,
+    specialty                   = 1,
+    eligible_to_order_and_refer = 1,
+    optout_effective_date       = 1,
+    optout_end_date             = 1,
+    last_updated                = 1,
+    address                     = 1,
+    city_name                   = 1,
+    state_code                  = 1,
+    zip_code                    = 1)
+
+  y <- dplyr::tibble(
+    npi               = 1,
+    first             = 1,
+    last              = 1,
+    specialty         = 1,
+    order_refer       = 1,
+    optout_start_date = 1,
+    optout_end_date   = 1,
+    last_updated      = 1,
+    address           = 1,
+    city              = 1,
+    state             = 1,
+    zip               = 1)
+
+  expect_equal(cols_opt(x), y)
+})
+
+test_that("cols_ord() works", {
+  x <- dplyr::tibble(
+    npi        = 1,
+    first_name = 1,
+    last_name  = 1,
+    partb      = 1,
+    hha        = 1,
+    dme        = 1,
+    pmd        = 1)
+
+  y <- dplyr::tibble(
+    npi                         = 1,
+    first                       = 1,
+    last                        = 1,
+    `Medicare Part B`           = 1,
+    `Home Health Agency`        = 1,
+    `Durable Medical Equipment` = 1,
+    `Power Mobility Devices`    = 1)
+
+  expect_equal(cols_ord(x), y)
+})
+
+test_that("cols_pros() works", {
+  x <- dplyr::tibble(
+    npi                = 1,
+    pecos_asct_cntl_id = 1,
+    enrlmt_id          = 1,
+    provider_type_cd   = 1,
+    provider_type_desc = 1,
+    state_cd           = 1,
+    org_name           = 1,
+    first_name         = 1,
+    mdl_name           = 1,
+    last_name          = 1,
+    gndr_sw            = 1)
+
+  y <- dplyr::tibble(
+    npi                   = 1,
+    pac                   = 1,
+    enid                  = 1,
+    specialty_code        = 1,
+    specialty_description = 1,
+    state                 = 1,
+    organization          = 1,
+    first                 = 1,
+    middle                = 1,
+    last                  = 1,
+    gender                = 1)
+
+  expect_equal(cols_pros(x), y)
+})
+
+test_that("cols_reas() works", {
+
+  x <- dplyr::tibble(
+    individual_npi                               = 1,
+    individual_pac_id                            = 1,
+    individual_enrollment_id                     = 1,
+    individual_first_name                        = 1,
+    individual_last_name                         = 1,
+    individual_total_employer_associations       = 1,
+    group_legal_business_name                    = 1,
+    group_pac_id                                 = 1,
+    group_enrollment_id                          = 1,
+    group_state_code                             = 1,
+    group_reassignments_and_physician_assistants = 1,
+    individual_state_code                        = 1,
+    individual_specialty_description             = 1,
+    individual_due_date                          = 1,
+    group_due_date                               = 1,
+    record_type                                  = 1)
+
+  y <- dplyr::tibble(
+    npi           = 1,
+    pac           = 1,
+    enid          = 1,
+    first         = 1,
+    last          = 1,
+    associations  = 1,
+    organization  = 1,
+    pac_org       = 1,
+    enid_org      = 1,
+    state_org     = 1,
+    reassignments = 1,
+    entry         = 1)
+
+  expect_equal(cols_reas(x), y)
+})
+
+# c('npi' = 'individual_npi') |>
+#   tibble::enframe() |>
+#   tibble::add_column(z = 1) |>
+#   dplyr::select(name, z) |>
+#   datawizard::data_rotate(colnames = "name") |>
+#   dplyr::tibble() |>
+#   constructive::construct()

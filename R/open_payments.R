@@ -281,7 +281,7 @@ open_payments <- function(year,
   return(results)
 }
 
-#' Parallelized version of [open_payments()], using furrr & future
+#' Parallelized [open_payments()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
 #' @param ... Pass arguments to [open_payments()].

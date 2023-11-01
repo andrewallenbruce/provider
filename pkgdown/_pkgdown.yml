@@ -35,18 +35,20 @@ navbar:
       href: index.html
     intro:
       icon: ~
-      text: Overview
+      text: Getting started
       href: articles/provider.html
     reference:
       text: Reference
       href: reference/index.html
     articles:
-      text: Vignettes
+      text: Articles
       menu:
       - text: Linking Providers
         href: articles/linking_providers.html
-      - text: Provider Analysis
+      - text: Comparing Providers
         href: articles/partb-stats.html
+      - text: Mapping Providers
+        href: articles/geospatial.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html

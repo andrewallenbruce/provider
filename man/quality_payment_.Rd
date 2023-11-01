@@ -2,7 +2,7 @@
 % Please edit documentation in R/quality_payment.R
 \name{quality_payment_}
 \alias{quality_payment_}
-\title{Parallelized version of \code{\link[=quality_payment]{quality_payment()}}, using furrr & future}
+\title{Parallelized \code{\link[=quality_payment]{quality_payment()}}}
 \usage{
 quality_payment_(year = qpp_years(), ...)
 }
@@ -13,5 +13,5 @@ format. Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the year
 \item{...}{Pass arguments to \code{\link[=quality_payment]{quality_payment()}}.}
 }
 \description{
-Parallelized version of \code{\link[=quality_payment]{quality_payment()}}, using furrr & future
+Parallelized \code{\link[=quality_payment]{quality_payment()}}
 }

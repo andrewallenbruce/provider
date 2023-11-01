@@ -62,9 +62,9 @@ pending <- function(type = "P",
     "LAST_NAME",  last,
     "FIRST_NAME", first)
 
-  if (type == "n") {
+  if (type == "N") {
     response <- httr2::req_perform(httr2::request(build_url("npe", args)))}
-  if (type == "p") {
+  if (type == "P") {
     response <- httr2::req_perform(httr2::request(build_url("ppe", args)))}
 
   if (vctrs::vec_is_empty(response$body)) {
@@ -85,7 +85,7 @@ pending <- function(type = "P",
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(type = dplyr::if_else(type == "p",
+      dplyr::mutate(type = dplyr::if_else(type == "P",
                                           "Physician",
                                           "Non-Physician")) |>
       cols_pen()

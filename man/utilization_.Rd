@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilization.R
 \name{utilization_}
 \alias{utilization_}
-\title{Parallelized version of \code{\link[=utilization]{utilization()}}, using furrr & future}
+\title{Parallelized \code{\link[=utilization]{utilization()}}}
 \usage{
 utilization_(year = util_years(), ...)
 }
@@ -13,5 +13,5 @@ format. Run \code{\link[=util_years]{util_years()}} to return a vector of the ye
 \item{...}{Pass arguments to \code{\link[=utilization]{utilization()}}.}
 }
 \description{
-Parallelized version of \code{\link[=utilization]{utilization()}}, using furrr & future
+Parallelized \code{\link[=utilization]{utilization()}}
 }

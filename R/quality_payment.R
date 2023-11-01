@@ -198,7 +198,7 @@ quality_payment <- function(year,
   return(results)
 }
 
-#' Parallelized version of [quality_payment()], using furrr & future
+#' Parallelized [quality_payment()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [qpp_years()] to return a vector of the years currently available.
 #' @param ... Pass arguments to [quality_payment()].

@@ -179,7 +179,7 @@ nppes <- function(npi = NULL,
   if (unnest) {
     results <- tidyr::unnest(results, c(basic, addresses)) |>
       combine(address, c('address_1', 'address_2')) |>
-      cols_nppes() |>
+      cols_nppes(1) |>
       dplyr::filter(purpose != "MAILING")
 
     results <- tidyr::unnest_longer(results, tx, keep_empty = TRUE) |>
@@ -198,7 +198,7 @@ nppes <- function(npi = NULL,
                         cred = "credential",
                         ent = "entity_type") |>
         dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
-        cols_nppes2()
+        cols_nppes(2)
 
       if (na.rm) results <- narm(results)
     }
@@ -223,9 +223,12 @@ entype_arg <- function(x) {
 }
 
 #' @param df data frame
+#' @param step step in the pipeline
 #' @autoglobal
 #' @noRd
-cols_nppes <- function(df) {
+cols_nppes <- function(df, step = c(1, 2)) {
+
+  if (step == 1) {
 
   cols <- c('npi'          = 'number',
             'entity_type'  = 'enumeration_type',
@@ -264,71 +267,68 @@ cols_nppes <- function(df) {
             'country'      = 'country_code',
             'phone'        = 'telephone_number',
             'fax'          = 'fax_number')
+  }
+
+  if (step == 2) {
+
+    cols <- c('npi',
+              'entity_type',
+              'enum_date',
+              'cert_date',
+              'last_update',
+              'status',
+              'prefix',
+              'first',
+              'middle',
+              'last',
+              'gender',
+              'credential',
+              'sole_prop',
+              'organization',
+              'org_parent',
+              'org_part',
+              'purpose',
+              'address',
+              'city',
+              'state',
+              'zip',
+              'country',
+              'phone',
+              'fax',
+              'ao_prefix',
+              'ao_first',
+              'ao_middle',
+              'ao_last',
+              'ao_suffix',
+              'ao_title',
+              'ao_phone',
+              'ao_fax',
+              'tx_code',
+              'tx_primary',
+              'tx_group'      = 'tx_taxonomy_group',
+              'tx_desc',
+              'tx_license',
+              'tx_state',
+              'id_code',
+              'id_desc',
+              'id_state',
+              'id_issuer',
+              'id_state',
+              'id_identifier',
+              'pr_country'    = 'pr_country_code',
+              'pr_purpose'    = 'pr_address_purpose',
+              'pr_address'    = 'pr_address_1',
+              'pr_city',
+              'pr_state',
+              'pr_zip'        = 'pr_postal_code',
+              'pr_phone'      = 'pr_telephone_number',
+              'pr_fax'        = 'pr_fax_number',
+              'on_type',
+              'on_code',
+              'on_org_name'   = 'on_organization_name')
+
+  }
 
   df |> dplyr::select(dplyr::any_of(cols))
 
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_nppes2 <- function(df) {
-
-  cols <- c('npi',
-            'entity_type',
-            'enum_date',
-            'cert_date',
-            'last_update',
-            'status',
-            'prefix',
-            'first',
-            'middle',
-            'last',
-            'gender',
-            'credential',
-            'sole_prop',
-            'organization',
-            'org_parent',
-            'org_part',
-            'purpose',
-            'address',
-            'city',
-            'state',
-            'zip',
-            'country',
-            'phone',
-            'fax',
-            'ao_prefix',
-            'ao_first',
-            'ao_middle',
-            'ao_last',
-            'ao_suffix',
-            'ao_title',
-            'ao_phone',
-            'ao_fax',
-            'tx_code',
-            'tx_primary',
-            'tx_group'      = 'tx_taxonomy_group',
-            'tx_desc',
-            'tx_license',
-            'tx_state',
-            'id_code',
-            'id_desc',
-            'id_state',
-            'id_issuer',
-            'id_state',
-            'id_identifier',
-            'pr_country'    = 'pr_country_code',
-            'pr_purpose'    = 'pr_address_purpose',
-            'pr_address'    = 'pr_address_1',
-            'pr_city',
-            'pr_state',
-            'pr_zip'        = 'pr_postal_code',
-            'pr_phone'      = 'pr_telephone_number',
-            'pr_fax'        = 'pr_fax_number',
-            'on_type',
-            'on_code',
-            'on_org_name'   = 'on_organization_name')
-
-  df |> dplyr::select(dplyr::any_of(cols))
 }

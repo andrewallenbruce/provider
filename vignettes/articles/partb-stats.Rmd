@@ -1,5 +1,5 @@
 ---
-title: "provider for Analysis"
+title: "Comparing Providers"
 description: "Demographics, Patient Mix, and Performance"
 author: "Andrew Bruce"
 output: html_document

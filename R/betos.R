@@ -105,7 +105,7 @@ betos <- function(hcpcs = NULL,
                                                        "N" ~ "Non-procedure",
                                                        "M" ~ "Major",
                                                        "O" ~ "Other")) |>
-      betos_cols()
+      cols_betos()
   }
   return(results)
 }
@@ -113,7 +113,7 @@ betos <- function(hcpcs = NULL,
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-betos_cols <- function(df) {
+cols_betos <- function(df) {
 
   cols <- c('hcpcs' = 'hcpcs_cd',
             'rbcs_id',
