@@ -21,6 +21,7 @@ Imports:
     dint,
     dplyr,
     forcats,
+    furrr,
     httr2,
     janitor,
     lifecycle,

@@ -15,7 +15,7 @@
 \alias{gen_data}
 \title{Utility Functions}
 \usage{
-change(df, cols, digits = 5)
+change(df, cols, csm = NULL, digits = 5)
 
 chg(x, n = 1L, fill_na = 0L)
 
@@ -47,7 +47,9 @@ gen_data(years)
 \arguments{
 \item{df}{data frame}
 
-\item{cols}{numeric columns}
+\item{cols}{numeric columns to calculate absolute/relative change & rate of return}
+
+\item{csm}{numeric cols to calculate cumulative sum for}
 
 \item{digits}{Number of digits to round to, default is 3}
 
@@ -111,8 +113,8 @@ change(pay) |>
 dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
                  csm_chg  = sum(pay_chg),
                  csm_pct  = sum(pay_pct),
-                 mean_ror = mean(pay_pct_ror, na.rm = TRUE),
-                 geomean  = geomean(pay_pct_ror))
+                 mean_ror = mean(pay_ror, na.rm = TRUE),
+                 geomean  = geomean(pay_ror))
 
 # Timespans
 dt <- dplyr::tibble(date = lubridate::today() - 366)

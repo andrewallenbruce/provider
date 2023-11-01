@@ -44,11 +44,13 @@ compare_hcpcs <- function(df) {
 
   x$type <- "geography"
 
-  state <- purrr::pmap(x, utilization) |> purrr::list_rbind()
+  state <- furrr::future_pmap_dfr(x, utilization)
+  # state <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   x$state <- "National"
 
-  national <- purrr::pmap(x, utilization) |> purrr::list_rbind()
+  national <- furrr::future_pmap_dfr(x, utilization)
+  # national <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   vctrs::vec_rbind(
     hcpcs_cols(df),
@@ -122,15 +124,19 @@ compare_conditions <- function(df, pivot = FALSE) {
                   subdemo = "all",
                   age = "all")
 
-  state <- purrr::pmap(y, conditions) |>
-    purrr::list_rbind() |>
-    dplyr::select(year, level, condition, prevalence)
+  state <- furrr::future_pmap_dfr(y, conditions)
+  state <- dplyr::select(state, year, level, condition, prevalence)
+  # state <- purrr::pmap(y, conditions) |>
+  #   purrr::list_rbind() |>
+  #   dplyr::select(year, level, condition, prevalence)
 
   y$sublevel <- "national"
 
-  national <- purrr::pmap(y, conditions) |>
-    purrr::list_rbind() |>
-    dplyr::select(year, level, condition, prevalence)
+  national <- furrr::future_pmap_dfr(y, conditions)
+  national <- dplyr::select(national, year, level, condition, prevalence)
+  # national <- purrr::pmap(y, conditions) |>
+  #   purrr::list_rbind() |>
+  #   dplyr::select(year, level, condition, prevalence)
 
   x$sublevel <- NULL
 

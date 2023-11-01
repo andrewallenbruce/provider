@@ -22,7 +22,10 @@ options(scipen = 999)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(purrr)
+library(furrr)
 library(gt)
 library(gtExtras)
 ```
@@ -31,15 +34,17 @@ library(gtExtras)
 # `utilization()`
 
 ```{r}
+plan(multisession, workers = 4)
 # Retrieve provider's overall utilization data
-ind     <- map_dfr(util_years(), ~utilization(year = .x, npi = 1043477615, type = "provider"))
+ind     <- future_map_dfr(util_years(), ~utilization(year = .x, npi = 1043477615, type = "provider"))
 # Retrieve state & national chronic condition data to compare with
 chronic <- compare_conditions(ind)
 
 # Retrieve provider's utilization data by HCPCS
-srvc    <- map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "service"))
+srvc    <- future_map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "service"))
 # Retrieve state & national HCPCS data to compare with
 hcpcs   <- compare_hcpcs(srvc)
+plan(sequential)
 ```
 
 
@@ -48,19 +53,18 @@ hcpcs   <- compare_hcpcs(srvc)
 ```{r}
 ind |> 
   unnest(performance) |> 
-  select(year, tot_hcpcs:.pymt_per_srvc) |> 
-  gt_preview(top_n = 30) |> 
-  opt_table_font(font = google_font(name = "Fira Code")) |> 
-  fmt_currency(columns = starts_with("avg_"), decimals = 0)
+  select(year, tot_hcpcs:.pymt_per_srvc)
 ```
+
+
 
 
 ```{r}
 ind |> 
   unnest(performance) |> 
   select(year, tot_hcpcs:tot_srvcs) |> 
-  change(!year) |> 
-  gt_preview(top_n = 30) |> 
+  change(!year, csm = "_chg") |> 
+  gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
   fmt_currency(columns = starts_with("avg_"), decimals = 0)
 ```
@@ -71,9 +75,12 @@ ind |>
   unnest(performance) |> 
   select(year, tot_charges:tot_payment) |> 
   change(!year) |> 
-  gt_preview(top_n = 30) |> 
+  gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
-  fmt_currency(columns = starts_with("avg_"), decimals = 0)
+  fmt_currency(columns = c(tot_charges, tot_allowed, tot_payment), decimals = 0) |> 
+  fmt_currency(columns = ends_with("_chg"), decimals = 0, force_sign = TRUE) |> 
+  fmt_percent(columns = ends_with("_pct"), decimals = 0, force_sign = TRUE) |> 
+  fmt_percent(columns = ends_with("_ror"), decimals = 0)
 ```
 
 
@@ -82,9 +89,9 @@ ind |>
   unnest(performance) |> 
   select(year, .copay_deduct:.pymt_per_srvc) |> 
   change(!year) |> 
-  gt_preview(top_n = 30) |> 
+  gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
-  fmt_currency(columns = starts_with("avg_"), decimals = 0)
+  fmt_currency(columns = starts_with(".pymt"), decimals = 2)
 ```
 
 ## HCPCS Utilization Data
@@ -93,38 +100,21 @@ ind |>
 srvc |> 
   group_by(year, family) |> 
   mutate(hcpcs_level = dplyr::min_rank(dplyr::pick(avg_allowed, avg_payment))) |> 
-  select(year, hcpcs, level = hcpcs_level, family, avg_allowed, avg_payment) |> 
-  arrange(year, family, level) |> 
-  gt_preview(top_n = 30) |> 
+  select(year, hcpcs, hcpcs_desc, rank = hcpcs_level, subcategory, family, tot_benes:tot_srvcs, avg_charge:avg_payment) |> 
+  arrange(year, family, rank) |> 
+  gt(groupname_col = "subcategory") |> 
+  gt_merge_stack(hcpcs, hcpcs_desc) |> 
+  fmt_roman(rank) |> 
+  cols_label(
+    tot_benes = "Beneficiaries",
+    tot_srvcs = "Services",
+    avg_charge = "Charge",
+    avg_allowed= "Allowed",
+    avg_payment = "Payment") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
-  fmt_currency(columns = starts_with("avg_"), decimals = 0)
-```
-
-
-```{r}
-hcpcs |> 
-  group_by(year, level, subcategory) |>
-  summarise(Beneficiaries = sum(beneficiaries),
-            Services = sum(services),
-            "Average Payment" = mean(avg_payment), .groups = "drop") |>
-  arrange(year, subcategory) |>
-  gt(rowname_col = "year") |> 
-  cols_align("left", level) |> 
-  cols_move_to_start(columns = subcategory) |> 
-  fmt_integer(columns = c(Beneficiaries, Services)) |> 
-  fmt_currency(columns = c('Average Payment'), decimals = 2) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Medicare Part B** Utilization")) |> 
-  opt_horizontal_padding(scale = 2) |> 
-  tab_options(table.width = pct(50),
-              column_labels.font.weight = "bold",
-              row_group.font.weight = "bold",
-              heading.background.color = "black",
-              heading.align = "left") |> 
+  fmt_currency(columns = starts_with("avg_"), decimals = 0) |> 
   opt_all_caps()
 ```
-
-
 
 
 <br>
@@ -157,6 +147,35 @@ srvc |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
   opt_all_caps()
 ```
+
+
+```{r}
+hcpcs |> 
+  group_by(year, level, subcategory) |>
+  summarise(Beneficiaries = sum(beneficiaries),
+            Services = sum(services),
+            "Average Payment" = mean(avg_payment), .groups = "drop") |>
+  arrange(year, subcategory) |>
+  gt(rowname_col = "year") |> 
+  cols_align("left", level) |> 
+  cols_move_to_start(columns = subcategory) |> 
+  fmt_integer(columns = c(Beneficiaries, Services)) |> 
+  fmt_currency(columns = c('Average Payment'), decimals = 2) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Medicare Part B** Utilization")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  tab_options(table.width = pct(50),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left") |> 
+  opt_all_caps()
+```
+
+
+
+
+
 
 
 ```{r}

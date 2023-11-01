@@ -30,8 +30,8 @@
 #' dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
 #'                  csm_chg  = sum(pay_chg),
 #'                  csm_pct  = sum(pay_pct),
-#'                  mean_ror = mean(pay_pct_ror, na.rm = TRUE),
-#'                  geomean  = geomean(pay_pct_ror))
+#'                  mean_ror = mean(pay_ror, na.rm = TRUE),
+#'                  geomean  = geomean(pay_ror))
 #'
 #' # Timespans
 #' dt <- dplyr::tibble(date = lubridate::today() - 366)
@@ -67,7 +67,8 @@
 NULL
 
 #' @param df data frame
-#' @param cols numeric columns
+#' @param cols numeric columns to calculate absolute/relative change & rate of return
+#' @param csm numeric cols to calculate cumulative sum for
 #' @param digits Number of digits to round to, default is 3
 #' @rdname calculations
 #' @examplesIf interactive()
@@ -76,16 +77,24 @@ NULL
 #' @autoglobal
 #' @export
 #' @keywords internal
-change <- function(df, cols, digits = 5) {
-  dplyr::mutate(df,
+change <- function(df, cols, csm = NULL, digits = 5) {
+
+  results <- dplyr::mutate(df,
     dplyr::across({{ cols }}, list(
       chg = \(x) chg(x),
       pct = \(x) pct(x)),
       .names = "{.col}_{.fn}")) |>
     dplyr::mutate(dplyr::across(dplyr::ends_with("_pct"), ~ .x + 1, .names = "{.col}_ror")) |>
-    dplyr::mutate(dplyr::across(dplyr::ends_with(c("_chg", "_pct")), ~cumsum(.), .names = "{.col}_csm")) |>
     dplyr::mutate(dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(., digits = digits))) |>
-    dplyr::relocate(dplyr::ends_with("_chg"), dplyr::ends_with("_pct"), .after = {{ cols }})
+    dplyr::relocate(dplyr::ends_with("_chg"), dplyr::ends_with("_pct"), dplyr::ends_with("_pct_ror"), .after = {{ cols }})
+
+  names(results) <- gsub("_pct_ror", "_ror", names(results))
+
+  if (!is.null(csm)) {
+    results <- dplyr::mutate(results,
+               dplyr::across(dplyr::ends_with({{ csm }}), list(cusum = \(x) cumsum(x)), .names = "{.col}_{.fn}"))
+  }
+  return(results)
 }
 
 #' Lagged absolute change
