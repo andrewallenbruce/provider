@@ -11,7 +11,8 @@ quality_payment(
   specialty = NULL,
   type = NULL,
   tidy = TRUE,
-  nest = TRUE
+  nest = TRUE,
+  ...
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ clinician; drives most of the data returned.
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest statuses & measures}
+
+\item{...}{For future use.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

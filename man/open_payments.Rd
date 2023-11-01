@@ -21,7 +21,8 @@ open_payments(
   offset = 0L,
   tidy = TRUE,
   pivot = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -82,6 +83,8 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+
+\item{...}{For future use.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -204,5 +207,8 @@ open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
 open_years() |>
 map(\(x) open_payments(year = x, npi = 1043477615)) |>
 list_rbind()
+
+# Parallelized
+open_payments_(npi = 1043218118)
 \dontshow{\}) # examplesIf}
 }

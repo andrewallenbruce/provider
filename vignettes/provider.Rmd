@@ -23,7 +23,6 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(provider)
-library(purrr)
 library(dplyr)
 ```
 
@@ -123,6 +122,13 @@ These can also be used in a pipeline, for searching all available years:
 map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
   select(year, size:pay_adjust)
 ```
+
+Several functions have parallelized versions, denoted by an underscore at the end of their name (`_`):
+
+```{r}
+quality_payment_(npi = 1043477615)
+```
+
 
 <br>
 

@@ -170,5 +170,10 @@ utilization(year = 2020, type = "geography", hcpcs = "0002A")
 util_years() |>
 map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
 list_rbind()
+
+# Parallelized version
+utilization_(npi = 1043477615, type = "provider")
+utilization_(npi = 1043477615, type = "service")
+utilization_(hcpcs = "0002A", type = "geography")
 \dontshow{\}) # examplesIf}
 }

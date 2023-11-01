@@ -47,7 +47,7 @@
 #' + `"MIPS APM"`
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest statuses & measures
-#'
+#' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
@@ -61,7 +61,8 @@ quality_payment <- function(year,
                             specialty = NULL,
                             type = NULL,
                             tidy = TRUE,
-                            nest = TRUE) {
+                            nest = TRUE,
+                            ...) {
 
 
   rlang::check_required(year)
@@ -195,6 +196,16 @@ quality_payment <- function(year,
       }
     }
   return(results)
+}
+
+#' Parallelized version of [quality_payment()], using furrr & future
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run [qpp_years()] to return a vector of the years currently available.
+#' @param ... Pass arguments to [quality_payment()].
+#' @autoglobal
+#' @export
+quality_payment_ <- function(year = qpp_years(), ...) {
+  furrr::future_map_dfr(year, quality_payment, ...)
 }
 
 #' @param df data frame

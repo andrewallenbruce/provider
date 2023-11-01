@@ -35,15 +35,17 @@ library(gtExtras)
 
 ```{r}
 plan(multisession, workers = 4)
+
 # Retrieve provider's overall utilization data
-ind     <- future_map_dfr(util_years(), ~utilization(year = .x, npi = 1043477615, type = "provider"))
+ind     <- utilization_(npi = 1043477615, type = "provider")
+# Retrieve provider's utilization data by HCPCS
+srvc    <- utilization_(npi = 1023076643, type = "service")
+
 # Retrieve state & national chronic condition data to compare with
 chronic <- compare_conditions(ind)
-
-# Retrieve provider's utilization data by HCPCS
-srvc    <- future_map_dfr(util_years(), ~utilization(year = .x, npi = 1023076643, type = "service"))
 # Retrieve state & national HCPCS data to compare with
 hcpcs   <- compare_hcpcs(srvc)
+
 plan(sequential)
 ```
 

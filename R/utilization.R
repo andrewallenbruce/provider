@@ -55,6 +55,11 @@
 #' map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
 #' list_rbind()
 #'
+#' # Parallelized version
+#' utilization_(npi = 1043477615, type = "provider")
+#' utilization_(npi = 1043477615, type = "service")
+#' utilization_(hcpcs = "0002A", type = "geography")
+#'
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [util_years()] to return a vector of the years currently available.
 #' @param type < *character* > // **required** dataset to query, `"provider"`, `"service"`, `"geography"`
@@ -247,6 +252,17 @@ utilization <- function(year,
     if (na.rm) results <- narm(results)
   }
   return(results)
+}
+
+#' Parallelized version of [utilization()], using furrr & future
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run [util_years()] to return a vector of the years currently available.
+#' @param ... Pass arguments to [utilization()].
+#' @autoglobal
+#' @export
+utilization_ <- function(year = util_years(),
+                         ...) {
+  furrr::future_map_dfr(year, utilization, ...)
 }
 
 #' @param results data frame from [utilization(type = "provider")]

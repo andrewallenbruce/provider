@@ -123,7 +123,7 @@
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#'
+#' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
@@ -137,6 +137,9 @@
 #' open_years() |>
 #' map(\(x) open_payments(year = x, npi = 1043477615)) |>
 #' list_rbind()
+#'
+#' # Parallelized
+#' open_payments_(npi = 1043218118)
 #' @autoglobal
 #' @export
 open_payments <- function(year,
@@ -155,7 +158,8 @@ open_payments <- function(year,
                           offset = 0L,
                           tidy = TRUE,
                           pivot = TRUE,
-                          na.rm = TRUE) {
+                          na.rm = TRUE,
+                          ...) {
 
 
   rlang::check_required(year)
@@ -275,6 +279,16 @@ open_payments <- function(year,
     if (na.rm) results <- narm(results)
   }
   return(results)
+}
+
+#' Parallelized version of [open_payments()], using furrr & future
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run [open_years()] to return a vector of the years currently available.
+#' @param ... Pass arguments to [open_payments()].
+#' @autoglobal
+#' @export
+open_payments_ <- function(year = open_years(), ...) {
+  furrr::future_map_dfr(year, open_payments, ...)
 }
 
 #' Update Open Payments API distribution IDs
