@@ -21,7 +21,6 @@ options(scipen = 999)
 ```
 
 
-
 ```{r message=FALSE, warning=FALSE}
 library(provider)
 library(tibble)

@@ -1,0 +1,9 @@
+file: georgia_reassignments.qs
+file_size: 2163889
+pin_hash: 894d245b4280614d
+type: qs
+title: 'georgia_reassignments: a pinned 97471 x 12 data frame'
+description: Georgia Provider Reassignments
+tags: ~
+created: 20231101T172634Z
+api_version: 1

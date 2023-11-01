@@ -150,3 +150,10 @@ cols_reas <- function(df) {
 record_type <- function(x) {
   dplyr::case_match(x, "Physician Assistant" ~ "Employment", .default = x)
 }
+
+#' @autoglobal
+#' @noRd
+georgia_reassignments <- function() {
+  pins::board_url(github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
+    pins::pin_read("georgia_reassignments")
+}

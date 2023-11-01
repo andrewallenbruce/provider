@@ -49,6 +49,8 @@ navbar:
         href: articles/partb-stats.html
       - text: Mapping Providers
         href: articles/geospatial.html
+      - text: Provider Networks
+        href: articles/networks.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
