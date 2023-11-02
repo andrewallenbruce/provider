@@ -26,6 +26,7 @@ library(dplyr)
 library(purrr)
 library(stringr)
 library(igraph)
+library(qs)
 library(ggraph)
 library(tidygraph)
 ```
