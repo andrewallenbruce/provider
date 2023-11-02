@@ -22,10 +22,118 @@ options(scipen = 999)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
+library(dplyr)
+library(purrr)
+library(stringr)
 library(igraph)
+library(ggraph)
+library(tidygraph)
 ```
 
+## Provider Networks
+
 ```{r}
-# georgia_reassignments()
+ga <- georgia_reassignments()
+# ga |> 
+#   filter(!is.na(organization)) |> 
+#   arrange(desc(reassignments)) |> 
+#   slice(50000:n())
 ```
+
+
+```{r}
+southland <- ga |> 
+  filter(pac_org == "1153563770") |> 
+  mutate(individual = stringr::str_glue("{first} {last}")) |> 
+  select(organization, 
+         individual,
+         associations,
+         entry, 
+         reassignments_org = reassignments, 
+         pac_org, 
+         enid_org, 
+         npi_ind = npi, 
+         pac_ind = pac, 
+         enid_ind = enid)
+
+southland
+```
+
+
+```{r}
+individuals <- southland |>
+  filter(associations > 5) |> 
+  distinct(npi_ind, .keep_all = TRUE) |> 
+  pull(npi_ind) |>
+  map_dfr(~reassignments(npi = .x)) |> 
+  mutate(individual = str_glue("{first} {last}")) |> 
+  select(individual,
+         organization, 
+         associations,
+         entry, 
+         reassignments_org = reassignments, 
+         pac_org, 
+         enid_org, 
+         npi_ind = npi, 
+         pac_ind = pac, 
+         enid_ind = enid) |> 
+  filter(organization != "SGMP SOUTHLAND LLC")
+
+individuals
+```
+
+## '{igraph}'
+
+```{r}
+bound_ig <- igraph::graph_from_data_frame(bind_rows(southland, individuals), directed = TRUE)
+bound_ig
+```
+
+
+```{r}
+plot(bound_ig, 
+     vertex.label.cex = 0.5, 
+     vertex.size = 3, 
+     vertex.color = "gray90", 
+     vertex.frame.width = 1)
+```
+
+<br><br>
+
+## `{tidygraph}` & `{ggraph}`
+
+```{r}
+south_grph <- tidygraph::as_tbl_graph(southland, directed = TRUE) |> 
+  mutate(importance = centrality_degree(mode = 'all'))
+south_grph
+```
+
+<br>
+
+```{r}
+ind_grph <- tidygraph::as_tbl_graph(individuals, directed = TRUE) |> 
+  mutate(importance = centrality_degree(mode = 'all'))
+ind_grph
+```
+
+<br>
+
+```{r}
+p <- ggraph(ind_grph, "graphopt") + 
+  geom_edge_link(arrow = arrow(length = unit(0.5, 'mm')), 
+                 end_cap = circle(2.5, 'mm'), edge_width = 0.3, edge_alpha = 0.5) +
+  geom_node_point(
+    #aes(size = importance), 
+                  show.legend = FALSE, 
+                  alpha = 0.5, 
+                  color = 'steelblue') + 
+  geom_node_text(aes(label = name), 
+                 repel = TRUE, 
+                 size = 1.25, 
+                 #label.size = 0.1,
+                 check_overlap = FALSE) +
+  theme_graph(fg_text_colour = 'white')
+```
+
+
 
