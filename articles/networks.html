@@ -134,8 +134,9 @@ Bruce</h4>
 <h2 id="provider-networks">Provider Networks<a class="anchor" aria-label="anchor" href="#provider-networks"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ga</span> <span class="op">&lt;-</span> <span class="fu">georgia_reassignments</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in georgia_reassignments(): could not find function "georgia_reassignments"</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">ga</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">:::</span><span class="fu">georgia_reassignments</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `read_qs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The package "qs" is required.</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ga |&gt; </span></span>
 <span><span class="co">#   filter(!is.na(organization)) |&gt; </span></span>
@@ -183,7 +184,8 @@ Bruce</h4>
 <pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'individuals' not found</span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="igraph">‘{igraph}’<a class="anchor" aria-label="anchor" href="#igraph"></a>
+<h2 id="igraph">
+<code>{igraph}</code><a class="anchor" aria-label="anchor" href="#igraph"></a>
 </h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound_ig</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html" class="external-link">graph_from_data_frame</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">southland</span>, <span class="va">individuals</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
