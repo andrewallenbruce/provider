@@ -7,7 +7,9 @@
 #' digits. The first two digits identify the State in which the provider is
 #' located. The last four digits identify the type of facility.
 #'
-#' Organ procurement organizations (OPOs) are assigned a 6-digit alphanumeric CCN.  The first 2 digits identify the State Code.  The third digit is the alpha character “P.”  The remaining 3 digits are the unique facility identifier.
+#' Organ procurement organizations (OPOs) are assigned a 6-digit alphanumeric
+#' CCN.  The first 2 digits identify the State Code.  The third digit is the
+#' alpha character “P.”  The remaining 3 digits are the unique facility identifier.
 #'
 #' @autoglobal
 #' @noRd
@@ -17,7 +19,7 @@ ccn_decode <- function(x) {
   if (nchar(x) == 6)           {type <- "Medicare Provider"}
   if (nchar(x) == 10)          {type <- "Medicare Supplier"}
 
-  s <- unlist(strsplit(x, ""))
+  s <- unlist(strsplit(x, ""), use.names = FALSE)
 
   # First two characters always represent the state
   cd <- paste0(s[1], s[2])
@@ -198,6 +200,32 @@ ipps_excluded_type_codes <- function(x) {
 
 #' @autoglobal
 #' @noRd
+supplier_codes <- function(x) {
+
+  # 3rd character of a 10-character CCN
+  dplyr::case_match(x,
+                    "C" ~ "Ambulatory Surgical Center",
+                    "D" ~ "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Laboratory",
+                    "X" ~ "Portable X-Ray Facility",
+                    .default = x)
+}
+
+
+#' @autoglobal
+#' @noRd
+emergency_codes <- function(x) {
+
+  # 6th character of a 6-character CCN
+  dplyr::case_match(
+    x,
+    "E" ~ "Non-Federal Emergency Hospital",
+    "F" ~ "Federal Emergency Hospital",
+    .default = x)
+
+}
+
+#' @autoglobal
+#' @noRd
 ccn_state_codes <- function(x) {
 
   dplyr::case_match(
@@ -261,32 +289,6 @@ ccn_state_codes <- function(x) {
     c("19", "71", "95", "A3") ~ "Louisiana",
     c("45", "67", "74", "97", "A9") ~ "Texas",
     c("05", "55", "75", "92", "A0", "A1", "B2") ~ "California",
-    .default = x)
-
-}
-
-#' @autoglobal
-#' @noRd
-supplier_codes <- function(x) {
-
-  # 3rd character of a 10-character CCN
-  dplyr::case_match(x,
-                    "C" ~ "Ambulatory Surgical Center",
-                    "D" ~ "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Laboratory",
-                    "X" ~ "Portable X-Ray Facility",
-                    .default = x)
-}
-
-
-#' @autoglobal
-#' @noRd
-emergency_codes <- function(x) {
-
-  # 6th character of a 6-character CCN
-  dplyr::case_match(
-    x,
-    "E" ~ "Non-Federal Emergency Hospital",
-    "F" ~ "Federal Emergency Hospital",
     .default = x)
 
 }

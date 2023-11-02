@@ -33,7 +33,7 @@ library(tidygraph)
 ## Provider Networks
 
 ```{r}
-ga <- georgia_reassignments()
+ga <- provider:::georgia_reassignments()
 # ga |> 
 #   filter(!is.na(organization)) |> 
 #   arrange(desc(reassignments)) |> 
@@ -82,7 +82,7 @@ individuals <- southland |>
 individuals
 ```
 
-## '{igraph}'
+## `{igraph}`
 
 ```{r}
 bound_ig <- igraph::graph_from_data_frame(bind_rows(southland, individuals), directed = TRUE)
