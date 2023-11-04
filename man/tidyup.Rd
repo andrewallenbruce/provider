@@ -6,7 +6,7 @@
 \usage{
 tidyup(
   df,
-  dt = c("date"),
+  dt = "date",
   yn = NULL,
   int = NULL,
   dbl = NULL,

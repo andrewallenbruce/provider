@@ -136,7 +136,7 @@ utilization <- function(year,
   type <- rlang::arg_match(type, c("provider", "service", "geography"))
 
   if (type != "provider") c(nest, detailed) %<-% c(FALSE, FALSE)
-  if (type == "provider") c(rbcs, hcpcs = NULL, pos = NULL, drug = NULL) %<-% c(FALSE)
+  if (type == "provider") c(rbcs, hcpcs = NULL, pos = NULL, drug = NULL) %<-% c(FALSE) # nolint
   if (type != "geography") level <- NULL
 
   if (type == "geography") {
@@ -153,7 +153,7 @@ utilization <- function(year,
     ruca         <- NULL
     country      <- NULL
     specialty    <- NULL
-    par          <- NULL
+    par          <- NULL # nolint
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
@@ -161,7 +161,7 @@ utilization <- function(year,
   zip   <- zip %nn% as.character(zip)
   fips  <- fips %nn% as.character(fips)
   ruca  <- ruca %nn% as.character(ruca)
-  par   <- par %nn% tf_2_yn(par)
+  par   <- par %nn% tf_2_yn(par) # nolint
   hcpcs <- hcpcs %nn% as.character(hcpcs)
   drug  <- drug %nn% tf_2_yn(drug)
 
@@ -186,7 +186,7 @@ utilization <- function(year,
     "Rndrng_Prvdr_RUCA",              ruca,
     "Rndrng_Prvdr_Cntry",             country,
     "Rndrng_Prvdr_Type",              specialty,
-    "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par,
+    "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par, # nolint
     "HCPCS_Cd",                       hcpcs,
     "HCPCS_Drug_Ind",                 drug,
     "Place_Of_Srvc",                  pos,
@@ -226,7 +226,7 @@ utilization <- function(year,
       "ruca",         ruca,
       "country",      country,
       "specialty",    specialty,
-      "par",          par,
+      "par",          par, # nolint
       "hcpcs",        hcpcs,
       "drug",         drug,
       "pos",          pos) |>

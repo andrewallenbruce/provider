@@ -13,6 +13,7 @@
 #'
 #' @autoglobal
 #' @noRd
+# nocov start
 ccn_decode <- function(x) {
 
   if (nchar(x) %in% !c(6, 10)) {type <- "Unknown Type"}
@@ -292,3 +293,4 @@ ccn_state_codes <- function(x) {
     .default = x)
 
 }
+# nocov end

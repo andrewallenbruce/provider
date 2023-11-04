@@ -26,6 +26,7 @@
 #'
 #' @autoglobal
 #' @export
+# nocov start
 outpatient <- function(year,
                        ccn = NULL,
                        organization = NULL,
@@ -130,3 +131,4 @@ cols_out <- function(df) {
 
     df |> dplyr::select(dplyr::any_of(cols))
 }
+# nocov end

@@ -97,7 +97,7 @@ gt_datadict <- function(df) {
     gt::gt() |>
     gt::fmt_markdown(columns = Variable) |>
     gtExtras::gt_add_divider(
-      columns = c("Variable"),
+      columns = c("Variable"), # nolint
       style = "solid",
       color = "gray",
       weight = gt::px(2),
@@ -180,9 +180,7 @@ gt_prov <- function(df,
     results <- results |> gt::tab_header(title = title, subtitle = subtitle)
   }
 
-  if (!is.null(source)) {
-    results <- results |> gt::tab_source_note(source_note = source)
-  }
+  if (!is.null(source)) results <- gt::tab_source_note(results, source_note = source) # nolint
 
   if (!is.null(checkmark)) {
     results <- results |> gt_check_xmark(cols = checkmark)

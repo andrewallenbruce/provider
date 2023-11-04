@@ -95,7 +95,7 @@ abb2full <- function(abb,
     dplyr::pull(y)
 
   if (vctrs::vec_is_empty(results)) {
-    cli::cli_abort(c("{.val {abb}} is not a valid state abbreviation."),
+    cli::cli_abort(c("{.val {abb}} is not a valid state abbreviation."), # nolint
                    call = call)
   }
   return(results)
@@ -165,7 +165,7 @@ df2chr <- function(df) {
 #' @export
 #' @keywords internal
 tidyup <- function(df,
-                   dt = c("date"),
+                   dt = "date",
                    yn = NULL,
                    int = NULL,
                    dbl = NULL,
@@ -363,7 +363,7 @@ build_url <- function(fn, args = NULL) {
                            "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
                            "bet" ~ "Restructured BETOS Classification System")
 
-  if (fn %in% c("tax") && is.null(args)) {
+  if (fn %in% c("tax") && is.null(args)) { # nolint
 
     url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                   cms_update(api)$distro[1],

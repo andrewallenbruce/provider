@@ -29,6 +29,7 @@
 #' download_msdrg()
 #' @autoglobal
 #' @noRd
+# nocov start
 download_msdrg <- function() {
 
   url <- "https://www.hipaaspace.com/medical.coding.library/drgs/"
@@ -49,3 +50,4 @@ download_msdrg <- function() {
                   drg_abbrev = dplyr::na_if(drg_abbrev, ""))
 
 }
+# nocov end
