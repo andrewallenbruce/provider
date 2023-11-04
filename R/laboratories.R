@@ -148,7 +148,7 @@ laboratories <- function(name = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, dt = c("_dt"), yn = c("_sw")) |>
+    results <- tidyup(results, dt = c("_dt"), yn = c("_sw")) |> # nolint
       combine(address, c('st_adr', 'addtnl_st_adr')) |>
       combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
       dplyr::mutate(pgm_trmntn_cd               = termcd(pgm_trmntn_cd),

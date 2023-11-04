@@ -139,7 +139,7 @@ check_npi <- function(x,
   luhn <- unlist(strsplit(luhn, ""))
 
   # 4. Reverse order
-  luhn <- luhn[length(luhn):1]
+  luhn <- luhn[length(luhn):1] # nolint
   replace <- seq(2, length(luhn), 2)
   luhn[replace] <- as.numeric(luhn[replace]) * 2
 

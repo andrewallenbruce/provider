@@ -124,14 +124,14 @@ conditions <- function(year,
 
   if (!is.null(mcc)) {
     if (set == "specific") {
-      cli::cli_abort(c("{.arg mcc} is only available for {.arg type = 'specific'}."))}
+      cli::cli_abort(c("{.arg mcc} is only available for {.arg type = 'specific'}."))} # nolint
     rlang::arg_match(mcc, mcc())
     mcc <- mcc_convert(mcc)
   }
 
   if (!is.null(condition)) {
     if (set == "multiple") {
-      cli::cli_abort(c("{.arg condition} is only available for {.arg type = 'multiple'}."))}
+      cli::cli_abort(c("{.arg condition} is only available for {.arg type = 'multiple'}."))} # nolint
   }
 
   if (!is.null(level)) {

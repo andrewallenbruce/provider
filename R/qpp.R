@@ -178,7 +178,7 @@ mips_2021 <- function(facility_name = NULL,
 
   if (all(is.null(c(npi, pac_id_ind, first_name, last_name,
                     facility_name, pac_id_org)))) {
-    cli::cli_abort(c("A non-NULL argument is required"))
+    cli::cli_abort(c("A non-NULL argument is required")) # nolint
   }
 
   if (any(!is.null(c(npi, pac_id_ind, first_name, last_name)))) {

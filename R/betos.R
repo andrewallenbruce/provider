@@ -100,7 +100,7 @@ betos <- function(hcpcs = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, dt = c("dt")) |>
+    results <- tidyup(results, dt = c("dt")) |> # nolint
       dplyr::mutate(rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
                                                        "N" ~ "Non-procedure",
                                                        "M" ~ "Major",

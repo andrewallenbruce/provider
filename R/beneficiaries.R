@@ -91,7 +91,7 @@ beneficiaries <- function(year = NULL,
   if (!is.null(year)) {
     year <- as.character(year)
 
-    if (!is.null(period) && period %in% c("Year")) {
+    if (!is.null(period) && period %in% c("Year")) { # nolint
       rlang::arg_match(year, as.character(bene_years("year")))}
 
     if (!is.null(period) && period %in% c("Month", month.name)) {
