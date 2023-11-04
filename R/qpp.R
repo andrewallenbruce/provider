@@ -109,7 +109,7 @@ quality_eligibility <- function(year, npi = NULL, tidy = TRUE) {
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' quality_stats(year = 2020)
 #' @rdname quality_payment
 #' @autoglobal
