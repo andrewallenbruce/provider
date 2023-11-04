@@ -14,7 +14,7 @@ URL: https://andrewallenbruce.github.io/provider/,
     https://github.com/andrewallenbruce/provider
 BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
-    R (>= 3.6)
+    R (>= 4.1.0)
 Imports: 
     anytime,
     cli,

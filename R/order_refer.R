@@ -51,8 +51,7 @@
 #' |`last`     |Order and Referring Provider's Last Name          |
 #' |`service`  |Services An Eligible Provider Can Order/Refer To  |
 #'
-#' @seealso [providers()], [opt_out()], [pending()]
-#' @examples
+#' @examplesIf interactive()
 #' order_refer(npi = 1003026055)
 #'
 #' # Filter for certain privileges

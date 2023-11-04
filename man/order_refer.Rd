@@ -70,11 +70,12 @@ Medicare may reimburse on behalf of its beneficiaries.
 order and refer. They can also enroll solely to order and refer.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 order_refer(npi = 1003026055)
 
 # Filter for certain privileges
 order_refer(last = "Smith", partb = FALSE, hha = TRUE)
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 links:
@@ -85,7 +86,4 @@ links:
 }
 
 \emph{Update Frequency:} \strong{Twice Weekly}
-}
-\seealso{
-\code{\link[=providers]{providers()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending]{pending()}}
 }
