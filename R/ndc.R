@@ -55,6 +55,22 @@
 #'
 #' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code
 #' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**    |**Description**                                 |
+#' |:------------|:-----------------------------------------------|
+#' |`ndc`        |National Drug Code                              |
+#' |`rxcui`      |RxNorm Identifier                               |
+#' |`atc`        |ATC Identifier                                  |
+#' |`status`     |Status (NDC)                                    |
+#' |`brand_name` |Brand Name (RxCUI)                              |
+#' |`drug_name`  |Drug Name (RxCUI)                               |
+#' |`atc_first`  |ATC I: Anatomical, Pharmacological              |
+#' |`atc_first`  |ATC II: Pharmacological, Therapeutic            |
+#' |`atc_first`  |ATC III: Chemical, Pharmacological, Therapeutic |
+#' |`atc_first`  |ATC IV: Chemical, Pharmacological, Therapeutic  |
+#' |`subject`    |Medline Plus: Subject                           |
+#' |`summary`    |Medline Plus: Summary                           |
+#'
 #' @autoglobal
 #' @export
 ndc_lookup <- function(ndc) {

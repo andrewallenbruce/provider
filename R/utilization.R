@@ -531,28 +531,6 @@ cols_util <- function(df, type) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-rbcs_util <- function(df) {
-
-  rbcs <- df |>
-    dplyr::distinct(hcpcs) |>
-    dplyr::pull(hcpcs) |>
-    purrr::map(\(x) betos(hcpcs = x)) |>
-    purrr::list_rbind()
-
-  if (vctrs::vec_is_empty(rbcs)) {
-
-    return(df)
-
-  } else {
-
-    rbcs <- dplyr::select(rbcs, hcpcs, category, subcategory, family, procedure)
-    cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs)), "rbcs")
-  }
-}
-
 #' @param x vector
 #' @autoglobal
 #' @noRd

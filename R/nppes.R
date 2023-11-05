@@ -328,7 +328,5 @@ cols_nppes <- function(df, step = c(1, 2)) {
               'on_org_name'   = 'on_organization_name')
 
   }
-
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

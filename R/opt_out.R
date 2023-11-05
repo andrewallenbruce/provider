@@ -74,10 +74,9 @@
 #' |`state`             |Opt-out provider's state                      |
 #' |`zip`               |Opt-out provider's zip code                   |
 #'
-#' @examples
+#' @examplesIf  interactive()
 #' opt_out(npi = 1043522824)
 #'
-#' @examplesIf  interactive()
 #' # For opt-out providers eligible
 #' # to order and refer, use [order_refer()]
 #' # to look up their eligibility status:

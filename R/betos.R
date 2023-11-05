@@ -101,10 +101,11 @@ betos <- function(hcpcs = NULL,
 
   if (tidy) {
     results <- tidyup(results, dt = c("dt")) |> # nolint
-      dplyr::mutate(rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
-                                                       "N" ~ "Non-procedure",
-                                                       "M" ~ "Major",
-                                                       "O" ~ "Other")) |>
+      dplyr::mutate(
+        rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
+                                           "N" ~ "Non-procedure",
+                                           "M" ~ "Major",
+                                           "O" ~ "Other")) |>
       cols_betos()
   }
   return(results)
@@ -115,20 +116,41 @@ betos <- function(hcpcs = NULL,
 #' @noRd
 cols_betos <- function(df) {
 
-  cols <- c('hcpcs' = 'hcpcs_cd',
+  cols <- c('hcpcs'            = 'hcpcs_cd',
             'rbcs_id',
             # 'rbcs_cat',
-            'category' = 'rbcs_cat_desc',
+            'category'         = 'rbcs_cat_desc',
             # 'rbcs_cat_subcat',
-            'subcategory' = 'rbcs_subcat_desc',
+            'subcategory'      = 'rbcs_subcat_desc',
             # 'rbcs_fam_numb',
-            'family' = 'rbcs_family_desc',
-            'procedure' = 'rbcs_major_ind',
+            'family'           = 'rbcs_family_desc',
+            'procedure'        = 'rbcs_major_ind',
             'hcpcs_start_date' = 'hcpcs_cd_add_dt',
-            'hcpcs_end_date' = 'hcpcs_cd_end_dt',
-            'rbcs_start_date' = 'rbcs_assignment_eff_dt',
-            'rbcs_end_date' = 'rbcs_assignment_end_dt')
+            'hcpcs_end_date'   = 'hcpcs_cd_end_dt',
+            'rbcs_start_date'  = 'rbcs_assignment_eff_dt',
+            'rbcs_end_date'    = 'rbcs_assignment_end_dt')
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+rbcs_util <- function(df) {
+
+  rbcs <- df |>
+    dplyr::distinct(hcpcs) |>
+    dplyr::pull(hcpcs) |>
+    purrr::map(\(x) betos(hcpcs = x)) |>
+    purrr::list_rbind()
+
+  if (vctrs::vec_is_empty(rbcs)) {
+
+    return(df)
+
+  } else {
+
+    rbcs <- dplyr::select(rbcs, hcpcs, category, subcategory, family, procedure)
+    cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs)), "rbcs")
+  }
 }

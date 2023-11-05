@@ -133,7 +133,7 @@
 #' open_payments(year = 2021, payer = "Adaptive Biotechnologies Corporation")
 #' open_payments(year = 2021, teaching_hospital = "Nyu Langone Hospitals")
 #'
-#' # Use the years helper function to retrieve results for all avaliable years:
+#' # Use the years helper function to retrieve results for all available years:
 #' open_years() |>
 #' map(\(x) open_payments(year = x, npi = 1043477615)) |>
 #' list_rbind()
