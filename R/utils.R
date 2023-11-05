@@ -145,13 +145,16 @@ display_long <- function(df, cols = dplyr::everything()) {
 #' @export
 #' @keywords internal
 df2chr <- function(df) {
-
-  df |> dplyr::mutate(dplyr::across(dplyr::where(is.numeric), as.character))
+  df |>
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::where(is.numeric), as.character))
 }
 
 #' Tidy a Data Frame
 #' @param df data frame
-#' @param dt cols to convert to date with [anytime::anydate()]
+#' @param dt cols to convert to date
+#' @param dtype mdy or ymd
 #' @param yn cols to convert to logical
 #' @param int cols to convert to integer
 #' @param dbl cols to convert to double
@@ -164,6 +167,7 @@ df2chr <- function(df) {
 #' @export
 #' @keywords internal
 tidyup <- function(df,
+                   dtype = c('mdy', 'ymd'),
                    dt = "date",
                    yn = NULL,
                    int = NULL,
@@ -176,19 +180,18 @@ tidyup <- function(df,
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
     dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
-                  dplyr::across(dplyr::where(is.character), na_blank),
-                  dplyr::across(dplyr::contains(dt), anytime::anydate))
+                  dplyr::across(dplyr::where(is.character), na_blank))
 
-  # `%nn%` <- function(x, y) if (!is.null(x)) y else x
-  # x <- yn %nn% dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))
+  if (dtype == 'mdy') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::mdy))
+  if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::ymd))
 
-  if (!is.null(yn))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn), yn_logical))}
-  if (!is.null(int))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int), as.integer))}
-  if (!is.null(dbl))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl), as.double))}
-  if (!is.null(chr))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr), as.character))}
-  if (!is.null(up))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
-  if (!is.null(cred))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))}
-  if (!is.null(ent))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent), entype_char))}
+  if (!is.null(yn))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn),   yn_logical))
+  if (!is.null(int))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int),  as.integer))
+  if (!is.null(dbl))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl),  as.double))
+  if (!is.null(chr))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr),  as.character))
+  if (!is.null(up))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up),   toupper))
+  if (!is.null(cred)) x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))
+  if (!is.null(ent))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent),  entype_char))
   return(x)
 }
 

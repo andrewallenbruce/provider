@@ -140,7 +140,10 @@ opt_out <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, yn = "eligible", chr = "npi") |>
+    results <- tidyup(results,
+                      dtype = 'mdy',
+                      yn = 'eligible',
+                      chr = 'npi') |>
       combine(address, c('first_line_street_address',
                          'second_line_street_address')) |>
       cols_opt()

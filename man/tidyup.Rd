@@ -6,6 +6,7 @@
 \usage{
 tidyup(
   df,
+  dtype = c("mdy", "ymd"),
   dt = "date",
   yn = NULL,
   int = NULL,
@@ -19,7 +20,9 @@ tidyup(
 \arguments{
 \item{df}{data frame}
 
-\item{dt}{cols to convert to date with \code{\link[anytime:anytime]{anytime::anydate()}}}
+\item{dtype}{mdy or ymd}
+
+\item{dt}{cols to convert to date}
 
 \item{yn}{cols to convert to logical}
 

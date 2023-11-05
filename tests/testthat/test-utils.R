@@ -65,9 +65,12 @@ test_that("tidyup() works", {
     star = "*",
     dash = "--")
 
+  df2 <- df
+  df2$date <- "03/07/1981"
+
   tidy <- dplyr::tibble(
     name = "JOHN DOE",
-    date = anytime::anydate("1981/03/07"),
+    date = lubridate::ymd("1981/03/07"),
     int = 123456789,
     dbl = 12.34,
     yn = TRUE,
@@ -79,9 +82,28 @@ test_that("tidyup() works", {
     star = NA_character_,
     dash = NA_character_)
 
-  expect_equal(tidyup(df, yn = "yn", int = c("int", "year"),
-                      dbl = "dbl", up = "name", cred = "cred",
-                      ent = c("ind", "org")), tidy)
+  tidy2 <- tidy
+  tidy2$date <- lubridate::mdy("03/07/1981")
+
+  expect_equal(tidyup(df,
+                      yn = "yn",
+                      dtype = 'ymd',
+                      int = c("int", "year"),
+                      dbl = "dbl",
+                      up = "name",
+                      cred = "cred",
+                      ent = c("ind", "org")),
+               tidy)
+
+  expect_equal(tidyup(df2,
+                      yn = "yn",
+                      dtype = 'mdy',
+                      int = c("int", "year"),
+                      dbl = "dbl",
+                      up = "name",
+                      cred = "cred",
+                      ent = c("ind", "org")),
+               tidy2)
 })
 
 test_that("combine() works", {

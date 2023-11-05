@@ -194,9 +194,10 @@ nppes <- function(npi = NULL,
                                tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
       results <- tidyup(results,
-                        yn = c("sole_prop", "org_part"),
-                        cred = "credential",
-                        ent = "entity_type") |>
+                        dtype = 'ymd',
+                        yn = c('sole_prop', 'org_part'),
+                        cred = 'credential',
+                        ent = 'entity_type') |>
         dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
         cols_nppes(2)
 

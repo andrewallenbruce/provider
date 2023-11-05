@@ -66,7 +66,7 @@ qpp_years <- function() as.integer(cms_update("Quality Payment Program Experienc
 #' @export
 #' @keywords internal
 bene_years <- function(period = c("year", "month")) {
-  if (period == "year")  {out <- beneficiaries(period = "Year", level = "National")$year}
-  if (period == "month") {out <- beneficiaries(period = "January", level = "National")$year}
+  if (period == "year")  out <- beneficiaries(period = "Year", level = "National", tidy = FALSE)$YEAR
+  if (period == "month") out <- beneficiaries(period = "January", level = "National", tidy = FALSE)$YEAR
   return(as.integer(out))
 }

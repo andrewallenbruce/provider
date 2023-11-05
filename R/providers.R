@@ -41,8 +41,6 @@
 #' |`state`                 |Enrollment state                       |
 #' |`gender`                |Individual provider's gender           |
 #'
-#' @seealso [order_refer()], [opt_out()], [pending()]
-#'
 #' @examplesIf interactive()
 #' providers(npi = 1417918293, specialty_code = "14-41")
 #' providers(pac = 2860305554, gender = "9")

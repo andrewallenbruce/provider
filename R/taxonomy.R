@@ -153,6 +153,6 @@ download_nucc_csv <- function() {
                   taxonomy_display_name = display_name,
                   taxonomy_definition = definition) |>
     dplyr::mutate(version = 231,
-                  release_date = anytime::anydate("2023-07-01"))
+                  release_date = lubridate::ymd("2023-07-01"))
   return(x)
 }

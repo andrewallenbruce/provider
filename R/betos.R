@@ -100,7 +100,9 @@ betos <- function(hcpcs = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, dt = c("dt")) |> # nolint
+    results <- tidyup(results,
+                      dtype = 'mdy',
+                      dt = 'dt') |>
       dplyr::mutate(
         rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
                                            "N" ~ "Non-procedure",
@@ -149,7 +151,6 @@ rbcs_util <- function(df) {
     return(df)
 
   } else {
-
     rbcs <- dplyr::select(rbcs, hcpcs, category, subcategory, family, procedure)
     cols_util(dplyr::full_join(df, rbcs, by = dplyr::join_by(hcpcs)), "rbcs")
   }

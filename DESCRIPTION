@@ -16,7 +16,6 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    anytime,
     cli,
     dplyr,
     furrr,
