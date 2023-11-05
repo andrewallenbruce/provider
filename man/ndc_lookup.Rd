@@ -10,7 +10,21 @@ ndc_lookup(ndc)
 \item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{ndc} \tab National Drug Code \cr
+   \code{rxcui} \tab RxNorm Identifier \cr
+   \code{atc} \tab ATC Identifier \cr
+   \code{status} \tab Status (NDC) \cr
+   \code{brand_name} \tab Brand Name (RxCUI) \cr
+   \code{drug_name} \tab Drug Name (RxCUI) \cr
+   \code{atc_first} \tab ATC I: Anatomical, Pharmacological \cr
+   \code{atc_first} \tab ATC II: Pharmacological, Therapeutic \cr
+   \code{atc_first} \tab ATC III: Chemical, Pharmacological, Therapeutic \cr
+   \code{atc_first} \tab ATC IV: Chemical, Pharmacological, Therapeutic \cr
+   \code{subject} \tab Medline Plus: Subject \cr
+   \code{summary} \tab Medline Plus: Summary \cr
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

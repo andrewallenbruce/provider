@@ -26,6 +26,7 @@ library(tidyr)
 library(dplyr)
 library(purrr)
 library(furrr)
+library(ggplot2)
 library(gt)
 library(gtExtras)
 ```
@@ -53,12 +54,25 @@ plan(sequential)
 ## Overall Performance
 
 ```{r}
-ind |> 
+performance <- ind |> 
   unnest(performance) |> 
+  mutate(year = as.integer(year)) |> 
   select(year, tot_hcpcs:.pymt_per_srvc)
+performance
 ```
 
 
+```{r}
+lm.performance <- lm(tot_payment ~ .srvcs_per_bene + tot_benes + .pymt_per_srvc, data = performance)
+summary(lm.performance)
+```
+
+
+```{r}
+ggplot(performance, aes(x = tot_payment, y = .srvcs_per_bene, fill = year, group = year)) +
+  geom_point(shape = 21, size = 4, alpha = 0.75) +
+  theme_minimal()
+```
 
 
 ```{r}

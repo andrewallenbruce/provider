@@ -7,6 +7,11 @@ utils::globalVariables(c(
   "y", # <beneficiaries>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
+  "hcpcs", # <rbcs_util>
+  "category", # <rbcs_util>
+  "subcategory", # <rbcs_util>
+  "family", # <rbcs_util>
+  "procedure", # <rbcs_util>
   "copy", # <ror>
   ":=", # <ror>
   "lg", # <ror>
@@ -197,11 +202,6 @@ utils::globalVariables(c(
   "address", # <tidyup_service>
   "specialty", # <tidyup_service>
   "place_of_srvc", # <tidyup_geography>
-  "hcpcs", # <rbcs_util>
-  "category", # <rbcs_util>
-  "subcategory", # <rbcs_util>
-  "family", # <rbcs_util>
-  "procedure", # <rbcs_util>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>
