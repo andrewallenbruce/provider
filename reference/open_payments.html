@@ -308,7 +308,7 @@ does not fall within one of the excluded categories in the rule.</p>
 <span class="r-in"><span><span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, payer <span class="op">=</span> <span class="st">"Adaptive Biotechnologies Corporation"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, teaching_hospital <span class="op">=</span> <span class="st">"Nyu Langone Hospitals"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Use the years helper function to retrieve results for all avaliable years:</span></span></span>
+<span class="r-in"><span><span class="co"># Use the years helper function to retrieve results for all available years:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="years.html">open_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
