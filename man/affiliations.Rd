@@ -68,8 +68,9 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 
 \code{\link[=affiliations]{affiliations()}} allows the user access to data concerning providers'
 facility affiliations
+}
+\section{Links}{
 
-Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
@@ -77,6 +78,7 @@ Links:
 
 \emph{Update Frequency:} \strong{Monthly}
 }
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 affiliations(parent_ccn = 670055)

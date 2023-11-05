@@ -421,7 +421,5 @@ cols_hosp <- function(df, step = c(1, 2)) {
               "Subgroup None"                = 'subgroup_none',
               'other')
   }
-
   df |> dplyr::select(dplyr::any_of(cols))
-
 }

@@ -6,10 +6,9 @@
 #' [affiliations()] allows the user access to data concerning providers'
 #' facility affiliations
 #'
-#' Links:
-#'
-#'  - [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-#'  - [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
+#' @section Links:
+#' + [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#' + [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
 #' *Update Frequency:* **Monthly**
 #'
@@ -72,14 +71,14 @@ affiliations <- function(npi = NULL,
 
     facility_type <- dplyr::case_match(
       facility_type,
-      "hp" ~ "Hospital",
+      "hp"   ~ "Hospital",
       "ltch" ~ "Long-term care hospital",
-      "nh" ~ "Nursing home",
-      "irf" ~ "Inpatient rehabilitation facility",
-      "hha" ~ "Home health agency",
-      "snf" ~ "Skilled nursing facility",
-      "hs" ~ "Hospice",
-      "df" ~ "Dialysis facility",
+      "nh"   ~ "Nursing home",
+      "irf"  ~ "Inpatient rehabilitation facility",
+      "hha"  ~ "Home health agency",
+      "snf"  ~ "Skilled nursing facility",
+      "hs"   ~ "Hospice",
+      "df"   ~ "Dialysis facility",
       .default = facility_type)
 
     facility_type <- rlang::arg_match(
@@ -97,9 +96,9 @@ affiliations <- function(npi = NULL,
     ~param,                                         ~arg,
     "npi",                                          npi,
     "ind_pac_id",                                   pac,
-    "frst_nm",                                      first,
-    "mid_nm",                                       middle,
-    "lst_nm",                                       last,
+    "provider_first_name",                          first,
+    "provider_middle_name",                         middle,
+    "provider_last_name",                           last,
     "facility_type",                                facility_type,
     "facility_affiliations_certification_number",   facility_ccn,
     "facility_type_certification_number",           parent_ccn)
@@ -130,8 +129,10 @@ affiliations <- function(npi = NULL,
     return(invisible(NULL))
 
   }
-  if (tidy)  results <- cols_aff(tidyup(results))
-  if (na.rm) results <- narm(results)
+  if (tidy) {
+    results <- cols_aff(tidyup(results)) |> dplyr::mutate(facility_type = fct_fac(facility_type))
+    if (na.rm) results <- narm(results)
+  }
   return(results)
 }
 
@@ -142,13 +143,27 @@ cols_aff <- function(df) {
 
   cols <- c("npi",
             "pac"          = "ind_pac_id",
-            "first"        = "frst_nm",
-            "middle"       = "mid_nm",
-            "last"         = "lst_nm",
+            "first"        = "provider_first_name",
+            "middle"       = "provider_middle_name",
+            "last"         = "provider_last_name",
             "suffix"       = "suff",
             "facility_type",
             "facility_ccn" = "facility_affiliations_certification_number",
             "parent_ccn"   = "facility_type_certification_number")
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_fac <- function(x) {
+  factor(x, levels = c("Hospital",
+                       "Long-term care hospital",
+                       "Nursing home",
+                       "Inpatient rehabilitation facility",
+                       "Home health agency",
+                       "Skilled nursing facility",
+                       "Hospice",
+                       "Dialysis facility"))
 }

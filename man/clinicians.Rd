@@ -12,6 +12,7 @@ clinicians(
   middle = NULL,
   last = NULL,
   gender = NULL,
+  credential = NULL,
   school = NULL,
   grad_year = NULL,
   specialty = NULL,
@@ -36,6 +37,8 @@ clinicians(
 
 \item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female)
 or \code{"M"} (Male)}
+
+\item{credential}{Individual provider’s credential}
 
 \item{school}{< \emph{character} > Individual provider’s medical school}
 
@@ -109,10 +112,7 @@ Medicare, including the medical school that they attended and the year they grad
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-clinicians(enid = "I20081002000549")
+clinicians(enid = "I20081002000549") # enid not working
 clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 \dontshow{\}) # examplesIf}
-}
-\seealso{
-\code{\link[=hospitals]{hospitals()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}
 }

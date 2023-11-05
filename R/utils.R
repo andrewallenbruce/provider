@@ -336,7 +336,7 @@ file_url <- function(fn = c("c", "a"), args, offset) {
   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
                 "[SELECT * FROM ", id$distribution$identifier, "]",
                 encode_param(args, type = "sql"),
-                "[LIMIT 10000 OFFSET ", offset, "]")
+                "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
 
   encode_url(url)
 }

@@ -19,6 +19,7 @@
 #' @param first,middle,last < *character* > Individual provider's name
 #' @param gender < *character* > Individual provider's gender; `"F"` (Female)
 #' or `"M"` (Male)
+#' @param credential Individual provider’s credential
 #' @param school < *character* > Individual provider’s medical school
 #' @param grad_year < *integer* > Individual provider’s graduation year
 #' @param specialty < *character* > Individual provider’s primary medical
@@ -63,10 +64,8 @@
 #' |`assign_ind`    |Indicates if provider accepts Medicare assignment     |
 #' |`assign_org`    |Indicates if facility accepts Medicare assignment     |
 #'
-#' @seealso [hospitals()], [providers()], [affiliations()]
-#'
 #' @examplesIf interactive()
-#' clinicians(enid = "I20081002000549")
+#' clinicians(enid = "I20081002000549") # enid not working
 #' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' @autoglobal
 #' @export
@@ -77,6 +76,7 @@ clinicians <- function(npi = NULL,
                        middle = NULL,
                        last = NULL,
                        gender = NULL,
+                       credential = NULL,
                        school = NULL,
                        grad_year = NULL,
                        specialty = NULL,
@@ -98,22 +98,23 @@ clinicians <- function(npi = NULL,
   gender    <- gender %nn% rlang::arg_match(gender, c("F", "M"))
 
   args <- dplyr::tribble(
-    ~param,               ~arg,
-    "NPI",                npi,
-    "Ind_PAC_ID",         pac,
-    "Ind_enrl_ID",        enid,
-    "frst_nm",            first,
-    "mid_nm",             middle,
-    "lst_nm",             last,
-    "gndr",               gender,
-    "med_sch",            school,
-    "grd_yr",             grad_year,
-    "pri_spec",           specialty,
-    "facility_name",      facility_name,
-    "org_pac_id",         pac_org,
-    "citytown",           city,
-    "state",              state,
-    "zip_code",           zip)
+    ~param,                 ~arg,
+    "npi",                  npi,
+    "ind_pac_id",           pac,
+    "ind_enrl_id",          enid,
+    "provider_first_name",  first,
+    "provider_middle_name", middle,
+    "provider_last_name",   last,
+    "gndr",                 gender,
+    "cred",                 credential,
+    "med_sch",              school,
+    "grd_yr",               grad_year,
+    "pri_spec",             specialty,
+    "facility_name",        facility_name,
+    "org_pac_id",           pac_org,
+    "citytown",             city,
+    "state",                state,
+    "zip_code",             zip)
 
   error_body <- function(response) {httr2::resp_body_json(response)$message}
 
@@ -134,6 +135,7 @@ clinicians <- function(npi = NULL,
       "middle",        middle,
       "last",          last,
       "gender",        gender,
+      "credential",    credential,
       "school",        school,
       "grad_year",     grad_year,
       "specialty",     specialty,
@@ -149,10 +151,8 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results,
-                      yn = 'telehlth',
-                      int = c('num_org_mem', 'grd_yr'),
-                      yr = 'grd_yr') |>
+    results <- tidyup(results, yn = 'telehlth',
+                      int = c('num_org_mem', 'grd_yr')) |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
       cols_clin()
 
@@ -169,9 +169,9 @@ cols_clin <- function(df) {
   cols <- c('npi',
             'pac'           = 'ind_pac_id',
             'enid'          = 'ind_enrl_id',
-            'first'         = 'frst_nm',
-            'middle'        = 'mid_nm',
-            'last'          = 'lst_nm',
+            'first'         = 'provider_first_name',
+            'middle'        = 'provider_middle_name',
+            'last'          = 'provider_last_name',
             'suffix'        = 'suff',
             'gender'        = 'gndr',
             'credential'    = 'cred',
@@ -179,18 +179,14 @@ cols_clin <- function(df) {
             'grad_year'     = 'grd_yr',
             'specialty'     = 'pri_spec',
             'specialty_sec' = 'sec_spec_all',
-            'organization'  = 'facility_name',
+            'facility_name',
             'pac_org'       = 'org_pac_id',
             'members_org'   = 'num_org_mem',
             'address_org'   = 'address',
-            'city_org'      = 'city_town',
+            'city_org'      = 'citytown',
             'state_org'     = 'state',
             'zip_org'       = 'zip_code',
             'phone_org'     = 'telephone_number')
-            # 'address_id'  = 'adrs_id',
-            # 'telehealth'  = 'telehlth',
-            # 'assign_ind'  = 'ind_assgn',
-            # 'assign_org'  = 'grp_assgn'
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

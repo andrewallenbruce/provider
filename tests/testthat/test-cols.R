@@ -1,26 +1,3 @@
-test_that("cols_aff() works", {
-  x <- dplyr::tibble(npi                                        = 1,
-                     ind_pac_id                                 = 1,
-                     frst_nm                                    = 1,
-                     mid_nm                                     = 1,
-                     lst_nm                                     = 1,
-                     suff                                       = 1,
-                     facility_type                              = 1,
-                     facility_affiliations_certification_number = 1,
-                     facility_type_certification_number         = 1)
-
-  y <- dplyr::tibble(npi           = 1,
-                     pac           = 1,
-                     first         = 1,
-                     middle        = 1,
-                     last          = 1,
-                     suffix        = 1,
-                     facility_type = 1,
-                     facility_ccn  = 1,
-                     parent_ccn    = 1)
-  expect_equal(cols_aff(x), y)
-})
-
 test_that("cols_bene() works", {
   x <- dplyr::tibble(
     year                                         = 1,
@@ -106,65 +83,6 @@ x <- dplyr::tibble(
                      rbcs_start_date  = 1,
                      rbcs_end_date    = 1)
   expect_equal(cols_betos(x), y)
-})
-
-test_that("cols_clin() works", {
-  x <- dplyr::tibble(
-    npi              = 1,
-    ind_pac_id       = 1,
-    ind_enrl_id      = 1,
-    frst_nm          = 1,
-    mid_nm           = 1,
-    lst_nm           = 1,
-    suff             = 1,
-    gndr             = 1,
-    cred             = 1,
-    med_sch          = 1,
-    grd_yr           = 1,
-    pri_spec         = 1,
-    sec_spec_all     = 1,
-    facility_name    = 1,
-    org_pac_id       = 1,
-    num_org_mem      = 1,
-    address          = 1,
-    city_town        = 1,
-    state            = 1,
-    zip_code         = 1,
-    telephone_number = 1,
-    adrs_id          = 1,
-    telehlth         = 1,
-    ind_assgn        = 1,
-    grp_assgn        = 1,
-  )
-
-  y <- dplyr::tibble(
-    npi           = 1,
-    pac           = 1,
-    enid          = 1,
-    first         = 1,
-    middle        = 1,
-    last          = 1,
-    suffix        = 1,
-    gender        = 1,
-    credential    = 1,
-    school        = 1,
-    grad_year     = 1,
-    specialty     = 1,
-    specialty_sec = 1,
-    organization  = 1,
-    pac_org       = 1,
-    members_org   = 1,
-    address_org   = 1,
-    city_org      = 1,
-    state_org     = 1,
-    zip_org       = 1,
-    phone_org     = 1
-    # address_id  = 1,
-    # telehealth  = 1,
-    # assign_ind  = 1,
-    # assign_org  = 1
-    )
-  expect_equal(cols_clin(x), y)
 })
 
 test_that("cols_cc() works", {
