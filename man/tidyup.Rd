@@ -13,8 +13,7 @@ tidyup(
   chr = NULL,
   up = NULL,
   cred = NULL,
-  ent = NULL,
-  yr = NULL
+  ent = NULL
 )
 }
 \arguments{
@@ -35,8 +34,6 @@ tidyup(
 \item{cred}{cols to remove periods from}
 
 \item{ent}{cols to convert to NPI entity type}
-
-\item{yr}{cols to convert to year with \code{\link[dint:date_y]{dint::as_date_y()}}}
 }
 \value{
 tidy data frame

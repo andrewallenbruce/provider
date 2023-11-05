@@ -53,7 +53,6 @@ test_that("display_long() works", {
 test_that("tidyup() works", {
   df <- dplyr::tibble(
     name = "John Doe ",
-    year = "1981",
     date = "1981/03/07",
     int = "123456789",
     dbl = "12.34",
@@ -68,7 +67,6 @@ test_that("tidyup() works", {
 
   tidy <- dplyr::tibble(
     name = "JOHN DOE",
-    year = dint::as_date_y(1981),
     date = anytime::anydate("1981/03/07"),
     int = 123456789,
     dbl = 12.34,
@@ -82,8 +80,8 @@ test_that("tidyup() works", {
     dash = NA_character_)
 
   expect_equal(tidyup(df, yn = "yn", int = c("int", "year"),
-                      dbl = "dbl", yr = "year", up = "name",
-                      cred = "cred", ent = c("ind", "org")), tidy)
+                      dbl = "dbl", up = "name", cred = "cred",
+                      ent = c("ind", "org")), tidy)
 })
 
 test_that("combine() works", {

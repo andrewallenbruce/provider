@@ -96,8 +96,7 @@ outpatient <- function(year,
                       dbl = c('avg_tot_sbmtd_chrgs',
                               'avg_mdcr_alowd_amt',
                               'avg_mdcr_pymt_amt',
-                              'avg_mdcr_outlier_amt'),
-                      yr = 'year') |>
+                              'avg_mdcr_outlier_amt')) |>
       cols_out()
     if (na.rm) results <- narm(results)
   }

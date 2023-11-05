@@ -18,7 +18,6 @@ Depends:
 Imports: 
     anytime,
     cli,
-    dint,
     dplyr,
     furrr,
     httr2,

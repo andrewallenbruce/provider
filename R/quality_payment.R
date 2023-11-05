@@ -141,8 +141,8 @@ quality_payment <- function(year,
                       "pi_bonus",
                       "extreme_hardship_ia",
                       "ia_study",
-                      "extreme_hardship_cost"),
-               yr = 'year') |> cols_qpp("tidy")
+                      "extreme_hardship_cost")) |>
+      cols_qpp("tidy")
 
       if (nest) {
         pcol <- list(q = c('quality_measure_id_', 'quality_measure_score_') %s+% rep(1:10, each = 2),

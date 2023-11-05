@@ -278,8 +278,7 @@ tidyup_provider <- function(results, nest, detailed) {
            int  = c("year", "_hcpcs", "bene", "_srvcs"),
            dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
            cred = "credential",
-           ent  = "entity_type",
-           yr   = 'year') |>
+           ent  = "entity_type") |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     dplyr::mutate(specialty       = correct_specialty(specialty),
                   .copay_deduct   = tot_allowed - tot_payment,
@@ -318,8 +317,7 @@ tidyup_service <- function(results, rbcs) {
   results <- tidyup(results,
                     yn      = "_ind",
                     int     = c("year", "tot_"),
-                    dbl     = "avg_",
-                    yr      = 'year') |>
+                    dbl     = "avg_") |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     cols_util("service") |>
     dplyr::mutate(specialty = correct_specialty(specialty))
@@ -339,8 +337,7 @@ tidyup_geography <- function(results, rbcs) {
   results <- tidyup(results,
                     yn           = "_ind",
                     int          = c("year", "tot_"),
-                    dbl          = "avg_",
-                    yr           = 'year') |>
+                    dbl          = "avg_") |>
     dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
     cols_util("geography")
 

@@ -159,7 +159,6 @@ df2chr <- function(df) {
 #' @param up cols to convert to upper case
 #' @param cred cols to remove periods from
 #' @param ent cols to convert to NPI entity type
-#' @param yr cols to convert to year with [dint::as_date_y()]
 #' @returns tidy data frame
 #' @autoglobal
 #' @export
@@ -172,8 +171,7 @@ tidyup <- function(df,
                    chr = NULL,
                    up = NULL,
                    cred = NULL,
-                   ent = NULL,
-                   yr = NULL) {
+                   ent = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -191,7 +189,6 @@ tidyup <- function(df,
   if (!is.null(up))    {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up), toupper))}
   if (!is.null(cred))  {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))}
   if (!is.null(ent))   {x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent), entype_char))}
-  if (!is.null(yr))    {x <- dplyr::mutate(x, dplyr::across(dplyr::any_of(yr), dint::as_date_y))}
   return(x)
 }
 

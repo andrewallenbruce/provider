@@ -240,8 +240,7 @@ open_payments <- function(year,
     results <- tidyup(results,
                       # yn = c(yncols),
                       dbl = "dollars",
-                      int = "program_year",
-                      yr  = "program_year") |>
+                      int = "program_year") |>
       dplyr::mutate(change_type                            = changed_logical(change_type),
                     covered_recipient_type                 = covered_recipient(covered_recipient_type),
                     nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>

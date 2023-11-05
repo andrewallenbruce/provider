@@ -207,8 +207,7 @@ conditions <- function(year,
     results$year <- year
     results <- cols_cc(tidyup(results,
                               int = "year",
-                              dbl = c("prvlnc", "_pc", "er_"),
-                              yr = "year"))
+                              dbl = c("prvlnc", "_pc", "er_")))
   if (na.rm) {results <- narm(results)}}
   return(results)
 }

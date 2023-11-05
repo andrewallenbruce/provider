@@ -147,7 +147,7 @@ beneficiaries <- function(year = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) results <- cols_bene(tidyup(results, int = c("year", "_benes"), yr = 'year'))
+  if (tidy) results <- cols_bene(tidyup(results, int = c('year', '_benes')))
   if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
 
   return(results)
