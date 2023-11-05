@@ -52,57 +52,51 @@ test_that("display_long() works", {
 
 test_that("tidyup() works", {
   df <- dplyr::tibble(
-    name = "John Doe ",
-    date = "1981/03/07",
-    int = "123456789",
-    dbl = "12.34",
-    yn = "Y",
-    cred = "M.D.",
-    ind = "NPI-1",
-    org = "NPI-2",
+    name  = "John Doe ",
+    date  = "1981/03/07",
+    int   = "123456789",
+    dbl   = "12.34",
+    yn    = "Y",
+    cred  = "M.D.",
     blank = "",
     space = " ",
-    star = "*",
-    dash = "--")
+    star  = "*",
+    dash  = "--")
 
-  df2 <- df
+  df2      <- df
   df2$date <- "03/07/1981"
 
   tidy <- dplyr::tibble(
-    name = "JOHN DOE",
-    date = lubridate::ymd("1981/03/07"),
-    int = 123456789,
-    dbl = 12.34,
-    yn = TRUE,
-    cred = "MD",
-    ind = "Individual",
-    org = "Organization",
+    name  = "JOHN DOE",
+    date  = lubridate::ymd("1981/03/07"),
+    int   = 123456789,
+    dbl   = 12.34,
+    yn    = TRUE,
+    cred  = "MD",
     blank = NA_character_,
     space = NA_character_,
-    star = NA_character_,
-    dash = NA_character_)
+    star  = NA_character_,
+    dash  = NA_character_)
 
-  tidy2 <- tidy
+  tidy2      <- tidy
   tidy2$date <- lubridate::mdy("03/07/1981")
 
   expect_equal(tidyup(df,
-                      yn = "yn",
+                      yn    = "yn",
                       dtype = 'ymd',
-                      int = c("int", "year"),
-                      dbl = "dbl",
-                      up = "name",
-                      cred = "cred",
-                      ent = c("ind", "org")),
+                      int   = c("int", "year"),
+                      dbl   = "dbl",
+                      up    = "name",
+                      cred  = "cred"),
                tidy)
 
   expect_equal(tidyup(df2,
-                      yn = "yn",
+                      yn    = "yn",
                       dtype = 'mdy',
-                      int = c("int", "year"),
-                      dbl = "dbl",
-                      up = "name",
-                      cred = "cred",
-                      ent = c("ind", "org")),
+                      int   = c("int", "year"),
+                      dbl   = "dbl",
+                      up    = "name",
+                      cred  = "cred"),
                tidy2)
 })
 

@@ -6,15 +6,14 @@
 \usage{
 tidyup(
   df,
-  dtype = c("mdy", "ymd"),
+  dtype = NULL,
   dt = "date",
   yn = NULL,
   int = NULL,
   dbl = NULL,
   chr = NULL,
   up = NULL,
-  cred = NULL,
-  ent = NULL
+  cred = NULL
 )
 }
 \arguments{
@@ -35,8 +34,6 @@ tidyup(
 \item{up}{cols to convert to upper case}
 
 \item{cred}{cols to remove periods from}
-
-\item{ent}{cols to convert to NPI entity type}
 }
 \value{
 tidy data frame

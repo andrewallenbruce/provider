@@ -151,10 +151,12 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results, yn = 'telehlth',
+    results <- tidyup(results,
+                      yn = 'telehlth',
                       int = c('num_org_mem', 'grd_yr')) |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-      cols_clin()
+      cols_clin() |>
+      dplyr::mutate(gender = fct_gen(gender))
 
     if (na.rm) results <- narm(results)
     }

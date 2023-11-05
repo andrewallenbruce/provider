@@ -104,7 +104,7 @@ providers <- function(npi = NULL,
   }
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy)  results <- cols_pros(tidyup(results))
+  if (tidy)  results <- cols_pros(tidyup(results)) |> dplyr::mutate(gender = fct_gen(gender))
   if (na.rm) results <- narm(results)
   return(results)
 }

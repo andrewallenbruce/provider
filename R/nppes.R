@@ -63,8 +63,8 @@
 #' statutes, regulations, and program instructions of the Medicare program.
 #'
 #' @section Links:
-#' - [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
-#' - [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+#' + [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
+#' + [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
 #'
 #' @section Trailing Wildcard Entries:
 #' Arguments that allow trailing wildcard entries are denoted in the parameter
@@ -196,10 +196,11 @@ nppes <- function(npi = NULL,
       results <- tidyup(results,
                         dtype = 'ymd',
                         yn = c('sole_prop', 'org_part'),
-                        cred = 'credential',
-                        ent = 'entity_type') |>
+                        cred = 'credential') |>
         dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
-        cols_nppes(2)
+        cols_nppes(2) |>
+        dplyr::mutate(gender = fct_gen(gender),
+                      entity_type = fct_enum(entity_type))
 
       if (na.rm) results <- narm(results)
     }
@@ -330,4 +331,14 @@ cols_nppes <- function(df, step = c(1, 2)) {
 
   }
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_enum <- function(x) {
+  factor(x,
+         levels = c("NPI-1", "NPI-2"),
+         labels = c("Individual", "Organization"))
 }

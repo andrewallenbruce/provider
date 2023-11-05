@@ -277,8 +277,7 @@ tidyup_provider <- function(results, nest, detailed) {
     tidyup(yn   = "par",
            int  = c("year", "_hcpcs", "bene", "_srvcs"),
            dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
-           cred = "credential",
-           ent  = "entity_type") |>
+           cred = "credential") |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     dplyr::mutate(specialty       = correct_specialty(specialty),
                   .copay_deduct   = tot_allowed - tot_payment,

@@ -138,6 +138,14 @@ display_long <- function(df, cols = dplyr::everything()) {
         tidyr::pivot_longer({{ cols }})
 }
 
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_gen <- function(x) {
+  factor(x,
+         levels = c("M", "F", "9"),
+         labels = c("Male", "Female", "Unknown"))
+}
 
 #' Convert data.frame cols to character
 #' @param df data frame
@@ -161,29 +169,29 @@ df2chr <- function(df) {
 #' @param chr cols to convert to character
 #' @param up cols to convert to upper case
 #' @param cred cols to remove periods from
-#' @param ent cols to convert to NPI entity type
 #' @returns tidy data frame
 #' @autoglobal
 #' @export
 #' @keywords internal
 tidyup <- function(df,
-                   dtype = c('mdy', 'ymd'),
+                   dtype = NULL,
                    dt = "date",
                    yn = NULL,
                    int = NULL,
                    dbl = NULL,
                    chr = NULL,
                    up = NULL,
-                   cred = NULL,
-                   ent = NULL) {
+                   cred = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
     dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish),
                   dplyr::across(dplyr::where(is.character), na_blank))
 
-  if (dtype == 'mdy') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::mdy))
-  if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::ymd))
+  if (!is.null(dtype)) {
+    if (dtype == 'mdy') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::mdy))
+    if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::ymd))
+  }
 
   if (!is.null(yn))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn),   yn_logical))
   if (!is.null(int))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int),  as.integer))
@@ -191,7 +199,6 @@ tidyup <- function(df,
   if (!is.null(chr))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr),  as.character))
   if (!is.null(up))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up),   toupper))
   if (!is.null(cred)) x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))
-  if (!is.null(ent))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(ent),  entype_char))
   return(x)
 }
 

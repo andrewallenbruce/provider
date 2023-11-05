@@ -112,6 +112,8 @@ utils::globalVariables(c(
   "pr", # <nppes>
   "on", # <nppes>
   "ep", # <nppes>
+  "gender", # <nppes>
+  "entity_type", # <nppes>
   "identifier", # <open_payments>
   "y", # <open_payments>
   "change_type", # <open_payments>
