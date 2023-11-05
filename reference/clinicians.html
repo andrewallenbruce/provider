@@ -103,6 +103,7 @@ Medicare, including the medical school that they attended and the year they grad
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  school <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grad_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -138,6 +139,10 @@ Medicare, including the medical school that they attended and the year they grad
 <dt>gender</dt>
 <dd><p>&lt; <em>character</em> &gt; Individual provider's gender; <code>"F"</code> (Female)
 or <code>"M"</code> (Male)</p></dd>
+
+
+<dt>credential</dt>
+<dd><p>Individual provider’s credential</p></dd>
 
 
 <dt>school</dt>
@@ -199,15 +204,11 @@ Associate Control ID</p></dd>
 <ul><li><p><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">National Downloadable File</a></p></li>
 <li><p><a href="https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf" class="external-link">Provider Data Catalog (PDC) Data Dictionary</a></p></li>
 </ul></div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="hospitals.html">hospitals()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="affiliations.html">affiliations()</a></code></p></div>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20081002000549"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20081002000549"</span><span class="op">)</span> <span class="co"># enid not working</span></span></span>
 <span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
