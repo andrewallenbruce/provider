@@ -30,7 +30,21 @@
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**       |**Description**                                                    |
+#' |:---------------|:------------------------------------------------------------------|
+#' |`npi`           |_Individual_ National Provider Identifier                          |
+#' |`pac`           |_Individual_ PECOS Associate Control ID                            |
+#' |`enid`          |_Individual_ Medicare Enrollment ID                                |
+#' |`first`         |_Individual_ Provider's First Name                                 |
+#' |`last`          |_Individual_ Provider's Last Name                                  |
+#' |`associations`  |Number of Organizations _Individual_ Reassigns Benefits To         |
+#' |`pac_org`       |_Organization's_ PECOS Associate Control ID                        |
+#' |`enid_org`      |_Organization's_ Medicare Enrollment ID                            |
+#' |`state_org`     |State _Organization_ Enrolled in Medicare                          |
+#' |`reassignments` |Number of Individuals the _Organization_ Accepts Reassignment From |
+#' |`entry`         |Whether Entry is for _Reassignment_ or _Employment_                |
 #'
 #' @examplesIf interactive()
 #' reassignments(enid = "I20200929003184")
@@ -153,7 +167,9 @@ record_type <- function(x) {
 
 #' @autoglobal
 #' @noRd
+# nocov start
 georgia_reassignments <- function() {
   pins::board_url(github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
     pins::pin_read("georgia_reassignments")
 }
+# nocov end

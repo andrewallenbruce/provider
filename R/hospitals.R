@@ -286,7 +286,8 @@ hospitals <- function(npi = NULL,
       dplyr::mutate(proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
                       "P" ~ "Proprietary",
                       "N" ~ "Non-Profit",
-                      .default = NA)) |>
+                      .default = NA),
+                    proprietary_nonprofit = fct_reg(proprietary_nonprofit)) |>
       cols_hosp(1)
 
     if (pivot) {
@@ -301,12 +302,40 @@ hospitals <- function(npi = NULL,
                             values_to = "flag") |>
         dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup ")) |>
         dplyr::filter(flag == TRUE) |>
-        dplyr::mutate(flag = NULL)
+        dplyr::mutate(flag = NULL,
+                      subgroup = fct_sub(subgroup))
 
     }
     if (na.rm) results <- narm(results)
   }
   return(results)
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_reg <- function(x) {
+  factor(x, levels = c("Non-Profit", "Proprietor"))
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_sub <- function(x) {
+  factor(x, levels = c("Acute Care",
+                       "Alcohol Drug",
+                       "Childrens' Hospital",
+                       "General",
+                       "Long-term",
+                       "None",
+                       "Other",
+                       "Psychiatric",
+                       "Psychiatric Unit",
+                       "Rehabilitation",
+                       "Rehabilitation Unit",
+                       "Short-Term",
+                       "Specialty Hospital",
+                       "Swing-Bed Approved"))
 }
 
 #' @param df data frame
@@ -371,6 +400,7 @@ cols_hosp <- function(df, step = c(1, 2)) {
               'state',
               'zip',
               'location_type',
+              'registration',
               'multi_npi',
               'reh_date',
               'reh_ccns',

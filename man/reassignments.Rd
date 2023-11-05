@@ -49,7 +49,20 @@ reassignments(
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab \emph{Individual} National Provider Identifier \cr
+   \code{pac} \tab \emph{Individual} PECOS Associate Control ID \cr
+   \code{enid} \tab \emph{Individual} Medicare Enrollment ID \cr
+   \code{first} \tab \emph{Individual} Provider's First Name \cr
+   \code{last} \tab \emph{Individual} Provider's Last Name \cr
+   \code{associations} \tab Number of Organizations \emph{Individual} Reassigns Benefits To \cr
+   \code{pac_org} \tab \emph{Organization's} PECOS Associate Control ID \cr
+   \code{enid_org} \tab \emph{Organization's} Medicare Enrollment ID \cr
+   \code{state_org} \tab State \emph{Organization} Enrolled in Medicare \cr
+   \code{reassignments} \tab Number of Individuals the \emph{Organization} Accepts Reassignment From \cr
+   \code{entry} \tab Whether Entry is for \emph{Reassignment} or \emph{Employment} \cr
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

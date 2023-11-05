@@ -298,6 +298,7 @@ test_that("cols_hosp() works", {
     state                          = 1,
     zip                            = 1,
     location_type                  = 1,
+    registration                   = 1,
     multi_npi                      = 1,
     reh_date                       = 1,
     reh_ccns                       = 1,
