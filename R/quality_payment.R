@@ -142,7 +142,8 @@ quality_payment <- function(year,
                       "extreme_hardship_ia",
                       "ia_study",
                       "extreme_hardship_cost")) |>
-      cols_qpp("tidy")
+      cols_qpp("tidy") |>
+      dplyr::mutate(type = fct_part(type))
 
       if (nest) {
         pcol <- list(q = c('quality_measure_id_', 'quality_measure_score_') %s+% rep(1:10, each = 2),
@@ -290,4 +291,10 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
   }
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+#' @autoglobal
+#' @noRd
+fct_part <- function(x) {
+  factor(x, levels = c("Group", "Individual", "MIPS APM"))
 }
