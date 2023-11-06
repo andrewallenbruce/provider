@@ -151,16 +151,16 @@ laboratories <- function(name = NULL,
     results <- tidyup(results, dtype = 'ymd', dt = '_dt', yn = '_sw') |>
       combine(address, c('st_adr', 'addtnl_st_adr')) |>
       combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
-      dplyr::mutate(pgm_trmntn_cd               = termcd(pgm_trmntn_cd),
-                    crtfctn_actn_type_cd        = toa(crtfctn_actn_type_cd),
-                    cmplnc_stus_cd              = status(cmplnc_stus_cd),
-                    rgn_cd                      = region(rgn_cd),
-                    gnrl_cntl_type_cd           = owner(gnrl_cntl_type_cd),
-                    crtfct_type_cd              = app(crtfct_type_cd),
-                    gnrl_fac_type_cd            = factype(gnrl_fac_type_cd),
-                    current_clia_lab_clsfctn_cd = labclass(current_clia_lab_clsfctn_cd),
-                    prvdr_ctgry_cd              = labclass(prvdr_ctgry_cd),
-                    prvdr_ctgry_sbtyp_cd        = labclass(prvdr_ctgry_sbtyp_cd),
+      dplyr::mutate(pgm_trmntn_cd               = fct_term(pgm_trmntn_cd),
+                    crtfctn_actn_type_cd        = fct_toa(crtfctn_actn_type_cd),
+                    cmplnc_stus_cd              = fct_stat(cmplnc_stus_cd),
+                    rgn_cd                      = fct_region(rgn_cd),
+                    gnrl_cntl_type_cd           = fct_owner(gnrl_cntl_type_cd),
+                    crtfct_type_cd              = fct_app(crtfct_type_cd),
+                    gnrl_fac_type_cd            = fct_facility(gnrl_fac_type_cd),
+                    current_clia_lab_clsfctn_cd = fct_lab(current_clia_lab_clsfctn_cd),
+                    prvdr_ctgry_cd              = fct_lab(prvdr_ctgry_cd),
+                    prvdr_ctgry_sbtyp_cd        = fct_lab(prvdr_ctgry_sbtyp_cd),
                     duration                    = duration_vec(trmntn_exprtn_dt),
                     expired                     = dplyr::if_else(duration < 0, TRUE, FALSE),
                     duration                    = NULL) |>
@@ -263,7 +263,7 @@ cols_lab <- function(df) {
   cols <- c('provider_name',
             'clia_number'           = 'prvdr_num',
             'certificate'           = 'crtfct_type_cd',
-            # 'clia_medicare'       = 'clia_mdcr_num',
+            'clia_medicare'         = 'clia_mdcr_num',
             # 'application'         = 'aplctn_type_cd',
             'effective_date'        = 'crtfct_efctv_dt',
             'expiration_date'       = 'trmntn_exprtn_dt',
@@ -290,7 +290,7 @@ cols_lab <- function(df) {
             'certification_date'    = 'crtfctn_dt',
             'mailed_date'           = 'crtfct_mail_dt',
 
-            # 'region'              = 'rgn_cd',
+            'region'                = 'rgn_cd',
             # 'state_region'        = 'state_rgn_cd',
             # 'fips_county'         = 'fips_cnty_cd',
             # 'fips_state'          = 'fips_state_cd',
@@ -365,156 +365,173 @@ cols_lab <- function(df) {
 
 #' @autoglobal
 #' @noRd
-toa <- function(x) {
-  dplyr::case_match(x,
-      "1" ~ "Initial",
-      "2" ~ "Recertification",
-      "3" ~ "Termination",
-      "4" ~ "Change of Ownership",
-      "5" ~ "Validation",
-      "8" ~ "Full Survey After Complaint",
-      .default = x)
-}
-
-#' @autoglobal
-#' @noRd
-app <- function(x) {
-  dplyr::case_match(x,
-      "1" ~ "Compliance",
-      "2" ~ "Waiver",
-      "3" ~ "Accreditation",
-      "4" ~ "PPM",
-      "9" ~ "Registration",
-      .default = x)
-}
-
-#' @autoglobal
-#' @noRd
 cert <- function(x) {
   dplyr::case_match(x,
-      "compliance"    ~ "1",
-      "waiver"        ~ "2",
-      "accreditation" ~ "3",
-      "ppm"           ~ "4",
-      "registration"  ~ "9",
-      .default = x)
+                    "compliance"    ~ "1",
+                    "waiver"        ~ "2",
+                    "accreditation" ~ "3",
+                    "ppm"           ~ "4",
+                    "registration"  ~ "9",
+                    .default = x)
 }
 
 #' @autoglobal
 #' @noRd
-status <- function(x) {
-  dplyr::case_match(x,
-      "A" ~ "In Compliance",
-      "B" ~ "Not In Compliance",
-      .default = x)
+fct_toa <- function(x) {
+  factor(x,
+         levels = c("1", "2", "3", "4", "5", "8"),
+         labels = c("Initial",
+                    "Recertification",
+                    "Termination",
+                    "Change of Ownership",
+                    "Validation",
+                    "Full Survey After Complaint"),
+         ordered = TRUE)
 }
 
 #' @autoglobal
 #' @noRd
-region <- function(x) {
-  dplyr::case_match(x,
-      "01" ~ "Boston",
-      "02" ~ "New York",
-      "03" ~ "Philadelphia",
-      "04" ~ "Atlanta",
-      "05" ~ "Chicago",
-      "06" ~ "Dallas",
-      "07" ~ "Kansas City",
-      "08" ~ "Denver",
-      "09" ~ "San Francisco",
-      "10" ~ "Seattle",
-      .default = x)
+fct_app <- function(x) {
+  factor(x,
+         levels = c("1", "2", "3", "4", "9"),
+         labels = c("Compliance",
+                    "Waiver",
+                    "Accreditation",
+                    "PPM",
+                    "Registration"),
+         ordered = TRUE)
 }
 
 #' @autoglobal
 #' @noRd
-owner <- function(x) {
-  dplyr::case_match(x,
-    "01" ~ "Religious Affiliation",
-    "02" ~ "Private",
-    "03" ~ "Other",
-    "04" ~ "Proprietary",
-    "05" ~ "Govt: City",
-    "06" ~ "Govt: County",
-    "07" ~ "Govt: State",
-    "08" ~ "Govt: Federal",
-    "09" ~ "Govt: Other",
-    "10" ~ "Unknown",
-    .default = x)
+fct_stat <- function(x) {
+  factor(x,
+         levels = c("A", "B"),
+         labels = c("In Compliance",
+                    "Not In Compliance"),
+         ordered = TRUE)
 }
 
 #' @autoglobal
 #' @noRd
-factype <- function(x) {
-  dplyr::case_match(x,
-    "01" ~ "Ambulance",
-    "02" ~ "Ambulatory Surgical Center",
-    "03" ~ "Ancillary Test Site",
-    "04" ~ "Assisted Living Facility",
-    "05" ~ "Blood Banks",
-    "06" ~ "Community Clinic",
-    "07" ~ "Comprehensive Outpatient Rehab",
-    "08" ~ "End-Stage Renal Disease Dialysis",
-    "09" ~ "Federally Qualified Health Center",
-    "10" ~ "Health Fair",
-    "11" ~ "Health Maintenance Organization",
-    "12" ~ "Home Health Agency",
-    "13" ~ "Hospice",
-    "14" ~ "Hospital",
-    "15" ~ "Independent",
-    "16" ~ "Industrial",
-    "17" ~ "Insurance",
-    "18" ~ "Intermediate Care Facility/Individuals with Intellectual Disabilities",
-    "19" ~ "Mobile Lab",
-    "20" ~ "Pharmacy",
-    "21" ~ "Physician Office",
-    "22" ~ "Other Practitioner",
-    "23" ~ "Prison",
-    "24" ~ "Public Health Laboratory",
-    "25" ~ "Rural Health Clinic",
-    "26" ~ "School/Student Health Service",
-    "27" ~ "Skilled Nursing Facility",
-    "28" ~ "Tissue Bank/Repositories",
-    "29" ~ "Other",
-    .default = x)
+fct_region <- function(x) {
+  factor(x,
+         levels = c('01', '02', '03', '04', '05',
+                    '06', '07', '08', '09', '10'),
+         labels = c('Boston',
+                    'New York',
+                    'Philadelphia',
+                    'Atlanta',
+                    'Chicago',
+                    'Dallas',
+                    'Kansas City',
+                    'Denver',
+                    'San Francisco',
+                    'Seattle'))
 }
 
 #' @autoglobal
 #' @noRd
-labclass <- function(x) {
-  dplyr::case_match(x,
-    c("00", "22") ~ "CLIA Lab",
-    "01" ~ "CLIA88 Lab",
-    "05" ~ "CLIA Exempt Lab",
-    "10" ~ "CLIA VA Lab",
-    .default = x)
+fct_owner <- function(x) {
+  factor(x,
+         levels = c('01', '02', '03', '04', '05',
+                    '06', '07', '08', '09', '10'),
+         labels = c('Religious Affiliation',
+                    'Private',
+                    'Other',
+                    'Proprietary',
+                    'Govt: City',
+                    'Govt: County',
+                    'Govt: State',
+                    'Govt: Federal',
+                    'Govt: Other',
+                    'Unknown'))
 }
 
 #' @autoglobal
 #' @noRd
-termcd <- function(x) {
-  dplyr::case_match(x,
-    "00" ~ "Active Provider",
-    "01" ~ "Voluntary: Merger, Closure",
-    "02" ~ "Voluntary: Dissatisfaction with Reimbursement",
-    "03" ~ "Voluntary: Risk of Involuntary Termination",
-    "04" ~ "Voluntary: Other Reason for Withdrawal",
-    "05" ~ "Involuntary: Failure to Meet Health-Safety Req",
-    "06" ~ "Involuntary: Failure to Meet Agreement",
-    "07" ~ "Other: Provider Status Change",
-    "08" ~ "Nonpayment of Fees (CLIA Only)",
-    "09" ~ "Rev/Unsuccessful Participation in PT (CLIA Only)",
-    "10" ~ "Rev/Other Reason (CLIA Only)",
-    "11" ~ "Incomplete CLIA Application Information (CLIA Only)",
-    "12" ~ "No Longer Performing Tests (CLIA Only)",
-    "13" ~ "Multiple to Single Site Certificate (CLIA Only)",
-    "14" ~ "Shared Laboratory (CLIA Only)",
-    "15" ~ "Failure to Renew Waiver PPM Certificate (CLIA Only)",
-    "16" ~ "Duplicate CLIA Number (CLIA Only)",
-    "17" ~ "Mail Returned No Forward Address Cert Ended (CLIA Only)",
-    "20" ~ "Notification Bankruptcy (CLIA Only)",
-    "33" ~ "Accreditation Not Confirmed (CLIA Only)",
-    "80" ~ "Awaiting State Approval",
-    "99" ~ "OIG Action Do Not Activate (CLIA Only)",
-    .default = x)
+fct_lab <- function(x) {
+  factor(x,
+         levels = c("00", "22", "01", "05", "10"),
+         labels = c("CLIA Lab",
+                    "CLIA Lab",
+                    "CLIA88 Lab",
+                    "CLIA Exempt Lab",
+                    "CLIA VA Lab"))
+}
+
+#' @autoglobal
+#' @noRd
+fct_facility <- function(x) {
+  factor(x,
+         levels = c('01', '02', '03', '04', '05',
+                    '06', '07', '08', '09', '10',
+                    '11', '12', '13', '14', '15',
+                    '16', '17', '18', '19', '20',
+                    '21', '22', '23', '24', '25',
+                    '26', '27', '28', '29'),
+         labels = c('Ambulance',
+                    'Ambulatory Surgical Center',
+                    'Ancillary Test Site',
+                    'Assisted Living Facility',
+                    'Blood Banks',
+                    'Community Clinic',
+                    'Comprehensive Outpatient Rehab',
+                    'End-Stage Renal Disease Dialysis',
+                    'Federally Qualified Health Center',
+                    'Health Fair',
+                    'Health Maintenance Organization',
+                    'Home Health Agency',
+                    'Hospice',
+                    'Hospital',
+                    'Independent',
+                    'Industrial',
+                    'Insurance',
+                    'Intermediate Care Facility-Individuals with Intellectual Disabilities',
+                    'Mobile Lab',
+                    'Pharmacy',
+                    'Physician Office',
+                    'Other Practitioner',
+                    'Prison',
+                    'Public Health Laboratory',
+                    'Rural Health Clinic',
+                    'School-Student Health Service',
+                    'Skilled Nursing Facility',
+                    'Tissue Bank-Repositories',
+                    'Other'),
+         ordered = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+fct_term <- function(x) {
+  factor(x,
+         levels = c('00', '01', '02', '03', '04',
+                    '05', '06', '07', '08', '09',
+                    '10', '11', '12', '13', '14',
+                    '15', '16', '17', '20', '33',
+                    '80', '99'),
+         labels = c('Active Provider',
+                    'Voluntary: Merger, Closure',
+                    'Voluntary: Dissatisfaction with Reimbursement',
+                    'Voluntary: Risk of Involuntary Termination',
+                    'Voluntary: Other Reason for Withdrawal',
+                    'Involuntary: Failure to Meet Health-Safety Req',
+                    'Involuntary: Failure to Meet Agreement',
+                    'Other: Provider Status Change',
+                    'Nonpayment of Fees (CLIA Only)',
+                    'Rev/Unsuccessful Participation in PT (CLIA Only)',
+                    'Rev/Other Reason (CLIA Only)',
+                    'Incomplete CLIA Application Information (CLIA Only)',
+                    'No Longer Performing Tests (CLIA Only)',
+                    'Multiple to Single Site Certificate (CLIA Only)',
+                    'Shared Laboratory (CLIA Only)',
+                    'Failure to Renew Waiver PPM Certificate (CLIA Only)',
+                    'Duplicate CLIA Number (CLIA Only)',
+                    'Mail Returned No Forward Address Cert Ended (CLIA Only)',
+                    'Notification Bankruptcy (CLIA Only)',
+                    'Accreditation Not Confirmed (CLIA Only)',
+                    'Awaiting State Approval',
+                    'OIG Action Do Not Activate (CLIA Only)'),
+         ordered = TRUE)
 }

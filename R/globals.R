@@ -135,6 +135,7 @@ utils::globalVariables(c(
   "identifier", # <open_ids>
   "y", # <opt_out>
   "y", # <order_refer>
+  "status", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>
@@ -181,6 +182,7 @@ utils::globalVariables(c(
   "set", # <quality_payment>
   "val", # <quality_payment>
   "score", # <quality_payment>
+  "status", # <quality_payment>
   "y", # <reassignments>
   "code", # <download_nucc_csv>
   "section", # <download_nucc_csv>
