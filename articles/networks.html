@@ -55,10 +55,12 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/linking-providers.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/linking-providers.html">Profiling Providers</a>
     <a class="dropdown-item" href="../articles/partb-stats.html">Comparing Providers</a>
     <a class="dropdown-item" href="../articles/geospatial.html">Mapping Providers</a>
-    <a class="dropdown-item" href="../articles/networks.html">Provider Networks</a>
+    <a class="dropdown-item" href="../articles/networks.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/qpp.html">Quality Payment Program</a>
+    <a class="dropdown-item" href="../articles/open.html">Open Payments</a>
   </div>
 </li>
       </ul>
@@ -217,11 +219,11 @@ Bruce</h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound_ig</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html" class="external-link">graph_from_data_frame</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">southland</span>, <span class="va">individuals</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">bound_ig</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH aba4b7a DN-- 217 362 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH 8cc13a6 DN-- 217 362 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), associations (e/n), entry (e/c), reassignments_org</span></span>
 <span><span class="co">#&gt; | (e/n), pac_org (e/c), enid_org (e/c), npi_ind (e/c), pac_ind (e/c),</span></span>
 <span><span class="co">#&gt; | enid_ind (e/c)</span></span>
-<span><span class="co">#&gt; + edges from aba4b7a (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 8cc13a6 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] SGMP SOUTHLAND LLC-&gt;ASHLEY ABT               </span></span>
 <span><span class="co">#&gt; [2] SGMP SOUTHLAND LLC-&gt;OBIORA AGBIMSON          </span></span>
 <span><span class="co">#&gt; [3] SGMP SOUTHLAND LLC-&gt;CHARLES ALEXIS           </span></span>

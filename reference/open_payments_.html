@@ -27,10 +27,12 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/linking-providers.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/linking-providers.html">Profiling Providers</a>
     <a class="dropdown-item" href="../articles/partb-stats.html">Comparing Providers</a>
     <a class="dropdown-item" href="../articles/geospatial.html">Mapping Providers</a>
-    <a class="dropdown-item" href="../articles/networks.html">Provider Networks</a>
+    <a class="dropdown-item" href="../articles/networks.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/qpp.html">Quality Payment Program</a>
+    <a class="dropdown-item" href="../articles/open.html">Open Payments</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -86,7 +88,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">open_payments_</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="years.html">open_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">open_payments_</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="years.html">open_years</a></span><span class="op">(</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -94,6 +96,10 @@
     <dl><dt>year</dt>
 <dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> Year data was reported, in <code>YYYY</code>
 format. Run <code><a href="years.html">open_years()</a></code> to return a vector of the years currently available.</p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 
 <dt>...</dt>

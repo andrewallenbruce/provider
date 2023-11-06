@@ -27,10 +27,12 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/linking-providers.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/linking-providers.html">Profiling Providers</a>
     <a class="dropdown-item" href="../articles/partb-stats.html">Comparing Providers</a>
     <a class="dropdown-item" href="../articles/geospatial.html">Mapping Providers</a>
-    <a class="dropdown-item" href="../articles/networks.html">Provider Networks</a>
+    <a class="dropdown-item" href="../articles/networks.html">Linking Providers</a>
+    <a class="dropdown-item" href="../articles/qpp.html">Quality Payment Program</a>
+    <a class="dropdown-item" href="../articles/open.html">Open Payments</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -200,12 +202,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year group   pay</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>643</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>666</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>069</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>604</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>146</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>245</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Lagged absolute/percentage change, rate of return and cumulative sum</span></span></span>
 <span class="r-in"><span><span class="co"># `change()`</span></span></span>
@@ -214,12 +216,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year group   pay pay_chg pay_pct pay_ror</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>643       0  0        1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>251    -<span style="color: #BB0000;">392</span> -<span style="color: #BB0000;">0.239</span>    0.761</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>600     349  0.279    1.28 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>666      66  0.041<span style="text-decoration: underline;">2</span>   1.04 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>069    -<span style="color: #BB0000;">597</span> -<span style="color: #BB0000;">0.358</span>    0.642</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>604     535  0.500    1.50 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>146       0   0       1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>926     780   0.681   1.68 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>153    -<span style="color: #BB0000;">773</span>  -<span style="color: #BB0000;">0.401</span>   0.599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>978     825   0.716   1.72 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>006    -<span style="color: #BB0000;">972</span>  -<span style="color: #BB0000;">0.491</span>   0.509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>245     239   0.238   1.24 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `geomean()` # Geometric mean</span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
@@ -229,7 +231,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   gmean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.995</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.02</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># When performing a `group_by()`, watch for</span></span></span>
 <span class="r-in"><span><span class="co"># the correct order of the variables</span></span></span>
@@ -238,20 +240,20 @@
 <span class="r-in"><span><span class="fu">change</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   group [2]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year group   pay pay_chg pay_pct pay_ror</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>643       0  0        1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>251    -<span style="color: #BB0000;">392</span> -<span style="color: #BB0000;">0.239</span>    0.761</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>600     349  0.279    1.28 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>666      66  0.041<span style="text-decoration: underline;">2</span>   1.04 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>069    -<span style="color: #BB0000;">597</span> -<span style="color: #BB0000;">0.358</span>    0.642</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>604     535  0.500    1.50 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>020 B      <span style="text-decoration: underline;">1</span>043       0  0        1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 B      <span style="text-decoration: underline;">1</span>234     191  0.183    1.18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>022 B      <span style="text-decoration: underline;">1</span>382     148  0.120    1.12 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>023 B      <span style="text-decoration: underline;">1</span>814     432  0.313    1.31 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>024 B      <span style="text-decoration: underline;">1</span>139    -<span style="color: #BB0000;">675</span> -<span style="color: #BB0000;">0.372</span>    0.628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>025 B      <span style="text-decoration: underline;">1</span>314     175  0.154    1.15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     year group   pay pay_chg  pay_pct pay_ror</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>146       0  0         1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>926     780  0.681     1.68 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>153    -<span style="color: #BB0000;">773</span> -<span style="color: #BB0000;">0.401</span>     0.599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>978     825  0.716     1.72 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>006    -<span style="color: #BB0000;">972</span> -<span style="color: #BB0000;">0.491</span>     0.509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>245     239  0.238     1.24 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>020 B      <span style="text-decoration: underline;">1</span>673       0  0         1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 B      <span style="text-decoration: underline;">1</span>429    -<span style="color: #BB0000;">244</span> -<span style="color: #BB0000;">0.146</span>     0.854</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>022 B      <span style="text-decoration: underline;">1</span>684     255  0.178     1.18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>023 B      <span style="text-decoration: underline;">1</span>232    -<span style="color: #BB0000;">452</span> -<span style="color: #BB0000;">0.268</span>     0.732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>024 B      <span style="text-decoration: underline;">1</span>445     213  0.173     1.17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>025 B      <span style="text-decoration: underline;">1</span>459      14  0.009<span style="text-decoration: underline;">69</span>   1.01 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -264,8 +266,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   group mean_pay csm_chg csm_pct mean_ror geomean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A        <span style="text-decoration: underline;">1</span>472.     -<span style="color: #BB0000;">39</span>   0.224     1.04   0.996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B        <span style="text-decoration: underline;">1</span>321      271   0.397     1.07   1.04 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A         <span style="text-decoration: underline;">1</span>409      99  0.741     1.12    1.01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B         <span style="text-decoration: underline;">1</span>487    -<span style="color: #BB0000;">214</span> -<span style="color: #BB0000;">0.053</span><span style="color: #BB0000; text-decoration: underline;">2</span>    0.991   0.977</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Timespans</span></span></span>
 <span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">366</span><span class="op">)</span></span></span>
@@ -303,12 +305,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   provider city  charges payment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> C        ATL      <span style="text-decoration: underline;">1</span>419    <span style="text-decoration: underline;">1</span>785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> C        ATL      <span style="text-decoration: underline;">1</span>965    <span style="text-decoration: underline;">1</span>655</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> C        NYC      <span style="text-decoration: underline;">1</span>213    <span style="text-decoration: underline;">1</span>192</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A        NYC      <span style="text-decoration: underline;">1</span>313    <span style="text-decoration: underline;">1</span>474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> C        NYC      <span style="text-decoration: underline;">1</span>048    <span style="text-decoration: underline;">1</span>784</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> C        ATL      <span style="text-decoration: underline;">1</span>481    <span style="text-decoration: underline;">1</span>505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> B        ATL      <span style="text-decoration: underline;">1</span>483    <span style="text-decoration: underline;">1</span>898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B        NYC      <span style="text-decoration: underline;">1</span>859    <span style="text-decoration: underline;">1</span>246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A        NYC      <span style="text-decoration: underline;">1</span>809    <span style="text-decoration: underline;">1</span>186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> B        ATL      <span style="text-decoration: underline;">1</span>345    <span style="text-decoration: underline;">1</span>273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> B        ATL      <span style="text-decoration: underline;">1</span>934    <span style="text-decoration: underline;">1</span>621</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A        NYC      <span style="text-decoration: underline;">1</span>947    <span style="text-decoration: underline;">1</span>772</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">summary_stats</span><span class="op">(</span><span class="va">sm</span>,</span></span>
 <span class="r-in"><span>              condition    <span class="op">=</span> <span class="va">city</span> <span class="op">==</span> <span class="st">"ATL"</span>,</span></span>
@@ -317,10 +319,10 @@
 <span class="r-in"><span>              arr          <span class="op">=</span> <span class="va">provider</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   provider charges_median charges_mean charges_sd payment_median payment_mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> C                 <span style="text-decoration: underline;">1</span>456.        <span style="text-decoration: underline;">1</span>458.       286.           <span style="text-decoration: underline;">1</span>472        <span style="text-decoration: underline;">1</span>458.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B                 <span style="text-decoration: underline;">1</span>387         <span style="text-decoration: underline;">1</span>457.       295.           <span style="text-decoration: underline;">1</span>429        <span style="text-decoration: underline;">1</span>469.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A                 <span style="text-decoration: underline;">1</span>554.        <span style="text-decoration: underline;">1</span>529.       312.           <span style="text-decoration: underline;">1</span>452        <span style="text-decoration: underline;">1</span>450.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> C                  <span style="text-decoration: underline;">1</span>561        <span style="text-decoration: underline;">1</span>497.       282.           <span style="text-decoration: underline;">1</span>634        <span style="text-decoration: underline;">1</span>496.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B                  <span style="text-decoration: underline;">1</span>454        <span style="text-decoration: underline;">1</span>491.       279.           <span style="text-decoration: underline;">1</span>396        <span style="text-decoration: underline;">1</span>467.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A                  <span style="text-decoration: underline;">1</span>703        <span style="text-decoration: underline;">1</span>600.       289.           <span style="text-decoration: underline;">1</span>442        <span style="text-decoration: underline;">1</span>427.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: payment_sd &lt;dbl&gt;, n &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
