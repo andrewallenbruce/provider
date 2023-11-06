@@ -86,20 +86,32 @@ beneficiaries <- function(year = NULL,
                           fips = NULL,
                           tidy = TRUE) {
 
+  args <- list(year   = year,
+               period = period,
+               level  = level,
+               state  = state,
+               county = county,
+               fips   = fips) |>
+    unlist(use.names  = FALSE)
+
+  if (length(args) == 1L && args %in% "Month") {
+    cli::cli_abort(c("{.arg period = 'Month'} cannot be the only argument.")) # nolint
+  }
+
   state_name <- NULL
 
   if (!is.null(year)) {
     year <- as.character(year)
 
     if (!is.null(period) && period %in% "Year") {
-      rlang::arg_match(year, as.character(bene_years("year")))}
+      year <- rlang::arg_match(year, as.character(bene_years("year")))}
 
     if (!is.null(period) && period %in% c("Month", month.name)) {
-      rlang::arg_match(year, as.character(bene_years("month")))}
+      year <- rlang::arg_match(year, as.character(bene_years("month")))}
   }
 
   if (!is.null(period)) {
-    rlang::arg_match(period, c("Year", "Month", month.name))
+    period <- rlang::arg_match(period, c("Year", "Month", month.name))
     if (period == "Month") period <- NULL
   }
 
@@ -147,9 +159,14 @@ beneficiaries <- function(year = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) results <- cols_bene(tidyup(results, int = c('year', '_benes')))
+  if (tidy) {
+    results <- cols_bene(tidyup(results, int = c('year', '_benes'))) |>
+      dplyr::mutate(period = fct_period(period),
+                    level = fct_level(level),
+                    state = fct_stabb(state),
+                    state_name = fct_stname(state_name))
   if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
-
+  }
   return(results)
 }
 
@@ -186,4 +203,44 @@ cols_bene <- function(df) {
             "bene_rx_lis_no"    = "prscrptn_drug_no_lis_benes")
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+
+#' @autoglobal
+#' @noRd
+fct_level <- function(x) {
+  factor(x, levels = c("National", "State", "County"), ordered = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+fct_period <- function(x) {
+  factor(x, levels = c("Year", "Month", month.name), ordered = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+fct_stabb <- function(x) {
+  factor(x,
+  levels = c('US',
+             state.abb[1:8],
+             'DC',
+             state.abb[9:50],
+             'AS', 'GU', 'MP', 'PR', 'VI', 'UK'),
+  ordered = TRUE)
+}
+
+fct_stname <- function(x) {
+  factor(x,
+  levels = c('National',
+             state.name[1:8],
+             'District of Columbia',
+             state.name[9:50],
+             'American Samoa',
+             'Guam',
+             'Northern Mariana Islands',
+             'Puerto Rico',
+             'Virgin Islands',
+             'Unknown'),
+  ordered = TRUE)
 }

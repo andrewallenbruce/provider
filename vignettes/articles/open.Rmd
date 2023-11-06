@@ -15,10 +15,10 @@ knitr::opts_chunk$set(
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
-  out.width = "100%",
-  fig.path  = "man/figures/README-"
+  out.width = "100%"
 )
 options(scipen = 999)
+plan(multisession, workers = 4)
 ```
 
 ```{r}
@@ -28,7 +28,7 @@ library(furrr)
 
 
 ```{r}
-plan(multisession, workers = 4)
+
 open <- open_payments_(npi = 1043218118)
 plan(sequential)
 open

@@ -5,6 +5,7 @@ utils::globalVariables(c(
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
+  "state.abb", # <fct_stabb>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
   "hcpcs", # <rbcs_util>
@@ -184,6 +185,22 @@ utils::globalVariables(c(
   "score", # <quality_payment>
   "status", # <quality_payment>
   "y", # <reassignments>
+  "taxonomy_code", # <taxonomy_codes>
+  "taxonomy_category", # <taxonomy_codes>
+  "taxonomy_grouping", # <taxonomy_codes>
+  "taxonomy_classification", # <taxonomy_codes>
+  "taxonomy_specialization", # <taxonomy_codes>
+  "Category", # <taxonomy_codes>
+  "Grouping", # <taxonomy_codes>
+  "Classification", # <taxonomy_codes>
+  "Specialization", # <taxonomy_codes>
+  "Category_Level", # <taxonomy_codes>
+  "Grouping_Level", # <taxonomy_codes>
+  "Classification_Level", # <taxonomy_codes>
+  "Specialization_Level", # <taxonomy_codes>
+  "Code", # <taxonomy_codes>
+  "Description", # <taxonomy_codes>
+  "Level", # <taxonomy_codes>
   "code", # <download_nucc_csv>
   "section", # <download_nucc_csv>
   "classification", # <download_nucc_csv>

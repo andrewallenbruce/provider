@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999)
+plan(multisession, workers = 4)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -36,7 +37,7 @@ library(gtExtras)
 # `utilization()`
 
 ```{r}
-plan(multisession, workers = 4)
+
 
 # Retrieve provider's overall utilization data
 ind     <- utilization_(npi = 1043477615, type = "provider")

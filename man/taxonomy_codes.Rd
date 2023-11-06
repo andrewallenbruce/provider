@@ -7,7 +7,10 @@
 \url{https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57}
 }
 \usage{
-taxonomy_codes()
+taxonomy_codes(shape = c("wide", "long"))
+}
+\arguments{
+\item{shape}{shape of the data frame returned, 'wide' or 'long'}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:

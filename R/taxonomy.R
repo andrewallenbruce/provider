@@ -111,15 +111,51 @@
 #' @source
 #' <https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57>
 #'
+#' @param shape shape of the data frame returned, 'wide' or 'long'
+#'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' @examplesIf interactive()
 #' taxonomy_codes()
 #' @autoglobal
 #' @export
-taxonomy_codes <- function() {
-  pins::board_url(github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
+taxonomy_codes <- function(shape = c('wide', 'long')) {
+  results <- pins::board_url(
+    github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
     pins::pin_read("taxonomy_codes")
+
+  if (shape == 'wide') return(results)
+
+  if (shape == 'long') {
+    results <- results |>
+      dplyr::select(Code = taxonomy_code,
+                    Category = taxonomy_category,
+                    Grouping = taxonomy_grouping,
+                    Classification = taxonomy_classification,
+                    Specialization = taxonomy_specialization) |>
+      dplyr::mutate(Category_Level = 0, .before = Category) |>
+      dplyr::mutate(Grouping_Level = 1, .before = Grouping) |>
+      dplyr::mutate(Classification_Level = 2, .before = Classification) |>
+      dplyr::mutate(Specialization_Level = 3, .before = Specialization) |>
+      tidyr::unite("Category", Category:Category_Level, remove = TRUE) |>
+      tidyr::unite("Grouping", Grouping:Grouping_Level, remove = TRUE) |>
+      tidyr::unite("Classification", Classification:Classification_Level,
+                   remove = TRUE, na.rm = TRUE) |>
+      tidyr::unite("Specialization", Specialization:Specialization_Level,
+                   remove = TRUE, na.rm = TRUE) |>
+      tidyr::pivot_longer(!Code, names_to = "Level",
+                          values_to = "Description") |>
+      dplyr::filter(Description != "3") |>
+      tidyr::separate_wider_delim(Description,
+                                  delim = "_",
+                                  names = c("Description", "Group")) |>
+      dplyr::mutate(Group = NULL,
+                    Level = factor(Level,
+      levels = c("Category", "Grouping", "Classification", "Specialization"),
+      labels = c("I. Category", "II. Grouping",
+                 "III. Classification", "IV. Specialization"), ordered = TRUE))
+  }
+    return(results)
 }
 
 #' @autoglobal
