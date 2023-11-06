@@ -122,7 +122,7 @@
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -158,7 +158,7 @@ open_payments <- function(year,
                           offset = 0L,
                           tidy = TRUE,
                           pivot = TRUE,
-                          na.rm = TRUE,
+                          na.rm = FALSE,
                           ...) {
 
 
@@ -284,11 +284,19 @@ open_payments <- function(year,
 #' Parallelized [open_payments()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
+#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... Pass arguments to [open_payments()].
 #' @autoglobal
 #' @export
-open_payments_ <- function(year = open_years(), ...) {
-  furrr::future_map_dfr(year, open_payments, ..., .options = furrr::furrr_options(seed = NULL))
+open_payments_ <- function(year = open_years(),
+                           na.rm = TRUE,
+                           ...) {
+  results <- furrr::future_map_dfr(year,
+                                   open_payments,
+                                   ...,
+                                   .options = furrr::furrr_options(seed = NULL))
+  if (na.rm) results <- narm(results)
+  return(results)
 }
 
 #' Update Open Payments API distribution IDs
@@ -309,7 +317,7 @@ open_ids <- function(search) {
     dplyr::filter(stringr::str_detect(title, {{ search }})) |>
     dplyr::arrange(dplyr::desc(title)) |>
     dplyr::mutate(year = strex::str_before_first(title, " "),
-                  set = strex::str_after_first(title, " "), .before = 1,
+                  set  = strex::str_after_first(title, " "), .before = 1,
                   year = as.integer(year)) |>
     dplyr::select(year, set, identifier)
 

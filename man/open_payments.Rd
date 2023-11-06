@@ -21,7 +21,7 @@ open_payments(
   offset = 0L,
   tidy = TRUE,
   pivot = TRUE,
-  na.rm = TRUE,
+  na.rm = FALSE,
   ...
 )
 }
@@ -82,7 +82,7 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
 
 \item{...}{For future use.}
 }

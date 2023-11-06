@@ -6,6 +6,7 @@
 \usage{
 betos(
   hcpcs = NULL,
+  rbcs = NULL,
   category = NULL,
   subcategory = NULL,
   family = NULL,
@@ -15,6 +16,8 @@ betos(
 }
 \arguments{
 \item{hcpcs}{< \emph{character} > HCPCS or CPT code}
+
+\item{rbcs}{< \emph{character} > RBCS ID}
 
 \item{category}{< \emph{character} > RBCS Category Description}
 
@@ -76,8 +79,10 @@ assigned to a 6-character RBCS taxonomy code.
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system}{Restructured BETOS Classification System}
 \item \href{https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary}{RBCS Data Dictionary}
 }
+}
 
-\emph{Update Frequency:} \strong{Annually}
+\section{Update Frequency}{
+ Annually
 }
 
 \examples{

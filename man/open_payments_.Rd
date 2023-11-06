@@ -4,11 +4,13 @@
 \alias{open_payments_}
 \title{Parallelized \code{\link[=open_payments]{open_payments()}}}
 \usage{
-open_payments_(year = open_years(), ...)
+open_payments_(year = open_years(), na.rm = TRUE, ...)
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=open_years]{open_years()}} to return a vector of the years currently available.}
+
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{...}{Pass arguments to \code{\link[=open_payments]{open_payments()}}.}
 }

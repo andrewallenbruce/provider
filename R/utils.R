@@ -49,7 +49,7 @@ na_blank <- function(x) {
   x <- dplyr::na_if(x, " ")
   x <- dplyr::na_if(x, "*")
   x <- dplyr::na_if(x, "--")
-
+  x <- dplyr::na_if(x, "N/A")
   return(x)
 }
 
@@ -162,7 +162,7 @@ df2chr <- function(df) {
 #' Tidy a Data Frame
 #' @param df data frame
 #' @param dt cols to convert to date
-#' @param dtype mdy or ymd
+#' @param dtype 'mdy' or 'ymd'
 #' @param yn cols to convert to logical
 #' @param int cols to convert to integer
 #' @param dbl cols to convert to double
