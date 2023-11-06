@@ -206,7 +206,7 @@ quality_payment <- function(year,
 #' @autoglobal
 #' @export
 quality_payment_ <- function(year = qpp_years(), ...) {
-  furrr::future_map_dfr(year, quality_payment, ...)
+  furrr::future_map_dfr(year, quality_payment, ..., .options = furrr::furrr_options(seed = NULL))
 }
 
 #' @param df data frame

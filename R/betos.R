@@ -31,9 +31,10 @@
 #' + [Restructured BETOS Classification System](https://data.cms.gov/provider-summary-by-type-of-service/provider-service-classifications/restructured-betos-classification-system)
 #' + [RBCS Data Dictionary](https://data.cms.gov/resources/restructured-betos-classification-system-data-dictionary)
 #'
-#' *Update Frequency:* **Annually**
+#' @section Update Frequency: Annually
 #'
 #' @param hcpcs < *character* > HCPCS or CPT code
+#' @param rbcs < *character* > RBCS ID
 #' @param category < *character* > RBCS Category Description
 #' @param subcategory < *character* > RBCS Subcategory Description
 #' @param family < *character* > RBCS Family Description
@@ -65,6 +66,7 @@
 #' @autoglobal
 #' @export
 betos <- function(hcpcs = NULL,
+                  rbcs = NULL,
                   category = NULL,
                   subcategory = NULL,
                   family = NULL,
@@ -74,18 +76,21 @@ betos <- function(hcpcs = NULL,
   args <- dplyr::tribble(
     ~param,             ~arg,
     "HCPCS_Cd",         hcpcs,
+    "RBCS_ID",          rbcs,
     "RBCS_Cat_Desc",    category,
     "RBCS_Subcat_Desc", subcategory,
     "RBCS_Family_Desc", family,
     "RBCS_Major_Ind",   procedure)
 
-  response <- httr2::request(build_url("bet", args)) |> httr2::req_perform()
+  response <- httr2::request(build_url("bet", args)) |>
+    httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,             ~y,
       "hcpcs",        hcpcs,
+      "rbcs",         rbcs,
       "category",     category,
       "subcategory",  subcategory,
       "family",       family,
@@ -100,17 +105,18 @@ betos <- function(hcpcs = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results,
-                      dtype = 'mdy',
-                      dt = 'dt') |>
-      dplyr::mutate(
-        rbcs_major_ind = dplyr::case_match(rbcs_major_ind,
-                                           "N" ~ "Non-procedure",
-                                           "M" ~ "Major",
-                                           "O" ~ "Other")) |>
+    results <- tidyup(results, dtype = 'mdy', dt = 'dt') |>
+      dplyr::mutate(rbcs_major_ind = fct_maj(rbcs_major_ind)) |>
       cols_betos()
   }
   return(results)
+}
+
+#' @autoglobal
+#' @noRd
+fct_maj <- function(x) {
+  factor(x, levels = c("N", "M", "O"),
+         labels = c("Non-procedure", "Major", "Other"))
 }
 
 #' @param df data frame

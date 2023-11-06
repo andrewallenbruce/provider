@@ -262,7 +262,8 @@ utilization <- function(year,
 #' @export
 utilization_ <- function(year = util_years(),
                          ...) {
-  furrr::future_map_dfr(year, utilization, ...)
+  furrr::future_map_dfr(year, utilization, ..., .options = furrr::furrr_options(seed = NULL))
+
 }
 
 #' @param results data frame from [utilization(type = "provider")]

@@ -44,20 +44,29 @@ compare_hcpcs <- function(df) {
 
   x$type <- "geography"
 
-  state <- furrr::future_pmap_dfr(x, utilization)
+  state <- furrr::future_pmap_dfr(x, utilization, .options = furrr::furrr_options(seed = NULL))
   # state <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   x$state <- "National"
 
-  national <- furrr::future_pmap_dfr(x, utilization)
+  national <- furrr::future_pmap_dfr(x, utilization, .options = furrr::furrr_options(seed = NULL))
   # national <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   vctrs::vec_rbind(
     hcpcs_cols(df),
     hcpcs_cols(state),
     hcpcs_cols(national)) |>
-    dplyr::mutate(level = forcats::fct_inorder(level)) |>
+    dplyr::mutate(level = fct_lvl(level)) |>
     dplyr::relocate(providers, .before = beneficiaries)
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_lvl <- function(x) {
+  factor(x,
+         levels = c("Provider", "State", "National"),
+         ordered = TRUE)
 }
 
 #' @param df data frame
@@ -124,7 +133,7 @@ compare_conditions <- function(df, pivot = FALSE) {
                   subdemo = "all",
                   age = "all")
 
-  state <- furrr::future_pmap_dfr(y, conditions)
+  state <- furrr::future_pmap_dfr(y, conditions, .options = furrr::furrr_options(seed = NULL))
   state <- dplyr::select(state, year, level, condition, prevalence)
   # state <- purrr::pmap(y, conditions) |>
   #   purrr::list_rbind() |>
@@ -132,7 +141,7 @@ compare_conditions <- function(df, pivot = FALSE) {
 
   y$sublevel <- "national"
 
-  national <- furrr::future_pmap_dfr(y, conditions)
+  national <- furrr::future_pmap_dfr(y, conditions, .options = furrr::furrr_options(seed = NULL))
   national <- dplyr::select(national, year, level, condition, prevalence)
   # national <- purrr::pmap(y, conditions) |>
   #   purrr::list_rbind() |>
@@ -156,7 +165,6 @@ compare_conditions <- function(df, pivot = FALSE) {
 #' @autoglobal
 #' @noRd
 cnd_rename <- function(df) {
-
   cols <- c('Atrial Fibrillation'                         = 'cc_af',
             "Alzheimer's Disease/Dementia"                = 'cc_alz',
             'Asthma'                                      = 'cc_asth',
@@ -175,5 +183,4 @@ cnd_rename <- function(df) {
             'Stroke'                                      = 'cc_strk')
 
   df |> dplyr::rename(dplyr::any_of(cols))
-
 }

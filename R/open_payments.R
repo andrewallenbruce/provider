@@ -288,7 +288,7 @@ open_payments <- function(year,
 #' @autoglobal
 #' @export
 open_payments_ <- function(year = open_years(), ...) {
-  furrr::future_map_dfr(year, open_payments, ...)
+  furrr::future_map_dfr(year, open_payments, ..., .options = furrr::furrr_options(seed = NULL))
 }
 
 #' Update Open Payments API distribution IDs
