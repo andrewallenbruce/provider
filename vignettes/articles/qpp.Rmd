@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 options(scipen = 999)
 ```
 
-```{r setup}
+```{r}
 library(provider)
 library(furrr)
 ```
