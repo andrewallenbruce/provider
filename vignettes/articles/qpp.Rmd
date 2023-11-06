@@ -24,7 +24,6 @@ options(scipen = 999)
 ```{r}
 library(provider)
 library(furrr)
-plan(multisession, workers = 4)
 ```
 
 ```{r}
@@ -33,10 +32,9 @@ nppes(npi = 1144544834)
 
 
 ```{r}
+plan(multisession, workers = 4)
 quality_payment_(npi = 1144544834)
-```
-
-```{r echo=FALSE}
 plan(sequential)
 ```
+
 
