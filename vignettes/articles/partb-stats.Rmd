@@ -81,10 +81,14 @@ plot(lm.performance)
 
 
 ```{r}
-# ggplot(performance, aes(x = .pymt_per_srvc, y = .srvcs_per_bene, fill = year, group = year)) +
-#   geom_point(shape = 21, size = 4, alpha = 0.75) +
-#   theme_minimal()
+ggplot(performance, aes(x = .pymt_per_srvc, 
+                        y = .srvcs_per_bene, 
+                        fill = year, group = year)) +
+  geom_point(shape = 21, size = 4, alpha = 0.75) +
+  theme_minimal()
 ```
+
+
 
 
 ```{r}

@@ -21,7 +21,8 @@
 #'    (APM) affiliations.
 #'
 #' @section Links:
-#'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#' + [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#' + [QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6)](https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility%2C%20v6)
 #'
 #' @section Update Frequency: **Annually**
 #'
@@ -36,7 +37,9 @@
 #' @autoglobal
 #' @noRd
 # nocov start
-quality_eligibility <- function(year, npi = NULL, tidy = TRUE) {
+quality_eligibility <- function(year,
+                                npi,
+                                tidy = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)

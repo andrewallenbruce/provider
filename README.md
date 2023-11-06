@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![devel
-version](https://img.shields.io/badge/devel%20version-0.0.0.9012-blue.svg)](https://github.com/andrewallenbruce/provider)
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
@@ -54,7 +52,7 @@ affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
     #> $ pac           <chr> "9032521372"
     #> $ first         <chr> "ALYSIA"
     #> $ last          <chr> "SMITH"
-    #> $ facility_type <chr> "Nursing home"
+    #> $ facility_type <fct> Nursing home
     #> $ facility_ccn  <chr> "37Z324"
     #> $ parent_ccn    <chr> "371324"
 
@@ -66,11 +64,11 @@ beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", coun
 
     #> Rows: 1
     #> Columns: 26
-    #> $ year              <date_y> 2022
-    #> $ period            <chr> "Year"
-    #> $ level             <chr> "County"
-    #> $ state             <chr> "GA"
-    #> $ state_name        <chr> "Georgia"
+    #> $ year              <int> 2022
+    #> $ period            <ord> Year
+    #> $ level             <ord> County
+    #> $ state             <ord> GA
+    #> $ state_name        <ord> Georgia
     #> $ county            <chr> "Lowndes"
     #> $ fips              <chr> "13185"
     #> $ bene_total        <int> 19782
@@ -101,24 +99,24 @@ clinicians(npi = 1932365699) |> glimpse()
 
     #> Rows: 1
     #> Columns: 18
-    #> $ npi          <chr> "1932365699"
-    #> $ pac          <chr> "0042370496"
-    #> $ enid         <chr> "I20171107000894"
-    #> $ first        <chr> "STEFAN"
-    #> $ middle       <chr> "MICHAEL"
-    #> $ last         <chr> "SMITH"
-    #> $ gender       <chr> "M"
-    #> $ school       <chr> "ILLINOIS COLLEGE OF OPTOMETRY AT CHICAGO"
-    #> $ grad_year    <date_y> 2008
-    #> $ specialty    <chr> "OPTOMETRY"
-    #> $ organization <chr> "LEE ANN HOVEN OD PC"
-    #> $ pac_org      <chr> "5193882009"
-    #> $ members_org  <int> 2
-    #> $ address_org  <chr> "1165 S CAMINO DEL RIO SUITE 100"
-    #> $ city_org     <chr> "DURANGO"
-    #> $ state_org    <chr> "CO"
-    #> $ zip_org      <chr> "813036824"
-    #> $ phone_org    <chr> "9702478762"
+    #> $ npi           <chr> "1932365699"
+    #> $ pac           <chr> "0042370496"
+    #> $ enid          <chr> "I20171107000894"
+    #> $ first         <chr> "STEFAN"
+    #> $ middle        <chr> "MICHAEL"
+    #> $ last          <chr> "SMITH"
+    #> $ gender        <fct> Male
+    #> $ school        <chr> "ILLINOIS COLLEGE OF OPTOMETRY AT CHICAGO"
+    #> $ grad_year     <int> 2008
+    #> $ specialty     <chr> "OPTOMETRY"
+    #> $ facility_name <chr> "LEE ANN HOVEN OD PC"
+    #> $ pac_org       <chr> "5193882009"
+    #> $ members_org   <int> 2
+    #> $ address_org   <chr> "1165 S CAMINO DEL RIO SUITE 100"
+    #> $ city_org      <chr> "DURANGO"
+    #> $ state_org     <chr> "CO"
+    #> $ zip_org       <chr> "813036824"
+    #> $ phone_org     <chr> "9702478762"
 
 ## `conditions()`
 
@@ -128,12 +126,12 @@ conditions(year = 2018, set = "multiple", level = "national", age = "all", demo 
 
     #> Rows: 1
     #> Columns: 12
-    #> $ year                <date_y> 2018
-    #> $ level               <chr> "National"
-    #> $ sublevel            <chr> "National"
-    #> $ age                 <chr> "All"
-    #> $ demographic         <chr> "All"
-    #> $ subdemo             <chr> "All"
+    #> $ year                <int> 2018
+    #> $ level               <ord> National
+    #> $ sublevel            <ord> National
+    #> $ age                 <fct> All
+    #> $ demographic         <fct> All
+    #> $ subdemo             <fct> All
     #> $ mcc                 <chr> "6+"
     #> $ prevalence          <dbl> 0.177
     #> $ tot_pymt_percap     <dbl> 32475.26
@@ -148,7 +146,7 @@ hospitals(npi = 1720098791) |> glimpse()
 ```
 
     #> Rows: 1
-    #> Columns: 21
+    #> Columns: 22
     #> $ npi_org           <chr> "1720098791"
     #> $ pac_org           <chr> "7618950643"
     #> $ enid_org          <chr> "O20230310002325"
@@ -165,11 +163,12 @@ hospitals(npi = 1720098791) |> glimpse()
     #> $ state             <chr> "GA"
     #> $ zip               <chr> "317745011"
     #> $ location_type     <chr> "OTHER HOSPITAL PRACTICE LOCATION: REH"
+    #> $ registration      <fct> Non-Profit
     #> $ multi_npi         <lgl> FALSE
     #> $ reh_date          <date> 2023-03-23
     #> $ reh_ccns          <chr> "110130"
     #> $ reh_conversion    <lgl> TRUE
-    #> $ subgroup          <chr> "None"
+    #> $ subgroup          <fct> None
 
 ## `laboratories()`
 
@@ -178,19 +177,20 @@ laboratories(clia = "11D0265516") |> glimpse()
 ```
 
     #> Rows: 1
-    #> Columns: 23
+    #> Columns: 25
     #> $ clia_number           <chr> "11D0265516"
     #> $ provider_name         <chr> "DANIEL FELDMAN MD"
-    #> $ certificate           <chr> "Compliance"
+    #> $ certificate           <ord> Compliance
+    #> $ clia_medicare         <chr> "00205114A3"
     #> $ effective_date        <date> 1996-08-29
     #> $ expiration_date       <date> 1998-08-04
     #> $ expired               <lgl> TRUE
-    #> $ termination_reason    <chr> "Mail Returned No Forward Address Cert Ended (CL…
-    #> $ status                <chr> "In Compliance"
+    #> $ termination_reason    <ord> "Mail Returned No Forward Address Cert Ended (CL…
+    #> $ status                <ord> In Compliance
     #> $ poc_ind               <lgl> TRUE
-    #> $ type_of_action        <chr> "Recertification"
-    #> $ ownership_type        <chr> "Proprietary"
-    #> $ facility_type         <chr> "Physician Office"
+    #> $ type_of_action        <ord> Recertification
+    #> $ ownership_type        <fct> Proprietary
+    #> $ facility_type         <ord> Physician Office
     #> $ director_affiliations <chr> "0"
     #> $ address               <chr> "205 WOODROW WILSON DR"
     #> $ city                  <chr> "VALDOSTA"
@@ -201,7 +201,8 @@ laboratories(clia = "11D0265516") |> glimpse()
     #> $ application_date      <date> 1993-01-20
     #> $ certification_date    <date> 1996-03-21
     #> $ mailed_date           <date> 1996-09-25
-    #> $ clia_class_current    <chr> "CLIA Lab"
+    #> $ region                <fct> Atlanta
+    #> $ clia_class_current    <fct> CLIA Lab
 
 ## `nppes()`
 
@@ -209,38 +210,10 @@ laboratories(clia = "11D0265516") |> glimpse()
 nppes(npi = 1720098791) |> glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 30
-    #> $ npi           <chr> "1720098791"
-    #> $ entity_type   <chr> "Organization"
-    #> $ enum_date     <date> 2006-08-09
-    #> $ last_update   <date> 2011-10-06
-    #> $ status        <chr> "A"
-    #> $ organization  <chr> "IRWIN COUNTY HOSPITAL"
-    #> $ org_part      <lgl> FALSE
-    #> $ purpose       <chr> "PRACTICE"
-    #> $ address       <chr> "710 N IRWIN AVE"
-    #> $ city          <chr> "OCILLA"
-    #> $ state         <chr> "GA"
-    #> $ zip           <chr> "317745011"
-    #> $ country       <chr> "US"
-    #> $ phone         <chr> "229-468-3800"
-    #> $ fax           <chr> "229-468-9991"
-    #> $ ao_prefix     <chr> "Mrs."
-    #> $ ao_first      <chr> "SHARON"
-    #> $ ao_middle     <chr> "P"
-    #> $ ao_last       <chr> "GRIFFIN"
-    #> $ ao_title      <chr> "CFO"
-    #> $ ao_phone      <chr> "2294683862"
-    #> $ tx_code       <chr> "282N00000X"
-    #> $ tx_primary    <chr> "TRUE"
-    #> $ tx_desc       <chr> "General Acute Care Hospital"
-    #> $ tx_license    <chr> "86112S"
-    #> $ tx_state      <chr> "GA"
-    #> $ id_code       <chr> "05"
-    #> $ id_desc       <chr> "MEDICAID"
-    #> $ id_state      <chr> "GA"
-    #> $ id_identifier <chr> "000000987A"
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `gender = fct_gen(gender)`.
+    #> Caused by error in `factor()`:
+    #> ! object 'gender' not found
 
 ## `open_payments()`
 
@@ -250,7 +223,7 @@ open_payments(year = 2021, npi = 1023630738) |> glimpse()
 
     #> Rows: 1
     #> Columns: 38
-    #> $ program_year        <date_y> 2021
+    #> $ program_year        <int> 2021
     #> $ npi                 <chr> "1023630738"
     #> $ changed             <lgl> FALSE
     #> $ covered_recipient   <chr> "Non-Physician"
@@ -263,7 +236,7 @@ open_payments(year = 2021, npi = 1023630738) |> glimpse()
     #> $ zip                 <chr> "73834"
     #> $ country             <chr> "United States"
     #> $ primary             <chr> "Physician Assistant"
-    #> $ specialty           <chr> "Physician Assistants & Advanced Practice Nursi…
+    #> $ specialty           <chr> "Physician Assistants & Advanced Practice Nursing …
     #> $ license_state       <chr> "OK"
     #> $ payer_id            <chr> "100000866821"
     #> $ payer_sub           <chr> "Organon LLC"
@@ -334,7 +307,7 @@ outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimps
 
     #> Rows: 1
     #> Columns: 18
-    #> $ year                <date_y> 2021
+    #> $ year                <int> 2021
     #> $ ccn                 <chr> "110122"
     #> $ organization        <chr> "South Georgia Medical Center"
     #> $ street              <chr> "2501 North Patterson Street, Po Box 1727"
@@ -377,13 +350,13 @@ quality_payment(year = 2021, npi = 1932365699) |> glimpse()
 
     #> Rows: 1
     #> Columns: 20
-    #> $ year            <date_y> 2021
+    #> $ year            <int> 2021
     #> $ npi             <chr> "1932365699"
     #> $ state           <chr> "CO"
     #> $ size            <int> 3
     #> $ specialty       <chr> "Optometry"
     #> $ med_years       <int> 14
-    #> $ type            <chr> "Group"
+    #> $ type            <fct> Group
     #> $ beneficiaries   <int> 555
     #> $ services        <int> 1157
     #> $ allowed_charges <dbl> 112449
@@ -416,7 +389,7 @@ reassignments(npi = 1932365699) |> glimpse()
     #> $ pac_org       <chr> "7719037548", "5193882009"
     #> $ enid_org      <chr> "O20090616000599", "O20090320000182"
     #> $ state_org     <chr> "CO", "CO"
-    #> $ reassignments <int> 6, 6
+    #> $ reassignments <int> 5, 6
     #> $ entry         <chr> "Reassignment", "Reassignment"
 
 ## `utilization()`
@@ -427,9 +400,9 @@ utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()
 
     #> Rows: 1
     #> Columns: 20
-    #> $ year         <date_y> 2021
+    #> $ year         <int> 2021
     #> $ npi          <chr> "1932365699"
-    #> $ entity_type  <chr> "Individual"
+    #> $ entity_type  <chr> "I"
     #> $ first        <chr> "Stefan"
     #> $ middle       <chr> "M"
     #> $ last         <chr> "Smith"

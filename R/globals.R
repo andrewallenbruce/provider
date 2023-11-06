@@ -33,6 +33,7 @@ utils::globalVariables(c(
   "state.abb", # <conditions>
   "distro", # <conditions>
   "y", # <conditions>
+  "demographic", # <conditions>
   "y", # <demo_convert>
   "y", # <subdemo_convert>
   "y", # <mcc_convert>

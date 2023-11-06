@@ -16,8 +16,7 @@ knitr::opts_chunk$set(
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
-  out.width = "100%",
-  fig.path  = "man/figures/README-"
+  out.width = "100%"
 )
 options(scipen = 999)
 ```
@@ -136,6 +135,7 @@ p <- ggraph(ind_grph, "graphopt") +
                  #label.size = 0.1,
                  check_overlap = FALSE) +
   theme_graph(fg_text_colour = 'white')
+p
 ```
 
 

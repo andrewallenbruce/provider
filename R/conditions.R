@@ -205,11 +205,51 @@ conditions <- function(year,
 
   if (tidy) {
     results$year <- year
-    results <- cols_cc(tidyup(results,
-                              int = "year",
-                              dbl = c("prvlnc", "_pc", "er_")))
-  if (na.rm) {results <- narm(results)}}
+    results <- cols_cc(tidyup(results, int = "year", dbl = c("prvlnc", "_pc", "er_"))) |>
+      dplyr::mutate(level = fct_level(level),
+                    sublevel = fct_stname(sublevel),
+                    age = fct_age(age),
+                    demographic = fct_demo(demographic),
+                    subdemo = fct_subdemo(subdemo))
+  if (na.rm) {results <- narm(results)}
+    }
   return(results)
+}
+
+#' @autoglobal
+#' @noRd
+fct_age <- function(x) {
+  factor(x, levels = c("All", "<65", "65+"))
+}
+
+#' @autoglobal
+#' @noRd
+fct_demo <- function(x) {
+  factor(x, levels = c("All", "Dual Status", "Sex", "Race"))
+}
+
+#' @autoglobal
+#' @noRd
+fct_subdemo <- function(x) {
+  factor(x, levels = c("All",
+                       "Medicare Only",
+                       "Medicare and Medicaid",
+                       "Female",
+                       "Male",
+                       "Asian Pacific Islander",
+                       "Hispanic",
+                       "Native American",
+                       "non-Hispanic Black",
+                       "non-Hispanic White"))
+}
+
+#' @autoglobal
+#' @noRd
+fct_mcc <- function(x) {
+  factor(x,
+         levels = c("0 to 1", "2 to 3", "4 to 5", "6+"),
+         labels = c("0-1", "2-3", "4-5", "6+"),
+         ordered = TRUE)
 }
 
 #' @param df data frame
