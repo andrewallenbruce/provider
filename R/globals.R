@@ -146,7 +146,6 @@ utils::globalVariables(c(
   "y", # <outpatient>
   "y", # <pending>
   "y", # <providers>
-  "state_cd", # <providers>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
   "group_scenario", # <quality_eligibility>
