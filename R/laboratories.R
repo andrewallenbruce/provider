@@ -148,7 +148,11 @@ laboratories <- function(name = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results, dtype = 'ymd', dt = '_dt', yn = '_sw') |>
+    results <- tidyup(results,
+                      dtype = 'ymd',
+                      dt    = '_dt',
+                      yn    = '_sw',
+                      int   = 'drctly_afltd') |>
       combine(address, c('st_adr', 'addtnl_st_adr')) |>
       combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
       dplyr::mutate(pgm_trmntn_cd               = fct_term(pgm_trmntn_cd),
@@ -161,6 +165,7 @@ laboratories <- function(name = NULL,
                     current_clia_lab_clsfctn_cd = fct_lab(current_clia_lab_clsfctn_cd),
                     prvdr_ctgry_cd              = fct_lab(prvdr_ctgry_cd),
                     prvdr_ctgry_sbtyp_cd        = fct_lab(prvdr_ctgry_sbtyp_cd),
+                    state_cd                    = fct_stabb(state_cd),
                     duration                    = duration_vec(trmntn_exprtn_dt),
                     expired                     = dplyr::if_else(duration < 0, TRUE, FALSE),
                     duration                    = NULL) |>

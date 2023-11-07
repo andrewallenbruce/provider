@@ -193,14 +193,17 @@ nppes <- function(npi = NULL,
                         tidyr::unnest_longer(ep, keep_empty = TRUE) |>
                                tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
-      results <- tidyup(results,
-                        dtype = 'ymd',
-                        yn = c('sole_prop', 'org_part'),
-                        cred = 'credential') |>
-        dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose)) |>
-        cols_nppes(2) |>
-        dplyr::mutate(gender = fct_gen(gender),
-                      entity_type = fct_enum(entity_type))
+
+      results <- tidyup(results, dtype = 'ymd', yn = c('sole_prop', 'org_part'), cred = 'credential')
+
+      if (!rlang::has_name(results, "gender")) results$gender <- "9"
+
+      results <- dplyr::mutate(results,
+                      purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
+                      gender = fct_gen(gender),
+                      entity_type = fct_enum(entity_type),
+                      state = fct_stabb(state)) |>
+        cols_nppes(2)
 
       if (na.rm) results <- narm(results)
     }
@@ -210,19 +213,6 @@ nppes <- function(npi = NULL,
 
   # results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
   # names(taxonomy) <- c("npi", paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-entype_arg <- function(x) {
-
-  x <- if (is.integer(x)) as.character(x)
-
-  dplyr::case_match(
-    x,
-    c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-    c("O", "o", "Org", "org", "2") ~ "NPI-2")
-}
 
 #' @param df data frame
 #' @param step step in the pipeline
@@ -332,7 +322,6 @@ cols_nppes <- function(df, step = c(1, 2)) {
   }
   df |> dplyr::select(dplyr::any_of(cols))
 }
-
 
 #' @param x vector
 #' @autoglobal

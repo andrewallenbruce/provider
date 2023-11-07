@@ -155,8 +155,9 @@ clinicians <- function(npi = NULL,
                       yn = 'telehlth',
                       int = c('num_org_mem', 'grd_yr')) |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-      cols_clin() |>
-      dplyr::mutate(gender = fct_gen(gender))
+      dplyr::mutate(gndr = fct_gen(gndr),
+                    state = fct_stabb(state)) |>
+      cols_clin()
 
     if (na.rm) results <- narm(results)
     }

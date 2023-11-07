@@ -125,8 +125,13 @@ reassignments <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy)  {
-    results <- cols_reas(tidyup(results, int = "ass", up = "name")) |>
-      dplyr::mutate(entry = record_type(entry))
+    results <- tidyup(results,
+                      int = 'ass',
+                      up = 'name') |>
+      dplyr::mutate(individual_state_code = fct_stabb(individual_state_code),
+                    group_state_code = fct_stabb(group_state_code),
+                    record_type = fct_record(record_type)) |>
+      cols_reas()
 
   if (na.rm) results <- narm(results)
     }
@@ -141,6 +146,8 @@ cols_reas <- function(df) {
   cols <- c('npi'                     = 'individual_npi',
             'pac'                     = 'individual_pac_id',
             'enid'                    = 'individual_enrollment_id',
+            # 'state_ind'             = 'individual_state_code',
+            # 'specialty_description' = 'individual_specialty_description',
             'first'                   = 'individual_first_name',
             'last'                    = 'individual_last_name',
             'associations'            = 'individual_total_employer_associations',
@@ -149,8 +156,6 @@ cols_reas <- function(df) {
             'enid_org'                = 'group_enrollment_id',
             'state_org'               = 'group_state_code',
             'reassignments'           = 'group_reassignments_and_physician_assistants',
-            # 'state_ind'             = 'individual_state_code',
-            # 'specialty_description' = 'individual_specialty_description',
             # 'due_date_ind'          = 'individual_due_date',
             # 'due_date_org'          = 'group_due_date',
             'entry'                   = 'record_type')
@@ -161,8 +166,10 @@ cols_reas <- function(df) {
 #' @param x vector
 #' @autoglobal
 #' @noRd
-record_type <- function(x) {
-  dplyr::case_match(x, "Physician Assistant" ~ "Employment", .default = x)
+fct_record <- function(x) {
+  factor(x,
+         levels = c("Physician Assistant", "Reassignment"),
+         labels = c("Employment", "Reassignment"))
 }
 
 #' @autoglobal

@@ -16,111 +16,89 @@ knitr::opts_chunk$set(
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
-  out.width = "100%",
-  fig.path  = "man/figures/README-"
+  out.width = "100%"
 )
 options(scipen = 999)
 ```
 
 
-```{r eval=FALSE}
+```{r}
 library(provider)
 library(tidygeocoder)
 library(purrr)
 library(dplyr)
-library(stringr)
-library(vctrs)
-library(campfin)
 library(ggplot2)
-library(ggsflabel)
-library(zipcodeR)
-library(fipio)
+#library(ggsflabel)
+library(ggrepel)
+#library(gghighlight)
 library(sf)
+library(tigris)
 ```
 
 
-```{r eval=FALSE}
-# Retrieve NPIs of all RHCs in Georgia
-ga <- providers(state = "GA", specialty_code = "00-17")
-
-# Create character vector of distinct NPIs
-npis <- unlist(distinct(ga, npi), use.names = FALSE)
-
-# Retrieve NPPES data for each NPI
-nppes <- npis |> map(\(x) nppes(npi = x)) |> list_rbind()
-
-# Create data frames of both practice and location addresses
-practice <- nppes |> select(npi, organization, purpose, address, city, state)
-location <- nppes |> select(npi, organization, 
-         purpose = pr_purpose, 
-         address = pr_address, 
-         city = pr_city, 
-         state = pr_state) |> 
-         filter(!is.na(purpose))
-
-# Combine and prepare for geocoding
-clean <- vec_rbind(practice, location) |> 
-  distinct() |> 
-  arrange(npi) |>
-  mutate(address = normal_address(address),
-         pobox = str_detect(address, "PO BOX")) |>
-  filter(pobox == FALSE) |>
-  mutate(pobox = NULL) |>
-  unite("address", address:state, remove = TRUE, sep = " ")
-
-# Pass to {tidygeocoder}
-coords <- geocode(clean, address = address, method = "mapbox", 
-               full_results = TRUE, unique_only = FALSE) |> 
-       select(npi, organization, purpose, place_name, lat, long)
-```
-
-
-```{r eval=FALSE}
+```{r}
 # Retrieve NPIs of all RHCs in Georgia
 rhcs <- providers(state = "GA", specialty_code = "00-17") |> 
-  distinct(npi) |> 
-  pull(npi) |> 
-  map(\(x) nppes(npi = x)) |>
-  list_rbind()
+  dplyr::distinct(npi) |> 
+  dplyr::pull(npi) |> 
+  purrr::map(\(x) nppes(npi = x)) |>
+  purrr::list_rbind()
 
-# Separate & Row-bind LOCATION & PRACTICE Addresses
-# Normalize Zip codes
-pivoted <- vctrs::vec_rbind(
-  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, tx_desc, 
+# Separate & row-bind distinct LOCATION & PRACTICE Addresses
+stack <- dplyr::bind_rows(
+  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, 
                 purpose, address, city, state, zip),
-  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, tx_desc, 
+  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, 
                 purpose = pr_purpose, 
                 address = pr_address, 
                 city = pr_city, 
                 state = pr_state, 
                 zip = pr_zip)) |> 
-  dplyr::mutate(zipnorm = zipcodeR::normalize_zip(zip)) |> 
-  dplyr::filter(!is.na(purpose))
+  dplyr::mutate(zip = zipcodeR::normalize_zip(zip)) |> 
+  dplyr::filter(!is.na(purpose)) |> 
+  dplyr::distinct()
 
-# ----------------------------------------------
 # Prepare for geocoding
-clean <- pivoted |> 
-  dplyr::select(npi:state) |> 
-  dplyr::mutate(address = campfin::normal_address(address)) |>
+clean <- stack |> 
+  #dplyr::mutate(address = campfin::normal_address(address)) |>
   tidyr::unite("address", address:state, remove = TRUE, sep = " ") |> 
   dplyr::distinct(address, .keep_all = TRUE)
 
 # Geocode with {tidygeocoder}
-rhc_coords <- tidygeocoder::geocode(clean, 
-                                    address = address, 
-                                    method = "mapbox", 
-                                    full_results = TRUE, 
-                                    unique_only = FALSE) |> 
-  dplyr::select(npi, organization, purpose, place_name, lat, long)
+rhc_crd <- tidygeocoder::geocode(clean, 
+                                 address = address, 
+                                 method = "mapbox", 
+                                 full_results = TRUE, 
+                                 unique_only = FALSE, 
+                                 return_input = TRUE) |> 
+  dplyr::select(npi, organization, on_org_name, org_parent, purpose, address, place_name, lat, long)
+```
 
-# Join & convert lat/long columns to `{sf}` geometry <POINT> object
-rhc_sf_points <- dplyr::left_join(pivoted, rhc_coords, 
-                 relationship = "many-to-many", 
-                 by = dplyr::join_by(npi, organization, purpose)) |> 
-  dplyr::select(-c(zip, place_name)) |> 
-  dplyr::rename(zip = zipnorm) |> 
-  sf::st_as_sf(coords = c("lat", "long"))
 
+```{r}
+ga_counties <- tigris::counties("GA")
+
+p <- ggplot(ga_counties) + 
+  geom_sf(colour = "white") +
+  geom_point(rhc_crd, mapping = aes(long, lat), fill = "orange", color = "darkred", alpha = 0.75, size = 2, shape = 21, stroke = 1) +
+  # geom_label_repel(rhc_crd, 
+  #                 mapping = aes(long, lat, label = organization),
+  #                 force_pull = 0,
+  #                 force = 2,
+  #                 direction = "both",
+  #                 segment.curvature = -0.1, 
+  #                 segment.ncp = 3, 
+  #                 segment.angle = 20, 
+  #                 min.segment.length = 0,
+  #                 nudge_x = 2.5,
+  #                 nudge_y = 0.5) +
+  theme_void()
+
+p + lims_bbox(ga_counties)
+```
+
+
+```{r eval=FALSE}
 # ----------------------------------------------
 # `{zipcodeR}`: Retrieve Counties from Zip codes 
 zip_db <- dplyr::tibble(zip_code_db) |> 

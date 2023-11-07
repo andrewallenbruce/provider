@@ -12,10 +12,9 @@ knitr::opts_chunk$set(
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
-  dpi       = 300, 
-  out.width = "100%",
-  fig.path  = "man/figures/README-"
-)
+  dpi       = 600, 
+  out.width = "100%"
+  )
 ```
 
 # provider <img src="man/figures/logo.svg" align="right" height="200" />
@@ -35,7 +34,7 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-You can install `provider` from [GitHub](https://github.com/) with:
+You can install __`provider`__ from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -50,100 +49,100 @@ library(dplyr)
 ```
 
 
-## `affiliations()`
+### `affiliations()`
 
 ```{r}
 affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
 ```
 
 
-## `beneficiaries()`
+### `beneficiaries()`
 
 ```{r}
 beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", county = "Lowndes") |> glimpse()
 ```
 
-## `clinicians()`
+### `clinicians()`
 
 ```{r}
 clinicians(npi = 1932365699) |> glimpse()
 ```
 
-## `conditions()`
+### `conditions()`
 
 ```{r}
 conditions(year = 2018, set = "multiple", level = "national", age = "all", demo = "all", mcc = "6+") |> glimpse()
 ```
 
 
-## `hospitals()`
+### `hospitals()`
 
 ```{r}
 hospitals(npi = 1720098791) |> glimpse()
 ```
 
-## `laboratories()`
+### `laboratories()`
 
 ```{r}
 laboratories(clia = "11D0265516") |> glimpse()
 ```
 
 
-## `nppes()`
+### `nppes()`
 
 ```{r}
 nppes(npi = 1720098791) |> glimpse()
 ```
 
 
-## `open_payments()`
+### `open_payments()`
 
 ```{r}
 open_payments(year = 2021, npi = 1023630738) |> glimpse()
 ```
 
 
-## `opt_out()`
+### `opt_out()`
 
 ```{r}
 opt_out(npi = 1043522824) |> glimpse()
 ```
 
 
-## `order_refer()`
+### `order_refer()`
 
 ```{r}
 order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
 ```
 
 
-## `outpatient()`
+### `outpatient()`
 
 ```{r}
 outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimpse()
 ```
 
 
-## `providers()`
+### `providers()`
 
 ```{r}
 providers(npi = 1720098791) |> glimpse()
 ```
 
-## `quality_payment()`
+### `quality_payment()`
 
 ```{r}
 quality_payment(year = 2021, npi = 1932365699) |> glimpse()
 ```
 
-## `reassignments()`
+### `reassignments()`
 
 ```{r}
 reassignments(npi = 1932365699) |> glimpse()
 ```
 
 
-## `utilization()`
+### `utilization()`
 
 ```{r}
 utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()

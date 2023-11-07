@@ -54,8 +54,12 @@ Suggests:
     roxyglobals,
     rvest,
     scales,
+    sf,
     stats,
+    zipcodeR,
     tidygraph,
+    tidygeocoder,
+    tigris,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr

@@ -154,9 +154,7 @@ conditions <- function(year,
     subdemo <- subdemo_convert(subdemo)
   }
 
-  if (!is.null(sublevel) && (sublevel %in% state.abb)) {
-    sublevel <- abb2full(sublevel)
-  }
+  if (!is.null(sublevel) && (sublevel %in% state.abb)) sublevel <- abb2full(sublevel)
 
   fips <- fips %nn% as.character(fips)
 
@@ -205,13 +203,18 @@ conditions <- function(year,
 
   if (tidy) {
     results$year <- year
-    results <- cols_cc(tidyup(results, int = "year", dbl = c("prvlnc", "_pc", "er_"))) |>
-      dplyr::mutate(level = fct_level(level),
-                    sublevel = fct_stname(sublevel),
-                    age = fct_age(age),
+
+    results <- cols_cc(tidyup(results,
+                              int = "year",
+                              dbl = c("prvlnc", "_pc", "er_", "_rate"))) |>
+      dplyr::mutate(level       = fct_level(level),
+                    sublevel    = fct_stname(sublevel),
+                    age         = fct_age(age),
                     demographic = fct_demo(demographic),
-                    subdemo = fct_subdemo(subdemo))
-  if (na.rm) {results <- narm(results)}
+                    subdemo     = fct_subdemo(subdemo))
+
+  if (set == "multiple") yr <- dplyr::mutate(results, mcc = fct_mcc(mcc))
+  if (na.rm) results <- narm(results)
     }
   return(results)
 }

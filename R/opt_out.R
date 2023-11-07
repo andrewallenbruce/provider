@@ -146,6 +146,7 @@ opt_out <- function(npi = NULL,
                       chr = 'npi') |>
       combine(address, c('first_line_street_address',
                          'second_line_street_address')) |>
+      dplyr::mutate(state_code = fct_stabb(state_code)) |>
       cols_opt()
     }
   return(results)

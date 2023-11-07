@@ -21,6 +21,7 @@ utils::globalVariables(c(
   "interval", # <make_interval>
   "y", # <clinicians>
   "address", # <clinicians>
+  "gndr", # <clinicians>
   "year", # <compare_hcpcs>
   "hcpcs", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
@@ -45,6 +46,7 @@ utils::globalVariables(c(
   "subgroup_other", # <hospitals>
   "subtotal", # <hospitals>
   "flag", # <hospitals>
+  "incorp_state", # <hospitals>
   "y", # <laboratories>
   "address", # <laboratories>
   "provider_name", # <laboratories>
@@ -58,6 +60,7 @@ utils::globalVariables(c(
   "current_clia_lab_clsfctn_cd", # <laboratories>
   "prvdr_ctgry_cd", # <laboratories>
   "prvdr_ctgry_sbtyp_cd", # <laboratories>
+  "state_cd", # <laboratories>
   "trmntn_exprtn_dt", # <laboratories>
   "duration", # <laboratories>
   "clia_number", # <laboratories>
@@ -136,12 +139,14 @@ utils::globalVariables(c(
   "set", # <open_ids>
   "identifier", # <open_ids>
   "y", # <opt_out>
+  "state_code", # <opt_out>
   "y", # <order_refer>
   "status", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>
   "y", # <providers>
+  "state_cd", # <providers>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
   "group_scenario", # <quality_eligibility>
@@ -186,6 +191,9 @@ utils::globalVariables(c(
   "score", # <quality_payment>
   "status", # <quality_payment>
   "y", # <reassignments>
+  "individual_state_code", # <reassignments>
+  "group_state_code", # <reassignments>
+  "record_type", # <reassignments>
   "taxonomy_code", # <taxonomy_codes>
   "taxonomy_category", # <taxonomy_codes>
   "taxonomy_grouping", # <taxonomy_codes>

@@ -304,7 +304,10 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup ")) |>
         dplyr::filter(flag == TRUE) |>
         dplyr::mutate(flag = NULL,
-                      subgroup = fct_sub(subgroup))
+                      subgroup = fct_sub(subgroup),
+                      enid_state = fct_stabb(enid_state),
+                      incorp_state = fct_stabb(incorp_state),
+                      state = fct_stabb(state))
 
     }
     if (na.rm) results <- narm(results)

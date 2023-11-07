@@ -26,7 +26,7 @@ milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/pr
 
 ## Installation
 
-You can install `provider` from [GitHub](https://github.com/) with:
+You can install **`provider`** from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -40,7 +40,7 @@ library(provider)
 library(dplyr)
 ```
 
-## `affiliations()`
+### `affiliations()`
 
 ``` r
 affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
@@ -56,7 +56,7 @@ affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
     #> $ facility_ccn  <chr> "37Z324"
     #> $ parent_ccn    <chr> "371324"
 
-## `beneficiaries()`
+### `beneficiaries()`
 
 ``` r
 beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", county = "Lowndes") |> glimpse()
@@ -91,7 +91,7 @@ beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", coun
     #> $ bene_rx_lis_part  <int> 143
     #> $ bene_rx_lis_no    <int> 8274
 
-## `clinicians()`
+### `clinicians()`
 
 ``` r
 clinicians(npi = 1932365699) |> glimpse()
@@ -114,11 +114,11 @@ clinicians(npi = 1932365699) |> glimpse()
     #> $ members_org   <int> 2
     #> $ address_org   <chr> "1165 S CAMINO DEL RIO SUITE 100"
     #> $ city_org      <chr> "DURANGO"
-    #> $ state_org     <chr> "CO"
+    #> $ state_org     <ord> CO
     #> $ zip_org       <chr> "813036824"
     #> $ phone_org     <chr> "9702478762"
 
-## `conditions()`
+### `conditions()`
 
 ``` r
 conditions(year = 2018, set = "multiple", level = "national", age = "all", demo = "all", mcc = "6+") |> glimpse()
@@ -136,10 +136,10 @@ conditions(year = 2018, set = "multiple", level = "national", age = "all", demo 
     #> $ prevalence          <dbl> 0.177
     #> $ tot_pymt_percap     <dbl> 32475.26
     #> $ tot_std_pymt_percap <dbl> 30118.69
-    #> $ hosp_readmit_rate   <chr> "0.227"
+    #> $ hosp_readmit_rate   <dbl> 0.227
     #> $ er_visits_per_1k    <dbl> 1922.216
 
-## `hospitals()`
+### `hospitals()`
 
 ``` r
 hospitals(npi = 1720098791) |> glimpse()
@@ -150,17 +150,17 @@ hospitals(npi = 1720098791) |> glimpse()
     #> $ npi_org           <chr> "1720098791"
     #> $ pac_org           <chr> "7618950643"
     #> $ enid_org          <chr> "O20230310002325"
-    #> $ enid_state        <chr> "GA"
+    #> $ enid_state        <ord> GA
     #> $ facility_ccn      <chr> "110779"
     #> $ organization      <chr> "IRWIN COUNTY HOSPITAL"
     #> $ doing_business_as <chr> "PROGRESSIVE MEDICAL ENTERPRISE"
     #> $ specialty_code    <chr> "00-24"
     #> $ specialty         <chr> "PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)"
-    #> $ incorp_state      <chr> "GA"
+    #> $ incorp_state      <ord> GA
     #> $ structure         <chr> "OTHER: HOSPITAL AUTHORITY"
     #> $ address           <chr> "710 N IRWIN AVE"
     #> $ city              <chr> "OCILLA"
-    #> $ state             <chr> "GA"
+    #> $ state             <ord> GA
     #> $ zip               <chr> "317745011"
     #> $ location_type     <chr> "OTHER HOSPITAL PRACTICE LOCATION: REH"
     #> $ registration      <fct> Non-Profit
@@ -170,7 +170,7 @@ hospitals(npi = 1720098791) |> glimpse()
     #> $ reh_conversion    <lgl> TRUE
     #> $ subgroup          <fct> None
 
-## `laboratories()`
+### `laboratories()`
 
 ``` r
 laboratories(clia = "11D0265516") |> glimpse()
@@ -191,10 +191,10 @@ laboratories(clia = "11D0265516") |> glimpse()
     #> $ type_of_action        <ord> Recertification
     #> $ ownership_type        <fct> Proprietary
     #> $ facility_type         <ord> Physician Office
-    #> $ director_affiliations <chr> "0"
+    #> $ director_affiliations <int> 0
     #> $ address               <chr> "205 WOODROW WILSON DR"
     #> $ city                  <chr> "VALDOSTA"
-    #> $ state                 <chr> "GA"
+    #> $ state                 <ord> GA
     #> $ zip                   <chr> "31602"
     #> $ phone                 <chr> "8032619888"
     #> $ orig_part_date        <date> 1992-09-01
@@ -204,18 +204,47 @@ laboratories(clia = "11D0265516") |> glimpse()
     #> $ region                <fct> Atlanta
     #> $ clia_class_current    <fct> CLIA Lab
 
-## `nppes()`
+### `nppes()`
 
 ``` r
 nppes(npi = 1720098791) |> glimpse()
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `gender = fct_gen(gender)`.
-    #> Caused by error in `factor()`:
-    #> ! object 'gender' not found
+    #> Rows: 1
+    #> Columns: 31
+    #> $ npi           <chr> "1720098791"
+    #> $ entity_type   <fct> Organization
+    #> $ enum_date     <date> 2006-08-09
+    #> $ last_update   <date> 2011-10-06
+    #> $ status        <chr> "A"
+    #> $ gender        <fct> Unknown
+    #> $ organization  <chr> "IRWIN COUNTY HOSPITAL"
+    #> $ org_part      <lgl> FALSE
+    #> $ purpose       <chr> "PRACTICE"
+    #> $ address       <chr> "710 N IRWIN AVE"
+    #> $ city          <chr> "OCILLA"
+    #> $ state         <ord> GA
+    #> $ zip           <chr> "317745011"
+    #> $ country       <chr> "US"
+    #> $ phone         <chr> "229-468-3800"
+    #> $ fax           <chr> "229-468-9991"
+    #> $ ao_prefix     <chr> "Mrs."
+    #> $ ao_first      <chr> "SHARON"
+    #> $ ao_middle     <chr> "P"
+    #> $ ao_last       <chr> "GRIFFIN"
+    #> $ ao_title      <chr> "CFO"
+    #> $ ao_phone      <chr> "2294683862"
+    #> $ tx_code       <chr> "282N00000X"
+    #> $ tx_primary    <chr> "TRUE"
+    #> $ tx_desc       <chr> "General Acute Care Hospital"
+    #> $ tx_license    <chr> "86112S"
+    #> $ tx_state      <chr> "GA"
+    #> $ id_code       <chr> "05"
+    #> $ id_desc       <chr> "MEDICAID"
+    #> $ id_state      <chr> "GA"
+    #> $ id_identifier <chr> "000000987A"
 
-## `open_payments()`
+### `open_payments()`
 
 ``` r
 open_payments(year = 2021, npi = 1023630738) |> glimpse()
@@ -262,7 +291,7 @@ open_payments(year = 2021, npi = 1023630738) |> glimpse()
     #> $ category            <chr> "CONTRACEPTIVES"
     #> $ ndc                 <chr> "78206-145-01"
 
-## `opt_out()`
+### `opt_out()`
 
 ``` r
 opt_out(npi = 1043522824) |> glimpse()
@@ -280,10 +309,10 @@ opt_out(npi = 1043522824) |> glimpse()
     #> $ last_updated      <date> 2023-09-15
     #> $ address           <chr> "8585 E HARTFORD DR STE 111"
     #> $ city              <chr> "SCOTTSDALE"
-    #> $ state             <chr> "AZ"
+    #> $ state             <ord> AZ
     #> $ zip               <chr> "852555472"
 
-## `order_refer()`
+### `order_refer()`
 
 ``` r
 order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
@@ -299,7 +328,7 @@ order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
     #> $ hha        <lgl> TRUE
     #> $ pmd        <lgl> TRUE
 
-## `outpatient()`
+### `outpatient()`
 
 ``` r
 outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimpse()
@@ -326,23 +355,18 @@ outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimps
     #> $ tot_outlier_srvcs   <int> 0
     #> $ avg_outlier_payment <dbl> 0
 
-## `providers()`
+### `providers()`
 
 ``` r
 providers(npi = 1720098791) |> glimpse()
 ```
 
-    #> Rows: 2
-    #> Columns: 7
-    #> $ npi                   <chr> "1720098791", "1720098791"
-    #> $ pac                   <chr> "7618950643", "7618950643"
-    #> $ enid                  <chr> "O20040610001257", "O20230310002325"
-    #> $ specialty_code        <chr> "12-70", "00-24"
-    #> $ specialty_description <chr> "PART B SUPPLIER - CLINIC/GROUP PRACTICE", "PART…
-    #> $ state                 <chr> "GA", "GA"
-    #> $ organization          <chr> "IRWIN COUNTY HOSPITAL", "IRWIN COUNTY HOSPITAL"
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `state_cd = fct_stabb(state_cd)`.
+    #> Caused by error in `factor()`:
+    #> ! object 'state_cd' not found
 
-## `quality_payment()`
+### `quality_payment()`
 
 ``` r
 quality_payment(year = 2021, npi = 1932365699) |> glimpse()
@@ -352,7 +376,7 @@ quality_payment(year = 2021, npi = 1932365699) |> glimpse()
     #> Columns: 20
     #> $ year            <int> 2021
     #> $ npi             <chr> "1932365699"
-    #> $ state           <chr> "CO"
+    #> $ state           <ord> CO
     #> $ size            <int> 3
     #> $ specialty       <chr> "Optometry"
     #> $ med_years       <int> 14
@@ -371,7 +395,7 @@ quality_payment(year = 2021, npi = 1932365699) |> glimpse()
     #> $ statuses        <list> [<tbl_df[9 x 2]>]
     #> $ measures        <list> [<tbl_df[6 x 3]>]
 
-## `reassignments()`
+### `reassignments()`
 
 ``` r
 reassignments(npi = 1932365699) |> glimpse()
@@ -388,11 +412,11 @@ reassignments(npi = 1932365699) |> glimpse()
     #> $ organization  <chr> "EYE CENTER OF THE ROCKIES PC", "LEE ANN HOVEN OD PC"
     #> $ pac_org       <chr> "7719037548", "5193882009"
     #> $ enid_org      <chr> "O20090616000599", "O20090320000182"
-    #> $ state_org     <chr> "CO", "CO"
+    #> $ state_org     <ord> CO, CO
     #> $ reassignments <int> 5, 6
-    #> $ entry         <chr> "Reassignment", "Reassignment"
+    #> $ entry         <fct> Reassignment, Reassignment
 
-## `utilization()`
+### `utilization()`
 
 ``` r
 utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()
