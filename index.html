@@ -123,7 +123,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install <strong><code>provider</code></strong> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
@@ -134,11 +134,10 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="affiliations">
+<div class="section level3">
+<h3 id="affiliations">
 <code>affiliations()</code><a class="anchor" aria-label="anchor" href="#affiliations"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/affiliations.html">affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1023630738</span>, facility_ccn <span class="op">=</span> <span class="st">"37Z324"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -151,10 +150,10 @@
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ facility_ccn  &lt;chr&gt; "37Z324"</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ parent_ccn    &lt;chr&gt; "371324"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="beneficiaries">
+<div class="section level3">
+<h3 id="beneficiaries">
 <code>beneficiaries()</code><a class="anchor" aria-label="anchor" href="#beneficiaries"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/beneficiaries.html">beneficiaries</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, period <span class="op">=</span> <span class="st">"Year"</span>, level <span class="op">=</span> <span class="st">"County"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, county <span class="op">=</span> <span class="st">"Lowndes"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -186,10 +185,10 @@
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_part  &lt;int&gt; 143</span></span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_no    &lt;int&gt; 8274</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="clinicians">
+<div class="section level3">
+<h3 id="clinicians">
 <code>clinicians()</code><a class="anchor" aria-label="anchor" href="#clinicians"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/clinicians.html">clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1932365699</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -209,14 +208,14 @@
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ members_org   &lt;int&gt; 2</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address_org   &lt;chr&gt; "1165 S CAMINO DEL RIO SUITE 100"</span></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city_org      &lt;chr&gt; "DURANGO"</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_org     &lt;chr&gt; "CO"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_org     &lt;ord&gt; CO</span></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip_org       &lt;chr&gt; "813036824"</span></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ phone_org     &lt;chr&gt; "9702478762"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="conditions">
+<div class="section level3">
+<h3 id="conditions">
 <code>conditions()</code><a class="anchor" aria-label="anchor" href="#conditions"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/conditions.html">conditions</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, set <span class="op">=</span> <span class="st">"multiple"</span>, level <span class="op">=</span> <span class="st">"national"</span>, age <span class="op">=</span> <span class="st">"all"</span>, demo <span class="op">=</span> <span class="st">"all"</span>, mcc <span class="op">=</span> <span class="st">"6+"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -231,13 +230,13 @@
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prevalence          &lt;dbl&gt; 0.177</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tot_pymt_percap     &lt;dbl&gt; 32475.26</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tot_std_pymt_percap &lt;dbl&gt; 30118.69</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ hosp_readmit_rate   &lt;chr&gt; "0.227"</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ hosp_readmit_rate   &lt;dbl&gt; 0.227</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ er_visits_per_1k    &lt;dbl&gt; 1922.216</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="hospitals">
+<div class="section level3">
+<h3 id="hospitals">
 <code>hospitals()</code><a class="anchor" aria-label="anchor" href="#hospitals"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/hospitals.html">hospitals</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720098791</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -245,17 +244,17 @@
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi_org           &lt;chr&gt; "1720098791"</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pac_org           &lt;chr&gt; "7618950643"</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enid_org          &lt;chr&gt; "O20230310002325"</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enid_state        &lt;chr&gt; "GA"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enid_state        &lt;ord&gt; GA</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ facility_ccn      &lt;chr&gt; "110779"</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ organization      &lt;chr&gt; "IRWIN COUNTY HOSPITAL"</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ doing_business_as &lt;chr&gt; "PROGRESSIVE MEDICAL ENTERPRISE"</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_code    &lt;chr&gt; "00-24"</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty         &lt;chr&gt; "PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)"</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ incorp_state      &lt;chr&gt; "GA"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ incorp_state      &lt;ord&gt; GA</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ structure         &lt;chr&gt; "OTHER: HOSPITAL AUTHORITY"</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address           &lt;chr&gt; "710 N IRWIN AVE"</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city              &lt;chr&gt; "OCILLA"</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;chr&gt; "GA"</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;ord&gt; GA</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip               &lt;chr&gt; "317745011"</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ location_type     &lt;chr&gt; "OTHER HOSPITAL PRACTICE LOCATION: REH"</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ registration      &lt;fct&gt; Non-Profit</span></span>
@@ -265,10 +264,10 @@
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ reh_conversion    &lt;lgl&gt; TRUE</span></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ subgroup          &lt;fct&gt; None</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="laboratories">
+<div class="section level3">
+<h3 id="laboratories">
 <code>laboratories()</code><a class="anchor" aria-label="anchor" href="#laboratories"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/laboratories.html">laboratories</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -286,10 +285,10 @@
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ type_of_action        &lt;ord&gt; Recertification</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ownership_type        &lt;fct&gt; Proprietary</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ facility_type         &lt;ord&gt; Physician Office</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ director_affiliations &lt;chr&gt; "0"</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ director_affiliations &lt;int&gt; 0</span></span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address               &lt;chr&gt; "205 WOODROW WILSON DR"</span></span>
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city                  &lt;chr&gt; "VALDOSTA"</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state                 &lt;chr&gt; "GA"</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state                 &lt;ord&gt; GA</span></span>
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip                   &lt;chr&gt; "31602"</span></span>
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ phone                 &lt;chr&gt; "8032619888"</span></span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ orig_part_date        &lt;date&gt; 1992-09-01</span></span>
@@ -299,21 +298,50 @@
 <span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ region                &lt;fct&gt; Atlanta</span></span>
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ clia_class_current    &lt;fct&gt; CLIA Lab</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="nppes">
+<div class="section level3">
+<h3 id="nppes">
 <code>nppes()</code><a class="anchor" aria-label="anchor" href="#nppes"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720098791</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In argument: `gender = fct_gen(gender)`.</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error in `factor()`:</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! object 'gender' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 31</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi           &lt;chr&gt; "1720098791"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ entity_type   &lt;fct&gt; Organization</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enum_date     &lt;date&gt; 2006-08-09</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ last_update   &lt;date&gt; 2011-10-06</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ status        &lt;chr&gt; "A"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ gender        &lt;fct&gt; Unknown</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ organization  &lt;chr&gt; "IRWIN COUNTY HOSPITAL"</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_part      &lt;lgl&gt; FALSE</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ purpose       &lt;chr&gt; "PRACTICE"</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address       &lt;chr&gt; "710 N IRWIN AVE"</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city          &lt;chr&gt; "OCILLA"</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state         &lt;ord&gt; GA</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip           &lt;chr&gt; "317745011"</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ country       &lt;chr&gt; "US"</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ phone         &lt;chr&gt; "229-468-3800"</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ fax           &lt;chr&gt; "229-468-9991"</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_prefix     &lt;chr&gt; "Mrs."</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_first      &lt;chr&gt; "SHARON"</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_middle     &lt;chr&gt; "P"</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_last       &lt;chr&gt; "GRIFFIN"</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_title      &lt;chr&gt; "CFO"</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_phone      &lt;chr&gt; "2294683862"</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_code       &lt;chr&gt; "282N00000X"</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_primary    &lt;chr&gt; "TRUE"</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_desc       &lt;chr&gt; "General Acute Care Hospital"</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_license    &lt;chr&gt; "86112S"</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_state      &lt;chr&gt; "GA"</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_code       &lt;chr&gt; "05"</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_desc       &lt;chr&gt; "MEDICAID"</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_state      &lt;chr&gt; "GA"</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_identifier &lt;chr&gt; "000000987A"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="open_payments">
+<div class="section level3">
+<h3 id="open_payments">
 <code>open_payments()</code><a class="anchor" aria-label="anchor" href="#open_payments"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1023630738</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -357,10 +385,10 @@
 <span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ category            &lt;chr&gt; "CONTRACEPTIVES"</span></span>
 <span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc                 &lt;chr&gt; "78206-145-01"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="opt_out">
+<div class="section level3">
+<h3 id="opt_out">
 <code>opt_out()</code><a class="anchor" aria-label="anchor" href="#opt_out"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -375,13 +403,13 @@
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ last_updated      &lt;date&gt; 2023-09-15</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address           &lt;chr&gt; "8585 E HARTFORD DR STE 111"</span></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city              &lt;chr&gt; "SCOTTSDALE"</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;chr&gt; "AZ"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;ord&gt; AZ</span></span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip               &lt;chr&gt; "852555472"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="order_refer">
+<div class="section level3">
+<h3 id="order_refer">
 <code>order_refer()</code><a class="anchor" aria-label="anchor" href="#order_refer"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -394,10 +422,10 @@
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ hha        &lt;lgl&gt; TRUE</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pmd        &lt;lgl&gt; TRUE</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="outpatient">
+<div class="section level3">
+<h3 id="outpatient">
 <code>outpatient()</code><a class="anchor" aria-label="anchor" href="#outpatient"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/outpatient.html">outpatient</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, apc <span class="op">=</span> <span class="st">"5072"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -421,33 +449,28 @@
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tot_outlier_srvcs   &lt;int&gt; 0</span></span>
 <span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ avg_outlier_payment &lt;dbl&gt; 0</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="providers">
+<div class="section level3">
+<h3 id="providers">
 <code>providers()</code><a class="anchor" aria-label="anchor" href="#providers"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/providers.html">providers</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720098791</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 2</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 7</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi                   &lt;chr&gt; "1720098791", "1720098791"</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pac                   &lt;chr&gt; "7618950643", "7618950643"</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enid                  &lt;chr&gt; "O20040610001257", "O20230310002325"</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_code        &lt;chr&gt; "12-70", "00-24"</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_description &lt;chr&gt; "PART B SUPPLIER - CLINIC/GROUP PRACTICE", "PART…</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state                 &lt;chr&gt; "GA", "GA"</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ organization          &lt;chr&gt; "IRWIN COUNTY HOSPITAL", "IRWIN COUNTY HOSPITAL"</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::mutate()`:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In argument: `state_cd = fct_stabb(state_cd)`.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error in `factor()`:</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! object 'state_cd' not found</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="quality_payment">
+<div class="section level3">
+<h3 id="quality_payment">
 <code>quality_payment()</code><a class="anchor" aria-label="anchor" href="#quality_payment"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1932365699</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 20</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year            &lt;int&gt; 2021</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi             &lt;chr&gt; "1932365699"</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state           &lt;chr&gt; "CO"</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state           &lt;ord&gt; CO</span></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ size            &lt;int&gt; 3</span></span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty       &lt;chr&gt; "Optometry"</span></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ med_years       &lt;int&gt; 14</span></span>
@@ -466,10 +489,10 @@
 <span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ statuses        &lt;list&gt; [&lt;tbl_df[9 x 2]&gt;]</span></span>
 <span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ measures        &lt;list&gt; [&lt;tbl_df[6 x 3]&gt;]</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="reassignments">
+<div class="section level3">
+<h3 id="reassignments">
 <code>reassignments()</code><a class="anchor" aria-label="anchor" href="#reassignments"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/reassignments.html">reassignments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1932365699</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb30"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 2</span></span>
@@ -483,14 +506,14 @@
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ organization  &lt;chr&gt; "EYE CENTER OF THE ROCKIES PC", "LEE ANN HOVEN OD PC"</span></span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pac_org       &lt;chr&gt; "7719037548", "5193882009"</span></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enid_org      &lt;chr&gt; "O20090616000599", "O20090320000182"</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_org     &lt;chr&gt; "CO", "CO"</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state_org     &lt;ord&gt; CO, CO</span></span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ reassignments &lt;int&gt; 5, 6</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ entry         &lt;chr&gt; "Reassignment", "Reassignment"</span></span></code></pre></div>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ entry         &lt;fct&gt; Reassignment, Reassignment</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="utilization">
+<div class="section level3">
+<h3 id="utilization">
 <code>utilization()</code><a class="anchor" aria-label="anchor" href="#utilization"></a>
-</h2>
+</h3>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/utilization.html">utilization</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1932365699</span>, type <span class="op">=</span> <span class="st">"provider"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
@@ -516,6 +539,7 @@
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ demographics &lt;list&gt; [&lt;tbl_df[1 x 15]&gt;]</span></span>
 <span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ conditions   &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;]</span></span></code></pre></div>
 <hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
