@@ -144,13 +144,9 @@ Bruce</h4>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `state_cd = fct_stabb(state_cd)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'state_cd' not found</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Separate &amp; row-bind distinct LOCATION &amp; PRACTICE Addresses</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Separate &amp; row-bind distinct LOCATION &amp; PRACTICE Addresses</span></span>
 <span><span class="va">stack</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, </span>
 <span>                <span class="va">purpose</span>, <span class="va">address</span>, <span class="va">city</span>, <span class="va">state</span>, <span class="va">zip</span><span class="op">)</span>,</span>
@@ -162,17 +158,15 @@ Bruce</h4>
 <span>                zip <span class="op">=</span> <span class="va">pr_zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="fu">zipcodeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zipcodeR/man/normalize_zip.html" class="external-link">normalize_zip</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">purpose</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'rhcs' not found</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Prepare for geocoding</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Prepare for geocoding</span></span>
 <span><span class="va">clean</span> <span class="op">&lt;-</span> <span class="va">stack</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co">#dplyr::mutate(address = campfin::normal_address(address)) |&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, <span class="va">address</span><span class="op">:</span><span class="va">state</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">address</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in UseMethod("unite"): no applicable method for 'unite' applied to an object of class "function"</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Geocode with {tidygeocoder}</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">address</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Geocode with {tidygeocoder}</span></span>
 <span><span class="va">rhc_crd</span> <span class="op">&lt;-</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">clean</span>, </span>
 <span>                                 address <span class="op">=</span> <span class="va">address</span>, </span>
 <span>                                 method <span class="op">=</span> <span class="st">"mapbox"</span>, </span>
@@ -180,8 +174,10 @@ Bruce</h4>
 <span>                                 unique_only <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>                                 return_input <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, <span class="va">purpose</span>, <span class="va">address</span>, <span class="va">place_name</span>, <span class="va">lat</span>, <span class="va">long</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'clean' not found</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; Error: An API Key is needed to use the 'mapbox' method.</span></span>
+<span><span class="co">#&gt;     Set the "MAPBOX_API_KEY" variable in your .Renviron file or with Sys.setenv().</span></span>
+<span><span class="co">#&gt;     Tip: usethis::edit_r_environ() will open your .Renviron file for editing.</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span><span class="st">"GA"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; 
   |                                                                            
@@ -191,17 +187,11 @@ Bruce</h4>
   |                                                                            
   |=                                                                     |   1%
   |                                                                            
-  |=                                                                     |   2%
-  |                                                                            
   |==                                                                    |   2%
   |                                                                            
   |==                                                                    |   3%
   |                                                                            
-  |==                                                                    |   4%
-  |                                                                            
   |===                                                                   |   4%
-  |                                                                            
-  |===                                                                   |   5%
   |                                                                            
   |====                                                                  |   5%
   |                                                                            
@@ -209,19 +199,13 @@ Bruce</h4>
   |                                                                            
   |=====                                                                 |   7%
   |                                                                            
-  |=====                                                                 |   8%
-  |                                                                            
   |======                                                                |   8%
-  |                                                                            
-  |======                                                                |   9%
-  |                                                                            
-  |=======                                                               |   9%
   |                                                                            
   |=======                                                               |  10%
   |                                                                            
-  |========                                                              |  11%
+  |=======                                                               |  11%
   |                                                                            
-  |=========                                                             |  12%
+  |========                                                              |  12%
   |                                                                            
   |=========                                                             |  13%
   |                                                                            
@@ -229,13 +213,11 @@ Bruce</h4>
   |                                                                            
   |==========                                                            |  15%
   |                                                                            
-  |===========                                                           |  15%
-  |                                                                            
   |===========                                                           |  16%
   |                                                                            
   |============                                                          |  17%
   |                                                                            
-  |=============                                                         |  18%
+  |============                                                          |  18%
   |                                                                            
   |=============                                                         |  19%
   |                                                                            
@@ -245,53 +227,43 @@ Bruce</h4>
   |                                                                            
   |===============                                                       |  22%
   |                                                                            
-  |================                                                      |  22%
-  |                                                                            
   |================                                                      |  23%
   |                                                                            
   |=================                                                     |  24%
   |                                                                            
-  |=================                                                     |  25%
-  |                                                                            
   |==================                                                    |  25%
+  |                                                                            
+  |==================                                                    |  26%
   |                                                                            
   |===================                                                   |  27%
   |                                                                            
-  |===================                                                   |  28%
-  |                                                                            
   |====================                                                  |  28%
   |                                                                            
-  |=====================                                                 |  29%
+  |====================                                                  |  29%
   |                                                                            
   |=====================                                                 |  30%
   |                                                                            
   |======================                                                |  31%
   |                                                                            
-  |======================                                                |  32%
-  |                                                                            
   |=======================                                               |  32%
   |                                                                            
   |=======================                                               |  33%
   |                                                                            
-  |========================                                              |  35%
+  |========================                                              |  34%
   |                                                                            
   |=========================                                             |  35%
   |                                                                            
-  |=========================                                             |  36%
+  |==========================                                            |  36%
   |                                                                            
   |==========================                                            |  37%
   |                                                                            
-  |==========================                                            |  38%
-  |                                                                            
   |===========================                                           |  39%
-  |                                                                            
-  |============================                                          |  39%
   |                                                                            
   |============================                                          |  40%
   |                                                                            
-  |=============================                                         |  41%
+  |============================                                          |  41%
   |                                                                            
-  |==============================                                        |  42%
+  |=============================                                         |  42%
   |                                                                            
   |==============================                                        |  43%
   |                                                                            
@@ -305,11 +277,7 @@ Bruce</h4>
   |                                                                            
   |=================================                                     |  48%
   |                                                                            
-  |==================================                                    |  48%
-  |                                                                            
   |==================================                                    |  49%
-  |                                                                            
-  |===================================                                   |  49%
   |                                                                            
   |===================================                                   |  50%
   |                                                                            
@@ -327,15 +295,13 @@ Bruce</h4>
   |                                                                            
   |========================================                              |  57%
   |                                                                            
-  |========================================                              |  58%
+  |=========================================                             |  58%
   |                                                                            
   |=========================================                             |  59%
   |                                                                            
   |==========================================                            |  60%
   |                                                                            
-  |==========================================                            |  61%
-  |                                                                            
-  |===========================================                           |  62%
+  |===========================================                           |  61%
   |                                                                            
   |============================================                          |  62%
   |                                                                            
@@ -345,19 +311,17 @@ Bruce</h4>
   |                                                                            
   |==============================================                        |  65%
   |                                                                            
-  |==============================================                        |  66%
-  |                                                                            
   |===============================================                       |  67%
   |                                                                            
   |===============================================                       |  68%
-  |                                                                            
-  |================================================                      |  68%
   |                                                                            
   |================================================                      |  69%
   |                                                                            
   |=================================================                     |  70%
   |                                                                            
-  |==================================================                    |  71%
+  |=================================================                     |  71%
+  |                                                                            
+  |==================================================                    |  72%
   |                                                                            
   |===================================================                   |  73%
   |                                                                            
@@ -373,25 +337,15 @@ Bruce</h4>
   |                                                                            
   |=======================================================               |  79%
   |                                                                            
-  |========================================================              |  79%
-  |                                                                            
   |========================================================              |  80%
-  |                                                                            
-  |========================================================              |  81%
   |                                                                            
   |=========================================================             |  81%
   |                                                                            
   |=========================================================             |  82%
   |                                                                            
-  |==========================================================            |  82%
-  |                                                                            
   |==========================================================            |  83%
   |                                                                            
-  |==========================================================            |  84%
-  |                                                                            
   |===========================================================           |  84%
-  |                                                                            
-  |===========================================================           |  85%
   |                                                                            
   |============================================================          |  85%
   |                                                                            
@@ -399,33 +353,19 @@ Bruce</h4>
   |                                                                            
   |=============================================================         |  87%
   |                                                                            
-  |=============================================================         |  88%
-  |                                                                            
   |==============================================================        |  88%
-  |                                                                            
-  |==============================================================        |  89%
   |                                                                            
   |===============================================================       |  89%
   |                                                                            
   |===============================================================       |  90%
   |                                                                            
-  |===============================================================       |  91%
-  |                                                                            
   |================================================================      |  91%
-  |                                                                            
-  |================================================================      |  92%
   |                                                                            
   |=================================================================     |  92%
   |                                                                            
   |=================================================================     |  93%
   |                                                                            
-  |=================================================================     |  94%
-  |                                                                            
   |==================================================================    |  94%
-  |                                                                            
-  |==================================================================    |  95%
-  |                                                                            
-  |===================================================================   |  95%
   |                                                                            
   |===================================================================   |  96%
   |                                                                            
@@ -433,14 +373,10 @@ Bruce</h4>
   |                                                                            
   |====================================================================  |  98%
   |                                                                            
-  |===================================================================== |  98%
-  |                                                                            
   |===================================================================== |  99%
   |                                                                            
-  |======================================================================|  99%
-  |                                                                            
   |======================================================================| 100%</code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">rhc_crd</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"orange"</span>, color <span class="op">=</span> <span class="st">"darkred"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span>, size <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">21</span>, stroke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -457,10 +393,10 @@ Bruce</h4>
 <span>  <span class="co">#                 nudge_y = 0.5) +</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'rhc_crd' not found</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">lims_bbox</span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'p' not found</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ----------------------------------------------</span></span>
 <span><span class="co"># `{zipcodeR}`: Retrieve Counties from Zip codes </span></span>
 <span><span class="va">zip_db</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="va">zip_code_db</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
