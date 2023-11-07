@@ -29,12 +29,15 @@ library(provider)
 library(tidygeocoder)
 library(purrr)
 library(dplyr)
+library(stringr)
 library(ggplot2)
 library(ggsflabel)
 library(ggrepel)
 library(gghighlight)
 library(sf)
 library(tigris)
+library(zipcodeR)
+library(fipio)
 ```
 
 
@@ -45,87 +48,150 @@ rhcs <- providers(state = "GA", specialty_code = "00-17") |>
   dplyr::distinct(npi) |> 
   dplyr::pull(npi) |> 
   purrr::map(\(x) nppes(npi = x)) |>
-  purrr::list_rbind()
+  purrr::list_rbind() |> 
+  dplyr::select(npi,
+                organization, 
+                tx_desc,
+                org_part,
+                purpose,
+                org_parent,
+                on_type,
+                on_org_name,
+                address, 
+                city, 
+                state, 
+                zip,
+                pr_purpose, 
+                pr_address, 
+                pr_city, 
+                pr_state, 
+                pr_zip)
 rhcs
 ```
 
+
+## Retrieve Counties from Zip codes with `{zipcodeR}`
+
+```{r}
+zip_db <- dplyr::tibble(zipcodeR::zip_code_db) |> 
+  dplyr::filter(state == "GA") |> 
+  dplyr::select(zip = zipcode, 
+                city = major_city, 
+                county, 
+                state, 
+                lat, 
+                lng) |> 
+  dplyr::mutate(county = stringr::str_remove(county, " County"))
+zip_db
+```
 
 ## Stack Distinct `LOCATION` & `PRACTICE` Addresses
 
 ```{r}
 stack <- dplyr::bind_rows(
-  dplyr::select(rhcs, npi, organization, 
-                on_org_name, org_parent, 
-                purpose, address, 
-                city, state, zip),
-  dplyr::select(rhcs, npi, organization, 
-                on_org_name, org_parent, 
+  dplyr::select(rhcs, 
+                npi,
+                organization, 
+                tx_desc,
+                org_part,
+                purpose,
+                org_parent,
+                on_type,
+                on_org_name,
+                address, 
+                city, 
+                state, 
+                zip),
+  dplyr::select(rhcs, 
+                npi, 
+                organization, 
+                tx_desc,
+                org_part,
                 purpose = pr_purpose, 
+                org_parent,
+                on_type,
+                on_org_name,
                 address = pr_address, 
                 city = pr_city, 
                 state = pr_state, 
                 zip = pr_zip)) |> 
   dplyr::mutate(zip = zipcodeR::normalize_zip(zip)) |> 
   dplyr::filter(!is.na(purpose)) |> 
-  dplyr::distinct()
+  tidyr::nest(specialty = tx_desc, 
+              other_names = c(org_parent, 
+                              on_type, 
+                              on_org_name)) |> 
+  tidyr::unite("address", 
+               address:state, 
+               remove = TRUE, 
+               sep = " ") |> 
+  dplyr::inner_join(zip_db) # Join RHCs to Counties
 stack
 ```
 
 
-## Prepare Addresses for Geocoding
 
 ```{r}
-clean <- stack |> 
-  #dplyr::mutate(address = campfin::normal_address(address)) |>
-  tidyr::unite("address", address:state, remove = TRUE, sep = " ") |> 
-  dplyr::distinct(address, .keep_all = TRUE)
-clean
+# Create data frame of unique state/county pairs
+sc <- stack |> dplyr::distinct(state, county)
+# Retrieve county FIPS codes
+sc <- sc |> dplyr::mutate(fips = purrr::map2_chr(sc$state, sc$county, fipio::as_fips))
+# Retrieve geometries based on county FIPS
+sc <- sc |> dplyr::mutate(geometry = purrr::map(sc$fips, fipio::fips_geometry)) |> tidyr::unnest(geometry)
+# Create `{sf}` <MULTIPOLYGON> object
+sc <- sf::st_as_sf(sc)
+sc
 ```
 
 
 ## Send to `{tidygeocoder}`
 
 ```{r}
-rhc_crd <- tidygeocoder::geocode(clean, address = address, method = "mapbox", full_results = TRUE, unique_only = FALSE, return_input = TRUE) |> 
-  dplyr::select(npi, organization, on_org_name, org_parent, purpose, address, place_name, lat, long)
-rhc_crd
+geo <- tidygeocoder::geocode(stack, 
+                             address = address, 
+                             method = "mapbox", 
+                             full_results = TRUE, 
+                             unique_only = FALSE, 
+                             return_input = TRUE) |> 
+  dplyr::select(npi, zip, place_name, lat, long)
+geo
 ```
+
 
 
 ## Convert to `{sf}` object
 
-```{r}
-# Use ESRI:102118 (NAD 1927 Georgia Statewide Albers: https://epsg.io/102118)
-ga_crs <- sf::st_crs("ESRI:102118")
+## Retrieve Georgia state & counties shapefile from `{tigris}`
 
-rhc_geo <- rhc_crd |> sf::st_as_sf(coords = c("long", "lat"), crs = ga_crs)
-rhc_geo
+```{r}
+ga_state <- tigris::states(year = 2022, 
+                           progress_bar = FALSE) |> 
+  dplyr::filter(STUSPS == "GA")
+ga_state
 ```
 
-
-## Retrieve Georgia counties shapefile from `{tigris}`
 
 ```{r}
 ga_counties <- tigris::counties(state = "GA", 
                                 year = 2022, 
-                                progress_bar = FALSE) #|>  
-  #sf::st_transform(ga_crs)
+                                progress_bar = FALSE)  
 ga_counties
 ```
 
 
 ```{r}
 p <- ggplot2::ggplot() + 
-  ggplot2::geom_sf(data = ga_counties, colour = "white") +
-  #ggplot2::geom_sf(data = rhc_geo, size = 3) +
-  ggplot2::geom_point(rhc_crd, 
+  #ggplot2::geom_sf(data = ga_state, colour = "darkred") +
+  ggplot2::geom_sf(data = ga_counties, fill = "darkgreen", colour = "white", alpha = 0.5) +
+  ggplot2::geom_sf(data = sc, size = 3, fill = "white") +
+  ggplot2::geom_point(geo, 
                       mapping = ggplot2::aes(long, lat), 
                       fill = "orange", 
                       color = "darkred", 
                       alpha = 0.75, 
-                      size = 2, 
+                      size = 1.5, 
                       shape = 21, 
-                      stroke = 1) +
+                      stroke = 0.5) +
   # geom_label_repel(rhc_crd, 
   #                 mapping = aes(long, lat, label = organization),
   #                 force_pull = 0,
@@ -143,95 +209,4 @@ p + ggsflabel::lims_bbox(ga_counties)
 ```
 
 
-```{r eval=FALSE}
-# ----------------------------------------------
-# `{zipcodeR}`: Retrieve Counties from Zip codes 
-zip_db <- dplyr::tibble(zip_code_db) |> 
-  dplyr::filter(state == "GA" | state == "FL") |> 
-  dplyr::select(
-    zipcode, 
-    city = major_city, 
-    county, 
-    state, 
-    lat, 
-    lng, 
-    pop_total = population, 
-    pop_dense = population_density,
-    med_income = median_household_income,
-    dplyr::contains("bounds"))
-
-# Join RHCs to Counties
-rhc_zip <- dplyr::left_join(
-  pivoted, 
-  zip_db, 
-  by = dplyr::join_by(state, zipnorm == zipcode))
-
-# Create data frame of unique state/county pairs
-# Remove "County" from county names
-st_cnty <- rhc_zip |> 
-  distinct(state, county) |> 
-  mutate(county = stringr::str_remove(county, " County"))
-
-# Make separate, equal-length lists of the states and counties
-x <- list(st_cnty$state)
-y <- list(st_cnty$county)
-
-# Retrieve county FIPS codes
-# Retrieve geometries based on county FIPS
-z    <- purrr::map2(x, y, fipio::as_fips)
-z_sf <- purrr::map(z, fipio::fips_geometry) |> purrr::list_rbind()
-z_sf[[1]]
-
-# Unlist & insert into new tibble with geometry
-st_ct_fips <- dplyr::tibble(
-  state = unlist(x),
-  county = unlist(y),
-  fips = unlist(z),
-  geometry = z_sf[[1]])
-
-
-# Create `{sf}` <MULTIPOLYGON> object
-counties_sf <- sf::st_as_sf(st_ct_fips)
-counties_sf
-
-# -----------------------------------------------------
-sf::st_crs(counties_sf)$epsg
-sf::st_crs("EPSG:4326")$epsg
-sf::st_crs(ga_base_map)$epsg
-
-sf::st_crs(rhc_sf_points)$epsg
-
-rhc_sf_points_4326 <- sf::st_transform(rhc_sf_points, 4326)
-
-ga_base_map <- USA.state.boundaries::state_boundaries_wgs84 |> 
-  dplyr::filter(STATE_ABBR == "GA")
-fl_base_map <- USA.state.boundaries::state_boundaries_wgs84 |> 
-  dplyr::filter(STATE_ABBR == "FL")
-
-# -----------------------------------------------------------------------------
-ggplot2::ggplot() +
-  ggplot2::geom_sf(data = ga_base_map, 
-                   fill = "white", 
-                   linewidth = 0.25) +
-  ggplot2::geom_sf(data = fl_base_map, 
-                   fill = "white", 
-                   linewidth = 0.25) +
-  ggplot2::geom_sf(data = counties_sf, 
-                   fill = "darkgreen", 
-                   alpha = 0.3, 
-                   color = "white", 
-                   linewidth = 0.75) +
-  ggplot2::geom_point(data = rhc_coords, 
-                      ggplot2::aes(long, lat),
-                      fill = "orange",
-                      color = "darkred", 
-                      alpha = 1, 
-                      size = 2, 
-                      shape = 21,
-                      stroke = 1.5) +
-  # ggplot2::geom_sf_text(data = rhc_sf_points_4326, 
-             # ggplot2::aes(geometry = geometry, label = tx_desc)) +
-  # ggplot2::coord_sf(crs = count_crs) +
-  ggplot2::theme_void()
-```
 
