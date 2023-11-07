@@ -22,33 +22,44 @@ options(scipen = 999)
 ```
 
 
+## Load Packages
+
 ```{r}
 library(provider)
 library(tidygeocoder)
 library(purrr)
 library(dplyr)
 library(ggplot2)
-#library(ggsflabel)
+library(ggsflabel)
 library(ggrepel)
-#library(gghighlight)
+library(gghighlight)
 library(sf)
 library(tigris)
 ```
 
 
+## Retrieve NPIs of all RHCs in Georgia
+
 ```{r}
-# Retrieve NPIs of all RHCs in Georgia
 rhcs <- providers(state = "GA", specialty_code = "00-17") |> 
   dplyr::distinct(npi) |> 
   dplyr::pull(npi) |> 
   purrr::map(\(x) nppes(npi = x)) |>
   purrr::list_rbind()
+rhcs
+```
 
-# Separate & row-bind distinct LOCATION & PRACTICE Addresses
+
+## Stack Distinct `LOCATION` & `PRACTICE` Addresses
+
+```{r}
 stack <- dplyr::bind_rows(
-  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, 
-                purpose, address, city, state, zip),
-  dplyr::select(rhcs, npi, organization, on_org_name, org_parent, 
+  dplyr::select(rhcs, npi, organization, 
+                on_org_name, org_parent, 
+                purpose, address, 
+                city, state, zip),
+  dplyr::select(rhcs, npi, organization, 
+                on_org_name, org_parent, 
                 purpose = pr_purpose, 
                 address = pr_address, 
                 city = pr_city, 
@@ -57,30 +68,64 @@ stack <- dplyr::bind_rows(
   dplyr::mutate(zip = zipcodeR::normalize_zip(zip)) |> 
   dplyr::filter(!is.na(purpose)) |> 
   dplyr::distinct()
+stack
+```
 
-# Prepare for geocoding
+
+## Prepare Addresses for Geocoding
+
+```{r}
 clean <- stack |> 
   #dplyr::mutate(address = campfin::normal_address(address)) |>
   tidyr::unite("address", address:state, remove = TRUE, sep = " ") |> 
   dplyr::distinct(address, .keep_all = TRUE)
+clean
+```
 
-# Geocode with {tidygeocoder}
-rhc_crd <- tidygeocoder::geocode(clean, 
-                                 address = address, 
-                                 method = "mapbox", 
-                                 full_results = TRUE, 
-                                 unique_only = FALSE, 
-                                 return_input = TRUE) |> 
+
+## Send to `{tidygeocoder}`
+
+```{r}
+rhc_crd <- tidygeocoder::geocode(clean, address = address, method = "mapbox", full_results = TRUE, unique_only = FALSE, return_input = TRUE) |> 
   dplyr::select(npi, organization, on_org_name, org_parent, purpose, address, place_name, lat, long)
+rhc_crd
+```
+
+
+## Convert to `{sf}` object
+
+```{r}
+# Use ESRI:102118 (NAD 1927 Georgia Statewide Albers: https://epsg.io/102118)
+ga_crs <- sf::st_crs("ESRI:102118")
+
+rhc_geo <- rhc_crd |> sf::st_as_sf(coords = c("long", "lat"), crs = ga_crs)
+rhc_geo
+```
+
+
+## Retrieve Georgia counties shapefile from `{tigris}`
+
+```{r}
+ga_counties <- tigris::counties(state = "GA", 
+                                year = 2022, 
+                                progress_bar = FALSE) #|>  
+  #sf::st_transform(ga_crs)
+ga_counties
 ```
 
 
 ```{r}
-ga_counties <- tigris::counties("GA")
-
-p <- ggplot(ga_counties) + 
-  geom_sf(colour = "white") +
-  geom_point(rhc_crd, mapping = aes(long, lat), fill = "orange", color = "darkred", alpha = 0.75, size = 2, shape = 21, stroke = 1) +
+p <- ggplot2::ggplot() + 
+  ggplot2::geom_sf(data = ga_counties, colour = "white") +
+  #ggplot2::geom_sf(data = rhc_geo, size = 3) +
+  ggplot2::geom_point(rhc_crd, 
+                      mapping = ggplot2::aes(long, lat), 
+                      fill = "orange", 
+                      color = "darkred", 
+                      alpha = 0.75, 
+                      size = 2, 
+                      shape = 21, 
+                      stroke = 1) +
   # geom_label_repel(rhc_crd, 
   #                 mapping = aes(long, lat, label = organization),
   #                 force_pull = 0,
@@ -92,9 +137,9 @@ p <- ggplot(ga_counties) +
   #                 min.segment.length = 0,
   #                 nudge_x = 2.5,
   #                 nudge_y = 0.5) +
-  theme_void()
+  ggplot2::theme_void()
 
-p + lims_bbox(ga_counties)
+p + ggsflabel::lims_bbox(ga_counties)
 ```
 
 
