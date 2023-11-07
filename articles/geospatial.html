@@ -127,30 +127,64 @@ Bruce</h4>
 
     
     
+<div class="section level2">
+<h2 id="load-packages">Load Packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jessecambon.github.io/tidygeocoder/" class="external-link">tidygeocoder</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="co">#library(ggsflabel)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yutannihilation.github.io/ggsflabel/" class="external-link">ggsflabel</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a></span><span class="op">)</span></span>
-<span><span class="co">#library(gghighlight)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yutannihilation.github.io/gghighlight/" class="external-link">gghighlight</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris" class="external-link">tigris</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="retrieve-npis-of-all-rhcs-in-georgia">Retrieve NPIs of all RHCs in Georgia<a class="anchor" aria-label="anchor" href="#retrieve-npis-of-all-rhcs-in-georgia"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Retrieve NPIs of all RHCs in Georgia</span></span>
-<span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty_code <span class="op">=</span> <span class="st">"00-17"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty_code <span class="op">=</span> <span class="st">"00-17"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Separate &amp; row-bind distinct LOCATION &amp; PRACTICE Addresses</span></span>
-<span><span class="va">stack</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, </span>
-<span>                <span class="va">purpose</span>, <span class="va">address</span>, <span class="va">city</span>, <span class="va">state</span>, <span class="va">zip</span><span class="op">)</span>,</span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, </span>
+<span><span class="va">rhcs</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 197 × 47</span></span></span>
+<span><span class="co">#&gt;    npi        entity_type  enum_date  cert_date  last_update status gender </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1992710610 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1497760243 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1497760243 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1497760243 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1497760243 Organization 2006-07-30 2021-04-28 2021-04-28  A      Unknown</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 187 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 40 more variables: organization &lt;chr&gt;, org_part &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;ord&gt;, zip &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone &lt;chr&gt;, fax &lt;chr&gt;, ao_first &lt;chr&gt;, ao_last &lt;chr&gt;, ao_title &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ao_phone &lt;chr&gt;, tx_code &lt;chr&gt;, tx_primary &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_desc &lt;chr&gt;, id_code &lt;chr&gt;, id_desc &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, on_type &lt;chr&gt;, on_code &lt;chr&gt;, …</span></span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="stack-distinct-location-practice-addresses">Stack Distinct <code>LOCATION</code> &amp; <code>PRACTICE</code>
+Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-practice-addresses"></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stack</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span>, <span class="va">organization</span>, </span>
+<span>                <span class="va">on_org_name</span>, <span class="va">org_parent</span>, </span>
+<span>                <span class="va">purpose</span>, <span class="va">address</span>, </span>
+<span>                <span class="va">city</span>, <span class="va">state</span>, <span class="va">zip</span><span class="op">)</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span>, <span class="va">organization</span>, </span>
+<span>                <span class="va">on_org_name</span>, <span class="va">org_parent</span>, </span>
 <span>                purpose <span class="op">=</span> <span class="va">pr_purpose</span>, </span>
 <span>                address <span class="op">=</span> <span class="va">pr_address</span>, </span>
 <span>                city <span class="op">=</span> <span class="va">pr_city</span>, </span>
@@ -159,242 +193,159 @@ Bruce</h4>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="fu">zipcodeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zipcodeR/man/normalize_zip.html" class="external-link">normalize_zip</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">purpose</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Prepare for geocoding</span></span>
-<span><span class="va">clean</span> <span class="op">&lt;-</span> <span class="va">stack</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">stack</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 99 × 9</span></span></span>
+<span><span class="co">#&gt;    npi     organization on_org_name org_parent purpose address city  state zip  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 199271… TMC HARALSO… PRIMARY CA… <span style="color: #BB0000;">NA</span>         PRACTI… 204 AL… BREM… GA    30110</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 149776… TMC TALLAPO… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 25 W L… TALL… GA    30176</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 128570… HIAWASSEE F… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 56 HOS… HIAW… GA    30546</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 198263… TMC WEST CA… WEST CARRO… <span style="color: #BB0000;">NA</span>         PRACTI… 1125 E… BOWD… GA    30108</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 182101… BACON COUNT… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 204 E … ALMA  GA    31510</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 175033… BOWDON- MT.… <span style="color: #BB0000;">NA</span>          BOWDON MT… PRACTI… 41 WEL… WHIT… GA    30185</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 136647… HOSPITAL AU… THE CAMILL… <span style="color: #BB0000;">NA</span>         PRACTI… 25 PER… CAMI… GA    31730</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 189186… THE MEDICAL… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 109 CO… ELBE… GA    30635</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 157868… UNION COUNT… BLUE MOUNT… <span style="color: #BB0000;">NA</span>         PRACTI… 178 A … BLAI… GA    30512</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 157868… UNION COUNT… UNION GENE… <span style="color: #BB0000;">NA</span>         PRACTI… 178 A … BLAI… GA    30512</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 89 more rows</span></span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="prepare-addresses-for-geocoding">Prepare Addresses for Geocoding<a class="anchor" aria-label="anchor" href="#prepare-addresses-for-geocoding"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clean</span> <span class="op">&lt;-</span> <span class="va">stack</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="co">#dplyr::mutate(address = campfin::normal_address(address)) |&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, <span class="va">address</span><span class="op">:</span><span class="va">state</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">address</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">clean</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 92 × 7</span></span></span>
+<span><span class="co">#&gt;    npi        organization          on_org_name org_parent purpose address zip  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 TMC HARALSON FAMILY … PRIMARY CA… <span style="color: #BB0000;">NA</span>         PRACTI… 204 AL… 30110</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760243 TMC TALLAPOOSA FAMIL… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 25 W L… 30176</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706879 HIAWASSEE FAMILY PRA… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 56 HOS… 30546</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631321 TMC WEST CARROLL FAM… WEST CARRO… <span style="color: #BB0000;">NA</span>         PRACTI… 1125 E… 30108</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017831 BACON COUNTY HEALTH … <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 204 E … 31510</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339511 BOWDON- MT. ZION PRI… <span style="color: #BB0000;">NA</span>          BOWDON MT… PRACTI… 41 WEL… 30185</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472003 HOSPITAL AUTHORITY O… THE CAMILL… <span style="color: #BB0000;">NA</span>         PRACTI… 25 PER… 31730</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863569 THE MEDICAL CENTER O… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 109 CO… 30635</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578682696 UNION COUNTY HOSPITA… BLUE MOUNT… <span style="color: #BB0000;">NA</span>         PRACTI… 178 A … 30512</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922211515 HOSPITAL AUTHORITY O… MEDICAL GR… <span style="color: #BB0000;">NA</span>         PRACTI… 259 US… 31730</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 82 more rows</span></span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="send-to-tidygeocoder">Send to <code>{tidygeocoder}</code><a class="anchor" aria-label="anchor" href="#send-to-tidygeocoder"></a>
+</h2>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rhc_crd</span> <span class="op">&lt;-</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">clean</span>, address <span class="op">=</span> <span class="va">address</span>, method <span class="op">=</span> <span class="st">"mapbox"</span>, full_results <span class="op">=</span> <span class="cn">TRUE</span>, unique_only <span class="op">=</span> <span class="cn">FALSE</span>, return_input <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, <span class="va">purpose</span>, <span class="va">address</span>, <span class="va">place_name</span>, <span class="va">lat</span>, <span class="va">long</span><span class="op">)</span></span>
+<span><span class="va">rhc_crd</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 92 × 9</span></span></span>
+<span><span class="co">#&gt;    npi      organization on_org_name org_parent purpose address place_name   lat</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710… TMC HARALSO… PRIMARY CA… <span style="color: #BB0000;">NA</span>         PRACTI… 204 AL… 204 Allen…  33.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760… TMC TALLAPO… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 25 W L… 25 W Lyon…  33.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706… HIAWASSEE F… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 56 HOS… 56 Hospit…  34.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631… TMC WEST CA… WEST CARRO… <span style="color: #BB0000;">NA</span>         PRACTI… 1125 E… 1125 E Hi…  33.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017… BACON COUNT… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 204 E … 204 East …  31.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339… BOWDON- MT.… <span style="color: #BB0000;">NA</span>          BOWDON MT… PRACTI… 41 WEL… 41 Wellin…  33.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472… HOSPITAL AU… THE CAMILL… <span style="color: #BB0000;">NA</span>         PRACTI… 25 PER… 25 Perry …  31.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863… THE MEDICAL… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 109 CO… 109 Colle…  34.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578682… UNION COUNT… BLUE MOUNT… <span style="color: #BB0000;">NA</span>         PRACTI… 178 A … 178 Hospi…  34.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922211… HOSPITAL AU… MEDICAL GR… <span style="color: #BB0000;">NA</span>         PRACTI… 259 US… 259 US Ro…  31.2</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 82 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: long &lt;dbl&gt;</span></span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="convert-to-sf-object">Convert to <code>{sf}</code> object<a class="anchor" aria-label="anchor" href="#convert-to-sf-object"></a>
+</h2>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Use ESRI:102118 (NAD 1927 Georgia Statewide Albers: https://epsg.io/102118)</span></span>
+<span><span class="va">ga_crs</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="st">"ESRI:102118"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Geocode with {tidygeocoder}</span></span>
-<span><span class="va">rhc_crd</span> <span class="op">&lt;-</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">clean</span>, </span>
-<span>                                 address <span class="op">=</span> <span class="va">address</span>, </span>
-<span>                                 method <span class="op">=</span> <span class="st">"mapbox"</span>, </span>
-<span>                                 full_results <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                                 unique_only <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>                                 return_input <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization</span>, <span class="va">on_org_name</span>, <span class="va">org_parent</span>, <span class="va">purpose</span>, <span class="va">address</span>, <span class="va">place_name</span>, <span class="va">lat</span>, <span class="va">long</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span><span class="st">"GA"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |                                                                      |   1%
-  |                                                                            
-  |=                                                                     |   1%
-  |                                                                            
-  |==                                                                    |   2%
-  |                                                                            
-  |==                                                                    |   3%
-  |                                                                            
-  |===                                                                   |   4%
-  |                                                                            
-  |====                                                                  |   5%
-  |                                                                            
-  |====                                                                  |   6%
-  |                                                                            
-  |=====                                                                 |   7%
-  |                                                                            
-  |======                                                                |   8%
-  |                                                                            
-  |======                                                                |   9%
-  |                                                                            
-  |=======                                                               |  10%
-  |                                                                            
-  |========                                                              |  11%
-  |                                                                            
-  |=========                                                             |  12%
-  |                                                                            
-  |=========                                                             |  13%
-  |                                                                            
-  |==========                                                            |  14%
-  |                                                                            
-  |==========                                                            |  15%
-  |                                                                            
-  |===========                                                           |  16%
-  |                                                                            
-  |============                                                          |  17%
-  |                                                                            
-  |=============                                                         |  18%
-  |                                                                            
-  |=============                                                         |  19%
-  |                                                                            
-  |==============                                                        |  20%
-  |                                                                            
-  |===============                                                       |  21%
-  |                                                                            
-  |===============                                                       |  22%
-  |                                                                            
-  |================                                                      |  23%
-  |                                                                            
-  |================                                                      |  24%
-  |                                                                            
-  |=================                                                     |  25%
-  |                                                                            
-  |==================                                                    |  26%
-  |                                                                            
-  |===================                                                   |  27%
-  |                                                                            
-  |===================                                                   |  28%
-  |                                                                            
-  |====================                                                  |  29%
-  |                                                                            
-  |=====================                                                 |  30%
-  |                                                                            
-  |======================                                                |  31%
-  |                                                                            
-  |======================                                                |  32%
-  |                                                                            
-  |=======================                                               |  33%
-  |                                                                            
-  |========================                                              |  34%
-  |                                                                            
-  |=========================                                             |  35%
-  |                                                                            
-  |=========================                                             |  36%
-  |                                                                            
-  |==========================                                            |  37%
-  |                                                                            
-  |==========================                                            |  38%
-  |                                                                            
-  |===========================                                           |  39%
-  |                                                                            
-  |============================                                          |  39%
-  |                                                                            
-  |============================                                          |  40%
-  |                                                                            
-  |=============================                                         |  41%
-  |                                                                            
-  |=============================                                         |  42%
-  |                                                                            
-  |==============================                                        |  43%
-  |                                                                            
-  |===============================                                       |  44%
-  |                                                                            
-  |===============================                                       |  45%
-  |                                                                            
-  |================================                                      |  45%
-  |                                                                            
-  |================================                                      |  46%
-  |                                                                            
-  |=================================                                     |  47%
-  |                                                                            
-  |==================================                                    |  48%
-  |                                                                            
-  |==================================                                    |  49%
-  |                                                                            
-  |===================================                                   |  50%
-  |                                                                            
-  |===================================                                   |  51%
-  |                                                                            
-  |====================================                                  |  51%
-  |                                                                            
-  |=====================================                                 |  52%
-  |                                                                            
-  |=====================================                                 |  54%
-  |                                                                            
-  |======================================                                |  55%
-  |                                                                            
-  |=======================================                               |  56%
-  |                                                                            
-  |========================================                              |  57%
-  |                                                                            
-  |========================================                              |  58%
-  |                                                                            
-  |=========================================                             |  58%
-  |                                                                            
-  |=========================================                             |  59%
-  |                                                                            
-  |==========================================                            |  60%
-  |                                                                            
-  |===========================================                           |  61%
-  |                                                                            
-  |===========================================                           |  62%
-  |                                                                            
-  |============================================                          |  63%
-  |                                                                            
-  |=============================================                         |  64%
-  |                                                                            
-  |==============================================                        |  65%
-  |                                                                            
-  |==============================================                        |  66%
-  |                                                                            
-  |===============================================                       |  67%
-  |                                                                            
-  |===============================================                       |  68%
-  |                                                                            
-  |================================================                      |  69%
-  |                                                                            
-  |=================================================                     |  69%
-  |                                                                            
-  |=================================================                     |  70%
-  |                                                                            
-  |==================================================                    |  71%
-  |                                                                            
-  |===================================================                   |  72%
-  |                                                                            
-  |===================================================                   |  73%
-  |                                                                            
-  |====================================================                  |  74%
-  |                                                                            
-  |=====================================================                 |  75%
-  |                                                                            
-  |=====================================================                 |  76%
-  |                                                                            
-  |======================================================                |  77%
-  |                                                                            
-  |=======================================================               |  78%
-  |                                                                            
-  |=======================================================               |  79%
-  |                                                                            
-  |========================================================              |  80%
-  |                                                                            
-  |=========================================================             |  81%
-  |                                                                            
-  |==========================================================            |  82%
-  |                                                                            
-  |==========================================================            |  83%
-  |                                                                            
-  |===========================================================           |  84%
-  |                                                                            
-  |===========================================================           |  85%
-  |                                                                            
-  |============================================================          |  85%
-  |                                                                            
-  |============================================================          |  86%
-  |                                                                            
-  |=============================================================         |  87%
-  |                                                                            
-  |==============================================================        |  89%
-  |                                                                            
-  |===============================================================       |  90%
-  |                                                                            
-  |===============================================================       |  91%
-  |                                                                            
-  |================================================================      |  91%
-  |                                                                            
-  |================================================================      |  92%
-  |                                                                            
-  |=================================================================     |  93%
-  |                                                                            
-  |==================================================================    |  94%
-  |                                                                            
-  |==================================================================    |  95%
-  |                                                                            
-  |===================================================================   |  96%
-  |                                                                            
-  |====================================================================  |  97%
-  |                                                                            
-  |====================================================================  |  98%
-  |                                                                            
-  |===================================================================== |  99%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">rhc_crd</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"orange"</span>, color <span class="op">=</span> <span class="st">"darkred"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span>, size <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">21</span>, stroke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">rhc_geo</span> <span class="op">&lt;-</span> <span class="va">rhc_crd</span> <span class="op">|&gt;</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"long"</span>, <span class="st">"lat"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="va">ga_crs</span><span class="op">)</span></span>
+<span><span class="va">rhc_geo</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Simple feature collection with 92 features and 7 fields</span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -85.50429 ymin: 30.34689 xmax: -81.10211 ymax: 34.97125</span></span>
+<span><span class="co">#&gt; Projected CRS: NAD_1927_Georgia_Statewide_Albers</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 92 × 8</span></span></span>
+<span><span class="co">#&gt;    npi        organization     on_org_name org_parent purpose address place_name</span></span>
+<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 TMC HARALSON FA… PRIMARY CA… <span style="color: #BB0000;">NA</span>         PRACTI… 204 AL… 204 Allen…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760243 TMC TALLAPOOSA … <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 25 W L… 25 W Lyon…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706879 HIAWASSEE FAMIL… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 56 HOS… 56 Hospit…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631321 TMC WEST CARROL… WEST CARRO… <span style="color: #BB0000;">NA</span>         PRACTI… 1125 E… 1125 E Hi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017831 BACON COUNTY HE… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 204 E … 204 East …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339511 BOWDON- MT. ZIO… <span style="color: #BB0000;">NA</span>          BOWDON MT… PRACTI… 41 WEL… 41 Wellin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472003 HOSPITAL AUTHOR… THE CAMILL… <span style="color: #BB0000;">NA</span>         PRACTI… 25 PER… 25 Perry …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863569 THE MEDICAL CEN… <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>         PRACTI… 109 CO… 109 Colle…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578682696 UNION COUNTY HO… BLUE MOUNT… <span style="color: #BB0000;">NA</span>         PRACTI… 178 A … 178 Hospi…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922211515 HOSPITAL AUTHOR… MEDICAL GR… <span style="color: #BB0000;">NA</span>         PRACTI… 259 US… 259 US Ro…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 82 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geometry &lt;POINT [US_survey_foot]&gt;</span></span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="retrieve-georgia-counties-shapefile-from-tigris">Retrieve Georgia counties shapefile from <code>{tigris}</code><a class="anchor" aria-label="anchor" href="#retrieve-georgia-counties-shapefile-from-tigris"></a>
+</h2>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, </span>
+<span>                                year <span class="op">=</span> <span class="fl">2022</span>, </span>
+<span>                                progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#|&gt;  </span></span>
+<span>  <span class="co">#sf::st_transform(ga_crs)</span></span>
+<span><span class="va">ga_counties</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Simple feature collection with 159 features and 17 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -85.60516 ymin: 30.35576 xmax: -80.78296 ymax: 35.0013</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  NAD83</span></span>
+<span><span class="co">#&gt; First 10 features:</span></span>
+<span><span class="co">#&gt;     STATEFP COUNTYFP COUNTYNS GEOID     NAME        NAMELSAD LSAD CLASSFP MTFCC</span></span>
+<span><span class="co">#&gt; 16       13      189 00348794 13189 McDuffie McDuffie County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 53       13      025 00351605 13025 Brantley Brantley County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 54       13      171 00326713 13171    Lamar    Lamar County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 83       13      115 00353665 13115    Floyd    Floyd County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 101      13      273 00352238 13273  Terrell  Terrell County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 102      13      063 01672399 13063  Clayton  Clayton County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 105      13      073 00348865 13073 Columbia Columbia County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 126      13      193 00346957 13193    Macon    Macon County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 146      13      049 00357747 13049 Charlton Charlton County   06      H1 G4020</span></span>
+<span><span class="co">#&gt; 147      13      233 00343585 13233     Polk     Polk County   06      H1 G4020</span></span>
+<span><span class="co">#&gt;     CSAFP CBSAFP METDIVFP FUNCSTAT      ALAND   AWATER    INTPTLAT     INTPTLON</span></span>
+<span><span class="co">#&gt; 16   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  666591525 23112523 +33.4806126 -082.4795333</span></span>
+<span><span class="co">#&gt; 53   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A 1147972258 10291563 +31.1973339 -081.9829779</span></span>
+<span><span class="co">#&gt; 54   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  475264405  6044329 +33.0744405 -084.1466893</span></span>
+<span><span class="co">#&gt; 83   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A 1320431515 22387093 +34.2636901 -085.2136849</span></span>
+<span><span class="co">#&gt; 101  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  869695791  4951325 +31.7771909 -084.4394464</span></span>
+<span><span class="co">#&gt; 102  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  367145192  6928044 +33.5516027 -084.4128678</span></span>
+<span><span class="co">#&gt; 105  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  751598754 45345677 +33.5520746 -082.2496077</span></span>
+<span><span class="co">#&gt; 126  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A 1037709945 13841916 +32.3626859 -084.0512306</span></span>
+<span><span class="co">#&gt; 146  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A 2020415648  5963237 +30.7799036 -082.1396442</span></span>
+<span><span class="co">#&gt; 147  &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;        A  803775591  4664760 +33.9960153 -085.1883384</span></span>
+<span><span class="co">#&gt;                           geometry</span></span>
+<span><span class="co">#&gt; 16  MULTIPOLYGON (((-82.6497 33...</span></span>
+<span><span class="co">#&gt; 53  MULTIPOLYGON (((-81.91301 3...</span></span>
+<span><span class="co">#&gt; 54  MULTIPOLYGON (((-84.2484 33...</span></span>
+<span><span class="co">#&gt; 83  MULTIPOLYGON (((-85.02322 3...</span></span>
+<span><span class="co">#&gt; 101 MULTIPOLYGON (((-84.3052 31...</span></span>
+<span><span class="co">#&gt; 102 MULTIPOLYGON (((-84.45843 3...</span></span>
+<span><span class="co">#&gt; 105 MULTIPOLYGON (((-82.44285 3...</span></span>
+<span><span class="co">#&gt; 126 MULTIPOLYGON (((-83.83685 3...</span></span>
+<span><span class="co">#&gt; 146 MULTIPOLYGON (((-82.42036 3...</span></span>
+<span><span class="co">#&gt; 147 MULTIPOLYGON (((-85.16059 3...</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ga_counties</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co">#ggplot2::geom_sf(data = rhc_geo, size = 3) +</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">rhc_crd</span>, </span>
+<span>                      mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, </span>
+<span>                      fill <span class="op">=</span> <span class="st">"orange"</span>, </span>
+<span>                      color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
+<span>                      alpha <span class="op">=</span> <span class="fl">0.75</span>, </span>
+<span>                      size <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>                      shape <span class="op">=</span> <span class="fl">21</span>, </span>
+<span>                      stroke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># geom_label_repel(rhc_crd, </span></span>
 <span>  <span class="co">#                 mapping = aes(long, lat, label = organization),</span></span>
 <span>  <span class="co">#                 force_pull = 0,</span></span>
@@ -406,11 +357,11 @@ Bruce</h4>
 <span>  <span class="co">#                 min.segment.length = 0,</span></span>
 <span>  <span class="co">#                 nudge_x = 2.5,</span></span>
 <span>  <span class="co">#                 nudge_y = 0.5) +</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p</span> <span class="op">+</span> <span class="fu">lims_bbox</span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in lims_bbox(ga_counties): could not find function "lims_bbox"</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu">ggsflabel</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/ggsflabel/reference/lims_bbox.html" class="external-link">lims_bbox</a></span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span></span></code></pre></div>
+<p><img src="geospatial_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ----------------------------------------------</span></span>
 <span><span class="co"># `{zipcodeR}`: Retrieve Counties from Zip codes </span></span>
 <span><span class="va">zip_db</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="va">zip_code_db</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -500,6 +451,7 @@ Bruce</h4>
 <span>             <span class="co"># ggplot2::aes(geometry = geometry, label = tx_desc)) +</span></span>
 <span>  <span class="co"># ggplot2::coord_sf(crs = count_crs) +</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
