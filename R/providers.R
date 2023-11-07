@@ -107,7 +107,7 @@ providers <- function(npi = NULL,
   if (tidy)  {
     results <- cols_pros(tidyup(results)) |>
       dplyr::mutate(gender = fct_gen(gender),
-                    state_cd = fct_stabb(state_cd))
+                    state = fct_stabb(state))
 
   if (na.rm) results <- narm(results)
   }

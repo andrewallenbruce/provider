@@ -213,7 +213,7 @@ conditions <- function(year,
                     demographic = fct_demo(demographic),
                     subdemo     = fct_subdemo(subdemo))
 
-  if (set == "multiple") yr <- dplyr::mutate(results, mcc = fct_mcc(mcc))
+  if (set == "multiple") results <- dplyr::mutate(results, mcc = fct_mcc(mcc))
   if (na.rm) results <- narm(results)
     }
   return(results)
