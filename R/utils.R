@@ -370,16 +370,11 @@ build_url <- function(fn, args = NULL) {
                            "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
                            "bet" ~ "Restructured BETOS Classification System")
 
-  if (fn %in% c("tax") && is.null(args)) { # nolint
-
-    url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                  cms_update(api)$distro[1],
-                  "/data?keyword=")
-
-  }
+  if (fn %in% "tax" && is.null(args)) {
+    url <- paste0("https://data.cms.gov/data-api/v1/dataset/", cms_update(api)$distro[1], "/data?keyword=")
+    }
 
   if (!is.null(args)) {
-
     json <- dplyr::case_match(fn,
                               c("end", "tax") ~ "/data?",
                               .default = "/data.json?")

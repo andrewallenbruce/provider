@@ -285,4 +285,5 @@ check_enid <- function(x,
         "x" = "{.val {x}} begins with {.val {first}}."), call = call)
     }
   }
+  return(as.character(x))
 }

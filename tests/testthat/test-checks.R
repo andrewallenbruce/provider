@@ -22,13 +22,13 @@ test_that("check_pac() works", {
 })
 
 test_that("check_enid() works", {
-  expect_equal(check_enid("I20031110000070"), NULL)
+  expect_equal(check_enid("I20031110000070"), "I20031110000070")
   expect_snapshot(check_enid(0123456789123456), error = TRUE)
   expect_snapshot(check_enid("I123456789123456"), error = TRUE)
   expect_snapshot(check_enid("012345678912345"), error = TRUE)
   expect_snapshot(check_enid("L20031110000070"), error = TRUE)
-  expect_equal(check_enid("O20031110000070", type = "org"), NULL)
+  expect_equal(check_enid("O20031110000070", type = "org"), "O20031110000070")
   expect_snapshot(check_enid("I20031110000070", type = "org"), error = TRUE)
-  expect_equal(check_enid("I20031110000070", type = "ind"), NULL)
+  expect_equal(check_enid("I20031110000070", type = "ind"), "I20031110000070")
   expect_snapshot(check_enid("O20031110000070", type = "ind"), error = TRUE)
 })
