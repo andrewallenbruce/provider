@@ -43,13 +43,13 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: Profiling Providers
+      - text: Profiling
         href: articles/linking-providers.html
-      - text: Comparing Providers
+      - text: Comparing
         href: articles/partb-stats.html
-      - text: Mapping Providers
+      - text: Mapping
         href: articles/geospatial.html
-      - text: Linking Providers
+      - text: Linking
         href: articles/networks.html
       - text: Quality Payment Program
         href: articles/qpp.html

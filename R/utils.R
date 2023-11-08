@@ -159,6 +159,42 @@ df2chr <- function(df) {
         dplyr::where(is.numeric), as.character))
 }
 
+#' Add county name, FIPs, and geometry to data frame with zip codes
+#' @param df data frame
+#' @param zcol column containing zip codes
+#' @examplesIf interactive()
+#' nppes(npi = 1962026229) |>
+#' add_counties(zip)
+#'
+#' @autoglobal
+#' @export
+#' @keywords internal
+add_counties <- function(df, zcol) {
+
+  # normalize zip to 5 digits
+  df <- dplyr::mutate(df, "{{ zcol }}" := zipcodeR::normalize_zip({{ zcol }}))
+
+  zdb <- dplyr::tibble(zipcodeR::zip_code_db) |>
+    dplyr::select(zip = zipcode, city = major_city, county, state, lat, lng) |>
+    dplyr::mutate(county = stringr::str_remove(county, " County"),
+                  city = stringr::str_to_upper(city),
+                  state = NULL)
+
+  df <- dplyr::inner_join(df, zdb, by = dplyr::join_by(city, zip))
+
+  # Retrieve county FIPS codes
+  df <- dplyr::mutate(df, fips = purrr::map2_chr(df$state, df$county, fipio::as_fips))
+
+  # Retrieve geometries based on county FIPS
+  df <- dplyr::mutate(df, geometry = purrr::map(df$fips, fipio::fips_geometry)) |>
+    tidyr::unnest(geometry)
+
+  # Create `{sf}` <MULTIPOLYGON> object
+  df <- sf::st_as_sf(df)
+
+  return(df)
+}
+
 #' Tidy a Data Frame
 #' @param df data frame
 #' @param dt cols to convert to date

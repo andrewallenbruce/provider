@@ -164,17 +164,13 @@ geo
 ## Retrieve Georgia state & counties shapefile from `{tigris}`
 
 ```{r}
-ga_state <- tigris::states(year = 2022, 
-                           progress_bar = FALSE) |> 
-  dplyr::filter(STUSPS == "GA")
+ga_state <- tigris::states(year = 2022, progress_bar = FALSE) |> dplyr::filter(STUSPS == "GA")
 ga_state
 ```
 
 
 ```{r}
-ga_counties <- tigris::counties(state = "GA", 
-                                year = 2022, 
-                                progress_bar = FALSE)  
+ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)  
 ga_counties
 ```
 
