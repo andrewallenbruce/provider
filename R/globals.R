@@ -5,7 +5,6 @@ utils::globalVariables(c(
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
-  "state.abb", # <fct_stabb>
   "y", # <betos>
   "rbcs_major_ind", # <betos>
   "hcpcs", # <rbcs_util>
@@ -258,6 +257,7 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
+  "state.abb", # <fct_stabb>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>

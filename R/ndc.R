@@ -83,6 +83,8 @@ ndc_lookup <- function(ndc) {
     purrr::map(\(x) rxnorm(ndc = x)) |>
     purrr::list_rbind()
 
+  if (vctrs::vec_is_empty(med)) return(rx)
+
   rx |>
     dplyr::full_join(med, by = "ndc") |>
     dplyr::arrange(ndc)

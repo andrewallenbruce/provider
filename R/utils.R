@@ -113,19 +113,6 @@ pos_char <- function(x) {
       .default = NULL)
 }
 
-#' @param x vector
-#' @autoglobal
-#' @noRd
-entype_char <- function(x) {
-
-  dplyr::case_match(
-    x,
-    c("NPI-1", "I") ~ "Individual",
-    c("NPI-2", "O") ~ "Organization",
-    .default = x
-  )
-}
-
 #' Pivot data frame to long format for easy printing
 #' @param df data frame
 #' @param cols columns to pivot long, default is [dplyr::everything()]
@@ -136,15 +123,6 @@ display_long <- function(df, cols = dplyr::everything()) {
 
   df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
         tidyr::pivot_longer({{ cols }})
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_gen <- function(x) {
-  factor(x,
-         levels = c("M", "F", "9"),
-         labels = c("Male", "Female", "Unknown"))
 }
 
 #' Convert data.frame cols to character

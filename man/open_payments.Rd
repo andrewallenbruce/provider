@@ -2,7 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Provider Financial Relationships with Drug & Medical Device Companies}
+\title{Relationships with Drug & Medical Device Companies}
 \usage{
 open_payments(
   year,
@@ -142,11 +142,11 @@ the “general” payment type, not research or ownership. The categories are:
 \item Charitable contributions:
 \itemize{
 \item Compensation for services other than consulting
-\item Compensation for serving as faculty or speaker for:
+\item Compensation for serving as faculty or speaker for an/a:
 \itemize{
-\item An accredited or certified continuing education program (2013 - 2020)
-\item An unaccredited and non-certified continuing education program (2013 - 2020)
-\item A medical education program (2021 - current)
+\item Accredited/certified continuing education program (2013 - 2020)
+\item Unaccredited/non-certified continuing education program (2013 - 2020)
+\item Medical education program (2021 - current)
 }
 }
 \item Consulting fees

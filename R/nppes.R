@@ -196,7 +196,8 @@ nppes <- function(npi = NULL,
 
       results <- tidyup(results, dtype = 'ymd', yn = c('sole_prop', 'org_part'), cred = 'credential')
 
-      if (!rlang::has_name(results, "gender")) results$gender <- "9"
+      if (!rlang::has_name(results, "gender"))    results$gender <- "9"
+      if (rlang::has_name(results, "tx_primary")) results$tx_primary <- as.logical(results$tx_primary)
 
       results <- dplyr::mutate(results,
                       purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
@@ -321,13 +322,4 @@ cols_nppes <- function(df, step = c(1, 2)) {
 
   }
   df |> dplyr::select(dplyr::any_of(cols))
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_enum <- function(x) {
-  factor(x,
-         levels = c("NPI-1", "NPI-2"),
-         labels = c("Individual", "Organization"))
 }

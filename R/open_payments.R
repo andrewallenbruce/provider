@@ -1,4 +1,4 @@
-#' Provider Financial Relationships with Drug & Medical Device Companies
+#' Relationships with Drug & Medical Device Companies
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -51,10 +51,10 @@
 #' + Acquisitions (2021 - current)
 #' + Charitable contributions:
 #'   + Compensation for services other than consulting
-#'   + Compensation for serving as faculty or speaker for:
-#'      + An accredited or certified continuing education program (2013 - 2020)
-#'      + An unaccredited and non-certified continuing education program (2013 - 2020)
-#'      + A medical education program (2021 - current)
+#'   + Compensation for serving as faculty or speaker for an/a:
+#'      + Accredited/certified continuing education program (2013 - 2020)
+#'      + Unaccredited/non-certified continuing education program (2013 - 2020)
+#'      + Medical education program (2021 - current)
 #' + Consulting fees
 #' + Current or prospective ownership or investment interest (prior to 2023)
 #' + Debt Forgiveness (2021 - current)
@@ -140,6 +140,7 @@
 #'
 #' # Parallelized
 #' open_payments_(npi = 1043218118)
+#'
 #' @autoglobal
 #' @export
 open_payments <- function(year,
@@ -170,7 +171,7 @@ open_payments <- function(year,
   zip <- zip %nn% as.character(zip)
 
   if (!is.null(covered_type)) {
-    rlang::arg_match(covered_type, c("Physician",
+    covered_type <- rlang::arg_match(covered_type, c("Physician",
                                      "Non-Physician Practitioner",
                                      "Teaching Hospital"))
     covered_type <- paste0("Covered Recipient ", covered_type)
@@ -241,7 +242,7 @@ open_payments <- function(year,
                       dtype = 'mdy',
                       # yn = c(yncols),
                       dbl = 'dollars',
-                      int = 'program_year') |>
+                      int = c('program_year', 'pay_count')) |> #nolint
       dplyr::mutate(change_type                            = changed_logical(change_type),
                     covered_recipient_type                 = covered_recipient(covered_recipient_type),
                     nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>
@@ -371,7 +372,7 @@ cols_open <- function(df) {
 
   cols <- c('program_year',
             'npi'                   = 'covered_recipient_npi',
-            'changed'               = 'change_type',
+            # 'changed'               = 'change_type',
             'covered_recipient'     = 'covered_recipient_type',
             'teaching_ccn'          = 'teaching_hospital_ccn',
             'teaching_id'           = 'teaching_hospital_id',

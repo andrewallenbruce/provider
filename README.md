@@ -38,6 +38,7 @@ pak::pak("andrewallenbruce/provider")
 ``` r
 library(provider)
 library(dplyr)
+library(tidyr)
 ```
 
 ### `affiliations()`
@@ -59,7 +60,12 @@ affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
 ### `beneficiaries()`
 
 ``` r
-beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", county = "Lowndes") |> glimpse()
+beneficiaries(year = 2022, 
+              period = "Year", 
+              level = "County", 
+              state = "GA", 
+              county = "Lowndes") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -121,7 +127,13 @@ clinicians(npi = 1932365699) |> glimpse()
 ### `conditions()`
 
 ``` r
-conditions(year = 2018, set = "multiple", level = "national", age = "all", demo = "all", mcc = "6+") |> glimpse()
+conditions(year = 2018, 
+           set = "multiple", 
+           level = "national", 
+           age = "all", 
+           demo = "all", 
+           mcc = "6+") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -132,12 +144,37 @@ conditions(year = 2018, set = "multiple", level = "national", age = "all", demo 
     #> $ age                 <fct> All
     #> $ demographic         <fct> All
     #> $ subdemo             <fct> All
-    #> $ mcc                 <chr> "6+"
+    #> $ mcc                 <ord> 6+
     #> $ prevalence          <dbl> 0.177
     #> $ tot_pymt_percap     <dbl> 32475.26
     #> $ tot_std_pymt_percap <dbl> 30118.69
     #> $ hosp_readmit_rate   <dbl> 0.227
     #> $ er_visits_per_1k    <dbl> 1922.216
+
+``` r
+conditions(year = 2018, 
+           set = "specific", 
+           level = "national", 
+           age = "all", 
+           demo = "all",
+           condition = "Arthritis") |> 
+  glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 12
+    #> $ year                <int> 2018
+    #> $ level               <ord> National
+    #> $ sublevel            <ord> National
+    #> $ age                 <fct> All
+    #> $ demographic         <fct> All
+    #> $ subdemo             <fct> All
+    #> $ condition           <chr> "Arthritis"
+    #> $ prevalence          <dbl> 0.3347
+    #> $ tot_pymt_percap     <dbl> 16890.05
+    #> $ tot_std_pymt_percap <dbl> 16006.14
+    #> $ hosp_readmit_rate   <dbl> 0.1843
+    #> $ er_visits_per_1k    <dbl> 1013.535
 
 ### `hospitals()`
 
@@ -235,7 +272,7 @@ nppes(npi = 1720098791) |> glimpse()
     #> $ ao_title      <chr> "CFO"
     #> $ ao_phone      <chr> "2294683862"
     #> $ tx_code       <chr> "282N00000X"
-    #> $ tx_primary    <chr> "TRUE"
+    #> $ tx_primary    <lgl> TRUE
     #> $ tx_desc       <chr> "General Acute Care Hospital"
     #> $ tx_license    <chr> "86112S"
     #> $ tx_state      <chr> "GA"
@@ -247,14 +284,17 @@ nppes(npi = 1720098791) |> glimpse()
 ### `open_payments()`
 
 ``` r
-open_payments(year = 2021, npi = 1023630738) |> glimpse()
+open_payments(year = 2021, npi = 1023630738) |> 
+  mutate(info = ndc_lookup(ndc), ndc = NULL) |> 
+  unnest(info) |> glimpse()
 ```
 
+    #> ✖ No results for NDC = 78206-145-01
+
     #> Rows: 1
-    #> Columns: 38
+    #> Columns: 46
     #> $ program_year        <int> 2021
     #> $ npi                 <chr> "1023630738"
-    #> $ changed             <lgl> FALSE
     #> $ covered_recipient   <chr> "Non-Physician"
     #> $ first               <chr> "ALYSIA"
     #> $ middle              <chr> "MOTA"
@@ -290,6 +330,15 @@ open_payments(year = 2021, npi = 1023630738) |> glimpse()
     #> $ type                <chr> "Drug"
     #> $ category            <chr> "CONTRACEPTIVES"
     #> $ ndc                 <chr> "78206-145-01"
+    #> $ rxcui               <chr> "1111011"
+    #> $ atc                 <chr> "G03AC"
+    #> $ status              <chr> "ACTIVE"
+    #> $ brand_name          <chr> "NEXPLANON"
+    #> $ drug_name           <chr> "etonogestrel 68 MG Drug Implant [Nexplanon]"
+    #> $ atc_first           <chr> "genito urinary system and sex hormones"
+    #> $ atc_second          <chr> "sex hormones and modulators of the genital system"
+    #> $ atc_third           <chr> "hormonal contraceptives for systemic use"
+    #> $ atc_fourth          <chr> "progestogens"
 
 ### `opt_out()`
 
@@ -315,7 +364,8 @@ opt_out(npi = 1043522824) |> glimpse()
 ### `order_refer()`
 
 ``` r
-order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
+order_refer(npi = 1043522824, 
+            pivot = FALSE) |> glimpse()
 ```
 
     #> Rows: 1
@@ -331,7 +381,10 @@ order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
 ### `outpatient()`
 
 ``` r
-outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimpse()
+outpatient(year = 2021, 
+           state = "GA", 
+           city = "Valdosta", 
+           apc = "5072") |> glimpse()
 ```
 
     #> Rows: 1
@@ -361,15 +414,21 @@ outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimps
 providers(npi = 1720098791) |> glimpse()
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `state_cd = fct_stabb(state_cd)`.
-    #> Caused by error in `factor()`:
-    #> ! object 'state_cd' not found
+    #> Rows: 2
+    #> Columns: 7
+    #> $ npi                   <chr> "1720098791", "1720098791"
+    #> $ pac                   <chr> "7618950643", "7618950643"
+    #> $ enid                  <chr> "O20040610001257", "O20230310002325"
+    #> $ specialty_code        <chr> "12-70", "00-24"
+    #> $ specialty_description <chr> "PART B SUPPLIER - CLINIC/GROUP PRACTICE", "PART…
+    #> $ state                 <ord> GA, GA
+    #> $ organization          <chr> "IRWIN COUNTY HOSPITAL", "IRWIN COUNTY HOSPITAL"
 
 ### `quality_payment()`
 
 ``` r
-quality_payment(year = 2021, npi = 1932365699) |> glimpse()
+quality_payment(year = 2021, 
+                npi = 1932365699) |> glimpse()
 ```
 
     #> Rows: 1
@@ -395,6 +454,41 @@ quality_payment(year = 2021, npi = 1932365699) |> glimpse()
     #> $ statuses        <list> [<tbl_df[9 x 2]>]
     #> $ measures        <list> [<tbl_df[6 x 3]>]
 
+``` r
+q <- quality_payment(year = 2021, npi = 1932365699)
+
+dplyr::select(q, year, statuses) |> 
+  tidyr::unnest(statuses) 
+```
+
+    #> # A tibble: 9 × 3
+    #>    year category                 status
+    #>   <int> <chr>                    <lgl> 
+    #> 1  2021 engaged                  TRUE  
+    #> 2  2021 small_practitioner       TRUE  
+    #> 3  2021 rural                    TRUE  
+    #> 4  2021 hpsa                     TRUE  
+    #> 5  2021 extreme_hardship         TRUE  
+    #> 6  2021 extreme_hardship_quality TRUE  
+    #> 7  2021 extreme_hardship_pi      TRUE  
+    #> 8  2021 extreme_hardship_ia      TRUE  
+    #> 9  2021 extreme_hardship_cost    TRUE
+
+``` r
+dplyr::select(q, year, measures) |> 
+  tidyr::unnest(measures)
+```
+
+    #> # A tibble: 6 × 4
+    #>    year measure id    score
+    #>   <int> <chr>   <chr> <dbl>
+    #> 1  2021 quality 141       3
+    #> 2  2021 quality 014       3
+    #> 3  2021 quality 110       3
+    #> 4  2021 quality 47        3
+    #> 5  2021 quality 1         0
+    #> 6  2021 quality 117       0
+
 ### `reassignments()`
 
 ``` r
@@ -419,7 +513,9 @@ reassignments(npi = 1932365699) |> glimpse()
 ### `utilization()`
 
 ``` r
-utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()
+utilization(year = 2021, 
+            npi = 1932365699, 
+            type = "provider") |> glimpse()
 ```
 
     #> Rows: 1
@@ -444,6 +540,144 @@ utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()
     #> $ performance  <list> [<tbl_df[1 x 11]>]
     #> $ demographics <list> [<tbl_df[1 x 15]>]
     #> $ conditions   <list> [<tbl_df[1 x 17]>]
+
+``` r
+p <- utilization(year = 2021, npi = 1932365699, type = "provider")
+
+p$performance |> glimpse()
+```
+
+    #> List of 1
+    #>  $ : tibble [1 × 11] (S3: tbl_df/tbl/data.frame)
+    #>   ..$ tot_hcpcs      : int 19
+    #>   ..$ tot_benes      : int 279
+    #>   ..$ tot_srvcs      : int 475
+    #>   ..$ tot_charges    : num 57099
+    #>   ..$ tot_allowed    : num 48345
+    #>   ..$ tot_payment    : num 31966
+    #>   ..$ tot_std_pymt   : num 31317
+    #>   ..$ .copay_deduct  : num 16379
+    #>   ..$ .srvcs_per_bene: num 1.7
+    #>   ..$ .pymt_per_bene : num 115
+    #>   ..$ .pymt_per_srvc : num 67.3
+
+``` r
+p$demographics |> glimpse()
+```
+
+    #> List of 1
+    #>  $ : tibble [1 × 15] (S3: tbl_df/tbl/data.frame)
+    #>   ..$ bene_age_avg   : int 72
+    #>   ..$ bene_age_lt65  : int 16
+    #>   ..$ bene_age_65_74 : int 181
+    #>   ..$ bene_age_75_84 : int 63
+    #>   ..$ bene_age_gt84  : int 19
+    #>   ..$ bene_gen_female: int 157
+    #>   ..$ bene_gen_male  : int 122
+    #>   ..$ bene_race_wht  : int 245
+    #>   ..$ bene_race_blk  : int 0
+    #>   ..$ bene_race_api  : int 0
+    #>   ..$ bene_race_hisp : int NA
+    #>   ..$ bene_race_nat  : int NA
+    #>   ..$ bene_race_oth  : int 15
+    #>   ..$ bene_dual      : int 40
+    #>   ..$ bene_ndual     : int 239
+
+``` r
+p$conditions |> glimpse()
+```
+
+    #> List of 1
+    #>  $ : tibble [1 × 17] (S3: tbl_df/tbl/data.frame)
+    #>   ..$ hcc_risk_avg: num 0.772
+    #>   ..$ cc_af       : num 0.08
+    #>   ..$ cc_alz      : num 0.07
+    #>   ..$ cc_asth     : num 0.06
+    #>   ..$ cc_canc     : num 0.09
+    #>   ..$ cc_chf      : num 0.06
+    #>   ..$ cc_ckd      : num 0.15
+    #>   ..$ cc_copd     : num 0.06
+    #>   ..$ cc_dep      : num 0.19
+    #>   ..$ cc_diab     : num 0.16
+    #>   ..$ cc_hplip    : num 0.32
+    #>   ..$ cc_hpten    : num 0.33
+    #>   ..$ cc_ihd      : num 0.18
+    #>   ..$ cc_opo      : num 0.13
+    #>   ..$ cc_raoa     : num 0.3
+    #>   ..$ cc_sz       : num NA
+    #>   ..$ cc_strk     : num NA
+
+``` r
+utilization(year = 2021, 
+            npi = 1932365699,
+            hcpcs = "99214",
+            type = "service") |> glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 32
+    #> $ year         <int> 2021
+    #> $ npi          <chr> "1932365699"
+    #> $ level        <chr> "Provider"
+    #> $ first        <chr> "Stefan"
+    #> $ middle       <chr> "M"
+    #> $ last         <chr> "Smith"
+    #> $ gender       <chr> "M"
+    #> $ credential   <chr> "O.D."
+    #> $ specialty    <chr> "Optometry"
+    #> $ address      <chr> "724 St. Louis Road"
+    #> $ city         <chr> "Collinsville"
+    #> $ state        <chr> "IL"
+    #> $ zip          <chr> "62234"
+    #> $ fips         <chr> "17"
+    #> $ ruca         <chr> "1"
+    #> $ country      <chr> "US"
+    #> $ par          <lgl> TRUE
+    #> $ hcpcs        <chr> "99214"
+    #> $ hcpcs_desc   <chr> "Established patient outpatient visit, total time 30-39 m…
+    #> $ category     <chr> "E&M"
+    #> $ subcategory  <chr> "Office/Outpatient Services"
+    #> $ family       <chr> "Office E&M - Established"
+    #> $ procedure    <fct> Non-procedure
+    #> $ drug         <lgl> FALSE
+    #> $ pos          <chr> "O"
+    #> $ tot_benes    <int> 24
+    #> $ tot_srvcs    <int> 27
+    #> $ tot_day      <int> 27
+    #> $ avg_charge   <dbl> 134.7407
+    #> $ avg_allowed  <dbl> 132.7281
+    #> $ avg_payment  <dbl> 102.7159
+    #> $ avg_std_pymt <dbl> 99.46074
+
+``` r
+utilization(year = 2021, 
+            hcpcs = "99205", 
+            level = "National",
+            pos = "F",
+            type = "geography") |> glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 19
+    #> $ year         <int> 2021
+    #> $ level        <chr> "National"
+    #> $ state        <chr> "National"
+    #> $ hcpcs        <chr> "99205"
+    #> $ hcpcs_desc   <chr> "New patient outpatient visit, total time 60-74 minutes"
+    #> $ category     <chr> "E&M"
+    #> $ subcategory  <chr> "Office/Outpatient Services"
+    #> $ family       <chr> "Office E&M - New"
+    #> $ procedure    <fct> Non-procedure
+    #> $ drug         <lgl> FALSE
+    #> $ pos          <chr> "F"
+    #> $ tot_provs    <int> 65502
+    #> $ tot_benes    <int> 574426
+    #> $ tot_srvcs    <int> 653339
+    #> $ tot_day      <int> 653311
+    #> $ avg_charge   <dbl> 493.5003
+    #> $ avg_allowed  <dbl> 186.2096
+    #> $ avg_payment  <dbl> 143.4408
+    #> $ avg_std_pymt <dbl> 139.6115
 
 ------------------------------------------------------------------------
 

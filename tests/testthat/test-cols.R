@@ -244,7 +244,7 @@ test_that("cols_open() works", {
   x <- dplyr::tibble(
     program_year                                                      = 1,
     covered_recipient_npi                                             = 1,
-    change_type                                                       = 1,
+    # change_type                                                       = 1,
     covered_recipient_type                                            = 1,
     teaching_hospital_ccn                                             = 1,
     teaching_hospital_id                                              = 1,
@@ -334,7 +334,7 @@ test_that("cols_open() works", {
   y <- dplyr::tibble(
     program_year          = 1,
     npi                   = 1,
-    changed               = 1,
+    # changed               = 1,
     covered_recipient     = 1,
     teaching_ccn          = 1,
     teaching_id           = 1,

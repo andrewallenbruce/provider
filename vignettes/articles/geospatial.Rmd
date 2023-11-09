@@ -147,14 +147,14 @@ sc
 ## Send to `{tidygeocoder}`
 
 ```{r}
-geo <- tidygeocoder::geocode(stack, 
-                             address = address, 
-                             method = "mapbox", 
-                             full_results = TRUE, 
-                             unique_only = FALSE, 
-                             return_input = TRUE) |> 
+rhc_geo <- dplyr::select(stack, npi:zip) |> 
+  tidygeocoder::geocode(address      = address, 
+                        method       = "mapbox", 
+                        full_results = TRUE, 
+                        unique_only  = FALSE, 
+                        return_input = TRUE) |> 
   dplyr::select(npi, zip, place_name, lat, long)
-geo
+rhc_geo
 ```
 
 
@@ -180,7 +180,7 @@ p <- ggplot2::ggplot() +
   #ggplot2::geom_sf(data = ga_state, colour = "darkred") +
   ggplot2::geom_sf(data = ga_counties, fill = "darkgreen", colour = "white", alpha = 0.5) +
   ggplot2::geom_sf(data = sc, size = 3, fill = "white") +
-  ggplot2::geom_point(geo, 
+  ggplot2::geom_point(rhc_geo, 
                       mapping = ggplot2::aes(long, lat), 
                       fill = "orange", 
                       color = "darkred", 

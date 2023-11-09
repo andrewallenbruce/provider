@@ -127,10 +127,10 @@ reassignments <- function(npi = NULL,
   if (tidy)  {
     results <- tidyup(results,
                       int = 'ass',
-                      up = 'name') |>
+                      up  = 'name') |>
       dplyr::mutate(individual_state_code = fct_stabb(individual_state_code),
-                    group_state_code = fct_stabb(group_state_code),
-                    record_type = fct_record(record_type)) |>
+                    group_state_code      = fct_stabb(group_state_code),
+                    record_type           = fct_record(record_type)) |>
       cols_reas()
 
   if (na.rm) results <- narm(results)

@@ -46,6 +46,7 @@ pak::pak("andrewallenbruce/provider")
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(provider)
 library(dplyr)
+library(tidyr)
 ```
 
 
@@ -59,7 +60,12 @@ affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
 ### `beneficiaries()`
 
 ```{r}
-beneficiaries(year = 2022, period = "Year", level = "County", state = "GA", county = "Lowndes") |> glimpse()
+beneficiaries(year = 2022, 
+              period = "Year", 
+              level = "County", 
+              state = "GA", 
+              county = "Lowndes") |> 
+  glimpse()
 ```
 
 ### `clinicians()`
@@ -71,9 +77,25 @@ clinicians(npi = 1932365699) |> glimpse()
 ### `conditions()`
 
 ```{r}
-conditions(year = 2018, set = "multiple", level = "national", age = "all", demo = "all", mcc = "6+") |> glimpse()
+conditions(year = 2018, 
+           set = "multiple", 
+           level = "national", 
+           age = "all", 
+           demo = "all", 
+           mcc = "6+") |> 
+  glimpse()
 ```
 
+
+```{r}
+conditions(year = 2018, 
+           set = "specific", 
+           level = "national", 
+           age = "all", 
+           demo = "all",
+           condition = "Arthritis") |> 
+  glimpse()
+```
 
 ### `hospitals()`
 
@@ -98,7 +120,9 @@ nppes(npi = 1720098791) |> glimpse()
 ### `open_payments()`
 
 ```{r}
-open_payments(year = 2021, npi = 1023630738) |> glimpse()
+open_payments(year = 2021, npi = 1023630738) |> 
+  mutate(info = ndc_lookup(ndc), ndc = NULL) |> 
+  unnest(info) |> glimpse()
 ```
 
 
@@ -112,14 +136,18 @@ opt_out(npi = 1043522824) |> glimpse()
 ### `order_refer()`
 
 ```{r}
-order_refer(npi = 1043522824, pivot = FALSE) |> glimpse()
+order_refer(npi = 1043522824, 
+            pivot = FALSE) |> glimpse()
 ```
 
 
 ### `outpatient()`
 
 ```{r}
-outpatient(year = 2021, state = "GA", city = "Valdosta", apc = "5072") |> glimpse()
+outpatient(year = 2021, 
+           state = "GA", 
+           city = "Valdosta", 
+           apc = "5072") |> glimpse()
 ```
 
 
@@ -132,7 +160,22 @@ providers(npi = 1720098791) |> glimpse()
 ### `quality_payment()`
 
 ```{r}
-quality_payment(year = 2021, npi = 1932365699) |> glimpse()
+quality_payment(year = 2021, 
+                npi = 1932365699) |> glimpse()
+```
+
+
+```{r}
+q <- quality_payment(year = 2021, npi = 1932365699)
+
+dplyr::select(q, year, statuses) |> 
+  tidyr::unnest(statuses) 
+```
+
+
+```{r}
+dplyr::select(q, year, measures) |> 
+  tidyr::unnest(measures)
 ```
 
 ### `reassignments()`
@@ -145,10 +188,46 @@ reassignments(npi = 1932365699) |> glimpse()
 ### `utilization()`
 
 ```{r}
-utilization(year = 2021, npi = 1932365699, type = "provider") |> glimpse()
+utilization(year = 2021, 
+            npi = 1932365699, 
+            type = "provider") |> glimpse()
 ```
 
 
+
+```{r}
+p <- utilization(year = 2021, npi = 1932365699, type = "provider")
+
+p$performance |> glimpse()
+```
+
+
+```{r}
+p$demographics |> glimpse()
+```
+
+
+```{r}
+p$conditions |> glimpse()
+```
+
+
+
+```{r}
+utilization(year = 2021, 
+            npi = 1932365699,
+            hcpcs = "99214",
+            type = "service") |> glimpse()
+```
+
+
+```{r}
+utilization(year = 2021, 
+            hcpcs = "99205", 
+            level = "National",
+            pos = "F",
+            type = "geography") |> glimpse()
+```
 
 ------------------------------------------------------------------------------
 

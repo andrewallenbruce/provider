@@ -36,12 +36,6 @@ test_that("pos_char() works", {
   expect_equal(pos_char(x), y)
 })
 
-test_that("entype_char() works", {
-  x <- c("NPI-1", "I", "NPI-2", "O", "Group")
-  y <- c(rep("Individual", 2), rep("Organization", 2), "Group")
-  expect_equal(entype_char(x), y)
-})
-
 test_that("display_long() works", {
   x <- dplyr::tibble(x = "NPI", y = "1144544834", id = 1)
   y <- dplyr::tibble(name = c("x", "y", "id"), value = c("NPI", "1144544834", "1"))
