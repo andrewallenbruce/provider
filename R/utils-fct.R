@@ -66,4 +66,23 @@ fct_enum <- function(x) {
          labels = c("Individual", "Organization"))
 }
 
+#' Convert entity types to labelled factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_pos <- function(x) {
+  factor(x,
+         levels = c("F", "N"),
+         labels = c("Facility", "Non-facility"))
+}
 
+
+#' Convert genders to unordered factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_purp <- function(x) {
+  factor(x,
+         levels = c("PRACTICE", "MAILING", "LOCATION"),
+         labels = c("Practice", "Mailing", "Location"))
+}

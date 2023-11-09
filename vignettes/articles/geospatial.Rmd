@@ -70,21 +70,6 @@ rhcs
 ```
 
 
-## Retrieve Counties from Zip codes with `{zipcodeR}`
-
-```{r}
-zip_db <- dplyr::tibble(zipcodeR::zip_code_db) |> 
-  dplyr::filter(state == "GA") |> 
-  dplyr::select(zip = zipcode, 
-                city = major_city, 
-                county, 
-                state, 
-                lat, 
-                lng) |> 
-  dplyr::mutate(county = stringr::str_remove(county, " County"))
-zip_db
-```
-
 ## Stack Distinct `LOCATION` & `PRACTICE` Addresses
 
 ```{r}
@@ -115,32 +100,17 @@ stack <- dplyr::bind_rows(
                 city = pr_city, 
                 state = pr_state, 
                 zip = pr_zip)) |> 
-  dplyr::mutate(zip = zipcodeR::normalize_zip(zip)) |> 
   dplyr::filter(!is.na(purpose)) |> 
   tidyr::nest(specialty = tx_desc, 
               other_names = c(org_parent, 
                               on_type, 
                               on_org_name)) |> 
+  add_counties(zcol = zip) |> 
   tidyr::unite("address", 
                address:state, 
                remove = TRUE, 
-               sep = " ") |> 
-  dplyr::inner_join(zip_db) # Join RHCs to Counties
+               sep = " ")
 stack
-```
-
-
-
-```{r}
-# Create data frame of unique state/county pairs
-sc <- stack |> dplyr::distinct(state, county)
-# Retrieve county FIPS codes
-sc <- sc |> dplyr::mutate(fips = purrr::map2_chr(sc$state, sc$county, fipio::as_fips))
-# Retrieve geometries based on county FIPS
-sc <- sc |> dplyr::mutate(geometry = purrr::map(sc$fips, fipio::fips_geometry)) |> tidyr::unnest(geometry)
-# Create `{sf}` <MULTIPOLYGON> object
-sc <- sf::st_as_sf(sc)
-sc
 ```
 
 
@@ -158,16 +128,7 @@ rhc_geo
 ```
 
 
-
-## Convert to `{sf}` object
-
-## Retrieve Georgia state & counties shapefile from `{tigris}`
-
-```{r}
-ga_state <- tigris::states(year = 2022, progress_bar = FALSE) |> dplyr::filter(STUSPS == "GA")
-ga_state
-```
-
+## Retrieve Georgia counties shapefile from `{tigris}`
 
 ```{r}
 ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)  
@@ -175,14 +136,15 @@ ga_counties
 ```
 
 
+## `{ggplot}`
+
 ```{r}
 p <- ggplot2::ggplot() + 
-  #ggplot2::geom_sf(data = ga_state, colour = "darkred") +
-  ggplot2::geom_sf(data = ga_counties, fill = "darkgreen", colour = "white", alpha = 0.5) +
-  ggplot2::geom_sf(data = sc, size = 3, fill = "white") +
+  ggplot2::geom_sf(data = ga_counties, fill = "darkgreen", colour = "white", alpha = 0.25) +
+  #ggplot2::geom_sf(data = stack, size = 3, fill = "white") +
   ggplot2::geom_point(rhc_geo, 
                       mapping = ggplot2::aes(long, lat), 
-                      fill = "orange", 
+                      fill = "white", 
                       color = "darkred", 
                       alpha = 0.75, 
                       size = 1.5, 

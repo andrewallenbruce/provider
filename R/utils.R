@@ -89,8 +89,19 @@ abb2full <- function(abb,
                      arg = rlang::caller_arg(abb),
                      call = rlang::caller_env()) {
 
-  results <- dplyr::tibble(x = state.abb,
-                           y = state.name) |>
+  results <- dplyr::tibble(x = c(state.abb[1:8],
+                                 'DC',
+                                 state.abb[9:50],
+                                 'AS', 'GU', 'MP', 'PR', 'VI', 'UK'),
+                           y = c(state.name[1:8],
+                                 'District of Columbia',
+                                 state.name[9:50],
+                                 'American Samoa',
+                                 'Guam',
+                                 'Northern Mariana Islands',
+                                 'Puerto Rico',
+                                 'Virgin Islands',
+                                 'Unknown')) |>
     dplyr::filter(x == abb) |>
     dplyr::pull(y)
 

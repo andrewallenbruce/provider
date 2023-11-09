@@ -258,6 +258,7 @@ utils::globalVariables(c(
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
   "state.abb", # <fct_stabb>
+  "state.name", # <fct_stname>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>

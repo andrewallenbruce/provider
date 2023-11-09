@@ -194,17 +194,26 @@ nppes <- function(npi = NULL,
                                tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
 
-      results <- tidyup(results, dtype = 'ymd', yn = c('sole_prop', 'org_part'), cred = 'credential')
+      results <- tidyup(results,
+                        dtype = 'ymd',
+                        yn = c('sole_prop', 'org_part'),
+                        cred = 'credential')
 
-      if (!rlang::has_name(results, "gender"))    results$gender <- "9"
-      if (rlang::has_name(results, "tx_primary")) results$tx_primary <- as.logical(results$tx_primary)
+      if (!rlang::has_name(results, "gender")) results$gender <- "9"
 
       results <- dplyr::mutate(results,
-                      purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
-                      gender = fct_gen(gender),
+                      purpose     = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
+                      gender      = fct_gen(gender),
                       entity_type = fct_enum(entity_type),
-                      state = fct_stabb(state)) |>
+                      state       = fct_stabb(state)) |>
         cols_nppes(2)
+
+      if (rlang::has_name(results, "tx_primary")) results$tx_primary <- as.logical(results$tx_primary)
+      if (rlang::has_name(results, "tx_state"))   results$tx_state   <- fct_stabb(results$tx_state)
+      if (rlang::has_name(results, "id_state"))   results$id_state   <- fct_stabb(results$id_state)
+      if (rlang::has_name(results, "pr_state"))   results$pr_state   <- fct_stabb(results$pr_state)
+      if (rlang::has_name(results, "purpose"))    results$purpose    <- fct_purp(results$purpose)
+      if (rlang::has_name(results, "pr_purpose")) results$pr_purpose <- fct_purp(results$pr_purpose)
 
       if (na.rm) results <- narm(results)
     }
