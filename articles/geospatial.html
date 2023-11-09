@@ -119,7 +119,7 @@ Mix, and Performance</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2023-11-08</h4>
+            <h4 data-toc-skip class="date">2023-11-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/geospatial.Rmd" class="external-link"><code>vignettes/articles/geospatial.Rmd</code></a></small>
       <div class="d-none name"><code>geospatial.Rmd</code></div>
@@ -174,56 +174,27 @@ Bruce</h4>
 <span><span class="va">rhcs</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 197 × 17</span></span></span>
 <span><span class="co">#&gt;    npi      organization tx_desc org_part purpose org_parent on_type on_org_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710… TMC HARALSO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1992710… TMC HARALSO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1992710… TMC HARALSO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1992710… TMC HARALSO… Clinic… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1992710… TMC HARALSO… Clinic… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1992710… TMC HARALSO… Clinic… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1497760… TMC TALLAPO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1497760… TMC TALLAPO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1497760… TMC TALLAPO… Family… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1497760… TMC TALLAPO… Clinic… FALSE    PRACTI… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710… TMC HARALSO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1992710… TMC HARALSO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1992710… TMC HARALSO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1992710… TMC HARALSO… Clinic… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1992710… TMC HARALSO… Clinic… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1992710… TMC HARALSO… Clinic… FALSE    Practi… <span style="color: #BB0000;">NA</span>         Doing … PRIMARY CA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1497760… TMC TALLAPO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1497760… TMC TALLAPO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1497760… TMC TALLAPO… Family… FALSE    Practi… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1497760… TMC TALLAPO… Clinic… FALSE    Practi… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>         </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 187 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;ord&gt;, zip &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pr_purpose &lt;chr&gt;, pr_address &lt;chr&gt;, pr_city &lt;chr&gt;, pr_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pr_purpose &lt;fct&gt;, pr_address &lt;chr&gt;, pr_city &lt;chr&gt;, pr_state &lt;ord&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pr_zip &lt;chr&gt;</span></span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="retrieve-counties-from-zip-codes-with-zipcoder">Retrieve Counties from Zip codes with <code>{zipcodeR}</code><a class="anchor" aria-label="anchor" href="#retrieve-counties-from-zip-codes-with-zipcoder"></a>
-</h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">zip_db</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="fu">zipcodeR</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/zipcodeR/man/zip_code_db.html" class="external-link">zip_code_db</a></span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">state</span> <span class="op">==</span> <span class="st">"GA"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="va">zipcode</span>, </span>
-<span>                city <span class="op">=</span> <span class="va">major_city</span>, </span>
-<span>                <span class="va">county</span>, </span>
-<span>                <span class="va">state</span>, </span>
-<span>                <span class="va">lat</span>, </span>
-<span>                <span class="va">lng</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>county <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">county</span>, <span class="st">" County"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">zip_db</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 973 × 6</span></span></span>
-<span><span class="co">#&gt;    zip   city             county   state   lat   lng</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 30002 Avondale Estates DeKalb   GA     33.8 -<span style="color: #BB0000;">84.3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 30003 Norcross         Gwinnett GA     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 30004 Alpharetta       Fulton   GA     34.1 -<span style="color: #BB0000;">84.3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 30005 Alpharetta       Fulton   GA     34.1 -<span style="color: #BB0000;">84.2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 30006 Marietta         Cobb     GA     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 30007 Marietta         Cobb     GA     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 30008 Marietta         Cobb     GA     33.9 -<span style="color: #BB0000;">84.6</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 30009 Alpharetta       Fulton   GA     34.1 -<span style="color: #BB0000;">84.3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 30010 Norcross         Gwinnett GA     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 30011 Auburn           Barrow   GA     34.0 -<span style="color: #BB0000;">83.8</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 963 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="stack-distinct-location-practice-addresses">Stack Distinct <code>LOCATION</code> &amp; <code>PRACTICE</code>
 Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-practice-addresses"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stack</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, </span>
 <span>                <span class="va">npi</span>,</span>
@@ -251,402 +222,70 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <span>                city <span class="op">=</span> <span class="va">pr_city</span>, </span>
 <span>                state <span class="op">=</span> <span class="va">pr_state</span>, </span>
 <span>                zip <span class="op">=</span> <span class="va">pr_zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="fu">zipcodeR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zipcodeR/man/normalize_zip.html" class="external-link">normalize_zip</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">purpose</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="va">tx_desc</span>, </span>
 <span>              other_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">org_parent</span>, </span>
 <span>                              <span class="va">on_type</span>, </span>
 <span>                              <span class="va">on_org_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/add_counties.html">add_counties</a></span><span class="op">(</span>zcol <span class="op">=</span> <span class="va">zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, </span>
 <span>               <span class="va">address</span><span class="op">:</span><span class="va">state</span>, </span>
 <span>               remove <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">zip_db</span><span class="op">)</span> <span class="co"># Join RHCs to Counties</span></span>
+<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="va">stack</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 91 × 13</span></span></span>
-<span><span class="co">#&gt;    npi   organization org_part purpose address zip   specialty other_names city </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992… TMC HARALSO… FALSE    PRACTI… 204 AL… 30110 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Brem…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497… TMC TALLAPO… FALSE    PRACTI… 25 W L… 30176 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Tall…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285… HIAWASSEE F… FALSE    PRACTI… 56 HOS… 30546 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Hiaw…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982… TMC WEST CA… FALSE    PRACTI… 1125 E… 30108 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Bowd…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821… BACON COUNT… FALSE    PRACTI… 204 E … 31510 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Alma </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750… BOWDON- MT.… TRUE     PRACTI… 41 WEL… 30185 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Whit…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366… HOSPITAL AU… FALSE    PRACTI… 25 PER… 31730 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Cami…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891… THE MEDICAL… FALSE    PRACTI… 109 CO… 30635 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Elbe…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578… UNION COUNT… FALSE    PRACTI… 178 A … 30512 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Blai…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922… HOSPITAL AU… FALSE    PRACTI… 259 US… 31730 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>    Cami…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 81 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: county &lt;chr&gt;, state &lt;chr&gt;, lat &lt;dbl&gt;, lng &lt;dbl&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Create data frame of unique state/county pairs</span></span>
-<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="va">stack</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">county</span><span class="op">)</span></span>
-<span><span class="co"># Retrieve county FIPS codes</span></span>
-<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="va">sc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>fips <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_chr</a></span><span class="op">(</span><span class="va">sc</span><span class="op">$</span><span class="va">state</span>, <span class="va">sc</span><span class="op">$</span><span class="va">county</span>, <span class="fu">fipio</span><span class="fu">::</span><span class="va"><a href="https://fipio.justinsingh.me/reference/as_fips.html" class="external-link">as_fips</a></span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># Retrieve geometries based on county FIPS</span></span>
-<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="va">sc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>geometry <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">sc</span><span class="op">$</span><span class="va">fips</span>, <span class="fu">fipio</span><span class="fu">::</span><span class="va"><a href="https://fipio.justinsingh.me/reference/fips_geometry.html" class="external-link">fips_geometry</a></span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span></span>
-<span><span class="co"># Create `{sf}` &lt;MULTIPOLYGON&gt; object</span></span>
-<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sc</span><span class="op">)</span></span>
-<span><span class="va">sc</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Simple feature collection with 53 features and 3 fields</span></span>
+<pre><code><span><span class="co">#&gt; Simple feature collection with 90 features and 12 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -85.60516 ymin: 30.6758 xmax: -80.78296 ymax: 35.0013</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -85.60516 ymin: 30.10375 xmax: -80.78296 ymax: 35.0013</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 53 × 4</span></span></span>
-<span><span class="co">#&gt;    state county    fips                                                 geometry</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON [°]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> GA    Haralson  13143 (((-85.33823 33.65312, -85.28974 33.65209, -85.26559 3…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> GA    Towns     13281 (((-83.65219 34.82299, -83.65645 34.8255, -83.65909 34…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> GA    Carroll   13045 (((-85.01536 33.42551, -85.01121 33.43104, -84.99719 3…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> GA    Bacon     13005 (((-82.41725 31.41712, -82.40179 31.41728, -82.40151 3…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> GA    Mitchell  13205 (((-84.00363 31.07729, -84.0032 31.10235, -84.01385 31…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> GA    Elbert    13105 (((-82.59463 34.0138, -82.59575 34.01749, -82.59389 34…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> GA    Union     13291 (((-83.78035 34.7929, -83.7806 34.81839, -83.78482 34.…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> GA    Worth     13321 (((-83.64938 31.56798, -83.65408 31.57106, -83.65928 3…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> GA    Jefferson 13163 (((-82.43196 33.27483, -82.4709 33.25012, -82.49985 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> GA    Hancock   13141 (((-83.0522 33.08068, -83.04075 33.08086, -83.03377 33…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 43 more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 90 × 13</span></span></span>
+<span><span class="co">#&gt;    npi        organization  org_part purpose address zip   specialty other_names</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 TMC HARALSON… FALSE    Practi… 204 AL… 30110 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760243 TMC TALLAPOO… FALSE    Practi… 25 W L… 30176 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706879 HIAWASSEE FA… FALSE    Practi… 56 HOS… 30546 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631321 TMC WEST CAR… FALSE    Practi… 1125 E… 30108 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017831 BACON COUNTY… FALSE    Practi… 204 E … 31510 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339511 BOWDON- MT. … TRUE     Practi… 41 WEL… 30185 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472003 HOSPITAL AUT… FALSE    Practi… 25 PER… 31730 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863569 THE MEDICAL … FALSE    Practi… 109 CO… 30635 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578682696 UNION COUNTY… FALSE    Practi… 178 A … 30512 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922211515 HOSPITAL AUT… FALSE    Practi… 259 US… 31730 <span style="color: #949494;">&lt;tibble&gt;</span>  <span style="color: #949494;">&lt;tibble&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 80 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: county &lt;chr&gt;, lat &lt;dbl&gt;, lng &lt;dbl&gt;, fips &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="send-to-tidygeocoder">Send to <code>{tidygeocoder}</code><a class="anchor" aria-label="anchor" href="#send-to-tidygeocoder"></a>
 </h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">stack</span>, </span>
-<span>                             address <span class="op">=</span> <span class="va">address</span>, </span>
-<span>                             method <span class="op">=</span> <span class="st">"mapbox"</span>, </span>
-<span>                             full_results <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                             unique_only <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>                             return_input <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">zip</span>, <span class="va">place_name</span>, <span class="va">lat</span>, <span class="va">long</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `lat` doesn't exist.</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">geo</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; function (address = NULL, street = NULL, city = NULL, county = NULL, </span></span>
-<span><span class="co">#&gt;     state = NULL, postalcode = NULL, country = NULL, method = "osm", </span></span>
-<span><span class="co">#&gt;     cascade_order = c("census", "osm"), lat = "lat", long = "long", </span></span>
-<span><span class="co">#&gt;     limit = 1, full_results = FALSE, mode = "", unique_only = FALSE, </span></span>
-<span><span class="co">#&gt;     return_addresses = TRUE, min_time = NULL, progress_bar = show_progress_bar(), </span></span>
-<span><span class="co">#&gt;     quiet = getOption("tidygeocoder.quiet", FALSE), api_url = NULL, </span></span>
-<span><span class="co">#&gt;     timeout = 20, flatten = TRUE, batch_limit = NULL, batch_limit_error = TRUE, </span></span>
-<span><span class="co">#&gt;     verbose = getOption("tidygeocoder.verbose", FALSE), no_query = FALSE, </span></span>
-<span><span class="co">#&gt;     custom_query = list(), api_options = list(), return_type = "locations", </span></span>
-<span><span class="co">#&gt;     iq_region = "us", geocodio_v = 1.6, param_error = TRUE, mapbox_permanent = FALSE, </span></span>
-<span><span class="co">#&gt;     here_request_id = NULL, mapquest_open = FALSE) </span></span>
-<span><span class="co">#&gt; {</span></span>
-<span><span class="co">#&gt;     lat &lt;- rm_quote(deparse(substitute(lat)))</span></span>
-<span><span class="co">#&gt;     long &lt;- rm_quote(deparse(substitute(long)))</span></span>
-<span><span class="co">#&gt;     api_options &lt;- initialize_init(api_options)</span></span>
-<span><span class="co">#&gt;     if (api_options[["init"]] == TRUE) {</span></span>
-<span><span class="co">#&gt;         if (!missing("return_type") &amp;&amp; !is.null(return_type)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(return_type)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["census_return_type"]] &lt;- return_type</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (!missing("iq_region") &amp;&amp; !is.null(iq_region)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(iq_region)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["iq_region"]] &lt;- iq_region</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (!missing("geocodio_v") &amp;&amp; !is.null(geocodio_v)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(geocodio_v)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["geocodio_v"]] &lt;- geocodio_v</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (!missing("mapbox_permanent") &amp;&amp; !is.null(mapbox_permanent)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(mapbox_permanent)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["mapbox_permanent"]] &lt;- mapbox_permanent</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (!missing("mapquest_open") &amp;&amp; !is.null(mapquest_open)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(mapquest_open)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["mapquest_open"]] &lt;- mapquest_open</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (!missing("here_request_id") &amp;&amp; !is.null(here_request_id)) {</span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(here_request_id)", </span></span>
-<span><span class="co">#&gt;                 with = "geo(api_options)")</span></span>
-<span><span class="co">#&gt;             api_options[["here_request_id"]] &lt;- here_request_id</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     api_options &lt;- apply_api_options_defaults(api_options)</span></span>
-<span><span class="co">#&gt;     all_args &lt;- as.list(environment())</span></span>
-<span><span class="co">#&gt;     if (method != "cascade") {</span></span>
-<span><span class="co">#&gt;         all_args$api_options[["init"]] &lt;- FALSE</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     else {</span></span>
-<span><span class="co">#&gt;         lifecycle::deprecate_warn("1.0.4", "geo(method = \"cannot be \\\"cascade\\\"\")", </span></span>
-<span><span class="co">#&gt;             "geocode_combine()")</span></span>
-<span><span class="co">#&gt;         all_args$return_type &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$iq_region &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$geocodio_v &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$mapbox_permanent &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$mapquest_open &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$here_request_id &lt;- NULL</span></span>
-<span><span class="co">#&gt;         all_args$api_options$cascade_flag &lt;- TRUE</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     check_api_options(api_options, "geo")</span></span>
-<span><span class="co">#&gt;     if (is.null(address) &amp;&amp; is.null(street) &amp;&amp; is.null(city) &amp;&amp; </span></span>
-<span><span class="co">#&gt;         is.null(county) &amp;&amp; is.null(state) &amp;&amp; is.null(postalcode) &amp;&amp; </span></span>
-<span><span class="co">#&gt;         is.null(country)) {</span></span>
-<span><span class="co">#&gt;         stop("No address data provided", call. = FALSE)</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(address, "address")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(street, "street")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(city, "city")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(county, "county")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(state, "state")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(postalcode, "postalcode")</span></span>
-<span><span class="co">#&gt;     check_address_argument_datatype(country, "country")</span></span>
-<span><span class="co">#&gt;     if (!(api_options[["census_return_type"]] %in% c("geographies", </span></span>
-<span><span class="co">#&gt;         "locations"))) {</span></span>
-<span><span class="co">#&gt;         stop("Invalid return_type argument. See ?geo", call. = FALSE)</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     stopifnot(is.logical(verbose), is.logical(no_query), is.logical(flatten), </span></span>
-<span><span class="co">#&gt;         is.null(param_error) || is.logical(param_error), is.logical(full_results), </span></span>
-<span><span class="co">#&gt;         is.logical(unique_only), is.logical(return_addresses), </span></span>
-<span><span class="co">#&gt;         is.null(batch_limit_error) || is.logical(batch_limit_error), </span></span>
-<span><span class="co">#&gt;         is.logical(progress_bar), is.logical(quiet), is.numeric(timeout), </span></span>
-<span><span class="co">#&gt;         timeout &gt;= 0, is.list(custom_query), is.logical(api_options[["mapbox_permanent"]]), </span></span>
-<span><span class="co">#&gt;         is.null(api_options[["here_request_id"]]) || is.character(api_options[["here_request_id"]]), </span></span>
-<span><span class="co">#&gt;         is.logical(api_options[["mapquest_open"]]), is.logical(api_options[["geocodio_hipaa"]]))</span></span>
-<span><span class="co">#&gt;     check_verbose_quiet(verbose, quiet, reverse = FALSE)</span></span>
-<span><span class="co">#&gt;     check_common_args("geo", mode, limit, batch_limit, min_time)</span></span>
-<span><span class="co">#&gt;     check_method(method, reverse = FALSE, mode, batch_func_map, </span></span>
-<span><span class="co">#&gt;         cascade_order = cascade_order)</span></span>
-<span><span class="co">#&gt;     if (!(api_options[["census_return_type"]] %in% c("geographies", </span></span>
-<span><span class="co">#&gt;         "locations"))) {</span></span>
-<span><span class="co">#&gt;         stop("Invalid census_return_type value. See ?geo", call. = FALSE)</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (api_options[["init"]] == TRUE) {</span></span>
-<span><span class="co">#&gt;         if (!missing("cascade_order")) </span></span>
-<span><span class="co">#&gt;             lifecycle::deprecate_warn("1.0.4", "geo(cascade_order)", </span></span>
-<span><span class="co">#&gt;                 "geocode_combine()")</span></span>
-<span><span class="co">#&gt;         if (is.null(api_options[["cascade_flag"]]) || api_options[["cascade_flag"]] != </span></span>
-<span><span class="co">#&gt;             TRUE) {</span></span>
-<span><span class="co">#&gt;             if (!missing("batch_limit_error")) </span></span>
-<span><span class="co">#&gt;                 lifecycle::deprecate_warn("1.0.4", "geo(batch_limit_error)")</span></span>
-<span><span class="co">#&gt;             if (!missing("param_error")) </span></span>
-<span><span class="co">#&gt;                 lifecycle::deprecate_warn("1.0.4", "geo(param_error)")</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (no_query == TRUE) </span></span>
-<span><span class="co">#&gt;         verbose &lt;- TRUE</span></span>
-<span><span class="co">#&gt;     start_time &lt;- Sys.time()</span></span>
-<span><span class="co">#&gt;     address_pack &lt;- package_addresses(address, street, city, </span></span>
-<span><span class="co">#&gt;         county, state, postalcode, country)</span></span>
-<span><span class="co">#&gt;     num_unique_addresses &lt;- nrow(address_pack$unique)</span></span>
-<span><span class="co">#&gt;     NA_value &lt;- get_na_value(lat, long, rows = num_unique_addresses)</span></span>
-<span><span class="co">#&gt;     if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;         message(paste0("\nNumber of Unique Addresses: ", num_unique_addresses))</span></span>
-<span><span class="co">#&gt;     if (num_unique_addresses == 1 &amp;&amp; all(is.na(address_pack$unique))) {</span></span>
-<span><span class="co">#&gt;         if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;             message(paste0("No non-blank non-NA addreses found. Returning NA results."))</span></span>
-<span><span class="co">#&gt;         return(unpackage_inputs(address_pack, NA_value, unique_only, </span></span>
-<span><span class="co">#&gt;             return_addresses))</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (method == "cascade") {</span></span>
-<span><span class="co">#&gt;         legal_parameters &lt;- unique(c(get_generic_parameters(cascade_order[1]), </span></span>
-<span><span class="co">#&gt;             get_generic_parameters(cascade_order[2])))</span></span>
-<span><span class="co">#&gt;         str_cascade_meth &lt;- paste0(" (\"", paste0(cascade_order, </span></span>
-<span><span class="co">#&gt;             collapse = "\", \""), "\")")</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     else {</span></span>
-<span><span class="co">#&gt;         legal_parameters &lt;- get_generic_parameters(method)</span></span>
-<span><span class="co">#&gt;         str_cascade_meth &lt;- ""</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     illegal_params &lt;- c()</span></span>
-<span><span class="co">#&gt;     for (param in colnames(address_pack$unique)) {</span></span>
-<span><span class="co">#&gt;         if (!(param %in% legal_parameters)) {</span></span>
-<span><span class="co">#&gt;             illegal_params &lt;- c(illegal_params, param)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (length(illegal_params) &gt; 0) {</span></span>
-<span><span class="co">#&gt;         param_message &lt;- paste0("The following parameter(s) are not supported for the \"", </span></span>
-<span><span class="co">#&gt;             method, "\"", str_cascade_meth, " method:\n\n", paste0(illegal_params, </span></span>
-<span><span class="co">#&gt;                 collapse = " "), "\n\nSee ?api_parameter_reference for more details.")</span></span>
-<span><span class="co">#&gt;         if (is.null(param_error) || param_error == TRUE) </span></span>
-<span><span class="co">#&gt;             stop(param_message, call. = FALSE)</span></span>
-<span><span class="co">#&gt;         else if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;             message(param_message)</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (method == "cascade") {</span></span>
-<span><span class="co">#&gt;         if (full_results == TRUE) </span></span>
-<span><span class="co">#&gt;             stop("full_results = TRUE cannot be used with the cascade method.", </span></span>
-<span><span class="co">#&gt;                 call. = FALSE)</span></span>
-<span><span class="co">#&gt;         if (is.null(limit) || limit != 1) </span></span>
-<span><span class="co">#&gt;             stop("limit argument must be 1 (default) to use the cascade method.", </span></span>
-<span><span class="co">#&gt;                 call. = FALSE)</span></span>
-<span><span class="co">#&gt;         return(do.call(cascade_geocoding, c(all_args[!names(all_args) %in% </span></span>
-<span><span class="co">#&gt;             c("method", "param_error", "batch_limit_error")], </span></span>
-<span><span class="co">#&gt;             list(batch_limit_error = FALSE, param_error = FALSE))))</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (method %in% pkg.globals$single_first_methods &amp;&amp; mode != </span></span>
-<span><span class="co">#&gt;         "batch") {</span></span>
-<span><span class="co">#&gt;         mode &lt;- "single"</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     single_addr_args &lt;- c(list(FUN = progress_geo), as.list(address_pack$unique), </span></span>
-<span><span class="co">#&gt;         list(MoreArgs = all_args[!names(all_args) %in% pkg.globals$address_arg_names], </span></span>
-<span><span class="co">#&gt;             USE.NAMES = FALSE, SIMPLIFY = FALSE))</span></span>
-<span><span class="co">#&gt;     if ((api_options[["init"]] == TRUE) &amp;&amp; (mode != "batch") &amp;&amp; </span></span>
-<span><span class="co">#&gt;         (!(method %in% names(batch_func_map)) || ((num_unique_addresses == </span></span>
-<span><span class="co">#&gt;             1) || (mode == "single")))) {</span></span>
-<span><span class="co">#&gt;         if (quiet == FALSE) {</span></span>
-<span><span class="co">#&gt;             query_start_message(method, num_unique_addresses, </span></span>
-<span><span class="co">#&gt;                 reverse = FALSE, batch = FALSE)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (progress_bar == TRUE) {</span></span>
-<span><span class="co">#&gt;             pb &lt;- create_progress_bar(num_unique_addresses)</span></span>
-<span><span class="co">#&gt;             single_addr_args$MoreArgs$pb &lt;- pb</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         list_coords &lt;- do.call(mapply, single_addr_args)</span></span>
-<span><span class="co">#&gt;         if (quiet == FALSE &amp;&amp; progress_bar == FALSE) {</span></span>
-<span><span class="co">#&gt;             query_complete_message(start_time)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         stacked_results &lt;- dplyr::bind_rows(list_coords)</span></span>
-<span><span class="co">#&gt;         return(unpackage_inputs(address_pack, stacked_results, </span></span>
-<span><span class="co">#&gt;             unique_only, FALSE))</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (api_options[["init"]] == TRUE) {</span></span>
-<span><span class="co">#&gt;         if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;             message("Executing batch geocoding...\n")</span></span>
-<span><span class="co">#&gt;         check_limit_for_batch(limit, return_addresses, reverse = FALSE)</span></span>
-<span><span class="co">#&gt;         if (is.null(batch_limit)) </span></span>
-<span><span class="co">#&gt;             batch_limit &lt;- get_batch_limit(method)</span></span>
-<span><span class="co">#&gt;         if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;             message(paste0("Batch limit: ", format(batch_limit, </span></span>
-<span><span class="co">#&gt;                 big.mark = ",")))</span></span>
-<span><span class="co">#&gt;         if (num_unique_addresses &gt; batch_limit) {</span></span>
-<span><span class="co">#&gt;             batch_limit_exceeded &lt;- TRUE</span></span>
-<span><span class="co">#&gt;             batch_limit_exceeded_message &lt;- paste0(format(num_unique_addresses, </span></span>
-<span><span class="co">#&gt;                 big.mark = ","), " unique addresses found which exceeds the batch limit of ", </span></span>
-<span><span class="co">#&gt;                 format(batch_limit, big.mark = ","), ".")</span></span>
-<span><span class="co">#&gt;             if (batch_limit_error == TRUE) </span></span>
-<span><span class="co">#&gt;                 stop(batch_limit_exceeded_message, call. = FALSE)</span></span>
-<span><span class="co">#&gt;             else {</span></span>
-<span><span class="co">#&gt;                 warning(paste0(batch_limit_exceeded_message, </span></span>
-<span><span class="co">#&gt;                   "\n", "Only geocoding the first ", format(batch_limit, </span></span>
-<span><span class="co">#&gt;                     big.mark = ","), " unique addresses. ", "All other addresses will have NA results."))</span></span>
-<span><span class="co">#&gt;                 batch_unique_addresses &lt;- address_pack$unique[1:batch_limit, </span></span>
-<span><span class="co">#&gt;                   ]</span></span>
-<span><span class="co">#&gt;             }</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         else {</span></span>
-<span><span class="co">#&gt;             batch_limit_exceeded &lt;- FALSE</span></span>
-<span><span class="co">#&gt;             batch_unique_addresses &lt;- address_pack$unique</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (method == "here") </span></span>
-<span><span class="co">#&gt;             check_here_return_input(api_options[["here_request_id"]], </span></span>
-<span><span class="co">#&gt;                 return_addresses, reverse = FALSE)</span></span>
-<span><span class="co">#&gt;         if (quiet == FALSE) {</span></span>
-<span><span class="co">#&gt;             query_start_message(method, min(batch_limit, num_unique_addresses), </span></span>
-<span><span class="co">#&gt;                 reverse = FALSE, batch = TRUE, display_time = FALSE)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (no_query == TRUE) </span></span>
-<span><span class="co">#&gt;             return(unpackage_inputs(address_pack, NA_value, unique_only, </span></span>
-<span><span class="co">#&gt;                 return_addresses))</span></span>
-<span><span class="co">#&gt;         batch_results &lt;- do.call(batch_func_map[[method]], c(list(batch_unique_addresses), </span></span>
-<span><span class="co">#&gt;             all_args[!names(all_args) %in% pkg.globals$address_arg_names]))</span></span>
-<span><span class="co">#&gt;         if (batch_limit_exceeded == TRUE) {</span></span>
-<span><span class="co">#&gt;             batch_filler &lt;- get_na_value(lat, long, rows = num_unique_addresses - </span></span>
-<span><span class="co">#&gt;                 batch_limit)</span></span>
-<span><span class="co">#&gt;             batch_results &lt;- dplyr::bind_rows(batch_results, </span></span>
-<span><span class="co">#&gt;                 batch_filler)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         if (quiet == FALSE) {</span></span>
-<span><span class="co">#&gt;             query_complete_message(start_time)</span></span>
-<span><span class="co">#&gt;         }</span></span>
-<span><span class="co">#&gt;         return(unpackage_inputs(address_pack, batch_results, </span></span>
-<span><span class="co">#&gt;             unique_only, return_addresses))</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     generic_query &lt;- list()</span></span>
-<span><span class="co">#&gt;     if (!is.null(address)) {</span></span>
-<span><span class="co">#&gt;         search &lt;- "onelineaddress"</span></span>
-<span><span class="co">#&gt;         generic_query[["address"]] &lt;- address_pack$unique$address</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     else {</span></span>
-<span><span class="co">#&gt;         search &lt;- "address"</span></span>
-<span><span class="co">#&gt;         if (!is.null(street)) </span></span>
-<span><span class="co">#&gt;             generic_query[["street"]] &lt;- address_pack$unique$street</span></span>
-<span><span class="co">#&gt;         if (!is.null(city)) </span></span>
-<span><span class="co">#&gt;             generic_query[["city"]] &lt;- address_pack$unique$city</span></span>
-<span><span class="co">#&gt;         if (!is.null(county)) </span></span>
-<span><span class="co">#&gt;             generic_query[["county"]] &lt;- address_pack$unique$county</span></span>
-<span><span class="co">#&gt;         if (!is.null(state)) </span></span>
-<span><span class="co">#&gt;             generic_query[["state"]] &lt;- address_pack$unique$state</span></span>
-<span><span class="co">#&gt;         if (!is.null(postalcode)) </span></span>
-<span><span class="co">#&gt;             generic_query[["postalcode"]] &lt;- address_pack$unique$postalcode</span></span>
-<span><span class="co">#&gt;         if (!is.null(country)) </span></span>
-<span><span class="co">#&gt;             generic_query[["country"]] &lt;- address_pack$unique$country</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     if (is.null(api_url)) {</span></span>
-<span><span class="co">#&gt;         api_url &lt;- get_api_url(method, reverse = FALSE, return_type = api_options[["census_return_type"]], </span></span>
-<span><span class="co">#&gt;             search = search, geocodio_v = api_options[["geocodio_v"]], </span></span>
-<span><span class="co">#&gt;             iq_region = api_options[["iq_region"]], mapbox_permanent = api_options[["mapbox_permanent"]], </span></span>
-<span><span class="co">#&gt;             mapquest_open = api_options[["mapquest_open"]], geocodio_hipaa = api_options[["geocodio_hipaa"]])</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     api_url &lt;- api_url_modification(method, api_url, generic_query, </span></span>
-<span><span class="co">#&gt;         custom_query, reverse = FALSE)</span></span>
-<span><span class="co">#&gt;     if (is.null(min_time)) </span></span>
-<span><span class="co">#&gt;         min_time &lt;- get_min_query_time(method)</span></span>
-<span><span class="co">#&gt;     generic_query &lt;- add_common_generic_parameters(generic_query, </span></span>
-<span><span class="co">#&gt;         method, no_query, limit)</span></span>
-<span><span class="co">#&gt;     api_query_parameters &lt;- get_api_query(method, generic_query, </span></span>
-<span><span class="co">#&gt;         custom_query)</span></span>
-<span><span class="co">#&gt;     if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;         display_query(api_url, api_query_parameters)</span></span>
-<span><span class="co">#&gt;     if (no_query == TRUE) </span></span>
-<span><span class="co">#&gt;         return(unpackage_inputs(address_pack, NA_value, unique_only, </span></span>
-<span><span class="co">#&gt;             return_addresses))</span></span>
-<span><span class="co">#&gt;     query_results &lt;- query_api(api_url, api_query_parameters, </span></span>
-<span><span class="co">#&gt;         method = method)</span></span>
-<span><span class="co">#&gt;     if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;         message(paste0("HTTP Status Code: ", as.character(query_results$status)))</span></span>
-<span><span class="co">#&gt;     if (query_results$status != 200) {</span></span>
-<span><span class="co">#&gt;         extract_errors_from_results(method, query_results$content, </span></span>
-<span><span class="co">#&gt;             verbose)</span></span>
-<span><span class="co">#&gt;         results &lt;- NA_value</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     else {</span></span>
-<span><span class="co">#&gt;         results &lt;- extract_results(method, jsonlite::fromJSON(query_results$content), </span></span>
-<span><span class="co">#&gt;             full_results, flatten, limit)</span></span>
-<span><span class="co">#&gt;         names(results)[1] &lt;- lat</span></span>
-<span><span class="co">#&gt;         names(results)[2] &lt;- long</span></span>
-<span><span class="co">#&gt;     }</span></span>
-<span><span class="co">#&gt;     pause_until(start_time, min_time, debug = verbose)</span></span>
-<span><span class="co">#&gt;     if (verbose == TRUE) </span></span>
-<span><span class="co">#&gt;         message("")</span></span>
-<span><span class="co">#&gt;     return(unpackage_inputs(address_pack, results, unique_only, </span></span>
-<span><span class="co">#&gt;         return_addresses))</span></span>
-<span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55c0152554a8&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: namespace:tidygeocoder&gt;</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rhc_geo</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">stack</span>, <span class="va">npi</span><span class="op">:</span><span class="va">zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span>address      <span class="op">=</span> <span class="va">address</span>, </span>
+<span>                        method       <span class="op">=</span> <span class="st">"mapbox"</span>, </span>
+<span>                        full_results <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                        unique_only  <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                        return_input <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">zip</span>, <span class="va">place_name</span>, <span class="va">lat</span>, <span class="va">long</span><span class="op">)</span></span>
+<span><span class="va">rhc_geo</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 90 × 5</span></span></span>
+<span><span class="co">#&gt;    npi        zip   place_name                                         lat  long</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 30110 204 Allen Memorial Drive, Bremen, Georgia 30110…  33.7 -<span style="color: #BB0000;">85.1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760243 30176 25 W Lyon St, Tallapoosa, Georgia 30176, United…  33.7 -<span style="color: #BB0000;">85.3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706879 30546 56 Hospital Drive, Hiawassee, Georgia 30546, Un…  34.9 -<span style="color: #BB0000;">83.8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631321 30108 1125 E Highway 166, Jonesville, Georgia 30108, …  33.6 -<span style="color: #BB0000;">85.2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017831 31510 204 East 15th Street, Alma, Georgia 31510, Unit…  31.5 -<span style="color: #BB0000;">82.5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339511 30185 41 Wellington Mill Road, Whitesburg, Georgia 30…  33.5 -<span style="color: #BB0000;">84.9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472003 31730 25 Perry Street, Camilla, Georgia 31730, United…  31.2 -<span style="color: #BB0000;">84.2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863569 30635 109 College Avenue, Elberton, Georgia 30635, Un…  34.1 -<span style="color: #BB0000;">82.9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1578682696 30512 178 Hospital Rd, Blairsville, Georgia 30512, Un…  34.9 -<span style="color: #BB0000;">84.0</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1922211515 31730 259 US Route 19, Camilla, Georgia 31730, United…  31.2 -<span style="color: #BB0000;">84.2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 80 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="convert-to-sf-object">Convert to <code>{sf}</code> object<a class="anchor" aria-label="anchor" href="#convert-to-sf-object"></a>
+<h2 id="retrieve-georgia-counties-shapefile-from-tigris">Retrieve Georgia counties shapefile from <code>{tigris}</code><a class="anchor" aria-label="anchor" href="#retrieve-georgia-counties-shapefile-from-tigris"></a>
 </h2>
-</div>
-<div class="section level2">
-<h2 id="retrieve-georgia-state-counties-shapefile-from-tigris">Retrieve Georgia state &amp; counties shapefile from
-<code>{tigris}</code><a class="anchor" aria-label="anchor" href="#retrieve-georgia-state-counties-shapefile-from-tigris"></a>
-</h2>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ga_state</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/states.html" class="external-link">states</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">STUSPS</span> <span class="op">==</span> <span class="st">"GA"</span><span class="op">)</span></span>
-<span><span class="va">ga_state</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Simple feature collection with 1 feature and 14 fields</span></span>
-<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -85.60516 ymin: 30.35576 xmax: -80.78296 ymax: 35.0013</span></span>
-<span><span class="co">#&gt; Geodetic CRS:  NAD83</span></span>
-<span><span class="co">#&gt;   REGION DIVISION STATEFP  STATENS GEOID STUSPS    NAME LSAD MTFCC FUNCSTAT</span></span>
-<span><span class="co">#&gt; 1      3        5      13 01705317    13     GA Georgia   00 G4000        A</span></span>
-<span><span class="co">#&gt;          ALAND     AWATER    INTPTLAT     INTPTLON</span></span>
-<span><span class="co">#&gt; 1 149486268417 4418716153 +32.6295789 -083.4235109</span></span>
-<span><span class="co">#&gt;                         geometry</span></span>
-<span><span class="co">#&gt; 1 MULTIPOLYGON (((-81.09538 3...</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2022</span>, progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>  </span>
 <span><span class="va">ga_counties</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Simple feature collection with 159 features and 17 fields</span></span>
@@ -688,14 +327,18 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <span><span class="co">#&gt; 126 MULTIPOLYGON (((-83.83685 3...</span></span>
 <span><span class="co">#&gt; 146 MULTIPOLYGON (((-82.42036 3...</span></span>
 <span><span class="co">#&gt; 147 MULTIPOLYGON (((-85.16059 3...</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+</div>
+<div class="section level2">
+<h2 id="ggplot">
+<code>{ggplot}</code><a class="anchor" aria-label="anchor" href="#ggplot"></a>
+</h2>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="co">#ggplot2::geom_sf(data = ga_state, colour = "darkred") +</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ga_counties</span>, fill <span class="op">=</span> <span class="st">"darkgreen"</span>, colour <span class="op">=</span> <span class="st">"white"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sc</span>, size <span class="op">=</span> <span class="fl">3</span>, fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">geo</span>, </span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ga_counties</span>, fill <span class="op">=</span> <span class="st">"darkgreen"</span>, colour <span class="op">=</span> <span class="st">"white"</span>, alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co">#ggplot2::geom_sf(data = stack, size = 3, fill = "white") +</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">rhc_geo</span>, </span>
 <span>                      mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, </span>
-<span>                      fill <span class="op">=</span> <span class="st">"orange"</span>, </span>
+<span>                      fill <span class="op">=</span> <span class="st">"white"</span>, </span>
 <span>                      color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
 <span>                      alpha <span class="op">=</span> <span class="fl">0.75</span>, </span>
 <span>                      size <span class="op">=</span> <span class="fl">1.5</span>, </span>
@@ -715,11 +358,7 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu">ggsflabel</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/ggsflabel/reference/lims_bbox.html" class="external-link">lims_bbox</a></span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `ggplot2::geom_point()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Problem while computing layer data.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred in the 3rd layer.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `if (...) NULL`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> missing value where TRUE/FALSE needed</span></span></code></pre>
+<p><img src="geospatial_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
