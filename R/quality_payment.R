@@ -174,7 +174,8 @@ quality_payment <- function(year,
                              values_fn = list) |>
           tidyr::unnest(c(id, score)) |>
           dplyr::filter(!is.na(id)) |>
-          dplyr::mutate(score = as.double(score)) |>
+          dplyr::mutate(score = as.double(score),
+                        measure = fct_measure(measure)) |>
           tidyr::nest(.by = c(year, npi, type),
                       .key  = "measures")
 
@@ -188,6 +189,7 @@ quality_payment <- function(year,
             values_to     = "status") |>
           dplyr::mutate(x = NULL) |>
           dplyr::filter(!is.na(status) & status != FALSE) |>
+          dplyr::mutate(category = fct_status(category)) |>
           tidyr::nest(.by = c(year, npi, type),
                       .key = "statuses")
 
@@ -298,4 +300,63 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 #' @noRd
 fct_part <- function(x) {
   factor(x, levels = c("Group", "Individual", "MIPS APM"))
+}
+
+#' @autoglobal
+#' @noRd
+fct_status <- function(x) {
+  factor(x,
+         levels = c("engaged",
+                    "opted_into_mips",
+                    "small_practitioner",
+                    "rural_clinician",
+                    "hpsa_clinician",
+                    "ambulatory_surgical_center",
+                    "hospital_based_clinician",
+                    "non_patient_facing",
+                    "facility_based",
+                    "extreme_hardship",
+                    "extreme_hardship_quality",
+                    "quality_bonus",
+                    "extreme_hardship_pi",
+                    "pi_hardship",
+                    "pi_reweighting",
+                    "pi_bonus",
+                    "extreme_hardship_ia",
+                    "ia_study",
+                    "extreme_hardship_cost"),
+         labels = c("Engaged",
+                    "Opted into MIPS",
+                    "Small Practitioner",
+                    "Rural Clinician",
+                    "HPSA Clinician",
+                    "Ambulatory Surgical Center",
+                    "Hospital-Based Clinician",
+                    "Non-Patient Facing",
+                    "Facility-Based",
+                    "Extreme Hardship",
+                    "Extreme Hardship (Quality)",
+                    "Quality Bonus",
+                    "Extreme Hardship (PI)",
+                    "PI Hardship",
+                    "PI Reweighting",
+                    "PI Bonus",
+                    "Extreme Hardship (IA)",
+                    "IA Study",
+                    "Extreme Hardship (Cost)")
+         )
+}
+
+#' @autoglobal
+#' @noRd
+fct_measure <- function(x) {
+  factor(x,
+         levels = c("quality",
+                    "pi",
+                    "ia",
+                    "cost"),
+         labels = c("Quality",
+                    "Promoting Interoperability",
+                    "Improvement Activities",
+                    "Cost"))
 }

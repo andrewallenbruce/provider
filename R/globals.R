@@ -118,10 +118,14 @@ utils::globalVariables(c(
   "ep", # <nppes>
   "gender", # <nppes>
   "entity_type", # <nppes>
+  "status", # <nppes>
   "identifier", # <open_payments>
   "y", # <open_payments>
-  "change_type", # <open_payments>
   "covered_recipient_type", # <open_payments>
+  "recipient_state", # <open_payments>
+  "applicable_manufacturer_or_applicable_gpo_making_payment_state", # <open_payments>
+  "covered_recipient_license_state_code1", # <open_payments>
+  "state_of_travel", # <open_payments>
   "nature_of_payment_or_transfer_of_value", # <open_payments>
   "address", # <open_payments>
   "name_1", # <open_payments>
@@ -187,7 +191,9 @@ utils::globalVariables(c(
   "set", # <quality_payment>
   "val", # <quality_payment>
   "score", # <quality_payment>
+  "measure", # <quality_payment>
   "status", # <quality_payment>
+  "category", # <quality_payment>
   "y", # <reassignments>
   "individual_state_code", # <reassignments>
   "group_state_code", # <reassignments>

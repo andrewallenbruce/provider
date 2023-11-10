@@ -205,7 +205,8 @@ nppes <- function(npi = NULL,
                       purpose     = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
                       gender      = fct_gen(gender),
                       entity_type = fct_enum(entity_type),
-                      state       = fct_stabb(state)) |>
+                      state       = fct_stabb(state),
+                      status      = factor(status, levels = "A", labels = "Active")) |>
         cols_nppes(2)
 
       if (rlang::has_name(results, "tx_primary")) results$tx_primary <- as.logical(results$tx_primary)

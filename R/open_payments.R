@@ -243,9 +243,12 @@ open_payments <- function(year,
                       # yn = c(yncols),
                       dbl = 'dollars',
                       int = c('program_year', 'pay_count')) |> #nolint
-      dplyr::mutate(change_type                            = changed_logical(change_type),
-                    covered_recipient_type                 = covered_recipient(covered_recipient_type),
-                    nature_of_payment_or_transfer_of_value = nature(nature_of_payment_or_transfer_of_value)) |>
+      dplyr::mutate(covered_recipient_type                                         = fct_cov(covered_recipient_type),
+                    recipient_state                                                = fct_stabb(recipient_state),
+                    applicable_manufacturer_or_applicable_gpo_making_payment_state = fct_stabb(applicable_manufacturer_or_applicable_gpo_making_payment_state),
+                    covered_recipient_license_state_code1                          = fct_stabb(covered_recipient_license_state_code1),
+                    state_of_travel                                                = fct_stabb(state_of_travel),
+                    nature_of_payment_or_transfer_of_value                         = nature(nature_of_payment_or_transfer_of_value)) |>
       combine(address,
               c('recipient_primary_business_street_address_line1',
                 'recipient_primary_business_street_address_line2')) |>
@@ -334,25 +337,16 @@ open_payments_error <- function(response) {
     strex::str_before_nth(":", 2)
 }
 
-#' Convert Changed column to logical
+#' Convert covered recipient types to unordered labelled factor
 #' @param x vector
 #' @autoglobal
 #' @noRd
-changed_logical <- function(x){
-  dplyr::case_match(x, "CHANGED" ~ TRUE,
-                       "UNCHANGED" ~ FALSE,
-                       .default = NA)
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-covered_recipient <- function(x){
-  dplyr::case_match(x,
-        "Covered Recipient Physician" ~ "Physician",
-        "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician",
-        "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
-        .default = x)
+fct_cov <- function(x) {
+  factor(x,
+         levels = c("Covered Recipient Physician",
+                    "Covered Recipient Non-Physician Practitioner",
+                    "Covered Recipient Teaching Hospital"),
+         labels = c("Physician", "NPP", "Teaching Hospital"))
 }
 
 #' @param x vector
