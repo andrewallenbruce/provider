@@ -146,6 +146,7 @@ statutes, regulations, and program instructions of the Medicare program.
 \itemize{
 \item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API Documentation}
 \item \href{https://npiregistry.cms.hhs.gov/demo-api}{NPPES NPI Registry API Demo}
+\item \href{https://npiregistry.cms.hhs.gov/help-api/country}{NPPES Available Countries}
 }
 }
 

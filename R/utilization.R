@@ -164,11 +164,7 @@ utilization <- function(year,
   par   <- par %nn% tf_2_yn(par) # nolint
   hcpcs <- hcpcs %nn% as.character(hcpcs)
   drug  <- drug %nn% tf_2_yn(drug)
-
-  if (!is.null(pos)) {
-    rlang::arg_match(pos, c("F", "O"))
-    pos <- pos_char(pos)
-  }
+  pos   <- pos %nn% rlang::arg_match(pos, c("F", "O"))
 
   args <- dplyr::tribble(
     ~param,                           ~arg,
@@ -284,7 +280,10 @@ tidyup_provider <- function(results, nest, detailed) {
                   .copay_deduct   = tot_allowed - tot_payment,
                   .srvcs_per_bene = tot_srvcs   / tot_benes,
                   .pymt_per_bene  = tot_payment / tot_benes,
-                  .pymt_per_srvc  = tot_payment / tot_srvcs)
+                  .pymt_per_srvc  = tot_payment / tot_srvcs,
+                  entity_type     = fct_ent(entity_type),
+                  gender          = fct_gen(gender),
+                  state           = fct_stabb(state))
 
   if (nest) {
     results <- tidyr::nest(
@@ -320,7 +319,11 @@ tidyup_service <- function(results, rbcs) {
                     dbl     = "avg_") |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     cols_util("service") |>
-    dplyr::mutate(specialty = correct_specialty(specialty))
+    dplyr::mutate(specialty = correct_specialty(specialty),
+                  gender    = fct_gen(gender),
+                  state     = fct_stabb(state),
+                  pos       = fct_pos(pos),
+                  level     = fct_level(level))
 
   if (rbcs) results <- rbcs_util(results)
 
@@ -338,7 +341,9 @@ tidyup_geography <- function(results, rbcs) {
                     yn           = "_ind",
                     int          = c("year", "tot_"),
                     dbl          = "avg_") |>
-    dplyr::mutate(place_of_srvc  = pos_char(place_of_srvc)) |>
+    dplyr::mutate(rndrng_prvdr_geo_desc = fct_stabb(rndrng_prvdr_geo_desc),
+                  place_of_srvc         = fct_pos(place_of_srvc),
+                  rndrng_prvdr_geo_lvl  = fct_level(rndrng_prvdr_geo_lvl)) |>
     cols_util("geography")
 
   if (rbcs) results <- rbcs_util(results)

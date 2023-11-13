@@ -40,7 +40,10 @@ compare_hcpcs <- function(df) {
       "x" = "{.var df} is of class {.cls {class(df)}}."))
   }
 
-  x <- df |> dplyr::select(year, state, hcpcs, pos)
+  x <- df |>
+    dplyr::select(year, state, hcpcs, pos) |>
+    dplyr::mutate(pos = as.character(pos),
+                  pos = dplyr::if_else(pos == "Facility", "F", "O"))
 
   x$type <- "geography"
 
@@ -56,17 +59,8 @@ compare_hcpcs <- function(df) {
     hcpcs_cols(df),
     hcpcs_cols(state),
     hcpcs_cols(national)) |>
-    dplyr::mutate(level = fct_lvl(level)) |>
+    dplyr::mutate(level = fct_level(level)) |>
     dplyr::relocate(providers, .before = beneficiaries)
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_lvl <- function(x) {
-  factor(x,
-         levels = c("Provider", "State", "National"),
-         ordered = TRUE)
 }
 
 #' @param df data frame

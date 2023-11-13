@@ -117,7 +117,8 @@ order_refer <- function(npi   = NULL,
                           names_to = "service",
                           values_to = "status") |>
         dplyr::filter(status == TRUE) |>
-        dplyr::mutate(status = NULL)
+        dplyr::mutate(status = NULL,
+                      service = fct_ord(service))
       }
     }
   return(results)
@@ -137,4 +138,14 @@ cols_ord <- function(df) {
             "Power Mobility Devices"    = 'pmd')
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+#' @autoglobal
+#' @noRd
+fct_ord <- function(x) {
+  factor(x,
+         levels = c("Medicare Part B",
+                    "Home Health Agency",
+                    "Durable Medical Equipment",
+                    "Power Mobility Devices"))
 }

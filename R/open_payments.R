@@ -171,9 +171,10 @@ open_payments <- function(year,
   zip <- zip %nn% as.character(zip)
 
   if (!is.null(covered_type)) {
-    covered_type <- rlang::arg_match(covered_type, c("Physician",
-                                     "Non-Physician Practitioner",
-                                     "Teaching Hospital"))
+    covered_type <- rlang::arg_match(
+      covered_type, c("Physician",
+                      "Non-Physician Practitioner",
+                      "Teaching Hospital"))
     covered_type <- paste0("Covered Recipient ", covered_type)
   }
 
@@ -240,7 +241,7 @@ open_payments <- function(year,
 
     results <- tidyup(results,
                       dtype = 'mdy',
-                      # yn = c(yncols),
+                      yn = c(yncols),
                       dbl = 'dollars',
                       int = c('program_year', 'pay_count')) |> #nolint
       dplyr::mutate(covered_recipient_type                                         = fct_cov(covered_recipient_type),
@@ -279,6 +280,8 @@ open_payments <- function(year,
         dplyr::filter(!is.na(name)) |>
         dplyr::mutate(group = as.integer(group),
                       pay_total = dplyr::if_else(group > 1, NA, pay_total))
+
+      if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
     }
     if (na.rm) results <- narm(results)
   }
@@ -346,7 +349,7 @@ fct_cov <- function(x) {
          levels = c("Covered Recipient Physician",
                     "Covered Recipient Non-Physician Practitioner",
                     "Covered Recipient Teaching Hospital"),
-         labels = c("Physician", "NPP", "Teaching Hospital"))
+         labels = c("Physician", "Non-Physician Practitioner", "Teaching Hospital"))
 }
 
 #' @param x vector

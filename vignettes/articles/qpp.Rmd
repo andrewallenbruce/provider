@@ -28,9 +28,11 @@ library(tidyr)
 ```
 
 ```{r}
-nppes(npi = 1144544834)
+nppes(npi = 1144544834) |> 
+  glimpse()
 ```
 
+<br>
 
 ```{r}
 plan(multisession, workers = 4)
@@ -40,13 +42,35 @@ q
 ```
 
 
+## Special Statuses
+
 ```{r}
 select(q, year, statuses) |> 
   unnest(statuses)
 ```
 
+<br>
+
+```{r}
+select(q, year, statuses) |> 
+  unnest(statuses) |> 
+  count(category, sort = TRUE)
+```
+
+<br>
+
+## Individual Category Measures
 
 ```{r}
 select(q, year, measures) |> 
   unnest(measures)
+```
+
+
+<br>
+
+```{r}
+select(q, year, measures) |> 
+  unnest(measures) |> 
+  count(measure, sort = TRUE)
 ```

@@ -3,7 +3,7 @@
 #' @autoglobal
 #' @noRd
 fct_level <- function(x) {
-  factor(x, levels = c("National", "State", "County"), ordered = TRUE)
+  factor(x, levels = c("National", "State", "County", "Provider"), ordered = TRUE)
 }
 
 #' Convert time period levels to ordered factor
@@ -70,9 +70,19 @@ fct_enum <- function(x) {
 #' @param x vector
 #' @autoglobal
 #' @noRd
+fct_ent <- function(x) {
+  factor(x,
+         levels = c("I", "O"),
+         labels = c("Individual", "Organization"))
+}
+
+#' Convert entity types to labelled factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
 fct_pos <- function(x) {
   factor(x,
-         levels = c("F", "N"),
+         levels = c("F", "O"),
          labels = c("Facility", "Non-facility"))
 }
 

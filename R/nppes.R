@@ -65,6 +65,7 @@
 #' @section Links:
 #' + [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
 #' + [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+#' + [NPPES Available Countries](https://npiregistry.cms.hhs.gov/help-api/country)
 #'
 #' @section Trailing Wildcard Entries:
 #' Arguments that allow trailing wildcard entries are denoted in the parameter

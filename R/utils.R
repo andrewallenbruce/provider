@@ -112,18 +112,6 @@ abb2full <- function(abb,
   return(results)
 }
 
-#' Convert Place of Service values
-#' @param x vector
-#' @autoglobal
-#' @noRd
-pos_char <- function(x) {
-
-    dplyr::case_match(x,
-      c("facility", "Facility", "F", "f") ~ "F",
-      c("office", "Office", "O", "o") ~ "O",
-      .default = NULL)
-}
-
 #' Pivot data frame to long format for easy printing
 #' @param df data frame
 #' @param cols columns to pivot long, default is [dplyr::everything()]

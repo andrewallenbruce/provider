@@ -189,7 +189,8 @@ quality_payment <- function(year,
             values_to     = "status") |>
           dplyr::mutate(x = NULL) |>
           dplyr::filter(!is.na(status) & status != FALSE) |>
-          dplyr::mutate(category = fct_status(category)) |>
+          dplyr::mutate(category = fct_status(category),
+                        status = NULL) |>
           tidyr::nest(.by = c(year, npi, type),
                       .key = "statuses")
 
@@ -299,7 +300,9 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 #' @autoglobal
 #' @noRd
 fct_part <- function(x) {
-  factor(x, levels = c("Group", "Individual", "MIPS APM"))
+  factor(x, levels = c("Group",
+                       "Individual",
+                       "MIPS APM"))
 }
 
 #' @autoglobal

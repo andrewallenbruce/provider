@@ -30,12 +30,6 @@ test_that("abb2full() works", {
   expect_snapshot(abb2full("YN"), error = TRUE)
 })
 
-test_that("pos_char() works", {
-  x <- c("facility", "Facility", "F", "f", "office", "Office", "O", "o")
-  y <- c(rep("F", 4), rep("O", 4))
-  expect_equal(pos_char(x), y)
-})
-
 test_that("display_long() works", {
   x <- dplyr::tibble(x = "NPI", y = "1144544834", id = 1)
   y <- dplyr::tibble(name = c("x", "y", "id"), value = c("NPI", "1144544834", "1"))

@@ -134,8 +134,7 @@ opt_out(npi = 1043522824) |> glimpse()
 ### `order_refer()`
 
 ```{r}
-order_refer(npi   = 1043522824, 
-            pivot = FALSE) |> glimpse()
+order_refer(npi   = 1043522824)
 ```
 
 
@@ -201,12 +200,16 @@ select(p, year, performance) |> unnest(performance) |> glimpse()
 
 
 ```{r}
-select(p, year, demographics) |> unnest(demographics) |> glimpse()
+select(p, year, demographics) |> 
+  unnest(demographics) |> 
+  glimpse()
 ```
 
 
 ```{r}
-select(p, year, conditions) |> unnest(conditions) |> glimpse()
+select(p, year, conditions) |> 
+  unnest(conditions) |> 
+  glimpse()
 ```
 
 

@@ -293,7 +293,7 @@ open_payments(year = 2021, npi = 1023630738) |>
     #> Columns: 46
     #> $ program_year        <int> 2021
     #> $ npi                 <chr> "1023630738"
-    #> $ covered_recipient   <fct> NPP
+    #> $ covered_recipient   <fct> Non-Physician Practitioner
     #> $ first               <chr> "ALYSIA"
     #> $ middle              <chr> "MOTA"
     #> $ last                <chr> "SMITH"
@@ -315,12 +315,12 @@ open_payments(year = 2021, npi = 1023630738) |>
     #> $ pay_count           <chr> "1"
     #> $ pay_form            <chr> "In-kind items and services"
     #> $ pay_nature          <chr> "Food and Beverage"
-    #> $ physician_ownership <chr> "No"
+    #> $ physician_ownership <lgl> FALSE
     #> $ third_party_payment <chr> "No Third Party Payment"
     #> $ publish_date        <date> 2023-06-30
-    #> $ publish_delay       <chr> "No"
-    #> $ publish_dispute     <chr> "No"
-    #> $ related_product     <chr> "Yes"
+    #> $ publish_delay       <lgl> FALSE
+    #> $ publish_dispute     <lgl> FALSE
+    #> $ related_product     <lgl> TRUE
     #> $ id                  <int> 1
     #> $ group               <int> 1
     #> $ name                <chr> "NEXPLANON"
@@ -362,19 +362,16 @@ opt_out(npi = 1043522824) |> glimpse()
 ### `order_refer()`
 
 ``` r
-order_refer(npi   = 1043522824, 
-            pivot = FALSE) |> glimpse()
+order_refer(npi   = 1043522824)
 ```
 
-    #> Rows: 1
-    #> Columns: 7
-    #> $ npi        <chr> "1043522824"
-    #> $ last_name  <chr> "SMITH"
-    #> $ first_name <chr> "JAMES"
-    #> $ partb      <lgl> TRUE
-    #> $ dme        <lgl> TRUE
-    #> $ hha        <lgl> TRUE
-    #> $ pmd        <lgl> TRUE
+    #> # A tibble: 4 × 4
+    #>   npi        first last  service                  
+    #>   <chr>      <chr> <chr> <fct>                    
+    #> 1 1043522824 JAMES SMITH Medicare Part B          
+    #> 2 1043522824 JAMES SMITH Home Health Agency       
+    #> 3 1043522824 JAMES SMITH Durable Medical Equipment
+    #> 4 1043522824 JAMES SMITH Power Mobility Devices
 
 ### `outpatient()`
 
@@ -450,7 +447,7 @@ quality_payment(year = 2021,
     #> $ cost_score      <dbl> 0
     #> $ complex_bonus   <dbl> 2.54
     #> $ qi_bonus        <dbl> 0
-    #> $ statuses        <list> [<tbl_df[9 x 2]>]
+    #> $ statuses        <list> [<tbl_df[9 x 1]>]
     #> $ measures        <list> [<tbl_df[6 x 3]>]
 
 ``` r
@@ -459,18 +456,18 @@ q <- quality_payment(year = 2021, npi = 1932365699)
 select(q, year, statuses) |> unnest(statuses) 
 ```
 
-    #> # A tibble: 9 × 3
-    #>    year category                   status
-    #>   <int> <fct>                      <lgl> 
-    #> 1  2021 Engaged                    TRUE  
-    #> 2  2021 Small Practitioner         TRUE  
-    #> 3  2021 Rural Clinician            TRUE  
-    #> 4  2021 HPSA Clinician             TRUE  
-    #> 5  2021 Extreme Hardship           TRUE  
-    #> 6  2021 Extreme Hardship (Quality) TRUE  
-    #> 7  2021 Extreme Hardship (PI)      TRUE  
-    #> 8  2021 Extreme Hardship (IA)      TRUE  
-    #> 9  2021 Extreme Hardship (Cost)    TRUE
+    #> # A tibble: 9 × 2
+    #>    year category                  
+    #>   <int> <fct>                     
+    #> 1  2021 Engaged                   
+    #> 2  2021 Small Practitioner        
+    #> 3  2021 Rural Clinician           
+    #> 4  2021 HPSA Clinician            
+    #> 5  2021 Extreme Hardship          
+    #> 6  2021 Extreme Hardship (Quality)
+    #> 7  2021 Extreme Hardship (PI)     
+    #> 8  2021 Extreme Hardship (IA)     
+    #> 9  2021 Extreme Hardship (Cost)
 
 ``` r
 select(q, year, measures) |> unnest(measures)
@@ -520,16 +517,16 @@ utilization(year = 2021,
     #> Columns: 20
     #> $ year         <int> 2021
     #> $ npi          <chr> "1932365699"
-    #> $ entity_type  <chr> "I"
+    #> $ entity_type  <fct> Individual
     #> $ first        <chr> "Stefan"
     #> $ middle       <chr> "M"
     #> $ last         <chr> "Smith"
-    #> $ gender       <chr> "M"
+    #> $ gender       <fct> Male
     #> $ credential   <chr> "OD"
     #> $ specialty    <chr> "Optometry"
     #> $ address      <chr> "724 St. Louis Road"
     #> $ city         <chr> "Collinsville"
-    #> $ state        <chr> "IL"
+    #> $ state        <ord> IL
     #> $ zip          <chr> "62234"
     #> $ fips         <chr> "17"
     #> $ ruca         <chr> "1"
@@ -561,7 +558,9 @@ select(p, year, performance) |> unnest(performance) |> glimpse()
     #> $ .pymt_per_srvc  <dbl> 67.29712
 
 ``` r
-select(p, year, demographics) |> unnest(demographics) |> glimpse()
+select(p, year, demographics) |> 
+  unnest(demographics) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -584,7 +583,9 @@ select(p, year, demographics) |> unnest(demographics) |> glimpse()
     #> $ bene_ndual      <int> 239
 
 ``` r
-select(p, year, conditions) |> unnest(conditions) |> glimpse()
+select(p, year, conditions) |> 
+  unnest(conditions) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -619,16 +620,16 @@ utilization(year  = 2021,
     #> Columns: 32
     #> $ year         <int> 2021
     #> $ npi          <chr> "1932365699"
-    #> $ level        <chr> "Provider"
+    #> $ level        <ord> Provider
     #> $ first        <chr> "Stefan"
     #> $ middle       <chr> "M"
     #> $ last         <chr> "Smith"
-    #> $ gender       <chr> "M"
+    #> $ gender       <fct> Male
     #> $ credential   <chr> "O.D."
     #> $ specialty    <chr> "Optometry"
     #> $ address      <chr> "724 St. Louis Road"
     #> $ city         <chr> "Collinsville"
-    #> $ state        <chr> "IL"
+    #> $ state        <ord> IL
     #> $ zip          <chr> "62234"
     #> $ fips         <chr> "17"
     #> $ ruca         <chr> "1"
@@ -641,7 +642,7 @@ utilization(year  = 2021,
     #> $ family       <chr> "Office E&M - Established"
     #> $ procedure    <fct> Non-procedure
     #> $ drug         <lgl> FALSE
-    #> $ pos          <chr> "O"
+    #> $ pos          <fct> Non-facility
     #> $ tot_benes    <int> 24
     #> $ tot_srvcs    <int> 27
     #> $ tot_day      <int> 27
@@ -659,10 +660,9 @@ utilization(year  = 2021,
 ```
 
     #> Rows: 1
-    #> Columns: 19
+    #> Columns: 18
     #> $ year         <int> 2021
-    #> $ level        <chr> "National"
-    #> $ state        <chr> "National"
+    #> $ level        <ord> National
     #> $ hcpcs        <chr> "99205"
     #> $ hcpcs_desc   <chr> "New patient outpatient visit, total time 60-74 minutes"
     #> $ category     <chr> "E&M"
@@ -670,7 +670,7 @@ utilization(year  = 2021,
     #> $ family       <chr> "Office E&M - New"
     #> $ procedure    <fct> Non-procedure
     #> $ drug         <lgl> FALSE
-    #> $ pos          <chr> "F"
+    #> $ pos          <fct> Facility
     #> $ tot_provs    <int> 65502
     #> $ tot_benes    <int> 574426
     #> $ tot_srvcs    <int> 653339

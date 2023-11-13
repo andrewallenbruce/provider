@@ -145,6 +145,7 @@ utils::globalVariables(c(
   "state_code", # <opt_out>
   "y", # <order_refer>
   "status", # <order_refer>
+  "service", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>
@@ -230,12 +231,21 @@ utils::globalVariables(c(
   "tot_payment", # <tidyup_provider>
   "tot_srvcs", # <tidyup_provider>
   "tot_benes", # <tidyup_provider>
+  "entity_type", # <tidyup_provider>
+  "gender", # <tidyup_provider>
+  "state", # <tidyup_provider>
   "hcc_risk_avg", # <tidyup_provider>
   "medical", # <tidyup_provider>
   "drug", # <tidyup_provider>
   "address", # <tidyup_service>
   "specialty", # <tidyup_service>
+  "gender", # <tidyup_service>
+  "state", # <tidyup_service>
+  "pos", # <tidyup_service>
+  "level", # <tidyup_service>
+  "rndrng_prvdr_geo_desc", # <tidyup_geography>
   "place_of_srvc", # <tidyup_geography>
+  "rndrng_prvdr_geo_lvl", # <tidyup_geography>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>
