@@ -53,19 +53,19 @@ library(tidyr)
 ### `affiliations()`
 
 ```{r}
-affiliations(npi = 1023630738, facility_ccn = "37Z324") |> glimpse()
+affiliations(npi          = 1023630738, 
+             facility_ccn = "37Z324") |> glimpse()
 ```
 
 
 ### `beneficiaries()`
 
 ```{r}
-beneficiaries(year = 2022, 
+beneficiaries(year   = 2022, 
               period = "Year", 
-              level = "County", 
-              state = "GA", 
-              county = "Lowndes") |> 
-  glimpse()
+              level  = "County", 
+              state  = "GA", 
+              county = "Lowndes") |> glimpse()
 ```
 
 ### `clinicians()`
@@ -77,24 +77,22 @@ clinicians(npi = 1932365699) |> glimpse()
 ### `conditions()`
 
 ```{r}
-conditions(year = 2018, 
-           set = "multiple", 
+conditions(year  = 2018, 
+           set   = "multiple", 
            level = "national", 
-           age = "all", 
-           demo = "all", 
-           mcc = "6+") |> 
-  glimpse()
+           age   = "all", 
+           demo  = "all", 
+           mcc   = "6+") |> glimpse()
 ```
 
 
 ```{r}
-conditions(year = 2018, 
-           set = "specific", 
-           level = "national", 
-           age = "all", 
-           demo = "all",
-           condition = "Arthritis") |> 
-  glimpse()
+conditions(year      = 2018, 
+           set       = "specific", 
+           level     = "national", 
+           age       = "all", 
+           demo      = "all",
+           condition = "Arthritis") |> glimpse()
 ```
 
 ### `hospitals()`
@@ -136,7 +134,7 @@ opt_out(npi = 1043522824) |> glimpse()
 ### `order_refer()`
 
 ```{r}
-order_refer(npi = 1043522824, 
+order_refer(npi   = 1043522824, 
             pivot = FALSE) |> glimpse()
 ```
 
@@ -144,44 +142,44 @@ order_refer(npi = 1043522824,
 ### `outpatient()`
 
 ```{r}
-outpatient(year = 2021, 
+outpatient(year  = 2021, 
            state = "GA", 
-           city = "Valdosta", 
-           apc = "5072") |> glimpse()
+           city  = "Valdosta", 
+           apc   = "5072") |> glimpse()
 ```
 
 
 ### `providers()`
 
 ```{r}
-providers(npi = 1720098791) |> glimpse()
+providers(npi  = 1720098791, 
+          enid = "O20040610001257") |> glimpse()
 ```
 
 ### `quality_payment()`
 
 ```{r}
 quality_payment(year = 2021, 
-                npi = 1932365699) |> glimpse()
+                npi  = 1932365699) |> glimpse()
 ```
 
 
 ```{r}
 q <- quality_payment(year = 2021, npi = 1932365699)
 
-dplyr::select(q, year, statuses) |> 
-  tidyr::unnest(statuses) 
+select(q, year, statuses) |> unnest(statuses) 
 ```
 
 
 ```{r}
-dplyr::select(q, year, measures) |> 
-  tidyr::unnest(measures)
+select(q, year, measures) |> unnest(measures)
 ```
 
 ### `reassignments()`
 
 ```{r}
-reassignments(npi = 1932365699) |> glimpse()
+reassignments(npi     = 1932365699, 
+              pac_org = 7719037548) |> glimpse()
 ```
 
 
@@ -189,7 +187,7 @@ reassignments(npi = 1932365699) |> glimpse()
 
 ```{r}
 utilization(year = 2021, 
-            npi = 1932365699, 
+            npi  = 1932365699, 
             type = "provider") |> glimpse()
 ```
 
@@ -198,35 +196,35 @@ utilization(year = 2021,
 ```{r}
 p <- utilization(year = 2021, npi = 1932365699, type = "provider")
 
-p$performance |> glimpse()
+select(p, year, performance) |> unnest(performance) |> glimpse()
 ```
 
 
 ```{r}
-p$demographics |> glimpse()
+select(p, year, demographics) |> unnest(demographics) |> glimpse()
 ```
 
 
 ```{r}
-p$conditions |> glimpse()
+select(p, year, conditions) |> unnest(conditions) |> glimpse()
 ```
 
 
 
 ```{r}
-utilization(year = 2021, 
-            npi = 1932365699,
+utilization(year  = 2021, 
+            npi   = 1932365699,
             hcpcs = "99214",
-            type = "service") |> glimpse()
+            type  = "service") |> glimpse()
 ```
 
 
 ```{r}
-utilization(year = 2021, 
+utilization(year  = 2021, 
             hcpcs = "99205", 
             level = "National",
-            pos = "F",
-            type = "geography") |> glimpse()
+            pos   = "F",
+            type  = "geography") |> glimpse()
 ```
 
 ------------------------------------------------------------------------------
