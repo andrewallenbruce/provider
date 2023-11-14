@@ -41,9 +41,9 @@ for this TIN/NPI combination.
 \item Cardiology
 }}
 
-\item{type}{< \emph{character} > Participation type; level at which the performance data
-was collected, submitted or reported for the final score attributed to the
-clinician; drives most of the data returned.
+\item{type}{< \emph{character} > Participation type; level at which the
+performance data was collected, submitted or reported for the final score
+attributed to the clinician; drives most of the data returned.
 \itemize{
 \item \code{"Group"}
 \item \code{"Individual"}
@@ -52,7 +52,7 @@ clinician; drives most of the data returned.
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest statuses & measures}
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{statuses} & \code{measures}}
 
 \item{...}{For future use.}
 }

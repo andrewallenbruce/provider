@@ -129,11 +129,20 @@ utils::globalVariables(c(
   "nature_of_payment_or_transfer_of_value", # <open_payments>
   "address", # <open_payments>
   "name_1", # <open_payments>
-  "val", # <open_payments>
-  "covered", # <open_payments>
+  "covered_1", # <open_payments>
+  "type_1", # <open_payments>
+  "category_1", # <open_payments>
+  "ndc_1", # <open_payments>
+  "pdi_1", # <open_payments>
+  ".name_1", # <open_payments>
+  ".pdi_1", # <open_payments>
+  "total", # <open_payments>
+  "value", # <open_payments>
   "name", # <open_payments>
-  "group", # <open_payments>
+  "covered", # <open_payments>
+  "group_id", # <open_payments>
   "pay_total", # <open_payments>
+  "pay_count", # <open_payments>
   "title", # <open_ids>
   "modified", # <open_ids>
   "distribution", # <open_ids>

@@ -118,7 +118,7 @@ nppes(npi = 1720098791) |> glimpse()
 ### `open_payments()`
 
 ```{r}
-open_payments(year = 2021, npi = 1023630738) |> 
+open_payments(year = 2021, npi = 1023630738, na.rm = TRUE) |> 
   mutate(info = ndc_lookup(ndc), ndc = NULL) |> 
   unnest(info) |> glimpse()
 ```

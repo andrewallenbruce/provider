@@ -104,6 +104,7 @@ reference:
   - conditions
   - open_payments
   - open_payments_
+  - quality_eligibility
   - quality_payment
   - quality_payment_
   - utilization

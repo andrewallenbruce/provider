@@ -39,14 +39,14 @@
 #' + Anesthesiology
 #' + Neurology
 #' + Cardiology
-#' @param type < *character* > Participation type; level at which the performance data
-#' was collected, submitted or reported for the final score attributed to the
-#' clinician; drives most of the data returned.
+#' @param type < *character* > Participation type; level at which the
+#' performance data was collected, submitted or reported for the final score
+#' attributed to the clinician; drives most of the data returned.
 #' + `"Group"`
 #' + `"Individual"`
 #' + `"MIPS APM"`
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest statuses & measures
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest `statuses` & `measures`
 #' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'

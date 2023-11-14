@@ -39,6 +39,7 @@ Suggests:
     fipio,
     fontawesome,
     forcats,
+    future,
     ggraph,
     ggplot2,
     ggthemes,

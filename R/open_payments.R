@@ -138,7 +138,7 @@
 #' map(\(x) open_payments(year = x, npi = 1043477615)) |>
 #' list_rbind()
 #'
-#' # Parallelized
+#' # Or simply use the parallelized version
 #' open_payments_(npi = 1043218118)
 #'
 #' @autoglobal
@@ -243,7 +243,7 @@ open_payments <- function(year,
                       dtype = 'mdy',
                       yn = c(yncols),
                       dbl = 'dollars',
-                      int = c('program_year', 'pay_count')) |> #nolint
+                      int = c('program_year', 'number_of_payments_included_in_total_amount')) |> #nolint
       dplyr::mutate(covered_recipient_type                                         = fct_cov(covered_recipient_type),
                     recipient_state                                                = fct_stabb(recipient_state),
                     applicable_manufacturer_or_applicable_gpo_making_payment_state = fct_stabb(applicable_manufacturer_or_applicable_gpo_making_payment_state),
@@ -255,34 +255,49 @@ open_payments <- function(year,
                 'recipient_primary_business_street_address_line2')) |>
       cols_open()
 
-    ## ------------------------------------------------------------------------
     if (pivot) {
-      pcol <- c(paste0('name_', 1:5),
-                paste0('covered_', 1:5),
-                paste0('type_', 1:5),
-                paste0('category_', 1:5),
-                paste0('ndc_', 1:5),
-                paste0('pdi_', 1:5))
+      results <- results |>
+        dplyr::mutate(row_id  = dplyr::row_number(),
+                      .name_1 = dplyr::if_else(is.na(name_1), TRUE, FALSE),
+                      .cov_1  = dplyr::if_else(is.na(covered_1), TRUE, FALSE),
+                      .type_1 = dplyr::if_else(is.na(type_1), TRUE, FALSE),
+                      .cat_1  = dplyr::if_else(is.na(category_1), TRUE, FALSE),
+                      .ndc_1  = dplyr::if_else(is.na(ndc_1), TRUE, FALSE),
+                      .pdi_1  = dplyr::if_else(is.na(pdi_1), TRUE, FALSE),
+                      .before = name_1) |>
+        dplyr::rowwise() |>
+        dplyr::mutate(total  = sum(dplyr::c_across(.name_1:.pdi_1), na.rm = TRUE),
+                      name_1 = dplyr::if_else(total == 6, 'Blank', name_1),
+                      total  = NULL) |>
+        dplyr::ungroup()
+
+      results$.name_1 <- NULL
+      results$.cov_1  <- NULL
+      results$.type_1 <- NULL
+      results$.cat_1  <- NULL
+      results$.ndc_1  <- NULL
+      results$.pdi_1  <- NULL
+
+      pcol <- c('name_', 'covered_', 'type_',
+                'category_', 'ndc_', 'pdi_') %s+% rep(1:5, each = 6)
 
       results <- results |>
-        dplyr::mutate(top_id = dplyr::row_number(), .before = name_1) |>
-        tidyr::pivot_longer(
-          cols = dplyr::any_of(pcol),
-          names_to = c("attr", "group"),
-          names_pattern = "(.*)_(.)",
-          values_to = "val") |>
-        dplyr::arrange(id) |>
-        tidyr::pivot_wider(names_from = attr,
-                           values_from = val,
-                           values_fn = list) |>
-        tidyr::unnest(cols = dplyr::any_of(c('name', 'covered', 'type', 'category', 'ndc', 'pdi'))) |>
-        dplyr::mutate(covered = dplyr::case_match(covered, "Covered" ~ TRUE, "Non-Covered" ~ FALSE, .default = NA)) |>
-        dplyr::filter(!is.na(name)) |>
-        dplyr::mutate(group = as.integer(group),
-                      pay_total = dplyr::if_else(group > 1, NA, pay_total))
+        tidyr::pivot_longer(dplyr::any_of(pcol)) |>
+        dplyr::filter(!is.na(value)) |>
+        tidyr::separate_wider_delim(name,
+                                    delim = "_",
+                                    names = c("attr", "group_id")) |>
+        tidyr::pivot_wider(names_from = "attr",
+                           values_from = "value") |>
+        dplyr::mutate(covered = dplyr::case_match(covered,
+                                                  "Covered" ~ TRUE,
+                                                  "Non-Covered" ~ FALSE,
+                                                  .default = NA),
+                      group_id = as.integer(group_id),
+                      pay_total = dplyr::if_else(group_id > 1, NA, pay_total),
+                      pay_count = dplyr::if_else(group_id > 1, NA, pay_count))
 
-      if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
-      ## ------------------------------------------------------------------------
+      # if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
     }
     if (na.rm) results <- narm(results)
   }

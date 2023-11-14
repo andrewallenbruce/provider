@@ -22,6 +22,7 @@ options(scipen = 999)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
+library(future)
 library(furrr)
 library(dplyr)
 library(tidyr)

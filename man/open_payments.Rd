@@ -208,7 +208,7 @@ open_years() |>
 map(\(x) open_payments(year = x, npi = 1043477615)) |>
 list_rbind()
 
-# Parallelized
+# Or simply use the parallelized version
 open_payments_(npi = 1043218118)
 \dontshow{\}) # examplesIf}
 }

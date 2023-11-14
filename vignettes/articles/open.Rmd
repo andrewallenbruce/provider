@@ -22,6 +22,7 @@ options(scipen = 999)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
+library(future)
 library(furrr)
 library(dplyr)
 ```
@@ -35,7 +36,6 @@ open
 ```
 
 
-
 ```{r}
 open |> 
   select(program_year, 
@@ -43,20 +43,45 @@ open |>
          pay_total, 
          pay_date, 
          pay_count, 
-         id, 
-         group, 
+         row_id, 
+         group_id, 
          name, 
-         type)
+         covered,
+         type, 
+         category, 
+         ndc,
+         pdi)
 ```
 
 
 ```{r}
-open |> count(payer_name, sort = TRUE)
+open |> 
+  count(payer_sub,
+        wt = pay_count,
+        sort = TRUE)
 ```
 
 
 ```{r}
-open |> count(type, sort = TRUE)
+open |> 
+  count(payer_name,
+        wt = pay_count,
+        sort = TRUE)
+```
+
+
+```{r}
+open |> 
+  count(payer_id,
+        wt = pay_count,
+        sort = TRUE)
+```
+
+
+```{r}
+open |> 
+  filter(!is.na(type)) |> 
+  count(type, sort = TRUE)
 ```
 
 

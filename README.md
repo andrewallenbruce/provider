@@ -282,7 +282,7 @@ nppes(npi = 1720098791) |> glimpse()
 ### `open_payments()`
 
 ``` r
-open_payments(year = 2021, npi = 1023630738) |> 
+open_payments(year = 2021, npi = 1023630738, na.rm = TRUE) |> 
   mutate(info = ndc_lookup(ndc), ndc = NULL) |> 
   unnest(info) |> glimpse()
 ```
@@ -312,7 +312,7 @@ open_payments(year = 2021, npi = 1023630738) |>
     #> $ payer_country       <chr> "United States"
     #> $ pay_total           <dbl> 17.43
     #> $ pay_date            <date> 2021-08-25
-    #> $ pay_count           <chr> "1"
+    #> $ pay_count           <int> 1
     #> $ pay_form            <chr> "In-kind items and services"
     #> $ pay_nature          <chr> "Food and Beverage"
     #> $ physician_ownership <lgl> FALSE
@@ -321,8 +321,8 @@ open_payments(year = 2021, npi = 1023630738) |>
     #> $ publish_delay       <lgl> FALSE
     #> $ publish_dispute     <lgl> FALSE
     #> $ related_product     <lgl> TRUE
-    #> $ id                  <int> 1
-    #> $ group               <int> 1
+    #> $ row_id              <int> 1
+    #> $ group_id            <int> 1
     #> $ name                <chr> "NEXPLANON"
     #> $ covered             <lgl> TRUE
     #> $ type                <chr> "Drug"
