@@ -253,9 +253,9 @@ open_payments <- function(year,
       combine(address,
               c('recipient_primary_business_street_address_line1',
                 'recipient_primary_business_street_address_line2')) |>
-      cols_open() |>
-      narm()
+      cols_open()
 
+    ## ------------------------------------------------------------------------
     if (pivot) {
       pcol <- c(paste0('name_', 1:5),
                 paste0('covered_', 1:5),
@@ -265,7 +265,7 @@ open_payments <- function(year,
                 paste0('pdi_', 1:5))
 
       results <- results |>
-        dplyr::mutate(id = dplyr::row_number(), .before = name_1) |>
+        dplyr::mutate(top_id = dplyr::row_number(), .before = name_1) |>
         tidyr::pivot_longer(
           cols = dplyr::any_of(pcol),
           names_to = c("attr", "group"),
@@ -282,6 +282,7 @@ open_payments <- function(year,
                       pay_total = dplyr::if_else(group > 1, NA, pay_total))
 
       if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
+      ## ------------------------------------------------------------------------
     }
     if (na.rm) results <- narm(results)
   }
@@ -291,12 +292,12 @@ open_payments <- function(year,
 #' Parallelized [open_payments()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param ... Pass arguments to [open_payments()].
 #' @autoglobal
 #' @export
 open_payments_ <- function(year = open_years(),
-                           na.rm = TRUE,
+                           na.rm = FALSE,
                            ...) {
   results <- furrr::future_map_dfr(year,
                                    open_payments,

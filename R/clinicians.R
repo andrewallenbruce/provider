@@ -116,7 +116,7 @@ clinicians <- function(npi = NULL,
     "state",                state,
     "zip_code",             zip)
 
-  error_body <- function(response) {httr2::resp_body_json(response)$message}
+  error_body <- function(response) httr2::resp_body_json(response)$message
 
   response <- httr2::request(file_url("c", args, offset)) |>
     httr2::req_error(body = error_body) |>

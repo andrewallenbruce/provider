@@ -20,16 +20,44 @@ knitr::opts_chunk$set(
 options(scipen = 999)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(provider)
 library(furrr)
+library(dplyr)
 ```
 
 
 ```{r}
 plan(multisession, workers = 4)
-open <- open_payments_(npi = 1043218118)
+open  <- open_payments_(npi = 1043218118)
 plan(sequential)
 open
 ```
+
+
+
+```{r}
+open |> 
+  select(program_year, 
+         payer_name, 
+         pay_total, 
+         pay_date, 
+         pay_count, 
+         id, 
+         group, 
+         name, 
+         type)
+```
+
+
+```{r}
+open |> count(payer_name, sort = TRUE)
+```
+
+
+```{r}
+open |> count(type, sort = TRUE)
+```
+
+
 

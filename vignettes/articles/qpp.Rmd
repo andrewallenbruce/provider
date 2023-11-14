@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 options(scipen = 999)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(provider)
 library(furrr)
 library(dplyr)
@@ -73,4 +73,44 @@ select(q, year, measures) |>
 select(q, year, measures) |> 
   unnest(measures) |> 
   count(measure, sort = TRUE)
+```
+
+<br>
+
+## Quality Eligibility
+
+```{r}
+quality_eligibility(year = 2017, npi = 1144544834) |> glimpse()
+```
+
+
+
+```{r}
+quality_eligibility(year = 2018, npi = 1144544834) |> glimpse()
+```
+
+
+
+```{r}
+quality_eligibility(year = 2019, npi = 1144544834) |> glimpse()
+```
+
+
+```{r}
+quality_eligibility(year = 2020, npi = 1144544834) |> glimpse()
+```
+
+
+```{r}
+quality_eligibility(year = 2021, npi = 1144544834) |> glimpse()
+```
+
+
+```{r}
+quality_eligibility(year = 2022, npi = 1144544834) |> glimpse()
+```
+
+
+```{r}
+quality_eligibility(year = 2023, npi = 1144544834) |> glimpse()
 ```

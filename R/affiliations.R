@@ -130,7 +130,8 @@ affiliations <- function(npi = NULL,
 
   }
   if (tidy) {
-    results <- cols_aff(tidyup(results)) |> dplyr::mutate(facility_type = fct_fac(facility_type))
+    results <- cols_aff(tidyup(results)) |>
+      dplyr::mutate(facility_type = fct_fac(facility_type))
     if (na.rm) results <- narm(results)
   }
   return(results)

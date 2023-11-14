@@ -150,21 +150,22 @@ utils::globalVariables(c(
   "y", # <outpatient>
   "y", # <pending>
   "y", # <providers>
-  "apms", # <quality_eligibility>
-  "individual_scenario", # <quality_eligibility>
-  "group_scenario", # <quality_eligibility>
-  "apms.extremeHardshipReasons", # <quality_eligibility>
-  "apms.qpPatientScores", # <quality_eligibility>
-  "apms.qpPaymentScores", # <quality_eligibility>
-  "individual_scenario.extremeHardshipReasons", # <quality_eligibility>
-  "individual_scenario.lowVolumeStatusReasons", # <quality_eligibility>
-  "individual_scenario.specialty", # <quality_eligibility>
-  "individual_scenario.isEligible", # <quality_eligibility>
-  "group_scenario.extremeHardshipReasons", # <quality_eligibility>
-  "group_scenario.lowVolumeStatusReasons", # <quality_eligibility>
-  "group_scenario.isEligible", # <quality_eligibility>
-  "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
-  "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
+  "y", # <quality_eligibility>
+  "apms", # <quality_eligibility2>
+  "individual_scenario", # <quality_eligibility2>
+  "group_scenario", # <quality_eligibility2>
+  "apms.extremeHardshipReasons", # <quality_eligibility2>
+  "apms.qpPatientScores", # <quality_eligibility2>
+  "apms.qpPaymentScores", # <quality_eligibility2>
+  "individual_scenario.extremeHardshipReasons", # <quality_eligibility2>
+  "individual_scenario.lowVolumeStatusReasons", # <quality_eligibility2>
+  "individual_scenario.specialty", # <quality_eligibility2>
+  "individual_scenario.isEligible", # <quality_eligibility2>
+  "group_scenario.extremeHardshipReasons", # <quality_eligibility2>
+  "group_scenario.lowVolumeStatusReasons", # <quality_eligibility2>
+  "group_scenario.isEligible", # <quality_eligibility2>
+  "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility2>
+  "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility2>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
   "aco_id_1", # <mips_2021>

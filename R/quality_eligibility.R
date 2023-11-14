@@ -1,24 +1,43 @@
 #' Quality Payment Program Eligibility
 #'
-#' @description Data pulled from across CMS that is used to create an
-#'    eligibility determination for a clinician. Using what CMS knows about a
-#'    clinician from their billing patterns and enrollments, eligibility is
-#'    "calculated" multiple times before and during the performance year.
+#' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' @details The Quality Payment Program (QPP) Eligibility System pulls together
-#'    data from across the Centers for Medicare and Medicaid Services (CMS) to
-#'    create an eligibility determination for every clinician in the system.
-#'    Using what CMS knows about a clinician from their billing patterns and
-#'    enrollments, eligibility is "calculated" multiple times before and during
-#'    the performance year. Information can be obtained primarily by the
-#'    Clinician type. You can query the Clinician type by passing in an National
-#'    Provider Identifier, or NPI. This number is a unique 10-digit
-#'    identification number issued to health care providers in the United
-#'    States by CMS. The information contained in these endpoints includes
-#'    basic enrollment information, associated organizations, information
-#'    about those organizations, individual and group special status
-#'    information, and in the future, any available Alternative Payment Model
-#'    (APM) affiliations.
+#' [quality_eligibility()] allows the user access to information on eligibility
+#' in the Merit-based Incentive Payment System (MIPS) and Advanced Alternative
+#' Payment Models (APMs) tracks.
+#'
+#' Data pulled from across CMS is used to create an eligibility determination
+#' for a clinician. Using what CMS knows about a clinician from their billing
+#' patterns and enrollments, eligibility is "calculated" multiple times before
+#' and during the performance year.
+#'
+#' @section Quality Payment Program (QPP) Eligibility:
+#' The QPP Eligibility System aggregates data from across CMS to create an
+#' eligibility determination for every clinician in the system. Using what CMS
+#' knows about a clinician from their billing patterns and enrollments,
+#' eligibility is "calculated" multiple times before and during the performance
+#' year.
+#'
+#' The information contained in these endpoints includes basic enrollment
+#' information, associated organizations, information about those organizations,
+#' individual and group special status information, and in the future, any
+#' available Alternative Payment Model (APM) affiliations.
+#'
+#' @section Types:
+#' + __Clinicians__ represent healthcare providers and are referenced using a NPI.
+#'
+#' + __Practices__ represent a clinician or group of clinicians that assign their
+#' billing rights to the same TIN. These are represented with a TIN, EIN, or
+#' SSN, and querying by this number requires an authorization token.
+#'
+#' + __Virtual Groups__ represent a combination of two or more TINs with certain
+#' characteristics, represented by a virtual group identifier, also requiring an
+#' authorization token.
+#'
+#' + __APM Entities__ represent a group of practices which participate in an
+#' APM, characterized by an APM Entity ID.
+#'
 #'
 #' @section Links:
 #' + [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
@@ -26,20 +45,194 @@
 #'
 #' @section Update Frequency: **Annually**
 #'
-#' @param year integer, YYYY, QPP eligibility year.
-#' @param npi NPI assigned to the clinician when they enrolled in Medicare.
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param year < *integer* > // __required__ QPP performance year, in `YYYY`format.
+#' Run [qpp_years()] to return a vector of the years currently available.
+#' @param npi < *integer* > 10-digit Individual National Provider Identifier
+#' assigned to the clinician when they enrolled in Medicare. Multiple rows for
+#' the same NPI indicate multiple TIN/NPI combinations.
+#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
+#' @param ... For future use.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
 #' quality_eligibility(year = 2020, npi = 1144544834)
 #' @autoglobal
-#' @noRd
-# nocov start
+#' @export
 quality_eligibility <- function(year,
                                 npi,
-                                tidy = TRUE) {
+                                tidy = TRUE,
+                                na.rm = FALSE,
+                                ...) {
+
+  rlang::check_required(year)
+  year <- as.character(year)
+  # rlang::arg_match(year, values = as.character(qpp_years()))
+  npi <- npi %nn% validate_npi(npi)
+  url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
+  error_body <- function(response) httr2::resp_body_json(response)$error$message
+
+  response <- httr2::request(url) |>
+    httr2::req_headers(Accept = "application/vnd.qpp.cms.gov.v6+json") |>
+    httr2::req_error(body = error_body) |>
+    httr2::req_perform()
+
+  if (vctrs::vec_is_empty(response$body)) {
+
+    cli_args <- dplyr::tribble(
+      ~x,             ~y,
+      "year",         year,
+      "npi",          npi) |>
+      tidyr::unnest(cols = c(y))
+
+    format_cli(cli_args)
+    return(invisible(NULL))
+  }
+
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+
+  results <- list(
+    year                  = year,
+    npi                   = results$data$npi,
+    npi_type              = results$data$nationalProviderIdentifierType,
+    first                 = results$data$firstName,
+    middle                = results$data$middleName,
+    last                  = results$data$lastName,
+    first_approved_date   = results$data$firstApprovedDate,
+    years_in_medicare     = results$data$yearsInMedicare,
+    pecos_enroll_year     = results$data$pecosEnrollmentDate,
+    newly_enrolled        = results$data$newlyEnrolled,
+    specialty_description = results$data$specialty$specialtyDescription,
+    specialty_type        = results$data$specialty$typeDescription,
+    specialty_category    = results$data$specialty$categoryReference,
+    is_maqi               = results$data$isMaqi,
+    organization          = results$data$organizations$prvdrOrgName,
+    hosp_vbp_name         = results$data$organizations$hospitalVbpName,
+    facility_based        = results$data$organizations$isFacilityBased,
+    address_1             = results$data$organizations$addressLineOne,
+    address_2             = results$data$organizations$addressLineTwo,
+    city                  = results$data$organizations$city,
+    state                 = results$data$organizations$state,
+    zip                   = results$data$organizations$zip,
+    apms                  = results$data$organizations$apms,
+    virtual               = results$data$organizations$virtualGroups,
+    ind                   = results$data$organizations$individualScenario,
+    group                 = results$data$organizations$groupScenario) |>
+    purrr::compact() |>
+    purrr::list_flatten() |>
+    purrr::list_flatten() |>
+    as.data.frame()
+
+  if (!tidy) results <- df2chr(results)
+
+  if (tidy) {
+    results <- results |>
+      dplyr::tibble()
+    # results <- tidyup(results,
+    #                   yn = 'telehlth',
+    #                   int = c('num_org_mem', 'grd_yr')) |>
+    #   combine(address, c('adr_ln_1', 'adr_ln_2')) |>
+    #   dplyr::mutate(gndr = fct_gen(gndr),
+    #                 state = fct_stabb(state)) |>
+    #   cols_clin()
+
+    if (na.rm) results <- narm(results)
+  }
+  return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_qelig <- function(df) {
+
+    cols <- c('year',
+              'npi',
+              'npi_type',
+              'first',
+              'middle',
+              'last',
+              'first_approved_date',
+              'years_in_medicare',
+              'pecos_enroll_year',
+              'newly_enrolled',
+              'specialty_description',
+              'specialty_type',
+              'specialty_category',
+              'is_maqi',
+              'organization',
+              'hosp_vbp_name',
+              'facility_based',
+              'address_1',
+              'address_2',
+              'city',
+              'state',
+              'zip',
+
+              'ind.aciHardship',
+              'ind.aciReweighting',
+              'ind.ambulatorySurgicalCenter',
+              'ind.extremeHardship',
+              'ind.extremeHardshipReasons',
+              'ind.extremeHardshipEventType',
+              'ind.extremeHardshipSources',
+              'ind.hospitalBasedClinician',
+              'ind.hpsaClinician',
+              'ind.iaStudy',
+              'ind.isOptedIn',
+              'ind.isOptInEligible',
+              'ind.mipsEligibleSwitch',
+              'ind.nonPatientFacing',
+              'ind.optInDecisionDate',
+              'ind.ruralClinician',
+              'ind.smallGroupPractitioner',
+              'ind.lowVolumeSwitch',
+              'ind.lowVolumeStatusReasons',
+              'ind.hasPaymentAdjustmentCCN',
+              'ind.hasHospitalVbpCCN',
+              'ind.aggregationLevel',
+              'ind.hospitalVbpName',
+              'ind.hospitalVbpScore',
+              'ind.isFacilityBased',
+              'ind.specialtyCode',
+              'ind.specialty',
+              'ind.isEligible',
+              'ind.eligibilityScenario',
+
+              'group.aciHardship',
+              'group.aciReweighting',
+              'group.ambulatorySurgicalCenter',
+              'group.extremeHardship',
+              'group.extremeHardshipReasons',
+              'group.extremeHardshipEventType',
+              'group.extremeHardshipSources',
+              'group.hospitalBasedClinician',
+              'group.hpsaClinician',
+              'group.iaStudy',
+              'group.isOptedIn',
+              'group.isOptInEligible',
+              'group.mipsEligibleSwitch',
+              'group.nonPatientFacing',
+              'group.optInDecisionDate',
+              'group.ruralClinician',
+              'group.smallGroupPractitioner',
+              'group.lowVolumeSwitch',
+              'group.lowVolumeStatusReasons',
+              'group.aggregationLevel',
+              'group.isEligible'
+              )
+
+  df |> dplyr::select(dplyr::any_of(cols))
+}
+
+##------------------------------------------------------------------------------
+#' @autoglobal
+#' @noRd
+# nocov start
+quality_eligibility2 <- function(year,
+                                 npi,
+                                 tidy = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
@@ -49,7 +242,7 @@ quality_eligibility <- function(year,
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
 
-  error_body <- function(resp) {httr2::resp_body_json(resp)$error$message}
+  error_body <- function(resp) httr2::resp_body_json(resp)$error$message
 
   resp <- httr2::request(url) |>
     httr2::req_error(body = error_body) |>
@@ -73,7 +266,19 @@ quality_eligibility <- function(year,
 
   results <- dplyr::bind_cols(top, org)
 
+  if (!tidy) results <- df2chr(results)
+
   if (tidy) {
+
+    # tidyr::unnest_longer(e1, apms, keep_empty = TRUE) |>
+    #   tidyr::unpack(apms, names_sep = ".") |>
+    #   tidyr::unnest_longer(virtual_groups, keep_empty = TRUE) |>
+    #   tidyr::unpack(virtual_groups, names_sep = ".") |>
+    #   tidyr::unnest_longer(individual_scenario, keep_empty = TRUE) |>
+    #   tidyr::unpack(individual_scenario, names_sep = ".") |>
+    #   tidyr::unnest_longer(group_scenario, keep_empty = TRUE) |>
+    #   tidyr::unpack(group_scenario, names_sep = ".")
+
     results <- results |>
       tidyr::unnest_wider(c(apms,
                             individual_scenario,
