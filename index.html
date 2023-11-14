@@ -375,7 +375,7 @@
 <code>open_payments()</code><a class="anchor" aria-label="anchor" href="#open_payments"></a>
 </h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1023630738</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1023630738</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>info <span class="op">=</span> <span class="fu"><a href="reference/ndc_lookup.html">ndc_lookup</a></span><span class="op">(</span><span class="va">ndc</span><span class="op">)</span>, ndc <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">info</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✖ No results for NDC = 78206-145-01</span></span>
@@ -403,7 +403,7 @@
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_country       &lt;chr&gt; "United States"</span></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_total           &lt;dbl&gt; 17.43</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_date            &lt;date&gt; 2021-08-25</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_count           &lt;chr&gt; "1"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_count           &lt;int&gt; 1</span></span>
 <span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_form            &lt;chr&gt; "In-kind items and services"</span></span>
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_nature          &lt;chr&gt; "Food and Beverage"</span></span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ physician_ownership &lt;lgl&gt; FALSE</span></span>
@@ -412,8 +412,8 @@
 <span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_delay       &lt;lgl&gt; FALSE</span></span>
 <span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_dispute     &lt;lgl&gt; FALSE</span></span>
 <span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ related_product     &lt;lgl&gt; TRUE</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id                  &lt;int&gt; 1</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group               &lt;int&gt; 1</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ row_id              &lt;int&gt; 1</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_id            &lt;int&gt; 1</span></span>
 <span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ name                &lt;chr&gt; "NEXPLANON"</span></span>
 <span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ covered             &lt;lgl&gt; TRUE</span></span>
 <span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ type                &lt;chr&gt; "Drug"</span></span>
