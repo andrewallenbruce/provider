@@ -135,7 +135,7 @@ quality_eligibility <- function(year,
     #   combine(address, c('adr_ln_1', 'adr_ln_2')) |>
     #   dplyr::mutate(gndr = fct_gen(gndr),
     #                 state = fct_stabb(state)) |>
-    #   cols_clin()
+    #   cols_qelig()
 
     if (na.rm) results <- narm(results)
   }

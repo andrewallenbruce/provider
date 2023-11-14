@@ -162,6 +162,7 @@ conditions <- function(year,
       cli::cli_abort(c("{.arg mcc} is only available for {.arg set = 'Multiple'}."))} # nolint
     mcc <- rlang::arg_match(mcc, names(mcc()))
     mcc <- lookup(mcc(), mcc)
+    condition2 <- NULL
   }
 
   if (!is.null(condition)) {

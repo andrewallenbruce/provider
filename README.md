@@ -128,10 +128,10 @@ clinicians(npi = 1932365699) |> glimpse()
 
 ``` r
 conditions(year  = 2018, 
-           set   = "multiple", 
-           level = "national", 
-           age   = "all", 
-           demo  = "all", 
+           set   = "Multiple", 
+           level = "National", 
+           age   = "All", 
+           demo  = "All", 
            mcc   = "6+") |> glimpse()
 ```
 
@@ -152,10 +152,10 @@ conditions(year  = 2018,
 
 ``` r
 conditions(year      = 2018, 
-           set       = "specific", 
-           level     = "national", 
-           age       = "all", 
-           demo      = "all",
+           set       = "Specific", 
+           level     = "National", 
+           age       = "All", 
+           demo      = "All",
            condition = "Arthritis") |> glimpse()
 ```
 
@@ -282,9 +282,13 @@ nppes(npi = 1720098791) |> glimpse()
 ### `open_payments()`
 
 ``` r
-open_payments(year = 2021, npi = 1023630738, na.rm = TRUE) |> 
-  mutate(info = ndc_lookup(ndc), ndc = NULL) |> 
-  unnest(info) |> glimpse()
+open_payments(year = 2021, 
+              npi = 1023630738, 
+              na.rm = TRUE) |> 
+  mutate(info = ndc_lookup(ndc), 
+         ndc = NULL) |> 
+  unnest(info) |> 
+  glimpse()
 ```
 
     #> ✖ No results for NDC = 78206-145-01

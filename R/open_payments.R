@@ -241,7 +241,7 @@ open_payments <- function(year,
 
     results <- tidyup(results,
                       dtype = 'mdy',
-                      yn = c(yncols),
+                      yn = c(yncols), #nolint
                       dbl = 'dollars',
                       int = c('program_year', 'number_of_payments_included_in_total_amount')) |> #nolint
       dplyr::mutate(covered_recipient_type                                         = fct_cov(covered_recipient_type),

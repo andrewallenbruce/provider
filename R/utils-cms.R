@@ -58,18 +58,6 @@ cms_update <- function(api, check = "id") {
 
 #' Update CMS.gov API distribution IDs
 #' @param api name of the api
-#' @param year int, year of the data distribution to return
-#' @return A [tibble][tibble::tibble-package] containing the updated ids.
-#' @noRd
-#' @autoglobal
-cms_match <- function(api, year) {
-  cms_update(api = {{ api }}, check = "id") |>
-    dplyr::filter(year == {{ year }}) |>
-    dplyr::pull(distro)
-}
-
-#' Update CMS.gov API distribution IDs
-#' @param api name of the api
 #' @return A [tibble][tibble::tibble-package] containing the updated ids.
 #' @examplesIf interactive()
 #' cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider")
@@ -103,26 +91,6 @@ cms_update_ids <- function(api = NULL) {
   return(ids)
 }
 
-
-#' Browse full CMS.gov API datasets
-#' @autoglobal
-#' @noRd
-cms_dataset_full <- function() {
-
-  resp <- httr2::request("https://data.cms.gov/data.json") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE)
-
-  ids <- resp$dataset |>
-    dplyr::tibble() |>
-    dplyr::select(title,
-                  description)
-
-  return(ids)
-}
-
-
 #' Search CMS.gov API datasets by keyword
 #' @param keyword search term
 #' @autoglobal
@@ -147,22 +115,4 @@ cms_dataset_search <- function(search = NULL) {
     ids <- ids |> dplyr::filter(keyword == {{ search }})
   }
   return(ids)
-}
-
-#' Search CMS.gov API datasets by keyword
-#' @param api search api distribution dates
-#' @autoglobal
-#' @noRd
-cms_get_dates <- function(api = NULL) {
-
-  cms_update_ids(api = {{ api }}) |>
-    dplyr::select(distribution_title,
-                  distribution) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c("title", "date"),
-                                cols_remove = TRUE) |>
-    dplyr::mutate(year = lubridate::year(date)) |>
-    dplyr::select(year, distribution)
-
 }
