@@ -1,4 +1,4 @@
-#' Beneficiary Chronic Conditions Prevalence
+#' Chronic Conditions Prevalence
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -6,14 +6,14 @@
 #' [conditions()] allows the user access to data concerning chronic conditions
 #' among Original Medicare (or fee-for-service) beneficiaries.
 #'
-#' @section `set = "specific"`:
+#' @section Specific Conditions:
 #'
-#' The __Specific Chronic Conditions__ dataset provides information on
-#' prevalence, use and spending organized by geography and 21 distinct chronic
-#' conditions among Original Medicare beneficiaries:
+#' The _Specific_ Chronic Conditions(`set = "specific"`) dataset provides
+#' information on prevalence, use and spending organized by geography and 21
+#' distinct chronic conditions:
 #'
 #' 1. Alcohol Abuse
-#' 1. Alzheimer’s Disease/Dementia
+#' 1. Alzheimer's Disease/Dementia
 #' 1. Arthritis
 #' 1. Asthma
 #' 1. Atrial Fibrillation
@@ -34,12 +34,12 @@
 #' 1. Schizophrenia and Other Psychotic Disorders
 #' 1. Stroke
 #'
-#' @section `set = "multiple"`:
+#' @section Multiple Conditions:
 #'
-#' The __Multiple Chronic Conditions__ dataset provides information on
-#' prevalence, use and spending organized by geography and the count of chronic
-#' conditions from the set of select 21 chronic conditions. The count of
-#' conditions is grouped into four categories:
+#' The _Multiple_ Chronic Conditions(`set = "multiple"`) dataset provides
+#' information on prevalence, use and spending organized by geography and the
+#' count of chronic conditions from the set of select 21 chronic conditions.
+#' The count of conditions is binned into four categories:
 #'
 #' 1. __0-1__
 #' 1. __2-3__
@@ -47,11 +47,13 @@
 #' 1. __6 or More__
 #'
 #' @section Prevalence:
+#'
 #' Prevalence estimates are calculated by taking the beneficiaries within the
 #' MCC category divided by the total number of beneficiaries in the
 #' fee-for-service population, expressed as a percentage.
 #'
 #' @section Hospital Readmission Rates:
+#'
 #' Hospital readmissions are expressed as a percentage of all admissions. A
 #' 30-day readmission is defined as an admission to an acute care hospital for
 #' any cause within 30 days of discharge from an acute care hospital. Except
@@ -59,52 +61,87 @@
 #' an index admission, a readmission, or both.
 #'
 #' @section Emergency Department Visits:
+#'
 #' Emergency department visits are presented as the number of visits per 1,000
 #' beneficiaries. ED visits include visits where the beneficiary was released
 #' from the outpatient setting and where the beneficiary was admitted to an
 #' inpatient setting.
 #'
 #' @section Payment Per Capita:
+#'
 #' Medicare spending includes total Medicare payments for all covered services
 #' in Parts A and B and is presented per beneficiary (i.e. per capita).
 #' Standardized payments are presented to allow for comparisons across
 #' geographic areas in health care use among beneficiaries.
 #'
 #' @section Links:
+#'
 #' + [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
 #' + [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)
 #'
 #' @param year < *integer* > Calendar year of Medicare enrollment, in `YYYY`
 #' format. Run [cc_years()] to return a vector of currently available years.
-#' @param set < *character* > // **required** `"multiple"` or `"specific"`
-#' @param level < *character* > Geographic level of aggregation: `"national"`, `"state"`, or `"county"`
+#' @param set < *character* > // **required** `"Multiple"` or `"Specific"`
+#' @param level < *character* > Geographic level of aggregation: `"National"`, `"State"`, or `"County"`
 #' @param sublevel < *character* > Beneficiary's state or county
 #' @param fips < *character* > Beneficiary's state or county FIPS code
-#' @param age < *character* > Age level of aggregation: `"all"`, `"<65"`, or `"65+"`
-#' @param demo,subdemo < *character* > __Demographic__, _subdemographic_ level of
-#' aggregation: __`"all"`__, __`"sex"`__ (`"male"`, `"female"`), __`"race"`__ (`"white"`,
-#' `"black"`, `"island"`, `"hispanic"`, `"native"`), __`"dual"`__ (`"nondual"`, `"dual"`).
+#' @param age < *character* > Age level of aggregation: `"All"`, `"<65"`, or `"65+"`
+#' @param demo,subdemo < *character* > Demographic/subdemographic level of aggregation:
+#'
+#' |**`demo`**      |**`subdemo`**                  |
+#' |:---------------|:------------------------------|
+#' |`'All'`         |`'All'`                        |
+#' |`'Sex'`         |`'Male'`                       |
+#' |                |`'Female'`                     |
+#' |`'Race'`        |`'White'`                      |
+#' |                |`'Black'`                      |
+#' |                |`'Island'`                     |
+#' |                |`'Hispanic'`                   |
+#' |                |`'Native'`                     |
+#' |`'Dual Status'` |`'Dual'` (Medicare & Medicaid) |
+#' |                |`'Nondual'` (Medicare only)    |
+#'
 #' @param mcc < *character* > Number of chronic conditions: `"0-1"`, `"2-3"`, `"4-5"`, `"6+"`
 #' @param condition < *character* > Chronic condition for which the prevalence
-#' and utilization is compiled (see above for list of conditions)
+#' and utilization is compiled (see details for list of conditions)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #'
 #' @returns A [tibble][tibble::tibble-package] with the following columns:
 #'
 #' @examplesIf interactive()
-#' conditions(year = 2018, set = "specific", sublevel = "CA", demo = "all")
-#' conditions(year = 2018, set = "specific", sublevel = "CA", subdemo = "female", age = "all")
-#' conditions(year = 2018, set = "multiple", sublevel = "California", subdemo = "female")
+#' conditions(year = 2018,
+#'            set = "Specific",
+#'            sublevel = "CA",
+#'            demo = "All")
 #'
-#' conditions(year = 2007, set = "specific", level = "national", demo = "race")
-#' conditions(year = 2007, set = "multiple", level = "national", demo = "race")
+#' conditions(year = 2018,
+#'            set = "Specific",
+#'            sublevel = "CA",
+#'            subdemo = "Female",
+#'            age = "All")
+#'
+#' conditions(year = 2018,
+#'            set = "Multiple",
+#'            sublevel = "California",
+#'            subdemo = "Female")
+#'
+#' conditions(year = 2007,
+#'            set = "Specific",
+#'            level = "National",
+#'            demo = "Race",
+#'            condition = "Alzheimer's Disease/Dementia")
+#'
+#' conditions(year = 2007,
+#'            set = "Multiple",
+#'            level = "National",
+#'            demo = "Race")
 #' @autoglobal
 #' @export
 conditions <- function(year,
                        condition = NULL,
                        sublevel = NULL,
-                       set = c("multiple", "specific"),
+                       set = c("Multiple", "Specific"),
                        level = NULL,
                        fips = NULL,
                        age = NULL,
@@ -116,47 +153,35 @@ conditions <- function(year,
 
   rlang::check_required(year)
   rlang::check_required(set)
-
   year <- as.character(year)
-
-  rlang::arg_match(year, as.character(cc_years()))
-  rlang::arg_match(set, c("multiple", "specific"))
+  year <- rlang::arg_match(year, as.character(cc_years()))
+  set  <- rlang::arg_match(set, c("Multiple", "Specific"))
 
   if (!is.null(mcc)) {
-    if (set == "specific") {
-      cli::cli_abort(c("{.arg mcc} is only available for {.arg type = 'specific'}."))} # nolint
-    rlang::arg_match(mcc, mcc())
-    mcc <- mcc_convert(mcc)
+    if (set == "Specific") {
+      cli::cli_abort(c("{.arg mcc} is only available for {.arg set = 'Multiple'}."))} # nolint
+    mcc <- rlang::arg_match(mcc, names(mcc()))
+    mcc <- lookup(mcc(), mcc)
   }
 
   if (!is.null(condition)) {
-    if (set == "multiple") {
-      cli::cli_abort(c("{.arg condition} is only available for {.arg type = 'multiple'}."))} # nolint
+    if (set == "Multiple") {
+      cli::cli_abort(c("{.arg condition} is only available for {.arg set = 'Specific'}."))} # nolint
+    condition <- rlang::arg_match(condition, names(spec_cond()))
+    condition2 <- lookup(spec_cond(), condition)
   }
 
-  if (!is.null(level)) {
-    rlang::arg_match(level, levels())
-    level <- stringr::str_to_title(level)
-  }
-
-  if (!is.null(age)) {
-    rlang::arg_match(age, ages())
-    if (age == "all") {age <- "All"}
-  }
-
-  if (!is.null(demo)) {
-    rlang::arg_match(demo, demo())
-    demo <- demo_convert(demo)
-  }
+  level <- level %nn% rlang::arg_match(level, levels())
+  age   <- age   %nn% rlang::arg_match(age, ages())
+  demo  <- demo  %nn% rlang::arg_match(demo, demo())
+  fips  <- fips  %nn% as.character(fips)
 
   if (!is.null(subdemo)) {
-    rlang::arg_match(subdemo, subdemo())
-    subdemo <- subdemo_convert(subdemo)
+    subdemo <- rlang::arg_match(subdemo, names(subdemo()))
+    subdemo <- lookup(subdemo(), subdemo)
   }
 
   if (!is.null(sublevel) && (sublevel %in% state.abb)) sublevel <- abb2full(sublevel)
-
-  fips <- fips %nn% as.character(fips)
 
   args <- dplyr::tribble(
     ~param,            ~arg,
@@ -167,10 +192,10 @@ conditions <- function(year,
     "Bene_Demo_Lvl",    demo,
     "Bene_Demo_Desc",   subdemo,
     "Bene_MCC",         mcc,
-    "Bene_Cond",        condition)
+    "Bene_Cond",        condition2)
 
-  if (set == "multiple") yr <- api_years("mcc")
-  if (set == "specific") yr <- api_years("scc")
+  if (set == "Multiple") yr <- api_years("mcc")
+  if (set == "Specific") yr <- api_years("scc")
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
@@ -190,7 +215,8 @@ conditions <- function(year,
       "age",          age,
       "demo",         demo,
       "subdemo",      subdemo,
-      "mcc",          mcc) |>
+      "mcc",          mcc,
+      "condition",    condition) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -203,7 +229,6 @@ conditions <- function(year,
 
   if (tidy) {
     results$year <- year
-
     results <- cols_cc(tidyup(results,
                               int = "year",
                               dbl = c("prvlnc", "_pc", "er_", "_rate"))) |>
@@ -213,46 +238,10 @@ conditions <- function(year,
                     demographic = fct_demo(demographic),
                     subdemo     = fct_subdemo(subdemo))
 
-  if (set == "multiple") results <- dplyr::mutate(results, mcc = fct_mcc(mcc))
+  if (set == "Multiple") results$mcc <- fct_mcc(results$mcc)
   if (na.rm) results <- narm(results)
     }
   return(results)
-}
-
-#' @autoglobal
-#' @noRd
-fct_age <- function(x) {
-  factor(x, levels = c("All", "<65", "65+"))
-}
-
-#' @autoglobal
-#' @noRd
-fct_demo <- function(x) {
-  factor(x, levels = c("All", "Dual Status", "Sex", "Race"))
-}
-
-#' @autoglobal
-#' @noRd
-fct_subdemo <- function(x) {
-  factor(x, levels = c("All",
-                       "Medicare Only",
-                       "Medicare and Medicaid",
-                       "Female",
-                       "Male",
-                       "Asian Pacific Islander",
-                       "Hispanic",
-                       "Native American",
-                       "non-Hispanic Black",
-                       "non-Hispanic White"))
-}
-
-#' @autoglobal
-#' @noRd
-fct_mcc <- function(x) {
-  factor(x,
-         levels = c("0 to 1", "2 to 3", "4 to 5", "6+"),
-         labels = c("0-1", "2-3", "4-5", "6+"),
-         ordered = TRUE)
 }
 
 #' @param df data frame
@@ -267,7 +256,7 @@ cols_cc <- function(df) {
             'age'                 = 'bene_age_lvl',
             'demographic'         = 'bene_demo_lvl',
             'subdemo'             = 'bene_demo_desc',
-            'mcc'                 = "bene_mcc",
+            'mcc'                 = 'bene_mcc',
             'condition'           = 'bene_cond',
             'prevalence'          = 'prvlnc',
             'tot_pymt_percap'     = 'tot_mdcr_pymt_pc',
@@ -280,76 +269,74 @@ cols_cc <- function(df) {
 
 #' @autoglobal
 #' @noRd
-levels <- function() {c("national", "state", "county")}
+levels <- function() c("National", "State", "County")
 
 #' @autoglobal
 #' @noRd
-ages <- function() {c("all", "<65", "65+")}
+ages <- function() c("All", "<65", "65+")
 
 #' @autoglobal
 #' @noRd
-demo <- function() {c("all", "dual", "sex", "race")}
-
-#' @param x demo level
-#' @return demo level
-#' @autoglobal
-#' @noRd
-demo_convert <- function(x) {
-  dplyr::tibble(
-    x = demo(),
-    y = c("All", "Dual Status", "Sex", "Race")) |>
-    dplyr::filter(x == {{ x }}) |>
-    dplyr::pull(y)
-}
+demo <- function() c("All", "Dual Status", "Sex", "Race")
 
 #' @autoglobal
 #' @noRd
 subdemo <- function() {
-  c("all",
-    "nondual",
-    "dual",
-    "female",
-    "male",
-    "island",
-    "hispanic",
-    "native",
-    "black",
-    "white")
-}
-
-#' @param x subdemo level
-#' @return subdemo level
-#' @autoglobal
-#' @noRd
-subdemo_convert <- function(x) {
-  dplyr::tibble(
-    x = subdemo(),
-    y = c("All",
-          "Medicare Only",
-          "Medicare and Medicaid",
-          "Female",
-          "Male",
-          "Asian Pacific Islander",
-          "Hispanic",
-          "Native American",
-          "non-Hispanic Black",
-          "non-Hispanic White")) |>
-    dplyr::filter(x == {{ x }}) |>
-    dplyr::pull(y)
+  c("All"      = "All",
+    "Nondual"  = "Medicare Only",
+    "Dual"     = "Medicare and Medicaid",
+    "Female"   = "Female",
+    "Male"     = "Male",
+    "Island"   = "Asian Pacific Islander",
+    "Hispanic" = "Hispanic",
+    "Native"   = "Native American",
+    "Black"    = "non-Hispanic Black",
+    "White"    = "non-Hispanic White")
 }
 
 #' @autoglobal
 #' @noRd
-mcc <- function() {c("0-1", "2-3", "4-5", "6+")}
+mcc <- function() {
+  c("0-1" = "0 to 1",
+    "2-3" = "2 to 3",
+    "4-5" = "4 to 5",
+    "6+"  = "6+")
+}
 
-#' @param x mcc arg
-#' @return mcc arg
+#' @param table lookup table, e.g. `mcc()`
+#' @param item phrase to search for, e.g. `"0-1"`
 #' @autoglobal
 #' @noRd
-mcc_convert <- function(x) {
-  dplyr::tibble(
-    x = mcc(),
-    y = c("0 to 1", "2 to 3", "4 to 5", "6+")) |>
-    dplyr::filter(x == {{ x }}) |>
-    dplyr::pull(y)
+lookup <- function(table, item) {
+  out <- table[item]
+  unname(out)
 }
+
+#' @autoglobal
+#' @noRd
+spec_cond <- function() {
+  c('All'                                         = 'All',
+    'Alcohol Abuse'                               = 'Alcohol Abuse',
+    "Alzheimer's Disease/Dementia"                = "Alzheimer's Disease%2FDementia",
+    'Arthritis'                                   = 'Arthritis',
+    'Asthma'                                      = 'Asthma',
+    'Atrial Fibrillation'                         = 'Atrial Fibrillation',
+    'Autism Spectrum Disorders'                   = 'Autism Spectrum Disorders',
+    'Cancer'                                      = 'Cancer',
+    'Chronic Kidney Disease'                      = 'Chronic Kidney Disease',
+    'COPD'                                        = 'COPD',
+    'Depression'                                  = 'Depression',
+    'Diabetes'                                    = 'Diabetes',
+    'Drug Abuse/Substance Abuse'                  = 'Drug Abuse%2FSubstance Abuse',
+    'Heart Failure'                               = 'Heart Failure',
+    'Hepatitis (Chronic Viral B & C)'             = 'Hepatitis (Chronic Viral B %26 C)',
+    'HIV/AIDS'                                    = 'HIV%2FAIDS',
+    'Hyperlipidemia'                              = 'Hyperlipidemia',
+    'Hypertension'                                = 'Hypertension',
+    'Ischemic Heart Disease'                      = 'Ischemic Heart Disease',
+    'Osteoporosis'                                = 'Osteoporosis',
+    'Schizophrenia and Other Psychotic Disorders' = 'Schizophrenia and Other Psychotic Disorders',
+    'Stroke'                                      = 'Stroke')
+}
+
+

@@ -68,7 +68,7 @@ quality_eligibility <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  # rlang::arg_match(year, values = as.character(qpp_years()))
+  rlang::arg_match(year, values = as.character(2017:2024))
   npi <- npi %nn% validate_npi(npi)
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
   error_body <- function(response) httr2::resp_body_json(response)$error$message

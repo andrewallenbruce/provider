@@ -2,13 +2,13 @@
 % Please edit documentation in R/conditions.R
 \name{conditions}
 \alias{conditions}
-\title{Beneficiary Chronic Conditions Prevalence}
+\title{Chronic Conditions Prevalence}
 \usage{
 conditions(
   year,
   condition = NULL,
   sublevel = NULL,
-  set = c("multiple", "specific"),
+  set = c("Multiple", "Specific"),
   level = NULL,
   fips = NULL,
   age = NULL,
@@ -24,21 +24,31 @@ conditions(
 format. Run \code{\link[=cc_years]{cc_years()}} to return a vector of currently available years.}
 
 \item{condition}{< \emph{character} > Chronic condition for which the prevalence
-and utilization is compiled (see above for list of conditions)}
+and utilization is compiled (see details for list of conditions)}
 
 \item{sublevel}{< \emph{character} > Beneficiary's state or county}
 
-\item{set}{< \emph{character} > // \strong{required} \code{"multiple"} or \code{"specific"}}
+\item{set}{< \emph{character} > // \strong{required} \code{"Multiple"} or \code{"Specific"}}
 
-\item{level}{< \emph{character} > Geographic level of aggregation: \code{"national"}, \code{"state"}, or \code{"county"}}
+\item{level}{< \emph{character} > Geographic level of aggregation: \code{"National"}, \code{"State"}, or \code{"County"}}
 
 \item{fips}{< \emph{character} > Beneficiary's state or county FIPS code}
 
-\item{age}{< \emph{character} > Age level of aggregation: \code{"all"}, \code{"<65"}, or \code{"65+"}}
+\item{age}{< \emph{character} > Age level of aggregation: \code{"All"}, \code{"<65"}, or \code{"65+"}}
 
-\item{demo, subdemo}{< \emph{character} > \strong{Demographic}, \emph{subdemographic} level of
-aggregation: \strong{\code{"all"}}, \strong{\code{"sex"}} (\code{"male"}, \code{"female"}), \strong{\code{"race"}} (\code{"white"},
-\code{"black"}, \code{"island"}, \code{"hispanic"}, \code{"native"}), \strong{\code{"dual"}} (\code{"nondual"}, \code{"dual"}).}
+\item{demo, subdemo}{< \emph{character} > Demographic/subdemographic level of aggregation:\tabular{ll}{
+   \strong{\code{demo}} \tab \strong{\code{subdemo}} \cr
+   \code{'All'} \tab \code{'All'} \cr
+   \code{'Sex'} \tab \code{'Male'} \cr
+    \tab \code{'Female'} \cr
+   \code{'Race'} \tab \code{'White'} \cr
+    \tab \code{'Black'} \cr
+    \tab \code{'Island'} \cr
+    \tab \code{'Hispanic'} \cr
+    \tab \code{'Native'} \cr
+   \code{'Dual Status'} \tab \code{'Dual'} (Medicare & Medicaid) \cr
+    \tab \code{'Nondual'} (Medicare only) \cr
+}}
 
 \item{mcc}{< \emph{character} > Number of chronic conditions: \code{"0-1"}, \code{"2-3"}, \code{"4-5"}, \code{"6+"}}
 
@@ -55,15 +65,15 @@ A \link[tibble:tibble-package]{tibble} with the following columns:
 \code{\link[=conditions]{conditions()}} allows the user access to data concerning chronic conditions
 among Original Medicare (or fee-for-service) beneficiaries.
 }
-\section{\code{set = "specific"}}{
+\section{Specific Conditions}{
 
 
-The \strong{Specific Chronic Conditions} dataset provides information on
-prevalence, use and spending organized by geography and 21 distinct chronic
-conditions among Original Medicare beneficiaries:
+The \emph{Specific} Chronic Conditions(\code{set = "specific"}) dataset provides
+information on prevalence, use and spending organized by geography and 21
+distinct chronic conditions:
 \enumerate{
 \item Alcohol Abuse
-\item Alzheimer’s Disease/Dementia
+\item Alzheimer's Disease/Dementia
 \item Arthritis
 \item Asthma
 \item Atrial Fibrillation
@@ -86,13 +96,13 @@ conditions among Original Medicare beneficiaries:
 }
 }
 
-\section{\code{set = "multiple"}}{
+\section{Multiple Conditions}{
 
 
-The \strong{Multiple Chronic Conditions} dataset provides information on
-prevalence, use and spending organized by geography and the count of chronic
-conditions from the set of select 21 chronic conditions. The count of
-conditions is grouped into four categories:
+The \emph{Multiple} Chronic Conditions(\code{set = "multiple"}) dataset provides
+information on prevalence, use and spending organized by geography and the
+count of chronic conditions from the set of select 21 chronic conditions.
+The count of conditions is binned into four categories:
 \enumerate{
 \item \strong{0-1}
 \item \strong{2-3}
@@ -103,12 +113,14 @@ conditions is grouped into four categories:
 
 \section{Prevalence}{
 
+
 Prevalence estimates are calculated by taking the beneficiaries within the
 MCC category divided by the total number of beneficiaries in the
 fee-for-service population, expressed as a percentage.
 }
 
 \section{Hospital Readmission Rates}{
+
 
 Hospital readmissions are expressed as a percentage of all admissions. A
 30-day readmission is defined as an admission to an acute care hospital for
@@ -119,6 +131,7 @@ an index admission, a readmission, or both.
 
 \section{Emergency Department Visits}{
 
+
 Emergency department visits are presented as the number of visits per 1,000
 beneficiaries. ED visits include visits where the beneficiary was released
 from the outpatient setting and where the beneficiary was admitted to an
@@ -126,6 +139,7 @@ inpatient setting.
 }
 
 \section{Payment Per Capita}{
+
 
 Medicare spending includes total Medicare payments for all covered services
 in Parts A and B and is presented per beneficiary (i.e. per capita).
@@ -143,11 +157,31 @@ geographic areas in health care use among beneficiaries.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-conditions(year = 2018, set = "specific", sublevel = "CA", demo = "all")
-conditions(year = 2018, set = "specific", sublevel = "CA", subdemo = "female", age = "all")
-conditions(year = 2018, set = "multiple", sublevel = "California", subdemo = "female")
+conditions(year = 2018,
+           set = "Specific",
+           sublevel = "CA",
+           demo = "All")
 
-conditions(year = 2007, set = "specific", level = "national", demo = "race")
-conditions(year = 2007, set = "multiple", level = "national", demo = "race")
+conditions(year = 2018,
+           set = "Specific",
+           sublevel = "CA",
+           subdemo = "Female",
+           age = "All")
+
+conditions(year = 2018,
+           set = "Multiple",
+           sublevel = "California",
+           subdemo = "Female")
+
+conditions(year = 2007,
+           set = "Specific",
+           level = "National",
+           demo = "Race",
+           condition = "Alzheimer's Disease/Dementia")
+
+conditions(year = 2007,
+           set = "Multiple",
+           level = "National",
+           demo = "Race")
 \dontshow{\}) # examplesIf}
 }

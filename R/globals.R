@@ -34,9 +34,6 @@ utils::globalVariables(c(
   "distro", # <conditions>
   "y", # <conditions>
   "demographic", # <conditions>
-  "y", # <demo_convert>
-  "y", # <subdemo_convert>
-  "y", # <mcc_convert>
   "y", # <hospitals>
   "address", # <hospitals>
   "location_type", # <hospitals>

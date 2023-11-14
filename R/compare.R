@@ -114,7 +114,8 @@ compare_conditions <- function(df, pivot = FALSE) {
 
   x <- dplyr::select(df, year, sublevel = state, conditions) |>
     tidyr::unnest(conditions) |>
-    dplyr::mutate(level = "Provider", .after = year) |>
+    dplyr::mutate(hcc_risk_avg = NULL,
+                  level = "Provider", .after = year) |>
     cnd_rename() |>
     tidyr::pivot_longer(cols = !c(year, level, sublevel),
                         names_to = "condition",
@@ -122,10 +123,10 @@ compare_conditions <- function(df, pivot = FALSE) {
     dplyr::filter(!is.na(prevalence), year %in% cc_years())
 
   y <- dplyr::select(x, year, condition, sublevel) |>
-    dplyr::mutate(set = "specific",
-                  demo = "all",
-                  subdemo = "all",
-                  age = "all")
+    dplyr::mutate(set     = "Specific",
+                  demo    = "All",
+                  subdemo = "All",
+                  age     = "All")
 
   state <- furrr::future_pmap_dfr(y, conditions, .options = furrr::furrr_options(seed = NULL))
   state <- dplyr::select(state, year, level, condition, prevalence)
@@ -133,7 +134,7 @@ compare_conditions <- function(df, pivot = FALSE) {
   #   purrr::list_rbind() |>
   #   dplyr::select(year, level, condition, prevalence)
 
-  y$sublevel <- "national"
+  y$sublevel <- "National"
 
   national <- furrr::future_pmap_dfr(y, conditions, .options = furrr::furrr_options(seed = NULL))
   national <- dplyr::select(national, year, level, condition, prevalence)
@@ -144,7 +145,7 @@ compare_conditions <- function(df, pivot = FALSE) {
   x$sublevel <- NULL
 
   results <- vctrs::vec_rbind(x, state, national) |>
-    dplyr::mutate(level = forcats::fct_inorder(level)) |>
+    dplyr::mutate(level = fct_level(level)) |>
     dplyr::arrange(year, condition)
 
   if (pivot) {
