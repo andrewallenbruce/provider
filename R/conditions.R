@@ -92,14 +92,14 @@
 #' |:---------------|:------------------------------|
 #' |`'All'`         |`'All'`                        |
 #' |`'Sex'`         |`'Male'`                       |
-#' |                |`'Female'`                     |
+#' | ''             |`'Female'`                     |
 #' |`'Race'`        |`'White'`                      |
-#' |                |`'Black'`                      |
-#' |                |`'Island'`                     |
-#' |                |`'Hispanic'`                   |
-#' |                |`'Native'`                     |
+#' | ''             |`'Black'`                      |
+#' | ''             |`'Island'`                     |
+#' | ''             |`'Hispanic'`                   |
+#' | ''             |`'Native'`                     |
 #' |`'Dual Status'` |`'Dual'` (Medicare & Medicaid) |
-#' |                |`'Nondual'` (Medicare only)    |
+#' | ''             |`'Nondual'` (Medicare only)    |
 #'
 #' @param mcc < *character* > Number of chronic conditions: `"0-1"`, `"2-3"`, `"4-5"`, `"6+"`
 #' @param condition < *character* > Chronic condition for which the prevalence

@@ -40,14 +40,14 @@ and utilization is compiled (see details for list of conditions)}
    \strong{\code{demo}} \tab \strong{\code{subdemo}} \cr
    \code{'All'} \tab \code{'All'} \cr
    \code{'Sex'} \tab \code{'Male'} \cr
-    \tab \code{'Female'} \cr
+   '' \tab \code{'Female'} \cr
    \code{'Race'} \tab \code{'White'} \cr
-    \tab \code{'Black'} \cr
-    \tab \code{'Island'} \cr
-    \tab \code{'Hispanic'} \cr
-    \tab \code{'Native'} \cr
+   '' \tab \code{'Black'} \cr
+   '' \tab \code{'Island'} \cr
+   '' \tab \code{'Hispanic'} \cr
+   '' \tab \code{'Native'} \cr
    \code{'Dual Status'} \tab \code{'Dual'} (Medicare & Medicaid) \cr
-    \tab \code{'Nondual'} (Medicare only) \cr
+   '' \tab \code{'Nondual'} (Medicare only) \cr
 }}
 
 \item{mcc}{< \emph{character} > Number of chronic conditions: \code{"0-1"}, \code{"2-3"}, \code{"4-5"}, \code{"6+"}}

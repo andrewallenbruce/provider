@@ -23,7 +23,7 @@ fct_period <- function(x) {
          ordered = TRUE)
 }
 
-#' Convert genders to unordered factor
+#' Convert sexes to unordered labelled factor
 #' @param x vector
 #' @autoglobal
 #' @noRd
