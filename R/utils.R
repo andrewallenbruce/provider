@@ -219,25 +219,15 @@ tidyup <- function(df,
 #' @param nm new col name, unquoted
 #' @param cols columns to combine
 #' @param sep separator
-#' @param type "bare" or "any"
 #' @autoglobal
 #' @noRd
-combine <- function(df, nm, cols, sep = " ", type = "any") {
+combine <- function(df, nm, cols, sep = " ") {
 
-  if (type == "any") {
   return(tidyr::unite(df, col = {{ nm }},
                       dplyr::any_of(cols),
                       remove = TRUE,
                       na.rm = TRUE,
-                      sep = sep))}
-
-  if (type == "bare") {
-  return(tidyr::unite(df, col = {{ nm }},
-                      {{ cols }},
-                      remove = TRUE,
-                      na.rm = TRUE,
-                      sep = sep))}
-
+                      sep = sep))
 }
 
 #' Remove empty rows and columns

@@ -77,11 +77,18 @@ select(q, year, measures) |>
 ```
 
 <br>
-
+"1043477615"
 ## Quality Eligibility
 
 ```{r}
-quality_eligibility(year = 2017, npi = 1144544834) |> glimpse()
+2017:2023 |>
+purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
+purrr::list_rbind()
+```
+
+
+```{r}
+quality_eligibility(year = 2017, npi = 1043477615) |> dplyr::glimpse()
 ```
 
 

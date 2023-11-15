@@ -255,7 +255,7 @@ laboratories <- function(name = NULL,
                                   aff,
                                   by = dplyr::join_by(clia_number))
     }
-    if (na.rm) {results <- narm(results)}
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }

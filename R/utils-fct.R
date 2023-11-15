@@ -160,12 +160,16 @@ fct_mcc <- function(x) {
          ordered = TRUE)
 }
 
+#' Convert QPP participation types to unordered factor
+#' @param x vector
 #' @autoglobal
 #' @noRd
 fct_part <- function(x) {
   factor(x, levels = c("Group", "Individual", "MIPS APM"))
 }
 
+#' Convert QPP special statuses to labelled factor
+#' @param x vector
 #' @autoglobal
 #' @noRd
 fct_status <- function(x) {
@@ -210,6 +214,8 @@ fct_status <- function(x) {
                     "Extreme Hardship (Cost)"))
 }
 
+#' Convert QPP measure categories to labelled factor
+#' @param x vector
 #' @autoglobal
 #' @noRd
 fct_measure <- function(x) {
@@ -217,4 +223,33 @@ fct_measure <- function(x) {
          levels = c("quality", "pi", "ia", "cost"),
          labels = c("Quality", "Promoting Interoperability",
                     "Improvement Activities", "Cost"))
+}
+
+#' Convert hospital registration types to unordered factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_reg <- function(x) {
+  factor(x, levels = c("Non-Profit", "Proprietor"))
+}
+
+#' Convert hospital subgroup types to unordered factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_subgroup <- function(x) {
+  factor(x, levels = c("Acute Care",
+                       "Alcohol Drug",
+                       "Childrens' Hospital",
+                       "General",
+                       "Long-term",
+                       "None",
+                       "Other",
+                       "Psychiatric",
+                       "Psychiatric Unit",
+                       "Rehabilitation",
+                       "Rehabilitation Unit",
+                       "Short-Term",
+                       "Specialty Hospital",
+                       "Swing-Bed Approved"))
 }

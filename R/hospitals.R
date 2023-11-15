@@ -276,8 +276,8 @@ hospitals <- function(npi = NULL,
   if (tidy) {
     results <- tidyup(results,
                       dtype = 'ymd',
-                      yn = c('flag', 'subgroup'),
-                      chr = 'zip_code') |>
+                      yn    = c('flag', 'subgroup'),
+                      chr   = 'zip_code') |>
       combine(address, c('address_line_1',
                          'address_line_2')) |>
       combine(structure, c('organization_type_structure',
@@ -294,7 +294,7 @@ hospitals <- function(npi = NULL,
     if (pivot) {
       results <- results |>
         dplyr::rowwise() |>
-        dplyr::mutate(subtotal = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
+        dplyr::mutate(subtotal      = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
                       subgroup_none = dplyr::if_else(subtotal == 0, TRUE, FALSE),
                       subtotal = NULL) |>
         cols_hosp(2) |>
@@ -304,42 +304,15 @@ hospitals <- function(npi = NULL,
         dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup ")) |>
         dplyr::filter(flag == TRUE) |>
         dplyr::mutate(flag = NULL,
-                      subgroup = fct_sub(subgroup),
-                      enid_state = fct_stabb(enid_state),
+                      subgroup     = fct_subgroup(subgroup),
+                      enid_state   = fct_stabb(enid_state),
                       incorp_state = fct_stabb(incorp_state),
-                      state = fct_stabb(state))
+                      state        = fct_stabb(state))
 
     }
     if (na.rm) results <- narm(results)
   }
   return(results)
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_reg <- function(x) {
-  factor(x, levels = c("Non-Profit", "Proprietor"))
-}
-
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_sub <- function(x) {
-  factor(x, levels = c("Acute Care",
-                       "Alcohol Drug",
-                       "Childrens' Hospital",
-                       "General",
-                       "Long-term",
-                       "None",
-                       "Other",
-                       "Psychiatric",
-                       "Psychiatric Unit",
-                       "Rehabilitation",
-                       "Rehabilitation Unit",
-                       "Short-Term",
-                       "Specialty Hospital",
-                       "Swing-Bed Approved"))
 }
 
 #' @param df data frame

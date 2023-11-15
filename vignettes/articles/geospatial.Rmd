@@ -1,7 +1,5 @@
 ---
 title: "Mapping Providers"
-subtitle: "Demographics, Patient Mix, and Performance"
-description: "Demographics, Patient Mix, and Performance"
 author: "Andrew Bruce"
 date: "`r Sys.Date()`"
 output: html_document
@@ -29,19 +27,15 @@ library(provider)
 library(tidygeocoder)
 library(purrr)
 library(dplyr)
-library(stringr)
 library(ggplot2)
 library(ggsflabel)
 library(ggrepel)
-library(gghighlight)
-library(sf)
 library(tigris)
-library(zipcodeR)
-library(fipio)
 ```
 
+<br>
 
-## Retrieve NPIs of all RHCs in Georgia
+## Retrieve Addresses of all RHCs in Georgia
 
 ```{r}
 rhcs <- providers(state = "GA", specialty_code = "00-17") |> 
@@ -66,14 +60,15 @@ rhcs <- providers(state = "GA", specialty_code = "00-17") |>
                 pr_city, 
                 pr_state, 
                 pr_zip)
-rhcs
+
 ```
 
+<br>
 
 ## Stack Distinct `LOCATION` & `PRACTICE` Addresses
 
 ```{r}
-stack <- dplyr::bind_rows(
+rhcs <- dplyr::bind_rows(
   dplyr::select(rhcs, 
                 npi,
                 organization, 
@@ -110,57 +105,71 @@ stack <- dplyr::bind_rows(
                address:state, 
                remove = TRUE, 
                sep = " ")
-stack
 ```
 
+<br>
 
-## Send to `{tidygeocoder}`
+## Filter to distinct counties for labelling
+
+```{r}
+county_pts <- dplyr::distinct(stack, county, .keep_all = TRUE) |> 
+  dplyr::select(county, lat, lng) |> 
+  dplyr::filter(county != "Duval")
+```
+
+<br>
+
+## Geocode with `{tidygeocoder}`
 
 ```{r}
 rhc_geo <- dplyr::select(stack, npi:zip) |> 
+  dplyr::filter(zip != "32209") |> 
   tidygeocoder::geocode(address      = address, 
                         method       = "mapbox", 
                         full_results = TRUE, 
                         unique_only  = FALSE, 
                         return_input = TRUE) |> 
   dplyr::select(npi, zip, place_name, lat, long)
-rhc_geo
 ```
 
+<br>
 
 ## Retrieve Georgia counties shapefile from `{tigris}`
 
 ```{r}
-ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)  
-ga_counties
+ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)
 ```
 
+<br>
 
-## `{ggplot}`
+## Map with `{ggplot}`
 
 ```{r}
 p <- ggplot2::ggplot() + 
-  ggplot2::geom_sf(data = ga_counties, fill = "darkgreen", colour = "white", alpha = 0.25) +
-  #ggplot2::geom_sf(data = stack, size = 3, fill = "white") +
+  ggplot2::geom_sf(data = ga_counties, 
+                   fill = "grey80", 
+                   colour = "white") +
+  ggrepel::geom_label_repel(county_pts,
+                  mapping = aes(lng, 
+                                lat, 
+                                label = county),
+                  colour = "grey30",
+                  fill = "white",
+                  alpha = 0.85,
+                  force_pull = 0,
+                  segment.curvature = -0.1,
+                  segment.ncp = 3,
+                  segment.angle = 10,
+                  min.segment.length = 0,
+                  label.size = 0) +
   ggplot2::geom_point(rhc_geo, 
                       mapping = ggplot2::aes(long, lat), 
-                      fill = "white", 
+                      fill = "orange", 
                       color = "darkred", 
                       alpha = 0.75, 
-                      size = 1.5, 
+                      size = 2.75, 
                       shape = 21, 
-                      stroke = 0.5) +
-  # geom_label_repel(rhc_crd, 
-  #                 mapping = aes(long, lat, label = organization),
-  #                 force_pull = 0,
-  #                 force = 2,
-  #                 direction = "both",
-  #                 segment.curvature = -0.1, 
-  #                 segment.ncp = 3, 
-  #                 segment.angle = 20, 
-  #                 min.segment.length = 0,
-  #                 nudge_x = 2.5,
-  #                 nudge_y = 0.5) +
+                      stroke = 0.75) +
   ggplot2::theme_void()
 
 p + ggsflabel::lims_bbox(ga_counties)
