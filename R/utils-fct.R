@@ -225,6 +225,21 @@ fct_measure <- function(x) {
                     "Improvement Activities", "Cost"))
 }
 
+
+#' Convert covered recipient types to unordered labelled factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_cov <- function(x) {
+  factor(x,
+         levels = c("Covered Recipient Physician",
+                    "Covered Recipient Non-Physician Practitioner",
+                    "Covered Recipient Teaching Hospital"),
+         labels = c("Physician",
+                    "Non-Physician Practitioner",
+                    "Teaching Hospital"))
+}
+
 #' Convert hospital registration types to unordered factor
 #' @param x vector
 #' @autoglobal
@@ -252,4 +267,19 @@ fct_subgroup <- function(x) {
                        "Short-Term",
                        "Specialty Hospital",
                        "Swing-Bed Approved"))
+}
+
+#' Convert facility types to unordered factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_fac <- function(x) {
+  factor(x, levels = c("Hospital",
+                       "Long-term care hospital",
+                       "Nursing home",
+                       "Inpatient rehabilitation facility",
+                       "Home health agency",
+                       "Skilled nursing facility",
+                       "Hospice",
+                       "Dialysis facility"))
 }

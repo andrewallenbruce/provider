@@ -38,11 +38,41 @@ test_that("display_long() works", {
   expect_equal(display_long(x, cols = !id), z)
 })
 
+test_that("df2chr() works", {
+  df <- dplyr::tibble(
+    name  = "John Doe ",
+    date  = "1981/03/07",
+    int   = "123456789",
+    chr   = 123456789,
+    dbl   = "12.34",
+    yn    = "Y",
+    cred  = "M.D.",
+    blank = "",
+    space = " ",
+    star  = "*",
+    dash  = "--")
+
+  dff <- dplyr::tibble(
+    name = "John Doe ",
+    date = "1981/03/07",
+    int = "123456789",
+    chr = "123456789",
+    dbl = "12.34",
+    yn = "Y",
+    cred = "M.D.",
+    blank = "",
+    space = " ",
+    star = "*",
+    dash = "--")
+  expect_equal(df2chr(df), dff)
+})
+
 test_that("tidyup() works", {
   df <- dplyr::tibble(
     name  = "John Doe ",
     date  = "1981/03/07",
     int   = "123456789",
+    chr   = 123456789,
     dbl   = "12.34",
     yn    = "Y",
     cred  = "M.D.",
@@ -58,6 +88,7 @@ test_that("tidyup() works", {
     name  = "JOHN DOE",
     date  = lubridate::ymd("1981/03/07"),
     int   = 123456789,
+    chr   = "123456789",
     dbl   = 12.34,
     yn    = TRUE,
     cred  = "MD",
@@ -82,6 +113,7 @@ test_that("tidyup() works", {
                       yn    = "yn",
                       dtype = 'mdy',
                       int   = c("int", "year"),
+                      chr   = "chr",
                       dbl   = "dbl",
                       up    = "name",
                       cred  = "cred"),

@@ -120,6 +120,16 @@ test_that("fct_measure() works", {
   expect_equal(fct_measure(x), z)
 })
 
+test_that("fct_cov() works", {
+  x <- c("Covered Recipient Physician",
+         "Covered Recipient Non-Physician Practitioner",
+         "Covered Recipient Teaching Hospital")
+  y <- c("Physician",
+         "Non-Physician Practitioner",
+         "Teaching Hospital")
+  expect_equal(fct_cov(x), factor(y, levels = y))
+})
+
 ## hospitals
 
 test_that("fct_reg() works", {
@@ -145,7 +155,16 @@ test_that("fct_subgroup() works", {
   expect_equal(fct_subgroup(x), factor(x))
 })
 
-## laboratories fcts
+## affiliations
+
+test_that("fct_fac() works", {
+  x <- c("Hospital", "Long-term care hospital", "Nursing home",
+         "Inpatient rehabilitation facility", "Home health agency",
+         "Skilled nursing facility", "Hospice", "Dialysis facility")
+  expect_equal(fct_fac(x), factor(x, levels = x))
+})
+
+## laboratories
 
 test_that("fct_toa() works", {
   x <- c("1", "2", "3", "4", "5", "8")

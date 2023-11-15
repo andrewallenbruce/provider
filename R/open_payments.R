@@ -356,18 +356,6 @@ open_payments_error <- function(response) {
     strex::str_before_nth(":", 2)
 }
 
-#' Convert covered recipient types to unordered labelled factor
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_cov <- function(x) {
-  factor(x,
-         levels = c("Covered Recipient Physician",
-                    "Covered Recipient Non-Physician Practitioner",
-                    "Covered Recipient Teaching Hospital"),
-         labels = c("Physician", "Non-Physician Practitioner", "Teaching Hospital"))
-}
-
 #' @param x vector
 #' @autoglobal
 #' @noRd

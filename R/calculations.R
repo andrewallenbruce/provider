@@ -269,6 +269,7 @@ duration_vec <- function(date_col) {
 #' @autoglobal
 #' @export
 #' @keywords internal
+# nocov start
 make_interval <- function(df, start, end = lubridate::today()) {
   dplyr::mutate(df,
                 interval = lubridate::interval(
@@ -276,7 +277,7 @@ make_interval <- function(df, start, end = lubridate::today()) {
                 period = lubridate::as.period(interval),
                 timelength_days = lubridate::time_length(interval, unit = "days"))
 }
-
+# nocov end
 #' Summary stats
 #' @param df data frame
 #' @param condition filter condition, i.e. `patient == "new"`
@@ -320,6 +321,7 @@ summary_stats <- function(df,
 #' @autoglobal
 #' @export
 #' @keywords internal
+# nocov start
 gen_data <- function(years) {
   lng <- length(years) * 2
   vctrs::vec_rbind(
@@ -327,3 +329,4 @@ gen_data <- function(years) {
     dplyr::tibble(year = {{ years }}, group = "B")) |>
     dplyr::mutate(pay = sample(1000:2000, lng))
 }
+# nocov end

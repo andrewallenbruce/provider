@@ -155,16 +155,3 @@ cols_aff <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_fac <- function(x) {
-  factor(x, levels = c("Hospital",
-                       "Long-term care hospital",
-                       "Nursing home",
-                       "Inpatient rehabilitation facility",
-                       "Home health agency",
-                       "Skilled nursing facility",
-                       "Hospice",
-                       "Dialysis facility"))
-}

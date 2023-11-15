@@ -276,13 +276,6 @@ utils::globalVariables(c(
   "distribution_accessURL", # <cms_update>
   "year", # <cms_update>
   "id", # <cms_update>
-  "title", # <cms_update_ids>
-  "modified", # <cms_update_ids>
-  "distribution", # <cms_update_ids>
-  "distribution_format", # <cms_update_ids>
-  "distribution_title", # <cms_update_ids>
-  "distribution_modified", # <cms_update_ids>
-  "distribution_accessURL", # <cms_update_ids>
   "title", # <cms_dataset_search>
   "modified", # <cms_dataset_search>
   "keyword", # <cms_dataset_search>

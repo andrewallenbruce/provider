@@ -81,9 +81,15 @@ select(q, year, measures) |>
 ## Quality Eligibility
 
 ```{r}
-2017:2023 |>
-purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
-purrr::list_rbind()
+s <- 2017:2023 |>
+  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
+  purrr::list_rbind()
+
+s |> tidyr::unnest(org_apms) |> 
+  tidyr::unnest(extremeHardshipReasons) |> 
+  tidyr::unnest(qpPatientScores) |> 
+  tidyr::unnest(qpPaymentScores) |> 
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
 
