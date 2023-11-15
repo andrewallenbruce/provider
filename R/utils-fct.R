@@ -85,6 +85,17 @@ fct_ent <- function(x) {
          labels = c("Individual", "Organization"))
 }
 
+
+#' Convert npi types to labelled factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_entype <- function(x) {
+  factor(x,
+         levels = c(1, 2),
+         labels = c("Individual", "Organization"))
+}
+
 #' Convert place of service types to labelled factor
 #' @param x vector
 #' @autoglobal

@@ -44,6 +44,12 @@ test_that("fct_ent() works", {
   expect_equal(fct_ent(x), y)
 })
 
+test_that("fct_entype() works", {
+  x <- c(1, 2)
+  y <- factor(c("Individual", "Organization"))
+  expect_equal(fct_entype(x), y)
+})
+
 test_that("fct_pos() works", {
   x <- c("F", "O")
   y <- factor(c("Facility", "Non-facility"))

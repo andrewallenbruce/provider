@@ -157,6 +157,20 @@ utils::globalVariables(c(
   "y", # <pending>
   "y", # <providers>
   "y", # <quality_eligibility>
+  "org", # <quality_eligibility>
+  "org_individualScenario", # <quality_eligibility>
+  "org_groupScenario", # <quality_eligibility>
+  "ind", # <quality_eligibility>
+  "grp", # <quality_eligibility>
+  "ind.extremeHardshipReasons", # <quality_eligibility>
+  "ind.extremeHardshipSources", # <quality_eligibility>
+  "ind.lowVolumeStatusReasons", # <quality_eligibility>
+  "ind.specialty", # <quality_eligibility>
+  "ind.isEligible", # <quality_eligibility>
+  "grp.extremeHardshipReasons", # <quality_eligibility>
+  "grp.extremeHardshipSources", # <quality_eligibility>
+  "grp.lowVolumeStatusReasons", # <quality_eligibility>
+  "grp.isEligible", # <quality_eligibility>
   "apms", # <quality_eligibility2>
   "individual_scenario", # <quality_eligibility2>
   "group_scenario", # <quality_eligibility2>

@@ -92,50 +92,62 @@ quality_eligibility <- function(year,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  results <- list(
-    year                  = year,
-    npi                   = results$data$npi,
-    npi_type              = results$data$nationalProviderIdentifierType,
-    first                 = results$data$firstName,
-    middle                = results$data$middleName,
-    last                  = results$data$lastName,
-    first_approved_date   = results$data$firstApprovedDate,
-    years_in_medicare     = results$data$yearsInMedicare,
-    pecos_enroll_year     = results$data$pecosEnrollmentDate,
-    newly_enrolled        = results$data$newlyEnrolled,
-    specialty_description = results$data$specialty$specialtyDescription,
-    specialty_type        = results$data$specialty$typeDescription,
-    specialty_category    = results$data$specialty$categoryReference,
-    is_maqi               = results$data$isMaqi,
-    organization          = results$data$organizations$prvdrOrgName,
-    hosp_vbp_name         = results$data$organizations$hospitalVbpName,
-    facility_based        = results$data$organizations$isFacilityBased,
-    address_1             = results$data$organizations$addressLineOne,
-    address_2             = results$data$organizations$addressLineTwo,
-    city                  = results$data$organizations$city,
-    state                 = results$data$organizations$state,
-    zip                   = results$data$organizations$zip,
-    apms                  = results$data$organizations$apms,
-    virtual               = results$data$organizations$virtualGroups,
-    ind                   = results$data$organizations$individualScenario,
-    group                 = results$data$organizations$groupScenario) |>
-    purrr::compact() |>
-    purrr::list_flatten() |>
-    purrr::list_flatten() |>
-    as.data.frame()
-
   if (!tidy) results <- df2chr(results)
 
   if (tidy) {
-    results <- results |>
-      dplyr::tibble()
-    # results <- tidyup(results,
-    #                   yn = 'telehlth',
-    #                   int = c('num_org_mem', 'grd_yr')) |>
-    #   combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-    #   dplyr::mutate(gndr = fct_gen(gndr),
-    #                 state = fct_stabb(state)) |>
-    #   cols_qelig()
+
+    res <- purrr::compact(results) |> purrr::list_flatten()
+
+    r <- dplyr::tibble(
+      year                  = as.integer(year),
+      npi                   = res$data_npi,
+      npi_type              = fct_entype(res$data_nationalProviderIdentifierType),
+      first                 = res$data_firstName,
+      middle                = res$data_middleName,
+      last                  = res$data_lastName,
+      first_approved_date   = lubridate::ymd(res$data_firstApprovedDate),
+      years_in_medicare     = as.integer(res$data_yearsInMedicare),
+      pecos_year            = as.integer(res$data_pecosEnrollmentDate),
+      newly_enrolled        = as.logical(res$data_newlyEnrolled),
+      specialty_description = res$data_specialty$specialtyDescription,
+      specialty_type        = res$data_specialty$typeDescription,
+      specialty_category    = res$data_specialty$categoryReference,
+      is_maqi               = as.logical(res$data_isMaqi),
+      org                   = dplyr::tibble(res$data_organizations))
+
+    r <- r |>
+      tidyr::unpack(org, names_sep = "_") |>
+      tidyr::unite("org_address",
+                   dplyr::any_of(c('org_addressLineOne',
+                                   'org_addressLineTwo')),
+                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+      tidyr::unnest_longer(dplyr::any_of(c('org_apms',
+                                           'org_virtualGroups')),
+                           keep_empty = TRUE) |>
+      dplyr::rename(ind = org_individualScenario,
+                    grp = org_groupScenario) |>
+      tidyr::unpack(ind, names_sep = ".") |>
+      tidyr::unpack(grp, names_sep = ".")
+
+    results <- r |>
+      tidyr::unnest_longer(ind.extremeHardshipReasons, keep_empty = TRUE) |>
+      tidyr::unpack(ind.extremeHardshipReasons, names_sep = ".") |>
+      tidyr::unnest_longer(ind.extremeHardshipSources, keep_empty = TRUE) |>
+      tidyr::unpack(ind.extremeHardshipSources, names_sep = ".") |>
+      tidyr::unnest_longer(ind.lowVolumeStatusReasons, keep_empty = TRUE) |>
+      tidyr::unpack(ind.lowVolumeStatusReasons, names_sep = ".") |>
+      tidyr::unnest_longer(ind.specialty, keep_empty = TRUE) |>
+      tidyr::unpack(ind.specialty, names_sep = ".") |>
+      tidyr::unnest_longer(ind.isEligible, keep_empty = TRUE) |>
+      tidyr::unpack(ind.isEligible, names_sep = ".") |>
+      tidyr::unnest_longer(grp.extremeHardshipReasons, keep_empty = TRUE) |>
+      tidyr::unpack(grp.extremeHardshipReasons, names_sep = ".") |>
+      tidyr::unnest_longer(grp.extremeHardshipSources, keep_empty = TRUE) |>
+      tidyr::unpack(grp.extremeHardshipSources, names_sep = ".") |>
+      tidyr::unnest_longer(grp.lowVolumeStatusReasons, keep_empty = TRUE) |>
+      tidyr::unpack(grp.lowVolumeStatusReasons, names_sep = ".") |>
+      tidyr::unnest_longer(grp.isEligible, keep_empty = TRUE) |>
+      tidyr::unpack(grp.isEligible, names_sep = ".")
 
     if (na.rm) results <- narm(results)
   }
@@ -233,6 +245,38 @@ cols_qelig <- function(df) {
 quality_eligibility2 <- function(year,
                                  npi,
                                  tidy = TRUE) {
+
+  # results <- list(
+  #   year                  = year,
+  #   npi                   = results$data$npi,
+  #   npi_type              = results$data$nationalProviderIdentifierType,
+  #   first                 = results$data$firstName,
+  #   middle                = results$data$middleName,
+  #   last                  = results$data$lastName,
+  #   first_approved_date   = results$data$firstApprovedDate,
+  #   years_in_medicare     = results$data$yearsInMedicare,
+  #   pecos_enroll_year     = results$data$pecosEnrollmentDate,
+  #   newly_enrolled        = results$data$newlyEnrolled,
+  #   specialty_description = results$data$specialty$specialtyDescription,
+  #   specialty_type        = results$data$specialty$typeDescription,
+  #   specialty_category    = results$data$specialty$categoryReference,
+  #   is_maqi               = results$data$isMaqi,
+  #   organization          = results$data$organizations$prvdrOrgName,
+  #   hosp_vbp_name         = results$data$organizations$hospitalVbpName,
+  #   facility_based        = results$data$organizations$isFacilityBased,
+  #   address_1             = results$data$organizations$addressLineOne,
+  #   address_2             = results$data$organizations$addressLineTwo,
+  #   city                  = results$data$organizations$city,
+  #   state                 = results$data$organizations$state,
+  #   zip                   = results$data$organizations$zip,
+  #   apms                  = results$data$organizations$apms,
+  #   virtual               = results$data$organizations$virtualGroups,
+  #   ind                   = results$data$organizations$individualScenario,
+  #   group                 = results$data$organizations$groupScenario) |>
+  #   purrr::compact() |>
+  #   purrr::list_flatten() |>
+  #   purrr::list_flatten() |>
+  #   as.data.frame()
 
   rlang::check_required(year)
   year <- as.character(year)
