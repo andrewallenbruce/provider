@@ -98,11 +98,14 @@ rhcs <- dplyr::bind_rows(
   tidyr::nest(specialty = tx_desc, 
               other_names = c(org_parent, 
                               on_type, 
-                              on_org_name)) |> 
+                              on_org_name))
+
+rhcs <- rhcs |> 
   add_counties(state, 
                zip, 
-               add_fips = FALSE,
-               add_sf = FALSE) |> 
+               add_fips = TRUE,
+               add_geo = TRUE,
+               as_sf = FALSE) |> 
   tidyr::unite("address", 
                address:state, 
                remove = TRUE, 

@@ -156,36 +156,6 @@ utils::globalVariables(c(
   "y", # <outpatient>
   "y", # <pending>
   "y", # <providers>
-  "y", # <quality_eligibility>
-  "org", # <quality_eligibility>
-  "org_individualScenario", # <quality_eligibility>
-  "org_groupScenario", # <quality_eligibility>
-  "ind", # <quality_eligibility>
-  "grp", # <quality_eligibility>
-  "ind.extremeHardshipReasons", # <quality_eligibility>
-  "ind.extremeHardshipSources", # <quality_eligibility>
-  "ind.lowVolumeStatusReasons", # <quality_eligibility>
-  "ind.specialty", # <quality_eligibility>
-  "ind.isEligible", # <quality_eligibility>
-  "grp.extremeHardshipReasons", # <quality_eligibility>
-  "grp.extremeHardshipSources", # <quality_eligibility>
-  "grp.lowVolumeStatusReasons", # <quality_eligibility>
-  "grp.isEligible", # <quality_eligibility>
-  "apms", # <quality_eligibility2>
-  "individual_scenario", # <quality_eligibility2>
-  "group_scenario", # <quality_eligibility2>
-  "apms.extremeHardshipReasons", # <quality_eligibility2>
-  "apms.qpPatientScores", # <quality_eligibility2>
-  "apms.qpPaymentScores", # <quality_eligibility2>
-  "individual_scenario.extremeHardshipReasons", # <quality_eligibility2>
-  "individual_scenario.lowVolumeStatusReasons", # <quality_eligibility2>
-  "individual_scenario.specialty", # <quality_eligibility2>
-  "individual_scenario.isEligible", # <quality_eligibility2>
-  "group_scenario.extremeHardshipReasons", # <quality_eligibility2>
-  "group_scenario.lowVolumeStatusReasons", # <quality_eligibility2>
-  "group_scenario.isEligible", # <quality_eligibility2>
-  "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility2>
-  "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility2>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
   "aco_id_1", # <mips_2021>
@@ -208,6 +178,21 @@ utils::globalVariables(c(
   "apm_affl_1", # <mips_2021>
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
+  "y", # <quality_eligibility>
+  "org", # <quality_eligibility>
+  "org_individualScenario", # <quality_eligibility>
+  "org_groupScenario", # <quality_eligibility>
+  "ind", # <quality_eligibility>
+  "grp", # <quality_eligibility>
+  "ind.extremeHardshipReasons", # <quality_eligibility>
+  "ind.extremeHardshipSources", # <quality_eligibility>
+  "ind.lowVolumeStatusReasons", # <quality_eligibility>
+  "ind.specialty", # <quality_eligibility>
+  "ind.isEligible", # <quality_eligibility>
+  "grp.extremeHardshipReasons", # <quality_eligibility>
+  "grp.extremeHardshipSources", # <quality_eligibility>
+  "grp.lowVolumeStatusReasons", # <quality_eligibility>
+  "grp.isEligible", # <quality_eligibility>
   "distro", # <quality_payment>
   "y", # <quality_payment>
   "set", # <quality_payment>
@@ -291,15 +276,14 @@ utils::globalVariables(c(
   "x", # <abb2full>
   "y", # <abb2full>
   "zipcode", # <add_counties>
-  "major_city", # <add_counties>
   "state", # <add_counties>
   "county", # <add_counties>
   "lat", # <add_counties>
   "lng", # <add_counties>
   ".county", # <add_counties>
-  "city", # <add_counties>
   "zip", # <add_counties>
   ":=", # <add_counties>
+  ".county_fips", # <add_counties>
   "geometry", # <add_counties>
   "arg", # <encode_param>
   NULL

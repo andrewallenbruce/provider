@@ -141,14 +141,15 @@ df2chr <- function(df) {
 #' @param statecol bare column name column containing state abbreviations
 #' @param zipcol bare column name containing zip codes
 #' @param add_fips add county FIPS code column, default is `FALSE`
-#' @param add_sf add county geometry column and convert tibble to an `{sf}`
-#' object, based on county fips code added, default is `FALSE`
+#' @param add_geo add county geometry column, default is `FALSE`
+#' @param as_sf convert tibble to an `{sf}` object, default is `FALSE`
 #' @examplesIf interactive()
 #' nppes(npi = 1720098791) |>
 #'       add_counties(statecol = state,
 #'                    zipcol   = zip,
 #'                    add_fips = TRUE,
-#'                    add_sf   = TRUE)
+#'                    add_geo  = TRUE,
+#'                    as_sf    = TRUE)
 #'
 #' @autoglobal
 #' @export
@@ -157,7 +158,8 @@ add_counties <- function(df,
                          statecol,
                          zipcol,
                          add_fips = FALSE,
-                         add_sf = FALSE) {
+                         add_geo  = FALSE,
+                         as_sf   = FALSE) {
 
   # prepare zip code tibble
   zdb <- dplyr::tibble(zipcodeR::zip_code_db) |>
@@ -171,8 +173,7 @@ add_counties <- function(df,
                        state   = fct_stabb(state))
 
   # prepare `join_by` object
-  by <- dplyr::join_by({{ zipcol }}   == zip,
-                       {{ statecol }} == state)
+  by <- dplyr::join_by({{ zipcol }} == zip, {{ statecol }} == state)
 
   # normalize zip codes to 5 digits
   df <- dplyr::mutate(df, "{{ zipcol }}" := zipcodeR::normalize_zip({{ zipcol }}))
@@ -182,23 +183,34 @@ add_counties <- function(df,
 
   if (add_fips) {
 
-    safe_fips <- purrr::safely(fipio::coords_to_fips, otherwise = NA_character_)
-
     # Retrieve county FIPS codes
-    df <- df |>
-      dplyr::mutate(.county_fips = purrr::map2(df$lng, df$lat, safe_fips))
+
+    poss_fips <- purrr::possibly(fipio::coords_to_fips, otherwise = NA_character_)
+
+    df <- df |> dplyr::mutate(.county_fips = purrr::map2(df$lng, df$lat, poss_fips))
+
+    df[apply(df, 2, function(x) lapply(x, length) == 0)] <- NA
+
+    df <- df |> tidyr::unnest(.county_fips, keep_empty = TRUE)
   }
 
-  if (add_sf) {
+  if (add_geo) {
 
     # Retrieve geometries based on county FIPS
-    df <- df |>
-      dplyr::mutate(geometry = purrr::map(df$.county_fips,
-                   purrr::possibly(fipio::fips_geometry))) |>
-                   tidyr::unnest(geometry)
+
+    poss_geo <- purrr::possibly(fipio::fips_geometry, otherwise = NA_character_)
+
+    df <- df |> dplyr::mutate(geometry = purrr::map(df$.county_fips, poss_geo))
+
+    # df[apply(df, 2, function(x) lapply(x, length) == 0)] <- NA
+    # df <- df |> tidyr::unnest(geometry, keep_empty = TRUE)
+  }
+
+  if (as_sf) {
 
     # Create `{sf}` <MULTIPOLYGON> object
-    df <- sf::st_as_sf(df)
+
+    df <- sf::st_as_sf(df,sf_column_name = geometry, crs = sf::st_crs(4326), na.fail = FALSE)
   }
   return(df)
 }

@@ -19,7 +19,7 @@ tidyup(
 \arguments{
 \item{df}{data frame}
 
-\item{dtype}{'mdy' or 'ymd'}
+\item{dtype}{\code{mdy} or \code{ymd}}
 
 \item{dt}{cols to convert to date}
 

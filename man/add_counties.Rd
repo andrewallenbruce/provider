@@ -4,7 +4,14 @@
 \alias{add_counties}
 \title{Add county name, FIPs, and geometry to data frame with zip codes}
 \usage{
-add_counties(df, statecol, zipcol, add_fips = FALSE, add_sf = FALSE)
+add_counties(
+  df,
+  statecol,
+  zipcol,
+  add_fips = FALSE,
+  add_geo = FALSE,
+  as_sf = FALSE
+)
 }
 \arguments{
 \item{df}{data frame}
@@ -15,8 +22,9 @@ add_counties(df, statecol, zipcol, add_fips = FALSE, add_sf = FALSE)
 
 \item{add_fips}{add county FIPS code column, default is \code{FALSE}}
 
-\item{add_sf}{add county geometry column and convert tibble to an \code{{sf}}
-object, based on county fips code added, default is \code{FALSE}}
+\item{add_geo}{add county geometry column, default is \code{FALSE}}
+
+\item{as_sf}{convert tibble to an \code{{sf}} object, default is \code{FALSE}}
 }
 \description{
 Add county name, FIPs, and geometry to data frame with zip codes
@@ -27,7 +35,8 @@ nppes(npi = 1720098791) |>
       add_counties(statecol = state,
                    zipcol   = zip,
                    add_fips = TRUE,
-                   add_sf   = TRUE)
+                   add_geo  = TRUE,
+                   as_sf    = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}
