@@ -225,7 +225,7 @@ test_that("fct_facility() works", {
   expect_equal(fct_facility(x), ordered(y, levels = y))
 })
 
-test_that("fct_facility() works", {
+test_that("fct_term() works", {
   x <- c('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
          '11', '12', '13', '14', '15', '16', '17', '20', '33', '80', '99')
   y <- c('Active Provider',
@@ -252,3 +252,27 @@ test_that("fct_facility() works", {
          'OIG Action Do Not Activate (CLIA Only)')
   expect_equal(fct_term(x), ordered(y, levels = y))
 })
+
+test_that("fct_maj() works", {
+  x <- c("N", "M", "O")
+  y <- c("Non-procedure", "Major", "Other")
+  expect_equal(fct_maj(x), factor(y, levels = y))
+})
+
+test_that("fct_cc() works", {
+  x <- c(
+    "All", "Alcohol Abuse", "Alzheimer's Disease/Dementia", "Arthritis",
+    "Asthma", "Atrial Fibrillation", "Autism Spectrum Disorders", "Cancer",
+    "Chronic Kidney Disease", "COPD", "Depression", "Diabetes",
+    "Drug Abuse/Substance Abuse", "Heart Failure",
+    "Hepatitis (Chronic Viral B & C)", "HIV/AIDS", "Hyperlipidemia",
+    "Hypertension", "Ischemic Heart Disease", "Osteoporosis",
+    "Schizophrenia and Other Psychotic Disorders", "Stroke")
+  expect_equal(fct_cc(x), ordered(x, levels = x))
+})
+
+test_that("fct_record() works", {
+  x <- c("Physician Assistant", "Reassignment")
+  expect_equal(fct_record(x), factor(c("Employment", "Reassignment")))
+})
+

@@ -112,8 +112,9 @@ procedures provided to Original Medicare (fee-for-service) Part B
 beneficiaries by physicians and other healthcare professionals; aggregated
 by provider, service and geography.
 }
-\section{\strong{type =} \code{"provider"}}{
+\section{By Provider}{
 
+\strong{type =}\code{"provider"}:
 
 The \strong{Provider} dataset allows the user access to data such as
 services and procedures performed; charges submitted and payment received;
@@ -122,8 +123,9 @@ treating Original Medicare (fee-for-service) Part B beneficiaries,
 aggregated by year.
 }
 
-\section{\strong{type =} \code{"service"}}{
+\section{By Provider and Service}{
 
+\strong{type =}\code{"service"}:
 
 The \strong{Provider and Service} dataset is aggregated by:
 \enumerate{
@@ -139,8 +141,9 @@ because separate fee schedules apply depending on whether the place
 of service submitted on the claim is facility or non-facility.
 }
 
-\section{\strong{type =} \code{"geography"}}{
+\section{By Geography and Service}{
 
+\strong{type =}\code{"geography"}:
 
 The \strong{Geography and Service} dataset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally

@@ -109,14 +109,17 @@ s |>
                 .before = ind.aciHardship) |> 
   janitor::clean_names() |> 
   dplyr::mutate(dplyr::across(dplyr::starts_with("ind_"), as.character)) |> 
-  tidyr::pivot_longer(!c(dplyr::any_of('year', 
+  tidyr::pivot_longer(!dplyr::any_of(c('year', 
                                        'scenario',
                                        'ind_specialty_code',
-                                       '',
-                                       '',
-                                       '',
-                                       ))) |> 
-  dplyr::filter(value != TRUE, value != FALSE)
+                                       'ind_specialty_specialty_description',
+                                       'ind_specialty_type_description',
+                                       'ind_specialty_category_reference',
+                                       'ind_hospital_vbp_score',
+                                       'ind_extreme_hardship_sources',
+                                       'ind_low_volume_status_reasons_low_vol_stus_rsn_cd',
+                                       'ind_low_volume_status_reasons_low_vol_stus_rsn_desc'))) |> 
+  dplyr::filter(value==TRUE, value==FALSE)
 ```
 "ind_specialty_code"
 "ind_specialty_specialty_description"
@@ -126,6 +129,7 @@ s |>
 "ind_extreme_hardship_sources"
 "ind_low_volume_status_reasons_low_vol_stus_rsn_cd"
 "ind_low_volume_status_reasons_low_vol_stus_rsn_desc"
+"ind_extreme_hardship_event_type"
 
 ```{r}
 quality_eligibility(year = 2017, npi = 1043477615) |> dplyr::glimpse()

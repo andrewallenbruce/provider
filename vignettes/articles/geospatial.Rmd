@@ -17,6 +17,13 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999)
+
+# camcorder::gg_record(
+#   #dir = '',
+#   width = 12,
+#   height = 12 * 9 / 16,
+#   dpi = 300,
+#   bg = 'white')
 ```
 
 
@@ -24,13 +31,6 @@ options(scipen = 999)
 
 ```{r}
 library(provider)
-library(tidygeocoder)
-library(purrr)
-library(dplyr)
-library(ggplot2)
-library(ggsflabel)
-library(ggrepel)
-library(tigris)
 ```
 
 <br>
@@ -43,23 +43,10 @@ rhcs <- providers(state = "GA", specialty_code = "00-17") |>
   dplyr::pull(npi) |> 
   purrr::map(\(x) nppes(npi = x)) |>
   purrr::list_rbind() |> 
-  dplyr::select(npi,
-                organization, 
-                tx_desc,
-                org_part,
-                purpose,
-                org_parent,
-                on_type,
-                on_org_name,
-                address, 
-                city, 
-                state, 
-                zip,
-                pr_purpose, 
-                pr_address, 
-                pr_city, 
-                pr_state, 
-                pr_zip)
+  dplyr::select(npi, organization, purpose, 
+                on_org_name, address:zip, pr_purpose:pr_zip) |> 
+  dplyr::distinct()
+rhcs
 ```
 
 <br>
@@ -67,49 +54,37 @@ rhcs <- providers(state = "GA", specialty_code = "00-17") |>
 ## Stack Distinct `LOCATION` & `PRACTICE` Addresses
 
 ```{r}
-rhcs <- dplyr::bind_rows(
-  dplyr::select(rhcs, 
-                npi,
-                organization, 
-                tx_desc,
-                org_part,
-                purpose,
-                org_parent,
-                on_type,
-                on_org_name,
-                address, 
-                city, 
-                state, 
-                zip),
-  dplyr::select(rhcs, 
-                npi, 
-                organization, 
-                tx_desc,
-                org_part,
-                purpose = pr_purpose, 
-                org_parent,
-                on_type,
-                on_org_name,
-                address = pr_address, 
-                city = pr_city, 
-                state = pr_state, 
-                zip = pr_zip)) |> 
-  dplyr::filter(!is.na(purpose)) |> 
-  tidyr::nest(specialty = tx_desc, 
-              other_names = c(org_parent, 
-                              on_type, 
-                              on_org_name))
+org <- dplyr::select(rhcs, 
+                     npi, 
+                     organization, 
+                     purpose, 
+                     address:zip,
+                     pr_purpose) |> 
+  dplyr::filter(is.na(pr_purpose))
 
-rhcs <- rhcs |> 
+org$pr_purpose <- NULL
+
+sub <- dplyr::select(rhcs, 
+                     npi, 
+                     organization = on_org_name,
+                     purpose = pr_purpose, 
+                     address = pr_address,
+                     city = pr_city,
+                     state = pr_state,
+                     zip = pr_zip) |> 
+  dplyr::filter(!is.na(purpose))
+
+rhcs <- dplyr::bind_rows(org, sub) |> 
+  dplyr::distinct() |> 
   add_counties(state, 
                zip, 
                add_fips = TRUE,
-               add_geo = TRUE,
-               as_sf = FALSE) |> 
+               add_geo = TRUE) |> 
   tidyr::unite("address", 
                address:state, 
                remove = TRUE, 
                sep = " ")
+rhcs
 ```
 
 <br>
@@ -120,6 +95,7 @@ rhcs <- rhcs |>
 county_pts <- dplyr::distinct(rhcs, .county, .keep_all = TRUE) |> 
   dplyr::select(.county, lat, lng) |> 
   dplyr::filter(.county != "Duval")
+county_pts
 ```
 
 <br>
@@ -143,6 +119,8 @@ rhc_geo <- dplyr::select(rhcs, npi:zip) |>
 
 ```{r}
 ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)
+ga_counties <- rmapshaper::ms_simplify(ga_counties)
+ga_counties
 ```
 
 <br>
@@ -152,7 +130,7 @@ ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)
 ```{r}
 p <- ggplot2::ggplot() + 
   ggplot2::geom_sf(data = ga_counties, 
-                   fill = "grey80", 
+                   fill = "skyblue", 
                    colour = "white") +
   ggrepel::geom_label_repel(county_pts,
                   mapping = ggplot2::aes(lng, 
@@ -162,17 +140,17 @@ p <- ggplot2::ggplot() +
                   fill = "white",
                   alpha = 0.85,
                   force_pull = 0,
-                  segment.curvature = -0.1,
+                  segment.curvature = -0.2,
                   segment.ncp = 3,
                   segment.angle = 10,
                   min.segment.length = 0,
                   label.size = 0) +
   ggplot2::geom_point(rhc_geo, 
                       mapping = ggplot2::aes(long, lat), 
-                      fill = "orange", 
+                      fill = "yellow", 
                       color = "darkred", 
-                      alpha = 0.75, 
-                      size = 2.75, 
+                      alpha = 0.85, 
+                      size = 1.75, 
                       shape = 21, 
                       stroke = 0.75) +
   ggplot2::theme_void()

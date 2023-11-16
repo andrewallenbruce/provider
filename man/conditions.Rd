@@ -68,7 +68,7 @@ among Original Medicare (or fee-for-service) beneficiaries.
 \section{Specific Conditions}{
 
 
-The \emph{Specific} Chronic Conditions(\code{set = "specific"}) dataset provides
+The \emph{Specific} Chronic Conditions(\code{set = "Specific"}) dataset provides
 information on prevalence, use and spending organized by geography and 21
 distinct chronic conditions:
 \enumerate{
@@ -99,7 +99,7 @@ distinct chronic conditions:
 \section{Multiple Conditions}{
 
 
-The \emph{Multiple} Chronic Conditions(\code{set = "multiple"}) dataset provides
+The \emph{Multiple} Chronic Conditions(\code{set = "Multiple"}) dataset provides
 information on prevalence, use and spending organized by geography and the
 count of chronic conditions from the set of select 21 chronic conditions.
 The count of conditions is binned into four categories:

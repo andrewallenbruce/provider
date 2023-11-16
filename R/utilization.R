@@ -8,7 +8,8 @@
 #' beneficiaries by physicians and other healthcare professionals; aggregated
 #' by provider, service and geography.
 #'
-#' @section __type =__ `"provider"`:
+#' @section By Provider:
+#' __type =__`"provider"`:
 #'
 #' The **Provider** dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
@@ -16,7 +17,8 @@
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
 #'
-#' @section __type =__ `"service"`:
+#' @section By Provider and Service:
+#' __type =__`"service"`:
 #'
 #' The **Provider and Service** dataset is aggregated by:
 #'
@@ -30,7 +32,8 @@
 #' because separate fee schedules apply depending on whether the place
 #' of service submitted on the claim is facility or non-facility.
 #'
-#' @section __type =__ `"geography"`:
+#' @section By Geography and Service:
+#' __type =__`"geography"`:
 #'
 #' The **Geography and Service** dataset contains information on utilization,
 #' allowed amount, Medicare payment, and submitted charges organized nationally

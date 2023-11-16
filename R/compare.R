@@ -122,6 +122,8 @@ compare_conditions <- function(df, pivot = FALSE) {
                         values_to = "prevalence") |>
     dplyr::filter(!is.na(prevalence), year %in% cc_years())
 
+  x$condition <- fct_cc(x$condition)
+
   y <- dplyr::select(x, year, condition, sublevel) |>
     dplyr::mutate(set     = "Specific",
                   demo    = "All",

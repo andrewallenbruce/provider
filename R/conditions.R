@@ -8,7 +8,7 @@
 #'
 #' @section Specific Conditions:
 #'
-#' The _Specific_ Chronic Conditions(`set = "specific"`) dataset provides
+#' The _Specific_ Chronic Conditions(`set = "Specific"`) dataset provides
 #' information on prevalence, use and spending organized by geography and 21
 #' distinct chronic conditions:
 #'
@@ -36,7 +36,7 @@
 #'
 #' @section Multiple Conditions:
 #'
-#' The _Multiple_ Chronic Conditions(`set = "multiple"`) dataset provides
+#' The _Multiple_ Chronic Conditions(`set = "Multiple"`) dataset provides
 #' information on prevalence, use and spending organized by geography and the
 #' count of chronic conditions from the set of select 21 chronic conditions.
 #' The count of conditions is binned into four categories:
@@ -239,7 +239,8 @@ conditions <- function(year,
                     demographic = fct_demo(demographic),
                     subdemo     = fct_subdemo(subdemo))
 
-  if (set == "Multiple") results$mcc <- fct_mcc(results$mcc)
+  if (set == "Multiple") results$mcc       <- fct_mcc(results$mcc)
+  if (set == "Specific") results$condition <- fct_cc(results$condition)
   if (na.rm) results <- narm(results)
     }
   return(results)
@@ -340,4 +341,33 @@ spec_cond <- function() {
     'Stroke'                                      = 'Stroke')
 }
 
-
+#' Convert multiple chronic condition groups to labelled, ordered factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_cc <- function(x) {
+  factor(x,
+         levels = c('All',
+                    'Alcohol Abuse',
+                    "Alzheimer's Disease/Dementia",
+                    'Arthritis',
+                    'Asthma',
+                    'Atrial Fibrillation',
+                    'Autism Spectrum Disorders',
+                    'Cancer',
+                    'Chronic Kidney Disease',
+                    'COPD',
+                    'Depression',
+                    'Diabetes',
+                    'Drug Abuse/Substance Abuse',
+                    'Heart Failure',
+                    'Hepatitis (Chronic Viral B & C)',
+                    'HIV/AIDS',
+                    'Hyperlipidemia',
+                    'Hypertension',
+                    'Ischemic Heart Disease',
+                    'Osteoporosis',
+                    'Schizophrenia and Other Psychotic Disorders',
+                    'Stroke'),
+         ordered = TRUE)
+}

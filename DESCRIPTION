@@ -54,6 +54,7 @@ Suggests:
     knitr,
     printr,
     qs,
+    rmapshaper,
     rmarkdown,
     roxyglobals,
     rvest,
