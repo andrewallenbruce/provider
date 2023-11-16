@@ -203,11 +203,14 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="va">tx_desc</span>, </span>
 <span>              other_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">org_parent</span>, </span>
 <span>                              <span class="va">on_type</span>, </span>
-<span>                              <span class="va">on_org_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                              <span class="va">on_org_name</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="va">rhcs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/add_counties.html">add_counties</a></span><span class="op">(</span><span class="va">state</span>, </span>
 <span>               <span class="va">zip</span>, </span>
-<span>               add_fips <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>               add_sf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>               add_fips <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>               add_geo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>               as_sf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, </span>
 <span>               <span class="va">address</span><span class="op">:</span><span class="va">state</span>, </span>
 <span>               remove <span class="op">=</span> <span class="cn">TRUE</span>, </span>
