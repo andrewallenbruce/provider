@@ -129,14 +129,7 @@ Bruce</h4>
 <h2 id="load-packages">Load Packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jessecambon.github.io/tidygeocoder/" class="external-link">tidygeocoder</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yutannihilation.github.io/ggsflabel/" class="external-link">ggsflabel</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/walkerke/tigris" class="external-link">tigris</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -148,88 +141,110 @@ Bruce</h4>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>,</span>
-<span>                <span class="va">organization</span>, </span>
-<span>                <span class="va">tx_desc</span>,</span>
-<span>                <span class="va">org_part</span>,</span>
-<span>                <span class="va">purpose</span>,</span>
-<span>                <span class="va">org_parent</span>,</span>
-<span>                <span class="va">on_type</span>,</span>
-<span>                <span class="va">on_org_name</span>,</span>
-<span>                <span class="va">address</span>, </span>
-<span>                <span class="va">city</span>, </span>
-<span>                <span class="va">state</span>, </span>
-<span>                <span class="va">zip</span>,</span>
-<span>                <span class="va">pr_purpose</span>, </span>
-<span>                <span class="va">pr_address</span>, </span>
-<span>                <span class="va">pr_city</span>, </span>
-<span>                <span class="va">pr_state</span>, </span>
-<span>                <span class="va">pr_zip</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization</span>, <span class="va">purpose</span>, </span>
+<span>                <span class="va">on_org_name</span>, <span class="va">address</span><span class="op">:</span><span class="va">zip</span>, <span class="va">pr_purpose</span><span class="op">:</span><span class="va">pr_zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">rhcs</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 94 × 13</span></span></span>
+<span><span class="co">#&gt;    npi     organization purpose on_org_name address city  state zip   pr_purpose</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 199271… TMC HARALSO… Practi… PRIMARY CA… 204 AL… BREM… GA    3011… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 149776… TMC TALLAPO… Practi… <span style="color: #BB0000;">NA</span>          25 W L… TALL… GA    3017… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 128570… HIAWASSEE F… Practi… <span style="color: #BB0000;">NA</span>          56 HOS… HIAW… GA    3054… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 198263… TMC WEST CA… Practi… WEST CARRO… 1125 E… BOWD… GA    3010… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 182101… BACON COUNT… Practi… <span style="color: #BB0000;">NA</span>          204 E … ALMA  GA    3151… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 175033… BOWDON- MT.… Practi… <span style="color: #BB0000;">NA</span>          41 WEL… WHIT… GA    3018… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 136647… HOSPITAL AU… Practi… THE CAMILL… 25 PER… CAMI… GA    3173… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 189186… THE MEDICAL… Practi… <span style="color: #BB0000;">NA</span>          109 CO… ELBE… GA    3063… <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 157868… UNION COUNT… Practi… BLUE MOUNT… 178 A … BLAI… GA    3051… Location  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 157868… UNION COUNT… Practi… UNION GENE… 178 A … BLAI… GA    3051… Location  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 84 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: pr_address &lt;chr&gt;, pr_city &lt;chr&gt;, pr_state &lt;ord&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pr_zip &lt;chr&gt;</span></span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="stack-distinct-location-practice-addresses">Stack Distinct <code>LOCATION</code> &amp; <code>PRACTICE</code>
 Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-practice-addresses"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, </span>
-<span>                <span class="va">npi</span>,</span>
-<span>                <span class="va">organization</span>, </span>
-<span>                <span class="va">tx_desc</span>,</span>
-<span>                <span class="va">org_part</span>,</span>
-<span>                <span class="va">purpose</span>,</span>
-<span>                <span class="va">org_parent</span>,</span>
-<span>                <span class="va">on_type</span>,</span>
-<span>                <span class="va">on_org_name</span>,</span>
-<span>                <span class="va">address</span>, </span>
-<span>                <span class="va">city</span>, </span>
-<span>                <span class="va">state</span>, </span>
-<span>                <span class="va">zip</span><span class="op">)</span>,</span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, </span>
-<span>                <span class="va">npi</span>, </span>
-<span>                <span class="va">organization</span>, </span>
-<span>                <span class="va">tx_desc</span>,</span>
-<span>                <span class="va">org_part</span>,</span>
-<span>                purpose <span class="op">=</span> <span class="va">pr_purpose</span>, </span>
-<span>                <span class="va">org_parent</span>,</span>
-<span>                <span class="va">on_type</span>,</span>
-<span>                <span class="va">on_org_name</span>,</span>
-<span>                address <span class="op">=</span> <span class="va">pr_address</span>, </span>
-<span>                city <span class="op">=</span> <span class="va">pr_city</span>, </span>
-<span>                state <span class="op">=</span> <span class="va">pr_state</span>, </span>
-<span>                zip <span class="op">=</span> <span class="va">pr_zip</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">purpose</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="va">tx_desc</span>, </span>
-<span>              other_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">org_parent</span>, </span>
-<span>                              <span class="va">on_type</span>, </span>
-<span>                              <span class="va">on_org_name</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">org</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, </span>
+<span>                     <span class="va">npi</span>, </span>
+<span>                     <span class="va">organization</span>, </span>
+<span>                     <span class="va">purpose</span>, </span>
+<span>                     <span class="va">address</span><span class="op">:</span><span class="va">zip</span>,</span>
+<span>                     <span class="va">pr_purpose</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">pr_purpose</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="va">rhcs</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">org</span><span class="op">$</span><span class="va">pr_purpose</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span></span>
+<span><span class="va">sub</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, </span>
+<span>                     <span class="va">npi</span>, </span>
+<span>                     organization <span class="op">=</span> <span class="va">on_org_name</span>,</span>
+<span>                     purpose <span class="op">=</span> <span class="va">pr_purpose</span>, </span>
+<span>                     address <span class="op">=</span> <span class="va">pr_address</span>,</span>
+<span>                     city <span class="op">=</span> <span class="va">pr_city</span>,</span>
+<span>                     state <span class="op">=</span> <span class="va">pr_state</span>,</span>
+<span>                     zip <span class="op">=</span> <span class="va">pr_zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">purpose</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">org</span>, <span class="va">sub</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/add_counties.html">add_counties</a></span><span class="op">(</span><span class="va">state</span>, </span>
 <span>               <span class="va">zip</span>, </span>
 <span>               add_fips <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>               add_geo <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>               as_sf <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>               add_geo <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, </span>
 <span>               <span class="va">address</span><span class="op">:</span><span class="va">state</span>, </span>
 <span>               remove <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span></code></pre></div>
+<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span>
+<span><span class="va">rhcs</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 91 × 14</span></span></span>
+<span><span class="co">#&gt;    npi        organization purpose address zip   .county   lat   lng bounds_west</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1992710610 TMC HARALSO… Practi… 204 AL… 30110 Harals…  33.7 -<span style="color: #BB0000;">85.2</span>       -<span style="color: #BB0000;">85.2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1497760243 TMC TALLAPO… Practi… 25 W L… 30176 Harals…  33.8 -<span style="color: #BB0000;">85.3</span>       -<span style="color: #BB0000;">85.4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285706879 HIAWASSEE F… Practi… 56 HOS… 30546 Towns    34.9 -<span style="color: #BB0000;">83.7</span>       -<span style="color: #BB0000;">83.8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1982631321 TMC WEST CA… Practi… 1125 E… 30108 Carroll  33.5 -<span style="color: #BB0000;">85.3</span>       -<span style="color: #BB0000;">85.3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1821017831 BACON COUNT… Practi… 204 E … 31510 Bacon    31.6 -<span style="color: #BB0000;">82.5</span>       -<span style="color: #BB0000;">82.6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1750339511 BOWDON- MT.… Practi… 41 WEL… 30185 Carroll  33.5 -<span style="color: #BB0000;">84.9</span>       -<span style="color: #BB0000;">85.0</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1366472003 HOSPITAL AU… Practi… 25 PER… 31730 Mitche…  31.2 -<span style="color: #BB0000;">84.3</span>       -<span style="color: #BB0000;">84.5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891863569 THE MEDICAL… Practi… 109 CO… 30635 Elbert   34.1 -<span style="color: #BB0000;">82.8</span>       -<span style="color: #BB0000;">83.0</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1922211515 HOSPITAL AU… Practi… 259 US… 31730 Mitche…  31.2 -<span style="color: #BB0000;">84.3</span>       -<span style="color: #BB0000;">84.5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1891770764 PHOEBE WORT… Practi… 1014 W… 31791 Worth    31.5 -<span style="color: #BB0000;">83.9</span>       -<span style="color: #BB0000;">84.0</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 81 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: bounds_east &lt;dbl&gt;, bounds_north &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bounds_south &lt;dbl&gt;, .county_fips &lt;chr&gt;, geometry &lt;list&gt;</span></span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="filter-to-distinct-counties-for-labelling">Filter to distinct counties for labelling<a class="anchor" aria-label="anchor" href="#filter-to-distinct-counties-for-labelling"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">county_pts</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">.county</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.county</span>, <span class="va">lat</span>, <span class="va">lng</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">.county</span> <span class="op">!=</span> <span class="st">"Duval"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">.county</span> <span class="op">!=</span> <span class="st">"Duval"</span><span class="op">)</span></span>
+<span><span class="va">county_pts</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 53 × 3</span></span></span>
+<span><span class="co">#&gt;    .county     lat   lng</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Haralson   33.7 -<span style="color: #BB0000;">85.2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Towns      34.9 -<span style="color: #BB0000;">83.7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Carroll    33.5 -<span style="color: #BB0000;">85.3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Bacon      31.6 -<span style="color: #BB0000;">82.5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Mitchell   31.2 -<span style="color: #BB0000;">84.3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Elbert     34.1 -<span style="color: #BB0000;">82.8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Worth      31.5 -<span style="color: #BB0000;">83.9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Jefferson  32.9 -<span style="color: #BB0000;">82.4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Hancock    33.3 -<span style="color: #BB0000;">83</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Putnam     33.3 -<span style="color: #BB0000;">83.3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 43 more rows</span></span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="geocode-with-tidygeocoder">Geocode with <code>{tidygeocoder}</code><a class="anchor" aria-label="anchor" href="#geocode-with-tidygeocoder"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rhc_geo</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rhcs</span>, <span class="va">npi</span><span class="op">:</span><span class="va">zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">zip</span> <span class="op">!=</span> <span class="st">"32209"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span>address      <span class="op">=</span> <span class="va">address</span>, </span>
@@ -243,17 +258,58 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <div class="section level2">
 <h2 id="retrieve-georgia-counties-shapefile-from-tigris">Retrieve Georgia counties shapefile from <code>{tigris}</code><a class="anchor" aria-label="anchor" href="#retrieve-georgia-counties-shapefile-from-tigris"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2022</span>, progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">tigris</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2022</span>, progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">ga_counties</span> <span class="op">&lt;-</span> <span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html" class="external-link">ms_simplify</a></span><span class="op">(</span><span class="va">ga_counties</span><span class="op">)</span></span>
+<span><span class="va">ga_counties</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Simple feature collection with 159 features and 17 fields</span></span>
+<span><span class="co">#&gt; Geometry type: GEOMETRY</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -85.60516 ymin: 30.35766 xmax: -80.78296 ymax: 35.0013</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  NAD83</span></span>
+<span><span class="co">#&gt; First 10 features:</span></span>
+<span><span class="co">#&gt;    FUNCSTAT GEOID COUNTYFP    INTPTLAT CBSAFP CSAFP COUNTYNS CLASSFP METDIVFP</span></span>
+<span><span class="co">#&gt; 1         A 13189      189 +33.4806126   &lt;NA&gt;  &lt;NA&gt; 00348794      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2         A 13025      025 +31.1973339   &lt;NA&gt;  &lt;NA&gt; 00351605      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3         A 13171      171 +33.0744405   &lt;NA&gt;  &lt;NA&gt; 00326713      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4         A 13115      115 +34.2636901   &lt;NA&gt;  &lt;NA&gt; 00353665      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5         A 13273      273 +31.7771909   &lt;NA&gt;  &lt;NA&gt; 00352238      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6         A 13063      063 +33.5516027   &lt;NA&gt;  &lt;NA&gt; 01672399      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 7         A 13073      073 +33.5520746   &lt;NA&gt;  &lt;NA&gt; 00348865      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 8         A 13193      193 +32.3626859   &lt;NA&gt;  &lt;NA&gt; 00346957      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 9         A 13049      049 +30.7799036   &lt;NA&gt;  &lt;NA&gt; 00357747      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 10        A 13233      233 +33.9960153   &lt;NA&gt;  &lt;NA&gt; 00343585      H1     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;        NAME        NAMELSAD LSAD MTFCC STATEFP      ALAND   AWATER     INTPTLON</span></span>
+<span><span class="co">#&gt; 1  McDuffie McDuffie County   06 G4020      13  666591525 23112523 -082.4795333</span></span>
+<span><span class="co">#&gt; 2  Brantley Brantley County   06 G4020      13 1147972258 10291563 -081.9829779</span></span>
+<span><span class="co">#&gt; 3     Lamar    Lamar County   06 G4020      13  475264405  6044329 -084.1466893</span></span>
+<span><span class="co">#&gt; 4     Floyd    Floyd County   06 G4020      13 1320431515 22387093 -085.2136849</span></span>
+<span><span class="co">#&gt; 5   Terrell  Terrell County   06 G4020      13  869695791  4951325 -084.4394464</span></span>
+<span><span class="co">#&gt; 6   Clayton  Clayton County   06 G4020      13  367145192  6928044 -084.4128678</span></span>
+<span><span class="co">#&gt; 7  Columbia Columbia County   06 G4020      13  751598754 45345677 -082.2496077</span></span>
+<span><span class="co">#&gt; 8     Macon    Macon County   06 G4020      13 1037709945 13841916 -084.0512306</span></span>
+<span><span class="co">#&gt; 9  Charlton Charlton County   06 G4020      13 2020415648  5963237 -082.1396442</span></span>
+<span><span class="co">#&gt; 10     Polk     Polk County   06 G4020      13  803775591  4664760 -085.1883384</span></span>
+<span><span class="co">#&gt;                          geometry</span></span>
+<span><span class="co">#&gt; 1  POLYGON ((-82.6497 33.60877...</span></span>
+<span><span class="co">#&gt; 2  POLYGON ((-81.93601 31.0479...</span></span>
+<span><span class="co">#&gt; 3  POLYGON ((-84.24819 33.1890...</span></span>
+<span><span class="co">#&gt; 4  POLYGON ((-85.04687 34.0964...</span></span>
+<span><span class="co">#&gt; 5  POLYGON ((-84.3052 31.69106...</span></span>
+<span><span class="co">#&gt; 6  POLYGON ((-84.35015 33.6479...</span></span>
+<span><span class="co">#&gt; 7  POLYGON ((-82.42533 33.6506...</span></span>
+<span><span class="co">#&gt; 8  MULTIPOLYGON (((-83.84838 3...</span></span>
+<span><span class="co">#&gt; 9  POLYGON ((-82.1317 31.01071...</span></span>
+<span><span class="co">#&gt; 10 POLYGON ((-85.38658 33.9017...</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="map-with-ggplot">Map with <code>{ggplot}</code><a class="anchor" aria-label="anchor" href="#map-with-ggplot"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ga_counties</span>, </span>
-<span>                   fill <span class="op">=</span> <span class="st">"grey80"</span>, </span>
+<span>                   fill <span class="op">=</span> <span class="st">"skyblue"</span>, </span>
 <span>                   colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">geom_label_repel</a></span><span class="op">(</span><span class="va">county_pts</span>,</span>
 <span>                  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">lng</span>, </span>
@@ -263,17 +319,17 @@ Addresses<a class="anchor" aria-label="anchor" href="#stack-distinct-location-pr
 <span>                  fill <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>                  alpha <span class="op">=</span> <span class="fl">0.85</span>,</span>
 <span>                  force_pull <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>                  segment.curvature <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>,</span>
+<span>                  segment.curvature <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>,</span>
 <span>                  segment.ncp <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>                  segment.angle <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>                  min.segment.length <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>                  label.size <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="va">rhc_geo</span>, </span>
 <span>                      mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, </span>
-<span>                      fill <span class="op">=</span> <span class="st">"orange"</span>, </span>
+<span>                      fill <span class="op">=</span> <span class="st">"yellow"</span>, </span>
 <span>                      color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
-<span>                      alpha <span class="op">=</span> <span class="fl">0.75</span>, </span>
-<span>                      size <span class="op">=</span> <span class="fl">2.75</span>, </span>
+<span>                      alpha <span class="op">=</span> <span class="fl">0.85</span>, </span>
+<span>                      size <span class="op">=</span> <span class="fl">1.75</span>, </span>
 <span>                      shape <span class="op">=</span> <span class="fl">21</span>, </span>
 <span>                      stroke <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>

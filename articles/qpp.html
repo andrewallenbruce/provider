@@ -301,25 +301,31 @@ Bruce</h4>
 <span>                .before <span class="op">=</span> <span class="va">ind.aciHardship</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"ind_"</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="st">'year'</span>, </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'year'</span>, </span>
 <span>                                       <span class="st">'scenario'</span>,</span>
 <span>                                       <span class="st">'ind_specialty_code'</span>,</span>
-<span>                                       <span class="st">''</span>,</span>
-<span>                                       <span class="st">''</span>,</span>
-<span>                                       <span class="st">''</span>,</span>
-<span>                                       <span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">!=</span> <span class="cn">TRUE</span>, <span class="va">value</span> <span class="op">!=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyr::pivot_longer()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Problem while evaluating `dplyr::any_of(...)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::any_of()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `...` must be empty.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you forget `c()`?</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The expected syntax is `any_of(c("a", "b"))`, not `any_of("a", "b")`</span></span></code></pre>
+<span>                                       <span class="st">'ind_specialty_specialty_description'</span>,</span>
+<span>                                       <span class="st">'ind_specialty_type_description'</span>,</span>
+<span>                                       <span class="st">'ind_specialty_category_reference'</span>,</span>
+<span>                                       <span class="st">'ind_hospital_vbp_score'</span>,</span>
+<span>                                       <span class="st">'ind_extreme_hardship_sources'</span>,</span>
+<span>                                       <span class="st">'ind_low_volume_status_reasons_low_vol_stus_rsn_cd'</span>,</span>
+<span>                                       <span class="st">'ind_low_volume_status_reasons_low_vol_stus_rsn_desc'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span><span class="op">==</span><span class="cn">TRUE</span>, <span class="va">value</span><span class="op">==</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 12</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 variables: year &lt;int&gt;, scenario &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_extreme_hardship_sources &lt;chr&gt;, ind_hospital_vbp_score &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_code &lt;chr&gt;, ind_specialty_specialty_description &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_type_description &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_category_reference &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_low_volume_status_reasons_low_vol_stus_rsn_cd &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_low_volume_status_reasons_low_vol_stus_rsn_desc &lt;chr&gt;, name &lt;chr&gt;, …</span></span></span></code></pre>
 <p>“ind_specialty_code” “ind_specialty_specialty_description”
 “ind_specialty_type_description” “ind_specialty_category_reference”
 “ind_hospital_vbp_score” “ind_extreme_hardship_sources”
 “ind_low_volume_status_reasons_low_vol_stus_rsn_cd”
-“ind_low_volume_status_reasons_low_vol_stus_rsn_desc”</p>
+“ind_low_volume_status_reasons_low_vol_stus_rsn_desc”
+“ind_extreme_hardship_event_type”</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Rows: 1</span></span>
@@ -334,7 +340,7 @@ Bruce</h4>
 <span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 9</span></span>
 <span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2014</span></span>
 <span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cardiac Electrophysi…</span></span>
+<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardiac Ele…</span></span>
 <span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medicine"</span></span>
 <span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians"</span></span>
 <span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
@@ -376,7 +382,7 @@ Bruce</h4>
 <span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
 <span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
 <span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "21"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cardiac Electrophysi…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardiac Ele…</span></span>
 <span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medicine"</span></span>
 <span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians"</span></span>
 <span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
