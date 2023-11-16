@@ -60,7 +60,6 @@ rhcs <- providers(state = "GA", specialty_code = "00-17") |>
                 pr_city, 
                 pr_state, 
                 pr_zip)
-
 ```
 
 <br>
@@ -100,7 +99,10 @@ rhcs <- dplyr::bind_rows(
               other_names = c(org_parent, 
                               on_type, 
                               on_org_name)) |> 
-  add_counties(city, state, zip, add_sf = TRUE) |> 
+  add_counties(state, 
+               zip, 
+               add_fips = FALSE,
+               add_sf = FALSE) |> 
   tidyr::unite("address", 
                address:state, 
                remove = TRUE, 
@@ -112,9 +114,9 @@ rhcs <- dplyr::bind_rows(
 ## Filter to distinct counties for labelling
 
 ```{r}
-county_pts <- dplyr::distinct(rhcs, county, .keep_all = TRUE) |> 
-  dplyr::select(county, lat, lng) |> 
-  dplyr::filter(county != "Duval")
+county_pts <- dplyr::distinct(rhcs, .county, .keep_all = TRUE) |> 
+  dplyr::select(.county, lat, lng) |> 
+  dplyr::filter(.county != "Duval")
 ```
 
 <br>
@@ -150,9 +152,9 @@ p <- ggplot2::ggplot() +
                    fill = "grey80", 
                    colour = "white") +
   ggrepel::geom_label_repel(county_pts,
-                  mapping = aes(lng, 
+                  mapping = ggplot2::aes(lng, 
                                 lat, 
-                                label = county),
+                                label = .county),
                   colour = "grey30",
                   fill = "white",
                   alpha = 0.85,
