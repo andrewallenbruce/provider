@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilization.R
 \name{utilization}
 \alias{utilization}
-\title{Provider Utilization & Demographics}
+\title{Provider Utilization & Demographics by Year}
 \usage{
 utilization(
   year,
@@ -93,9 +93,9 @@ submitted on the claims is a:
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{demographics} and \code{conditions}}
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{performance}, \code{demographics} and \code{conditions}}
 
-\item{detailed}{< \emph{boolean} > // \strong{default:} \code{FALSE} Include \code{detailed} column}
+\item{detailed}{< \emph{boolean} > // \strong{default:} \code{FALSE} Include nested \code{medical} and \code{drug} columns}
 
 \item{rbcs}{< \emph{boolean} > // \strong{default:} \code{TRUE} Add Restructured BETOS
 Classifications to HCPCS codes}
@@ -107,7 +107,7 @@ Classifications to HCPCS codes}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-These functions allow the user access to information on services and
+\code{\link[=utilization]{utilization()}} allows access to information on services and
 procedures provided to Original Medicare (fee-for-service) Part B
 beneficiaries by physicians and other healthcare professionals; aggregated
 by provider, service and geography.

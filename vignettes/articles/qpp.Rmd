@@ -77,7 +77,7 @@ select(q, year, measures) |>
 ```
 
 <br>
-"1043477615"
+
 ## Quality Eligibility
 
 ```{r}
@@ -85,11 +85,31 @@ s <- 2017:2023 |>
   purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
   purrr::list_rbind()
 
-s |> tidyr::unnest(org_apms) |> 
+"1043477615"
+
+"org_apms"
+"org_virtualGroups"
+
+s |> 
+  tidyr::unnest_longer(org_apms, keep_empty = TRUE) |> 
+  tidyr::unpack(org_apms, names_sep = ".")
+  tidyr::unnest(org_apms, keep_empty = TRUE) |> 
+  #tidyr::unpack()
   tidyr::unnest(extremeHardshipReasons) |> 
   tidyr::unnest(qpPatientScores) |> 
   tidyr::unnest(qpPaymentScores) |> 
   janitor::remove_empty(which = c("rows", "cols"))
+```
+
+
+```{r}
+s |> 
+  dplyr::select(year, dplyr::starts_with("ind.")) |> 
+  dplyr::mutate(scenario = "Individual", 
+                .before = ind.aciHardship) |> 
+  janitor::clean_names() |> 
+  dplyr::mutate(dplyr::across(dplyr::starts_with("ind_"), as.character)) |> 
+  tidyr::pivot_longer(!c(year, scenario))
 ```
 
 

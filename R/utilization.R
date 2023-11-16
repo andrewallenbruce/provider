@@ -1,9 +1,9 @@
-#' Provider Utilization & Demographics
+#' Provider Utilization & Demographics by Year
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' These functions allow the user access to information on services and
+#' [utilization()] allows access to information on services and
 #' procedures provided to Original Medicare (fee-for-service) Part B
 #' beneficiaries by physicians and other healthcare professionals; aggregated
 #' by provider, service and geography.
@@ -96,8 +96,8 @@
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest `demographics` and `conditions`
-#' @param detailed < *boolean* > // __default:__ `FALSE` Include `detailed` column
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest `performance`, `demographics` and `conditions`
+#' @param detailed < *boolean* > // __default:__ `FALSE` Include nested `medical` and `drug` columns
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... For future use.
 #' @autoglobal

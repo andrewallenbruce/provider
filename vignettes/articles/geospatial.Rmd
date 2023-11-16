@@ -100,7 +100,7 @@ rhcs <- dplyr::bind_rows(
               other_names = c(org_parent, 
                               on_type, 
                               on_org_name)) |> 
-  add_counties(zcol = zip) |> 
+  add_counties(city, state, zip, add_sf = TRUE) |> 
   tidyr::unite("address", 
                address:state, 
                remove = TRUE, 
@@ -112,7 +112,7 @@ rhcs <- dplyr::bind_rows(
 ## Filter to distinct counties for labelling
 
 ```{r}
-county_pts <- dplyr::distinct(stack, county, .keep_all = TRUE) |> 
+county_pts <- dplyr::distinct(rhcs, county, .keep_all = TRUE) |> 
   dplyr::select(county, lat, lng) |> 
   dplyr::filter(county != "Duval")
 ```
@@ -122,7 +122,7 @@ county_pts <- dplyr::distinct(stack, county, .keep_all = TRUE) |>
 ## Geocode with `{tidygeocoder}`
 
 ```{r}
-rhc_geo <- dplyr::select(stack, npi:zip) |> 
+rhc_geo <- dplyr::select(rhcs, npi:zip) |> 
   dplyr::filter(zip != "32209") |> 
   tidygeocoder::geocode(address      = address, 
                         method       = "mapbox", 

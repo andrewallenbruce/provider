@@ -4,7 +4,7 @@
 \alias{compare}
 \alias{compare_hcpcs}
 \alias{compare_conditions}
-\title{Compare Providers to State and National Benchmarks}
+\title{Compare Provider Performance}
 \usage{
 compare_hcpcs(df)
 

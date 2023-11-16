@@ -4,20 +4,30 @@
 \alias{add_counties}
 \title{Add county name, FIPs, and geometry to data frame with zip codes}
 \usage{
-add_counties(df, zcol)
+add_counties(df, citycol, statecol, zipcol, add_sf = FALSE)
 }
 \arguments{
 \item{df}{data frame}
 
-\item{zcol}{column containing zip codes}
+\item{citycol}{bare column name column containing city names}
+
+\item{statecol}{bare column name column containing state abbreviations}
+
+\item{zipcol}{bare column name containing zip codes}
+
+\item{add_sf}{add county geometry column and convert tibble to an sf object,
+based on county fips code added, default is \code{FALSE}}
 }
 \description{
 Add county name, FIPs, and geometry to data frame with zip codes
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-nppes(npi = 1962026229) |>
-add_counties(zip)
+nppes(npi = 1720098791) |>
+      add_counties(citycol = city,
+      statecol = state,
+      zipcol = zip,
+      add_sf = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

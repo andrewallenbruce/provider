@@ -1,4 +1,4 @@
-#' Compare Providers to State and National Benchmarks
+#' Compare Provider Performance
 #'
 #' @description
 #'

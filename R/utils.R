@@ -138,37 +138,64 @@ df2chr <- function(df) {
 
 #' Add county name, FIPs, and geometry to data frame with zip codes
 #' @param df data frame
-#' @param zcol column containing zip codes
+#' @param citycol bare column name column containing city names
+#' @param statecol bare column name column containing state abbreviations
+#' @param zipcol bare column name containing zip codes
+#' @param add_sf add county geometry column and convert tibble to an sf object,
+#' based on county fips code added, default is `FALSE`
 #' @examplesIf interactive()
-#' nppes(npi = 1962026229) |>
-#' add_counties(zip)
+#' nppes(npi = 1720098791) |>
+#'       add_counties(citycol = city,
+#'       statecol = state,
+#'       zipcol = zip,
+#'       add_sf = TRUE)
 #'
 #' @autoglobal
 #' @export
 #' @keywords internal
-add_counties <- function(df, zcol) {
+add_counties <- function(df,
+                         citycol,
+                         statecol,
+                         zipcol,
+                         add_sf = FALSE) {
 
-  # normalize zip to 5 digits
-  df <- dplyr::mutate(df, "{{ zcol }}" := zipcodeR::normalize_zip({{ zcol }}))
-
+  # prepare zip code tibble
   zdb <- dplyr::tibble(zipcodeR::zip_code_db) |>
-    dplyr::select(zip = zipcode, city = major_city, county, state, lat, lng) |>
-    dplyr::mutate(county = stringr::str_remove(county, " County"),
-                  city = stringr::str_to_upper(city),
-                  state = NULL)
+         dplyr::select(zip = zipcode,
+                       city = major_city,
+                       state,
+                       .county = county,
+                       lat, lng, dplyr::starts_with("bounds")) |>
+         #tidyr::nest(.coords = c(lat, lng, dplyr::starts_with("bounds"))) |>
+         dplyr::mutate(.county = stringr::str_remove(.county, " County"),
+                       city = stringr::str_to_upper(city),
+                       state = stringr::str_to_upper(state),
+                       state = fct_stabb(state))
 
-  df <- dplyr::inner_join(df, zdb, by = dplyr::join_by(city, zip))
+  # prepare `join_by` object
+  by <- dplyr::join_by({{ zipcol }}   == zip,
+                       {{ citycol }}  == city,
+                       {{ statecol }} == state)
 
-  # Retrieve county FIPS codes
-  df <- dplyr::mutate(df, fips = purrr::map2_chr(df$state, df$county, fipio::as_fips))
+  # normalize zip codes to 5 digits
+  df <- dplyr::mutate(df, "{{ zipcol }}" := zipcodeR::normalize_zip({{ zipcol }}))
 
-  # Retrieve geometries based on county FIPS
-  df <- dplyr::mutate(df, geometry = purrr::map(df$fips, fipio::fips_geometry)) |>
-    tidyr::unnest(geometry)
+  # join tibbles
+  df <- dplyr::left_join(df, zdb, by)
 
-  # Create `{sf}` <MULTIPOLYGON> object
-  df <- sf::st_as_sf(df)
+  # # Retrieve county FIPS codes
+  df <- dplyr::mutate(df, .county_fips = purrr::map2_chr(df$lng, df$lat, fipio::coords_to_fips))
 
+  if (add_sf) {
+    # Retrieve geometries based on county FIPS
+    df <- df |>
+      dplyr::mutate(geometry = purrr::map(df$.county_fips,
+                               fipio::fips_geometry)) |>
+      tidyr::unnest(geometry)
+
+    # Create `{sf}` <MULTIPOLYGON> object
+    df <- sf::st_as_sf(df)
+  }
   return(df)
 }
 

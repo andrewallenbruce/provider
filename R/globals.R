@@ -290,15 +290,16 @@ utils::globalVariables(c(
   "state.name", # <abb2full>
   "x", # <abb2full>
   "y", # <abb2full>
-  ":=", # <add_counties>
   "zipcode", # <add_counties>
   "major_city", # <add_counties>
-  "county", # <add_counties>
   "state", # <add_counties>
+  "county", # <add_counties>
   "lat", # <add_counties>
   "lng", # <add_counties>
+  ".county", # <add_counties>
   "city", # <add_counties>
   "zip", # <add_counties>
+  ":=", # <add_counties>
   "geometry", # <add_counties>
   "arg", # <encode_param>
   NULL
