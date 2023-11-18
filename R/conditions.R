@@ -232,7 +232,10 @@ conditions <- function(year,
     results$year <- year
     results <- cols_cc(tidyup(results,
                               int = "year",
-                              dbl = c("prvlnc", "_pc", "er_", "_rate"))) |>
+                              dbl = c("prvlnc",
+                                      "_pc",
+                                      "er_",
+                                      "_rate"))) |>
       dplyr::mutate(level       = fct_level(level),
                     sublevel    = fct_stname(sublevel),
                     age         = fct_age(age),

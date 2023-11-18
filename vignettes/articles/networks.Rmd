@@ -26,117 +26,110 @@ library(provider)
 library(dplyr)
 library(purrr)
 library(stringr)
-library(igraph)
-library(qs)
-library(ggraph)
 library(tidygraph)
+library(ggraph)
 ```
+
+
 
 ## Provider Networks
 
 ```{r}
-ga <- provider:::georgia_reassignments()
-# ga |> 
-#   filter(!is.na(organization)) |> 
-#   arrange(desc(reassignments)) |> 
-#   slice(50000:n())
-```
-
-
-```{r}
-southland <- ga |> 
-  filter(pac_org == "1153563770") |> 
-  mutate(individual = stringr::str_glue("{first} {last}")) |> 
-  select(organization, 
-         individual,
-         associations,
-         entry, 
-         reassignments_org = reassignments, 
-         pac_org, 
-         enid_org, 
-         npi_ind = npi, 
-         pac_ind = pac, 
-         enid_ind = enid)
-
-southland
-```
-
-
-```{r}
-individuals <- southland |>
-  filter(associations > 5) |> 
-  distinct(npi_ind, .keep_all = TRUE) |> 
-  pull(npi_ind) |>
-  map_dfr(~reassignments(npi = .x)) |> 
-  mutate(individual = str_glue("{first} {last}")) |> 
-  select(individual,
-         organization, 
-         associations,
-         entry, 
-         reassignments_org = reassignments, 
-         pac_org, 
-         enid_org, 
-         npi_ind = npi, 
-         pac_ind = pac, 
-         enid_ind = enid) |> 
-  filter(organization != "SGMP SOUTHLAND LLC")
-
-individuals
-```
-
-## `{igraph}`
-
-```{r}
-bound_ig <- igraph::graph_from_data_frame(bind_rows(southland, individuals), directed = TRUE)
-bound_ig
-```
-
-
-```{r}
-plot(bound_ig, 
-     vertex.label.cex = 0.5, 
-     vertex.size = 3, 
-     vertex.color = "gray90", 
-     vertex.frame.width = 1)
+williams <- provider:::georgia_reassignments() |>
+  filter(npi          == "1346391299") |> 
+  mutate(provider     = str_glue("{first} {last}"),
+         #provider     = str_to_title(provider),
+         organization = str_to_title(organization),
+         organization = str_remove_all(organization, 
+                        regex("Llc|Inc| Pc|-|,+|\\.")),
+         organization = str_squish(organization)) |> 
+  select(provider, organization, reassignments) |> 
+  arrange(desc(reassignments))
+williams
 ```
 
 <br><br>
 
-## `{tidygraph}` & `{ggraph}`
+## `{tidygraph}`
 
 ```{r}
-south_grph <- tidygraph::as_tbl_graph(southland, directed = TRUE) |> 
-  mutate(importance = centrality_degree(mode = 'all'))
-south_grph
+will_tdgrph <- tidygraph::as_tbl_graph(williams, directed = FALSE)
+
+summary(will_tdgrph)
+
+will_tdgrph
 ```
 
-<br>
+<br><br>
+
 
 ```{r}
-ind_grph <- tidygraph::as_tbl_graph(individuals, directed = TRUE) |> 
-  mutate(importance = centrality_degree(mode = 'all'))
-ind_grph
-```
-
-<br>
-
-```{r}
-p <- ggraph(ind_grph, "graphopt") + 
-  geom_edge_link(arrow = arrow(length = unit(0.5, 'mm')), 
-                 end_cap = circle(2.5, 'mm'), edge_width = 0.3, edge_alpha = 0.5) +
-  geom_node_point(
-    #aes(size = importance), 
-                  show.legend = FALSE, 
-                  alpha = 0.5, 
-                  color = 'steelblue') + 
-  geom_node_text(aes(label = name), 
-                 repel = TRUE, 
-                 size = 1.25, 
-                 #label.size = 0.1,
-                 check_overlap = FALSE) +
+ggraph(will_tdgrph, "stress") + 
+  geom_edge_link(end_cap = circle(0.5, 'mm'), 
+                 edge.width = 0.5, color = "grey") +
+  geom_node_point(show.legend = FALSE, 
+                  alpha = 1, 
+                  color = 'steelblue',
+                  size = 2.5) + 
+  geom_node_label(aes(label = name),
+                 repel = FALSE,
+                 size = 3,
+                 alpha = 0.85,
+                 label.r = unit(0.25, "lines"),
+                 label.size = 0.1,
+                 check_overlap = TRUE) +
   theme_graph(fg_text_colour = 'white')
-p
 ```
 
 
+
+
+
+
+
+
+```{r}
+# individuals <- southland |>
+#   filter(associations > 5) |> 
+#   distinct(npi_ind, .keep_all = TRUE) |> 
+#   pull(npi_ind) |>
+#   map_dfr(~reassignments(npi = .x)) |> 
+#   mutate(individual = str_glue("{first} {last}")) |> 
+#   select(individual,
+#          organization, 
+#          associations,
+#          entry, 
+#          reassignments_org = reassignments, 
+#          pac_org, 
+#          enid_org, 
+#          npi_ind = npi, 
+#          pac_ind = pac, 
+#          enid_ind = enid) |> 
+#   filter(organization != "SGMP SOUTHLAND LLC")
+# 
+# individuals
+```
+
+```{r}
+x <- c(1, 0.9871, 0.9485, 0.8855, 0.7994, 0.6927, 0.5681, 0.4287, 0.2782, 0.1205,
+    -0.0403, -0.2, -0.3546, -0.5, -0.6324, -0.7485, -0.8452, -0.92, -0.9709, -0.9968,
+    -0.9968, -0.9709, -0.92, -0.8452, -0.7485, -0.6324, -0.5, -0.3546, -0.2, -0.0403,
+    0.1205, 0.2782, 0.4287, 0.5681, 0.6927, 0.7994, 0.8855, 0.9485, 0.9871)
+y <- c(0, 0.1604, 0.3167, 0.4647, 0.6007, 0.7212, 0.823, 0.9035, 0.9605, 0.9927,
+    0.9992, 0.9798, 0.935, 0.866, 0.7746, 0.6631, 0.5345, 0.392, 0.2393, 0.0805,
+    -0.0805, -0.2393, -0.392, -0.5345, -0.6631, -0.7746, -0.866, -0.935, -0.9798,
+    -0.9992, -0.9927, -0.9605, -0.9035, -0.823, -0.7212, -0.6007, -0.4647, -0.3167,
+    -0.1604)
+
+ggraph(will_tdgrph, layout = "manual", x = x, y = y) + 
+	geom_edge_link0(aes(alpha = reassignments, width = reassignments, colour = reassignments)) + 
+	scale_edge_colour_gradient(low = "#AEDDFC", high = "#27408B") + 
+	scale_edge_width(range = c(0.2, 2)) + 
+	scale_edge_alpha(range = c(0.1, 1)) + 
+	geom_node_point(aes(fill = degree, size = degree), colour = "#9F94F2", shape = 21, stroke = 3) + 
+	scale_fill_gradient(low = "#87CEFF", high = "#27408B") + 
+  scale_size(range = c(1, 5)) + 
+  geom_node_text(aes(label = name), colour = "#0F0909", size = 4, family = "Helvetica") + 
+  theme_graph()
+```
 
