@@ -18,7 +18,7 @@ utils::globalVariables(c(
   "year", # <change_year>
   ":=", # <change_year>
   "interval", # <make_interval>
-  "state", # <.ccn>
+  ".cms_type", # <.ccn>
   "y", # <clinicians>
   "address", # <clinicians>
   "gndr", # <clinicians>

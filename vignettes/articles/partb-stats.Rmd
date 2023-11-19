@@ -52,6 +52,16 @@ plan(sequential)
 ```
 
 
+
+```{r}
+chronic |> 
+  group_by(year, level) |> 
+  summarise(mprevalence = mean(prevalence, na.rm = TRUE),
+            gprevalence = geomean(prevalence),
+            n = n()) |> 
+  arrange(year, desc(level))
+```
+
 ## Overall Performance
 
 ```{r}
@@ -63,6 +73,15 @@ performance
 
 
 ```{r}
+datawizard::data_codebook(performance)
+```
+
+
+```{r}
+datawizard::data_tabulate(performance)
+```
+
+```{r}
 plot(tot_payment ~ tot_srvcs, performance)
 abline(h = mean(performance$tot_payment), lty = 2)
 abline(v = mean(performance$tot_srvcs), lty = 2)
@@ -71,7 +90,7 @@ abline(lm(tot_payment ~ tot_srvcs, performance))
 
 
 ```{r}
-lm.performance <- lm(tot_payment ~ tot_benes + .srvcs_per_bene + .pymt_per_srvc + .copay_deduct + .pymt_per_bene, data = performance)
+lm.performance <- lm(tot_payment ~ tot_benes + .srvcs_per_bene + .pymt_per_srvc + .copay_deduct, data = performance)
 lm.performance
 
 summary(lm.performance)
