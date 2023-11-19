@@ -88,6 +88,7 @@ outpatient <- function(year,
 
   if (tidy) {
     results$year <- year
+    results$rndrng_prvdr_state_abrvtn <- fct_stabb(rndrng_prvdr_state_abrvtn)
     results <- tidyup(results,
                       int = c('year',
                               'bene_cnt',
@@ -96,7 +97,8 @@ outpatient <- function(year,
                       dbl = c('avg_tot_sbmtd_chrgs',
                               'avg_mdcr_alowd_amt',
                               'avg_mdcr_pymt_amt',
-                              'avg_mdcr_outlier_amt')) |>
+                              'avg_mdcr_outlier_amt'),
+                      zip = 'rndrng_prvdr_zip5') |>
       cols_out()
     if (na.rm) results <- narm(results)
   }
@@ -107,11 +109,10 @@ outpatient <- function(year,
 #' @autoglobal
 #' @noRd
 cols_out <- function(df) {
-
     cols <- c('year',
               'ccn'                 = 'rndrng_prvdr_ccn',
               'organization'        = 'rndrng_prvdr_org_name',
-              'street'              = 'rndrng_prvdr_st',
+              'address'             = 'rndrng_prvdr_st',
               'city'                = 'rndrng_prvdr_city',
               'state'               = 'rndrng_prvdr_state_abrvtn',
               'fips'                = 'rndrng_prvdr_state_fips',

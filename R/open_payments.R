@@ -122,6 +122,7 @@
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param add.ndc < *boolean* > // __default:__ `TRUE` Add output from [ndc_lookup()]
 #' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -159,6 +160,7 @@ open_payments <- function(year,
                           offset = 0L,
                           tidy = TRUE,
                           pivot = TRUE,
+                          add.ndc = TRUE,
                           na.rm = FALSE,
                           ...) {
 
@@ -243,7 +245,9 @@ open_payments <- function(year,
                       dtype = 'mdy',
                       yn = c(yncols), #nolint
                       dbl = 'dollars',
-                      int = c('program_year', 'number_of_payments_included_in_total_amount')) |> #nolint
+                      int = c('program_year',
+                              'number_of_payments_included_in_total_amount'),
+                      zip = 'recipient_zip_code') |>
       dplyr::mutate(covered_recipient_type                                         = fct_cov(covered_recipient_type),
                     recipient_state                                                = fct_stabb(recipient_state),
                     applicable_manufacturer_or_applicable_gpo_making_payment_state = fct_stabb(applicable_manufacturer_or_applicable_gpo_making_payment_state),
@@ -297,12 +301,21 @@ open_payments <- function(year,
                       pay_total = dplyr::if_else(group_id > 1, NA, pay_total),
                       pay_count = dplyr::if_else(group_id > 1, NA, pay_count))
 
-      # if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
+      if (add.ndc) {
+      ndcs <- unique(results$ndc)
+      ndcs <- ndcs[!is.na(ndcs)]
+      rx <- ndcs |> purrr::map(\(x) rxnorm(ndc = x)) |>
+                    purrr::list_rbind()
+      results <- dplyr::left_join(results, rx,
+                 by = dplyr::join_by(ndc == ndc))
+      }
     }
     if (na.rm) results <- narm(results)
   }
   return(results)
 }
+
+# if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
 
 #' Parallelized [open_payments()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
@@ -362,7 +375,9 @@ open_payments_error <- function(response) {
 nature <- function(x){
   dplyr::case_match(
     x,
-    "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation Other Than Consulting",
+    paste("Compensation for services other than consulting, including serving",
+          "as faculty or as a speaker at a venue other than a continuing",
+          "education program") ~ "Compensation Other Than Consulting",
     .default = x)
 }
 
@@ -372,7 +387,7 @@ nature <- function(x){
 cols_open <- function(df) {
 
   cols <- c('program_year',
-            'npi'                   = 'covered_recipient_npi',
+            'npi' = 'covered_recipient_npi',
             # 'changed'               = 'change_type',
             'covered_recipient'     = 'covered_recipient_type',
             'teaching_ccn'          = 'teaching_hospital_ccn',

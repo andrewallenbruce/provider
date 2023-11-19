@@ -142,8 +142,9 @@ opt_out <- function(npi = NULL,
   if (tidy) {
     results <- tidyup(results,
                       dtype = 'mdy',
-                      yn = 'eligible',
-                      chr = 'npi') |>
+                      yn    = 'eligible',
+                      chr   = 'npi',
+                      zip   = 'zip_code') |>
       combine(address, c('first_line_street_address',
                          'second_line_street_address')) |>
       dplyr::mutate(state_code = fct_stabb(state_code)) |>

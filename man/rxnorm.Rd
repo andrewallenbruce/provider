@@ -4,13 +4,15 @@
 \alias{rxnorm}
 \title{RxNorm API}
 \usage{
-rxnorm(ndc)
+rxnorm(ndc, ...)
 }
 \arguments{
 \item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
+
+\item{...}{future use}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:
+A \link[dplyr:reexports]{tibble} with the columns:
 }
 \description{
 RxNorm API

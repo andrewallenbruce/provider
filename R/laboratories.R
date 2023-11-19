@@ -152,7 +152,8 @@ laboratories <- function(name = NULL,
                       dtype = 'ymd',
                       dt    = '_dt',
                       yn    = '_sw',
-                      int   = 'drctly_afltd') |>
+                      int   = 'drctly_afltd',
+                      zip   = 'zip_cd') |>
       combine(address, c('st_adr', 'addtnl_st_adr')) |>
       combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
       dplyr::mutate(pgm_trmntn_cd               = fct_term(pgm_trmntn_cd),

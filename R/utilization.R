@@ -277,7 +277,8 @@ tidyup_provider <- function(results, nest, detailed) {
     tidyup(yn   = "par",
            int  = c("year", "_hcpcs", "bene", "_srvcs"),
            dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
-           cred = "credential") |>
+           cred = "credential",
+           zip  = 'rndrng_prvdr_zip5') |>
     combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
     dplyr::mutate(specialty       = correct_specialty(specialty),
                   .copay_deduct   = tot_allowed - tot_payment,
@@ -317,10 +318,12 @@ tidyup_service <- function(results, rbcs) {
   results$level <- "Provider"
 
   results <- tidyup(results,
-                    yn      = "_ind",
-                    int     = c("year", "tot_"),
-                    dbl     = "avg_") |>
-    combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
+                    yn  = "_ind",
+                    int = c("year", "tot_"),
+                    dbl = "avg_",
+                    zip = 'rndrng_prvdr_zip5') |>
+    combine(address, c('rndrng_prvdr_st1',
+                       'rndrng_prvdr_st2')) |>
     cols_util("service") |>
     dplyr::mutate(specialty = correct_specialty(specialty),
                   gender    = fct_gen(gender),
@@ -344,7 +347,7 @@ tidyup_geography <- function(results, rbcs) {
                     yn           = "_ind",
                     int          = c("year", "tot_"),
                     dbl          = "avg_") |>
-    dplyr::mutate(rndrng_prvdr_geo_desc = fct_stabb(rndrng_prvdr_geo_desc),
+    dplyr::mutate(rndrng_prvdr_geo_desc = fct_stname(rndrng_prvdr_geo_desc),
                   place_of_srvc         = fct_pos(place_of_srvc),
                   rndrng_prvdr_geo_lvl  = fct_level(rndrng_prvdr_geo_lvl)) |>
     cols_util("geography")

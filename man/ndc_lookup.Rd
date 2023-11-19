@@ -4,10 +4,12 @@
 \alias{ndc_lookup}
 \title{National Drug Code (NDC) Lookup}
 \usage{
-ndc_lookup(ndc)
+ndc_lookup(ndc, ...)
 }
 \arguments{
 \item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
+
+\item{...}{for future use.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -152,10 +152,11 @@ clinicians <- function(npi = NULL,
 
   if (tidy) {
     results <- tidyup(results,
-                      yn = 'telehlth',
-                      int = c('num_org_mem', 'grd_yr')) |>
+                      yn  = 'telehlth',
+                      int = c('num_org_mem', 'grd_yr'),
+                      zip = 'zip_code') |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-      dplyr::mutate(gndr = fct_gen(gndr),
+      dplyr::mutate(gndr  = fct_gen(gndr),
                     state = fct_stabb(state)) |>
       cols_clin()
 

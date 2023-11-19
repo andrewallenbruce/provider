@@ -141,6 +141,7 @@ utils::globalVariables(c(
   "group_id", # <open_payments>
   "pay_total", # <open_payments>
   "pay_count", # <open_payments>
+  "ndc", # <open_payments>
   "title", # <open_ids>
   "modified", # <open_ids>
   "distribution", # <open_ids>
@@ -155,6 +156,7 @@ utils::globalVariables(c(
   "service", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
+  "rndrng_prvdr_state_abrvtn", # <outpatient>
   "y", # <pending>
   "y", # <providers>
   "y", # <mips_2021>
@@ -276,15 +278,10 @@ utils::globalVariables(c(
   "state.name", # <abb2full>
   "x", # <abb2full>
   "y", # <abb2full>
-  "zipcode", # <add_counties>
-  "state", # <add_counties>
-  "county", # <add_counties>
-  "lat", # <add_counties>
-  "lng", # <add_counties>
-  ".county", # <add_counties>
   "zip", # <add_counties>
+  "state", # <add_counties>
   ":=", # <add_counties>
-  ".county_fips", # <add_counties>
+  "county_fips", # <add_counties>
   "geometry", # <add_counties>
   "arg", # <encode_param>
   NULL

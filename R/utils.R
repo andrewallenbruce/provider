@@ -161,56 +161,56 @@ add_counties <- function(df,
                          add_geo  = FALSE,
                          as_sf   = FALSE) {
 
-  # prepare zip code tibble
-  zdb <- dplyr::tibble(zipcodeR::zip_code_db) |>
-         dplyr::select(zip     = zipcode,
-                       state,
-                       .county = county,
-                       lat, lng, dplyr::starts_with("bounds")) |>
-         #tidyr::nest(.coords  = c(lat, lng, dplyr::starts_with("bounds"))) |>
-         dplyr::mutate(.county = stringr::str_remove(.county, " County"),
-                       state   = stringr::str_to_upper(state),
-                       state   = fct_stabb(state))
-
   # prepare `join_by` object
-  by <- dplyr::join_by({{ zipcol }} == zip, {{ statecol }} == state)
+  by <- dplyr::join_by({{ zipcol }} == zip,
+                       {{ statecol }} == state)
 
   # normalize zip codes to 5 digits
-  df <- dplyr::mutate(df, "{{ zipcol }}" := zipcodeR::normalize_zip({{ zipcol }}))
+  df <- dplyr::mutate(df,
+        "{{ zipcol }}" := zipcodeR::normalize_zip({{ zipcol }}))
+
+  # prepare zip code tibble
+  zdb <- dplyr::tibble(
+    zip    = zipcodeR::zip_code_db$zipcode,
+    city   = zipcodeR::zip_code_db$major_city,
+    county = stringr::str_remove(zipcodeR::zip_code_db$county, " County"),
+    state  = fct_stabb(zipcodeR::zip_code_db$state),
+    lat    = zipcodeR::zip_code_db$lat,
+    lng    = zipcodeR::zip_code_db$lng)
 
   # join tibbles
   df <- dplyr::left_join(df, zdb, by)
 
   if (add_fips) {
+    # County FIPS codes
+    poss_fips <- purrr::possibly(fipio::coords_to_fips,
+                                 otherwise = NA_character_)
 
-    # Retrieve county FIPS codes
-
-    poss_fips <- purrr::possibly(fipio::coords_to_fips, otherwise = NA_character_)
-
-    df <- df |> dplyr::mutate(.county_fips = purrr::map2(df$lng, df$lat, poss_fips))
+    df <- df |>
+      dplyr::mutate(county_fips = purrr::map2(df$lng, df$lat, poss_fips))
 
     df[apply(df, 2, function(x) lapply(x, length) == 0)] <- NA
 
-    df <- df |> tidyr::unnest(.county_fips, keep_empty = TRUE)
+    df <- tidyr::unnest(df, county_fips, keep_empty = TRUE)
   }
 
   if (add_geo) {
+    # Geometries based on county FIPS
+    poss_geo <- purrr::possibly(fipio::fips_geometry,
+                                otherwise = NA_character_)
 
-    # Retrieve geometries based on county FIPS
-
-    poss_geo <- purrr::possibly(fipio::fips_geometry, otherwise = NA_character_)
-
-    df <- df |> dplyr::mutate(geometry = purrr::map(df$.county_fips, poss_geo))
+    df <- df |> dplyr::mutate(geometry = purrr::map(df$.county_fips,
+                                                    poss_geo))
 
     # df[apply(df, 2, function(x) lapply(x, length) == 0)] <- NA
     # df <- df |> tidyr::unnest(geometry, keep_empty = TRUE)
   }
 
   if (as_sf) {
-
-    # Create `{sf}` <MULTIPOLYGON> object
-
-    df <- sf::st_as_sf(df,sf_column_name = geometry, crs = sf::st_crs(4326), na.fail = FALSE)
+    df <- sf::st_as_sf(df,
+                       sf_column_name = geometry,
+                       crs = sf::st_crs(4326),
+                       na.fail = FALSE)
   }
   return(df)
 }
@@ -237,7 +237,8 @@ tidyup <- function(df,
                    dbl = NULL,
                    chr = NULL,
                    up = NULL,
-                   cred = NULL) {
+                   cred = NULL,
+                   zip = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -255,6 +256,7 @@ tidyup <- function(df,
   if (!is.null(chr))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr),  as.character))
   if (!is.null(up))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up),   toupper))
   if (!is.null(cred)) x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))
+  if (!is.null(zip))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(zip), zipcodeR::normalize_zip))
   return(x)
 }
 

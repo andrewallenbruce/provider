@@ -277,7 +277,8 @@ hospitals <- function(npi = NULL,
     results <- tidyup(results,
                       dtype = 'ymd',
                       yn    = c('flag', 'subgroup'),
-                      chr   = 'zip_code') |>
+                      chr   = 'zip_code',
+                      zip   = 'zip_code') |>
       combine(address, c('address_line_1',
                          'address_line_2')) |>
       combine(structure, c('organization_type_structure',

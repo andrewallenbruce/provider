@@ -143,7 +143,7 @@ quality_payment <- function(year,
                       "ia_study",
                       "extreme_hardship_cost")) |>
       cols_qpp("tidy") |>
-      dplyr::mutate(type = fct_part(type),
+      dplyr::mutate(type  = fct_part(type),
                     state = fct_stabb(state))
 
       if (nest) {

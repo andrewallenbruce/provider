@@ -21,6 +21,7 @@ open_payments(
   offset = 0L,
   tidy = TRUE,
   pivot = TRUE,
+  add.ndc = TRUE,
   na.rm = FALSE,
   ...
 )
@@ -81,6 +82,8 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+
+\item{add.ndc}{< \emph{boolean} > // \strong{default:} \code{TRUE} Add output from \code{\link[=ndc_lookup]{ndc_lookup()}}}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
 

@@ -13,7 +13,8 @@ tidyup(
   dbl = NULL,
   chr = NULL,
   up = NULL,
-  cred = NULL
+  cred = NULL,
+  zip = NULL
 )
 }
 \arguments{
