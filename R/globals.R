@@ -161,7 +161,6 @@ utils::globalVariables(c(
   "service", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
-  "rndrng_prvdr_state_abrvtn", # <outpatient>
   "y", # <pending>
   "y", # <providers>
   "y", # <mips_2021>

@@ -12,7 +12,6 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
-[![pkgdown](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
@@ -44,8 +43,10 @@ library(tidyr)
 ### `affiliations()`
 
 ``` r
-affiliations(npi          = 1023630738, 
-             facility_ccn = "37Z324") |> glimpse()
+affiliations(npi = 1023630738,
+             pac = 9032521372,
+             facility_ccn = "37Z324") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -65,7 +66,8 @@ beneficiaries(year   = 2022,
               period = "Year", 
               level  = "County", 
               state  = "GA", 
-              county = "Lowndes") |> glimpse()
+              county = "Lowndes") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -100,7 +102,8 @@ beneficiaries(year   = 2022,
 ### `clinicians()`
 
 ``` r
-clinicians(npi = 1932365699) |> glimpse()
+clinicians(npi = 1932365699) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -121,7 +124,7 @@ clinicians(npi = 1932365699) |> glimpse()
     #> $ address_org   <chr> "1165 S CAMINO DEL RIO SUITE 100"
     #> $ city_org      <chr> "DURANGO"
     #> $ state_org     <ord> CO
-    #> $ zip_org       <chr> "813036824"
+    #> $ zip_org       <chr> "81303"
     #> $ phone_org     <chr> "9702478762"
 
 ### `conditions()`
@@ -132,7 +135,8 @@ conditions(year  = 2018,
            level = "National", 
            age   = "All", 
            demo  = "All", 
-           mcc   = "6+") |> glimpse()
+           mcc   = "6+") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -156,7 +160,8 @@ conditions(year      = 2018,
            level     = "National", 
            age       = "All", 
            demo      = "All",
-           condition = "Arthritis") |> glimpse()
+           condition = "Arthritis") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -167,7 +172,7 @@ conditions(year      = 2018,
     #> $ age                 <fct> All
     #> $ demographic         <fct> All
     #> $ subdemo             <fct> All
-    #> $ condition           <chr> "Arthritis"
+    #> $ condition           <ord> Arthritis
     #> $ prevalence          <dbl> 0.3347
     #> $ tot_pymt_percap     <dbl> 16890.05
     #> $ tot_std_pymt_percap <dbl> 16006.14
@@ -177,7 +182,8 @@ conditions(year      = 2018,
 ### `hospitals()`
 
 ``` r
-hospitals(npi = 1720098791) |> glimpse()
+hospitals(npi = 1720098791) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -196,7 +202,7 @@ hospitals(npi = 1720098791) |> glimpse()
     #> $ address           <chr> "710 N IRWIN AVE"
     #> $ city              <chr> "OCILLA"
     #> $ state             <ord> GA
-    #> $ zip               <chr> "317745011"
+    #> $ zip               <chr> "31774"
     #> $ location_type     <chr> "OTHER HOSPITAL PRACTICE LOCATION: REH"
     #> $ registration      <fct> Non-Profit
     #> $ multi_npi         <lgl> FALSE
@@ -208,7 +214,8 @@ hospitals(npi = 1720098791) |> glimpse()
 ### `laboratories()`
 
 ``` r
-laboratories(clia = "11D0265516") |> glimpse()
+laboratories(clia = "11D0265516") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -242,11 +249,13 @@ laboratories(clia = "11D0265516") |> glimpse()
 ### `nppes()`
 
 ``` r
-nppes(npi = 1720098791) |> glimpse()
+nppes(npi = 1720098791) |> 
+  add_counties(state, zip) |> 
+  glimpse()
 ```
 
     #> Rows: 1
-    #> Columns: 31
+    #> Columns: 34
     #> $ npi           <chr> "1720098791"
     #> $ entity_type   <fct> Organization
     #> $ enum_date     <date> 2006-08-09
@@ -259,7 +268,7 @@ nppes(npi = 1720098791) |> glimpse()
     #> $ address       <chr> "710 N IRWIN AVE"
     #> $ city          <chr> "OCILLA"
     #> $ state         <ord> GA
-    #> $ zip           <chr> "317745011"
+    #> $ zip           <chr> "31774"
     #> $ country       <chr> "US"
     #> $ phone         <chr> "229-468-3800"
     #> $ fax           <chr> "229-468-9991"
@@ -278,20 +287,18 @@ nppes(npi = 1720098791) |> glimpse()
     #> $ id_desc       <chr> "MEDICAID"
     #> $ id_state      <ord> GA
     #> $ id_identifier <chr> "000000987A"
+    #> $ county        <chr> "Irwin"
+    #> $ lat           <dbl> 31.6
+    #> $ lng           <dbl> -83.3
 
 ### `open_payments()`
 
 ``` r
-open_payments(year = 2021, 
-              npi = 1023630738, 
+open_payments(year  = 2021, 
+              npi   = 1023630738, 
               na.rm = TRUE) |> 
-  mutate(info = ndc_lookup(ndc), 
-         ndc = NULL) |> 
-  unnest(info) |> 
   glimpse()
 ```
-
-    #> ✖ No results for NDC = 78206-145-01
 
     #> Rows: 1
     #> Columns: 46
@@ -345,7 +352,8 @@ open_payments(year = 2021,
 ### `opt_out()`
 
 ``` r
-opt_out(npi = 1043522824) |> glimpse()
+opt_out(npi = 1043522824) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -361,12 +369,12 @@ opt_out(npi = 1043522824) |> glimpse()
     #> $ address           <chr> "8585 E HARTFORD DR STE 111"
     #> $ city              <chr> "SCOTTSDALE"
     #> $ state             <ord> AZ
-    #> $ zip               <chr> "852555472"
+    #> $ zip               <chr> "85255"
 
 ### `order_refer()`
 
 ``` r
-order_refer(npi   = 1043522824)
+order_refer(npi = 1043522824)
 ```
 
     #> # A tibble: 4 × 4
@@ -383,7 +391,8 @@ order_refer(npi   = 1043522824)
 outpatient(year  = 2021, 
            state = "GA", 
            city  = "Valdosta", 
-           apc   = "5072") |> glimpse()
+           apc   = "5072") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -391,9 +400,9 @@ outpatient(year  = 2021,
     #> $ year                <int> 2021
     #> $ ccn                 <chr> "110122"
     #> $ organization        <chr> "South Georgia Medical Center"
-    #> $ street              <chr> "2501 North Patterson Street, Po Box 1727"
+    #> $ address             <chr> "2501 North Patterson Street, Po Box 1727"
     #> $ city                <chr> "Valdosta"
-    #> $ state               <chr> "GA"
+    #> $ state               <ord> GA
     #> $ fips                <chr> "13"
     #> $ zip                 <chr> "31602"
     #> $ ruca                <chr> "1"
@@ -411,7 +420,8 @@ outpatient(year  = 2021,
 
 ``` r
 providers(npi  = 1720098791, 
-          enid = "O20040610001257") |> glimpse()
+          enid = "O20040610001257") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -428,7 +438,8 @@ providers(npi  = 1720098791,
 
 ``` r
 quality_payment(year = 2021, 
-                npi  = 1932365699) |> glimpse()
+                npi  = 1932365699) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -455,9 +466,11 @@ quality_payment(year = 2021,
     #> $ measures        <list> [<tbl_df[6 x 3]>]
 
 ``` r
-q <- quality_payment(year = 2021, npi = 1932365699)
+q <- quality_payment(year = 2021, 
+                     npi = 1932365699)
 
-select(q, year, statuses) |> unnest(statuses) 
+select(q, year, statuses) |> 
+  unnest(statuses) 
 ```
 
     #> # A tibble: 9 × 2
@@ -474,7 +487,8 @@ select(q, year, statuses) |> unnest(statuses)
     #> 9  2021 Extreme Hardship (Cost)
 
 ``` r
-select(q, year, measures) |> unnest(measures)
+select(q, year, measures) |> 
+  unnest(measures)
 ```
 
     #> # A tibble: 6 × 4
@@ -490,8 +504,9 @@ select(q, year, measures) |> unnest(measures)
 ### `reassignments()`
 
 ``` r
-reassignments(npi     = 1932365699, 
-              pac_org = 7719037548) |> glimpse()
+reassignments(npi = 1932365699, 
+              pac_org = 7719037548) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -514,7 +529,8 @@ reassignments(npi     = 1932365699,
 ``` r
 utilization(year = 2021, 
             npi  = 1932365699, 
-            type = "provider") |> glimpse()
+            type = "provider") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -541,9 +557,13 @@ utilization(year = 2021,
     #> $ conditions   <list> [<tbl_df[1 x 17]>]
 
 ``` r
-p <- utilization(year = 2021, npi = 1932365699, type = "provider")
+p <- utilization(year = 2021, 
+                 npi = 1932365699, 
+                 type = "provider")
 
-select(p, year, performance) |> unnest(performance) |> glimpse()
+select(p, year, performance) |> 
+  unnest(performance) |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -617,7 +637,8 @@ select(p, year, conditions) |>
 utilization(year  = 2021, 
             npi   = 1932365699,
             hcpcs = "99214",
-            type  = "service") |> glimpse()
+            type  = "service") |> 
+  glimpse()
 ```
 
     #> Rows: 1
@@ -660,13 +681,15 @@ utilization(year  = 2021,
             hcpcs = "99205", 
             level = "National",
             pos   = "F",
-            type  = "geography") |> glimpse()
+            type  = "geography") |> 
+  glimpse()
 ```
 
     #> Rows: 1
-    #> Columns: 18
+    #> Columns: 19
     #> $ year         <int> 2021
     #> $ level        <ord> National
+    #> $ state        <ord> National
     #> $ hcpcs        <chr> "99205"
     #> $ hcpcs_desc   <chr> "New patient outpatient visit, total time 60-74 minutes"
     #> $ category     <chr> "E&M"
