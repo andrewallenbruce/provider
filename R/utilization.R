@@ -321,6 +321,7 @@ tidyup_service <- function(results, rbcs) {
                     yn  = "_ind",
                     int = c("year", "tot_"),
                     dbl = "avg_",
+                    cred = "credential",
                     zip = 'rndrng_prvdr_zip5') |>
     combine(address, c('rndrng_prvdr_st1',
                        'rndrng_prvdr_st2')) |>

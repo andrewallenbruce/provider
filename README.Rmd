@@ -24,7 +24,6 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 [![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
-[![pkgdown](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 ![GitHub milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
@@ -53,8 +52,10 @@ library(tidyr)
 ### `affiliations()`
 
 ```{r}
-affiliations(npi          = 1023630738, 
-             facility_ccn = "37Z324") |> glimpse()
+affiliations(npi = 1023630738,
+             pac = 9032521372,
+             facility_ccn = "37Z324") |> 
+  glimpse()
 ```
 
 
@@ -65,13 +66,15 @@ beneficiaries(year   = 2022,
               period = "Year", 
               level  = "County", 
               state  = "GA", 
-              county = "Lowndes") |> glimpse()
+              county = "Lowndes") |> 
+  glimpse()
 ```
 
 ### `clinicians()`
 
 ```{r}
-clinicians(npi = 1932365699) |> glimpse()
+clinicians(npi = 1932365699) |> 
+  glimpse()
 ```
 
 ### `conditions()`
@@ -82,7 +85,8 @@ conditions(year  = 2018,
            level = "National", 
            age   = "All", 
            demo  = "All", 
-           mcc   = "6+") |> glimpse()
+           mcc   = "6+") |> 
+  glimpse()
 ```
 
 
@@ -92,38 +96,40 @@ conditions(year      = 2018,
            level     = "National", 
            age       = "All", 
            demo      = "All",
-           condition = "Arthritis") |> glimpse()
+           condition = "Arthritis") |> 
+  glimpse()
 ```
 
 ### `hospitals()`
 
 ```{r}
-hospitals(npi = 1720098791) |> glimpse()
+hospitals(npi = 1720098791) |> 
+  glimpse()
 ```
 
 ### `laboratories()`
 
 ```{r}
-laboratories(clia = "11D0265516") |> glimpse()
+laboratories(clia = "11D0265516") |> 
+  glimpse()
 ```
 
 
 ### `nppes()`
 
 ```{r}
-nppes(npi = 1720098791) |> glimpse()
+nppes(npi = 1720098791) |> 
+  add_counties(state, zip) |> 
+  glimpse()
 ```
 
 
 ### `open_payments()`
 
 ```{r}
-open_payments(year = 2021, 
-              npi = 1023630738, 
+open_payments(year  = 2021, 
+              npi   = 1023630738, 
               na.rm = TRUE) |> 
-  mutate(info = ndc_lookup(ndc), 
-         ndc = NULL) |> 
-  unnest(info) |> 
   glimpse()
 ```
 
@@ -131,14 +137,15 @@ open_payments(year = 2021,
 ### `opt_out()`
 
 ```{r}
-opt_out(npi = 1043522824) |> glimpse()
+opt_out(npi = 1043522824) |> 
+  glimpse()
 ```
 
 
 ### `order_refer()`
 
 ```{r}
-order_refer(npi   = 1043522824)
+order_refer(npi = 1043522824)
 ```
 
 
@@ -148,7 +155,8 @@ order_refer(npi   = 1043522824)
 outpatient(year  = 2021, 
            state = "GA", 
            city  = "Valdosta", 
-           apc   = "5072") |> glimpse()
+           apc   = "5072") |> 
+  glimpse()
 ```
 
 
@@ -156,33 +164,39 @@ outpatient(year  = 2021,
 
 ```{r}
 providers(npi  = 1720098791, 
-          enid = "O20040610001257") |> glimpse()
+          enid = "O20040610001257") |> 
+  glimpse()
 ```
 
 ### `quality_payment()`
 
 ```{r}
 quality_payment(year = 2021, 
-                npi  = 1932365699) |> glimpse()
+                npi  = 1932365699) |> 
+  glimpse()
 ```
 
 
 ```{r}
-q <- quality_payment(year = 2021, npi = 1932365699)
+q <- quality_payment(year = 2021, 
+                     npi = 1932365699)
 
-select(q, year, statuses) |> unnest(statuses) 
+select(q, year, statuses) |> 
+  unnest(statuses) 
 ```
 
 
 ```{r}
-select(q, year, measures) |> unnest(measures)
+select(q, year, measures) |> 
+  unnest(measures)
 ```
 
 ### `reassignments()`
 
 ```{r}
-reassignments(npi     = 1932365699, 
-              pac_org = 7719037548) |> glimpse()
+reassignments(npi = 1932365699, 
+              pac_org = 7719037548) |> 
+  glimpse()
 ```
 
 
@@ -191,15 +205,20 @@ reassignments(npi     = 1932365699,
 ```{r}
 utilization(year = 2021, 
             npi  = 1932365699, 
-            type = "provider") |> glimpse()
+            type = "provider") |> 
+  glimpse()
 ```
 
 
 
 ```{r}
-p <- utilization(year = 2021, npi = 1932365699, type = "provider")
+p <- utilization(year = 2021, 
+                 npi = 1932365699, 
+                 type = "provider")
 
-select(p, year, performance) |> unnest(performance) |> glimpse()
+select(p, year, performance) |> 
+  unnest(performance) |> 
+  glimpse()
 ```
 
 
@@ -222,7 +241,8 @@ select(p, year, conditions) |>
 utilization(year  = 2021, 
             npi   = 1932365699,
             hcpcs = "99214",
-            type  = "service") |> glimpse()
+            type  = "service") |> 
+  glimpse()
 ```
 
 
@@ -231,7 +251,8 @@ utilization(year  = 2021,
             hcpcs = "99205", 
             level = "National",
             pos   = "F",
-            type  = "geography") |> glimpse()
+            type  = "geography") |> 
+  glimpse()
 ```
 
 ------------------------------------------------------------------------------

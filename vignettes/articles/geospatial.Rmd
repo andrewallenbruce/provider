@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
-  out.width = "100%"
+  out.width = "100%",
+  fig.height = 14,
+  fig.width = 10
 )
 options(scipen = 999)
 
@@ -31,6 +33,13 @@ options(scipen = 999)
 
 ```{r}
 library(provider)
+library(dplyr)
+library(purrr)
+library(tidygeocoder)
+library(tigris)
+library(rmapshaper)
+library(ggplot2)
+library(sf)
 ```
 
 <br>
@@ -38,64 +47,16 @@ library(provider)
 ## Retrieve Addresses of all RHCs in Georgia
 
 ```{r}
-rhcs <- providers(state = "GA", specialty_code = "00-17") |> 
-  dplyr::distinct(npi) |> 
-  dplyr::pull(npi) |> 
-  purrr::map(\(x) nppes(npi = x)) |>
-  purrr::list_rbind() |> 
-  dplyr::select(npi, organization, purpose, 
-                on_org_name, address:zip, pr_purpose:pr_zip) |> 
-  dplyr::distinct()
+rhcs <- providers(state = "GA", 
+                  specialty_code = "00-17") |> 
+  pull(npi) |> 
+  map_dfr(\(x) nppes(npi = x)) |> 
+  select(organization, 
+         address:zip) |> 
+  distinct() |> 
+  add_counties(state, zip) |> 
+  filter(county != "Duval")
 rhcs
-```
-
-<br>
-
-## Stack Distinct `LOCATION` & `PRACTICE` Addresses
-
-```{r}
-org <- dplyr::select(rhcs, 
-                     npi, 
-                     organization, 
-                     purpose, 
-                     address:zip,
-                     pr_purpose) |> 
-  dplyr::filter(is.na(pr_purpose))
-
-org$pr_purpose <- NULL
-
-sub <- dplyr::select(rhcs, 
-                     npi, 
-                     organization = on_org_name,
-                     purpose = pr_purpose, 
-                     address = pr_address,
-                     city = pr_city,
-                     state = pr_state,
-                     zip = pr_zip) |> 
-  dplyr::filter(!is.na(purpose))
-
-rhcs <- dplyr::bind_rows(org, sub) |> 
-  dplyr::distinct() |> 
-  add_counties(state, 
-               zip, 
-               add_fips = TRUE,
-               add_geo = TRUE) |> 
-  tidyr::unite("address", 
-               address:state, 
-               remove = TRUE, 
-               sep = " ")
-rhcs
-```
-
-<br>
-
-## Filter to distinct counties for labelling
-
-```{r}
-county_pts <- dplyr::distinct(rhcs, .county, .keep_all = TRUE) |> 
-  dplyr::select(.county, lat, lng) |> 
-  dplyr::filter(.county != "Duval")
-county_pts
 ```
 
 <br>
@@ -103,14 +64,15 @@ county_pts
 ## Geocode with `{tidygeocoder}`
 
 ```{r}
-rhc_geo <- dplyr::select(rhcs, npi:zip) |> 
-  dplyr::filter(zip != "32209") |> 
-  tidygeocoder::geocode(address      = address, 
-                        method       = "mapbox", 
-                        full_results = TRUE, 
-                        unique_only  = FALSE, 
-                        return_input = TRUE) |> 
-  dplyr::select(npi, zip, place_name, lat, long)
+census <- geocode(rhcs[ ,1:5],
+                  street = address,
+                  city = city, 
+                  state = state,
+                  postalcode = zip, 
+                  method = 'census', 
+                  full_results = TRUE) |> 
+  filter(match_indicator != "No_Match") |> 
+  select(organization:long)
 ```
 
 <br>
@@ -118,9 +80,12 @@ rhc_geo <- dplyr::select(rhcs, npi:zip) |>
 ## Retrieve Georgia counties shapefile from `{tigris}`
 
 ```{r}
-ga_counties <- tigris::counties(state = "GA", year = 2022, progress_bar = FALSE)
-ga_counties <- rmapshaper::ms_simplify(ga_counties)
-ga_counties
+sf_cnt <- counties(state = "GA", 
+                   year = 2022, 
+                   progress_bar = FALSE) |> 
+          ms_simplify()
+
+sf_cnt$mid <- st_centroid(sf_cnt$geometry)
 ```
 
 <br>
@@ -128,34 +93,23 @@ ga_counties
 ## Map with `{ggplot}`
 
 ```{r}
-p <- ggplot2::ggplot() + 
-  ggplot2::geom_sf(data = ga_counties, 
-                   fill = "skyblue", 
-                   colour = "white") +
-  ggrepel::geom_label_repel(county_pts,
-                  mapping = ggplot2::aes(lng, 
-                                lat, 
-                                label = .county),
-                  colour = "grey30",
-                  fill = "white",
-                  alpha = 0.85,
-                  force_pull = 0,
-                  segment.curvature = -0.2,
-                  segment.ncp = 3,
-                  segment.angle = 10,
-                  min.segment.length = 0,
-                  label.size = 0) +
-  ggplot2::geom_point(rhc_geo, 
-                      mapping = ggplot2::aes(long, lat), 
-                      fill = "yellow", 
-                      color = "darkred", 
-                      alpha = 0.85, 
-                      size = 1.75, 
-                      shape = 21, 
-                      stroke = 0.75) +
-  ggplot2::theme_void()
-
-p + ggsflabel::lims_bbox(ga_counties)
+ggplot(sf_cnt) + 
+  geom_sf(fill = "skyblue", 
+          colour = "white", 
+          alpha = 0.5) +
+  geom_sf_text(aes(geometry = mid, 
+                   label = NAME),
+               size = 3.5,
+               check_overlap = TRUE) +
+  geom_jitter(data = census,
+             mapping = aes(long, lat), 
+             fill = "yellow", 
+             color = "darkred", 
+             alpha = 0.75, 
+             size = 4.5, 
+             shape = 21,
+             stroke = 1.5) +
+  theme_void()
 ```
 
 

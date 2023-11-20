@@ -70,11 +70,17 @@
 #' |`bene_rx_lis_no`    |Part D No Low Income Subsidy Beneficiaries              |
 #'
 #' @examplesIf interactive()
-#' beneficiaries(year = 2022, period = "Year", level = "County", county = "Autauga")
+#' beneficiaries(year   = 2022,
+#'               period = "Year",
+#'               level  = "County",
+#'               county = "Autauga")
 #'
-#' beneficiaries(year = 2022, period = "July", state = "Georgia")
+#' beneficiaries(year   = 2022,
+#'               period = "July",
+#'               state  = "Georgia")
 #'
-#' beneficiaries(level = "State", fips = "10")
+#' beneficiaries(level = "State",
+#'               fips  = "10")
 #'
 #' @autoglobal
 #' @export

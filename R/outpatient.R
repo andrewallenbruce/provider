@@ -88,7 +88,6 @@ outpatient <- function(year,
 
   if (tidy) {
     results$year <- year
-    results$rndrng_prvdr_state_abrvtn <- fct_stabb(rndrng_prvdr_state_abrvtn)
     results <- tidyup(results,
                       int = c('year',
                               'bene_cnt',
@@ -100,6 +99,8 @@ outpatient <- function(year,
                               'avg_mdcr_outlier_amt'),
                       zip = 'rndrng_prvdr_zip5') |>
       cols_out()
+    results$state <- fct_stabb(results$state)
+
     if (na.rm) results <- narm(results)
   }
   return(results)

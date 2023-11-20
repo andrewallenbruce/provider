@@ -196,9 +196,9 @@ nppes <- function(npi = NULL,
     if (tidy) {
       results <- tidyup(results,
                         dtype = 'ymd',
-                        yn = c('sole_prop', 'org_part'),
-                        cred = 'credential',
-                        zip = 'zip')
+                        yn    = c('sole_prop', 'org_part'),
+                        cred  = 'credential',
+                        zip   = 'zip')
 
       if (!rlang::has_name(results, "gender")) results$gender <- "9"
 
