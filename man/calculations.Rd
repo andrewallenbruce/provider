@@ -186,7 +186,7 @@ dplyr::mutate(dur = duration_vec(date),
 \dontshow{\}) # examplesIf}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 dt <- dplyr::tibble(date = lubridate::today() - 366)
-make_interval(dt, start = lubridate::today() - 1000)
+make_interval(dt, start = date)
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

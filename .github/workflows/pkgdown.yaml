@@ -20,6 +20,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       MAPBOX_API_KEY: ${{ secrets.MAPBOX_API_KEY }}
+      CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
     steps:
       - uses: actions/checkout@v2
 

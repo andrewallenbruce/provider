@@ -44,6 +44,11 @@ library(sf)
 
 <br>
 
+```{r}
+nppes(1851682538)
+```
+
+
 ## Retrieve Addresses of all RHCs in Georgia
 
 ```{r}
@@ -53,9 +58,7 @@ rhcs <- providers(state = "GA",
   map_dfr(\(x) nppes(npi = x)) |> 
   select(organization, 
          address:zip) |> 
-  distinct() |> 
-  add_counties(state, zip) |> 
-  filter(county != "Duval")
+  distinct()
 rhcs
 ```
 

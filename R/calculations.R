@@ -265,7 +265,7 @@ duration_vec <- function(date_col) {
 #' @rdname calculations
 #' @examplesIf interactive()
 #' dt <- dplyr::tibble(date = lubridate::today() - 366)
-#' make_interval(dt, start = lubridate::today() - 1000)
+#' make_interval(dt, start = date)
 #' @autoglobal
 #' @export
 #' @keywords internal

@@ -191,15 +191,6 @@ utils::globalVariables(c(
   "org_groupScenario", # <quality_eligibility>
   "ind", # <quality_eligibility>
   "grp", # <quality_eligibility>
-  "ind.extremeHardshipReasons", # <quality_eligibility>
-  "ind.extremeHardshipSources", # <quality_eligibility>
-  "ind.lowVolumeStatusReasons", # <quality_eligibility>
-  "ind.specialty", # <quality_eligibility>
-  "ind.isEligible", # <quality_eligibility>
-  "grp.extremeHardshipReasons", # <quality_eligibility>
-  "grp.extremeHardshipSources", # <quality_eligibility>
-  "grp.lowVolumeStatusReasons", # <quality_eligibility>
-  "grp.isEligible", # <quality_eligibility>
   "distro", # <quality_payment>
   "y", # <quality_payment>
   "set", # <quality_payment>

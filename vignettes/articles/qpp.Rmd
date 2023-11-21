@@ -84,22 +84,18 @@ select(q, year, measures) |>
 s <- 2017:2023 |>
   purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
   purrr::list_rbind()
-
-"1043477615"
-
-"org_apms"
-"org_virtualGroups"
-
-s |> 
-  tidyr::unnest_longer(org_apms, keep_empty = TRUE) |> 
-  tidyr::unpack(org_apms, names_sep = ".")
-  tidyr::unnest(org_apms, keep_empty = TRUE) |> 
-  #tidyr::unpack()
-  tidyr::unnest(extremeHardshipReasons) |> 
-  tidyr::unnest(qpPatientScores) |> 
-  tidyr::unnest(qpPaymentScores) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
+s
 ```
+
+```{r}
+t <- 2017:2023 |>
+  purrr::map(\(x) quality_eligibility(year = x, npi = 1144544834)) |>
+  purrr::list_rbind()
+t
+```
+
+
+
 
 
 ```{r}

@@ -98,7 +98,7 @@ quality_eligibility <- function(year,
 
     res <- purrr::compact(results) |> purrr::list_flatten()
 
-    r <- dplyr::tibble(
+    results <- dplyr::tibble(
       year                  = as.integer(year),
       npi                   = res$data_npi,
       npi_type              = fct_entype(res$data_nationalProviderIdentifierType),
@@ -115,7 +115,7 @@ quality_eligibility <- function(year,
       is_maqi               = as.logical(res$data_isMaqi),
       org                   = dplyr::tibble(res$data_organizations))
 
-    r <- r |>
+    results <- results |>
       tidyr::unpack(org, names_sep = "_") |>
       tidyr::unite("org_address",
                    dplyr::any_of(c('org_addressLineOne',
@@ -129,25 +129,23 @@ quality_eligibility <- function(year,
       tidyr::unpack(ind, names_sep = ".") |>
       tidyr::unpack(grp, names_sep = ".")
 
-    results <- r |>
-      tidyr::unnest_longer(ind.extremeHardshipReasons, keep_empty = TRUE) |>
-      tidyr::unpack(ind.extremeHardshipReasons, names_sep = ".") |>
-      tidyr::unnest_longer(ind.extremeHardshipSources, keep_empty = TRUE) |>
-      tidyr::unpack(ind.extremeHardshipSources, names_sep = ".") |>
-      tidyr::unnest_longer(ind.lowVolumeStatusReasons, keep_empty = TRUE) |>
-      tidyr::unpack(ind.lowVolumeStatusReasons, names_sep = ".") |>
-      tidyr::unnest_longer(ind.specialty, keep_empty = TRUE) |>
-      tidyr::unpack(ind.specialty, names_sep = ".") |>
-      tidyr::unnest_longer(ind.isEligible, keep_empty = TRUE) |>
-      tidyr::unpack(ind.isEligible, names_sep = ".") |>
-      tidyr::unnest_longer(grp.extremeHardshipReasons, keep_empty = TRUE) |>
-      tidyr::unpack(grp.extremeHardshipReasons, names_sep = ".") |>
-      tidyr::unnest_longer(grp.extremeHardshipSources, keep_empty = TRUE) |>
-      tidyr::unpack(grp.extremeHardshipSources, names_sep = ".") |>
-      tidyr::unnest_longer(grp.lowVolumeStatusReasons, keep_empty = TRUE) |>
-      tidyr::unpack(grp.lowVolumeStatusReasons, names_sep = ".") |>
-      tidyr::unnest_longer(grp.isEligible, keep_empty = TRUE) |>
-      tidyr::unpack(grp.isEligible, names_sep = ".")
+    results <- results |>
+      unnest_if_name('org_apms') |>
+      unnest_if_name('org_apms.extremeHardshipReasons') |>
+      unnest_if_name('org_apms.extremeHardshipSources', wide = TRUE) |>
+      unnest_if_name('org_apms.qpPatientScores') |>
+      unnest_if_name('org_apms.qpPaymentScores') |>
+
+      unnest_if_name('ind.extremeHardshipReasons') |>
+      unnest_if_name('ind.extremeHardshipSources', wide = TRUE) |>
+      unnest_if_name('ind.lowVolumeStatusReasons', wide = TRUE) |>
+      unnest_if_name('ind.specialty') |>
+      unnest_if_name('ind.isEligible') |>
+
+      unnest_if_name('grp.extremeHardshipReasons') |>
+      unnest_if_name('grp.extremeHardshipSources', wide = TRUE) |>
+      unnest_if_name('grp.lowVolumeStatusReasons', wide = TRUE) |>
+      unnest_if_name('grp.isEligible')
 
     if (na.rm) results <- narm(results)
   }
@@ -155,32 +153,52 @@ quality_eligibility <- function(year,
 }
 
 #' @param df data frame
+#' @param name quoted column name
+#' @param unpack `TRUE` for nested list columns __(default)__,
+#'    `FALSE` for nested 'data frame' columns
+#' @param wide unnest wide instead of long, default `FALSE`
+#' @autoglobal
+#' @noRd
+unnest_if_name <- function(df, name, unpack = TRUE, wide = FALSE) {
+
+  if (rlang::has_name(df, name)) {
+
+    if (wide) return(tidyr::unnest_wider(df, name, names_sep = "."))
+
+    df <- tidyr::unnest_longer(df, name, keep_empty = TRUE)
+
+  if (unpack) df <- tidyr::unpack(df, name, names_sep = ".")
+  }
+  return(df)
+}
+
+#' @param df data frame
 #' @autoglobal
 #' @noRd
 cols_qelig <- function(df) {
 
-    cols <- c('year',
-              'npi',
-              'npi_type',
-              'first',
-              'middle',
-              'last',
-              'first_approved_date',
-              'years_in_medicare',
-              'pecos_enroll_year',
-              'newly_enrolled',
-              'specialty_description',
-              'specialty_type',
-              'specialty_category',
-              'is_maqi',
-              'organization',
-              'hosp_vbp_name',
-              'facility_based',
-              'address_1',
-              'address_2',
-              'city',
-              'state',
-              'zip',
+    cols <- c('year' = 'year',
+              'npi' = 'npi',
+              'npi_type' = 'npi_type',
+              'first' = 'first',
+              'middle' = 'middle',
+              'last' = 'last',
+              'first_approved_date' = 'first_approved_date',
+              'years_in_medicare' = 'years_in_medicare',
+              'pecos_enroll_year' = 'pecos_enroll_year',
+              'newly_enrolled' = 'newly_enrolled',
+              'specialty_description' = 'specialty_description',
+              'specialty_type' = 'specialty_type',
+              'specialty_category' = 'specialty_category',
+              'is_maqi' = 'is_maqi',
+              'organization' = 'organization',
+              'hosp_vbp_name' = 'hosp_vbp_name',
+              'facility_based' = 'facility_based',
+              'address_1' = 'address_1',
+              'address_2' = 'address_2',
+              'city' = 'city',
+              'state' = 'state',
+              'zip' = 'zip',
 
               'ind.aciHardship',
               'ind.aciReweighting',
