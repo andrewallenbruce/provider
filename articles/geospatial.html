@@ -117,7 +117,7 @@
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2023-11-21</h4>
+            <h4 data-toc-skip class="date">2023-11-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/geospatial.Rmd" class="external-link"><code>vignettes/articles/geospatial.Rmd</code></a></small>
       <div class="d-none name"><code>geospatial.Rmd</code></div>
@@ -138,57 +138,53 @@ Bruce</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span><span class="fl">1851682538</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrieve-addresses-of-all-rhcs-in-georgia">Retrieve Addresses of all RHCs in Georgia<a class="anchor" aria-label="anchor" href="#retrieve-addresses-of-all-rhcs-in-georgia"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rhcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, </span>
 <span>                  specialty_code <span class="op">=</span> <span class="st">"00-17"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">organization</span>, </span>
 <span>         <span class="va">address</span><span class="op">:</span><span class="va">zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>address <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">address</span>, <span class="st">" "</span>, <span class="va">city</span>, <span class="st">", "</span>, <span class="va">state</span><span class="op">)</span>,</span>
+<span>         city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>         state <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">rhcs</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 88 × 5</span></span></span>
-<span><span class="co">#&gt;    organization                                  address       city  state zip  </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TMC HARALSON FAMILY HEALTHCARE CENTER         204 ALLEN ME… BREM… GA    30110</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TMC TALLAPOOSA FAMILY HEALTHCARE CENTER       25 W LYON ST  TALL… GA    30176</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> HIAWASSEE FAMILY PRACTICE P C                 56 HOSPITAL … HIAW… GA    30546</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TMC WEST CARROLL FAMILY HEALTHCARE CENTER INC 1125 E HIGHW… BOWD… GA    30108</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> BACON COUNTY HEALTH SERVICES, INC             204 E 15TH ST ALMA  GA    31510</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> BOWDON- MT. ZION PRIMARY HEALTH CENTER ,INC.  41 WELLINGTO… WHIT… GA    30185</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> HOSPITAL AUTHORITY OF MITCHELL COUNTY         25 PERRY ST   CAMI… GA    31730</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> THE MEDICAL CENTER OF ELBERTON, LLP           109 COLLEGE … ELBE… GA    30635</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UNION COUNTY HOSPITAL AUTHORITY               178 A HOSPIT… BLAI… GA    30512</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> HOSPITAL AUTHORITY OF MITCHELL COUNTY         259 US HIGHW… CAMI… GA    31730</span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 88 × 3</span></span></span>
+<span><span class="co">#&gt;    organization                                  address                   zip  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TMC HARALSON FAMILY HEALTHCARE CENTER         204 ALLEN MEMORIAL DR SU… 30110</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> TMC TALLAPOOSA FAMILY HEALTHCARE CENTER       25 W LYON ST TALLAPOOSA,… 30176</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> HIAWASSEE FAMILY PRACTICE P C                 56 HOSPITAL ST HIAWASSEE… 30546</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TMC WEST CARROLL FAMILY HEALTHCARE CENTER INC 1125 E HIGHWAY 166 BOWDO… 30108</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> BACON COUNTY HEALTH SERVICES, INC             204 E 15TH ST ALMA, GA    31510</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> BOWDON- MT. ZION PRIMARY HEALTH CENTER ,INC.  41 WELLINGTON MILL RD WH… 30185</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> HOSPITAL AUTHORITY OF MITCHELL COUNTY         25 PERRY ST CAMILLA, GA   31730</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> THE MEDICAL CENTER OF ELBERTON, LLP           109 COLLEGE AVE ELBERTON… 30635</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UNION COUNTY HOSPITAL AUTHORITY               178 A HOSPITAL RD BLAIRS… 30512</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> HOSPITAL AUTHORITY OF MITCHELL COUNTY         259 US HIGHWAY 19 NORTH … 31730</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 78 more rows</span></span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="geocode-with-tidygeocoder">Geocode with <code>{tidygeocoder}</code><a class="anchor" aria-label="anchor" href="#geocode-with-tidygeocoder"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">census</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">rhcs</span><span class="op">[</span> ,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
-<span>                  street <span class="op">=</span> <span class="va">address</span>,</span>
-<span>                  city <span class="op">=</span> <span class="va">city</span>, </span>
-<span>                  state <span class="op">=</span> <span class="va">state</span>,</span>
-<span>                  postalcode <span class="op">=</span> <span class="va">zip</span>, </span>
-<span>                  method <span class="op">=</span> <span class="st">'census'</span>, </span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mapbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">rhcs</span>,</span>
+<span>                  address <span class="op">=</span> <span class="va">address</span>,</span>
+<span>                  method <span class="op">=</span> <span class="st">'mapbox'</span>, </span>
 <span>                  full_results <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">match_indicator</span> <span class="op">!=</span> <span class="st">"No_Match"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">organization</span><span class="op">:</span><span class="va">long</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in is.null(arg) || is.character(arg) || is.numeric(arg) || is.na(arg): 'length = 88' in coercion to 'logical(1)'</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="retrieve-georgia-counties-shapefile-from-tigris">Retrieve Georgia counties shapefile from <code>{tigris}</code><a class="anchor" aria-label="anchor" href="#retrieve-georgia-counties-shapefile-from-tigris"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sf_cnt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tigris/man/counties.html" class="external-link">counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, </span>
 <span>                   year <span class="op">=</span> <span class="fl">2022</span>, </span>
 <span>                   progress_bar <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -200,7 +196,7 @@ Bruce</h4>
 <div class="section level2">
 <h2 id="map-with-ggplot">Map with <code>{ggplot}</code><a class="anchor" aria-label="anchor" href="#map-with-ggplot"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">sf_cnt</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"skyblue"</span>, </span>
 <span>          colour <span class="op">=</span> <span class="st">"white"</span>, </span>
@@ -209,7 +205,7 @@ Bruce</h4>
 <span>                   label <span class="op">=</span> <span class="va">NAME</span><span class="op">)</span>,</span>
 <span>               size <span class="op">=</span> <span class="fl">3.5</span>,</span>
 <span>               check_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">census</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mapbox</span>,</span>
 <span>             mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">long</span>, <span class="va">lat</span><span class="op">)</span>, </span>
 <span>             fill <span class="op">=</span> <span class="st">"yellow"</span>, </span>
 <span>             color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
@@ -218,7 +214,7 @@ Bruce</h4>
 <span>             shape <span class="op">=</span> <span class="fl">21</span>,</span>
 <span>             stroke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'census' not found</span></span></code></pre>
+<p><img src="geospatial_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -119,7 +119,7 @@ Mix, and Performance</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2023-11-21</h4>
+            <h4 data-toc-skip class="date">2023-11-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/qpp.Rmd" class="external-link"><code>vignettes/articles/qpp.Rmd</code></a></small>
       <div class="d-none name"><code>qpp.Rmd</code></div>
@@ -256,699 +256,250 @@ Bruce</h4>
 <code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">s</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 105</span></span></span>
-<span><span class="co">#&gt;    year npi    npi_type first middle last  first_approved_date years_in_medicare</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>022 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>023 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 97 more variables: pecos_year &lt;int&gt;, newly_enrolled &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_description &lt;chr&gt;, specialty_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_category &lt;chr&gt;, is_maqi &lt;lgl&gt;, org_prvdrOrgName &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_hospitalVbpName &lt;lgl&gt;, org_isFacilityBased &lt;lgl&gt;, org_address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_city &lt;chr&gt;, org_state &lt;chr&gt;, org_zip &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_apms.advancedApmFlag &lt;lgl&gt;, org_apms.apmId &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_apms.apmName &lt;chr&gt;, org_apms.entityName &lt;chr&gt;, …</span></span></span></code></pre>
+<span></span>
+<span><span class="va">s</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">org_virtual_groups</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 7</span></span>
+<span><span class="co">#&gt; Columns: 42</span></span>
+<span><span class="co">#&gt; $ year                                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021…</span></span>
+<span><span class="co">#&gt; $ npi                                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043477615", "1043477615", …</span></span>
+<span><span class="co">#&gt; $ npi_type                                  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual, Individual, Indi…</span></span>
+<span><span class="co">#&gt; $ first                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SARAH", "SARAH", "SARAH", "…</span></span>
+<span><span class="co">#&gt; $ middle                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K", "K", "K", "K", "K", "K"…</span></span>
+<span><span class="co">#&gt; $ last                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "HUSSAIN", "HUSSAIN", "HUSSA…</span></span>
+<span><span class="co">#&gt; $ first_approved_date                       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2014-01-27, 2014-01-27, 201…</span></span>
+<span><span class="co">#&gt; $ years_in_medicare                         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 9, 9, 9, 9, 9, 9, 9</span></span>
+<span><span class="co">#&gt; $ newly_enrolled                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ specialty_description                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardiac Electrophy…</span></span>
+<span><span class="co">#&gt; $ specialty_type                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medicine", "Docto…</span></span>
+<span><span class="co">#&gt; $ specialty_category                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians", "Physicians", …</span></span>
+<span><span class="co">#&gt; $ is_maqi                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_name                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "THE MILTON S HERSHEY MEDICA…</span></span>
+<span><span class="co">#&gt; $ org_hosp_vbp_name                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_facility_based                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_address                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9124 LAMBSKIN LN", "9124 LA…</span></span>
+<span><span class="co">#&gt; $ org_city                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "COLUMBIA", "COLUMBIA", "COL…</span></span>
+<span><span class="co">#&gt; $ org_state                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD", "MD", "MD", "MD", "MD"…</span></span>
+<span><span class="co">#&gt; $ org_zip                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "210452935", "210452935", "2…</span></span>
+<span><span class="co">#&gt; $ org_apms.advanced_apm_flag                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.apm_id                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "08", "08", "08", "08", "08"…</span></span>
+<span><span class="co">#&gt; $ org_apms.name                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Medicare Shared Savings Pro…</span></span>
+<span><span class="co">#&gt; $ org_apms.entity_name                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Central PA Health Network L…</span></span>
+<span><span class="co">#&gt; $ org_apms.is_opted_in                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_flag                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_patients                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 86807, 61839, 61034, 54798, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_payments                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 77013291, 52079519, 47420585…</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_small_status                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_performance_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021…</span></span>
+<span><span class="co">#&gt; $ org_apms.mips_apm_flag                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, TRUE, FALSE, F…</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.pi      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.cost    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.ia      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.quality <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_event_type      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.subdivision_id                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01", "01", "01", "01"…</span></span>
+<span><span class="co">#&gt; $ org_apms.subdivision_name                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MSSP ACO - Track 1", "MSSP …</span></span>
+<span><span class="co">#&gt; $ org_apms.final_qpc_score                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.provider_relationship_code       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "P", NA,…</span></span>
+<span><span class="co">#&gt; $ org_virtual_groups                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">s</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"ind."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 7</span></span>
+<span><span class="co">#&gt; Columns: 37</span></span>
+<span><span class="co">#&gt; $ year                                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021…</span></span>
+<span><span class="co">#&gt; $ ind.pi_hardship                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.pi_reweighting                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.ambulatory_surgical_center            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, TRUE, TRUE, TR…</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.quality      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.ia           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.pi           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.cost         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_event.type           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ ind.hospital_based_clinician              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.hpsa_clinician                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.ia_study                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.is_opted_in                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ ind.is_opt_in_eligible                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.mips_eligible_switch                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.non_patient_facing                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.opt_in_decision_date                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ ind.rural_clinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.small_group_practitioner              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_switch                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.has_payment_adjustment_ccn            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.has_hospital_vbp_ccn                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.hospital_vbp_name                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ ind.hospital_vbp_score                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, 0, 0, 0, 0, 0, 0</span></span>
+<span><span class="co">#&gt; $ ind.facility_based                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.specialty.code                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "21", "21", "21", "21", "21"…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.description                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardiac Electrophy…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.type                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medicine", "Docto…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.category                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians", "Physicians", …</span></span>
+<span><span class="co">#&gt; $ ind.eligible.individual                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, FALS…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.group                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.mips_apm                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, FALS…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.virtual_group                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_sources              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "auto-fema", "auto-c…</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_status_reasons.code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "CHRG", "CHR…</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_status_reasons.description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, NA, NA, "Clinician’s…</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">s</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"org_apms."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 7</span></span>
+<span><span class="co">#&gt; Columns: 23</span></span>
+<span><span class="co">#&gt; $ year                                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021…</span></span>
+<span><span class="co">#&gt; $ org_apms.advanced_apm_flag                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.apm_id                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "08", "08", "08", "08", "08"…</span></span>
+<span><span class="co">#&gt; $ org_apms.name                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Medicare Shared Savings Pro…</span></span>
+<span><span class="co">#&gt; $ org_apms.entity_name                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Central PA Health Network L…</span></span>
+<span><span class="co">#&gt; $ org_apms.is_opted_in                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_flag                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_patients                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 86807, 61839, 61034, 54798, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_payments                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 77013291, 52079519, 47420585…</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_small_status                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.lvt_performance_year             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021…</span></span>
+<span><span class="co">#&gt; $ org_apms.mips_apm_flag                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, TRUE, FALSE, F…</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.pi      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.cost    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.ia      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_reasons.quality <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_event_type      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.subdivision_id                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01", "01", "01", "01", "01"…</span></span>
+<span><span class="co">#&gt; $ org_apms.subdivision_name                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MSSP ACO - Track 1", "MSSP …</span></span>
+<span><span class="co">#&gt; $ org_apms.final_qpc_score                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_apms.provider_relationship_code       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P", "P", "P", "P", "P", NA,…</span></span>
+<span><span class="co">#&gt; $ org_apms.extreme_hardship_sources_1       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "auto-fema", NA, NA,…</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">s</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"grp."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 7</span></span>
+<span><span class="co">#&gt; Columns: 22</span></span>
+<span><span class="co">#&gt; $ year                                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2019, 2020, 2021, 202…</span></span>
+<span><span class="co">#&gt; $ grp.pi_hardship                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, FALSE, FALSE, FALSE, FALSE,…</span></span>
+<span><span class="co">#&gt; $ grp.pi_reweighting                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, FALSE, FALSE, TRUE, TRUE, T…</span></span>
+<span><span class="co">#&gt; $ grp.ambulatory_surgical_center       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.quality <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.ia      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.pi      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.cost    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_event_type      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.hospital_based_clinician         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, TRUE, …</span></span>
+<span><span class="co">#&gt; $ grp.hpsa_clinician                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.ia_study                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.is_opted_in                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.is_opt_in_eligible               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.mips_eligible_switch             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</span></span>
+<span><span class="co">#&gt; $ grp.non_patient_facing               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.opt_in_decision_date             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.rural_clinician                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.small_group_practitioner         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.low_volume_switch                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.eligible                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</span></span></code></pre>
+<p><br><br></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">t</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 83</span></span></span>
-<span><span class="co">#&gt;    year npi    npi_type first middle last  first_approved_date years_in_medicare</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>021 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>022 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>023 11445… Individ… EMILY T      MANL… 2011-09-13                         12</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more variables: pecos_year &lt;int&gt;, newly_enrolled &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_description &lt;chr&gt;, specialty_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_category &lt;chr&gt;, is_maqi &lt;lgl&gt;, org_prvdrOrgName &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_hospitalVbpName &lt;lgl&gt;, org_isFacilityBased &lt;lgl&gt;, org_address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_city &lt;chr&gt;, org_state &lt;chr&gt;, org_zip &lt;chr&gt;, org_apms &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_virtualGroups &lt;lgl&gt;, ind.aciHardship &lt;lgl&gt;, ind.aciReweighting &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind.ambulatorySurgicalCenter &lt;lgl&gt;, ind.extremeHardship &lt;lgl&gt;, …</span></span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">s</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"ind."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>scenario <span class="op">=</span> <span class="st">"Individual"</span>, </span>
-<span>                .before <span class="op">=</span> <span class="va">ind.aciHardship</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"ind_"</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'year'</span>, </span>
-<span>                                       <span class="st">'scenario'</span>,</span>
-<span>                                       <span class="st">'ind_specialty_code'</span>,</span>
-<span>                                       <span class="st">'ind_specialty_specialty_description'</span>,</span>
-<span>                                       <span class="st">'ind_specialty_type_description'</span>,</span>
-<span>                                       <span class="st">'ind_specialty_category_reference'</span>,</span>
-<span>                                       <span class="st">'ind_hospital_vbp_score'</span>,</span>
-<span>                                       <span class="st">'ind_extreme_hardship_sources'</span>,</span>
-<span>                                       <span class="st">'ind_low_volume_status_reasons_low_vol_stus_rsn_cd'</span>,</span>
-<span>                                       <span class="st">'ind_low_volume_status_reasons_low_vol_stus_rsn_desc'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span><span class="op">==</span><span class="cn">TRUE</span>, <span class="va">value</span><span class="op">==</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 11</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 variables: year &lt;int&gt;, scenario &lt;chr&gt;, ind_hospital_vbp_score &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_code &lt;chr&gt;, ind_specialty_specialty_description &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_type_description &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_category_reference &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_low_volume_status_reasons_low_vol_stus_rsn_cd &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_low_volume_status_reasons_low_vol_stus_rsn_desc &lt;chr&gt;, name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   value &lt;chr&gt;</span></span></span></code></pre>
-<p>“ind_specialty_code” “ind_specialty_specialty_description”
-“ind_specialty_type_description” “ind_specialty_category_reference”
-“ind_hospital_vbp_score” “ind_extreme_hardship_sources”
-“ind_low_volume_status_reasons_low_vol_stus_rsn_cd”
-“ind_low_volume_status_reasons_low_vol_stus_rsn_desc”
-“ind_extreme_hardship_event_type”</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 100</span></span>
-<span><span class="co">#&gt; $ year                                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017</span></span>
-<span><span class="co">#&gt; $ npi                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043477615"</span></span>
-<span><span class="co">#&gt; $ npi_type                                              <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "SARAH"</span></span>
-<span><span class="co">#&gt; $ middle                                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
-<span><span class="co">#&gt; $ last                                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "HUSSAIN"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                                   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2014-01-27</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 9</span></span>
-<span><span class="co">#&gt; $ pecos_year                                            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2014</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardia…</span></span>
-<span><span class="co">#&gt; $ specialty_type                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medic…</span></span>
-<span><span class="co">#&gt; $ specialty_category                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "THE MILTON S HE…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "9124 LAMBSKIN L…</span></span>
-<span><span class="co">#&gt; $ org_city                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "COLUMBIA"</span></span>
-<span><span class="co">#&gt; $ org_state                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MD"</span></span>
-<span><span class="co">#&gt; $ org_zip                                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "210452935"</span></span>
-<span><span class="co">#&gt; $ org_apms.advancedApmFlag                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.apmId                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "08"</span></span>
-<span><span class="co">#&gt; $ org_apms.apmName                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Medicare Shared…</span></span>
-<span><span class="co">#&gt; $ org_apms.entityName                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Central PA Heal…</span></span>
-<span><span class="co">#&gt; $ org_apms.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_apms.lvtFlag                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.lvtPatients                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 86807</span></span>
-<span><span class="co">#&gt; $ org_apms.lvtPayments                                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 77013291</span></span>
-<span><span class="co">#&gt; $ org_apms.lvtSmallStatus                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.lvtPerformanceYear                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017</span></span>
-<span><span class="co">#&gt; $ org_apms.mipsApmFlag                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_apms.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_apms.subdivisionId                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "01"</span></span>
-<span><span class="co">#&gt; $ org_apms.subdivisionName                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MSSP ACO - Tra…</span></span>
-<span><span class="co">#&gt; $ org_apms.finalQpcScore                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_apms.providerRelationshipCode                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "P"</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "21"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinical/Cardia…</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Doctor of Medic…</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physicians"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1000</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 2</span></span>
-<span><span class="co">#&gt; Columns: 83</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2018, 2018</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834", "114454…</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual, Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY", "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T", "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY", "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13, 2011-09-1…</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12, 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011, 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"…</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"…</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners", "Pra…</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "NORTH GEORGIA DERMAT…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "771 OLD NORCROSS RD…</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "LAWRENCEVILLE", "ALB…</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA", "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "300464308", "3170119…</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipSources.1                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "auto-fema"</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnCd       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "BOTH"</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnDesc     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, "Both the unique …</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97", "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"…</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"…</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners", "Pra…</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 600, 500</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE</span></span></code></pre>
+<span></span>
+<span><span class="va">t</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">org_virtual_groups</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 8</span></span>
+<span><span class="co">#&gt; Columns: 21</span></span>
+<span><span class="co">#&gt; $ year                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2018, 2019, 2020, 2021, 2022, 2023</span></span>
+<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834", "1144544834", "1144544834", "11445…</span></span>
+<span><span class="co">#&gt; $ npi_type              <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual, Individual, Individual, Individual, …</span></span>
+<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY", "EMILY", "EMILY", "EMILY", "EMILY", "EM…</span></span>
+<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T", "T", "T", "T", "T", "T", "T", "T"</span></span>
+<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY", "MANLEY", "MANLEY", "MANLEY", "MANLEY"…</span></span>
+<span><span class="co">#&gt; $ first_approved_date   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13, 2011-09-13, 2011-09-13, 2011-09-13, …</span></span>
+<span><span class="co">#&gt; $ years_in_medicare     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12, 12, 12, 12, 12, 12, 12, 12</span></span>
+<span><span class="co">#&gt; $ newly_enrolled        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…</span></span>
+<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant", "Physician Assistant", "…</span></span>
+<span><span class="co">#&gt; $ specialty_type        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant", "Physician Assistant", "P…</span></span>
+<span><span class="co">#&gt; $ specialty_category    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners", "Practitioners", "Practitioners…</span></span>
+<span><span class="co">#&gt; $ is_maqi               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…</span></span>
+<span><span class="co">#&gt; $ org_name              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "NORTH GEORGIA DERMATOLOGY, P.C.", "NORTH GEORGI…</span></span>
+<span><span class="co">#&gt; $ org_hosp_vbp_name     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ org_facility_based    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…</span></span>
+<span><span class="co">#&gt; $ org_address           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "771 OLD NORCROSS RD STE 260", "771 OLD NORCROSS…</span></span>
+<span><span class="co">#&gt; $ org_city              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "LAWRENCEVILLE", "LAWRENCEVILLE", "ALBANY", "ALB…</span></span>
+<span><span class="co">#&gt; $ org_state             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA", "GA", "GA", "GA", "GA", "GA", "GA", "GA"</span></span>
+<span><span class="co">#&gt; $ org_zip               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "300464308", "300464308", "317011915", "31701191…</span></span>
+<span><span class="co">#&gt; $ org_virtual_groups    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 83</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2019</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834"</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ADVANCED DERMATOLOGY…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "401 W 4TH AVE"</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALBANY"</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "317011915"</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipSources.1                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "auto-fema"</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnCd       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "BOTH"</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnDesc     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Both the unique bene…</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 475</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"ind."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 8</span></span>
+<span><span class="co">#&gt; Columns: 37</span></span>
+<span><span class="co">#&gt; $ year                                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2018, 2019, 2020…</span></span>
+<span><span class="co">#&gt; $ ind.pi_hardship                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.pi_reweighting                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.ambulatory_surgical_center            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, FALSE, TRUE, TRUE, TRU…</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.quality      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.ia           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.pi           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_reasons.cost         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_event.type           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.extreme_hardship_sources              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "auto-fema", NA, "auto-fema"…</span></span>
+<span><span class="co">#&gt; $ ind.hospital_based_clinician              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.hpsa_clinician                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, T…</span></span>
+<span><span class="co">#&gt; $ ind.ia_study                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.is_opted_in                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.is_opt_in_eligible                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, T…</span></span>
+<span><span class="co">#&gt; $ ind.mips_eligible_switch                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.non_patient_facing                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, TRUE, FALSE, F…</span></span>
+<span><span class="co">#&gt; $ ind.opt_in_decision_date                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.rural_clinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.small_group_practitioner              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_switch                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, TRUE, TRUE, TR…</span></span>
+<span><span class="co">#&gt; $ ind.has_payment_adjustment_ccn            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.has_hospital_vbp_ccn                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.hospital_vbp_name                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.hospital_vbp_score                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> NA, 0, 0, 0, 0, 0, 0, 0</span></span>
+<span><span class="co">#&gt; $ ind.facility_based                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, …</span></span>
+<span><span class="co">#&gt; $ ind.specialty.code                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97", "97", "97", "97", "97"…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.description                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant", "Phys…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.type                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant", "Phys…</span></span>
+<span><span class="co">#&gt; $ ind.specialty.category                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners", "Practition…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.individual                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, FALSE, FALSE, FA…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.group                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE…</span></span>
+<span><span class="co">#&gt; $ ind.eligible.mips_apm                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.eligible.virtual_group                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_status_reasons.code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "BOTH", "BOTH", "CHR…</span></span>
+<span><span class="co">#&gt; $ ind.low_volume_status_reasons.description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> NA, NA, "Both the unique ben…</span></span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 83</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2020</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834"</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ADVANCED DERMATOLOGY…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "401 W 4TH AVE"</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALBANY"</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "317011915"</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipSources.1                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "auto-covid"</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnCd       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CHRG"</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnDesc     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinician’s Part B e…</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 475</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"org_apms."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 8</span></span>
+<span><span class="co">#&gt; Columns: 1</span></span>
+<span><span class="co">#&gt; $ year <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2018, 2019, 2020, 2021, 2022, 2023</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 83</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2021</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834"</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ADVANCED DERMATOLOGY…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "401 W 4TH AVE"</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALBANY"</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "317011915"</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipSources.1                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "auto-covid"</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnCd       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CHRG"</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeStatusReasons.lowVolStusRsnDesc     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Clinician’s Part B e…</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 475</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 80</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2022</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834"</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ADVANCED DERMATOLOGY…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "401 W 4TH AVE"</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALBANY"</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "317011915"</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 600</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2023</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 80</span></span>
-<span><span class="co">#&gt; $ year                                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2023</span></span>
-<span><span class="co">#&gt; $ npi                                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1144544834"</span></span>
-<span><span class="co">#&gt; $ npi_type                                         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> Individual</span></span>
-<span><span class="co">#&gt; $ first                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "EMILY"</span></span>
-<span><span class="co">#&gt; $ middle                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "T"</span></span>
-<span><span class="co">#&gt; $ last                                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MANLEY"</span></span>
-<span><span class="co">#&gt; $ first_approved_date                              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2011-09-13</span></span>
-<span><span class="co">#&gt; $ years_in_medicare                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12</span></span>
-<span><span class="co">#&gt; $ pecos_year                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2011</span></span>
-<span><span class="co">#&gt; $ newly_enrolled                                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ specialty_description                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_type                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ specialty_category                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ is_maqi                                          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_prvdrOrgName                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ADVANCED DERMATOLOGY…</span></span>
-<span><span class="co">#&gt; $ org_hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ org_address                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "401 W 4TH AVE"</span></span>
-<span><span class="co">#&gt; $ org_city                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "ALBANY"</span></span>
-<span><span class="co">#&gt; $ org_state                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ org_zip                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "317011915"</span></span>
-<span><span class="co">#&gt; $ org_apms                                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ org_virtualGroups                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasPaymentAdjustmentCCN                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.hasHospitalVbpCCN                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpName                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.hospitalVbpScore                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ind.isFacilityBased                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ ind.specialtyCode                                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "97"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.specialtyDescription               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.typeDescription                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Assistant"</span></span>
-<span><span class="co">#&gt; $ ind.specialty.categoryReference                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Practitioners"</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.individual                        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.mipsApm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.isEligible.virtualGroup                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ ind.eligibilityScenario                          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 600</span></span>
-<span><span class="co">#&gt; $ grp.aciHardship                                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aciReweighting                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.ambulatorySurgicalCenter                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardship                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.quality               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.improvementActivities <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.aci                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipReasons.cost                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.extremeHardshipEventType                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.hospitalBasedClinician                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.hpsaClinician                                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.iaStudy                                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.isOptedIn                                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.isOptInEligible                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.mipsEligibleSwitch                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.nonPatientFacing                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.optInDecisionDate                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA</span></span>
-<span><span class="co">#&gt; $ grp.ruralClinician                               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.smallGroupPractitioner                       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ grp.lowVolumeSwitch                              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ grp.aggregationLevel                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2</span></span>
-<span><span class="co">#&gt; $ grp.isEligible.group                             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"grp."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 8</span></span>
+<span><span class="co">#&gt; Columns: 22</span></span>
+<span><span class="co">#&gt; $ year                                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2017, 2018, 2018, 2019, 2020, 202…</span></span>
+<span><span class="co">#&gt; $ grp.pi_hardship                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, TRUE, …</span></span>
+<span><span class="co">#&gt; $ grp.pi_reweighting                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, TRUE, …</span></span>
+<span><span class="co">#&gt; $ grp.ambulatory_surgical_center       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship                 <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.quality <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.ia      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.pi      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_reasons.cost    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.extreme_hardship_event_type      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.hospital_based_clinician         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.hpsa_clinician                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, TRUE, TRUE, …</span></span>
+<span><span class="co">#&gt; $ grp.ia_study                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.is_opted_in                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.is_opt_in_eligible               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.mips_eligible_switch             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</span></span>
+<span><span class="co">#&gt; $ grp.non_patient_facing               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.opt_in_decision_date             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ grp.rural_clinician                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.small_group_practitioner         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</span></span>
+<span><span class="co">#&gt; $ grp.low_volume_switch                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE, FALSE, FALSE, FALSE, FALSE…</span></span>
+<span><span class="co">#&gt; $ grp.eligible                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
