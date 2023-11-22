@@ -44,10 +44,6 @@ library(sf)
 
 <br>
 
-```{r}
-nppes(1851682538)
-```
-
 
 ## Retrieve Addresses of all RHCs in Georgia
 
@@ -58,6 +54,9 @@ rhcs <- providers(state = "GA",
   map_dfr(\(x) nppes(npi = x)) |> 
   select(organization, 
          address:zip) |> 
+  mutate(address = paste0(address, " ", city, ", ", state),
+         city = NULL,
+         state = NULL) |> 
   distinct()
 rhcs
 ```
@@ -67,14 +66,10 @@ rhcs
 ## Geocode with `{tidygeocoder}`
 
 ```{r}
-census <- geocode(rhcs[ ,1:5],
-                  street = address,
-                  city = city, 
-                  state = state,
-                  postalcode = zip, 
-                  method = 'census', 
+mapbox <- geocode(rhcs,
+                  address = address,
+                  method = 'mapbox', 
                   full_results = TRUE) |> 
-  filter(match_indicator != "No_Match") |> 
   select(organization:long)
 ```
 
@@ -104,7 +99,7 @@ ggplot(sf_cnt) +
                    label = NAME),
                size = 3.5,
                check_overlap = TRUE) +
-  geom_jitter(data = census,
+  geom_jitter(data = mapbox,
              mapping = aes(long, lat), 
              fill = "yellow", 
              color = "darkred", 

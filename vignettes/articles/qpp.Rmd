@@ -84,81 +84,50 @@ select(q, year, measures) |>
 s <- 2017:2023 |>
   purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
   purrr::list_rbind()
-s
+
+s |> dplyr::select(year:org_virtual_groups) |> dplyr::glimpse()
 ```
+
+
+
+```{r}
+s |> dplyr::select(year, dplyr::starts_with("ind.")) |> dplyr::glimpse()
+```
+
+
+```{r}
+s |> dplyr::select(year, dplyr::starts_with("org_apms.")) |> dplyr::glimpse()
+```
+
+
+```{r}
+s |> dplyr::select(year, dplyr::starts_with("grp.")) |> dplyr::glimpse()
+```
+
+
+<br><br>
 
 ```{r}
 t <- 2017:2023 |>
   purrr::map(\(x) quality_eligibility(year = x, npi = 1144544834)) |>
   purrr::list_rbind()
-t
-```
 
-
-
-
-
-```{r}
-s |> 
-  dplyr::select(year, dplyr::starts_with("ind.")) |> 
-  dplyr::mutate(scenario = "Individual", 
-                .before = ind.aciHardship) |> 
-  janitor::clean_names() |> 
-  dplyr::mutate(dplyr::across(dplyr::starts_with("ind_"), as.character)) |> 
-  tidyr::pivot_longer(!dplyr::any_of(c('year', 
-                                       'scenario',
-                                       'ind_specialty_code',
-                                       'ind_specialty_specialty_description',
-                                       'ind_specialty_type_description',
-                                       'ind_specialty_category_reference',
-                                       'ind_hospital_vbp_score',
-                                       'ind_extreme_hardship_sources',
-                                       'ind_low_volume_status_reasons_low_vol_stus_rsn_cd',
-                                       'ind_low_volume_status_reasons_low_vol_stus_rsn_desc'))) |> 
-  dplyr::filter(value==TRUE, value==FALSE)
-```
-"ind_specialty_code"
-"ind_specialty_specialty_description"
-"ind_specialty_type_description"
-"ind_specialty_category_reference"
-"ind_hospital_vbp_score"
-"ind_extreme_hardship_sources"
-"ind_low_volume_status_reasons_low_vol_stus_rsn_cd"
-"ind_low_volume_status_reasons_low_vol_stus_rsn_desc"
-"ind_extreme_hardship_event_type"
-
-```{r}
-quality_eligibility(year = 2017, npi = 1043477615) |> dplyr::glimpse()
-```
-
-
-
-```{r}
-quality_eligibility(year = 2018, npi = 1144544834) |> glimpse()
-```
-
-
-
-```{r}
-quality_eligibility(year = 2019, npi = 1144544834) |> glimpse()
+t |> dplyr::select(year:org_virtual_groups) |> dplyr::glimpse()
 ```
 
 
 ```{r}
-quality_eligibility(year = 2020, npi = 1144544834) |> glimpse()
+t |> dplyr::select(year, dplyr::starts_with("ind.")) |> dplyr::glimpse()
+```
+
+```{r}
+t |> 
+  dplyr::select(year, dplyr::starts_with("org_apms.")) |> 
+  dplyr::glimpse()
 ```
 
 
 ```{r}
-quality_eligibility(year = 2021, npi = 1144544834) |> glimpse()
+t |> dplyr::select(year, dplyr::starts_with("grp.")) |> dplyr::glimpse()
 ```
 
-
-```{r}
-quality_eligibility(year = 2022, npi = 1144544834) |> glimpse()
-```
-
-
-```{r}
-quality_eligibility(year = 2023, npi = 1144544834) |> glimpse()
-```
