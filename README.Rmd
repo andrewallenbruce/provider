@@ -196,7 +196,7 @@ select(q, year, measures) |>
 ```{r}
 quality_eligibility(year = 2021, 
                     npi  = 1932365699) |> 
-  dplyr::glimpse()
+  glimpse()
 ```
 
 ### `reassignments()`

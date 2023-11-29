@@ -42,6 +42,7 @@
 #' @section Links:
 #' + [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
 #' + [QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6)](https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility%2C%20v6)
+#' + [QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6) (Multiple NPIs)](https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility%2C%20v6#/Unauthenticated/get_api_eligibility_npis__npi_)
 #'
 #' @section Update Frequency: **Annually**
 #'
@@ -89,7 +90,7 @@ quality_eligibility <- function(year,
                                 tidy = TRUE,
                                 unnest = TRUE,
                                 pivot = TRUE,
-                                na.rm = TRUE,
+                                na.rm = FALSE,
                                 ...) {
 
   rlang::check_required(year)
@@ -174,7 +175,7 @@ quality_eligibility <- function(year,
       results <- tidyup(results,
              dtype = 'ymd',
              int = c('year',
-                     'years_in_medicare',
+                     # 'years_in_medicare',
                      'ind_hosp_vbp_score',
                      # 'apms_lvt_patients',
                      # 'apms_lvt_year'
@@ -240,15 +241,28 @@ quality_eligibility <- function(year,
                      'grp_eligible')) |>
         dplyr::mutate(npi_type  = fct_entype(npi_type),
                       org_state = fct_stabb(org_state))
-    }
-    if (pivot) {
 
-      results <- cols_qelig(results, 'top') |>
-        dplyr::left_join(cols_qelig(results, 'apms')) |>
-        dplyr::left_join(cols_qelig(results, 'ind')) |>
-        dplyr::left_join(cols_qelig(results, 'grp'))
+      if (pivot) {
+        by <- dplyr::join_by(year, npi, org_name)
 
-    }
+        apm_test <- dplyr::select(results,
+                    dplyr::any_of(dplyr::starts_with("apms_")))
+
+        if (vctrs::vec_is_empty(as.vector(apm_test))) {
+
+          results <- cols_qelig(results, 'top') |>
+            dplyr::left_join(cols_qelig(results, 'ind'), by) |>
+            dplyr::left_join(cols_qelig(results, 'grp'), by)
+
+          } else {
+
+            results <- cols_qelig(results, 'top') |>
+              dplyr::left_join(cols_qelig(results, 'apms'), by) |>
+              dplyr::left_join(cols_qelig(results, 'ind'), by) |>
+              dplyr::left_join(cols_qelig(results, 'grp'), by)
+          }
+        }
+      }
     if (na.rm) results <- narm(results)
   }
   return(results)
@@ -289,7 +303,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
               'middle'              = 'middleName',
               'last'                = 'lastName',
               'first_approved_date' = 'firstApprovedDate',
-              'years_in_medicare'   = 'yearsInMedicare',
+              # 'years_in_medicare'   = 'yearsInMedicare',
               'pecos_year'          = 'pecosEnrollmentDate',
               'newly_enrolled'      = 'newlyEnrolled',
               'specialty_desc'      = 'specialty.specialtyDescription',
@@ -401,19 +415,18 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
               'grp_eligible'             = 'grp.isEligible.group'
               # 'grp_agg_level'          = 'grp.aggregationLevel',
               )
-    return(df |> dplyr::select(dplyr::any_of(cols)))
+    results <- df |> dplyr::select(dplyr::any_of(cols))
   }
 
   if (type == 'top') {
 
-    cols <- c('year',
+    top_cols <- c('year',
               'npi',
               'npi_type',
               'first',
               'middle',
               'last',
               'first_approved_date',
-              'years_in_medicare',
               'pecos_year',
               'newly_enrolled',
               'specialty_desc',
@@ -433,7 +446,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
               'error_message',
               'error_type')
 
-    return(df |> dplyr::select(dplyr::any_of(cols)))
+    results <- df |> dplyr::select(dplyr::any_of(top_cols))
 
   }
 
@@ -441,7 +454,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
 
     apm_flags <- c(
       'Advanced APM'                               = 'apms_advanced',
-      'Below Low Volume Threshold'                 ='apms_lvt',
+      'Below Low Volume Threshold'                 = 'apms_lvt',
       'Small Practice Status'                      = 'apms_lvt_small',
       'MIPS APM'                                   = 'apms_mips_apm',
       'Extreme Hardship'                           = 'apms_ext_hardship',
@@ -451,7 +464,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
       'Extreme Hardship (Quality)'                 = 'apms_ext_hardship_quality'
     )
 
-    return(results |>
+    results <- df |>
       dplyr::select(year,
                     npi,
                     org_name,
@@ -462,7 +475,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
       dplyr::filter(value == TRUE) |>
       dplyr::mutate(value = NULL) |>
       tidyr::nest(apms_status = name) |>
-      janitor::remove_empty(which = c("rows", "cols")))
+      janitor::remove_empty(which = c("rows", "cols"))
 
   }
 
@@ -496,7 +509,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
       'Eligible: Virtual Group'                    = 'ind_eligible_virtual'
     )
 
-    return(results |>
+    results <- df |>
              dplyr::select(year,
                            npi,
                            org_name,
@@ -507,7 +520,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
              dplyr::filter(value == TRUE) |>
              dplyr::mutate(value = NULL) |>
              tidyr::nest(ind_status = name) |>
-             janitor::remove_empty(which = c("rows", "cols")))
+             janitor::remove_empty(which = c("rows", "cols"))
 
   }
 
@@ -535,7 +548,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
       'Eligible: Group'                            = 'grp_eligible'
     )
 
-    return(results |>
+    results <- df |>
              dplyr::select(year,
                            npi,
                            org_name,
@@ -546,9 +559,10 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
              dplyr::filter(value == TRUE) |>
              dplyr::mutate(value = NULL) |>
              tidyr::nest(grp_status = name) |>
-             janitor::remove_empty(which = c("rows", "cols")))
+             janitor::remove_empty(which = c("rows", "cols"))
 
   }
+  return(results)
 }
 
 

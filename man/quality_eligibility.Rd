@@ -10,7 +10,7 @@ quality_eligibility(
   tidy = TRUE,
   unnest = TRUE,
   pivot = TRUE,
-  na.rm = TRUE,
+  na.rm = FALSE,
   ...
 )
 }
@@ -81,6 +81,7 @@ APM, characterized by an APM Entity ID.
 \itemize{
 \item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
 \item \href{https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility\%2C\%20v6}{QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6)}
+\item \href{https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility\%2C\%20v6#/Unauthenticated/get_api_eligibility_npis__npi_}{QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6) (Multiple NPIs)}
 }
 }
 

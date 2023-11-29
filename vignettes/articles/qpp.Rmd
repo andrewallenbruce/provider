@@ -87,21 +87,14 @@ plan(sequential)
 n
 ```
 
+<br>
 
 ```{r}
 results <- 2017:2023 |>
-  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615, na.rm = FALSE)) |>
+  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
   purrr::list_rbind()
 
-results
+results |> 
+  janitor::remove_empty()
 ```
-
-
-
-
-
-
-
-
-
 

@@ -506,10 +506,40 @@ select(q, year, measures) |>
 ``` r
 quality_eligibility(year = 2021, 
                     npi  = 1932365699) |> 
-  dplyr::glimpse()
+  glimpse()
 ```
 
-    #> Error in dplyr::select(results, year, npi, org_name, dplyr::contains("apms_")): object 'results' not found
+    #> Rows: 1
+    #> Columns: 29
+    #> $ year                <int> 2021
+    #> $ npi                 <chr> "1932365699"
+    #> $ npi_type            <fct> Individual
+    #> $ first               <chr> "STEFAN"
+    #> $ middle              <chr> "MICHAEL"
+    #> $ last                <chr> "SMITH"
+    #> $ first_approved_date <date> 2008-11-15
+    #> $ pecos_year          <int> 2008
+    #> $ newly_enrolled      <lgl> FALSE
+    #> $ specialty_desc      <chr> "Optometry"
+    #> $ specialty_type      <chr> "Doctor of Optometry"
+    #> $ specialty_cat       <chr> "Physicians"
+    #> $ is_maqi             <lgl> FALSE
+    #> $ org_name            <chr> "LEE ANN HOVEN OD PC"
+    #> $ org_hosp_vbp_name   <chr> NA
+    #> $ org_facility_based  <lgl> FALSE
+    #> $ org_address         <chr> "ADVANCED EYE CARE 1165S CAMINO DEL RIO SUITE 100"
+    #> $ org_city            <chr> "DURANGO"
+    #> $ org_state           <ord> CO
+    #> $ org_zip             <chr> "81303"
+    #> $ ind_lvt_status_code <chr> "BOTH"
+    #> $ ind_lvt_status_desc <chr> "Both the unique beneficiaries and Part B"
+    #> $ ind_hosp_vbp_score  <int> 0
+    #> $ ind_specialty_code  <chr> "41"
+    #> $ ind_specialty_desc  <chr> "Optometry"
+    #> $ ind_specialty_type  <chr> "Doctor of Optometry"
+    #> $ ind_specialty_cat   <chr> "Physicians"
+    #> $ ind_status          <list> [<tbl_df[8 x 1]>]
+    #> $ grp_status          <list> [<tbl_df[10 x 1]>]
 
 ### `reassignments()`
 

@@ -195,7 +195,7 @@ utils::globalVariables(c(
   "grp", # <quality_eligibility>
   "npi_type", # <quality_eligibility>
   "org_state", # <quality_eligibility>
-  "results", # <cols_qelig>
+  "org_name", # <quality_eligibility>
   "year", # <cols_qelig>
   "npi", # <cols_qelig>
   "org_name", # <cols_qelig>
