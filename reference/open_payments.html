@@ -129,7 +129,9 @@ research, meals, travel, gifts or speaking fees.</p>
 <span>  add.ndc <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">open_payments_</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="years.html">open_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -144,7 +146,7 @@ format. Run <code><a href="years.html">open_years()</a></code> to return a vecto
 
 
 <dt>covered_type</dt>
-<dd><p>&lt; <em>character</em> &gt; Type of covered recipient:</p><ul><li><p><code>"Physician"</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Type of covered recipient, e.g.:</p><ul><li><p><code>"Physician"</code></p></li>
 <li><p><code>"Non-Physician Practitioner"</code></p></li>
 <li><p><code>"Teaching Hospital"</code></p></li>
 </ul></dd>
@@ -167,12 +169,12 @@ format. Run <code><a href="years.html">open_years()</a></code> to return a vecto
 
 
 <dt>teaching_hospital</dt>
-<dd><p>&lt; <em>character</em> &gt; Name of teaching hospital, e.g.</p><ul><li><p><code>"Vanderbilt University Medical Center"</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Name of teaching hospital, e.g.:</p><ul><li><p><code>"Vanderbilt University Medical Center"</code></p></li>
 </ul></dd>
 
 
 <dt>payer</dt>
-<dd><p>&lt; <em>character</em> &gt; Paying entity's name, e.g.</p><ul><li><p><code>"Pharmacosmos Therapeutics Inc."</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Paying entity's name, e.g.:</p><ul><li><p><code>"Pharmacosmos Therapeutics Inc."</code></p></li>
 <li><p><code>"Getinge USA Sales, LLC"</code></p></li>
 <li><p><code>"Agiliti Health, Inc."</code></p></li>
 <li><p><code>"OrthoScan, Inc."</code></p></li>
@@ -180,18 +182,18 @@ format. Run <code><a href="years.html">open_years()</a></code> to return a vecto
 
 
 <dt>payer_id</dt>
-<dd><p>&lt; <em>integer</em> &gt; Paying entity's unique Open Payments ID</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; Paying entity's unique 10-digit Open Payments ID</p></dd>
 
 
 <dt>pay_form</dt>
-<dd><p>&lt; <em>character</em> &gt; Form of payment:</p><ul><li><p><code>"Stock option"</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Form of payment, e.g.:</p><ul><li><p><code>"Stock option"</code></p></li>
 <li><p><code>"Cash or cash equivalent"</code></p></li>
 <li><p><code>"In-kind items and services"</code></p></li>
 </ul></dd>
 
 
 <dt>pay_nature</dt>
-<dd><p>&lt; <em>character</em> &gt; Nature of payment or transfer of value:</p><ul><li><p><code>"Royalty or License"</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; Nature of payment or transfer of value, e.g.:</p><ul><li><p><code>"Royalty or License"</code></p></li>
 <li><p><code>"Charitable Contribution"</code></p></li>
 <li><p><code>"Current or prospective ownership or investment interest"</code></p></li>
 <li><p><code>"Food and Beverage"</code></p></li>
@@ -219,7 +221,7 @@ format. Run <code><a href="years.html">open_years()</a></code> to return a vecto
 
 
 <dt>...</dt>
-<dd><p>For future use.</p></dd>
+<dd><p>Pass arguments to <code>open_payments()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -321,7 +323,7 @@ does not fall within one of the excluded categories in the rule.</p>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or simply use the parallelized version</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="open_payments_.html">open_payments_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">open_payments_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

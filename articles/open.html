@@ -114,8 +114,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Open Payments</h1>
-            <h3 data-toc-skip class="subtitle">Demographics, Patient
-Mix, and Performance</h3>
+            <h3 data-toc-skip class="subtitle">Financial
+Relationships</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
@@ -133,34 +133,58 @@ Bruce</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1043218118</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 109 × 47</span></span></span>
+<span><span class="co">#&gt;    program_year npi      covered_recipient first last  address city  state zip  </span></span>
+<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         Ahad  Maho… 6739 G… Zeph… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>021 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 99 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 38 more variables: country &lt;chr&gt;, primary &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   license_state &lt;ord&gt;, physician_ownership &lt;lgl&gt;, third_party_payment &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   charity &lt;lgl&gt;, publish_date &lt;date&gt;, publish_delay &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   publish_dispute &lt;lgl&gt;, related_product &lt;lgl&gt;, payer_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;ord&gt;, payer_country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, …</span></span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">open</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_payments_.html">open_payments_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span>
+<span><span class="va">open</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_payments.html">open_payments_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">open</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 74</span></span></span>
-<span><span class="co">#&gt;    program_year npi     covered_recipient teaching_ccn teaching_id teaching_name</span></span>
-<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 104321… Physician         <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>           </span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 53</span></span></span>
+<span><span class="co">#&gt;    program_year npi      covered_recipient first last  address city  state zip  </span></span>
+<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 466 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 68 more variables: first &lt;chr&gt;, middle &lt;chr&gt;, last &lt;chr&gt;, suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;ord&gt;, zip &lt;chr&gt;, postal &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, province &lt;chr&gt;, primary &lt;chr&gt;, primary2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   primary3 &lt;chr&gt;, primary4 &lt;chr&gt;, primary5 &lt;chr&gt;, primary6 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty &lt;chr&gt;, specialty2 &lt;chr&gt;, specialty3 &lt;chr&gt;, specialty4 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty5 &lt;chr&gt;, specialty6 &lt;chr&gt;, license_state &lt;ord&gt;, …</span></span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 44 more variables: country &lt;chr&gt;, primary &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   license_state &lt;ord&gt;, travel_city &lt;chr&gt;, travel_state &lt;ord&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   travel_country &lt;chr&gt;, physician_ownership &lt;lgl&gt;, third_party_payment &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   third_party_name &lt;chr&gt;, third_party_recipient &lt;chr&gt;, charity &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   context &lt;chr&gt;, publish_date &lt;date&gt;, publish_delay &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   publish_dispute &lt;lgl&gt;, related_product &lt;lgl&gt;, payer_id &lt;chr&gt;, …</span></span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">program_year</span>, </span>
 <span>         <span class="va">payer_name</span>, </span>
+<span>         <span class="va">pay_form</span>,</span>
+<span>         <span class="va">pay_nature</span>,</span>
 <span>         <span class="va">pay_total</span>, </span>
 <span>         <span class="va">pay_date</span>, </span>
 <span>         <span class="va">pay_count</span>, </span>
@@ -172,23 +196,23 @@ Bruce</h4>
 <span>         <span class="va">category</span>, </span>
 <span>         <span class="va">ndc</span>,</span>
 <span>         <span class="va">pdi</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 13</span></span></span>
-<span><span class="co">#&gt;    program_year payer_name  pay_total pay_date   pay_count row_id group_id name </span></span>
-<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 Shire Nort…     18.8  2016-06-06         1      1        1 Blank</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 Allergan I…    126.   2016-06-09         1      2        1 <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 Allergan I…    127.   2016-10-24         1      3        1 <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 Sun Pharma…     16.1  2016-08-31         1      4        1 Brom…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 CLARITY ME…     14.7  2016-01-13         1      5        1 <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 Ellex, Inc    <span style="text-decoration: underline;">2</span>000    2016-08-16         1      6        1 <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 Abbott Lab…      8.57 2016-03-11         1      7        1 Tecn…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 Abbott Lab…     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span>      7        2 Tecn…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 Abbott Lab…     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span>      7        3 Tecn…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 Abbott Lab…     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span>      7        4 Tecn…</span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 15</span></span></span>
+<span><span class="co">#&gt;    program_year payer_name    pay_form pay_nature pay_total pay_date   pay_count</span></span>
+<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 Shire North … In-kind… Food and …     18.8  2016-06-06         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 Allergan Inc. In-kind… Food and …    126.   2016-06-09         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 Allergan Inc. In-kind… Food and …    127.   2016-10-24         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 Sun Pharmace… Cash or… Food and …     16.1  2016-08-31         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 CLARITY MEDI… Cash or… Food and …     14.7  2016-01-13         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 Ellex, Inc    Cash or… Honoraria    <span style="text-decoration: underline;">2</span>000    2016-08-16         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …      8.57 2016-03-11         1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 466 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: covered &lt;lgl&gt;, type &lt;chr&gt;, category &lt;chr&gt;, ndc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pdi &lt;chr&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: row_id &lt;int&gt;, group_id &lt;int&gt;, name &lt;chr&gt;, covered &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   type &lt;chr&gt;, category &lt;chr&gt;, ndc &lt;chr&gt;, pdi &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_sub</span>,</span>
 <span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
@@ -207,7 +231,7 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Sight Sciences, Inc.                                  18</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Ivantis, Inc                                          17</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 35 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_name</span>,</span>
 <span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
@@ -226,7 +250,7 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Sight Sciences, Inc.                                  18</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Ivantis, Inc                                          17</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_id</span>,</span>
 <span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
@@ -245,7 +269,7 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 100000136569    18</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 100000231809    17</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">type</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
