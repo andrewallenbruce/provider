@@ -269,17 +269,31 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre>
+<p><br></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `purrr::map()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `cols_qelig()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'results' not found</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'results' not found</span></span></code></pre>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">results</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 36</span></span></span>
+<span><span class="co">#&gt;    year npi        npi_type   first middle last   first_approved_date pecos_year</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>022 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>023 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more variables: newly_enrolled &lt;lgl&gt;, specialty_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_type &lt;chr&gt;, specialty_cat &lt;chr&gt;, is_maqi &lt;lgl&gt;, org_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_facility_based &lt;lgl&gt;, org_address &lt;chr&gt;, org_city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_state &lt;ord&gt;, org_zip &lt;chr&gt;, ams_mips_eligible &lt;lgl&gt;, apms_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   apms_name &lt;chr&gt;, apms_entity_name &lt;chr&gt;, apms_sub_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   apms_sub_name &lt;chr&gt;, apms_relationship &lt;chr&gt;, apms_status &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_code &lt;chr&gt;, ind_specialty_desc &lt;chr&gt;, …</span></span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

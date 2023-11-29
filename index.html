@@ -596,8 +596,38 @@
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
 <span>                    npi  <span class="op">=</span> <span class="fl">1932365699</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in dplyr::select(results, year, npi, org_name, dplyr::contains("apms_")): object 'results' not found</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 29</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year                &lt;int&gt; 2021</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi                 &lt;chr&gt; "1932365699"</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi_type            &lt;fct&gt; Individual</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ first               &lt;chr&gt; "STEFAN"</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ middle              &lt;chr&gt; "MICHAEL"</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ last                &lt;chr&gt; "SMITH"</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ first_approved_date &lt;date&gt; 2008-11-15</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pecos_year          &lt;int&gt; 2008</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ newly_enrolled      &lt;lgl&gt; FALSE</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_desc      &lt;chr&gt; "Optometry"</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_type      &lt;chr&gt; "Doctor of Optometry"</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty_cat       &lt;chr&gt; "Physicians"</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ is_maqi             &lt;lgl&gt; FALSE</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_name            &lt;chr&gt; "LEE ANN HOVEN OD PC"</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_hosp_vbp_name   &lt;chr&gt; NA</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_facility_based  &lt;lgl&gt; FALSE</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_address         &lt;chr&gt; "ADVANCED EYE CARE 1165S CAMINO DEL RIO SUITE 100"</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_city            &lt;chr&gt; "DURANGO"</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_state           &lt;ord&gt; CO</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_zip             &lt;chr&gt; "81303"</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_lvt_status_code &lt;chr&gt; "BOTH"</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_lvt_status_desc &lt;chr&gt; "Both the unique beneficiaries and Part B"</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_hosp_vbp_score  &lt;int&gt; 0</span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_specialty_code  &lt;chr&gt; "41"</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_specialty_desc  &lt;chr&gt; "Optometry"</span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_specialty_type  &lt;chr&gt; "Doctor of Optometry"</span></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_specialty_cat   &lt;chr&gt; "Physicians"</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_status          &lt;list&gt; [&lt;tbl_df[8 x 1]&gt;]</span></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ grp_status          &lt;list&gt; [&lt;tbl_df[10 x 1]&gt;]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="reassignments">
