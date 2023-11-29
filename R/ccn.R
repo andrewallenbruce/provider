@@ -22,13 +22,25 @@
   # step 2: first two characters encode state
   .state <- ccn.state(x)
 
+  # step 3: third character
+  .third <- ccn.third(x)
+
+  # step 4: sequence number
+  .seq_no <- ccn.sequence(x)
+
+  # step 5: facility ranges
+  .fac_rng <- ccn.facility_ranges(.seq_no)
+
 
   # collect results
   results <- list(
-    ccn            = x,
-    provider_type  = .pr_type,
-    state          = .state,
-    cms_type       = .cms_type)
+    ccn = x,
+    type = .pr_type,
+    state = .state,
+    third = .third,
+    sequence_no = .seq_no,
+    facility = .fac_rng
+    )
 
   return(results)
 
@@ -166,9 +178,10 @@ ccn.state <- function(x) {
     'B1' = 'West Virginia',
     'B2' = 'California')
 
-  return(
-    unname(states[x])
-    )
+  code <- paste0('[', rlang::sym(x), ']')
+  state <- unname(states[x])
+
+  return(paste(state, code))
 }
 
 #' Return the CCN CMS Provider type
@@ -176,7 +189,7 @@ ccn.state <- function(x) {
 #' @return character vector of a valid type or NA
 #' @autoglobal
 #' @noRd
-ccn.cms <- function(x) {
+ccn.third <- function(x) {
 
   # if numeric, convert to character
   if(is.numeric(x)) x <- as.character(x)
@@ -184,17 +197,7 @@ ccn.cms <- function(x) {
   # split and unlist ccn
   x <- unlist(strsplit(x, ""), use.names = FALSE)
 
-  # take the third character
-  x <- x[3]
-
-  # state code = state
-  cms <- vctrs::vec_c(
-    'P' = 'Medicare Provider (Organ Procurement Organization)',
-    'B2' = 'California')
-
-  return(
-    unname(cms[x])
-  )
+  return(x[3])
 }
 
 #' Return the CCN Sequence Number
@@ -206,10 +209,10 @@ ccn.cms <- function(x) {
 ccn.sequence <- function(x) {
 
   # numeric -> character
-  if(is.numeric(x)) x <- as.character(x)
+  if(is.character(x)) x <- as.integer(x)
 
   # split -> unlist
-  x <- unlist(strsplit(x, ""), use.names = FALSE)
+  x <- unlist(strsplit(as.character(x), ""), use.names = FALSE)
 
   # 3rd == number, include it
   if (grepl("^[[:digit:]]+$", x[3])) x <- x[3:length(x)]
@@ -220,12 +223,88 @@ ccn.sequence <- function(x) {
   # collapse vector
   x <- paste0(x, collapse = "")
 
-  # state code = state
-  cms <- vctrs::vec_c(
-    'P' = 'Medicare Provider (Organ Procurement Organization)',
-    'B2' = 'California')
+  x <- as.integer(x)
 
-  return(
-    unname(cms[x])
+  return(x)
+}
+
+#' Return CCN Facility Ranges Information
+#' @autoglobal
+#' @noRd
+ccn.facility_ranges <- function(code) {
+
+  if (nchar(code) != 4 && isTRUE(grepl("^[[:digit:]]+$", code))) return("Invalid Code")
+
+  code <- as.numeric(code)
+  code_sym <- rlang::sym(as.character(code))
+
+  ranges <- vctrs::vec_rbind(
+    dplyr::tibble(type = "Short-term (General and Specialty) Hospital", start = 1L, end = 880L),
+    dplyr::tibble(type = "Hospital participating in ORD demonstration project", start = 880L, end = 900L),
+    dplyr::tibble(type = rep("Federally Qualified Health Center", 2), start = c(1000L, 1800L), end = c(1200L, 1990L)),
+    dplyr::tibble(type = "Medical Assistance Facility", start = 1225L, end = 1300L),
+    dplyr::tibble(type = "Critical Access Hospital", start = 1300L, end = 1400L),
+    dplyr::tibble(type = rep("Community Mental Health Center", 3), start = c(1400L, 4600L, 4900L), end = c(1500L, 4800L, 5000L)),
+    dplyr::tibble(type = "Hospice", start = 1500L, end = 1800L),
+    dplyr::tibble(type = "Religious Non-medical Health Care Institution", start = 1990L, end = 2000L),
+    dplyr::tibble(type = "Long-Term Care Hospital", start = 2000L, end = 2300L),
+    dplyr::tibble(type = "Hospital-based Renal Dialysis Facility", start = 2300L, end = 2500L),
+    dplyr::tibble(type = "Independent Renal Dialysis Facility", start = 2500L, end = 2900L),
+    dplyr::tibble(type = "Independent Special Purpose Renal Dialysis Facility", start = 2900L, end = 3000L),
+    dplyr::tibble(type = "Rehabilitation Hospital", start = 3025L, end = 3100L),
+    dplyr::tibble(type = rep("Home Health Agency", 3), start = c(3100L, 7000L, 9000L), end = c(3200L, 8500L, 9800L)),
+    dplyr::tibble(type = "Children's Hospital", start = 3300L, end = 3400L),
+    dplyr::tibble(type = rep("Rural Health Clinic (Provider-based)", 3), start = c(3400L, 3975L, 8500L), end = c(3500L, 4000L, 8900L)),
+    dplyr::tibble(type = rep("Rural Health Clinic (Free-standing)", 2), start = c(3800L, 8900L), end = c(3975L, 9000L)),
+    dplyr::tibble(type = "Hospital-based Satellite Renal Dialysis Facility", start = 3500L, end = 3700L),
+    dplyr::tibble(type = "Hospital-based Special Purpose Renal Dialysis Facility", start = 3700L, end = 3800L),
+    dplyr::tibble(type = "Psychiatric Hospital", start = 4000L, end = 4500L),
+    dplyr::tibble(type = rep("Comprehensive Outpatient Rehabilitation Facility", 3), start = c(3200L, 4500L, 4800L), end = c(3300L, 4600L, 4900L)),
+    dplyr::tibble(type = "Skilled Nursing Facility", start = 5000L, end = 6500L),
+    dplyr::tibble(type = "Outpatient Physical Therapy Services", start = 6500L, end = 6990L),
+    dplyr::tibble(type = "Transplant Center", start = 9800L, end = 9900L),
+    dplyr::tibble(type = "Number Reserved (formerly Christian Science Skilled Nursing)", start = 6990L, end = 7000L),
+    dplyr::tibble(type = "Reserved for Future Use", start = 9900L, end = 10000L),
+    dplyr::tibble(type = "Multiple Hospital Component in a Medical Complex (Number Retired)", start = 900L, end = 1000L),
+    dplyr::tibble(type = "Alcohol/Drug Hospital (Number Retired)", start = 1200L, end = 1225L),
+    dplyr::tibble(type = "Tuberculosis Hospital (Number Retired)", start = 3000L, end = 3025L)) |>
+    dplyr::arrange(start) |>
+    dplyr::mutate(range = ivs::iv(start, end), .keep = "unused")
+
+  results <- ranges |>
+    dplyr::mutate(is_between = ivs::iv_includes(range, {{ code }})) |>
+    dplyr::filter(is_between == TRUE)
+
+  if (vctrs::vec_is_empty(results)) {
+
+    results <- dplyr::tibble(
+      type = NA_character_,
+      range = NA_integer_,
+      is_between = NA_character_)
+
+    start <- NA_integer_
+    end <- NA_integer_
+
+    results <- list(
+      code = paste0('[', code_sym, ']'),
+      type = results$type,
+      range = paste0('[', start, ", ", end, ')'),
+      text = paste0(results$type, " ",
+             paste0('[', code_sym, ']'), ", in range ",
+             paste0('[', start, ", ", end, ')')))
+    return(results)
+  }
+
+  start <- ivs::iv_start(results$range)
+  end <- ivs::iv_end(results$range)
+
+  results <- list(
+    code = paste0('[', code_sym, ']'),
+    type = results$type,
+    range = paste0('[', start, ", ", end, ')'),
+    text = paste0(results$type, " ",
+           paste0('[', code_sym, ']'), ", in range ",
+           paste0('[', start, ", ", end, ')'))
   )
+  return(results)
 }

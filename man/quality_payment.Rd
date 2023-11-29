@@ -2,6 +2,7 @@
 % Please edit documentation in R/quality_payment.R
 \name{quality_payment}
 \alias{quality_payment}
+\alias{quality_payment_}
 \title{Quality Payment Program Experience}
 \usage{
 quality_payment(
@@ -14,10 +15,12 @@ quality_payment(
   nest = TRUE,
   ...
 )
+
+quality_payment_(year = qpp_years(), ...)
 }
 \arguments{
-\item{year}{< \emph{integer} > // \strong{required} QPP performance year, in \code{YYYY}format.
-Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
+\item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
+format. Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
 
 \item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier
 assigned to the clinician when they enrolled in Medicare. Multiple rows for
@@ -54,7 +57,7 @@ attributed to the clinician; drives most of the data returned.
 
 \item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{statuses} & \code{measures}}
 
-\item{...}{For future use.}
+\item{...}{Pass arguments to \code{\link[=quality_payment]{quality_payment()}}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

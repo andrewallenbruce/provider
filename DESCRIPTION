@@ -20,6 +20,7 @@ Imports:
     dplyr,
     furrr,
     httr2,
+    ivs,
     janitor,
     lifecycle,
     lubridate,

@@ -30,12 +30,31 @@ add_counties(
 Add county name, FIPs, and geometry to data frame with zip codes
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-nppes(npi = 1720098791) |>
-      add_counties(statecol = state,
-                   zipcol   = zip,
+# Example data frame containing state abbreviation and zip code
+ex <- dplyr::tibble(state = "GA",
+                    zip = "31605")
+ex
+
+# Adds county name and latitude/longitude
+ex |> add_counties(state, zip)
+
+# Adds county FIPS
+ex |> add_counties(state,
+                   zip,
+                   add_fips = TRUE)
+
+# Adds county `geometry` column,
+# based on county FIPS column
+ex |> add_counties(state,
+                   zip,
+                   add_fips = TRUE,
+                   add_geo  = TRUE)
+
+# Converts data frame to an `sf` object
+ex |> add_counties(state,
+                   zip,
                    add_fips = TRUE,
                    add_geo  = TRUE,
                    as_sf    = TRUE)
-\dontshow{\}) # examplesIf}
+
 }

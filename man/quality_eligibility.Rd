@@ -2,6 +2,7 @@
 % Please edit documentation in R/quality_eligibility.R
 \name{quality_eligibility}
 \alias{quality_eligibility}
+\alias{quality_eligibility_}
 \title{Quality Payment Program Eligibility}
 \usage{
 quality_eligibility(
@@ -13,10 +14,12 @@ quality_eligibility(
   na.rm = FALSE,
   ...
 )
+
+quality_eligibility_(year = 2017:2023, ...)
 }
 \arguments{
-\item{year}{< \emph{integer} > // \strong{required} QPP performance year, in \code{YYYY}format.
-Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
+\item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
+format. Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
 
 \item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier
 assigned to the clinician when they enrolled in Medicare. Multiple rows for
@@ -30,7 +33,7 @@ the same NPI indicate multiple TIN/NPI combinations.}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
 
-\item{...}{For future use.}
+\item{...}{Pass arguments to \code{\link[=quality_eligibility]{quality_eligibility()}}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

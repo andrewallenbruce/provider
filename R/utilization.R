@@ -63,6 +63,9 @@
 #' utilization_(npi = 1043477615, type = "service")
 #' utilization_(hcpcs = "0002A", type = "geography")
 #'
+#' @name utilization
+NULL
+
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [util_years()] to return a vector of the years currently available.
 #' @param type < *character* > // **required** dataset to query, `"provider"`, `"service"`, `"geography"`
@@ -103,6 +106,7 @@
 #' @param detailed < *boolean* > // __default:__ `FALSE` Include nested `medical` and `drug` columns
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... For future use.
+#' @rdname utilization
 #' @autoglobal
 #' @export
 utilization <- function(year,
@@ -257,6 +261,7 @@ utilization <- function(year,
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [util_years()] to return a vector of the years currently available.
 #' @param ... Pass arguments to [utilization()].
+#' @rdname utilization
 #' @autoglobal
 #' @export
 utilization_ <- function(year = util_years(),

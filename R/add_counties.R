@@ -6,10 +6,30 @@
 #' @param add_geo add county geometry column, default is `FALSE`
 #' @param as_sf convert tibble to an `{sf}` object, default is `FALSE`
 #'
-#' @examplesIf interactive()
-#' nppes(npi = 1720098791) |>
-#'       add_counties(statecol = state,
-#'                    zipcol   = zip,
+#' @examples
+#' # Example data frame containing state abbreviation and zip code
+#' ex <- dplyr::tibble(state = "GA",
+#'                     zip = "31605")
+#' ex
+#'
+#' # Adds county name and latitude/longitude
+#' ex |> add_counties(state, zip)
+#'
+#' # Adds county FIPS
+#' ex |> add_counties(state,
+#'                    zip,
+#'                    add_fips = TRUE)
+#'
+#' # Adds county `geometry` column,
+#' # based on county FIPS column
+#' ex |> add_counties(state,
+#'                    zip,
+#'                    add_fips = TRUE,
+#'                    add_geo  = TRUE)
+#'
+#' # Converts data frame to an `sf` object
+#' ex |> add_counties(state,
+#'                    zip,
 #'                    add_fips = TRUE,
 #'                    add_geo  = TRUE,
 #'                    as_sf    = TRUE)
@@ -70,7 +90,7 @@ add_counties <- function(df,
 
   if (as_sf) {
     df <- sf::st_as_sf(df,
-                       sf_column_name = geometry,
+                       coords = c("lng", "lat"),
                        crs = sf::st_crs(4326),
                        na.fail = FALSE)
   }

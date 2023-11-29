@@ -35,6 +35,8 @@ nppes(npi = 1144544834) |>
 
 <br>
 
+# Quality Payment Reporting
+
 ```{r}
 plan(multisession, workers = 4)
 q <- quality_payment_(npi = 1144544834)
@@ -78,7 +80,7 @@ select(q, year, measures) |>
 
 <br>
 
-## Quality Eligibility
+# Quality Payment Eligibility
 
 ```{r}
 plan(multisession, workers = 4)

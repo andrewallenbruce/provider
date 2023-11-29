@@ -2,6 +2,7 @@
 % Please edit documentation in R/utilization.R
 \name{utilization}
 \alias{utilization}
+\alias{utilization_}
 \title{Provider Utilization & Demographics by Year}
 \usage{
 utilization(
@@ -33,6 +34,8 @@ utilization(
   na.rm = TRUE,
   ...
 )
+
+utilization_(year = util_years(), ...)
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
@@ -102,7 +105,7 @@ Classifications to HCPCS codes}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
-\item{...}{For future use.}
+\item{...}{Pass arguments to \code{\link[=utilization]{utilization()}}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

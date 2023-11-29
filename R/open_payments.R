@@ -94,7 +94,6 @@
 #' @name open_payments
 NULL
 
-
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > Covered recipient's 10-digit National Provider Identifier

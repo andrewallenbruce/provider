@@ -5,7 +5,6 @@ utils::globalVariables(c(
   "state", # <add_counties>
   ":=", # <add_counties>
   "county_fips", # <add_counties>
-  "geometry", # <add_counties>
   "y", # <affiliations>
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
@@ -23,7 +22,7 @@ utils::globalVariables(c(
   "year", # <change_year>
   ":=", # <change_year>
   "interval", # <make_interval>
-  ".cms_type", # <.ccn>
+  "is_between", # <ccn.facility_ranges>
   "y", # <clinicians>
   "address", # <clinicians>
   "gndr", # <clinicians>

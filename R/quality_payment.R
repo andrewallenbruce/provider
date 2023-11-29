@@ -20,6 +20,10 @@
 #' @section Update Frequency:
 #' __Annually__
 #'
+#' @name quality_payment
+NULL
+
+#'
 #' @param year < *integer* > // **required** QPP performance year, in `YYYY`format.
 #' Run [qpp_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > 10-digit Individual National Provider Identifier
@@ -207,6 +211,7 @@ quality_payment <- function(year,
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [qpp_years()] to return a vector of the years currently available.
 #' @param ... Pass arguments to [quality_payment()].
+#' @rdname quality_payment
 #' @autoglobal
 #' @export
 quality_payment_ <- function(year = qpp_years(), ...) {

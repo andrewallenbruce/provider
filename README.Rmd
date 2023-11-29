@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 ![GitHub milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
-> Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
+> 	:package: Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
 
 ## :arrow_double_down: Installation
 
@@ -118,9 +118,12 @@ laboratories(clia = "11D0265516") |>
 ### `nppes()`
 
 ```{r}
-nppes(npi = 1720098791) |> 
-  add_counties(state, zip) |> 
-  glimpse()
+nppes(npi = 1497535637) |> 
+  add_counties(state, 
+               zip, 
+               add_fips = TRUE, 
+               add_geo = TRUE, 
+               as_sf = TRUE)
 ```
 
 
@@ -265,7 +268,13 @@ utilization(year  = 2021,
 
 ------------------------------------------------------------------------------
 
-## Code of Conduct
+## :page_facing_up: Code of Conduct
+
+## :balance_scale: Code of Conduct
 
 Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
+
+## :classical_building: Governance
+
+This project is primarily maintained by [Andrew Bruce](https://twitter.com/riannone). Other authors may occasionally assist with some of these duties.

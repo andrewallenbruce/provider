@@ -19,7 +19,7 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
-> Providing easy access to [healthcare
+> :package: Providing easy access to [healthcare
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
 > through publicly available APIs.
 
@@ -249,47 +249,28 @@ laboratories(clia = "11D0265516") |>
 ### `nppes()`
 
 ``` r
-nppes(npi = 1720098791) |> 
-  add_counties(state, zip) |> 
-  glimpse()
+nppes(npi = 1497535637) |> 
+  add_counties(state, 
+               zip, 
+               add_fips = TRUE, 
+               add_geo = TRUE, 
+               as_sf = TRUE)
 ```
 
-    #> Rows: 1
-    #> Columns: 34
-    #> $ npi           <chr> "1720098791"
-    #> $ entity_type   <fct> Organization
-    #> $ enum_date     <date> 2006-08-09
-    #> $ last_update   <date> 2011-10-06
-    #> $ status        <fct> Active
-    #> $ gender        <fct> Unknown
-    #> $ organization  <chr> "IRWIN COUNTY HOSPITAL"
-    #> $ org_part      <lgl> FALSE
-    #> $ purpose       <fct> Practice
-    #> $ address       <chr> "710 N IRWIN AVE"
-    #> $ city          <chr> "OCILLA"
-    #> $ state         <ord> GA
-    #> $ zip           <chr> "31774"
-    #> $ country       <chr> "US"
-    #> $ phone         <chr> "229-468-3800"
-    #> $ fax           <chr> "229-468-9991"
-    #> $ ao_prefix     <chr> "Mrs."
-    #> $ ao_first      <chr> "SHARON"
-    #> $ ao_middle     <chr> "P"
-    #> $ ao_last       <chr> "GRIFFIN"
-    #> $ ao_title      <chr> "CFO"
-    #> $ ao_phone      <chr> "2294683862"
-    #> $ tx_code       <chr> "282N00000X"
-    #> $ tx_primary    <lgl> TRUE
-    #> $ tx_desc       <chr> "General Acute Care Hospital"
-    #> $ tx_license    <chr> "86112S"
-    #> $ tx_state      <ord> GA
-    #> $ id_code       <chr> "05"
-    #> $ id_desc       <chr> "MEDICAID"
-    #> $ id_state      <ord> GA
-    #> $ id_identifier <chr> "000000987A"
-    #> $ county        <chr> "Irwin"
-    #> $ lat           <dbl> 31.6
-    #> $ lng           <dbl> -83.3
+    #> Simple feature collection with 1 feature and 25 fields
+    #> Geometry type: POINT
+    #> Dimension:     XY
+    #> Bounding box:  xmin: -83.3 ymin: 30.9 xmax: -83.3 ymax: 30.9
+    #> Geodetic CRS:  WGS 84
+    #> # A tibble: 1 × 26
+    #>   npi    entity_type enum_date  cert_date  last_update status first last  gender
+    #> * <chr>  <fct>       <date>     <date>     <date>      <fct>  <chr> <chr> <fct> 
+    #> 1 14975… Individual  2023-10-04 2023-10-05 2023-10-05  Active CART… ADAMS Male  
+    #> # ℹ 17 more variables: credential <chr>, sole_prop <lgl>, purpose <fct>,
+    #> #   address <chr>, city <chr>, state <ord>, zip <chr>, country <chr>,
+    #> #   phone <chr>, tx_code <chr>, tx_primary <lgl>, tx_desc <chr>,
+    #> #   tx_license <chr>, tx_state <ord>, county <chr>, county_fips <chr>,
+    #> #   geometry <POINT [°]>
 
 ### `open_payments()`
 
@@ -316,22 +297,22 @@ open_payments(year  = 2021,
     #> $ primary             <chr> "Physician Assistant"
     #> $ specialty           <chr> "Physician Assistants & Advanced Practice Nursing …
     #> $ license_state       <ord> OK
-    #> $ payer_id            <chr> "100000866821"
-    #> $ payer_sub           <chr> "Organon LLC"
-    #> $ payer_name          <chr> "Organon LLC"
-    #> $ payer_state         <ord> NJ
-    #> $ payer_country       <chr> "United States"
-    #> $ pay_total           <dbl> 17.43
-    #> $ pay_date            <date> 2021-08-25
-    #> $ pay_count           <int> 1
-    #> $ pay_form            <chr> "In-kind items and services"
-    #> $ pay_nature          <chr> "Food and Beverage"
     #> $ physician_ownership <lgl> FALSE
     #> $ third_party_payment <chr> "No Third Party Payment"
     #> $ publish_date        <date> 2023-06-30
     #> $ publish_delay       <lgl> FALSE
     #> $ publish_dispute     <lgl> FALSE
     #> $ related_product     <lgl> TRUE
+    #> $ payer_id            <chr> "100000866821"
+    #> $ payer_sub           <chr> "Organon LLC"
+    #> $ payer_name          <chr> "Organon LLC"
+    #> $ payer_state         <ord> NJ
+    #> $ payer_country       <chr> "United States"
+    #> $ pay_form            <chr> "In-kind items and services"
+    #> $ pay_nature          <chr> "Food and Beverage"
+    #> $ pay_total           <dbl> 17.43
+    #> $ pay_date            <date> 2021-08-25
+    #> $ pay_count           <int> 1
     #> $ row_id              <int> 1
     #> $ group_id            <int> 1
     #> $ name                <chr> "NEXPLANON"
@@ -339,15 +320,15 @@ open_payments(year  = 2021,
     #> $ type                <chr> "Drug"
     #> $ category            <chr> "CONTRACEPTIVES"
     #> $ ndc                 <chr> "78206-145-01"
-    #> $ rxcui               <chr> "1111011"
-    #> $ atc                 <chr> "G03AC"
-    #> $ status              <chr> "ACTIVE"
-    #> $ brand_name          <chr> "NEXPLANON"
-    #> $ drug_name           <chr> "etonogestrel 68 MG Drug Implant [Nexplanon]"
-    #> $ atc_first           <chr> "genito urinary system and sex hormones"
-    #> $ atc_second          <chr> "sex hormones and modulators of the genital system"
-    #> $ atc_third           <chr> "hormonal contraceptives for systemic use"
-    #> $ atc_fourth          <chr> "progestogens"
+    #> $ ndc.rxcui           <chr> "1111011"
+    #> $ ndc.atc             <chr> "G03AC"
+    #> $ ndc.status          <chr> "ACTIVE"
+    #> $ ndc.brand_name      <chr> "NEXPLANON"
+    #> $ ndc.drug_name       <chr> "etonogestrel 68 MG Drug Implant [Nexplanon]"
+    #> $ ndc.atc_first       <chr> "genito urinary system and sex hormones"
+    #> $ ndc.atc_second      <chr> "sex hormones and modulators of the genital system"
+    #> $ ndc.atc_third       <chr> "hormonal contraceptives for systemic use"
+    #> $ ndc.atc_fourth      <chr> "progestogens"
 
 ### `opt_out()`
 
@@ -749,9 +730,17 @@ utilization(year  = 2021,
 
 ------------------------------------------------------------------------
 
-## Code of Conduct
+## :page_facing_up: Code of Conduct
+
+## :balance_scale: Code of Conduct
 
 Please note that the `provider` project is released with a [Contributor
 Code of
 Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+## :classical_building: Governance
+
+This project is primarily maintained by [Andrew
+Bruce](https://twitter.com/riannone). Other authors may occasionally
+assist with some of these duties.

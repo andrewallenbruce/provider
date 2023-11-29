@@ -46,6 +46,8 @@
 #'
 #' @section Update Frequency: **Annually**
 #'
+#' @name quality_eligibility
+#'
 #' @param year < *integer* > // __required__ QPP performance year, in `YYYY`format.
 #' Run [qpp_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > 10-digit Individual National Provider Identifier
@@ -58,6 +60,8 @@
 #' @param ... For future use.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @rdname quality_eligibility
 #'
 #' @examplesIf interactive()
 #' # Single NPI/year
@@ -266,6 +270,18 @@ quality_eligibility <- function(year,
     if (na.rm) results <- narm(results)
   }
   return(results)
+}
+
+#' Parallelized [quality_eligibility()]
+#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
+#' format. Run [qpp_years()] to return a vector of the years currently available.
+#' @param ... Pass arguments to [quality_eligibility()].
+#' @rdname quality_eligibility
+#' @autoglobal
+#' @export
+quality_eligibility_ <- function(year = 2017:2023, ...) {
+  furrr::future_map_dfr(year, quality_eligibility, ...,
+                        .options = furrr::furrr_options(seed = NULL))
 }
 
 #' @param df data frame
