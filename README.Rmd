@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 
 > Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
 
-# :arrow_double_down: Installation
+## :arrow_double_down: Installation
 
 You can install __`provider`__ from [GitHub](https://github.com/) with:
 
@@ -40,7 +40,7 @@ You can install __`provider`__ from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-# :beginner: Usage
+## :beginner: Usage
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(provider)
@@ -189,6 +189,14 @@ select(q, year, statuses) |>
 ```{r}
 select(q, year, measures) |> 
   unnest(measures)
+```
+
+### `quality_eligibility()`
+
+```{r}
+quality_eligibility(year = 2021, 
+                    npi  = 1932365699) |> 
+  dplyr::glimpse()
 ```
 
 ### `reassignments()`

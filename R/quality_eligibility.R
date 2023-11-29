@@ -88,8 +88,8 @@ quality_eligibility <- function(year,
                                 npi,
                                 tidy = TRUE,
                                 unnest = TRUE,
-                                pivot = FALSE,
-                                na.rm = FALSE,
+                                pivot = TRUE,
+                                na.rm = TRUE,
                                 ...) {
 
   rlang::check_required(year)
@@ -169,12 +169,13 @@ quality_eligibility <- function(year,
         unnest_if_name('grp.lowVolumeStatusReasons', wide = TRUE) |>
         unnest_if_name('grp.isEligible') |>
         unnest_if_name('error') |>
-        cols_qelig()
+        cols_qelig('tidyup')
 
       results <- tidyup(results,
              dtype = 'ymd',
              int = c('year',
                      'years_in_medicare',
+                     'ind_hosp_vbp_score',
                      # 'apms_lvt_patients',
                      # 'apms_lvt_year'
                      'pecos_year'),
@@ -204,6 +205,7 @@ quality_eligibility <- function(year,
                      'ind_hospital_based',
                      'ind_hpsa',
                      'ind_ia_study',
+                     'ind_opted_in',
                      'ind_opt_in_eligible',
                      'ind_mips_switch',
                      'ind_non_patient',
@@ -228,6 +230,7 @@ quality_eligibility <- function(year,
                      'grp_hospital_based',
                      'grp_hpsa',
                      'grp_ia_study',
+                     'grp_opted_in',
                      'grp_opt_in_eligible',
                      'grp_mips_switch',
                      'grp_non_patient',
@@ -238,7 +241,14 @@ quality_eligibility <- function(year,
         dplyr::mutate(npi_type  = fct_entype(npi_type),
                       org_state = fct_stabb(org_state))
     }
-    if (pivot) {}
+    if (pivot) {
+
+      results <- cols_qelig(results, 'top') |>
+        dplyr::left_join(cols_qelig(results, 'apms')) |>
+        dplyr::left_join(cols_qelig(results, 'ind')) |>
+        dplyr::left_join(cols_qelig(results, 'grp'))
+
+    }
     if (na.rm) results <- narm(results)
   }
   return(results)
@@ -265,9 +275,12 @@ unnest_if_name <- function(df, name, unpack = TRUE, wide = FALSE) {
 }
 
 #' @param df data frame
+#' @param type description
 #' @autoglobal
 #' @noRd
-cols_qelig <- function(df) {
+cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
+
+  if (type == 'tidyup') {
 
     cols <- c('year'                = 'year',
               'npi'                 = 'npi',
@@ -281,7 +294,7 @@ cols_qelig <- function(df) {
               'newly_enrolled'      = 'newlyEnrolled',
               'specialty_desc'      = 'specialty.specialtyDescription',
               'specialty_type'      = 'specialty.typeDescription',
-              'specialty_category'  = 'specialty.categoryReference',
+              'specialty_cat'       = 'specialty.categoryReference',
               'is_maqi'             = 'isMaqi',
               'org_name'            = 'organizations_prvdrOrgName',
               'org_hosp_vbp_name'   = 'organizations_hospitalVbpName',
@@ -364,7 +377,7 @@ cols_qelig <- function(df) {
               # 'ind_scenario'                 = 'ind.eligibilityScenario',
 
               'grp_hardship_pi'          = 'grp.aciHardship',
-              'grp_hardship_reweight'    = 'grp.aciReweighting',
+              'grp_reweight_pi'          = 'grp.aciReweighting',
               'grp_asc'                  = 'grp.ambulatorySurgicalCenter',
               'grp_ext_hardship'         = 'grp.extremeHardship',
               'grp_ext_hardship_quality' = 'grp.extremeHardshipReasons.quality',
@@ -388,8 +401,154 @@ cols_qelig <- function(df) {
               'grp_eligible'             = 'grp.isEligible.group'
               # 'grp_agg_level'          = 'grp.aggregationLevel',
               )
+    return(df |> dplyr::select(dplyr::any_of(cols)))
+  }
 
-  df |> dplyr::select(dplyr::any_of(cols))
+  if (type == 'top') {
+
+    cols <- c('year',
+              'npi',
+              'npi_type',
+              'first',
+              'middle',
+              'last',
+              'first_approved_date',
+              'years_in_medicare',
+              'pecos_year',
+              'newly_enrolled',
+              'specialty_desc',
+              'specialty_type',
+              'specialty_cat',
+              'is_maqi',
+              'org_name',
+              'org_hosp_vbp_name',
+              'org_facility_based',
+              'org_address',
+              'org_city',
+              'org_state',
+              'org_zip',
+              'qp_status',
+              'ams_mips_eligible',
+              'qp_score_type',
+              'error_message',
+              'error_type')
+
+    return(df |> dplyr::select(dplyr::any_of(cols)))
+
+  }
+
+  if (type == 'apms') {
+
+    apm_flags <- c(
+      'Advanced APM'                               = 'apms_advanced',
+      'Below Low Volume Threshold'                 ='apms_lvt',
+      'Small Practice Status'                      = 'apms_lvt_small',
+      'MIPS APM'                                   = 'apms_mips_apm',
+      'Extreme Hardship'                           = 'apms_ext_hardship',
+      'Extreme Hardship (Performance Improvement)' = 'apms_ext_hardship_pi',
+      'Extreme Hardship (Cost)'                    = 'apms_ext_hardship_cost',
+      'Extreme Hardship (Improvement Activities)'  = 'apms_ext_hardship_ia',
+      'Extreme Hardship (Quality)'                 = 'apms_ext_hardship_quality'
+    )
+
+    return(results |>
+      dplyr::select(year,
+                    npi,
+                    org_name,
+                    dplyr::contains('apms_')) |>
+      dplyr::rename(dplyr::any_of(apm_flags)) |>
+      tidyr::pivot_longer(cols = dplyr::any_of(names(apm_flags))) |>
+      dplyr::filter(!is.na(value)) |>
+      dplyr::filter(value == TRUE) |>
+      dplyr::mutate(value = NULL) |>
+      tidyr::nest(apms_status = name) |>
+      janitor::remove_empty(which = c("rows", "cols")))
+
+  }
+
+  if (type == 'ind') {
+
+    ind_flags <- c(
+      'Hardship (Performance Improvement)'         = 'ind_hardship_pi',
+      'Reweighting (Performance Improvement)'      = 'ind_reweight_pi',
+      'Ambulatory Surgical Center'                 = 'ind_asc',
+      'Extreme Hardship'                           = 'ind_ext_hardship',
+      'Extreme Hardship (Quality)'                 = 'ind_ext_hardship_quality',
+      'Extreme Hardship (Improvement Activities)'  = 'ind_ext_hardship_ia',
+      'Extreme Hardship (Performance Improvement)' = 'ind_ext_hardship_pi',
+      'Extreme Hardship (Cost)'                    = 'ind_ext_hardship_cost',
+      'Hospital-based Clinician'                   = 'ind_hospital_based',
+      'HPSA Clinician'                             = 'ind_hpsa',
+      'Improvement Activities Study'               = 'ind_ia_study',
+      'Has Opted In'                               = 'ind_opted_in',
+      'Is Opt-In Eligible'                         = 'ind_opt_in_eligible',
+      'MIPS Eligible Clinician'                    = 'ind_mips_switch',
+      'Non-Patient Facing'                         = 'ind_non_patient',
+      'Rural Clinician'                            = 'ind_rural',
+      'Small Group Practitioner'                   = 'ind_small',
+      'Below Low Volume Threshold'                 = 'ind_lvt_switch',
+      'Has Payment Adjustment CCN'                 = 'ind_has_payment_adjustment_ccn',
+      'Has Hospital Value-Based CCN'               = 'ind_has_hospital_vbp_ccn',
+      'Facility-based Clinician'                   = 'ind_facility',
+      'Eligible: Individual'                       = 'ind_eligible_ind',
+      'Eligible: Group'                            = 'ind_eligible_group',
+      'Eligible: APM'                              = 'ind_eligible_apm',
+      'Eligible: Virtual Group'                    = 'ind_eligible_virtual'
+    )
+
+    return(results |>
+             dplyr::select(year,
+                           npi,
+                           org_name,
+                           dplyr::contains('ind_')) |>
+             dplyr::rename(dplyr::any_of(ind_flags)) |>
+             tidyr::pivot_longer(cols = dplyr::any_of(names(ind_flags))) |>
+             dplyr::filter(!is.na(value)) |>
+             dplyr::filter(value == TRUE) |>
+             dplyr::mutate(value = NULL) |>
+             tidyr::nest(ind_status = name) |>
+             janitor::remove_empty(which = c("rows", "cols")))
+
+  }
+
+  if (type == 'grp') {
+
+    grp_flags <- c(
+      'Hardship (Performance Improvement)'         = 'grp_hardship_pi',
+      'Reweighting (Performance Improvement)'      = 'grp_reweight_pi',
+      'Ambulatory Surgical Center'                 = 'grp_asc',
+      'Extreme Hardship'                           = 'grp_ext_hardship',
+      'Extreme Hardship (Quality)'                 = 'grp_ext_hardship_quality',
+      'Extreme Hardship (Improvement Activities)'  = 'grp_ext_hardship_ia',
+      'Extreme Hardship (Performance Improvement)' = 'grp_ext_hardship_pi',
+      'Extreme Hardship (Cost)'                    = 'grp_ext_hardship_cost',
+      'Hospital-based Clinician'                   = 'grp_hospital_based',
+      'HPSA Clinician'                             = 'grp_hpsa',
+      'Improvement Activities Study'               = 'grp_ia_study',
+      'Has Opted In'                               = 'grp_opted_in',
+      'Is Opt-In Eligible'                         = 'grp_opt_in_eligible',
+      'MIPS Eligible Clinician'                    = 'grp_mips_switch',
+      'Non-Patient Facing'                         = 'grp_non_patient',
+      'Rural Clinician'                            = 'grp_rural',
+      'Small Group Practitioner'                   = 'grp_small',
+      'Below Low Volume Threshold'                 = 'grp_lvt_switch',
+      'Eligible: Group'                            = 'grp_eligible'
+    )
+
+    return(results |>
+             dplyr::select(year,
+                           npi,
+                           org_name,
+                           dplyr::contains('grp_')) |>
+             dplyr::rename(dplyr::any_of(grp_flags)) |>
+             tidyr::pivot_longer(cols = dplyr::any_of(names(grp_flags))) |>
+             dplyr::filter(!is.na(value)) |>
+             dplyr::filter(value == TRUE) |>
+             dplyr::mutate(value = NULL) |>
+             tidyr::nest(grp_status = name) |>
+             janitor::remove_empty(which = c("rows", "cols")))
+
+  }
 }
 
 

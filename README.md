@@ -23,7 +23,7 @@ milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/pr
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
 > through publicly available APIs.
 
-# :arrow_double_down: Installation
+## :arrow_double_down: Installation
 
 You can install **`provider`** from [GitHub](https://github.com/) with:
 
@@ -32,7 +32,7 @@ You can install **`provider`** from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-# :beginner: Usage
+## :beginner: Usage
 
 ``` r
 library(provider)
@@ -500,6 +500,16 @@ select(q, year, measures) |>
     #> 4  2021 Quality 47        3
     #> 5  2021 Quality 1         0
     #> 6  2021 Quality 117       0
+
+### `quality_eligibility()`
+
+``` r
+quality_eligibility(year = 2021, 
+                    npi  = 1932365699) |> 
+  dplyr::glimpse()
+```
+
+    #> Error in dplyr::select(results, year, npi, org_name, dplyr::contains("apms_")): object 'results' not found
 
 ### `reassignments()`
 

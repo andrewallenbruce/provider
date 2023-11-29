@@ -9,8 +9,8 @@ quality_eligibility(
   npi,
   tidy = TRUE,
   unnest = TRUE,
-  pivot = FALSE,
-  na.rm = FALSE,
+  pivot = TRUE,
+  na.rm = TRUE,
   ...
 )
 }
