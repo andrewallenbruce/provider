@@ -91,30 +91,34 @@
 #' @section Update Frequency:
 #' Yearly
 #'
+#' @name open_payments
+NULL
+
+
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
 #' @param npi < *integer* > Covered recipient's 10-digit National Provider Identifier
-#' @param covered_type < *character* > Type of covered recipient:
+#' @param covered_type < *character* > Type of covered recipient, e.g.:
 #' + `"Physician"`
 #' + `"Non-Physician Practitioner"`
 #' + `"Teaching Hospital"`
-#' @param teaching_hospital < *character* > Name of teaching hospital, e.g.
+#' @param teaching_hospital < *character* > Name of teaching hospital, e.g.:
 #' + `"Vanderbilt University Medical Center"`
 #' @param first,last < *character* > Covered recipient's name
 #' @param city < *character* > Covered recipient's city
 #' @param state < *character* > Covered recipient's state abbreviation
 #' @param zip < *character* > Covered recipient's zip code
-#' @param payer < *character* > Paying entity's name, e.g.
+#' @param payer < *character* > Paying entity's name, e.g.:
 #' + `"Pharmacosmos Therapeutics Inc."`
 #' + `"Getinge USA Sales, LLC"`
 #' + `"Agiliti Health, Inc."`
 #' + `"OrthoScan, Inc."`
-#' @param payer_id < *integer* > Paying entity's unique Open Payments ID
-#' @param pay_form < *character* > Form of payment:
+#' @param payer_id < *integer* > Paying entity's unique 10-digit Open Payments ID
+#' @param pay_form < *character* > Form of payment, e.g.:
 #' + `"Stock option"`
 #' + `"Cash or cash equivalent"`
 #' + `"In-kind items and services"`
-#' @param pay_nature < *character* > Nature of payment or transfer of value:
+#' @param pay_nature < *character* > Nature of payment or transfer of value, e.g.:
 #' + `"Royalty or License"`
 #' + `"Charitable Contribution"`
 #' + `"Current or prospective ownership or investment interest"`
@@ -124,8 +128,11 @@
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
 #' @param add.ndc < *boolean* > // __default:__ `TRUE` Add output from [ndc_lookup()]
 #' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
-#' @param ... For future use.
+#' @param ... Pass arguments to [open_payments()].
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @rdname open_payments
 #'
 #' @examplesIf interactive()
 #' open_payments(year = 2021, npi = 1043218118)
@@ -275,15 +282,12 @@ open_payments <- function(year,
                       total  = NULL) |>
         dplyr::ungroup()
 
-      results$.name_1 <- NULL
-      results$.cov_1  <- NULL
-      results$.type_1 <- NULL
-      results$.cat_1  <- NULL
-      results$.ndc_1  <- NULL
-      results$.pdi_1  <- NULL
+      results$.name_1 <- NULL; results$.cov_1  <- NULL; results$.type_1 <- NULL
+      results$.cat_1  <- NULL; results$.ndc_1  <- NULL; results$.pdi_1  <- NULL
 
-      pcol <- c('name_', 'covered_', 'type_',
-                'category_', 'ndc_', 'pdi_') %s+% rep(1:5, each = 6)
+      pcol <- c('name_', 'covered_',
+                'type_', 'category_',
+                'ndc_', 'pdi_') %s+% rep(1:5, each = 6)
 
       results <- results |>
         tidyr::pivot_longer(dplyr::any_of(pcol)) |>
@@ -297,7 +301,7 @@ open_payments <- function(year,
                                                   "Covered" ~ TRUE,
                                                   "Non-Covered" ~ FALSE,
                                                   .default = NA),
-                      group_id = as.integer(group_id),
+                      group_id  = as.integer(group_id),
                       pay_total = dplyr::if_else(group_id > 1, NA, pay_total),
                       pay_count = dplyr::if_else(group_id > 1, NA, pay_count))
 
@@ -307,7 +311,8 @@ open_payments <- function(year,
       rx <- ndcs |> purrr::map(\(x) rxnorm(ndc = x)) |>
                     purrr::list_rbind()
       results <- dplyr::left_join(results, rx,
-                 by = dplyr::join_by(ndc == ndc))
+                 by = dplyr::join_by(ndc == ndc)) |>
+        cols_open2()
       }
     }
     if (na.rm) results <- narm(results)
@@ -315,23 +320,20 @@ open_payments <- function(year,
   return(results)
 }
 
-# if (rlang::has_name(results, "pdi")) results$pdi <- dplyr::na_if(results$pdi, "N/A")
-
 #' Parallelized [open_payments()]
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [open_years()] to return a vector of the years currently available.
-#' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param ... Pass arguments to [open_payments()].
+#' @rdname open_payments
 #' @autoglobal
 #' @export
 open_payments_ <- function(year = open_years(),
-                           na.rm = FALSE,
                            ...) {
   results <- furrr::future_map_dfr(year,
                                    open_payments,
                                    ...,
                                    .options = furrr::furrr_options(seed = NULL))
-  if (na.rm) results <- narm(results)
+  results <- narm(results)
   return(results)
 }
 
@@ -387,8 +389,8 @@ nature <- function(x){
 cols_open <- function(df) {
 
   cols <- c('program_year',
-            'npi' = 'covered_recipient_npi',
-            # 'changed'               = 'change_type',
+            'npi'                   = 'covered_recipient_npi',
+            # 'changed'             = 'change_type',
             'covered_recipient'     = 'covered_recipient_type',
             'teaching_ccn'          = 'teaching_hospital_ccn',
             'teaching_id'           = 'teaching_hospital_id',
@@ -405,24 +407,24 @@ cols_open <- function(df) {
             'country'               = 'recipient_country',
             'province'              = 'recipient_province',
             'primary'               = 'covered_recipient_primary_type_1',
-            'primary2'               = 'covered_recipient_primary_type_2',
-            'primary3'               = 'covered_recipient_primary_type_3',
-            'primary4'               = 'covered_recipient_primary_type_4',
-            'primary5'               = 'covered_recipient_primary_type_5',
-            'primary6'               = 'covered_recipient_primary_type_6',
+            'primary2'              = 'covered_recipient_primary_type_2',
+            'primary3'              = 'covered_recipient_primary_type_3',
+            'primary4'              = 'covered_recipient_primary_type_4',
+            'primary5'              = 'covered_recipient_primary_type_5',
+            'primary6'              = 'covered_recipient_primary_type_6',
             # 'primary_other',
             'specialty'             = 'covered_recipient_specialty_1',
-            'specialty2'             = 'covered_recipient_specialty_2',
-            'specialty3'             = 'covered_recipient_specialty_3',
-            'specialty4'             = 'covered_recipient_specialty_4',
-            'specialty5'             = 'covered_recipient_specialty_5',
-            'specialty6'             = 'covered_recipient_specialty_6',
+            'specialty2'            = 'covered_recipient_specialty_2',
+            'specialty3'            = 'covered_recipient_specialty_3',
+            'specialty4'            = 'covered_recipient_specialty_4',
+            'specialty5'            = 'covered_recipient_specialty_5',
+            'specialty6'            = 'covered_recipient_specialty_6',
             # 'specialty_other',
             'license_state'         = 'covered_recipient_license_state_code1',
-            'license_state2'         = 'covered_recipient_license_state_code2',
-            'license_state3'         = 'covered_recipient_license_state_code3',
-            'license_state4'         = 'covered_recipient_license_state_code4',
-            'license_state5'         = 'covered_recipient_license_state_code5',
+            'license_state2'        = 'covered_recipient_license_state_code2',
+            'license_state3'        = 'covered_recipient_license_state_code3',
+            'license_state4'        = 'covered_recipient_license_state_code4',
+            'license_state5'        = 'covered_recipient_license_state_code5',
             # 'license_state_other',
             'payer_id'              = 'applicable_manufacturer_or_applicable_gpo_making_payment_id',
             'payer_sub'             = 'submitting_applicable_manufacturer_or_applicable_gpo_name',
@@ -478,5 +480,89 @@ cols_open <- function(df) {
             'ndc_5'                 = 'associated_drug_or_biological_ndc_5',
             'pdi_5'                 = 'associated_device_or_medical_supply_pdi_5')
 
-  df |> dplyr::select(dplyr::any_of(cols))
+    dplyr::select(df, dplyr::any_of(cols))
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cols_open2 <- function(df) {
+
+  cols <- c(
+      'program_year',
+      'npi',
+      'covered_recipient',
+      'teaching_ccn',
+      'teaching_id',
+      'teaching_name',
+      'first',
+      'middle',
+      'last',
+      'suffix',
+      'address',
+      'city',
+      'state',
+      'zip',
+      'postal',
+      'country',
+      'province',
+      'primary',
+      'primary2',
+      'primary3',
+      'primary4',
+      'primary5',
+      'primary6',
+      'specialty',
+      'specialty2',
+      'specialty3',
+      'specialty4',
+      'specialty5',
+      'specialty6',
+      'license_state',
+      'license_state2',
+      'license_state3',
+      'license_state4',
+      'license_state5',
+      'travel_city',
+      'travel_state',
+      'travel_country',
+      'physician_ownership',
+      'third_party_payment',
+      'third_party_name',
+      'third_party_recipient',
+      'charity',
+      'context',
+      'publish_date',
+      'publish_delay',
+      'publish_dispute',
+      'related_product',
+      'payer_id',
+      'payer_sub',
+      'payer_name',
+      'payer_state',
+      'payer_country',
+      'pay_form',
+      'pay_nature',
+      'pay_total',
+      'pay_date',
+      'pay_count',
+      'row_id',
+      'group_id',
+      'name',
+      'covered',
+      'type',
+      'category',
+      'pdi',
+      'ndc',
+      'ndc.rxcui'      = 'rxcui',
+      'ndc.atc'        = 'atc',
+      'ndc.status'     = 'status',
+      'ndc.brand_name' = 'brand_name',
+      'ndc.drug_name'  = 'drug_name',
+      'ndc.atc_first'  = 'atc_first',
+      'ndc.atc_second' = 'atc_second',
+      'ndc.atc_third'  = 'atc_third',
+      'ndc.atc_fourth' = 'atc_fourth')
+
+    dplyr::select(df, dplyr::any_of(cols))
 }

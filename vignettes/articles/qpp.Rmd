@@ -1,6 +1,6 @@
 ---
 title: "Quality Payment Program"
-subtitle: "Demographics, Patient Mix, and Performance"
+subtitle: "MIPS, APMS, & QPP"
 author: "Andrew Bruce"
 date: "`r Sys.Date()`"
 output: html_document

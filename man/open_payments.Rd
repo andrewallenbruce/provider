@@ -2,6 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
+\alias{open_payments_}
 \title{Relationships with Drug & Medical Device Companies}
 \usage{
 open_payments(
@@ -25,6 +26,8 @@ open_payments(
   na.rm = FALSE,
   ...
 )
+
+open_payments_(year = open_years(), ...)
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
@@ -32,7 +35,7 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 
 \item{npi}{< \emph{integer} > Covered recipient's 10-digit National Provider Identifier}
 
-\item{covered_type}{< \emph{character} > Type of covered recipient:
+\item{covered_type}{< \emph{character} > Type of covered recipient, e.g.:
 \itemize{
 \item \code{"Physician"}
 \item \code{"Non-Physician Practitioner"}
@@ -47,12 +50,12 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 
 \item{zip}{< \emph{character} > Covered recipient's zip code}
 
-\item{teaching_hospital}{< \emph{character} > Name of teaching hospital, e.g.
+\item{teaching_hospital}{< \emph{character} > Name of teaching hospital, e.g.:
 \itemize{
 \item \code{"Vanderbilt University Medical Center"}
 }}
 
-\item{payer}{< \emph{character} > Paying entity's name, e.g.
+\item{payer}{< \emph{character} > Paying entity's name, e.g.:
 \itemize{
 \item \code{"Pharmacosmos Therapeutics Inc."}
 \item \code{"Getinge USA Sales, LLC"}
@@ -60,16 +63,16 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 \item \code{"OrthoScan, Inc."}
 }}
 
-\item{payer_id}{< \emph{integer} > Paying entity's unique Open Payments ID}
+\item{payer_id}{< \emph{integer} > Paying entity's unique 10-digit Open Payments ID}
 
-\item{pay_form}{< \emph{character} > Form of payment:
+\item{pay_form}{< \emph{character} > Form of payment, e.g.:
 \itemize{
 \item \code{"Stock option"}
 \item \code{"Cash or cash equivalent"}
 \item \code{"In-kind items and services"}
 }}
 
-\item{pay_nature}{< \emph{character} > Nature of payment or transfer of value:
+\item{pay_nature}{< \emph{character} > Nature of payment or transfer of value, e.g.:
 \itemize{
 \item \code{"Royalty or License"}
 \item \code{"Charitable Contribution"}
@@ -87,7 +90,7 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
 
-\item{...}{For future use.}
+\item{...}{Pass arguments to \code{\link[=open_payments]{open_payments()}}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
