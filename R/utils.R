@@ -138,14 +138,16 @@ df2chr <- function(df) {
 
 #' Tidy a Data Frame
 #' @param df data frame
-#' @param dt cols to convert to date
 #' @param dtype `mdy` or `ymd`
-#' @param yn cols to convert to logical
-#' @param int cols to convert to integer
-#' @param dbl cols to convert to double
-#' @param chr cols to convert to character
-#' @param up cols to convert to upper case
-#' @param cred cols to remove periods from
+#' @param dt convert to date, default is 'date'
+#' @param yn convert to logical
+#' @param int convert to integer
+#' @param dbl convert to double
+#' @param chr convert to character
+#' @param up convert to upper case
+#' @param cred remove periods from
+#' @param zip normalize zip code
+#' @param lgl convert to logical
 #' @returns tidy data frame
 #' @autoglobal
 #' @export
@@ -159,7 +161,8 @@ tidyup <- function(df,
                    chr = NULL,
                    up = NULL,
                    cred = NULL,
-                   zip = NULL) {
+                   zip = NULL,
+                   lgl = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -167,8 +170,8 @@ tidyup <- function(df,
                   dplyr::across(dplyr::where(is.character), na_blank))
 
   if (!is.null(dtype)) {
-    if (dtype == 'mdy') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::mdy))
-    if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), lubridate::ymd))
+    if (dtype == 'mdy') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), ~ lubridate::mdy(.x, quiet = TRUE)))
+    if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), ~ lubridate::ymd(.x, quiet = TRUE)))
   }
 
   if (!is.null(yn))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn),   yn_logical))
@@ -177,7 +180,9 @@ tidyup <- function(df,
   if (!is.null(chr))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr),  as.character))
   if (!is.null(up))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up),   toupper))
   if (!is.null(cred)) x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))
-  if (!is.null(zip))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(zip), zipcodeR::normalize_zip))
+  if (!is.null(zip))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(zip),  zipcodeR::normalize_zip))
+  if (!is.null(lgl))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(lgl),  as.logical))
+
   return(x)
 }
 

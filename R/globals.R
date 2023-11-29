@@ -186,11 +186,15 @@ utils::globalVariables(c(
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
   "y", # <quality_eligibility>
-  "org", # <quality_eligibility>
-  "org_individualScenario", # <quality_eligibility>
-  "org_groupScenario", # <quality_eligibility>
+  "organizations", # <quality_eligibility>
+  "organizations_individualScenario", # <quality_eligibility>
+  "organizations_groupScenario", # <quality_eligibility>
+  "organizations_apms", # <quality_eligibility>
+  "organizations_virtualGroups", # <quality_eligibility>
   "ind", # <quality_eligibility>
   "grp", # <quality_eligibility>
+  "npi_type", # <quality_eligibility>
+  "org_state", # <quality_eligibility>
   "distro", # <quality_payment>
   "y", # <quality_payment>
   "set", # <quality_payment>

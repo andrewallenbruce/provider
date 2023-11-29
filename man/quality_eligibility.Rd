@@ -4,7 +4,15 @@
 \alias{quality_eligibility}
 \title{Quality Payment Program Eligibility}
 \usage{
-quality_eligibility(year, npi, tidy = TRUE, na.rm = FALSE, ...)
+quality_eligibility(
+  year,
+  npi,
+  tidy = TRUE,
+  unnest = TRUE,
+  pivot = FALSE,
+  na.rm = FALSE,
+  ...
+)
 }
 \arguments{
 \item{year}{< \emph{integer} > // \strong{required} QPP performance year, in \code{YYYY}format.
@@ -15,6 +23,10 @@ assigned to the clinician when they enrolled in Medicare. Multiple rows for
 the same NPI indicate multiple TIN/NPI combinations.}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{unnest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
 
@@ -78,6 +90,28 @@ APM, characterized by an APM Entity ID.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Single NPI/year
 quality_eligibility(year = 2020, npi = 1144544834)
+
+# Multiple NPIs
+aff_npis <- affiliations(facility_ccn = 331302) |>
+            dplyr::pull(npi)
+
+quality_eligibility(year = 2021,
+                    npi = c(aff_npis[1:5],
+                            1234567893,
+                            1043477615,
+                            1144544834))
+
+# Multiple NPIs/years
+
+2017:2023 |>
+purrr::map(\(x)
+       quality_eligibility(year = x,
+                           npi = c(aff_npis[1:5],
+                                   1234567893,
+                                   1043477615,
+                                   1144544834))) |>
+       purrr::list_rbind()
 \dontshow{\}) # examplesIf}
 }

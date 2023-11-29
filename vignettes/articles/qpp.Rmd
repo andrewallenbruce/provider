@@ -81,53 +81,172 @@ select(q, year, measures) |>
 ## Quality Eligibility
 
 ```{r}
+plan(multisession, workers = 4)
+n <- quality_payment_(npi = 1043477615)
+plan(sequential)
+n
+```
+
+
+```{r}
 s <- 2017:2023 |>
-  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
+  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615, na.rm = FALSE)) |>
   purrr::list_rbind()
+```
 
-s |> dplyr::select(year:org_virtual_groups) |> dplyr::glimpse()
+
+```{r}
+apm_flags <- c(
+  'Advanced APM' = 'apms_advanced',
+  'Below Low Volume Threshold' ='apms_lvt',
+  'Small Practice Status' = 'apms_lvt_small',
+  'MIPS APM' = 'apms_mips_apm',
+  'Extreme Hardship' = 'apms_ext_hardship',
+  'Extreme Hardship (Performance Improvement)' = 'apms_ext_hardship_pi',
+  'Extreme Hardship (Cost)' = 'apms_ext_hardship_cost',
+  'Extreme Hardship (Improvement Activities)' = 'apms_ext_hardship_ia',
+  'Extreme Hardship (Quality)' = 'apms_ext_hardship_quality'
+)
+
+apms <- s |> 
+  dplyr::select(year, 
+                npi, 
+                org_name, 
+                dplyr::contains('apms_')) |> 
+  dplyr::rename(dplyr::any_of(apm_flags)) |> 
+  tidyr::pivot_longer(cols = dplyr::any_of(names(apm_flags))) |> 
+  dplyr::filter(!is.na(value)) |> 
+  dplyr::filter(value == TRUE) |> 
+  dplyr::mutate(value = NULL) |> 
+  tidyr::nest(apms_status = name) |> 
+  janitor::remove_empty(which = c("rows", "cols"))
+
+apms
 ```
 
 
 
 ```{r}
-s |> dplyr::select(year, dplyr::starts_with("ind.")) |> dplyr::glimpse()
+# ind <- s |> 
+#   dplyr::select(year, 
+#                 npi, 
+#                 org_name, 
+#                 dplyr::starts_with("ind.")) |> 
+#   tidyr::pivot_longer(cols = c(ind.pi_hardship,
+#                                ind.pi_reweighting,
+#                                ind.ambulatory_surgical_center,
+#                                ind.extreme_hardship,
+#                                ind.extreme_hardship_reasons.quality,
+#                                ind.extreme_hardship_reasons.ia,
+#                                ind.extreme_hardship_reasons.pi,
+#                                ind.extreme_hardship_reasons.cost,
+#                                ind.hospital_based_clinician,
+#                                ind.hpsa_clinician,
+#                                ind.ia_study,
+#                                ind.is_opted_in,
+#                                ind.is_opt_in_eligible,
+#                                ind.mips_eligible_switch,
+#                                ind.non_patient_facing,
+#                                ind.rural_clinician,
+#                                ind.small_group_practitioner,
+#                                ind.low_volume_switch,
+#                                ind.has_payment_adjustment_ccn,
+#                                ind.has_hospital_vbp_ccn,
+#                                ind.facility_based,
+#                                ind.eligible.individual,
+#                                ind.eligible.group,
+#                                ind.eligible.mips_apm,
+#                                ind.eligible.virtual_group)) |> 
+#   dplyr::filter(!is.na(value)) |> 
+#   dplyr::filter(value == TRUE) |> 
+#   dplyr::mutate(name = stringr::str_replace(name, "ind.pi_reweighting", "PI Reweighting"),
+#                 name = stringr::str_replace(name, "ind.hospital_based_clinician", "Hospital-based Clinician"),
+#                 name = stringr::str_replace(name, "ind.mips_eligible_switch", "MIPS Eligible Switch"),
+#                 name = stringr::str_replace(name, "ind.eligible.individual", "Eligible: Individual"),
+#                 name = stringr::str_replace(name, "ind.eligible.group", "Eligible: Group"),
+#                 name = stringr::str_replace(name, "ind.eligible.mips_apm", "Eligible: MIPS APM"),
+#                 name = stringr::str_replace(name, "ind.extreme_hardship", "Extreme Hardship"),
+#                 name = stringr::str_replace(name, "ind.is_opt_in_eligible", "Opt-In Eligible"),
+#                 name = stringr::str_replace(name, "ind.low_volume_switch", "Low Volume Switch"),
+#                 value = NULL) |> 
+#   dplyr::select(year, 
+#                 npi, 
+#                 org_name,
+#                 ind.extreme_hardship_event = ind.extreme_hardship_event.type,
+#                 ind.opt_in_date = ind.opt_in_decision_date,
+#                 ind.hospital_vbp_name,
+#                 ind.hospital_vbp_score,
+#                 specialty_code = ind.specialty.code,
+#                 specialty_description = ind.specialty.description,
+#                 specialty_type = ind.specialty.type,
+#                 specialty_category = ind.specialty.category,
+#                 ind.extreme_hardship_sources,
+#                 ind.lvt_code = ind.low_volume_status_reasons.code,
+#                 ind.lvt_reasons = ind.low_volume_status_reasons.description,
+#                 ind.status = name) |> 
+#   tidyr::nest(ind.statuses = ind.status) |> 
+#   janitor::remove_empty()
+# 
+# ind
 ```
+
 
 
 ```{r}
-s |> dplyr::select(year, dplyr::starts_with("org_apms.")) |> dplyr::glimpse()
+# grp <- s |> 
+#   dplyr::select(year, 
+#                 npi, 
+#                 org_name,
+#                 dplyr::starts_with("grp.")) |> 
+#   tidyr::pivot_longer(cols = c(grp.pi_hardship,
+#                                grp.pi_reweighting,
+#                                grp.ambulatory_surgical_center,
+#                                grp.extreme_hardship,
+#                                grp.extreme_hardship_reasons.quality,
+#                                grp.extreme_hardship_reasons.ia,
+#                                grp.extreme_hardship_reasons.pi,
+#                                grp.extreme_hardship_reasons.cost,
+#                                grp.hospital_based_clinician,
+#                                grp.hpsa_clinician,
+#                                grp.ia_study,
+#                                grp.is_opted_in,
+#                                grp.is_opt_in_eligible,
+#                                grp.mips_eligible_switch,
+#                                grp.non_patient_facing,
+#                                grp.rural_clinician,
+#                                grp.small_group_practitioner,
+#                                grp.low_volume_switch,
+#                                grp.eligible)) |> 
+#   dplyr::filter(!is.na(value)) |> 
+#   dplyr::filter(value == TRUE) |> 
+#   dplyr::mutate(name = stringr::str_replace(name, "grp.pi_hardship", "PI Hardship"),
+#                 name = stringr::str_replace(name, "grp.pi_reweighting", "PI Reweighting"),
+#                 name = stringr::str_replace(name, "grp.hospital_based_clinician", "Hospital-based Clinician"),
+#                 name = stringr::str_replace(name, "grp.mips_eligible_switch", "MIPS Eligible Switch"),
+#                 name = stringr::str_replace(name, "grp.eligible", "Eligible: Group"),
+#                 value = NULL) |> 
+#   dplyr::select(year, 
+#                 npi, 
+#                 org_name,
+#                 grp.extreme_hardship_event = grp.extreme_hardship_event_type,
+#                 grp.opt_in_date = grp.opt_in_decision_date,
+#                 grp.status = name) |> 
+#   tidyr::nest(grp.statuses = grp.status) |> 
+#   janitor::remove_empty()
+# 
+# grp
 ```
+
 
 
 ```{r}
-s |> dplyr::select(year, dplyr::starts_with("grp.")) |> dplyr::glimpse()
+# nests <- dplyr::full_join(ind, grp) |> 
+#   dplyr::full_join(apms)
+# 
+# qpp_e <- top |> 
+#   dplyr::left_join(nests)
+# 
+# n |> 
+#   dplyr::full_join(qpp_e) |> 
+#   dplyr::glimpse()
 ```
-
-
-<br><br>
-
-```{r}
-t <- 2017:2023 |>
-  purrr::map(\(x) quality_eligibility(year = x, npi = 1144544834)) |>
-  purrr::list_rbind()
-
-t |> dplyr::select(year:org_virtual_groups) |> dplyr::glimpse()
-```
-
-
-```{r}
-t |> dplyr::select(year, dplyr::starts_with("ind.")) |> dplyr::glimpse()
-```
-
-```{r}
-t |> 
-  dplyr::select(year, dplyr::starts_with("org_apms.")) |> 
-  dplyr::glimpse()
-```
-
-
-```{r}
-t |> dplyr::select(year, dplyr::starts_with("grp.")) |> dplyr::glimpse()
-```
-

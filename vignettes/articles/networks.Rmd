@@ -15,8 +15,10 @@ knitr::opts_chunk$set(
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
-  dpi       = 600, 
-  out.width = "100%"
+  dpi       = 300, 
+  out.width = "100%",
+  fig.height = 6,
+  fig.width = 10
 )
 options(scipen = 999)
 ```
@@ -26,8 +28,58 @@ library(provider)
 library(dplyr)
 library(purrr)
 library(stringr)
+library(igraph)
 library(tidygraph)
 library(ggraph)
+```
+
+
+Example: Edge Table
+
+```{r}
+edge_table <- tribble(
+  ~from,          ~to,             ~label,
+  "Individual",   "Organization",  "Reassigns Benefits To",
+  "Organization", "Individual",    "Accepts Reassignment From")
+
+edge_table
+```
+
+Example: Node Table
+
+```{r}
+node_table <- tribble(
+  ~name,            ~x,  ~y,
+  "Individual",     1,    0,
+  "Organization",   2,    0)
+
+node_table
+```
+
+
+```{r}
+example <- graph_from_data_frame(
+  d = edge_table,
+  vertices = node_table,
+  directed = T)
+
+example
+```
+
+
+```{r}
+ggraph(example, layout = "manual", x = x, y = y) +
+  geom_node_text(aes(label = name), size = 5) +
+  geom_edge_arc(
+    aes(label = label), 
+                   angle_calc = 'none',
+                   label_dodge = unit(2, 'lines'),
+                   arrow = arrow(length = unit(0.5, 'lines')), 
+                   start_cap = circle(4, 'lines'),
+                   end_cap = circle(4, 'lines'),
+    strength = 1) +
+  theme_void() +
+  coord_fixed()
 ```
 
 

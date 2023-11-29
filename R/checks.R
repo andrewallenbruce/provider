@@ -9,6 +9,7 @@
 #' + [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
+#' @param print return `npi` before Luhn check
 #' @return character vector
 #' @examplesIf interactive()
 #' # Valid:
@@ -23,13 +24,14 @@
 #' @noRd
 validate_npi <- function(npi,
                          arg = rlang::caller_arg(npi),
-                         call = rlang::caller_env()) {
+                         call = rlang::caller_env(),
+                         print = FALSE) {
 
   # Must be numeric
   if (grepl("^[[:digit:]]+$", npi) == FALSE) {
     cli::cli_abort(c(
       "An {.strong NPI} must be {.emph numeric}.",
-      "x" = "{.val {npi}} contains {.emph non-numeric} characters."),
+      "x" = "{.strong {.val {npi}}} contains {.emph non-numeric} characters."),
       call = call)
   }
 
@@ -37,12 +39,14 @@ validate_npi <- function(npi,
   if (nchar(npi) != 10L) {
     cli::cli_abort(c(
       "An {.strong NPI} must be {.emph 10 digits long}.",
-      "x" = "{.val {npi}} contains {.val {nchar(npi)}} digit{?s}."),
+      "x" = "{.strong {.val {npi}}} contains {.val {nchar(npi)}} digit{?s}."),
       call = call)
   }
 
   # Must pass Luhn algorithm
   npi_test <- as.character(npi)
+
+  if (print) return(npi_test)
 
   # Remove the 10th digit to create the 9-position identifier part of the NPI
   id <- unlist(strsplit(npi_test, ""), use.names = FALSE)[1:9]
@@ -80,8 +84,8 @@ validate_npi <- function(npi,
   # Is the syntactically valid NPI identical to the test NPI?
   if (!identical(npi_valid, npi_test)) {
     cli::cli_abort(c(
-      "{.val {npi_test}} is not a valid NPI.",
-      ">" = "Did you mean {.val {npi_valid}}?"),
+      "{.val {npi_test}} is {.emph not} a valid NPI.",
+      ">" = "Did you mean {.strong {.val {npi_valid}}}?"),
       call = call)
   }
   return(npi_test)

@@ -23,7 +23,7 @@ milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/pr
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
 > through publicly available APIs.
 
-## Installation
+# :arrow_double_down: Installation
 
 You can install **`provider`** from [GitHub](https://github.com/) with:
 
@@ -32,7 +32,7 @@ You can install **`provider`** from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-## Usage
+# :beginner: Usage
 
 ``` r
 library(provider)

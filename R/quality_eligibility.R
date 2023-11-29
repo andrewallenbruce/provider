@@ -51,26 +51,64 @@
 #' assigned to the clinician when they enrolled in Medicare. Multiple rows for
 #' the same NPI indicate multiple TIN/NPI combinations.
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param unnest < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param pivot < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param ... For future use.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
+#' # Single NPI/year
 #' quality_eligibility(year = 2020, npi = 1144544834)
+#'
+#' # Multiple NPIs
+#' aff_npis <- affiliations(facility_ccn = 331302) |>
+#'             dplyr::pull(npi)
+#'
+#' quality_eligibility(year = 2021,
+#'                     npi = c(aff_npis[1:5],
+#'                             1234567893,
+#'                             1043477615,
+#'                             1144544834))
+#'
+#' # Multiple NPIs/years
+#'
+#' 2017:2023 |>
+#' purrr::map(\(x)
+#'        quality_eligibility(year = x,
+#'                            npi = c(aff_npis[1:5],
+#'                                    1234567893,
+#'                                    1043477615,
+#'                                    1144544834))) |>
+#'        purrr::list_rbind()
 #' @autoglobal
 #' @export
 quality_eligibility <- function(year,
                                 npi,
                                 tidy = TRUE,
+                                unnest = TRUE,
+                                pivot = FALSE,
                                 na.rm = FALSE,
                                 ...) {
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(2017:2024))
-  npi <- npi %nn% validate_npi(npi)
-  url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
+  rlang::arg_match(year, as.character(2017:2024))
+
+  rlang::check_required(npi)
+
+
+  if (length(npi) == 1L) npi <- npi %nn% validate_npi(npi)
+
+  if (length(npi) > 1L) {
+    npi <- purrr::map_vec(npi, validate_npi)
+    npi <- paste0(unique(npi), collapse = ",")
+  }
+
+
+  url <- glue::glue("https://qpp.cms.gov/api/eligibility/npis/{npi}/?year={year}")
+
   error_body <- function(response) httr2::resp_body_json(response)$error$message
 
   response <- httr2::request(url) |>
@@ -92,62 +130,115 @@ quality_eligibility <- function(year,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (!tidy) results <- df2chr(results)
+  results <- dplyr::tibble(year = year, results$data)
 
   if (tidy) {
 
-    res <- purrr::compact(results) |> purrr::list_flatten()
-
-    results <- dplyr::tibble(
-      year                  = as.integer(year),
-      npi                   = res$data_npi,
-      npi_type              = fct_entype(res$data_nationalProviderIdentifierType),
-      first                 = res$data_firstName,
-      middle                = res$data_middleName,
-      last                  = res$data_lastName,
-      first_approved_date   = lubridate::ymd(res$data_firstApprovedDate),
-      years_in_medicare     = as.integer(res$data_yearsInMedicare),
-      pecos_year            = as.integer(res$data_pecosEnrollmentDate),
-      newly_enrolled        = as.logical(res$data_newlyEnrolled),
-      specialty_description = res$data_specialty$specialtyDescription,
-      specialty_type        = res$data_specialty$typeDescription,
-      specialty_category    = res$data_specialty$categoryReference,
-      is_maqi               = as.logical(res$data_isMaqi),
-      org                   = dplyr::tibble(res$data_organizations))
-
     results <- results |>
-      tidyr::unpack(org, names_sep = "_") |>
-      tidyr::unite("org_address",
-                   dplyr::any_of(c('org_addressLineOne',
-                                   'org_addressLineTwo')),
+      tidyr::unnest(organizations, keep_empty = TRUE, names_sep = "_") |>
+      tidyr::unite("organizations_address",
+                   dplyr::any_of(c('organizations_addressLineOne',
+                                   'organizations_addressLineTwo')),
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
-      tidyr::unnest_longer(dplyr::any_of(c('org_apms',
-                                           'org_virtualGroups')),
-                           keep_empty = TRUE) |>
-      dplyr::rename(ind = org_individualScenario,
-                    grp = org_groupScenario) |>
+      dplyr::rename(ind = organizations_individualScenario,
+                    grp = organizations_groupScenario,
+                    apms = organizations_apms,
+                    vrgrp = organizations_virtualGroups) |>
+      unnest_if_name('vrgrp', wide = TRUE) |>
+      unnest_if_name('apms', wide = TRUE) |>
       tidyr::unpack(ind, names_sep = ".") |>
       tidyr::unpack(grp, names_sep = ".")
 
-    results <- results |>
-      unnest_if_name('org_apms') |>
-      unnest_if_name('org_apms.extremeHardshipReasons') |>
-      unnest_if_name('org_apms.extremeHardshipSources', wide = TRUE) |>
-      unnest_if_name('org_apms.qpPatientScores') |>
-      unnest_if_name('org_apms.qpPaymentScores') |>
+    if (unnest) {
 
-      unnest_if_name('ind.extremeHardshipReasons') |>
-      unnest_if_name('ind.extremeHardshipSources', wide = TRUE) |>
-      unnest_if_name('ind.lowVolumeStatusReasons', wide = TRUE) |>
-      unnest_if_name('ind.specialty') |>
-      unnest_if_name('ind.isEligible') |>
+      results <- results |>
+        unnest_if_name('specialty') |>
+        unnest_if_name('apms.extremeHardshipReasons') |>
+        unnest_if_name('apms.extremeHardshipSources', wide = TRUE) |>
+        unnest_if_name('apms.qpPatientScores') |>
+        unnest_if_name('apms.qpPaymentScores') |>
 
-      unnest_if_name('grp.extremeHardshipReasons') |>
-      unnest_if_name('grp.extremeHardshipSources', wide = TRUE) |>
-      unnest_if_name('grp.lowVolumeStatusReasons', wide = TRUE) |>
-      unnest_if_name('grp.isEligible') |>
-      cols_qelig()
+        unnest_if_name('ind.extremeHardshipReasons') |>
+        unnest_if_name('ind.extremeHardshipSources', wide = TRUE) |>
+        unnest_if_name('ind.lowVolumeStatusReasons', wide = TRUE) |>
+        unnest_if_name('ind.specialty') |>
+        unnest_if_name('ind.isEligible') |>
 
+        unnest_if_name('grp.extremeHardshipReasons') |>
+        unnest_if_name('grp.extremeHardshipSources', wide = TRUE) |>
+        unnest_if_name('grp.lowVolumeStatusReasons', wide = TRUE) |>
+        unnest_if_name('grp.isEligible') |>
+        unnest_if_name('error') |>
+        cols_qelig()
+
+      results <- tidyup(results,
+             dtype = 'ymd',
+             int = c('year',
+                     'years_in_medicare',
+                     # 'apms_lvt_patients',
+                     # 'apms_lvt_year'
+                     'pecos_year'),
+             # dbl = 'apms_lvt_payments',
+             zip = 'org_zip',
+             lgl = c('newly_enrolled',
+                     'is_maqi',
+                     'org_facility_based',
+                     'ams_mips_eligible',
+                     'apms_advanced',
+                     'apms_lvt',
+                     'apms_lvt_small',
+                     'apms_mips_apm',
+                     'apms_ext_hardship',
+                     'apms_ext_hardship_pi',
+                     'apms_ext_hardship_cost',
+                     'apms_ext_hardship_ia',
+                     'apms_ext_hardship_quality',
+                     'ind_hardship_pi',
+                     'ind_reweight_pi',
+                     'ind_asc',
+                     'ind_ext_hardship',
+                     'ind_ext_hardship_pi',
+                     'ind_ext_hardship_cost',
+                     'ind_ext_hardship_ia',
+                     'ind_ext_hardship_quality',
+                     'ind_hospital_based',
+                     'ind_hpsa',
+                     'ind_ia_study',
+                     'ind_opt_in_eligible',
+                     'ind_mips_switch',
+                     'ind_non_patient',
+                     'ind_rural',
+                     'ind_small',
+                     'ind_lvt_switch',
+                     'ind_has_payment_adjustment_ccn',
+                     'ind_has_hospital_vbp_ccn',
+                     'ind_facility',
+                     'ind_eligible_ind',
+                     'ind_eligible_group',
+                     'ind_eligible_apm',
+                     'ind_eligible_virtual',
+                     'grp_hardship_pi',
+                     'grp_reweight_pi',
+                     'grp_asc',
+                     'grp_ext_hardship',
+                     'grp_ext_hardship_pi',
+                     'grp_ext_hardship_cost',
+                     'grp_ext_hardship_ia',
+                     'grp_ext_hardship_quality',
+                     'grp_hospital_based',
+                     'grp_hpsa',
+                     'grp_ia_study',
+                     'grp_opt_in_eligible',
+                     'grp_mips_switch',
+                     'grp_non_patient',
+                     'grp_rural',
+                     'grp_small',
+                     'grp_lvt_switch',
+                     'grp_eligible')) |>
+        dplyr::mutate(npi_type  = fct_entype(npi_type),
+                      org_state = fct_stabb(org_state))
+    }
+    if (pivot) {}
     if (na.rm) results <- narm(results)
   }
   return(results)
@@ -178,121 +269,136 @@ unnest_if_name <- function(df, name, unpack = TRUE, wide = FALSE) {
 #' @noRd
 cols_qelig <- function(df) {
 
-    cols <- c('year'                  = 'year',
-              'npi'                   = 'npi',
-              'npi_type'              = 'npi_type',
-              'first'                 = 'first',
-              'middle'                = 'middle',
-              'last'                  = 'last',
-              'first_approved_date'   = 'first_approved_date',
-              'years_in_medicare'     = 'years_in_medicare',
-              'pecos_enroll_year'     = 'pecos_enroll_year',
-              'newly_enrolled'        = 'newly_enrolled',
-              'specialty_description' = 'specialty_description',
-              'specialty_type'        = 'specialty_type',
-              'specialty_category'    = 'specialty_category',
-              'is_maqi'               = 'is_maqi',
-              'org_name'              = 'org_prvdrOrgName',
-              'org_hosp_vbp_name'     = 'org_hospitalVbpName',
-              'org_facility_based'    = 'org_isFacilityBased',
-              'org_address'           = 'org_address',
-              'org_city'              = 'org_city',
-              'org_state'             = 'org_state',
-              'org_zip'               = 'org_zip',
-              'org_tin'               = 'org_TIN',
+    cols <- c('year'                = 'year',
+              'npi'                 = 'npi',
+              'npi_type'            = 'nationalProviderIdentifierType',
+              'first'               = 'firstName',
+              'middle'              = 'middleName',
+              'last'                = 'lastName',
+              'first_approved_date' = 'firstApprovedDate',
+              'years_in_medicare'   = 'yearsInMedicare',
+              'pecos_year'          = 'pecosEnrollmentDate',
+              'newly_enrolled'      = 'newlyEnrolled',
+              'specialty_desc'      = 'specialty.specialtyDescription',
+              'specialty_type'      = 'specialty.typeDescription',
+              'specialty_category'  = 'specialty.categoryReference',
+              'is_maqi'             = 'isMaqi',
+              'org_name'            = 'organizations_prvdrOrgName',
+              'org_hosp_vbp_name'   = 'organizations_hospitalVbpName',
+              'org_facility_based'  = 'organizations_isFacilityBased',
+              'org_address'         = 'organizations_address',
+              'org_city'            = 'organizations_city',
+              'org_state'           = 'organizations_state',
+              'org_zip'             = 'organizations_zip',
+              # 'org_tin'           = 'organizations_TIN',
+              'qp_status'           = 'qpStatus',
+              'ams_mips_eligible'   = 'amsMipsEligibleClinician',
+              'qp_score_type'       = 'qpScoreType',
+              'error_message'       = 'error.message',
+              'error_type'          = 'error.type',
 
-              'org_apms.advanced_apm_flag'                = 'org_apms.advancedApmFlag',
-              'org_apms.apm_id'                           = 'org_apms.apmId',
-              'org_apms.name'                             = 'org_apms.apmName',
-              'org_apms.entity_name'                      = 'org_apms.entityName',
-              'org_apms.is_opted_in'                      = 'org_apms.isOptedIn',
-              'org_apms.lvt_flag'                         = 'org_apms.lvtFlag',
-              'org_apms.lvt_patients'                     = 'org_apms.lvtPatients',
-              'org_apms.lvt_payments'                     = 'org_apms.lvtPayments',
-              'org_apms.qp_patient_scores'                = 'org_apms.qpPatientScores.me',
-              'org_apms.qp_payment_scores'                = 'org_apms.qpPaymentScores.me',
-              'org_apms.lvt_small_status'                 = 'org_apms.lvtSmallStatus',
-              'org_apms.lvt_performance_year'             = 'org_apms.lvtPerformanceYear',
-              'org_apms.mips_apm_flag'                    = 'org_apms.mipsApmFlag',
-              'org_apms.extreme_hardship'                 = 'org_apms.extremeHardship',
-              'org_apms.extreme_hardship_reasons.pi'      = 'org_apms.extremeHardshipReasons.aci',
-              'org_apms.extreme_hardship_reasons.cost'    = 'org_apms.extremeHardshipReasons.cost',
-              'org_apms.extreme_hardship_reasons.ia'      = 'org_apms.extremeHardshipReasons.improvementActivities',
-              'org_apms.extreme_hardship_reasons.quality' = 'org_apms.extremeHardshipReasons.quality',
-              'org_apms.extreme_hardship_event_type'      = 'org_apms.extremeHardshipEventType',
-              'org_apms.extreme_hardship_sources_1'       = 'org_apms.extremeHardshipSources.1',
-              'org_apms.subdivision_id'                   = 'org_apms.subdivisionId',
-              'org_apms.subdivision_name'                 = 'org_apms.subdivisionName',
-              'org_apms.final_qpc_score'                  = 'org_apms.finalQpcScore',
-              'org_apms.provider_relationship_code'       = 'org_apms.providerRelationshipCode',
+              'apms_advanced'             = 'apms.advancedApmFlag',
+              'apms_id'                   = 'apms.apmId',
+              'apms_name'                 = 'apms.apmName',
+              'apms_entity_name'          = 'apms.entityName',
+              'apms_opted_in'             = 'apms.isOptedIn',
+              'apms_lvt'                  = 'apms.lvtFlag',
+              'apms_lvt_patients'         = 'apms.lvtPatients',
+              'apms_lvt_payments'         = 'apms.lvtPayments',
+              'apms_lvt_small'            = 'apms.lvtSmallStatus',
+              # 'apms_lvt_year'             = 'apms.lvtPerformanceYear',
+              'apms_mips_apm'             = 'apms.mipsApmFlag',
+              'apms_ext_hardship'         = 'apms.extremeHardship',
+              'apms_ext_hardship_pi'      = 'apms.extremeHardshipReasons.aci',
+              'apms_ext_hardship_cost'    = 'apms.extremeHardshipReasons.cost',
+              'apms_ext_hardship_ia'      = 'apms.extremeHardshipReasons.improvementActivities',
+              'apms_ext_hardship_quality' = 'apms.extremeHardshipReasons.quality',
+              'apms_ext_hardship_type'    = 'apms.extremeHardshipEventType',
+              'apms_ext_hardship_sources' = 'apms.extremeHardshipSources.1',
+              'apms_sub_id'               = 'apms.subdivisionId',
+              'apms_sub_name'             = 'apms.subdivisionName',
+              'apms_final_qpc_score'      = 'apms.finalQpcScore',
+              'apms_relationship'         = 'apms.providerRelationshipCode',
+              'apms_qp_patient_scores_me' = 'apms.qpPatientScores.me',
+              'apms_qp_payment_scores_me' = 'apms.qpPaymentScores.me',
 
-              'org_virtual_groups'= 'org_virtualGroups',
+              'virtual_groups'            = 'virtualGroups',
 
-              'ind.pi_hardship'                           = 'ind.aciHardship',
-              'ind.pi_reweighting'                        = 'ind.aciReweighting',
-              'ind.ambulatory_surgical_center'            = 'ind.ambulatorySurgicalCenter',
-              'ind.extreme_hardship'                      = 'ind.extremeHardship',
-              'ind.extreme_hardship_reasons.quality'      = 'ind.extremeHardshipReasons.quality',
-              'ind.extreme_hardship_reasons.ia'           = 'ind.extremeHardshipReasons.improvementActivities',
-              'ind.extreme_hardship_reasons.pi'           = 'ind.extremeHardshipReasons.aci',
-              'ind.extreme_hardship_reasons.cost'         = 'ind.extremeHardshipReasons.cost',
-              'ind.extreme_hardship_event.type'           = 'ind.extremeHardshipEventType',
-              'ind.extreme_hardship_sources'              = 'ind.extremeHardshipSources.1',
-              'ind.hospital_based_clinician'              = 'ind.hospitalBasedClinician',
-              'ind.hpsa_clinician'                        = 'ind.hpsaClinician',
-              'ind.ia_study'                              = 'ind.iaStudy',
-              'ind.is_opted_in'                           = 'ind.isOptedIn',
-              'ind.is_opt_in_eligible'                    = 'ind.isOptInEligible',
-              'ind.mips_eligible_switch'                  = 'ind.mipsEligibleSwitch',
-              'ind.non_patient_facing'                    = 'ind.nonPatientFacing',
-              'ind.opt_in_decision_date'                  = 'ind.optInDecisionDate',
-              'ind.rural_clinician'                       = 'ind.ruralClinician',
-              'ind.small_group_practitioner'              = 'ind.smallGroupPractitioner',
-              'ind.low_volume_switch'                     = 'ind.lowVolumeSwitch',
-              'ind.low_volume_status_reasons.code'        = 'ind.lowVolumeStatusReasons.lowVolStusRsnCd',
-              'ind.low_volume_status_reasons.description' = 'ind.lowVolumeStatusReasons.lowVolStusRsnDesc',
-              'ind.has_payment_adjustment_ccn'            = 'ind.hasPaymentAdjustmentCCN',
-              'ind.has_hospital_vbp_ccn'                  = 'ind.hasHospitalVbpCCN',
-              # 'ind.aggregation_level'                   = 'ind.aggregationLevel',
-              'ind.hospital_vbp_name'                     = 'ind.hospitalVbpName',
-              'ind.hospital_vbp_score'                    = 'ind.hospitalVbpScore',
-              'ind.facility_based'                        = 'ind.isFacilityBased',
-              'ind.specialty.code'                        = 'ind.specialtyCode',
-              'ind.specialty.description'                 = 'ind.specialty.specialtyDescription',
-              'ind.specialty.type'                        = 'ind.specialty.typeDescription',
-              'ind.specialty.category'                    = 'ind.specialty.categoryReference',
-              'ind.eligible.individual'                   = 'ind.isEligible.individual',
-              'ind.eligible.group'                        = 'ind.isEligible.group',
-              'ind.eligible.mips_apm'                     = 'ind.isEligible.mipsApm',
-              # 'ind.eligibility_scenario.'               = 'ind.eligibilityScenario',
-              'ind.eligible.virtual_group'                = 'ind.isEligible.virtualGroup',
+              'ind_hardship_pi'                = 'ind.aciHardship',
+              'ind_reweight_pi'                = 'ind.aciReweighting',
+              'ind_asc'                        = 'ind.ambulatorySurgicalCenter',
+              'ind_ext_hardship'               = 'ind.extremeHardship',
+              'ind_ext_hardship_quality'       = 'ind.extremeHardshipReasons.quality',
+              'ind_ext_hardship_ia'            = 'ind.extremeHardshipReasons.improvementActivities',
+              'ind_ext_hardship_pi'            = 'ind.extremeHardshipReasons.aci',
+              'ind_ext_hardship_cost'          = 'ind.extremeHardshipReasons.cost',
+              'ind_ext_hardship_type'          = 'ind.extremeHardshipEventType',
+              'ind_ext_hardship_sources'       = 'ind.extremeHardshipSources.1',
+              'ind_hospital_based'             = 'ind.hospitalBasedClinician',
+              'ind_hpsa'                       = 'ind.hpsaClinician',
+              'ind_ia_study'                   = 'ind.iaStudy',
+              'ind_opted_in'                   = 'ind.isOptedIn',
+              'ind_opt_in_eligible'            = 'ind.isOptInEligible',
+              'ind_mips_switch'                = 'ind.mipsEligibleSwitch',
+              'ind_non_patient'                = 'ind.nonPatientFacing',
+              'ind_opt_in_date'                = 'ind.optInDecisionDate',
+              'ind_rural'                      = 'ind.ruralClinician',
+              'ind_small'                      = 'ind.smallGroupPractitioner',
+              'ind_lvt_switch'                 = 'ind.lowVolumeSwitch',
+              'ind_lvt_status_code'            = 'ind.lowVolumeStatusReasons.lowVolStusRsnCd',
+              'ind_lvt_status_desc'            = 'ind.lowVolumeStatusReasons.lowVolStusRsnDesc',
+              'ind_has_payment_adjustment_ccn' = 'ind.hasPaymentAdjustmentCCN',
+              'ind_has_hospital_vbp_ccn'       = 'ind.hasHospitalVbpCCN',
+              'ind_hosp_vbp_name'              = 'ind.hospitalVbpName',
+              'ind_hosp_vbp_score'             = 'ind.hospitalVbpScore',
+              'ind_facility'                   = 'ind.isFacilityBased',
+              'ind_specialty_code'             = 'ind.specialtyCode',
+              'ind_specialty_desc'             = 'ind.specialty.specialtyDescription',
+              'ind_specialty_type'             = 'ind.specialty.typeDescription',
+              'ind_specialty_cat'              = 'ind.specialty.categoryReference',
+              'ind_eligible_ind'               = 'ind.isEligible.individual',
+              'ind_eligible_group'             = 'ind.isEligible.group',
+              'ind_eligible_apm'               = 'ind.isEligible.mipsApm',
+              'ind_eligible_virtual'           = 'ind.isEligible.virtualGroup',
+              # 'ind_agg_level'                = 'ind.aggregationLevel',
+              # 'ind_scenario'                 = 'ind.eligibilityScenario',
 
-              'grp.pi_hardship'                     = 'grp.aciHardship',
-              'grp.pi_reweighting'                  = 'grp.aciReweighting',
-              'grp.ambulatory_surgical_center'      = 'grp.ambulatorySurgicalCenter',
-              'grp.extreme_hardship'                = 'grp.extremeHardship',
-              'grp.extreme_hardship_reasons.quality'= 'grp.extremeHardshipReasons.quality',
-              'grp.extreme_hardship_reasons.ia'     = 'grp.extremeHardshipReasons.improvementActivities',
-              'grp.extreme_hardship_reasons.pi'     = 'grp.extremeHardshipReasons.aci',
-              'grp.extreme_hardship_reasons.cost'   = 'grp.extremeHardshipReasons.cost',
-              'grp.extreme_hardship_event_type'     = 'grp.extremeHardshipEventType',
-              'grp.extreme_hardship_sources'        = 'grp.extremeHardship',
-              'grp.extreme_hardship_sources_1'      = 'grp.extremeHardshipSources.1',
-              'grp.hospital_based_clinician'        = 'grp.hospitalBasedClinician',
-              'grp.hpsa_clinician'                  = 'grp.hpsaClinician',
-              'grp.ia_study'                        = 'grp.iaStudy',
-              'grp.is_opted_in'                     = 'grp.isOptedIn',
-              'grp.is_opt_in_eligible'              = 'grp.isOptInEligible',
-              'grp.mips_eligible_switch'            = 'grp.mipsEligibleSwitch',
-              'grp.non_patient_facing'              = 'grp.nonPatientFacing',
-              'grp.opt_in_decision_date'            = 'grp.optInDecisionDate',
-              'grp.rural_clinician'                 = 'grp.ruralClinician',
-              'grp.small_group_practitioner'        = 'grp.smallGroupPractitioner',
-              'grp.low_volume_switch'               = 'grp.lowVolumeSwitch',
-              'grp.low_volume_status_reasons'       = 'grp.lowVolumeStatusReasons',
-              # 'grp.aggregation_level'             = 'grp.aggregationLevel',
-              'grp.eligible'                        = 'grp.isEligible.group'
+              'grp_hardship_pi'          = 'grp.aciHardship',
+              'grp_hardship_reweight'    = 'grp.aciReweighting',
+              'grp_asc'                  = 'grp.ambulatorySurgicalCenter',
+              'grp_ext_hardship'         = 'grp.extremeHardship',
+              'grp_ext_hardship_quality' = 'grp.extremeHardshipReasons.quality',
+              'grp_ext_hardship_ia'      = 'grp.extremeHardshipReasons.improvementActivities',
+              'grp_ext_hardship_pi'      = 'grp.extremeHardshipReasons.aci',
+              'grp_ext_hardship_cost'    = 'grp.extremeHardshipReasons.cost',
+              'grp_ext_hardship_type'    = 'grp.extremeHardshipEventType',
+              'grp_ext_hardship_sources' = 'grp.extremeHardshipSources.1',
+              'grp_hospital_based'       = 'grp.hospitalBasedClinician',
+              'grp_hpsa'                 = 'grp.hpsaClinician',
+              'grp_ia_study'             = 'grp.iaStudy',
+              'grp_opted_in'             = 'grp.isOptedIn',
+              'grp_opt_in_eligible'      = 'grp.isOptInEligible',
+              'grp_mips_switch'          = 'grp.mipsEligibleSwitch',
+              'grp_non_patient'          = 'grp.nonPatientFacing',
+              'grp_opt_in_date'          = 'grp.optInDecisionDate',
+              'grp_rural'                = 'grp.ruralClinician',
+              'grp_small'                = 'grp.smallGroupPractitioner',
+              'grp_lvt_switch'           = 'grp.lowVolumeSwitch',
+              'grp_lvt_status'           = 'grp.lowVolumeStatusReasons',
+              'grp_eligible'             = 'grp.isEligible.group'
+              # 'grp_agg_level'          = 'grp.aggregationLevel',
               )
 
   df |> dplyr::select(dplyr::any_of(cols))
+}
+
+
+#' Convert enumeration types to labelled factor
+#' @param x vector
+#' @autoglobal
+#' @noRd
+fct_enum <- function(x) {
+  factor(x,
+         levels = c("NPI-1", "NPI-2"),
+         labels = c("Individual", "Organization"))
 }

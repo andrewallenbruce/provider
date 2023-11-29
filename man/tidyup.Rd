@@ -14,7 +14,8 @@ tidyup(
   chr = NULL,
   up = NULL,
   cred = NULL,
-  zip = NULL
+  zip = NULL,
+  lgl = NULL
 )
 }
 \arguments{
@@ -22,19 +23,23 @@ tidyup(
 
 \item{dtype}{\code{mdy} or \code{ymd}}
 
-\item{dt}{cols to convert to date}
+\item{dt}{convert to date, default is 'date'}
 
-\item{yn}{cols to convert to logical}
+\item{yn}{convert to logical}
 
-\item{int}{cols to convert to integer}
+\item{int}{convert to integer}
 
-\item{dbl}{cols to convert to double}
+\item{dbl}{convert to double}
 
-\item{chr}{cols to convert to character}
+\item{chr}{convert to character}
 
-\item{up}{cols to convert to upper case}
+\item{up}{convert to upper case}
 
-\item{cred}{cols to remove periods from}
+\item{cred}{remove periods from}
+
+\item{zip}{normalize zip code}
+
+\item{lgl}{convert to logical}
 }
 \value{
 tidy data frame
