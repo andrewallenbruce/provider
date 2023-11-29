@@ -128,7 +128,9 @@ by provider, service and geography.</p>
 <span>  rbcs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">utilization_</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="years.html">util_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -245,7 +247,7 @@ Classifications to HCPCS codes</p></dd>
 
 
 <dt>...</dt>
-<dd><p>For future use.</p></dd>
+<dd><p>Pass arguments to <code>utilization()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -307,9 +309,9 @@ and state-wide by HCPCS code and place of service.</p>
 <span class="r-in"><span><span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Parallelized version</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="utilization_.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, type <span class="op">=</span> <span class="st">"provider"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="utilization_.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, type <span class="op">=</span> <span class="st">"service"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="utilization_.html">utilization_</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"0002A"</span>, type <span class="op">=</span> <span class="st">"geography"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">utilization_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, type <span class="op">=</span> <span class="st">"provider"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">utilization_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, type <span class="op">=</span> <span class="st">"service"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">utilization_</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"0002A"</span>, type <span class="op">=</span> <span class="st">"geography"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

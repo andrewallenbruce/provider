@@ -118,7 +118,7 @@
 <!-- badges: start -->
 
 <blockquote>
-<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs.</p>
+<p><span class="emoji" data-emoji="package">📦</span> Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs.</p>
 </blockquote>
 <div class="section level2">
 <h2 id="arrow_double_down-installation">
@@ -345,45 +345,26 @@
 <code>nppes()</code><a class="anchor" aria-label="anchor" href="#nppes"></a>
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720098791</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/add_counties.html">add_counties</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">zip</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 34</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi           &lt;chr&gt; "1720098791"</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ entity_type   &lt;fct&gt; Organization</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enum_date     &lt;date&gt; 2006-08-09</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ last_update   &lt;date&gt; 2011-10-06</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ status        &lt;fct&gt; Active</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ gender        &lt;fct&gt; Unknown</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ organization  &lt;chr&gt; "IRWIN COUNTY HOSPITAL"</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_part      &lt;lgl&gt; FALSE</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ purpose       &lt;fct&gt; Practice</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ address       &lt;chr&gt; "710 N IRWIN AVE"</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city          &lt;chr&gt; "OCILLA"</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state         &lt;ord&gt; GA</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip           &lt;chr&gt; "31774"</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ country       &lt;chr&gt; "US"</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ phone         &lt;chr&gt; "229-468-3800"</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ fax           &lt;chr&gt; "229-468-9991"</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_prefix     &lt;chr&gt; "Mrs."</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_first      &lt;chr&gt; "SHARON"</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_middle     &lt;chr&gt; "P"</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_last       &lt;chr&gt; "GRIFFIN"</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_title      &lt;chr&gt; "CFO"</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ao_phone      &lt;chr&gt; "2294683862"</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_code       &lt;chr&gt; "282N00000X"</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_primary    &lt;lgl&gt; TRUE</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_desc       &lt;chr&gt; "General Acute Care Hospital"</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_license    &lt;chr&gt; "86112S"</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tx_state      &lt;ord&gt; GA</span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_code       &lt;chr&gt; "05"</span></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_desc       &lt;chr&gt; "MEDICAID"</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_state      &lt;ord&gt; GA</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ id_identifier &lt;chr&gt; "000000987A"</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ county        &lt;chr&gt; "Irwin"</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ lat           &lt;dbl&gt; 31.6</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ lng           &lt;dbl&gt; -83.3</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1497535637</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="reference/add_counties.html">add_counties</a></span><span class="op">(</span><span class="va">state</span>, </span>
+<span>               <span class="va">zip</span>, </span>
+<span>               add_fips <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>               add_geo <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>               as_sf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 1 feature and 25 fields</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -83.3 ymin: 30.9 xmax: -83.3 ymax: 30.9</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 26</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   npi    entity_type enum_date  cert_date  last_update status first last  gender</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;  &lt;fct&gt;       &lt;date&gt;     &lt;date&gt;     &lt;date&gt;      &lt;fct&gt;  &lt;chr&gt; &lt;chr&gt; &lt;fct&gt; </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 14975… Individual  2023-10-04 2023-10-05 2023-10-05  Active CART… ADAMS Male  </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: credential &lt;chr&gt;, sole_prop &lt;lgl&gt;, purpose &lt;fct&gt;,</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;ord&gt;, zip &lt;chr&gt;, country &lt;chr&gt;,</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   phone &lt;chr&gt;, tx_code &lt;chr&gt;, tx_primary &lt;lgl&gt;, tx_desc &lt;chr&gt;,</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   tx_license &lt;chr&gt;, tx_state &lt;ord&gt;, county &lt;chr&gt;, county_fips &lt;chr&gt;,</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="open_payments">
@@ -410,22 +391,22 @@
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ primary             &lt;chr&gt; "Physician Assistant"</span></span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty           &lt;chr&gt; "Physician Assistants &amp; Advanced Practice Nursing …</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ license_state       &lt;ord&gt; OK</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_id            &lt;chr&gt; "100000866821"</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_sub           &lt;chr&gt; "Organon LLC"</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_name          &lt;chr&gt; "Organon LLC"</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_state         &lt;ord&gt; NJ</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_country       &lt;chr&gt; "United States"</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_total           &lt;dbl&gt; 17.43</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_date            &lt;date&gt; 2021-08-25</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_count           &lt;int&gt; 1</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_form            &lt;chr&gt; "In-kind items and services"</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_nature          &lt;chr&gt; "Food and Beverage"</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ physician_ownership &lt;lgl&gt; FALSE</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ third_party_payment &lt;chr&gt; "No Third Party Payment"</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_date        &lt;date&gt; 2023-06-30</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_delay       &lt;lgl&gt; FALSE</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_dispute     &lt;lgl&gt; FALSE</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ related_product     &lt;lgl&gt; TRUE</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ physician_ownership &lt;lgl&gt; FALSE</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ third_party_payment &lt;chr&gt; "No Third Party Payment"</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_date        &lt;date&gt; 2023-06-30</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_delay       &lt;lgl&gt; FALSE</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ publish_dispute     &lt;lgl&gt; FALSE</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ related_product     &lt;lgl&gt; TRUE</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_id            &lt;chr&gt; "100000866821"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_sub           &lt;chr&gt; "Organon LLC"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_name          &lt;chr&gt; "Organon LLC"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_state         &lt;ord&gt; NJ</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payer_country       &lt;chr&gt; "United States"</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_form            &lt;chr&gt; "In-kind items and services"</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_nature          &lt;chr&gt; "Food and Beverage"</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_total           &lt;dbl&gt; 17.43</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_date            &lt;date&gt; 2021-08-25</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pay_count           &lt;int&gt; 1</span></span>
 <span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ row_id              &lt;int&gt; 1</span></span>
 <span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_id            &lt;int&gt; 1</span></span>
 <span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ name                &lt;chr&gt; "NEXPLANON"</span></span>
@@ -433,15 +414,15 @@
 <span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ type                &lt;chr&gt; "Drug"</span></span>
 <span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ category            &lt;chr&gt; "CONTRACEPTIVES"</span></span>
 <span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc                 &lt;chr&gt; "78206-145-01"</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rxcui               &lt;chr&gt; "1111011"</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ atc                 &lt;chr&gt; "G03AC"</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ status              &lt;chr&gt; "ACTIVE"</span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ brand_name          &lt;chr&gt; "NEXPLANON"</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ drug_name           &lt;chr&gt; "etonogestrel 68 MG Drug Implant [Nexplanon]"</span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ atc_first           &lt;chr&gt; "genito urinary system and sex hormones"</span></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ atc_second          &lt;chr&gt; "sex hormones and modulators of the genital system"</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ atc_third           &lt;chr&gt; "hormonal contraceptives for systemic use"</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ atc_fourth          &lt;chr&gt; "progestogens"</span></span></code></pre></div>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.rxcui           &lt;chr&gt; "1111011"</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.atc             &lt;chr&gt; "G03AC"</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.status          &lt;chr&gt; "ACTIVE"</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.brand_name      &lt;chr&gt; "NEXPLANON"</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.drug_name       &lt;chr&gt; "etonogestrel 68 MG Drug Implant [Nexplanon]"</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.atc_first       &lt;chr&gt; "genito urinary system and sex hormones"</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.atc_second      &lt;chr&gt; "sex hormones and modulators of the genital system"</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.atc_third       &lt;chr&gt; "hormonal contraceptives for systemic use"</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ndc.atc_fourth      &lt;chr&gt; "progestogens"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="opt_out">
@@ -823,9 +804,21 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+<h2 id="page_facing_up-code-of-conduct">
+<span class="emoji" data-emoji="page_facing_up">📄</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#page_facing_up-code-of-conduct"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="balance_scale-code-of-conduct">
+<span class="emoji" data-emoji="balance_scale">⚖️</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#balance_scale-code-of-conduct"></a>
 </h2>
 <p>Please note that the <code>provider</code> project is released with a <a href="https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div class="section level2">
+<h2 id="classical_building-governance">
+<span class="emoji" data-emoji="classical_building">🏛️</span> Governance<a class="anchor" aria-label="anchor" href="#classical_building-governance"></a>
+</h2>
+<p>This project is primarily maintained by <a href="https://twitter.com/riannone" class="external-link">Andrew Bruce</a>. Other authors may occasionally assist with some of these duties.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

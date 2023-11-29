@@ -106,14 +106,16 @@ Advanced Alternative Payment Models (APMs) tracks.</p>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  nest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">quality_payment_</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> QPP performance year, in <code>YYYY</code>format.
-Run <code><a href="years.html">qpp_years()</a></code> to return a vector of the years currently available.</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; // <strong>required</strong> Year data was reported, in <code>YYYY</code>
+format. Run <code><a href="years.html">qpp_years()</a></code> to return a vector of the years currently available.</p></dd>
 
 
 <dt>npi</dt>
@@ -160,7 +162,7 @@ attributed to the clinician; drives most of the data returned.</p><ul><li><p><co
 
 
 <dt>...</dt>
-<dd><p>For future use.</p></dd>
+<dd><p>Pass arguments to <code>quality_payment()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

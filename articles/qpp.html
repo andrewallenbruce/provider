@@ -162,9 +162,12 @@ Bruce</h4>
 <span><span class="co">#&gt; $ tx_license  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "005279"</span></span>
 <span><span class="co">#&gt; $ tx_state    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> GA</span></span></code></pre>
 <p><br></p>
+<div class="section level2">
+<h2 id="quality-payment-reporting">Quality Payment Reporting<a class="anchor" aria-label="anchor" href="#quality-payment-reporting"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment_.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">q</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 20</span></span></span>
@@ -180,9 +183,9 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre>
-<div class="section level2">
-<h2 id="special-statuses">Special Statuses<a class="anchor" aria-label="anchor" href="#special-statuses"></a>
-</h2>
+<div class="section level3">
+<h3 id="special-statuses">Special Statuses<a class="anchor" aria-label="anchor" href="#special-statuses"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">statuses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">statuses</span><span class="op">)</span></span></code></pre></div>
@@ -216,9 +219,9 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> PI Reweighting         3</span></span></code></pre>
 <p><br></p>
 </div>
-<div class="section level2">
-<h2 id="individual-category-measures">Individual Category Measures<a class="anchor" aria-label="anchor" href="#individual-category-measures"></a>
-</h2>
+<div class="section level3">
+<h3 id="individual-category-measures">Individual Category Measures<a class="anchor" aria-label="anchor" href="#individual-category-measures"></a>
+</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span></span></code></pre></div>
@@ -249,12 +252,13 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Cost                       6</span></span></code></pre>
 <p><br></p>
 </div>
+</div>
 <div class="section level2">
-<h2 id="quality-eligibility">Quality Eligibility<a class="anchor" aria-label="anchor" href="#quality-eligibility"></a>
+<h2 id="quality-payment-eligibility">Quality Payment Eligibility<a class="anchor" aria-label="anchor" href="#quality-payment-eligibility"></a>
 </h2>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment_.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">n</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
