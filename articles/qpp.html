@@ -270,161 +270,16 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">apm_flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">'Advanced APM'</span> <span class="op">=</span> <span class="st">'apms_advanced'</span>,</span>
-<span>  <span class="st">'Below Low Volume Threshold'</span> <span class="op">=</span><span class="st">'apms_lvt'</span>,</span>
-<span>  <span class="st">'Small Practice Status'</span> <span class="op">=</span> <span class="st">'apms_lvt_small'</span>,</span>
-<span>  <span class="st">'MIPS APM'</span> <span class="op">=</span> <span class="st">'apms_mips_apm'</span>,</span>
-<span>  <span class="st">'Extreme Hardship'</span> <span class="op">=</span> <span class="st">'apms_ext_hardship'</span>,</span>
-<span>  <span class="st">'Extreme Hardship (Performance Improvement)'</span> <span class="op">=</span> <span class="st">'apms_ext_hardship_pi'</span>,</span>
-<span>  <span class="st">'Extreme Hardship (Cost)'</span> <span class="op">=</span> <span class="st">'apms_ext_hardship_cost'</span>,</span>
-<span>  <span class="st">'Extreme Hardship (Improvement Activities)'</span> <span class="op">=</span> <span class="st">'apms_ext_hardship_ia'</span>,</span>
-<span>  <span class="st">'Extreme Hardship (Quality)'</span> <span class="op">=</span> <span class="st">'apms_ext_hardship_quality'</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">apms</span> <span class="op">&lt;-</span> <span class="va">s</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                <span class="va">npi</span>, </span>
-<span>                <span class="va">org_name</span>, </span>
-<span>                <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">'apms_'</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="va">apm_flags</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">apm_flags</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>apms_status <span class="op">=</span> <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">apms</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 10</span></span></span>
-<span><span class="co">#&gt;    year npi        org_name       apms_id apms_name apms_entity_name apms_sub_id</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 THE MILTON S … 08      Medicare… Central PA Heal… 01         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 THE MILTON S … 08      Medicare… Central PA Heal… 01         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 THE MILTON S … 08      Medicare… Central PA Heal… 01         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 THE MILTON S … 08      Medicare… Central PA Heal… 01         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 THE MILTON S … 08      MEDICARE… Central PA Heal… 01         </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: apms_sub_name &lt;chr&gt;, apms_relationship &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   apms_status &lt;list&gt;</span></span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ind &lt;- s |&gt; </span></span>
-<span><span class="co">#   dplyr::select(year, </span></span>
-<span><span class="co">#                 npi, </span></span>
-<span><span class="co">#                 org_name, </span></span>
-<span><span class="co">#                 dplyr::starts_with("ind.")) |&gt; </span></span>
-<span><span class="co">#   tidyr::pivot_longer(cols = c(ind.pi_hardship,</span></span>
-<span><span class="co">#                                ind.pi_reweighting,</span></span>
-<span><span class="co">#                                ind.ambulatory_surgical_center,</span></span>
-<span><span class="co">#                                ind.extreme_hardship,</span></span>
-<span><span class="co">#                                ind.extreme_hardship_reasons.quality,</span></span>
-<span><span class="co">#                                ind.extreme_hardship_reasons.ia,</span></span>
-<span><span class="co">#                                ind.extreme_hardship_reasons.pi,</span></span>
-<span><span class="co">#                                ind.extreme_hardship_reasons.cost,</span></span>
-<span><span class="co">#                                ind.hospital_based_clinician,</span></span>
-<span><span class="co">#                                ind.hpsa_clinician,</span></span>
-<span><span class="co">#                                ind.ia_study,</span></span>
-<span><span class="co">#                                ind.is_opted_in,</span></span>
-<span><span class="co">#                                ind.is_opt_in_eligible,</span></span>
-<span><span class="co">#                                ind.mips_eligible_switch,</span></span>
-<span><span class="co">#                                ind.non_patient_facing,</span></span>
-<span><span class="co">#                                ind.rural_clinician,</span></span>
-<span><span class="co">#                                ind.small_group_practitioner,</span></span>
-<span><span class="co">#                                ind.low_volume_switch,</span></span>
-<span><span class="co">#                                ind.has_payment_adjustment_ccn,</span></span>
-<span><span class="co">#                                ind.has_hospital_vbp_ccn,</span></span>
-<span><span class="co">#                                ind.facility_based,</span></span>
-<span><span class="co">#                                ind.eligible.individual,</span></span>
-<span><span class="co">#                                ind.eligible.group,</span></span>
-<span><span class="co">#                                ind.eligible.mips_apm,</span></span>
-<span><span class="co">#                                ind.eligible.virtual_group)) |&gt; </span></span>
-<span><span class="co">#   dplyr::filter(!is.na(value)) |&gt; </span></span>
-<span><span class="co">#   dplyr::filter(value == TRUE) |&gt; </span></span>
-<span><span class="co">#   dplyr::mutate(name = stringr::str_replace(name, "ind.pi_reweighting", "PI Reweighting"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.hospital_based_clinician", "Hospital-based Clinician"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.mips_eligible_switch", "MIPS Eligible Switch"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.eligible.individual", "Eligible: Individual"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.eligible.group", "Eligible: Group"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.eligible.mips_apm", "Eligible: MIPS APM"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.extreme_hardship", "Extreme Hardship"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.is_opt_in_eligible", "Opt-In Eligible"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "ind.low_volume_switch", "Low Volume Switch"),</span></span>
-<span><span class="co">#                 value = NULL) |&gt; </span></span>
-<span><span class="co">#   dplyr::select(year, </span></span>
-<span><span class="co">#                 npi, </span></span>
-<span><span class="co">#                 org_name,</span></span>
-<span><span class="co">#                 ind.extreme_hardship_event = ind.extreme_hardship_event.type,</span></span>
-<span><span class="co">#                 ind.opt_in_date = ind.opt_in_decision_date,</span></span>
-<span><span class="co">#                 ind.hospital_vbp_name,</span></span>
-<span><span class="co">#                 ind.hospital_vbp_score,</span></span>
-<span><span class="co">#                 specialty_code = ind.specialty.code,</span></span>
-<span><span class="co">#                 specialty_description = ind.specialty.description,</span></span>
-<span><span class="co">#                 specialty_type = ind.specialty.type,</span></span>
-<span><span class="co">#                 specialty_category = ind.specialty.category,</span></span>
-<span><span class="co">#                 ind.extreme_hardship_sources,</span></span>
-<span><span class="co">#                 ind.lvt_code = ind.low_volume_status_reasons.code,</span></span>
-<span><span class="co">#                 ind.lvt_reasons = ind.low_volume_status_reasons.description,</span></span>
-<span><span class="co">#                 ind.status = name) |&gt; </span></span>
-<span><span class="co">#   tidyr::nest(ind.statuses = ind.status) |&gt; </span></span>
-<span><span class="co">#   janitor::remove_empty()</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># ind</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># grp &lt;- s |&gt; </span></span>
-<span><span class="co">#   dplyr::select(year, </span></span>
-<span><span class="co">#                 npi, </span></span>
-<span><span class="co">#                 org_name,</span></span>
-<span><span class="co">#                 dplyr::starts_with("grp.")) |&gt; </span></span>
-<span><span class="co">#   tidyr::pivot_longer(cols = c(grp.pi_hardship,</span></span>
-<span><span class="co">#                                grp.pi_reweighting,</span></span>
-<span><span class="co">#                                grp.ambulatory_surgical_center,</span></span>
-<span><span class="co">#                                grp.extreme_hardship,</span></span>
-<span><span class="co">#                                grp.extreme_hardship_reasons.quality,</span></span>
-<span><span class="co">#                                grp.extreme_hardship_reasons.ia,</span></span>
-<span><span class="co">#                                grp.extreme_hardship_reasons.pi,</span></span>
-<span><span class="co">#                                grp.extreme_hardship_reasons.cost,</span></span>
-<span><span class="co">#                                grp.hospital_based_clinician,</span></span>
-<span><span class="co">#                                grp.hpsa_clinician,</span></span>
-<span><span class="co">#                                grp.ia_study,</span></span>
-<span><span class="co">#                                grp.is_opted_in,</span></span>
-<span><span class="co">#                                grp.is_opt_in_eligible,</span></span>
-<span><span class="co">#                                grp.mips_eligible_switch,</span></span>
-<span><span class="co">#                                grp.non_patient_facing,</span></span>
-<span><span class="co">#                                grp.rural_clinician,</span></span>
-<span><span class="co">#                                grp.small_group_practitioner,</span></span>
-<span><span class="co">#                                grp.low_volume_switch,</span></span>
-<span><span class="co">#                                grp.eligible)) |&gt; </span></span>
-<span><span class="co">#   dplyr::filter(!is.na(value)) |&gt; </span></span>
-<span><span class="co">#   dplyr::filter(value == TRUE) |&gt; </span></span>
-<span><span class="co">#   dplyr::mutate(name = stringr::str_replace(name, "grp.pi_hardship", "PI Hardship"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "grp.pi_reweighting", "PI Reweighting"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "grp.hospital_based_clinician", "Hospital-based Clinician"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "grp.mips_eligible_switch", "MIPS Eligible Switch"),</span></span>
-<span><span class="co">#                 name = stringr::str_replace(name, "grp.eligible", "Eligible: Group"),</span></span>
-<span><span class="co">#                 value = NULL) |&gt; </span></span>
-<span><span class="co">#   dplyr::select(year, </span></span>
-<span><span class="co">#                 npi, </span></span>
-<span><span class="co">#                 org_name,</span></span>
-<span><span class="co">#                 grp.extreme_hardship_event = grp.extreme_hardship_event_type,</span></span>
-<span><span class="co">#                 grp.opt_in_date = grp.opt_in_decision_date,</span></span>
-<span><span class="co">#                 grp.status = name) |&gt; </span></span>
-<span><span class="co">#   tidyr::nest(grp.statuses = grp.status) |&gt; </span></span>
-<span><span class="co">#   janitor::remove_empty()</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># grp</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># nests &lt;- dplyr::full_join(ind, grp) |&gt; </span></span>
-<span><span class="co">#   dplyr::full_join(apms)</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># qpp_e &lt;- top |&gt; </span></span>
-<span><span class="co">#   dplyr::left_join(nests)</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># n |&gt; </span></span>
-<span><span class="co">#   dplyr::full_join(qpp_e) |&gt; </span></span>
-<span><span class="co">#   dplyr::glimpse()</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `purrr::map()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `cols_qelig()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'results' not found</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'results' not found</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
