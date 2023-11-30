@@ -248,9 +248,9 @@ utilization <- function(year,
     results$year <- year
 
     results <- switch(type,
-      "provider"  = tidyup_provider(results, nest = nest, detailed = detailed),
-      "service"   = tidyup_service(results, rbcs = rbcs),
-      "geography" = tidyup_geography(results, rbcs = rbcs))
+      "provider"  = tidyup_provider.util(results, nest = nest, detailed = detailed),
+      "service"   = tidyup_service.util(results, rbcs = rbcs),
+      "geography" = tidyup_geography.util(results, rbcs = rbcs))
 
     if (na.rm) results <- narm(results)
   }
@@ -266,7 +266,8 @@ utilization <- function(year,
 #' @export
 utilization_ <- function(year = util_years(),
                          ...) {
-  furrr::future_map_dfr(year, utilization, ..., .options = furrr::furrr_options(seed = NULL))
+  furrr::future_map_dfr(year, utilization, ...,
+                        .options = furrr::furrr_options(seed = NULL))
 
 }
 
@@ -275,7 +276,7 @@ utilization_ <- function(year = util_years(),
 #' @param detailed < *boolean* > Include `detailed` column
 #' @autoglobal
 #' @noRd
-tidyup_provider <- function(results, nest, detailed) {
+tidyup_provider.util <- function(results, nest, detailed) {
 
   results <- janitor::clean_names(results) |>
     cols_util("provider") |>
@@ -330,7 +331,7 @@ tidyup_provider <- function(results, nest, detailed) {
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
-tidyup_service <- function(results, rbcs) {
+tidyup_service.util <- function(results, rbcs) {
 
   results$level <- "Provider"
 
@@ -359,7 +360,7 @@ tidyup_service <- function(results, rbcs) {
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
-tidyup_geography <- function(results, rbcs) {
+tidyup_geography.util <- function(results, rbcs) {
 
   results <- tidyup(results,
                     yn           = "_ind",

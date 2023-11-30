@@ -7,7 +7,7 @@
 \usage{
 prescribers(
   year,
-  type = "provider",
+  type,
   npi = NULL,
   first = NULL,
   last = NULL,
@@ -22,6 +22,8 @@ prescribers(
   ruca = NULL,
   country = NULL,
   specialty = NULL,
+  brand = NULL,
+  generic = NULL,
   tidy = TRUE,
   na.rm = TRUE,
   ...
@@ -62,6 +64,12 @@ prescriber's name}
 
 \item{specialty}{< \emph{character} > Prescriber specialty code reported on the
 largest number of claims submitted}
+
+\item{brand}{< \emph{character} > Brand name (trademarked name) of the drug filled}
+
+\item{generic}{< \emph{character} > USAN generic name of the drug filled (short
+version); A term referring to the chemical ingredient of a drug rather than
+the trademarked brand name under which the drug is sold}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -128,16 +136,17 @@ and state-wide by HCPCS code and place of service.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-prescribers(year = 2020, npi = 1003000423) |> dplyr::glimpse()
-prescribers(year = 2021, npi = 1003000126) |> dplyr::glimpse()
-prescribers(year = 2019, npi = 1003000126)
+prescribers(year = 2020, type = 'provider', npi = 1003000423)
+prescribers(year = 2021, type = 'provider', npi = 1003000126)
+prescribers(year = 2019, type = 'drug', npi = 1003000126)
 
 # Use the years helper function to retrieve results for every year:
 rx_years() |>
-map(\(x) prescribers(year = x, npi = 1043477615)) |>
+map(\(x) prescribers(year = x, type = 'provider', npi = 1043477615)) |>
 list_rbind()
 
 # Parallelized version
-prescribers_(npi = 1043477615)
+prescribers_(type = 'provider', npi = 1043477615)
+prescribers_(type = 'drug', npi = 1003000423)
 \dontshow{\}) # examplesIf}
 }

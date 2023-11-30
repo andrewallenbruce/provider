@@ -163,10 +163,14 @@ utils::globalVariables(c(
   "y", # <pending>
   "distro", # <prescribers>
   "y", # <prescribers>
-  "address", # <prescribers>
-  "entity_type", # <prescribers>
-  "tot_benes", # <prescribers>
-  "bene_race_wht", # <prescribers>
+  "state", # <tidyup_drug.rx>
+  "level", # <tidyup_drug.rx>
+  "address", # <tidyup_provider.rx>
+  "entity_type", # <tidyup_provider.rx>
+  "gender", # <tidyup_provider.rx>
+  "state", # <tidyup_provider.rx>
+  "tot_benes", # <tidyup_provider.rx>
+  "bene_race_wht", # <tidyup_provider.rx>
   "y", # <providers>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
@@ -244,29 +248,29 @@ utils::globalVariables(c(
   "state.abb", # <utilization>
   "distro", # <utilization>
   "y", # <utilization>
-  "address", # <tidyup_provider>
-  "specialty", # <tidyup_provider>
-  "tot_allowed", # <tidyup_provider>
-  "tot_payment", # <tidyup_provider>
-  "tot_srvcs", # <tidyup_provider>
-  "tot_benes", # <tidyup_provider>
-  "entity_type", # <tidyup_provider>
-  "gender", # <tidyup_provider>
-  "state", # <tidyup_provider>
-  "bene_race_wht", # <tidyup_provider>
-  "bene_race_detailed", # <tidyup_provider>
-  "hcc_risk_avg", # <tidyup_provider>
-  "medical", # <tidyup_provider>
-  "drug", # <tidyup_provider>
-  "address", # <tidyup_service>
-  "specialty", # <tidyup_service>
-  "gender", # <tidyup_service>
-  "state", # <tidyup_service>
-  "pos", # <tidyup_service>
-  "level", # <tidyup_service>
-  "rndrng_prvdr_geo_desc", # <tidyup_geography>
-  "place_of_srvc", # <tidyup_geography>
-  "rndrng_prvdr_geo_lvl", # <tidyup_geography>
+  "address", # <tidyup_provider.util>
+  "specialty", # <tidyup_provider.util>
+  "tot_allowed", # <tidyup_provider.util>
+  "tot_payment", # <tidyup_provider.util>
+  "tot_srvcs", # <tidyup_provider.util>
+  "tot_benes", # <tidyup_provider.util>
+  "entity_type", # <tidyup_provider.util>
+  "gender", # <tidyup_provider.util>
+  "state", # <tidyup_provider.util>
+  "bene_race_wht", # <tidyup_provider.util>
+  "bene_race_detailed", # <tidyup_provider.util>
+  "hcc_risk_avg", # <tidyup_provider.util>
+  "medical", # <tidyup_provider.util>
+  "drug", # <tidyup_provider.util>
+  "address", # <tidyup_service.util>
+  "specialty", # <tidyup_service.util>
+  "gender", # <tidyup_service.util>
+  "state", # <tidyup_service.util>
+  "pos", # <tidyup_service.util>
+  "level", # <tidyup_service.util>
+  "rndrng_prvdr_geo_desc", # <tidyup_geography.util>
+  "place_of_srvc", # <tidyup_geography.util>
+  "rndrng_prvdr_geo_lvl", # <tidyup_geography.util>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>
