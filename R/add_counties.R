@@ -68,6 +68,14 @@ add_counties <- function(df,
     poss_fips <- purrr::possibly(fipio::coords_to_fips,
                                  otherwise = NA_character_)
 
+    # dplyr::tibble(
+    #   city = c('Mount Zion', 'Montezuma', 'Thomaston'),
+    #   state = fct_stabb(rep('GA', 3)),
+    #   county = c('Carroll', 'Macon', 'Upson'),
+    #   zip = c('30150', '31063', '30286'),
+    #   county_fips = c('13045', '13193', '13293')
+    # )
+
     df <- df |>
       dplyr::mutate(county_fips = purrr::map2(df$lng, df$lat, poss_fips))
 
@@ -80,12 +88,8 @@ add_counties <- function(df,
     # Geometries based on county FIPS
     poss_geo <- purrr::possibly(fipio::fips_geometry,
                                 otherwise = NA_character_)
-
     df <- df |>
       dplyr::mutate(geometry = purrr::map(df$county_fips, poss_geo))
-
-    # df[apply(df, 2, function(x) lapply(x, length) == 0)] <- NA
-    # df <- df |> tidyr::unnest(geometry, keep_empty = TRUE)
   }
 
   if (as_sf) {

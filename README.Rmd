@@ -29,9 +29,9 @@ knitr::opts_chunk$set(
 ![GitHub milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
-> 	:package: Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
+>  Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
 
-## :arrow_double_down: Installation
+## :package: Installation
 
 You can install __`provider`__ from [GitHub](https://github.com/) with:
 
@@ -268,8 +268,6 @@ utilization(year  = 2021,
 
 ------------------------------------------------------------------------------
 
-## :page_facing_up: Code of Conduct
-
 ## :balance_scale: Code of Conduct
 
 Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
@@ -277,4 +275,4 @@ Please note that the `provider` project is released with a [Contributor Code of 
 
 ## :classical_building: Governance
 
-This project is primarily maintained by [Andrew Bruce](https://twitter.com/riannone). Other authors may occasionally assist with some of these duties.
+This project is primarily maintained by [Andrew Bruce](https://github.com/andrewallenbruce). Other authors may occasionally assist with some of these duties.

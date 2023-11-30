@@ -26,6 +26,7 @@ library(provider)
 library(tidyr)
 library(dplyr)
 library(purrr)
+library(future)
 library(furrr)
 library(ggplot2)
 library(gt)
@@ -36,7 +37,7 @@ library(gtExtras)
 # `utilization()`
 
 ```{r}
-plan(multisession, workers = 4)
+future::plan(multisession, workers = 4)
 
 # Retrieve provider's overall utilization data
 ind     <- utilization_(npi = 1043477615, type = "provider")
@@ -48,7 +49,7 @@ chronic <- compare_conditions(ind)
 # Retrieve state & national HCPCS data to compare with
 hcpcs   <- compare_hcpcs(srvc)
 
-plan(sequential)
+future::plan(sequential)
 ```
 
 
@@ -72,14 +73,6 @@ performance
 ```
 
 
-```{r}
-datawizard::data_codebook(performance)
-```
-
-
-```{r}
-datawizard::data_tabulate(performance)
-```
 
 ```{r}
 plot(tot_payment ~ tot_srvcs, performance)
@@ -151,7 +144,14 @@ ind |>
 srvc |> 
   group_by(year, family) |> 
   mutate(hcpcs_level = dplyr::min_rank(dplyr::pick(avg_allowed, avg_payment))) |> 
-  select(year, hcpcs, hcpcs_desc, rank = hcpcs_level, subcategory, family, tot_benes:tot_srvcs, avg_charge:avg_payment) |> 
+  select(year, 
+         hcpcs, 
+         hcpcs_desc, 
+         rank = hcpcs_level, 
+         subcategory, 
+         family, 
+         tot_benes:tot_srvcs, 
+         avg_charge:avg_payment) |> 
   arrange(year, family, rank) |> 
   gt(groupname_col = "subcategory") |> 
   gt_merge_stack(hcpcs, hcpcs_desc) |> 
@@ -265,6 +265,7 @@ hcpcs |>
 ind |> 
   unnest(performance, demographics) |> 
   select(year, tot_benes, starts_with("bene_")) |> 
+  select(-bene_race_detailed) |> 
   gt(rowname_col = "year") |> 
   cols_label(tot_benes = "Total") |>  
   fmt_percent(columns = starts_with("cc_"), decimals = 0) |>

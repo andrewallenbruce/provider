@@ -109,6 +109,8 @@ reference:
   - quality_payment_
   - utilization
   - utilization_
+  - prescribers
+  - prescribers_
   - compare_hcpcs
   - compare_conditions
 
@@ -130,6 +132,7 @@ reference:
   - open_years
   - out_years
   - qpp_years
+  - rx_years
   - util_years
 
 - title: Utilities

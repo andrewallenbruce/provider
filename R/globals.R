@@ -161,6 +161,12 @@ utils::globalVariables(c(
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>
+  "distro", # <prescribers>
+  "y", # <prescribers>
+  "address", # <prescribers>
+  "entity_type", # <prescribers>
+  "tot_benes", # <prescribers>
+  "bene_race_wht", # <prescribers>
   "y", # <providers>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
@@ -247,6 +253,8 @@ utils::globalVariables(c(
   "entity_type", # <tidyup_provider>
   "gender", # <tidyup_provider>
   "state", # <tidyup_provider>
+  "bene_race_wht", # <tidyup_provider>
+  "bene_race_detailed", # <tidyup_provider>
   "hcc_risk_avg", # <tidyup_provider>
   "medical", # <tidyup_provider>
   "drug", # <tidyup_provider>

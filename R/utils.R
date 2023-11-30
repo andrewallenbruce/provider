@@ -9,6 +9,12 @@
 #' @noRd
 `%nn%` <- function(x, y) if (!is.null(x)) y else x
 
+#' Infix operator for `not in` statements
+#' @return description
+#' @autoglobal
+#' @noRd
+`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
+
 #' Format US ZIP codes
 #' @param zip Nine-digit US ZIP code
 #' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
@@ -389,6 +395,9 @@ api_years <- function(fn) {
                            "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
                            "srv" ~ "Medicare Physician & Other Practitioners - by Provider and Service",
                            "prv" ~ "Medicare Physician & Other Practitioners - by Provider",
+                           "rxg" ~ "Medicare Part D Prescribers - by Geography and Drug",
+                           "rxd" ~ "Medicare Part D Prescribers - by Provider and Drug",
+                           "rxp" ~ "Medicare Part D Prescribers - by Provider",
                            "outps" ~ "Medicare Outpatient Hospitals - by Provider and Service",
                            "outgs" ~ "Medicare Outpatient Hospitals - by Geography and Service",
                            "scc" ~ "Specific Chronic Conditions",

@@ -292,13 +292,25 @@ tidyup_provider <- function(results, nest, detailed) {
                   .pymt_per_srvc  = tot_payment / tot_srvcs,
                   entity_type     = fct_ent(entity_type),
                   gender          = fct_gen(gender),
-                  state           = fct_stabb(state))
+                  state           = fct_stabb(state)) |>
+    dplyr::mutate(bene_race_nonwht = tot_benes - bene_race_wht,
+                  .after = bene_race_wht)
 
   if (nest) {
+    race_cols <- c('bene_race_blk',
+                   'bene_race_api',
+                   'bene_race_hisp',
+                   'bene_race_nat',
+                   'bene_race_oth')
+
+    results <- tidyr::nest(
+      results,
+      bene_race_detailed = dplyr::any_of(race_cols))
+
     results <- tidyr::nest(
       results,
       performance    = c(dplyr::starts_with("tot_"), dplyr::starts_with(".")),
-      demographics   = dplyr::starts_with("bene_"),
+      demographics   = c(dplyr::starts_with("bene_"), bene_race_detailed),
       conditions     = c(hcc_risk_avg, dplyr::starts_with("cc_")))
   }
   if (detailed) {

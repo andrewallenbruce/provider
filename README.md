@@ -19,11 +19,11 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
-> :package: Providing easy access to [healthcare
+> Providing easy access to [healthcare
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
 > through publicly available APIs.
 
-## :arrow_double_down: Installation
+## :package: Installation
 
 You can install **`provider`** from [GitHub](https://github.com/) with:
 
@@ -574,7 +574,7 @@ utilization(year = 2021,
     #> $ country      <chr> "US"
     #> $ par          <lgl> TRUE
     #> $ performance  <list> [<tbl_df[1 x 11]>]
-    #> $ demographics <list> [<tbl_df[1 x 15]>]
+    #> $ demographics <list> [<tbl_df[1 x 12]>]
     #> $ conditions   <list> [<tbl_df[1 x 17]>]
 
 ``` r
@@ -609,23 +609,20 @@ select(p, year, demographics) |>
 ```
 
     #> Rows: 1
-    #> Columns: 16
-    #> $ year            <int> 2021
-    #> $ bene_age_avg    <int> 72
-    #> $ bene_age_lt65   <int> 16
-    #> $ bene_age_65_74  <int> 181
-    #> $ bene_age_75_84  <int> 63
-    #> $ bene_age_gt84   <int> 19
-    #> $ bene_gen_female <int> 157
-    #> $ bene_gen_male   <int> 122
-    #> $ bene_race_wht   <int> 245
-    #> $ bene_race_blk   <int> 0
-    #> $ bene_race_api   <int> 0
-    #> $ bene_race_hisp  <int> NA
-    #> $ bene_race_nat   <int> NA
-    #> $ bene_race_oth   <int> 15
-    #> $ bene_dual       <int> 40
-    #> $ bene_ndual      <int> 239
+    #> Columns: 13
+    #> $ year               <int> 2021
+    #> $ bene_age_avg       <int> 72
+    #> $ bene_age_lt65      <int> 16
+    #> $ bene_age_65_74     <int> 181
+    #> $ bene_age_75_84     <int> 63
+    #> $ bene_age_gt84      <int> 19
+    #> $ bene_gen_female    <int> 157
+    #> $ bene_gen_male      <int> 122
+    #> $ bene_race_wht      <int> 245
+    #> $ bene_race_nonwht   <int> 34
+    #> $ bene_dual          <int> 40
+    #> $ bene_ndual         <int> 239
+    #> $ bene_race_detailed <list> [<tbl_df[1 x 5]>]
 
 ``` r
 select(p, year, conditions) |> 
@@ -730,8 +727,6 @@ utilization(year  = 2021,
 
 ------------------------------------------------------------------------
 
-## :page_facing_up: Code of Conduct
-
 ## :balance_scale: Code of Conduct
 
 Please note that the `provider` project is released with a [Contributor
@@ -742,5 +737,5 @@ By contributing to this project, you agree to abide by its terms.
 ## :classical_building: Governance
 
 This project is primarily maintained by [Andrew
-Bruce](https://twitter.com/riannone). Other authors may occasionally
-assist with some of these duties.
+Bruce](https://github.com/andrewallenbruce). Other authors may
+occasionally assist with some of these duties.

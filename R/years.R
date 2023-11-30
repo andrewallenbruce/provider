@@ -20,7 +20,10 @@
 #' qpp_years()
 #'
 #' # `outpatient()`
-#' out_years
+#' out_years()
+#'
+#' # `prescribers()`
+#' rx_years()
 #'
 #' @name years
 #' @keywords internal
@@ -38,6 +41,14 @@ open_years <- function() sort(open_ids("General Payment Data")$year)
 #' @keywords internal
 out_years <- function() {
   as.integer(cms_update("Medicare Outpatient Hospitals - by Provider and Service", "years"))
+}
+
+#' @rdname years
+#' @autoglobal
+#' @export
+#' @keywords internal
+rx_years <- function() {
+  as.integer(cms_update("Medicare Part D Prescribers - by Provider", "years"))
 }
 
 #' @rdname years

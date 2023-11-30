@@ -4,6 +4,7 @@
 \alias{years}
 \alias{open_years}
 \alias{out_years}
+\alias{rx_years}
 \alias{util_years}
 \alias{cc_years}
 \alias{qpp_years}
@@ -13,6 +14,8 @@
 open_years()
 
 out_years()
+
+rx_years()
 
 util_years()
 
@@ -50,7 +53,10 @@ cc_years()
 qpp_years()
 
 # `outpatient()`
-out_years
+out_years()
+
+# `prescribers()`
+rx_years()
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}
