@@ -118,11 +118,11 @@
 <!-- badges: start -->
 
 <blockquote>
-<p><span class="emoji" data-emoji="package">📦</span> Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs.</p>
+<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs.</p>
 </blockquote>
 <div class="section level2">
-<h2 id="arrow_double_down-installation">
-<span class="emoji" data-emoji="arrow_double_down">⏬</span> Installation<a class="anchor" aria-label="anchor" href="#arrow_double_down-installation"></a>
+<h2 id="package-installation">
+<span class="emoji" data-emoji="package">📦</span> Installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
 </h2>
 <p>You can install <strong><code>provider</code></strong> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -662,7 +662,7 @@
 <span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ country      &lt;chr&gt; "US"</span></span>
 <span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ par          &lt;lgl&gt; TRUE</span></span>
 <span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ performance  &lt;list&gt; [&lt;tbl_df[1 x 11]&gt;]</span></span>
-<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ demographics &lt;list&gt; [&lt;tbl_df[1 x 15]&gt;]</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ demographics &lt;list&gt; [&lt;tbl_df[1 x 12]&gt;]</span></span>
 <span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ conditions   &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;]</span></span></code></pre></div>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/utilization.html">utilization</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
@@ -691,23 +691,20 @@
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">demographics</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb44"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 16</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year            &lt;int&gt; 2021</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_avg    &lt;int&gt; 72</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_lt65   &lt;int&gt; 16</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_65_74  &lt;int&gt; 181</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_75_84  &lt;int&gt; 63</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_gt84   &lt;int&gt; 19</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_gen_female &lt;int&gt; 157</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_gen_male   &lt;int&gt; 122</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_wht   &lt;int&gt; 245</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_blk   &lt;int&gt; 0</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_api   &lt;int&gt; 0</span></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_hisp  &lt;int&gt; NA</span></span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_nat   &lt;int&gt; NA</span></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_oth   &lt;int&gt; 15</span></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_dual       &lt;int&gt; 40</span></span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_ndual      &lt;int&gt; 239</span></span></code></pre></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 13</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year               &lt;int&gt; 2021</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_avg       &lt;int&gt; 72</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_lt65      &lt;int&gt; 16</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_65_74     &lt;int&gt; 181</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_75_84     &lt;int&gt; 63</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age_gt84      &lt;int&gt; 19</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_gen_female    &lt;int&gt; 157</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_gen_male      &lt;int&gt; 122</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_wht      &lt;int&gt; 245</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_nonwht   &lt;int&gt; 34</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_dual          &lt;int&gt; 40</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_ndual         &lt;int&gt; 239</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race_detailed &lt;list&gt; [&lt;tbl_df[1 x 5]&gt;]</span></span></code></pre></div>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">year</span>, <span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -804,11 +801,6 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="page_facing_up-code-of-conduct">
-<span class="emoji" data-emoji="page_facing_up">📄</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#page_facing_up-code-of-conduct"></a>
-</h2>
-</div>
-<div class="section level2">
 <h2 id="balance_scale-code-of-conduct">
 <span class="emoji" data-emoji="balance_scale">⚖️</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#balance_scale-code-of-conduct"></a>
 </h2>
@@ -818,7 +810,7 @@
 <h2 id="classical_building-governance">
 <span class="emoji" data-emoji="classical_building">🏛️</span> Governance<a class="anchor" aria-label="anchor" href="#classical_building-governance"></a>
 </h2>
-<p>This project is primarily maintained by <a href="https://twitter.com/riannone" class="external-link">Andrew Bruce</a>. Other authors may occasionally assist with some of these duties.</p>
+<p>This project is primarily maintained by <a href="https://github.com/andrewallenbruce" class="external-link">Andrew Bruce</a>. Other authors may occasionally assist with some of these duties.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
