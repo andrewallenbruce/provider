@@ -45,6 +45,15 @@ clean_credentials <- function(x) {
   gsub("\\.", "", x)
 }
 
+#' Remove commas from dollar amounts
+#' @param x Character vector
+#' @return Character vector with commas removed
+#' @autoglobal
+#' @noRd
+clean_dollars <- function(x) {
+  gsub(",", "", x)
+}
+
 #' Convert empty char values to NA
 #' @param x vector
 #' @autoglobal
@@ -151,9 +160,10 @@ df2chr <- function(df) {
 #' @param dbl convert to double
 #' @param chr convert to character
 #' @param up convert to upper case
-#' @param cred remove periods from
+#' @param cred remove periods
 #' @param zip normalize zip code
 #' @param lgl convert to logical
+#' @param cma remove commas
 #' @returns tidy data frame
 #' @autoglobal
 #' @export
@@ -168,7 +178,8 @@ tidyup <- function(df,
                    up = NULL,
                    cred = NULL,
                    zip = NULL,
-                   lgl = NULL) {
+                   lgl = NULL,
+                   cma = NULL) {
 
   x <- janitor::clean_names(df) |>
     dplyr::tibble() |>
@@ -180,6 +191,7 @@ tidyup <- function(df,
     if (dtype == 'ymd') x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dt), ~ lubridate::ymd(.x, quiet = TRUE)))
   }
 
+  if (!is.null(cma))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cma),  clean_dollars))
   if (!is.null(yn))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(yn),   yn_logical))
   if (!is.null(int))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(int),  as.integer))
   if (!is.null(dbl))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(dbl),  as.double))

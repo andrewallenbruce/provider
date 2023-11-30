@@ -22,8 +22,9 @@ prescribers(
   ruca = NULL,
   country = NULL,
   specialty = NULL,
-  brand = NULL,
-  generic = NULL,
+  brand_name = NULL,
+  generic_name = NULL,
+  level = NULL,
   tidy = TRUE,
   na.rm = TRUE,
   ...
@@ -35,7 +36,7 @@ prescribers_(year = rx_years(), ...)
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=rx_years]{rx_years()}} to return a vector of the years currently available.}
 
-\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"provider"}, \code{"drug"}, \code{"geography"}}
+\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"}, \code{"Drug"}, \code{"Geography"}}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
@@ -65,11 +66,21 @@ prescriber's name}
 \item{specialty}{< \emph{character} > Prescriber specialty code reported on the
 largest number of claims submitted}
 
-\item{brand}{< \emph{character} > Brand name (trademarked name) of the drug filled}
+\item{brand_name}{< \emph{character} > Brand name (trademarked name) of the drug
+filled, derived by linking the National Drug Codes (NDCs) from PDEs to a
+drug information database.}
 
-\item{generic}{< \emph{character} > USAN generic name of the drug filled (short
+\item{generic_name}{< \emph{character} > USAN generic name of the drug filled (short
 version); A term referring to the chemical ingredient of a drug rather than
-the trademarked brand name under which the drug is sold}
+the trademarked brand name under which the drug is sold, derived by linking
+the National Drug Codes (NDCs) from PDEs to a drug information database.}
+
+\item{level}{< \emph{character} > Geographic level by which the data will be
+aggregated:
+\itemize{
+\item \code{"State"}: Data is aggregated for each state
+\item \code{"National"}: Data is aggregated across all states for a given HCPCS Code
+}}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
@@ -84,43 +95,44 @@ the trademarked brand name under which the drug is sold}
 to Medicare beneficiaries enrolled in Part D (Prescription Drug Coverage),
 by physicians and other health care providers; aggregated by provider, drug
 and geography.
+
+The Medicare Part D Prescribers Datasets contain information on prescription
+drug events (PDEs) incurred by Medicare beneficiaries with a Part D
+prescription drug plan. The Part D Prescribers Datasets are organized by
+National Provider Identifier (NPI) and drug name and contains information
+on drug utilization (claim counts and day supply) and total drug costs.
 }
 \section{By Provider}{
 
-\strong{type =}\code{"provider"}:
+\strong{type =}\code{"Provider"}:
 
-The \strong{Provider} dataset allows the user access to data such as
-services and procedures performed; charges submitted and payment received;
-and beneficiary demographic and health characteristics for providers
-treating Original Medicare (fee-for-service) Part B beneficiaries,
-aggregated by year.
+The Medicare Part D Prescribers by \strong{Provider} dataset summarizes for each
+prescriber the total number of prescriptions that were dispensed, which
+include original prescriptions and any refills, and the total drug cost.
 }
 
 \section{By Provider and Drug}{
 
-\strong{type =}\code{"service"}:
+\strong{type =}\code{"Drug"}:
 
-The \strong{Provider and Drug} dataset is aggregated by:
-\enumerate{
-\item Rendering provider's NPI
-\item Healthcare Common Procedure Coding System (HCPCS) code
-\item Place of Service (Facility or Non-facility)
-}
-
-There can be multiple records for a given NPI based on the number of
-distinct HCPCS codes that were billed and where the services were
-provided. Data have been aggregated based on the place of service
-because separate fee schedules apply depending on whether the place
-of service submitted on the claim is facility or non-facility.
+The Medicare Part D Prescribers by \strong{Provider and Drug} dataset contains
+the total number of prescription fills that were dispensed and the total
+drug cost paid organized by prescribing National Provider Identifier (NPI),
+drug brand name (if applicable) and drug generic name.
 }
 
 \section{By Geography and Drug}{
 
-\strong{type =}\code{"geography"}:
+\strong{type =}\code{"Geography"}:
 
-The \strong{Geography and Drug} dataset contains information on utilization,
-allowed amount, Medicare payment, and submitted charges organized nationally
-and state-wide by HCPCS code and place of service.
+For each drug, the \strong{Geography and Drug} dataset includes the total number
+of prescriptions that were dispensed, which include original prescriptions
+and any refills, and the total drug cost.
+
+The total drug cost includes the ingredient cost of the medication,
+dispensing fees, sales tax, and any applicable administration fees and is
+based on the amount paid by the Part D plan, Medicare beneficiary, government
+subsidies, and any other third-party payers.
 }
 
 \section{Links}{
@@ -129,6 +141,7 @@ and state-wide by HCPCS code and place of service.
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider}{Medicare Part D Prescribers: by Provider}
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug}{Medicare Part D Prescribers: by Provider and Drug}
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-geography-and-drug}{Medicare Part D Prescribers: by Geography and Drug}
+\item \href{https://data.cms.gov/sites/default/files/2021-08/mup_dpr_ry21_20210819_technical_specifications.pdf}{Medicare Part D Prescribers Technical Specifications}
 }
 
 \emph{Update Frequency:} \strong{Annually}
@@ -136,17 +149,41 @@ and state-wide by HCPCS code and place of service.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-prescribers(year = 2020, type = 'provider', npi = 1003000423)
-prescribers(year = 2021, type = 'provider', npi = 1003000126)
-prescribers(year = 2019, type = 'drug', npi = 1003000126)
+prescribers(year = 2020,
+            type = 'Provider',
+            npi = 1003000423)
 
-# Use the years helper function to retrieve results for every year:
+prescribers(year = 2019,
+            type = 'Drug',
+            npi = 1003000126)
+
+prescribers(year = 2021,
+            type = 'Geography',
+            brand_name = 'Clotrimazole-Betamethasone')
+
+prescribers(year = 2017,
+            type = 'Geography',
+            level = 'National',
+            brand_name = 'Paroxetine Hcl') |>
+            dplyr::glimpse()
+
+# Use the years helper function to
+# retrieve results for every year:
 rx_years() |>
-map(\(x) prescribers(year = x, type = 'provider', npi = 1043477615)) |>
+map(\(x) prescribers(year = x,
+                     type = 'Provider',
+                     npi = 1043477615)) |>
 list_rbind()
 
 # Parallelized version
-prescribers_(type = 'provider', npi = 1043477615)
-prescribers_(type = 'drug', npi = 1003000423)
+prescribers_(type = 'Provider',
+             npi = 1043477615)
+
+prescribers_(type = 'Drug',
+             npi = 1003000423)
+
+prescribers_(type = 'Geography',
+             level = 'National',
+             generic_name = 'Mirabegron')
 \dontshow{\}) # examplesIf}
 }

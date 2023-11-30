@@ -98,7 +98,7 @@ NULL
 #' @param level < *character* > Geographic level by which the data will be
 #' aggregated:
 #' + `"State"`: Data is aggregated for each state
-#' + `National`: Data is aggregated across all states for a given HCPCS Code
+#' + `"National"`: Data is aggregated across all states for a given HCPCS Code
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
 #' Classifications to HCPCS codes

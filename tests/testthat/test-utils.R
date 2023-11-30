@@ -69,6 +69,7 @@ test_that("df2chr() works", {
 
 test_that("tidyup() works", {
   df <- dplyr::tibble(
+    cost  = "123,456",
     name  = "John Doe ",
     date  = "1981/03/07",
     int   = "123456789",
@@ -86,6 +87,7 @@ test_that("tidyup() works", {
   df2$date <- "03/07/1981"
 
   tidy <- dplyr::tibble(
+    cost  = "123456",
     name  = "JOHN DOE",
     date  = lubridate::ymd("1981/03/07"),
     int   = 123456789,
@@ -103,6 +105,7 @@ test_that("tidyup() works", {
   tidy2$date <- lubridate::mdy("03/07/1981")
 
   expect_equal(tidyup(df,
+                      cma   = "cost",
                       yn    = "yn",
                       dtype = 'ymd',
                       int   = c("int", "year"),
@@ -113,6 +116,7 @@ test_that("tidyup() works", {
                tidy)
 
   expect_equal(tidyup(df2,
+                      cma   = "cost",
                       yn    = "yn",
                       dtype = 'mdy',
                       int   = c("int", "year"),

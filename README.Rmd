@@ -163,6 +163,34 @@ outpatient(year  = 2021,
 ```
 
 
+### `prescribers()`
+
+```{r}
+prescribers(year = 2019, 
+            type = 'Provider', 
+            npi = 1003000423) |> 
+  glimpse()
+```
+
+
+```{r}
+prescribers(year = 2019, 
+            npi = 1003000126,
+            type = 'Drug',
+            brand_name = 'Atorvastatin Calcium') |> 
+  glimpse()
+```
+
+
+```{r}
+prescribers(year = 2021, 
+            type = 'Geography',
+            level = 'National',
+            brand_name = 'Clotrimazole-Betamethasone') |> 
+  glimpse()
+```
+
+
 ### `providers()`
 
 ```{r}

@@ -80,21 +80,21 @@ beneficiaries(year   = 2022,
     #> $ county            <chr> "Lowndes"
     #> $ fips              <chr> "13185"
     #> $ bene_total        <int> 19782
-    #> $ bene_orig         <int> 11731
+    #> $ bene_orig         <int> 11732
     #> $ bene_ma_oth       <int> 8051
-    #> $ bene_total_aged   <int> 16289
+    #> $ bene_total_aged   <int> 16290
     #> $ bene_aged_esrd    <int> 129
-    #> $ bene_aged_no_esrd <int> 16160
-    #> $ bene_total_dsb    <int> 3493
-    #> $ bene_dsb_esrd     <int> 144
-    #> $ bene_dsb_no_esrd  <int> 3349
-    #> $ bene_total_ab     <int> 18315
-    #> $ bene_ab_orig      <int> 10271
+    #> $ bene_aged_no_esrd <int> 16161
+    #> $ bene_total_dsb    <int> 3492
+    #> $ bene_dsb_esrd     <int> 143
+    #> $ bene_dsb_no_esrd  <int> 3350
+    #> $ bene_total_ab     <int> 18314
+    #> $ bene_ab_orig      <int> 10270
     #> $ bene_ab_ma_oth    <int> 8044
-    #> $ bene_total_rx     <int> 14027
-    #> $ bene_rx_pdp       <int> 6430
+    #> $ bene_total_rx     <int> 14028
+    #> $ bene_rx_pdp       <int> 6431
     #> $ bene_rx_mapd      <int> 7596
-    #> $ bene_rx_lis_elig  <int> 5145
+    #> $ bene_rx_lis_elig  <int> 5146
     #> $ bene_rx_lis_full  <int> 464
     #> $ bene_rx_lis_part  <int> 143
     #> $ bene_rx_lis_no    <int> 8274
@@ -396,6 +396,149 @@ outpatient(year  = 2021,
     #> $ avg_payment         <dbl> 981.9733
     #> $ tot_outlier_srvcs   <int> 0
     #> $ avg_outlier_payment <dbl> 0
+
+### `prescribers()`
+
+``` r
+prescribers(year = 2019, 
+            type = 'Provider', 
+            npi = 1003000423) |> 
+  glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 67
+    #> $ year                      <int> 2019
+    #> $ npi                       <chr> "1003000423"
+    #> $ entity_type               <fct> Individual
+    #> $ first                     <chr> "Jennifer"
+    #> $ middle                    <chr> "A"
+    #> $ last                      <chr> "Velotta"
+    #> $ gender                    <fct> Female
+    #> $ credential                <chr> "MD"
+    #> $ specialty                 <chr> "Obstetrics & Gynecology"
+    #> $ source                    <fct> Medicare Specialty Code
+    #> $ address                   <chr> "11100 Euclid Ave"
+    #> $ city                      <chr> "Cleveland"
+    #> $ state                     <ord> OH
+    #> $ zip                       <chr> "44106"
+    #> $ fips                      <chr> "39"
+    #> $ ruca                      <chr> "1"
+    #> $ country                   <chr> "US"
+    #> $ tot_claims                <int> 199
+    #> $ tot_fills                 <dbl> 344.0667
+    #> $ tot_cost                  <dbl> 21614.75
+    #> $ tot_supply                <int> 8759
+    #> $ tot_benes                 <int> 65
+    #> $ tot_claims_ge65           <int> 150
+    #> $ tot_fills_ge65            <dbl> 260.8667
+    #> $ tot_cost_ge65             <dbl> 17660.51
+    #> $ tot_supply_ge65           <int> 6495
+    #> $ tot_benes_ge65            <int> 49
+    #> $ tot_claims_brand          <int> 49
+    #> $ tot_cost_brand            <dbl> 14343.73
+    #> $ tot_claims_generic        <int> 150
+    #> $ tot_cost_generic          <dbl> 7271.02
+    #> $ tot_claims_other          <int> 0
+    #> $ tot_cost_other            <dbl> 0
+    #> $ tot_claims_mapd           <int> 78
+    #> $ tot_cost_mapd             <dbl> 9438.54
+    #> $ tot_claims_pdp            <int> 121
+    #> $ tot_cost_pdp              <dbl> 12176.21
+    #> $ tot_claims_lis            <int> 73
+    #> $ tot_cost_lis              <dbl> 9659.24
+    #> $ tot_claims_nlis           <int> 126
+    #> $ tot_cost_nlis             <dbl> 11955.51
+    #> $ tot_claims_opioid         <int> 0
+    #> $ tot_cost_opioid           <dbl> 0
+    #> $ tot_supply_opioid         <int> 0
+    #> $ tot_benes_opioid          <int> 0
+    #> $ rx_rate_opioid            <dbl> 0
+    #> $ tot_claims_opioid_la      <int> 0
+    #> $ tot_cost_opioid_la        <dbl> 0
+    #> $ tot_supply_opioid_la      <int> 0
+    #> $ tot_benes_opioid_la       <int> 0
+    #> $ tot_claims_antibioc       <int> 14
+    #> $ tot_cost_antibioc         <dbl> 177.68
+    #> $ tot_benes_antibioc        <int> 11
+    #> $ tot_claims_antipsych_ge65 <int> 0
+    #> $ tot_cost_antipsych_ge65   <dbl> 0
+    #> $ tot_benes_antipsych_ge65  <int> 0
+    #> $ bene_age_avg              <dbl> 66.63077
+    #> $ bene_age_lt65             <int> 16
+    #> $ bene_age_65_74            <int> 33
+    #> $ bene_race_wht             <int> 60
+    #> $ bene_race_nonwht          <int> 5
+    #> $ bene_race_api             <int> 0
+    #> $ bene_race_nat             <int> 0
+    #> $ bene_race_oth             <int> 0
+    #> $ bene_dual                 <int> 17
+    #> $ bene_ndual                <int> 48
+    #> $ hcc_risk_avg              <dbl> 0.8426269
+
+``` r
+prescribers(year = 2019, 
+            npi = 1003000126,
+            type = 'Drug',
+            brand_name = 'Atorvastatin Calcium') |> 
+  glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 22
+    #> $ year            <int> 2019
+    #> $ npi             <chr> "1003000126"
+    #> $ last            <chr> "Enkeshafi"
+    #> $ first           <chr> "Ardalan"
+    #> $ city            <chr> "Cumberland"
+    #> $ state           <ord> MD
+    #> $ fips            <chr> "24"
+    #> $ specialty       <chr> "Internal Medicine"
+    #> $ source          <fct> Medicare Specialty Code
+    #> $ brand_name      <chr> "Atorvastatin Calcium"
+    #> $ generic_name    <chr> "Atorvastatin Calcium"
+    #> $ tot_claims      <int> 41
+    #> $ tot_fills       <dbl> 50
+    #> $ tot_supply      <int> 1482
+    #> $ tot_cost        <dbl> 373.6
+    #> $ tot_benes       <int> 22
+    #> $ tot_claims_ge65 <int> 41
+    #> $ tot_fills_ge65  <dbl> 50
+    #> $ tot_cost_ge65   <dbl> 373.6
+    #> $ tot_supply_ge65 <int> 1482
+    #> $ tot_benes_ge65  <int> 22
+    #> $ level           <ord> Provider
+
+``` r
+prescribers(year = 2021, 
+            type = 'Geography',
+            level = 'National',
+            brand_name = 'Clotrimazole-Betamethasone') |> 
+  glimpse()
+```
+
+    #> Rows: 1
+    #> Columns: 20
+    #> $ year            <int> 2021
+    #> $ level           <ord> National
+    #> $ state           <ord> National
+    #> $ brand_name      <chr> "Clotrimazole-Betamethasone"
+    #> $ generic_name    <chr> "Clotrimazole/Betamethasone Dip"
+    #> $ tot_prescribers <int> 203283
+    #> $ tot_claims      <int> 1611886
+    #> $ tot_fills       <dbl> 1694182
+    #> $ tot_cost        <dbl> 43735273
+    #> $ tot_benes       <int> 887643
+    #> $ tot_claims_ge65 <int> 1363536
+    #> $ tot_fills_ge65  <dbl> 1435849
+    #> $ tot_cost_ge65   <dbl> 36509742
+    #> $ tot_benes_ge65  <int> 763073
+    #> $ tot_cost_lis    <dbl> 877005.8
+    #> $ tot_cost_nlis   <dbl> 11891222
+    #> $ opioid          <lgl> FALSE
+    #> $ opioid_la       <lgl> FALSE
+    #> $ antibiotic      <lgl> FALSE
+    #> $ antipsychotic   <lgl> FALSE
 
 ### `providers()`
 

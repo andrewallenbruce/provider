@@ -15,7 +15,8 @@ tidyup(
   up = NULL,
   cred = NULL,
   zip = NULL,
-  lgl = NULL
+  lgl = NULL,
+  cma = NULL
 )
 }
 \arguments{
@@ -35,11 +36,13 @@ tidyup(
 
 \item{up}{convert to upper case}
 
-\item{cred}{remove periods from}
+\item{cred}{remove periods}
 
 \item{zip}{normalize zip code}
 
 \item{lgl}{convert to logical}
+
+\item{cma}{remove commas}
 }
 \value{
 tidy data frame

@@ -161,8 +161,13 @@ utils::globalVariables(c(
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>
+  "state.abb", # <prescribers>
   "distro", # <prescribers>
+  "brand", # <prescribers>
+  "generic", # <prescribers>
   "y", # <prescribers>
+  "state", # <tidyup_geography.rx>
+  "level", # <tidyup_geography.rx>
   "state", # <tidyup_drug.rx>
   "level", # <tidyup_drug.rx>
   "address", # <tidyup_provider.rx>

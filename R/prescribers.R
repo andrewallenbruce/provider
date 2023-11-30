@@ -8,64 +8,91 @@
 #' by physicians and other health care providers; aggregated by provider, drug
 #' and geography.
 #'
-#' @section By Provider:
-#' __type =__`"provider"`:
+#' The Medicare Part D Prescribers Datasets contain information on prescription
+#' drug events (PDEs) incurred by Medicare beneficiaries with a Part D
+#' prescription drug plan. The Part D Prescribers Datasets are organized by
+#' National Provider Identifier (NPI) and drug name and contains information
+#' on drug utilization (claim counts and day supply) and total drug costs.
 #'
-#' The **Provider** dataset allows the user access to data such as
-#' services and procedures performed; charges submitted and payment received;
-#' and beneficiary demographic and health characteristics for providers
-#' treating Original Medicare (fee-for-service) Part B beneficiaries,
-#' aggregated by year.
+#' @section By Provider:
+#' __type =__`"Provider"`:
+#'
+#' The Medicare Part D Prescribers by __Provider__ dataset summarizes for each
+#' prescriber the total number of prescriptions that were dispensed, which
+#' include original prescriptions and any refills, and the total drug cost.
 #'
 #' @section By Provider and Drug:
-#' __type =__`"service"`:
+#' __type =__`"Drug"`:
 #'
-#' The **Provider and Drug** dataset is aggregated by:
-#'
-#'    1. Rendering provider's NPI
-#'    2. Healthcare Common Procedure Coding System (HCPCS) code
-#'    3. Place of Service (Facility or Non-facility)
-#'
-#' There can be multiple records for a given NPI based on the number of
-#' distinct HCPCS codes that were billed and where the services were
-#' provided. Data have been aggregated based on the place of service
-#' because separate fee schedules apply depending on whether the place
-#' of service submitted on the claim is facility or non-facility.
+#' The Medicare Part D Prescribers by __Provider and Drug__ dataset contains
+#' the total number of prescription fills that were dispensed and the total
+#' drug cost paid organized by prescribing National Provider Identifier (NPI),
+#' drug brand name (if applicable) and drug generic name.
 #'
 #' @section By Geography and Drug:
-#' __type =__`"geography"`:
+#' __type =__`"Geography"`:
 #'
-#' The **Geography and Drug** dataset contains information on utilization,
-#' allowed amount, Medicare payment, and submitted charges organized nationally
-#' and state-wide by HCPCS code and place of service.
+#' For each drug, the __Geography and Drug__ dataset includes the total number
+#' of prescriptions that were dispensed, which include original prescriptions
+#' and any refills, and the total drug cost.
+#'
+#' The total drug cost includes the ingredient cost of the medication,
+#' dispensing fees, sales tax, and any applicable administration fees and is
+#' based on the amount paid by the Part D plan, Medicare beneficiary, government
+#' subsidies, and any other third-party payers.
 #'
 #' @section Links:
 #' + [Medicare Part D Prescribers: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider)
 #' + [Medicare Part D Prescribers: by Provider and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug)
 #' + [Medicare Part D Prescribers: by Geography and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-geography-and-drug)
+#' + [Medicare Part D Prescribers Technical Specifications](https://data.cms.gov/sites/default/files/2021-08/mup_dpr_ry21_20210819_technical_specifications.pdf)
 #'
 #' *Update Frequency:* **Annually**
 #'
 #' @examplesIf interactive()
-#' prescribers(year = 2020, type = 'provider', npi = 1003000423)
-#' prescribers(year = 2021, type = 'provider', npi = 1003000126)
-#' prescribers(year = 2019, type = 'drug', npi = 1003000126)
+#' prescribers(year = 2020,
+#'             type = 'Provider',
+#'             npi = 1003000423)
 #'
-#' # Use the years helper function to retrieve results for every year:
+#' prescribers(year = 2019,
+#'             type = 'Drug',
+#'             npi = 1003000126)
+#'
+#' prescribers(year = 2021,
+#'             type = 'Geography',
+#'             brand_name = 'Clotrimazole-Betamethasone')
+#'
+#' prescribers(year = 2017,
+#'             type = 'Geography',
+#'             level = 'National',
+#'             brand_name = 'Paroxetine Hcl') |>
+#'             dplyr::glimpse()
+#'
+#' # Use the years helper function to
+#' # retrieve results for every year:
 #' rx_years() |>
-#' map(\(x) prescribers(year = x, type = 'provider', npi = 1043477615)) |>
+#' map(\(x) prescribers(year = x,
+#'                      type = 'Provider',
+#'                      npi = 1043477615)) |>
 #' list_rbind()
 #'
 #' # Parallelized version
-#' prescribers_(type = 'provider', npi = 1043477615)
-#' prescribers_(type = 'drug', npi = 1003000423)
+#' prescribers_(type = 'Provider',
+#'              npi = 1043477615)
+#'
+#' prescribers_(type = 'Drug',
+#'              npi = 1003000423)
+#'
+#' prescribers_(type = 'Geography',
+#'              level = 'National',
+#'              generic_name = 'Mirabegron')
 #'
 #' @name prescribers
 NULL
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [rx_years()] to return a vector of the years currently available.
-#' @param type < *character* > // **required** dataset to query, `"provider"`, `"drug"`, `"geography"`
+#' @param type < *character* > // **required** dataset to query, `"Provider"`, `"Drug"`, `"Geography"`
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
 #' prescriber's name
@@ -82,10 +109,17 @@ NULL
 #' @param country < *character* > Country where prescriber is located
 #' @param specialty < *character* > Prescriber specialty code reported on the
 #' largest number of claims submitted
-#' @param brand < *character* > Brand name (trademarked name) of the drug filled
-#' @param generic < *character* > USAN generic name of the drug filled (short
+#' @param brand_name < *character* > Brand name (trademarked name) of the drug
+#' filled, derived by linking the National Drug Codes (NDCs) from PDEs to a
+#' drug information database.
+#' @param generic_name < *character* > USAN generic name of the drug filled (short
 #' version); A term referring to the chemical ingredient of a drug rather than
-#' the trademarked brand name under which the drug is sold
+#' the trademarked brand name under which the drug is sold, derived by linking
+#' the National Drug Codes (NDCs) from PDEs to a drug information database.
+#' @param level < *character* > Geographic level by which the data will be
+#' aggregated:
+#' + `"State"`: Data is aggregated for each state
+#' + `"National"`: Data is aggregated across all states for a given HCPCS Code
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... For future use.
@@ -108,8 +142,9 @@ prescribers <- function(year,
                         ruca = NULL,
                         country = NULL,
                         specialty = NULL,
-                        brand = NULL,
-                        generic = NULL,
+                        brand_name = NULL,
+                        generic_name = NULL,
+                        level = NULL,
                         tidy = TRUE,
                         na.rm = TRUE,
                         ...) {
@@ -123,23 +158,49 @@ prescribers <- function(year,
   fips  <- fips %nn% as.character(fips)
   ruca  <- ruca %nn% as.character(ruca)
 
-  type <- rlang::arg_match(type, c('provider', 'drug', 'geography'))
+  rlang::check_required(type)
+  type <- rlang::arg_match(type, c('Provider', 'Drug', 'Geography'))
 
-  if (type == 'provider') {
+  if (type == 'Provider') {
     param_npi <- 'PRSCRBR_NPI'
-    brand     <- NULL
-    generic   <- NULL
+    param_state <- 'Prscrbr_State_Abrvtn'
+    param_fips <- 'Prscrbr_State_FIPS'
+    brand_name <- NULL
+    generic_name <- NULL
+    level <- NULL
   }
 
-  if (type == 'drug') {
+  if (type == 'Drug') {
     param_npi  <- 'Prscrbr_NPI'
+    param_state <- 'Prscrbr_State_Abrvtn'
+    param_fips <- 'Prscrbr_State_FIPS'
     credential <- NULL
-    gender     <- NULL
-    entype     <- NULL
-    fips       <- NULL
-    zip        <- NULL
-    ruca       <- NULL
-    country    <- NULL
+    gender <- NULL
+    entype <- NULL
+    fips <- NULL
+    zip <- NULL
+    ruca <- NULL
+    country <- NULL
+    level <- NULL
+  }
+
+  if (type == 'Geography') {
+    param_npi  <- 'Prscrbr_NPI'
+    param_state <- 'Prscrbr_Geo_Desc'
+    param_fips <- 'Prscrbr_Geo_Cd'
+    npi <- NULL
+    first <- NULL
+    last <- NULL
+    specialty <- NULL
+    organization <- NULL
+    credential <- NULL
+    gender <- NULL
+    entype <- NULL
+    zip <- NULL
+    ruca <- NULL
+    country <- NULL
+    level <- level %nn% rlang::arg_match(level, c("National", "State"))
+    if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
   args <- dplyr::tribble(
@@ -151,19 +212,20 @@ prescribers <- function(year,
     'Prscrbr_Gndr',          gender,
     'Prscrbr_Ent_Cd',        entype,
     'Prscrbr_City',          city,
-    'Prscrbr_State_Abrvtn',  state,
-    'Prscrbr_State_FIPS',    fips,
+    param_state,             state,
+    param_fips,              fips,
     'Prscrbr_zip5',          zip,
     'Prscrbr_RUCA',          ruca,
     'Prscrbr_Cntry',         country,
     'Prscrbr_Type',          specialty,
-    'Brnd_Name',             brand,
-    'Gnrc_Name',             generic)
+    'Brnd_Name',             brand_name,
+    'Gnrc_Name',             generic_name,
+    'Prscrbr_Geo_Lvl',       level)
 
   yr <- switch(type,
-               "provider"  = api_years("rxp"),
-               "drug"      = api_years("rxd"),
-               "geography" = api_years("rxg"))
+               "Provider"  = api_years("rxp"),
+               "Drug"      = api_years("rxd"),
+               "Geography" = api_years("rxg"))
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
@@ -192,7 +254,8 @@ prescribers <- function(year,
       "country",      country,
       "specialty",    specialty,
       'brand',        brand,
-      'generic',      generic) |>
+      'generic',      generic,
+      'level',        level) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -208,8 +271,9 @@ prescribers <- function(year,
     results$year <- year
 
     results <- switch(type,
-            'provider' = tidyup_provider.rx(results),
-            'drug' = tidyup_drug.rx(results))
+            'Provider'  = tidyup_provider.rx(results),
+            'Drug'      = tidyup_drug.rx(results),
+            'Geography' = tidyup_geography.rx(results))
 
     if (na.rm) results <- narm(results)
 
@@ -217,12 +281,40 @@ prescribers <- function(year,
   return(results)
 }
 
-#' @param results data frame from [prescribers(type = "drug")]
+#' @param results data frame from [prescribers(type = "Geography")]
+#' @autoglobal
+#' @noRd
+tidyup_geography.rx <- function(results) {
+
+  results <- cols_rx(results, 'Geography') |>
+    tidyup(cma = c('tot_'),
+           int  = c('year',
+                    'tot_prescribers',
+                    'tot_claims',
+                    'tot_benes'),
+           dbl  = c('tot_fills',
+                    'tot_cost'),
+           yn = c('opioid',
+                  'opioid_la',
+                  'antibiotic',
+                  'antipsychotic')) |>
+    dplyr::mutate(state = fct_stname(state),
+                  level = fct_level(level))
+
+  results <- dplyr::mutate(results,
+                           dplyr::across(
+                             dplyr::contains('suppress_'),
+                             suppress_flag))
+
+  return(results)
+}
+
+#' @param results data frame from [prescribers(type = "Drug")]
 #' @autoglobal
 #' @noRd
 tidyup_drug.rx <- function(results) {
 
-  results <- cols_rx(results, 'drug') |>
+  results <- cols_rx(results, 'Drug') |>
     tidyup(int  = c('year',
                     'tot_claims',
                     'tot_supply',
@@ -242,12 +334,12 @@ tidyup_drug.rx <- function(results) {
   return(results)
 }
 
-#' @param results data frame from [prescribers(type = "provider")]
+#' @param results data frame from [prescribers(type = "Provider")]
 #' @autoglobal
 #' @noRd
 tidyup_provider.rx <- function(results) {
 
-  results <- cols_rx(results, 'provider') |>
+  results <- cols_rx(results, 'Provider') |>
     tidyup(int  = c('year',
                     'tot_claims',
                     'tot_supply',
@@ -313,12 +405,12 @@ fct_src <- function(x) {
 }
 
 #' @param df data frame
-#' @param type 'provider', 'drug', 'geography'
+#' @param type 'Provider', 'Drug', 'Geography'
 #' @autoglobal
 #' @noRd
 cols_rx <- function(df, type) {
 
-  if (type == "provider") {
+  if (type == "Provider") {
     cols <- c('year',
               'npi' = 'PRSCRBR_NPI',
               'entity_type' = 'Prscrbr_Ent_Cd',
@@ -406,7 +498,7 @@ cols_rx <- function(df, type) {
               'hcc_risk_avg' = 'Bene_Avg_Risk_Scre')
   }
 
-  if (type == 'drug') {
+  if (type == 'Drug') {
     cols <- c(
       'year',
       'npi' = 'Prscrbr_NPI',
@@ -431,6 +523,34 @@ cols_rx <- function(df, type) {
       'tot_benes_ge65' = 'GE65_Tot_Benes',
       'suppress_ge65' = 'GE65_Sprsn_Flag',
       'suppress_bene_ge65' = 'GE65_Bene_Sprsn_Flag'
+    )
+  }
+
+  if (type == 'Geography') {
+    cols <- c(
+      'year',
+      'level' = 'Prscrbr_Geo_Lvl',
+      'state' = 'Prscrbr_Geo_Desc',
+      'fips' = 'Prscrbr_Geo_Cd',
+      'brand_name' = 'Brnd_Name',
+      'generic_name' = 'Gnrc_Name',
+      'tot_prescribers' = 'Tot_Prscrbrs',
+      'tot_claims' = 'Tot_Clms',
+      'tot_fills' = 'Tot_30day_Fills',
+      'tot_cost' = 'Tot_Drug_Cst',
+      'tot_benes' = 'Tot_Benes',
+      'tot_claims_ge65' = 'GE65_Tot_Clms',
+      'tot_fills_ge65' = 'GE65_Tot_30day_Fills',
+      'tot_cost_ge65' = 'GE65_Tot_Drug_Cst',
+      'tot_benes_ge65' = 'GE65_Tot_Benes',
+      'suppress_ge65' = 'GE65_Sprsn_Flag',
+      'suppress_bene_ge65' = 'GE65_Bene_Sprsn_Flag',
+      'tot_cost_lis' = 'LIS_Bene_Cst_Shr',
+      'tot_cost_nlis' = 'NonLIS_Bene_Cst_Shr',
+      'opioid' = 'Opioid_Drug_Flag',
+      'opioid_la' = 'Opioid_LA_Drug_Flag',
+      'antibiotic' = 'Antbtc_Drug_Flag',
+      'antipsychotic' = 'Antpsyct_Drug_Flag'
     )
   }
 

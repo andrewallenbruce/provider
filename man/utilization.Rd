@@ -78,7 +78,7 @@ Medicare and/or accepts assignment of Medicare allowed amounts}
 aggregated:
 \itemize{
 \item \code{"State"}: Data is aggregated for each state
-\item \code{National}: Data is aggregated across all states for a given HCPCS Code
+\item \code{"National"}: Data is aggregated across all states for a given HCPCS Code
 }}
 
 \item{hcpcs}{< \emph{character} > HCPCS code used to identify the specific
