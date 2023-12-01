@@ -11,7 +11,7 @@ compare_hcpcs(df)
 compare_conditions(df, pivot = FALSE)
 }
 \arguments{
-\item{df}{< \emph{tbl_df} > // \strong{required} \code{\link[=tibble]{tibble()}} returned from \code{utilization(type = "provider")}}
+\item{df}{< \emph{tbl_df} > // \strong{required} \code{\link[=tibble]{tibble()}} returned from \code{utilization(type = "Provider")}}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{FALSE} Pivot output}
 }
@@ -31,30 +31,27 @@ prevalence of chronic conditions among a provider's patient mix to state and
 national averages
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{compare_hcpcs()}: performance detail
-
-\item \code{compare_conditions()}: chronic condition prevalence
-
-}}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
+compare_hcpcs(utilization(year = 2018,
+                          type = "Service",
+                          npi = 1023076643))
 
 map_dfr(util_years(), ~utilization(year = .x,
                                    npi = 1023076643,
-                                   type = "service")) |>
+                                   type = "Service")) |>
 compare_hcpcs()
 \dontshow{\}) # examplesIf}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
+compare_conditions(utilization(year = 2018,
+                               type = "Provider",
+                               npi = 1023076643))
 
 map_dfr(util_years(), ~utilization(year = .x,
                                    npi = 1023076643,
-                                   type = "provider")) |>
+                                   type = "Provider")) |>
 compare_conditions()
 \dontshow{\}) # examplesIf}
 }

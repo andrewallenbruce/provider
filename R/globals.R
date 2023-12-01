@@ -163,8 +163,6 @@ utils::globalVariables(c(
   "y", # <pending>
   "state.abb", # <prescribers>
   "distro", # <prescribers>
-  "brand", # <prescribers>
-  "generic", # <prescribers>
   "y", # <prescribers>
   "state", # <tidyup_geography.rx>
   "level", # <tidyup_geography.rx>

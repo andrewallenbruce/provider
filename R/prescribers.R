@@ -92,7 +92,8 @@ NULL
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [rx_years()] to return a vector of the years currently available.
-#' @param type < *character* > // **required** dataset to query, `"Provider"`, `"Drug"`, `"Geography"`
+#' @param type < *character* > // **required** dataset to query, `"Provider"`,
+#' `"Drug"`, `"Geography"`
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
 #' prescriber's name
@@ -199,7 +200,7 @@ prescribers <- function(year,
     zip <- NULL
     ruca <- NULL
     country <- NULL
-    level <- level %nn% rlang::arg_match(level, c("National", "State"))
+    level <- level %nn% rlang::arg_match(level, c('National', 'State'))
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
@@ -223,9 +224,9 @@ prescribers <- function(year,
     'Prscrbr_Geo_Lvl',       level)
 
   yr <- switch(type,
-               "Provider"  = api_years("rxp"),
-               "Drug"      = api_years("rxd"),
-               "Geography" = api_years("rxg"))
+               'Provider'  = api_years('rxp'),
+               'Drug'      = api_years('rxd'),
+               'Geography' = api_years('rxg'))
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
@@ -239,22 +240,22 @@ prescribers <- function(year,
     cli_args <- dplyr::tribble(
       ~x,             ~y,
       'year',         year,
-      "npi",          npi,
-      "first",        first,
-      "last",         last,
-      "organization", organization,
-      "credential",   credential,
-      "gender",       gender,
-      "entype",       entype,
-      "city",         city,
-      "state",        state,
-      "fips",         fips,
-      "zip",          zip,
-      "ruca",         ruca,
-      "country",      country,
-      "specialty",    specialty,
-      'brand',        brand,
-      'generic',      generic,
+      'npi',          npi,
+      'first',        first,
+      'last',         last,
+      'organization', organization,
+      'credential',   credential,
+      'gender',       gender,
+      'entype',       entype,
+      'city',         city,
+      'state',        state,
+      'fips',         fips,
+      'zip',          zip,
+      'ruca',         ruca,
+      'country',      country,
+      'specialty',    specialty,
+      'brand_name',   brand_name,
+      'generic_name', generic_name,
       'level',        level) |>
       tidyr::unnest(cols = c(y))
 
@@ -287,7 +288,7 @@ prescribers <- function(year,
 tidyup_geography.rx <- function(results) {
 
   results <- cols_rx(results, 'Geography') |>
-    tidyup(cma = c('tot_'),
+    tidyup(cma = 'tot_',
            int  = c('year',
                     'tot_prescribers',
                     'tot_claims',
@@ -321,8 +322,8 @@ tidyup_drug.rx <- function(results) {
                     'tot_benes'),
            dbl  = c('tot_fills',
                     'tot_cost')) |>
-    dplyr::mutate(level = "Provider",
-                  source = fct_src(source),
+    dplyr::mutate(level = 'Provider',
+                  source = fct_src(source), # nolint
                   state = fct_stabb(state),
                   level = fct_level(level))
 
@@ -363,10 +364,10 @@ tidyup_provider.rx <- function(results) {
                     'hcc_risk_avg',
                     'bene_age_avg',
                     'rx_rate_'),
-           cred = "credential",
+           cred = 'credential',
            zip  = 'zip') |>
     combine(address, c('prscrbr_st1', 'prscrbr_st2')) |>
-    dplyr::mutate(source = fct_src(source),
+    dplyr::mutate(source = fct_src(source),              # nolint
                   entity_type = fct_ent(entity_type),
                   gender = fct_gen(gender),
                   state = fct_stabb(state)) |>
@@ -410,7 +411,7 @@ fct_src <- function(x) {
 #' @noRd
 cols_rx <- function(df, type) {
 
-  if (type == "Provider") {
+  if (type == 'Provider') {
     cols <- c('year',
               'npi' = 'PRSCRBR_NPI',
               'entity_type' = 'Prscrbr_Ent_Cd',

@@ -9,18 +9,18 @@
 #' by provider, service and geography.
 #'
 #' @section By Provider:
-#' __type =__`"provider"`:
+#' __type =__`"Provider"`:
 #'
-#' The **Provider** dataset allows the user access to data such as
+#' The __Provider__ dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
 #' and beneficiary demographic and health characteristics for providers
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
 #'
 #' @section By Provider and Service:
-#' __type =__`"service"`:
+#' __type =__`"Service"`:
 #'
-#' The **Provider and Service** dataset is aggregated by:
+#' The __Provider and Service__ dataset is aggregated by:
 #'
 #'    1. Rendering provider's NPI
 #'    2. Healthcare Common Procedure Coding System (HCPCS) code
@@ -33,9 +33,9 @@
 #' of service submitted on the claim is facility or non-facility.
 #'
 #' @section By Geography and Service:
-#' __type =__`"geography"`:
+#' __type =__`"Geography"`:
 #'
-#' The **Geography and Service** dataset contains information on utilization,
+#' The __Geography and Service__ dataset contains information on utilization,
 #' allowed amount, Medicare payment, and submitted charges organized nationally
 #' and state-wide by HCPCS code and place of service.
 #'
@@ -47,28 +47,43 @@
 #' *Update Frequency:* **Annually**
 #'
 #' @examplesIf interactive()
-#' utilization(year = 2020, type = "provider", npi = 1003000423)
+#' utilization(year = 2020,
+#'             type = 'Provider',
+#'             npi = 1003000423)
 #'
-#' utilization(year = 2019, type = "service", npi = 1003000126)
+#' utilization(year = 2019,
+#'             type = 'Service',
+#'             npi = 1003000126)
 #'
-#' utilization(year = 2020, type = "geography", hcpcs = "0002A")
+#' utilization(year = 2020,
+#'             type = 'Geography',
+#'             hcpcs = '0002A')
 #'
-#' # Use the years helper function to retrieve results for every year:
+#' # Use the years helper function to
+#' # retrieve results for every year:
 #' util_years() |>
-#' map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
+#' map(\(x) utilization(year = x,
+#'                      type = 'Provider',
+#'                      npi = 1043477615)) |>
 #' list_rbind()
 #'
 #' # Parallelized version
-#' utilization_(npi = 1043477615, type = "provider")
-#' utilization_(npi = 1043477615, type = "service")
-#' utilization_(hcpcs = "0002A", type = "geography")
+#' utilization_(type = 'Provider',
+#'              npi = 1043477615)
+#'
+#' utilization_(type = 'Service',
+#'              npi = 1043477615)
+#'
+#' utilization_(type = 'Geography',
+#'              hcpcs = '0002A')
 #'
 #' @name utilization
 NULL
 
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [util_years()] to return a vector of the years currently available.
-#' @param type < *character* > // **required** dataset to query, `"provider"`, `"service"`, `"geography"`
+#' @param type < *character* > // **required** dataset to query, `"Provider"`,
+#' `"Service"`, `"Geography"`
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last,organization < *character* > Individual/Organizational
 #' provider's name
@@ -140,27 +155,33 @@ utilization <- function(year,
   rlang::check_required(year)
   year <- as.character(year)
   year <- rlang::arg_match(year, as.character(util_years()))
-  type <- rlang::arg_match(type, c("provider", "service", "geography"))
+  type <- rlang::arg_match(type, c('Provider', 'Service', 'Geography'))
 
-  if (type != "provider") c(nest, detailed) %<-% c(FALSE, FALSE)
-  if (type == "provider") c(rbcs, hcpcs = NULL, pos = NULL, drug = NULL) %<-% c(FALSE) # nolint
-  if (type != "geography") level <- NULL
+  if (type != 'Provider') c(nest, detailed) %<-% c(FALSE, FALSE)
+  if (type == 'Provider') c(rbcs, hcpcs = NULL, pos = NULL, drug = NULL) %<-% c(FALSE) # nolint
+  if (type != 'Geography') {
+    param_state <- 'Rndrng_Prvdr_State_Abrvtn'
+    param_fips <- 'Rndrng_Prvdr_State_FIPS'
+    level <- NULL
+  }
 
-  if (type == "geography") {
-    level        <- level %nn% rlang::arg_match(level, c("National", "State"))
-    npi          <- NULL
-    first        <- NULL
-    last         <- NULL
+  if (type == 'Geography') {
+    param_state <- 'Rndrng_Prvdr_Geo_Desc'
+    param_fips <- 'Rndrng_Prvdr_Geo_Cd'
+    npi <- NULL
+    first <- NULL
+    last <- NULL
     organization <- NULL
-    credential   <- NULL
-    gender       <- NULL
-    entype       <- NULL
-    city         <- NULL
-    zip          <- NULL
-    ruca         <- NULL
-    country      <- NULL
-    specialty    <- NULL
-    par          <- NULL # nolint
+    credential <- NULL
+    gender <- NULL
+    entype <- NULL
+    city <- NULL
+    zip <- NULL
+    ruca <- NULL
+    country <- NULL
+    specialty <- NULL
+    par <- NULL # nolint
+    level <- level %nn% rlang::arg_match(level, c('National', 'State'))
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
@@ -168,7 +189,7 @@ utilization <- function(year,
   zip   <- zip %nn% as.character(zip)
   fips  <- fips %nn% as.character(fips)
   ruca  <- ruca %nn% as.character(ruca)
-  par   <- par %nn% tf_2_yn(par) # nolint
+  par   <- par %nn% tf_2_yn(par)              # nolint
   hcpcs <- hcpcs %nn% as.character(hcpcs)
   drug  <- drug %nn% tf_2_yn(drug)
   pos   <- pos %nn% rlang::arg_match(pos, c("F", "O"))
@@ -183,24 +204,22 @@ utilization <- function(year,
     "Rndrng_Prvdr_Gndr",              gender,
     "Rndrng_Prvdr_Ent_Cd",            entype,
     "Rndrng_Prvdr_City",              city,
-    "Rndrng_Prvdr_State_Abrvtn",      state,
-    "Rndrng_Prvdr_State_FIPS",        fips,
+    param_state,                      state,
+    param_fips,                       fips,
     "Rndrng_Prvdr_Zip5",              zip,
     "Rndrng_Prvdr_RUCA",              ruca,
     "Rndrng_Prvdr_Cntry",             country,
     "Rndrng_Prvdr_Type",              specialty,
-    "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par, # nolint
+    "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par,      # nolint
     "HCPCS_Cd",                       hcpcs,
     "HCPCS_Drug_Ind",                 drug,
     "Place_Of_Srvc",                  pos,
-    "Rndrng_Prvdr_Geo_Lvl",           level,
-    "Rndrng_Prvdr_Geo_Desc",          state,
-    "Rndrng_Prvdr_Geo_Cd",            fips)
+    "Rndrng_Prvdr_Geo_Lvl",           level)
 
   yr <- switch(type,
-    "provider"   = api_years("prv"),
-    "service"    = api_years("srv"),
-    "geography"  = api_years("geo"))
+    'Provider'   = api_years('prv'),
+    'Service'    = api_years('srv'),
+    'Geography'  = api_years('geo'))
 
   id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
 
@@ -229,7 +248,7 @@ utilization <- function(year,
       "ruca",         ruca,
       "country",      country,
       "specialty",    specialty,
-      "par",          par, # nolint
+      "par",          par,        # nolint
       "hcpcs",        hcpcs,
       "drug",         drug,
       "pos",          pos) |>
@@ -248,9 +267,9 @@ utilization <- function(year,
     results$year <- year
 
     results <- switch(type,
-      "provider"  = tidyup_provider.util(results, nest = nest, detailed = detailed),
-      "service"   = tidyup_service.util(results, rbcs = rbcs),
-      "geography" = tidyup_geography.util(results, rbcs = rbcs))
+      "Provider"  = tidyup_provider.util(results, nest = nest, detailed = detailed),
+      "Service"   = tidyup_service.util(results, rbcs = rbcs),
+      "Geography" = tidyup_geography.util(results, rbcs = rbcs))
 
     if (na.rm) results <- narm(results)
   }
@@ -271,7 +290,7 @@ utilization_ <- function(year = util_years(),
 
 }
 
-#' @param results data frame from [utilization(type = "provider")]
+#' @param results data frame from [utilization(type = "Provider")]
 #' @param nest < *boolean* > Nest `demographics` and `conditions`
 #' @param detailed < *boolean* > Include `detailed` column
 #' @autoglobal
@@ -279,7 +298,7 @@ utilization_ <- function(year = util_years(),
 tidyup_provider.util <- function(results, nest, detailed) {
 
   results <- janitor::clean_names(results) |>
-    cols_util("provider") |>
+    cols_util("Provider") |>
     tidyup(yn   = "par",
            int  = c("year", "_hcpcs", "bene", "_srvcs"),
            dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
@@ -327,7 +346,7 @@ tidyup_provider.util <- function(results, nest, detailed) {
   return(results)
 }
 
-#' @param results data frame from [utilization(type = "service")]
+#' @param results data frame from [utilization(type = "Service")]
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
@@ -343,7 +362,7 @@ tidyup_service.util <- function(results, rbcs) {
                     zip = 'rndrng_prvdr_zip5') |>
     combine(address, c('rndrng_prvdr_st1',
                        'rndrng_prvdr_st2')) |>
-    cols_util("service") |>
+    cols_util("Service") |>
     dplyr::mutate(specialty = correct_specialty(specialty),
                   gender    = fct_gen(gender),
                   state     = fct_stabb(state),
@@ -356,7 +375,7 @@ tidyup_service.util <- function(results, rbcs) {
   return(results)
 }
 
-#' @param results data frame from [utilization(type = "geography")]
+#' @param results data frame from [utilization(type = "Geography")]
 #' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
 #' @autoglobal
 #' @noRd
@@ -369,7 +388,7 @@ tidyup_geography.util <- function(results, rbcs) {
     dplyr::mutate(rndrng_prvdr_geo_desc = fct_stname(rndrng_prvdr_geo_desc),
                   place_of_srvc         = fct_pos(place_of_srvc),
                   rndrng_prvdr_geo_lvl  = fct_level(rndrng_prvdr_geo_lvl)) |>
-    cols_util("geography")
+    cols_util("Geography")
 
   if (rbcs) results <- rbcs_util(results)
 
@@ -378,12 +397,12 @@ tidyup_geography.util <- function(results, rbcs) {
 }
 
 #' @param df data frame
-#' @param type 'provider', 'service', 'geography' or 'rbcs'
+#' @param type 'Provider', 'Service', 'Geography' or 'rbcs'
 #' @autoglobal
 #' @noRd
 cols_util <- function(df, type) {
 
-  if (type == "geography") {
+  if (type == "Geography") {
 
     cols <- c("year",
               "level"        = "rndrng_prvdr_geo_lvl",
@@ -403,7 +422,7 @@ cols_util <- function(df, type) {
               "avg_std_pymt" = "avg_mdcr_stdzd_amt")
   }
 
-  if (type == "service") {
+  if (type == "Service") {
 
     cols <- c('year',
               'npi'          = 'rndrng_npi',
@@ -442,7 +461,7 @@ cols_util <- function(df, type) {
 
   }
 
-  if (type == "provider") {
+  if (type == "Provider") {
 
     cols <- c("year",
               "npi"            = "rndrng_npi",

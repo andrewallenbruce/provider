@@ -17,19 +17,20 @@ NULL
 
 #' @param df < *tbl_df* > // **required**
 #'
-#' [tibble()] returned from `utilization(type = "service")`
+#' [tibble()] returned from `utilization(type = "Service")`
 #'
 #' @examplesIf interactive()
 #'
-#' compare_hcpcs(utilization(year = 2018, type = "service", npi = 1023076643))
+#' compare_hcpcs(utilization(year = 2018,
+#'                           type = "Service",
+#'                           npi = 1023076643))
 #'
 #' map_dfr(util_years(), ~utilization(year = .x,
 #'                                    npi = 1023076643,
-#'                                    type = "service")) |>
+#'                                    type = "Service")) |>
 #' compare_hcpcs()
 #'
-#' @describeIn compare performance detail
-#'
+#' @rdname compare
 #' @autoglobal
 #' @export
 compare_hcpcs <- function(df) {
@@ -45,14 +46,18 @@ compare_hcpcs <- function(df) {
     dplyr::mutate(pos = as.character(pos),
                   pos = dplyr::if_else(pos == "Facility", "F", "O"))
 
-  x$type <- "geography"
+  x$type <- "Geography"
 
-  state <- furrr::future_pmap_dfr(x, utilization, .options = furrr::furrr_options(seed = NULL))
+  state <- furrr::future_pmap_dfr(x,
+                                  utilization,
+                                  .options = furrr::furrr_options(seed = NULL))
   # state <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   x$state <- "National"
 
-  national <- furrr::future_pmap_dfr(x, utilization, .options = furrr::furrr_options(seed = NULL))
+  national <- furrr::future_pmap_dfr(x,
+                                     utilization,
+                                     .options = furrr::furrr_options(seed = NULL))
   # national <- purrr::pmap(x, utilization) |> purrr::list_rbind()
 
   vctrs::vec_rbind(
@@ -87,19 +92,21 @@ hcpcs_cols <- function(df) {
   df |> dplyr::select(dplyr::any_of(cols))
 }
 
-#' @param df < *tbl_df* > // **required** [tibble()] returned from `utilization(type = "provider")`
+#' @param df < *tbl_df* > // **required** [tibble()] returned from `utilization(type = "Provider")`
 #'
 #' @param pivot < *boolean* > // __default:__ `FALSE` Pivot output
 #'
-#' @describeIn compare chronic condition prevalence
+#' @rdname compare
 #'
 #' @examplesIf interactive()
 #'
-#' compare_conditions(utilization(year = 2018, type = "provider", npi = 1023076643))
+#' compare_conditions(utilization(year = 2018,
+#'                                type = "Provider",
+#'                                npi = 1023076643))
 #'
 #' map_dfr(util_years(), ~utilization(year = .x,
 #'                                    npi = 1023076643,
-#'                                    type = "provider")) |>
+#'                                    type = "Provider")) |>
 #' compare_conditions()
 #'
 #' @autoglobal

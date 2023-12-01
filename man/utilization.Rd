@@ -41,7 +41,8 @@ utilization_(year = util_years(), ...)
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=util_years]{util_years()}} to return a vector of the years currently available.}
 
-\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"provider"}, \code{"service"}, \code{"geography"}}
+\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"},
+\code{"Service"}, \code{"Geography"}}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
@@ -117,7 +118,7 @@ by provider, service and geography.
 }
 \section{By Provider}{
 
-\strong{type =}\code{"provider"}:
+\strong{type =}\code{"Provider"}:
 
 The \strong{Provider} dataset allows the user access to data such as
 services and procedures performed; charges submitted and payment received;
@@ -128,7 +129,7 @@ aggregated by year.
 
 \section{By Provider and Service}{
 
-\strong{type =}\code{"service"}:
+\strong{type =}\code{"Service"}:
 
 The \strong{Provider and Service} dataset is aggregated by:
 \enumerate{
@@ -146,7 +147,7 @@ of service submitted on the claim is facility or non-facility.
 
 \section{By Geography and Service}{
 
-\strong{type =}\code{"geography"}:
+\strong{type =}\code{"Geography"}:
 
 The \strong{Geography and Service} dataset contains information on utilization,
 allowed amount, Medicare payment, and submitted charges organized nationally
@@ -166,20 +167,34 @@ and state-wide by HCPCS code and place of service.
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-utilization(year = 2020, type = "provider", npi = 1003000423)
+utilization(year = 2020,
+            type = 'Provider',
+            npi = 1003000423)
 
-utilization(year = 2019, type = "service", npi = 1003000126)
+utilization(year = 2019,
+            type = 'Service',
+            npi = 1003000126)
 
-utilization(year = 2020, type = "geography", hcpcs = "0002A")
+utilization(year = 2020,
+            type = 'Geography',
+            hcpcs = '0002A')
 
-# Use the years helper function to retrieve results for every year:
+# Use the years helper function to
+# retrieve results for every year:
 util_years() |>
-map(\(x) utilization(year = x, type = "provider", npi = 1043477615)) |>
+map(\(x) utilization(year = x,
+                     type = 'Provider',
+                     npi = 1043477615)) |>
 list_rbind()
 
 # Parallelized version
-utilization_(npi = 1043477615, type = "provider")
-utilization_(npi = 1043477615, type = "service")
-utilization_(hcpcs = "0002A", type = "geography")
+utilization_(type = 'Provider',
+             npi = 1043477615)
+
+utilization_(type = 'Service',
+             npi = 1043477615)
+
+utilization_(type = 'Geography',
+             hcpcs = '0002A')
 \dontshow{\}) # examplesIf}
 }

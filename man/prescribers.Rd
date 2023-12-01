@@ -36,7 +36,8 @@ prescribers_(year = rx_years(), ...)
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=rx_years]{rx_years()}} to return a vector of the years currently available.}
 
-\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"}, \code{"Drug"}, \code{"Geography"}}
+\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"},
+\code{"Drug"}, \code{"Geography"}}
 
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
