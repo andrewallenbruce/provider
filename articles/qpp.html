@@ -170,53 +170,39 @@ Bruce</h4>
 <span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">q</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 20</span></span></span>
-<span><span class="co">#&gt;    year npi        state  size specialty  med_years type  beneficiaries services</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1144544834 GA        8 Physician…         8 Group          <span style="text-decoration: underline;">2</span>867       <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1144544834 GA        8 Physician…         8 Group          <span style="text-decoration: underline;">2</span>731        0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 1144544834 GA       12 Physician…         8 Group          <span style="text-decoration: underline;">3</span>165        0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 1144544834 GA       13 Physician…         9 Group          <span style="text-decoration: underline;">5</span>621    <span style="text-decoration: underline;">25</span>215</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 1144544834 GA       13 Physician…        10 Group          <span style="text-decoration: underline;">4</span>804    <span style="text-decoration: underline;">21</span>667</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>021 1144544834 GA       11 Physician…        11 Group          <span style="text-decoration: underline;">4</span>722    <span style="text-decoration: underline;">19</span>234</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: allowed_charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 45</span></span></span>
+<span><span class="co">#&gt;    year npi    npi_type first middle last  first_approved_date years_in_medicare</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 11445… Individ… EMILY T      MANL… 2011-09-13                          6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 11445… Individ… EMILY T      MANL… 2011-09-13                          7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 11445… Individ… EMILY T      MANL… 2011-09-13                          7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 11445… Individ… EMILY T      MANL… 2011-09-13                          8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 11445… Individ… EMILY T      MANL… 2011-09-13                          9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>021 11445… Individ… EMILY T      MANL… 2011-09-13                         10</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 37 more variables: participation_type &lt;fct&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_type &lt;chr&gt;, specialty_cat &lt;chr&gt;, specialty_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_id &lt;int&gt;, org_name &lt;chr&gt;, org_address &lt;chr&gt;, org_city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_state &lt;ord&gt;, org_zip &lt;chr&gt;, org_size &lt;int&gt;, beneficiaries &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   services &lt;int&gt;, allowed_charges &lt;dbl&gt;, final_score &lt;dbl&gt;, pay_adjust &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;, cost_score &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, qpp_status &lt;list&gt;, …</span></span></span></code></pre>
 <div class="section level3">
 <h3 id="special-statuses">Special Statuses<a class="anchor" aria-label="anchor" href="#special-statuses"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">statuses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">statuses</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32 × 2</span></span></span>
-<span><span class="co">#&gt;     year category          </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 Quality Bonus     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 Small Practitioner</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 Quality Bonus     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 Engaged           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018 Small Practitioner</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 Quality Bonus     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 Engaged           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 Small Practitioner</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 Quality Bonus     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 Engaged           </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `statuses` doesn't exist.</span></span></code></pre>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">statuses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">statuses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">category</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
-<span><span class="co">#&gt;   category               n</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Small Practitioner     8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Quality Bonus          8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Engaged                7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> HPSA Clinician         3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> PI Hardship            3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> PI Reweighting         3</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `statuses` doesn't exist.</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level3">
@@ -225,31 +211,17 @@ Bruce</h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 70 × 4</span></span></span>
-<span><span class="co">#&gt;     year measure                id       score</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 Quality                111        5.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 Quality                110        3.7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 Quality                138        3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017 Quality                265        3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 Quality                47         3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017 Quality                137        3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>017 Improvement Activities IA_BE_6   40  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>017 Improvement Activities IA_AHE_1  40  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 Cost                   TPCC_1     4.6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 Quality                431        8.9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `measures` doesn't exist.</span></span></code></pre>
 <p><br></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">measure</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 2</span></span></span>
-<span><span class="co">#&gt;   measure                    n</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Quality                   48</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Improvement Activities    16</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Cost                       6</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `measures` doesn't exist.</span></span></code></pre>
 <p><br></p>
 </div>
 </div>
@@ -261,18 +233,21 @@ Bruce</h4>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">n</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
-<span><span class="co">#&gt;    year npi        state  size specialty  med_years type  beneficiaries services</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 PA     <span style="text-decoration: underline;">1</span>394 Cardiac E…         5 MIPS…         <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 PA     <span style="text-decoration: underline;">1</span>297 Cardiac E…         5 MIPS…         <span style="text-decoration: underline;">41</span>034        0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 PA     <span style="text-decoration: underline;">1</span>344 Cardiac E…         6 MIPS…         <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 PA     <span style="text-decoration: underline;">1</span>440 Cardiac E…         7 MIPS…         <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 PA     <span style="text-decoration: underline;">1</span>940 Cardiac E…         8 MIPS…         <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: allowed_charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, statuses &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   measures &lt;list&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 55</span></span></span>
+<span><span class="co">#&gt;    year npi    npi_type first middle last  first_approved_date years_in_medicare</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 10434… <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>                                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 10434… <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>                                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 10434… <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>                                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 10434… <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>                                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 10434… <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>                                 <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47 more variables: participation_type &lt;fct&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_type &lt;chr&gt;, specialty_cat &lt;chr&gt;, specialty_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_id &lt;int&gt;, org_name &lt;chr&gt;, org_address &lt;chr&gt;, org_city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_state &lt;ord&gt;, org_zip &lt;chr&gt;, org_size &lt;int&gt;, beneficiaries &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   services &lt;int&gt;, allowed_charges &lt;dbl&gt;, final_score &lt;dbl&gt;, pay_adjust &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;, cost_score &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, qpp_status &lt;list&gt;, …</span></span></span></code></pre>
 <p><br></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span>
@@ -281,21 +256,21 @@ Bruce</h4>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 36</span></span></span>
-<span><span class="co">#&gt;    year npi        npi_type   first middle last   first_approved_date pecos_year</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>022 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>023 1043477615 Individual SARAH K      HUSSA… 2014-01-27                <span style="text-decoration: underline;">2</span>014</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more variables: newly_enrolled &lt;lgl&gt;, specialty_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_type &lt;chr&gt;, specialty_cat &lt;chr&gt;, is_maqi &lt;lgl&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_facility_based &lt;lgl&gt;, org_address &lt;chr&gt;, org_city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_state &lt;ord&gt;, org_zip &lt;chr&gt;, ams_mips_eligible &lt;lgl&gt;, apms_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   apms_name &lt;chr&gt;, apms_entity_name &lt;chr&gt;, apms_sub_id &lt;chr&gt;,</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 37</span></span></span>
+<span><span class="co">#&gt;    year npi    npi_type first middle last  first_approved_date years_in_medicare</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 10434… Individ… SARAH K      HUSS… 2014-01-27                          4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 10434… Individ… SARAH K      HUSS… 2014-01-27                          5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 10434… Individ… SARAH K      HUSS… 2014-01-27                          6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 10434… Individ… SARAH K      HUSS… 2014-01-27                          7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 10434… Individ… SARAH K      HUSS… 2014-01-27                          8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>022 10434… Individ… SARAH K      HUSS… 2014-01-27                          9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>023 10434… Individ… SARAH K      HUSS… 2014-01-27                         10</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: newly_enrolled &lt;lgl&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_type &lt;chr&gt;, specialty_cat &lt;chr&gt;, is_maqi &lt;lgl&gt;, org_id &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_name &lt;chr&gt;, org_facility_based &lt;lgl&gt;, org_address &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_city &lt;chr&gt;, org_state &lt;ord&gt;, org_zip &lt;chr&gt;, ams_mips_eligible &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   apms_id &lt;chr&gt;, apms_name &lt;chr&gt;, apms_entity_name &lt;chr&gt;, apms_sub_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   apms_sub_name &lt;chr&gt;, apms_relationship &lt;chr&gt;, apms_status &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ind_specialty_code &lt;chr&gt;, ind_specialty_desc &lt;chr&gt;, …</span></span></span></code></pre>
 </div>

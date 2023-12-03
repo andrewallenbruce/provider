@@ -105,6 +105,7 @@ Advanced Alternative Payment Models (APMs) tracks.</p>
 <span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  nest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  eligibility <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -158,7 +159,12 @@ attributed to the clinician; drives most of the data returned.</p><ul><li><p><co
 
 
 <dt>nest</dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest <code>statuses</code> &amp; <code>measures</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest <code>status</code> &amp; <code>measures</code></p></dd>
+
+
+<dt>eligibility</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Append results
+from <code><a href="quality_eligibility.html">quality_eligibility()</a></code></p></dd>
 
 
 <dt>...</dt>
