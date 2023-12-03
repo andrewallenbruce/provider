@@ -116,6 +116,7 @@ and during the performance year.</p>
 <span>  unnest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pivot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  stats <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -149,6 +150,10 @@ the same NPI indicate multiple TIN/NPI combinations.</p></dd>
 
 <dt>na.rm</dt>
 <dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>FALSE</code> Remove empty rows and columns</p></dd>
+
+
+<dt>stats</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>FALSE</code> Return QPP stats</p></dd>
 
 
 <dt>...</dt>
@@ -190,6 +195,29 @@ authorization token.</p></li>
 APM, characterized by an APM Entity ID.</p></li>
 </ul></div>
     <div class="section level2">
+    <h2 id="stats-true"><strong>stats</strong> == <code>TRUE</code><a class="anchor" aria-label="anchor" href="#stats-true"></a></h2>
+    
+
+<p>Public statistics derived from all QPP providers:</p><div class="section">
+<h3 id="hcc-risk-score-average-">HCC Risk Score Average:<a class="anchor" aria-label="anchor" href="#hcc-risk-score-average-"></a></h3>
+
+
+<p>National average individual (NPI) or group (TIN) risk score for MIPS
+eligible individual/group. Scores are calculated as follows:</p><ul><li><p><strong>Individual</strong> = <code>sum(Clinician Risk Scores) / n(Eligible Clinicians)</code></p></li>
+<li><p><strong>Group</strong> = <code>sum(Practice Risk Scores) / n(Eligible Practices)</code></p></li>
+</ul></div>
+
+<div class="section">
+<h3 id="dual-eligibility-average-">Dual Eligibility Average:<a class="anchor" aria-label="anchor" href="#dual-eligibility-average-"></a></h3>
+
+
+<p>National average individual (NPI) or group (TIN) dual-eligibility score for
+MIPS eligible individual/group.</p><ul><li><p><strong>Individual</strong> = <code>sum(Clinician Dual-Eligibility Scores) / n(Eligible Clinicians)</code></p></li>
+<li><p><strong>Group</strong> = sum(Practice Dual-Eligibility Scores) / n(Eligible Practices)</p></li>
+</ul></div>
+
+    </div>
+    <div class="section level2">
     <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
     
 
@@ -228,6 +256,12 @@ APM, characterized by an APM Entity ID.</p></li>
 <span class="r-in"><span>                                   <span class="fl">1043477615</span>,</span></span>
 <span class="r-in"><span>                                   <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>       <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Quality Stats</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">quality_eligibility</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
