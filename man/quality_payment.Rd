@@ -13,6 +13,7 @@ quality_payment(
   type = NULL,
   tidy = TRUE,
   nest = TRUE,
+  eligibility = TRUE,
   ...
 )
 
@@ -56,6 +57,9 @@ attributed to the clinician; drives most of the data returned.
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{statuses} & \code{measures}}
+
+\item{eligibility}{< \emph{boolean} > // \strong{default:} \code{TRUE} Append results
+from \code{\link[=quality_eligibility]{quality_eligibility()}}}
 
 \item{...}{Pass arguments to \code{\link[=quality_payment]{quality_payment()}}.}
 }

@@ -51,6 +51,8 @@ NULL
 #' + `"MIPS APM"`
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest `statuses` & `measures`
+#' @param eligibility < *boolean* > // __default:__ `TRUE` Append results
+#' from [quality_eligibility()]
 #' @param ... For future use.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -66,6 +68,7 @@ quality_payment <- function(year,
                             type = NULL,
                             tidy = TRUE,
                             nest = TRUE,
+                            eligibility = TRUE,
                             ...) {
 
 
@@ -94,12 +97,12 @@ quality_payment <- function(year,
   if (vctrs::vec_is_empty(response$body)) {
 
     cli_args <- dplyr::tribble(
-      ~x,                               ~y,
-      "year",                           year,
-      "npi",                            npi,
-      "practice state or us territory", state,
-      "clinician specialty",            specialty,
-      "participation type",             type) |>
+      ~x,                     ~y,
+      "year",                 year,
+      "npi",                  npi,
+      "state",                state,
+      "specialty",            specialty,
+      "type",   type) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -147,8 +150,8 @@ quality_payment <- function(year,
                       "ia_study",
                       "extreme_hardship_cost")) |>
       cols_qpp("tidy") |>
-      dplyr::mutate(type  = fct_part(type),
-                    state = fct_stabb(state))
+      dplyr::mutate(participation_type = fct_part(participation_type),
+                    org_state = fct_stabb(org_state))
 
       if (nest) {
         pcol <- list(q = c('quality_measure_id_', 'quality_measure_score_') %s+% rep(1:10, each = 2),
@@ -161,47 +164,84 @@ quality_payment <- function(year,
         top <- results |>
           dplyr::select(-c(dplyr::contains("measure_"),
                            dplyr::contains("ind_"))) |>
-          dplyr::arrange(year, type)
+          dplyr::arrange(year, participation_type)
 
-        measures <- dplyr::select(results, year, npi, type,
+        measures <- dplyr::select(results, year, npi, participation_type,
                                   dplyr::any_of(pcol)) |>
-          dplyr::arrange(year, type) |>
+          dplyr::arrange(year, participation_type) |>
           tidyr::pivot_longer(
             cols          = dplyr::any_of(pcol),
-            names_to      = c("measure", "x", "set", "number"),
+            names_to      = c("category", "x", "set", "cat_id"),
             names_pattern = "(.*)_(.*)_(.*)_(.)",
             values_to     = "val") |>
+          dplyr::filter(!is.na(val)) |>
           dplyr::mutate(x = NULL,
-                        number = NULL) |>
+                        cat_id = NULL) |> #print(n = Inf)
           tidyr::pivot_wider(names_from = set,
                              values_from = val,
                              values_fn = list) |>
           tidyr::unnest(c(id, score)) |>
-          dplyr::filter(!is.na(id)) |>
           dplyr::mutate(score = as.double(score),
-                        measure = fct_measure(measure)) |>
-          tidyr::nest(.by = c(year, npi, type),
-                      .key  = "measures")
+                        category = fct_measure(category)) |>
+          dplyr::rename(measure_id = id) |>
+          tidyr::nest(.by = c(year, npi, participation_type),
+                      .key  = "qpp_measures")
 
-        statuses <- dplyr::select(results, year, npi, type,
+        statuses <- dplyr::select(results,
+                                  year,
+                                  npi,
+                                  participation_type,
                                   dplyr::contains("ind_")) |>
-          dplyr::arrange(year, type) |>
+          dplyr::arrange(year, participation_type) |>
           tidyr::pivot_longer(
             cols          = dplyr::starts_with("ind_"),
-            names_to      = c("x", "category"),
+            names_to      = c("x", "qualified"),
             names_pattern = "(...)_(.*)",
             values_to     = "status") |>
           dplyr::mutate(x = NULL) |>
           dplyr::filter(!is.na(status) & status != FALSE) |>
-          dplyr::mutate(category = fct_status(category),
+          dplyr::mutate(qualified = fct_status(qualified),
                         status = NULL) |>
-          tidyr::nest(.by = c(year, npi, type),
-                      .key = "statuses")
+          tidyr::nest(.by = c(year, npi, participation_type),
+                      .key = "qpp_status")
 
-        results <- dplyr::left_join(top, measures,
-                                     by = dplyr::join_by(year, npi, type)) |>
-          dplyr::left_join(statuses, by = dplyr::join_by(year, npi, type)) |>
-          cols_qpp("nest")
+        by <- dplyr::join_by(year, npi, participation_type)
+
+        results <- dplyr::left_join(top, measures, by) |>
+          dplyr::left_join(statuses, by) |>
+          cols_qpp("nest") |>
+          dplyr::group_by(year) |>
+          dplyr::mutate(org_id = dplyr::row_number(), .before = org_size) |>
+          dplyr::ungroup()
+
+        if (eligibility) {
+          npi  <- unique(results$npi)
+          elig <- quality_eligibility(year = year, npi = c(npi))
+          results <- dplyr::left_join(results, elig,
+                     by = dplyr::join_by(year, npi, org_id, specialty, org_state)) |>
+            dplyr::select(year,
+                          npi,
+                          npi_type,
+                          first,
+                          middle,
+                          last,
+                          first_approved_date,
+                          years_in_medicare,
+                          participation_type,
+                          specialty,
+                          specialty_type,
+                          specialty_cat,
+                          specialty_code = ind_specialty_code,
+                          org_id,
+                          org_name,
+                          org_address,
+                          org_city,
+                          org_state,
+                          org_zip,
+                          org_size,
+                          dplyr::everything())
+
+        }
       }
     }
   return(results)
@@ -218,6 +258,7 @@ quality_payment_ <- function(year = qpp_years(), ...) {
   furrr::future_map_dfr(year, quality_payment, ..., .options = furrr::furrr_options(seed = NULL))
 }
 
+#' QPP Columns
 #' @param df data frame
 #' @param step description
 #' @autoglobal
@@ -228,11 +269,11 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 
   cols <- c('year',
             'npi',
-            'state'                        = 'practice_state_or_us_territory',
-            'size'                         = 'practice_size',
+            'org_state'                    = 'practice_state_or_us_territory',
+            'org_size'                     = 'practice_size',
             'specialty'                    = 'clinician_specialty',
-            'med_years'                    = 'years_in_medicare',
-            'type'                         = 'participation_type',
+            #'med_years'                    = 'years_in_medicare',
+            'participation_type',
             'beneficiaries'                = 'medicare_patients',
             'services',
             'allowed_charges',
@@ -260,7 +301,7 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
             'ind_pi_hardship'              = 'pi_hardship',
             'ind_pi_reweighting'           = 'pi_reweighting',
             'ind_pi_bonus'                 = 'pi_bonus',
-            'pi_cehrt_id',
+            #'pi_cehrt_id',
             'ind_extreme_hardship_ia'      = 'extreme_hardship_ia',
             'ind_ia_study'                 = 'ia_study',
             'ind_extreme_hardship_cost'    = 'extreme_hardship_cost',
@@ -278,11 +319,11 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 
     cols <- c('year',
               'npi',
-              'state',
-              'size',
+              'org_state',
+              'org_size',
               'specialty',
               'med_years',
-              'type',
+              'participation_type',
               'beneficiaries',
               'services',
               'allowed_charges',
@@ -294,9 +335,8 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
               'cost_score',
               'complex_bonus',
               'qi_bonus',
-              # 'pi_cehrt_id',
-              'statuses',
-              'measures')
+              'qpp_status',
+              'qpp_measures')
   }
 
   df |> dplyr::select(dplyr::any_of(cols))

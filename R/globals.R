@@ -113,6 +113,29 @@ utils::globalVariables(c(
   "confirmed", # <laboratories>
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
+  "y", # <mips_2021>
+  "org_pac_id", # <mips_2021>
+  "facility_name", # <mips_2021>
+  "aco_id_1", # <mips_2021>
+  "aco_nm_1", # <mips_2021>
+  "aco_id_2", # <mips_2021>
+  "aco_nm_2", # <mips_2021>
+  "measure_cd", # <mips_2021>
+  "measure_title", # <mips_2021>
+  "invs_msr", # <mips_2021>
+  "attestation_value", # <mips_2021>
+  "prf_rate", # <mips_2021>
+  "patient_count", # <mips_2021>
+  "star_value", # <mips_2021>
+  "five_star_benchmark", # <mips_2021>
+  "collection_type", # <mips_2021>
+  "ccxp_ind", # <mips_2021>
+  "ind_pac_id", # <mips_2021>
+  "provider_first_name", # <mips_2021>
+  "provider_last_name", # <mips_2021>
+  "apm_affl_1", # <mips_2021>
+  "apm_affl_2", # <mips_2021>
+  "apm_affl_3", # <mips_2021>
   "number", # <download_msdrg>
   "mdc", # <download_msdrg>
   "mdc_description", # <download_msdrg>
@@ -190,29 +213,6 @@ utils::globalVariables(c(
   "tot_benes", # <tidyup_provider.rx>
   "bene_race_wht", # <tidyup_provider.rx>
   "y", # <providers>
-  "y", # <mips_2021>
-  "org_pac_id", # <mips_2021>
-  "facility_name", # <mips_2021>
-  "aco_id_1", # <mips_2021>
-  "aco_nm_1", # <mips_2021>
-  "aco_id_2", # <mips_2021>
-  "aco_nm_2", # <mips_2021>
-  "measure_cd", # <mips_2021>
-  "measure_title", # <mips_2021>
-  "invs_msr", # <mips_2021>
-  "attestation_value", # <mips_2021>
-  "prf_rate", # <mips_2021>
-  "patient_count", # <mips_2021>
-  "star_value", # <mips_2021>
-  "five_star_benchmark", # <mips_2021>
-  "collection_type", # <mips_2021>
-  "ccxp_ind", # <mips_2021>
-  "ind_pac_id", # <mips_2021>
-  "provider_first_name", # <mips_2021>
-  "provider_last_name", # <mips_2021>
-  "apm_affl_1", # <mips_2021>
-  "apm_affl_2", # <mips_2021>
-  "apm_affl_3", # <mips_2021>
   "y", # <quality_eligibility>
   "organizations", # <quality_eligibility>
   "organizations_individualScenario", # <quality_eligibility>
@@ -221,20 +221,41 @@ utils::globalVariables(c(
   "organizations_virtualGroups", # <quality_eligibility>
   "npi_type", # <quality_eligibility>
   "org_state", # <quality_eligibility>
+  "first_approved_date", # <quality_eligibility>
+  "timelength_days", # <quality_eligibility>
   "org_name", # <quality_eligibility>
   "year", # <cols_qelig>
   "npi", # <cols_qelig>
   "org_name", # <cols_qelig>
   "value", # <cols_qelig>
   "name", # <cols_qelig>
+  "ind_status", # <cols_qelig>
+  "grp_status", # <cols_qelig>
   "distro", # <quality_payment>
   "y", # <quality_payment>
-  "set", # <quality_payment>
+  "participation_type", # <quality_payment>
+  "org_state", # <quality_payment>
   "val", # <quality_payment>
+  "set", # <quality_payment>
   "score", # <quality_payment>
-  "measure", # <quality_payment>
-  "status", # <quality_payment>
   "category", # <quality_payment>
+  "status", # <quality_payment>
+  "qualified", # <quality_payment>
+  "org_size", # <quality_payment>
+  "org_id", # <quality_payment>
+  "npi_type", # <quality_payment>
+  "first", # <quality_payment>
+  "middle", # <quality_payment>
+  "last", # <quality_payment>
+  "first_approved_date", # <quality_payment>
+  "years_in_medicare", # <quality_payment>
+  "specialty_type", # <quality_payment>
+  "specialty_cat", # <quality_payment>
+  "ind_specialty_code", # <quality_payment>
+  "org_name", # <quality_payment>
+  "org_address", # <quality_payment>
+  "org_city", # <quality_payment>
+  "org_zip", # <quality_payment>
   "y", # <reassignments>
   "individual_state_code", # <reassignments>
   "group_state_code", # <reassignments>

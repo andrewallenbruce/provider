@@ -226,11 +226,10 @@ quality_eligibility <- function(year,
       results <- tidyup(results,
              dtype = 'ymd',
              int = c('year',
-                     # 'years_in_medicare',
-                     'ind_hosp_vbp_score',
+                     'ind_hosp_vbp_score'
                      # 'apms_lvt_patients',
                      # 'apms_lvt_year'
-                     'pecos_year'),
+                     ),
              # dbl = 'apms_lvt_payments',
              zip = 'org_zip',
              lgl = c('newly_enrolled',
@@ -291,7 +290,17 @@ quality_eligibility <- function(year,
                      'grp_lvt_switch',
                      'grp_eligible')) |>
         dplyr::mutate(npi_type  = fct_entype(npi_type),
-                      org_state = fct_stabb(org_state))
+                      org_state = fct_stabb(org_state)) |>
+        make_interval(start = first_approved_date,
+                      end = lubridate::ymd(paste0(year, '-12-31'))) |>
+        dplyr::mutate(years_in_medicare = round(timelength_days / 365),
+                      .after = first_approved_date) |>
+        dplyr::mutate(interval = NULL,
+                      period = NULL,
+                      timelength_days = NULL) |>
+        dplyr::group_by(year) |>
+        dplyr::mutate(org_id = dplyr::row_number(), .before = org_name) |>
+        dplyr::ungroup()
 
       if (pivot) {
         by <- dplyr::join_by(year, npi, org_name)
@@ -367,9 +376,9 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
               'last'                = 'lastName',
               'first_approved_date' = 'firstApprovedDate',
               # 'years_in_medicare'   = 'yearsInMedicare',
-              'pecos_year'          = 'pecosEnrollmentDate',
+              # 'pecos_year'          = 'pecosEnrollmentDate',
               'newly_enrolled'      = 'newlyEnrolled',
-              'specialty_desc'      = 'specialty.specialtyDescription',
+              'specialty'           = 'specialty.specialtyDescription',
               'specialty_type'      = 'specialty.typeDescription',
               'specialty_cat'       = 'specialty.categoryReference',
               'is_maqi'             = 'isMaqi',
@@ -484,30 +493,31 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
   if (type == 'top') {
 
     top_cols <- c('year',
-              'npi',
-              'npi_type',
-              'first',
-              'middle',
-              'last',
-              'first_approved_date',
-              'pecos_year',
-              'newly_enrolled',
-              'specialty_desc',
-              'specialty_type',
-              'specialty_cat',
-              'is_maqi',
-              'org_name',
-              'org_hosp_vbp_name',
-              'org_facility_based',
-              'org_address',
-              'org_city',
-              'org_state',
-              'org_zip',
-              'qp_status',
-              'ams_mips_eligible',
-              'qp_score_type',
-              'error_message',
-              'error_type')
+                  'npi',
+                  'npi_type',
+                  'first',
+                  'middle',
+                  'last',
+                  'first_approved_date',
+                  'years_in_medicare',
+                  'newly_enrolled',
+                  'specialty',
+                  'specialty_type',
+                  'specialty_cat',
+                  'is_maqi',
+                  'org_id',
+                  'org_name',
+                  'org_hosp_vbp_name',
+                  'org_facility_based',
+                  'org_address',
+                  'org_city',
+                  'org_state',
+                  'org_zip',
+                  'qp_status',
+                  'ams_mips_eligible',
+                  'qp_score_type',
+                  'error_message',
+                  'error_type')
 
     results <- df |> dplyr::select(dplyr::any_of(top_cols))
 
@@ -582,7 +592,8 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
              dplyr::filter(!is.na(value)) |>
              dplyr::filter(value == TRUE) |>
              dplyr::mutate(value = NULL) |>
-             tidyr::nest(ind_status = name) |>
+             dplyr::rename(ind_status = name) |>
+             tidyr::nest(ind_status = ind_status) |>
              janitor::remove_empty(which = c("rows", "cols"))
 
   }
@@ -621,7 +632,8 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
              dplyr::filter(!is.na(value)) |>
              dplyr::filter(value == TRUE) |>
              dplyr::mutate(value = NULL) |>
-             tidyr::nest(grp_status = name) |>
+             dplyr::rename(grp_status = name) |>
+             tidyr::nest(grp_status = grp_status) |>
              janitor::remove_empty(which = c("rows", "cols"))
 
   }
