@@ -40,9 +40,9 @@ library(gtExtras)
 future::plan(multisession, workers = 4)
 
 # Retrieve provider's overall utilization data
-ind     <- utilization_(npi = 1043477615, type = "provider")
+ind     <- utilization_(npi = 1043477615, type = "Provider")
 # Retrieve provider's utilization data by HCPCS
-srvc    <- utilization_(npi = 1023076643, type = "service")
+srvc    <- utilization_(npi = 1023076643, type = "Service")
 
 # Retrieve state & national chronic condition data to compare with
 chronic <- compare_conditions(ind)
@@ -54,14 +54,6 @@ future::plan(sequential)
 
 
 
-```{r}
-chronic |> 
-  group_by(year, level) |> 
-  summarise(mprevalence = mean(prevalence, na.rm = TRUE),
-            gprevalence = geomean(prevalence),
-            n = n()) |> 
-  arrange(year, desc(level))
-```
 
 ## Overall Performance
 
@@ -73,23 +65,23 @@ performance
 ```
 
 
-
 ```{r}
-plot(tot_payment ~ tot_srvcs, performance)
-abline(h = mean(performance$tot_payment), lty = 2)
-abline(v = mean(performance$tot_srvcs), lty = 2)
-abline(lm(tot_payment ~ tot_srvcs, performance))
+performance |> 
+  pivot_longer(!year,
+               names_to = "measure", 
+               values_to = "value") |> 
+  pivot_wider(names_from = year, 
+              values_from = value)
+  
+performance |> 
+  dplyr::mutate(year = lubridate::make_date(year)) |> 
+  echarts4r::e_chart(x = year, height = "80px", width = "300px") |> 
+    echarts4r::e_line(tot_hcpcs, symbol = "none") |> 
+    echarts4r::e_legend(show = FALSE) |> 
+    echarts4r::e_axis(axis = "y", show = FALSE)
 ```
 
 
-```{r}
-lm.performance <- lm(tot_payment ~ tot_benes + .srvcs_per_bene + .pymt_per_srvc + .copay_deduct, data = performance)
-lm.performance
-
-summary(lm.performance)
-
-plot(lm.performance)
-```
 
 
 ```{r}

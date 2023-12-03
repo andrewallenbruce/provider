@@ -281,7 +281,7 @@ hospitals <- function(npi = NULL,
                       zip   = 'zip_code') |>
       combine(address, c('address_line_1',
                          'address_line_2')) |>
-      combine(structure, c('organization_type_structure',
+      combine(structure, c('organization_type_structure', #nolint
                            'organization_other_type_text'), sep = ": ") |>
       combine(location_type, c('practice_location_type',
                                'location_other_type_text'), sep = ": ") |>

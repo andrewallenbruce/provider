@@ -35,7 +35,15 @@
 #'
 #' @param hcpcs < *character* > HCPCS or CPT code
 #' @param rbcs < *character* > RBCS ID
-#' @param category < *character* > RBCS Category Description
+#' @param category < *character* > RBCS Category Description, e.g.
+#' + Anesthesia
+#' + DME
+#' + E&M
+#' + Imaging
+#' + Other
+#' + Procedure
+#' + Test
+#' + Treatment
 #' @param subcategory < *character* > RBCS Subcategory Description
 #' @param family < *character* > RBCS Family Description
 #' @param procedure < *character* > Whether the HCPCS code is a Major (`"M"`),
@@ -63,6 +71,8 @@
 #' betos(subcategory = "General Laboratory")
 #' betos(family = "Immunoassay")
 #' betos(procedure = "M")
+#' betos(family = "No RBCS Family")
+#' betos(rbcs = "TL001N)
 #' @autoglobal
 #' @export
 betos <- function(hcpcs = NULL,

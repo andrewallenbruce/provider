@@ -9,6 +9,7 @@ test_that("check_npi() works", {
 test_that("validate_npi() works", {
   expect_equal(validate_npi(1528060837), "1528060837")
   expect_type(validate_npi(1528060837), "character")
+  expect_equal(validate_npi(1528060837, print = TRUE), "1528060837")
   expect_snapshot(validate_npi(1234567891), error = TRUE)
   expect_snapshot(validate_npi(12345691234), error = TRUE)
   expect_snapshot(validate_npi("O12345678912"), error = TRUE)

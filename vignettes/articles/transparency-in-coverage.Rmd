@@ -32,17 +32,17 @@ library(gt)
 
 
 ```{r}
-res <- httr2::request("https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/") |> 
-       httr2::req_perform() |> 
-       httr2::resp_body_json(check_type = FALSE, 
-                             simplifyVector = TRUE)
-res$blobs$name
-
-res$blobs |> 
-  tibble::tibble() |> 
-  dplyr::slice_tail() |> 
-  dplyr::glimpse()
-#"2023-11-01_ADAMS-COUNTY-GOVERNMENT_DOCTORS-PLAN-EPO_allowed-amounts.json.gz"
-"2023-11-01_6S-DEVELOPMENT-LLC_index.json"
+# res <- httr2::request("https://transparency-in-coverage.uhc.com/api/v1/uhc/blobs/") |> 
+#        httr2::req_perform() |> 
+#        httr2::resp_body_json(check_type = FALSE, 
+#                              simplifyVector = TRUE)
+# res$blobs$name
+# 
+# res$blobs |> 
+#   tibble::tibble() |> 
+#   dplyr::slice_tail() |> 
+#   dplyr::glimpse()
+# #"2023-11-01_ADAMS-COUNTY-GOVERNMENT_DOCTORS-PLAN-EPO_allowed-amounts.json.gz"
+# "2023-11-01_6S-DEVELOPMENT-LLC_index.json"
 ```
 

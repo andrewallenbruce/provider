@@ -23,6 +23,14 @@ test_that("util_years() works", {
 
 })
 
+test_that("rx_years() works", {
+
+  rx <- rx_years()
+  expect_equal(rx, 2013:2021)
+  expect_vector(rx, ptype = integer(), size = 9)
+
+})
+
 test_that("cc_years() works", {
 
   cc <- cc_years()

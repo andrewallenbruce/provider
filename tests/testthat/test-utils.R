@@ -81,7 +81,8 @@ test_that("tidyup() works", {
     space = " ",
     star  = "*",
     dash  = "--",
-    lgl   = "TRUE")
+    lgl   = "TRUE",
+    zip   = "813031234")
 
   df2      <- df
   df2$date <- "03/07/1981"
@@ -99,7 +100,8 @@ test_that("tidyup() works", {
     space = NA_character_,
     star  = NA_character_,
     dash  = NA_character_,
-    lgl   = TRUE)
+    lgl   = TRUE,
+    zip   = "81303")
 
   tidy2      <- tidy
   tidy2$date <- lubridate::mdy("03/07/1981")
@@ -112,7 +114,8 @@ test_that("tidyup() works", {
                       dbl   = "dbl",
                       up    = "name",
                       cred  = "cred",
-                      lgl   = 'lgl'),
+                      lgl   = 'lgl',
+                      zip   = 'zip'),
                tidy)
 
   expect_equal(tidyup(df2,
@@ -124,7 +127,8 @@ test_that("tidyup() works", {
                       dbl   = "dbl",
                       up    = "name",
                       cred  = "cred",
-                      lgl   = 'lgl'),
+                      lgl   = 'lgl',
+                      zip   = 'zip'),
                tidy2)
 })
 

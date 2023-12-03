@@ -26,6 +26,21 @@ utils::globalVariables(c(
   "y", # <clinicians>
   "address", # <clinicians>
   "gndr", # <clinicians>
+  "title", # <cms_update>
+  "modified", # <cms_update>
+  "distribution", # <cms_update>
+  "distribution_format", # <cms_update>
+  "distribution_title", # <cms_update>
+  "distribution_modified", # <cms_update>
+  "distribution_accessURL", # <cms_update>
+  "year", # <cms_update>
+  "id", # <cms_update>
+  "title", # <cms_dataset_search>
+  "modified", # <cms_dataset_search>
+  "keyword", # <cms_dataset_search>
+  "identifier", # <cms_dataset_search>
+  "description", # <cms_dataset_search>
+  "arg", # <encode_param>
   "year", # <compare_hcpcs>
   "hcpcs", # <compare_hcpcs>
   "pos", # <compare_hcpcs>
@@ -274,20 +289,6 @@ utils::globalVariables(c(
   "rndrng_prvdr_geo_desc", # <tidyup_geography.util>
   "place_of_srvc", # <tidyup_geography.util>
   "rndrng_prvdr_geo_lvl", # <tidyup_geography.util>
-  "title", # <cms_update>
-  "modified", # <cms_update>
-  "distribution", # <cms_update>
-  "distribution_format", # <cms_update>
-  "distribution_title", # <cms_update>
-  "distribution_modified", # <cms_update>
-  "distribution_accessURL", # <cms_update>
-  "year", # <cms_update>
-  "id", # <cms_update>
-  "title", # <cms_dataset_search>
-  "modified", # <cms_dataset_search>
-  "keyword", # <cms_dataset_search>
-  "identifier", # <cms_dataset_search>
-  "description", # <cms_dataset_search>
   "state.abb", # <fct_stabb>
   "state.name", # <fct_stname>
   "Variable", # <gt_datadict>
@@ -297,6 +298,5 @@ utils::globalVariables(c(
   "state.name", # <abb2full>
   "x", # <abb2full>
   "y", # <abb2full>
-  "arg", # <encode_param>
   NULL
 ))

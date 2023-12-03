@@ -19,7 +19,17 @@ betos(
 
 \item{rbcs}{< \emph{character} > RBCS ID}
 
-\item{category}{< \emph{character} > RBCS Category Description}
+\item{category}{< \emph{character} > RBCS Category Description, e.g.
+\itemize{
+\item Anesthesia
+\item DME
+\item E&M
+\item Imaging
+\item Other
+\item Procedure
+\item Test
+\item Treatment
+}}
 
 \item{subcategory}{< \emph{character} > RBCS Subcategory Description}
 
@@ -85,12 +95,3 @@ assigned to a 6-character RBCS taxonomy code.
  Annually
 }
 
-\examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-betos(hcpcs = "0001U")
-betos(category = "Test")
-betos(subcategory = "General Laboratory")
-betos(family = "Immunoassay")
-betos(procedure = "M")
-\dontshow{\}) # examplesIf}
-}
