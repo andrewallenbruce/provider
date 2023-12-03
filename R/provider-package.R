@@ -5,5 +5,6 @@
 #' @importFrom lifecycle deprecated
 #' @importFrom zeallot %<-%
 #' @importFrom stringi %s+%
+#' @importFrom rlang %||%
 ## usethis namespace: end
 NULL

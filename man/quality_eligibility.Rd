@@ -12,6 +12,7 @@ quality_eligibility(
   unnest = TRUE,
   pivot = TRUE,
   na.rm = FALSE,
+  stats = FALSE,
   ...
 )
 
@@ -32,6 +33,8 @@ the same NPI indicate multiple TIN/NPI combinations.}
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{FALSE} Remove empty rows and columns}
+
+\item{stats}{< \emph{boolean} > // \strong{default:} \code{FALSE} Return QPP stats}
 
 \item{...}{Pass arguments to \code{\link[=quality_eligibility]{quality_eligibility()}}.}
 }
@@ -79,6 +82,30 @@ APM, characterized by an APM Entity ID.
 }
 }
 
+\section{\strong{stats} == \code{TRUE}}{
+
+Public statistics derived from all QPP providers:
+\subsection{HCC Risk Score Average:}{
+
+National average individual (NPI) or group (TIN) risk score for MIPS
+eligible individual/group. Scores are calculated as follows:
+\itemize{
+\item \strong{Individual} = \verb{sum(Clinician Risk Scores) / n(Eligible Clinicians)}
+\item \strong{Group} = \verb{sum(Practice Risk Scores) / n(Eligible Practices)}
+}
+}
+
+\subsection{Dual Eligibility Average:}{
+
+National average individual (NPI) or group (TIN) dual-eligibility score for
+MIPS eligible individual/group.
+\itemize{
+\item \strong{Individual} = \verb{sum(Clinician Dual-Eligibility Scores) / n(Eligible Clinicians)}
+\item \strong{Group} = sum(Practice Dual-Eligibility Scores) / n(Eligible Practices)
+}
+}
+}
+
 \section{Links}{
 
 \itemize{
@@ -117,5 +144,11 @@ purrr::map(\(x)
                                    1043477615,
                                    1144544834))) |>
        purrr::list_rbind()
+
+# Quality Stats
+
+2017:2023 |>
+purrr::map(\(x) quality_eligibility(year = x, stats = TRUE)) |>
+purrr::list_rbind()
 \dontshow{\}) # examplesIf}
 }

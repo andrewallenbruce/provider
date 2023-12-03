@@ -192,6 +192,7 @@ utils::globalVariables(c(
   "y", # <providers>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
+  "facility_name", # <mips_2021>
   "aco_id_1", # <mips_2021>
   "aco_nm_1", # <mips_2021>
   "aco_id_2", # <mips_2021>
@@ -207,8 +208,8 @@ utils::globalVariables(c(
   "collection_type", # <mips_2021>
   "ccxp_ind", # <mips_2021>
   "ind_pac_id", # <mips_2021>
-  "frst_nm", # <mips_2021>
-  "lst_nm", # <mips_2021>
+  "provider_first_name", # <mips_2021>
+  "provider_last_name", # <mips_2021>
   "apm_affl_1", # <mips_2021>
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
@@ -218,8 +219,6 @@ utils::globalVariables(c(
   "organizations_groupScenario", # <quality_eligibility>
   "organizations_apms", # <quality_eligibility>
   "organizations_virtualGroups", # <quality_eligibility>
-  "ind", # <quality_eligibility>
-  "grp", # <quality_eligibility>
   "npi_type", # <quality_eligibility>
   "org_state", # <quality_eligibility>
   "org_name", # <quality_eligibility>

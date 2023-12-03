@@ -38,13 +38,29 @@
 #' + __APM Entities__ represent a group of practices which participate in an
 #' APM, characterized by an APM Entity ID.
 #'
+#' @section __stats__ == `TRUE`:
+#' Public statistics derived from all QPP providers:
+#'
+#' ## HCC Risk Score Average:
+#' National average individual (NPI) or group (TIN) risk score for MIPS
+#' eligible individual/group. Scores are calculated as follows:
+#'
+#' + __Individual__ = `sum(Clinician Risk Scores) / n(Eligible Clinicians)`
+#' + __Group__ = `sum(Practice Risk Scores) / n(Eligible Practices)`
+#'
+#' ## Dual Eligibility Average:
+#' National average individual (NPI) or group (TIN) dual-eligibility score for
+#' MIPS eligible individual/group.
+#'
+#' + __Individual__ = `sum(Clinician Dual-Eligibility Scores) / n(Eligible Clinicians)`
+#' + __Group__ = sum(Practice Dual-Eligibility Scores) / n(Eligible Practices)
 #'
 #' @section Links:
 #' + [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
 #' + [QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6)](https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility%2C%20v6)
 #' + [QPP Eligibility & MVP/CAHPS/Subgroups Registration Services (v6) (Multiple NPIs)](https://qpp.cms.gov/api/eligibility/docs/?urls.primaryName=Eligibility%2C%20v6#/Unauthenticated/get_api_eligibility_npis__npi_)
 #'
-#' @section Update Frequency: **Annually**
+#' @section Update Frequency: __Annually__
 #'
 #' @name quality_eligibility
 #'
@@ -57,6 +73,7 @@
 #' @param unnest < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
+#' @param stats < *boolean* > // __default:__ `FALSE` Return QPP stats
 #' @param ... For future use.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -87,6 +104,13 @@
 #'                                    1043477615,
 #'                                    1144544834))) |>
 #'        purrr::list_rbind()
+#'
+#' # Quality Stats
+#'
+#' 2017:2023 |>
+#' purrr::map(\(x) quality_eligibility(year = x, stats = TRUE)) |>
+#' purrr::list_rbind()
+#'
 #' @autoglobal
 #' @export
 quality_eligibility <- function(year,
@@ -95,22 +119,45 @@ quality_eligibility <- function(year,
                                 unnest = TRUE,
                                 pivot = TRUE,
                                 na.rm = FALSE,
+                                stats = FALSE,
                                 ...) {
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, as.character(2017:2024))
+  year <- rlang::arg_match(year,
+          as.character(2017:lubridate::year(lubridate::now())))
+
+  if (stats) {
+
+    url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
+
+    response <- httr2::request(url) |>
+      httr2::req_headers(Accept = "application/vnd.qpp.cms.gov.v6+json") |>
+      httr2::req_perform() |>
+      httr2::resp_body_json(simplifyVector = TRUE)
+
+    ind <- response$data$individual
+    grp <- response$data$group
+
+    results <- dplyr::tibble(
+      year    = as.integer(year),
+      type    = factor(rep(c("Individual", "Group"), each = 2)),
+      measure = factor(rep(c("HCC Risk Score", "Dual Eligibility"), 2)),
+      average = as.double(c(ind$hccRiskScoreAverage %||% 0,
+                            ind$dualEligibilityAverage %||% 0,
+                            grp$hccRiskScoreAverage %||% 0,
+                            grp$dualEligibilityAverage %||% 0)))
+
+    return(results)
+  }
 
   rlang::check_required(npi)
-
-
   if (length(npi) == 1L) npi <- npi %nn% validate_npi(npi)
 
   if (length(npi) > 1L) {
     npi <- purrr::map_vec(npi, validate_npi)
     npi <- paste0(unique(npi), collapse = ",")
   }
-
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npis/{npi}/?year={year}")
 

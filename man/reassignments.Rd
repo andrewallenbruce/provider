@@ -22,25 +22,25 @@ reassignments(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > \strong{Individual} National Provider Identifier}
+\item{npi}{< \emph{integer} > \strong{Individual} 10-digit National Provider Identifier}
 
-\item{pac}{< \emph{integer} > \strong{Individual} PECOS Associate Control ID}
+\item{pac}{< \emph{integer} > \strong{Individual} 10-digit PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > \strong{Individual} Medicare Enrollment ID}
+\item{enid}{< \emph{character} > \strong{Individual} 15-digit Medicare Enrollment ID}
 
 \item{first, last}{< \emph{character} > \strong{Individual} Provider's name}
 
-\item{state}{< \emph{character} > \strong{Individual} Enrollment state}
+\item{state}{< \emph{character} > \strong{Individual} Enrollment state abbreviation}
 
 \item{specialty}{< \emph{character} > \strong{Individual} Enrollment specialty}
 
 \item{organization}{< \emph{character} > \strong{Organizational} Legal business name}
 
-\item{pac_org}{< \emph{integer} > \strong{Organizational} PECOS Associate Control ID}
+\item{pac_org}{< \emph{integer} > \strong{Organizational} 10-digit PECOS Associate Control ID}
 
-\item{enid_org}{< \emph{character} > \strong{Organizational} Medicare Enrollment ID}
+\item{enid_org}{< \emph{character} > \strong{Organizational} 15-digit Medicare Enrollment ID}
 
-\item{state_org}{< \emph{character} > \strong{Organizational} Enrollment state}
+\item{state_org}{< \emph{character} > \strong{Organizational} Enrollment state abbreviation}
 
 \item{entry}{< \emph{character} > Entry type, reassignment (\code{"R"}) or employment (\code{"E"})}
 

@@ -154,7 +154,7 @@ prescribers <- function(year,
   year <- as.character(year)
   year <- rlang::arg_match(year, as.character(rx_years()))
 
-  npi  <- npi %nn% validate_npi(npi)
+  npi   <- npi %nn% validate_npi(npi)
   zip   <- zip %nn% as.character(zip)
   fips  <- fips %nn% as.character(fips)
   ruca  <- ruca %nn% as.character(ruca)
