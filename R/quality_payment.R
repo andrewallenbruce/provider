@@ -50,7 +50,7 @@ NULL
 #' + `"Individual"`
 #' + `"MIPS APM"`
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest `statuses` & `measures`
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest `status` & `measures`
 #' @param eligibility < *boolean* > // __default:__ `TRUE` Append results
 #' from [quality_eligibility()]
 #' @param ... For future use.
@@ -255,12 +255,11 @@ quality_payment <- function(year,
 #' @autoglobal
 #' @export
 quality_payment_ <- function(year = qpp_years(), ...) {
-  furrr::future_map_dfr(year, quality_payment, ..., .options = furrr::furrr_options(seed = NULL))
+  furrr::future_map_dfr(year, quality_payment, ...,
+                        .options = furrr::furrr_options(seed = NULL))
 }
 
-#' QPP Columns
-#' @param df data frame
-#' @param step description
+
 #' @autoglobal
 #' @noRd
 cols_qpp <- function(df, step = c("tidy", "nest")) {

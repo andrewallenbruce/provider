@@ -56,7 +56,7 @@ attributed to the clinician; drives most of the data returned.
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{statuses} & \code{measures}}
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{status} & \code{measures}}
 
 \item{eligibility}{< \emph{boolean} > // \strong{default:} \code{TRUE} Append results
 from \code{\link[=quality_eligibility]{quality_eligibility()}}}
