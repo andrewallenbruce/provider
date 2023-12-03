@@ -151,7 +151,7 @@ quality_payment <- function(year,
                       "extreme_hardship_cost")) |>
       cols_qpp("tidy") |>
       dplyr::mutate(participation_type = fct_part(participation_type),
-                    org_state = fct_stabb(org_state))
+                    state = fct_stabb(state))
 
       if (nest) {
         pcol <- list(q = c('quality_measure_id_', 'quality_measure_score_') %s+% rep(1:10, each = 2),
@@ -176,7 +176,7 @@ quality_payment <- function(year,
             values_to     = "val") |>
           dplyr::filter(!is.na(val)) |>
           dplyr::mutate(x = NULL,
-                        cat_id = NULL) |> #print(n = Inf)
+                        cat_id = NULL) |>
           tidyr::pivot_wider(names_from = set,
                              values_from = val,
                              values_fn = list) |>
@@ -215,32 +215,11 @@ quality_payment <- function(year,
           dplyr::ungroup()
 
         if (eligibility) {
+          by = dplyr::join_by(year, npi, org_id)
           npi  <- unique(results$npi)
           elig <- quality_eligibility(year = year, npi = c(npi))
-          results <- dplyr::left_join(results, elig,
-                     by = dplyr::join_by(year, npi, org_id, specialty, org_state)) |>
-            dplyr::select(year,
-                          npi,
-                          npi_type,
-                          first,
-                          middle,
-                          last,
-                          first_approved_date,
-                          years_in_medicare,
-                          participation_type,
-                          specialty,
-                          specialty_type,
-                          specialty_cat,
-                          specialty_code = ind_specialty_code,
-                          org_id,
-                          org_name,
-                          org_address,
-                          org_city,
-                          org_state,
-                          org_zip,
-                          org_size,
-                          dplyr::everything())
-
+          results <- dplyr::left_join(results, elig, by) |>
+            cols_qcomb()
         }
       }
     }
@@ -259,6 +238,79 @@ quality_payment_ <- function(year = qpp_years(), ...) {
                         .options = furrr::furrr_options(seed = NULL))
 }
 
+#' @autoglobal
+#' @noRd
+cols_qcomb <- function(df) {
+
+  cols <- c('year',
+            'npi',
+            'npi_type',
+            'first',
+            'middle',
+            'last',
+            'state',
+            'first_approved_date',
+            'years_in_medicare',
+            'participation_type',
+            'beneficiaries',
+            'services',
+            'charges' = 'allowed_charges',
+            'final_score',
+            'pay_adjust',
+            'quality_score',
+            'pi_score',
+            'ia_score',
+            'cost_score',
+            'complex_bonus',
+            'qi_bonus',
+            'qp_status',
+            'qp_score_type',
+            'ams_mips_eligible',
+            'newly_enrolled',
+            'is_maqi',
+
+            'org_id',
+            'org_size',
+            'org_name',
+            'org_address',
+            'org_city',
+            'org_state',
+            'org_zip',
+            'org_hosp_vbp_name',
+            'org_facility_based',
+
+            'apms_id',
+            'apms_name',
+            'apms_entity_name',
+            'apms_sub_id',
+            'apms_sub_name',
+            'apms_relationship',
+
+            'ind_lvt_status_code',
+            'ind_lvt_status_desc',
+            'ind_hosp_vbp_score',
+
+            'specialty',
+
+            'specialty_desc',
+            'specialty_type',
+            'specialty_cat',
+
+            'ind_specialty_code',
+            'ind_specialty_desc',
+            'ind_specialty_type',
+            'ind_specialty_cat',
+
+            'qpp_status',
+            'qpp_measures',
+            'ind_status',
+            'grp_status',
+            'apms_status'
+            )
+
+  df |> dplyr::select(dplyr::any_of(cols))
+
+}
 
 #' @autoglobal
 #' @noRd
@@ -268,7 +320,7 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 
   cols <- c('year',
             'npi',
-            'org_state'                    = 'practice_state_or_us_territory',
+            'state'                        = 'practice_state_or_us_territory',
             'org_size'                     = 'practice_size',
             'specialty'                    = 'clinician_specialty',
             #'med_years'                    = 'years_in_medicare',
@@ -318,10 +370,10 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
 
     cols <- c('year',
               'npi',
-              'org_state',
+              'state',
               'org_size',
               'specialty',
-              'med_years',
+              # 'med_years',
               'participation_type',
               'beneficiaries',
               'services',
@@ -337,6 +389,5 @@ cols_qpp <- function(df, step = c("tidy", "nest")) {
               'qpp_status',
               'qpp_measures')
   }
-
   df |> dplyr::select(dplyr::any_of(cols))
 }

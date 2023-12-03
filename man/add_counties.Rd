@@ -30,6 +30,8 @@ add_counties(
 Add county name, FIPs, and geometry to data frame with zip codes
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 # Example data frame containing state abbreviation and zip code
 ex <- dplyr::tibble(state = "GA",
                     zip = "31605")
@@ -56,5 +58,5 @@ ex |> add_counties(state,
                    add_fips = TRUE,
                    add_geo  = TRUE,
                    as_sf    = TRUE)
-
+\dontshow{\}) # examplesIf}
 }

@@ -234,7 +234,6 @@ utils::globalVariables(c(
   "distro", # <quality_payment>
   "y", # <quality_payment>
   "participation_type", # <quality_payment>
-  "org_state", # <quality_payment>
   "val", # <quality_payment>
   "set", # <quality_payment>
   "score", # <quality_payment>
@@ -243,19 +242,6 @@ utils::globalVariables(c(
   "qualified", # <quality_payment>
   "org_size", # <quality_payment>
   "org_id", # <quality_payment>
-  "npi_type", # <quality_payment>
-  "first", # <quality_payment>
-  "middle", # <quality_payment>
-  "last", # <quality_payment>
-  "first_approved_date", # <quality_payment>
-  "years_in_medicare", # <quality_payment>
-  "specialty_type", # <quality_payment>
-  "specialty_cat", # <quality_payment>
-  "ind_specialty_code", # <quality_payment>
-  "org_name", # <quality_payment>
-  "org_address", # <quality_payment>
-  "org_city", # <quality_payment>
-  "org_zip", # <quality_payment>
   "y", # <reassignments>
   "individual_state_code", # <reassignments>
   "group_state_code", # <reassignments>

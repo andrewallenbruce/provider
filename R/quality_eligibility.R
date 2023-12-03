@@ -95,7 +95,6 @@
 #'                             1144544834))
 #'
 #' # Multiple NPIs/years
-#'
 #' 2017:2023 |>
 #' purrr::map(\(x)
 #'        quality_eligibility(year = x,
@@ -105,11 +104,19 @@
 #'                                    1144544834))) |>
 #'        purrr::list_rbind()
 #'
-#' # Quality Stats
+#' # Same as
+#' quality_eligibility_(npi = c(aff_npis[1:5],
+#'                              1234567893,
+#'                              1043477615,
+#'                              1144544834))
 #'
+#' # Quality Stats
 #' 2017:2023 |>
 #' purrr::map(\(x) quality_eligibility(year = x, stats = TRUE)) |>
 #' purrr::list_rbind()
+#'
+#' # Same as
+#' quality_eligibility_(stats = TRUE)
 #'
 #' @autoglobal
 #' @export
@@ -378,7 +385,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
               # 'years_in_medicare'   = 'yearsInMedicare',
               # 'pecos_year'          = 'pecosEnrollmentDate',
               'newly_enrolled'      = 'newlyEnrolled',
-              'specialty'           = 'specialty.specialtyDescription',
+              'specialty_desc'      = 'specialty.specialtyDescription',
               'specialty_type'      = 'specialty.typeDescription',
               'specialty_cat'       = 'specialty.categoryReference',
               'is_maqi'             = 'isMaqi',
@@ -501,7 +508,7 @@ cols_qelig <- function(df, type = c('tidyup', 'top', 'apms', 'ind', 'grp')) {
                   'first_approved_date',
                   'years_in_medicare',
                   'newly_enrolled',
-                  'specialty',
+                  'specialty_desc',
                   'specialty_type',
                   'specialty_cat',
                   'is_maqi',

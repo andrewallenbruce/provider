@@ -6,7 +6,8 @@
 #' @param add_geo add county geometry column, default is `FALSE`
 #' @param as_sf convert tibble to an `{sf}` object, default is `FALSE`
 #'
-#' @examples
+#' @examplesIf interactive()
+#'
 #' # Example data frame containing state abbreviation and zip code
 #' ex <- dplyr::tibble(state = "GA",
 #'                     zip = "31605")

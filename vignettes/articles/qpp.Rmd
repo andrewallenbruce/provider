@@ -45,19 +45,37 @@ q
 ```
 
 
+# Grouping 
+
+```{r}
+q |> 
+  select(year, 
+         participation_type,
+         org_name,
+         org_size,
+         beneficiaries,
+         services,
+         charges = allowed_charges,
+         final_score,
+         pay_adjust,
+         ind_lvt_status_desc)
+```
+
+
+
 ## Special Statuses
 
 ```{r}
-select(q, year, statuses) |> 
-  unnest(statuses)
+select(q, year, qpp_status) |> 
+  unnest(qpp_status)
 ```
 
 <br>
 
 ```{r}
-select(q, year, statuses) |> 
-  unnest(statuses) |> 
-  count(category, sort = TRUE)
+select(q, year, qpp_status) |> 
+  unnest(qpp_status) |> 
+  count(qualified, sort = TRUE)
 ```
 
 <br>
@@ -65,38 +83,27 @@ select(q, year, statuses) |>
 ## Individual Category Measures
 
 ```{r}
-select(q, year, measures) |> 
-  unnest(measures)
+select(q, year, qpp_measures) |> 
+  unnest(qpp_measures)
 ```
 
 
 <br>
 
 ```{r}
-select(q, year, measures) |> 
-  unnest(measures) |> 
-  count(measure, sort = TRUE)
+select(q, year, qpp_measures) |> 
+  unnest(qpp_measures) |> 
+  count(category, sort = TRUE)
 ```
 
 <br>
-
-# Quality Payment Eligibility
 
 ```{r}
 plan(multisession, workers = 4)
-n <- quality_payment_(npi = 1043477615)
+qq <- quality_payment_(npi = 1043477615)
 plan(sequential)
-n
-```
+qq
 
-<br>
-
-```{r}
-results <- 2017:2023 |>
-  purrr::map(\(x) quality_eligibility(year = x, npi = 1043477615)) |>
-  purrr::list_rbind()
-
-results |> 
-  janitor::remove_empty()
+quality_payment(year = 2018, npi = 1043477615)
 ```
 

@@ -135,7 +135,6 @@ quality_eligibility(year = 2021,
                             1144544834))
 
 # Multiple NPIs/years
-
 2017:2023 |>
 purrr::map(\(x)
        quality_eligibility(year = x,
@@ -145,10 +144,18 @@ purrr::map(\(x)
                                    1144544834))) |>
        purrr::list_rbind()
 
-# Quality Stats
+# Same as
+quality_eligibility_(npi = c(aff_npis[1:5],
+                             1234567893,
+                             1043477615,
+                             1144544834))
 
+# Quality Stats
 2017:2023 |>
 purrr::map(\(x) quality_eligibility(year = x, stats = TRUE)) |>
 purrr::list_rbind()
+
+# Same as
+quality_eligibility_(stats = TRUE)
 \dontshow{\}) # examplesIf}
 }

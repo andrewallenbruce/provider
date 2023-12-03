@@ -387,7 +387,7 @@ test_that("cols_qpp() works", {
   y <- dplyr::tibble(
     year                         = 1,
     npi                          = 1,
-    org_state                    = 1,
+    state                        = 1,
     org_size                     = 1,
     specialty                    = 1,
     # med_years                    = 1,
@@ -481,7 +481,7 @@ test_that("cols_qpp() works", {
   z <- dplyr::tibble(
     year = 1,
     npi = 1,
-    org_state = 1,
+    state = 1,
     org_size = 1,
     specialty = 1,
     # med_years = 1,
@@ -504,7 +504,7 @@ test_that("cols_qpp() works", {
   zz <- dplyr::tibble(
     year = 1,
     npi = 1,
-    org_state = 1,
+    state = 1,
     org_size = 1,
     specialty = 1,
     # med_years = 1,
