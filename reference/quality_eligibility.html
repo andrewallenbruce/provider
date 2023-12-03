@@ -247,7 +247,6 @@ MIPS eligible individual/group.</p><ul><li><p><strong>Individual</strong> = <cod
 <span class="r-in"><span>                            <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Multiple NPIs/years</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span>       <span class="fu">quality_eligibility</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>,</span></span>
@@ -257,11 +256,19 @@ MIPS eligible individual/group.</p><ul><li><p><strong>Individual</strong> = <cod
 <span class="r-in"><span>                                   <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>       <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Quality Stats</span></span></span>
+<span class="r-in"><span><span class="co"># Same as</span></span></span>
+<span class="r-in"><span><span class="fu">quality_eligibility_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">aff_npis</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>                             <span class="fl">1234567893</span>,</span></span>
+<span class="r-in"><span>                             <span class="fl">1043477615</span>,</span></span>
+<span class="r-in"><span>                             <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Quality Stats</span></span></span>
 <span class="r-in"><span><span class="fl">2017</span><span class="op">:</span><span class="fl">2023</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">quality_eligibility</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Same as</span></span></span>
+<span class="r-in"><span><span class="fu">quality_eligibility_</span><span class="op">(</span>stats <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
