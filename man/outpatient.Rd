@@ -59,5 +59,10 @@ excluded.
 outpatient(year = 2021, ccn = "110122")
 
 outpatient(year = 2021, state = "GA")
+
+out_years() |>
+map(\(x) outpatient(year = x,
+                    ccn = "110122")) |>
+                    list_rbind()
 \dontshow{\}) # examplesIf}
 }

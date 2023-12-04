@@ -25,70 +25,163 @@ library(provider)
 library(future)
 library(furrr)
 library(dplyr)
+library(tidyr)
+library(gt)
+```
+
+# Open Payments
+
+```{r}
+ex <- open_payments(year = 2021, npi = 1043218118, na.rm = TRUE)
+ex
 ```
 
 ```{r}
-open_payments(year = 2021, npi = 1043218118, na.rm = TRUE)
-```
-
-
-
-```{r}
-plan(multisession, workers = 4)
-open  <- open_payments_(npi = 1043218118)
-plan(sequential)
-open
-```
-
-
-```{r}
-open |> 
-  select(program_year, 
-         payer_name, 
+payment <- ex |> 
+  select(payer_name,
          pay_form,
          pay_nature,
-         pay_total, 
+         row_id,
+         group_id,
+         pay_total,
          pay_date, 
-         pay_count, 
-         row_id, 
-         group_id, 
+         name:category,
+         ndc.atc_second)
+payment
+```
+
+
+```{r}
+payment |> 
+  filter(!is.na(pay_total)) |> 
+  summarise(payments = n(),
+            total = sum(pay_total, na.rm = TRUE),
+            avg_per_pmt = total / payments) |> 
+  gt::gt_preview() |> 
+  gt::fmt_currency(columns = c(total, avg_per_pmt)) |> 
+  gt::opt_all_caps()
+```
+
+
+```{r}
+payment |> 
+  filter(!is.na(pay_total)) |> 
+  group_by(payer_name) |> 
+  summarise(payments = n(),
+            total = sum(pay_total, na.rm = TRUE),
+            avg_per_pmt = total / payments) |> 
+  arrange(desc(total)) |> 
+  gt::gt_preview(30) |> 
+  gt::fmt_currency(columns = c(total, avg_per_pmt)) |> 
+  gt::opt_all_caps()
+```
+
+
+```{r}
+payment |> 
+  select(group_id, 
+         pay_total, 
          name, 
-         covered,
          type, 
-         category, 
-         ndc,
-         pdi)
+         category) |> 
+  group_by(type, category, name) |> 
+  summarise(payments = n(),
+            total = sum(pay_total, na.rm = TRUE),
+            avg_per_pmt = total / payments) |> 
+  arrange(desc(total)) |> 
+  gt::gt_preview(40) |> 
+  gt::fmt_currency(columns = c(total, avg_per_pmt)) |> 
+  gt::opt_all_caps()
 ```
 
 
 ```{r}
-open |> 
-  count(payer_sub,
-        wt = pay_count,
-        sort = TRUE)
+payment |> 
+  filter(row_id == "72")
+```
+
+## Fuzzy Joins
+
+```{r}
+op <- ex |> 
+  filter(type == "Drug") |> 
+  select(year = program_year, 
+         pay_total, 
+         group_id,
+         brand_name = ndc.brand_name,
+         generic_name = ndc.drug_name) |> 
+  mutate(brand_name = stringr::str_to_title(brand_name),
+         generic_name = stringr::str_to_title(generic_name))
+op
 ```
 
 
 ```{r}
-open |> 
-  count(payer_name,
-        wt = pay_count,
-        sort = TRUE)
+rx <- prescribers(year = 2021, 
+                  type = 'Drug', 
+                  npi = 1043218118) |> 
+  select(year,
+         brand_name, 
+         generic_name, 
+         tot_claims, 
+         tot_fills, 
+         tot_supply, 
+         tot_cost, 
+         tot_benes)
+rx
+```
+
+
+## More Involved Example
+
+```{r}
+# plan(multisession, workers = 4)
+# open  <- open_payments_(npi = 1043218118)
+# plan(sequential)
+# open <- open |> janitor::remove_empty(which = c('rows', 'cols'))
 ```
 
 
 ```{r}
-open |> 
-  count(payer_id,
-        wt = pay_count,
-        sort = TRUE)
+# open |> 
+#   select(program_year, 
+#          payer_name, 
+#          pay_form,
+#          pay_nature,
+#          pay_total, 
+#          pay_date, 
+#          pay_count, 
+#          row_id, 
+#          group_id, 
+#          name, 
+#          covered,
+#          type, 
+#          category, 
+#          ndc,
+#          pdi)
 ```
 
 
 ```{r}
-open |> 
-  filter(!is.na(type)) |> 
-  count(type, sort = TRUE)
+# open |> 
+#   count(payer_name,
+#         wt = pay_count,
+#         sort = TRUE)
+```
+
+
+```{r}
+# open |> 
+#   count(payer_id,
+#         wt = pay_count,
+#         sort = TRUE)
+```
+
+
+```{r}
+# open |> 
+#   filter(!is.na(type)) |> 
+#   count(type, sort = TRUE)
 ```
 
 

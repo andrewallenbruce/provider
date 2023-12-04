@@ -195,7 +195,7 @@ utils::globalVariables(c(
   "state_code", # <opt_out>
   "y", # <order_refer>
   "status", # <order_refer>
-  "service", # <order_refer>
+  "eligible", # <order_refer>
   "distro", # <outpatient>
   "y", # <outpatient>
   "y", # <pending>

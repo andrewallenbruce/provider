@@ -28,13 +28,6 @@ library(dplyr)
 library(tidyr)
 ```
 
-```{r}
-nppes(npi = 1144544834) |> 
-  glimpse()
-```
-
-<br>
-
 # Quality Payment Reporting
 
 ```{r}
@@ -55,7 +48,7 @@ q |>
          org_size,
          beneficiaries,
          services,
-         charges = allowed_charges,
+         charges,
          final_score,
          pay_adjust,
          ind_lvt_status_desc)
@@ -66,16 +59,16 @@ q |>
 ## Special Statuses
 
 ```{r}
-select(q, year, qpp_status) |> 
+select(q, year, participation_type, org_name, org_size, qpp_status) |> 
   unnest(qpp_status)
 ```
 
 <br>
 
 ```{r}
-select(q, year, qpp_status) |> 
+select(q, year, participation_type, org_name, org_size, qpp_status) |> 
   unnest(qpp_status) |> 
-  count(qualified, sort = TRUE)
+  count(org_name, qualified, sort = TRUE)
 ```
 
 <br>
@@ -83,7 +76,7 @@ select(q, year, qpp_status) |>
 ## Individual Category Measures
 
 ```{r}
-select(q, year, qpp_measures) |> 
+select(q, year, participation_type, org_name, org_size, qpp_measures) |>
   unnest(qpp_measures)
 ```
 
@@ -91,9 +84,9 @@ select(q, year, qpp_measures) |>
 <br>
 
 ```{r}
-select(q, year, qpp_measures) |> 
+select(q, year, participation_type, org_name, org_size, qpp_measures) |>
   unnest(qpp_measures) |> 
-  count(category, sort = TRUE)
+  count(year, org_name, category, sort = TRUE)
 ```
 
 <br>
@@ -103,7 +96,5 @@ plan(multisession, workers = 4)
 qq <- quality_payment_(npi = 1043477615)
 plan(sequential)
 qq
-
-quality_payment(year = 2018, npi = 1043477615)
 ```
 

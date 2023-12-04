@@ -114,11 +114,11 @@ order_refer <- function(npi   = NULL,
     if (pivot) {
       results <-  cols_ord(results) |>
         tidyr::pivot_longer(cols = !c(npi, first, last),
-                          names_to = "service",
+                          names_to = "eligible",
                           values_to = "status") |>
         dplyr::filter(status == TRUE) |>
         dplyr::mutate(status = NULL,
-                      service = fct_ord(service))
+                      eligible = fct_ord(eligible))
       }
     }
   return(results)

@@ -24,6 +24,10 @@
 #'
 #' outpatient(year = 2021, state = "GA")
 #'
+#' out_years() |>
+#' map(\(x) outpatient(year = x,
+#'                     ccn = "110122")) |>
+#'                     list_rbind()
 #' @autoglobal
 #' @export
 # nocov start
