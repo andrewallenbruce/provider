@@ -135,7 +135,12 @@ on drug utilization (claim counts and day supply) and total drug costs.</p>
 <span>  brand_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  generic_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  opioid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  opioidLA <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  antibiotic <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  antipsychotic <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  nest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
@@ -227,8 +232,28 @@ aggregated:</p><ul><li><p><code>"State"</code>: Data is aggregated for each stat
 </ul></dd>
 
 
+<dt>opioid</dt>
+<dd><p>&lt; <em>boolean</em> &gt; <em>type = 'Geography'</em>, <code>TRUE</code> returns Opioid drugs</p></dd>
+
+
+<dt>opioidLA</dt>
+<dd><p>&lt; <em>boolean</em> &gt; <em>type = 'Geography'</em>, <code>TRUE</code> returns Long-acting Opioids</p></dd>
+
+
+<dt>antibiotic</dt>
+<dd><p>&lt; <em>boolean</em> &gt; <em>type = 'Geography'</em>, <code>TRUE</code> returns antibiotics</p></dd>
+
+
+<dt>antipsychotic</dt>
+<dd><p>&lt; <em>boolean</em> &gt; <em>type = 'Geography'</em>, <code>TRUE</code> returns antipsychotics</p></dd>
+
+
 <dt>tidy</dt>
 <dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
+
+
+<dt>nest</dt>
+<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest output</p></dd>
 
 
 <dt>na.rm</dt>
@@ -300,8 +325,11 @@ subsidies, and any other third-party payers.</p>
 <span class="r-in"><span><span class="fu">prescribers</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>,</span></span>
 <span class="r-in"><span>            type <span class="op">=</span> <span class="st">'Geography'</span>,</span></span>
 <span class="r-in"><span>            level <span class="op">=</span> <span class="st">'National'</span>,</span></span>
-<span class="r-in"><span>            brand_name <span class="op">=</span> <span class="st">'Paroxetine Hcl'</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>            brand_name <span class="op">=</span> <span class="st">'Paroxetine Hcl'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">prescribers</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>,</span></span>
+<span class="r-in"><span>            type <span class="op">=</span> <span class="st">'Geography'</span>,</span></span>
+<span class="r-in"><span>            opioid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use the years helper function to</span></span></span>
 <span class="r-in"><span><span class="co"># retrieve results for every year:</span></span></span>
