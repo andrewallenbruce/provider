@@ -72,7 +72,7 @@
 #' betos(family = "Immunoassay")
 #' betos(procedure = "M")
 #' betos(family = "No RBCS Family")
-#' betos(rbcs = "TL001N)
+#' betos(rbcs = "TL001N")
 #' @autoglobal
 #' @export
 betos <- function(hcpcs = NULL,

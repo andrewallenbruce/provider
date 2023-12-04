@@ -65,8 +65,11 @@
 #' prescribers(year = 2017,
 #'             type = 'Geography',
 #'             level = 'National',
-#'             brand_name = 'Paroxetine Hcl') |>
-#'             dplyr::glimpse()
+#'             brand_name = 'Paroxetine Hcl')
+#'
+#' prescribers(year = 2017,
+#'             type = 'Geography',
+#'             opioid = TRUE)
 #'
 #' # Use the years helper function to
 #' # retrieve results for every year:
@@ -121,7 +124,12 @@ NULL
 #' aggregated:
 #' + `"State"`: Data is aggregated for each state
 #' + `"National"`: Data is aggregated across all states for a given HCPCS Code
+#' @param opioid < *boolean* > _type = 'Geography'_, `TRUE` returns Opioid drugs
+#' @param opioidLA < *boolean* > _type = 'Geography'_, `TRUE` returns Long-acting Opioids
+#' @param antibiotic < *boolean* > _type = 'Geography'_, `TRUE` returns antibiotics
+#' @param antipsychotic < *boolean* > _type = 'Geography'_, `TRUE` returns antipsychotics
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param nest < *boolean* > // __default:__ `TRUE` Nest output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... For future use.
 #' @rdname prescribers
@@ -146,7 +154,12 @@ prescribers <- function(year,
                         brand_name = NULL,
                         generic_name = NULL,
                         level = NULL,
+                        opioid = NULL,
+                        opioidLA = NULL,
+                        antibiotic = NULL,
+                        antipsychotic = NULL,
                         tidy = TRUE,
+                        nest = TRUE,
                         na.rm = TRUE,
                         ...) {
 
@@ -202,6 +215,10 @@ prescribers <- function(year,
     country <- NULL
     level <- level %nn% rlang::arg_match(level, c('National', 'State'))
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
+    opioid <- opioid %nn% tf_2_yn(opioid)
+    opioidLA <- opioidLA %nn% tf_2_yn(opioidLA)
+    antibiotic <- antibiotic %nn% tf_2_yn(antibiotic)
+    antipsychotic <- antipsychotic %nn% tf_2_yn(antipsychotic)
   }
 
   args <- dplyr::tribble(
@@ -221,7 +238,11 @@ prescribers <- function(year,
     'Prscrbr_Type',          specialty,
     'Brnd_Name',             brand_name,
     'Gnrc_Name',             generic_name,
-    'Prscrbr_Geo_Lvl',       level)
+    'Prscrbr_Geo_Lvl',       level,
+    'Opioid_Drug_Flag',      opioid,
+    'Opioid_LA_Drug_Flag',   opioidLA,
+    'Antbtc_Drug_Flag',      antibiotic,
+    'Antpsyct_Drug_Flag',    antipsychotic)
 
   yr <- switch(type,
                'Provider'  = api_years('rxp'),
@@ -272,8 +293,8 @@ prescribers <- function(year,
     results$year <- year
 
     results <- switch(type,
-            'Provider'  = tidyup_provider.rx(results),
-            'Drug'      = tidyup_drug.rx(results),
+            'Provider'  = tidyup_provider.rx(results, nest = nest),
+            'Drug'      = tidyup_drug.rx(results, nest = nest),
             'Geography' = tidyup_geography.rx(results))
 
     if (na.rm) results <- narm(results)
@@ -313,7 +334,7 @@ tidyup_geography.rx <- function(results) {
 #' @param results data frame from [prescribers(type = "Drug")]
 #' @autoglobal
 #' @noRd
-tidyup_drug.rx <- function(results) {
+tidyup_drug.rx <- function(results, nest = TRUE) {
 
   results <- cols_rx(results, 'Drug') |>
     tidyup(int  = c('year',
@@ -332,13 +353,24 @@ tidyup_drug.rx <- function(results) {
                              dplyr::contains('suppress_'),
                              suppress_flag))
 
-  return(results)
+  if (nest) {
+    results <- results |>
+      tidyr::nest(gte_65 = dplyr::any_of(c(
+        'tot_claims_ge65',
+        'tot_fills_ge65',
+        'tot_cost_ge65',
+        'tot_supply_ge65',
+        'tot_benes_ge65',
+        'suppress_ge65',
+        'suppress_bene_ge65')))
+  }
+ return(results)
 }
 
 #' @param results data frame from [prescribers(type = "Provider")]
 #' @autoglobal
 #' @noRd
-tidyup_provider.rx <- function(results) {
+tidyup_provider.rx <- function(results, nest = TRUE) {
 
   results <- cols_rx(results, 'Provider') |>
     tidyup(int  = c('year',
@@ -378,6 +410,63 @@ tidyup_provider.rx <- function(results) {
                            dplyr::across(
                              dplyr::contains('suppress_'),
                              suppress_flag))
+
+  if (nest) {
+    results <- results |>
+      tidyr::nest(detailed = dplyr::any_of(c(
+        'tot_claims_brand',
+        'tot_cost_brand',
+        'tot_claims_generic',
+        'tot_cost_generic',
+        'tot_claims_other',
+        'tot_cost_other',
+        'tot_claims_mapd',
+        'tot_cost_mapd',
+        'tot_claims_pdp',
+        'tot_cost_pdp',
+        'tot_claims_lis',
+        'tot_cost_lis',
+        'tot_claims_nlis',
+        'tot_cost_nlis',
+        'tot_claims_opioid',
+        'tot_cost_opioid',
+        'tot_supply_opioid',
+        'tot_benes_opioid',
+        'tot_claims_opioid_la',
+        'tot_cost_opioid_la',
+        'tot_supply_opioid_la',
+        'tot_benes_opioid_la',
+        'tot_claims_antibioc',
+        'tot_cost_antibioc',
+        'suppress_brand',
+        'suppress_generic',
+        'suppress_other',
+        'suppress_mapd',
+        'suppress_lis',
+        'suppress_nlis',
+        'suppress_pdp'))) |>
+      tidyr::nest(demographics = dplyr::any_of(c(
+        'bene_age_avg',
+        'bene_age_lt65',
+        'bene_age_65_74',
+        'bene_age_75_84',
+        'bene_race_wht',
+        'bene_race_nonwht',
+        'bene_race_api',
+        'bene_race_nat',
+        'bene_race_other',
+        'bene_dual',
+        'bene_ndual'))) |>
+      tidyr::nest(gte_65 = dplyr::any_of(c(
+        'tot_claims_ge65',
+        'tot_fills_ge65',
+        'tot_cost_ge65',
+        'tot_supply_ge65',
+        'tot_benes_ge65',
+        'tot_claims_antipsych_ge65',
+        'tot_cost_antipsych_ge65',
+        'tot_benes_antipsych_ge65')))
+  }
   return(results)
 }
 

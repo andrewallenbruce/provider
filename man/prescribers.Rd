@@ -25,7 +25,12 @@ prescribers(
   brand_name = NULL,
   generic_name = NULL,
   level = NULL,
+  opioid = NULL,
+  opioidLA = NULL,
+  antibiotic = NULL,
+  antipsychotic = NULL,
   tidy = TRUE,
+  nest = TRUE,
   na.rm = TRUE,
   ...
 )
@@ -83,7 +88,17 @@ aggregated:
 \item \code{"National"}: Data is aggregated across all states for a given HCPCS Code
 }}
 
+\item{opioid}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns Opioid drugs}
+
+\item{opioidLA}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns Long-acting Opioids}
+
+\item{antibiotic}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns antibiotics}
+
+\item{antipsychotic}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns antipsychotics}
+
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
@@ -165,8 +180,11 @@ prescribers(year = 2021,
 prescribers(year = 2017,
             type = 'Geography',
             level = 'National',
-            brand_name = 'Paroxetine Hcl') |>
-            dplyr::glimpse()
+            brand_name = 'Paroxetine Hcl')
+
+prescribers(year = 2017,
+            type = 'Geography',
+            opioid = TRUE)
 
 # Use the years helper function to
 # retrieve results for every year:

@@ -113,6 +113,22 @@ utils::globalVariables(c(
   "confirmed", # <laboratories>
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
+  "issued", # <metadata.store>
+  "modified", # <metadata.store>
+  "released", # <metadata.store>
+  "identifier", # <metadata.store>
+  "landingPage", # <metadata.store>
+  "publisher", # <metadata.store>
+  "@type", # <metadata.store>
+  "description", # <metadata.json>
+  "describedBy", # <metadata.json>
+  "distribution", # <metadata.json>
+  "landingPage", # <metadata.json>
+  "modified", # <metadata.json>
+  "references", # <metadata.json>
+  "distribution_title", # <metadata.json>
+  "distribution_modified", # <metadata.json>
+  "distribution_accessURL", # <metadata.json>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
   "facility_name", # <mips_2021>
