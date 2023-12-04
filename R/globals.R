@@ -126,6 +126,8 @@ utils::globalVariables(c(
   "landingPage", # <metadata.json>
   "modified", # <metadata.json>
   "references", # <metadata.json>
+  "accrualPeriodicity", # <metadata.json>
+  "temporal", # <metadata.json>
   "distribution_title", # <metadata.json>
   "distribution_modified", # <metadata.json>
   "distribution_accessURL", # <metadata.json>

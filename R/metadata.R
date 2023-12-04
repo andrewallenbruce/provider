@@ -1,12 +1,11 @@
 #' @param title name of the api
-#' @return A [tibble()] containing the updated ids.
+#' @return A list of metadata describing each API's dataset
 #' @examplesIf interactive()
 #' metadata.store("Facility Affiliation Data")
 #' metadata.store("National Downloadable File")
 #' @autoglobal
 #' @noRd
 metadata.store <- function(title) {
-
   #------------------------------------------------
   url.store <- paste0('https://data.cms.gov/',
                       'provider-data/api/1/metastore/',
@@ -50,23 +49,23 @@ metadata.store <- function(title) {
                           simplifyVector = TRUE)
 
   schema <- dplyr::tibble(
-    title = response$title,
-    description = response$description,
-    uuid = response$identifier,
-    identifier = response$keyword$identifier,
-    distribution = response$distribution$identifier,
-    landing_page = response$landingPage,
-    publisher = response$publisher$data$name,
-    contact = response$contactPoint$hasEmail,
-    date_issued = response$issued,
-    date_modified = response$modified,
+    title             = response$title,
+    description       = response$description,
+    uuid              = response$identifier,
+    identifier        = response$keyword$identifier,
+    distribution      = response$distribution$identifier,
+    landing_page      = response$landingPage,
+    publisher         = response$publisher$data$name,
+    contact           = response$contactPoint$hasEmail,
+    date_issued       = response$issued,
+    date_modified     = response$modified,
     datetime_modified = response$`%modified`,
-    date_released = response$released)
+    date_released     = response$released)
 
   #------------------------------------------------
   url.query <- glue::glue('https://data.cms.gov/',
                           'provider-data/api/1/datastore/query/',
-                          '{schema$distribution}',
+                          '{schema$distribution[1]}',
                           '?limit=1&offset=0&count=true&results=true',
                           '&schema=true&keys=true&format=json&rowIds=true')
 
@@ -81,7 +80,139 @@ metadata.store <- function(title) {
     names = list(names(response$results)))
 
   #------------------------------------------------
-  return(list(store = store, schema = schema, query = query))
+  results <- list(
+    title           = store$title,
+    description     = schema$description[[1]],
+    publisher       = store$name,
+    uuid            = store$identifier,
+    distribution    = schema$distribution[[1]],
+    date_issued     = store$issued,
+    date_modified   = store$modified,
+    date_released   = store$released,
+    period          = store$period,
+    timelength_days = store$timelength_days,
+    dimensions      = paste0(query$columns, ' columns x ', format(query$rows, big.mark = ","), ' rows'),
+    fields          = query$names[[1]],
+    landing_page    = store$landingPage,
+    data_dictionary = "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf"
+  )
+  return(results)
+}
+
+#' @param title name of the api
+#' @param first only need the first row
+#' @return A [tibble()] containing the updated ids.
+#' @examplesIf interactive()
+#' metadata.json("Medicare Fee-For-Service  Public Provider Enrollment")
+#' metadata.json("Provider of Services File - Clinical Laboratories")
+#' @autoglobal
+#' @noRd
+metadata.json <- function(title, first = TRUE) {
+
+  resp <- httr2::request("https://data.cms.gov/data.json") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+
+  resp <- resp$dataset |>
+    dplyr::tibble() |>
+    dplyr::select(title,
+                  description,
+                  describedBy,
+                  distribution,
+                  landingPage,
+                  modified,
+                  references,
+                  accrualPeriodicity,
+                  temporal) |>
+    dplyr::filter(title == {{ title }}) |>
+    tidyr::unnest(references)
+
+  dst <- resp |>
+    dplyr::select(title,
+                  distribution) |>
+    tidyr::unnest(cols = distribution, names_sep = "_") |>
+    #dplyr::filter(distribution_format == "API") |>
+    dplyr::select(title,
+                  distribution_title,
+                  distribution_modified,
+                  distribution_accessURL) |>
+    dplyr::mutate(distribution_accessURL = strex::str_after_last(distribution_accessURL, "dataset/"),
+                  distribution_accessURL = strex::str_before_last(distribution_accessURL, "/data")) |>
+    dplyr::rename(distribution = distribution_accessURL)
+
+  resp$distribution <- NULL
+
+  results <- dplyr::left_join(resp, dst, by = dplyr::join_by(title)) |>
+    dplyr::select(-title) |>
+    dplyr::select(title = distribution_title,
+                  description,
+                  dictionary = describedBy,
+                  methodology = references,
+                  landing_page = landingPage,
+                  distribution,
+                  modified = distribution_modified,
+                  accrualPeriodicity) |>
+    dplyr::mutate(modified = lubridate::ymd(modified)) |>
+    provider::make_interval(start = modified) |>
+    tidyr::separate_wider_delim(title, delim = " : ", names = c("title", NA))
+
+  results$interval <- NULL
+
+  if (first) results <- dplyr::slice_head(results)
+
+  url <- glue::glue('https://data.cms.gov/',
+                    'data-api/v1/dataset/',
+                    '{results$distribution}',
+                    '/data-viewer?offset=0&size=1')
+
+  response <- httr2::request(url) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE)
+
+  rows <- response$meta$total_rows
+  cols <- response$meta$headers
+
+  iso_8601 <- function(x) {
+    dplyr::case_match(
+      x,
+      "R/P10Y" ~ "Decennial",
+      "R/P4Y" ~ "Quadrennial",
+      "R/P1Y" ~ "Annual",
+      c("R/P2M", "R/P0.5M") ~ "Bimonthly",
+      "R/P3.5D" ~ "Semiweekly",
+      "R/P1D" ~ "Daily",
+      c("R/P2W", "R/P0.5W") ~ "Biweekly",
+      "R/P6M" ~ "Semiannual",
+      "R/P2Y" ~ "Biennial",
+      "R/P3Y" ~ "Triennial",
+      "R/P0.33W" ~ "Three Times a Week",
+      "R/P0.33M" ~ "Three Times a Month",
+      "R/PT1S" ~ "Continuously Updated",
+      "R/P1M" ~ "Monthly",
+      "R/P3M" ~ "Quarterly",
+      "R/P0.5M" ~ "Semimonthly",
+      "R/P4M" ~ "Three Times a Year",
+      "R/P1W" ~ "Weekly",
+      "R/PT1H" ~ "Hourly")
+  }
+
+  results <- list(
+    title           = results$title,
+    description     = results$description,
+    publisher       = " ",
+    distribution    = results$distribution,
+    update_schedule = iso_8601(results$accrualPeriodicity),
+    date_modified   = results$modified,
+    period          = results$period,
+    timelength_days = results$timelength_days,
+    dimensions      = paste0(length(cols), ' columns x ', format(rows, big.mark = ","), ' rows'),
+    fields          = cols,
+    landing_page    = results$landing_page,
+    data_dictionary = results$dictionary,
+    methodology     = results$methodology)
+
+  return(results)
 }
 
 #' @param uuid distribution id of the api
@@ -113,6 +244,7 @@ metadata.rows <- function(uuid) {
 #' metadata.viewer('a85fa452-dee9-4c8f-8156-665238b8492f') # hospitals()
 #' @autoglobal
 #' @noRd
+
 metadata.viewer <- function(uuid) {
 
   url <- glue::glue('https://data.cms.gov/',
@@ -131,65 +263,4 @@ metadata.viewer <- function(uuid) {
     dimensions = paste0(length(cols), ' columns x ', format(rows, big.mark = ","), ' rows'),
     fields = cols
   )
-}
-
-#' @param title name of the api
-#' @param first only need the first row
-#' @return A [tibble()] containing the updated ids.
-#' @examplesIf interactive()
-#' metadata.json("Medicare Fee-For-Service  Public Provider Enrollment")
-#' metadata.json("Provider of Services File - Clinical Laboratories")
-#' @autoglobal
-#' @noRd
-metadata.json <- function(title, first = TRUE) {
-
-  resp <- httr2::request("https://data.cms.gov/data.json") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
-
-  resp <- resp$dataset |>
-    dplyr::tibble() |>
-    dplyr::select(title,
-                  description,
-                  describedBy,
-                  distribution,
-                  landingPage,
-                  modified,
-                  references) |>
-    dplyr::filter(title == {{ title }}) |>
-    tidyr::unnest(references)
-
-  dst <- resp |>
-    dplyr::select(title,
-                  distribution) |>
-    tidyr::unnest(cols = distribution, names_sep = "_") |>
-    #dplyr::filter(distribution_format == "API") |>
-    dplyr::select(title,
-                  distribution_title,
-                  distribution_modified,
-                  distribution_accessURL) |>
-    dplyr::mutate(distribution_accessURL = strex::str_after_last(distribution_accessURL, "dataset/"),
-                  distribution_accessURL = strex::str_before_last(distribution_accessURL, "/data")) |>
-    dplyr::rename(distribution = distribution_accessURL)
-
-  resp$distribution <- NULL
-
-  results <- dplyr::left_join(resp, dst, by = dplyr::join_by(title)) |>
-    dplyr::select(-title) |>
-    dplyr::select(title        = distribution_title,
-                  description,
-                  dictionary   = describedBy,
-                  methodology  = references,
-                  landing_page = landingPage,
-                  distribution,
-                  modified     = distribution_modified) |>
-    dplyr::mutate(modified     = lubridate::ymd(modified)) |>
-    provider::make_interval(start = modified) |>
-    tidyr::separate_wider_delim(title, delim = " : ", names = c("title", NA))
-
-  results$interval <- NULL
-
-  if (first) results <- dplyr::slice_head(results)
-
-  return(results)
 }

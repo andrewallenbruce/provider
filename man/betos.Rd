@@ -95,3 +95,14 @@ assigned to a 6-character RBCS taxonomy code.
  Annually
 }
 
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+betos(hcpcs = "0001U")
+betos(category = "Test")
+betos(subcategory = "General Laboratory")
+betos(family = "Immunoassay")
+betos(procedure = "M")
+betos(family = "No RBCS Family")
+betos(rbcs = "TL001N")
+\dontshow{\}) # examplesIf}
+}

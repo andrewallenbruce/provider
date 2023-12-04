@@ -24,7 +24,6 @@ options(scipen = 999)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
-library(tibble)
 library(vctrs)
 library(dplyr)
 library(purrr)
@@ -35,6 +34,23 @@ library(gt)
 <br>
 
 ## Individual Provider
+
+```{r}
+library(chainr)
+
+mark <- chain(
+  providers    = providers(pac = 7810891009),
+  reassignment = reassignments(pac = 7810891009),
+  clinicians   = clinicians(pac = 7810891009),
+  nppes        = nppes(npi = 1043245657),
+  referrals    = order_refer(npi = 1043245657),
+  affiliations = affiliations(pac = 7810891009),
+  hospitals    = affiliations(pac = 7810891009) |> pull(facility_ccn) |> map_dfr(~hospitals(facility_ccn = .x)),
+  utilization  = utilization_(npi = 1043245657, type = "Provider"))
+
+mark
+```
+
 
 ```{r}
 vctrs::vec_rbind(

@@ -491,7 +491,8 @@ prescribers_ <- function(year = rx_years(),
 fct_src <- function(x) {
   factor(x,
          levels = c("S", "T"),
-         labels = c("Medicare Specialty Code", "Taxonomy Code Classification"))
+         labels = c("Medicare Specialty Code",
+                    "Taxonomy Code Classification"))
 }
 
 #' @param df data frame
