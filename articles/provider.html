@@ -174,7 +174,7 @@ that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
-<span><span class="co">#&gt;   npi        first last    service                  </span></span>
+<span><span class="co">#&gt;   npi        first last    eligible                 </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency       </span></span>
@@ -215,56 +215,6 @@ transformations, simply turn it off with <code>tidy = FALSE</code>.</p>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="exported-functions">Exported Functions<a class="anchor" aria-label="anchor" href="#exported-functions"></a>
-</h2>
-<p>The API Search functions can be grouped according to the type of data
-that they return about a Provider: <em>administrative</em>,
-<em>statistical</em>, and <em>auxiliary.</em></p>
-<ul>
-<li>
-<code><a href="../reference/nppes.html">nppes()</a></code>: Registry of all healthcare providers.</li>
-<li>
-<code><a href="../reference/providers.html">providers()</a></code>: Providers actively enrolled in
-Medicare.</li>
-<li>
-<code><a href="../reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of
-Medicare.</li>
-<li>
-<code><a href="../reference/reassignments.html">reassignments()</a></code>: Link Type-1 and Type-2 providers.</li>
-<li>
-<code><a href="../reference/clinicians.html">clinicians()</a></code>: Provider school, graduation year,
-linking.</li>
-<li>
-<code><a href="../reference/affiliations.html">affiliations()</a></code>: Linking providers to Facilities.</li>
-<li>
-<code><a href="../reference/hospitals.html">hospitals()</a></code>: Facilities linked to providers.</li>
-<li>
-<code><a href="../reference/laboratories.html">laboratories()</a></code>: Clinical laboratories.</li>
-<li>
-<code><a href="../reference/utilization.html">utilization()</a></code>: Utilization summary.</li>
-<li>
-<code><a href="../reference/quality_payment.html">quality_payment()</a></code>: QPP/MIPS performance.</li>
-<li>
-<code><a href="../reference/open_payments.html">open_payments()</a></code>: Open Payments reporting.</li>
-<li>
-<code><a href="../reference/beneficiaries.html">beneficiaries()</a></code>: Medicare enrollment.</li>
-<li>
-<code>conditions</code>: Chronic condition prevalence.</li>
-<li>
-<code><a href="../reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and
-refer?</li>
-<li>
-<code><a href="../reference/pending.html">pending()</a></code>: Has a provider’s Medicare application been
-processed?</li>
-<li>
-<code><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty
-eligible to enroll in Medicare?</li>
-<li>
-<code><a href="../reference/taxonomy_codes.html">taxonomy_codes()</a></code>:</li>
-</ul>
-<p><br></p>
-</div>
-<div class="section level2">
 <h2 id="helper-functions">Helper Functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
 </h2>
 <p>Several functions have a required <code>year</code> argument. The
@@ -279,29 +229,46 @@ the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 years:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">size</span><span class="op">:</span><span class="va">pay_adjust</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `size` doesn't exist.</span></span></code></pre></div>
-<p>Several functions have parallelized versions, denoted by an
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">participation_type</span>, </span>
+<span>         <span class="va">beneficiaries</span>,</span>
+<span>         <span class="va">services</span>,</span>
+<span>         <span class="va">charges</span>,</span>
+<span>         <span class="va">final_score</span>,</span>
+<span>         <span class="va">pay_adjust</span>, </span>
+<span>         <span class="va">org_size</span>, </span>
+<span>         <span class="va">apms_entity_name</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
+<span><span class="co">#&gt;    year participation_type beneficiaries services charges final_score pay_adjust</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 MIPS APM                   <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span>  3.64<span style="color: #949494;">e</span>7        97.1       1.72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 MIPS APM                   <span style="text-decoration: underline;">41</span>034        0  3.50<span style="color: #949494;">e</span>7       100         1.68</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 MIPS APM                   <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298  3.69<span style="color: #949494;">e</span>7        95.1       1.46</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 MIPS APM                   <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278  3.35<span style="color: #949494;">e</span>7        96.7       1.48</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 MIPS APM                   <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720  3.56<span style="color: #949494;">e</span>7        97.2       1.94</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: org_size &lt;int&gt;, apms_entity_name &lt;chr&gt;</span></span></span></code></pre></div>
+<p>Several functions have <em>parallelized</em> versions, denoted by an
 underscore at the end of their name (<code>_</code>):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 57</span></span></span>
-<span><span class="co">#&gt;    year npi        npi_type   first middle last    state first_approved_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 49 more variables: years_in_medicare &lt;dbl&gt;, participation_type &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   beneficiaries &lt;int&gt;, services &lt;int&gt;, charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, qp_status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   qp_score_type &lt;chr&gt;, ams_mips_eligible &lt;lgl&gt;, newly_enrolled &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   is_maqi &lt;lgl&gt;, org_id &lt;int&gt;, org_size &lt;int&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_address &lt;chr&gt;, org_city &lt;chr&gt;, org_state &lt;ord&gt;, org_zip &lt;chr&gt;, …</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">participation_type</span>, </span>
+<span>         <span class="va">beneficiaries</span>,</span>
+<span>         <span class="va">services</span>,</span>
+<span>         <span class="va">charges</span>,</span>
+<span>         <span class="va">final_score</span>,</span>
+<span>         <span class="va">pay_adjust</span>, </span>
+<span>         <span class="va">org_size</span>, </span>
+<span>         <span class="va">apms_entity_name</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
+<span><span class="co">#&gt;    year participation_type beneficiaries services charges final_score pay_adjust</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 MIPS APM                   <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span>  3.64<span style="color: #949494;">e</span>7        97.1       1.72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 MIPS APM                   <span style="text-decoration: underline;">41</span>034        0  3.50<span style="color: #949494;">e</span>7       100         1.68</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 MIPS APM                   <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298  3.69<span style="color: #949494;">e</span>7        95.1       1.46</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 MIPS APM                   <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278  3.35<span style="color: #949494;">e</span>7        96.7       1.48</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 MIPS APM                   <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720  3.56<span style="color: #949494;">e</span>7        97.2       1.94</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: org_size &lt;int&gt;, apms_entity_name &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -333,7 +300,7 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB; font-weight: bold;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"P"</span>, npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span>, type <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #0000BB;">"1234569123"</span> is <span style="font-style: italic;">not</span> a valid NPI.</span></span>
 <span><span class="co">#&gt; → Did you mean <span style="color: #0000BB; font-weight: bold;">"1234569121"</span>?</span></span></code></pre></div>
@@ -391,20 +358,6 @@ of benefits) is linked through the Enrollment ID.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Organizational Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I20180115000174"</span> begins with <span style="color: #0000BB;">"I"</span>.</span></span></code></pre></div>
-<p><br></p>
-<blockquote>
-<p><strong>Note</strong>: <em>R will drop any leading zeros in a numeric
-vector when it’s evaluated.</em> Parameters that contain leading zeros
-must be input as a character vector:</p>
-</blockquote>
-<p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Leading zeros are dropped in an integer vector:</span></span>
-<span><span class="fl">0001</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="co"># But preserved in a character vector:</span></span>
-<span><span class="st">"0001"</span></span>
-<span><span class="co">#&gt; [1] "0001"</span></span></code></pre></div>
 <hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

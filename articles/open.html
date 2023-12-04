@@ -119,7 +119,7 @@ Relationships</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2023-12-03</h4>
+            <h4 data-toc-skip class="date">2023-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/open.Rmd" class="external-link"><code>vignettes/articles/open.Rmd</code></a></small>
       <div class="d-none name"><code>open.Rmd</code></div>
@@ -131,9 +131,15 @@ Bruce</h4>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org" class="external-link">future</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="open-payments">Open Payments<a class="anchor" aria-label="anchor" href="#open-payments"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1043218118</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">1043218118</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">ex</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 109 × 47</span></span></span>
 <span><span class="co">#&gt;    program_year npi      covered_recipient first last  address city  state zip  </span></span>
 <span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
@@ -155,131 +161,1982 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #949494;">#   payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;ord&gt;, payer_country &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, …</span></span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">open</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_payments.html">open_payments_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
-<span><span class="va">open</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 53</span></span></span>
-<span><span class="co">#&gt;    program_year npi      covered_recipient first last  address city  state zip  </span></span>
-<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 1043218… Physician         AHAD  MAHO… 6739 G… ZEPH… FL    33542</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 466 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 44 more variables: country &lt;chr&gt;, primary &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   license_state &lt;ord&gt;, travel_city &lt;chr&gt;, travel_state &lt;ord&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   travel_country &lt;chr&gt;, physician_ownership &lt;lgl&gt;, third_party_payment &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   third_party_name &lt;chr&gt;, third_party_recipient &lt;chr&gt;, charity &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   context &lt;chr&gt;, publish_date &lt;date&gt;, publish_delay &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   publish_dispute &lt;lgl&gt;, related_product &lt;lgl&gt;, payer_id &lt;chr&gt;, …</span></span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">program_year</span>, </span>
-<span>         <span class="va">payer_name</span>, </span>
+<code class="sourceCode R"><span><span class="va">payment</span> <span class="op">&lt;-</span> <span class="va">ex</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">payer_name</span>,</span>
 <span>         <span class="va">pay_form</span>,</span>
 <span>         <span class="va">pay_nature</span>,</span>
-<span>         <span class="va">pay_total</span>, </span>
+<span>         <span class="va">row_id</span>,</span>
+<span>         <span class="va">group_id</span>,</span>
+<span>         <span class="va">pay_total</span>,</span>
 <span>         <span class="va">pay_date</span>, </span>
-<span>         <span class="va">pay_count</span>, </span>
-<span>         <span class="va">row_id</span>, </span>
-<span>         <span class="va">group_id</span>, </span>
-<span>         <span class="va">name</span>, </span>
-<span>         <span class="va">covered</span>,</span>
-<span>         <span class="va">type</span>, </span>
-<span>         <span class="va">category</span>, </span>
-<span>         <span class="va">ndc</span>,</span>
-<span>         <span class="va">pdi</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 476 × 15</span></span></span>
-<span><span class="co">#&gt;    program_year payer_name    pay_form pay_nature pay_total pay_date   pay_count</span></span>
-<span><span class="co">#&gt;           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         <span style="text-decoration: underline;">2</span>016 Shire North … In-kind… Food and …     18.8  2016-06-06         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         <span style="text-decoration: underline;">2</span>016 Allergan Inc. In-kind… Food and …    126.   2016-06-09         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         <span style="text-decoration: underline;">2</span>016 Allergan Inc. In-kind… Food and …    127.   2016-10-24         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         <span style="text-decoration: underline;">2</span>016 Sun Pharmace… Cash or… Food and …     16.1  2016-08-31         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         <span style="text-decoration: underline;">2</span>016 CLARITY MEDI… Cash or… Food and …     14.7  2016-01-13         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         <span style="text-decoration: underline;">2</span>016 Ellex, Inc    Cash or… Honoraria    <span style="text-decoration: underline;">2</span>000    2016-08-16         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …      8.57 2016-03-11         1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         <span style="text-decoration: underline;">2</span>016 Abbott Labor… In-kind… Food and …     <span style="color: #BB0000;">NA</span>    2016-03-11        <span style="color: #BB0000;">NA</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 466 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: row_id &lt;int&gt;, group_id &lt;int&gt;, name &lt;chr&gt;, covered &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   type &lt;chr&gt;, category &lt;chr&gt;, ndc &lt;chr&gt;, pdi &lt;chr&gt;</span></span></span></code></pre>
+<span>         <span class="va">name</span><span class="op">:</span><span class="va">category</span>,</span>
+<span>         <span class="va">ndc.atc_second</span><span class="op">)</span></span>
+<span><span class="va">payment</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 109 × 12</span></span></span>
+<span><span class="co">#&gt;    payer_name     pay_form pay_nature row_id group_id pay_total pay_date   name </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Mobius Therap… Cash or… Compensat…      1        1    <span style="text-decoration: underline;">2</span>500   2021-05-26 Mito…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Johnson &amp; Joh… In-kind… Food and …      2        1      69.9 2021-03-04 Tecn…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Horizon Thera… In-kind… Food and …      3        1     108.  2021-08-24 TEPE…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Horizon Thera… In-kind… Food and …      4        1      97.1 2021-08-24 TEPE…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Horizon Thera… In-kind… Food and …      5        1      23.9 2021-09-30 TEPE…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Horizon Thera… In-kind… Food and …      6        1      25.6 2021-11-10 TEPE…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EyePoint Phar… In-kind… Food and …      7        1      13.8 2021-12-08 YUTIQ</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EyePoint Phar… In-kind… Food and …      8        1      16.6 2021-04-15 DEXY…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Alcon Vision … In-kind… Food and …      9        1     114.  2021-05-06 Prec…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Alcon Vision … In-kind… Food and …     10        1      14.7 2021-10-06 Acry…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 99 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: covered &lt;lgl&gt;, type &lt;chr&gt;, category &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ndc.atc_second &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">payment</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">pay_total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>payments <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pay_total</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>            avg_per_pmt <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">payments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">total</span>, <span class="va">avg_per_pmt</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="eesxmpghzm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eesxmpghzm table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eesxmpghzm thead, #eesxmpghzm tbody, #eesxmpghzm tfoot, #eesxmpghzm tr, #eesxmpghzm td, #eesxmpghzm th {
+  border-style: none;
+}
+
+#eesxmpghzm p {
+  margin: 0;
+  padding: 0;
+}
+
+#eesxmpghzm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#eesxmpghzm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#eesxmpghzm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#eesxmpghzm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#eesxmpghzm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#eesxmpghzm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#eesxmpghzm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#eesxmpghzm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#eesxmpghzm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#eesxmpghzm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#eesxmpghzm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eesxmpghzm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#eesxmpghzm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#eesxmpghzm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#eesxmpghzm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eesxmpghzm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#eesxmpghzm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#eesxmpghzm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#eesxmpghzm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eesxmpghzm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#eesxmpghzm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eesxmpghzm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#eesxmpghzm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eesxmpghzm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eesxmpghzm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eesxmpghzm .gt_left {
+  text-align: left;
+}
+
+#eesxmpghzm .gt_center {
+  text-align: center;
+}
+
+#eesxmpghzm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#eesxmpghzm .gt_font_normal {
+  font-weight: normal;
+}
+
+#eesxmpghzm .gt_font_bold {
+  font-weight: bold;
+}
+
+#eesxmpghzm .gt_font_italic {
+  font-style: italic;
+}
+
+#eesxmpghzm .gt_super {
+  font-size: 65%;
+}
+
+#eesxmpghzm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#eesxmpghzm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#eesxmpghzm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#eesxmpghzm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#eesxmpghzm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#eesxmpghzm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#eesxmpghzm .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="payments">payments</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total">total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_per_pmt">avg_per_pmt</th>
+    </tr></thead>
+<tbody class="gt_table_body"><tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
+<td headers="stub_1_1 payments" class="gt_row gt_right">92</td>
+<td headers="stub_1_1 total" class="gt_row gt_right">$22,678.50</td>
+<td headers="stub_1_1 avg_per_pmt" class="gt_row gt_right">$246.51</td>
+</tr></tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">payment</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">pay_total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payer_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>payments <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pay_total</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>            avg_per_pmt <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">payments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">total</span>, <span class="va">avg_per_pmt</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="ejntjmjdmn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ejntjmjdmn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ejntjmjdmn thead, #ejntjmjdmn tbody, #ejntjmjdmn tfoot, #ejntjmjdmn tr, #ejntjmjdmn td, #ejntjmjdmn th {
+  border-style: none;
+}
+
+#ejntjmjdmn p {
+  margin: 0;
+  padding: 0;
+}
+
+#ejntjmjdmn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ejntjmjdmn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ejntjmjdmn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ejntjmjdmn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ejntjmjdmn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ejntjmjdmn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ejntjmjdmn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ejntjmjdmn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ejntjmjdmn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ejntjmjdmn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ejntjmjdmn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ejntjmjdmn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ejntjmjdmn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ejntjmjdmn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ejntjmjdmn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ejntjmjdmn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ejntjmjdmn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ejntjmjdmn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ejntjmjdmn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ejntjmjdmn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ejntjmjdmn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ejntjmjdmn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ejntjmjdmn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ejntjmjdmn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ejntjmjdmn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ejntjmjdmn .gt_left {
+  text-align: left;
+}
+
+#ejntjmjdmn .gt_center {
+  text-align: center;
+}
+
+#ejntjmjdmn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ejntjmjdmn .gt_font_normal {
+  font-weight: normal;
+}
+
+#ejntjmjdmn .gt_font_bold {
+  font-weight: bold;
+}
+
+#ejntjmjdmn .gt_font_italic {
+  font-style: italic;
+}
+
+#ejntjmjdmn .gt_super {
+  font-size: 65%;
+}
+
+#ejntjmjdmn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ejntjmjdmn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ejntjmjdmn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ejntjmjdmn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ejntjmjdmn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ejntjmjdmn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ejntjmjdmn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="payer_name">payer_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="payments">payments</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total">total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_per_pmt">avg_per_pmt</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
+<td headers="stub_1_1 payer_name" class="gt_row gt_left">Allergan, Inc.</td>
+<td headers="stub_1_1 payments" class="gt_row gt_right">33</td>
+<td headers="stub_1_1 total" class="gt_row gt_right">$12,454.59</td>
+<td headers="stub_1_1 avg_per_pmt" class="gt_row gt_right">$377.41</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
+<td headers="stub_1_2 payer_name" class="gt_row gt_left">Bausch &amp; Lomb, a division of Bausch Health US, LLC</td>
+<td headers="stub_1_2 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_2 total" class="gt_row gt_right">$3,116.93</td>
+<td headers="stub_1_2 avg_per_pmt" class="gt_row gt_right">$1,558.46</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
+<td headers="stub_1_3 payer_name" class="gt_row gt_left">Mobius Therapeutics, LLC</td>
+<td headers="stub_1_3 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_3 total" class="gt_row gt_right">$2,500.00</td>
+<td headers="stub_1_3 avg_per_pmt" class="gt_row gt_right">$2,500.00</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
+<td headers="stub_1_4 payer_name" class="gt_row gt_left">Ivantis, Inc</td>
+<td headers="stub_1_4 payments" class="gt_row gt_right">7</td>
+<td headers="stub_1_4 total" class="gt_row gt_right">$1,804.85</td>
+<td headers="stub_1_4 avg_per_pmt" class="gt_row gt_right">$257.84</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
+<td headers="stub_1_5 payer_name" class="gt_row gt_left">Iridex Corporation</td>
+<td headers="stub_1_5 payments" class="gt_row gt_right">3</td>
+<td headers="stub_1_5 total" class="gt_row gt_right">$1,034.87</td>
+<td headers="stub_1_5 avg_per_pmt" class="gt_row gt_right">$344.96</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">6</th>
+<td headers="stub_1_6 payer_name" class="gt_row gt_left">Horizon Therapeutics plc</td>
+<td headers="stub_1_6 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_6 total" class="gt_row gt_right">$254.57</td>
+<td headers="stub_1_6 avg_per_pmt" class="gt_row gt_right">$63.64</td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">7</th>
+<td headers="stub_1_7 payer_name" class="gt_row gt_left">Sight Sciences, Inc.</td>
+<td headers="stub_1_7 payments" class="gt_row gt_right">5</td>
+<td headers="stub_1_7 total" class="gt_row gt_right">$250.27</td>
+<td headers="stub_1_7 avg_per_pmt" class="gt_row gt_right">$50.05</td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">8</th>
+<td headers="stub_1_8 payer_name" class="gt_row gt_left">SUN PHARMACEUTICAL INDUSTRIES INC.</td>
+<td headers="stub_1_8 payments" class="gt_row gt_right">5</td>
+<td headers="stub_1_8 total" class="gt_row gt_right">$175.53</td>
+<td headers="stub_1_8 avg_per_pmt" class="gt_row gt_right">$35.11</td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">9</th>
+<td headers="stub_1_9 payer_name" class="gt_row gt_left">Mallinckrodt Hospital Products Inc.</td>
+<td headers="stub_1_9 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_9 total" class="gt_row gt_right">$156.91</td>
+<td headers="stub_1_9 avg_per_pmt" class="gt_row gt_right">$39.23</td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">10</th>
+<td headers="stub_1_10 payer_name" class="gt_row gt_left">NEW WORLD MEDICAL,INC.</td>
+<td headers="stub_1_10 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_10 total" class="gt_row gt_right">$156.86</td>
+<td headers="stub_1_10 avg_per_pmt" class="gt_row gt_right">$78.43</td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">11</th>
+<td headers="stub_1_11 payer_name" class="gt_row gt_left">Kala Pharmaceuticals, Inc.</td>
+<td headers="stub_1_11 payments" class="gt_row gt_right">7</td>
+<td headers="stub_1_11 total" class="gt_row gt_right">$138.46</td>
+<td headers="stub_1_11 avg_per_pmt" class="gt_row gt_right">$19.78</td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">12</th>
+<td headers="stub_1_12 payer_name" class="gt_row gt_left">Alcon Vision LLC</td>
+<td headers="stub_1_12 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_12 total" class="gt_row gt_right">$128.93</td>
+<td headers="stub_1_12 avg_per_pmt" class="gt_row gt_right">$64.47</td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">13</th>
+<td headers="stub_1_13 payer_name" class="gt_row gt_left">Regeneron Healthcare Solutions, Inc.</td>
+<td headers="stub_1_13 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_13 total" class="gt_row gt_right">$125.01</td>
+<td headers="stub_1_13 avg_per_pmt" class="gt_row gt_right">$125.01</td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">14</th>
+<td headers="stub_1_14 payer_name" class="gt_row gt_left">Alimera Sciences, Inc.</td>
+<td headers="stub_1_14 payments" class="gt_row gt_right">5</td>
+<td headers="stub_1_14 total" class="gt_row gt_right">$89.25</td>
+<td headers="stub_1_14 avg_per_pmt" class="gt_row gt_right">$17.85</td>
+</tr>
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">15</th>
+<td headers="stub_1_15 payer_name" class="gt_row gt_left">Johnson &amp; Johnson Surgical Vision, Inc.</td>
+<td headers="stub_1_15 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_15 total" class="gt_row gt_right">$69.90</td>
+<td headers="stub_1_15 avg_per_pmt" class="gt_row gt_right">$69.90</td>
+</tr>
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">16</th>
+<td headers="stub_1_16 payer_name" class="gt_row gt_left">Ocular Therapeutix, Inc.</td>
+<td headers="stub_1_16 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_16 total" class="gt_row gt_right">$69.27</td>
+<td headers="stub_1_16 avg_per_pmt" class="gt_row gt_right">$34.63</td>
+</tr>
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">17</th>
+<td headers="stub_1_17 payer_name" class="gt_row gt_left">Novartis Pharmaceuticals Corporation</td>
+<td headers="stub_1_17 payments" class="gt_row gt_right">3</td>
+<td headers="stub_1_17 total" class="gt_row gt_right">$61.57</td>
+<td headers="stub_1_17 avg_per_pmt" class="gt_row gt_right">$20.52</td>
+</tr>
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">18</th>
+<td headers="stub_1_18 payer_name" class="gt_row gt_left">EyePoint Pharmaceuticals US, Inc.</td>
+<td headers="stub_1_18 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_18 total" class="gt_row gt_right">$30.49</td>
+<td headers="stub_1_18 avg_per_pmt" class="gt_row gt_right">$15.25</td>
+</tr>
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">19</th>
+<td headers="stub_1_19 payer_name" class="gt_row gt_left">Beaver-Visitec International, Inc.</td>
+<td headers="stub_1_19 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_19 total" class="gt_row gt_right">$25.02</td>
+<td headers="stub_1_19 avg_per_pmt" class="gt_row gt_right">$25.02</td>
+</tr>
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">20</th>
+<td headers="stub_1_20 payer_name" class="gt_row gt_left">Dompe US, Inc.</td>
+<td headers="stub_1_20 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_20 total" class="gt_row gt_right">$20.48</td>
+<td headers="stub_1_20 avg_per_pmt" class="gt_row gt_right">$20.48</td>
+</tr>
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">21</th>
+<td headers="stub_1_21 payer_name" class="gt_row gt_left">Checkpoint Surgical, Inc</td>
+<td headers="stub_1_21 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_21 total" class="gt_row gt_right">$14.74</td>
+<td headers="stub_1_21 avg_per_pmt" class="gt_row gt_right">$14.74</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_sub</span>,</span>
-<span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
-<span>        sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 45 × 2</span></span></span>
-<span><span class="co">#&gt;    payer_sub                                              n</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Allergan, Inc.                                        75</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Allergan Inc.                                         30</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Alimera Sciences, Inc.                                22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Valeant Pharmaceuticals International                 22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Bausch &amp; Lomb, a division of Bausch Health US, LLC    19</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Bausch Health Americas, Inc.                          19</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Horizon Therapeutics plc                              18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Iridex Corporation                                    18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Sight Sciences, Inc.                                  18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Ivantis, Inc                                          17</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 35 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_name</span>,</span>
-<span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
-<span>        sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 42 × 2</span></span></span>
-<span><span class="co">#&gt;    payer_name                                             n</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Allergan, Inc.                                        75</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Bausch &amp; Lomb, a division of Bausch Health US, LLC    38</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Allergan Inc.                                         30</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Alimera Sciences, Inc.                                23</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Valeant Pharmaceuticals North America LLC             22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Sun Pharmaceutical Industries Inc.                    19</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Horizon Therapeutics plc                              18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Iridex Corporation                                    18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Sight Sciences, Inc.                                  18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Ivantis, Inc                                          17</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">payer_id</span>,</span>
-<span>        wt <span class="op">=</span> <span class="va">pay_count</span>,</span>
-<span>        sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 38 × 2</span></span></span>
-<span><span class="co">#&gt;    payer_id         n</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 100000000278   105</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 100000226816    38</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 100000151589    24</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 100000056293    23</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 100000005405    22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 100000010935    22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 100000131367    18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 100000131389    18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 100000136569    18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 100000231809    17</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">open</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">type</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
-<span><span class="co">#&gt;   type               n</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Device           254</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Drug             164</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Biological        14</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Medical Supply     1</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">payment</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">group_id</span>, </span>
+<span>         <span class="va">pay_total</span>, </span>
+<span>         <span class="va">name</span>, </span>
+<span>         <span class="va">type</span>, </span>
+<span>         <span class="va">category</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span>, <span class="va">category</span>, <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>payments <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pay_total</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>            avg_per_pmt <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">payments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">total</span>, <span class="va">avg_per_pmt</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="ozvuekalki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ozvuekalki table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ozvuekalki thead, #ozvuekalki tbody, #ozvuekalki tfoot, #ozvuekalki tr, #ozvuekalki td, #ozvuekalki th {
+  border-style: none;
+}
+
+#ozvuekalki p {
+  margin: 0;
+  padding: 0;
+}
+
+#ozvuekalki .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ozvuekalki .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ozvuekalki .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ozvuekalki .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ozvuekalki .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ozvuekalki .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ozvuekalki .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ozvuekalki .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ozvuekalki .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ozvuekalki .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ozvuekalki .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ozvuekalki .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ozvuekalki .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ozvuekalki .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ozvuekalki .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ozvuekalki .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ozvuekalki .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ozvuekalki .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ozvuekalki .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ozvuekalki .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ozvuekalki .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ozvuekalki .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ozvuekalki .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ozvuekalki .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ozvuekalki .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ozvuekalki .gt_left {
+  text-align: left;
+}
+
+#ozvuekalki .gt_center {
+  text-align: center;
+}
+
+#ozvuekalki .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ozvuekalki .gt_font_normal {
+  font-weight: normal;
+}
+
+#ozvuekalki .gt_font_bold {
+  font-weight: bold;
+}
+
+#ozvuekalki .gt_font_italic {
+  font-style: italic;
+}
+
+#ozvuekalki .gt_super {
+  font-size: 65%;
+}
+
+#ozvuekalki .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ozvuekalki .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ozvuekalki .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ozvuekalki .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ozvuekalki .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ozvuekalki .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ozvuekalki .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="type">type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="category">category</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="payments">payments</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total">total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_per_pmt">avg_per_pmt</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
+<td headers="stub_1_1 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_1 category" class="gt_row gt_left">GLAUCOMA</td>
+<td headers="stub_1_1 name" class="gt_row gt_left">XEN GLAUCOMA TREATMENT SYSTEM</td>
+<td headers="stub_1_1 payments" class="gt_row gt_right">24</td>
+<td headers="stub_1_1 total" class="gt_row gt_right">$11,859.00</td>
+<td headers="stub_1_1 avg_per_pmt" class="gt_row gt_right">$494.12</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
+<td headers="stub_1_2 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_2 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_2 name" class="gt_row gt_left">STELLARIS</td>
+<td headers="stub_1_2 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_2 total" class="gt_row gt_right">$3,000.00</td>
+<td headers="stub_1_2 avg_per_pmt" class="gt_row gt_right">$3,000.00</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
+<td headers="stub_1_3 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_3 category" class="gt_row gt_left">Ophthamology</td>
+<td headers="stub_1_3 name" class="gt_row gt_left">Mitosol</td>
+<td headers="stub_1_3 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_3 total" class="gt_row gt_right">$2,500.00</td>
+<td headers="stub_1_3 avg_per_pmt" class="gt_row gt_right">$2,500.00</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
+<td headers="stub_1_4 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_4 category" class="gt_row gt_left">Ophthalmic Surgery</td>
+<td headers="stub_1_4 name" class="gt_row gt_left">Hydrus Microstent</td>
+<td headers="stub_1_4 payments" class="gt_row gt_right">7</td>
+<td headers="stub_1_4 total" class="gt_row gt_right">$1,804.85</td>
+<td headers="stub_1_4 avg_per_pmt" class="gt_row gt_right">$257.84</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
+<td headers="stub_1_5 type" class="gt_row gt_left">NA</td>
+<td headers="stub_1_5 category" class="gt_row gt_left">NA</td>
+<td headers="stub_1_5 name" class="gt_row gt_left">Blank</td>
+<td headers="stub_1_5 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_5 total" class="gt_row gt_right">$1,059.89</td>
+<td headers="stub_1_5 avg_per_pmt" class="gt_row gt_right">$264.97</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">6</th>
+<td headers="stub_1_6 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_6 category" class="gt_row gt_left">GLAUCOMA</td>
+<td headers="stub_1_6 name" class="gt_row gt_left">DURYSTA</td>
+<td headers="stub_1_6 payments" class="gt_row gt_right">8</td>
+<td headers="stub_1_6 total" class="gt_row gt_right">$522.35</td>
+<td headers="stub_1_6 avg_per_pmt" class="gt_row gt_right">$65.29</td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">7</th>
+<td headers="stub_1_7 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_7 category" class="gt_row gt_left">TEPEZZA</td>
+<td headers="stub_1_7 name" class="gt_row gt_left">TEPEZZA</td>
+<td headers="stub_1_7 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_7 total" class="gt_row gt_right">$254.57</td>
+<td headers="stub_1_7 avg_per_pmt" class="gt_row gt_right">$63.64</td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">8</th>
+<td headers="stub_1_8 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_8 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_8 name" class="gt_row gt_left">Cequa</td>
+<td headers="stub_1_8 payments" class="gt_row gt_right">5</td>
+<td headers="stub_1_8 total" class="gt_row gt_right">$175.53</td>
+<td headers="stub_1_8 avg_per_pmt" class="gt_row gt_right">$35.11</td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">9</th>
+<td headers="stub_1_9 type" class="gt_row gt_left">Biological</td>
+<td headers="stub_1_9 category" class="gt_row gt_left">IMMUNOLOGY</td>
+<td headers="stub_1_9 name" class="gt_row gt_left">ACTHAR</td>
+<td headers="stub_1_9 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_9 total" class="gt_row gt_right">$156.91</td>
+<td headers="stub_1_9 avg_per_pmt" class="gt_row gt_right">$39.23</td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">10</th>
+<td headers="stub_1_10 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_10 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_10 name" class="gt_row gt_left">Ahmed Glaucoma Valve</td>
+<td headers="stub_1_10 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_10 total" class="gt_row gt_right">$156.86</td>
+<td headers="stub_1_10 avg_per_pmt" class="gt_row gt_right">$78.43</td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">11</th>
+<td headers="stub_1_11 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_11 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_11 name" class="gt_row gt_left">OMNI(R) SURGICAL SYSTEM (US)</td>
+<td headers="stub_1_11 payments" class="gt_row gt_right">4</td>
+<td headers="stub_1_11 total" class="gt_row gt_right">$153.97</td>
+<td headers="stub_1_11 avg_per_pmt" class="gt_row gt_right">$38.49</td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">12</th>
+<td headers="stub_1_12 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_12 category" class="gt_row gt_left">Ocular</td>
+<td headers="stub_1_12 name" class="gt_row gt_left">INVELTYS</td>
+<td headers="stub_1_12 payments" class="gt_row gt_right">7</td>
+<td headers="stub_1_12 total" class="gt_row gt_right">$138.46</td>
+<td headers="stub_1_12 avg_per_pmt" class="gt_row gt_right">$19.78</td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">13</th>
+<td headers="stub_1_13 type" class="gt_row gt_left">Biological</td>
+<td headers="stub_1_13 category" class="gt_row gt_left">OPHTHALMOLOGY</td>
+<td headers="stub_1_13 name" class="gt_row gt_left">EYLEA</td>
+<td headers="stub_1_13 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_13 total" class="gt_row gt_right">$125.01</td>
+<td headers="stub_1_13 avg_per_pmt" class="gt_row gt_right">$125.01</td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">14</th>
+<td headers="stub_1_14 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_14 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_14 name" class="gt_row gt_left">CRYSTALENS</td>
+<td headers="stub_1_14 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_14 total" class="gt_row gt_right">$116.93</td>
+<td headers="stub_1_14 avg_per_pmt" class="gt_row gt_right">$116.93</td>
+</tr>
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">15</th>
+<td headers="stub_1_15 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_15 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_15 name" class="gt_row gt_left">Precision 1</td>
+<td headers="stub_1_15 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_15 total" class="gt_row gt_right">$114.20</td>
+<td headers="stub_1_15 avg_per_pmt" class="gt_row gt_right">$114.20</td>
+</tr>
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">16</th>
+<td headers="stub_1_16 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_16 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_16 name" class="gt_row gt_left">TearCare SmartLid</td>
+<td headers="stub_1_16 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_16 total" class="gt_row gt_right">$96.30</td>
+<td headers="stub_1_16 avg_per_pmt" class="gt_row gt_right">$96.30</td>
+</tr>
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">17</th>
+<td headers="stub_1_17 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_17 category" class="gt_row gt_left">OPHTHALMOLOGY</td>
+<td headers="stub_1_17 name" class="gt_row gt_left">ILUVIEN</td>
+<td headers="stub_1_17 payments" class="gt_row gt_right">5</td>
+<td headers="stub_1_17 total" class="gt_row gt_right">$89.25</td>
+<td headers="stub_1_17 avg_per_pmt" class="gt_row gt_right">$17.85</td>
+</tr>
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">18</th>
+<td headers="stub_1_18 type" class="gt_row gt_left">NA</td>
+<td headers="stub_1_18 category" class="gt_row gt_left">NA</td>
+<td headers="stub_1_18 name" class="gt_row gt_left">NA</td>
+<td headers="stub_1_18 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_18 total" class="gt_row gt_right">$73.24</td>
+<td headers="stub_1_18 avg_per_pmt" class="gt_row gt_right">$73.24</td>
+</tr>
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">19</th>
+<td headers="stub_1_19 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_19 category" class="gt_row gt_left">Optics</td>
+<td headers="stub_1_19 name" class="gt_row gt_left">Tecnis IOL</td>
+<td headers="stub_1_19 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_19 total" class="gt_row gt_right">$69.90</td>
+<td headers="stub_1_19 avg_per_pmt" class="gt_row gt_right">$69.90</td>
+</tr>
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">20</th>
+<td headers="stub_1_20 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_20 category" class="gt_row gt_left">Corticosteroid intracanalicular insert</td>
+<td headers="stub_1_20 name" class="gt_row gt_left">DEXTENZA</td>
+<td headers="stub_1_20 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_20 total" class="gt_row gt_right">$69.27</td>
+<td headers="stub_1_20 avg_per_pmt" class="gt_row gt_right">$34.63</td>
+</tr>
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">21</th>
+<td headers="stub_1_21 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_21 category" class="gt_row gt_left">OPHTHALMOLOGY</td>
+<td headers="stub_1_21 name" class="gt_row gt_left">BEOVU</td>
+<td headers="stub_1_21 payments" class="gt_row gt_right">3</td>
+<td headers="stub_1_21 total" class="gt_row gt_right">$61.57</td>
+<td headers="stub_1_21 avg_per_pmt" class="gt_row gt_right">$20.52</td>
+</tr>
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">22</th>
+<td headers="stub_1_22 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_22 category" class="gt_row gt_left">SOLUTION/ DROPS</td>
+<td headers="stub_1_22 name" class="gt_row gt_left">OXERVATE</td>
+<td headers="stub_1_22 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_22 total" class="gt_row gt_right">$20.48</td>
+<td headers="stub_1_22 avg_per_pmt" class="gt_row gt_right">$20.48</td>
+</tr>
+<tr>
+<th id="stub_1_23" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">23</th>
+<td headers="stub_1_23 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_23 category" class="gt_row gt_left">Postoperative Inflammation</td>
+<td headers="stub_1_23 name" class="gt_row gt_left">DEXYCU</td>
+<td headers="stub_1_23 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_23 total" class="gt_row gt_right">$16.64</td>
+<td headers="stub_1_23 avg_per_pmt" class="gt_row gt_right">$16.64</td>
+</tr>
+<tr>
+<th id="stub_1_24" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">24</th>
+<td headers="stub_1_24 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_24 category" class="gt_row gt_left">Surgery</td>
+<td headers="stub_1_24 name" class="gt_row gt_left">Checkpoint Stimulators</td>
+<td headers="stub_1_24 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_24 total" class="gt_row gt_right">$14.74</td>
+<td headers="stub_1_24 avg_per_pmt" class="gt_row gt_right">$14.74</td>
+</tr>
+<tr>
+<th id="stub_1_25" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">25</th>
+<td headers="stub_1_25 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_25 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_25 name" class="gt_row gt_left">AcrySof IQ VIVITY IOL</td>
+<td headers="stub_1_25 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_25 total" class="gt_row gt_right">$14.73</td>
+<td headers="stub_1_25 avg_per_pmt" class="gt_row gt_right">$14.73</td>
+</tr>
+<tr>
+<th id="stub_1_26" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">26</th>
+<td headers="stub_1_26 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_26 category" class="gt_row gt_left">Chronic Non-infectious Posterior Segment Uveitis</td>
+<td headers="stub_1_26 name" class="gt_row gt_left">YUTIQ</td>
+<td headers="stub_1_26 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_26 total" class="gt_row gt_right">$13.85</td>
+<td headers="stub_1_26 avg_per_pmt" class="gt_row gt_right">$13.85</td>
+</tr>
+<tr>
+<th id="stub_1_27" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">27</th>
+<td headers="stub_1_27 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_27 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_27 name" class="gt_row gt_left">Crystalens Accommodating IOL (AT-52AO)</td>
+<td headers="stub_1_27 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_27 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_27 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_28" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">28</th>
+<td headers="stub_1_28 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_28 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_28 name" class="gt_row gt_left">Kahook Dual Blade</td>
+<td headers="stub_1_28 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_28 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_28 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_29" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">29</th>
+<td headers="stub_1_29 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_29 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_29 name" class="gt_row gt_left">TEARCARE(TM) (2.2) SYSTEM KIT</td>
+<td headers="stub_1_29 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_29 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_29 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_30" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">30</th>
+<td headers="stub_1_30 type" class="gt_row gt_left">Device</td>
+<td headers="stub_1_30 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_30 name" class="gt_row gt_left">Trulign IOL</td>
+<td headers="stub_1_30 payments" class="gt_row gt_right">1</td>
+<td headers="stub_1_30 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_30 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_31" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">31</th>
+<td headers="stub_1_31 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_31 category" class="gt_row gt_left">Ocular</td>
+<td headers="stub_1_31 name" class="gt_row gt_left">EYSUVIS</td>
+<td headers="stub_1_31 payments" class="gt_row gt_right">7</td>
+<td headers="stub_1_31 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_31 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_32" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">32</th>
+<td headers="stub_1_32 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_32 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_32 name" class="gt_row gt_left">BromSite</td>
+<td headers="stub_1_32 payments" class="gt_row gt_right">3</td>
+<td headers="stub_1_32 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_32 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+<tr>
+<th id="stub_1_33" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">33</th>
+<td headers="stub_1_33 type" class="gt_row gt_left">Drug</td>
+<td headers="stub_1_33 category" class="gt_row gt_left">Ophthalmology</td>
+<td headers="stub_1_33 name" class="gt_row gt_left">Xelpros</td>
+<td headers="stub_1_33 payments" class="gt_row gt_right">2</td>
+<td headers="stub_1_33 total" class="gt_row gt_right">$0.00</td>
+<td headers="stub_1_33 avg_per_pmt" class="gt_row gt_right">$0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">payment</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">row_id</span> <span class="op">==</span> <span class="st">"72"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 12</span></span></span>
+<span><span class="co">#&gt;   payer_name      pay_form pay_nature row_id group_id pay_total pay_date   name </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Bausch &amp; Lomb,… Cash or… Consultin…     72        1      <span style="text-decoration: underline;">3</span>000 2021-01-04 STEL…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Bausch &amp; Lomb,… Cash or… Consultin…     72        2        <span style="color: #BB0000;">NA</span> 2021-01-04 Crys…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Bausch &amp; Lomb,… Cash or… Consultin…     72        3        <span style="color: #BB0000;">NA</span> 2021-01-04 Trul…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: covered &lt;lgl&gt;, type &lt;chr&gt;, category &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ndc.atc_second &lt;chr&gt;</span></span></span></code></pre>
+<div class="section level3">
+<h3 id="fuzzy-joins">Fuzzy Joins<a class="anchor" aria-label="anchor" href="#fuzzy-joins"></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="va">ex</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Drug"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">program_year</span>, </span>
+<span>         <span class="va">pay_total</span>, </span>
+<span>         <span class="va">group_id</span>,</span>
+<span>         brand_name <span class="op">=</span> <span class="va">ndc.brand_name</span>,</span>
+<span>         generic_name <span class="op">=</span> <span class="va">ndc.drug_name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>brand_name <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="va">brand_name</span><span class="op">)</span>,</span>
+<span>         generic_name <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="va">generic_name</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">op</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 50 × 5</span></span></span>
+<span><span class="co">#&gt;     year pay_total group_id brand_name generic_name                             </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021   <span style="text-decoration: underline;">2</span>500           1 Mitosol    Mitomycin 0.2 Mg/Ml Ophthalmic Solution …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021    108.          1 Tepezza    Teprotumumab-Trbw 500 Mg Injection [Tepe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021     97.1         1 Tepezza    Teprotumumab-Trbw 500 Mg Injection [Tepe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021     23.9         1 Tepezza    Teprotumumab-Trbw 500 Mg Injection [Tepe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021     25.6         1 Tepezza    Teprotumumab-Trbw 500 Mg Injection [Tepe…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021     13.8         1 Yutiq      Fluocinolone Acetonide 0.18 Mg Drug Impl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021     16.6         1 Dexycu     0.005 Ml Dexamethasone 103.4 Mg/Ml Injec…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021    325           1 Durysta    Bimatoprost 0.01 Mg Drug Implant [Duryst…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021     18.6         1 Durysta    Bimatoprost 0.01 Mg Drug Implant [Duryst…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021      4.05        1 Durysta    Bimatoprost 0.01 Mg Drug Implant [Duryst…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 40 more rows</span></span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rx</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prescribers.html">prescribers</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
+<span>                  type <span class="op">=</span> <span class="st">'Drug'</span>, </span>
+<span>                  npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
+<span>         <span class="va">brand_name</span>, </span>
+<span>         <span class="va">generic_name</span>, </span>
+<span>         <span class="va">tot_claims</span>, </span>
+<span>         <span class="va">tot_fills</span>, </span>
+<span>         <span class="va">tot_supply</span>, </span>
+<span>         <span class="va">tot_cost</span>, </span>
+<span>         <span class="va">tot_benes</span><span class="op">)</span></span>
+<span><span class="va">rx</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 27 × 8</span></span></span>
+<span><span class="co">#&gt;     year brand_name        generic_name tot_claims tot_fills tot_supply tot_cost</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 Acetazolamide Er  Acetazolami…         20      20.5        533     971.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 Alphagan P        Brimonidine…         34      51         <span style="text-decoration: underline;">1</span>424   <span style="text-decoration: underline;">12</span>450.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 Azithromycin      Azithromycin        661    <span style="text-decoration: underline;">1</span>588.       <span style="text-decoration: underline;">45</span>870    <span style="text-decoration: underline;">7</span>181.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 Brimonidine Tart… Brimonidine…        306     550.       <span style="text-decoration: underline;">15</span>746    <span style="text-decoration: underline;">8</span>700.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 Bromsite          Bromfenac S…         78      80.5       <span style="text-decoration: underline;">2</span>387   <span style="text-decoration: underline;">21</span>943.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 Carteolol Hcl     Carteolol H…         79     184.        <span style="text-decoration: underline;">5</span>482    <span style="text-decoration: underline;">1</span>578.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 Cephalexin        Cephalexin           57      57          279     444.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 Combigan          Brimonidine…         63      87.8       <span style="text-decoration: underline;">2</span>444   <span style="text-decoration: underline;">17</span>835.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide Hcl   Dorzolamide…         71     151.        <span style="text-decoration: underline;">4</span>533    <span style="text-decoration: underline;">2</span>189 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide-Timo… Dorzolamide…         99     216.        <span style="text-decoration: underline;">6</span>463    <span style="text-decoration: underline;">3</span>921.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: tot_benes &lt;int&gt;</span></span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="more-involved-example">More Involved Example<a class="anchor" aria-label="anchor" href="#more-involved-example"></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plan(multisession, workers = 4)</span></span>
+<span><span class="co"># open  &lt;- open_payments_(npi = 1043218118)</span></span>
+<span><span class="co"># plan(sequential)</span></span>
+<span><span class="co"># open &lt;- open |&gt; janitor::remove_empty(which = c('rows', 'cols'))</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
+<span><span class="co">#   select(program_year, </span></span>
+<span><span class="co">#          payer_name, </span></span>
+<span><span class="co">#          pay_form,</span></span>
+<span><span class="co">#          pay_nature,</span></span>
+<span><span class="co">#          pay_total, </span></span>
+<span><span class="co">#          pay_date, </span></span>
+<span><span class="co">#          pay_count, </span></span>
+<span><span class="co">#          row_id, </span></span>
+<span><span class="co">#          group_id, </span></span>
+<span><span class="co">#          name, </span></span>
+<span><span class="co">#          covered,</span></span>
+<span><span class="co">#          type, </span></span>
+<span><span class="co">#          category, </span></span>
+<span><span class="co">#          ndc,</span></span>
+<span><span class="co">#          pdi)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
+<span><span class="co">#   count(payer_name,</span></span>
+<span><span class="co">#         wt = pay_count,</span></span>
+<span><span class="co">#         sort = TRUE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
+<span><span class="co">#   count(payer_id,</span></span>
+<span><span class="co">#         wt = pay_count,</span></span>
+<span><span class="co">#         sort = TRUE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
+<span><span class="co">#   filter(!is.na(type)) |&gt; </span></span>
+<span><span class="co">#   count(type, sort = TRUE)</span></span></code></pre></div>
+</div>
+</div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>

@@ -169,6 +169,11 @@ excluded.</p>
 <span class="r-in"><span><span class="fu">outpatient</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, ccn <span class="op">=</span> <span class="st">"110122"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">outpatient</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="years.html">out_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">outpatient</span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>                    ccn <span class="op">=</span> <span class="st">"110122"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>                    <span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
