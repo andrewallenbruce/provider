@@ -74,7 +74,8 @@ Remotes:
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm,
     github::rstudio/gt,
-    github::yutannihilation/ggsflabel
+    github::yutannihilation/ggsflabel,
+    github::emitanaka/chainr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
