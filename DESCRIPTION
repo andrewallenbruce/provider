@@ -26,7 +26,7 @@ Imports:
     lubridate,
     pins,
     purrr,
-    rlang,
+    rlang (>= 1.1.0),
     rxnorm,
     strex,
     stringi,
@@ -36,6 +36,7 @@ Imports:
     zeallot
 Suggests: 
     covr,
+    chainr,
     data.table,
     fipio,
     fontawesome,

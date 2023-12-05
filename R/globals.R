@@ -131,6 +131,35 @@ utils::globalVariables(c(
   "distribution_title", # <metadata.json>
   "distribution_modified", # <metadata.json>
   "distribution_accessURL", # <metadata.json>
+  "period", # <metadata.open>
+  "distribution", # <metadata.open>
+  "distribution.data", # <metadata.open>
+  "distribution.data_%Ref:downloadURL", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data", # <metadata.open>
+  "distribution.data_title", # <metadata.open>
+  "distribution.data_mediaType", # <metadata.open>
+  "distribution.data_format", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.identifier", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_filePath", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_identifier", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_mimeType", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_perspective", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_version", # <metadata.open>
+  "distribution.data_%Ref:downloadURL.data_checksum", # <metadata.open>
+  "distribution.data_@type", # <metadata.open>
+  "title", # <metadata.open>
+  "issued", # <metadata.open>
+  "modified", # <metadata.open>
+  "description", # <metadata.open>
+  "period_start", # <metadata.open>
+  "period_end", # <metadata.open>
+  "distribution.title", # <metadata.open>
+  "update_schedule", # <metadata.open>
+  "periodicity", # <metadata.open>
+  "interval", # <metadata.open>
+  "identifier", # <metadata.open>
+  "publisher", # <metadata.open>
+  "distribution.identifier", # <metadata.open>
   "y", # <mips_2021>
   "org_pac_id", # <mips_2021>
   "facility_name", # <mips_2021>

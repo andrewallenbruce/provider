@@ -173,30 +173,6 @@ metadata.json <- function(title, first = TRUE) {
   rows <- response$meta$total_rows
   cols <- response$meta$headers
 
-  iso_8601 <- function(x) {
-    dplyr::case_match(
-      x,
-      "R/P10Y" ~ "Decennial",
-      "R/P4Y" ~ "Quadrennial",
-      "R/P1Y" ~ "Annual",
-      c("R/P2M", "R/P0.5M") ~ "Bimonthly",
-      "R/P3.5D" ~ "Semiweekly",
-      "R/P1D" ~ "Daily",
-      c("R/P2W", "R/P0.5W") ~ "Biweekly",
-      "R/P6M" ~ "Semiannual",
-      "R/P2Y" ~ "Biennial",
-      "R/P3Y" ~ "Triennial",
-      "R/P0.33W" ~ "Three Times a Week",
-      "R/P0.33M" ~ "Three Times a Month",
-      "R/PT1S" ~ "Continuously Updated",
-      "R/P1M" ~ "Monthly",
-      "R/P3M" ~ "Quarterly",
-      "R/P0.5M" ~ "Semimonthly",
-      "R/P4M" ~ "Three Times a Year",
-      "R/P1W" ~ "Weekly",
-      "R/PT1H" ~ "Hourly")
-  }
-
   results <- list(
     title           = results$title,
     description     = results$description,
@@ -214,6 +190,164 @@ metadata.json <- function(title, first = TRUE) {
 
   return(results)
 }
+
+.metadata.funs <- function(fun) {
+
+  funs <- vctrs::vec_c(
+    'affiliations' = 'Facility Affiliation Data',
+    'beneficiaries' = 'Medicare Monthly Enrollment',
+    'betos' = 'Restructured BETOS Classification System',
+    'clinicians' = 'National Downloadable File',
+    'conditions_specific' = 'Specific Chronic Conditions',
+    'conditions_multiple' = 'Multiple Chronic Conditions',
+    'hospitals' = 'Hospital Enrollments',
+    'laboratories' = 'Provider of Services File - Clinical Laboratories',
+    'mips_individual' = 'PY 2021 Clinician Public Reporting: MIPS Measures and Attestations',
+    'mips_group' = 'PY 2021 Group Public Reporting: MIPS Measures and Attestations',
+    'opt_out' = 'Opt Out Affidavits',
+    'order_refer' = 'Order and Referring',
+    'outpatient_service' = 'Medicare Outpatient Hospitals - by Provider and Service',
+    'outpatient_geography' = 'Medicare Outpatient Hospitals - by Geography and Service',
+    'pending_physicians' = 'Pending Initial Logging and Tracking Physicians',
+    'pending_nonphysicians' = 'Pending Initial Logging and Tracking Non Physicians',
+    'prescribers_provider' = 'Medicare Part D Prescribers - by Provider',
+    'prescribers_drug' = 'Medicare Part D Prescribers - by Provider and Drug',
+    'prescribers_geography' = 'Medicare Part D Prescribers - by Geography and Drug',
+    'providers' = 'Medicare Fee-For-Service  Public Provider Enrollment',
+    'quality_payment' = 'Quality Payment Program Experience',
+    'reassignments' = 'Revalidation Reassignment List',
+    'taxonomy_crosswalk' = 'Medicare Provider and Supplier Taxonomy Crosswalk',
+    'utilization_provider' = 'Medicare Physician & Other Practitioners - by Provider',
+    'utilization_service' = 'Medicare Physician & Other Practitioners - by Provider and Service',
+    'utilization_geography' = 'Medicare Physician & Other Practitioners - by Geography and Service',
+  )
+
+}
+
+
+#' @autoglobal
+#' @noRd
+iso_8601 <- function(x) {
+  dplyr::case_match(
+    x,
+    "R/P10Y" ~ "Decennial",
+    "R/P4Y" ~ "Quadrennial",
+    "R/P1Y" ~ "Annual",
+    c("R/P2M", "R/P0.5M") ~ "Bimonthly",
+    "R/P3.5D" ~ "Semiweekly",
+    "R/P1D" ~ "Daily",
+    c("R/P2W", "R/P0.5W") ~ "Biweekly",
+    "R/P6M" ~ "Semiannual",
+    "R/P2Y" ~ "Biennial",
+    "R/P3Y" ~ "Triennial",
+    "R/P0.33W" ~ "Three Times a Week",
+    "R/P0.33M" ~ "Three Times a Month",
+    "R/PT1S" ~ "Continuously Updated",
+    "R/P1M" ~ "Monthly",
+    "R/P3M" ~ "Quarterly",
+    "R/P0.5M" ~ "Semimonthly",
+    "R/P4M" ~ "Three Times a Year",
+    "R/P1W" ~ "Weekly",
+    "R/PT1H" ~ "Hourly")
+}
+
+#' @autoglobal
+#' @param search dataset title
+#' @param tidy TRUE
+#' @param year dataset year
+#' @noRd
+metadata.open <- function(search = NULL,
+                          tidy = TRUE,
+                          year = NULL) {
+
+  url <- paste0('https://openpaymentsdata.cms.gov/',
+                'api/1/metastore/schemas/dataset/',
+                'items?show-reference-ids')
+
+  response <- httr2::request(url) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE)
+
+  results <- dplyr::tibble(
+    title = response$title,
+    description = response$description,
+    periodicity = response$accrualPeriodicity,
+    update_schedule = iso_8601(response$accrualPeriodicity),
+    modified = response$modified,
+    issued = response$issued,
+    period = response$temporal,
+    identifier = response$identifier,
+    publisher = response$publisher$data$name,
+    distribution = response$distribution) |>
+    tidyr::separate_wider_delim(period, delim = "/",
+                                names = c('period_start', 'period_end')) |>
+    tidyr::unnest(distribution, names_sep = ".") |>
+    tidyr::unnest(distribution.data, names_sep = "_") |>
+    tidyr::unnest(`distribution.data_%Ref:downloadURL`, names_sep = ".") |>
+    tidyr::unnest(`distribution.data_%Ref:downloadURL.data`, names_sep = "_") |>
+    dplyr::rename(distribution.title = distribution.data_title,
+                  distribution.mediaType = distribution.data_mediaType,
+                  distribution.format = distribution.data_format,
+                  distribution.url_identifier = `distribution.data_%Ref:downloadURL.identifier`,
+                  distribution.url_path = `distribution.data_%Ref:downloadURL.data_filePath`,
+                  distribution.url_identifier2 = `distribution.data_%Ref:downloadURL.data_identifier`,
+                  distribution.url_mimeType = `distribution.data_%Ref:downloadURL.data_mimeType`,
+                  distribution.url_perspective = `distribution.data_%Ref:downloadURL.data_perspective`,
+                  distribution.url_version = `distribution.data_%Ref:downloadURL.data_version`,
+                  distribution.url_checksum = `distribution.data_%Ref:downloadURL.data_checksum`,
+                  distribution.data_type = `distribution.data_@type`)
+
+  if (!is.null(search)) {
+
+    results <- results |> dplyr::filter(stringr::str_detect(title, {{ search }}))
+
+    if (tidy) {
+
+      results <- results |>
+        tidyr::separate_wider_delim(issued, delim = "T", names = c('issued', NA), too_few = "align_start") |>
+        tidyr::separate_wider_delim(modified, delim = "T", names = c('modified', NA), too_few = "align_start") |>
+        dplyr::mutate(year = strex::str_before_first(title, " "),
+                      year = as.integer(year),
+                      description = strex::str_before_first(description, "<p>"),
+                      issued = lubridate::ymd(issued),
+                      modified = lubridate::ymd(modified)) |>
+        provider::make_interval(start = period_start, end = period_end) |>
+        dplyr::select(year,
+                      title = distribution.title,
+                      description,
+                      update_schedule,
+                      periodicity,
+                      issued,
+                      modified,
+                      interval,
+                      identifier,
+                      publisher,
+                      distribution.identifier) |>
+        dplyr::arrange(dplyr::desc(year))
+
+      if(!is.null(year)) {
+
+        results <- dplyr::filter(results, year == {{ year }})
+
+        results <- list(year = results$year,
+                        title = results$title,
+                        description = results$description,
+                        update_schedule = results$update_schedule,
+                        periodicity = results$periodicity,
+                        date_issued = results$issued,
+                        date_modified = results$modified,
+                        period = results$interval,
+                        identifier = results$identifier,
+                        publisher = results$publisher,
+                        distribution = results$distribution.identifier)
+
+      }
+    }
+  }
+  return(results)
+}
+
 
 #' @param uuid distribution id of the api
 #' @return A numeric vector containing the total rows in the dataset.

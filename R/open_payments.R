@@ -342,7 +342,11 @@ open_payments_ <- function(year = open_years(),
 #' @noRd
 open_ids <- function(search) {
 
-  response <- httr2::request("https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?show-reference-ids") |>
+  url <- paste0('https://openpaymentsdata.cms.gov/',
+                'api/1/metastore/schemas/dataset/',
+                'items?show-reference-ids')
+
+  response <- httr2::request(url) |>
     httr2::req_perform()
 
   results <- dplyr::tibble(
