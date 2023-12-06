@@ -1,6 +1,10 @@
 ---
 name: Bug report or feature request
 about: Describe a bug you've seen or make a case for a new feature
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 Please briefly describe your problem and what output you expect. If you have a question, please don't use this form. Instead, ask on <https://stackoverflow.com/> or <https://community.rstudio.com/>.
