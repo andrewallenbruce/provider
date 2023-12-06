@@ -2,8 +2,8 @@
 name: Bug report or feature request
 about: Describe a bug you've seen or make a case for a new feature
 title: ''
-labels: ''
-assignees: ''
+labels: 'documentation :writing_hand:, feature :camera_flash:'
+assignees: andrewallenbruce
 
 ---
 
