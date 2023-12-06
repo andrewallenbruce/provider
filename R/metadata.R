@@ -1,11 +1,68 @@
-#' @param title name of the api
+#' Look up Dataset's API title
+#' @param fn function name
+#' @return A list containing the function name and the dataset's API title
+#' @examplesIf interactive()
+#' meta.funs('affiliations')
+#' meta.funs('clinicians')
+#' @autoglobal
+#' @export
+#' @keywords internal
+meta.funs <- function(fn) {
+
+  sets <- vctrs::vec_c(
+    'affiliations' = 'Facility Affiliation Data',
+    'beneficiaries' = 'Medicare Monthly Enrollment',
+    'betos' = 'Restructured BETOS Classification System',
+    'clinicians' = 'National Downloadable File',
+    'conditions_specific' = 'Specific Chronic Conditions',
+    'conditions_multiple' = 'Multiple Chronic Conditions',
+    'hospitals' = 'Hospital Enrollments',
+    'laboratories' = 'Provider of Services File - Clinical Laboratories',
+    'mips_individual' = 'PY 2021 Clinician Public Reporting: MIPS Measures and Attestations',
+    'mips_group' = 'PY 2021 Group Public Reporting: MIPS Measures and Attestations',
+    'opt_out' = 'Opt Out Affidavits',
+    'order_refer' = 'Order and Referring',
+    'open_payments' = 'General Payment Data',
+    'outpatient_service' = 'Medicare Outpatient Hospitals - by Provider and Service',
+    'outpatient_geography' = 'Medicare Outpatient Hospitals - by Geography and Service',
+    'pending_physicians' = 'Pending Initial Logging and Tracking Physicians',
+    'pending_nonphysicians' = 'Pending Initial Logging and Tracking Non Physicians',
+    'prescribers_provider' = 'Medicare Part D Prescribers - by Provider',
+    'prescribers_drug' = 'Medicare Part D Prescribers - by Provider and Drug',
+    'prescribers_geography' = 'Medicare Part D Prescribers - by Geography and Drug',
+    'providers' = 'Medicare Fee-For-Service  Public Provider Enrollment',
+    'quality_payment' = 'Quality Payment Program Experience',
+    'reassignments' = 'Revalidation Reassignment List',
+    'taxonomy_crosswalk' = 'Medicare Provider and Supplier Taxonomy Crosswalk',
+    'utilization_provider' = 'Medicare Physician & Other Practitioners - by Provider',
+    'utilization_service' = 'Medicare Physician & Other Practitioners - by Provider and Service',
+    'utilization_geography' = 'Medicare Physician & Other Practitioners - by Geography and Service',
+  )
+
+  nm <- unname(sets[fn])
+  lookup <- list(function_name  = paste("[", rlang::sym(fn), "]"),
+                 title = nm)
+  return(lookup)
+}
+
+#' Return Metadata about function's dataset
+#' @param fn function using the dataset
+#' @param title dataset's API title
 #' @return A list of metadata describing each API's dataset
 #' @examplesIf interactive()
-#' metadata.store("Facility Affiliation Data")
-#' metadata.store("National Downloadable File")
+#' meta.store(title = 'Facility Affiliation Data')
+#' meta.store(title = 'National Downloadable File')
+#' meta.store(fn = 'affiliations')
+#' meta.store(fn = 'clinicians')
 #' @autoglobal
-#' @noRd
-metadata.store <- function(title) {
+#' @export
+#' @keywords internal
+meta.store <- function(fn = NULL, title = NULL) {
+
+  rlang::check_exclusive(fn, title)
+  if (!is.null(fn)) c(function_name, dataset) %<-% meta.funs(fn)
+  if (!is.null(title)) dataset <- title
+
   #------------------------------------------------
   url.store <- paste0('https://data.cms.gov/',
                       'provider-data/api/1/metastore/',
@@ -26,8 +83,10 @@ metadata.store <- function(title) {
                   landingPage,
                   publisher) |>
     tidyr::unnest(publisher) |>
-    dplyr::select(-`@type`) |>
-    dplyr::filter(title == {{ title }})
+    dplyr::select(-`@type`)
+
+  results <- results |>
+    dplyr::filter(title == dataset)
 
   results$issued   <- lubridate::ymd(results$issued)
   results$modified <- lubridate::ymd(results$modified)
@@ -81,6 +140,7 @@ metadata.store <- function(title) {
 
   #------------------------------------------------
   results <- list(
+    function_name   = ifelse(!is.null(fn), function_name, NA),
     title           = store$title,
     description     = schema$description[[1]],
     publisher       = store$name,
@@ -99,19 +159,30 @@ metadata.store <- function(title) {
   return(results)
 }
 
-#' @param title name of the api
+#' Return Metadata about function's dataset
+#' @param fn function using the dataset
+#' @param title dataset's API title
 #' @param first only need the first row
 #' @return A [tibble()] containing the updated ids.
 #' @examplesIf interactive()
-#' metadata.json("Medicare Fee-For-Service  Public Provider Enrollment")
-#' metadata.json("Provider of Services File - Clinical Laboratories")
+#' meta.json(title = 'Medicare Fee-For-Service  Public Provider Enrollment')
+#' meta.json(title = 'Provider of Services File - Clinical Laboratories')
+#' meta.json(fn = 'providers')
+#' meta.json(fn = 'laboratories')
 #' @autoglobal
-#' @noRd
-metadata.json <- function(title, first = TRUE) {
+#' @export
+#' @keywords internal
+meta.json <- function(fn = NULL, title = NULL, first = TRUE) {
 
+  rlang::check_exclusive(fn, title)
+  if (!is.null(fn)) c(function_name, dataset) %<-% meta.funs(fn)
+  if (!is.null(title)) dataset <- title
+
+  #------------------------------------------------
   resp <- httr2::request("https://data.cms.gov/data.json") |>
     httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE)
 
   resp <- resp$dataset |>
     dplyr::tibble() |>
@@ -124,14 +195,13 @@ metadata.json <- function(title, first = TRUE) {
                   references,
                   accrualPeriodicity,
                   temporal) |>
-    dplyr::filter(title == {{ title }}) |>
+    dplyr::filter(title == dataset) |>
     tidyr::unnest(references)
 
   dst <- resp |>
     dplyr::select(title,
                   distribution) |>
     tidyr::unnest(cols = distribution, names_sep = "_") |>
-    #dplyr::filter(distribution_format == "API") |>
     dplyr::select(title,
                   distribution_title,
                   distribution_modified,
@@ -152,7 +222,8 @@ metadata.json <- function(title, first = TRUE) {
                   distribution,
                   modified = distribution_modified,
                   accrualPeriodicity) |>
-    dplyr::mutate(modified = lubridate::ymd(modified)) |>
+    dplyr::mutate(description = strex::str_before_first(description, "\n\n"),
+                  modified = lubridate::ymd(modified)) |>
     provider::make_interval(start = modified) |>
     tidyr::separate_wider_delim(title, delim = " : ", names = c("title", NA))
 
@@ -160,6 +231,7 @@ metadata.json <- function(title, first = TRUE) {
 
   if (first) results <- dplyr::slice_head(results)
 
+  #------------------------------------------------
   url <- glue::glue('https://data.cms.gov/',
                     'data-api/v1/dataset/',
                     '{results$distribution}',
@@ -173,10 +245,12 @@ metadata.json <- function(title, first = TRUE) {
   rows <- response$meta$total_rows
   cols <- response$meta$headers
 
+  #------------------------------------------------
   results <- list(
+    function_name   = ifelse(!is.null(fn), function_name, NA),
     title           = results$title,
     description     = results$description,
-    publisher       = " ",
+    publisher       = "Centers for Medicare & Medicaid Services (CMS)",
     distribution    = results$distribution,
     update_schedule = iso_8601(results$accrualPeriodicity),
     date_modified   = results$modified,
@@ -191,74 +265,18 @@ metadata.json <- function(title, first = TRUE) {
   return(results)
 }
 
-.metadata.funs <- function(fun) {
-
-  funs <- vctrs::vec_c(
-    'affiliations' = 'Facility Affiliation Data',
-    'beneficiaries' = 'Medicare Monthly Enrollment',
-    'betos' = 'Restructured BETOS Classification System',
-    'clinicians' = 'National Downloadable File',
-    'conditions_specific' = 'Specific Chronic Conditions',
-    'conditions_multiple' = 'Multiple Chronic Conditions',
-    'hospitals' = 'Hospital Enrollments',
-    'laboratories' = 'Provider of Services File - Clinical Laboratories',
-    'mips_individual' = 'PY 2021 Clinician Public Reporting: MIPS Measures and Attestations',
-    'mips_group' = 'PY 2021 Group Public Reporting: MIPS Measures and Attestations',
-    'opt_out' = 'Opt Out Affidavits',
-    'order_refer' = 'Order and Referring',
-    'outpatient_service' = 'Medicare Outpatient Hospitals - by Provider and Service',
-    'outpatient_geography' = 'Medicare Outpatient Hospitals - by Geography and Service',
-    'pending_physicians' = 'Pending Initial Logging and Tracking Physicians',
-    'pending_nonphysicians' = 'Pending Initial Logging and Tracking Non Physicians',
-    'prescribers_provider' = 'Medicare Part D Prescribers - by Provider',
-    'prescribers_drug' = 'Medicare Part D Prescribers - by Provider and Drug',
-    'prescribers_geography' = 'Medicare Part D Prescribers - by Geography and Drug',
-    'providers' = 'Medicare Fee-For-Service  Public Provider Enrollment',
-    'quality_payment' = 'Quality Payment Program Experience',
-    'reassignments' = 'Revalidation Reassignment List',
-    'taxonomy_crosswalk' = 'Medicare Provider and Supplier Taxonomy Crosswalk',
-    'utilization_provider' = 'Medicare Physician & Other Practitioners - by Provider',
-    'utilization_service' = 'Medicare Physician & Other Practitioners - by Provider and Service',
-    'utilization_geography' = 'Medicare Physician & Other Practitioners - by Geography and Service',
-  )
-
-}
-
-
-#' @autoglobal
-#' @noRd
-iso_8601 <- function(x) {
-  dplyr::case_match(
-    x,
-    "R/P10Y" ~ "Decennial",
-    "R/P4Y" ~ "Quadrennial",
-    "R/P1Y" ~ "Annual",
-    c("R/P2M", "R/P0.5M") ~ "Bimonthly",
-    "R/P3.5D" ~ "Semiweekly",
-    "R/P1D" ~ "Daily",
-    c("R/P2W", "R/P0.5W") ~ "Biweekly",
-    "R/P6M" ~ "Semiannual",
-    "R/P2Y" ~ "Biennial",
-    "R/P3Y" ~ "Triennial",
-    "R/P0.33W" ~ "Three Times a Week",
-    "R/P0.33M" ~ "Three Times a Month",
-    "R/PT1S" ~ "Continuously Updated",
-    "R/P1M" ~ "Monthly",
-    "R/P3M" ~ "Quarterly",
-    "R/P0.5M" ~ "Semimonthly",
-    "R/P4M" ~ "Three Times a Year",
-    "R/P1W" ~ "Weekly",
-    "R/PT1H" ~ "Hourly")
-}
-
-#' @autoglobal
+#' Return Metadata about function's dataset
 #' @param search dataset title
 #' @param tidy TRUE
 #' @param year dataset year
-#' @noRd
-metadata.open <- function(search = NULL,
-                          tidy = TRUE,
-                          year = NULL) {
+#' @return A list of metadata describing each API's dataset
+#' @examplesIf interactive()
+#' meta.open('General Payment Data')
+#' meta.open(meta_funs('open_payments'), year = 2022)
+#' @autoglobal
+#' @export
+#' @keywords internal
+meta.open <- function(search = NULL, tidy = TRUE, year = NULL) {
 
   url <- paste0('https://openpaymentsdata.cms.gov/',
                 'api/1/metastore/schemas/dataset/',
@@ -300,10 +318,12 @@ metadata.open <- function(search = NULL,
 
   if (!is.null(search)) {
 
-    results <- results |> dplyr::filter(stringr::str_detect(title, {{ search }}))
+    if (is.list(search))          dataset <- search$title
+    if (rlang::is_atomic(search)) dataset <- search
+
+    results <- results |> dplyr::filter(stringr::str_detect(title, dataset))
 
     if (tidy) {
-
       results <- results |>
         tidyr::separate_wider_delim(issued, delim = "T", names = c('issued', NA), too_few = "align_start") |>
         tidyr::separate_wider_delim(modified, delim = "T", names = c('modified', NA), too_few = "align_start") |>
@@ -330,7 +350,8 @@ metadata.open <- function(search = NULL,
 
         results <- dplyr::filter(results, year == {{ year }})
 
-        results <- list(year = results$year,
+        results <- list(function_name = paste("[", "open_payments", "]"),
+                        year = results$year,
                         title = results$title,
                         description = results$description,
                         update_schedule = results$update_schedule,
@@ -341,26 +362,25 @@ metadata.open <- function(search = NULL,
                         identifier = results$identifier,
                         publisher = results$publisher,
                         distribution = results$distribution.identifier)
-
       }
     }
   }
   return(results)
 }
 
-
 #' @param uuid distribution id of the api
 #' @return A numeric vector containing the total rows in the dataset.
 #' @examplesIf interactive()
-#' metadata.rows('2457ea29-fc82-48b0-86ec-3b0755de7515') # providers()
-#' metadata.rows('a85fa452-dee9-4c8f-8156-665238b8492f') # hospitals()
+#' .meta_rows('2457ea29-fc82-48b0-86ec-3b0755de7515') # providers()
+#' .meta_rows('a85fa452-dee9-4c8f-8156-665238b8492f') # hospitals()
 #' @autoglobal
 #' @noRd
-metadata.rows <- function(uuid) {
+.meta_rows <- function(uuid) {
 
   url <- glue::glue('https://data.cms.gov/',
                     'data-api/v1/dataset/',
-                    '{uuid}/data-viewer/stats')
+                    '{uuid}',
+                    '/data-viewer/stats')
 
   response <- httr2::request(url) |>
     httr2::req_perform() |>
@@ -374,16 +394,19 @@ metadata.rows <- function(uuid) {
 #' @return A list containing the total columns and rows in the dataset,
 #' as well as the column names.
 #' @examplesIf interactive()
-#' metadata.viewer('2457ea29-fc82-48b0-86ec-3b0755de7515') # providers()
-#' metadata.viewer('a85fa452-dee9-4c8f-8156-665238b8492f') # hospitals()
+#' .meta_view('2457ea29-fc82-48b0-86ec-3b0755de7515') # providers()
+#' .meta_view('a85fa452-dee9-4c8f-8156-665238b8492f') # hospitals()
 #' @autoglobal
 #' @noRd
-
-metadata.viewer <- function(uuid) {
+.meta_view <- function(uuid) {
 
   url <- glue::glue('https://data.cms.gov/',
                     'data-api/v1/dataset/',
-                    '{uuid}/data-viewer?offset=0&size=1')
+                    '{uuid}',
+                    '/data-viewer?offset=0&size=1')
+
+  # affiliations & clinicians
+  # 'https://data.cms.gov/provider-data/api/1/datastore/imports/78125945-ea51-5ee0-b3f1-5f46292467b1'
 
   response <- httr2::request(url) |>
     httr2::req_perform() |>
@@ -397,4 +420,30 @@ metadata.viewer <- function(uuid) {
     dimensions = paste0(length(cols), ' columns x ', format(rows, big.mark = ","), ' rows'),
     fields = cols
   )
+}
+
+#' @autoglobal
+#' @noRd
+iso_8601 <- function(x) {
+  dplyr::case_match(
+    x,
+    "R/P10Y" ~ "Decennial",
+    "R/P4Y" ~ "Quadrennial",
+    "R/P1Y" ~ "Annual",
+    c("R/P2M", "R/P0.5M") ~ "Bimonthly",
+    "R/P3.5D" ~ "Semiweekly",
+    "R/P1D" ~ "Daily",
+    c("R/P2W", "R/P0.5W") ~ "Biweekly",
+    "R/P6M" ~ "Semiannual",
+    "R/P2Y" ~ "Biennial",
+    "R/P3Y" ~ "Triennial",
+    "R/P0.33W" ~ "Three Times a Week",
+    "R/P0.33M" ~ "Three Times a Month",
+    "R/PT1S" ~ "Continuously Updated",
+    "R/P1M" ~ "Monthly",
+    "R/P3M" ~ "Quarterly",
+    "R/P0.5M" ~ "Semimonthly",
+    "R/P4M" ~ "Three Times a Year",
+    "R/P1W" ~ "Weekly",
+    "R/PT1H" ~ "Hourly")
 }
