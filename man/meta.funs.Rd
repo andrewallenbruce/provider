@@ -7,7 +7,7 @@
 meta.funs(fn)
 }
 \arguments{
-\item{fn}{function name}
+\item{call}{function name}
 }
 \value{
 A list containing the function name and the dataset's API title
@@ -19,6 +19,7 @@ Look up Dataset's API title
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 meta.funs('affiliations')
 meta.funs('clinicians')
+meta.funs('beneficiaries')
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

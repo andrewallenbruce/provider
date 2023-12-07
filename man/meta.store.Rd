@@ -7,9 +7,7 @@
 meta.store(fn = NULL, title = NULL)
 }
 \arguments{
-\item{fn}{function using the dataset}
-
-\item{title}{dataset's API title}
+\item{call}{function using the dataset}
 }
 \value{
 A list of metadata describing each API's dataset
@@ -22,7 +20,7 @@ Return Metadata about function's dataset
 meta.store(title = 'Facility Affiliation Data')
 meta.store(title = 'National Downloadable File')
 meta.store(fn = 'affiliations')
-meta.store(fn = 'clinicians')
+meta.store(fn = 'beneficiaries')
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

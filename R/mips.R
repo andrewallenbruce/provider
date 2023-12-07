@@ -64,13 +64,13 @@ mips_2021 <- function(npi = NULL,
   #   "lst_name",        last)
 
   args <- dplyr::tribble(
-    ~param,            ~arg,
-    "NPI",             npi,
-    "Ind_PAC_ID",      pac_ind,
-    "Org_PAC_ID",      pac_org,
-    "facility_name",   facility,
-    "Provider First Name",       first,
-    "Provider Last Name",        last)
+    ~param,               ~arg,
+    "NPI",                 npi,
+    "Ind_PAC_ID",          pac_ind,
+    "Org_PAC_ID",          pac_org,
+    "facility_name",       facility,
+    "Provider First Name", first,
+    "Provider Last Name",  last)
 
   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
                 "[SELECT * FROM ", id, "]",
@@ -153,7 +153,7 @@ mips_2021 <- function(npi = NULL,
                                measure_care_compare = ccxp_ind,
                                dplyr::everything())
     }
-    if (na.rm) results <- narm(results)
+   if (na.rm) results <- narm(results)
   }
   return(results)
 }

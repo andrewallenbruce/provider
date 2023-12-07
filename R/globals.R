@@ -121,6 +121,7 @@ utils::globalVariables(c(
   "landingPage", # <meta.store>
   "publisher", # <meta.store>
   "@type", # <meta.store>
+  "function_call", # <meta.store>
   "function_name", # <meta.json>
   "description", # <meta.json>
   "describedBy", # <meta.json>

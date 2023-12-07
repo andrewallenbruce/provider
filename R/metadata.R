@@ -1,9 +1,10 @@
 #' Look up Dataset's API title
-#' @param fn function name
+#' @param call function name
 #' @return A list containing the function name and the dataset's API title
 #' @examplesIf interactive()
 #' meta.funs('affiliations')
 #' meta.funs('clinicians')
+#' meta.funs('beneficiaries')
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -14,46 +15,44 @@ meta.funs <- function(fn) {
     'beneficiaries' = 'Medicare Monthly Enrollment',
     'betos' = 'Restructured BETOS Classification System',
     'clinicians' = 'National Downloadable File',
-    'conditions_specific' = 'Specific Chronic Conditions',
-    'conditions_multiple' = 'Multiple Chronic Conditions',
+    'conditions_specific' = 'Specific Chronic Conditions', # type, year
+    'conditions_multiple' = 'Multiple Chronic Conditions', # type, year
     'hospitals' = 'Hospital Enrollments',
     'laboratories' = 'Provider of Services File - Clinical Laboratories',
-    'mips_individual' = 'PY 2021 Clinician Public Reporting: MIPS Measures and Attestations',
-    'mips_group' = 'PY 2021 Group Public Reporting: MIPS Measures and Attestations',
+    'mips_individual' = 'PY 2021 Clinician Public Reporting: MIPS Measures and Attestations', # type
+    'mips_group' = 'PY 2021 Group Public Reporting: MIPS Measures and Attestations', # type
     'opt_out' = 'Opt Out Affidavits',
     'order_refer' = 'Order and Referring',
-    'open_payments' = 'General Payment Data',
-    'outpatient_service' = 'Medicare Outpatient Hospitals - by Provider and Service',
-    'outpatient_geography' = 'Medicare Outpatient Hospitals - by Geography and Service',
-    'pending_physicians' = 'Pending Initial Logging and Tracking Physicians',
-    'pending_nonphysicians' = 'Pending Initial Logging and Tracking Non Physicians',
-    'prescribers_provider' = 'Medicare Part D Prescribers - by Provider',
-    'prescribers_drug' = 'Medicare Part D Prescribers - by Provider and Drug',
-    'prescribers_geography' = 'Medicare Part D Prescribers - by Geography and Drug',
+    'open_payments' = 'General Payment Data', # year
+    'outpatient_service' = 'Medicare Outpatient Hospitals - by Provider and Service', # type, year
+    'outpatient_geography' = 'Medicare Outpatient Hospitals - by Geography and Service', # type, year
+    'pending_physicians' = 'Pending Initial Logging and Tracking Physicians', # type
+    'pending_nonphysicians' = 'Pending Initial Logging and Tracking Non Physicians', # type
+    'prescribers_provider' = 'Medicare Part D Prescribers - by Provider', # type, year
+    'prescribers_drug' = 'Medicare Part D Prescribers - by Provider and Drug', # type, year
+    'prescribers_geography' = 'Medicare Part D Prescribers - by Geography and Drug', # type, year
     'providers' = 'Medicare Fee-For-Service  Public Provider Enrollment',
-    'quality_payment' = 'Quality Payment Program Experience',
+    'quality_payment' = 'Quality Payment Program Experience', # year
     'reassignments' = 'Revalidation Reassignment List',
     'taxonomy_crosswalk' = 'Medicare Provider and Supplier Taxonomy Crosswalk',
-    'utilization_provider' = 'Medicare Physician & Other Practitioners - by Provider',
-    'utilization_service' = 'Medicare Physician & Other Practitioners - by Provider and Service',
-    'utilization_geography' = 'Medicare Physician & Other Practitioners - by Geography and Service',
-  )
+    'utilization_provider' = 'Medicare Physician & Other Practitioners - by Provider', # type, year
+    'utilization_service' = 'Medicare Physician & Other Practitioners - by Provider and Service', # type, year
+    'utilization_geography' = 'Medicare Physician & Other Practitioners - by Geography and Service' # type, year
+    )
 
-  nm <- unname(sets[fn])
-  lookup <- list(function_name  = paste("[", rlang::sym(fn), "]"),
-                 title = nm)
+  lookup <- list(function_name = paste0(fn, "()"),
+                 title = unname(sets[fn]))
   return(lookup)
 }
 
 #' Return Metadata about function's dataset
-#' @param fn function using the dataset
-#' @param title dataset's API title
+#' @param call function using the dataset
 #' @return A list of metadata describing each API's dataset
 #' @examplesIf interactive()
 #' meta.store(title = 'Facility Affiliation Data')
 #' meta.store(title = 'National Downloadable File')
 #' meta.store(fn = 'affiliations')
-#' meta.store(fn = 'clinicians')
+#' meta.store(fn = 'beneficiaries')
 #' @autoglobal
 #' @export
 #' @keywords internal
@@ -140,7 +139,8 @@ meta.store <- function(fn = NULL, title = NULL) {
 
   #------------------------------------------------
   results <- list(
-    function_name   = ifelse(!is.null(fn), function_name, NA),
+    function_call   = function_call,
+    function_name   = function_name,
     title           = store$title,
     description     = schema$description[[1]],
     publisher       = store$name,
