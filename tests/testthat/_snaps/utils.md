@@ -44,14 +44,14 @@
     Code
       file_url(fn = "c", args = args, offset = 0L)
     Output
-      [1] "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%204171e10f-d33a-50a1-9c60-8e43bc74a2ee%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D;&show_db_columns"
+      [1] "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%20a4525979-6264-592f-babb-3589b5d85d25%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D;&show_db_columns"
 
 ---
 
     Code
       file_url(fn = "a", args = args, offset = 0L)
     Output
-      [1] "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%2078125945-ea51-5ee0-b3f1-5f46292467b1%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D;&show_db_columns"
+      [1] "https://data.cms.gov/provider-data/api/1/datastore/sql?query=%5BSELECT%20%2A%20FROM%20df1724a2-0e9f-501f-ba77-67d60cf6e3a6%5D%5BWHERE%20NPI%20=%20%221144544834%22%5D%5BLIMIT%2010000%20OFFSET%200%5D;&show_db_columns"
 
 # format_cli() works
 

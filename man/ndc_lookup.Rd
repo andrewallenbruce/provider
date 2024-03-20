@@ -9,7 +9,7 @@ ndc_lookup(ndc, ...)
 \arguments{
 \item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
 
-\item{...}{for future use.}
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

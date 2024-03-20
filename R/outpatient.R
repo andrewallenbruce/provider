@@ -19,6 +19,7 @@
 #' @param apc < *character* > comprehensive ambulatory payment classification code
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #' @examplesIf interactive()
 #' outpatient(year = 2021, ccn = "110122")
 #'
@@ -32,17 +33,18 @@
 #' @export
 # nocov start
 outpatient <- function(year,
-                       ccn = NULL,
+                       ccn          = NULL,
                        organization = NULL,
-                       street = NULL,
-                       city = NULL,
-                       state = NULL,
-                       fips = NULL,
-                       zip = NULL,
-                       ruca = NULL,
-                       apc = NULL,
-                       tidy = TRUE,
-                       na.rm = TRUE) {
+                       street       = NULL,
+                       city         = NULL,
+                       state        = NULL,
+                       fips         = NULL,
+                       zip          = NULL,
+                       ruca         = NULL,
+                       apc          = NULL,
+                       tidy         = TRUE,
+                       na.rm        = TRUE,
+                       ...) {
 
   zip <- zip %nn% as.character(zip)
   ccn <- ccn %nn% as.character(ccn)

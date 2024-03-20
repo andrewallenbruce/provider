@@ -34,6 +34,7 @@
 #' @param taxonomy_description < *character* > Provider's taxonomy description
 #' @param keyword_search < *character* > Search term to use for quick full-text search.
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -56,7 +57,8 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
                                specialty_code        = NULL,
                                specialty_description = NULL,
                                keyword_search        = NULL,
-                               tidy                  = TRUE) {
+                               tidy                  = TRUE,
+                               ...) {
 
   if (!is.null(keyword_search)) {
 

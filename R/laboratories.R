@@ -80,6 +80,7 @@
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -88,16 +89,17 @@
 #' laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 #' @autoglobal
 #' @export
-laboratories <- function(name = NULL,
-                         clia = NULL,
+laboratories <- function(name        = NULL,
+                         clia        = NULL,
                          certificate = NULL,
-                         city = NULL,
-                         state = NULL,
-                         zip = NULL,
-                         active = FALSE,
-                         tidy = TRUE,
-                         na.rm = TRUE,
-                         pivot = TRUE) {
+                         city        = NULL,
+                         state       = NULL,
+                         zip         = NULL,
+                         active      = FALSE,
+                         tidy        = TRUE,
+                         na.rm       = TRUE,
+                         pivot       = TRUE,
+                         ...) {
 
   if (!is.null(certificate)) {
     rlang::arg_match(certificate,

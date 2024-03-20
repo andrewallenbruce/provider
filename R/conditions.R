@@ -106,6 +106,7 @@
 #' and utilization is compiled (see details for list of conditions)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @returns A [tibble][tibble::tibble-package] with the following columns:
 #'
@@ -149,7 +150,8 @@ conditions <- function(year,
                        subdemo = NULL,
                        mcc = NULL,
                        tidy = TRUE,
-                       na.rm = TRUE) {
+                       na.rm = TRUE,
+                       ...) {
 
   rlang::check_required(year)
   rlang::check_required(set)

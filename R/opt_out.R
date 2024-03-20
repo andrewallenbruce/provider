@@ -56,6 +56,7 @@
 #' @param zip < `character` > Opt-out provider's zip code
 #' @param order_refer < `boolean` > Indicates order and refer eligibility
 #' @param tidy < `boolean` > // __default:__ `TRUE` Tidy output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -96,7 +97,8 @@ opt_out <- function(npi = NULL,
                     state = NULL,
                     zip = NULL,
                     order_refer = NULL,
-                    tidy = TRUE) {
+                    tidy = TRUE,
+                    ...) {
 
   npi         <- npi %nn% validate_npi(npi)
   order_refer <- order_refer %nn% tf_2_yn(order_refer)

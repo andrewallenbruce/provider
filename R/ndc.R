@@ -54,7 +54,7 @@
 #' rxnorm("0002-1433-80")
 #'
 #' @param ndc < *character* > // __required__ 10- to 11-digit National Drug Code
-#' @param ... for future use.
+#' @param ... Empty
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**    |**Description**                                 |
@@ -133,13 +133,12 @@ medline <- function(ndc) {
 
 #' RxNorm API
 #' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code
-#' @param ... future use
+#' @param ... Empty
 #' @return A [tibble][dplyr::tibble()] with the columns:
 #' @autoglobal
 #' @export
 #' @keywords internal
-rxnorm <- function(ndc,
-                   ...) {
+rxnorm <- function(ndc, ...) {
 
   rxcui      <- rxnorm::from_ndc(ndc)
   ndc_status <- rxnorm::get_ndc_status(ndc)

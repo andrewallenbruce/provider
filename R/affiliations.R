@@ -31,6 +31,7 @@
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -60,7 +61,8 @@ affiliations <- function(npi = NULL,
                          parent_ccn = NULL,
                          offset = 0L,
                          tidy = TRUE,
-                         na.rm = TRUE) {
+                         na.rm = TRUE,
+                         ...) {
 
   npi          <- npi %nn% validate_npi(npi)
   pac          <- pac %nn% check_pac(pac)

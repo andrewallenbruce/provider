@@ -10,7 +10,8 @@ taxonomy_crosswalk(
   specialty_code = NULL,
   specialty_description = NULL,
   keyword_search = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  ...
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ taxonomy_crosswalk(
 \item{keyword_search}{< \emph{character} > Search term to use for quick full-text search.}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

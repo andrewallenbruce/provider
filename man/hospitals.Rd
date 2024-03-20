@@ -22,7 +22,8 @@ hospitals(
   subgroup = list(),
   tidy = TRUE,
   pivot = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -138,6 +139,8 @@ Pivot output}
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE}
 
 Remove empty rows and columns}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

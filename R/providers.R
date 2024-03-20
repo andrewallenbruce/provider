@@ -24,6 +24,7 @@
 #' `"M"` (Male), `"9"` (Unknown/Organization)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return [tibble][tibble::tibble-package] with the columns:
 #'
@@ -47,19 +48,20 @@
 #' providers(pac = 2860305554, gender = "9")
 #' @autoglobal
 #' @export
-providers <- function(npi = NULL,
-                      pac = NULL,
-                      enid = NULL,
-                      specialty_code = NULL,
+providers <- function(npi                   = NULL,
+                      pac                   = NULL,
+                      enid                  = NULL,
+                      specialty_code        = NULL,
                       specialty_description = NULL,
-                      first = NULL,
-                      middle = NULL,
-                      last = NULL,
-                      organization = NULL,
-                      state = NULL,
-                      gender = NULL,
-                      tidy = TRUE,
-                      na.rm = TRUE) {
+                      first                 = NULL,
+                      middle                = NULL,
+                      last                  = NULL,
+                      organization          = NULL,
+                      state                 = NULL,
+                      gender                = NULL,
+                      tidy                  = TRUE,
+                      na.rm                 = TRUE,
+                      ...) {
 
   npi    <- npi %nn% validate_npi(npi)
   pac    <- pac %nn% check_pac(pac)

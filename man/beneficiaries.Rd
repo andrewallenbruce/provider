@@ -11,7 +11,8 @@ beneficiaries(
   state = NULL,
   county = NULL,
   fips = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  ...
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ beneficiary residence}
 \item{fips}{< \emph{character} > FIPS code of beneficiary residence}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

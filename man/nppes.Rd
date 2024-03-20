@@ -20,7 +20,8 @@ nppes(
   skip = 0L,
   unnest = TRUE,
   tidy = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -69,6 +70,8 @@ after those returned}
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -9,7 +9,7 @@ rxnorm(ndc, ...)
 \arguments{
 \item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
 
-\item{...}{future use}
+\item{...}{Empty}
 }
 \value{
 A \link[dplyr:reexports]{tibble} with the columns:

@@ -16,7 +16,8 @@ conditions(
   subdemo = NULL,
   mcc = NULL,
   tidy = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ and utilization is compiled (see details for list of conditions)}
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the following columns:

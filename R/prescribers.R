@@ -131,36 +131,36 @@ NULL
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... For future use.
+#' @param ... Empty
 #' @rdname prescribers
 #' @autoglobal
 #' @export
 prescribers <- function(year,
                         type,
-                        npi = NULL,
-                        first = NULL,
-                        last = NULL,
-                        organization = NULL,
-                        credential  = NULL,
-                        gender = NULL,
-                        entype = NULL,
-                        city = NULL,
-                        state = NULL,
-                        zip = NULL,
-                        fips = NULL,
-                        ruca = NULL,
-                        country = NULL,
-                        specialty = NULL,
-                        brand_name = NULL,
-                        generic_name = NULL,
-                        level = NULL,
-                        opioid = NULL,
-                        opioidLA = NULL,
-                        antibiotic = NULL,
+                        npi           = NULL,
+                        first         = NULL,
+                        last          = NULL,
+                        organization  = NULL,
+                        credential    = NULL,
+                        gender        = NULL,
+                        entype        = NULL,
+                        city          = NULL,
+                        state         = NULL,
+                        zip           = NULL,
+                        fips          = NULL,
+                        ruca          = NULL,
+                        country       = NULL,
+                        specialty     = NULL,
+                        brand_name    = NULL,
+                        generic_name  = NULL,
+                        level         = NULL,
+                        opioid        = NULL,
+                        opioidLA      = NULL,
+                        antibiotic    = NULL,
                         antipsychotic = NULL,
-                        tidy = TRUE,
-                        nest = TRUE,
-                        na.rm = TRUE,
+                        tidy          = TRUE,
+                        nest          = TRUE,
+                        na.rm         = TRUE,
                         ...) {
 
   rlang::check_required(year)

@@ -14,7 +14,8 @@ opt_out(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  ...
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ opt_out(
 \item{order_refer}{< \code{boolean} > Indicates order and refer eligibility}
 
 \item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

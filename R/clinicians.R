@@ -34,6 +34,7 @@
 #' @param offset < *integer* > // __default:__ `0L` API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -69,25 +70,26 @@
 #' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' @autoglobal
 #' @export
-clinicians <- function(npi = NULL,
-                       pac = NULL,
-                       enid = NULL,
-                       first = NULL,
-                       middle = NULL,
-                       last = NULL,
-                       gender = NULL,
-                       credential = NULL,
-                       school = NULL,
-                       grad_year = NULL,
-                       specialty = NULL,
+clinicians <- function(npi           = NULL,
+                       pac           = NULL,
+                       enid          = NULL,
+                       first         = NULL,
+                       middle        = NULL,
+                       last          = NULL,
+                       gender        = NULL,
+                       credential    = NULL,
+                       school        = NULL,
+                       grad_year     = NULL,
+                       specialty     = NULL,
                        facility_name = NULL,
-                       pac_org = NULL,
-                       city = NULL,
-                       state = NULL,
-                       zip = NULL,
-                       offset = 0L,
-                       tidy = TRUE,
-                       na.rm = TRUE) {
+                       pac_org       = NULL,
+                       city          = NULL,
+                       state         = NULL,
+                       zip           = NULL,
+                       offset        = 0L,
+                       tidy          = TRUE,
+                       na.rm         = TRUE,
+                       ...) {
 
   npi       <- npi %nn% validate_npi(npi)
   pac       <- pac %nn% check_pac(pac)

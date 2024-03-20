@@ -49,6 +49,7 @@
 #' @param procedure < *character* > Whether the HCPCS code is a Major (`"M"`),
 #' Other (`"O"`), or Non-Procedure code (`"N"`).
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -81,7 +82,8 @@ betos <- function(hcpcs = NULL,
                   subcategory = NULL,
                   family = NULL,
                   procedure = NULL,
-                  tidy = TRUE) {
+                  tidy = TRUE,
+                  ...) {
 
   args <- dplyr::tribble(
     ~param,             ~arg,

@@ -37,6 +37,7 @@
 #' @param county < *character* > County of beneficiary residence
 #' @param fips < *character* > FIPS code of beneficiary residence
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -90,7 +91,8 @@ beneficiaries <- function(year = NULL,
                           state = NULL,
                           county = NULL,
                           fips = NULL,
-                          tidy = TRUE) {
+                          tidy = TRUE,
+                          ...) {
 
   args <- list(year   = year,
                period = period,

@@ -14,7 +14,8 @@ laboratories(
   active = FALSE,
   tidy = TRUE,
   na.rm = TRUE,
-  pivot = TRUE
+  pivot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ laboratories(
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -53,7 +53,7 @@ NULL
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest `status` & `measures`
 #' @param eligibility < *boolean* > // __default:__ `TRUE` Append results
 #' from [quality_eligibility()]
-#' @param ... For future use.
+#' @param ... Empty
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
@@ -62,12 +62,12 @@ NULL
 #' @autoglobal
 #' @export
 quality_payment <- function(year,
-                            npi = NULL,
-                            state = NULL,
-                            specialty = NULL,
-                            type = NULL,
-                            tidy = TRUE,
-                            nest = TRUE,
+                            npi         = NULL,
+                            state       = NULL,
+                            specialty   = NULL,
+                            type        = NULL,
+                            tidy        = TRUE,
+                            nest        = TRUE,
                             eligibility = TRUE,
                             ...) {
 

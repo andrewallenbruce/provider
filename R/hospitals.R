@@ -124,6 +124,8 @@
 #'
 #' Remove empty rows and columns
 #'
+#' @param ... Empty
+#'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**           |**Description**                                                |
@@ -171,24 +173,25 @@
 #'
 #' @autoglobal
 #' @export
-hospitals <- function(npi = NULL,
-                      facility_ccn = NULL,
-                      enid_org = NULL,
-                      enid_state = NULL,
-                      pac_org = NULL,
+hospitals <- function(npi            = NULL,
+                      facility_ccn   = NULL,
+                      enid_org       = NULL,
+                      enid_state     = NULL,
+                      pac_org        = NULL,
                       specialty_code = NULL,
-                      organization = NULL,
-                      dba = NULL,
-                      city = NULL,
-                      state = NULL,
-                      zip = NULL,
-                      registration = NULL,
-                      multi_npi = NULL,
-                      reh = NULL,
-                      subgroup = list(),
-                      tidy = TRUE,
-                      pivot = TRUE,
-                      na.rm = TRUE) {
+                      organization   = NULL,
+                      dba            = NULL,
+                      city           = NULL,
+                      state          = NULL,
+                      zip            = NULL,
+                      registration   = NULL,
+                      multi_npi      = NULL,
+                      reh            = NULL,
+                      subgroup       = list(),
+                      tidy           = TRUE,
+                      pivot          = TRUE,
+                      na.rm          = TRUE,
+                      ...) {
 
   npi          <- npi %nn% validate_npi(npi)
   pac_org      <- pac_org %nn% check_pac(pac_org)

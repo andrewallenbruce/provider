@@ -13,7 +13,8 @@ order_refer(
   hha = NULL,
   pmd = NULL,
   tidy = TRUE,
-  pivot = TRUE
+  pivot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ order and refer to:
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -74,7 +74,7 @@
 #' @param pivot < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `FALSE` Remove empty rows and columns
 #' @param stats < *boolean* > // __default:__ `FALSE` Return QPP stats
-#' @param ... For future use.
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -122,11 +122,11 @@
 #' @export
 quality_eligibility <- function(year,
                                 npi,
-                                tidy = TRUE,
+                                tidy   = TRUE,
                                 unnest = TRUE,
-                                pivot = TRUE,
-                                na.rm = FALSE,
-                                stats = FALSE,
+                                pivot  = TRUE,
+                                na.rm  = FALSE,
+                                stats  = FALSE,
                                 ...) {
 
   rlang::check_required(year)

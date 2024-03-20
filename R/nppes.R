@@ -101,6 +101,7 @@
 #' @param unnest < *boolean* > // __default:__ `TRUE` Unnest list columns
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -111,22 +112,23 @@
 #' nppes(city = "CARROLLTON", state = "GA", zip = 301173889, entype = "I")
 #' @autoglobal
 #' @export
-nppes <- function(npi = NULL,
-                  entype = NULL,
-                  first = NULL,
-                  last = NULL,
-                  organization = NULL,
-                  name_type = NULL,
+nppes <- function(npi            = NULL,
+                  entype         = NULL,
+                  first          = NULL,
+                  last           = NULL,
+                  organization   = NULL,
+                  name_type      = NULL,
                   taxonomy_desc  = NULL,
-                  city = NULL,
-                  state = NULL,
-                  zip = NULL,
-                  country = NULL,
-                  limit = 1200L,
-                  skip = 0L,
-                  unnest = TRUE,
-                  tidy = TRUE,
-                  na.rm = TRUE) {
+                  city           = NULL,
+                  state          = NULL,
+                  zip            = NULL,
+                  country        = NULL,
+                  limit          = 1200L,
+                  skip           = 0L,
+                  unnest         = TRUE,
+                  tidy           = TRUE,
+                  na.rm          = TRUE,
+                  ...) {
 
   npi       <- npi %nn% validate_npi(npi)
   name_type <- name_type %nn% rlang::arg_match(name_type, c("AO", "Provider"))

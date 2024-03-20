@@ -120,36 +120,36 @@ NULL
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest `performance`, `demographics` and `conditions`
 #' @param detailed < *boolean* > // __default:__ `FALSE` Include nested `medical` and `drug` columns
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... For future use.
+#' @param ... Empty
 #' @rdname utilization
 #' @autoglobal
 #' @export
 utilization <- function(year,
                         type,
-                        npi = NULL,
-                        first = NULL,
-                        last = NULL,
+                        npi          = NULL,
+                        first        = NULL,
+                        last         = NULL,
                         organization = NULL,
-                        credential  = NULL,
-                        gender = NULL,
-                        entype = NULL,
-                        city = NULL,
-                        state = NULL,
-                        zip = NULL,
-                        fips = NULL,
-                        ruca = NULL,
-                        country = NULL,
-                        specialty = NULL,
-                        par = NULL,
-                        level = NULL,
-                        hcpcs = NULL,
-                        drug = NULL,
-                        pos = NULL,
-                        tidy = TRUE,
-                        nest = TRUE,
-                        detailed = FALSE,
-                        rbcs = TRUE,
-                        na.rm = TRUE,
+                        credential   = NULL,
+                        gender       = NULL,
+                        entype       = NULL,
+                        city         = NULL,
+                        state        = NULL,
+                        zip          = NULL,
+                        fips         = NULL,
+                        ruca         = NULL,
+                        country      = NULL,
+                        specialty    = NULL,
+                        par          = NULL,
+                        level        = NULL,
+                        hcpcs        = NULL,
+                        drug         = NULL,
+                        pos          = NULL,
+                        tidy         = TRUE,
+                        nest         = TRUE,
+                        detailed     = FALSE,
+                        rbcs         = TRUE,
+                        na.rm        = TRUE,
                         ...) {
 
   rlang::check_required(year)

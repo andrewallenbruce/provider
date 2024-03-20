@@ -15,6 +15,7 @@
 #' @param offset offset; API pagination
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -25,15 +26,16 @@
 #' @autoglobal
 #' @noRd
 # nocov start
-mips_2021 <- function(npi = NULL,
-                      pac_ind = NULL,
-                      pac_org = NULL,
+mips_2021 <- function(npi      = NULL,
+                      pac_ind  = NULL,
+                      pac_org  = NULL,
                       facility = NULL,
-                      first = NULL,
-                      last = NULL,
-                      offset = 0L,
-                      tidy = TRUE,
-                      na.rm = TRUE) {
+                      first    = NULL,
+                      last     = NULL,
+                      offset   = 0L,
+                      tidy     = TRUE,
+                      na.rm    = TRUE,
+                      ...) {
 
   if (all(is.null(c(npi, pac_ind, pac_org, first, last, facility)))) {
     cli::cli_abort("A non-NULL argument is required")

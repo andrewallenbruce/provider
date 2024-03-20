@@ -4,7 +4,14 @@
 \alias{pending}
 \title{Pending Medicare Enrollment Applications}
 \usage{
-pending(type = "P", npi = NULL, first = NULL, last = NULL, tidy = TRUE)
+pending(
+  type = c("P", "N"),
+  npi = NULL,
+  first = NULL,
+  last = NULL,
+  tidy = TRUE,
+  ...
+)
 }
 \arguments{
 \item{type}{< \code{character} > // \strong{default:} \code{"P"}
@@ -22,6 +29,8 @@ Provider's name}
 \item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE}
 
 Tidy output}
+
+\item{...}{Empty}
 }
 \value{
 A \code{\link[=tibble]{tibble()}} with the columns:\tabular{ll}{

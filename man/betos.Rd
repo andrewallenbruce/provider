@@ -11,7 +11,8 @@ betos(
   subcategory = NULL,
   family = NULL,
   procedure = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  ...
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ betos(
 Other (\code{"O"}), or Non-Procedure code (\code{"N"}).}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+
+\item{...}{Empty}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{

@@ -29,6 +29,7 @@
 #' @param entry < *character* > Entry type, reassignment (`"R"`) or employment (`"E"`)
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -55,20 +56,21 @@
 #'
 #' @autoglobal
 #' @export
-reassignments <- function(npi = NULL,
-                          pac = NULL,
-                          enid = NULL,
-                          first = NULL,
-                          last = NULL,
-                          state = NULL,
-                          specialty = NULL,
+reassignments <- function(npi          = NULL,
+                          pac          = NULL,
+                          enid         = NULL,
+                          first        = NULL,
+                          last         = NULL,
+                          state        = NULL,
+                          specialty    = NULL,
                           organization = NULL,
-                          pac_org = NULL,
-                          enid_org = NULL,
-                          state_org = NULL,
-                          entry = NULL,
-                          tidy = TRUE,
-                          na.rm = TRUE) {
+                          pac_org      = NULL,
+                          enid_org     = NULL,
+                          state_org    = NULL,
+                          entry        = NULL,
+                          tidy         = TRUE,
+                          na.rm        = TRUE,
+                          ...) {
 
   npi      <- npi %nn% validate_npi(npi)
   pac      <- pac %nn% check_pac(pac)

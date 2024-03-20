@@ -30,6 +30,8 @@
 #'
 #' Tidy output
 #'
+#' @param ... Empty
+#'
 #' @return A [tibble()] with the columns:
 #'
 #' |**Field** |**Description**         |
@@ -47,13 +49,14 @@
 #'
 #' @autoglobal
 #' @export
-pending <- function(type = "P",
-                    npi = NULL,
+pending <- function(type  = c("P", "N"),
+                    npi   = NULL,
                     first = NULL,
-                    last = NULL,
-                    tidy = TRUE) {
+                    last  = NULL,
+                    tidy  = TRUE,
+                    ...) {
 
-  type <- rlang::arg_match(type, c("P", "N"))
+  type <- match.arg(type)
   npi  <- npi %nn% validate_npi(npi)
 
   args <- dplyr::tribble(

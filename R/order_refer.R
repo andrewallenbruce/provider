@@ -41,6 +41,7 @@
 #' + `pmd`: Power Mobility Devices
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param pivot < *boolean* > // __default:__ `TRUE` Pivot output
+#' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -67,7 +68,8 @@ order_refer <- function(npi   = NULL,
                         hha   = NULL,
                         pmd   = NULL,
                         tidy  = TRUE,
-                        pivot = TRUE) {
+                        pivot = TRUE,
+                        ...) {
 
   npi   <- npi %nn% validate_npi(npi)
   partb <- partb %nn% tf_2_yn(partb)

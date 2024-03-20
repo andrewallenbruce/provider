@@ -120,9 +120,12 @@
 #' @autoglobal
 #' @export
 taxonomy_codes <- function(shape = c('wide', 'long')) {
+
   results <- pins::board_url(
     github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
     pins::pin_read("taxonomy_codes")
+
+  shape <- match.arg(shape)
 
   if (shape == 'wide') return(results)
 

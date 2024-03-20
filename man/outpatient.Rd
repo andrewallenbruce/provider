@@ -16,7 +16,8 @@ outpatient(
   ruca = NULL,
   apc = NULL,
   tidy = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  ...
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ format. Run \code{\link[=out_years]{out_years()}} to return a vector of the year
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
 \item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+
+\item{...}{Empty}
 }
 \description{
 Outpatient Hospitals Enrolled in Medicare
