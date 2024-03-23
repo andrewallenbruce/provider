@@ -238,8 +238,8 @@ quality_payment_ <- function(year = qpp_years(), ...) {
                         .options = furrr::furrr_options(seed = NULL))
 }
 
-#' @autoglobal
 #' @noRd
+#' @autoglobal
 cols_qcomb <- function(df) {
 
   cols <- c('year',
@@ -312,8 +312,8 @@ cols_qcomb <- function(df) {
 
 }
 
-#' @autoglobal
 #' @noRd
+#' @autoglobal
 cols_qpp <- function(df, step = c("tidy", "nest")) {
 
   if (step == "tidy") {
