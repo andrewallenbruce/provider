@@ -1,8 +1,6 @@
 #' Provider Taxonomies
 #'
 #' @description
-#' `r lifecycle::badge("questioning")`
-#'
 #' `taxonomy_codes()` returns a [tibble()] of the current Health Care Provider
 #' Taxonomy code set
 #'

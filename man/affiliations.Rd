@@ -20,57 +20,50 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
+by CMS to US healthcare providers through NPPES.}
 
-\item{pac}{< \emph{integer} > 10-digit Individual PECOS Associate Control ID}
+\item{pac}{\verb{<int>} Unique 10-digit Provider Associate-level Control ID (PAC),
+assigned to each individual or organization in PECOS. The PAC ID links all
+entity-level information (e.g., tax identification numbers and
+organizational names) and may be associated with multiple enrollment IDs if
+the individual or organization enrolled multiple times under different
+circumstances.}
 
-\item{first, middle, last}{< \emph{character} > Individual Provider's name}
+\item{first, middle, last}{\verb{<chr>} Individual provider's first/middle/last name}
 
-\item{facility_type}{< \emph{character} >
+\item{facility_type}{\verb{<chr>} Type of facility, one of the following:
 \itemize{
-\item \code{"Hospital"} or \code{"hp"}
-\item \code{"Long-term care hospital"} or \code{"ltch"}
-\item \code{"Nursing home"} or \code{"nh"}
-\item \code{"Inpatient rehabilitation facility"} or \code{"irf"}
-\item \code{"Home health agency"} or \code{"hha"}
-\item \code{"Skilled nursing facility"} or \code{"snf"}
-\item \code{"Hospice"} or \code{"hs"}
-\item \code{"Dialysis facility"} or \code{"df"}
+\item \code{Hospital} (\code{hp})
+\item \verb{Long-term care hospital} (\code{ltch})
+\item \verb{Nursing home} (\code{nh})
+\item \verb{Inpatient rehabilitation facility} (\code{irf})
+\item \verb{Home health agency} (\code{hha})
+\item \verb{Skilled nursing facility} (\code{snf})
+\item \code{Hospice} (\code{hs})
+\item \verb{Dialysis facility} (\code{df})
 }}
 
-\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of
-facility or unit within hospital where an individual provider provides service}
+\item{facility_ccn}{\verb{<chr>} 6-digit CMS Certification Number of facility or
+unit within hospital where an individual provider provides service.}
 
-\item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a sub-unit's
-primary hospital, should the provider provide services in said unit}
+\item{parent_ccn}{\verb{<int>} 6-digit CMS Certification Number of a sub-unit's
+primary hospital, should the provider provide services in said unit.}
 
-\item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
+\item{offset}{\verb{<int>} API pagination, \strong{default} is \code{0L}}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<lgl>} Remove empty rows and columns; \strong{default} is \code{TRUE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab 10-digit NPI \cr
-   \code{pac} \tab 10-digit individual PAC ID \cr
-   \code{first} \tab Individual provider's first name \cr
-   \code{middle} \tab Individual provider's middle name \cr
-   \code{last} \tab Individual provider's last name \cr
-   \code{suffix} \tab Individual provider's suffix \cr
-   \code{facility_type} \tab Category of facility \cr
-   \code{facility_ccn} \tab Facility's 6-digit CCN \cr
-   \code{parent_ccn} \tab Primary facility's 6-digit CCN \cr
-}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=affiliations]{affiliations()}} allows the user access to data concerning providers'
-facility affiliations
+\code{\link[=affiliations]{affiliations()}} allows the user access to data concerning
+providers' facility affiliations
 }
 \section{Links}{
 

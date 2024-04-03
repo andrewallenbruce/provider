@@ -1,55 +1,51 @@
 #' Provider Facility Affiliations
 #'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [affiliations()] allows the user access to data concerning providers'
-#' facility affiliations
+#' @description [affiliations()] allows the user access to data concerning
+#'   providers' facility affiliations
 #'
 #' @section Links:
-#' + [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-#' + [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
+#'    * [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > 10-digit Individual National Provider Identifier
-#' @param pac < *integer* > 10-digit Individual PECOS Associate Control ID
-#' @param first,middle,last < *character* > Individual Provider's name
-#' @param facility_type < *character* >
-#' + `"Hospital"` or `"hp"`
-#' + `"Long-term care hospital"` or `"ltch"`
-#' + `"Nursing home"` or `"nh"`
-#' + `"Inpatient rehabilitation facility"` or `"irf"`
-#' + `"Home health agency"` or `"hha"`
-#' + `"Skilled nursing facility"` or `"snf"`
-#' + `"Hospice"` or `"hs"`
-#' + `"Dialysis facility"` or `"df"`
-#' @param facility_ccn < *character* > 6-digit CMS Certification Number of
-#' facility or unit within hospital where an individual provider provides service
-#' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a sub-unit's
-#' primary hospital, should the provider provide services in said unit
-#' @param offset < *integer* > // __default:__ `0L` API pagination
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... Empty
+#' @template args-npi
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @template args-pac
 #'
-#' |**Field**       |**Description**                   |
-#' |:---------------|:---------------------------------|
-#' |`npi`           |10-digit NPI                      |
-#' |`pac`           |10-digit individual PAC ID        |
-#' |`first`         |Individual provider's first name  |
-#' |`middle`        |Individual provider's middle name |
-#' |`last`          |Individual provider's last name   |
-#' |`suffix`        |Individual provider's suffix      |
-#' |`facility_type` |Category of facility              |
-#' |`facility_ccn`  |Facility's 6-digit CCN            |
-#' |`parent_ccn`    |Primary facility's 6-digit CCN    |
+#' @param first,middle,last `<chr>` Individual provider's first/middle/last name
+#'
+#' @param facility_type `<chr>` Type of facility, one of the following:
+#'    * `Hospital` (`hp`)
+#'    * `Long-term care hospital` (`ltch`)
+#'    * `Nursing home` (`nh`)
+#'    * `Inpatient rehabilitation facility` (`irf`)
+#'    * `Home health agency` (`hha`)
+#'    * `Skilled nursing facility` (`snf`)
+#'    * `Hospice` (`hs`)
+#'    * `Dialysis facility` (`df`)
+#'
+#' @param facility_ccn `<chr>` 6-digit CMS Certification Number of facility or
+#'   unit within hospital where an individual provider provides service.
+#'
+#' @param parent_ccn `<int>` 6-digit CMS Certification Number of a sub-unit's
+#'   primary hospital, should the provider provide services in said unit.
+#'
+#' @template args-offset
+#'
+#' @template args-tidy
+#'
+#' @template args-narm
+#'
+#' @template args-dots
+#'
+#' @template returns
 #'
 #' @examplesIf interactive()
 #' affiliations(parent_ccn = 670055)
+#'
 #' @autoglobal
+#'
 #' @export
 affiliations <- function(npi = NULL,
                          pac = NULL,

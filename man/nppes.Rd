@@ -25,123 +25,115 @@ nppes(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer | character} > 10-digit Organizational National Provider Identifier}
+\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
+by CMS to US healthcare providers through NPPES.}
 
-\item{entype}{< \emph{character} > Entity/enumeration type \emph{Cannot be the only criteria entered.}
-\itemize{
-\item \code{"I"}: Individual provider (NPI-1)
-\item \code{"O"}: Organizational provider (NPI-2)
-}}
+\item{entype}{\verb{<chr>} Entity type; one of either \code{I} for Individual (NPI-1)
+or \code{O} for Organizational (NPI-2)}
 
-\item{first, last}{< \emph{character} > // \strong{WC} Individual provider's name}
+\item{first, last}{\verb{<chr>} \strong{WC} Individual provider's first and/or last name}
 
-\item{organization}{< \emph{character} > // \strong{WC} Organization's name. Many
-types of names (LBN, DBA, Former LBN, Other Name) may match. As such, the
-results might contain a name different from the one entered.}
+\item{organization}{\verb{<chr>} \strong{WC} Organizational provider's name. Many types
+of names (LBN, DBA, Former LBN, Other Name) may match. As such, the results
+might contain a name different from the one entered.}
 
-\item{name_type}{< \emph{character} > Type of individual the name arguments
-refer to:
-\itemize{
-\item \code{"AO"}: search Authorized Officials only
-\item \code{"Provider"}: search Individual Providers only
-}}
+\item{name_type}{\verb{<chr>} Type of individual the \code{first} and \code{last} name
+parameters refer to; one of either \code{AO} for Authorized Officials or
+\code{Provider} for Individual Providers.}
 
-\item{taxonomy_desc}{< \emph{character} > Provider's taxonomy description,
-e.g. \code{"Pharmacist"}, \code{"Pediatrics"}}
+\item{taxonomy_desc}{\verb{<chr>} Provider's taxonomy description, e.g.
+\code{Pharmacist}, \code{Pediatrics}}
 
-\item{city}{< \emph{character} > Provider's city. To search for a military
-address, enter either \code{"APO"} or \code{"FPO"}.}
+\item{city}{\verb{<chr>} City name. For military addresses, search for either
+\code{APO} or \code{FPO}.}
 
-\item{state}{< \emph{character} > Provider's state abbreviation. If the only
-input, one other param besides \code{entype} and \code{country} must be input.}
+\item{state}{\verb{<chr>} 2-character state abbreviation. If it is the only input,
+one other parameter besides \code{entype} and \code{country} is required.}
 
-\item{zip}{< \emph{character} > // \strong{WC} Provider's zip code}
+\item{zip}{\verb{<chr>} \strong{WC} 5- to 9-digit zip code, without a hyphen.}
 
-\item{country}{< \emph{character} > Provider's country code. Can be used as the
-only input, as long as the input \emph{is not} \code{"US"}.}
+\item{country}{\verb{<chr>} 2-character country abbreviation. Can be the only
+input, as long as it \emph{is not} \code{US}.}
 
-\item{limit}{< \emph{integer} > // \strong{default:} \code{1200L} Max results to return}
+\item{limit}{\verb{<int>} Maximum number of results to return; \strong{default} is
+\code{1200L}}
 
-\item{skip}{< \emph{integer} > // \strong{default:} \code{0L} Number of results to skip
-after those returned}
+\item{skip}{\verb{<int>} Number of results to skip after those initially returned
+by the API; \strong{default} is \code{0L}}
 
-\item{unnest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Unnest list columns}
+\item{unnest}{\verb{<lgl>} Unnest list columns; \strong{default} is \code{TRUE}}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<lgl>} Remove empty rows and columns; \strong{default} is \code{TRUE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{\link[=nppes]{nppes()}} allows the user to search the National Plan and Provider
-Enumeration System (NPPES) NPI Registry, a free directory of all active NPI
-records.
+\code{\link[=nppes]{nppes()}} allows the user to search the National Plan and
+Provider Enumeration System (NPPES) NPI Registry, a free directory of all
+active NPI records.
 }
 \section{\strong{National Provider Identifier (NPI)}}{
-
-Healthcare providers acquire their unique 10-digit NPIs to identify
-themselves in a standard way throughout their industry. Once CMS supplies
-an NPI, they publish the parts of the NPI record that have public relevance,
-including the provider’s name, taxonomy and practice address.
+ Healthcare providers acquire
+their unique 10-digit NPIs to identify themselves in a standard way
+throughout their industry. Once CMS supplies an NPI, they publish the parts
+of the NPI record that have public relevance, including the provider’s
+name, taxonomy and practice address.
 }
 
 \section{\strong{Entity/Enumeration Type}}{
-
-Two categories of health care providers exist for NPI enumeration purposes:
+ Two categories of health care providers
+exist for NPI enumeration purposes:
 
 \strong{Type 1}: Individual providers may get an NPI as \emph{Entity Type 1}.
 
-\emph{Sole Proprietorship}
-A sole proprietor is one who does not conduct business as a corporation and,
-thus, \strong{is not} an incorporated individual.
+\emph{Sole Proprietorship} A sole proprietor is one who does not conduct
+business as a corporation and, thus, \strong{is not} an incorporated individual.
 
 An \strong{incorporated individual} is an individual provider who forms and
 conducts business under a corporation. This provider may have a Type 1 NPI
 while the corporation has its own Type 2 NPI.
 
-A solo practitioner is not necessarily a sole proprietor, and vice versa. The
-following factors do not affect whether a sole proprietor is a Type 1 entity:
-\itemize{
-\item Multiple office locations
-\item Having employees
-\item Having an EIN
-}
+A solo practitioner is not necessarily a sole proprietor, and vice versa.
+The following factors do not affect whether a sole proprietor is a Type 1
+entity: + Multiple office locations + Having employees + Having an EIN
 
 \strong{Type 2}: Organizational providers are eligible for \emph{Entity Type 2} NPIs.
 
-Organizational or Group providers may have a single employee or thousands of employees.
-An example is an \strong{incorporated individual} who is an organization's only
-employee.
+Organizational or Group providers may have a single employee or thousands
+of employees. An example is an \strong{incorporated individual} who is an
+organization's only employee.
 
 Some organization health care providers are made up of parts that work
-somewhat independently from
-their parent organization. These parts may offer different types of health
-care or offer health care in separate physical locations. These parts and
-their physical locations aren't themselves legal entities but are part of
-the organization health care provider (which is a legal entity). The NPI
-Final Rule refers to the parts and locations as sub-parts. An organization
-health care provider can get its sub-parts their own NPIs. If a sub-part
-conducts any HIPAA standard transactions on its own (separately from its
-parent), it must get its own NPI. Sub-part determination makes sure that
-entities within a covered organization are uniquely identified in HIPAA
-standard transactions they conduct with Medicare and other covered entities.
-For example, a hospital offers acute care, laboratory, pharmacy, and
-rehabilitation services. Each of these sub-parts may need its own NPI because
-each sends its own standard transactions to one or more health plans. Sub-part
-delegation doesn't affect Entity Type 1 health care providers. As individuals,
-these health care providers can't choose sub-parts and are not sub-parts.
+somewhat independently from their parent organization. These parts may
+offer different types of health care or offer health care in separate
+physical locations. These parts and their physical locations aren't
+themselves legal entities but are part of the organization health care
+provider (which is a legal entity). The NPI Final Rule refers to the parts
+and locations as sub-parts. An organization health care provider can get
+its sub-parts their own NPIs. If a sub-part conducts any HIPAA standard
+transactions on its own (separately from its parent), it must get its own
+NPI. Sub-part determination makes sure that entities within a covered
+organization are uniquely identified in HIPAA standard transactions they
+conduct with Medicare and other covered entities. For example, a hospital
+offers acute care, laboratory, pharmacy, and rehabilitation services. Each
+of these sub-parts may need its own NPI because each sends its own standard
+transactions to one or more health plans. Sub-part delegation doesn't
+affect Entity Type 1 health care providers. As individuals, these health
+care providers can't choose sub-parts and are not sub-parts.
 
 \strong{Authorized Official} \if{html}{\out{<br>}}
-An appointed official (e.g., chief executive officer, chief financial officer,
-general partner, chairman of the board, or direct owner) to whom the
-organization has granted the legal authority to enroll it in the Medicare
-program, to make changes or updates to the organization's status in the
-Medicare program, and to commit the organization to fully abide by the
-statutes, regulations, and program instructions of the Medicare program.
+An appointed official (e.g., chief executive officer, chief financial
+officer, general partner, chairman of the board, or direct owner) to whom
+the organization has granted the legal authority to enroll it in the
+Medicare program, to make changes or updates to the organization's status
+in the Medicare program, and to commit the organization to fully abide by
+the statutes, regulations, and program instructions of the Medicare
+program.
 }
 
 \section{Links}{
@@ -154,10 +146,9 @@ statutes, regulations, and program instructions of the Medicare program.
 }
 
 \section{Trailing Wildcard Entries}{
-
-Arguments that allow trailing wildcard entries are denoted in the parameter
-description with \strong{WC}. Wildcard entries require at least two
-characters to be entered, e.g. \code{"jo*"}
+ Arguments that allow trailing wildcard
+entries are denoted in the parameter description with \strong{WC}. Wildcard
+entries require at least two characters to be entered, e.g. \code{"jo*"}
 }
 
 \section{Update Frequency}{
@@ -168,7 +159,9 @@ characters to be entered, e.g. \code{"jo*"}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes(npi = 1528060837)
 
-nppes(city = "CARROLLTON", state = "GA", zip = 301173889, entype = "I")
+nppes(city   = "CARROLLTON",
+      state  = "GA",
+      zip    = 301173889,
+      entype = "I")
 \dontshow{\}) # examplesIf}
 }
-\concept{api}

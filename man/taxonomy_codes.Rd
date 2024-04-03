@@ -16,8 +16,6 @@ taxonomy_codes(shape = c("wide", "long"))
 A \link[tibble:tibble-package]{tibble} with the columns:
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
-
 \code{taxonomy_codes()} returns a \code{\link[=tibble]{tibble()}} of the current Health Care Provider
 Taxonomy code set
 

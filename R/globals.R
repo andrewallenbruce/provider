@@ -186,11 +186,6 @@ utils::globalVariables(c(
   "apm_affl_1", # <mips_2021>
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
-  "number", # <download_msdrg>
-  "mdc", # <download_msdrg>
-  "mdc_description", # <download_msdrg>
-  "drg_type", # <download_msdrg>
-  "drg_abbrev", # <download_msdrg>
   "y", # <medline>
   "title", # <medline>
   "title._value", # <medline>

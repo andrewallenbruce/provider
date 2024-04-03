@@ -131,36 +131,36 @@ NULL
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param nest < *boolean* > // __default:__ `TRUE` Nest output
 #' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... Empty
+#' @param ... For future use.
 #' @rdname prescribers
 #' @autoglobal
 #' @export
 prescribers <- function(year,
                         type,
-                        npi           = NULL,
-                        first         = NULL,
-                        last          = NULL,
-                        organization  = NULL,
-                        credential    = NULL,
-                        gender        = NULL,
-                        entype        = NULL,
-                        city          = NULL,
-                        state         = NULL,
-                        zip           = NULL,
-                        fips          = NULL,
-                        ruca          = NULL,
-                        country       = NULL,
-                        specialty     = NULL,
-                        brand_name    = NULL,
-                        generic_name  = NULL,
-                        level         = NULL,
-                        opioid        = NULL,
-                        opioidLA      = NULL,
-                        antibiotic    = NULL,
+                        npi = NULL,
+                        first = NULL,
+                        last = NULL,
+                        organization = NULL,
+                        credential  = NULL,
+                        gender = NULL,
+                        entype = NULL,
+                        city = NULL,
+                        state = NULL,
+                        zip = NULL,
+                        fips = NULL,
+                        ruca = NULL,
+                        country = NULL,
+                        specialty = NULL,
+                        brand_name = NULL,
+                        generic_name = NULL,
+                        level = NULL,
+                        opioid = NULL,
+                        opioidLA = NULL,
+                        antibiotic = NULL,
                         antipsychotic = NULL,
-                        tidy          = TRUE,
-                        nest          = TRUE,
-                        na.rm         = TRUE,
+                        tidy = TRUE,
+                        nest = TRUE,
+                        na.rm = TRUE,
                         ...) {
 
   rlang::check_required(year)
@@ -293,9 +293,9 @@ prescribers <- function(year,
     results$year <- year
 
     results <- switch(type,
-            'Provider'  = tidyup_provider.rx(results, nest = nest),
-            'Drug'      = tidyup_drug.rx(results, nest = nest),
-            'Geography' = tidyup_geography.rx(results))
+                      'Provider'  = tidyup_provider.rx(results, nest = nest),
+                      'Drug'      = tidyup_drug.rx(results, nest = nest),
+                      'Geography' = tidyup_geography.rx(results))
 
     if (na.rm) results <- narm(results)
 
@@ -364,7 +364,7 @@ tidyup_drug.rx <- function(results, nest = TRUE) {
         'suppress_ge65',
         'suppress_bene_ge65')))
   }
- return(results)
+  return(results)
 }
 
 #' @param results data frame from [prescribers(type = "Provider")]
@@ -438,6 +438,7 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
         'tot_benes_opioid_la',
         'tot_claims_antibioc',
         'tot_cost_antibioc',
+        'tot_benes_antibioc',
         'suppress_brand',
         'suppress_generic',
         'suppress_other',
@@ -450,11 +451,14 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
         'bene_age_lt65',
         'bene_age_65_74',
         'bene_age_75_84',
+        'bene_age_gt84',
+        'bene_gen_female',
+        'bene_gen_male',
         'bene_race_wht',
         'bene_race_nonwht',
         'bene_race_api',
         'bene_race_nat',
-        'bene_race_other',
+        'bene_race_oth',
         'bene_dual',
         'bene_ndual'))) |>
       tidyr::nest(gte_65 = dplyr::any_of(c(
