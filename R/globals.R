@@ -291,6 +291,7 @@ utils::globalVariables(c(
   "individual_state_code", # <reassignments>
   "group_state_code", # <reassignments>
   "record_type", # <reassignments>
+  "hierarchy", # <taxonomies>
   "taxonomy_code", # <taxonomy_codes>
   "taxonomy_category", # <taxonomy_codes>
   "taxonomy_grouping", # <taxonomy_codes>

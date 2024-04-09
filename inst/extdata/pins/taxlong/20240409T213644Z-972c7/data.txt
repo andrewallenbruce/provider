@@ -1,0 +1,10 @@
+file: taxlong.qs
+file_size: 105576
+pin_hash: 972c745ebfbd01bf
+type: qs
+title: Provider Taxonomy Code Set
+description: NUCC Health Care Provider Taxonomy Code Set January 2024
+tags: ~
+urls: ~
+created: 20240409T213644Z
+api_version: 1

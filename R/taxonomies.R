@@ -1,7 +1,6 @@
-#' Provider Taxonomies
+#' NUCC Provider Taxonomy Codeset
 #'
-#' @description
-#' `taxonomy_codes()` returns a [tibble()] of the current Health Care Provider
+#' `search_taxonomy()` returns a [tibble()] of the current Health Care Provider
 #' Taxonomy code set
 #'
 #' __Update Frequency__: _Biannually_
@@ -96,100 +95,56 @@
 #' taxonomies, but "Radiology Chiropractor" more accurately specifies the provider.
 #'
 #' @section Description:
-#' + `taxonomy_code`: Provider Taxonomy Code
-#' + `taxonomy_category`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
-#' + `taxonomy_grouping`: Level I, Provider Grouping
-#' + `taxonomy_classification`: Level II, Classification
-#' + `taxonomy_specialization`: Level III, Area of Specialization
-#' + `taxonomy_display_name`: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
-#' + `taxonomy_definition`: Definition of Taxonomy
+#' + `code`: Provider Taxonomy Code
+#' + `category`: Indicates whether Taxonomy is Individual or Non-Individual, i.e., a group taxonomy
+#' + `grouping`: Level I, Provider Grouping
+#' + `classification`: Level II, Classification
+#' + `specialization`: Level III, Area of Specialization
+#' + `display_name`: Consumer-friendly taxonomy name, made of the code name and the Level in which the code is nested.
+#' + `definition`: Definition of Taxonomy
 #' + `version`: Three digit version of the code set. The first two digits indicate the year and the third digit indicates either the first release of the year ("0") or the second release of the year ("1").
 #' + `release_date`: Date the version of the code set was released
 #'
 #' @source
-#' <https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57>
+#' [National Uniform Claim Committee](https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57)
 #'
-#' @param shape shape of the data frame returned, 'wide' or 'long'
+#' @param code `<chr>` vector of taxonomy codes
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @param shape `<chr>` shape of data to return, `wide` (default) or `long`
 #'
-#' @examplesIf interactive()
-#' taxonomy_codes()
+#' @param unnest `<lgl>`unnest `hierarchy` column, default is `FALSE`
+#'
+#' @template args-dots
+#'
+#' @template returns
+#'
+#' @examples
+#' taxonomies(code = c("207K00000X", "193200000X"))
+#'
+#' taxonomies(code   = "207K00000X",
+#'            shape  = "long",
+#'            unnest = TRUE)
+#'
 #' @autoglobal
+#'
 #' @export
-taxonomy_codes <- function(shape = c('wide', 'long')) {
-
-  results <- pins::board_url(
-    fuimus::gh_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
-    pins::pin_read("taxonomy_codes")
+taxonomies <- function(code   = NULL,
+                       shape  = c('wide', 'long'),
+                       unnest = FALSE,
+                       ...) {
 
   shape <- match.arg(shape)
 
-  if (shape == 'wide') return(results)
+  txn <- switch(
+    shape,
+    "wide" = pins::pin_read(mount_board(), "taxonomy"),
+    "long" = pins::pin_read(mount_board(), "taxlong")
+  )
 
-  if (shape == 'long') {
-    results <- results |>
-      dplyr::select(Code = taxonomy_code,
-                    Category = taxonomy_category,
-                    Grouping = taxonomy_grouping,
-                    Classification = taxonomy_classification,
-                    Specialization = taxonomy_specialization) |>
-      dplyr::mutate(Category_Level = 0, .before = Category) |>
-      dplyr::mutate(Grouping_Level = 1, .before = Grouping) |>
-      dplyr::mutate(Classification_Level = 2, .before = Classification) |>
-      dplyr::mutate(Specialization_Level = 3, .before = Specialization) |>
-      tidyr::unite("Category", Category:Category_Level, remove = TRUE) |>
-      tidyr::unite("Grouping", Grouping:Grouping_Level, remove = TRUE) |>
-      tidyr::unite("Classification", Classification:Classification_Level,
-                   remove = TRUE, na.rm = TRUE) |>
-      tidyr::unite("Specialization", Specialization:Specialization_Level,
-                   remove = TRUE, na.rm = TRUE) |>
-      tidyr::pivot_longer(!Code, names_to = "Level",
-                          values_to = "Description") |>
-      dplyr::filter(Description != "3") |>
-      tidyr::separate_wider_delim(Description,
-                                  delim = "_",
-                                  names = c("Description", "Group")) |>
-      dplyr::mutate(Group = NULL,
-                    Level = factor(Level,
-      levels = c("Category", "Grouping", "Classification", "Specialization"),
-      labels = c("I. Category", "II. Grouping",
-                 "III. Classification", "IV. Specialization"), ordered = TRUE))
+  txn <- fuimus::search_in_if(txn, txn$code, code)
+
+  if (shape == "long" && unnest) {
+    txn <- tidyr::unnest(txn, cols = c(hierarchy))
   }
-    return(results)
-}
-
-#' @autoglobal
-#' @noRd
-download_nucc_csv <- function() {
-
-  x <- rvest::session("https://www.nucc.org") |>
-    rvest::session_follow_link("Code Sets") |>
-    rvest::session_follow_link("Taxonomy") |>
-    rvest::session_follow_link("CSV") |>
-    rvest::html_elements("a") |>
-    rvest::html_attr("href") |>
-    stringr::str_subset("taxonomy") |>
-    stringr::str_subset("csv")
-
-  x <- rvest::session(paste0("https://www.nucc.org", x)) |>
-    rvest::session_follow_link("Version")
-
-  x <- x$response$url
-
-  x <- data.table::fread(x) |>
-    dplyr::tibble() |>
-    janitor::clean_names() |>
-    dplyr::mutate(dplyr::across(dplyr::everything(), ~dplyr::na_if(., "")),
-                  dplyr::across(dplyr::everything(), ~stringr::str_squish(.))) |>
-    dplyr::select(taxonomy_code = code,
-                  taxonomy_category = section,
-                  taxonomy_grouping = grouping,
-                  taxonomy_classification = classification,
-                  taxonomy_specialization = specialization,
-                  taxonomy_display_name = display_name,
-                  taxonomy_definition = definition) |>
-    dplyr::mutate(version = 231,
-                  release_date = lubridate::ymd("2023-07-01"))
-  return(x)
+  return(txn)
 }

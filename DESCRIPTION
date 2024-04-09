@@ -36,6 +36,8 @@ Imports:
     zeallot
 Suggests: 
     covr,
+    fs,
+    fuimus,
     data.table,
     fipio,
     fontawesome,
@@ -70,6 +72,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
+    github::andrewallenbruce/fuimus,
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm,
     github::rstudio/gt,
