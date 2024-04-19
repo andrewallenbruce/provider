@@ -35,7 +35,7 @@ library(gt)
 
 ## Individual Provider
 
-```{r}
+```{r echo=FALSE, eval=FALSE}
 library(chainr)
 
 mark <- chain(
@@ -45,7 +45,9 @@ mark <- chain(
   nppes        = nppes(npi = 1043245657),
   referrals    = order_refer(npi = 1043245657),
   affiliations = affiliations(pac = 7810891009),
-  hospitals    = affiliations(pac = 7810891009) |> pull(facility_ccn) |> map_dfr(~hospitals(facility_ccn = .x)),
+  hospitals    = affiliations(pac = 7810891009) |> 
+    pull(facility_ccn) |> 
+    map_dfr(~hospitals(facility_ccn = .x)),
   utilization  = utilization_(npi = 1043245657, type = "Provider"))
 
 mark
@@ -68,7 +70,7 @@ vctrs::vec_rbind(
               heading.background.color = "black",
               heading.align = "left", 
               stub_row_group.font.weight = "bold") |> 
-  tab_header(title = md("**PROVIDER**: Mark, K. Fung, M.D.")) |> 
+  tab_header(title = md("**PROVIDER**: Mark K. Fung, M.D.")) |> 
   opt_horizontal_padding(scale = 2) |> 
   opt_all_caps()
 ```

@@ -12,30 +12,33 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
+  hos = NULL,
   tidy = TRUE,
   pivot = TRUE,
   ...
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
+by CMS to US healthcare providers through NPPES.}
 
-\item{first, last}{< \emph{character} > Individual provider's first/last name}
+\item{first, last}{\verb{<chr>} Individual provider's first/last name}
 
-\item{partb, dme, hha, pmd}{< \emph{boolean} > Whether a provider is eligible to
+\item{partb, dme, hha, pmd, hos}{\verb{<lgl>} Whether a provider is eligible to
 order and refer to:
 \itemize{
 \item \code{partb}: Medicare Part B
 \item \code{dme}: Durable Medical Equipment
 \item \code{hha}: Home Health Agency
 \item \code{pmd}: Power Mobility Devices
+\item \code{hos}: Hospice
 }}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
 
-\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+\item{pivot}{\verb{<lgl>} Pivot output; \strong{default} is \code{TRUE}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -43,7 +46,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{npi} \tab National Provider Identifier \cr
    \code{first} \tab Order and Referring Provider's First Name \cr
    \code{last} \tab Order and Referring Provider's Last Name \cr
-   \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
+   \code{eligible} \tab Services An Eligible Provider Can Order/Refer To \cr
 }
 }
 \description{
@@ -73,12 +76,16 @@ Medicare may reimburse on behalf of its beneficiaries.
 order and refer. They can also enroll solely to order and refer.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 order_refer(npi = 1003026055)
 
 # Filter for certain privileges
-order_refer(last = "Smith", partb = FALSE, hha = TRUE)
-\dontshow{\}) # examplesIf}
+order_refer(first = "Jennifer",
+            last  = "Smith",
+            partb = TRUE,
+            hos   = FALSE,
+            hha   = FALSE,
+            pmd   = FALSE)
+
 }
 \references{
 links:

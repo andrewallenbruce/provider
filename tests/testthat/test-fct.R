@@ -276,3 +276,13 @@ test_that("fct_record() works", {
   expect_equal(fct_record(x), factor(c("Employment", "Reassignment")))
 })
 
+test_that("fct_ord() works", {
+  x <- c(
+    "Medicare Part B",
+    "Home Health Agency",
+    "Durable Medical Equipment",
+    "Power Mobility Devices",
+    "Hospice"
+  )
+  expect_equal(fct_ord(x), factor(x, levels = x))
+})

@@ -65,7 +65,7 @@ performance
 ```
 
 
-```{r}
+```{r echo=FALSE, eval=FALSE}
 performance |> 
   pivot_longer(!year,
                names_to = "measure", 

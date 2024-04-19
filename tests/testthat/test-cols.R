@@ -244,7 +244,8 @@ test_that("cols_ord() works", {
     partb      = 1,
     hha        = 1,
     dme        = 1,
-    pmd        = 1)
+    pmd        = 1,
+    hospice    = 1)
 
   y <- dplyr::tibble(
     npi                         = 1,
@@ -253,7 +254,8 @@ test_that("cols_ord() works", {
     `Medicare Part B`           = 1,
     `Home Health Agency`        = 1,
     `Durable Medical Equipment` = 1,
-    `Power Mobility Devices`    = 1)
+    `Power Mobility Devices`    = 1,
+    `Hospice`                   = 1)
 
   expect_equal(cols_ord(x), y)
 })
