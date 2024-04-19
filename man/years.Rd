@@ -26,7 +26,7 @@ qpp_years()
 bene_years(period = c("year", "month"))
 }
 \arguments{
-\item{period}{One of \code{"year"} or \code{"month"}}
+\item{period}{\verb{<chr>} One of \code{"year"} or \code{"month"}}
 }
 \value{
 integer vector of years available to search
@@ -35,10 +35,10 @@ integer vector of years available to search
 Years Currently Searchable for APIs
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # `beneficiaries()`
-bene_years("year")
-bene_years("month")
+bene_years(period = "year")
+
+bene_years(period = "month")
 
 # `open_payments()`
 open_years()
@@ -57,6 +57,6 @@ out_years()
 
 # `prescribers()`
 rx_years()
-\dontshow{\}) # examplesIf}
+
 }
 \keyword{internal}

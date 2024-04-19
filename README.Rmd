@@ -53,9 +53,9 @@ library(tidyr)
 ### `affiliations()`
 
 ```{r}
-affiliations(npi = 1023630738,
-             pac = 9032521372,
-             facility_ccn = "37Z324") |> 
+affiliations(npi = 1023630738, 
+             pac = 9032521372, 
+             facility_ccn = 370781) |> 
   glimpse()
 ```
 
@@ -63,7 +63,7 @@ affiliations(npi = 1023630738,
 ### `beneficiaries()`
 
 ```{r}
-beneficiaries(year   = 2022, 
+beneficiaries(year   = 2023, 
               period = "Year", 
               level  = "County", 
               state  = "GA", 
@@ -120,11 +120,7 @@ laboratories(clia = "11D0265516") |>
 
 ```{r}
 nppes(npi = 1497535637) |> 
-  add_counties(state, 
-               zip, 
-               add_fips = TRUE, 
-               add_geo = TRUE, 
-               as_sf = TRUE)
+  glimpse()
 ```
 
 
@@ -149,7 +145,8 @@ opt_out(npi = 1043522824) |>
 ### `order_refer()`
 
 ```{r}
-order_refer(npi = 1043522824)
+order_refer(npi = 1043522824, tidy = FALSE) |> 
+  glimpse()
 ```
 
 
@@ -167,7 +164,7 @@ outpatient(year  = 2021,
 ### `prescribers()`
 
 ```{r}
-prescribers(year = 2019, 
+prescribers(year = 2021, 
             type = 'Provider', 
             npi = 1003000423) |> 
   glimpse()
@@ -213,14 +210,22 @@ quality_payment(year = 2021,
 q <- quality_payment(year = 2021, 
                      npi = 1932365699)
 
-select(q, year, statuses) |> 
-  unnest(statuses) 
+q |> 
+  select(
+    year,
+    qpp_status
+    ) |> 
+  unnest(qpp_status)
 ```
 
 
 ```{r}
-select(q, year, measures) |> 
-  unnest(measures)
+q |> 
+  select(
+    year,
+    qpp_measures
+    ) |> 
+  unnest(qpp_measures)
 ```
 
 ### `quality_eligibility()`

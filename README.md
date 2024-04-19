@@ -41,20 +41,25 @@ library(tidyr)
 ### `affiliations()`
 
 ``` r
-affiliations(npi = 1023630738,
-             pac = 9032521372,
-             facility_ccn = "37Z324") |> 
+affiliations(npi = 1023630738, 
+             pac = 9032521372, 
+             facility_ccn = 370781) |> 
   glimpse()
 ```
 
-    #> ✖ No results for npi = 1023630738, pac = 9032521372, and facility_ccn = 37Z324
-
-    #>  NULL
+    #> Rows: 1
+    #> Columns: 6
+    #> $ npi           <chr> "1023630738"
+    #> $ pac           <chr> "9032521372"
+    #> $ first         <chr> "ALYSIA"
+    #> $ last          <chr> "SMITH"
+    #> $ facility_type <fct> Hospital
+    #> $ facility_ccn  <chr> "370781"
 
 ### `beneficiaries()`
 
 ``` r
-beneficiaries(year   = 2022, 
+beneficiaries(year   = 2023, 
               period = "Year", 
               level  = "County", 
               state  = "GA", 
@@ -64,32 +69,32 @@ beneficiaries(year   = 2022,
 
     #> Rows: 1
     #> Columns: 26
-    #> $ year              <int> 2022
+    #> $ year              <int> 2023
     #> $ period            <ord> Year
     #> $ level             <ord> County
     #> $ state             <ord> GA
     #> $ state_name        <ord> Georgia
     #> $ county            <chr> "Lowndes"
     #> $ fips              <chr> "13185"
-    #> $ bene_total        <int> 19786
-    #> $ bene_orig         <int> 11732
-    #> $ bene_ma_oth       <int> 8054
-    #> $ bene_total_aged   <int> 16296
-    #> $ bene_aged_esrd    <int> 129
-    #> $ bene_aged_no_esrd <int> 16168
-    #> $ bene_total_dsb    <int> 3490
-    #> $ bene_dsb_esrd     <int> 142
-    #> $ bene_dsb_no_esrd  <int> 3348
-    #> $ bene_total_ab     <int> 18326
-    #> $ bene_ab_orig      <int> 10276
-    #> $ bene_ab_ma_oth    <int> 8050
-    #> $ bene_total_rx     <int> 14033
-    #> $ bene_rx_pdp       <int> 6432
-    #> $ bene_rx_mapd      <int> 7601
-    #> $ bene_rx_lis_elig  <int> 5146
-    #> $ bene_rx_lis_full  <int> 464
-    #> $ bene_rx_lis_part  <int> 144
-    #> $ bene_rx_lis_no    <int> 8280
+    #> $ bene_total        <int> 20515
+    #> $ bene_orig         <int> 11098
+    #> $ bene_ma_oth       <int> 9418
+    #> $ bene_total_aged   <int> 17046
+    #> $ bene_aged_esrd    <int> 124
+    #> $ bene_aged_no_esrd <int> 16923
+    #> $ bene_total_dsb    <int> 3469
+    #> $ bene_dsb_esrd     <int> 145
+    #> $ bene_dsb_no_esrd  <int> 3325
+    #> $ bene_total_ab     <int> 19038
+    #> $ bene_ab_orig      <int> 9635
+    #> $ bene_ab_ma_oth    <int> 9403
+    #> $ bene_total_rx     <int> 14850
+    #> $ bene_rx_pdp       <int> 5940
+    #> $ bene_rx_mapd      <int> 8910
+    #> $ bene_rx_lis_elig  <int> 5561
+    #> $ bene_rx_lis_full  <int> 456
+    #> $ bene_rx_lis_part  <int> 133
+    #> $ bene_rx_lis_no    <int> 8701
 
 ### `clinicians()`
 
@@ -242,27 +247,34 @@ laboratories(clia = "11D0265516") |>
 
 ``` r
 nppes(npi = 1497535637) |> 
-  add_counties(state, 
-               zip, 
-               add_fips = TRUE, 
-               add_geo = TRUE, 
-               as_sf = TRUE)
+  glimpse()
 ```
 
-    #> Simple feature collection with 1 feature and 25 fields
-    #> Geometry type: POINT
-    #> Dimension:     XY
-    #> Bounding box:  xmin: -83.3 ymin: 30.9 xmax: -83.3 ymax: 30.9
-    #> Geodetic CRS:  WGS 84
-    #> # A tibble: 1 × 26
-    #>   npi    entity_type enum_date  cert_date  last_update status first last  gender
-    #> * <chr>  <fct>       <date>     <date>     <date>      <fct>  <chr> <chr> <fct> 
-    #> 1 14975… Individual  2023-10-04 2023-10-05 2023-10-05  Active CART… ADAMS Male  
-    #> # ℹ 17 more variables: credential <chr>, sole_prop <lgl>, purpose <fct>,
-    #> #   address <chr>, city <chr>, state <ord>, zip <chr>, country <chr>,
-    #> #   phone <chr>, tx_code <chr>, tx_primary <lgl>, tx_desc <chr>,
-    #> #   tx_license <chr>, tx_state <ord>, county <chr>, county_fips <chr>,
-    #> #   geometry <POINT [°]>
+    #> Rows: 1
+    #> Columns: 23
+    #> $ npi         <chr> "1497535637"
+    #> $ entity_type <fct> Individual
+    #> $ enum_date   <date> 2023-10-04
+    #> $ cert_date   <date> 2023-10-05
+    #> $ last_update <date> 2023-10-05
+    #> $ status      <fct> Active
+    #> $ first       <chr> "CARTER"
+    #> $ last        <chr> "ADAMS"
+    #> $ gender      <fct> Male
+    #> $ credential  <chr> "NP-BC"
+    #> $ sole_prop   <lgl> FALSE
+    #> $ purpose     <fct> Practice
+    #> $ address     <chr> "2501 N PATTERSON ST"
+    #> $ city        <chr> "VALDOSTA"
+    #> $ state       <ord> GA
+    #> $ zip         <chr> "31602"
+    #> $ country     <chr> "US"
+    #> $ phone       <chr> "229-433-1000"
+    #> $ tx_code     <chr> "363L00000X"
+    #> $ tx_primary  <lgl> TRUE
+    #> $ tx_desc     <chr> "Nurse Practitioner"
+    #> $ tx_license  <chr> "RN272237"
+    #> $ tx_state    <ord> GA
 
 ### `open_payments()`
 
@@ -347,16 +359,20 @@ opt_out(npi = 1043522824) |>
 ### `order_refer()`
 
 ``` r
-order_refer(npi = 1043522824)
+order_refer(npi = 1043522824, tidy = FALSE) |> 
+  glimpse()
 ```
 
-    #> # A tibble: 4 × 4
-    #>   npi        first last  eligible                 
-    #>   <chr>      <chr> <chr> <fct>                    
-    #> 1 1043522824 JAMES SMITH Medicare Part B          
-    #> 2 1043522824 JAMES SMITH Home Health Agency       
-    #> 3 1043522824 JAMES SMITH Durable Medical Equipment
-    #> 4 1043522824 JAMES SMITH Power Mobility Devices
+    #> Rows: 1
+    #> Columns: 8
+    #> $ NPI        <chr> "1043522824"
+    #> $ LAST_NAME  <chr> "SMITH"
+    #> $ FIRST_NAME <chr> "JAMES"
+    #> $ PARTB      <chr> "Y"
+    #> $ DME        <chr> "Y"
+    #> $ HHA        <chr> "Y"
+    #> $ PMD        <chr> "Y"
+    #> $ HOSPICE    <chr> "N"
 
 ### `outpatient()`
 
@@ -392,7 +408,7 @@ outpatient(year  = 2021,
 ### `prescribers()`
 
 ``` r
-prescribers(year = 2019, 
+prescribers(year = 2021, 
             type = 'Provider', 
             npi = 1003000423) |> 
   glimpse()
@@ -400,7 +416,7 @@ prescribers(year = 2019,
 
     #> Rows: 1
     #> Columns: 27
-    #> $ year           <int> 2019
+    #> $ year           <int> 2021
     #> $ npi            <chr> "1003000423"
     #> $ entity_type    <fct> Individual
     #> $ first          <chr> "Jennifer"
@@ -417,13 +433,13 @@ prescribers(year = 2019,
     #> $ fips           <chr> "39"
     #> $ ruca           <chr> "1"
     #> $ country        <chr> "US"
-    #> $ tot_claims     <int> 199
-    #> $ tot_fills      <dbl> 344.0667
-    #> $ tot_cost       <dbl> 21614.75
-    #> $ tot_supply     <int> 8759
-    #> $ tot_benes      <int> 65
+    #> $ tot_claims     <int> 206
+    #> $ tot_fills      <dbl> 378.2667
+    #> $ tot_cost       <dbl> 20757.65
+    #> $ tot_supply     <int> 10231
+    #> $ tot_benes      <int> 66
     #> $ rx_rate_opioid <dbl> 0
-    #> $ hcc_risk_avg   <dbl> 0.8426269
+    #> $ hcc_risk_avg   <dbl> 0.8011638
     #> $ detailed       <list> [<tbl_df[1 x 32]>]
     #> $ demographics   <list> [<tbl_df[1 x 14]>]
     #> $ gte_65         <list> [<tbl_df[1 x 8]>]
@@ -568,22 +584,45 @@ quality_payment(year = 2021,
 q <- quality_payment(year = 2021, 
                      npi = 1932365699)
 
-select(q, year, statuses) |> 
-  unnest(statuses) 
+q |> 
+  select(
+    year,
+    qpp_status
+    ) |> 
+  unnest(qpp_status)
 ```
 
-    #> Error in `select()`:
-    #> ! Can't select columns that don't exist.
-    #> ✖ Column `statuses` doesn't exist.
+    #> # A tibble: 9 × 2
+    #>    year qualified                 
+    #>   <int> <fct>                     
+    #> 1  2021 Engaged                   
+    #> 2  2021 Small Practitioner        
+    #> 3  2021 Rural Clinician           
+    #> 4  2021 HPSA Clinician            
+    #> 5  2021 Extreme Hardship          
+    #> 6  2021 Extreme Hardship (Quality)
+    #> 7  2021 Extreme Hardship (PI)     
+    #> 8  2021 Extreme Hardship (IA)     
+    #> 9  2021 Extreme Hardship (Cost)
 
 ``` r
-select(q, year, measures) |> 
-  unnest(measures)
+q |> 
+  select(
+    year,
+    qpp_measures
+    ) |> 
+  unnest(qpp_measures)
 ```
 
-    #> Error in `select()`:
-    #> ! Can't select columns that don't exist.
-    #> ✖ Column `measures` doesn't exist.
+    #> # A tibble: 6 × 4
+    #>    year category measure_id score
+    #>   <int> <fct>    <chr>      <dbl>
+    #> 1  2021 Quality  141            3
+    #> 2  2021 Quality  014            3
+    #> 3  2021 Quality  110            3
+    #> 4  2021 Quality  47             3
+    #> 5  2021 Quality  1              0
+    #> 6  2021 Quality  117            0
 
 ### `quality_eligibility()`
 
