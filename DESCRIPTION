@@ -3,8 +3,8 @@ Package: provider
 Title: Access Public Healthcare Provider Data
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
+    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
 Description: Provides various features to facilitate easy access to
     publicly available healthcare provider data. Includes functions to
     tidy the data being accessed, whether for reporting purposes or
@@ -36,18 +36,18 @@ Imports:
     zeallot
 Suggests: 
     covr,
-    fs,
-    fuimus,
     data.table,
     fipio,
     fontawesome,
+    fs,
+    fuimus,
     future,
-    ggraph,
-    ggplot2,
-    ggthemes,
-    ggsflabel,
-    ggrepel,
     gghighlight,
+    ggplot2,
+    ggraph,
+    ggrepel,
+    ggsflabel,
+    ggthemes,
     glue,
     gt,
     gtExtras,
@@ -64,11 +64,11 @@ Suggests:
     scales,
     sf,
     stats,
-    zipcodeR,
-    tidygraph,
+    testthat (>= 3.0.0),
     tidygeocoder,
+    tidygraph,
     tigris,
-    testthat (>= 3.0.0)
+    zipcodeR
 VignetteBuilder: 
     knitr
 Remotes: 
@@ -77,13 +77,13 @@ Remotes:
     github::nt-williams/rxnorm,
     github::rstudio/gt,
     github::yutannihilation/ggsflabel
+Config/roxyglobals/filename: generated-globals.R
+Config/roxyglobals/unique: TRUE
+Config/testthat/edition: 3
+Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
 RoxygenNote: 7.3.1
-Config/testthat/edition: 3
-Config/testthat/parallel: true
-Config/roxyglobals/filename: globals.R
-Config/roxyglobals/unique: FALSE

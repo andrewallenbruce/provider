@@ -3,6 +3,10 @@
 
 # provider <img src="man/figures/logo.svg" align="right" height="200" />
 
+> Providing easy access to [healthcare
+> provider](https://en.wikipedia.org/wiki/Health_care_provider) data
+> through publicly available APIs.
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
@@ -15,13 +19,7 @@ commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
-![GitHub
-milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
-
-> Providing easy access to [healthcare
-> provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-> through publicly available APIs.
 
 ## :package: Installation
 
@@ -49,15 +47,9 @@ affiliations(npi = 1023630738,
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 7
-    #> $ npi           <chr> "1023630738"
-    #> $ pac           <chr> "9032521372"
-    #> $ first         <chr> "ALYSIA"
-    #> $ last          <chr> "SMITH"
-    #> $ facility_type <fct> Nursing home
-    #> $ facility_ccn  <chr> "37Z324"
-    #> $ parent_ccn    <chr> "371324"
+    #> ✖ No results for npi = 1023630738, pac = 9032521372, and facility_ccn = 37Z324
+
+    #>  NULL
 
 ### `beneficiaries()`
 
@@ -79,25 +71,25 @@ beneficiaries(year   = 2022,
     #> $ state_name        <ord> Georgia
     #> $ county            <chr> "Lowndes"
     #> $ fips              <chr> "13185"
-    #> $ bene_total        <int> 19782
+    #> $ bene_total        <int> 19786
     #> $ bene_orig         <int> 11732
-    #> $ bene_ma_oth       <int> 8051
-    #> $ bene_total_aged   <int> 16290
+    #> $ bene_ma_oth       <int> 8054
+    #> $ bene_total_aged   <int> 16296
     #> $ bene_aged_esrd    <int> 129
-    #> $ bene_aged_no_esrd <int> 16161
-    #> $ bene_total_dsb    <int> 3492
-    #> $ bene_dsb_esrd     <int> 143
-    #> $ bene_dsb_no_esrd  <int> 3350
-    #> $ bene_total_ab     <int> 18314
-    #> $ bene_ab_orig      <int> 10270
-    #> $ bene_ab_ma_oth    <int> 8044
-    #> $ bene_total_rx     <int> 14028
-    #> $ bene_rx_pdp       <int> 6431
-    #> $ bene_rx_mapd      <int> 7596
+    #> $ bene_aged_no_esrd <int> 16168
+    #> $ bene_total_dsb    <int> 3490
+    #> $ bene_dsb_esrd     <int> 142
+    #> $ bene_dsb_no_esrd  <int> 3348
+    #> $ bene_total_ab     <int> 18326
+    #> $ bene_ab_orig      <int> 10276
+    #> $ bene_ab_ma_oth    <int> 8050
+    #> $ bene_total_rx     <int> 14033
+    #> $ bene_rx_pdp       <int> 6432
+    #> $ bene_rx_mapd      <int> 7601
     #> $ bene_rx_lis_elig  <int> 5146
     #> $ bene_rx_lis_full  <int> 464
-    #> $ bene_rx_lis_part  <int> 143
-    #> $ bene_rx_lis_no    <int> 8274
+    #> $ bene_rx_lis_part  <int> 144
+    #> $ bene_rx_lis_no    <int> 8280
 
 ### `clinicians()`
 
@@ -299,7 +291,7 @@ open_payments(year  = 2021,
     #> $ license_state       <ord> OK
     #> $ physician_ownership <lgl> FALSE
     #> $ third_party_payment <chr> "No Third Party Payment"
-    #> $ publish_date        <date> 2023-06-30
+    #> $ publish_date        <date> 2024-01-18
     #> $ publish_delay       <lgl> FALSE
     #> $ publish_dispute     <lgl> FALSE
     #> $ related_product     <lgl> TRUE
@@ -359,7 +351,7 @@ order_refer(npi = 1043522824)
 ```
 
     #> # A tibble: 4 × 4
-    #>   npi        first last  service                  
+    #>   npi        first last  eligible                 
     #>   <chr>      <chr> <chr> <fct>                    
     #> 1 1043522824 JAMES SMITH Medicare Part B          
     #> 2 1043522824 JAMES SMITH Home Health Agency       
@@ -407,74 +399,34 @@ prescribers(year = 2019,
 ```
 
     #> Rows: 1
-    #> Columns: 67
-    #> $ year                      <int> 2019
-    #> $ npi                       <chr> "1003000423"
-    #> $ entity_type               <fct> Individual
-    #> $ first                     <chr> "Jennifer"
-    #> $ middle                    <chr> "A"
-    #> $ last                      <chr> "Velotta"
-    #> $ gender                    <fct> Female
-    #> $ credential                <chr> "MD"
-    #> $ specialty                 <chr> "Obstetrics & Gynecology"
-    #> $ source                    <fct> Medicare Specialty Code
-    #> $ address                   <chr> "11100 Euclid Ave"
-    #> $ city                      <chr> "Cleveland"
-    #> $ state                     <ord> OH
-    #> $ zip                       <chr> "44106"
-    #> $ fips                      <chr> "39"
-    #> $ ruca                      <chr> "1"
-    #> $ country                   <chr> "US"
-    #> $ tot_claims                <int> 199
-    #> $ tot_fills                 <dbl> 344.0667
-    #> $ tot_cost                  <dbl> 21614.75
-    #> $ tot_supply                <int> 8759
-    #> $ tot_benes                 <int> 65
-    #> $ tot_claims_ge65           <int> 150
-    #> $ tot_fills_ge65            <dbl> 260.8667
-    #> $ tot_cost_ge65             <dbl> 17660.51
-    #> $ tot_supply_ge65           <int> 6495
-    #> $ tot_benes_ge65            <int> 49
-    #> $ tot_claims_brand          <int> 49
-    #> $ tot_cost_brand            <dbl> 14343.73
-    #> $ tot_claims_generic        <int> 150
-    #> $ tot_cost_generic          <dbl> 7271.02
-    #> $ tot_claims_other          <int> 0
-    #> $ tot_cost_other            <dbl> 0
-    #> $ tot_claims_mapd           <int> 78
-    #> $ tot_cost_mapd             <dbl> 9438.54
-    #> $ tot_claims_pdp            <int> 121
-    #> $ tot_cost_pdp              <dbl> 12176.21
-    #> $ tot_claims_lis            <int> 73
-    #> $ tot_cost_lis              <dbl> 9659.24
-    #> $ tot_claims_nlis           <int> 126
-    #> $ tot_cost_nlis             <dbl> 11955.51
-    #> $ tot_claims_opioid         <int> 0
-    #> $ tot_cost_opioid           <dbl> 0
-    #> $ tot_supply_opioid         <int> 0
-    #> $ tot_benes_opioid          <int> 0
-    #> $ rx_rate_opioid            <dbl> 0
-    #> $ tot_claims_opioid_la      <int> 0
-    #> $ tot_cost_opioid_la        <dbl> 0
-    #> $ tot_supply_opioid_la      <int> 0
-    #> $ tot_benes_opioid_la       <int> 0
-    #> $ tot_claims_antibioc       <int> 14
-    #> $ tot_cost_antibioc         <dbl> 177.68
-    #> $ tot_benes_antibioc        <int> 11
-    #> $ tot_claims_antipsych_ge65 <int> 0
-    #> $ tot_cost_antipsych_ge65   <dbl> 0
-    #> $ tot_benes_antipsych_ge65  <int> 0
-    #> $ bene_age_avg              <dbl> 66.63077
-    #> $ bene_age_lt65             <int> 16
-    #> $ bene_age_65_74            <int> 33
-    #> $ bene_race_wht             <int> 60
-    #> $ bene_race_nonwht          <int> 5
-    #> $ bene_race_api             <int> 0
-    #> $ bene_race_nat             <int> 0
-    #> $ bene_race_oth             <int> 0
-    #> $ bene_dual                 <int> 17
-    #> $ bene_ndual                <int> 48
-    #> $ hcc_risk_avg              <dbl> 0.8426269
+    #> Columns: 27
+    #> $ year           <int> 2019
+    #> $ npi            <chr> "1003000423"
+    #> $ entity_type    <fct> Individual
+    #> $ first          <chr> "Jennifer"
+    #> $ middle         <chr> "A"
+    #> $ last           <chr> "Velotta"
+    #> $ gender         <fct> Female
+    #> $ credential     <chr> "MD"
+    #> $ specialty      <chr> "Obstetrics & Gynecology"
+    #> $ source         <fct> Medicare Specialty Code
+    #> $ address        <chr> "11100 Euclid Ave"
+    #> $ city           <chr> "Cleveland"
+    #> $ state          <ord> OH
+    #> $ zip            <chr> "44106"
+    #> $ fips           <chr> "39"
+    #> $ ruca           <chr> "1"
+    #> $ country        <chr> "US"
+    #> $ tot_claims     <int> 199
+    #> $ tot_fills      <dbl> 344.0667
+    #> $ tot_cost       <dbl> 21614.75
+    #> $ tot_supply     <int> 8759
+    #> $ tot_benes      <int> 65
+    #> $ rx_rate_opioid <dbl> 0
+    #> $ hcc_risk_avg   <dbl> 0.8426269
+    #> $ detailed       <list> [<tbl_df[1 x 32]>]
+    #> $ demographics   <list> [<tbl_df[1 x 14]>]
+    #> $ gte_65         <list> [<tbl_df[1 x 8]>]
 
 ``` r
 prescribers(year = 2019, 
@@ -485,29 +437,25 @@ prescribers(year = 2019,
 ```
 
     #> Rows: 1
-    #> Columns: 22
-    #> $ year            <int> 2019
-    #> $ npi             <chr> "1003000126"
-    #> $ last            <chr> "Enkeshafi"
-    #> $ first           <chr> "Ardalan"
-    #> $ city            <chr> "Cumberland"
-    #> $ state           <ord> MD
-    #> $ fips            <chr> "24"
-    #> $ specialty       <chr> "Internal Medicine"
-    #> $ source          <fct> Medicare Specialty Code
-    #> $ brand_name      <chr> "Atorvastatin Calcium"
-    #> $ generic_name    <chr> "Atorvastatin Calcium"
-    #> $ tot_claims      <int> 41
-    #> $ tot_fills       <dbl> 50
-    #> $ tot_supply      <int> 1482
-    #> $ tot_cost        <dbl> 373.6
-    #> $ tot_benes       <int> 22
-    #> $ tot_claims_ge65 <int> 41
-    #> $ tot_fills_ge65  <dbl> 50
-    #> $ tot_cost_ge65   <dbl> 373.6
-    #> $ tot_supply_ge65 <int> 1482
-    #> $ tot_benes_ge65  <int> 22
-    #> $ level           <ord> Provider
+    #> Columns: 18
+    #> $ year         <int> 2019
+    #> $ npi          <chr> "1003000126"
+    #> $ last         <chr> "Enkeshafi"
+    #> $ first        <chr> "Ardalan"
+    #> $ city         <chr> "Cumberland"
+    #> $ state        <ord> MD
+    #> $ fips         <chr> "24"
+    #> $ specialty    <chr> "Internal Medicine"
+    #> $ source       <fct> Medicare Specialty Code
+    #> $ brand_name   <chr> "Atorvastatin Calcium"
+    #> $ generic_name <chr> "Atorvastatin Calcium"
+    #> $ tot_claims   <int> 41
+    #> $ tot_fills    <dbl> 50
+    #> $ tot_supply   <int> 1482
+    #> $ tot_cost     <dbl> 373.6
+    #> $ tot_benes    <int> 22
+    #> $ level        <ord> Provider
+    #> $ gte_65       <list> [<tbl_df[1 x 7]>]
 
 ``` r
 prescribers(year = 2021, 
@@ -567,27 +515,54 @@ quality_payment(year = 2021,
 ```
 
     #> Rows: 1
-    #> Columns: 20
-    #> $ year            <int> 2021
-    #> $ npi             <chr> "1932365699"
-    #> $ state           <ord> CO
-    #> $ size            <int> 3
-    #> $ specialty       <chr> "Optometry"
-    #> $ med_years       <int> 14
-    #> $ type            <fct> Group
-    #> $ beneficiaries   <int> 555
-    #> $ services        <int> 1157
-    #> $ allowed_charges <dbl> 112449
-    #> $ final_score     <dbl> 60
-    #> $ pay_adjust      <dbl> 0
-    #> $ quality_score   <dbl> 45
-    #> $ pi_score        <dbl> 0
-    #> $ ia_score        <dbl> 0
-    #> $ cost_score      <dbl> 0
-    #> $ complex_bonus   <dbl> 2.54
-    #> $ qi_bonus        <dbl> 0
-    #> $ statuses        <list> [<tbl_df[9 x 1]>]
-    #> $ measures        <list> [<tbl_df[6 x 3]>]
+    #> Columns: 47
+    #> $ year                <int> 2021
+    #> $ npi                 <chr> "1932365699"
+    #> $ npi_type            <fct> Individual
+    #> $ first               <chr> "STEFAN"
+    #> $ middle              <chr> "MICHAEL"
+    #> $ last                <chr> "SMITH"
+    #> $ state               <ord> CO
+    #> $ first_approved_date <date> 2008-11-15
+    #> $ years_in_medicare   <dbl> 13
+    #> $ participation_type  <fct> Group
+    #> $ beneficiaries       <int> 555
+    #> $ services            <int> 1157
+    #> $ charges             <dbl> 112449
+    #> $ final_score         <dbl> 60
+    #> $ pay_adjust          <dbl> 0
+    #> $ quality_score       <dbl> 45
+    #> $ pi_score            <dbl> 0
+    #> $ ia_score            <dbl> 0
+    #> $ cost_score          <dbl> 0
+    #> $ complex_bonus       <dbl> 2.54
+    #> $ qi_bonus            <dbl> 0
+    #> $ newly_enrolled      <lgl> FALSE
+    #> $ is_maqi             <lgl> FALSE
+    #> $ org_id              <int> 1
+    #> $ org_size            <int> 3
+    #> $ org_name            <chr> "LEE ANN HOVEN OD PC"
+    #> $ org_address         <chr> "ADVANCED EYE CARE 1165S CAMINO DEL RIO SUITE 100"
+    #> $ org_city            <chr> "DURANGO"
+    #> $ org_state           <ord> CO
+    #> $ org_zip             <chr> "81303"
+    #> $ org_hosp_vbp_name   <chr> NA
+    #> $ org_facility_based  <lgl> FALSE
+    #> $ ind_lvt_status_code <chr> "BOTH"
+    #> $ ind_lvt_status_desc <chr> "Both the unique beneficiaries and Part B"
+    #> $ ind_hosp_vbp_score  <int> 0
+    #> $ specialty           <chr> "Optometry"
+    #> $ specialty_desc      <chr> "Optometry"
+    #> $ specialty_type      <chr> "Doctor of Optometry"
+    #> $ specialty_cat       <chr> "Physicians"
+    #> $ ind_specialty_code  <chr> "41"
+    #> $ ind_specialty_desc  <chr> "Optometry"
+    #> $ ind_specialty_type  <chr> "Doctor of Optometry"
+    #> $ ind_specialty_cat   <chr> "Physicians"
+    #> $ qpp_status          <list> [<tbl_df[9 x 1]>]
+    #> $ qpp_measures        <list> [<tbl_df[6 x 3]>]
+    #> $ ind_status          <list> [<tbl_df[8 x 1]>]
+    #> $ grp_status          <list> [<tbl_df[10 x 1]>]
 
 ``` r
 q <- quality_payment(year = 2021, 
@@ -597,33 +572,18 @@ select(q, year, statuses) |>
   unnest(statuses) 
 ```
 
-    #> # A tibble: 9 × 2
-    #>    year category                  
-    #>   <int> <fct>                     
-    #> 1  2021 Engaged                   
-    #> 2  2021 Small Practitioner        
-    #> 3  2021 Rural Clinician           
-    #> 4  2021 HPSA Clinician            
-    #> 5  2021 Extreme Hardship          
-    #> 6  2021 Extreme Hardship (Quality)
-    #> 7  2021 Extreme Hardship (PI)     
-    #> 8  2021 Extreme Hardship (IA)     
-    #> 9  2021 Extreme Hardship (Cost)
+    #> Error in `select()`:
+    #> ! Can't select columns that don't exist.
+    #> ✖ Column `statuses` doesn't exist.
 
 ``` r
 select(q, year, measures) |> 
   unnest(measures)
 ```
 
-    #> # A tibble: 6 × 4
-    #>    year measure id    score
-    #>   <int> <fct>   <chr> <dbl>
-    #> 1  2021 Quality 141       3
-    #> 2  2021 Quality 014       3
-    #> 3  2021 Quality 110       3
-    #> 4  2021 Quality 47        3
-    #> 5  2021 Quality 1         0
-    #> 6  2021 Quality 117       0
+    #> Error in `select()`:
+    #> ! Can't select columns that don't exist.
+    #> ✖ Column `measures` doesn't exist.
 
 ### `quality_eligibility()`
 
@@ -634,7 +594,7 @@ quality_eligibility(year = 2021,
 ```
 
     #> Rows: 1
-    #> Columns: 29
+    #> Columns: 30
     #> $ year                <int> 2021
     #> $ npi                 <chr> "1932365699"
     #> $ npi_type            <fct> Individual
@@ -642,12 +602,13 @@ quality_eligibility(year = 2021,
     #> $ middle              <chr> "MICHAEL"
     #> $ last                <chr> "SMITH"
     #> $ first_approved_date <date> 2008-11-15
-    #> $ pecos_year          <int> 2008
+    #> $ years_in_medicare   <dbl> 13
     #> $ newly_enrolled      <lgl> FALSE
     #> $ specialty_desc      <chr> "Optometry"
     #> $ specialty_type      <chr> "Doctor of Optometry"
     #> $ specialty_cat       <chr> "Physicians"
     #> $ is_maqi             <lgl> FALSE
+    #> $ org_id              <int> 1
     #> $ org_name            <chr> "LEE ANN HOVEN OD PC"
     #> $ org_hosp_vbp_name   <chr> NA
     #> $ org_facility_based  <lgl> FALSE
@@ -697,53 +658,29 @@ utilization(year = 2021,
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 20
-    #> $ year         <int> 2021
-    #> $ npi          <chr> "1932365699"
-    #> $ entity_type  <fct> Individual
-    #> $ first        <chr> "Stefan"
-    #> $ middle       <chr> "M"
-    #> $ last         <chr> "Smith"
-    #> $ gender       <fct> Male
-    #> $ credential   <chr> "OD"
-    #> $ specialty    <chr> "Optometry"
-    #> $ address      <chr> "724 St. Louis Road"
-    #> $ city         <chr> "Collinsville"
-    #> $ state        <ord> IL
-    #> $ zip          <chr> "62234"
-    #> $ fips         <chr> "17"
-    #> $ ruca         <chr> "1"
-    #> $ country      <chr> "US"
-    #> $ par          <lgl> TRUE
-    #> $ performance  <list> [<tbl_df[1 x 11]>]
-    #> $ demographics <list> [<tbl_df[1 x 12]>]
-    #> $ conditions   <list> [<tbl_df[1 x 17]>]
+    #> Error in `utilization()`:
+    #> ! `type` must be one of "Provider", "Service", or "Geography", not
+    #>   "provider".
+    #> ℹ Did you mean "Provider"?
 
 ``` r
 p <- utilization(year = 2021, 
                  npi = 1932365699, 
                  type = "provider")
+```
 
+    #> Error in `utilization()`:
+    #> ! `type` must be one of "Provider", "Service", or "Geography", not
+    #>   "provider".
+    #> ℹ Did you mean "Provider"?
+
+``` r
 select(p, year, performance) |> 
   unnest(performance) |> 
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 12
-    #> $ year            <int> 2021
-    #> $ tot_hcpcs       <int> 19
-    #> $ tot_benes       <int> 279
-    #> $ tot_srvcs       <int> 475
-    #> $ tot_charges     <dbl> 57098.8
-    #> $ tot_allowed     <dbl> 48345.19
-    #> $ tot_payment     <dbl> 31966.13
-    #> $ tot_std_pymt    <dbl> 31316.51
-    #> $ .copay_deduct   <dbl> 16379.06
-    #> $ .srvcs_per_bene <dbl> 1.702509
-    #> $ .pymt_per_bene  <dbl> 114.5739
-    #> $ .pymt_per_srvc  <dbl> 67.29712
+    #> Error in eval(expr, envir, enclos): object 'p' not found
 
 ``` r
 select(p, year, demographics) |> 
@@ -751,21 +688,7 @@ select(p, year, demographics) |>
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 13
-    #> $ year               <int> 2021
-    #> $ bene_age_avg       <int> 72
-    #> $ bene_age_lt65      <int> 16
-    #> $ bene_age_65_74     <int> 181
-    #> $ bene_age_75_84     <int> 63
-    #> $ bene_age_gt84      <int> 19
-    #> $ bene_gen_female    <int> 157
-    #> $ bene_gen_male      <int> 122
-    #> $ bene_race_wht      <int> 245
-    #> $ bene_race_nonwht   <int> 34
-    #> $ bene_dual          <int> 40
-    #> $ bene_ndual         <int> 239
-    #> $ bene_race_detailed <list> [<tbl_df[1 x 5]>]
+    #> Error in eval(expr, envir, enclos): object 'p' not found
 
 ``` r
 select(p, year, conditions) |> 
@@ -773,26 +696,7 @@ select(p, year, conditions) |>
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 18
-    #> $ year         <int> 2021
-    #> $ hcc_risk_avg <dbl> 0.7719
-    #> $ cc_af        <dbl> 0.08
-    #> $ cc_alz       <dbl> 0.07
-    #> $ cc_asth      <dbl> 0.06
-    #> $ cc_canc      <dbl> 0.09
-    #> $ cc_chf       <dbl> 0.06
-    #> $ cc_ckd       <dbl> 0.15
-    #> $ cc_copd      <dbl> 0.06
-    #> $ cc_dep       <dbl> 0.19
-    #> $ cc_diab      <dbl> 0.16
-    #> $ cc_hplip     <dbl> 0.32
-    #> $ cc_hpten     <dbl> 0.33
-    #> $ cc_ihd       <dbl> 0.18
-    #> $ cc_opo       <dbl> 0.13
-    #> $ cc_raoa      <dbl> 0.3
-    #> $ cc_sz        <dbl> NA
-    #> $ cc_strk      <dbl> NA
+    #> Error in eval(expr, envir, enclos): object 'p' not found
 
 ``` r
 utilization(year  = 2021, 
@@ -802,40 +706,10 @@ utilization(year  = 2021,
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 32
-    #> $ year         <int> 2021
-    #> $ npi          <chr> "1932365699"
-    #> $ level        <ord> Provider
-    #> $ first        <chr> "Stefan"
-    #> $ middle       <chr> "M"
-    #> $ last         <chr> "Smith"
-    #> $ gender       <fct> Male
-    #> $ credential   <chr> "O.D."
-    #> $ specialty    <chr> "Optometry"
-    #> $ address      <chr> "724 St. Louis Road"
-    #> $ city         <chr> "Collinsville"
-    #> $ state        <ord> IL
-    #> $ zip          <chr> "62234"
-    #> $ fips         <chr> "17"
-    #> $ ruca         <chr> "1"
-    #> $ country      <chr> "US"
-    #> $ par          <lgl> TRUE
-    #> $ hcpcs        <chr> "99214"
-    #> $ hcpcs_desc   <chr> "Established patient outpatient visit, total time 30-39 m…
-    #> $ category     <chr> "E&M"
-    #> $ subcategory  <chr> "Office/Outpatient Services"
-    #> $ family       <chr> "Office E&M - Established"
-    #> $ procedure    <fct> Non-procedure
-    #> $ drug         <lgl> FALSE
-    #> $ pos          <fct> Non-facility
-    #> $ tot_benes    <int> 24
-    #> $ tot_srvcs    <int> 27
-    #> $ tot_day      <int> 27
-    #> $ avg_charge   <dbl> 134.7407
-    #> $ avg_allowed  <dbl> 132.7281
-    #> $ avg_payment  <dbl> 102.7159
-    #> $ avg_std_pymt <dbl> 99.46074
+    #> Error in `utilization()`:
+    #> ! `type` must be one of "Provider", "Service", or "Geography", not
+    #>   "service".
+    #> ℹ Did you mean "Service"?
 
 ``` r
 utilization(year  = 2021, 
@@ -846,27 +720,10 @@ utilization(year  = 2021,
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 19
-    #> $ year         <int> 2021
-    #> $ level        <ord> National
-    #> $ state        <ord> National
-    #> $ hcpcs        <chr> "99205"
-    #> $ hcpcs_desc   <chr> "New patient outpatient visit, total time 60-74 minutes"
-    #> $ category     <chr> "E&M"
-    #> $ subcategory  <chr> "Office/Outpatient Services"
-    #> $ family       <chr> "Office E&M - New"
-    #> $ procedure    <fct> Non-procedure
-    #> $ drug         <lgl> FALSE
-    #> $ pos          <fct> Facility
-    #> $ tot_provs    <int> 65502
-    #> $ tot_benes    <int> 574426
-    #> $ tot_srvcs    <int> 653339
-    #> $ tot_day      <int> 653311
-    #> $ avg_charge   <dbl> 493.5003
-    #> $ avg_allowed  <dbl> 186.2096
-    #> $ avg_payment  <dbl> 143.4408
-    #> $ avg_std_pymt <dbl> 139.6115
+    #> Error in `utilization()`:
+    #> ! `type` must be one of "Provider", "Service", or "Geography", not
+    #>   "geography".
+    #> ℹ Did you mean "Geography"?
 
 ------------------------------------------------------------------------
 

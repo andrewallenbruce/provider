@@ -312,8 +312,8 @@ cols_qcomb <- function(df) {
 
 }
 
-#' @noRd
 #' @autoglobal
+#' @noRd
 cols_qpp <- function(df, step = c("tidy", "nest")) {
 
   if (step == "tidy") {
