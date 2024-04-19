@@ -20,7 +20,7 @@
 <link href="../deps/Kanit-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Linking Providers">
 <meta property="og:description" content="NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More">
 <meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
@@ -138,23 +138,6 @@ Bruce</h4>
 <h2 id="individual-provider">Individual Provider<a class="anchor" aria-label="anchor" href="#individual-provider"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">chainr</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in library(chainr): there is no package called 'chainr'</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mark</span> <span class="op">&lt;-</span> <span class="fu">chain</span><span class="op">(</span></span>
-<span>  providers    <span class="op">=</span> <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>,</span>
-<span>  reassignment <span class="op">=</span> <span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>,</span>
-<span>  clinicians   <span class="op">=</span> <span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>,</span>
-<span>  nppes        <span class="op">=</span> <span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043245657</span><span class="op">)</span>,</span>
-<span>  referrals    <span class="op">=</span> <span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043245657</span><span class="op">)</span>,</span>
-<span>  affiliations <span class="op">=</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>,</span>
-<span>  hospitals    <span class="op">=</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  utilization  <span class="op">=</span> <span class="fu"><a href="../reference/utilization.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043245657</span>, type <span class="op">=</span> <span class="st">"Provider"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in chain(providers = providers(pac = 7810891009), reassignment = reassignments(pac = 7810891009), : could not find function "chain"</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mark</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'mark' not found</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/vec_bind.html" class="external-link">vec_rbind</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html" class="external-link">add_column</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"`providers()`"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html" class="external-link">add_column</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"`reassignments()`"</span><span class="op">)</span>,</span>
@@ -170,7 +153,7 @@ Bruce</h4>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>              heading.align <span class="op">=</span> <span class="st">"left"</span>, </span>
 <span>              stub_row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**PROVIDER**: Mark, K. Fung, M.D."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**PROVIDER**: Mark K. Fung, M.D."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_horizontal_padding.html" class="external-link">opt_horizontal_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -625,7 +608,7 @@ Bruce</h4>
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_heading">
-<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class="gt_from_md"><strong>PROVIDER</strong>: Mark, K. Fung, M.D.</span></td>
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class="gt_from_md"><strong>PROVIDER</strong>: Mark K. Fung, M.D.</span></td>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr class="gt_row_group_first">
@@ -833,7 +816,7 @@ Bruce</h4>
 <td headers="nppes name_50 value" class="gt_row gt_left">1010070</td>
 </tr>
 <tr class="gt_row_group_first">
-<td headers="order-refer stub_1_51 stub_1" rowspan="4" class="gt_row gt_left gt_stub_row_group"><span class="gt_from_md"><code><a href="../reference/order_refer.html">order_refer()</a></code></span></td>
+<td headers="order-refer stub_1_51 stub_1" rowspan="5" class="gt_row gt_left gt_stub_row_group"><span class="gt_from_md"><code><a href="../reference/order_refer.html">order_refer()</a></code></span></td>
 <td headers="order-refer stub_1_51 name" class="gt_row gt_left">eligible</td>
 <td headers="order-refer stub_1_51 value" class="gt_row gt_left">Medicare Part B</td>
 </tr>
@@ -849,11 +832,15 @@ Bruce</h4>
 <td headers="order-refer name_54 name" class="gt_row gt_left">eligible</td>
 <td headers="order-refer name_54 value" class="gt_row gt_left">Power Mobility Devices</td>
 </tr>
+<tr>
+<td headers="order-refer name_55 name" class="gt_row gt_left">eligible</td>
+<td headers="order-refer name_55 value" class="gt_row gt_left">Hospice</td>
+</tr>
 </tbody>
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -871,24 +858,24 @@ Bruce</h4>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**FACILITY** AFFILIATIONS"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_horizontal_padding.html" class="external-link">opt_horizontal_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="hrvvqeoelf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lfyoqaitrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#hrvvqeoelf table {
+#lfyoqaitrx table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hrvvqeoelf thead, #hrvvqeoelf tbody, #hrvvqeoelf tfoot, #hrvvqeoelf tr, #hrvvqeoelf td, #hrvvqeoelf th {
+#lfyoqaitrx thead, #lfyoqaitrx tbody, #lfyoqaitrx tfoot, #lfyoqaitrx tr, #lfyoqaitrx td, #lfyoqaitrx th {
   border-style: none;
 }
 
-#hrvvqeoelf p {
+#lfyoqaitrx p {
   margin: 0;
   padding: 0;
 }
 
-#hrvvqeoelf .gt_table {
+#lfyoqaitrx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -914,12 +901,12 @@ Bruce</h4>
   border-left-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_caption {
+#lfyoqaitrx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hrvvqeoelf .gt_title {
+#lfyoqaitrx .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -931,7 +918,7 @@ Bruce</h4>
   border-bottom-width: 0;
 }
 
-#hrvvqeoelf .gt_subtitle {
+#lfyoqaitrx .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -943,7 +930,7 @@ Bruce</h4>
   border-top-width: 0;
 }
 
-#hrvvqeoelf .gt_heading {
+#lfyoqaitrx .gt_heading {
   background-color: #000000;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -955,13 +942,13 @@ Bruce</h4>
   border-right-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_bottom_border {
+#lfyoqaitrx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_col_headings {
+#lfyoqaitrx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -976,7 +963,7 @@ Bruce</h4>
   border-right-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_col_heading {
+#lfyoqaitrx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -996,7 +983,7 @@ Bruce</h4>
   overflow-x: hidden;
 }
 
-#hrvvqeoelf .gt_column_spanner_outer {
+#lfyoqaitrx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1008,15 +995,15 @@ Bruce</h4>
   padding-right: 4px;
 }
 
-#hrvvqeoelf .gt_column_spanner_outer:first-child {
+#lfyoqaitrx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hrvvqeoelf .gt_column_spanner_outer:last-child {
+#lfyoqaitrx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hrvvqeoelf .gt_column_spanner {
+#lfyoqaitrx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1028,11 +1015,11 @@ Bruce</h4>
   width: 100%;
 }
 
-#hrvvqeoelf .gt_spanner_row {
+#lfyoqaitrx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hrvvqeoelf .gt_group_heading {
+#lfyoqaitrx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 10px;
@@ -1058,7 +1045,7 @@ Bruce</h4>
   text-align: left;
 }
 
-#hrvvqeoelf .gt_empty_group_heading {
+#lfyoqaitrx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1073,15 +1060,15 @@ Bruce</h4>
   vertical-align: middle;
 }
 
-#hrvvqeoelf .gt_from_md > :first-child {
+#lfyoqaitrx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hrvvqeoelf .gt_from_md > :last-child {
+#lfyoqaitrx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hrvvqeoelf .gt_row {
+#lfyoqaitrx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 10px;
@@ -1100,7 +1087,7 @@ Bruce</h4>
   overflow-x: hidden;
 }
 
-#hrvvqeoelf .gt_stub {
+#lfyoqaitrx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1113,7 +1100,7 @@ Bruce</h4>
   padding-right: 10px;
 }
 
-#hrvvqeoelf .gt_stub_row_group {
+#lfyoqaitrx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1127,15 +1114,15 @@ Bruce</h4>
   vertical-align: top;
 }
 
-#hrvvqeoelf .gt_row_group_first td {
+#lfyoqaitrx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hrvvqeoelf .gt_row_group_first th {
+#lfyoqaitrx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hrvvqeoelf .gt_summary_row {
+#lfyoqaitrx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1145,16 +1132,16 @@ Bruce</h4>
   padding-right: 10px;
 }
 
-#hrvvqeoelf .gt_first_summary_row {
+#lfyoqaitrx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_first_summary_row.thick {
+#lfyoqaitrx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hrvvqeoelf .gt_last_summary_row {
+#lfyoqaitrx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 10px;
@@ -1164,7 +1151,7 @@ Bruce</h4>
   border-bottom-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_grand_summary_row {
+#lfyoqaitrx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1174,7 +1161,7 @@ Bruce</h4>
   padding-right: 10px;
 }
 
-#hrvvqeoelf .gt_first_grand_summary_row {
+#lfyoqaitrx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 10px;
@@ -1184,7 +1171,7 @@ Bruce</h4>
   border-top-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_last_grand_summary_row_top {
+#lfyoqaitrx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 10px;
@@ -1194,11 +1181,11 @@ Bruce</h4>
   border-bottom-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_striped {
+#lfyoqaitrx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hrvvqeoelf .gt_table_body {
+#lfyoqaitrx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1207,7 +1194,7 @@ Bruce</h4>
   border-bottom-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_footnotes {
+#lfyoqaitrx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1221,7 +1208,7 @@ Bruce</h4>
   border-right-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_footnote {
+#lfyoqaitrx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1230,7 +1217,7 @@ Bruce</h4>
   padding-right: 10px;
 }
 
-#hrvvqeoelf .gt_sourcenotes {
+#lfyoqaitrx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1244,7 +1231,7 @@ Bruce</h4>
   border-right-color: #D3D3D3;
 }
 
-#hrvvqeoelf .gt_sourcenote {
+#lfyoqaitrx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1252,72 +1239,72 @@ Bruce</h4>
   padding-right: 10px;
 }
 
-#hrvvqeoelf .gt_left {
+#lfyoqaitrx .gt_left {
   text-align: left;
 }
 
-#hrvvqeoelf .gt_center {
+#lfyoqaitrx .gt_center {
   text-align: center;
 }
 
-#hrvvqeoelf .gt_right {
+#lfyoqaitrx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hrvvqeoelf .gt_font_normal {
+#lfyoqaitrx .gt_font_normal {
   font-weight: normal;
 }
 
-#hrvvqeoelf .gt_font_bold {
+#lfyoqaitrx .gt_font_bold {
   font-weight: bold;
 }
 
-#hrvvqeoelf .gt_font_italic {
+#lfyoqaitrx .gt_font_italic {
   font-style: italic;
 }
 
-#hrvvqeoelf .gt_super {
+#lfyoqaitrx .gt_super {
   font-size: 65%;
 }
 
-#hrvvqeoelf .gt_footnote_marks {
+#lfyoqaitrx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hrvvqeoelf .gt_asterisk {
+#lfyoqaitrx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hrvvqeoelf .gt_indent_1 {
+#lfyoqaitrx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hrvvqeoelf .gt_indent_2 {
+#lfyoqaitrx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hrvvqeoelf .gt_indent_3 {
+#lfyoqaitrx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hrvvqeoelf .gt_indent_4 {
+#lfyoqaitrx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hrvvqeoelf .gt_indent_5 {
+#lfyoqaitrx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hrvvqeoelf .katex-display {
+#lfyoqaitrx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hrvvqeoelf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lfyoqaitrx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1713,28 +1700,28 @@ Bruce</h4>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="qaitrxpwwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kzgfujivnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qaitrxpwwk table {
+#kzgfujivnx table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qaitrxpwwk thead, #qaitrxpwwk tbody, #qaitrxpwwk tfoot, #qaitrxpwwk tr, #qaitrxpwwk td, #qaitrxpwwk th {
+#kzgfujivnx thead, #kzgfujivnx tbody, #kzgfujivnx tfoot, #kzgfujivnx tr, #kzgfujivnx td, #kzgfujivnx th {
   border-style: none;
 }
 
-#qaitrxpwwk p {
+#kzgfujivnx p {
   margin: 0;
   padding: 0;
 }
 
-#qaitrxpwwk .gt_table {
+#kzgfujivnx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1760,12 +1747,12 @@ insights. For example, there is a hospital in New York named
   border-left-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_caption {
+#kzgfujivnx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qaitrxpwwk .gt_title {
+#kzgfujivnx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1777,7 +1764,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-width: 0;
 }
 
-#qaitrxpwwk .gt_subtitle {
+#kzgfujivnx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1789,7 +1776,7 @@ insights. For example, there is a hospital in New York named
   border-top-width: 0;
 }
 
-#qaitrxpwwk .gt_heading {
+#kzgfujivnx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1801,13 +1788,13 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_bottom_border {
+#kzgfujivnx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_col_headings {
+#kzgfujivnx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1822,7 +1809,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_col_heading {
+#kzgfujivnx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1842,7 +1829,7 @@ insights. For example, there is a hospital in New York named
   overflow-x: hidden;
 }
 
-#qaitrxpwwk .gt_column_spanner_outer {
+#kzgfujivnx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1854,15 +1841,15 @@ insights. For example, there is a hospital in New York named
   padding-right: 4px;
 }
 
-#qaitrxpwwk .gt_column_spanner_outer:first-child {
+#kzgfujivnx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qaitrxpwwk .gt_column_spanner_outer:last-child {
+#kzgfujivnx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qaitrxpwwk .gt_column_spanner {
+#kzgfujivnx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1874,11 +1861,11 @@ insights. For example, there is a hospital in New York named
   width: 100%;
 }
 
-#qaitrxpwwk .gt_spanner_row {
+#kzgfujivnx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qaitrxpwwk .gt_group_heading {
+#kzgfujivnx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1904,7 +1891,7 @@ insights. For example, there is a hospital in New York named
   text-align: left;
 }
 
-#qaitrxpwwk .gt_empty_group_heading {
+#kzgfujivnx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1919,15 +1906,15 @@ insights. For example, there is a hospital in New York named
   vertical-align: middle;
 }
 
-#qaitrxpwwk .gt_from_md > :first-child {
+#kzgfujivnx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qaitrxpwwk .gt_from_md > :last-child {
+#kzgfujivnx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qaitrxpwwk .gt_row {
+#kzgfujivnx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1946,7 +1933,7 @@ insights. For example, there is a hospital in New York named
   overflow-x: hidden;
 }
 
-#qaitrxpwwk .gt_stub {
+#kzgfujivnx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1959,7 +1946,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#qaitrxpwwk .gt_stub_row_group {
+#kzgfujivnx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1973,15 +1960,15 @@ insights. For example, there is a hospital in New York named
   vertical-align: top;
 }
 
-#qaitrxpwwk .gt_row_group_first td {
+#kzgfujivnx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qaitrxpwwk .gt_row_group_first th {
+#kzgfujivnx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qaitrxpwwk .gt_summary_row {
+#kzgfujivnx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1991,16 +1978,16 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#qaitrxpwwk .gt_first_summary_row {
+#kzgfujivnx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_first_summary_row.thick {
+#kzgfujivnx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qaitrxpwwk .gt_last_summary_row {
+#kzgfujivnx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2010,7 +1997,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_grand_summary_row {
+#kzgfujivnx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2020,7 +2007,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#qaitrxpwwk .gt_first_grand_summary_row {
+#kzgfujivnx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2030,7 +2017,7 @@ insights. For example, there is a hospital in New York named
   border-top-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_last_grand_summary_row_top {
+#kzgfujivnx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2040,11 +2027,11 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_striped {
+#kzgfujivnx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qaitrxpwwk .gt_table_body {
+#kzgfujivnx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2053,7 +2040,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_footnotes {
+#kzgfujivnx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2067,7 +2054,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_footnote {
+#kzgfujivnx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2076,7 +2063,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#qaitrxpwwk .gt_sourcenotes {
+#kzgfujivnx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2090,7 +2077,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#qaitrxpwwk .gt_sourcenote {
+#kzgfujivnx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2098,72 +2085,72 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#qaitrxpwwk .gt_left {
+#kzgfujivnx .gt_left {
   text-align: left;
 }
 
-#qaitrxpwwk .gt_center {
+#kzgfujivnx .gt_center {
   text-align: center;
 }
 
-#qaitrxpwwk .gt_right {
+#kzgfujivnx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qaitrxpwwk .gt_font_normal {
+#kzgfujivnx .gt_font_normal {
   font-weight: normal;
 }
 
-#qaitrxpwwk .gt_font_bold {
+#kzgfujivnx .gt_font_bold {
   font-weight: bold;
 }
 
-#qaitrxpwwk .gt_font_italic {
+#kzgfujivnx .gt_font_italic {
   font-style: italic;
 }
 
-#qaitrxpwwk .gt_super {
+#kzgfujivnx .gt_super {
   font-size: 65%;
 }
 
-#qaitrxpwwk .gt_footnote_marks {
+#kzgfujivnx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qaitrxpwwk .gt_asterisk {
+#kzgfujivnx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qaitrxpwwk .gt_indent_1 {
+#kzgfujivnx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qaitrxpwwk .gt_indent_2 {
+#kzgfujivnx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qaitrxpwwk .gt_indent_3 {
+#kzgfujivnx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qaitrxpwwk .gt_indent_4 {
+#kzgfujivnx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qaitrxpwwk .gt_indent_5 {
+#kzgfujivnx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qaitrxpwwk .katex-display {
+#kzgfujivnx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qaitrxpwwk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kzgfujivnx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2222,28 +2209,28 @@ insights. For example, there is a hospital in New York named
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="zgfujivnxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cljjbjgwtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#zgfujivnxc table {
+#cljjbjgwtl table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zgfujivnxc thead, #zgfujivnxc tbody, #zgfujivnxc tfoot, #zgfujivnxc tr, #zgfujivnxc td, #zgfujivnxc th {
+#cljjbjgwtl thead, #cljjbjgwtl tbody, #cljjbjgwtl tfoot, #cljjbjgwtl tr, #cljjbjgwtl td, #cljjbjgwtl th {
   border-style: none;
 }
 
-#zgfujivnxc p {
+#cljjbjgwtl p {
   margin: 0;
   padding: 0;
 }
 
-#zgfujivnxc .gt_table {
+#cljjbjgwtl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2269,12 +2256,12 @@ insights. For example, there is a hospital in New York named
   border-left-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_caption {
+#cljjbjgwtl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zgfujivnxc .gt_title {
+#cljjbjgwtl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2286,7 +2273,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-width: 0;
 }
 
-#zgfujivnxc .gt_subtitle {
+#cljjbjgwtl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2298,7 +2285,7 @@ insights. For example, there is a hospital in New York named
   border-top-width: 0;
 }
 
-#zgfujivnxc .gt_heading {
+#cljjbjgwtl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2310,13 +2297,13 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_bottom_border {
+#cljjbjgwtl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_col_headings {
+#cljjbjgwtl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2331,7 +2318,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_col_heading {
+#cljjbjgwtl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2351,7 +2338,7 @@ insights. For example, there is a hospital in New York named
   overflow-x: hidden;
 }
 
-#zgfujivnxc .gt_column_spanner_outer {
+#cljjbjgwtl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2363,15 +2350,15 @@ insights. For example, there is a hospital in New York named
   padding-right: 4px;
 }
 
-#zgfujivnxc .gt_column_spanner_outer:first-child {
+#cljjbjgwtl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zgfujivnxc .gt_column_spanner_outer:last-child {
+#cljjbjgwtl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zgfujivnxc .gt_column_spanner {
+#cljjbjgwtl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2383,11 +2370,11 @@ insights. For example, there is a hospital in New York named
   width: 100%;
 }
 
-#zgfujivnxc .gt_spanner_row {
+#cljjbjgwtl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zgfujivnxc .gt_group_heading {
+#cljjbjgwtl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2413,7 +2400,7 @@ insights. For example, there is a hospital in New York named
   text-align: left;
 }
 
-#zgfujivnxc .gt_empty_group_heading {
+#cljjbjgwtl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2428,15 +2415,15 @@ insights. For example, there is a hospital in New York named
   vertical-align: middle;
 }
 
-#zgfujivnxc .gt_from_md > :first-child {
+#cljjbjgwtl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zgfujivnxc .gt_from_md > :last-child {
+#cljjbjgwtl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zgfujivnxc .gt_row {
+#cljjbjgwtl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2455,7 +2442,7 @@ insights. For example, there is a hospital in New York named
   overflow-x: hidden;
 }
 
-#zgfujivnxc .gt_stub {
+#cljjbjgwtl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2468,7 +2455,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#zgfujivnxc .gt_stub_row_group {
+#cljjbjgwtl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2482,15 +2469,15 @@ insights. For example, there is a hospital in New York named
   vertical-align: top;
 }
 
-#zgfujivnxc .gt_row_group_first td {
+#cljjbjgwtl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zgfujivnxc .gt_row_group_first th {
+#cljjbjgwtl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zgfujivnxc .gt_summary_row {
+#cljjbjgwtl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2500,16 +2487,16 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#zgfujivnxc .gt_first_summary_row {
+#cljjbjgwtl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_first_summary_row.thick {
+#cljjbjgwtl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zgfujivnxc .gt_last_summary_row {
+#cljjbjgwtl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2519,7 +2506,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_grand_summary_row {
+#cljjbjgwtl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2529,7 +2516,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#zgfujivnxc .gt_first_grand_summary_row {
+#cljjbjgwtl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2539,7 +2526,7 @@ insights. For example, there is a hospital in New York named
   border-top-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_last_grand_summary_row_top {
+#cljjbjgwtl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2549,11 +2536,11 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_striped {
+#cljjbjgwtl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zgfujivnxc .gt_table_body {
+#cljjbjgwtl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2562,7 +2549,7 @@ insights. For example, there is a hospital in New York named
   border-bottom-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_footnotes {
+#cljjbjgwtl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2576,7 +2563,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_footnote {
+#cljjbjgwtl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2585,7 +2572,7 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#zgfujivnxc .gt_sourcenotes {
+#cljjbjgwtl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2599,7 +2586,7 @@ insights. For example, there is a hospital in New York named
   border-right-color: #D3D3D3;
 }
 
-#zgfujivnxc .gt_sourcenote {
+#cljjbjgwtl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2607,72 +2594,72 @@ insights. For example, there is a hospital in New York named
   padding-right: 5px;
 }
 
-#zgfujivnxc .gt_left {
+#cljjbjgwtl .gt_left {
   text-align: left;
 }
 
-#zgfujivnxc .gt_center {
+#cljjbjgwtl .gt_center {
   text-align: center;
 }
 
-#zgfujivnxc .gt_right {
+#cljjbjgwtl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zgfujivnxc .gt_font_normal {
+#cljjbjgwtl .gt_font_normal {
   font-weight: normal;
 }
 
-#zgfujivnxc .gt_font_bold {
+#cljjbjgwtl .gt_font_bold {
   font-weight: bold;
 }
 
-#zgfujivnxc .gt_font_italic {
+#cljjbjgwtl .gt_font_italic {
   font-style: italic;
 }
 
-#zgfujivnxc .gt_super {
+#cljjbjgwtl .gt_super {
   font-size: 65%;
 }
 
-#zgfujivnxc .gt_footnote_marks {
+#cljjbjgwtl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zgfujivnxc .gt_asterisk {
+#cljjbjgwtl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zgfujivnxc .gt_indent_1 {
+#cljjbjgwtl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zgfujivnxc .gt_indent_2 {
+#cljjbjgwtl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zgfujivnxc .gt_indent_3 {
+#cljjbjgwtl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zgfujivnxc .gt_indent_4 {
+#cljjbjgwtl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zgfujivnxc .gt_indent_5 {
+#cljjbjgwtl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zgfujivnxc .katex-display {
+#cljjbjgwtl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zgfujivnxc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cljjbjgwtl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2758,28 +2745,28 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="ljjbjgwtlm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mpwzbijlfm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ljjbjgwtlm table {
+#mpwzbijlfm table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ljjbjgwtlm thead, #ljjbjgwtlm tbody, #ljjbjgwtlm tfoot, #ljjbjgwtlm tr, #ljjbjgwtlm td, #ljjbjgwtlm th {
+#mpwzbijlfm thead, #mpwzbijlfm tbody, #mpwzbijlfm tfoot, #mpwzbijlfm tr, #mpwzbijlfm td, #mpwzbijlfm th {
   border-style: none;
 }
 
-#ljjbjgwtlm p {
+#mpwzbijlfm p {
   margin: 0;
   padding: 0;
 }
 
-#ljjbjgwtlm .gt_table {
+#mpwzbijlfm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2805,12 +2792,12 @@ all-numeric CCN (<code>331302</code>):</p>
   border-left-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_caption {
+#mpwzbijlfm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ljjbjgwtlm .gt_title {
+#mpwzbijlfm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2822,7 +2809,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-bottom-width: 0;
 }
 
-#ljjbjgwtlm .gt_subtitle {
+#mpwzbijlfm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2834,7 +2821,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-top-width: 0;
 }
 
-#ljjbjgwtlm .gt_heading {
+#mpwzbijlfm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2846,13 +2833,13 @@ all-numeric CCN (<code>331302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_bottom_border {
+#mpwzbijlfm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_col_headings {
+#mpwzbijlfm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2867,7 +2854,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_col_heading {
+#mpwzbijlfm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2887,7 +2874,7 @@ all-numeric CCN (<code>331302</code>):</p>
   overflow-x: hidden;
 }
 
-#ljjbjgwtlm .gt_column_spanner_outer {
+#mpwzbijlfm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2899,15 +2886,15 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 4px;
 }
 
-#ljjbjgwtlm .gt_column_spanner_outer:first-child {
+#mpwzbijlfm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ljjbjgwtlm .gt_column_spanner_outer:last-child {
+#mpwzbijlfm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ljjbjgwtlm .gt_column_spanner {
+#mpwzbijlfm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2919,11 +2906,11 @@ all-numeric CCN (<code>331302</code>):</p>
   width: 100%;
 }
 
-#ljjbjgwtlm .gt_spanner_row {
+#mpwzbijlfm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ljjbjgwtlm .gt_group_heading {
+#mpwzbijlfm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2949,7 +2936,7 @@ all-numeric CCN (<code>331302</code>):</p>
   text-align: left;
 }
 
-#ljjbjgwtlm .gt_empty_group_heading {
+#mpwzbijlfm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2964,15 +2951,15 @@ all-numeric CCN (<code>331302</code>):</p>
   vertical-align: middle;
 }
 
-#ljjbjgwtlm .gt_from_md > :first-child {
+#mpwzbijlfm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ljjbjgwtlm .gt_from_md > :last-child {
+#mpwzbijlfm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ljjbjgwtlm .gt_row {
+#mpwzbijlfm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2991,7 +2978,7 @@ all-numeric CCN (<code>331302</code>):</p>
   overflow-x: hidden;
 }
 
-#ljjbjgwtlm .gt_stub {
+#mpwzbijlfm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3004,7 +2991,7 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 5px;
 }
 
-#ljjbjgwtlm .gt_stub_row_group {
+#mpwzbijlfm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3018,15 +3005,15 @@ all-numeric CCN (<code>331302</code>):</p>
   vertical-align: top;
 }
 
-#ljjbjgwtlm .gt_row_group_first td {
+#mpwzbijlfm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ljjbjgwtlm .gt_row_group_first th {
+#mpwzbijlfm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ljjbjgwtlm .gt_summary_row {
+#mpwzbijlfm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3036,16 +3023,16 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 5px;
 }
 
-#ljjbjgwtlm .gt_first_summary_row {
+#mpwzbijlfm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_first_summary_row.thick {
+#mpwzbijlfm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ljjbjgwtlm .gt_last_summary_row {
+#mpwzbijlfm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3055,7 +3042,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_grand_summary_row {
+#mpwzbijlfm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3065,7 +3052,7 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 5px;
 }
 
-#ljjbjgwtlm .gt_first_grand_summary_row {
+#mpwzbijlfm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3075,7 +3062,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-top-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_last_grand_summary_row_top {
+#mpwzbijlfm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3085,11 +3072,11 @@ all-numeric CCN (<code>331302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_striped {
+#mpwzbijlfm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ljjbjgwtlm .gt_table_body {
+#mpwzbijlfm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3098,7 +3085,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_footnotes {
+#mpwzbijlfm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3112,7 +3099,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_footnote {
+#mpwzbijlfm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3121,7 +3108,7 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 5px;
 }
 
-#ljjbjgwtlm .gt_sourcenotes {
+#mpwzbijlfm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3135,7 +3122,7 @@ all-numeric CCN (<code>331302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#ljjbjgwtlm .gt_sourcenote {
+#mpwzbijlfm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3143,72 +3130,72 @@ all-numeric CCN (<code>331302</code>):</p>
   padding-right: 5px;
 }
 
-#ljjbjgwtlm .gt_left {
+#mpwzbijlfm .gt_left {
   text-align: left;
 }
 
-#ljjbjgwtlm .gt_center {
+#mpwzbijlfm .gt_center {
   text-align: center;
 }
 
-#ljjbjgwtlm .gt_right {
+#mpwzbijlfm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ljjbjgwtlm .gt_font_normal {
+#mpwzbijlfm .gt_font_normal {
   font-weight: normal;
 }
 
-#ljjbjgwtlm .gt_font_bold {
+#mpwzbijlfm .gt_font_bold {
   font-weight: bold;
 }
 
-#ljjbjgwtlm .gt_font_italic {
+#mpwzbijlfm .gt_font_italic {
   font-style: italic;
 }
 
-#ljjbjgwtlm .gt_super {
+#mpwzbijlfm .gt_super {
   font-size: 65%;
 }
 
-#ljjbjgwtlm .gt_footnote_marks {
+#mpwzbijlfm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ljjbjgwtlm .gt_asterisk {
+#mpwzbijlfm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ljjbjgwtlm .gt_indent_1 {
+#mpwzbijlfm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ljjbjgwtlm .gt_indent_2 {
+#mpwzbijlfm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ljjbjgwtlm .gt_indent_3 {
+#mpwzbijlfm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ljjbjgwtlm .gt_indent_4 {
+#mpwzbijlfm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ljjbjgwtlm .gt_indent_5 {
+#mpwzbijlfm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ljjbjgwtlm .katex-display {
+#mpwzbijlfm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ljjbjgwtlm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mpwzbijlfm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3473,28 +3460,28 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="pwzbijlfmz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zbbiaqaayr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pwzbijlfmz table {
+#zbbiaqaayr table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pwzbijlfmz thead, #pwzbijlfmz tbody, #pwzbijlfmz tfoot, #pwzbijlfmz tr, #pwzbijlfmz td, #pwzbijlfmz th {
+#zbbiaqaayr thead, #zbbiaqaayr tbody, #zbbiaqaayr tfoot, #zbbiaqaayr tr, #zbbiaqaayr td, #zbbiaqaayr th {
   border-style: none;
 }
 
-#pwzbijlfmz p {
+#zbbiaqaayr p {
   margin: 0;
   padding: 0;
 }
 
-#pwzbijlfmz .gt_table {
+#zbbiaqaayr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3520,12 +3507,12 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-left-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_caption {
+#zbbiaqaayr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pwzbijlfmz .gt_title {
+#zbbiaqaayr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3537,7 +3524,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-bottom-width: 0;
 }
 
-#pwzbijlfmz .gt_subtitle {
+#zbbiaqaayr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3549,7 +3536,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-top-width: 0;
 }
 
-#pwzbijlfmz .gt_heading {
+#zbbiaqaayr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3561,13 +3548,13 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_bottom_border {
+#zbbiaqaayr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_col_headings {
+#zbbiaqaayr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3582,7 +3569,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_col_heading {
+#zbbiaqaayr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3602,7 +3589,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   overflow-x: hidden;
 }
 
-#pwzbijlfmz .gt_column_spanner_outer {
+#zbbiaqaayr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3614,15 +3601,15 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 4px;
 }
 
-#pwzbijlfmz .gt_column_spanner_outer:first-child {
+#zbbiaqaayr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pwzbijlfmz .gt_column_spanner_outer:last-child {
+#zbbiaqaayr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pwzbijlfmz .gt_column_spanner {
+#zbbiaqaayr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3634,11 +3621,11 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   width: 100%;
 }
 
-#pwzbijlfmz .gt_spanner_row {
+#zbbiaqaayr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pwzbijlfmz .gt_group_heading {
+#zbbiaqaayr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3664,7 +3651,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   text-align: left;
 }
 
-#pwzbijlfmz .gt_empty_group_heading {
+#zbbiaqaayr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3679,15 +3666,15 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   vertical-align: middle;
 }
 
-#pwzbijlfmz .gt_from_md > :first-child {
+#zbbiaqaayr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pwzbijlfmz .gt_from_md > :last-child {
+#zbbiaqaayr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pwzbijlfmz .gt_row {
+#zbbiaqaayr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3706,7 +3693,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   overflow-x: hidden;
 }
 
-#pwzbijlfmz .gt_stub {
+#zbbiaqaayr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3719,7 +3706,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 5px;
 }
 
-#pwzbijlfmz .gt_stub_row_group {
+#zbbiaqaayr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3733,15 +3720,15 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   vertical-align: top;
 }
 
-#pwzbijlfmz .gt_row_group_first td {
+#zbbiaqaayr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pwzbijlfmz .gt_row_group_first th {
+#zbbiaqaayr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pwzbijlfmz .gt_summary_row {
+#zbbiaqaayr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3751,16 +3738,16 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 5px;
 }
 
-#pwzbijlfmz .gt_first_summary_row {
+#zbbiaqaayr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_first_summary_row.thick {
+#zbbiaqaayr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pwzbijlfmz .gt_last_summary_row {
+#zbbiaqaayr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3770,7 +3757,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_grand_summary_row {
+#zbbiaqaayr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3780,7 +3767,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 5px;
 }
 
-#pwzbijlfmz .gt_first_grand_summary_row {
+#zbbiaqaayr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3790,7 +3777,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-top-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_last_grand_summary_row_top {
+#zbbiaqaayr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3800,11 +3787,11 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_striped {
+#zbbiaqaayr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pwzbijlfmz .gt_table_body {
+#zbbiaqaayr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3813,7 +3800,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-bottom-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_footnotes {
+#zbbiaqaayr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3827,7 +3814,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_footnote {
+#zbbiaqaayr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3836,7 +3823,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 5px;
 }
 
-#pwzbijlfmz .gt_sourcenotes {
+#zbbiaqaayr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3850,7 +3837,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   border-right-color: #D3D3D3;
 }
 
-#pwzbijlfmz .gt_sourcenote {
+#zbbiaqaayr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3858,72 +3845,72 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
   padding-right: 5px;
 }
 
-#pwzbijlfmz .gt_left {
+#zbbiaqaayr .gt_left {
   text-align: left;
 }
 
-#pwzbijlfmz .gt_center {
+#zbbiaqaayr .gt_center {
   text-align: center;
 }
 
-#pwzbijlfmz .gt_right {
+#zbbiaqaayr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pwzbijlfmz .gt_font_normal {
+#zbbiaqaayr .gt_font_normal {
   font-weight: normal;
 }
 
-#pwzbijlfmz .gt_font_bold {
+#zbbiaqaayr .gt_font_bold {
   font-weight: bold;
 }
 
-#pwzbijlfmz .gt_font_italic {
+#zbbiaqaayr .gt_font_italic {
   font-style: italic;
 }
 
-#pwzbijlfmz .gt_super {
+#zbbiaqaayr .gt_super {
   font-size: 65%;
 }
 
-#pwzbijlfmz .gt_footnote_marks {
+#zbbiaqaayr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pwzbijlfmz .gt_asterisk {
+#zbbiaqaayr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pwzbijlfmz .gt_indent_1 {
+#zbbiaqaayr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pwzbijlfmz .gt_indent_2 {
+#zbbiaqaayr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pwzbijlfmz .gt_indent_3 {
+#zbbiaqaayr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pwzbijlfmz .gt_indent_4 {
+#zbbiaqaayr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pwzbijlfmz .gt_indent_5 {
+#zbbiaqaayr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pwzbijlfmz .katex-display {
+#zbbiaqaayr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pwzbijlfmz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zbbiaqaayr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3994,13 +3981,11 @@ i.e. <code>affiliations(parent_ccn = 331302)</code></p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Andrew Bruce.</p>
+  <p>Developed by Andrew Bruce.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>

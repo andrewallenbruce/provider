@@ -20,7 +20,7 @@
 <link href="../deps/Kanit-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Comparing Providers">
 <meta property="og:description" content="Demographics, Patient Mix, and Performance">
 <meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
@@ -177,42 +177,13 @@ Bruce</h4>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: tot_std_pymt &lt;dbl&gt;, .copay_deduct &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   .srvcs_per_bene &lt;dbl&gt;, .pymt_per_bene &lt;dbl&gt;, .pymt_per_srvc &lt;dbl&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">performance</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">year</span>,</span>
-<span>               names_to <span class="op">=</span> <span class="st">"measure"</span>, </span>
-<span>               values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">year</span>, </span>
-<span>              values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 9</span></span></span>
-<span><span class="co">#&gt;    measure            `2014`    `2015` `2016` `2017` `2018` `2019` `2020` `2021`</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> tot_hcpcs           45        54    6.2 <span style="color: #949494;">e</span>1 6.5 <span style="color: #949494;">e</span>1 5.4 <span style="color: #949494;">e</span>1 5.5 <span style="color: #949494;">e</span>1 5.7 <span style="color: #949494;">e</span>1 5.8 <span style="color: #949494;">e</span>1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> tot_benes          598      <span style="text-decoration: underline;">1</span>042    6.19<span style="color: #949494;">e</span>2 6.06<span style="color: #949494;">e</span>2 5.05<span style="color: #949494;">e</span>2 5.32<span style="color: #949494;">e</span>2 6.5 <span style="color: #949494;">e</span>2 7.48<span style="color: #949494;">e</span>2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> tot_srvcs          823      <span style="text-decoration: underline;">1</span>449    1   <span style="color: #949494;">e</span>3 9.72<span style="color: #949494;">e</span>2 1.03<span style="color: #949494;">e</span>3 1.25<span style="color: #949494;">e</span>3 1.26<span style="color: #949494;">e</span>3 1.37<span style="color: #949494;">e</span>3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> tot_charges     <span style="text-decoration: underline;">319</span>401    <span style="text-decoration: underline;">551</span>630    6.54<span style="color: #949494;">e</span>5 4.61<span style="color: #949494;">e</span>5 5.05<span style="color: #949494;">e</span>5 6.18<span style="color: #949494;">e</span>5 4.82<span style="color: #949494;">e</span>5 4.45<span style="color: #949494;">e</span>5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> tot_allowed      <span style="text-decoration: underline;">42</span>429.    <span style="text-decoration: underline;">82</span>729.   1.11<span style="color: #949494;">e</span>5 8.82<span style="color: #949494;">e</span>4 1.03<span style="color: #949494;">e</span>5 1.34<span style="color: #949494;">e</span>5 1.07<span style="color: #949494;">e</span>5 9.72<span style="color: #949494;">e</span>4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> tot_payment      <span style="text-decoration: underline;">33</span>775.    <span style="text-decoration: underline;">64</span>720.   8.71<span style="color: #949494;">e</span>4 6.82<span style="color: #949494;">e</span>4 8.01<span style="color: #949494;">e</span>4 1.05<span style="color: #949494;">e</span>5 8.19<span style="color: #949494;">e</span>4 7.53<span style="color: #949494;">e</span>4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> tot_std_pymt     <span style="text-decoration: underline;">34</span>339.    <span style="text-decoration: underline;">66</span>427.   8.93<span style="color: #949494;">e</span>4 6.95<span style="color: #949494;">e</span>4 8.37<span style="color: #949494;">e</span>4 1.06<span style="color: #949494;">e</span>5 8.26<span style="color: #949494;">e</span>4 7.55<span style="color: #949494;">e</span>4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> .copay_deduct     <span style="text-decoration: underline;">8</span>654.    <span style="text-decoration: underline;">18</span>009.   2.41<span style="color: #949494;">e</span>4 2.00<span style="color: #949494;">e</span>4 2.28<span style="color: #949494;">e</span>4 2.91<span style="color: #949494;">e</span>4 2.46<span style="color: #949494;">e</span>4 2.19<span style="color: #949494;">e</span>4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> .srvcs_per_bene      1.38      1.39 1.62<span style="color: #949494;">e</span>0 1.60<span style="color: #949494;">e</span>0 2.05<span style="color: #949494;">e</span>0 2.35<span style="color: #949494;">e</span>0 1.94<span style="color: #949494;">e</span>0 1.83<span style="color: #949494;">e</span>0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> .pymt_per_bene      56.5      62.1  1.41<span style="color: #949494;">e</span>2 1.12<span style="color: #949494;">e</span>2 1.59<span style="color: #949494;">e</span>2 1.97<span style="color: #949494;">e</span>2 1.26<span style="color: #949494;">e</span>2 1.01<span style="color: #949494;">e</span>2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> .pymt_per_srvc      41.0      44.7  8.71<span style="color: #949494;">e</span>1 7.01<span style="color: #949494;">e</span>1 7.74<span style="color: #949494;">e</span>1 8.39<span style="color: #949494;">e</span>1 6.50<span style="color: #949494;">e</span>1 5.50<span style="color: #949494;">e</span>1</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">performance</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/make_datetime.html" class="external-link">make_date</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">echarts4r</span><span class="fu">::</span><span class="fu">e_chart</span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, height <span class="op">=</span> <span class="st">"80px"</span>, width <span class="op">=</span> <span class="st">"300px"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">echarts4r</span><span class="fu">::</span><span class="fu">e_line</span><span class="op">(</span><span class="va">tot_hcpcs</span>, symbol <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">echarts4r</span><span class="fu">::</span><span class="fu">e_legend</span><span class="op">(</span>show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">echarts4r</span><span class="fu">::</span><span class="fu">e_axis</span><span class="op">(</span>axis <span class="op">=</span> <span class="st">"y"</span>, show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'echarts4r'</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">performance</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.pymt_per_srvc</span>, </span>
 <span>                        y <span class="op">=</span> <span class="va">.srvcs_per_bene</span>, </span>
 <span>                        fill <span class="op">=</span> <span class="va">year</span>, group <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="partb-stats_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">performance</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_hcpcs</span><span class="op">:</span><span class="va">tot_srvcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -837,7 +808,7 @@ Bruce</h4>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">performance</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_charges</span><span class="op">:</span><span class="va">tot_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1438,7 +1409,7 @@ Bruce</h4>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">performance</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">.copay_deduct</span><span class="op">:</span><span class="va">.pymt_per_srvc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2076,7 +2047,7 @@ Bruce</h4>
 <div class="section level3">
 <h3 id="hcpcs-utilization-data">HCPCS Utilization Data<a class="anchor" aria-label="anchor" href="#hcpcs-utilization-data"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srvc</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">family</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs_level <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">min_rank</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pick.html" class="external-link">pick</a></span><span class="op">(</span><span class="va">avg_allowed</span>, <span class="va">avg_payment</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3003,7 +2974,7 @@ Bruce</h4>
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srvc</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">hcpcs</span>, </span>
@@ -3647,7 +3618,7 @@ Bruce</h4>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">level</span>, <span class="va">subcategory</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>Beneficiaries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">beneficiaries</span><span class="op">)</span>,</span>
@@ -4448,7 +4419,7 @@ Bruce</h4>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">level</span>,</span>
@@ -6115,7 +6086,7 @@ Bruce</h4>
 <div class="section level3">
 <h3 id="demographics">Demographics<a class="anchor" aria-label="anchor" href="#demographics"></a>
 </h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">performance</span>, <span class="va">demographics</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bene_"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -6720,7 +6691,7 @@ Bruce</h4>
 <div class="section level4">
 <h4 id="chronic-conditions">Chronic Conditions<a class="anchor" aria-label="anchor" href="#chronic-conditions"></a>
 </h4>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">performance</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -7381,7 +7352,7 @@ Bruce</h4>
 <div class="section level4">
 <h4 id="comparison-chronic-conditions">Comparison: Chronic Conditions<a class="anchor" aria-label="anchor" href="#comparison-chronic-conditions"></a>
 </h4>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chronic</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># filter(prevalence &gt; 0)</span></span>
 <span>  <span class="co"># filter(!if_any(contains("20"), ~ . &lt;= 0)) |&gt;</span></span>
@@ -8594,13 +8565,11 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Andrew Bruce.</p>
+  <p>Developed by Andrew Bruce.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>
