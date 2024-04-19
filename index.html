@@ -142,20 +142,25 @@
 <code>affiliations()</code><a class="anchor" aria-label="anchor" href="#affiliations"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/affiliations.html">affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1023630738</span>,</span>
-<span>             pac <span class="op">=</span> <span class="fl">9032521372</span>,</span>
-<span>             facility_ccn <span class="op">=</span> <span class="st">"37Z324"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/affiliations.html">affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1023630738</span>, </span>
+<span>             pac <span class="op">=</span> <span class="fl">9032521372</span>, </span>
+<span>             facility_ccn <span class="op">=</span> <span class="fl">370781</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">#&gt; ✖ No results for npi = 1023630738, pac = 9032521372, and facility_ccn = 37Z324</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;  NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; Columns: 6</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; $ npi           &lt;chr&gt; "1023630738"</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; $ pac           &lt;chr&gt; "9032521372"</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; $ first         &lt;chr&gt; "ALYSIA"</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; $ last          &lt;chr&gt; "SMITH"</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; $ facility_type &lt;fct&gt; Hospital</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; $ facility_ccn  &lt;chr&gt; "370781"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="beneficiaries">
 <code>beneficiaries()</code><a class="anchor" aria-label="anchor" href="#beneficiaries"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/beneficiaries.html">beneficiaries</a></span><span class="op">(</span>year   <span class="op">=</span> <span class="fl">2022</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/beneficiaries.html">beneficiaries</a></span><span class="op">(</span>year   <span class="op">=</span> <span class="fl">2023</span>, </span>
 <span>              period <span class="op">=</span> <span class="st">"Year"</span>, </span>
 <span>              level  <span class="op">=</span> <span class="st">"County"</span>, </span>
 <span>              state  <span class="op">=</span> <span class="st">"GA"</span>, </span>
@@ -163,32 +168,32 @@
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; Columns: 26</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; $ year              &lt;int&gt; 2022</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; $ year              &lt;int&gt; 2023</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; $ period            &lt;ord&gt; Year</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; $ level             &lt;ord&gt; County</span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;ord&gt; GA</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; $ state_name        &lt;ord&gt; Georgia</span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; $ county            &lt;chr&gt; "Lowndes"</span></span>
 <span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; $ fips              &lt;chr&gt; "13185"</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; $ bene_total        &lt;int&gt; 19786</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; $ bene_orig         &lt;int&gt; 11732</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; $ bene_ma_oth       &lt;int&gt; 8054</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; $ bene_total_aged   &lt;int&gt; 16296</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; $ bene_aged_esrd    &lt;int&gt; 129</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; $ bene_aged_no_esrd &lt;int&gt; 16168</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; $ bene_total_dsb    &lt;int&gt; 3490</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; $ bene_dsb_esrd     &lt;int&gt; 142</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; $ bene_dsb_no_esrd  &lt;int&gt; 3348</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; $ bene_total_ab     &lt;int&gt; 18326</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; $ bene_ab_orig      &lt;int&gt; 10276</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; $ bene_ab_ma_oth    &lt;int&gt; 8050</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; $ bene_total_rx     &lt;int&gt; 14033</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_pdp       &lt;int&gt; 6432</span></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_mapd      &lt;int&gt; 7601</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_elig  &lt;int&gt; 5146</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_full  &lt;int&gt; 464</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_part  &lt;int&gt; 144</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_no    &lt;int&gt; 8280</span></span></code></pre></div>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; $ bene_total        &lt;int&gt; 20515</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; $ bene_orig         &lt;int&gt; 11098</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; $ bene_ma_oth       &lt;int&gt; 9418</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; $ bene_total_aged   &lt;int&gt; 17046</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; $ bene_aged_esrd    &lt;int&gt; 124</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; $ bene_aged_no_esrd &lt;int&gt; 16923</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; $ bene_total_dsb    &lt;int&gt; 3469</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; $ bene_dsb_esrd     &lt;int&gt; 145</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; $ bene_dsb_no_esrd  &lt;int&gt; 3325</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; $ bene_total_ab     &lt;int&gt; 19038</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; $ bene_ab_orig      &lt;int&gt; 9635</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; $ bene_ab_ma_oth    &lt;int&gt; 9403</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; $ bene_total_rx     &lt;int&gt; 14850</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_pdp       &lt;int&gt; 5940</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_mapd      &lt;int&gt; 8910</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_elig  &lt;int&gt; 5561</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_full  &lt;int&gt; 456</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_part  &lt;int&gt; 133</span></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a><span class="co">#&gt; $ bene_rx_lis_no    &lt;int&gt; 8701</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="clinicians">
@@ -340,25 +345,32 @@
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1497535637</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/add_counties.html">add_counties</a></span><span class="op">(</span><span class="va">state</span>, </span>
-<span>               <span class="va">zip</span>, </span>
-<span>               add_fips <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>               add_geo <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>               as_sf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co">#&gt; Simple feature collection with 1 feature and 25 fields</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="co">#&gt; Geometry type: POINT</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; Dimension:     XY</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; Bounding box:  xmin: -83.3 ymin: 30.9 xmax: -83.3 ymax: 30.9</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 26</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt;   npi    entity_type enum_date  cert_date  last_update status first last  gender</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;  &lt;fct&gt;       &lt;date&gt;     &lt;date&gt;     &lt;date&gt;      &lt;fct&gt;  &lt;chr&gt; &lt;chr&gt; &lt;fct&gt; </span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; 1 14975… Individual  2023-10-04 2023-10-05 2023-10-05  Active CART… ADAMS Male  </span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: credential &lt;chr&gt;, sole_prop &lt;lgl&gt;, purpose &lt;fct&gt;,</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; #   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;ord&gt;, zip &lt;chr&gt;, country &lt;chr&gt;,</span></span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">#&gt; #   phone &lt;chr&gt;, tx_code &lt;chr&gt;, tx_primary &lt;lgl&gt;, tx_desc &lt;chr&gt;,</span></span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">#&gt; #   tx_license &lt;chr&gt;, tx_state &lt;ord&gt;, county &lt;chr&gt;, county_fips &lt;chr&gt;,</span></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">#&gt; #   geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="co">#&gt; Columns: 23</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; $ npi         &lt;chr&gt; "1497535637"</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; $ entity_type &lt;fct&gt; Individual</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; $ enum_date   &lt;date&gt; 2023-10-04</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; $ cert_date   &lt;date&gt; 2023-10-05</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; $ last_update &lt;date&gt; 2023-10-05</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; $ status      &lt;fct&gt; Active</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; $ first       &lt;chr&gt; "CARTER"</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt; $ last        &lt;chr&gt; "ADAMS"</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; $ gender      &lt;fct&gt; Male</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">#&gt; $ credential  &lt;chr&gt; "NP-BC"</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">#&gt; $ sole_prop   &lt;lgl&gt; FALSE</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">#&gt; $ purpose     &lt;fct&gt; Practice</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">#&gt; $ address     &lt;chr&gt; "2501 N PATTERSON ST"</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="co">#&gt; $ city        &lt;chr&gt; "VALDOSTA"</span></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="co">#&gt; $ state       &lt;ord&gt; GA</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="co">#&gt; $ zip         &lt;chr&gt; "31602"</span></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co">#&gt; $ country     &lt;chr&gt; "US"</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="co">#&gt; $ phone       &lt;chr&gt; "229-433-1000"</span></span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a><span class="co">#&gt; $ tx_code     &lt;chr&gt; "363L00000X"</span></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a><span class="co">#&gt; $ tx_primary  &lt;lgl&gt; TRUE</span></span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a><span class="co">#&gt; $ tx_desc     &lt;chr&gt; "Nurse Practitioner"</span></span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a><span class="co">#&gt; $ tx_license  &lt;chr&gt; "RN272237"</span></span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a><span class="co">#&gt; $ tx_state    &lt;ord&gt; GA</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="open_payments">
@@ -445,14 +457,18 @@
 <code>order_refer()</code><a class="anchor" aria-label="anchor" href="#order_refer"></a>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 4</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#&gt;   npi        first last  eligible                 </span></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;                    </span></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt; 1 1043522824 JAMES SMITH Medicare Part B          </span></span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co">#&gt; 2 1043522824 JAMES SMITH Home Health Agency       </span></span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; 3 1043522824 JAMES SMITH Durable Medical Equipment</span></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; 4 1043522824 JAMES SMITH Power Mobility Devices</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#&gt; Columns: 8</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#&gt; $ NPI        &lt;chr&gt; "1043522824"</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt; $ LAST_NAME  &lt;chr&gt; "SMITH"</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co">#&gt; $ FIRST_NAME &lt;chr&gt; "JAMES"</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; $ PARTB      &lt;chr&gt; "Y"</span></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; $ DME        &lt;chr&gt; "Y"</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co">#&gt; $ HHA        &lt;chr&gt; "Y"</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="co">#&gt; $ PMD        &lt;chr&gt; "Y"</span></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co">#&gt; $ HOSPICE    &lt;chr&gt; "N"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="outpatient">
@@ -490,13 +506,13 @@
 <code>prescribers()</code><a class="anchor" aria-label="anchor" href="#prescribers"></a>
 </h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/prescribers.html">prescribers</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/prescribers.html">prescribers</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
 <span>            type <span class="op">=</span> <span class="st">'Provider'</span>, </span>
 <span>            npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
 <span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="co">#&gt; Columns: 27</span></span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; $ year           &lt;int&gt; 2019</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; $ year           &lt;int&gt; 2021</span></span>
 <span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">#&gt; $ npi            &lt;chr&gt; "1003000423"</span></span>
 <span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt; $ entity_type    &lt;fct&gt; Individual</span></span>
 <span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="co">#&gt; $ first          &lt;chr&gt; "Jennifer"</span></span>
@@ -513,13 +529,13 @@
 <span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a><span class="co">#&gt; $ fips           &lt;chr&gt; "39"</span></span>
 <span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a><span class="co">#&gt; $ ruca           &lt;chr&gt; "1"</span></span>
 <span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a><span class="co">#&gt; $ country        &lt;chr&gt; "US"</span></span>
-<span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a><span class="co">#&gt; $ tot_claims     &lt;int&gt; 199</span></span>
-<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a><span class="co">#&gt; $ tot_fills      &lt;dbl&gt; 344.0667</span></span>
-<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a><span class="co">#&gt; $ tot_cost       &lt;dbl&gt; 21614.75</span></span>
-<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a><span class="co">#&gt; $ tot_supply     &lt;int&gt; 8759</span></span>
-<span id="cb28-24"><a href="#cb28-24" tabindex="-1"></a><span class="co">#&gt; $ tot_benes      &lt;int&gt; 65</span></span>
+<span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a><span class="co">#&gt; $ tot_claims     &lt;int&gt; 206</span></span>
+<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a><span class="co">#&gt; $ tot_fills      &lt;dbl&gt; 378.2667</span></span>
+<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a><span class="co">#&gt; $ tot_cost       &lt;dbl&gt; 20757.65</span></span>
+<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a><span class="co">#&gt; $ tot_supply     &lt;int&gt; 10231</span></span>
+<span id="cb28-24"><a href="#cb28-24" tabindex="-1"></a><span class="co">#&gt; $ tot_benes      &lt;int&gt; 66</span></span>
 <span id="cb28-25"><a href="#cb28-25" tabindex="-1"></a><span class="co">#&gt; $ rx_rate_opioid &lt;dbl&gt; 0</span></span>
-<span id="cb28-26"><a href="#cb28-26" tabindex="-1"></a><span class="co">#&gt; $ hcc_risk_avg   &lt;dbl&gt; 0.8426269</span></span>
+<span id="cb28-26"><a href="#cb28-26" tabindex="-1"></a><span class="co">#&gt; $ hcc_risk_avg   &lt;dbl&gt; 0.8011638</span></span>
 <span id="cb28-27"><a href="#cb28-27" tabindex="-1"></a><span class="co">#&gt; $ detailed       &lt;list&gt; [&lt;tbl_df[1 x 32]&gt;]</span></span>
 <span id="cb28-28"><a href="#cb28-28" tabindex="-1"></a><span class="co">#&gt; $ demographics   &lt;list&gt; [&lt;tbl_df[1 x 14]&gt;]</span></span>
 <span id="cb28-29"><a href="#cb28-29" tabindex="-1"></a><span class="co">#&gt; $ gte_65         &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;]</span></span></code></pre></div>
@@ -657,17 +673,40 @@
 <code class="sourceCode R"><span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
 <span>                     npi <span class="op">=</span> <span class="fl">1932365699</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">statuses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">statuses</span><span class="op">)</span> </span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co">#&gt; Error in `select()`:</span></span>
-<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="co">#&gt; ! Can't select columns that don't exist.</span></span>
-<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt; ✖ Column `statuses` doesn't exist.</span></span></code></pre></div>
+<span><span class="va">q</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
+<span>    <span class="va">year</span>,</span>
+<span>    <span class="va">qpp_status</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_status</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 9 × 2</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="co">#&gt;    year qualified                 </span></span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;fct&gt;                     </span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co">#&gt; 1  2021 Engaged                   </span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="co">#&gt; 2  2021 Small Practitioner        </span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="co">#&gt; 3  2021 Rural Clinician           </span></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; 4  2021 HPSA Clinician            </span></span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="co">#&gt; 5  2021 Extreme Hardship          </span></span>
+<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a><span class="co">#&gt; 6  2021 Extreme Hardship (Quality)</span></span>
+<span id="cb38-10"><a href="#cb38-10" tabindex="-1"></a><span class="co">#&gt; 7  2021 Extreme Hardship (PI)     </span></span>
+<span id="cb38-11"><a href="#cb38-11" tabindex="-1"></a><span class="co">#&gt; 8  2021 Extreme Hardship (IA)     </span></span>
+<span id="cb38-12"><a href="#cb38-12" tabindex="-1"></a><span class="co">#&gt; 9  2021 Extreme Hardship (Cost)</span></span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measures</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co">#&gt; Error in `select()`:</span></span>
-<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="co">#&gt; ! Can't select columns that don't exist.</span></span>
-<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co">#&gt; ✖ Column `measures` doesn't exist.</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">q</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
+<span>    <span class="va">year</span>,</span>
+<span>    <span class="va">qpp_measures</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_measures</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="co">#&gt;    year category measure_id score</span></span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;fct&gt;    &lt;chr&gt;      &lt;dbl&gt;</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co">#&gt; 1  2021 Quality  141            3</span></span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a><span class="co">#&gt; 2  2021 Quality  014            3</span></span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="co">#&gt; 3  2021 Quality  110            3</span></span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="co">#&gt; 4  2021 Quality  47             3</span></span>
+<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a><span class="co">#&gt; 5  2021 Quality  1              0</span></span>
+<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="co">#&gt; 6  2021 Quality  117            0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="quality_eligibility">

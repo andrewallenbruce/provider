@@ -106,7 +106,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>period</dt>
-<dd><p>One of <code>"year"</code> or <code>"month"</code></p></dd>
+<dd><p><code>&lt;chr&gt;</code> One of <code>"year"</code> or <code>"month"</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -118,29 +118,37 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="co"># `beneficiaries()`</span></span></span>
-<span class="r-in"><span><span class="fu">bene_years</span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">bene_years</span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># `beneficiaries()`</span></span></span>
+<span class="r-in"><span><span class="fu">bene_years</span><span class="op">(</span>period <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">bene_years</span><span class="op">(</span>period <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `open_payments()`</span></span></span>
 <span class="r-in"><span><span class="fu">open_years</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2016 2017 2018 2019 2020 2021 2022</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `utilization()`</span></span></span>
 <span class="r-in"><span><span class="fu">util_years</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `conditions()`</span></span></span>
 <span class="r-in"><span><span class="fu">cc_years</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `quality_payment()`</span></span></span>
 <span class="r-in"><span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2017 2018 2019 2020 2021</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `outpatient()`</span></span></span>
 <span class="r-in"><span><span class="fu">out_years</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2015 2016 2017 2018 2019 2020 2021</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `prescribers()`</span></span></span>
 <span class="r-in"><span><span class="fu">rx_years</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
