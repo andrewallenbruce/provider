@@ -225,7 +225,7 @@ the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 <code><a href="../reference/quality_payment.html">quality_payment()</a></code>’s is:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">qpp_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021 2022</span></span></code></pre></div>
 <p>These can also be used in a pipeline, for searching all available
 years:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -239,15 +239,12 @@ years:</p>
 <span>         <span class="va">pay_adjust</span>, </span>
 <span>         <span class="va">org_size</span>, </span>
 <span>         <span class="va">apms_entity_name</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
-<span><span class="co">#&gt;    year participation_type beneficiaries services charges final_score pay_adjust</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 MIPS APM                   <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span>  3.64<span style="color: #949494;">e</span>7        97.1       1.72</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 MIPS APM                   <span style="text-decoration: underline;">41</span>034        0  3.50<span style="color: #949494;">e</span>7       100         1.68</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 MIPS APM                   <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298  3.69<span style="color: #949494;">e</span>7        95.1       1.46</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 MIPS APM                   <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278  3.35<span style="color: #949494;">e</span>7        96.7       1.48</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 MIPS APM                   <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720  3.56<span style="color: #949494;">e</span>7        97.2       1.94</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: org_size &lt;int&gt;, apms_entity_name &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 6.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `participation_type = fct_part(participation_type)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'participation_type' not found</span></span></code></pre></div>
 <p>Several functions have <em>parallelized</em> versions, denoted by an
 underscore at the end of their name (<code>_</code>):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -261,15 +258,12 @@ underscore at the end of their name (<code>_</code>):</p>
 <span>         <span class="va">pay_adjust</span>, </span>
 <span>         <span class="va">org_size</span>, </span>
 <span>         <span class="va">apms_entity_name</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
-<span><span class="co">#&gt;    year participation_type beneficiaries services charges final_score pay_adjust</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 MIPS APM                   <span style="text-decoration: underline;">43</span>007       <span style="color: #BB0000;">NA</span>  3.64<span style="color: #949494;">e</span>7        97.1       1.72</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 MIPS APM                   <span style="text-decoration: underline;">41</span>034        0  3.50<span style="color: #949494;">e</span>7       100         1.68</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 MIPS APM                   <span style="text-decoration: underline;">42</span>222   <span style="text-decoration: underline;">415</span>298  3.69<span style="color: #949494;">e</span>7        95.1       1.46</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 MIPS APM                   <span style="text-decoration: underline;">39</span>624   <span style="text-decoration: underline;">374</span>278  3.35<span style="color: #949494;">e</span>7        96.7       1.48</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 MIPS APM                   <span style="text-decoration: underline;">41</span>404   <span style="text-decoration: underline;">403</span>720  3.56<span style="color: #949494;">e</span>7        97.2       1.94</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: org_size &lt;int&gt;, apms_entity_name &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 6.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `participation_type = fct_part(participation_type)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'participation_type' not found</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">

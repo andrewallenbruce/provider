@@ -119,7 +119,7 @@ QPP</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2024-04-19</h4>
+            <h4 data-toc-skip class="date">2024-05-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/qpp.Rmd" class="external-link"><code>vignettes/articles/qpp.Rmd</code></a></small>
       <div class="d-none name"><code>qpp.Rmd</code></div>
@@ -138,30 +138,25 @@ Bruce</h4>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 2.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `participation_type = fct_part(participation_type)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'participation_type' not found</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">q</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 47</span></span></span>
-<span><span class="co">#&gt;    year npi        npi_type   first middle last   state first_approved_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>021 1144544834 Individual EMILY T      MANLEY GA    2011-09-13         </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39 more variables: years_in_medicare &lt;dbl&gt;, participation_type &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   beneficiaries &lt;int&gt;, services &lt;int&gt;, charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   newly_enrolled &lt;lgl&gt;, is_maqi &lt;lgl&gt;, org_id &lt;int&gt;, org_size &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_name &lt;chr&gt;, org_address &lt;chr&gt;, org_city &lt;chr&gt;, org_state &lt;ord&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_zip &lt;chr&gt;, org_hosp_vbp_name &lt;chr&gt;, org_facility_based &lt;lgl&gt;, …</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; function (save = "default", status = 0, runLast = TRUE) </span></span>
+<span><span class="co">#&gt; .Internal(quit(save, status, runLast))</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55c17e27ccd8&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:base&gt;</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="grouping">Grouping<a class="anchor" aria-label="anchor" href="#grouping"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">q</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">participation_type</span>,</span>
@@ -173,121 +168,49 @@ Bruce</h4>
 <span>         <span class="va">final_score</span>,</span>
 <span>         <span class="va">pay_adjust</span>,</span>
 <span>         <span class="va">ind_lvt_status_desc</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 10</span></span></span>
-<span><span class="co">#&gt;    year participation_type org_name      org_size beneficiaries services charges</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGI…        8          <span style="text-decoration: underline;">2</span>867       <span style="color: #BB0000;">NA</span> 1<span style="text-decoration: underline;">355</span>375</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGI…        8          <span style="text-decoration: underline;">2</span>731        0 1<span style="text-decoration: underline;">268</span>854</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 Group              ADVANCED DER…       12          <span style="text-decoration: underline;">3</span>165        0 1<span style="text-decoration: underline;">051</span>616</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>019 Group              ADVANCED DER…       13          <span style="text-decoration: underline;">5</span>621    <span style="text-decoration: underline;">25</span>215 2<span style="text-decoration: underline;">720</span>001</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 Group              ADVANCED DER…       13          <span style="text-decoration: underline;">4</span>804    <span style="text-decoration: underline;">21</span>667 2<span style="text-decoration: underline;">383</span>127</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>021 Group              ADVANCED DER…       11          <span style="text-decoration: underline;">4</span>722    <span style="text-decoration: underline;">19</span>234 2<span style="text-decoration: underline;">270</span>356</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: final_score &lt;dbl&gt;, pay_adjust &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_lvt_status_desc &lt;chr&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</span></span></code></pre>
 <div class="section level3">
 <h3 id="special-statuses">Special Statuses<a class="anchor" aria-label="anchor" href="#special-statuses"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">participation_type</span>, <span class="va">org_name</span>, <span class="va">org_size</span>, <span class="va">qpp_status</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_status</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32 × 5</span></span></span>
-<span><span class="co">#&gt;     year participation_type org_name                          org_size qualified</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Quality …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Small Pr…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Quality …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Engaged  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Small Pr…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Quality …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Engaged  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DERMATOLOGY, P.C.          8 Small Pr…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 Group              ADVANCED DERMATOLOGY OF GEORGIA,…       12 Quality …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 Group              ADVANCED DERMATOLOGY OF GEORGIA,…       12 Engaged  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">participation_type</span>, <span class="va">org_name</span>, <span class="va">org_size</span>, <span class="va">qpp_status</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_status</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">org_name</span>, <span class="va">qualified</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 3</span></span></span>
-<span><span class="co">#&gt;   org_name                             qualified              n</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC Engaged                5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC Small Practitioner     5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC Quality Bonus          5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC HPSA Clinician         3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC PI Hardship            3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ADVANCED DERMATOLOGY OF GEORGIA, LLC PI Reweighting         3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> NORTH GEORGIA DERMATOLOGY, P.C.      Small Practitioner     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> NORTH GEORGIA DERMATOLOGY, P.C.      Quality Bonus          3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> NORTH GEORGIA DERMATOLOGY, P.C.      Engaged                2</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="individual-category-measures">Individual Category Measures<a class="anchor" aria-label="anchor" href="#individual-category-measures"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">participation_type</span>, <span class="va">org_name</span>, <span class="va">org_size</span>, <span class="va">qpp_measures</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_measures</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 70 × 7</span></span></span>
-<span><span class="co">#&gt;     year participation_type org_name          org_size category measure_id score</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  111          5.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  110          3.7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  138          3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  265          3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  47           3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Quality  137          3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Improve… IA_BE_6     40  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Improve… IA_AHE_1    40  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 Group              NORTH GEORGIA DE…        8 Cost     TPCC_1       4.6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 Group              NORTH GEORGIA DE…        8 Quality  431          8.9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">q</span>, <span class="va">year</span>, <span class="va">participation_type</span>, <span class="va">org_name</span>, <span class="va">org_size</span>, <span class="va">qpp_measures</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">qpp_measures</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">org_name</span>, <span class="va">category</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 4</span></span></span>
-<span><span class="co">#&gt;     year org_name                             category                   n</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 ADVANCED DERMATOLOGY OF GEORGIA, LLC Quality                   12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>018 NORTH GEORGIA DERMATOLOGY, P.C.      Quality                   12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 NORTH GEORGIA DERMATOLOGY, P.C.      Quality                    6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019 ADVANCED DERMATOLOGY OF GEORGIA, LLC Quality                    6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>020 ADVANCED DERMATOLOGY OF GEORGIA, LLC Quality                    6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 ADVANCED DERMATOLOGY OF GEORGIA, LLC Quality                    6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 ADVANCED DERMATOLOGY OF GEORGIA, LLC Improvement Activities     4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 NORTH GEORGIA DERMATOLOGY, P.C.      Improvement Activities     4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 NORTH GEORGIA DERMATOLOGY, P.C.      Improvement Activities     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 ADVANCED DERMATOLOGY OF GEORGIA, LLC Cost                       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>018 NORTH GEORGIA DERMATOLOGY, P.C.      Cost                       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>019 ADVANCED DERMATOLOGY OF GEORGIA, LLC Improvement Activities     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>020 ADVANCED DERMATOLOGY OF GEORGIA, LLC Improvement Activities     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>021 ADVANCED DERMATOLOGY OF GEORGIA, LLC Improvement Activities     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>017 NORTH GEORGIA DERMATOLOGY, P.C.      Cost                       1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>019 ADVANCED DERMATOLOGY OF GEORGIA, LLC Cost                       1</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">qq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
+<span><span class="va">qq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 2.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `participation_type = fct_part(participation_type)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'participation_type' not found</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
 <span><span class="va">qq</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 57</span></span></span>
-<span><span class="co">#&gt;    year npi        npi_type   first middle last    state first_approved_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 Individual SARAH K      HUSSAIN PA    2014-01-27         </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 49 more variables: years_in_medicare &lt;dbl&gt;, participation_type &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   beneficiaries &lt;int&gt;, services &lt;int&gt;, charges &lt;dbl&gt;, final_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_adjust &lt;dbl&gt;, quality_score &lt;dbl&gt;, pi_score &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cost_score &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qi_bonus &lt;dbl&gt;, qp_status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   qp_score_type &lt;chr&gt;, ams_mips_eligible &lt;lgl&gt;, newly_enrolled &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   is_maqi &lt;lgl&gt;, org_id &lt;int&gt;, org_size &lt;int&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_address &lt;chr&gt;, org_city &lt;chr&gt;, org_state &lt;ord&gt;, org_zip &lt;chr&gt;, …</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'qq' not found</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
