@@ -69,7 +69,6 @@ NULL
 #' @param df data frame
 #' @param cols numeric columns to calculate absolute/relative change & rate of return
 #' @param csm numeric cols to calculate cumulative sum for
-#' @param digits Number of digits to round to, default is 3
 #' @rdname calculations
 #' @examplesIf interactive()
 #' dplyr::filter(ex, group == "A") |>
@@ -80,19 +79,35 @@ NULL
 change <- function(df, cols, csm = NULL, digits = 5) {
 
   results <- dplyr::mutate(df,
-    dplyr::across({{ cols }}, list(
-      chg = \(x) chg(x),
-      pct = \(x) pct(x)),
+    dplyr::across(
+      {{ cols }},
+      list(
+        chg = \(x) chg(x),
+        pct = \(x) pct(x)),
       .names = "{.col}_{.fn}")) |>
-    dplyr::mutate(dplyr::across(dplyr::ends_with("_pct"), ~ .x + 1, .names = "{.col}_ror")) |>
-    dplyr::mutate(dplyr::across(dplyr::where(is.double), ~janitor::round_half_up(., digits = digits))) |>
-    dplyr::relocate(dplyr::ends_with("_chg"), dplyr::ends_with("_pct"), dplyr::ends_with("_pct_ror"), .after = {{ cols }})
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::ends_with("_pct"), ~ .x + 1,
+        .names = "{.col}_ror")
+      ) |>
+    dplyr::relocate(
+      dplyr::ends_with("_chg"),
+      dplyr::ends_with("_pct"),
+      dplyr::ends_with("_pct_ror"),
+      .after = {{ cols }}
+      )
 
   names(results) <- gsub("_pct_ror", "_ror", names(results))
 
   if (!is.null(csm)) {
-    results <- dplyr::mutate(results,
-               dplyr::across(dplyr::ends_with({{ csm }}), list(cusum = \(x) cumsum(x)), .names = "{.col}_{.fn}"))
+    results <- dplyr::mutate(
+      results,
+      dplyr::across(
+        dplyr::ends_with({{ csm }}),
+        list(
+          cusum = \(x) cumsum(x)),
+        .names = "{.col}_{.fn}")
+      )
   }
   return(results)
 }

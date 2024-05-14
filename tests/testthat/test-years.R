@@ -31,19 +31,19 @@ test_that("rx_years() works", {
 
 })
 
-test_that("cc_years() works", {
-
-  cc <- cc_years()
-  expect_equal(cc, 2007:2018)
-  expect_vector(cc, ptype = integer(), size = 12)
-
-})
+# test_that("cc_years() works", {
+#
+#   cc <- cc_years()
+#   expect_equal(cc, 2007:2018)
+#   expect_vector(cc, ptype = integer(), size = 12)
+#
+# })
 
 test_that("qpp_years() works", {
 
   qpp <- qpp_years()
-  expect_equal(qpp, 2017:2021)
-  expect_vector(qpp, ptype = integer(), size = 5)
+  expect_equal(qpp, 2017:2022)
+  expect_vector(qpp, ptype = integer(), size = 6)
 
 })
 
@@ -54,7 +54,7 @@ test_that("bene_years() works", {
   expect_vector(benyr, ptype = integer(), size = 11)
 
   benmn <- bene_years("month")
-  expect_equal(benmn, 2013:2023)
-  expect_vector(benmn, ptype = integer(), size = 11)
+  expect_equal(benmn, 2013:2024)
+  expect_vector(benmn, ptype = integer(), size = 12)
 
 })

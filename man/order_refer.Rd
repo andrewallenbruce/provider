@@ -50,10 +50,10 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 \code{order_refer()} returns a provider's eligibility to order and refer within
 Medicare to:
+}
+\details{
 \itemize{
 \item \strong{Part B}: Clinical Laboratory Services, Imaging Services
 \item \strong{DME}: Durable Medical Equipment, Prosthetics, Orthotics, & Supplies (DMEPOS)

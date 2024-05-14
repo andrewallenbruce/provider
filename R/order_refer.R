@@ -1,8 +1,5 @@
 #' Order and Referral Eligibility
 #'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
 #' `order_refer()` returns a provider's eligibility to order and refer within
 #' Medicare to:
 #'
