@@ -134,8 +134,6 @@ utils::globalVariables(c(
   "cola",
   # <mips_2021>
   "collection_type",
-  # <compare_conditions>
-  "condition",
   # <laboratories>
   "confirmed",
   # <laboratories>
@@ -164,8 +162,6 @@ utils::globalVariables(c(
   "definition",
   # <gt_datadict>
   "Definition",
-  # <conditions>
-  "demographic",
   # <meta.json>
   "describedBy",
   # <cms_dataset_search>
@@ -225,7 +221,6 @@ utils::globalVariables(c(
   # <cms_update>
   # <meta.json>
   "distribution_title",
-  # <conditions>
   # <outpatient>
   # <prescribers>
   # <quality_payment>
@@ -323,7 +318,6 @@ utils::globalVariables(c(
   # <meta.json>
   "landingPage",
   # <compare_hcpcs>
-  # <compare_conditions>
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
   # <tidyup_service.util>
@@ -414,8 +408,6 @@ utils::globalVariables(c(
   "pos",
   # <nppes>
   "pr",
-  # <compare_conditions>
-  "prevalence",
   # <mips_2021>
   "prf_rate",
   # <rbcs_util>
@@ -481,7 +473,6 @@ utils::globalVariables(c(
   # <tidyup_service.util>
   "state",
   # <beneficiaries>
-  # <conditions>
   # <prescribers>
   # <utilization>
   # <fct_stabb>
@@ -507,8 +498,6 @@ utils::globalVariables(c(
   "subgroup_general",
   # <hospitals>
   "subgroup_other",
-  # <compare_conditions>
-  "sublevel",
   # <hospitals>
   "subtotal",
   # <medline>
@@ -569,7 +558,6 @@ utils::globalVariables(c(
   # <beneficiaries>
   # <betos>
   # <clinicians>
-  # <conditions>
   # <hospitals>
   # <laboratories>
   # <mips_2021>
@@ -592,7 +580,6 @@ utils::globalVariables(c(
   # <change_year>
   # <cms_update>
   # <compare_hcpcs>
-  # <compare_conditions>
   # <open_ids>
   # <cols_qelig>
   "year",

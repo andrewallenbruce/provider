@@ -149,17 +149,6 @@ fct_subdemo <- function(x) {
                        "non-Hispanic White"))
 }
 
-#' Convert multiple chronic condition groups to labelled, ordered factor
-#' @param x vector
-#' @autoglobal
-#' @noRd
-fct_mcc <- function(x) {
-  factor(x,
-         levels = c("0 to 1", "2 to 3", "4 to 5", "6+"),
-         labels = c("0-1", "2-3", "4-5", "6+"),
-         ordered = TRUE)
-}
-
 #' Convert QPP participation types to unordered factor
 #' @param x vector
 #' @autoglobal

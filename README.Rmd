@@ -63,11 +63,11 @@ affiliations(npi = 1023630738,
 ### `beneficiaries()`
 
 ```{r}
-beneficiaries(year   = 2023, 
-              period = "Year", 
+beneficiaries(year   = 2024, 
+              period = "Month", 
               level  = "County", 
               state  = "GA", 
-              county = "Lowndes") |> 
+              county = "Lowndes County") |> 
   glimpse()
 ```
 
@@ -75,29 +75,6 @@ beneficiaries(year   = 2023,
 
 ```{r}
 clinicians(npi = 1932365699) |> 
-  glimpse()
-```
-
-### `conditions()`
-
-```{r}
-conditions(year  = 2018, 
-           set   = "Multiple", 
-           level = "National", 
-           age   = "All", 
-           demo  = "All", 
-           mcc   = "6+") |> 
-  glimpse()
-```
-
-
-```{r}
-conditions(year      = 2018, 
-           set       = "Specific", 
-           level     = "National", 
-           age       = "All", 
-           demo      = "All",
-           condition = "Arthritis") |> 
   glimpse()
 ```
 
@@ -250,7 +227,7 @@ reassignments(npi = 1932365699,
 ```{r}
 utilization(year = 2021, 
             npi  = 1932365699, 
-            type = "provider") |> 
+            type = "Provider") |> 
   glimpse()
 ```
 
@@ -259,7 +236,7 @@ utilization(year = 2021,
 ```{r}
 p <- utilization(year = 2021, 
                  npi = 1932365699, 
-                 type = "provider")
+                 type = "Provider")
 
 select(p, year, performance) |> 
   unnest(performance) |> 
@@ -286,7 +263,7 @@ select(p, year, conditions) |>
 utilization(year  = 2021, 
             npi   = 1932365699,
             hcpcs = "99214",
-            type  = "service") |> 
+            type  = "Service") |> 
   glimpse()
 ```
 
@@ -296,7 +273,7 @@ utilization(year  = 2021,
             hcpcs = "99205", 
             level = "National",
             pos   = "F",
-            type  = "geography") |> 
+            type  = "Geography") |> 
   glimpse()
 ```
 

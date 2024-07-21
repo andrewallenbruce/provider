@@ -43,9 +43,6 @@ future::plan(multisession, workers = 4)
 ind     <- utilization_(npi = 1043477615, type = "Provider")
 # Retrieve provider's utilization data by HCPCS
 srvc    <- utilization_(npi = 1023076643, type = "Service")
-
-# Retrieve state & national chronic condition data to compare with
-chronic <- compare_conditions(ind)
 # Retrieve state & national HCPCS data to compare with
 hcpcs   <- compare_hcpcs(srvc)
 
@@ -286,35 +283,3 @@ ind |>
 
 
 <br>
-
-### Comparison: Chronic Conditions
-
-
-```{r}
-chronic |>
-  # filter(prevalence > 0)
-  # filter(!if_any(contains("20"), ~ . <= 0)) |>
-  pivot_wider(names_from = year, 
-              values_from = prevalence) |>
-  gt(rowname_col = "level") |> 
-  fmt_percent(columns = contains('0'), decimals = 0) |>
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  sub_missing(missing_text = "") |> 
-  cols_nanoplot(
-    columns = starts_with("20"),
-    plot_type = "bar",
-    new_col_name = "change",
-    new_col_label = "change",
-    missing_vals = "remove",
-    options = nanoplot_options(
-      show_data_line = FALSE,
-      show_data_area = FALSE,
-      data_bar_stroke_color = "transparent"
-    )
-  )
-```
-
-
-
-
-<br><br>

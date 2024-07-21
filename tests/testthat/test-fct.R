@@ -83,12 +83,6 @@ test_that("fct_subdemo() works", {
   expect_equal(fct_subdemo(x), y)
 })
 
-test_that("fct_mcc() works", {
-  x <- c("0 to 1", "2 to 3", "4 to 5", "6+")
-  y <- ordered(c("0-1", "2-3", "4-5", "6+"))
-  expect_equal(fct_mcc(x), y)
-})
-
 test_that("fct_part() works", {
   x <- c("Group", "Individual", "MIPS APM")
   y <- factor(c("Group", "Individual", "MIPS APM"))
@@ -259,17 +253,6 @@ test_that("fct_maj() works", {
   expect_equal(fct_maj(x), factor(y, levels = y))
 })
 
-test_that("fct_cc() works", {
-  x <- c(
-    "All", "Alcohol Abuse", "Alzheimer's Disease/Dementia", "Arthritis",
-    "Asthma", "Atrial Fibrillation", "Autism Spectrum Disorders", "Cancer",
-    "Chronic Kidney Disease", "COPD", "Depression", "Diabetes",
-    "Drug Abuse/Substance Abuse", "Heart Failure",
-    "Hepatitis (Chronic Viral B & C)", "HIV/AIDS", "Hyperlipidemia",
-    "Hypertension", "Ischemic Heart Disease", "Osteoporosis",
-    "Schizophrenia and Other Psychotic Disorders", "Stroke")
-  expect_equal(fct_cc(x), ordered(x, levels = x))
-})
 
 test_that("fct_record() works", {
   x <- c("Physician Assistant", "Reassignment")

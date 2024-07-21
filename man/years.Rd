@@ -6,7 +6,6 @@
 \alias{out_years}
 \alias{rx_years}
 \alias{util_years}
-\alias{cc_years}
 \alias{qpp_years}
 \alias{bene_years}
 \title{Years Currently Searchable for APIs}
@@ -18,8 +17,6 @@ out_years()
 rx_years()
 
 util_years()
-
-cc_years()
 
 qpp_years()
 

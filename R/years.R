@@ -101,22 +101,6 @@ util_years <- function() {
 #' @autoglobal
 #'
 #' @export
-cc_years <- function() {
-  as.integer(
-    cms_update(
-      "Specific Chronic Conditions",
-      "years"
-    )
-  )
-}
-
-#' @rdname years
-#'
-#' @keywords internal
-#'
-#' @autoglobal
-#'
-#' @export
 qpp_years <- function() {
   as.integer(
     cms_update(

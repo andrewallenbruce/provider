@@ -59,42 +59,42 @@ affiliations(npi = 1023630738,
 ### `beneficiaries()`
 
 ``` r
-beneficiaries(year   = 2023, 
-              period = "Year", 
+beneficiaries(year   = 2024, 
+              period = "Month", 
               level  = "County", 
               state  = "GA", 
-              county = "Lowndes") |> 
+              county = "Lowndes County") |> 
   glimpse()
 ```
 
-    #> Rows: 1
+    #> Rows: 3
     #> Columns: 26
-    #> $ year              <int> 2023
-    #> $ period            <ord> Year
-    #> $ level             <ord> County
-    #> $ state             <ord> GA
-    #> $ state_name        <ord> Georgia
-    #> $ county            <chr> "Lowndes"
-    #> $ fips              <chr> "13185"
-    #> $ bene_total        <int> 20515
-    #> $ bene_orig         <int> 11098
-    #> $ bene_ma_oth       <int> 9418
-    #> $ bene_total_aged   <int> 17046
-    #> $ bene_aged_esrd    <int> 124
-    #> $ bene_aged_no_esrd <int> 16923
-    #> $ bene_total_dsb    <int> 3469
-    #> $ bene_dsb_esrd     <int> 145
-    #> $ bene_dsb_no_esrd  <int> 3325
-    #> $ bene_total_ab     <int> 19038
-    #> $ bene_ab_orig      <int> 9635
-    #> $ bene_ab_ma_oth    <int> 9403
-    #> $ bene_total_rx     <int> 14850
-    #> $ bene_rx_pdp       <int> 5940
-    #> $ bene_rx_mapd      <int> 8910
-    #> $ bene_rx_lis_elig  <int> 5561
-    #> $ bene_rx_lis_full  <int> 456
-    #> $ bene_rx_lis_part  <int> 133
-    #> $ bene_rx_lis_no    <int> 8701
+    #> $ year              <int> 2024, 2024, 2024
+    #> $ period            <ord> January, February, March
+    #> $ level             <ord> County, County, County
+    #> $ state             <ord> GA, GA, GA
+    #> $ state_name        <ord> Georgia, Georgia, Georgia
+    #> $ county            <chr> "Lowndes County", "Lowndes County", "Lowndes County"
+    #> $ fips              <chr> "13185", "13185", "13185"
+    #> $ bene_total        <int> 20848, 20854, 20874
+    #> $ bene_orig         <int> 10648, 10609, 10579
+    #> $ bene_ma_oth       <int> 10200, 10245, 10295
+    #> $ bene_total_aged   <int> 17556, 17561, 17581
+    #> $ bene_aged_esrd    <int> 118, 114, 112
+    #> $ bene_aged_no_esrd <int> 17438, 17447, 17469
+    #> $ bene_total_dsb    <int> 3292, 3293, 3293
+    #> $ bene_dsb_esrd     <int> 144, 144, 142
+    #> $ bene_dsb_no_esrd  <int> 3148, 3149, 3151
+    #> $ bene_total_ab     <int> 19357, 19403, 19424
+    #> $ bene_ab_orig      <int> 9172, 9173, 9148
+    #> $ bene_ab_ma_oth    <int> 10185, 10230, 10276
+    #> $ bene_total_rx     <int> 15492, 15512, 15529
+    #> $ bene_rx_pdp       <int> 5868, 5835, 5809
+    #> $ bene_rx_mapd      <int> 9624, 9677, 9720
+    #> $ bene_rx_lis_elig  <int> 5669, 5675, 5678
+    #> $ bene_rx_lis_full  <int> 600, 595, 601
+    #> $ bene_rx_lis_part  <int> 23, 23, 22
+    #> $ bene_rx_lis_no    <int> 9200, 9219, 9228
 
 ### `clinicians()`
 
@@ -104,7 +104,7 @@ clinicians(npi = 1932365699) |>
 ```
 
     #> Rows: 1
-    #> Columns: 18
+    #> Columns: 19
     #> $ npi           <chr> "1932365699"
     #> $ pac           <chr> "0042370496"
     #> $ enid          <chr> "I20171107000894"
@@ -112,6 +112,7 @@ clinicians(npi = 1932365699) |>
     #> $ middle        <chr> "MICHAEL"
     #> $ last          <chr> "SMITH"
     #> $ gender        <fct> Male
+    #> $ credential    <chr> "OD"
     #> $ school        <chr> "ILLINOIS COLLEGE OF OPTOMETRY AT CHICAGO"
     #> $ grad_year     <int> 2008
     #> $ specialty     <chr> "OPTOMETRY"
@@ -123,58 +124,6 @@ clinicians(npi = 1932365699) |>
     #> $ state_org     <ord> CO
     #> $ zip_org       <chr> "81303"
     #> $ phone_org     <chr> "9702478762"
-
-### `conditions()`
-
-``` r
-conditions(year  = 2018, 
-           set   = "Multiple", 
-           level = "National", 
-           age   = "All", 
-           demo  = "All", 
-           mcc   = "6+") |> 
-  glimpse()
-```
-
-    #> Rows: 1
-    #> Columns: 12
-    #> $ year                <int> 2018
-    #> $ level               <ord> National
-    #> $ sublevel            <ord> National
-    #> $ age                 <fct> All
-    #> $ demographic         <fct> All
-    #> $ subdemo             <fct> All
-    #> $ mcc                 <ord> 6+
-    #> $ prevalence          <dbl> 0.177
-    #> $ tot_pymt_percap     <dbl> 32475.26
-    #> $ tot_std_pymt_percap <dbl> 30118.69
-    #> $ hosp_readmit_rate   <dbl> 0.227
-    #> $ er_visits_per_1k    <dbl> 1922.216
-
-``` r
-conditions(year      = 2018, 
-           set       = "Specific", 
-           level     = "National", 
-           age       = "All", 
-           demo      = "All",
-           condition = "Arthritis") |> 
-  glimpse()
-```
-
-    #> Rows: 1
-    #> Columns: 12
-    #> $ year                <int> 2018
-    #> $ level               <ord> National
-    #> $ sublevel            <ord> National
-    #> $ age                 <fct> All
-    #> $ demographic         <fct> All
-    #> $ subdemo             <fct> All
-    #> $ condition           <ord> Arthritis
-    #> $ prevalence          <dbl> 0.3347
-    #> $ tot_pymt_percap     <dbl> 16890.05
-    #> $ tot_std_pymt_percap <dbl> 16006.14
-    #> $ hosp_readmit_rate   <dbl> 0.1843
-    #> $ er_visits_per_1k    <dbl> 1013.535
 
 ### `hospitals()`
 
@@ -303,7 +252,7 @@ open_payments(year  = 2021,
     #> $ license_state       <ord> OK
     #> $ physician_ownership <lgl> FALSE
     #> $ third_party_payment <chr> "No Third Party Payment"
-    #> $ publish_date        <date> 2024-01-18
+    #> $ publish_date        <date> 2024-06-28
     #> $ publish_delay       <lgl> FALSE
     #> $ publish_dispute     <lgl> FALSE
     #> $ related_product     <lgl> TRUE
@@ -414,35 +363,7 @@ prescribers(year = 2021,
   glimpse()
 ```
 
-    #> Rows: 1
-    #> Columns: 27
-    #> $ year           <int> 2021
-    #> $ npi            <chr> "1003000423"
-    #> $ entity_type    <fct> Individual
-    #> $ first          <chr> "Jennifer"
-    #> $ middle         <chr> "A"
-    #> $ last           <chr> "Velotta"
-    #> $ gender         <fct> Female
-    #> $ credential     <chr> "MD"
-    #> $ specialty      <chr> "Obstetrics & Gynecology"
-    #> $ source         <fct> Medicare Specialty Code
-    #> $ address        <chr> "11100 Euclid Ave"
-    #> $ city           <chr> "Cleveland"
-    #> $ state          <ord> OH
-    #> $ zip            <chr> "44106"
-    #> $ fips           <chr> "39"
-    #> $ ruca           <chr> "1"
-    #> $ country        <chr> "US"
-    #> $ tot_claims     <int> 206
-    #> $ tot_fills      <dbl> 378.2667
-    #> $ tot_cost       <dbl> 20757.65
-    #> $ tot_supply     <int> 10231
-    #> $ tot_benes      <int> 66
-    #> $ rx_rate_opioid <dbl> 0
-    #> $ hcc_risk_avg   <dbl> 0.8011638
-    #> $ detailed       <list> [<tbl_df[1 x 32]>]
-    #> $ demographics   <list> [<tbl_df[1 x 14]>]
-    #> $ gte_65         <list> [<tbl_df[1 x 8]>]
+    #> Error in readBin(body, character()): R character strings are limited to 2^31-1 bytes
 
 ``` r
 prescribers(year = 2019, 
@@ -453,7 +374,7 @@ prescribers(year = 2019,
 ```
 
     #> Rows: 1
-    #> Columns: 18
+    #> Columns: 17
     #> $ year         <int> 2019
     #> $ npi          <chr> "1003000126"
     #> $ last         <chr> "Enkeshafi"
@@ -462,7 +383,6 @@ prescribers(year = 2019,
     #> $ state        <ord> MD
     #> $ fips         <chr> "24"
     #> $ specialty    <chr> "Internal Medicine"
-    #> $ source       <fct> Medicare Specialty Code
     #> $ brand_name   <chr> "Atorvastatin Calcium"
     #> $ generic_name <chr> "Atorvastatin Calcium"
     #> $ tot_claims   <int> 41
@@ -693,33 +613,57 @@ reassignments(npi = 1932365699,
 ``` r
 utilization(year = 2021, 
             npi  = 1932365699, 
-            type = "provider") |> 
+            type = "Provider") |> 
   glimpse()
 ```
 
-    #> Error in `utilization()`:
-    #> ! `type` must be one of "Provider", "Service", or "Geography", not
-    #>   "provider".
-    #> ℹ Did you mean "Provider"?
+    #> Rows: 1
+    #> Columns: 20
+    #> $ year         <int> 2021
+    #> $ npi          <chr> "1932365699"
+    #> $ entity_type  <fct> Individual
+    #> $ first        <chr> "Stefan"
+    #> $ middle       <chr> "M"
+    #> $ last         <chr> "Smith"
+    #> $ gender       <fct> Male
+    #> $ credential   <chr> "OD"
+    #> $ specialty    <chr> "Optometry"
+    #> $ address      <chr> "724 St. Louis Road"
+    #> $ city         <chr> "Collinsville"
+    #> $ state        <ord> IL
+    #> $ zip          <chr> "62234"
+    #> $ fips         <chr> "17"
+    #> $ ruca         <chr> "1"
+    #> $ country      <chr> "US"
+    #> $ par          <lgl> TRUE
+    #> $ performance  <list> [<tbl_df[1 x 11]>]
+    #> $ demographics <list> [<tbl_df[1 x 12]>]
+    #> $ conditions   <list> [<tbl_df[1 x 1]>]
 
 ``` r
 p <- utilization(year = 2021, 
                  npi = 1932365699, 
-                 type = "provider")
-```
+                 type = "Provider")
 
-    #> Error in `utilization()`:
-    #> ! `type` must be one of "Provider", "Service", or "Geography", not
-    #>   "provider".
-    #> ℹ Did you mean "Provider"?
-
-``` r
 select(p, year, performance) |> 
   unnest(performance) |> 
   glimpse()
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'p' not found
+    #> Rows: 1
+    #> Columns: 12
+    #> $ year            <int> 2021
+    #> $ tot_hcpcs       <int> 19
+    #> $ tot_benes       <int> 279
+    #> $ tot_srvcs       <int> 475
+    #> $ tot_charges     <dbl> 57098.8
+    #> $ tot_allowed     <dbl> 48345.19
+    #> $ tot_payment     <dbl> 31966.13
+    #> $ tot_std_pymt    <dbl> 31316.51
+    #> $ .copay_deduct   <dbl> 16379.06
+    #> $ .srvcs_per_bene <dbl> 1.702509
+    #> $ .pymt_per_bene  <dbl> 114.5739
+    #> $ .pymt_per_srvc  <dbl> 67.29712
 
 ``` r
 select(p, year, demographics) |> 
@@ -727,7 +671,21 @@ select(p, year, demographics) |>
   glimpse()
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'p' not found
+    #> Rows: 1
+    #> Columns: 13
+    #> $ year               <int> 2021
+    #> $ bene_age_avg       <int> 72
+    #> $ bene_age_lt65      <int> 16
+    #> $ bene_age_65_74     <int> 181
+    #> $ bene_age_75_84     <int> 63
+    #> $ bene_age_gt84      <int> 19
+    #> $ bene_gen_female    <int> 157
+    #> $ bene_gen_male      <int> 122
+    #> $ bene_race_wht      <int> 245
+    #> $ bene_race_nonwht   <int> 34
+    #> $ bene_dual          <int> 40
+    #> $ bene_ndual         <int> 239
+    #> $ bene_race_detailed <list> [<tbl_df[1 x 5]>]
 
 ``` r
 select(p, year, conditions) |> 
@@ -735,34 +693,84 @@ select(p, year, conditions) |>
   glimpse()
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'p' not found
+    #> Rows: 1
+    #> Columns: 2
+    #> $ year         <int> 2021
+    #> $ hcc_risk_avg <dbl> 0.7719
 
 ``` r
 utilization(year  = 2021, 
             npi   = 1932365699,
             hcpcs = "99214",
-            type  = "service") |> 
+            type  = "Service") |> 
   glimpse()
 ```
 
-    #> Error in `utilization()`:
-    #> ! `type` must be one of "Provider", "Service", or "Geography", not
-    #>   "service".
-    #> ℹ Did you mean "Service"?
+    #> Rows: 1
+    #> Columns: 32
+    #> $ year         <int> 2021
+    #> $ npi          <chr> "1932365699"
+    #> $ level        <ord> Provider
+    #> $ first        <chr> "Stefan"
+    #> $ middle       <chr> "M"
+    #> $ last         <chr> "Smith"
+    #> $ gender       <fct> Male
+    #> $ credential   <chr> "O.D."
+    #> $ specialty    <chr> "Optometry"
+    #> $ address      <chr> "724 St. Louis Road"
+    #> $ city         <chr> "Collinsville"
+    #> $ state        <ord> IL
+    #> $ zip          <chr> "62234"
+    #> $ fips         <chr> "17"
+    #> $ ruca         <chr> "1"
+    #> $ country      <chr> "US"
+    #> $ par          <lgl> TRUE
+    #> $ hcpcs        <chr> "99214"
+    #> $ hcpcs_desc   <chr> "Established patient outpatient visit, total time 30-39 m…
+    #> $ category     <chr> "E&M"
+    #> $ subcategory  <chr> "Office/Outpatient Services"
+    #> $ family       <chr> "Office E&M - Established"
+    #> $ procedure    <fct> Non-procedure
+    #> $ drug         <lgl> FALSE
+    #> $ pos          <fct> Non-facility
+    #> $ tot_benes    <int> 24
+    #> $ tot_srvcs    <int> 27
+    #> $ tot_day      <int> 27
+    #> $ avg_charge   <dbl> 134.7407
+    #> $ avg_allowed  <dbl> 132.7281
+    #> $ avg_payment  <dbl> 102.7159
+    #> $ avg_std_pymt <dbl> 99.46074
 
 ``` r
 utilization(year  = 2021, 
             hcpcs = "99205", 
             level = "National",
             pos   = "F",
-            type  = "geography") |> 
+            type  = "Geography") |> 
   glimpse()
 ```
 
-    #> Error in `utilization()`:
-    #> ! `type` must be one of "Provider", "Service", or "Geography", not
-    #>   "geography".
-    #> ℹ Did you mean "Geography"?
+    #> Rows: 1
+    #> Columns: 19
+    #> $ year         <int> 2021
+    #> $ level        <ord> National
+    #> $ state        <ord> National
+    #> $ hcpcs        <chr> "99205"
+    #> $ hcpcs_desc   <chr> "New patient outpatient visit, total time 60-74 minutes"
+    #> $ category     <chr> "E&M"
+    #> $ subcategory  <chr> "Office/Outpatient Services"
+    #> $ family       <chr> "Office E&M - New"
+    #> $ procedure    <fct> Non-procedure
+    #> $ drug         <lgl> FALSE
+    #> $ pos          <fct> Facility
+    #> $ tot_provs    <int> 65502
+    #> $ tot_benes    <int> 574426
+    #> $ tot_srvcs    <int> 653339
+    #> $ tot_day      <int> 653311
+    #> $ avg_charge   <dbl> 493.5003
+    #> $ avg_allowed  <dbl> 186.2096
+    #> $ avg_payment  <dbl> 143.4408
+    #> $ avg_std_pymt <dbl> 139.6115
 
 ------------------------------------------------------------------------
 

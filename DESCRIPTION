@@ -3,8 +3,8 @@ Package: provider
 Title: Access Public Healthcare Provider Data
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
+    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Provides various features to facilitate easy access to
     publicly available healthcare provider data. Includes functions to
     tidy the data being accessed, whether for reporting purposes or
@@ -75,7 +75,6 @@ Remotes:
     github::andrewallenbruce/fuimus,
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm,
-    github::rstudio/gt,
     github::yutannihilation/ggsflabel
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
@@ -86,4 +85,4 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

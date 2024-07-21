@@ -80,49 +80,79 @@
 #' @name utilization
 NULL
 
-#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [util_years()] to return a vector of the years currently available.
-#' @param type < *character* > // **required** dataset to query, `"Provider"`,
-#' `"Service"`, `"Geography"`
-#' @param npi < *integer* > 10-digit national provider identifier
-#' @param first,last,organization < *character* > Individual/Organizational
-#' provider's name
-#' @param credential < *character* > Individual provider's credentials
-#' @param gender < *character* > Individual provider's gender; `"F"` (Female),
-#' `"M"` (Male)
-#' @param entype < *character* > Provider entity type; `"I"` (Individual),
-#' `"O"` (Organization)
-#' @param city < *character* > City where provider is located
-#' @param state < *character* > State where provider is located
-#' @param fips < *character* > Provider's state's FIPS code
-#' @param zip < *character* > Provider’s zip code
-#' @param ruca < *character* > Provider’s RUCA code
-#' @param country < *character* > Country where provider is located
-#' @param specialty < *character* > Provider specialty code reported on the
-#' largest number of claims submitted
-#' @param par < *boolean* > Identifies whether the provider participates in
-#' Medicare and/or accepts assignment of Medicare allowed amounts
-#' @param hcpcs < *character* > HCPCS code used to identify the specific
-#' medical service furnished by the provider
-#' @param drug < *boolean* > Identifies whether the HCPCS code is listed in the
-#' Medicare Part B Drug Average Sales Price (ASP) File
-#' @param pos < *character* > Identifies whether the Place of Service (POS)
-#' submitted on the claims is a:
-#' + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
-#' + Non-facility (`"O"`): Office, Home, etc.
-#' @param level < *character* > Geographic level by which the data will be
-#' aggregated:
-#' + `"State"`: Data is aggregated for each state
-#' + `"National"`: Data is aggregated across all states for a given HCPCS Code
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param rbcs < *boolean* > // __default:__ `TRUE` Add Restructured BETOS
-#' Classifications to HCPCS codes
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest `performance`, `demographics` and `conditions`
-#' @param detailed < *boolean* > // __default:__ `FALSE` Include nested `medical` and `drug` columns
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... Empty
+#' @param year `<int>` // **required** Year data was reported, in `YYYY` format.
+#'   Run [util_years()] to return a vector of the years currently available.
+#'
+#' @param type `<chr>` // **required** dataset to query, `"Provider"`,
+#'   `"Service"`, `"Geography"`
+#'
+#' @param npi `<int>` 10-digit national provider identifier
+#'
+#' @param first,last,organization `<chr>` Individual/Organizational provider's
+#'   name
+#'
+#' @param credential `<chr>` Individual provider's credentials
+#'
+#' @param gender `<chr>` Individual provider's gender; `"F"` (Female), `"M"`
+#'   (Male)
+#'
+#' @param entype `<chr>` Provider entity type; `"I"` (Individual), `"O"`
+#'   (Organization)
+#'
+#' @param city `<chr>` City where provider is located
+#'
+#' @param state `<chr>` State where provider is located
+#'
+#' @param fips `<chr>` Provider's state's FIPS code
+#'
+#' @param zip `<chr>` Provider’s zip code
+#'
+#' @param ruca `<chr>` Provider’s RUCA code
+#'
+#' @param country `<chr>` Country where provider is located
+#'
+#' @param specialty `<chr>` Provider specialty code reported on the largest
+#'   number of claims submitted
+#'
+#' @param par `<lgl>` Identifies whether the provider participates in Medicare
+#'   and/or accepts assignment of Medicare allowed amounts
+#'
+#' @param hcpcs `<chr>` HCPCS code used to identify the specific medical service
+#'   furnished by the provider
+#'
+#' @param drug `<lgl>` Identifies whether the HCPCS code is listed in the
+#'   Medicare Part B Drug Average Sales Price (ASP) File
+#'
+#' @param pos `<chr>` Identifies whether the Place of Service (POS) submitted on
+#'   the claims is a:
+#'
+#'    + Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
+#'    + Non-facility (`"O"`): Office, Home, etc.
+#'
+#' @param level `<chr>` Geographic level by which the data will be aggregated:
+#'
+#'    + `"State"`: Data is aggregated for each state
+#'    + `"National"`: Data is aggregated across all states for a given HCPCS Code
+#'
+#' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
+#'
+#' @param rbcs `<lgl>` // __default:__ `TRUE` Add Restructured BETOS
+#'   Classifications to HCPCS codes
+#'
+#' @param nest `<lgl>` // __default:__ `TRUE` Nest `performance`, `demographics`
+#'   and `conditions` columns
+#'
+#' @param detailed `<lgl>` // __default:__ `FALSE` Include nested `medical` and
+#'   `drug` columns
+#'
+#' @param na.rm `<lgl>` // __default:__ `TRUE` Remove empty rows and columns
+#'
+#' @param ... Empty dots
+#'
 #' @rdname utilization
+#'
 #' @autoglobal
+#'
 #' @export
 utilization <- function(year,
                         type,
@@ -154,15 +184,15 @@ utilization <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, as.character(util_years()))
-  type <- rlang::arg_match(type, c('Provider', 'Service', 'Geography'))
+  year <- rlang::arg_match0(year, as.character(util_years()))
+  type <- rlang::arg_match0(type, c('Provider', 'Service', 'Geography'))
 
   if (type != 'Provider') c(nest, detailed) %<-% c(FALSE, FALSE)
   if (type == 'Provider') c(rbcs, hcpcs = NULL, pos = NULL, drug = NULL) %<-% c(FALSE) # nolint
   if (type != 'Geography') {
     param_state <- 'Rndrng_Prvdr_State_Abrvtn'
-    param_fips <- 'Rndrng_Prvdr_State_FIPS'
-    level <- NULL
+    param_fips  <- 'Rndrng_Prvdr_State_FIPS'
+    level       <- NULL
   }
 
   if (type == 'Geography') {
@@ -181,7 +211,7 @@ utilization <- function(year,
     country <- NULL
     specialty <- NULL
     par <- NULL # nolint
-    level <- level %nn% rlang::arg_match(level, c('National', 'State'))
+    level <- level %nn% rlang::arg_match0(level, c('National', 'State'))
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
   }
 
@@ -192,7 +222,7 @@ utilization <- function(year,
   par   <- par %nn% tf_2_yn(par)              # nolint
   hcpcs <- hcpcs %nn% as.character(hcpcs)
   drug  <- drug %nn% tf_2_yn(drug)
-  pos   <- pos %nn% rlang::arg_match(pos, c("F", "O"))
+  pos   <- pos %nn% rlang::arg_match0(pos, c("F", "O"))
 
   args <- dplyr::tribble(
     ~param,                           ~arg,
@@ -221,10 +251,18 @@ utilization <- function(year,
     'Service'    = api_years('srv'),
     'Geography'  = api_years('geo'))
 
-  id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
+  id <- dplyr::filter(
+    yr,
+    year == {{ year }}
+    ) |>
+    dplyr::pull(distro)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                id, "/data.json?", encode_param(args))
+  url <- paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    id,
+    "/data.json?",
+
+    encode_param(args))
 
   response <- httr2::request(url) |> httr2::req_perform()
 
@@ -277,51 +315,70 @@ utilization <- function(year,
 }
 
 #' Parallelized [utilization()]
-#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [util_years()] to return a vector of the years currently available.
+#'
+#' @param year `<int>` // **required** Year data was reported, in `YYYY` format.
+#'   Run [util_years()] to return a vector of the years currently available.
+#'
 #' @param ... Pass arguments to [utilization()].
+#'
 #' @rdname utilization
+#'
 #' @autoglobal
+#'
 #' @export
 utilization_ <- function(year = util_years(),
                          ...) {
-  furrr::future_map_dfr(year, utilization, ...,
-                        .options = furrr::furrr_options(seed = NULL))
-
+  furrr::future_map_dfr(
+    year,
+    utilization,
+    ...,
+    .options = furrr::furrr_options(seed = NULL))
 }
 
 #' @param results data frame from [utilization(type = "Provider")]
-#' @param nest < *boolean* > Nest `demographics` and `conditions`
-#' @param detailed < *boolean* > Include `detailed` column
+#'
+#' @param nest `<lgl>` Nest `demographics` and `conditions`
+#'
+#' @param detailed `<lgl>` Include `detailed` column
+#'
 #' @autoglobal
+#'
 #' @noRd
 tidyup_provider.util <- function(results, nest, detailed) {
 
   results <- janitor::clean_names(results) |>
     cols_util("Provider") |>
-    tidyup(yn   = "par",
-           int  = c("year", "_hcpcs", "bene", "_srvcs"),
-           dbl  = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
-           cred = "credential",
-           zip  = 'rndrng_prvdr_zip5') |>
-    combine(address, c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')) |>
-    dplyr::mutate(specialty       = correct_specialty(specialty),
-                  .copay_deduct   = tot_allowed - tot_payment,
-                  .srvcs_per_bene = tot_srvcs   / tot_benes,
-                  .pymt_per_bene  = tot_payment / tot_benes,
-                  .pymt_per_srvc  = tot_payment / tot_srvcs,
-                  entity_type     = fct_ent(entity_type),
-                  gender          = fct_gen(gender),
-                  state           = fct_stabb(state)) |>
-    dplyr::mutate(bene_race_nonwht = tot_benes - bene_race_wht,
-                  .after = bene_race_wht)
+    tidyup(
+      yn = "par",
+      int = c("year", "_hcpcs", "bene", "_srvcs"),
+      dbl = c("pay", "pymt", "charges", "allowed", "cc_", "hcc"),
+      cred = "credential",
+      zip = 'rndrng_prvdr_zip5') |>
+    combine(
+      address,
+      c('rndrng_prvdr_st1', 'rndrng_prvdr_st2')
+      ) |>
+    dplyr::mutate(
+      specialty       = correct_specialty(specialty),
+      .copay_deduct   = tot_allowed - tot_payment,
+      .srvcs_per_bene = tot_srvcs   / tot_benes,
+      .pymt_per_bene  = tot_payment / tot_benes,
+      .pymt_per_srvc  = tot_payment / tot_srvcs,
+      entity_type     = fct_ent(entity_type),
+      gender          = fct_gen(gender),
+      state           = fct_stabb(state)
+      ) |>
+    dplyr::mutate(
+      bene_race_nonwht = tot_benes - bene_race_wht,
+      .after = bene_race_wht)
 
   if (nest) {
-    race_cols <- c('bene_race_blk',
-                   'bene_race_api',
-                   'bene_race_hisp',
-                   'bene_race_nat',
-                   'bene_race_oth')
+    race_cols <- c(
+      'bene_race_blk',
+      'bene_race_api',
+      'bene_race_hisp',
+      'bene_race_nat',
+      'bene_race_oth')
 
     results <- tidyr::nest(
       results,
@@ -329,26 +386,37 @@ tidyup_provider.util <- function(results, nest, detailed) {
 
     results <- tidyr::nest(
       results,
-      performance    = c(dplyr::starts_with("tot_"), dplyr::starts_with(".")),
-      demographics   = c(dplyr::starts_with("bene_"), bene_race_detailed),
-      conditions     = c(hcc_risk_avg, dplyr::starts_with("cc_")))
+      performance = c(dplyr::starts_with("tot_"), dplyr::starts_with(".")),
+      demographics = c(dplyr::starts_with("bene_"), bene_race_detailed),
+      conditions = c(hcc_risk_avg, dplyr::starts_with("cc_")))
   }
   if (detailed) {
-    results <- tidyr::nest(results, medical  = dplyr::starts_with("med_"),
-                                    drug     = dplyr::starts_with("drug_")) |>
-               tidyr::nest(results, detailed = c(medical, drug))
+    results <- tidyr::nest(
+      results,
+      medical = dplyr::starts_with("med_"),
+      drug = dplyr::starts_with("drug_")
+      ) |>
+      tidyr::nest(
+        results,
+        detailed = c(medical, drug))
   } else {
-    results <- dplyr::select(results,
-                             -dplyr::starts_with("med_"),
-                             -dplyr::starts_with("drug_"))
+    results <- dplyr::select(
+      results,
+      -dplyr::starts_with("med_"),
+      -dplyr::starts_with("drug_"))
   }
+
   class(results) <- c("utilization_provider", class(results))
+
   return(results)
 }
 
 #' @param results data frame from [utilization(type = "Service")]
-#' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
+#'
+#' @param rbcs `<lgl>` Add Restructured BETOS Classifications to HCPCS codes
+#'
 #' @autoglobal
+#'
 #' @noRd
 tidyup_service.util <- function(results, rbcs) {
 
@@ -376,8 +444,11 @@ tidyup_service.util <- function(results, rbcs) {
 }
 
 #' @param results data frame from [utilization(type = "Geography")]
-#' @param rbcs < *boolean* > Add Restructured BETOS Classifications to HCPCS codes
+#'
+#' @param rbcs `<lgl>` Add Restructured BETOS Classifications to HCPCS codes
+#'
 #' @autoglobal
+#'
 #' @noRd
 tidyup_geography.util <- function(results, rbcs) {
 
@@ -393,12 +464,16 @@ tidyup_geography.util <- function(results, rbcs) {
   if (rbcs) results <- rbcs_util(results)
 
   class(results) <- c("utilization_geography", class(results))
+
   return(results)
 }
 
 #' @param df data frame
+#'
 #' @param type 'Provider', 'Service', 'Geography' or 'rbcs'
+#'
 #' @autoglobal
+#'
 #' @noRd
 cols_util <- function(df, type) {
 
@@ -578,7 +653,9 @@ cols_util <- function(df, type) {
 }
 
 #' @param x vector
+#'
 #' @autoglobal
+#'
 #' @noRd
 correct_specialty <- function(x) {
   dplyr::case_match(x,

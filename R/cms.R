@@ -1,12 +1,18 @@
 #' Update CMS.gov API distribution IDs
+#'
 #' @param api name of the api
+#'
 #' @param check `"base"`, `"id"`, or `"years"`, default is `"id"`
+#'
 #' @return A [tibble()] containing the updated ids.
+#'
 #' @examplesIf interactive()
 #' cms_update("Provider of Services File - Clinical Laboratories", "base")
 #' cms_update("Provider of Services File - Clinical Laboratories", "id")
 #' cms_update("Provider of Services File - Clinical Laboratories", "years")
+#'
 #' @autoglobal
+#'
 #' @noRd
 cms_update <- function(api, check = "id") {
 
@@ -239,8 +245,8 @@ api_years <- function(fn) {
                            "rxp" ~ "Medicare Part D Prescribers - by Provider",
                            "outps" ~ "Medicare Outpatient Hospitals - by Provider and Service",
                            "outgs" ~ "Medicare Outpatient Hospitals - by Geography and Service",
-                           "scc" ~ "Specific Chronic Conditions",
-                           "mcc" ~ "Multiple Chronic Conditions",
+                           # "scc" ~ "Specific Chronic Conditions",
+                           # "mcc" ~ "Multiple Chronic Conditions",
                            "qpp" ~ "Quality Payment Program Experience",
                            .default = NULL)
 

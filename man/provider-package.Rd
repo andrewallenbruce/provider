@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andrew Bruce \email{andrew.bruce@northstarrevenueintegrity.com} [copyright holder]
+\strong{Maintainer}: Andrew Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
 
 }
 \keyword{internal}

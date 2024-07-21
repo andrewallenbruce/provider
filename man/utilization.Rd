@@ -38,73 +38,74 @@ utilization(
 utilization_(year = util_years(), ...)
 }
 \arguments{
-\item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
-format. Run \code{\link[=util_years]{util_years()}} to return a vector of the years currently available.}
+\item{year}{\verb{<int>} // \strong{required} Year data was reported, in \code{YYYY} format.
+Run \code{\link[=util_years]{util_years()}} to return a vector of the years currently available.}
 
-\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"},
+\item{type}{\verb{<chr>} // \strong{required} dataset to query, \code{"Provider"},
 \code{"Service"}, \code{"Geography"}}
 
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{\verb{<int>} 10-digit national provider identifier}
 
-\item{first, last, organization}{< \emph{character} > Individual/Organizational
-provider's name}
+\item{first, last, organization}{\verb{<chr>} Individual/Organizational provider's
+name}
 
-\item{credential}{< \emph{character} > Individual provider's credentials}
+\item{credential}{\verb{<chr>} Individual provider's credentials}
 
-\item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female),
-\code{"M"} (Male)}
+\item{gender}{\verb{<chr>} Individual provider's gender; \code{"F"} (Female), \code{"M"}
+(Male)}
 
-\item{entype}{< \emph{character} > Provider entity type; \code{"I"} (Individual),
-\code{"O"} (Organization)}
+\item{entype}{\verb{<chr>} Provider entity type; \code{"I"} (Individual), \code{"O"}
+(Organization)}
 
-\item{city}{< \emph{character} > City where provider is located}
+\item{city}{\verb{<chr>} City where provider is located}
 
-\item{state}{< \emph{character} > State where provider is located}
+\item{state}{\verb{<chr>} State where provider is located}
 
-\item{zip}{< \emph{character} > Provider’s zip code}
+\item{zip}{\verb{<chr>} Provider’s zip code}
 
-\item{fips}{< \emph{character} > Provider's state's FIPS code}
+\item{fips}{\verb{<chr>} Provider's state's FIPS code}
 
-\item{ruca}{< \emph{character} > Provider’s RUCA code}
+\item{ruca}{\verb{<chr>} Provider’s RUCA code}
 
-\item{country}{< \emph{character} > Country where provider is located}
+\item{country}{\verb{<chr>} Country where provider is located}
 
-\item{specialty}{< \emph{character} > Provider specialty code reported on the
-largest number of claims submitted}
+\item{specialty}{\verb{<chr>} Provider specialty code reported on the largest
+number of claims submitted}
 
-\item{par}{< \emph{boolean} > Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts}
+\item{par}{\verb{<lgl>} Identifies whether the provider participates in Medicare
+and/or accepts assignment of Medicare allowed amounts}
 
-\item{level}{< \emph{character} > Geographic level by which the data will be
-aggregated:
+\item{level}{\verb{<chr>} Geographic level by which the data will be aggregated:
 \itemize{
 \item \code{"State"}: Data is aggregated for each state
 \item \code{"National"}: Data is aggregated across all states for a given HCPCS Code
 }}
 
-\item{hcpcs}{< \emph{character} > HCPCS code used to identify the specific
-medical service furnished by the provider}
+\item{hcpcs}{\verb{<chr>} HCPCS code used to identify the specific medical service
+furnished by the provider}
 
-\item{drug}{< \emph{boolean} > Identifies whether the HCPCS code is listed in the
+\item{drug}{\verb{<lgl>} Identifies whether the HCPCS code is listed in the
 Medicare Part B Drug Average Sales Price (ASP) File}
 
-\item{pos}{< \emph{character} > Identifies whether the Place of Service (POS)
-submitted on the claims is a:
+\item{pos}{\verb{<chr>} Identifies whether the Place of Service (POS) submitted on
+the claims is a:
 \itemize{
 \item Facility (\code{"F"}): Hospital, Skilled Nursing Facility, etc.
 \item Non-facility (\code{"O"}): Office, Home, etc.
 }}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{performance}, \code{demographics} and \code{conditions}}
+\item{nest}{\verb{<lgl>} // \strong{default:} \code{TRUE} Nest \code{performance}, \code{demographics}
+and \code{conditions} columns}
 
-\item{detailed}{< \emph{boolean} > // \strong{default:} \code{FALSE} Include nested \code{medical} and \code{drug} columns}
+\item{detailed}{\verb{<lgl>} // \strong{default:} \code{FALSE} Include nested \code{medical} and
+\code{drug} columns}
 
-\item{rbcs}{< \emph{boolean} > // \strong{default:} \code{TRUE} Add Restructured BETOS
+\item{rbcs}{\verb{<lgl>} // \strong{default:} \code{TRUE} Add Restructured BETOS
 Classifications to HCPCS codes}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{...}{Pass arguments to \code{\link[=utilization]{utilization()}}.}
 }

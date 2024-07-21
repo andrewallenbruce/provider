@@ -31,14 +31,6 @@ test_that("rx_years() works", {
 
 })
 
-# test_that("cc_years() works", {
-#
-#   cc <- cc_years()
-#   expect_equal(cc, 2007:2018)
-#   expect_vector(cc, ptype = integer(), size = 12)
-#
-# })
-
 test_that("qpp_years() works", {
 
   qpp <- qpp_years()
