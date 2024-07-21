@@ -357,13 +357,41 @@ outpatient(year  = 2021,
 ### `prescribers()`
 
 ``` r
-prescribers(year = 2021, 
+prescribers(year = 2019, 
             type = 'Provider', 
-            npi = 1003000423) |> 
+            npi = 1003000126) |> 
   glimpse()
 ```
 
-    #> Error in readBin(body, character()): R character strings are limited to 2^31-1 bytes
+    #> Rows: 1
+    #> Columns: 27
+    #> $ year           <int> 2019
+    #> $ npi            <chr> "1003000126"
+    #> $ entity_type    <fct> Individual
+    #> $ first          <chr> "Ardalan"
+    #> $ last           <chr> "Enkeshafi"
+    #> $ gender         <fct> Male
+    #> $ credential     <chr> "MD"
+    #> $ specialty      <chr> "Internal Medicine"
+    #> $ source         <chr> "Claim-Specialty"
+    #> $ address        <chr> "900 Seton Dr"
+    #> $ city           <chr> "Cumberland"
+    #> $ state          <ord> MD
+    #> $ zip            <chr> "21502"
+    #> $ fips           <chr> "24"
+    #> $ ruca           <chr> "1"
+    #> $ country        <chr> "US"
+    #> $ tot_claims     <int> 589
+    #> $ tot_fills      <dbl> 681.7333
+    #> $ tot_cost       <dbl> 28902.12
+    #> $ tot_supply     <int> 15955
+    #> $ tot_benes      <int> 214
+    #> $ rx_rate_opioid <dbl> 5.093379
+    #> $ bene_race_blk  <int> 73
+    #> $ hcc_risk_avg   <dbl> 2.708114
+    #> $ detailed       <list> [<tbl_df[1 x 32]>]
+    #> $ demographics   <list> [<tbl_df[1 x 14]>]
+    #> $ gte_65         <list> [<tbl_df[1 x 8]>]
 
 ``` r
 prescribers(year = 2019, 
@@ -374,7 +402,7 @@ prescribers(year = 2019,
 ```
 
     #> Rows: 1
-    #> Columns: 17
+    #> Columns: 18
     #> $ year         <int> 2019
     #> $ npi          <chr> "1003000126"
     #> $ last         <chr> "Enkeshafi"
@@ -383,6 +411,7 @@ prescribers(year = 2019,
     #> $ state        <ord> MD
     #> $ fips         <chr> "24"
     #> $ specialty    <chr> "Internal Medicine"
+    #> $ source       <chr> "Claim-Specialty"
     #> $ brand_name   <chr> "Atorvastatin Calcium"
     #> $ generic_name <chr> "Atorvastatin Calcium"
     #> $ tot_claims   <int> 41

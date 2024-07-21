@@ -41,66 +41,65 @@ prescribers_(year = rx_years(), ...)
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=rx_years]{rx_years()}} to return a vector of the years currently available.}
 
-\item{type}{< \emph{character} > // \strong{required} dataset to query, \code{"Provider"},
-\code{"Drug"}, \code{"Geography"}}
+\item{type}{\verb{<chr>} // \strong{required} dataset to query, \code{"Provider"}, \code{"Drug"},
+\code{"Geography"}}
 
-\item{npi}{< \emph{integer} > 10-digit national provider identifier}
+\item{npi}{\verb{<int>} 10-digit national provider identifier}
 
-\item{first, last, organization}{< \emph{character} > Individual/Organizational
-prescriber's name}
+\item{first, last, organization}{\verb{<chr>} Individual/Organizational prescriber's
+name}
 
-\item{credential}{< \emph{character} > Individual prescriber's credentials}
+\item{credential}{\verb{<chr>} Individual prescriber's credentials}
 
-\item{gender}{< \emph{character} > Individual prescriber's gender; \code{"F"} (Female),
-\code{"M"} (Male)}
+\item{gender}{\verb{<chr>} Individual prescriber's gender; \code{"F"} (Female), \code{"M"}
+(Male)}
 
-\item{entype}{< \emph{character} > Prescriber entity type; \code{"I"} (Individual),
-\code{"O"} (Organization)}
+\item{entype}{\verb{<chr>} Prescriber entity type; \code{"I"} (Individual), \code{"O"}
+(Organization)}
 
-\item{city}{< \emph{character} > City where prescriber is located}
+\item{city}{\verb{<chr>} City where prescriber is located}
 
-\item{state}{< \emph{character} > State where prescriber is located}
+\item{state}{\verb{<chr>} State where prescriber is located}
 
-\item{zip}{< \emph{character} > Prescriber’s zip code}
+\item{zip}{\verb{<chr>} Prescriber’s zip code}
 
-\item{fips}{< \emph{character} > Prescriber's state's FIPS code}
+\item{fips}{\verb{<chr>} Prescriber's state's FIPS code}
 
-\item{ruca}{< \emph{character} > Prescriber’s RUCA code}
+\item{ruca}{\verb{<chr>} Prescriber’s RUCA code}
 
-\item{country}{< \emph{character} > Country where prescriber is located}
+\item{country}{\verb{<chr>} Country where prescriber is located}
 
-\item{specialty}{< \emph{character} > Prescriber specialty code reported on the
-largest number of claims submitted}
+\item{specialty}{\verb{<chr>} Prescriber specialty code reported on the largest
+number of claims submitted}
 
-\item{brand_name}{< \emph{character} > Brand name (trademarked name) of the drug
+\item{brand_name}{\verb{<chr>} Brand name (trademarked name) of the drug
 filled, derived by linking the National Drug Codes (NDCs) from PDEs to a
 drug information database.}
 
-\item{generic_name}{< \emph{character} > USAN generic name of the drug filled (short
+\item{generic_name}{\verb{<chr>} USAN generic name of the drug filled (short
 version); A term referring to the chemical ingredient of a drug rather than
 the trademarked brand name under which the drug is sold, derived by linking
 the National Drug Codes (NDCs) from PDEs to a drug information database.}
 
-\item{level}{< \emph{character} > Geographic level by which the data will be
-aggregated:
+\item{level}{\verb{<chr>} Geographic level by which the data will be aggregated:
 \itemize{
 \item \code{"State"}: Data is aggregated for each state
 \item \code{"National"}: Data is aggregated across all states for a given HCPCS Code
 }}
 
-\item{opioid}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns Opioid drugs}
+\item{opioid}{\verb{<lgl>} \emph{type = 'Geography'}, \code{TRUE} returns Opioid drugs}
 
-\item{opioidLA}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns Long-acting Opioids}
+\item{opioidLA}{\verb{<lgl>} \emph{type = 'Geography'}, \code{TRUE} returns Long-acting Opioids}
 
-\item{antibiotic}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns antibiotics}
+\item{antibiotic}{\verb{<lgl>} \emph{type = 'Geography'}, \code{TRUE} returns antibiotics}
 
-\item{antipsychotic}{< \emph{boolean} > \emph{type = 'Geography'}, \code{TRUE} returns antipsychotics}
+\item{antipsychotic}{\verb{<lgl>} \emph{type = 'Geography'}, \code{TRUE} returns antipsychotics}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest output}
+\item{nest}{\verb{<lgl>} // \strong{default:} \code{TRUE} Nest output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{...}{Pass arguments to \code{\link[=prescribers]{prescribers()}}.}
 }

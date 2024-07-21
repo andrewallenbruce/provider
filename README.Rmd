@@ -141,9 +141,9 @@ outpatient(year  = 2021,
 ### `prescribers()`
 
 ```{r}
-prescribers(year = 2021, 
+prescribers(year = 2019, 
             type = 'Provider', 
-            npi = 1003000423) |> 
+            npi = 1003000126) |> 
   glimpse()
 ```
 

@@ -93,47 +93,74 @@
 #' @name prescribers
 NULL
 
-#' @param year < *integer* > // **required** Year data was reported, in `YYYY`
-#' format. Run [rx_years()] to return a vector of the years currently available.
-#' @param type < *character* > // **required** dataset to query, `"Provider"`,
-#' `"Drug"`, `"Geography"`
-#' @param npi < *integer* > 10-digit national provider identifier
-#' @param first,last,organization < *character* > Individual/Organizational
-#' prescriber's name
-#' @param credential < *character* > Individual prescriber's credentials
-#' @param gender < *character* > Individual prescriber's gender; `"F"` (Female),
-#' `"M"` (Male)
-#' @param entype < *character* > Prescriber entity type; `"I"` (Individual),
-#' `"O"` (Organization)
-#' @param city < *character* > City where prescriber is located
-#' @param state < *character* > State where prescriber is located
-#' @param fips < *character* > Prescriber's state's FIPS code
-#' @param zip < *character* > Prescriber’s zip code
-#' @param ruca < *character* > Prescriber’s RUCA code
-#' @param country < *character* > Country where prescriber is located
-#' @param specialty < *character* > Prescriber specialty code reported on the
-#' largest number of claims submitted
-#' @param brand_name < *character* > Brand name (trademarked name) of the drug
+#' @param year `<int>` // **required** Year data was reported, in `YYYY` format.
+#'   Run [rx_years()] to return a vector of the years currently available.
+#'
+#' @param type `<chr>` // **required** dataset to query, `"Provider"`, `"Drug"`,
+#'   `"Geography"`
+#'
+#' @param npi `<int>` 10-digit national provider identifier
+#'
+#' @param first,last,organization `<chr>` Individual/Organizational prescriber's
+#'   name
+#'
+#' @param credential `<chr>` Individual prescriber's credentials
+#'
+#' @param gender `<chr>` Individual prescriber's gender; `"F"` (Female), `"M"`
+#'   (Male)
+#'
+#' @param entype `<chr>` Prescriber entity type; `"I"` (Individual), `"O"`
+#'   (Organization)
+#'
+#' @param city `<chr>` City where prescriber is located
+#'
+#' @param state `<chr>` State where prescriber is located
+#'
+#' @param fips `<chr>` Prescriber's state's FIPS code
+#'
+#' @param zip `<chr>` Prescriber’s zip code
+#'
+#' @param ruca `<chr>` Prescriber’s RUCA code
+#'
+#' @param country `<chr>` Country where prescriber is located
+#'
+#' @param specialty `<chr>` Prescriber specialty code reported on the largest
+#'   number of claims submitted
+#'
+#' @param brand_name `<chr>` Brand name (trademarked name) of the drug
 #' filled, derived by linking the National Drug Codes (NDCs) from PDEs to a
 #' drug information database.
-#' @param generic_name < *character* > USAN generic name of the drug filled (short
+#'
+#' @param generic_name `<chr>` USAN generic name of the drug filled (short
 #' version); A term referring to the chemical ingredient of a drug rather than
 #' the trademarked brand name under which the drug is sold, derived by linking
 #' the National Drug Codes (NDCs) from PDEs to a drug information database.
-#' @param level < *character* > Geographic level by which the data will be
-#' aggregated:
-#' + `"State"`: Data is aggregated for each state
-#' + `"National"`: Data is aggregated across all states for a given HCPCS Code
-#' @param opioid < *boolean* > _type = 'Geography'_, `TRUE` returns Opioid drugs
-#' @param opioidLA < *boolean* > _type = 'Geography'_, `TRUE` returns Long-acting Opioids
-#' @param antibiotic < *boolean* > _type = 'Geography'_, `TRUE` returns antibiotics
-#' @param antipsychotic < *boolean* > _type = 'Geography'_, `TRUE` returns antipsychotics
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... For future use.
+#'
+#' @param level `<chr>` Geographic level by which the data will be aggregated:
+#'
+#'    + `"State"`: Data is aggregated for each state
+#'    + `"National"`: Data is aggregated across all states for a given HCPCS Code
+#'
+#' @param opioid `<lgl>` _type = 'Geography'_, `TRUE` returns Opioid drugs
+#'
+#' @param opioidLA `<lgl>` _type = 'Geography'_, `TRUE` returns Long-acting Opioids
+#'
+#' @param antibiotic `<lgl>` _type = 'Geography'_, `TRUE` returns antibiotics
+#'
+#' @param antipsychotic `<lgl>` _type = 'Geography'_, `TRUE` returns antipsychotics
+#'
+#' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
+#'
+#' @param nest `<lgl>` // __default:__ `TRUE` Nest output
+#'
+#' @param na.rm `<lgl>` // __default:__ `TRUE` Remove empty rows and columns
+#'
+#' @param ... Empty dots.
+#'
 #' @rdname prescribers
+#'
 #' @autoglobal
+#'
 #' @export
 prescribers <- function(year,
                         type,
@@ -165,7 +192,7 @@ prescribers <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, as.character(rx_years()))
+  year <- rlang::arg_match0(year, as.character(rx_years()))
 
   npi   <- npi %nn% validate_npi(npi)
   zip   <- zip %nn% as.character(zip)
@@ -173,10 +200,10 @@ prescribers <- function(year,
   ruca  <- ruca %nn% as.character(ruca)
 
   rlang::check_required(type)
-  type <- rlang::arg_match(type, c('Provider', 'Drug', 'Geography'))
+  type <- rlang::arg_match0(type, c('Provider', 'Drug', 'Geography'))
 
   if (type == 'Provider') {
-    param_npi <- 'PRSCRBR_NPI'
+    param_npi <- 'Prscrbr_NPI'
     param_state <- 'Prscrbr_State_Abrvtn'
     param_fips <- 'Prscrbr_State_FIPS'
     brand_name <- NULL
@@ -213,7 +240,7 @@ prescribers <- function(year,
     zip <- NULL
     ruca <- NULL
     country <- NULL
-    level <- level %nn% rlang::arg_match(level, c('National', 'State'))
+    level <- level %nn% rlang::arg_match0(level, c('National', 'State'))
     if (!is.null(state) && (state %in% state.abb)) state <- abb2full(state)
     opioid <- opioid %nn% tf_2_yn(opioid)
     opioidLA <- opioidLA %nn% tf_2_yn(opioidLA)
@@ -244,17 +271,25 @@ prescribers <- function(year,
     'Antbtc_Drug_Flag',      antibiotic,
     'Antpsyct_Drug_Flag',    antipsychotic)
 
-  yr <- switch(type,
-               'Provider'  = api_years('rxp'),
-               'Drug'      = api_years('rxd'),
-               'Geography' = api_years('rxg'))
+  yr <- switch(
+    type,
+    'Provider'  = api_years('rxp'),
+    'Drug'      = api_years('rxd'),
+    'Geography' = api_years('rxg'))
 
-  id <- dplyr::filter(yr, year == {{ year }}) |> dplyr::pull(distro)
+  id <- dplyr::filter(
+    yr,
+    year == {{ year }}) |>
+    dplyr::pull(distro)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                id, "/data.json?", encode_param(args))
+  url <- paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    id,
+    "/data.json?",
+    encode_param(args))
 
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |>
+    httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
 
@@ -284,7 +319,9 @@ prescribers <- function(year,
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  results <- httr2::resp_body_json(
+    response,
+    simplifyVector = TRUE)
 
   if (!tidy) results <- df2chr(results)
 
@@ -292,13 +329,13 @@ prescribers <- function(year,
 
     results$year <- year
 
-    results <- switch(type,
-                      'Provider'  = tidyup_provider.rx(results, nest = nest),
-                      'Drug'      = tidyup_drug.rx(results, nest = nest),
-                      'Geography' = tidyup_geography.rx(results))
+    results <- switch(
+      type,
+      'Provider'  = tidyup_provider.rx(results, nest = nest),
+      'Drug'      = tidyup_drug.rx(results, nest = nest),
+      'Geography' = tidyup_geography.rx(results))
 
     if (na.rm) results <- narm(results)
-
   }
   return(results)
 }
@@ -323,10 +360,12 @@ tidyup_geography.rx <- function(results) {
     dplyr::mutate(state = fct_stname(state),
                   level = fct_level(level))
 
-  results <- dplyr::mutate(results,
-                           dplyr::across(
-                             dplyr::contains('suppress_'),
-                             suppress_flag))
+  results <- dplyr::mutate(
+    results,
+    dplyr::across(
+      dplyr::contains('suppress_'),
+      suppress_flag)
+    )
 
   return(results)
 }
@@ -344,25 +383,32 @@ tidyup_drug.rx <- function(results, nest = TRUE) {
            dbl  = c('tot_fills',
                     'tot_cost')) |>
     dplyr::mutate(level = 'Provider',
-                  source = fct_src(source), # nolint
+                  # source = fct_src(source), # nolint
                   state = fct_stabb(state),
                   level = fct_level(level))
 
-  results <- dplyr::mutate(results,
-                           dplyr::across(
-                             dplyr::contains('suppress_'),
-                             suppress_flag))
+  results <- dplyr::mutate(
+    results,
+    dplyr::across(
+      dplyr::contains('suppress_'),
+      suppress_flag)
+  )
 
   if (nest) {
     results <- results |>
-      tidyr::nest(gte_65 = dplyr::any_of(c(
-        'tot_claims_ge65',
-        'tot_fills_ge65',
-        'tot_cost_ge65',
-        'tot_supply_ge65',
-        'tot_benes_ge65',
-        'suppress_ge65',
-        'suppress_bene_ge65')))
+      tidyr::nest(
+        gte_65 = dplyr::any_of(
+          c(
+            'tot_claims_ge65',
+            'tot_fills_ge65',
+            'tot_cost_ge65',
+            'tot_supply_ge65',
+            'tot_benes_ge65',
+            'suppress_ge65',
+            'suppress_bene_ge65'
+            )
+          )
+        )
   }
   return(results)
 }
@@ -399,21 +445,25 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
            cred = 'credential',
            zip  = 'zip') |>
     combine(address, c('prscrbr_st1', 'prscrbr_st2')) |>
-    dplyr::mutate(source = fct_src(source),              # nolint
-                  entity_type = fct_ent(entity_type),
+    dplyr::mutate(entity_type = fct_ent(entity_type),
+                  # source = fct_src(source),              # nolint
                   gender = fct_gen(gender),
                   state = fct_stabb(state)) |>
     dplyr::mutate(bene_race_nonwht = tot_benes - bene_race_wht,
                   .after = bene_race_wht)
 
-  results <- dplyr::mutate(results,
-                           dplyr::across(
-                             dplyr::contains('suppress_'),
-                             suppress_flag))
+  results <- dplyr::mutate(
+    results,
+    dplyr::across(
+      dplyr::contains('suppress_'),
+      suppress_flag)
+  )
 
   if (nest) {
     results <- results |>
-      tidyr::nest(detailed = dplyr::any_of(c(
+      tidyr::nest(
+        detailed = dplyr::any_of(
+          c(
         'tot_claims_brand',
         'tot_cost_brand',
         'tot_claims_generic',
@@ -445,8 +495,13 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
         'suppress_mapd',
         'suppress_lis',
         'suppress_nlis',
-        'suppress_pdp'))) |>
-      tidyr::nest(demographics = dplyr::any_of(c(
+        'suppress_pdp'
+        )
+      )
+    ) |>
+      tidyr::nest(
+        demographics = dplyr::any_of(
+          c(
         'bene_age_avg',
         'bene_age_lt65',
         'bene_age_65_74',
@@ -460,8 +515,13 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
         'bene_race_nat',
         'bene_race_oth',
         'bene_dual',
-        'bene_ndual'))) |>
-      tidyr::nest(gte_65 = dplyr::any_of(c(
+        'bene_ndual'
+        )
+      )
+    ) |>
+      tidyr::nest(
+        gte_65 = dplyr::any_of(
+          c(
         'tot_claims_ge65',
         'tot_fills_ge65',
         'tot_cost_ge65',
@@ -469,7 +529,10 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
         'tot_benes_ge65',
         'tot_claims_antipsych_ge65',
         'tot_cost_antipsych_ge65',
-        'tot_benes_antipsych_ge65')))
+        'tot_benes_antipsych_ge65'
+        )
+      )
+    )
   }
   return(results)
 }
@@ -483,9 +546,11 @@ tidyup_provider.rx <- function(results, nest = TRUE) {
 #' @export
 prescribers_ <- function(year = rx_years(),
                          ...) {
-  furrr::future_map_dfr(year, prescribers, ...,
-                        .options = furrr::furrr_options(seed = NULL))
-
+  furrr::future_map_dfr(
+    year,
+    prescribers,
+    ...,
+    .options = furrr::furrr_options(seed = NULL))
 }
 
 #' Convert specialty source to unordered labelled factor
@@ -493,10 +558,11 @@ prescribers_ <- function(year = rx_years(),
 #' @autoglobal
 #' @noRd
 fct_src <- function(x) {
-  factor(x,
-         levels = c("S", "T"),
-         labels = c("Medicare Specialty Code",
-                    "Taxonomy Code Classification"))
+  factor(
+    x,
+    levels = c("S", "T"),
+    labels = c("Medicare Specialty Code",
+               "Taxonomy Code Classification"))
 }
 
 #' @param df data frame
@@ -507,7 +573,7 @@ cols_rx <- function(df, type) {
 
   if (type == 'Provider') {
     cols <- c('year',
-              'npi' = 'PRSCRBR_NPI',
+              'npi' = 'Prscrbr_NPI',
               'entity_type' = 'Prscrbr_Ent_Cd',
               'first' = 'Prscrbr_First_Name',
               'middle' = 'Prscrbr_MI',
@@ -515,7 +581,7 @@ cols_rx <- function(df, type) {
               'gender' = 'Prscrbr_Gndr',
               'credential' = 'Prscrbr_Crdntls',
               'specialty' = 'Prscrbr_Type',
-              'source' = 'Prscrbr_Type_src',
+              'source' = 'Prscrbr_Type_Src',
               'Prscrbr_St1',
               'Prscrbr_St2',
               'city' = 'Prscrbr_City',

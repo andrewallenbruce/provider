@@ -4,7 +4,7 @@ template:
   bootstrap: 5
   bootswatch: simplex
   bslib:
-    font_scale: 1.1
+    font_scale: 1
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Kanit"}
     code_font: {google: "Fira Code"}
@@ -107,7 +107,6 @@ reference:
     Access a provider's statistical data.
   contents:
   - beneficiaries
-  - conditions
   - open_payments
   - open_payments_
   - quality_eligibility
