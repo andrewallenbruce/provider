@@ -31,12 +31,14 @@ navbar:
   components:
     home:
       icon: fas fa-home fa-lg
-      text: ""
       href: index.html
+      aria-label: Home
+      text: ""
     intro:
       icon: ~
-      text: Getting started
       href: articles/provider.html
+      aria-label: Intro
+      text: Getting started
     reference:
       text: Reference
       href: reference/index.html
@@ -58,24 +60,28 @@ navbar:
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
-      text: ""
+      aria-label: News
       title: "Changelog"
+      text: ""
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/andrewallenbruce/provider
+      aria-label: GitHub
     linkedin:
       icon: fas fa-linkedin fa-lg
-      href: https://www.linkedin.com/in/andybruce1/
+      href: https://www.linkedin.com/in/andrewallenbruce
+      aria-label: LinkedIn
     twitter:
       icon: fab fa-twitter fa-lg
-      href: http://twitter.com/aabrucehimni
+      href: http://twitter.com/andrewallbruce
+      aria-label: X
   opengraph:
     image:
       src: man/figures/card.png
       alt: "Provider Logo"
     twitter:
-      creator: "@aabrucehimni"
-      site: "@aabrucehimni"
+      creator: "@andrewallbruce"
+      site: "@andrewallbruce"
       card: summary_large_image
 
 reference:
@@ -112,7 +118,6 @@ reference:
   - prescribers
   - prescribers_
   - compare_hcpcs
-  - compare_conditions
 
 - title: Classifications
   desc: >
@@ -129,7 +134,6 @@ reference:
     Years available to query for search functions.
   contents:
   - bene_years
-  - cc_years
   - open_years
   - out_years
   - qpp_years
