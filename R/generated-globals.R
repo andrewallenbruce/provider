@@ -9,16 +9,12 @@ utils::globalVariables(c(
   # <ror>
   # <change_year>
   ":=",
-  # <meta.store>
-  "@type",
   # <laboratories>
   "a2la",
   # <laboratories>
   "aabb",
   # <laboratories>
   "accredited",
-  # <meta.json>
-  "accrualPeriodicity",
   # <mips_2021>
   "aco_id_1",
   # <mips_2021>
@@ -162,11 +158,7 @@ utils::globalVariables(c(
   "definition",
   # <gt_datadict>
   "Definition",
-  # <meta.json>
-  "describedBy",
   # <cms_dataset_search>
-  # <meta.json>
-  # <meta.open>
   "description",
   # <taxonomy_codes>
   # <gt_datadict>
@@ -174,52 +166,15 @@ utils::globalVariables(c(
   # <download_nucc_csv>
   "display_name",
   # <cms_update>
-  # <meta.json>
-  # <meta.open>
   # <open_ids>
   "distribution",
-  # <meta.open>
-  "distribution.data",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_checksum",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_filePath",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_identifier",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_mimeType",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_perspective",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.data_version",
-  # <meta.open>
-  "distribution.data_%Ref:downloadURL.identifier",
-  # <meta.open>
-  "distribution.data_@type",
-  # <meta.open>
-  "distribution.data_format",
-  # <meta.open>
-  "distribution.data_mediaType",
-  # <meta.open>
-  "distribution.data_title",
-  # <meta.open>
-  "distribution.identifier",
-  # <meta.open>
-  "distribution.title",
   # <cms_update>
-  # <meta.json>
   "distribution_accessURL",
   # <cms_update>
   "distribution_format",
   # <cms_update>
-  # <meta.json>
   "distribution_modified",
   # <cms_update>
-  # <meta.json>
   "distribution_title",
   # <outpatient>
   # <prescribers>
@@ -248,11 +203,6 @@ utils::globalVariables(c(
   "five_star_benchmark",
   # <hospitals>
   "flag",
-  # <meta.store>
-  "function_call",
-  # <meta.store>
-  # <meta.json>
-  "function_name",
   # <nppes>
   # <tidyup_provider.rx>
   # <tidyup_provider.util>
@@ -287,8 +237,6 @@ utils::globalVariables(c(
   # <nppes>
   "id",
   # <cms_dataset_search>
-  # <meta.store>
-  # <meta.open>
   # <open_payments>
   # <open_ids>
   "identifier",
@@ -301,22 +249,13 @@ utils::globalVariables(c(
   # <reassignments>
   "individual_state_code",
   # <make_interval>
-  # <meta.open>
   "interval",
   # <mips_2021>
   "invs_msr",
-  # <ccn.facility_ranges>
-  "is_between",
-  # <meta.store>
-  # <meta.open>
-  "issued",
   # <laboratories>
   "jcaho",
   # <cms_dataset_search>
   "keyword",
-  # <meta.store>
-  # <meta.json>
-  "landingPage",
   # <compare_hcpcs>
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
@@ -336,9 +275,6 @@ utils::globalVariables(c(
   "medical",
   # <cms_update>
   # <cms_dataset_search>
-  # <meta.store>
-  # <meta.json>
-  # <meta.open>
   # <open_ids>
   "modified",
   # <open_payments>
@@ -391,14 +327,6 @@ utils::globalVariables(c(
   "pay_total",
   # <open_payments>
   "pdi_1",
-  # <meta.open>
-  "period",
-  # <meta.open>
-  "period_end",
-  # <meta.open>
-  "period_start",
-  # <meta.open>
-  "periodicity",
   # <laboratories>
   "pgm_trmntn_cd",
   # <tidyup_geography.util>
@@ -424,9 +352,6 @@ utils::globalVariables(c(
   "prvdr_ctgry_cd",
   # <laboratories>
   "prvdr_ctgry_sbtyp_cd",
-  # <meta.store>
-  # <meta.open>
-  "publisher",
   # <nppes>
   "purpose",
   # <quality_payment>
@@ -437,10 +362,6 @@ utils::globalVariables(c(
   "recipient_state",
   # <reassignments>
   "record_type",
-  # <meta.json>
-  "references",
-  # <meta.store>
-  "released",
   # <laboratories>
   "rgn_cd",
   # <tidyup_geography.util>
@@ -512,13 +433,10 @@ utils::globalVariables(c(
   "taxonomy_grouping",
   # <taxonomy_codes>
   "taxonomy_specialization",
-  # <meta.json>
-  "temporal",
   # <quality_eligibility>
   "timelength_days",
   # <cms_update>
   # <cms_dataset_search>
-  # <meta.open>
   # <medline>
   # <open_ids>
   "title",
@@ -543,8 +461,6 @@ utils::globalVariables(c(
   "type_1",
   # <laboratories>
   "type_of_action",
-  # <meta.open>
-  "update_schedule",
   # <quality_payment>
   "val",
   # <open_payments>

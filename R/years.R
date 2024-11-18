@@ -4,9 +4,9 @@
 #'
 #' @examples
 #' # `beneficiaries()`
-#' bene_years(period = "year")
+#' bene_years(period = "Year")
 #'
-#' bene_years(period = "month")
+#' bene_years(period = "Month")
 #'
 #' # `open_payments()`
 #' open_years()
@@ -110,7 +110,7 @@ qpp_years <- function() {
   )
 }
 
-#' @param period `<chr>` One of `"year"` or `"month"`
+#' @param period `<chr>` One of `"Year"` or `"Month"`
 #'
 #' @rdname years
 #'
@@ -119,18 +119,18 @@ qpp_years <- function() {
 #' @autoglobal
 #'
 #' @export
-bene_years <- function(period = c("year", "month")) {
+bene_years <- function(period = c("Year", "Month")) {
 
   period <- match.arg(period)
 
-  if (period == "year") { # NOT WORKING
+  if (period == "Year") { # NOT WORKING
       out <- beneficiaries(
         period = "Year",
         level  = "National",
         tidy   = FALSE)$YEAR
     }
 
-  if (period == "month") {
+  if (period == "Month") {
       out <- beneficiaries(
         period = "January",
         level  = "National",

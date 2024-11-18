@@ -41,11 +41,11 @@ test_that("qpp_years() works", {
 
 test_that("bene_years() works", {
 
-  benyr <- bene_years("year")
+  benyr <- bene_years("Year")
   expect_equal(benyr, 2013:2023)
   expect_vector(benyr, ptype = integer(), size = 11)
 
-  benmn <- bene_years("month")
+  benmn <- bene_years("Month")
   expect_equal(benmn, 2013:2024)
   expect_vector(benmn, ptype = integer(), size = 12)
 

@@ -80,8 +80,7 @@
 #'               period = "July",
 #'               state  = "Georgia")
 #'
-#' beneficiaries(level = "State",
-#'               fips  = "10")
+#' beneficiaries(level = "State", fips  = "10")
 #'
 #' @autoglobal
 #' @export
@@ -112,21 +111,21 @@ beneficiaries <- function(year = NULL,
     year <- as.character(year)
 
     if (!is.null(period) && period %in% "Year") {
-      year <- rlang::arg_match(year, as.character(bene_years("year")))}
+      year <- rlang::arg_match0(year, as.character(bene_years("Year")))}
 
     if (!is.null(period) && period %in% c("Month", month.name)) {
-      year <- rlang::arg_match(year, as.character(bene_years("month")))}
+      year <- rlang::arg_match0(year, as.character(bene_years("Month")))}
   }
 
   if (!is.null(period)) {
-    period <- rlang::arg_match(period, c("Year", "Month", month.name))
+    period <- rlang::arg_match0(period, c("Year", "Month", month.name))
     if (period == "Month") period <- NULL
   }
 
-  level <- level %nn% rlang::arg_match(level, c("National", "State", "County"))
+  level <- level %nn% rlang::arg_match0(level, c("National", "State", "County"))
 
   if (!is.null(state)) {
-    state <- rlang::arg_match(state, c(state.abb, state.name, "US"))
+    state <- rlang::arg_match0(state, c(state.abb, state.name, "US"))
 
     if (state %in% c(state.name, "United States")) {
       state_name <- state
@@ -137,14 +136,14 @@ beneficiaries <- function(year = NULL,
   if (is.null(state)) state_name <- NULL
 
   args <- dplyr::tribble(
-                 ~param,       ~arg,
-                 "YEAR",       year,
-                "MONTH",     period,
-         "BENE_GEO_LVL",      level,
-    "BENE_STATE_ABRVTN",      state,
-      "BENE_STATE_DESC", state_name,
-     "BENE_COUNTY_DESC",     county,
-         "BENE_FIPS_CD",       fips)
+    ~param,              ~arg,
+    "YEAR",              year,
+    "MONTH",             period,
+    "BENE_GEO_LVL",      level,
+    "BENE_STATE_ABRVTN", state,
+    "BENE_STATE_DESC",   state_name,
+    "BENE_COUNTY_DESC",  county,
+    "BENE_FIPS_CD",      fips)
 
   response <- httr2::request(build_url("ben", args)) |>
     httr2::req_perform()
@@ -162,6 +161,7 @@ beneficiaries <- function(year = NULL,
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
+
     return(invisible(NULL))
   }
 
@@ -173,7 +173,7 @@ beneficiaries <- function(year = NULL,
                     level = fct_level(level),
                     state = fct_stabb(state),
                     state_name = fct_stname(state_name))
-  if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
+    if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
   }
   return(results)
 }

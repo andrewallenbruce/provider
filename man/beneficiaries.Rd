@@ -112,7 +112,6 @@ beneficiaries(year   = 2022,
               period = "July",
               state  = "Georgia")
 
-beneficiaries(level = "State",
-              fips  = "10")
+beneficiaries(level = "State", fips  = "10")
 \dontshow{\}) # examplesIf}
 }

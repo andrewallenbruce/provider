@@ -20,10 +20,10 @@ util_years()
 
 qpp_years()
 
-bene_years(period = c("year", "month"))
+bene_years(period = c("Year", "Month"))
 }
 \arguments{
-\item{period}{\verb{<chr>} One of \code{"year"} or \code{"month"}}
+\item{period}{\verb{<chr>} One of \code{"Year"} or \code{"Month"}}
 }
 \value{
 integer vector of years available to search
@@ -33,9 +33,9 @@ Years Currently Searchable for APIs
 }
 \examples{
 # `beneficiaries()`
-bene_years(period = "year")
+bene_years(period = "Year")
 
-bene_years(period = "month")
+bene_years(period = "Month")
 
 # `open_payments()`
 open_years()
