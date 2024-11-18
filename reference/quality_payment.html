@@ -83,18 +83,18 @@ format. Run <code><a href="years.html">qpp_years()</a></code> to return a vector
 
 
 <dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit Individual National Provider Identifier
+<dd><p><code>&lt;int&gt;</code> 10-digit Individual National Provider Identifier
 assigned to the clinician when they enrolled in Medicare. Multiple rows for
 the same NPI indicate multiple TIN/NPI combinations.</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; State or US territory code location of the TIN
+<dd><p><code>&lt;chr&gt;</code> State or US territory code location of the TIN
 associated with the clinician.</p></dd>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Specialty corresponding to the type of
+<dd><p><code>&lt;chr&gt;</code> Specialty corresponding to the type of
 service that the clinician submitted most on their Medicare Part B claims
 for this TIN/NPI combination.</p><ul><li><p>Nurse Practitioner</p></li>
 <li><p>Internal Medicine</p></li>
@@ -109,7 +109,7 @@ for this TIN/NPI combination.</p><ul><li><p>Nurse Practitioner</p></li>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Participation type; level at which the
+<dd><p><code>&lt;chr&gt;</code> Participation type; level at which the
 performance data was collected, submitted or reported for the final score
 attributed to the clinician; drives most of the data returned.</p><ul><li><p><code>"Group"</code></p></li>
 <li><p><code>"Individual"</code></p></li>
@@ -118,15 +118,15 @@ attributed to the clinician; drives most of the data returned.</p><ul><li><p><co
 
 
 <dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt id="arg-nest">nest<a class="anchor" aria-label="anchor" href="#arg-nest"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Nest <code>status</code> &amp; <code>measures</code></p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Nest <code>status</code> &amp; <code>measures</code></p></dd>
 
 
 <dt id="arg-eligibility">eligibility<a class="anchor" aria-label="anchor" href="#arg-eligibility"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Append results
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Append results
 from <code><a href="quality_eligibility.html">quality_eligibility()</a></code></p></dd>
 
 

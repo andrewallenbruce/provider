@@ -92,32 +92,32 @@ type and address.</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt;</p>
+<dd><p><code>&lt;int&gt;</code></p>
 <p>10-digit Organizational National Provider Identifier</p></dd>
 
 
 <dt id="arg-facility-ccn">facility_ccn<a class="anchor" aria-label="anchor" href="#arg-facility-ccn"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt;</p>
+<dd><p><code>&lt;int&gt;</code></p>
 <p>6-digit CMS Certification Number</p></dd>
 
 
 <dt id="arg-enid-org">enid_org<a class="anchor" aria-label="anchor" href="#arg-enid-org"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>15-digit Organizational Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-enid-state">enid_state<a class="anchor" aria-label="anchor" href="#arg-enid-state"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>Hospital’s enrollment state</p></dd>
 
 
 <dt id="arg-pac-org">pac_org<a class="anchor" aria-label="anchor" href="#arg-pac-org"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt;</p>
+<dd><p><code>&lt;int&gt;</code></p>
 <p>10-digit Organizational PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-specialty-code">specialty_code<a class="anchor" aria-label="anchor" href="#arg-specialty-code"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>Medicare Part A Provider specialty code:</p><ul><li><p><code>"00-00"</code>: Religious Non-Medical Healthcare Institution (RNHCI)</p></li>
 <li><p><code>"00-01"</code>: Community Mental Health Center</p></li>
 <li><p><code>"00-02"</code>: Comprehensive Outpatient Rehabilitation Facility (CORF)</p></li>
@@ -139,50 +139,50 @@ type and address.</p>
 
 
 <dt id="arg-organization">organization<a class="anchor" aria-label="anchor" href="#arg-organization"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>Hospital’s legal business name</p></dd>
 
 
 <dt id="arg-dba">dba<a class="anchor" aria-label="anchor" href="#arg-dba"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>Hospital’s doing-business-as name</p></dd>
 
 
 <dt id="arg-city">city<a class="anchor" aria-label="anchor" href="#arg-city"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>City of the hospital’s practice location</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>State of the hospital’s practice location</p></dd>
 
 
 <dt id="arg-zip">zip<a class="anchor" aria-label="anchor" href="#arg-zip"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt;</p>
+<dd><p><code>&lt;int&gt;</code></p>
 <p>Zip code of the hospital’s practice location</p></dd>
 
 
 <dt id="arg-registration">registration<a class="anchor" aria-label="anchor" href="#arg-registration"></a></dt>
-<dd><p>&lt; <em>character</em> &gt;</p>
+<dd><p><code>&lt;chr&gt;</code></p>
 <p>Hospital's IRS designation:</p><ul><li><p><code>"P"</code>: Registered as <strong>Proprietor</strong></p></li>
 <li><p><code>"N"</code>: Registered as <strong>Non-Profit</strong></p></li>
 </ul></dd>
 
 
 <dt id="arg-multi-npi">multi_npi<a class="anchor" aria-label="anchor" href="#arg-multi-npi"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt;</p>
+<dd><p><code>&lt;lgl&gt;</code></p>
 <p>Indicates hospital has more than one NPI</p></dd>
 
 
 <dt id="arg-reh">reh<a class="anchor" aria-label="anchor" href="#arg-reh"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt;</p>
+<dd><p><code>&lt;lgl&gt;</code></p>
 <p>Indicates a former Hospital or Critical Access Hospital (CAH) that
 converted to a Rural Emergency Hospital (REH)</p></dd>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
-<dd><p>&lt; <em>list</em> &gt;</p>
+<dd><p><code>&lt;list&gt;</code></p>
 <p><code>subgroup = list(acute = TRUE, swing = FALSE)</code></p>
 <p>Indicates hospital’s subgroup/unit designation:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
 <li><p><code>alc_drug</code>: Alcohol/Drug</p></li>
@@ -201,17 +201,17 @@ converted to a Rural Emergency Hospital (REH)</p></dd>
 
 
 <dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code></p>
 <p>Tidy output</p></dd>
 
 
 <dt id="arg-pivot">pivot<a class="anchor" aria-label="anchor" href="#arg-pivot"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code></p>
 <p>Pivot output</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code></p>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code></p>
 <p>Remove empty rows and columns</p></dd>
 
 
