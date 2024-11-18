@@ -17,8 +17,8 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/IBM_Plex_Sans-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Kanit-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Provider Networks">
 <meta name="description" content="NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More">
@@ -80,7 +80,7 @@ IDs, CCNs, CLIAs and More</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2024-07-21</h4>
+            <h4 data-toc-skip class="date">2024-11-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/articles/networks.Rmd" class="external-link"><code>vignettes/articles/networks.Rmd</code></a></small>
       <div class="d-none name"><code>networks.Rmd</code></div>
@@ -129,9 +129,9 @@ Bruce</h4>
 <span>  directed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">example</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH 755c9c7 DN-- 2 2 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH a0e8fcf DN-- 2 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), x (v/n), y (v/n), label (e/c)</span></span>
-<span><span class="co">#&gt; + edges from 755c9c7 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from a0e8fcf (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Individual  -&gt;Organization Organization-&gt;Individual</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">example</span>, layout <span class="op">=</span> <span class="st">"manual"</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
@@ -186,7 +186,7 @@ Bruce</h4>
 <code class="sourceCode R"><span><span class="va">will_tdgrph</span> <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html" class="external-link">as_tbl_graph</a></span><span class="op">(</span><span class="va">williams</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">will_tdgrph</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH 55b6c3b UN-- 39 38 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH 89a3000 UN-- 39 38 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), reassignments (e/n)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">will_tdgrph</span></span></code></pre></div>
@@ -296,7 +296,7 @@ Bruce</h4>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
