@@ -60,11 +60,9 @@ VignetteBuilder:
 Remotes: 
     github::andrewallenbruce/fuimus,
     github::anthonynorth/roxyglobals,
-    github::nt-williams/rxnorm,
-    github::yutannihilation/ggsflabel
-Config/Needs/website: gghighlight, ggplot2, ggraph, ggrepel, ggsflabel,
-    ggthemes, igraph, printr, rmapshaper, scales, tidygeocoder, tidygraph,
-    tigris
+    github::nt-williams/rxnorm
+Config/Needs/website: gghighlight, ggplot2, ggraph, ggrepel, ggthemes,
+    igraph, rmapshaper, scales, tidygeocoder, tidygraph, tigris
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
 Config/testthat/edition: 3
