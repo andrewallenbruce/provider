@@ -41,32 +41,19 @@ Suggests:
     fs,
     fuimus,
     future,
-    gghighlight,
-    ggplot2,
-    ggraph,
-    ggrepel,
-    ggsflabel,
-    ggthemes,
     glue,
     gt,
     gtExtras,
     htmltools,
     httptest2,
-    igraph,
     knitr,
-    printr,
     qs,
-    rmapshaper,
     rmarkdown,
     roxyglobals,
     rvest,
-    scales,
     sf,
     stats,
     testthat (>= 3.0.0),
-    tidygeocoder,
-    tidygraph,
-    tigris,
     zipcodeR
 VignetteBuilder: 
     knitr
@@ -75,6 +62,9 @@ Remotes:
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm,
     github::yutannihilation/ggsflabel
+Config/Needs/website: gghighlight, ggplot2, ggraph, ggrepel, ggsflabel,
+    ggthemes, igraph, printr, rmapshaper, scales, tidygeocoder, tidygraph,
+    tigris
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
 Config/testthat/edition: 3

@@ -13,27 +13,27 @@
 #' @section Links:
 #' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' @param npi < *integer* >
+#' @param npi `<int>`
 #'
 #' 10-digit Organizational National Provider Identifier
 #'
-#' @param pac_org < *integer* >
+#' @param pac_org `<int>`
 #'
 #' 10-digit Organizational PECOS Associate Control ID
 #'
-#' @param enid_org < *character* >
+#' @param enid_org `<chr>`
 #'
 #' 15-digit Organizational Medicare Enrollment ID
 #'
-#' @param enid_state < *character* >
+#' @param enid_state `<chr>`
 #'
 #' Hospital’s enrollment state
 #'
-#' @param facility_ccn < *integer* >
+#' @param facility_ccn `<int>`
 #'
 #' 6-digit CMS Certification Number
 #'
-#' @param specialty_code < *character* >
+#' @param specialty_code `<chr>`
 #'
 #' Medicare Part A Provider specialty code:
 #'
@@ -55,27 +55,27 @@
 #' + `"00-24"`: Rural Emergency Hospital (REH)
 #' + `"00-85"`: Critical Access Hospital (CAH)
 #'
-#' @param organization < *character* >
+#' @param organization `<chr>`
 #'
 #' Hospital’s legal business name
 #'
-#' @param dba < *character* >
+#' @param dba `<chr>`
 #'
 #' Hospital’s doing-business-as name
 #'
-#' @param city < *character* >
+#' @param city `<chr>`
 #'
 #' City of the hospital’s practice location
 #'
-#' @param state < *character* >
+#' @param state `<chr>`
 #'
 #' State of the hospital’s practice location
 #'
-#' @param zip < *integer* >
+#' @param zip `<int>`
 #'
 #' Zip code of the hospital’s practice location
 #'
-#' @param registration < *character* >
+#' @param registration `<chr>`
 #'
 #' Hospital's IRS designation:
 #'
@@ -83,11 +83,11 @@
 #'
 #' + `"N"`: Registered as __Non-Profit__
 #'
-#' @param multi_npi < *boolean* >
+#' @param multi_npi `<lgl>`
 #'
 #' Indicates hospital has more than one NPI
 #'
-#' @param subgroup < *list* >
+#' @param subgroup `<list>`
 #'
 #' `subgroup = list(acute = TRUE, swing = FALSE)`
 #'
@@ -107,20 +107,20 @@
 #' + `spec`: Specialty Hospital
 #' + `other`: Not listed on CMS form
 #'
-#' @param reh < *boolean* >
+#' @param reh `<lgl>`
 #'
 #' Indicates a former Hospital or Critical Access Hospital (CAH) that
 #' converted to a Rural Emergency Hospital (REH)
 #'
-#' @param tidy < *boolean* > // __default:__ `TRUE`
+#' @param tidy `<lgl>` // __default:__ `TRUE`
 #'
 #' Tidy output
 #'
-#' @param pivot < *boolean* > // __default:__ `TRUE`
+#' @param pivot `<lgl>` // __default:__ `TRUE`
 #'
 #' Pivot output
 #'
-#' @param na.rm < *boolean* > // __default:__ `TRUE`
+#' @param na.rm `<lgl>` // __default:__ `TRUE`
 #'
 #' Remove empty rows and columns
 #'

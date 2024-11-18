@@ -27,27 +27,27 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} >
+\item{npi}{\verb{<int>}
 
 10-digit Organizational National Provider Identifier}
 
-\item{facility_ccn}{< \emph{integer} >
+\item{facility_ccn}{\verb{<int>}
 
 6-digit CMS Certification Number}
 
-\item{enid_org}{< \emph{character} >
+\item{enid_org}{\verb{<chr>}
 
 15-digit Organizational Medicare Enrollment ID}
 
-\item{enid_state}{< \emph{character} >
+\item{enid_state}{\verb{<chr>}
 
 Hospital’s enrollment state}
 
-\item{pac_org}{< \emph{integer} >
+\item{pac_org}{\verb{<int>}
 
 10-digit Organizational PECOS Associate Control ID}
 
-\item{specialty_code}{< \emph{character} >
+\item{specialty_code}{\verb{<chr>}
 
 Medicare Part A Provider specialty code:
 \itemize{
@@ -70,27 +70,27 @@ Medicare Part A Provider specialty code:
 \item \code{"00-85"}: Critical Access Hospital (CAH)
 }}
 
-\item{organization}{< \emph{character} >
+\item{organization}{\verb{<chr>}
 
 Hospital’s legal business name}
 
-\item{dba}{< \emph{character} >
+\item{dba}{\verb{<chr>}
 
 Hospital’s doing-business-as name}
 
-\item{city}{< \emph{character} >
+\item{city}{\verb{<chr>}
 
 City of the hospital’s practice location}
 
-\item{state}{< \emph{character} >
+\item{state}{\verb{<chr>}
 
 State of the hospital’s practice location}
 
-\item{zip}{< \emph{integer} >
+\item{zip}{\verb{<int>}
 
 Zip code of the hospital’s practice location}
 
-\item{registration}{< \emph{character} >
+\item{registration}{\verb{<chr>}
 
 Hospital's IRS designation:
 \itemize{
@@ -98,16 +98,16 @@ Hospital's IRS designation:
 \item \code{"N"}: Registered as \strong{Non-Profit}
 }}
 
-\item{multi_npi}{< \emph{boolean} >
+\item{multi_npi}{\verb{<lgl>}
 
 Indicates hospital has more than one NPI}
 
-\item{reh}{< \emph{boolean} >
+\item{reh}{\verb{<lgl>}
 
 Indicates a former Hospital or Critical Access Hospital (CAH) that
 converted to a Rural Emergency Hospital (REH)}
 
-\item{subgroup}{< \emph{list} >
+\item{subgroup}{\verb{<list>}
 
 \code{subgroup = list(acute = TRUE, swing = FALSE)}
 
@@ -128,15 +128,15 @@ Indicates hospital’s subgroup/unit designation:
 \item \code{other}: Not listed on CMS form
 }}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE}
 
 Tidy output}
 
-\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE}
+\item{pivot}{\verb{<lgl>} // \strong{default:} \code{TRUE}
 
 Pivot output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE}
+\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE}
 
 Remove empty rows and columns}
 

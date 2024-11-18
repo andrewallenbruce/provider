@@ -23,14 +23,14 @@ quality_payment_(year = qpp_years(), ...)
 \item{year}{< \emph{integer} > // \strong{required} Year data was reported, in \code{YYYY}
 format. Run \code{\link[=qpp_years]{qpp_years()}} to return a vector of the years currently available.}
 
-\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier
+\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier
 assigned to the clinician when they enrolled in Medicare. Multiple rows for
 the same NPI indicate multiple TIN/NPI combinations.}
 
-\item{state}{< \emph{character} > State or US territory code location of the TIN
+\item{state}{\verb{<chr>} State or US territory code location of the TIN
 associated with the clinician.}
 
-\item{specialty}{< \emph{character} > Specialty corresponding to the type of
+\item{specialty}{\verb{<chr>} Specialty corresponding to the type of
 service that the clinician submitted most on their Medicare Part B claims
 for this TIN/NPI combination.
 \itemize{
@@ -45,7 +45,7 @@ for this TIN/NPI combination.
 \item Cardiology
 }}
 
-\item{type}{< \emph{character} > Participation type; level at which the
+\item{type}{\verb{<chr>} Participation type; level at which the
 performance data was collected, submitted or reported for the final score
 attributed to the clinician; drives most of the data returned.
 \itemize{
@@ -54,11 +54,11 @@ attributed to the clinician; drives most of the data returned.
 \item \code{"MIPS APM"}
 }}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
 
-\item{nest}{< \emph{boolean} > // \strong{default:} \code{TRUE} Nest \code{status} & \code{measures}}
+\item{nest}{\verb{<lgl>} // \strong{default:} \code{TRUE} Nest \code{status} & \code{measures}}
 
-\item{eligibility}{< \emph{boolean} > // \strong{default:} \code{TRUE} Append results
+\item{eligibility}{\verb{<lgl>} // \strong{default:} \code{TRUE} Append results
 from \code{\link[=quality_eligibility]{quality_eligibility()}}}
 
 \item{...}{Pass arguments to \code{\link[=quality_payment]{quality_payment()}}.}

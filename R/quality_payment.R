@@ -24,16 +24,20 @@
 NULL
 
 #'
-#' @param year < *integer* > // **required** QPP performance year, in `YYYY`format.
+#' @param year `<int>` // **required** QPP performance year, in `YYYY`format.
 #' Run [qpp_years()] to return a vector of the years currently available.
-#' @param npi < *integer* > 10-digit Individual National Provider Identifier
+#'
+#' @param npi `<int>` 10-digit Individual National Provider Identifier
 #' assigned to the clinician when they enrolled in Medicare. Multiple rows for
 #' the same NPI indicate multiple TIN/NPI combinations.
-#' @param state < *character* > State or US territory code location of the TIN
+#'
+#' @param state `<chr>` State or US territory code location of the TIN
 #'  associated with the clinician.
-#' @param specialty < *character* > Specialty corresponding to the type of
+#'
+#' @param specialty `<chr>` Specialty corresponding to the type of
 #' service that the clinician submitted most on their Medicare Part B claims
 #' for this TIN/NPI combination.
+#'
 #' + Nurse Practitioner
 #' + Internal Medicine
 #' + Physician Assistant
@@ -43,23 +47,33 @@ NULL
 #' + Anesthesiology
 #' + Neurology
 #' + Cardiology
-#' @param type < *character* > Participation type; level at which the
+#'
+#' @param type `<chr>` Participation type; level at which the
 #' performance data was collected, submitted or reported for the final score
 #' attributed to the clinician; drives most of the data returned.
+#'
 #' + `"Group"`
 #' + `"Individual"`
 #' + `"MIPS APM"`
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param nest < *boolean* > // __default:__ `TRUE` Nest `status` & `measures`
-#' @param eligibility < *boolean* > // __default:__ `TRUE` Append results
+#'
+#' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
+#'
+#' @param nest `<lgl>` // __default:__ `TRUE` Nest `status` & `measures`
+#'
+#' @param eligibility `<lgl>` // __default:__ `TRUE` Append results
 #' from [quality_eligibility()]
+#'
 #' @param ... Empty
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
 #' quality_payment(year = 2020, npi = 1144544834)
+#'
 #' @rdname quality_payment
+#'
 #' @autoglobal
+#'
 #' @export
 quality_payment <- function(year,
                             npi         = NULL,
@@ -74,7 +88,7 @@ quality_payment <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(qpp_years()))
+  rlang::arg_match0(year, values = as.character(qpp_years()))
 
   npi <- npi %nn% validate_npi(npi)
 
@@ -149,9 +163,9 @@ quality_payment <- function(year,
                       "extreme_hardship_ia",
                       "ia_study",
                       "extreme_hardship_cost")) |>
-      cols_qpp("tidy") |>
-      dplyr::mutate(participation_type = fct_part(participation_type),
-                    state = fct_stabb(state))
+      cols_qpp("tidy") # FIXME |>
+      # dplyr::mutate(participation_type = fct_part(participation_type),
+      #               state = fct_stabb(state))
 
       if (nest) {
         pcol <- list(q = c('quality_measure_id_', 'quality_measure_score_') %s+% rep(1:10, each = 2),
@@ -227,11 +241,16 @@ quality_payment <- function(year,
 }
 
 #' Parallelized [quality_payment()]
+#'
 #' @param year < *integer* > // **required** Year data was reported, in `YYYY`
 #' format. Run [qpp_years()] to return a vector of the years currently available.
+#'
 #' @param ... Pass arguments to [quality_payment()].
+#'
 #' @rdname quality_payment
+#'
 #' @autoglobal
+#'
 #' @export
 quality_payment_ <- function(year = qpp_years(), ...) {
   furrr::future_map_dfr(year, quality_payment, ...,
