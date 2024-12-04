@@ -23,31 +23,31 @@ reassignments(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > \strong{Individual} 10-digit National Provider Identifier}
+\item{npi}{\verb{<chr>} \strong{Individual} 10-digit National Provider Identifier}
 
-\item{pac}{< \emph{integer} > \strong{Individual} 10-digit PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} \strong{Individual} 10-digit PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > \strong{Individual} 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} \strong{Individual} 15-digit Medicare Enrollment ID}
 
-\item{first, last}{< \emph{character} > \strong{Individual} Provider's name}
+\item{first, last}{\verb{<chr>} \strong{Individual} Provider's name}
 
-\item{state}{< \emph{character} > \strong{Individual} Enrollment state abbreviation}
+\item{state}{\verb{<chr>} \strong{Individual} Enrollment state abbreviation}
 
-\item{specialty}{< \emph{character} > \strong{Individual} Enrollment specialty}
+\item{specialty}{\verb{<chr>} \strong{Individual} Enrollment specialty}
 
-\item{organization}{< \emph{character} > \strong{Organizational} Legal business name}
+\item{organization}{\verb{<chr>} \strong{Organizational} Legal business name}
 
-\item{pac_org}{< \emph{integer} > \strong{Organizational} 10-digit PECOS Associate Control ID}
+\item{pac_org}{\verb{<chr>} \strong{Organizational} 10-digit PECOS Associate Control ID}
 
-\item{enid_org}{< \emph{character} > \strong{Organizational} 15-digit Medicare Enrollment ID}
+\item{enid_org}{\verb{<chr>} \strong{Organizational} 15-digit Medicare Enrollment ID}
 
-\item{state_org}{< \emph{character} > \strong{Organizational} Enrollment state abbreviation}
+\item{state_org}{\verb{<chr>} \strong{Organizational} Enrollment state abbreviation}
 
-\item{entry}{< \emph{character} > Entry type, reassignment (\code{"R"}) or employment (\code{"E"})}
+\item{entry}{\verb{<chr>} Entry type, reassignment (\code{"R"}) or employment (\code{"E"})}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<chr>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
 \item{...}{Empty}
 }

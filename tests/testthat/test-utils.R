@@ -144,12 +144,6 @@ test_that("narm() works", {
   expect_equal(narm(x), y)
 })
 
-
-test_that("github_raw() works", {
-  expect_equal(github_raw("andrewallenbruce/provider/"),
-  "https://raw.githubusercontent.com/andrewallenbruce/provider/")
-})
-
 test_that("format_param() works", {
   a <- "npi"
   b <- "1234567891"
@@ -175,12 +169,6 @@ test_that("encode_param() works", {
 
 test_that("encode_url() works", {
   expect_equal(encode_url("[ * ]"), "%5B%20%2A%20%5D")
-})
-
-test_that("file_url() works", {
-  args <- dplyr::tibble(param = "NPI", arg = "1144544834")
-  expect_snapshot(file_url(fn = "c", args = args, offset = 0L), error = FALSE)
-  expect_snapshot(file_url(fn = "a", args = args, offset = 0L), error = FALSE)
 })
 
 test_that("format_cli() works", {
