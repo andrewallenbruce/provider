@@ -16,19 +16,19 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi < *integer* > __Individual__ 10-digit National Provider Identifier
-#' @param pac < *integer* > __Individual__ 10-digit PECOS Associate Control ID
-#' @param enid < *character* > __Individual__ 15-digit Medicare Enrollment ID
-#' @param first,last < *character* > __Individual__ Provider's name
-#' @param state < *character* > __Individual__ Enrollment state abbreviation
-#' @param specialty < *character* > __Individual__ Enrollment specialty
-#' @param organization < *character* > __Organizational__ Legal business name
-#' @param pac_org < *integer* > __Organizational__ 10-digit PECOS Associate Control ID
-#' @param enid_org < *character* > __Organizational__ 15-digit Medicare Enrollment ID
-#' @param state_org < *character* > __Organizational__ Enrollment state abbreviation
-#' @param entry < *character* > Entry type, reassignment (`"R"`) or employment (`"E"`)
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
+#' @param npi `<chr>` __Individual__ 10-digit National Provider Identifier
+#' @param pac `<chr>` __Individual__ 10-digit PECOS Associate Control ID
+#' @param enid `<chr>` __Individual__ 15-digit Medicare Enrollment ID
+#' @param first,last `<chr>` __Individual__ Provider's name
+#' @param state `<chr>` __Individual__ Enrollment state abbreviation
+#' @param specialty `<chr>` __Individual__ Enrollment specialty
+#' @param organization `<chr>` __Organizational__ Legal business name
+#' @param pac_org `<chr>` __Organizational__ 10-digit PECOS Associate Control ID
+#' @param enid_org `<chr>` __Organizational__ 15-digit Medicare Enrollment ID
+#' @param state_org `<chr>` __Organizational__ Enrollment state abbreviation
+#' @param entry `<chr>` Entry type, reassignment (`"R"`) or employment (`"E"`)
+#' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
+#' @param na.rm `<chr>` // __default:__ `TRUE` Remove empty rows and columns
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -173,12 +173,3 @@ fct_record <- function(x) {
          levels = c("Physician Assistant", "Reassignment"),
          labels = c("Employment", "Reassignment"))
 }
-
-#' @autoglobal
-#' @noRd
-# nocov start
-georgia_reassignments <- function() {
-  pins::board_url(github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
-    pins::pin_read("georgia_reassignments")
-}
-# nocov end

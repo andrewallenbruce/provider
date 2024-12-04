@@ -33,7 +33,6 @@ Imports:
     vctrs,
     zeallot
 Suggests: 
-    covr,
     data.table,
     fipio,
     fontawesome,
@@ -45,7 +44,6 @@ Suggests:
     htmltools,
     httptest2,
     knitr,
-    rmarkdown,
     roxyglobals,
     rvest,
     sf,

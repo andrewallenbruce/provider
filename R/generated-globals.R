@@ -104,28 +104,14 @@ utils::globalVariables(c(
   # <rbcs_util>
   # <quality_payment>
   "category",
-  # <taxonomy_codes>
-  "Category",
   # <open_payments>
   "category_1",
-  # <taxonomy_codes>
-  "Category_Level",
   # <mips_2021>
   "ccxp_ind",
-  # <download_nucc_csv>
-  "classification",
-  # <taxonomy_codes>
-  "Classification",
-  # <taxonomy_codes>
-  "Classification_Level",
   # <laboratories>
   "clia_number",
   # <laboratories>
   "cmplnc_stus_cd",
-  # <download_nucc_csv>
-  "code",
-  # <taxonomy_codes>
-  "Code",
   # <laboratories>
   "cola",
   # <mips_2021>
@@ -154,17 +140,12 @@ utils::globalVariables(c(
   "current_clia_lab_clsfctn_cd",
   # <open_ids>
   "data",
-  # <download_nucc_csv>
-  "definition",
   # <gt_datadict>
   "Definition",
   # <cms_dataset_search>
   "description",
-  # <taxonomy_codes>
   # <gt_datadict>
   "Description",
-  # <download_nucc_csv>
-  "display_name",
   # <cms_update>
   # <open_ids>
   "distribution",
@@ -218,10 +199,6 @@ utils::globalVariables(c(
   "group_id",
   # <reassignments>
   "group_state_code",
-  # <taxonomy_codes>
-  "Grouping",
-  # <taxonomy_codes>
-  "Grouping_Level",
   # <cols_qelig>
   "grp_status",
   # <tidyup_provider.util>
@@ -229,8 +206,6 @@ utils::globalVariables(c(
   # <rbcs_util>
   # <compare_hcpcs>
   "hcpcs",
-  # <taxonomies>
-  "hierarchy",
   # <medline>
   "html",
   # <cms_update>
@@ -261,8 +236,6 @@ utils::globalVariables(c(
   # <tidyup_drug.rx>
   # <tidyup_service.util>
   "level",
-  # <taxonomy_codes>
-  "Level",
   # <ror>
   "lg",
   # <hospitals>
@@ -370,17 +343,9 @@ utils::globalVariables(c(
   "rndrng_prvdr_geo_lvl",
   # <quality_payment>
   "score",
-  # <download_nucc_csv>
-  "section",
   # <open_ids>
   # <quality_payment>
   "set",
-  # <download_nucc_csv>
-  "specialization",
-  # <taxonomy_codes>
-  "Specialization",
-  # <taxonomy_codes>
-  "Specialization_Level",
   # <tidyup_provider.util>
   # <tidyup_service.util>
   "specialty",
@@ -423,16 +388,6 @@ utils::globalVariables(c(
   "subtotal",
   # <medline>
   "summary._value",
-  # <taxonomy_codes>
-  "taxonomy_category",
-  # <taxonomy_codes>
-  "taxonomy_classification",
-  # <taxonomy_codes>
-  "taxonomy_code",
-  # <taxonomy_codes>
-  "taxonomy_grouping",
-  # <taxonomy_codes>
-  "taxonomy_specialization",
   # <quality_eligibility>
   "timelength_days",
   # <cms_update>

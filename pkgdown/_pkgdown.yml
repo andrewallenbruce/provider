@@ -125,7 +125,6 @@ reference:
   contents:
   - betos
   - ndc_lookup
-  - taxonomy_codes
   - taxonomy_crosswalk
 
 - title: Years

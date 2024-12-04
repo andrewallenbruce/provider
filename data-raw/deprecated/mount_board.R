@@ -22,3 +22,12 @@ mount_board <- function(source = c("local", "remote")) {
     )
   )
 }
+
+#' @autoglobal
+#' @noRd
+# nocov start
+georgia_reassignments <- function() {
+  pins::board_url(github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
+    pins::pin_read("georgia_reassignments")
+}
+# nocov end
