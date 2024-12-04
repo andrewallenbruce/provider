@@ -2,6 +2,7 @@ url: https://andrewallenbruce.github.io/provider/
 
 template:
   bootstrap: 5
+  light-switch: true
   bootswatch: simplex
   bslib:
     font_scale: 1
