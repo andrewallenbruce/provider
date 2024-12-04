@@ -227,17 +227,6 @@ narm <- function(df) {
   janitor::remove_empty(df, which = c("rows", "cols"))
 }
 
-#' Return GitHub raw url
-#' @param x url
-#' @returns raw url
-#' @examplesIf interactive()
-#' github_raw("andrewallenbruce/provider/")
-#' @autoglobal
-#' @noRd
-github_raw <- function(x) {
-  paste0("https://raw.githubusercontent.com/", x)
-}
-
 #' Format empty search results
 #' @param df data frame of parameter arguments
 #' @autoglobal
@@ -253,29 +242,4 @@ format_cli <- function(df) {
   cli::cli_alert_danger("No results for {.val {x}}",
                         wrap = TRUE)
 
-}
-
-#' Mount [pins][pins::pins-package] board
-#'
-#' @param source `"local"` or `"remote"`
-#'
-#' @return `<pins_board_folder>` or `<pins_board_url>`
-#'
-#' @noRd
-mount_board <- function(source = c("local", "remote")) {
-
-  source <- match.arg(source)
-
-  switch(
-    source,
-    local  = pins::board_folder(
-      fs::path_package(
-        "extdata/pins",
-        package = "provider")
-    ),
-    remote = pins::board_url(
-      fuimus::gh_raw(
-        "andrewallenbruce/provider/master/inst/extdata/pins/")
-    )
-  )
 }

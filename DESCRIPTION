@@ -3,7 +3,7 @@ Package: provider
 Title: Access Public Healthcare Provider Data
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+    person(c("Andrew", "Allen"), "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Provides various features to facilitate easy access to
     publicly available healthcare provider data. Includes functions to
@@ -23,7 +23,6 @@ Imports:
     janitor,
     lifecycle,
     lubridate,
-    pins,
     purrr,
     rlang (>= 1.1.0),
     rxnorm,
@@ -38,7 +37,6 @@ Suggests:
     data.table,
     fipio,
     fontawesome,
-    fs,
     fuimus,
     future,
     glue,
@@ -47,7 +45,6 @@ Suggests:
     htmltools,
     httptest2,
     knitr,
-    qs,
     rmarkdown,
     roxyglobals,
     rvest,
