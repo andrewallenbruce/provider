@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/IBM_Plex_Sans-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Fira_Code-0.4.9/font.css" rel="stylesheet">
@@ -29,7 +29,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
@@ -80,7 +80,7 @@ IDs, CCNs, CLIAs and More</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2024-11-18</h4>
+            <h4 data-toc-skip class="date">2024-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/articles/networks.Rmd" class="external-link"><code>vignettes/articles/networks.Rmd</code></a></small>
       <div class="d-none name"><code>networks.Rmd</code></div>
@@ -129,9 +129,9 @@ Bruce</h4>
 <span>  directed <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">example</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH 8d902cf DN-- 2 2 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH 7b27cdd DN-- 2 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), x (v/n), y (v/n), label (e/c)</span></span>
-<span><span class="co">#&gt; + edges from 8d902cf (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 7b27cdd (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Individual  -&gt;Organization Organization-&gt;Individual</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">example</span>, layout <span class="op">=</span> <span class="st">"manual"</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
@@ -160,64 +160,28 @@ Bruce</h4>
 <span>                        <span class="fu"><a href="https://stringr.tidyverse.org/reference/modifiers.html" class="external-link">regex</a></span><span class="op">(</span><span class="st">"Llc|Inc| Pc|-|,+|\\."</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>         organization <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_squish</a></span><span class="op">(</span><span class="va">organization</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">provider</span>, <span class="va">organization</span>, <span class="va">reassignments</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">reassignments</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">williams</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 38 × 3</span></span></span>
-<span><span class="co">#&gt;    provider          organization                                  reassignments</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> JONATHAN WILLIAMS Emergency Coverage Corp                                 257</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  212</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> JONATHAN WILLIAMS Crisp Regional Hospital                                 200</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         184</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           137</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> JONATHAN WILLIAMS Union County Hospital Authority                         117</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> JONATHAN WILLIAMS Clinch County Hospital Authority                        104</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> JONATHAN WILLIAMS Sgmp Southland                                          102</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> JONATHAN WILLIAMS Southland Consolidated Emergency Services                75</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> JONATHAN WILLIAMS Southland Emergency Medical Services                     74</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more rows</span></span></span></code></pre>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">reassignments</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in filter(provider:::georgia_reassignments(), npi == "1346391299"): object 'georgia_reassignments' not found</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">williams</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'williams' not found</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="tidygraph">
 <code>{tidygraph}</code><a class="anchor" aria-label="anchor" href="#tidygraph"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">will_tdgrph</span> <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html" class="external-link">as_tbl_graph</a></span><span class="op">(</span><span class="va">williams</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">will_tdgrph</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH 5decc7e UN-- 39 38 -- </span></span>
-<span><span class="co">#&gt; + attr: name (v/c), reassignments (e/n)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">will_tdgrph</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tbl_graph: 39 nodes and 38 edges</span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; #</span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # An unrooted tree</span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; #</span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Node Data: 39 × 1 (active)</span></span></span>
-<span><span class="co">#&gt;    name                                             </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> JONATHAN WILLIAMS                                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Emergency Coverage Corp                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Southland Bainbridge Hospitalist Group           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Crisp Regional Hospital                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Phoebe Putney Memorial Hospital                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Southland Emergency Medical Services Consolidated</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Union County Hospital Authority                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Clinch County Hospital Authority                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Sgmp Southland                                   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Southland Consolidated Emergency Services        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#</span></span></span>
-<span><span class="co"><span style="color: #949494;">#&gt; # Edge Data: 38 × 3</span></span></span>
-<span><span class="co">#&gt;    from    to reassignments</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     2           257</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     3           212</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     4           200</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 35 more rows</span></span></span></code></pre>
-<p><br><br></p>
+<code class="sourceCode R"><span><span class="va">will_tdgrph</span> <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html" class="external-link">as_tbl_graph</a></span><span class="op">(</span><span class="va">williams</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'williams' not found</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">will_tdgrph</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'will_tdgrph' not found</span></span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">will_tdgrph</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'will_tdgrph' not found</span></span></code></pre>
+<p><br><br></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">will_tdgrph</span>, <span class="st">"stress"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html" class="external-link">geom_edge_link</a></span><span class="op">(</span>end_cap <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html" class="external-link">circle</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">'mm'</span><span class="op">)</span>, </span>
 <span>                 edge.width <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -233,8 +197,8 @@ Bruce</h4>
 <span>                 label.size <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>                 check_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span>fg_text_colour <span class="op">=</span> <span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="networks_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; Error: object 'will_tdgrph' not found</span></span></code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># individuals &lt;- southland |&gt;</span></span>
 <span><span class="co">#   filter(associations &gt; 5) |&gt; </span></span>
 <span><span class="co">#   distinct(npi_ind, .keep_all = TRUE) |&gt; </span></span>
@@ -254,7 +218,7 @@ Bruce</h4>
 <span><span class="co">#   filter(organization != "SGMP SOUTHLAND LLC")</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># individuals</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.9871</span>, <span class="fl">0.9485</span>, <span class="fl">0.8855</span>, <span class="fl">0.7994</span>, <span class="fl">0.6927</span>, <span class="fl">0.5681</span>, <span class="fl">0.4287</span>, <span class="fl">0.2782</span>, <span class="fl">0.1205</span>,</span>
 <span>    <span class="op">-</span><span class="fl">0.0403</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.3546</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.6324</span>, <span class="op">-</span><span class="fl">0.7485</span>, <span class="op">-</span><span class="fl">0.8452</span>, <span class="op">-</span><span class="fl">0.92</span>, <span class="op">-</span><span class="fl">0.9709</span>, <span class="op">-</span><span class="fl">0.9968</span>,</span>
 <span>    <span class="op">-</span><span class="fl">0.9968</span>, <span class="op">-</span><span class="fl">0.9709</span>, <span class="op">-</span><span class="fl">0.92</span>, <span class="op">-</span><span class="fl">0.8452</span>, <span class="op">-</span><span class="fl">0.7485</span>, <span class="op">-</span><span class="fl">0.6324</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.3546</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.0403</span>,</span>
@@ -275,15 +239,7 @@ Bruce</h4>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html" class="external-link">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"#0F0909"</span>, size <span class="op">=</span> <span class="fl">4</span>, family <span class="op">=</span> <span class="st">"Helvetica"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `geom_node_point()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Problem while computing aesthetics.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred in the 2nd layer.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `compute_aesthetics()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Aesthetics are not valid data columns.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> The following aesthetics are invalid:</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> `fill = NULL`</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> `size = NULL`</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mistype the name of a data column or forget to add `after_stat()`?</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error: object 'will_tdgrph' not found</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -292,7 +248,7 @@ Bruce</h4>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Andrew Bruce.</p>
+  <p>Developed by Andrew Allen Bruce.</p>
 </div>
 
 <div class="pkgdown-footer-right">
