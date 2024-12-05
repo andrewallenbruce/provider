@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r setup, include = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
@@ -18,15 +18,12 @@ knitr::opts_chunk$set(
   dpi       = 300, 
   out.width = "100%"
 )
-options(scipen = 999)
-```
+options(scipen = 999, digits = 2)
 
-```{r, warning=FALSE, message=FALSE}
 library(provider)
 library(dplyr)
 library(purrr)
 ```
-
 
 The overarching goal of `{provider}` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following goals:
 
@@ -95,8 +92,8 @@ qpp_years()
 
 These can also be used in a pipeline, for searching all available years:
 
-```{r}
-map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
+```{r, eval=FALSE}
+map_dfr(qpp_years(), ~ quality_payment(year = .x, npi = 1043477615)) |> 
   select(year, 
          participation_type, 
          beneficiaries,
@@ -110,7 +107,7 @@ map_dfr(qpp_years(), ~quality_payment(year = .x, npi = 1043477615)) |>
 
 Several functions have _parallelized_ versions, denoted by an underscore at the end of their name (`_`):
 
-```{r}
+```{r, eval=FALSE}
 quality_payment_(npi = 1043477615) |> 
   select(year, 
          participation_type, 

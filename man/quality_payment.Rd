@@ -11,9 +11,9 @@ quality_payment(
   state = NULL,
   specialty = NULL,
   type = NULL,
-  tidy = TRUE,
-  nest = TRUE,
-  eligibility = TRUE,
+  tidy = FALSE,
+  nest = FALSE,
+  eligibility = FALSE,
   ...
 )
 
@@ -97,5 +97,7 @@ TIN/NPI level on what was published in the previous performance year.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_payment(year = 2020, npi = 1144544834)
+
+quality_payment(year = 2022, npi = 1043477615)
 \dontshow{\}) # examplesIf}
 }

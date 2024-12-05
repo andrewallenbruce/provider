@@ -5,10 +5,9 @@ template:
   light-switch: true
   bootswatch: simplex
   bslib:
-    font_scale: 1
     base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Kanit"}
-    code_font: {google: "Fira Code"}
+    code_font: {google: "JetBrains Mono"}
 
 home:
   title: provider • Access Healthcare Provider Data

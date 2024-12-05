@@ -65,10 +65,12 @@ NULL
 #'
 #' @param ... Empty
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
 #' quality_payment(year = 2020, npi = 1144544834)
+#'
+#' quality_payment(year = 2022, npi = 1043477615)
 #'
 #' @rdname quality_payment
 #'
@@ -80,9 +82,9 @@ quality_payment <- function(year,
                             state       = NULL,
                             specialty   = NULL,
                             type        = NULL,
-                            tidy        = TRUE,
-                            nest        = TRUE,
-                            eligibility = TRUE,
+                            tidy        = FALSE,
+                            nest        = FALSE,
+                            eligibility = FALSE,
                             ...) {
 
 
@@ -98,6 +100,8 @@ quality_payment <- function(year,
     "practice state or us territory", state,
     "clinician specialty",            specialty,
     "participation type",             type)
+
+  # id <- "b3438273-b4a6-44ca-8fb2-9e6026b74642"
 
   id <- api_years("qpp") |>
     dplyr::filter(year == {{ year }}) |>
@@ -180,8 +184,12 @@ quality_payment <- function(year,
                            dplyr::contains("ind_"))) |>
           dplyr::arrange(year, participation_type)
 
-        measures <- dplyr::select(results, year, npi, participation_type,
-                                  dplyr::any_of(pcol)) |>
+        measures <- dplyr::select(
+          results,
+          year,
+          npi,
+          participation_type,
+          dplyr::any_of(pcol)) |>
           dplyr::arrange(year, participation_type) |>
           tidyr::pivot_longer(
             cols          = dplyr::any_of(pcol),
