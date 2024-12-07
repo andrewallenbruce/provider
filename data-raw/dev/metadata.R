@@ -422,6 +422,10 @@ meta.open <- function(search = NULL, tidy = TRUE, year = NULL) {
   )
 }
 
+# https://sentenz.github.io/convention/convention/iso-8601/#19-recurring-time-intervals
+# https://en.wikipedia.org/wiki/ISO_8601#Repeating_intervals
+# https://gist.github.com/rbeauchamp/6d8f8ffe22358665a9dd6571b79e1d5f
+# https://gist.github.com/TurtleNav/fd0ee1ef3e576cd778724fd5b7985f46
 #' @autoglobal
 #' @noRd
 iso_8601 <- function(x) {

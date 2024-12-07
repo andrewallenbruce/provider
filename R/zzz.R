@@ -15,31 +15,42 @@
 #' @export
 cms_distributions <- \() {
 
-  datasets <- c(
-    hospitals       = "^Hospital Enrollments",
-    providers       = "^Medicare Fee-For-Service  Public Provider Enrollment",
-    crosswalk       = "^Medicare Provider and Supplier Taxonomy Crosswalk",
-    orderrefer      = "^Order and Referring",
-    pending         = "^Pending Initial Logging and Tracking",
-    quality_payment = "^Quality Payment Program Experience",
-    rbcs            = "^Restructured BETOS Classification System",
-    reassignment    = "^Revalidation", # Clinic Group Practice Reassignment",
-    optout          = "^Opt Out Affidavits",
-    utilization     = "^Medicare Physician & Other Practitioners",
-    outpatient      = "^Medicare Outpatient Hospitals",
-    laboratories    = "^Provider of Services File - Clinical Laboratories",
-    beneficiaries   = "^Medicare Monthly Enrollment",
-    prescribers     = "^Medicare Part D Prescribers"
+  datasets <- vctrs::vec_c(
+    # affiliations    = "Facility Affiliation Data",
+    # clinicians      = "National Downloadable File",
+    # open_payments   = "General Payment Data",
+    beneficiaries   = "Medicare Monthly Enrollment",
+    crosswalk       = "Medicare Provider and Supplier Taxonomy Crosswalk",
+    hospitals       = "Hospital Enrollments",
+    laboratories    = "Provider of Services File - Clinical Laboratories",
+    outpatient      = c(service = "Medicare Outpatient Hospitals - by Provider and Service",
+                        geography = "Medicare Outpatient Hospitals - by Geography and Service"),
+    orderrefer      = "Order and Referring",
+    pending         = c(physicians = "Pending Initial Logging and Tracking",
+                        nonphysicians = "Pending Initial Logging and Tracking Non Physicians"),
+    providers       = "Medicare Fee-For-Service  Public Provider Enrollment",
+    quality         = "Quality Payment Program Experience",
+    rbcs            = "Restructured BETOS Classification System",
+    reassignment    = "Revalidation Reassignment List", # Clinic Group Practice Reassignment",
+    optout          = "Opt Out Affidavits",
+    prescribers     = c(provider = "Medicare Part D Prescribers - by Provider",
+                        drug = "Medicare Part D Prescribers - by Provider and Drug",
+                        geography = "Medicare Part D Prescribers - by Geography and Drug"),
+    utilization     = c(provider = "Medicare Physician & Other Practitioners - by Provider",
+                        service = "Medicare Physician & Other Practitioners - by Provider and Service",
+                        geography = "Medicare Physician & Other Practitioners - by Geography and Service"),
+    .name_spec = "{outer}_{inner}"
   )
 
   resp <- httr2::request("https://data.cms.gov/data.json") |>
     httr2::req_perform()
 
   resp <- as.Date(
-    regmatches(resp[["headers"]][["Last-Modified"]],
-               regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}",
-                       resp[["headers"]][["Last-Modified"]],
-                       perl = TRUE)),
+    regmatches(
+      resp[["headers"]][["Last-Modified"]],
+      regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}",
+              resp[["headers"]][["Last-Modified"]],
+              perl = TRUE)),
     format = "%d %b %Y")
 
   arrow_cms <- arrow::read_json_arrow(
