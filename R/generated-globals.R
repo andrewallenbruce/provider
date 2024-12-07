@@ -5,10 +5,6 @@ utils::globalVariables(c(
   ".name_1",
   # <open_payments>
   ".pdi_1",
-  # <add_counties>
-  # <ror>
-  # <change_year>
-  ":=",
   # <laboratories>
   "a2la",
   # <laboratories>
@@ -148,14 +144,19 @@ utils::globalVariables(c(
   "Description",
   # <cms_update>
   # <open_ids>
+  # <cms_distributions>
   "distribution",
   # <cms_update>
+  # <cms_distributions>
   "distribution_accessURL",
   # <cms_update>
+  # <cms_distributions>
   "distribution_format",
   # <cms_update>
+  # <cms_distributions>
   "distribution_modified",
   # <cms_update>
+  # <cms_distributions>
   "distribution_title",
   # <outpatient>
   # <prescribers>
@@ -249,6 +250,7 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
+  # <cms_distributions>
   "modified",
   # <open_payments>
   # <cols_qelig>
@@ -394,6 +396,7 @@ utils::globalVariables(c(
   # <cms_dataset_search>
   # <medline>
   # <open_ids>
+  # <cms_distributions>
   "title",
   # <medline>
   "title._value",
@@ -453,6 +456,7 @@ utils::globalVariables(c(
   # <compare_hcpcs>
   # <open_ids>
   # <cols_qelig>
+  # <cms_distributions>
   "year",
   # <add_counties>
   "zip",

@@ -98,7 +98,7 @@ format_param <- function(param, arg, type = "filter") {
 
   rlang::check_required(param)
   rlang::check_required(arg)
-  rlang::arg_match(type, c("filter", "sql"))
+  rlang::arg_match0(type, c("filter", "sql"))
 
   if (type %in% 'filter') {out <- paste0("filter[", param, "]=", arg)}
   if (type %in% 'sql')    {out <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}

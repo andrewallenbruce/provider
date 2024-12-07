@@ -1,6 +1,6 @@
 test_that("format_zipcode() works", {
-  expect_equal(format_zipcode(123456789), "12345-6789")
-  expect_equal(format_zipcode(12345), "12345")
+  expect_equal(format_zipcode("123456789"), "12345-6789")
+  expect_equal(format_zipcode("12345"), "12345")
   })
 
 test_that("clean_credentials() works", {

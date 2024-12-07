@@ -17,6 +17,8 @@ Depends:
     R (>= 4.1.0)
 Imports: 
     cli,
+    collapse,
+    arrow,
     dplyr,
     furrr,
     httr2,
@@ -31,9 +33,9 @@ Imports:
     stringr,
     tidyr,
     vctrs,
+    data.table,
     zeallot
 Suggests: 
-    data.table,
     fipio,
     fontawesome,
     fuimus,

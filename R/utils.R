@@ -1,39 +1,42 @@
-#' Infix operator for `if (!is.null(x)) y else x` statements
+#' Infix if (!is.null(x)) y else x
+#'
 #' @param x,y description
-#' @return description
+#'
+#' @returns y if x is not NULL, otherwise x
+#'
 #' @examples
 #' ccn <- 123456
-#' ccn <- ccn %nn% as.character(ccn)
-#' ccn
+#'
+#' ccn %nn% as.character(ccn)
+#'
+#' NULL %nn% as.character(ccn)
+#'
 #' @autoglobal
+#'
 #' @noRd
-`%nn%` <- function(x, y) if (!is.null(x)) y else x #nocov
-
-#' Infix operator for `not in` statements
-#' @return description
-#' @autoglobal
-#' @noRd
-`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L #nocov
+`%nn%` <- \(x, y) if (!is.null(x)) y else x #nocov
 
 #' Format US ZIP codes
-#' @param zip Nine-digit US ZIP code
-#' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
+#'
+#' @param x Nine-digit US ZIP code
+#'
+#' @returns ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
+#'
 #' @examples
 #' format_zipcode(123456789)
 #' format_zipcode(12345)
+#'
 #' @autoglobal
+#'
 #' @noRd
-format_zipcode <- function(zip) {
+format_zipcode <- function(x) {
 
-  zip <- as.character(zip)
+  stopifnot(is.character(x))
 
-  if (stringr::str_detect(zip, "^[[:digit:]]{9}$") == TRUE) {
-    zip <- paste0(stringr::str_sub(zip, 1, 5), "-",
-                  stringr::str_sub(zip, 6, 9))
-    return(zip)
-    } else {
-      return(zip)
-  }
+  if (grepl("^[0-9]{9}$", x))
+    paste0(substr(x, 1, 5), "-", substr(x, 6, 9))
+  else x
+
 }
 
 #' Remove periods from credentials
@@ -92,37 +95,43 @@ tf_2_yn <- function(x) {
     x,
     TRUE ~ "Y",
     FALSE ~ "N",
-    .default = NULL
+    .default = NA_character_
   )
 }
 
 #' @param abb state abbreviation
-#' @return state full name
+#'
+#' @returns state full name
+#'
 #' @autoglobal
+#'
 #' @noRd
 abb2full <- function(abb,
                      arg = rlang::caller_arg(abb),
                      call = rlang::caller_env()) {
 
-  results <- dplyr::tibble(x = c(state.abb[1:8],
-                                 'DC',
-                                 state.abb[9:50],
-                                 'AS', 'GU', 'MP', 'PR', 'VI', 'UK'),
-                           y = c(state.name[1:8],
-                                 'District of Columbia',
-                                 state.name[9:50],
-                                 'American Samoa',
-                                 'Guam',
-                                 'Northern Mariana Islands',
-                                 'Puerto Rico',
-                                 'Virgin Islands',
-                                 'Unknown')) |>
+  results <- dplyr::tibble(
+    x = c(state.abb[1:8],
+          'DC',
+          state.abb[9:50],
+          'AS', 'GU', 'MP', 'PR', 'VI', 'UK'),
+    y = c(state.name[1:8],
+          'District of Columbia',
+          state.name[9:50],
+          'American Samoa',
+          'Guam',
+          'Northern Mariana Islands',
+          'Puerto Rico',
+          'Virgin Islands',
+          'Unknown')) |>
     dplyr::filter(x == abb) |>
     dplyr::pull(y)
 
   if (vctrs::vec_is_empty(results)) {
-    cli::cli_abort(c("{.val {abb}} is not a valid state abbreviation."), # nolint
-                   call = call)
+    cli::cli_abort(
+      c("{.arg {arg}} is not a valid state abbreviation."), # nolint
+      arg = arg,
+      call = call)
   }
   return(results)
 }
@@ -135,7 +144,10 @@ abb2full <- function(abb,
 #' @keywords internal
 display_long <- function(df, cols = dplyr::everything()) {
 
-  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
+  df |>
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::everything(), as.character)) |>
         tidyr::pivot_longer({{ cols }})
 }
 
@@ -212,11 +224,13 @@ tidyup <- function(df,
 #' @noRd
 combine <- function(df, nm, cols, sep = " ") {
 
-  return(tidyr::unite(df, col = {{ nm }},
-                      dplyr::any_of(cols),
-                      remove = TRUE,
-                      na.rm = TRUE,
-                      sep = sep))
+  tidyr::unite(
+    df,
+    col = {{ nm }},
+    dplyr::any_of(cols),
+    remove = TRUE,
+    na.rm = TRUE,
+    sep = sep)
 }
 
 #' Remove empty rows and columns
@@ -233,13 +247,15 @@ narm <- function(df) {
 #' @noRd
 format_cli <- function(df) {
 
-  x <- purrr::map2(df$x,
-                   df$y,
-                   stringr::str_c,
-                   sep = " = ",
-                   collapse = "")
+  x <- purrr::map2(
+    df$x,
+    df$y,
+    stringr::str_c,
+    sep = " = ",
+    collapse = "")
 
-  cli::cli_alert_danger("No results for {.val {x}}",
-                        wrap = TRUE)
-
+  cli::cli_alert_danger(
+    "No results for {.val {x}}",
+    wrap = TRUE
+    )
 }

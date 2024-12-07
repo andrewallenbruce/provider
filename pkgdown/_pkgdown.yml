@@ -5,8 +5,8 @@ template:
   light-switch: true
   bootswatch: simplex
   bslib:
-    base_font: {google: "IBM Plex Sans"}
-    heading_font: {google: "Kanit"}
+    base_font: {google: "Roboto Condensed"}
+    heading_font: {google: "Roboto"}
     code_font: {google: "JetBrains Mono"}
 
 home:

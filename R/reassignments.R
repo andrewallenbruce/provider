@@ -79,7 +79,7 @@ reassignments <- function(npi          = NULL,
   enid_org <- enid_org %nn% check_enid(enid_org)
 
   if (!is.null(entry)) {
-    entry <- rlang::arg_match(entry, c("E", "R"))
+    entry <- rlang::arg_match0(entry, c("E", "R"))
     entry <- dplyr::case_match(entry, "E" ~ "Physician Assistant",
                                       "R" ~ "Reassignment")
     }

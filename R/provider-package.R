@@ -5,6 +5,7 @@
 #' @importFrom lifecycle deprecated
 #' @importFrom zeallot %<-%
 #' @importFrom stringi %s+%
-#' @importFrom rlang %||%
+#' @importFrom collapse %==%
+#' @import rlang
 ## usethis namespace: end
 NULL
