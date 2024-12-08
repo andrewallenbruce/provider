@@ -144,19 +144,19 @@ utils::globalVariables(c(
   "Description",
   # <cms_update>
   # <open_ids>
-  # <cms_distributions>
+  # <distributions_cms>
   "distribution",
   # <cms_update>
-  # <cms_distributions>
+  # <distributions_cms>
   "distribution_accessURL",
   # <cms_update>
-  # <cms_distributions>
+  # <distributions_cms>
   "distribution_format",
   # <cms_update>
-  # <cms_distributions>
+  # <distributions_cms>
   "distribution_modified",
   # <cms_update>
-  # <cms_distributions>
+  # <distributions_cms>
   "distribution_title",
   # <outpatient>
   # <prescribers>
@@ -250,7 +250,7 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
-  # <cms_distributions>
+  # <distributions_cms>
   "modified",
   # <open_payments>
   # <cols_qelig>
@@ -337,6 +337,8 @@ utils::globalVariables(c(
   "recipient_state",
   # <reassignments>
   "record_type",
+  # <distributions_open>
+  "response",
   # <laboratories>
   "rgn_cd",
   # <tidyup_geography.util>
@@ -396,7 +398,7 @@ utils::globalVariables(c(
   # <cms_dataset_search>
   # <medline>
   # <open_ids>
-  # <cms_distributions>
+  # <distributions_cms>
   "title",
   # <medline>
   "title._value",
@@ -456,7 +458,7 @@ utils::globalVariables(c(
   # <compare_hcpcs>
   # <open_ids>
   # <cols_qelig>
-  # <cms_distributions>
+  # <distributions_cms>
   "year",
   # <add_counties>
   "zip",

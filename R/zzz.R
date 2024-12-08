@@ -1,21 +1,23 @@
 .onLoad <- function(libname, pkgname) {
-  .__distros <<- cms_distributions()
+  .__distros <<- distributions_cms()
 }
 
 .onUnload <- function(libpath) {
   remove(".__distros", envir = .GlobalEnv)
 }
 
-#' Retrieve the latest CMS distributions
+#' Main CMS Distributions
 #'
 #' @autoglobal
+#'
+#' @returns description
 #'
 #' @keywords internal
 #'
 #' @export
-cms_distributions <- \() {
+distributions_cms <- \() {
 
-  datasets <- vctrs::vec_c(
+  datasets <- c(
     # affiliations    = "Facility Affiliation Data",
     # clinicians      = "National Downloadable File",
     # open_payments   = "General Payment Data",
@@ -38,8 +40,7 @@ cms_distributions <- \() {
                         geography = "Medicare Part D Prescribers - by Geography and Drug"),
     utilization     = c(provider = "Medicare Physician & Other Practitioners - by Provider",
                         service = "Medicare Physician & Other Practitioners - by Provider and Service",
-                        geography = "Medicare Physician & Other Practitioners - by Geography and Service"),
-    .name_spec = "{outer}_{inner}"
+                        geography = "Medicare Physician & Other Practitioners - by Geography and Service")
   )
 
   resp <- httr2::request("https://data.cms.gov/data.json") |>
@@ -108,4 +109,96 @@ cms_distributions <- \() {
     last_modified = resp,
     distributions = arrow_cms
   )
+}
+
+#' Doctors and Clinicians (National Downloadable File) Distributions
+#'
+#' @autoglobal
+#'
+#' @returns description
+#'
+#' @keywords internal
+#'
+#' @export
+distributions_natl <- \() {
+
+  id <- c(
+    affiliations = "27ea-46a8",
+    clinicians = "mj5m-pzi6")
+
+  urls <- glue::glue(
+    "https://data.cms.gov/",
+    "provider-data/api/1/metastore/",
+    "schemas/dataset/items/",
+    "{unname(id)}?show-reference-ids=true")
+
+  reqs <- list(
+    httr2::request(urls[1]),
+    httr2::request(urls[2]))
+
+  resps <- httr2::req_perform_parallel(reqs, on_error = "continue")
+
+  af <- httr2::resp_body_json(resps[[1]], simplifyVector = TRUE)
+  cl <- httr2::resp_body_json(resps[[2]], simplifyVector = TRUE)
+
+  list(
+    identifier = af$identifier,
+    description = af$description,
+    title = af$title,
+    distribution = af$distribution$identifier,
+    landing = af$landingPage,
+    issued = af$issued,
+    modified = af$modified,
+    released = af$released,
+    csv_url = af$distribution$data$downloadURL
+    )
+
+  list(
+    identifier = cl$identifier,
+    description = cl$description,
+    title = cl$title,
+    distribution = cl$distribution$identifier,
+    landing = cl$landingPage,
+    issued = cl$issued,
+    modified = cl$modified,
+    released = cl$released,
+    csv_url = cl$distribution$data$downloadURL
+  )
+}
+
+# url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+#               "[SELECT * FROM ", id$distribution$identifier, "]",
+#               encode_param(args, type = "sql"),
+#               "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
+
+#' Open Payments CMS Distributions
+#'
+#' @autoglobal
+#'
+#' @returns description
+#'
+#' @keywords internal
+#'
+#' @export
+distributions_open <- function() {
+
+  url <- paste0(
+    "https://openpaymentsdata.cms.gov/",
+    "api/1/metastore/schemas/dataset/",
+    "items?show-reference-ids")
+
+  httr2::request(url) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(
+    response,
+    check_type = FALSE,
+    simplifyVector = TRUE) |>
+    dplyr::tibble() # |>
+    # dplyr::select(title, modified, distribution) |>
+    # tidyr::unnest(cols = distribution) |>
+    # tidyr::unnest(cols = data,
+    #               names_sep = ".") |>
+    # dplyr::arrange(dplyr::desc(title)) |>
+    # dplyr::mutate(set  = strex::str_after_first(title, " "), .before = 1) |>
+    # dplyr::select(set, identifier)
 }
