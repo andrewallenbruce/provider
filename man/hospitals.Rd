@@ -171,12 +171,9 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=hospitals]{hospitals()}} allows the user to search for information on all hospitals
-currently enrolled in Medicare. Data returned includes the hospital's
-sub-group types, legal business name, doing-business-as name, organization
-type and address.
+Access information on all hospitals currently enrolled in Medicare. Data
+returned includes the hospital's sub-group types, legal business name,
+doing-business-as name, organization type and address.
 
 \emph{Update Frequency:} \strong{Monthly}
 }
@@ -193,16 +190,16 @@ hospitals(pac_org = 6103733050)
 
 hospitals(state = "GA", reh = TRUE)
 
-hospitals(city = "Savannah", state = "GA") |>
-          dplyr::select(organization, subgroup)
+hospitals(city = "Savannah", state = "GA")
 
-hospitals(city = "Savannah", state = "GA",
-          subgroup = list(acute = FALSE)) |>
-          dplyr::select(organization, subgroup)
+hospitals(city = "Savannah",
+          state = "GA",
+          subgroup = list(acute = FALSE))
 
-hospitals(city = "Savannah", state = "GA",
-          subgroup = list(gen = TRUE,
-          rehab = FALSE)) |>
-          dplyr::select(organization, subgroup)
+hospitals(city = "Savannah",
+          state = "GA",
+          subgroup = list(
+          gen = TRUE,
+          rehab = FALSE))
 \dontshow{\}) # examplesIf}
 }

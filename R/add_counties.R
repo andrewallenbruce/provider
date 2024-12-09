@@ -1,39 +1,35 @@
 #' Add county name, FIPs, and geometry to data frame with zip codes
+#'
 #' @param df data frame
+#'
 #' @param statecol bare column name column containing state abbreviations
+#'
 #' @param zipcol bare column name containing zip codes
+#'
 #' @param add_fips add county FIPS code column, default is `FALSE`
+#'
 #' @param add_geo add county geometry column, default is `FALSE`
+#'
 #' @param as_sf convert tibble to an `{sf}` object, default is `FALSE`
 #'
-#' @examplesIf interactive()
+#' @examples
+#' # Example data frame containing
+#' # state abbreviation and zip code
 #'
-#' # Example data frame containing state abbreviation and zip code
-#' ex <- dplyr::tibble(state = "GA",
-#'                     zip = "31605")
-#' ex
+#' (ex <- dplyr::tibble(state = "GA", zip = "31605"))
 #'
-#' # Adds county name and latitude/longitude
+#' # Add county and latitude/longitude
 #' ex |> add_counties(state, zip)
 #'
-#' # Adds county FIPS
-#' ex |> add_counties(state,
-#'                    zip,
-#'                    add_fips = TRUE)
+#' # Add county FIPS
+#' ex |> add_counties(state, zip, add_fips = TRUE)
 #'
-#' # Adds county `geometry` column,
+#' # Add county `geometry` column,
 #' # based on county FIPS column
-#' ex |> add_counties(state,
-#'                    zip,
-#'                    add_fips = TRUE,
-#'                    add_geo  = TRUE)
+#' ex |> add_counties(state, zip, add_fips = TRUE, add_geo = TRUE)
 #'
-#' # Converts data frame to an `sf` object
-#' ex |> add_counties(state,
-#'                    zip,
-#'                    add_fips = TRUE,
-#'                    add_geo  = TRUE,
-#'                    as_sf    = TRUE)
+#' # Convert to an `sf` object
+#' ex |> add_counties(state, zip, add_fips = TRUE, add_geo = TRUE, as_sf = TRUE)
 #'
 #' @autoglobal
 #' @export

@@ -110,12 +110,9 @@ Classifications to HCPCS codes}
 \item{...}{Pass arguments to \code{\link[=utilization]{utilization()}}.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=utilization]{utilization()}} allows access to information on services and
-procedures provided to Original Medicare (fee-for-service) Part B
-beneficiaries by physicians and other healthcare professionals; aggregated
-by provider, service and geography.
+Access information on services and procedures provided to Original
+Medicare (fee-for-service) Part B beneficiaries by physicians and other
+healthcare professionals; aggregated by provider, service and geography.
 }
 \section{By Provider}{
 

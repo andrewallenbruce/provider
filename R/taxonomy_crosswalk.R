@@ -1,11 +1,8 @@
 #' Taxonomy Code // Medicare Specialty
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' `taxonomy_crosswalk()` allows you to search the types of providers and
-#' suppliers eligible for Medicare programs by taxonomy code or Medicare
-#' specialty type code.
+#' Allows you to search the types of providers and suppliers eligible for
+#' Medicare programs by taxonomy code or Medicare specialty type code.
 #'
 #' ## Taxonomy Codes
 #' The **Healthcare Provider Taxonomy Code Set** is a hierarchical HIPAA

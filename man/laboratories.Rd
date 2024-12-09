@@ -52,10 +52,8 @@ laboratories(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=laboratories]{laboratories()}} allows you to search for information on clinical laboratories
-including demographics and the type of testing services the facility provides.
+Access information on clinical laboratories including demographics and
+the type of testing services the facility provides.
 }
 \section{Clinical Laboratory Improvement Amendments (CLIA)}{
 

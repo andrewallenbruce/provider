@@ -1,9 +1,7 @@
 #' Quality Payment Program Experience
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [quality_payment()]  allows the user access to information on participation
+#' Allows the user access to information on participation
 #' and performance in the Merit-based Incentive Payment System (MIPS) and
 #' Advanced Alternative Payment Models (APMs) tracks.
 #'
@@ -15,7 +13,7 @@
 #' TIN/NPI level on what was published in the previous performance year.
 #'
 #' @section Links:
-#' + [Quality Payment Program Experience](https://data.cms.gov/quality-of-care/quality-payment-program-experience)
+#'    * [Quality Payment Program Experience](https://data.cms.gov/quality-of-care/quality-payment-program-experience)
 #'
 #' @section Update Frequency:
 #' __Annually__
@@ -24,7 +22,7 @@
 NULL
 
 #'
-#' @param year `<int>` // **required** QPP performance year, in `YYYY`format.
+#' @param year `<int>` // **required** QPP performance year, in `YYYY` format.
 #' Run [qpp_years()] to return a vector of the years currently available.
 #'
 #' @param npi `<int>` 10-digit Individual National Provider Identifier

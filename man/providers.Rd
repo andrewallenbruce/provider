@@ -64,10 +64,7 @@ providers(
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{providers()} allows you to access enrollment level data on individual and
-organizational providers that are actively approved to bill Medicare.
+Access enrollment level data on individual and organizational providers that are actively approved to bill Medicare.
 }
 \section{Links}{
 

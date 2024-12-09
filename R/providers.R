@@ -1,14 +1,11 @@
 #' Provider Enrollment in Medicare
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' `providers()` allows you to access enrollment level data on individual and
-#' organizational providers that are actively approved to bill Medicare.
+#' Access enrollment level data on individual and organizational providers that are actively approved to bill Medicare.
 #'
 #' @section Links:
-#' + [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
-#' + [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
+#'    * [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+#'    * [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
 #' *Update Frequency:* **Quarterly**
 #'
@@ -46,7 +43,9 @@
 #' providers(enid = "I20040309000221")
 #' providers(npi = 1417918293, specialty_code = "14-41")
 #' providers(pac = 2860305554, gender = "9")
+#'
 #' @autoglobal
+#'
 #' @export
 providers <- function(npi                   = NULL,
                       pac                   = NULL,

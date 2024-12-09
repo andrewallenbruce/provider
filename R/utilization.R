@@ -1,12 +1,9 @@
 #' Provider Utilization & Demographics by Year
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [utilization()] allows access to information on services and
-#' procedures provided to Original Medicare (fee-for-service) Part B
-#' beneficiaries by physicians and other healthcare professionals; aggregated
-#' by provider, service and geography.
+#' Access information on services and procedures provided to Original
+#' Medicare (fee-for-service) Part B beneficiaries by physicians and other
+#' healthcare professionals; aggregated by provider, service and geography.
 #'
 #' @section By Provider:
 #' __type =__`"Provider"`:

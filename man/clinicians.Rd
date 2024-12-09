@@ -36,8 +36,8 @@ clinicians(
 
 \item{first, middle, last}{< \emph{character} > Individual provider's name}
 
-\item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female)
-or \code{"M"} (Male)}
+\item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female) or
+\code{"M"} (Male)}
 
 \item{credential}{Individual provider’s credential}
 
@@ -51,8 +51,8 @@ specialty reported in the selected enrollment}
 \item{facility_name}{< \emph{character} > Name of facility associated with the
 individual provider}
 
-\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS
-Associate Control ID}
+\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS Associate Control
+ID}
 
 \item{city}{< \emph{character} > Provider's city}
 
@@ -64,7 +64,8 @@ Associate Control ID}
 
 \item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and
+columns}
 
 \item{...}{Empty}
 }
@@ -98,10 +99,8 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=clinicians]{clinicians()}} allows you to access information about providers enrolled in
-Medicare, including the medical school that they attended and the year they graduated
+Access information about providers enrolled in Medicare,
+including the medical school that they attended and the year they graduated
 
 \emph{Update Frequency:} \strong{Monthly}
 }
@@ -116,6 +115,7 @@ Medicare, including the medical school that they attended and the year they grad
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 clinicians(enid = "I20081002000549") # enid not working
+
 clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 \dontshow{\}) # examplesIf}
 }

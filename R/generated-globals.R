@@ -102,6 +102,7 @@ utils::globalVariables(c(
   # <laboratories>
   "cap",
   # <rbcs_util>
+  # <quality_pay2>
   # <quality_payment>
   "category",
   # <open_payments>
@@ -174,6 +175,7 @@ utils::globalVariables(c(
   "distribution_title",
   # <outpatient>
   # <prescribers>
+  # <quality_pay2>
   # <quality_payment>
   # <utilization>
   "distro",
@@ -287,6 +289,7 @@ utils::globalVariables(c(
   "npi_type",
   # <nppes>
   "on",
+  # <quality_pay2>
   # <quality_payment>
   "org_id",
   # <quality_eligibility>
@@ -294,6 +297,7 @@ utils::globalVariables(c(
   "org_name",
   # <mips_2021>
   "org_pac_id",
+  # <quality_pay2>
   # <quality_payment>
   "org_size",
   # <quality_eligibility>
@@ -310,6 +314,7 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
+  # <quality_pay2>
   # <quality_payment>
   "participation_type",
   # <mips_2021>
@@ -347,6 +352,7 @@ utils::globalVariables(c(
   "prvdr_ctgry_sbtyp_cd",
   # <nppes>
   "purpose",
+  # <quality_pay2>
   # <quality_payment>
   "qualified",
   # <betos>
@@ -361,9 +367,11 @@ utils::globalVariables(c(
   "rndrng_prvdr_geo_desc",
   # <tidyup_geography.util>
   "rndrng_prvdr_geo_lvl",
+  # <quality_pay2>
   # <quality_payment>
   "score",
   # <open_ids>
+  # <quality_pay2>
   # <quality_payment>
   "set",
   # <tidyup_provider.util>
@@ -396,6 +404,7 @@ utils::globalVariables(c(
   "state_of_travel",
   # <nppes>
   # <order_refer>
+  # <quality_pay2>
   # <quality_payment>
   "status",
   # <rbcs_util>
@@ -440,6 +449,7 @@ utils::globalVariables(c(
   "type_1",
   # <laboratories>
   "type_of_action",
+  # <quality_pay2>
   # <quality_payment>
   "val",
   # <open_payments>
@@ -466,6 +476,7 @@ utils::globalVariables(c(
   # <prescribers>
   # <providers>
   # <quality_eligibility>
+  # <quality_pay2>
   # <quality_payment>
   # <reassignments>
   # <taxonomy_crosswalk>

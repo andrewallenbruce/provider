@@ -140,3 +140,14 @@ unnest_dt2 <- function(tbl, ...) {
 
   tbl
 }
+
+#
+# lastmod <- regmatches(
+#   lastmod,
+#   regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}", lastmod, perl = TRUE)) |>
+#   as.Date(format = "%d %b %Y")
+#
+#   resps <- httr2::req_perform_parallel(
+#   purrr::map(urls, httr2::request), on_error = "continue") |>
+#   httr2::resps_successes() |>
+#   httr2::resps_data(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE))

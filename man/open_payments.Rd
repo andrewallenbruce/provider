@@ -96,9 +96,7 @@ format. Run \code{\link[=open_years]{open_years()}} to return a vector of the ye
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=open_payments]{open_payments()}} allows the user access to CMS' Open Payments Program API
+Allows the user access to CMS' Open Payments Program API
 
 The \strong{Open Payments} program is a national disclosure program that collects and
 publishes information about financial relationships between drug and medical

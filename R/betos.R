@@ -1,11 +1,8 @@
 #' Restructured BETOS Classification for HCPCS
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [betos()] allows the user to group HCPCS codes into clinically
-#' meaningful categories based on the original _Berenson-Eggers Type of Service_
-#' (BETOS) classification.
+#' Group HCPCS codes into clinically meaningful categories based on the
+#' original _Berenson-Eggers Type of Service_ (BETOS) classification.
 #'
 #' @section From BETOS to RBCS:
 #'

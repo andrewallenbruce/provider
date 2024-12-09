@@ -1,8 +1,5 @@
 #' National Drug Code (NDC) Lookup
 #'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
 #' @section NDC:
 #' A National Drug Code (NDC) is a unique 10- or 11-digit, 3-segment numeric
 #' identifier assigned to each medication listed under Section 510 of the US

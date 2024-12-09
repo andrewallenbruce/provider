@@ -1,17 +1,14 @@
 #' Hospitals Enrolled in Medicare
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [hospitals()] allows the user to search for information on all hospitals
-#' currently enrolled in Medicare. Data returned includes the hospital's
-#' sub-group types, legal business name, doing-business-as name, organization
-#' type and address.
+#' Access information on all hospitals currently enrolled in Medicare. Data
+#' returned includes the hospital's sub-group types, legal business name,
+#' doing-business-as name, organization type and address.
 #'
 #' *Update Frequency:* **Monthly**
 #'
 #' @section Links:
-#' + [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#'    * [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>`
 #'
@@ -93,19 +90,19 @@
 #'
 #' Indicates hospital’s subgroup/unit designation:
 #'
-#' + `acute`: Acute Care
-#' + `alc_drug`: Alcohol/Drug
-#' + `child`: Children's Hospital
-#' + `gen`: General
-#' + `long`: Long-Term
-#' + `short`: Short-Term
-#' + `psych`: Psychiatric
-#' + `rehab`: Rehabilitation
-#' + `swing`: Swing-Bed Approved
-#' + `psych_unit`: Psychiatric Unit
-#' + `rehab_unit`: Rehabilitation Unit
-#' + `spec`: Specialty Hospital
-#' + `other`: Not listed on CMS form
+#'    * `acute`: Acute Care
+#'    * `alc_drug`: Alcohol/Drug
+#'    * `child`: Children's Hospital
+#'    * `gen`: General
+#'    * `long`: Long-Term
+#'    * `short`: Short-Term
+#'    * `psych`: Psychiatric
+#'    * `rehab`: Rehabilitation
+#'    * `swing`: Swing-Bed Approved
+#'    * `psych_unit`: Psychiatric Unit
+#'    * `rehab_unit`: Rehabilitation Unit
+#'    * `spec`: Specialty Hospital
+#'    * `other`: Not listed on CMS form
 #'
 #' @param reh `<lgl>`
 #'
@@ -159,19 +156,20 @@
 #'
 #' hospitals(state = "GA", reh = TRUE)
 #'
-#' hospitals(city = "Savannah", state = "GA") |>
-#'           dplyr::select(organization, subgroup)
+#' hospitals(city = "Savannah", state = "GA")
 #'
-#' hospitals(city = "Savannah", state = "GA",
-#'           subgroup = list(acute = FALSE)) |>
-#'           dplyr::select(organization, subgroup)
+#' hospitals(city = "Savannah",
+#'           state = "GA",
+#'           subgroup = list(acute = FALSE))
 #'
-#' hospitals(city = "Savannah", state = "GA",
-#'           subgroup = list(gen = TRUE,
-#'           rehab = FALSE)) |>
-#'           dplyr::select(organization, subgroup)
+#' hospitals(city = "Savannah",
+#'           state = "GA",
+#'           subgroup = list(
+#'           gen = TRUE,
+#'           rehab = FALSE))
 #'
 #' @autoglobal
+#'
 #' @export
 hospitals <- function(npi            = NULL,
                       facility_ccn   = NULL,
@@ -198,7 +196,7 @@ hospitals <- function(npi            = NULL,
   enid_org     <- enid_org %nn% check_enid(enid_org, type = "org")
   zip          <- zip %nn% as.character(zip)
   facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
-  registration <- registration %nn% rlang::arg_match(registration, c("P", "N"))
+  registration <- registration %nn% rlang::arg_match0(registration, c("P", "N"))
   multi_npi    <- multi_npi %nn% tf_2_yn(multi_npi)
   reh          <- reh %nn% tf_2_yn(reh)
 

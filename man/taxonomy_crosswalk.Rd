@@ -39,11 +39,8 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{taxonomy_crosswalk()} allows you to search the types of providers and
-suppliers eligible for Medicare programs by taxonomy code or Medicare
-specialty type code.
+Allows you to search the types of providers and suppliers eligible for
+Medicare programs by taxonomy code or Medicare specialty type code.
 \subsection{Taxonomy Codes}{
 
 The \strong{Healthcare Provider Taxonomy Code Set} is a hierarchical HIPAA

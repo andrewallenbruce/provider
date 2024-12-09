@@ -1,11 +1,8 @@
 #' Quality Payment Program Eligibility
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [quality_eligibility()] allows the user access to information on eligibility
-#' in the Merit-based Incentive Payment System (MIPS) and Advanced Alternative
-#' Payment Models (APMs) tracks.
+#' Access to information on eligibility in the Merit-based Incentive Payment
+#' System (MIPS) and Advanced Alternative Payment Models (APMs) tracks.
 #'
 #' Data pulled from across CMS is used to create an eligibility determination
 #' for a clinician. Using what CMS knows about a clinician from their billing

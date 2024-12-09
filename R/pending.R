@@ -1,15 +1,11 @@
 #' Pending Medicare Enrollment Applications
 #'
 #' @description
-#' `r lifecycle::badge("questioning")`
-#'
-#' [pending()] allows the user to search for providers with pending Medicare
-#' enrollment applications.
+#' Search for providers with pending Medicare enrollment applications.
 #'
 #' @references
-#'
-#' + [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
-#' + [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
+#'    * [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
+#'    * [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
 #' @section Update Frequency:
 #' __QUARTERLY__

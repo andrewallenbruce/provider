@@ -59,11 +59,8 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=betos]{betos()}} allows the user to group HCPCS codes into clinically
-meaningful categories based on the original \emph{Berenson-Eggers Type of Service}
-(BETOS) classification.
+Group HCPCS codes into clinically meaningful categories based on the
+original \emph{Berenson-Eggers Type of Service} (BETOS) classification.
 }
 \section{From BETOS to RBCS}{
 

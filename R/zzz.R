@@ -159,18 +159,14 @@ distros_dac <- \() {
     unname(ids),
     "?show-reference-ids=true")
 
-  resp <- httr2::req_perform_parallel(
-    purrr::map(urls, httr2::request),
+  resp <- req_perform_parallel(
+    map(urls, request),
     on_error = "continue") |>
     setNames(names(ids))
 
-  af <- httr2::resp_body_json(
-    collapse::get_elem(resp, "affiliations"),
-    simplifyVector = TRUE)
+  af <- resp_body_json(get_elem(resp, "affiliations"), simplifyVector = TRUE)
 
-  cl <- httr2::resp_body_json(
-    collapse::get_elem(resp, "clinicians"),
-    simplifyVector = TRUE)
+  cl <- resp_body_json(get_elem(resp, "clinicians"), simplifyVector = TRUE)
 
 
   affiliations <- list(
@@ -215,12 +211,12 @@ distros_open <- function() {
     "api/1/metastore/schemas/dataset/",
     "items?show-reference-ids")
 
-  resp <- httr2::request(url) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(
+  resp <- request(url) |>
+    req_perform() |>
+    resp_body_json(
     check_type = FALSE,
     simplifyVector = TRUE) |>
-    dplyr::tibble()
+    data.table::as.data.table()
 
   root <- dplyr::reframe(
     resp,
@@ -233,18 +229,16 @@ distros_open <- function() {
     temporal,
     periodicity = accrualPeriodicity)
 
-  nests <- dplyr::select(resp, identifier, distribution) |>
+  nests <- fselect(resp, identifier, distribution) |>
     data.table::as.data.table() |>
     mlr3misc::unnest("distribution", prefix = "{col}_") |>
     mlr3misc::unnest("distribution_data", prefix = "{col}_") |>
-    # collapse::frename(distribution_data_ref = `distribution_data_%Ref:downloadURL`) |>
-    collapse::fselect(
+    fselect(
       identifier,
       distribution_identifier,
       distribution_data_title,
       distribution_data_downloadURL,
-      distribution_data_describedBy) |>
-    dplyr::tibble()
+      distribution_data_describedBy)
 
   list(
     root = root,
@@ -256,13 +250,3 @@ distros_open <- function() {
 #               "[SELECT * FROM ", id$distribution$identifier, "]",
 #               encode_param(args, type = "sql"),
 #               "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
-#
-# lastmod <- regmatches(
-#   lastmod,
-#   regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}", lastmod, perl = TRUE)) |>
-#   as.Date(format = "%d %b %Y")
-#
-#   resps <- httr2::req_perform_parallel(
-#   purrr::map(urls, httr2::request), on_error = "continue") |>
-#   httr2::resps_successes() |>
-#   httr2::resps_data(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE))

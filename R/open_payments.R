@@ -1,9 +1,7 @@
 #' Relationships with Drug & Medical Device Companies
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [open_payments()] allows the user access to CMS' Open Payments Program API
+#' Allows the user access to CMS' Open Payments Program API
 #'
 #' The __Open Payments__ program is a national disclosure program that collects and
 #' publishes information about financial relationships between drug and medical

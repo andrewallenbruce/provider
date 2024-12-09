@@ -42,11 +42,8 @@ the same NPI indicate multiple TIN/NPI combinations.}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=quality_eligibility]{quality_eligibility()}} allows the user access to information on eligibility
-in the Merit-based Incentive Payment System (MIPS) and Advanced Alternative
-Payment Models (APMs) tracks.
+Access to information on eligibility in the Merit-based Incentive Payment
+System (MIPS) and Advanced Alternative Payment Models (APMs) tracks.
 
 Data pulled from across CMS is used to create an eligibility determination
 for a clinician. Using what CMS knows about a clinician from their billing

@@ -72,10 +72,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
-
-\code{\link[=beneficiaries]{beneficiaries()}} allows the user access current data on enrolled Medicare
-beneficiaries.
+Access current data on enrolled Medicare beneficiaries.
 }
 \section{Medicare Monthly Enrollment}{
 

@@ -57,10 +57,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{opt_out()} allows the user to access information on providers who have
-decided not to participate in Medicare.
+Access information on providers who have decided not to participate in Medicare.
 }
 \section{Opting Out}{
 
@@ -74,9 +71,9 @@ the provider out-of-pocket.
 
 To opt out, a provider must:
 \itemize{
-\item Be of an \emph{eligible specialty} type
-\item Submit an \emph{opt-out affidavit} to Medicare
-\item Enter into a \emph{private contract} with their Medicare patients, reflecting
+\item Be of an \strong{eligible specialty} type
+\item Submit an \strong{opt-out affidavit} to Medicare
+\item Enter into a \strong{private contract} with their Medicare patients, reflecting
 the agreement that they will pay out-of-pocket and that no one will submit
 the bill to Medicare for reimbursement
 }
@@ -98,7 +95,7 @@ If a provider retires, surrenders their license, or no longer wants to
 participate in the Medicare program, they must officially withdraw within 90
 days. DMEPOS suppliers must withdraw within 30 days.
 
-Providers may \emph{NOT} opt-out if they intend to be a Medicare Advantage
+Providers may \strong{NOT} opt-out if they intend to be a Medicare Advantage
 (Part C) provider or furnish services covered by traditional Medicare
 fee-for-service (Part B).
 

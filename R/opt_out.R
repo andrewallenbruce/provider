@@ -1,13 +1,10 @@
 #' Providers Opted Out of Medicare
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' `opt_out()` allows the user to access information on providers who have
-#' decided not to participate in Medicare.
+#' Access information on providers who have decided not to participate in Medicare.
 #'
 #' @references
-#' + [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#'    * [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
 #'
 #' @section Opting Out:
 #'
@@ -20,9 +17,9 @@
 #'
 #' To opt out, a provider must:
 #'
-#' + Be of an *eligible specialty* type
-#' + Submit an *opt-out affidavit* to Medicare
-#' + Enter into a *private contract* with their Medicare patients, reflecting
+#' * Be of an __eligible specialty__ type
+#' * Submit an __opt-out affidavit__ to Medicare
+#' * Enter into a __private contract__ with their Medicare patients, reflecting
 #'   the agreement that they will pay out-of-pocket and that no one will submit
 #'   the bill to Medicare for reimbursement
 #'
@@ -41,21 +38,30 @@
 #' participate in the Medicare program, they must officially withdraw within 90
 #' days. DMEPOS suppliers must withdraw within 30 days.
 #'
-#' Providers may *NOT* opt-out if they intend to be a Medicare Advantage
+#' Providers may __NOT__ opt-out if they intend to be a Medicare Advantage
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < `integer` > 10-digit Opt-out National Provider Identifier
+#'
 #' @param first,last < `character` > Opt-out provider's name
+#'
 #' @param specialty < `character` > Opt-out provider's specialty
+#'
 #' @param address < `character` > Opt-out provider's address
+#'
 #' @param city < `character` > Opt-out provider's city
+#'
 #' @param state < `character` > Opt-out provider's state abbreviation
+#'
 #' @param zip < `character` > Opt-out provider's zip code
+#'
 #' @param order_refer < `boolean` > Indicates order and refer eligibility
+#'
 #' @param tidy < `boolean` > // __default:__ `TRUE` Tidy output
+#'
 #' @param ... Empty
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -86,7 +92,9 @@
 #'         pull(npi) |>
 #'         map(\(x) order_refer(npi = x)) |>
 #'         list_rbind()
+#'
 #' @autoglobal
+#'
 #' @export
 opt_out <- function(npi = NULL,
                     first = NULL,

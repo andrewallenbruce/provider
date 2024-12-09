@@ -1,37 +1,47 @@
 #' Reassignment of Benefits
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [reassignments()] returns information about:
-#' + Individual providers who are reassigning benefits or are an employee of
-#' + Organizational/Group providers who are receiving reassignment of benefits
-#' from or are the employer of the individual provider
+#' Returns information about:
+#'    * Individual providers who are reassigning benefits or are an employee of
+#'    * Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 #'
 #' It provides information regarding the physician and the group practice they
 #' reassign their billing to, including individual employer association counts.
 #'
 #' @section Links:
-#' + [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
+#'    * [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi `<chr>` __Individual__ 10-digit National Provider Identifier
+#'
 #' @param pac `<chr>` __Individual__ 10-digit PECOS Associate Control ID
+#'
 #' @param enid `<chr>` __Individual__ 15-digit Medicare Enrollment ID
+#'
 #' @param first,last `<chr>` __Individual__ Provider's name
+#'
 #' @param state `<chr>` __Individual__ Enrollment state abbreviation
+#'
 #' @param specialty `<chr>` __Individual__ Enrollment specialty
+#'
 #' @param organization `<chr>` __Organizational__ Legal business name
+#'
 #' @param pac_org `<chr>` __Organizational__ 10-digit PECOS Associate Control ID
+#'
 #' @param enid_org `<chr>` __Organizational__ 15-digit Medicare Enrollment ID
+#'
 #' @param state_org `<chr>` __Organizational__ Enrollment state abbreviation
+#'
 #' @param entry `<chr>` Entry type, reassignment (`"R"`) or employment (`"E"`)
+#'
 #' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
+#'
 #' @param na.rm `<chr>` // __default:__ `TRUE` Remove empty rows and columns
+#'
 #' @param ... Empty
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**       |**Description**                                                    |
 #' |:---------------|:------------------------------------------------------------------|
@@ -55,6 +65,7 @@
 #' reassignments(pac_org = 3173525888)
 #'
 #' @autoglobal
+#'
 #' @export
 reassignments <- function(npi          = NULL,
                           pac          = NULL,

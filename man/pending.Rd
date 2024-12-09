@@ -42,10 +42,7 @@ A \code{\link[=tibble]{tibble()}} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#questioning}{\figure{lifecycle-questioning.svg}{options: alt='[Questioning]'}}}{\strong{[Questioning]}}
-
-\code{\link[=pending]{pending()}} allows the user to search for providers with pending Medicare
-enrollment applications.
+Search for providers with pending Medicare enrollment applications.
 }
 \section{Update Frequency}{
 

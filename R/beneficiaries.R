@@ -1,10 +1,7 @@
 #' Beneficiary Enrollment in Medicare
 #'
 #' @description
-#' `r lifecycle::badge("questioning")`
-#'
-#' [beneficiaries()] allows the user access current data on enrolled Medicare
-#' beneficiaries.
+#' Access current data on enrolled Medicare beneficiaries.
 #'
 #' @section Medicare Monthly Enrollment:
 #' Current monthly information on the number of Medicare beneficiaries with

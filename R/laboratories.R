@@ -1,10 +1,8 @@
 #' Clinical Laboratories
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [laboratories()] allows you to search for information on clinical laboratories
-#' including demographics and the type of testing services the facility provides.
+#' Access information on clinical laboratories including demographics and
+#' the type of testing services the facility provides.
 #'
 #' @section Clinical Laboratory Improvement Amendments (CLIA):
 #'

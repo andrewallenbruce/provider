@@ -68,13 +68,10 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
-\code{\link[=reassignments]{reassignments()}} returns information about:
+Returns information about:
 \itemize{
 \item Individual providers who are reassigning benefits or are an employee of
-\item Organizational/Group providers who are receiving reassignment of benefits
-from or are the employer of the individual provider
+\item Organizational/Group providers who are receiving reassignment of benefits from or are the employer of the individual provider
 }
 
 It provides information regarding the physician and the group practice they

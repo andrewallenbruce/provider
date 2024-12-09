@@ -1,9 +1,7 @@
 #' Prescriber Utilization & Demographics by Year
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' [prescribers()] allows access to information on prescription drugs provided
+#' Access information on prescription drugs provided
 #' to Medicare beneficiaries enrolled in Part D (Prescription Drug Coverage),
 #' by physicians and other health care providers; aggregated by provider, drug
 #' and geography.
