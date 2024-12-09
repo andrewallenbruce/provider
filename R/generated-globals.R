@@ -11,6 +11,8 @@ utils::globalVariables(c(
   "aabb",
   # <laboratories>
   "accredited",
+  # <distros_open>
+  "accrualPeriodicity",
   # <mips_2021>
   "aco_id_1",
   # <mips_2021>
@@ -84,6 +86,8 @@ utils::globalVariables(c(
   "applicable_manufacturer_or_applicable_gpo_making_payment_state",
   # <encode_param>
   "arg",
+  # <distros_main>
+  "arrow_cms",
   # <laboratories>
   "ashi",
   # <mips_2021>
@@ -139,24 +143,34 @@ utils::globalVariables(c(
   # <gt_datadict>
   "Definition",
   # <cms_dataset_search>
+  # <distros_open>
   "description",
   # <gt_datadict>
   "Description",
   # <cms_update>
   # <open_ids>
-  # <distributions_cms>
+  # <distros_main>
+  # <distros_open>
   "distribution",
   # <cms_update>
-  # <distributions_cms>
+  # <distros_main>
   "distribution_accessURL",
+  # <distros_open>
+  "distribution_data_describedBy",
+  # <distros_open>
+  "distribution_data_downloadURL",
+  # <distros_open>
+  "distribution_data_title",
   # <cms_update>
-  # <distributions_cms>
+  # <distros_main>
   "distribution_format",
+  # <distros_open>
+  "distribution_identifier",
   # <cms_update>
-  # <distributions_cms>
+  # <distros_main>
   "distribution_modified",
   # <cms_update>
-  # <distributions_cms>
+  # <distros_main>
   "distribution_title",
   # <outpatient>
   # <prescribers>
@@ -215,6 +229,7 @@ utils::globalVariables(c(
   # <cms_dataset_search>
   # <open_payments>
   # <open_ids>
+  # <distros_open>
   "identifier",
   # <hospitals>
   "incorp_state",
@@ -228,6 +243,8 @@ utils::globalVariables(c(
   "interval",
   # <mips_2021>
   "invs_msr",
+  # <distros_open>
+  "issued",
   # <laboratories>
   "jcaho",
   # <cms_dataset_search>
@@ -250,7 +267,8 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
-  # <distributions_cms>
+  # <distros_main>
+  # <distros_open>
   "modified",
   # <open_payments>
   # <cols_qelig>
@@ -337,8 +355,6 @@ utils::globalVariables(c(
   "recipient_state",
   # <reassignments>
   "record_type",
-  # <distributions_open>
-  "response",
   # <laboratories>
   "rgn_cd",
   # <tidyup_geography.util>
@@ -392,13 +408,16 @@ utils::globalVariables(c(
   "subtotal",
   # <medline>
   "summary._value",
+  # <distros_open>
+  "temporal",
   # <quality_eligibility>
   "timelength_days",
   # <cms_update>
   # <cms_dataset_search>
   # <medline>
   # <open_ids>
-  # <distributions_cms>
+  # <distros_main>
+  # <distros_open>
   "title",
   # <medline>
   "title._value",
@@ -458,7 +477,7 @@ utils::globalVariables(c(
   # <compare_hcpcs>
   # <open_ids>
   # <cols_qelig>
-  # <distributions_cms>
+  # <distros_main>
   "year",
   # <add_counties>
   "zip",

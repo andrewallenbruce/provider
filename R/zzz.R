@@ -1,12 +1,12 @@
-.onLoad <- function(libname, pkgname) {
-  .__distros <<- distributions_cms()
-}
+# .onLoad <- function(libname, pkgname) {
+#   .__distros <<- distributions_cms()
+# }
+#
+# .onUnload <- function(libpath) {
+#   remove(".__distros", envir = .GlobalEnv)
+# }
 
-.onUnload <- function(libpath) {
-  remove(".__distros", envir = .GlobalEnv)
-}
-
-#' Main CMS Distributions
+#' Main CMS Distributions, datetime last modified
 #'
 #' @autoglobal
 #'
@@ -15,9 +15,32 @@
 #' @keywords internal
 #'
 #' @export
-distributions_cms <- \() {
+last_dttm <- \() {
 
-  datasets <- c(
+  res <- req_perform(
+    request("https://data.cms.gov/data.json"))
+
+  c(req = strptime(
+      resp_date(res),
+      format = "%Y-%m-%d %H:%M:%S",
+      tz = "EST"),
+    mod = strptime(
+      resp_header(res, "Last-Modified"),
+      format = "%a, %d %b %Y %H:%M:%S",
+      tz = "EST"))
+}
+
+#' CMS Dataset Distribution Names
+#'
+#' @autoglobal
+#'
+#' @returns description
+#'
+#' @keywords internal
+#'
+#' @export
+datasets <- \() {
+  c(
     # affiliations    = "Facility Affiliation Data",
     # clinicians      = "National Downloadable File",
     # open_payments   = "General Payment Data",
@@ -25,57 +48,61 @@ distributions_cms <- \() {
     crosswalk       = "Medicare Provider and Supplier Taxonomy Crosswalk",
     hospitals       = "Hospital Enrollments",
     laboratories    = "Provider of Services File - Clinical Laboratories",
-    outpatient      = c(service = "Medicare Outpatient Hospitals - by Provider and Service",
-                        geography = "Medicare Outpatient Hospitals - by Geography and Service"),
+    outpatient      = c(service = "Medicare Outpatient Hospitals - by Provider and Service", geography = "Medicare Outpatient Hospitals - by Geography and Service"),
     orderrefer      = "Order and Referring",
-    pending         = c(physicians = "Pending Initial Logging and Tracking",
-                        nonphysicians = "Pending Initial Logging and Tracking Non Physicians"),
+    pending         = c(physicians = "Pending Initial Logging and Tracking", nonphysicians = "Pending Initial Logging and Tracking Non Physicians"),
     providers       = "Medicare Fee-For-Service  Public Provider Enrollment",
     quality         = "Quality Payment Program Experience",
     rbcs            = "Restructured BETOS Classification System",
     reassignment    = "Revalidation Reassignment List", # Clinic Group Practice Reassignment",
     optout          = "Opt Out Affidavits",
-    prescribers     = c(provider = "Medicare Part D Prescribers - by Provider",
-                        drug = "Medicare Part D Prescribers - by Provider and Drug",
-                        geography = "Medicare Part D Prescribers - by Geography and Drug"),
-    utilization     = c(provider = "Medicare Physician & Other Practitioners - by Provider",
-                        service = "Medicare Physician & Other Practitioners - by Provider and Service",
-                        geography = "Medicare Physician & Other Practitioners - by Geography and Service")
+    prescribers     = c(
+      provider = "Medicare Part D Prescribers - by Provider",
+      drug = "Medicare Part D Prescribers - by Provider and Drug",
+      geography = "Medicare Part D Prescribers - by Geography and Drug"
+    ),
+    utilization     = c(
+      provider = "Medicare Physician & Other Practitioners - by Provider",
+      service = "Medicare Physician & Other Practitioners - by Provider and Service",
+      geography = "Medicare Physician & Other Practitioners - by Geography and Service"
+    )
   )
+}
 
-  resp <- httr2::request("https://data.cms.gov/data.json") |>
-    httr2::req_perform()
+#' Main CMS Distributions
+#'
+#' @param datasets character vector of dataset names
+#'
+#' @autoglobal
+#'
+#' @returns description
+#'
+#' @keywords internal
+#'
+#' @export
+distros_main <- \(datasets = datasets()) {
 
-  resp <- as.Date(
-    regmatches(
-      resp[["headers"]][["Last-Modified"]],
-      regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}",
-              resp[["headers"]][["Last-Modified"]],
-              perl = TRUE)),
-    format = "%d %b %Y")
-
-  arrow_cms <- arrow::read_json_arrow(
+  main <- arrow::read_json_arrow(
     file = "https://data.cms.gov/data.json",
     col_select = c("dataset"),
     as_data_frame = TRUE)
 
-  arrow_cms <- arrow_cms[["dataset"]][[1]][
-    c("title", "modified", "distribution")] |>
+  main <- main[["dataset"]][[1]][c("title", "modified", "distribution")]
+
+  main <- main |>
     collapse::fsubset(
-      grepl(
-        paste0(
-          unname(datasets),
-          collapse = "|"),
-        title,
-        perl = TRUE
-      )
-    ) |>
+      grepl(paste0(
+        unname(datasets),
+        collapse = "|"),
+        title, perl = TRUE))
+
+  main |>
     tidyr::unnest(
       cols = distribution,
       names_sep = "_",
       keep_empty = TRUE) |>
-    collapse::fsubset(
-      distribution_format %==% "API") |>
+    collapse::fsubset(!cheapr::is_na(distribution_format)) |>
+    # collapse::fsubset(distribution_format %==% "API") |>
     collapse::fcompute(
       year = as.integer(
         regmatches(
@@ -106,7 +133,7 @@ distributions_cms <- \() {
     )
 
   list(
-    last_modified = resp,
+    last_modified = last_dttm(),
     distributions = arrow_cms
   )
 }
@@ -120,56 +147,57 @@ distributions_cms <- \() {
 #' @keywords internal
 #'
 #' @export
-distributions_natl <- \() {
+distros_dac <- \() {
 
-  id <- c(
-    affiliations = "27ea-46a8",
-    clinicians = "mj5m-pzi6")
+  ids <- c(affiliations = "27ea-46a8",
+           clinicians = "mj5m-pzi6")
 
-  urls <- glue::glue(
+  urls <- paste0(
     "https://data.cms.gov/",
     "provider-data/api/1/metastore/",
     "schemas/dataset/items/",
-    "{unname(id)}?show-reference-ids=true")
+    unname(ids),
+    "?show-reference-ids=true")
 
-  reqs <- list(
-    httr2::request(urls[1]),
-    httr2::request(urls[2]))
+  resp <- httr2::req_perform_parallel(
+    purrr::map(urls, httr2::request),
+    on_error = "continue") |>
+    setNames(names(ids))
 
-  resps <- httr2::req_perform_parallel(reqs, on_error = "continue")
+  af <- httr2::resp_body_json(
+    collapse::get_elem(resp, "affiliations"),
+    simplifyVector = TRUE)
 
-  af <- httr2::resp_body_json(resps[[1]], simplifyVector = TRUE)
-  cl <- httr2::resp_body_json(resps[[2]], simplifyVector = TRUE)
+  cl <- httr2::resp_body_json(
+    collapse::get_elem(resp, "clinicians"),
+    simplifyVector = TRUE)
 
-  list(
-    identifier = af$identifier,
-    description = af$description,
-    title = af$title,
-    distribution = af$distribution$identifier,
-    landing = af$landingPage,
-    issued = af$issued,
-    modified = af$modified,
-    released = af$released,
-    csv_url = af$distribution$data$downloadURL
-    )
 
-  list(
-    identifier = cl$identifier,
-    description = cl$description,
-    title = cl$title,
-    distribution = cl$distribution$identifier,
-    landing = cl$landingPage,
-    issued = cl$issued,
-    modified = cl$modified,
-    released = cl$released,
-    csv_url = cl$distribution$data$downloadURL
-  )
+  affiliations <- list(
+    dataset = c(title = af$title,
+                description = af$description),
+    ids = c(identifier = af$identifier,
+            distribution = af$distribution$identifier),
+    dates = c(issued = af$issued,
+              modified = af$modified,
+              released = af$released),
+    urls = c(landing = af$landingPage,
+             csv = af$distribution$data$downloadURL))
+
+  clinicians <- list(
+    dataset = c(title = cl$title,
+                description = cl$description),
+    ids = c(identifier = cl$identifier,
+            distribution = cl$distribution$identifier),
+    dates = c(issued = cl$issued,
+              modified = cl$modified,
+              released = cl$released),
+    urls = c(landing = cl$landingPage,
+             csv = cl$distribution$data$downloadURL))
+
+  c(affiliations = affiliations,
+    clinicians = clinicians)
 }
-
-# url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-#               "[SELECT * FROM ", id$distribution$identifier, "]",
-#               encode_param(args, type = "sql"),
-#               "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
 
 #' Open Payments CMS Distributions
 #'
@@ -180,25 +208,61 @@ distributions_natl <- \() {
 #' @keywords internal
 #'
 #' @export
-distributions_open <- function() {
+distros_open <- function() {
 
   url <- paste0(
     "https://openpaymentsdata.cms.gov/",
     "api/1/metastore/schemas/dataset/",
     "items?show-reference-ids")
 
-  httr2::request(url) |>
+  resp <- httr2::request(url) |>
     httr2::req_perform() |>
     httr2::resp_body_json(
-    response,
     check_type = FALSE,
     simplifyVector = TRUE) |>
-    dplyr::tibble() # |>
-    # dplyr::select(title, modified, distribution) |>
-    # tidyr::unnest(cols = distribution) |>
-    # tidyr::unnest(cols = data,
-    #               names_sep = ".") |>
-    # dplyr::arrange(dplyr::desc(title)) |>
-    # dplyr::mutate(set  = strex::str_after_first(title, " "), .before = 1) |>
-    # dplyr::select(set, identifier)
+    dplyr::tibble()
+
+  root <- dplyr::reframe(
+    resp,
+    title,
+    description = strex::str_before_first(description, " \\[") |>
+      stringfish::sf_gsub("\n", ". ", fixed = TRUE, nthreads = 4L),
+    identifier,
+    issued,
+    modified,
+    temporal,
+    periodicity = accrualPeriodicity)
+
+  nests <- dplyr::select(resp, identifier, distribution) |>
+    data.table::as.data.table() |>
+    mlr3misc::unnest("distribution", prefix = "{col}_") |>
+    mlr3misc::unnest("distribution_data", prefix = "{col}_") |>
+    # collapse::frename(distribution_data_ref = `distribution_data_%Ref:downloadURL`) |>
+    collapse::fselect(
+      identifier,
+      distribution_identifier,
+      distribution_data_title,
+      distribution_data_downloadURL,
+      distribution_data_describedBy) |>
+    dplyr::tibble()
+
+  list(
+    root = root,
+    nests = nests
+  )
 }
+
+# url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+#               "[SELECT * FROM ", id$distribution$identifier, "]",
+#               encode_param(args, type = "sql"),
+#               "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
+#
+# lastmod <- regmatches(
+#   lastmod,
+#   regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}", lastmod, perl = TRUE)) |>
+#   as.Date(format = "%d %b %Y")
+#
+#   resps <- httr2::req_perform_parallel(
+#   purrr::map(urls, httr2::request), on_error = "continue") |>
+#   httr2::resps_successes() |>
+#   httr2::resps_data(\(resp) httr2::resp_body_json(resp, simplifyVector = TRUE))

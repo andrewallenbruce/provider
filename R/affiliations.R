@@ -79,7 +79,7 @@ affiliations <- function(npi = NULL,
       "df"   ~ "Dialysis facility",
       .default = facility_type)
 
-    facility_type <- rlang::arg_match(
+    facility_type <- rlang::arg_match0(
       facility_type, c("Hospital",
                        "Long-term care hospital",
                        "Nursing home",

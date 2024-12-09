@@ -16,9 +16,10 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
+    arrow,
     cli,
     collapse,
-    arrow,
+    data.table,
     dplyr,
     furrr,
     httr2,
@@ -33,9 +34,9 @@ Imports:
     stringr,
     tidyr,
     vctrs,
-    data.table,
     zeallot
 Suggests: 
+    cheapr,
     fipio,
     fontawesome,
     fuimus,
@@ -46,10 +47,12 @@ Suggests:
     htmltools,
     httptest2,
     knitr,
+    mlr3misc,
     roxyglobals,
     rvest,
     sf,
     stats,
+    stringfish,
     testthat (>= 3.0.0),
     zipcodeR
 VignetteBuilder: 
