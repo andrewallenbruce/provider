@@ -2063,33 +2063,21 @@ Bruce</h4>
 <span>         <span class="va">tot_fills</span>, </span>
 <span>         <span class="va">tot_supply</span>, </span>
 <span>         <span class="va">tot_cost</span>, </span>
-<span>         <span class="va">tot_benes</span><span class="op">)</span></span>
-<span><span class="va">rx</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 27 × 8</span></span></span>
-<span><span class="co">#&gt;     year brand_name        generic_name tot_claims tot_fills tot_supply tot_cost</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 Acetazolamide Er  Acetazolami…         20      20.5        533     971.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 Alphagan P        Brimonidine…         34      51         <span style="text-decoration: underline;">1</span>424   <span style="text-decoration: underline;">12</span>450.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 Azithromycin      Azithromycin        661    <span style="text-decoration: underline;">1</span>588.       <span style="text-decoration: underline;">45</span>870    <span style="text-decoration: underline;">7</span>181.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 Brimonidine Tart… Brimonidine…        306     550.       <span style="text-decoration: underline;">15</span>746    <span style="text-decoration: underline;">8</span>700.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 Bromsite          Bromfenac S…         78      80.5       <span style="text-decoration: underline;">2</span>387   <span style="text-decoration: underline;">21</span>943.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 Carteolol Hcl     Carteolol H…         79     184.        <span style="text-decoration: underline;">5</span>482    <span style="text-decoration: underline;">1</span>578.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 Cephalexin        Cephalexin           57      57          279     444.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 Combigan          Brimonidine…         63      87.8       <span style="text-decoration: underline;">2</span>444   <span style="text-decoration: underline;">17</span>835.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide Hcl   Dorzolamide…         71     151.        <span style="text-decoration: underline;">4</span>533    <span style="text-decoration: underline;">2</span>189 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide-Timo… Dorzolamide…         99     216.        <span style="text-decoration: underline;">6</span>463    <span style="text-decoration: underline;">3</span>921.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: tot_benes &lt;int&gt;</span></span></span></code></pre>
+<span>         <span class="va">tot_benes</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in api_years("rxd"): argument "year" is missing, with no default</span></span></code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rx</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'rx' not found</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="more-involved-example">More Involved Example<a class="anchor" aria-label="anchor" href="#more-involved-example"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plan(multisession, workers = 4)</span></span>
 <span><span class="co"># open  &lt;- open_payments_(npi = 1043218118)</span></span>
 <span><span class="co"># plan(sequential)</span></span>
 <span><span class="co"># open &lt;- open |&gt; janitor::remove_empty(which = c('rows', 'cols'))</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
 <span><span class="co">#   select(program_year, </span></span>
 <span><span class="co">#          payer_name, </span></span>
@@ -2106,17 +2094,17 @@ Bruce</h4>
 <span><span class="co">#          category, </span></span>
 <span><span class="co">#          ndc,</span></span>
 <span><span class="co">#          pdi)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
 <span><span class="co">#   count(payer_name,</span></span>
 <span><span class="co">#         wt = pay_count,</span></span>
 <span><span class="co">#         sort = TRUE)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
 <span><span class="co">#   count(payer_id,</span></span>
 <span><span class="co">#         wt = pay_count,</span></span>
 <span><span class="co">#         sort = TRUE)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># open |&gt; </span></span>
 <span><span class="co">#   filter(!is.na(type)) |&gt; </span></span>
 <span><span class="co">#   count(type, sort = TRUE)</span></span></code></pre></div>
