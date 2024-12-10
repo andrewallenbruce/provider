@@ -88,11 +88,18 @@ cms_dataset_search <- function(search = NULL) {
   return(ids)
 }
 
+#' "%22" url encoding for double quote (")
+#'
 #' @param param API parameter
+#'
 #' @param arg API function arg
+#'
 #' @param type format type, `filter`, `sql`, default is `filter`
-#' @return formatted API filters
+#'
+#' @returns formatted API filters
+#'
 #' @autoglobal
+#'
 #' @noRd
 format_param <- function(param, arg, type = "filter") {
 
@@ -123,8 +130,7 @@ format_param <- function(param, arg, type = "filter") {
 #' @noRd
 encode_param <- function(args, type = "filter") {
 
-  rlang::check_required(args)
-  rlang::arg_match(type, c("filter", "sql"))
+  type <- rlang::arg_match0(type, c("filter", "sql"))
 
   args <- tidyr::unnest(args, arg)
 
@@ -191,64 +197,73 @@ file_url <- function(fn = c("c", "a"), args, offset) {
 }
 
 #' Build url for http requests
-#' @param fn abbreviation for function name
+#' @param abb abbreviation for function name
 #' @param args tibble of parameter arguments
 #' @autoglobal
 #' @noRd
-build_url <- function(fn, args = NULL) {
+build_url <- function(abb, args = NULL) {
 
-  api <- dplyr::case_match(fn,
-                           "ben" ~ "Medicare Monthly Enrollment",
-                           "hos" ~ "Hospital Enrollments",
-                           "lab" ~ "Provider of Services File - Clinical Laboratories",
-                           "end" ~ "Public Reporting of Missing Digital Contact Information",
-                           "pro" ~ "Medicare Fee-For-Service  Public Provider Enrollment",
-                           "rdt" ~ "Revalidation Due Date List",
-                           "ras" ~ "Revalidation Reassignment List",
-                           "ord" ~ "Order and Referring",
-                           "opt" ~ "Opt Out Affidavits",
-                           "ppe" ~ "Pending Initial Logging and Tracking Physicians",
-                           "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
-                           "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
-                           "bet" ~ "Restructured BETOS Classification System")
+  api <- dplyr::case_match(
+    abb,
+    "ben" ~ "Medicare Monthly Enrollment",
+    "hos" ~ "Hospital Enrollments",
+    "lab" ~ "Provider of Services File - Clinical Laboratories",
+    "end" ~ "Public Reporting of Missing Digital Contact Information",
+    "pro" ~ "Medicare Fee-For-Service  Public Provider Enrollment",
+    "rdt" ~ "Revalidation Due Date List",
+    "ras" ~ "Revalidation Reassignment List",
+    "ord" ~ "Order and Referring",
+    "opt" ~ "Opt Out Affidavits",
+    "ppe" ~ "Pending Initial Logging and Tracking Physicians",
+    "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
+    "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
+    "bet" ~ "Restructured BETOS Classification System",
+    .default = NULL)
 
-  if (fn %in% "tax" && is.null(args)) {
-    url <- paste0("https://data.cms.gov/data-api/v1/dataset/", cms_update(api)$distro[1], "/data?keyword=")
-  }
+  url <- "https://data.cms.gov/data-api/v1/dataset/"
+  url <- paste0(url, cms_update(api)$distro[1])
 
-  if (!is.null(args)) {
-    json <- dplyr::case_match(fn,
-                              c("end", "tax") ~ "/data?",
-                              .default = "/data.json?")
+  crosswalk <- (abb %in% "tax" & null(args))
 
-    url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                  cms_update(api)$distro[1],
-                  json,
-                  encode_param(args))
-  }
-  return(url)
+  if (crosswalk)
+    return(paste0(url, "/data?keyword="))
+
+  if (!crosswalk)
+    return(paste0(
+      url,
+      dplyr::if_else(
+        abb %in% c("end", "tax"),
+        "/data?",
+        "/data.json?"),
+      encode_param(args)))
 }
 
 #' Build url for http requests
-#' @param fn abbreviation for function name
-#' @param year tibble of parameter arguments
+#'
+#' @param abb abbreviation for function name
+#'
+#' @param year year of data distribution
+#'
 #' @autoglobal
+#'
 #' @noRd
-api_years <- function(fn) {
+api_years <- function(abb, year) {
 
-  api <- dplyr::case_match(fn,
-                           "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
-                           "srv" ~ "Medicare Physician & Other Practitioners - by Provider and Service",
-                           "prv" ~ "Medicare Physician & Other Practitioners - by Provider",
-                           "rxg" ~ "Medicare Part D Prescribers - by Geography and Drug",
-                           "rxd" ~ "Medicare Part D Prescribers - by Provider and Drug",
-                           "rxp" ~ "Medicare Part D Prescribers - by Provider",
-                           "outps" ~ "Medicare Outpatient Hospitals - by Provider and Service",
-                           "outgs" ~ "Medicare Outpatient Hospitals - by Geography and Service",
-                           # "scc" ~ "Specific Chronic Conditions",
-                           # "mcc" ~ "Multiple Chronic Conditions",
-                           "qpp" ~ "Quality Payment Program Experience",
-                           .default = NULL)
+  api <- dplyr::case_match(
+    abb,
+    "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
+    "srv" ~ "Medicare Physician & Other Practitioners - by Provider and Service",
+    "prv" ~ "Medicare Physician & Other Practitioners - by Provider",
+    "rxg" ~ "Medicare Part D Prescribers - by Geography and Drug",
+    "rxd" ~ "Medicare Part D Prescribers - by Provider and Drug",
+    "rxp" ~ "Medicare Part D Prescribers - by Provider",
+    "outps" ~ "Medicare Outpatient Hospitals - by Provider and Service",
+    "outgs" ~ "Medicare Outpatient Hospitals - by Geography and Service",
+    "qpp" ~ "Quality Payment Program Experience",
+    .default = NULL
+  )
 
-  cms_update(api)
+  api <- cms_update(api)
+
+  fuimus::search_in(api, api[["year"]], year)
 }

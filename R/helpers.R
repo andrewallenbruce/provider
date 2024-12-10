@@ -1,27 +1,3 @@
-#' Years between two dates, rounded down to nearest whole number
-#'
-#' @param from `<date>` Start date
-#'
-#' @param to `<date>` End date
-#'
-#' @returns `<int>` vector; number of years between `from` and `to`, rounded
-#'   down to nearest whole number
-#'
-#' @examples
-#' years_floor(
-#'    as.Date("2020-01-01"),
-#'    as.Date("2020-01-01") + 2057)
-#'
-#' @autoglobal
-#'
-#' @noRd
-years_floor <- \(from, to) {
-  floor(
-    as.integer(
-      difftime(to, from, units = "weeks", tz = "UTC")
-    ) / 52.17857)
-}
-
 #' Is `x` `NULL`?
 #'
 #' @param x vector
@@ -88,7 +64,46 @@ not_na <- \(x) !na(x)
 #' @autoglobal
 #'
 #' @noRd
-rdetect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
+sf_detect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
+
+#' Detect Opposite by Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @returns `<lgl>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+sf_ndetect <- \(s, p) !stringfish::sf_grepl(s, p, nthreads = 4L)
+
+#' Extract by Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+sf_extract <- \(s, p) s[sf_detect(s, p)]
+
+#' Extract Negation of Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+sf_nextract <- \(s, p) s[sf_ndetect(s, p)]
 
 #' Remove by Regex
 #'
@@ -103,9 +118,9 @@ rdetect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
 #' @autoglobal
 #'
 #' @noRd
-rremove <- \(s, p, fix = FALSE) stringfish::sf_gsub(s, p, "", nthreads = 4L, fixed = fix)
+sf_remove <- \(s, p, fix = FALSE) stringfish::sf_gsub(s, p, "", nthreads = 4L, fixed = fix)
 
-#' Count of characters in character vector
+#' Count characters in vector
 #'
 #' @param x `<chr>` vector
 #'
@@ -114,7 +129,7 @@ rremove <- \(s, p, fix = FALSE) stringfish::sf_gsub(s, p, "", nthreads = 4L, fix
 #' @autoglobal
 #'
 #' @noRd
-rnchar <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
+sf_nchar <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
 
 #' Convert character vector to stringfish vector
 #'
@@ -125,21 +140,31 @@ rnchar <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
 #' @autoglobal
 #'
 #' @noRd
-sfconv <- \(x) stringfish::sf_convert(x)
+sf_conv <- \(x) stringfish::sf_convert(x)
 
 #' Concatenate Vectors
 #'
-#' @param ... Any number of vectors, coerced to `<character>` vector, if necessary
+#' @param ... Any number of vectors, coerced to `<chr>` vector, if necessary
 #'
-#' @returns concatenated `<character>` vector
-#'
-#' @examples
-#' sfcc(LETTERS, "A")
+#' @returns concatenated `<chr>` vector
 #'
 #' @autoglobal
 #'
 #' @noRd
-sfcc <- \(...) stringfish::sfc(...)
+sf_c <- \(...) stringfish::sfc(...)
+
+#' Collapse Vector
+#'
+#' @param x `<chr>` vector
+#'
+#' @param sep `<chr>` separator; default is `""`
+#'
+#' @returns collapsed `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+sf_smush <- \(x, sep = "") stringfish::sf_collapse(x, collapse = sep)
 
 #' Fast ifelse wrapper
 #'
@@ -154,4 +179,15 @@ sfcc <- \(...) stringfish::sfc(...)
 #' @autoglobal
 #'
 #' @noRd
-iifelse <- \(x, yes, no) kit::iif(test = x, yes = yes, no = no, nThread = 4L)
+iif_else <- \(x, yes, no) kit::iif(test = x, yes = yes, no = no, nThread = 4L)
+
+#' Unlist with no names
+#'
+#' @param x Named or unnamed `<list>`
+#'
+#' @returns Unnamed `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+delist <- \(x) unlist(x, use.names = FALSE)

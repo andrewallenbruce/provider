@@ -99,48 +99,6 @@ body <- RcppSimdJson::fparse(
     "modified",
     "distribution")]
 
-
-
-unnest_dt <- function(tbl, col) {
-
-  tbl <- data.table::as.data.table(tbl)
-
-  col <- rlang::ensyms(col)
-
-  col_names <- rlang::syms(setdiff(colnames(tbl), as.character(col)))
-
-  tbl <- rlang::eval(
-    rlang::expr(
-      tbl[,
-          as.character(unlist(!!!col)),
-          by = list(!!!col_names)])
-  )
-
-  colnames(tbl) <- c(as.character(col_names), as.character(col))
-
-  tbl
-}
-
-
-unnest_dt2 <- function(tbl, ...) {
-
-  tbl <- data.table::as.data.table(tbl)
-
-  col <- rlang::ensyms(...)
-
-  clnms <- rlang::syms(setdiff(colnames(tbl), as.character(col)))
-
-  tbl <- data.table::as.data.table(tbl)
-
-  tbl <- rlang::eval(
-    rlang::expr(tbl[, lapply(.SD, unlist), by = list(!!!clnms), .SDcols = as.character(col)])
-  )
-
-  colnames(tbl) <- c(as.character(clnms), as.character(col))
-
-  tbl
-}
-
 #
 # lastmod <- regmatches(
 #   lastmod,

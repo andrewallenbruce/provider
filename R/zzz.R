@@ -216,32 +216,36 @@ distros_open <- function() {
     resp_body_json(
     check_type = FALSE,
     simplifyVector = TRUE) |>
-    data.table::as.data.table()
+    as.data.table() |>
+    fmutate(
+      year = strex::str_before_first(temporal, "-"),
+    description = stringfish::sf_gsub(
+      strex::str_before_first(
+        description, " \\["),
+      "\n", ". ",
+      fixed = TRUE,
+      nthreads = 4L)) |>
+    fselect(
+      year,
+      title,
+      identifier,
+      issued,
+      modified,
+      distribution,
+      periodicity = accrualPeriodicity)
 
-  root <- dplyr::reframe(
-    resp,
-    title,
-    description = strex::str_before_first(description, " \\[") |>
-      stringfish::sf_gsub("\n", ". ", fixed = TRUE, nthreads = 4L),
-    identifier,
-    issued,
-    modified,
-    temporal,
-    periodicity = accrualPeriodicity)
-
-  nests <- fselect(resp, identifier, distribution) |>
-    data.table::as.data.table() |>
+  nests <- fselect(resp, year, identifier, distribution) |>
     mlr3misc::unnest("distribution", prefix = "{col}_") |>
     mlr3misc::unnest("distribution_data", prefix = "{col}_") |>
     fselect(
+      year,
       identifier,
-      distribution_identifier,
-      distribution_data_title,
-      distribution_data_downloadURL,
-      distribution_data_describedBy)
+      distro_id = distribution_identifier,
+      distro_title = distribution_data_title,
+      distro_csv = distribution_data_downloadURL)
 
   list(
-    root = root,
+    root = resp,
     nests = nests
   )
 }
