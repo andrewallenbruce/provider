@@ -14,7 +14,7 @@
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 years_floor <- \(from, to) {
   floor(
     as.integer(
@@ -138,7 +138,7 @@ sfconv <- \(x) stringfish::sf_convert(x)
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 sfcc <- \(...) stringfish::sfc(...)
 
 #' Fast ifelse wrapper
