@@ -50,7 +50,7 @@
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 quality_pay2 <- function(year,
                          npi         = NULL,
                          state       = NULL,
