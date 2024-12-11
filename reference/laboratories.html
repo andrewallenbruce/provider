@@ -72,15 +72,15 @@ the type of testing services the facility provides.</p>
 
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Provider or clinical laboratory's name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Provider or clinical laboratory's name</p></dd>
 
 
 <dt id="arg-clia">clia<a class="anchor" aria-label="anchor" href="#arg-clia"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; 10-character CLIA number</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 10-character CLIA number</p></dd>
 
 
 <dt id="arg-certificate">certificate<a class="anchor" aria-label="anchor" href="#arg-certificate"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
+<dd><p><code>&lt;chr&gt;</code> CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
 <li><p><code>"ppm"</code></p></li>
 <li><p><code>"registration"</code></p></li>
 <li><p><code>"compliance"</code></p></li>
@@ -89,31 +89,31 @@ the type of testing services the facility provides.</p>
 
 
 <dt id="arg-city">city<a class="anchor" aria-label="anchor" href="#arg-city"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; City</p></dd>
+<dd><p><code>&lt;chr&gt;</code> City</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; State</p></dd>
+<dd><p><code>&lt;chr&gt;</code> State</p></dd>
 
 
 <dt id="arg-zip">zip<a class="anchor" aria-label="anchor" href="#arg-zip"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Zip code</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Zip code</p></dd>
 
 
 <dt id="arg-active">active<a class="anchor" aria-label="anchor" href="#arg-active"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>FALSE</code> Return only active providers</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>FALSE</code> Return only active providers</p></dd>
 
 
 <dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
 
 
 <dt id="arg-pivot">pivot<a class="anchor" aria-label="anchor" href="#arg-pivot"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Pivot output</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Pivot output</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -174,14 +174,46 @@ following CMS-approved accreditation organizations:</p></li>
 <li><p><a href="https://www.cap.org/" class="external-link">College of American Pathologists</a> (CAP)</p></li>
 <li><p><a href="https://www.cola.org/" class="external-link">Commission on Office Laboratory Accreditation</a> (COLA)</p></li>
 <li><p><a href="https://www.jointcommission.org/" class="external-link">The Joint Commission</a> (JCAHO)</p></li>
-</ul><p>Links:</p><ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">Provider of Services File - Clinical Laboratories</a></p></li>
+</ul></div>
+    <div class="section level2">
+    <h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a></h2>
+
+
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">Provider of Services File - Clinical Laboratories</a></p></li>
+<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS.gov CLIA</a></p></li>
+<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC.gov CLIA</a></p></li>
+<li><p><a href="https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases" class="external-link">FDA CLIA Databases</a></p></li>
+<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CDC.gov CLIA Certificates</a></p></li>
+<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS QCOR - S&amp;C's Quality, Certification and Oversight Reports</a></p></li>
 </ul><p><em>Update Frequency:</em> <strong>Quarterly</strong></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="co"># Artic Envestigations Program Laboratory, Anchorage, AK</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"02D0873639"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Dengue Laboratory, San Juan, PR</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"40D0869394"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># CDC/CGH/DGHA International Laboratory, Atlanta, GA</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D1061576"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Infectious Diseases Laboratory, Atlanta, GA</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0668319"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0668290"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Vector-Borne Diseases Laboratory, Fort Collins, CO</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"06D0880233"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Wiregrass Georgia Tech College Student Health Center, Valdosta, GA</span></span></span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D2306220"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>certificate <span class="op">=</span> <span class="st">"ppm"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
