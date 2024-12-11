@@ -104,24 +104,24 @@ beneficiaries <- function(year = NULL,
 
   state_name <- NULL
 
-  if (!is.null(year)) {
+  if (not_null(year)) {
     year <- as.character(year)
 
-    if (!is.null(period) && period %in% "Year") {
+    if (not_null(period) && period %in% "Year") {
       year <- rlang::arg_match0(year, as.character(bene_years("Year")))}
 
-    if (!is.null(period) && period %in% c("Month", month.name)) {
+    if (not_null(period) && period %in% c("Month", month.name)) {
       year <- rlang::arg_match0(year, as.character(bene_years("Month")))}
   }
 
-  if (!is.null(period)) {
+  if (not_null(period)) {
     period <- rlang::arg_match0(period, c("Year", "Month", month.name))
     if (period == "Month") period <- NULL
   }
 
   level <- level %nn% rlang::arg_match0(level, c("National", "State", "County"))
 
-  if (!is.null(state)) {
+  if (not_null(state)) {
     state <- rlang::arg_match0(state, c(state.abb, state.name, "US"))
 
     if (state %in% c(state.name, "United States")) {
@@ -130,7 +130,7 @@ beneficiaries <- function(year = NULL,
     }
   }
 
-  if (is.null(state)) state_name <- NULL
+  if (null(state)) state_name <- NULL
 
   args <- dplyr::tribble(
     ~param,              ~arg,
@@ -142,10 +142,10 @@ beneficiaries <- function(year = NULL,
     "BENE_COUNTY_DESC",  county,
     "BENE_FIPS_CD",      fips)
 
-  response <- httr2::request(build_url("ben", args)) |>
-    httr2::req_perform()
+  response <- request(build_url("ben", args)) |>
+    req_perform()
 
-  if (vctrs::vec_is_empty(response$body)) {
+  if (empty(response$body)) {
 
     cli_args <- dplyr::tribble(
       ~x,           ~y,
@@ -162,15 +162,18 @@ beneficiaries <- function(year = NULL,
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  results <- resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- cols_bene(tidyup(results, int = c('year', '_benes'))) |>
+    results <- cols_bene(
+      tidyup(results,
+             int = c('year', '_benes'))) |>
       dplyr::mutate(period = fct_period(period),
                     level = fct_level(level),
                     state = fct_stabb(state),
                     state_name = fct_stname(state_name))
-    if (!is.null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
+
+    if (not_null(period) && period == "Month") results <- dplyr::filter(results, period %in% month.name)
   }
   return(results)
 }
