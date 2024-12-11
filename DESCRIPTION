@@ -1,7 +1,7 @@
 Type: Package
 Package: provider
 Title: Access Public Healthcare Provider Data
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
     person(c("Andrew", "Allen"), "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
