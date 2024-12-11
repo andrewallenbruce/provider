@@ -30,45 +30,6 @@ last_dttm <- \() {
       tz = "EST"))
 }
 
-#' CMS Dataset Distribution Names
-#'
-#' @autoglobal
-#'
-#' @returns description
-#'
-#' @keywords internal
-#'
-#' @export
-datasets <- \() {
-  c(
-    # affiliations    = "Facility Affiliation Data",
-    # clinicians      = "National Downloadable File",
-    # open_payments   = "General Payment Data",
-    beneficiaries   = "Medicare Monthly Enrollment",
-    crosswalk       = "Medicare Provider and Supplier Taxonomy Crosswalk",
-    hospitals       = "Hospital Enrollments",
-    laboratories    = "Provider of Services File - Clinical Laboratories",
-    outpatient      = c(service = "Medicare Outpatient Hospitals - by Provider and Service", geography = "Medicare Outpatient Hospitals - by Geography and Service"),
-    orderrefer      = "Order and Referring",
-    pending         = c(physicians = "Pending Initial Logging and Tracking", nonphysicians = "Pending Initial Logging and Tracking Non Physicians"),
-    providers       = "Medicare Fee-For-Service  Public Provider Enrollment",
-    quality         = "Quality Payment Program Experience",
-    rbcs            = "Restructured BETOS Classification System",
-    reassignment    = "Revalidation Reassignment List", # Clinic Group Practice Reassignment",
-    optout          = "Opt Out Affidavits",
-    prescribers     = c(
-      provider = "Medicare Part D Prescribers - by Provider",
-      drug = "Medicare Part D Prescribers - by Provider and Drug",
-      geography = "Medicare Part D Prescribers - by Geography and Drug"
-    ),
-    utilization     = c(
-      provider = "Medicare Physician & Other Practitioners - by Provider",
-      service = "Medicare Physician & Other Practitioners - by Provider and Service",
-      geography = "Medicare Physician & Other Practitioners - by Geography and Service"
-    )
-  )
-}
-
 #' Main CMS Distributions
 #'
 #' @param datasets character vector of dataset names
@@ -80,7 +41,7 @@ datasets <- \() {
 #' @keywords internal
 #'
 #' @export
-distros_main <- \(datasets = datasets()) {
+distros_main <- \(datasets = api_names("main")) {
 
   main <- arrow::read_json_arrow(
     file = "https://data.cms.gov/data.json",

@@ -21,12 +21,9 @@ Imports:
     collapse,
     data.table,
     dplyr,
-    furrr,
     httr2,
     janitor,
     fs,
-    kit,
-    pins,
     lubridate,
     purrr,
     rlang (>= 1.1.0),
@@ -36,10 +33,12 @@ Imports:
     stringr,
     tidyr,
     vctrs,
-    zeallot
+    zeallot,
+    kit,
+    cheapr
 Suggests: 
-    cheapr,
-    fipio,
+    pins,
+    furrr,
     fontawesome,
     fuimus,
     future,
@@ -52,11 +51,9 @@ Suggests:
     mlr3misc,
     roxyglobals,
     rvest,
-    sf,
     stats,
     stringfish,
-    testthat (>= 3.0.0),
-    zipcodeR
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Remotes: 

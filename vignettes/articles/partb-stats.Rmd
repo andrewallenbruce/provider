@@ -1,8 +1,5 @@
 ---
 title: "Comparing Providers"
-subtitle: "Demographics, Patient Mix, and Performance"
-description: "Demographics, Patient Mix, and Performance"
-author: "Andrew Bruce"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -21,6 +18,8 @@ knitr::opts_chunk$set(
 options(scipen = 999)
 ```
 
+# Demographics, Patient Mix, and Performance
+
 ```{r message=FALSE, warning=FALSE}
 library(provider)
 library(tidyr)
@@ -32,7 +31,6 @@ library(ggplot2)
 library(gt)
 library(gtExtras)
 ```
-
 
 # `utilization()`
 
@@ -49,9 +47,6 @@ hcpcs   <- compare_hcpcs(srvc)
 future::plan(sequential)
 ```
 
-
-
-
 ## Overall Performance
 
 ```{r}
@@ -60,7 +55,6 @@ performance <- ind |>
   select(year, tot_hcpcs:.pymt_per_srvc)
 performance
 ```
-
 
 ```{r echo=FALSE, eval=FALSE}
 performance |> 
@@ -78,9 +72,6 @@ performance |>
     echarts4r::e_axis(axis = "y", show = FALSE)
 ```
 
-
-
-
 ```{r}
 ggplot(performance, aes(x = .pymt_per_srvc, 
                         y = .srvcs_per_bene, 
@@ -89,25 +80,21 @@ ggplot(performance, aes(x = .pymt_per_srvc,
   theme_minimal()
 ```
 
-
-
-
 ```{r}
 ind |> 
   unnest(performance) |> 
   select(year, tot_hcpcs:tot_srvcs) |> 
-  change(!year, csm = "_chg") |> 
+  provider:::change(!year, csm = "_chg") |> 
   gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
   fmt_currency(columns = starts_with("avg_"), decimals = 0)
 ```
 
-
 ```{r}
 ind |> 
   unnest(performance) |> 
   select(year, tot_charges:tot_payment) |> 
-  change(!year) |> 
+  provider:::change(!year) |> 
   gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
   fmt_currency(columns = c(tot_charges, tot_allowed, tot_payment), decimals = 0) |> 
@@ -121,7 +108,7 @@ ind |>
 ind |> 
   unnest(performance) |> 
   select(year, .copay_deduct:.pymt_per_srvc) |> 
-  change(!year) |> 
+  provider:::change(!year) |> 
   gt(rowname_col = "year") |> 
   opt_table_font(font = google_font(name = "Fira Code")) |> 
   fmt_currency(columns = starts_with(".pymt"), decimals = 2)
@@ -132,7 +119,9 @@ ind |>
 ```{r}
 srvc |> 
   group_by(year, family) |> 
-  mutate(hcpcs_level = dplyr::min_rank(dplyr::pick(avg_allowed, avg_payment))) |> 
+  mutate(
+    hcpcs_level = min_rank(
+      pick(avg_allowed, avg_payment))) |> 
   select(year, 
          hcpcs, 
          hcpcs_desc, 
@@ -155,9 +144,6 @@ srvc |>
   fmt_currency(columns = starts_with("avg_"), decimals = 0) |> 
   opt_all_caps()
 ```
-
-
-<br>
 
 ```{r}
 srvc |> 
@@ -212,12 +198,6 @@ hcpcs |>
   opt_all_caps()
 ```
 
-
-
-
-
-
-
 ```{r}
 hcpcs |> 
   select(year, 
@@ -245,9 +225,6 @@ hcpcs |>
   opt_all_caps()
 ```
 
-
-
-
 ## Demographics
 
 ```{r}
@@ -264,7 +241,6 @@ ind |>
   opt_all_caps()
 ```
 
-
 ### Chronic Conditions
 
 ```{r}
@@ -280,6 +256,3 @@ ind |>
   sub_zero(zero_text = "") |>
   opt_all_caps()
 ```
-
-
-<br>
