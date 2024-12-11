@@ -243,23 +243,13 @@ utilization <- function(year,
     "Place_Of_Srvc",                  pos,
     "Rndrng_Prvdr_Geo_Lvl",           level)
 
-  yr <- switch(type,
-    'Provider'   = api_years('prv'),
-    'Service'    = api_years('srv'),
-    'Geography'  = api_years('geo'))
+  id <- switch(
+    type,
+    "Provider"  = api_years("prv", year = as.integer(year))[["distro"]],
+    "Service"   = api_years("srv", year = as.integer(year))[["distro"]],
+    "Geography" = api_years("geo", year = as.integer(year))[["distro"]])
 
-  id <- dplyr::filter(
-    yr,
-    year == {{ year }}
-    ) |>
-    dplyr::pull(distro)
-
-  url <- paste0(
-    "https://data.cms.gov/data-api/v1/dataset/",
-    id,
-    "/data.json?",
-
-    encode_param(args))
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/", id, "/data.json?", encode_param(args))
 
   response <- httr2::request(url) |> httr2::req_perform()
 

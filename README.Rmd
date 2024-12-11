@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -22,6 +24,7 @@ knitr::opts_chunk$set(
 >  Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
 
 <!-- badges: start -->
+![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/provider?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 [![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
@@ -53,60 +56,55 @@ library(tidyr)
 ### `affiliations()`
 
 ```{r}
-affiliations(npi = 1023630738, 
-             pac = 9032521372, 
-             facility_ccn = 370781) |> 
-  glimpse()
+affiliations(facility_ccn = 370781)
 ```
 
 
 ### `beneficiaries()`
 
 ```{r}
-beneficiaries(year   = 2024, 
-              period = "Month", 
-              level  = "County", 
-              state  = "GA", 
-              county = "Lowndes County") |> 
+beneficiaries(
+  year   = 2023, 
+  period = "Year", 
+  level  = "County", 
+  state  = "GA", 
+  county = "Lowndes County") |>
   glimpse()
 ```
 
 ### `clinicians()`
 
 ```{r}
-clinicians(npi = 1932365699) |> 
-  glimpse()
+clinicians(npi = 1932365699) |> glimpse()
 ```
 
 ### `hospitals()`
 
 ```{r}
-hospitals(npi = 1720098791) |> 
-  glimpse()
+hospitals(npi = 1720098791) |> glimpse()
 ```
 
 ### `laboratories()`
 
 ```{r}
-laboratories(clia = "11D0265516") |> 
-  glimpse()
+laboratories(clia = "11D0265516") |> glimpse()
 ```
 
 
 ### `nppes()`
 
 ```{r}
-nppes(npi = 1497535637) |> 
-  glimpse()
+nppes(npi = 1497535637) |> glimpse()
 ```
 
 
 ### `open_payments()`
 
 ```{r}
-open_payments(year  = 2021, 
-              npi   = 1023630738, 
-              na.rm = TRUE) |> 
+open_payments(
+  year  = 2021, 
+  npi   = 1023630738, 
+  na.rm = TRUE) |> 
   glimpse()
 ```
 
@@ -114,26 +112,25 @@ open_payments(year  = 2021,
 ### `opt_out()`
 
 ```{r}
-opt_out(npi = 1043522824) |> 
-  glimpse()
+opt_out(npi = 1043522824) |> glimpse()
 ```
 
 
 ### `order_refer()`
 
 ```{r}
-order_refer(npi = 1043522824, tidy = FALSE) |> 
-  glimpse()
+order_refer(npi = 1043522824) |> glimpse()
 ```
 
 
 ### `outpatient()`
 
 ```{r}
-outpatient(year  = 2021, 
-           state = "GA", 
-           city  = "Valdosta", 
-           apc   = "5072") |> 
+outpatient(
+  year  = 2021, 
+  state = "GA", 
+  city  = "Valdosta", 
+  apc   = "5072") |> 
   glimpse()
 ```
 
@@ -141,139 +138,101 @@ outpatient(year  = 2021,
 ### `prescribers()`
 
 ```{r}
-prescribers(year = 2019, 
-            type = 'Provider', 
-            npi = 1003000126) |> 
+prescribers(
+  year = 2022, 
+  type = 'Provider', 
+  npi = 1003000126) |> 
   glimpse()
 ```
 
 
 ```{r}
-prescribers(year = 2019, 
-            npi = 1003000126,
-            type = 'Drug',
-            brand_name = 'Atorvastatin Calcium') |> 
+prescribers(
+  year = 2022, 
+  npi = 1003000126,
+  type = 'Drug',
+  brand_name = 'Atorvastatin Calcium') |> 
   glimpse()
 ```
 
 
 ```{r}
-prescribers(year = 2021, 
-            type = 'Geography',
-            level = 'National',
-            brand_name = 'Clotrimazole-Betamethasone') |> 
+prescribers(
+  year = 2022, 
+  type = 'Geography',
+  level = 'National',
+  brand_name = 'Clotrimazole-Betamethasone') |> 
   glimpse()
 ```
-
 
 ### `providers()`
 
 ```{r}
-providers(npi  = 1720098791, 
-          enid = "O20040610001257") |> 
+providers(
+  npi  = 1720098791, 
+  enid = "O20040610001257") |> 
   glimpse()
 ```
 
 ### `quality_payment()`
 
 ```{r}
-quality_payment(year = 2021, 
-                npi  = 1932365699) |> 
+quality_payment(
+  year = 2021, 
+  npi  = 1932365699) |> 
   glimpse()
-```
-
-
-```{r}
-q <- quality_payment(year = 2021, 
-                     npi = 1932365699)
-
-q |> 
-  select(
-    year,
-    qpp_status
-    ) |> 
-  unnest(qpp_status)
-```
-
-
-```{r}
-q |> 
-  select(
-    year,
-    qpp_measures
-    ) |> 
-  unnest(qpp_measures)
 ```
 
 ### `quality_eligibility()`
 
 ```{r}
-quality_eligibility(year = 2021, 
-                    npi  = 1932365699) |> 
+quality_eligibility(
+  year = 2024, 
+  npi  = 1932365699,
+  tidy = FALSE,
+  unnest = FALSE,
+  pivot = FALSE,
+  na.rm = FALSE) |> 
   glimpse()
 ```
 
 ### `reassignments()`
 
 ```{r}
-reassignments(npi = 1932365699, 
-              pac_org = 7719037548) |> 
+reassignments(
+  npi = 1932365699, 
+  pac_org = 7719037548) |> 
   glimpse()
 ```
-
 
 ### `utilization()`
 
 ```{r}
-utilization(year = 2021, 
-            npi  = 1932365699, 
-            type = "Provider") |> 
+utilization(
+  year = 2022, 
+  npi  = 1932365699, 
+  type = "Provider") |> 
   glimpse()
 ```
 
-
-
 ```{r}
-p <- utilization(year = 2021, 
-                 npi = 1932365699, 
-                 type = "Provider")
-
-select(p, year, performance) |> 
-  unnest(performance) |> 
+utilization(
+  year  = 2022, 
+  npi   = 1932365699,
+  hcpcs = "99214",
+  type  = "Service",
+  rbcs = FALSE) |> 
   glimpse()
 ```
 
-
 ```{r}
-select(p, year, demographics) |> 
-  unnest(demographics) |> 
-  glimpse()
-```
-
-
-```{r}
-select(p, year, conditions) |> 
-  unnest(conditions) |> 
-  glimpse()
-```
-
-
-
-```{r}
-utilization(year  = 2021, 
-            npi   = 1932365699,
-            hcpcs = "99214",
-            type  = "Service") |> 
-  glimpse()
-```
-
-
-```{r}
-utilization(year  = 2021, 
-            hcpcs = "99205", 
-            level = "National",
-            pos   = "F",
-            type  = "Geography") |> 
+utilization(
+  year  = 2022, 
+  hcpcs = "99205", 
+  level = "National",
+  pos   = "F",
+  type  = "Geography",
+  rbcs = FALSE) |> 
   glimpse()
 ```
 

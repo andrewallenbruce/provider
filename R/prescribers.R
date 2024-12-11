@@ -269,25 +269,15 @@ prescribers <- function(year,
     'Antbtc_Drug_Flag',      antibiotic,
     'Antpsyct_Drug_Flag',    antipsychotic)
 
-  yr <- switch(
+  id <- switch(
     type,
-    'Provider'  = api_years('rxp'),
-    'Drug'      = api_years('rxd'),
-    'Geography' = api_years('rxg'))
+    "Provider"  = api_years("rxp", year = as.integer(year))[["distro"]],
+    "Drug"      = api_years("rxd", year = as.integer(year))[["distro"]],
+    "Geography" = api_years("rxg", year = as.integer(year))[["distro"]])
 
-  id <- dplyr::filter(
-    yr,
-    year == {{ year }}) |>
-    dplyr::pull(distro)
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/", id, "/data.json?", encode_param(args))
 
-  url <- paste0(
-    "https://data.cms.gov/data-api/v1/dataset/",
-    id,
-    "/data.json?",
-    encode_param(args))
-
-  response <- httr2::request(url) |>
-    httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
 

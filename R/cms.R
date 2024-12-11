@@ -247,7 +247,7 @@ build_url <- function(abb, args = NULL) {
 #' @autoglobal
 #'
 #' @noRd
-api_years <- function(abb, year) {
+api_years <- function(abb, year = NULL) {
 
   api <- dplyr::case_match(
     abb,

@@ -101,9 +101,7 @@ quality_payment <- function(year,
 
   # id <- "b3438273-b4a6-44ca-8fb2-9e6026b74642"
 
-  id <- api_years("qpp") |>
-    dplyr::filter(year == {{ year }}) |>
-    dplyr::pull(distro)
+  id <- api_years("qpp", year = as.integer(year))[["distro"]]
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                 id, "/data?", encode_param(args))

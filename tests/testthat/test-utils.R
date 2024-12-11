@@ -101,7 +101,7 @@ test_that("tidyup() works", {
     star  = NA_character_,
     dash  = NA_character_,
     lgl   = TRUE,
-    zip   = "81303-1234")
+    zip   = "813031234")
 
   tidy2      <- tidy
   tidy2$date <- lubridate::mdy("03/07/1981")

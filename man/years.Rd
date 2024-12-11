@@ -43,9 +43,6 @@ open_years()
 # `utilization()`
 util_years()
 
-# `conditions()`
-# cc_years()
-
 # `quality_payment()`
 qpp_years()
 

@@ -62,9 +62,7 @@ outpatient <- function(year,
     'Rndrng_Prvdr_RUCA',         ruca,
     'APC_Cd',                    apc)
 
-  id <- dplyr::filter(api_years("outps"),
-                      year == {{ year }}) |>
-    dplyr::pull(distro)
+  id <- api_years("outps", year = as.integer(year))[["distro"]]
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                 id, "/data.json?", encode_param(args))
