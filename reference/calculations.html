@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,101 +49,14 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">change</span><span class="op">(</span><span class="va">df</span>, <span class="va">cols</span>, csm <span class="op">=</span> <span class="cn">NULL</span>, digits <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">chg</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, fill_na <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">pct</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, fill_na <span class="op">=</span> <span class="fl">0L</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ror</span><span class="op">(</span><span class="va">df</span>, <span class="va">col</span>, n <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">geomean</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">years_df</span><span class="op">(</span><span class="va">df</span>, <span class="va">date_col</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">years_vec</span><span class="op">(</span><span class="va">date_col</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">duration_vec</span><span class="op">(</span><span class="va">date_col</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">make_interval</span><span class="op">(</span><span class="va">df</span>, <span class="va">start</span>, end <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">summary_stats</span><span class="op">(</span></span>
-<span>  <span class="va">df</span>,</span>
-<span>  condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  summary_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  arr <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  digits <span class="op">=</span> <span class="fl">3</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">gen_data</span><span class="op">(</span><span class="va">years</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gen_data</span><span class="op">(</span><span class="va">years</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>data frame</p></dd>
-
-
-<dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
-<dd><p>numeric columns to calculate absolute/relative change &amp; rate of return</p></dd>
-
-
-<dt id="arg-csm">csm<a class="anchor" aria-label="anchor" href="#arg-csm"></a></dt>
-<dd><p>numeric cols to calculate cumulative sum for</p></dd>
-
-
-<dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
-<dd><p>Number of digits to round to, default is 3</p></dd>
-
-
-<dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>numeric vector</p></dd>
-
-
-<dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>values to offset</p></dd>
-
-
-<dt id="arg-fill-na">fill_na<a class="anchor" aria-label="anchor" href="#arg-fill-na"></a></dt>
-<dd><p>fill value for any NAs; default is 0</p></dd>
-
-
-<dt id="arg-col">col<a class="anchor" aria-label="anchor" href="#arg-col"></a></dt>
-<dd><p>numeric column</p></dd>
-
-
-<dt id="arg-date-col">date_col<a class="anchor" aria-label="anchor" href="#arg-date-col"></a></dt>
-<dd><p>date column</p></dd>
-
-
-<dt id="arg-start">start<a class="anchor" aria-label="anchor" href="#arg-start"></a></dt>
-<dd><p>start date column</p></dd>
-
-
-<dt id="arg-end">end<a class="anchor" aria-label="anchor" href="#arg-end"></a></dt>
-<dd><p>end date column</p></dd>
-
-
-<dt id="arg-condition">condition<a class="anchor" aria-label="anchor" href="#arg-condition"></a></dt>
-<dd><p>filter condition, i.e. <code>patient == "new"</code></p></dd>
-
-
-<dt id="arg-group-vars">group_vars<a class="anchor" aria-label="anchor" href="#arg-group-vars"></a></dt>
-<dd><p>variables to group by, i.e. <code>c(specialty, state, hcpcs, cost)</code></p></dd>
-
-
-<dt id="arg-summary-vars">summary_vars<a class="anchor" aria-label="anchor" href="#arg-summary-vars"></a></dt>
-<dd><p>variables to summarise, i.e. <code>c(min, max, mode, range)</code></p></dd>
-
-
-<dt id="arg-arr">arr<a class="anchor" aria-label="anchor" href="#arg-arr"></a></dt>
-<dd><p>column to arrange data by, i.e. <code>cost</code></p></dd>
-
-
-<dt id="arg-years">years<a class="anchor" aria-label="anchor" href="#arg-years"></a></dt>
+<dl><dt id="arg-years">years<a class="anchor" aria-label="anchor" href="#arg-years"></a></dt>
 <dd><p>sequence of years, e.g. <code>2010:2020</code></p></dd>
 
 </dl></div>
@@ -155,64 +68,26 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu">gen_data</span><span class="op">(</span><span class="fl">2020</span><span class="op">:</span><span class="fl">2025</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year group   pay</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>484</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>869</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Lagged absolute/percentage change, rate of return and cumulative sum</span></span></span>
-<span class="r-in"><span><span class="co"># `change()`</span></span></span>
+<span class="r-in"><span><span class="co"># Lagged absolute/percentage change,</span></span></span>
+<span class="r-in"><span><span class="co"># rate of return and cumulative sum</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">change</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year group   pay pay_chg pay_pct pay_ror</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>172       0  0        1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>406     234  0.200    1.20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>459      53  0.037<span style="text-decoration: underline;">7</span>   1.04 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>062    -<span style="color: #BB0000;">397</span> -<span style="color: #BB0000;">0.272</span>    0.728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>484     422  0.397    1.40 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>869     385  0.259    1.26 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># `geomean()` # Geometric mean</span></span></span>
+<span class="r-in"><span><span class="co"># Geometric mean</span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">ror</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>gmean <span class="op">=</span> <span class="fu">geomean</span><span class="op">(</span><span class="va">pay_ror</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 1</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gmean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  1.10</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># When performing a `group_by()`, watch for</span></span></span>
 <span class="r-in"><span><span class="co"># the correct order of the variables</span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">change</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   group [2]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year group   pay pay_chg  pay_pct pay_ror</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>020 A      <span style="text-decoration: underline;">1</span>172       0  0         1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 A      <span style="text-decoration: underline;">1</span>406     234  0.200     1.20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>022 A      <span style="text-decoration: underline;">1</span>459      53  0.037<span style="text-decoration: underline;">7</span>    1.04 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>023 A      <span style="text-decoration: underline;">1</span>062    -<span style="color: #BB0000;">397</span> -<span style="color: #BB0000;">0.272</span>     0.728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>024 A      <span style="text-decoration: underline;">1</span>484     422  0.397     1.40 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>025 A      <span style="text-decoration: underline;">1</span>869     385  0.259     1.26 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>020 B      <span style="text-decoration: underline;">1</span>878       0  0         1    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 B      <span style="text-decoration: underline;">1</span>558    -<span style="color: #BB0000;">320</span> -<span style="color: #BB0000;">0.170</span>     0.830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>022 B      <span style="text-decoration: underline;">1</span>926     368  0.236     1.24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>023 B      <span style="text-decoration: underline;">1</span>451    -<span style="color: #BB0000;">475</span> -<span style="color: #BB0000;">0.247</span>     0.753</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>024 B      <span style="text-decoration: underline;">1</span>200    -<span style="color: #BB0000;">251</span> -<span style="color: #BB0000;">0.173</span>     0.827</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>025 B      <span style="text-decoration: underline;">1</span>196      -<span style="color: #BB0000;">4</span> -<span style="color: #BB0000;">0.003</span><span style="color: #BB0000; text-decoration: underline;">33</span>   0.997</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -222,36 +97,19 @@
 <span class="r-in"><span>                 csm_pct  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pay_pct</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 mean_ror <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pay_ror</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 geomean  <span class="op">=</span> <span class="fu">geomean</span><span class="op">(</span><span class="va">pay_ror</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   group mean_pay csm_chg csm_pct mean_ror geomean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A        <span style="text-decoration: underline;">1</span>409.     697   0.622    1.10    1.08 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B        <span style="text-decoration: underline;">1</span>535.    -<span style="color: #BB0000;">682</span>  -<span style="color: #BB0000;">0.357</span>    0.940   0.928</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Timespans</span></span></span>
 <span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">366</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `years_df()`</span></span></span>
 <span class="r-in"><span><span class="fu">years_df</span><span class="op">(</span><span class="va">dt</span>, <span class="va">date</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date       years_passed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2023-12-10            1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `duration_vec()`</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">dt</span>, dur <span class="op">=</span> <span class="fu">duration_vec</span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date       dur                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2023-12-10 -31622400s (~-1 years)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `make_interval()`</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">make_interval</span><span class="op">(</span>start <span class="op">=</span> <span class="va">date</span>, end <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">500</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date       interval                       period             timelength_days</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;Interval&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;Period&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-03-16 2022-03-16 UTC--2023-07-29 UTC 1y 4m 13d 0H 0M 0S             500</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># `summary_stats()`</span></span></span>
@@ -261,72 +119,12 @@
 <span class="r-in"><span>                    payment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">:</span><span class="fl">2000</span>, size <span class="op">=</span> <span class="fl">200</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sm</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   provider city  charges payment</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A        ATL      <span style="text-decoration: underline;">1</span>523    <span style="text-decoration: underline;">1</span>352</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> C        ATL      <span style="text-decoration: underline;">1</span>956    <span style="text-decoration: underline;">1</span>662</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> C        NYC      <span style="text-decoration: underline;">1</span>396    <span style="text-decoration: underline;">1</span>288</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A        NYC      <span style="text-decoration: underline;">1</span>749    <span style="text-decoration: underline;">1</span>180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> B        ATL      <span style="text-decoration: underline;">1</span>356    <span style="text-decoration: underline;">1</span>894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> B        NYC      <span style="text-decoration: underline;">1</span>327    <span style="text-decoration: underline;">1</span>085</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">summary_stats</span><span class="op">(</span><span class="va">sm</span>,</span></span>
 <span class="r-in"><span>              condition    <span class="op">=</span> <span class="va">city</span> <span class="op">==</span> <span class="st">"ATL"</span>,</span></span>
 <span class="r-in"><span>              group_vars   <span class="op">=</span> <span class="va">provider</span>,</span></span>
 <span class="r-in"><span>              summary_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">charges</span>, <span class="va">payment</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              arr          <span class="op">=</span> <span class="va">provider</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   provider charges_median charges_mean charges_sd payment_median payment_mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> C                 <span style="text-decoration: underline;">1</span>518         <span style="text-decoration: underline;">1</span>493.       323.           <span style="text-decoration: underline;">1</span>407        <span style="text-decoration: underline;">1</span>441.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B                 <span style="text-decoration: underline;">1</span>444.        <span style="text-decoration: underline;">1</span>517.       310.           <span style="text-decoration: underline;">1</span>499        <span style="text-decoration: underline;">1</span>520.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A                 <span style="text-decoration: underline;">1</span>456         <span style="text-decoration: underline;">1</span>446        259.           <span style="text-decoration: underline;">1</span>493        <span style="text-decoration: underline;">1</span>511.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: payment_sd &lt;dbl&gt;, n &lt;int&gt;</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">change</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>change <span class="op">=</span> <span class="fu">chg</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pct_change <span class="op">=</span> <span class="fu">pct</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">ror</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">ror</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ex</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">ror</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>gmean <span class="op">=</span> <span class="fu">geomean</span><span class="op">(</span><span class="va">pay_ror</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">ex</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">ror</span><span class="op">(</span><span class="va">pay</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>gmean <span class="op">=</span> <span class="fu">geomean</span><span class="op">(</span><span class="va">pay_ror</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">366</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">dt</span>, years <span class="op">=</span> <span class="fu">years_vec</span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">366</span>,</span></span>
-<span class="r-in"><span>              date2 <span class="op">=</span> <span class="va">date</span> <span class="op">-</span> <span class="fl">789</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>dur <span class="op">=</span> <span class="fu">duration_vec</span><span class="op">(</span><span class="va">date</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              dur2 <span class="op">=</span> <span class="fu">duration_vec</span><span class="op">(</span><span class="va">date2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">366</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">make_interval</span><span class="op">(</span><span class="va">dt</span>, start <span class="op">=</span> <span class="va">date</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

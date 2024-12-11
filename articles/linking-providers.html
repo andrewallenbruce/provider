@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@ IDs, CCNs, CLIAs and More</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2024-12-10</h4>
+            <h4 data-toc-skip class="date">2024-12-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/articles/linking-providers.Rmd" class="external-link"><code>vignettes/articles/linking-providers.Rmd</code></a></small>
       <div class="d-none name"><code>linking-providers.Rmd</code></div>
@@ -677,7 +677,7 @@ Bruce</h4>
 </tr>
 <tr>
 <td headers="clinicians name_26 name" class="gt_row gt_left">zip_org</td>
-<td headers="clinicians name_26 value" class="gt_row gt_left">05401</td>
+<td headers="clinicians name_26 value" class="gt_row gt_left">05401-1473</td>
 </tr>
 <tr>
 <td headers="clinicians name_27 name" class="gt_row gt_left">phone_org</td>
@@ -726,7 +726,7 @@ Bruce</h4>
 </tr>
 <tr>
 <td headers="nppes name_38 name" class="gt_row gt_left">zip</td>
-<td headers="nppes name_38 value" class="gt_row gt_left">05401</td>
+<td headers="nppes name_38 value" class="gt_row gt_left">05401-1473</td>
 </tr>
 <tr>
 <td headers="nppes name_39 name" class="gt_row gt_left">country</td>
@@ -1333,7 +1333,7 @@ Bruce</h4>
 </tr>
 <tr>
 <td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_15 name" class="gt_row gt_left">zip</td>
-<td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_15 value" class="gt_row gt_left">05401</td>
+<td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_15 value" class="gt_row gt_left">54011473</td>
 </tr>
 <tr>
 <td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_16 name" class="gt_row gt_left">location_type</td>
@@ -1409,7 +1409,7 @@ Bruce</h4>
 </tr>
 <tr>
 <td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_34 name" class="gt_row gt_left">zip</td>
-<td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_34 value" class="gt_row gt_left">05401</td>
+<td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_34 value" class="gt_row gt_left">54011473</td>
 </tr>
 <tr>
 <td headers="UNIVERSITY OF VERMONT MEDICAL CENTER INC name_35 name" class="gt_row gt_left">location_type</td>
@@ -1486,7 +1486,7 @@ Bruce</h4>
 </tr>
 <tr>
 <td headers="CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER name_53 name" class="gt_row gt_left">zip</td>
-<td headers="CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER name_53 value" class="gt_row gt_left">12901</td>
+<td headers="CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER name_53 value" class="gt_row gt_left">12901-1438</td>
 </tr>
 <tr>
 <td headers="CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER name_54 name" class="gt_row gt_left">location_type</td>
@@ -2054,6 +2054,24 @@ insights. For example, there is a hospital in New York named
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::contains(zip), format_zipcode)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `across()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't compute column `zip_code`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `if (grepl("^[0-9]{9}$", x)) ...`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> the condition has length &gt; 1</span></span></code></pre>
+<p><br></p>
+<p>The <strong>Hospital Enrollment</strong> API includes only Medicare
+Part A (hospital) providers, so we only get two rows back, but those
+include a new data point: two facility CCNs. Plugging those into the
+<strong>Facility Affiliations</strong> API, we can retrieve information
+on the individual providers practicing at this hospital. First, the
+all-numeric CCN (<code>331302</code>):</p>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="cljjbjgwtl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 #cljjbjgwtl table {
@@ -2507,88 +2525,267 @@ insights. For example, there is a hospital in New York named
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi_org">npi_org</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pac_org">pac_org</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="enid_org">enid_org</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="enid_state">enid_state</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="organization">organization</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="specialty_code">specialty_code</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="specialty">specialty</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="incorp_date">incorp_date</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="incorp_state">incorp_state</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="structure">structure</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="address">address</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="city">city</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="state">state</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="zip">zip</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="location_type">location_type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="registration">registration</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="multi_npi">multi_npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="reh_conversion">reh_conversion</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="subgroup">subgroup</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pac">pac</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first">first</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="middle">middle</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_type">facility_type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 npi_org" class="gt_row gt_right">1891785184</td>
-<td headers="stub_1_1 pac_org" class="gt_row gt_right">3577554138</td>
-<td headers="stub_1_1 enid_org" class="gt_row gt_left">O20101110000259</td>
-<td headers="stub_1_1 enid_state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_1 facility_ccn" class="gt_row gt_left">331302</td>
-<td headers="stub_1_1 organization" class="gt_row gt_left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td headers="stub_1_1 specialty_code" class="gt_row gt_right">00-85</td>
-<td headers="stub_1_1 specialty" class="gt_row gt_left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td headers="stub_1_1 incorp_date" class="gt_row gt_right">1926-05-08</td>
-<td headers="stub_1_1 incorp_state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_1 structure" class="gt_row gt_left">CORPORATION</td>
-<td headers="stub_1_1 address" class="gt_row gt_left">75 PARK ST</td>
-<td headers="stub_1_1 city" class="gt_row gt_left">ELIZABETHTOWN</td>
-<td headers="stub_1_1 state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_1 zip" class="gt_row gt_right">12932</td>
-<td headers="stub_1_1 location_type" class="gt_row gt_left">OTHER HOSPITAL PRACTICE LOCATION</td>
-<td headers="stub_1_1 registration" class="gt_row gt_left">Non-Profit</td>
-<td headers="stub_1_1 multi_npi" class="gt_row gt_center">TRUE</td>
-<td headers="stub_1_1 reh_conversion" class="gt_row gt_center">FALSE</td>
-<td headers="stub_1_1 subgroup" class="gt_row gt_left">None</td>
+<td headers="stub_1_1 npi" class="gt_row gt_right">1003029125</td>
+<td headers="stub_1_1 pac" class="gt_row gt_right">6204824378</td>
+<td headers="stub_1_1 first" class="gt_row gt_left">STACI</td>
+<td headers="stub_1_1 middle" class="gt_row gt_left">L</td>
+<td headers="stub_1_1 last" class="gt_row gt_left">CARTER-KELLY</td>
+<td headers="stub_1_1 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_1 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_1 facility_ccn" class="gt_row gt_right">331302</td>
 </tr>
 <tr>
 <th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 npi_org" class="gt_row gt_right">1407061591</td>
-<td headers="stub_1_2 pac_org" class="gt_row gt_right">3577554138</td>
-<td headers="stub_1_2 enid_org" class="gt_row gt_left">O20220827000145</td>
-<td headers="stub_1_2 enid_state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_2 facility_ccn" class="gt_row gt_left">33Z302</td>
-<td headers="stub_1_2 organization" class="gt_row gt_left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td headers="stub_1_2 specialty_code" class="gt_row gt_right">00-85</td>
-<td headers="stub_1_2 specialty" class="gt_row gt_left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td headers="stub_1_2 incorp_date" class="gt_row gt_right">1926-05-08</td>
-<td headers="stub_1_2 incorp_state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_2 structure" class="gt_row gt_left">CORPORATION</td>
-<td headers="stub_1_2 address" class="gt_row gt_left">75 PARK ST</td>
-<td headers="stub_1_2 city" class="gt_row gt_left">ELIZABETHTOWN</td>
-<td headers="stub_1_2 state" class="gt_row gt_left">NY</td>
-<td headers="stub_1_2 zip" class="gt_row gt_right">12932</td>
-<td headers="stub_1_2 location_type" class="gt_row gt_left">OTHER HOSPITAL PRACTICE LOCATION</td>
-<td headers="stub_1_2 registration" class="gt_row gt_left">Non-Profit</td>
-<td headers="stub_1_2 multi_npi" class="gt_row gt_center">FALSE</td>
-<td headers="stub_1_2 reh_conversion" class="gt_row gt_center">FALSE</td>
-<td headers="stub_1_2 subgroup" class="gt_row gt_left">None</td>
+<td headers="stub_1_2 npi" class="gt_row gt_right">1013141860</td>
+<td headers="stub_1_2 pac" class="gt_row gt_right">8022069558</td>
+<td headers="stub_1_2 first" class="gt_row gt_left">DEBORAH</td>
+<td headers="stub_1_2 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_2 last" class="gt_row gt_left">KAMPSCHROR</td>
+<td headers="stub_1_2 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_2 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_2 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
+<td headers="stub_1_3 npi" class="gt_row gt_right">1013910256</td>
+<td headers="stub_1_3 pac" class="gt_row gt_right">5890719371</td>
+<td headers="stub_1_3 first" class="gt_row gt_left">JOSE</td>
+<td headers="stub_1_3 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_3 last" class="gt_row gt_left">ACOSTAMADIEDO</td>
+<td headers="stub_1_3 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_3 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_3 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
+<td headers="stub_1_4 npi" class="gt_row gt_right">1023377843</td>
+<td headers="stub_1_4 pac" class="gt_row gt_right">6901115278</td>
+<td headers="stub_1_4 first" class="gt_row gt_left">LINDSEY</td>
+<td headers="stub_1_4 middle" class="gt_row gt_left">B</td>
+<td headers="stub_1_4 last" class="gt_row gt_left">WILHELM</td>
+<td headers="stub_1_4 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_4 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_4 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
+<td headers="stub_1_5 npi" class="gt_row gt_right">1043257819</td>
+<td headers="stub_1_5 pac" class="gt_row gt_right">0345243655</td>
+<td headers="stub_1_5 first" class="gt_row gt_left">PAOLO</td>
+<td headers="stub_1_5 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_5 last" class="gt_row gt_left">FEDI</td>
+<td headers="stub_1_5 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_5 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_5 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">6</th>
+<td headers="stub_1_6 npi" class="gt_row gt_right">1043397656</td>
+<td headers="stub_1_6 pac" class="gt_row gt_right">4183764558</td>
+<td headers="stub_1_6 first" class="gt_row gt_left">ANTHONY</td>
+<td headers="stub_1_6 middle" class="gt_row gt_left">F</td>
+<td headers="stub_1_6 last" class="gt_row gt_left">TRAMONTANO</td>
+<td headers="stub_1_6 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_6 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_6 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">7</th>
+<td headers="stub_1_7 npi" class="gt_row gt_right">1043672140</td>
+<td headers="stub_1_7 pac" class="gt_row gt_right">7214229350</td>
+<td headers="stub_1_7 first" class="gt_row gt_left">VANESSA</td>
+<td headers="stub_1_7 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_7 last" class="gt_row gt_left">FIORINI FURTADO</td>
+<td headers="stub_1_7 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_7 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_7 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">8</th>
+<td headers="stub_1_8 npi" class="gt_row gt_right">1063409282</td>
+<td headers="stub_1_8 pac" class="gt_row gt_right">4284548819</td>
+<td headers="stub_1_8 first" class="gt_row gt_left">NIDAL</td>
+<td headers="stub_1_8 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_8 last" class="gt_row gt_left">MAKHOUL</td>
+<td headers="stub_1_8 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_8 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_8 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">9</th>
+<td headers="stub_1_9 npi" class="gt_row gt_right">1073099172</td>
+<td headers="stub_1_9 pac" class="gt_row gt_right">0547519381</td>
+<td headers="stub_1_9 first" class="gt_row gt_left">BROOKE</td>
+<td headers="stub_1_9 middle" class="gt_row gt_left">A</td>
+<td headers="stub_1_9 last" class="gt_row gt_left">MAGGY</td>
+<td headers="stub_1_9 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_9 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_9 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">10</th>
+<td headers="stub_1_10 npi" class="gt_row gt_right">1073585055</td>
+<td headers="stub_1_10 pac" class="gt_row gt_right">0749217313</td>
+<td headers="stub_1_10 first" class="gt_row gt_left">TODD</td>
+<td headers="stub_1_10 middle" class="gt_row gt_left">J</td>
+<td headers="stub_1_10 last" class="gt_row gt_left">WHITMAN</td>
+<td headers="stub_1_10 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_10 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_10 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">11</th>
+<td headers="stub_1_11 npi" class="gt_row gt_right">1073660684</td>
+<td headers="stub_1_11 pac" class="gt_row gt_right">1759418007</td>
+<td headers="stub_1_11 first" class="gt_row gt_left">GAYLEN</td>
+<td headers="stub_1_11 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_11 last" class="gt_row gt_left">BIGELOW</td>
+<td headers="stub_1_11 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_11 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_11 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">12</th>
+<td headers="stub_1_12 npi" class="gt_row gt_right">1083148837</td>
+<td headers="stub_1_12 pac" class="gt_row gt_right">0042564882</td>
+<td headers="stub_1_12 first" class="gt_row gt_left">NEIL</td>
+<td headers="stub_1_12 middle" class="gt_row gt_left">A</td>
+<td headers="stub_1_12 last" class="gt_row gt_left">KRULEWITZ</td>
+<td headers="stub_1_12 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_12 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_12 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">13</th>
+<td headers="stub_1_13 npi" class="gt_row gt_right">1083771927</td>
+<td headers="stub_1_13 pac" class="gt_row gt_right">7012087018</td>
+<td headers="stub_1_13 first" class="gt_row gt_left">JOSEPH</td>
+<td headers="stub_1_13 middle" class="gt_row gt_left">C</td>
+<td headers="stub_1_13 last" class="gt_row gt_left">MIHINDUKULASURYIA</td>
+<td headers="stub_1_13 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_13 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_13 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">14</th>
+<td headers="stub_1_14 npi" class="gt_row gt_right">1083861934</td>
+<td headers="stub_1_14 pac" class="gt_row gt_right">2860555141</td>
+<td headers="stub_1_14 first" class="gt_row gt_left">STEVEN</td>
+<td headers="stub_1_14 middle" class="gt_row gt_left">J</td>
+<td headers="stub_1_14 last" class="gt_row gt_left">ELLIOTT</td>
+<td headers="stub_1_14 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_14 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_14 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">15</th>
+<td headers="stub_1_15 npi" class="gt_row gt_right">1093796898</td>
+<td headers="stub_1_15 pac" class="gt_row gt_right">5597848077</td>
+<td headers="stub_1_15 first" class="gt_row gt_left">ANDREW</td>
+<td headers="stub_1_15 middle" class="gt_row gt_left">C</td>
+<td headers="stub_1_15 last" class="gt_row gt_left">MAHONEY</td>
+<td headers="stub_1_15 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_15 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_15 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">16</th>
+<td headers="stub_1_16 npi" class="gt_row gt_right">1093905911</td>
+<td headers="stub_1_16 pac" class="gt_row gt_right">1759424534</td>
+<td headers="stub_1_16 first" class="gt_row gt_left">ANNA</td>
+<td headers="stub_1_16 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_16 last" class="gt_row gt_left">WOJTASZEK</td>
+<td headers="stub_1_16 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_16 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_16 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">17</th>
+<td headers="stub_1_17 npi" class="gt_row gt_right">1134186703</td>
+<td headers="stub_1_17 pac" class="gt_row gt_right">2567476948</td>
+<td headers="stub_1_17 first" class="gt_row gt_left">JAMES</td>
+<td headers="stub_1_17 middle" class="gt_row gt_left">S</td>
+<td headers="stub_1_17 last" class="gt_row gt_left">KENNEY</td>
+<td headers="stub_1_17 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_17 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_17 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">18</th>
+<td headers="stub_1_18 npi" class="gt_row gt_right">1144215997</td>
+<td headers="stub_1_18 pac" class="gt_row gt_right">9638269707</td>
+<td headers="stub_1_18 first" class="gt_row gt_left">RICHARD</td>
+<td headers="stub_1_18 middle" class="gt_row gt_left">N</td>
+<td headers="stub_1_18 last" class="gt_row gt_left">DIMICK</td>
+<td headers="stub_1_18 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_18 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_18 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">19</th>
+<td headers="stub_1_19 npi" class="gt_row gt_right">1144634791</td>
+<td headers="stub_1_19 pac" class="gt_row gt_right">1951521335</td>
+<td headers="stub_1_19 first" class="gt_row gt_left">SOUZANA</td>
+<td headers="stub_1_19 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_19 last" class="gt_row gt_left">OBRETENOVA</td>
+<td headers="stub_1_19 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_19 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_19 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">20</th>
+<td headers="stub_1_20 npi" class="gt_row gt_right">1154042729</td>
+<td headers="stub_1_20 pac" class="gt_row gt_right">0840667812</td>
+<td headers="stub_1_20 first" class="gt_row gt_left">ISABELLE</td>
+<td headers="stub_1_20 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_20 last" class="gt_row gt_left">DUCHESNAY</td>
+<td headers="stub_1_20 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_20 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_20 facility_ccn" class="gt_row gt_right">331302</td>
+</tr>
+<tr>
+<th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">21..188</th>
+<td headers="stub_1_21 npi" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 pac" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 first" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 middle" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 last" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 suffix" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 facility_type" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 facility_ccn" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+</tr>
+<tr>
+<th id="stub_1_22" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">189</th>
+<td headers="stub_1_22 npi" class="gt_row gt_right">1992947865</td>
+<td headers="stub_1_22 pac" class="gt_row gt_right">9032365804</td>
+<td headers="stub_1_22 first" class="gt_row gt_left">CHRISTOPHER</td>
+<td headers="stub_1_22 middle" class="gt_row gt_left">R</td>
+<td headers="stub_1_22 last" class="gt_row gt_left">MASON</td>
+<td headers="stub_1_22 suffix" class="gt_row gt_left">NA</td>
+<td headers="stub_1_22 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="stub_1_22 facility_ccn" class="gt_row gt_right">331302</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p><br></p>
-<p>The <strong>Hospital Enrollment</strong> API includes only Medicare
-Part A (hospital) providers, so we only get two rows back, but those
-include a new data point: two facility CCNs. Plugging those into the
-<strong>Facility Affiliations</strong> API, we can retrieve information
-on the individual providers practicing at this hospital. First, the
-all-numeric CCN (<code>331302</code>):</p>
-<p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p>That returns individual providers affiliated with the hospital. Now
+to search the alphanumeric CCN (<code>33Z302</code>):</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="mpwzbijlfm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -3037,721 +3234,6 @@ all-numeric CCN (<code>331302</code>):</p>
 }
 
 #mpwzbijlfm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pac">pac</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first">first</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="middle">middle</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_type">facility_type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 npi" class="gt_row gt_right">1003029125</td>
-<td headers="stub_1_1 pac" class="gt_row gt_right">6204824378</td>
-<td headers="stub_1_1 first" class="gt_row gt_left">STACI</td>
-<td headers="stub_1_1 middle" class="gt_row gt_left">L</td>
-<td headers="stub_1_1 last" class="gt_row gt_left">CARTER-KELLY</td>
-<td headers="stub_1_1 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_1 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_1 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 npi" class="gt_row gt_right">1013141860</td>
-<td headers="stub_1_2 pac" class="gt_row gt_right">8022069558</td>
-<td headers="stub_1_2 first" class="gt_row gt_left">DEBORAH</td>
-<td headers="stub_1_2 middle" class="gt_row gt_left">M</td>
-<td headers="stub_1_2 last" class="gt_row gt_left">KAMPSCHROR</td>
-<td headers="stub_1_2 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_2 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_2 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
-<td headers="stub_1_3 npi" class="gt_row gt_right">1013910256</td>
-<td headers="stub_1_3 pac" class="gt_row gt_right">5890719371</td>
-<td headers="stub_1_3 first" class="gt_row gt_left">JOSE</td>
-<td headers="stub_1_3 middle" class="gt_row gt_left">M</td>
-<td headers="stub_1_3 last" class="gt_row gt_left">ACOSTAMADIEDO</td>
-<td headers="stub_1_3 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_3 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_3 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
-<td headers="stub_1_4 npi" class="gt_row gt_right">1023377843</td>
-<td headers="stub_1_4 pac" class="gt_row gt_right">6901115278</td>
-<td headers="stub_1_4 first" class="gt_row gt_left">LINDSEY</td>
-<td headers="stub_1_4 middle" class="gt_row gt_left">B</td>
-<td headers="stub_1_4 last" class="gt_row gt_left">WILHELM</td>
-<td headers="stub_1_4 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_4 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_4 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
-<td headers="stub_1_5 npi" class="gt_row gt_right">1043257819</td>
-<td headers="stub_1_5 pac" class="gt_row gt_right">0345243655</td>
-<td headers="stub_1_5 first" class="gt_row gt_left">PAOLO</td>
-<td headers="stub_1_5 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_5 last" class="gt_row gt_left">FEDI</td>
-<td headers="stub_1_5 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_5 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_5 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">6</th>
-<td headers="stub_1_6 npi" class="gt_row gt_right">1043397656</td>
-<td headers="stub_1_6 pac" class="gt_row gt_right">4183764558</td>
-<td headers="stub_1_6 first" class="gt_row gt_left">ANTHONY</td>
-<td headers="stub_1_6 middle" class="gt_row gt_left">F</td>
-<td headers="stub_1_6 last" class="gt_row gt_left">TRAMONTANO</td>
-<td headers="stub_1_6 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_6 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_6 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">7</th>
-<td headers="stub_1_7 npi" class="gt_row gt_right">1043672140</td>
-<td headers="stub_1_7 pac" class="gt_row gt_right">7214229350</td>
-<td headers="stub_1_7 first" class="gt_row gt_left">VANESSA</td>
-<td headers="stub_1_7 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_7 last" class="gt_row gt_left">FIORINI FURTADO</td>
-<td headers="stub_1_7 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_7 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_7 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">8</th>
-<td headers="stub_1_8 npi" class="gt_row gt_right">1063409282</td>
-<td headers="stub_1_8 pac" class="gt_row gt_right">4284548819</td>
-<td headers="stub_1_8 first" class="gt_row gt_left">NIDAL</td>
-<td headers="stub_1_8 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_8 last" class="gt_row gt_left">MAKHOUL</td>
-<td headers="stub_1_8 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_8 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_8 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">9</th>
-<td headers="stub_1_9 npi" class="gt_row gt_right">1073099172</td>
-<td headers="stub_1_9 pac" class="gt_row gt_right">0547519381</td>
-<td headers="stub_1_9 first" class="gt_row gt_left">BROOKE</td>
-<td headers="stub_1_9 middle" class="gt_row gt_left">A</td>
-<td headers="stub_1_9 last" class="gt_row gt_left">MAGGY</td>
-<td headers="stub_1_9 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_9 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_9 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">10</th>
-<td headers="stub_1_10 npi" class="gt_row gt_right">1073585055</td>
-<td headers="stub_1_10 pac" class="gt_row gt_right">0749217313</td>
-<td headers="stub_1_10 first" class="gt_row gt_left">TODD</td>
-<td headers="stub_1_10 middle" class="gt_row gt_left">J</td>
-<td headers="stub_1_10 last" class="gt_row gt_left">WHITMAN</td>
-<td headers="stub_1_10 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_10 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_10 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">11</th>
-<td headers="stub_1_11 npi" class="gt_row gt_right">1073660684</td>
-<td headers="stub_1_11 pac" class="gt_row gt_right">1759418007</td>
-<td headers="stub_1_11 first" class="gt_row gt_left">GAYLEN</td>
-<td headers="stub_1_11 middle" class="gt_row gt_left">M</td>
-<td headers="stub_1_11 last" class="gt_row gt_left">BIGELOW</td>
-<td headers="stub_1_11 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_11 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_11 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">12</th>
-<td headers="stub_1_12 npi" class="gt_row gt_right">1083148837</td>
-<td headers="stub_1_12 pac" class="gt_row gt_right">0042564882</td>
-<td headers="stub_1_12 first" class="gt_row gt_left">NEIL</td>
-<td headers="stub_1_12 middle" class="gt_row gt_left">A</td>
-<td headers="stub_1_12 last" class="gt_row gt_left">KRULEWITZ</td>
-<td headers="stub_1_12 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_12 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_12 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">13</th>
-<td headers="stub_1_13 npi" class="gt_row gt_right">1083771927</td>
-<td headers="stub_1_13 pac" class="gt_row gt_right">7012087018</td>
-<td headers="stub_1_13 first" class="gt_row gt_left">JOSEPH</td>
-<td headers="stub_1_13 middle" class="gt_row gt_left">C</td>
-<td headers="stub_1_13 last" class="gt_row gt_left">MIHINDUKULASURYIA</td>
-<td headers="stub_1_13 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_13 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_13 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">14</th>
-<td headers="stub_1_14 npi" class="gt_row gt_right">1083861934</td>
-<td headers="stub_1_14 pac" class="gt_row gt_right">2860555141</td>
-<td headers="stub_1_14 first" class="gt_row gt_left">STEVEN</td>
-<td headers="stub_1_14 middle" class="gt_row gt_left">J</td>
-<td headers="stub_1_14 last" class="gt_row gt_left">ELLIOTT</td>
-<td headers="stub_1_14 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_14 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_14 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">15</th>
-<td headers="stub_1_15 npi" class="gt_row gt_right">1093796898</td>
-<td headers="stub_1_15 pac" class="gt_row gt_right">5597848077</td>
-<td headers="stub_1_15 first" class="gt_row gt_left">ANDREW</td>
-<td headers="stub_1_15 middle" class="gt_row gt_left">C</td>
-<td headers="stub_1_15 last" class="gt_row gt_left">MAHONEY</td>
-<td headers="stub_1_15 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_15 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_15 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">16</th>
-<td headers="stub_1_16 npi" class="gt_row gt_right">1093905911</td>
-<td headers="stub_1_16 pac" class="gt_row gt_right">1759424534</td>
-<td headers="stub_1_16 first" class="gt_row gt_left">ANNA</td>
-<td headers="stub_1_16 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_16 last" class="gt_row gt_left">WOJTASZEK</td>
-<td headers="stub_1_16 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_16 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_16 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">17</th>
-<td headers="stub_1_17 npi" class="gt_row gt_right">1134186703</td>
-<td headers="stub_1_17 pac" class="gt_row gt_right">2567476948</td>
-<td headers="stub_1_17 first" class="gt_row gt_left">JAMES</td>
-<td headers="stub_1_17 middle" class="gt_row gt_left">S</td>
-<td headers="stub_1_17 last" class="gt_row gt_left">KENNEY</td>
-<td headers="stub_1_17 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_17 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_17 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">18</th>
-<td headers="stub_1_18 npi" class="gt_row gt_right">1144215997</td>
-<td headers="stub_1_18 pac" class="gt_row gt_right">9638269707</td>
-<td headers="stub_1_18 first" class="gt_row gt_left">RICHARD</td>
-<td headers="stub_1_18 middle" class="gt_row gt_left">N</td>
-<td headers="stub_1_18 last" class="gt_row gt_left">DIMICK</td>
-<td headers="stub_1_18 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_18 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_18 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">19</th>
-<td headers="stub_1_19 npi" class="gt_row gt_right">1144634791</td>
-<td headers="stub_1_19 pac" class="gt_row gt_right">1951521335</td>
-<td headers="stub_1_19 first" class="gt_row gt_left">SOUZANA</td>
-<td headers="stub_1_19 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_19 last" class="gt_row gt_left">OBRETENOVA</td>
-<td headers="stub_1_19 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_19 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_19 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">20</th>
-<td headers="stub_1_20 npi" class="gt_row gt_right">1154042729</td>
-<td headers="stub_1_20 pac" class="gt_row gt_right">0840667812</td>
-<td headers="stub_1_20 first" class="gt_row gt_left">ISABELLE</td>
-<td headers="stub_1_20 middle" class="gt_row gt_left">NA</td>
-<td headers="stub_1_20 last" class="gt_row gt_left">DUCHESNAY</td>
-<td headers="stub_1_20 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_20 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_20 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-<tr>
-<th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">21..188</th>
-<td headers="stub_1_21 npi" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 pac" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 first" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 middle" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 last" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 suffix" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 facility_type" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 facility_ccn" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
-</tr>
-<tr>
-<th id="stub_1_22" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">189</th>
-<td headers="stub_1_22 npi" class="gt_row gt_right">1992947865</td>
-<td headers="stub_1_22 pac" class="gt_row gt_right">9032365804</td>
-<td headers="stub_1_22 first" class="gt_row gt_left">CHRISTOPHER</td>
-<td headers="stub_1_22 middle" class="gt_row gt_left">R</td>
-<td headers="stub_1_22 last" class="gt_row gt_left">MASON</td>
-<td headers="stub_1_22 suffix" class="gt_row gt_left">NA</td>
-<td headers="stub_1_22 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_22 facility_ccn" class="gt_row gt_right">331302</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
-<p>That returns individual providers affiliated with the hospital. Now
-to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="zbbiaqaayr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#zbbiaqaayr table {
-  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#zbbiaqaayr thead, #zbbiaqaayr tbody, #zbbiaqaayr tfoot, #zbbiaqaayr tr, #zbbiaqaayr td, #zbbiaqaayr th {
-  border-style: none;
-}
-
-#zbbiaqaayr p {
-  margin: 0;
-  padding: 0;
-}
-
-#zbbiaqaayr .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#zbbiaqaayr .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#zbbiaqaayr .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#zbbiaqaayr .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#zbbiaqaayr .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#zbbiaqaayr .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#zbbiaqaayr .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#zbbiaqaayr .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#zbbiaqaayr .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#zbbiaqaayr .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#zbbiaqaayr .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#zbbiaqaayr .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#zbbiaqaayr .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#zbbiaqaayr .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#zbbiaqaayr .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#zbbiaqaayr .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#zbbiaqaayr .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#zbbiaqaayr .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#zbbiaqaayr .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#zbbiaqaayr .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#zbbiaqaayr .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#zbbiaqaayr .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#zbbiaqaayr .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#zbbiaqaayr .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#zbbiaqaayr .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#zbbiaqaayr .gt_left {
-  text-align: left;
-}
-
-#zbbiaqaayr .gt_center {
-  text-align: center;
-}
-
-#zbbiaqaayr .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#zbbiaqaayr .gt_font_normal {
-  font-weight: normal;
-}
-
-#zbbiaqaayr .gt_font_bold {
-  font-weight: bold;
-}
-
-#zbbiaqaayr .gt_font_italic {
-  font-style: italic;
-}
-
-#zbbiaqaayr .gt_super {
-  font-size: 65%;
-}
-
-#zbbiaqaayr .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#zbbiaqaayr .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#zbbiaqaayr .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#zbbiaqaayr .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#zbbiaqaayr .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#zbbiaqaayr .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#zbbiaqaayr .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#zbbiaqaayr .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#zbbiaqaayr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
