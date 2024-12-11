@@ -210,7 +210,7 @@ tidyup <- function(df,
   if (!is.null(chr))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(chr),  as.character))
   if (!is.null(up))   x <- dplyr::mutate(x, dplyr::across(dplyr::contains(up),   toupper))
   if (!is.null(cred)) x <- dplyr::mutate(x, dplyr::across(dplyr::contains(cred), clean_credentials))
-  if (!is.null(zip))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(zip),  format_zipcode))
+  if (!is.null(zip))  x <- x # dplyr::mutate(x, dplyr::across(dplyr::contains(zip),  format_zipcode))
   if (!is.null(lgl))  x <- dplyr::mutate(x, dplyr::across(dplyr::contains(lgl),  as.logical))
 
   return(x)

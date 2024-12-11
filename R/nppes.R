@@ -145,7 +145,7 @@ nppes <- function(npi            = NULL,
                   ...) {
 
   npi       <- npi %nn% validate_npi(npi)
-  name_type <- name_type %nn% rlang::arg_match(name_type, c("AO", "Provider"))
+  name_type <- name_type %nn% rlang::arg_match0(name_type, c("AO", "Provider"))
   zip       <- zip %nn% as.character(zip)
 
   if (!is.null(entype)) {
@@ -240,7 +240,7 @@ nppes <- function(npi            = NULL,
       if (rlang::has_name(results, "pr_state"))   results$pr_state   <- fct_stabb(results$pr_state)
       if (rlang::has_name(results, "purpose"))    results$purpose    <- fct_purp(results$purpose)
       if (rlang::has_name(results, "pr_purpose")) results$pr_purpose <- fct_purp(results$pr_purpose)
-      if (rlang::has_name(results, "pr_zip"))     results$pr_zip     <- zipcodeR::normalize_zip(results$pr_zip)
+      # if (rlang::has_name(results, "pr_zip"))     results$pr_zip     <- zipcodeR::normalize_zip(results$pr_zip)
 
       if (na.rm) results <- narm(results)
     }
