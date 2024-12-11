@@ -36,7 +36,7 @@
 #' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
 #' @param ... Empty
 #'
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**           |**Description**                                         |
 #' |:-------------------|:-------------------------------------------------------|

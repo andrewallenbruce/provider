@@ -12,7 +12,7 @@ rxnorm(ndc, ...)
 \item{...}{Empty}
 }
 \value{
-A \link[dplyr:reexports]{tibble} with the columns:
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 RxNorm API

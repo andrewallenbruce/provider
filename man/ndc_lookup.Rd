@@ -7,7 +7,7 @@
 ndc_lookup(ndc, ...)
 }
 \arguments{
-\item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
+\item{ndc}{\verb{<chr>} \strong{required} 10- to 11-digit National Drug Code}
 
 \item{...}{Empty}
 }
@@ -81,6 +81,7 @@ chemical subgroups.
 \itemize{
 \item \href{https://www.whocc.no/atc/structure_and_principles/}{ATCs}
 \item \href{https://www.nlm.nih.gov/research/umls/rxnorm/overview.html}{RxNorm}
+\item \href{https://ndclist.com/ndc-hcpcs-crosswalk-lookup}{NDC-HCPCS Crosswalk}
 }
 }
 

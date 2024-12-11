@@ -40,10 +40,10 @@
 #' subsidies, and any other third-party payers.
 #'
 #' @section Links:
-#' + [Medicare Part D Prescribers: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider)
-#' + [Medicare Part D Prescribers: by Provider and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug)
-#' + [Medicare Part D Prescribers: by Geography and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-geography-and-drug)
-#' + [Medicare Part D Prescribers Technical Specifications](https://data.cms.gov/sites/default/files/2021-08/mup_dpr_ry21_20210819_technical_specifications.pdf)
+#'   - [Medicare Part D Prescribers: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider)
+#'   - [Medicare Part D Prescribers: by Provider and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug)
+#'   - [Medicare Part D Prescribers: by Geography and Drug](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-geography-and-drug)
+#'   - [Medicare Part D Prescribers Technical Specifications](https://data.cms.gov/sites/default/files/2021-08/mup_dpr_ry21_20210819_technical_specifications.pdf)
 #'
 #' *Update Frequency:* **Annually**
 #'

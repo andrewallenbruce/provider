@@ -7,10 +7,10 @@
 medline(ndc)
 }
 \arguments{
-\item{ndc}{< \emph{character} > // \strong{required} 10- to 11-digit National Drug Code}
+\item{ndc}{\verb{<chr>} \strong{required} 10- to 11-digit National Drug Code}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Medline Plus API

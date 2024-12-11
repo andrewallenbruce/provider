@@ -170,11 +170,6 @@ utils::globalVariables(c(
   # <cms_update>
   # <distros_main>
   "distribution_title",
-  # <outpatient>
-  # <prescribers>
-  # <quality_payment>
-  # <utilization>
-  "distro",
   # <tidyup_provider.util>
   "drug",
   # <laboratories>

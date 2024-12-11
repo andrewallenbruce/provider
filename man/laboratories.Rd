@@ -19,11 +19,11 @@ laboratories(
 )
 }
 \arguments{
-\item{name}{< \emph{character} > Provider or clinical laboratory's name}
+\item{name}{\verb{<chr>} Provider or clinical laboratory's name}
 
-\item{clia}{< \emph{character} > 10-character CLIA number}
+\item{clia}{\verb{<chr>} 10-character CLIA number}
 
-\item{certificate}{< \emph{character} > CLIA certificate type:
+\item{certificate}{\verb{<chr>} CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
 \item \code{"ppm"}
@@ -32,19 +32,19 @@ laboratories(
 \item \code{"accreditation"}
 }}
 
-\item{city}{< \emph{character} > City}
+\item{city}{\verb{<chr>} City}
 
-\item{state}{< \emph{character} > State}
+\item{state}{\verb{<chr>} State}
 
-\item{zip}{< \emph{character} > Zip code}
+\item{zip}{\verb{<chr>} Zip code}
 
-\item{active}{< \emph{boolean} > // \strong{default:} \code{FALSE} Return only active providers}
+\item{active}{\verb{<lgl>} // \strong{default:} \code{FALSE} Return only active providers}
 
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
+\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
 
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
+\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
-\item{pivot}{< \emph{boolean} > // \strong{default:} \code{TRUE} Pivot output}
+\item{pivot}{\verb{<lgl>} // \strong{default:} \code{TRUE} Pivot output}
 
 \item{...}{Empty}
 }
@@ -109,10 +109,17 @@ following CMS-approved accreditation organizations:
 \item \href{https://www.cola.org/}{Commission on Office Laboratory Accreditation} (COLA)
 \item \href{https://www.jointcommission.org/}{The Joint Commission} (JCAHO)
 }
+}
 
-Links:
+\section{Resources}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS.gov CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC.gov CLIA}
+\item \href{https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases}{FDA CLIA Databases}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CDC.gov CLIA Certificates}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS QCOR - S&C's Quality, Certification and Oversight Reports}
 }
 
 \emph{Update Frequency:} \strong{Quarterly}
@@ -120,7 +127,29 @@ Links:
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Artic Envestigations Program Laboratory, Anchorage, AK
+laboratories(clia = "02D0873639")
+
+# Dengue Laboratory, San Juan, PR
+laboratories(clia = "40D0869394")
+
+# CDC/CGH/DGHA International Laboratory, Atlanta, GA
+laboratories(clia = "11D1061576")
+
+# Infectious Diseases Laboratory, Atlanta, GA
+laboratories(clia = "11D0668319")
+
+# National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA
+laboratories(clia = "11D0668290")
+
+# Vector-Borne Diseases Laboratory, Fort Collins, CO
+laboratories(clia = "06D0880233")
+
+# Wiregrass Georgia Tech College Student Health Center, Valdosta, GA
+laboratories(clia = "11D2306220")
+
 laboratories(clia = "11D0265516")
+
 laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 \dontshow{\}) # examplesIf}
 }

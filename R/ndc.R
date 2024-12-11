@@ -40,8 +40,9 @@
 #' chemical subgroups.
 #'
 #' @section Links:
-#' + [ATCs](https://www.whocc.no/atc/structure_and_principles/)
-#' + [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/overview.html)
+#'    - [ATCs](https://www.whocc.no/atc/structure_and_principles/)
+#'    - [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/overview.html)
+#'    - [NDC-HCPCS Crosswalk](https://ndclist.com/ndc-hcpcs-crosswalk-lookup)
 #'
 #' @examplesIf interactive()
 #' ndc_lookup("0002-1433-80")
@@ -50,9 +51,11 @@
 #'
 #' rxnorm("0002-1433-80")
 #'
-#' @param ndc < *character* > // __required__ 10- to 11-digit National Drug Code
+#' @param ndc `<chr>` **required** 10- to 11-digit National Drug Code
+#'
 #' @param ... Empty
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**    |**Description**                                 |
 #' |:------------|:-----------------------------------------------|
@@ -70,6 +73,7 @@
 #' |`summary`    |Medline Plus: Summary                           |
 #'
 #' @autoglobal
+#'
 #' @export
 ndc_lookup <- function(ndc, ...) {
 
@@ -89,11 +93,16 @@ ndc_lookup <- function(ndc, ...) {
 }
 
 #' Medline Plus API
-#' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code
-#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' @param ndc `<chr>` **required** 10- to 11-digit National Drug Code
+#'
+#' @template returns
+#'
 #' @autoglobal
-#' @export
+#'
 #' @keywords internal
+#'
+#' @export
 medline <- function(ndc) {
 
   http <- "https://connect.medlineplus.gov/service?"
@@ -131,7 +140,7 @@ medline <- function(ndc) {
 #' RxNorm API
 #' @param ndc < *character* > // **required** 10- to 11-digit National Drug Code
 #' @param ... Empty
-#' @return A [tibble][dplyr::tibble()] with the columns:
+#' @template returns
 #' @autoglobal
 #' @export
 #' @keywords internal
