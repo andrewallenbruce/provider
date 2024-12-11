@@ -265,5 +265,5 @@ api_years <- function(abb, year) {
 
   api <- cms_update(api)
 
-  fuimus::search_in(api, api[["year"]], year)
+  search_in(api, api[["year"]], year)
 }

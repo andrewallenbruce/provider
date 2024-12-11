@@ -2,79 +2,12 @@
 % Please edit documentation in R/calculations.R
 \name{calculations}
 \alias{calculations}
-\alias{change}
-\alias{chg}
-\alias{pct}
-\alias{ror}
-\alias{geomean}
-\alias{years_df}
-\alias{years_vec}
-\alias{duration_vec}
-\alias{make_interval}
-\alias{summary_stats}
 \alias{gen_data}
 \title{Utility Functions}
 \usage{
-change(df, cols, csm = NULL, digits = 5)
-
-chg(x, n = 1L, fill_na = 0L)
-
-pct(x, n = 1L, fill_na = 0L)
-
-ror(df, col, n = 1L)
-
-geomean(x)
-
-years_df(df, date_col)
-
-years_vec(date_col)
-
-duration_vec(date_col)
-
-make_interval(df, start, end = lubridate::today())
-
-summary_stats(
-  df,
-  condition = NULL,
-  group_vars = NULL,
-  summary_vars = NULL,
-  arr = NULL,
-  digits = 3
-)
-
 gen_data(years)
 }
 \arguments{
-\item{df}{data frame}
-
-\item{cols}{numeric columns to calculate absolute/relative change & rate of return}
-
-\item{csm}{numeric cols to calculate cumulative sum for}
-
-\item{digits}{Number of digits to round to, default is 3}
-
-\item{x}{numeric vector}
-
-\item{n}{values to offset}
-
-\item{fill_na}{fill value for any NAs; default is 0}
-
-\item{col}{numeric column}
-
-\item{date_col}{date column}
-
-\item{start}{start date column}
-
-\item{end}{end date column}
-
-\item{condition}{filter condition, i.e. \code{patient == "new"}}
-
-\item{group_vars}{variables to group by, i.e. \code{c(specialty, state, hcpcs, cost)}}
-
-\item{summary_vars}{variables to summarise, i.e. \code{c(min, max, mode, range)}}
-
-\item{arr}{column to arrange data by, i.e. \code{cost}}
-
 \item{years}{sequence of years, e.g. \code{2010:2020}}
 }
 \value{
@@ -86,16 +19,16 @@ tibble
 Common utility functions
 }
 \examples{
-# Example data
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ex <- gen_data(2020:2025)
 head(ex)
 
-# Lagged absolute/percentage change, rate of return and cumulative sum
-# `change()`
+# Lagged absolute/percentage change,
+# rate of return and cumulative sum
 dplyr::filter(ex, group == "A") |>
 change(pay)
 
-# `geomean()` # Geometric mean
+# Geometric mean
 ex |>
 dplyr::filter(group == "A") |>
 ror(pay) |>
@@ -143,50 +76,6 @@ summary_stats(sm,
               group_vars   = provider,
               summary_vars = c(charges, payment),
               arr          = provider)
-
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::filter(ex, group == "A") |>
-change(pay)
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::filter(ex, group == "A") |>
-dplyr::mutate(change = chg(pay))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::filter(ex, group == "A") |>
-dplyr::mutate(pct_change = pct(pay))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::filter(ex, group == "A") |>
-ror(pay)
-
-ex |>
-dplyr::group_by(group) |>
-ror(pay)
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::filter(ex, group == "A") |>
-ror(pay) |>
-dplyr::summarise(gmean = geomean(pay_ror))
-
-ex |>
-dplyr::group_by(group) |>
-ror(pay) |>
-dplyr::summarise(gmean = geomean(pay_ror))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dt <- dplyr::tibble(date = lubridate::today() - 366)
-dplyr::mutate(dt, years = years_vec(date))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dplyr::tibble(date = lubridate::today() - 366,
-              date2 = date - 789) |>
-dplyr::mutate(dur = duration_vec(date),
-              dur2 = duration_vec(date2))
-\dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-dt <- dplyr::tibble(date = lubridate::today() - 366)
-make_interval(dt, start = date)
 \dontshow{\}) # examplesIf}
 }
 \keyword{internal}

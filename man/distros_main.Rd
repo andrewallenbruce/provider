@@ -4,7 +4,7 @@
 \alias{distros_main}
 \title{Main CMS Distributions}
 \usage{
-distros_main(datasets = datasets())
+distros_main(datasets = api_names("main"))
 }
 \arguments{
 \item{datasets}{character vector of dataset names}

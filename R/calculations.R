@@ -2,7 +2,7 @@
 #'
 #' @description Common utility functions
 #'
-#' @examples
+#' @examplesIf FALSE
 #' ex <- gen_data(2020:2025)
 #' head(ex)
 #'

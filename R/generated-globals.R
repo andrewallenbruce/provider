@@ -9,6 +9,8 @@ utils::globalVariables(c(
   "a2la",
   # <laboratories>
   "aabb",
+  # <build_url2>
+  "abb",
   # <laboratories>
   "accredited",
   # <distros_open>
@@ -122,8 +124,6 @@ utils::globalVariables(c(
   "confirmed_date",
   # <ror>
   "copy",
-  # <add_counties>
-  "county_fips",
   # <open_payments>
   "covered",
   # <open_payments>
@@ -308,8 +308,6 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
-  # <format_api_params>
-  "params",
   # <quality_payment>
   "participation_type",
   # <mips_2021>
@@ -371,7 +369,6 @@ utils::globalVariables(c(
   "specialty",
   # <mips_2021>
   "star_value",
-  # <add_counties>
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
   # <tidyup_provider.rx>
@@ -481,7 +478,5 @@ utils::globalVariables(c(
   # <distros_main>
   # <distros_open>
   "year",
-  # <add_counties>
-  "zip",
   NULL
 ))
