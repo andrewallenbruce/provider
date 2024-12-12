@@ -17,11 +17,19 @@
 #
 # * Initial version.
 #
+# 2024-12-11:
+#
+# * null_if_empty() -> if_empty_null()
+#
+# * Added:
+#    * invert_named()
+#    * true(), false()
+#    * as_character(), as_integer(), as_numeric(), as_date()
+#
 # nocov start
 
 # vctrs -------------------------------------------------------------------
-# @importFrom vctrs vec_is_empty vec_slice vec_in
-
+#
 #' Is Vector Empty?
 #'
 #' @param x vector
@@ -29,26 +37,25 @@
 #' @noRd
 empty <- \(x) vctrs::vec_is_empty(x)
 
-#' Return NULL if the input is empty, otherwise return the input
+#' If `x` is empty, `NULL`, else `x`
 #'
 #' @param x vector
 #'
 #' @noRd
-null_if_empty <- \(x) if (empty(x)) NULL else x
+if_empty_null <- \(x) if (empty(x)) NULL else x
 
 #' Search in data frame
 #'
-#' @param data A `<data.frame>` or `<tibble>`
+#' @param x vector or `<data.frame>`
 #'
-#' @param column column to search; of the form `data[["column"]]` or
-#'   `data$column`
+#' @param column column; of the form `data[["column"]]` or `data$column`
 #'
-#' @param what string or vector to search for in `column`
+#' @param what to search for in `column`
 #'
 #' @noRd
-search_in_impl <- function(data, column, what) {
+search_in_impl <- function(x, column, what) {
   vctrs::vec_slice(
-    data,
+    x,
     vctrs::vec_in(
       column,
       uniq(what)))
@@ -56,25 +63,22 @@ search_in_impl <- function(data, column, what) {
 
 #' Search in data frame column if search term is not `NULL`
 #'
-#' @param data `<data.frame>` or `<tibble>`
+#' @param x vector or `<data.frame>`
 #'
-#' @param column column to search; of the form `data[["column"]]` or
-#'   `data$column`
+#' @param column column; of the form `data[["column"]]` or `data$column`
 #'
-#' @param what string or vector to search for in `column`
+#' @param what to search for in `column`
 #'
 #' @noRd
-search_in <- function(data, column, what) {
+search_in <- function(x, column, what) {
 
-  if (null(what))
-    return(data)
+  if (null(x)) return(x)
 
-  search_in_impl(data, column, what)
+  search_in_impl(x, column, what)
 }
 
 # kit ---------------------------------------------------------------------
-# @importFrom kit iif psort
-
+#
 #' ifelse wrapper using kit::iif
 #'
 #' @param x `<lgl>` vector
@@ -93,8 +97,7 @@ iif_else <- \(x, yes, no) kit::iif(test = x, yes = yes, no = no, nThread = 4L)
 strsort <- \(x) kit::psort(x, nThread = 4L)
 
 # cheapr -------------------------------------------------------------------
-# @importFrom cheapr is_na
-
+#
 #' Predicate to filter out NAs
 #'
 #' @param x vector
@@ -110,8 +113,7 @@ na <- \(x) cheapr::is_na(x)
 not_na <- \(x) !na(x)
 
 # collapse -----------------------------------------------------------------
-# @importFrom collapse get_elem vlengths funique fmax na_rm
-
+#
 #' Get named element from list
 #'
 #' @param l named `<list>`
@@ -157,8 +159,7 @@ uniq_narm <- \(x) uniq(collapse::na_rm(x))
 max_vlen <- \(x) collapse::fmax(vlen(x))
 
 # stringfish ---------------------------------------------------------------
-# @importFrom stringfish sf_substr convert_to_sf sf_nchar sf_grepl sf_gsub sfc sf_collapse sf_split
-
+#
 #' Subset Vector by Range
 #'
 #' @param x `<chr>` vector
@@ -261,7 +262,7 @@ sf_c <- \(...) stringfish::sfc(...)
 #' @noRd
 sf_smush <- \(x, sep = "") stringfish::sf_collapse(x, collapse = sep)
 
-#' Split String by Delimiter
+#' Split string by delimiter
 #'
 #' @param x `<chr>` vector
 #'
@@ -273,9 +274,8 @@ sf_smush <- \(x, sep = "") stringfish::sf_collapse(x, collapse = sep)
 sf_strsplit <- \(x, s, fixed = TRUE) stringfish::sf_split(subject = x, split = s, fixed = fixed, nthreads = 4L)
 
 # stringi -----------------------------------------------------------------
-# @importFrom stringi stri_rand_strings
-
-#' Generate Random Strings
+#
+#' Generate random strings
 #'
 #' @param n `<int>` number of strings to generate
 #'
@@ -288,7 +288,7 @@ random_string <- \(n, ln, p = "[A-Z0-9]") stringi::stri_rand_strings(n = n, leng
 
 # base --------------------------------------------------------------------
 #
-#' Unlist with no names
+#' Unlist and unname
 #'
 #' @param x Named or unnamed `<list>`
 #'
@@ -297,7 +297,7 @@ random_string <- \(n, ln, p = "[A-Z0-9]") stringi::stri_rand_strings(n = n, leng
 #' @noRd
 delist <- \(x) unlist(x, use.names = FALSE)
 
-#' Delist, Unname and Split a String
+#' Unlist, unname and split
 #'
 #' @param x `<chr>` string or named `<list>`
 #'
@@ -329,4 +329,83 @@ null <- \(x) is.null(x)
 #' @noRd
 not_null <- \(x) !null(x)
 
+#' Is `x` `TRUE`?
+#'
+#' @param x input
+#'
+#' @returns `<lgl>` `TRUE` if `x` is `TRUE`, else `FALSE`
+#'
+#' @noRd
+true <- \(x) isTRUE(x)
+
+#' Is `x` `FALSE`?
+#'
+#' @param x input
+#'
+#' @returns `<lgl>` `TRUE` if `x` is `FALSE`, else `FALSE`
+#'
+#' @noRd
+false <- \(x) isFALSE(x)
+
+#' Coerce vector to `<chr>`
+#'
+#' @param x vector
+#'
+#' @returns `<chr>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+as_character <- \(x) if (!is.character(x)) as.character(x) else x
+
+#' Coerce vector to `<int>`
+#'
+#' @param x vector
+#'
+#' @returns `<int>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+as_integer <- \(x) if (!is.integer(x)) as.integer(x) else x
+
+#' Coerce vector to `<num>` class
+#'
+#' @param x vector
+#'
+#' @returns `<num>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+as_numeric <- \(x) if (!is.numeric(x)) as.numeric(x) else x
+
+#' Coerce vector to `<date>` class
+#'
+#' @param x vector
+#'
+#' @param ... additional arguments
+#'
+#' @param fmt `<chr>` format; default is `"%Y-%m-%d"`
+#'
+#' @returns `<date>` vector
+#'
+#' @autoglobal
+#'
+#' @noRd
+as_date <- \(x, ..., fmt = "%Y-%m-%d") as.Date(x, ..., format = fmt)
+
+#' Invert a named vector
+#'
+#' @param x A named vector
+#'
+#' @returns A named vector with names and values inverted
+#'
+#' @autoglobal
+#'
+#' @noRd
+invert_named <- \(x) {
+  stopifnot("Input must be a named vector" = not_null(names(x)))
+  stats::setNames(names(x), unname(x))
+}
 # nocov end

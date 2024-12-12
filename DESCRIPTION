@@ -35,7 +35,8 @@ Imports:
     vctrs,
     zeallot,
     kit,
-    cheapr
+    cheapr,
+    stringfish
 Suggests: 
     pins,
     furrr,
@@ -52,7 +53,6 @@ Suggests:
     roxyglobals,
     rvest,
     stats,
-    stringfish,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
