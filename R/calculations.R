@@ -1,84 +1,10 @@
-#' Utility Functions
-#'
-#' @description Common utility functions
-#'
-#' @examplesIf FALSE
-#' ex <- gen_data(2020:2025)
-#' head(ex)
-#'
-#' # Lagged absolute/percentage change,
-#' # rate of return and cumulative sum
-#' dplyr::filter(ex, group == "A") |>
-#' change(pay)
-#'
-#' # Geometric mean
-#' ex |>
-#' dplyr::filter(group == "A") |>
-#' ror(pay) |>
-#' dplyr::summarise(gmean = geomean(pay_ror))
-#'
-#' # When performing a `group_by()`, watch for
-#' # the correct order of the variables
-#' ex |>
-#' dplyr::group_by(group) |>
-#' change(pay)
-#'
-#' ex |>
-#' dplyr::group_by(group) |>
-#' change(pay) |>
-#' dplyr::summarise(mean_pay = mean(pay, na.rm = TRUE),
-#'                  csm_chg  = sum(pay_chg),
-#'                  csm_pct  = sum(pay_pct),
-#'                  mean_ror = mean(pay_ror, na.rm = TRUE),
-#'                  geomean  = geomean(pay_ror))
-#'
-#' # Timespans
-#' dt <- dplyr::tibble(date = lubridate::today() - 366)
-#'
-#' # `years_df()`
-#' years_df(dt, date)
-#'
-#' # `duration_vec()`
-#' dplyr::mutate(dt, dur = duration_vec(date))
-#'
-#' # `make_interval()`
-#' dplyr::tibble(date = lubridate::today() - 1000) |>
-#' make_interval(start = date, end = lubridate::today() - 500)
-#'
-#'
-#' # `summary_stats()`
-#' sm <- dplyr::tibble(provider = sample(c("A", "B", "C"), size = 200, replace = TRUE),
-#'                     city = sample(c("ATL", "NYC"), size = 200, replace = TRUE),
-#'                     charges = sample(1000:2000, size = 200),
-#'                     payment = sample(1000:2000, size = 200))
-#'
-#' head(sm)
-#'
-#' summary_stats(sm,
-#'               condition    = city == "ATL",
-#'               group_vars   = provider,
-#'               summary_vars = c(charges, payment),
-#'               arr          = provider)
-#'
-#' @returns [tibble()] or vector
-#'
-#' @name calculations
-#'
-#' @keywords internal
-NULL
-
-# nocov start
-#' @rdname calculations
-#'
-#' @param df data frame
+#' @param df data.frame
 #'
 #' @param cols numeric columns to calculate absolute/relative change & rate of return
 #'
 #' @param csm numeric cols to calculate cumulative sum for
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 change <- function(df, cols, csm = NULL, digits = 5) {
@@ -117,8 +43,6 @@ change <- function(df, cols, csm = NULL, digits = 5) {
   return(results)
 }
 
-#' @rdname calculations
-#'
 #' @param x numeric vector
 #'
 #' @param n values to offset
@@ -126,8 +50,6 @@ change <- function(df, cols, csm = NULL, digits = 5) {
 #' @param fill_na fill value for any NAs; default is 0
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 chg <- function(x, n = 1L, fill_na = 0L) {
@@ -137,8 +59,6 @@ chg <- function(x, n = 1L, fill_na = 0L) {
   return(res)
 }
 
-#' @rdname calculations
-#'
 #' @param x numeric vector
 #'
 #' @param n values to offset
@@ -157,8 +77,6 @@ pct <- function(x, n = 1L, fill_na = 0L) {
   return(res)
 }
 
-#' @rdname calculations
-#'
 #' @param df data frame
 #'
 #' @param col numeric column
@@ -184,8 +102,6 @@ ror <- function(df, col, n = 1L) {
     .after = {{ col }})
 }
 
-#' @rdname calculations
-#'
 #' @param x numeric vector
 #'
 #' @autoglobal
@@ -195,8 +111,6 @@ ror <- function(df, col, n = 1L) {
 #' @noRd
 geomean <- function(x) exp(mean(log(x), na.rm = TRUE))
 
-#' @rdname calculations
-#'
 #' @param df data frame
 #'
 #' @param col column of numeric values to calculate lag
@@ -223,15 +137,11 @@ change_year <- function(df, col, by = year, digits = 3) {
       dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
 }
 
-#' @rdname calculations
-#'
 #' @param df data frame
 #'
 #' @param date_col date column
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 years_df <- function(df, date_col) {
@@ -248,13 +158,9 @@ years_df <- function(df, date_col) {
       .after = {{ date_col }})
 }
 
-#' @rdname calculations
-#'
 #' @param date_col date column
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 years_vec <- function(date_col) {
@@ -267,13 +173,9 @@ years_vec <- function(date_col) {
         tz = "UTC")) / 52.17857, 2)
 }
 
-#' @rdname calculations
-#'
 #' @param date_col date column
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 duration_vec <- function(date_col) {
@@ -289,8 +191,6 @@ duration_vec <- function(date_col) {
   return(date)
 }
 
-#' @rdname calculations
-#'
 #' @param df data frame
 #'
 #' @param start start date column
@@ -298,8 +198,6 @@ duration_vec <- function(date_col) {
 #' @param end end date column
 #'
 #' @autoglobal
-#'
-#' @keywords internal
 #'
 #' @noRd
 make_interval <- function(df, start, end = lubridate::today()) {
@@ -311,69 +209,5 @@ make_interval <- function(df, start, end = lubridate::today()) {
     timelength_days = lubridate::time_length(
       interval,
       unit = "days"))
-}
-
-#' @rdname calculations
-#'
-#' @param df data frame
-#'
-#' @param condition filter condition, i.e. `patient == "new"`
-#'
-#' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
-#'
-#' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
-#'
-#' @param arr column to arrange data by, i.e. `cost`
-#'
-#' @param digits Number of digits to round to, default is 3
-#'
-#' @autoglobal
-#'
-#' @keywords internal
-#'
-#' @noRd
-summary_stats <- function(df,
-                          condition = NULL,
-                          group_vars = NULL,
-                          summary_vars = NULL,
-                          arr = NULL,
-                          digits = 3) {
-
-  results <- df |>
-    dplyr::filter({{ condition }}) |>
-    dplyr::summarise(
-      dplyr::across({{ summary_vars }},
-                    list(median = \(x) stats::median(x, na.rm = TRUE),
-                         mean = \(x) mean(x, na.rm = TRUE),
-                         sd = \(x) stats::sd(x, na.rm = TRUE)),
-                    .names = "{.col}_{.fn}"),
-      n = dplyr::n(),
-      .by = ({{ group_vars }})) |>
-    dplyr::arrange(dplyr::desc({{ arr }})) |>
-    dplyr::mutate(dplyr::across(
-      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
-
-  return(results)
-}
-
-#' @rdname calculations
-#'
-#' @param years sequence of years, e.g. `2010:2020`
-#'
-#' @returns tibble
-#'
-#' @autoglobal
-#'
-#' @keywords internal
-#'
-#' @export
-gen_data <- function(years) {
-
-  lng <- length(years) * 2
-
-  vctrs::vec_rbind(
-    dplyr::tibble(year = {{ years }}, group = "A"),
-    dplyr::tibble(year = {{ years }}, group = "B")) |>
-    dplyr::mutate(pay = sample(1000:2000, lng))
 }
 # nocov end

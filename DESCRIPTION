@@ -27,8 +27,6 @@ Imports:
     lubridate,
     purrr,
     rlang (>= 1.1.0),
-    rxnorm,
-    strex,
     stringi,
     stringr,
     tidyr,
@@ -40,13 +38,11 @@ Imports:
 Suggests: 
     pins,
     furrr,
-    fontawesome,
     fuimus,
+    rxnorm,
+    strex,
     future,
     glue,
-    gt,
-    gtExtras,
-    htmltools,
     httptest2,
     knitr,
     mlr3misc,
@@ -60,7 +56,7 @@ Remotes:
     github::andrewallenbruce/fuimus,
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm
-Config/Needs/website: gghighlight, ggplot2, ggraph, ggrepel, ggthemes,
+Config/Needs/website: gt, gtExtras, gghighlight, ggplot2, ggraph, ggrepel, ggthemes,
     igraph, rmapshaper, scales, tidygeocoder, tidygraph, tigris
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE

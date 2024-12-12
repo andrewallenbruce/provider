@@ -140,13 +140,9 @@ utils::globalVariables(c(
   "current_clia_lab_clsfctn_cd",
   # <open_ids>
   "data",
-  # <gt_datadict>
-  "Definition",
   # <cms_dataset_search>
   # <distros_open>
   "description",
-  # <gt_datadict>
-  "Description",
   # <cms_update>
   # <open_ids>
   # <distros_main>
@@ -437,8 +433,6 @@ utils::globalVariables(c(
   # <open_payments>
   # <cols_qelig>
   "value",
-  # <gt_datadict>
-  "Variable",
   # <abb2full>
   "x",
   # <affiliations>
