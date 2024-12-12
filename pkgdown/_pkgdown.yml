@@ -3,11 +3,23 @@ url: https://andrewallenbruce.github.io/provider/
 template:
   bootstrap: 5
   light-switch: true
-  bootswatch: simplex
   bslib:
+    primary: "#202C56"
+    border_radius: 0.5rem
+    button-border-radius: 0.25rem
+    danger: "#A6081A"
     base_font: {google: "Roboto Condensed"}
     heading_font: {google: "Roboto"}
     code_font: {google: "JetBrains Mono"}
+  includes:
+    after_body: >
+      <script data-goatcounter="https://andrewallenbruce.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
+    # base_font:
+    #   google: {family: "Roboto Condensed", wght: [400, 500, 700], ital:[0, 1]}
+    # heading_font:
+    #   google: {family: "Roboto", wght: [400, 500, 700], ital:[0, 1]}
+    # code_font: {google: "JetBrains Mono"}
 
 home:
   title: provider • Access Healthcare Provider Data
