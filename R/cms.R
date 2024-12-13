@@ -268,5 +268,5 @@ api_years <- function(abb, year = NULL) {
 
   api <- cms_update(api)
 
-  search_in(api, api[["year"]], year)
+  search_in(api, "year", year)
 }
