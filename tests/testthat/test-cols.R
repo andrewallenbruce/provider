@@ -63,7 +63,7 @@ x <- dplyr::tibble(
     'rbcs_cat'             = 1,
     rbcs_cat_desc          = 1,
     'rbcs_cat_subcat'      = 1,
-    rbcs_subcat_desc       = 1,
+    rbcs_sub_cat_desc       = 1,
     'rbcs_fam_numb'        = 1,
     rbcs_family_desc       = 1,
     rbcs_major_ind         = 1,

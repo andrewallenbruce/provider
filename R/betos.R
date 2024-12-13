@@ -138,7 +138,7 @@ cols_betos <- function(df) {
             # 'rbcs_cat',
             'category'         = 'rbcs_cat_desc',
             # 'rbcs_cat_subcat',
-            'subcategory'      = 'rbcs_subcat_desc',
+            'subcategory'      = 'rbcs_sub_cat_desc',
             # 'rbcs_fam_numb',
             'family'           = 'rbcs_family_desc',
             'procedure'        = 'rbcs_major_ind',
@@ -158,7 +158,7 @@ rbcs_util <- function(df) {
   rbcs <- df |>
     dplyr::distinct(hcpcs) |>
     dplyr::pull(hcpcs) |>
-    purrr::map(\(x) betos(hcpcs = x)) |>
+    purrr::map(\(x) betos(hcpcs = x, tidy = F)) |>
     purrr::list_rbind()
 
   if (vctrs::vec_is_empty(rbcs)) {
