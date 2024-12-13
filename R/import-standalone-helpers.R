@@ -6,25 +6,39 @@
 # ---
 # repo: andrewallenbruce/fuimus
 # file: standalone-helpers.R
-# last-updated: 2024-12-10
+# last-updated: 2024-12-13
 # license: https://unlicense.org
-# imports: [kit, cheapr, collapse, stringfish, vctrs, stringi]
+# imports: [cheapr (>= 0.9.92), collapse (>= 2.0.18), kit (>= 0.0.19), stringfish (>= 0.16.0), stringi (>= 1.8.4), vctrs (>= 0.6.5)]
 # ---
 #
 # ## Changelog
 #
-# 2024-12-10:
+# 2024-12-13:
 #
-# * Initial version.
+# * Added sf_replace()
+#
+# 2024-12-12:
+#
+# * Fixed bug in search_in()
+# * Shortened as_() names
+# * Added roundup()
 #
 # 2024-12-11:
 #
-# * null_if_empty() -> if_empty_null()
+# * Renamed null_if_empty() to if_empty_null()
 #
 # * Added:
 #    * invert_named()
-#    * true(), false()
-#    * as_character(), as_integer(), as_numeric(), as_date()
+#    * true()
+#    * false()
+#    * as_character()
+#    * as_integer()
+#    * as_numeric()
+#    * as_date()
+#
+# 2024-12-10:
+#
+# * Initial version.
 #
 # nocov start
 
@@ -35,29 +49,29 @@
 #' @param x vector
 #'
 #' @noRd
-empty <- \(x) vctrs::vec_is_empty(x)
+empty <- \(x) { vctrs::vec_is_empty(x) }
 
 #' If `x` is empty, `NULL`, else `x`
 #'
 #' @param x vector
 #'
 #' @noRd
-if_empty_null <- \(x) if (empty(x)) NULL else x
+if_empty_null <- \(x) { if (empty(x)) NULL else x }
 
 #' Search in data frame
 #'
 #' @param x vector or `<data.frame>`
 #'
-#' @param column column; of the form `data[["column"]]` or `data$column`
+#' @param column `<chr>` string of column name
 #'
 #' @param what to search for in `column`
 #'
 #' @noRd
-search_in_impl <- function(x, column, what) {
+search_in_impl <- \(x, column, what) {
   vctrs::vec_slice(
     x,
     vctrs::vec_in(
-      column,
+      x[[column]],
       uniq(what)))
 }
 
@@ -65,14 +79,14 @@ search_in_impl <- function(x, column, what) {
 #'
 #' @param x vector or `<data.frame>`
 #'
-#' @param column column; of the form `data[["column"]]` or `data$column`
+#' @param column `<chr>` string of column name
 #'
 #' @param what to search for in `column`
 #'
 #' @noRd
-search_in <- function(x, column, what) {
+search_in <- \(x, column, what) {
 
-  if (null(x)) return(x)
+  if (null(what)) return(x)
 
   search_in_impl(x, column, what)
 }
@@ -87,14 +101,14 @@ search_in <- function(x, column, what) {
 #'   be same type and be either length 1 or same length of `x`.
 #'
 #' @noRd
-iif_else <- \(x, yes, no) kit::iif(test = x, yes = yes, no = no, nThread = 4L)
+iif_else <- \(x, yes, no) { kit::iif(test = x, yes = yes, no = no, nThread = 4L) }
 
 #' Parallel Sort
 #'
 #' @param x `<chr>` vector. If other, will default to [base::sort()]
 #'
 #' @noRd
-strsort <- \(x) kit::psort(x, nThread = 4L)
+strsort <- \(x) { kit::psort(x, nThread = 4L) }
 
 # cheapr -------------------------------------------------------------------
 #
@@ -103,14 +117,14 @@ strsort <- \(x) kit::psort(x, nThread = 4L)
 #' @param x vector
 #'
 #' @noRd
-na <- \(x) cheapr::is_na(x)
+na <- \(x) { cheapr::is_na(x) }
 
 #' Predicate to filter out NAs
 #'
 #' @param x vector
 #'
 #' @noRd
-not_na <- \(x) !na(x)
+not_na <- \(x) { !na(x) }
 
 # collapse -----------------------------------------------------------------
 #
@@ -121,42 +135,42 @@ not_na <- \(x) !na(x)
 #' @param e `<chr>` element name; can be a regex pattern
 #'
 #' @noRd
-getelem <- \(l, e) collapse::get_elem(l = l, elem = e, regex = TRUE)
+getelem <- \(l, e) { collapse::get_elem(l = l, elem = e, regex = TRUE) }
 
 #' Lengths of Vector
 #'
 #' @param x vector
 #'
 #' @noRd
-vlen <- \(x) collapse::vlengths(x, use.names = FALSE)
+vlen <- \(x) { collapse::vlengths(x, use.names = FALSE) }
 
 #' Unique Values of Vector
 #'
 #' @param x vector
 #'
 #' @noRd
-uniq <- \(x) collapse::funique(x)
+uniq <- \(x) { collapse::funique(x) }
 
 #' Unique Lengths of Vector
 #'
 #' @param x vector
 #'
 #' @noRd
-uniq_vlen <- \(x) uniq(vlen(x))
+uniq_vlen <- \(x) { uniq(vlen(x)) }
 
 #' Unique Values with NAs Removed
 #'
 #' @param x vector
 #'
 #' @noRd
-uniq_narm <- \(x) uniq(collapse::na_rm(x))
+uniq_narm <- \(x) { uniq(collapse::na_rm(x)) }
 
 #' Maximum Vector Length
 #'
 #' @param x vector
 #'
 #' @noRd
-max_vlen <- \(x) collapse::fmax(vlen(x))
+max_vlen <- \(x) { collapse::fmax(vlen(x)) }
 
 # stringfish ---------------------------------------------------------------
 #
@@ -169,21 +183,21 @@ max_vlen <- \(x) collapse::fmax(vlen(x))
 #' @param stop `<int>` index end
 #'
 #' @noRd
-sf_sub <- \(x, start = 1, stop) stringfish::sf_substr(x, start = start, stop = stop, nthreads = 4L)
+sf_sub <- \(x, start = 1, stop) { stringfish::sf_substr(x, start = start, stop = stop, nthreads = 4L) }
 
 #' Convert string to stringfish vector
 #'
 #' @param x `<chr>` vector
 #'
 #' @noRd
-sf_conv <- \(x) stringfish::convert_to_sf(x)
+sf_conv <- \(x) { stringfish::convert_to_sf(x) }
 
 #' Count number of characters in character vector
 #'
 #' @param x `<chr>` vector
 #'
 #' @noRd
-sf_chars <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
+sf_chars <- \(x) { stringfish::sf_nchar(x, nthreads = 4L) }
 
 #' Subset Vector at One Index Point
 #'
@@ -192,7 +206,7 @@ sf_chars <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
 #' @param idx `<int>` index
 #'
 #' @noRd
-sf_at <- \(x, idx = 1) sf_sub(x, start = idx, stop = idx)
+sf_at <- \(x, idx = 1) { sf_sub(x, start = idx, stop = idx) }
 
 #' Detect by Regex
 #'
@@ -201,7 +215,7 @@ sf_at <- \(x, idx = 1) sf_sub(x, start = idx, stop = idx)
 #' @param p `<chr>` regex pattern
 #'
 #' @noRd
-sf_detect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
+sf_detect <- \(s, p) { stringfish::sf_grepl(s, p, nthreads = 4L) }
 
 #' Detect Opposite by Regex
 #'
@@ -210,7 +224,7 @@ sf_detect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
 #' @param p `<chr>` regex pattern
 #'
 #' @noRd
-sf_ndetect <- \(s, p) !stringfish::sf_grepl(s, p, nthreads = 4L)
+sf_ndetect <- \(s, p) { !stringfish::sf_grepl(s, p, nthreads = 4L) }
 
 #' Extract by Regex
 #'
@@ -219,7 +233,7 @@ sf_ndetect <- \(s, p) !stringfish::sf_grepl(s, p, nthreads = 4L)
 #' @param p `<chr>` regex pattern
 #'
 #' @noRd
-sf_extract <- \(s, p) s[sf_detect(s, p)]
+sf_extract <- \(s, p) { s[sf_detect(s, p)] }
 
 #' Extract Opposite by Regex
 #'
@@ -228,7 +242,20 @@ sf_extract <- \(s, p) s[sf_detect(s, p)]
 #' @param p `<chr>` regex pattern
 #'
 #' @noRd
-sf_nextract <- \(s, p) s[sf_ndetect(s, p)]
+sf_nextract <- \(s, p) { s[sf_ndetect(s, p)] }
+
+#' Replace by Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @param r `<chr>` replacement
+#'
+#' @param fix `<lgl>` fixed or regex; default is `FALSE`
+#'
+#' @noRd
+sf_replace <- \(s, p, r, fix = FALSE) { stringfish::sf_gsub(subject = s, pattern = p, replacement = r, fixed = fix, nthreads = 4L) }
 
 #' Remove by Regex
 #'
@@ -236,22 +263,24 @@ sf_nextract <- \(s, p) s[sf_ndetect(s, p)]
 #'
 #' @param p `<chr>` regex pattern
 #'
+#' @param fix `<lgl>` fixed or regex; default is `FALSE`
+#'
 #' @noRd
-sf_remove <- \(s, p) stringfish::sf_gsub(s, p, "", nthreads = 4L)
+sf_remove <- \(s, p, fix = FALSE) { stringfish::sf_gsub(subject = s, pattern = p, replacement = "", fixed = fix, nthreads = 4L) }
 
 #' Remove single or double quotes from a character string
 #'
 #' @param x `<chr>` vector to convert
 #'
 #' @noRd
-remove_quotes <- \(x) sf_remove(x, '["\']')
+remove_quotes <- \(x) { sf_remove(x, '["\']') }
 
 #' Concatenate Vectors
 #'
 #' @param ... Any number of vectors, coerced to `<chr>` vector, if necessary
 #'
 #' @noRd
-sf_c <- \(...) stringfish::sfc(...)
+sf_c <- \(...) { stringfish::sfc(...) }
 
 #' Collapse Vector
 #'
@@ -260,7 +289,7 @@ sf_c <- \(...) stringfish::sfc(...)
 #' @param sep `<chr>` separator; default is `""`
 #'
 #' @noRd
-sf_smush <- \(x, sep = "") stringfish::sf_collapse(x, collapse = sep)
+sf_smush <- \(x, sep = "") { stringfish::sf_collapse(x, collapse = sep) }
 
 #' Split string by delimiter
 #'
@@ -268,10 +297,10 @@ sf_smush <- \(x, sep = "") stringfish::sf_collapse(x, collapse = sep)
 #'
 #' @param s `<chr>` delimiter to split by
 #'
-#' @param fixed `<lgl>` fixed or regex; default is `TRUE`
+#' @param fix `<lgl>` fixed or regex; default is `TRUE`
 #'
 #' @noRd
-sf_strsplit <- \(x, s, fixed = TRUE) stringfish::sf_split(subject = x, split = s, fixed = fixed, nthreads = 4L)
+sf_strsplit <- \(x, s, fix = TRUE) { stringfish::sf_split(subject = x, split = s, fixed = fix, nthreads = 4L) }
 
 # stringi -----------------------------------------------------------------
 #
@@ -284,7 +313,7 @@ sf_strsplit <- \(x, s, fixed = TRUE) stringfish::sf_split(subject = x, split = s
 #' @param p `<chr>` pattern to sample from; default is `"[A-Z0-9]"`
 #'
 #' @noRd
-random_string <- \(n, ln, p = "[A-Z0-9]") stringi::stri_rand_strings(n = n, length = ln, pattern = p)
+random_string <- \(n, ln, p = "[A-Z0-9]") { stringi::stri_rand_strings(n = n, length = ln, pattern = p) }
 
 # base --------------------------------------------------------------------
 #
@@ -295,7 +324,7 @@ random_string <- \(n, ln, p = "[A-Z0-9]") stringi::stri_rand_strings(n = n, leng
 #' @returns Unnamed `<chr>` vector
 #'
 #' @noRd
-delist <- \(x) unlist(x, use.names = FALSE)
+delist <- \(x) { unlist(x, use.names = FALSE) }
 
 #' Unlist, unname and split
 #'
@@ -318,7 +347,7 @@ desplit <- \(x) {
 #' @returns `<lgl>` `TRUE` if `x` is `NULL`, else `FALSE`
 #'
 #' @noRd
-null <- \(x) is.null(x)
+null <- \(x) { is.null(x) }
 
 #' Is `x` not `NULL`?
 #'
@@ -327,7 +356,7 @@ null <- \(x) is.null(x)
 #' @returns `<lgl>` `TRUE` if `x` is not `NULL`, else `FALSE`
 #'
 #' @noRd
-not_null <- \(x) !null(x)
+not_null <- \(x) { !null(x) }
 
 #' Is `x` `TRUE`?
 #'
@@ -336,7 +365,7 @@ not_null <- \(x) !null(x)
 #' @returns `<lgl>` `TRUE` if `x` is `TRUE`, else `FALSE`
 #'
 #' @noRd
-true <- \(x) isTRUE(x)
+true <- \(x) { isTRUE(x) }
 
 #' Is `x` `FALSE`?
 #'
@@ -345,7 +374,7 @@ true <- \(x) isTRUE(x)
 #' @returns `<lgl>` `TRUE` if `x` is `FALSE`, else `FALSE`
 #'
 #' @noRd
-false <- \(x) isFALSE(x)
+false <- \(x) { isFALSE(x) }
 
 #' Coerce vector to `<chr>`
 #'
@@ -356,7 +385,7 @@ false <- \(x) isFALSE(x)
 #' @autoglobal
 #'
 #' @noRd
-as_character <- \(x) if (!is.character(x)) as.character(x) else x
+as_chr <- \(x) { if (is.character(x)) x else as.character(x) }
 
 #' Coerce vector to `<int>`
 #'
@@ -367,7 +396,7 @@ as_character <- \(x) if (!is.character(x)) as.character(x) else x
 #' @autoglobal
 #'
 #' @noRd
-as_integer <- \(x) if (!is.integer(x)) as.integer(x) else x
+as_int <- \(x) { if (is.integer(x)) x else as.integer(x) }
 
 #' Coerce vector to `<num>` class
 #'
@@ -378,7 +407,7 @@ as_integer <- \(x) if (!is.integer(x)) as.integer(x) else x
 #' @autoglobal
 #'
 #' @noRd
-as_numeric <- \(x) if (!is.numeric(x)) as.numeric(x) else x
+as_num <- \(x) { if (is.numeric(x)) x else as.numeric(x) }
 
 #' Coerce vector to `<date>` class
 #'
@@ -393,7 +422,7 @@ as_numeric <- \(x) if (!is.numeric(x)) as.numeric(x) else x
 #' @autoglobal
 #'
 #' @noRd
-as_date <- \(x, ..., fmt = "%Y-%m-%d") as.Date(x, ..., format = fmt)
+as_date <- \(x, ..., fmt = "%Y-%m-%d") { as.Date(x, ..., format = fmt) }
 
 #' Invert a named vector
 #'
@@ -407,5 +436,31 @@ as_date <- \(x, ..., fmt = "%Y-%m-%d") as.Date(x, ..., format = fmt)
 invert_named <- \(x) {
   stopifnot("Input must be a named vector" = not_null(names(x)))
   stats::setNames(names(x), unname(x))
+}
+
+#' Round up to nearest decimal place
+#'
+#' @param x `<num>` vector
+#'
+#' @param d `<int>` decimal places to round to; default is `2`
+#'
+#' @returns `<num>` vector rounded up to the nearest decimal place
+#'
+#' @autoglobal
+#'
+#' @noRd
+roundup <- \(x, d = 2) {
+
+  d  <- 10^d
+
+  z  <- abs(x) * d
+
+  z  <- z + 0.5 + sqrt(.Machine[["double.eps"]])
+
+  z  <- trunc(z)
+
+  z  <- z / d
+
+  z * sign(x)
 }
 # nocov end

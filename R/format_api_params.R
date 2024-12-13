@@ -52,13 +52,31 @@ api_names <- \(fn_name) {
   if (fn_name == "all")
     return(apinms)
 
-  collapse::get_elem(
-    apinms,
-    fn_name,
-    regex = TRUE)
+  getelem(apinms, fn_name)
 }
 
-#' Encode API parameters as a URL
+#' Encode string as URL
+#'
+#' @param x `<chr>` string
+#'
+#' @returns `<chr>` string with encoded characters
+#'
+#' @autoglobal
+#'
+#' @noRd
+encode_api_url <- function(x) {
+
+  x <- gsub(" ", "%20", x)
+  x <- gsub("[", "%5B", x, fixed = TRUE)
+  x <- gsub("*", "%2A", x, fixed = TRUE)
+  x <- gsub("]", "%5D", x, fixed = TRUE)
+  x <- gsub("<", "%3C", x, fixed = TRUE)
+  x <- gsub("+", "%2B", x, fixed = TRUE)
+
+  return(x)
+}
+
+#' Format API parameters as a URL
 #'
 #' "%22" url encoding for double quote (")
 #'
@@ -84,14 +102,7 @@ format_api_params <- function(x, fmt = "filter") {
     sql = paste0(
       paste0("[WHERE ", names(x), " = %22", x, "%22]" ), collapse = ""))
 
-  x <- gsub(" ", "%20", x)
-  x <- gsub("[", "%5B", x, fixed = TRUE)
-  x <- gsub("*", "%2A", x, fixed = TRUE)
-  x <- gsub("]", "%5D", x, fixed = TRUE)
-  x <- gsub("<", "%3C", x, fixed = TRUE)
-  x <- gsub("+", "%2B", x, fixed = TRUE)
-
-  return(x)
+  encode_api_url(x)
 }
 
 #' Build url for http requests
@@ -125,12 +136,12 @@ build_url2 <- function(api, args = NULL) {
   url <- "https://data.cms.gov/data-api/v1/dataset/"
   url <- paste0(url, cms_update(api)$distro[1])
 
-  crosswalk <- (abb %in% "tax" & null(args))
+  crosskey <- (abb %in% "tax" & null(args))
 
-  if (crosswalk)
+  if (crosskey)
     return(paste0(url, "/data?keyword="))
 
-  if (!crosswalk)
+  if (!crosskey)
     return(paste0(
       url,
       dplyr::if_else(

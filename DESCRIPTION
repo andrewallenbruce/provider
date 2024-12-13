@@ -17,38 +17,38 @@ Depends:
     R (>= 4.1.0)
 Imports: 
     arrow,
+    cheapr (>= 0.9.92),
     cli,
-    collapse,
+    collapse (>= 2.0.18),
     data.table,
     dplyr,
+    fs,
     httr2,
     janitor,
-    fs,
+    kit (>= 0.0.19),
     lubridate,
     purrr,
     rlang (>= 1.1.0),
+    stringfish (>= 0.16.0),
     stringi,
     stringr,
     tidyr,
     vctrs,
-    zeallot,
-    kit,
-    cheapr,
-    stringfish
+    zeallot
 Suggests: 
-    pins,
-    furrr,
     fuimus,
-    rxnorm,
-    strex,
+    furrr,
     future,
     glue,
     httptest2,
     knitr,
     mlr3misc,
+    pins,
     roxyglobals,
     rvest,
+    rxnorm,
     stats,
+    strex,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
@@ -56,8 +56,8 @@ Remotes:
     github::andrewallenbruce/fuimus,
     github::anthonynorth/roxyglobals,
     github::nt-williams/rxnorm
-Config/Needs/website: gt, gtExtras, gghighlight, ggplot2, ggraph, ggrepel, ggthemes,
-    igraph, rmapshaper, scales, tidygeocoder, tidygraph, tigris
+Config/Needs/website: gt, gtExtras, gghighlight, ggplot2, ggraph, ggrepel,
+    ggthemes, igraph, rmapshaper, scales, tidygeocoder, tidygraph, tigris
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
 Config/testthat/edition: 3
