@@ -57,11 +57,27 @@
 </li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="nav-link" href="../index.html" aria-label="Home"><span class="fa fas fa-home fa-lg"></span> </a></li>
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa far fa-newspaper fa-lg"></span> </a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/andrewallenbruce/provider" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="http://twitter.com/andrewallbruce" aria-label="X"><span class="fa fab fa-twitter fa-lg"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://www.linkedin.com/in/andrewallenbruce" aria-label="LinkedIn"><span class="fa fas fa-linkedin fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-links" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Links"><span class="fa fas fa-at"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-links">
+<li><a class="external-link dropdown-item" href="https://github.com/andrewallenbruce/provider"><span class="fa fab fa-github fa-lg"></span> GitHub</a></li>
+    <li><a class="external-link dropdown-item" href="http://twitter.com/andrewallbruce"><span class="fa fab fa-x-twitter fa-lg"></span> X</a></li>
+    <li><a class="external-link dropdown-item" href="http://twitter.com/andrewallbruce"><span class="fa fab fa-bluesky fa-lg"></span> Bluesky</a></li>
+    <li><a class="external-link dropdown-item" href="https://www.linkedin.com/in/andrewallenbruce"><span class="fa fas fa-linkedin fa-lg"></span> LinkedIn</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -80,7 +96,7 @@ IDs, CCNs, CLIAs and More</h3>
                         <h4 data-toc-skip class="author">Andrew
 Bruce</h4>
             
-            <h4 data-toc-skip class="date">2024-12-12</h4>
+            <h4 data-toc-skip class="date">2024-12-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/articles/linking-providers.Rmd" class="external-link"><code>vignettes/articles/linking-providers.Rmd</code></a></small>
       <div class="d-none name"><code>linking-providers.Rmd</code></div>

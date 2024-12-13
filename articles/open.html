@@ -54,11 +54,27 @@
 </li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="nav-link" href="../index.html" aria-label="Home"><span class="fa fas fa-home fa-lg"></span> </a></li>
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa far fa-newspaper fa-lg"></span> </a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/andrewallenbruce/provider" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="http://twitter.com/andrewallbruce" aria-label="X"><span class="fa fab fa-twitter fa-lg"></span></a></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://www.linkedin.com/in/andrewallenbruce" aria-label="LinkedIn"><span class="fa fas fa-linkedin fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-links" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Links"><span class="fa fas fa-at"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-links">
+<li><a class="external-link dropdown-item" href="https://github.com/andrewallenbruce/provider"><span class="fa fab fa-github fa-lg"></span> GitHub</a></li>
+    <li><a class="external-link dropdown-item" href="http://twitter.com/andrewallbruce"><span class="fa fab fa-x-twitter fa-lg"></span> X</a></li>
+    <li><a class="external-link dropdown-item" href="http://twitter.com/andrewallbruce"><span class="fa fab fa-bluesky fa-lg"></span> Bluesky</a></li>
+    <li><a class="external-link dropdown-item" href="https://www.linkedin.com/in/andrewallenbruce"><span class="fa fas fa-linkedin fa-lg"></span> LinkedIn</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -2053,23 +2069,13 @@
 <span>    <span class="va">tot_fills</span>, </span>
 <span>    <span class="va">tot_supply</span>, </span>
 <span>    <span class="va">tot_cost</span>, </span>
-<span>    <span class="va">tot_benes</span><span class="op">)</span></span>
-<span><span class="va">rx</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 27 × 8</span></span></span>
-<span><span class="co">#&gt;     year brand_name        generic_name tot_claims tot_fills tot_supply tot_cost</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 Acetazolamide Er  Acetazolami…         20      20.5        533     971.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 Alphagan P        Brimonidine…         34      51         <span style="text-decoration: underline;">1</span>424   <span style="text-decoration: underline;">12</span>450.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 Azithromycin      Azithromycin        661    <span style="text-decoration: underline;">1</span>588.       <span style="text-decoration: underline;">45</span>870    <span style="text-decoration: underline;">7</span>181.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 Brimonidine Tart… Brimonidine…        306     550.       <span style="text-decoration: underline;">15</span>746    <span style="text-decoration: underline;">8</span>700.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 Bromsite          Bromfenac S…         78      80.5       <span style="text-decoration: underline;">2</span>387   <span style="text-decoration: underline;">21</span>943.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 Carteolol Hcl     Carteolol H…         79     184.        <span style="text-decoration: underline;">5</span>482    <span style="text-decoration: underline;">1</span>578.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 Cephalexin        Cephalexin           57      57          279     444.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 Combigan          Brimonidine…         63      87.8       <span style="text-decoration: underline;">2</span>444   <span style="text-decoration: underline;">17</span>835.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide Hcl   Dorzolamide…         71     151.        <span style="text-decoration: underline;">4</span>533    <span style="text-decoration: underline;">2</span>189 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 Dorzolamide-Timo… Dorzolamide…         99     216.        <span style="text-decoration: underline;">6</span>463    <span style="text-decoration: underline;">3</span>921.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: tot_benes &lt;int&gt;</span></span></span></code></pre>
+<span>    <span class="va">tot_benes</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `x[[column]]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't extract column with `column`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `column` must be size 1, not 10.</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rx</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error: object 'rx' not found</span></span></code></pre>
 </div>
   </main>
 </div>
