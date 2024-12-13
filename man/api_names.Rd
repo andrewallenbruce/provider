@@ -4,10 +4,10 @@
 \alias{api_names}
 \title{CMS API Dataset Names Lookup}
 \usage{
-api_names(fn_name)
+api_names(fn_name = "all")
 }
 \arguments{
-\item{fn_name}{\verb{<chr>} function name, can be a regex pattern}
+\item{fn_name}{\verb{<chr>} function name, can be a regex pattern; default is \code{"all"}}
 }
 \value{
 \verb{<chr>} API dataset name

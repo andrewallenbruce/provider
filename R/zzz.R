@@ -125,9 +125,9 @@ distros_dac <- \() {
     on_error = "continue") |>
     setNames(names(ids))
 
-  af <- resp_body_json(get_elem(resp, "affiliations"), simplifyVector = TRUE)
+  af <- resp_body_json(getelem(resp, "affiliations"), simplifyVector = TRUE)
 
-  cl <- resp_body_json(get_elem(resp, "clinicians"), simplifyVector = TRUE)
+  cl <- resp_body_json(getelem(resp, "clinicians"), simplifyVector = TRUE)
 
 
   affiliations <- list(

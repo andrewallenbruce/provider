@@ -2,6 +2,7 @@ url: https://andrewallenbruce.github.io/provider/
 
 template:
   bootstrap: 5
+  theme: tango
   light-switch: true
   bslib:
     primary: "#202C56"
@@ -24,7 +25,7 @@ template:
 home:
   title: provider • Access Healthcare Provider Data
   description: >
-    Functions for accessing and retrieving healthcare provider data.
+    Tools for accessing and retrieving healthcare provider data.
   sidebar:
     structure: [links, license, community, citation, authors, dev]
 
@@ -35,17 +36,27 @@ navbar:
     - reference
     - articles
     right:
-    - home
+    - search
     - news
-    - github
-    - twitter
-    - linkedin
+    - links
+    - lightswitch
   components:
-    home:
-      icon: fas fa-home fa-lg
-      href: index.html
-      aria-label: Home
-      text: ""
+    search:
+      search: []
+    lightswitch:
+      icon: fa-sun
+      aria-label: Light switch
+      id: lightswitch
+      menu:
+      - text: Light
+        theme: light
+        icon: fa-sun
+      - text: Dark
+        theme: dark
+        icon: fa-moon
+      - text: Auto
+        theme: auto
+        icon: fa-adjust
     intro:
       icon: ~
       href: articles/provider.html
@@ -75,18 +86,23 @@ navbar:
       aria-label: News
       title: "Changelog"
       text: ""
-    github:
-      icon: fab fa-github fa-lg
-      href: https://github.com/andrewallenbruce/provider
-      aria-label: GitHub
-    linkedin:
-      icon: fas fa-linkedin fa-lg
-      href: https://www.linkedin.com/in/andrewallenbruce
-      aria-label: LinkedIn
-    twitter:
-      icon: fab fa-twitter fa-lg
-      href: http://twitter.com/andrewallbruce
-      aria-label: X
+    links:
+      icon: fas fa-at
+      aria-label: Links
+      id: links
+      menu:
+      - text: GitHub
+        icon: fab fa-github fa-lg
+        href: https://github.com/andrewallenbruce/provider
+      - text: X
+        icon: fab fa-x-twitter fa-lg
+        href: http://twitter.com/andrewallbruce
+      - text: Bluesky
+        icon: fab fa-bluesky fa-lg
+        href: http://twitter.com/andrewallbruce
+      - text: LinkedIn
+        icon: fas fa-linkedin fa-lg
+        href: https://www.linkedin.com/in/andrewallenbruce
   opengraph:
     image:
       src: man/figures/card.png

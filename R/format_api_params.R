@@ -1,6 +1,6 @@
 #' CMS API Dataset Names Lookup
 #'
-#' @param fn_name `<chr>` function name, can be a regex pattern
+#' @param fn_name `<chr>` function name, can be a regex pattern; default is `"all"`
 #'
 #' @returns `<chr>` API dataset name
 #'
@@ -18,7 +18,7 @@
 #' @keywords internal
 #'
 #' @export
-api_names <- \(fn_name) {
+api_names <- \(fn_name = "all") {
 
   apinms <- c(
     main = c(
