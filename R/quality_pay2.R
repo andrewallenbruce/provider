@@ -58,7 +58,7 @@ quality_pay2 <- function(year,
                          type        = NULL,
                          tidy        = FALSE,
                          nest        = FALSE,
-                         eligibility = FALSE,
+                         eligibility = TRUE,
                          ...) {
 
   stopifnot(not_null(year), is.character(year))
@@ -90,66 +90,84 @@ quality_pay2 <- function(year,
     return(invisible(NULL))
   }
 
-  results <- resp_body_json(response, simplifyVector = TRUE)
-  results$year <- year
+  results           <- resp_body_json(response, simplifyVector = TRUE)
+  results[["year"]] <- year
 
-  return(as.data.table(results))
+  if (false(tidy)) return(results)
 
+  names(results) <- janitor::make_clean_names(names(results))
 
-    if (FALSE) {
-      top <- results |>
-        dplyr::select(-c(dplyr::contains("measure_"), dplyr::contains("ind_"))) |>
-        dplyr::arrange(year, participation_type)
-
-      measures <- dplyr::select(results, year, npi, participation_type, dplyr::any_of(pcol)) |>
-        dplyr::arrange(year, participation_type) |>
+  measures <- dplyr::select(results,
+        dplyr::matches("year$|npi|participation_option|_measure_", perl = TRUE)) |>
         tidyr::pivot_longer(
-          cols          = dplyr::any_of(pcol),
-          names_to      = c("category", "x", "set", "cat_id"),
-          names_pattern = "(.*)_(.*)_(.*)_(.)",
-          values_to     = "val"
-        ) |>
-        dplyr::filter(!is.na(val)) |>
-        dplyr::mutate(x = NULL, cat_id = NULL) |>
-        tidyr::pivot_wider(names_from = set,
-                           values_from = val,
-                           values_fn = list) |>
-        tidyr::unnest(c(id, score)) |>
-        dplyr::mutate(score = as.double(score), category = fct_measure(category)) |>
-        dplyr::rename(measure_id = id) |>
-        tidyr::nest(.by = c(year, npi, participation_type), .key  = "qpp_measures")
+          cols          = dplyr::matches("_measure_", perl = TRUE),
+          names_to      = c("category", "name", "id"),
+          names_pattern = "(.*)_measure_(.*)_([0-9]{1,2}$)",
+          values_to     = "value") |>
+        dplyr::filter(value != "") |>
+        dplyr::mutate(
+          id = NULL,
+          name = dplyr::case_match(name,
+            "achievement_points" ~ "score",
+            "collection_type" ~ "type",
+            .default = name))
 
-      statuses <- dplyr::select(results, year, npi, participation_type, dplyr::contains("ind_")) |>
-        dplyr::arrange(year, participation_type) |>
-        tidyr::pivot_longer(
-          cols          = dplyr::starts_with("ind_"),
-          names_to      = c("x", "qualified"),
-          names_pattern = "(...)_(.*)",
-          values_to     = "status"
-        ) |>
-        dplyr::mutate(x = NULL) |>
-        dplyr::filter(!is.na(status) & status != FALSE) |>
-        dplyr::mutate(qualified = fct_status(qualified), status = NULL) |>
-        tidyr::nest(.by = c(year, npi, participation_type), .key = "qpp_status")
+  measures <- collapse::rsplit(
+    measures,
+    measures[["category"]]) |>
+    purrr::map(
+      function(df)
+        tidyr::pivot_wider(
+          df,
+          names_from = name,
+          values_from = value,
+          values_fn = list))
 
-      by <- dplyr::join_by(year, npi, participation_type)
+  measures <- dplyr::bind_rows(
+    measures[c("quality", "pi")]  |>
+      purrr::map(\(df) tidyr::unnest(df, c(id, type, score))) |>
+      purrr::list_rbind(),
+    measures[c("cost", "ia")]  |>
+      purrr::map(\(df) tidyr::unnest(df, c(id, score))) |>
+      purrr::list_rbind() |>
+      dplyr::mutate(type = NA_character_)) |>
+        dplyr::mutate(score = as.double(score)) |>
+        tidyr::nest(
+          .by = c(year, npi, participation_option), .key = "measures")
 
-      results <- dplyr::left_join(top, measures, by) |>
-        dplyr::left_join(statuses, by) |>
-        cols_qpp("nest") |>
-        dplyr::group_by(year) |>
-        dplyr::mutate(org_id = dplyr::row_number(), .before = org_size) |>
-        dplyr::ungroup()
+  statuses <- dplyr::select(
+    results, year, npi, participation_option,
+    dplyr::matches("opted_into_mips|ia_credit|non_reporting|_status|_reweighting_", perl = TRUE)) |>
+    tidyr::pivot_longer(
+      cols          = !c(year, npi, participation_option),
+      names_to      = "category",
+      values_to     = "status") |>
+    tidyr::nest(.by = c(year, npi, participation_option), .key = "statuses")
+
+  joinby <- dplyr::join_by(year, npi, participation_option)
+
+  results <- dplyr::left_join(
+        dplyr::select(results |>
+                        dplyr::tibble(),
+          !dplyr::matches(
+            "opted_into_mips|ia_credit|non_reporting|_measure_|_status|_reweighting_",
+            perl = TRUE)), measures, joinby) |>
+        dplyr::left_join(statuses, joinby) |>
+        dplyr::mutate(grpid = dplyr::row_number(), .by = year)
 
       if (eligibility) {
-        by = dplyr::join_by(year, npi, org_id)
-        npi  <- unique(results$npi)
-        elig <- quality_eligibility(year = year, npi = c(npi))
-        results <- dplyr::left_join(results, elig, by) |>
-          cols_qcomb()
+        return(
+          dplyr::left_join(
+            results,
+            quality_eligibility(
+              year = year,
+              npi = c(uniq(results$npi)),
+              tidy = FALSE),
+            dplyr::join_by(year, npi)
+            )
+          )
       }
-    }
-  return(results)
+  results
 }
 
 

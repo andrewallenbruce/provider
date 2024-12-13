@@ -214,6 +214,7 @@ utils::globalVariables(c(
   "html",
   # <cms_update>
   # <nppes>
+  # <quality_pay2>
   "id",
   # <cms_dataset_search>
   # <open_payments>
@@ -261,6 +262,7 @@ utils::globalVariables(c(
   "modified",
   # <open_payments>
   # <cols_qelig>
+  # <quality_pay2>
   "name",
   # <open_payments>
   "name_1",
@@ -299,6 +301,8 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
+  # <quality_pay2>
+  "participation_option",
   # <quality_payment>
   "participation_type",
   # <mips_2021>
@@ -350,6 +354,7 @@ utils::globalVariables(c(
   "rndrng_prvdr_geo_desc",
   # <tidyup_geography.util>
   "rndrng_prvdr_geo_lvl",
+  # <quality_pay2>
   # <quality_payment>
   "score",
   # <open_ids>
@@ -432,6 +437,7 @@ utils::globalVariables(c(
   "val",
   # <open_payments>
   # <cols_qelig>
+  # <quality_pay2>
   "value",
   # <abb2full>
   "x",
