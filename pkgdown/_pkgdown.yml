@@ -16,12 +16,6 @@ template:
     after_body: >
       <script data-goatcounter="https://andrewallenbruce.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
-    # base_font:
-    #   google: {family: "Roboto Condensed", wght: [400, 500, 700], ital:[0, 1]}
-    # heading_font:
-    #   google: {family: "Roboto", wght: [400, 500, 700], ital:[0, 1]}
-    # code_font: {google: "JetBrains Mono"}
-
 home:
   title: provider • Access Healthcare Provider Data
   description: >

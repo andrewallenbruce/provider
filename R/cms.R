@@ -113,15 +113,12 @@ cms_dataset_search <- function(search = NULL) {
 format_param <- function(param, arg, type = "filter") {
   rlang::check_required(param)
   rlang::check_required(arg)
-  rlang::arg_match0(type, c("filter", "sql"))
 
   switch(
     type,
     filter = paste0("filter[", param, "]=", arg),
-    sql = paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")
+    sql = paste0("[WHERE ", param, " = %22", arg, "%22 ]")
   )
-
-  return(out)
 }
 
 #' @param args tibble with two columns: `param` and `args`
@@ -145,7 +142,7 @@ encode_param <- function(args, type = "filter") {
 
   if (type == "filter") {
     args <- purrr::pmap(args, format_param) |>
-      unlist() |>
+      unlist_() |>
       stringr::str_c(collapse = "&")
   }
 

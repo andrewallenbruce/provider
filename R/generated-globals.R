@@ -251,8 +251,6 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
-  # <format_param>
-  "out",
   # <affiliations>
   "parent_ccn",
   # <quality_pay2>
