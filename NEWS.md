@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9002 (2026-02-26)
+
+* more spring cleaning
+* roxyglobals version corrected
+
+
 # provider 0.0.1.9001 (2026-02-26)
 
 * beginning of clean-up/overhaul
