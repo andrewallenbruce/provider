@@ -33,10 +33,10 @@ vctrs::vec_rbind(
   opt_all_caps()
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `gender = fct_gen(gender)`.
+    #> Caused by error:
+    #> ! `gender` must be size 1, not 0.
 
   
 
@@ -75,10 +75,10 @@ providers(organization = "Elizabethtown Community Hospital") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `gender = fct_gen(gender)`.
+    #> Caused by error:
+    #> ! `gender` must be size 9 or 1, not 0.
 
 ``` r
 hospitals(organization = "Elizabethtown Community Hospital") |> 
@@ -86,10 +86,10 @@ hospitals(organization = "Elizabethtown Community Hospital") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+|     | npi_org    | pac_org    | enid_org        | enid_state | facility_ccn | organization                     | specialty_code | specialty                                  | incorp_date | incorp_state | structure   | address    | city          | state | zip       | location_type                    | registration | multi_npi | reh_conversion | subgroup |
+|-----|------------|------------|-----------------|------------|--------------|----------------------------------|----------------|--------------------------------------------|-------------|--------------|-------------|------------|---------------|-------|-----------|----------------------------------|--------------|-----------|----------------|----------|
+| 1   | 1891785184 | 3577554138 | O20101110000259 | NY         | 331302       | ELIZABETHTOWN COMMUNITY HOSPITAL | 00-85          | PART A PROVIDER - CRITICAL ACCESS HOSPITAL | 1926-05-08  | NY           | CORPORATION | 75 PARK ST | ELIZABETHTOWN | NY    | 129322300 | OTHER HOSPITAL PRACTICE LOCATION | Non-Profit   | TRUE      | FALSE          | None     |
+| 2   | 1407061591 | 3577554138 | O20220827000145 | NY         | 33Z302       | ELIZABETHTOWN COMMUNITY HOSPITAL | 00-85          | PART A PROVIDER - CRITICAL ACCESS HOSPITAL | 1926-05-08  | NY           | CORPORATION | 75 PARK ST | ELIZABETHTOWN | NY    | 129322300 | OTHER HOSPITAL PRACTICE LOCATION | Non-Profit   | FALSE     | FALSE          | None     |
 
   
 

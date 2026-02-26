@@ -19,10 +19,8 @@ ex <- open_payments(
   na.rm = TRUE)
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `paste0()`:
+    #> ! cannot coerce type 'closure' to vector of type 'character'
 
 ``` r
 ex
@@ -141,16 +139,21 @@ rx <- prescribers(
     tot_supply, 
     tot_cost, 
     tot_benes)
-```
-
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
-
-``` r
 rx
 ```
 
-    #> Error:
-    #> ! object 'rx' not found
+    #> # A tibble: 27 × 8
+    #>     year brand_name        generic_name tot_claims tot_fills tot_supply tot_cost
+    #>    <int> <chr>             <chr>             <int>     <dbl>      <int>    <dbl>
+    #>  1  2021 Acetazolamide Er  Acetazolami…         20      20.5        533     971.
+    #>  2  2021 Alphagan P        Brimonidine…         34      51         1424   12450.
+    #>  3  2021 Azithromycin      Azithromycin        661    1588.       45870    7181.
+    #>  4  2021 Brimonidine Tart… Brimonidine…        306     550.       15746    8700.
+    #>  5  2021 Bromsite          Bromfenac S…         78      80.5       2387   21943.
+    #>  6  2021 Carteolol Hcl     Carteolol H…         79     184.        5482    1578.
+    #>  7  2021 Cephalexin        Cephalexin           57      57          279     444.
+    #>  8  2021 Combigan          Brimonidine…         63      87.8       2444   17835.
+    #>  9  2021 Dorzolamide Hcl   Dorzolamide…         71     151.        4533    2189 
+    #> 10  2021 Dorzolamide-Timo… Dorzolamide…         99     216.        6463    3921.
+    #> # ℹ 17 more rows
+    #> # ℹ 1 more variable: tot_benes <int>

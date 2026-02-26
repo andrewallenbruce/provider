@@ -25,10 +25,10 @@ ind     <- utilization_(npi = 1043477615, type = "Provider")
 
     #> Error:
     #> ℹ In index: 1.
-    #> Caused by error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Caused by error in `dplyr::mutate()`:
+    #> ℹ In argument: `gender = fct_gen(gender)`.
+    #> Caused by error:
+    #> ! object 'gender' not found
 
 ``` r
 # Retrieve provider's utilization data by HCPCS
@@ -36,11 +36,7 @@ srvc    <- utilization_(npi = 1023076643, type = "Service")
 ```
 
     #> Error:
-    #> ℹ In index: 1.
-    #> Caused by error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> ! Future (<unnamed-5>) of class MultisessionFuture interrupted (pid 8965) [future <unnamed-5> (a74c2a10dd4d379d387e3daa909289ff-5); on a74c2a10dd4d379d387e3daa909289ff@runnervmnay03<8895> at 2026-02-26 18:12:28.036199]
 
 ``` r
 # Retrieve state & national HCPCS data to compare with

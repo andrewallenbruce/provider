@@ -34,10 +34,10 @@ rhcs <- providers(
   distinct()
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `gender = fct_gen(gender)`.
+    #> Caused by error:
+    #> ! `gender` must be size 81 or 1, not 0.
 
 ``` r
 rhcs

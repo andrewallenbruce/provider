@@ -49,10 +49,14 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#> Error in `purrr::pmap()`:
-#> ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! object 'out' not found
+#> # A tibble: 5 × 4
+#>   npi        first last    eligible                 
+#>   <chr>      <chr> <chr>   <fct>                    
+#> 1 1043477615 SARAH HUSSAIN Medicare Part B          
+#> 2 1043477615 SARAH HUSSAIN Home Health Agency       
+#> 3 1043477615 SARAH HUSSAIN Durable Medical Equipment
+#> 4 1043477615 SARAH HUSSAIN Power Mobility Devices   
+#> 5 1043477615 SARAH HUSSAIN Hospice
 ```
 
   
@@ -62,10 +66,8 @@ un-processed output:
 
 ``` r
 order_refer(npi = 1043477615, tidy = FALSE)
-#> Error in `purrr::pmap()`:
-#> ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! object 'out' not found
+#>          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD HOSPICE
+#> 1 1043477615   HUSSAIN      SARAH     Y   Y   Y   Y       Y
 ```
 
   
@@ -75,10 +77,10 @@ transformations to the output, such as `pivot`:
 
 ``` r
 order_refer(npi = 1043477615, pivot = FALSE)
-#> Error in `purrr::pmap()`:
-#> ℹ In index: 1.
-#> Caused by error in `.f()`:
-#> ! object 'out' not found
+#> # A tibble: 1 × 8
+#>   npi        last_name first_name partb dme   hha   pmd   hospice
+#>   <chr>      <chr>     <chr>      <lgl> <lgl> <lgl> <lgl> <lgl>  
+#> 1 1043477615 HUSSAIN   SARAH      TRUE  TRUE  TRUE  TRUE  TRUE
 ```
 
   
