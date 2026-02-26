@@ -1,0 +1,242 @@
+# Overview of Provider
+
+The overarching goal of
+[provider](https://andrewallenbruce.github.io/provider/) is to make the
+experience of accessing publicly-available Provider data easier and more
+consistent across a variety of sources. It aims to accomplish this
+through the following goals:
+
+- Non-Destructive **Tidy Output**, with an option to turn it off by
+  setting a function’s `tidy` parameter to `FALSE`.
+
+- **Variable Standardization**, for the express purpose of making it
+  easier to understand (and make connections between) each API’s output.
+  This will also allow for the removal of duplicate information and
+  greatly simplify the process of merging data across outputs.
+
+- **Input Validation**. Not only is this simply good practice, it also
+  prevents unnecessary querying of APIs.
+
+- **Helpful Documentation**. The impetus for this package was to cobble
+  together a motivating example of using a programming language to
+  streamline the process of data acquisition for, among other things,
+  medical coding, billing, and healthcare revenue cycle management.
+  Though it’s now grown beyond that, the intended audience remiains the
+  same: non-programmers in healthcare who are interested in what a
+  programming language like R can do to make their work easier. As such,
+  the documentation is written with in a way that assumes no prior
+  knowledge of R or programming in general. Domain-specific terminology
+  and concepts are explained in detail, as there is not one person in
+  existence that understands every aspect of the business of health
+  care, including the author of this package.
+
+  
+
+## Tidy Output
+
+In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html),
+every **column** is a *variable*, every **row** is an *observation*, and
+every **cell** is a *single value*.
+
+Many of the outputs of these APIs violate this form by
+
+- Storing column headers as values, not variable names
+- Storing multiple variables in one column
+
+To remedy this, there is some post-processing done to the output before
+it is returned. Each function has a `tidy` parameter that is set to
+`TRUE` by default:
+
+``` r
+order_refer(npi = 1043477615)
+#> Error in `purrr::pmap()`:
+#> ℹ In index: 1.
+#> Caused by error in `.f()`:
+#> ! object 'out' not found
+```
+
+  
+
+Setting `tidy` to `FALSE` will return a data.frame of the API’s
+un-processed output:
+
+``` r
+order_refer(npi = 1043477615, tidy = FALSE)
+#> Error in `purrr::pmap()`:
+#> ℹ In index: 1.
+#> Caused by error in `.f()`:
+#> ! object 'out' not found
+```
+
+  
+
+Several functions also have arguments that implement additional optional
+transformations to the output, such as `pivot`:
+
+``` r
+order_refer(npi = 1043477615, pivot = FALSE)
+#> Error in `purrr::pmap()`:
+#> ℹ In index: 1.
+#> Caused by error in `.f()`:
+#> ! object 'out' not found
+```
+
+  
+
+The `tidy` transformations applied to the output of each function
+include:
+
+- Favoring a long format over wide.
+- More descriptive, thematic variable names involving prefixes and a
+  standardized vocabulary across all outputs
+- Various quality-of-life data transformations (e.g., using `snake_case`
+  for variable names, replacing empty character cells with `NA`;
+  converting years, dates, booleans to their respective data types)
+- Nesting large groups of related columns into lists, to initially
+  emphasize the most important output.
+
+However, in the event that you would prefer to do your own
+transformations, simply turn it off with `tidy = FALSE`.
+
+  
+
+## Helper Functions
+
+Several functions have a required `year` argument. The years available
+to query these APIs might change at any time, so there is an
+accompanying helper function to retrieve the years available, in the
+form of `<function_name>_years()`. For instance,
+[`quality_payment()`](https://andrewallenbruce.github.io/provider/reference/quality_payment.md)’s
+is:
+
+``` r
+qpp_years()
+#> [1] 2017 2018 2019 2020 2021 2022 2023
+```
+
+These can also be used in a pipeline, for searching all available years:
+
+``` r
+map_dfr(qpp_years(), ~ quality_payment(year = .x, npi = 1043477615)) |> 
+  select(year, 
+         participation_type, 
+         beneficiaries,
+         services,
+         charges,
+         final_score,
+         pay_adjust, 
+         org_size, 
+         apms_entity_name)
+```
+
+Several functions have *parallelized* versions, denoted by an underscore
+at the end of their name (`_`):
+
+``` r
+quality_payment_(npi = 1043477615) |> 
+  select(year, 
+         participation_type, 
+         beneficiaries,
+         services,
+         charges,
+         final_score,
+         pay_adjust, 
+         org_size, 
+         apms_entity_name)
+```
+
+  
+
+## Validation Checks
+
+Several validation checks have been implemented, including checks for
+*NPIs*, *PAC IDs*, and *Enrollment IDs*:
+
+> **National Provider Identifier**: A National Provider Identifier (NPI)
+> is a unique 10-digit identification number issued to health care
+> providers in the United States by the Centers for Medicare and
+> Medicaid Services (CMS) through the National Plan and Provider
+> Enumeration System (NPPES). All individual HIPAA–covered healthcare
+> providers or organizations must obtain an NPI. Once assigned, a
+> provider’s NPI is permanent and remains with the provider regardless
+> of job or location changes.
+
+``` r
+# Must be 10 digits long
+open_payments(year = 2021, npi = 12345691234)
+#> Error in `open_payments()`:
+#> ! An NPI must be 10 digits long.
+#> ✖ 12345691234 contains 11 digits.
+
+# Must be numeric
+nppes(npi = "O12345678912")
+#> Error in `nppes()`:
+#> ! An NPI must be numeric.
+#> ✖ "O12345678912" contains non-numeric characters.
+
+# Must pass Luhn check
+pending(npi = 001234569123, type = "P")
+#> Error in `pending()`:
+#> ! "1234569123" is not a valid NPI.
+#> → Did you mean "1234569121"?
+```
+
+  
+
+> **Provider Associate-level Control ID**: A Provider associate-level
+> control ID (PAC ID) is a 10-digit unique numeric identifier that is
+> assigned to each individual or organization in PECOS. The PAC ID links
+> all entity-level information (e.g., tax identification numbers and
+> organizational names) and may be associated with multiple enrollment
+> IDs if the individual or organization enrolled multiple times under
+> different circumstances.
+
+``` r
+# Must be 10 digits long
+affiliations(pac = 0123456789)
+#> Error in `affiliations()`:
+#> ! A PAC ID must be 10 digits long.
+#> ✖ 123456789 contains 9 digits.
+
+# Must be numeric
+hospitals(pac_org = "O12345678912")
+#> Error in `hospitals()`:
+#> ! A PAC ID must be numeric.
+#> ✖ "O12345678912" contains non-numeric characters.
+```
+
+  
+
+> **Medicare Enrollment ID**: An Enrollment ID is a 15-digit unique
+> alphanumeric identifier that is assigned to each new provider
+> enrollment application. All enrollment-level information (e.g.,
+> enrollment type, enrollment state, provider specialty and reassignment
+> of benefits) is linked through the Enrollment ID.
+
+``` r
+# Must be a character vector
+clinicians(enid = 0123456789123456)
+#> Error in `clinicians()`:
+#> ! An Enrollment ID must be a <character> vector.
+#> ✖ 123456789123456 is a <numeric> vector.
+
+# Must be 15 characters long
+reassignments(enid = "I123456789123456")
+#> Error in `reassignments()`:
+#> ! An Enrollment ID must be 15 characters long.
+#> ✖ "I123456789123456" contains 16 characters.
+
+# Must begin with a capital I (Individual) or O (Organization/Group)
+providers(enid = "L12345678912345")
+#> Error in `providers()`:
+#> ! An Enrollment ID must begin with a capital `I` or `O`.
+#> ✖ "L12345678912345" begins with "L".
+
+# Some functions require one of ID types
+hospitals(enid_org = "I20180115000174")
+#> Error in `hospitals()`:
+#> ! An Organizational Enrollment ID must begin with a capital `O`.
+#> ✖ "I20180115000174" begins with "I".
+```
+
+------------------------------------------------------------------------

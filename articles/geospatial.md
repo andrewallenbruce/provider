@@ -1,0 +1,101 @@
+# Mapping Providers
+
+## Load Packages
+
+``` r
+library(provider)
+library(dplyr)
+library(purrr)
+library(tidygeocoder)
+library(tigris)
+library(rmapshaper)
+library(ggplot2)
+library(sf)
+```
+
+## Retrieve Addresses of all RHCs in Georgia
+
+``` r
+rhcs <- providers(
+  state = "GA", 
+  specialty_code = "00-17") |> 
+  pull(npi) |> 
+  map_dfr(\(x) nppes(npi = x)) |> 
+  select(
+    organization, 
+    address:zip) |> 
+  mutate(
+    address = paste0(
+      address, " ", 
+      city, ", ", 
+      state),
+    city = NULL,
+    state = NULL) |> 
+  distinct()
+```
+
+    #> Error in `purrr::pmap()`:
+    #> ℹ In index: 1.
+    #> Caused by error in `.f()`:
+    #> ! object 'out' not found
+
+``` r
+rhcs
+```
+
+    #> Error:
+    #> ! object 'rhcs' not found
+
+## Geocode with `{tidygeocoder}`
+
+``` r
+mapbox <- geocode(
+  rhcs,
+  address = address,
+  method = 'mapbox', 
+  full_results = TRUE) |> 
+  select(organization:long)
+```
+
+    #> Error:
+    #> ! object 'rhcs' not found
+
+## Retrieve Georgia counties shapefile from `{tigris}`
+
+``` r
+sf_cnt <- counties(
+  state = "GA",
+  year = 2022,
+  progress_bar = FALSE) |>
+  ms_simplify()
+
+sf_cnt$mid <- st_centroid(sf_cnt$geometry)
+```
+
+## Map with `{ggplot}`
+
+``` r
+ggplot(sf_cnt) +
+  geom_sf(
+    fill = "skyblue",
+    colour = "white",
+    alpha = 0.5) +
+  geom_sf_text(
+    aes(geometry = mid, 
+        label = NAME),
+    size = 3.5,
+    check_overlap = TRUE) +
+  geom_jitter(
+    data = mapbox,
+    mapping = aes(long, lat),
+    fill = "yellow",
+    color = "darkred",
+    alpha = 0.75,
+    size = 4,
+    shape = 21,
+    stroke = 1) +
+  theme_void()
+```
+
+    #> Error:
+    #> ! object 'mapbox' not found
