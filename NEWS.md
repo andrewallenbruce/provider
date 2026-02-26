@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9003 (2026-02-26)
+
+* fixed bug in internal `format_param()`
+* removed R-CMD-check gh action for now
+
+
 # provider 0.0.1.9002 (2026-02-26)
 
 * more spring cleaning
