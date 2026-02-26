@@ -42,7 +42,7 @@ Suggests:
     httptest2,
     knitr,
     pins (>= 1.4.1),
-    roxyglobals (>= 1.1.0),
+    roxyglobals (>= 1.0.0),
     rvest,
     rxnorm,
     stats,
