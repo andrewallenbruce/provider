@@ -18,8 +18,6 @@ Access a provider’s administrative data.
   : Providers Opted Out of Medicare
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
   : Order and Referral Eligibility
-- [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)
-  : Outpatient Hospitals Enrolled in Medicare
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
   : Pending Medicare Enrollment Applications
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
@@ -31,8 +29,6 @@ Access a provider’s administrative data.
 
 Access a provider’s statistical data.
 
-- [`beneficiaries()`](https://andrewallenbruce.github.io/provider/reference/beneficiaries.md)
-  : Beneficiary Enrollment in Medicare
 - [`open_payments()`](https://andrewallenbruce.github.io/provider/reference/open_payments.md)
   [`open_payments_()`](https://andrewallenbruce.github.io/provider/reference/open_payments.md)
   : Relationships with Drug & Medical Device Companies
@@ -50,17 +46,6 @@ Access a provider’s statistical data.
   : Prescriber Utilization & Demographics by Year
 - [`compare_hcpcs()`](https://andrewallenbruce.github.io/provider/reference/compare_hcpcs.md)
   : Compare Provider Performance
-
-## Classifications
-
-Classification systems for added context and dimensionality reduction.
-
-- [`betos()`](https://andrewallenbruce.github.io/provider/reference/betos.md)
-  : Restructured BETOS Classification for HCPCS
-- [`ndc_lookup()`](https://andrewallenbruce.github.io/provider/reference/ndc_lookup.md)
-  : National Drug Code (NDC) Lookup
-- [`taxonomy_crosswalk()`](https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.md)
-  : Taxonomy Code // Medicare Specialty
 
 ## Years
 

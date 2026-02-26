@@ -60,10 +60,8 @@ affiliations(pac = 7810891009) |>
   opt_all_caps()
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `UseMethod()`:
+    #> ! no applicable method for 'unnest' applied to an object of class "function"
 
   
 
@@ -110,10 +108,8 @@ affiliations(facility_ccn = 331302) |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `UseMethod()`:
+    #> ! no applicable method for 'unnest' applied to an object of class "function"
 
   
 
@@ -126,10 +122,8 @@ affiliations(facility_ccn = "33Z302") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `purrr::pmap()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `.f()`:
-    #> ! object 'out' not found
+    #> Error in `UseMethod()`:
+    #> ! no applicable method for 'unnest' applied to an object of class "function"
 
   
 

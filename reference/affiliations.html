@@ -9,7 +9,7 @@ providers' facility affiliations"><meta property="og:image" content="https://and
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +69,10 @@ providers' facility affiliations</p>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  facility_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  offset <span class="op">=</span> <span class="fl">0L</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn_parent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -101,38 +99,30 @@ circumstances.</p></dd>
 <dd><p><code>&lt;chr&gt;</code> Individual provider's name(s)</p></dd>
 
 
-<dt id="arg-facility-type">facility_type<a class="anchor" aria-label="anchor" href="#arg-facility-type"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Type of facility, one of the following:</p><ul><li><p>"hp" = Hospital</p></li>
-<li><p>"ltch" = Long-term care hospital</p></li>
-<li><p>"nh" = Nursing home</p></li>
-<li><p>"irf" = Inpatient rehabilitation facility</p></li>
-<li><p>"hha" = Home health agency</p></li>
-<li><p>"snf" = Skilled nursing facility</p></li>
-<li><p>"hs" = Hospice</p></li>
-<li><p>"df" = Dialysis facility</p></li>
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Type of facility, one of the following:</p><ul><li><p><code>"hp"</code> = Hospital</p></li>
+<li><p><code>"lt"</code> = Long-term care hospital</p></li>
+<li><p><code>"nh"</code> = Nursing home</p></li>
+<li><p><code>"irf"</code> = Inpatient rehabilitation facility</p></li>
+<li><p><code>"hha"</code> = Home health agency</p></li>
+<li><p><code>"snf"</code> = Skilled nursing facility</p></li>
+<li><p><code>"hs"</code> = Hospice</p></li>
+<li><p><code>"df"</code> = Dialysis facility</p></li>
 </ul></dd>
 
 
-<dt id="arg-facility-ccn">facility_ccn<a class="anchor" aria-label="anchor" href="#arg-facility-ccn"></a></dt>
+<dt id="arg-ccn-unit">ccn_unit<a class="anchor" aria-label="anchor" href="#arg-ccn-unit"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> 6-digit CCN of facility or unit within hospital
 where an individual provider provides service.</p></dd>
 
 
-<dt id="arg-parent-ccn">parent_ccn<a class="anchor" aria-label="anchor" href="#arg-parent-ccn"></a></dt>
+<dt id="arg-ccn-parent">ccn_parent<a class="anchor" aria-label="anchor" href="#arg-ccn-parent"></a></dt>
 <dd><p><code>&lt;int&gt;</code> 6-digit CCN of a sub-unit's
 primary hospital, should the provider provide services in said unit.</p></dd>
 
 
-<dt id="arg-offset">offset<a class="anchor" aria-label="anchor" href="#arg-offset"></a></dt>
-<dd><p><code>&lt;int&gt;</code> API pagination, <strong>default</strong> is <code>0L</code></p></dd>
-
-
 <dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Tidy output; <strong>default</strong> is <code>TRUE</code></p></dd>
-
-
-<dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Remove empty rows and columns; <strong>default</strong> is <code>TRUE</code></p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

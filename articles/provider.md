@@ -194,9 +194,8 @@ pending(npi = 001234569123, type = "P")
 ``` r
 # Must be 10 digits long
 affiliations(pac = 0123456789)
-#> Error in `affiliations()`:
-#> ! A PAC ID must be 10 digits long.
-#> ✖ 123456789 contains 9 digits.
+#> Error in `UseMethod()`:
+#> ! no applicable method for 'unnest' applied to an object of class "function"
 
 # Must be numeric
 hospitals(pac_org = "O12345678912")

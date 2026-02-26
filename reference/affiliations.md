@@ -12,12 +12,10 @@ affiliations(
   first = NULL,
   middle = NULL,
   last = NULL,
-  facility_type = NULL,
-  facility_ccn = NULL,
-  parent_ccn = NULL,
-  offset = 0L,
+  type = NULL,
+  ccn_unit = NULL,
+  ccn_parent = NULL,
   tidy = TRUE,
-  na.rm = TRUE,
   ...
 )
 ```
@@ -42,47 +40,39 @@ affiliations(
 
   `<chr>` Individual provider's name(s)
 
-- facility_type:
+- type:
 
   `<chr>` Type of facility, one of the following:
 
-  - "hp" = Hospital
+  - `"hp"` = Hospital
 
-  - "ltch" = Long-term care hospital
+  - `"lt"` = Long-term care hospital
 
-  - "nh" = Nursing home
+  - `"nh"` = Nursing home
 
-  - "irf" = Inpatient rehabilitation facility
+  - `"irf"` = Inpatient rehabilitation facility
 
-  - "hha" = Home health agency
+  - `"hha"` = Home health agency
 
-  - "snf" = Skilled nursing facility
+  - `"snf"` = Skilled nursing facility
 
-  - "hs" = Hospice
+  - `"hs"` = Hospice
 
-  - "df" = Dialysis facility
+  - `"df"` = Dialysis facility
 
-- facility_ccn:
+- ccn_unit:
 
   `<chr>` 6-digit CCN of facility or unit within hospital where an
   individual provider provides service.
 
-- parent_ccn:
+- ccn_parent:
 
   `<int>` 6-digit CCN of a sub-unit's primary hospital, should the
   provider provide services in said unit.
 
-- offset:
-
-  `<int>` API pagination, **default** is `0L`
-
 - tidy:
 
   `<lgl>` Tidy output; **default** is `TRUE`
-
-- na.rm:
-
-  `<lgl>` Remove empty rows and columns; **default** is `TRUE`
 
 - ...:
 

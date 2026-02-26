@@ -27,11 +27,8 @@ open_payments(
   payer_id = NULL,
   pay_form = NULL,
   pay_nature = NULL,
-  offset = 0L,
   tidy = TRUE,
   pivot = TRUE,
-  add.ndc = TRUE,
-  na.rm = FALSE,
   ...
 )
 
@@ -122,10 +119,6 @@ open_payments_(year = open_years(), ...)
 
   - `"Food and Beverage"`
 
-- offset:
-
-  \< *integer* \> // **default:** `0L` API pagination
-
 - tidy:
 
   \< *boolean* \> // **default:** `TRUE` Tidy output
@@ -133,15 +126,6 @@ open_payments_(year = open_years(), ...)
 - pivot:
 
   \< *boolean* \> // **default:** `TRUE` Pivot output
-
-- add.ndc:
-
-  \< *boolean* \> // **default:** `TRUE` Add output from
-  [`ndc_lookup()`](https://andrewallenbruce.github.io/provider/reference/ndc_lookup.md)
-
-- na.rm:
-
-  \< *boolean* \> // **default:** `FALSE` Remove empty rows and columns
 
 - ...:
 

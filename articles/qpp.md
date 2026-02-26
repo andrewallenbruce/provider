@@ -29,7 +29,7 @@ q
 
     #> function (save = "default", status = 0, runLast = TRUE) 
     #> .Internal(quit(save, status, runLast))
-    #> <bytecode: 0x55c5caa70990>
+    #> <bytecode: 0x5635a51e2d60>
     #> <environment: namespace:base>
 
 ## Grouping
