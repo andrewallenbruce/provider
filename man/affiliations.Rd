@@ -30,24 +30,24 @@ organizational names) and may be associated with multiple enrollment IDs if
 the individual or organization enrolled multiple times under different
 circumstances.}
 
-\item{first, middle, last}{\verb{<chr>} Individual provider's first/middle/last name}
+\item{first, middle, last}{\verb{<chr>} Individual provider's name(s)}
 
 \item{facility_type}{\verb{<chr>} Type of facility, one of the following:
 \itemize{
-\item \code{Hospital} (\code{hp})
-\item \verb{Long-term care hospital} (\code{ltch})
-\item \verb{Nursing home} (\code{nh})
-\item \verb{Inpatient rehabilitation facility} (\code{irf})
-\item \verb{Home health agency} (\code{hha})
-\item \verb{Skilled nursing facility} (\code{snf})
-\item \code{Hospice} (\code{hs})
-\item \verb{Dialysis facility} (\code{df})
+\item "hp" = Hospital
+\item "ltch" = Long-term care hospital
+\item "nh" = Nursing home
+\item "irf" = Inpatient rehabilitation facility
+\item "hha" = Home health agency
+\item "snf" = Skilled nursing facility
+\item "hs" = Hospice
+\item "df" = Dialysis facility
 }}
 
-\item{facility_ccn}{\verb{<chr>} 6-digit CMS Certification Number of facility or
-unit within hospital where an individual provider provides service.}
+\item{facility_ccn}{\verb{<chr>} 6-digit CCN of facility or unit within hospital
+where an individual provider provides service.}
 
-\item{parent_ccn}{\verb{<int>} 6-digit CMS Certification Number of a sub-unit's
+\item{parent_ccn}{\verb{<int>} 6-digit CCN of a sub-unit's
 primary hospital, should the provider provide services in said unit.}
 
 \item{offset}{\verb{<int>} API pagination, \strong{default} is \code{0L}}
@@ -76,7 +76,7 @@ providers' facility affiliations
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 affiliations(parent_ccn = 670055)
 \dontshow{\}) # examplesIf}
 }

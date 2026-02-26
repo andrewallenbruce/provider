@@ -99,7 +99,7 @@ The dataset includes enrollee counts on a \emph{rolling 12 month basis}.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 beneficiaries(year   = 2022,
               period = "Year",
               level  = "County",

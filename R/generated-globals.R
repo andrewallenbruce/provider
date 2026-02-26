@@ -145,26 +145,15 @@ utils::globalVariables(c(
   "description",
   # <cms_update>
   # <open_ids>
-  # <distros_main>
   # <distros_open>
   "distribution",
   # <cms_update>
-  # <distros_main>
   "distribution_accessURL",
-  # <distros_open>
-  "distribution_data_downloadURL",
-  # <distros_open>
-  "distribution_data_title",
   # <cms_update>
-  # <distros_main>
   "distribution_format",
-  # <distros_open>
-  "distribution_identifier",
   # <cms_update>
-  # <distros_main>
   "distribution_modified",
   # <cms_update>
-  # <distros_main>
   "distribution_title",
   # <tidyup_provider.util>
   "drug",
@@ -257,7 +246,6 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
-  # <distros_main>
   # <distros_open>
   "modified",
   # <open_payments>
@@ -272,6 +260,8 @@ utils::globalVariables(c(
   "ndc",
   # <open_payments>
   "ndc_1",
+  # <distros_open>
+  "nests",
   # <cols_qelig>
   "npi",
   # <quality_eligibility>
@@ -301,6 +291,8 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
+  # <format_param>
+  "out",
   # <quality_pay2>
   "participation_option",
   # <quality_payment>
@@ -470,7 +462,6 @@ utils::globalVariables(c(
   # <compare_hcpcs>
   # <open_ids>
   # <cols_qelig>
-  # <distros_main>
   # <distros_open>
   "year",
   NULL

@@ -126,7 +126,7 @@ following CMS-approved accreditation organizations:
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Artic Envestigations Program Laboratory, Anchorage, AK
 laboratories(clia = "02D0873639")
 

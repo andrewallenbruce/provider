@@ -107,7 +107,7 @@ Classifications to HCPCS codes}
 
 \item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
 
-\item{...}{Pass arguments to \code{\link[=utilization]{utilization()}}.}
+\item{...}{Pass arguments to utilization().}
 }
 \description{
 Access information on services and procedures provided to Original
@@ -164,7 +164,7 @@ and state-wide by HCPCS code and place of service.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 utilization(year = 2020,
             type = 'Provider',
             npi = 1003000423)

@@ -113,7 +113,7 @@ including the medical school that they attended and the year they graduated
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 clinicians(enid = "I20081002000549") # enid not working
 
 clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")

@@ -161,7 +161,7 @@ subsidies, and any other third-party payers.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 prescribers(year = 2020,
             type = 'Provider',
             npi = 1003000423)

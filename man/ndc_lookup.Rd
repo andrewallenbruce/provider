@@ -86,7 +86,7 @@ chemical subgroups.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ndc_lookup("0002-1433-80")
 
 medline("0002-1433-80")

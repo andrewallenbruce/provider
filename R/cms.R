@@ -15,50 +15,65 @@
 #'
 #' @noRd
 cms_update <- function(api, check = "id") {
-
   id_resp <- httr2::request("https://data.cms.gov/data.json") |>
     httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE)
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 
   results <- id_resp$dataset |>
     dplyr::tibble() |>
-    dplyr::select(title,
-                  modified,
-                  distribution) |>
+    dplyr::select(title, modified, distribution) |>
     tidyr::unnest(cols = distribution, names_sep = "_") |>
     dplyr::filter(distribution_format == "API") |>
-    dplyr::select(title,
-                  modified,
-                  distribution_title,
-                  distribution_modified,
-                  distribution_accessURL) |>
-    dplyr::mutate(distribution_accessURL = strex::str_after_last(distribution_accessURL, "dataset/"),
-                  distribution_accessURL = strex::str_before_last(distribution_accessURL, "/data")) |>
+    dplyr::select(
+      title,
+      modified,
+      distribution_title,
+      distribution_modified,
+      distribution_accessURL
+    ) |>
+    dplyr::mutate(
+      distribution_accessURL = strex::str_after_last(
+        distribution_accessURL,
+        "dataset/"
+      ),
+      distribution_accessURL = strex::str_before_last(
+        distribution_accessURL,
+        "/data"
+      )
+    ) |>
     dplyr::rename(distribution = distribution_accessURL) |>
     dplyr::filter(title == {{ api }})
 
-  if (check == "base") {return(results)}
+  if (check == "base") {
+    return(results)
+  }
 
   results <- results |>
-    dplyr::select(distribution_title,
-                  distro = distribution) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c(NA, "year")) |>
-    dplyr::mutate(id = dplyr::row_number(),
-                  year = as.integer(lubridate::year(year))) |>
+    dplyr::select(distribution_title, distro = distribution) |>
+    tidyr::separate_wider_delim(
+      distribution_title,
+      delim = " : ",
+      names = c(NA, "year")
+    ) |>
+    dplyr::mutate(
+      id = dplyr::row_number(),
+      year = as.integer(lubridate::year(year))
+    ) |>
     dplyr::filter(id != 1) |>
     dplyr::select(-id)
 
-  if (check == "id") {return(results)}
+  if (check == "id") {
+    return(results)
+  }
 
   if (check == "years") {
-    return(results |>
-             dplyr::distinct(year) |>
-             dplyr::arrange(year) |>
-             dplyr::pull(year) |>
-             as.character())
+    return(
+      results |>
+        dplyr::distinct(year) |>
+        dplyr::arrange(year) |>
+        dplyr::pull(year) |>
+        as.character()
+    )
   }
 }
 
@@ -67,19 +82,13 @@ cms_update <- function(api, check = "id") {
 #' @autoglobal
 #' @noRd
 cms_dataset_search <- function(search = NULL) {
-
   resp <- httr2::request("https://data.cms.gov/data.json") |>
     httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE)
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 
   ids <- resp$dataset |>
     dplyr::tibble() |>
-    dplyr::select(title,
-                  modified,
-                  keyword,
-                  identifier,
-                  description) |>
+    dplyr::select(title, modified, keyword, identifier, description) |>
     tidyr::unnest(keyword)
 
   if (!is.null(search)) {
@@ -102,14 +111,15 @@ cms_dataset_search <- function(search = NULL) {
 #'
 #' @noRd
 format_param <- function(param, arg, type = "filter") {
-
   rlang::check_required(param)
   rlang::check_required(arg)
   rlang::arg_match0(type, c("filter", "sql"))
 
-  if (type %in% 'filter') {out <- paste0("filter[", param, "]=", arg)}
-  if (type %in% 'sql')    {out <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}
-  # %22 url encoding for double quote (")
+  switch(
+    type,
+    filter = paste0("filter[", param, "]=", arg),
+    sql = paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")
+  )
 
   return(out)
 }
@@ -129,7 +139,6 @@ format_param <- function(param, arg, type = "filter") {
 #' @autoglobal
 #' @noRd
 encode_param <- function(args, type = "filter") {
-
   type <- rlang::arg_match0(type, c("filter", "sql"))
 
   args <- tidyr::unnest(args, arg)
@@ -163,7 +172,6 @@ encode_param <- function(args, type = "filter") {
 #' @autoglobal
 #' @noRd
 encode_url <- function(url) {
-
   url <- gsub(" ", "%20", url)
   url <- gsub("[", "%5B", url, fixed = TRUE)
   url <- gsub("*", "%2A", url, fixed = TRUE)
@@ -179,19 +187,31 @@ encode_url <- function(url) {
 #' @autoglobal
 #' @noRd
 file_url <- function(fn = c("c", "a"), args, offset) {
-
-  if (fn == "a") {uuid <- "27ea-46a8"}
-  if (fn == "c") {uuid <- "mj5m-pzi6"}
+  if (fn == "a") {
+    uuid <- "27ea-46a8"
+  }
+  if (fn == "c") {
+    uuid <- "mj5m-pzi6"
+  }
 
   id <- httr2::request(
-    glue::glue("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/{uuid}?show-reference-ids=true")) |>
+    glue::glue(
+      "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/{uuid}?show-reference-ids=true"
+    )
+  ) |>
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE)
 
-  url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-                "[SELECT * FROM ", id$distribution$identifier, "]",
-                encode_param(args, type = "sql"),
-                "[LIMIT 10000 OFFSET ", offset, "];&show_db_columns")
+  url <- paste0(
+    "https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+    "[SELECT * FROM ",
+    id$distribution$identifier,
+    "]",
+    encode_param(args, type = "sql"),
+    "[LIMIT 10000 OFFSET ",
+    offset,
+    "];&show_db_columns"
+  )
 
   encode_url(url)
 }
@@ -202,7 +222,6 @@ file_url <- function(fn = c("c", "a"), args, offset) {
 #' @autoglobal
 #' @noRd
 build_url <- function(abb, args = NULL) {
-
   api <- dplyr::case_match(
     abb,
     "ben" ~ "Medicare Monthly Enrollment",
@@ -218,16 +237,19 @@ build_url <- function(abb, args = NULL) {
     "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
     "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
     "bet" ~ "Restructured BETOS Classification System",
-    .default = NULL)
+    .default = NULL
+  )
 
   url <- "https://data.cms.gov/data-api/v1/dataset/"
   url <- paste0(url, cms_update(api)$distro[1])
 
   crosswalkkey <- (abb %in% "tax" & null(args))
 
-  if (crosswalkkey) return(paste0(url, "/data?keyword="))
+  if (crosswalkkey) {
+    return(paste0(url, "/data?keyword="))
+  }
 
-  if (!crosswalkkey)
+  if (!crosswalkkey) {
     return(
       paste0(
         url,
@@ -235,10 +257,11 @@ build_url <- function(abb, args = NULL) {
           abb %in% c("end", "tax"),
           "/data?",
           "/data.json?"
-          ),
+        ),
         encode_param(args)
-        )
       )
+    )
+  }
 }
 
 #' Build url for http requests
@@ -251,7 +274,6 @@ build_url <- function(abb, args = NULL) {
 #'
 #' @noRd
 api_years <- function(abb, year = NULL) {
-
   api <- dplyr::case_match(
     abb,
     "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",

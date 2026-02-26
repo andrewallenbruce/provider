@@ -55,7 +55,7 @@
 #' |`last`      |Order and Referring Provider's Last Name          |
 #' |`eligible`  |Services An Eligible Provider Can Order/Refer To  |
 #'
-#' @examples
+#' @examplesIf rlang::is_interactive()
 #' order_refer(npi = 1003026055)
 #'
 #' # Filter for certain privileges
@@ -69,63 +69,63 @@
 #' @autoglobal
 #'
 #' @export
-order_refer <- function(npi   = NULL,
-                        first = NULL,
-                        last  = NULL,
-                        partb = NULL,
-                        dme   = NULL,
-                        hha   = NULL,
-                        pmd   = NULL,
-                        hos   = NULL,
-                        tidy  = TRUE,
-                        pivot = TRUE,
-                        ...) {
-
-  npi   <- npi %nn% validate_npi(npi)
+order_refer <- function(
+  npi = NULL,
+  first = NULL,
+  last = NULL,
+  partb = NULL,
+  dme = NULL,
+  hha = NULL,
+  pmd = NULL,
+  hos = NULL,
+  tidy = TRUE,
+  pivot = TRUE,
+  ...
+) {
+  npi <- npi %nn% validate_npi(npi)
   partb <- partb %nn% tf_2_yn(partb)
-  dme   <- dme %nn% tf_2_yn(dme)
-  hha   <- hha %nn% tf_2_yn(hha)
-  pmd   <- pmd %nn% tf_2_yn(pmd)
-  hos   <- hos %nn% tf_2_yn(hos)
+  dme <- dme %nn% tf_2_yn(dme)
+  hha <- hha %nn% tf_2_yn(hha)
+  pmd <- pmd %nn% tf_2_yn(pmd)
+  hos <- hos %nn% tf_2_yn(hos)
 
   args <- dplyr::tribble(
-    ~param,      ~arg,
-    "NPI",        npi,
-    "FIRST_NAME", first,
-    "LAST_NAME",  last,
-    "PARTB",      partb,
-    "DME",        dme,
-    "HHA",        hha,
-    "PMD",        pmd,
-    "HOSPICE",    hos
-    )
+    ~param       , ~arg  ,
+    "NPI"        , npi   ,
+    "FIRST_NAME" , first ,
+    "LAST_NAME"  , last  ,
+    "PARTB"      , partb ,
+    "DME"        , dme   ,
+    "HHA"        , hha   ,
+    "PMD"        , pmd   ,
+    "HOSPICE"    , hos
+  )
 
   response <- httr2::request(build_url("ord", args)) |>
     httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
-
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "first",         first,
-      "last",          last,
-      "partb",         partb,
-      "dme",           dme,
-      "hha",           hha,
-      "pmd",           pmd,
-      "hos",           hos) |>
+      ~x      , ~y    ,
+      "npi"   , npi   ,
+      "first" , first ,
+      "last"  , last  ,
+      "partb" , partb ,
+      "dme"   , dme   ,
+      "hha"   , hha   ,
+      "pmd"   , pmd   ,
+      "hos"   , hos
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
     return(invisible(NULL))
-
   }
 
   results <- httr2::resp_body_json(
     response,
     simplifyVector = TRUE
-    )
+  )
 
   if (tidy) {
     results <- tidyup(
@@ -136,21 +136,20 @@ order_refer <- function(npi   = NULL,
         "dme",
         "pmd",
         "hos"
-        )
       )
+    )
 
     if (pivot) {
-      results <-  cols_ord(results) |>
+      results <- cols_ord(results) |>
         tidyr::pivot_longer(
-          cols      = !c(npi, first, last),
-          names_to  = "eligible",
+          cols = !c(npi, first, last),
+          names_to = "eligible",
           values_to = "status"
-          ) |>
+        ) |>
         dplyr::filter(status == TRUE) |>
-        dplyr::mutate(status   = NULL,
-                      eligible = fct_ord(eligible))
-      }
+        dplyr::mutate(status = NULL, eligible = fct_ord(eligible))
     }
+  }
   return(results)
 }
 
@@ -162,15 +161,16 @@ order_refer <- function(npi   = NULL,
 #'
 #' @noRd
 cols_ord <- function(df) {
-
-  cols <- c('npi',
-            'first'                     = 'first_name',
-            'last'                      = 'last_name',
-            "Medicare Part B"           = 'partb',
-            "Home Health Agency"        = 'hha',
-            "Durable Medical Equipment" = 'dme',
-            "Power Mobility Devices"    = 'pmd',
-            "Hospice"                   = 'hospice')
+  cols <- c(
+    'npi',
+    'first' = 'first_name',
+    'last' = 'last_name',
+    "Medicare Part B" = 'partb',
+    "Home Health Agency" = 'hha',
+    "Durable Medical Equipment" = 'dme',
+    "Power Mobility Devices" = 'pmd',
+    "Hospice" = 'hospice'
+  )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }
@@ -189,6 +189,6 @@ fct_ord <- function(x) {
       "Durable Medical Equipment",
       "Power Mobility Devices",
       "Hospice"
-      )
     )
+  )
 }

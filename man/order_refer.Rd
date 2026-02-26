@@ -76,6 +76,7 @@ Medicare may reimburse on behalf of its beneficiaries.
 order and refer. They can also enroll solely to order and refer.
 }
 \examples{
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 order_refer(npi = 1003026055)
 
 # Filter for certain privileges
@@ -85,7 +86,7 @@ order_refer(first = "Jennifer",
             hos   = FALSE,
             hha   = FALSE,
             pmd   = FALSE)
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 links:

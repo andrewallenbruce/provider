@@ -68,7 +68,7 @@ Links:
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 taxonomy_crosswalk(keyword_search = "B4")
 taxonomy_crosswalk(keyword_search = "Histocompatibility")
 taxonomy_crosswalk(specialty_description = "Rehabilitation Agency")

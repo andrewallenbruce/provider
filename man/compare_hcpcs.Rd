@@ -19,7 +19,7 @@ A \link[tibble:tibble-package]{tibble}
 utilization data to state and national averages
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 compare_hcpcs(utilization(year = 2018,
                           type = "Service",
                           npi = 1023076643))

@@ -16,24 +16,23 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    arrow,
-    cheapr (>= 0.9.92),
-    cli,
-    collapse (>= 2.0.18),
+    cheapr (>= 1.5.0),
+    cli (>= 3.6.5),
+    collapse (>= 2.1.6),
     data.table,
     dplyr,
     fs,
-    httr2,
+    httr2 (>= 1.2.2),
     janitor,
-    kit (>= 0.0.19),
+    kit (>= 0.0.21),
     lubridate,
-    purrr,
-    rlang (>= 1.1.0),
-    stringfish (>= 0.16.0),
+    purrr (>= 1.2.1),
+    rlang (>= 1.1.7),
+    stringfish,
     stringi,
-    stringr,
+    stringr (>= 1.6.0),
     tidyr,
-    vctrs,
+    vctrs (>= 0.7.1),
     zeallot
 Suggests: 
     fuimus,
@@ -42,9 +41,8 @@ Suggests:
     glue,
     httptest2,
     knitr,
-    mlr3misc,
-    pins,
-    roxyglobals,
+    pins (>= 1.4.1),
+    roxyglobals (>= 1.1.0),
     rvest,
     rxnorm,
     stats,
@@ -67,4 +65,4 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

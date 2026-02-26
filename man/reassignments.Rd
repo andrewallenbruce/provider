@@ -87,7 +87,7 @@ reassign their billing to, including individual employer association counts.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 reassignments(enid = "I20200929003184")
 
 reassignments(pac = 9830437441)

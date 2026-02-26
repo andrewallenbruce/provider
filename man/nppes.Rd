@@ -156,7 +156,7 @@ entries require at least two characters to be entered, e.g. \code{"jo*"}
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 nppes(npi = 1528060837)
 
 nppes(city   = "CARROLLTON",

@@ -200,7 +200,7 @@ Yearly
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 open_payments(year = 2021, npi = 1043218118)
 open_payments(year = 2021, pay_nature = "Royalty or License")
 open_payments(year = 2021, pay_form = "Stock option")

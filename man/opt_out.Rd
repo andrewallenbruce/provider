@@ -103,7 +103,7 @@ fee-for-service (Part B).
 }
 
 \examples{
-\dontshow{if ( interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if ( interactive()) withAutoprint(\{ # examplesIf}
 opt_out(npi = 1043522824)
 
 # For opt-out providers eligible

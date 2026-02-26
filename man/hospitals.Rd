@@ -185,7 +185,7 @@ doing-business-as name, organization type and address.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 hospitals(pac_org = 6103733050)
 
 hospitals(state = "GA", reh = TRUE)

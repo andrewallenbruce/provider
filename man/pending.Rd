@@ -33,7 +33,7 @@ Tidy output}
 \item{...}{Empty}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} with the columns:\tabular{ll}{
+A \code{\link[tibble:tibble]{tibble::tibble()}} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit individual NPI \cr
    \code{first} \tab Provider's first name \cr
@@ -50,7 +50,7 @@ Search for providers with pending Medicare enrollment applications.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 pending(type = "P", first = "John")
 

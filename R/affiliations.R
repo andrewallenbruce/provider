@@ -13,22 +13,22 @@
 #'
 #' @template args-pac
 #'
-#' @param first,middle,last `<chr>` Individual provider's first/middle/last name
+#' @param first,middle,last `<chr>` Individual provider's name(s)
 #'
 #' @param facility_type `<chr>` Type of facility, one of the following:
-#'    * `Hospital` (`hp`)
-#'    * `Long-term care hospital` (`ltch`)
-#'    * `Nursing home` (`nh`)
-#'    * `Inpatient rehabilitation facility` (`irf`)
-#'    * `Home health agency` (`hha`)
-#'    * `Skilled nursing facility` (`snf`)
-#'    * `Hospice` (`hs`)
-#'    * `Dialysis facility` (`df`)
+#'    * "hp" = Hospital
+#'    * "ltch" = Long-term care hospital
+#'    * "nh" = Nursing home
+#'    * "irf" = Inpatient rehabilitation facility
+#'    * "hha" = Home health agency
+#'    * "snf" = Skilled nursing facility
+#'    * "hs" = Hospice
+#'    * "df" = Dialysis facility
 #'
-#' @param facility_ccn `<chr>` 6-digit CMS Certification Number of facility or
-#'   unit within hospital where an individual provider provides service.
+#' @param facility_ccn `<chr>` 6-digit CCN of facility or unit within hospital
+#'   where an individual provider provides service.
 #'
-#' @param parent_ccn `<int>` 6-digit CMS Certification Number of a sub-unit's
+#' @param parent_ccn `<int>` 6-digit CCN of a sub-unit's
 #'   primary hospital, should the provider provide services in said unit.
 #'
 #' @template args-offset
@@ -47,59 +47,65 @@
 #' @autoglobal
 #'
 #' @export
-affiliations <- function(npi = NULL,
-                         pac = NULL,
-                         first = NULL,
-                         middle = NULL,
-                         last = NULL,
-                         facility_type = NULL,
-                         facility_ccn = NULL,
-                         parent_ccn = NULL,
-                         offset = 0L,
-                         tidy = TRUE,
-                         na.rm = TRUE,
-                         ...) {
-
-  npi          <- npi %nn% validate_npi(npi)
-  pac          <- pac %nn% check_pac(pac)
+affiliations <- function(
+  npi = NULL,
+  pac = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  facility_type = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL,
+  offset = 0L,
+  tidy = TRUE,
+  na.rm = TRUE,
+  ...
+) {
+  npi <- npi %nn% validate_npi(npi)
+  pac <- pac %nn% check_pac(pac)
   facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
-  parent_ccn   <- parent_ccn %nn% as.character(parent_ccn)
+  parent_ccn <- parent_ccn %nn% as.character(parent_ccn)
 
   if (!is.null(facility_type)) {
-
     facility_type <- dplyr::case_match(
       facility_type,
-      "hp"   ~ "Hospital",
+      "hp" ~ "Hospital",
       "ltch" ~ "Long-term care hospital",
-      "nh"   ~ "Nursing home",
-      "irf"  ~ "Inpatient rehabilitation facility",
-      "hha"  ~ "Home health agency",
-      "snf"  ~ "Skilled nursing facility",
-      "hs"   ~ "Hospice",
-      "df"   ~ "Dialysis facility",
-      .default = facility_type)
+      "nh" ~ "Nursing home",
+      "irf" ~ "Inpatient rehabilitation facility",
+      "hha" ~ "Home health agency",
+      "snf" ~ "Skilled nursing facility",
+      "hs" ~ "Hospice",
+      "df" ~ "Dialysis facility",
+      .default = facility_type
+    )
 
     facility_type <- rlang::arg_match0(
-      facility_type, c("Hospital",
-                       "Long-term care hospital",
-                       "Nursing home",
-                       "Inpatient rehabilitation facility",
-                       "Home health agency",
-                       "Skilled nursing facility",
-                       "Hospice",
-                       "Dialysis facility"))
-    }
+      facility_type,
+      c(
+        "Hospital",
+        "Long-term care hospital",
+        "Nursing home",
+        "Inpatient rehabilitation facility",
+        "Home health agency",
+        "Skilled nursing facility",
+        "Hospice",
+        "Dialysis facility"
+      )
+    )
+  }
 
   args <- dplyr::tribble(
-    ~param,                                         ~arg,
-    "npi",                                          npi,
-    "ind_pac_id",                                   pac,
-    "provider_first_name",                          first,
-    "provider_middle_name",                         middle,
-    "provider_last_name",                           last,
-    "facility_type",                                facility_type,
-    "facility_affiliations_certification_number",   facility_ccn,
-    "facility_type_certification_number",           parent_ccn)
+    ~param                                       , ~arg          ,
+    "npi"                                        , npi           ,
+    "ind_pac_id"                                 , pac           ,
+    "provider_first_name"                        , first         ,
+    "provider_middle_name"                       , middle        ,
+    "provider_last_name"                         , last          ,
+    "facility_type"                              , facility_type ,
+    "facility_affiliations_certification_number" , facility_ccn  ,
+    "facility_type_certification_number"         , parent_ccn
+  )
 
   error_body <- function(response) httr2::resp_body_json(response)$message
 
@@ -110,22 +116,21 @@ affiliations <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (vctrs::vec_is_empty(results)) {
-
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "pac",           pac,
-      "first",         first,
-      "middle",        middle,
-      "last",          last,
-      "facility_type", facility_type,
-      "facility_ccn",  facility_ccn,
-      "parent_ccn",    parent_ccn) |>
+      ~x              , ~y            ,
+      "npi"           , npi           ,
+      "pac"           , pac           ,
+      "first"         , first         ,
+      "middle"        , middle        ,
+      "last"          , last          ,
+      "facility_type" , facility_type ,
+      "facility_ccn"  , facility_ccn  ,
+      "parent_ccn"    , parent_ccn
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
     return(invisible(NULL))
-
   }
   if (tidy) {
     results <- cols_aff(tidyup(results)) |>
@@ -139,17 +144,17 @@ affiliations <- function(npi = NULL,
 #' @autoglobal
 #' @noRd
 cols_aff <- function(df) {
-
-  cols <- c("npi",
-            "pac"          = "ind_pac_id",
-            "first"        = "provider_first_name",
-            "middle"       = "provider_middle_name",
-            "last"         = "provider_last_name",
-            "suffix"       = "suff",
-            "facility_type",
-            "facility_ccn" = "facility_affiliations_certification_number",
-            "parent_ccn"   = "facility_type_certification_number")
+  cols <- c(
+    "npi",
+    "pac" = "ind_pac_id",
+    "first" = "provider_first_name",
+    "middle" = "provider_middle_name",
+    "last" = "provider_last_name",
+    "suffix" = "suff",
+    "facility_type",
+    "facility_ccn" = "facility_affiliations_certification_number",
+    "parent_ccn" = "facility_type_certification_number"
+  )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }
-

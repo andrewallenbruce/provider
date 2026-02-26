@@ -16,6 +16,7 @@ api_names(fn_name = "all")
 CMS API Dataset Names Lookup
 }
 \examples{
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 api_names("quality_payment")
 
 api_names("utilization")
@@ -23,6 +24,6 @@ api_names("utilization")
 api_names("provider")
 
 api_names("provider$")
-
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

@@ -32,6 +32,7 @@ integer vector of years available to search
 Years Currently Searchable for APIs
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # `beneficiaries()`
 bene_years(period = "Year")
 
@@ -51,6 +52,6 @@ out_years()
 
 # `prescribers()`
 rx_years()
-
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

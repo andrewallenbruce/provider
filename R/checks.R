@@ -1,8 +1,8 @@
 #' NPI Validation Check Version 2
 #'
 #' @description
-#' [validate_npi()] checks validity of NPI input against CMS requirements,
-#' using the Modulus 10 “double-add-double” Check Digit variation of the Luhn algorithm
+#' checks validity of NPI input against CMS requirements, using the Modulus 10
+#' "double-add-double" Check Digit variation of the Luhn algorithm
 #'
 #' @section National Provider Identifier (NPI):
 #' + [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
@@ -22,31 +22,40 @@
 #' validate_npi("152806O837")
 #' @autoglobal
 #' @noRd
-validate_npi <- function(npi,
-                         arg = rlang::caller_arg(npi),
-                         call = rlang::caller_env(),
-                         print = FALSE) {
-
+validate_npi <- function(
+  npi,
+  arg = rlang::caller_arg(npi),
+  call = rlang::caller_env(),
+  print = FALSE
+) {
   # Must be numeric
   if (grepl("^[[:digit:]]+$", npi) == FALSE) {
-    cli::cli_abort(c(
-      "An {.strong NPI} must be {.emph numeric}.",
-      "x" = "{.strong {.val {npi}}} contains {.emph non-numeric} characters."),
-      call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong NPI} must be {.emph numeric}.",
+        "x" = "{.strong {.val {npi}}} contains {.emph non-numeric} characters."
+      ),
+      call = call
+    )
   }
 
   # Must be 10 char length
   if (nchar(npi) != 10L) {
-    cli::cli_abort(c(
-      "An {.strong NPI} must be {.emph 10 digits long}.",
-      "x" = "{.strong {.val {npi}}} contains {.val {nchar(npi)}} digit{?s}."),
-      call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong NPI} must be {.emph 10 digits long}.",
+        "x" = "{.strong {.val {npi}}} contains {.val {nchar(npi)}} digit{?s}."
+      ),
+      call = call
+    )
   }
 
   # Must pass Luhn algorithm
   npi_test <- as.character(npi)
 
-  if (print) return(npi_test)
+  if (print) {
+    return(npi_test)
+  }
 
   # Remove the 10th digit to create the 9-position identifier part of the NPI
   id <- unlist(strsplit(npi_test, ""), use.names = FALSE)[1:9]
@@ -83,10 +92,13 @@ validate_npi <- function(npi,
 
   # Is the syntactically valid NPI identical to the test NPI?
   if (!identical(npi_valid, npi_test)) {
-    cli::cli_abort(c(
-      "{.val {npi_test}} is {.emph not} a valid NPI.",
-      ">" = "Did you mean {.strong {.val {npi_valid}}}?"),
-      call = call)
+    cli::cli_abort(
+      c(
+        "{.val {npi_test}} is {.emph not} a valid NPI.",
+        ">" = "Did you mean {.strong {.val {npi_valid}}}?"
+      ),
+      call = call
+    )
   }
   return(npi_test)
 }
@@ -112,24 +124,31 @@ validate_npi <- function(npi,
 #' check_npi("152806O837")
 #' @autoglobal
 #' @noRd
-check_npi <- function(x,
-                      arg = rlang::caller_arg(x),
-                      call = rlang::caller_env()) {
-
+check_npi <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
   #------------------------------------------Must be numeric
   if (grepl("^[[:digit:]]+$", x) == FALSE) {
-    cli::cli_abort(c(
-      "An {.strong NPI} must be {.emph numeric}.",
-      "x" = "{.val {x}} contains {.emph non-numeric} characters."),
-      call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong NPI} must be {.emph numeric}.",
+        "x" = "{.val {x}} contains {.emph non-numeric} characters."
+      ),
+      call = call
+    )
   }
 
   #------------------------------------------Must be 10 char length
   if (nchar(x) != 10L) {
-    cli::cli_abort(c(
-      "An {.strong NPI} must be {.emph 10 digits long}.",
-      "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."),
-      call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong NPI} must be {.emph 10 digits long}.",
+        "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."
+      ),
+      call = call
+    )
   }
 
   #------------------------------------------Must pass Luhn algorithm
@@ -155,10 +174,13 @@ check_npi <- function(x,
 
   # Check if the sum divides by 10
   if ((sum(luhn) %% 10) != 0) {
-    cli::cli_abort(c(
-      "An {.strong NPI} must pass {.emph Luhn algorithm}.",
-      "x" = "{.val {x}} {.emph fails} Luhn check."),
-      call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong NPI} must pass {.emph Luhn algorithm}.",
+        "x" = "{.val {x}} {.emph fails} Luhn check."
+      ),
+      call = call
+    )
   }
   return(as.character(x))
 }
@@ -188,22 +210,31 @@ check_npi <- function(x,
 #' check_pac("152806O837")
 #' @autoglobal
 #' @noRd
-check_pac <- function(x,
-                      arg = rlang::caller_arg(x),
-                      call = rlang::caller_env()) {
-
+check_pac <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
   # Return FALSE if not a number
   if (grepl("^[[:digit:]]+$", x) == FALSE) {
-    cli::cli_abort(c(
-      "A {.strong PAC ID} must be {.emph numeric}.",
-      "x" = "{.val {x}} contains {.emph non-numeric} characters."), call = call)
+    cli::cli_abort(
+      c(
+        "A {.strong PAC ID} must be {.emph numeric}.",
+        "x" = "{.val {x}} contains {.emph non-numeric} characters."
+      ),
+      call = call
+    )
   }
 
   # Must be 10 char length
   if (nchar(x) != 10L) {
-    cli::cli_abort(c(
-      "A {.strong PAC ID} must be {.emph 10 digits long}.",
-      "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."), call = call)
+    cli::cli_abort(
+      c(
+        "A {.strong PAC ID} must be {.emph 10 digits long}.",
+        "x" = "{.val {x}} contains {.val {nchar(x)}} digit{?s}."
+      ),
+      call = call
+    )
   }
   return(as.character(x))
 }
@@ -236,57 +267,80 @@ check_pac <- function(x,
 #' check_enid("152806O837")
 #' @autoglobal
 #' @noRd
-check_enid <- function(x,
-                       arg = rlang::caller_arg(x),
-                       call = rlang::caller_env(),
-                       type = NULL) {
-
+check_enid <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env(),
+  type = NULL
+) {
   # Abort if not character vector
   if (is.character(x) != TRUE) {
-    cli::cli_abort(c(
-      "An {.strong Enrollment ID} must be a {.cls character} vector.",
-      "x" = "{.val {x}} is a {.cls {class(x)}} vector."), call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong Enrollment ID} must be a {.cls character} vector.",
+        "x" = "{.val {x}} is a {.cls {class(x)}} vector."
+      ),
+      call = call
+    )
   }
 
   # Return TRUE if not a number
   if (grepl("^[[:digit:]]+$", x) == TRUE) {
-    cli::cli_abort(c(
-      "An {.strong Enrollment ID} must be {.emph numeric}.",
-      "x" = "{.val {x}} contains {.emph non-numeric} characters."), call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong Enrollment ID} must be {.emph numeric}.",
+        "x" = "{.val {x}} contains {.emph non-numeric} characters."
+      ),
+      call = call
+    )
   }
 
   # Must be 15 char length
   if (nchar(x) != 15L) {
-    cli::cli_abort(c(
-      "An {.strong Enrollment ID} must be {.emph 15 characters long}.",
-      "x" = "{.val {x}} contains {.val {nchar(x)}} character{?s}."), call = call)
+    cli::cli_abort(
+      c(
+        "An {.strong Enrollment ID} must be {.emph 15 characters long}.",
+        "x" = "{.val {x}} contains {.val {nchar(x)}} character{?s}."
+      ),
+      call = call
+    )
   }
 
   first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
 
   if ((first %in% c("I", "O")) != TRUE) {
-
-    cli::cli_abort(c(
-      "An {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
-      "x" = "{.val {x}} begins with {.val {first}}."), call = call)
-
+    cli::cli_abort(
+      c(
+        "An {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
+        "x" = "{.val {x}} begins with {.val {first}}."
+      ),
+      call = call
+    )
   }
 
   if (!is.null(type) && type %in% "ind") {
     first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
     if (first != "I") {
-      cli::cli_abort(c(
-        "An {.strong Individual Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
-        "x" = "{.val {x}} begins with {.val {first}}."), call = call)
+      cli::cli_abort(
+        c(
+          "An {.strong Individual Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
+          "x" = "{.val {x}} begins with {.val {first}}."
+        ),
+        call = call
+      )
     }
   }
 
   if (!is.null(type) && type %in% "org") {
     first <- unlist(strsplit(x, ""), use.names = FALSE)[1]
     if (first != "O") {
-      cli::cli_abort(c(
-        "An {.strong Organizational Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
-        "x" = "{.val {x}} begins with {.val {first}}."), call = call)
+      cli::cli_abort(
+        c(
+          "An {.strong Organizational Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
+          "x" = "{.val {x}} begins with {.val {first}}."
+        ),
+        call = call
+      )
     }
   }
   return(as.character(x))

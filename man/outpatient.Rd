@@ -58,7 +58,7 @@ Prospective Payment System (OPPS). Maryland and US territory hospitals are
 excluded.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 outpatient(year = 2021, ccn = "110122")
 
 outpatient(year = 2021, state = "GA")

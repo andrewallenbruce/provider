@@ -96,7 +96,7 @@ assigned to a 6-character RBCS taxonomy code.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 betos(hcpcs = "0001U")
 betos(category = "Test")
 betos(subcategory = "General Laboratory")

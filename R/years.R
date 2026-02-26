@@ -2,7 +2,7 @@
 #'
 #' @returns integer vector of years available to search
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # `beneficiaries()`
 #' bene_years(period = "Year")
 #'
@@ -39,7 +39,8 @@ NULL
 open_years <- function() {
   sort(
     open_ids(
-      "General Payment Data")$year
+      "General Payment Data"
+    )$year
   )
 }
 
@@ -55,8 +56,8 @@ out_years <- function() {
     cms_update(
       "Medicare Outpatient Hospitals - by Provider and Service",
       "years"
-      )
     )
+  )
 }
 
 #' @rdname years
@@ -71,8 +72,8 @@ rx_years <- function() {
     cms_update(
       "Medicare Part D Prescribers - by Provider",
       "years"
-      )
     )
+  )
 }
 
 #' @rdname years
@@ -87,8 +88,8 @@ util_years <- function() {
     cms_update(
       "Medicare Physician & Other Practitioners - by Provider",
       "years"
-      )
     )
+  )
 }
 
 #' @rdname years
@@ -117,21 +118,23 @@ qpp_years <- function() {
 #'
 #' @export
 bene_years <- function(period = c("Year", "Month")) {
-
   period <- match.arg(period)
 
-  if (period == "Year") { # NOT WORKING
-      out <- beneficiaries(
-        period = "Year",
-        level  = "National",
-        tidy   = FALSE)$YEAR
-    }
+  if (period == "Year") {
+    # NOT WORKING
+    out <- beneficiaries(
+      period = "Year",
+      level = "National",
+      tidy = FALSE
+    )$YEAR
+  }
 
   if (period == "Month") {
-      out <- beneficiaries(
-        period = "January",
-        level  = "National",
-        tidy   = FALSE)$YEAR
+    out <- beneficiaries(
+      period = "January",
+      level = "National",
+      tidy = FALSE
+    )$YEAR
   }
   return(as.integer(out))
 }
