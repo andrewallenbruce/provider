@@ -13,16 +13,6 @@ utils::globalVariables(c(
   "abb",
   # <laboratories>
   "accredited",
-  # <distros_open>
-  "accrualPeriodicity",
-  # <mips_2021>
-  "aco_id_1",
-  # <mips_2021>
-  "aco_id_2",
-  # <mips_2021>
-  "aco_nm_1",
-  # <mips_2021>
-  "aco_nm_2",
   # <laboratories>
   "acr_a2la",
   # <laboratories>
@@ -78,22 +68,12 @@ utils::globalVariables(c(
   "addresses",
   # <laboratories>
   "aoa",
-  # <mips_2021>
-  "apm_affl_1",
-  # <mips_2021>
-  "apm_affl_2",
-  # <mips_2021>
-  "apm_affl_3",
   # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_state",
   # <encode_param>
   "arg",
-  # <distros_main>
-  "arrow_cms",
   # <laboratories>
   "ashi",
-  # <mips_2021>
-  "attestation_value",
   # <nppes>
   "basic",
   # <tidyup_provider.util>
@@ -101,23 +81,20 @@ utils::globalVariables(c(
   # <tidyup_provider.rx>
   # <tidyup_provider.util>
   "bene_race_wht",
+  # <compare_hcpcs>
+  "beneficiaries",
   # <laboratories>
   "cap",
-  # <rbcs_util>
   # <quality_payment>
   "category",
   # <open_payments>
   "category_1",
-  # <mips_2021>
-  "ccxp_ind",
   # <laboratories>
   "clia_number",
   # <laboratories>
   "cmplnc_stus_cd",
   # <laboratories>
   "cola",
-  # <mips_2021>
-  "collection_type",
   # <laboratories>
   "confirmed",
   # <laboratories>
@@ -141,11 +118,9 @@ utils::globalVariables(c(
   # <open_ids>
   "data",
   # <cms_dataset_search>
-  # <distros_open>
   "description",
   # <cms_update>
   # <open_ids>
-  # <distros_open>
   "distribution",
   # <cms_update>
   "distribution_accessURL",
@@ -167,14 +142,12 @@ utils::globalVariables(c(
   "entity_type",
   # <nppes>
   "ep",
-  # <mips_2021>
-  "facility_name",
-  # <rbcs_util>
-  "family",
+  # <affiliations>
+  "facility_ccn",
+  # <affiliations>
+  "facility_type",
   # <quality_eligibility>
   "first_approved_date",
-  # <mips_2021>
-  "five_star_benchmark",
   # <hospitals>
   "flag",
   # <nppes>
@@ -196,38 +169,31 @@ utils::globalVariables(c(
   "grp_status",
   # <tidyup_provider.util>
   "hcc_risk_avg",
-  # <rbcs_util>
   # <compare_hcpcs>
   "hcpcs",
-  # <medline>
-  "html",
   # <cms_update>
   # <nppes>
   # <quality_pay2>
   "id",
+  # <get_pro_api>
   # <cms_dataset_search>
   # <open_payments>
   # <open_ids>
-  # <distros_open>
   "identifier",
   # <hospitals>
   "incorp_state",
-  # <mips_2021>
-  "ind_pac_id",
   # <cols_qelig>
   "ind_status",
   # <reassignments>
   "individual_state_code",
   # <make_interval>
   "interval",
-  # <mips_2021>
-  "invs_msr",
-  # <distros_open>
-  "issued",
   # <laboratories>
   "jcaho",
   # <cms_dataset_search>
   "keyword",
+  # <get_pro_api>
+  "landingPage",
   # <compare_hcpcs>
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
@@ -237,16 +203,11 @@ utils::globalVariables(c(
   "lg",
   # <hospitals>
   "location_type",
-  # <mips_2021>
-  "measure_cd",
-  # <mips_2021>
-  "measure_title",
   # <tidyup_provider.util>
   "medical",
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
-  # <distros_open>
   "modified",
   # <open_payments>
   # <cols_qelig>
@@ -257,15 +218,16 @@ utils::globalVariables(c(
   # <open_payments>
   "nature_of_payment_or_transfer_of_value",
   # <open_payments>
-  "ndc",
-  # <open_payments>
   "ndc_1",
-  # <distros_open>
-  "nests",
+  # <get_pro_api>
+  "nextUpdateDate",
   # <cols_qelig>
   "npi",
   # <quality_eligibility>
   "npi_type",
+  # <affiliations>
+  # <open_payments>
+  "offset",
   # <nppes>
   "on",
   # <quality_payment>
@@ -273,8 +235,6 @@ utils::globalVariables(c(
   # <quality_eligibility>
   # <cols_qelig>
   "org_name",
-  # <mips_2021>
-  "org_pac_id",
   # <quality_payment>
   "org_size",
   # <quality_eligibility>
@@ -293,12 +253,12 @@ utils::globalVariables(c(
   "organizations_virtualGroups",
   # <format_param>
   "out",
+  # <affiliations>
+  "parent_ccn",
   # <quality_pay2>
   "participation_option",
   # <quality_payment>
   "participation_type",
-  # <mips_2021>
-  "patient_count",
   # <open_payments>
   "pay_count",
   # <open_payments>
@@ -314,16 +274,8 @@ utils::globalVariables(c(
   "pos",
   # <nppes>
   "pr",
-  # <mips_2021>
-  "prf_rate",
-  # <rbcs_util>
-  "procedure",
   # <hospitals>
   "proprietary_nonprofit",
-  # <mips_2021>
-  "provider_first_name",
-  # <mips_2021>
-  "provider_last_name",
   # <laboratories>
   "provider_name",
   # <laboratories>
@@ -334,12 +286,12 @@ utils::globalVariables(c(
   "purpose",
   # <quality_payment>
   "qualified",
-  # <betos>
-  "rbcs_major_ind",
   # <open_payments>
   "recipient_state",
   # <reassignments>
   "record_type",
+  # <get_pro_api>
+  "released",
   # <laboratories>
   "rgn_cd",
   # <tidyup_geography.util>
@@ -355,21 +307,17 @@ utils::globalVariables(c(
   # <tidyup_provider.util>
   # <tidyup_service.util>
   "specialty",
-  # <mips_2021>
-  "star_value",
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
   # <tidyup_provider.rx>
   # <tidyup_provider.util>
   # <tidyup_service.util>
   "state",
-  # <beneficiaries>
   # <prescribers>
   # <utilization>
   # <fct_stabb>
   # <abb2full>
   "state.abb",
-  # <beneficiaries>
   # <fct_stname>
   # <abb2full>
   "state.name",
@@ -383,29 +331,19 @@ utils::globalVariables(c(
   # <order_refer>
   # <quality_payment>
   "status",
-  # <rbcs_util>
-  "subcategory",
   # <hospitals>
   "subgroup_general",
   # <hospitals>
   "subgroup_other",
   # <hospitals>
   "subtotal",
-  # <medline>
-  "summary._value",
-  # <distros_open>
-  "temporal",
   # <quality_eligibility>
   "timelength_days",
+  # <get_pro_api>
   # <cms_update>
   # <cms_dataset_search>
-  # <medline>
   # <open_ids>
-  # <distros_main>
-  # <distros_open>
   "title",
-  # <medline>
-  "title._value",
   # <tidyup_provider.util>
   "tot_allowed",
   # <tidyup_provider.rx>
@@ -434,18 +372,13 @@ utils::globalVariables(c(
   # <abb2full>
   "x",
   # <affiliations>
-  # <beneficiaries>
-  # <betos>
   # <clinicians>
   # <hospitals>
   # <laboratories>
-  # <mips_2021>
-  # <medline>
   # <nppes>
   # <open_payments>
   # <opt_out>
   # <order_refer>
-  # <outpatient>
   # <pending>
   # <prescribers>
   # <providers>
@@ -453,7 +386,6 @@ utils::globalVariables(c(
   # <quality_pay2>
   # <quality_payment>
   # <reassignments>
-  # <taxonomy_crosswalk>
   # <utilization>
   # <abb2full>
   "y",
@@ -462,7 +394,6 @@ utils::globalVariables(c(
   # <compare_hcpcs>
   # <open_ids>
   # <cols_qelig>
-  # <distros_open>
   "year",
   NULL
 ))

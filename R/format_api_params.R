@@ -147,7 +147,7 @@ build_url2 <- function(api, args = NULL) {
   url <- "https://data.cms.gov/data-api/v1/dataset/"
   url <- paste0(url, cms_update(api)$distro[1])
 
-  crosskey <- (abb %in% "tax" & null(args))
+  crosskey <- (abb %in% "tax" & is.null(args))
 
   if (crosskey) {
     return(paste0(url, "/data?keyword="))

@@ -51,125 +51,160 @@
 #' @autoglobal
 #'
 #' @noRd
-quality_pay2 <- function(year,
-                         npi         = NULL,
-                         state       = NULL,
-                         specialty   = NULL,
-                         type        = NULL,
-                         tidy        = FALSE,
-                         nest        = FALSE,
-                         eligibility = TRUE,
-                         ...) {
-
-  stopifnot(not_null(year), is.character(year))
+quality_pay2 <- function(
+  year,
+  npi = NULL,
+  state = NULL,
+  specialty = NULL,
+  type = NULL,
+  tidy = FALSE,
+  nest = FALSE,
+  eligibility = TRUE,
+  ...
+) {
+  stopifnot(!is.null(year), is.character(year))
   year <- match.arg(year, as.character(qpp_years()))
 
   params <- list(
-    "npi" = if (null(npi)) NULL else validate_npi(npi),
+    "npi" = if (is.null(npi)) NULL else validate_npi(npi),
     "practice state or us territory" = state,
     "clinician specialty" = specialty,
-    "participation type" = type)
+    "participation type" = type
+  )
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-    api_years("qpp", as.integer(year))[["distro"]], "/data?", format_api_params(params))
+  url <- paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    api_years("qpp", as.integer(year))[["distro"]],
+    "/data?",
+    format_api_params(params)
+  )
 
   response <- request(url) |> req_perform()
 
-  if (empty(response$body)) {
-
+  if (vctrs::vec_is_empty(response$body)) {
     cli_args <- dplyr::tribble(
-      ~x,                     ~y,
-      "year",                 year,
-      "npi",                  npi,
-      "state",                state,
-      "specialty",            specialty,
-      "type",   type) |>
+      ~x          , ~y        ,
+      "year"      , year      ,
+      "npi"       , npi       ,
+      "state"     , state     ,
+      "specialty" , specialty ,
+      "type"      , type
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
     return(invisible(NULL))
   }
 
-  results           <- resp_body_json(response, simplifyVector = TRUE)
+  results <- resp_body_json(response, simplifyVector = TRUE)
   results[["year"]] <- year
 
-  if (false(tidy)) return(results)
+  if (!tidy) {
+    return(results)
+  }
 
   names(results) <- janitor::make_clean_names(names(results))
 
-  measures <- dplyr::select(results,
-        dplyr::matches("year$|npi|participation_option|_measure_", perl = TRUE)) |>
-        tidyr::pivot_longer(
-          cols          = dplyr::matches("_measure_", perl = TRUE),
-          names_to      = c("category", "name", "id"),
-          names_pattern = "(.*)_measure_(.*)_([0-9]{1,2}$)",
-          values_to     = "value") |>
-        dplyr::filter(value != "") |>
-        dplyr::mutate(
-          id = NULL,
-          name = dplyr::case_match(name,
-            "achievement_points" ~ "score",
-            "collection_type" ~ "type",
-            .default = name))
+  measures <- dplyr::select(
+    results,
+    dplyr::matches("year$|npi|participation_option|_measure_", perl = TRUE)
+  ) |>
+    tidyr::pivot_longer(
+      cols = dplyr::matches("_measure_", perl = TRUE),
+      names_to = c("category", "name", "id"),
+      names_pattern = "(.*)_measure_(.*)_([0-9]{1,2}$)",
+      values_to = "value"
+    ) |>
+    dplyr::filter(value != "") |>
+    dplyr::mutate(
+      id = NULL,
+      name = dplyr::case_match(
+        name,
+        "achievement_points" ~ "score",
+        "collection_type" ~ "type",
+        .default = name
+      )
+    )
 
   measures <- collapse::rsplit(
     measures,
-    measures[["category"]]) |>
+    measures[["category"]]
+  ) |>
     purrr::map(
-      function(df)
+      function(df) {
         tidyr::pivot_wider(
           df,
           names_from = name,
           values_from = value,
-          values_fn = list))
+          values_fn = list
+        )
+      }
+    )
 
   measures <- dplyr::bind_rows(
-    measures[c("quality", "pi")]  |>
+    measures[c("quality", "pi")] |>
       purrr::map(\(df) tidyr::unnest(df, c(id, type, score))) |>
       purrr::list_rbind(),
-    measures[c("cost", "ia")]  |>
+    measures[c("cost", "ia")] |>
       purrr::map(\(df) tidyr::unnest(df, c(id, score))) |>
       purrr::list_rbind() |>
-      dplyr::mutate(type = NA_character_)) |>
-        dplyr::mutate(score = as.double(score)) |>
-        tidyr::nest(
-          .by = c(year, npi, participation_option), .key = "measures")
+      dplyr::mutate(type = NA_character_)
+  ) |>
+    dplyr::mutate(score = as.double(score)) |>
+    tidyr::nest(
+      .by = c(year, npi, participation_option),
+      .key = "measures"
+    )
 
   statuses <- dplyr::select(
-    results, year, npi, participation_option,
-    dplyr::matches("opted_into_mips|ia_credit|non_reporting|_status|_reweighting_", perl = TRUE)) |>
+    results,
+    year,
+    npi,
+    participation_option,
+    dplyr::matches(
+      "opted_into_mips|ia_credit|non_reporting|_status|_reweighting_",
+      perl = TRUE
+    )
+  ) |>
     tidyr::pivot_longer(
-      cols          = !c(year, npi, participation_option),
-      names_to      = "category",
-      values_to     = "status") |>
+      cols = !c(year, npi, participation_option),
+      names_to = "category",
+      values_to = "status"
+    ) |>
     tidyr::nest(.by = c(year, npi, participation_option), .key = "statuses")
 
   joinby <- dplyr::join_by(year, npi, participation_option)
 
   results <- dplyr::left_join(
-        dplyr::select(results |>
-                        dplyr::tibble(),
-          !dplyr::matches(
-            "opted_into_mips|ia_credit|non_reporting|_measure_|_status|_reweighting_",
-            perl = TRUE)), measures, joinby) |>
-        dplyr::left_join(statuses, joinby) |>
-        dplyr::mutate(grpid = dplyr::row_number(), .by = year)
+    dplyr::select(
+      results |>
+        dplyr::tibble(),
+      !dplyr::matches(
+        "opted_into_mips|ia_credit|non_reporting|_measure_|_status|_reweighting_",
+        perl = TRUE
+      )
+    ),
+    measures,
+    joinby
+  ) |>
+    dplyr::left_join(statuses, joinby) |>
+    dplyr::mutate(grpid = dplyr::row_number(), .by = year)
 
-      if (eligibility) {
-        return(
-          dplyr::left_join(
-            results,
-            quality_eligibility(
-              year = year,
-              npi = c(uniq(results$npi)),
-              tidy = FALSE),
-            dplyr::join_by(year, npi)
-            )
-          )
-      }
+  if (eligibility) {
+    return(
+      dplyr::left_join(
+        results,
+        quality_eligibility(
+          year = year,
+          npi = c(collapse::funique(results$npi)),
+          tidy = FALSE
+        ),
+        dplyr::join_by(year, npi)
+      )
+    )
+  }
   results
 }
-
 
 # c(
 #   "year",

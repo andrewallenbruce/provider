@@ -451,9 +451,9 @@ tidyup_service.util <- function(results, rbcs) {
       level = fct_level(level)
     )
 
-  if (rbcs) {
-    results <- rbcs_util(results)
-  }
+  # if (rbcs) {
+  #   results <- rbcs_util(results)
+  # }
 
   class(results) <- c("utilization_service", class(results))
   return(results)
@@ -480,9 +480,9 @@ tidyup_geography.util <- function(results, rbcs) {
     ) |>
     cols_util("Geography")
 
-  if (rbcs) {
-    results <- rbcs_util(results)
-  }
+  # if (rbcs) {
+  #   results <- rbcs_util(results)
+  # }
 
   class(results) <- c("utilization_geography", class(results))
 

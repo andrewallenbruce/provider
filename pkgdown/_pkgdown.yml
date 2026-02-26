@@ -125,7 +125,6 @@ reference:
   - nppes
   - opt_out
   - order_refer
-  - outpatient
   - pending
   - providers
   - reassignments
@@ -134,7 +133,6 @@ reference:
   desc: >
     Access a provider's statistical data.
   contents:
-  - beneficiaries
   - open_payments
   - open_payments_
   - quality_eligibility
@@ -145,14 +143,6 @@ reference:
   - prescribers
   - prescribers_
   - compare_hcpcs
-
-- title: Classifications
-  desc: >
-    Classification systems for added context and dimensionality reduction.
-  contents:
-  - betos
-  - ndc_lookup
-  - taxonomy_crosswalk
 
 - title: Years
   desc: >

@@ -10,12 +10,10 @@ affiliations(
   first = NULL,
   middle = NULL,
   last = NULL,
-  facility_type = NULL,
-  facility_ccn = NULL,
-  parent_ccn = NULL,
-  offset = 0L,
+  type = NULL,
+  ccn_unit = NULL,
+  ccn_parent = NULL,
   tidy = TRUE,
-  na.rm = TRUE,
   ...
 )
 }
@@ -32,29 +30,25 @@ circumstances.}
 
 \item{first, middle, last}{\verb{<chr>} Individual provider's name(s)}
 
-\item{facility_type}{\verb{<chr>} Type of facility, one of the following:
+\item{type}{\verb{<chr>} Type of facility, one of the following:
 \itemize{
-\item "hp" = Hospital
-\item "ltch" = Long-term care hospital
-\item "nh" = Nursing home
-\item "irf" = Inpatient rehabilitation facility
-\item "hha" = Home health agency
-\item "snf" = Skilled nursing facility
-\item "hs" = Hospice
-\item "df" = Dialysis facility
+\item \code{"hp"} = Hospital
+\item \code{"lt"} = Long-term care hospital
+\item \code{"nh"} = Nursing home
+\item \code{"irf"} = Inpatient rehabilitation facility
+\item \code{"hha"} = Home health agency
+\item \code{"snf"} = Skilled nursing facility
+\item \code{"hs"} = Hospice
+\item \code{"df"} = Dialysis facility
 }}
 
-\item{facility_ccn}{\verb{<chr>} 6-digit CCN of facility or unit within hospital
+\item{ccn_unit}{\verb{<chr>} 6-digit CCN of facility or unit within hospital
 where an individual provider provides service.}
 
-\item{parent_ccn}{\verb{<int>} 6-digit CCN of a sub-unit's
+\item{ccn_parent}{\verb{<int>} 6-digit CCN of a sub-unit's
 primary hospital, should the provider provide services in said unit.}
 
-\item{offset}{\verb{<int>} API pagination, \strong{default} is \code{0L}}
-
 \item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
-
-\item{na.rm}{\verb{<lgl>} Remove empty rows and columns; \strong{default} is \code{TRUE}}
 
 \item{...}{Empty dots}
 }
