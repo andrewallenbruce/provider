@@ -47,58 +47,60 @@
 #' @autoglobal
 #'
 #' @export
-providers <- function(npi                   = NULL,
-                      pac                   = NULL,
-                      enid                  = NULL,
-                      specialty_code        = NULL,
-                      specialty_description = NULL,
-                      first                 = NULL,
-                      middle                = NULL,
-                      last                  = NULL,
-                      organization          = NULL,
-                      state                 = NULL,
-                      gender                = NULL,
-                      tidy                  = TRUE,
-                      na.rm                 = TRUE,
-                      ...) {
-
-  npi    <- npi %nn% validate_npi(npi)
-  pac    <- pac %nn% check_pac(pac)
-  enid   <- enid %nn% check_enid(enid)
+providers <- function(
+  npi = NULL,
+  pac = NULL,
+  enid = NULL,
+  specialty_code = NULL,
+  specialty_description = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  organization = NULL,
+  state = NULL,
+  gender = NULL,
+  tidy = TRUE,
+  na.rm = TRUE,
+  ...
+) {
+  npi <- npi %nn% validate_npi(npi)
+  pac <- pac %nn% check_pac(pac)
+  enid <- enid %nn% check_enid(enid)
   gender <- gender %nn% rlang::arg_match(gender, c("F", "M", "9"))
 
   args <- dplyr::tribble(
-                        ~param,  ~arg,
-                          "NPI", npi,
-           "PECOS_ASCT_CNTL_ID", pac,
-                    "ENRLMT_ID", enid,
-             "PROVIDER_TYPE_CD", specialty_code,
-           "PROVIDER_TYPE_DESC", specialty_description,
-                     "STATE_CD", state,
-                   "FIRST_NAME", first,
-                     "MDL_NAME", middle,
-                    "LAST_NAME", last,
-                     "ORG_NAME", organization,
-                      "GNDR_SW", gender)
+    ~param               , ~arg                  ,
+    "NPI"                , npi                   ,
+    "PECOS_ASCT_CNTL_ID" , pac                   ,
+    "ENRLMT_ID"          , enid                  ,
+    "PROVIDER_TYPE_CD"   , specialty_code        ,
+    "PROVIDER_TYPE_DESC" , specialty_description ,
+    "STATE_CD"           , state                 ,
+    "FIRST_NAME"         , first                 ,
+    "MDL_NAME"           , middle                ,
+    "LAST_NAME"          , last                  ,
+    "ORG_NAME"           , organization          ,
+    "GNDR_SW"            , gender
+  )
 
   response <- httr2::request(build_url("pro", args)) |>
     httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
-
     cli_args <- dplyr::tribble(
-      ~x,                      ~y,
-      "npi",                   npi,
-      "pac",                   pac,
-      "enid",                  enid,
-      "specialty_code",        specialty_code,
-      "specialty_description", specialty_description,
-      "state",                 state,
-      "first",                 first,
-      "middle",                middle,
-      "last",                  last,
-      "organization",          organization,
-      "gender",                gender) |>
+      ~x                      , ~y                    ,
+      "npi"                   , npi                   ,
+      "pac"                   , pac                   ,
+      "enid"                  , enid                  ,
+      "specialty_code"        , specialty_code        ,
+      "specialty_description" , specialty_description ,
+      "state"                 , state                 ,
+      "first"                 , first                 ,
+      "middle"                , middle                ,
+      "last"                  , last                  ,
+      "organization"          , organization          ,
+      "gender"                , gender
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -106,12 +108,10 @@ providers <- function(npi                   = NULL,
   }
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy)  {
-    results <- cols_pros(tidyup(results)) |>
-      dplyr::mutate(gender = fct_gen(gender),
-                    state = fct_stabb(state))
+  if (tidy) {
+    results <- cols_pros(tidyup(results))
 
-  if (na.rm) results <- narm(results)
+    if (na.rm) results <- narm(results)
   }
   return(results)
 }
@@ -120,18 +120,19 @@ providers <- function(npi                   = NULL,
 #' @autoglobal
 #' @noRd
 cols_pros <- function(df) {
-
-  cols <- c('npi',
-            'pac'                   = 'pecos_asct_cntl_id',
-            'enid'                  = 'enrlmt_id',
-            'specialty_code'        = 'provider_type_cd',
-            'specialty_description' = 'provider_type_desc',
-            'state'                 = 'state_cd',
-            'organization'          = 'org_name',
-            'first'                 = 'first_name',
-            'middle'                = 'mdl_name',
-            'last'                  = 'last_name',
-            'gender'                = 'gndr_sw')
+  cols <- c(
+    'npi',
+    'pac' = 'pecos_asct_cntl_id',
+    'enid' = 'enrlmt_id',
+    'specialty_code' = 'provider_type_cd',
+    'specialty_description' = 'provider_type_desc',
+    'state' = 'state_cd',
+    'organization' = 'org_name',
+    'first' = 'first_name',
+    'middle' = 'mdl_name',
+    'last' = 'last_name',
+    'gender' = 'gndr_sw'
+  )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

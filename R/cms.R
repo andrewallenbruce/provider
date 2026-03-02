@@ -180,16 +180,14 @@ encode_url <- function(url) {
 #' Build url for affiliations & clinicians
 #' @param fn `"a"` for affiliations, `"c"` for clinicians
 #' @param args tibble of parameter arguments
-#' @param offset API offset
 #' @autoglobal
 #' @noRd
-file_url <- function(fn = c("c", "a"), args, offset) {
-  if (fn == "a") {
-    uuid <- "27ea-46a8"
-  }
-  if (fn == "c") {
-    uuid <- "mj5m-pzi6"
-  }
+file_url <- function(fn = c("c", "a"), args) {
+  uuid <- switch(
+    fn,
+    a = "27ea-46a8",
+    c = "mj5m-pzi6"
+  )
 
   id <- httr2::request(
     glue::glue(
@@ -199,15 +197,18 @@ file_url <- function(fn = c("c", "a"), args, offset) {
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE)
 
+  a <- cheapr::fast_df(param = names(args), arg = unlist_(args))
+
   url <- paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
     "[SELECT * FROM ",
     id$distribution$identifier,
     "]",
-    encode_param(args, type = "sql"),
-    "[LIMIT 10000 OFFSET ",
-    offset,
-    "];&show_db_columns"
+    encode_param(
+      args = a,
+      type = "sql"
+    ),
+    "[LIMIT 100 OFFSET 0];&show_db_columns"
   )
 
   encode_url(url)

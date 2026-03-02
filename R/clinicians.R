@@ -88,82 +88,84 @@
 #' @autoglobal
 #'
 #' @export
-clinicians <- function(npi           = NULL,
-                       pac           = NULL,
-                       enid          = NULL,
-                       first         = NULL,
-                       middle        = NULL,
-                       last          = NULL,
-                       gender        = NULL,
-                       credential    = NULL,
-                       school        = NULL,
-                       grad_year     = NULL,
-                       specialty     = NULL,
-                       facility_name = NULL,
-                       pac_org       = NULL,
-                       city          = NULL,
-                       state         = NULL,
-                       zip           = NULL,
-                       offset        = 0L,
-                       tidy          = TRUE,
-                       na.rm         = TRUE,
-                       ...) {
-
-  npi       <- npi %nn% validate_npi(npi)
-  pac       <- pac %nn% check_pac(pac)
-  pac_org   <- pac_org %nn% check_pac(pac_org)
-  enid      <- enid %nn% check_enid(enid)
+clinicians <- function(
+  npi = NULL,
+  pac = NULL,
+  enid = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  gender = NULL,
+  credential = NULL,
+  school = NULL,
+  grad_year = NULL,
+  specialty = NULL,
+  facility_name = NULL,
+  pac_org = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  offset = 0L,
+  tidy = TRUE,
+  na.rm = TRUE,
+  ...
+) {
+  npi <- npi %nn% validate_npi(npi)
+  pac <- pac %nn% check_pac(pac)
+  pac_org <- pac_org %nn% check_pac(pac_org)
+  enid <- enid %nn% check_enid(enid)
   grad_year <- grad_year %nn% as.character(grad_year)
-  zip       <- zip %nn% as.character(zip)
-  gender    <- gender %nn% rlang::arg_match(gender, c("F", "M"))
+  zip <- zip %nn% as.character(zip)
+  gender <- gender %nn% rlang::arg_match(gender, c("F", "M"))
 
   args <- dplyr::tribble(
-    ~param,                 ~arg,
-    "npi",                  npi,
-    "ind_pac_id",           pac,
-    "ind_enrl_id",          enid,
-    "provider_first_name",  first,
-    "provider_middle_name", middle,
-    "provider_last_name",   last,
-    "gndr",                 gender,
-    "cred",                 credential,
-    "med_sch",              school,
-    "grd_yr",               grad_year,
-    "pri_spec",             specialty,
-    "facility_name",        facility_name,
-    "org_pac_id",           pac_org,
-    "citytown",             city,
-    "state",                state,
-    "zip_code",             zip)
+    ~param                 , ~arg          ,
+    "npi"                  , npi           ,
+    "ind_pac_id"           , pac           ,
+    "ind_enrl_id"          , enid          ,
+    "provider_first_name"  , first         ,
+    "provider_middle_name" , middle        ,
+    "provider_last_name"   , last          ,
+    "gndr"                 , gender        ,
+    "cred"                 , credential    ,
+    "med_sch"              , school        ,
+    "grd_yr"               , grad_year     ,
+    "pri_spec"             , specialty     ,
+    "facility_name"        , facility_name ,
+    "org_pac_id"           , pac_org       ,
+    "citytown"             , city          ,
+    "state"                , state         ,
+    "zip_code"             , zip
+  )
 
   error_body <- function(response) httr2::resp_body_json(response)$message
 
-  response <- httr2::request(file_url("c", args, offset)) |>
+  response <- httr2::request(file_url("c", args)) |>
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (vctrs::vec_is_empty(results)) {
-
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "pac",           pac,
-      "enid",          enid,
-      "first",         first,
-      "middle",        middle,
-      "last",          last,
-      "gender",        gender,
-      "credential",    credential,
-      "school",        school,
-      "grad_year",     grad_year,
-      "specialty",     specialty,
-      "facility_name", facility_name,
-      "pac_org",       pac_org,
-      "city",          city,
-      "state",         state,
-      "zip",           zip) |>
+      ~x              , ~y            ,
+      "npi"           , npi           ,
+      "pac"           , pac           ,
+      "enid"          , enid          ,
+      "first"         , first         ,
+      "middle"        , middle        ,
+      "last"          , last          ,
+      "gender"        , gender        ,
+      "credential"    , credential    ,
+      "school"        , school        ,
+      "grad_year"     , grad_year     ,
+      "specialty"     , specialty     ,
+      "facility_name" , facility_name ,
+      "pac_org"       , pac_org       ,
+      "city"          , city          ,
+      "state"         , state         ,
+      "zip"           , zip
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -171,17 +173,18 @@ clinicians <- function(npi           = NULL,
   }
 
   if (tidy) {
-    results <- tidyup(results,
-                      yn  = 'telehlth',
-                      int = c('num_org_mem', 'grd_yr'),
-                      zip = 'zip_code') |>
+    results <- tidyup(
+      results,
+      yn = 'telehlth',
+      int = c('num_org_mem', 'grd_yr'),
+      zip = 'zip_code'
+    ) |>
       combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-      dplyr::mutate(gndr  = fct_gen(gndr),
-                    state = fct_stabb(state)) |>
+      dplyr::mutate(gndr = fct_gen(gndr), state = fct_stabb(state)) |>
       cols_clin()
 
     if (na.rm) results <- narm(results)
-    }
+  }
   return(results)
 }
 
@@ -189,28 +192,29 @@ clinicians <- function(npi           = NULL,
 #' @autoglobal
 #' @noRd
 cols_clin <- function(df) {
-
-  cols <- c('npi',
-            'pac'           = 'ind_pac_id',
-            'enid'          = 'ind_enrl_id',
-            'first'         = 'provider_first_name',
-            'middle'        = 'provider_middle_name',
-            'last'          = 'provider_last_name',
-            'suffix'        = 'suff',
-            'gender'        = 'gndr',
-            'credential'    = 'cred',
-            'school'        = 'med_sch',
-            'grad_year'     = 'grd_yr',
-            'specialty'     = 'pri_spec',
-            'specialty_sec' = 'sec_spec_all',
-            'facility_name',
-            'pac_org'       = 'org_pac_id',
-            'members_org'   = 'num_org_mem',
-            'address_org'   = 'address',
-            'city_org'      = 'citytown',
-            'state_org'     = 'state',
-            'zip_org'       = 'zip_code',
-            'phone_org'     = 'telephone_number')
+  cols <- c(
+    'npi',
+    'pac' = 'ind_pac_id',
+    'enid' = 'ind_enrl_id',
+    'first' = 'provider_first_name',
+    'middle' = 'provider_middle_name',
+    'last' = 'provider_last_name',
+    'suffix' = 'suff',
+    'gender' = 'gndr',
+    'credential' = 'cred',
+    'school' = 'med_sch',
+    'grad_year' = 'grd_yr',
+    'specialty' = 'pri_spec',
+    'specialty_sec' = 'sec_spec_all',
+    'facility_name',
+    'pac_org' = 'org_pac_id',
+    'members_org' = 'num_org_mem',
+    'address_org' = 'address',
+    'city_org' = 'citytown',
+    'state_org' = 'state',
+    'zip_org' = 'zip_code',
+    'phone_org' = 'telephone_number'
+  )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

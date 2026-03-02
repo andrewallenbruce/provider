@@ -17,15 +17,16 @@ Depends:
     R (>= 4.1.0)
 Imports: 
     cheapr (>= 1.5.0),
-    RcppSimdJson (>= 0.1.15),
     cli (>= 3.6.5),
     collapse (>= 2.1.6),
     dplyr,
+    fastplyr (>= 0.9.91),
     fs,
     httr2 (>= 1.2.2),
     janitor,
     lubridate,
     purrr (>= 1.2.1),
+    RcppSimdJson (>= 0.1.15),
     rlang (>= 1.1.7),
     stringi,
     stringr (>= 1.6.0),

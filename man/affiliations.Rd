@@ -5,50 +5,30 @@
 \title{Provider Facility Affiliations}
 \usage{
 affiliations(
-  npi = NULL,
-  pac = NULL,
-  first = NULL,
-  middle = NULL,
-  last = NULL,
-  type = NULL,
-  ccn_unit = NULL,
-  ccn_parent = NULL,
-  tidy = TRUE,
+  id = list(npi = NULL, pac = NULL, ccn = NULL),
+  name = list(first = NULL, middle = NULL, last = NULL, suff = NULL),
+  facility_type = NULL,
   ...
 )
 }
 \arguments{
-\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
-by CMS to US healthcare providers through NPPES.}
+\item{id}{\verb{<list>} List of parameters that uniquely identify a provider, any
+of the following: \code{npi}, \code{pac}, \code{ccn}.}
 
-\item{pac}{\verb{<int>} Unique 10-digit Provider Associate-level Control ID (PAC),
-assigned to each individual or organization in PECOS. The PAC ID links all
-entity-level information (e.g., tax identification numbers and
-organizational names) and may be associated with multiple enrollment IDs if
-the individual or organization enrolled multiple times under different
-circumstances.}
+\item{name}{\verb{<list>} Individual provider's name(s), any of the following:
+\code{first}, \code{middle}, \code{last}, \code{suffix}}
 
-\item{first, middle, last}{\verb{<chr>} Individual provider's name(s)}
-
-\item{type}{\verb{<chr>} Type of facility, one of the following:
+\item{facility_type}{\verb{<chr>} type of facility:
 \itemize{
-\item \code{"hp"} = Hospital
-\item \code{"lt"} = Long-term care hospital
-\item \code{"nh"} = Nursing home
-\item \code{"irf"} = Inpatient rehabilitation facility
-\item \code{"hha"} = Home health agency
-\item \code{"snf"} = Skilled nursing facility
-\item \code{"hs"} = Hospice
-\item \code{"df"} = Dialysis facility
+\item \code{"hp"} Hospital
+\item \code{"lt"} Long-Term Care Hospital
+\item \code{"nh"} Nursing Home
+\item \code{"irf"} Inpatient Rehabilitation Facility
+\item \code{"hha"} Home Health Agency
+\item \code{"snf"} Skilled Nursing Facility
+\item \code{"hs"} Hospice
+\item \code{"df"} Dialysis Facility
 }}
-
-\item{ccn_unit}{\verb{<chr>} 6-digit CCN of facility or unit within hospital
-where an individual provider provides service.}
-
-\item{ccn_parent}{\verb{<int>} 6-digit CCN of a sub-unit's
-primary hospital, should the provider provide services in said unit.}
-
-\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
 
 \item{...}{Empty dots}
 }
@@ -65,12 +45,10 @@ providers' facility affiliations
 \item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
 }
-
-\emph{Update Frequency:} \strong{Monthly}
 }
 
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-affiliations(parent_ccn = 670055)
+affiliations(id = list(ccn = 670055))
 \dontshow{\}) # examplesIf}
 }

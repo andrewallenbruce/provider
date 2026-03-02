@@ -142,10 +142,6 @@ utils::globalVariables(c(
   "entity_type",
   # <nppes>
   "ep",
-  # <affiliations>
-  "facility_ccn",
-  # <affiliations>
-  "facility_type",
   # <quality_eligibility>
   "first_approved_date",
   # <hospitals>
@@ -225,9 +221,6 @@ utils::globalVariables(c(
   "npi",
   # <quality_eligibility>
   "npi_type",
-  # <affiliations>
-  # <open_payments>
-  "offset",
   # <nppes>
   "on",
   # <quality_payment>
@@ -251,8 +244,6 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
-  # <affiliations>
-  "parent_ccn",
   # <quality_pay2>
   "participation_option",
   # <quality_payment>
@@ -369,7 +360,6 @@ utils::globalVariables(c(
   "value",
   # <abb2full>
   "x",
-  # <affiliations>
   # <clinicians>
   # <hospitals>
   # <laboratories>
