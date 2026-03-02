@@ -59,9 +59,8 @@ affiliations(pac = 7810891009) |>
   opt_all_caps()
 ```
 
-    #> Error in `pull()`:
-    #> Caused by error:
-    #> ! object 'facility_ccn' not found
+    #> Error in `affiliations()`:
+    #> ! unused argument (pac = 7810891009)
 
   
 
@@ -115,30 +114,8 @@ affiliations(facility_ccn = 331302) |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-|          | npi        | ind_pac_id | provider_last_name | provider_first_name | provider_middle_name | suff | facility_type      | facility_affiliations_certification_number | facility_type_certification_number |
-|----------|------------|------------|--------------------|---------------------|----------------------|------|--------------------|--------------------------------------------|------------------------------------|
-| 1        | 1003000126 | 7517003643 | ENKESHAFI          | ARDALAN             |                      |      | Hospital           | 090012                                     |                                    |
-| 2        | 1003000142 | 9931380672 | KHALIL             | RASHID              |                      |      | Hospital           | 360112                                     |                                    |
-| 3        | 1003000423 | 9133397268 | VELOTTA            | JENNIFER            | A                    |      | Hospital           | 360098                                     |                                    |
-| 4        | 1003000480 | 0446348254 | ROTHCHILD          | KEVIN               | B                    |      | Hospital           | 060024                                     |                                    |
-| 5        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Home health agency | 397791                                     |                                    |
-| 6        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390035                                     |                                    |
-| 7        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390049                                     |                                    |
-| 8        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390057                                     |                                    |
-| 9        | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370001                                     |                                    |
-| 10       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370202                                     |                                    |
-| 11       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370057                                     |                                    |
-| 12       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370183                                     |                                    |
-| 13       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370099                                     |                                    |
-| 14       | 1003000639 | 8527252766 | BENHARASH          | PEYMAN              |                      |      | Hospital           | 050262                                     |                                    |
-| 15       | 1003000704 | 2365611035 | GATTON             | ZACHARY             | M                    |      | Hospital           | 360040                                     |                                    |
-| 16       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Home health agency | 157152                                     |                                    |
-| 17       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospice            | 151605                                     |                                    |
-| 18       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospital           | 150044                                     |                                    |
-| 19       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospital           | 150009                                     |                                    |
-| 20       | 1003000936 | 9739278128 | STELLINGWORTH      | MARK                |                      |      | Hospital           | 420010                                     |                                    |
-| 21..1499 |            |            |                    |                     |                      |      |                    |                                            |                                    |
-| 1500     | 1003068024 | 2860555471 | JOSEPH             | JOSELYN             |                      |      | Nursing home       | 14Z316                                     | 141316                             |
+    #> Error in `affiliations()`:
+    #> ! unused argument (facility_ccn = 331302)
 
   
 
@@ -151,20 +128,8 @@ affiliations(facility_ccn = "33Z302") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-|          | npi        | ind_pac_id | provider_last_name | provider_first_name | provider_middle_name | suff | facility_type      | facility_affiliations_certification_number | facility_type_certification_number |
-|----------|------------|------------|--------------------|---------------------|----------------------|------|--------------------|--------------------------------------------|------------------------------------|
-| 1        | 1003000126 | 7517003643 | ENKESHAFI          | ARDALAN             |                      |      | Hospital           | 090012                                     |                                    |
-| 2        | 1003000142 | 9931380672 | KHALIL             | RASHID              |                      |      | Hospital           | 360112                                     |                                    |
-| 3        | 1003000423 | 9133397268 | VELOTTA            | JENNIFER            | A                    |      | Hospital           | 360098                                     |                                    |
-| 4        | 1003000480 | 0446348254 | ROTHCHILD          | KEVIN               | B                    |      | Hospital           | 060024                                     |                                    |
-| 5        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Home health agency | 397791                                     |                                    |
-| 6        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390035                                     |                                    |
-| 7        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390049                                     |                                    |
-| 8        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390057                                     |                                    |
-| 9        | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370001                                     |                                    |
-| 10       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370202                                     |                                    |
-| 11..1499 |            |            |                    |                     |                      |      |                    |                                            |                                    |
-| 1500     | 1003068024 | 2860555471 | JOSEPH             | JOSELYN             |                      |      | Nursing home       | 14Z316                                     | 141316                             |
+    #> Error in `affiliations()`:
+    #> ! unused argument (facility_ccn = "33Z302")
 
   
 

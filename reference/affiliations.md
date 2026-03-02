@@ -8,9 +8,8 @@ facility affiliations
 ``` r
 affiliations(
   id = list(npi = NULL, pac = NULL, ccn = NULL),
-  name = list(first = NULL, middle = NULL, last = NULL, suff = NULL),
-  facility_type = NULL,
-  ...
+  name = list(first = NULL, middle = NULL, last = NULL, suffix = NULL),
+  facility_type = NULL
 )
 ```
 
@@ -46,10 +45,6 @@ affiliations(
 
   - `"df"` Dialysis Facility
 
-- ...:
-
-  Empty dots
-
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -67,6 +62,7 @@ containing the search results.
 
 ``` r
 if (FALSE) { # interactive()
-affiliations(id = list(ccn = 670055))
+affiliations(id = list(ccn = c(670055, 331302, "33Z302")))
+affiliations(id = list(pac = 7810891009))
 }
 ```

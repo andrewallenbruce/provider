@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9005 (2026-03-02)
+
+- [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
+  refinement
+
 ## provider 0.0.1.9004 (2026-03-02)
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
@@ -61,9 +66,9 @@
 - test fixes
 - added dint::as_y() class for year cols
 
-## provider (development version)
-
 ## provider 0.0.1
+
+- first version release
 
 ## provider 0.0.0.9010 (2023-02-08)
 

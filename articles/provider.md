@@ -196,23 +196,8 @@ pending(npi = 001234569123, type = "P")
 ``` r
 # Must be 10 digits long
 affiliations(pac = 0123456789)
-#> # A tibble: 1,500 × 9
-#>    npi    ind_pac_id provider_last_name provider_first_name provider_middle_name
-#>    <chr>  <chr>      <chr>              <chr>               <chr>               
-#>  1 10030… 7517003643 ENKESHAFI          ARDALAN             ""                  
-#>  2 10030… 9931380672 KHALIL             RASHID              ""                  
-#>  3 10030… 9133397268 VELOTTA            JENNIFER            "A"                 
-#>  4 10030… 0446348254 ROTHCHILD          KEVIN               "B"                 
-#>  5 10030… 2163575663 SEMONCHE           AMANDA              "M"                 
-#>  6 10030… 2163575663 SEMONCHE           AMANDA              "M"                 
-#>  7 10030… 2163575663 SEMONCHE           AMANDA              "M"                 
-#>  8 10030… 2163575663 SEMONCHE           AMANDA              "M"                 
-#>  9 10030… 4082848189 KIM                DAE                 ""                  
-#> 10 10030… 4082848189 KIM                DAE                 ""                  
-#> # ℹ 1,490 more rows
-#> # ℹ 4 more variables: suff <chr>, facility_type <chr>,
-#> #   facility_affiliations_certification_number <chr>,
-#> #   facility_type_certification_number <chr>
+#> Error in `affiliations()`:
+#> ! unused argument (pac = 123456789)
 
 # Must be numeric
 hospitals(pac_org = "O12345678912")
