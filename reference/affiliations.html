@@ -9,7 +9,7 @@ providers' facility affiliations"><meta property="og:image" content="https://and
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,15 +64,9 @@ providers' facility affiliations</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">affiliations</span><span class="op">(</span></span>
-<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ccn_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ccn_parent <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, pac <span class="op">=</span> <span class="cn">NULL</span>, ccn <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="cn">NULL</span>, middle <span class="op">=</span> <span class="cn">NULL</span>, last <span class="op">=</span> <span class="cn">NULL</span>, suff <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  facility_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -81,48 +75,26 @@ providers' facility affiliations</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Unique 10-digit National Provider Identifier number issued
-by CMS to US healthcare providers through NPPES.</p></dd>
+<dl><dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
+<dd><p><code>&lt;list&gt;</code> List of parameters that uniquely identify a provider, any
+of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
 
 
-<dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Unique 10-digit Provider Associate-level Control ID (PAC),
-assigned to each individual or organization in PECOS. The PAC ID links all
-entity-level information (e.g., tax identification numbers and
-organizational names) and may be associated with multiple enrollment IDs if
-the individual or organization enrolled multiple times under different
-circumstances.</p></dd>
+<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
+<dd><p><code>&lt;list&gt;</code> Individual provider's name(s), any of the following:
+<code>first</code>, <code>middle</code>, <code>last</code>, <code>suffix</code></p></dd>
 
 
-<dt id="arg-first-middle-last">first, middle, last<a class="anchor" aria-label="anchor" href="#arg-first-middle-last"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Individual provider's name(s)</p></dd>
-
-
-<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Type of facility, one of the following:</p><ul><li><p><code>"hp"</code> = Hospital</p></li>
-<li><p><code>"lt"</code> = Long-term care hospital</p></li>
-<li><p><code>"nh"</code> = Nursing home</p></li>
-<li><p><code>"irf"</code> = Inpatient rehabilitation facility</p></li>
-<li><p><code>"hha"</code> = Home health agency</p></li>
-<li><p><code>"snf"</code> = Skilled nursing facility</p></li>
-<li><p><code>"hs"</code> = Hospice</p></li>
-<li><p><code>"df"</code> = Dialysis facility</p></li>
+<dt id="arg-facility-type">facility_type<a class="anchor" aria-label="anchor" href="#arg-facility-type"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> type of facility:</p><ul><li><p><code>"hp"</code> Hospital</p></li>
+<li><p><code>"lt"</code> Long-Term Care Hospital</p></li>
+<li><p><code>"nh"</code> Nursing Home</p></li>
+<li><p><code>"irf"</code> Inpatient Rehabilitation Facility</p></li>
+<li><p><code>"hha"</code> Home Health Agency</p></li>
+<li><p><code>"snf"</code> Skilled Nursing Facility</p></li>
+<li><p><code>"hs"</code> Hospice</p></li>
+<li><p><code>"df"</code> Dialysis Facility</p></li>
 </ul></dd>
-
-
-<dt id="arg-ccn-unit">ccn_unit<a class="anchor" aria-label="anchor" href="#arg-ccn-unit"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 6-digit CCN of facility or unit within hospital
-where an individual provider provides service.</p></dd>
-
-
-<dt id="arg-ccn-parent">ccn_parent<a class="anchor" aria-label="anchor" href="#arg-ccn-parent"></a></dt>
-<dd><p><code>&lt;int&gt;</code> 6-digit CCN of a sub-unit's
-primary hospital, should the provider provide services in said unit.</p></dd>
-
-
-<dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Tidy output; <strong>default</strong> is <code>TRUE</code></p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -139,13 +111,12 @@ primary hospital, should the provider provide services in said unit.</p></dd>
 
 <ul><li><p><a href="https://data.cms.gov/provider-data/dataset/27ea-46a8" class="external-link">Physician Facility Affiliations</a></p></li>
 <li><p><a href="https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf" class="external-link">Certification Number (CCN) State Codes</a></p></li>
-</ul><p><em>Update Frequency:</em> <strong>Monthly</strong></p>
-    </div>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

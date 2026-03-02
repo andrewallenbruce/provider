@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,9 +141,9 @@
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">example</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH 85befae DN-- 2 2 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH b5ebd2f DN-- 2 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), x (v/n), y (v/n), label (e/c)</span></span>
-<span><span class="co">#&gt; + edges from 85befae (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from b5ebd2f (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Individual  -&gt;Organization Organization-&gt;Individual</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">example</span>, layout <span class="op">=</span> <span class="st">"manual"</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
@@ -180,16 +180,16 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 3</span></span></span>
 <span><span class="co">#&gt;    provider          organization                                  reassignments</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;glue&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> JONATHAN WILLIAMS Emergency Coverage                                      364</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         247</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           165</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  144</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> JONATHAN WILLIAMS Southland Consolidated Emergency Services               143</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> JONATHAN WILLIAMS Crisp Regional Hospital                                 123</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> JONATHAN WILLIAMS Union County Hospital Authority                         106</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> JONATHAN WILLIAMS Clinch County Hospital Authority                        104</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> JONATHAN WILLIAMS Sgmp Southland                                          100</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> JONATHAN WILLIAMS Southland Emergency Medical Services                     87</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> JONATHAN WILLIAMS Emergency Coverage                                      332</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         241</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           145</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  124</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> JONATHAN WILLIAMS Southland Consolidated Emergency Services               122</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> JONATHAN WILLIAMS Crisp Regional Hospital                                 117</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> JONATHAN WILLIAMS Union County Hospital Authority                         100</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> JONATHAN WILLIAMS Clinch County Hospital Authority                         93</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> JONATHAN WILLIAMS Sgmp Southland                                           93</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> JONATHAN WILLIAMS Hospitalist Medicine Physicians Of GeorgiaTcg            69</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 24 more rows</span></span></span></code></pre>
 </div>
 <div class="section level2">
@@ -200,7 +200,7 @@
 <code class="sourceCode R"><span><span class="va">will_tdgrph</span> <span class="op">&lt;-</span> <span class="fu">tidygraph</span><span class="fu">::</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html" class="external-link">as_tbl_graph</a></span><span class="op">(</span><span class="va">williams</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">will_tdgrph</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; IGRAPH bfc2c14 UN-- 34 34 -- </span></span>
+<pre><code><span><span class="co">#&gt; IGRAPH c85acd2 UN-- 34 34 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), reassignments (e/n)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">will_tdgrph</span></span></code></pre></div>
@@ -226,9 +226,9 @@
 <span><span class="co"><span style="color: #949494;">#&gt; # Edge Data: 34 × 3</span></span></span>
 <span><span class="co">#&gt;    from    to reassignments</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     2           364</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     3           247</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     4           165</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1     2           332</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1     3           241</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1     4           145</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 31 more rows</span></span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">will_tdgrph</span>, <span class="st">"stress"</span><span class="op">)</span> <span class="op">+</span> </span>

@@ -53,9 +53,9 @@ example <- graph_from_data_frame(
 example
 ```
 
-    #> IGRAPH 85befae DN-- 2 2 -- 
+    #> IGRAPH b5ebd2f DN-- 2 2 -- 
     #> + attr: name (v/c), x (v/n), y (v/n), label (e/c)
-    #> + edges from 85befae (vertex names):
+    #> + edges from b5ebd2f (vertex names):
     #> [1] Individual  ->Organization Organization->Individual
 
 ``` r
@@ -96,16 +96,16 @@ williams
     #> # A tibble: 34 × 3
     #>    provider          organization                                  reassignments
     #>    <glue>            <chr>                                                 <int>
-    #>  1 JONATHAN WILLIAMS Emergency Coverage                                      364
-    #>  2 JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         247
-    #>  3 JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           165
-    #>  4 JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  144
-    #>  5 JONATHAN WILLIAMS Southland Consolidated Emergency Services               143
-    #>  6 JONATHAN WILLIAMS Crisp Regional Hospital                                 123
-    #>  7 JONATHAN WILLIAMS Union County Hospital Authority                         106
-    #>  8 JONATHAN WILLIAMS Clinch County Hospital Authority                        104
-    #>  9 JONATHAN WILLIAMS Sgmp Southland                                          100
-    #> 10 JONATHAN WILLIAMS Southland Emergency Medical Services                     87
+    #>  1 JONATHAN WILLIAMS Emergency Coverage                                      332
+    #>  2 JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         241
+    #>  3 JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           145
+    #>  4 JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  124
+    #>  5 JONATHAN WILLIAMS Southland Consolidated Emergency Services               122
+    #>  6 JONATHAN WILLIAMS Crisp Regional Hospital                                 117
+    #>  7 JONATHAN WILLIAMS Union County Hospital Authority                         100
+    #>  8 JONATHAN WILLIAMS Clinch County Hospital Authority                         93
+    #>  9 JONATHAN WILLIAMS Sgmp Southland                                           93
+    #> 10 JONATHAN WILLIAMS Hospitalist Medicine Physicians Of GeorgiaTcg            69
     #> # ℹ 24 more rows
 
 ## `{tidygraph}`
@@ -116,7 +116,7 @@ will_tdgrph <- tidygraph::as_tbl_graph(williams, directed = FALSE)
 summary(will_tdgrph)
 ```
 
-    #> IGRAPH bfc2c14 UN-- 34 34 -- 
+    #> IGRAPH c85acd2 UN-- 34 34 -- 
     #> + attr: name (v/c), reassignments (e/n)
 
 ``` r
@@ -145,9 +145,9 @@ will_tdgrph
     #> # Edge Data: 34 × 3
     #>    from    to reassignments
     #>   <int> <int>         <int>
-    #> 1     1     2           364
-    #> 2     1     3           247
-    #> 3     1     4           165
+    #> 1     1     2           332
+    #> 2     1     3           241
+    #> 3     1     4           145
     #> # ℹ 31 more rows
 
 ``` r

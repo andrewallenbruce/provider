@@ -33,10 +33,9 @@ vctrs::vec_rbind(
   opt_all_caps()
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `gender = fct_gen(gender)`.
-    #> Caused by error:
-    #> ! `gender` must be size 1, not 0.
+    #> Error in `httr2::req_perform()`:
+    #> ! HTTP 400 Bad Request.
+    #> ℹ Invalid query string.
 
   
 
@@ -60,8 +59,9 @@ affiliations(pac = 7810891009) |>
   opt_all_caps()
 ```
 
-    #> Error in `UseMethod()`:
-    #> ! no applicable method for 'unnest' applied to an object of class "function"
+    #> Error in `pull()`:
+    #> Caused by error:
+    #> ! object 'facility_ccn' not found
 
   
 
@@ -75,10 +75,17 @@ providers(organization = "Elizabethtown Community Hospital") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `gender = fct_gen(gender)`.
-    #> Caused by error:
-    #> ! `gender` must be size 9 or 1, not 0.
+|     | npi        | pac        | enid            | specialty_code | specialty_description                        | state | organization                     |
+|-----|------------|------------|-----------------|----------------|----------------------------------------------|-------|----------------------------------|
+| 1   | 1053656744 | 3577554138 | O20040521000534 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | NY    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 2   | 1891785184 | 3577554138 | O20101110000259 | 00-85          | PART A PROVIDER - CRITICAL ACCESS HOSPITAL   | NY    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 3   | 1487923637 | 3577554138 | O20190719002511 | 12-59          | PART B SUPPLIER - AMBULANCE SERVICE SUPPLIER | NY    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 4   | 1407061591 | 3577554138 | O20220827000145 | 00-85          | PART A PROVIDER - CRITICAL ACCESS HOSPITAL   | NY    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 5   | 1053656744 | 3577554138 | O20240508002551 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | CT    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 6   | 1053656744 | 3577554138 | O20240509001572 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | FL    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 7   | 1053656744 | 3577554138 | O20240515002137 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | VT    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 8   | 1053656744 | 3577554138 | O20250909000919 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | NH    | ELIZABETHTOWN COMMUNITY HOSPITAL |
+| 9   | 1053656744 | 3577554138 | O20250912004448 | 12-70          | PART B SUPPLIER - CLINIC/GROUP PRACTICE      | CO    | ELIZABETHTOWN COMMUNITY HOSPITAL |
 
 ``` r
 hospitals(organization = "Elizabethtown Community Hospital") |> 
@@ -108,8 +115,30 @@ affiliations(facility_ccn = 331302) |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `UseMethod()`:
-    #> ! no applicable method for 'unnest' applied to an object of class "function"
+|          | npi        | ind_pac_id | provider_last_name | provider_first_name | provider_middle_name | suff | facility_type      | facility_affiliations_certification_number | facility_type_certification_number |
+|----------|------------|------------|--------------------|---------------------|----------------------|------|--------------------|--------------------------------------------|------------------------------------|
+| 1        | 1003000126 | 7517003643 | ENKESHAFI          | ARDALAN             |                      |      | Hospital           | 090012                                     |                                    |
+| 2        | 1003000142 | 9931380672 | KHALIL             | RASHID              |                      |      | Hospital           | 360112                                     |                                    |
+| 3        | 1003000423 | 9133397268 | VELOTTA            | JENNIFER            | A                    |      | Hospital           | 360098                                     |                                    |
+| 4        | 1003000480 | 0446348254 | ROTHCHILD          | KEVIN               | B                    |      | Hospital           | 060024                                     |                                    |
+| 5        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Home health agency | 397791                                     |                                    |
+| 6        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390035                                     |                                    |
+| 7        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390049                                     |                                    |
+| 8        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390057                                     |                                    |
+| 9        | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370001                                     |                                    |
+| 10       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370202                                     |                                    |
+| 11       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370057                                     |                                    |
+| 12       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370183                                     |                                    |
+| 13       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370099                                     |                                    |
+| 14       | 1003000639 | 8527252766 | BENHARASH          | PEYMAN              |                      |      | Hospital           | 050262                                     |                                    |
+| 15       | 1003000704 | 2365611035 | GATTON             | ZACHARY             | M                    |      | Hospital           | 360040                                     |                                    |
+| 16       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Home health agency | 157152                                     |                                    |
+| 17       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospice            | 151605                                     |                                    |
+| 18       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospital           | 150044                                     |                                    |
+| 19       | 1003000902 | 1153415187 | LOHANO             | JAIVANTI            |                      |      | Hospital           | 150009                                     |                                    |
+| 20       | 1003000936 | 9739278128 | STELLINGWORTH      | MARK                |                      |      | Hospital           | 420010                                     |                                    |
+| 21..1499 |            |            |                    |                     |                      |      |                    |                                            |                                    |
+| 1500     | 1003068024 | 2860555471 | JOSEPH             | JOSELYN             |                      |      | Nursing home       | 14Z316                                     | 141316                             |
 
   
 
@@ -122,8 +151,20 @@ affiliations(facility_ccn = "33Z302") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `UseMethod()`:
-    #> ! no applicable method for 'unnest' applied to an object of class "function"
+|          | npi        | ind_pac_id | provider_last_name | provider_first_name | provider_middle_name | suff | facility_type      | facility_affiliations_certification_number | facility_type_certification_number |
+|----------|------------|------------|--------------------|---------------------|----------------------|------|--------------------|--------------------------------------------|------------------------------------|
+| 1        | 1003000126 | 7517003643 | ENKESHAFI          | ARDALAN             |                      |      | Hospital           | 090012                                     |                                    |
+| 2        | 1003000142 | 9931380672 | KHALIL             | RASHID              |                      |      | Hospital           | 360112                                     |                                    |
+| 3        | 1003000423 | 9133397268 | VELOTTA            | JENNIFER            | A                    |      | Hospital           | 360098                                     |                                    |
+| 4        | 1003000480 | 0446348254 | ROTHCHILD          | KEVIN               | B                    |      | Hospital           | 060024                                     |                                    |
+| 5        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Home health agency | 397791                                     |                                    |
+| 6        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390035                                     |                                    |
+| 7        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390049                                     |                                    |
+| 8        | 1003000530 | 2163575663 | SEMONCHE           | AMANDA              | M                    |      | Hospital           | 390057                                     |                                    |
+| 9        | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370001                                     |                                    |
+| 10       | 1003000597 | 4082848189 | KIM                | DAE                 |                      |      | Hospital           | 370202                                     |                                    |
+| 11..1499 |            |            |                    |                     |                      |      |                    |                                            |                                    |
+| 1500     | 1003068024 | 2860555471 | JOSEPH             | JOSELYN             |                      |      | Nursing home       | 14Z316                                     | 141316                             |
 
   
 

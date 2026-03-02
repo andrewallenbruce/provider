@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9004 (2026-03-02)
+
+- [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
+  refactoring
+
 ## provider 0.0.1.9003 (2026-02-26)
 
 - fixed bug in internal `format_param()`

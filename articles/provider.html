@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -269,8 +269,23 @@ under different circumstances.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `UseMethod()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no applicable method for 'unnest' applied to an object of class "function"</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,500 × 9</span></span></span>
+<span><span class="co">#&gt;    npi    ind_pac_id provider_last_name provider_first_name provider_middle_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030… 7517003643 ENKESHAFI          ARDALAN             <span style="color: #949494;">""</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030… 9931380672 KHALIL             RASHID              <span style="color: #949494;">""</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030… 9133397268 VELOTTA            JENNIFER            <span style="color: #949494;">"</span>A<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030… 0446348254 ROTHCHILD          KEVIN               <span style="color: #949494;">"</span>B<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 10030… 2163575663 SEMONCHE           AMANDA              <span style="color: #949494;">"</span>M<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 10030… 2163575663 SEMONCHE           AMANDA              <span style="color: #949494;">"</span>M<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 10030… 2163575663 SEMONCHE           AMANDA              <span style="color: #949494;">"</span>M<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 10030… 2163575663 SEMONCHE           AMANDA              <span style="color: #949494;">"</span>M<span style="color: #949494;">"</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10030… 4082848189 KIM                DAE                 <span style="color: #949494;">""</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10030… 4082848189 KIM                DAE                 <span style="color: #949494;">""</span>                  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: suff &lt;chr&gt;, facility_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   facility_affiliations_certification_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   facility_type_certification_number &lt;chr&gt;</span></span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
