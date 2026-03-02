@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9004 (2026-03-02)
+
+* `affiliations()` refactoring
+
+
 # provider 0.0.1.9003 (2026-02-26)
 
 * fixed bug in internal `format_param()`
