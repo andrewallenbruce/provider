@@ -1,4 +1,14 @@
 #' @noRd
+has_letter <- function(x) {
+  grepl("[A-Z]", x, ignore.case = TRUE, perl = TRUE)
+}
+
+#' @noRd
+is_numeric <- function(x) {
+  !has_letter(x)
+}
+
+#' @noRd
 search_in <- function(x, column, what) {
   if (is.null(what)) {
     return(x)

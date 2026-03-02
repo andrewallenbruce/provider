@@ -6,9 +6,8 @@
 \usage{
 affiliations(
   id = list(npi = NULL, pac = NULL, ccn = NULL),
-  name = list(first = NULL, middle = NULL, last = NULL, suff = NULL),
-  facility_type = NULL,
-  ...
+  name = list(first = NULL, middle = NULL, last = NULL, suffix = NULL),
+  facility_type = NULL
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ of the following: \code{npi}, \code{pac}, \code{ccn}.}
 \item \code{"hs"} Hospice
 \item \code{"df"} Dialysis Facility
 }}
-
-\item{...}{Empty dots}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -49,6 +46,7 @@ providers' facility affiliations
 
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-affiliations(id = list(ccn = 670055))
+affiliations(id = list(ccn = c(670055, 331302, "33Z302")))
+affiliations(id = list(pac = 7810891009))
 \dontshow{\}) # examplesIf}
 }

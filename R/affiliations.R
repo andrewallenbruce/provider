@@ -28,23 +28,20 @@
 #'    * `"snf"` Skilled Nursing Facility
 #'    * `"hs"` Hospice
 #'    * `"df"` Dialysis Facility
-#'
-#' @template args-dots
 #' @template returns
 #' @examplesIf interactive()
-#' affiliations(id = list(ccn = 670055))
-#'
+#' affiliations(id = list(ccn = c(670055, 331302, "33Z302")))
+#' affiliations(id = list(pac = 7810891009))
 #' @autoglobal
 #' @export
 affiliations <- function(
   id = list(npi = NULL, pac = NULL, ccn = NULL),
-  name = list(first = NULL, middle = NULL, last = NULL, suff = NULL),
-  facility_type = NULL,
-  ...
+  name = list(first = NULL, middle = NULL, last = NULL, suffix = NULL),
+  facility_type = NULL
 ) {
   # TODO simplify step
   if (!is.null(facility_type)) {
-    enum <- list(
+    facility_enum <- list(
       hp = "Hospital",
       lt = "Long-term care hospital",
       nh = "Nursing home",
@@ -57,10 +54,10 @@ affiliations <- function(
 
     facility_type <- rlang::arg_match(
       facility_type,
-      names(enum),
+      names(facility_enum),
       multiple = TRUE
     )
-    facility_type <- unlist_(enum[facility_type])
+    facility_type <- unlist_(facility_enum[facility_type])
   }
 
   args <- purrr::compact(list(
@@ -69,10 +66,10 @@ affiliations <- function(
     provider_last_name = name$last,
     provider_first_name = name$first,
     provider_middle_name = name$middle,
+    suff = name$suffix,
     facility_type = facility_type,
-    # TODO resolve unit vs parent
-    facility_affiliations_certification_number = id$ccn,
-    facility_type_certification_number = id$ccn
+    facility_affiliations_certification_number = id$ccn[has_letter(id$ccn)],
+    facility_type_certification_number = id$ccn[is_numeric(id$ccn)]
   ))
 
   query <- flatten_query(args)
@@ -113,11 +110,26 @@ affiliations <- function(
   req <- httr2::request(url) |>
     httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message)
 
-  req |>
+  res <- req |>
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE) |>
     _$results |>
     fastplyr::as_tbl()
+
+  rlang::set_names(
+    res,
+    c(
+      "npi",
+      "pac",
+      "first",
+      "middle",
+      "last",
+      "suffix",
+      "facility_type",
+      "parent_ccn",
+      "facility_ccn"
+    )
+  )
 }
 
 #' @autoglobal
@@ -137,23 +149,4 @@ get_pro_api <- function() {
       next_release = nextUpdateDate
     ) |>
     fastplyr::as_tbl()
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_aff <- function(df) {
-  cols <- c(
-    "npi",
-    "pac" = "ind_pac_id",
-    "first" = "provider_first_name",
-    "middle" = "provider_middle_name",
-    "last" = "provider_last_name",
-    "suffix" = "suff",
-    "facility_type",
-    "facility_ccn" = "facility_affiliations_certification_number",
-    "parent_ccn" = "facility_type_certification_number"
-  )
-
-  df |> dplyr::select(dplyr::any_of(cols))
 }
