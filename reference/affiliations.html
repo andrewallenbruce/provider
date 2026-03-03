@@ -9,7 +9,7 @@ providers' facility affiliations"><meta property="og:image" content="https://and
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,8 +64,14 @@ providers' facility affiliations</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">affiliations</span><span class="op">(</span></span>
-<span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, pac <span class="op">=</span> <span class="cn">NULL</span>, ccn <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
-<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="cn">NULL</span>, middle <span class="op">=</span> <span class="cn">NULL</span>, last <span class="op">=</span> <span class="cn">NULL</span>, suffix <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn_facility <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn_parent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  suffix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_type <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -74,14 +80,36 @@ providers' facility affiliations</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
-<dd><p><code>&lt;list&gt;</code> List of parameters that uniquely identify a provider, any
-of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
+<dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
+<dd><p><code>&lt;int&gt;</code> Unique clinician ID assigned by NPPES</p></dd>
 
 
-<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p><code>&lt;list&gt;</code> Individual provider's name(s), any of the following:
-<code>first</code>, <code>middle</code>, <code>last</code>, <code>suffix</code></p></dd>
+<dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Unique individual clinician ID assigned by PECOS</p></dd>
+
+
+<dt id="arg-ccn-facility">ccn_facility<a class="anchor" aria-label="anchor" href="#arg-ccn-facility"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare CCN of facility type or unit within hospital where an individual clinician provides service</p></dd>
+
+
+<dt id="arg-ccn-parent">ccn_parent<a class="anchor" aria-label="anchor" href="#arg-ccn-parent"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital</p></dd>
+
+
+<dt id="arg-first">first<a class="anchor" aria-label="anchor" href="#arg-first"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Individual clinician first name</p></dd>
+
+
+<dt id="arg-middle">middle<a class="anchor" aria-label="anchor" href="#arg-middle"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Individual clinician middle name</p></dd>
+
+
+<dt id="arg-last">last<a class="anchor" aria-label="anchor" href="#arg-last"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Individual clinician last name</p></dd>
+
+
+<dt id="arg-suffix">suffix<a class="anchor" aria-label="anchor" href="#arg-suffix"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Individual clinician suffix</p></dd>
 
 
 <dt id="arg-facility-type">facility_type<a class="anchor" aria-label="anchor" href="#arg-facility-type"></a></dt>
@@ -110,7 +138,7 @@ of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">331302</span>, <span class="st">"33Z302"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>ccn_facility <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 5 results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
@@ -120,7 +148,19 @@ of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1538173… 0547… CHON  IL     <span style="color: #949494;">"</span>JUN<span style="color: #949494;">"</span> <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1558659… 6709… BANU  DRAGOS <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1760167… 8123… WARN… JOSHUA <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>ccn_parent <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 5 results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1073258… 3870… KLOTZ JEFFR… <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1396989… 8921… HALL… MARY   <span style="color: #949494;">"</span>K<span style="color: #949494;">"</span>   <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1538173… 0547… CHON  IL     <span style="color: #949494;">"</span>JUN<span style="color: #949494;">"</span> <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1558659… 6709… BANU  DRAGOS <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1760167… 8123… WARN… JOSHUA <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 5 results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
@@ -130,7 +170,8 @@ of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      331321     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      470001     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      471307     <span style="color: #949494;">""</span>          </span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"KIM"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"KIM"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 703 results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 703 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    npi     pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
@@ -146,6 +187,7 @@ of the following: <code>npi</code>, <code>pac</code>, <code>ccn</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 101307… 0547… WRIG… KIM    C     <span style="color: #949494;">""</span>     Hospital      140185     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 101309… 1254… CARL… KIM    M     <span style="color: #949494;">""</span>     Hospital      030007     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 693 more rows</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

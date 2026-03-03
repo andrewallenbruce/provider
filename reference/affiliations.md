@@ -7,23 +7,54 @@ facility affiliations
 
 ``` r
 affiliations(
-  id = list(npi = NULL, pac = NULL, ccn = NULL),
-  name = list(first = NULL, middle = NULL, last = NULL, suffix = NULL),
+  npi = NULL,
+  pac = NULL,
+  ccn_facility = NULL,
+  ccn_parent = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  suffix = NULL,
   facility_type = NULL
 )
 ```
 
 ## Arguments
 
-- id:
+- npi:
 
-  `<list>` List of parameters that uniquely identify a provider, any of
-  the following: `npi`, `pac`, `ccn`.
+  `<int>` Unique clinician ID assigned by NPPES
 
-- name:
+- pac:
 
-  `<list>` Individual provider's name(s), any of the following: `first`,
-  `middle`, `last`, `suffix`
+  `<chr>` Unique individual clinician ID assigned by PECOS
+
+- ccn_facility:
+
+  `<chr>` Medicare CCN of facility type or unit within hospital where an
+  individual clinician provides service
+
+- ccn_parent:
+
+  `<chr>` Medicare CCN of the primary hospital where individual
+  clinician provides service, should the clinician provide services in a
+  unit within the hospital
+
+- first:
+
+  `<chr>` Individual clinician first name
+
+- middle:
+
+  `<chr>` Individual clinician middle name
+
+- last:
+
+  `<chr>` Individual clinician last name
+
+- suffix:
+
+  `<chr>` Individual clinician suffix
 
 - facility_type:
 
@@ -61,7 +92,7 @@ containing the search results.
 ## Examples
 
 ``` r
-affiliations(id = list(ccn = c(331302, "33Z302")))
+affiliations(ccn_facility = "33Z302")
 #> ✔ Query returning 5 results.
 #> # A tibble: 5 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
@@ -71,7 +102,19 @@ affiliations(id = list(ccn = c(331302, "33Z302")))
 #> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
 #> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
 #> 5 1760167… 8123… WARN… JOSHUA ""    ""     Nursing home  33Z302     331302      
-affiliations(id = list(pac = 7810891009))
+
+affiliations(ccn_parent = 331302)
+#> ✔ Query returning 5 results.
+#> # A tibble: 5 × 9
+#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
+#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
+#> 1 1073258… 3870… KLOTZ JEFFR… ""    ""     Nursing home  33Z302     331302      
+#> 2 1396989… 8921… HALL… MARY   "K"   ""     Nursing home  33Z302     331302      
+#> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
+#> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
+#> 5 1760167… 8123… WARN… JOSHUA ""    ""     Nursing home  33Z302     331302      
+
+affiliations(pac = 7810891009)
 #> ✔ Query returning 5 results.
 #> # A tibble: 5 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
@@ -81,7 +124,8 @@ affiliations(id = list(pac = 7810891009))
 #> 3 1043245… 7810… FUNG  MARK   K     ""     Hospital      331321     ""          
 #> 4 1043245… 7810… FUNG  MARK   K     ""     Hospital      470001     ""          
 #> 5 1043245… 7810… FUNG  MARK   K     ""     Hospital      471307     ""          
-affiliations(name = list(first = "KIM"))
+
+affiliations(first = "KIM")
 #> ✔ Query returning 703 results.
 #> # A tibble: 703 × 9
 #>    npi     pac   first middle last  suffix facility_type parent_ccn facility_ccn

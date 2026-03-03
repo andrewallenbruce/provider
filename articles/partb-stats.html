@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,7 +129,7 @@
 <code class="sourceCode R"><span><span class="co"># Retrieve provider's utilization data by HCPCS</span></span>
 <span><span class="va">srvc</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/utilization.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1023076643</span>, type <span class="op">=</span> <span class="st">"Service"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Future (&lt;unnamed-5&gt;) of class MultisessionFuture interrupted (pid 8922) [future &lt;unnamed-5&gt; (f9c5a31144e152110d7ea1030923fe58-5); on f9c5a31144e152110d7ea1030923fe58@runnervmnay03&lt;8852&gt; at 2026-03-03 03:00:36.54463]</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Future (&lt;unnamed-5&gt;) of class MultisessionFuture interrupted (pid 8894) [future &lt;unnamed-5&gt; (38c885692823071c03a5fdf58b1d7948-5); on 38c885692823071c03a5fdf58b1d7948@runnervmnay03&lt;8826&gt; at 2026-03-03 20:03:27.867066]</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve state &amp; national HCPCS data to compare with</span></span>
 <span><span class="va">hcpcs</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_hcpcs.html">compare_hcpcs</a></span><span class="op">(</span><span class="va">srvc</span><span class="op">)</span></span></code></pre></div>

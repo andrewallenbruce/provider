@@ -59,8 +59,9 @@ affiliations(pac = 7810891009) |>
   opt_all_caps()
 ```
 
-    #> Error in `affiliations()`:
-    #> ! unused argument (pac = 7810891009)
+    #> Error in `select()`:
+    #> ! Can't select columns that don't exist.
+    #> ✖ Column `reh_conversion` doesn't exist.
 
   
 

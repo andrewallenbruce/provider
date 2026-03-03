@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9007 (2026-03-03)
+
+- affiliations fleshing out
+
 ## provider 0.0.1.9006 (2026-03-02)
 
 - query helpers

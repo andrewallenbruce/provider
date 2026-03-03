@@ -36,7 +36,7 @@ srvc    <- utilization_(npi = 1023076643, type = "Service")
 ```
 
     #> Error:
-    #> ! Future (<unnamed-5>) of class MultisessionFuture interrupted (pid 8922) [future <unnamed-5> (f9c5a31144e152110d7ea1030923fe58-5); on f9c5a31144e152110d7ea1030923fe58@runnervmnay03<8852> at 2026-03-03 03:00:36.54463]
+    #> ! Future (<unnamed-5>) of class MultisessionFuture interrupted (pid 8894) [future <unnamed-5> (38c885692823071c03a5fdf58b1d7948-5); on 38c885692823071c03a5fdf58b1d7948@runnervmnay03<8826> at 2026-03-03 20:03:27.867066]
 
 ``` r
 # Retrieve state & national HCPCS data to compare with

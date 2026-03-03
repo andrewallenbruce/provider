@@ -196,8 +196,6 @@ pending(npi = 001234569123, type = "P")
 ``` r
 # Must be 10 digits long
 affiliations(pac = 0123456789)
-#> Error in `affiliations()`:
-#> ! unused argument (pac = 123456789)
 
 # Must be numeric
 hospitals(pac_org = "O12345678912")
