@@ -45,8 +45,7 @@ providers' facility affiliations
 }
 
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-affiliations(id = list(ccn = c(670055, 331302, "33Z302")))
+affiliations(id = list(ccn = c(331302, "33Z302")))
 affiliations(id = list(pac = 7810891009))
-\dontshow{\}) # examplesIf}
+affiliations(name = list(first = "KIM"))
 }

@@ -1,9 +1,3 @@
-# api_url <- list(
-#   care = "https://data.cms.gov/data.json",
-#   prov = "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items",
-#   open = "https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items"
-# )
-
 #' Provider Facility Affiliations
 #'
 #' @description [affiliations()] allows the user access to data concerning
@@ -29,9 +23,10 @@
 #'    * `"hs"` Hospice
 #'    * `"df"` Dialysis Facility
 #' @template returns
-#' @examplesIf interactive()
-#' affiliations(id = list(ccn = c(670055, 331302, "33Z302")))
+#' @examples
+#' affiliations(id = list(ccn = c(331302, "33Z302")))
 #' affiliations(id = list(pac = 7810891009))
+#' affiliations(name = list(first = "KIM"))
 #' @autoglobal
 #' @export
 affiliations <- function(
@@ -60,7 +55,7 @@ affiliations <- function(
     facility_type <- unlist_(facility_enum[facility_type])
   }
 
-  args <- purrr::compact(list(
+  args <- compact_list(
     npi = id$npi,
     ind_pac_id = id$pac,
     provider_last_name = name$last,
@@ -70,47 +65,39 @@ affiliations <- function(
     facility_type = facility_type,
     facility_affiliations_certification_number = id$ccn[has_letter(id$ccn)],
     facility_type_certification_number = id$ccn[is_numeric(id$ccn)]
-  ))
+  )
 
   query <- flatten_query(args)
 
-  base <- "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?"
-
-  opts <- list(
+  opts <- flatten_opts(list(
     count = "true",
     results = "false",
     schema = "false"
-  )
+  ))
 
-  opts <- paste0(names(opts), "=", unlist_(opts), collapse = "&")
-
-  url <- paste(paste0(base, opts), query, sep = "&")
+  base <- "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?"
+  url <- flatten_url(base, opts, query)
 
   # TODO create base provider API request
-  # to use for this and clinicians function
-  req <- httr2::request(url) |>
-    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message)
-
-  cnt <- req |>
+  cnt <- httr2::request(url) |>
+    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE) |>
     _$count
 
-  opts <- list(
+  cli::cli_alert_success("Query returning {cnt} results.")
+
+  opts <- flatten_opts(list(
     count = "false",
     results = "true",
     schema = "false",
     limit = 1500L
-  )
+  ))
 
-  opts <- paste0(names(opts), "=", unlist_(opts), collapse = "&")
+  url <- flatten_url(base, opts, query)
 
-  url <- paste(paste0(base, opts), query, sep = "&")
-
-  req <- httr2::request(url) |>
-    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message)
-
-  res <- req |>
+  res <- httr2::request(url) |>
+    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE) |>
     _$results |>

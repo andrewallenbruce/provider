@@ -35,30 +35,3 @@ offset <- function(n, limit, which = "size") {
     seq = cheapr::seq_(from = 0L, to = n, by = limit)
   )
 }
-
-#' @autoglobal
-#' @noRd
-flatten_query <- function(args) {
-  purrr::imap(args, function(x, N) {
-    V <- gsub(" ", "+", unlist_(x), fixed = TRUE)
-    O <- if (length(V) > 1L) "IN" else "="
-    N <- gsub(" ", "+", N, fixed = TRUE)
-
-    c(
-      paste0("conditions[<<i>>][property]=", N),
-      paste0("conditions[<<i>>][operator]=", O),
-      `if`(
-        length(V) > 1L,
-        # paste0("conditions[<<i>>][value][", seq_along(V), "]=", V),
-        paste0("conditions[<<i>>][value][]=", V),
-        paste0("conditions[<<i>>][value]=", V)
-      )
-    )
-  }) |>
-    unname() |>
-    purrr::imap_chr(function(x, idx) {
-      gsub(x = x, pattern = "<<i>>", replacement = idx - 1, fixed = TRUE) |>
-        paste0(collapse = "&")
-    }) |>
-    (\(x) paste0(x, collapse = "&"))()
-}

@@ -43,18 +43,6 @@ yank <- function(x, ..., .def = NULL) {
   x
 }
 
-# subset_detect <- function(i, j, p, n = FALSE, ci = FALSE) {
-#   collapse::sbt(
-#     i,
-#     pdetect(
-#       x = i[[rlang::ensym(j)]],
-#       p = p,
-#       n = n,
-#       ci = ci
-#     )
-#   )
-# }
-
 #' @noRd
 date_year <- function(x) {
   strtoi(substr(x, 1, 4))
