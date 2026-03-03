@@ -53,9 +53,9 @@ example <- graph_from_data_frame(
 example
 ```
 
-    #> IGRAPH 0784880 DN-- 2 2 -- 
+    #> IGRAPH e36802b DN-- 2 2 -- 
     #> + attr: name (v/c), x (v/n), y (v/n), label (e/c)
-    #> + edges from 0784880 (vertex names):
+    #> + edges from e36802b (vertex names):
     #> [1] Individual  ->Organization Organization->Individual
 
 ``` r
@@ -116,7 +116,7 @@ will_tdgrph <- tidygraph::as_tbl_graph(williams, directed = FALSE)
 summary(will_tdgrph)
 ```
 
-    #> IGRAPH dc2d597 UN-- 34 34 -- 
+    #> IGRAPH 8ab662c UN-- 34 34 -- 
     #> + attr: name (v/c), reassignments (e/n)
 
 ``` r

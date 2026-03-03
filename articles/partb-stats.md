@@ -24,7 +24,7 @@ ind     <- utilization_(npi = 1043477615, type = "Provider")
 ```
 
     #> Error:
-    #> ℹ In index: 2.
+    #> ℹ In index: 1.
     #> Caused by error in `dplyr::mutate()`:
     #> ℹ In argument: `gender = fct_gen(gender)`.
     #> Caused by error:
@@ -36,11 +36,7 @@ srvc    <- utilization_(npi = 1023076643, type = "Service")
 ```
 
     #> Error:
-    #> ℹ In index: 1.
-    #> Caused by error in `dplyr::mutate()`:
-    #> ℹ In argument: `gender = fct_gen(gender)`.
-    #> Caused by error:
-    #> ! object 'gender' not found
+    #> ! Future (<unnamed-5>) of class MultisessionFuture interrupted (pid 8922) [future <unnamed-5> (f9c5a31144e152110d7ea1030923fe58-5); on f9c5a31144e152110d7ea1030923fe58@runnervmnay03<8852> at 2026-03-03 03:00:36.54463]
 
 ``` r
 # Retrieve state & national HCPCS data to compare with

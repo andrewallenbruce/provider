@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9006 (2026-03-02)
+
+- query helpers
+
 ## provider 0.0.1.9005 (2026-03-02)
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
