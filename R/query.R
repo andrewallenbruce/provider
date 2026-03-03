@@ -39,6 +39,10 @@ flatten_opts <- function(x) {
 
 #' @autoglobal
 #' @noRd
-flatten_url <- function(base, opts, query) {
-  paste(paste0(base, opts), query, sep = "&")
+flatten_url <- function(base, opts, query = NULL) {
+  if (is.null(query)) {
+    paste0(base, opts)
+  } else {
+    paste(paste0(base, opts), query, sep = "&")
+  }
 }

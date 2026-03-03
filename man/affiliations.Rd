@@ -5,17 +5,33 @@
 \title{Provider Facility Affiliations}
 \usage{
 affiliations(
-  id = list(npi = NULL, pac = NULL, ccn = NULL),
-  name = list(first = NULL, middle = NULL, last = NULL, suffix = NULL),
+  npi = NULL,
+  pac = NULL,
+  ccn_facility = NULL,
+  ccn_parent = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  suffix = NULL,
   facility_type = NULL
 )
 }
 \arguments{
-\item{id}{\verb{<list>} List of parameters that uniquely identify a provider, any
-of the following: \code{npi}, \code{pac}, \code{ccn}.}
+\item{npi}{\verb{<int>} Unique clinician ID assigned by NPPES}
 
-\item{name}{\verb{<list>} Individual provider's name(s), any of the following:
-\code{first}, \code{middle}, \code{last}, \code{suffix}}
+\item{pac}{\verb{<chr>} Unique individual clinician ID assigned by PECOS}
+
+\item{ccn_facility}{\verb{<chr>} Medicare CCN of facility type or unit within hospital where an individual clinician provides service}
+
+\item{ccn_parent}{\verb{<chr>} Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
+
+\item{first}{\verb{<chr>} Individual clinician first name}
+
+\item{middle}{\verb{<chr>} Individual clinician middle name}
+
+\item{last}{\verb{<chr>} Individual clinician last name}
+
+\item{suffix}{\verb{<chr>} Individual clinician suffix}
 
 \item{facility_type}{\verb{<chr>} type of facility:
 \itemize{
@@ -45,7 +61,12 @@ providers' facility affiliations
 }
 
 \examples{
-affiliations(id = list(ccn = c(331302, "33Z302")))
-affiliations(id = list(pac = 7810891009))
-affiliations(name = list(first = "KIM"))
+affiliations(ccn_facility = "33Z302")
+
+affiliations(ccn_parent = 331302)
+
+affiliations(pac = 7810891009)
+
+affiliations(first = "KIM")
+
 }
