@@ -7,23 +7,19 @@
 affiliations(
   npi = NULL,
   pac = NULL,
-  ccn_facility = NULL,
-  ccn_parent = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
   suffix = NULL,
-  facility_type = NULL
+  facility_type = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL
 )
 }
 \arguments{
 \item{npi}{\verb{<int>} Unique clinician ID assigned by NPPES}
 
 \item{pac}{\verb{<chr>} Unique individual clinician ID assigned by PECOS}
-
-\item{ccn_facility}{\verb{<chr>} Medicare CCN of facility type or unit within hospital where an individual clinician provides service}
-
-\item{ccn_parent}{\verb{<chr>} Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
 
 \item{first}{\verb{<chr>} Individual clinician first name}
 
@@ -44,6 +40,10 @@ affiliations(
 \item \code{"hs"} Hospice
 \item \code{"df"} Dialysis Facility
 }}
+
+\item{facility_ccn}{\verb{<chr>} Medicare CCN of facility type or unit within hospital where an individual clinician provides service}
+
+\item{parent_ccn}{\verb{<chr>} Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -61,11 +61,13 @@ providers' facility affiliations
 }
 
 \examples{
-affiliations(ccn_facility = "33Z302")
+affiliations(facility_ccn = "33Z302")
 
-affiliations(ccn_parent = 331302)
+affiliations(parent_ccn = 331302)
 
 affiliations(pac = 7810891009)
+
+affiliations(npi = 1003026055)
 
 affiliations(first = "KIM")
 

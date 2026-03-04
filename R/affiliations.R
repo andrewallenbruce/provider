@@ -9,8 +9,8 @@
 #'
 #' @param npi `<int>` Unique clinician ID assigned by NPPES
 #' @param pac `<chr>` Unique individual clinician ID assigned by PECOS
-#' @param ccn_facility `<chr>` Medicare CCN of facility type or unit within hospital where an individual clinician provides service
-#' @param ccn_parent `<chr>` Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital
+#' @param facility_ccn `<chr>` Medicare CCN of facility type or unit within hospital where an individual clinician provides service
+#' @param parent_ccn `<chr>` Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital
 #' @param first `<chr>` Individual clinician first name
 #' @param middle `<chr>` Individual clinician middle name
 #' @param last `<chr>` Individual clinician last name
@@ -29,11 +29,13 @@
 #' @template returns
 #'
 #' @examples
-#' affiliations(ccn_facility = "33Z302")
+#' affiliations(facility_ccn = "33Z302")
 #'
-#' affiliations(ccn_parent = 331302)
+#' affiliations(parent_ccn = 331302)
 #'
 #' affiliations(pac = 7810891009)
+#'
+#' affiliations(npi = 1003026055)
 #'
 #' affiliations(first = "KIM")
 #'
@@ -43,13 +45,13 @@
 affiliations <- function(
   npi = NULL,
   pac = NULL,
-  ccn_facility = NULL,
-  ccn_parent = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
   suffix = NULL,
-  facility_type = NULL
+  facility_type = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL
 ) {
   if (!is.null(facility_type)) {
     facility_enum <- list(
@@ -79,8 +81,8 @@ affiliations <- function(
     provider_middle_name = middle,
     suff = suffix,
     facility_type = facility_type,
-    facility_affiliations_certification_number = ccn_facility,
-    facility_type_certification_number = ccn_parent
+    facility_affiliations_certification_number = facility_ccn,
+    facility_type_certification_number = parent_ccn
   )
 
   # if no query, warn and return first 100 results
@@ -217,6 +219,9 @@ affiliations <- function(
         param_name = "offset",
         start = 0L,
         offset = 1500L,
+        resp_complete = function(resp) {
+          length(resp_body_json(resp)$data) < 1500
+        },
         resp_pages = function(resp) {
           offset(cnt, 1500L)
         }
