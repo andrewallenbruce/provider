@@ -9,13 +9,13 @@ facility affiliations
 affiliations(
   npi = NULL,
   pac = NULL,
-  ccn_facility = NULL,
-  ccn_parent = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
   suffix = NULL,
-  facility_type = NULL
+  facility_type = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL
 )
 ```
 
@@ -28,17 +28,6 @@ affiliations(
 - pac:
 
   `<chr>` Unique individual clinician ID assigned by PECOS
-
-- ccn_facility:
-
-  `<chr>` Medicare CCN of facility type or unit within hospital where an
-  individual clinician provides service
-
-- ccn_parent:
-
-  `<chr>` Medicare CCN of the primary hospital where individual
-  clinician provides service, should the clinician provide services in a
-  unit within the hospital
 
 - first:
 
@@ -76,6 +65,17 @@ affiliations(
 
   - `"df"` Dialysis Facility
 
+- facility_ccn:
+
+  `<chr>` Medicare CCN of facility type or unit within hospital where an
+  individual clinician provides service
+
+- parent_ccn:
+
+  `<chr>` Medicare CCN of the primary hospital where individual
+  clinician provides service, should the clinician provide services in a
+  unit within the hospital
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -92,7 +92,7 @@ containing the search results.
 ## Examples
 
 ``` r
-affiliations(ccn_facility = "33Z302")
+affiliations(facility_ccn = "33Z302")
 #> ✔ Query returning 5 results.
 #> # A tibble: 5 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
@@ -103,7 +103,7 @@ affiliations(ccn_facility = "33Z302")
 #> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
 #> 5 1760167… 8123… WARN… JOSHUA ""    ""     Nursing home  33Z302     331302      
 
-affiliations(ccn_parent = 331302)
+affiliations(parent_ccn = 331302)
 #> ✔ Query returning 5 results.
 #> # A tibble: 5 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
@@ -124,6 +124,13 @@ affiliations(pac = 7810891009)
 #> 3 1043245… 7810… FUNG  MARK   K     ""     Hospital      331321     ""          
 #> 4 1043245… 7810… FUNG  MARK   K     ""     Hospital      470001     ""          
 #> 5 1043245… 7810… FUNG  MARK   K     ""     Hospital      471307     ""          
+
+affiliations(npi = 1003026055)
+#> ✔ Query returning 1 results.
+#> # A tibble: 1 × 9
+#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
+#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
+#> 1 1003026… 4486… PHAD… RADHI… PUSH… ""     Hospital      100168     ""          
 
 affiliations(first = "KIM")
 #> ✔ Query returning 703 results.

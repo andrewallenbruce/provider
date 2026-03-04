@@ -66,13 +66,13 @@ providers' facility affiliations</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">affiliations</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ccn_facility <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ccn_parent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  suffix <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  facility_type <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  facility_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -86,14 +86,6 @@ providers' facility affiliations</p>
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Unique individual clinician ID assigned by PECOS</p></dd>
-
-
-<dt id="arg-ccn-facility">ccn_facility<a class="anchor" aria-label="anchor" href="#arg-ccn-facility"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Medicare CCN of facility type or unit within hospital where an individual clinician provides service</p></dd>
-
-
-<dt id="arg-ccn-parent">ccn_parent<a class="anchor" aria-label="anchor" href="#arg-ccn-parent"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital</p></dd>
 
 
 <dt id="arg-first">first<a class="anchor" aria-label="anchor" href="#arg-first"></a></dt>
@@ -123,6 +115,14 @@ providers' facility affiliations</p>
 <li><p><code>"df"</code> Dialysis Facility</p></li>
 </ul></dd>
 
+
+<dt id="arg-facility-ccn">facility_ccn<a class="anchor" aria-label="anchor" href="#arg-facility-ccn"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare CCN of facility type or unit within hospital where an individual clinician provides service</p></dd>
+
+
+<dt id="arg-parent-ccn">parent_ccn<a class="anchor" aria-label="anchor" href="#arg-parent-ccn"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -138,7 +138,7 @@ providers' facility affiliations</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>ccn_facility <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 5 results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
@@ -149,7 +149,7 @@ providers' facility affiliations</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1558659… 6709… BANU  DRAGOS <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1760167… 8123… WARN… JOSHUA <span style="color: #949494;">""</span>    <span style="color: #949494;">""</span>     Nursing home  33Z302     331302      </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>ccn_parent <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 5 results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
@@ -170,6 +170,13 @@ providers' facility affiliations</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      331321     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      470001     <span style="color: #949494;">""</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1043245… 7810… FUNG  MARK   K     <span style="color: #949494;">""</span>     Hospital      471307     <span style="color: #949494;">""</span>          </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 1 results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1003026… 4486… PHAD… RADHI… PUSH… <span style="color: #949494;">""</span>     Hospital      100168     <span style="color: #949494;">""</span>          </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"KIM"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returning 703 results.</span>
