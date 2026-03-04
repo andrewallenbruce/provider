@@ -21,13 +21,7 @@ affiliations(
 
 \item{pac}{\verb{<chr>} Unique individual clinician ID assigned by PECOS}
 
-\item{first}{\verb{<chr>} Individual clinician first name}
-
-\item{middle}{\verb{<chr>} Individual clinician middle name}
-
-\item{last}{\verb{<chr>} Individual clinician last name}
-
-\item{suffix}{\verb{<chr>} Individual clinician suffix}
+\item{first, middle, last, suffix}{\verb{<chr>} Clinician name}
 
 \item{facility_type}{\verb{<chr>} type of facility:
 \itemize{
@@ -41,9 +35,9 @@ affiliations(
 \item \code{"df"} Dialysis Facility
 }}
 
-\item{facility_ccn}{\verb{<chr>} Medicare CCN of facility type or unit within hospital where an individual clinician provides service}
+\item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} or unit within hospital where an individual clinician provides service}
 
-\item{parent_ccn}{\verb{<chr>} Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
+\item{parent_ccn}{\verb{<chr>} CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

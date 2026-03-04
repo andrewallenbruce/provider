@@ -21,7 +21,6 @@ Imports:
     collapse (>= 2.1.6),
     dplyr,
     fastplyr (>= 0.9.91),
-    fs,
     httr2 (>= 1.2.2),
     janitor,
     lubridate,
@@ -38,13 +37,9 @@ Suggests:
     furrr,
     future,
     glue,
-    httptest2,
     knitr,
-    pins (>= 1.4.1),
     roxyglobals (>= 1.0.0),
-    rvest,
     rxnorm,
-    stats,
     strex,
     testthat (>= 3.0.0)
 VignetteBuilder: 

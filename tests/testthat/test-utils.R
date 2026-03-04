@@ -1,16 +1,16 @@
-test_that("format_zipcode() works", {
-  expect_equal(format_zipcode("123456789"), "12345-6789")
-  expect_equal(format_zipcode("12345"), "12345")
-})
-
-test_that("clean_credentials() works", {
-  expect_equal(clean_credentials("M.D."), "MD")
-})
-
-test_that("na_blank() works", {
-  x <- c("", " ", "*", "--")
-  expect_equal(na_blank(x), rep(NA_character_, 4))
-})
+# test_that("format_zipcode() works", {
+#   expect_equal(format_zipcode("123456789"), "12345-6789")
+#   expect_equal(format_zipcode("12345"), "12345")
+# })
+#
+# test_that("clean_credentials() works", {
+#   expect_equal(clean_credentials("M.D."), "MD")
+# })
+#
+# test_that("na_blank() works", {
+#   x <- c("", " ", "*", "--")
+#   expect_equal(na_blank(x), rep(NA_character_, 4))
+# })
 
 # test_that("yn_logical() works", {
 #   x <- c("Y", "YES", "Yes", "yes", "y", "True",

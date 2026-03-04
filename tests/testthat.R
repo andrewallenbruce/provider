@@ -7,5 +7,4 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat) # nolint
-library(httptest2) # nolint
 test_check("provider")

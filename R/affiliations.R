@@ -9,13 +9,9 @@
 #'
 #' @param npi `<int>` Unique clinician ID assigned by NPPES
 #' @param pac `<chr>` Unique individual clinician ID assigned by PECOS
-#' @param facility_ccn `<chr>` Medicare CCN of facility type or unit within hospital where an individual clinician provides service
-#' @param parent_ccn `<chr>` Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital
-#' @param first `<chr>` Individual clinician first name
-#' @param middle `<chr>` Individual clinician middle name
-#' @param last `<chr>` Individual clinician last name
-#' @param suffix `<chr>` Individual clinician suffix
-#'
+#' @param facility_ccn `<chr>` CCN of `facility_type` or unit within hospital where an individual clinician provides service
+#' @param parent_ccn `<chr>` CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital
+#' @param first,middle,last,suffix `<chr>` Clinician name
 #' @param facility_type `<chr>` type of facility:
 #'    * `"hp"` Hospital
 #'    * `"lt"` Long-Term Care Hospital
@@ -53,26 +49,6 @@ affiliations <- function(
   facility_ccn = NULL,
   parent_ccn = NULL
 ) {
-  if (!is.null(facility_type)) {
-    facility_enum <- list(
-      hp = "Hospital",
-      lt = "Long-term care hospital",
-      nh = "Nursing home",
-      irf = "Inpatient rehabilitation facility",
-      hha = "Home health agency",
-      snf = "Skilled nursing facility",
-      hs = "Hospice",
-      df = "Dialysis facility"
-    )
-
-    facility_type <- rlang::arg_match(
-      facility_type,
-      names(facility_enum),
-      multiple = TRUE
-    )
-    facility_type <- unlist_(facility_enum[facility_type])
-  }
-
   args <- compact_list(
     npi = npi,
     ind_pac_id = pac,
@@ -80,7 +56,7 @@ affiliations <- function(
     provider_first_name = first,
     provider_middle_name = middle,
     suff = suffix,
-    facility_type = facility_type,
+    facility_type = facility_enum(facility_type),
     facility_affiliations_certification_number = facility_ccn,
     facility_type_certification_number = parent_ccn
   )
@@ -250,6 +226,32 @@ affiliations <- function(
       "facility_ccn"
     )
   )
+}
+
+#' @autoglobal
+#' @noRd
+facility_enum <- function(facility_type = NULL) {
+  if (!is.null(facility_type)) {
+    facility_enum <- list(
+      hp = "Hospital",
+      lt = "Long-term care hospital",
+      nh = "Nursing home",
+      irf = "Inpatient rehabilitation facility",
+      hha = "Home health agency",
+      snf = "Skilled nursing facility",
+      hs = "Hospice",
+      df = "Dialysis facility"
+    )
+
+    facility_type <- rlang::arg_match(
+      facility_type,
+      names(facility_enum),
+      multiple = TRUE
+    )
+
+    facility_type <- unlist_(facility_enum[facility_type])
+  }
+  return(facility_type)
 }
 
 #' @autoglobal

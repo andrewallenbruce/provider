@@ -9,8 +9,6 @@ utils::globalVariables(c(
   "a2la",
   # <laboratories>
   "aabb",
-  # <build_url2>
-  "abb",
   # <laboratories>
   "accredited",
   # <laboratories>
@@ -89,6 +87,10 @@ utils::globalVariables(c(
   "category",
   # <open_payments>
   "category_1",
+  # <tidyup>
+  "clean_credentials",
+  # <tidyup>
+  "clean_dollars",
   # <laboratories>
   "clia_number",
   # <laboratories>
@@ -169,7 +171,6 @@ utils::globalVariables(c(
   "hcpcs",
   # <cms_update>
   # <nppes>
-  # <quality_pay2>
   "id",
   # <get_pro_api>
   # <cms_dataset_search>
@@ -205,9 +206,10 @@ utils::globalVariables(c(
   # <cms_dataset_search>
   # <open_ids>
   "modified",
+  # <tidyup>
+  "na_blank",
   # <open_payments>
   # <cols_qelig>
-  # <quality_pay2>
   "name",
   # <open_payments>
   "name_1",
@@ -244,8 +246,6 @@ utils::globalVariables(c(
   "organizations_individualScenario",
   # <quality_eligibility>
   "organizations_virtualGroups",
-  # <quality_pay2>
-  "participation_option",
   # <quality_payment>
   "participation_type",
   # <open_payments>
@@ -287,7 +287,6 @@ utils::globalVariables(c(
   "rndrng_prvdr_geo_desc",
   # <tidyup_geography.util>
   "rndrng_prvdr_geo_lvl",
-  # <quality_pay2>
   # <quality_payment>
   "score",
   # <open_ids>
@@ -356,7 +355,6 @@ utils::globalVariables(c(
   "val",
   # <open_payments>
   # <cols_qelig>
-  # <quality_pay2>
   "value",
   # <abb2full>
   "x",
@@ -371,7 +369,6 @@ utils::globalVariables(c(
   # <prescribers>
   # <providers>
   # <quality_eligibility>
-  # <quality_pay2>
   # <quality_payment>
   # <reassignments>
   # <utilization>
