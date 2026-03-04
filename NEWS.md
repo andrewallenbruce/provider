@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9008 (2026-03-04)
+
+* removed several unused deps, tests
+
+
 # provider 0.0.1.9007 (2026-03-03)
 
 * affiliations fleshing out
