@@ -53,9 +53,9 @@ example <- graph_from_data_frame(
 example
 ```
 
-    #> IGRAPH 65deb79 DN-- 2 2 -- 
+    #> IGRAPH 66fef0d DN-- 2 2 -- 
     #> + attr: name (v/c), x (v/n), y (v/n), label (e/c)
-    #> + edges from 65deb79 (vertex names):
+    #> + edges from 66fef0d (vertex names):
     #> [1] Individual  ->Organization Organization->Individual
 
 ``` r
@@ -89,66 +89,42 @@ williams <- reassignments("1346391299") |>
          organization, 
          reassignments) |> 
   arrange(desc(reassignments))
+```
 
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
+    #> Caused by error:
+    #> ! object 'na_blank' not found
+
+``` r
 williams
 ```
 
-    #> # A tibble: 34 × 3
-    #>    provider          organization                                  reassignments
-    #>    <glue>            <chr>                                                 <int>
-    #>  1 JONATHAN WILLIAMS Emergency Coverage                                      332
-    #>  2 JONATHAN WILLIAMS Phoebe Putney Memorial Hospital                         241
-    #>  3 JONATHAN WILLIAMS Southland Emergency Medical Services Consoli…           145
-    #>  4 JONATHAN WILLIAMS Southland Bainbridge Hospitalist Group                  124
-    #>  5 JONATHAN WILLIAMS Southland Consolidated Emergency Services               122
-    #>  6 JONATHAN WILLIAMS Crisp Regional Hospital                                 117
-    #>  7 JONATHAN WILLIAMS Union County Hospital Authority                         100
-    #>  8 JONATHAN WILLIAMS Clinch County Hospital Authority                         93
-    #>  9 JONATHAN WILLIAMS Sgmp Southland                                           93
-    #> 10 JONATHAN WILLIAMS Hospitalist Medicine Physicians Of GeorgiaTcg            69
-    #> # ℹ 24 more rows
+    #> Error:
+    #> ! object 'williams' not found
 
 ## `{tidygraph}`
 
 ``` r
 will_tdgrph <- tidygraph::as_tbl_graph(williams, directed = FALSE)
+```
 
+    #> Error:
+    #> ! object 'williams' not found
+
+``` r
 summary(will_tdgrph)
 ```
 
-    #> IGRAPH f81e947 UN-- 34 34 -- 
-    #> + attr: name (v/c), reassignments (e/n)
+    #> Error:
+    #> ! object 'will_tdgrph' not found
 
 ``` r
 will_tdgrph
 ```
 
-    #> # A tbl_graph: 34 nodes and 34 edges
-    #> #
-    #> # An undirected multigraph with 1 component
-    #> #
-    #> # Node Data: 34 × 1 (active)
-    #>    name                                             
-    #>    <chr>                                            
-    #>  1 JONATHAN WILLIAMS                                
-    #>  2 Emergency Coverage                               
-    #>  3 Phoebe Putney Memorial Hospital                  
-    #>  4 Southland Emergency Medical Services Consolidated
-    #>  5 Southland Bainbridge Hospitalist Group           
-    #>  6 Southland Consolidated Emergency Services        
-    #>  7 Crisp Regional Hospital                          
-    #>  8 Union County Hospital Authority                  
-    #>  9 Clinch County Hospital Authority                 
-    #> 10 Sgmp Southland                                   
-    #> # ℹ 24 more rows
-    #> #
-    #> # Edge Data: 34 × 3
-    #>    from    to reassignments
-    #>   <int> <int>         <int>
-    #> 1     1     2           332
-    #> 2     1     3           241
-    #> 3     1     4           145
-    #> # ℹ 31 more rows
+    #> Error:
+    #> ! object 'will_tdgrph' not found
 
 ``` r
 ggraph(will_tdgrph, "stress") + 
@@ -171,4 +147,5 @@ ggraph(will_tdgrph, "stress") +
   theme_graph(fg_text_colour = 'white')
 ```
 
-![](networks_files/figure-html/unnamed-chunk-8-1.png)
+    #> Error:
+    #> ! object 'will_tdgrph' not found

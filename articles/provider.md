@@ -49,14 +49,10 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#> # A tibble: 5 × 4
-#>   npi        first last    eligible                 
-#>   <chr>      <chr> <chr>   <fct>                    
-#> 1 1043477615 SARAH HUSSAIN Medicare Part B          
-#> 2 1043477615 SARAH HUSSAIN Home Health Agency       
-#> 3 1043477615 SARAH HUSSAIN Durable Medical Equipment
-#> 4 1043477615 SARAH HUSSAIN Power Mobility Devices   
-#> 5 1043477615 SARAH HUSSAIN Hospice
+#> Error in `dplyr::mutate()`:
+#> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
+#> Caused by error:
+#> ! object 'na_blank' not found
 ```
 
   
@@ -77,10 +73,10 @@ transformations to the output, such as `pivot`:
 
 ``` r
 order_refer(npi = 1043477615, pivot = FALSE)
-#> # A tibble: 1 × 8
-#>   npi        last_name first_name partb dme   hha   pmd   hospice
-#>   <chr>      <chr>     <chr>      <lgl> <lgl> <lgl> <lgl> <lgl>  
-#> 1 1043477615 HUSSAIN   SARAH      TRUE  TRUE  TRUE  TRUE  TRUE
+#> Error in `dplyr::mutate()`:
+#> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
+#> Caused by error:
+#> ! object 'na_blank' not found
 ```
 
   

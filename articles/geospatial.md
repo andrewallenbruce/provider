@@ -32,24 +32,19 @@ rhcs <- providers(
     city = NULL,
     state = NULL) |> 
   distinct()
+```
 
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
+    #> Caused by error:
+    #> ! object 'na_blank' not found
+
+``` r
 rhcs
 ```
 
-    #> # A tibble: 81 × 3
-    #>    organization                                  address                   zip  
-    #>    <chr>                                         <chr>                     <chr>
-    #>  1 TMC HARALSON FAMILY HEALTHCARE CENTER         204 ALLEN MEMORIAL DR SU… 3011…
-    #>  2 TMC TALLAPOOSA FAMILY HEALTHCARE CENTER       25 W LYON ST TALLAPOOSA,… 3017…
-    #>  3 HIAWASSEE FAMILY PRACTICE P C                 386 BELAIRE DR HIAWASSEE… 3054…
-    #>  4 TMC WEST CARROLL FAMILY HEALTHCARE CENTER INC 1125 E HIGHWAY 166 BOWDO… 3010…
-    #>  5 BACON COUNTY HEALTH SERVICES, INC             204 E 15TH ST ALMA, GA    3151…
-    #>  6 BOWDON- MT. ZION PRIMARY HEALTH CENTER ,INC.  41 WELLINGTON MILL RD WH… 3018…
-    #>  7 HOSPITAL AUTHORITY OF MITCHELL COUNTY         25 PERRY ST CAMILLA, GA   3173…
-    #>  8 THE MEDICAL CENTER OF ELBERTON, LLP           109 COLLEGE AVE ELBERTON… 3063…
-    #>  9 UNION COUNTY HOSPITAL AUTHORITY               162 HOSPITAL RD STE A BL… 3051…
-    #> 10 HOSPITAL AUTHORITY OF MITCHELL COUNTY         259 US HIGHWAY 19 NORTH … 3173…
-    #> # ℹ 71 more rows
+    #> Error:
+    #> ! object 'rhcs' not found
 
 ## Geocode with `{tidygeocoder}`
 
@@ -61,6 +56,9 @@ mapbox <- geocode(
   full_results = TRUE) |> 
   select(organization:long)
 ```
+
+    #> Error:
+    #> ! object 'rhcs' not found
 
 ## Retrieve Georgia counties shapefile from `{tigris}`
 
@@ -99,4 +97,5 @@ ggplot(sf_cnt) +
   theme_void()
 ```
 
-![](geospatial_files/figure-html/unnamed-chunk-5-1.png)
+    #> Error:
+    #> ! object 'mapbox' not found

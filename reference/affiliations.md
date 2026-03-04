@@ -29,21 +29,9 @@ affiliations(
 
   `<chr>` Unique individual clinician ID assigned by PECOS
 
-- first:
+- first, middle, last, suffix:
 
-  `<chr>` Individual clinician first name
-
-- middle:
-
-  `<chr>` Individual clinician middle name
-
-- last:
-
-  `<chr>` Individual clinician last name
-
-- suffix:
-
-  `<chr>` Individual clinician suffix
+  `<chr>` Clinician name
 
 - facility_type:
 
@@ -67,14 +55,14 @@ affiliations(
 
 - facility_ccn:
 
-  `<chr>` Medicare CCN of facility type or unit within hospital where an
+  `<chr>` CCN of `facility_type` or unit within hospital where an
   individual clinician provides service
 
 - parent_ccn:
 
-  `<chr>` Medicare CCN of the primary hospital where individual
-  clinician provides service, should the clinician provide services in a
-  unit within the hospital
+  `<chr>` CCN of the primary hospital where individual clinician
+  provides service, should the clinician provide services in a unit
+  within the hospital
 
 ## Value
 
