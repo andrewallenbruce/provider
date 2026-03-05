@@ -55,6 +55,8 @@ providers' facility affiliations
 }
 
 \examples{
+# affiliations(facility_type = c("lt", "irf")) 15,105 results
+
 affiliations(facility_ccn = "33Z302")
 
 affiliations(parent_ccn = 331302)

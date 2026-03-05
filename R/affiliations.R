@@ -25,6 +25,8 @@
 #' @template returns
 #'
 #' @examples
+#' # affiliations(facility_type = c("lt", "irf")) 15,105 results
+#'
 #' affiliations(facility_ccn = "33Z302")
 #'
 #' affiliations(parent_ccn = 331302)
@@ -81,7 +83,8 @@ affiliations <- function(
     res <- httr2::request(url) |>
       httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
       httr2::req_perform() |>
-      httr2::resp_body_json(simplifyVector = TRUE) |>
+      httr2::resp_body_string() |>
+      RcppSimdJson::fparse() |>
       _$results |>
       fastplyr::as_tbl()
 
@@ -148,7 +151,8 @@ affiliations <- function(
     res <- httr2::request(url) |>
       httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
       httr2::req_perform() |>
-      httr2::resp_body_json(simplifyVector = TRUE) |>
+      httr2::resp_body_string() |>
+      RcppSimdJson::fparse() |>
       _$results |>
       fastplyr::as_tbl()
 
@@ -178,37 +182,27 @@ affiliations <- function(
   opts <- flatten_opts(list(
     count = "false",
     results = "true",
-    schema = "false"
+    schema = "false",
+    limit = 1500,
+    offset = "<<i>>"
   ))
 
   url <- flatten_url(base, opts, query)
 
-  # url <- flatten_url(base, opts, query) |> urlparse::url_encoder(":/=+?&")
-  # url <- flatten_url(base, query, opts)
+  urls <- offset(cnt, 1500L, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
 
-  res <- httr2::request(url) |>
-    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message)
+  req <- purrr::map(urls, httr2::request)
 
-  res <- res |>
-    httr2::req_perform_iterative(
-      next_req = httr2::iterate_with_offset(
-        param_name = "offset",
-        start = 0L,
-        offset = 1500L,
-        resp_complete = function(resp) {
-          length(resp_body_json(resp)$data) < 1500
-        },
-        resp_pages = function(resp) {
-          offset(cnt, 1500L)
-        }
-      )
-    )
+  res <- httr2::req_perform_parallel(req, on_error = "continue")
 
-  res <- res |>
-    purrr::map(\(x) {
-      httr2::resp_body_json(x, simplifyVector = TRUE) |>
-        _$results
-    }) |>
+  res <- purrr::map(res, function(x) {
+    httr2::resp_body_string(x) |>
+      RcppSimdJson::fparse() |>
+      _$results
+  }) |>
     collapse::rowbind() |>
     fastplyr::as_tbl()
 
