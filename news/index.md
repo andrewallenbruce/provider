@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9009 (2026-03-04)
+
+- simplified formatting queries
+
 ## provider 0.0.1.9008 (2026-03-04)
 
 - removed several unused deps, tests

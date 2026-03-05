@@ -24,7 +24,7 @@ ind     <- utilization_(npi = 1043477615, type = "Provider")
 ```
 
     #> Error:
-    #> ℹ In index: 1.
+    #> ℹ In index: 2.
     #> Caused by error in `dplyr::mutate()`:
     #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
     #> Caused by error:
@@ -36,7 +36,11 @@ srvc    <- utilization_(npi = 1023076643, type = "Service")
 ```
 
     #> Error:
-    #> ! Future (<unnamed-5>) of class MultisessionFuture interrupted (pid 8772) [future <unnamed-5> (e3854e08810679d5e8b6603c59c59945-5); on e3854e08810679d5e8b6603c59c59945@runnervm0kj6c<8701> at 2026-03-04 21:00:34.418343]
+    #> ℹ In index: 1.
+    #> Caused by error in `dplyr::mutate()`:
+    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
+    #> Caused by error:
+    #> ! object 'na_blank' not found
 
 ``` r
 # Retrieve state & national HCPCS data to compare with

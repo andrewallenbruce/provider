@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Comparing Providers</h1>
             
-            <h4 data-toc-skip class="date">2026-03-04</h4>
+            <h4 data-toc-skip class="date">2026-03-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/articles/partb-stats.Rmd" class="external-link"><code>vignettes/articles/partb-stats.Rmd</code></a></small>
       <div class="d-none name"><code>partb-stats.Rmd</code></div>
@@ -120,7 +120,7 @@
 <span><span class="co"># Retrieve provider's overall utilization data</span></span>
 <span><span class="va">ind</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/utilization.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, type <span class="op">=</span> <span class="st">"Provider"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 2.</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
@@ -129,7 +129,11 @@
 <code class="sourceCode R"><span><span class="co"># Retrieve provider's utilization data by HCPCS</span></span>
 <span><span class="va">srvc</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/utilization.html">utilization_</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1023076643</span>, type <span class="op">=</span> <span class="st">"Service"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Future (&lt;unnamed-5&gt;) of class MultisessionFuture interrupted (pid 8772) [future &lt;unnamed-5&gt; (e3854e08810679d5e8b6603c59c59945-5); on e3854e08810679d5e8b6603c59c59945@runnervm0kj6c&lt;8701&gt; at 2026-03-04 21:00:34.418343]</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve state &amp; national HCPCS data to compare with</span></span>
 <span><span class="va">hcpcs</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_hcpcs.html">compare_hcpcs</a></span><span class="op">(</span><span class="va">srvc</span><span class="op">)</span></span></code></pre></div>

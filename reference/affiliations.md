@@ -80,6 +80,8 @@ containing the search results.
 ## Examples
 
 ``` r
+# affiliations(facility_type = c("lt", "irf")) 15,105 results
+
 affiliations(facility_ccn = "33Z302")
 #> ✔ Query returning 5 results.
 #> # A tibble: 5 × 9
