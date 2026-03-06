@@ -83,26 +83,24 @@ containing the search results.
 # affiliations(facility_type = c("lt", "irf")) 15,105 results
 
 affiliations(facility_ccn = "33Z302")
-#> ✔ Query returning 5 results.
-#> # A tibble: 5 × 9
+#> ✔ Query returning 4 results.
+#> # A tibble: 4 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
 #>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
 #> 1 1073258… 3870… KLOTZ JEFFR… ""    ""     Nursing home  33Z302     331302      
 #> 2 1396989… 8921… HALL… MARY   "K"   ""     Nursing home  33Z302     331302      
 #> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
 #> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
-#> 5 1760167… 8123… WARN… JOSHUA ""    ""     Nursing home  33Z302     331302      
 
 affiliations(parent_ccn = 331302)
-#> ✔ Query returning 5 results.
-#> # A tibble: 5 × 9
+#> ✔ Query returning 4 results.
+#> # A tibble: 4 × 9
 #>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
 #>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
 #> 1 1073258… 3870… KLOTZ JEFFR… ""    ""     Nursing home  33Z302     331302      
 #> 2 1396989… 8921… HALL… MARY   "K"   ""     Nursing home  33Z302     331302      
 #> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
 #> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
-#> 5 1760167… 8123… WARN… JOSHUA ""    ""     Nursing home  33Z302     331302      
 
 affiliations(pac = 7810891009)
 #> ✔ Query returning 5 results.
@@ -123,8 +121,8 @@ affiliations(npi = 1003026055)
 #> 1 1003026… 4486… PHAD… RADHI… PUSH… ""     Hospital      100168     ""          
 
 affiliations(first = "KIM")
-#> ✔ Query returning 703 results.
-#> # A tibble: 703 × 9
+#> ✔ Query returning 710 results.
+#> # A tibble: 710 × 9
 #>    npi     pac   first middle last  suffix facility_type parent_ccn facility_ccn
 #>    <chr>   <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
 #>  1 100311… 0941… FREN… KIM    M     ""     Hospital      260032     ""          
@@ -137,5 +135,5 @@ affiliations(first = "KIM")
 #>  8 101300… 6002… FALL… KIM    M     ""     Hospital      310084     ""          
 #>  9 101307… 0547… WRIG… KIM    C     ""     Hospital      140185     ""          
 #> 10 101309… 1254… CARL… KIM    M     ""     Hospital      030007     ""          
-#> # ℹ 693 more rows
+#> # ℹ 700 more rows
 ```

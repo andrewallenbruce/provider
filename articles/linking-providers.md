@@ -120,19 +120,19 @@ affiliations(facility_ccn = 331302) |>
 | 7       | 1043672140 | 7214229350 | FIORINI FURTADO  | VANESSA |        |        | Hospital      | 331302     |              |
 | 8       | 1063420891 | 9436051687 | YOUNG            | JOHN    |        |        | Hospital      | 331302     |              |
 | 9       | 1073073177 | 0547593097 | OSBORN           | DELANEY |        |        | Hospital      | 331302     |              |
-| 10      | 1073099172 | 0547519381 | MAGGY            | BROOKE  | A      |        | Hospital      | 331302     |              |
-| 11      | 1073133435 | 6800318452 | GILL             | ANGAD   |        |        | Hospital      | 331302     |              |
-| 12      | 1073258398 | 3870095805 | KLOTZ            | JEFFREY |        |        | Hospital      | 331302     |              |
-| 13      | 1073572236 | 7012816168 | RHEEMAN          | CHARLES | H      |        | Hospital      | 331302     |              |
-| 14      | 1073634531 | 9234285487 | GILBERT          | MATTHEW | P      |        | Hospital      | 331302     |              |
-| 15      | 1073660684 | 1759418007 | BIGELOW          | GAYLEN  | M      |        | Hospital      | 331302     |              |
-| 16      | 1083148837 | 0042564882 | KRULEWITZ        | NEIL    | A      |        | Hospital      | 331302     |              |
-| 17      | 1083861934 | 2860555141 | ELLIOTT          | STEVEN  | J      |        | Hospital      | 331302     |              |
-| 18      | 1083887137 | 8921256520 | WALSH            | RYAN    |        |        | Hospital      | 331302     |              |
-| 19      | 1093386070 | 3476085051 | GADELHA PIEROTTI | ELISSA  | JENSEN |        | Hospital      | 331302     |              |
-| 20      | 1093475196 | 0042603920 | ALBUCHER         | JAMIE   | NICOLE |        | Hospital      | 331302     |              |
-| 21..212 |            |            |                  |         |        |        |               |            |              |
-| 213     | 1992993794 | 7113172685 | DAVIS            | ELLEN   |        |        | Hospital      | 331302     |              |
+| 10      | 1073133435 | 6800318452 | GILL             | ANGAD   |        |        | Hospital      | 331302     |              |
+| 11      | 1073258398 | 3870095805 | KLOTZ            | JEFFREY |        |        | Hospital      | 331302     |              |
+| 12      | 1073572236 | 7012816168 | RHEEMAN          | CHARLES | H      |        | Hospital      | 331302     |              |
+| 13      | 1073634531 | 9234285487 | GILBERT          | MATTHEW | P      |        | Hospital      | 331302     |              |
+| 14      | 1073660684 | 1759418007 | BIGELOW          | GAYLEN  | M      |        | Hospital      | 331302     |              |
+| 15      | 1083148837 | 0042564882 | KRULEWITZ        | NEIL    | A      |        | Hospital      | 331302     |              |
+| 16      | 1083861934 | 2860555141 | ELLIOTT          | STEVEN  | J      |        | Hospital      | 331302     |              |
+| 17      | 1083887137 | 8921256520 | WALSH            | RYAN    |        |        | Hospital      | 331302     |              |
+| 18      | 1093386070 | 3476085051 | GADELHA PIEROTTI | ELISSA  | JENSEN |        | Hospital      | 331302     |              |
+| 19      | 1093796898 | 5597848077 | MAHONEY          | ANDREW  | C      |        | Hospital      | 331302     |              |
+| 20      | 1104118330 | 0547408825 | BROWN            | JODI    | AU     |        | Hospital      | 331302     |              |
+| 21..205 |            |            |                  |         |        |        |               |            |              |
+| 206     | 1992993794 | 7113172685 | DAVIS            | ELLEN   |        |        | Hospital      | 331302     |              |
 
   
 
@@ -151,7 +151,6 @@ affiliations(facility_ccn = "33Z302") |>
 | 2   | 1396989059 | 8921259557 | HALLORAN | MARY    | K    |        | Nursing home  | 33Z302     | 331302       |
 | 3   | 1538173869 | 0547299091 | CHON     | IL      | JUN  |        | Nursing home  | 33Z302     | 331302       |
 | 4   | 1558659367 | 6709004682 | BANU     | DRAGOS  |      |        | Nursing home  | 33Z302     | 331302       |
-| 5   | 1760167712 | 8123473469 | WARNER   | JOSHUA  |      |        | Nursing home  | 33Z302     | 331302       |
 
   
 
