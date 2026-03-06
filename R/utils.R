@@ -1,3 +1,52 @@
+#' @autoglobal
+#' @noRd
+get_pro_api <- function() {
+  RcppSimdJson::fload(
+    json = "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
+  ) |>
+    collapse::sbt(
+      title %iin% c("Facility Affiliation Data", "National Downloadable File")
+    ) |>
+    collapse::slt(
+      title,
+      identifier,
+      url = landingPage,
+      last_release = released,
+      next_release = nextUpdateDate
+    ) |>
+    fastplyr::as_tbl()
+}
+
+# state_recode(c("GA", "FL"))
+# state_recode(c("Georgia", "Florida"), "abbr")
+#' @autoglobal
+#' @noRd
+state_recode <- function(x, to = "full") {
+  states <- switch(
+    match.arg(to, c("full", "abbr")),
+    full = rlang::set_names(state.abb, state.name),
+    abbr = rlang::set_names(state.name, state.abb)
+  )
+
+  rlang::names2(states)[collapse::fmatch(x, states)]
+}
+
+#' @autoglobal
+#' @noRd
+na_if <- function(x, y = "") {
+  vctrs::vec_slice(
+    x,
+    vctrs::vec_in(x, y, needles_arg = "x", haystack_arg = "y")
+  ) <- NA
+  x
+}
+
+#' @autoglobal
+#' @noRd
+map_na_if <- function(i) {
+  purrr::modify_if(i, is.character, function(x) na_if(x, y = ""))
+}
+
 #' @noRd
 search_in <- function(x, column, what) {
   if (is.null(what)) {

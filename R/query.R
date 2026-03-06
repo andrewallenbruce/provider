@@ -1,3 +1,41 @@
+#' Generate API Offset Sequence & Size
+#'
+#' @param n  `<int>` Number of results in an API request
+#' @param limit `<int>` API rate limit
+#' @param which `<chr>` Return type, `"seq"` or `"size"` (default)
+#' @returns Depending on inputs:
+#'    * if `n` == `0`: returns `0`
+#'    * if `n` <= `limit`: returns `n`
+#'    * if `n` > `limit` and:
+#'       * `which` = `"seq"`: sequence `0:n` by `limit`, of length `ceiling(n / limit)`.
+#'       * `which` = `"size"`: length of sequence.
+#'
+#' @examplesIf interactive()
+#' offset(n = 100, limit = 10, which = "size")
+#' offset(n = 100, limit = 10, which = "seq")
+#'
+#' offset(n = 10, limit = 100, which = "size")
+#' offset(n = 10, limit = 100, which = "seq")
+#'
+#' offset(n = 47984, limit = 5000, which = "size")
+#' offset(n = 47984, limit = 5000, which = "seq")
+#'
+#' offset(n = 147984, limit = 1500, which = "size")
+#' offset(n = 147984, limit = 1500, which = "seq")
+#' @autoglobal
+#' @noRd
+offset <- function(n, limit, which = "size") {
+  if (n == 0L) {
+    return(0L)
+  }
+
+  switch(
+    which,
+    size = cheapr::seq_size(from = 0L, to = n, by = limit),
+    seq = cheapr::seq_(from = 0L, to = n, by = limit)
+  )
+}
+
 #' @noRd
 plus <- function(x) {
   gsub(" ", "+", x, fixed = TRUE)
@@ -29,13 +67,14 @@ flatten_query <- function(args) {
 
 #' @autoglobal
 #' @noRd
-compact_list <- function(...) {
-  purrr::compact(list(...))
+parameters <- function(...) {
+  purrr::compact(rlang::list2(...))
 }
 
 #' @autoglobal
 #' @noRd
-flatten_opts <- function(x) {
+set_opts <- function(...) {
+  x <- rlang::list2(...)
   paste0(names(x), "=", unlist_(x), collapse = "&")
 }
 
@@ -52,29 +91,43 @@ flatten_url <- function(base, opts, query = NULL) {
 #' @autoglobal
 #' @noRd
 parse_string <- function(resp, query = NULL) {
-  f <- function(x, qry = NULL) {
+  PS <- function(x, qry = NULL) {
     RcppSimdJson::fparse(httr2::resp_body_string(x), query = qry)
   }
 
-  if (!is.null(query)) {
-    switch(
-      query,
-      count = return(f(resp) |> _$count),
-      results = return(f(resp) |> _$results),
-      names = return(f(resp) |> rlang::names2()),
-      found_rows = return(f(resp) |> _[["found_rows"]]),
-      total_rows = return(f(resp) |> _[["total_rows"]]),
-      return(f(resp, qry = query))
-    )
+  if (is.null(query)) {
+    return(PS(resp))
   }
-  f(resp)
+
+  switch(
+    query,
+    count = PS(resp) |> _$count,
+    results = PS(resp) |> _$results,
+    names = rlang::names2(PS(resp)),
+    found_rows = PS(resp) |> _$found_rows,
+    total_rows = PS(resp) |> _$total_rows,
+    PS(resp, qry = query)
+  )
 }
 
 #' @autoglobal
 #' @noRd
-map_perform_parallel <- function(x, query = NULL) {
+bare_request <- function(x, query = NULL) {
+  httr2::request(x) |>
+    httr2::req_error(body = function(resp) {
+      httr2::resp_body_json(resp)$message
+    }) |>
+    httr2::req_perform() |>
+    parse_string(query = query)
+}
+
+#' @autoglobal
+#' @noRd
+parallel_request <- function(x, query = NULL) {
   purrr::map(x, httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     httr2::resps_successes() |>
-    purrr::map(function(x) parse_string(x, query = query))
+    purrr::map(function(x) {
+      parse_string(x, query = query)
+    })
 }

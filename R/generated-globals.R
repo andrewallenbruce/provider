@@ -172,10 +172,10 @@ utils::globalVariables(c(
   # <cms_update>
   # <nppes>
   "id",
-  # <get_pro_api>
   # <cms_dataset_search>
   # <open_payments>
   # <open_ids>
+  # <get_pro_api>
   "identifier",
   # <hospitals>
   "incorp_state",
@@ -304,9 +304,11 @@ utils::globalVariables(c(
   # <prescribers>
   # <utilization>
   # <fct_stabb>
+  # <state_recode>
   # <abb2full>
   "state.abb",
   # <fct_stname>
+  # <state_recode>
   # <abb2full>
   "state.name",
   # <laboratories>
@@ -327,10 +329,10 @@ utils::globalVariables(c(
   "subtotal",
   # <quality_eligibility>
   "timelength_days",
-  # <get_pro_api>
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
+  # <get_pro_api>
   "title",
   # <tidyup_provider.util>
   "tot_allowed",

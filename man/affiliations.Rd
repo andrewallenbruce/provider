@@ -2,7 +2,7 @@
 % Please edit documentation in R/affiliations.R
 \name{affiliations}
 \alias{affiliations}
-\title{Provider Facility Affiliations}
+\title{Provider-Facility Affiliations}
 \usage{
 affiliations(
   npi = NULL,
@@ -17,27 +17,30 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} Unique clinician ID assigned by NPPES}
+\item{npi}{\verb{<int>} Individual clinician ID, assigned by \emph{NPPES}}
 
-\item{pac}{\verb{<chr>} Unique individual clinician ID assigned by PECOS}
+\item{pac}{\verb{<chr>} Individual clinician ID, assigned by \emph{PECOS}}
 
-\item{first, middle, last, suffix}{\verb{<chr>} Clinician name}
+\item{first, middle, last, suffix}{\verb{<chr>} Individual clinician's name}
 
-\item{facility_type}{\verb{<chr>} type of facility:
-\itemize{
-\item \code{"hp"} Hospital
-\item \code{"lt"} Long-Term Care Hospital
-\item \code{"nh"} Nursing Home
-\item \code{"irf"} Inpatient Rehabilitation Facility
-\item \code{"hha"} Home Health Agency
-\item \code{"snf"} Skilled Nursing Facility
-\item \code{"hs"} Hospice
-\item \code{"df"} Dialysis Facility
+\item{facility_type}{\verb{<chr>} Type of facility:\tabular{ll}{
+   \strong{abbr} \tab \strong{full} \cr
+   \code{hp} \tab Hospital \cr
+   \code{lt} \tab Long-term care hospital \cr
+   \code{nh} \tab Nursing home \cr
+   \code{irf} \tab Inpatient rehabilitation facility \cr
+   \code{hha} \tab Home health agency \cr
+   \code{snf} \tab Skilled nursing facility \cr
+   \code{hs} \tab Hospice \cr
+   \code{df} \tab Dialysis facility \cr
 }}
 
-\item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} or unit within hospital where an individual clinician provides service}
+\item{facility_ccn}{\verb{<chr>} Medicare CCN of \code{facility_type} column's
+facility \emph{or} of a \emph{unit} within the hospital where the individual
+clinician provides services.}
 
-\item{parent_ccn}{\verb{<chr>} CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital}
+\item{parent_ccn}{\verb{<chr>} Medicare CCN of \emph{primary} hospital where the
+individual clinician provides services in a unit within said hospital.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -55,7 +58,7 @@ providers' facility affiliations
 }
 
 \examples{
-# affiliations(facility_type = c("lt", "irf")) 15,105 results
+affiliations()
 
 affiliations(facility_ccn = "33Z302")
 
