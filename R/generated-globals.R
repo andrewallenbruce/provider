@@ -172,7 +172,6 @@ utils::globalVariables(c(
   # <cms_dataset_search>
   # <open_payments>
   # <open_ids>
-  # <get_pro_api>
   "identifier",
   # <hospitals>
   "incorp_state",
@@ -186,8 +185,6 @@ utils::globalVariables(c(
   "jcaho",
   # <cms_dataset_search>
   "keyword",
-  # <get_pro_api>
-  "landingPage",
   # <compare_hcpcs>
   # <tidyup_geography.rx>
   # <tidyup_drug.rx>
@@ -202,6 +199,7 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
+  # <api_medicare>
   "modified",
   # <tidyup>
   "na_blank",
@@ -214,8 +212,6 @@ utils::globalVariables(c(
   "nature_of_payment_or_transfer_of_value",
   # <open_payments>
   "ndc_1",
-  # <get_pro_api>
-  "nextUpdateDate",
   # <cols_qelig>
   "npi",
   # <quality_eligibility>
@@ -276,7 +272,7 @@ utils::globalVariables(c(
   "recipient_state",
   # <reassignments>
   "record_type",
-  # <get_pro_api>
+  # <api_provider>
   "released",
   # <laboratories>
   "rgn_cd",
@@ -329,7 +325,8 @@ utils::globalVariables(c(
   # <cms_update>
   # <cms_dataset_search>
   # <open_ids>
-  # <get_pro_api>
+  # <api_provider>
+  # <api_medicare>
   "title",
   # <tidyup_provider.util>
   "tot_allowed",

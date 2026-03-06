@@ -139,8 +139,8 @@ affiliations <- function(
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli::cli_alert_success("Query returned {N} result{?s}.")
-  cli::cli_alert_info("Retrieving {offset(N, 1500L)} pages...")
+  cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
+  cli::cli_alert_info("Retrieving {offset(N, 1500L)} page{?s}...")
 
   url <- flatten_url(
     base,

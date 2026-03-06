@@ -1,19 +1,60 @@
 #' @autoglobal
 #' @noRd
-get_pro_api <- function() {
+api_provider <- function() {
+  rex <- paste0(
+    c(
+      "Facility Affiliation Data",
+      "National Downloadable File"
+    ),
+    collapse = "|"
+  )
+
   RcppSimdJson::fload(
-    json = "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
+    "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
   ) |>
-    collapse::sbt(
-      title %iin% c("Facility Affiliation Data", "National Downloadable File")
-    ) |>
-    collapse::slt(
-      title,
-      identifier,
-      url = landingPage,
-      last_release = released,
-      next_release = nextUpdateDate
-    ) |>
+    collapse::sbt(stringr::str_which(title, rex)) |>
+    collapse::gv(c(
+      "title",
+      "released",
+      "description",
+      "identifier",
+      "landingPage",
+      "nextUpdateDate"
+    )) |>
+    collapse::roworder(title, released) |>
+    fastplyr::as_tbl()
+}
+
+#' @autoglobal
+#' @noRd
+api_medicare <- function() {
+  rex <- paste0(
+    c(
+      "Public Provider Enrollment",
+      "Order and Refer",
+      "Opt Out Affidavits",
+      "Hospital Enrollment",
+      "Clinical Laboratories",
+      "Pending Initial",
+      "Revalidation",
+      "Medicare Physician & Other Practitioners",
+      "Medicare Part D Prescribers",
+      "Quality Payment Program Experience",
+      "Rural Health Clinic",
+      "Revoked Medicare Providers and Suppliers",
+      "Hospital Price Transparency Enforcement Activities and Outcomes",
+      "Federally Qualified Health Center"
+    ),
+    collapse = "|"
+  )
+
+  RcppSimdJson::fload(
+    json = "https://data.cms.gov/data.json",
+    query = "/dataset"
+  ) |>
+    collapse::sbt(stringr::str_which(title, rex)) |>
+    collapse::gv(c("title", "modified", "description", "identifier")) |>
+    collapse::roworder(title, modified) |>
     fastplyr::as_tbl()
 }
 
