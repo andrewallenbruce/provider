@@ -63,18 +63,17 @@ affiliations <- function(
     facility_type_certification_number = parent_ccn
   )
 
-  # if no query, warn and return first 100 results
-
+  # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
     cli::cli_alert_warning(
-      "No arguments provided. Returning first 100 results."
+      "No arguments provided. Returning first 10 rows."
     )
 
     opts <- flatten_opts(list(
       count = "false",
       results = "true",
       schema = "false",
-      limit = 100L
+      limit = 10L
     ))
 
     base <- "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?"
@@ -83,30 +82,14 @@ affiliations <- function(
     res <- httr2::request(url) |>
       httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
       httr2::req_perform() |>
-      httr2::resp_body_string() |>
-      RcppSimdJson::fparse() |>
-      _$results |>
+      parse_string("results") |>
       fastplyr::as_tbl()
 
-    res <- rlang::set_names(
-      res,
-      c(
-        "npi",
-        "pac",
-        "first",
-        "middle",
-        "last",
-        "suffix",
-        "facility_type",
-        "parent_ccn",
-        "facility_ccn"
-      )
-    )
+    res <- affiliations_names(res)
     return(res)
   }
 
-  # Format query and request number of results
-
+  # Valid Query: Flatten & Request Result Count =====================
   query <- flatten_query(args)
 
   opts <- flatten_opts(list(
@@ -120,23 +103,20 @@ affiliations <- function(
   base <- "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?"
   url <- flatten_url(base, opts, query)
 
-  cnt <- httr2::request(url) |>
+  N <- httr2::request(url) |>
     httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
     httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = TRUE) |>
-    _$count
+    parse_string("count")
 
-  # If count is 0, alert and exit
-
-  if (cnt == 0L) {
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
     cli::cli_alert_danger("Query returned 0 results.")
     return(invisible(NULL))
   }
 
-  # If count is within api limit, return results
-
-  if (cnt <= 1500L) {
-    cli::cli_alert_success("Query returning {cnt} results.")
+  # Count is Within API Limit: Request & Return Results
+  if (N <= 1500L) {
+    cli::cli_alert_success("Query returning {N} results.")
 
     opts <- flatten_opts(list(
       count = "false",
@@ -151,32 +131,16 @@ affiliations <- function(
     res <- httr2::request(url) |>
       httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
       httr2::req_perform() |>
-      httr2::resp_body_string() |>
-      RcppSimdJson::fparse() |>
-      _$results |>
+      parse_string("results") |>
       fastplyr::as_tbl()
 
-    res <- rlang::set_names(
-      res,
-      c(
-        "npi",
-        "pac",
-        "first",
-        "middle",
-        "last",
-        "suffix",
-        "facility_type",
-        "parent_ccn",
-        "facility_ccn"
-      )
-    )
+    res <- affiliations_names(res)
     return(res)
   }
 
-  # At this point, count is above api limit.
-
+  # Count Above API Limit: Alert & Return Results =====================
   cli::cli_alert_success(
-    "Query returning {offset(cnt, 1500L)} pages ({cnt} results)."
+    "Query returning {offset(N, 1500L)} pages ({N} results)."
   )
 
   opts <- flatten_opts(list(
@@ -189,25 +153,23 @@ affiliations <- function(
 
   url <- flatten_url(base, opts, query)
 
-  urls <- offset(cnt, 1500L, "seq") |>
+  urls <- offset(N, 1500L, "seq") |>
     purrr::map_chr(\(x) {
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  req <- purrr::map(urls, httr2::request)
-
-  res <- httr2::req_perform_parallel(req, on_error = "continue")
-
-  res <- purrr::map(res, function(x) {
-    httr2::resp_body_string(x) |>
-      RcppSimdJson::fparse() |>
-      _$results
-  }) |>
+  res <- map_perform_parallel(urls, "results") |>
     collapse::rowbind() |>
     fastplyr::as_tbl()
 
+  affiliations_names(res)
+}
+
+#' @autoglobal
+#' @noRd
+affiliations_names <- function(x) {
   rlang::set_names(
-    res,
+    x,
     c(
       "npi",
       "pac",

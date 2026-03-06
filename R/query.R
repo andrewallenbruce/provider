@@ -59,10 +59,10 @@ parse_string <- function(resp, query = NULL) {
   if (!is.null(query)) {
     switch(
       query,
-      count = return(f(resp) |> _[["count"]]),
-      found_rows = return(f(resp) |> _[["found_rows"]]),
+      count = return(f(resp) |> _$count),
+      results = return(f(resp) |> _$results),
       names = return(f(resp) |> rlang::names2()),
-      results = return(f(resp) |> _[["results"]]),
+      found_rows = return(f(resp) |> _[["found_rows"]]),
       total_rows = return(f(resp) |> _[["total_rows"]]),
       return(f(resp, qry = query))
     )
