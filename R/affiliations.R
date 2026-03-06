@@ -35,15 +35,13 @@
 #' @examples
 #' affiliations()
 #'
-#' affiliations(facility_ccn = "33Z302")
-#'
-#' affiliations(parent_ccn = 331302)
-#'
 #' affiliations(pac = 7810891009)
 #'
 #' affiliations(npi = 1003026055)
 #'
 #' affiliations(first = "KIM")
+#'
+#' affiliations(facility_ccn = c("33Z302", 331302))
 #'
 #' @autoglobal
 #'
@@ -75,8 +73,7 @@ affiliations <- function(
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
-    cli::cli_alert_warning("No arguments provided.")
-    cli::cli_alert_info("Returning first 10 rows.")
+    cli::cli_alert_warning(c("{.emph No Query} ", cli::symbol$pointer, " Returning first 10 rows."))
 
     url <- flatten_url(
       base,
@@ -90,9 +87,9 @@ affiliations <- function(
 
     res <- bare_request(url, "results") |>
       fastplyr::as_tbl() |>
-      map_na_if()
+      map_na_if() |>
+      rename_affiliations()
 
-    res <- rename_affiliations(res)
     return(res)
   }
 
@@ -119,7 +116,7 @@ affiliations <- function(
 
   # Count is Within API Limit: Request & Return Results
   if (N <= 1500L) {
-    cli::cli_alert_success("Query returned {N} results.")
+    cli::cli_alert_success("Query returned {N} result{?s}.")
 
     url <- flatten_url(
       base,
@@ -135,14 +132,14 @@ affiliations <- function(
 
     res <- bare_request(url, "results") |>
       fastplyr::as_tbl() |>
-      map_na_if()
+      map_na_if() |>
+      rename_affiliations()
 
-    res <- rename_affiliations(res)
     return(res)
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli::cli_alert_success("Query returned {N} results.")
+  cli::cli_alert_success("Query returned {N} result{?s}.")
   cli::cli_alert_info("Retrieving {offset(N, 1500L)} pages...")
 
   url <- flatten_url(
@@ -162,24 +159,12 @@ affiliations <- function(
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  res <- parallel_request(urls, "results") |>
+  parallel_request(urls, "results") |>
     collapse::rowbind() |>
     fastplyr::as_tbl() |>
-    map_na_if()
-
-  rename_affiliations(res)
+    map_na_if() |>
+    rename_affiliations()
 }
-
-# affiliations(facility_type = c("lt", "irf")) 15,105 results
-#
-#    * `"hp"` Hospital
-#    * `"lt"` Long-Term Care Hospital
-#    * `"nh"` Nursing Home
-#    * `"irf"` Inpatient Rehabilitation Facility
-#    * `"hha"` Home Health Agency
-#    * `"snf"` Skilled Nursing Facility
-#    * `"hs"` Hospice
-#    * `"df"` Dialysis Facility
 
 #' @autoglobal
 #' @noRd

@@ -53,7 +53,6 @@ utils::globalVariables(c(
   "acr_jcaho_date",
   # <laboratories>
   "acr_jcaho_ind",
-  # <clinicians>
   # <hospitals>
   # <laboratories>
   # <nppes>
@@ -153,8 +152,6 @@ utils::globalVariables(c(
   # <tidyup_provider.util>
   # <tidyup_service.util>
   "gender",
-  # <clinicians>
-  "gndr",
   # <laboratories>
   "gnrl_cntl_type_cd",
   # <laboratories>
@@ -360,7 +357,6 @@ utils::globalVariables(c(
   "value",
   # <abb2full>
   "x",
-  # <clinicians>
   # <hospitals>
   # <laboratories>
   # <nppes>

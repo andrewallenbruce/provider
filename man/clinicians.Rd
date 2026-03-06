@@ -11,63 +11,43 @@ clinicians(
   first = NULL,
   middle = NULL,
   last = NULL,
+  suffix = NULL,
   gender = NULL,
   credential = NULL,
-  school = NULL,
+  grad_school = NULL,
   grad_year = NULL,
-  specialty = NULL,
-  facility_name = NULL,
-  pac_org = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  offset = 0L,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  specialty = NULL,
+  facility_name = NULL,
+  facility_pac = NULL
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<int>} Provider's NPI}
 
-\item{pac}{< \emph{integer} > 10-digit Individual PECOS Associate Control ID}
+\item{pac}{\verb{<int>} Provider's PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > 15-digit Individual Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Provider's Medicare Enrollment ID}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's name}
+\item{first, middle, last, suffix}{\verb{<chr>} Provider's name}
 
-\item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female) or
-\code{"M"} (Male)}
+\item{gender}{\verb{<chr>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
-\item{credential}{Individual provider’s credential}
+\item{credential}{\verb{<chr>} Provider’s credential, i.e. "MD"}
 
-\item{school}{< \emph{character} > Individual provider’s medical school}
+\item{grad_school}{\verb{<chr>} Medical school provider graduated from}
 
-\item{grad_year}{< \emph{integer} > Individual provider’s graduation year}
+\item{grad_year}{\verb{<int>} Provider’s graduation year; YYYY}
 
-\item{specialty}{< \emph{character} > Individual provider’s primary medical
-specialty reported in the selected enrollment}
+\item{city, state, zip}{\verb{<chr>} Provider's city, state, zip}
 
-\item{facility_name}{< \emph{character} > Name of facility associated with the
-individual provider}
+\item{specialty}{\verb{<chr>} Provider’s primary medical specialty}
 
-\item{pac_org}{< \emph{integer} > 10-digit Organizational PECOS Associate Control
-ID}
+\item{facility_name}{\verb{<chr>} Facility associated with Provider}
 
-\item{city}{< \emph{character} > Provider's city}
-
-\item{state}{< \emph{character} > Provider's state}
-
-\item{zip}{< \emph{character} > Provider's ZIP code}
-
-\item{offset}{< \emph{integer} > // \strong{default:} \code{0L} API pagination}
-
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
-
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and
-columns}
-
-\item{...}{Empty}
+\item{facility_pac}{\verb{<int>} Facility's PECOS Associate Control ID}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -101,8 +81,6 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 \description{
 Access information about providers enrolled in Medicare,
 including the medical school that they attended and the year they graduated
-
-\emph{Update Frequency:} \strong{Monthly}
 }
 \section{Links}{
 
@@ -113,9 +91,10 @@ including the medical school that they attended and the year they graduated
 }
 
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-clinicians(enid = "I20081002000549") # enid not working
+clinicians()
 
-clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
-\dontshow{\}) # examplesIf}
+clinicians(enid = "I20081002000549")
+
+clinicians(first = "ETAN")
+
 }

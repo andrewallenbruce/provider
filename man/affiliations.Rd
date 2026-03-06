@@ -60,14 +60,12 @@ providers' facility affiliations
 \examples{
 affiliations()
 
-affiliations(facility_ccn = "33Z302")
-
-affiliations(parent_ccn = 331302)
-
 affiliations(pac = 7810891009)
 
 affiliations(npi = 1003026055)
 
 affiliations(first = "KIM")
+
+affiliations(facility_ccn = c("33Z302", 331302))
 
 }

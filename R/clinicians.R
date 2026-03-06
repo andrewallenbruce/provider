@@ -3,53 +3,23 @@
 #' @description Access information about providers enrolled in Medicare,
 #' including the medical school that they attended and the year they graduated
 #'
-#' *Update Frequency:* **Monthly**
-#'
 #' @section Links:
 #'
 #'    * [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 #'    * [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'
-#' @param npi < *integer* > 10-digit Individual National Provider Identifier
-#'
-#' @param pac < *integer* > 10-digit Individual PECOS Associate Control ID
-#'
-#' @param enid < *character* > 15-digit Individual Medicare Enrollment ID
-#'
-#' @param first,middle,last < *character* > Individual provider's name
-#'
-#' @param gender < *character* > Individual provider's gender; `"F"` (Female) or
-#'   `"M"` (Male)
-#'
-#' @param credential Individual provider’s credential
-#'
-#' @param school < *character* > Individual provider’s medical school
-#'
-#' @param grad_year < *integer* > Individual provider’s graduation year
-#'
-#' @param specialty < *character* > Individual provider’s primary medical
-#'   specialty reported in the selected enrollment
-#'
-#' @param facility_name < *character* > Name of facility associated with the
-#'   individual provider
-#'
-#' @param pac_org < *integer* > 10-digit Organizational PECOS Associate Control
-#'   ID
-#'
-#' @param city < *character* > Provider's city
-#'
-#' @param state < *character* > Provider's state
-#'
-#' @param zip < *character* > Provider's ZIP code
-#'
-#' @param offset < *integer* > // __default:__ `0L` API pagination
-#'
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#'
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and
-#'   columns
-#'
-#' @param ... Empty
+#' @param npi `<int>` Provider's NPI
+#' @param pac `<int>` Provider's PECOS Associate Control ID
+#' @param enid `<chr>` Provider's Medicare Enrollment ID
+#' @param first,middle,last,suffix `<chr>` Provider's name
+#' @param gender `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
+#' @param credential `<chr>` Provider’s credential, i.e. "MD"
+#' @param city,state,zip `<chr>` Provider's city, state, zip
+#' @param grad_school `<chr>` Medical school provider graduated from
+#' @param grad_year `<int>` Provider’s graduation year; YYYY
+#' @param specialty `<chr>` Provider’s primary medical specialty
+#' @param facility_name `<chr>` Facility associated with Provider
+#' @param facility_pac `<int>` Facility's PECOS Associate Control ID
 #'
 #' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -80,13 +50,14 @@
 #'   |`assign_ind`    |Indicates if provider accepts Medicare assignment     |
 #'   |`assign_org`    |Indicates if facility accepts Medicare assignment     |
 #'
-#' @examplesIf interactive()
-#' clinicians(enid = "I20081002000549") # enid not working
+#' @examples
+#' clinicians()
 #'
-#' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
+#' clinicians(enid = "I20081002000549")
+#'
+#' clinicians(first = "ETAN")
 #'
 #' @autoglobal
-#'
 #' @export
 clinicians <- function(
   npi = NULL,
@@ -95,126 +66,167 @@ clinicians <- function(
   first = NULL,
   middle = NULL,
   last = NULL,
+  suffix = NULL,
   gender = NULL,
   credential = NULL,
-  school = NULL,
+  grad_school = NULL,
   grad_year = NULL,
-  specialty = NULL,
-  facility_name = NULL,
-  pac_org = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  offset = 0L,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  specialty = NULL,
+  facility_name = NULL,
+  facility_pac = NULL
 ) {
-  npi <- npi %nn% validate_npi(npi)
-  pac <- pac %nn% check_pac(pac)
-  pac_org <- pac_org %nn% check_pac(pac_org)
-  enid <- enid %nn% check_enid(enid)
-  grad_year <- grad_year %nn% as.character(grad_year)
-  zip <- zip %nn% as.character(zip)
-  gender <- gender %nn% rlang::arg_match(gender, c("F", "M"))
 
-  args <- dplyr::tribble(
-    ~param                 , ~arg          ,
-    "npi"                  , npi           ,
-    "ind_pac_id"           , pac           ,
-    "ind_enrl_id"          , enid          ,
-    "provider_first_name"  , first         ,
-    "provider_middle_name" , middle        ,
-    "provider_last_name"   , last          ,
-    "gndr"                 , gender        ,
-    "cred"                 , credential    ,
-    "med_sch"              , school        ,
-    "grd_yr"               , grad_year     ,
-    "pri_spec"             , specialty     ,
-    "facility_name"        , facility_name ,
-    "org_pac_id"           , pac_org       ,
-    "citytown"             , city          ,
-    "state"                , state         ,
-    "zip_code"             , zip
+  args <- parameters(
+    npi = npi,
+    ind_pac_id = pac,
+    ind_enrl_id = enid,
+    provider_last_name = last,
+    provider_first_name = first,
+    provider_middle_name = middle,
+    suff = suffix,
+    gndr = gender,
+    cred = credential,
+    med_sch = grad_school,
+    grd_yr = grad_year,
+    pri_spec = specialty,
+    facility_name = facility_name,
+    org_pac_id = facility_pac,
+    citytown = city,
+    state = state,
+    zip_code = zip
   )
 
-  error_body <- function(response) httr2::resp_body_json(response)$message
+  base <- "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?"
 
-  response <- httr2::request(file_url("c", args)) |>
-    httr2::req_error(body = error_body) |>
-    httr2::req_perform()
+  # No Query: Warn & Return First 10 Rows =====================
+  if (!length(args)) {
+    cli::cli_alert_warning(c("{.emph No Query} ", cli::symbol$pointer, " Returning first 10 rows."))
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+    url <- flatten_url(
+      base,
+      opts = set_opts(
+        count = "false",
+        results = "true",
+        schema = "false",
+        limit = 10L
+      )
+    )
 
-  if (vctrs::vec_is_empty(results)) {
-    cli_args <- dplyr::tribble(
-      ~x              , ~y            ,
-      "npi"           , npi           ,
-      "pac"           , pac           ,
-      "enid"          , enid          ,
-      "first"         , first         ,
-      "middle"        , middle        ,
-      "last"          , last          ,
-      "gender"        , gender        ,
-      "credential"    , credential    ,
-      "school"        , school        ,
-      "grad_year"     , grad_year     ,
-      "specialty"     , specialty     ,
-      "facility_name" , facility_name ,
-      "pac_org"       , pac_org       ,
-      "city"          , city          ,
-      "state"         , state         ,
-      "zip"           , zip
-    ) |>
-      tidyr::unnest(cols = c(y))
+    res <- bare_request(url, "results") |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_clinicians()
 
-    format_cli(cli_args)
+    return(res)
+  }
+  # Valid Query: Flatten & Request Result Count =====================
+  url <- flatten_url(
+    base,
+    opts = set_opts(
+      count = "true",
+      results = "false",
+      schema = "false",
+      offset = 0,
+      limit = 1500
+    ),
+    query = flatten_query(args)
+  )
+
+  N <- bare_request(url, "count")
+
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
+    cli::cli_alert_danger("Query returned {N} result{?s}.")
     return(invisible(NULL))
   }
 
-  if (tidy) {
-    results <- tidyup(
-      results,
-      yn = 'telehlth',
-      int = c('num_org_mem', 'grd_yr'),
-      zip = 'zip_code'
-    ) |>
-      combine(address, c('adr_ln_1', 'adr_ln_2')) |>
-      dplyr::mutate(gndr = fct_gen(gndr), state = fct_stabb(state)) |>
-      cols_clin()
+  # Count is Within API Limit: Request & Return Results
+  if (N <= 1500L) {
+    cli::cli_alert_success("Query returned {N} result{?s}.")
 
-    if (na.rm) results <- narm(results)
+    url <- flatten_url(
+      base,
+      opts = set_opts(
+        count = "false",
+        results = "true",
+        schema = "false",
+        offset = 0,
+        limit = 1500
+      ),
+      query = flatten_query(args)
+    )
+
+    res <- bare_request(url, "results") |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_clinicians()
+
+    return(res)
   }
-  return(results)
-}
 
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_clin <- function(df) {
-  cols <- c(
-    'npi',
-    'pac' = 'ind_pac_id',
-    'enid' = 'ind_enrl_id',
-    'first' = 'provider_first_name',
-    'middle' = 'provider_middle_name',
-    'last' = 'provider_last_name',
-    'suffix' = 'suff',
-    'gender' = 'gndr',
-    'credential' = 'cred',
-    'school' = 'med_sch',
-    'grad_year' = 'grd_yr',
-    'specialty' = 'pri_spec',
-    'specialty_sec' = 'sec_spec_all',
-    'facility_name',
-    'pac_org' = 'org_pac_id',
-    'members_org' = 'num_org_mem',
-    'address_org' = 'address',
-    'city_org' = 'citytown',
-    'state_org' = 'state',
-    'zip_org' = 'zip_code',
-    'phone_org' = 'telephone_number'
+  # Count Above API Limit: Alert & Return Results =====================
+  cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
+  cli::cli_alert_info("Retrieving {offset(N, 1500L)} page{?s}...")
+
+  url <- flatten_url(
+    base,
+    opts = set_opts(
+      count = "false",
+      results = "true",
+      schema = "false",
+      limit = 1500,
+      offset = "<<i>>"
+    ),
+    query = flatten_query(args)
   )
 
-  df |> dplyr::select(dplyr::any_of(cols))
+  urls <- offset(N, 1500L, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+
+  parallel_request(urls, "results") |>
+    collapse::rowbind() |>
+    fastplyr::as_tbl() |>
+    map_na_if() |>
+    rename_clinicians()
+}
+
+#' @autoglobal
+#' @noRd
+rename_clinicians <- function(x) {
+  NM <- c(
+    npi = "npi",
+    ind_pac_id = "pac",
+    ind_enrl_id = "enid",
+    provider_last_name = "last",
+    provider_first_name = "first",
+    provider_middle_name = "middle",
+    suff = "suffix",
+    gndr = "gender",
+    cred = "credential",
+    med_sch = "grad_school",
+    grd_yr = "grad_year",
+    pri_spec = "specialty",
+    sec_spec_all = "spec_other",
+    telehlth = "telehealth",
+    facility_name = "facility_name",
+    org_pac_id = "org_pac",
+    num_org_mem = "org_mem",
+    adr_ln_1 = "add_1",
+    adr_ln_2 = "add_2",
+    citytown = "city",
+    state = "state",
+    zip_code = "zip",
+    telephone_number = "phone",
+    ind_assgn = "ind_par",
+    grp_assgn = "grp_par"
+  )
+
+  collapse::setrename(x, NM, .nse = FALSE)
+
+  collapse::gv(x, unlist_(NM))
 }

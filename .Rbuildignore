@@ -12,3 +12,5 @@ vignettes
 ^codecov\.yml$
 ^data-raw$
 ^man-roxygen$
+^\.positai$
+^\.claude$
