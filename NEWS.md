@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9012 (2026-03-06)
+
+* refactored `clinicians()`
+
+
 # provider 0.0.1.9011 (2026-03-06)
 
 * tinkering with affiliations
