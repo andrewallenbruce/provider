@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9012 (2026-03-06)
+
+- refactored
+  [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
+
 ## provider 0.0.1.9011 (2026-03-06)
 
 - tinkering with affiliations

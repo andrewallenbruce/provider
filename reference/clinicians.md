@@ -3,8 +3,6 @@
 Access information about providers enrolled in Medicare, including the
 medical school that they attended and the year they graduated
 
-*Update Frequency:* **Monthly**
-
 ## Usage
 
 ``` r
@@ -15,20 +13,17 @@ clinicians(
   first = NULL,
   middle = NULL,
   last = NULL,
+  suffix = NULL,
   gender = NULL,
   credential = NULL,
-  school = NULL,
+  grad_school = NULL,
   grad_year = NULL,
-  specialty = NULL,
-  facility_name = NULL,
-  pac_org = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  offset = 0L,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  specialty = NULL,
+  facility_name = NULL,
+  facility_pac = NULL
 )
 ```
 
@@ -36,78 +31,52 @@ clinicians(
 
 - npi:
 
-  \< *integer* \> 10-digit Individual National Provider Identifier
+  `<int>` Provider's NPI
 
 - pac:
 
-  \< *integer* \> 10-digit Individual PECOS Associate Control ID
+  `<int>` Provider's PECOS Associate Control ID
 
 - enid:
 
-  \< *character* \> 15-digit Individual Medicare Enrollment ID
+  `<chr>` Provider's Medicare Enrollment ID
 
-- first, middle, last:
+- first, middle, last, suffix:
 
-  \< *character* \> Individual provider's name
+  `<chr>` Provider's name
 
 - gender:
 
-  \< *character* \> Individual provider's gender; `"F"` (Female) or
-  `"M"` (Male)
+  `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
+  (Unknown)
 
 - credential:
 
-  Individual provider’s credential
+  `<chr>` Provider’s credential, i.e. "MD"
 
-- school:
+- grad_school:
 
-  \< *character* \> Individual provider’s medical school
+  `<chr>` Medical school provider graduated from
 
 - grad_year:
 
-  \< *integer* \> Individual provider’s graduation year
+  `<int>` Provider’s graduation year; YYYY
+
+- city, state, zip:
+
+  `<chr>` Provider's city, state, zip
 
 - specialty:
 
-  \< *character* \> Individual provider’s primary medical specialty
-  reported in the selected enrollment
+  `<chr>` Provider’s primary medical specialty
 
 - facility_name:
 
-  \< *character* \> Name of facility associated with the individual
-  provider
+  `<chr>` Facility associated with Provider
 
-- pac_org:
+- facility_pac:
 
-  \< *integer* \> 10-digit Organizational PECOS Associate Control ID
-
-- city:
-
-  \< *character* \> Provider's city
-
-- state:
-
-  \< *character* \> Provider's state
-
-- zip:
-
-  \< *character* \> Provider's ZIP code
-
-- offset:
-
-  \< *integer* \> // **default:** `0L` API pagination
-
-- tidy:
-
-  \< *boolean* \> // **default:** `TRUE` Tidy output
-
-- na.rm:
-
-  \< *boolean* \> // **default:** `TRUE` Remove empty rows and columns
-
-- ...:
-
-  Empty
+  `<int>` Facility's PECOS Associate Control ID
 
 ## Value
 
@@ -153,9 +122,55 @@ with the columns:
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
-clinicians(enid = "I20081002000549") # enid not working
+clinicians()
+#> ! No Query ❯ Returning first 10 rows.
+#> # A tibble: 10 × 25
+#>    npi       pac   enid  last  first middle suffix gender credential grad_school
+#>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
+#>  1 10030001… 7517… I201… ENKE… ARDA… NA     NA     M      MD         OTHER      
+#>  2 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
+#>  3 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
+#>  4 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
+#>  5 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
+#>  6 10030004… 9133… I201… VELO… JENN… A      NA     F      MD         TOLEDO MED…
+#>  7 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
+#>  8 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
+#>  9 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
+#> 10 10030005… 2163… I200… SEMO… AMAN… M      NA     F      DO         LAKE ERIE …
+#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
+#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
+#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
+#> #   ind_par <chr>, grp_par <chr>
 
-clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
-}
+clinicians(enid = "I20081002000549")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 25
+#>   npi        pac   enid  last  first middle suffix gender credential grad_school
+#>   <chr>      <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
+#> 1 1407031495 8022… I200… MCCU… DORO… E      NA     F      AU         OTHER      
+#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
+#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
+#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
+#> #   ind_par <chr>, grp_par <chr>
+
+clinicians(first = "ETAN")
+#> ✔ Query returned 11 results.
+#> # A tibble: 11 × 25
+#>    npi       pac   enid  last  first middle suffix gender credential grad_school
+#>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
+#>  1 10030118… 4587… I201… SPIRA ETAN  NA     NA     M      MD         NEW YORK U…
+#>  2 10030118… 4587… I201… SPIRA ETAN  NA     NA     M      MD         NEW YORK U…
+#>  3 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
+#>  4 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
+#>  5 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
+#>  6 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
+#>  7 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
+#>  8 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
+#>  9 15283017… 7113… I201… MARKS ETAN  ARIEL  NA     M      DO         NOVA SOUTH…
+#> 10 15283017… 7113… I202… MARKS ETAN  ARIEL  NA     M      DO         NOVA SOUTH…
+#> 11 16990407… 7618… I202… DAYAN ETAN  NA     NA     M      MD         STATE UNIV…
+#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
+#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
+#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
+#> #   ind_par <chr>, grp_par <chr>
 ```

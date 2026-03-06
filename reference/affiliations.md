@@ -77,8 +77,7 @@ containing the search results.
 
 ``` r
 affiliations()
-#> ! No arguments provided.
-#> ℹ Returning first 10 rows.
+#> ! No Query ❯ Returning first 10 rows.
 #> # A tibble: 10 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -93,26 +92,6 @@ affiliations()
 #>  9 100300… 4082… KIM   DAE   NA     NA     Hospital      370202       NA        
 #> 10 100300… 4082… KIM   DAE   NA     NA     Hospital      370057       NA        
 
-affiliations(facility_ccn = "33Z302")
-#> ✔ Query returned 4 results.
-#> # A tibble: 4 × 9
-#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
-#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
-#> 1 1073258… 3870… KLOTZ JEFF… NA     NA     Nursing home  33Z302       331302    
-#> 2 1396989… 8921… HALL… MARY  K      NA     Nursing home  33Z302       331302    
-#> 3 1538173… 0547… CHON  IL    JUN    NA     Nursing home  33Z302       331302    
-#> 4 1558659… 6709… BANU  DRAG… NA     NA     Nursing home  33Z302       331302    
-
-affiliations(parent_ccn = 331302)
-#> ✔ Query returned 4 results.
-#> # A tibble: 4 × 9
-#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
-#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
-#> 1 1073258… 3870… KLOTZ JEFF… NA     NA     Nursing home  33Z302       331302    
-#> 2 1396989… 8921… HALL… MARY  K      NA     Nursing home  33Z302       331302    
-#> 3 1538173… 0547… CHON  IL    JUN    NA     Nursing home  33Z302       331302    
-#> 4 1558659… 6709… BANU  DRAG… NA     NA     Nursing home  33Z302       331302    
-
 affiliations(pac = 7810891009)
 #> ✔ Query returned 5 results.
 #> # A tibble: 5 × 9
@@ -125,7 +104,7 @@ affiliations(pac = 7810891009)
 #> 5 1043245… 7810… FUNG  MARK  K      NA     Hospital      471307       NA        
 
 affiliations(npi = 1003026055)
-#> ✔ Query returned 1 results.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 9
 #>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -147,4 +126,21 @@ affiliations(first = "KIM")
 #>  9 101307… 0547… WRIG… KIM   C      NA     Hospital      140185       NA        
 #> 10 101309… 1254… CARL… KIM   M      NA     Hospital      030007       NA        
 #> # ℹ 700 more rows
+
+affiliations(facility_ccn = c("33Z302", 331302))
+#> ✔ Query returned 210 results.
+#> # A tibble: 210 × 9
+#>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#>  1 100384… 1759… GREE… LAURA A      NA     Hospital      331302       NA        
+#>  2 101314… 8022… KAMP… DEBO… M      NA     Hospital      331302       NA        
+#>  3 101353… 9133… VASS… NAROD NA     NA     Hospital      331302       NA        
+#>  4 101359… 3375… TRIP… EMILY NA     NA     Hospital      331302       NA        
+#>  5 101391… 5890… ACOS… JOSE  M      NA     Hospital      331302       NA        
+#>  6 102337… 6901… WILH… LIND… B      NA     Hospital      331302       NA        
+#>  7 104367… 7214… FIOR… VANE… NA     NA     Hospital      331302       NA        
+#>  8 106342… 9436… YOUNG JOHN  NA     NA     Hospital      331302       NA        
+#>  9 107307… 0547… OSBO… DELA… NA     NA     Hospital      331302       NA        
+#> 10 107313… 6800… GILL  ANGAD NA     NA     Hospital      331302       NA        
+#> # ℹ 200 more rows
 ```

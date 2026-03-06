@@ -211,9 +211,6 @@ hospitals(pac_org = "O12345678912")
 ``` r
 # Must be a character vector
 clinicians(enid = 0123456789123456)
-#> Error in `clinicians()`:
-#> ! An Enrollment ID must be a <character> vector.
-#> ✖ 123456789123456 is a <numeric> vector.
 
 # Must be 15 characters long
 reassignments(enid = "I123456789123456")
