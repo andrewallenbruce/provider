@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9011 (2026-03-06)
+
+- tinkering with affiliations
+
 ## provider 0.0.1.9010 (2026-03-05)
 
 - clean up

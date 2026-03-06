@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,9 +155,12 @@ Bruce</h4>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**FACILITY** AFFILIATIONS"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_horizontal_padding.html" class="external-link">opt_horizontal_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `reh_conversion` doesn't exist.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre>
 <p><br></p>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
@@ -645,278 +648,278 @@ all-numeric CCN (<code>331302</code>):</p>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pac">pac</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first">first</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="middle">middle</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_type">facility_type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="parent_ccn">parent_ccn</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="parent_ccn">parent_ccn</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
 <td headers="stub_1_1 npi" class="gt_row gt_right">1003845272</td>
 <td headers="stub_1_1 pac" class="gt_row gt_right">1759384035</td>
-<td headers="stub_1_1 first" class="gt_row gt_left">GREENE</td>
-<td headers="stub_1_1 middle" class="gt_row gt_left">LAURA</td>
-<td headers="stub_1_1 last" class="gt_row gt_left">A</td>
-<td headers="stub_1_1 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_1 last" class="gt_row gt_left">GREENE</td>
+<td headers="stub_1_1 first" class="gt_row gt_left">LAURA</td>
+<td headers="stub_1_1 middle" class="gt_row gt_left">A</td>
+<td headers="stub_1_1 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_1 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_1 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_1 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_1 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_1 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
 <td headers="stub_1_2 npi" class="gt_row gt_right">1013141860</td>
 <td headers="stub_1_2 pac" class="gt_row gt_right">8022069558</td>
-<td headers="stub_1_2 first" class="gt_row gt_left">KAMPSCHROR</td>
-<td headers="stub_1_2 middle" class="gt_row gt_left">DEBORAH</td>
-<td headers="stub_1_2 last" class="gt_row gt_left">M</td>
-<td headers="stub_1_2 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_2 last" class="gt_row gt_left">KAMPSCHROR</td>
+<td headers="stub_1_2 first" class="gt_row gt_left">DEBORAH</td>
+<td headers="stub_1_2 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_2 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_2 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_2 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_2 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_2 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_2 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
 <td headers="stub_1_3 npi" class="gt_row gt_right">1013539584</td>
 <td headers="stub_1_3 pac" class="gt_row gt_right">9133544109</td>
-<td headers="stub_1_3 first" class="gt_row gt_left">VASSILIAN</td>
-<td headers="stub_1_3 middle" class="gt_row gt_left">NAROD</td>
-<td headers="stub_1_3 last" class="gt_row gt_left"></td>
-<td headers="stub_1_3 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_3 last" class="gt_row gt_left">VASSILIAN</td>
+<td headers="stub_1_3 first" class="gt_row gt_left">NAROD</td>
+<td headers="stub_1_3 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_3 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_3 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_3 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_3 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_3 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_3 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
 <td headers="stub_1_4 npi" class="gt_row gt_right">1013595560</td>
 <td headers="stub_1_4 pac" class="gt_row gt_right">3375947401</td>
-<td headers="stub_1_4 first" class="gt_row gt_left">TRIPLETT</td>
-<td headers="stub_1_4 middle" class="gt_row gt_left">EMILY</td>
-<td headers="stub_1_4 last" class="gt_row gt_left"></td>
-<td headers="stub_1_4 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_4 last" class="gt_row gt_left">TRIPLETT</td>
+<td headers="stub_1_4 first" class="gt_row gt_left">EMILY</td>
+<td headers="stub_1_4 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_4 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_4 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_4 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_4 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_4 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_4 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
 <td headers="stub_1_5 npi" class="gt_row gt_right">1013910256</td>
 <td headers="stub_1_5 pac" class="gt_row gt_right">5890719371</td>
-<td headers="stub_1_5 first" class="gt_row gt_left">ACOSTAMADIEDO</td>
-<td headers="stub_1_5 middle" class="gt_row gt_left">JOSE</td>
-<td headers="stub_1_5 last" class="gt_row gt_left">M</td>
-<td headers="stub_1_5 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_5 last" class="gt_row gt_left">ACOSTAMADIEDO</td>
+<td headers="stub_1_5 first" class="gt_row gt_left">JOSE</td>
+<td headers="stub_1_5 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_5 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_5 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_5 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_5 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_5 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_5 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">6</th>
 <td headers="stub_1_6 npi" class="gt_row gt_right">1023377843</td>
 <td headers="stub_1_6 pac" class="gt_row gt_right">6901115278</td>
-<td headers="stub_1_6 first" class="gt_row gt_left">WILHELM</td>
-<td headers="stub_1_6 middle" class="gt_row gt_left">LINDSEY</td>
-<td headers="stub_1_6 last" class="gt_row gt_left">B</td>
-<td headers="stub_1_6 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_6 last" class="gt_row gt_left">WILHELM</td>
+<td headers="stub_1_6 first" class="gt_row gt_left">LINDSEY</td>
+<td headers="stub_1_6 middle" class="gt_row gt_left">B</td>
+<td headers="stub_1_6 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_6 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_6 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_6 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_6 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_6 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">7</th>
 <td headers="stub_1_7 npi" class="gt_row gt_right">1043672140</td>
 <td headers="stub_1_7 pac" class="gt_row gt_right">7214229350</td>
-<td headers="stub_1_7 first" class="gt_row gt_left">FIORINI FURTADO</td>
-<td headers="stub_1_7 middle" class="gt_row gt_left">VANESSA</td>
-<td headers="stub_1_7 last" class="gt_row gt_left"></td>
-<td headers="stub_1_7 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_7 last" class="gt_row gt_left">FIORINI FURTADO</td>
+<td headers="stub_1_7 first" class="gt_row gt_left">VANESSA</td>
+<td headers="stub_1_7 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_7 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_7 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_7 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_7 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_7 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_7 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">8</th>
 <td headers="stub_1_8 npi" class="gt_row gt_right">1063420891</td>
 <td headers="stub_1_8 pac" class="gt_row gt_right">9436051687</td>
-<td headers="stub_1_8 first" class="gt_row gt_left">YOUNG</td>
-<td headers="stub_1_8 middle" class="gt_row gt_left">JOHN</td>
-<td headers="stub_1_8 last" class="gt_row gt_left"></td>
-<td headers="stub_1_8 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_8 last" class="gt_row gt_left">YOUNG</td>
+<td headers="stub_1_8 first" class="gt_row gt_left">JOHN</td>
+<td headers="stub_1_8 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_8 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_8 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_8 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_8 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_8 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_8 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">9</th>
 <td headers="stub_1_9 npi" class="gt_row gt_right">1073073177</td>
 <td headers="stub_1_9 pac" class="gt_row gt_right">0547593097</td>
-<td headers="stub_1_9 first" class="gt_row gt_left">OSBORN</td>
-<td headers="stub_1_9 middle" class="gt_row gt_left">DELANEY</td>
-<td headers="stub_1_9 last" class="gt_row gt_left"></td>
-<td headers="stub_1_9 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_9 last" class="gt_row gt_left">OSBORN</td>
+<td headers="stub_1_9 first" class="gt_row gt_left">DELANEY</td>
+<td headers="stub_1_9 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_9 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_9 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_9 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_9 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_9 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_9 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">10</th>
 <td headers="stub_1_10 npi" class="gt_row gt_right">1073133435</td>
 <td headers="stub_1_10 pac" class="gt_row gt_right">6800318452</td>
-<td headers="stub_1_10 first" class="gt_row gt_left">GILL</td>
-<td headers="stub_1_10 middle" class="gt_row gt_left">ANGAD</td>
-<td headers="stub_1_10 last" class="gt_row gt_left"></td>
-<td headers="stub_1_10 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_10 last" class="gt_row gt_left">GILL</td>
+<td headers="stub_1_10 first" class="gt_row gt_left">ANGAD</td>
+<td headers="stub_1_10 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_10 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_10 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_10 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_10 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_10 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_10 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">11</th>
 <td headers="stub_1_11 npi" class="gt_row gt_right">1073258398</td>
 <td headers="stub_1_11 pac" class="gt_row gt_right">3870095805</td>
-<td headers="stub_1_11 first" class="gt_row gt_left">KLOTZ</td>
-<td headers="stub_1_11 middle" class="gt_row gt_left">JEFFREY</td>
-<td headers="stub_1_11 last" class="gt_row gt_left"></td>
-<td headers="stub_1_11 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_11 last" class="gt_row gt_left">KLOTZ</td>
+<td headers="stub_1_11 first" class="gt_row gt_left">JEFFREY</td>
+<td headers="stub_1_11 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_11 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_11 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_11 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_11 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_11 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_11 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">12</th>
 <td headers="stub_1_12 npi" class="gt_row gt_right">1073572236</td>
 <td headers="stub_1_12 pac" class="gt_row gt_right">7012816168</td>
-<td headers="stub_1_12 first" class="gt_row gt_left">RHEEMAN</td>
-<td headers="stub_1_12 middle" class="gt_row gt_left">CHARLES</td>
-<td headers="stub_1_12 last" class="gt_row gt_left">H</td>
-<td headers="stub_1_12 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_12 last" class="gt_row gt_left">RHEEMAN</td>
+<td headers="stub_1_12 first" class="gt_row gt_left">CHARLES</td>
+<td headers="stub_1_12 middle" class="gt_row gt_left">H</td>
+<td headers="stub_1_12 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_12 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_12 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_12 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_12 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_12 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">13</th>
 <td headers="stub_1_13 npi" class="gt_row gt_right">1073634531</td>
 <td headers="stub_1_13 pac" class="gt_row gt_right">9234285487</td>
-<td headers="stub_1_13 first" class="gt_row gt_left">GILBERT</td>
-<td headers="stub_1_13 middle" class="gt_row gt_left">MATTHEW</td>
-<td headers="stub_1_13 last" class="gt_row gt_left">P</td>
-<td headers="stub_1_13 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_13 last" class="gt_row gt_left">GILBERT</td>
+<td headers="stub_1_13 first" class="gt_row gt_left">MATTHEW</td>
+<td headers="stub_1_13 middle" class="gt_row gt_left">P</td>
+<td headers="stub_1_13 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_13 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_13 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_13 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_13 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_13 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">14</th>
 <td headers="stub_1_14 npi" class="gt_row gt_right">1073660684</td>
 <td headers="stub_1_14 pac" class="gt_row gt_right">1759418007</td>
-<td headers="stub_1_14 first" class="gt_row gt_left">BIGELOW</td>
-<td headers="stub_1_14 middle" class="gt_row gt_left">GAYLEN</td>
-<td headers="stub_1_14 last" class="gt_row gt_left">M</td>
-<td headers="stub_1_14 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_14 last" class="gt_row gt_left">BIGELOW</td>
+<td headers="stub_1_14 first" class="gt_row gt_left">GAYLEN</td>
+<td headers="stub_1_14 middle" class="gt_row gt_left">M</td>
+<td headers="stub_1_14 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_14 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_14 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_14 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_14 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_14 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">15</th>
 <td headers="stub_1_15 npi" class="gt_row gt_right">1083148837</td>
 <td headers="stub_1_15 pac" class="gt_row gt_right">0042564882</td>
-<td headers="stub_1_15 first" class="gt_row gt_left">KRULEWITZ</td>
-<td headers="stub_1_15 middle" class="gt_row gt_left">NEIL</td>
-<td headers="stub_1_15 last" class="gt_row gt_left">A</td>
-<td headers="stub_1_15 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_15 last" class="gt_row gt_left">KRULEWITZ</td>
+<td headers="stub_1_15 first" class="gt_row gt_left">NEIL</td>
+<td headers="stub_1_15 middle" class="gt_row gt_left">A</td>
+<td headers="stub_1_15 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_15 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_15 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_15 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_15 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_15 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">16</th>
 <td headers="stub_1_16 npi" class="gt_row gt_right">1083861934</td>
 <td headers="stub_1_16 pac" class="gt_row gt_right">2860555141</td>
-<td headers="stub_1_16 first" class="gt_row gt_left">ELLIOTT</td>
-<td headers="stub_1_16 middle" class="gt_row gt_left">STEVEN</td>
-<td headers="stub_1_16 last" class="gt_row gt_left">J</td>
-<td headers="stub_1_16 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_16 last" class="gt_row gt_left">ELLIOTT</td>
+<td headers="stub_1_16 first" class="gt_row gt_left">STEVEN</td>
+<td headers="stub_1_16 middle" class="gt_row gt_left">J</td>
+<td headers="stub_1_16 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_16 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_16 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_16 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_16 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_16 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">17</th>
 <td headers="stub_1_17 npi" class="gt_row gt_right">1083887137</td>
 <td headers="stub_1_17 pac" class="gt_row gt_right">8921256520</td>
-<td headers="stub_1_17 first" class="gt_row gt_left">WALSH</td>
-<td headers="stub_1_17 middle" class="gt_row gt_left">RYAN</td>
-<td headers="stub_1_17 last" class="gt_row gt_left"></td>
-<td headers="stub_1_17 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_17 last" class="gt_row gt_left">WALSH</td>
+<td headers="stub_1_17 first" class="gt_row gt_left">RYAN</td>
+<td headers="stub_1_17 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_17 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_17 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_17 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_17 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_17 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_17 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">18</th>
 <td headers="stub_1_18 npi" class="gt_row gt_right">1093386070</td>
 <td headers="stub_1_18 pac" class="gt_row gt_right">3476085051</td>
-<td headers="stub_1_18 first" class="gt_row gt_left">GADELHA PIEROTTI</td>
-<td headers="stub_1_18 middle" class="gt_row gt_left">ELISSA</td>
-<td headers="stub_1_18 last" class="gt_row gt_left">JENSEN</td>
-<td headers="stub_1_18 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_18 last" class="gt_row gt_left">GADELHA PIEROTTI</td>
+<td headers="stub_1_18 first" class="gt_row gt_left">ELISSA</td>
+<td headers="stub_1_18 middle" class="gt_row gt_left">JENSEN</td>
+<td headers="stub_1_18 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_18 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_18 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_18 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_18 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_18 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">19</th>
 <td headers="stub_1_19 npi" class="gt_row gt_right">1093796898</td>
 <td headers="stub_1_19 pac" class="gt_row gt_right">5597848077</td>
-<td headers="stub_1_19 first" class="gt_row gt_left">MAHONEY</td>
-<td headers="stub_1_19 middle" class="gt_row gt_left">ANDREW</td>
-<td headers="stub_1_19 last" class="gt_row gt_left">C</td>
-<td headers="stub_1_19 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_19 last" class="gt_row gt_left">MAHONEY</td>
+<td headers="stub_1_19 first" class="gt_row gt_left">ANDREW</td>
+<td headers="stub_1_19 middle" class="gt_row gt_left">C</td>
+<td headers="stub_1_19 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_19 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_19 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_19 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_19 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_19 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">20</th>
 <td headers="stub_1_20 npi" class="gt_row gt_right">1104118330</td>
 <td headers="stub_1_20 pac" class="gt_row gt_right">0547408825</td>
-<td headers="stub_1_20 first" class="gt_row gt_left">BROWN</td>
-<td headers="stub_1_20 middle" class="gt_row gt_left">JODI</td>
-<td headers="stub_1_20 last" class="gt_row gt_left">AU</td>
-<td headers="stub_1_20 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_20 last" class="gt_row gt_left">BROWN</td>
+<td headers="stub_1_20 first" class="gt_row gt_left">JODI</td>
+<td headers="stub_1_20 middle" class="gt_row gt_left">AU</td>
+<td headers="stub_1_20 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_20 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_20 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_20 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_20 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_20 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 <tr>
 <th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">21..205</th>
 <td headers="stub_1_21 npi" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
 <td headers="stub_1_21 pac" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 last" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
 <td headers="stub_1_21 first" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
 <td headers="stub_1_21 middle" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 last" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 suffix" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 suffix" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
 <td headers="stub_1_21 facility_type" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_21 parent_ccn" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
 <td headers="stub_1_21 facility_ccn" class="gt_row gt_right" style="background-color: #E4E4E4;"></td>
+<td headers="stub_1_21 parent_ccn" class="gt_row gt_left" style="background-color: #E4E4E4;"></td>
 </tr>
 <tr>
 <th id="stub_1_22" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">206</th>
 <td headers="stub_1_22 npi" class="gt_row gt_right">1992993794</td>
 <td headers="stub_1_22 pac" class="gt_row gt_right">7113172685</td>
-<td headers="stub_1_22 first" class="gt_row gt_left">DAVIS</td>
-<td headers="stub_1_22 middle" class="gt_row gt_left">ELLEN</td>
-<td headers="stub_1_22 last" class="gt_row gt_left"></td>
-<td headers="stub_1_22 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_22 last" class="gt_row gt_left">DAVIS</td>
+<td headers="stub_1_22 first" class="gt_row gt_left">ELLEN</td>
+<td headers="stub_1_22 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_22 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_22 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_22 parent_ccn" class="gt_row gt_right">331302</td>
-<td headers="stub_1_22 facility_ccn" class="gt_row gt_right"></td>
+<td headers="stub_1_22 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_22 parent_ccn" class="gt_row gt_left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -1383,62 +1386,62 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pac">pac</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first">first</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="middle">middle</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last">last</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="suffix">suffix</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_type">facility_type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="parent_ccn">parent_ccn</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="facility_ccn">facility_ccn</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="parent_ccn">parent_ccn</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
 <td headers="stub_1_1 npi" class="gt_row gt_right">1073258398</td>
 <td headers="stub_1_1 pac" class="gt_row gt_right">3870095805</td>
-<td headers="stub_1_1 first" class="gt_row gt_left">KLOTZ</td>
-<td headers="stub_1_1 middle" class="gt_row gt_left">JEFFREY</td>
-<td headers="stub_1_1 last" class="gt_row gt_left"></td>
-<td headers="stub_1_1 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_1 last" class="gt_row gt_left">KLOTZ</td>
+<td headers="stub_1_1 first" class="gt_row gt_left">JEFFREY</td>
+<td headers="stub_1_1 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_1 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_1 facility_type" class="gt_row gt_left">Nursing home</td>
-<td headers="stub_1_1 parent_ccn" class="gt_row gt_left">33Z302</td>
-<td headers="stub_1_1 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_1 facility_ccn" class="gt_row gt_left">33Z302</td>
+<td headers="stub_1_1 parent_ccn" class="gt_row gt_right">331302</td>
 </tr>
 <tr>
 <th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
 <td headers="stub_1_2 npi" class="gt_row gt_right">1396989059</td>
 <td headers="stub_1_2 pac" class="gt_row gt_right">8921259557</td>
-<td headers="stub_1_2 first" class="gt_row gt_left">HALLORAN</td>
-<td headers="stub_1_2 middle" class="gt_row gt_left">MARY</td>
-<td headers="stub_1_2 last" class="gt_row gt_left">K</td>
-<td headers="stub_1_2 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_2 last" class="gt_row gt_left">HALLORAN</td>
+<td headers="stub_1_2 first" class="gt_row gt_left">MARY</td>
+<td headers="stub_1_2 middle" class="gt_row gt_left">K</td>
+<td headers="stub_1_2 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_2 facility_type" class="gt_row gt_left">Nursing home</td>
-<td headers="stub_1_2 parent_ccn" class="gt_row gt_left">33Z302</td>
-<td headers="stub_1_2 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_2 facility_ccn" class="gt_row gt_left">33Z302</td>
+<td headers="stub_1_2 parent_ccn" class="gt_row gt_right">331302</td>
 </tr>
 <tr>
 <th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
 <td headers="stub_1_3 npi" class="gt_row gt_right">1538173869</td>
 <td headers="stub_1_3 pac" class="gt_row gt_right">0547299091</td>
-<td headers="stub_1_3 first" class="gt_row gt_left">CHON</td>
-<td headers="stub_1_3 middle" class="gt_row gt_left">IL</td>
-<td headers="stub_1_3 last" class="gt_row gt_left">JUN</td>
-<td headers="stub_1_3 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_3 last" class="gt_row gt_left">CHON</td>
+<td headers="stub_1_3 first" class="gt_row gt_left">IL</td>
+<td headers="stub_1_3 middle" class="gt_row gt_left">JUN</td>
+<td headers="stub_1_3 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_3 facility_type" class="gt_row gt_left">Nursing home</td>
-<td headers="stub_1_3 parent_ccn" class="gt_row gt_left">33Z302</td>
-<td headers="stub_1_3 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_3 facility_ccn" class="gt_row gt_left">33Z302</td>
+<td headers="stub_1_3 parent_ccn" class="gt_row gt_right">331302</td>
 </tr>
 <tr>
 <th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
 <td headers="stub_1_4 npi" class="gt_row gt_right">1558659367</td>
 <td headers="stub_1_4 pac" class="gt_row gt_right">6709004682</td>
-<td headers="stub_1_4 first" class="gt_row gt_left">BANU</td>
-<td headers="stub_1_4 middle" class="gt_row gt_left">DRAGOS</td>
-<td headers="stub_1_4 last" class="gt_row gt_left"></td>
-<td headers="stub_1_4 suffix" class="gt_row gt_right"></td>
+<td headers="stub_1_4 last" class="gt_row gt_left">BANU</td>
+<td headers="stub_1_4 first" class="gt_row gt_left">DRAGOS</td>
+<td headers="stub_1_4 middle" class="gt_row gt_left">NA</td>
+<td headers="stub_1_4 suffix" class="gt_row gt_left">NA</td>
 <td headers="stub_1_4 facility_type" class="gt_row gt_left">Nursing home</td>
-<td headers="stub_1_4 parent_ccn" class="gt_row gt_left">33Z302</td>
-<td headers="stub_1_4 facility_ccn" class="gt_row gt_right">331302</td>
+<td headers="stub_1_4 facility_ccn" class="gt_row gt_left">33Z302</td>
+<td headers="stub_1_4 parent_ccn" class="gt_row gt_right">331302</td>
 </tr>
 </tbody>
 </table>

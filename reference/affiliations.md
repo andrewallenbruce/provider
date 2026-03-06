@@ -1,4 +1,4 @@
-# Provider Facility Affiliations
+# Provider-Facility Affiliations
 
 `affiliations()` allows the user access to data concerning providers'
 facility affiliations
@@ -23,46 +23,42 @@ affiliations(
 
 - npi:
 
-  `<int>` Unique clinician ID assigned by NPPES
+  `<int>` Individual clinician ID, assigned by *NPPES*
 
 - pac:
 
-  `<chr>` Unique individual clinician ID assigned by PECOS
+  `<chr>` Individual clinician ID, assigned by *PECOS*
 
 - first, middle, last, suffix:
 
-  `<chr>` Clinician name
+  `<chr>` Individual clinician's name
 
 - facility_type:
 
-  `<chr>` type of facility:
+  `<chr>` Type of facility:
 
-  - `"hp"` Hospital
-
-  - `"lt"` Long-Term Care Hospital
-
-  - `"nh"` Nursing Home
-
-  - `"irf"` Inpatient Rehabilitation Facility
-
-  - `"hha"` Home Health Agency
-
-  - `"snf"` Skilled Nursing Facility
-
-  - `"hs"` Hospice
-
-  - `"df"` Dialysis Facility
+  |          |                                   |
+  |----------|-----------------------------------|
+  | **abbr** | **full**                          |
+  | `hp`     | Hospital                          |
+  | `lt`     | Long-term care hospital           |
+  | `nh`     | Nursing home                      |
+  | `irf`    | Inpatient rehabilitation facility |
+  | `hha`    | Home health agency                |
+  | `snf`    | Skilled nursing facility          |
+  | `hs`     | Hospice                           |
+  | `df`     | Dialysis facility                 |
 
 - facility_ccn:
 
-  `<chr>` CCN of `facility_type` or unit within hospital where an
-  individual clinician provides service
+  `<chr>` Medicare CCN of `facility_type` column's facility *or* of a
+  *unit* within the hospital where the individual clinician provides
+  services.
 
 - parent_ccn:
 
-  `<chr>` CCN of the primary hospital where individual clinician
-  provides service, should the clinician provide services in a unit
-  within the hospital
+  `<chr>` Medicare CCN of *primary* hospital where the individual
+  clinician provides services in a unit within said hospital.
 
 ## Value
 
@@ -80,60 +76,75 @@ containing the search results.
 ## Examples
 
 ``` r
-# affiliations(facility_type = c("lt", "irf")) 15,105 results
+affiliations()
+#> ! No arguments provided.
+#> ℹ Returning first 10 rows.
+#> # A tibble: 10 × 9
+#>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#>  1 100300… 7517… ENKE… ARDA… NA     NA     Hospital      090012       NA        
+#>  2 100300… 9931… KHAL… RASH… NA     NA     Hospital      360112       NA        
+#>  3 100300… 0446… ROTH… KEVIN B      NA     Hospital      060024       NA        
+#>  4 100300… 2163… SEMO… AMAN… M      NA     Home health … 397791       NA        
+#>  5 100300… 2163… SEMO… AMAN… M      NA     Hospital      390035       NA        
+#>  6 100300… 2163… SEMO… AMAN… M      NA     Hospital      390049       NA        
+#>  7 100300… 2163… SEMO… AMAN… M      NA     Hospital      390057       NA        
+#>  8 100300… 4082… KIM   DAE   NA     NA     Hospital      370001       NA        
+#>  9 100300… 4082… KIM   DAE   NA     NA     Hospital      370202       NA        
+#> 10 100300… 4082… KIM   DAE   NA     NA     Hospital      370057       NA        
 
 affiliations(facility_ccn = "33Z302")
-#> ✔ Query returning 4 results.
+#> ✔ Query returned 4 results.
 #> # A tibble: 4 × 9
-#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
-#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
-#> 1 1073258… 3870… KLOTZ JEFFR… ""    ""     Nursing home  33Z302     331302      
-#> 2 1396989… 8921… HALL… MARY   "K"   ""     Nursing home  33Z302     331302      
-#> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
-#> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
+#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#> 1 1073258… 3870… KLOTZ JEFF… NA     NA     Nursing home  33Z302       331302    
+#> 2 1396989… 8921… HALL… MARY  K      NA     Nursing home  33Z302       331302    
+#> 3 1538173… 0547… CHON  IL    JUN    NA     Nursing home  33Z302       331302    
+#> 4 1558659… 6709… BANU  DRAG… NA     NA     Nursing home  33Z302       331302    
 
 affiliations(parent_ccn = 331302)
-#> ✔ Query returning 4 results.
+#> ✔ Query returned 4 results.
 #> # A tibble: 4 × 9
-#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
-#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
-#> 1 1073258… 3870… KLOTZ JEFFR… ""    ""     Nursing home  33Z302     331302      
-#> 2 1396989… 8921… HALL… MARY   "K"   ""     Nursing home  33Z302     331302      
-#> 3 1538173… 0547… CHON  IL     "JUN" ""     Nursing home  33Z302     331302      
-#> 4 1558659… 6709… BANU  DRAGOS ""    ""     Nursing home  33Z302     331302      
+#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#> 1 1073258… 3870… KLOTZ JEFF… NA     NA     Nursing home  33Z302       331302    
+#> 2 1396989… 8921… HALL… MARY  K      NA     Nursing home  33Z302       331302    
+#> 3 1538173… 0547… CHON  IL    JUN    NA     Nursing home  33Z302       331302    
+#> 4 1558659… 6709… BANU  DRAG… NA     NA     Nursing home  33Z302       331302    
 
 affiliations(pac = 7810891009)
-#> ✔ Query returning 5 results.
+#> ✔ Query returned 5 results.
 #> # A tibble: 5 × 9
-#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
-#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
-#> 1 1043245… 7810… FUNG  MARK   K     ""     Hospital      470003     ""          
-#> 2 1043245… 7810… FUNG  MARK   K     ""     Hospital      330250     ""          
-#> 3 1043245… 7810… FUNG  MARK   K     ""     Hospital      331321     ""          
-#> 4 1043245… 7810… FUNG  MARK   K     ""     Hospital      470001     ""          
-#> 5 1043245… 7810… FUNG  MARK   K     ""     Hospital      471307     ""          
+#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#> 1 1043245… 7810… FUNG  MARK  K      NA     Hospital      470003       NA        
+#> 2 1043245… 7810… FUNG  MARK  K      NA     Hospital      330250       NA        
+#> 3 1043245… 7810… FUNG  MARK  K      NA     Hospital      331321       NA        
+#> 4 1043245… 7810… FUNG  MARK  K      NA     Hospital      470001       NA        
+#> 5 1043245… 7810… FUNG  MARK  K      NA     Hospital      471307       NA        
 
 affiliations(npi = 1003026055)
-#> ✔ Query returning 1 results.
+#> ✔ Query returned 1 results.
 #> # A tibble: 1 × 9
-#>   npi      pac   first middle last  suffix facility_type parent_ccn facility_ccn
-#>   <chr>    <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
-#> 1 1003026… 4486… PHAD… RADHI… PUSH… ""     Hospital      100168     ""          
+#>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#> 1 1003026… 4486… PHAD… RADH… PUSHK… NA     Hospital      100168       NA        
 
 affiliations(first = "KIM")
-#> ✔ Query returning 710 results.
+#> ✔ Query returned 710 results.
 #> # A tibble: 710 × 9
-#>    npi     pac   first middle last  suffix facility_type parent_ccn facility_ccn
-#>    <chr>   <chr> <chr> <chr>  <chr> <chr>  <chr>         <chr>      <chr>       
-#>  1 100311… 0941… FREN… KIM    M     ""     Hospital      260032     ""          
-#>  2 100315… 4880… HARL… KIM    A     ""     Hospital      180038     ""          
-#>  3 100315… 4880… HARL… KIM    A     ""     Hospital      151322     ""          
-#>  4 100326… 4082… GORD… KIM    E     ""     Hospital      310041     ""          
-#>  5 100344… 9335… VU    KIM    HOANG ""     Hospital      050231     ""          
-#>  6 100399… 0244… FRED… KIM    S     ""     Hospital      050131     ""          
-#>  7 101300… 6002… FALL… KIM    M     ""     Hospital      310041     ""          
-#>  8 101300… 6002… FALL… KIM    M     ""     Hospital      310084     ""          
-#>  9 101307… 0547… WRIG… KIM    C     ""     Hospital      140185     ""          
-#> 10 101309… 1254… CARL… KIM    M     ""     Hospital      030007     ""          
+#>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#>  1 100311… 0941… FREN… KIM   M      NA     Hospital      260032       NA        
+#>  2 100315… 4880… HARL… KIM   A      NA     Hospital      180038       NA        
+#>  3 100315… 4880… HARL… KIM   A      NA     Hospital      151322       NA        
+#>  4 100326… 4082… GORD… KIM   E      NA     Hospital      310041       NA        
+#>  5 100344… 9335… VU    KIM   HOANG  NA     Hospital      050231       NA        
+#>  6 100399… 0244… FRED… KIM   S      NA     Hospital      050131       NA        
+#>  7 101300… 6002… FALL… KIM   M      NA     Hospital      310041       NA        
+#>  8 101300… 6002… FALL… KIM   M      NA     Hospital      310084       NA        
+#>  9 101307… 0547… WRIG… KIM   C      NA     Hospital      140185       NA        
+#> 10 101309… 1254… CARL… KIM   M      NA     Hospital      030007       NA        
 #> # ℹ 700 more rows
 ```

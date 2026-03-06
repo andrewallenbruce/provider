@@ -5,7 +5,7 @@
 Access a provider’s administrative data.
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
-  : Provider Facility Affiliations
+  : Provider-Facility Affiliations
 - [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
   : Clinicians Enrolled in Medicare
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
