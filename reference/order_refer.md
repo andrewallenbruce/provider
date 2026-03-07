@@ -109,8 +109,6 @@ links:
 - [Order and Referring
   Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 
-*Update Frequency:* **Twice Weekly**
-
 ## Examples
 
 ``` r
