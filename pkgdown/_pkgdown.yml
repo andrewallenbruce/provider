@@ -9,8 +9,8 @@ template:
     border_radius: 0.5rem
     button-border-radius: 0.25rem
     danger: "#A6081A"
-    base_font: {google: "Roboto Condensed"}
-    heading_font: {google: "Roboto"}
+    base_font: {google: "Inter"}
+    heading_font: {google: "Recursive"}
     code_font: {google: "JetBrains Mono"}
   includes:
     after_body: >
@@ -64,16 +64,6 @@ navbar:
       menu:
       - text: Profiling
         href: articles/linking-providers.html
-      - text: Comparing
-        href: articles/partb-stats.html
-      - text: Mapping
-        href: articles/geospatial.html
-      - text: Linking
-        href: articles/networks.html
-      - text: Quality Payment Program
-        href: articles/qpp.html
-      - text: Open Payments
-        href: articles/open.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
@@ -88,23 +78,12 @@ navbar:
       - text: GitHub
         icon: fab fa-github fa-lg
         href: https://github.com/andrewallenbruce/provider
-      - text: X
-        icon: fab fa-x-twitter fa-lg
-        href: http://twitter.com/andrewallbruce
       - text: Bluesky
         icon: fab fa-bluesky fa-lg
         href: http://twitter.com/andrewallbruce
       - text: LinkedIn
         icon: fas fa-linkedin fa-lg
         href: https://www.linkedin.com/in/andrewallenbruce
-  opengraph:
-    image:
-      src: man/figures/card.png
-      alt: "Provider Logo"
-    twitter:
-      creator: "@andrewallbruce"
-      site: "@andrewallbruce"
-      card: summary_large_image
 
 reference:
 
@@ -137,14 +116,3 @@ reference:
   - prescribers
   - prescribers_
   - compare_hcpcs
-
-- title: Years
-  desc: >
-    Years available to query for search functions.
-  contents:
-  - bene_years
-  - open_years
-  - out_years
-  - qpp_years
-  - rx_years
-  - util_years
