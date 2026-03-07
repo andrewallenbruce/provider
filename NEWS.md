@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9014 (2026-03-07)
+
+* refactored `providers()`
+
+
 # provider 0.0.1.9013 (2026-03-06)
 
 * api catalog helpers
