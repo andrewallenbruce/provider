@@ -79,10 +79,8 @@ providers(organization = "Elizabethtown Community Hospital") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-    #> Caused by error:
-    #> ! object 'na_blank' not found
+    #> Error in `providers()`:
+    #> ! unused argument (organization = "Elizabethtown Community Hospital")
 
 ``` r
 hospitals(organization = "Elizabethtown Community Hospital") |> 

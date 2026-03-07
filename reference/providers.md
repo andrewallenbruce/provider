@@ -10,17 +10,14 @@ providers(
   npi = NULL,
   pac = NULL,
   enid = NULL,
-  specialty_code = NULL,
-  specialty_description = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
-  organization = NULL,
+  spec_code = NULL,
+  spec_desc = NULL,
   state = NULL,
-  gender = NULL,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  org_name = NULL,
+  multi = NULL
 )
 ```
 
@@ -28,72 +25,58 @@ providers(
 
 - npi:
 
-  \< *integer* \> 10-digit Individual National Provider Identifier
+  `<int>` 10-digit Individual National Provider Identifier
 
 - pac:
 
-  \< *integer* \> 10-digit PECOS Associate Control ID
+  `<chr>` 10-digit PECOS Associate Control ID
 
 - enid:
 
-  \< *character* \> 15-digit Medicare Enrollment ID
-
-- specialty_code:
-
-  \< *character* \> Enrollment specialty code
-
-- specialty_description:
-
-  \< *character* \> Enrollment specialty description
+  `<chr>` 15-digit Medicare Enrollment ID
 
 - first, middle, last:
 
-  \< *character* \> Individual provider's name
+  `<chr>` Individual provider's name
 
-- organization:
+- spec_code:
 
-  \< *character* \> Organizational provider's name
+  `<chr>` Enrollment specialty code
+
+- spec_desc:
+
+  `<chr>` Enrollment specialty description
 
 - state:
 
-  \< *character* \> Enrollment state, full or abbreviation
+  `<chr>` Enrollment state, full or abbreviation
 
-- gender:
+- org_name:
 
-  \< *character* \> Individual provider's gender: `"F"` (Female), `"M"`
-  (Male), `"9"` (Unknown/Organization)
+  `<chr>` Organization name
 
-- tidy:
+- multi:
 
-  \< *boolean* \> // **default:** `TRUE` Tidy output
-
-- na.rm:
-
-  \< *boolean* \> // **default:** `TRUE` Remove empty rows and columns
-
-- ...:
-
-  Empty
+  `<chr>` Provider has multiple NPIs
 
 ## Value
 
-[tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 with the columns:
 
-|                         |                                        |
-|-------------------------|----------------------------------------|
-| **Field**               | **Description**                        |
-| `npi`                   | 10-digit NPI                           |
-| `pac`                   | 10-digit PAC ID                        |
-| `enid`                  | 15-digit provider enrollment ID        |
-| `specialty_code`        | Enrollment primary specialty type code |
-| `specialty_description` | Enrollment specialty type description  |
-| `first`                 | Individual provider's first name       |
-| `middle`                | Individual provider's middle name      |
-| `last`                  | Individual provider's last name        |
-| `organization`          | Organizational provider's name         |
-| `state`                 | Enrollment state                       |
-| `gender`                | Individual provider's gender           |
+|             |                                        |
+|-------------|----------------------------------------|
+| **Field**   | **Description**                        |
+| `npi`       | 10-digit NPI                           |
+| `pac`       | 10-digit PAC ID                        |
+| `enid`      | 15-digit provider enrollment ID        |
+| `spec_code` | Enrollment primary specialty type code |
+| `spec_desc` | Enrollment specialty type description  |
+| `first`     | Individual provider's first name       |
+| `middle`    | Individual provider's middle name      |
+| `last`      | Individual provider's last name        |
+| `state`     | Enrollment state                       |
+| `org_name`  | Organizational provider's name         |
 
 ## Links
 
@@ -103,14 +86,30 @@ with the columns:
 - [Provider Enrollment Data
   Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 
-*Update Frequency:* **Quarterly**
-
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
 providers(enid = "I20040309000221")
-providers(npi = 1417918293, specialty_code = "14-41")
-providers(pac = 2860305554, gender = "9")
-}
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 11
+#>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
+#>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
+#> 1 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      NA   
+
+providers(npi = 1417918293)
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 11
+#>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
+#>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
+#> 1 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      NA   
+
+providers(pac = 2860305554)
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 11
+#>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
+#>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
+#> 1 11341222… N     2860… I200… 14-41     PRACTITI… TX    YEAM… ROBE… NA     NA   
+
+# providers(state = "AK")
+# providers(spec_code = "14-41")
 ```

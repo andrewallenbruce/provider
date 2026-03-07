@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9014 (2026-03-07)
+
+- refactored
+  [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
+
 ## provider 0.0.1.9013 (2026-03-06)
 
 - api catalog helpers

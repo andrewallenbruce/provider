@@ -53,9 +53,9 @@ example <- graph_from_data_frame(
 example
 ```
 
-    #> IGRAPH 3c7422b DN-- 2 2 -- 
+    #> IGRAPH 47ae87e DN-- 2 2 -- 
     #> + attr: name (v/c), x (v/n), y (v/n), label (e/c)
-    #> + edges from 3c7422b (vertex names):
+    #> + edges from 47ae87e (vertex names):
     #> [1] Individual  ->Organization Organization->Individual
 
 ``` r

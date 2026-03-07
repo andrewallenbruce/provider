@@ -34,10 +34,8 @@ rhcs <- providers(
   distinct()
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-    #> Caused by error:
-    #> ! object 'na_blank' not found
+    #> Error in `providers()`:
+    #> ! unused argument (specialty_code = "00-17")
 
 ``` r
 rhcs

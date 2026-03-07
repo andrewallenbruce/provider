@@ -220,9 +220,6 @@ reassignments(enid = "I123456789123456")
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
 providers(enid = "L12345678912345")
-#> Error in `providers()`:
-#> ! An Enrollment ID must begin with a capital `I` or `O`.
-#> ✖ "L12345678912345" begins with "L".
 
 # Some functions require one of ID types
 hospitals(enid_org = "I20180115000174")

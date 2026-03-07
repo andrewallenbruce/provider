@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9013</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,17 +64,14 @@
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spec_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spec_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multi <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -83,73 +80,78 @@
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit Individual National Provider Identifier</p></dd>
+<dd><p><code>&lt;int&gt;</code> 10-digit Individual National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p>&lt; <em>integer</em> &gt; 10-digit PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; 15-digit Medicare Enrollment ID</p></dd>
-
-
-<dt id="arg-specialty-code">specialty_code<a class="anchor" aria-label="anchor" href="#arg-specialty-code"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Enrollment specialty code</p></dd>
-
-
-<dt id="arg-specialty-description">specialty_description<a class="anchor" aria-label="anchor" href="#arg-specialty-description"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Enrollment specialty description</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-middle-last">first, middle, last<a class="anchor" aria-label="anchor" href="#arg-first-middle-last"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual provider's name</p></dd>
 
 
-<dt id="arg-organization">organization<a class="anchor" aria-label="anchor" href="#arg-organization"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Organizational provider's name</p></dd>
+<dt id="arg-spec-code">spec_code<a class="anchor" aria-label="anchor" href="#arg-spec-code"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Enrollment specialty code</p></dd>
+
+
+<dt id="arg-spec-desc">spec_desc<a class="anchor" aria-label="anchor" href="#arg-spec-desc"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Enrollment specialty description</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Enrollment state, full or abbreviation</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Enrollment state, full or abbreviation</p></dd>
 
 
-<dt id="arg-gender">gender<a class="anchor" aria-label="anchor" href="#arg-gender"></a></dt>
-<dd><p>&lt; <em>character</em> &gt; Individual provider's gender: <code>"F"</code> (Female),
-<code>"M"</code> (Male), <code>"9"</code> (Unknown/Organization)</p></dd>
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Organization name</p></dd>
 
 
-<dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
-
-
-<dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>&lt; <em>boolean</em> &gt; // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Empty</p></dd>
+<dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider has multiple NPIs</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac</code></td><td>10-digit PAC ID</td></tr><tr><td><code>enid</code></td><td>15-digit provider enrollment ID</td></tr><tr><td><code>specialty_code</code></td><td>Enrollment primary specialty type code</td></tr><tr><td><code>specialty_description</code></td><td>Enrollment specialty type description</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>organization</code></td><td>Organizational provider's name</td></tr><tr><td><code>state</code></td><td>Enrollment state</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr></table></div>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac</code></td><td>10-digit PAC ID</td></tr><tr><td><code>enid</code></td><td>15-digit provider enrollment ID</td></tr><tr><td><code>spec_code</code></td><td>Enrollment primary specialty type code</td></tr><tr><td><code>spec_desc</code></td><td>Enrollment specialty type description</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>state</code></td><td>Enrollment state</td></tr><tr><td><code>org_name</code></td><td>Organizational provider's name</td></tr></table></div>
     <div class="section level2">
     <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
 
 
 <ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Provider Enrollment API</a></p></li>
 <li><p><a href="https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary" class="external-link">Provider Enrollment Data Dictionary</a></p></li>
-</ul><p><em>Update Frequency:</em> <strong>Quarterly</strong></p>
-    </div>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20040309000221"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1417918293</span>, specialty_code <span class="op">=</span> <span class="st">"14-41"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">2860305554</span>, gender <span class="op">=</span> <span class="st">"9"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20040309000221"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1417918293</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">2860305554</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11341222… N     2860… I200… 14-41     PRACTITI… TX    YEAM… ROBE… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># providers(state = "AK")</span></span></span>
+<span class="r-in"><span><span class="co"># providers(spec_code = "14-41")</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
