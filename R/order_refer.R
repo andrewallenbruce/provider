@@ -26,8 +26,6 @@
 #' + [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #' + [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
-#' *Update Frequency:* **Twice Weekly**
-#'
 #' @template args-npi
 #'
 #' @param first,last `<chr>` Individual provider's first/last name

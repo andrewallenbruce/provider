@@ -95,6 +95,4 @@ links:
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
 \item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
 }
-
-\emph{Update Frequency:} \strong{Twice Weekly}
 }
