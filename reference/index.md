@@ -46,15 +46,3 @@ Access a provider’s statistical data.
   : Prescriber Utilization & Demographics by Year
 - [`compare_hcpcs()`](https://andrewallenbruce.github.io/provider/reference/compare_hcpcs.md)
   : Compare Provider Performance
-
-## Years
-
-Years available to query for search functions.
-
-- [`open_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`out_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`rx_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`util_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`qpp_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`bene_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  : Years Currently Searchable for APIs

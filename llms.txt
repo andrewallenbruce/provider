@@ -824,41 +824,14 @@ Access a provider’s statistical data.
 - [`compare_hcpcs()`](https://andrewallenbruce.github.io/provider/reference/compare_hcpcs.md)
   : Compare Provider Performance
 
-## Years
-
-Years available to query for search functions.
-
-- [`open_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`out_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`rx_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`util_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`qpp_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  [`bene_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  : Years Currently Searchable for APIs
-
 # Articles
 
 ### All vignettes
-
-- [Mapping
-  Providers](https://andrewallenbruce.github.io/provider/articles/geospatial.md):
 
 - [Linking
   Providers](https://andrewallenbruce.github.io/provider/articles/linking-providers.md):
 
   NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More
 
-- [Provider
-  Networks](https://andrewallenbruce.github.io/provider/articles/networks.md):
-
-- [Open
-  Payments](https://andrewallenbruce.github.io/provider/articles/open.md):
-
-- [Comparing
-  Providers](https://andrewallenbruce.github.io/provider/articles/partb-stats.md):
-
 - [Overview of
   Provider](https://andrewallenbruce.github.io/provider/articles/provider.md):
-
-- [Quality Payment
-  Program](https://andrewallenbruce.github.io/provider/articles/qpp.md):
