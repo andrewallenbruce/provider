@@ -69,14 +69,12 @@ affiliations <- function(
     facility_type_certification_number = parent_ccn
   )
 
-  base <- "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?"
-
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
-    cli::cli_alert_warning(c("{.emph No Query} ", cli::symbol$pointer, " Returning first 10 rows."))
+    cli_no_query()
 
     url <- flatten_url(
-      base,
+      base_url("affiliations"),
       opts = set_opts(
         count = "false",
         results = "true",
@@ -95,13 +93,13 @@ affiliations <- function(
 
   # Valid Query: Flatten & Request Result Count =====================
   url <- flatten_url(
-    base,
+    base_url("affiliations"),
     opts = set_opts(
       count = "true",
       results = "false",
       schema = "false",
       offset = 0,
-      limit = 1500
+      limit = limit("affiliations")
     ),
     query = flatten_query(args)
   )
@@ -115,17 +113,17 @@ affiliations <- function(
   }
 
   # Count is Within API Limit: Request & Return Results
-  if (N <= 1500L) {
+  if (N <= limit("affiliations")) {
     cli::cli_alert_success("Query returned {N} result{?s}.")
 
     url <- flatten_url(
-      base,
+      base_url("affiliations"),
       opts = set_opts(
         count = "false",
         results = "true",
         schema = "false",
         offset = 0,
-        limit = 1500
+        limit = limit("affiliations")
       ),
       query = flatten_query(args)
     )
@@ -140,21 +138,21 @@ affiliations <- function(
 
   # Count Above API Limit: Alert & Return Results =====================
   cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
-  cli::cli_alert_info("Retrieving {offset(N, 1500L)} page{?s}...")
+  cli::cli_alert_info("Retrieving {offset(N, limit('affiliations'))} page{?s}...")
 
   url <- flatten_url(
-    base,
+    base_url("affiliations"),
     opts = set_opts(
       count = "false",
       results = "true",
       schema = "false",
-      limit = 1500,
+      limit = limit("affiliations"),
       offset = "<<i>>"
     ),
     query = flatten_query(args)
   )
 
-  urls <- offset(N, 1500L, "seq") |>
+  urls <- offset(N, limit("affiliations"), "seq") |>
     purrr::map_chr(\(x) {
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })

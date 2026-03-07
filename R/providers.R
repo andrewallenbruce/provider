@@ -7,42 +7,40 @@
 #'    * [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #'    * [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' *Update Frequency:* **Quarterly**
+#' @param npi `<int>` 10-digit Individual National Provider Identifier
+#' @param pac `<chr>` 10-digit PECOS Associate Control ID
+#' @param enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param first,middle,last `<chr>` Individual provider's name
+#' @param spec_code `<chr>` Enrollment specialty code
+#' @param spec_desc `<chr>` Enrollment specialty description
+#' @param state `<chr>` Enrollment state, full or abbreviation
+#' @param org_name `<chr>` Organization name
+#' @param multi `<chr>` Provider has multiple NPIs
 #'
-#' @param npi < *integer* > 10-digit Individual National Provider Identifier
-#' @param pac < *integer* > 10-digit PECOS Associate Control ID
-#' @param enid < *character* > 15-digit Medicare Enrollment ID
-#' @param specialty_code < *character* > Enrollment specialty code
-#' @param specialty_description < *character* > Enrollment specialty description
-#' @param state < *character* > Enrollment state, full or abbreviation
-#' @param first,middle,last < *character* > Individual provider's name
-#' @param organization < *character* > Organizational provider's name
-#' @param gender < *character* > Individual provider's gender: `"F"` (Female),
-#' `"M"` (Male), `"9"` (Unknown/Organization)
-#' @param tidy < *boolean* > // __default:__ `TRUE` Tidy output
-#' @param na.rm < *boolean* > // __default:__ `TRUE` Remove empty rows and columns
-#' @param ... Empty
+#' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
-#' @return [tibble][tibble::tibble-package] with the columns:
+#' |**Field**   |**Description**                        |
+#' |:-----------|:--------------------------------------|
+#' |`npi`       |10-digit NPI                           |
+#' |`pac`       |10-digit PAC ID                        |
+#' |`enid`      |15-digit provider enrollment ID        |
+#' |`spec_code` |Enrollment primary specialty type code |
+#' |`spec_desc` |Enrollment specialty type description  |
+#' |`first`     |Individual provider's first name       |
+#' |`middle`    |Individual provider's middle name      |
+#' |`last`      |Individual provider's last name        |
+#' |`state`     |Enrollment state                       |
+#' |`org_name`  |Organizational provider's name         |
 #'
-#' |**Field**               |**Description**                        |
-#' |:-----------------------|:--------------------------------------|
-#' |`npi`                   |10-digit NPI                           |
-#' |`pac`                   |10-digit PAC ID                        |
-#' |`enid`                  |15-digit provider enrollment ID        |
-#' |`specialty_code`        |Enrollment primary specialty type code |
-#' |`specialty_description` |Enrollment specialty type description  |
-#' |`first`                 |Individual provider's first name       |
-#' |`middle`                |Individual provider's middle name      |
-#' |`last`                  |Individual provider's last name        |
-#' |`organization`          |Organizational provider's name         |
-#' |`state`                 |Enrollment state                       |
-#' |`gender`                |Individual provider's gender           |
-#'
-#' @examplesIf interactive()
+#' @examples
 #' providers(enid = "I20040309000221")
-#' providers(npi = 1417918293, specialty_code = "14-41")
-#' providers(pac = 2860305554, gender = "9")
+#'
+#' providers(npi = 1417918293)
+#'
+#' providers(pac = 2860305554)
+#'
+#' # providers(state = "AK")
+#' # providers(spec_code = "14-41")
 #'
 #' @autoglobal
 #'
@@ -51,88 +49,123 @@ providers <- function(
   npi = NULL,
   pac = NULL,
   enid = NULL,
-  specialty_code = NULL,
-  specialty_description = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
-  organization = NULL,
+  spec_code = NULL,
+  spec_desc = NULL,
   state = NULL,
-  gender = NULL,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  org_name = NULL,
+  multi = NULL
 ) {
-  npi <- npi %nn% validate_npi(npi)
-  pac <- pac %nn% check_pac(pac)
-  enid <- enid %nn% check_enid(enid)
-  gender <- gender %nn% rlang::arg_match(gender, c("F", "M", "9"))
-
-  args <- dplyr::tribble(
-    ~param               , ~arg                  ,
-    "NPI"                , npi                   ,
-    "PECOS_ASCT_CNTL_ID" , pac                   ,
-    "ENRLMT_ID"          , enid                  ,
-    "PROVIDER_TYPE_CD"   , specialty_code        ,
-    "PROVIDER_TYPE_DESC" , specialty_description ,
-    "STATE_CD"           , state                 ,
-    "FIRST_NAME"         , first                 ,
-    "MDL_NAME"           , middle                ,
-    "LAST_NAME"          , last                  ,
-    "ORG_NAME"           , organization          ,
-    "GNDR_SW"            , gender
+  args <- parameters(
+    NPI = npi,
+    MULTIPLE_NPI_FLAG = multi,
+    PECOS_ASCT_CNTL_ID = pac,
+    ENRLMT_ID = enid,
+    PROVIDER_TYPE_CD = spec_code,
+    PROVIDER_TYPE_DESC = spec_desc,
+    STATE_CD = state,
+    LAST_NAME = last,
+    FIRST_NAME = first,
+    MDL_NAME = middle,
+    ORG_NAME = org_name
   )
 
-  response <- httr2::request(build_url("pro", args)) |>
-    httr2::req_perform()
+  # No Query: Warn & Return First 10 Rows =====================
+  if (!length(args)) {
+    cli_no_query()
 
-  if (vctrs::vec_is_empty(response$body)) {
-    cli_args <- dplyr::tribble(
-      ~x                      , ~y                    ,
-      "npi"                   , npi                   ,
-      "pac"                   , pac                   ,
-      "enid"                  , enid                  ,
-      "specialty_code"        , specialty_code        ,
-      "specialty_description" , specialty_description ,
-      "state"                 , state                 ,
-      "first"                 , first                 ,
-      "middle"                , middle                ,
-      "last"                  , last                  ,
-      "organization"          , organization          ,
-      "gender"                , gender
-    ) |>
-      tidyr::unnest(cols = c(y))
+    url <- flatten_url(
+      base_url("providers"),
+      opts = set_opts(
+        `?size` = 10,
+        offset = 0
+      )
+    )
 
-    format_cli(cli_args)
+    res <- bare_request(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_providers()
+
+    return(res)
+  }
+
+  # Valid Query: Flatten & Request Result Count =====================
+
+  url <- flatten_url(
+    paste0(base_url("providers"), "/stats?"),
+    set_opts(size = limit("providers"), offset = 0),
+    flatten_query2(args)
+  )
+
+  N <- bare_request(url, "found_rows")
+
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
+    cli::cli_alert_danger("Query returned {N} results.")
     return(invisible(NULL))
   }
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  if (tidy) {
-    results <- cols_pros(tidyup(results))
+  # Count is Within API Limit: Request & Return Results
+  if (N <= limit("providers")) {
+    cli::cli_alert_success("Query returned {N} result{?s}.")
 
-    if (na.rm) results <- narm(results)
+    url <- flatten_url(
+      paste0(base_url("providers"), "?"),
+      set_opts(offset = 0, size = limit("providers")),
+      flatten_query2(args)
+    )
+
+    res <- bare_request(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_providers()
+
+    return(res)
   }
-  return(results)
-}
 
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_pros <- function(df) {
-  cols <- c(
-    'npi',
-    'pac' = 'pecos_asct_cntl_id',
-    'enid' = 'enrlmt_id',
-    'specialty_code' = 'provider_type_cd',
-    'specialty_description' = 'provider_type_desc',
-    'state' = 'state_cd',
-    'organization' = 'org_name',
-    'first' = 'first_name',
-    'middle' = 'mdl_name',
-    'last' = 'last_name',
-    'gender' = 'gndr_sw'
+  # Count Above API Limit: Alert & Return Results =====================
+  cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
+  cli::cli_alert_info("Retrieving {offset(N, limit('providers'))} page{?s}...")
+
+  url <- flatten_url(
+    paste0(base_url("providers"), "?"),
+    set_opts(offset = "<<i>>", size = limit("providers")),
+    flatten_query2(args)
   )
 
-  df |> dplyr::select(dplyr::any_of(cols))
+  urls <- offset(N, limit("providers"), "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+
+  parallel_request(urls) |>
+    collapse::rowbind() |>
+    fastplyr::as_tbl() |>
+    map_na_if() |>
+    rename_providers()
+}
+
+#' @autoglobal
+#' @noRd
+rename_providers <- function(x) {
+  NM <- c(
+    NPI = "npi",
+    MULTIPLE_NPI_FLAG = "multi",
+    PECOS_ASCT_CNTL_ID = "pac",
+    ENRLMT_ID = "enid",
+    PROVIDER_TYPE_CD = "spec_code",
+    PROVIDER_TYPE_DESC = "spec_desc",
+    STATE_CD = "state",
+    LAST_NAME = "last",
+    FIRST_NAME = "first",
+    MDL_NAME = "middle",
+    ORG_NAME = "org"
+  )
+
+  collapse::setrename(x, NM, .nse = FALSE)
+
+  collapse::gv(x, unlist_(NM))
 }

@@ -36,6 +36,30 @@ offset <- function(n, limit, which = "size") {
   )
 }
 
+#' @autoglobal
+#' @noRd
+base_url <- function(dataset) {
+  switch(
+    dataset,
+    "affiliations" = "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?",
+    "clinicians" = "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?",
+    "providers" = "https://data.cms.gov/data-api/v1/dataset/2457ea29-fc82-48b0-86ec-3b0755de7515/data",
+    cli::cli_abort("{.arg dataset} not recognized")
+  )
+}
+
+#' @autoglobal
+#' @noRd
+limit <- function(dataset) {
+  switch(
+    dataset,
+    "affiliations" = ,
+    "clinicians" = 1500,
+    "providers" = 5000,
+    cli::cli_abort("{.arg dataset} not recognized")
+  )
+}
+
 #' @noRd
 plus <- function(x) {
   gsub(" ", "+", x, fixed = TRUE)
@@ -60,6 +84,37 @@ flatten_query <- function(args) {
     unname() |>
     purrr::imap_chr(function(x, idx) {
       gsub(x = x, pattern = "<<i>>", replacement = idx - 1, fixed = TRUE) |>
+        paste0(collapse = "&")
+    }) |>
+    (\(x) paste0(x, collapse = "&"))()
+}
+
+#' @autoglobal
+#' @noRd
+format_query2 <- function(x, N) {
+  V <- plus(unlist_(x))
+
+  c(
+    paste0("filter[<<i>>][condition][path]=", plus(N)),
+    paste0(
+      "filter[<<i>>][condition][operator]=",
+      if (length(V) > 1L) "IN" else "="
+    ),
+    paste0(
+      "filter[<<i>>][condition][value]",
+      if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",
+      V
+    )
+  )
+}
+
+#' @autoglobal
+#' @noRd
+flatten_query2 <- function(args) {
+  purrr::imap(args, format_query2) |>
+    unname() |>
+    purrr::imap_chr(function(x, idx) {
+      gsub(x = x, pattern = "<<i>>", replacement = idx, fixed = TRUE) |>
         paste0(collapse = "&")
     }) |>
     (\(x) paste0(x, collapse = "&"))()
@@ -103,7 +158,6 @@ parse_string <- function(resp, query = NULL) {
     query,
     count = PS(resp) |> _$count,
     results = PS(resp) |> _$results,
-    names = rlang::names2(PS(resp)),
     found_rows = PS(resp) |> _$found_rows,
     total_rows = PS(resp) |> _$total_rows,
     PS(resp, qry = query)
@@ -130,4 +184,14 @@ parallel_request <- function(x, query = NULL) {
     purrr::map(function(x) {
       parse_string(x, query = query)
     })
+}
+
+#' @autoglobal
+#' @noRd
+cli_no_query <- function() {
+  cli::cli_alert_warning(c(
+    "{.emph No Query} ",
+    cli::symbol$pointer,
+    " Returning first 10 rows."
+  ))
 }

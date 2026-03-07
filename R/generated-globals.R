@@ -362,7 +362,6 @@ utils::globalVariables(c(
   # <order_refer>
   # <pending>
   # <prescribers>
-  # <providers>
   # <quality_eligibility>
   # <quality_payment>
   # <reassignments>

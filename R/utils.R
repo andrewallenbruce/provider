@@ -72,6 +72,16 @@ state_recode <- function(x, to = "full") {
   rlang::names2(states)[collapse::fmatch(x, states)]
 }
 
+
+# set_args(providers)
+#' @autoglobal
+#' @noRd
+set_args <- function(fn) {
+  rlang::fn_fmls(fn) |>
+    as.list() |>
+    list2env(envir = .GlobalEnv)
+}
+
 #' @autoglobal
 #' @noRd
 na_if <- function(x, y = "") {

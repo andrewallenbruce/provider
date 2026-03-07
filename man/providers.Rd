@@ -8,59 +8,48 @@ providers(
   npi = NULL,
   pac = NULL,
   enid = NULL,
-  specialty_code = NULL,
-  specialty_description = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
-  organization = NULL,
+  spec_code = NULL,
+  spec_desc = NULL,
   state = NULL,
-  gender = NULL,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  org_name = NULL,
+  multi = NULL
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier}
 
-\item{pac}{< \emph{integer} > 10-digit PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
 
-\item{enid}{< \emph{character} > 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
 
-\item{specialty_code}{< \emph{character} > Enrollment specialty code}
+\item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
-\item{specialty_description}{< \emph{character} > Enrollment specialty description}
+\item{spec_code}{\verb{<chr>} Enrollment specialty code}
 
-\item{first, middle, last}{< \emph{character} > Individual provider's name}
+\item{spec_desc}{\verb{<chr>} Enrollment specialty description}
 
-\item{organization}{< \emph{character} > Organizational provider's name}
+\item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
 
-\item{state}{< \emph{character} > Enrollment state, full or abbreviation}
+\item{org_name}{\verb{<chr>} Organization name}
 
-\item{gender}{< \emph{character} > Individual provider's gender: \code{"F"} (Female),
-\code{"M"} (Male), \code{"9"} (Unknown/Organization)}
-
-\item{tidy}{< \emph{boolean} > // \strong{default:} \code{TRUE} Tidy output}
-
-\item{na.rm}{< \emph{boolean} > // \strong{default:} \code{TRUE} Remove empty rows and columns}
-
-\item{...}{Empty}
+\item{multi}{\verb{<chr>} Provider has multiple NPIs}
 }
 \value{
-\link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit NPI \cr
    \code{pac} \tab 10-digit PAC ID \cr
    \code{enid} \tab 15-digit provider enrollment ID \cr
-   \code{specialty_code} \tab Enrollment primary specialty type code \cr
-   \code{specialty_description} \tab Enrollment specialty type description \cr
+   \code{spec_code} \tab Enrollment primary specialty type code \cr
+   \code{spec_desc} \tab Enrollment specialty type description \cr
    \code{first} \tab Individual provider's first name \cr
    \code{middle} \tab Individual provider's middle name \cr
    \code{last} \tab Individual provider's last name \cr
-   \code{organization} \tab Organizational provider's name \cr
    \code{state} \tab Enrollment state \cr
-   \code{gender} \tab Individual provider's gender \cr
+   \code{org_name} \tab Organizational provider's name \cr
 }
 }
 \description{
@@ -72,14 +61,16 @@ Access enrollment level data on individual and organizational providers that are
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
 \item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
 }
-
-\emph{Update Frequency:} \strong{Quarterly}
 }
 
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 providers(enid = "I20040309000221")
-providers(npi = 1417918293, specialty_code = "14-41")
-providers(pac = 2860305554, gender = "9")
-\dontshow{\}) # examplesIf}
+
+providers(npi = 1417918293)
+
+providers(pac = 2860305554)
+
+# providers(state = "AK")
+# providers(spec_code = "14-41")
+
 }

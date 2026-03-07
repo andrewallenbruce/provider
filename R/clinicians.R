@@ -78,7 +78,6 @@ clinicians <- function(
   facility_name = NULL,
   facility_pac = NULL
 ) {
-
   args <- parameters(
     npi = npi,
     ind_pac_id = pac,
@@ -99,14 +98,12 @@ clinicians <- function(
     zip_code = zip
   )
 
-  base <- "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?"
-
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
-    cli::cli_alert_warning(c("{.emph No Query} ", cli::symbol$pointer, " Returning first 10 rows."))
+    cli_no_query()
 
     url <- flatten_url(
-      base,
+      base_url("clinicians"),
       opts = set_opts(
         count = "false",
         results = "true",
@@ -124,7 +121,7 @@ clinicians <- function(
   }
   # Valid Query: Flatten & Request Result Count =====================
   url <- flatten_url(
-    base,
+    base_url("clinicians"),
     opts = set_opts(
       count = "true",
       results = "false",
@@ -148,7 +145,7 @@ clinicians <- function(
     cli::cli_alert_success("Query returned {N} result{?s}.")
 
     url <- flatten_url(
-      base,
+      base_url("clinicians"),
       opts = set_opts(
         count = "false",
         results = "true",
@@ -172,7 +169,7 @@ clinicians <- function(
   cli::cli_alert_info("Retrieving {offset(N, 1500L)} page{?s}...")
 
   url <- flatten_url(
-    base,
+    base_url("clinicians"),
     opts = set_opts(
       count = "false",
       results = "true",
