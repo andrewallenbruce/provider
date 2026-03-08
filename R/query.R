@@ -38,25 +38,33 @@ offset <- function(n, limit, which = "size") {
 
 #' @autoglobal
 #' @noRd
-base_url <- function(dataset) {
+base_url <- function(set) {
+  a <- "https://data.cms.gov/"
+  p <- \(id) paste0(a, "provider-data/api/1/datastore/query/", id, "/0?")
+  m <- \(id) paste0(a, "data-api/v1/dataset/", id, "/data")
   switch(
-    dataset,
-    "affiliations" = "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?",
-    "clinicians" = "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?",
-    "providers" = "https://data.cms.gov/data-api/v1/dataset/2457ea29-fc82-48b0-86ec-3b0755de7515/data",
-    cli::cli_abort("{.arg dataset} not recognized")
+    set,
+    affiliations = p("27ea-46a8"),
+    clinicians = p("mj5m-pzi6"),
+    providers = m("2457ea29-fc82-48b0-86ec-3b0755de7515"),
+    opt_out = m("9887a515-7552-4693-bf58-735c77af46d7"),
+    order_refer = m("c99b5865-1119-4436-bb80-c5af2773ea1f"),
+    hospitals = m("f6f6505c-e8b0-4d57-b258-e2b94133aaf2"),
+    laboratories = m("d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16"),
+    reassignments = m("20f51cff-4137-4f3a-b6b7-bfc9ad57983b"),
+    cli::cli_abort("{.arg set} not recognized")
   )
 }
 
 #' @autoglobal
 #' @noRd
-limit <- function(dataset) {
+limit <- function(set) {
   switch(
-    dataset,
+    set,
     "affiliations" = ,
     "clinicians" = 1500,
     "providers" = 5000,
-    cli::cli_abort("{.arg dataset} not recognized")
+    cli::cli_abort("{.arg set} not recognized")
   )
 }
 

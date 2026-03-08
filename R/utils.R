@@ -21,7 +21,7 @@ api_provider <- function() {
       "landingPage",
       "nextUpdateDate"
     )) |>
-    collapse::roworder(title, released) |>
+    collapse::roworderv(c("title", "released")) |>
     fastplyr::as_tbl()
 }
 
@@ -54,7 +54,7 @@ api_medicare <- function() {
   ) |>
     collapse::sbt(stringr::str_which(title, rex)) |>
     collapse::gv(c("title", "modified", "description", "identifier")) |>
-    collapse::roworder(title, modified) |>
+    collapse::roworderv(c("title", "modified")) |>
     fastplyr::as_tbl()
 }
 
@@ -74,7 +74,6 @@ state_recode <- function(x, to = "full") {
 
 
 # set_args(providers)
-#' @autoglobal
 #' @noRd
 set_args <- function(fn) {
   rlang::fn_fmls(fn) |>
@@ -82,20 +81,12 @@ set_args <- function(fn) {
     list2env(envir = .GlobalEnv)
 }
 
-#' @autoglobal
-#' @noRd
-na_if <- function(x, y = "") {
-  vctrs::vec_slice(
-    x,
-    vctrs::vec_in(x, y, needles_arg = "x", haystack_arg = "y")
-  ) <- NA
-  x
-}
-
-#' @autoglobal
 #' @noRd
 map_na_if <- function(i) {
-  purrr::modify_if(i, is.character, function(x) na_if(x, y = ""))
+  purrr::modify_if(i, is.character, function(x) {
+    vctrs::vec_slice(x, vctrs::vec_in(x, haystack = "")) <- NA_character_
+    x
+  })
 }
 
 #' @noRd
@@ -128,6 +119,20 @@ is_numeric <- function(x) {
 
 #' @noRd
 `%nn%` <- function(x, y) if (!is.null(x)) y else x #nocov
+
+#' @noRd
+duration_vec <- function(date_col) {
+
+  date <- difftime(
+    date_col,
+    lubridate::today(),
+    units = "auto",
+    tz = "UTC")
+
+  date <- lubridate::as.duration(date)
+
+  return(date)
+}
 
 #' @noRd
 yn_logical <- function(x) {

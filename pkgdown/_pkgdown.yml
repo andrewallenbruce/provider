@@ -87,9 +87,9 @@ navbar:
 
 reference:
 
-- title: Administrative
+- title: Current
   desc: >
-    Access a provider's administrative data.
+    Access current administrative healthcare provider data.
   contents:
   - affiliations
   - clinicians
@@ -101,18 +101,3 @@ reference:
   - pending
   - providers
   - reassignments
-
-- title: Provider Statistics
-  desc: >
-    Access a provider's statistical data.
-  contents:
-  - open_payments
-  - open_payments_
-  - quality_eligibility
-  - quality_payment
-  - quality_payment_
-  - utilization
-  - utilization_
-  - prescribers
-  - prescribers_
-  - compare_hcpcs
