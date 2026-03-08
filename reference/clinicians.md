@@ -16,12 +16,12 @@ clinicians(
   suffix = NULL,
   gender = NULL,
   credential = NULL,
-  grad_school = NULL,
-  grad_year = NULL,
+  specialty = NULL,
+  school = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  specialty = NULL,
   facility_name = NULL,
   facility_pac = NULL
 )
@@ -31,44 +31,44 @@ clinicians(
 
 - npi:
 
-  `<int>` Provider's NPI
+  `<int>` Individual National Provider Identifier
 
 - pac:
 
-  `<int>` Provider's PECOS Associate Control ID
+  `<int>` Individual PECOS Associate Control ID
 
 - enid:
 
-  `<chr>` Provider's Medicare Enrollment ID
+  `<chr>` Individual Medicare Enrollment ID
 
 - first, middle, last, suffix:
 
-  `<chr>` Provider's name
+  `<chr>` Individual provider's name
 
 - gender:
 
-  `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
-  (Unknown)
+  `<chr>` Individual provider's gender; `"F"` (Female), `"M"` (Male), or
+  `"U"` (Unknown)
 
 - credential:
 
-  `<chr>` Provider’s credential, i.e. "MD"
-
-- grad_school:
-
-  `<chr>` Medical school provider graduated from
-
-- grad_year:
-
-  `<int>` Provider’s graduation year; YYYY
-
-- city, state, zip:
-
-  `<chr>` Provider's city, state, zip
+  `<chr>` Individual provider's credential, i.e. `"MD"`
 
 - specialty:
 
-  `<chr>` Provider’s primary medical specialty
+  `<chr>` Individual provider’s primary medical specialty
+
+- school:
+
+  `<chr>` Individual provider’s alma mater
+
+- year:
+
+  `<int>` Individual provider’s graduation year
+
+- city, state, zip:
+
+  `<chr>` Facility's city, state, zip
 
 - facility_name:
 
@@ -143,7 +143,7 @@ clinicians()
 #> #   ind_par <chr>, grp_par <chr>
 
 clinicians(enid = "I20081002000549")
-#> ✔ Query returned 1 result.
+#> ✔ Query returned 1  result.
 #> # A tibble: 1 × 25
 #>   npi        pac   enid  last  first middle suffix gender credential grad_school
 #>   <chr>      <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
@@ -154,7 +154,7 @@ clinicians(enid = "I20081002000549")
 #> #   ind_par <chr>, grp_par <chr>
 
 clinicians(first = "ETAN")
-#> ✔ Query returned 11 results.
+#> ✔ Query returned 11  results.
 #> # A tibble: 11 × 25
 #>    npi       pac   enid  last  first middle suffix gender credential grad_school
 #>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      

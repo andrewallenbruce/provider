@@ -9,7 +9,7 @@ including the medical school that they attended and the year they graduated"><me
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,12 +67,12 @@ including the medical school that they attended and the year they graduated</p>
 <span>  suffix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  grad_school <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  grad_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  school <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_pac <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -83,43 +83,43 @@ including the medical school that they attended and the year they graduated</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Provider's NPI</p></dd>
+<dd><p><code>&lt;int&gt;</code> Individual National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Provider's PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;int&gt;</code> Individual PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-middle-last-suffix">first, middle, last, suffix<a class="anchor" aria-label="anchor" href="#arg-first-middle-last-suffix"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual provider's name</p></dd>
 
 
 <dt id="arg-gender">gender<a class="anchor" aria-label="anchor" href="#arg-gender"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's gender; <code>"F"</code> (Female), <code>"M"</code> (Male), or <code>"U"</code> (Unknown)</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual provider's gender; <code>"F"</code> (Female), <code>"M"</code> (Male), or <code>"U"</code> (Unknown)</p></dd>
 
 
 <dt id="arg-credential">credential<a class="anchor" aria-label="anchor" href="#arg-credential"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider’s credential, i.e. "MD"</p></dd>
-
-
-<dt id="arg-grad-school">grad_school<a class="anchor" aria-label="anchor" href="#arg-grad-school"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Medical school provider graduated from</p></dd>
-
-
-<dt id="arg-grad-year">grad_year<a class="anchor" aria-label="anchor" href="#arg-grad-year"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Provider’s graduation year; YYYY</p></dd>
-
-
-<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's city, state, zip</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual provider's credential, i.e. <code>"MD"</code></p></dd>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider’s primary medical specialty</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Individual provider’s primary medical specialty</p></dd>
+
+
+<dt id="arg-school">school<a class="anchor" aria-label="anchor" href="#arg-school"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Individual provider’s alma mater</p></dd>
+
+
+<dt id="arg-year">year<a class="anchor" aria-label="anchor" href="#arg-year"></a></dt>
+<dd><p><code>&lt;int&gt;</code> Individual provider’s graduation year</p></dd>
+
+
+<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Facility's city, state, zip</p></dd>
 
 
 <dt id="arg-facility-name">facility_name<a class="anchor" aria-label="anchor" href="#arg-facility-name"></a></dt>
@@ -164,7 +164,7 @@ including the medical school that they attended and the year they graduated</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ind_par &lt;chr&gt;, grp_par &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20081002000549"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span>  result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac   enid  last  first middle suffix gender credential grad_school</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
@@ -175,7 +175,7 @@ including the medical school that they attended and the year they graduated</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ind_par &lt;chr&gt;, grp_par &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"ETAN"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 11 results.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">11</span>  results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    npi       pac   enid  last  first middle suffix gender credential grad_school</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>

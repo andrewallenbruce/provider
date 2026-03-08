@@ -1,7 +1,7 @@
 # Provider-Facility Affiliations
 
-`affiliations()` allows the user access to data concerning providers'
-facility affiliations
+Access information concerning individual providers' affiliations with
+organizations/facilities.
 
 ## Usage
 
@@ -23,23 +23,23 @@ affiliations(
 
 - npi:
 
-  `<int>` Individual clinician ID, assigned by *NPPES*
+  `<int>` Individual National Provider Identifier
 
 - pac:
 
-  `<chr>` Individual clinician ID, assigned by *PECOS*
+  `<chr>` Individual PECOS Associate Control ID
 
 - first, middle, last, suffix:
 
-  `<chr>` Individual clinician's name
+  `<chr>` Individual provider's name
 
 - facility_type:
 
-  `<chr>` Type of facility:
+  `<chr>` facility type abbreviation:
 
   |          |                                   |
   |----------|-----------------------------------|
-  | **abbr** | **full**                          |
+  | **ABBR** | **FULL**                          |
   | `hp`     | Hospital                          |
   | `lt`     | Long-term care hospital           |
   | `nh`     | Nursing home                      |
@@ -51,21 +51,19 @@ affiliations(
 
 - facility_ccn:
 
-  `<chr>` Medicare CCN of `facility_type` column's facility *or* of a
-  *unit* within the hospital where the individual clinician provides
-  services.
+  `<chr>` CCN of `facility_type` column's facility *or* of a *unit*
+  within the hospital where the individual provider provides services.
 
 - parent_ccn:
 
-  `<chr>` Medicare CCN of *primary* hospital where the individual
-  clinician provides services in a unit within said hospital.
+  `<chr>` CCN of the *primary* hospital containing the unit where the
+  individual provider provides services.
 
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-containing the search results.
 
-## Links
+## References
 
 - [Physician Facility
   Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
@@ -93,7 +91,7 @@ affiliations()
 #> 10 100300… 4082… KIM   DAE   NA     NA     Hospital      370057       NA        
 
 affiliations(pac = 7810891009)
-#> ✔ Query returned 5 results.
+#> ✔ Query returned 5  results.
 #> # A tibble: 5 × 9
 #>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -104,14 +102,14 @@ affiliations(pac = 7810891009)
 #> 5 1043245… 7810… FUNG  MARK  K      NA     Hospital      471307       NA        
 
 affiliations(npi = 1003026055)
-#> ✔ Query returned 1 result.
+#> ✔ Query returned 1  result.
 #> # A tibble: 1 × 9
 #>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
 #> 1 1003026… 4486… PHAD… RADH… PUSHK… NA     Hospital      100168       NA        
 
 affiliations(first = "KIM")
-#> ✔ Query returned 710 results.
+#> ✔ Query returned 710  results.
 #> # A tibble: 710 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -128,7 +126,7 @@ affiliations(first = "KIM")
 #> # ℹ 700 more rows
 
 affiliations(facility_ccn = c("33Z302", 331302))
-#> ✔ Query returned 210 results.
+#> ✔ Query returned 210  results.
 #> # A tibble: 210 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
