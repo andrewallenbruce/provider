@@ -24,3 +24,19 @@ Access current administrative healthcare provider data.
   : Provider Enrollment in Medicare
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
   : Reassignment of Benefits
+
+## Modifiers
+
+Query Modifiers
+
+- [`new_modifier()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`is_modifier()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`greater_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`less_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`between()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`starts_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`ends_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`equals()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`any_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  : Query Modifiers

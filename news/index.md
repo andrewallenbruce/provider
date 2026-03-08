@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9019 (2026-03-08)
+
+- refactored
+  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- added `modifier` class
+
 ## provider 0.0.1.9018 (2026-03-08)
 
 - another round of mothballing/tweaking
