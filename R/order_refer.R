@@ -73,7 +73,7 @@ order_refer <- function(
   pmd = NULL,
   hospice = NULL
 ) {
-  args <- parameters(
+  args <- params(
     NPI = npi,
     FIRST_NAME = first,
     LAST_NAME = last,
@@ -91,7 +91,7 @@ order_refer <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(paste0(BASE, "?"), set_opts(size = 10, offset = 0))
+    url <- url_(paste0(BASE, "?"), opts(size = 10))
 
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
@@ -103,13 +103,13 @@ order_refer <- function(
 
   # Valid Query: Flatten & Request Result Count =====================
 
-  url <- flatten_url(
+  url <- url_(
     paste0(BASE, "/stats?"),
-    set_opts(size = LIMIT, offset = 0),
-    flatten_query2(args)
+    opts(size = LIMIT),
+    query2(args)
   )
 
-  N <- request_bare(url, "found_rows")
+  N <- request_rows(url)
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
@@ -121,10 +121,10 @@ order_refer <- function(
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- flatten_url(
+    url <- url_(
       paste0(BASE, "?"),
-      set_opts(size = LIMIT, offset = 0),
-      flatten_query2(args)
+      opts(size = LIMIT),
+      query2(args)
     )
 
     res <- request_bare(url) |>
@@ -138,10 +138,10 @@ order_refer <- function(
   # Count Above API Limit: Alert & Return Results =====================
   cli_pages(N, offset(N, LIMIT))
 
-  url <- flatten_url(
+  url <- url_(
     paste0(BASE, "?"),
-    set_opts(offset = "<<i>>", size = LIMIT),
-    flatten_query2(args)
+    opts(size = LIMIT, offset = "<<i>>"),
+    query2(args)
   )
 
   urls <- offset(N, LIMIT, "seq") |>
@@ -172,18 +172,4 @@ rename_order_refer <- function(x) {
   collapse::setrename(x, NM, .nse = FALSE)
 
   collapse::gv(x, unlist_(NM))
-}
-
-#' @autoglobal
-#' @noRd
-convert_lgl <- function(x = NULL) {
-  if (is.null(x)) {
-    return(NULL)
-  }
-
-  cheapr::val_match(
-    x,
-    TRUE ~ "Y",
-    FALSE ~ "N"
-  )
 }

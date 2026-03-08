@@ -78,7 +78,7 @@ clinicians <- function(
   facility_name = NULL,
   facility_pac = NULL
 ) {
-  args <- parameters(
+  args <- params(
     npi = npi,
     ind_pac_id = pac,
     ind_enrl_id = enid,
@@ -105,14 +105,13 @@ clinicians <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(
+    url <- url_(
       BASE,
-      set_opts(
+      opts(
         count = "false",
         results = "true",
         schema = "false",
-        limit = 10,
-        offset = 0
+        limit = 10
       )
     )
 
@@ -124,16 +123,15 @@ clinicians <- function(
     return(res)
   }
   # Valid Query: Flatten & Request Result Count =====================
-  url <- flatten_url(
+  url <- url_(
     BASE,
-    set_opts(
+    opts(
       count = "true",
       results = "false",
       schema = "false",
-      limit = LIMIT,
-      offset = 0
+      limit = LIMIT
     ),
-    flatten_query(args)
+    query(args)
   )
 
   N <- request_count(url)
@@ -148,16 +146,15 @@ clinicians <- function(
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- flatten_url(
+    url <- url_(
       BASE,
-      set_opts(
+      opts(
         count = "false",
         results = "true",
         schema = "false",
-        limit = LIMIT,
-        offset = 0
+        limit = LIMIT
       ),
-      flatten_query(args)
+      query(args)
     )
 
     res <- request_results(url) |>
@@ -171,16 +168,16 @@ clinicians <- function(
   # Count Above API Limit: Alert & Return Results =====================
   cli_pages(N, offset(N, LIMIT))
 
-  url <- flatten_url(
+  url <- url_(
     BASE,
-    set_opts(
+    opts(
       count = "false",
       results = "true",
       schema = "false",
       limit = LIMIT,
       offset = "<<i>>"
     ),
-    flatten_query(args)
+    query(args)
   )
 
   urls <- offset(N, LIMIT, "seq") |>

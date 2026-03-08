@@ -49,7 +49,6 @@ utils::globalVariables(c(
   "acr_jcaho_date",
   # <laboratories>
   "acr_jcaho_ind",
-  # <hospitals>
   # <laboratories>
   # <nppes>
   "address",
@@ -100,34 +99,20 @@ utils::globalVariables(c(
   # <laboratories>
   "duration",
   # <nppes>
-  "entity_type",
-  # <nppes>
   "ep",
-  # <hospitals>
-  "flag",
-  # <nppes>
-  "gender",
   # <laboratories>
   "gnrl_cntl_type_cd",
   # <laboratories>
   "gnrl_fac_type_cd",
-  # <reassignments>
-  "group_state_code",
   # <cms_update>
   # <nppes>
   "id",
   # <cms_dataset_search>
   "identifier",
-  # <hospitals>
-  "incorp_state",
-  # <reassignments>
-  "individual_state_code",
   # <laboratories>
   "jcaho",
   # <cms_dataset_search>
   "keyword",
-  # <hospitals>
-  "location_type",
   # <cms_update>
   # <cms_dataset_search>
   "modified",
@@ -141,8 +126,6 @@ utils::globalVariables(c(
   "pgm_trmntn_cd",
   # <nppes>
   "pr",
-  # <hospitals>
-  "proprietary_nonprofit",
   # <laboratories>
   "provider_name",
   # <laboratories>
@@ -151,30 +134,18 @@ utils::globalVariables(c(
   "prvdr_ctgry_sbtyp_cd",
   # <nppes>
   "purpose",
-  # <reassignments>
-  "record_type",
   # <laboratories>
   "rgn_cd",
-  # <fct_stabb>
+  # <hospitals>
+  "sg",
   # <state_recode>
   # <abb2full>
   "state.abb",
-  # <fct_stname>
   # <state_recode>
   # <abb2full>
   "state.name",
-  # <laboratories>
-  "state_cd",
-  # <opt_out>
-  "state_code",
   # <nppes>
   "status",
-  # <hospitals>
-  "subgroup_general",
-  # <hospitals>
-  "subgroup_other",
-  # <hospitals>
-  "subtotal",
   # <cms_update>
   # <cms_dataset_search>
   # <api_provider>

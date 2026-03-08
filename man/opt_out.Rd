@@ -105,15 +105,6 @@ fee-for-service (Part B).
 \examples{
 \dontshow{if ( interactive()) withAutoprint(\{ # examplesIf}
 opt_out(npi = 1043522824)
-
-# For opt-out providers eligible
-# to order and refer, use [order_refer()]
-# to look up their eligibility status:
-
-opt_out(npi = 1043522824) |>
-        pull(npi) |>
-        map(\(x) order_refer(npi = x)) |>
-        list_rbind()
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -8,16 +8,40 @@ plus <- function(x) {
 format_query <- function(x, N) {
   V <- plus(unlist_(x))
 
+  PRP <- "conditions[<<i>>][property]="
+  OPR <- "conditions[<<i>>][operator]="
+  VAL <- "conditions[<<i>>][value]"
+
   c(
-    paste0("conditions[<<i>>][property]=", plus(N)),
-    paste0("conditions[<<i>>][operator]=", if (length(V) > 1L) "IN" else "="),
-    paste0("conditions[<<i>>][value]", if (length(V) > 1L) "[]=" else "=", V)
+    paste0(PRP, plus(N)),
+    paste0(OPR, if (length(V) > 1L) "IN" else "="),
+    paste0(VAL, if (length(V) > 1L) "[]=" else "=", V)
   )
 }
 
 #' @autoglobal
 #' @noRd
-flatten_query <- function(args) {
+format_query2 <- function(x, N) {
+  V <- plus(unlist_(x))
+
+  PRP <- "filter[<<i>>][condition][path]="
+  OPR <- "filter[<<i>>][condition][operator]="
+  VAL <- "filter[<<i>>][condition][value]"
+
+  c(
+    paste0(PRP, plus(N)),
+    paste0(OPR, if (length(V) > 1L) "IN" else "="),
+    paste0(
+      VAL,
+      if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",
+      V
+    )
+  )
+}
+
+#' @autoglobal
+#' @noRd
+query <- function(args) {
   purrr::imap(args, format_query) |>
     unname() |>
     purrr::imap_chr(function(x, idx) {
@@ -29,26 +53,7 @@ flatten_query <- function(args) {
 
 #' @autoglobal
 #' @noRd
-format_query2 <- function(x, N) {
-  V <- plus(unlist_(x))
-
-  c(
-    paste0("filter[<<i>>][condition][path]=", plus(N)),
-    paste0(
-      "filter[<<i>>][condition][operator]=",
-      if (length(V) > 1L) "IN" else "="
-    ),
-    paste0(
-      "filter[<<i>>][condition][value]",
-      if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",
-      V
-    )
-  )
-}
-
-#' @autoglobal
-#' @noRd
-flatten_query2 <- function(args) {
+query2 <- function(args) {
   purrr::imap(args, format_query2) |>
     unname() |>
     purrr::imap_chr(function(x, idx) {

@@ -171,101 +171,92 @@
 #' @autoglobal
 #'
 #' @export
-hospitals <- function(npi            = NULL,
-                      facility_ccn   = NULL,
-                      enid_org       = NULL,
-                      enid_state     = NULL,
-                      pac_org        = NULL,
-                      specialty_code = NULL,
-                      organization   = NULL,
-                      dba            = NULL,
-                      city           = NULL,
-                      state          = NULL,
-                      zip            = NULL,
-                      registration   = NULL,
-                      multi_npi      = NULL,
-                      reh            = NULL,
-                      subgroup       = list(),
-                      tidy           = TRUE,
-                      pivot          = TRUE,
-                      na.rm          = TRUE,
-                      ...) {
-
-  npi          <- npi %nn% validate_npi(npi)
-  pac_org      <- pac_org %nn% check_pac(pac_org)
-  enid_org     <- enid_org %nn% check_enid(enid_org, type = "org")
-  zip          <- zip %nn% as.character(zip)
-  facility_ccn <- facility_ccn %nn% as.character(facility_ccn)
-  registration <- registration %nn% rlang::arg_match0(registration, c("P", "N"))
-  multi_npi    <- multi_npi %nn% tf_2_yn(multi_npi)
-  reh          <- reh %nn% tf_2_yn(reh)
-
-  sg <- purrr::compact(subgroup) |> purrr::map(tf_2_yn)
-
+hospitals <- function(
+  npi = NULL,
+  facility_ccn = NULL,
+  enid_org = NULL,
+  enid_state = NULL,
+  pac_org = NULL,
+  specialty_code = NULL,
+  organization = NULL,
+  dba = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  registration = NULL,
+  multi_npi = NULL,
+  reh = NULL,
+  subgroup = list(),
+  tidy = TRUE,
+  pivot = TRUE,
+  na.rm = TRUE,
+  ...
+) {
   args <- dplyr::tribble(
-    ~param,                             ~arg,
-    "NPI",                              npi,
-    "CCN",                              facility_ccn,
-    "ENROLLMENT ID",                    enid_org,
-    "ENROLLMENT STATE",                 enid_state,
-    "PROVIDER TYPE CODE",               specialty_code,
-    "ASSOCIATE ID",                     pac_org,
-    "ORGANIZATION NAME",                organization,
-    "DOING BUSINESS AS NAME",           dba,
-    "CITY",                             city,
-    "STATE",                            state,
-    "ZIP CODE",                         zip,
-    "PROPRIETARY_NONPROFIT",            registration,
-    "MULTIPLE NPI FLAG",                multi_npi,
-    "REH CONVERSION FLAG",              reh,
-    "SUBGROUP %2D GENERAL",             sg$gen,
-    "SUBGROUP %2D ACUTE CARE",          sg$acute,
-    "SUBGROUP %2D ALCOHOL DRUG",        sg$alc_drug,
-    "SUBGROUP %2D CHILDRENS",           sg$child,
-    "SUBGROUP %2D LONG-TERM",           sg$long,
-    "SUBGROUP %2D PSYCHIATRIC",         sg$psych,
-    "SUBGROUP %2D REHABILITATION",      sg$rehab,
-    "SUBGROUP %2D SHORT-TERM",          sg$short,
-    "SUBGROUP %2D SWING-BED APPROVED",  sg$swing,
-    "SUBGROUP %2D PSYCHIATRIC UNIT",    sg$psych_unit,
-    "SUBGROUP %2D REHABILITATION UNIT", sg$rehab_unit,
-    "SUBGROUP %2D SPECIALTY HOSPITAL",  sg$spec,
-    "SUBGROUP %2D OTHER",               sg$other)
+    ~param                             , ~arg           ,
+    "NPI"                              , npi            ,
+    "CCN"                              , facility_ccn   ,
+    "ENROLLMENT ID"                    , enid_org       ,
+    "ENROLLMENT STATE"                 , enid_state     ,
+    "PROVIDER TYPE CODE"               , specialty_code ,
+    "ASSOCIATE ID"                     , pac_org        ,
+    "ORGANIZATION NAME"                , organization   ,
+    "DOING BUSINESS AS NAME"           , dba            ,
+    "CITY"                             , city           ,
+    "STATE"                            , state          ,
+    "ZIP CODE"                         , zip            ,
+    "PROPRIETARY_NONPROFIT"            , registration   ,
+    "MULTIPLE NPI FLAG"                , multi_npi      ,
+    "REH CONVERSION FLAG"              , reh            ,
+    "SUBGROUP %2D GENERAL"             , sg$gen         ,
+    "SUBGROUP %2D ACUTE CARE"          , sg$acute       ,
+    "SUBGROUP %2D ALCOHOL DRUG"        , sg$alc_drug    ,
+    "SUBGROUP %2D CHILDRENS"           , sg$child       ,
+    "SUBGROUP %2D LONG-TERM"           , sg$long        ,
+    "SUBGROUP %2D PSYCHIATRIC"         , sg$psych       ,
+    "SUBGROUP %2D REHABILITATION"      , sg$rehab       ,
+    "SUBGROUP %2D SHORT-TERM"          , sg$short       ,
+    "SUBGROUP %2D SWING-BED APPROVED"  , sg$swing       ,
+    "SUBGROUP %2D PSYCHIATRIC UNIT"    , sg$psych_unit  ,
+    "SUBGROUP %2D REHABILITATION UNIT" , sg$rehab_unit  ,
+    "SUBGROUP %2D SPECIALTY HOSPITAL"  , sg$spec        ,
+    "SUBGROUP %2D OTHER"               , sg$other
+  )
 
   response <- httr2::request(build_url("hos", args)) |>
     httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
-
     cli_args <- dplyr::tribble(
-      ~x,               ~y,
-      "npi",            npi,
-      "facility_ccn",   facility_ccn,
-      "enid_org",       enid_org,
-      "enid_state",     enid_state,
-      "specialty_code", specialty_code,
-      "pac_org",        pac_org,
-      "organization",   organization,
-      "dba",            dba,
-      "city",           city,
-      "state",          state,
-      "zip",            zip,
-      "registration",   registration,
-      "multi_npi",      multi_npi,
-      "reh",            reh,
-      "gen",            sg$gen,
-      "acute",          sg$acute,
-      "alc_drug",       sg$alc_drug,
-      "child",          sg$child,
-      "long",           sg$long,
-      "psych",          sg$psych,
-      "rehab",          sg$rehab,
-      "short",          sg$short,
-      "swing",          sg$swing,
-      "psych_unit",     sg$psych_unit,
-      "rehab_unit",     sg$rehab_unit,
-      "spec",           sg$spec,
-      "other",          sg$other) |>
+      ~x               , ~y             ,
+      "npi"            , npi            ,
+      "facility_ccn"   , facility_ccn   ,
+      "enid_org"       , enid_org       ,
+      "enid_state"     , enid_state     ,
+      "specialty_code" , specialty_code ,
+      "pac_org"        , pac_org        ,
+      "organization"   , organization   ,
+      "dba"            , dba            ,
+      "city"           , city           ,
+      "state"          , state          ,
+      "zip"            , zip            ,
+      "registration"   , registration   ,
+      "multi_npi"      , multi_npi      ,
+      "reh"            , reh            ,
+      "gen"            , sg$gen         ,
+      "acute"          , sg$acute       ,
+      "alc_drug"       , sg$alc_drug    ,
+      "child"          , sg$child       ,
+      "long"           , sg$long        ,
+      "psych"          , sg$psych       ,
+      "rehab"          , sg$rehab       ,
+      "short"          , sg$short       ,
+      "swing"          , sg$swing       ,
+      "psych_unit"     , sg$psych_unit  ,
+      "rehab_unit"     , sg$rehab_unit  ,
+      "spec"           , sg$spec        ,
+      "other"          , sg$other
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -273,132 +264,5 @@ hospitals <- function(npi            = NULL,
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-
-  if (tidy) {
-    results <- tidyup(results,
-                      dtype = 'ymd',
-                      yn    = c('flag', 'subgroup'),
-                      chr   = 'zip_code',
-                      zip   = 'zip_code') |>
-      combine(address, c('address_line_1',
-                         'address_line_2')) |>
-      combine(structure, c('organization_type_structure', #nolint
-                           'organization_other_type_text'), sep = ": ") |>
-      combine(location_type, c('practice_location_type',
-                               'location_other_type_text'), sep = ": ") |>
-      dplyr::mutate(proprietary_nonprofit = dplyr::case_match(proprietary_nonprofit,
-                      "P" ~ "Proprietary",
-                      "N" ~ "Non-Profit",
-                      .default = NA),
-                    proprietary_nonprofit = fct_reg(proprietary_nonprofit)) |>
-      cols_hosp(1)
-
-    if (pivot) {
-      results <- results |>
-        dplyr::rowwise() |>
-        dplyr::mutate(subtotal      = sum(dplyr::c_across(subgroup_general:subgroup_other), na.rm = TRUE),
-                      subgroup_none = dplyr::if_else(subtotal == 0, TRUE, FALSE),
-                      subtotal = NULL) |>
-        cols_hosp(2) |>
-        tidyr::pivot_longer(cols = dplyr::contains("Subgroup"),
-                            names_to = "subgroup",
-                            values_to = "flag") |>
-        dplyr::mutate(subgroup = stringr::str_remove(subgroup, "Subgroup ")) |>
-        dplyr::filter(flag == TRUE) |>
-        dplyr::mutate(flag = NULL,
-                      subgroup     = fct_subgroup(subgroup),
-                      enid_state   = fct_stabb(enid_state),
-                      incorp_state = fct_stabb(incorp_state),
-                      state        = fct_stabb(state))
-
-    }
-    if (na.rm) results <- narm(results)
-  }
   return(results)
-}
-
-#' @param df data frame
-#' @param step step 1 or 2 in pipeline
-#' @autoglobal
-#' @noRd
-cols_hosp <- function(df, step = c(1, 2)) {
-
-  if (step == 1) {
-  cols <- c('npi',
-            'pac_org'           = 'associate_id',
-            'enid_org'          = 'enrollment_id',
-            'enid_state'        = 'enrollment_state',
-            'facility_ccn'      = 'ccn',
-            'organization'      = 'organization_name',
-            'doing_business_as' = 'doing_business_as_name',
-            'specialty_code'    = 'provider_type_code',
-            'specialty'         = 'provider_type_text',
-            'incorp_date'       = 'incorporation_date',
-            'incorp_state'      = 'incorporation_state',
-            'structure',
-            'address',
-            'city',
-            'state',
-            'zip'               = 'zip_code',
-            'location_type',
-            'registration'      = 'proprietary_nonprofit',
-            'multi_npi'         = 'multiple_npi_flag',
-            'reh_conversion'    = 'reh_conversion_flag',
-            'reh_date'          = 'reh_conversion_date',
-            'reh_ccns'          = 'cah_or_hospital_ccn',
-            'subgroup_general',
-            'subgroup_acute_care',
-            'subgroup_alcohol_drug',
-            'subgroup_childrens',
-            'subgroup_long_term',
-            'subgroup_psychiatric',
-            'subgroup_rehabilitation',
-            'subgroup_short_term',
-            'subgroup_swing_bed_approved',
-            'subgroup_psychiatric_unit',
-            'subgroup_rehabilitation_unit',
-            'subgroup_specialty_hospital',
-            'subgroup_other',
-            'other'             = 'subgroup_other_text')
-  }
-  if (step == 2) {
-    cols <- c('npi_org' = 'npi',
-              'pac_org',
-              'enid_org',
-              'enid_state',
-              'facility_ccn',
-              'organization',
-              'doing_business_as',
-              'specialty_code',
-              'specialty',
-              'incorp_date',
-              'incorp_state',
-              'structure',
-              'address',
-              'city',
-              'state',
-              'zip',
-              'location_type',
-              'registration',
-              'multi_npi',
-              'reh_date',
-              'reh_ccns',
-              'reh_conversion',
-              "Subgroup General"             = 'subgroup_general',
-              "Subgroup Acute Care"          = 'subgroup_acute_care',
-              "Subgroup Alcohol Drug"        = 'subgroup_alcohol_drug',
-              "Subgroup Childrens' Hospital" = 'subgroup_childrens',
-              "Subgroup Long-term"           = 'subgroup_long_term',
-              "Subgroup Psychiatric"         = 'subgroup_psychiatric',
-              "Subgroup Rehabilitation"      = 'subgroup_rehabilitation',
-              "Subgroup Short-Term"          = 'subgroup_short_term',
-              "Subgroup Swing-Bed Approved"  = 'subgroup_swing_bed_approved',
-              "Subgroup Psychiatric Unit"    = 'subgroup_psychiatric_unit',
-              "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
-              "Subgroup Specialty Hospital"  = 'subgroup_specialty_hospital',
-              "Subgroup Other"               = 'subgroup_other',
-              "Subgroup None"                = 'subgroup_none',
-              'other')
-  }
-  df |> dplyr::select(dplyr::any_of(cols))
 }

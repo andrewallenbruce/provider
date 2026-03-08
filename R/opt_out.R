@@ -84,82 +84,72 @@
 #' @examplesIf  interactive()
 #' opt_out(npi = 1043522824)
 #'
-#' # For opt-out providers eligible
-#' # to order and refer, use [order_refer()]
-#' # to look up their eligibility status:
-#'
-#' opt_out(npi = 1043522824) |>
-#'         pull(npi) |>
-#'         map(\(x) order_refer(npi = x)) |>
-#'         list_rbind()
-#'
 #' @autoglobal
-#'
 #' @export
-opt_out <- function(npi = NULL,
-                    first = NULL,
-                    last = NULL,
-                    specialty = NULL,
-                    address = NULL,
-                    city = NULL,
-                    state = NULL,
-                    zip = NULL,
-                    order_refer = NULL,
-                    tidy = TRUE,
-                    ...) {
-
-  npi         <- npi %nn% validate_npi(npi)
-  order_refer <- order_refer %nn% tf_2_yn(order_refer)
-  zip         <- zip %nn% as.character(zip)
-
+opt_out <- function(
+  npi = NULL,
+  first = NULL,
+  last = NULL,
+  specialty = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  order_refer = NULL,
+  tidy = TRUE,
+  ...
+) {
   args <- dplyr::tribble(
-    ~param,                         ~arg,
-    "NPI",                           npi,
-    "First Name",                    first,
-    "Last Name",                     last,
-    "Specialty",                     specialty,
-    "First Line Street Address",     address,
-    "City Name",                     city,
-    "State Code",                    state,
-    "Zip code",                      zip,
-    "Eligible to Order and Refer",   order_refer)
+    ~param                        , ~arg        ,
+    "NPI"                         , npi         ,
+    "First Name"                  , first       ,
+    "Last Name"                   , last        ,
+    "Specialty"                   , specialty   ,
+    "First Line Street Address"   , address     ,
+    "City Name"                   , city        ,
+    "State Code"                  , state       ,
+    "Zip code"                    , zip         ,
+    "Eligible to Order and Refer" , order_refer
+  )
 
   response <- httr2::request(build_url("opt", args)) |>
     httr2::req_perform()
 
   if (vctrs::vec_is_empty(response$body)) {
-
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "first",         first,
-      "last",          last,
-      "specialty",     specialty,
-      "address",       address,
-      "city",          city,
-      "state",         state,
-      "zip",           zip,
-      "order_refer",   order_refer) |>
+      ~x            , ~y          ,
+      "npi"         , npi         ,
+      "first"       , first       ,
+      "last"        , last        ,
+      "specialty"   , specialty   ,
+      "address"     , address     ,
+      "city"        , city        ,
+      "state"       , state       ,
+      "zip"         , zip         ,
+      "order_refer" , order_refer
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
     return(invisible(NULL))
-
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results,
-                      dtype = 'mdy',
-                      yn    = 'eligible',
-                      chr   = 'npi',
-                      zip   = 'zip_code') |>
-      combine(address, c('first_line_street_address',
-                         'second_line_street_address')) |>
-      dplyr::mutate(state_code = fct_stabb(state_code)) |>
+    results <- tidyup(
+      results,
+      dtype = 'mdy',
+      yn = 'eligible',
+      chr = 'npi',
+      zip = 'zip_code'
+    ) |>
+      combine(
+        address,
+        c('first_line_street_address', 'second_line_street_address')
+      ) |>
       cols_opt()
-    }
+  }
   return(results)
 }
 
@@ -167,19 +157,20 @@ opt_out <- function(npi = NULL,
 #' @autoglobal
 #' @noRd
 cols_opt <- function(df) {
-
-  cols <- c('npi',
-            'first'             = 'first_name',
-            'last'              = 'last_name',
-            'specialty',
-            'order_refer'       = 'eligible_to_order_and_refer',
-            'optout_start_date' = 'optout_effective_date',
-            'optout_end_date',
-            'last_updated',
-            'address',
-            'city'              = 'city_name',
-            'state'             = 'state_code',
-            'zip'               = 'zip_code')
+  cols <- c(
+    'npi',
+    'first' = 'first_name',
+    'last' = 'last_name',
+    'specialty',
+    'order_refer' = 'eligible_to_order_and_refer',
+    'optout_start_date' = 'optout_effective_date',
+    'optout_end_date',
+    'last_updated',
+    'address',
+    'city' = 'city_name',
+    'state' = 'state_code',
+    'zip' = 'zip_code'
+  )
 
   df |> dplyr::select(dplyr::any_of(cols))
 }

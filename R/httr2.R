@@ -44,6 +44,12 @@ request_count <- function(x) {
 
 #' @autoglobal
 #' @noRd
+request_rows <- function(x) {
+  request_bare(x, query = "found_rows")
+}
+
+#' @autoglobal
+#' @noRd
 parallel_request <- function(x, query = NULL) {
   purrr::map(x, httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>

@@ -1,4 +1,3 @@
-#' @autoglobal
 #' @noRd
 cli_no_query <- function() {
   cli::cli_alert_warning(c(
@@ -8,19 +7,18 @@ cli_no_query <- function() {
   ))
 }
 
-#' @autoglobal
 #' @noRd
 cli_no_results <- function() {
   cli::cli_alert_danger("Query returned {.strong 0} results.")
 }
 
-#' @autoglobal
 #' @noRd
 cli_results <- function(x) {
-  cli::cli_alert_success("Query returned {.strong {format(x, big.mark = ',')}} {cli::qty(x)} result{?s}.")
+  cli::cli_alert_success(
+    "Query returned {.strong {format(x, big.mark = ',')}} {cli::qty(x)}result{?s}."
+  )
 }
 
-#' @autoglobal
 #' @noRd
 cli_pages <- function(x, p) {
   cli_results(x)

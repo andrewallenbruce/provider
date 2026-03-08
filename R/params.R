@@ -1,19 +1,47 @@
 #' @autoglobal
 #' @noRd
-parameters <- function(...) {
+convert_lgl <- function(x = NULL) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  cheapr::val_match(
+    x,
+    TRUE ~ "Y",
+    FALSE ~ "N"
+  )
+}
+
+#' @autoglobal
+#' @noRd
+params <- function(...) {
   purrr::compact(rlang::list2(...))
 }
 
 #' @autoglobal
 #' @noRd
-set_opts <- function(...) {
-  x <- rlang::list2(...)
+opts <- function(
+  count = NULL,
+  results = NULL,
+  schema = NULL,
+  size = NULL,
+  limit = NULL,
+  offset = 0
+) {
+  x <- params(
+    count = count,
+    results = results,
+    schema = schema,
+    size = size,
+    limit = limit,
+    offset = offset
+  )
   paste0(names(x), "=", unlist_(x), collapse = "&")
 }
 
 #' @autoglobal
 #' @noRd
-flatten_url <- function(base, opts, query = NULL) {
+url_ <- function(base, opts, query = NULL) {
   if (is.null(query)) {
     paste0(base, opts)
   } else {

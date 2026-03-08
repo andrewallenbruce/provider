@@ -126,75 +126,68 @@
 #' @autoglobal
 #'
 #' @export
-nppes <- function(npi            = NULL,
-                  entype         = NULL,
-                  first          = NULL,
-                  last           = NULL,
-                  organization   = NULL,
-                  name_type      = NULL,
-                  taxonomy_desc  = NULL,
-                  city           = NULL,
-                  state          = NULL,
-                  zip            = NULL,
-                  country        = NULL,
-                  limit          = 1200L,
-                  skip           = 0L,
-                  unnest         = TRUE,
-                  tidy           = TRUE,
-                  na.rm          = TRUE,
-                  ...) {
-
-  npi       <- npi %nn% validate_npi(npi)
-  name_type <- name_type %nn% rlang::arg_match0(name_type, c("AO", "Provider"))
-  zip       <- zip %nn% as.character(zip)
-
+nppes <- function(
+  npi = NULL,
+  entype = NULL,
+  first = NULL,
+  last = NULL,
+  organization = NULL,
+  name_type = NULL,
+  taxonomy_desc = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  country = NULL,
+  limit = 1200L,
+  skip = 0L,
+  unnest = TRUE,
+  tidy = TRUE,
+  na.rm = TRUE,
+  ...
+) {
   if (!is.null(entype)) {
-
     entype <- rlang::arg_match(entype, c("I", "O"))
-
-    # entype <- switch(
-    # entype,
-    # "I" = "NPI-1",
-    # "O" = "NPI-2"
-    # )
-
     entype <- dplyr::case_when(entype == "I" ~ "NPI-1", entype == "O" ~ "NPI-2")
   }
 
-  request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
-    httr2::req_url_query(number               = npi,
-                         enumeration_type     = entype,
-                         first_name           = first,
-                         last_name            = last,
-                         name_purpose         = name_type,
-                         organization_name    = organization,
-                         taxonomy_description = taxonomy_desc,
-                         city                 = city,
-                         state                = state,
-                         postal_code          = zip,
-                         country_code         = country,
-                         limit                = limit,
-                         skip                 = skip) |>
+  request <- httr2::request(
+    "https://npiregistry.cms.hhs.gov/api/?version=2.1"
+  ) |>
+    httr2::req_url_query(
+      number = npi,
+      enumeration_type = entype,
+      first_name = first,
+      last_name = last,
+      name_purpose = name_type,
+      organization_name = organization,
+      taxonomy_description = taxonomy_desc,
+      city = city,
+      state = state,
+      postal_code = zip,
+      country_code = country,
+      limit = limit,
+      skip = skip
+    ) |>
     httr2::req_perform()
 
   response <- httr2::resp_body_json(request, simplifyVector = TRUE)
-  results  <- response$results
+  results <- response$results
 
   if (vctrs::vec_is_empty(results)) {
-
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "entype",        entype,
-      "first",         first,
-      "last",          last,
-      "name_type",     name_type,
-      "organization",  organization,
-      "taxonomy_desc", taxonomy_desc,
-      "city",          city,
-      "state",         state,
-      "zip",           zip,
-      "country",       country) |>
+      ~x              , ~y            ,
+      "npi"           , npi           ,
+      "entype"        , entype        ,
+      "first"         , first         ,
+      "last"          , last          ,
+      "name_type"     , name_type     ,
+      "organization"  , organization  ,
+      "taxonomy_desc" , taxonomy_desc ,
+      "city"          , city          ,
+      "state"         , state         ,
+      "zip"           , zip           ,
+      "country"       , country
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -208,154 +201,152 @@ nppes <- function(npi            = NULL,
       dplyr::filter(purpose != "MAILING")
 
     results <- tidyr::unnest_longer(results, tx, keep_empty = TRUE) |>
-                               tidyr::unpack(tx, names_sep = ".") |>
-                        tidyr::unnest_longer(id, keep_empty = TRUE) |>
-                               tidyr::unpack(id, names_sep = ".") |>
-                        tidyr::unnest_longer(pr, keep_empty = TRUE) |>
-                               tidyr::unpack(pr, names_sep = ".") |>
-                        tidyr::unnest_longer(on, keep_empty = TRUE) |>
-                               tidyr::unpack(on, names_sep = ".") |>
-                        tidyr::unnest_longer(ep, keep_empty = TRUE) |>
-                               tidyr::unpack(ep, names_sep = ".")
+      tidyr::unpack(tx, names_sep = ".") |>
+      tidyr::unnest_longer(id, keep_empty = TRUE) |>
+      tidyr::unpack(id, names_sep = ".") |>
+      tidyr::unnest_longer(pr, keep_empty = TRUE) |>
+      tidyr::unpack(pr, names_sep = ".") |>
+      tidyr::unnest_longer(on, keep_empty = TRUE) |>
+      tidyr::unpack(on, names_sep = ".") |>
+      tidyr::unnest_longer(ep, keep_empty = TRUE) |>
+      tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
-      results <- tidyup(results,
-                        dtype = 'ymd',
-                        yn    = c('sole_prop', 'org_part'),
-                        cred  = 'credential',
-                        zip   = 'zip')
+      results <- tidyup(
+        results,
+        dtype = 'ymd',
+        yn = c('sole_prop', 'org_part'),
+        cred = 'credential',
+        zip = 'zip'
+      )
 
-      if (!rlang::has_name(results, "gender")) results$gender <- "9"
+      if (!rlang::has_name(results, "gender")) {
+        results$gender <- "9"
+      }
 
-      results <- dplyr::mutate(results,
-                      purpose     = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
-                      gender      = fct_gen(gender),
-                      entity_type = fct_enum(entity_type),
-                      state       = fct_stabb(state),
-                      status      = factor(status, levels = "A", labels = "Active")) |>
+      results <- dplyr::mutate(
+        results,
+        purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose),
+        status = factor(status, levels = "A", labels = "Active")
+      ) |>
         cols_nppes(2)
 
-      if (rlang::has_name(results, "tx_primary")) results$tx_primary <- as.logical(results$tx_primary)
-      if (rlang::has_name(results, "tx_state"))   results$tx_state   <- fct_stabb(results$tx_state)
-      if (rlang::has_name(results, "id_state"))   results$id_state   <- fct_stabb(results$id_state)
-      if (rlang::has_name(results, "pr_state"))   results$pr_state   <- fct_stabb(results$pr_state)
-      if (rlang::has_name(results, "purpose"))    results$purpose    <- fct_purp(results$purpose)
-      if (rlang::has_name(results, "pr_purpose")) results$pr_purpose <- fct_purp(results$pr_purpose)
-      # if (rlang::has_name(results, "pr_zip"))     results$pr_zip     <- zipcodeR::normalize_zip(results$pr_zip)
-
+      if (rlang::has_name(results, "tx_primary")) {
+        results$tx_primary <- as.logical(results$tx_primary)
+      }
       if (na.rm) results <- narm(results)
     }
   }
   return(results)
 }
 
-  # results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
-  # names(taxonomy) <- c("npi", paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
+# results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+# names(taxonomy) <- c("npi", paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
 
 #' @param df data frame
 #' @param step step in the pipeline
 #' @autoglobal
 #' @noRd
 cols_nppes <- function(df, step = c(1, 2)) {
-
   if (step == 1) {
-
-  cols <- c('npi'          = 'number',
-            'entity_type'  = 'enumeration_type',
-            'enum_date'    = 'enumeration_date',
-            'cert_date'    = 'certification_date',
-            'last_update'  = 'last_updated',
-            'status',
-            'tx'           = 'taxonomies',
-            'id'           = 'identifiers',
-            'pr'           = 'practiceLocations',
-            'on'           = 'other_names',
-            'ep'           = 'endpoints',
-            'prefix'       = 'name_prefix',
-            'first'        = 'first_name',
-            'middle'       = 'middle_name',
-            'last'         = 'last_name',
-            'gender',
-            'credential',
-            'sole_prop'    = 'sole_proprietor',
-            'organization' = 'organization_name',
-            'org_parent'   = 'parent_organization_legal_business_name',
-            'org_part'     = 'organizational_subpart',
-            'ao_prefix'    = 'authorized_official_name_prefix',
-            'ao_first'     = 'authorized_official_first_name',
-            'ao_middle'    = 'authorized_official_middle_name',
-            'ao_last'      = 'authorized_official_last_name',
-            'ao_suffix'    = 'authorized_official_name_suffix',
-            'ao_title'     = 'authorized_official_title_or_position',
-            'ao_phone'     = 'authorized_official_telephone_number',
-            'ao_fax'       = 'authorized_official_fax_number',
-            'purpose'      = 'address_purpose',
-            'address',
-            'city',
-            'state',
-            'zip'          = 'postal_code',
-            'country'      = 'country_code',
-            'phone'        = 'telephone_number',
-            'fax'          = 'fax_number')
+    cols <- c(
+      'npi' = 'number',
+      'entity_type' = 'enumeration_type',
+      'enum_date' = 'enumeration_date',
+      'cert_date' = 'certification_date',
+      'last_update' = 'last_updated',
+      'status',
+      'tx' = 'taxonomies',
+      'id' = 'identifiers',
+      'pr' = 'practiceLocations',
+      'on' = 'other_names',
+      'ep' = 'endpoints',
+      'prefix' = 'name_prefix',
+      'first' = 'first_name',
+      'middle' = 'middle_name',
+      'last' = 'last_name',
+      'gender',
+      'credential',
+      'sole_prop' = 'sole_proprietor',
+      'organization' = 'organization_name',
+      'org_parent' = 'parent_organization_legal_business_name',
+      'org_part' = 'organizational_subpart',
+      'ao_prefix' = 'authorized_official_name_prefix',
+      'ao_first' = 'authorized_official_first_name',
+      'ao_middle' = 'authorized_official_middle_name',
+      'ao_last' = 'authorized_official_last_name',
+      'ao_suffix' = 'authorized_official_name_suffix',
+      'ao_title' = 'authorized_official_title_or_position',
+      'ao_phone' = 'authorized_official_telephone_number',
+      'ao_fax' = 'authorized_official_fax_number',
+      'purpose' = 'address_purpose',
+      'address',
+      'city',
+      'state',
+      'zip' = 'postal_code',
+      'country' = 'country_code',
+      'phone' = 'telephone_number',
+      'fax' = 'fax_number'
+    )
   }
 
   if (step == 2) {
-
-    cols <- c('npi',
-              'entity_type',
-              'enum_date',
-              'cert_date',
-              'last_update',
-              'status',
-              'prefix',
-              'first',
-              'middle',
-              'last',
-              'gender',
-              'credential',
-              'sole_prop',
-              'organization',
-              'org_parent',
-              'org_part',
-              'purpose',
-              'address',
-              'city',
-              'state',
-              'zip',
-              'country',
-              'phone',
-              'fax',
-              'ao_prefix',
-              'ao_first',
-              'ao_middle',
-              'ao_last',
-              'ao_suffix',
-              'ao_title',
-              'ao_phone',
-              'ao_fax',
-              'tx_code',
-              'tx_primary',
-              'tx_group'      = 'tx_taxonomy_group',
-              'tx_desc',
-              'tx_license',
-              'tx_state',
-              'id_code',
-              'id_desc',
-              'id_state',
-              'id_issuer',
-              'id_state',
-              'id_identifier',
-              'pr_country'    = 'pr_country_code',
-              'pr_purpose'    = 'pr_address_purpose',
-              'pr_address'    = 'pr_address_1',
-              'pr_city',
-              'pr_state',
-              'pr_zip'        = 'pr_postal_code',
-              'pr_phone'      = 'pr_telephone_number',
-              'pr_fax'        = 'pr_fax_number',
-              'on_type',
-              'on_code',
-              'on_org_name'   = 'on_organization_name')
-
+    cols <- c(
+      'npi',
+      'entity_type',
+      'enum_date',
+      'cert_date',
+      'last_update',
+      'status',
+      'prefix',
+      'first',
+      'middle',
+      'last',
+      'gender',
+      'credential',
+      'sole_prop',
+      'organization',
+      'org_parent',
+      'org_part',
+      'purpose',
+      'address',
+      'city',
+      'state',
+      'zip',
+      'country',
+      'phone',
+      'fax',
+      'ao_prefix',
+      'ao_first',
+      'ao_middle',
+      'ao_last',
+      'ao_suffix',
+      'ao_title',
+      'ao_phone',
+      'ao_fax',
+      'tx_code',
+      'tx_primary',
+      'tx_group' = 'tx_taxonomy_group',
+      'tx_desc',
+      'tx_license',
+      'tx_state',
+      'id_code',
+      'id_desc',
+      'id_state',
+      'id_issuer',
+      'id_state',
+      'id_identifier',
+      'pr_country' = 'pr_country_code',
+      'pr_purpose' = 'pr_address_purpose',
+      'pr_address' = 'pr_address_1',
+      'pr_city',
+      'pr_state',
+      'pr_zip' = 'pr_postal_code',
+      'pr_phone' = 'pr_telephone_number',
+      'pr_fax' = 'pr_fax_number',
+      'on_type',
+      'on_code',
+      'on_org_name' = 'on_organization_name'
+    )
   }
   df |> dplyr::select(dplyr::any_of(cols))
 }

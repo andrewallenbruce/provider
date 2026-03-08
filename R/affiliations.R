@@ -57,7 +57,7 @@ affiliations <- function(
   facility_ccn = NULL,
   parent_ccn = NULL
 ) {
-  args <- parameters(
+  args <- params(
     npi = npi,
     ind_pac_id = pac,
     provider_last_name = last,
@@ -76,12 +76,13 @@ affiliations <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(BASE, set_opts(
+    url <- url_(
+      BASE,
+      opts(
         count = "false",
         results = "true",
         schema = "false",
-        limit = 10,
-        offset = 0
+        limit = 10
       )
     )
 
@@ -94,16 +95,15 @@ affiliations <- function(
   }
 
   # Valid Query: Flatten & Request Result Count =====================
-  url <- flatten_url(
+  url <- url_(
     BASE,
-    opts = set_opts(
+    opts = opts(
       count = "true",
       results = "false",
       schema = "false",
-      limit = LIMIT,
-      offset = 0
+      limit = LIMIT
     ),
-    query = flatten_query(args)
+    query(args)
   )
 
   N <- request_count(url)
@@ -118,16 +118,15 @@ affiliations <- function(
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- flatten_url(
+    url <- url_(
       BASE,
-      set_opts(
+      opts(
         count = "false",
         results = "true",
         schema = "false",
-        limit = LIMIT,
-        offset = 0
+        limit = LIMIT
       ),
-      flatten_query(args)
+      query(args)
     )
 
     res <- request_results(url) |>
@@ -141,16 +140,16 @@ affiliations <- function(
   # Count Above API Limit: Alert & Return Results =====================
   cli_pages(N, offset(N, LIMIT))
 
-  url <- flatten_url(
+  url <- url_(
     BASE,
-    set_opts(
+    opts(
       count = "false",
       results = "true",
       schema = "false",
       limit = LIMIT,
       offset = "<<i>>"
     ),
-    flatten_query(args)
+    query(args)
   )
 
   urls <- offset(N, LIMIT, "seq") |>

@@ -45,35 +45,38 @@
 #'
 #' @autoglobal
 #' @export
-pending <- function(type  = c("P", "N"),
-                    npi   = NULL,
-                    first = NULL,
-                    last  = NULL,
-                    tidy  = TRUE,
-                    ...) {
-
+pending <- function(
+  type = c("P", "N"),
+  npi = NULL,
+  first = NULL,
+  last = NULL,
+  tidy = TRUE,
+  ...
+) {
   type <- match.arg(type)
-  npi  <- npi %nn% validate_npi(npi)
 
   args <- dplyr::tribble(
-    ~param,       ~arg,
-    "NPI",        npi,
-    "LAST_NAME",  last,
-    "FIRST_NAME", first)
+    ~param       , ~arg  ,
+    "NPI"        , npi   ,
+    "LAST_NAME"  , last  ,
+    "FIRST_NAME" , first
+  )
 
   if (type == "N") {
-    response <- httr2::req_perform(httr2::request(build_url("npe", args)))}
+    response <- httr2::req_perform(httr2::request(build_url("npe", args)))
+  }
   if (type == "P") {
-    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))}
+    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))
+  }
 
   if (vctrs::vec_is_empty(response$body)) {
-
     cli_args <- dplyr::tribble(
-      ~x,      ~y,
-      "type",  type,
-      "npi",   npi,
-      "first", first,
-      "last",  last) |>
+      ~x      , ~y    ,
+      "type"  , type  ,
+      "npi"   , npi   ,
+      "first" , first ,
+      "last"  , last
+    ) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -84,11 +87,11 @@ pending <- function(type  = c("P", "N"),
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(type = dplyr::if_else(type == "P",
-                                          "Physician",
-                                          "Non-Physician")) |>
+      dplyr::mutate(
+        type = dplyr::if_else(type == "P", "Physician", "Non-Physician")
+      ) |>
       cols_pen()
-    }
+  }
   return(results)
 }
 

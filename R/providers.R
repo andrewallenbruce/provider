@@ -61,7 +61,7 @@ providers <- function(
   org_name = NULL,
   multi = NULL
 ) {
-  args <- parameters(
+  args <- params(
     NPI = npi,
     MULTIPLE_NPI_FLAG = multi,
     PECOS_ASCT_CNTL_ID = pac,
@@ -82,7 +82,7 @@ providers <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(paste0(BASE, "?"), set_opts(size = 10, offset = 0))
+    url <- url_(paste0(BASE, "?"), opts(size = 10))
 
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
@@ -94,13 +94,13 @@ providers <- function(
 
   # Valid Query: Flatten & Request Result Count =====================
 
-  url <- flatten_url(
+  url <- url_(
     paste0(BASE, "/stats?"),
-    set_opts(size = LIMIT, offset = 0),
-    flatten_query2(args)
+    opts(size = LIMIT),
+    query2(args)
   )
 
-  N <- request_bare(url, "found_rows")
+  N <- request_rows(url)
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
@@ -112,10 +112,10 @@ providers <- function(
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- flatten_url(
+    url <- url_(
       paste0(BASE, "?"),
-      set_opts(size = LIMIT, offset = 0),
-      flatten_query2(args)
+      opts(size = LIMIT),
+      query2(args)
     )
 
     res <- request_bare(url) |>
@@ -129,10 +129,10 @@ providers <- function(
   # Count Above API Limit: Alert & Return Results =====================
   cli_pages(N, offset(N, LIMIT))
 
-  url <- flatten_url(
+  url <- url_(
     paste0(BASE, "?"),
-    set_opts(size = LIMIT, offset = "<<i>>"),
-    flatten_query2(args)
+    opts(size = LIMIT, offset = "<<i>>"),
+    query2(args)
   )
 
   urls <- offset(N, LIMIT, "seq") |>
