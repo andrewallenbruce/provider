@@ -8,16 +8,16 @@
 #'    * [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 #'    * [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'
-#' @param npi `<int>` Provider's NPI
-#' @param pac `<int>` Provider's PECOS Associate Control ID
-#' @param enid `<chr>` Provider's Medicare Enrollment ID
-#' @param first,middle,last,suffix `<chr>` Provider's name
-#' @param gender `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
-#' @param credential `<chr>` Provider’s credential, i.e. "MD"
-#' @param city,state,zip `<chr>` Provider's city, state, zip
-#' @param grad_school `<chr>` Medical school provider graduated from
-#' @param grad_year `<int>` Provider’s graduation year; YYYY
-#' @param specialty `<chr>` Provider’s primary medical specialty
+#' @param npi `<int>` Individual National Provider Identifier
+#' @param pac `<int>` Individual PECOS Associate Control ID
+#' @param enid `<chr>` Individual Medicare Enrollment ID
+#' @param first,middle,last,suffix `<chr>` Individual provider's name
+#' @param gender `<chr>` Individual provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
+#' @param credential `<chr>` Individual provider's credential, i.e. `"MD"`
+#' @param school `<chr>` Individual provider’s alma mater
+#' @param year `<int>` Individual provider’s graduation year
+#' @param specialty `<chr>` Individual provider’s primary medical specialty
+#' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param facility_name `<chr>` Facility associated with Provider
 #' @param facility_pac `<int>` Facility's PECOS Associate Control ID
 #'
@@ -69,12 +69,12 @@ clinicians <- function(
   suffix = NULL,
   gender = NULL,
   credential = NULL,
-  grad_school = NULL,
-  grad_year = NULL,
+  specialty = NULL,
+  school = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  specialty = NULL,
   facility_name = NULL,
   facility_pac = NULL
 ) {
@@ -88,8 +88,8 @@ clinicians <- function(
     suff = suffix,
     gndr = gender,
     cred = credential,
-    med_sch = grad_school,
-    grd_yr = grad_year,
+    med_sch = school,
+    grd_yr = year,
     pri_spec = specialty,
     facility_name = facility_name,
     org_pac_id = facility_pac,
@@ -98,21 +98,25 @@ clinicians <- function(
     zip_code = zip
   )
 
+  BASE <- base_url("clinicians")
+  LIMIT <- limit("clinicians")
+
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
     cli_no_query()
 
     url <- flatten_url(
-      base_url("clinicians"),
-      opts = set_opts(
+      BASE,
+      set_opts(
         count = "false",
         results = "true",
         schema = "false",
-        limit = 10L
+        limit = 10,
+        offset = 0
       )
     )
 
-    res <- bare_request(url, "results") |>
+    res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_clinicians()
@@ -121,42 +125,42 @@ clinicians <- function(
   }
   # Valid Query: Flatten & Request Result Count =====================
   url <- flatten_url(
-    base_url("clinicians"),
-    opts = set_opts(
+    BASE,
+    set_opts(
       count = "true",
       results = "false",
       schema = "false",
-      offset = 0,
-      limit = 1500
+      limit = LIMIT,
+      offset = 0
     ),
-    query = flatten_query(args)
+    flatten_query(args)
   )
 
-  N <- bare_request(url, "count")
+  N <- request_count(url)
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli::cli_alert_danger("Query returned {N} result{?s}.")
+    cli_no_results()
     return(invisible(NULL))
   }
 
   # Count is Within API Limit: Request & Return Results
-  if (N <= 1500L) {
-    cli::cli_alert_success("Query returned {N} result{?s}.")
+  if (N <= LIMIT) {
+    cli_results(N)
 
     url <- flatten_url(
-      base_url("clinicians"),
-      opts = set_opts(
+      BASE,
+      set_opts(
         count = "false",
         results = "true",
         schema = "false",
-        offset = 0,
-        limit = 1500
+        limit = LIMIT,
+        offset = 0
       ),
-      query = flatten_query(args)
+      flatten_query(args)
     )
 
-    res <- bare_request(url, "results") |>
+    res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_clinicians()
@@ -165,28 +169,26 @@ clinicians <- function(
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
-  cli::cli_alert_info("Retrieving {offset(N, 1500L)} page{?s}...")
+  cli_pages(N, offset(N, LIMIT))
 
   url <- flatten_url(
-    base_url("clinicians"),
-    opts = set_opts(
+    BASE,
+    set_opts(
       count = "false",
       results = "true",
       schema = "false",
-      limit = 1500,
+      limit = LIMIT,
       offset = "<<i>>"
     ),
-    query = flatten_query(args)
+    flatten_query(args)
   )
 
-  urls <- offset(N, 1500L, "seq") |>
+  urls <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  parallel_request(urls, "results") |>
-    collapse::rowbind() |>
+  parallel_results(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_clinicians()

@@ -84,19 +84,16 @@ order_refer <- function(
     HOSPICE = convert_lgl(hospice)
   )
 
+  BASE <- base_url("order_refer")
+  LIMIT <- limit("order_refer")
+
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(
-      base_url("order_refer"),
-      opts = set_opts(
-        `?size` = 10,
-        offset = 0
-      )
-    )
+    url <- flatten_url(paste0(BASE, "?"), set_opts(size = 10, offset = 0))
 
-    res <- bare_request(url) |>
+    res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_order_refer()
@@ -107,12 +104,12 @@ order_refer <- function(
   # Valid Query: Flatten & Request Result Count =====================
 
   url <- flatten_url(
-    paste0(base_url("order_refer"), "/stats?"),
-    set_opts(size = limit("order_refer"), offset = 0),
+    paste0(BASE, "/stats?"),
+    set_opts(size = LIMIT, offset = 0),
     flatten_query2(args)
   )
 
-  N <- bare_request(url, "found_rows")
+  N <- request_bare(url, "found_rows")
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
@@ -121,16 +118,16 @@ order_refer <- function(
   }
 
   # Count is Within API Limit: Request & Return Results
-  if (N <= limit("order_refer")) {
+  if (N <= LIMIT) {
     cli_results(N)
 
     url <- flatten_url(
-      paste0(base_url("order_refer"), "?"),
-      set_opts(offset = 0, size = limit("order_refer")),
+      paste0(BASE, "?"),
+      set_opts(size = LIMIT, offset = 0),
       flatten_query2(args)
     )
 
-    res <- bare_request(url) |>
+    res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_order_refer()
@@ -139,21 +136,20 @@ order_refer <- function(
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli_pages(N, offset(N, limit("order_refer")))
+  cli_pages(N, offset(N, LIMIT))
 
   url <- flatten_url(
-    paste0(base_url("order_refer"), "?"),
-    set_opts(offset = "<<i>>", size = limit("order_refer")),
+    paste0(BASE, "?"),
+    set_opts(offset = "<<i>>", size = LIMIT),
     flatten_query2(args)
   )
 
-  urls <- offset(N, limit("order_refer"), "seq") |>
+  urls <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
   parallel_request(urls) |>
-    collapse::rowbind() |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_order_refer()

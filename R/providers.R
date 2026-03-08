@@ -75,19 +75,16 @@ providers <- function(
     ORG_NAME = org_name
   )
 
+  BASE <- base_url("providers")
+  LIMIT <- limit("providers")
+
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
     cli_no_query()
 
-    url <- flatten_url(
-      base_url("providers"),
-      opts = set_opts(
-        `?size` = 10,
-        offset = 0
-      )
-    )
+    url <- flatten_url(paste0(BASE, "?"), set_opts(size = 10, offset = 0))
 
-    res <- bare_request(url) |>
+    res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_providers()
@@ -98,12 +95,12 @@ providers <- function(
   # Valid Query: Flatten & Request Result Count =====================
 
   url <- flatten_url(
-    paste0(base_url("providers"), "/stats?"),
-    set_opts(size = limit("providers"), offset = 0),
+    paste0(BASE, "/stats?"),
+    set_opts(size = LIMIT, offset = 0),
     flatten_query2(args)
   )
 
-  N <- bare_request(url, "found_rows")
+  N <- request_bare(url, "found_rows")
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
@@ -112,16 +109,16 @@ providers <- function(
   }
 
   # Count is Within API Limit: Request & Return Results
-  if (N <= limit("providers")) {
+  if (N <= LIMIT) {
     cli_results(N)
 
     url <- flatten_url(
-      paste0(base_url("providers"), "?"),
-      set_opts(offset = 0, size = limit("providers")),
+      paste0(BASE, "?"),
+      set_opts(size = LIMIT, offset = 0),
       flatten_query2(args)
     )
 
-    res <- bare_request(url) |>
+    res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_providers()
@@ -130,21 +127,20 @@ providers <- function(
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli_pages(N, offset(N, limit("providers")))
+  cli_pages(N, offset(N, LIMIT))
 
   url <- flatten_url(
-    paste0(base_url("providers"), "?"),
-    set_opts(offset = "<<i>>", size = limit("providers")),
+    paste0(BASE, "?"),
+    set_opts(size = LIMIT, offset = "<<i>>"),
     flatten_query2(args)
   )
 
-  urls <- offset(N, limit("providers"), "seq") |>
+  urls <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
       gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
   parallel_request(urls) |>
-    collapse::rowbind() |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_providers()

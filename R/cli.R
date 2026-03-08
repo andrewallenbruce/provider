@@ -17,7 +17,7 @@ cli_no_results <- function() {
 #' @autoglobal
 #' @noRd
 cli_results <- function(x) {
-  cli::cli_alert_success("Query returned {.strong {x}} result{?s}.")
+  cli::cli_alert_success("Query returned {.strong {format(x, big.mark = ',')}} {cli::qty(x)} result{?s}.")
 }
 
 #' @autoglobal

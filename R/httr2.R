@@ -21,7 +21,7 @@ parse_string <- function(resp, query = NULL) {
 
 #' @autoglobal
 #' @noRd
-bare_request <- function(x, query = NULL) {
+request_bare <- function(x, query = NULL) {
   httr2::request(x) |>
     httr2::req_error(body = function(resp) {
       httr2::resp_body_json(resp)$message
@@ -32,11 +32,30 @@ bare_request <- function(x, query = NULL) {
 
 #' @autoglobal
 #' @noRd
+request_results <- function(x) {
+  request_bare(x, query = "results")
+}
+
+#' @autoglobal
+#' @noRd
+request_count <- function(x) {
+  request_bare(x, query = "count")
+}
+
+#' @autoglobal
+#' @noRd
 parallel_request <- function(x, query = NULL) {
   purrr::map(x, httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     httr2::resps_successes() |>
     purrr::map(function(x) {
       parse_string(x, query = query)
-    })
+    }) |>
+    collapse::rowbind()
+}
+
+#' @autoglobal
+#' @noRd
+parallel_results <- function(x) {
+  parallel_request(x, query = "results")
 }

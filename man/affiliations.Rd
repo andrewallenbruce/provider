@@ -17,14 +17,14 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} Individual clinician ID, assigned by \emph{NPPES}}
+\item{npi}{\verb{<int>} Individual National Provider Identifier}
 
-\item{pac}{\verb{<chr>} Individual clinician ID, assigned by \emph{PECOS}}
+\item{pac}{\verb{<chr>} Individual PECOS Associate Control ID}
 
-\item{first, middle, last, suffix}{\verb{<chr>} Individual clinician's name}
+\item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{facility_type}{\verb{<chr>} Type of facility:\tabular{ll}{
-   \strong{abbr} \tab \strong{full} \cr
+\item{facility_type}{\verb{<chr>} facility type abbreviation:\tabular{ll}{
+   \strong{ABBR} \tab \strong{FULL} \cr
    \code{hp} \tab Hospital \cr
    \code{lt} \tab Long-term care hospital \cr
    \code{nh} \tab Nursing home \cr
@@ -35,28 +35,20 @@ affiliations(
    \code{df} \tab Dialysis facility \cr
 }}
 
-\item{facility_ccn}{\verb{<chr>} Medicare CCN of \code{facility_type} column's
+\item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} column's
 facility \emph{or} of a \emph{unit} within the hospital where the individual
-clinician provides services.}
+provider provides services.}
 
-\item{parent_ccn}{\verb{<chr>} Medicare CCN of \emph{primary} hospital where the
-individual clinician provides services in a unit within said hospital.}
+\item{parent_ccn}{\verb{<chr>} CCN of the \emph{primary} hospital containing the
+unit where the individual provider provides services.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-\code{\link[=affiliations]{affiliations()}} allows the user access to data concerning
-providers' facility affiliations
+Access information concerning individual providers'
+affiliations with organizations/facilities.
 }
-\section{Links}{
-
-\itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
-\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
-}
-}
-
 \examples{
 affiliations()
 
@@ -68,4 +60,10 @@ affiliations(first = "KIM")
 
 affiliations(facility_ccn = c("33Z302", 331302))
 
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
+\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
+}
 }

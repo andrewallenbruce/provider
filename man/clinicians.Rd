@@ -14,36 +14,36 @@ clinicians(
   suffix = NULL,
   gender = NULL,
   credential = NULL,
-  grad_school = NULL,
-  grad_year = NULL,
+  specialty = NULL,
+  school = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  specialty = NULL,
   facility_name = NULL,
   facility_pac = NULL
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} Provider's NPI}
+\item{npi}{\verb{<int>} Individual National Provider Identifier}
 
-\item{pac}{\verb{<int>} Provider's PECOS Associate Control ID}
+\item{pac}{\verb{<int>} Individual PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} Provider's Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Individual Medicare Enrollment ID}
 
-\item{first, middle, last, suffix}{\verb{<chr>} Provider's name}
+\item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{gender}{\verb{<chr>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
+\item{gender}{\verb{<chr>} Individual provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
-\item{credential}{\verb{<chr>} Provider’s credential, i.e. "MD"}
+\item{credential}{\verb{<chr>} Individual provider's credential, i.e. \code{"MD"}}
 
-\item{grad_school}{\verb{<chr>} Medical school provider graduated from}
+\item{specialty}{\verb{<chr>} Individual provider’s primary medical specialty}
 
-\item{grad_year}{\verb{<int>} Provider’s graduation year; YYYY}
+\item{school}{\verb{<chr>} Individual provider’s alma mater}
 
-\item{city, state, zip}{\verb{<chr>} Provider's city, state, zip}
+\item{year}{\verb{<int>} Individual provider’s graduation year}
 
-\item{specialty}{\verb{<chr>} Provider’s primary medical specialty}
+\item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 
 \item{facility_name}{\verb{<chr>} Facility associated with Provider}
 
