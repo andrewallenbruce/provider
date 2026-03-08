@@ -103,13 +103,13 @@ transformations, simply turn it off with `tidy = FALSE`.
 Several functions have a required `year` argument. The years available
 to query these APIs might change at any time, so there is an
 accompanying helper function to retrieve the years available, in the
-form of `<function_name>_years()`. For instance,
-[`quality_payment()`](https://andrewallenbruce.github.io/provider/reference/quality_payment.md)’s
+form of `<function_name>_years()`. For instance, `quality_payment()`’s
 is:
 
 ``` r
 qpp_years()
-#> [1] 2017 2018 2019 2020 2021 2022 2023
+#> Error in `qpp_years()`:
+#> ! could not find function "qpp_years"
 ```
 
 These can also be used in a pipeline, for searching all available years:
@@ -163,8 +163,7 @@ Several validation checks have been implemented, including checks for
 # Must be 10 digits long
 open_payments(year = 2021, npi = 12345691234)
 #> Error in `open_payments()`:
-#> ! An NPI must be 10 digits long.
-#> ✖ 12345691234 contains 11 digits.
+#> ! could not find function "open_payments"
 
 # Must be numeric
 nppes(npi = "O12345678912")

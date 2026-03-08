@@ -777,9 +777,9 @@ occasionally assist with some of these duties.
 
 # Package index
 
-## Administrative
+## Current
 
-Access a provider’s administrative data.
+Access current administrative healthcare provider data.
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
   : Provider-Facility Affiliations
@@ -801,28 +801,6 @@ Access a provider’s administrative data.
   : Provider Enrollment in Medicare
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
   : Reassignment of Benefits
-
-## Provider Statistics
-
-Access a provider’s statistical data.
-
-- [`open_payments()`](https://andrewallenbruce.github.io/provider/reference/open_payments.md)
-  [`open_payments_()`](https://andrewallenbruce.github.io/provider/reference/open_payments.md)
-  : Relationships with Drug & Medical Device Companies
-- [`quality_eligibility()`](https://andrewallenbruce.github.io/provider/reference/quality_eligibility.md)
-  [`quality_eligibility_()`](https://andrewallenbruce.github.io/provider/reference/quality_eligibility.md)
-  : Quality Payment Program Eligibility
-- [`quality_payment()`](https://andrewallenbruce.github.io/provider/reference/quality_payment.md)
-  [`quality_payment_()`](https://andrewallenbruce.github.io/provider/reference/quality_payment.md)
-  : Quality Payment Program Experience
-- [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
-  [`utilization_()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
-  : Provider Utilization & Demographics by Year
-- [`prescribers()`](https://andrewallenbruce.github.io/provider/reference/prescribers.md)
-  [`prescribers_()`](https://andrewallenbruce.github.io/provider/reference/prescribers.md)
-  : Prescriber Utilization & Demographics by Year
-- [`compare_hcpcs()`](https://andrewallenbruce.github.io/provider/reference/compare_hcpcs.md)
-  : Compare Provider Performance
 
 # Articles
 
