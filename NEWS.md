@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9016 (2026-03-07)
+
+* refactored `order_refer()`
+
+
 # provider 0.0.1.9015 (2026-03-07)
 
 * mothballed several functions to concentrate on a smaller subset
