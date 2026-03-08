@@ -42,27 +42,14 @@
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
-#' *Update Frequency:* **Monthly**
-#'
-#' @param npi < `integer` > 10-digit Opt-out National Provider Identifier
-#'
-#' @param first,last < `character` > Opt-out provider's name
-#'
-#' @param specialty < `character` > Opt-out provider's specialty
-#'
-#' @param address < `character` > Opt-out provider's address
-#'
-#' @param city < `character` > Opt-out provider's city
-#'
-#' @param state < `character` > Opt-out provider's state abbreviation
-#'
-#' @param zip < `character` > Opt-out provider's zip code
-#'
-#' @param order_refer < `boolean` > Indicates order and refer eligibility
-#'
-#' @param tidy < `boolean` > // __default:__ `TRUE` Tidy output
-#'
-#' @param ... Empty
+#' @param npi `<int>` Individual National Provider Identifier
+#' @param first,last `<chr>` Provider's name
+#' @param specialty `<chr>` Provider's specialty
+#' @param address `<chr>` Provider's address
+#' @param city `<chr>` Provider's city
+#' @param state `<chr>` Provider's state abbreviation
+#' @param zip `<chr>` Provider's zip code
+#' @param order_refer `<lgl>` Indicates order and refer eligibility
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -81,8 +68,14 @@
 #' |`state`             |Opt-out provider's state                      |
 #' |`zip`               |Opt-out provider's zip code                   |
 #'
-#' @examplesIf  interactive()
+#' @examples
+#' opt_out()
+#'
 #' opt_out(npi = 1043522824)
+#'
+#' opt_out(state = "AK")
+#'
+#' opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #'
 #' @autoglobal
 #' @export
@@ -95,82 +88,111 @@ opt_out <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_refer = NULL,
-  tidy = TRUE,
-  ...
+  order_refer = NULL
 ) {
-  args <- dplyr::tribble(
-    ~param                        , ~arg        ,
-    "NPI"                         , npi         ,
-    "First Name"                  , first       ,
-    "Last Name"                   , last        ,
-    "Specialty"                   , specialty   ,
-    "First Line Street Address"   , address     ,
-    "City Name"                   , city        ,
-    "State Code"                  , state       ,
-    "Zip code"                    , zip         ,
-    "Eligible to Order and Refer" , order_refer
+  args <- params(
+    NPI = npi,
+    `First+Name` = first,
+    `Last+Name` = last,
+    Specialty = specialty,
+    `First+Line+Street+Address` = address,
+    `City+Name` = city,
+    `State+Code` = state,
+    `Zip+code` = zip,
+    `Eligible+to+Order+and+Refer` = convert_lgl(order_refer)
   )
 
-  response <- httr2::request(build_url("opt", args)) |>
-    httr2::req_perform()
+  BASE <- base_url("opt_out")
+  LIMIT <- limit("opt_out")
 
-  if (vctrs::vec_is_empty(response$body)) {
-    cli_args <- dplyr::tribble(
-      ~x            , ~y          ,
-      "npi"         , npi         ,
-      "first"       , first       ,
-      "last"        , last        ,
-      "specialty"   , specialty   ,
-      "address"     , address     ,
-      "city"        , city        ,
-      "state"       , state       ,
-      "zip"         , zip         ,
-      "order_refer" , order_refer
-    ) |>
-      tidyr::unnest(cols = c(y))
+  # No Query: Warn & Return First 10 Rows =====================
+  if (!length(args)) {
+    cli_no_query()
 
-    format_cli(cli_args)
+    url <- url_(paste0(BASE, "?"), opts(size = 10))
+
+    res <- request_bare(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_opt_out()
+
+    return(res)
+  }
+
+  # Valid Query: Flatten & Request Result Count =====================
+
+  url <- url_(
+    paste0(BASE, "/stats?"),
+    opts(size = LIMIT),
+    query2(args)
+  )
+
+  N <- request_rows(url)
+
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
+    cli_no_results()
     return(invisible(NULL))
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  # Count is Within API Limit: Request & Return Results
+  if (N <= LIMIT) {
+    cli_results(N)
 
-  if (tidy) {
-    results <- tidyup(
-      results,
-      dtype = 'mdy',
-      yn = 'eligible',
-      chr = 'npi',
-      zip = 'zip_code'
-    ) |>
-      combine(
-        address,
-        c('first_line_street_address', 'second_line_street_address')
-      ) |>
-      cols_opt()
+    url <- url_(
+      paste0(BASE, "?"),
+      opts(size = LIMIT),
+      query2(args)
+    )
+
+    res <- request_bare(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_opt_out()
+
+    return(res)
   }
-  return(results)
-}
 
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_opt <- function(df) {
-  cols <- c(
-    'npi',
-    'first' = 'first_name',
-    'last' = 'last_name',
-    'specialty',
-    'order_refer' = 'eligible_to_order_and_refer',
-    'optout_start_date' = 'optout_effective_date',
-    'optout_end_date',
-    'last_updated',
-    'address',
-    'city' = 'city_name',
-    'state' = 'state_code',
-    'zip' = 'zip_code'
+  # Count Above API Limit: Alert & Return Results =====================
+  cli_pages(N, offset(N, LIMIT))
+
+  url <- url_(
+    paste0(BASE, "?"),
+    opts(size = LIMIT, offset = "<<i>>"),
+    query2(args)
   )
 
-  df |> dplyr::select(dplyr::any_of(cols))
+  urls <- offset(N, LIMIT, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+
+  parallel_request(urls) |>
+    fastplyr::as_tbl() |>
+    map_na_if() |>
+    rename_opt_out()
+}
+
+#' @autoglobal
+#' @noRd
+rename_opt_out <- function(x) {
+  NM <- c(
+    NPI = "npi",
+    `First Name` = "first",
+    `Last Name` = "last",
+    Specialty = "specialty",
+    `Optout Effective Date` = "date_start",
+    `Optout End Date` = "date_end",
+    `Last updated` = "last_update",
+    `First Line Street Address` = "address1",
+    `Second Line Street Address` = "address2",
+    `City Name` = "city",
+    `State Code` = "state",
+    `Zip code` = "zip",
+    `Eligible to Order and Refer` = "order_refer"
+  )
+
+  collapse::setrename(x, NM, .nse = FALSE)
+
+  collapse::gv(x, unlist_(NM))
 }

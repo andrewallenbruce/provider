@@ -13,31 +13,25 @@ opt_out(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_refer = NULL,
-  tidy = TRUE,
-  ...
+  order_refer = NULL
 )
 }
 \arguments{
-\item{npi}{< \code{integer} > 10-digit Opt-out National Provider Identifier}
+\item{npi}{\verb{<int>} Individual National Provider Identifier}
 
-\item{first, last}{< \code{character} > Opt-out provider's name}
+\item{first, last}{\verb{<chr>} Provider's name}
 
-\item{specialty}{< \code{character} > Opt-out provider's specialty}
+\item{specialty}{\verb{<chr>} Provider's specialty}
 
-\item{address}{< \code{character} > Opt-out provider's address}
+\item{address}{\verb{<chr>} Provider's address}
 
-\item{city}{< \code{character} > Opt-out provider's city}
+\item{city}{\verb{<chr>} Provider's city}
 
-\item{state}{< \code{character} > Opt-out provider's state abbreviation}
+\item{state}{\verb{<chr>} Provider's state abbreviation}
 
-\item{zip}{< \code{character} > Opt-out provider's zip code}
+\item{zip}{\verb{<chr>} Provider's zip code}
 
-\item{order_refer}{< \code{boolean} > Indicates order and refer eligibility}
-
-\item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE} Tidy output}
-
-\item{...}{Empty}
+\item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -98,14 +92,17 @@ days. DMEPOS suppliers must withdraw within 30 days.
 Providers may \strong{NOT} opt-out if they intend to be a Medicare Advantage
 (Part C) provider or furnish services covered by traditional Medicare
 fee-for-service (Part B).
-
-\emph{Update Frequency:} \strong{Monthly}
 }
 
 \examples{
-\dontshow{if ( interactive()) withAutoprint(\{ # examplesIf}
+opt_out()
+
 opt_out(npi = 1043522824)
-\dontshow{\}) # examplesIf}
+
+opt_out(state = "AK")
+
+opt_out(specialty = "Psychiatry", order_refer = FALSE)
+
 }
 \references{
 \itemize{

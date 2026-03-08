@@ -97,7 +97,7 @@ affiliations <- function(
   # Valid Query: Flatten & Request Result Count =====================
   url <- url_(
     BASE,
-    opts = opts(
+    opts(
       count = "true",
       results = "false",
       schema = "false",

@@ -162,7 +162,6 @@ utils::globalVariables(c(
   # <hospitals>
   # <laboratories>
   # <nppes>
-  # <opt_out>
   # <pending>
   # <reassignments>
   # <abb2full>
