@@ -8,37 +8,27 @@ order_refer(
   npi = NULL,
   first = NULL,
   last = NULL,
-  partb = NULL,
+  part_b = NULL,
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  hos = NULL,
-  tidy = TRUE,
-  pivot = TRUE,
-  ...
+  hospice = NULL
 )
 }
 \arguments{
-\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
-by CMS to US healthcare providers through NPPES.}
+\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier}
 
 \item{first, last}{\verb{<chr>} Individual provider's first/last name}
 
-\item{partb, dme, hha, pmd, hos}{\verb{<lgl>} Whether a provider is eligible to
+\item{part_b, dme, hha, pmd, hospice}{\verb{<lgl>} Whether a provider is eligible to
 order and refer to:
 \itemize{
 \item \code{partb}: Medicare Part B
 \item \code{dme}: Durable Medical Equipment
 \item \code{hha}: Home Health Agency
 \item \code{pmd}: Power Mobility Devices
-\item \code{hos}: Hospice
+\item \code{hospice}: Hospice
 }}
-
-\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
-
-\item{pivot}{\verb{<lgl>} Pivot output; \strong{default} is \code{TRUE}}
-
-\item{...}{Empty dots}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -76,23 +66,27 @@ Medicare may reimburse on behalf of its beneficiaries.
 order and refer. They can also enroll solely to order and refer.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
+order_refer()
+
+order_refer(npi = 100)
+
 order_refer(npi = 1003026055)
 
-# Filter for certain privileges
-order_refer(first = "Jennifer",
-            last  = "Smith",
-            partb = TRUE,
-            hos   = FALSE,
-            hha   = FALSE,
-            pmd   = FALSE)
-\dontshow{\}) # examplesIf}
+order_refer(first = "Jennifer", last = "Smith")
+
+order_refer(
+  part_b = TRUE,
+  dme = TRUE,
+  hha = FALSE,
+  pmd = TRUE,
+  hospice = FALSE
+ )
+
 }
 \references{
 links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
-\item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
 }
 }

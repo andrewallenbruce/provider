@@ -24,25 +24,16 @@
 #' @references links:
 #' + [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 #' + [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
-#' + [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
-#' @template args-npi
-#'
+#' @param npi `<int>` 10-digit Individual National Provider Identifier
 #' @param first,last `<chr>` Individual provider's first/last name
-#'
-#' @param partb,dme,hha,pmd,hos `<lgl>` Whether a provider is eligible to
+#' @param part_b,dme,hha,pmd,hospice `<lgl>` Whether a provider is eligible to
 #' order and refer to:
 #' + `partb`: Medicare Part B
 #' + `dme`: Durable Medical Equipment
 #' + `hha`: Home Health Agency
 #' + `pmd`: Power Mobility Devices
-#' + `hos`: Hospice
-#'
-#' @template args-tidy
-#'
-#' @template args-pivot
-#'
-#' @template args-dots
+#' + `hospice`: Hospice
 #'
 #' @returns A [tibble][tibble::tibble-package] with the columns:
 #'
@@ -53,140 +44,150 @@
 #' |`last`      |Order and Referring Provider's Last Name          |
 #' |`eligible`  |Services An Eligible Provider Can Order/Refer To  |
 #'
-#' @examplesIf rlang::is_interactive()
+#' @examples
+#' order_refer()
+#'
+#' order_refer(npi = 100)
+#'
 #' order_refer(npi = 1003026055)
 #'
-#' # Filter for certain privileges
-#' order_refer(first = "Jennifer",
-#'             last  = "Smith",
-#'             partb = TRUE,
-#'             hos   = FALSE,
-#'             hha   = FALSE,
-#'             pmd   = FALSE)
+#' order_refer(first = "Jennifer", last = "Smith")
+#'
+#' order_refer(
+#'   part_b = TRUE,
+#'   dme = TRUE,
+#'   hha = FALSE,
+#'   pmd = TRUE,
+#'   hospice = FALSE
+#'  )
 #'
 #' @autoglobal
-#'
 #' @export
 order_refer <- function(
   npi = NULL,
   first = NULL,
   last = NULL,
-  partb = NULL,
+  part_b = NULL,
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  hos = NULL,
-  tidy = TRUE,
-  pivot = TRUE,
-  ...
+  hospice = NULL
 ) {
-  npi <- npi %nn% validate_npi(npi)
-  partb <- partb %nn% tf_2_yn(partb)
-  dme <- dme %nn% tf_2_yn(dme)
-  hha <- hha %nn% tf_2_yn(hha)
-  pmd <- pmd %nn% tf_2_yn(pmd)
-  hos <- hos %nn% tf_2_yn(hos)
-
-  args <- dplyr::tribble(
-    ~param       , ~arg  ,
-    "NPI"        , npi   ,
-    "FIRST_NAME" , first ,
-    "LAST_NAME"  , last  ,
-    "PARTB"      , partb ,
-    "DME"        , dme   ,
-    "HHA"        , hha   ,
-    "PMD"        , pmd   ,
-    "HOSPICE"    , hos
+  args <- parameters(
+    NPI = npi,
+    FIRST_NAME = first,
+    LAST_NAME = last,
+    PARTB = convert_lgl(part_b),
+    DME = convert_lgl(dme),
+    HHA = convert_lgl(hha),
+    PMD = convert_lgl(pmd),
+    HOSPICE = convert_lgl(hospice)
   )
 
-  response <- httr2::request(build_url("ord", args)) |>
-    httr2::req_perform()
+  # No Query: Warn & Return First 10 Rows =====================
+  if (!length(args)) {
+    cli_no_query()
 
-  if (vctrs::vec_is_empty(response$body)) {
-    cli_args <- dplyr::tribble(
-      ~x      , ~y    ,
-      "npi"   , npi   ,
-      "first" , first ,
-      "last"  , last  ,
-      "partb" , partb ,
-      "dme"   , dme   ,
-      "hha"   , hha   ,
-      "pmd"   , pmd   ,
-      "hos"   , hos
-    ) |>
-      tidyr::unnest(cols = c(y))
-
-    format_cli(cli_args)
-    return(invisible(NULL))
-  }
-
-  results <- httr2::resp_body_json(
-    response,
-    simplifyVector = TRUE
-  )
-
-  if (tidy) {
-    results <- tidyup(
-      results,
-      yn = c(
-        "partb",
-        "hha",
-        "dme",
-        "pmd",
-        "hos"
+    url <- flatten_url(
+      base_url("order_refer"),
+      opts = set_opts(
+        `?size` = 10,
+        offset = 0
       )
     )
 
-    if (pivot) {
-      results <- cols_ord(results) |>
-        tidyr::pivot_longer(
-          cols = !c(npi, first, last),
-          names_to = "eligible",
-          values_to = "status"
-        ) |>
-        dplyr::filter(status == TRUE) |>
-        dplyr::mutate(status = NULL, eligible = fct_ord(eligible))
-    }
-  }
-  return(results)
-}
+    res <- bare_request(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_order_refer()
 
-#' @param df `<data.frame>`
-#'
-#' @template returns
-#'
-#' @autoglobal
-#'
-#' @noRd
-cols_ord <- function(df) {
-  cols <- c(
-    'npi',
-    'first' = 'first_name',
-    'last' = 'last_name',
-    "Medicare Part B" = 'partb',
-    "Home Health Agency" = 'hha',
-    "Durable Medical Equipment" = 'dme',
-    "Power Mobility Devices" = 'pmd',
-    "Hospice" = 'hospice'
+    return(res)
+  }
+
+  # Valid Query: Flatten & Request Result Count =====================
+
+  url <- flatten_url(
+    paste0(base_url("order_refer"), "/stats?"),
+    set_opts(size = limit("order_refer"), offset = 0),
+    flatten_query2(args)
   )
 
-  df |> dplyr::select(dplyr::any_of(cols))
+  N <- bare_request(url, "found_rows")
+
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
+    cli_no_results()
+    return(invisible(NULL))
+  }
+
+  # Count is Within API Limit: Request & Return Results
+  if (N <= limit("order_refer")) {
+    cli_results(N)
+
+    url <- flatten_url(
+      paste0(base_url("order_refer"), "?"),
+      set_opts(offset = 0, size = limit("order_refer")),
+      flatten_query2(args)
+    )
+
+    res <- bare_request(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_order_refer()
+
+    return(res)
+  }
+
+  # Count Above API Limit: Alert & Return Results =====================
+  cli_pages(N, offset(N, limit("order_refer")))
+
+  url <- flatten_url(
+    paste0(base_url("order_refer"), "?"),
+    set_opts(offset = "<<i>>", size = limit("order_refer")),
+    flatten_query2(args)
+  )
+
+  urls <- offset(N, limit("order_refer"), "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+
+  parallel_request(urls) |>
+    collapse::rowbind() |>
+    fastplyr::as_tbl() |>
+    map_na_if() |>
+    rename_order_refer()
 }
 
-#' @param x `<chr>` vector
-#'
 #' @autoglobal
-#'
 #' @noRd
-fct_ord <- function(x) {
-  factor(
+rename_order_refer <- function(x) {
+  NM <- c(
+    NPI = "npi",
+    FIRST_NAME = "first",
+    LAST_NAME = "last",
+    PARTB = "part_b",
+    DME = "dme",
+    HHA = "hha",
+    PMD = "pmd",
+    HOSPICE = "hospice"
+  )
+
+  collapse::setrename(x, NM, .nse = FALSE)
+
+  collapse::gv(x, unlist_(NM))
+}
+
+#' @autoglobal
+#' @noRd
+convert_lgl <- function(x = NULL) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  cheapr::val_match(
     x,
-    levels = c(
-      "Medicare Part B",
-      "Home Health Agency",
-      "Durable Medical Equipment",
-      "Power Mobility Devices",
-      "Hospice"
-    )
+    TRUE ~ "Y",
+    FALSE ~ "N"
   )
 }

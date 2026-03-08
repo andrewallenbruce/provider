@@ -99,8 +99,6 @@ utils::globalVariables(c(
   "distribution_title",
   # <laboratories>
   "duration",
-  # <order_refer>
-  "eligible",
   # <nppes>
   "entity_type",
   # <nppes>
@@ -170,7 +168,6 @@ utils::globalVariables(c(
   # <opt_out>
   "state_code",
   # <nppes>
-  # <order_refer>
   "status",
   # <hospitals>
   "subgroup_general",
@@ -195,7 +192,6 @@ utils::globalVariables(c(
   # <laboratories>
   # <nppes>
   # <opt_out>
-  # <order_refer>
   # <pending>
   # <reassignments>
   # <abb2full>

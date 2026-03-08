@@ -33,14 +33,17 @@
 #' |`org_name`  |Organizational provider's name         |
 #'
 #' @examples
+#' providers()
+#'
+#' providers(spec_code = "14")
+#'
 #' providers(enid = "I20040309000221")
 #'
 #' providers(npi = 1417918293)
 #'
 #' providers(pac = 2860305554)
 #'
-#' # providers(state = "AK")
-#' # providers(spec_code = "14-41")
+#' providers(state = "AK")
 #'
 #' @autoglobal
 #'
@@ -104,13 +107,13 @@ providers <- function(
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli::cli_alert_danger("Query returned {N} results.")
+    cli_no_results()
     return(invisible(NULL))
   }
 
   # Count is Within API Limit: Request & Return Results
   if (N <= limit("providers")) {
-    cli::cli_alert_success("Query returned {N} result{?s}.")
+    cli_results(N)
 
     url <- flatten_url(
       paste0(base_url("providers"), "?"),
@@ -127,8 +130,7 @@ providers <- function(
   }
 
   # Count Above API Limit: Alert & Return Results =====================
-  cli::cli_alert_success("Query returned {format(N, big.mark = ',')} results.")
-  cli::cli_alert_info("Retrieving {offset(N, limit('providers'))} page{?s}...")
+  cli_pages(N, offset(N, limit("providers")))
 
   url <- flatten_url(
     paste0(base_url("providers"), "?"),

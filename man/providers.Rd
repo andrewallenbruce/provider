@@ -64,13 +64,16 @@ Access enrollment level data on individual and organizational providers that are
 }
 
 \examples{
+providers()
+
+providers(spec_code = "14")
+
 providers(enid = "I20040309000221")
 
 providers(npi = 1417918293)
 
 providers(pac = 2860305554)
 
-# providers(state = "AK")
-# providers(spec_code = "14-41")
+providers(state = "AK")
 
 }
