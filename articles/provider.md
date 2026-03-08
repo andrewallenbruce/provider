@@ -21,7 +21,7 @@ through the following goals:
   together a motivating example of using a programming language to
   streamline the process of data acquisition for, among other things,
   medical coding, billing, and healthcare revenue cycle management.
-  Though it’s now grown beyond that, the intended audience remiains the
+  Though it’s now grown beyond that, the intended audience remains the
   same: non-programmers in healthcare who are interested in what a
   programming language like R can do to make their work easier. As such,
   the documentation is written with in a way that assumes no prior
@@ -49,10 +49,10 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#> Error in `dplyr::mutate()`:
-#> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-#> Caused by error:
-#> ! object 'na_blank' not found
+#> # A tibble: 1 × 8
+#>   npi        first last    part_b dme   hha   pmd   hospice
+#>   <chr>      <chr> <chr>   <chr>  <chr> <chr> <chr> <chr>  
+#> 1 1043477615 SARAH HUSSAIN Y      Y     Y     Y     Y
 ```
 
   
@@ -62,8 +62,8 @@ un-processed output:
 
 ``` r
 order_refer(npi = 1043477615, tidy = FALSE)
-#>          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD HOSPICE
-#> 1 1043477615   HUSSAIN      SARAH     Y   Y   Y   Y       Y
+#> Error in `order_refer()`:
+#> ! unused argument (tidy = FALSE)
 ```
 
   
@@ -73,10 +73,8 @@ transformations to the output, such as `pivot`:
 
 ``` r
 order_refer(npi = 1043477615, pivot = FALSE)
-#> Error in `dplyr::mutate()`:
-#> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-#> Caused by error:
-#> ! object 'na_blank' not found
+#> Error in `order_refer()`:
+#> ! unused argument (pivot = FALSE)
 ```
 
   

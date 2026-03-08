@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@ package was to cobble together a motivating example of using a
 programming language to streamline the process of data acquisition for,
 among other things, medical coding, billing, and healthcare revenue
 cycle management. Though it’s now grown beyond that, the intended
-audience remiains the same: non-programmers in healthcare who are
+audience remains the same: non-programmers in healthcare who are
 interested in what a programming language like R can do to make their
 work easier. As such, the documentation is written with in a way that
 assumes no prior knowledge of R or programming in general.
@@ -136,26 +136,24 @@ before it is returned. Each function has a <code>tidy</code> parameter
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
+<span><span class="co">#&gt;   npi        first last    part_b dme   hha   pmd   hospice</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Y      Y     Y     Y     Y</span></span></code></pre></div>
 <p><br></p>
 <p>Setting <code>tidy</code> to <code>FALSE</code> will return a
 data.frame of the API’s un-processed output:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD HOSPICE</span></span>
-<span><span class="co">#&gt; 1 1043477615   HUSSAIN      SARAH     Y   Y   Y   Y       Y</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `order_refer()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> unused argument (tidy = FALSE)</span></span></code></pre></div>
 <p><br></p>
 <p>Several functions also have arguments that implement additional
 optional transformations to the output, such as <code>pivot</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `order_refer()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> unused argument (pivot = FALSE)</span></span></code></pre></div>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
 function include:</p>

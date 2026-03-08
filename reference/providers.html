@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,29 +122,65 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20040309000221"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi      multi pac   enid  spec_code spec_desc state last  first middle org  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1003879… N     8022… I200… 14-16     PRACTITI… PR    ALVA… ANTO… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1003976… N     7113… I200… 14-68     PRACTITI… PA    ZIEG… CHRI… J      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1407802… N     8022… I200… 14-93     PRACTITI… PA    RAPP  KADI… B      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1831165… N     5193… I200… 14-16     PRACTITI… PR    OSTO… JORGE A      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1851357… N     2466… I200… 14-30     PRACTITI… KY    GRIS… RHON… G      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1083766… N     5092… I200… 14-35     PRACTITI… NJ    DIEC… TIMO… J      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1083835… N     5991… I200… 14-41     PRACTITI… NJ    MOY   ANNA  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1720297… N     7618… I200… 14-26     PRACTITI… NJ    DELS… DAMON D      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1497881… N     1254… I200… 14-01     PRACTITI… PR    AYALA ELVIA ARELIS <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1437155… N     9234… I200… 14-68     PRACTITI… MI    WEIN… ARNO… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>spec_code <span class="op">=</span> <span class="st">"14"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Query returned <span style="font-weight: bold;">0</span> results.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20040309000221"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1417918293</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">2860305554</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned 1 result.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11341222… N     2860… I200… 14-41     PRACTITI… TX    YEAM… ROBE… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># providers(state = "AK")</span></span></span>
-<span class="r-in"><span><span class="co"># providers(spec_code = "14-41")</span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"AK"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">6851</span> results.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Retrieving <span style="font-weight: bold;">2</span> pages...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [working] (0 + 0) -&gt; 1 -&gt; 1 | <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50%</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [working] (0 + 0) -&gt; 0 -&gt; 2 | <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,851 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi      multi pac   enid  spec_code spec_desc state last  first middle org  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1124081… N     6305… I200… 14-11     PRACTITI… AK    BARN… DAVID L      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1770648… N     8022… I200… 14-01     PRACTITI… AK    SKALA TIMO… W      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1821135… N     8820… I200… 14-48     PRACTITI… AK    HEIL… MATT  A      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1922095… N     1850… I200… 14-22     PRACTITI… AK    CLARK CHRI… D      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1699746… N     7214… I200… 14-25     PRACTITI… AK    JOHN… SHAWN P      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1245226… N     3476… I200… 14-30     PRACTITI… AK    INAM… CHAK… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1588650… N     5193… I200… 14-30     PRACTITI… AK    MAUR… ERIK  J      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1043323… N     0244… I200… 14-65     PRACTITI… AK    BENN… LUCI… L      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1124081… N     4981… I200… 14-65     PRACTITI… AK    SZYM… STAC… G      <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1396731… N     2769… I200… 14-30     PRACTITI… AK    KOTT… CHRI… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6,841 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

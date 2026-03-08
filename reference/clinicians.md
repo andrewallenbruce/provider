@@ -123,7 +123,7 @@ with the columns:
 
 ``` r
 clinicians()
-#> ! No Query ❯ Returning first 10 rows.
+#> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 25
 #>    npi       pac   enid  last  first middle suffix gender credential grad_school
 #>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      

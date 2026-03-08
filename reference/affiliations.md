@@ -77,7 +77,7 @@ containing the search results.
 
 ``` r
 affiliations()
-#> ! No Query ❯ Returning first 10 rows.
+#> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
