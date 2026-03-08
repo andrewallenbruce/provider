@@ -62,10 +62,8 @@ affiliations(pac = 7810891009) |>
 
     #> Error in `map()`:
     #> ℹ In index: 1.
-    #> Caused by error in `dplyr::mutate()`:
-    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-    #> Caused by error:
-    #> ! object 'na_blank' not found
+    #> Caused by error in `hospitals()`:
+    #> ! object 'sg' not found
 
   
 
@@ -88,10 +86,8 @@ hospitals(organization = "Elizabethtown Community Hospital") |>
   opt_table_font(font = google_font(name = "JetBrains Mono"))
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-    #> Caused by error:
-    #> ! object 'na_blank' not found
+    #> Error in `hospitals()`:
+    #> ! object 'sg' not found
 
   
 

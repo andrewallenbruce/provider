@@ -113,14 +113,14 @@ order_refer(npi = 100)
 #> ✖ Query returned 0 results.
 
 order_refer(npi = 1003026055)
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 8
 #>   npi        first   last   part_b dme   hha   pmd   hospice
 #>   <chr>      <chr>   <chr>  <chr>  <chr> <chr> <chr> <chr>  
 #> 1 1003026055 RADHIKA PHADKE Y      Y     Y     Y     Y      
 
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ Query returned 133  results.
+#> ✔ Query returned 133 results.
 #> # A tibble: 133 × 8
 #>    npi        first    last  part_b dme   hha   pmd   hospice
 #>    <chr>      <chr>    <chr> <chr>  <chr> <chr> <chr> <chr>  
@@ -143,7 +143,7 @@ order_refer(
   pmd = TRUE,
   hospice = FALSE
  )
-#> ✔ Query returned 50  results.
+#> ✔ Query returned 50 results.
 #> # A tibble: 50 × 8
 #>    npi        first    last        part_b dme   hha   pmd   hospice
 #>    <chr>      <chr>    <chr>       <chr>  <chr> <chr> <chr> <chr>  

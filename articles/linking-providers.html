@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9017</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9018</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,10 +151,8 @@ Bruce</h4>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `hospitals()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'sg' not found</span></span></code></pre>
 <p><br></p>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
@@ -169,10 +167,8 @@ insights. For example, there is a hospital in New York named
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span>top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'na_blank' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'sg' not found</span></span></code></pre>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those

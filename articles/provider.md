@@ -165,15 +165,11 @@ open_payments(year = 2021, npi = 12345691234)
 
 # Must be numeric
 nppes(npi = "O12345678912")
-#> Error in `nppes()`:
-#> ! An NPI must be numeric.
-#> ✖ "O12345678912" contains non-numeric characters.
 
 # Must pass Luhn check
 pending(npi = 001234569123, type = "P")
-#> Error in `pending()`:
-#> ! "1234569123" is not a valid NPI.
-#> → Did you mean "1234569121"?
+#> Error in `tidyr::unnest()`:
+#> ! Can't combine `y[[1]]` <character> and `y[[2]]` <double>.
 ```
 
   
@@ -193,8 +189,7 @@ affiliations(pac = 0123456789)
 # Must be numeric
 hospitals(pac_org = "O12345678912")
 #> Error in `hospitals()`:
-#> ! A PAC ID must be numeric.
-#> ✖ "O12345678912" contains non-numeric characters.
+#> ! object 'sg' not found
 ```
 
   
@@ -211,9 +206,6 @@ clinicians(enid = 0123456789123456)
 
 # Must be 15 characters long
 reassignments(enid = "I123456789123456")
-#> Error in `reassignments()`:
-#> ! An Enrollment ID must be 15 characters long.
-#> ✖ "I123456789123456" contains 16 characters.
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
 providers(enid = "L12345678912345")
@@ -221,8 +213,7 @@ providers(enid = "L12345678912345")
 # Some functions require one of ID types
 hospitals(enid_org = "I20180115000174")
 #> Error in `hospitals()`:
-#> ! An Organizational Enrollment ID must begin with a capital `O`.
-#> ✖ "I20180115000174" begins with "I".
+#> ! object 'sg' not found
 ```
 
 ------------------------------------------------------------------------

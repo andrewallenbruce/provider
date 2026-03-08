@@ -91,7 +91,7 @@ affiliations()
 #> 10 100300… 4082… KIM   DAE   NA     NA     Hospital      370057       NA        
 
 affiliations(pac = 7810891009)
-#> ✔ Query returned 5  results.
+#> ✔ Query returned 5 results.
 #> # A tibble: 5 × 9
 #>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -102,14 +102,14 @@ affiliations(pac = 7810891009)
 #> 5 1043245… 7810… FUNG  MARK  K      NA     Hospital      471307       NA        
 
 affiliations(npi = 1003026055)
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 9
 #>   npi      pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>   <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
 #> 1 1003026… 4486… PHAD… RADH… PUSHK… NA     Hospital      100168       NA        
 
 affiliations(first = "KIM")
-#> ✔ Query returned 710  results.
+#> ✔ Query returned 710 results.
 #> # A tibble: 710 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
@@ -126,7 +126,7 @@ affiliations(first = "KIM")
 #> # ℹ 700 more rows
 
 affiliations(facility_ccn = c("33Z302", 331302))
-#> ✔ Query returned 210  results.
+#> ✔ Query returned 210 results.
 #> # A tibble: 210 × 9
 #>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     

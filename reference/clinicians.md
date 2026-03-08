@@ -143,7 +143,7 @@ clinicians()
 #> #   ind_par <chr>, grp_par <chr>
 
 clinicians(enid = "I20081002000549")
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 25
 #>   npi        pac   enid  last  first middle suffix gender credential grad_school
 #>   <chr>      <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
@@ -154,7 +154,7 @@ clinicians(enid = "I20081002000549")
 #> #   ind_par <chr>, grp_par <chr>
 
 clinicians(first = "ETAN")
-#> ✔ Query returned 11  results.
+#> ✔ Query returned 11 results.
 #> # A tibble: 11 × 25
 #>    npi       pac   enid  last  first middle suffix gender credential grad_school
 #>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      

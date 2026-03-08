@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9017</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9018</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -235,15 +235,11 @@ job or location changes.</p>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB; font-weight: bold;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
 <span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span>, type <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #0000BB;">"1234569123"</span> is <span style="font-style: italic;">not</span> a valid NPI.</span></span>
-<span><span class="co">#&gt; → Did you mean <span style="color: #0000BB; font-weight: bold;">"1234569121"</span>?</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyr::unnest()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't combine `y[[1]]` &lt;character&gt; and `y[[2]]` &lt;double&gt;.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
@@ -261,8 +257,7 @@ under different circumstances.</p>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'sg' not found</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a
@@ -277,9 +272,6 @@ of benefits) is linked through the Enrollment ID.</p>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
 <span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `reassignments()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be <span style="font-style: italic;">15 characters long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
 <span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"L12345678912345"</span><span class="op">)</span></span>
@@ -287,8 +279,7 @@ of benefits) is linked through the Enrollment ID.</p>
 <span><span class="co"># Some functions require one of ID types</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>enid_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Organizational Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I20180115000174"</span> begins with <span style="color: #0000BB;">"I"</span>.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'sg' not found</span></span></code></pre></div>
 <hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

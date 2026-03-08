@@ -109,31 +109,29 @@ providers(spec_code = "14")
 #> ✖ Query returned 0 results.
 
 providers(enid = "I20040309000221")
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
 #>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
 #> 1 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      NA   
 
 providers(npi = 1417918293)
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
 #>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
 #> 1 14179182… N     3870… I200… 14-41     PRACTITI… FL    SHEI… STEV… D      NA   
 
 providers(pac = 2860305554)
-#> ✔ Query returned 1  result.
+#> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   npi       multi pac   enid  spec_code spec_desc state last  first middle org  
 #>   <chr>     <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
 #> 1 11341222… N     2860… I200… 14-41     PRACTITI… TX    YEAM… ROBE… NA     NA   
 
 providers(state = "AK")
-#> ✔ Query returned 6,851  results.
+#> ✔ Query returned 6,851 results.
 #> ℹ Retrieving 2 pages...
-#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
-#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 6,851 × 11
 #>    npi      multi pac   enid  spec_code spec_desc state last  first middle org  
 #>    <chr>    <chr> <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>  <chr>
