@@ -1,7 +1,8 @@
 #' Provider Enrollment in Medicare
 #'
 #' @description
-#' Access enrollment level data on individual and organizational providers that are actively approved to bill Medicare.
+#' Enrollment data on individual and organizational providers that are
+#'    actively approved to bill Medicare.
 #'
 #' @section Links:
 #'    * [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
@@ -63,7 +64,7 @@ providers <- function(
 ) {
   args <- params(
     NPI = npi,
-    MULTIPLE_NPI_FLAG = multi,
+    MULTIPLE_NPI_FLAG = convert_lgl(multi),
     PECOS_ASCT_CNTL_ID = pac,
     ENRLMT_ID = enid,
     PROVIDER_TYPE_CD = spec_code,
@@ -160,7 +161,7 @@ rename_providers <- function(x) {
     LAST_NAME = "last",
     FIRST_NAME = "first",
     MDL_NAME = "middle",
-    ORG_NAME = "org"
+    ORG_NAME = "org_name"
   )
 
   collapse::setrename(x, NM, .nse = FALSE)

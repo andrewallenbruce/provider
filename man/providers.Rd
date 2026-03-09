@@ -53,7 +53,8 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-Access enrollment level data on individual and organizational providers that are actively approved to bill Medicare.
+Enrollment data on individual and organizational providers that are
+actively approved to bill Medicare.
 }
 \section{Links}{
 

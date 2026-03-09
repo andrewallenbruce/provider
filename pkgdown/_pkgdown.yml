@@ -87,7 +87,7 @@ navbar:
 
 reference:
 
-- title: Current
+- title: Current Endpoints
   desc: >
     Access current administrative healthcare provider data.
   contents:
@@ -102,15 +102,17 @@ reference:
   - providers
   - reassignments
 
-- title: Modifiers
+- title: Query Modifiers
   desc: >
      Query Modifiers
   contents:
   - any_of
+  - none_of
   - between
   - contains
-  - ends_with
-  - equals
+  - equal
+  - not_equal
   - greater_than
   - less_than
+  - ends_with
   - starts_with

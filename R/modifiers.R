@@ -1,8 +1,4 @@
-#' @rdname modifier
-#' @param operator input
-#' @param value input
-#' @keywords internal
-#' @export
+#' @noRd
 new_modifier <- function(operator, value) {
   structure(
     list(
@@ -13,9 +9,7 @@ new_modifier <- function(operator, value) {
   )
 }
 
-#' @rdname modifier
-#' @keywords internal
-#' @export
+#' @noRd
 is_modifier <- function(x) {
   inherits(x, "modifier")
 }
@@ -23,17 +17,16 @@ is_modifier <- function(x) {
 #' @export
 print.modifier <- function(x, ...) {
   cli::cli_text(cli::col_cyan("<modifier>"))
-  cli::cli_text(c(cli::col_silver("Operator: "), cli::col_red(x$operator)))
+  cli::cli_text(c(
+    cli::col_silver("Operator: "),
+    cli::col_red(cli::style_bold("{x$operator}"))
+  ))
   cli::cli_text(
     c(
-      if (is.numeric(x$value) & length(x$value) > 1L) {
-        cli::col_silver("{cli::qty(as.character(x$value))}Value{?s}: ")
-        } else {
-          cli::col_silver("{cli::qty(x$value)}Value{?s}: ")
-          },
+      cli::col_silver("{cli::qty(length(x$value))}Value{?s}: "),
       cli::col_yellow("{x$value}")
-      )
     )
+  )
 }
 
 #' Query Modifiers
@@ -45,9 +38,9 @@ print.modifier <- function(x, ...) {
 #' Query modifiers are a small DSL for use in constructing query conditions,
 #' in the [JSON-API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering) format.
 #'
-#' @param x,y input
-#' @param or_equal `<lgl>` append `=`
-#' @param negate `<lgl>` prepend `NOT`
+#' @param x input
+#' @param or_equal `<lgl>` append `=` to `greater_than()`/`less_than()`
+#' @param negate `<lgl>` prepend `NOT` to `between()`
 #' @name modifier
 #' @returns An object of class `<modifier>`
 NULL
@@ -56,7 +49,6 @@ NULL
 #' @examples
 #' greater_than(1000)
 #' greater_than(0.125, or_equal = TRUE)
-#' @autoglobal
 #' @export
 greater_than <- function(x, or_equal = FALSE) {
   new_modifier(
@@ -69,7 +61,6 @@ greater_than <- function(x, or_equal = FALSE) {
 #' @examples
 #' less_than(1000)
 #' less_than(0.125, or_equal = TRUE)
-#' @autoglobal
 #' @export
 less_than <- function(x, or_equal = FALSE) {
   new_modifier(
@@ -80,28 +71,21 @@ less_than <- function(x, or_equal = FALSE) {
 
 #' @rdname modifier
 #' @examples
-#' between(1000, 1100)
-#' between(0.125, 2, negate = TRUE)
-#' @autoglobal
+#' between(c(1000, 1100))
+#' between(c(0.125, 2), negate = TRUE)
 #' @export
-between <- function(x, y, negate = FALSE) {
-  if (x >= y) {
-    cli::cli_abort("{.arg x} must be less than {.arg y}.", call. = FALSE)
-  }
-
+between <- function(x, negate = FALSE) {
   new_modifier(
     operator = ifelse(!negate, "BETWEEN", "NOT+BETWEEN"),
-    value = c(x, y)
+    value = collapse::frange(x)
   )
 }
 
 #' @rdname modifier
 #' @examples
 #' starts_with("foo")
-#' @autoglobal
 #' @export
 starts_with <- function(x) {
-
   new_modifier(
     operator = "STARTS_WITH",
     value = x
@@ -111,7 +95,6 @@ starts_with <- function(x) {
 #' @rdname modifier
 #' @examples
 #' ends_with("bar")
-#' @autoglobal
 #' @export
 ends_with <- function(x) {
   new_modifier(
@@ -123,7 +106,6 @@ ends_with <- function(x) {
 #' @rdname modifier
 #' @examples
 #' contains("baz")
-#' @autoglobal
 #' @export
 contains <- function(x) {
   new_modifier(
@@ -134,13 +116,22 @@ contains <- function(x) {
 
 #' @rdname modifier
 #' @examples
-#' equals(1000)
-#' equals(1000, negate = TRUE)
-#' @autoglobal
+#' equal(1000)
 #' @export
-equals <- function(x, negate = FALSE) {
+equal <- function(x) {
   new_modifier(
-    operator = ifelse(!negate, "=", "<>"),
+    operator = "=",
+    value = x
+  )
+}
+
+#' @rdname modifier
+#' @examples
+#' not_equal(1000)
+#' @export
+not_equal <- function(x) {
+  new_modifier(
+    operator = "<>",
     value = x
   )
 }
@@ -148,12 +139,21 @@ equals <- function(x, negate = FALSE) {
 #' @rdname modifier
 #' @examples
 #' any_of(state.abb[10:15])
-#' any_of(state.abb[10:15], negate = TRUE)
-#' @autoglobal
 #' @export
-any_of <- function(x, negate = FALSE) {
+any_of <- function(x) {
   new_modifier(
-    operator = ifelse(!negate, "IN", "NOT+IN"),
+    operator = "IN",
+    value = x
+  )
+}
+
+#' @rdname modifier
+#' @examples
+#' none_of(state.abb[1:5])
+#' @export
+none_of <- function(x) {
+  new_modifier(
+    operator = "NOT+IN",
     value = x
   )
 }
