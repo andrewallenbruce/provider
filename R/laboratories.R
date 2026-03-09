@@ -1,76 +1,76 @@
 #' Clinical Laboratories
 #'
 #' @description
-#' Access information on clinical laboratories including demographics and
-#' the type of testing services the facility provides.
+#' Clinical laboratories including demographics and the type of testing
+#' services the facility provides.
 #'
-#' @section Clinical Laboratory Improvement Amendments (CLIA):
+#' @section CLIA:
 #'
 #' CMS regulates all laboratory testing (except research) performed on humans
-#' in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
+#' in the U.S. through the __Clinical Laboratory Improvement Amendments (CLIA)__.
 #' In total, CLIA covers approximately 320,000 laboratory entities.
 #'
-#' The Division of Clinical Laboratory Improvement & Quality, within the Quality,
-#' Safety & Oversight Group, under the Center for Clinical Standards and Quality
+#' The _Division of Clinical Laboratory Improvement & Quality_, within the
+#' _Quality, Safety & Oversight Group_, under the _Center for Clinical Standards and Quality_
 #' (CCSQ) has the responsibility for implementing the CLIA Program.
 #'
 #' Although all clinical laboratories must be properly certified to receive
 #' Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
 #' program responsibilities.
 #'
-#' @section CLIA Certificates:
+#' @section Certification:
 #'
-#' There are five CLIA certificate types all of which are effective for a
-#' period of two years. They are as follows, in order of increasing complexity:
+#' The five CLIA certificate types, all of which are effective for a period of
+#' two years, are as follows, in order of increasing complexity:
 #'
-#' 1. Certificate of **Waiver**: Issued to a laboratory to perform only waived
-#'    tests; does not waive the lab from all CLIA requirements. Waived tests are
-#'    laboratory tests that are simple to perform. Routine inspections are not
-#'    conducted for waiver labs, although 2% are visited each year to ensure
-#'    quality laboratory testing.
+#' 1. **Waiver**: Issued to a laboratory to perform only waived tests; does
+#'    not waive the lab from all CLIA requirements. Waived tests are laboratory
+#'    tests that are simple to perform. Routine inspections are not conducted
+#'    for waiver labs, although 2% are visited each year to ensure quality
+#'    laboratory testing.
 #'
-#' 2. Certificate for **Provider-Performed Microscopy Procedures** (PPM): Issued
-#'    to a laboratory in which a physician, midlevel practitioner or dentist
+#' 2. **Provider-Performed Microscopy Procedures (PPM)**: Issued to a
+#'    laboratory in which a physician, mid-level practitioner or dentist
 #'    performs limited tests that require microscopic examination. PPM tests are
 #'    considered moderate complexity. Waived tests can also be performed under this
 #'    certificate type. There are no routine inspections conducted for PPM labs.
 #'
-#' 3. Certificate of **Registration**: Initially issued to a laboratory that has
-#'    applied for a Certificate of Compliance or Accreditation, enabling the lab to
-#'    conduct moderate/high complexity testing until the survey is performed and
-#'    the laboratory is found to be in CLIA compliance. Includes PPM and waived
+#' 3. **Registration**: Initially issued to a laboratory that has applied for
+#'    a Certificate of Compliance or Accreditation, enabling the lab to conduct
+#'    moderate/high complexity testing until the survey is performed and the
+#'    laboratory is found to be in CLIA compliance. Includes PPM and waived
 #'    testing.
 #'
-#' 4. Certificate of **Compliance**: Allows the laboratory to conduct
-#'    moderate/high complexity testing and is issued after an inspection finds the
-#'    lab to be in compliance with all applicable CLIA requirements. Includes PPM
-#'    and waived testing.
+#' 4. **Compliance**: Allows the laboratory to conduct moderate/high complexity
+#'    testing and is issued after an inspection finds the lab to be in
+#'    compliance with all applicable CLIA requirements. Includes PPM and
+#'    waived testing.
 #'
-#' 5. Certificate of **Accreditation**: Exactly the same as the Certificate of
-#'    Compliance, except that the laboratory must be accredited by one of the
-#'    following CMS-approved accreditation organizations:
+#' 5. **Accreditation**: Exactly the same as the Certificate of Compliance,
+#'    except that the laboratory must be accredited by one of the following
+#'    CMS-approved accreditation organizations:
 #'
-#'   - [American Association for Laboratory Accreditation](https://a2la.org/) (A2LA)
-#'   - [Association for the Advancement of Blood & Biotherapies](https://www.aabb.org/) (AABB)
-#'   - [American Osteopathic Association](https://osteopathic.org/) (AOA)
-#'   - [American Society for Histocompatibility and Immunogenetics](https://www.ashi-hla.org/) (ASHI)
-#'   - [College of American Pathologists](https://www.cap.org/) (CAP)
-#'   - [Commission on Office Laboratory Accreditation](https://www.cola.org/) (COLA)
-#'   - [The Joint Commission](https://www.jointcommission.org/) (JCAHO)
+#'   - [A2LA](https://a2la.org/): American Association for Laboratory Accreditation
+#'   - [AABB](https://www.aabb.org/): Association for the Advancement of Blood & Biotherapies
+#'   - [AOA](https://osteopathic.org/): American Osteopathic Association
+#'   - [ASHI-HLA](https://www.ashi-hla.org/): American Society for Histocompatibility & Immunogenetics
+#'   - [CAP](https://www.cap.org/): College of American Pathologists
+#'   - [COLA](https://www.cola.org/): Commission on Office Laboratory Accreditation
+#'   - [JCAHO](https://www.jointcommission.org/): The Joint Commission
 #'
-#' @section Resources:
-#'   - [Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
-#'   - [CMS.gov CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
-#'   - [CDC.gov CLIA](https://www.cdc.gov/clia/php/about/index.html)
-#'   - [FDA CLIA Databases](https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases)
-#'   - [CDC.gov CLIA Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
-#'   - [CMS QCOR - S&C's Quality, Certification and Oversight Reports](https://qcor.cms.gov/main.jsp)
-#'
-#' *Update Frequency:* **Quarterly**
+#' @references
+#'   - [Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+#'   - [CMS - CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
+#'   - [FDA - CLIA](https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases)
+#'   - [CDC - CLIA](https://www.cdc.gov/clia/php/about/index.html)
+#'   - [CDC - CLIA Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
+#'   - [CMS - QCOR](https://qcor.cms.gov/main.jsp)
+#'   - [CLIA Certificate Fee Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
+#'   - [CLIA Certification Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)
 #'
 #' @param name `<chr>` Provider or clinical laboratory's name
-#' @param clia `<chr>` 10-character CLIA number
-#' @param certificate `<chr>` CLIA certificate type:
+#' @param ccn `<chr>` 10-character CLIA number
+#' @param cert `<chr>` CLIA certificate type:
 #'    - `"waiver"`
 #'    - `"ppm"`
 #'    - `"registration"`
@@ -79,322 +79,154 @@
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
-#' @param active `<lgl>` // __default:__ `FALSE` Return only active providers
-#' @param tidy `<lgl>` // __default:__ `TRUE` Tidy output
-#' @param na.rm `<lgl>` // __default:__ `TRUE` Remove empty rows and columns
-#' @param pivot `<lgl>` // __default:__ `TRUE` Pivot output
-#' @param ... Empty
-#'
+#' @param active `<lgl>` Return only active providers#'
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
 #' # Artic Envestigations Program Laboratory, Anchorage, AK
-#' laboratories(clia = "02D0873639")
+#' laboratories(ccn = "02D0873639")
 #'
 #' # Dengue Laboratory, San Juan, PR
-#' laboratories(clia = "40D0869394")
+#' laboratories(ccn = "40D0869394")
 #'
 #' # CDC/CGH/DGHA International Laboratory, Atlanta, GA
-#' laboratories(clia = "11D1061576")
+#' laboratories(ccn = "11D1061576")
 #'
 #' # Infectious Diseases Laboratory, Atlanta, GA
-#' laboratories(clia = "11D0668319")
+#' laboratories(ccn = "11D0668319")
 #'
 #' # National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA
-#' laboratories(clia = "11D0668290")
+#' laboratories(ccn = "11D0668290")
 #'
 #' # Vector-Borne Diseases Laboratory, Fort Collins, CO
-#' laboratories(clia = "06D0880233")
+#' laboratories(ccn = "06D0880233")
 #'
 #' # Wiregrass Georgia Tech College Student Health Center, Valdosta, GA
-#' laboratories(clia = "11D2306220")
+#' laboratories(ccn = "11D2306220")
 #'
-#' laboratories(clia = "11D0265516")
+#' laboratories(ccn = "11D0265516")
 #'
-#' laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
+#' laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 #'
 #' @autoglobal
 #'
 #' @export
 laboratories <- function(
-  name = NULL,
-  clia = NULL,
-  certificate = NULL,
+    name = NULL,
+  ccn = NULL,
+  cert = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  active = FALSE,
-  tidy = TRUE,
-  na.rm = TRUE,
-  pivot = TRUE,
-  ...
+  active = FALSE
 ) {
-  if (!is.null(certificate)) {
-    rlang::arg_match(
-      certificate,
-      c("waiver", "compliance", "accreditation", "ppm", "registration")
-    )
-    certificate <- cert(certificate)
-  }
-
-  if (isTRUE(active)) {
-    active <- "00"
-  } else {
-    active <- NULL
-  }
-
-  args <- dplyr::tribble(
-    ~param           , ~arg        ,
-    "FAC_NAME"       , name        ,
-    "PRVDR_NUM"      , clia        ,
-    "CRTFCT_TYPE_CD" , certificate ,
-    "CITY_NAME"      , city        ,
-    "STATE_CD"       , state       ,
-    "ZIP_CD"         , zip         ,
-    "PGM_TRMNTN_CD"  , active
+  args <- params(
+    FAC_NAME = name,
+    PRVDR_NUM = ccn,
+    CRTFCT_TYPE_CD = cert_enum(cert),
+    CITY_NAME = city,
+    STATE_CD = state,
+    ZIP_CD = zip,
+    PGM_TRMNTN_CD = conv_active(active)
   )
 
-  response <- httr2::request(build_url("lab", args)) |>
-    httr2::req_perform()
+  .c(BASE, LIMIT, NM) %=% constants("laboratories")
+  NM <- NULL
 
-  if (vctrs::vec_is_empty(response$body)) {
-    if (active == "00") {
-      active <- TRUE
-    }
+  # No Query: Warn & Return First 10 Rows =====================
+  if (!length(args)) {
+    cli_no_query()
+
+    url <- url_(paste0(BASE, "?"), opts(size = 10))
+
+    res <- request_bare(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_(NM)
+
+    return(res)
   }
 
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  # Valid Query: Flatten & Request Result Count =====================
+  url <- url_(
+    paste0(BASE, "/stats?"),
+    opts(size = LIMIT),
+    query2(args)
+  )
 
-  if (tidy) {
-    # results <- tidyup(
-    #   results,
-    #   dtype = 'ymd',
-    #   dt = '_dt',
-    #   yn = '_sw',
-    #   int = 'drctly_afltd',
-    #   zip = 'zip_cd'
-    # ) |>
-    #   combine(address, c('st_adr', 'addtnl_st_adr')) |>
-    #   combine(provider_name, c('fac_name', 'addtnl_fac_name')) |>
-    #   dplyr::mutate(
-    #     pgm_trmntn_cd = fct_term(pgm_trmntn_cd),
-    #     crtfctn_actn_type_cd = fct_toa(crtfctn_actn_type_cd),
-    #     cmplnc_stus_cd = fct_stat(cmplnc_stus_cd),
-    #     rgn_cd = fct_region(rgn_cd),
-    #     gnrl_cntl_type_cd = fct_owner(gnrl_cntl_type_cd),
-    #     crtfct_type_cd = fct_app(crtfct_type_cd),
-    #     gnrl_fac_type_cd = fct_facility(gnrl_fac_type_cd),
-    #     current_clia_lab_clsfctn_cd = fct_lab(current_clia_lab_clsfctn_cd),
-    #     prvdr_ctgry_cd = fct_lab(prvdr_ctgry_cd),
-    #     prvdr_ctgry_sbtyp_cd = fct_lab(prvdr_ctgry_sbtyp_cd),
-    #     # state_cd                    = fct_stabb(state_cd),
-    #     duration = duration_vec(trmntn_exprtn_dt),
-    #     expired = dplyr::if_else(duration < 0, TRUE, FALSE),
-    #     duration = NULL
-    #   ) |>
-    #   cols_lab()
+  N <- request_rows(url)
 
-    if (pivot) {
-      # res <- dplyr::select(results, -dplyr::starts_with("acr_"))
-      #
-      # acr <- dplyr::select(results, clia_number, dplyr::starts_with("acr_")) |>
-      #   dplyr::select(
-      #     clia_number,
-      #     a2la = acr_a2la,
-      #     a2la_ind = acr_a2la_ind,
-      #     a2la_date = acr_a2la_date,
-      #     aabb = acr_aabb,
-      #     aabb_ind = acr_aabb_ind,
-      #     aabb_date = acr_aabb_date,
-      #     aoa = acr_aoa,
-      #     aoa_ind = acr_aoa_ind,
-      #     aoa_date = acr_aoa_date,
-      #     ashi = acr_ashi,
-      #     ashi_ind = acr_ashi_ind,
-      #     ashi_date = acr_ashi_date,
-      #     cap = acr_cap,
-      #     cap_ind = acr_cap_ind,
-      #     cap_date = acr_cap_date,
-      #     cola = acr_cola,
-      #     cola_ind = acr_cola_ind,
-      #     cola_date = acr_cola_date,
-      #     jcaho = acr_jcaho,
-      #     jcaho_ind = acr_jcaho_ind,
-      #     jcaho_date = acr_jcaho_date
-      #   )
-      #
-      # org <- acr |>
-      #   dplyr::select(clia_number, a2la, aabb, aoa, ashi, cap, cola, jcaho) |>
-      #   tidyr::pivot_longer(
-      #     cols = !clia_number,
-      #     names_to = "organization",
-      #     values_to = "accredited"
-      #   ) |>
-      #   dplyr::mutate(
-      #     accredited = dplyr::if_else(accredited == "X", TRUE, FALSE)
-      #   )
-      #
-      # dt <- acr |>
-      #   dplyr::select(clia_number, dplyr::ends_with("_date")) |>
-      #   tidyr::pivot_longer(
-      #     cols = !clia_number,
-      #     names_to = "organization",
-      #     values_to = "confirmed_date"
-      #   ) |>
-      #   dplyr::mutate(organization = stringr::str_remove(organization, "_date"))
-      #
-      # ind <- acr |>
-      #   dplyr::select(clia_number, dplyr::ends_with("_ind")) |>
-      #   tidyr::pivot_longer(
-      #     cols = !clia_number,
-      #     names_to = "organization",
-      #     values_to = "confirmed"
-      #   ) |>
-      #   dplyr::mutate(organization = stringr::str_remove(organization, "_ind"))
-      #
-      # results <- dplyr::inner_join(
-      #   org,
-      #   ind,
-      #   by = dplyr::join_by(clia_number, organization)
-      # ) |>
-      #   dplyr::inner_join(dt, by = dplyr::join_by(clia_number, organization)) |>
-      #   dplyr::filter(accredited == TRUE) |>
-      #   dplyr::right_join(res, by = dplyr::join_by(clia_number)) |>
-      #   dplyr::mutate(organization = stringr::str_to_upper(organization)) |>
-      #   dplyr::relocate(
-      #     c(organization, accredited, confirmed, confirmed_date),
-      #     .after = type_of_action
-      #   ) |>
-      #   dplyr::select(-dplyr::starts_with("affiliated_"))
-      #
-      # aff <- dplyr::select(
-      #   res,
-      #   clia_number,
-      #   dplyr::starts_with("affiliated_")
-      # ) |>
-      #   dplyr::distinct() |>
-      #   tidyr::pivot_longer(
-      #     !clia_number,
-      #     names_to = "affiliated_provider",
-      #     values_to = "affiliated_provider_clia",
-      #     values_drop_na = TRUE
-      #   )
-      #
-      # aff$affiliated_provider <- NULL
-      #
-      # results <- dplyr::left_join(
-      #   results,
-      #   aff,
-      #   by = dplyr::join_by(clia_number)
-      # )
-    }
+  # Query Returned Nothing: Alert & Exit =====================
+  if (N == 0L) {
+    cli_no_results()
+    return(invisible(NULL))
   }
-  return(results)
+
+  # Count is Within API Limit: Request & Return Results
+  if (N <= LIMIT) {
+    cli_results(N)
+
+    url <- url_(
+      paste0(BASE, "?"),
+      opts(size = LIMIT),
+      query2(args)
+    )
+
+    res <- request_bare(url) |>
+      fastplyr::as_tbl() |>
+      map_na_if() |>
+      rename_(NM)
+
+    return(res)
+  }
+
+  # Count Above API Limit: Alert & Return Results =====================
+  cli_pages(N, offset(N, LIMIT))
+
+  url <- url_(
+    paste0(BASE, "?"),
+    opts(size = LIMIT, offset = "<<i>>"),
+    query2(args)
+  )
+
+  urls <- offset(N, LIMIT, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+
+  parallel_request(urls) |>
+    fastplyr::as_tbl() |>
+    map_na_if() |>
+    rename_(NM)
 }
 
-#' @param df data frame
-#' @autoglobal
+
 #' @noRd
-cols_lab <- function(df) {
-  cols <- c(
-    'provider_name',
-    'clia_number' = 'prvdr_num',
-    'certificate' = 'crtfct_type_cd',
-    'clia_medicare' = 'clia_mdcr_num',
-    # 'application'         = 'aplctn_type_cd',
-    'effective_date' = 'crtfct_efctv_dt',
-    'expiration_date' = 'trmntn_exprtn_dt',
-    'expired',
-    'termination_reason' = 'pgm_trmntn_cd',
-    'status' = 'cmplnc_stus_cd',
-    'poc_ind' = 'acptbl_poc_sw',
-    # 'termination_code'    = 'clia_trmntn_cd',
-    'type_of_action' = 'crtfctn_actn_type_cd',
-    'ownership_type' = 'gnrl_cntl_type_cd',
-    'facility_type' = 'gnrl_fac_type_cd',
-    'director_affiliations' = 'drctly_afltd_lab_cnt',
-    # 'category'            = 'prvdr_ctgry_cd',
-    # 'subcategory'         = 'prvdr_ctgry_sbtyp_cd',
+conv_active <- function(active) {
+  if (active) "00" else NULL
+}
 
-    'address',
-    'city' = 'city_name',
-    'state' = 'state_cd',
-    'zip' = 'zip_cd',
-    'phone' = 'phne_num',
-    'fax' = 'fax_phne_num',
-    'orig_part_date' = 'orgnl_prtcptn_dt',
-    'application_date' = 'aplctn_rcvd_dt',
-    'certification_date' = 'crtfctn_dt',
-    'mailed_date' = 'crtfct_mail_dt',
+#' @noRd
+cert_enum <- function(cert = NULL) {
+  if (is.null(cert)) {
+    return(NULL)
+  }
 
-    'region' = 'rgn_cd',
-    # 'state_region'        = 'state_rgn_cd',
-    # 'fips_county'         = 'fips_cnty_cd',
-    # 'fips_state'          = 'fips_state_cd',
-    # 'cbsa'                = 'cbsa_cd',
-    # 'cbsa_ind'            = 'cbsa_urbn_rrl_ind',
-    # 'carrier'             = 'intrmdry_carr_cd',
-    # 'carrier_prior'       = 'intrmdry_carr_prior_cd',
-    # 'medicaid_vendor'     = 'mdcd_vndr_num',
-    # 'chow_count'          = 'chow_cnt',
-    # 'chow_date_prev'      = 'chow_prior_dt',
-    # 'chow_date'           = 'chow_dt',
-    # 'fiscal_year_end'     = 'fy_end_mo_day_cd',
-    # 'eligible_ind'        = 'elgblty_sw',
-    # 'skeleton_ind'        = 'skltn_rec_sw',
-    # 'multi_site_ind'      = 'mlt_site_excptn_sw',
-    # 'hosp_campus_ind'     = 'hosp_lab_excptn_sw',
-    # 'pub_health_ind'      = 'non_prft_excptn_sw',
-    # 'tmp_test_site_ind'   = 'lab_temp_tstg_site_sw',
-    # 'shared_lab_ind'      = 'shr_lab_sw',
-    # 'shared_lab_xref_number',
-    # 'lab_site_count'      = 'lab_site_cnt',
-    # 'ppm_test_count'      = 'ppmp_test_vol_cnt',
-    # 'acc_sched'           = 'acrdtn_schdl_cd',
-    # 'form_116_acrdtd_test_vol_cnt',
-    # 'form_116_test_vol_cnt',
-    # 'form_1557_crtfct_schdl_cd',
-    # 'form_1557_cmplnc_schdl_cd',
-    # 'form_1557_test_vol_cnt',
-    # 'wvd_test_vol_cnt',
-
-    # American Association for Laboratory Accreditation
-    'acr_a2la' = 'a2la_acrdtd_cd',
-    'acr_a2la_ind' = 'a2la_acrdtd_y_match_sw',
-    'acr_a2la_date' = 'a2la_acrdtd_y_match_dt',
-
-    # American Association of Blood Banks
-    'acr_aabb' = 'aabb_acrdtd_cd',
-    'acr_aabb_ind' = 'aabb_acrdtd_y_match_sw',
-    'acr_aabb_date' = 'aabb_acrdtd_y_match_dt',
-
-    # American Osteopathic Association
-    'acr_aoa' = 'aoa_acrdtd_cd',
-    'acr_aoa_ind' = 'aoa_acrdtd_y_match_sw',
-    'acr_aoa_date' = 'aoa_acrdtd_y_match_dt',
-
-    # American Society for Histocompatibility and Immunogenetics
-    'acr_ashi' = 'ashi_acrdtd_cd',
-    'acr_ashi_ind' = 'ashi_acrdtd_y_match_sw',
-    'acr_ashi_date' = 'ashi_acrdtd_y_match_dt',
-
-    # College of American Pathologists
-    'acr_cap' = 'cap_acrdtd_cd',
-    'acr_cap_ind' = 'cap_acrdtd_y_match_sw',
-    'acr_cap_date' = 'cap_acrdtd_y_match_dt',
-
-    # Commission on Office Laboratory Accreditation
-    'acr_cola' = 'cola_acrdtd_cd',
-    'acr_cola_ind' = 'cola_acrdtd_y_match_sw',
-    'acr_cola_date' = 'cola_acrdtd_y_match_dt',
-
-    # the Joint Commission
-    'acr_jcaho' = 'jcaho_acrdtd_cd',
-    'acr_jcaho_ind' = 'jcaho_acrdtd_y_match_sw',
-    'acr_jcaho_date' = 'jcaho_acrdtd_y_match_dt',
-
-    'clia_class_current' = 'current_clia_lab_clsfctn_cd'
+  ENUM <- list(
+    "compliance" = 1,
+    "waiver" = 2,
+    "accreditation" = 3,
+    "ppm" = 4,
+    "registration" = 9
   )
+
+  cert <- rlang::arg_match(
+    cert,
+    rlang::names2(ENUM),
+    multiple = TRUE
+  )
+
+  unlist_(ENUM[cert])
 }
 
 #' @autoglobal

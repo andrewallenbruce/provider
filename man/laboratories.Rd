@@ -6,24 +6,20 @@
 \usage{
 laboratories(
   name = NULL,
-  clia = NULL,
-  certificate = NULL,
+  ccn = NULL,
+  cert = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  active = FALSE,
-  tidy = TRUE,
-  na.rm = TRUE,
-  pivot = TRUE,
-  ...
+  active = FALSE
 )
 }
 \arguments{
 \item{name}{\verb{<chr>} Provider or clinical laboratory's name}
 
-\item{clia}{\verb{<chr>} 10-character CLIA number}
+\item{ccn}{\verb{<chr>} 10-character CLIA number}
 
-\item{certificate}{\verb{<chr>} CLIA certificate type:
+\item{cert}{\verb{<chr>} CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
 \item \code{"ppm"}
@@ -38,32 +34,24 @@ laboratories(
 
 \item{zip}{\verb{<chr>} Zip code}
 
-\item{active}{\verb{<lgl>} // \strong{default:} \code{FALSE} Return only active providers}
-
-\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
-
-\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
-
-\item{pivot}{\verb{<lgl>} // \strong{default:} \code{TRUE} Pivot output}
-
-\item{...}{Empty}
+\item{active}{\verb{<lgl>} Return only active providers#'}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information on clinical laboratories including demographics and
-the type of testing services the facility provides.
+Clinical laboratories including demographics and the type of testing
+services the facility provides.
 }
-\section{Clinical Laboratory Improvement Amendments (CLIA)}{
+\section{CLIA}{
 
 
 CMS regulates all laboratory testing (except research) performed on humans
-in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
+in the U.S. through the \strong{Clinical Laboratory Improvement Amendments (CLIA)}.
 In total, CLIA covers approximately 320,000 laboratory entities.
 
-The Division of Clinical Laboratory Improvement & Quality, within the Quality,
-Safety & Oversight Group, under the Center for Clinical Standards and Quality
+The \emph{Division of Clinical Laboratory Improvement & Quality}, within the
+\emph{Quality, Safety & Oversight Group}, under the \emph{Center for Clinical Standards and Quality}
 (CCSQ) has the responsibility for implementing the CLIA Program.
 
 Although all clinical laboratories must be properly certified to receive
@@ -71,85 +59,83 @@ Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
 program responsibilities.
 }
 
-\section{CLIA Certificates}{
+\section{Certification}{
 
 
-There are five CLIA certificate types all of which are effective for a
-period of two years. They are as follows, in order of increasing complexity:
+The five CLIA certificate types, all of which are effective for a period of
+two years, are as follows, in order of increasing complexity:
 \enumerate{
-\item Certificate of \strong{Waiver}: Issued to a laboratory to perform only waived
-tests; does not waive the lab from all CLIA requirements. Waived tests are
-laboratory tests that are simple to perform. Routine inspections are not
-conducted for waiver labs, although 2\% are visited each year to ensure
-quality laboratory testing.
-\item Certificate for \strong{Provider-Performed Microscopy Procedures} (PPM): Issued
-to a laboratory in which a physician, midlevel practitioner or dentist
+\item \strong{Waiver}: Issued to a laboratory to perform only waived tests; does
+not waive the lab from all CLIA requirements. Waived tests are laboratory
+tests that are simple to perform. Routine inspections are not conducted
+for waiver labs, although 2\% are visited each year to ensure quality
+laboratory testing.
+\item \strong{Provider-Performed Microscopy Procedures (PPM)}: Issued to a
+laboratory in which a physician, mid-level practitioner or dentist
 performs limited tests that require microscopic examination. PPM tests are
 considered moderate complexity. Waived tests can also be performed under this
 certificate type. There are no routine inspections conducted for PPM labs.
-\item Certificate of \strong{Registration}: Initially issued to a laboratory that has
-applied for a Certificate of Compliance or Accreditation, enabling the lab to
-conduct moderate/high complexity testing until the survey is performed and
-the laboratory is found to be in CLIA compliance. Includes PPM and waived
+\item \strong{Registration}: Initially issued to a laboratory that has applied for
+a Certificate of Compliance or Accreditation, enabling the lab to conduct
+moderate/high complexity testing until the survey is performed and the
+laboratory is found to be in CLIA compliance. Includes PPM and waived
 testing.
-\item Certificate of \strong{Compliance}: Allows the laboratory to conduct
-moderate/high complexity testing and is issued after an inspection finds the
-lab to be in compliance with all applicable CLIA requirements. Includes PPM
-and waived testing.
-\item Certificate of \strong{Accreditation}: Exactly the same as the Certificate of
-Compliance, except that the laboratory must be accredited by one of the
-following CMS-approved accreditation organizations:
+\item \strong{Compliance}: Allows the laboratory to conduct moderate/high complexity
+testing and is issued after an inspection finds the lab to be in
+compliance with all applicable CLIA requirements. Includes PPM and
+waived testing.
+\item \strong{Accreditation}: Exactly the same as the Certificate of Compliance,
+except that the laboratory must be accredited by one of the following
+CMS-approved accreditation organizations:
 }
 \itemize{
-\item \href{https://a2la.org/}{American Association for Laboratory Accreditation} (A2LA)
-\item \href{https://www.aabb.org/}{Association for the Advancement of Blood & Biotherapies} (AABB)
-\item \href{https://osteopathic.org/}{American Osteopathic Association} (AOA)
-\item \href{https://www.ashi-hla.org/}{American Society for Histocompatibility and Immunogenetics} (ASHI)
-\item \href{https://www.cap.org/}{College of American Pathologists} (CAP)
-\item \href{https://www.cola.org/}{Commission on Office Laboratory Accreditation} (COLA)
-\item \href{https://www.jointcommission.org/}{The Joint Commission} (JCAHO)
+\item \href{https://a2la.org/}{A2LA}: American Association for Laboratory Accreditation
+\item \href{https://www.aabb.org/}{AABB}: Association for the Advancement of Blood & Biotherapies
+\item \href{https://osteopathic.org/}{AOA}: American Osteopathic Association
+\item \href{https://www.ashi-hla.org/}{ASHI-HLA}: American Society for Histocompatibility & Immunogenetics
+\item \href{https://www.cap.org/}{CAP}: College of American Pathologists
+\item \href{https://www.cola.org/}{COLA}: Commission on Office Laboratory Accreditation
+\item \href{https://www.jointcommission.org/}{JCAHO}: The Joint Commission
 }
-}
-
-\section{Resources}{
-
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories}
-\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS.gov CLIA}
-\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC.gov CLIA}
-\item \href{https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases}{FDA CLIA Databases}
-\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CDC.gov CLIA Certificates}
-\item \href{https://qcor.cms.gov/main.jsp}{CMS QCOR - S&C's Quality, Certification and Oversight Reports}
-}
-
-\emph{Update Frequency:} \strong{Quarterly}
 }
 
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Artic Envestigations Program Laboratory, Anchorage, AK
-laboratories(clia = "02D0873639")
+laboratories(ccn = "02D0873639")
 
 # Dengue Laboratory, San Juan, PR
-laboratories(clia = "40D0869394")
+laboratories(ccn = "40D0869394")
 
 # CDC/CGH/DGHA International Laboratory, Atlanta, GA
-laboratories(clia = "11D1061576")
+laboratories(ccn = "11D1061576")
 
 # Infectious Diseases Laboratory, Atlanta, GA
-laboratories(clia = "11D0668319")
+laboratories(ccn = "11D0668319")
 
 # National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA
-laboratories(clia = "11D0668290")
+laboratories(ccn = "11D0668290")
 
 # Vector-Borne Diseases Laboratory, Fort Collins, CO
-laboratories(clia = "06D0880233")
+laboratories(ccn = "06D0880233")
 
 # Wiregrass Georgia Tech College Student Health Center, Valdosta, GA
-laboratories(clia = "11D2306220")
+laboratories(ccn = "11D2306220")
 
-laboratories(clia = "11D0265516")
+laboratories(ccn = "11D0265516")
 
-laboratories(certificate = "ppm", city = "Valdosta", state = "GA", active = TRUE)
+laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 \dontshow{\}) # examplesIf}
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories API}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS - CLIA}
+\item \href{https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases}{FDA - CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC - CLIA}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CDC - CLIA Certificates}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS - QCOR}
+\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA Certificate Fee Schedule}
+\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA Certification Guide}
+}
 }

@@ -171,19 +171,10 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-Access information on all hospitals currently enrolled in Medicare. Data
-returned includes the hospital's sub-group types, legal business name,
-doing-business-as name, organization type and address.
-
-\emph{Update Frequency:} \strong{Monthly}
+Hospitals currently enrolled in Medicare. Data includes the hospital's
+sub-group types, legal business name, doing-business-as name, organization
+type and address.
 }
-\section{Links}{
-
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
-}
-}
-
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 hospitals(pac_org = 6103733050)
@@ -202,4 +193,9 @@ hospitals(city = "Savannah",
           gen = TRUE,
           rehab = FALSE))
 \dontshow{\}) # examplesIf}
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments API}
+}
 }

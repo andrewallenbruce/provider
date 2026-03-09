@@ -5,8 +5,8 @@
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#' @references
-#'    * [Hospital Enrollments API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#' @section Links:
+#'    * [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>`
 #'

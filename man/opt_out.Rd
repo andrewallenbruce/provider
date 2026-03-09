@@ -2,7 +2,7 @@
 % Please edit documentation in R/opt_out.R
 \name{opt_out}
 \alias{opt_out}
-\title{Providers Opted Out of Medicare}
+\title{Opt-Out Providers}
 \usage{
 opt_out(
   npi = NULL,
@@ -17,7 +17,7 @@ opt_out(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} Individual National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
 \item{first, last}{\verb{<chr>} Provider's name}
 
@@ -34,29 +34,14 @@ opt_out(
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab 10-digit NPI \cr
-   \code{first} \tab Opt-out provider's first name \cr
-   \code{last} \tab Opt-out provider's last name \cr
-   \code{specialty} \tab Opt-out provider's specialty \cr
-   \code{order_refer} \tab Indicates if the provider can order and refer \cr
-   \code{optout_start_date} \tab Date that provider's Opt-Out period begins \cr
-   \code{optout_end_date} \tab Date that provider's Opt-Out period ends \cr
-   \code{last_updated} \tab Date information was last updated \cr
-   \code{address} \tab Opt-out provider's street address \cr
-   \code{city} \tab Opt-out provider's city \cr
-   \code{state} \tab Opt-out provider's state \cr
-   \code{zip} \tab Opt-out provider's zip code \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Access information on providers who have decided not to participate in Medicare.
+Information on providers who have decided not to participate in Medicare.
 }
 \section{Opting Out}{
 
-
-Providers who do not wish to enroll in the Medicare program may “opt-out”,
+Providers who do not wish to enroll in the Medicare program may "opt-out",
 meaning neither they nor the beneficiary can bill Medicare for services rendered.
 
 Instead, a private contract between provider and beneficiary is signed,
@@ -67,27 +52,16 @@ To opt out, a provider must:
 \itemize{
 \item Be of an \strong{eligible specialty} type
 \item Submit an \strong{opt-out affidavit} to Medicare
-\item Enter into a \strong{private contract} with their Medicare patients, reflecting
-the agreement that they will pay out-of-pocket and that no one will submit
-the bill to Medicare for reimbursement
+\item Enter into a \strong{private contract} with their Medicare patients
 }
 }
 
 \section{Opt-Out Periods}{
 
-
 Opt-out periods last for two years and cannot be terminated early unless the
 provider is opting out for the very first time and terminates the opt-out no
-later than 90 days after the opt-out period's effective date.
-
-Opt-out statuses are also effective for two years and automatically renew.
-Providers that do not want to extend their opt-out status at the end of an
-opt-out period may cancel by notifying all MACs an affidavit was filed at
-least 30 days prior to the start of the next opt-out period.
-
-If a provider retires, surrenders their license, or no longer wants to
-participate in the Medicare program, they must officially withdraw within 90
-days. DMEPOS suppliers must withdraw within 30 days.
+later than 90 days after the opt-out period's effective date. Opt-out
+statuses are effective for two years and automatically renew.
 
 Providers may \strong{NOT} opt-out if they intend to be a Medicare Advantage
 (Part C) provider or furnish services covered by traditional Medicare

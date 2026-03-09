@@ -7,6 +7,7 @@ utils::globalVariables(c(
   "arg",
   # <affiliations>
   # <clinicians>
+  # <laboratories>
   # <opt_out>
   # <order_refer>
   # <providers>
@@ -37,6 +38,7 @@ utils::globalVariables(c(
   "keyword",
   # <affiliations>
   # <clinicians>
+  # <laboratories>
   # <opt_out>
   # <order_refer>
   # <providers>

@@ -1,5 +1,8 @@
 #' @autoglobal
 rename_ <- function(x, NM) {
+  if (is.null(NM)) {
+    return(x)
+  }
   collapse::setrename(x, NM, .nse = FALSE)
   collapse::gv(x, unlist_(NM))
 }
@@ -95,7 +98,6 @@ map_na_if <- function(i) {
 
 #' @noRd
 search_in <- function(x, column, what) {
-
   search_in_impl <- function(x, column, what) {
     vctrs::vec_slice(x, vctrs::vec_in(x[[column]], collapse::funique(what)))
   }
