@@ -5,15 +5,11 @@ Helpers for use in constructing conditions in queries.
 ## Usage
 
 ``` r
-new_modifier(operator, value)
-
-is_modifier(x)
-
 greater_than(x, or_equal = FALSE)
 
 less_than(x, or_equal = FALSE)
 
-between(x, y, negate = FALSE)
+between(x, negate = FALSE)
 
 starts_with(x)
 
@@ -21,32 +17,28 @@ ends_with(x)
 
 contains(x)
 
-equals(x, negate = FALSE)
+equal(x)
 
-any_of(x, negate = FALSE)
+not_equal(x)
+
+any_of(x)
+
+none_of(x)
 ```
 
 ## Arguments
 
-- operator:
-
-  input
-
-- value:
-
-  input
-
-- x, y:
+- x:
 
   input
 
 - or_equal:
 
-  `<lgl>` append `=`
+  `<lgl>` append `=` to `greater_than()`/`less_than()`
 
 - negate:
 
-  `<lgl>` prepend `NOT`
+  `<lgl>` prepend `NOT` to `between()`
 
 ## Value
 
@@ -65,24 +57,24 @@ format.
 greater_than(1000)
 #> <modifier>
 #> Operator: >
-#> Values: 1000
+#> Value: 1000
 greater_than(0.125, or_equal = TRUE)
 #> <modifier>
 #> Operator: >=
-#> Values: 0.125
+#> Value: 0.125
 less_than(1000)
 #> <modifier>
 #> Operator: <
-#> Values: 1000
+#> Value: 1000
 less_than(0.125, or_equal = TRUE)
 #> <modifier>
 #> Operator: <=
-#> Values: 0.125
-between(1000, 1100)
+#> Value: 0.125
+between(c(1000, 1100))
 #> <modifier>
 #> Operator: BETWEEN
 #> Values: 1000 and 1100
-between(0.125, 2, negate = TRUE)
+between(c(0.125, 2), negate = TRUE)
 #> <modifier>
 #> Operator: NOT+BETWEEN
 #> Values: 0.125 and 2
@@ -98,20 +90,20 @@ contains("baz")
 #> <modifier>
 #> Operator: CONTAINS
 #> Value: baz
-equals(1000)
+equal(1000)
 #> <modifier>
 #> Operator: =
-#> Values: 1000
-equals(1000, negate = TRUE)
+#> Value: 1000
+not_equal(1000)
 #> <modifier>
 #> Operator: <>
-#> Values: 1000
+#> Value: 1000
 any_of(state.abb[10:15])
 #> <modifier>
 #> Operator: IN
 #> Values: GA, HI, ID, IL, IN, and IA
-any_of(state.abb[10:15], negate = TRUE)
+none_of(state.abb[1:5])
 #> <modifier>
 #> Operator: NOT+IN
-#> Values: GA, HI, ID, IL, IN, and IA
+#> Values: AL, AK, AZ, AR, and CA
 ```
