@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9020 (2026-03-09)
+
+- refactored
+  [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
+- added Provider Type Code Reference dataset
+
 ## provider 0.0.1.9019 (2026-03-08)
 
 - refactored

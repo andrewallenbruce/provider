@@ -19,7 +19,7 @@ reassign their billing to, including individual employer association counts."><m
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,14 +77,10 @@ reassign their billing to, including individual employer association counts.</p>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enid_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  entry <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_state <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -93,81 +89,100 @@ reassign their billing to, including individual employer association counts.</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> 10-digit National Provider Identifier</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 10-digit National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> 10-digit PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> 15-digit Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-last">first, last<a class="anchor" aria-label="anchor" href="#arg-first-last"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> Provider's name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> Enrollment state abbreviation</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Enrollment state abbreviation</p></dd>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Individual</strong> Enrollment specialty</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Enrollment specialty</p></dd>
 
 
-<dt id="arg-organization">organization<a class="anchor" aria-label="anchor" href="#arg-organization"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Organizational</strong> Legal business name</p></dd>
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Legal business name</p></dd>
 
 
-<dt id="arg-pac-org">pac_org<a class="anchor" aria-label="anchor" href="#arg-pac-org"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Organizational</strong> 10-digit PECOS Associate Control ID</p></dd>
+<dt id="arg-org-pac">org_pac<a class="anchor" aria-label="anchor" href="#arg-org-pac"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
 
 
-<dt id="arg-enid-org">enid_org<a class="anchor" aria-label="anchor" href="#arg-enid-org"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Organizational</strong> 15-digit Medicare Enrollment ID</p></dd>
+<dt id="arg-org-enid">org_enid<a class="anchor" aria-label="anchor" href="#arg-org-enid"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
 
 
-<dt id="arg-state-org">state_org<a class="anchor" aria-label="anchor" href="#arg-state-org"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <strong>Organizational</strong> Enrollment state abbreviation</p></dd>
-
-
-<dt id="arg-entry">entry<a class="anchor" aria-label="anchor" href="#arg-entry"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Entry type, reassignment (<code>"R"</code>) or employment (<code>"E"</code>)</p></dd>
-
-
-<dt id="arg-tidy">tidy<a class="anchor" aria-label="anchor" href="#arg-tidy"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> // <strong>default:</strong> <code>TRUE</code> Tidy output</p></dd>
-
-
-<dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> // <strong>default:</strong> <code>TRUE</code> Remove empty rows and columns</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Empty</p></dd>
+<dt id="arg-org-state">org_state<a class="anchor" aria-label="anchor" href="#arg-org-state"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Enrollment state abbreviation</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td><em>Individual</em> National Provider Identifier</td></tr><tr><td><code>pac</code></td><td><em>Individual</em> PECOS Associate Control ID</td></tr><tr><td><code>enid</code></td><td><em>Individual</em> Medicare Enrollment ID</td></tr><tr><td><code>first</code></td><td><em>Individual</em> Provider's First Name</td></tr><tr><td><code>last</code></td><td><em>Individual</em> Provider's Last Name</td></tr><tr><td><code>associations</code></td><td>Number of Organizations <em>Individual</em> Reassigns Benefits To</td></tr><tr><td><code>pac_org</code></td><td><em>Organization's</em> PECOS Associate Control ID</td></tr><tr><td><code>enid_org</code></td><td><em>Organization's</em> Medicare Enrollment ID</td></tr><tr><td><code>state_org</code></td><td>State <em>Organization</em> Enrolled in Medicare</td></tr><tr><td><code>reassignments</code></td><td>Number of Individuals the <em>Organization</em> Accepts Reassignment From</td></tr><tr><td><code>entry</code></td><td>Whether Entry is for <em>Reassignment</em> or <em>Employment</em></td></tr></table></div>
     <div class="section level2">
-    <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
-
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
 <ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list" class="external-link">Medicare Revalidation Reassignment List API</a></p></li>
-</ul><p><em>Update Frequency:</em> <strong>Monthly</strong></p>
-    </div>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 14</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi    pac   enid  first last  state specialty reassignments org_name org_pac</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 10437… 4880… I201… Syeda Abbas NY    Optometry 1             <span style="color: #BB0000;">NA</span>       347660…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 18718… 9335… I201… Amir  Abba… VA    Podiatry  5             <span style="color: #BB0000;">NA</span>       903214…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 15982… 8224… I201… Kell… Abe   HI    Optometry 1             <span style="color: #BB0000;">NA</span>       165840…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 15685… 2769… I200… Ther… Abed  MI    Clinical… 15            <span style="color: #BB0000;">NA</span>       246673…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 14371… 6305… I200… Mich… Abis  NY    Internal… 1             <span style="color: #BB0000;">NA</span>       670906…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 10536… 5092… I201… Lori  Abney KY    Nurse Pr… 2             <span style="color: #BB0000;">NA</span>       771995…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 19321… 5472… I200… Lour… Abri… NY    Anesthes… 2             <span style="color: #BB0000;">NA</span>       549688…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 15184… 6507… I201… Cath… Acad… CA    Optometry 3             <span style="color: #BB0000;">NA</span>       701292…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 13164… 4385… I201… Megan Acke… CA    Chiropra… 2             <span style="color: #BB0000;">NA</span>       680087…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 13669… 7495… I202… Domi… Acqu… IN    Family P… 1             <span style="color: #BB0000;">NA</span>       670982…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: org_enid &lt;chr&gt;, org_state &lt;chr&gt;, associations &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   type &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20200929003184"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Query returned <span style="font-weight: bold;">0</span> results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">9830437441</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">2</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi     pac   enid  first last  state specialty reassignments org_name org_pac</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 108315… 9830… I202… Joah  Alia… FL    Ophthalm… 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 108315… 9830… I202… Joah  Alia… FL    Ophthalm… 1             Clermon… 579929…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: org_enid &lt;chr&gt;, org_state &lt;chr&gt;, associations &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   type &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">3173525888</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>org_pac <span class="op">=</span> <span class="fl">3173525888</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">5</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 14</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi     pac   enid  first last  state specialty reassignments org_name org_pac</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 108315… 9830… I202… Joah  Alia… FL    Ophthalm… 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 187104… 1850… I201… Kyle  Bett… FL    Optometry 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 185133… 6305… I201… Craig Cole  FL    Ophthalm… 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 176047… 3577… I201… Rich… Jabl… FL    Ophthalm… 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 143733… 8224… I201… Ashl… Royce FL    Optometry 5             <span style="color: #BB0000;">NA</span>       317352…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: org_enid &lt;chr&gt;, org_state &lt;chr&gt;, associations &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   type &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
