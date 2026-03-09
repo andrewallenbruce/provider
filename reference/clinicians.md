@@ -125,52 +125,52 @@ with the columns:
 clinicians()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 25
-#>    npi       pac   enid  last  first middle suffix gender credential grad_school
-#>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
-#>  1 10030001… 7517… I201… ENKE… ARDA… NA     NA     M      MD         OTHER      
-#>  2 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
-#>  3 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
-#>  4 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
-#>  5 10030001… 9931… I201… KHAL… RASH… NA     NA     M      MD         OTHER      
-#>  6 10030004… 9133… I201… VELO… JENN… A      NA     F      MD         TOLEDO MED…
-#>  7 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
-#>  8 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
-#>  9 10030004… 0446… I200… ROTH… KEVIN B      NA     M      MD         OHIO STATE…
-#> 10 10030005… 2163… I200… SEMO… AMAN… M      NA     F      DO         LAKE ERIE …
-#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
-#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
-#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
-#> #   ind_par <chr>, grp_par <chr>
+#>    npi        pac      enid  last  first middle suffix gender cred  school year 
+#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
+#>  1 1003000126 7517003… I201… ENKE… ARDA… NA     NA     M      MD    OTHER  1994 
+#>  2 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
+#>  3 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
+#>  4 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
+#>  5 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
+#>  6 1003000423 9133397… I201… VELO… JENN… A      NA     F      MD    TOLED… 2007 
+#>  7 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
+#>  8 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
+#>  9 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
+#> 10 1003000530 2163575… I200… SEMO… AMAN… M      NA     F      DO    LAKE … 2006 
+#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
+#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
+#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
+#> #   grp <chr>
 
 clinicians(enid = "I20081002000549")
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 25
-#>   npi        pac   enid  last  first middle suffix gender credential grad_school
-#>   <chr>      <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
-#> 1 1407031495 8022… I200… MCCU… DORO… E      NA     F      AU         OTHER      
-#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
-#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
-#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
-#> #   ind_par <chr>, grp_par <chr>
+#>   npi        pac       enid  last  first middle suffix gender cred  school year 
+#>   <chr>      <chr>     <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
+#> 1 1407031495 80221861… I200… MCCU… DORO… E      NA     F      AU    OTHER  2008 
+#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
+#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
+#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
+#> #   grp <chr>
 
 clinicians(first = "ETAN")
 #> ✔ Query returned 11 results.
 #> # A tibble: 11 × 25
-#>    npi       pac   enid  last  first middle suffix gender credential grad_school
-#>    <chr>     <chr> <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr>      <chr>      
-#>  1 10030118… 4587… I201… SPIRA ETAN  NA     NA     M      MD         NEW YORK U…
-#>  2 10030118… 4587… I201… SPIRA ETAN  NA     NA     M      MD         NEW YORK U…
-#>  3 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
-#>  4 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
-#>  5 12354266… 0244… I202… SUGA… ETAN  NA     NA     M      NA         ALBERT EIN…
-#>  6 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
-#>  7 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
-#>  8 14071762… 9638… I202… EITC… ETAN  NA     NA     M      MD         COLUMBIA U…
-#>  9 15283017… 7113… I201… MARKS ETAN  ARIEL  NA     M      DO         NOVA SOUTH…
-#> 10 15283017… 7113… I202… MARKS ETAN  ARIEL  NA     M      DO         NOVA SOUTH…
-#> 11 16990407… 7618… I202… DAYAN ETAN  NA     NA     M      MD         STATE UNIV…
-#> # ℹ 15 more variables: grad_year <chr>, specialty <chr>, spec_other <chr>,
-#> #   telehealth <chr>, facility_name <chr>, org_pac <chr>, org_mem <chr>,
-#> #   add_1 <chr>, add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>,
-#> #   ind_par <chr>, grp_par <chr>
+#>    npi        pac      enid  last  first middle suffix gender cred  school year 
+#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
+#>  1 1003011891 4587858… I201… SPIRA ETAN  NA     NA     M      MD    NEW Y… 2007 
+#>  2 1003011891 4587858… I201… SPIRA ETAN  NA     NA     M      MD    NEW Y… 2007 
+#>  3 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
+#>  4 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
+#>  5 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
+#>  6 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
+#>  7 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
+#>  8 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
+#>  9 1528301728 7113252… I201… MARKS ETAN  ARIEL  NA     M      DO    NOVA … 2013 
+#> 10 1528301728 7113252… I202… MARKS ETAN  ARIEL  NA     M      DO    NOVA … 2013 
+#> 11 1699040790 7618254… I202… DAYAN ETAN  NA     NA     M      MD    STATE… 2012 
+#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
+#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
+#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
+#> #   grp <chr>
 ```

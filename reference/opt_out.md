@@ -1,6 +1,6 @@
-# Providers Opted Out of Medicare
+# Opt-Out Providers
 
-Access information on providers who have decided not to participate in
+Information on providers who have decided not to participate in
 Medicare.
 
 ## Usage
@@ -23,7 +23,7 @@ opt_out(
 
 - npi:
 
-  `<int>` Individual National Provider Identifier
+  `<int>` National Provider Identifier
 
 - first, last:
 
@@ -56,28 +56,11 @@ opt_out(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-with the columns:
-
-|                     |                                               |
-|---------------------|-----------------------------------------------|
-| **Field**           | **Description**                               |
-| `npi`               | 10-digit NPI                                  |
-| `first`             | Opt-out provider's first name                 |
-| `last`              | Opt-out provider's last name                  |
-| `specialty`         | Opt-out provider's specialty                  |
-| `order_refer`       | Indicates if the provider can order and refer |
-| `optout_start_date` | Date that provider's Opt-Out period begins    |
-| `optout_end_date`   | Date that provider's Opt-Out period ends      |
-| `last_updated`      | Date information was last updated             |
-| `address`           | Opt-out provider's street address             |
-| `city`              | Opt-out provider's city                       |
-| `state`             | Opt-out provider's state                      |
-| `zip`               | Opt-out provider's zip code                   |
 
 ## Opting Out
 
 Providers who do not wish to enroll in the Medicare program may
-“opt-out”, meaning neither they nor the beneficiary can bill Medicare
+"opt-out", meaning neither they nor the beneficiary can bill Medicare
 for services rendered.
 
 Instead, a private contract between provider and beneficiary is signed,
@@ -90,25 +73,14 @@ To opt out, a provider must:
 
 - Submit an **opt-out affidavit** to Medicare
 
-- Enter into a **private contract** with their Medicare patients,
-  reflecting the agreement that they will pay out-of-pocket and that no
-  one will submit the bill to Medicare for reimbursement
+- Enter into a **private contract** with their Medicare patients
 
 ## Opt-Out Periods
 
 Opt-out periods last for two years and cannot be terminated early unless
 the provider is opting out for the very first time and terminates the
 opt-out no later than 90 days after the opt-out period's effective date.
-
-Opt-out statuses are also effective for two years and automatically
-renew. Providers that do not want to extend their opt-out status at the
-end of an opt-out period may cancel by notifying all MACs an affidavit
-was filed at least 30 days prior to the start of the next opt-out
-period.
-
-If a provider retires, surrenders their license, or no longer wants to
-participate in the Medicare program, they must officially withdraw
-within 90 days. DMEPOS suppliers must withdraw within 30 days.
+Opt-out statuses are effective for two years and automatically renew.
 
 Providers may **NOT** opt-out if they intend to be a Medicare Advantage
 (Part C) provider or furnish services covered by traditional Medicare
@@ -125,7 +97,7 @@ fee-for-service (Part B).
 opt_out()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 13
-#>    npi   first last  specialty date_start date_end last_update add1  add2  city 
+#>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
 #>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #>  1 1720… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2026   1629… P O … GLAD…
 #>  2 1811… Kevin Carl… Internal… 7/1/2010   7/1/2026 8/15/2024   1070… NA    COLU…
@@ -142,7 +114,7 @@ opt_out()
 opt_out(npi = 1043522824)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 13
-#>   npi    first last  specialty date_start date_end last_update add1  add2  city 
+#>   npi    first last  specialty date_start date_end last_update add_1 add_2 city 
 #>   <chr>  <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #> 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
@@ -150,7 +122,7 @@ opt_out(npi = 1043522824)
 opt_out(state = "AK")
 #> ✔ Query returned 256 results.
 #> # A tibble: 256 × 13
-#>    npi   first last  specialty date_start date_end last_update add1  add2  city 
+#>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
 #>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #>  1 1265… Henry Chap… Physicia… 4/1/2012   4/1/2026 5/15/2024   3300… STE … ANCH…
 #>  2 1487… Ann   Stoc… Clinical… 4/1/2012   4/1/2026 5/15/2024   505 … STE … ANCH…
@@ -168,7 +140,7 @@ opt_out(state = "AK")
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ Query returned 790 results.
 #> # A tibble: 790 × 13
-#>    npi   first last  specialty date_start date_end last_update add1  add2  city 
+#>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
 #>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #>  1 1720… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2026   1629… P O … GLAD…
 #>  2 1598… Mart… Leat… Psychiat… 4/1/2012   4/1/2026 10/15/2024  1314… #5101 SAN …

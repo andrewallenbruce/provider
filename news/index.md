@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9023 (2026-03-09)
+
+- refactored
+  [`laboratories()`](https://andrewallenbruce.github.io/provider/reference/laboratories.md)
+
 ## provider 0.0.1.9022 (2026-03-09)
 
 - spring cleaning

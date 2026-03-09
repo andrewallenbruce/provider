@@ -1,10 +1,8 @@
 # Hospitals Enrolled in Medicare
 
-Access information on all hospitals currently enrolled in Medicare. Data
-returned includes the hospital's sub-group types, legal business name,
-doing-business-as name, organization type and address.
-
-*Update Frequency:* **Monthly**
+Hospitals currently enrolled in Medicare. Data includes the hospital's
+sub-group types, legal business name, doing-business-as name,
+organization type and address.
 
 ## Usage
 
@@ -245,10 +243,10 @@ with the columns:
 | `subgroup`          | Hospital's Subgroup/Unit Designations, REH Conversion Status   |
 | `other`             | If `subgroup` is `"Other"`, description of Subgroup/Unit       |
 
-## Links
+## References
 
-- [Hospital
-  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+- [Hospital Enrollments
+  API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 
 ## Examples
 

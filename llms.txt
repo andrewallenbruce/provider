@@ -792,7 +792,7 @@ Access current administrative healthcare provider data.
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
-  : Providers Opted Out of Medicare
+  : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
   : Order and Referral Eligibility
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
