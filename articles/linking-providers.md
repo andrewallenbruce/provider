@@ -33,10 +33,8 @@ vctrs::vec_rbind(
   opt_all_caps()
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `dplyr::across(dplyr::where(is.character), na_blank)`.
-    #> Caused by error:
-    #> ! object 'na_blank' not found
+    #> Error in `display_long()`:
+    #> ! could not find function "display_long"
 
   
 
@@ -60,10 +58,8 @@ affiliations(pac = 7810891009) |>
   opt_all_caps()
 ```
 
-    #> Error in `map()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `hospitals()`:
-    #> ! object 'sg' not found
+    #> Error in `display_long()`:
+    #> ! could not find function "display_long"
 
   
 

@@ -51,12 +51,12 @@ affiliations(
 
 - facility_ccn:
 
-  `<chr>` CCN of `facility_type` column's facility *or* of a *unit*
+  `<chr>` CCN of `facility_type` column's facility **or** of a **unit**
   within the hospital where the individual provider provides services.
 
 - parent_ccn:
 
-  `<chr>` CCN of the *primary* hospital containing the unit where the
+  `<chr>` CCN of the **primary** hospital containing the unit where the
   individual provider provides services.
 
 ## Value

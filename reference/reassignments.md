@@ -118,8 +118,18 @@ reassignments()
 #> # ℹ 4 more variables: org_enid <chr>, org_state <chr>, associations <chr>,
 #> #   type <chr>
 
-reassignments(enid = "I20200929003184")
-#> ✖ Query returned 0 results.
+reassignments(org_enid = "I20070209000135")
+#> ✔ Query returned 5 results.
+#> # A tibble: 5 × 14
+#>   npi     pac   enid  first last  state specialty reassignments org_name org_pac
+#>   <chr>   <chr> <chr> <chr> <chr> <chr> <chr>     <chr>         <chr>    <chr>  
+#> 1 108315… 9830… I202… Joah  Alia… FL    Ophthalm… 5             NA       317352…
+#> 2 187104… 1850… I201… Kyle  Bett… FL    Optometry 5             NA       317352…
+#> 3 185133… 6305… I201… Craig Cole  FL    Ophthalm… 5             NA       317352…
+#> 4 176047… 3577… I201… Rich… Jabl… FL    Ophthalm… 5             NA       317352…
+#> 5 143733… 8224… I201… Ashl… Royce FL    Optometry 5             NA       317352…
+#> # ℹ 4 more variables: org_enid <chr>, org_state <chr>, associations <chr>,
+#> #   type <chr>
 
 reassignments(pac = 9830437441)
 #> ✔ Query returned 2 results.

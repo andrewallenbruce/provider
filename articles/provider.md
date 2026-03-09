@@ -168,8 +168,6 @@ nppes(npi = "O12345678912")
 
 # Must pass Luhn check
 pending(npi = 001234569123, type = "P")
-#> Error in `tidyr::unnest()`:
-#> ! Can't combine `y[[1]]` <character> and `y[[2]]` <double>.
 ```
 
   
