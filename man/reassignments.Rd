@@ -68,7 +68,7 @@ reassign their billing to, including individual employer association counts.
 \examples{
 reassignments()
 
-reassignments(enid = "I20200929003184")
+reassignments(org_enid = "I20070209000135")
 
 reassignments(pac = 9830437441)
 

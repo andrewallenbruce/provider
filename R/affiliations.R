@@ -25,9 +25,9 @@
 #'
 #'
 #' @param facility_ccn `<chr>` CCN of `facility_type` column's
-#'    facility *or* of a *unit* within the hospital where the individual
+#'    facility **or** of a **unit** within the hospital where the individual
 #'    provider provides services.
-#' @param parent_ccn `<chr>` CCN of the *primary* hospital containing the
+#' @param parent_ccn `<chr>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
 #'
 #' @returns A [tibble][tibble::tibble-package]
@@ -69,8 +69,7 @@ affiliations <- function(
     facility_type_certification_number = parent_ccn
   )
 
-  BASE <- base_url("affiliations")
-  LIMIT <- limit("affiliations")
+  .c(BASE, LIMIT, NM) %=% constants("affiliations")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -89,7 +88,7 @@ affiliations <- function(
     res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_affiliations()
+      rename_(NM)
 
     return(res)
   }
@@ -132,7 +131,7 @@ affiliations <- function(
     res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_affiliations()
+      rename_(NM)
 
     return(res)
   }
@@ -160,27 +159,7 @@ affiliations <- function(
   parallel_results(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_affiliations()
-}
-
-#' @autoglobal
-#' @noRd
-rename_affiliations <- function(x) {
-  NM <- c(
-    npi = "npi",
-    ind_pac_id = "pac",
-    provider_last_name = "last",
-    provider_first_name = "first",
-    provider_middle_name = "middle",
-    suff = "suffix",
-    facility_type = "facility_type",
-    facility_affiliations_certification_number = "facility_ccn",
-    facility_type_certification_number = "parent_ccn"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }
 
 #' @autoglobal

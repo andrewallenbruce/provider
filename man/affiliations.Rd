@@ -36,10 +36,10 @@ affiliations(
 }}
 
 \item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} column's
-facility \emph{or} of a \emph{unit} within the hospital where the individual
+facility \strong{or} of a \strong{unit} within the hospital where the individual
 provider provides services.}
 
-\item{parent_ccn}{\verb{<chr>} CCN of the \emph{primary} hospital containing the
+\item{parent_ccn}{\verb{<chr>} CCN of the \strong{primary} hospital containing the
 unit where the individual provider provides services.}
 }
 \value{

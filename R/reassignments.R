@@ -41,7 +41,7 @@
 #' @examples
 #' reassignments()
 #'
-#' reassignments(enid = "I20200929003184")
+#' reassignments(org_enid = "I20070209000135")
 #'
 #' reassignments(pac = 9830437441)
 #'
@@ -62,7 +62,6 @@ reassignments <- function(
   org_enid = NULL,
   org_state = NULL
 ) {
-
   args <- params(
     `Individual NPI` = npi,
     `Individual PAC ID` = pac,
@@ -77,8 +76,7 @@ reassignments <- function(
     `Group State Code` = org_state
   )
 
-  BASE <- base_url("reassignments")
-  LIMIT <- limit("reassignments")
+  .c(BASE, LIMIT, NM) %=% constants("reassignments")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -89,7 +87,7 @@ reassignments <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_reassignments()
+      rename_(NM)
 
     return(res)
   }
@@ -123,7 +121,7 @@ reassignments <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_reassignments()
+      rename_(NM)
 
     return(res)
   }
@@ -145,30 +143,5 @@ reassignments <- function(
   parallel_request(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_reassignments()
-}
-
-#' @autoglobal
-#' @noRd
-rename_reassignments <- function(x) {
-  NM <- c(
-    `Individual NPI` = "npi",
-    `Individual PAC ID` = "pac",
-    `Individual Enrollment ID` = "enid",
-    `Individual First Name` = "first",
-    `Individual Last Name` = "last",
-    `Individual State Code` = "state",
-    `Individual Specialty Description` = "specialty",
-    `Group Reassignments and Physician Assistants` = "reassignments",
-    `Group Legal Business Name` = "org_name",
-    `Group PAC ID` = "org_pac",
-    `Group Enrollment ID` = "org_enid",
-    `Group State Code` = "org_state",
-    `Individual Total Employer Associations` = "associations",
-    `Record Type` = "type"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }

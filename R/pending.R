@@ -61,44 +61,4 @@ pending <- function(
     "LAST_NAME"  , last  ,
     "FIRST_NAME" , first
   )
-
-  if (type == "N") {
-    response <- httr2::req_perform(httr2::request(build_url("npe", args)))
-  }
-  if (type == "P") {
-    response <- httr2::req_perform(httr2::request(build_url("ppe", args)))
-  }
-
-  if (vctrs::vec_is_empty(response$body)) {
-    cli_args <- dplyr::tribble(
-      ~x      , ~y    ,
-      "type"  , type  ,
-      "npi"   , npi   ,
-      "first" , first ,
-      "last"  , last
-    ) |>
-      tidyr::unnest(cols = c(y))
-
-    format_cli(cli_args)
-    return(invisible(NULL))
-  }
-
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::mutate(
-        type = dplyr::if_else(type == "P", "Physician", "Non-Physician")
-      ) |>
-      cols_pen()
-  }
-  return(results)
-}
-
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-cols_pen <- function(df) {
-  cols <- c('npi', 'first' = 'first_name', 'last' = 'last_name', 'type')
-  df |> dplyr::select(dplyr::any_of(cols))
 }

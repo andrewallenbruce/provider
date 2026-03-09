@@ -222,47 +222,4 @@ hospitals <- function(
     "SUBGROUP %2D SPECIALTY HOSPITAL"  , sg$spec        ,
     "SUBGROUP %2D OTHER"               , sg$other
   )
-
-  response <- httr2::request(build_url("hos", args)) |>
-    httr2::req_perform()
-
-  if (vctrs::vec_is_empty(response$body)) {
-    cli_args <- dplyr::tribble(
-      ~x               , ~y             ,
-      "npi"            , npi            ,
-      "facility_ccn"   , facility_ccn   ,
-      "enid_org"       , enid_org       ,
-      "enid_state"     , enid_state     ,
-      "specialty_code" , specialty_code ,
-      "pac_org"        , pac_org        ,
-      "organization"   , organization   ,
-      "dba"            , dba            ,
-      "city"           , city           ,
-      "state"          , state          ,
-      "zip"            , zip            ,
-      "registration"   , registration   ,
-      "multi_npi"      , multi_npi      ,
-      "reh"            , reh            ,
-      "gen"            , sg$gen         ,
-      "acute"          , sg$acute       ,
-      "alc_drug"       , sg$alc_drug    ,
-      "child"          , sg$child       ,
-      "long"           , sg$long        ,
-      "psych"          , sg$psych       ,
-      "rehab"          , sg$rehab       ,
-      "short"          , sg$short       ,
-      "swing"          , sg$swing       ,
-      "psych_unit"     , sg$psych_unit  ,
-      "rehab_unit"     , sg$rehab_unit  ,
-      "spec"           , sg$spec        ,
-      "other"          , sg$other
-    ) |>
-      tidyr::unnest(cols = c(y))
-
-    format_cli(cli_args)
-    return(invisible(NULL))
-  }
-
-  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-  return(results)
 }

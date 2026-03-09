@@ -54,10 +54,7 @@ parallel_request <- function(x, query = NULL) {
   purrr::map(x, httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     httr2::resps_successes() |>
-    purrr::map(function(x) {
-      parse_string(x, query = query)
-    }) |>
-    collapse::rowbind()
+    httr2::resps_data(function(resp) parse_string(resp, query = query))
 }
 
 #' @autoglobal

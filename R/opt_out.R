@@ -102,8 +102,7 @@ opt_out <- function(
     `Eligible to Order and Refer` = convert_lgl(order_refer)
   )
 
-  BASE <- base_url("opt_out")
-  LIMIT <- limit("opt_out")
+  .c(BASE, LIMIT, NM) %=% constants("opt_out")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -114,7 +113,7 @@ opt_out <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_opt_out()
+      rename_(NM)
 
     return(res)
   }
@@ -148,7 +147,7 @@ opt_out <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_opt_out()
+      rename_(NM)
 
     return(res)
   }
@@ -170,29 +169,5 @@ opt_out <- function(
   parallel_request(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_opt_out()
-}
-
-#' @autoglobal
-#' @noRd
-rename_opt_out <- function(x) {
-  NM <- c(
-    NPI = "npi",
-    `First Name` = "first",
-    `Last Name` = "last",
-    Specialty = "specialty",
-    `Optout Effective Date` = "date_start",
-    `Optout End Date` = "date_end",
-    `Last updated` = "last_update",
-    `First Line Street Address` = "add1",
-    `Second Line Street Address` = "add2",
-    `City Name` = "city",
-    `State Code` = "state",
-    `Zip code` = "zip",
-    `Eligible to Order and Refer` = "order_refer"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }

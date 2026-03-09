@@ -22,7 +22,6 @@ Imports:
     dplyr,
     fastplyr (>= 0.9.91),
     httr2 (>= 1.2.2),
-    janitor,
     lubridate,
     purrr (>= 1.2.1),
     RcppSimdJson (>= 0.1.15),
@@ -31,21 +30,13 @@ Imports:
     tidyr,
     vctrs (>= 0.7.1)
 Suggests: 
-    fuimus,
-    furrr,
-    future,
     glue,
     knitr,
     roxyglobals (>= 1.0.0),
-    rxnorm,
     strex,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Remotes: 
-    github::andrewallenbruce/fuimus,
-    github::anthonynorth/roxyglobals,
-    github::nt-williams/rxnorm
 Config/Needs/website: gt
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE

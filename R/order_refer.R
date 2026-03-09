@@ -84,8 +84,7 @@ order_refer <- function(
     HOSPICE = convert_lgl(hospice)
   )
 
-  BASE <- base_url("order_refer")
-  LIMIT <- limit("order_refer")
+  .c(BASE, LIMIT, NM) %=% constants("order_refer")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -96,7 +95,7 @@ order_refer <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_order_refer()
+      rename_(NM)
 
     return(res)
   }
@@ -130,7 +129,7 @@ order_refer <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_order_refer()
+      rename_(NM)
 
     return(res)
   }
@@ -152,24 +151,5 @@ order_refer <- function(
   parallel_request(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_order_refer()
-}
-
-#' @autoglobal
-#' @noRd
-rename_order_refer <- function(x) {
-  NM <- c(
-    NPI = "npi",
-    FIRST_NAME = "first",
-    LAST_NAME = "last",
-    PARTB = "part_b",
-    DME = "dme",
-    HHA = "hha",
-    PMD = "pmd",
-    HOSPICE = "hospice"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }

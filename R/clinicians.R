@@ -98,8 +98,7 @@ clinicians <- function(
     zip_code = zip
   )
 
-  BASE <- base_url("clinicians")
-  LIMIT <- limit("clinicians")
+  .c(BASE, LIMIT, NM) %=% constants("clinicians")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -118,7 +117,7 @@ clinicians <- function(
     res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_clinicians()
+      rename_(NM)
 
     return(res)
   }
@@ -160,7 +159,7 @@ clinicians <- function(
     res <- request_results(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_clinicians()
+      rename_(NM)
 
     return(res)
   }
@@ -188,41 +187,5 @@ clinicians <- function(
   parallel_results(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_clinicians()
-}
-
-#' @autoglobal
-#' @noRd
-rename_clinicians <- function(x) {
-  NM <- c(
-    npi = "npi",
-    ind_pac_id = "pac",
-    ind_enrl_id = "enid",
-    provider_last_name = "last",
-    provider_first_name = "first",
-    provider_middle_name = "middle",
-    suff = "suffix",
-    gndr = "gender",
-    cred = "credential",
-    med_sch = "grad_school",
-    grd_yr = "grad_year",
-    pri_spec = "specialty",
-    sec_spec_all = "spec_other",
-    telehlth = "telehealth",
-    facility_name = "facility_name",
-    org_pac_id = "org_pac",
-    num_org_mem = "org_mem",
-    adr_ln_1 = "add_1",
-    adr_ln_2 = "add_2",
-    citytown = "city",
-    state = "state",
-    zip_code = "zip",
-    telephone_number = "phone",
-    ind_assgn = "ind_par",
-    grp_assgn = "grp_par"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }

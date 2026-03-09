@@ -190,13 +190,13 @@ nppes <- function(
     ) |>
       tidyr::unnest(cols = c(y))
 
-    format_cli(cli_args)
+    # format_cli(cli_args)
     return(invisible(NULL))
   }
 
   if (unnest) {
     results <- tidyr::unnest(results, c(basic, addresses)) |>
-      combine(address, c('address_1', 'address_2')) |>
+      # combine(address, c('address_1', 'address_2')) |>
       cols_nppes(1) |>
       dplyr::filter(purpose != "MAILING")
 
@@ -211,13 +211,13 @@ nppes <- function(
       tidyr::unnest_longer(ep, keep_empty = TRUE) |>
       tidyr::unpack(ep, names_sep = ".")
     if (tidy) {
-      results <- tidyup(
-        results,
-        dtype = 'ymd',
-        yn = c('sole_prop', 'org_part'),
-        cred = 'credential',
-        zip = 'zip'
-      )
+      # results <- tidyup(
+      #   results,
+      #   dtype = 'ymd',
+      #   yn = c('sole_prop', 'org_part'),
+      #   cred = 'credential',
+      #   zip = 'zip'
+      # )
 
       if (!rlang::has_name(results, "gender")) {
         results$gender <- "9"
@@ -233,7 +233,6 @@ nppes <- function(
       if (rlang::has_name(results, "tx_primary")) {
         results$tx_primary <- as.logical(results$tx_primary)
       }
-      if (na.rm) results <- narm(results)
     }
   }
   return(results)

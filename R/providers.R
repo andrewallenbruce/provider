@@ -76,8 +76,7 @@ providers <- function(
     ORG_NAME = org_name
   )
 
-  BASE <- base_url("providers")
-  LIMIT <- limit("providers")
+  .c(BASE, LIMIT, NM) %=% constants("providers")
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -88,7 +87,7 @@ providers <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_providers()
+      rename_(NM)
 
     return(res)
   }
@@ -122,7 +121,7 @@ providers <- function(
     res <- request_bare(url) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
-      rename_providers()
+      rename_(NM)
 
     return(res)
   }
@@ -144,27 +143,5 @@ providers <- function(
   parallel_request(urls) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
-    rename_providers()
-}
-
-#' @autoglobal
-#' @noRd
-rename_providers <- function(x) {
-  NM <- c(
-    NPI = "npi",
-    MULTIPLE_NPI_FLAG = "multi",
-    PECOS_ASCT_CNTL_ID = "pac",
-    ENRLMT_ID = "enid",
-    PROVIDER_TYPE_CD = "spec_code",
-    PROVIDER_TYPE_DESC = "spec_desc",
-    STATE_CD = "state",
-    LAST_NAME = "last",
-    FIRST_NAME = "first",
-    MDL_NAME = "middle",
-    ORG_NAME = "org_name"
-  )
-
-  collapse::setrename(x, NM, .nse = FALSE)
-
-  collapse::gv(x, unlist_(NM))
+    rename_(NM)
 }

@@ -87,14 +87,13 @@ offset <- function(n, limit, which = "size") {
   )
 }
 
-#' @autoglobal
 #' @noRd
-base_url <- function(set) {
+base_url <- function(endpoint) {
   a <- "https://data.cms.gov/"
   p <- \(id) paste0(a, "provider-data/api/1/datastore/query/", id, "/0?")
   m <- \(id) paste0(a, "data-api/v1/dataset/", id, "/data")
   switch(
-    set,
+    endpoint,
     affiliations = p("27ea-46a8"),
     clinicians = p("mj5m-pzi6"),
     providers = m("2457ea29-fc82-48b0-86ec-3b0755de7515"),
@@ -103,23 +102,25 @@ base_url <- function(set) {
     hospitals = m("f6f6505c-e8b0-4d57-b258-e2b94133aaf2"),
     laboratories = m("d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16"),
     reassignments = m("20f51cff-4137-4f3a-b6b7-bfc9ad57983b"),
-    cli::cli_abort("{.arg set} not recognized")
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} not recognized")
   )
 }
 
-#' @autoglobal
 #' @noRd
-limit <- function(set) {
+limit <- function(endpoint) {
   switch(
-    set,
+    endpoint,
     affiliations = ,
-    clinicians = 1500,
-    providers = ,
-    opt_out = ,
-    order_refer = ,
-    hospitals = ,
-    laboratories = ,
-    reassignments = 5000,
-    cli::cli_abort("{.arg set} not recognized")
+    clinicians = 1500L,
+    5000L
+  )
+}
+
+#' @noRd
+constants <- function(endpoint) {
+  list(
+    url = base_url(endpoint),
+    limit = limit(endpoint),
+    names = renames(endpoint)
   )
 }
