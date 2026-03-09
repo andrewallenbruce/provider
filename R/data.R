@@ -1,0 +1,13 @@
+#' Provider Type Code Reference Table
+#'
+#' @format ## `provider_type_code`
+#' A data frame with 108 rows and 3 columns:
+#' \describe{
+#'   \item{code}{State code}
+#'   \item{abbr}{State abbreviation}
+#'   \item{name}{State full name}
+#'   ...
+#' }
+#' @keywords internal
+#' @source https://data.cms.gov/sites/default/files/2025-10/1e42b271-dfe0-4c64-8022-0c507993667e/PPEF_Data_Dictionary.pdf
+"provider_type_code"

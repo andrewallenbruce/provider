@@ -12,44 +12,32 @@ reassignments(
   last = NULL,
   state = NULL,
   specialty = NULL,
-  organization = NULL,
-  pac_org = NULL,
-  enid_org = NULL,
-  state_org = NULL,
-  entry = NULL,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  org_name = NULL,
+  org_pac = NULL,
+  org_enid = NULL,
+  org_state = NULL
 )
 }
 \arguments{
-\item{npi}{\verb{<chr>} \strong{Individual} 10-digit National Provider Identifier}
+\item{npi}{\verb{<chr>} 10-digit National Provider Identifier}
 
-\item{pac}{\verb{<chr>} \strong{Individual} 10-digit PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} \strong{Individual} 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
 
-\item{first, last}{\verb{<chr>} \strong{Individual} Provider's name}
+\item{first, last}{\verb{<chr>} Provider's name}
 
-\item{state}{\verb{<chr>} \strong{Individual} Enrollment state abbreviation}
+\item{state}{\verb{<chr>} Enrollment state abbreviation}
 
-\item{specialty}{\verb{<chr>} \strong{Individual} Enrollment specialty}
+\item{specialty}{\verb{<chr>} Enrollment specialty}
 
-\item{organization}{\verb{<chr>} \strong{Organizational} Legal business name}
+\item{org_name}{\verb{<chr>} Legal business name}
 
-\item{pac_org}{\verb{<chr>} \strong{Organizational} 10-digit PECOS Associate Control ID}
+\item{org_pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
 
-\item{enid_org}{\verb{<chr>} \strong{Organizational} 15-digit Medicare Enrollment ID}
+\item{org_enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
 
-\item{state_org}{\verb{<chr>} \strong{Organizational} Enrollment state abbreviation}
-
-\item{entry}{\verb{<chr>} Entry type, reassignment (\code{"R"}) or employment (\code{"E"})}
-
-\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE} Tidy output}
-
-\item{na.rm}{\verb{<chr>} // \strong{default:} \code{TRUE} Remove empty rows and columns}
-
-\item{...}{Empty}
+\item{org_state}{\verb{<chr>} Enrollment state abbreviation}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -77,21 +65,18 @@ Returns information about:
 It provides information regarding the physician and the group practice they
 reassign their billing to, including individual employer association counts.
 }
-\section{Links}{
-
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
-}
-
-\emph{Update Frequency:} \strong{Monthly}
-}
-
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+reassignments()
+
 reassignments(enid = "I20200929003184")
 
 reassignments(pac = 9830437441)
 
-reassignments(pac_org = 3173525888)
-\dontshow{\}) # examplesIf}
+reassignments(org_pac = 3173525888)
+
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
+}
 }

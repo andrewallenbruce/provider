@@ -163,7 +163,6 @@ utils::globalVariables(c(
   # <laboratories>
   # <nppes>
   # <pending>
-  # <reassignments>
   # <abb2full>
   "y",
   # <cms_update>

@@ -1,6 +1,6 @@
 ---
 title: "Overview of Provider"
-output: rmarkdown::html_vignette
+output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Overview of Provider}
   %\VignetteEngine{knitr::rmarkdown}

@@ -92,14 +92,14 @@ opt_out <- function(
 ) {
   args <- params(
     NPI = npi,
-    `First+Name` = first,
-    `Last+Name` = last,
+    `First Name` = first,
+    `Last Name` = last,
     Specialty = specialty,
-    `First+Line+Street+Address` = address,
-    `City+Name` = city,
-    `State+Code` = state,
-    `Zip+code` = zip,
-    `Eligible+to+Order+and+Refer` = convert_lgl(order_refer)
+    `First Line Street Address` = address,
+    `City Name` = city,
+    `State Code` = state,
+    `Zip code` = zip,
+    `Eligible to Order and Refer` = convert_lgl(order_refer)
   )
 
   BASE <- base_url("opt_out")
@@ -184,8 +184,8 @@ rename_opt_out <- function(x) {
     `Optout Effective Date` = "date_start",
     `Optout End Date` = "date_end",
     `Last updated` = "last_update",
-    `First Line Street Address` = "address1",
-    `Second Line Street Address` = "address2",
+    `First Line Street Address` = "add1",
+    `Second Line Street Address` = "add2",
     `City Name` = "city",
     `State Code` = "state",
     `Zip code` = "zip",
