@@ -1,12 +1,14 @@
-# provider
+# 
 
-> Providing easy access to [healthcare
-> provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-> through publicly available APIs.
+**provider** ![](reference/figures/logo.svg)
+
+> Tidy Healthcare Provider API Interface
+
+  
 
 ## 📦 Installation
 
-You can install **`provider`** from [GitHub](https://github.com/) with:
+You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -17,747 +19,301 @@ pak::pak("andrewallenbruce/provider")
 
 ``` r
 library(provider)
-library(dplyr)
-library(tidyr)
 ```
 
-### `affiliations()`
+#### Facility Affiliations
 
 ``` r
 affiliations(facility_ccn = 370781)
 ```
 
 ``` R
-#> # A tibble: 16 × 7
-#>    npi        pac        first     middle last        facility_type facility_ccn
-#>    <chr>      <chr>      <chr>     <chr>  <chr>       <fct>         <chr>       
-#>  1 1053547950 7618131160 AARON     S      SIZELOVE    Hospital      370781      
-#>  2 1083618003 6406913474 KEITH     J      KASSABIAN   Hospital      370781      
-#>  3 1225098460 2466474713 BRENDA    K      HUENERGARDT Hospital      370781      
-#>  4 1245239045 4082508833 STEVE     M      MADRID      Hospital      370781      
-#>  5 1316939622 2769376508 CHESTER   WRAY   BEAM        Hospital      370781      
-#>  6 1417376823 0941531362 MICHAEL   <NA>   TRAN        Hospital      370781      
-#>  7 1427045400 7517858608 THOMAS    <NA>   MCGARRY     Hospital      370781      
-#>  8 1487435053 8426405796 NICHOLAS  <NA>   RUSSENBERG… Hospital      370781      
-#>  9 1568453835 3870487739 DWAYNE    A      SCHMIDT     Hospital      370781      
-#> 10 1629043369 6103878764 JANA      NIKOLE MORRIS      Hospital      370781      
-#> 11 1659758472 3375853419 ALYSSA    B      MIZE        Hospital      370781      
-#> 12 1740291517 1052341575 WILLIAM   LANCE  GARNER      Hospital      370781      
-#> 13 1780762195 1052581154 CHRISTIAN L      KOOPMAN     Hospital      370781      
-#> 14 1790005809 2668699729 RYAN      B      HURST       Hospital      370781      
-#> 15 1891248191 1658620976 MATTHEW   I      ORGEL       Hospital      370781      
-#> 16 1922361740 1052633591 LYNNETTE  <NA>   MORRISON    Hospital      370781
+#> ✔ Query returned 15 results.
+
+#> # A tibble: 15 × 9
+#>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
+#>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
+#>  1 100330… 1254… LEE   NICO… <NA>   <NA>   Hospital      370781       <NA>      
+#>  2 101316… 6800… SEE   LEILA DANIE… <NA>   Hospital      370781       <NA>      
+#>  3 105354… 7618… SIZE… AARON S      <NA>   Hospital      370781       <NA>      
+#>  4 108361… 6406… KASS… KEITH J      <NA>   Hospital      370781       <NA>      
+#>  5 124523… 4082… MADR… STEVE M      <NA>   Hospital      370781       <NA>      
+#>  6 131693… 2769… BEAM  CHES… WRAY   <NA>   Hospital      370781       <NA>      
+#>  7 140790… 3870… FINCH COREY D      <NA>   Hospital      370781       <NA>      
+#>  8 142704… 7517… MCGA… THOM… <NA>   <NA>   Hospital      370781       <NA>      
+#>  9 148743… 8426… RUSS… NICH… <NA>   <NA>   Hospital      370781       <NA>      
+#> 10 156845… 3870… SCHM… DWAY… A      <NA>   Hospital      370781       <NA>      
+#> 11 162904… 6103… MORR… JANA  NIKOLE <NA>   Hospital      370781       <NA>      
+#> 12 171039… 9739… GRAH… TIMO… AARON  <NA>   Hospital      370781       <NA>      
+#> 13 171093… 2163… COST… RICH… F      JR.    Hospital      370781       <NA>      
+#> 14 180138… 9436… FONK… VEDM… <NA>   <NA>   Hospital      370781       <NA>      
+#> 15 192205… 9032… ARMOR JESS  F      <NA>   Hospital      370781       <NA>
 ```
 
-### `beneficiaries()`
+#### National Provider Catalog
 
 ``` r
-beneficiaries(
-  year   = 2023, 
-  period = "Year", 
-  level  = "County", 
-  state  = "GA", 
-  county = "Lowndes County") |>
-  glimpse()
+clinicians(npi = 1932365699) |> str()
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 26
-#> $ year              <int> 2023
-#> $ period            <ord> Year
-#> $ level             <ord> County
-#> $ state             <ord> GA
-#> $ state_name        <ord> Georgia
-#> $ county            <chr> "Lowndes County"
-#> $ fips              <chr> "13185"
-#> $ bene_total        <int> 20536
-#> $ bene_orig         <int> 11128
-#> $ bene_ma_oth       <int> 9408
-#> $ bene_total_aged   <int> 17059
-#> $ bene_aged_esrd    <int> 125
-#> $ bene_aged_no_esrd <int> 16933
-#> $ bene_total_dsb    <int> 3477
-#> $ bene_dsb_esrd     <int> 145
-#> $ bene_dsb_no_esrd  <int> 3333
-#> $ bene_total_ab     <int> 19048
-#> $ bene_ab_orig      <int> 9646
-#> $ bene_ab_ma_oth    <int> 9402
-#> $ bene_total_rx     <int> 14843
-#> $ bene_rx_pdp       <int> 5942
-#> $ bene_rx_mapd      <int> 8901
-#> $ bene_rx_lis_elig  <int> 5558
-#> $ bene_rx_lis_full  <int> 475
-#> $ bene_rx_lis_part  <int> 159
-#> $ bene_rx_lis_no    <int> 8651
+#> ✔ Query returned 1 result.
+
+#> tibble [1 × 25] (S3: tbl_df/tbl/data.frame)
+#>  $ npi          : chr "1932365699"
+#>  $ pac          : chr "0042370496"
+#>  $ enid         : chr "I20081115000066"
+#>  $ last         : chr "SMITH"
+#>  $ first        : chr "STEFAN"
+#>  $ middle       : chr "MICHAEL"
+#>  $ suffix       : chr NA
+#>  $ gender       : chr "M"
+#>  $ cred         : chr "OD"
+#>  $ school       : chr "ILLINOIS COLLEGE OF OPTOMETRY AT CHICAGO"
+#>  $ year         : chr "2008"
+#>  $ specialty    : chr "OPTOMETRY"
+#>  $ spec_other   : chr NA
+#>  $ telehealth   : chr NA
+#>  $ facility_name: chr "VEP IL OPTOMETRIC LLC"
+#>  $ org_pac      : chr "3678814217"
+#>  $ org_mems     : chr "25"
+#>  $ add_1        : chr "1001 CHARLESTON AVE E"
+#>  $ add_2        : chr NA
+#>  $ city         : chr "MATTOON"
+#>  $ state        : chr "IL"
+#>  $ zip          : chr "619386226"
+#>  $ phone        : chr "2172352020"
+#>  $ ind          : chr "Y"
+#>  $ grp          : chr "Y"
 ```
 
-### `clinicians()`
+#### Hospitals
 
 ``` r
-clinicians(npi = 1932365699) |> glimpse()
+hospitals(npi = 1720098791) |> str()
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 19
-#> $ npi           <chr> "1932365699"
-#> $ pac           <chr> "0042370496"
-#> $ enid          <chr> "I20171107000894"
-#> $ first         <chr> "STEFAN"
-#> $ middle        <chr> "MICHAEL"
-#> $ last          <chr> "SMITH"
-#> $ gender        <fct> Male
-#> $ credential    <chr> "OD"
-#> $ school        <chr> "ILLINOIS COLLEGE OF OPTOMETRY AT CHICAGO"
-#> $ grad_year     <int> 2008
-#> $ specialty     <chr> "OPTOMETRY"
-#> $ facility_name <chr> "LEE ANN HOVEN OD PC"
-#> $ pac_org       <chr> "5193882009"
-#> $ members_org   <int> 2
-#> $ address_org   <chr> "1165 S CAMINO DEL RIO SUITE 100"
-#> $ city_org      <chr> "DURANGO"
-#> $ state_org     <ord> CO
-#> $ zip_org       <chr> "813036824"
-#> $ phone_org     <chr> "9702478762"
+#> ✔ Query returned 1 result.
+
+#> tibble [1 × 39] (S3: tbl_df/tbl/data.frame)
+#>  $ enid          : chr "O20230310002325"
+#>  $ enid_state    : chr "GA"
+#>  $ spec_cd       : chr "00-24"
+#>  $ specialty     : chr "PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)"
+#>  $ npi           : chr "1720098791"
+#>  $ multi         : chr "N"
+#>  $ ccn           : chr "110779"
+#>  $ pac           : chr "7618950643"
+#>  $ org_name      : chr "IRWIN COUNTY HOSPITAL"
+#>  $ dba_name      : chr "PROGRESSIVE MEDICAL ENTERPRISE"
+#>  $ inc_date      : chr NA
+#>  $ inc_state     : chr "GA"
+#>  $ org_type      : chr "OTHER"
+#>  $ org_text      : chr "HOSPITAL AUTHORITY"
+#>  $ designation   : chr "N"
+#>  $ add_1         : chr "710 N IRWIN AVE"
+#>  $ add_2         : chr NA
+#>  $ city          : chr "OCILLA"
+#>  $ state         : chr "GA"
+#>  $ zip           : chr "317745011"
+#>  $ location_type : chr "OTHER HOSPITAL PRACTICE LOCATION"
+#>  $ location_text : chr "REH"
+#>  $ sub_general   : chr "N"
+#>  $ sub_acute     : chr "N"
+#>  $ sub_drug      : chr "N"
+#>  $ sub_child     : chr "N"
+#>  $ sub_long      : chr "N"
+#>  $ sub_psych     : chr "N"
+#>  $ sub_rehab     : chr "N"
+#>  $ sub_short     : chr "N"
+#>  $ sub_swing     : chr "N"
+#>  $ sub_psych_unit: chr "N"
+#>  $ sub_rehab_unit: chr "N"
+#>  $ sub_specialty : chr "N"
+#>  $ sub_other     : chr "N"
+#>  $ sub_otext     : chr NA
+#>  $ reh_ind       : chr "Y"
+#>  $ reh_date      : chr "2023-03-23"
+#>  $ old_ccn       : chr "110130"
 ```
 
-### `hospitals()`
+#### CLIA Laboratories
 
 ``` r
-hospitals(npi = 1720098791) |> glimpse()
+laboratories(ccn = "11D0265516") |> str()
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 22
-#> $ npi_org           <chr> "1720098791"
-#> $ pac_org           <chr> "7618950643"
-#> $ enid_org          <chr> "O20230310002325"
-#> $ enid_state        <ord> GA
-#> $ facility_ccn      <chr> "110779"
-#> $ organization      <chr> "IRWIN COUNTY HOSPITAL"
-#> $ doing_business_as <chr> "PROGRESSIVE MEDICAL ENTERPRISE"
-#> $ specialty_code    <chr> "00-24"
-#> $ specialty         <chr> "PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)"
-#> $ incorp_state      <ord> GA
-#> $ structure         <chr> "OTHER: HOSPITAL AUTHORITY"
-#> $ address           <chr> "710 N IRWIN AVE"
-#> $ city              <chr> "OCILLA"
-#> $ state             <ord> GA
-#> $ zip               <chr> "317745011"
-#> $ location_type     <chr> "OTHER HOSPITAL PRACTICE LOCATION: REH"
-#> $ registration      <fct> Non-Profit
-#> $ multi_npi         <lgl> FALSE
-#> $ reh_date          <date> 2023-03-23
-#> $ reh_ccns          <chr> "110130"
-#> $ reh_conversion    <lgl> TRUE
-#> $ subgroup          <fct> None
+#> ✔ Query returned 1 result.
+
+#> tibble [1 × 103] (S3: tbl_df/tbl/data.frame)
+#>  $ prv_cat       : chr "22"
+#>  $ prv_type      : chr "01"
+#>  $ chow_count    : chr "0"
+#>  $ chow_date     : chr NA
+#>  $ city          : chr "VALDOSTA"
+#>  $ pos           : chr "Y"
+#>  $ status        : chr "A"
+#>  $ county_ssa    : chr "700"
+#>  $ xref_ccn      : chr NA
+#>  $ cert_date     : chr "19960321"
+#>  $ eligible_ind  : chr "Y"
+#>  $ name          : chr "DANIEL FELDMAN MD"
+#>  $ mac_curr      : chr NA
+#>  $ vend          : chr NA
+#>  $ orig_date     : chr "19920901"
+#>  $ chow_prev_date: chr NA
+#>  $ mac_prev      : chr NA
+#>  $ ccn           : chr "11D0265516"
+#>  $ region        : chr "04"
+#>  $ skeleton      : chr "N"
+#>  $ state         : chr "GA"
+#>  $ state_ssa     : chr "11"
+#>  $ state_reg     : chr "001"
+#>  $ add_1         : chr "205 WOODROW WILSON DR"
+#>  $ phone_1       : chr "8032619888"
+#>  $ term_cd       : chr "17"
+#>  $ term_date     : chr "19980804"
+#>  $ cert_action   : chr "2"
+#>  $ ownership     : chr "04"
+#>  $ zip           : chr "31602"
+#>  $ fips_state    : chr "13"
+#>  $ fips_county   : chr "185"
+#>  $ cbsa_ind      : chr "U"
+#>  $ cbsa_cd       : chr "46660"
+#>  $ add_2         : chr NA
+#>  $ aff_1         : chr NA
+#>  $ aff_2         : chr NA
+#>  $ aff_3         : chr NA
+#>  $ aff_4         : chr NA
+#>  $ aff_5         : chr NA
+#>  $ aff_6         : chr NA
+#>  $ aff_7         : chr NA
+#>  $ aff_8         : chr NA
+#>  $ a2la_cred     : chr NA
+#>  $ a2la_date     : chr NA
+#>  $ a2la_ind      : chr "N"
+#>  $ aabb_cred     : chr NA
+#>  $ aabb_date     : chr NA
+#>  $ aabb_ind      : chr "N"
+#>  $ aoa_cred      : chr NA
+#>  $ aoa_date      : chr NA
+#>  $ aoa_ind       : chr "N"
+#>  $ ashi_cred     : chr NA
+#>  $ ashi_date     : chr NA
+#>  $ ashi_ind      : chr "N"
+#>  $ cap_cred      : chr NA
+#>  $ cap_date      : chr NA
+#>  $ cap_ind       : chr "N"
+#>  $ cola_cred     : chr NA
+#>  $ cola_date     : chr NA
+#>  $ cola_ind      : chr "N"
+#>  $ jcaho_cred    : chr NA
+#>  $ jcaho_date    : chr NA
+#>  $ jcaho_ind     : chr "N"
+#>  $ apl_date      : chr "19930120"
+#>  $ apl_type      : chr "1"
+#>  $ fac_type      : chr "21"
+#>  $ eff_date      : chr "19960829"
+#>  $ mail_date     : chr "19960925"
+#>  $ cert_type     : chr "1"
+#>  $ cls0          : chr "00"
+#>  $ cls1          : chr "00"
+#>  $ cls2          : chr "00"
+#>  $ cls3          : chr "00"
+#>  $ cls4          : chr NA
+#>  $ cls5          : chr NA
+#>  $ cls6          : chr NA
+#>  $ cls7          : chr NA
+#>  $ cls8          : chr NA
+#>  $ cls9          : chr NA
+#>  $ cls10         : chr NA
+#>  $ clia_88       : chr "00205114A3"
+#>  $ term_cd       : chr "17"
+#>  $ sched_cred    : chr NA
+#>  $ vol_cred      : chr "0"
+#>  $ vol_comp      : chr "0"
+#>  $ aff_count     : chr "0"
+#>  $ phone_2       : chr NA
+#>  $ fyend         : chr NA
+#>  $ multi         : chr "N"
+#>  $ hosp          : chr "N"
+#>  $ nonprof       : chr "N"
+#>  $ temp          : chr "N"
+#>  $ site_count    : chr "0"
+#>  $ vol_ppm       : chr "0"
+#>  $ name_2        : chr NA
+#>  $ rel_num       : chr NA
+#>  $ shared_lab    : chr "N"
+#>  $ shared_xref   : chr NA
+#>   [list output truncated]
 ```
 
-### `laboratories()`
+#### Opt-Out Affidavits
 
 ``` r
-laboratories(clia = "11D0265516") |> glimpse()
+opt_out(npi = 1043522824)
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 25
-#> $ clia_number           <chr> "11D0265516"
-#> $ provider_name         <chr> "DANIEL FELDMAN MD"
-#> $ certificate           <ord> Compliance
-#> $ clia_medicare         <chr> "00205114A3"
-#> $ effective_date        <date> 1996-08-29
-#> $ expiration_date       <date> 1998-08-04
-#> $ expired               <lgl> TRUE
-#> $ termination_reason    <ord> "Mail Returned No Forward Address Cert Ended (CL…
-#> $ status                <ord> In Compliance
-#> $ poc_ind               <lgl> TRUE
-#> $ type_of_action        <ord> Recertification
-#> $ ownership_type        <fct> Proprietary
-#> $ facility_type         <ord> Physician Office
-#> $ director_affiliations <int> 0
-#> $ address               <chr> "205 WOODROW WILSON DR"
-#> $ city                  <chr> "VALDOSTA"
-#> $ state                 <ord> GA
-#> $ zip                   <chr> "31602"
-#> $ phone                 <chr> "8032619888"
-#> $ orig_part_date        <date> 1992-09-01
-#> $ application_date      <date> 1993-01-20
-#> $ certification_date    <date> 1996-03-21
-#> $ mailed_date           <date> 1996-09-25
-#> $ region                <fct> Atlanta
-#> $ clia_class_current    <fct> CLIA Lab
+#> ✔ Query returned 1 result.
+
+#> # A tibble: 1 × 13
+#>   npi    first last  specialty date_start date_end last_update add_1 add_2 city 
+#>   <chr>  <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
+#> 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…
+#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
 
-### `nppes()`
+#### Ordering & Referral
 
 ``` r
-nppes(npi = 1497535637) |> glimpse()
+order_refer(npi = 1043522824)
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 23
-#> $ npi         <chr> "1497535637"
-#> $ entity_type <fct> Individual
-#> $ enum_date   <date> 2023-10-04
-#> $ cert_date   <date> 2023-10-05
-#> $ last_update <date> 2023-10-05
-#> $ status      <fct> Active
-#> $ first       <chr> "CARTER"
-#> $ last        <chr> "ADAMS"
-#> $ gender      <fct> Male
-#> $ credential  <chr> "NP-BC"
-#> $ sole_prop   <lgl> FALSE
-#> $ purpose     <fct> Practice
-#> $ address     <chr> "2501 N PATTERSON ST"
-#> $ city        <chr> "VALDOSTA"
-#> $ state       <ord> GA
-#> $ zip         <chr> "316021785"
-#> $ country     <chr> "US"
-#> $ phone       <chr> "229-433-1000"
-#> $ tx_code     <chr> "363L00000X"
-#> $ tx_primary  <lgl> TRUE
-#> $ tx_desc     <chr> "Nurse Practitioner"
-#> $ tx_license  <chr> "RN272237"
-#> $ tx_state    <ord> GA
+#> ✔ Query returned 1 result.
+
+#> # A tibble: 1 × 8
+#>   npi        first last  part_b dme   hha   pmd   hospice
+#>   <chr>      <chr> <chr> <chr>  <chr> <chr> <chr> <chr>  
+#> 1 1043522824 JAMES SMITH Y      Y     Y     Y     N
 ```
 
-### `open_payments()`
+#### Provider Enrollment
 
 ``` r
-open_payments(
-  year  = 2021, 
-  npi   = 1023630738, 
-  na.rm = TRUE) |> 
-  glimpse()
+providers(enid = "O20040610001257")
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 46
-#> $ program_year        <int> 2021
-#> $ npi                 <chr> "1023630738"
-#> $ covered_recipient   <fct> Non-Physician Practitioner
-#> $ first               <chr> "ALYSIA"
-#> $ middle              <chr> "MOTA"
-#> $ last                <chr> "SMITH"
-#> $ address             <chr> "610 N HOY ST"
-#> $ city                <chr> "BUFFALO"
-#> $ state               <ord> OK
-#> $ zip                 <chr> "73834"
-#> $ country             <chr> "United States"
-#> $ primary             <chr> "Physician Assistant"
-#> $ specialty           <chr> "Physician Assistants & Advanced Practice Nursing …
-#> $ license_state       <ord> OK
-#> $ physician_ownership <lgl> FALSE
-#> $ third_party_payment <chr> "No Third Party Payment"
-#> $ publish_date        <date> 2024-06-28
-#> $ publish_delay       <lgl> FALSE
-#> $ publish_dispute     <lgl> FALSE
-#> $ related_product     <lgl> TRUE
-#> $ payer_id            <chr> "100000866821"
-#> $ payer_sub           <chr> "Organon LLC"
-#> $ payer_name          <chr> "Organon LLC"
-#> $ payer_state         <ord> NJ
-#> $ payer_country       <chr> "United States"
-#> $ pay_form            <chr> "In-kind items and services"
-#> $ pay_nature          <chr> "Food and Beverage"
-#> $ pay_total           <dbl> 17.43
-#> $ pay_date            <date> 2021-08-25
-#> $ pay_count           <int> 1
-#> $ row_id              <int> 1
-#> $ group_id            <int> 1
-#> $ name                <chr> "NEXPLANON"
-#> $ covered             <lgl> TRUE
-#> $ type                <chr> "Drug"
-#> $ category            <chr> "CONTRACEPTIVES"
-#> $ ndc                 <chr> "78206-145-01"
-#> $ ndc.rxcui           <chr> "1111011"
-#> $ ndc.atc             <chr> "G03AC"
-#> $ ndc.status          <chr> "ACTIVE"
-#> $ ndc.brand_name      <chr> "NEXPLANON"
-#> $ ndc.drug_name       <chr> "etonogestrel 68 MG Drug Implant [Nexplanon]"
-#> $ ndc.atc_first       <chr> "genito urinary system and sex hormones"
-#> $ ndc.atc_second      <chr> "sex hormones and modulators of the genital system"
-#> $ ndc.atc_third       <chr> "hormonal contraceptives for systemic use"
-#> $ ndc.atc_fourth      <chr> "progestogens"
+#> ✔ Query returned 1 result.
+
+#> # A tibble: 1 × 11
+#>   npi        multi pac   enid  spec  specialty state last  first middle org_name
+#>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
+#> 1 1720098791 N     7618… O200… 12-70 PART B S… GA    <NA>  <NA>  <NA>   IRWIN C…
 ```
 
-### `opt_out()`
+#### Reassignments
 
 ``` r
-opt_out(npi = 1043522824) |> glimpse()
+reassignments(org_pac = 7719037548)
 ```
 
 ``` R
-#> Rows: 1
-#> Columns: 12
-#> $ npi               <chr> "1043522824"
-#> $ first             <chr> "James"
-#> $ last              <chr> "Smith"
-#> $ specialty         <chr> "Nurse Practitioner"
-#> $ order_refer       <lgl> TRUE
-#> $ optout_start_date <date> 2019-07-01
-#> $ optout_end_date   <date> 2025-07-01
-#> $ last_updated      <date> 2023-09-15
-#> $ address           <chr> "8585 E HARTFORD DR STE 111"
-#> $ city              <chr> "SCOTTSDALE"
-#> $ state             <ord> AZ
-#> $ zip               <chr> "852555472"
-```
+#> ✔ Query returned 4 results.
 
-### `order_refer()`
-
-``` r
-order_refer(npi = 1043522824) |> glimpse()
-```
-
-``` R
-#> Rows: 4
-#> Columns: 4
-#> $ npi      <chr> "1043522824", "1043522824", "1043522824", "1043522824"
-#> $ first    <chr> "JAMES", "JAMES", "JAMES", "JAMES"
-#> $ last     <chr> "SMITH", "SMITH", "SMITH", "SMITH"
-#> $ eligible <fct> Medicare Part B, Home Health Agency, Durable Medical Equipmen…
-```
-
-### `outpatient()`
-
-``` r
-outpatient(
-  year  = 2021, 
-  state = "GA", 
-  city  = "Valdosta", 
-  apc   = "5072") |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 18
-#> $ year                <int> 2021
-#> $ ccn                 <chr> "110122"
-#> $ organization        <chr> "South Georgia Medical Center"
-#> $ address             <chr> "2501 North Patterson Street, Po Box 1727"
-#> $ city                <chr> "Valdosta"
-#> $ state               <ord> GA
-#> $ fips                <chr> "13"
-#> $ zip                 <chr> "31602"
-#> $ ruca                <chr> "1"
-#> $ apc                 <chr> "5072"
-#> $ apc_desc            <chr> "Level 2 Excision/ Biopsy/ Incision and Drainage"
-#> $ tot_benes           <int> 210
-#> $ comp_apc_srvcs      <int> 222
-#> $ avg_charges         <dbl> 6454.778
-#> $ avg_allowed         <dbl> 1233.753
-#> $ avg_payment         <dbl> 981.9733
-#> $ tot_outlier_srvcs   <int> 0
-#> $ avg_outlier_payment <dbl> 0
-```
-
-### `prescribers()`
-
-``` r
-prescribers(
-  year = 2022, 
-  type = 'Provider', 
-  npi = 1003000126) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 28
-#> $ year              <int> 2022
-#> $ npi               <chr> "1003000126"
-#> $ entity_type       <fct> Individual
-#> $ first             <chr> "Ardalan"
-#> $ last              <chr> "Enkeshafi"
-#> $ gender            <fct> Male
-#> $ credential        <chr> "MD"
-#> $ specialty         <chr> "Internal Medicine"
-#> $ source            <chr> "Claim-Specialty"
-#> $ address           <chr> "6410 Rockledge Dr Ste 304"
-#> $ city              <chr> "Bethesda"
-#> $ state             <ord> MD
-#> $ zip               <chr> "20817"
-#> $ fips              <chr> "24"
-#> $ ruca              <chr> "1"
-#> $ country           <chr> "US"
-#> $ tot_claims        <int> 413
-#> $ tot_fills         <dbl> 715.7667
-#> $ tot_cost          <dbl> 36330.41
-#> $ tot_supply        <int> 19258
-#> $ tot_benes         <int> 155
-#> $ rx_rate_opioid    <dbl> 3.1477
-#> $ rx_rate_opioid_la <dbl> 0
-#> $ bene_race_blk     <int> 20
-#> $ hcc_risk_avg      <dbl> 2.059633
-#> $ detailed          <list> [<tbl_df[1 x 32]>]
-#> $ demographics      <list> [<tbl_df[1 x 14]>]
-#> $ gte_65            <list> [<tbl_df[1 x 8]>]
-```
-
-``` r
-prescribers(
-  year = 2022, 
-  npi = 1003000126,
-  type = 'Drug',
-  brand_name = 'Atorvastatin Calcium') |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 17
-#> $ year         <int> 2022
-#> $ npi          <chr> "1003000126"
-#> $ last         <chr> "Enkeshafi"
-#> $ first        <chr> "Ardalan"
-#> $ city         <chr> "Bethesda"
-#> $ state        <ord> MD
-#> $ fips         <chr> "24"
-#> $ specialty    <chr> "Internal Medicine"
-#> $ source       <chr> "Claim-Specialty"
-#> $ brand_name   <chr> "Atorvastatin Calcium"
-#> $ generic_name <chr> "Atorvastatin Calcium"
-#> $ tot_claims   <int> 11
-#> $ tot_fills    <dbl> 29
-#> $ tot_supply   <int> 870
-#> $ tot_cost     <dbl> 286.69
-#> $ level        <ord> Provider
-#> $ gte_65       <list> [<tbl_df[1 x 7]>]
-```
-
-``` r
-prescribers(
-  year = 2022, 
-  type = 'Geography',
-  level = 'National',
-  brand_name = 'Clotrimazole-Betamethasone') |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 20
-#> $ year            <int> 2022
-#> $ level           <ord> National
-#> $ state           <ord> National
-#> $ brand_name      <chr> "Clotrimazole-Betamethasone"
-#> $ generic_name    <chr> "Clotrimazole/Betamethasone Dip"
-#> $ tot_prescribers <int> 205696
-#> $ tot_claims      <int> 1598558
-#> $ tot_fills       <dbl> 1688104
-#> $ tot_cost        <dbl> 48271880
-#> $ tot_benes       <int> 879153
-#> $ tot_claims_ge65 <int> 1361135
-#> $ tot_fills_ge65  <dbl> 1439915
-#> $ tot_cost_ge65   <dbl> 40468578
-#> $ tot_benes_ge65  <int> 760752
-#> $ tot_cost_lis    <dbl> 767079.3
-#> $ tot_cost_nlis   <dbl> 12326159
-#> $ opioid          <lgl> FALSE
-#> $ opioid_la       <lgl> FALSE
-#> $ antibiotic      <lgl> FALSE
-#> $ antipsychotic   <lgl> FALSE
-```
-
-### `providers()`
-
-``` r
-providers(
-  npi  = 1720098791, 
-  enid = "O20040610001257") |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 7
-#> $ npi                   <chr> "1720098791"
-#> $ pac                   <chr> "7618950643"
-#> $ enid                  <chr> "O20040610001257"
-#> $ specialty_code        <chr> "12-70"
-#> $ specialty_description <chr> "PART B SUPPLIER - CLINIC/GROUP PRACTICE"
-#> $ state                 <ord> GA
-#> $ organization          <chr> "IRWIN COUNTY HOSPITAL"
-```
-
-### `quality_payment()`
-
-``` r
-quality_payment(
-  year = 2021, 
-  npi  = 1932365699) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 92
-#> $ `provider key`                                   <chr> "000493218"
-#> $ `practice state or us territory`                 <chr> "CO"
-#> $ `practice size`                                  <chr> "3"
-#> $ `clinician specialty`                            <chr> "Optometry"
-#> $ `years in medicare`                              <chr> "14"
-#> $ npi                                              <chr> "1932365699"
-#> $ engaged                                          <chr> "True"
-#> $ `participation type`                             <chr> "Group"
-#> $ `medicare patients`                              <chr> "555"
-#> $ `allowed charges`                                <chr> "112449"
-#> $ services                                         <chr> "1157"
-#> $ `opted into mips`                                <chr> "False"
-#> $ `small practitioner`                             <chr> "True"
-#> $ `rural clinician`                                <chr> "True"
-#> $ `hpsa clinician`                                 <chr> "True"
-#> $ `ambulatory surgical center`                     <chr> "False"
-#> $ `hospital-based clinician`                       <chr> "False"
-#> $ `non-patient facing`                             <chr> "False"
-#> $ `facility-based`                                 <chr> "False"
-#> $ `extreme hardship`                               <chr> "True"
-#> $ `final score`                                    <chr> "60"
-#> $ `payment adjustment percentage`                  <chr> "0"
-#> $ `complex patient bonus`                          <chr> "2.54"
-#> $ `extreme hardship quality`                       <chr> "True"
-#> $ `quality category score`                         <chr> "45"
-#> $ `quality improvement bonus`                      <chr> "0"
-#> $ `quality bonus`                                  <chr> "False"
-#> $ `quality measure id 1`                           <chr> "141"
-#> $ `quality measure score 1`                        <chr> "3"
-#> $ `quality measure id 2`                           <chr> "014"
-#> $ `quality measure score 2`                        <chr> "3"
-#> $ `quality measure id 3`                           <chr> "110"
-#> $ `quality measure score 3`                        <chr> "3"
-#> $ `quality measure id 4`                           <chr> "47"
-#> $ `quality measure score 4`                        <chr> "3"
-#> $ `quality measure id 5`                           <chr> "1"
-#> $ `quality measure score 5`                        <chr> "0"
-#> $ `quality measure id 6`                           <chr> "117"
-#> $ `quality measure score 6`                        <chr> "0"
-#> $ `quality measure id 7`                           <chr> ""
-#> $ `quality measure score 7`                        <chr> ""
-#> $ `quality measure id 8`                           <chr> ""
-#> $ `quality measure score 8`                        <chr> ""
-#> $ `quality measure id 9`                           <chr> ""
-#> $ `quality measure score 9`                        <chr> ""
-#> $ `quality measure id 10`                          <chr> ""
-#> $ `quality measure score 10`                       <chr> ""
-#> $ `promoting interoperability (pi) category score` <chr> "0"
-#> $ `extreme hardship pi`                            <chr> "True"
-#> $ `pi hardship`                                    <chr> "False"
-#> $ `pi reweighting`                                 <chr> "False"
-#> $ `pi bonus`                                       <chr> "False"
-#> $ `pi cehrt id`                                    <chr> ""
-#> $ `pi measure id 1`                                <chr> ""
-#> $ `pi measure score 1`                             <chr> ""
-#> $ `pi measure id 2`                                <chr> ""
-#> $ `pi measure score 2`                             <chr> ""
-#> $ `pi measure id 3`                                <chr> ""
-#> $ `pi measure score 3`                             <chr> ""
-#> $ `pi measure id 4`                                <chr> ""
-#> $ `pi measure score 4`                             <chr> ""
-#> $ `pi measure id 5`                                <chr> ""
-#> $ `pi measure score 5`                             <chr> ""
-#> $ `pi measure id 6`                                <chr> ""
-#> $ `pi measure score 6`                             <chr> ""
-#> $ `pi measure id 7`                                <chr> ""
-#> $ `pi measure score 7`                             <chr> ""
-#> $ `pi measure id 8`                                <chr> ""
-#> $ `pi measure score 8`                             <chr> ""
-#> $ `pi measure id 9`                                <chr> ""
-#> $ `pi measure score 9`                             <chr> ""
-#> $ `pi measure id 10`                               <chr> ""
-#> $ `pi measure score 10`                            <chr> ""
-#> $ `pi measure id 11`                               <chr> ""
-#> $ `pi measure score 11`                            <chr> ""
-#> $ `ia score`                                       <chr> "0"
-#> $ `extreme hardship ia`                            <chr> "True"
-#> $ `ia study`                                       <chr> "False"
-#> $ `ia measure id 1`                                <chr> ""
-#> $ `ia measure score 1`                             <chr> ""
-#> $ `ia measure id 2`                                <chr> ""
-#> $ `ia measure score 2`                             <chr> ""
-#> $ `ia measure id 3`                                <chr> ""
-#> $ `ia measure score 3`                             <chr> ""
-#> $ `ia measure id 4`                                <chr> ""
-#> $ `ia measure score 4`                             <chr> ""
-#> $ `cost score`                                     <chr> "0"
-#> $ `extreme hardship cost`                          <chr> "True"
-#> $ `cost measure id 1`                              <chr> ""
-#> $ `cost measure score 1`                           <chr> ""
-#> $ `cost measure id 2`                              <chr> ""
-#> $ `cost measure score 2`                           <chr> ""
-```
-
-### `quality_eligibility()`
-
-``` r
-quality_eligibility(
-  year = 2024, 
-  npi  = 1932365699,
-  tidy = FALSE,
-  unnest = FALSE,
-  pivot = FALSE,
-  na.rm = FALSE) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 13
-#> $ year                           <chr> "2024"
-#> $ firstName                      <chr> "STEFAN"
-#> $ middleName                     <chr> "MICHAEL"
-#> $ lastName                       <chr> "SMITH"
-#> $ npi                            <chr> "1932365699"
-#> $ nationalProviderIdentifierType <int> 1
-#> $ firstApprovedDate              <chr> "2008-11-15"
-#> $ yearsInMedicare                <int> 16
-#> $ pecosEnrollmentDate            <int> 2008
-#> $ newlyEnrolled                  <lgl> FALSE
-#> $ specialty                      <df[,3]> <data.frame[1 x 3]>
-#> $ isMaqi                         <lgl> FALSE
-#> $ organizations                  <list> [<data.frame[2 x 12]>]
-```
-
-### `reassignments()`
-
-``` r
-reassignments(
-  npi = 1932365699, 
-  pac_org = 7719037548) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 12
-#> $ npi           <chr> "1932365699"
-#> $ pac           <chr> "42370496"
-#> $ enid          <chr> "I20171107000894"
-#> $ first         <chr> "STEFAN"
-#> $ last          <chr> "SMITH"
-#> $ associations  <int> 2
-#> $ organization  <chr> "EYE CENTER OF THE ROCKIES PC"
-#> $ pac_org       <chr> "7719037548"
-#> $ enid_org      <chr> "O20090616000599"
-#> $ state_org     <ord> CO
-#> $ reassignments <int> 5
-#> $ entry         <fct> Reassignment
-```
-
-### `utilization()`
-
-``` r
-utilization(
-  year = 2022, 
-  npi  = 1932365699, 
-  type = "Provider") |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 20
-#> $ year         <int> 2022
-#> $ npi          <chr> "1932365699"
-#> $ entity_type  <fct> Individual
-#> $ first        <chr> "Stefan"
-#> $ middle       <chr> "M"
-#> $ last         <chr> "Smith"
-#> $ gender       <fct> Male
-#> $ credential   <chr> "OD"
-#> $ specialty    <chr> "Optometry"
-#> $ address      <chr> "724 St. Louis Road"
-#> $ city         <chr> "Collinsville"
-#> $ state        <ord> IL
-#> $ zip          <chr> "62234"
-#> $ fips         <chr> "17"
-#> $ ruca         <chr> "1"
-#> $ country      <chr> "US"
-#> $ par          <lgl> TRUE
-#> $ performance  <list> [<tbl_df[1 x 11]>]
-#> $ demographics <list> [<tbl_df[1 x 12]>]
-#> $ conditions   <list> [<tbl_df[1 x 1]>]
-```
-
-``` r
-utilization(
-  year  = 2022, 
-  npi   = 1932365699,
-  hcpcs = "99214",
-  type  = "Service",
-  rbcs = FALSE) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 29
-#> $ year         <int> 2022
-#> $ npi          <chr> "1932365699"
-#> $ level        <ord> Provider
-#> $ entity_type  <chr> "I"
-#> $ first        <chr> "Stefan"
-#> $ middle       <chr> "M"
-#> $ last         <chr> "Smith"
-#> $ gender       <fct> Male
-#> $ credential   <chr> "O.D."
-#> $ specialty    <chr> "Optometry"
-#> $ address      <chr> "724 St. Louis Road"
-#> $ city         <chr> "Collinsville"
-#> $ state        <ord> IL
-#> $ zip          <chr> "62234"
-#> $ fips         <chr> "17"
-#> $ ruca         <chr> "1"
-#> $ country      <chr> "US"
-#> $ par          <lgl> TRUE
-#> $ hcpcs        <chr> "99214"
-#> $ hcpcs_desc   <chr> "Established patient office or other outpatient visit, 30…
-#> $ drug         <lgl> FALSE
-#> $ pos          <fct> Non-facility
-#> $ tot_benes    <int> 38
-#> $ tot_srvcs    <int> 46
-#> $ tot_day      <int> 46
-#> $ avg_charge   <dbl> 135
-#> $ avg_allowed  <dbl> 130.6146
-#> $ avg_payment  <dbl> 80.1337
-#> $ avg_std_pymt <dbl> 78.30435
-```
-
-``` r
-utilization(
-  year  = 2022, 
-  hcpcs = "99205", 
-  level = "National",
-  pos   = "F",
-  type  = "Geography",
-  rbcs = FALSE) |> 
-  glimpse()
-```
-
-``` R
-#> Rows: 1
-#> Columns: 15
-#> $ year         <int> 2022
-#> $ level        <ord> National
-#> $ state        <ord> National
-#> $ hcpcs        <chr> "99205"
-#> $ hcpcs_desc   <chr> "New patient office or other outpatient visit, 60-74 minu…
-#> $ drug         <lgl> FALSE
-#> $ pos          <fct> Facility
-#> $ tot_provs    <int> 67438
-#> $ tot_benes    <int> 589940
-#> $ tot_srvcs    <int> 672234
-#> $ tot_day      <int> 672211
-#> $ avg_charge   <dbl> 506.3615
-#> $ avg_allowed  <dbl> 183.1025
-#> $ avg_payment  <dbl> 139.1145
-#> $ avg_std_pymt <dbl> 137.0229
+#> # A tibble: 4 × 14
+#>   npi     pac   enid  first last  state specialty reassignments org_name org_pac
+#>   <chr>   <chr> <chr> <chr> <chr> <chr> <chr>     <chr>         <chr>    <chr>  
+#> 1 115446… 5294… I201… Broo… Alld… CO    Optometry 4             Eye Cen… 771903…
+#> 2 108362… 6103… I200… Matt… Ehrl… CO    Ophthalm… 4             Eye Cen… 771903…
+#> 3 140794… 1850… I200… Jeff… Olson CO    Ophthalm… 4             Eye Cen… 771903…
+#> 4 193236… 4237… I201… Stef… Smith CO    Optometry 4             Eye Cen… 771903…
+#> # ℹ 4 more variables: org_enid <chr>, org_state <chr>, associations <chr>,
+#> #   type <chr>
 ```
 
 ------------------------------------------------------------------------

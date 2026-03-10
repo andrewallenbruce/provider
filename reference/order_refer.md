@@ -120,21 +120,21 @@ order_refer(npi = 1003026055)
 #> 1 1003026055 RADHIKA PHADKE Y      Y     Y     Y     Y      
 
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ Query returned 133 results.
-#> # A tibble: 133 × 8
+#> ✔ Query returned 134 results.
+#> # A tibble: 134 × 8
 #>    npi        first    last  part_b dme   hha   pmd   hospice
 #>    <chr>      <chr>    <chr> <chr>  <chr> <chr> <chr> <chr>  
-#>  1 1982026100 JENNIFER SMITH Y      Y     N     N     N      
-#>  2 1861777609 JENNIFER SMITH Y      Y     N     N     N      
-#>  3 1295381994 JENNIFER SMITH N      Y     N     N     N      
-#>  4 1184142903 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  5 1598994923 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  6 1811218712 JENNIFER SMITH Y      Y     Y     Y     Y      
-#>  7 1750494886 JENNIFER SMITH Y      Y     Y     N     Y      
-#>  8 1497230395 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  9 1033486725 JENNIFER SMITH Y      Y     Y     Y     N      
-#> 10 1952073652 JENNIFER SMITH Y      Y     Y     Y     N      
-#> # ℹ 123 more rows
+#>  1 1134237498 JENNIFER SMITH Y      Y     Y     Y     Y      
+#>  2 1336652726 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  3 1811518566 JENNIFER SMITH Y      Y     N     N     N      
+#>  4 1992162556 JENNIFER SMITH Y      Y     N     N     N      
+#>  5 1396151817 JENNIFER SMITH Y      Y     Y     N     Y      
+#>  6 1427168814 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  7 1588291215 JENNIFER SMITH Y      Y     Y     Y     Y      
+#>  8 1841730512 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  9 1053842450 JENNIFER SMITH Y      Y     Y     Y     Y      
+#> 10 1063080125 JENNIFER SMITH Y      Y     Y     Y     N      
+#> # ℹ 124 more rows
 
 order_refer(
   part_b = TRUE,

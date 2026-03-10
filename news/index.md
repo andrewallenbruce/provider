@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9026 (2026-03-10)
+
+- re-rendered `README.Rmd`
+
 ## provider 0.0.1.9025 (2026-03-10)
 
 - removed old dependencies

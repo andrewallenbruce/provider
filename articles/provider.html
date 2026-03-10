@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9025</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9026</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -182,7 +182,7 @@ the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 years:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">quality_payment</span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">participation_type</span>, </span>
 <span>         <span class="va">beneficiaries</span>,</span>
 <span>         <span class="va">services</span>,</span>
@@ -195,7 +195,7 @@ years:</p>
 underscore at the end of their name (<code>_</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">quality_payment_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">participation_type</span>, </span>
 <span>         <span class="va">beneficiaries</span>,</span>
 <span>         <span class="va">services</span>,</span>
