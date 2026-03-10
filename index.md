@@ -1,4 +1,4 @@
-**provider** ![](reference/figures/logo.svg)
+# **provider**
 
   
 

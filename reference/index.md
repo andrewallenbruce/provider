@@ -27,8 +27,6 @@ Access current administrative healthcare provider data.
 
 ## Query Modifiers
 
-Query Modifiers
-
 - [`greater_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`less_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`between()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
@@ -39,4 +37,4 @@ Query Modifiers
   [`not_equal()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`any_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`none_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  : Query Modifiers
+  : A variety of different query operators
