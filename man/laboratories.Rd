@@ -87,7 +87,6 @@ waived testing.
 \item \strong{Accreditation}: Exactly the same as the Certificate of Compliance,
 except that the laboratory must be accredited by one of the following
 CMS-approved accreditation organizations:
-}
 \itemize{
 \item \href{https://a2la.org/}{A2LA}: American Association for Laboratory Accreditation
 \item \href{https://www.aabb.org/}{AABB}: Association for the Advancement of Blood & Biotherapies
@@ -96,6 +95,7 @@ CMS-approved accreditation organizations:
 \item \href{https://www.cap.org/}{CAP}: College of American Pathologists
 \item \href{https://www.cola.org/}{COLA}: Commission on Office Laboratory Accreditation
 \item \href{https://www.jointcommission.org/}{JCAHO}: The Joint Commission
+}
 }
 }
 
@@ -129,11 +129,10 @@ laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
 \references{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories API}
-\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS - CLIA}
-\item \href{https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases}{FDA - CLIA}
-\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC - CLIA}
-\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CDC - CLIA Certificates}
-\item \href{https://qcor.cms.gov/main.jsp}{CMS - QCOR}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC CLIA}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS QCOR}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA Certificates}
 \item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA Certificate Fee Schedule}
 \item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA Certification Guide}
 }

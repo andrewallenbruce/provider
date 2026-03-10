@@ -19,10 +19,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999, digits = 2)
-
 library(provider)
-library(dplyr)
-library(purrr)
 ```
 
 The overarching goal of `{provider}` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following goals:
@@ -57,7 +54,7 @@ order_refer(npi = 1043477615)
 
 Setting `tidy` to `FALSE` will return a data.frame of the API's un-processed output:
 
-```{r}
+```{r, eval=FALSE}
 order_refer(npi = 1043477615, tidy = FALSE)
 ```
 
@@ -65,7 +62,7 @@ order_refer(npi = 1043477615, tidy = FALSE)
 
 Several functions also have arguments that implement additional optional transformations to the output, such as `pivot`:
 
-```{r}
+```{r, eval=FALSE}
 order_refer(npi = 1043477615, pivot = FALSE)
 ```
 
@@ -86,7 +83,7 @@ However, in the event that you would prefer to do your own transformations, simp
 
 Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
 
-```{r}
+```{r, eval=FALSE}
 qpp_years()
 ```
 
@@ -130,7 +127,7 @@ Several validation checks have been implemented, including checks for *NPIs*, *P
 > **National Provider Identifier**: 
 > A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS) through the National Plan and Provider Enumeration System (NPPES). All individual HIPAA–covered healthcare providers or organizations must obtain an NPI. Once assigned, a provider’s NPI is permanent and remains with the provider regardless of job or location changes.
 
-```{r}
+```{r, eval=FALSE}
 # Must be 10 digits long
 open_payments(year = 2021, npi = 12345691234)
 
@@ -147,7 +144,7 @@ pending(npi = 001234569123, type = "P")
 > A Provider associate-level control ID (PAC ID) is a 10-digit unique numeric identifier that is assigned to each individual or organization in PECOS. The PAC ID links all entity-level information (e.g., tax identification numbers and organizational names) and may be associated with multiple enrollment IDs if the individual or organization enrolled multiple times under different circumstances.
 
 
-```{r}
+```{r, eval=FALSE}
 # Must be 10 digits long
 affiliations(pac = 0123456789)
 
@@ -160,7 +157,7 @@ hospitals(pac_org = "O12345678912")
 > **Medicare Enrollment ID**:
 > An Enrollment ID is a 15-digit unique alphanumeric identifier that is assigned to each new provider enrollment application. All enrollment-level information (e.g., enrollment type, enrollment state, provider specialty and reassignment of benefits) is linked through the Enrollment ID.
 
-```{r}
+```{r, eval=FALSE}
 # Must be a character vector
 clinicians(enid = 0123456789123456)
 

@@ -2,59 +2,24 @@
 % Please edit documentation in R/pending.R
 \name{pending}
 \alias{pending}
-\title{Pending Medicare Enrollment Applications}
+\title{Pending Medicare Enrollments}
 \usage{
-pending(
-  type = c("P", "N"),
-  npi = NULL,
-  first = NULL,
-  last = NULL,
-  tidy = TRUE,
-  ...
-)
+pending(npi = NULL, first = NULL, last = NULL)
 }
 \arguments{
-\item{type}{< \code{character} > // \strong{default:} \code{"P"}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-Physician (\code{P}) or Non-physician (\code{N})}
-
-\item{npi}{< \code{integer} >
-
-10-digit National Provider Identifier}
-
-\item{first, last}{< \code{character} >
-
-Provider's name}
-
-\item{tidy}{< \code{boolean} > // \strong{default:} \code{TRUE}
-
-Tidy output}
-
-\item{...}{Empty}
+\item{first, last}{\verb{<chr>} Provider's name}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab 10-digit individual NPI \cr
-   \code{first} \tab Provider's first name \cr
-   \code{last} \tab Provider's last name \cr
-   \code{type} \tab Type of Provider \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Search for providers with pending Medicare enrollment applications.
+Providers with pending Medicare enrollment applications.
 }
-\section{Update Frequency}{
-
-\strong{QUARTERLY}
-}
-
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-
-pending(type = "P", first = "John")
-
-pending(type = "N", last = "Smith")
+pending(first = "John")
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -1,9 +1,5 @@
 ---
 title: "Linking Providers"
-subtitle: "NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More"
-description: "NPIs, PAC IDs, Enrollment IDs, CCNs, CLIAs and More"
-author: "Andrew Bruce"
-date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -19,82 +15,31 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999)
-```
-
-
-```{r message=FALSE, warning=FALSE}
 library(provider)
 library(vctrs)
-library(dplyr)
 library(purrr)
 library(gt)
 ```
 
+## NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
 
-<br>
-
-## Individual Provider
-
-```{r echo=FALSE, eval=FALSE}
-library(chainr)
-
-mark <- chain(
-  providers    = providers(pac = 7810891009),
-  reassignment = reassignments(pac = 7810891009),
-  clinicians   = clinicians(pac = 7810891009),
-  nppes        = nppes(npi = 1043245657),
-  referrals    = order_refer(npi = 1043245657),
-  affiliations = affiliations(pac = 7810891009),
-  hospitals    = affiliations(pac = 7810891009) |> 
-    pull(facility_ccn) |> 
-    map_dfr(~hospitals(facility_ccn = .x)),
-  utilization  = utilization_(npi = 1043245657, type = "Provider"))
-
-mark
+```{r}
+pac <- affiliations(pac = 7810891009)
+gt(pac, rownames_to_stub = TRUE) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono"), size = gt::px(12))
 ```
 
 
 ```{r}
-vctrs::vec_rbind(
-  display_long(providers(pac = 7810891009)) |> tibble::add_column(source = "`providers()`"),
-  display_long(reassignments(pac = 7810891009)) |> tibble::add_column(source = "`reassignments()`"),
-  display_long(clinicians(pac = 7810891009)) |> tibble::add_column(source = "`clinicians()`"),
-  display_long(nppes(npi = 1043245657)) |> tibble::add_column(source = "`nppes()`"),
-  display_long(order_refer(npi = 1043245657)) |> tibble::add_column(source = "`order_refer()`")) |> 
-  distinct(name, value, .keep_all = TRUE) |> 
-  gt(groupname_col = "source", 
-     row_group_as_column = TRUE, process_md = TRUE) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  tab_options(column_labels.hidden = TRUE, 
-              table.width = px(600),
-              heading.background.color = "black",
-              heading.align = "left", 
-              stub_row_group.font.weight = "bold") |> 
-  tab_header(title = md("**PROVIDER**: Mark K. Fung, M.D.")) |> 
-  opt_horizontal_padding(scale = 2) |> 
-  opt_all_caps()
-```
-
-<br>
-
-```{r}
-affiliations(pac = 7810891009) |> 
-  pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x)) |> 
-  select(-reh_conversion) |> 
-  display_long(cols = !organization) |> 
-  filter(!is.na(value)) |> 
-  gt(groupname_col = "organization", 
-     row_group_as_column = TRUE) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono")) |> 
-  tab_options(column_labels.hidden = TRUE, 
-              table.width = px(800),
-              heading.background.color = "black",
-              heading.align = "left", 
-              stub_row_group.font.weight = "bold") |> 
-  tab_header(title = md("**FACILITY** AFFILIATIONS")) |> 
-  opt_horizontal_padding(scale = 2) |> 
-  opt_all_caps()
+ccn <- hospitals(ccn = unique(pac$facility_ccn))
+gt(ccn, 
+   groupname_col = "org_name", 
+   rowname_col = "dba_name", 
+   row_group_as_column = TRUE, 
+   rownames_to_stub = TRUE) |> 
+  opt_table_font(
+    font = google_font(name = "JetBrains Mono"), 
+    size = px(12))
 ```
 
 
@@ -103,17 +48,21 @@ affiliations(pac = 7810891009) |>
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 
 ```{r}
-providers(organization = "Elizabethtown Community Hospital") |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+providers(org_name = "Elizabethtown Community Hospital") |> 
+  gt(rownames_to_stub = TRUE) |> 
+  opt_table_font(
+    font = google_font(name = "JetBrains Mono"), 
+    size = px(12))
 ```
 
 
 
 ```{r}
-hospitals(organization = "Elizabethtown Community Hospital") |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+hospitals(org_name = "Elizabethtown Community Hospital") |> 
+  gt(rownames_to_stub = TRUE) |> 
+  opt_table_font(
+    font = google_font(name = "JetBrains Mono"), 
+    size = px(12))
 ```
 
 <br>
@@ -124,8 +73,10 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 
 ```{r}
 affiliations(facility_ccn = 331302) |> 
-  gt_preview(top_n = 20) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+  gt(rownames_to_stub = TRUE) |> 
+  opt_table_font(
+    font = google_font(name = "JetBrains Mono"), 
+    size = px(12))
 ```
 
 
@@ -136,8 +87,10 @@ That returns individual providers affiliated with the hospital. Now to search th
 
 ```{r}
 affiliations(facility_ccn = "33Z302") |> 
-  gt_preview(top_n = 10) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"))
+  gt(rownames_to_stub = TRUE) |> 
+  opt_table_font(
+    font = google_font(name = "JetBrains Mono"), 
+    size = px(12))
 ```
 
 <br>

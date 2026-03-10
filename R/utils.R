@@ -65,21 +65,6 @@ api_medicare <- function() {
     fastplyr::as_tbl()
 }
 
-# state_recode(c("GA", "FL"))
-# state_recode(c("Georgia", "Florida"), "abbr")
-#' @autoglobal
-#' @noRd
-state_recode <- function(x, to = "full") {
-  states <- switch(
-    to,
-    full = rlang::set_names(state.abb, state.name),
-    abbr = rlang::set_names(state.name, state.abb)
-  )
-
-  rlang::names2(states)[collapse::fmatch(x, states)]
-}
-
-
 # set_args(providers)
 #' @noRd
 set_args <- function(fn) {
@@ -94,18 +79,6 @@ map_na_if <- function(i) {
     vctrs::vec_slice(x, vctrs::vec_in(x, haystack = "")) <- NA_character_
     x
   })
-}
-
-#' @noRd
-search_in <- function(x, column, what) {
-  search_in_impl <- function(x, column, what) {
-    vctrs::vec_slice(x, vctrs::vec_in(x[[column]], collapse::funique(what)))
-  }
-
-  if (is.null(what)) {
-    return(x)
-  }
-  search_in_impl(x, column, what)
 }
 
 #' @noRd

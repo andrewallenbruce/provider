@@ -19,21 +19,16 @@ Imports:
     cheapr (>= 1.5.0),
     cli (>= 3.6.5),
     collapse (>= 2.1.6),
-    dplyr,
     fastplyr (>= 0.9.91),
     httr2 (>= 1.2.2),
-    lubridate,
     purrr (>= 1.2.1),
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.1.7),
     stringr (>= 1.6.0),
-    tidyr,
     vctrs (>= 0.7.1)
 Suggests: 
-    glue,
     knitr,
     roxyglobals (>= 1.0.0),
-    strex,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr

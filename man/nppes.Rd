@@ -6,76 +6,53 @@
 \usage{
 nppes(
   npi = NULL,
-  entype = NULL,
+  entity = NULL,
   first = NULL,
   last = NULL,
-  organization = NULL,
-  name_type = NULL,
-  taxonomy_desc = NULL,
+  org_name = NULL,
+  type = NULL,
+  specialty = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   country = NULL,
   limit = 1200L,
-  skip = 0L,
-  unnest = TRUE,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  skip = 0L
 )
 }
 \arguments{
-\item{npi}{\verb{<chr>} Unique 10-digit National Provider Identifier number issued
-by CMS to US healthcare providers through NPPES.}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{entype}{\verb{<chr>} Entity type; one of either \code{I} for Individual (NPI-1)
-or \code{O} for Organizational (NPI-2)}
+\item{entity}{\verb{<chr>} Entity type; \code{1} (Individual) or \code{2} (Organization)}
 
-\item{first, last}{\verb{<chr>} \strong{WC} Individual provider's first and/or last name}
+\item{first, last}{\verb{<chr>} \strong{WC} Individual provider's name}
 
-\item{organization}{\verb{<chr>} \strong{WC} Organizational provider's name. Many types
-of names (LBN, DBA, Former LBN, Other Name) may match. As such, the results
-might contain a name different from the one entered.}
+\item{org_name}{\verb{<chr>} \strong{WC} Organization's name}
 
-\item{name_type}{\verb{<chr>} Type of individual the \code{first} and \code{last} name
-parameters refer to; one of either \code{AO} for Authorized Officials or
-\code{Provider} for Individual Providers.}
+\item{type}{\verb{<chr>} Type of individual \code{first}/\code{last} refers to:
+\code{AO} (Authorized Official) or \code{Provider} (Individual Provider).}
 
-\item{taxonomy_desc}{\verb{<chr>} Provider's taxonomy description, e.g.
-\code{Pharmacist}, \code{Pediatrics}}
+\item{specialty}{\verb{<chr>} Provider's specialty}
 
-\item{city}{\verb{<chr>} City name. For military addresses, search for either
-\code{APO} or \code{FPO}.}
+\item{city}{\verb{<chr>} City; For military addresses, search \code{"APO"}/\code{"FPO"}.}
 
-\item{state}{\verb{<chr>} 2-character state abbreviation. If it is the only input,
-one other parameter besides \code{entype} and \code{country} is required.}
+\item{state}{\verb{<chr>} State abbreviation. If the only input, one other parameter
+besides \code{entity} or \code{country} is required.}
 
-\item{zip}{\verb{<chr>} \strong{WC} 5- to 9-digit zip code, without a hyphen.}
+\item{zip}{\verb{<chr>} \strong{WC} 5-9 digit zip code, no hyphen.}
 
-\item{country}{\verb{<chr>} 2-character country abbreviation. Can be the only
-input, as long as it \emph{is not} \code{US}.}
+\item{country}{\verb{<chr>} Country abbreviation. Can be the only input if it \emph{is not} \code{"US"}.}
 
-\item{limit}{\verb{<int>} Maximum number of results to return; \strong{default} is
-\code{1200L}}
+\item{limit}{\verb{<int>} Maximum number of results to return}
 
-\item{skip}{\verb{<int>} Number of results to skip after those initially returned
-by the API; \strong{default} is \code{0L}}
-
-\item{unnest}{\verb{<lgl>} Unnest list columns; \strong{default} is \code{TRUE}}
-
-\item{tidy}{\verb{<lgl>} Tidy output; \strong{default} is \code{TRUE}}
-
-\item{na.rm}{\verb{<lgl>} Remove empty rows and columns; \strong{default} is \code{TRUE}}
-
-\item{...}{Empty dots}
+\item{skip}{\verb{<int>} Number of results to skip}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-\code{\link[=nppes]{nppes()}} allows the user to search the National Plan and
-Provider Enumeration System (NPPES) NPI Registry, a free directory of all
-active NPI records.
+Search the National Plan and Provider Enumeration System (NPPES)
+NPI Registry, a free directory of all active NPI records.
 }
 \section{\strong{National Provider Identifier (NPI)}}{
  Healthcare providers acquire
@@ -136,23 +113,10 @@ the statutes, regulations, and program instructions of the Medicare
 program.
 }
 
-\section{Links}{
-
-\itemize{
-\item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API Documentation}
-\item \href{https://npiregistry.cms.hhs.gov/demo-api}{NPPES NPI Registry API Demo}
-\item \href{https://npiregistry.cms.hhs.gov/help-api/country}{NPPES Available Countries}
-}
-}
-
 \section{Trailing Wildcard Entries}{
  Arguments that allow trailing wildcard
 entries are denoted in the parameter description with \strong{WC}. Wildcard
 entries require at least two characters to be entered, e.g. \code{"jo*"}
-}
-
-\section{Update Frequency}{
- \strong{Weekly}
 }
 
 \examples{
@@ -162,6 +126,11 @@ nppes(npi = 1528060837)
 nppes(city   = "CARROLLTON",
       state  = "GA",
       zip    = 301173889,
-      entype = "I")
+      entity = 1)
 \dontshow{\}) # examplesIf}
+}
+\references{
+\itemize{
+\item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API}
+}
 }

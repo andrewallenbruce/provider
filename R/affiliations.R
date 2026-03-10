@@ -29,9 +29,7 @@
 #'    provider provides services.
 #' @param parent_ccn `<chr>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
-#'
 #' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examples
 #' affiliations()
 #'
