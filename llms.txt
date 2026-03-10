@@ -333,20 +333,25 @@ occasionally assist with some of these duties.
 
 # Package index
 
-## Current Endpoints
+## Endpoints
 
-Access current administrative healthcare provider data.
+### General
+
+Access Current Provider Data.
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
   : Provider-Facility Affiliations
-- [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
-  : Clinicians Enrolled in Medicare
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  : Hospitals Enrolled in Medicare
-- [`laboratories()`](https://andrewallenbruce.github.io/provider/reference/laboratories.md)
-  : Clinical Laboratories
+- [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
+  : Reassignment of Benefits
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
+
+### Individual
+
+Access Current Individual Provider Data.
+
+- [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
+  : Clinicians Enrolled in Medicare
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
   : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
@@ -355,8 +360,15 @@ Access current administrative healthcare provider data.
   : Pending Medicare Enrollments
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
   : Provider Enrollment in Medicare
-- [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
-  : Reassignment of Benefits
+
+### Organization
+
+Access Current Organizational Provider Data.
+
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  : Hospitals Enrolled in Medicare
+- [`laboratories()`](https://andrewallenbruce.github.io/provider/reference/laboratories.md)
+  : Clinical Laboratories
 
 ## Query Modifiers
 
