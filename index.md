@@ -1,6 +1,6 @@
-# 
-
 **provider** ![](reference/figures/logo.svg)
+
+  
 
 > Tidy Healthcare Provider API Interface
 

@@ -22,9 +22,7 @@ hospitals(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = list(acute = NULL, drug = NULL, child = NULL, general = NULL, long = NULL,
-    short = NULL, psych = NULL, rehab = NULL, swing = NULL, psych_unit = NULL, rehab_unit
-    = NULL, specialty = NULL, other = NULL)
+  subgroup = subgroups()
 )
 ```
 
@@ -94,7 +92,7 @@ hospitals(
 
 - subgroup:
 
-  `<list>` Hospital’s subgroup/unit:
+  `<subgroups>` Hospital’s subgroup/unit:
 
   - `acute`: Acute Care
 
@@ -183,7 +181,7 @@ hospitals(state = "GA", reh = TRUE)
 #> #   sub_long <chr>, sub_psych <chr>, sub_rehab <chr>, sub_short <chr>,
 #> #   sub_swing <chr>, sub_psych_unit <chr>, sub_rehab_unit <chr>,
 #> #   sub_specialty <chr>, sub_other <chr>, sub_otext <chr>, reh_ind <chr>, …
-hospitals(city = "Atlanta", state = "GA", subgroup = list(acute = FALSE))
+hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
 #> ✔ Query returned 12 results.
 #> # A tibble: 12 × 39
 #>    enid   enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name
@@ -207,7 +205,7 @@ hospitals(city = "Atlanta", state = "GA", subgroup = list(acute = FALSE))
 #> #   sub_long <chr>, sub_psych <chr>, sub_rehab <chr>, sub_short <chr>,
 #> #   sub_swing <chr>, sub_psych_unit <chr>, sub_rehab_unit <chr>,
 #> #   sub_specialty <chr>, sub_other <chr>, sub_otext <chr>, reh_ind <chr>, …
-hospitals(state = "GA", subgroup = list(psych = TRUE))
+hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
 #> ✔ Query returned 15 results.
 #> # A tibble: 15 × 39
 #>    enid   enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name

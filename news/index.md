@@ -1,5 +1,12 @@
 # Changelog
 
+## provider 0.0.1.9027 (2026-03-10)
+
+- added
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  helper
+- added `cdc_labs` CLIA example dataset
+
 ## provider 0.0.1.9026 (2026-03-10)
 
 - re-rendered `README.Rmd`

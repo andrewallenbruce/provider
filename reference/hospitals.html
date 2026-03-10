@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9026</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9027</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,9 +75,7 @@ type and address.</p>
 <span>  designation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  reh <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  subgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">NULL</span>, drug <span class="op">=</span> <span class="cn">NULL</span>, child <span class="op">=</span> <span class="cn">NULL</span>, general <span class="op">=</span> <span class="cn">NULL</span>, long <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    short <span class="op">=</span> <span class="cn">NULL</span>, psych <span class="op">=</span> <span class="cn">NULL</span>, rehab <span class="op">=</span> <span class="cn">NULL</span>, swing <span class="op">=</span> <span class="cn">NULL</span>, psych_unit <span class="op">=</span> <span class="cn">NULL</span>, rehab_unit</span>
-<span>    <span class="op">=</span> <span class="cn">NULL</span>, specialty <span class="op">=</span> <span class="cn">NULL</span>, other <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -145,7 +143,7 @@ type and address.</p>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
-<dd><p><code>&lt;list&gt;</code> Hospital’s subgroup/unit:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
+<dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
 <li><p><code>drug</code>: Alcohol/Drug Treatment</p></li>
 <li><p><code>child</code>: Children's Hospital</p></li>
 <li><p><code>general</code>: General Hospital</p></li>
@@ -222,7 +220,7 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otext &lt;chr&gt;, reh_ind &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, subgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">12</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    enid   enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name</span>
@@ -246,7 +244,7 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otext &lt;chr&gt;, reh_ind &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, subgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span>psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">15</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    enid   enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name</span>
