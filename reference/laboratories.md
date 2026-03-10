@@ -111,41 +111,38 @@ of two years, are as follows, in order of increasing complexity:
     Compliance, except that the laboratory must be accredited by one of
     the following CMS-approved accreditation organizations:
 
-- [A2LA](https://a2la.org/): American Association for Laboratory
-  Accreditation
+    - [A2LA](https://a2la.org/): American Association for Laboratory
+      Accreditation
 
-- [AABB](https://www.aabb.org/): Association for the Advancement of
-  Blood & Biotherapies
+    - [AABB](https://www.aabb.org/): Association for the Advancement of
+      Blood & Biotherapies
 
-- [AOA](https://osteopathic.org/): American Osteopathic Association
+    - [AOA](https://osteopathic.org/): American Osteopathic Association
 
-- [ASHI-HLA](https://www.ashi-hla.org/): American Society for
-  Histocompatibility & Immunogenetics
+    - [ASHI-HLA](https://www.ashi-hla.org/): American Society for
+      Histocompatibility & Immunogenetics
 
-- [CAP](https://www.cap.org/): College of American Pathologists
+    - [CAP](https://www.cap.org/): College of American Pathologists
 
-- [COLA](https://www.cola.org/): Commission on Office Laboratory
-  Accreditation
+    - [COLA](https://www.cola.org/): Commission on Office Laboratory
+      Accreditation
 
-- [JCAHO](https://www.jointcommission.org/): The Joint Commission
+    - [JCAHO](https://www.jointcommission.org/): The Joint Commission
 
 ## References
 
 - [Provider of Services File - Clinical Laboratories
   API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 
-- [CMS -
+- [CMS
   CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
 
-- [FDA -
-  CLIA](https://www.fda.gov/medical-devices/ivd-regulatory-assistance/public-databases)
+- [CDC CLIA](https://www.cdc.gov/clia/php/about/index.html)
 
-- [CDC - CLIA](https://www.cdc.gov/clia/php/about/index.html)
+- [CMS QCOR](https://qcor.cms.gov/main.jsp)
 
-- [CDC - CLIA
+- [CLIA
   Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
-
-- [CMS - QCOR](https://qcor.cms.gov/main.jsp)
 
 - [CLIA Certificate Fee
   Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)

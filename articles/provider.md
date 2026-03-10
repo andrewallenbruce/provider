@@ -62,8 +62,6 @@ un-processed output:
 
 ``` r
 order_refer(npi = 1043477615, tidy = FALSE)
-#> Error in `order_refer()`:
-#> ! unused argument (tidy = FALSE)
 ```
 
   
@@ -73,8 +71,6 @@ transformations to the output, such as `pivot`:
 
 ``` r
 order_refer(npi = 1043477615, pivot = FALSE)
-#> Error in `order_refer()`:
-#> ! unused argument (pivot = FALSE)
 ```
 
   
@@ -106,8 +102,6 @@ is:
 
 ``` r
 qpp_years()
-#> Error in `qpp_years()`:
-#> ! could not find function "qpp_years"
 ```
 
 These can also be used in a pipeline, for searching all available years:
@@ -160,8 +154,6 @@ Several validation checks have been implemented, including checks for
 ``` r
 # Must be 10 digits long
 open_payments(year = 2021, npi = 12345691234)
-#> Error in `open_payments()`:
-#> ! could not find function "open_payments"
 
 # Must be numeric
 nppes(npi = "O12345678912")
@@ -186,8 +178,6 @@ affiliations(pac = 0123456789)
 
 # Must be numeric
 hospitals(pac_org = "O12345678912")
-#> Error in `hospitals()`:
-#> ! unused argument (pac_org = "O12345678912")
 ```
 
   
@@ -210,8 +200,6 @@ providers(enid = "L12345678912345")
 
 # Some functions require one of ID types
 hospitals(enid_org = "I20180115000174")
-#> Error in `hospitals()`:
-#> ! unused argument (enid_org = "I20180115000174")
 ```
 
 ------------------------------------------------------------------------

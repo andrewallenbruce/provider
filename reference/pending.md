@@ -1,67 +1,26 @@
-# Pending Medicare Enrollment Applications
+# Pending Medicare Enrollments
 
-Search for providers with pending Medicare enrollment applications.
+Providers with pending Medicare enrollment applications.
 
 ## Usage
 
 ``` r
-pending(
-  type = c("P", "N"),
-  npi = NULL,
-  first = NULL,
-  last = NULL,
-  tidy = TRUE,
-  ...
-)
+pending(npi = NULL, first = NULL, last = NULL)
 ```
 
 ## Arguments
 
-- type:
-
-  \< `character` \> // **default:** `"P"`
-
-  Physician (`P`) or Non-physician (`N`)
-
 - npi:
 
-  \< `integer` \>
-
-  10-digit National Provider Identifier
+  `<int>` National Provider Identifier
 
 - first, last:
 
-  \< `character` \>
-
-  Provider's name
-
-- tidy:
-
-  \< `boolean` \> // **default:** `TRUE`
-
-  Tidy output
-
-- ...:
-
-  Empty
+  `<chr>` Provider's name
 
 ## Value
 
-A
-[`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
-with the columns:
-
-|           |                         |
-|-----------|-------------------------|
-| **Field** | **Description**         |
-| `npi`     | 10-digit individual NPI |
-| `first`   | Provider's first name   |
-| `last`    | Provider's last name    |
-| `type`    | Type of Provider        |
-
-## Update Frequency
-
-**QUARTERLY**
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ## References
 
@@ -75,9 +34,6 @@ with the columns:
 
 ``` r
 if (FALSE) { # interactive()
-
-pending(type = "P", first = "John")
-
-pending(type = "N", last = "Smith")
+pending(first = "John")
 }
 ```

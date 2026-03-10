@@ -19,7 +19,7 @@ Access current administrative healthcare provider data.
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
   : Order and Referral Eligibility
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
-  : Pending Medicare Enrollment Applications
+  : Pending Medicare Enrollments
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
   : Provider Enrollment in Medicare
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)

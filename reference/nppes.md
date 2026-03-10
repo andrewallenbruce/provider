@@ -1,30 +1,25 @@
 # National Registry of Health Care Providers
 
-`nppes()` allows the user to search the National Plan and Provider
-Enumeration System (NPPES) NPI Registry, a free directory of all active
-NPI records.
+Search the National Plan and Provider Enumeration System (NPPES) NPI
+Registry, a free directory of all active NPI records.
 
 ## Usage
 
 ``` r
 nppes(
   npi = NULL,
-  entype = NULL,
+  entity = NULL,
   first = NULL,
   last = NULL,
-  organization = NULL,
-  name_type = NULL,
-  taxonomy_desc = NULL,
+  org_name = NULL,
+  type = NULL,
+  specialty = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   country = NULL,
   limit = 1200L,
-  skip = 0L,
-  unnest = TRUE,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  skip = 0L
 )
 ```
 
@@ -32,83 +27,58 @@ nppes(
 
 - npi:
 
-  `<chr>` Unique 10-digit National Provider Identifier number issued by
-  CMS to US healthcare providers through NPPES.
+  `<int>` National Provider Identifier
 
-- entype:
+- entity:
 
-  `<chr>` Entity type; one of either `I` for Individual (NPI-1) or `O`
-  for Organizational (NPI-2)
+  `<chr>` Entity type; `1` (Individual) or `2` (Organization)
 
 - first, last:
 
-  `<chr>` **WC** Individual provider's first and/or last name
+  `<chr>` **WC** Individual provider's name
 
-- organization:
+- org_name:
 
-  `<chr>` **WC** Organizational provider's name. Many types of names
-  (LBN, DBA, Former LBN, Other Name) may match. As such, the results
-  might contain a name different from the one entered.
+  `<chr>` **WC** Organization's name
 
-- name_type:
+- type:
 
-  `<chr>` Type of individual the `first` and `last` name parameters
-  refer to; one of either `AO` for Authorized Officials or `Provider`
-  for Individual Providers.
+  `<chr>` Type of individual `first`/`last` refers to: `AO` (Authorized
+  Official) or `Provider` (Individual Provider).
 
-- taxonomy_desc:
+- specialty:
 
-  `<chr>` Provider's taxonomy description, e.g. `Pharmacist`,
-  `Pediatrics`
+  `<chr>` Provider's specialty
 
 - city:
 
-  `<chr>` City name. For military addresses, search for either `APO` or
-  `FPO`.
+  `<chr>` City; For military addresses, search `"APO"`/`"FPO"`.
 
 - state:
 
-  `<chr>` 2-character state abbreviation. If it is the only input, one
-  other parameter besides `entype` and `country` is required.
+  `<chr>` State abbreviation. If the only input, one other parameter
+  besides `entity` or `country` is required.
 
 - zip:
 
-  `<chr>` **WC** 5- to 9-digit zip code, without a hyphen.
+  `<chr>` **WC** 5-9 digit zip code, no hyphen.
 
 - country:
 
-  `<chr>` 2-character country abbreviation. Can be the only input, as
-  long as it *is not* `US`.
+  `<chr>` Country abbreviation. Can be the only input if it *is not*
+  `"US"`.
 
 - limit:
 
-  `<int>` Maximum number of results to return; **default** is `1200L`
+  `<int>` Maximum number of results to return
 
 - skip:
 
-  `<int>` Number of results to skip after those initially returned by
-  the API; **default** is `0L`
-
-- unnest:
-
-  `<lgl>` Unnest list columns; **default** is `TRUE`
-
-- tidy:
-
-  `<lgl>` Tidy output; **default** is `TRUE`
-
-- na.rm:
-
-  `<lgl>` Remove empty rows and columns; **default** is `TRUE`
-
-- ...:
-
-  Empty dots
+  `<int>` Number of results to skip
 
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-containing the search results.
 
 ## **National Provider Identifier (NPI)**
 
@@ -173,26 +143,15 @@ status in the Medicare program, and to commit the organization to fully
 abide by the statutes, regulations, and program instructions of the
 Medicare program.
 
-## Links
-
-- [NPPES NPI Registry API
-  Documentation](https://npiregistry.cms.hhs.gov/api-page)
-
-- [NPPES NPI Registry API
-  Demo](https://npiregistry.cms.hhs.gov/demo-api)
-
-- [NPPES Available
-  Countries](https://npiregistry.cms.hhs.gov/help-api/country)
-
 ## Trailing Wildcard Entries
 
 Arguments that allow trailing wildcard entries are denoted in the
 parameter description with **WC**. Wildcard entries require at least two
 characters to be entered, e.g. `"jo*"`
 
-## Update Frequency
+## References
 
-**Weekly**
+- [NPPES NPI Registry API](https://npiregistry.cms.hhs.gov/api-page)
 
 ## Examples
 
@@ -203,6 +162,6 @@ nppes(npi = 1528060837)
 nppes(city   = "CARROLLTON",
       state  = "GA",
       zip    = 301173889,
-      entype = "I")
+      entity = 1)
 }
 ```
