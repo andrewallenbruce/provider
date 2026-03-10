@@ -82,7 +82,7 @@
 #' @param active `<lgl>` Return only active providers#'
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @examplesIf interactive()
+#' @examples
 #' # Artic Envestigations Program Laboratory, Anchorage, AK
 #' laboratories(ccn = "02D0873639")
 #'
@@ -112,7 +112,7 @@
 #'
 #' @export
 laboratories <- function(
-    name = NULL,
+  name = NULL,
   ccn = NULL,
   cert = NULL,
   city = NULL,
@@ -131,7 +131,6 @@ laboratories <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("laboratories")
-  NM <- NULL
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -231,55 +230,35 @@ cert_enum <- function(cert = NULL) {
 
 #' @autoglobal
 #' @noRd
-cert <- function(x) {
-  dplyr::case_match(
-    x,
-    "compliance" ~ "1",
-    "waiver" ~ "2",
-    "accreditation" ~ "3",
-    "ppm" ~ "4",
-    "registration" ~ "9",
-    .default = x
-  )
-}
-
-#' @autoglobal
-#' @noRd
-fct_toa <- function(x) {
-  factor(
-    x,
-    levels = c("1", "2", "3", "4", "5", "8"),
-    labels = c(
-      "Initial",
-      "Recertification",
-      "Termination",
-      "Change of Ownership",
-      "Validation",
-      "Full Survey After Complaint"
+recode_clia <- function(x, col) {
+  switch(
+    col,
+    # same as apl_type
+    cert = cheapr::val_match(
+      x,
+      1 ~ "Compliance",
+      2 ~ "Waiver",
+      3 ~ "Accreditation",
+      4 ~ "PPM",
+      9 ~ "Registration",
+      .default = x
     ),
-    ordered = TRUE
-  )
-}
-
-#' @autoglobal
-#' @noRd
-fct_app <- function(x) {
-  factor(
-    x,
-    levels = c("1", "2", "3", "4", "9"),
-    labels = c("Compliance", "Waiver", "Accreditation", "PPM", "Registration"),
-    ordered = TRUE
-  )
-}
-
-#' @autoglobal
-#' @noRd
-fct_stat <- function(x) {
-  factor(
-    x,
-    levels = c("A", "B"),
-    labels = c("In Compliance", "Not In Compliance"),
-    ordered = TRUE
+    action = cheapr::val_match(
+      x,
+      1 ~ "Initial",
+      2 ~ "Recertification",
+      3 ~ "Termination",
+      4 ~ "Change of Ownership",
+      5 ~ "Validation",
+      8 ~ "Full Survey After Complaint",
+      .default = x
+    ),
+    status = cheapr::val_match(
+      x,
+      "A" ~ "Compliant",
+      "B" ~ "Non-Compliant",
+      .default = x
+    )
   )
 }
 

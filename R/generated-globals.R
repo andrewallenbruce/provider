@@ -7,6 +7,7 @@ utils::globalVariables(c(
   "arg",
   # <affiliations>
   # <clinicians>
+  # <hospitals>
   # <laboratories>
   # <opt_out>
   # <order_refer>
@@ -38,6 +39,7 @@ utils::globalVariables(c(
   "keyword",
   # <affiliations>
   # <clinicians>
+  # <hospitals>
   # <laboratories>
   # <opt_out>
   # <order_refer>
@@ -49,6 +51,8 @@ utils::globalVariables(c(
   "modified",
   # <affiliations>
   # <clinicians>
+  # <hospitals>
+  # <laboratories>
   # <opt_out>
   # <order_refer>
   # <providers>
@@ -60,8 +64,6 @@ utils::globalVariables(c(
   "pr",
   # <nppes>
   "purpose",
-  # <hospitals>
-  "sg",
   # <state_recode>
   "state.abb",
   # <state_recode>

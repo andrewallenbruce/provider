@@ -6,169 +6,77 @@
 \usage{
 hospitals(
   npi = NULL,
-  facility_ccn = NULL,
-  enid_org = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
   enid_state = NULL,
-  pac_org = NULL,
-  specialty_code = NULL,
-  organization = NULL,
-  dba = NULL,
+  specialty = NULL,
+  org_name = NULL,
+  dba_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  registration = NULL,
-  multi_npi = NULL,
+  designation = NULL,
+  multi = NULL,
   reh = NULL,
-  subgroup = list(),
-  tidy = TRUE,
-  pivot = TRUE,
-  na.rm = TRUE,
-  ...
+  subgroup = list(acute = NULL, drug = NULL, child = NULL, general = NULL, long = NULL,
+    short = NULL, psych = NULL, rehab = NULL, swing = NULL, psych_unit = NULL, rehab_unit
+    = NULL, specialty = NULL, other = NULL)
 )
 }
 \arguments{
-\item{npi}{\verb{<int>}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-10-digit Organizational National Provider Identifier}
+\item{ccn}{\verb{<int>} CMS Certification Number}
 
-\item{facility_ccn}{\verb{<int>}
+\item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-6-digit CMS Certification Number}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
-\item{enid_org}{\verb{<chr>}
+\item{enid_state}{\verb{<chr>} Enrollment State}
 
-15-digit Organizational Medicare Enrollment ID}
-
-\item{enid_state}{\verb{<chr>}
-
-Hospital’s enrollment state}
-
-\item{pac_org}{\verb{<int>}
-
-10-digit Organizational PECOS Associate Control ID}
-
-\item{specialty_code}{\verb{<chr>}
-
-Medicare Part A Provider specialty code:
+\item{specialty}{\verb{<chr>} Part A Provider Specialty:
 \itemize{
-\item \code{"00-00"}: Religious Non-Medical Healthcare Institution (RNHCI)
-\item \code{"00-01"}: Community Mental Health Center
-\item \code{"00-02"}: Comprehensive Outpatient Rehabilitation Facility (CORF)
-\item \code{"00-03"}: End-Stage Renal Disease Facility (ESRD)
-\item \code{"00-04"}: Federally Qualified Health Center (FQHC)
-\item \code{"00-05"}: Histocompatibility Laboratory
-\item \code{"00-06"}: Home Health Agency (HHA)
-\item \code{"00-08"}: Hospice
 \item \code{"00-09"}: Hospital
-\item \code{"00-10"}: Indian Health Services Facility
-\item \code{"00-13"}: Organ Procurement Organization (OPO)
-\item \code{"00-14"}: Outpatient PT/Occupational Therapy/Speech Pathology
-\item \code{"00-17"}: Rural Health Clinic (RHC)
-\item \code{"00-18"}: Skilled Nursing Facility (SNF)
-\item \code{"00-19"}: Other
-\item \code{"00-24"}: Rural Emergency Hospital (REH)
-\item \code{"00-85"}: Critical Access Hospital (CAH)
+\item \code{"00-24"}: REH (Rural Emergency Hospital)
+\item \code{"00-85"}: CAH (Critical Access Hospital)
 }}
 
-\item{organization}{\verb{<chr>}
+\item{org_name}{\verb{<chr>} Legal Business Name}
 
-Hospital’s legal business name}
+\item{dba_name}{\verb{<chr>} Doing-Business-As Name}
 
-\item{dba}{\verb{<chr>}
+\item{city}{\verb{<chr>} Practice Location City}
 
-Hospital’s doing-business-as name}
+\item{state}{\verb{<chr>} Practice Location State}
 
-\item{city}{\verb{<chr>}
+\item{zip}{\verb{<chr>} Practice Location Zip Code}
 
-City of the hospital’s practice location}
+\item{designation}{\verb{<chr>} IRS designation; \code{"Proprietor"}/\code{"Non-Profit"}}
 
-\item{state}{\verb{<chr>}
+\item{multi}{\verb{<lgl>} Hospital has more than one NPI}
 
-State of the hospital’s practice location}
+\item{reh}{\verb{<lgl>} Former Hospital/CAH now a Rural Emergency Hospital}
 
-\item{zip}{\verb{<int>}
-
-Zip code of the hospital’s practice location}
-
-\item{registration}{\verb{<chr>}
-
-Hospital's IRS designation:
-\itemize{
-\item \code{"P"}: Registered as \strong{Proprietor}
-\item \code{"N"}: Registered as \strong{Non-Profit}
-}}
-
-\item{multi_npi}{\verb{<lgl>}
-
-Indicates hospital has more than one NPI}
-
-\item{reh}{\verb{<lgl>}
-
-Indicates a former Hospital or Critical Access Hospital (CAH) that
-converted to a Rural Emergency Hospital (REH)}
-
-\item{subgroup}{\verb{<list>}
-
-\code{subgroup = list(acute = TRUE, swing = FALSE)}
-
-Indicates hospital’s subgroup/unit designation:
+\item{subgroup}{\verb{<list>} Hospital’s subgroup/unit:
 \itemize{
 \item \code{acute}: Acute Care
-\item \code{alc_drug}: Alcohol/Drug
+\item \code{drug}: Alcohol/Drug Treatment
 \item \code{child}: Children's Hospital
-\item \code{gen}: General
-\item \code{long}: Long-Term
-\item \code{short}: Short-Term
+\item \code{general}: General Hospital
+\item \code{long}: Long-Term Care
+\item \code{short}: Short-Term Care
 \item \code{psych}: Psychiatric
 \item \code{rehab}: Rehabilitation
 \item \code{swing}: Swing-Bed Approved
 \item \code{psych_unit}: Psychiatric Unit
 \item \code{rehab_unit}: Rehabilitation Unit
-\item \code{spec}: Specialty Hospital
-\item \code{other}: Not listed on CMS form
+\item \code{specialty}: Specialty Hospital
+\item \code{other}: Unlisted on CMS form
 }}
-
-\item{tidy}{\verb{<lgl>} // \strong{default:} \code{TRUE}
-
-Tidy output}
-
-\item{pivot}{\verb{<lgl>} // \strong{default:} \code{TRUE}
-
-Pivot output}
-
-\item{na.rm}{\verb{<lgl>} // \strong{default:} \code{TRUE}
-
-Remove empty rows and columns}
-
-\item{...}{Empty}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab Hospital's 10-digit National Provider Identifier \cr
-   \code{pac_org} \tab Hospital’s 10-digit PECOS Associate Control ID \cr
-   \code{enid_org} \tab Hospital’s 15-digit Enrollment ID \cr
-   \code{enid_state} \tab Hospital’s Enrollment State \cr
-   \code{facility_ccn} \tab Hospital’s CMS Certification Number \cr
-   \code{organization} \tab Hospital’s Legal Business Name \cr
-   \code{doing_business_as} \tab Hospital’s Doing-Business-As Name \cr
-   \code{specialty_code} \tab Hospital’s Medicare Part A Provider Specialty Code \cr
-   \code{specialty} \tab Specialty Code Description \cr
-   \code{incorp_date} \tab Date the Business was Incorporated \cr
-   \code{incorp_state} \tab State in which the Business was Incorporated \cr
-   \code{structure} \tab Hospital’s Organization Structure Type \cr
-   \code{address} \tab Hospital’s Practice Location Address \cr
-   \code{city} \tab Hospital’s Practice Location City \cr
-   \code{state} \tab Hospital’s Practice Location State \cr
-   \code{zip} \tab Hospital’s Practice Location Zip Code \cr
-   \code{location_type} \tab Practice Location Type \cr
-   \code{multi_npi} \tab Indicates Hospital has more than one NPI \cr
-   \code{reh_date} \tab Date the Hospital/CAH converted to an REH \cr
-   \code{reh_ccns} \tab CCNs associated with the Hospital/CAH that converted to an REH \cr
-   \code{registration} \tab Hospital’s IRS Registration Status \cr
-   \code{subgroup} \tab Hospital's Subgroup/Unit Designations, REH Conversion Status \cr
-   \code{other} \tab If \code{subgroup} is \code{"Other"}, description of Subgroup/Unit \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Hospitals currently enrolled in Medicare. Data includes the hospital's
@@ -176,23 +84,11 @@ sub-group types, legal business name, doing-business-as name, organization
 type and address.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-hospitals(pac_org = 6103733050)
-
+hospitals()
+hospitals(pac = 6103733050)
 hospitals(state = "GA", reh = TRUE)
-
-hospitals(city = "Savannah", state = "GA")
-
-hospitals(city = "Savannah",
-          state = "GA",
-          subgroup = list(acute = FALSE))
-
-hospitals(city = "Savannah",
-          state = "GA",
-          subgroup = list(
-          gen = TRUE,
-          rehab = FALSE))
-\dontshow{\}) # examplesIf}
+hospitals(city = "Atlanta", state = "GA", subgroup = list(acute = FALSE))
+hospitals(state = "GA", subgroup = list(psych = TRUE))
 }
 \references{
 \itemize{

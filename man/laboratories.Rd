@@ -100,7 +100,6 @@ CMS-approved accreditation organizations:
 }
 
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Artic Envestigations Program Laboratory, Anchorage, AK
 laboratories(ccn = "02D0873639")
 
@@ -125,7 +124,7 @@ laboratories(ccn = "11D2306220")
 laboratories(ccn = "11D0265516")
 
 laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
-\dontshow{\}) # examplesIf}
+
 }
 \references{
 \itemize{
