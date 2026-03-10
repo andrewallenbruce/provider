@@ -27,7 +27,7 @@
 #'    - `"00-24"`: REH (Rural Emergency Hospital)
 #'    - `"00-85"`: CAH (Critical Access Hospital)
 #'
-#' @param subgroup `<list>` Hospital’s subgroup/unit:
+#' @param subgroup `<subgroups>` Hospital’s subgroup/unit:
 #'
 #'    - `acute`: Acute Care
 #'    - `drug`: Alcohol/Drug Treatment
@@ -48,8 +48,8 @@
 #' hospitals()
 #' hospitals(pac = 6103733050)
 #' hospitals(state = "GA", reh = TRUE)
-#' hospitals(city = "Atlanta", state = "GA", subgroup = list(acute = FALSE))
-#' hospitals(state = "GA", subgroup = list(psych = TRUE))
+#' hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
+#' hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
 #' @autoglobal
 #' @export
 hospitals <- function(
@@ -67,26 +67,12 @@ hospitals <- function(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = list(
-    acute = NULL,
-    drug = NULL,
-    child = NULL,
-    general = NULL,
-    long = NULL,
-    short = NULL,
-    psych = NULL,
-    rehab = NULL,
-    swing = NULL,
-    psych_unit = NULL,
-    rehab_unit = NULL,
-    specialty = NULL,
-    other = NULL
-  )
+  subgroup = subgroups()
 ) {
 
-  G <- purrr::map(subgroup, convert_lgl)
+  check_is_subgroups(subgroup)
 
-  args <- params(
+  ARG <- params(
     NPI = npi,
     CCN = ccn,
     `ENROLLMENT ID` = enid,
@@ -101,25 +87,13 @@ hospitals <- function(
     PROPRIETARY_NONPROFIT = designation,
     `MULTIPLE NPI FLAG` = convert_lgl(multi),
     `REH CONVERSION FLAG` = convert_lgl(reh),
-    `SUBGROUP %2D GENERAL` = G$general,
-    `SUBGROUP %2D ACUTE CARE` = G$acute,
-    `SUBGROUP %2D ALCOHOL DRUG` = G$drug,
-    `SUBGROUP %2D CHILDRENS` = G$child,
-    `SUBGROUP %2D LONG-TERM` = G$long,
-    `SUBGROUP %2D PSYCHIATRIC` = G$psych,
-    `SUBGROUP %2D REHABILITATION` = G$rehab,
-    `SUBGROUP %2D SHORT-TERM` = G$short,
-    `SUBGROUP %2D SWING-BED APPROVED` = G$swing,
-    `SUBGROUP %2D PSYCHIATRIC UNIT` = G$psych_unit,
-    `SUBGROUP %2D REHABILITATION UNIT` = G$rehab_unit,
-    `SUBGROUP %2D SPECIALTY HOSPITAL` = G$specialty,
-    `SUBGROUP %2D OTHER` = G$other
+    !!!subgroup
   )
 
   .c(BASE, LIMIT, NM) %=% constants("hospitals")
 
   # No Query: Warn & Return First 10 Rows =====================
-  if (!length(args)) {
+  if (!length(ARG)) {
     cli_no_query()
 
     url <- url_(paste0(BASE, "?"), opts(size = 10))
@@ -136,7 +110,7 @@ hospitals <- function(
   url <- url_(
     paste0(BASE, "/stats?"),
     opts(size = LIMIT),
-    query2(args)
+    query2(ARG)
   )
 
   N <- request_rows(url)
@@ -154,7 +128,7 @@ hospitals <- function(
     url <- url_(
       paste0(BASE, "?"),
       opts(size = LIMIT),
-      query2(args)
+      query2(ARG)
     )
 
     res <- request_bare(url) |>
@@ -171,7 +145,7 @@ hospitals <- function(
   url <- url_(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    query2(args)
+    query2(ARG)
   )
 
   urls <- offset(N, LIMIT, "seq") |>
@@ -183,4 +157,89 @@ hospitals <- function(
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)
+}
+
+#' Subgroup Helper
+#'
+#' For use in [hospitals()] `subgroup` argument
+#'
+#' @param acute `<lgl>` Acute Care
+#' @param drug `<lgl>` Alcohol/Drug Treatment
+#' @param child `<lgl>` Children's Hospital
+#' @param general `<lgl>` General Hospital
+#' @param long `<lgl>` Long-Term Care
+#' @param short `<lgl>` Short-Term Care
+#' @param psych `<lgl>` Psychiatric
+#' @param rehab `<lgl>` Rehabilitation
+#' @param swing `<lgl>` Swing-Bed Approved
+#' @param psych_unit `<lgl>` Psychiatric Unit
+#' @param rehab_unit `<lgl>` Rehabilitation Unit
+#' @param specialty `<lgl>` Specialty Hospital
+#' @param other `<lgl>` Unlisted on CMS form
+#' @returns A `<subgroups>` object
+#' @examples
+#' subgroups(acute = TRUE, rehab = TRUE)
+#' @autoglobal
+#' @keywords internal
+#' @export
+subgroups <- function(
+  acute = NULL,
+  drug = NULL,
+  child = NULL,
+  general = NULL,
+  long = NULL,
+  short = NULL,
+  psych = NULL,
+  rehab = NULL,
+  swing = NULL,
+  psych_unit = NULL,
+  rehab_unit = NULL,
+  specialty = NULL,
+  other = NULL
+) {
+  x <- purrr::map(
+    list(
+      acute = acute,
+      drug = drug,
+      child = child,
+      general = general,
+      long = long,
+      short = short,
+      psych = psych,
+      rehab = rehab,
+      swing = swing,
+      psych_unit = psych_unit,
+      rehab_unit = rehab_unit,
+      specialty = specialty,
+      other = other
+    ),
+    convert_lgl
+  )
+
+  structure(
+    params(
+      `SUBGROUP %2D GENERAL` = x$general,
+      `SUBGROUP %2D ACUTE CARE` = x$acute,
+      `SUBGROUP %2D ALCOHOL DRUG` = x$drug,
+      `SUBGROUP %2D CHILDRENS` = x$child,
+      `SUBGROUP %2D LONG-TERM` = x$long,
+      `SUBGROUP %2D PSYCHIATRIC` = x$psych,
+      `SUBGROUP %2D REHABILITATION` = x$rehab,
+      `SUBGROUP %2D SHORT-TERM` = x$short,
+      `SUBGROUP %2D SWING-BED APPROVED` = x$swing,
+      `SUBGROUP %2D PSYCHIATRIC UNIT` = x$psych_unit,
+      `SUBGROUP %2D REHABILITATION UNIT` = x$rehab_unit,
+      `SUBGROUP %2D SPECIALTY HOSPITAL` = x$specialty,
+      `SUBGROUP %2D OTHER` = x$other
+    ),
+    class = "subgroups"
+  )
+}
+
+#' @noRd
+check_is_subgroups <- function(x) {
+  if (!inherits(x, "subgroups")) {
+    cli::cli_abort(c("{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(subgroup)}}",
+                     "i" = "Use the {.fn subgroups} helper function"))
+  }
 }

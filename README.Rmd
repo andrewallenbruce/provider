@@ -19,11 +19,9 @@ knitr::opts_chunk$set(
   )
 ```
 
-<h1 align="left">
-
 <b>provider</b> <img src="man/figures/logo.svg" align="right" height="200" />
 
-</h1>
+<br>
 
 > Tidy Healthcare Provider API Interface
 

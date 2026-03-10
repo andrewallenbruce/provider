@@ -1,12 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<h1 align="left">
-
 <b>provider</b>
 <img src="man/figures/logo.svg" align="right" height="200" />
 
-</h1>
+<br>
 
 > Tidy Healthcare Provider API Interface
 

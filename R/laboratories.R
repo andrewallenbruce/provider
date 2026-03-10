@@ -78,34 +78,20 @@
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
-#' @param active `<lgl>` Return only active providers#'
+#' @param active `<lgl>` Return only active providers
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' # Artic Envestigations Program Laboratory, Anchorage, AK
-#' laboratories(ccn = "02D0873639")
+#' provider:::cdc_labs
 #'
-#' # Dengue Laboratory, San Juan, PR
-#' laboratories(ccn = "40D0869394")
+#' laboratories(ccn = provider:::cdc_labs$ccn)
 #'
-#' # CDC/CGH/DGHA International Laboratory, Atlanta, GA
-#' laboratories(ccn = "11D1061576")
-#'
-#' # Infectious Diseases Laboratory, Atlanta, GA
-#' laboratories(ccn = "11D0668319")
-#'
-#' # National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA
-#' laboratories(ccn = "11D0668290")
-#'
-#' # Vector-Borne Diseases Laboratory, Fort Collins, CO
-#' laboratories(ccn = "06D0880233")
-#'
-#' # Wiregrass Georgia Tech College Student Health Center, Valdosta, GA
-#' laboratories(ccn = "11D2306220")
-#'
-#' laboratories(ccn = "11D0265516")
-#'
-#' laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
+#' laboratories(
+#'    cert = c("ppm", "accreditation"),
+#'    city = "Valdosta",
+#'    state = "GA",
+#'    active = TRUE
+#'  )
 #'
 #' @autoglobal
 #'

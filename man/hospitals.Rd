@@ -19,9 +19,7 @@ hospitals(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = list(acute = NULL, drug = NULL, child = NULL, general = NULL, long = NULL,
-    short = NULL, psych = NULL, rehab = NULL, swing = NULL, psych_unit = NULL, rehab_unit
-    = NULL, specialty = NULL, other = NULL)
+  subgroup = subgroups()
 )
 }
 \arguments{
@@ -58,7 +56,7 @@ hospitals(
 
 \item{reh}{\verb{<lgl>} Former Hospital/CAH now a Rural Emergency Hospital}
 
-\item{subgroup}{\verb{<list>} Hospital’s subgroup/unit:
+\item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit:
 \itemize{
 \item \code{acute}: Acute Care
 \item \code{drug}: Alcohol/Drug Treatment
@@ -87,8 +85,8 @@ type and address.
 hospitals()
 hospitals(pac = 6103733050)
 hospitals(state = "GA", reh = TRUE)
-hospitals(city = "Atlanta", state = "GA", subgroup = list(acute = FALSE))
-hospitals(state = "GA", subgroup = list(psych = TRUE))
+hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
+hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
 }
 \references{
 \itemize{
