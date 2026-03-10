@@ -110,7 +110,6 @@ laboratories(
    state = "GA",
    active = TRUE
  )
-
 }
 \references{
 \itemize{

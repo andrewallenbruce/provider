@@ -12,7 +12,7 @@
 \alias{not_equal}
 \alias{any_of}
 \alias{none_of}
-\title{Query Modifiers}
+\title{A variety of different query operators}
 \usage{
 greater_than(x, or_equal = FALSE)
 

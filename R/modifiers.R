@@ -29,7 +29,7 @@ print.modifier <- function(x, ...) {
   )
 }
 
-#' Query Modifiers
+#' A variety of different query operators
 #'
 #' @description
 #' Helpers for use in constructing conditions in queries.

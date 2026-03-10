@@ -13,13 +13,12 @@ knitr::opts_chunk$set(
   message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
-  comment   = "#>",
-  dpi       = 600, 
-  out.width = "100%"
+  comment   = "#>"
   )
 ```
 
-<b>provider</b> <img src="man/figures/logo.svg" align="right" height="200" />
+# <b>provider</b> <a href="https://andrewallenbruce.github.io/provider/"><img src="man/figures/logo.svg" align="right" height="139" alt="provider website" /></a>
+
 
 <br>
 

@@ -103,16 +103,5 @@ reference:
   - reassignments
 
 - title: Query Modifiers
-  desc: >
-     Query Modifiers
   contents:
-  - any_of
-  - none_of
-  - between
-  - contains
-  - equal
-  - not_equal
-  - greater_than
-  - less_than
-  - ends_with
-  - starts_with
+  - modifier

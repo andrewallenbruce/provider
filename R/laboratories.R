@@ -92,9 +92,7 @@
 #'    state = "GA",
 #'    active = TRUE
 #'  )
-#'
 #' @autoglobal
-#'
 #' @export
 laboratories <- function(
   name = NULL,
