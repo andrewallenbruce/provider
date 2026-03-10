@@ -17,7 +17,7 @@ template:
       <script data-goatcounter="https://andrewallenbruce.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 home:
-  title: provider • Access Healthcare Provider Data
+  title: provider • Tidy Healthcare Provider API Interface
   description: >
     Tools for accessing and retrieving healthcare provider data.
   sidebar:
@@ -62,7 +62,7 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: Profiling
+      - text: Linking Providers
         href: articles/linking-providers.html
     news:
       icon: far fa-newspaper fa-lg
@@ -87,20 +87,29 @@ navbar:
 
 reference:
 
-- title: Current Endpoints
+- title: Endpoints
+- subtitle: General
   desc: >
-    Access current administrative healthcare provider data.
+    Access Current Provider Data.
   contents:
   - affiliations
-  - clinicians
-  - hospitals
-  - laboratories
+  - reassignments
   - nppes
+- subtitle: Individual
+  desc: >
+    Access Current Individual Provider Data.
+  contents:
+  - clinicians
   - opt_out
   - order_refer
   - pending
   - providers
-  - reassignments
+- subtitle: Organization
+  desc: >
+    Access Current Organizational Provider Data.
+  contents:
+  - hospitals
+  - laboratories
 
 - title: Query Modifiers
   contents:

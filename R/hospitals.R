@@ -69,7 +69,6 @@ hospitals <- function(
   reh = NULL,
   subgroup = subgroups()
 ) {
-
   check_is_subgroups(subgroup)
 
   ARG <- params(
@@ -199,47 +198,32 @@ subgroups <- function(
 ) {
   x <- purrr::map(
     list(
-      acute = acute,
-      drug = drug,
-      child = child,
-      general = general,
-      long = long,
-      short = short,
-      psych = psych,
-      rehab = rehab,
-      swing = swing,
-      psych_unit = psych_unit,
-      rehab_unit = rehab_unit,
-      specialty = specialty,
-      other = other
+      `SUBGROUP %2D GENERAL` = general,
+      `SUBGROUP %2D ACUTE CARE` = acute,
+      `SUBGROUP %2D ALCOHOL DRUG` = drug,
+      `SUBGROUP %2D CHILDRENS` = child,
+      `SUBGROUP %2D LONG-TERM` = long,
+      `SUBGROUP %2D PSYCHIATRIC` = psych,
+      `SUBGROUP %2D REHABILITATION` = rehab,
+      `SUBGROUP %2D SHORT-TERM` = short,
+      `SUBGROUP %2D SWING-BED APPROVED` = swing,
+      `SUBGROUP %2D PSYCHIATRIC UNIT` = psych_unit,
+      `SUBGROUP %2D REHABILITATION UNIT` = rehab_unit,
+      `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
+      `SUBGROUP %2D OTHER` = other
     ),
     convert_lgl
   )
 
-  structure(
-    params(
-      `SUBGROUP %2D GENERAL` = x$general,
-      `SUBGROUP %2D ACUTE CARE` = x$acute,
-      `SUBGROUP %2D ALCOHOL DRUG` = x$drug,
-      `SUBGROUP %2D CHILDRENS` = x$child,
-      `SUBGROUP %2D LONG-TERM` = x$long,
-      `SUBGROUP %2D PSYCHIATRIC` = x$psych,
-      `SUBGROUP %2D REHABILITATION` = x$rehab,
-      `SUBGROUP %2D SHORT-TERM` = x$short,
-      `SUBGROUP %2D SWING-BED APPROVED` = x$swing,
-      `SUBGROUP %2D PSYCHIATRIC UNIT` = x$psych_unit,
-      `SUBGROUP %2D REHABILITATION UNIT` = x$rehab_unit,
-      `SUBGROUP %2D SPECIALTY HOSPITAL` = x$specialty,
-      `SUBGROUP %2D OTHER` = x$other
-    ),
-    class = "subgroups"
-  )
+  structure(params(!!!x), class = "subgroups")
 }
 
 #' @noRd
 check_is_subgroups <- function(x) {
   if (!inherits(x, "subgroups")) {
-    cli::cli_abort(c("{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(subgroup)}}",
-                     "i" = "Use the {.fn subgroups} helper function"))
+    cli::cli_abort(c(
+      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(subgroup)}}",
+      "i" = "Use the {.fn subgroups} helper function"
+    ))
   }
 }

@@ -95,3 +95,15 @@ has_letter <- function(x) {
 is_numeric <- function(x) {
   !has_letter(x)
 }
+
+#' @autoglobal
+#' @noRd
+as_date <- function(x, ..., fmt = "%Y-%m-%d") {
+  as.Date(x, ..., format = fmt)
+}
+
+#' @autoglobal
+#' @noRd
+to_string <- function(x) {
+  purrr::map_chr(x, \(i) toString(unlist_(i), width = NULL))
+}
