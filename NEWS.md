@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9025 (2026-03-10)
+
+* removed old dependencies
+* vignette & article cleaning
+
+
 # provider 0.0.1.9024 (2026-03-10)
 
 * refactored `hospitals()`
