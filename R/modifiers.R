@@ -14,7 +14,7 @@ is_modifier <- function(x) {
   inherits(x, "modifier")
 }
 
-#' @export
+#' @exportS3Method base::print
 print.modifier <- function(x, ...) {
   cli::cli_text(cli::col_cyan("<modifier>"))
   cli::cli_text(c(
