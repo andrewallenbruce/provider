@@ -156,30 +156,138 @@ of two years, are as follows, in order of increasing complexity:
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
 # Artic Envestigations Program Laboratory, Anchorage, AK
 laboratories(ccn = "02D0873639")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        ANCHOR… N     A      020        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # Dengue Laboratory, San Juan, PR
 laboratories(ccn = "40D0869394")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        SAN JU… N     A      640        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # CDC/CGH/DGHA International Laboratory, Atlanta, GA
 laboratories(ccn = "11D1061576")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        ATLANTA N     NA     370        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # Infectious Diseases Laboratory, Atlanta, GA
 laboratories(ccn = "11D0668319")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        ATLANTA N     B      370        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA
 laboratories(ccn = "11D0668290")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        ATLANTA N     A      370        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # Vector-Borne Diseases Laboratory, Fort Collins, CO
 laboratories(ccn = "06D0880233")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        FORT C… Y     A      340        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 # Wiregrass Georgia Tech College Student Health Center, Valdosta, GA
 laboratories(ccn = "11D2306220")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        VALDOS… N     NA     700        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 laboratories(ccn = "11D0265516")
+#> ✔ Query returned 1 result.
+#> # A tibble: 1 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        VALDOS… Y     A      700        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 
 laboratories(cert = "ppm", city = "Valdosta", state = "GA", active = TRUE)
-}
+#> ✔ Query returned 3 results.
+#> # A tibble: 3 × 103
+#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
+#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
+#> 1 22      01       0          NA        VALDOS… N     NA     700        NA      
+#> 2 22      01       0          NA        VALDOS… N     NA     700        NA      
+#> 3 22      01       0          NA        VALDOS… N     A      700        NA      
+#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
+#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
+#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
+#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
+#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
+#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
+#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
 ```

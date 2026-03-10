@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9023</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9024</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,32 +175,141 @@ CMS-approved accreditation organizations:</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="co"># Artic Envestigations Program Laboratory, Anchorage, AK</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Artic Envestigations Program Laboratory, Anchorage, AK</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"02D0873639"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        ANCHOR… N     A      020        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Dengue Laboratory, San Juan, PR</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"40D0869394"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        SAN JU… N     A      640        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CDC/CGH/DGHA International Laboratory, Atlanta, GA</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"11D1061576"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        ATLANTA N     <span style="color: #BB0000;">NA</span>     370        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Infectious Diseases Laboratory, Atlanta, GA</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"11D0668319"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        ATLANTA N     B      370        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># National Center for Environmental Health, Division of Laboratory Science, Atlanta, GA</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"11D0668290"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        ATLANTA N     A      370        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Vector-Borne Diseases Laboratory, Fort Collins, CO</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"06D0880233"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        FORT C… Y     A      340        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Wiregrass Georgia Tech College Student Health Center, Valdosta, GA</span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"11D2306220"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        VALDOS… N     <span style="color: #BB0000;">NA</span>     700        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        VALDOS… Y     A      700        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>cert <span class="op">=</span> <span class="st">"ppm"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">3</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 103</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 22      01       0          <span style="color: #BB0000;">NA</span>        VALDOS… N     <span style="color: #BB0000;">NA</span>     700        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 22      01       0          <span style="color: #BB0000;">NA</span>        VALDOS… N     <span style="color: #BB0000;">NA</span>     700        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 22      01       0          <span style="color: #BB0000;">NA</span>        VALDOS… N     A      700        <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 94 more variables: cert_date &lt;chr&gt;, eligible_ind &lt;chr&gt;, name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_curr &lt;chr&gt;, vend &lt;chr&gt;, orig_date &lt;chr&gt;, chow_prev_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac_prev &lt;chr&gt;, ccn &lt;chr&gt;, region &lt;chr&gt;, skeleton &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state_ssa &lt;chr&gt;, state_reg &lt;chr&gt;, add_1 &lt;chr&gt;, phone_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_cd &lt;chr&gt;, term_date &lt;chr&gt;, cert_action &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, cbsa_ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_cd &lt;chr&gt;, add_2 &lt;chr&gt;, aff_1 &lt;chr&gt;, aff_2 &lt;chr&gt;, aff_3 &lt;chr&gt;, …</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

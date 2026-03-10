@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9024 (2026-03-10)
+
+- refactored
+  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+
 ## provider 0.0.1.9023 (2026-03-09)
 
 - refactored

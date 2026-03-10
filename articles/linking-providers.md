@@ -83,7 +83,7 @@ hospitals(organization = "Elizabethtown Community Hospital") |>
 ```
 
     #> Error in `hospitals()`:
-    #> ! object 'sg' not found
+    #> ! unused argument (organization = "Elizabethtown Community Hospital")
 
   
 

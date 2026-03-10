@@ -187,7 +187,7 @@ affiliations(pac = 0123456789)
 # Must be numeric
 hospitals(pac_org = "O12345678912")
 #> Error in `hospitals()`:
-#> ! object 'sg' not found
+#> ! unused argument (pac_org = "O12345678912")
 ```
 
   
@@ -211,7 +211,7 @@ providers(enid = "L12345678912345")
 # Some functions require one of ID types
 hospitals(enid_org = "I20180115000174")
 #> Error in `hospitals()`:
-#> ! object 'sg' not found
+#> ! unused argument (enid_org = "I20180115000174")
 ```
 
 ------------------------------------------------------------------------
