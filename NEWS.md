@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9027 (2026-03-10)
+
+* added `subgroups()` helper
+* added `cdc_labs` CLIA example dataset
+
+
 # provider 0.0.1.9026 (2026-03-10)
 
 * re-rendered `README.Rmd`
