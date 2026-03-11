@@ -166,22 +166,22 @@ provider:::cdc_labs
 
 laboratories(ccn = provider:::cdc_labs$ccn)
 #> ✔ Query returned 6 results.
-#> # A tibble: 6 × 103
-#>   prv_cat prv_type chow_count chow_date city    pos   status county_ssa xref_ccn
-#>   <chr>   <chr>    <chr>      <chr>     <chr>   <chr> <chr>  <chr>      <chr>   
-#> 1 22      01       0          NA        ANCHOR… N     A      020        NA      
-#> 2 22      01       0          NA        FORT C… Y     A      340        NA      
-#> 3 22      01       0          NA        ATLANTA N     A      370        NA      
-#> 4 22      01       0          NA        ATLANTA N     B      370        NA      
-#> 5 22      01       0          NA        ATLANTA N     NA     370        NA      
-#> 6 22      01       0          NA        SAN JU… N     A      640        NA      
-#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
-#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
-#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
-#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
-#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
-#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
-#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
+#> # A tibble: 6 × 82
+#>   fac_name_1      fac_name_2 ccn   xref  chow_n chow_date chow_prev pos   status
+#>   <chr>           <chr>      <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr> 
+#> 1 CDC ARCTIC INV… CENTERS F… 02D0… NA    0      NA        NA        N     A     
+#> 2 CENTERS FOR DI… DIVISION … 06D0… NA    0      NA        NA        Y     A     
+#> 3 CDC/NCEH/DIVIS… NA         11D0… NA    0      NA        NA        N     A     
+#> 4 CENTERS FOR DI… NA         11D0… NA    0      NA        NA        N     B     
+#> 5 CDC/CGH/DGHA I… ATTENTION… 11D1… NA    0      NA        NA        N     NA    
+#> 6 CENTERS FOR DI… DENGUE BR… 40D0… NA    0      NA        NA        N     A     
+#> # ℹ 73 more variables: add_1 <chr>, add_2 <chr>, phone_1 <chr>, phone_2 <chr>,
+#> #   city <chr>, state <chr>, region <chr>, zip <chr>, state_ssa <chr>,
+#> #   county_ssa <chr>, fips_state <chr>, fips_county <chr>, state_reg <chr>,
+#> #   cbsa_cd <chr>, cbsa_ind <chr>, eligible <chr>, term_pgm <chr>,
+#> #   term_clia <chr>, apl_type <chr>, cert_type <chr>, fac_type <chr>,
+#> #   ownership <chr>, cert_action <chr>, orig_date <chr>, apl_date <chr>,
+#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
 
 laboratories(
    cert = c("ppm", "accreditation"),
@@ -190,26 +190,26 @@ laboratories(
    active = TRUE
  )
 #> ✔ Query returned 12 results.
-#> # A tibble: 12 × 103
-#>    prv_cat prv_type chow_count chow_date city   pos   status county_ssa xref_ccn
-#>    <chr>   <chr>    <chr>      <chr>     <chr>  <chr> <chr>  <chr>      <chr>   
-#>  1 22      01       0          NA        VALDO… N     A      700        NA      
-#>  2 22      01       0          NA        VALDO… N     A      700        NA      
-#>  3 22      01       0          NA        VALDO… N     NA     700        NA      
-#>  4 22      01       0          NA        VALDO… N     NA     700        NA      
-#>  5 22      01       0          NA        VALDO… N     NA     700        NA      
-#>  6 22      01       0          NA        VALDO… N     NA     700        NA      
-#>  7 22      01       0          NA        VALDO… N     A      700        NA      
-#>  8 22      01       0          NA        VALDO… N     NA     120        NA      
-#>  9 22      01       0          NA        VALDO… N     NA     700        NA      
-#> 10 22      01       0          NA        VALDO… N     NA     700        NA      
-#> 11 22      01       0          NA        VALDO… N     NA     700        NA      
-#> 12 22      01       0          NA        VALDO… N     NA     700        NA      
-#> # ℹ 94 more variables: cert_date <chr>, eligible_ind <chr>, name <chr>,
-#> #   mac_curr <chr>, vend <chr>, orig_date <chr>, chow_prev_date <chr>,
-#> #   mac_prev <chr>, ccn <chr>, region <chr>, skeleton <chr>, state <chr>,
-#> #   state_ssa <chr>, state_reg <chr>, add_1 <chr>, phone_1 <chr>,
-#> #   term_cd <chr>, term_date <chr>, cert_action <chr>, ownership <chr>,
-#> #   zip <chr>, fips_state <chr>, fips_county <chr>, cbsa_ind <chr>,
-#> #   cbsa_cd <chr>, add_2 <chr>, aff_1 <chr>, aff_2 <chr>, aff_3 <chr>, …
+#> # A tibble: 12 × 82
+#>    fac_name_1     fac_name_2 ccn   xref  chow_n chow_date chow_prev pos   status
+#>    <chr>          <chr>      <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr> 
+#>  1 SGMC HEALTH    NA         11D0… NA    0      NA        NA        N     A     
+#>  2 SGMC- SMITH N… NA         11D0… NA    0      NA        NA        N     A     
+#>  3 JOHN D ANDERS… NA         11D0… NA    0      NA        NA        N     NA    
+#>  4 SOUTH GA MED … NA         11D0… NA    0      NA        NA        N     NA    
+#>  5 VALDOSTA CBOC  NA         11D1… NA    0      NA        NA        N     NA    
+#>  6 AZALEA WOMEN'… NA         11D1… NA    0      NA        NA        N     NA    
+#>  7 THACKER DERMA… NA         11D2… NA    0      NA        NA        N     A     
+#>  8 CARE MEDICAL … NA         11D2… NA    0      NA        NA        N     NA    
+#>  9 BPC PLASMA, I… NA         11D2… NA    0      NA        NA        N     NA    
+#> 10 SOUTH GEORGIA… NA         11D2… NA    0      NA        NA        N     NA    
+#> 11 OCTAPHARMA PL… NA         11D2… NA    0      NA        NA        N     NA    
+#> 12 VEEDHATA OM L… NA         11D2… NA    0      NA        NA        N     NA    
+#> # ℹ 73 more variables: add_1 <chr>, add_2 <chr>, phone_1 <chr>, phone_2 <chr>,
+#> #   city <chr>, state <chr>, region <chr>, zip <chr>, state_ssa <chr>,
+#> #   county_ssa <chr>, fips_state <chr>, fips_county <chr>, state_reg <chr>,
+#> #   cbsa_cd <chr>, cbsa_ind <chr>, eligible <chr>, term_pgm <chr>,
+#> #   term_clia <chr>, apl_type <chr>, cert_type <chr>, fac_type <chr>,
+#> #   ownership <chr>, cert_action <chr>, orig_date <chr>, apl_date <chr>,
+#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
 ```
