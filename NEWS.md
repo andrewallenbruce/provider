@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9029 (2026-03-10)
+
+* modifiers working for both api syntaxes
+* cleaning up
+
+
 # provider 0.0.1.9028 (2026-03-10)
 
 * cleaned up old files
