@@ -18,9 +18,32 @@ set_args <- function(fn) {
 #' @noRd
 map_na_if <- function(i) {
   purrr::modify_if(i, is.character, function(x) {
-    vctrs::vec_slice(x, vctrs::vec_in(x, haystack = "")) <- NA_character_
-    x
+    vctrs::vec_assign(
+      x,
+      i = vctrs::vec_in(x, haystack = ""),
+      value = NA_character_,
+      slice_value = TRUE
+    )
   })
+}
+
+#' @noRd
+comb_ <- function(a, b, sep = "") {
+  cheapr::if_else_(
+    !cheapr::is_na(b),
+    cheapr::paste_(a, b, sep = sep),
+    a
+  )
+}
+
+#' @noRd
+bin_ <- function(x) {
+  cheapr::val_match(
+    x,
+    "Y" ~ 1L,
+    "N" ~ 0L,
+    .default = NA_integer_
+  )
 }
 
 #' @noRd

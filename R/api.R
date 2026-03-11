@@ -1,3 +1,4 @@
+#' @noRd
 #' @autoglobal
 api_provider <- function() {
   rex <- paste0(
@@ -24,6 +25,7 @@ api_provider <- function() {
     fastplyr::as_tbl()
 }
 
+#' @noRd
 #' @autoglobal
 api_medicare <- function() {
   rex <- paste0(
