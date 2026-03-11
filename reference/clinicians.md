@@ -173,4 +173,25 @@ clinicians(first = "ETAN")
 #> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
 #> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
 #> #   grp <chr>
+
+clinicians(city = starts_with("At"), state = "GA", year = 2020)
+#> ✔ Query returned 651 results.
+#> # A tibble: 651 × 25
+#>    npi        pac      enid  last  first middle suffix gender cred  school year 
+#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
+#>  1 1003403940 9032526… I202… BROWN ABBY  A      NA     F      NP    OTHER  2020 
+#>  2 1003443938 2769874… I202… TUCK… JAMES QUINT… NA     M      NA    KANSA… 2020 
+#>  3 1003445529 2769929… I202… DUNS… SARAH ELIZA… NA     F      MD    UNIVE… 2020 
+#>  4 1013410398 0941682… I202… WISE  ANNA  NA     NA     F      NA    OTHER  2020 
+#>  5 1013500073 3870993… I202… HAMB… SANT… GIBBS  NA     F      NA    OTHER  2020 
+#>  6 1013525310 1759786… I202… ST L… SAND… NA     NA     F      NA    OTHER  2020 
+#>  7 1013527811 2567889… I202… CERVI JACK… J      NA     M      NA    OTHER  2020 
+#>  8 1013545854 3072973… I202… KHIM… SHAM… NA     NA     F      NA    OTHER  2020 
+#>  9 1013545912 5799221… I202… FOST… TYREL NA     NA     M      MD    UNIVE… 2020 
+#> 10 1013546126 4183047… I202… BHAT  KART… NA     NA     M      MD    EASTE… 2020 
+#> # ℹ 641 more rows
+#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
+#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
+#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
+#> #   grp <chr>
 ```

@@ -9,7 +9,7 @@ including the medical school that they attended and the year they graduated"><me
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9028</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9029</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -190,6 +190,27 @@ including the medical school that they attended and the year they graduated</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1528301728 7113252… I201… MARKS ETAN  ARIEL  <span style="color: #BB0000;">NA</span>     M      DO    NOVA … 2013 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1528301728 7113252… I202… MARKS ETAN  ARIEL  <span style="color: #BB0000;">NA</span>     M      DO    NOVA … 2013 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 1699040790 7618254… I202… DAYAN ETAN  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     M      MD    STATE… 2012 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: specialty &lt;chr&gt;, spec_other &lt;chr&gt;, telehealth &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   facility_name &lt;chr&gt;, org_pac &lt;chr&gt;, org_mems &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grp &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"At"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">651</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 651 × 25</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        pac      enid  last  first middle suffix gender cred  school year </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1003403940 9032526… I202… BROWN ABBY  A      <span style="color: #BB0000;">NA</span>     F      NP    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1003443938 2769874… I202… TUCK… JAMES QUINT… <span style="color: #BB0000;">NA</span>     M      <span style="color: #BB0000;">NA</span>    KANSA… 2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1003445529 2769929… I202… DUNS… SARAH ELIZA… <span style="color: #BB0000;">NA</span>     F      MD    UNIVE… 2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1013410398 0941682… I202… WISE  ANNA  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1013500073 3870993… I202… HAMB… SANT… GIBBS  <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1013525310 1759786… I202… ST L… SAND… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1013527811 2567889… I202… CERVI JACK… J      <span style="color: #BB0000;">NA</span>     M      <span style="color: #BB0000;">NA</span>    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1013545854 3072973… I202… KHIM… SHAM… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1013545912 5799221… I202… FOST… TYREL <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     M      MD    UNIVE… 2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1013546126 4183047… I202… BHAT  KART… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     M      MD    EASTE… 2020 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 641 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: specialty &lt;chr&gt;, spec_other &lt;chr&gt;, telehealth &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   facility_name &lt;chr&gt;, org_pac &lt;chr&gt;, org_mems &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;,</span></span>
