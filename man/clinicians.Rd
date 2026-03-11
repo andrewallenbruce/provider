@@ -2,7 +2,7 @@
 % Please edit documentation in R/clinicians.R
 \name{clinicians}
 \alias{clinicians}
-\title{Clinicians Enrolled in Medicare}
+\title{Clinician Demographics}
 \usage{
 clinicians(
   npi = NULL,
@@ -35,11 +35,11 @@ clinicians(
 
 \item{gender}{\verb{<chr>} Individual provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
-\item{credential}{\verb{<chr>} Individual provider's credential, i.e. \code{"MD"}}
+\item{credential}{\verb{<chr>} Individual provider's credential, i.e. \code{"MD"}, \code{"OD"}}
 
 \item{specialty}{\verb{<chr>} Individual provider’s primary medical specialty}
 
-\item{school}{\verb{<chr>} Individual provider’s alma mater}
+\item{school}{\verb{<chr>} Individual provider’s medical school}
 
 \item{year}{\verb{<int>} Individual provider’s graduation year}
 
@@ -50,46 +50,16 @@ clinicians(
 \item{facility_pac}{\verb{<int>} Facility's PECOS Associate Control ID}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab 10-digit individual NPI \cr
-   \code{pac} \tab 10-digit individual PAC ID \cr
-   \code{enid} \tab 15-digit individual enrollment ID \cr
-   \code{first} \tab Provider's first name \cr
-   \code{middle} \tab Provider's middle name \cr
-   \code{last} \tab Provider's last name \cr
-   \code{suffix} \tab Provider's name suffix \cr
-   \code{gender} \tab Provider's gender \cr
-   \code{credential} \tab Provider's credential \cr
-   \code{school} \tab Provider's medical school \cr
-   \code{grad_year} \tab Provider's graduation year \cr
-   \code{specialty} \tab Provider's primary specialty \cr
-   \code{specialty_sec} \tab Provider's secondary specialty \cr
-   \code{facility_name} \tab Facility associated with provider \cr
-   \code{pac_org} \tab Facility's 10-digit PAC ID \cr
-   \code{members} \tab Number of providers associated with facility's PAC ID \cr
-   \code{address} \tab Provider's street address \cr
-   \code{city} \tab Provider's city \cr
-   \code{state} \tab Provider's state \cr
-   \code{zip} \tab Provider's zip code \cr
-   \code{phone} \tab Provider's phone number \cr
-   \code{telehealth} \tab Indicates if provider offers telehealth services \cr
-   \code{assign_ind} \tab Indicates if provider accepts Medicare assignment \cr
-   \code{assign_org} \tab Indicates if facility accepts Medicare assignment \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Access information about providers enrolled in Medicare,
-including the medical school that they attended and the year they graduated
-}
-\section{Links}{
+Demographics of doctors and clinicians listed in the Provider Data Catalog (PDC)
 
-\itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}
-\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
+The Doctors and Clinicians national downloadable file is organized such that
+each line is unique at the clinician/enrollment record/group/address level.
+Clinicians with multiple Medicare enrollment records and/or single enrollments
+linking to multiple practice locations are listed on multiple lines.
 }
-}
-
 \examples{
 clinicians()
 
@@ -99,4 +69,10 @@ clinicians(first = "ETAN")
 
 clinicians(city = starts_with("At"), state = "GA", year = 2020)
 
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}
+\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
+}
 }
