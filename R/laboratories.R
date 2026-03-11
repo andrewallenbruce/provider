@@ -185,6 +185,9 @@ laboratories <- function(
 
 #' @noRd
 conv_active <- function(active) {
+  if (is.null(active)) {
+    return(NULL)
+  }
   if (active) "00" else NULL
 }
 

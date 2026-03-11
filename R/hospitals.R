@@ -69,7 +69,7 @@ hospitals <- function(
   reh = NULL,
   subgroup = subgroups()
 ) {
-  check_is_subgroups(subgroup)
+  check_subgroups(subgroup)
 
   ARG <- params(
     NPI = npi,
@@ -219,7 +219,7 @@ subgroups <- function(
 }
 
 #' @noRd
-check_is_subgroups <- function(x) {
+check_subgroups <- function(x) {
   if (!inherits(x, "subgroups")) {
     cli::cli_abort(c(
       "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(subgroup)}}",
