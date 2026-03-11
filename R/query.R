@@ -6,7 +6,15 @@ plus <- function(x) {
 #' @autoglobal
 #' @noRd
 format_query <- function(x, N) {
-  V <- plus(unlist_(x))
+  MOD <- is_modifier(x)
+  V <- if (MOD) plus(x$value) else plus(unlist_(x))
+  O <- if (MOD) {
+    tolower(plus(gsub("_", " ", x$operator, fixed = TRUE)))
+  } else if (length(V) > 1L) {
+    "IN"
+  } else {
+    "="
+  }
 
   PRP <- "conditions[<<i>>][property]="
   OPR <- "conditions[<<i>>][operator]="
@@ -14,7 +22,7 @@ format_query <- function(x, N) {
 
   c(
     paste0(PRP, plus(N)),
-    paste0(OPR, if (length(V) > 1L) "IN" else "="),
+    paste0(OPR, O),
     paste0(VAL, if (length(V) > 1L) "[]=" else "=", V)
   )
 }
@@ -22,7 +30,15 @@ format_query <- function(x, N) {
 #' @autoglobal
 #' @noRd
 format_query2 <- function(x, N) {
-  V <- plus(unlist_(x))
+  MOD <- is_modifier(x)
+  V <- if (MOD) plus(x$value) else plus(unlist_(x))
+  O <- if (MOD) {
+    plus(x$operator)
+  } else if (length(V) > 1L) {
+    "IN"
+  } else {
+    "="
+  }
 
   PRP <- "filter[<<i>>][condition][path]="
   OPR <- "filter[<<i>>][condition][operator]="
@@ -30,7 +46,7 @@ format_query2 <- function(x, N) {
 
   c(
     paste0(PRP, plus(N)),
-    paste0(OPR, if (length(V) > 1L) "IN" else "="),
+    paste0(OPR, O),
     paste0(
       VAL,
       if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",

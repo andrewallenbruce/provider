@@ -82,13 +82,15 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
+#' laboratories()
+#'
 #' provider:::cdc_labs
 #'
 #' laboratories(ccn = provider:::cdc_labs$ccn)
 #'
 #' laboratories(
-#'    cert = c("ppm", "accreditation"),
-#'    city = "Valdosta",
+#'    cert = c("ppm"),
+#'    city = not_equal("Valdosta"),
 #'    state = "GA",
 #'    active = TRUE
 #'  )

@@ -97,4 +97,6 @@ clinicians(enid = "I20081002000549")
 
 clinicians(first = "ETAN")
 
+clinicians(city = starts_with("At"), state = "GA", year = 2020)
+
 }

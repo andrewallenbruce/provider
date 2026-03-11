@@ -57,6 +57,8 @@
 #'
 #' clinicians(first = "ETAN")
 #'
+#' clinicians(city = starts_with("At"), state = "GA", year = 2020)
+#'
 #' @autoglobal
 #' @export
 clinicians <- function(

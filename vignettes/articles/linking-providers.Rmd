@@ -16,30 +16,25 @@ knitr::opts_chunk$set(
 )
 options(scipen = 999)
 library(provider)
-library(vctrs)
-library(purrr)
 library(gt)
+# gt(pac, rownames_to_stub = TRUE) |> 
+#   opt_table_font(
+#   font = google_font(name = "JetBrains Mono"), size = gt::px(12))
 ```
 
 ## NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
 
 ```{r}
 pac <- affiliations(pac = 7810891009)
-gt(pac, rownames_to_stub = TRUE) |> 
-  opt_table_font(font = google_font(name = "JetBrains Mono"), size = gt::px(12))
+list(
+  individual = as.data.frame(t(unique(pac[1:6]))),
+  organization = pac[7:9])
 ```
 
 
 ```{r}
 ccn <- hospitals(ccn = unique(pac$facility_ccn))
-gt(ccn, 
-   groupname_col = "org_name", 
-   rowname_col = "dba_name", 
-   row_group_as_column = TRUE, 
-   rownames_to_stub = TRUE) |> 
-  opt_table_font(
-    font = google_font(name = "JetBrains Mono"), 
-    size = px(12))
+ccn
 ```
 
 
@@ -48,21 +43,13 @@ gt(ccn,
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 
 ```{r}
-providers(org_name = "Elizabethtown Community Hospital") |> 
-  gt(rownames_to_stub = TRUE) |> 
-  opt_table_font(
-    font = google_font(name = "JetBrains Mono"), 
-    size = px(12))
+providers(org_name = "Elizabethtown Community Hospital")
 ```
 
 
 
 ```{r}
-hospitals(org_name = "Elizabethtown Community Hospital") |> 
-  gt(rownames_to_stub = TRUE) |> 
-  opt_table_font(
-    font = google_font(name = "JetBrains Mono"), 
-    size = px(12))
+hospitals(org_name = "Elizabethtown Community Hospital")
 ```
 
 <br>
@@ -72,11 +59,11 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 <br>
 
 ```{r}
-affiliations(facility_ccn = 331302) |> 
-  gt(rownames_to_stub = TRUE) |> 
-  opt_table_font(
-    font = google_font(name = "JetBrains Mono"), 
-    size = px(12))
+ccn <- affiliations(facility_ccn = 331302)
+list(
+  organization = as.data.frame(t(unique(ccn[7:9]))),
+  individual = unique(ccn[1:6])
+  )
 ```
 
 
@@ -86,11 +73,11 @@ That returns individual providers affiliated with the hospital. Now to search th
 
 
 ```{r}
-affiliations(facility_ccn = "33Z302") |> 
-  gt(rownames_to_stub = TRUE) |> 
-  opt_table_font(
-    font = google_font(name = "JetBrains Mono"), 
-    size = px(12))
+ccn2 <- affiliations(facility_ccn = "33Z302")
+list(
+  organization = as.data.frame(t(unique(ccn2[7:9]))),
+  individual = unique(ccn2[1:6])
+  )
 ```
 
 <br>
