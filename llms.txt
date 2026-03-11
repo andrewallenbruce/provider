@@ -351,7 +351,7 @@ Access Current Provider Data.
 Access Current Individual Provider Data.
 
 - [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
-  : Clinicians Enrolled in Medicare
+  : Clinician Demographics
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
   : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)

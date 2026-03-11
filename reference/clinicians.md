@@ -1,7 +1,13 @@
-# Clinicians Enrolled in Medicare
+# Clinician Demographics
 
-Access information about providers enrolled in Medicare, including the
-medical school that they attended and the year they graduated
+Demographics of doctors and clinicians listed in the Provider Data
+Catalog (PDC)
+
+The Doctors and Clinicians national downloadable file is organized such
+that each line is unique at the clinician/enrollment
+record/group/address level. Clinicians with multiple Medicare enrollment
+records and/or single enrollments linking to multiple practice locations
+are listed on multiple lines.
 
 ## Usage
 
@@ -52,7 +58,7 @@ clinicians(
 
 - credential:
 
-  `<chr>` Individual provider's credential, i.e. `"MD"`
+  `<chr>` Individual provider's credential, i.e. `"MD"`, `"OD"`
 
 - specialty:
 
@@ -60,7 +66,7 @@ clinicians(
 
 - school:
 
-  `<chr>` Individual provider’s alma mater
+  `<chr>` Individual provider’s medical school
 
 - year:
 
@@ -81,37 +87,8 @@ clinicians(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-with the columns:
 
-|                 |                                                       |
-|-----------------|-------------------------------------------------------|
-| **Field**       | **Description**                                       |
-| `npi`           | 10-digit individual NPI                               |
-| `pac`           | 10-digit individual PAC ID                            |
-| `enid`          | 15-digit individual enrollment ID                     |
-| `first`         | Provider's first name                                 |
-| `middle`        | Provider's middle name                                |
-| `last`          | Provider's last name                                  |
-| `suffix`        | Provider's name suffix                                |
-| `gender`        | Provider's gender                                     |
-| `credential`    | Provider's credential                                 |
-| `school`        | Provider's medical school                             |
-| `grad_year`     | Provider's graduation year                            |
-| `specialty`     | Provider's primary specialty                          |
-| `specialty_sec` | Provider's secondary specialty                        |
-| `facility_name` | Facility associated with provider                     |
-| `pac_org`       | Facility's 10-digit PAC ID                            |
-| `members`       | Number of providers associated with facility's PAC ID |
-| `address`       | Provider's street address                             |
-| `city`          | Provider's city                                       |
-| `state`         | Provider's state                                      |
-| `zip`           | Provider's zip code                                   |
-| `phone`         | Provider's phone number                               |
-| `telehealth`    | Indicates if provider offers telehealth services      |
-| `assign_ind`    | Indicates if provider accepts Medicare assignment     |
-| `assign_org`    | Indicates if facility accepts Medicare assignment     |
-
-## Links
+## References
 
 - [National Downloadable
   File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
