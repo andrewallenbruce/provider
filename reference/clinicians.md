@@ -125,73 +125,69 @@ with the columns:
 clinicians()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 25
-#>    npi        pac      enid  last  first middle suffix gender cred  school year 
-#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
-#>  1 1003000126 7517003… I201… ENKE… ARDA… NA     NA     M      MD    OTHER  1994 
-#>  2 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
-#>  3 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
-#>  4 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
-#>  5 1003000142 9931380… I201… KHAL… RASH… NA     NA     M      MD    OTHER  1999 
-#>  6 1003000423 9133397… I201… VELO… JENN… A      NA     F      MD    TOLED… 2007 
-#>  7 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
-#>  8 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
-#>  9 1003000480 0446348… I200… ROTH… KEVIN B      NA     M      MD    OHIO … 1997 
-#> 10 1003000530 2163575… I200… SEMO… AMAN… M      NA     F      DO    LAKE … 2006 
-#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
-#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
-#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
-#> #   grp <chr>
+#>    first    middle last    suffix gender cred  school year  specialty spec_other
+#>    <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
+#>  1 ARDALAN  NA     ENKESH… NA     M      MD    OTHER  1994  HOSPITAL… INTERNAL …
+#>  2 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
+#>  3 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
+#>  4 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
+#>  5 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… PAIN MANA…
+#>  6 JENNIFER A      VELOTTA NA     F      MD    TOLED… 2007  OBSTETRI… NA        
+#>  7 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
+#>  8 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
+#>  9 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
+#> 10 AMANDA   M      SEMONC… NA     F      DO    LAKE … 2006  INTERNAL… NA        
+#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
+#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
 
 clinicians(enid = "I20081002000549")
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 25
-#>   npi        pac       enid  last  first middle suffix gender cred  school year 
-#>   <chr>      <chr>     <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
-#> 1 1407031495 80221861… I200… MCCU… DORO… E      NA     F      AU    OTHER  2008 
-#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
-#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
-#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
-#> #   grp <chr>
+#>   first   middle last     suffix gender cred  school year  specialty  spec_other
+#>   <chr>   <chr>  <chr>    <chr>  <chr>  <chr> <chr>  <chr> <chr>      <chr>     
+#> 1 DOROTHY E      MCCURLEY NA     F      AU    OTHER  2008  QUALIFIED… NA        
+#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
+#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
 
 clinicians(first = "ETAN")
 #> ✔ Query returned 11 results.
 #> # A tibble: 11 × 25
-#>    npi        pac      enid  last  first middle suffix gender cred  school year 
-#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
-#>  1 1003011891 4587858… I201… SPIRA ETAN  NA     NA     M      MD    NEW Y… 2007 
-#>  2 1003011891 4587858… I201… SPIRA ETAN  NA     NA     M      MD    NEW Y… 2007 
-#>  3 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
-#>  4 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
-#>  5 1235426610 0244526… I202… SUGA… ETAN  NA     NA     M      NA    ALBER… 2011 
-#>  6 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
-#>  7 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
-#>  8 1407176233 9638313… I202… EITC… ETAN  NA     NA     M      MD    COLUM… 2010 
-#>  9 1528301728 7113252… I201… MARKS ETAN  ARIEL  NA     M      DO    NOVA … 2013 
-#> 10 1528301728 7113252… I202… MARKS ETAN  ARIEL  NA     M      DO    NOVA … 2013 
-#> 11 1699040790 7618254… I202… DAYAN ETAN  NA     NA     M      MD    STATE… 2012 
-#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
-#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
-#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
-#> #   grp <chr>
+#>    first middle last     suffix gender cred  school   year  specialty spec_other
+#>    <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
+#>  1 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
+#>  2 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
+#>  3 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#>  4 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#>  5 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#>  6 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
+#>  7 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
+#>  8 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
+#>  9 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
+#> 10 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
+#> 11 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
+#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
+#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
 
 clinicians(city = starts_with("At"), state = "GA", year = 2020)
 #> ✔ Query returned 651 results.
 #> # A tibble: 651 × 25
-#>    npi        pac      enid  last  first middle suffix gender cred  school year 
-#>    <chr>      <chr>    <chr> <chr> <chr> <chr>  <chr>  <chr>  <chr> <chr>  <chr>
-#>  1 1003403940 9032526… I202… BROWN ABBY  A      NA     F      NP    OTHER  2020 
-#>  2 1003443938 2769874… I202… TUCK… JAMES QUINT… NA     M      NA    KANSA… 2020 
-#>  3 1003445529 2769929… I202… DUNS… SARAH ELIZA… NA     F      MD    UNIVE… 2020 
-#>  4 1013410398 0941682… I202… WISE  ANNA  NA     NA     F      NA    OTHER  2020 
-#>  5 1013500073 3870993… I202… HAMB… SANT… GIBBS  NA     F      NA    OTHER  2020 
-#>  6 1013525310 1759786… I202… ST L… SAND… NA     NA     F      NA    OTHER  2020 
-#>  7 1013527811 2567889… I202… CERVI JACK… J      NA     M      NA    OTHER  2020 
-#>  8 1013545854 3072973… I202… KHIM… SHAM… NA     NA     F      NA    OTHER  2020 
-#>  9 1013545912 5799221… I202… FOST… TYREL NA     NA     M      MD    UNIVE… 2020 
-#> 10 1013546126 4183047… I202… BHAT  KART… NA     NA     M      MD    EASTE… 2020 
+#>    first    middle   last  suffix gender cred  school year  specialty spec_other
+#>    <chr>    <chr>    <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
+#>  1 ABBY     A        BROWN NA     F      NP    OTHER  2020  NURSE PR… NA        
+#>  2 JAMES    QUINTEN  TUCK… NA     M      NA    KANSA… 2020  OPHTHALM… NA        
+#>  3 SARAH    ELIZABE… DUNS… NA     F      MD    UNIVE… 2020  ANESTHES… NA        
+#>  4 ANNA     NA       WISE  NA     F      NA    OTHER  2020  PSYCHIAT… NA        
+#>  5 SANTORIA GIBBS    HAMB… NA     F      NA    OTHER  2020  NURSE PR… NA        
+#>  6 SANDRA   NA       ST L… NA     F      NA    OTHER  2020  NURSE PR… NA        
+#>  7 JACKSON  J        CERVI NA     M      NA    OTHER  2020  PHYSICAL… NA        
+#>  8 SHAMEELA NA       KHIM… NA     F      NA    OTHER  2020  ALLERGY/… NA        
+#>  9 TYREL    NA       FOST… NA     M      MD    UNIVE… 2020  NUCLEAR … NA        
+#> 10 KARTHIK  NA       BHAT  NA     M      MD    EASTE… 2020  VASCULAR… NA        
 #> # ℹ 641 more rows
-#> # ℹ 14 more variables: specialty <chr>, spec_other <chr>, telehealth <chr>,
-#> #   facility_name <chr>, org_pac <chr>, org_mems <chr>, add_1 <chr>,
-#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, phone <chr>, ind <chr>,
-#> #   grp <chr>
+#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
+#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
 ```

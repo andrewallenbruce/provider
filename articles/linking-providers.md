@@ -11,12 +11,12 @@ list(
 
     #> $individual
     #>                V1
-    #> npi    1043245657
-    #> pac    7810891009
-    #> last         FUNG
     #> first        MARK
+    #> last         FUNG
     #> middle          K
     #> suffix       <NA>
+    #> npi    1043245657
+    #> pac    7810891009
     #> 
     #> $organization
     #> # A tibble: 5 × 3
@@ -34,20 +34,20 @@ ccn
 ```
 
     #> # A tibble: 5 × 39
-    #>   enid    enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name
-    #>   <chr>   <chr>      <chr>   <chr>     <chr> <chr> <chr> <chr> <chr>    <chr>   
-    #> 1 O20120… NY         00-09   PART A P… 1033… N     3302… 2769… CHAMPLA… THE UNI…
-    #> 2 O20230… NY         00-85   PART A P… 1114… N     3313… 4082… ALICE H… THE UNI…
-    #> 3 O20050… VT         00-09   PART A P… 1508… N     4700… 9335… CENTRAL… NA      
-    #> 4 O20021… VT         00-09   PART A P… 1568… N     4700… 3779… UNIVERS… UNIVERS…
-    #> 5 O20061… VT         00-85   PART A P… 1740… Y     4713… 1850… PORTER … NA      
-    #> # ℹ 29 more variables: inc_date <chr>, inc_state <chr>, org_type <chr>,
-    #> #   org_text <chr>, designation <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-    #> #   state <chr>, zip <chr>, location_type <chr>, location_text <chr>,
-    #> #   sub_general <chr>, sub_acute <chr>, sub_drug <chr>, sub_child <chr>,
-    #> #   sub_long <chr>, sub_psych <chr>, sub_rehab <chr>, sub_short <chr>,
-    #> #   sub_swing <chr>, sub_psych_unit <chr>, sub_rehab_unit <chr>,
-    #> #   sub_specialty <chr>, sub_other <chr>, sub_otext <chr>, reh_ind <chr>, …
+    #>   org_name     dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2
+    #>   <chr>        <chr>    <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+    #> 1 CHAMPLAIN V… THE UNI… O201… NY         00-09 PART A P… 1033… N     3302… NA   
+    #> 2 ALICE HYDE … THE UNI… O202… NY         00-85 PART A P… 1114… N     3313… NA   
+    #> 3 CENTRAL VER… NA       O200… VT         00-09 PART A P… 1508… N     4700… NA   
+    #> 4 UNIVERSITY … UNIVERS… O200… VT         00-09 PART A P… 1568… N     4700… NA   
+    #> 5 PORTER HOSP… NA       O200… VT         00-85 PART A P… 1740… Y     4713… NA   
+    #> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
+    #> #   org_type <chr>, org_text <chr>, designation <chr>, add_1 <chr>,
+    #> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, location_type <chr>,
+    #> #   location_text <chr>, reh_ind <chr>, reh_date <chr>, sub_general <chr>,
+    #> #   sub_acute <chr>, sub_drug <chr>, sub_child <chr>, sub_long <chr>,
+    #> #   sub_psych <chr>, sub_rehab <chr>, sub_short <chr>, sub_swing <chr>,
+    #> #   sub_psych_unit <chr>, sub_rehab_unit <chr>, sub_specialty <chr>, …
 
   
 
@@ -60,34 +60,34 @@ providers(org_name = "Elizabethtown Community Hospital")
 ```
 
     #> # A tibble: 9 × 11
-    #>   npi        multi pac   enid  spec  specialty state last  first middle org_name
-    #>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-    #> 1 1053656744 Y     3577… O200… 12-70 PART B S… NY    NA    NA    NA     ELIZABE…
-    #> 2 1891785184 Y     3577… O201… 00-85 PART A P… NY    NA    NA    NA     ELIZABE…
-    #> 3 1487923637 N     3577… O201… 12-59 PART B S… NY    NA    NA    NA     ELIZABE…
-    #> 4 1407061591 N     3577… O202… 00-85 PART A P… NY    NA    NA    NA     ELIZABE…
-    #> 5 1053656744 N     3577… O202… 12-70 PART B S… CT    NA    NA    NA     ELIZABE…
-    #> 6 1053656744 N     3577… O202… 12-70 PART B S… FL    NA    NA    NA     ELIZABE…
-    #> 7 1053656744 N     3577… O202… 12-70 PART B S… VT    NA    NA    NA     ELIZABE…
-    #> 8 1053656744 N     3577… O202… 12-70 PART B S… NH    NA    NA    NA     ELIZABE…
-    #> 9 1053656744 N     3577… O202… 12-70 PART B S… CO    NA    NA    NA     ELIZABE…
+    #>   first middle last  org_name      state spec  specialty npi   multi pac   enid 
+    #>   <chr> <chr>  <chr> <chr>         <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+    #> 1 NA    NA     NA    ELIZABETHTOW… NY    12-70 PART B S… 1053… Y     3577… O200…
+    #> 2 NA    NA     NA    ELIZABETHTOW… NY    00-85 PART A P… 1891… Y     3577… O201…
+    #> 3 NA    NA     NA    ELIZABETHTOW… NY    12-59 PART B S… 1487… N     3577… O201…
+    #> 4 NA    NA     NA    ELIZABETHTOW… NY    00-85 PART A P… 1407… N     3577… O202…
+    #> 5 NA    NA     NA    ELIZABETHTOW… CT    12-70 PART B S… 1053… N     3577… O202…
+    #> 6 NA    NA     NA    ELIZABETHTOW… FL    12-70 PART B S… 1053… N     3577… O202…
+    #> 7 NA    NA     NA    ELIZABETHTOW… VT    12-70 PART B S… 1053… N     3577… O202…
+    #> 8 NA    NA     NA    ELIZABETHTOW… NH    12-70 PART B S… 1053… N     3577… O202…
+    #> 9 NA    NA     NA    ELIZABETHTOW… CO    12-70 PART B S… 1053… N     3577… O202…
 
 ``` r
 hospitals(org_name = "Elizabethtown Community Hospital")
 ```
 
     #> # A tibble: 2 × 39
-    #>   enid    enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name
-    #>   <chr>   <chr>      <chr>   <chr>     <chr> <chr> <chr> <chr> <chr>    <chr>   
-    #> 1 O20101… NY         00-85   PART A P… 1891… Y     3313… 3577… ELIZABE… NA      
-    #> 2 O20220… NY         00-85   PART A P… 1407… N     33Z3… 3577… ELIZABE… NA      
-    #> # ℹ 29 more variables: inc_date <chr>, inc_state <chr>, org_type <chr>,
-    #> #   org_text <chr>, designation <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-    #> #   state <chr>, zip <chr>, location_type <chr>, location_text <chr>,
-    #> #   sub_general <chr>, sub_acute <chr>, sub_drug <chr>, sub_child <chr>,
-    #> #   sub_long <chr>, sub_psych <chr>, sub_rehab <chr>, sub_short <chr>,
-    #> #   sub_swing <chr>, sub_psych_unit <chr>, sub_rehab_unit <chr>,
-    #> #   sub_specialty <chr>, sub_other <chr>, sub_otext <chr>, reh_ind <chr>, …
+    #>   org_name     dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2
+    #>   <chr>        <chr>    <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+    #> 1 ELIZABETHTO… NA       O201… NY         00-85 PART A P… 1891… Y     3313… NA   
+    #> 2 ELIZABETHTO… NA       O202… NY         00-85 PART A P… 1407… N     33Z3… NA   
+    #> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
+    #> #   org_type <chr>, org_text <chr>, designation <chr>, add_1 <chr>,
+    #> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, location_type <chr>,
+    #> #   location_text <chr>, reh_ind <chr>, reh_date <chr>, sub_general <chr>,
+    #> #   sub_acute <chr>, sub_drug <chr>, sub_child <chr>, sub_long <chr>,
+    #> #   sub_psych <chr>, sub_rehab <chr>, sub_short <chr>, sub_swing <chr>,
+    #> #   sub_psych_unit <chr>, sub_rehab_unit <chr>, sub_specialty <chr>, …
 
   
 
@@ -116,18 +116,18 @@ list(
     #> 
     #> $individual
     #> # A tibble: 206 × 6
-    #>    npi        pac        last            first   middle suffix
-    #>    <chr>      <chr>      <chr>           <chr>   <chr>  <chr> 
-    #>  1 1003845272 1759384035 GREENE          LAURA   A      NA    
-    #>  2 1013141860 8022069558 KAMPSCHROR      DEBORAH M      NA    
-    #>  3 1013539584 9133544109 VASSILIAN       NAROD   NA     NA    
-    #>  4 1013595560 3375947401 TRIPLETT        EMILY   NA     NA    
-    #>  5 1013910256 5890719371 ACOSTAMADIEDO   JOSE    M      NA    
-    #>  6 1023377843 6901115278 WILHELM         LINDSEY B      NA    
-    #>  7 1043672140 7214229350 FIORINI FURTADO VANESSA NA     NA    
-    #>  8 1063420891 9436051687 YOUNG           JOHN    NA     NA    
-    #>  9 1073073177 0547593097 OSBORN          DELANEY NA     NA    
-    #> 10 1073133435 6800318452 GILL            ANGAD   NA     NA    
+    #>    first   last            middle suffix npi        pac       
+    #>    <chr>   <chr>           <chr>  <chr>  <chr>      <chr>     
+    #>  1 LAURA   GREENE          A      NA     1003845272 1759384035
+    #>  2 DEBORAH KAMPSCHROR      M      NA     1013141860 8022069558
+    #>  3 NAROD   VASSILIAN       NA     NA     1013539584 9133544109
+    #>  4 EMILY   TRIPLETT        NA     NA     1013595560 3375947401
+    #>  5 JOSE    ACOSTAMADIEDO   M      NA     1013910256 5890719371
+    #>  6 LINDSEY WILHELM         B      NA     1023377843 6901115278
+    #>  7 VANESSA FIORINI FURTADO NA     NA     1043672140 7214229350
+    #>  8 JOHN    YOUNG           NA     NA     1063420891 9436051687
+    #>  9 DELANEY OSBORN          NA     NA     1073073177 0547593097
+    #> 10 ANGAD   GILL            NA     NA     1073133435 6800318452
     #> # ℹ 196 more rows
 
   
@@ -151,12 +151,12 @@ list(
     #> 
     #> $individual
     #> # A tibble: 4 × 6
-    #>   npi        pac        last     first   middle suffix
-    #>   <chr>      <chr>      <chr>    <chr>   <chr>  <chr> 
-    #> 1 1073258398 3870095805 KLOTZ    JEFFREY NA     NA    
-    #> 2 1396989059 8921259557 HALLORAN MARY    K      NA    
-    #> 3 1538173869 0547299091 CHON     IL      JUN    NA    
-    #> 4 1558659367 6709004682 BANU     DRAGOS  NA     NA
+    #>   first   last     middle suffix npi        pac       
+    #>   <chr>   <chr>    <chr>  <chr>  <chr>      <chr>     
+    #> 1 JEFFREY KLOTZ    NA     NA     1073258398 3870095805
+    #> 2 MARY    HALLORAN K      NA     1396989059 8921259557
+    #> 3 IL      CHON     JUN    NA     1538173869 0547299091
+    #> 4 DRAGOS  BANU     NA     NA     1558659367 6709004682
 
   
 

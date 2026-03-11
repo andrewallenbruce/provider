@@ -156,25 +156,25 @@ of two years, are as follows, in order of increasing complexity:
 laboratories()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 82
-#>    fac_name_1     fac_name_2 ccn   xref  chow_n chow_date chow_prev pos   status
-#>    <chr>          <chr>      <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr> 
-#>  1 SHELBY BAPTIS… NA         01D0… NA    0      NA        NA        N     NA    
-#>  2 WOODLAND COMM… NA         01D0… NA    0      NA        NA        N     NA    
-#>  3 CULLMAN REGIO… NA         01D0… 01D0… 0      NA        NA        N     NA    
-#>  4 ST VINCENT'S … NA         01D0… NA    0      NA        NA        N     B     
-#>  5 BAPTIST HEALT… NA         01D0… NA    0      NA        NA        N     A     
-#>  6 UAB HIGHLANDS… NA         01D0… NA    0      NA        NA        N     NA    
-#>  7 ASCENSION ST … NA         01D0… NA    0      NA        NA        N     NA    
-#>  8 AMER CAST IRO… NA         01D0… NA    0      NA        NA        N     NA    
-#>  9 MCE-FAMILY HE… NA         01D0… NA    0      NA        NA        Y     A     
-#> 10 JCDH-BESSEMER… NA         01D0… 01D0… 0      NA        NA        Y     A     
-#> # ℹ 73 more variables: add_1 <chr>, add_2 <chr>, phone_1 <chr>, phone_2 <chr>,
-#> #   city <chr>, state <chr>, region <chr>, zip <chr>, state_ssa <chr>,
-#> #   county_ssa <chr>, fips_state <chr>, fips_county <chr>, state_reg <chr>,
-#> #   cbsa_cd <chr>, cbsa_ind <chr>, eligible <chr>, term_pgm <chr>,
-#> #   term_clia <chr>, apl_type <chr>, cert_type <chr>, fac_type <chr>,
-#> #   ownership <chr>, cert_action <chr>, orig_date <chr>, apl_date <chr>,
-#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
+#>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2
+#>    <chr>  <chr>  <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr>  <chr> <chr>
+#>  1 SHELB… NA     01D0… NA    0      NA        NA        N     NA     1000… NA   
+#>  2 WOODL… NA     01D0… NA    0      NA        NA        N     NA     1910… NA   
+#>  3 CULLM… NA     01D0… 01D0… 0      NA        NA        N     NA     1912… NA   
+#>  4 ST VI… NA     01D0… NA    0      NA        NA        N     B      7063… ATTN…
+#>  5 BAPTI… NA     01D0… NA    0      NA        NA        N     A      604 … NA   
+#>  6 UAB H… NA     01D0… NA    0      NA        NA        N     NA     1201… NA   
+#>  7 ASCEN… NA     01D0… NA    0      NA        NA        N     NA     810 … NA   
+#>  8 AMER … NA     01D0… NA    0      NA        NA        N     NA     1501… NA   
+#>  9 MCE-F… NA     01D0… NA    0      NA        NA        Y     A      9823… NA   
+#> 10 JCDH-… NA     01D0… 01D0… 0      NA        NA        Y     A      2201… NA   
+#> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
+#> #   region <chr>, zip <chr>, state_ssa <chr>, county_ssa <chr>,
+#> #   fips_state <chr>, fips_county <chr>, state_reg <chr>, cbsa_cd <chr>,
+#> #   cbsa_ind <chr>, eligible <chr>, term_pgm <chr>, term_clia <chr>,
+#> #   apl_type <chr>, cert_type <chr>, fac_type <chr>, ownership <chr>,
+#> #   cert_action <chr>, orig_date <chr>, apl_date <chr>, cert_date <chr>,
+#> #   eff_date <chr>, mail_date <chr>, term_date <chr>, a2la_cred <chr>, …
 
 provider:::cdc_labs
 #> # A tibble: 6 × 4
@@ -190,21 +190,21 @@ provider:::cdc_labs
 laboratories(ccn = provider:::cdc_labs$ccn)
 #> ✔ Query returned 6 results.
 #> # A tibble: 6 × 82
-#>   fac_name_1      fac_name_2 ccn   xref  chow_n chow_date chow_prev pos   status
-#>   <chr>           <chr>      <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr> 
-#> 1 CDC ARCTIC INV… CENTERS F… 02D0… NA    0      NA        NA        N     A     
-#> 2 CENTERS FOR DI… DIVISION … 06D0… NA    0      NA        NA        Y     A     
-#> 3 CDC/NCEH/DIVIS… NA         11D0… NA    0      NA        NA        N     A     
-#> 4 CENTERS FOR DI… NA         11D0… NA    0      NA        NA        N     B     
-#> 5 CDC/CGH/DGHA I… ATTENTION… 11D1… NA    0      NA        NA        N     NA    
-#> 6 CENTERS FOR DI… DENGUE BR… 40D0… NA    0      NA        NA        N     A     
-#> # ℹ 73 more variables: add_1 <chr>, add_2 <chr>, phone_1 <chr>, phone_2 <chr>,
-#> #   city <chr>, state <chr>, region <chr>, zip <chr>, state_ssa <chr>,
-#> #   county_ssa <chr>, fips_state <chr>, fips_county <chr>, state_reg <chr>,
-#> #   cbsa_cd <chr>, cbsa_ind <chr>, eligible <chr>, term_pgm <chr>,
-#> #   term_clia <chr>, apl_type <chr>, cert_type <chr>, fac_type <chr>,
-#> #   ownership <chr>, cert_action <chr>, orig_date <chr>, apl_date <chr>,
-#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
+#>   name_1  name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2
+#>   <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr>  <chr> <chr>
+#> 1 CDC AR… CENTE… 02D0… NA    0      NA        NA        N     A      4055… NA   
+#> 2 CENTER… DIVIS… 06D0… NA    0      NA        NA        Y     A      3156… NA   
+#> 3 CDC/NC… NA     11D0… NA    0      NA        NA        N     A      4770… ATTN…
+#> 4 CENTER… NA     11D0… NA    0      NA        NA        N     B      1600… NA   
+#> 5 CDC/CG… ATTEN… 11D1… NA    0      NA        NA        N     NA     1600… NA   
+#> 6 CENTER… DENGU… 40D0… NA    0      NA        NA        N     A      1324… NA   
+#> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
+#> #   region <chr>, zip <chr>, state_ssa <chr>, county_ssa <chr>,
+#> #   fips_state <chr>, fips_county <chr>, state_reg <chr>, cbsa_cd <chr>,
+#> #   cbsa_ind <chr>, eligible <chr>, term_pgm <chr>, term_clia <chr>,
+#> #   apl_type <chr>, cert_type <chr>, fac_type <chr>, ownership <chr>,
+#> #   cert_action <chr>, orig_date <chr>, apl_date <chr>, cert_date <chr>,
+#> #   eff_date <chr>, mail_date <chr>, term_date <chr>, a2la_cred <chr>, …
 
 laboratories(
    cert = c("ppm"),
@@ -214,23 +214,23 @@ laboratories(
  )
 #> ✔ Query returned 896 results.
 #> # A tibble: 896 × 82
-#>    fac_name_1     fac_name_2 ccn   xref  chow_n chow_date chow_prev pos   status
-#>    <chr>          <chr>      <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr> 
-#>  1 WELLSTAR OB/G… NA         11D0… NA    0      NA        NA        Y     A     
-#>  2 COBB WOMENS H… NA         11D0… NA    0      NA        NA        Y     A     
-#>  3 WELLSTAR COBB… NA         11D0… NA    0      NA        NA        N     NA    
-#>  4 WELLSTAR OB/G… NA         11D0… NA    0      NA        NA        N     NA    
-#>  5 ATLANTA GYNEC… NA         11D0… NA    0      NA        NA        N     NA    
-#>  6 CONCENTRA - D… NA         11D0… NA    0      NA        NA        Y     A     
-#>  7 MEDCURA HEALT… NA         11D0… NA    0      NA        NA        N     NA    
-#>  8 SOUTH DEKALB … NA         11D0… NA    0      NA        NA        Y     A     
-#>  9 SNAPFINGER WO… NA         11D0… NA    0      NA        NA        N     NA    
-#> 10 GEORGIA KIDNE… NA         11D0… NA    0      NA        NA        Y     A     
+#>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2
+#>    <chr>  <chr>  <chr> <chr> <chr>  <chr>     <chr>     <chr> <chr>  <chr> <chr>
+#>  1 WELLS… NA     11D0… NA    0      NA        NA        Y     A      1791… NA   
+#>  2 COBB … NA     11D0… NA    0      NA        NA        Y     A      1810… NA   
+#>  3 WELLS… NA     11D0… NA    0      NA        NA        N     NA     1790… NA   
+#>  4 WELLS… NA     11D0… NA    0      NA        NA        N     NA     1700… NA   
+#>  5 ATLAN… NA     11D0… NA    0      NA        NA        N     NA     315 … NA   
+#>  6 CONCE… NA     11D0… NA    0      NA        NA        Y     A      1045… NA   
+#>  7 MEDCU… NA     11D0… NA    0      NA        NA        N     NA     5582… NA   
+#>  8 SOUTH… NA     11D0… NA    0      NA        NA        Y     A      2855… NA   
+#>  9 SNAPF… NA     11D0… NA    0      NA        NA        N     NA     5040… NA   
+#> 10 GEORG… NA     11D0… NA    0      NA        NA        Y     A      55 W… NA   
 #> # ℹ 886 more rows
-#> # ℹ 73 more variables: add_1 <chr>, add_2 <chr>, phone_1 <chr>, phone_2 <chr>,
-#> #   city <chr>, state <chr>, region <chr>, zip <chr>, state_ssa <chr>,
-#> #   county_ssa <chr>, fips_state <chr>, fips_county <chr>, state_reg <chr>,
-#> #   cbsa_cd <chr>, cbsa_ind <chr>, eligible <chr>, term_pgm <chr>,
-#> #   term_clia <chr>, apl_type <chr>, cert_type <chr>, fac_type <chr>,
-#> #   ownership <chr>, cert_action <chr>, orig_date <chr>, apl_date <chr>, …
+#> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
+#> #   region <chr>, zip <chr>, state_ssa <chr>, county_ssa <chr>,
+#> #   fips_state <chr>, fips_county <chr>, state_reg <chr>, cbsa_cd <chr>,
+#> #   cbsa_ind <chr>, eligible <chr>, term_pgm <chr>, term_clia <chr>,
+#> #   apl_type <chr>, cert_type <chr>, fac_type <chr>, ownership <chr>,
+#> #   cert_action <chr>, orig_date <chr>, apl_date <chr>, cert_date <chr>, …
 ```

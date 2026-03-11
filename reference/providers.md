@@ -92,18 +92,18 @@ with the columns:
 providers()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 11
-#>    npi       multi pac   enid  spec  specialty state last  first middle org_name
-#>    <chr>     <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#>  1 10038798… N     8022… I200… 14-16 PRACTITI… PR    ALVA… ANTO… NA     NA      
-#>  2 10039769… N     7113… I200… 14-68 PRACTITI… PA    ZIEG… CHRI… J      NA      
-#>  3 14078021… N     8022… I200… 14-93 PRACTITI… PA    RAPP  KADI… B      NA      
-#>  4 18311650… N     5193… I200… 14-16 PRACTITI… PR    OSTO… JORGE A      NA      
-#>  5 18513572… N     2466… I200… 14-30 PRACTITI… KY    GRIS… RHON… G      NA      
-#>  6 10837669… N     5092… I200… 14-35 PRACTITI… NJ    DIEC… TIMO… J      NA      
-#>  7 10838351… N     5991… I200… 14-41 PRACTITI… NJ    MOY   ANNA  NA     NA      
-#>  8 17202979… N     7618… I200… 14-26 PRACTITI… NJ    DELS… DAMON D      NA      
-#>  9 14978811… N     1254… I200… 14-01 PRACTITI… PR    AYALA ELVIA ARELIS NA      
-#> 10 14371555… N     9234… I200… 14-68 PRACTITI… MI    WEIN… ARNO… NA     NA      
+#>    first     middle last  org_name state spec  specialty npi   multi pac   enid 
+#>    <chr>     <chr>  <chr> <chr>    <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+#>  1 ANTONIO   NA     ALVA… NA       PR    14-16 PRACTITI… 1003… N     8022… I200…
+#>  2 CHRISTOP… J      ZIEG… NA       PA    14-68 PRACTITI… 1003… N     7113… I200…
+#>  3 KADISHA   B      RAPP  NA       PA    14-93 PRACTITI… 1407… N     8022… I200…
+#>  4 JORGE     A      OSTO… NA       PR    14-16 PRACTITI… 1831… N     5193… I200…
+#>  5 RHONDA    G      GRIS… NA       KY    14-30 PRACTITI… 1851… N     2466… I200…
+#>  6 TIMOTHY   J      DIEC… NA       NJ    14-35 PRACTITI… 1083… N     5092… I200…
+#>  7 ANNA      NA     MOY   NA       NJ    14-41 PRACTITI… 1083… N     5991… I200…
+#>  8 DAMON     D      DELS… NA       NJ    14-26 PRACTITI… 1720… N     7618… I200…
+#>  9 ELVIA     ARELIS AYALA NA       PR    14-01 PRACTITI… 1497… N     1254… I200…
+#> 10 ARNOLD    NA     WEIN… NA       MI    14-68 PRACTITI… 1437… N     9234… I200…
 
 providers(spec_code = "14")
 #> ✖ Query returned 0 results.
@@ -111,39 +111,39 @@ providers(spec_code = "14")
 providers(enid = "I20040309000221")
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
-#>   npi        multi pac   enid  spec  specialty state last  first middle org_name
-#>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#> 1 1417918293 N     3870… I200… 14-41 PRACTITI… FL    SHEI… STEV… D      NA      
+#>   first  middle last    org_name state spec  specialty   npi   multi pac   enid 
+#>   <chr>  <chr>  <chr>   <chr>    <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
+#> 1 STEVEN D      SHEINER NA       FL    14-41 PRACTITION… 1417… N     3870… I200…
 
 providers(npi = 1417918293)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
-#>   npi        multi pac   enid  spec  specialty state last  first middle org_name
-#>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#> 1 1417918293 N     3870… I200… 14-41 PRACTITI… FL    SHEI… STEV… D      NA      
+#>   first  middle last    org_name state spec  specialty   npi   multi pac   enid 
+#>   <chr>  <chr>  <chr>   <chr>    <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
+#> 1 STEVEN D      SHEINER NA       FL    14-41 PRACTITION… 1417… N     3870… I200…
 
 providers(pac = 2860305554)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
-#>   npi        multi pac   enid  spec  specialty state last  first middle org_name
-#>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#> 1 1134122260 N     2860… I200… 14-41 PRACTITI… TX    YEAM… ROBE… NA     NA      
+#>   first  middle last   org_name state spec  specialty    npi   multi pac   enid 
+#>   <chr>  <chr>  <chr>  <chr>    <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
+#> 1 ROBERT NA     YEAMAN NA       TX    14-41 PRACTITIONE… 1134… N     2860… I200…
 
 providers(state = "AK")
 #> ✔ Query returned 6,851 results.
 #> ℹ Retrieving 2 pages...
 #> # A tibble: 6,851 × 11
-#>    npi       multi pac   enid  spec  specialty state last  first middle org_name
-#>    <chr>     <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#>  1 11240812… N     6305… I200… 14-11 PRACTITI… AK    BARN… DAVID L      NA      
-#>  2 17706487… N     8022… I200… 14-01 PRACTITI… AK    SKALA TIMO… W      NA      
-#>  3 18211354… N     8820… I200… 14-48 PRACTITI… AK    HEIL… MATT  A      NA      
-#>  4 19220956… N     1850… I200… 14-22 PRACTITI… AK    CLARK CHRI… D      NA      
-#>  5 16997469… N     7214… I200… 14-25 PRACTITI… AK    JOHN… SHAWN P      NA      
-#>  6 12452261… N     3476… I200… 14-30 PRACTITI… AK    INAM… CHAK… NA     NA      
-#>  7 15886504… N     5193… I200… 14-30 PRACTITI… AK    MAUR… ERIK  J      NA      
-#>  8 10433230… N     0244… I200… 14-65 PRACTITI… AK    BENN… LUCI… L      NA      
-#>  9 11240811… N     4981… I200… 14-65 PRACTITI… AK    SZYM… STAC… G      NA      
-#> 10 13967312… N     2769… I200… 14-30 PRACTITI… AK    KOTT… CHRI… NA     NA      
+#>    first     middle last  org_name state spec  specialty npi   multi pac   enid 
+#>    <chr>     <chr>  <chr> <chr>    <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+#>  1 DAVID     L      BARN… NA       AK    14-11 PRACTITI… 1124… N     6305… I200…
+#>  2 TIMOTHY   W      SKALA NA       AK    14-01 PRACTITI… 1770… N     8022… I200…
+#>  3 MATT      A      HEIL… NA       AK    14-48 PRACTITI… 1821… N     8820… I200…
+#>  4 CHRISTINE D      CLARK NA       AK    14-22 PRACTITI… 1922… N     1850… I200…
+#>  5 SHAWN     P      JOHN… NA       AK    14-25 PRACTITI… 1699… N     7214… I200…
+#>  6 CHAKRI    NA     INAM… NA       AK    14-30 PRACTITI… 1245… N     3476… I200…
+#>  7 ERIK      J      MAUR… NA       AK    14-30 PRACTITI… 1588… N     5193… I200…
+#>  8 LUCILLE   L      BENN… NA       AK    14-65 PRACTITI… 1043… N     0244… I200…
+#>  9 STACEY    G      SZYM… NA       AK    14-65 PRACTITI… 1124… N     4981… I200…
+#> 10 CHRISTOP… NA     KOTT… NA       AK    14-30 PRACTITI… 1396… N     2769… I200…
 #> # ℹ 6,841 more rows
 ```

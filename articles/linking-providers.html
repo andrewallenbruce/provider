@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9029</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9030</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,12 +99,12 @@
 <span>  organization <span class="op">=</span> <span class="va">pac</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; $individual</span></span>
 <span><span class="co">#&gt;                V1</span></span>
-<span><span class="co">#&gt; npi    1043245657</span></span>
-<span><span class="co">#&gt; pac    7810891009</span></span>
-<span><span class="co">#&gt; last         FUNG</span></span>
 <span><span class="co">#&gt; first        MARK</span></span>
+<span><span class="co">#&gt; last         FUNG</span></span>
 <span><span class="co">#&gt; middle          K</span></span>
 <span><span class="co">#&gt; suffix       &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; npi    1043245657</span></span>
+<span><span class="co">#&gt; pac    7810891009</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $organization</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
@@ -119,20 +119,20 @@
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pac</span><span class="op">$</span><span class="va">facility_ccn</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ccn</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 39</span></span></span>
-<span><span class="co">#&gt;   enid    enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> O20120… NY         00-09   PART A P… 1033… N     3302… 2769… CHAMPLA… THE UNI…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> O20230… NY         00-85   PART A P… 1114… N     3313… 4082… ALICE H… THE UNI…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> O20050… VT         00-09   PART A P… 1508… N     4700… 9335… CENTRAL… <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> O20021… VT         00-09   PART A P… 1568… N     4700… 3779… UNIVERS… UNIVERS…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> O20061… VT         00-85   PART A P… 1740… Y     4713… 1850… PORTER … <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;, location_text &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otext &lt;chr&gt;, reh_ind &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt;   org_name     dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CHAMPLAIN V… THE UNI… O201… NY         00-09 PART A P… 1033… N     3302… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ALICE HYDE … THE UNI… O202… NY         00-85 PART A P… 1114… N     3313… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> CENTRAL VER… <span style="color: #BB0000;">NA</span>       O200… VT         00-09 PART A P… 1508… N     4700… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> UNIVERSITY … UNIVERS… O200… VT         00-09 PART A P… 1568… N     4700… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> PORTER HOSP… <span style="color: #BB0000;">NA</span>       O200… VT         00-85 PART A P… 1740… Y     4713… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_type &lt;chr&gt;, org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_text &lt;chr&gt;, reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br></p>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
@@ -140,31 +140,31 @@ insights. For example, there is a hospital in New York named
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 11</span></span></span>
-<span><span class="co">#&gt;   npi        multi pac   enid  spec  specialty state last  first middle org_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1053656744 Y     3577… O200… 12-70 PART B S… NY    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1891785184 Y     3577… O201… 00-85 PART A P… NY    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1487923637 N     3577… O201… 12-59 PART B S… NY    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1407061591 N     3577… O202… 00-85 PART A P… NY    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1053656744 N     3577… O202… 12-70 PART B S… CT    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1053656744 N     3577… O202… 12-70 PART B S… FL    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1053656744 N     3577… O202… 12-70 PART B S… VT    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1053656744 N     3577… O202… 12-70 PART B S… NH    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1053656744 N     3577… O202… 12-70 PART B S… CO    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     ELIZABE…</span></span></code></pre>
+<span><span class="co">#&gt;   first middle last  org_name      state spec  specialty npi   multi pac   enid </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    12-70 PART B S… 1053… Y     3577… O200…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    00-85 PART A P… 1891… Y     3577… O201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    12-59 PART B S… 1487… N     3577… O201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    00-85 PART A P… 1407… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… CT    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… FL    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… VT    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NH    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… CO    12-70 PART B S… 1053… N     3577… O202…</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 39</span></span></span>
-<span><span class="co">#&gt;   enid    enid_state spec_cd specialty npi   multi ccn   pac   org_name dba_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> O20101… NY         00-85   PART A P… 1891… Y     3313… 3577… ELIZABE… <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> O20220… NY         00-85   PART A P… 1407… N     33Z3… 3577… ELIZABE… <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;, location_text &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otext &lt;chr&gt;, reh_ind &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt;   org_name     dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABETHTO… <span style="color: #BB0000;">NA</span>       O201… NY         00-85 PART A P… 1891… Y     3313… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABETHTO… <span style="color: #BB0000;">NA</span>       O202… NY         00-85 PART A P… 1407… N     33Z3… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_type &lt;chr&gt;, org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_text &lt;chr&gt;, reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -187,18 +187,18 @@ all-numeric CCN (<code>331302</code>):</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $individual</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 206 × 6</span></span></span>
-<span><span class="co">#&gt;    npi        pac        last            first   middle suffix</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003845272 1759384035 GREENE          LAURA   A      <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1013141860 8022069558 KAMPSCHROR      DEBORAH M      <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1013539584 9133544109 VASSILIAN       NAROD   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1013595560 3375947401 TRIPLETT        EMILY   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1013910256 5890719371 ACOSTAMADIEDO   JOSE    M      <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023377843 6901115278 WILHELM         LINDSEY B      <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1043672140 7214229350 FIORINI FURTADO VANESSA <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1063420891 9436051687 YOUNG           JOHN    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1073073177 0547593097 OSBORN          DELANEY <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1073133435 6800318452 GILL            ANGAD   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">#&gt;    first   last            middle suffix npi        pac       </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> LAURA   GREENE          A      <span style="color: #BB0000;">NA</span>     1003845272 1759384035</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> DEBORAH KAMPSCHROR      M      <span style="color: #BB0000;">NA</span>     1013141860 8022069558</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NAROD   VASSILIAN       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1013539584 9133544109</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EMILY   TRIPLETT        <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1013595560 3375947401</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> JOSE    ACOSTAMADIEDO   M      <span style="color: #BB0000;">NA</span>     1013910256 5890719371</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> LINDSEY WILHELM         B      <span style="color: #BB0000;">NA</span>     1023377843 6901115278</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> VANESSA FIORINI FURTADO <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1043672140 7214229350</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> JOHN    YOUNG           <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1063420891 9436051687</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DELANEY OSBORN          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073073177 0547593097</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ANGAD   GILL            <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073133435 6800318452</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 196 more rows</span></span></span></code></pre>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
@@ -217,12 +217,12 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $individual</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
-<span><span class="co">#&gt;   npi        pac        last     first   middle suffix</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1073258398 3870095805 KLOTZ    JEFFREY <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1396989059 8921259557 HALLORAN MARY    K      <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1538173869 0547299091 CHON     IL      JUN    <span style="color: #BB0000;">NA</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1558659367 6709004682 BANU     DRAGOS  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span></span></span></code></pre>
+<span><span class="co">#&gt;   first   last     middle suffix npi        pac       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> JEFFREY KLOTZ    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073258398 3870095805</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MARY    HALLORAN K      <span style="color: #BB0000;">NA</span>     1396989059 8921259557</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> IL      CHON     JUN    <span style="color: #BB0000;">NA</span>     1538173869 0547299091</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> DRAGOS  BANU     <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1558659367 6709004682</span></span></code></pre>
 <p><br></p>
 <p>That returns more affiliated individual providers that practice in
 the Hospital’s nursing home..</p>
