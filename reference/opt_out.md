@@ -15,7 +15,8 @@ opt_out(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_refer = NULL
+  order_refer = NULL,
+  count = FALSE
 )
 ```
 
@@ -52,6 +53,10 @@ opt_out(
 - order_refer:
 
   `<lgl>` Indicates order and refer eligibility
+
+- count:
+
+  `<lgl>` Return the dataset's total row count
 
 ## Value
 
@@ -94,23 +99,8 @@ fee-for-service (Part B).
 ## Examples
 
 ``` r
-opt_out()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 13
-#>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
-#>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
-#>  1 1720… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2026   1629… P O … GLAD…
-#>  2 1811… Kevin Carl… Internal… 7/1/2010   7/1/2026 8/15/2024   1070… NA    COLU…
-#>  3 1548… Bruce Shap… Psychiat… 12/28/2015 12/28/2… 1/15/2026   666 … NA    STAM…
-#>  4 1861… Alan  Mcfa… Clinical… 1/1/2018   1/1/2028 1/15/2026   7330… STE B ANNA…
-#>  5 1689… Heat… Razn… Clinical… 6/1/2010   6/1/2026 7/15/2024   3009… NA    ST L…
-#>  6 1235… Laura Bren… Psychiat… 5/1/2006   5/1/2026 5/15/2024   135 … SUIT… CRES…
-#>  7 1003… Phyl… Tuth… Oral Sur… 2/16/2012  2/16/20… 10/15/2024  1111… STE 5 HOUS…
-#>  8 1366… Firas Kata… Oral Sur… 10/1/2015  10/1/20… 11/14/2025  2220… NA    CHIC…
-#>  9 1790… Gera… Card… Psychiat… 4/28/1998  4/28/20… 5/15/2024   1020… NA    MANI…
-#> 10 1275… John  Zaje… Psychiat… 4/1/2006   4/1/2026 5/15/2024   4711… STE … SKOK…
-#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
-
+opt_out(count = TRUE)
+#> ✔ Query returned 54,943 results.
 opt_out(npi = 1043522824)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 13
@@ -118,7 +108,6 @@ opt_out(npi = 1043522824)
 #>   <chr>  <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #> 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
-
 opt_out(state = "AK")
 #> ✔ Query returned 256 results.
 #> # A tibble: 256 × 13
@@ -136,7 +125,6 @@ opt_out(state = "AK")
 #> 10 1225… Ray   Holl… Oral Sur… 6/16/2014  6/16/20… 7/15/2024   111 … STE … ANCH…
 #> # ℹ 246 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
-
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ Query returned 790 results.
 #> # A tibble: 790 × 13

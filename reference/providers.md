@@ -81,28 +81,24 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 providers(count = TRUE)
 #> ✔ Query returned 2,957,262 results.
-
 providers(enid = "I20040309000221")
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   first  middle last    org_name state spec  specialty   npi   multi pac   enid 
 #>   <chr>  <chr>  <chr>   <chr>    <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 STEVEN D      SHEINER NA       FL    14-41 PRACTITION… 1417… N     3870… I200…
-
 providers(npi = 1417918293)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   first  middle last    org_name state spec  specialty   npi   multi pac   enid 
 #>   <chr>  <chr>  <chr>   <chr>    <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 STEVEN D      SHEINER NA       FL    14-41 PRACTITION… 1417… N     3870… I200…
-
 providers(pac = 2860305554)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 11
 #>   first  middle last   org_name state spec  specialty    npi   multi pac   enid 
 #>   <chr>  <chr>  <chr>  <chr>    <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
 #> 1 ROBERT NA     YEAMAN NA       TX    14-41 PRACTITIONE… 1134… N     2860… I200…
-
 providers(state = "AK")
 #> ✔ Query returned 6,851 results.
 #> ℹ Retrieving 2 pages...

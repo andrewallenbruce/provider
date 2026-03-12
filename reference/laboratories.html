@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9032</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9033</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,11 +60,13 @@ services the facility provides.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">laboratories</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cert <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  certification <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  active <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  active <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -80,7 +82,7 @@ services the facility provides.</p>
 <dd><p><code>&lt;chr&gt;</code> 10-character CLIA number</p></dd>
 
 
-<dt id="arg-cert">cert<a class="anchor" aria-label="anchor" href="#arg-cert"></a></dt>
+<dt id="arg-certification">certification<a class="anchor" aria-label="anchor" href="#arg-certification"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
 <li><p><code>"ppm"</code></p></li>
 <li><p><code>"registration"</code></p></li>
@@ -101,8 +103,16 @@ services the facility provides.</p>
 <dd><p><code>&lt;chr&gt;</code> Zip code</p></dd>
 
 
+<dt id="arg-status">status<a class="anchor" aria-label="anchor" href="#arg-status"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> <code>A</code> (Compliant) or <code>B</code> (Non-Compliant)</p></dd>
+
+
 <dt id="arg-active">active<a class="anchor" aria-label="anchor" href="#arg-active"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return only active providers</p></dd>
+
+
+<dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -115,11 +125,8 @@ services the facility provides.</p>
 
 
 <p>CMS regulates all laboratory testing (except research) performed on humans
-in the U.S. through the <strong>Clinical Laboratory Improvement Amendments (CLIA)</strong>.
-In total, CLIA covers approximately 320,000 laboratory entities.</p>
-<p>The <em>Division of Clinical Laboratory Improvement &amp; Quality</em>, within the
-<em>Quality, Safety &amp; Oversight Group</em>, under the <em>Center for Clinical Standards and Quality</em>
-(CCSQ) has the responsibility for implementing the CLIA Program.</p>
+in the U.S. through the <strong>Clinical Laboratory Improvement Amendments</strong>.
+In total, <strong>CLIA</strong> covers approximately 320,000 laboratory entities.</p>
 <p>Although all clinical laboratories must be properly certified to receive
 Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
 program responsibilities.</p>
@@ -163,18 +170,20 @@ CMS-approved accreditation organizations:</p><ul><li><p><a href="https://a2la.or
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">Provider of Services File - Clinical Laboratories API</a></p></li>
-<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS CLIA</a></p></li>
-<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC CLIA</a></p></li>
-<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS QCOR</a></p></li>
-<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CLIA Certificates</a></p></li>
-<li><p><a href="https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf" class="external-link">CLIA Certificate Fee Schedule</a></p></li>
-<li><p><a href="https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf" class="external-link">CLIA Certification Guide</a></p></li>
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">API: Provider of Services File - Clinical Laboratories</a></p></li>
+<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS: CLIA</a></p></li>
+<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC: CLIA</a></p></li>
+<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS: QCOR</a></p></li>
+<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CLIA: Certificates</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf" class="external-link">CLIA: Certificate Fee Schedule</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf" class="external-link">CLIA: Certification Guide</a></p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">671,570</span> results.</span>
+<span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 82</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2</span>
@@ -196,18 +205,6 @@ CMS-approved accreditation organizations:</p><ul><li><p><a href="https://a2la.or
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   apl_type &lt;chr&gt;, cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_action &lt;chr&gt;, orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eff_date &lt;chr&gt;, mail_date &lt;chr&gt;, term_date &lt;chr&gt;, a2la_cred &lt;chr&gt;, …</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">provider</span><span class="fu">:::</span><span class="va">cdc_labs</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   laboratory                                                   ccn   city  state</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Artic Envestigations Program Laboratory                      02D0… Anch… AK   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Dengue Laboratory                                            40D0… San … PR   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> CDC/CGH/DGHA International Laboratory                        11D1… Atla… GA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Infectious Diseases Laboratory                               11D0… Atla… GA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> National Center for Environmental Health, Division of Labor… 11D0… Atla… GA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Vector-Borne Diseases Laboratory                             06D0… Fort… CO   </span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>ccn <span class="op">=</span> <span class="fu">provider</span><span class="fu">:::</span><span class="va">cdc_labs</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">6</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 82</span></span>
@@ -226,34 +223,35 @@ CMS-approved accreditation organizations:</p><ul><li><p><a href="https://a2la.or
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   apl_type &lt;chr&gt;, cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_action &lt;chr&gt;, orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eff_date &lt;chr&gt;, mail_date &lt;chr&gt;, term_date &lt;chr&gt;, a2la_cred &lt;chr&gt;, …</span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   cert <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ppm"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   city <span class="op">=</span> <span class="fu"><a href="modifier.html">not_equal</a></span><span class="op">(</span><span class="st">"Valdosta"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
-<span class="r-in"><span>   active <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span> <span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">896</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 896 × 82</span></span>
+<span class="r-in"><span>   certification <span class="op">=</span> <span class="st">"accreditation"</span>,</span></span>
+<span class="r-in"><span>   city <span class="op">=</span> <span class="st">"Valdosta"</span>,</span></span>
+<span class="r-in"><span>   state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">14</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 82</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> WELLS… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        Y     A      1791… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> COBB … <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        Y     A      1810… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> WELLS… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     1790… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> WELLS… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     1700… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ATLAN… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     315 … <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> CONCE… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        Y     A      1045… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MEDCU… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     5582… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SOUTH… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        Y     A      2855… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> SNAPF… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     5040… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> GEORG… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        Y     A      55 W… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 886 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SGMC … <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     A      2501… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SGMC-… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     A      4280… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> QUEST… SOLST… 11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     A      341 … <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SOUTH… <span style="color: #BB0000;">NA</span>     11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     2501… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> NORTH… WILLI… 11D0… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     201 … <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> VALDO… <span style="color: #BB0000;">NA</span>     11D1… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     2841… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ALLEG… <span style="color: #BB0000;">NA</span>     11D1… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     5101… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> CARE … <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     2804… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> BPC P… <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     311 … <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SOUTH… <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     3312… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> SGMC … <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     2501… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> SGMC … <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     3386… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> OCTAP… <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     1713… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> VEEDH… <span style="color: #BB0000;">NA</span>     11D2… <span style="color: #BB0000;">NA</span>    0      <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        N     <span style="color: #BB0000;">NA</span>     3386… <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 71 more variables: phone_1 &lt;chr&gt;, phone_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   region &lt;chr&gt;, zip &lt;chr&gt;, state_ssa &lt;chr&gt;, county_ssa &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fips_state &lt;chr&gt;, fips_county &lt;chr&gt;, state_reg &lt;chr&gt;, cbsa_cd &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cbsa_ind &lt;chr&gt;, eligible &lt;chr&gt;, term_pgm &lt;chr&gt;, term_clia &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   apl_type &lt;chr&gt;, cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, ownership &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_action &lt;chr&gt;, orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_action &lt;chr&gt;, orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eff_date &lt;chr&gt;, mail_date &lt;chr&gt;, term_date &lt;chr&gt;, a2la_cred &lt;chr&gt;, …</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

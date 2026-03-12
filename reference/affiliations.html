@@ -9,7 +9,7 @@ affiliations with organizations/facilities."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9032</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9033</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@ affiliations with organizations/facilities.</p>
 
 
 <dt id="arg-facility-type">facility_type<a class="anchor" aria-label="anchor" href="#arg-facility-type"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> facility type abbreviation:</p><table class="table table"><tr><td><strong>ABBR</strong></td><td><strong>FULL</strong></td></tr><tr><td><code>hp</code></td><td>Hospital</td></tr><tr><td><code>lt</code></td><td>Long-term care hospital</td></tr><tr><td><code>nh</code></td><td>Nursing home</td></tr><tr><td><code>irf</code></td><td>Inpatient rehabilitation facility</td></tr><tr><td><code>hha</code></td><td>Home health agency</td></tr><tr><td><code>snf</code></td><td>Skilled nursing facility</td></tr><tr><td><code>hs</code></td><td>Hospice</td></tr><tr><td><code>df</code></td><td>Dialysis facility</td></tr></table></dd>
+<dd><p><code>&lt;chr&gt;</code> facility type abbreviation</p></dd>
 
 
 <dt id="arg-facility-ccn">facility_ccn<a class="anchor" aria-label="anchor" href="#arg-facility-ccn"></a></dt>
@@ -113,7 +113,7 @@ unit where the individual provider provides services.</p></dd>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p><a href="https://data.cms.gov/provider-data/dataset/27ea-46a8" class="external-link">Physician Facility Affiliations</a></p></li>
+<ul><li><p><a href="https://data.cms.gov/provider-data/dataset/27ea-46a8" class="external-link">API: Physician Facility Affiliations</a></p></li>
 <li><p><a href="https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf" class="external-link">Certification Number (CCN) State Codes</a></p></li>
 </ul></div>
 
@@ -121,45 +121,44 @@ unit where the individual provider provides services.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1,621,297</span> results.</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">5</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   first last  middle suffix npi      pac   facility_type facility_ccn parent_ccn</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> MARK  FUNG  K      <span style="color: #BB0000;">NA</span>     1043245… 7810… Hospital      470003       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> MARK  FUNG  K      <span style="color: #BB0000;">NA</span>     1043245… 7810… Hospital      330250       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> MARK  FUNG  K      <span style="color: #BB0000;">NA</span>     1043245… 7810… Hospital      331321       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MARK  FUNG  K      <span style="color: #BB0000;">NA</span>     1043245… 7810… Hospital      470001       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> MARK  FUNG  K      <span style="color: #BB0000;">NA</span>     1043245… 7810… Hospital      471307       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ARDALAN ENKE… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 7517… Hospital      090012       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> RASHID  KHAL… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 9931… Hospital      360112       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> KEVIN   ROTH… B      <span style="color: #BB0000;">NA</span>     1003… 0446… Hospital      060024       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Home health … 397791       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390035       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390049       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390057       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370001       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370202       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370057       <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>first <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Query returned <span style="font-weight: bold;">0</span> results.</span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">4</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> RADHIKA PHADKE PUSHK… <span style="color: #BB0000;">NA</span>     1003… 4486… Hospital      100168       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"KIM"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">710</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 710 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first last    middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> KIM   FRENCH  M      <span style="color: #BB0000;">NA</span>     1003… 0941… Hospital      260032       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> KIM   HARLEY  A      <span style="color: #BB0000;">NA</span>     1003… 4880… Hospital      180038       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> KIM   HARLEY  A      <span style="color: #BB0000;">NA</span>     1003… 4880… Hospital      151322       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> KIM   GORDON  E      <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      310041       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> KIM   VU      HOANG  <span style="color: #BB0000;">NA</span>     1003… 9335… Hospital      050231       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> KIM   FREDER… S      <span style="color: #BB0000;">NA</span>     1003… 0244… Hospital      050131       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> KIM   FALLON  M      <span style="color: #BB0000;">NA</span>     1013… 6002… Hospital      310041       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> KIM   FALLON  M      <span style="color: #BB0000;">NA</span>     1013… 6002… Hospital      310084       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> KIM   WRIGLEY C      <span style="color: #BB0000;">NA</span>     1013… 0547… Hospital      140185       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> KIM   CARLTON M      <span style="color: #BB0000;">NA</span>     1013… 1254… Hospital      030007       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 700 more rows</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"33Z302"</span>, <span class="fl">331302</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">210</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 210 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> JEFFREY KLOTZ  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073… 3870… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> MARY    HALLO… K      <span style="color: #BB0000;">NA</span>     1396… 8921… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> IL      CHON   JUN    <span style="color: #BB0000;">NA</span>     1538… 0547… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> DRAGOS  BANU   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1558… 6709… Nursing home  33Z302       331302    </span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">4</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> JEFFREY KLOTZ  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073… 3870… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> MARY    HALLO… K      <span style="color: #BB0000;">NA</span>     1396… 8921… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> IL      CHON   JUN    <span style="color: #BB0000;">NA</span>     1538… 0547… Nursing home  33Z302       331302    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> DRAGOS  BANU   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1558… 6709… Nursing home  33Z302       331302    </span>
+<span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">206</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 206 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> LAURA   GREE… A      <span style="color: #BB0000;">NA</span>     1003… 1759… Hospital      331302       <span style="color: #BB0000;">NA</span>        </span>
@@ -172,8 +171,7 @@ unit where the individual provider provides services.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> JOHN    YOUNG <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1063… 9436… Hospital      331302       <span style="color: #BB0000;">NA</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DELANEY OSBO… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073… 0547… Hospital      331302       <span style="color: #BB0000;">NA</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ANGAD   GILL  <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073… 6800… Hospital      331302       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 200 more rows</span></span>
-<span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 196 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

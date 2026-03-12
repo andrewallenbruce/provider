@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9033 (2026-03-12)
+
+- added `enum_()` helper for enum function args
+
 ## provider 0.0.1.9032 (2026-03-11)
 
 - added `count` arg to api calls
