@@ -9,7 +9,7 @@ actively approved to bill Medicare."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,11 +64,12 @@ actively approved to bill Medicare.</p>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  spec_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  spec_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spec <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  multi <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -92,11 +93,11 @@ actively approved to bill Medicare.</p>
 <dd><p><code>&lt;chr&gt;</code> Individual provider's name</p></dd>
 
 
-<dt id="arg-spec-code">spec_code<a class="anchor" aria-label="anchor" href="#arg-spec-code"></a></dt>
+<dt id="arg-spec">spec<a class="anchor" aria-label="anchor" href="#arg-spec"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Enrollment specialty code</p></dd>
 
 
-<dt id="arg-spec-desc">spec_desc<a class="anchor" aria-label="anchor" href="#arg-spec-desc"></a></dt>
+<dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Enrollment specialty description</p></dd>
 
 
@@ -111,38 +112,26 @@ actively approved to bill Medicare.</p>
 <dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider has multiple NPIs</p></dd>
 
+
+<dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac</code></td><td>10-digit PAC ID</td></tr><tr><td><code>enid</code></td><td>15-digit provider enrollment ID</td></tr><tr><td><code>spec_code</code></td><td>Enrollment primary specialty type code</td></tr><tr><td><code>spec_desc</code></td><td>Enrollment specialty type description</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>state</code></td><td>Enrollment state</td></tr><tr><td><code>org_name</code></td><td>Organizational provider's name</td></tr></table></div>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+    </div>
     <div class="section level2">
-    <h2 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h2>
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Provider Enrollment API</a></p></li>
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">API: Medicare Provider Supplier Enrollment</a></p></li>
 <li><p><a href="https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary" class="external-link">Provider Enrollment Data Dictionary</a></p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first     middle last  org_name state spec  specialty npi   multi pac   enid </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ANTONIO   <span style="color: #BB0000;">NA</span>     ALVA… <span style="color: #BB0000;">NA</span>       PR    14-16 PRACTITI… 1003… N     8022… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CHRISTOP… J      ZIEG… <span style="color: #BB0000;">NA</span>       PA    14-68 PRACTITI… 1003… N     7113… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> KADISHA   B      RAPP  <span style="color: #BB0000;">NA</span>       PA    14-93 PRACTITI… 1407… N     8022… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> JORGE     A      OSTO… <span style="color: #BB0000;">NA</span>       PR    14-16 PRACTITI… 1831… N     5193… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> RHONDA    G      GRIS… <span style="color: #BB0000;">NA</span>       KY    14-30 PRACTITI… 1851… N     2466… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TIMOTHY   J      DIEC… <span style="color: #BB0000;">NA</span>       NJ    14-35 PRACTITI… 1083… N     5092… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ANNA      <span style="color: #BB0000;">NA</span>     MOY   <span style="color: #BB0000;">NA</span>       NJ    14-41 PRACTITI… 1083… N     5991… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> DAMON     D      DELS… <span style="color: #BB0000;">NA</span>       NJ    14-26 PRACTITI… 1720… N     7618… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ELVIA     ARELIS AYALA <span style="color: #BB0000;">NA</span>       PR    14-01 PRACTITI… 1497… N     1254… I200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ARNOLD    <span style="color: #BB0000;">NA</span>     WEIN… <span style="color: #BB0000;">NA</span>       MI    14-68 PRACTITI… 1437… N     9234… I200…</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>spec_code <span class="op">=</span> <span class="st">"14"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Query returned <span style="font-weight: bold;">0</span> results.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">2,957,262</span> results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>enid <span class="op">=</span> <span class="st">"I20040309000221"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1</span> result.</span>

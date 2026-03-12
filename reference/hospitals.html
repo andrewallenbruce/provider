@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,8 @@ type and address.</p>
 <span>  designation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  reh <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -104,9 +105,9 @@ type and address.</p>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Part A Provider Specialty:</p><ul><li><p><code>"00-09"</code>: Hospital</p></li>
-<li><p><code>"00-24"</code>: REH (Rural Emergency Hospital)</p></li>
-<li><p><code>"00-85"</code>: CAH (Critical Access Hospital)</p></li>
+<dd><p><code>&lt;chr&gt;</code></p><ul><li><p><code>"00-09"</code>: Hospital</p></li>
+<li><p><code>"00-24"</code>: Rural Emergency Hospital</p></li>
+<li><p><code>"00-85"</code>: Critical Access Hospital</p></li>
 </ul></dd>
 
 
@@ -131,7 +132,7 @@ type and address.</p>
 
 
 <dt id="arg-designation">designation<a class="anchor" aria-label="anchor" href="#arg-designation"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> IRS designation; <code>"Proprietor"</code>/<code>"Non-Profit"</code></p></dd>
+<dd><p><code>&lt;chr&gt;</code> <code>"Proprietor"</code>/<code>"Non-Profit"</code></p></dd>
 
 
 <dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
@@ -143,20 +144,11 @@ type and address.</p>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
-<dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit:</p><ul><li><p><code>acute</code>: Acute Care</p></li>
-<li><p><code>drug</code>: Alcohol/Drug Treatment</p></li>
-<li><p><code>child</code>: Children's Hospital</p></li>
-<li><p><code>general</code>: General Hospital</p></li>
-<li><p><code>long</code>: Long-Term Care</p></li>
-<li><p><code>short</code>: Short-Term Care</p></li>
-<li><p><code>psych</code>: Psychiatric</p></li>
-<li><p><code>rehab</code>: Rehabilitation</p></li>
-<li><p><code>swing</code>: Swing-Bed Approved</p></li>
-<li><p><code>psych_unit</code>: Psychiatric Unit</p></li>
-<li><p><code>rehab_unit</code>: Rehabilitation Unit</p></li>
-<li><p><code>specialty</code>: Specialty Hospital</p></li>
-<li><p><code>other</code>: Unlisted on CMS form</p></li>
-</ul></dd>
+<dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit. See <code><a href="subgroups.html">subgroups()</a></code>.</p></dd>
+
+
+<dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -171,28 +163,8 @@ type and address.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    org_name    dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SOUTHERN T… HIGHPOI… O200… TN         00-09 PART A P… 1467… N     4400… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CENTRAL MA… <span style="color: #BB0000;">NA</span>       O200… ME         00-09 PART A P… 1689… N     2000… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ADCARE HOS… ADCARE … O200… MA         00-09 PART A P… 1134… N     2200… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> CAPE COD H… CAPE CO… O200… MA         00-09 PART A P… 1114… N     2200… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CARRINGTON… CHI ST … O200… ND         00-85 PART A P… 1205… N     3513… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SELECT SPE… SELECT … O200… GA         00-09 PART A P… 1588… N     1120… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> THE FINLEY… FINLEY … O200… IA         00-09 PART A P… 1942… N     1601… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ST CHARLES… <span style="color: #BB0000;">NA</span>       O200… NY         00-09 PART A P… 1164… N     3302… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> WASHINGTON… <span style="color: #BB0000;">NA</span>       O200… AR         00-09 PART A P… 1083… N     0400… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ARIZONA SP… <span style="color: #BB0000;">NA</span>       O200… AZ         00-09 PART A P… 1396… N     0301… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_text &lt;chr&gt;, reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, …</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">9,196</span> results.</span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 39</span></span>

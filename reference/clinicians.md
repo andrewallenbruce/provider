@@ -1,13 +1,6 @@
 # Clinician Demographics
 
-Demographics of doctors and clinicians listed in the Provider Data
-Catalog (PDC)
-
-The Doctors and Clinicians national downloadable file is organized such
-that each line is unique at the clinician/enrollment
-record/group/address level. Clinicians with multiple Medicare enrollment
-records and/or single enrollments linking to multiple practice locations
-are listed on multiple lines.
+Demographics of clinicians listed in the Provider Data Catalog (PDC)
 
 ## Usage
 
@@ -29,7 +22,8 @@ clinicians(
   state = NULL,
   zip = NULL,
   facility_name = NULL,
-  facility_pac = NULL
+  facility_pac = NULL,
+  count = FALSE
 )
 ```
 
@@ -37,15 +31,15 @@ clinicians(
 
 - npi:
 
-  `<int>` Individual National Provider Identifier
+  `<int>` National Provider Identifier
 
 - pac:
 
-  `<int>` Individual PECOS Associate Control ID
+  `<int>` PECOS Associate Control ID
 
 - enid:
 
-  `<chr>` Individual Medicare Enrollment ID
+  `<chr>` Medicare Enrollment ID
 
 - first, middle, last, suffix:
 
@@ -53,24 +47,24 @@ clinicians(
 
 - gender:
 
-  `<chr>` Individual provider's gender; `"F"` (Female), `"M"` (Male), or
-  `"U"` (Unknown)
+  `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
+  (Unknown)
 
 - credential:
 
-  `<chr>` Individual provider's credential, i.e. `"MD"`, `"OD"`
+  `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
 
 - specialty:
 
-  `<chr>` Individual provider’s primary medical specialty
+  `<chr>` Provider’s primary medical specialty
 
 - school:
 
-  `<chr>` Individual provider’s medical school
+  `<chr>` Provider’s medical school
 
 - year:
 
-  `<int>` Individual provider’s graduation year
+  `<int>` Provider’s graduation year
 
 - city, state, zip:
 
@@ -84,40 +78,54 @@ clinicians(
 
   `<int>` Facility's PECOS Associate Control ID
 
+- count:
+
+  `<lgl>` Return the dataset's total row count
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
+## Data Source
+
+The Doctors and Clinicians National Downloadable File is organized such
+that each line is unique at the clinician/enrollment
+record/group/address level. Clinicians with multiple Medicare enrollment
+records and/or single enrollments linking to multiple practice locations
+are listed on multiple lines.
+
+### Inclusion Criteria
+
+A Clinician or Group must have:
+
+- Current and approved Medicare enrollment record in PECOS
+
+- Valid physical practice location or address
+
+- Valid specialty
+
+- National Provider Identifier
+
+- One Medicare FFS claim within the last six months
+
+- Two approved clinicians reassigning their benefits to the group
+
 ## References
 
-- [National Downloadable
+- [API: National Downloadable
   File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 
 - [Provider Data Catalog (PDC) Data
   Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 
+- [Source
+  Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
+
 ## Examples
 
 ``` r
-clinicians()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 25
-#>    first    middle last    suffix gender cred  school year  specialty spec_other
-#>    <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
-#>  1 ARDALAN  NA     ENKESH… NA     M      MD    OTHER  1994  HOSPITAL… INTERNAL …
-#>  2 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
-#>  3 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
-#>  4 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… NA        
-#>  5 RASHID   NA     KHALIL  NA     M      MD    OTHER  1999  ANESTHES… PAIN MANA…
-#>  6 JENNIFER A      VELOTTA NA     F      MD    TOLED… 2007  OBSTETRI… NA        
-#>  7 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
-#>  8 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
-#>  9 KEVIN    B      ROTHCH… NA     M      MD    OHIO … 1997  GENERAL … NA        
-#> 10 AMANDA   M      SEMONC… NA     F      DO    LAKE … 2006  INTERNAL… NA        
-#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
-#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
-
+clinicians(count = TRUE)
+#> ✔ Query returned 2,843,790 results.
 clinicians(enid = "I20081002000549")
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 25
@@ -127,7 +135,6 @@ clinicians(enid = "I20081002000549")
 #> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
 #> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
 #> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
-
 clinicians(first = "ETAN")
 #> ✔ Query returned 11 results.
 #> # A tibble: 11 × 25
@@ -147,7 +154,6 @@ clinicians(first = "ETAN")
 #> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
 #> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
 #> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
-
 clinicians(city = starts_with("At"), state = "GA", year = 2020)
 #> ✔ Query returned 651 results.
 #> # A tibble: 651 × 25

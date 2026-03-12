@@ -1,7 +1,6 @@
-# Order and Referral Eligibility
+# Order and Refer Eligibility
 
-`order_refer()` returns a provider's eligibility to order and refer
-within Medicare to:
+Eligibility to order and refer within Medicare
 
 ## Usage
 
@@ -14,7 +13,8 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  hospice = NULL
+  hospice = NULL,
+  count = FALSE
 )
 ```
 
@@ -22,7 +22,7 @@ order_refer(
 
 - npi:
 
-  `<int>` 10-digit Individual National Provider Identifier
+  `<int>` National Provider Identifier
 
 - first, last:
 
@@ -30,9 +30,9 @@ order_refer(
 
 - part_b, dme, hha, pmd, hospice:
 
-  `<lgl>` Whether a provider is eligible to order and refer to:
+  `<lgl>` Eligibility for:
 
-  - `partb`: Medicare Part B
+  - `part_b`: Medicare Part B
 
   - `dme`: Durable Medical Equipment
 
@@ -42,75 +42,53 @@ order_refer(
 
   - `hospice`: Hospice
 
+- count:
+
+  `<lgl>` Return the dataset's total row count
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-with the columns:
 
-|            |                                                  |
-|------------|--------------------------------------------------|
-| **Field**  | **Description**                                  |
-| `npi`      | National Provider Identifier                     |
-| `first`    | Order and Referring Provider's First Name        |
-| `last`     | Order and Referring Provider's Last Name         |
-| `eligible` | Services An Eligible Provider Can Order/Refer To |
+## Criteria
 
-## Details
+- *Individual* NPI
 
-- **Part B**: Clinical Laboratory Services, Imaging Services
+- Medicare enrollment with *Approved* or *Opt-Out* status
 
-- **DME**: Durable Medical Equipment, Prosthetics, Orthotics, & Supplies
-  (DMEPOS)
+- Eligible *specialty* type
 
-- **Part A**: Home Health Services
+## Types
 
-To be eligible, a provider must:
+- *Ordering*: can order non-physician services for patients.
 
-- have an *Individual* NPI
+- *Referring/Certifying*: can request items/services Medicare may
+  reimburse.
 
-- be enrolled in Medicare in either an *Approved* or *Opt-Out* status
+- *Opt-Out*: can enroll solely to order and refer.
 
-- be of an *Eligible Specialty* type
+## Services
 
-**Ordering Providers** can order non-physician services for patients.
+- *Medicare Part B*: Clinical Labs, Imaging
 
-**Referring (or Certifying) Providers** can request items or services
-that Medicare may reimburse on behalf of its beneficiaries.
+- *Medicare Part A*: Home Health
 
-**Opt-Out Providers**: Providers who have opted out of Medicare may
-still order and refer. They can also enroll solely to order and refer.
+- *DMEPOS*: Durable medical equipment, prosthetics, orthotics, &
+  supplies
 
 ## References
 
-links:
+- [API: Medicare Order and
+  Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 
-- [Medicare Order and Referring
-  API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-
-- [CMS.gov: Ordering &
+- [CMS: Ordering &
   Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 
 ## Examples
 
 ``` r
-order_refer()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 8
-#>    npi        first     last          part_b dme   hha   pmd   hospice
-#>    <chr>      <chr>     <chr>         <chr>  <chr> <chr> <chr> <chr>  
-#>  1 1417051921 N         A BELLE       Y      Y     Y     Y     N      
-#>  2 1972040137 ELIZABETH A NOVOTNY     Y      Y     Y     Y     N      
-#>  3 1760465553 MUHAMMAD  A SATTAR      Y      Y     Y     Y     Y      
-#>  4 1295400745 BROGAN    A'NEAL        Y      Y     N     N     N      
-#>  5 1265446264 CATHERINE A'VANT FOWLER Y      Y     N     N     N      
-#>  6 1700562584 BAILEY    AAB           Y      Y     Y     N     Y      
-#>  7 1205257284 KATIE     AAB           Y      Y     N     N     N      
-#>  8 1245971480 ALEXANDER AABEDI        Y      Y     Y     Y     Y      
-#>  9 1164905659 SAMANTHA  AABEL         Y      Y     N     N     N      
-#> 10 1881384394 CAROLINE  AABERG        Y      Y     Y     Y     N      
-
-order_refer(npi = 100)
-#> ✖ Query returned 0 results.
+order_refer(count = TRUE)
+#> ✔ Query returned 1,996,162 results.
 
 order_refer(npi = 1003026055)
 #> ✔ Query returned 1 result.
@@ -141,8 +119,7 @@ order_refer(
   dme = TRUE,
   hha = FALSE,
   pmd = TRUE,
-  hospice = FALSE
- )
+  hospice = FALSE)
 #> ✔ Query returned 50 results.
 #> # A tibble: 50 × 8
 #>    npi        first    last        part_b dme   hha   pmd   hospice

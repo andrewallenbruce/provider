@@ -22,7 +22,7 @@ Access Current Individual Provider Data.
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
   : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
-  : Order and Referral Eligibility
+  : Order and Refer Eligibility
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
   : Pending Medicare Enrollments
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)

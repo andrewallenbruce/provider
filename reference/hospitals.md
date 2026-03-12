@@ -22,7 +22,8 @@ hospitals(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = subgroups()
+  subgroup = subgroups(),
+  count = FALSE
 )
 ```
 
@@ -50,13 +51,13 @@ hospitals(
 
 - specialty:
 
-  `<chr>` Part A Provider Specialty:
+  `<chr>`
 
   - `"00-09"`: Hospital
 
-  - `"00-24"`: REH (Rural Emergency Hospital)
+  - `"00-24"`: Rural Emergency Hospital
 
-  - `"00-85"`: CAH (Critical Access Hospital)
+  - `"00-85"`: Critical Access Hospital
 
 - org_name:
 
@@ -80,7 +81,7 @@ hospitals(
 
 - designation:
 
-  `<chr>` IRS designation; `"Proprietor"`/`"Non-Profit"`
+  `<chr>` `"Proprietor"`/`"Non-Profit"`
 
 - multi:
 
@@ -92,33 +93,12 @@ hospitals(
 
 - subgroup:
 
-  `<subgroups>` Hospital’s subgroup/unit:
+  `<subgroups>` Hospital’s subgroup/unit. See
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
 
-  - `acute`: Acute Care
+- count:
 
-  - `drug`: Alcohol/Drug Treatment
-
-  - `child`: Children's Hospital
-
-  - `general`: General Hospital
-
-  - `long`: Long-Term Care
-
-  - `short`: Short-Term Care
-
-  - `psych`: Psychiatric
-
-  - `rehab`: Rehabilitation
-
-  - `swing`: Swing-Bed Approved
-
-  - `psych_unit`: Psychiatric Unit
-
-  - `rehab_unit`: Rehabilitation Unit
-
-  - `specialty`: Specialty Hospital
-
-  - `other`: Unlisted on CMS form
+  `<lgl>` Return the dataset's total row count
 
 ## Value
 
@@ -132,28 +112,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
-hospitals()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 39
-#>    org_name    dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2
-#>    <chr>       <chr>    <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
-#>  1 SOUTHERN T… HIGHPOI… O200… TN         00-09 PART A P… 1467… N     4400… NA   
-#>  2 CENTRAL MA… NA       O200… ME         00-09 PART A P… 1689… N     2000… NA   
-#>  3 ADCARE HOS… ADCARE … O200… MA         00-09 PART A P… 1134… N     2200… NA   
-#>  4 CAPE COD H… CAPE CO… O200… MA         00-09 PART A P… 1114… N     2200… NA   
-#>  5 CARRINGTON… CHI ST … O200… ND         00-85 PART A P… 1205… N     3513… NA   
-#>  6 SELECT SPE… SELECT … O200… GA         00-09 PART A P… 1588… N     1120… NA   
-#>  7 THE FINLEY… FINLEY … O200… IA         00-09 PART A P… 1942… N     1601… NA   
-#>  8 ST CHARLES… NA       O200… NY         00-09 PART A P… 1164… N     3302… NA   
-#>  9 WASHINGTON… NA       O200… AR         00-09 PART A P… 1083… N     0400… NA   
-#> 10 ARIZONA SP… NA       O200… AZ         00-09 PART A P… 1396… N     0301… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   org_type <chr>, org_text <chr>, designation <chr>, add_1 <chr>,
-#> #   add_2 <chr>, city <chr>, state <chr>, zip <chr>, location_type <chr>,
-#> #   location_text <chr>, reh_ind <chr>, reh_date <chr>, sub_general <chr>,
-#> #   sub_acute <chr>, sub_drug <chr>, sub_child <chr>, sub_long <chr>,
-#> #   sub_psych <chr>, sub_rehab <chr>, sub_short <chr>, sub_swing <chr>,
-#> #   sub_psych_unit <chr>, sub_rehab_unit <chr>, sub_specialty <chr>, …
+hospitals(count = TRUE)
+#> ✔ Query returned 9,196 results.
 hospitals(pac = 6103733050)
 #> ✔ Query returned 2 results.
 #> # A tibble: 2 × 39

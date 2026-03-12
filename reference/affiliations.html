@@ -9,7 +9,7 @@ affiliations with organizations/facilities."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,8 @@ affiliations with organizations/facilities.</p>
 <span>  suffix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,6 +101,10 @@ provider provides services.</p></dd>
 <dd><p><code>&lt;chr&gt;</code> CCN of the <strong>primary</strong> hospital containing the
 unit where the individual provider provides services.</p></dd>
 
+
+<dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -114,21 +119,8 @@ unit where the individual provider provides services.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> → Returning first <span style="font-weight: bold;">10</span> rows.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ARDALAN ENKE… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 7517… Hospital      090012       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> RASHID  KHAL… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 9931… Hospital      360112       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> KEVIN   ROTH… B      <span style="color: #BB0000;">NA</span>     1003… 0446… Hospital      060024       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Home health … 397791       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390035       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390049       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AMANDA  SEMO… M      <span style="color: #BB0000;">NA</span>     1003… 2163… Hospital      390057       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370001       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370202       <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> DAE     KIM   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1003… 4082… Hospital      370057       <span style="color: #BB0000;">NA</span>        </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">1,621,297</span> results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">5</span> results.</span>

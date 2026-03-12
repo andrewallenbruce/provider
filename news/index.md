@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9032 (2026-03-11)
+
+- added `count` arg to api calls
+
 ## provider 0.0.1.9031 (2026-03-11)
 
 - documentation, tweaking error handling

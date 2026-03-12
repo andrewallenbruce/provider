@@ -13,11 +13,12 @@ providers(
   first = NULL,
   middle = NULL,
   last = NULL,
-  spec_code = NULL,
-  spec_desc = NULL,
+  spec = NULL,
+  specialty = NULL,
   state = NULL,
   org_name = NULL,
-  multi = NULL
+  multi = NULL,
+  count = FALSE
 )
 ```
 
@@ -39,11 +40,11 @@ providers(
 
   `<chr>` Individual provider's name
 
-- spec_code:
+- spec:
 
   `<chr>` Enrollment specialty code
 
-- spec_desc:
+- specialty:
 
   `<chr>` Enrollment specialty description
 
@@ -59,29 +60,18 @@ providers(
 
   `<chr>` Provider has multiple NPIs
 
+- count:
+
+  `<lgl>` Return the dataset's total row count
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-with the columns:
 
-|             |                                        |
-|-------------|----------------------------------------|
-| **Field**   | **Description**                        |
-| `npi`       | 10-digit NPI                           |
-| `pac`       | 10-digit PAC ID                        |
-| `enid`      | 15-digit provider enrollment ID        |
-| `spec_code` | Enrollment primary specialty type code |
-| `spec_desc` | Enrollment specialty type description  |
-| `first`     | Individual provider's first name       |
-| `middle`    | Individual provider's middle name      |
-| `last`      | Individual provider's last name        |
-| `state`     | Enrollment state                       |
-| `org_name`  | Organizational provider's name         |
+## References
 
-## Links
-
-- [Provider Enrollment
-  API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+- [API: Medicare Provider Supplier
+  Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 
 - [Provider Enrollment Data
   Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
@@ -89,24 +79,8 @@ with the columns:
 ## Examples
 
 ``` r
-providers()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 11
-#>    first     middle last  org_name state spec  specialty npi   multi pac   enid 
-#>    <chr>     <chr>  <chr> <chr>    <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
-#>  1 ANTONIO   NA     ALVA… NA       PR    14-16 PRACTITI… 1003… N     8022… I200…
-#>  2 CHRISTOP… J      ZIEG… NA       PA    14-68 PRACTITI… 1003… N     7113… I200…
-#>  3 KADISHA   B      RAPP  NA       PA    14-93 PRACTITI… 1407… N     8022… I200…
-#>  4 JORGE     A      OSTO… NA       PR    14-16 PRACTITI… 1831… N     5193… I200…
-#>  5 RHONDA    G      GRIS… NA       KY    14-30 PRACTITI… 1851… N     2466… I200…
-#>  6 TIMOTHY   J      DIEC… NA       NJ    14-35 PRACTITI… 1083… N     5092… I200…
-#>  7 ANNA      NA     MOY   NA       NJ    14-41 PRACTITI… 1083… N     5991… I200…
-#>  8 DAMON     D      DELS… NA       NJ    14-26 PRACTITI… 1720… N     7618… I200…
-#>  9 ELVIA     ARELIS AYALA NA       PR    14-01 PRACTITI… 1497… N     1254… I200…
-#> 10 ARNOLD    NA     WEIN… NA       MI    14-68 PRACTITI… 1437… N     9234… I200…
-
-providers(spec_code = "14")
-#> ✖ Query returned 0 results.
+providers(count = TRUE)
+#> ✔ Query returned 2,957,262 results.
 
 providers(enid = "I20040309000221")
 #> ✔ Query returned 1 result.

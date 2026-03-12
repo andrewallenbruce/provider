@@ -15,7 +15,8 @@ affiliations(
   suffix = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
-  parent_ccn = NULL
+  parent_ccn = NULL,
+  count = FALSE
 )
 ```
 
@@ -59,6 +60,10 @@ affiliations(
   `<chr>` CCN of the **primary** hospital containing the unit where the
   individual provider provides services.
 
+- count:
+
+  `<lgl>` Return the dataset's total row count
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -74,21 +79,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
-affiliations()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 9
-#>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
-#>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
-#>  1 ARDALAN ENKE… NA     NA     1003… 7517… Hospital      090012       NA        
-#>  2 RASHID  KHAL… NA     NA     1003… 9931… Hospital      360112       NA        
-#>  3 KEVIN   ROTH… B      NA     1003… 0446… Hospital      060024       NA        
-#>  4 AMANDA  SEMO… M      NA     1003… 2163… Home health … 397791       NA        
-#>  5 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390035       NA        
-#>  6 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390049       NA        
-#>  7 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390057       NA        
-#>  8 DAE     KIM   NA     NA     1003… 4082… Hospital      370001       NA        
-#>  9 DAE     KIM   NA     NA     1003… 4082… Hospital      370202       NA        
-#> 10 DAE     KIM   NA     NA     1003… 4082… Hospital      370057       NA        
+affiliations(count = TRUE)
+#> ✔ Query returned 1,621,297 results.
 
 affiliations(pac = 7810891009)
 #> ✔ Query returned 5 results.
