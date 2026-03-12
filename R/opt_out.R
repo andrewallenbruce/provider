@@ -37,16 +37,13 @@
 #' @param state `<chr>` Provider's state abbreviation
 #' @param zip `<chr>` Provider's zip code
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
+#' @param count `<lgl>` Return the dataset's total row count
 #' @return A [tibble][tibble::tibble-package]
 #' @examples
-#' opt_out()
-#'
+#' opt_out(count = TRUE)
 #' opt_out(npi = 1043522824)
-#'
 #' opt_out(state = "AK")
-#'
 #' opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#'
 #' @autoglobal
 #' @export
 opt_out <- function(
@@ -58,7 +55,8 @@ opt_out <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_refer = NULL
+  order_refer = NULL,
+  count = FALSE
 ) {
   args <- params(
     NPI = npi,
@@ -73,6 +71,12 @@ opt_out <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("opt_out")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_rows(paste0(BASE, "/stats?")))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {

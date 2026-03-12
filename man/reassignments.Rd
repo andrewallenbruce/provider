@@ -15,7 +15,8 @@ reassignments(
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
-  org_state = NULL
+  org_state = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -38,22 +39,11 @@ reassignments(
 \item{org_enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
 
 \item{org_state}{\verb{<chr>} Enrollment state abbreviation}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab \emph{Individual} National Provider Identifier \cr
-   \code{pac} \tab \emph{Individual} PECOS Associate Control ID \cr
-   \code{enid} \tab \emph{Individual} Medicare Enrollment ID \cr
-   \code{first} \tab \emph{Individual} Provider's First Name \cr
-   \code{last} \tab \emph{Individual} Provider's Last Name \cr
-   \code{associations} \tab Number of Organizations \emph{Individual} Reassigns Benefits To \cr
-   \code{pac_org} \tab \emph{Organization's} PECOS Associate Control ID \cr
-   \code{enid_org} \tab \emph{Organization's} Medicare Enrollment ID \cr
-   \code{state_org} \tab State \emph{Organization} Enrolled in Medicare \cr
-   \code{reassignments} \tab Number of Individuals the \emph{Organization} Accepts Reassignment From \cr
-   \code{entry} \tab Whether Entry is for \emph{Reassignment} or \emph{Employment} \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Returns information about:
@@ -66,17 +56,13 @@ It provides information regarding the physician and the group practice they
 reassign their billing to, including individual employer association counts.
 }
 \examples{
-reassignments()
-
+reassignments(count = TRUE)
 reassignments(org_enid = "I20070209000135")
-
 reassignments(pac = 9830437441)
-
 reassignments(org_pac = 3173525888)
-
 }
 \references{
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{API: Medicare Revalidation Reassignment List}
 }
 }

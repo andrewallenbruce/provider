@@ -1,3 +1,12 @@
+#' @autoglobal
+rename_ <- function(x, NM) {
+  if (is.null(NM)) {
+    return(x)
+  }
+  collapse::setrename(x, NM, .nse = FALSE)
+  collapse::gv(x, unlist_(NM))
+}
+
 #' @noRd
 renames <- function(endpoint) {
   switch(

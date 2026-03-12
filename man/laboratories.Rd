@@ -7,11 +7,13 @@
 laboratories(
   name = NULL,
   ccn = NULL,
-  cert = NULL,
+  certification = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  active = FALSE
+  status = NULL,
+  active = FALSE,
+  count = FALSE
 )
 }
 \arguments{
@@ -19,7 +21,7 @@ laboratories(
 
 \item{ccn}{\verb{<chr>} 10-character CLIA number}
 
-\item{cert}{\verb{<chr>} CLIA certificate type:
+\item{certification}{\verb{<chr>} CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
 \item \code{"ppm"}
@@ -34,7 +36,11 @@ laboratories(
 
 \item{zip}{\verb{<chr>} Zip code}
 
+\item{status}{\verb{<chr>} \code{A} (Compliant) or \code{B} (Non-Compliant)}
+
 \item{active}{\verb{<lgl>} Return only active providers}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -47,12 +53,8 @@ services the facility provides.
 
 
 CMS regulates all laboratory testing (except research) performed on humans
-in the U.S. through the \strong{Clinical Laboratory Improvement Amendments (CLIA)}.
-In total, CLIA covers approximately 320,000 laboratory entities.
-
-The \emph{Division of Clinical Laboratory Improvement & Quality}, within the
-\emph{Quality, Safety & Oversight Group}, under the \emph{Center for Clinical Standards and Quality}
-(CCSQ) has the responsibility for implementing the CLIA Program.
+in the U.S. through the \strong{Clinical Laboratory Improvement Amendments}.
+In total, \strong{CLIA} covers approximately 320,000 laboratory entities.
 
 Although all clinical laboratories must be properly certified to receive
 Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
@@ -100,27 +102,22 @@ CMS-approved accreditation organizations:
 }
 
 \examples{
+laboratories(count = TRUE)
 laboratories()
-
-provider:::cdc_labs
-
 laboratories(ccn = provider:::cdc_labs$ccn)
-
 laboratories(
-   cert = c("ppm"),
-   city = not_equal("Valdosta"),
-   state = "GA",
-   active = TRUE
- )
+   certification = "accreditation",
+   city = "Valdosta",
+   state = "GA")
 }
 \references{
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories API}
-\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS CLIA}
-\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC CLIA}
-\item \href{https://qcor.cms.gov/main.jsp}{CMS QCOR}
-\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA Certificates}
-\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA Certificate Fee Schedule}
-\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA Certification Guide}
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{API: Provider of Services File - Clinical Laboratories}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS: CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC: CLIA}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS: QCOR}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA: Certificates}
+\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA: Certificate Fee Schedule}
+\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA: Certification Guide}
 }
 }

@@ -7,12 +7,8 @@
 #' @section CLIA:
 #'
 #' CMS regulates all laboratory testing (except research) performed on humans
-#' in the U.S. through the __Clinical Laboratory Improvement Amendments (CLIA)__.
-#' In total, CLIA covers approximately 320,000 laboratory entities.
-#'
-#' The _Division of Clinical Laboratory Improvement & Quality_, within the
-#' _Quality, Safety & Oversight Group_, under the _Center for Clinical Standards and Quality_
-#' (CCSQ) has the responsibility for implementing the CLIA Program.
+#' in the U.S. through the __Clinical Laboratory Improvement Amendments__.
+#' In total, __CLIA__ covers approximately 320,000 laboratory entities.
 #'
 #' Although all clinical laboratories must be properly certified to receive
 #' Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
@@ -59,17 +55,17 @@
 #'      - [JCAHO](https://www.jointcommission.org/): The Joint Commission
 #'
 #' @references
-#'   - [Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
-#'   - [CMS CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
-#'   - [CDC CLIA](https://www.cdc.gov/clia/php/about/index.html)
-#'   - [CMS QCOR](https://qcor.cms.gov/main.jsp)
-#'   - [CLIA Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
-#'   - [CLIA Certificate Fee Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
-#'   - [CLIA Certification Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)
+#'   - [API: Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+#'   - [CMS: CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
+#'   - [CDC: CLIA](https://www.cdc.gov/clia/php/about/index.html)
+#'   - [CMS: QCOR](https://qcor.cms.gov/main.jsp)
+#'   - [CLIA: Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
+#'   - [CLIA: Certificate Fee Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
+#'   - [CLIA: Certification Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)
 #'
 #' @param name `<chr>` Provider or clinical laboratory's name
 #' @param ccn `<chr>` 10-character CLIA number
-#' @param cert `<chr>` CLIA certificate type:
+#' @param certification `<chr>` CLIA certificate type:
 #'    - `"waiver"`
 #'    - `"ppm"`
 #'    - `"registration"`
@@ -78,44 +74,49 @@
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
+#' @param status `<chr>` `A` (Compliant) or `B` (Non-Compliant)
 #' @param active `<lgl>` Return only active providers
+#' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
+#' laboratories(count = TRUE)
 #' laboratories()
-#'
-#' provider:::cdc_labs
-#'
 #' laboratories(ccn = provider:::cdc_labs$ccn)
-#'
 #' laboratories(
-#'    cert = c("ppm"),
-#'    city = not_equal("Valdosta"),
-#'    state = "GA",
-#'    active = TRUE
-#'  )
+#'    certification = "accreditation",
+#'    city = "Valdosta",
+#'    state = "GA")
 #' @autoglobal
 #' @export
 laboratories <- function(
   name = NULL,
   ccn = NULL,
-  cert = NULL,
+  certification = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  active = FALSE
+  status = NULL,
+  active = FALSE,
+  count = FALSE
 ) {
   args <- params(
     FAC_NAME = name,
     PRVDR_NUM = ccn,
-    CRTFCT_TYPE_CD = cert_enum(cert),
+    CRTFCT_TYPE_CD = enum_(certification),
     CITY_NAME = city,
     STATE_CD = state,
     ZIP_CD = zip,
-    PGM_TRMNTN_CD = conv_active(active)
+    CMPLNC_STUS_CD = status,
+    PGM_TRMNTN_CD = lab_active(active)
   )
 
   .c(BASE, LIMIT, NM) %=% constants("laboratories")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_rows(paste0(BASE, "/stats?")))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
@@ -186,34 +187,11 @@ laboratories <- function(
 
 
 #' @noRd
-conv_active <- function(active) {
+lab_active <- function(active) {
   if (is.null(active)) {
     return(NULL)
   }
   if (active) "00" else NULL
-}
-
-#' @noRd
-cert_enum <- function(cert = NULL) {
-  if (is.null(cert)) {
-    return(NULL)
-  }
-
-  ENUM <- list(
-    "compliance" = 1,
-    "waiver" = 2,
-    "accreditation" = 3,
-    "ppm" = 4,
-    "registration" = 9
-  )
-
-  cert <- rlang::arg_match(
-    cert,
-    rlang::names2(ENUM),
-    multiple = TRUE
-  )
-
-  unlist_(ENUM[cert])
 }
 
 #' @autoglobal

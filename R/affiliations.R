@@ -4,26 +4,13 @@
 #'    affiliations with organizations/facilities.
 #'
 #' @references
-#'    * [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 #'    * [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
 #' @param first,middle,last,suffix `<chr>` Individual provider's name
-#' @param facility_type `<chr>` facility type abbreviation:
-#'
-#'    |**ABBR**  |**FULL**                          |
-#'    |:---------|:---------------------------------|
-#'    |`hp`      |Hospital                          |
-#'    |`lt`      |Long-term care hospital           |
-#'    |`nh`      |Nursing home                      |
-#'    |`irf`     |Inpatient rehabilitation facility |
-#'    |`hha`     |Home health agency                |
-#'    |`snf`     |Skilled nursing facility          |
-#'    |`hs`      |Hospice                           |
-#'    |`df`      |Dialysis facility                 |
-#'
-#'
+#' @param facility_type `<chr>` facility type abbreviation
 #' @param facility_ccn `<chr>` CCN of `facility_type` column's
 #'    facility **or** of a **unit** within the hospital where the individual
 #'    provider provides services.
@@ -33,15 +20,11 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
 #' affiliations(count = TRUE)
-#'
-#' affiliations(pac = 7810891009)
-#'
-#' affiliations(npi = 1003026055)
-#'
-#' affiliations(first = "KIM")
-#'
-#' affiliations(facility_ccn = c("33Z302", 331302))
-#'
+#' affiliations()
+#' affiliations(first = "")
+#' affiliations(facility_ccn = "33Z302")
+#' affiliations(parent_ccn = 331302)
+#' affiliations(facility_ccn = 331302)
 #' @autoglobal
 #' @export
 affiliations <- function(
@@ -63,7 +46,7 @@ affiliations <- function(
     provider_first_name = first,
     provider_middle_name = middle,
     suff = suffix,
-    facility_type = facility_enum(facility_type),
+    facility_type = enum_(facility_type),
     facility_affiliations_certification_number = facility_ccn,
     facility_type_certification_number = parent_ccn
   )
@@ -168,31 +151,4 @@ affiliations <- function(
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)
-}
-
-#' @autoglobal
-#' @noRd
-facility_enum <- function(facility_type = NULL) {
-  if (is.null(facility_type)) {
-    return(NULL)
-  }
-
-  ENUM <- list(
-    hp = "Hospital",
-    lt = "Long-term care hospital",
-    nh = "Nursing home",
-    irf = "Inpatient rehabilitation facility",
-    hha = "Home health agency",
-    snf = "Skilled nursing facility",
-    hs = "Hospice",
-    df = "Dialysis facility"
-  )
-
-  facility_type <- rlang::arg_match(
-    facility_type,
-    rlang::names2(ENUM),
-    multiple = TRUE
-  )
-
-  unlist_(ENUM[facility_type])
 }

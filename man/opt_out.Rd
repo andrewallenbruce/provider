@@ -13,7 +13,8 @@ opt_out(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_refer = NULL
+  order_refer = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ opt_out(
 \item{zip}{\verb{<chr>} Provider's zip code}
 
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -69,14 +72,10 @@ fee-for-service (Part B).
 }
 
 \examples{
-opt_out()
-
+opt_out(count = TRUE)
 opt_out(npi = 1043522824)
-
 opt_out(state = "AK")
-
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-
 }
 \references{
 \itemize{

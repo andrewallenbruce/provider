@@ -9,7 +9,7 @@
 #' reassign their billing to, including individual employer association counts.
 #'
 #' @references
-#'    * [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
+#'    - [API: Medicare Revalidation Reassignment List](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
 #' @param npi `<chr>` 10-digit National Provider Identifier
 #' @param pac `<chr>` 10-digit PECOS Associate Control ID
@@ -21,32 +21,13 @@
 #' @param org_pac `<chr>` 10-digit PECOS Associate Control ID
 #' @param org_enid `<chr>` 15-digit Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
-#'
-#' @returns A [tibble][tibble::tibble-package] with the columns:
-#'
-#' |**Field**       |**Description**                                                    |
-#' |:---------------|:------------------------------------------------------------------|
-#' |`npi`           |_Individual_ National Provider Identifier                          |
-#' |`pac`           |_Individual_ PECOS Associate Control ID                            |
-#' |`enid`          |_Individual_ Medicare Enrollment ID                                |
-#' |`first`         |_Individual_ Provider's First Name                                 |
-#' |`last`          |_Individual_ Provider's Last Name                                  |
-#' |`associations`  |Number of Organizations _Individual_ Reassigns Benefits To         |
-#' |`pac_org`       |_Organization's_ PECOS Associate Control ID                        |
-#' |`enid_org`      |_Organization's_ Medicare Enrollment ID                            |
-#' |`state_org`     |State _Organization_ Enrolled in Medicare                          |
-#' |`reassignments` |Number of Individuals the _Organization_ Accepts Reassignment From |
-#' |`entry`         |Whether Entry is for _Reassignment_ or _Employment_                |
-#'
+#' @param count `<lgl>` Return the dataset's total row count
+#' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' reassignments()
-#'
+#' reassignments(count = TRUE)
 #' reassignments(org_enid = "I20070209000135")
-#'
 #' reassignments(pac = 9830437441)
-#'
 #' reassignments(org_pac = 3173525888)
-#'
 #' @autoglobal
 #' @export
 reassignments <- function(
@@ -60,7 +41,8 @@ reassignments <- function(
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
-  org_state = NULL
+  org_state = NULL,
+  count = FALSE
 ) {
   args <- params(
     `Individual NPI` = npi,
@@ -77,6 +59,12 @@ reassignments <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("reassignments")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_rows(paste0(BASE, "/stats?")))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {

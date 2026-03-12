@@ -24,17 +24,7 @@ affiliations(
 
 \item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{facility_type}{\verb{<chr>} facility type abbreviation:\tabular{ll}{
-   \strong{ABBR} \tab \strong{FULL} \cr
-   \code{hp} \tab Hospital \cr
-   \code{lt} \tab Long-term care hospital \cr
-   \code{nh} \tab Nursing home \cr
-   \code{irf} \tab Inpatient rehabilitation facility \cr
-   \code{hha} \tab Home health agency \cr
-   \code{snf} \tab Skilled nursing facility \cr
-   \code{hs} \tab Hospice \cr
-   \code{df} \tab Dialysis facility \cr
-}}
+\item{facility_type}{\verb{<chr>} facility type abbreviation}
 
 \item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} column's
 facility \strong{or} of a \strong{unit} within the hospital where the individual
@@ -54,19 +44,15 @@ affiliations with organizations/facilities.
 }
 \examples{
 affiliations(count = TRUE)
-
-affiliations(pac = 7810891009)
-
-affiliations(npi = 1003026055)
-
-affiliations(first = "KIM")
-
-affiliations(facility_ccn = c("33Z302", 331302))
-
+affiliations()
+affiliations(first = "")
+affiliations(facility_ccn = "33Z302")
+affiliations(parent_ccn = 331302)
+affiliations(facility_ccn = 331302)
 }
 \references{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
 }
 }
