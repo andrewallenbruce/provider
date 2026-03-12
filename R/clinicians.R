@@ -6,10 +6,11 @@
 #' @section Data Source:
 #' The Doctors and Clinicians National Downloadable File is organized such that
 #' each line is unique at the clinician/enrollment record/group/address level.
+#'
 #' Clinicians with multiple Medicare enrollment records and/or single enrollments
 #' linking to multiple practice locations are listed on multiple lines.
 #'
-#' ### Inclusion Criteria
+#' #### Inclusion Criteria
 #' A Clinician or Group must have:
 #'   - Current and approved Medicare enrollment record in PECOS
 #'   - Valid physical practice location or address
@@ -20,7 +21,7 @@
 #'
 #' @references
 #'   - [API: National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
-#'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+#'   - [Dictionary: Provider Data Catalog (PDC)](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'   - [Source Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
 #'
 #' @param npi `<int>` National Provider Identifier
@@ -41,7 +42,8 @@
 #' clinicians(count = TRUE)
 #' clinicians(enid = "I20081002000549")
 #' clinicians(first = "ETAN")
-#' clinicians(city = starts_with("At"), state = "GA", year = 2020)
+#' clinicians(city = starts_with("At"), state = "GA", year = 2020, count = TRUE)
+#' clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
 #' @autoglobal
 #' @export
 clinicians <- function(
@@ -64,7 +66,7 @@ clinicians <- function(
   facility_pac = NULL,
   count = FALSE
 ) {
-  args <- params(
+  ARG <- params(
     npi = npi,
     ind_pac_id = pac,
     ind_enrl_id = enid,
@@ -86,20 +88,21 @@ clinicians <- function(
 
   .c(BASE, LIMIT, NM) %=% constants("clinicians")
 
-  # Return Total Rows =====================
-  if (count) {
-    cli_results(request_count(url_(
-      BASE,
-      opts(count = "true", results = "false", schema = "false")
-    )))
-    return(invisible(NULL))
-  }
+  # EMPTY QUERY --> Return First 10 Rows
+  if (!length(ARG)) {
+    # COUNT --> Return Total Row Count
+    if (count) {
+      cli_results(
+        request_count(
+          url_(BASE, opts(count = "true", results = "false", schema = "false"))
+        )
+      )
+      return(invisible(NULL))
+    }
 
-  # No Query: Warn & Return First 10 Rows =====================
-  if (!length(args)) {
     cli_no_query()
 
-    url <- url_(
+    URL <- url_(
       BASE,
       opts(
         count = "false",
@@ -109,15 +112,16 @@ clinicians <- function(
       )
     )
 
-    res <- request_results(url) |>
+    res <- request_results(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
 
     return(res)
   }
-  # Valid Query: Flatten & Request Result Count =====================
-  url <- url_(
+
+  # QUERY --> Request Count
+  URL <- url_(
     BASE,
     opts(
       count = "true",
@@ -125,22 +129,28 @@ clinicians <- function(
       schema = "false",
       limit = LIMIT
     ),
-    query(args)
+    query(ARG)
   )
 
-  N <- request_count(url)
+  N <- request_count(URL)
 
-  # Query Returned Nothing: Alert & Exit =====================
+  # NO RESULTS --> Alert & Exit
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 
-  # Count is Within API Limit: Request & Return Results
+  # COUNT --> Return Total Row Count
+  if (count) {
+    cli_results(N)
+    return(invisible(NULL))
+  }
+
+  # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- url_(
+    URL <- url_(
       BASE,
       opts(
         count = "false",
@@ -148,10 +158,10 @@ clinicians <- function(
         schema = "false",
         limit = LIMIT
       ),
-      query(args)
+      query(ARG)
     )
 
-    res <- request_results(url) |>
+    res <- request_results(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -159,10 +169,10 @@ clinicians <- function(
     return(res)
   }
 
-  # Count Above API Limit: Alert & Return Results =====================
+  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
   cli_pages(N, offset(N, LIMIT))
 
-  url <- url_(
+  URL <- url_(
     BASE,
     opts(
       count = "false",
@@ -171,15 +181,15 @@ clinicians <- function(
       limit = LIMIT,
       offset = "<<i>>"
     ),
-    query(args)
+    query(ARG)
   )
 
-  urls <- offset(N, LIMIT, "seq") |>
+  URL <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  parallel_results(urls) |>
+  parallel_results(URL) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)

@@ -1,6 +1,5 @@
-#' @autoglobal
 #' @noRd
-convert_lgl <- function(x = NULL) {
+cv_lgl <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -11,13 +10,32 @@ convert_lgl <- function(x = NULL) {
   )
 }
 
-#' @autoglobal
+#' @noRd
+offset <- function(n, limit, which = "size") {
+  if (n == 0L) {
+    return(0L)
+  }
+
+  if (n <= limit) {
+    return(switch(
+      which,
+      size = 1L,
+      seq = 0L
+    ))
+  }
+
+  switch(
+    which,
+    size = cheapr::seq_size(from = 0L, to = n, by = limit),
+    seq = cheapr::seq_(from = 0L, to = n, by = limit)
+  )
+}
+
 #' @noRd
 params <- function(...) {
   purrr::compact(rlang::list2(...))
 }
 
-#' @autoglobal
 #' @noRd
 opts <- function(
   count = NULL,
@@ -38,35 +56,23 @@ opts <- function(
   paste0(names(x), "=", unlist_(x), collapse = "&")
 }
 
-#' @autoglobal
 #' @noRd
 url_ <- function(base, opts, query = NULL) {
   if (is.null(query)) {
-    paste0(base, opts)
-  } else {
-    paste(paste0(base, opts), query, sep = "&")
+    return(paste0(base, opts))
   }
-}
-
-#' @autoglobal
-#' @noRd
-offset <- function(n, limit, which = "size") {
-  if (n == 0L) {
-    return(0L)
-  }
-
-  switch(
-    which,
-    size = cheapr::seq_size(from = 0L, to = n, by = limit),
-    seq = cheapr::seq_(from = 0L, to = n, by = limit)
-  )
+  paste(paste0(base, opts), query, sep = "&")
 }
 
 #' @noRd
-base_url <- function(endpoint) {
-  a <- "https://data.cms.gov/"
-  p <- \(id) paste0(a, "provider-data/api/1/datastore/query/", id, "/0?")
-  m <- \(id) paste0(a, "data-api/v1/dataset/", id, "/data")
+uuid <- function(endpoint) {
+  http <- "https://data.cms.gov/"
+  prov <- "provider-data/api/1/datastore/query/"
+  care <- "data-api/v1/dataset/"
+
+  p <- \(id) paste0(http, prov, id, "/0?")
+  m <- \(id) paste0(http, care, id, "/data")
+
   switch(
     endpoint,
     affiliations = p("27ea-46a8"),
@@ -114,7 +120,7 @@ limit <- function(endpoint) {
 #' @noRd
 constants <- function(endpoint) {
   list(
-    url = base_url(endpoint),
+    url = uuid(endpoint),
     limit = limit(endpoint),
     names = renames(endpoint)
   )

@@ -122,9 +122,7 @@ laboratories <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- url_(paste0(BASE, "?"), opts(size = 10))
-
-    res <- request_bare(url) |>
+    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -143,7 +141,7 @@ laboratories <- function(
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 

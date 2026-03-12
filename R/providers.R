@@ -43,7 +43,7 @@ providers <- function(
 ) {
   args <- params(
     NPI = npi,
-    MULTIPLE_NPI_FLAG = convert_lgl(multi),
+    MULTIPLE_NPI_FLAG = cv_lgl(multi),
     PECOS_ASCT_CNTL_ID = pac,
     ENRLMT_ID = enid,
     PROVIDER_TYPE_CD = spec,
@@ -87,7 +87,7 @@ providers <- function(
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 

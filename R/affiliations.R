@@ -39,7 +39,7 @@ affiliations <- function(
   parent_ccn = NULL,
   count = FALSE
 ) {
-  args <- params(
+  ARG <- params(
     npi = npi,
     ind_pac_id = pac,
     provider_last_name = last,
@@ -53,20 +53,21 @@ affiliations <- function(
 
   .c(BASE, LIMIT, NM) %=% constants("affiliations")
 
-  # Return Total Rows =====================
-  if (count) {
-    cli_results(request_count(url_(
-      BASE,
-      opts(count = "true", results = "false", schema = "false")
-    )))
-    return(invisible(NULL))
-  }
+  # EMPTY QUERY --> Return First 10 Rows
+  if (!length(ARG)) {
+    # COUNT --> Return Total Row Count
+    if (count) {
+      cli_results(
+        request_count(
+          url_(BASE, opts(count = "true", results = "false", schema = "false"))
+        )
+      )
+      return(invisible(NULL))
+    }
 
-  # No Query: Warn & Return First 10 Rows =====================
-  if (!length(args)) {
     cli_no_query()
 
-    url <- url_(
+    URL <- url_(
       BASE,
       opts(
         count = "false",
@@ -76,7 +77,7 @@ affiliations <- function(
       )
     )
 
-    res <- request_results(url) |>
+    res <- request_results(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -84,8 +85,8 @@ affiliations <- function(
     return(res)
   }
 
-  # Valid Query: Flatten & Request Result Count =====================
-  url <- url_(
+  # QUERY --> Request Count
+  N <- request_count(url_(
     BASE,
     opts(
       count = "true",
@@ -93,22 +94,26 @@ affiliations <- function(
       schema = "false",
       limit = LIMIT
     ),
-    query(args)
-  )
+    query(ARG)
+  ))
 
-  N <- request_count(url)
-
-  # Query Returned Nothing: Alert & Exit =====================
+  # NO RESULTS --> Alert & Exit
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 
-  # Count is Within API Limit: Request & Return Results
+  # COUNT --> Return Total Row Count
+  if (count) {
+    cli_results(N)
+    return(invisible(NULL))
+  }
+
+  # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- url_(
+    URL <- url_(
       BASE,
       opts(
         count = "false",
@@ -116,10 +121,10 @@ affiliations <- function(
         schema = "false",
         limit = LIMIT
       ),
-      query(args)
+      query(ARG)
     )
 
-    res <- request_results(url) |>
+    res <- request_results(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -127,10 +132,10 @@ affiliations <- function(
     return(res)
   }
 
-  # Count Above API Limit: Alert & Return Results =====================
+  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
   cli_pages(N, offset(N, LIMIT))
 
-  url <- url_(
+  URL <- url_(
     BASE,
     opts(
       count = "false",
@@ -139,15 +144,15 @@ affiliations <- function(
       limit = LIMIT,
       offset = "<<i>>"
     ),
-    query(args)
+    query(ARG)
   )
 
-  urls <- offset(N, LIMIT, "seq") |>
+  URL <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  parallel_results(urls) |>
+  parallel_results(URL) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)

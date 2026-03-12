@@ -54,6 +54,8 @@ A \verb{<subgroups>} object
 For use in \code{\link[=hospitals]{hospitals()}} \code{subgroup} argument
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 subgroups(acute = TRUE, rehab = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \keyword{internal}

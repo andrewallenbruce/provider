@@ -67,7 +67,7 @@ opt_out <- function(
     `City Name` = city,
     `State Code` = state,
     `Zip code` = zip,
-    `Eligible to Order and Refer` = convert_lgl(order_refer)
+    `Eligible to Order and Refer` = cv_lgl(order_refer)
   )
 
   .c(BASE, LIMIT, NM) %=% constants("opt_out")
@@ -82,9 +82,7 @@ opt_out <- function(
   if (!length(args)) {
     cli_no_query()
 
-    url <- url_(paste0(BASE, "?"), opts(size = 10))
-
-    res <- request_bare(url) |>
+    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -103,7 +101,7 @@ opt_out <- function(
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 

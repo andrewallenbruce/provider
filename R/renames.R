@@ -1,10 +1,10 @@
 #' @autoglobal
-rename_ <- function(x, NM) {
-  if (is.null(NM)) {
+rename_ <- function(x, nm) {
+  if (is.null(nm)) {
     return(x)
   }
-  collapse::setrename(x, NM, .nse = FALSE)
-  collapse::gv(x, unlist_(NM))
+  collapse::setrename(x, nm, .nse = FALSE)
+  collapse::gv(x, unlist_(nm))
 }
 
 #' @noRd
@@ -235,19 +235,19 @@ renames <- function(endpoint) {
       HOSPICE = "hospice"
     ),
     reassignments = c(
-      `Individual NPI` = "npi",
-      `Individual PAC ID` = "pac",
-      `Individual Enrollment ID` = "enid",
       `Individual First Name` = "first",
       `Individual Last Name` = "last",
       `Individual State Code` = "state",
       `Individual Specialty Description` = "specialty",
-      `Group Reassignments and Physician Assistants` = "reassignments",
+      `Individual Total Employer Associations` = "ind_assoc",
+      `Individual NPI` = "npi",
+      `Individual PAC ID` = "pac",
+      `Individual Enrollment ID` = "enid",
       `Group Legal Business Name` = "org_name",
+      `Group Reassignments and Physician Assistants` = "org_assign",
       `Group PAC ID` = "org_pac",
       `Group Enrollment ID` = "org_enid",
       `Group State Code` = "org_state",
-      `Individual Total Employer Associations` = "associations",
       `Record Type` = "type"
     ),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} invalid.")

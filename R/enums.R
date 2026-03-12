@@ -7,8 +7,8 @@ enum_ <- function(x = NULL) {
   VAR <- rlang::as_string(
     rlang::call_args(
       rlang::call_match()
-      )[[1]]
-    )
+    )[[1]]
+  )
 
   ENUM <- enum_map(VAR)
 
@@ -26,7 +26,6 @@ enum_ <- function(x = NULL) {
 enum_map <- function(arg) {
   switch(
     arg,
-    # apl_type = ,
     facility_type = list(
       hospital = "Hospital",
       ltch = "Long-term care hospital",

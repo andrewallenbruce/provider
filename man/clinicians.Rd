@@ -62,6 +62,7 @@ Demographics of clinicians listed in the Provider Data Catalog (PDC)
 
 The Doctors and Clinicians National Downloadable File is organized such that
 each line is unique at the clinician/enrollment record/group/address level.
+
 Clinicians with multiple Medicare enrollment records and/or single enrollments
 linking to multiple practice locations are listed on multiple lines.
 \subsection{Inclusion Criteria}{
@@ -82,12 +83,13 @@ A Clinician or Group must have:
 clinicians(count = TRUE)
 clinicians(enid = "I20081002000549")
 clinicians(first = "ETAN")
-clinicians(city = starts_with("At"), state = "GA", year = 2020)
+clinicians(city = starts_with("At"), state = "GA", year = 2020, count = TRUE)
+clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
 }
 \references{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{API: National Downloadable File}
-\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
+\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Dictionary: Provider Data Catalog (PDC)}
 \item \href{https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources}{Source Information}
 }
 }

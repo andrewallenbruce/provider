@@ -8,11 +8,6 @@ cli_no_query <- function() {
 }
 
 #' @noRd
-cli_no_results <- function() {
-  cli::cli_alert_danger("Query returned {.strong 0} results.")
-}
-
-#' @noRd
 cli_results <- function(x) {
   cli::cli_alert_success(
     "Query returned {.strong {format(x, big.mark = ',')}} {cli::qty(x)}result{?s}."

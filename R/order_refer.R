@@ -62,11 +62,11 @@ order_refer <- function(
     NPI = npi,
     FIRST_NAME = first,
     LAST_NAME = last,
-    PARTB = convert_lgl(part_b),
-    DME = convert_lgl(dme),
-    HHA = convert_lgl(hha),
-    PMD = convert_lgl(pmd),
-    HOSPICE = convert_lgl(hospice)
+    PARTB = cv_lgl(part_b),
+    DME = cv_lgl(dme),
+    HHA = cv_lgl(hha),
+    PMD = cv_lgl(pmd),
+    HOSPICE = cv_lgl(hospice)
   )
 
   .c(BASE, LIMIT, NM) %=% constants("order_refer")
@@ -103,7 +103,7 @@ order_refer <- function(
 
   # Query Returned Nothing: Alert & Exit =====================
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 

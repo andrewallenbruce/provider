@@ -69,21 +69,21 @@ hospitals <- function(
     STATE = state,
     `ZIP CODE` = zip,
     PROPRIETARY_NONPROFIT = designation,
-    `MULTIPLE NPI FLAG` = convert_lgl(multi),
-    `REH CONVERSION FLAG` = convert_lgl(reh),
+    `MULTIPLE NPI FLAG` = cv_lgl(multi),
+    `REH CONVERSION FLAG` = cv_lgl(reh),
     !!!subgroup
   )
 
   .c(BASE, LIMIT, NM) %=% constants("hospitals")
 
-  # Return Total Rows =====================
-  if (count) {
-    cli_results(request_rows(paste0(BASE, "/stats?")))
-    return(invisible(NULL))
-  }
-
-  # No Query: Warn & Return First 10 Rows =====================
+  # EMPTY QUERY --> Return First 10 Rows
   if (!length(ARG)) {
+    # COUNT --> Return Total Row Count
+    if (count) {
+      cli_results(request_rows(paste0(BASE, "/stats?")))
+      return(invisible(NULL))
+    }
+
     cli_no_query()
 
     res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
@@ -94,32 +94,36 @@ hospitals <- function(
     return(res)
   }
 
-  # Valid Query: Flatten & Request Result Count =====================
-  url <- url_(
+  # QUERY --> Request Count
+  N <- request_rows(url_(
     paste0(BASE, "/stats?"),
     opts(size = LIMIT),
     query2(ARG)
-  )
+  ))
 
-  N <- request_rows(url)
-
-  # Query Returned Nothing: Alert & Exit =====================
+  # NO RESULTS --> Alert & Exit
   if (N == 0L) {
-    cli_no_results()
+    cli_results(N)
     return(invisible(NULL))
   }
 
-  # Count is Within API Limit: Request & Return Results
+  # COUNT --> Return Total Row Count
+  if (count) {
+    cli_results(N)
+    return(invisible(NULL))
+  }
+
+  # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- url_(
+    URL <- url_(
       paste0(BASE, "?"),
       opts(size = LIMIT),
       query2(ARG)
     )
 
-    res <- request_bare(url) |>
+    res <- request_bare(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -127,21 +131,21 @@ hospitals <- function(
     return(res)
   }
 
-  # Count Above API Limit: Alert & Return Results =====================
+  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
   cli_pages(N, offset(N, LIMIT))
 
-  url <- url_(
+  URL <- url_(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
     query2(ARG)
   )
 
-  urls <- offset(N, LIMIT, "seq") |>
+  URL <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  parallel_request(urls) |>
+  parallel_request(URL) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)
@@ -165,7 +169,7 @@ hospitals <- function(
 #' @param specialty `<lgl>` Specialty Hospital
 #' @param other `<lgl>` Unlisted on CMS form
 #' @returns A `<subgroups>` object
-#' @examples
+#' @examplesIf FALSE
 #' subgroups(acute = TRUE, rehab = TRUE)
 #' @autoglobal
 #' @keywords internal
@@ -201,9 +205,8 @@ subgroups <- function(
       `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
       `SUBGROUP %2D OTHER` = other
     ),
-    convert_lgl
+    cv_lgl
   )
-
   structure(params(!!!x), class = "subgroups")
 }
 
