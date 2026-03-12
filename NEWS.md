@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9035 (2026-03-12)
+
+* added `revocations()` endpoint
+
+
 # provider 0.0.1.9034 (2026-03-12)
 
 * tweaking control flow of each api
