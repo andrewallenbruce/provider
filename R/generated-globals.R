@@ -9,6 +9,7 @@ utils::globalVariables(c(
   # <order_refer>
   # <providers>
   # <reassignments>
+  # <revocations>
   "BASE",
   # <affiliations>
   # <clinicians>
@@ -18,6 +19,7 @@ utils::globalVariables(c(
   # <order_refer>
   # <providers>
   # <reassignments>
+  # <revocations>
   "LIMIT",
   # <affiliations>
   # <clinicians>
@@ -27,6 +29,7 @@ utils::globalVariables(c(
   # <order_refer>
   # <providers>
   # <reassignments>
+  # <revocations>
   "NM",
   # <api_provider>
   # <api_medicare>

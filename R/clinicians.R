@@ -25,7 +25,7 @@
 #'   - [Source Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
 #'
 #' @param npi `<int>` National Provider Identifier
-#' @param pac `<int>` PECOS Associate Control ID
+#' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,middle,last,suffix `<chr>` Individual provider's name
 #' @param gender `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
@@ -35,7 +35,7 @@
 #' @param specialty `<chr>` Provider’s primary medical specialty
 #' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param facility_name `<chr>` Facility associated with Provider
-#' @param facility_pac `<int>` Facility's PECOS Associate Control ID
+#' @param facility_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
@@ -86,11 +86,10 @@ clinicians <- function(
     zip_code = zip
   )
 
-  .c(BASE, LIMIT, NM) %=% constants("clinicians")
+  .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # EMPTY QUERY --> Return First 10 Rows
+  # COUNT --> Return Total Row Count
   if (!length(ARG)) {
-    # COUNT --> Return Total Row Count
     if (count) {
       cli_results(
         request_count(
@@ -100,6 +99,7 @@ clinicians <- function(
       return(invisible(NULL))
     }
 
+    # EMPTY QUERY --> Return First 10 Rows
     cli_no_query()
 
     URL <- url_(
@@ -134,14 +134,8 @@ clinicians <- function(
 
   N <- request_count(URL)
 
-  # NO RESULTS --> Alert & Exit
-  if (N == 0L) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
-
-  # COUNT --> Return Total Row Count
-  if (count) {
+  # NO RESULTS or COUNT --> Return Total Row Count
+  if (N == 0L || count) {
     cli_results(N)
     return(invisible(NULL))
   }
@@ -169,7 +163,7 @@ clinicians <- function(
     return(res)
   }
 
-  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
+  # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, offset(N, LIMIT))
 
   URL <- url_(

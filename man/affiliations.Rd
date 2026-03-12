@@ -30,7 +30,7 @@ affiliations(
 facility \strong{or} of a \strong{unit} within the hospital where the individual
 provider provides services.}
 
-\item{parent_ccn}{\verb{<chr>} CCN of the \strong{primary} hospital containing the
+\item{parent_ccn}{\verb{<int>} CCN of the \strong{primary} hospital containing the
 unit where the individual provider provides services.}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}

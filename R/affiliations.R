@@ -14,7 +14,7 @@
 #' @param facility_ccn `<chr>` CCN of `facility_type` column's
 #'    facility **or** of a **unit** within the hospital where the individual
 #'    provider provides services.
-#' @param parent_ccn `<chr>` CCN of the **primary** hospital containing the
+#' @param parent_ccn `<int>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
@@ -51,11 +51,10 @@ affiliations <- function(
     facility_type_certification_number = parent_ccn
   )
 
-  .c(BASE, LIMIT, NM) %=% constants("affiliations")
+  .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # EMPTY QUERY --> Return First 10 Rows
+  # COUNT --> Return Total Row Count
   if (!length(ARG)) {
-    # COUNT --> Return Total Row Count
     if (count) {
       cli_results(
         request_count(
@@ -65,6 +64,7 @@ affiliations <- function(
       return(invisible(NULL))
     }
 
+    # EMPTY QUERY --> Return First 10 Rows
     cli_no_query()
 
     URL <- url_(
@@ -86,7 +86,7 @@ affiliations <- function(
   }
 
   # QUERY --> Request Count
-  N <- request_count(url_(
+  URL <- url_(
     BASE,
     opts(
       count = "true",
@@ -95,16 +95,12 @@ affiliations <- function(
       limit = LIMIT
     ),
     query(ARG)
-  ))
+  )
 
-  # NO RESULTS --> Alert & Exit
-  if (N == 0L) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
+  N <- request_count(URL)
 
-  # COUNT --> Return Total Row Count
-  if (count) {
+  # NO RESULTS or COUNT --> Return Total Row Count
+  if (N == 0L || count) {
     cli_results(N)
     return(invisible(NULL))
   }
@@ -132,7 +128,7 @@ affiliations <- function(
     return(res)
   }
 
-  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
+  # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, offset(N, LIMIT))
 
   URL <- url_(

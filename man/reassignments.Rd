@@ -20,7 +20,7 @@ reassignments(
 )
 }
 \arguments{
-\item{npi}{\verb{<chr>} 10-digit National Provider Identifier}
+\item{npi}{\verb{<int>} 10-digit National Provider Identifier}
 
 \item{pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
 

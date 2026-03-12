@@ -28,7 +28,7 @@ clinicians(
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{pac}{\verb{<int>} PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
 \item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
@@ -48,7 +48,7 @@ clinicians(
 
 \item{facility_name}{\verb{<chr>} Facility associated with Provider}
 
-\item{facility_pac}{\verb{<int>} Facility's PECOS Associate Control ID}
+\item{facility_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
 }

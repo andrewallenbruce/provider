@@ -250,6 +250,20 @@ renames <- function(endpoint) {
       `Group State Code` = "org_state",
       `Record Type` = "type"
     ),
+    revocations = c(
+      ENRLMT_ID = "enid",
+      NPI = "npi",
+      FIRST_NAME = "first",
+      MDL_NAME = "middle",
+      LAST_NAME = "last",
+      ORG_NAME = "org_name",
+      MULTIPLE_NPI_FLAG = "multi",
+      STATE_CD = "state",
+      PROVIDER_TYPE_DESC = "specialty",
+      REVOCATION_RSN = "reason",
+      REVOCATION_EFCTV_DT = "date_start",
+      REENROLLMENT_BAR_EXPRTN_DT = "date_end"
+    ),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} invalid.")
   )
 }

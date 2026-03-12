@@ -74,16 +74,16 @@ hospitals <- function(
     !!!subgroup
   )
 
-  .c(BASE, LIMIT, NM) %=% constants("hospitals")
+  .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # EMPTY QUERY --> Return First 10 Rows
+  # COUNT --> Return Total Row Count
   if (!length(ARG)) {
-    # COUNT --> Return Total Row Count
     if (count) {
       cli_results(request_rows(paste0(BASE, "/stats?")))
       return(invisible(NULL))
     }
 
+    # EMPTY QUERY --> Return First 10 Rows
     cli_no_query()
 
     res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
@@ -101,14 +101,8 @@ hospitals <- function(
     query2(ARG)
   ))
 
-  # NO RESULTS --> Alert & Exit
-  if (N == 0L) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
-
-  # COUNT --> Return Total Row Count
-  if (count) {
+  # NO RESULTS or COUNT --> Return Total Row Count
+  if (N == 0L || count) {
     cli_results(N)
     return(invisible(NULL))
   }
@@ -131,7 +125,7 @@ hospitals <- function(
     return(res)
   }
 
-  # COUNT ABOVE LIMIT --> Multiple Parallel Requests
+  # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, offset(N, LIMIT))
 
   URL <- url_(

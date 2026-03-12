@@ -36,7 +36,7 @@ providers(
 
 \item{org_name}{\verb{<chr>} Organization name}
 
-\item{multi}{\verb{<chr>} Provider has multiple NPIs}
+\item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
 }

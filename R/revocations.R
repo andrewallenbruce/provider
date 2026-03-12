@@ -1,72 +1,52 @@
-#' Order and Refer Eligibility
+#' Revocations of Medicare Enrollments
 #'
 #' @description
 #' Eligibility to order and refer within Medicare
-#'
-#' @section Criteria:
-#'    - *Individual* NPI
-#'    - Medicare enrollment with *Approved* or *Opt-Out* status
-#'    - Eligible *specialty* type
-#'
-#' @section Types:
-#'    - *Ordering*: can order non-physician services for patients.
-#'    - *Referring/Certifying*: can request items/services Medicare may reimburse.
-#'    - *Opt-Out*: can enroll solely to order and refer.
-#'
-#' @section Services:
-#'    - *Medicare Part B*: Clinical Labs, Imaging
-#'    - *Medicare Part A*: Home Health
-#'    - *DMEPOS*: Durable medical equipment, prosthetics, orthotics, & supplies
 #'
 #' @references
 #'    - [API: Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 #'    - [CMS: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'
-#' @param npi `<int>` National Provider Identifier
-#' @param first,last `<chr>` Individual provider's first/last name
-#' @param part_b,dme,hha,pmd,hospice `<lgl>` Eligibility for:
-#'    - `part_b`: Medicare Part B
-#'    - `dme`: Durable Medical Equipment
-#'    - `hha`: Home Health Agency
-#'    - `pmd`: Power Mobility Devices
-#'    - `hospice`: Hospice
+#' @param npi `<int>` 10-digit Individual National Provider Identifier
+#' @param enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param first,middle,last `<chr>` Individual provider's name
+#' @param specialty `<chr>` Enrollment specialty description
+#' @param state `<chr>` Enrollment state, full or abbreviation
+#' @param org_name `<chr>` Organization name
+#' @param multi `<lgl>` Provider has multiple NPIs
+#' @param reason `<chr>` reason for revocation
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' order_refer(count = TRUE)
-#'
-#' order_refer(npi = 1003026055)
-#'
-#' order_refer(first = "Jennifer", last = "Smith")
-#'
-#' order_refer(
-#'   part_b = TRUE,
-#'   dme = TRUE,
-#'   hha = FALSE,
-#'   pmd = TRUE,
-#'   hospice = FALSE)
+#' revocations(count = TRUE)
+#' revocations(state = "GA")
+#' revocations(specialty = contains("CARDIO"))
 #' @autoglobal
 #' @export
-order_refer <- function(
+revocations <- function(
   npi = NULL,
+  enid = NULL,
   first = NULL,
+  middle = NULL,
   last = NULL,
-  part_b = NULL,
-  dme = NULL,
-  hha = NULL,
-  pmd = NULL,
-  hospice = NULL,
+  org_name = NULL,
+  multi = NULL,
+  state = NULL,
+  specialty = NULL,
+  reason = NULL,
   count = FALSE
 ) {
   ARG <- params(
+    ENRLMT_ID = enid,
     NPI = npi,
     FIRST_NAME = first,
+    MDL_NAME = middle,
     LAST_NAME = last,
-    PARTB = cv_lgl(part_b),
-    DME = cv_lgl(dme),
-    HHA = cv_lgl(hha),
-    PMD = cv_lgl(pmd),
-    HOSPICE = cv_lgl(hospice)
+    ORG_NAME = org_name,
+    MULTIPLE_NPI_FLAG = cv_lgl(multi),
+    STATE_CD = state,
+    PROVIDER_TYPE_DESC = specialty,
+    REVOCATION_RSN = reason
   )
 
   .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))

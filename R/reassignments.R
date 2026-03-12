@@ -11,7 +11,7 @@
 #' @references
 #'    - [API: Medicare Revalidation Reassignment List](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
-#' @param npi `<chr>` 10-digit National Provider Identifier
+#' @param npi `<int>` 10-digit National Provider Identifier
 #' @param pac `<chr>` 10-digit PECOS Associate Control ID
 #' @param enid `<chr>` 15-digit Medicare Enrollment ID
 #' @param first,last `<chr>` Provider's name
@@ -44,7 +44,7 @@ reassignments <- function(
   org_state = NULL,
   count = FALSE
 ) {
-  args <- params(
+  ARG <- params(
     `Individual NPI` = npi,
     `Individual PAC ID` = pac,
     `Individual Enrollment ID` = enid,
@@ -58,16 +58,16 @@ reassignments <- function(
     `Group State Code` = org_state
   )
 
-  .c(BASE, LIMIT, NM) %=% constants("reassignments")
+  .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # Return Total Rows =====================
-  if (count) {
-    cli_results(request_rows(paste0(BASE, "/stats?")))
-    return(invisible(NULL))
-  }
+  # COUNT --> Return Total Row Count
+  if (!length(ARG)) {
+    if (count) {
+      cli_results(request_rows(paste0(BASE, "/stats?")))
+      return(invisible(NULL))
+    }
 
-  # No Query: Warn & Return First 10 Rows =====================
-  if (!length(args)) {
+    # EMPTY QUERY --> Return First 10 Rows
     cli_no_query()
 
     res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
@@ -78,33 +78,30 @@ reassignments <- function(
     return(res)
   }
 
-  # Valid Query: Flatten & Request Result Count =====================
-
-  url <- url_(
+  # QUERY --> Request Count
+  N <- request_rows(url_(
     paste0(BASE, "/stats?"),
     opts(size = LIMIT),
-    query2(args)
-  )
+    query2(ARG)
+  ))
 
-  N <- request_rows(url)
-
-  # Query Returned Nothing: Alert & Exit =====================
-  if (N == 0L) {
+  # NO RESULTS or COUNT --> Return Total Row Count
+  if (N == 0L || count) {
     cli_results(N)
     return(invisible(NULL))
   }
 
-  # Count is Within API Limit: Request & Return Results
+  # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N)
 
-    url <- url_(
+    URL <- url_(
       paste0(BASE, "?"),
       opts(size = LIMIT),
-      query2(args)
+      query2(ARG)
     )
 
-    res <- request_bare(url) |>
+    res <- request_bare(URL) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -112,21 +109,21 @@ reassignments <- function(
     return(res)
   }
 
-  # Count Above API Limit: Alert & Return Results =====================
+  # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, offset(N, LIMIT))
 
-  url <- url_(
+  URL <- url_(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    query2(args)
+    query2(ARG)
   )
 
-  urls <- offset(N, LIMIT, "seq") |>
+  URL <- offset(N, LIMIT, "seq") |>
     purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
     })
 
-  parallel_request(urls) |>
+  parallel_request(URL) |>
     fastplyr::as_tbl() |>
     map_na_if() |>
     rename_(NM)
