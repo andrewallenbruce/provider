@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9034</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,8 +141,8 @@
 
 
 <p>The Doctors and Clinicians National Downloadable File is organized such that
-each line is unique at the clinician/enrollment record/group/address level.
-Clinicians with multiple Medicare enrollment records and/or single enrollments
+each line is unique at the clinician/enrollment record/group/address level.</p>
+<p>Clinicians with multiple Medicare enrollment records and/or single enrollments
 linking to multiple practice locations are listed on multiple lines.</p><div class="section">
 <h3 id="inclusion-criteria">Inclusion Criteria<a class="anchor" aria-label="anchor" href="#inclusion-criteria"></a></h3>
 
@@ -160,7 +160,7 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
 <ul><li><p><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">API: National Downloadable File</a></p></li>
-<li><p><a href="https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf" class="external-link">Provider Data Catalog (PDC) Data Dictionary</a></p></li>
+<li><p><a href="https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf" class="external-link">Dictionary: Provider Data Catalog (PDC)</a></p></li>
 <li><p><a href="https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources" class="external-link">Source Information</a></p></li>
 </ul></div>
 
@@ -196,25 +196,10 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more variables: facility_name &lt;chr&gt;, npi &lt;chr&gt;, pac &lt;chr&gt;, enid &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mems &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;, grp &lt;chr&gt;, tele &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"At"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"At"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2020</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">651</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 651 × 25</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first    middle   last  suffix gender cred  school year  specialty spec_other</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ABBY     A        BROWN <span style="color: #BB0000;">NA</span>     F      NP    OTHER  2020  NURSE PR… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> JAMES    QUINTEN  TUCK… <span style="color: #BB0000;">NA</span>     M      <span style="color: #BB0000;">NA</span>    KANSA… 2020  OPHTHALM… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SARAH    ELIZABE… DUNS… <span style="color: #BB0000;">NA</span>     F      MD    UNIVE… 2020  ANESTHES… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANNA     <span style="color: #BB0000;">NA</span>       WISE  <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020  PSYCHIAT… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SANTORIA GIBBS    HAMB… <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020  NURSE PR… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SANDRA   <span style="color: #BB0000;">NA</span>       ST L… <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020  NURSE PR… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JACKSON  J        CERVI <span style="color: #BB0000;">NA</span>     M      <span style="color: #BB0000;">NA</span>    OTHER  2020  PHYSICAL… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SHAMEELA <span style="color: #BB0000;">NA</span>       KHIM… <span style="color: #BB0000;">NA</span>     F      <span style="color: #BB0000;">NA</span>    OTHER  2020  ALLERGY/… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> TYREL    <span style="color: #BB0000;">NA</span>       FOST… <span style="color: #BB0000;">NA</span>     M      MD    UNIVE… 2020  NUCLEAR … <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> KARTHIK  <span style="color: #BB0000;">NA</span>       BHAT  <span style="color: #BB0000;">NA</span>     M      MD    EASTE… 2020  VASCULAR… <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 641 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more variables: facility_name &lt;chr&gt;, npi &lt;chr&gt;, pac &lt;chr&gt;, enid &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mems &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;, grp &lt;chr&gt;, tele &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"Atl"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2025</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">351</span> results.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

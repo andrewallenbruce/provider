@@ -85,13 +85,7 @@ A `<subgroups>` object
 ## Examples
 
 ``` r
+if (FALSE) {
 subgroups(acute = TRUE, rehab = TRUE)
-#> $`SUBGROUP %2D ACUTE CARE`
-#> [1] "Y"
-#> 
-#> $`SUBGROUP %2D REHABILITATION`
-#> [1] "Y"
-#> 
-#> attr(,"class")
-#> [1] "subgroups"
+}
 ```

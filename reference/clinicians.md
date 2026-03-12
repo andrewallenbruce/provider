@@ -90,9 +90,11 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 The Doctors and Clinicians National Downloadable File is organized such
 that each line is unique at the clinician/enrollment
-record/group/address level. Clinicians with multiple Medicare enrollment
-records and/or single enrollments linking to multiple practice locations
-are listed on multiple lines.
+record/group/address level.
+
+Clinicians with multiple Medicare enrollment records and/or single
+enrollments linking to multiple practice locations are listed on
+multiple lines.
 
 ### Inclusion Criteria
 
@@ -115,8 +117,8 @@ A Clinician or Group must have:
 - [API: National Downloadable
   File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 
-- [Provider Data Catalog (PDC) Data
-  Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+- [Dictionary: Provider Data Catalog
+  (PDC)](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 
 - [Source
   Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
@@ -154,23 +156,8 @@ clinicians(first = "ETAN")
 #> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
 #> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
 #> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
-clinicians(city = starts_with("At"), state = "GA", year = 2020)
+clinicians(city = starts_with("At"), state = "GA", year = 2020, count = TRUE)
 #> ✔ Query returned 651 results.
-#> # A tibble: 651 × 25
-#>    first    middle   last  suffix gender cred  school year  specialty spec_other
-#>    <chr>    <chr>    <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
-#>  1 ABBY     A        BROWN NA     F      NP    OTHER  2020  NURSE PR… NA        
-#>  2 JAMES    QUINTEN  TUCK… NA     M      NA    KANSA… 2020  OPHTHALM… NA        
-#>  3 SARAH    ELIZABE… DUNS… NA     F      MD    UNIVE… 2020  ANESTHES… NA        
-#>  4 ANNA     NA       WISE  NA     F      NA    OTHER  2020  PSYCHIAT… NA        
-#>  5 SANTORIA GIBBS    HAMB… NA     F      NA    OTHER  2020  NURSE PR… NA        
-#>  6 SANDRA   NA       ST L… NA     F      NA    OTHER  2020  NURSE PR… NA        
-#>  7 JACKSON  J        CERVI NA     M      NA    OTHER  2020  PHYSICAL… NA        
-#>  8 SHAMEELA NA       KHIM… NA     F      NA    OTHER  2020  ALLERGY/… NA        
-#>  9 TYREL    NA       FOST… NA     M      MD    UNIVE… 2020  NUCLEAR … NA        
-#> 10 KARTHIK  NA       BHAT  NA     M      MD    EASTE… 2020  VASCULAR… NA        
-#> # ℹ 641 more rows
-#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
-#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
+clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
+#> ✔ Query returned 351 results.
 ```

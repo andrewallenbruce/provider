@@ -85,7 +85,7 @@ affiliations()
 #>  9 DAE     KIM   NA     NA     1003… 4082… Hospital      370202       NA        
 #> 10 DAE     KIM   NA     NA     1003… 4082… Hospital      370057       NA        
 affiliations(first = "")
-#> ✖ Query returned 0 results.
+#> ✔ Query returned 0 results.
 affiliations(facility_ccn = "33Z302")
 #> ✔ Query returned 4 results.
 #> # A tibble: 4 × 9
