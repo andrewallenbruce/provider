@@ -13,7 +13,8 @@ affiliations(
   suffix = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
-  parent_ccn = NULL
+  parent_ccn = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -41,6 +42,8 @@ provider provides services.}
 
 \item{parent_ccn}{\verb{<chr>} CCN of the \strong{primary} hospital containing the
 unit where the individual provider provides services.}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -50,7 +53,7 @@ Access information concerning individual providers'
 affiliations with organizations/facilities.
 }
 \examples{
-affiliations()
+affiliations(count = TRUE)
 
 affiliations(pac = 7810891009)
 

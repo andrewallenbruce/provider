@@ -29,9 +29,10 @@
 #'    provider provides services.
 #' @param parent_ccn `<chr>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
+#' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' affiliations()
+#' affiliations(count = TRUE)
 #'
 #' affiliations(pac = 7810891009)
 #'
@@ -42,7 +43,6 @@
 #' affiliations(facility_ccn = c("33Z302", 331302))
 #'
 #' @autoglobal
-#'
 #' @export
 affiliations <- function(
   npi = NULL,
@@ -53,7 +53,8 @@ affiliations <- function(
   suffix = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
-  parent_ccn = NULL
+  parent_ccn = NULL,
+  count = FALSE
 ) {
   args <- params(
     npi = npi,
@@ -68,6 +69,15 @@ affiliations <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("affiliations")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_count(url_(
+      BASE,
+      opts(count = "true", results = "false", schema = "false")
+    )))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {

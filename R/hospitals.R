@@ -6,7 +6,7 @@
 #' type and address.
 #'
 #' @references
-#'    * [Hospital Enrollments API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#'    - [Hospital Enrollments API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -18,34 +18,18 @@
 #' @param city `<chr>` Practice Location City
 #' @param state `<chr>` Practice Location State
 #' @param zip `<chr>` Practice Location Zip Code
-#' @param designation `<chr>` IRS designation; `"Proprietor"`/`"Non-Profit"`
+#' @param designation `<chr>` `"Proprietor"`/`"Non-Profit"`
 #' @param multi `<lgl>` Hospital has more than one NPI
 #' @param reh `<lgl>` Former Hospital/CAH now a Rural Emergency Hospital
-#' @param specialty `<chr>` Part A Provider Specialty:
-#'
+#' @param specialty `<chr>`
 #'    - `"00-09"`: Hospital
-#'    - `"00-24"`: REH (Rural Emergency Hospital)
-#'    - `"00-85"`: CAH (Critical Access Hospital)
-#'
-#' @param subgroup `<subgroups>` Hospital’s subgroup/unit:
-#'
-#'    - `acute`: Acute Care
-#'    - `drug`: Alcohol/Drug Treatment
-#'    - `child`: Children's Hospital
-#'    - `general`: General Hospital
-#'    - `long`: Long-Term Care
-#'    - `short`: Short-Term Care
-#'    - `psych`: Psychiatric
-#'    - `rehab`: Rehabilitation
-#'    - `swing`: Swing-Bed Approved
-#'    - `psych_unit`: Psychiatric Unit
-#'    - `rehab_unit`: Rehabilitation Unit
-#'    - `specialty`: Specialty Hospital
-#'    - `other`: Unlisted on CMS form
-#'
+#'    - `"00-24"`: Rural Emergency Hospital
+#'    - `"00-85"`: Critical Access Hospital
+#' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
+#' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' hospitals()
+#' hospitals(count = TRUE)
 #' hospitals(pac = 6103733050)
 #' hospitals(state = "GA", reh = TRUE)
 #' hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
@@ -67,7 +51,8 @@ hospitals <- function(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = subgroups()
+  subgroup = subgroups(),
+  count = FALSE
 ) {
   check_subgroups(subgroup)
 
@@ -91,13 +76,17 @@ hospitals <- function(
 
   .c(BASE, LIMIT, NM) %=% constants("hospitals")
 
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_rows(paste0(BASE, "/stats?")))
+    return(invisible(NULL))
+  }
+
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(ARG)) {
     cli_no_query()
 
-    url <- url_(paste0(BASE, "?"), opts(size = 10))
-
-    res <- request_bare(url) |>
+    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
       fastplyr::as_tbl() |>
       map_na_if() |>
       rename_(NM)
@@ -219,10 +208,15 @@ subgroups <- function(
 }
 
 #' @noRd
+is_subgroups <- function(x) {
+  inherits(x, "subgroups")
+}
+
+#' @noRd
 check_subgroups <- function(x) {
-  if (!inherits(x, "subgroups")) {
+  if (!is_subgroups(x)) {
     cli::cli_abort(c(
-      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(subgroup)}}",
+      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(x)}}",
       "i" = "Use the {.fn subgroups} helper function"
     ))
   }

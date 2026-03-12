@@ -21,58 +21,73 @@ clinicians(
   state = NULL,
   zip = NULL,
   facility_name = NULL,
-  facility_pac = NULL
+  facility_pac = NULL,
+  count = FALSE
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} Individual National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{pac}{\verb{<int>} Individual PECOS Associate Control ID}
+\item{pac}{\verb{<int>} PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} Individual Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{gender}{\verb{<chr>} Individual provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
+\item{gender}{\verb{<chr>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
-\item{credential}{\verb{<chr>} Individual provider's credential, i.e. \code{"MD"}, \code{"OD"}}
+\item{credential}{\verb{<chr>} Provider's credential, i.e. \code{"MD"}, \code{"OD"}}
 
-\item{specialty}{\verb{<chr>} Individual provider’s primary medical specialty}
+\item{specialty}{\verb{<chr>} Provider’s primary medical specialty}
 
-\item{school}{\verb{<chr>} Individual provider’s medical school}
+\item{school}{\verb{<chr>} Provider’s medical school}
 
-\item{year}{\verb{<int>} Individual provider’s graduation year}
+\item{year}{\verb{<int>} Provider’s graduation year}
 
 \item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 
 \item{facility_name}{\verb{<chr>} Facility associated with Provider}
 
 \item{facility_pac}{\verb{<int>} Facility's PECOS Associate Control ID}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Demographics of doctors and clinicians listed in the Provider Data Catalog (PDC)
+Demographics of clinicians listed in the Provider Data Catalog (PDC)
+}
+\section{Data Source}{
 
-The Doctors and Clinicians national downloadable file is organized such that
+The Doctors and Clinicians National Downloadable File is organized such that
 each line is unique at the clinician/enrollment record/group/address level.
 Clinicians with multiple Medicare enrollment records and/or single enrollments
 linking to multiple practice locations are listed on multiple lines.
+\subsection{Inclusion Criteria}{
+
+A Clinician or Group must have:
+\itemize{
+\item Current and approved Medicare enrollment record in PECOS
+\item Valid physical practice location or address
+\item Valid specialty
+\item National Provider Identifier
+\item One Medicare FFS claim within the last six months
+\item Two approved clinicians reassigning their benefits to the group
 }
+}
+}
+
 \examples{
-clinicians()
-
+clinicians(count = TRUE)
 clinicians(enid = "I20081002000549")
-
 clinicians(first = "ETAN")
-
 clinicians(city = starts_with("At"), state = "GA", year = 2020)
-
 }
 \references{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}
+\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{API: National Downloadable File}
 \item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
+\item \href{https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources}{Source Information}
 }
 }

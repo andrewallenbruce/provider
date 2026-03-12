@@ -2,7 +2,7 @@
 % Please edit documentation in R/order_refer.R
 \name{order_refer}
 \alias{order_refer}
-\title{Order and Referral Eligibility}
+\title{Order and Refer Eligibility}
 \usage{
 order_refer(
   npi = NULL,
@@ -12,63 +12,61 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  hospice = NULL
+  hospice = NULL,
+  count = FALSE
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
 \item{first, last}{\verb{<chr>} Individual provider's first/last name}
 
-\item{part_b, dme, hha, pmd, hospice}{\verb{<lgl>} Whether a provider is eligible to
-order and refer to:
+\item{part_b, dme, hha, pmd, hospice}{\verb{<lgl>} Eligibility for:
 \itemize{
-\item \code{partb}: Medicare Part B
+\item \code{part_b}: Medicare Part B
 \item \code{dme}: Durable Medical Equipment
 \item \code{hha}: Home Health Agency
 \item \code{pmd}: Power Mobility Devices
 \item \code{hospice}: Hospice
 }}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab National Provider Identifier \cr
-   \code{first} \tab Order and Referring Provider's First Name \cr
-   \code{last} \tab Order and Referring Provider's Last Name \cr
-   \code{eligible} \tab Services An Eligible Provider Can Order/Refer To \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-\code{order_refer()} returns a provider's eligibility to order and refer within
-Medicare to:
+Eligibility to order and refer within Medicare
 }
-\details{
+\section{Criteria}{
+
 \itemize{
-\item \strong{Part B}: Clinical Laboratory Services, Imaging Services
-\item \strong{DME}: Durable Medical Equipment, Prosthetics, Orthotics, & Supplies (DMEPOS)
-\item \strong{Part A}: Home Health Services
+\item \emph{Individual} NPI
+\item Medicare enrollment with \emph{Approved} or \emph{Opt-Out} status
+\item Eligible \emph{specialty} type
+}
 }
 
-To be eligible, a provider must:
+\section{Types}{
+
 \itemize{
-\item have an \emph{Individual} NPI
-\item be enrolled in Medicare in either an \emph{Approved} or \emph{Opt-Out} status
-\item be of an \emph{Eligible Specialty} type
+\item \emph{Ordering}: can order non-physician services for patients.
+\item \emph{Referring/Certifying}: can request items/services Medicare may reimburse.
+\item \emph{Opt-Out}: can enroll solely to order and refer.
+}
 }
 
-\strong{Ordering Providers} can order non-physician services for patients.
+\section{Services}{
 
-\strong{Referring (or Certifying) Providers} can request items or services that
-Medicare may reimburse on behalf of its beneficiaries.
-
-\strong{Opt-Out Providers}: Providers who have opted out of Medicare may still
-order and refer. They can also enroll solely to order and refer.
+\itemize{
+\item \emph{Medicare Part B}: Clinical Labs, Imaging
+\item \emph{Medicare Part A}: Home Health
+\item \emph{DMEPOS}: Durable medical equipment, prosthetics, orthotics, & supplies
 }
+}
+
 \examples{
-order_refer()
-
-order_refer(npi = 100)
+order_refer(count = TRUE)
 
 order_refer(npi = 1003026055)
 
@@ -79,14 +77,11 @@ order_refer(
   dme = TRUE,
   hha = FALSE,
   pmd = TRUE,
-  hospice = FALSE
- )
-
+  hospice = FALSE)
 }
 \references{
-links:
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
-\item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{API: Medicare Order and Referring}
+\item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS: Ordering & Certifying}
 }
 }

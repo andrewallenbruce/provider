@@ -19,7 +19,8 @@ hospitals(
   designation = NULL,
   multi = NULL,
   reh = NULL,
-  subgroup = subgroups()
+  subgroup = subgroups(),
+  count = FALSE
 )
 }
 \arguments{
@@ -33,11 +34,11 @@ hospitals(
 
 \item{enid_state}{\verb{<chr>} Enrollment State}
 
-\item{specialty}{\verb{<chr>} Part A Provider Specialty:
+\item{specialty}{\verb{<chr>}
 \itemize{
 \item \code{"00-09"}: Hospital
-\item \code{"00-24"}: REH (Rural Emergency Hospital)
-\item \code{"00-85"}: CAH (Critical Access Hospital)
+\item \code{"00-24"}: Rural Emergency Hospital
+\item \code{"00-85"}: Critical Access Hospital
 }}
 
 \item{org_name}{\verb{<chr>} Legal Business Name}
@@ -50,28 +51,15 @@ hospitals(
 
 \item{zip}{\verb{<chr>} Practice Location Zip Code}
 
-\item{designation}{\verb{<chr>} IRS designation; \code{"Proprietor"}/\code{"Non-Profit"}}
+\item{designation}{\verb{<chr>} \code{"Proprietor"}/\code{"Non-Profit"}}
 
 \item{multi}{\verb{<lgl>} Hospital has more than one NPI}
 
 \item{reh}{\verb{<lgl>} Former Hospital/CAH now a Rural Emergency Hospital}
 
-\item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit:
-\itemize{
-\item \code{acute}: Acute Care
-\item \code{drug}: Alcohol/Drug Treatment
-\item \code{child}: Children's Hospital
-\item \code{general}: General Hospital
-\item \code{long}: Long-Term Care
-\item \code{short}: Short-Term Care
-\item \code{psych}: Psychiatric
-\item \code{rehab}: Rehabilitation
-\item \code{swing}: Swing-Bed Approved
-\item \code{psych_unit}: Psychiatric Unit
-\item \code{rehab_unit}: Rehabilitation Unit
-\item \code{specialty}: Specialty Hospital
-\item \code{other}: Unlisted on CMS form
-}}
+\item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -82,7 +70,7 @@ sub-group types, legal business name, doing-business-as name, organization
 type and address.
 }
 \examples{
-hospitals()
+hospitals(count = TRUE)
 hospitals(pac = 6103733050)
 hospitals(state = "GA", reh = TRUE)
 hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))

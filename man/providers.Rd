@@ -11,11 +11,12 @@ providers(
   first = NULL,
   middle = NULL,
   last = NULL,
-  spec_code = NULL,
-  spec_desc = NULL,
+  spec = NULL,
+  specialty = NULL,
   state = NULL,
   org_name = NULL,
-  multi = NULL
+  multi = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -27,47 +28,27 @@ providers(
 
 \item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
-\item{spec_code}{\verb{<chr>} Enrollment specialty code}
+\item{spec}{\verb{<chr>} Enrollment specialty code}
 
-\item{spec_desc}{\verb{<chr>} Enrollment specialty description}
+\item{specialty}{\verb{<chr>} Enrollment specialty description}
 
 \item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
 
 \item{org_name}{\verb{<chr>} Organization name}
 
 \item{multi}{\verb{<chr>} Provider has multiple NPIs}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
-   \strong{Field} \tab \strong{Description} \cr
-   \code{npi} \tab 10-digit NPI \cr
-   \code{pac} \tab 10-digit PAC ID \cr
-   \code{enid} \tab 15-digit provider enrollment ID \cr
-   \code{spec_code} \tab Enrollment primary specialty type code \cr
-   \code{spec_desc} \tab Enrollment specialty type description \cr
-   \code{first} \tab Individual provider's first name \cr
-   \code{middle} \tab Individual provider's middle name \cr
-   \code{last} \tab Individual provider's last name \cr
-   \code{state} \tab Enrollment state \cr
-   \code{org_name} \tab Organizational provider's name \cr
-}
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Enrollment data on individual and organizational providers that are
 actively approved to bill Medicare.
 }
-\section{Links}{
-
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
-\item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
-}
-}
-
 \examples{
-providers()
-
-providers(spec_code = "14")
+providers(count = TRUE)
 
 providers(enid = "I20040309000221")
 
@@ -77,4 +58,10 @@ providers(pac = 2860305554)
 
 providers(state = "AK")
 
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{API: Medicare Provider Supplier Enrollment}
+\item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
+}
 }

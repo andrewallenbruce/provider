@@ -1,53 +1,39 @@
-#' Order and Referral Eligibility
+#' Order and Refer Eligibility
 #'
-#' `order_refer()` returns a provider's eligibility to order and refer within
-#' Medicare to:
+#' @description
+#' Eligibility to order and refer within Medicare
 #'
-#' + **Part B**: Clinical Laboratory Services, Imaging Services
-#' + **DME**: Durable Medical Equipment, Prosthetics, Orthotics, & Supplies (DMEPOS)
-#' + **Part A**: Home Health Services
+#' @section Criteria:
+#'    - *Individual* NPI
+#'    - Medicare enrollment with *Approved* or *Opt-Out* status
+#'    - Eligible *specialty* type
 #'
-#' To be eligible, a provider must:
+#' @section Types:
+#'    - *Ordering*: can order non-physician services for patients.
+#'    - *Referring/Certifying*: can request items/services Medicare may reimburse.
+#'    - *Opt-Out*: can enroll solely to order and refer.
 #'
-#' + have an *Individual* NPI
-#' + be enrolled in Medicare in either an *Approved* or *Opt-Out* status
-#' + be of an *Eligible Specialty* type
+#' @section Services:
+#'    - *Medicare Part B*: Clinical Labs, Imaging
+#'    - *Medicare Part A*: Home Health
+#'    - *DMEPOS*: Durable medical equipment, prosthetics, orthotics, & supplies
 #'
-#' **Ordering Providers** can order non-physician services for patients.
+#' @references
+#'    - [API: Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+#'    - [CMS: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'
-#' **Referring (or Certifying) Providers** can request items or services that
-#' Medicare may reimburse on behalf of its beneficiaries.
-#'
-#' **Opt-Out Providers**: Providers who have opted out of Medicare may still
-#' order and refer. They can also enroll solely to order and refer.
-#'
-#' @references links:
-#' + [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-#' + [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
-#'
-#' @param npi `<int>` 10-digit Individual National Provider Identifier
+#' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Individual provider's first/last name
-#' @param part_b,dme,hha,pmd,hospice `<lgl>` Whether a provider is eligible to
-#' order and refer to:
-#' + `partb`: Medicare Part B
-#' + `dme`: Durable Medical Equipment
-#' + `hha`: Home Health Agency
-#' + `pmd`: Power Mobility Devices
-#' + `hospice`: Hospice
-#'
-#' @returns A [tibble][tibble::tibble-package] with the columns:
-#'
-#' |**Field**   |**Description**                                   |
-#' |:-----------|:-------------------------------------------------|
-#' |`npi`       |National Provider Identifier                      |
-#' |`first`     |Order and Referring Provider's First Name         |
-#' |`last`      |Order and Referring Provider's Last Name          |
-#' |`eligible`  |Services An Eligible Provider Can Order/Refer To  |
-#'
+#' @param part_b,dme,hha,pmd,hospice `<lgl>` Eligibility for:
+#'    - `part_b`: Medicare Part B
+#'    - `dme`: Durable Medical Equipment
+#'    - `hha`: Home Health Agency
+#'    - `pmd`: Power Mobility Devices
+#'    - `hospice`: Hospice
+#' @param count `<lgl>` Return the dataset's total row count
+#' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' order_refer()
-#'
-#' order_refer(npi = 100)
+#' order_refer(count = TRUE)
 #'
 #' order_refer(npi = 1003026055)
 #'
@@ -58,9 +44,7 @@
 #'   dme = TRUE,
 #'   hha = FALSE,
 #'   pmd = TRUE,
-#'   hospice = FALSE
-#'  )
-#'
+#'   hospice = FALSE)
 #' @autoglobal
 #' @export
 order_refer <- function(
@@ -71,7 +55,8 @@ order_refer <- function(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  hospice = NULL
+  hospice = NULL,
+  count = FALSE
 ) {
   args <- params(
     NPI = npi,
@@ -85,6 +70,12 @@ order_refer <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("order_refer")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_rows(paste0(BASE, "/stats?")))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {

@@ -1,38 +1,47 @@
 #' Clinician Demographics
 #'
-#' @description Demographics of doctors and clinicians listed in the Provider Data Catalog (PDC)
+#' @description
+#' Demographics of clinicians listed in the Provider Data Catalog (PDC)
 #'
-#' The Doctors and Clinicians national downloadable file is organized such that
+#' @section Data Source:
+#' The Doctors and Clinicians National Downloadable File is organized such that
 #' each line is unique at the clinician/enrollment record/group/address level.
 #' Clinicians with multiple Medicare enrollment records and/or single enrollments
 #' linking to multiple practice locations are listed on multiple lines.
 #'
-#' @references
-#'    * [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
-#'    * [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+#' ### Inclusion Criteria
+#' A Clinician or Group must have:
+#'   - Current and approved Medicare enrollment record in PECOS
+#'   - Valid physical practice location or address
+#'   - Valid specialty
+#'   - National Provider Identifier
+#'   - One Medicare FFS claim within the last six months
+#'   - Two approved clinicians reassigning their benefits to the group
 #'
-#' @param npi `<int>` Individual National Provider Identifier
-#' @param pac `<int>` Individual PECOS Associate Control ID
-#' @param enid `<chr>` Individual Medicare Enrollment ID
+#' @references
+#'   - [API: National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+#'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+#'   - [Source Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
+#'
+#' @param npi `<int>` National Provider Identifier
+#' @param pac `<int>` PECOS Associate Control ID
+#' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,middle,last,suffix `<chr>` Individual provider's name
-#' @param gender `<chr>` Individual provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
-#' @param credential `<chr>` Individual provider's credential, i.e. `"MD"`, `"OD"`
-#' @param school `<chr>` Individual provider’s medical school
-#' @param year `<int>` Individual provider’s graduation year
-#' @param specialty `<chr>` Individual provider’s primary medical specialty
+#' @param gender `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
+#' @param credential `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
+#' @param school `<chr>` Provider’s medical school
+#' @param year `<int>` Provider’s graduation year
+#' @param specialty `<chr>` Provider’s primary medical specialty
 #' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param facility_name `<chr>` Facility associated with Provider
 #' @param facility_pac `<int>` Facility's PECOS Associate Control ID
+#' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examples
-#' clinicians()
-#'
+#' clinicians(count = TRUE)
 #' clinicians(enid = "I20081002000549")
-#'
 #' clinicians(first = "ETAN")
-#'
 #' clinicians(city = starts_with("At"), state = "GA", year = 2020)
-#'
 #' @autoglobal
 #' @export
 clinicians <- function(
@@ -52,7 +61,8 @@ clinicians <- function(
   state = NULL,
   zip = NULL,
   facility_name = NULL,
-  facility_pac = NULL
+  facility_pac = NULL,
+  count = FALSE
 ) {
   args <- params(
     npi = npi,
@@ -75,6 +85,15 @@ clinicians <- function(
   )
 
   .c(BASE, LIMIT, NM) %=% constants("clinicians")
+
+  # Return Total Rows =====================
+  if (count) {
+    cli_results(request_count(url_(
+      BASE,
+      opts(count = "true", results = "false", schema = "false")
+    )))
+    return(invisible(NULL))
+  }
 
   # No Query: Warn & Return First 10 Rows =====================
   if (!length(args)) {
