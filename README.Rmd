@@ -102,6 +102,12 @@ providers(enid = "O20040610001257")
 reassignments(org_pac = 7719037548)
 ```
 
+#### Revocations
+
+```{r}
+revocations(state = "GA")
+```
+
 ------------------------------------------------------------------------------
 
 ## :balance_scale: Code of Conduct

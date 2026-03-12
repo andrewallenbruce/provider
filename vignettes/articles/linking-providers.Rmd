@@ -1,14 +1,16 @@
 ---
 title: "Linking Providers"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE, 
-  message   = FALSE, 
-  warning   = FALSE,
+  message   = TRUE, 
+  warning   = TRUE,
   error     = TRUE,
   comment   = "#>",
   dpi       = 600, 
@@ -22,7 +24,9 @@ library(gt)
 #   font = google_font(name = "JetBrains Mono"), size = gt::px(12))
 ```
 
-## NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
+> NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
+
+#### Individual Provider
 
 ```{r}
 pac <- affiliations(pac = 7810891009)
@@ -33,12 +37,13 @@ list(
 
 
 ```{r}
-ccn <- hospitals(ccn = unique(pac$facility_ccn))
-ccn
+ccn <- hospitals(ccn = pac$facility_ccn)
+ccn |> str()
 ```
 
-
 <br>
+
+#### Organizational Provider
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 
@@ -46,10 +51,16 @@ Exploring links between providers can lead to many interesting insights. For exa
 providers(org_name = "Elizabethtown Community Hospital")
 ```
 
-
-
 ```{r}
 hospitals(org_name = "Elizabethtown Community Hospital")
+```
+
+```{r}
+clinicians(facility_name = "Elizabethtown Community Hospital")
+```
+
+```{r}
+reassignments(org_name = "Elizabethtown Community Hospital")
 ```
 
 <br>

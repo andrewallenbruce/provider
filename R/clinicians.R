@@ -66,125 +66,31 @@ clinicians <- function(
   facility_pac = NULL,
   count = FALSE
 ) {
-  ARG <- params(
-    npi = npi,
-    ind_pac_id = pac,
-    ind_enrl_id = enid,
-    provider_last_name = last,
-    provider_first_name = first,
-    provider_middle_name = middle,
-    suff = suffix,
-    gndr = gender,
-    cred = credential,
-    med_sch = school,
-    grd_yr = year,
-    pri_spec = specialty,
-    facility_name = facility_name,
-    org_pac_id = facility_pac,
-    citytown = city,
-    state = state,
-    zip_code = zip
-  )
-
   .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # COUNT --> Return Total Row Count
-  if (!length(ARG)) {
-    if (count) {
-      cli_results(
-        request_count(
-          url_(BASE, opts(count = "true", results = "false", schema = "false"))
-        )
-      )
-      return(invisible(NULL))
-    }
-
-    # EMPTY QUERY --> Return First 10 Rows
-    cli_no_query()
-
-    URL <- url_(
-      BASE,
-      opts(
-        count = "false",
-        results = "true",
-        schema = "false",
-        limit = 10
-      )
-    )
-
-    res <- request_results(URL) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # QUERY --> Request Count
-  URL <- url_(
-    BASE,
-    opts(
-      count = "true",
-      results = "false",
-      schema = "false",
-      limit = LIMIT
+  exec_prov(
+    ARG = params(
+      npi = npi,
+      ind_pac_id = pac,
+      ind_enrl_id = enid,
+      provider_last_name = last,
+      provider_first_name = first,
+      provider_middle_name = middle,
+      suff = suffix,
+      gndr = gender,
+      cred = credential,
+      med_sch = school,
+      grd_yr = year,
+      pri_spec = specialty,
+      facility_name = facility_name,
+      org_pac_id = facility_pac,
+      citytown = city,
+      state = state,
+      zip_code = zip
     ),
-    query(ARG)
+    BASE = BASE,
+    LIMIT = LIMIT,
+    NM = NM,
+    COUNT = count
   )
-
-  N <- request_count(URL)
-
-  # NO RESULTS or COUNT --> Return Total Row Count
-  if (N == 0L || count) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
-
-  # COUNT BELOW LIMIT --> Single Request
-  if (N <= LIMIT) {
-    cli_results(N)
-
-    URL <- url_(
-      BASE,
-      opts(
-        count = "false",
-        results = "true",
-        schema = "false",
-        limit = LIMIT
-      ),
-      query(ARG)
-    )
-
-    res <- request_results(URL) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, offset(N, LIMIT))
-
-  URL <- url_(
-    BASE,
-    opts(
-      count = "false",
-      results = "true",
-      schema = "false",
-      limit = LIMIT,
-      offset = "<<i>>"
-    ),
-    query(ARG)
-  )
-
-  URL <- offset(N, LIMIT, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-
-  parallel_results(URL) |>
-    fastplyr::as_tbl() |>
-    map_na_if() |>
-    rename_(NM)
 }

@@ -9,13 +9,19 @@ cli_no_query <- function() {
 
 #' @noRd
 cli_results <- function(x) {
-  cli::cli_alert_success(
-    "Query returned {.strong {format(x, big.mark = ',')}} {cli::qty(x)}result{?s}."
-  )
+  cli::cli_alert_success(c(
+    "Query returned {.strong ",
+    format(x, big.mark = ","),
+    "} ",
+    "{cli::qty(x)}result{?s}."
+  ))
 }
 
 #' @noRd
 cli_pages <- function(x, p) {
   cli_results(x)
-  cli::cli_alert_info("Retrieving {.strong {p}} page{?s}...")
+  P <- offset(x, p, "size")
+  cli::cli_alert_info(c(
+    "Retrieving {.strong {P}} page{?s}..."
+  ))
 }
