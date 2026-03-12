@@ -35,7 +35,7 @@ reassignments(
 
 - npi:
 
-  `<chr>` 10-digit National Provider Identifier
+  `<int>` 10-digit National Provider Identifier
 
 - pac:
 

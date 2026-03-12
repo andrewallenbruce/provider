@@ -58,7 +58,7 @@ providers(
 
 - multi:
 
-  `<chr>` Provider has multiple NPIs
+  `<lgl>` Provider has multiple NPIs
 
 - count:
 

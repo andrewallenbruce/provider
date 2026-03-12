@@ -35,7 +35,7 @@ clinicians(
 
 - pac:
 
-  `<int>` PECOS Associate Control ID
+  `<chr>` PECOS Associate Control ID
 
 - enid:
 
@@ -76,7 +76,7 @@ clinicians(
 
 - facility_pac:
 
-  `<int>` Facility's PECOS Associate Control ID
+  `<chr>` Facility's PECOS Associate Control ID
 
 - count:
 

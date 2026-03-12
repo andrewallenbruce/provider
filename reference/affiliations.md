@@ -45,7 +45,7 @@ affiliations(
 
 - parent_ccn:
 
-  `<chr>` CCN of the **primary** hospital containing the unit where the
+  `<int>` CCN of the **primary** hospital containing the unit where the
   individual provider provides services.
 
 - count:

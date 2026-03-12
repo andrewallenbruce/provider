@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9035 (2026-03-12)
+
+- added
+  [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
+  endpoint
+
 ## provider 0.0.1.9034 (2026-03-12)
 
 - tweaking control flow of each api

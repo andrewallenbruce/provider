@@ -343,6 +343,8 @@ Access Current Provider Data.
   : Provider-Facility Affiliations
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
   : Reassignment of Benefits
+- [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
+  : Revocations of Medicare Enrollments
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 
