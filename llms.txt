@@ -31,23 +31,23 @@ affiliations(facility_ccn = 370781)
 #> ✔ Query returned 15 results.
 
 #> # A tibble: 15 × 9
-#>    npi     pac   last  first middle suffix facility_type facility_ccn parent_ccn
-#>    <chr>   <chr> <chr> <chr> <chr>  <chr>  <chr>         <chr>        <chr>     
-#>  1 100330… 1254… LEE   NICO… <NA>   <NA>   Hospital      370781       <NA>      
-#>  2 101316… 6800… SEE   LEILA DANIE… <NA>   Hospital      370781       <NA>      
-#>  3 105354… 7618… SIZE… AARON S      <NA>   Hospital      370781       <NA>      
-#>  4 108361… 6406… KASS… KEITH J      <NA>   Hospital      370781       <NA>      
-#>  5 124523… 4082… MADR… STEVE M      <NA>   Hospital      370781       <NA>      
-#>  6 131693… 2769… BEAM  CHES… WRAY   <NA>   Hospital      370781       <NA>      
-#>  7 140790… 3870… FINCH COREY D      <NA>   Hospital      370781       <NA>      
-#>  8 142704… 7517… MCGA… THOM… <NA>   <NA>   Hospital      370781       <NA>      
-#>  9 148743… 8426… RUSS… NICH… <NA>   <NA>   Hospital      370781       <NA>      
-#> 10 156845… 3870… SCHM… DWAY… A      <NA>   Hospital      370781       <NA>      
-#> 11 162904… 6103… MORR… JANA  NIKOLE <NA>   Hospital      370781       <NA>      
-#> 12 171039… 9739… GRAH… TIMO… AARON  <NA>   Hospital      370781       <NA>      
-#> 13 171093… 2163… COST… RICH… F      JR.    Hospital      370781       <NA>      
-#> 14 180138… 9436… FONK… VEDM… <NA>   <NA>   Hospital      370781       <NA>      
-#> 15 192205… 9032… ARMOR JESS  F      <NA>   Hospital      370781       <NA>
+#>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
+#>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
+#>  1 NICOLE  LEE   <NA>   <NA>   1003… 1254… Hospital      370781       <NA>      
+#>  2 LEILA   SEE   DANIE… <NA>   1013… 6800… Hospital      370781       <NA>      
+#>  3 AARON   SIZE… S      <NA>   1053… 7618… Hospital      370781       <NA>      
+#>  4 KEITH   KASS… J      <NA>   1083… 6406… Hospital      370781       <NA>      
+#>  5 STEVE   MADR… M      <NA>   1245… 4082… Hospital      370781       <NA>      
+#>  6 CHESTER BEAM  WRAY   <NA>   1316… 2769… Hospital      370781       <NA>      
+#>  7 COREY   FINCH D      <NA>   1407… 3870… Hospital      370781       <NA>      
+#>  8 THOMAS  MCGA… <NA>   <NA>   1427… 7517… Hospital      370781       <NA>      
+#>  9 NICHOL… RUSS… <NA>   <NA>   1487… 8426… Hospital      370781       <NA>      
+#> 10 DWAYNE  SCHM… A      <NA>   1568… 3870… Hospital      370781       <NA>      
+#> 11 JANA    MORR… NIKOLE <NA>   1629… 6103… Hospital      370781       <NA>      
+#> 12 TIMOTHY GRAH… AARON  <NA>   1710… 9739… Hospital      370781       <NA>      
+#> 13 RICHARD COST… F      JR.    1710… 2163… Hospital      370781       <NA>      
+#> 14 VEDMIA  FONK… <NA>   <NA>   1801… 9436… Hospital      370781       <NA>      
+#> 15 JESS    ARMOR F      <NA>   1922… 9032… Hospital      370781       <NA>
 ```
 
 #### National Provider Catalog
@@ -60,12 +60,9 @@ clinicians(npi = 1932365699) |> str()
 #> ✔ Query returned 1 result.
 
 #> tibble [1 × 25] (S3: tbl_df/tbl/data.frame)
-#>  $ npi          : chr "1932365699"
-#>  $ pac          : chr "0042370496"
-#>  $ enid         : chr "I20081115000066"
-#>  $ last         : chr "SMITH"
 #>  $ first        : chr "STEFAN"
 #>  $ middle       : chr "MICHAEL"
+#>  $ last         : chr "SMITH"
 #>  $ suffix       : chr NA
 #>  $ gender       : chr "M"
 #>  $ cred         : chr "OD"
@@ -73,8 +70,10 @@ clinicians(npi = 1932365699) |> str()
 #>  $ year         : chr "2008"
 #>  $ specialty    : chr "OPTOMETRY"
 #>  $ spec_other   : chr NA
-#>  $ telehealth   : chr NA
 #>  $ facility_name: chr "VEP IL OPTOMETRIC LLC"
+#>  $ npi          : chr "1932365699"
+#>  $ pac          : chr "0042370496"
+#>  $ enid         : chr "I20081115000066"
 #>  $ org_pac      : chr "3678814217"
 #>  $ org_mems     : chr "25"
 #>  $ add_1        : chr "1001 CHARLESTON AVE E"
@@ -85,6 +84,7 @@ clinicians(npi = 1932365699) |> str()
 #>  $ phone        : chr "2172352020"
 #>  $ ind          : chr "Y"
 #>  $ grp          : chr "Y"
+#>  $ tele         : chr NA
 ```
 
 #### Hospitals
@@ -97,16 +97,17 @@ hospitals(npi = 1720098791) |> str()
 #> ✔ Query returned 1 result.
 
 #> tibble [1 × 39] (S3: tbl_df/tbl/data.frame)
+#>  $ org_name      : chr "IRWIN COUNTY HOSPITAL"
+#>  $ dba_name      : chr "PROGRESSIVE MEDICAL ENTERPRISE"
 #>  $ enid          : chr "O20230310002325"
 #>  $ enid_state    : chr "GA"
-#>  $ spec_cd       : chr "00-24"
+#>  $ spec          : chr "00-24"
 #>  $ specialty     : chr "PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)"
 #>  $ npi           : chr "1720098791"
 #>  $ multi         : chr "N"
 #>  $ ccn           : chr "110779"
+#>  $ ccn_2         : chr "110130"
 #>  $ pac           : chr "7618950643"
-#>  $ org_name      : chr "IRWIN COUNTY HOSPITAL"
-#>  $ dba_name      : chr "PROGRESSIVE MEDICAL ENTERPRISE"
 #>  $ inc_date      : chr NA
 #>  $ inc_state     : chr "GA"
 #>  $ org_type      : chr "OTHER"
@@ -119,6 +120,8 @@ hospitals(npi = 1720098791) |> str()
 #>  $ zip           : chr "317745011"
 #>  $ location_type : chr "OTHER HOSPITAL PRACTICE LOCATION"
 #>  $ location_text : chr "REH"
+#>  $ reh_ind       : chr "Y"
+#>  $ reh_date      : chr "2023-03-23"
 #>  $ sub_general   : chr "N"
 #>  $ sub_acute     : chr "N"
 #>  $ sub_drug      : chr "N"
@@ -133,9 +136,6 @@ hospitals(npi = 1720098791) |> str()
 #>  $ sub_specialty : chr "N"
 #>  $ sub_other     : chr "N"
 #>  $ sub_otext     : chr NA
-#>  $ reh_ind       : chr "Y"
-#>  $ reh_date      : chr "2023-03-23"
-#>  $ old_ccn       : chr "110130"
 ```
 
 #### CLIA Laboratories
@@ -147,107 +147,89 @@ laboratories(ccn = "11D0265516") |> str()
 ``` R
 #> ✔ Query returned 1 result.
 
-#> tibble [1 × 103] (S3: tbl_df/tbl/data.frame)
-#>  $ prv_cat       : chr "22"
-#>  $ prv_type      : chr "01"
-#>  $ chow_count    : chr "0"
-#>  $ chow_date     : chr NA
-#>  $ city          : chr "VALDOSTA"
-#>  $ pos           : chr "Y"
-#>  $ status        : chr "A"
-#>  $ county_ssa    : chr "700"
-#>  $ xref_ccn      : chr NA
-#>  $ cert_date     : chr "19960321"
-#>  $ eligible_ind  : chr "Y"
-#>  $ name          : chr "DANIEL FELDMAN MD"
-#>  $ mac_curr      : chr NA
-#>  $ vend          : chr NA
-#>  $ orig_date     : chr "19920901"
-#>  $ chow_prev_date: chr NA
-#>  $ mac_prev      : chr NA
-#>  $ ccn           : chr "11D0265516"
-#>  $ region        : chr "04"
-#>  $ skeleton      : chr "N"
-#>  $ state         : chr "GA"
-#>  $ state_ssa     : chr "11"
-#>  $ state_reg     : chr "001"
-#>  $ add_1         : chr "205 WOODROW WILSON DR"
-#>  $ phone_1       : chr "8032619888"
-#>  $ term_cd       : chr "17"
-#>  $ term_date     : chr "19980804"
-#>  $ cert_action   : chr "2"
-#>  $ ownership     : chr "04"
-#>  $ zip           : chr "31602"
-#>  $ fips_state    : chr "13"
-#>  $ fips_county   : chr "185"
-#>  $ cbsa_ind      : chr "U"
-#>  $ cbsa_cd       : chr "46660"
-#>  $ add_2         : chr NA
-#>  $ aff_1         : chr NA
-#>  $ aff_2         : chr NA
-#>  $ aff_3         : chr NA
-#>  $ aff_4         : chr NA
-#>  $ aff_5         : chr NA
-#>  $ aff_6         : chr NA
-#>  $ aff_7         : chr NA
-#>  $ aff_8         : chr NA
-#>  $ a2la_cred     : chr NA
-#>  $ a2la_date     : chr NA
-#>  $ a2la_ind      : chr "N"
-#>  $ aabb_cred     : chr NA
-#>  $ aabb_date     : chr NA
-#>  $ aabb_ind      : chr "N"
-#>  $ aoa_cred      : chr NA
-#>  $ aoa_date      : chr NA
-#>  $ aoa_ind       : chr "N"
-#>  $ ashi_cred     : chr NA
-#>  $ ashi_date     : chr NA
-#>  $ ashi_ind      : chr "N"
-#>  $ cap_cred      : chr NA
-#>  $ cap_date      : chr NA
-#>  $ cap_ind       : chr "N"
-#>  $ cola_cred     : chr NA
-#>  $ cola_date     : chr NA
-#>  $ cola_ind      : chr "N"
-#>  $ jcaho_cred    : chr NA
-#>  $ jcaho_date    : chr NA
-#>  $ jcaho_ind     : chr "N"
-#>  $ apl_date      : chr "19930120"
-#>  $ apl_type      : chr "1"
-#>  $ fac_type      : chr "21"
-#>  $ eff_date      : chr "19960829"
-#>  $ mail_date     : chr "19960925"
-#>  $ cert_type     : chr "1"
-#>  $ cls0          : chr "00"
-#>  $ cls1          : chr "00"
-#>  $ cls2          : chr "00"
-#>  $ cls3          : chr "00"
-#>  $ cls4          : chr NA
-#>  $ cls5          : chr NA
-#>  $ cls6          : chr NA
-#>  $ cls7          : chr NA
-#>  $ cls8          : chr NA
-#>  $ cls9          : chr NA
-#>  $ cls10         : chr NA
-#>  $ clia_88       : chr "00205114A3"
-#>  $ term_cd       : chr "17"
-#>  $ sched_cred    : chr NA
-#>  $ vol_cred      : chr "0"
-#>  $ vol_comp      : chr "0"
-#>  $ aff_count     : chr "0"
-#>  $ phone_2       : chr NA
-#>  $ fyend         : chr NA
-#>  $ multi         : chr "N"
-#>  $ hosp          : chr "N"
-#>  $ nonprof       : chr "N"
-#>  $ temp          : chr "N"
-#>  $ site_count    : chr "0"
-#>  $ vol_ppm       : chr "0"
-#>  $ name_2        : chr NA
-#>  $ rel_num       : chr NA
-#>  $ shared_lab    : chr "N"
-#>  $ shared_xref   : chr NA
-#>   [list output truncated]
+#> tibble [1 × 82] (S3: tbl_df/tbl/data.frame)
+#>  $ name_1     : chr "DANIEL FELDMAN MD"
+#>  $ name_2     : chr NA
+#>  $ ccn        : chr "11D0265516"
+#>  $ xref       : chr NA
+#>  $ chow_n     : chr "0"
+#>  $ chow_date  : chr NA
+#>  $ chow_prev  : chr NA
+#>  $ pos        : chr "Y"
+#>  $ status     : chr "A"
+#>  $ add_1      : chr "205 WOODROW WILSON DR"
+#>  $ add_2      : chr NA
+#>  $ phone_1    : chr "8032619888"
+#>  $ phone_2    : chr NA
+#>  $ city       : chr "VALDOSTA"
+#>  $ state      : chr "GA"
+#>  $ region     : chr "04"
+#>  $ zip        : chr "31602"
+#>  $ state_ssa  : chr "11"
+#>  $ county_ssa : chr "700"
+#>  $ fips_state : chr "13"
+#>  $ fips_county: chr "185"
+#>  $ state_reg  : chr "001"
+#>  $ cbsa_cd    : chr "46660"
+#>  $ cbsa_ind   : chr "U"
+#>  $ eligible   : chr "Y"
+#>  $ term_pgm   : chr "17"
+#>  $ term_clia  : chr "17"
+#>  $ apl_type   : chr "1"
+#>  $ cert_type  : chr "1"
+#>  $ fac_type   : chr "21"
+#>  $ ownership  : chr "04"
+#>  $ cert_action: chr "2"
+#>  $ orig_date  : chr "19920901"
+#>  $ apl_date   : chr "19930120"
+#>  $ cert_date  : chr "19960321"
+#>  $ eff_date   : chr "19960829"
+#>  $ mail_date  : chr "19960925"
+#>  $ term_date  : chr "19980804"
+#>  $ a2la_cred  : chr NA
+#>  $ a2la_date  : chr NA
+#>  $ a2la_ind   : chr "N"
+#>  $ aabb_cred  : chr NA
+#>  $ aabb_date  : chr NA
+#>  $ aabb_ind   : chr "N"
+#>  $ aoa_cred   : chr NA
+#>  $ aoa_date   : chr NA
+#>  $ aoa_ind    : chr "N"
+#>  $ ashi_cred  : chr NA
+#>  $ ashi_date  : chr NA
+#>  $ ashi_ind   : chr "N"
+#>  $ cap_cred   : chr NA
+#>  $ cap_date   : chr NA
+#>  $ cap_ind    : chr "N"
+#>  $ cola_cred  : chr NA
+#>  $ cola_date  : chr NA
+#>  $ cola_ind   : chr "N"
+#>  $ jcaho_cred : chr NA
+#>  $ jcaho_date : chr NA
+#>  $ jcaho_ind  : chr "N"
+#>  $ clia_88    : chr "00205114A3"
+#>  $ acrd_sched : chr NA
+#>  $ cert_sched : chr NA
+#>  $ comp_sched : chr NA
+#>  $ survey_vol : chr "0"
+#>  $ acrd_vol   : chr "0"
+#>  $ comp_vol   : chr "0"
+#>  $ ppm_vol    : chr "0"
+#>  $ waive_vol  : chr "0"
+#>  $ affiliated : chr "0"
+#>  $ multi      : chr "N"
+#>  $ hosp       : chr "N"
+#>  $ nonprof    : chr "N"
+#>  $ temp       : chr "N"
+#>  $ sites      : chr "0"
+#>  $ related_num: chr NA
+#>  $ shared_lab : chr "N"
+#>  $ shared_num : chr NA
+#>  $ fyend      : chr NA
+#>  $ mac_curr   : chr NA
+#>  $ mac_prev   : chr NA
+#>  $ vend       : chr NA
+#>  $ skeleton   : chr "N"
 ```
 
 #### Opt-Out Affidavits
@@ -291,9 +273,9 @@ providers(enid = "O20040610001257")
 #> ✔ Query returned 1 result.
 
 #> # A tibble: 1 × 11
-#>   npi        multi pac   enid  spec  specialty state last  first middle org_name
-#>   <chr>      <chr> <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>  <chr>   
-#> 1 1720098791 N     7618… O200… 12-70 PART B S… GA    <NA>  <NA>  <NA>   IRWIN C…
+#>   first middle last  org_name      state spec  specialty npi   multi pac   enid 
+#>   <chr> <chr>  <chr> <chr>         <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+#> 1 <NA>  <NA>   <NA>  IRWIN COUNTY… GA    12-70 PART B S… 1720… N     7618… O200…
 ```
 
 #### Reassignments
@@ -306,14 +288,40 @@ reassignments(org_pac = 7719037548)
 #> ✔ Query returned 4 results.
 
 #> # A tibble: 4 × 14
-#>   npi     pac   enid  first last  state specialty reassignments org_name org_pac
-#>   <chr>   <chr> <chr> <chr> <chr> <chr> <chr>     <chr>         <chr>    <chr>  
-#> 1 115446… 5294… I201… Broo… Alld… CO    Optometry 4             Eye Cen… 771903…
-#> 2 108362… 6103… I200… Matt… Ehrl… CO    Ophthalm… 4             Eye Cen… 771903…
-#> 3 140794… 1850… I200… Jeff… Olson CO    Ophthalm… 4             Eye Cen… 771903…
-#> 4 193236… 4237… I201… Stef… Smith CO    Optometry 4             Eye Cen… 771903…
-#> # ℹ 4 more variables: org_enid <chr>, org_state <chr>, associations <chr>,
+#>   first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
+#>   <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
+#> 1 Brooks  Alldr… CO    Optometry 1         1154… 5294… I201… Eye Cen… 4         
+#> 2 Matthew Ehrli… CO    Ophthalm… 1         1083… 6103… I200… Eye Cen… 4         
+#> 3 Jeffrey Olson  CO    Ophthalm… 3         1407… 1850… I200… Eye Cen… 4         
+#> 4 Stefan  Smith  CO    Optometry 1         1932… 4237… I201… Eye Cen… 4         
+#> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   type <chr>
+```
+
+#### Revocations
+
+``` r
+revocations(state = "GA")
+```
+
+``` R
+#> ✔ Query returned 213 results.
+
+#> # A tibble: 213 × 12
+#>    enid           npi   first middle last  org_name multi state specialty reason
+#>    <chr>          <chr> <chr> <chr>  <chr> <chr>    <chr> <chr> <chr>     <chr> 
+#>  1 I200312190001… 1881… WALL… S      ANDE… <NA>     N     GA    PRACTITI… 424.5…
+#>  2 I200312260000… 1073… LEO   G      FRAN… <NA>     N     GA    PRACTITI… 424.5…
+#>  3 I200402100005… 1265… ANTH… D      MILLS <NA>     N     GA    PRACTITI… 424.5…
+#>  4 I200402240001… 1851… JEFF… M.     GALL… <NA>     N     GA    PRACTITI… 424.5…
+#>  5 I200404020006… 1528… CURT… <NA>   CHEE… <NA>     N     GA    PRACTITI… 424.5…
+#>  6 I200404130008… 1770… ZAVI… C      ASH   <NA>     N     GA    PRACTITI… 424.5…
+#>  7 I200404300007… 1679… SHAWN E      TYWON <NA>     N     GA    PRACTITI… 424.5…
+#>  8 I200408090002… 1649… ANAND P      LALA… <NA>     N     GA    PRACTITI… 424.5…
+#>  9 I200409010000… 1205… TIFF… D      FORB… <NA>     N     GA    PRACTITI… 424.5…
+#> 10 I200409100000… 1952… STEP… T      BASH… <NA>     N     GA    PRACTITI… 424.5…
+#> # ℹ 203 more rows
+#> # ℹ 2 more variables: date_start <chr>, date_end <chr>
 ```
 
 ------------------------------------------------------------------------

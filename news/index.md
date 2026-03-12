@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9036 (2026-03-12)
+
+- Generalized both API flows into new `exec_*` functions
+
 ## provider 0.0.1.9035 (2026-03-12)
 
 - added
