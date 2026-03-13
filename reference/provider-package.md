@@ -1,4 +1,4 @@
-# provider: Access Public Healthcare Provider Data
+# provider: Tidy Healthcare Provider API Interface
 
 Provides various features to facilitate easy access to publicly
 available healthcare provider data. Includes functions to tidy the data

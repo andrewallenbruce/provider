@@ -9,14 +9,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/andrewallenbruce/provider/blob/main/DESCRIPTION)
 
-Bruce AA (2026). *provider: Access Public Healthcare Provider Data*. R
-package version 0.0.1.9036,
+Bruce AA (2026). *provider: Tidy Healthcare Provider API Interface*. R
+package version 0.0.1.9037,
 <https://andrewallenbruce.github.io/provider/>.
 
     @Manual{,
-      title = {provider: Access Public Healthcare Provider Data},
+      title = {provider: Tidy Healthcare Provider API Interface},
       author = {Andrew Allen Bruce},
       year = {2026},
-      note = {R package version 0.0.1.9036},
+      note = {R package version 0.0.1.9037},
       url = {https://andrewallenbruce.github.io/provider/},
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9037 (2026-03-12)
+
+- a LOT of cleaning up
+
 ## provider 0.0.1.9036 (2026-03-12)
 
 - Generalized both API flows into new `exec_*` functions
@@ -62,8 +66,7 @@
 
 ## provider 0.0.1.9023 (2026-03-09)
 
-- refactored
-  [`laboratories()`](https://andrewallenbruce.github.io/provider/reference/laboratories.md)
+- refactored `laboratories()`
 
 ## provider 0.0.1.9022 (2026-03-09)
 

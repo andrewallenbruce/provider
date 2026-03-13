@@ -36,7 +36,7 @@ Access Current Organizational Provider Data.
 
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
-- [`laboratories()`](https://andrewallenbruce.github.io/provider/reference/laboratories.md)
+- [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
 
 ## Query Modifiers
