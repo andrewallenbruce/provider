@@ -10,8 +10,8 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
 #' @returns A [tibble][tibble::tibble-package]
-#' @examplesIf interactive()
-#' pending(first = "John")
+#' @examplesIf httr2::is_online()
+#' # pending(first = "John")
 #' @autoglobal
 #' @export
 pending <- function(

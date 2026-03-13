@@ -22,7 +22,7 @@ api_provider <- function() {
       "nextUpdateDate"
     )) |>
     collapse::roworderv(c("title", "released")) |>
-    fastplyr::as_tbl()
+    df_tbl_()
 }
 
 #' @noRd
@@ -55,5 +55,5 @@ api_medicare <- function() {
     collapse::sbt(stringr::str_which(title, rex)) |>
     collapse::gv(c("title", "modified", "description", "identifier")) |>
     collapse::roworderv(c("title", "modified")) |>
-    fastplyr::as_tbl()
+    df_tbl_()
 }

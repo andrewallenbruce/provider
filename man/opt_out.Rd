@@ -72,10 +72,12 @@ fee-for-service (Part B).
 }
 
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 opt_out(count = TRUE)
 opt_out(npi = 1043522824)
 opt_out(state = "AK")
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

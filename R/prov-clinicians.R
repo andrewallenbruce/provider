@@ -38,7 +38,7 @@
 #' @param facility_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
-#' @examples
+#' @examplesIf httr2::is_online()
 #' clinicians(count = TRUE)
 #' clinicians(enid = "I20081002000549")
 #' clinicians(first = "ETAN")

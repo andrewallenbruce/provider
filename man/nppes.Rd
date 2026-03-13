@@ -120,13 +120,8 @@ entries require at least two characters to be entered, e.g. \code{"jo*"}
 }
 
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-nppes(npi = 1528060837)
-
-nppes(city   = "CARROLLTON",
-      state  = "GA",
-      zip    = 301173889,
-      entity = 1)
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+# nppes(npi = 1528060837)
 \dontshow{\}) # examplesIf}
 }
 \references{

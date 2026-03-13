@@ -1,5 +1,9 @@
 #' @noRd
 exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
+  # NO INTERNET --> Abort
+  cli_online()
+  check_bool(COUNT)
+
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
     if (COUNT) {
@@ -25,7 +29,7 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_results(URL) |>
-      fastplyr::as_tbl() |>
+      df_tbl_() |>
       map_na_if() |>
       rename_(NM)
 
@@ -68,7 +72,7 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_results(URL) |>
-      fastplyr::as_tbl() |>
+      df_tbl_() |>
       map_na_if() |>
       rename_(NM)
 
@@ -96,13 +100,17 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
     })
 
   parallel_results(URL) |>
-    fastplyr::as_tbl() |>
+    df_tbl_() |>
     map_na_if() |>
     rename_(NM)
 }
 
 #' @noRd
 exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
+  # NO INTERNET --> Abort
+  cli_online()
+  check_bool(COUNT)
+
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
     if (COUNT) {
@@ -115,7 +123,7 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
     cli_no_query()
 
     res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
-      fastplyr::as_tbl() |>
+      df_tbl_() |>
       map_na_if() |>
       rename_(NM)
 
@@ -146,7 +154,7 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_bare(URL) |>
-      fastplyr::as_tbl() |>
+      df_tbl_() |>
       map_na_if() |>
       rename_(NM)
 
@@ -168,7 +176,7 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
     })
 
   parallel_request(URL) |>
-    fastplyr::as_tbl() |>
+    df_tbl_() |>
     map_na_if() |>
     rename_(NM)
 }

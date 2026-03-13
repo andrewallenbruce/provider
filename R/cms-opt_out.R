@@ -39,7 +39,7 @@
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
 #' @param count `<lgl>` Return the dataset's total row count
 #' @return A [tibble][tibble::tibble-package]
-#' @examples
+#' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #' opt_out(npi = 1043522824)
 #' opt_out(state = "AK")
@@ -58,85 +58,23 @@ opt_out <- function(
   order_refer = NULL,
   count = FALSE
 ) {
-  ARG <- params(
-    NPI = npi,
-    `First Name` = first,
-    `Last Name` = last,
-    Specialty = specialty,
-    `First Line Street Address` = address,
-    `City Name` = city,
-    `State Code` = state,
-    `Zip code` = zip,
-    `Eligible to Order and Refer` = cv_lgl(order_refer)
-  )
-
   .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # COUNT --> Return Total Row Count
-  if (!length(ARG)) {
-    if (count) {
-      cli_results(request_rows(paste0(BASE, "/stats?")))
-      return(invisible(NULL))
-    }
-
-    # EMPTY QUERY --> Return First 10 Rows
-    cli_no_query()
-
-    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # QUERY --> Request Count
-  N <- request_rows(url_(
-    paste0(BASE, "/stats?"),
-    opts(size = LIMIT),
-    query2(ARG)
-  ))
-
-  # NO RESULTS or COUNT --> Return Total Row Count
-  if (N == 0L || count) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
-
-  # COUNT BELOW LIMIT --> Single Request
-  if (N <= LIMIT) {
-    cli_results(N)
-
-    URL <- url_(
-      paste0(BASE, "?"),
-      opts(size = LIMIT),
-      query2(ARG)
-    )
-
-    res <- request_bare(URL) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, offset(N, LIMIT))
-
-  URL <- url_(
-    paste0(BASE, "?"),
-    opts(size = LIMIT, offset = "<<i>>"),
-    query2(ARG)
+  exec_cms(
+    ARG = params(
+      NPI = npi,
+      `First Name` = first,
+      `Last Name` = last,
+      Specialty = specialty,
+      `First Line Street Address` = address,
+      `City Name` = city,
+      `State Code` = state,
+      `Zip code` = zip,
+      `Eligible to Order and Refer` = cv_lgl(order_refer)
+    ),
+    BASE = BASE,
+    LIMIT = LIMIT,
+    NM = NM,
+    COUNT = count
   )
-
-  URL <- offset(N, LIMIT, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-
-  parallel_request(URL) |>
-    fastplyr::as_tbl() |>
-    map_na_if() |>
-    rename_(NM)
 }

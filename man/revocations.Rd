@@ -44,9 +44,11 @@ A \link[tibble:tibble-package]{tibble}
 Eligibility to order and refer within Medicare
 }
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
 revocations(state = "GA")
 revocations(specialty = contains("CARDIO"))
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

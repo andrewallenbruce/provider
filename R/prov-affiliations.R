@@ -18,7 +18,7 @@
 #'    unit where the individual provider provides services.
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
-#' @examples
+#' @examplesIf httr2::is_online()
 #' affiliations(count = TRUE)
 #' affiliations()
 #' affiliations(first = "")

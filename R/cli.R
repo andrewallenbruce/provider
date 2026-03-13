@@ -25,3 +25,13 @@ cli_pages <- function(x, p) {
     "Retrieving {.strong {P}} page{?s}..."
   ))
 }
+
+#' @noRd
+cli_online <- function() {
+  if (!httr2::is_online()) {
+    cli::cli_abort(c(
+      "You are not online.",
+      "i" = "Check your internet connection."
+    ))
+  }
+}

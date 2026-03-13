@@ -48,11 +48,13 @@ Enrollment data on individual and organizational providers that are
 actively approved to bill Medicare.
 }
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 providers(count = TRUE)
 providers(enid = "I20040309000221")
 providers(npi = 1417918293)
 providers(pac = 2860305554)
 providers(state = "AK")
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

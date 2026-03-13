@@ -16,43 +16,8 @@
 #'
 #' @section Certification:
 #'
-#' The five CLIA certificate types, all of which are effective for a period of
-#' two years, are as follows, in order of increasing complexity:
-#'
-#' 1. **Waiver**: Issued to a laboratory to perform only waived tests; does
-#'    not waive the lab from all CLIA requirements. Waived tests are laboratory
-#'    tests that are simple to perform. Routine inspections are not conducted
-#'    for waiver labs, although 2% are visited each year to ensure quality
-#'    laboratory testing.
-#'
-#' 2. **Provider-Performed Microscopy Procedures (PPM)**: Issued to a
-#'    laboratory in which a physician, mid-level practitioner or dentist
-#'    performs limited tests that require microscopic examination. PPM tests are
-#'    considered moderate complexity. Waived tests can also be performed under this
-#'    certificate type. There are no routine inspections conducted for PPM labs.
-#'
-#' 3. **Registration**: Initially issued to a laboratory that has applied for
-#'    a Certificate of Compliance or Accreditation, enabling the lab to conduct
-#'    moderate/high complexity testing until the survey is performed and the
-#'    laboratory is found to be in CLIA compliance. Includes PPM and waived
-#'    testing.
-#'
-#' 4. **Compliance**: Allows the laboratory to conduct moderate/high complexity
-#'    testing and is issued after an inspection finds the lab to be in
-#'    compliance with all applicable CLIA requirements. Includes PPM and
-#'    waived testing.
-#'
-#' 5. **Accreditation**: Exactly the same as the Certificate of Compliance,
-#'    except that the laboratory must be accredited by one of the following
-#'    CMS-approved accreditation organizations:
-#'
-#'      - [A2LA](https://a2la.org/): American Association for Laboratory Accreditation
-#'      - [AABB](https://www.aabb.org/): Association for the Advancement of Blood & Biotherapies
-#'      - [AOA](https://osteopathic.org/): American Osteopathic Association
-#'      - [ASHI-HLA](https://www.ashi-hla.org/): American Society for Histocompatibility & Immunogenetics
-#'      - [CAP](https://www.cap.org/): College of American Pathologists
-#'      - [COLA](https://www.cola.org/): Commission on Office Laboratory Accreditation
-#'      - [JCAHO](https://www.jointcommission.org/): The Joint Commission
+#' ```{r, child = "man/md/clia_links.md"}
+#' ```
 #'
 #' @references
 #'
@@ -74,14 +39,15 @@
 #' @param active `<lgl>` Return only active providers
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
+#' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
 #' clia()
 #' clia(ccn = provider:::cdc_labs$ccn)
 #' clia(
-#'    certification = "accreditation",
-#'    city = "Valdosta",
-#'    state = "GA")
+#'   certification = "accreditation",
+#'   city = "Valdosta",
+#'   state = "GA"
+#' )
 #' @autoglobal
 #' @export
 clia <- function(
@@ -95,88 +61,25 @@ clia <- function(
   active = FALSE,
   count = FALSE
 ) {
-  ARG <- params(
-    FAC_NAME = name,
-    PRVDR_NUM = ccn,
-    CRTFCT_TYPE_CD = enum_(certification),
-    CITY_NAME = city,
-    STATE_CD = state,
-    ZIP_CD = zip,
-    CMPLNC_STUS_CD = status,
-    PGM_TRMNTN_CD = lab_active(active)
-  )
-
   .c(BASE, LIMIT, NM) %=% constants(rlang::call_name(rlang::call_match()))
 
-  # COUNT --> Return Total Row Count
-  if (!length(ARG)) {
-    if (count) {
-      cli_results(request_rows(paste0(BASE, "/stats?")))
-      return(invisible(NULL))
-    }
-
-    # EMPTY QUERY --> Return First 10 Rows
-    cli_no_query()
-
-    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # QUERY --> Request Count
-  N <- request_rows(url_(
-    paste0(BASE, "/stats?"),
-    opts(size = LIMIT),
-    query2(ARG)
-  ))
-
-  # NO RESULTS or COUNT --> Return Total Row Count
-  if (N == 0L || count) {
-    cli_results(N)
-    return(invisible(NULL))
-  }
-
-  # COUNT BELOW LIMIT --> Single Request
-  if (N <= LIMIT) {
-    cli_results(N)
-
-    URL <- url_(
-      paste0(BASE, "?"),
-      opts(size = LIMIT),
-      query2(ARG)
-    )
-
-    res <- request_bare(URL) |>
-      fastplyr::as_tbl() |>
-      map_na_if() |>
-      rename_(NM)
-
-    return(res)
-  }
-
-  # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, offset(N, LIMIT))
-
-  URL <- url_(
-    paste0(BASE, "?"),
-    opts(size = LIMIT, offset = "<<i>>"),
-    query2(ARG)
+  exec_cms(
+    ARG = params(
+      FAC_NAME = name,
+      PRVDR_NUM = ccn,
+      CRTFCT_TYPE_CD = enum_(certification),
+      CITY_NAME = city,
+      STATE_CD = state,
+      ZIP_CD = zip,
+      CMPLNC_STUS_CD = status,
+      PGM_TRMNTN_CD = lab_active(active)
+    ),
+    BASE = BASE,
+    LIMIT = LIMIT,
+    NM = NM,
+    COUNT = count
   )
-
-  URL <- offset(N, LIMIT, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-
-  parallel_request(URL) |>
-    fastplyr::as_tbl() |>
-    map_na_if() |>
-    rename_(NM)
 }
-
 
 #' @noRd
 lab_active <- function(active) {
@@ -186,7 +89,6 @@ lab_active <- function(active) {
   if (active) "00" else NULL
 }
 
-#' @autoglobal
 #' @noRd
 recode_clia <- function(x, col) {
   switch(
@@ -220,7 +122,6 @@ recode_clia <- function(x, col) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 fct_region <- function(x) {
   factor(
@@ -241,7 +142,6 @@ fct_region <- function(x) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 fct_owner <- function(x) {
   factor(
@@ -262,7 +162,6 @@ fct_owner <- function(x) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 fct_lab <- function(x) {
   factor(
@@ -278,7 +177,6 @@ fct_lab <- function(x) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 fct_facility <- function(x) {
   factor(
@@ -349,7 +247,6 @@ fct_facility <- function(x) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 fct_term <- function(x) {
   factor(

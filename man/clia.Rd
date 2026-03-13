@@ -63,52 +63,28 @@ program responsibilities.
 
 \section{Certification}{
 
-
-The five CLIA certificate types, all of which are effective for a period of
-two years, are as follows, in order of increasing complexity:
-\enumerate{
-\item \strong{Waiver}: Issued to a laboratory to perform only waived tests; does
-not waive the lab from all CLIA requirements. Waived tests are laboratory
-tests that are simple to perform. Routine inspections are not conducted
-for waiver labs, although 2\% are visited each year to ensure quality
-laboratory testing.
-\item \strong{Provider-Performed Microscopy Procedures (PPM)}: Issued to a
-laboratory in which a physician, mid-level practitioner or dentist
-performs limited tests that require microscopic examination. PPM tests are
-considered moderate complexity. Waived tests can also be performed under this
-certificate type. There are no routine inspections conducted for PPM labs.
-\item \strong{Registration}: Initially issued to a laboratory that has applied for
-a Certificate of Compliance or Accreditation, enabling the lab to conduct
-moderate/high complexity testing until the survey is performed and the
-laboratory is found to be in CLIA compliance. Includes PPM and waived
-testing.
-\item \strong{Compliance}: Allows the laboratory to conduct moderate/high complexity
-testing and is issued after an inspection finds the lab to be in
-compliance with all applicable CLIA requirements. Includes PPM and
-waived testing.
-\item \strong{Accreditation}: Exactly the same as the Certificate of Compliance,
-except that the laboratory must be accredited by one of the following
-CMS-approved accreditation organizations:
 \itemize{
-\item \href{https://a2la.org/}{A2LA}: American Association for Laboratory Accreditation
-\item \href{https://www.aabb.org/}{AABB}: Association for the Advancement of Blood & Biotherapies
-\item \href{https://osteopathic.org/}{AOA}: American Osteopathic Association
-\item \href{https://www.ashi-hla.org/}{ASHI-HLA}: American Society for Histocompatibility & Immunogenetics
-\item \href{https://www.cap.org/}{CAP}: College of American Pathologists
-\item \href{https://www.cola.org/}{COLA}: Commission on Office Laboratory Accreditation
-\item \href{https://www.jointcommission.org/}{JCAHO}: The Joint Commission
-}
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{API: Provider of Services File - Clinical Laboratories}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS: CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC: CLIA}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS: QCOR}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA: Certificates}
+\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA: Certificate Fee Schedule}
+\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA: Certification Guide}
 }
 }
 
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
 clia()
 clia(ccn = provider:::cdc_labs$ccn)
 clia(
-   certification = "accreditation",
-   city = "Valdosta",
-   state = "GA")
+  certification = "accreditation",
+  city = "Valdosta",
+  state = "GA"
+)
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

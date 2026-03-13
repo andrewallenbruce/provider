@@ -1,6 +1,5 @@
 ## code to prepare `provider_type_code` dataset goes here
 
-# Provider Type Code Reference Table
 doc_dict <- tabulapdf::extract_tables(
   file = "https://data.cms.gov/sites/default/files/2025-10/1e42b271-dfe0-4c64-8022-0c507993667e/PPEF_Data_Dictionary.pdf"
 )
@@ -18,7 +17,6 @@ provider_type_code <- doc_dict[3:8] |>
       "PART A PROVIDER - OUTPATIENT PHYSICAL THERAPY/OCCUPATIONAL THERAPY/SPEECH PATHOLOGY SERVICES",
       description
     ),
-    # cat = strtoi(substring(code, 1, 2)),
     type = substring(code, 1, 2),
     spec = substring(code, 4, 5),
     type_description = cheapr::case(
@@ -48,3 +46,9 @@ provider_type_code <- doc_dict[3:8] |>
   collapse::frename(description = spec_description)
 
 usethis::use_data(provider_type_code, overwrite = TRUE)
+
+provider_type_code |>
+  collapse::fcount(type, type_description)
+
+provider_type_code |>
+  collapse::rsplit(~type_description)

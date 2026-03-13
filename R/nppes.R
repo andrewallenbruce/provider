@@ -80,15 +80,8 @@
 #' @param limit `<int>` Maximum number of results to return
 #' @param skip `<int>` Number of results to skip
 #' @returns A [tibble][tibble::tibble-package]
-#' @examplesIf interactive()
-#' nppes(npi = 1528060837)
-#'
-#' nppes(city   = "CARROLLTON",
-#'       state  = "GA",
-#'       zip    = 301173889,
-#'       entity = 1)
-#'
-#' @autoglobal
+#' @examplesIf httr2::is_online()
+#' # nppes(npi = 1528060837)
 #' @export
 nppes <- function(
   npi = NULL,
@@ -105,7 +98,6 @@ nppes <- function(
   limit = 1200L,
   skip = 0L
 ) {
-
   request <- httr2::request(
     "https://npiregistry.cms.hhs.gov/api/?version=2.1"
   ) |>

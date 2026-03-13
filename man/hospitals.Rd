@@ -70,11 +70,13 @@ sub-group types, legal business name, doing-business-as name, organization
 type and address.
 }
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
 hospitals(pac = 6103733050)
 hospitals(state = "GA", reh = TRUE)
 hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
 hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

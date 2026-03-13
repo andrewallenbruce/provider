@@ -19,7 +19,6 @@ Imports:
     cheapr (>= 1.5.0),
     cli (>= 3.6.5),
     collapse (>= 2.1.6),
-    fastplyr (>= 0.9.91),
     httr2 (>= 1.2.2),
     purrr (>= 1.2.1),
     RcppSimdJson (>= 0.1.15),

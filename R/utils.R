@@ -1,4 +1,9 @@
 #' @noRd
+df_tbl_ <- function(x) {
+  `class<-`(cheapr::as_df(x), c("tbl_df", "tbl", "data.frame"))
+}
+
+#' @noRd
 set_args <- function(fn) {
   rlang::fn_fmls(fn) |>
     as.list() |>

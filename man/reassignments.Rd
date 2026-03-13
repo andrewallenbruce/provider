@@ -56,10 +56,12 @@ It provides information regarding the physician and the group practice they
 reassign their billing to, including individual employer association counts.
 }
 \examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 reassignments(count = TRUE)
 reassignments(org_enid = "I20070209000135")
 reassignments(pac = 9830437441)
 reassignments(org_pac = 3173525888)
+\dontshow{\}) # examplesIf}
 }
 \references{
 \itemize{

@@ -51,6 +51,8 @@ NULL
 #' greater_than(0.125, or_equal = TRUE)
 #' @export
 greater_than <- function(x, or_equal = FALSE) {
+  check_number_decimal(x)
+  check_bool(or_equal)
   new_modifier(
     operator = ifelse(!or_equal, ">", ">="),
     value = x
@@ -63,6 +65,8 @@ greater_than <- function(x, or_equal = FALSE) {
 #' less_than(0.125, or_equal = TRUE)
 #' @export
 less_than <- function(x, or_equal = FALSE) {
+  check_number_decimal(x)
+  check_bool(or_equal)
   new_modifier(
     operator = ifelse(!or_equal, "<", "<="),
     value = x
@@ -75,6 +79,12 @@ less_than <- function(x, or_equal = FALSE) {
 #' between(c(0.125, 2), negate = TRUE)
 #' @export
 between <- function(x, negate = FALSE) {
+  if (!rlang::is_bare_numeric(x)) {
+    cli::cli_abort(c(
+      "{.arg x} must be a numeric vector, not {.obj_type_friendly {x}}"
+    ))
+  }
+  check_bool(negate)
   new_modifier(
     operator = ifelse(!negate, "BETWEEN", "NOT+BETWEEN"),
     value = collapse::frange(x)

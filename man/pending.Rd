@@ -18,8 +18,8 @@ A \link[tibble:tibble-package]{tibble}
 Providers with pending Medicare enrollment applications.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-pending(first = "John")
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+# pending(first = "John")
 \dontshow{\}) # examplesIf}
 }
 \references{
