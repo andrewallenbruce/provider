@@ -1,4 +1,16 @@
 #' @noRd
+cv_lgl <- function(x = NULL) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+  cheapr::val_match(
+    x,
+    TRUE ~ "Y",
+    FALSE ~ "N"
+  )
+}
+
+#' @noRd
 enum_ <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)

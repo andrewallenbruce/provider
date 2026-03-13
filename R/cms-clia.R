@@ -55,13 +55,9 @@
 #'      - [JCAHO](https://www.jointcommission.org/): The Joint Commission
 #'
 #' @references
-#'   - [API: Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
-#'   - [CMS: CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
-#'   - [CDC: CLIA](https://www.cdc.gov/clia/php/about/index.html)
-#'   - [CMS: QCOR](https://qcor.cms.gov/main.jsp)
-#'   - [CLIA: Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
-#'   - [CLIA: Certificate Fee Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
-#'   - [CLIA: Certification Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)
+#'
+#' ```{r, child = "man/md/clia_links.md"}
+#' ```
 #'
 #' @param name `<chr>` Provider or clinical laboratory's name
 #' @param ccn `<chr>` 10-character CLIA number
@@ -79,16 +75,16 @@
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
-#' laboratories(count = TRUE)
-#' laboratories()
-#' laboratories(ccn = provider:::cdc_labs$ccn)
-#' laboratories(
+#' clia(count = TRUE)
+#' clia()
+#' clia(ccn = provider:::cdc_labs$ccn)
+#' clia(
 #'    certification = "accreditation",
 #'    city = "Valdosta",
 #'    state = "GA")
 #' @autoglobal
 #' @export
-laboratories <- function(
+clia <- function(
   name = NULL,
   ccn = NULL,
   certification = NULL,

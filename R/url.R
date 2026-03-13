@@ -1,16 +1,4 @@
 #' @noRd
-cv_lgl <- function(x = NULL) {
-  if (is.null(x)) {
-    return(NULL)
-  }
-  cheapr::val_match(
-    x,
-    TRUE ~ "Y",
-    FALSE ~ "N"
-  )
-}
-
-#' @noRd
 offset <- function(n, limit, which = "size") {
   if (n == 0L) {
     return(0L)
@@ -81,7 +69,7 @@ uuid <- function(endpoint) {
     opt_out = m("9887a515-7552-4693-bf58-735c77af46d7"),
     order_refer = m("c99b5865-1119-4436-bb80-c5af2773ea1f"),
     hospitals = m("f6f6505c-e8b0-4d57-b258-e2b94133aaf2"),
-    laboratories = m("d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16"),
+    clia = m("d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16"),
     reassignments = m("20f51cff-4137-4f3a-b6b7-bfc9ad57983b"),
     rhcs = list(
       owner = m("ab03c9bc-0c22-4ca4-b032-21dd3408210d"),
@@ -97,7 +85,7 @@ uuid <- function(endpoint) {
     ),
     revocations = m("a6496a7d-4e19-479a-a9ad-d4c0a49e07c3"),
     transparency = m("6a3aa708-3c9d-411a-a1a4-e046d3ade"),
-    quality_payment = m("7adb8b1b-b85c-4ed3-b314-064776e50180"),
+    quality = m("7adb8b1b-b85c-4ed3-b314-064776e50180"),
     utilization = list(
       geography = m("6fea9d79-0129-4e4c-b1b8-23cd86a4f435"),
       provider = m("8889d81e-2ee7-448f-8713-f071038289b5"),

@@ -1,0 +1,7 @@
+   - [API: Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+   - [CMS: CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
+   - [CDC: CLIA](https://www.cdc.gov/clia/php/about/index.html)
+   - [CMS: QCOR](https://qcor.cms.gov/main.jsp)
+   - [CLIA: Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
+   - [CLIA: Certificate Fee Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
+   - [CLIA: Certification Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)

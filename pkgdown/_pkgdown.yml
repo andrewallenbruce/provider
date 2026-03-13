@@ -86,8 +86,8 @@ navbar:
         href: https://www.linkedin.com/in/andrewallenbruce
 
 reference:
-
 - title: Endpoints
+
 - subtitle: General
   desc: >
     Access Current Provider Data.
@@ -110,7 +110,7 @@ reference:
     Access Current Organizational Provider Data.
   contents:
   - hospitals
-  - laboratories
+  - clia
 
 - title: Query Modifiers
   contents:

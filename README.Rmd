@@ -8,12 +8,14 @@ editor_options:
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = FALSE,
+  collapse  = TRUE,
   echo      = TRUE,
   message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
-  comment   = "#>"
+  comment   = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
   )
 ```
 

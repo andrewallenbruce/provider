@@ -90,7 +90,7 @@ renames <- function(endpoint) {
       `SUBGROUP - OTHER` = "sub_other",
       `SUBGROUP - OTHER TEXT` = "sub_otext"
     ),
-    laboratories = c(
+    clia = c(
       FAC_NAME = "name_1",
       ADDTNL_FAC_NAME = "name_2",
       PRVDR_NUM = "ccn",
@@ -99,7 +99,7 @@ renames <- function(endpoint) {
       CHOW_DT = "chow_date",
       CHOW_PRIOR_DT = "chow_prev",
       ACPTBL_POC_SW = "pos",
-      CMPLNC_STUS_CD = "status", # A=IN COMPLIANCE, B=NOT IN COMPLIANCE
+      CMPLNC_STUS_CD = "status",
       ST_ADR = "add_1",
       ADDTNL_ST_ADR = "add_2",
       PHNE_NUM = "phone_1",
@@ -169,32 +169,10 @@ renames <- function(endpoint) {
       SHR_LAB_SW = "shared_lab",
       SHARED_LAB_XREF_NUMBER = "shared_num",
       FY_END_MO_DAY_CD = "fyend",
-
-      # PRVDR_CTGRY_CD = "prv_cat", # 22=CLIA Laboratory
-      # PRVDR_CTGRY_SBTYP_CD = "prv_type", # 01=CLIA88 Laboratory
-      # CURRENT_CLIA_LAB_CLSFCTN_CD = "cls0",
-      # CLIA_LAB_CLASSIFICATION_CD_1 = "cls1",
-      # CLIA_LAB_CLASSIFICATION_CD_2 = "cls2",
-      # CLIA_LAB_CLASSIFICATION_CD_3 = "cls3",
-      # CLIA_LAB_CLASSIFICATION_CD_4 = "cls4",
-      # CLIA_LAB_CLASSIFICATION_CD_5 = "cls5",
-      # CLIA_LAB_CLASSIFICATION_CD_6 = "cls6",
-      # CLIA_LAB_CLASSIFICATION_CD_7 = "cls7",
-      # CLIA_LAB_CLASSIFICATION_CD_8 = "cls8",
-      # CLIA_LAB_CLASSIFICATION_CD_9 = "cls9",
-      # CLIA_LAB_CLASSIFICATION_CD_10 = "cls10",
-      # AFFILIATED_PROVIDER_NUMBER_1 = "aff_1",
-      # AFFILIATED_PROVIDER_NUMBER_2 = "aff_2",
-      # AFFILIATED_PROVIDER_NUMBER_3 = "aff_3",
-      # AFFILIATED_PROVIDER_NUMBER_4 = "aff_4",
-      # AFFILIATED_PROVIDER_NUMBER_5 = "aff_5",
-      # AFFILIATED_PROVIDER_NUMBER_6 = "aff_6",
-      # AFFILIATED_PROVIDER_NUMBER_7 = "aff_7",
-      # AFFILIATED_PROVIDER_NUMBER_8 = "aff_8",
       INTRMDRY_CARR_CD = "mac_curr",
       INTRMDRY_CARR_PRIOR_CD = "mac_prev",
       MDCD_VNDR_NUM = "vend",
-      SKLTN_REC_SW = "skeleton" # Only provider categories 01, 17, 19, 21, 22 can have skeleton providers
+      SKLTN_REC_SW = "skeleton"
     ),
     providers = c(
       FIRST_NAME = "first",

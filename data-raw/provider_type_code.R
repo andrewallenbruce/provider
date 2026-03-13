@@ -1,3 +1,5 @@
+## code to prepare `provider_type_code` dataset goes here
+
 # Provider Type Code Reference Table
 doc_dict <- tabulapdf::extract_tables(
   file = "https://data.cms.gov/sites/default/files/2025-10/1e42b271-dfe0-4c64-8022-0c507993667e/PPEF_Data_Dictionary.pdf"
@@ -8,9 +10,7 @@ provider_type_code <- doc_dict[3:8] |>
     collapse::ss(x, j = 1:2) |>
       rlang::set_names(c("code", "description"))
   }) |>
-  collapse::rowbind()
-
-provider_type_code <- provider_type_code |>
+  collapse::rowbind() |>
   collapse::sbt(!is.na(code)) |>
   collapse::mtt(
     description = cheapr::if_else_(

@@ -1,6 +1,6 @@
 Type: Package
 Package: provider
-Title: Access Public Healthcare Provider Data
+Title: Tidy Healthcare Provider API Interface
 Version: 0.0.1.9036
 Authors@R: 
     person(c("Andrew", "Allen"), "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
@@ -29,7 +29,7 @@ Imports:
 Suggests: 
     knitr,
     roxyglobals (>= 1.0.0),
-    testthat (>= 3.0.0)
+    testthat (>= 3.3.2)
 VignetteBuilder: 
     knitr
 Config/Needs/website: gt

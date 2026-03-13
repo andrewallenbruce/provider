@@ -20,13 +20,13 @@ dt {
   color: rgb(38, 38, 38);
   text-decoration: underline;
   text-decoration-style: solid;
-  text-underline-offset: 4px;
+  text-underline-offset: 6px;
   font-family: monospace;
   border-top-style: dotted;
-  border-top-width: 1px;
+  border-top-width: 5px;
   border-top-color: gray;
-  margin-bottom: 7px;
-  padding-top: 7px;
+  margin-bottom: 10px;
+  padding-top: 10px;
 }
 
 img {
