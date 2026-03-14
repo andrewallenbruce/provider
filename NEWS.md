@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9041 (2026-03-14)
+
+* tweaking `exec_*` functionality
+
+
 # provider 0.0.1.9040 (2026-03-14)
 
 * `pending()` now queries both endpoints
