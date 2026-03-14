@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9040 (2026-03-14)
+
+* `pending()` now queries both endpoints
+
+
 # provider 0.0.1.9039 (2026-03-14)
 
 * added `transparency()` endpoint
