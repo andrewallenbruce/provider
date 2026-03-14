@@ -20,10 +20,10 @@ dt {
   color: rgb(38, 38, 38);
   text-decoration: underline;
   text-decoration-style: solid;
-  text-underline-offset: 6px;
+  text-underline-offset: 2px;
   font-family: monospace;
   border-top-style: dotted;
-  border-top-width: 5px;
+  border-top-width: 2px;
   border-top-color: gray;
   margin-bottom: 10px;
   padding-top: 10px;

@@ -3,7 +3,6 @@ plus <- function(x) {
   gsub(" ", "+", x, fixed = TRUE)
 }
 
-#' @autoglobal
 #' @noRd
 format_query <- function(x, N) {
   MOD <- is_modifier(x)
@@ -27,7 +26,6 @@ format_query <- function(x, N) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 format_query2 <- function(x, N) {
   MOD <- is_modifier(x)
@@ -55,7 +53,6 @@ format_query2 <- function(x, N) {
   )
 }
 
-#' @autoglobal
 #' @noRd
 query <- function(args) {
   purrr::imap(args, format_query) |>
@@ -67,7 +64,6 @@ query <- function(args) {
     (\(x) paste0(x, collapse = "&"))()
 }
 
-#' @autoglobal
 #' @noRd
 query2 <- function(args) {
   purrr::imap(args, format_query2) |>

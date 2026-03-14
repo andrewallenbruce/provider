@@ -1,4 +1,4 @@
-#' @autoglobal
+#' @noRd
 rename_ <- function(x, nm) {
   if (is.null(nm)) {
     return(x)

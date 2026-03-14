@@ -79,11 +79,7 @@ less_than <- function(x, or_equal = FALSE) {
 #' between(c(0.125, 2), negate = TRUE)
 #' @export
 between <- function(x, negate = FALSE) {
-  if (!rlang::is_bare_numeric(x)) {
-    cli::cli_abort(c(
-      "{.arg x} must be a numeric vector, not {.obj_type_friendly {x}}"
-    ))
-  }
+  check_numeric(x)
   check_bool(negate)
   new_modifier(
     operator = ifelse(!negate, "BETWEEN", "NOT+BETWEEN"),
@@ -96,6 +92,7 @@ between <- function(x, negate = FALSE) {
 #' starts_with("foo")
 #' @export
 starts_with <- function(x) {
+  check_character(x)
   new_modifier(
     operator = "STARTS_WITH",
     value = x
@@ -107,6 +104,7 @@ starts_with <- function(x) {
 #' ends_with("bar")
 #' @export
 ends_with <- function(x) {
+  check_character(x)
   new_modifier(
     operator = "ENDS_WITH",
     value = x
@@ -118,6 +116,7 @@ ends_with <- function(x) {
 #' contains("baz")
 #' @export
 contains <- function(x) {
+  check_character(x)
   new_modifier(
     operator = "CONTAINS",
     value = x
@@ -151,6 +150,7 @@ not_equal <- function(x) {
 #' any_of(state.abb[10:15])
 #' @export
 any_of <- function(x) {
+  check_character(x)
   new_modifier(
     operator = "IN",
     value = x
@@ -162,6 +162,7 @@ any_of <- function(x) {
 #' none_of(state.abb[1:5])
 #' @export
 none_of <- function(x) {
+  check_character(x)
   new_modifier(
     operator = "NOT+IN",
     value = x

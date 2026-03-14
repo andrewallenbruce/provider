@@ -23,7 +23,7 @@ map_na_if <- function(i) {
 }
 
 #' @noRd
-comb_ <- function(a, b, sep = "") {
+combine_ <- function(a, b, sep = "") {
   cheapr::if_else_(
     !cheapr::is_na(b),
     cheapr::paste_(a, b, sep = sep),
@@ -56,13 +56,11 @@ is_numeric <- function(x) {
   !has_letter(x)
 }
 
-#' @autoglobal
 #' @noRd
 as_date <- function(x, ..., fmt = "%Y-%m-%d") {
   as.Date(x, ..., format = fmt)
 }
 
-#' @autoglobal
 #' @noRd
 to_string <- function(x) {
   purrr::map_chr(x, \(i) toString(unlist_(i), width = NULL))

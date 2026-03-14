@@ -103,7 +103,6 @@ hospitals <- function(
 #' @returns A `<subgroups>` object
 #' @examplesIf FALSE
 #' subgroups(acute = TRUE, rehab = TRUE)
-#' @autoglobal
 #' @keywords internal
 #' @export
 subgroups <- function(

@@ -35,3 +35,12 @@ cli_online <- function() {
     ))
   }
 }
+
+#' @noRd
+check_numeric <- function(x) {
+  if (!rlang::is_bare_numeric(x)) {
+    cli::cli_abort(c(
+      "{.arg x} must be a numeric vector, not {.obj_type_friendly {x}}"
+    ))
+  }
+}
