@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
   )
+library(tibble)
 ```
 
 # <b>provider</b> <a href="https://andrewallenbruce.github.io/provider/"><img src="man/figures/logo.svg" align="right" height="139" alt="provider website" /></a>
@@ -65,19 +66,19 @@ affiliations(facility_ccn = 370781)
 #### National Provider Catalog
 
 ```{r}
-clinicians(npi = 1932365699) |> str()
+clinicians(npi = 1932365699)
 ```
 
 #### Hospitals
 
 ```{r}
-hospitals(npi = 1720098791) |> str()
+hospitals(npi = 1720098791)
 ```
 
 #### CLIA Laboratories
 
 ```{r}
-laboratories(ccn = "11D0265516") |> str()
+clia(ccn = "11D0265516")
 ```
 
 #### Opt-Out Affidavits
