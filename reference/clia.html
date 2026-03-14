@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9038</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,38 +135,14 @@ program responsibilities.</p>
     <h2 id="certification">Certification<a class="anchor" aria-label="anchor" href="#certification"></a></h2>
 
 
-
-<p>The five CLIA certificate types, all of which are effective for a period of
-two years, are as follows, in order of increasing complexity:</p><ol><li><p><strong>Waiver</strong>: Issued to a laboratory to perform only waived tests; does
-not waive the lab from all CLIA requirements. Waived tests are laboratory
-tests that are simple to perform. Routine inspections are not conducted
-for waiver labs, although 2% are visited each year to ensure quality
-laboratory testing.</p></li>
-<li><p><strong>Provider-Performed Microscopy Procedures (PPM)</strong>: Issued to a
-laboratory in which a physician, mid-level practitioner or dentist
-performs limited tests that require microscopic examination. PPM tests are
-considered moderate complexity. Waived tests can also be performed under this
-certificate type. There are no routine inspections conducted for PPM labs.</p></li>
-<li><p><strong>Registration</strong>: Initially issued to a laboratory that has applied for
-a Certificate of Compliance or Accreditation, enabling the lab to conduct
-moderate/high complexity testing until the survey is performed and the
-laboratory is found to be in CLIA compliance. Includes PPM and waived
-testing.</p></li>
-<li><p><strong>Compliance</strong>: Allows the laboratory to conduct moderate/high complexity
-testing and is issued after an inspection finds the lab to be in
-compliance with all applicable CLIA requirements. Includes PPM and
-waived testing.</p></li>
-<li><p><strong>Accreditation</strong>: Exactly the same as the Certificate of Compliance,
-except that the laboratory must be accredited by one of the following
-CMS-approved accreditation organizations:</p><ul><li><p><a href="https://a2la.org/" class="external-link">A2LA</a>: American Association for Laboratory Accreditation</p></li>
-<li><p><a href="https://www.aabb.org/" class="external-link">AABB</a>: Association for the Advancement of Blood &amp; Biotherapies</p></li>
-<li><p><a href="https://osteopathic.org/" class="external-link">AOA</a>: American Osteopathic Association</p></li>
-<li><p><a href="https://www.ashi-hla.org/" class="external-link">ASHI-HLA</a>: American Society for Histocompatibility &amp; Immunogenetics</p></li>
-<li><p><a href="https://www.cap.org/" class="external-link">CAP</a>: College of American Pathologists</p></li>
-<li><p><a href="https://www.cola.org/" class="external-link">COLA</a>: Commission on Office Laboratory Accreditation</p></li>
-<li><p><a href="https://www.jointcommission.org/" class="external-link">JCAHO</a>: The Joint Commission</p></li>
-</ul></li>
-</ol></div>
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">API: Provider of Services File - Clinical Laboratories</a></p></li>
+<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS: CLIA</a></p></li>
+<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC: CLIA</a></p></li>
+<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS: QCOR</a></p></li>
+<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CLIA: Certificates</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf" class="external-link">CLIA: Certificate Fee Schedule</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf" class="external-link">CLIA: Certification Guide</a></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
@@ -224,9 +200,10 @@ CMS-approved accreditation organizations:</p><ul><li><p><a href="https://a2la.or
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_action &lt;chr&gt;, orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eff_date &lt;chr&gt;, mail_date &lt;chr&gt;, term_date &lt;chr&gt;, a2la_cred &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">clia</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   certification <span class="op">=</span> <span class="st">"accreditation"</span>,</span></span>
-<span class="r-in"><span>   city <span class="op">=</span> <span class="st">"Valdosta"</span>,</span></span>
-<span class="r-in"><span>   state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  certification <span class="op">=</span> <span class="st">"accreditation"</span>,</span></span>
+<span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Valdosta"</span>,</span></span>
+<span class="r-in"><span>  state <span class="op">=</span> <span class="st">"GA"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">14</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 82</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2</span>

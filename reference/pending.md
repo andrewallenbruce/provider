@@ -33,7 +33,5 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
-pending(first = "John")
-}
+# pending(first = "John")
 ```

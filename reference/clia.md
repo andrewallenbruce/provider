@@ -85,54 +85,24 @@ program responsibilities.
 
 ## Certification
 
-The five CLIA certificate types, all of which are effective for a period
-of two years, are as follows, in order of increasing complexity:
+- [API: Provider of Services File - Clinical
+  Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 
-1.  **Waiver**: Issued to a laboratory to perform only waived tests;
-    does not waive the lab from all CLIA requirements. Waived tests are
-    laboratory tests that are simple to perform. Routine inspections are
-    not conducted for waiver labs, although 2% are visited each year to
-    ensure quality laboratory testing.
+- [CMS:
+  CLIA](https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments)
 
-2.  **Provider-Performed Microscopy Procedures (PPM)**: Issued to a
-    laboratory in which a physician, mid-level practitioner or dentist
-    performs limited tests that require microscopic examination. PPM
-    tests are considered moderate complexity. Waived tests can also be
-    performed under this certificate type. There are no routine
-    inspections conducted for PPM labs.
+- [CDC: CLIA](https://www.cdc.gov/clia/php/about/index.html)
 
-3.  **Registration**: Initially issued to a laboratory that has applied
-    for a Certificate of Compliance or Accreditation, enabling the lab
-    to conduct moderate/high complexity testing until the survey is
-    performed and the laboratory is found to be in CLIA compliance.
-    Includes PPM and waived testing.
+- [CMS: QCOR](https://qcor.cms.gov/main.jsp)
 
-4.  **Compliance**: Allows the laboratory to conduct moderate/high
-    complexity testing and is issued after an inspection finds the lab
-    to be in compliance with all applicable CLIA requirements. Includes
-    PPM and waived testing.
+- [CLIA:
+  Certificates](https://www.cdc.gov/labs/clia-certificates/index.html)
 
-5.  **Accreditation**: Exactly the same as the Certificate of
-    Compliance, except that the laboratory must be accredited by one of
-    the following CMS-approved accreditation organizations:
+- [CLIA: Certificate Fee
+  Schedule](https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf)
 
-    - [A2LA](https://a2la.org/): American Association for Laboratory
-      Accreditation
-
-    - [AABB](https://www.aabb.org/): Association for the Advancement of
-      Blood & Biotherapies
-
-    - [AOA](https://osteopathic.org/): American Osteopathic Association
-
-    - [ASHI-HLA](https://www.ashi-hla.org/): American Society for
-      Histocompatibility & Immunogenetics
-
-    - [CAP](https://www.cap.org/): College of American Pathologists
-
-    - [COLA](https://www.cola.org/): Commission on Office Laboratory
-      Accreditation
-
-    - [JCAHO](https://www.jointcommission.org/): The Joint Commission
+- [CLIA: Certification
+  Guide](https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf)
 
 ## References
 
@@ -201,9 +171,10 @@ clia(ccn = provider:::cdc_labs$ccn)
 #> #   cert_action <chr>, orig_date <chr>, apl_date <chr>, cert_date <chr>,
 #> #   eff_date <chr>, mail_date <chr>, term_date <chr>, a2la_cred <chr>, …
 clia(
-   certification = "accreditation",
-   city = "Valdosta",
-   state = "GA")
+  certification = "accreditation",
+  city = "Valdosta",
+  state = "GA"
+)
 #> ✔ Query returned 14 results.
 #> # A tibble: 14 × 82
 #>    name_1 name_2 ccn   xref  chow_n chow_date chow_prev pos   status add_1 add_2

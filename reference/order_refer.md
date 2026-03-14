@@ -88,32 +88,29 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ✔ Query returned 1,996,162 results.
-
+#> ✔ Query returned 1,997,403 results.
 order_refer(npi = 1003026055)
 #> ✔ Query returned 1 result.
 #> # A tibble: 1 × 8
 #>   npi        first   last   part_b dme   hha   pmd   hospice
 #>   <chr>      <chr>   <chr>  <chr>  <chr> <chr> <chr> <chr>  
 #> 1 1003026055 RADHIKA PHADKE Y      Y     Y     Y     Y      
-
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ Query returned 134 results.
-#> # A tibble: 134 × 8
+#> ✔ Query returned 135 results.
+#> # A tibble: 135 × 8
 #>    npi        first    last  part_b dme   hha   pmd   hospice
 #>    <chr>      <chr>    <chr> <chr>  <chr> <chr> <chr> <chr>  
-#>  1 1134237498 JENNIFER SMITH Y      Y     Y     Y     Y      
-#>  2 1336652726 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  3 1811518566 JENNIFER SMITH Y      Y     N     N     N      
-#>  4 1992162556 JENNIFER SMITH Y      Y     N     N     N      
-#>  5 1396151817 JENNIFER SMITH Y      Y     Y     N     Y      
-#>  6 1427168814 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  7 1588291215 JENNIFER SMITH Y      Y     Y     Y     Y      
-#>  8 1841730512 JENNIFER SMITH Y      Y     Y     Y     N      
-#>  9 1053842450 JENNIFER SMITH Y      Y     Y     Y     Y      
-#> 10 1063080125 JENNIFER SMITH Y      Y     Y     Y     N      
-#> # ℹ 124 more rows
-
+#>  1 1669767083 JENNIFER SMITH Y      Y     Y     Y     Y      
+#>  2 1053340471 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  3 1013227818 JENNIFER SMITH Y      Y     N     N     N      
+#>  4 1497981047 JENNIFER SMITH Y      Y     N     N     N      
+#>  5 1497270268 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  6 1386871028 JENNIFER SMITH Y      Y     Y     Y     Y      
+#>  7 1881115061 JENNIFER SMITH Y      Y     N     N     N      
+#>  8 1184142903 JENNIFER SMITH Y      Y     Y     Y     N      
+#>  9 1598994923 JENNIFER SMITH Y      Y     Y     Y     N      
+#> 10 1497233613 JENNIFER SMITH Y      Y     Y     Y     N      
+#> # ℹ 125 more rows
 order_refer(
   part_b = TRUE,
   dme = TRUE,

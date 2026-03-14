@@ -156,12 +156,5 @@ characters to be entered, e.g. `"jo*"`
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
-nppes(npi = 1528060837)
-
-nppes(city   = "CARROLLTON",
-      state  = "GA",
-      zip    = 301173889,
-      entity = 1)
-}
+# nppes(npi = 1528060837)
 ```
