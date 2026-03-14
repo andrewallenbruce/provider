@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9038 (2026-03-14)
+
+* added type checks to modifier function args
+* API-calling functions now use `exec_cms()` or `exec_prov()` framework
+* API-calling examples now call `httr2::is_online()`
+
+
 # provider 0.0.1.9037 (2026-03-12)
 
 * a LOT of cleaning up
