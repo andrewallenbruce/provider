@@ -49,8 +49,8 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#>          npi first    last part_b dme hha pmd hospice
-#> 1 1043477615 SARAH HUSSAIN      Y   Y   Y   Y       Y
+#>   first    last        npi part_b dme hha pmd hospice
+#> 1 SARAH HUSSAIN 1043477615      Y   Y   Y   Y       Y
 ```
 
   

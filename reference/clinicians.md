@@ -127,18 +127,18 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ✔ Query returned 2,843,790 results.
+#> ✔ `clinicians()` returned 2,843,790 results.
 clinicians(enid = "I20081002000549")
-#> ✔ Query returned 1 result.
+#> ✔ `clinicians()` returned 1 result.
 #> # A tibble: 1 × 25
-#>   first   middle last     suffix gender cred  school year  specialty  spec_other
-#>   <chr>   <chr>  <chr>    <chr>  <chr>  <chr> <chr>  <chr> <chr>      <chr>     
-#> 1 DOROTHY E      MCCURLEY NA     F      AU    OTHER  2008  QUALIFIED… NA        
-#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
-#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
+#>   first middle last  suffix gender cred  school year  specialty spec_other npi  
+#>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
+#> 1 DORO… E      MCCU… NA     F      AU    OTHER  2008  QUALIFIE… NA         1407…
+#> # ℹ 14 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, city <chr>, state <chr>,
+#> #   zip <chr>, phone <chr>, ind <chr>, grp <chr>, tlh <chr>
 clinicians(first = "ETAN")
-#> ✔ Query returned 11 results.
+#> ✔ `clinicians()` returned 11 results.
 #> # A tibble: 11 × 25
 #>    first middle last     suffix gender cred  school   year  specialty spec_other
 #>    <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
@@ -153,11 +153,11 @@ clinicians(first = "ETAN")
 #>  9 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
 #> 10 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
 #> 11 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
-#> # ℹ 15 more variables: facility_name <chr>, npi <chr>, pac <chr>, enid <chr>,
-#> #   org_pac <chr>, org_mems <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tele <chr>
+#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tlh <chr>
 clinicians(city = starts_with("At"), state = "GA", year = 2020, count = TRUE)
-#> ✔ Query returned 651 results.
+#> ✔ `clinicians()` returned 651 results.
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#> ✔ Query returned 351 results.
+#> ✔ `clinicians()` returned 351 results.
 ```

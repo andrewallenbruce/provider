@@ -68,7 +68,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 affiliations(count = TRUE)
-#> ✔ Query returned 1,621,297 results.
+#> ✔ `affiliations()` returned 1,621,297 results.
 affiliations()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 9
@@ -85,9 +85,9 @@ affiliations()
 #>  9 DAE     KIM   NA     NA     1003… 4082… Hospital      370202       NA        
 #> 10 DAE     KIM   NA     NA     1003… 4082… Hospital      370057       NA        
 affiliations(first = "")
-#> ✔ Query returned 0 results.
+#> ✔ `affiliations()` returned 0 results.
 affiliations(facility_ccn = "33Z302")
-#> ✔ Query returned 4 results.
+#> ✔ `affiliations()` returned 4 results.
 #> # A tibble: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>   <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
@@ -96,7 +96,7 @@ affiliations(facility_ccn = "33Z302")
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(parent_ccn = 331302)
-#> ✔ Query returned 4 results.
+#> ✔ `affiliations()` returned 4 results.
 #> # A tibble: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>   <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
@@ -105,7 +105,7 @@ affiliations(parent_ccn = 331302)
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(facility_ccn = 331302)
-#> ✔ Query returned 206 results.
+#> ✔ `affiliations()` returned 206 results.
 #> # A tibble: 206 × 9
 #>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     

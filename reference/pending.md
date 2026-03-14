@@ -37,20 +37,38 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+pending(count = TRUE)
+#> ✔ `pending()` returned 9,899 results.
 pending(first = "John")
-#> ✔ Query returned 41 results.
-#> # A tibble: 41 × 3
-#>    npi        first last   
-#>    <chr>      <chr> <chr>  
-#>  1 1881791739 JOHN  ADAMS  
-#>  2 1255696514 JOHN  BAUMANN
-#>  3 1841280963 JOHN  BIGBEE 
-#>  4 1619996378 JOHN  BODDEN 
-#>  5 1902873300 JOHN  BRET   
-#>  6 1588744569 JOHN  BRUNO  
-#>  7 1861142556 JOHN  BURKE  
-#>  8 1306817531 JOHN  COMBS  
-#>  9 1376571554 JOHN  FLYNN  
-#> 10 1689774804 JOHN  FREEMAN
-#> # ℹ 31 more rows
+#> ✔ `pending()` returned 66 results.
+#> # A tibble: 66 × 4
+#>    prov_type first last    npi       
+#>    <fct>     <chr> <chr>   <chr>     
+#>  1 Physician JOHN  ADAMS   1881791739
+#>  2 Physician JOHN  BAUMANN 1255696514
+#>  3 Physician JOHN  BIGBEE  1841280963
+#>  4 Physician JOHN  BODDEN  1619996378
+#>  5 Physician JOHN  BRET    1902873300
+#>  6 Physician JOHN  BRUNO   1588744569
+#>  7 Physician JOHN  BURKE   1861142556
+#>  8 Physician JOHN  COMBS   1306817531
+#>  9 Physician JOHN  FLYNN   1376571554
+#> 10 Physician JOHN  FREEMAN 1689774804
+#> # ℹ 56 more rows
+pending(first = starts_with("J"))
+#> ✔ `pending()` returned 1,052 results.
+#> # A tibble: 1,052 × 4
+#>    prov_type first     last     npi       
+#>    <fct>     <chr>     <chr>    <chr>     
+#>  1 Physician J. ROBERT MILES    1619975190
+#>  2 Physician JABEEN    KHAN     1679770663
+#>  3 Physician JACE      FOSS     1306268586
+#>  4 Physician JACINTA   MOORE    1922894955
+#>  5 Physician JACK      GREIDER  1316038615
+#>  6 Physician JACK      SHUMATE  1558366955
+#>  7 Physician JACKIE    KOTECKI  1851128441
+#>  8 Physician JACKIE    MULLINS  1972535805
+#>  9 Physician JACKLEEN  GLODENER 1780266270
+#> 10 Physician JACOB     ARNAUD   1952824120
+#> # ℹ 1,042 more rows
 ```

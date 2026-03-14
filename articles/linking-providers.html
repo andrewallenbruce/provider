@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9039</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9040</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@
 </h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">5</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `affiliations()` returned <span style="font-weight: bold;">5</span> results.</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pac</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -122,12 +122,12 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Hospital      471307       <span style="color: #BB0000;">NA</span></span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">facility_ccn</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">5</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">5</span> results.</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; tibble [5 × 39] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ org_name      : chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "ALICE HYDE MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" ...</span></span>
-<span><span class="co">#&gt;  $ dba_name      : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" "THE UNIVERSITY OF VERMONT HEALTH NETWORK-ALICE HYDE MEDICAL CENTER" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" ...</span></span>
+<span><span class="co">#&gt;  $ org_dba       : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" "THE UNIVERSITY OF VERMONT HEALTH NETWORK-ALICE HYDE MEDICAL CENTER" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" ...</span></span>
 <span><span class="co">#&gt;  $ enid          : chr [1:5] "O20120110000201" "O20230512000344" "O20050809000650" "O20021111000009" ...</span></span>
 <span><span class="co">#&gt;  $ enid_state    : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
 <span><span class="co">#&gt;  $ spec          : chr [1:5] "00-09" "00-85" "00-09" "00-09" ...</span></span>
@@ -139,16 +139,16 @@
 <span><span class="co">#&gt;  $ pac           : chr [1:5] "2769396878" "4082525837" "9335138817" "3779491071" ...</span></span>
 <span><span class="co">#&gt;  $ inc_date      : chr [1:5] "1926-01-01" "1905-04-13" "1984-03-01" "1995-01-01" ...</span></span>
 <span><span class="co">#&gt;  $ inc_state     : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
-<span><span class="co">#&gt;  $ org_type      : chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
-<span><span class="co">#&gt;  $ org_text      : chr [1:5] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ designation   : chr [1:5] "N" "N" "N" "N" ...</span></span>
+<span><span class="co">#&gt;  $ struct        : chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
+<span><span class="co">#&gt;  $ struct_otext  : chr [1:5] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ design        : chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ add_1         : chr [1:5] "75 BEEKMAN ST" "133 PARK ST" "130 FISHER RD" "111 COLCHESTER AVE" ...</span></span>
 <span><span class="co">#&gt;  $ add_2         : chr [1:5] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ city          : chr [1:5] "PLATTSBURGH" "MALONE" "BERLIN" "BURLINGTON" ...</span></span>
 <span><span class="co">#&gt;  $ state         : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
 <span><span class="co">#&gt;  $ zip           : chr [1:5] "129011438" "129531244" "56029516" "54011473" ...</span></span>
-<span><span class="co">#&gt;  $ location_type : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
-<span><span class="co">#&gt;  $ location_text : chr [1:5] NA NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" ...</span></span>
+<span><span class="co">#&gt;  $ location      : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
+<span><span class="co">#&gt;  $ loc_otext     : chr [1:5] NA NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" ...</span></span>
 <span><span class="co">#&gt;  $ reh_ind       : chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ reh_date      : chr [1:5] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ sub_general   : chr [1:5] "N" "N" "N" "N" ...</span></span>
@@ -175,37 +175,37 @@ insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">9</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `providers()` returned <span style="font-weight: bold;">9</span> results.</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 11</span></span></span>
-<span><span class="co">#&gt;   first middle last  org_name      state spec  specialty npi   multi pac   enid </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    12-70 PART B S… 1053… Y     3577… O200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    00-85 PART A P… 1891… Y     3577… O201…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    12-59 PART B S… 1487… N     3577… O201…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NY    00-85 PART A P… 1407… N     3577… O202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… CT    12-70 PART B S… 1053… N     3577… O202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… FL    12-70 PART B S… 1053… N     3577… O202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… VT    12-70 PART B S… 1053… N     3577… O202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… NH    12-70 PART B S… 1053… N     3577… O202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    ELIZABETHTOW… CO    12-70 PART B S… 1053… N     3577… O202…</span></span></code></pre>
+<span><span class="co">#&gt;   org_name      first middle last  state spec  specialty npi   multi pac   enid </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NY    12-70 PART B S… 1053… Y     3577… O200…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NY    00-85 PART A P… 1891… Y     3577… O201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NY    12-59 PART B S… 1487… N     3577… O201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NY    00-85 PART A P… 1407… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CT    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    FL    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    VT    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NH    12-70 PART B S… 1053… N     3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CO    12-70 PART B S… 1053… N     3577… O202…</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">2</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">2</span> results.</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 39</span></span></span>
-<span><span class="co">#&gt;   org_name     dba_name enid  enid_state spec  specialty npi   multi ccn   ccn_2</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABETHTO… <span style="color: #BB0000;">NA</span>       O201… NY         00-85 PART A P… 1891… Y     3313… <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABETHTO… <span style="color: #BB0000;">NA</span>       O202… NY         00-85 PART A P… 1407… N     33Z3… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt;   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>      O201… NY         00-85 PART A P… 1891… Y     3313… <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABETHTOW… <span style="color: #BB0000;">NA</span>      O202… NY         00-85 PART A P… 1407… N     33Z3… <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_type &lt;chr&gt;, org_text &lt;chr&gt;, designation &lt;chr&gt;, add_1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   location_text &lt;chr&gt;, reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_psych_unit &lt;chr&gt;, sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   struct &lt;chr&gt;, struct_otext &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location &lt;chr&gt;, loc_otext &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>facility_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">60</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `clinicians()` returned <span style="font-weight: bold;">60</span> results.</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 60 × 25</span></span></span>
 <span><span class="co">#&gt;    first    middle last    suffix gender cred  school year  specialty spec_other</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
@@ -220,12 +220,12 @@ insights. For example, there is a hospital in New York named
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> STEVEN   E      DESO    <span style="color: #BB0000;">NA</span>     M      MD    BOSTO… 2010  DIAGNOST… INTERVENT…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> LAURENT  <span style="color: #BB0000;">NA</span>     GILLOT… <span style="color: #BB0000;">NA</span>     M      MD    OTHER  1998  DIAGNOST… <span style="color: #BB0000;">NA</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 50 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: facility_name &lt;chr&gt;, npi &lt;chr&gt;, pac &lt;chr&gt;, enid &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mems &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;, grp &lt;chr&gt;, tele &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: npi &lt;chr&gt;, pac &lt;chr&gt;, enid &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mem &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;, grp &lt;chr&gt;, tlh &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">356</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `reassignments()` returned <span style="font-weight: bold;">356</span> results.</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 356 × 14</span></span></span>
 <span><span class="co">#&gt;    first   last  state specialty ind_assoc npi   pac   enid  org_name org_assign</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
@@ -252,7 +252,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">206</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `affiliations()` returned <span style="font-weight: bold;">206</span> results.</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -284,7 +284,7 @@ all-numeric CCN (<code>331302</code>):</p>
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Query returned <span style="font-weight: bold;">4</span> results.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `affiliations()` returned <span style="font-weight: bold;">4</span> results.</span></span></code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>

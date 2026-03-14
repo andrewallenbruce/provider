@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9040 (2026-03-14)
+
+- [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
+  now queries both endpoints
+
 ## provider 0.0.1.9039 (2026-03-14)
 
 - added

@@ -100,16 +100,16 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> ✔ Query returned 54,943 results.
+#> ✔ `opt_out()` returned 54,943 results.
 opt_out(npi = 1043522824)
-#> ✔ Query returned 1 result.
+#> ✔ `opt_out()` returned 1 result.
 #> # A tibble: 1 × 13
 #>   npi    first last  specialty date_start date_end last_update add_1 add_2 city 
 #>   <chr>  <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
 #> 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(state = "AK")
-#> ✔ Query returned 256 results.
+#> ✔ `opt_out()` returned 256 results.
 #> # A tibble: 256 × 13
 #>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
 #>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
@@ -126,7 +126,7 @@ opt_out(state = "AK")
 #> # ℹ 246 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#> ✔ Query returned 790 results.
+#> ✔ `opt_out()` returned 790 results.
 #> # A tibble: 790 × 13
 #>    npi   first last  specialty date_start date_end last_update add_1 add_2 city 
 #>    <chr> <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
