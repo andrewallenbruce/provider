@@ -63,14 +63,34 @@ program responsibilities.
 
 \section{Certification}{
 
+
+There are five CLIA certificate types, all of which are effective for a period of
+two years. They are as follows, in order of increasing complexity:
+\enumerate{
+\item \strong{Waiver}: Laboratory can only perform waived tests, those that are simple
+to perform. Although routine inspections are not conducted, 2\% are visited
+annually to ensure quality. Does not waive the lab from all CLIA requirements.
+\item \strong{Provider-Performed Microscopy (PPM)}: In addition to waived tests,
+a physician, mid-level practitioner or dentist can perform limited tests of
+moderate complexity requiring microscopic examination. No routine inspections
+are conducted.
+\item \strong{Registration}: Laboratory has applied for a \strong{Compliance} or
+\strong{Accreditation} certificate, enabling it to conduct moderate/high complexity
+testing until the survey is completed. Includes PPM and waived testing.
+\item \strong{Compliance}: Allows the laboratory to conduct moderate/high complexity
+testing and is issued after an inspection finds the lab to be in compliance
+with all applicable CLIA requirements. Includes PPM and waived testing.
+\item \strong{Accreditation}: Exactly the same as \strong{Compliance}, except that the
+laboratory is accredited by one of the CMS-approved organizations:
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{API: Provider of Services File - Clinical Laboratories}
-\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS: CLIA}
-\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC: CLIA}
-\item \href{https://qcor.cms.gov/main.jsp}{CMS: QCOR}
-\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA: Certificates}
-\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA: Certificate Fee Schedule}
-\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA: Certification Guide}
+\item \href{https://a2la.org/}{A2LA: American Association for Laboratory Accreditation}
+\item \href{https://www.aabb.org/}{AABB: Association for the Advancement of Blood & Biotherapies}
+\item \href{https://osteopathic.org/}{AOA: American Osteopathic Association}
+\item \href{https://www.ashi-hla.org/}{ASHI-HLA: American Society for Histocompatibility & Immunogenetics}
+\item \href{https://www.cap.org/}{CAP: College of American Pathologists}
+\item \href{https://www.cola.org/}{COLA: Commission on Office Laboratory Accreditation}
+\item \href{https://www.jointcommission.org/}{JCAHO: The Joint Commission}
+}
 }
 }
 

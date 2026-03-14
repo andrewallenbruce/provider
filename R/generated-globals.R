@@ -5,9 +5,11 @@ utils::globalVariables(c(
   # <hospitals>
   # <opt_out>
   # <order_refer>
+  # <pending>
   # <providers>
   # <reassignments>
   # <revocations>
+  # <transparency>
   # <affiliations>
   # <clinicians>
   "BASE",
@@ -15,9 +17,11 @@ utils::globalVariables(c(
   # <hospitals>
   # <opt_out>
   # <order_refer>
+  # <pending>
   # <providers>
   # <reassignments>
   # <revocations>
+  # <transparency>
   # <affiliations>
   # <clinicians>
   "LIMIT",
@@ -25,9 +29,11 @@ utils::globalVariables(c(
   # <hospitals>
   # <opt_out>
   # <order_refer>
+  # <pending>
   # <providers>
   # <reassignments>
   # <revocations>
+  # <transparency>
   # <affiliations>
   # <clinicians>
   "NM",

@@ -111,6 +111,7 @@ reference:
   contents:
   - hospitals
   - clia
+  - transparency
 
 - title: Query Modifiers
   contents:

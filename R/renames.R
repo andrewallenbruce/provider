@@ -174,6 +174,11 @@ renames <- function(endpoint) {
       MDCD_VNDR_NUM = "vend",
       SKLTN_REC_SW = "skeleton"
     ),
+    pending = c(
+      NPI = "npi",
+      FIRST_NAME = "first",
+      LAST_NAME = "last"
+    ),
     providers = c(
       FIRST_NAME = "first",
       MDL_NAME = "middle",
@@ -242,6 +247,15 @@ renames <- function(endpoint) {
       REVOCATION_EFCTV_DT = "date_start",
       REENROLLMENT_BAR_EXPRTN_DT = "date_end"
     ),
-    cli::cli_abort("{.arg endpoint} {.val {endpoint}} invalid.")
+    transparency = c(
+      Case_ID = "id",
+      Hosp_Name = "name",
+      Hosp_Address = "address",
+      City = "city",
+      State = "state",
+      Action = "action",
+      Date_of_Action = "action_date"
+    ),
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

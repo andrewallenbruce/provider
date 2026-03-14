@@ -4,12 +4,14 @@
 \alias{pending}
 \title{Pending Medicare Enrollments}
 \usage{
-pending(npi = NULL, first = NULL, last = NULL)
+pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
 
 \item{first, last}{\verb{<chr>} Provider's name}
+
+\item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -19,7 +21,7 @@ Providers with pending Medicare enrollment applications.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-# pending(first = "John")
+pending(first = "John")
 \dontshow{\}) # examplesIf}
 }
 \references{

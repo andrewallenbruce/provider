@@ -16,7 +16,7 @@
 #'
 #' @section Certification:
 #'
-#' ```{r, child = "man/md/clia_links.md"}
+#' ```{r, child = "man/md/clia_certification.md"}
 #' ```
 #'
 #' @references
