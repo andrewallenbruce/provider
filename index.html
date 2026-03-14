@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9040</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9041</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,8 +146,8 @@
 <span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;</span></span>
 <span><span class="co">#&gt; 1 STEF… MICHA… SMITH &lt;NA&gt;   M      OD    ILLIN… 2008  OPTOMETRY &lt;NA&gt;       1932…</span></span>
 <span><span class="co">#&gt; # ℹ 14 more variables: pac &lt;chr&gt;, enid &lt;chr&gt;, org_name &lt;chr&gt;, org_pac &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   org_mem &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   zip &lt;chr&gt;, phone &lt;chr&gt;, ind &lt;chr&gt;, grp &lt;chr&gt;, tlh &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; #   org_mem &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, org_city &lt;chr&gt;, org_state &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   org_zip &lt;chr&gt;, org_phone &lt;chr&gt;, ind &lt;chr&gt;, org &lt;chr&gt;, tlh &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="hospitals">Hospitals<a class="anchor" aria-label="anchor" href="#hospitals"></a>
@@ -159,12 +159,12 @@
 <span><span class="co">#&gt;   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
 <span><span class="co">#&gt; 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…</span></span>
-<span><span class="co">#&gt; # ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   struct &lt;chr&gt;, struct_otext &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, location &lt;chr&gt;, loc_otext &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; # ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, str &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   str_otxt &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   state &lt;chr&gt;, zip &lt;chr&gt;, loc &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -179,7 +179,7 @@
 <span><span class="co">#&gt; 1 DANIEL … &lt;NA&gt;   11D0… &lt;NA&gt;  0      &lt;NA&gt;      &lt;NA&gt;     Y     A      205 … &lt;NA&gt; </span></span>
 <span><span class="co">#&gt; # ℹ 71 more variables: phone_1 &lt;chr&gt;, phone_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   zip &lt;chr&gt;, region &lt;chr&gt;, region_st &lt;chr&gt;, ssa_st &lt;chr&gt;, ssa_cty &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   fips_st &lt;chr&gt;, fips_cty &lt;chr&gt;, cbsa &lt;chr&gt;, cbsa_i &lt;chr&gt;, eligible &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   fips_st &lt;chr&gt;, fips_cty &lt;chr&gt;, cbsa_1 &lt;chr&gt;, cbsa_2 &lt;chr&gt;, eligible &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   term_pgm &lt;chr&gt;, term_clia &lt;chr&gt;, apl_type &lt;chr&gt;, cert_type &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   fac_type &lt;chr&gt;, owner &lt;chr&gt;, cert_action &lt;chr&gt;, orig_date &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   apl_date &lt;chr&gt;, cert_date &lt;chr&gt;, eff_date &lt;chr&gt;, mail_date &lt;chr&gt;,</span></span>
@@ -192,9 +192,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ `opt_out()` returned 1 result.</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 13</span></span>
-<span><span class="co">#&gt;   npi    first last  specialty date_start date_end last_update add_1 add_2 city </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…</span></span>
+<span><span class="co">#&gt;   npi        first last  specialty start_date end_date updated add_1 add_2 city </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 1043522824 James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2… 8585… STE … SCOT…</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, order_refer &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -255,7 +255,7 @@
 <span><span class="co">#&gt;  9 &lt;NA&gt;     TIFFANNI D      FORBES     I2004… 1205… N     GA    PRACTITI… 424.5…</span></span>
 <span><span class="co">#&gt; 10 &lt;NA&gt;     STEPHEN  T      BASHUK     I2004… 1952… N     GA    PRACTITI… 424.5…</span></span>
 <span><span class="co">#&gt; # ℹ 203 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 2 more variables: date_start &lt;chr&gt;, date_end &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 2 more variables: start_date &lt;chr&gt;, end_date &lt;chr&gt;</span></span></code></pre></div>
 <hr>
 </div>
 </div>

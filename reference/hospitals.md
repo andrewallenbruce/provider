@@ -121,12 +121,12 @@ hospitals(pac = 6103733050)
 #>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 ST CHARLES H… NA      O200… NY         00-09 PART A P… 1164… N     3302… NA   
 #> 2 ST CHARLES H… NA      O200… NY         00-09 PART A P… 1225… N     33T2… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   struct <chr>, struct_otext <chr>, design <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, location <chr>, loc_otext <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
-#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
+#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
+#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
+#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
+#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals(state = "GA", reh = TRUE)
 #> ✔ `hospitals()` returned 1 result.
@@ -134,12 +134,12 @@ hospitals(state = "GA", reh = TRUE)
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   struct <chr>, struct_otext <chr>, design <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, location <chr>, loc_otext <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
-#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
+#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
+#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
+#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
+#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
 #> ✔ `hospitals()` returned 12 results.
@@ -158,12 +158,12 @@ hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
 #> 10 ES REHABILI… EMORY … O201… GA         00-09 PART A P… 1548… N     1130… NA   
 #> 11 SELECT SPEC… SELECT… O201… GA         00-09 PART A P… 1235… N     1120… NA   
 #> 12 REHABILITAT… REHABI… O202… GA         00-09 PART A P… 1538… N     1130… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   struct <chr>, struct_otext <chr>, design <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, location <chr>, loc_otext <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
-#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
+#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
+#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
+#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
+#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
 #> ✔ `hospitals()` returned 15 results.
@@ -185,11 +185,11 @@ hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
 #> 13 RV BEHAVIOR… RIDGEV… O201… GA         00-09 PART A P… 1427… N     1140… NA   
 #> 14 DONALSONVIL… NA      O201… GA         00-09 PART A P… 1932… N     11S1… NA   
 #> 15 HOSPITAL AU… JEFFER… O202… GA         00-09 PART A P… 1417… N     11S1… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   struct <chr>, struct_otext <chr>, design <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, location <chr>, loc_otext <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
-#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
+#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
+#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
+#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
+#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 ```

@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9041 (2026-03-14)
+
+- tweaking `exec_*` functionality
+
 ## provider 0.0.1.9040 (2026-03-14)
 
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)

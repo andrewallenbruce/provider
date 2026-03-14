@@ -1,5 +1,9 @@
 # Overview of Provider
 
+``` r
+library(provider)
+```
+
 The overarching goal of
 [provider](https://andrewallenbruce.github.io/provider/) is to make the
 experience of accessing publicly-available Provider data easier and more
@@ -49,8 +53,11 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#>   first    last        npi part_b dme hha pmd hospice
-#> 1 SARAH HUSSAIN 1043477615      Y   Y   Y   Y       Y
+#> ✔ `order_refer()` returned 1 result.
+#> # A tibble: 1 × 8
+#>   first last    npi        part_b dme   hha   pmd   hospice
+#>   <chr> <chr>   <chr>      <chr>  <chr> <chr> <chr> <chr>  
+#> 1 SARAH HUSSAIN 1043477615 Y      Y     Y     Y     Y
 ```
 
   

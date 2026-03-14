@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9040</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9041</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,6 +89,8 @@
 
     
     
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p>The overarching goal of <a href="https://andrewallenbruce.github.io/provider/">provider</a> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
@@ -134,19 +136,22 @@ every <strong>row</strong> is an <em>observation</em>, and every
 <p>To remedy this, there is some post-processing done to the output
 before it is returned. Each function has a <code>tidy</code> parameter
 that is set to <code>TRUE</code> by default:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   first    last        npi part_b dme hha pmd hospice</span></span>
-<span><span class="co">#&gt; 1 SARAH HUSSAIN 1043477615      Y   Y   Y   Y       Y</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> `order_refer()` returned <span style="font-weight: bold;">1</span> result.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
+<span><span class="co">#&gt;   first last    npi        part_b dme   hha   pmd   hospice</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> SARAH HUSSAIN 1043477615 Y      Y     Y     Y     Y</span></span></code></pre></div>
 <p><br></p>
 <p>Setting <code>tidy</code> to <code>FALSE</code> will return a
 data.frame of the API’s un-processed output:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <p>Several functions also have arguments that implement additional
 optional transformations to the output, such as <code>pivot</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
@@ -174,11 +179,11 @@ years available to query these APIs might change at any time, so there
 is an accompanying helper function to retrieve the years available, in
 the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 <code>quality_payment()</code>’s is:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>These can also be used in a pipeline, for searching all available
 years:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">quality_payment</span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">participation_type</span>, </span>
@@ -191,7 +196,7 @@ years:</p>
 <span>         <span class="va">apms_entity_name</span><span class="op">)</span></span></code></pre></div>
 <p>Several functions have <em>parallelized</em> versions, denoted by an
 underscore at the end of their name (<code>_</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">quality_payment_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
 <span>         <span class="va">participation_type</span>, </span>
@@ -219,7 +224,7 @@ providers or organizations must obtain an NPI. Once assigned, a
 provider’s NPI is permanent and remains with the provider regardless of
 job or location changes.</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
 <span></span>
@@ -238,7 +243,7 @@ numbers and organizational names) and may be associated with multiple
 enrollment IDs if the individual or organization enrolled multiple times
 under different circumstances.</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span></span>
@@ -252,7 +257,7 @@ provider enrollment application. All enrollment-level information (e.g.,
 enrollment type, enrollment state, provider specialty and reassignment
 of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span></span>

@@ -135,8 +135,8 @@ clinicians(enid = "I20081002000549")
 #>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
 #> 1 DORO… E      MCCU… NA     F      AU    OTHER  2008  QUALIFIE… NA         1407…
 #> # ℹ 14 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, phone <chr>, ind <chr>, grp <chr>, tlh <chr>
+#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>, org_state <chr>,
+#> #   org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>, tlh <chr>
 clinicians(first = "ETAN")
 #> ✔ `clinicians()` returned 11 results.
 #> # A tibble: 11 × 25
@@ -154,8 +154,9 @@ clinicians(first = "ETAN")
 #> 10 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
 #> 11 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
-#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, phone <chr>, ind <chr>, grp <chr>, tlh <chr>
+#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
+#> #   tlh <chr>
 clinicians(city = starts_with("At"), state = "GA", year = 2020, count = TRUE)
 #> ✔ `clinicians()` returned 651 results.
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)

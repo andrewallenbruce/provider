@@ -91,7 +91,7 @@ revocations(state = "GA")
 #>  9 NA       TIFFANNI D      FORBES     I2004… 1205… N     GA    PRACTITI… 424.5…
 #> 10 NA       STEPHEN  T      BASHUK     I2004… 1952… N     GA    PRACTITI… 424.5…
 #> # ℹ 203 more rows
-#> # ℹ 2 more variables: date_start <chr>, date_end <chr>
+#> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 revocations(specialty = contains("CARDIO"))
 #> ✔ `revocations()` returned 48 results.
 #> # A tibble: 48 × 12
@@ -108,5 +108,5 @@ revocations(specialty = contains("CARDIO"))
 #>  9 NA       BRYAN    F      PERRY      I2004… 1235… N     OK    PRACTITI… 424.5…
 #> 10 NA       KLAUS    P      RENTROP    I2005… 1194… N     NY    PRACTITI… 424.5…
 #> # ℹ 38 more rows
-#> # ℹ 2 more variables: date_start <chr>, date_end <chr>
+#> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 ```
