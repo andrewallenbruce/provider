@@ -39,12 +39,9 @@ affiliations <- function(
   parent_ccn = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_prov(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       npi = npi,
       ind_pac_id = pac,
@@ -55,10 +52,6 @@ affiliations <- function(
       facility_type = enum_(facility_type),
       facility_affiliations_certification_number = facility_ccn,
       facility_type_certification_number = parent_ccn
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }

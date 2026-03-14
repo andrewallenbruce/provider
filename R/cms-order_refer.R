@@ -55,25 +55,18 @@ order_refer <- function(
   hospice = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       NPI = npi,
       FIRST_NAME = first,
       LAST_NAME = last,
-      PARTB = cv_lgl(part_b),
-      DME = cv_lgl(dme),
-      HHA = cv_lgl(hha),
-      PMD = cv_lgl(pmd),
-      HOSPICE = cv_lgl(hospice)
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+      PARTB = bool_(part_b),
+      DME = bool_(dme),
+      HHA = bool_(hha),
+      PMD = bool_(pmd),
+      HOSPICE = bool_(hospice)
+    )
   )
 }

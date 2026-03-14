@@ -7,11 +7,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE, warning=FALSE, message=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
-  message   = FALSE, 
+  message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
@@ -19,6 +19,10 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999, digits = 2)
+library(tibble)
+```
+
+```{r}
 library(provider)
 ```
 

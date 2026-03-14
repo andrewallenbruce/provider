@@ -1,8 +1,10 @@
 #' @noRd
-exec_prov <- function(END, ARG, BASE, LIMIT, NM, COUNT) {
+exec_prov <- function(END, COUNT, ARG) {
   # NO INTERNET --> Abort
   cli_online()
   check_bool(COUNT)
+
+  .c(BASE, LIMIT, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -99,10 +101,12 @@ exec_prov <- function(END, ARG, BASE, LIMIT, NM, COUNT) {
 }
 
 #' @noRd
-exec_cms <- function(END, ARG, BASE, LIMIT, NM, COUNT) {
+exec_cms <- function(END, COUNT, ARG) {
   # NO INTERNET --> Abort
   cli_online()
   check_bool(COUNT)
+
+  .c(BASE, LIMIT, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {

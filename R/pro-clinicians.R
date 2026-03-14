@@ -66,12 +66,9 @@ clinicians <- function(
   facility_pac = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_prov(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       npi = npi,
       ind_pac_id = pac,
@@ -90,10 +87,6 @@ clinicians <- function(
       citytown = city,
       state = state,
       zip_code = zip
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }

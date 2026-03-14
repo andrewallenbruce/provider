@@ -1,5 +1,5 @@
 #' @noRd
-cv_lgl <- function(x = NULL) {
+bool_ <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -25,7 +25,7 @@ enum_ <- function(x = NULL) {
     )[[1]]
   )
 
-  ENUM <- enum_map(VAR)
+  ENUM <- enumerations(VAR)
 
   x <- rlang::arg_match(
     arg = x,
@@ -38,9 +38,10 @@ enum_ <- function(x = NULL) {
 }
 
 #' @noRd
-enum_map <- function(arg) {
+enumerations <- function(arg) {
   switch(
     arg,
+    # affiliations
     facility_type = list(
       hospital = "Hospital",
       ltch = "Long-term care hospital",
@@ -51,12 +52,18 @@ enum_map <- function(arg) {
       hospice = "Hospice",
       esrd = "Dialysis facility"
     ),
-    certification = list(
-      compliance = 1,
-      waiver = 2,
-      accreditation = 3,
+    # clia
+    certificate = list(
+      cmp = 1,
+      wav = 2,
+      acc = 3,
       ppm = 4,
-      registration = 9
+      reg = 9
+    ),
+    # clia
+    status = list(
+      cmp = "A",
+      non = "B"
     ),
     cli::cli_abort("{.arg arg} {.val {arg}} invalid.")
   )

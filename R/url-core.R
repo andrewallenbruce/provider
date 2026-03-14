@@ -79,13 +79,13 @@ uuid <- function(endpoint) {
     hospitals = m("f6f6505c-e8b0-4d57-b258-e2b94133aaf2"),
     clia = m("d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16"),
     reassignments = m("20f51cff-4137-4f3a-b6b7-bfc9ad57983b"),
-    rhcs = list(
-      enroll = m("3b7e7659-067e-41ea-8e36-f9ee2036e1f6"),
-      owner = m("ab03c9bc-0c22-4ca4-b032-21dd3408210d")
+    rhc = list(
+      Enrollment = m("3b7e7659-067e-41ea-8e36-f9ee2036e1f6"),
+      Owners = m("ab03c9bc-0c22-4ca4-b032-21dd3408210d")
     ),
-    fqhcs = list(
-      enroll = m("4bcae866-3411-439a-b762-90a6187c194b"),
-      owner = m("ed289c89-0bb8-4221-a20a-85776066381b")
+    fqhc = list(
+      Enrollment = m("4bcae866-3411-439a-b762-90a6187c194b"),
+      Owners = m("ed289c89-0bb8-4221-a20a-85776066381b")
     ),
     pending = list(
       Physician = m("6bd6b1dd-208c-4f9c-88b8-b15fec6db548"),
@@ -118,6 +118,6 @@ constants <- function(endpoint) {
   list(
     url = uuid(endpoint),
     limit = limit(endpoint),
-    names = renames(endpoint)
+    names = column_renames(endpoint)
   )
 }

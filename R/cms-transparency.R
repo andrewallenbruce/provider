@@ -27,22 +27,15 @@ transparency <- function(
   action = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       Hosp_Name = name,
       Hosp_Address = address,
       City = city,
       State = state,
       Action = action
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }

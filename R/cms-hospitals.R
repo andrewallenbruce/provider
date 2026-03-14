@@ -56,12 +56,9 @@ hospitals <- function(
 ) {
   check_subgroups(subgroup)
 
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       NPI = npi,
       CCN = ccn,
@@ -75,14 +72,10 @@ hospitals <- function(
       STATE = state,
       `ZIP CODE` = zip,
       PROPRIETARY_NONPROFIT = designation,
-      `MULTIPLE NPI FLAG` = cv_lgl(multi),
-      `REH CONVERSION FLAG` = cv_lgl(reh),
+      `MULTIPLE NPI FLAG` = bool_(multi),
+      `REH CONVERSION FLAG` = bool_(reh),
       !!!subgroup
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }
 
@@ -139,7 +132,7 @@ subgroups <- function(
       `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
       `SUBGROUP %2D OTHER` = other
     ),
-    cv_lgl
+    bool_
   )
   structure(params(!!!x), class = "subgroups")
 }

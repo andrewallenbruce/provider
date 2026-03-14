@@ -1,5 +1,5 @@
 #' @noRd
-renames <- function(endpoint) {
+column_renames <- function(endpoint) {
   switch(
     endpoint,
     affiliations = c(
@@ -32,12 +32,12 @@ renames <- function(endpoint) {
       num_org_mem = "org_mem",
       adr_ln_1 = "add_1",
       adr_ln_2 = "add_2",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip",
-      telephone_number = "phone",
+      citytown = "org_city",
+      state = "org_state",
+      zip_code = "org_zip",
+      telephone_number = "org_phone",
       ind_assgn = "ind",
-      grp_assgn = "grp",
+      grp_assgn = "org",
       telehlth = "tlh"
     ),
     hospitals = c(
@@ -54,16 +54,16 @@ renames <- function(endpoint) {
       `ASSOCIATE ID` = "pac",
       `INCORPORATION DATE` = "inc_date",
       `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "struct",
-      `ORGANIZATION OTHER TYPE TEXT` = "struct_otext",
+      `ORGANIZATION TYPE STRUCTURE` = "str",
+      `ORGANIZATION OTHER TYPE TEXT` = "str_otxt",
       `PROPRIETARY NONPROFIT` = "design",
       `ADDRESS LINE 1` = "add_1",
       `ADDRESS LINE 2` = "add_2",
       `CITY` = "city",
       `STATE` = "state",
       `ZIP CODE` = "zip",
-      `PRACTICE LOCATION TYPE` = "location",
-      `LOCATION OTHER TYPE TEXT` = "loc_otext",
+      `PRACTICE LOCATION TYPE` = "loc",
+      `LOCATION OTHER TYPE TEXT` = "loc_otxt",
       `REH CONVERSION FLAG` = "reh_ind",
       `REH CONVERSION DATE` = "reh_date",
       `SUBGROUP - GENERAL` = "sub_general",
@@ -79,7 +79,7 @@ renames <- function(endpoint) {
       `SUBGROUP - REHABILITATION UNIT` = "sub_rehab_unit",
       `SUBGROUP - SPECIALTY HOSPITAL` = "sub_specialty",
       `SUBGROUP - OTHER` = "sub_other",
-      `SUBGROUP - OTHER TEXT` = "sub_otext"
+      `SUBGROUP - OTHER TEXT` = "sub_otxt"
     ),
     clia = c(
       FAC_NAME = "name_1",
@@ -104,8 +104,8 @@ renames <- function(endpoint) {
       SSA_CNTY_CD = "ssa_cty",
       FIPS_STATE_CD = "fips_st",
       FIPS_CNTY_CD = "fips_cty",
-      CBSA_CD = "cbsa",
-      CBSA_URBN_RRL_IND = "cbsa_i",
+      CBSA_CD = "cbsa_1",
+      CBSA_URBN_RRL_IND = "cbsa_2",
       ELGBLTY_SW = "eligible",
       PGM_TRMNTN_CD = "term_pgm",
       CLIA_TRMNTN_CD = "term_clia",
@@ -188,9 +188,9 @@ renames <- function(endpoint) {
       `First Name` = "first",
       `Last Name` = "last",
       Specialty = "specialty",
-      `Optout Effective Date` = "date_start",
-      `Optout End Date` = "date_end",
-      `Last updated` = "last_update",
+      `Optout Effective Date` = "start_date",
+      `Optout End Date` = "end_date",
+      `Last updated` = "updated",
       `First Line Street Address` = "add_1",
       `Second Line Street Address` = "add_2",
       `City Name` = "city",
@@ -235,8 +235,8 @@ renames <- function(endpoint) {
       STATE_CD = "state",
       PROVIDER_TYPE_DESC = "specialty",
       REVOCATION_RSN = "reason",
-      REVOCATION_EFCTV_DT = "date_start",
-      REENROLLMENT_BAR_EXPRTN_DT = "date_end"
+      REVOCATION_EFCTV_DT = "start_date",
+      REENROLLMENT_BAR_EXPRTN_DT = "end_date"
     ),
     transparency = c(
       Case_ID = "id",

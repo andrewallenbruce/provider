@@ -7,7 +7,7 @@ editor_options:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = FALSE,
+  collapse  = TRUE,
   echo      = TRUE, 
   message   = TRUE, 
   warning   = TRUE,
@@ -17,12 +17,13 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 options(scipen = 999)
-library(provider)
-library(gt)
-# gt(pac, rownames_to_stub = TRUE) |> 
-#   opt_table_font(
-#   font = google_font(name = "JetBrains Mono"), size = gt::px(12))
+library(tibble)
 ```
+
+```{r}
+library(provider)
+```
+
 
 > NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
 

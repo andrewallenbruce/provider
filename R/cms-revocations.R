@@ -36,13 +36,9 @@ revocations <- function(
   reason = NULL,
   count = FALSE
 ) {
-
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       ENRLMT_ID = enid,
       NPI = npi,
@@ -50,14 +46,10 @@ revocations <- function(
       MDL_NAME = middle,
       LAST_NAME = last,
       ORG_NAME = org_name,
-      MULTIPLE_NPI_FLAG = cv_lgl(multi),
+      MULTIPLE_NPI_FLAG = bool_(multi),
       STATE_CD = state,
       PROVIDER_TYPE_DESC = specialty,
       REVOCATION_RSN = reason
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }

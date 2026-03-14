@@ -58,12 +58,9 @@ opt_out <- function(
   order_refer = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       NPI = npi,
       `First Name` = first,
@@ -73,11 +70,7 @@ opt_out <- function(
       `City Name` = city,
       `State Code` = state,
       `Zip code` = zip,
-      `Eligible to Order and Refer` = cv_lgl(order_refer)
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+      `Eligible to Order and Refer` = bool_(order_refer)
+    )
   )
 }

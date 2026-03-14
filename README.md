@@ -75,8 +75,8 @@ clinicians(npi = 1932365699)
 #>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
 #> 1 STEF… MICHA… SMITH <NA>   M      OD    ILLIN… 2008  OPTOMETRY <NA>       1932…
 #> # ℹ 14 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, phone <chr>, ind <chr>, grp <chr>, tlh <chr>
+#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>, org_state <chr>,
+#> #   org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>, tlh <chr>
 ```
 
 #### Hospitals
@@ -88,12 +88,12 @@ hospitals(npi = 1720098791)
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   struct <chr>, struct_otext <chr>, design <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, location <chr>, loc_otext <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
-#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
+#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
+#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
+#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
+#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 ```
 
@@ -108,7 +108,7 @@ clia(ccn = "11D0265516")
 #> 1 DANIEL … <NA>   11D0… <NA>  0      <NA>      <NA>     Y     A      205 … <NA> 
 #> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
 #> #   zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa <chr>, cbsa_i <chr>, eligible <chr>,
+#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, eligible <chr>,
 #> #   term_pgm <chr>, term_clia <chr>, apl_type <chr>, cert_type <chr>,
 #> #   fac_type <chr>, owner <chr>, cert_action <chr>, orig_date <chr>,
 #> #   apl_date <chr>, cert_date <chr>, eff_date <chr>, mail_date <chr>,
@@ -121,9 +121,9 @@ clia(ccn = "11D0265516")
 opt_out(npi = 1043522824)
 #> ✔ `opt_out()` returned 1 result.
 #> # A tibble: 1 × 13
-#>   npi    first last  specialty date_start date_end last_update add_1 add_2 city 
-#>   <chr>  <chr> <chr> <chr>     <chr>      <chr>    <chr>       <chr> <chr> <chr>
-#> 1 10435… James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2025   8585… STE … SCOT…
+#>   npi        first last  specialty start_date end_date updated add_1 add_2 city 
+#>   <chr>      <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
+#> 1 1043522824 James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2… 8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
 
@@ -184,7 +184,7 @@ revocations(state = "GA")
 #>  9 <NA>     TIFFANNI D      FORBES     I2004… 1205… N     GA    PRACTITI… 424.5…
 #> 10 <NA>     STEPHEN  T      BASHUK     I2004… 1952… N     GA    PRACTITI… 424.5…
 #> # ℹ 203 more rows
-#> # ℹ 2 more variables: date_start <chr>, date_end <chr>
+#> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 ```
 
 ------------------------------------------------------------------------

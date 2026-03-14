@@ -41,15 +41,12 @@ providers <- function(
   multi = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       NPI = npi,
-      MULTIPLE_NPI_FLAG = cv_lgl(multi),
+      MULTIPLE_NPI_FLAG = bool_(multi),
       PECOS_ASCT_CNTL_ID = pac,
       ENRLMT_ID = enid,
       PROVIDER_TYPE_CD = spec,
@@ -59,10 +56,6 @@ providers <- function(
       FIRST_NAME = first,
       MDL_NAME = middle,
       ORG_NAME = org_name
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }

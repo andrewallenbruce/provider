@@ -7,7 +7,7 @@
 clia(
   name = NULL,
   ccn = NULL,
-  certification = NULL,
+  certificate = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -21,7 +21,7 @@ clia(
 
 \item{ccn}{\verb{<chr>} 10-character CLIA number}
 
-\item{certification}{\verb{<chr>} CLIA certificate type:
+\item{certificate}{\verb{<chr>} CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
 \item \code{"ppm"}
@@ -36,7 +36,7 @@ clia(
 
 \item{zip}{\verb{<chr>} Zip code}
 
-\item{status}{\verb{<chr>} \code{A} (Compliant) or \code{B} (Non-Compliant)}
+\item{status}{\verb{<chr>} \code{"cmp"} (Compliant) or \code{"non"} (Non-Compliant)}
 
 \item{active}{\verb{<lgl>} Return only active providers}
 
@@ -97,10 +97,10 @@ laboratory is accredited by one of the CMS-approved organizations:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
-clia()
+clia(status = "cmp", count = TRUE)
 clia(ccn = provider:::cdc_labs$ccn)
 clia(
-  certification = "accreditation",
+  certificate = c("acc", "reg"),
   city = "Valdosta",
   state = "GA"
 )

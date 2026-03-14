@@ -44,12 +44,9 @@ reassignments <- function(
   org_state = NULL,
   count = FALSE
 ) {
-  END <- rlang::call_name(rlang::call_match())
-
-  .c(BASE, LIMIT, NM) %=% constants(END)
-
   exec_cms(
-    END,
+    END = rlang::call_name(rlang::call_match()),
+    COUNT = count,
     ARG = params(
       `Individual NPI` = npi,
       `Individual PAC ID` = pac,
@@ -62,10 +59,6 @@ reassignments <- function(
       `Group PAC ID` = org_pac,
       `Group Enrollment ID` = org_enid,
       `Group State Code` = org_state
-    ),
-    BASE = BASE,
-    LIMIT = LIMIT,
-    NM = NM,
-    COUNT = count
+    )
   )
 }
