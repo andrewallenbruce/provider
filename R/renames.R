@@ -1,13 +1,4 @@
 #' @noRd
-rename_ <- function(x, nm) {
-  if (is.null(nm)) {
-    return(x)
-  }
-  collapse::setrename(x, nm, .nse = FALSE)
-  collapse::gv(x, unlist_(nm))
-}
-
-#' @noRd
 renames <- function(endpoint) {
   switch(
     endpoint,
@@ -33,12 +24,12 @@ renames <- function(endpoint) {
       grd_yr = "year",
       pri_spec = "specialty",
       sec_spec_all = "spec_other",
-      facility_name = "facility_name",
       npi = "npi",
       ind_pac_id = "pac",
       ind_enrl_id = "enid",
+      facility_name = "org_name",
       org_pac_id = "org_pac",
-      num_org_mem = "org_mems",
+      num_org_mem = "org_mem",
       adr_ln_1 = "add_1",
       adr_ln_2 = "add_2",
       citytown = "city",
@@ -47,11 +38,11 @@ renames <- function(endpoint) {
       telephone_number = "phone",
       ind_assgn = "ind",
       grp_assgn = "grp",
-      telehlth = "tele"
+      telehlth = "tlh"
     ),
     hospitals = c(
       `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "dba_name",
+      `DOING BUSINESS AS NAME` = "org_dba",
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
       `PROVIDER TYPE CODE` = "spec",
@@ -63,16 +54,16 @@ renames <- function(endpoint) {
       `ASSOCIATE ID` = "pac",
       `INCORPORATION DATE` = "inc_date",
       `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_text",
-      `PROPRIETARY NONPROFIT` = "designation",
+      `ORGANIZATION TYPE STRUCTURE` = "struct",
+      `ORGANIZATION OTHER TYPE TEXT` = "struct_otext",
+      `PROPRIETARY NONPROFIT` = "design",
       `ADDRESS LINE 1` = "add_1",
       `ADDRESS LINE 2` = "add_2",
       `CITY` = "city",
       `STATE` = "state",
       `ZIP CODE` = "zip",
-      `PRACTICE LOCATION TYPE` = "location_type",
-      `LOCATION OTHER TYPE TEXT` = "location_text",
+      `PRACTICE LOCATION TYPE` = "location",
+      `LOCATION OTHER TYPE TEXT` = "loc_otext",
       `REH CONVERSION FLAG` = "reh_ind",
       `REH CONVERSION DATE` = "reh_date",
       `SUBGROUP - GENERAL` = "sub_general",
@@ -97,7 +88,7 @@ renames <- function(endpoint) {
       CROSS_REF_PROVIDER_NUMBER = "xref",
       CHOW_CNT = "chow_n",
       CHOW_DT = "chow_date",
-      CHOW_PRIOR_DT = "chow_prev",
+      CHOW_PRIOR_DT = "chow_prv",
       ACPTBL_POC_SW = "pos",
       CMPLNC_STUS_CD = "status",
       ST_ADR = "add_1",
@@ -106,22 +97,22 @@ renames <- function(endpoint) {
       FAX_PHNE_NUM = "phone_2",
       CITY_NAME = "city",
       STATE_CD = "state",
-      RGN_CD = "region",
       ZIP_CD = "zip",
-      SSA_STATE_CD = "state_ssa",
-      SSA_CNTY_CD = "county_ssa",
-      FIPS_STATE_CD = "fips_state",
-      FIPS_CNTY_CD = "fips_county",
-      STATE_RGN_CD = "state_reg",
-      CBSA_CD = "cbsa_cd",
-      CBSA_URBN_RRL_IND = "cbsa_ind",
+      RGN_CD = "region",
+      STATE_RGN_CD = "region_st",
+      SSA_STATE_CD = "ssa_st",
+      SSA_CNTY_CD = "ssa_cty",
+      FIPS_STATE_CD = "fips_st",
+      FIPS_CNTY_CD = "fips_cty",
+      CBSA_CD = "cbsa",
+      CBSA_URBN_RRL_IND = "cbsa_i",
       ELGBLTY_SW = "eligible",
       PGM_TRMNTN_CD = "term_pgm",
       CLIA_TRMNTN_CD = "term_clia",
       APLCTN_TYPE_CD = "apl_type",
       CRTFCT_TYPE_CD = "cert_type",
       GNRL_FAC_TYPE_CD = "fac_type",
-      GNRL_CNTL_TYPE_CD = "ownership",
+      GNRL_CNTL_TYPE_CD = "owner",
       CRTFCTN_ACTN_TYPE_CD = "cert_action",
       ORGNL_PRTCPTN_DT = "orig_date",
       APLCTN_RCVD_DT = "apl_date",
@@ -175,15 +166,15 @@ renames <- function(endpoint) {
       SKLTN_REC_SW = "skeleton"
     ),
     pending = c(
-      NPI = "npi",
       FIRST_NAME = "first",
-      LAST_NAME = "last"
+      LAST_NAME = "last",
+      NPI = "npi"
     ),
     providers = c(
+      ORG_NAME = "org_name",
       FIRST_NAME = "first",
       MDL_NAME = "middle",
       LAST_NAME = "last",
-      ORG_NAME = "org_name",
       STATE_CD = "state",
       PROVIDER_TYPE_CD = "spec",
       PROVIDER_TYPE_DESC = "specialty",
@@ -208,9 +199,9 @@ renames <- function(endpoint) {
       `Eligible to Order and Refer` = "order_refer"
     ),
     order_refer = c(
-      NPI = "npi",
       FIRST_NAME = "first",
       LAST_NAME = "last",
+      NPI = "npi",
       PARTB = "part_b",
       DME = "dme",
       HHA = "hha",
@@ -234,12 +225,12 @@ renames <- function(endpoint) {
       `Record Type` = "type"
     ),
     revocations = c(
-      ENRLMT_ID = "enid",
-      NPI = "npi",
+      ORG_NAME = "org_name",
       FIRST_NAME = "first",
       MDL_NAME = "middle",
       LAST_NAME = "last",
-      ORG_NAME = "org_name",
+      ENRLMT_ID = "enid",
+      NPI = "npi",
       MULTIPLE_NPI_FLAG = "multi",
       STATE_CD = "state",
       PROVIDER_TYPE_DESC = "specialty",

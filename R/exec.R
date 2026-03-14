@@ -1,5 +1,5 @@
 #' @noRd
-exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
+exec_prov <- function(END, ARG, BASE, LIMIT, NM, COUNT) {
   # NO INTERNET --> Abort
   cli_online()
   check_bool(COUNT)
@@ -11,7 +11,7 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
         BASE,
         opts(count = "true", results = "false", schema = "false")
       ))
-      cli_results(N)
+      cli_results(N, END)
       return(invisible(N))
     }
 
@@ -29,9 +29,7 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_results(URL) |>
-      df_tbl_() |>
-      map_na_if() |>
-      rename_(NM)
+      polish(NM)
 
     return(res)
   }
@@ -52,13 +50,13 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
-    cli_results(N)
+    cli_results(N, END)
     return(invisible(N))
   }
 
   # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
-    cli_results(N)
+    cli_results(N, END)
 
     URL <- url_(
       BASE,
@@ -72,41 +70,36 @@ exec_prov <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_results(URL) |>
-      df_tbl_() |>
-      map_na_if() |>
-      rename_(NM)
+      polish(NM)
 
     return(res)
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, LIMIT)
+  cli_pages(N, LIMIT, END)
 
-  URL <- url_(
-    BASE,
-    opts(
-      count = "false",
-      results = "true",
-      schema = "false",
-      limit = LIMIT,
-      offset = "<<i>>"
-    ),
-    query(ARG)
+  URL <- create_offset(
+    N,
+    LIMIT,
+    url_(
+      BASE,
+      opts(
+        count = "false",
+        results = "true",
+        schema = "false",
+        limit = LIMIT,
+        offset = "<<i>>"
+      ),
+      query(ARG)
+    )
   )
 
-  URL <- offset(N, LIMIT, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-
   parallel_results(URL) |>
-    df_tbl_() |>
-    map_na_if() |>
-    rename_(NM)
+    polish(NM)
 }
 
 #' @noRd
-exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
+exec_cms <- function(END, ARG, BASE, LIMIT, NM, COUNT) {
   # NO INTERNET --> Abort
   cli_online()
   check_bool(COUNT)
@@ -115,7 +108,7 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
   if (!length(ARG)) {
     if (COUNT) {
       N <- request_rows(paste0(BASE, "/stats?"))
-      cli_results(N)
+      cli_results(N, END)
       return(invisible(N))
     }
 
@@ -123,9 +116,7 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
     cli_no_query()
 
     res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
-      df_tbl_() |>
-      map_na_if() |>
-      rename_(NM)
+      polish(NM)
 
     return(res)
   }
@@ -139,13 +130,13 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
-    cli_results(N)
+    cli_results(N, END)
     return(invisible(N))
   }
 
   # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
-    cli_results(N)
+    cli_results(N, END)
 
     URL <- url_(
       paste0(BASE, "?"),
@@ -154,29 +145,24 @@ exec_cms <- function(ARG, BASE, LIMIT, NM, COUNT) {
     )
 
     res <- request_bare(URL) |>
-      df_tbl_() |>
-      map_na_if() |>
-      rename_(NM)
+      polish(NM)
 
     return(res)
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, LIMIT)
+  cli_pages(N, LIMIT, END)
 
-  URL <- url_(
-    paste0(BASE, "?"),
-    opts(size = LIMIT, offset = "<<i>>"),
-    query2(ARG)
+  URL <- create_offset(
+    N,
+    LIMIT,
+    url_(
+      paste0(BASE, "?"),
+      opts(size = LIMIT, offset = "<<i>>"),
+      query2(ARG)
+    )
   )
 
-  URL <- offset(N, LIMIT, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = URL, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-
   parallel_request(URL) |>
-    df_tbl_() |>
-    map_na_if() |>
-    rename_(NM)
+    polish(NM)
 }

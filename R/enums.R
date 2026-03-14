@@ -3,6 +3,9 @@ cv_lgl <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
+
+  check_bool(x)
+
   cheapr::val_match(
     x,
     TRUE ~ "Y",

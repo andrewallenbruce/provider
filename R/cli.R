@@ -8,9 +8,12 @@ cli_no_query <- function() {
 }
 
 #' @noRd
-cli_results <- function(x) {
+cli_results <- function(x, endpoint) {
+
+  if (length(x) > 1L) x <- sum(x, na.rm = TRUE)
+
   cli::cli_alert_success(c(
-    "Query returned {.strong ",
+    "{.fn {endpoint}} returned {.strong ",
     format(x, big.mark = ","),
     "} ",
     "{cli::qty(x)}result{?s}."
@@ -18,9 +21,13 @@ cli_results <- function(x) {
 }
 
 #' @noRd
-cli_pages <- function(x, p) {
-  cli_results(x)
-  P <- offset(x, p, "size")
+cli_pages <- function(x, p, endpoint) {
+  cli_results(x, endpoint)
+  P <- if (length(x) > 1L) {
+    purrr::map_int(x, \(X) offset(n = X, limit = p)) |> sum()
+  } else {
+    offset(n = x, limit = p)
+    }
   cli::cli_alert_info(c(
     "Retrieving {.strong {P}} page{?s}..."
   ))

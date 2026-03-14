@@ -20,6 +20,14 @@ offset <- function(n, limit, which = "size") {
 }
 
 #' @noRd
+create_offset <- function(n, limit, url) {
+  offset(n, limit, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
+}
+
+#' @noRd
 params <- function(...) {
   purrr::compact(rlang::list2(...))
 }
@@ -80,8 +88,8 @@ uuid <- function(endpoint) {
       owner = m("ed289c89-0bb8-4221-a20a-85776066381b")
     ),
     pending = list(
-      phys = m("6bd6b1dd-208c-4f9c-88b8-b15fec6db548"),
-      non = m("261b83b6-b89f-43ad-ae7b-0d419a3bc24b")
+      Physician = m("6bd6b1dd-208c-4f9c-88b8-b15fec6db548"),
+      `Non-Physician` = m("261b83b6-b89f-43ad-ae7b-0d419a3bc24b")
     ),
     revocations = m("a6496a7d-4e19-479a-a9ad-d4c0a49e07c3"),
     transparency = m("6a3aa708-3c9d-411a-a1a4-e046d3ade7e"),
@@ -107,7 +115,6 @@ limit <- function(endpoint) {
 
 #' @noRd
 constants <- function(endpoint) {
-
   list(
     url = uuid(endpoint),
     limit = limit(endpoint),

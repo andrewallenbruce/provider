@@ -21,7 +21,9 @@ Providers with pending Medicare enrollment applications.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+pending(count = TRUE)
 pending(first = "John")
+pending(first = starts_with("J"))
 \dontshow{\}) # examplesIf}
 }
 \references{

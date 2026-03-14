@@ -5,21 +5,14 @@ df_tbl_ <- function(x) {
 
 #' @noRd
 set_args <- function(fn) {
-  rlang::fn_fmls(fn) |>
-    as.list() |>
-    list2env(envir = .GlobalEnv)
-}
-
-#' @noRd
-map_na_if <- function(i) {
-  purrr::modify_if(i, is.character, function(x) {
-    vctrs::vec_assign(
-      x,
-      i = vctrs::vec_in(x, haystack = ""),
-      value = NA_character_,
-      slice_value = TRUE
+  invisible(
+    list2env(
+      as.list(
+        rlang::fn_fmls(fn)
+      ),
+      envir = .GlobalEnv
     )
-  })
+  )
 }
 
 #' @noRd
