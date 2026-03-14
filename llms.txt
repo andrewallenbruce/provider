@@ -379,6 +379,8 @@ Access Current Organizational Provider Data.
   : Hospitals Enrolled in Medicare
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
+- [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
+  : Hospital Price Transparency
 
 ## Query Modifiers
 

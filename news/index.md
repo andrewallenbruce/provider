@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9039 (2026-03-14)
+
+- added
+  [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
+  endpoint
+
 ## provider 0.0.1.9038 (2026-03-14)
 
 - added type checks to modifier function args
