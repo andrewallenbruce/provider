@@ -62,7 +62,7 @@ pending <- function(
     request_rows(url_(
       paste0(x, "/stats?"),
       opts(size = LIMIT),
-      query2(ARG)
+      query(END, ARG)
     ))
   })
 
@@ -80,7 +80,7 @@ pending <- function(
       request_bare(url_(
         paste0(x, "?"),
         opts(size = LIMIT),
-        query2(ARG)
+        query(END, ARG)
       )) |>
         polish(NM)
     }) |>
@@ -95,7 +95,7 @@ pending <- function(
   URL <- url_(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    query2(ARG)
+    query(END, ARG)
   )
 
   URL <- purrr::map2_chr(URL, N, \(x, n) {

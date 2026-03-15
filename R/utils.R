@@ -16,12 +16,8 @@ set_args <- function(fn) {
 }
 
 #' @noRd
-combine_ <- function(a, b, sep = "") {
-  cheapr::if_else_(
-    !cheapr::is_na(b),
-    cheapr::paste_(a, b, sep = sep),
-    a
-  )
+combine_ <- function(e1, e2, sep = ", ") {
+  cheapr::if_else_(cheapr::is_na(e2), e1, cheapr::paste_(e1, e2, sep = sep))
 }
 
 #' @noRd

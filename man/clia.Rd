@@ -3,6 +3,17 @@
 \name{clia}
 \alias{clia}
 \title{Clinical Laboratories}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{API: Provider of Services File - Clinical Laboratories}
+\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS: CLIA}
+\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC: CLIA}
+\item \href{https://qcor.cms.gov/main.jsp}{CMS: QCOR}
+\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA: Certificates}
+\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA: Certificate Fee Schedule}
+\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA: Certification Guide}
+}
+}
 \usage{
 clia(
   name = NULL,
@@ -21,13 +32,13 @@ clia(
 
 \item{ccn}{\verb{<chr>} 10-character CLIA number}
 
-\item{certificate}{\verb{<chr>} CLIA certificate type:
+\item{certificate}{\verb{<chr>} CLIA certificate type (see details):
 \itemize{
-\item \code{"waiver"}
-\item \code{"ppm"}
-\item \code{"registration"}
-\item \code{"compliance"}
-\item \code{"accreditation"}
+\item \code{"wav"}: Waiver
+\item \code{"ppm"}: Provider-Performed Microscopy (PPM)
+\item \code{"reg"}: Registration
+\item \code{"cmp"}: Compliance
+\item \code{"acc"}: Accreditation
 }}
 
 \item{city}{\verb{<chr>} City}
@@ -59,10 +70,7 @@ In total, \strong{CLIA} covers approximately 320,000 laboratory entities.
 Although all clinical laboratories must be properly certified to receive
 Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
 program responsibilities.
-}
-
-\section{Certification}{
-
+\subsection{Certification}{
 
 There are five CLIA certificate types, all of which are effective for a period of
 two years. They are as follows, in order of increasing complexity:
@@ -93,6 +101,7 @@ laboratory is accredited by one of the CMS-approved organizations:
 }
 }
 }
+}
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
@@ -105,15 +114,4 @@ clia(
   state = "GA"
 )
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{API: Provider of Services File - Clinical Laboratories}
-\item \href{https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments}{CMS: CLIA}
-\item \href{https://www.cdc.gov/clia/php/about/index.html}{CDC: CLIA}
-\item \href{https://qcor.cms.gov/main.jsp}{CMS: QCOR}
-\item \href{https://www.cdc.gov/labs/clia-certificates/index.html}{CLIA: Certificates}
-\item \href{https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf}{CLIA: Certificate Fee Schedule}
-\item \href{https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf}{CLIA: Certification Guide}
-}
 }

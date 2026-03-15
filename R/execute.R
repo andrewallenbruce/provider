@@ -45,7 +45,7 @@ exec_prov <- function(END, COUNT, ARG) {
       schema = "false",
       limit = LIMIT
     ),
-    query(ARG)
+    query(END, ARG)
   )
 
   N <- request_count(URL)
@@ -68,7 +68,7 @@ exec_prov <- function(END, COUNT, ARG) {
         schema = "false",
         limit = LIMIT
       ),
-      query(ARG)
+      query(END, ARG)
     )
 
     res <- request_results(URL) |>
@@ -92,7 +92,7 @@ exec_prov <- function(END, COUNT, ARG) {
         limit = LIMIT,
         offset = "<<i>>"
       ),
-      query(ARG)
+      query(END, ARG)
     )
   )
 
@@ -129,7 +129,7 @@ exec_cms <- function(END, COUNT, ARG) {
   N <- request_rows(url_(
     paste0(BASE, "/stats?"),
     opts(size = LIMIT),
-    query2(ARG)
+    query(END, ARG)
   ))
 
   # NO RESULTS or COUNT --> Return Invisibly
@@ -145,7 +145,7 @@ exec_cms <- function(END, COUNT, ARG) {
     URL <- url_(
       paste0(BASE, "?"),
       opts(size = LIMIT),
-      query2(ARG)
+      query(END, ARG)
     )
 
     res <- request_bare(URL) |>
@@ -163,7 +163,7 @@ exec_cms <- function(END, COUNT, ARG) {
     url_(
       paste0(BASE, "?"),
       opts(size = LIMIT, offset = "<<i>>"),
-      query2(ARG)
+      query(END, ARG)
     )
   )
 

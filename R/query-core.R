@@ -4,7 +4,7 @@ plus <- function(x) {
 }
 
 #' @noRd
-format_query <- function(x, N) {
+format_query_pro <- function(x, N) {
   MOD <- is_modifier(x)
   V <- if (MOD) plus(x$value) else plus(unlist_(x))
   O <- if (MOD) {
@@ -27,7 +27,7 @@ format_query <- function(x, N) {
 }
 
 #' @noRd
-format_query2 <- function(x, N) {
+format_query_cms <- function(x, N) {
   MOD <- is_modifier(x)
   V <- if (MOD) plus(x$value) else plus(unlist_(x))
   O <- if (MOD) {
@@ -54,8 +54,8 @@ format_query2 <- function(x, N) {
 }
 
 #' @noRd
-query <- function(args) {
-  purrr::imap(args, format_query) |>
+query_pro <- function(args) {
+  purrr::imap(args, format_query_pro) |>
     unname() |>
     purrr::imap_chr(function(x, idx) {
       gsub(x = x, pattern = "<<i>>", replacement = idx - 1, fixed = TRUE) |>
@@ -65,12 +65,22 @@ query <- function(args) {
 }
 
 #' @noRd
-query2 <- function(args) {
-  purrr::imap(args, format_query2) |>
+query_cms <- function(args) {
+  purrr::imap(args, format_query_cms) |>
     unname() |>
     purrr::imap_chr(function(x, idx) {
       gsub(x = x, pattern = "<<i>>", replacement = idx, fixed = TRUE) |>
         paste0(collapse = "&")
     }) |>
     (\(x) paste0(x, collapse = "&"))()
+}
+
+#' @noRd
+query <- function(endpoint, args) {
+  switch(
+    endpoint,
+    affiliations = ,
+    clinicians = query_pro(args),
+    query_cms(args)
+  )
 }

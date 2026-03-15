@@ -14,24 +14,24 @@
 #' Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
 #' program responsibilities.
 #'
-#' @section Certification:
+#' ### Certification
 #'
 #' ```{r, child = "man/md/clia_certification.md"}
 #' ```
 #'
-#' @references
+#' @source
 #'
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
 #' @param name `<chr>` Provider or clinical laboratory's name
 #' @param ccn `<chr>` 10-character CLIA number
-#' @param certificate `<chr>` CLIA certificate type:
-#'    - `"waiver"`
-#'    - `"ppm"`
-#'    - `"registration"`
-#'    - `"compliance"`
-#'    - `"accreditation"`
+#' @param certificate `<chr>` CLIA certificate type (see details):
+#'    - `"wav"`: Waiver
+#'    - `"ppm"`: Provider-Performed Microscopy (PPM)
+#'    - `"reg"`: Registration
+#'    - `"cmp"`: Compliance
+#'    - `"acc"`: Accreditation
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
