@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9041</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9042</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,17 @@ services the facility provides.</p>
     </div>
 
     <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">API: Provider of Services File - Clinical Laboratories</a></p></li>
+<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS: CLIA</a></p></li>
+<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC: CLIA</a></p></li>
+<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS: QCOR</a></p></li>
+<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CLIA: Certificates</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf" class="external-link">CLIA: Certificate Fee Schedule</a></p></li>
+<li><p><a href="https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf" class="external-link">CLIA: Certification Guide</a></p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
@@ -83,11 +94,11 @@ services the facility provides.</p>
 
 
 <dt id="arg-certificate">certificate<a class="anchor" aria-label="anchor" href="#arg-certificate"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
-<li><p><code>"ppm"</code></p></li>
-<li><p><code>"registration"</code></p></li>
-<li><p><code>"compliance"</code></p></li>
-<li><p><code>"accreditation"</code></p></li>
+<dd><p><code>&lt;chr&gt;</code> CLIA certificate type (see details):</p><ul><li><p><code>"wav"</code>: Waiver</p></li>
+<li><p><code>"ppm"</code>: Provider-Performed Microscopy (PPM)</p></li>
+<li><p><code>"reg"</code>: Registration</p></li>
+<li><p><code>"cmp"</code>: Compliance</p></li>
+<li><p><code>"acc"</code>: Accreditation</p></li>
 </ul></dd>
 
 
@@ -129,11 +140,8 @@ in the U.S. through the <strong>Clinical Laboratory Improvement Amendments</stro
 In total, <strong>CLIA</strong> covers approximately 320,000 laboratory entities.</p>
 <p>Although all clinical laboratories must be properly certified to receive
 Medicare or Medicaid payments, CLIA has no direct Medicare or Medicaid
-program responsibilities.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="certification">Certification<a class="anchor" aria-label="anchor" href="#certification"></a></h2>
-
+program responsibilities.</p><div class="section">
+<h3 id="certification">Certification<a class="anchor" aria-label="anchor" href="#certification"></a></h3>
 
 
 <p>There are five CLIA certificate types, all of which are effective for a period of
@@ -160,17 +168,8 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
 <li><p><a href="https://www.jointcommission.org/" class="external-link">JCAHO: The Joint Commission</a></p></li>
 </ul></li>
 </ol></div>
-    <div class="section level2">
-    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">API: Provider of Services File - Clinical Laboratories</a></p></li>
-<li><p><a href="https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments" class="external-link">CMS: CLIA</a></p></li>
-<li><p><a href="https://www.cdc.gov/clia/php/about/index.html" class="external-link">CDC: CLIA</a></p></li>
-<li><p><a href="https://qcor.cms.gov/main.jsp" class="external-link">CMS: QCOR</a></p></li>
-<li><p><a href="https://www.cdc.gov/labs/clia-certificates/index.html" class="external-link">CLIA: Certificates</a></p></li>
-<li><p><a href="https://www.cms.gov/files/document/clia-certificate-fee-schedule-updated-06/7/2024.pdf" class="external-link">CLIA: Certificate Fee Schedule</a></p></li>
-<li><p><a href="https://www.cms.gov/files/document/clia-cert-quick-start-guide.pdf" class="external-link">CLIA: Certification Guide</a></p></li>
-</ul></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
