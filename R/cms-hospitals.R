@@ -5,7 +5,7 @@
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#' @references
+#' @source
 #'    - [Hospital Enrollments API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>` National Provider Identifier
@@ -20,20 +20,21 @@
 #' @param zip `<chr>` Practice Location Zip Code
 #' @param designation `<chr>` `"Proprietor"`/`"Non-Profit"`
 #' @param multi `<lgl>` Hospital has more than one NPI
-#' @param reh `<lgl>` Former Hospital/CAH now a Rural Emergency Hospital
 #' @param specialty `<chr>` `"hospital"`, `"reh"`, `"cah"`
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
-#' hospitals(state = "GA", reh = TRUE)
 #' hospitals(state = "GA", specialty = "reh")
-#' hospitals(city = "Atlanta",
-#'           state = "GA",
-#'           subgroup = subgroups(
-#'              acute = FALSE,
-#'              psych = TRUE))
+#' hospitals(
+#'   city = "Atlanta",
+#'   state = "GA",
+#'   subgroup = subgroups(
+#'     acute = FALSE,
+#'     psych = TRUE
+#'   )
+#' )
 #' @autoglobal
 #' @export
 hospitals <- function(
@@ -50,11 +51,12 @@ hospitals <- function(
   zip = NULL,
   designation = NULL,
   multi = NULL,
-  reh = NULL,
   subgroup = subgroups(),
   count = FALSE
 ) {
-  check_subgroups(subgroup)
+  check_subgroup(subgroup)
+  check_bool(multi, allow_null = TRUE)
+  check_character(specialty, allow_null = TRUE)
 
   exec_cms(
     END = rlang::call_name(rlang::call_match()),
@@ -64,7 +66,6 @@ hospitals <- function(
       CCN = ccn,
       `ENROLLMENT ID` = enid,
       `ENROLLMENT STATE` = enid_state,
-      # TODO Handle enums with modifiers
       `PROVIDER TYPE CODE` = enum_(specialty),
       `ASSOCIATE ID` = pac,
       `ORGANIZATION NAME` = org_name,
@@ -74,7 +75,6 @@ hospitals <- function(
       `ZIP CODE` = zip,
       PROPRIETARY_NONPROFIT = designation,
       `MULTIPLE NPI FLAG` = bool_(multi),
-      `REH CONVERSION FLAG` = bool_(reh),
       !!!subgroup
     )
   )
@@ -139,16 +139,6 @@ subgroups <- function(
 }
 
 #' @noRd
-is_subgroups <- function(x) {
+is_subgroup <- function(x) {
   inherits(x, "subgroups")
-}
-
-#' @noRd
-check_subgroups <- function(x) {
-  if (!is_subgroups(x)) {
-    cli::cli_abort(c(
-      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(x)}}",
-      "i" = "Use the {.fn subgroups} helper function"
-    ))
-  }
 }

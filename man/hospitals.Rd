@@ -3,6 +3,11 @@
 \name{hospitals}
 \alias{hospitals}
 \title{Hospitals Enrolled in Medicare}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments API}
+}
+}
 \usage{
 hospitals(
   npi = NULL,
@@ -18,7 +23,6 @@ hospitals(
   zip = NULL,
   designation = NULL,
   multi = NULL,
-  reh = NULL,
   subgroup = subgroups(),
   count = FALSE
 )
@@ -50,8 +54,6 @@ hospitals(
 
 \item{multi}{\verb{<lgl>} Hospital has more than one NPI}
 
-\item{reh}{\verb{<lgl>} Former Hospital/CAH now a Rural Emergency Hospital}
-
 \item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
@@ -67,17 +69,14 @@ type and address.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
-hospitals(state = "GA", reh = TRUE)
 hospitals(state = "GA", specialty = "reh")
-hospitals(city = "Atlanta",
-          state = "GA",
-          subgroup = subgroups(
-             acute = FALSE,
-             psych = TRUE))
+hospitals(
+  city = "Atlanta",
+  state = "GA",
+  subgroup = subgroups(
+    acute = FALSE,
+    psych = TRUE
+  )
+)
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments API}
-}
 }

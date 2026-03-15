@@ -16,7 +16,7 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
-#' transparency(state = "GA")
+#' transparency(state = "GA", city = "Valdosta")
 #' @autoglobal
 #' @export
 transparency <- function(

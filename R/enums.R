@@ -4,8 +4,6 @@ bool_ <- function(x = NULL) {
     return(NULL)
   }
 
-  check_bool(x)
-
   cheapr::val_match(
     x,
     TRUE ~ "Y",
@@ -19,11 +17,7 @@ enum_ <- function(x = NULL) {
     return(NULL)
   }
 
-  VAR <- rlang::as_string(
-    rlang::call_args(
-      rlang::call_match()
-    )[[1]]
-  )
+  VAR <- rlang::as_string(rlang::call_args(rlang::call_match())[[1]])
 
   ENUM <- enumerations(VAR)
 

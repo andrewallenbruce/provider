@@ -22,6 +22,7 @@
 #' affiliations(count = TRUE)
 #' affiliations()
 #' affiliations(first = "")
+#'
 #' affiliations(facility_ccn = "33Z302")
 #' affiliations(parent_ccn = 331302)
 #' affiliations(facility_ccn = 331302)
@@ -39,6 +40,8 @@ affiliations <- function(
   parent_ccn = NULL,
   count = FALSE
 ) {
+  check_character(facility_type, allow_null = TRUE)
+
   exec_prov(
     END = rlang::call_name(rlang::call_match()),
     COUNT = count,

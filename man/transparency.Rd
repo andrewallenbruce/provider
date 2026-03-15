@@ -35,7 +35,7 @@ Eligibility to order and refer within Medicare
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 transparency(count = TRUE)
-transparency(state = "GA")
+transparency(state = "GA", city = "Valdosta")
 \dontshow{\}) # examplesIf}
 }
 \references{

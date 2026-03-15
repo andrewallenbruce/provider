@@ -58,6 +58,8 @@ opt_out <- function(
   order_refer = NULL,
   count = FALSE
 ) {
+  check_bool(order_refer, allow_null = TRUE)
+
   exec_cms(
     END = rlang::call_name(rlang::call_match()),
     COUNT = count,

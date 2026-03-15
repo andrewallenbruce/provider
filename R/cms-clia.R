@@ -61,6 +61,9 @@ clia <- function(
   active = FALSE,
   count = FALSE
 ) {
+  check_character(certificate, allow_null = TRUE)
+  check_character(status, allow_null = TRUE)
+
   exec_cms(
     END = rlang::call_name(rlang::call_match()),
     COUNT = count,
