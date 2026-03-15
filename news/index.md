@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9044 (2026-03-15)
+
+- cleaning up query logic
+
 ## provider 0.0.1.9043 (2026-03-14)
 
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
