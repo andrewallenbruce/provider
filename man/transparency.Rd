@@ -33,7 +33,7 @@ A \link[tibble:tibble-package]{tibble}
 Eligibility to order and refer within Medicare
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 transparency(count = TRUE)
 transparency(state = "GA")
 \dontshow{\}) # examplesIf}

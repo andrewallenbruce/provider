@@ -14,7 +14,7 @@
 #' @param action `<chr>` Action taken by CMS following a Hospital Price Transparency Compliance Review
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
-#' @examplesIf FALSE
+#' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
 #' transparency(state = "GA")
 #' @autoglobal
