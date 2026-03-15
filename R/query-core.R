@@ -4,52 +4,43 @@ plus <- function(x) {
 }
 
 #' @noRd
-format_query_pro <- function(x, N) {
-  MOD <- is_modifier(x)
-  V <- if (MOD) plus(x$value) else plus(unlist_(x))
-  O <- if (MOD) {
-    tolower(plus(gsub("_", " ", x$operator, fixed = TRUE)))
-  } else if (length(V) > 1L) {
-    "IN"
-  } else {
-    "="
-  }
+plus2 <- function(x) {
+  tolower(plus(gsub("_", " ", x, fixed = TRUE)))
+}
 
-  PRP <- "conditions[<<i>>][property]="
-  OPR <- "conditions[<<i>>][operator]="
-  VAL <- "conditions[<<i>>][value]"
+#' @noRd
+format_query_pro <- function(x, N) {
+  V <- if (is_modifier(x)) plus(x$value) else plus(unlist_(x))
+  O <- if (is_modifier(x)) plus2(x$operator) else x
+  O <- if (length(V) > 1L) "IN" else "="
+
+  property <- "conditions[<<i>>][property]="
+  operator <- "conditions[<<i>>][operator]="
+  value <- "conditions[<<i>>][value]"
+  index <- if (length(V) > 1L) "[]=" else "="
 
   c(
-    paste0(PRP, plus(N)),
-    paste0(OPR, O),
-    paste0(VAL, if (length(V) > 1L) "[]=" else "=", V)
+    paste0(property, plus(N)),
+    paste0(operator, O),
+    paste0(value, index, V)
   )
 }
 
 #' @noRd
 format_query_cms <- function(x, N) {
-  MOD <- is_modifier(x)
-  V <- if (MOD) plus(x$value) else plus(unlist_(x))
-  O <- if (MOD) {
-    plus(x$operator)
-  } else if (length(V) > 1L) {
-    "IN"
-  } else {
-    "="
-  }
+  V <- if (is_modifier(x)) plus(x$value) else plus(unlist_(x))
+  O <- if (is_modifier(x)) plus(x$operator) else x
+  O <- if (length(V) > 1L) "IN" else "="
 
-  PRP <- "filter[<<i>>][condition][path]="
-  OPR <- "filter[<<i>>][condition][operator]="
-  VAL <- "filter[<<i>>][condition][value]"
+  property <- "filter[<<i>>][condition][path]="
+  operator <- "filter[<<i>>][condition][operator]="
+  value <- "filter[<<i>>][condition][value]"
+  index <- if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "="
 
   c(
-    paste0(PRP, plus(N)),
-    paste0(OPR, O),
-    paste0(
-      VAL,
-      if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",
-      V
-    )
+    paste0(property, plus(N)),
+    paste0(operator, O),
+    paste0(value, index, V)
   )
 }
 

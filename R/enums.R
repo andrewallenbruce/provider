@@ -65,6 +65,11 @@ enumerations <- function(arg) {
       cmp = "A",
       non = "B"
     ),
+    specialty = list(
+      hospital = "00-09",
+      reh = "00-24",
+      cah = "00-85"
+    ),
     cli::cli_abort("{.arg arg} {.val {arg}} invalid.")
   )
 }

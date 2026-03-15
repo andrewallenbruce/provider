@@ -34,12 +34,7 @@ hospitals(
 
 \item{enid_state}{\verb{<chr>} Enrollment State}
 
-\item{specialty}{\verb{<chr>}
-\itemize{
-\item \code{"00-09"}: Hospital
-\item \code{"00-24"}: Rural Emergency Hospital
-\item \code{"00-85"}: Critical Access Hospital
-}}
+\item{specialty}{\verb{<chr>} \code{"hospital"}, \code{"reh"}, \code{"cah"}}
 
 \item{org_name}{\verb{<chr>} Legal Business Name}
 
@@ -72,10 +67,13 @@ type and address.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
-hospitals(pac = 6103733050)
 hospitals(state = "GA", reh = TRUE)
-hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
-hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
+hospitals(state = "GA", specialty = "reh")
+hospitals(city = "Atlanta",
+          state = "GA",
+          subgroup = subgroups(
+             acute = FALSE,
+             psych = TRUE))
 \dontshow{\}) # examplesIf}
 }
 \references{

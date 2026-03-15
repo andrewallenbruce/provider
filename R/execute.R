@@ -1,7 +1,7 @@
 #' @noRd
 exec_prov <- function(END, COUNT, ARG) {
   # NO INTERNET --> Abort
-  cli_online()
+  check_online()
   check_bool(COUNT)
 
   .c(BASE, LIMIT, NM) %=% constants(END)
@@ -103,7 +103,7 @@ exec_prov <- function(END, COUNT, ARG) {
 #' @noRd
 exec_cms <- function(END, COUNT, ARG) {
   # NO INTERNET --> Abort
-  cli_online()
+  check_online()
   check_bool(COUNT)
 
   .c(BASE, LIMIT, NM) %=% constants(END)

@@ -21,19 +21,19 @@
 #' @param designation `<chr>` `"Proprietor"`/`"Non-Profit"`
 #' @param multi `<lgl>` Hospital has more than one NPI
 #' @param reh `<lgl>` Former Hospital/CAH now a Rural Emergency Hospital
-#' @param specialty `<chr>`
-#'    - `"00-09"`: Hospital
-#'    - `"00-24"`: Rural Emergency Hospital
-#'    - `"00-85"`: Critical Access Hospital
+#' @param specialty `<chr>` `"hospital"`, `"reh"`, `"cah"`
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
-#' hospitals(pac = 6103733050)
 #' hospitals(state = "GA", reh = TRUE)
-#' hospitals(city = "Atlanta", state = "GA", subgroup = subgroups(acute = FALSE))
-#' hospitals(state = "GA", subgroup = subgroups(psych = TRUE))
+#' hospitals(state = "GA", specialty = "reh")
+#' hospitals(city = "Atlanta",
+#'           state = "GA",
+#'           subgroup = subgroups(
+#'              acute = FALSE,
+#'              psych = TRUE))
 #' @autoglobal
 #' @export
 hospitals <- function(
@@ -64,7 +64,8 @@ hospitals <- function(
       CCN = ccn,
       `ENROLLMENT ID` = enid,
       `ENROLLMENT STATE` = enid_state,
-      `PROVIDER TYPE CODE` = specialty,
+      # TODO Handle enums with modifiers
+      `PROVIDER TYPE CODE` = enum_(specialty),
       `ASSOCIATE ID` = pac,
       `ORGANIZATION NAME` = org_name,
       `DOING BUSINESS AS NAME` = dba_name,

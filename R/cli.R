@@ -9,8 +9,9 @@ cli_no_query <- function() {
 
 #' @noRd
 cli_results <- function(x, endpoint) {
-
-  if (length(x) > 1L) x <- sum(x, na.rm = TRUE)
+  if (length(x) > 1L) {
+    x <- sum(x, na.rm = TRUE)
+  }
 
   cli::cli_alert_success(c(
     "{.fn {endpoint}} returned {.strong ",
@@ -27,14 +28,14 @@ cli_pages <- function(x, p, endpoint) {
     purrr::map_int(x, \(X) offset(n = X, limit = p)) |> sum()
   } else {
     offset(n = x, limit = p)
-    }
+  }
   cli::cli_alert_info(c(
     "Retrieving {.strong {P}} page{?s}..."
   ))
 }
 
 #' @noRd
-cli_online <- function() {
+check_online <- function() {
   if (!httr2::is_online()) {
     cli::cli_abort(c(
       "You are not online.",
