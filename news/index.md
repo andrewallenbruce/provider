@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9045 (2026-03-15)
+
+- checks for parameters not allowed to use query modifiers
+
 ## provider 0.0.1.9044 (2026-03-15)
 
 - cleaning up query logic

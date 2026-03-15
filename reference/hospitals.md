@@ -21,11 +21,15 @@ hospitals(
   zip = NULL,
   designation = NULL,
   multi = NULL,
-  reh = NULL,
   subgroup = subgroups(),
   count = FALSE
 )
 ```
+
+## Source
+
+- [Hospital Enrollments
+  API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 
 ## Arguments
 
@@ -81,10 +85,6 @@ hospitals(
 
   `<lgl>` Hospital has more than one NPI
 
-- reh:
-
-  `<lgl>` Former Hospital/CAH now a Rural Emergency Hospital
-
 - subgroup:
 
   `<subgroups>` Hospital’s subgroup/unit. See
@@ -98,29 +98,11 @@ hospitals(
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
-## References
-
-- [Hospital Enrollments
-  API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
-
 ## Examples
 
 ``` r
 hospitals(count = TRUE)
 #> ✔ `hospitals()` returned 9,196 results.
-hospitals(state = "GA", reh = TRUE)
-#> ✔ `hospitals()` returned 1 result.
-#> # A tibble: 1 × 39
-#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
-#>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
-#> 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
-#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
-#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
-#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
-#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
-#> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals(state = "GA", specialty = "reh")
 #> ✔ `hospitals()` returned 1 result.
 #> # A tibble: 1 × 39
@@ -134,11 +116,14 @@ hospitals(state = "GA", specialty = "reh")
 #> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
 #> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
-hospitals(city = "Atlanta",
-          state = "GA",
-          subgroup = subgroups(
-             acute = FALSE,
-             psych = TRUE))
+hospitals(
+  city = "Atlanta",
+  state = "GA",
+  subgroup = subgroups(
+    acute = FALSE,
+    psych = TRUE
+  )
+)
 #> ✔ `hospitals()` returned 2 results.
 #> # A tibble: 2 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2

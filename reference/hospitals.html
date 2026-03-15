@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9044</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9045</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,12 +74,16 @@ type and address.</p>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  designation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reh <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+
+<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments" class="external-link">Hospital Enrollments API</a></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
@@ -136,10 +140,6 @@ type and address.</p>
 <dd><p><code>&lt;lgl&gt;</code> Hospital has more than one NPI</p></dd>
 
 
-<dt id="arg-reh">reh<a class="anchor" aria-label="anchor" href="#arg-reh"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Former Hospital/CAH now a Rural Emergency Hospital</p></dd>
-
-
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
 <dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit. See <code><a href="subgroups.html">subgroups()</a></code>.</p></dd>
 
@@ -152,29 +152,11 @@ type and address.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
     </div>
-    <div class="section level2">
-    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments" class="external-link">Hospital Enrollments API</a></p></li>
-</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">9,196</span> results.</span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, reh <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, str &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   str_otxt &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, loc &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 39</span></span>
@@ -188,11 +170,14 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
-<span class="r-in"><span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
-<span class="r-in"><span>          subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>             acute <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>             psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
+<span class="r-in"><span>  state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
+<span class="r-in"><span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    acute <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>    psych <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> `hospitals()` returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
