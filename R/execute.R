@@ -1,15 +1,9 @@
 #' @noRd
-exec_prov <- function(END, COUNT, ARG) {
+exec_prov <- function(END, COUNT, ARG, call) {
   # NO INTERNET --> Abort
   check_online()
   check_bool(COUNT)
-
-  if (
-    any(purrr::map_lgl(ARG, is_modifier)) &&
-      any(unlist_(ARG) %in% c("ENDS WITH"))
-  ) {
-    cli::cli_abort("{.fn ends_with} cannot be used with {.fn {END}}.")
-  }
+  check_modifiers(ARG, END, call = call)
 
   .c(BASE, LIMIT, NM) %=% constants(END)
 
