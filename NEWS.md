@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9049 (2026-03-16)
+
+* Query modifiers are now an S7 class
+
+
 # provider 0.0.1.9048 (2026-03-16)
 
 * partially fixed bug in modifiers
