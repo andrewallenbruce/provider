@@ -5,26 +5,29 @@ Helpers for use in constructing conditions in queries.
 ## Usage
 
 ``` r
+any_of(x)
+
+none_of(x)
+
+contains(x)
+
+not(x)
+
+between(x)
+
 greater_than(x, or_equal = FALSE)
 
 less_than(x, or_equal = FALSE)
 
-between(x, negate = FALSE)
-
 starts_with(x)
 
 ends_with(x)
-
-contains(x)
-
-equal(x)
-
-not_equal(x)
-
-any_of(x)
-
-none_of(x)
 ```
+
+## Source
+
+[JSON-API: Query
+Parameters](https://jsonapi.org/format/#query-parameters)
 
 ## Arguments
 
@@ -36,13 +39,9 @@ none_of(x)
 
   `<lgl>` append `=` to `greater_than()`/`less_than()`
 
-- negate:
-
-  `<lgl>` prepend `NOT` to `between()`
-
 ## Value
 
-An object of class `<modifier>`
+An S7 `<Modifier>` object.
 
 ## Details
 
@@ -54,56 +53,48 @@ format.
 ## Examples
 
 ``` r
+any_of(state.abb)
+#> <Modifier>
+#> Operator: IN
+#> Values: AL, AK, AZ, AR, ....
+none_of(state.abb)
+#> <Modifier>
+#> Operator: NOT+IN
+#> Values: AL, AK, AZ, AR, ....
+contains("baz")
+#> <Modifier>
+#> Operator: CONTAINS
+#> Value: baz
+not(1000)
+#> <Modifier>
+#> Operator: <>
+#> Value: 1000
+between(c(0.125, 2))
+#> <Modifier>
+#> Operator: BETWEEN
+#> Values: 0.125, 2
 greater_than(1000)
-#> <modifier>
+#> <Modifier>
 #> Operator: >
 #> Value: 1000
 greater_than(0.125, or_equal = TRUE)
-#> <modifier>
+#> <Modifier>
 #> Operator: >=
 #> Value: 0.125
 less_than(1000)
-#> <modifier>
+#> <Modifier>
 #> Operator: <
 #> Value: 1000
 less_than(0.125, or_equal = TRUE)
-#> <modifier>
+#> <Modifier>
 #> Operator: <=
 #> Value: 0.125
-between(c(1000, 1100))
-#> <modifier>
-#> Operator: BETWEEN
-#> Value: NA
-between(c(0.125, 2), negate = TRUE)
-#> <modifier>
-#> Operator: NOT+BETWEEN
-#> Value: NA
 starts_with("foo")
-#> <modifier>
-#> Operator: STARTS_WITH
+#> <Modifier>
+#> Operator: STARTS WITH
 #> Value: foo
 ends_with("bar")
-#> <modifier>
-#> Operator: ENDS_WITH
+#> <Modifier>
+#> Operator: ENDS WITH
 #> Value: bar
-contains("baz")
-#> <modifier>
-#> Operator: CONTAINS
-#> Value: baz
-equal(1000)
-#> <modifier>
-#> Operator: =
-#> Value: 1000
-not_equal(1000)
-#> <modifier>
-#> Operator: <>
-#> Value: 1000
-any_of(state.abb[10:15])
-#> <modifier>
-#> Operator: IN
-#> Value: NA
-none_of(state.abb[1:5])
-#> <modifier>
-#> Operator: NOT+IN
-#> Value: NA
 ```

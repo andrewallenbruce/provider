@@ -177,7 +177,7 @@ clinicians(first = "ETAN")
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#> ✔ `clinicians()` returned 0 results.
+#> ✔ `clinicians()` returned 351 results.
 clinicians(city = "ATLANTA", state = "GA", year = 2025, count = TRUE)
 #> ✔ `clinicians()` returned 351 results.
 clinicians(city = any_of("Atlanta"), state = "GA", year = 2025)

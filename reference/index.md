@@ -43,14 +43,13 @@ Access Current Organizational Provider Data.
 
 ## Query Modifiers
 
-- [`greater_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`less_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+- [`any_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`none_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`not()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`between()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`greater_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`less_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`starts_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`ends_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`equal()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`not_equal()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`any_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`none_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   : A variety of different query operators

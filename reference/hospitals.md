@@ -102,7 +102,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ✔ `hospitals()` returned 9,196 results.
+#> ✔ `hospitals()` returned 9,187 results.
 hospitals(state = "GA", specialty = "reh")
 #> ✔ `hospitals()` returned 1 result.
 #> # A tibble: 1 × 39
