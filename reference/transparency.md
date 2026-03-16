@@ -35,8 +35,7 @@ transparency(
 
 - action:
 
-  `<chr>` Action taken by CMS following a Hospital Price Transparency
-  Compliance Review
+  `<chr>` Action taken by CMS following a Compliance Review
 
 - count:
 

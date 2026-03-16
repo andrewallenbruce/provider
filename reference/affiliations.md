@@ -69,6 +69,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 affiliations(count = TRUE)
 #> ✔ `affiliations()` returned 1,621,297 results.
+affiliations(middle = "", count = TRUE)
+#> ✔ `affiliations()` returned 548,785 results.
 affiliations()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 9
@@ -84,8 +86,6 @@ affiliations()
 #>  8 DAE     KIM   NA     NA     1003… 4082… Hospital      370001       NA        
 #>  9 DAE     KIM   NA     NA     1003… 4082… Hospital      370202       NA        
 #> 10 DAE     KIM   NA     NA     1003… 4082… Hospital      370057       NA        
-affiliations(first = "")
-#> ✔ `affiliations()` returned 0 results.
 
 affiliations(facility_ccn = "33Z302")
 #> ✔ `affiliations()` returned 4 results.
