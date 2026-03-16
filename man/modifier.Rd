@@ -2,47 +2,45 @@
 % Please edit documentation in R/query-modifiers.R
 \name{modifier}
 \alias{modifier}
-\alias{greater_than}
-\alias{less_than}
-\alias{between}
-\alias{starts_with}
-\alias{ends_with}
-\alias{contains}
-\alias{equal}
-\alias{not_equal}
 \alias{any_of}
 \alias{none_of}
+\alias{contains}
+\alias{not}
+\alias{between}
+\alias{greater_than}
+\alias{less_than}
+\alias{starts_with}
+\alias{ends_with}
 \title{A variety of different query operators}
+\source{
+\href{https://jsonapi.org/format/#query-parameters}{JSON-API: Query Parameters}
+}
 \usage{
+any_of(x)
+
+none_of(x)
+
+contains(x)
+
+not(x)
+
+between(x)
+
 greater_than(x, or_equal = FALSE)
 
 less_than(x, or_equal = FALSE)
 
-between(x, negate = FALSE)
-
 starts_with(x)
 
 ends_with(x)
-
-contains(x)
-
-equal(x)
-
-not_equal(x)
-
-any_of(x)
-
-none_of(x)
 }
 \arguments{
 \item{x}{input}
 
 \item{or_equal}{\verb{<lgl>} append \code{=} to \code{greater_than()}/\code{less_than()}}
-
-\item{negate}{\verb{<lgl>} prepend \code{NOT} to \code{between()}}
 }
 \value{
-An object of class \verb{<modifier>}
+An S7 \verb{<Modifier>} object.
 }
 \description{
 Helpers for use in constructing conditions in queries.
@@ -52,17 +50,15 @@ Query modifiers are a small DSL for use in constructing query conditions,
 in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering}{JSON-API} format.
 }
 \examples{
+any_of(state.abb)
+none_of(state.abb)
+contains("baz")
+not(1000)
+between(c(0.125, 2))
 greater_than(1000)
 greater_than(0.125, or_equal = TRUE)
 less_than(1000)
 less_than(0.125, or_equal = TRUE)
-between(c(1000, 1100))
-between(c(0.125, 2), negate = TRUE)
 starts_with("foo")
 ends_with("bar")
-contains("baz")
-equal(1000)
-not_equal(1000)
-any_of(state.abb[10:15])
-none_of(state.abb[1:5])
 }

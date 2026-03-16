@@ -61,6 +61,7 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
 revocations(state = "GA")
-revocations(specialty = contains("CARDIO"))
+revocations(specialty = contains("CARDIO"), state = not("TX"))
+revocations(specialty = contains("CARDIO"), state = none_of(c("TX", "OH")))
 \dontshow{\}) # examplesIf}
 }

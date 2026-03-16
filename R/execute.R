@@ -4,6 +4,13 @@ exec_prov <- function(END, COUNT, ARG) {
   check_online()
   check_bool(COUNT)
 
+  if (
+    any(purrr::map_lgl(ARG, is_modifier)) &&
+      any(unlist_(ARG) %in% c("ENDS WITH"))
+  ) {
+    cli::cli_abort("{.fn ends_with} cannot be used with {.fn {END}}.")
+  }
+
   .c(BASE, LIMIT, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
