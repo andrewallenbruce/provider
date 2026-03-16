@@ -20,8 +20,8 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' affiliations(count = TRUE)
+#' affiliations(middle = "", count = TRUE)
 #' affiliations()
-#' affiliations(first = "")
 #'
 #' affiliations(facility_ccn = "33Z302")
 #' affiliations(parent_ccn = 331302)

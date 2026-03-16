@@ -20,14 +20,6 @@ offset <- function(n, limit, which = "size") {
 }
 
 #' @noRd
-create_offset <- function(n, limit, url) {
-  offset(n, limit, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
-}
-
-#' @noRd
 params <- function(...) {
   purrr::compact(rlang::list2(...))
 }
@@ -39,7 +31,7 @@ opts <- function(
   schema = NULL,
   size = NULL,
   limit = NULL,
-  offset = 0
+  offset = NULL
 ) {
   x <- params(
     count = count,
@@ -49,15 +41,20 @@ opts <- function(
     limit = limit,
     offset = offset
   )
+
+  if (length(x) == 0L) {
+    return(NULL)
+  }
+
   paste0(names(x), "=", unlist_(x), collapse = "&")
 }
 
 #' @noRd
-url_ <- function(base, opts, query = NULL) {
-  if (is.null(query)) {
+url_str <- function(base, opts = opts(), args = NULL) {
+  if (is.null(args) || length(args) == 0L) {
     return(paste0(base, opts))
   }
-  paste(paste0(base, opts), query, sep = "&")
+  paste(paste0(base, opts), args, sep = "&")
 }
 
 #' @noRd
@@ -77,4 +74,12 @@ constants <- function(endpoint) {
     limit = limit(endpoint),
     names = column_renames(endpoint)
   )
+}
+
+#' @noRd
+create_offset <- function(n, limit, url) {
+  offset(n, limit, "seq") |>
+    purrr::map_chr(\(x) {
+      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
+    })
 }

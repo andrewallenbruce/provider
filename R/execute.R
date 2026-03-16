@@ -9,46 +9,24 @@ exec_prov <- function(END, COUNT, ARG) {
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
     if (COUNT) {
-      N <- request_count(url_(
-        BASE,
-        opts(count = "true", results = "false", schema = "false")
-      ))
+      N <- request_count(BASE)
+
       cli_results(N, END)
+
       return(invisible(N))
     }
 
     # EMPTY QUERY --> First 10 Rows
     cli_no_query()
 
-    URL <- url_(
-      BASE,
-      opts(
-        count = "false",
-        results = "true",
-        schema = "false",
-        limit = 10
-      )
-    )
-
-    res <- request_results(URL) |>
+    res <- request_pro(BASE, limit = 10) |>
       polish(NM)
 
     return(res)
   }
 
   # QUERY --> Request Count
-  URL <- url_(
-    BASE,
-    opts(
-      count = "true",
-      results = "false",
-      schema = "false",
-      limit = LIMIT
-    ),
-    query(END, ARG)
-  )
-
-  N <- request_count(URL)
+  N <- request_count(BASE, query(END, ARG))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -60,18 +38,7 @@ exec_prov <- function(END, COUNT, ARG) {
   if (N <= LIMIT) {
     cli_results(N, END)
 
-    URL <- url_(
-      BASE,
-      opts(
-        count = "false",
-        results = "true",
-        schema = "false",
-        limit = LIMIT
-      ),
-      query(END, ARG)
-    )
-
-    res <- request_results(URL) |>
+    res <- request_pro(BASE, LIMIT, query(END, ARG)) |>
       polish(NM)
 
     return(res)
@@ -80,21 +47,15 @@ exec_prov <- function(END, COUNT, ARG) {
   # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, LIMIT, END)
 
-  URL <- create_offset(
-    N,
-    LIMIT,
-    url_(
-      BASE,
-      opts(
-        count = "false",
-        results = "true",
-        schema = "false",
-        limit = LIMIT,
-        offset = "<<i>>"
-      ),
-      query(END, ARG)
-    )
+  OPT <- opts(
+    count = "false",
+    results = "true",
+    schema = "false",
+    limit = LIMIT,
+    offset = "<<i>>"
   )
+  URL <- url_str(BASE, OPT, query(END, ARG))
+  URL <- create_offset(N, LIMIT, URL)
 
   parallel_results(URL) |>
     polish(NM)
@@ -111,7 +72,7 @@ exec_cms <- function(END, COUNT, ARG) {
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
     if (COUNT) {
-      N <- request_rows(paste0(BASE, "/stats?"))
+      N <- request_rows(BASE)
       cli_results(N, END)
       return(invisible(N))
     }
@@ -119,18 +80,14 @@ exec_cms <- function(END, COUNT, ARG) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query()
 
-    res <- request_bare(url_(paste0(BASE, "?"), opts(size = 10))) |>
+    res <- request_cms(BASE) |>
       polish(NM)
 
     return(res)
   }
 
   # QUERY --> Request Count
-  N <- request_rows(url_(
-    paste0(BASE, "/stats?"),
-    opts(size = LIMIT),
-    query(END, ARG)
-  ))
+  N <- request_rows(BASE, LIMIT, query(END, ARG))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -142,13 +99,7 @@ exec_cms <- function(END, COUNT, ARG) {
   if (N <= LIMIT) {
     cli_results(N, END)
 
-    URL <- url_(
-      paste0(BASE, "?"),
-      opts(size = LIMIT),
-      query(END, ARG)
-    )
-
-    res <- request_bare(URL) |>
+    res <- request_cms(BASE, LIMIT, query(END, ARG)) |>
       polish(NM)
 
     return(res)
@@ -157,15 +108,12 @@ exec_cms <- function(END, COUNT, ARG) {
   # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, LIMIT, END)
 
-  URL <- create_offset(
-    N,
-    LIMIT,
-    url_(
-      paste0(BASE, "?"),
-      opts(size = LIMIT, offset = "<<i>>"),
-      query(END, ARG)
-    )
+  URL <- url_str(
+    paste0(BASE, "?"),
+    opts(size = LIMIT, offset = "<<i>>"),
+    query(END, ARG)
   )
+  URL <- create_offset(N, LIMIT, URL)
 
   parallel_request(URL) |>
     polish(NM)

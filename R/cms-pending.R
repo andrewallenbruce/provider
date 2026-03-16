@@ -50,7 +50,7 @@ pending <- function(
     cli_no_query()
 
     res <- purrr::imap(BASE, function(x, nm) {
-      request_bare(url_(paste0(x, "?"), opts(size = 10))) |>
+      request_bare(url_str(paste0(x, "?"), opts(size = 10))) |>
         polish(NM)
     }) |>
       collapse::rowbind(idcol = "prov_type")
@@ -60,7 +60,7 @@ pending <- function(
 
   # QUERY --> Request Count
   N <- purrr::map_int(BASE, function(x, nm) {
-    request_rows(url_(
+    request_rows(url_str(
       paste0(x, "/stats?"),
       opts(size = LIMIT),
       query(END, ARG)
@@ -78,7 +78,7 @@ pending <- function(
     cli_results(N, END)
 
     res <- purrr::imap(BASE, function(x, nm) {
-      request_bare(url_(
+      request_bare(url_str(
         paste0(x, "?"),
         opts(size = LIMIT),
         query(END, ARG)
@@ -93,7 +93,7 @@ pending <- function(
   # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages(N, LIMIT, END)
 
-  URL <- url_(
+  URL <- url_str(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
     query(END, ARG)

@@ -11,7 +11,7 @@
 #' @param address `<chr>` Hospital address
 #' @param city `<chr>` Hospital city
 #' @param state `<chr>` Hospital state
-#' @param action `<chr>` Action taken by CMS following a Hospital Price Transparency Compliance Review
+#' @param action `<chr>` Action taken by CMS following a Compliance Review
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()

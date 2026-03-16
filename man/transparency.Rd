@@ -22,7 +22,7 @@ transparency(
 
 \item{state}{\verb{<chr>} Hospital state}
 
-\item{action}{\verb{<chr>} Action taken by CMS following a Hospital Price Transparency Compliance Review}
+\item{action}{\verb{<chr>} Action taken by CMS following a Compliance Review}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
 }

@@ -1,9 +1,4 @@
 #' @noRd
-df_tbl_ <- function(x) {
-  `class<-`(cheapr::as_df(x), c("tbl_df", "tbl", "data.frame"))
-}
-
-#' @noRd
 set_args <- function(fn) {
   invisible(
     list2env(
@@ -12,21 +7,6 @@ set_args <- function(fn) {
       ),
       envir = .GlobalEnv
     )
-  )
-}
-
-#' @noRd
-combine_ <- function(e1, e2, sep = ", ") {
-  cheapr::if_else_(cheapr::is_na(e2), e1, cheapr::paste_(e1, e2, sep = sep))
-}
-
-#' @noRd
-bin_ <- function(x) {
-  cheapr::val_match(
-    x,
-    "Y" ~ 1L,
-    "N" ~ 0L,
-    .default = NA_integer_
   )
 }
 
@@ -43,11 +23,6 @@ has_letter <- function(x) {
 #' @noRd
 is_numeric <- function(x) {
   !has_letter(x)
-}
-
-#' @noRd
-as_date <- function(x, ..., fmt = "%Y-%m-%d") {
-  as.Date(x, ..., format = fmt)
 }
 
 #' @noRd

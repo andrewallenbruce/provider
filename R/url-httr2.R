@@ -10,17 +10,17 @@ parse_string <- function(resp, query = NULL) {
 
   switch(
     query,
-    count = PS(resp) |> _$count,
     results = PS(resp) |> _$results,
+    count = PS(resp) |> _$count,
     found_rows = PS(resp) |> _$found_rows,
-    total_rows = PS(resp) |> _$total_rows,
     PS(resp, qry = query)
   )
 }
 
 #' @noRd
-request_bare <- function(x, query = NULL) {
-  httr2::request(x) |>
+request_bare <- function(base, opts = NULL, args = NULL, query = NULL) {
+  url_str(base = base, opts = opts, args = args) |>
+    httr2::request() |>
     httr2::req_error(body = function(resp) {
       httr2::resp_body_json(resp)$message
     }) |>
@@ -30,18 +30,51 @@ request_bare <- function(x, query = NULL) {
 }
 
 #' @noRd
-request_results <- function(x) {
-  request_bare(x, query = "results")
+request_count <- function(base, args = NULL) {
+  request_bare(
+    base = base,
+    opts = opts(
+      count = "true",
+      results = "false",
+      schema = "false"
+      ),
+    args = args,
+    query = "count"
+  )
 }
 
 #' @noRd
-request_count <- function(x) {
-  request_bare(x, query = "count")
+request_pro <- function(base, limit = 10, args = NULL) {
+  request_bare(
+    base = base,
+    opts = opts(
+      count = "false",
+      results = "true",
+      schema = "false",
+      limit = limit
+    ),
+    args = args,
+    query = "results"
+  )
 }
 
 #' @noRd
-request_rows <- function(x) {
-  request_bare(x, query = "found_rows")
+request_rows <- function(base, limit = NULL, args = NULL) {
+  request_bare(
+    base = paste0(base, "/stats?"),
+    opts = opts(size = limit),
+    args = args,
+    query = "found_rows"
+  )
+}
+
+#' @noRd
+request_cms <- function(base, limit = 10, args = NULL) {
+  request_bare(
+    base = paste0(base, "?"),
+    opts = opts(size = limit),
+    args = args
+  )
 }
 
 #' @noRd
