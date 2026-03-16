@@ -11,7 +11,7 @@ Access Current Provider Data.
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
   : Reassignment of Benefits
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
-  : Revocations of Medicare Enrollments
+  : Revoked Providers & Suppliers
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 
@@ -39,7 +39,7 @@ Access Current Organizational Provider Data.
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
-  : Hospital Price Transparency
+  : Hospital Transparency Enforcement
 
 ## Query Modifiers
 
