@@ -1,12 +1,6 @@
 #' @noRd
 new_modifier <- function(operator, value) {
-  structure(
-    list(
-      operator = operator,
-      value = value
-    ),
-    class = "modifier"
-  )
+  structure(c(operator = operator, value = value), class = "modifier")
 }
 
 #' @noRd
@@ -19,12 +13,12 @@ print.modifier <- function(x, ...) {
   cli::cli_text(cli::col_cyan("<modifier>"))
   cli::cli_text(c(
     cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold("{x$operator}"))
+    cli::col_red(cli::style_bold(x["operator"]))
   ))
   cli::cli_text(
     c(
-      cli::col_silver("{cli::qty(length(x$value))}Value{?s}: "),
-      cli::col_yellow("{x$value}")
+      cli::col_silver(if (length(x["value"]) > 1L) "Values: " else "Value: "),
+      cli::col_yellow(x["value"])
     )
   )
 }

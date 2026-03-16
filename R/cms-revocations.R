@@ -49,8 +49,8 @@ revocations <- function(
     END = rlang::call_name(rlang::call_match()),
     COUNT = count,
     ARG = params(
-      ENRLMT_ID = enid,
       NPI = npi,
+      ENRLMT_ID = enid,
       FIRST_NAME = first,
       MDL_NAME = middle,
       LAST_NAME = last,

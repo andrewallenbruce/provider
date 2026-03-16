@@ -1,5 +1,5 @@
 ---
-title: "CMS API Notes"
+title: "API Notes"
 editor_options: 
   chunk_output_type: console
 output: 
@@ -14,6 +14,7 @@ output:
 
 
 
+## CMS
 
    - [data.CMS.gov API FAQ]("https://data.cms.gov/sites/default/files/2024-10/7ef65521-65a4-41ed-b600-3a0011f8ec4b/API%20Guide%20Formatted%201_6.pdf")
 
@@ -150,3 +151,86 @@ fastplyr::new_tbl(
 > Also, requests with `%20` encoded spaces seem to be faster than those with `+` encoded spaces.
 
 <br>
+
+## Provider
+
+Which query modifiers work?
+
+
+``` r
+clinicians(first = starts_with("J")) |> _$first |> collapse::funique()
+✔ `clinicians()` returned 187 results.
+[1] "J"
+clinicians(first = contains("J"), count = TRUE)
+✔ `clinicians()` returned 187 results.
+```
+
+
+
+``` r
+contains_url <- paste0(
+  "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?",
+  "schema=false&",
+  "keys=true&",
+  "results=true&",
+  "count=true&",
+  "format=json&",
+  "rowIds=false&",
+  "limit=10&",
+  "offset=0&",
+  "conditions[0][property]=provider_first_name&",
+  "conditions[0][operator]=contains&",
+  "conditions[0][value]=JO"
+)
+contains_url |> 
+  urlparse::url_encoder(safe = ":/=&?") |> 
+  httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  _$results |> 
+  _$provider_first_name |> 
+  collapse::funique()
+[1] "JON"      "JONATHAN" "JOSEPH"   "JONATHON"
+
+contains_url |> 
+  httr2::url_modify_query(`conditions[0][operator]` = "starts with") |> 
+  httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  _$results |> 
+  _$provider_first_name |> 
+  collapse::funique()
+[1] "JON"      "JONATHAN" "JOSEPH"   "JONATHON"
+
+contains_url |> 
+  httr2::url_modify_query(`conditions[0][operator]` = "ENDS_WITH") |> 
+  httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  _$results |> 
+  _$provider_first_name |> 
+  collapse::funique()
+Error in `httr2::req_perform()` at provider/R/url-httr2.R:8:5:
+! HTTP 400 Bad Request.
+
+contains_url |> 
+  httr2::url_modify_query(`conditions[0][operator]` = "=") |> 
+  httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  _$results |> 
+  _$provider_first_name |> 
+  collapse::funique()
+[1] "JO"
+
+contains_url |> 
+  httr2::url_modify_query(`conditions[0][operator]` = "like") |> 
+  httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  _$results |> 
+  _$provider_first_name |> 
+  collapse::funique()
+[1] "JO"
+```
+

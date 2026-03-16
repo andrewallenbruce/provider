@@ -10,8 +10,8 @@ plus2 <- function(x) {
 
 #' @noRd
 format_query_pro <- function(x, N) {
-  V <- if (is_modifier(x)) plus(x$value) else plus(unlist_(x))
-  O <- if (is_modifier(x)) plus2(x$operator) else "="
+  V <- if (is_modifier(x)) plus(x["value"]) else plus(unlist_(x))
+  O <- if (is_modifier(x)) plus2(x["operator"]) else "="
   O <- if (length(V) > 1L) "IN" else "="
 
   property <- "conditions[<<i>>][property]="
@@ -28,8 +28,8 @@ format_query_pro <- function(x, N) {
 
 #' @noRd
 format_query_cms <- function(x, N) {
-  V <- if (is_modifier(x)) plus(x$value) else plus(unlist_(x))
-  O <- if (is_modifier(x)) plus(x$operator) else "="
+  V <- if (is_modifier(x)) plus(x["value"]) else plus(unlist_(x))
+  O <- if (is_modifier(x)) plus(x["operator"]) else "="
   O <- if (length(V) > 1L) "IN" else "="
 
   property <- "filter[<<i>>][condition][path]="
