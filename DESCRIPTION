@@ -23,9 +23,9 @@ Imports:
     purrr (>= 1.2.1),
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.1.7),
+    S7 (>= 0.2.1),
     stringr (>= 1.6.0),
-    vctrs (>= 0.7.1),
-    S7 (>= 0.2.1)
+    vctrs (>= 0.7.1)
 Suggests: 
     knitr,
     roxyglobals (>= 1.0.0),
