@@ -73,11 +73,11 @@ less_than(0.125, or_equal = TRUE)
 between(c(1000, 1100))
 #> <modifier>
 #> Operator: BETWEEN
-#> Values: 1000 and 1100
+#> Value: NA
 between(c(0.125, 2), negate = TRUE)
 #> <modifier>
 #> Operator: NOT+BETWEEN
-#> Values: 0.125 and 2
+#> Value: NA
 starts_with("foo")
 #> <modifier>
 #> Operator: STARTS_WITH
@@ -101,9 +101,9 @@ not_equal(1000)
 any_of(state.abb[10:15])
 #> <modifier>
 #> Operator: IN
-#> Values: GA, HI, ID, IL, IN, and IA
+#> Value: NA
 none_of(state.abb[1:5])
 #> <modifier>
 #> Operator: NOT+IN
-#> Values: AL, AK, AZ, AR, and CA
+#> Value: NA
 ```

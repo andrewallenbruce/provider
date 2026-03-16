@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9048 (2026-03-16)
+
+- partially fixed bug in modifiers
+
 ## provider 0.0.1.9047 (2026-03-16)
 
 - documentation, notes
