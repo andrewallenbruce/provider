@@ -2,7 +2,12 @@
 % Please edit documentation in R/cms-revocations.R
 \name{revocations}
 \alias{revocations}
-\title{Revocations of Medicare Enrollments}
+\title{Revoked Providers & Suppliers}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revoked-medicare-providers-and-suppliers}{API: Revoked Medicare Providers and Suppliers}
+}
+}
 \usage{
 revocations(
   npi = NULL,
@@ -41,7 +46,16 @@ revocations(
 A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Eligibility to order and refer within Medicare
+Information on providers and suppliers currently revoked from the Medicare program.
+\subsection{Details}{
+
+The Revoked Medicare Providers and Suppliers dataset contains information on
+providers and suppliers who are revoked and under a current re-enrollment bar.
+This dataset includes provider and supplier names, NPIs, revocation
+authorities pursuant to \href{https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535}{42 CFR § 424.535}, revocation effective dates, and
+re-enrollment bar expiration dates. This dataset is based on information
+gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+}
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
@@ -49,10 +63,4 @@ revocations(count = TRUE)
 revocations(state = "GA")
 revocations(specialty = contains("CARDIO"))
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{API: Medicare Order and Referring}
-\item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS: Ordering & Certifying}
-}
 }

@@ -1,11 +1,18 @@
-#' Revocations of Medicare Enrollments
+#' Revoked Providers & Suppliers
 #'
 #' @description
-#' Eligibility to order and refer within Medicare
+#' Information on providers and suppliers currently revoked from the Medicare program.
 #'
-#' @references
-#'    - [API: Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-#'    - [CMS: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
+#' ### Details
+#' The Revoked Medicare Providers and Suppliers dataset contains information on
+#' providers and suppliers who are revoked and under a current re-enrollment bar.
+#' This dataset includes provider and supplier names, NPIs, revocation
+#' authorities pursuant to [42 CFR § 424.535](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535), revocation effective dates, and
+#' re-enrollment bar expiration dates. This dataset is based on information
+#' gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+#'
+#' @source
+#'    - [API: Revoked Medicare Providers and Suppliers](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revoked-medicare-providers-and-suppliers)
 #'
 #' @param npi `<int>` 10-digit Individual National Provider Identifier
 #' @param enid `<chr>` 15-digit Medicare Enrollment ID
