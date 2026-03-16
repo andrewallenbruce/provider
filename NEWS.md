@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9047 (2026-03-16)
+
+* documentation, notes
+
+
 # provider 0.0.1.9046 (2026-03-15)
 
 * refining `exec_` functionality
