@@ -24,12 +24,28 @@ hospitals(
   subgroup = subgroups(),
   count = FALSE
 )
+
+subgroups(
+  acute = NULL,
+  drug = NULL,
+  child = NULL,
+  general = NULL,
+  long = NULL,
+  short = NULL,
+  psych = NULL,
+  rehab = NULL,
+  swing = NULL,
+  psych_unit = NULL,
+  rehab_unit = NULL,
+  specialty = NULL,
+  other = NULL
+)
 ```
 
 ## Source
 
-- [Hospital Enrollments
-  API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+- [API: Hospital
+  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 
 ## Arguments
 
@@ -55,7 +71,7 @@ hospitals(
 
 - specialty:
 
-  `<chr>` `"hospital"`, `"reh"`, `"cah"`
+  `<lgl>` Specialty Hospital
 
 - org_name:
 
@@ -87,16 +103,65 @@ hospitals(
 
 - subgroup:
 
-  `<subgroups>` Hospital’s subgroup/unit. See
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
+  `<subgroups>` Hospital’s subgroup/unit. See `subgroups()`.
 
 - count:
 
   `<lgl>` Return the dataset's total row count
 
+- acute:
+
+  `<lgl>` Acute Care
+
+- drug:
+
+  `<lgl>` Alcohol/Drug Treatment
+
+- child:
+
+  `<lgl>` Children's Hospital
+
+- general:
+
+  `<lgl>` General Hospital
+
+- long:
+
+  `<lgl>` Long-Term Care
+
+- short:
+
+  `<lgl>` Short-Term Care
+
+- psych:
+
+  `<lgl>` Psychiatric
+
+- rehab:
+
+  `<lgl>` Rehabilitation
+
+- swing:
+
+  `<lgl>` Swing-Bed Approved
+
+- psych_unit:
+
+  `<lgl>` Psychiatric Unit
+
+- rehab_unit:
+
+  `<lgl>` Rehabilitation Unit
+
+- other:
+
+  `<lgl>` Unlisted on CMS form
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+
+A `<subgroups>` object
 
 ## Examples
 
@@ -137,4 +202,8 @@ hospitals(
 #> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
 #> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
+subgroups(acute = TRUE, rehab = TRUE)
+#> <subgroups>
+#> ◉ SUBGROUP %2D ACUTE CARE     : Y
+#> ◉ SUBGROUP %2D REHABILITATION : Y
 ```

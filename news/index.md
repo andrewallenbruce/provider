@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9051 (2026-03-17)
+
+- rebuild readme, documentation
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)’
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  helper now exported
+- `cli_hybrid` for calls to different APIs within one function
+
 ## provider 0.0.1.9050 (2026-03-16)
 
 - `pending` APIs (hybrid) restructuring
@@ -106,7 +114,7 @@
 ## provider 0.0.1.9027 (2026-03-10)
 
 - added
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   helper
 - added `cdc_labs` CLIA example dataset
 

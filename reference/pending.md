@@ -2,6 +2,10 @@
 
 Providers with pending Medicare enrollment applications.
 
+The Pending Initial Logging and Tracking (L & T) dataset provides a list
+of pending applications for both Physicians and Non-Physicians that have
+not been processed by CMS contractors.
+
 ## Usage
 
 ``` r
@@ -10,11 +14,13 @@ pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
 
 ## Source
 
-- [Medicare Pending Initial Logging and Tracking Physicians
-  API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
+Medicare Pending Initial Logging and Tracking:
 
-- [Medicare Pending Initial Logging and Tracking Non-Physicians
-  API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
+- [API:
+  Physicians](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
+
+- [API:
+  Non-Physicians](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 
 ## Arguments
 
