@@ -44,15 +44,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ✔ `pending` returned 9,899 results.
-#> ◉ Physician     : 3,271
-#> ◉ Non-Physician : 6,628
+#> ✔ `pending` returned 9,759 results.
+#> ◉ NULL : 9,759
 pending(first = "Victor", count = TRUE)
-#> ✔ `pending` returned 8 results.
-#> ◉ Physician     : 6
-#> ◉ Non-Physician : 2
+#> ✔ `pending` returned 9 results.
+#> ◉ NULL : 9
 pending(first = starts_with("V"), count = TRUE)
-#> ✔ `pending` returned 139 results.
-#> ◉ Physician     : 39 
-#> ◉ Non-Physician : 100
+#> ✔ `pending` returned 145 results.
+#> ◉ NULL : 145
 ```
