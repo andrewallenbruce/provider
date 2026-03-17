@@ -3,6 +3,12 @@
 \name{pending}
 \alias{pending}
 \title{Pending Medicare Enrollments}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
+}
+}
 \usage{
 pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
 }
@@ -22,13 +28,7 @@ Providers with pending Medicare enrollment applications.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 pending(count = TRUE)
-pending(first = "John")
-pending(first = starts_with("J"))
+pending(first = "Victor", count = TRUE)
+pending(first = starts_with("V"), count = TRUE)
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
-}
 }

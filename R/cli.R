@@ -1,4 +1,9 @@
 #' @noRd
+nump <- function(x) {
+  prettyNum(x, big.mark = ",")
+}
+
+#' @noRd
 cli_no_query <- function() {
   cli::cli_alert_warning(c(
     "{.emph No Query} ",
@@ -9,23 +14,46 @@ cli_no_query <- function() {
 
 #' @noRd
 cli_results <- function(x, endpoint) {
-  if (length(x) > 1L) {
-    x <- sum(x, na.rm = TRUE)
-  }
-
   cli::cli_alert_success(c(
-    "{.fn {endpoint}} returned {.strong ",
-    format(x, big.mark = ","),
-    "} ",
+    "{.strong {.arg {endpoint}}} returned ",
+    "{.strong {nump(x)}} ",
     "{cli::qty(x)}result{?s}."
   ))
 }
 
 #' @noRd
-cli_pages <- function(x, p, endpoint) {
+cli_hybrid <- function(x, endpoint) {
+  TOTAL <- collapse::fsum(x)
+
+  cli::cli_alert_success(c(
+    "{.strong {.arg {endpoint}}} returned ",
+    "{.strong {nump(TOTAL)}} ",
+    "{cli::qty(TOTAL)}result{?s}."
+  ))
+  cli::cat_bullet(
+    paste0(
+      format(names(x), justify = "left"),
+      cli::col_silver(" : "),
+      format(nump(unname(x)), justify = "left")
+    ),
+    bullet = "radio_on",
+    bullet_col = "silver"
+  )
+}
+
+#' @noRd
+cli_pages <- function(x, limit, endpoint) {
   cli_results(x, endpoint)
+  cli::cli_alert_info(c(
+    "Retrieving {.strong {offset(n = x, limit = limit)}} page{?s}..."
+  ))
+}
+
+#' @noRd
+cli_hybrid_pages <- function(x, limit, endpoint) {
+  cli_hybrid(x, endpoint)
   P <- if (length(x) > 1L) {
-    purrr::map_int(x, \(X) offset(n = X, limit = p)) |> sum()
+    purrr::map_int(x, \(X) offset(n = X, limit = limit)) |> sum()
   } else {
     offset(n = x, limit = p)
   }

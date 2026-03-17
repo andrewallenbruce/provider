@@ -3,7 +3,7 @@
 #' @description
 #' Providers with pending Medicare enrollment applications.
 #'
-#' @references
+#' @source
 #'    * [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #'    * [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
@@ -13,8 +13,8 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
-#' pending(first = "John")
-#' pending(first = starts_with("J"))
+#' pending(first = "Victor", count = TRUE)
+#' pending(first = starts_with("V"), count = TRUE)
 #' @autoglobal
 #' @export
 pending <- function(
@@ -42,7 +42,7 @@ pending <- function(
       N <- purrr::map_int(BASE, function(x, nm) {
         request_rows(paste0(x, "/stats?"))
       })
-      cli_results(N, END)
+      cli_hybrid(N, END)
       return(invisible(N))
     }
 
@@ -59,23 +59,19 @@ pending <- function(
   }
 
   # QUERY --> Request Count
-  N <- purrr::map_int(BASE, function(x, nm) {
-    request_rows(url_str(
-      paste0(x, "/stats?"),
-      opts(size = LIMIT),
-      query(END, ARG)
-    ))
+  N <- purrr::imap_vec(BASE, function(x, n) {
+    request_rows(base = x, limit = LIMIT, query(END, ARG))
   })
 
   # NO RESULTS or COUNT --> Return Invisibly
-  if (sum(N, na.rm = TRUE) == 0L || COUNT) {
-    cli_results(N, END)
+  if (collapse::fsum(N) == 0L || COUNT) {
+    cli_hybrid(N, END)
     return(invisible(N))
   }
 
   # COUNT BELOW LIMIT --> Single Request
-  if (all(N <= LIMIT)) {
-    cli_results(N, END)
+  if (collapse::allv(N <= LIMIT, TRUE)) {
+    cli_hybrid(N, END)
 
     res <- purrr::imap(BASE, function(x, nm) {
       request_bare(url_str(
@@ -91,7 +87,7 @@ pending <- function(
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_pages(N, LIMIT, END)
+  cli_hybrid_pages(N, LIMIT, END)
 
   URL <- url_str(
     paste0(BASE, "?"),
