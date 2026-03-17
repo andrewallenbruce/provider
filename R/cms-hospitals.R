@@ -6,7 +6,7 @@
 #' type and address.
 #'
 #' @source
-#'    - [Hospital Enrollments API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#'    - [API: Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -54,12 +54,12 @@ hospitals <- function(
   subgroup = subgroups(),
   count = FALSE
 ) {
-  check_subgroup(subgroup)
+  check_subgroups(subgroup)
   check_bool(multi, allow_null = TRUE)
   check_character(specialty, allow_null = TRUE)
 
   exec_cms(
-    END = rlang::call_name(rlang::call_match()),
+    END = call_name(call_match()),
     COUNT = count,
     ARG = params(
       NPI = npi,
@@ -80,10 +80,6 @@ hospitals <- function(
   )
 }
 
-#' Subgroup Helper
-#'
-#' For use in [hospitals()] `subgroup` argument
-#'
 #' @param acute `<lgl>` Acute Care
 #' @param drug `<lgl>` Alcohol/Drug Treatment
 #' @param child `<lgl>` Children's Hospital
@@ -98,9 +94,9 @@ hospitals <- function(
 #' @param specialty `<lgl>` Specialty Hospital
 #' @param other `<lgl>` Unlisted on CMS form
 #' @returns A `<subgroups>` object
-#' @examplesIf FALSE
+#' @examples
 #' subgroups(acute = TRUE, rehab = TRUE)
-#' @keywords internal
+#' @rdname hospitals
 #' @export
 subgroups <- function(
   acute = NULL,
@@ -139,6 +135,24 @@ subgroups <- function(
 }
 
 #' @noRd
-is_subgroup <- function(x) {
+is_subgroups <- function(x) {
   inherits(x, "subgroups")
+}
+
+#' @exportS3Method base::print
+print.subgroups <- function(x, ...) {
+  cli::cli_text(cli::col_cyan("<subgroups>"))
+  if (!length(x)) {
+    cli::cli_text(cli::col_red("<empty>"))
+  } else {
+    cli::cat_bullet(
+      paste0(
+        format(names(x), justify = "left"),
+        cli::col_silver(" : "),
+        format(unname(x), justify = "left")
+      ),
+      bullet = "radio_on",
+      bullet_col = "silver"
+    )
+  }
 }

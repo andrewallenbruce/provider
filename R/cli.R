@@ -22,6 +22,14 @@ cli_results <- function(x, endpoint) {
 }
 
 #' @noRd
+cli_pages <- function(x, limit, endpoint) {
+  cli_results(x, endpoint)
+  cli::cli_alert_info(c(
+    "Retrieving {.strong {offset(n = x, limit = limit)}} page{?s}..."
+  ))
+}
+
+#' @noRd
 cli_hybrid <- function(x, endpoint) {
   TOTAL <- collapse::fsum(x)
 
@@ -42,22 +50,8 @@ cli_hybrid <- function(x, endpoint) {
 }
 
 #' @noRd
-cli_pages <- function(x, limit, endpoint) {
-  cli_results(x, endpoint)
-  cli::cli_alert_info(c(
-    "Retrieving {.strong {offset(n = x, limit = limit)}} page{?s}..."
-  ))
-}
-
-#' @noRd
 cli_hybrid_pages <- function(x, limit, endpoint) {
+  PAGE <- collapse::fsum(cheapr::seq_size(0L, unlist_(x), limit))
   cli_hybrid(x, endpoint)
-  P <- if (length(x) > 1L) {
-    purrr::map_int(x, \(X) offset(n = X, limit = limit)) |> sum()
-  } else {
-    offset(n = x, limit = p)
-  }
-  cli::cli_alert_info(c(
-    "Retrieving {.strong {P}} page{?s}..."
-  ))
+  cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
 }
