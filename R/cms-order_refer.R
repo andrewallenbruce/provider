@@ -55,7 +55,6 @@ order_refer <- function(
   hospice = NULL,
   count = FALSE
 ) {
-
   check_bool(part_b, allow_null = TRUE)
   check_bool(dme, allow_null = TRUE)
   check_bool(hha, allow_null = TRUE)
@@ -63,7 +62,7 @@ order_refer <- function(
   check_bool(hospice, allow_null = TRUE)
 
   exec_cms(
-    END = rlang::call_name(rlang::call_match()),
+    END = call_name(call_match()),
     COUNT = count,
     ARG = params(
       NPI = npi,

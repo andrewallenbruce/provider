@@ -109,8 +109,8 @@ reference:
   desc: >
     Access Current Organizational Provider Data.
   contents:
-  - hospitals
   - clia
+  - hospitals
   - transparency
 
 - title: Query Modifiers

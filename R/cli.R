@@ -14,11 +14,17 @@ cli_no_query <- function() {
 
 #' @noRd
 cli_results <- function(x, endpoint) {
-  cli::cli_alert_success(c(
+  msg <- c(
     "{.strong {.arg {endpoint}}} returned ",
     "{.strong {nump(x)}} ",
     "{cli::qty(x)}result{?s}."
-  ))
+  )
+
+  if (x == 0L) {
+    cli::cli_alert_warning(msg)
+  } else {
+    cli::cli_alert_success(msg)
+  }
 }
 
 #' @noRd
@@ -31,13 +37,20 @@ cli_pages <- function(x, limit, endpoint) {
 
 #' @noRd
 cli_hybrid <- function(x, endpoint) {
-  TOTAL <- collapse::fsum(x)
+  x <- collapse::fsum(x)
 
-  cli::cli_alert_success(c(
+  msg <- c(
     "{.strong {.arg {endpoint}}} returned ",
-    "{.strong {nump(TOTAL)}} ",
-    "{cli::qty(TOTAL)}result{?s}."
-  ))
+    "{.strong {nump(x)}} ",
+    "{cli::qty(x)}result{?s}."
+  )
+
+  if (x == 0L) {
+    cli::cli_alert_warning(msg)
+  } else {
+    cli::cli_alert_success(msg)
+  }
+
   cli::cat_bullet(
     paste0(
       format(names(x), justify = "left"),

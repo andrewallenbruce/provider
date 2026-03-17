@@ -29,7 +29,7 @@ pending <- function(
   count = FALSE
 ) {
   check_online()
-  END <- rlang::call_name(rlang::call_match())
+  END <- call_name(call_match())
 
   .c(BASE, LIMIT, NM) %=% constants(END)
 
