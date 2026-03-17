@@ -102,9 +102,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ✔ `hospitals()` returned 9,187 results.
+#> ✔ `hospitals` returned 9,187 results.
 hospitals(state = "GA", specialty = "reh")
-#> ✔ `hospitals()` returned 1 result.
+#> ✔ `hospitals` returned 1 result.
 #> # A tibble: 1 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
@@ -124,7 +124,7 @@ hospitals(
     psych = TRUE
   )
 )
-#> ✔ `hospitals()` returned 2 results.
+#> ✔ `hospitals` returned 2 results.
 #> # A tibble: 2 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>

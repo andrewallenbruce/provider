@@ -127,7 +127,7 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ✔ `clinicians()` returned 2,843,790 results.
+#> ✔ `clinicians` returned 2,843,790 results.
 clinicians()
 #> ! No Query → Returning first 10 rows.
 #> # A tibble: 10 × 25
@@ -148,7 +148,7 @@ clinicians()
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
 clinicians(enid = "I20081002000549")
-#> ✔ `clinicians()` returned 1 result.
+#> ✔ `clinicians` returned 1 result.
 #> # A tibble: 1 × 25
 #>   first middle last  suffix gender cred  school year  specialty spec_other npi  
 #>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
@@ -157,7 +157,7 @@ clinicians(enid = "I20081002000549")
 #> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>, org_state <chr>,
 #> #   org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>, tlh <chr>
 clinicians(first = "ETAN")
-#> ✔ `clinicians()` returned 11 results.
+#> ✔ `clinicians` returned 11 results.
 #> # A tibble: 11 × 25
 #>    first middle last     suffix gender cred  school   year  specialty spec_other
 #>    <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
@@ -177,11 +177,11 @@ clinicians(first = "ETAN")
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#> ✔ `clinicians()` returned 351 results.
+#> ✔ `clinicians` returned 351 results.
 clinicians(city = "ATLANTA", state = "GA", year = 2025, count = TRUE)
-#> ✔ `clinicians()` returned 351 results.
+#> ✔ `clinicians` returned 351 results.
 clinicians(city = any_of("Atlanta"), state = "GA", year = 2025)
-#> ✔ `clinicians()` returned 351 results.
+#> ✔ `clinicians` returned 351 results.
 #> # A tibble: 351 × 25
 #>    first      middle last  suffix gender cred  school year  specialty spec_other
 #>    <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     

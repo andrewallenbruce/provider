@@ -88,15 +88,15 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ✔ `order_refer()` returned 1,997,403 results.
+#> ✔ `order_refer` returned 1,997,403 results.
 order_refer(npi = 1003026055)
-#> ✔ `order_refer()` returned 1 result.
+#> ✔ `order_refer` returned 1 result.
 #> # A tibble: 1 × 8
 #>   first   last   npi        part_b dme   hha   pmd   hospice
 #>   <chr>   <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>  
 #> 1 RADHIKA PHADKE 1003026055 Y      Y     Y     Y     Y      
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ `order_refer()` returned 135 results.
+#> ✔ `order_refer` returned 135 results.
 #> # A tibble: 135 × 8
 #>    first    last  npi        part_b dme   hha   pmd   hospice
 #>    <chr>    <chr> <chr>      <chr>  <chr> <chr> <chr> <chr>  
@@ -117,7 +117,7 @@ order_refer(
   hha = FALSE,
   pmd = TRUE,
   hospice = FALSE)
-#> ✔ `order_refer()` returned 50 results.
+#> ✔ `order_refer` returned 50 results.
 #> # A tibble: 50 × 8
 #>    first    last        npi        part_b dme   hha   pmd   hospice
 #>    <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  

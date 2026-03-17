@@ -101,9 +101,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> ✔ `transparency()` returned 10,726 results.
+#> ✔ `transparency` returned 10,726 results.
 transparency(state = "GA", city = "Valdosta")
-#> ✔ `transparency()` returned 1 result.
+#> ✔ `transparency` returned 1 result.
 #> # A tibble: 1 × 7
 #>   id    name             address             city     state action   action_date
 #>   <chr> <chr>            <chr>               <chr>    <chr> <chr>    <chr>      

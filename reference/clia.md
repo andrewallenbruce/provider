@@ -156,11 +156,11 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ✔ `clia()` returned 671,570 results.
+#> ✔ `clia` returned 671,570 results.
 clia(status = "cmp", count = TRUE)
-#> ✔ `clia()` returned 72,855 results.
+#> ✔ `clia` returned 72,855 results.
 clia(ccn = provider:::cdc_labs$ccn)
-#> ✔ `clia()` returned 6 results.
+#> ✔ `clia` returned 6 results.
 #> # A tibble: 6 × 82
 #>   name_1   name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
 #>   <chr>    <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
@@ -182,7 +182,7 @@ clia(
   city = "Valdosta",
   state = "GA"
 )
-#> ✔ `clia()` returned 18 results.
+#> ✔ `clia` returned 18 results.
 #> # A tibble: 18 × 82
 #>    name_1  name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
 #>    <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>

@@ -80,27 +80,27 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ✔ `providers()` returned 2,957,262 results.
+#> ✔ `providers` returned 2,957,262 results.
 providers(enid = "I20040309000221")
-#> ✔ `providers()` returned 1 result.
+#> ✔ `providers` returned 1 result.
 #> # A tibble: 1 × 11
 #>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
 #>   <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
 providers(npi = 1417918293)
-#> ✔ `providers()` returned 1 result.
+#> ✔ `providers` returned 1 result.
 #> # A tibble: 1 × 11
 #>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
 #>   <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
 providers(pac = 2860305554)
-#> ✔ `providers()` returned 1 result.
+#> ✔ `providers` returned 1 result.
 #> # A tibble: 1 × 11
 #>   org_name first  middle last   state spec  specialty    npi   multi pac   enid 
 #>   <chr>    <chr>  <chr>  <chr>  <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
 #> 1 NA       ROBERT NA     YEAMAN TX    14-41 PRACTITIONE… 1134… N     2860… I200…
 providers(state = "AK")
-#> ✔ `providers()` returned 6,851 results.
+#> ✔ `providers` returned 6,851 results.
 #> ℹ Retrieving 2 pages...
 #> # A tibble: 6,851 × 11
 #>    org_name first     middle last  state spec  specialty npi   multi pac   enid 
