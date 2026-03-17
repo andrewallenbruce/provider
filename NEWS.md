@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9051 (2026-03-17)
+
+* rebuild readme, documentation
+* `hospitals()`' `subgroups()` helper now exported
+* `cli_hybrid` for calls to different APIs within one function
+
+
 # provider 0.0.1.9050 (2026-03-16)
 
 * `pending` APIs (hybrid) restructuring
