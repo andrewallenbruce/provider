@@ -17,13 +17,13 @@ enum_ <- function(x = NULL) {
     return(NULL)
   }
 
-  VAR <- rlang::as_string(rlang::call_args(rlang::call_match())[[1]])
+  VAR <- as_string(call_args(call_match())[[1]])
 
   ENUM <- enumerations(VAR)
 
-  x <- rlang::arg_match(
+  x <- arg_match(
     arg = x,
-    values = rlang::names2(ENUM),
+    values = names2(ENUM),
     multiple = TRUE,
     error_arg = VAR
   )

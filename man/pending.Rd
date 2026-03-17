@@ -4,9 +4,10 @@
 \alias{pending}
 \title{Pending Medicare Enrollments}
 \source{
+Medicare Pending Initial Logging and Tracking:
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{API: Physicians}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{API: Non-Physicians}
 }
 }
 \usage{
@@ -24,6 +25,10 @@ A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Providers with pending Medicare enrollment applications.
+
+The Pending Initial Logging and Tracking (L & T) dataset provides a list of
+pending applications for both Physicians and Non-Physicians that have not
+been processed by CMS contractors.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

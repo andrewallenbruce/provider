@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
-  comment   = "#>",
+  comment   = "",
   fig.path = "man/figures/README-",
   out.width = "100%"
   )
@@ -22,10 +22,7 @@ library(tibble)
 
 # <b>provider</b> <a href="https://andrewallenbruce.github.io/provider/"><img src="man/figures/logo.svg" align="right" height="139" alt="provider website" /></a>
 
-
-<br>
-
-> Tidy Healthcare Provider API Interface
+> <b>Tidy Healthcare Provider API Interface</b>
 
 <br>
 
@@ -33,16 +30,13 @@ library(tibble)
 
 ![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/provider?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
+[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider) <br>
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 
 <!-- badges: end -->
 
-
-
-## :package: Installation
 
 You can install `provider` from [GitHub](https://github.com/) with:
 
@@ -63,42 +57,6 @@ library(provider)
 affiliations(facility_ccn = 370781)
 ```
 
-#### National Provider Catalog
-
-```{r}
-clinicians(npi = 1932365699)
-```
-
-#### Hospitals
-
-```{r}
-hospitals(npi = 1720098791)
-```
-
-#### CLIA Laboratories
-
-```{r}
-clia(ccn = "11D0265516")
-```
-
-#### Opt-Out Affidavits
-
-```{r}
-opt_out(npi = 1043522824)
-```
-
-#### Ordering & Referral
-
-```{r}
-order_refer(npi = 1043522824)
-```
-
-#### Provider Enrollment
-
-```{r}
-providers(enid = "O20040610001257")
-```
-
 #### Reassignments
 
 ```{r}
@@ -108,10 +66,91 @@ reassignments(org_pac = 7719037548)
 #### Revocations
 
 ```{r}
-revocations(state = "GA")
+revocations(
+  specialty = contains("CARDIO"), 
+  state = not("TX")
+  )
+```
+
+#### National Provider Catalog
+
+```{r}
+clinicians(
+  city = any_of(c("Atlanta", "Macon")), 
+  state = "GA", 
+  gender = "F",
+  year = 2025
+  )
+```
+
+#### Opt-Out Affidavits
+
+```{r}
+opt_out(
+  specialty = "Psychiatry", 
+  order_refer = FALSE
+  )
+```
+
+#### Order & Referral Eligibility
+
+```{r}
+order_refer(
+  last = starts_with("B"),
+  part_b = TRUE,
+  dme = TRUE,
+  hha = FALSE,
+  pmd = TRUE,
+  hospice = FALSE)
+```
+
+#### Pending Enrollments
+
+```{r}
+pending(
+  first = starts_with("V"),
+  last = starts_with("W")
+  )
+```
+
+#### Provider Enrollment
+
+```{r}
+providers(
+  first = contains("C"),
+  state = "AK",
+  spec = ends_with("30")
+  )
+```
+
+#### Hospitals
+
+```{r}
+hospitals(
+  city = "Atlanta",
+  state = "GA",
+  subgroup = subgroups(
+    acute = FALSE,
+    psych = TRUE
+  )
+)
+```
+
+#### CLIA Laboratories
+
+```{r}
+clia(name = starts_with("CDC"))
+```
+
+#### Hospital Transparency Enforcement
+
+```{r}
+transparency(action = contains("CMP"))
 ```
 
 ------------------------------------------------------------------------------
+
+<br>
 
 ## :balance_scale: Code of Conduct
 
