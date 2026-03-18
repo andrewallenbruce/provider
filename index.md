@@ -4,6 +4,8 @@
 
   
 
+  
+
 You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
@@ -11,9 +13,7 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-  
-
-## 🔰 Usage
+### 🔰 Usage
 
 ``` r
 library(provider)

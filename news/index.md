@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9057 (2026-03-18)
+
+- added `api_medicare2`
+
 ## provider 0.0.1.9056 (2026-03-18)
 
 - added exec_cms2
