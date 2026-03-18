@@ -118,7 +118,7 @@ revocations(specialty = contains("CARDIO"), state = not("TX"))
 #> 10 NA       JOHN     MILES  MCCLURE    I2005… 1427… N     MI    PRACTITI… 424.5…
 #> # ℹ 36 more rows
 #> # ℹ 2 more variables: start_date <chr>, end_date <chr>
-revocations(specialty = contains("CARDIO"), state = none_of(c("TX", "OH")))
+revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
 #> ✔ `revocations` returned 43 results.
 #> # A tibble: 43 × 12
 #>    org_name first   middle last      enid     npi   multi state specialty reason

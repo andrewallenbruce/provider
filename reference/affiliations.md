@@ -71,22 +71,6 @@ affiliations(count = TRUE)
 #> ✔ `affiliations` returned 1,621,297 results.
 affiliations(middle = "", count = TRUE)
 #> ✔ `affiliations` returned 548,785 results.
-affiliations()
-#> ! No Query → Returning first 10 rows.
-#> # A tibble: 10 × 9
-#>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
-#>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
-#>  1 ARDALAN ENKE… NA     NA     1003… 7517… Hospital      090012       NA        
-#>  2 RASHID  KHAL… NA     NA     1003… 9931… Hospital      360112       NA        
-#>  3 KEVIN   ROTH… B      NA     1003… 0446… Hospital      060024       NA        
-#>  4 AMANDA  SEMO… M      NA     1003… 2163… Home health … 397791       NA        
-#>  5 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390035       NA        
-#>  6 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390049       NA        
-#>  7 AMANDA  SEMO… M      NA     1003… 2163… Hospital      390057       NA        
-#>  8 DAE     KIM   NA     NA     1003… 4082… Hospital      370001       NA        
-#>  9 DAE     KIM   NA     NA     1003… 4082… Hospital      370202       NA        
-#> 10 DAE     KIM   NA     NA     1003… 4082… Hospital      370057       NA        
-
 affiliations(facility_ccn = "33Z302")
 #> ✔ `affiliations` returned 4 results.
 #> # A tibble: 4 × 9

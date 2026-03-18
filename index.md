@@ -45,15 +45,25 @@ affiliations(facility_ccn = 370781)
 #### Reassignments
 
 ``` r
-reassignments(org_pac = 7719037548)
-✔ `reassignments` returned 4 results.
-# A tibble: 4 × 14
-  first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
-  <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
-1 Brooks  Alldr… CO    Optometry 1         1154… 5294… I201… Eye Cen… 4         
-2 Matthew Ehrli… CO    Ophthalm… 1         1083… 6103… I200… Eye Cen… 4         
-3 Jeffrey Olson  CO    Ophthalm… 3         1407… 1850… I200… Eye Cen… 4         
-4 Stefan  Smith  CO    Optometry 1         1932… 4237… I201… Eye Cen… 4         
+reassignments(
+  first = starts_with("J"), 
+  state = "GA", 
+  specialty = contains("Gastro"))
+✔ `reassignments` returned 86 results.
+# A tibble: 86 × 14
+   first   last  state specialty ind_assoc npi   pac   enid  org_name org_assign
+   <chr>   <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
+ 1 Jai Eun Min   GA    Gastroen… 2         1508… 2961… I201… Aga Cli… 34        
+ 2 James   Barl… GA    Gastroen… 2         1568… 2668… I201… Aga Pro… 160       
+ 3 Joel    Cami… GA    Gastroen… 3         1144… 1456… I201… Aga Pro… 160       
+ 4 James   Camp… GA    Gastroen… 2         1053… 1658… I202… Aga Pro… 160       
+ 5 Justin  Forde GA    Gastroen… 2         1437… 4082… I202… Aga Pro… 160       
+ 6 Jay     Gart… GA    Gastroen… 2         1831… 3971… I200… Aga Pro… 160       
+ 7 Jonath… Kand… GA    Gastroen… 3         1043… 3870… I202… Aga Pro… 160       
+ 8 Justin  Mend… GA    Gastroen… 3         1669… 9335… I201… Aga Pro… 160       
+ 9 Joyce   Peji  GA    Gastroen… 2         1538… 3870… I200… Aga Pro… 160       
+10 Jung    Suh   GA    Gastroen… 3         1952… 1355… I200… Aga Pro… 160       
+# ℹ 76 more rows
 # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #   type <chr>
 ```
@@ -63,8 +73,7 @@ reassignments(org_pac = 7719037548)
 ``` r
 revocations(
   specialty = contains("CARDIO"), 
-  state = not("TX")
-  )
+  state = not("TX"))
 ✔ `revocations` returned 46 results.
 # A tibble: 46 × 12
    org_name first    middle last       enid   npi   multi state specialty reason
@@ -87,11 +96,10 @@ revocations(
 
 ``` r
 clinicians(
-  city = any_of(c("Atlanta", "Macon")), 
+  city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  year = 2025
-  )
+  year = 2025)
 ✔ `clinicians` returned 293 results.
 # A tibble: 293 × 25
    first      middle last  suffix gender cred  school year  specialty spec_other
@@ -118,8 +126,7 @@ clinicians(
 ``` r
 opt_out(
   specialty = "Psychiatry", 
-  order_refer = FALSE
-  )
+  order_refer = FALSE)
 ✔ `opt_out` returned 790 results.
 # A tibble: 790 × 13
    npi       first last  specialty start_date end_date updated add_1 add_2 city 
@@ -148,15 +155,14 @@ order_refer(
   hha = FALSE,
   pmd = TRUE,
   hospice = FALSE)
-✔ `order_refer` returned 5 results.
-# A tibble: 5 × 8
+✔ `order_refer` returned 4 results.
+# A tibble: 4 × 8
   first    last        npi        part_b dme   hha   pmd   hospice
   <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
 1 MEGAN    BAUMGARDNER 1023796711 Y      Y     N     Y     N      
 2 KRISTINA BERRY       1295461192 Y      Y     N     Y     N      
 3 BONNIE   BETTS       1306821129 Y      Y     N     Y     N      
-4 ALYSSA   BLEDSOE     1073322277 Y      Y     N     Y     N      
-5 LAURA    BOBROWSKI   1013297019 Y      Y     N     Y     N      
+4 LAURA    BOBROWSKI   1013297019 Y      Y     N     Y     N      
 ```
 
 #### Pending Enrollments
@@ -164,22 +170,17 @@ order_refer(
 ``` r
 pending(
   first = starts_with("V"),
-  last = starts_with("W")
-  )
-✔ `pending` returned 8 results.
-◉ Physician     : 2
-◉ Non-Physician : 6
-# A tibble: 8 × 4
-  prov_type     first    last       npi       
-  <fct>         <chr>    <chr>      <chr>     
-1 Physician     VANESSA  WOOSLEY    1326877440
-2 Physician     VICTORIA WIDJAJA    1851757033
-3 Non-Physician VALERIE  WASHINGTON 1780540567
-4 Non-Physician VANESSA  WOMACK     1184148306
-5 Non-Physician VERONICA WYNN       1063579613
-6 Non-Physician VICKI    WALLS      1366781072
-7 Non-Physician VICTORIA WARNER     1780232942
-8 Non-Physician VICTORIA WEINAND    1558252023
+  last = starts_with("A"))
+✔ `pending` returned 4 results.
+• Physician     : 2
+• Non-Physician : 2
+# A tibble: 4 × 4
+  prov_type     first    last      npi       
+  <fct>         <chr>    <chr>     <chr>     
+1 Physician     VICTOR   ABADOM    1265939722
+2 Physician     VICTORIA ARREDONDO 1548150287
+3 Non-Physician VICTOR   ALLEN     1306481510
+4 Non-Physician VICTORIA ALTAMIRA  1366301384
 ```
 
 #### Provider Enrollment
@@ -188,8 +189,7 @@ pending(
 providers(
   first = contains("C"),
   state = "AK",
-  spec = ends_with("30")
-  )
+  spec = ends_with("30"))
 ✔ `providers` returned 33 results.
 # A tibble: 33 × 11
    org_name first     middle last  state spec  specialty npi   multi pac   enid 
@@ -215,9 +215,7 @@ hospitals(
   state = "GA",
   subgroup = subgroups(
     acute = FALSE,
-    psych = TRUE
-  )
-)
+    psych = TRUE))
 ✔ `hospitals` returned 2 results.
 # A tibble: 2 × 39
   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2

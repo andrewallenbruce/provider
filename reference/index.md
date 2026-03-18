@@ -44,8 +44,7 @@ Access Current Organizational Provider Data.
 
 ## Query Modifiers
 
-- [`any_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`none_of()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+- [`excludes()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`not()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`between()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)

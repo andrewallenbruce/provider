@@ -5,15 +5,13 @@ Helpers for use in constructing conditions in queries.
 ## Usage
 
 ``` r
-any_of(x)
-
-none_of(x)
+excludes(...)
 
 contains(x)
 
 not(x)
 
-between(x)
+between(...)
 
 greater_than(x, or_equal = FALSE)
 
@@ -31,9 +29,13 @@ Parameters](https://jsonapi.org/format/#query-parameters)
 
 ## Arguments
 
+- ...:
+
+  parameter input
+
 - x:
 
-  input
+  parameter input
 
 - or_equal:
 
@@ -53,14 +55,17 @@ format.
 ## Examples
 
 ``` r
-any_of(state.abb)
-#> <Modifier>
-#> Operator: IN
-#> Values: AL, AK, AZ, AR, ....
-none_of(state.abb)
+params()
+#> list()
+x <- excludes(state.abb[1:5])
+x
 #> <Modifier>
 #> Operator: NOT+IN
-#> Values: AL, AK, AZ, AR, ....
+#> Values: AL, AK, AZ, AR, CA
+operator(x)
+#> Error in operator(x): could not find function "operator"
+value(x)
+#> Error in value(x): could not find function "value"
 contains("baz")
 #> <Modifier>
 #> Operator: CONTAINS
@@ -69,7 +74,7 @@ not(1000)
 #> <Modifier>
 #> Operator: <>
 #> Value: 1000
-between(c(0.125, 2))
+between(0.125, 2)
 #> <Modifier>
 #> Operator: BETWEEN
 #> Values: 0.125, 2

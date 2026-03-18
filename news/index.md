@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9053 (2026-03-17)
+
+- Modifier refactoring
+
 ## provider 0.0.1.9052 (2026-03-17)
 
 - A warning is now thrown when 0 results are returned, instead of a
