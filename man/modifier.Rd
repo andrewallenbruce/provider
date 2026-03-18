@@ -2,8 +2,7 @@
 % Please edit documentation in R/query-modifiers.R
 \name{modifier}
 \alias{modifier}
-\alias{any_of}
-\alias{none_of}
+\alias{excludes}
 \alias{contains}
 \alias{not}
 \alias{between}
@@ -16,15 +15,13 @@
 \href{https://jsonapi.org/format/#query-parameters}{JSON-API: Query Parameters}
 }
 \usage{
-any_of(x)
-
-none_of(x)
+excludes(...)
 
 contains(x)
 
 not(x)
 
-between(x)
+between(...)
 
 greater_than(x, or_equal = FALSE)
 
@@ -35,7 +32,9 @@ starts_with(x)
 ends_with(x)
 }
 \arguments{
-\item{x}{input}
+\item{...}{parameter input}
+
+\item{x}{parameter input}
 
 \item{or_equal}{\verb{<lgl>} append \code{=} to \code{greater_than()}/\code{less_than()}}
 }
@@ -50,11 +49,14 @@ Query modifiers are a small DSL for use in constructing query conditions,
 in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering}{JSON-API} format.
 }
 \examples{
-any_of(state.abb)
-none_of(state.abb)
+params()
+x <- excludes(state.abb[1:5])
+x
+operator(x)
+value(x)
 contains("baz")
 not(1000)
-between(c(0.125, 2))
+between(0.125, 2)
 greater_than(1000)
 greater_than(0.125, or_equal = TRUE)
 less_than(1000)

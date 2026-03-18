@@ -14,6 +14,7 @@ cli_no_query <- function() {
 
 #' @noRd
 cli_results <- function(x, endpoint) {
+  # cli::cat_rule(left = cli::style_bold(endpoint), width = 10)
   msg <- c(
     "{.strong {.arg {endpoint}}} returned ",
     "{.strong {nump(x)}} ",
@@ -37,15 +38,15 @@ cli_pages <- function(x, limit, endpoint) {
 
 #' @noRd
 cli_hybrid <- function(x, endpoint) {
-  x <- collapse::fsum(x)
+  N <- collapse::fsum(x)
 
   msg <- c(
     "{.strong {.arg {endpoint}}} returned ",
-    "{.strong {nump(x)}} ",
-    "{cli::qty(x)}result{?s}."
+    "{.strong {nump(N)}} ",
+    "{cli::qty(N)}result{?s}."
   )
 
-  if (x == 0L) {
+  if (N == 0L) {
     cli::cli_alert_warning(msg)
   } else {
     cli::cli_alert_success(msg)
@@ -53,11 +54,10 @@ cli_hybrid <- function(x, endpoint) {
 
   cli::cat_bullet(
     paste0(
-      format(names(x), justify = "left"),
+      cli::col_yellow(format(names(x), justify = "left")),
       cli::col_silver(" : "),
       format(nump(unname(x)), justify = "left")
     ),
-    bullet = "radio_on",
     bullet_col = "silver"
   )
 }

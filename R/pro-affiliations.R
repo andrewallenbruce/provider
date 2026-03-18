@@ -21,8 +21,6 @@
 #' @examplesIf httr2::is_online()
 #' affiliations(count = TRUE)
 #' affiliations(middle = "", count = TRUE)
-#' affiliations()
-#'
 #' affiliations(facility_ccn = "33Z302")
 #' affiliations(parent_ccn = 331302)
 #' affiliations(facility_ccn = 331302)

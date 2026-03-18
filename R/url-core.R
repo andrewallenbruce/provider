@@ -19,7 +19,11 @@ offset <- function(n, limit, which = "size") {
   )
 }
 
-#' @noRd
+#' Parameter list helper
+#'
+#' @param ... dots
+#' @keywords internal
+#' @export
 params <- function(...) {
   purrr::compact(rlang::list2(...))
 }

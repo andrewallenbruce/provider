@@ -17,7 +17,7 @@ enum_ <- function(x = NULL) {
     return(NULL)
   }
 
-  VAR <- as_string(call_args(call_match())[[1]])
+  VAR <- as_string(call_args(call_match())$x)
 
   ENUM <- enumerations(VAR)
 
@@ -35,7 +35,7 @@ enum_ <- function(x = NULL) {
 enumerations <- function(arg) {
   switch(
     arg,
-    # affiliations
+    # <affiliations>
     facility_type = list(
       hospital = "Hospital",
       ltch = "Long-term care hospital",
@@ -46,7 +46,7 @@ enumerations <- function(arg) {
       hospice = "Hospice",
       esrd = "Dialysis facility"
     ),
-    # clia
+    # <clia>
     certificate = list(
       cmp = 1,
       wav = 2,
@@ -54,7 +54,7 @@ enumerations <- function(arg) {
       ppm = 4,
       reg = 9
     ),
-    # clia
+    # <clia>
     status = list(
       cmp = "A",
       non = "B"

@@ -60,7 +60,10 @@ affiliations(facility_ccn = 370781)
 #### Reassignments
 
 ```{r}
-reassignments(org_pac = 7719037548)
+reassignments(
+  first = starts_with("J"), 
+  state = "GA", 
+  specialty = contains("Gastro"))
 ```
 
 #### Revocations
@@ -68,19 +71,17 @@ reassignments(org_pac = 7719037548)
 ```{r}
 revocations(
   specialty = contains("CARDIO"), 
-  state = not("TX")
-  )
+  state = not("TX"))
 ```
 
 #### National Provider Catalog
 
 ```{r}
 clinicians(
-  city = any_of(c("Atlanta", "Macon")), 
+  city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  year = 2025
-  )
+  year = 2025)
 ```
 
 #### Opt-Out Affidavits
@@ -88,8 +89,7 @@ clinicians(
 ```{r}
 opt_out(
   specialty = "Psychiatry", 
-  order_refer = FALSE
-  )
+  order_refer = FALSE)
 ```
 
 #### Order & Referral Eligibility
@@ -109,8 +109,7 @@ order_refer(
 ```{r}
 pending(
   first = starts_with("V"),
-  last = starts_with("W")
-  )
+  last = starts_with("A"))
 ```
 
 #### Provider Enrollment
@@ -119,8 +118,7 @@ pending(
 providers(
   first = contains("C"),
   state = "AK",
-  spec = ends_with("30")
-  )
+  spec = ends_with("30"))
 ```
 
 #### Hospitals
@@ -131,9 +129,7 @@ hospitals(
   state = "GA",
   subgroup = subgroups(
     acute = FALSE,
-    psych = TRUE
-  )
-)
+    psych = TRUE))
 ```
 
 #### CLIA Laboratories

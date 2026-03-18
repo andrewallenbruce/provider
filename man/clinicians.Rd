@@ -82,12 +82,10 @@ A Clinician or Group must have:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clinicians(count = TRUE)
-clinicians()
 clinicians(enid = "I20081002000549")
 clinicians(first = "ETAN")
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-clinicians(city = "ATLANTA", state = "GA", year = 2025, count = TRUE)
-clinicians(city = any_of("Atlanta"), state = "GA", year = 2025)
+clinicians(city = "Atlanta", state = "GA", year = 2025)
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -7,9 +7,12 @@
 #' Query modifiers are a small DSL for use in constructing query conditions,
 #' in the [JSON-API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering) format.
 #'
-#' @param x input
+#' @param x parameter input
+#' @param ... parameter input
 #' @param or_equal `<lgl>` append `=` to `greater_than()`/`less_than()`
 #' @name modifier
+#' @examples
+#' params()
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)
 NULL
@@ -20,7 +23,7 @@ Modifier <- S7::new_class(
   parent = S7::class_character,
   package = NULL,
   properties = list(
-    value = S7::class_character | S7::class_numeric
+    value = S7::class_atomic
   )
 )
 #' @noRd
@@ -28,34 +31,63 @@ is_modifier <- function(x) {
   S7::S7_inherits(x, Modifier)
 }
 
+#' @noRd
+cli_bld_red <- cli::combine_ansi_styles("red", "bold")
+
 #' @exportS3Method base::print
 print.Modifier <- function(x, ...) {
   cli::cli_text(cli::col_cyan("<Modifier>"))
   cli::cli_text(c(
     cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold(S7::S7_data(x)))
+    cli_bld_red(operator(x))
   ))
+
+  LEN <- length(value(x)) > 1L
+
   cli::cli_text(
     c(
-      cli::col_silver(if (length(x@value) > 1L) "Values: " else "Value: "),
-      cli::col_yellow(if (length(x@value) > 1L) toString(x@value, width = 20L) else x@value)
+      cli::col_silver(if (LEN) "Values: " else "Value: "),
+      cli::col_yellow(if (LEN) toString(value(x), width = 20L) else value(x))
     )
   )
 }
 
-#' @rdname modifier
-#' @examples
-#' any_of(state.abb)
-#' @export
-any_of <- function(x) {
-  Modifier("IN", value = x)
+#' @noRd
+operator <- S7::new_generic("operator", "x")
+
+#' @noRd
+value <- S7::new_generic("value", "x")
+
+#' @noRd
+S7::method(operator, Modifier) <- function(x) {
+  S7::S7_data(x)
 }
+
+#' @noRd
+S7::method(value, Modifier) <- function(x) {
+  S7::prop(x, "value")
+}
+
+# @rdname modifier
+# @examples
+# any_of(state.abb)
+# @export
+# any_of <- function(...) {
+#   check_dots_unnamed()
+#   x <- c(...)
+#   Modifier("IN", value = x)
+# }
 
 #' @rdname modifier
 #' @examples
-#' none_of(state.abb)
+#' x <- excludes(state.abb[1:5])
+#' x
+#' operator(x)
+#' value(x)
 #' @export
-none_of <- function(x) {
+excludes <- function(...) {
+  check_dots_unnamed()
+  x <- c(...)
   Modifier("NOT+IN", value = x)
 }
 
@@ -64,6 +96,7 @@ none_of <- function(x) {
 #' contains("baz")
 #' @export
 contains <- function(x) {
+  check_required(x)
   Modifier("CONTAINS", value = x)
 }
 
@@ -72,14 +105,17 @@ contains <- function(x) {
 #' not(1000)
 #' @export
 not <- function(x) {
+  check_required(x)
   Modifier("<>", value = x)
 }
 
 #' @rdname modifier
 #' @examples
-#' between(c(0.125, 2))
+#' between(0.125, 2)
 #' @export
-between <- function(x) {
+between <- function(...) {
+  check_dots_unnamed()
+  x <- c(...)
   check_numeric(x)
   Modifier("BETWEEN", value = collapse::frange(x, na.rm = TRUE))
 }
