@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9054</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9055</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,14 +66,15 @@ type and address.</p>
 <span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enid_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dba_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  designation <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  provider_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  location_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subgroup <span class="op">=</span> <span class="fu">subgroups</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
@@ -116,44 +117,38 @@ type and address.</p>
 <dd><p><code>&lt;chr&gt;</code> PECOS Associate Control ID</p></dd>
 
 
-<dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID</p></dd>
-
-
-<dt id="arg-enid-state">enid_state<a class="anchor" aria-label="anchor" href="#arg-enid-state"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Enrollment State</p></dd>
-
-
-<dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Specialty Hospital</p></dd>
+<dt id="arg-enid-enid-state">enid, enid_state<a class="anchor" aria-label="anchor" href="#arg-enid-enid-state"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID, Enrollment state</p></dd>
 
 
 <dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Legal Business Name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Legal business name</p></dd>
 
 
 <dt id="arg-dba-name">dba_name<a class="anchor" aria-label="anchor" href="#arg-dba-name"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Doing-Business-As Name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Doing-business-as name</p></dd>
 
 
-<dt id="arg-city">city<a class="anchor" aria-label="anchor" href="#arg-city"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Practice Location City</p></dd>
-
-
-<dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Practice Location State</p></dd>
-
-
-<dt id="arg-zip">zip<a class="anchor" aria-label="anchor" href="#arg-zip"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Practice Location Zip Code</p></dd>
-
-
-<dt id="arg-designation">designation<a class="anchor" aria-label="anchor" href="#arg-designation"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> <code>"Proprietor"</code>/<code>"Non-Profit"</code></p></dd>
+<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Location city, state, zip</p></dd>
 
 
 <dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Hospital has more than one NPI</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Does hospital have more than one NPI?</p></dd>
+
+
+<dt id="arg-org-type">org_type<a class="anchor" aria-label="anchor" href="#arg-org-type"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> <code>P</code>: Proprietary, <code>N</code>: Non-Profit, <code>D</code>: Unknown</p></dd>
+
+
+<dt id="arg-provider-type">provider_type<a class="anchor" aria-label="anchor" href="#arg-provider-type"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Provider type; <code>hospital</code>: Part A Hospital,
+<code>reh</code>: Rural Emergency Hospital, or <code>cah</code>: Critical Access Hospital</p></dd>
+
+
+<dt id="arg-location-type">location_type<a class="anchor" aria-label="anchor" href="#arg-location-type"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Location type; <code>primary</code>, <code>psych</code>, <code>rehab</code>,
+<code>extension</code>, <code>other</code></p></dd>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
@@ -161,7 +156,7 @@ type and address.</p>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 
 <dt id="arg-acute">acute<a class="anchor" aria-label="anchor" href="#arg-acute"></a></dt>
@@ -208,6 +203,10 @@ type and address.</p>
 <dd><p><code>&lt;lgl&gt;</code> Rehabilitation Unit</p></dd>
 
 
+<dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Specialty Hospital</p></dd>
+
+
 <dt id="arg-other">other<a class="anchor" aria-label="anchor" href="#arg-other"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Unlisted on CMS form</p></dd>
 
@@ -222,7 +221,7 @@ type and address.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">9,187</span> results.</span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, provider_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
@@ -258,8 +257,8 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">subgroups</span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">TRUE</span>, rehab <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;subgroups&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◉</span> SUBGROUP %2D ACUTE CARE    <span style="color: #555555;"> : </span>Y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◉</span> SUBGROUP %2D REHABILITATION<span style="color: #555555;"> : </span>Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> SUBGROUP %2D ACUTE CARE    <span style="color: #555555;"> : </span>Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> SUBGROUP %2D REHABILITATION<span style="color: #555555;"> : </span>Y</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

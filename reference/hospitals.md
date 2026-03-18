@@ -13,14 +13,15 @@ hospitals(
   pac = NULL,
   enid = NULL,
   enid_state = NULL,
-  specialty = NULL,
   org_name = NULL,
   dba_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  designation = NULL,
   multi = NULL,
+  org_type = NULL,
+  provider_type = NULL,
+  location_type = NULL,
   subgroup = subgroups(),
   count = FALSE
 )
@@ -61,45 +62,39 @@ subgroups(
 
   `<chr>` PECOS Associate Control ID
 
-- enid:
+- enid, enid_state:
 
-  `<chr>` Medicare Enrollment ID
-
-- enid_state:
-
-  `<chr>` Enrollment State
-
-- specialty:
-
-  `<lgl>` Specialty Hospital
+  `<chr>` Medicare Enrollment ID, Enrollment state
 
 - org_name:
 
-  `<chr>` Legal Business Name
+  `<chr>` Legal business name
 
 - dba_name:
 
-  `<chr>` Doing-Business-As Name
+  `<chr>` Doing-business-as name
 
-- city:
+- city, state, zip:
 
-  `<chr>` Practice Location City
-
-- state:
-
-  `<chr>` Practice Location State
-
-- zip:
-
-  `<chr>` Practice Location Zip Code
-
-- designation:
-
-  `<chr>` `"Proprietor"`/`"Non-Profit"`
+  `<chr>` Location city, state, zip
 
 - multi:
 
-  `<lgl>` Hospital has more than one NPI
+  `<lgl>` Does hospital have more than one NPI?
+
+- org_type:
+
+  `<enum>` `P`: Proprietary, `N`: Non-Profit, `D`: Unknown
+
+- provider_type:
+
+  `<enum>` Provider type; `hospital`: Part A Hospital, `reh`: Rural
+  Emergency Hospital, or `cah`: Critical Access Hospital
+
+- location_type:
+
+  `<enum>` Location type; `primary`, `psych`, `rehab`, `extension`,
+  `other`
 
 - subgroup:
 
@@ -107,7 +102,7 @@ subgroups(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
 
 - acute:
 
@@ -153,6 +148,10 @@ subgroups(
 
   `<lgl>` Rehabilitation Unit
 
+- specialty:
+
+  `<lgl>` Specialty Hospital
+
 - other:
 
   `<lgl>` Unlisted on CMS form
@@ -168,7 +167,7 @@ A `<subgroups>` object
 ``` r
 hospitals(count = TRUE)
 #> ✔ `hospitals` returned 9,187 results.
-hospitals(state = "GA", specialty = "reh")
+hospitals(state = "GA", provider_type = "reh")
 #> ✔ `hospitals` returned 1 result.
 #> # A tibble: 1 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
@@ -204,6 +203,6 @@ hospitals(
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 subgroups(acute = TRUE, rehab = TRUE)
 #> <subgroups>
-#> ◉ SUBGROUP %2D ACUTE CARE     : Y
-#> ◉ SUBGROUP %2D REHABILITATION : Y
+#> • SUBGROUP %2D ACUTE CARE     : Y
+#> • SUBGROUP %2D REHABILITATION : Y
 ```

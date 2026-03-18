@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9055 (2026-03-18)
+
+- refactored query formatting
+- added arguments to
+  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+
 ## provider 0.0.1.9054 (2026-03-17)
 
 - modifier cleanup

@@ -102,6 +102,8 @@ providers(pac = 2860305554)
 providers(state = "AK")
 #> ✔ `providers` returned 6,851 results.
 #> ℹ Retrieving 2 pages...
+#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
+#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 6,851 × 11
 #>    org_name first     middle last  state spec  specialty npi   multi pac   enid 
 #>    <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
