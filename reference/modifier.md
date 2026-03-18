@@ -31,15 +31,15 @@ Parameters](https://jsonapi.org/format/#query-parameters)
 
 - ...:
 
-  parameter input
+  input
 
 - x:
 
-  parameter input
+  input
 
 - or_equal:
 
-  `<lgl>` append `=` to `greater_than()`/`less_than()`
+  `<lgl>` append `=`
 
 ## Value
 
@@ -55,51 +55,66 @@ format.
 ## Examples
 
 ``` r
-params()
-#> list()
-x <- excludes(state.abb[1:5])
-x
+params(
+   state = excludes(state.abb[1:5]),
+   title = ends_with("bar"),
+   name = starts_with("foo"),
+   n = less_than(1000),
+   avg = less_than(0.125, or_equal = TRUE),
+   rank = greater_than(1000),
+   score = greater_than(0.125, or_equal = TRUE),
+   interval = between(0.125, 2),
+   category = contains("baz"),
+   type = not("standard")
+ )
+#> $state
 #> <Modifier>
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ, AR, CA
-operator(x)
-#> Error in operator(x): could not find function "operator"
-value(x)
-#> Error in value(x): could not find function "value"
-contains("baz")
-#> <Modifier>
-#> Operator: CONTAINS
-#> Value: baz
-not(1000)
-#> <Modifier>
-#> Operator: <>
-#> Value: 1000
-between(0.125, 2)
-#> <Modifier>
-#> Operator: BETWEEN
-#> Values: 0.125, 2
-greater_than(1000)
-#> <Modifier>
-#> Operator: >
-#> Value: 1000
-greater_than(0.125, or_equal = TRUE)
-#> <Modifier>
-#> Operator: >=
-#> Value: 0.125
-less_than(1000)
-#> <Modifier>
-#> Operator: <
-#> Value: 1000
-less_than(0.125, or_equal = TRUE)
-#> <Modifier>
-#> Operator: <=
-#> Value: 0.125
-starts_with("foo")
-#> <Modifier>
-#> Operator: STARTS WITH
-#> Value: foo
-ends_with("bar")
+#> 
+#> $title
 #> <Modifier>
 #> Operator: ENDS WITH
 #> Value: bar
+#> 
+#> $name
+#> <Modifier>
+#> Operator: STARTS WITH
+#> Value: foo
+#> 
+#> $n
+#> <Modifier>
+#> Operator: <
+#> Value: 1000
+#> 
+#> $avg
+#> <Modifier>
+#> Operator: <=
+#> Value: 0.125
+#> 
+#> $rank
+#> <Modifier>
+#> Operator: >
+#> Value: 1000
+#> 
+#> $score
+#> <Modifier>
+#> Operator: >=
+#> Value: 0.125
+#> 
+#> $interval
+#> <Modifier>
+#> Operator: BETWEEN
+#> Values: 0.125, 2
+#> 
+#> $category
+#> <Modifier>
+#> Operator: CONTAINS
+#> Value: baz
+#> 
+#> $type
+#> <Modifier>
+#> Operator: <>
+#> Value: standard
+#> 
 ```
