@@ -1,9 +1,4 @@
 #' @noRd
-nump <- function(x) {
-  prettyNum(x, big.mark = ",")
-}
-
-#' @noRd
 cli_no_query <- function() {
   cli::cli_alert_warning(c(
     "{.emph No Query} ",
@@ -17,7 +12,7 @@ cli_results <- function(x, endpoint) {
   # cli::cat_rule(left = cli::style_bold(endpoint), width = 10)
   msg <- c(
     "{.strong {.arg {endpoint}}} returned ",
-    "{.strong {nump(x)}} ",
+    "{.strong {mark(x)}} ",
     "{cli::qty(x)}result{?s}."
   )
 
@@ -36,7 +31,7 @@ cli_results2 <- function(x, endpoint) {
     paste0(
       cli::col_yellow(format(names(x), justify = "left")),
       cli::col_silver(" : "),
-      format(nump(unname(x)), justify = "left")
+      format(mark(unname(x)), justify = "left")
     ),
     bullet_col = "silver"
   )

@@ -6,7 +6,9 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| label: setup
+#| include: FALSE
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE,
@@ -30,10 +32,13 @@ library(tibble)
 
 ![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/provider?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider) <br>
+<br>
+[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
+<br>
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+<br>
 
 <!-- badges: end -->
 
@@ -44,39 +49,44 @@ You can install `provider` from [GitHub](https://github.com/) with:
 # install.packages("pak")
 pak::pak("andrewallenbruce/provider")
 ```
+<br>
 
 ## :beginner: Usage
 
-```{r echo=TRUE, message=TRUE, warning=FALSE}
+```{r}
+#| label: load
+#| echo: TRUE
+#| message: TRUE
+#| warning: FALSE
 library(provider)
 ```
 
-#### Facility Affiliations
-
 ```{r}
+#| label: affiliations
+# Provider/Facility Affiliations
 affiliations(facility_ccn = 370781)
 ```
 
-#### Reassignments
-
 ```{r}
+#| label: reassignments
+# Provider/Organization Reassignment of Benefits
 reassignments(
   first = starts_with("J"), 
   state = "GA", 
   specialty = contains("Gastro"))
 ```
 
-#### Revocations
-
 ```{r}
+#| label: revocations
+# Revoked Medicare Providers
 revocations(
   specialty = contains("CARDIO"), 
   state = not("TX"))
 ```
 
-#### National Provider Catalog
-
 ```{r}
+#| label: clinicians
+# Clinician Demographics
 clinicians(
   city = c("Atlanta", "Macon"), 
   state = "GA", 
@@ -84,17 +94,17 @@ clinicians(
   year = 2025)
 ```
 
-#### Opt-Out Affidavits
-
 ```{r}
+#| label: opt_out
+# Opt-Out Affidavits
 opt_out(
   specialty = "Psychiatry", 
   order_refer = FALSE)
 ```
 
-#### Order & Referral Eligibility
-
 ```{r}
+#| label: order_refer
+# Ordering & Referral Eligibility
 order_refer(
   last = starts_with("B"),
   part_b = TRUE,
@@ -104,26 +114,26 @@ order_refer(
   hospice = FALSE)
 ```
 
-#### Pending Enrollments
-
 ```{r}
+#| label: pending
+# Pending Enrollment Applications
 pending(
   first = starts_with("V"),
   last = starts_with("A"))
 ```
 
-#### Provider Enrollment
-
 ```{r}
+#| label: providers
+# Medicare Provider Enrollment
 providers(
   first = contains("C"),
   state = "AK",
   spec = ends_with("30"))
 ```
 
-#### Hospitals
-
 ```{r}
+#| label: hospitals
+# Hospitals Enrolled in Medicare Part A
 hospitals(
   city = "Atlanta",
   state = "GA",
@@ -132,17 +142,19 @@ hospitals(
     psych = TRUE))
 ```
 
-#### CLIA Laboratories
-
 ```{r}
+#| label: clia
+# CLIA Laboratories
 clia(name = starts_with("CDC"))
 ```
 
-#### Hospital Transparency Enforcement
-
 ```{r}
+#| label: transparency
+# Hospital Transparency Enforcement
 transparency(action = contains("CMP"))
 ```
+
+<br>
 
 ------------------------------------------------------------------------------
 

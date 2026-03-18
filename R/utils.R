@@ -1,4 +1,9 @@
 #' @noRd
+provider_types <- function() {
+  provider::provider_type_code
+}
+
+#' @noRd
 set_args <- function(fn) {
   invisible(
     list2env(
@@ -8,6 +13,21 @@ set_args <- function(fn) {
       envir = .GlobalEnv
     )
   )
+}
+
+#' @noRd
+mark <- function(x) {
+  prettyNum(x, big.mark = ",")
+}
+
+#' @noRd
+plus <- function(x) {
+  gsub(" ", "+", x, fixed = TRUE)
+}
+
+#' @noRd
+under <- function(x) {
+  gsub(" ", "_", x, fixed = TRUE)
 }
 
 #' @noRd

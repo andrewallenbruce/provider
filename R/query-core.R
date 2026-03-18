@@ -1,13 +1,4 @@
 #' @noRd
-plus <- function(x) {
-  gsub(" ", "+", x, fixed = TRUE)
-}
-
-#' @noRd
-under <- function(x) {
-  gsub(" ", "_", x, fixed = TRUE)
-}
-
 fmt_mod <- function(x) {
   M <- is_modifier(x)
   V <- if (M) plus(value(x)) else plus(unlist_(x))

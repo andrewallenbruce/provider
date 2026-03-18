@@ -13,13 +13,14 @@
 version](https://img.shields.io/github/r-package/v/andrewallenbruce/provider?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-[![code
+<br> [![code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
-<br> [![last
+[![last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
-[![Codecov test
+<br> [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+<br>
 
 <!-- badges: end -->
 
@@ -30,15 +31,16 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
+<br>
+
 ## :beginner: Usage
 
 ``` r
 library(provider)
 ```
 
-#### Facility Affiliations
-
 ``` r
+# Provider/Facility Affiliations
 affiliations(facility_ccn = 370781)
 ✔ `affiliations` returned 15 results.
 # A tibble: 15 × 9
@@ -61,9 +63,8 @@ affiliations(facility_ccn = 370781)
 15 JESS    ARMOR F      <NA>   1922… 9032… Hospital      370781       <NA>      
 ```
 
-#### Reassignments
-
 ``` r
+# Provider/Organization Reassignment of Benefits
 reassignments(
   first = starts_with("J"), 
   state = "GA", 
@@ -87,9 +88,8 @@ reassignments(
 #   type <chr>
 ```
 
-#### Revocations
-
 ``` r
+# Revoked Medicare Providers
 revocations(
   specialty = contains("CARDIO"), 
   state = not("TX"))
@@ -111,9 +111,8 @@ revocations(
 # ℹ 2 more variables: start_date <chr>, end_date <chr>
 ```
 
-#### National Provider Catalog
-
 ``` r
+# Clinician Demographics
 clinicians(
   city = c("Atlanta", "Macon"), 
   state = "GA", 
@@ -140,9 +139,8 @@ clinicians(
 #   tlh <chr>
 ```
 
-#### Opt-Out Affidavits
-
 ``` r
+# Opt-Out Affidavits
 opt_out(
   specialty = "Psychiatry", 
   order_refer = FALSE)
@@ -164,9 +162,8 @@ opt_out(
 # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
 
-#### Order & Referral Eligibility
-
 ``` r
+# Ordering & Referral Eligibility
 order_refer(
   last = starts_with("B"),
   part_b = TRUE,
@@ -184,9 +181,8 @@ order_refer(
 4 LAURA    BOBROWSKI   1013297019 Y      Y     N     Y     N      
 ```
 
-#### Pending Enrollments
-
 ``` r
+# Pending Enrollment Applications
 pending(
   first = starts_with("V"),
   last = starts_with("A"))
@@ -202,9 +198,8 @@ pending(
 4 Non-Physician VICTORIA ALTAMIRA  1366301384
 ```
 
-#### Provider Enrollment
-
 ``` r
+# Medicare Provider Enrollment
 providers(
   first = contains("C"),
   state = "AK",
@@ -226,9 +221,8 @@ providers(
 # ℹ 23 more rows
 ```
 
-#### Hospitals
-
 ``` r
+# Hospitals Enrolled in Medicare Part A
 hospitals(
   city = "Atlanta",
   state = "GA",
@@ -250,9 +244,8 @@ hospitals(
 #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 ```
 
-#### CLIA Laboratories
-
 ``` r
+# CLIA Laboratories
 clia(name = starts_with("CDC"))
 ✔ `clia` returned 23 results.
 # A tibble: 23 × 82
@@ -277,9 +270,8 @@ clia(name = starts_with("CDC"))
 #   apl_date <chr>, cert_date <chr>, eff_date <chr>, mail_date <chr>, …
 ```
 
-#### Hospital Transparency Enforcement
-
 ``` r
+# Hospital Transparency Enforcement
 transparency(action = contains("CMP"))
 ✔ `transparency` returned 26 results.
 # A tibble: 26 × 7
@@ -297,6 +289,8 @@ transparency(action = contains("CMP"))
 10 697   West Chase Houston Hospital    6011 W S… Hous… TX    CMP N… 2024-12-19 
 # ℹ 16 more rows
 ```
+
+<br>
 
 ------------------------------------------------------------------------
 
