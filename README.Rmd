@@ -42,6 +42,7 @@ library(tibble)
 
 <!-- badges: end -->
 
+<br>
 
 You can install `provider` from [GitHub](https://github.com/) with:
 
@@ -49,9 +50,8 @@ You can install `provider` from [GitHub](https://github.com/) with:
 # install.packages("pak")
 pak::pak("andrewallenbruce/provider")
 ```
-<br>
 
-## :beginner: Usage
+### :beginner: Usage
 
 ```{r}
 #| label: load

@@ -24,6 +24,8 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 
 <!-- badges: end -->
 
+<br>
+
 You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
@@ -31,9 +33,7 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-<br>
-
-## :beginner: Usage
+### :beginner: Usage
 
 ``` r
 library(provider)
