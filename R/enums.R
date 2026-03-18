@@ -59,10 +59,27 @@ enumerations <- function(arg) {
       cmp = "A",
       non = "B"
     ),
-    specialty = list(
+    # <hospitals>
+    provider_type = list(
       hospital = "00-09",
       reh = "00-24",
       cah = "00-85"
+    ),
+    # <hospitals>
+    location_type = list(
+      other = "OTHER HOSPITAL PRACTICE LOCATION",
+      primary = "MAIN/PRIMARY HOSPITAL LOCATION",
+      psych_unit = "HOSPITAL PSYCHIATRIC UNIT",
+      rehab_unit = "HOSPITAL REHABILITATION UNIT",
+      extension = "OPT EXTENSION SITE"
+    ),
+    # <hospitals>
+    org_type = list(
+      corp = "CORPORATION",
+      other = "OTHER",
+      llc = "LLC",
+      partner = "PARTNERSHIP",
+      sole = "SOLE PROPRIETOR"
     ),
     cli::cli_abort("{.arg arg} {.val {arg}} invalid.")
   )

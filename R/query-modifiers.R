@@ -127,7 +127,6 @@ less_than <- function(x, or_equal = FALSE) {
 }
 
 #' @rdname modifier
-#' @examples
 #' @export
 starts_with <- function(x) {
   check_string(x)

@@ -16,14 +16,15 @@ hospitals(
   pac = NULL,
   enid = NULL,
   enid_state = NULL,
-  specialty = NULL,
   org_name = NULL,
   dba_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  designation = NULL,
   multi = NULL,
+  org_type = NULL,
+  provider_type = NULL,
+  location_type = NULL,
   subgroup = subgroups(),
   count = FALSE
 )
@@ -51,29 +52,27 @@ subgroups(
 
 \item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} Medicare Enrollment ID}
+\item{enid, enid_state}{\verb{<chr>} Medicare Enrollment ID, Enrollment state}
 
-\item{enid_state}{\verb{<chr>} Enrollment State}
+\item{org_name}{\verb{<chr>} Legal business name}
 
-\item{specialty}{\verb{<lgl>} Specialty Hospital}
+\item{dba_name}{\verb{<chr>} Doing-business-as name}
 
-\item{org_name}{\verb{<chr>} Legal Business Name}
+\item{city, state, zip}{\verb{<chr>} Location city, state, zip}
 
-\item{dba_name}{\verb{<chr>} Doing-Business-As Name}
+\item{multi}{\verb{<lgl>} Does hospital have more than one NPI?}
 
-\item{city}{\verb{<chr>} Practice Location City}
+\item{org_type}{\verb{<enum>} \code{P}: Proprietary, \code{N}: Non-Profit, \code{D}: Unknown}
 
-\item{state}{\verb{<chr>} Practice Location State}
+\item{provider_type}{\verb{<enum>} Provider type; \code{hospital}: Part A Hospital,
+\code{reh}: Rural Emergency Hospital, or \code{cah}: Critical Access Hospital}
 
-\item{zip}{\verb{<chr>} Practice Location Zip Code}
-
-\item{designation}{\verb{<chr>} \code{"Proprietor"}/\code{"Non-Profit"}}
-
-\item{multi}{\verb{<lgl>} Hospital has more than one NPI}
+\item{location_type}{\verb{<enum>} Location type; \code{primary}, \code{psych}, \code{rehab},
+\code{extension}, \code{other}}
 
 \item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{acute}{\verb{<lgl>} Acute Care}
 
@@ -97,6 +96,8 @@ subgroups(
 
 \item{rehab_unit}{\verb{<lgl>} Rehabilitation Unit}
 
+\item{specialty}{\verb{<lgl>} Specialty Hospital}
+
 \item{other}{\verb{<lgl>} Unlisted on CMS form}
 }
 \value{
@@ -112,7 +113,7 @@ type and address.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
-hospitals(state = "GA", specialty = "reh")
+hospitals(state = "GA", provider_type = "reh")
 hospitals(
   city = "Atlanta",
   state = "GA",

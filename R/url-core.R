@@ -1,24 +1,3 @@
-#' @noRd
-offset <- function(n, limit, which = "size") {
-  if (n == 0L) {
-    return(0L)
-  }
-
-  if (n <= limit) {
-    return(switch(
-      which,
-      size = 1L,
-      seq = 0L
-    ))
-  }
-
-  switch(
-    which,
-    size = cheapr::seq_size(from = 0L, to = n, by = limit),
-    seq = cheapr::seq_(from = 0L, to = n, by = limit)
-  )
-}
-
 #' Parameter list helper
 #'
 #' @param ... dots
@@ -26,6 +5,39 @@ offset <- function(n, limit, which = "size") {
 #' @export
 params <- function(...) {
   purrr::compact(rlang::list2(...))
+}
+
+#' @noRd
+offset <- function(n, limit, which = "size") {
+  if (n == 0L) {
+    return(0L)
+  }
+
+  if (n <= limit) {
+    return(
+      switch(
+        which,
+        size = 1L,
+        seq = 0L
+      )
+    )
+  }
+
+  switch(
+    which,
+    size = cheapr::seq_size(0L, n, limit),
+    seq = cheapr::seq_(0L, n, limit)
+  )
+}
+
+#' @noRd
+create_offset <- function(n, limit, url) {
+  purrr::map_chr(
+    offset(n, limit, "seq"),
+    function(x) {
+      sub_idx(url, x)
+    }
+  )
 }
 
 #' @noRd
@@ -78,12 +90,4 @@ constants <- function(endpoint) {
     limit = limit(endpoint),
     names = column_renames(endpoint)
   )
-}
-
-#' @noRd
-create_offset <- function(n, limit, url) {
-  offset(n, limit, "seq") |>
-    purrr::map_chr(\(x) {
-      gsub(x = url, pattern = "<<i>>", replacement = x, fixed = TRUE)
-    })
 }

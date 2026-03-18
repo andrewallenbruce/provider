@@ -9,24 +9,24 @@
 #'    - [API: Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi `<int>` National Provider Identifier
-#' @param pac `<chr>` PECOS Associate Control ID
-#' @param enid `<chr>` Medicare Enrollment ID
-#' @param enid_state `<chr>` Enrollment State
 #' @param ccn `<int>` CMS Certification Number
-#' @param org_name `<chr>` Legal Business Name
-#' @param dba_name `<chr>` Doing-Business-As Name
-#' @param city `<chr>` Practice Location City
-#' @param state `<chr>` Practice Location State
-#' @param zip `<chr>` Practice Location Zip Code
-#' @param designation `<chr>` `"Proprietor"`/`"Non-Profit"`
-#' @param multi `<lgl>` Hospital has more than one NPI
-#' @param specialty `<chr>` `"hospital"`, `"reh"`, `"cah"`
+#' @param pac `<chr>` PECOS Associate Control ID
+#' @param enid,enid_state `<chr>` Medicare Enrollment ID, Enrollment state
+#' @param org_name `<chr>` Legal business name
+#' @param dba_name `<chr>` Doing-business-as name
+#' @param city,state,zip `<chr>` Location city, state, zip
+#' @param multi `<lgl>` Does hospital have more than one NPI?
+#' @param org_type `<enum>` `P`: Proprietary, `N`: Non-Profit, `D`: Unknown
+#' @param provider_type `<enum>` Provider type; `hospital`: Part A Hospital,
+#'    `reh`: Rural Emergency Hospital, or `cah`: Critical Access Hospital
+#' @param location_type `<enum>` Location type; `primary`, `psych`, `rehab`,
+#'    `extension`, `other`
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
-#' hospitals(state = "GA", specialty = "reh")
+#' hospitals(state = "GA", provider_type = "reh")
 #' hospitals(
 #'   city = "Atlanta",
 #'   state = "GA",
@@ -43,20 +43,21 @@ hospitals <- function(
   pac = NULL,
   enid = NULL,
   enid_state = NULL,
-  specialty = NULL,
   org_name = NULL,
   dba_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  designation = NULL,
   multi = NULL,
+  org_type = NULL,
+  provider_type = NULL,
+  location_type = NULL,
   subgroup = subgroups(),
   count = FALSE
 ) {
   check_subgroups(subgroup)
   check_bool(multi, allow_null = TRUE)
-  check_character(specialty, allow_null = TRUE)
+  check_character(provider_type, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
@@ -64,17 +65,18 @@ hospitals <- function(
     ARG = params(
       NPI = npi,
       CCN = ccn,
+      `ASSOCIATE ID` = pac,
       `ENROLLMENT ID` = enid,
       `ENROLLMENT STATE` = enid_state,
-      `PROVIDER TYPE CODE` = enum_(specialty),
-      `ASSOCIATE ID` = pac,
       `ORGANIZATION NAME` = org_name,
       `DOING BUSINESS AS NAME` = dba_name,
       CITY = city,
       STATE = state,
       `ZIP CODE` = zip,
-      PROPRIETARY_NONPROFIT = designation,
       `MULTIPLE NPI FLAG` = bool_(multi),
+      PROPRIETARY_NONPROFIT = org_type,
+      `PROVIDER TYPE CODE` = enum_(provider_type),
+      `PRACTICE LOCATION TYPE` = enum_(location_type),
       !!!subgroup
     )
   )
@@ -151,7 +153,6 @@ print.subgroups <- function(x, ...) {
         cli::col_silver(" : "),
         format(unname(x), justify = "left")
       ),
-      bullet = "radio_on",
       bullet_col = "silver"
     )
   }

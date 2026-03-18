@@ -86,31 +86,6 @@ collapse::gvr(res, "ENROLLMENT ID|SUBGROUP") |>
   collapse::fungroup() |>
   collapse::funique()
 
-# PRACTICE LOCATION TYPE (character):
-# OTHER HOSPITAL PRACTICE LOCATION  3291  38.94
-# MAIN/PRIMARY HOSPITAL LOCATION    2860  33.84
-# HOSPITAL PSYCHIATRIC UNIT          850  10.06
-# HOSPITAL SWING-BED UNIT            738   8.73
-# HOSPITAL REHABILITATION UNIT       694   8.21
-# OPT EXTENSION SITE                  19   0.22
-
-# PROPRIETARY NONPROFIT (character):
-# N  6728  73.00
-# P  2432  26.39
-# D    57   0.62
-
-# ORGANIZATION TYPE STRUCTURE (character):
-# CORPORATION      5207  56.49
-# OTHER            2092  22.70
-# LLC              1738  18.86
-# PARTNERSHIP       179   1.94
-# SOLE PROPRIETOR     1   0.01
-
-# PROVIDER TYPE TEXT (character):
-# 00-09 PART A PROVIDER - HOSPITAL                        6452  70.00
-# 00-85 PART A PROVIDER - CRITICAL ACCESS HOSPITAL        2724  29.55
-# 00-24 PART A PROVIDER - RURAL EMERGENCY HOSPITAL (REH)    41   0.44
-
 x |> collapse::descr()
 
 list(

@@ -1,4 +1,14 @@
 #' @noRd
+sub_idx <- function(what, with) {
+  gsub(
+    x = what,
+    pattern = "<<i>>",
+    replacement = with,
+    fixed = TRUE
+  )
+}
+
+#' @noRd
 provider_types <- function() {
   provider::provider_type_code
 }

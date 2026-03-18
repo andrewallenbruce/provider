@@ -7,14 +7,14 @@ utils::globalVariables(c(
   "LIMIT",
   # <pending>
   "NM",
-  # <format_query_pro>
-  # <format_query_cms>
+  # <query_fmt_pro>
+  # <query_fmt_cms>
   "O",
   # <api_provider>
   # <api_medicare>
   "title",
-  # <format_query_pro>
-  # <format_query_cms>
+  # <query_fmt_pro>
+  # <query_fmt_cms>
   "V",
   NULL
 ))
