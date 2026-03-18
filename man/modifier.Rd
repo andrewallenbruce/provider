@@ -32,11 +32,11 @@ starts_with(x)
 ends_with(x)
 }
 \arguments{
-\item{...}{parameter input}
+\item{...}{input}
 
-\item{x}{parameter input}
+\item{x}{input}
 
-\item{or_equal}{\verb{<lgl>} append \code{=} to \code{greater_than()}/\code{less_than()}}
+\item{or_equal}{\verb{<lgl>} append \code{=}}
 }
 \value{
 An S7 \verb{<Modifier>} object.
@@ -49,18 +49,16 @@ Query modifiers are a small DSL for use in constructing query conditions,
 in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering}{JSON-API} format.
 }
 \examples{
-params()
-x <- excludes(state.abb[1:5])
-x
-operator(x)
-value(x)
-contains("baz")
-not(1000)
-between(0.125, 2)
-greater_than(1000)
-greater_than(0.125, or_equal = TRUE)
-less_than(1000)
-less_than(0.125, or_equal = TRUE)
-starts_with("foo")
-ends_with("bar")
+params(
+   state = excludes(state.abb[1:5]),
+   title = ends_with("bar"),
+   name = starts_with("foo"),
+   n = less_than(1000),
+   avg = less_than(0.125, or_equal = TRUE),
+   rank = greater_than(1000),
+   score = greater_than(0.125, or_equal = TRUE),
+   interval = between(0.125, 2),
+   category = contains("baz"),
+   type = not("standard")
+ )
 }

@@ -8,21 +8,23 @@ under <- function(x) {
   gsub(" ", "_", x, fixed = TRUE)
 }
 
-#' @noRd
-format_query_pro <- function(x, N) {
-  V <- if (is_modifier(x)) {
-    plus(x@value)
-  } else {
-    plus(unlist_(x))
-  }
-
-  O <- if (is_modifier(x)) {
-    tolower(plus(S7::S7_data(x)))
+fmt_mod <- function(x) {
+  M <- is_modifier(x)
+  V <- if (M) plus(value(x)) else plus(unlist_(x))
+  O <- if (M) {
+    operator(x)
   } else if (length(V) > 1L) {
     "IN"
   } else {
     "="
   }
+  list(V = V, O = O)
+}
+
+#' @autoglobal
+#' @noRd
+format_query_pro <- function(x, N) {
+  .c(V, O) %=% fmt_mod(x)
 
   property <- "conditions[<<i>>][property]="
   operator <- "conditions[<<i>>][operator]="
@@ -31,26 +33,15 @@ format_query_pro <- function(x, N) {
 
   c(
     paste0(property, plus(N)),
-    paste0(operator, O),
+    paste0(operator, tolower(plus(O))),
     paste0(value, index, V)
   )
 }
 
+#' @autoglobal
 #' @noRd
 format_query_cms <- function(x, N) {
-  V <- if (is_modifier(x)) {
-    plus(x@value)
-  } else {
-    plus(unlist_(x))
-  }
-
-  O <- if (is_modifier(x)) {
-    under(S7::S7_data(x))
-  } else if (length(V) > 1L) {
-    "IN"
-  } else {
-    "="
-  }
+  .c(V, O) %=% fmt_mod(x)
 
   property <- "filter[<<i>>][condition][path]="
   operator <- "filter[<<i>>][condition][operator]="
@@ -59,7 +50,7 @@ format_query_cms <- function(x, N) {
 
   c(
     paste0(property, plus(N)),
-    paste0(operator, O),
+    paste0(operator, under(O)),
     paste0(value, index, V)
   )
 }

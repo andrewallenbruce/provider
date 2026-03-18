@@ -21,7 +21,7 @@ cli_results <- function(x, endpoint) {
     "{cli::qty(x)}result{?s}."
   )
 
-  if (x == 0L) {
+  if (!x) {
     cli::cli_alert_warning(msg)
   } else {
     cli::cli_alert_success(msg)
@@ -29,28 +29,8 @@ cli_results <- function(x, endpoint) {
 }
 
 #' @noRd
-cli_pages <- function(x, limit, endpoint) {
-  cli_results(x, endpoint)
-  cli::cli_alert_info(c(
-    "Retrieving {.strong {offset(n = x, limit = limit)}} page{?s}..."
-  ))
-}
-
-#' @noRd
-cli_hybrid <- function(x, endpoint) {
-  N <- collapse::fsum(x)
-
-  msg <- c(
-    "{.strong {.arg {endpoint}}} returned ",
-    "{.strong {nump(N)}} ",
-    "{cli::qty(N)}result{?s}."
-  )
-
-  if (N == 0L) {
-    cli::cli_alert_warning(msg)
-  } else {
-    cli::cli_alert_success(msg)
-  }
+cli_results2 <- function(x, endpoint) {
+  cli_results(x = collapse::fsum(x), endpoint)
 
   cli::cat_bullet(
     paste0(
@@ -63,8 +43,15 @@ cli_hybrid <- function(x, endpoint) {
 }
 
 #' @noRd
-cli_hybrid_pages <- function(x, limit, endpoint) {
+cli_pages <- function(x, limit, endpoint) {
+  cli_results(x, endpoint)
+  PAGE <- offset(n = x, limit = limit)
+  cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
+}
+
+#' @noRd
+cli_pages2 <- function(x, limit, endpoint) {
+  cli_results2(x, endpoint)
   PAGE <- collapse::fsum(cheapr::seq_size(0L, unlist_(x), limit))
-  cli_hybrid(x, endpoint)
   cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
 }

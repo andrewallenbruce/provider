@@ -1,4 +1,11 @@
 #' @noRd
+check_named <- function(x, call = rlang::caller_env()) {
+  if (rlang::is_named(x)) {
+    cli::cli_abort("Inputs cannot be named.", call = call)
+  }
+}
+
+#' @noRd
 check_online <- function() {
   if (!httr2::is_online()) {
     cli::cli_abort(c(

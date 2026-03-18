@@ -47,7 +47,7 @@ pending <- function(
       N <- purrr::map_int(BASE, function(x, nm) {
         request_rows(paste0(x, "/stats?"))
       })
-      cli_hybrid(N, END)
+      cli_results2(N, END)
       return(invisible(N))
     }
 
@@ -70,13 +70,13 @@ pending <- function(
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (collapse::fsum(N) == 0L || COUNT) {
-    cli_hybrid(N, END)
+    cli_results2(N, END)
     return(invisible(N))
   }
 
   # COUNT BELOW LIMIT --> Single Request
   if (collapse::allv(N <= LIMIT, TRUE)) {
-    cli_hybrid(N, END)
+    cli_results2(N, END)
 
     res <- purrr::imap(BASE, function(x, nm) {
       request_bare(url_str(
@@ -92,7 +92,7 @@ pending <- function(
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
-  cli_hybrid_pages(N, LIMIT, END)
+  cli_pages2(N, LIMIT, END)
 
   URL <- url_str(
     paste0(BASE, "?"),
