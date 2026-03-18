@@ -149,7 +149,7 @@ clinicians(first = contains("J"), count = TRUE)
 
 
 ```{r}
-contains_url <- paste0(
+url <- paste0(
   "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?",
   "schema=false&",
   "keys=true&",
@@ -163,7 +163,8 @@ contains_url <- paste0(
   "conditions[0][operator]=contains&",
   "conditions[0][value]=JO"
 )
-contains_url |> 
+# contains
+url |> 
   urlparse::url_encoder(safe = ":/=&?") |> 
   httr2::request() |> 
   httr2::req_perform() |> 
@@ -171,36 +172,40 @@ contains_url |>
   _$results |> 
   _$provider_first_name |> 
   collapse::funique()
-
-contains_url |> 
-  httr2::url_modify_query(`conditions[0][operator]` = "starts with") |> 
+# starts with
+url |> 
+  httr2::url_modify_query(
+    `conditions[0][operator]` = "starts with") |> 
   httr2::request() |> 
   httr2::req_perform() |> 
   provider:::parse_string() |> 
   _$results |> 
   _$provider_first_name |> 
   collapse::funique()
-
-contains_url |> 
-  httr2::url_modify_query(`conditions[0][operator]` = "ENDS_WITH") |> 
+# ENDS_WITH
+url |> 
+  httr2::url_modify_query(
+    `conditions[0][operator]` = "ENDS_WITH") |> 
   httr2::request() |> 
   httr2::req_perform() |> 
   provider:::parse_string() |> 
   _$results |> 
   _$provider_first_name |> 
   collapse::funique()
-
-contains_url |> 
-  httr2::url_modify_query(`conditions[0][operator]` = "=") |> 
+# =
+url |> 
+  httr2::url_modify_query(
+    `conditions[0][operator]` = "=") |> 
   httr2::request() |> 
   httr2::req_perform() |> 
   provider:::parse_string() |> 
   _$results |> 
   _$provider_first_name |> 
   collapse::funique()
-
-contains_url |> 
-  httr2::url_modify_query(`conditions[0][operator]` = "like") |> 
+# like
+url |> 
+  httr2::url_modify_query(
+    `conditions[0][operator]` = "like") |> 
   httr2::request() |> 
   httr2::req_perform() |> 
   provider:::parse_string() |> 
@@ -209,3 +214,57 @@ contains_url |>
   collapse::funique()
 ```
 
+
+## Refactoring the URL building process
+
+   - CMS API
+
+```{r}
+cms <- list(
+  uri = "https://data.cms.gov/data-api/v1/dataset/<<uuid>>/data<<end>>",
+  uid = "2457ea29-fc82-48b0-86ec-3b0755de7515",
+  end = list(stats = "/stats?", qmk = "?"),
+  opt = list(size = 10, offset = 0)
+)
+
+query = "filter[PROVIDER_TYPE_DESC]=PRACTITIONER%20-%20GENERAL%20PRACTICE"
+
+# Total Row Count
+paste0(cms$uri, cms$uuid, cms$end, cms$stats, cms$qmk)
+# Query Row Count
+paste0(cms$uri, cms$uuid, cms$end, cms$stats, cms$qmk, cms$query)
+# Query Results
+paste0(cms$uri, cms$uuid, cms$end, cms$qmk, cms$size, cms$offset, cms$query)
+
+httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  fastplyr::as_tbl() |> 
+  head()
+```
+
+   - PROVIDER API
+
+```{r}
+prov <- list(
+  uri = "https://data.cms.gov/provider-data/api/1/datastore/query/<<uuid>>/0?",
+  uid = "mj5m-pzi6",
+  opt = "schema=false&keys=true&format=json&rowIds=false&count=true&",
+  results = "true",
+  offset = 0, 
+  limit = 10
+)
+
+query <- paste0(
+  "conditions[0][property]=provider_first_name&",
+  "conditions[0][operator]=contains&",
+  "conditions[0][value]=JO",
+  collapse = "&"
+)
+
+httr2::request() |> 
+  httr2::req_perform() |> 
+  provider:::parse_string() |> 
+  fastplyr::as_tbl() |> 
+  head()
+```

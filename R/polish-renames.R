@@ -247,6 +247,10 @@ column_renames <- function(endpoint) {
       Action = "action",
       Date_of_Action = "action_date"
     ),
+    utilization = c(),
+    quality = c(),
+    rhc = c(),
+    fqhc = c(),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
