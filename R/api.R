@@ -104,17 +104,17 @@ extract_year <- function(x) {
 api_medicare2 <- function(x) {
   rex <- paste0(
     c(
-      "Public Provider Enrollment",
-      "Order and Refer",
-      "Opt Out Affidavits",
-      "Hospital Enrollment",
-      "Clinical Laboratories",
-      "Pending Initial",
-      "Revalidation",
-      "Rural Health Clinic",
-      "Revoked Medicare Providers and Suppliers",
-      "Hospital Price Transparency Enforcement Activities and Outcomes",
-      "Federally Qualified Health Center",
+      # "Public Provider Enrollment",
+      # "Order and Refer",
+      # "Opt Out Affidavits",
+      # "Hospital Enrollment",
+      # "Clinical Laboratories",
+      # "Pending Initial",
+      # "Revalidation",
+      # "Rural Health Clinic",
+      # "Revoked Medicare Providers and Suppliers",
+      # "Hospital Price Transparency Enforcement Activities and Outcomes",
+      # "Federally Qualified Health Center",
       "^Skilled Nursing Facility",
       "Hospital & Non-Hospital Facilities",
       "Medicare Inpatient Hospitals",
@@ -198,7 +198,11 @@ api_medicare2 <- function(x) {
       )
     ))
 
-  x <- collapse::sbt(x, stringr::str_which(title, pattern = rex))
+  x <- collapse::ss(x, stringr::str_which(x$title, rex))
+  x <- collapse::ss(
+    x,
+    stringr::str_which(x$title, "CMS Program Statistics", TRUE)
+  )
 
   list(
     current = df_tbl_(x),

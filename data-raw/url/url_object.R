@@ -1,6 +1,20 @@
+get_uri <- function(x) {
+  switch(
+    x,
+    clinicians = ,
+    affiliations = paste0(
+      "https://data.cms.gov/provider-data/api/1/datastore/query/<<uuid>>/0?",
+      "schema=false&keys=true&format=json&rowIds=false&count=true&"
+    ),
+    "https://data.cms.gov/data-api/v1/dataset/<<uuid>>/data<<end>>"
+  )
+}
+
 get_uuid <- function(x) {
   switch(
     x,
+    affiliations = "27ea-46a8",
+    clinicians = "mj5m-pzi6",
     providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
     opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
     order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",

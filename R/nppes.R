@@ -36,18 +36,22 @@
 #'   offer different types of health care or offer health care in separate
 #'   physical locations. These parts and their physical locations aren't
 #'   themselves legal entities but are part of the organization health care
-#'   provider (which is a legal entity). The NPI Final Rule refers to the parts
-#'   and locations as sub-parts. An organization health care provider can get
-#'   its sub-parts their own NPIs. If a sub-part conducts any HIPAA standard
-#'   transactions on its own (separately from its parent), it must get its own
-#'   NPI. Sub-part determination makes sure that entities within a covered
-#'   organization are uniquely identified in HIPAA standard transactions they
-#'   conduct with Medicare and other covered entities. For example, a hospital
-#'   offers acute care, laboratory, pharmacy, and rehabilitation services. Each
-#'   of these sub-parts may need its own NPI because each sends its own standard
-#'   transactions to one or more health plans. Sub-part delegation doesn't
-#'   affect Entity Type 1 health care providers. As individuals, these health
-#'   care providers can't choose sub-parts and are not sub-parts.
+#'   provider (which is a legal entity).
+#'
+#'   The NPI Final Rule refers to the parts and locations as sub-parts. An
+#'   organization health care provider can get its sub-parts their own NPIs.
+#'   If a sub-part conducts any HIPAA standard transactions on its own
+#'   (separately from its parent), it must get its own NPI. Sub-part
+#'   determination makes sure that entities within a covered organization are
+#'   uniquely identified in HIPAA standard transactions they conduct with
+#'   Medicare and other covered entities.
+#'
+#'   For example, a hospital offers acute care, laboratory, pharmacy, and
+#'   rehabilitation services. Each of these sub-parts may need its own NPI
+#'   because each sends its own standard transactions to one or more health
+#'   plans. Sub-part delegation doesn't affect Entity Type 1 health care
+#'   providers. As individuals, these health care providers can't choose
+#'   sub-parts and are not sub-parts.
 #'
 #' **Authorized Official** <br>
 #'   An appointed official (e.g., chief executive officer, chief financial
@@ -73,12 +77,11 @@
 #' @param org_name `<chr>` __WC__ Organization's name
 #' @param specialty `<chr>` Provider's specialty
 #' @param city `<chr>` City; For military addresses, search `"APO"`/`"FPO"`.
-#' @param state `<chr>` State abbreviation. If the only input, one other parameter
-#'    besides `entity` or `country` is required.
+#' @param state `<chr>` State abbreviation. If the only input, one other
+#'    parameter besides `entity` or `country` is required.
 #' @param zip `<chr>` __WC__ 5-9 digit zip code, no hyphen.
-#' @param country `<chr>` Country abbreviation. Can be the only input if it *is not* `"US"`.
-#' @param limit `<int>` Maximum number of results to return
-#' @param skip `<int>` Number of results to skip
+#' @param country `<chr>` Country abbreviation. Can be the only input if
+#'    it *is not* `"US"`.
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' # nppes(npi = 1528060837)
@@ -94,11 +97,9 @@ nppes <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
-  country = NULL,
-  limit = 1200L,
-  skip = 0L
+  country = NULL
 ) {
-  request <- httr2::request(
+  req <- httr2::request(
     "https://npiregistry.cms.hhs.gov/api/?version=2.1"
   ) |>
     httr2::req_url_query(
@@ -113,11 +114,50 @@ nppes <- function(
       state = state,
       postal_code = zip,
       country_code = country,
-      limit = limit,
-      skip = skip
-    ) |>
-    httr2::req_perform()
+      limit = 1200L,
+      skip = 0L,
+    )
+
+  list(
+    "https://npiregistry.cms.hhs.gov/api/?",
+    "version=2.1&",
+    "number=&",
+    "enumeration_type=NPI-1&",
+    "taxonomy_description=&",
+    "name_purpose=&",
+    "first_name=Jo&",
+    "use_first_name_alias=&",
+    "last_name=&",
+    "organization_name=&",
+    "address_purpose=&",
+    "city=&",
+    "state=&",
+    "postal_code=&",
+    "country_code=&",
+    "limit=200&", # default = 10
+    "skip=0&", # max = 1000
+    "pretty=on" #on/off
+    )
+
+  "https://npiregistry.cms.hhs.gov/api/?number=&enumeration_type=NPI-1&taxonomy_description=&name_purpose=&first_name=Jo*&use_first_name_alias=true&last_name=&organization_name=&address_purpose=&city=&state=&postal_code=&country_code=&limit=200&skip=1000&pretty=on&version=2.1"
+
+  httr2::req_perform(req)
+}
+
+#' @param x `<chr>` input
+#' @returns A `<wildcard>` object
+#' @examples
+#' wildcard("Jo")
+#' @rdname nppes
+#' @export
+wildcard <- function(x) {
+  if (nchar(x) <= 1L) {
+    cli::cli_abort(c("Wildcards must be more than 2 characters."))
+  }
+
+  structure(x, class = "wildcard")
 }
 
 # results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
-# names(taxonomy) <- c("npi", paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
+# names(taxonomy) <- c("npi", paste0("taxonomy_",
+# names(taxonomy)[2:length(names(taxonomy))]))

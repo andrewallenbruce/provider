@@ -2,6 +2,7 @@
 % Please edit documentation in R/nppes.R
 \name{nppes}
 \alias{nppes}
+\alias{wildcard}
 \title{National Registry of Health Care Providers}
 \usage{
 nppes(
@@ -15,10 +16,10 @@ nppes(
   city = NULL,
   state = NULL,
   zip = NULL,
-  country = NULL,
-  limit = 1200L,
-  skip = 0L
+  country = NULL
 )
+
+wildcard(x)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
@@ -36,19 +37,20 @@ nppes(
 
 \item{city}{\verb{<chr>} City; For military addresses, search \code{"APO"}/\code{"FPO"}.}
 
-\item{state}{\verb{<chr>} State abbreviation. If the only input, one other parameter
-besides \code{entity} or \code{country} is required.}
+\item{state}{\verb{<chr>} State abbreviation. If the only input, one other
+parameter besides \code{entity} or \code{country} is required.}
 
 \item{zip}{\verb{<chr>} \strong{WC} 5-9 digit zip code, no hyphen.}
 
-\item{country}{\verb{<chr>} Country abbreviation. Can be the only input if it \emph{is not} \code{"US"}.}
+\item{country}{\verb{<chr>} Country abbreviation. Can be the only input if
+it \emph{is not} \code{"US"}.}
 
-\item{limit}{\verb{<int>} Maximum number of results to return}
-
-\item{skip}{\verb{<int>} Number of results to skip}
+\item{x}{\verb{<chr>} input}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
+
+A \verb{<wildcard>} object
 }
 \description{
 Search the National Plan and Provider Enumeration System (NPPES)
@@ -90,18 +92,22 @@ somewhat independently from their parent organization. These parts may
 offer different types of health care or offer health care in separate
 physical locations. These parts and their physical locations aren't
 themselves legal entities but are part of the organization health care
-provider (which is a legal entity). The NPI Final Rule refers to the parts
-and locations as sub-parts. An organization health care provider can get
-its sub-parts their own NPIs. If a sub-part conducts any HIPAA standard
-transactions on its own (separately from its parent), it must get its own
-NPI. Sub-part determination makes sure that entities within a covered
-organization are uniquely identified in HIPAA standard transactions they
-conduct with Medicare and other covered entities. For example, a hospital
-offers acute care, laboratory, pharmacy, and rehabilitation services. Each
-of these sub-parts may need its own NPI because each sends its own standard
-transactions to one or more health plans. Sub-part delegation doesn't
-affect Entity Type 1 health care providers. As individuals, these health
-care providers can't choose sub-parts and are not sub-parts.
+provider (which is a legal entity).
+
+The NPI Final Rule refers to the parts and locations as sub-parts. An
+organization health care provider can get its sub-parts their own NPIs.
+If a sub-part conducts any HIPAA standard transactions on its own
+(separately from its parent), it must get its own NPI. Sub-part
+determination makes sure that entities within a covered organization are
+uniquely identified in HIPAA standard transactions they conduct with
+Medicare and other covered entities.
+
+For example, a hospital offers acute care, laboratory, pharmacy, and
+rehabilitation services. Each of these sub-parts may need its own NPI
+because each sends its own standard transactions to one or more health
+plans. Sub-part delegation doesn't affect Entity Type 1 health care
+providers. As individuals, these health care providers can't choose
+sub-parts and are not sub-parts.
 
 \strong{Authorized Official} \if{html}{\out{<br>}}
 An appointed official (e.g., chief executive officer, chief financial
@@ -123,6 +129,7 @@ entries require at least two characters to be entered, e.g. \code{"jo*"}
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 # nppes(npi = 1528060837)
 \dontshow{\}) # examplesIf}
+wildcard("Jo")
 }
 \references{
 \itemize{
