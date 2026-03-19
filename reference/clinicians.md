@@ -127,7 +127,7 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ✔ `clinicians` returned 2,843,790 results.
+#> ✔ `clinicians` returned 2,819,129 results.
 clinicians(enid = "I20081002000549")
 #> ✔ `clinicians` returned 1 result.
 #> # A tibble: 1 × 25
@@ -158,23 +158,23 @@ clinicians(first = "ETAN")
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#> ✔ `clinicians` returned 351 results.
+#> ✔ `clinicians` returned 362 results.
 clinicians(city = "Atlanta", state = "GA", year = 2025)
-#> ✔ `clinicians` returned 351 results.
-#> # A tibble: 351 × 25
+#> ✔ `clinicians` returned 362 results.
+#> # A tibble: 362 × 25
 #>    first      middle last  suffix gender cred  school year  specialty spec_other
 #>    <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
 #>  1 THAO       NA     HOANG NA     F      PA    OTHER  2025  PHYSICIA… NA        
 #>  2 RYAN       NA     FERL… NA     M      NA    OTHER  2025  PHYSICIA… NA        
-#>  3 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
-#>  4 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
-#>  5 KERRINGTON NA     PUGH  NA     F      NA    OTHER  2025  PHYSICIA… NA        
-#>  6 ELIOT      NA     KIM   NA     M      PT    OTHER  2025  PHYSICAL… NA        
-#>  7 NATHANIEL  NA     TREES NA     M      NA    OTHER  2025  PHYSICAL… NA        
-#>  8 MARA       S.     DETR… NA     F      NA    MERCE… 2025  PHYSICIA… NA        
-#>  9 KRYSTAL    GAIL   DENN… NA     F      NP    OTHER  2025  NURSE PR… NA        
-#> 10 LAUREN     NA     FOX   NA     F      NP    OTHER  2025  NURSE PR… NA        
-#> # ℹ 341 more rows
+#>  3 SYDNEY     CLAIRE ZARS… NA     F      NA    OTHER  2025  PHYSICIA… NA        
+#>  4 CATHERINE  NA     GENER NA     F      NP    OTHER  2025  NURSE PR… NA        
+#>  5 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
+#>  6 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
+#>  7 KERRINGTON NA     PUGH  NA     F      NA    OTHER  2025  PHYSICIA… NA        
+#>  8 ELIOT      NA     KIM   NA     M      PT    OTHER  2025  PHYSICAL… NA        
+#>  9 NATHANIEL  NA     TREES NA     M      NA    OTHER  2025  PHYSICAL… NA        
+#> 10 MARA       S.     DETR… NA     F      NA    MERCE… 2025  PHYSICIA… NA        
+#> # ℹ 352 more rows
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,

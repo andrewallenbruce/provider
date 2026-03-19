@@ -13,6 +13,7 @@ Access Current Provider Data.
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
   : Revoked Providers & Suppliers
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  [`wildcard()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 
 ### Individual

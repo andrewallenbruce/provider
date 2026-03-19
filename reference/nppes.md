@@ -17,10 +17,10 @@ nppes(
   city = NULL,
   state = NULL,
   zip = NULL,
-  country = NULL,
-  limit = 1200L,
-  skip = 0L
+  country = NULL
 )
+
+wildcard(x)
 ```
 
 ## Arguments
@@ -68,17 +68,15 @@ nppes(
   `<chr>` Country abbreviation. Can be the only input if it *is not*
   `"US"`.
 
-- limit:
+- x:
 
-  `<int>` Maximum number of results to return
-
-- skip:
-
-  `<int>` Number of results to skip
+  `<chr>` input
 
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+
+A `<wildcard>` object
 
 ## **National Provider Identifier (NPI)**
 
@@ -120,14 +118,17 @@ somewhat independently from their parent organization. These parts may
 offer different types of health care or offer health care in separate
 physical locations. These parts and their physical locations aren't
 themselves legal entities but are part of the organization health care
-provider (which is a legal entity). The NPI Final Rule refers to the
-parts and locations as sub-parts. An organization health care provider
-can get its sub-parts their own NPIs. If a sub-part conducts any HIPAA
-standard transactions on its own (separately from its parent), it must
-get its own NPI. Sub-part determination makes sure that entities within
-a covered organization are uniquely identified in HIPAA standard
-transactions they conduct with Medicare and other covered entities. For
-example, a hospital offers acute care, laboratory, pharmacy, and
+provider (which is a legal entity).
+
+The NPI Final Rule refers to the parts and locations as sub-parts. An
+organization health care provider can get its sub-parts their own NPIs.
+If a sub-part conducts any HIPAA standard transactions on its own
+(separately from its parent), it must get its own NPI. Sub-part
+determination makes sure that entities within a covered organization are
+uniquely identified in HIPAA standard transactions they conduct with
+Medicare and other covered entities.
+
+For example, a hospital offers acute care, laboratory, pharmacy, and
 rehabilitation services. Each of these sub-parts may need its own NPI
 because each sends its own standard transactions to one or more health
 plans. Sub-part delegation doesn't affect Entity Type 1 health care
@@ -157,4 +158,8 @@ characters to be entered, e.g. `"jo*"`
 
 ``` r
 # nppes(npi = 1528060837)
+wildcard("Jo")
+#> [1] "Jo"
+#> attr(,"class")
+#> [1] "wildcard"
 ```

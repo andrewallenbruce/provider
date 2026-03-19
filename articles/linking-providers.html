@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9057</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9058</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,43 +116,43 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">#&gt;   facility_type facility_ccn parent_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hospital      470003       <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Hospital      330250       <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Hospital      331321       <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Hospital      470001       <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Hospital      471307       <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hospital      330250       <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Hospital      470003       <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Hospital      470001       <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Hospital      471307       <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Hospital      470011       <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">facility_ccn</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">5</span> results.</span></span>
 <span><span class="va">ccn</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [5 × 39] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ org_name      : chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "ALICE HYDE MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" ...</span></span>
-<span><span class="co">#&gt;  $ org_dba       : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" "THE UNIVERSITY OF VERMONT HEALTH NETWORK-ALICE HYDE MEDICAL CENTER" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" ...</span></span>
-<span><span class="co">#&gt;  $ enid          : chr [1:5] "O20120110000201" "O20230512000344" "O20050809000650" "O20021111000009" ...</span></span>
-<span><span class="co">#&gt;  $ enid_state    : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
-<span><span class="co">#&gt;  $ spec          : chr [1:5] "00-09" "00-85" "00-09" "00-09" ...</span></span>
-<span><span class="co">#&gt;  $ specialty     : chr [1:5] "PART A PROVIDER - HOSPITAL" "PART A PROVIDER - CRITICAL ACCESS HOSPITAL" "PART A PROVIDER - HOSPITAL" "PART A PROVIDER - HOSPITAL" ...</span></span>
-<span><span class="co">#&gt;  $ npi           : chr [1:5] "1033270699" "1114954682" "1508845637" "1568419976" ...</span></span>
+<span><span class="co">#&gt;  $ org_name      : chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...</span></span>
+<span><span class="co">#&gt;  $ org_dba       : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...</span></span>
+<span><span class="co">#&gt;  $ enid          : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...</span></span>
+<span><span class="co">#&gt;  $ enid_state    : chr [1:5] "NY" "VT" "VT" "VT" ...</span></span>
+<span><span class="co">#&gt;  $ spec          : chr [1:5] "00-09" "00-09" "00-09" "00-09" ...</span></span>
+<span><span class="co">#&gt;  $ specialty     : chr [1:5] "PART A PROVIDER - HOSPITAL" "PART A PROVIDER - HOSPITAL" "PART A PROVIDER - HOSPITAL" "PART A PROVIDER - HOSPITAL" ...</span></span>
+<span><span class="co">#&gt;  $ npi           : chr [1:5] "1033270699" "1508845637" "1568419976" "1306849708" ...</span></span>
 <span><span class="co">#&gt;  $ multi         : chr [1:5] "N" "N" "N" "N" ...</span></span>
-<span><span class="co">#&gt;  $ ccn           : chr [1:5] "330250" "331321" "470001" "470003" ...</span></span>
+<span><span class="co">#&gt;  $ ccn           : chr [1:5] "330250" "470001" "470003" "470011" ...</span></span>
 <span><span class="co">#&gt;  $ ccn_2         : chr [1:5] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ pac           : chr [1:5] "2769396878" "4082525837" "9335138817" "3779491071" ...</span></span>
-<span><span class="co">#&gt;  $ inc_date      : chr [1:5] "1926-01-01" "1905-04-13" "1984-03-01" "1995-01-01" ...</span></span>
-<span><span class="co">#&gt;  $ inc_state     : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
+<span><span class="co">#&gt;  $ pac           : chr [1:5] "2769396878" "9335138817" "3779491071" "9335112929" ...</span></span>
+<span><span class="co">#&gt;  $ inc_date      : chr [1:5] "1926-01-01" "1984-03-01" "1995-01-01" "1904-10-26" ...</span></span>
+<span><span class="co">#&gt;  $ inc_state     : chr [1:5] "NY" "VT" "VT" "VT" ...</span></span>
 <span><span class="co">#&gt;  $ str           : chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
 <span><span class="co">#&gt;  $ str_otxt      : chr [1:5] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ design        : chr [1:5] "N" "N" "N" "N" ...</span></span>
-<span><span class="co">#&gt;  $ add_1         : chr [1:5] "75 BEEKMAN ST" "133 PARK ST" "130 FISHER RD" "111 COLCHESTER AVE" ...</span></span>
+<span><span class="co">#&gt;  $ add_1         : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...</span></span>
 <span><span class="co">#&gt;  $ add_2         : chr [1:5] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ city          : chr [1:5] "PLATTSBURGH" "MALONE" "BERLIN" "BURLINGTON" ...</span></span>
-<span><span class="co">#&gt;  $ state         : chr [1:5] "NY" "NY" "VT" "VT" ...</span></span>
-<span><span class="co">#&gt;  $ zip           : chr [1:5] "129011438" "129531244" "56029516" "54011473" ...</span></span>
-<span><span class="co">#&gt;  $ loc           : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
-<span><span class="co">#&gt;  $ loc_otxt      : chr [1:5] NA NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" ...</span></span>
+<span><span class="co">#&gt;  $ city          : chr [1:5] "PLATTSBURGH" "BERLIN" "BURLINGTON" "BRATTLEBORO" ...</span></span>
+<span><span class="co">#&gt;  $ state         : chr [1:5] "NY" "VT" "VT" "VT" ...</span></span>
+<span><span class="co">#&gt;  $ zip           : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...</span></span>
+<span><span class="co">#&gt;  $ loc           : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
+<span><span class="co">#&gt;  $ loc_otxt      : chr [1:5] NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" NA ...</span></span>
 <span><span class="co">#&gt;  $ reh_ind       : chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ reh_date      : chr [1:5] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ sub_general   : chr [1:5] "N" "N" "N" "N" ...</span></span>
-<span><span class="co">#&gt;  $ sub_acute     : chr [1:5] "Y" "N" "Y" "Y" ...</span></span>
+<span><span class="co">#&gt;  $ sub_general   : chr [1:5] "N" "N" "N" "Y" ...</span></span>
+<span><span class="co">#&gt;  $ sub_acute     : chr [1:5] "Y" "Y" "Y" "N" ...</span></span>
 <span><span class="co">#&gt;  $ sub_drug      : chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ sub_child     : chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ sub_long      : chr [1:5] "N" "N" "N" "N" ...</span></span>
@@ -163,8 +163,8 @@
 <span><span class="co">#&gt;  $ sub_psych_unit: chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ sub_rehab_unit: chr [1:5] "N" "N" "N" "N" ...</span></span>
 <span><span class="co">#&gt;  $ sub_specialty : chr [1:5] "N" "N" "N" "N" ...</span></span>
-<span><span class="co">#&gt;  $ sub_other     : chr [1:5] "N" "N" "N" "Y" ...</span></span>
-<span><span class="co">#&gt;  $ sub_otxt      : chr [1:5] NA NA NA "ORGAN TRANSPLANT PROGRAM" ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ sub_other     : chr [1:5] "N" "N" "Y" "N" ...</span></span>
+<span><span class="co">#&gt;  $ sub_otxt      : chr [1:5] NA NA "ORGAN TRANSPLANT PROGRAM" NA ...</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -205,8 +205,8 @@ insights. For example, there is a hospital in New York named
 <span><span class="co">#&gt; <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>facility_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`clinicians`</span> returned <span style="font-weight: bold;">60</span> results.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 60 × 25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`clinicians`</span> returned <span style="font-weight: bold;">59</span> results.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 59 × 25</span></span></span>
 <span><span class="co">#&gt;    first    middle last    suffix gender cred  school year  specialty spec_other</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> JEFFREY  <span style="color: #BB0000;">NA</span>     KLOTZ   <span style="color: #BB0000;">NA</span>     M      MD    OTHER  2022  FAMILY P… <span style="color: #BB0000;">NA</span>        </span></span>
@@ -219,7 +219,7 @@ insights. For example, there is a hospital in New York named
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> BENJAMIN <span style="color: #BB0000;">NA</span>     BAMFORD <span style="color: #BB0000;">NA</span>     M      MD    UNIVE… 1992  DIAGNOST… <span style="color: #BB0000;">NA</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> STEVEN   E      DESO    <span style="color: #BB0000;">NA</span>     M      MD    BOSTO… 2010  DIAGNOST… INTERVENT…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> LAURENT  <span style="color: #BB0000;">NA</span>     GILLOT… <span style="color: #BB0000;">NA</span>     M      MD    OTHER  1998  DIAGNOST… <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 50 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 49 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: npi &lt;chr&gt;, pac &lt;chr&gt;, enid &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mem &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, org_city &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   org_state &lt;chr&gt;, org_zip &lt;chr&gt;, org_phone &lt;chr&gt;, ind &lt;chr&gt;, org &lt;chr&gt;,</span></span></span>
@@ -253,7 +253,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`affiliations`</span> returned <span style="font-weight: bold;">206</span> results.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`affiliations`</span> returned <span style="font-weight: bold;">211</span> results.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
@@ -265,7 +265,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <span><span class="co">#&gt; parent_ccn        &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 206 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 211 × 6</span></span></span>
 <span><span class="co">#&gt;    first   last            middle suffix npi        pac       </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> LAURA   GREENE          A      <span style="color: #BB0000;">NA</span>     1003845272 1759384035</span></span>
@@ -276,9 +276,9 @@ all-numeric CCN (<code>331302</code>):</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> LINDSEY WILHELM         B      <span style="color: #BB0000;">NA</span>     1023377843 6901115278</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> VANESSA FIORINI FURTADO <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1043672140 7214229350</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> JOHN    YOUNG           <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1063420891 9436051687</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DELANEY OSBORN          <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073073177 0547593097</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ANGAD   GILL            <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     1073133435 6800318452</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 196 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ROBERT  BENAK           L      <span style="color: #BB0000;">NA</span>     1063423523 3476552878</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ALTHEA  MORRISON        LOUISE <span style="color: #BB0000;">NA</span>     1063974293 8628445343</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 201 more rows</span></span></span></code></pre></div>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>

@@ -68,9 +68,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 affiliations(count = TRUE)
-#> ✔ `affiliations` returned 1,621,297 results.
+#> ✔ `affiliations` returned 1,623,829 results.
 affiliations(middle = "", count = TRUE)
-#> ✔ `affiliations` returned 548,785 results.
+#> ✔ `affiliations` returned 551,669 results.
 affiliations(facility_ccn = "33Z302")
 #> ✔ `affiliations` returned 4 results.
 #> # A tibble: 4 × 9
@@ -90,8 +90,8 @@ affiliations(parent_ccn = 331302)
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(facility_ccn = 331302)
-#> ✔ `affiliations` returned 206 results.
-#> # A tibble: 206 × 9
+#> ✔ `affiliations` returned 211 results.
+#> # A tibble: 211 × 9
 #>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #>  1 LAURA   GREE… A      NA     1003… 1759… Hospital      331302       NA        
@@ -102,7 +102,7 @@ affiliations(facility_ccn = 331302)
 #>  6 LINDSEY WILH… B      NA     1023… 6901… Hospital      331302       NA        
 #>  7 VANESSA FIOR… NA     NA     1043… 7214… Hospital      331302       NA        
 #>  8 JOHN    YOUNG NA     NA     1063… 9436… Hospital      331302       NA        
-#>  9 DELANEY OSBO… NA     NA     1073… 0547… Hospital      331302       NA        
-#> 10 ANGAD   GILL  NA     NA     1073… 6800… Hospital      331302       NA        
-#> # ℹ 196 more rows
+#>  9 ROBERT  BENAK L      NA     1063… 3476… Hospital      331302       NA        
+#> 10 ALTHEA  MORR… LOUISE NA     1063… 8628… Hospital      331302       NA        
+#> # ℹ 201 more rows
 ```

@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9058 (2026-03-19)
+
+- nppes work
+
 ## provider 0.0.1.9057 (2026-03-18)
 
 - added `api_medicare2`
