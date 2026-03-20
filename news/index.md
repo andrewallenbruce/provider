@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9060 (2026-03-20)
+
+- added
+  [`hrsa_select()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md),
+  `provider_types()`
+
 ## provider 0.0.1.9059 (2026-03-20)
 
 - `hrsa` functionality,.

@@ -86,9 +86,9 @@ revocations(count = TRUE)
 #> ✔ `revocations` returned 7,465 results.
 revocations(state = "GA")
 #> ✔ `revocations` returned 213 results.
-#> # A tibble: 213 × 12
+#> # A data frame: 213 × 12
 #>    org_name first    middle last       enid   npi   multi state specialty reason
-#>    <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
+#>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       WALLACE  S      ANDERSON   I2003… 1881… N     GA    PRACTITI… 424.5…
 #>  2 NA       LEO      G      FRANGIPANE I2003… 1073… N     GA    PRACTITI… 424.5…
 #>  3 NA       ANTHONY  D      MILLS      I2004… 1265… N     GA    PRACTITI… 424.5…
@@ -103,9 +103,9 @@ revocations(state = "GA")
 #> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 revocations(specialty = contains("CARDIO"), state = not("TX"))
 #> ✔ `revocations` returned 46 results.
-#> # A tibble: 46 × 12
+#> # A data frame: 46 × 12
 #>    org_name first    middle last       enid   npi   multi state specialty reason
-#>    <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
+#>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       RONALD   A      CARLISH    I2003… 1639… N     CA    PRACTITI… 424.5…
 #>  2 NA       STEVE    E      NOZAD      I2003… 1962… N     NY    PRACTITI… 424.5…
 #>  3 NA       RAED     A      JITAN      I2004… 1033… N     WV    PRACTITI… 424.5…
@@ -120,9 +120,9 @@ revocations(specialty = contains("CARDIO"), state = not("TX"))
 #> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
 #> ✔ `revocations` returned 43 results.
-#> # A tibble: 43 × 12
+#> # A data frame: 43 × 12
 #>    org_name first   middle last      enid     npi   multi state specialty reason
-#>    <chr>    <chr>   <chr>  <chr>     <chr>    <chr> <chr> <chr> <chr>     <chr> 
+#>  * <chr>    <chr>   <chr>  <chr>     <chr>    <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       RONALD  A      CARLISH   I200311… 1639… N     CA    PRACTITI… 424.5…
 #>  2 NA       STEVE   E      NOZAD     I200312… 1962… N     NY    PRACTITI… 424.5…
 #>  3 NA       RAED    A      JITAN     I200402… 1033… N     WV    PRACTITI… 424.5…

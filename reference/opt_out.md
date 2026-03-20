@@ -103,16 +103,16 @@ opt_out(count = TRUE)
 #> ✔ `opt_out` returned 54,943 results.
 opt_out(npi = 1043522824)
 #> ✔ `opt_out` returned 1 result.
-#> # A tibble: 1 × 13
+#> # A data frame: 1 × 13
 #>   npi        first last  specialty start_date end_date updated add_1 add_2 city 
-#>   <chr>      <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
+#> * <chr>      <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #> 1 1043522824 James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2… 8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(state = "AK")
 #> ✔ `opt_out` returned 256 results.
-#> # A tibble: 256 × 13
+#> # A data frame: 256 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
-#>    <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
+#>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #>  1 12655534… Henry Chap… Physicia… 4/1/2012   4/1/2026 5/15/2… 3300… STE … ANCH…
 #>  2 14878796… Ann   Stoc… Clinical… 4/1/2012   4/1/2026 5/15/2… 505 … STE … ANCH…
 #>  3 10435593… Amber Shea  Nurse Pr… 4/1/2013   4/1/2027 5/15/2… 5805… NA    WASI…
@@ -127,9 +127,9 @@ opt_out(state = "AK")
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ `opt_out` returned 790 results.
-#> # A tibble: 790 × 13
+#> # A data frame: 790 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
-#>    <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
+#>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #>  1 17204445… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2… 1629… P O … GLAD…
 #>  2 15988021… Mart… Leat… Psychiat… 4/1/2012   4/1/2026 10/15/… 1314… #5101 SAN …
 #>  3 19726233… Nancy Shos… Psychiat… 3/2/2012   3/2/2026 10/15/… 1288… NA    DALL…

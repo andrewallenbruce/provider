@@ -130,18 +130,18 @@ clinicians(count = TRUE)
 #> ✔ `clinicians` returned 2,819,129 results.
 clinicians(enid = "I20081002000549")
 #> ✔ `clinicians` returned 1 result.
-#> # A tibble: 1 × 25
+#> # A data frame: 1 × 25
 #>   first middle last  suffix gender cred  school year  specialty spec_other npi  
-#>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
+#> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
 #> 1 DORO… E      MCCU… NA     F      AU    OTHER  2008  QUALIFIE… NA         1407…
 #> # ℹ 14 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>, org_state <chr>,
 #> #   org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>, tlh <chr>
 clinicians(first = "ETAN")
 #> ✔ `clinicians` returned 11 results.
-#> # A tibble: 11 × 25
+#> # A data frame: 11 × 25
 #>    first middle last     suffix gender cred  school   year  specialty spec_other
-#>    <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
+#>  * <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
 #>  1 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
 #>  2 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
 #>  3 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
@@ -161,9 +161,9 @@ clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
 #> ✔ `clinicians` returned 362 results.
 clinicians(city = "Atlanta", state = "GA", year = 2025)
 #> ✔ `clinicians` returned 362 results.
-#> # A tibble: 362 × 25
+#> # A data frame: 362 × 25
 #>    first      middle last  suffix gender cred  school year  specialty spec_other
-#>    <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
+#>  * <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
 #>  1 THAO       NA     HOANG NA     F      PA    OTHER  2025  PHYSICIA… NA        
 #>  2 RYAN       NA     FERL… NA     M      NA    OTHER  2025  PHYSICIA… NA        
 #>  3 SYDNEY     CLAIRE ZARS… NA     F      NA    OTHER  2025  PHYSICIA… NA        

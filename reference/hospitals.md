@@ -19,6 +19,7 @@ hospitals(
   state = NULL,
   zip = NULL,
   multi = NULL,
+  org_status = NULL,
   org_type = NULL,
   provider_type = NULL,
   location_type = NULL,
@@ -82,19 +83,43 @@ subgroups(
 
   `<lgl>` Does hospital have more than one NPI?
 
+- org_status:
+
+  `<enum>` Organization status
+
+  - `P` = Proprietary
+
+  - `N` = Non-Profit
+
+  - `D` = Unknown
+
 - org_type:
 
-  `<enum>` `P`: Proprietary, `N`: Non-Profit, `D`: Unknown
+  `<enum>` Organization structure type
 
 - provider_type:
 
-  `<enum>` Provider type; `hospital`: Part A Hospital, `reh`: Rural
-  Emergency Hospital, or `cah`: Critical Access Hospital
+  `<enum>` Provider type;
+
+  - `hospital` = Part A Hospital
+
+  - `reh` = Rural Emergency Hospital
+
+  - `cah` = Critical Access Hospital
 
 - location_type:
 
-  `<enum>` Location type; `primary`, `psych`, `rehab`, `extension`,
-  `other`
+  `<enum>` Practice location type
+
+  - `main` = Main/Primary Hospital Location
+
+  - `psych` = Hospital Psychiatric Unit
+
+  - `rehab` = Hospital Rehabilitation Unit
+
+  - `ext` = Opt Extension Site
+
+  - `other` = Other Hospital Practice Location
 
 - subgroup:
 
@@ -169,16 +194,16 @@ hospitals(count = TRUE)
 #> ✔ `hospitals` returned 9,187 results.
 hospitals(state = "GA", provider_type = "reh")
 #> ✔ `hospitals` returned 1 result.
-#> # A tibble: 1 × 39
+#> # A data frame: 1 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
-#>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+#> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
-#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
-#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
-#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
-#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
+#> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
+#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
+#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
+#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals(
   city = "Atlanta",
@@ -189,17 +214,17 @@ hospitals(
   )
 )
 #> ✔ `hospitals` returned 2 results.
-#> # A tibble: 2 × 39
+#> # A data frame: 2 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
-#>   <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+#> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 UHS OF ANCHO… ANCHOR… O201… GA         00-09 PART A P… 1023… Y     1140… NA   
 #> 2 UHS OF PEACH… PEACHF… O201… GA         00-09 PART A P… 1093… N     1140… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
-#> #   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
-#> #   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
-#> #   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
-#> #   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
+#> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
+#> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
+#> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
+#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 subgroups(acute = TRUE, rehab = TRUE)
 #> <subgroups>

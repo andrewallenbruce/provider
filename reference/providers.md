@@ -83,28 +83,28 @@ providers(count = TRUE)
 #> ✔ `providers` returned 2,957,262 results.
 providers(enid = "I20040309000221")
 #> ✔ `providers` returned 1 result.
-#> # A tibble: 1 × 11
+#> # A data frame: 1 × 11
 #>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
-#>   <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
+#> * <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
 providers(npi = 1417918293)
 #> ✔ `providers` returned 1 result.
-#> # A tibble: 1 × 11
+#> # A data frame: 1 × 11
 #>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
-#>   <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
+#> * <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
 #> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
 providers(pac = 2860305554)
 #> ✔ `providers` returned 1 result.
-#> # A tibble: 1 × 11
+#> # A data frame: 1 × 11
 #>   org_name first  middle last   state spec  specialty    npi   multi pac   enid 
-#>   <chr>    <chr>  <chr>  <chr>  <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
+#> * <chr>    <chr>  <chr>  <chr>  <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
 #> 1 NA       ROBERT NA     YEAMAN TX    14-41 PRACTITIONE… 1134… N     2860… I200…
 providers(state = "AK")
 #> ✔ `providers` returned 6,851 results.
 #> ℹ Retrieving 2 pages...
-#> # A tibble: 6,851 × 11
+#> # A data frame: 6,851 × 11
 #>    org_name first     middle last  state spec  specialty npi   multi pac   enid 
-#>    <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+#>  * <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
 #>  1 NA       DAVID     L      BARN… AK    14-11 PRACTITI… 1124… N     6305… I200…
 #>  2 NA       TIMOTHY   W      SKALA AK    14-01 PRACTITI… 1770… N     8022… I200…
 #>  3 NA       MATT      A      HEIL… AK    14-48 PRACTITI… 1821… N     8820… I200…

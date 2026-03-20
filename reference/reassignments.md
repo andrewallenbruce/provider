@@ -93,9 +93,9 @@ reassignments(count = TRUE)
 #> ✔ `reassignments` returned 3,493,831 results.
 reassignments(org_enid = "I20070209000135")
 #> ✔ `reassignments` returned 5 results.
-#> # A tibble: 5 × 14
+#> # A data frame: 5 × 14
 #>   first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
-#>   <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
+#> * <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
 #> 1 Joah    Alian… FL    Ophthalm… 2         1083… 9830… I202… NA       5         
 #> 2 Kyle    Bettis FL    Optometry 2         1871… 1850… I201… NA       5         
 #> 3 Craig   Cole   FL    Ophthalm… 2         1851… 6305… I201… NA       5         
@@ -105,18 +105,18 @@ reassignments(org_enid = "I20070209000135")
 #> #   type <chr>
 reassignments(pac = 9830437441)
 #> ✔ `reassignments` returned 2 results.
-#> # A tibble: 2 × 14
+#> # A data frame: 2 × 14
 #>   first last    state specialty  ind_assoc npi   pac   enid  org_name org_assign
-#>   <chr> <chr>   <chr> <chr>      <chr>     <chr> <chr> <chr> <chr>    <chr>     
+#> * <chr> <chr>   <chr> <chr>      <chr>     <chr> <chr> <chr> <chr>    <chr>     
 #> 1 Joah  Aliancy FL    Ophthalmo… 2         1083… 9830… I202… NA       5         
 #> 2 Joah  Aliancy FL    Ophthalmo… 2         1083… 9830… I202… Clermon… 1         
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   type <chr>
 reassignments(org_pac = 3173525888)
 #> ✔ `reassignments` returned 5 results.
-#> # A tibble: 5 × 14
+#> # A data frame: 5 × 14
 #>   first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
-#>   <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
+#> * <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
 #> 1 Joah    Alian… FL    Ophthalm… 2         1083… 9830… I202… NA       5         
 #> 2 Kyle    Bettis FL    Optometry 2         1871… 1850… I201… NA       5         
 #> 3 Craig   Cole   FL    Ophthalm… 2         1851… 6305… I201… NA       5         

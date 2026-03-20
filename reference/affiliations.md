@@ -36,7 +36,23 @@ affiliations(
 
 - facility_type:
 
-  `<chr>` facility type abbreviation
+  `<chr>` facility type:
+
+  - `esrd` = Dialysis facility
+
+  - `hha` = Home health agency
+
+  - `hospice` = Hospice
+
+  - `hospital` = Hospital
+
+  - `irf` = Inpatient rehabilitation facility
+
+  - `ltch` = Long-term care hospital
+
+  - `nurse` = Nursing home
+
+  - `snf` = Skilled nursing facility
 
 - facility_ccn:
 
@@ -67,33 +83,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
-affiliations(count = TRUE)
-#> ✔ `affiliations` returned 1,623,829 results.
 affiliations(middle = "", count = TRUE)
 #> ✔ `affiliations` returned 551,669 results.
 affiliations(facility_ccn = "33Z302")
 #> ✔ `affiliations` returned 4 results.
-#> # A tibble: 4 × 9
+#> # A data frame: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
-#>   <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
+#> * <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #> 1 JEFFREY KLOTZ  NA     NA     1073… 3870… Nursing home  33Z302       331302    
 #> 2 MARY    HALLO… K      NA     1396… 8921… Nursing home  33Z302       331302    
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(parent_ccn = 331302)
 #> ✔ `affiliations` returned 4 results.
-#> # A tibble: 4 × 9
+#> # A data frame: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
-#>   <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
+#> * <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #> 1 JEFFREY KLOTZ  NA     NA     1073… 3870… Nursing home  33Z302       331302    
 #> 2 MARY    HALLO… K      NA     1396… 8921… Nursing home  33Z302       331302    
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(facility_ccn = 331302)
 #> ✔ `affiliations` returned 211 results.
-#> # A tibble: 211 × 9
+#> # A data frame: 211 × 9
 #>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
-#>    <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
+#>  * <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #>  1 LAURA   GREE… A      NA     1003… 1759… Hospital      331302       NA        
 #>  2 DEBORAH KAMP… M      NA     1013… 8022… Hospital      331302       NA        
 #>  3 NAROD   VASS… NA     NA     1013… 9133… Hospital      331302       NA        

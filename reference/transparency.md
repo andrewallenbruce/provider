@@ -104,8 +104,8 @@ transparency(count = TRUE)
 #> ✔ `transparency` returned 10,726 results.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ `transparency` returned 1 result.
-#> # A tibble: 1 × 7
+#> # A data frame: 1 × 7
 #>   id    name             address             city     state action   action_date
-#>   <chr> <chr>            <chr>               <chr>    <chr> <chr>    <chr>      
+#> * <chr> <chr>            <chr>               <chr>    <chr> <chr>    <chr>      
 #> 1 6131  Greenleaf Center 2209 Pineview Drive Valdosta GA    Met Req… 2025-08-01 
 ```

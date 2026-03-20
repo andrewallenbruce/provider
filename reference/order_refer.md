@@ -91,15 +91,15 @@ order_refer(count = TRUE)
 #> ✔ `order_refer` returned 1,998,262 results.
 order_refer(npi = 1003026055)
 #> ✔ `order_refer` returned 1 result.
-#> # A tibble: 1 × 8
+#> # A data frame: 1 × 8
 #>   first   last   npi        part_b dme   hha   pmd   hospice
-#>   <chr>   <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>  
+#> * <chr>   <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>  
 #> 1 RADHIKA PHADKE 1003026055 Y      Y     Y     Y     Y      
 order_refer(first = "Jennifer", last = "Smith")
 #> ✔ `order_refer` returned 135 results.
-#> # A tibble: 135 × 8
+#> # A data frame: 135 × 8
 #>    first    last  npi        part_b dme   hha   pmd   hospice
-#>    <chr>    <chr> <chr>      <chr>  <chr> <chr> <chr> <chr>  
+#>  * <chr>    <chr> <chr>      <chr>  <chr> <chr> <chr> <chr>  
 #>  1 JENNIFER SMITH 1588849350 Y      Y     Y     Y     N      
 #>  2 JENNIFER SMITH 1952073652 Y      Y     Y     Y     N      
 #>  3 JENNIFER SMITH 1265005615 Y      Y     Y     Y     N      
@@ -118,9 +118,9 @@ order_refer(
   pmd = TRUE,
   hospice = FALSE)
 #> ✔ `order_refer` returned 49 results.
-#> # A tibble: 49 × 8
+#> # A data frame: 49 × 8
 #>    first    last        npi        part_b dme   hha   pmd   hospice
-#>    <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
+#>  * <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
 #>  1 ROBYN    AYER        1659094290 Y      Y     N     Y     N      
 #>  2 MEGAN    BAUMGARDNER 1023796711 Y      Y     N     Y     N      
 #>  3 KRISTINA BERRY       1295461192 Y      Y     N     Y     N      

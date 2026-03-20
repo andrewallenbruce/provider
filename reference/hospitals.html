@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9059</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9060</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,6 +72,7 @@ type and address.</p>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_status <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  provider_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  location_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -137,18 +138,31 @@ type and address.</p>
 <dd><p><code>&lt;lgl&gt;</code> Does hospital have more than one NPI?</p></dd>
 
 
+<dt id="arg-org-status">org_status<a class="anchor" aria-label="anchor" href="#arg-org-status"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Organization status</p><ul><li><p><code>P</code> = Proprietary</p></li>
+<li><p><code>N</code> = Non-Profit</p></li>
+<li><p><code>D</code> = Unknown</p></li>
+</ul></dd>
+
+
 <dt id="arg-org-type">org_type<a class="anchor" aria-label="anchor" href="#arg-org-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> <code>P</code>: Proprietary, <code>N</code>: Non-Profit, <code>D</code>: Unknown</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Organization structure type</p></dd>
 
 
 <dt id="arg-provider-type">provider_type<a class="anchor" aria-label="anchor" href="#arg-provider-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Provider type; <code>hospital</code>: Part A Hospital,
-<code>reh</code>: Rural Emergency Hospital, or <code>cah</code>: Critical Access Hospital</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Provider type;</p><ul><li><p><code>hospital</code> = Part A Hospital</p></li>
+<li><p><code>reh</code> = Rural Emergency Hospital</p></li>
+<li><p><code>cah</code> = Critical Access Hospital</p></li>
+</ul></dd>
 
 
 <dt id="arg-location-type">location_type<a class="anchor" aria-label="anchor" href="#arg-location-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Location type; <code>primary</code>, <code>psych</code>, <code>rehab</code>,
-<code>extension</code>, <code>other</code></p></dd>
+<dd><p><code>&lt;enum&gt;</code> Practice location type</p><ul><li><p><code>main</code> = Main/Primary Hospital Location</p></li>
+<li><p><code>psych</code> = Hospital Psychiatric Unit</p></li>
+<li><p><code>rehab</code> = Hospital Rehabilitation Unit</p></li>
+<li><p><code>ext</code> = Opt Extension Site</p></li>
+<li><p><code>other</code> = Other Hospital Practice Location</p></li>
+</ul></dd>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
@@ -223,16 +237,16 @@ type and address.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">9,187</span> results.</span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, provider_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 39</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 1 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, str &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   str_otxt &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, loc &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, org_status &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
@@ -243,17 +257,17 @@ type and address.</p>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">`hospitals`</span> returned <span style="font-weight: bold;">2</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 39</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 2 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UHS OF ANCHO… ANCHOR… O201… GA         00-09 PART A P… 1023… Y     1140… <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF PEACH… PEACHF… O201… GA         00-09 PART A P… 1093… N     1140… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;, str &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   str_otxt &lt;chr&gt;, design &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;, loc &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;, sub_drug &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;, sub_rehab &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, org_status &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_general &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">subgroups</span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">TRUE</span>, rehab <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;subgroups&gt;</span></span>

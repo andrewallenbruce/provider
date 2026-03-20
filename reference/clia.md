@@ -161,9 +161,9 @@ clia(status = "cmp", count = TRUE)
 #> ✔ `clia` returned 72,855 results.
 clia(ccn = provider:::cdc_labs$ccn)
 #> ✔ `clia` returned 6 results.
-#> # A tibble: 6 × 82
+#> # A data frame: 6 × 82
 #>   name_1   name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
-#>   <chr>    <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
+#> * <chr>    <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
 #> 1 CDC ARC… CENTE… 02D0… NA    0      NA        NA       N     A      4055… NA   
 #> 2 CENTERS… DIVIS… 06D0… NA    0      NA        NA       Y     A      3156… NA   
 #> 3 CDC/NCE… NA     11D0… NA    0      NA        NA       N     A      4770… ATTN…
@@ -183,9 +183,9 @@ clia(
   state = "GA"
 )
 #> ✔ `clia` returned 18 results.
-#> # A tibble: 18 × 82
+#> # A data frame: 18 × 82
 #>    name_1  name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
-#>    <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
+#>  * <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
 #>  1 SGMC H… NA     11D0… NA    0      NA        NA       N     A      2501… NA   
 #>  2 SGMC- … NA     11D0… NA    0      NA        NA       N     A      4280… NA   
 #>  3 SMITH … NA     11D0… NA    0      NA        NA       N     NA     2910… NA   

@@ -335,6 +335,7 @@ Access Current Organizational Provider Data.
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_fields()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
+  [`hrsa_select()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   : HRSA Facilities
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
