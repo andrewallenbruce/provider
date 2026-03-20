@@ -1,4 +1,10 @@
 #' @noRd
+data_frame <- function(x, call = rlang::caller_call()) {
+  check_data_frame(x, call = call)
+  structure(x, class = c("tbl", "data.frame"))
+}
+
+#' @noRd
 df_tbl_ <- function(x) {
   `class<-`(cheapr::as_df(x), c("tbl_df", "tbl", "data.frame"))
 }
@@ -28,7 +34,7 @@ polish <- function(x, n) {
   x |>
     replace_nz() |>
     rename_with(nm = n) |>
-    df_tbl_()
+    data_frame()
 }
 
 #' @noRd

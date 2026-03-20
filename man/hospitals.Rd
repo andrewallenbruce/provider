@@ -22,6 +22,7 @@ hospitals(
   state = NULL,
   zip = NULL,
   multi = NULL,
+  org_status = NULL,
   org_type = NULL,
   provider_type = NULL,
   location_type = NULL,
@@ -62,13 +63,30 @@ subgroups(
 
 \item{multi}{\verb{<lgl>} Does hospital have more than one NPI?}
 
-\item{org_type}{\verb{<enum>} \code{P}: Proprietary, \code{N}: Non-Profit, \code{D}: Unknown}
+\item{org_status}{\verb{<enum>} Organization status
+\itemize{
+\item \code{P} = Proprietary
+\item \code{N} = Non-Profit
+\item \code{D} = Unknown
+}}
 
-\item{provider_type}{\verb{<enum>} Provider type; \code{hospital}: Part A Hospital,
-\code{reh}: Rural Emergency Hospital, or \code{cah}: Critical Access Hospital}
+\item{org_type}{\verb{<enum>} Organization structure type}
 
-\item{location_type}{\verb{<enum>} Location type; \code{primary}, \code{psych}, \code{rehab},
-\code{extension}, \code{other}}
+\item{provider_type}{\verb{<enum>} Provider type;
+\itemize{
+\item \code{hospital} = Part A Hospital
+\item \code{reh} = Rural Emergency Hospital
+\item \code{cah} = Critical Access Hospital
+}}
+
+\item{location_type}{\verb{<enum>} Practice location type
+\itemize{
+\item \code{main} = Main/Primary Hospital Location
+\item \code{psych} = Hospital Psychiatric Unit
+\item \code{rehab} = Hospital Rehabilitation Unit
+\item \code{ext} = Opt Extension Site
+\item \code{other} = Other Hospital Practice Location
+}}
 
 \item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
 

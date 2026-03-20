@@ -58,27 +58,6 @@ S7::method(value, Modifier) <- function(x) {
   S7::prop(x, "value")
 }
 
-#' @noRd
-cli_bld_red <- cli::combine_ansi_styles("red", "bold")
-
-#' @exportS3Method base::print
-print.Modifier <- function(x, ...) {
-  cli::cli_text(cli::col_cyan("<Modifier>"))
-  cli::cli_text(c(
-    cli::col_silver("Operator: "),
-    cli_bld_red(operator(x))
-  ))
-
-  LEN <- length(value(x)) > 1L
-
-  cli::cli_text(
-    c(
-      cli::col_silver(if (LEN) "Values: " else "Value: "),
-      cli::col_yellow(if (LEN) toString(value(x), width = 20L) else value(x))
-    )
-  )
-}
-
 #' @rdname modifier
 #' @export
 excludes <- function(...) {
@@ -139,13 +118,3 @@ ends_with <- function(x) {
   check_string(x)
   Modifier("ENDS WITH", value = x)
 }
-
-# @rdname modifier
-# @examples
-# any_of(state.abb)
-# @export
-# any_of <- function(...) {
-#   check_dots_unnamed()
-#   x <- c(...)
-#   Modifier("IN", value = x)
-# }

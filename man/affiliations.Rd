@@ -24,7 +24,17 @@ affiliations(
 
 \item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{facility_type}{\verb{<chr>} facility type abbreviation}
+\item{facility_type}{\verb{<chr>} facility type:
+\itemize{
+\item \code{esrd} = Dialysis facility
+\item \code{hha} = Home health agency
+\item \code{hospice} = Hospice
+\item \code{hospital} = Hospital
+\item \code{irf} = Inpatient rehabilitation facility
+\item \code{ltch} = Long-term care hospital
+\item \code{nurse} = Nursing home
+\item \code{snf} = Skilled nursing facility
+}}
 
 \item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} column's
 facility \strong{or} of a \strong{unit} within the hospital where the individual
@@ -44,7 +54,6 @@ affiliations with organizations/facilities.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-affiliations(count = TRUE)
 affiliations(middle = "", count = TRUE)
 affiliations(facility_ccn = "33Z302")
 affiliations(parent_ccn = 331302)

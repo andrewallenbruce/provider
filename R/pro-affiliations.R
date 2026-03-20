@@ -10,7 +10,15 @@
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
 #' @param first,middle,last,suffix `<chr>` Individual provider's name
-#' @param facility_type `<chr>` facility type abbreviation
+#' @param facility_type `<chr>` facility type:
+#'    - `esrd` = Dialysis facility
+#'    - `hha` = Home health agency
+#'    - `hospice` = Hospice
+#'    - `hospital` = Hospital
+#'    - `irf` = Inpatient rehabilitation facility
+#'    - `ltch` = Long-term care hospital
+#'    - `nurse` = Nursing home
+#'    - `snf` = Skilled nursing facility
 #' @param facility_ccn `<chr>` CCN of `facility_type` column's
 #'    facility **or** of a **unit** within the hospital where the individual
 #'    provider provides services.
@@ -19,7 +27,6 @@
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
-#' affiliations(count = TRUE)
 #' affiliations(middle = "", count = TRUE)
 #' affiliations(facility_ccn = "33Z302")
 #' affiliations(parent_ccn = 331302)
@@ -41,7 +48,7 @@ affiliations <- function(
   check_character(facility_type, allow_null = TRUE)
 
   exec_prov(
-    END = rlang::call_name(rlang::call_match()),
+    END = call_name(call_match()),
     COUNT = count,
     ARG = params(
       npi = npi,
@@ -54,6 +61,6 @@ affiliations <- function(
       facility_affiliations_certification_number = facility_ccn,
       facility_type_certification_number = parent_ccn
     ),
-    call = rlang::caller_env()
+    call = caller_env()
   )
 }

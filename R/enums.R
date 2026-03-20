@@ -68,10 +68,10 @@ enumerations <- function(arg) {
     # <hospitals>
     location_type = list(
       other = "OTHER HOSPITAL PRACTICE LOCATION",
-      primary = "MAIN/PRIMARY HOSPITAL LOCATION",
+      main = "MAIN/PRIMARY HOSPITAL LOCATION",
       psych_unit = "HOSPITAL PSYCHIATRIC UNIT",
       rehab_unit = "HOSPITAL REHABILITATION UNIT",
-      extension = "OPT EXTENSION SITE"
+      ext = "OPT EXTENSION SITE"
     ),
     # <hospitals>
     org_type = list(

@@ -148,7 +148,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
       request_bare(url_str(paste0(x, "?"), opts(size = 10))) |>
         polish(NM)
     }) |>
-      collapse::rowbind(idcol = .id)
+      collapse::rowbind(idcol = .id, return = 4L)
 
     return(res)
   }
@@ -176,7 +176,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
       )) |>
         polish(NM)
     }) |>
-      collapse::rowbind(idcol = .id)
+      collapse::rowbind(idcol = .id, return = 4L)
 
     return(res)
   }
@@ -202,5 +202,5 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     parallel_request(x) |>
       polish(NM)
   }) |>
-    collapse::rowbind(idcol = .id)
+    collapse::rowbind(idcol = .id, return = 4L)
 }

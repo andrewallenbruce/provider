@@ -16,11 +16,21 @@
 #' @param dba_name `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
 #' @param multi `<lgl>` Does hospital have more than one NPI?
-#' @param org_type `<enum>` `P`: Proprietary, `N`: Non-Profit, `D`: Unknown
-#' @param provider_type `<enum>` Provider type; `hospital`: Part A Hospital,
-#'    `reh`: Rural Emergency Hospital, or `cah`: Critical Access Hospital
-#' @param location_type `<enum>` Location type; `primary`, `psych`, `rehab`,
-#'    `extension`, `other`
+#' @param org_status `<enum>` Organization status
+#'    - `P` = Proprietary
+#'    - `N` = Non-Profit
+#'    - `D` = Unknown
+#' @param org_type `<enum>` Organization structure type
+#' @param provider_type `<enum>` Provider type;
+#'    - `hospital` = Part A Hospital
+#'    - `reh` = Rural Emergency Hospital
+#'    - `cah` = Critical Access Hospital
+#' @param location_type `<enum>` Practice location type
+#'    - `main` = Main/Primary Hospital Location
+#'    - `psych` = Hospital Psychiatric Unit
+#'    - `rehab` = Hospital Rehabilitation Unit
+#'    - `ext` = Opt Extension Site
+#'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package]
@@ -49,6 +59,7 @@ hospitals <- function(
   state = NULL,
   zip = NULL,
   multi = NULL,
+  org_status = NULL,
   org_type = NULL,
   provider_type = NULL,
   location_type = NULL,
@@ -58,6 +69,7 @@ hospitals <- function(
   check_subgroups(subgroup)
   check_bool(multi, allow_null = TRUE)
   check_character(provider_type, allow_null = TRUE)
+  check_character(org_status, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
@@ -74,7 +86,8 @@ hospitals <- function(
       STATE = state,
       `ZIP CODE` = zip,
       `MULTIPLE NPI FLAG` = bool_(multi),
-      PROPRIETARY_NONPROFIT = org_type,
+      PROPRIETARY_NONPROFIT = org_status,
+      `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
       `PROVIDER TYPE CODE` = enum_(provider_type),
       `PRACTICE LOCATION TYPE` = enum_(location_type),
       !!!subgroup
@@ -139,21 +152,4 @@ subgroups <- function(
 #' @noRd
 is_subgroups <- function(x) {
   inherits(x, "subgroups")
-}
-
-#' @exportS3Method base::print
-print.subgroups <- function(x, ...) {
-  cli::cli_text(cli::col_cyan("<subgroups>"))
-  if (!length(x)) {
-    cli::cli_text(cli::col_red("<empty>"))
-  } else {
-    cli::cat_bullet(
-      paste0(
-        format(names(x), justify = "left"),
-        cli::col_silver(" : "),
-        format(unname(x), justify = "left")
-      ),
-      bullet_col = "silver"
-    )
-  }
 }

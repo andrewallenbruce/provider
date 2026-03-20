@@ -9,6 +9,10 @@ params <- function(...) {
 
 #' @noRd
 offset <- function(n, limit, which = "size") {
+
+  check_number_whole(n, min = 0)
+  check_number_whole(limit, min = 1)
+
   if (n == 0L) {
     return(0L)
   }

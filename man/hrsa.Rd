@@ -6,6 +6,7 @@
 \alias{hrsa_layers}
 \alias{hrsa_items}
 \alias{hrsa_fields}
+\alias{hrsa_select}
 \title{HRSA Facilities}
 \usage{
 hrsa_open()
@@ -15,6 +16,8 @@ hrsa_layers(ms)
 hrsa_items(ms)
 
 hrsa_fields(facility, fl)
+
+hrsa_select(facility, fl)
 }
 \arguments{
 \item{ms}{\verb{<MapServer>} String indicating what to retrieve.}
@@ -30,11 +33,9 @@ A list of endpoints.
 HRSA Facilities
 }
 \examples{
-ms <- hrsa_open()
-ms
-hrsa_items(ms)
-
-fl <- hrsa_layers(ms)
-
-hrsa_fields("asc", fl)
+(MS <- hrsa_open())
+hrsa_items(MS)
+(FL <- hrsa_layers(MS))
+hrsa_fields("asc", FL)
+hrsa_select("asc", FL)
 }

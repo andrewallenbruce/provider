@@ -36,15 +36,9 @@ check_subgroups <- function(x) {
 
 #' @noRd
 check_modifiers <- function(x, end, call = call) {
-  if (
-    collapse::anyv(purrr::map_lgl(x, is_modifier), TRUE) &&
-      collapse::anyv(unlist_(x) %in_% c("ENDS WITH", "NOT+IN"), TRUE)
-  ) {
-    cli::cli_abort(
-      message = c(
-        "{.fn ends_with} & {.fn none_of} cannot be used in {.fn {end}}."
-      ),
-      call = call
-    )
+  if (any2(purrr::map_lgl(x, is_modifier))) {
+    if (any2(unlist_(x) %in_% c("ENDS WITH", "NOT+IN"))) {
+      cli::cli_abort("{.fn ends_with} & {.fn excludes} cannot be used in {.fn {end}}.", call = call)
+    }
   }
 }

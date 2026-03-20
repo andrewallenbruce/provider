@@ -1,4 +1,7 @@
 #' @noRd
+cli_red <- cli::combine_ansi_styles("red", "bold")
+
+#' @noRd
 cli_no_query <- function() {
   cli::cli_alert_warning(c(
     "{.emph No Query} ",

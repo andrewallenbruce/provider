@@ -1,4 +1,24 @@
 #' @noRd
+uuid_from_url <- function(x) {
+  stringr::str_extract(
+    x,
+    pattern = paste(
+      "(?:[0-9a-fA-F]){8}",
+      "(?:[0-9a-fA-F]){4}",
+      "(?:[0-9a-fA-F]){4}",
+      "(?:[0-9a-fA-F]){4}",
+      "(?:[0-9a-fA-F]){12}",
+      sep = "-?"
+    )
+  )
+}
+
+#' @noRd
+extract_year <- function(x) {
+  as.integer(stringr::str_extract(x, "[12]{1}[0-9]{3}"))
+}
+
+#' @noRd
 sub_idx <- function(what, with) {
   gsub(
     x = what,
@@ -9,8 +29,12 @@ sub_idx <- function(what, with) {
 }
 
 #' @noRd
-provider_types <- function() {
-  provider::provider_type_code
+provider_types <- function(code = NULL, type = NULL, spec = NULL) {
+  x <- provider::provider_type_code
+  x <- if (!is.null(code)) collapse::ss(x, x$code %iin% code) else x
+  x <- if (!is.null(type)) collapse::ss(x, x$type %iin% type) else x
+  x <- if (!is.null(spec)) collapse::ss(x, x$spec %iin% spec) else x
+  return(x)
 }
 
 #' @noRd
@@ -23,6 +47,11 @@ set_args <- function(fn) {
       envir = .GlobalEnv
     )
   )
+}
+
+#' @noRd
+any2 <- function(x) {
+  collapse::anyv(x, TRUE)
 }
 
 #' @noRd

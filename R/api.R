@@ -80,26 +80,6 @@ api_medicare <- function() {
 }
 
 #' @noRd
-uuid_from_url <- function(x) {
-  stringr::str_extract(
-    x,
-    pattern = paste(
-      "(?:[0-9a-fA-F]){8}",
-      "(?:[0-9a-fA-F]){4}",
-      "(?:[0-9a-fA-F]){4}",
-      "(?:[0-9a-fA-F]){4}",
-      "(?:[0-9a-fA-F]){12}",
-      sep = "-?"
-    )
-  )
-}
-
-#' @noRd
-extract_year <- function(x) {
-  as.integer(stringr::str_extract(x, "[12]{1}[0-9]{3}"))
-}
-
-#' @noRd
 #' @autoglobal
 api_medicare2 <- function(x) {
   rex <- paste0(

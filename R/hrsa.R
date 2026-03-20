@@ -6,13 +6,11 @@
 #' @returns A list of endpoints.
 #' @name hrsa
 #' @examples
-#' ms <- hrsa_open()
-#' ms
-#' hrsa_items(ms)
-#'
-#' fl <- hrsa_layers(ms)
-#'
-#' hrsa_fields("asc", fl)
+#' (MS <- hrsa_open())
+#' hrsa_items(MS)
+#' (FL <- hrsa_layers(MS))
+#' hrsa_fields("asc", FL)
+#' hrsa_select("asc", FL)
 #' @autoglobal
 #' @export
 
@@ -54,4 +52,24 @@ hrsa_fields <- function(facility, fl) {
     nursing = "10"
   )
   arcgislayers::list_fields(fl$layers[[I]])
+}
+
+#' @rdname hrsa
+#' @export
+hrsa_select <- function(facility, fl) {
+  I <- switch(
+    facility,
+    hospital = "0",
+    cah = "1",
+    fqhc = "2",
+    rhc = "3",
+    hospice = "4",
+    icf = "5",
+    asc = "6",
+    snf = "7",
+    snf_dual = "8",
+    snf_dist = "9",
+    nursing = "10"
+  )
+  arcgislayers::arc_select(fl$layers[[I]], geometry = FALSE)
 }
