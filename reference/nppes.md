@@ -3,17 +3,25 @@
 Search the National Plan and Provider Enumeration System (NPPES) NPI
 Registry, a free directory of all active NPI records.
 
+Trailing Wildcard Entries
+
+Arguments that allow trailing wildcard entries are denoted in the
+parameter description with `<WC>`. Wildcard entries require at least two
+characters to be entered, e.g. `"jo*"`
+
 ## Usage
 
 ``` r
 nppes(
   npi = NULL,
   entity = NULL,
+  specialty = NULL,
+  ind_type = NULL,
   first = NULL,
+  use_alias = NULL,
   last = NULL,
   org_name = NULL,
-  type = NULL,
-  specialty = NULL,
+  add_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -33,22 +41,30 @@ wildcard(x)
 
   `<chr>` Entity type; `1` (Individual) or `2` (Organization)
 
+- specialty:
+
+  `<chr>` Provider's specialty
+
+- ind_type:
+
+  `<chr>` Type of individual `first`/`last` refers to: `AO` (Authorized
+  Official) or `Provider` (Individual Provider).
+
 - first, last:
 
   `<chr>` **WC** Individual provider's name
+
+- use_alias:
+
+  `<lgl>` Use first name alias
 
 - org_name:
 
   `<chr>` **WC** Organization's name
 
-- type:
+- add_type:
 
-  `<chr>` Type of individual `first`/`last` refers to: `AO` (Authorized
-  Official) or `Provider` (Individual Provider).
-
-- specialty:
-
-  `<chr>` Provider's specialty
+  `<enum>` Address type
 
 - city:
 
@@ -144,12 +160,6 @@ status in the Medicare program, and to commit the organization to fully
 abide by the statutes, regulations, and program instructions of the
 Medicare program.
 
-## Trailing Wildcard Entries
-
-Arguments that allow trailing wildcard entries are denoted in the
-parameter description with **WC**. Wildcard entries require at least two
-characters to be entered, e.g. `"jo*"`
-
 ## References
 
 - [NPPES NPI Registry API](https://npiregistry.cms.hhs.gov/api-page)
@@ -159,7 +169,7 @@ characters to be entered, e.g. `"jo*"`
 ``` r
 # nppes(npi = 1528060837)
 wildcard("Jo")
-#> [1] "Jo"
+#> [1] "Jo*"
 #> attr(,"class")
 #> [1] "wildcard"
 ```

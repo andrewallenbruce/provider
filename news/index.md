@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9059 (2026-03-20)
+
+- `hrsa` functionality,.
+  [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  refactoring
+
 ## provider 0.0.1.9058 (2026-03-19)
 
 - nppes work
