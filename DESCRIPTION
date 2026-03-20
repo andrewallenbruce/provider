@@ -26,7 +26,8 @@ Imports:
     S7 (>= 0.2.1),
     stringr (>= 1.6.0),
     vctrs (>= 0.7.1),
-    arcgislayers (>= 0.6.0)
+    arcgislayers (>= 0.6.0),
+    memoise (>= 2.0.1)
 Suggests: 
     knitr,
     roxyglobals (>= 1.0.0),

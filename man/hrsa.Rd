@@ -2,40 +2,37 @@
 % Please edit documentation in R/hrsa.R
 \name{hrsa}
 \alias{hrsa}
-\alias{hrsa_open}
-\alias{hrsa_layers}
 \alias{hrsa_items}
+\alias{hrsa_layers}
 \alias{hrsa_fields}
 \alias{hrsa_select}
 \title{HRSA Facilities}
+\source{
+\href{https://data.hrsa.gov/tools/web-services/registration#serviceInfo}{API: HRSA}
+}
 \usage{
-hrsa_open()
+hrsa_items()
 
-hrsa_layers(ms)
+hrsa_layers()
 
-hrsa_items(ms)
+hrsa_fields(facility)
 
-hrsa_fields(facility, fl)
-
-hrsa_select(facility, fl)
+hrsa_select(facility, ...)
 }
 \arguments{
-\item{ms}{\verb{<MapServer>} String indicating what to retrieve.}
-
 \item{facility}{Facility type}
-
-\item{fl}{\verb{<FeatureLayer>}}
 }
 \value{
 A list of endpoints.
 }
 \description{
-HRSA Facilities
+Health Resources & Services Administration
+}
+\details{
+Query modifiers are a small DSL for use in constructing query conditions.
 }
 \examples{
-(MS <- hrsa_open())
-hrsa_items(MS)
-(FL <- hrsa_layers(MS))
-hrsa_fields("asc", FL)
-# hrsa_select("asc", FL)
+hrsa_items()
+hrsa_layers()
+hrsa_fields("snf_all")
 }

@@ -24,5 +24,7 @@ utils::globalVariables(c(
 ))
 
 .onLoad <- function(libname, pkgname) {
+  hrsa_open <<- memoise::memoise(hrsa_open)
+  hrsa_layers <<- memoise::memoise(hrsa_layers)
   S7::methods_register()
 }
