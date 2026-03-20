@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9060 (2026-03-20)
+
+* added `hrsa_select()`, `provider_types()`
+
+
 # provider 0.0.1.9059 (2026-03-20)
 
 * `hrsa` functionality,. `nppes()` refactoring
