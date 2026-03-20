@@ -65,17 +65,15 @@
 #' @references
 #'    - [NPPES NPI Registry API](https://npiregistry.cms.hhs.gov/api-page)
 #'
-#' @section Trailing Wildcard Entries: Arguments that allow trailing wildcard
-#'   entries are denoted in the parameter description with __WC__. Wildcard
-#'   entries require at least two characters to be entered, e.g. `"jo*"`
-#'
 #' @param npi `<int>` National Provider Identifier
 #' @param entity `<chr>` Entity type; `1` (Individual) or `2` (Organization)
-#' @param first,last `<chr>` __WC__ Individual provider's name
-#' @param type `<chr>` Type of individual `first`/`last` refers to:
-#'    `AO` (Authorized Official) or `Provider` (Individual Provider).
-#' @param org_name `<chr>` __WC__ Organization's name
 #' @param specialty `<chr>` Provider's specialty
+#' @param ind_type `<chr>` Type of individual `first`/`last` refers to:
+#'    `AO` (Authorized Official) or `Provider` (Individual Provider).
+#' @param first,last `<chr>` __WC__ Individual provider's name
+#' @param use_alias `<lgl>` Use first name alias
+#' @param org_name `<chr>` __WC__ Organization's name
+#' @param add_type `<enum>` Address type
 #' @param city `<chr>` City; For military addresses, search `"APO"`/`"FPO"`.
 #' @param state `<chr>` State abbreviation. If the only input, one other
 #'    parameter besides `entity` or `country` is required.
@@ -89,61 +87,51 @@
 nppes <- function(
   npi = NULL,
   entity = NULL,
+  specialty = NULL,
+  ind_type = NULL,
   first = NULL,
+  use_alias = NULL,
   last = NULL,
   org_name = NULL,
-  type = NULL,
-  specialty = NULL,
+  add_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   country = NULL
 ) {
-  req <- httr2::request(
-    "https://npiregistry.cms.hhs.gov/api/?version=2.1"
-  ) |>
+  req <- httr2::request("https://npiregistry.cms.hhs.gov/api/?") |>
     httr2::req_url_query(
+      version = "2.1",
       number = npi,
-      enumeration_type = entity,
-      first_name = first,
-      last_name = last,
-      name_purpose = type,
-      organization_name = org_name,
+      enumeration_type = entity, # c("NPI-1", "NPI-2")
       taxonomy_description = specialty,
-      city = city,
+      name_purpose = ind_type, # c("AO", "Provider")
+      first_name = first, # wildcard
+      use_first_name_alias = use_alias, # c("true", "false")
+      last_name = last, # wildcard
+      organization_name = org_name, # wildcard
+      address_purpose = add_type, # c("true", "false")
+      city = city, # wildcard
       state = state,
       postal_code = zip,
       country_code = country,
-      limit = 1200L,
-      skip = 0L,
+      limit = 200L,
+      skip = 0L, # max = 1000
+      pretty = "on" #on/off
     )
-
-  list(
-    "https://npiregistry.cms.hhs.gov/api/?",
-    "version=2.1&",
-    "number=&",
-    "enumeration_type=NPI-1&",
-    "taxonomy_description=&",
-    "name_purpose=&",
-    "first_name=Jo&",
-    "use_first_name_alias=&",
-    "last_name=&",
-    "organization_name=&",
-    "address_purpose=&",
-    "city=&",
-    "state=&",
-    "postal_code=&",
-    "country_code=&",
-    "limit=200&", # default = 10
-    "skip=0&", # max = 1000
-    "pretty=on" #on/off
-    )
-
-  "https://npiregistry.cms.hhs.gov/api/?number=&enumeration_type=NPI-1&taxonomy_description=&name_purpose=&first_name=Jo*&use_first_name_alias=true&last_name=&organization_name=&address_purpose=&city=&state=&postal_code=&country_code=&limit=200&skip=1000&pretty=on&version=2.1"
 
   httr2::req_perform(req)
 }
 
+#' Wildcards
+#'
+#' @description
+#' Trailing Wildcard Entries
+#'
+#' Arguments that allow trailing wildcard entries are denoted in the parameter
+#' description with `<WC>`. Wildcard entries require at least two characters to
+#' be entered, e.g. `"jo*"`
+#'
 #' @param x `<chr>` input
 #' @returns A `<wildcard>` object
 #' @examples
@@ -151,11 +139,14 @@ nppes <- function(
 #' @rdname nppes
 #' @export
 wildcard <- function(x) {
+  if (length(x) > 1L) {
+    cli::cli_abort("Wildcards must be length 1.")
+  }
   if (nchar(x) <= 1L) {
     cli::cli_abort(c("Wildcards must be more than 2 characters."))
   }
 
-  structure(x, class = "wildcard")
+  structure(paste0(x, "*"), class = "wildcard")
 }
 
 # results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA

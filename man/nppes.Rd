@@ -8,11 +8,13 @@
 nppes(
   npi = NULL,
   entity = NULL,
+  specialty = NULL,
+  ind_type = NULL,
   first = NULL,
+  use_alias = NULL,
   last = NULL,
   org_name = NULL,
-  type = NULL,
-  specialty = NULL,
+  add_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -26,14 +28,18 @@ wildcard(x)
 
 \item{entity}{\verb{<chr>} Entity type; \code{1} (Individual) or \code{2} (Organization)}
 
+\item{specialty}{\verb{<chr>} Provider's specialty}
+
+\item{ind_type}{\verb{<chr>} Type of individual \code{first}/\code{last} refers to:
+\code{AO} (Authorized Official) or \code{Provider} (Individual Provider).}
+
 \item{first, last}{\verb{<chr>} \strong{WC} Individual provider's name}
+
+\item{use_alias}{\verb{<lgl>} Use first name alias}
 
 \item{org_name}{\verb{<chr>} \strong{WC} Organization's name}
 
-\item{type}{\verb{<chr>} Type of individual \code{first}/\code{last} refers to:
-\code{AO} (Authorized Official) or \code{Provider} (Individual Provider).}
-
-\item{specialty}{\verb{<chr>} Provider's specialty}
+\item{add_type}{\verb{<enum>} Address type}
 
 \item{city}{\verb{<chr>} City; For military addresses, search \code{"APO"}/\code{"FPO"}.}
 
@@ -55,6 +61,12 @@ A \verb{<wildcard>} object
 \description{
 Search the National Plan and Provider Enumeration System (NPPES)
 NPI Registry, a free directory of all active NPI records.
+
+Trailing Wildcard Entries
+
+Arguments that allow trailing wildcard entries are denoted in the parameter
+description with \verb{<WC>}. Wildcard entries require at least two characters to
+be entered, e.g. \code{"jo*"}
 }
 \section{\strong{National Provider Identifier (NPI)}}{
  Healthcare providers acquire
@@ -117,12 +129,6 @@ Medicare program, to make changes or updates to the organization's status
 in the Medicare program, and to commit the organization to fully abide by
 the statutes, regulations, and program instructions of the Medicare
 program.
-}
-
-\section{Trailing Wildcard Entries}{
- Arguments that allow trailing wildcard
-entries are denoted in the parameter description with \strong{WC}. Wildcard
-entries require at least two characters to be entered, e.g. \code{"jo*"}
 }
 
 \examples{

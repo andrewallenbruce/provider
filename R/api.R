@@ -115,6 +115,7 @@ api_medicare2 <- function(x) {
       # "Revoked Medicare Providers and Suppliers",
       # "Hospital Price Transparency Enforcement Activities and Outcomes",
       # "Federally Qualified Health Center",
+      "Quality Payment Program Experience",
       "^Skilled Nursing Facility",
       "Hospital & Non-Hospital Facilities",
       "Medicare Inpatient Hospitals",

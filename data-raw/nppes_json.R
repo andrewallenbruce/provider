@@ -1,7 +1,3 @@
-here::here("data-raw")
-
-fs::path("data-raw", "nppes", ext = "json")
-
 x <- llmjson::repair_json_file(
   fs::path(
     here::here("data-raw"),
@@ -15,8 +11,30 @@ jsonify::pretty_json(x)
 
 
 RcppSimdJson::fparse(x)$result_count
-RcppSimdJson::fparse(x)$results |>
-  fastplyr::as_tbl()
+
+res <- RcppSimdJson::fparse(x)$results |> fastplyr::as_tbl()
+
+collapse::gvr(res, "epoch") <- NULL
+
+ex <- res[1, ]
+
+cheapr::fast_df(npi = ex$number, entity = ex$enumeration_type) |>
+  cheapr::col_c(
+    ex$taxonomies[[1]],
+    ex$addresses[[1]]
+  )
+
+ex$basic[[1]] |>
+  collapse::unlist2d() |>
+  collapse::pivot(how = "recast", names = list(".id", ".id"))
+
+ex$endpoints
+ex$identifiers
+ex$other_names
+ex$practiceLocations
+
+
+collapse::rsplit(res, ~number)
 
 library(structr)
 s_map(name = s_string(), age = s_integer())
