@@ -1,58 +1,43 @@
 # HRSA Facilities
 
-HRSA Facilities
+Health Resources & Services Administration
 
 ## Usage
 
 ``` r
-hrsa_open()
+hrsa_items()
 
-hrsa_layers(ms)
+hrsa_layers()
 
-hrsa_items(ms)
+hrsa_fields(facility)
 
-hrsa_fields(facility, fl)
-
-hrsa_select(facility, fl)
+hrsa_select(facility, ...)
 ```
 
+## Source
+
+[API:
+HRSA](https://data.hrsa.gov/tools/web-services/registration#serviceInfo)
+
 ## Arguments
-
-- ms:
-
-  `<MapServer>` String indicating what to retrieve.
 
 - facility:
 
   Facility type
 
-- fl:
-
-  `<FeatureLayer>`
-
 ## Value
 
 A list of endpoints.
 
+## Details
+
+Query modifiers are a small DSL for use in constructing query
+conditions.
+
 ## Examples
 
 ``` r
-(MS <- hrsa_open())
-#> <MapServer <11 layers, 0 tables>>
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#>   0: Hospitals (esriGeometryPoint)
-#>   1: Critical Access Hospitals (esriGeometryPoint)
-#>   2: Federally Qualified Health Centers (esriGeometryPoint)
-#>   3: Rural Health Clinics (esriGeometryPoint)
-#>   4: Hospices (esriGeometryPoint)
-#>   5: Intermediate Care Facility-Mentally Retarded (esriGeometryPoint)
-#>   6: Ambulatory Surgical Centers (esriGeometryPoint)
-#>   7: Skilled Nursing Facilities (esriGeometryPoint)
-#>   8: Skilled Nursing Facility_Dually (esriGeometryPoint)
-#>   9: Skilled Nursing Facility_Distinct (esriGeometryPoint)
-#>   10: Nursing Facilities (esriGeometryPoint)
-hrsa_items(MS)
+hrsa_items()
 #> # A data frame: 11 × 10
 #>       id name      parentLayerId defaultVisibility subLayerIds minScale maxScale
 #>  * <int> <chr>             <int> <lgl>             <lgl>          <int>    <int>
@@ -69,106 +54,105 @@ hrsa_items(MS)
 #> 11    10 Nursing …            -1 FALSE             NA                 0        0
 #> # ℹ 3 more variables: type <chr>, geometryType <chr>,
 #> #   supportsDynamicLegends <lgl>
-(FL <- hrsa_layers(MS))
-#> $layers
-#> $layers$`0`
+hrsa_layers()
+#> $`0`
 #> <FeatureLayer>
 #> Name: Hospitals
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`1`
+#> $`1`
 #> <FeatureLayer>
 #> Name: Critical Access Hospitals
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`2`
+#> $`2`
 #> <FeatureLayer>
 #> Name: Federally Qualified Health Centers
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`3`
+#> $`3`
 #> <FeatureLayer>
 #> Name: Rural Health Clinics
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`4`
+#> $`4`
 #> <FeatureLayer>
 #> Name: Hospices
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`5`
+#> $`5`
 #> <FeatureLayer>
 #> Name: Intermediate Care Facility-Mentally Retarded
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`6`
+#> $`6`
 #> <FeatureLayer>
 #> Name: Ambulatory Surgical Centers
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`7`
+#> $`7`
 #> <FeatureLayer>
 #> Name: Skilled Nursing Facilities
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`8`
+#> $`8`
 #> <FeatureLayer>
 #> Name: Skilled Nursing Facility_Dually
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`9`
+#> $`9`
 #> <FeatureLayer>
 #> Name: Skilled Nursing Facility_Distinct
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> $layers$`10`
+#> $`10`
 #> <FeatureLayer>
 #> Name: Nursing Facilities
 #> Geometry Type: esriGeometryPoint
 #> CRS: 3857
 #> Capabilities: Map,Query,Data
 #> 
-#> 
-hrsa_fields("asc", FL)
-#> # A data frame: 17 × 5
-#>    name                          type                  alias       length domain
-#>  * <chr>                         <chr>                 <chr>        <int> <lgl> 
-#>  1 CMS_PROVIDER_ADDRESS          esriFieldTypeString   CMS_PROVID…    150 NA    
-#>  2 CMS_PROVIDER_CAT_CD           esriFieldTypeString   CMS_PROVID…      2 NA    
-#>  3 CMS_PROVIDER_CAT_SUB_TYP_CD   esriFieldTypeString   CMS_PROVID…      2 NA    
-#>  4 CMS_PROVIDER_CITY             esriFieldTypeString   CMS_PROVID…     50 NA    
-#>  5 CMS_PROVIDER_NUM              esriFieldTypeString   CMS_PROVID…     10 NA    
-#>  6 CMS_PROVIDER_ZIP_CD           esriFieldTypeString   CMS_PROVID…     15 NA    
-#>  7 CMS_PROVIDER_CAT_DESC         esriFieldTypeString   Facility C…    100 NA    
-#>  8 FACILITY_NM                   esriFieldTypeString   Facility N…    100 NA    
-#>  9 CMS_PROVIDER_CAT_SUB_TYP_DESC esriFieldTypeString   Facility S…    100 NA    
-#> 10 FAX_NUM                       esriFieldTypeString   FAX_NUM         25 NA    
-#> 11 FREE_STANDING_IND             esriFieldTypeString   FREE_STAND…      1 NA    
-#> 12 HOSPITAL_BASED_IND            esriFieldTypeString   HOSPITAL_B…      1 NA    
-#> 13 OBJECTID                      esriFieldTypeOID      OBJECTID        NA NA    
-#> 14 OPERATING_ROOM_CT             esriFieldTypeInteger  OPERATING_…     NA NA    
-#> 15 PHONE_NUM                     esriFieldTypeString   PHONE_NUM       25 NA    
-#> 16 Shape                         esriFieldTypeGeometry Shape           NA NA    
-#> 17 CMS_PROVIDER_STATE_ABBR       esriFieldTypeString   State Abbr…      2 NA    
-# hrsa_select("asc", FL)
+hrsa_fields("snf_all")
+#> # A data frame: 19 × 5
+#>    name                          type                  alias       domain length
+#>  * <chr>                         <chr>                 <chr>       <lgl>   <int>
+#>  1 CERTIFIED_BED_CT              esriFieldTypeInteger  CERTIFIED_… NA         NA
+#>  2 CMS_PROVIDER_ADDRESS          esriFieldTypeString   CMS_PROVID… NA        150
+#>  3 CMS_PROVIDER_CAT_CD           esriFieldTypeString   CMS_PROVID… NA          2
+#>  4 CMS_PROVIDER_CAT_SUB_TYP_CD   esriFieldTypeString   CMS_PROVID… NA          2
+#>  5 CMS_PROVIDER_CITY             esriFieldTypeString   CMS_PROVID… NA         50
+#>  6 CMS_PROVIDER_NUM              esriFieldTypeString   CMS_PROVID… NA         10
+#>  7 CMS_PROVIDER_ZIP_CD           esriFieldTypeString   CMS_PROVID… NA         15
+#>  8 CMS_PROVIDER_CAT_DESC         esriFieldTypeString   Facility C… NA        100
+#>  9 FACILITY_NM                   esriFieldTypeString   Facility N… NA        100
+#> 10 CMS_PROVIDER_CAT_SUB_TYP_DESC esriFieldTypeString   Facility S… NA        100
+#> 11 FAX_NUM                       esriFieldTypeString   FAX_NUM     NA         25
+#> 12 MEDICAID_SNF_BED_CT           esriFieldTypeInteger  MEDICAID_S… NA         NA
+#> 13 MEDICARE_MEDICAID_SNF_BED_CT  esriFieldTypeInteger  MEDICARE_M… NA         NA
+#> 14 MEDICARE_SNF_BED_CT           esriFieldTypeInteger  MEDICARE_S… NA         NA
+#> 15 OBJECTID                      esriFieldTypeOID      OBJECTID    NA         NA
+#> 16 PHONE_NUM                     esriFieldTypeString   PHONE_NUM   NA         25
+#> 17 Shape                         esriFieldTypeGeometry Shape       NA         NA
+#> 18 CMS_PROVIDER_STATE_ABBR       esriFieldTypeString   State Abbr… NA          2
+#> 19 TOT_BED_CT                    esriFieldTypeInteger  TOT_BED_CT  NA         NA
 ```

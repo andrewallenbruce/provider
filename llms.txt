@@ -331,9 +331,8 @@ Access Current Organizational Provider Data.
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
-- [`hrsa_open()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
+- [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
-  [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_fields()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_select()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   : HRSA Facilities

@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9061 (2026-03-20)
+
+- refactored hrsa functions
+
 ## provider 0.0.1.9060 (2026-03-20)
 
 - added
