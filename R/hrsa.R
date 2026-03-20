@@ -10,7 +10,7 @@
 #' hrsa_items(MS)
 #' (FL <- hrsa_layers(MS))
 #' hrsa_fields("asc", FL)
-#' hrsa_select("asc", FL)
+#' # hrsa_select("asc", FL)
 #' @autoglobal
 #' @export
 
