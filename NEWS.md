@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9063 (2026-03-23)
+
+* fixed bug in `exec_cms2()`
+
+
 # provider 0.0.1.9062 (2026-03-23)
 
 * added `hospitals2()` endpoint
