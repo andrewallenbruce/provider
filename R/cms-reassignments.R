@@ -45,7 +45,7 @@ reassignments <- function(
   count = FALSE
 ) {
   exec_cms(
-    END = rlang::call_name(rlang::call_match()),
+    END = call_name(call_match()),
     COUNT = count,
     ARG = params(
       `Individual NPI` = npi,

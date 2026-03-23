@@ -1,3 +1,38 @@
+#' Parameter list helper
+#'
+#' @param ... dots
+#' @keywords internal
+#' @export
+params <- function(...) {
+  purrr::compact(rlang::list2(...))
+}
+
+#' @noRd
+offset <- function(n, limit, which = "size") {
+  check_number_whole(n, min = 0)
+  check_number_whole(limit, min = 1)
+
+  if (n == 0L) {
+    return(0L)
+  }
+
+  if (n <= limit) {
+    return(
+      switch(
+        which,
+        size = 1L,
+        seq = 0L
+      )
+    )
+  }
+
+  switch(
+    which,
+    size = cheapr::seq_size(0L, n, limit),
+    seq = cheapr::seq_(0L, n, limit)
+  )
+}
+
 #' @noRd
 uuid_from_url <- function(x) {
   stringr::str_extract(
@@ -52,6 +87,11 @@ set_args <- function(fn) {
 #' @noRd
 any2 <- function(x) {
   collapse::anyv(x, TRUE)
+}
+
+#' @noRd
+all2 <- function(x) {
+  collapse::allv(x, TRUE)
 }
 
 #' @noRd

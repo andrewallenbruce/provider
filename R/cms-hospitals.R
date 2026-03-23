@@ -159,7 +159,6 @@ is_subgroups <- function(x) {
   inherits(x, "subgroups")
 }
 
-
 #' @param county `<chr>`
 #' @param hosp_type `<chr>`
 #' @param ownership `<chr>`

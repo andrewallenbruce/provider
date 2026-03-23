@@ -90,7 +90,7 @@ exec_cms <- function(END, COUNT, ARG) {
   }
 
   # QUERY --> Request Count
-  N <- request_rows(BASE, LIMIT, query(END, ARG))
+  N <- request_rows(BASE, query(END, ARG))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -134,9 +134,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
     if (COUNT) {
-      N <- purrr::map_int(BASE, function(x, nm) {
-        request_rows(paste0(x, "/stats?"))
-      })
+      N <- purrr::map_int(BASE, \(x, nm) request_rows(x))
       cli_results2(N, END)
       return(invisible(N))
     }
@@ -144,19 +142,14 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query()
 
-    res <- purrr::imap(BASE, function(x, nm) {
-      request_bare(url_str(paste0(x, "?"), opts(size = 10))) |>
-        polish(NM)
-    }) |>
+    res <- purrr::imap(BASE, \(x, i) polish(request_cms(x), NM)) |>
       collapse::rowbind(idcol = .id, return = 4L)
 
     return(res)
   }
 
   # QUERY --> Request Count
-  N <- purrr::imap_vec(BASE, function(x, n) {
-    request_rows(base = x, limit = LIMIT, query(END, ARG))
-  })
+  N <- purrr::imap_vec(BASE, \(x, n) request_rows(x, query(END, ARG)))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (collapse::fsum(N) == 0L || COUNT) {
@@ -165,16 +158,11 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   }
 
   # COUNT BELOW LIMIT --> Single Request
-  if (collapse::allv(N <= LIMIT, TRUE)) {
+  if (all2(N <= LIMIT)) {
     cli_results2(N, END)
 
-    res <- purrr::imap(BASE, function(x, nm) {
-      request_bare(url_str(
-        paste0(x, "?"),
-        opts(size = LIMIT),
-        query(END, ARG)
-      )) |>
-        polish(NM)
+    res <- purrr::imap(BASE, \(x, nm) {
+      request_cms(x, LIMIT, query(END, ARG)) |> polish(NM)
     }) |>
       collapse::rowbind(idcol = .id, return = 4L)
 
@@ -198,9 +186,6 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     )
   })
 
-  purrr::imap(URL, function(x, nm) {
-    parallel_request(x) |>
-      polish(NM)
-  }) |>
+  purrr::imap(URL, \(x, nm) parallel_request(x) |> polish(NM)) |>
     collapse::rowbind(idcol = .id, return = 4L)
 }

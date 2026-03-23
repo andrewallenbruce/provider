@@ -1,38 +1,3 @@
-#' Parameter list helper
-#'
-#' @param ... dots
-#' @keywords internal
-#' @export
-params <- function(...) {
-  purrr::compact(rlang::list2(...))
-}
-
-#' @noRd
-offset <- function(n, limit, which = "size") {
-  check_number_whole(n, min = 0)
-  check_number_whole(limit, min = 1)
-
-  if (n == 0L) {
-    return(0L)
-  }
-
-  if (n <= limit) {
-    return(
-      switch(
-        which,
-        size = 1L,
-        seq = 0L
-      )
-    )
-  }
-
-  switch(
-    which,
-    size = cheapr::seq_size(0L, n, limit),
-    seq = cheapr::seq_(0L, n, limit)
-  )
-}
-
 #' @noRd
 create_offset <- function(n, limit, url) {
   purrr::map_chr(
@@ -74,6 +39,17 @@ url_str <- function(base, opts = opts(), args = NULL) {
     return(paste0(base, opts))
   }
   paste(paste0(base, opts), args, sep = "&")
+}
+
+#' @noRd
+uuid <- function(endpoint) {
+  switch(
+    endpoint,
+    affiliations = ,
+    hospitals2 = ,
+    clinicians = uuid_pro(endpoint),
+    uuid_cms(endpoint)
+  )
 }
 
 #' @noRd

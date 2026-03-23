@@ -61,14 +61,3 @@ uuid_cms <- function(endpoint) {
     p0(x)
   }
 }
-
-#' @noRd
-uuid <- function(endpoint) {
-  switch(
-    endpoint,
-    affiliations = ,
-    hospitals2 = ,
-    clinicians = uuid_pro(endpoint),
-    uuid_cms(endpoint)
-  )
-}

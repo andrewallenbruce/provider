@@ -10,9 +10,9 @@ parse_string <- function(resp, query = NULL) {
 
   switch(
     query,
-    results = PS(resp) |> _$results,
-    count = PS(resp) |> _$count,
-    found_rows = PS(resp) |> _$found_rows,
+    results = PS(resp)$results,
+    count = PS(resp)$count,
+    found_rows = PS(resp)$found_rows,
     PS(resp, qry = query)
   )
 }
@@ -24,7 +24,9 @@ request_bare <- function(base, opts = NULL, args = NULL, query = NULL) {
     httr2::req_error(body = function(resp) {
       httr2::resp_body_json(resp)$message
     }) |>
-    # httr2::req_user_agent("provider (https://andrewallenbruce.github.io/provider)") |>
+    # httr2::req_user_agent(
+    # "provider (https://andrewallenbruce.github.io/provider)"
+    # ) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }
@@ -37,9 +39,18 @@ request_count <- function(base, args = NULL) {
       count = "true",
       results = "false",
       schema = "false"
-      ),
+    ),
     args = args,
     query = "count"
+  )
+}
+
+#' @noRd
+request_rows <- function(base, args = NULL) {
+  request_bare(
+    base = paste0(base, "/stats?"),
+    args = args,
+    query = "found_rows"
   )
 }
 
@@ -55,16 +66,6 @@ request_pro <- function(base, limit = 10, args = NULL) {
     ),
     args = args,
     query = "results"
-  )
-}
-
-#' @noRd
-request_rows <- function(base, limit = NULL, args = NULL) {
-  request_bare(
-    base = paste0(base, "/stats?"),
-    opts = opts(size = limit),
-    args = args,
-    query = "found_rows"
   )
 }
 
