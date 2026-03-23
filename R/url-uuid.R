@@ -6,6 +6,7 @@ uuid_pro <- function(endpoint) {
       endpoint,
       affiliations = "27ea-46a8",
       clinicians = "mj5m-pzi6",
+      hospitals2 = "xubh-q36u",
       cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
     ),
     "/0?"
@@ -66,6 +67,7 @@ uuid <- function(endpoint) {
   switch(
     endpoint,
     affiliations = ,
+    hospitals2 = ,
     clinicians = uuid_pro(endpoint),
     uuid_cms(endpoint)
   )

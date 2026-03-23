@@ -81,6 +81,19 @@ column_renames <- function(endpoint) {
       `SUBGROUP - OTHER` = "sub_other",
       `SUBGROUP - OTHER TEXT` = "sub_otxt"
     ),
+    hospitals2 = c(
+      facility_id = "ccn",
+      facility_name = "org_name",
+      address = "address",
+      citytown = "city",
+      state = "state",
+      zip_code = "zip",
+      countyparish = "county",
+      telephone_number = "phone",
+      hospital_type = "type",
+      hospital_ownership = "ownership",
+      hospital_overall_rating = "rating"
+    ),
     clia = c(
       FAC_NAME = "name_1",
       ADDTNL_FAC_NAME = "name_2",

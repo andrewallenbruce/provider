@@ -30,7 +30,7 @@ api_provider <- function() {
       "nextUpdateDate"
     )) |>
     collapse::roworderv(c("title", "released")) |>
-    df_tbl_()
+    data_frame()
 }
 
 #' @noRd
@@ -76,7 +76,7 @@ api_medicare <- function() {
     collapse::sbt(stringr::str_which(title, rex)) |>
     collapse::gv(c("title", "modified", "description", "identifier")) |>
     collapse::roworderv(c("title", "modified")) |>
-    df_tbl_()
+    data_frame()
 }
 
 #' @noRd
@@ -186,8 +186,8 @@ api_medicare2 <- function(x) {
   )
 
   list(
-    current = df_tbl_(x),
-    temporal = df_tbl_(d) |>
+    current = data_frame(x),
+    temporal = data_frame(d) |>
       collapse::rsplit(~title)
   )
 }

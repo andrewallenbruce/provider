@@ -21,6 +21,8 @@ hrsa_select(facility, ...)
 }
 \arguments{
 \item{facility}{Facility type}
+
+\item{...}{arguments passed on to \code{arcgislayers::arc_select()}}
 }
 \value{
 A list of endpoints.

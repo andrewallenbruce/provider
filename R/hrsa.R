@@ -7,6 +7,7 @@
 #' Query modifiers are a small DSL for use in constructing query conditions.
 #'
 #' @param facility Facility type
+#' @param ... arguments passed on to `arcgislayers::arc_select()`
 #' @name hrsa
 #' @returns A list of endpoints.
 #' @examples

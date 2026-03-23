@@ -67,7 +67,7 @@ clinicians <- function(
   count = FALSE
 ) {
   exec_prov(
-    END = rlang::call_name(rlang::call_match()),
+    END = call_name(call_match()),
     COUNT = count,
     ARG = params(
       npi = npi,
@@ -88,6 +88,6 @@ clinicians <- function(
       state = state,
       zip_code = zip
     ),
-    call = rlang::caller_env()
+    call = caller_env()
   )
 }

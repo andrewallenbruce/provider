@@ -9,7 +9,6 @@ params <- function(...) {
 
 #' @noRd
 offset <- function(n, limit, which = "size") {
-
   check_number_whole(n, min = 0)
   check_number_whole(limit, min = 1)
 
@@ -82,6 +81,7 @@ limit <- function(endpoint) {
   switch(
     endpoint,
     affiliations = ,
+    hospitals2 = ,
     clinicians = 1500L,
     5000L
   )

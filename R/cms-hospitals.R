@@ -37,14 +37,19 @@
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
 #' hospitals(state = "GA", provider_type = "reh")
-#' hospitals(
+#'
+#' x <- hospitals(
 #'   city = "Atlanta",
 #'   state = "GA",
 #'   subgroup = subgroups(
 #'     acute = FALSE,
-#'     psych = TRUE
-#'   )
-#' )
+#'     psych = TRUE))
+#' x
+#' hospitals2(ccn = x$ccn)
+#'
+#' x <- hospitals2()
+#' x
+#' hospitals(ccn = x$ccn)
 #' @autoglobal
 #' @export
 hospitals <- function(
@@ -152,4 +157,39 @@ subgroups <- function(
 #' @noRd
 is_subgroups <- function(x) {
   inherits(x, "subgroups")
+}
+
+
+#' @param county `<chr>`
+#' @param hosp_type `<chr>`
+#' @param ownership `<chr>`
+#' @rdname hospitals
+#' @autoglobal
+#' @export
+hospitals2 <- function(
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  hosp_type = NULL,
+  ownership = NULL,
+  count = FALSE
+) {
+  exec_prov(
+    END = call_name(call_match()),
+    COUNT = count,
+    ARG = params(
+      facility_id = ccn,
+      facility_name = org_name,
+      citytown = city,
+      state = state,
+      zip_code = zip,
+      countyparish = county,
+      hospital_type = hosp_type,
+      hospital_ownership = ownership
+    ),
+    call = caller_env()
+  )
 }

@@ -54,6 +54,7 @@ query <- function(endpoint, args) {
       switch(
         endpoint,
         affiliations = ,
+        hospitals2 = ,
         clinicians = query_fmt_pro(x, n),
         query_fmt_cms(x, n)
       )

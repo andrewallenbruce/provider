@@ -3,6 +3,7 @@
 \name{hospitals}
 \alias{hospitals}
 \alias{subgroups}
+\alias{hospitals2}
 \title{Hospitals Enrolled in Medicare}
 \source{
 \itemize{
@@ -44,6 +45,18 @@ subgroups(
   rehab_unit = NULL,
   specialty = NULL,
   other = NULL
+)
+
+hospitals2(
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  hosp_type = NULL,
+  ownership = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -117,6 +130,12 @@ subgroups(
 \item{specialty}{\verb{<lgl>} Specialty Hospital}
 
 \item{other}{\verb{<lgl>} Unlisted on CMS form}
+
+\item{county}{\verb{<chr>}}
+
+\item{hosp_type}{\verb{<chr>}}
+
+\item{ownership}{\verb{<chr>}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -132,14 +151,19 @@ type and address.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
 hospitals(state = "GA", provider_type = "reh")
-hospitals(
+
+x <- hospitals(
   city = "Atlanta",
   state = "GA",
   subgroup = subgroups(
     acute = FALSE,
-    psych = TRUE
-  )
-)
+    psych = TRUE))
+x
+hospitals2(ccn = x$ccn)
+
+x <- hospitals2()
+x
+hospitals(ccn = x$ccn)
 \dontshow{\}) # examplesIf}
 subgroups(acute = TRUE, rehab = TRUE)
 }
