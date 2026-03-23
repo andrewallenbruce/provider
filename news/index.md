@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9062 (2026-03-23)
+
+- added
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  endpoint
+
 ## provider 0.0.1.9061 (2026-03-20)
 
 - refactored hrsa functions

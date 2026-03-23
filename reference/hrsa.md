@@ -25,6 +25,11 @@ HRSA](https://data.hrsa.gov/tools/web-services/registration#serviceInfo)
 
   Facility type
 
+- ...:
+
+  arguments passed on to
+  [`arcgislayers::arc_select()`](https://rdrr.io/pkg/arcgislayers/man/arc_select.html)
+
 ## Value
 
 A list of endpoints.

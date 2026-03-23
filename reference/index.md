@@ -39,6 +39,7 @@ Access Current Organizational Provider Data.
   : Clinical Laboratories
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
 - [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
