@@ -100,7 +100,7 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> ✔ `opt_out` returned 54,943 results.
+#> ✔ `opt_out` returned 55,330 results.
 opt_out(npi = 1043522824)
 #> ✔ `opt_out` returned 1 result.
 #> # A data frame: 1 × 13
@@ -109,8 +109,8 @@ opt_out(npi = 1043522824)
 #> 1 1043522824 James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2… 8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(state = "AK")
-#> ✔ `opt_out` returned 256 results.
-#> # A data frame: 256 × 13
+#> ✔ `opt_out` returned 258 results.
+#> # A data frame: 258 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
 #>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #>  1 12655534… Henry Chap… Physicia… 4/1/2012   4/1/2026 5/15/2… 3300… STE … ANCH…
@@ -123,11 +123,11 @@ opt_out(state = "AK")
 #>  8 11544675… Suza… Stra… Nurse Pr… 4/1/2014   4/1/2026 5/15/2… 1147… STE … EAGL…
 #>  9 12957552… Will… Berg… Oral Sur… 11/5/2018  11/5/20… 12/15/… 111 … STE … ANCH…
 #> 10 12250589… Ray   Holl… Oral Sur… 6/16/2014  6/16/20… 7/15/2… 111 … STE … ANCH…
-#> # ℹ 246 more rows
+#> # ℹ 248 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#> ✔ `opt_out` returned 790 results.
-#> # A data frame: 790 × 13
+#> ✔ `opt_out` returned 798 results.
+#> # A data frame: 798 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
 #>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #>  1 17204445… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2… 1629… P O … GLAD…
@@ -140,6 +140,6 @@ opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #>  8 18715013… Ingr… Schm… Psychiat… 9/2/2010   9/2/2026 10/15/… 5750… STE … AUST…
 #>  9 14776142… Lore… Henry Psychiat… 5/26/2012  5/26/20… 10/15/… 1721… SUIT… COLL…
 #> 10 19322840… Patr… Mcgr… Psychiat… 6/1/2012   6/1/2026 7/15/2… 100 … SUIT… NEW …
-#> # ℹ 780 more rows
+#> # ℹ 788 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
