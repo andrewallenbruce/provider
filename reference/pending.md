@@ -44,29 +44,29 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ✔ `pending` returned 9,799 results.
-#> • Physician     : 3,225
-#> • Non-Physician : 6,574
+#> ✔ `pending` returned 9,654 results.
+#> • Physician     : 3,224
+#> • Non-Physician : 6,430
 pending(first = "Victor", count = TRUE)
-#> ✔ `pending` returned 9 results.
-#> • Physician     : 7
+#> ✔ `pending` returned 7 results.
+#> • Physician     : 5
 #> • Non-Physician : 2
 pending(first = starts_with("V"))
-#> ✔ `pending` returned 136 results.
-#> • Physician     : 37
-#> • Non-Physician : 99
-#> # A tibble: 136 × 4
-#>    prov_type first   last        npi       
-#>    <fct>     <chr>   <chr>       <chr>     
-#>  1 Physician VADIN   LALL DASS   1144512724
-#>  2 Physician VALERIE ESPINOZA    1669050084
-#>  3 Physician VALERIE LOPEZ       1073258638
-#>  4 Physician VALJEAN BACOT-DAVIS 1407597651
-#>  5 Physician VANESSA LOUISSAINT  1386093193
-#>  6 Physician VANESSA PARVEZ      1982465530
-#>  7 Physician VANESSA SANCHEZ     1275197329
-#>  8 Physician VANESSA STOLOFF     1477616779
-#>  9 Physician VANESSA TRIVINO     1124765284
-#> 10 Physician VANESSA WOOSLEY     1326877440
-#> # ℹ 126 more rows
+#> ✔ `pending` returned 145 results.
+#> • Physician     : 38 
+#> • Non-Physician : 107
+#> # A tibble: 145 × 4
+#>    prov_type first     last             npi       
+#>    <fct>     <chr>     <chr>            <chr>     
+#>  1 Physician VADIN     LALL DASS        1144512724
+#>  2 Physician VAIBHAVI  SHAH             1437952843
+#>  3 Physician VALENTINA TURBAY CABALLERO 1689304545
+#>  4 Physician VALERIA   LOZADA MIRANDA   1881291540
+#>  5 Physician VALERIE   ESPINOZA         1669050084
+#>  6 Physician VALJEAN   BACOT-DAVIS      1407597651
+#>  7 Physician VANESSA   LOUISSAINT       1386093193
+#>  8 Physician VANESSA   NWOKOYE          1205530045
+#>  9 Physician VANESSA   PARVEZ           1982465530
+#> 10 Physician VANSHANI  PATEL            1649118753
+#> # ℹ 135 more rows
 ```
