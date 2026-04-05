@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9064 (2026-04-05)
+
+- url object
+
 ## provider 0.0.1.9063 (2026-03-23)
 
 - fixed bug in `exec_cms2()`

@@ -147,21 +147,21 @@ clinicians(facility_name = "Elizabethtown Community Hospital")
 
 ``` r
 reassignments(org_name = "Elizabethtown Community Hospital")
-#> ✔ `reassignments` returned 356 results.
-#> # A data frame: 356 × 14
+#> ✔ `reassignments` returned 370 results.
+#> # A data frame: 370 × 14
 #>    first   last  state specialty ind_assoc npi   pac   enid  org_name org_assign
 #>  * <chr>   <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
-#>  1 Nathal… Abis… NY    Family P… 1         1336… 5294… I202… Elizabe… 186       
-#>  2 Jose    Acos… NY    Medical … 5         1013… 5890… I201… Elizabe… 186       
-#>  3 Jose    Acos… NY    Medical … 5         1013… 5890… I201… Elizabe… 114       
-#>  4 Aderon… Aden… NY    Cardiova… 3         1407… 8820… I201… Elizabe… 186       
-#>  5 Dmitriy Akse… NY    Diagnost… 4         1629… 4385… I202… Elizabe… 186       
-#>  6 Dmitriy Akse… VT    Diagnost… 6         1629… 4385… I201… Elizabe… 33        
-#>  7 Vlada   Alex… NY    Pathology 3         1952… 5092… I201… Elizabe… 186       
-#>  8 Anel    Alex… NY    Emergenc… 6         1720… 3678… I201… Elizabe… 186       
-#>  9 Anel    Alex… NY    Emergenc… 6         1720… 3678… I201… Elizabe… 114       
-#> 10 Loren   Allen NY    Nurse Pr… 2         1770… 1658… I201… Elizabe… 186       
-#> # ℹ 346 more rows
+#>  1 Nathal… Abis… NY    Family P… 1         1336… 5294… I202… Elizabe… 193       
+#>  2 Jose    Acos… NY    Medical … 5         1013… 5890… I201… Elizabe… 193       
+#>  3 Jose    Acos… NY    Medical … 5         1013… 5890… I201… Elizabe… 121       
+#>  4 Dmitriy Akse… NY    Diagnost… 4         1629… 4385… I202… Elizabe… 193       
+#>  5 Dmitriy Akse… VT    Diagnost… 6         1629… 4385… I201… Elizabe… 33        
+#>  6 Vlada   Alex… NY    Pathology 3         1952… 5092… I201… Elizabe… 193       
+#>  7 Anel    Alex… NY    Emergenc… 6         1720… 3678… I201… Elizabe… 193       
+#>  8 Anel    Alex… NY    Emergenc… 6         1720… 3678… I201… Elizabe… 121       
+#>  9 Loren   Allen NY    Nurse Pr… 2         1770… 1658… I201… Elizabe… 193       
+#> 10 Nichol… Also… NY    Emergenc… 5         1235… 8628… I202… Elizabe… 193       
+#> # ℹ 360 more rows
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   type <chr>
 ```

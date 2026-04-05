@@ -44,18 +44,18 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ✔ `pending` returned 9,654 results.
-#> • Physician     : 3,224
-#> • Non-Physician : 6,430
+#> ✔ `pending` returned 9,594 results.
+#> • Physician     : 3,290
+#> • Non-Physician : 6,304
 pending(first = "Victor", count = TRUE)
-#> ✔ `pending` returned 7 results.
-#> • Physician     : 5
-#> • Non-Physician : 2
+#> ✔ `pending` returned 5 results.
+#> • Physician     : 4
+#> • Non-Physician : 1
 pending(first = starts_with("V"))
-#> ✔ `pending` returned 145 results.
-#> • Physician     : 38 
-#> • Non-Physician : 107
-#> # A tibble: 145 × 4
+#> ✔ `pending` returned 143 results.
+#> • Physician     : 40 
+#> • Non-Physician : 103
+#> # A tibble: 143 × 4
 #>    prov_type first     last             npi       
 #>    <fct>     <chr>     <chr>            <chr>     
 #>  1 Physician VADIN     LALL DASS        1144512724
@@ -66,7 +66,7 @@ pending(first = starts_with("V"))
 #>  6 Physician VALJEAN   BACOT-DAVIS      1407597651
 #>  7 Physician VANESSA   LOUISSAINT       1386093193
 #>  8 Physician VANESSA   NWOKOYE          1205530045
-#>  9 Physician VANESSA   PARVEZ           1982465530
-#> 10 Physician VANSHANI  PATEL            1649118753
-#> # ℹ 135 more rows
+#>  9 Physician VANSHANI  PATEL            1649118753
+#> 10 Physician VEDATTA   MAHARAJ          1811637556
+#> # ℹ 133 more rows
 ```
