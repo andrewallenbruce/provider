@@ -1,5 +1,5 @@
 #' @noRd
-query_fmt_mod <- function(x) {
+query_mod <- function(x) {
   M <- is_modifier(x)
   V <- if (M) plus(value(x)) else plus(unlist_(x))
   O <- if (M) {
@@ -14,8 +14,8 @@ query_fmt_mod <- function(x) {
 
 #' @autoglobal
 #' @noRd
-query_fmt_pro <- function(x, N) {
-  .c(V, O) %=% query_fmt_mod(x)
+query_pro <- function(x, N) {
+  .c(V, O) %=% query_mod(x)
 
   property <- "conditions[<<i>>][property]="
   operator <- "conditions[<<i>>][operator]="
@@ -31,8 +31,8 @@ query_fmt_pro <- function(x, N) {
 
 #' @autoglobal
 #' @noRd
-query_fmt_cms <- function(x, N) {
-  .c(V, O) %=% query_fmt_mod(x)
+query_cms <- function(x, N) {
+  .c(V, O) %=% query_mod(x)
 
   property <- "filter[<<i>>][condition][path]="
   operator <- "filter[<<i>>][condition][operator]="
@@ -55,8 +55,8 @@ query <- function(endpoint, args) {
         endpoint,
         affiliations = ,
         hospitals2 = ,
-        clinicians = query_fmt_pro(x, n),
-        query_fmt_cms(x, n)
+        clinicians = query_pro(x, n),
+        query_cms(x, n)
       )
     }
   ) |>

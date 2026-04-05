@@ -21,15 +21,15 @@ utils::globalVariables(c(
   # <exec_cms>
   # <exec_cms2>
   "NM",
-  # <query_fmt_pro>
-  # <query_fmt_cms>
+  # <query_pro>
+  # <query_cms>
   "O",
   # <api_provider>
   # <api_medicare>
   # <api_medicare2>
   "title",
-  # <query_fmt_pro>
-  # <query_fmt_cms>
+  # <query_pro>
+  # <query_cms>
   "V",
   NULL
 ))

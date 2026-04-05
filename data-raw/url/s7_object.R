@@ -45,12 +45,14 @@ get_uuid <- function(x) {
   )
 }
 
-cms <- list(
-  uri = "https://data.cms.gov/data-api/v1/dataset/<<uuid>>/data<<end>>",
-  uid = "2457ea29-fc82-48b0-86ec-3b0755de7515",
-  end = list(stats = "/stats?", qmk = "?"),
-  opt = list(size = 10, offset = 0)
-)
+cms <- function(end) {
+  e <- list(
+    uri = paste0("https://data.cms.gov/data-api/v1/dataset/", get_uuid(end), "/data"),
+    limit = 15000L,
+    action = function(x) switch(x, count = "/stats?", results = "?"),
+    opt = list(size = 10, offset = 0)
+  )
+}
 
 prov <- list(
   uri = "https://data.cms.gov/provider-data/api/1/datastore/query/<<uuid>>/0?",

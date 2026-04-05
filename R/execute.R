@@ -21,8 +21,7 @@ exec_prov <- function(END, COUNT, ARG, call) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query()
 
-    res <- request_pro(BASE, limit = 10) |>
-      polish(NM)
+    res <- polish(request_pro(BASE), NM)
 
     return(res)
   }
@@ -83,8 +82,7 @@ exec_cms <- function(END, COUNT, ARG) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query()
 
-    res <- request_cms(BASE) |>
-      polish(NM)
+    res <- polish(request_cms(BASE), NM)
 
     return(res)
   }
