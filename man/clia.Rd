@@ -24,7 +24,8 @@ clia(
   zip = NULL,
   status = NULL,
   active = FALSE,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ clia(
 \item{active}{\verb{<lgl>} Return only active providers}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

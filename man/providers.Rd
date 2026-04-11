@@ -16,7 +16,8 @@ providers(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ providers(
 \item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

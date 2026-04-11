@@ -18,6 +18,7 @@
 #' @param org_name `<chr>` Organization name
 #' @param multi `<lgl>` Provider has multiple NPIs
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
@@ -39,13 +40,15 @@ providers <- function(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_bool(multi, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       NPI = npi,
       MULTIPLE_NPI_FLAG = bool_(multi),

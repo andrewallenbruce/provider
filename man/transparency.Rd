@@ -15,7 +15,8 @@ transparency(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ transparency(
 \item{action}{\verb{<chr>} Action taken by CMS following a Compliance Review}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

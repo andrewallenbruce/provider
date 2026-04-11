@@ -13,7 +13,8 @@ order_refer(
   hha = NULL,
   pmd = NULL,
   hospice = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ order_refer(
 }}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

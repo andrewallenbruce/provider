@@ -22,6 +22,7 @@
 #' @param org_enid `<chr>` 15-digit Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
@@ -42,11 +43,13 @@ reassignments <- function(
   org_pac = NULL,
   org_enid = NULL,
   org_state = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       `Individual NPI` = npi,
       `Individual PAC ID` = pac,

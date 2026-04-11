@@ -24,9 +24,7 @@ request_bare <- function(base, opts = NULL, args = NULL, query = NULL) {
     httr2::req_error(body = function(resp) {
       httr2::resp_body_json(resp)$message
     }) |>
-    # httr2::req_user_agent(
-    # "provider (https://andrewallenbruce.github.io/provider)"
-    # ) |>
+    # httr2::req_user_agent("provider (https://andrewallenbruce.github.io/provider)") |>
     httr2::req_perform() |>
     parse_string(query = query)
 }

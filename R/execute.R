@@ -64,10 +64,11 @@ exec_prov <- function(END, COUNT, ARG, call) {
 
 #' @noRd
 #' @autoglobal
-exec_cms <- function(END, COUNT, ARG) {
+exec_cms <- function(END, COUNT, SET, ARG) {
   # NO INTERNET --> Abort
   check_online()
   check_bool(COUNT)
+  check_bool(SET)
 
   .c(BASE, LIMIT, NM) %=% constants(END)
 
@@ -77,6 +78,24 @@ exec_cms <- function(END, COUNT, ARG) {
       N <- request_rows(BASE)
       cli_results(N, END)
       return(invisible(N))
+    }
+
+    if (SET) {
+      # SET --> Return Entire Dataset
+      N <- request_rows(BASE)
+      cli_pages(N, LIMIT, END)
+
+      URL <- create_offset(
+        N,
+        LIMIT,
+        url_str(
+          paste0(BASE, "?"),
+          opts(size = LIMIT, offset = "<<i>>")
+        )
+      )
+
+      parallel_request(URL) |>
+        polish(NM)
     }
 
     # EMPTY QUERY --> First 10 Rows

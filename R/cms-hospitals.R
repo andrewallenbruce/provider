@@ -33,6 +33,7 @@
 #'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
@@ -69,7 +70,8 @@ hospitals <- function(
   provider_type = NULL,
   location_type = NULL,
   subgroup = subgroups(),
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_subgroups(subgroup)
   check_bool(multi, allow_null = TRUE)
@@ -79,6 +81,7 @@ hospitals <- function(
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       NPI = npi,
       CCN = ccn,

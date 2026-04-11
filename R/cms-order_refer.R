@@ -31,6 +31,7 @@
 #'    - `pmd`: Power Mobility Devices
 #'    - `hospice`: Hospice
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' order_refer(count = TRUE)
@@ -53,7 +54,8 @@ order_refer <- function(
   hha = NULL,
   pmd = NULL,
   hospice = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_bool(part_b, allow_null = TRUE)
   check_bool(dme, allow_null = TRUE)
@@ -64,6 +66,7 @@ order_refer <- function(
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       NPI = npi,
       FIRST_NAME = first,

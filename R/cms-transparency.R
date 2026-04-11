@@ -46,6 +46,7 @@
 #' @param state `<chr>` Hospital state
 #' @param action `<chr>` Action taken by CMS following a Compliance Review
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
@@ -58,11 +59,13 @@ transparency <- function(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       Hosp_Name = name,
       Hosp_Address = address,

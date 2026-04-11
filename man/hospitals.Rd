@@ -28,7 +28,8 @@ hospitals(
   provider_type = NULL,
   location_type = NULL,
   subgroup = subgroups(),
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 
 subgroups(
@@ -104,6 +105,8 @@ hospitals2(
 \item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 
 \item{acute}{\verb{<lgl>} Acute Care}
 

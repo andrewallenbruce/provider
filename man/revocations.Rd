@@ -20,7 +20,8 @@ revocations(
   state = NULL,
   specialty = NULL,
   reason = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -41,6 +42,8 @@ revocations(
 \item{reason}{\verb{<chr>} reason for revocation}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

@@ -38,6 +38,7 @@
 #' @param zip `<chr>` Provider's zip code
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @return A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
@@ -56,13 +57,15 @@ opt_out <- function(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_bool(order_refer, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       NPI = npi,
       `First Name` = first,

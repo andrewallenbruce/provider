@@ -38,6 +38,7 @@
 #' @param status `<chr>` `"cmp"` (Compliant) or `"non"` (Non-Compliant)
 #' @param active `<lgl>` Return only active providers
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
@@ -59,7 +60,8 @@ clia <- function(
   zip = NULL,
   status = NULL,
   active = FALSE,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_character(certificate, allow_null = TRUE)
   check_character(status, allow_null = TRUE)
@@ -67,6 +69,7 @@ clia <- function(
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
+    SET = set,
     ARG = params(
       FAC_NAME = name,
       PRVDR_NUM = ccn,

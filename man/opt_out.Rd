@@ -14,7 +14,8 @@ opt_out(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ opt_out(
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
