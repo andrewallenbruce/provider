@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9066 (2026-04-11)
+
+* added parameters to `clia()`
+* updated dependencies
+
+
 # provider 0.0.1.9065 (2026-04-11)
 
 * added `set` parameter
