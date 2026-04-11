@@ -26,45 +26,60 @@
 #'
 #' @param name `<chr>` Provider or clinical laboratory's name
 #' @param ccn `<chr>` 10-character CLIA number
-#' @param certificate `<chr>` CLIA certificate type (see details):
-#'    - `"wav"`: Waiver
+#' @param parent `<chr>` 6-character CLIA number
+#' @param certificate `<enum>` CLIA certificate type (see details):
+#'    - `"waiver"`: Waiver
 #'    - `"ppm"`: Provider-Performed Microscopy (PPM)
-#'    - `"reg"`: Registration
-#'    - `"cmp"`: Compliance
-#'    - `"acc"`: Accreditation
+#'    - `"registration"`: Registration
+#'    - `"compliance"`: Compliance
+#'    - `"accreditation"`: Accreditation
+#' @param accreditation `<enum>` CLIA accrediting organization (see details):
+#'    - `"a2la"`: A2LA
+#'    - `"aabb"`: AABB
+#'    - `"aoa"`: AOA
+#'    - `"ashi"`: ASHI-HLA
+#'    - `"cap"`: CAP
+#'    - `"cola"`: COLA
+#'    - `"jcaho"`: JCAHO
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
-#' @param status `<chr>` `"cmp"` (Compliant) or `"non"` (Non-Compliant)
+#' @param compliant `<lgl>` Compliant or Non-Compliant
 #' @param active `<lgl>` Return only active providers
 #' @param count `<lgl>` Return the dataset's total row count
 #' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
-#' clia(status = "cmp", count = TRUE)
+#' clia(compliant = TRUE, count = TRUE)
 #' clia(ccn = provider:::cdc_labs$ccn)
 #' clia(
-#'   certificate = c("acc", "reg"),
+#'   certificate = c("accreditation", "registration"),
 #'   city = "Valdosta",
 #'   state = "GA"
 #' )
+#' clia(accreditation = "jcaho", count = TRUE)
+#' clia(accreditation = "a2la")
 #' @autoglobal
 #' @export
 clia <- function(
   name = NULL,
   ccn = NULL,
+  parent = NULL,
   certificate = NULL,
+  accreditation = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  status = NULL,
-  active = FALSE,
+  compliant = NULL,
+  active = NULL,
   count = FALSE,
   set = FALSE
 ) {
   check_character(certificate, allow_null = TRUE)
-  check_character(status, allow_null = TRUE)
+  check_character(accreditation, allow_null = TRUE)
+  check_bool(compliant, allow_null = TRUE)
+  check_bool(active, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
@@ -73,12 +88,14 @@ clia <- function(
     ARG = params(
       FAC_NAME = name,
       PRVDR_NUM = ccn,
+      CLIA_MDCR_NUM = parent,
       CRTFCT_TYPE_CD = enum_(certificate),
       CITY_NAME = city,
       STATE_CD = state,
       ZIP_CD = zip,
-      CMPLNC_STUS_CD = enum_(status),
-      PGM_TRMNTN_CD = active_(active)
+      CMPLNC_STUS_CD = comp_(compliant),
+      PGM_TRMNTN_CD = active_(active),
+      !!!accredit(accreditation)
     )
   )
 }
@@ -88,7 +105,43 @@ active_ <- function(active) {
   if (is.null(active)) {
     return(NULL)
   }
-  check_bool(active)
-
   if (active) "00" else NULL
+}
+
+#' @noRd
+comp_ <- function(x = NULL) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  cheapr::val_match(
+    x,
+    TRUE ~ "A",
+    FALSE ~ "B"
+  )
+}
+
+#' @noRd
+accredit <- function(x) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+  arg_match(
+    x,
+    c("a2la", "aabb", "aoa", "ashi", "cap", "cola", "jcaho"),
+    multiple = FALSE,
+    error_arg = "accreditation",
+    error_call = call2("clia")
+  )
+  x <- switch(
+    x,
+    a2la = "A2LA_ACRDTD_Y_MATCH_SW",
+    aabb = "AABB_ACRDTD_Y_MATCH_SW",
+    aoa = "AOA_ACRDTD_Y_MATCH_SW",
+    ashi = "ASHI_ACRDTD_Y_MATCH_SW",
+    cap = "CAP_ACRDTD_Y_MATCH_SW",
+    cola = "COLA_ACRDTD_Y_MATCH_SW",
+    jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
+  )
+  set_names(list("Y"), x)
 }

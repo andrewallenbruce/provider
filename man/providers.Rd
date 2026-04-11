@@ -56,7 +56,6 @@ providers(count = TRUE)
 providers(enid = "I20040309000221")
 providers(npi = 1417918293)
 providers(pac = 2860305554)
-providers(state = "AK")
 \dontshow{\}) # examplesIf}
 }
 \references{

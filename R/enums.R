@@ -48,16 +48,11 @@ enumerations <- function(arg) {
     ),
     # <clia>
     certificate = list(
-      cmp = 1,
-      wav = 2,
-      acc = 3,
+      compliance = 1,
+      waiver = 2,
+      accreditation = 3,
       ppm = 4,
-      reg = 9
-    ),
-    # <clia>
-    status = list(
-      cmp = "A",
-      non = "B"
+      registration = 9
     ),
     # <hospitals>
     provider_type = list(

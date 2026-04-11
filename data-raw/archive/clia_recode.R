@@ -86,8 +86,14 @@ fct_lab <- function(x) {
   )
 }
 
+# CLIA_MDCR_NUM is the parent facility
+# hospitals(ccn = "010016") |> str()
+# hospitals2(ccn = "010016") |> str()
+# clia(ccn = "01D0026356") |> str()
+
 #' @noRd
 fct_facility <- function(x) {
+  # GNRL_FAC_TYPE_CD
   factor(
     x,
     levels = c(

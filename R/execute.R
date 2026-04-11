@@ -19,7 +19,7 @@ exec_prov <- function(END, COUNT, ARG, call) {
     }
 
     # EMPTY QUERY --> First 10 Rows
-    cli_no_query()
+    cli_no_query(END)
 
     res <- polish(request_pro(BASE), NM)
 
@@ -99,7 +99,7 @@ exec_cms <- function(END, COUNT, SET, ARG) {
     }
 
     # EMPTY QUERY --> First 10 Rows
-    cli_no_query()
+    cli_no_query(END)
 
     res <- polish(request_cms(BASE), NM)
 
@@ -157,7 +157,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     }
 
     # EMPTY QUERY --> First 10 Rows
-    cli_no_query()
+    cli_no_query(END)
 
     res <- purrr::imap(BASE, \(x, i) polish(request_cms(x), NM)) |>
       collapse::rowbind(idcol = .id, return = 4L)

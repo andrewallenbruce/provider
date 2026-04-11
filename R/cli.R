@@ -2,9 +2,9 @@
 cli_red <- cli::combine_ansi_styles("red", "bold")
 
 #' @noRd
-cli_no_query <- function() {
+cli_no_query <- function(endpoint) {
   cli::cli_alert_warning(c(
-    "{.emph No Query} ",
+    "{.emph No Query} to {.strong {endpoint}}",
     cli::symbol$arrow_right,
     " Returning first {.strong 10} rows."
   ))
@@ -14,7 +14,7 @@ cli_no_query <- function() {
 cli_results <- function(x, endpoint) {
   # cli::cat_rule(left = cli::style_bold(endpoint), width = 10)
   msg <- c(
-    "{.strong {.arg {endpoint}}} returned ",
+    "{.strong {endpoint}} returned ",
     "{.strong {mark(x)}} ",
     "{cli::qty(x)}result{?s}."
   )

@@ -16,16 +16,16 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    cheapr (>= 1.5.0),
-    cli (>= 3.6.5),
+    cheapr (>= 1.5.1),
+    cli (>= 3.6.6),
     collapse (>= 2.1.6),
     httr2 (>= 1.2.2),
     purrr (>= 1.2.1),
     RcppSimdJson (>= 0.1.15),
-    rlang (>= 1.1.7),
+    rlang (>= 1.2.0),
     S7 (>= 0.2.1),
     stringr (>= 1.6.0),
-    vctrs (>= 0.7.1),
+    vctrs (>= 0.7.2),
     arcgislayers (>= 0.6.0),
     memoise (>= 2.0.1)
 Suggests: 

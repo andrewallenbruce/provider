@@ -25,7 +25,6 @@
 #' providers(enid = "I20040309000221")
 #' providers(npi = 1417918293)
 #' providers(pac = 2860305554)
-#' providers(state = "AK")
 #' @autoglobal
 #' @export
 providers <- function(
