@@ -95,9 +95,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 reassignments(count = TRUE)
-#> ✔ `reassignments` returned 3,511,984 results.
+#> ✔ reassignments returned 3,511,984 results.
 reassignments(org_enid = "I20070209000135")
-#> ✔ `reassignments` returned 6 results.
+#> ✔ reassignments returned 6 results.
 #> # A data frame: 6 × 14
 #>   first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
 #> * <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
@@ -110,7 +110,7 @@ reassignments(org_enid = "I20070209000135")
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   type <chr>
 reassignments(pac = 9830437441)
-#> ✔ `reassignments` returned 2 results.
+#> ✔ reassignments returned 2 results.
 #> # A data frame: 2 × 14
 #>   first last    state specialty  ind_assoc npi   pac   enid  org_name org_assign
 #> * <chr> <chr>   <chr> <chr>      <chr>     <chr> <chr> <chr> <chr>    <chr>     
@@ -119,7 +119,7 @@ reassignments(pac = 9830437441)
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   type <chr>
 reassignments(org_pac = 3173525888)
-#> ✔ `reassignments` returned 6 results.
+#> ✔ reassignments returned 6 results.
 #> # A data frame: 6 × 14
 #>   first   last   state specialty ind_assoc npi   pac   enid  org_name org_assign
 #> * <chr>   <chr>  <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     

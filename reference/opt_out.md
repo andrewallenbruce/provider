@@ -105,16 +105,16 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> ✔ `opt_out` returned 55,330 results.
+#> ✔ opt_out returned 55,330 results.
 opt_out(npi = 1043522824)
-#> ✔ `opt_out` returned 1 result.
+#> ✔ opt_out returned 1 result.
 #> # A data frame: 1 × 13
 #>   npi        first last  specialty start_date end_date updated add_1 add_2 city 
 #> * <chr>      <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
 #> 1 1043522824 James Smith Nurse Pr… 7/1/2019   7/1/2027 8/15/2… 8585… STE … SCOT…
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(state = "AK")
-#> ✔ `opt_out` returned 258 results.
+#> ✔ opt_out returned 258 results.
 #> # A data frame: 258 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
 #>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
@@ -131,7 +131,7 @@ opt_out(state = "AK")
 #> # ℹ 248 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#> ✔ `opt_out` returned 798 results.
+#> ✔ opt_out returned 798 results.
 #> # A data frame: 798 × 13
 #>    npi       first last  specialty start_date end_date updated add_1 add_2 city 
 #>  * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>

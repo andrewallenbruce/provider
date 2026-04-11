@@ -9,12 +9,14 @@ services the facility provides.
 clia(
   name = NULL,
   ccn = NULL,
+  parent = NULL,
   certificate = NULL,
+  accreditation = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  status = NULL,
-  active = FALSE,
+  compliant = NULL,
+  active = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -51,19 +53,41 @@ clia(
 
   `<chr>` 10-character CLIA number
 
+- parent:
+
+  `<chr>` 6-character CLIA number
+
 - certificate:
 
-  `<chr>` CLIA certificate type (see details):
+  `<enum>` CLIA certificate type (see details):
 
-  - `"wav"`: Waiver
+  - `"waiver"`: Waiver
 
   - `"ppm"`: Provider-Performed Microscopy (PPM)
 
-  - `"reg"`: Registration
+  - `"registration"`: Registration
 
-  - `"cmp"`: Compliance
+  - `"compliance"`: Compliance
 
-  - `"acc"`: Accreditation
+  - `"accreditation"`: Accreditation
+
+- accreditation:
+
+  `<enum>` CLIA accrediting organization (see details):
+
+  - `"a2la"`: A2LA
+
+  - `"aabb"`: AABB
+
+  - `"aoa"`: AOA
+
+  - `"ashi"`: ASHI-HLA
+
+  - `"cap"`: CAP
+
+  - `"cola"`: COLA
+
+  - `"jcaho"`: JCAHO
 
 - city:
 
@@ -77,9 +101,9 @@ clia(
 
   `<chr>` Zip code
 
-- status:
+- compliant:
 
-  `<chr>` `"cmp"` (Compliant) or `"non"` (Non-Compliant)
+  `<lgl>` Compliant or Non-Compliant
 
 - active:
 
@@ -161,59 +185,84 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ✔ `clia` returned 671,570 results.
-clia(status = "cmp", count = TRUE)
-#> ✔ `clia` returned 72,855 results.
+#> ✔ clia returned 671,570 results.
+clia(compliant = TRUE, count = TRUE)
+#> ✔ clia returned 72,855 results.
 clia(ccn = provider:::cdc_labs$ccn)
-#> ✔ `clia` returned 6 results.
+#> ✔ clia returned 6 results.
 #> # A data frame: 6 × 82
-#>   name_1   name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
-#> * <chr>    <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
-#> 1 CDC ARC… CENTE… 02D0… NA    0      NA        NA       N     A      4055… NA   
-#> 2 CENTERS… DIVIS… 06D0… NA    0      NA        NA       Y     A      3156… NA   
-#> 3 CDC/NCE… NA     11D0… NA    0      NA        NA       N     A      4770… ATTN…
-#> 4 CENTERS… NA     11D0… NA    0      NA        NA       N     B      1600… NA   
-#> 5 CDC/CGH… ATTEN… 11D1… NA    0      NA        NA       N     NA     1600… NA   
-#> 6 CENTERS… DENGU… 40D0… NA    0      NA        NA       N     A      1324… NA   
-#> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, eligible <chr>,
-#> #   term_pgm <chr>, term_clia <chr>, apl_type <chr>, cert_type <chr>,
-#> #   fac_type <chr>, owner <chr>, cert_action <chr>, orig_date <chr>,
-#> #   apl_date <chr>, cert_date <chr>, eff_date <chr>, mail_date <chr>,
-#> #   term_date <chr>, a2la_cred <chr>, a2la_date <chr>, a2la_ind <chr>, …
+#>   name_1  name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1
+#> * <chr>   <chr>  <chr> <chr>  <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr>
+#> 1 CDC AR… CENTE… 02D0… NA     NA    0      NA        NA       N     A      4055…
+#> 2 CENTER… DIVIS… 06D0… NA     NA    0      NA        NA       Y     A      3156…
+#> 3 CDC/NC… NA     11D0… NA     NA    0      NA        NA       N     A      4770…
+#> 4 CENTER… NA     11D0… NA     NA    0      NA        NA       N     B      1600…
+#> 5 CDC/CG… ATTEN… 11D1… NA     NA    0      NA        NA       N     NA     1600…
+#> 6 CENTER… DENGU… 40D0… NA     NA    0      NA        NA       N     A      1324…
+#> # ℹ 71 more variables: add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>,
+#> #   ssa_cty <chr>, fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>,
+#> #   eligible <chr>, term_pgm <chr>, term_clia <chr>, apl_type <chr>,
+#> #   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
+#> #   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>,
+#> #   mail_date <chr>, term_date <chr>, a2la_cred <chr>, a2la_date <chr>, …
 clia(
-  certificate = c("acc", "reg"),
+  certificate = c("accreditation", "registration"),
   city = "Valdosta",
   state = "GA"
 )
-#> ✔ `clia` returned 18 results.
+#> ✔ clia returned 18 results.
 #> # A data frame: 18 × 82
-#>    name_1  name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
-#>  * <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
-#>  1 SGMC H… NA     11D0… NA    0      NA        NA       N     A      2501… NA   
-#>  2 SGMC- … NA     11D0… NA    0      NA        NA       N     A      4280… NA   
-#>  3 SMITH … NA     11D0… NA    0      NA        NA       N     NA     2910… NA   
-#>  4 QUEST … SOLST… 11D0… NA    0      NA        NA       N     A      341 … NA   
-#>  5 SOUTH … NA     11D0… NA    0      NA        NA       N     NA     2501… NA   
-#>  6 NORTHS… WILLI… 11D0… NA    0      NA        NA       N     NA     201 … NA   
-#>  7 SOUTH … NA     11D0… NA    0      NA        NA       N     NA     201 … NA   
-#>  8 SOUTHE… NA     11D0… NA    0      NA        NA       N     NA     2740… NA   
-#>  9 VALDOS… NA     11D1… NA    0      NA        NA       N     NA     2841… NA   
-#> 10 ALLEGI… NA     11D1… NA    0      NA        NA       N     NA     5101… NA   
-#> 11 CARE M… NA     11D2… NA    0      NA        NA       N     NA     2804… NA   
-#> 12 GULF C… NA     11D2… NA    0      NA        NA       N     NA     2804… NA   
-#> 13 BPC PL… NA     11D2… NA    0      NA        NA       N     NA     311 … NA   
-#> 14 SOUTH … NA     11D2… NA    0      NA        NA       N     NA     3312… NA   
-#> 15 SGMC P… NA     11D2… NA    0      NA        NA       N     NA     2501… NA   
-#> 16 SGMC F… NA     11D2… NA    0      NA        NA       N     NA     3386… NA   
-#> 17 OCTAPH… NA     11D2… NA    0      NA        NA       N     NA     1713… NA   
-#> 18 VEEDHA… NA     11D2… NA    0      NA        NA       N     NA     3386… NA   
-#> # ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, eligible <chr>,
-#> #   term_pgm <chr>, term_clia <chr>, apl_type <chr>, cert_type <chr>,
-#> #   fac_type <chr>, owner <chr>, cert_action <chr>, orig_date <chr>,
-#> #   apl_date <chr>, cert_date <chr>, eff_date <chr>, mail_date <chr>,
-#> #   term_date <chr>, a2la_cred <chr>, a2la_date <chr>, a2la_ind <chr>, …
+#>    name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1
+#>  * <chr>  <chr>  <chr> <chr>  <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr>
+#>  1 SGMC … NA     11D0… 110122 NA    0      NA        NA       N     A      2501…
+#>  2 SGMC-… NA     11D0… 110037 NA    0      NA        NA       N     A      4280…
+#>  3 SMITH… NA     11D0… 25462… NA    0      NA        NA       N     NA     2910…
+#>  4 QUEST… SOLST… 11D0… 11L00… NA    0      NA        NA       N     A      341 …
+#>  5 SOUTH… NA     11D0… 110122 NA    0      NA        NA       N     NA     2501…
+#>  6 NORTH… WILLI… 11D0… NA     NA    0      NA        NA       N     NA     201 …
+#>  7 SOUTH… NA     11D0… NA     NA    0      NA        NA       N     NA     201 …
+#>  8 SOUTH… NA     11D0… NA     NA    0      NA        NA       N     NA     2740…
+#>  9 VALDO… NA     11D1… NA     NA    0      NA        NA       N     NA     2841…
+#> 10 ALLEG… NA     11D1… NA     NA    0      NA        NA       N     NA     5101…
+#> 11 CARE … NA     11D2… NA     NA    0      NA        NA       N     NA     2804…
+#> 12 GULF … NA     11D2… NA     NA    0      NA        NA       N     NA     2804…
+#> 13 BPC P… NA     11D2… NA     NA    0      NA        NA       N     NA     311 …
+#> 14 SOUTH… NA     11D2… NA     NA    0      NA        NA       N     NA     3312…
+#> 15 SGMC … NA     11D2… NA     NA    0      NA        NA       N     NA     2501…
+#> 16 SGMC … NA     11D2… NA     NA    0      NA        NA       N     NA     3386…
+#> 17 OCTAP… NA     11D2… NA     NA    0      NA        NA       N     NA     1713…
+#> 18 VEEDH… NA     11D2… NA     NA    0      NA        NA       N     NA     3386…
+#> # ℹ 71 more variables: add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>,
+#> #   ssa_cty <chr>, fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>,
+#> #   eligible <chr>, term_pgm <chr>, term_clia <chr>, apl_type <chr>,
+#> #   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
+#> #   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>,
+#> #   mail_date <chr>, term_date <chr>, a2la_cred <chr>, a2la_date <chr>, …
+clia(accreditation = "jcaho", count = TRUE)
+#> ✔ clia returned 2,765 results.
+clia(accreditation = "a2la")
+#> ✔ clia returned 11 results.
+#> # A data frame: 11 × 82
+#>    name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1
+#>  * <chr>  <chr>  <chr> <chr>  <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr>
+#>  1 ONCOL… NA     01D0… NA     NA    0      NA        NA       N     A      3601…
+#>  2 EUROF… NA     03D2… NA     NA    0      NA        NA       N     NA     9052…
+#>  3 CDC/N… NA     11D0… NA     NA    0      NA        NA       N     A      4770…
+#>  4 ADVAN… NA     45D2… NA     NA    0      NA        NA       N     NA     1077…
+#>  5 PROTE… NA     45D2… NA     NA    0      NA        NA       N     NA     4514…
+#>  6 RAREC… NA     50D2… NA     NA    0      NA        NA       N     A      2601…
+#>  7 LIFE … NA     99D2… NA     NA    0      NA        NA       N     NA     ROND…
+#>  8 PROTE… NA     99D2… NA     NA    0      NA        NA       N     NA     MARS…
+#>  9 RNA D… NA     99D2… NA     NA    0      NA        NA       N     NA     56 W…
+#> 10 PATHA… NA     99D2… NA     NA    0      NA        NA       N     NA     500 …
+#> 11 EARLY… NA     99D2… NA     NA    0      NA        NA       N     NA     4 ME…
+#> # ℹ 71 more variables: add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>,
+#> #   ssa_cty <chr>, fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>,
+#> #   eligible <chr>, term_pgm <chr>, term_clia <chr>, apl_type <chr>,
+#> #   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
+#> #   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>,
+#> #   mail_date <chr>, term_date <chr>, a2la_cred <chr>, a2la_date <chr>, …
 ```

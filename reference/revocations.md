@@ -88,9 +88,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> ✔ `revocations` returned 7,465 results.
+#> ✔ revocations returned 7,465 results.
 revocations(state = "GA")
-#> ✔ `revocations` returned 213 results.
+#> ✔ revocations returned 213 results.
 #> # A data frame: 213 × 12
 #>    org_name first    middle last       enid   npi   multi state specialty reason
 #>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
@@ -107,7 +107,7 @@ revocations(state = "GA")
 #> # ℹ 203 more rows
 #> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 revocations(specialty = contains("CARDIO"), state = not("TX"))
-#> ✔ `revocations` returned 46 results.
+#> ✔ revocations returned 46 results.
 #> # A data frame: 46 × 12
 #>    org_name first    middle last       enid   npi   multi state specialty reason
 #>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
@@ -124,7 +124,7 @@ revocations(specialty = contains("CARDIO"), state = not("TX"))
 #> # ℹ 36 more rows
 #> # ℹ 2 more variables: start_date <chr>, end_date <chr>
 revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
-#> ✔ `revocations` returned 43 results.
+#> ✔ revocations returned 43 results.
 #> # A data frame: 43 × 12
 #>    org_name first   middle last      enid     npi   multi state specialty reason
 #>  * <chr>    <chr>   <chr>  <chr>     <chr>    <chr> <chr> <chr> <chr>     <chr> 

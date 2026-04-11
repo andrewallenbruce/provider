@@ -220,9 +220,9 @@ A `<subgroups>` object
 
 ``` r
 hospitals(count = TRUE)
-#> ✔ `hospitals` returned 9,187 results.
+#> ✔ hospitals returned 9,187 results.
 hospitals(state = "GA", provider_type = "reh")
-#> ✔ `hospitals` returned 1 result.
+#> ✔ hospitals returned 1 result.
 #> # A data frame: 1 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
@@ -241,7 +241,7 @@ x <- hospitals(
   subgroup = subgroups(
     acute = FALSE,
     psych = TRUE))
-#> ✔ `hospitals` returned 2 results.
+#> ✔ hospitals returned 2 results.
 x
 #> # A data frame: 2 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
@@ -256,7 +256,7 @@ x
 #> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 hospitals2(ccn = x$ccn)
-#> ✔ `hospitals2` returned 2 results.
+#> ✔ hospitals2 returned 2 results.
 #> # A data frame: 2 × 11
 #>   ccn    org_name  address city  state zip   county phone type  ownership rating
 #> * <chr>  <chr>     <chr>   <chr> <chr> <chr> <chr>  <chr> <chr> <chr>     <chr> 
@@ -264,7 +264,7 @@ hospitals2(ccn = x$ccn)
 #> 2 114032 SO CRESC… 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Governme… Not A…
 
 x <- hospitals2()
-#> ! No Query → Returning first 10 rows.
+#> ! No Query to hospitals2→ Returning first 10 rows.
 x
 #> # A data frame: 10 × 11
 #>    ccn    org_name address city  state zip   county phone type  ownership rating
@@ -280,7 +280,7 @@ x
 #>  9 010018 CALLAHA… 1720 U… BIRM… AL    35233 JEFFE… (205… Acut… Voluntar… Not A…
 #> 10 010019 HELEN K… 1300 S… SHEF… AL    35660 COLBE… (256… Acut… Governme… 2     
 hospitals(ccn = x$ccn)
-#> ✔ `hospitals` returned 8 results.
+#> ✔ hospitals returned 8 results.
 #> # A data frame: 8 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>

@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9066 (2026-04-11)
+
+- added parameters to
+  [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
+- updated dependencies
+
 ## provider 0.0.1.9065 (2026-04-11)
 
 - added `set` parameter

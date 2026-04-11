@@ -53,7 +53,7 @@ it is returned. Each function has a `tidy` parameter that is set to
 
 ``` r
 order_refer(npi = 1043477615)
-#> ✔ `order_refer` returned 1 result.
+#> ✔ order_refer returned 1 result.
 #> # A data frame: 1 × 8
 #>   first last    npi        part_b dme   hha   pmd   hospice
 #> * <chr> <chr>   <chr>      <chr>  <chr> <chr> <chr> <chr>  

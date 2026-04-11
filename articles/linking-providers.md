@@ -10,7 +10,7 @@ library(provider)
 
 ``` r
 pac <- affiliations(pac = 7810891009)
-#> ✔ `affiliations` returned 5 results.
+#> ✔ affiliations returned 5 results.
 list(
   individual = as.data.frame(t(unique(pac[1:6]))),
   organization = pac[7:9])
@@ -36,7 +36,7 @@ list(
 
 ``` r
 ccn <- hospitals(ccn = pac$facility_ccn)
-#> ✔ `hospitals` returned 5 results.
+#> ✔ hospitals returned 5 results.
 ccn |> str()
 #> Classes 'tbl' and 'data.frame':  5 obs. of  39 variables:
 #>  $ org_name      : chr  "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...
@@ -90,7 +90,7 @@ Community Hospital**.
 
 ``` r
 providers(org_name = "Elizabethtown Community Hospital")
-#> ✔ `providers` returned 9 results.
+#> ✔ providers returned 9 results.
 #> # A data frame: 9 × 11
 #>   org_name      first middle last  state spec  specialty npi   multi pac   enid 
 #> * <chr>         <chr> <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
@@ -107,7 +107,7 @@ providers(org_name = "Elizabethtown Community Hospital")
 
 ``` r
 hospitals(org_name = "Elizabethtown Community Hospital")
-#> ✔ `hospitals` returned 2 results.
+#> ✔ hospitals returned 2 results.
 #> # A data frame: 2 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
@@ -124,7 +124,7 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 
 ``` r
 clinicians(facility_name = "Elizabethtown Community Hospital")
-#> ✔ `clinicians` returned 58 results.
+#> ✔ clinicians returned 58 results.
 #> # A data frame: 58 × 25
 #>    first    middle last    suffix gender cred  school year  specialty spec_other
 #>  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
@@ -147,7 +147,7 @@ clinicians(facility_name = "Elizabethtown Community Hospital")
 
 ``` r
 reassignments(org_name = "Elizabethtown Community Hospital")
-#> ✔ `reassignments` returned 370 results.
+#> ✔ reassignments returned 370 results.
 #> # A data frame: 370 × 14
 #>    first   last  state specialty ind_assoc npi   pac   enid  org_name org_assign
 #>  * <chr>   <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
@@ -179,7 +179,7 @@ providers practicing at this hospital. First, the all-numeric CCN
 
 ``` r
 ccn <- affiliations(facility_ccn = 331302)
-#> ✔ `affiliations` returned 206 results.
+#> ✔ affiliations returned 206 results.
 list(
   organization = as.data.frame(t(unique(ccn[7:9]))),
   individual = unique(ccn[1:6])
@@ -214,7 +214,7 @@ search the alphanumeric CCN (`33Z302`):
 
 ``` r
 ccn2 <- affiliations(facility_ccn = "33Z302")
-#> ✔ `affiliations` returned 4 results.
+#> ✔ affiliations returned 4 results.
 list(
   organization = as.data.frame(t(unique(ccn2[7:9]))),
   individual = unique(ccn2[1:6])
