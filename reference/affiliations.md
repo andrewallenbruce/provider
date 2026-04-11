@@ -84,7 +84,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 affiliations(middle = "", count = TRUE)
-#> ✔ `affiliations` returned 551,669 results.
+#> ✔ `affiliations` returned 558,466 results.
 affiliations(facility_ccn = "33Z302")
 #> ✔ `affiliations` returned 4 results.
 #> # A data frame: 4 × 9
@@ -104,19 +104,19 @@ affiliations(parent_ccn = 331302)
 #> 3 IL      CHON   JUN    NA     1538… 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(facility_ccn = 331302)
-#> ✔ `affiliations` returned 211 results.
-#> # A data frame: 211 × 9
+#> ✔ `affiliations` returned 206 results.
+#> # A data frame: 206 × 9
 #>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>  * <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #>  1 LAURA   GREE… A      NA     1003… 1759… Hospital      331302       NA        
-#>  2 DEBORAH KAMP… M      NA     1013… 8022… Hospital      331302       NA        
-#>  3 NAROD   VASS… NA     NA     1013… 9133… Hospital      331302       NA        
-#>  4 EMILY   TRIP… NA     NA     1013… 3375… Hospital      331302       NA        
-#>  5 JOSE    ACOS… M      NA     1013… 5890… Hospital      331302       NA        
-#>  6 LINDSEY WILH… B      NA     1023… 6901… Hospital      331302       NA        
+#>  2 NAROD   VASS… NA     NA     1013… 9133… Hospital      331302       NA        
+#>  3 EMILY   TRIP… NA     NA     1013… 3375… Hospital      331302       NA        
+#>  4 JOSE    ACOS… M      NA     1013… 5890… Hospital      331302       NA        
+#>  5 LINDSEY WILH… B      NA     1023… 6901… Hospital      331302       NA        
+#>  6 ANTHONY TRAM… F      NA     1043… 4183… Hospital      331302       NA        
 #>  7 VANESSA FIOR… NA     NA     1043… 7214… Hospital      331302       NA        
-#>  8 JOHN    YOUNG NA     NA     1063… 9436… Hospital      331302       NA        
-#>  9 ROBERT  BENAK L      NA     1063… 3476… Hospital      331302       NA        
-#> 10 ALTHEA  MORR… LOUISE NA     1063… 8628… Hospital      331302       NA        
-#> # ℹ 201 more rows
+#>  8 CONOR   O'NE… NA     NA     1053… 9234… Hospital      331302       NA        
+#>  9 JOHN    YOUNG NA     NA     1063… 9436… Hospital      331302       NA        
+#> 10 ROBERT  BENAK L      NA     1063… 3476… Hospital      331302       NA        
+#> # ℹ 196 more rows
 ```

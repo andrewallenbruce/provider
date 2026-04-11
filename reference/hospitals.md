@@ -24,7 +24,8 @@ hospitals(
   provider_type = NULL,
   location_type = NULL,
   subgroup = subgroups(),
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 
 subgroups(
@@ -140,6 +141,10 @@ hospitals2(
 - count:
 
   `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 - acute:
 

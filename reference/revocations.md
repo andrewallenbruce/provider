@@ -28,7 +28,8 @@ revocations(
   state = NULL,
   specialty = NULL,
   reason = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -74,6 +75,10 @@ revocations(
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 

@@ -27,7 +27,8 @@ reassignments(
   org_pac = NULL,
   org_enid = NULL,
   org_state = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -76,6 +77,10 @@ reassignments(
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 

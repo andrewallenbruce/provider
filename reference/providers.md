@@ -18,7 +18,8 @@ providers(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -64,6 +65,10 @@ providers(
 
   `<lgl>` Return the dataset's total row count
 
+- set:
+
+  `<lgl>` Return the entire dataset
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -102,6 +107,8 @@ providers(pac = 2860305554)
 providers(state = "AK")
 #> ✔ `providers` returned 6,851 results.
 #> ℹ Retrieving 2 pages...
+#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
+#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A data frame: 6,851 × 11
 #>    org_name first     middle last  state spec  specialty npi   multi pac   enid 
 #>  * <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>

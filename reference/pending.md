@@ -44,29 +44,29 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ✔ `pending` returned 9,594 results.
-#> • Physician     : 3,290
-#> • Non-Physician : 6,304
+#> ✔ `pending` returned 9,453 results.
+#> • Physician     : 3,323
+#> • Non-Physician : 6,130
 pending(first = "Victor", count = TRUE)
 #> ✔ `pending` returned 5 results.
 #> • Physician     : 4
 #> • Non-Physician : 1
 pending(first = starts_with("V"))
-#> ✔ `pending` returned 143 results.
-#> • Physician     : 40 
-#> • Non-Physician : 103
-#> # A tibble: 143 × 4
-#>    prov_type first     last             npi       
-#>    <fct>     <chr>     <chr>            <chr>     
-#>  1 Physician VADIN     LALL DASS        1144512724
-#>  2 Physician VAIBHAVI  SHAH             1437952843
-#>  3 Physician VALENTINA TURBAY CABALLERO 1689304545
-#>  4 Physician VALERIA   LOZADA MIRANDA   1881291540
-#>  5 Physician VALERIE   ESPINOZA         1669050084
-#>  6 Physician VALJEAN   BACOT-DAVIS      1407597651
-#>  7 Physician VANESSA   LOUISSAINT       1386093193
-#>  8 Physician VANESSA   NWOKOYE          1205530045
-#>  9 Physician VANSHANI  PATEL            1649118753
-#> 10 Physician VEDATTA   MAHARAJ          1811637556
-#> # ℹ 133 more rows
+#> ✔ `pending` returned 126 results.
+#> • Physician     : 41
+#> • Non-Physician : 85
+#> # A tibble: 126 × 4
+#>    prov_type first        last             npi       
+#>    <fct>     <chr>        <chr>            <chr>     
+#>  1 Physician VADIN        LALL DASS        1144512724
+#>  2 Physician VAJEH        VATANKHAHI       1003754821
+#>  3 Physician VALENTINA    TURBAY CABALLERO 1689304545
+#>  4 Physician VALJEAN      BACOT-DAVIS      1407597651
+#>  5 Physician VANESSA      KARIMI           1104445022
+#>  6 Physician VANESSA      NWOKOYE          1205530045
+#>  7 Physician VANSHANI     PATEL            1649118753
+#>  8 Physician VENKATARAMAN PATLA            1124038419
+#>  9 Physician VENNELA      PULIKANTI        1821238999
+#> 10 Physician VERNON       SHARP            1023616224
+#> # ℹ 116 more rows
 ```

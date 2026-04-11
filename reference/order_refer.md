@@ -14,7 +14,8 @@ order_refer(
   hha = NULL,
   pmd = NULL,
   hospice = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -45,6 +46,10 @@ order_refer(
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 
@@ -88,7 +93,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ✔ `order_refer` returned 2,003,316 results.
+#> ✔ `order_refer` returned 2,004,978 results.
 order_refer(npi = 1003026055)
 #> ✔ `order_refer` returned 1 result.
 #> # A data frame: 1 × 8
@@ -100,16 +105,16 @@ order_refer(first = "Jennifer", last = "Smith")
 #> # A data frame: 135 × 8
 #>    first    last  npi        part_b dme   hha   pmd   hospice
 #>  * <chr>    <chr> <chr>      <chr>  <chr> <chr> <chr> <chr>  
-#>  1 JENNIFER SMITH 1609118330 Y      Y     Y     Y     Y      
-#>  2 JENNIFER SMITH 1033553219 Y      Y     N     N     N      
-#>  3 JENNIFER SMITH 1982792206 Y      Y     Y     Y     N      
-#>  4 JENNIFER SMITH 1639413461 Y      Y     Y     Y     N      
-#>  5 JENNIFER SMITH 1891028056 Y      Y     Y     Y     N      
-#>  6 JENNIFER SMITH 1780354217 Y      Y     Y     Y     N      
-#>  7 JENNIFER SMITH 1760504674 Y      Y     Y     N     Y      
-#>  8 JENNIFER SMITH 1598943821 Y      Y     Y     Y     Y      
-#>  9 JENNIFER SMITH 1790063832 Y      Y     Y     Y     Y      
-#> 10 JENNIFER SMITH 1316301955 Y      Y     Y     Y     Y      
+#>  1 JENNIFER SMITH 1255983557 Y      Y     Y     N     Y      
+#>  2 JENNIFER SMITH 1063260172 Y      Y     Y     Y     N      
+#>  3 JENNIFER SMITH 1972332542 Y      Y     Y     Y     N      
+#>  4 JENNIFER SMITH 1588617773 Y      Y     Y     Y     N      
+#>  5 JENNIFER SMITH 1023408291 Y      Y     Y     Y     N      
+#>  6 JENNIFER SMITH 1336652726 Y      Y     Y     Y     N      
+#>  7 JENNIFER SMITH 1528351160 Y      Y     Y     Y     Y      
+#>  8 JENNIFER SMITH 1992396162 Y      Y     N     N     N      
+#>  9 JENNIFER SMITH 1942592324 Y      Y     Y     Y     N      
+#> 10 JENNIFER SMITH 1134237498 Y      Y     Y     Y     Y      
 #> # ℹ 125 more rows
 order_refer(
   part_b = TRUE,
@@ -117,8 +122,8 @@ order_refer(
   hha = FALSE,
   pmd = TRUE,
   hospice = FALSE)
-#> ✔ `order_refer` returned 52 results.
-#> # A data frame: 52 × 8
+#> ✔ `order_refer` returned 51 results.
+#> # A data frame: 51 × 8
 #>    first    last        npi        part_b dme   hha   pmd   hospice
 #>  * <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
 #>  1 ROBYN    AYER        1659094290 Y      Y     N     Y     N      
@@ -131,5 +136,5 @@ order_refer(
 #>  8 LYNELL   DAWSON      1962852533 Y      Y     N     Y     N      
 #>  9 BETH     DETRICH     1124364203 Y      Y     N     Y     N      
 #> 10 BRIDGET  DIETZ       1720522592 Y      Y     N     Y     N      
-#> # ℹ 42 more rows
+#> # ℹ 41 more rows
 ```

@@ -27,8 +27,8 @@ list(
 #> # A data frame: 5 × 3
 #>   facility_type facility_ccn parent_ccn
 #> * <chr>         <chr>        <chr>     
-#> 1 Hospital      330250       NA        
-#> 2 Hospital      470003       NA        
+#> 1 Hospital      470003       NA        
+#> 2 Hospital      330250       NA        
 #> 3 Hospital      470001       NA        
 #> 4 Hospital      471307       NA        
 #> 5 Hospital      470011       NA
@@ -124,21 +124,21 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 
 ``` r
 clinicians(facility_name = "Elizabethtown Community Hospital")
-#> ✔ `clinicians` returned 59 results.
-#> # A data frame: 59 × 25
+#> ✔ `clinicians` returned 58 results.
+#> # A data frame: 58 × 25
 #>    first    middle last    suffix gender cred  school year  specialty spec_other
 #>  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
-#>  1 JEFFREY  NA     KLOTZ   NA     M      MD    OTHER  2022  FAMILY P… NA        
-#>  2 RYAN     NA     WALSH   NA     M      MD    OTHER  2007  DIAGNOST… NA        
-#>  3 RYAN     NA     WALSH   NA     M      MD    OTHER  2007  DIAGNOST… NA        
-#>  4 RUSSELL  NA     MEYER   NA     M      MD    UNIVE… 2009  DIAGNOST… NA        
-#>  5 RUSSELL  NA     MEYER   NA     M      MD    UNIVE… 2009  DIAGNOST… NA        
-#>  6 JAMES    NA     KENNEY  NA     M      MD    UNIVE… 1992  DIAGNOST… NA        
-#>  7 BENJAMIN NA     BAMFORD NA     M      MD    UNIVE… 1992  DIAGNOST… NA        
-#>  8 BENJAMIN NA     BAMFORD NA     M      MD    UNIVE… 1992  DIAGNOST… NA        
-#>  9 STEVEN   E      DESO    NA     M      MD    BOSTO… 2010  DIAGNOST… INTERVENT…
-#> 10 LAURENT  NA     GILLOT… NA     M      MD    OTHER  1998  DIAGNOST… NA        
-#> # ℹ 49 more rows
+#>  1 GAVIN    L      NOBLE   NA     M      MD    STATE… 1999  CARDIOVA… INTERNAL …
+#>  2 DMITRIY  G      AKSELR… NA     M      MD    STATE… 2007  DIAGNOST… NA        
+#>  3 ROBERT   NA     PERCAR… NA     M      MD    NEW Y… 2009  INTERVEN… NA        
+#>  4 BENJAMIN NA     LANGE   NA     M      MD    HARVA… 2009  DIAGNOST… INTERVENT…
+#>  5 BENJAMIN NA     BAMFORD NA     M      MD    UNIVE… 1992  DIAGNOST… NA        
+#>  6 JOSHUA   NA     WARNER  NA     F      NP    OTHER  2023  NURSE PR… NA        
+#>  7 DAGMAR   NA     HOEGEM… NA     F      MD    OTHER  1996  DIAGNOST… NA        
+#>  8 CARLY    J      SLEEPER NA     F      NA    ALBAN… 2012  PHYSICIA… NA        
+#>  9 ROB      L      DEMURO  NA     M      MD    STATE… 1996  INTERNAL… NA        
+#> 10 JAMES    E      EAST    NA     M      MD    OTHER  2016  DIAGNOST… NA        
+#> # ℹ 48 more rows
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
@@ -179,7 +179,7 @@ providers practicing at this hospital. First, the all-numeric CCN
 
 ``` r
 ccn <- affiliations(facility_ccn = 331302)
-#> ✔ `affiliations` returned 211 results.
+#> ✔ `affiliations` returned 206 results.
 list(
   organization = as.data.frame(t(unique(ccn[7:9]))),
   individual = unique(ccn[1:6])
@@ -191,20 +191,20 @@ list(
 #> parent_ccn        <NA>
 #> 
 #> $individual
-#> # A data frame: 211 × 6
+#> # A data frame: 206 × 6
 #>    first   last            middle suffix npi        pac       
 #>  * <chr>   <chr>           <chr>  <chr>  <chr>      <chr>     
 #>  1 LAURA   GREENE          A      NA     1003845272 1759384035
-#>  2 DEBORAH KAMPSCHROR      M      NA     1013141860 8022069558
-#>  3 NAROD   VASSILIAN       NA     NA     1013539584 9133544109
-#>  4 EMILY   TRIPLETT        NA     NA     1013595560 3375947401
-#>  5 JOSE    ACOSTAMADIEDO   M      NA     1013910256 5890719371
-#>  6 LINDSEY WILHELM         B      NA     1023377843 6901115278
+#>  2 NAROD   VASSILIAN       NA     NA     1013539584 9133544109
+#>  3 EMILY   TRIPLETT        NA     NA     1013595560 3375947401
+#>  4 JOSE    ACOSTAMADIEDO   M      NA     1013910256 5890719371
+#>  5 LINDSEY WILHELM         B      NA     1023377843 6901115278
+#>  6 ANTHONY TRAMONTANO      F      NA     1043397656 4183764558
 #>  7 VANESSA FIORINI FURTADO NA     NA     1043672140 7214229350
-#>  8 JOHN    YOUNG           NA     NA     1063420891 9436051687
-#>  9 ROBERT  BENAK           L      NA     1063423523 3476552878
-#> 10 ALTHEA  MORRISON        LOUISE NA     1063974293 8628445343
-#> # ℹ 201 more rows
+#>  8 CONOR   O'NEILL         NA     NA     1053686196 9234432576
+#>  9 JOHN    YOUNG           NA     NA     1063420891 9436051687
+#> 10 ROBERT  BENAK           L      NA     1063423523 3476552878
+#> # ℹ 196 more rows
 ```
 
   

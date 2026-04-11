@@ -127,7 +127,7 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ✔ `clinicians` returned 2,819,129 results.
+#> ✔ `clinicians` returned 2,857,460 results.
 clinicians(enid = "I20081002000549")
 #> ✔ `clinicians` returned 1 result.
 #> # A data frame: 1 × 25
@@ -142,39 +142,39 @@ clinicians(first = "ETAN")
 #> # A data frame: 11 × 25
 #>    first middle last     suffix gender cred  school   year  specialty spec_other
 #>  * <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
-#>  1 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
-#>  2 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
-#>  3 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
-#>  4 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
-#>  5 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#>  1 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
+#>  2 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
+#>  3 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
+#>  4 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
+#>  5 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
 #>  6 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
-#>  7 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
+#>  7 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
 #>  8 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
-#>  9 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
-#> 10 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
-#> 11 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
+#>  9 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
 clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#> ✔ `clinicians` returned 362 results.
+#> ✔ `clinicians` returned 389 results.
 clinicians(city = "Atlanta", state = "GA", year = 2025)
-#> ✔ `clinicians` returned 362 results.
-#> # A data frame: 362 × 25
-#>    first      middle last  suffix gender cred  school year  specialty spec_other
-#>  * <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
-#>  1 THAO       NA     HOANG NA     F      PA    OTHER  2025  PHYSICIA… NA        
-#>  2 RYAN       NA     FERL… NA     M      NA    OTHER  2025  PHYSICIA… NA        
-#>  3 SYDNEY     CLAIRE ZARS… NA     F      NA    OTHER  2025  PHYSICIA… NA        
-#>  4 CATHERINE  NA     GENER NA     F      NP    OTHER  2025  NURSE PR… NA        
-#>  5 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
-#>  6 MADISON    NA     THUR… NA     F      OD    ILLIN… 2025  OPHTHALM… NA        
-#>  7 KERRINGTON NA     PUGH  NA     F      NA    OTHER  2025  PHYSICIA… NA        
-#>  8 ELIOT      NA     KIM   NA     M      PT    OTHER  2025  PHYSICAL… NA        
-#>  9 NATHANIEL  NA     TREES NA     M      NA    OTHER  2025  PHYSICAL… NA        
-#> 10 MARA       S.     DETR… NA     F      NA    MERCE… 2025  PHYSICIA… NA        
-#> # ℹ 352 more rows
+#> ✔ `clinicians` returned 389 results.
+#> # A data frame: 389 × 25
+#>    first     middle  last  suffix gender cred  school year  specialty spec_other
+#>  * <chr>     <chr>   <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
+#>  1 HAYDEN    NA      SMITH NA     M      NA    OTHER  2025  PHYSICAL… NA        
+#>  2 BRITTANY  MARIE   STEN… NA     F      NA    MERCE… 2025  PHYSICIA… NA        
+#>  3 ALANA     MARIE   JOHN… NA     F      NA    OTHER  2025  ANESTHES… NA        
+#>  4 MORGAN    LEIGH   GRAV… NA     F      CNA   OTHER  2025  CERTIFIE… NA        
+#>  5 ISABELLA  A       NAVA… NA     F      NA    OTHER  2025  ANESTHES… NA        
+#>  6 RYAN      DON     COWA… NA     M      NA    OTHER  2025  ANESTHES… NA        
+#>  7 MACKENSIE NA      HOGAN NA     F      NA    OTHER  2025  ANESTHES… NA        
+#>  8 TEKIAH    S       MCCL… NA     F      NA    OTHER  2025  ANESTHES… NA        
+#>  9 ALAN      ALBERTO ALVA… NA     M      NA    OTHER  2025  ANESTHES… NA        
+#> 10 BLAKE     THOMAS  BJOR… NA     M      NA    OTHER  2025  ANESTHES… NA        
+#> # ℹ 379 more rows
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,

@@ -15,7 +15,8 @@ clia(
   zip = NULL,
   status = NULL,
   active = FALSE,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -87,6 +88,10 @@ clia(
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 

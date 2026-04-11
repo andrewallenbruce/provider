@@ -58,7 +58,8 @@ transparency(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -92,6 +93,10 @@ transparency(
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 
