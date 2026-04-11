@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9065 (2026-04-11)
+
+* added `set` parameter
+
+
 # provider 0.0.1.9064 (2026-04-05)
 
 * url object
