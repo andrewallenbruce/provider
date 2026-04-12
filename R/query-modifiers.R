@@ -12,17 +12,27 @@
 #' @param or_equal `<lgl>` append `=`
 #' @name modifier
 #' @examples
-#' params(
-#'    state = excludes(state.abb[1:5]),
-#'    title = ends_with("bar"),
-#'    name = starts_with("foo"),
-#'    n = less_than(1000),
-#'    avg = less_than(0.125, or_equal = TRUE),
-#'    rank = greater_than(1000),
-#'    score = greater_than(0.125, or_equal = TRUE),
-#'    interval = between(0.125, 2),
-#'    category = contains("baz"),
-#'    type = not("standard")
+#' list(
+#'    # !x %in% c("AL", "AK", "AZ")
+#'    `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
+#'    # endsWith(x, "bar")
+#'    `ends_with("bar")` = ends_with("bar"),
+#'    # startsWith(x, "foo")
+#'    `starts_with("foo")` = starts_with("foo"),
+#'    # x < 1000
+#'    `less_than(1000)` = less_than(1000),
+#'    # x <= 1000
+#'    `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
+#'    # x > 1000
+#'    `greater_than(1000)` = greater_than(1000),
+#'    # x >= 1000
+#'    `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
+#'    # x > 0.125 & x < 2
+#'    `between(0.125, 2)` = between(0.125, 2),
+#'    # grepl("baz", x)
+#'    `contains("baz")` = contains("baz"),
+#'    # x != "zzz"
+#'    `not("zzz")` = not("zzz")
 #'  )
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)

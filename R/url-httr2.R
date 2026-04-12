@@ -13,6 +13,8 @@ parse_string <- function(resp, query = NULL) {
     results = PS(resp)$results,
     count = PS(resp)$count,
     found_rows = PS(resp)$found_rows,
+    total_rows = PS(resp)$total_rows,
+    names = rlang::names2(PS(resp)),
     PS(resp, qry = query)
   )
 }

@@ -13,6 +13,15 @@ uuid <- function(end) {
   )
 }
 
+request_ <- function(url, query) {
+  httr2::request(url) |>
+    httr2::req_error(body = function(resp) {
+      httr2::resp_body_json(resp)$message
+    }) |>
+    httr2::req_perform() |>
+    parse_string(query = query)
+}
+
 new_url <- function(
   base = character(),
   opts = list(),
@@ -49,3 +58,30 @@ cms_url <- function(end, action = c("count", "results"), args = NULL) {
 }
 
 cms_url(.c(providers), args = list(provider = contains("sdgkjhskg")))
+
+new_url <- function(end) {
+  base <- paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    uuid(end),
+    "/data"
+  )
+  mark <- "?"
+  query <- \(x) query(endpoint = end, args = x)
+
+  list(
+    count = function(args = NULL) {
+      paste0(base, "/stats?", args)
+    },
+    noquery = function() {
+      paste0(base, results, "size=10&offset=0")
+    },
+    results = function() {
+      paste0(base, results, "size=1500&offset=0")
+    }
+  )
+}
+
+x <- new_url("providers")
+x$count("provider=ADGD")
+x$count()
+x$noquery()

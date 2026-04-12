@@ -26,8 +26,6 @@ library(tibble)
 
 > <b>Tidy Healthcare Provider API Interface</b>
 
-<br>
-
 <!-- badges: start -->
 
 ![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/provider?style=flat-square&logo=R&label=Package&color=%23192a38)
@@ -41,8 +39,6 @@ library(tibble)
 <br>
 
 <!-- badges: end -->
-
-<br>
 
 You can install `provider` from [GitHub](https://github.com/) with:
 

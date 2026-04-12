@@ -1,7 +1,6 @@
 #' @noRd
 #' @autoglobal
 exec_prov <- function(END, COUNT, ARG, call) {
-  # NO INTERNET --> Abort
   check_online()
   check_bool(COUNT)
   check_modifiers(ARG, END, call = call)
@@ -65,7 +64,6 @@ exec_prov <- function(END, COUNT, ARG, call) {
 #' @noRd
 #' @autoglobal
 exec_cms <- function(END, COUNT, SET, ARG) {
-  # NO INTERNET --> Abort
   check_online()
   check_bool(COUNT)
   check_bool(SET)
@@ -142,7 +140,6 @@ exec_cms <- function(END, COUNT, SET, ARG) {
 #' @noRd
 #' @autoglobal
 exec_cms2 <- function(END, COUNT, ARG, .id) {
-  # NO INTERNET --> Abort
   check_online()
   check_bool(COUNT)
 
@@ -159,8 +156,9 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query(END)
 
-    res <- purrr::imap(BASE, \(x, i) polish(request_cms(x), NM)) |>
-      collapse::rowbind(idcol = .id, return = 4L)
+    res <- purrr::imap(BASE, \(x, i) request_cms(x)) |>
+      collapse::rowbind(idcol = .id, return = 4L) |>
+      polish(c(rlang::set_names(.id), NM))
 
     return(res)
   }
@@ -179,9 +177,10 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     cli_results2(N, END)
 
     res <- purrr::imap(BASE, \(x, nm) {
-      request_cms(x, LIMIT, query(END, ARG)) |> polish(NM)
+      request_cms(x, LIMIT, query(END, ARG))
     }) |>
-      collapse::rowbind(idcol = .id, return = 4L)
+      collapse::rowbind(idcol = .id, return = 4L) |>
+      polish(c(rlang::set_names(.id), NM))
 
     return(res)
   }
@@ -203,6 +202,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     )
   })
 
-  purrr::imap(URL, \(x, nm) parallel_request(x) |> polish(NM)) |>
-    collapse::rowbind(idcol = .id, return = 4L)
+  purrr::imap(URL, \(x, nm) parallel_request(x)) |>
+    collapse::rowbind(idcol = .id, return = 4L) |>
+    polish(c(rlang::set_names(.id), NM))
 }

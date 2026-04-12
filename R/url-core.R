@@ -1,4 +1,17 @@
 #' @noRd
+url2 <- function(n, limit, base, opts = opts(), args = NULL) {
+  create_offset(
+    n = n,
+    limit = LIMIT,
+    url = url_str(
+      base = base,
+      opts = opts,
+      args = args
+    )
+  )
+}
+
+#' @noRd
 create_offset <- function(n, limit, url) {
   purrr::map_chr(
     offset(n, limit, "seq"),
