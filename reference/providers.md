@@ -85,7 +85,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ✔ providers returned 2,957,262 results.
+#> ℹ providers has 2,957,262 total rows.
 providers(enid = "I20040309000221")
 #> ✔ providers returned 1 result.
 #> # A data frame: 1 × 11

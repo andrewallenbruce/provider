@@ -230,9 +230,9 @@ A `<subgroups>` object
 
 ``` r
 hospitals(count = TRUE)
-#> ✔ hospitals returned 9,187 results.
+#> ℹ hospitals has 9,187 total rows.
 hospitals2(count = TRUE)
-#> ✔ hospitals2 returned 5,426 results.
+#> ℹ hospitals2 has 5,426 total rows.
 
 hospitals(state = "GA", prov_type = "reh")
 #> ✔ hospitals returned 1 result.

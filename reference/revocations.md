@@ -88,7 +88,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> ✔ revocations returned 7,465 results.
+#> ℹ revocations has 7,465 total rows.
 revocations(state = "GA")
 #> ✔ revocations returned 213 results.
 #> # A data frame: 213 × 12

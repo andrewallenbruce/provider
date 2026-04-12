@@ -127,7 +127,7 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ✔ clinicians returned 2,857,460 results.
+#> ℹ clinicians has 2,857,460 total rows.
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
 #> # A data frame: 1 × 25
@@ -157,26 +157,8 @@ clinicians(first = "ETAN")
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
-clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
+clinicians(count = TRUE, city = starts_with("Atl"), state = "GA", year = 2025)
 #> ✔ clinicians returned 389 results.
-clinicians(city = "Atlanta", state = "GA", year = 2025)
+clinicians(count = TRUE, city = "Atlanta", state = "GA", year = 2025)
 #> ✔ clinicians returned 389 results.
-#> # A data frame: 389 × 25
-#>    first     middle  last  suffix gender cred  school year  specialty spec_other
-#>  * <chr>     <chr>   <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
-#>  1 HAYDEN    NA      SMITH NA     M      NA    OTHER  2025  PHYSICAL… NA        
-#>  2 BRITTANY  MARIE   STEN… NA     F      NA    MERCE… 2025  PHYSICIA… NA        
-#>  3 ALANA     MARIE   JOHN… NA     F      NA    OTHER  2025  ANESTHES… NA        
-#>  4 MORGAN    LEIGH   GRAV… NA     F      CNA   OTHER  2025  CERTIFIE… NA        
-#>  5 ISABELLA  A       NAVA… NA     F      NA    OTHER  2025  ANESTHES… NA        
-#>  6 RYAN      DON     COWA… NA     M      NA    OTHER  2025  ANESTHES… NA        
-#>  7 MACKENSIE NA      HOGAN NA     F      NA    OTHER  2025  ANESTHES… NA        
-#>  8 TEKIAH    S       MCCL… NA     F      NA    OTHER  2025  ANESTHES… NA        
-#>  9 ALAN      ALBERTO ALVA… NA     M      NA    OTHER  2025  ANESTHES… NA        
-#> 10 BLAKE     THOMAS  BJOR… NA     M      NA    OTHER  2025  ANESTHES… NA        
-#> # ℹ 379 more rows
-#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
-#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
-#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
-#> #   tlh <chr>
 ```
