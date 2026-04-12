@@ -16,16 +16,21 @@
 #' @param dba_name `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
 #' @param multi `<lgl>` Does hospital have more than one NPI?
-#' @param org_status `<enum>` Organization status
+#' @param status `<enum>` Organization status
 #'    - `P` = Proprietary
 #'    - `N` = Non-Profit
 #'    - `D` = Unknown
 #' @param org_type `<enum>` Organization structure type
-#' @param provider_type `<enum>` Provider type;
-#'    - `hospital` = Part A Hospital
+#'    - `corp` = Corporation
+#'    - `other` = Other
+#'    - `llc` = LLC
+#'    - `partner` = Partnership
+#'    - `sole` = Sole Proprietor
+#' @param prov_type `<enum>` Provider type;
+#'    - `hosp` = Part A Hospital
 #'    - `reh` = Rural Emergency Hospital
 #'    - `cah` = Critical Access Hospital
-#' @param location_type `<enum>` Practice location type
+#' @param loc_type `<enum>` Practice location type
 #'    - `main` = Main/Primary Hospital Location
 #'    - `psych` = Hospital Psychiatric Unit
 #'    - `rehab` = Hospital Rehabilitation Unit
@@ -37,7 +42,9 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
-#' hospitals(state = "GA", provider_type = "reh")
+#' hospitals2(count = TRUE)
+#'
+#' hospitals(state = "GA", prov_type = "reh")
 #'
 #' x <- hospitals(
 #'   city = "Atlanta",
@@ -65,18 +72,20 @@ hospitals <- function(
   state = NULL,
   zip = NULL,
   multi = NULL,
-  org_status = NULL,
+  status = NULL,
   org_type = NULL,
-  provider_type = NULL,
-  location_type = NULL,
+  prov_type = NULL,
+  loc_type = NULL,
   subgroup = subgroups(),
   count = FALSE,
   set = FALSE
 ) {
   check_subgroups(subgroup)
   check_bool(multi, allow_null = TRUE)
-  check_character(provider_type, allow_null = TRUE)
-  check_character(org_status, allow_null = TRUE)
+  check_character(status, allow_null = TRUE)
+  check_character(org_type, allow_null = TRUE)
+  check_character(loc_type, allow_null = TRUE)
+  check_character(prov_type, allow_null = TRUE)
 
   exec_cms(
     END = call_name(call_match()),
@@ -94,16 +103,16 @@ hospitals <- function(
       STATE = state,
       `ZIP CODE` = zip,
       `MULTIPLE NPI FLAG` = bool_(multi),
-      PROPRIETARY_NONPROFIT = org_status,
+      PROPRIETARY_NONPROFIT = status,
       `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
-      `PROVIDER TYPE CODE` = enum_(provider_type),
-      `PRACTICE LOCATION TYPE` = enum_(location_type),
+      `PROVIDER TYPE CODE` = enum_(prov_type),
+      `PRACTICE LOCATION TYPE` = enum_(loc_type),
       !!!subgroup
     )
   )
 }
 
-#' @param acute `<lgl>` Acute Care
+#' @param acute `<lgl>` Acute/Short Term Care Hospital
 #' @param drug `<lgl>` Alcohol/Drug Treatment
 #' @param child `<lgl>` Children's Hospital
 #' @param general `<lgl>` General Hospital

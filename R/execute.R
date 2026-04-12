@@ -169,7 +169,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   N <- purrr::imap_vec(BASE, \(x, n) request_rows(x, query(END, ARG)))
 
   # NO RESULTS or COUNT --> Return Invisibly
-  if (collapse::fsum(N) == 0L || COUNT) {
+  if (sum2(N) == 0L || COUNT) {
     cli_results2(N, END)
     return(invisible(N))
   }

@@ -85,6 +85,11 @@ set_args <- function(fn) {
 }
 
 #' @noRd
+sum2 <- function(x, ...) {
+  collapse::fsum(x, na.rm = TRUE, ...)
+}
+
+#' @noRd
 any2 <- function(x) {
   collapse::anyv(x, TRUE)
 }

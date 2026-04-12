@@ -23,10 +23,10 @@ hospitals(
   state = NULL,
   zip = NULL,
   multi = NULL,
-  org_status = NULL,
+  status = NULL,
   org_type = NULL,
-  provider_type = NULL,
-  location_type = NULL,
+  prov_type = NULL,
+  loc_type = NULL,
   subgroup = subgroups(),
   count = FALSE,
   set = FALSE
@@ -77,23 +77,30 @@ hospitals2(
 
 \item{multi}{\verb{<lgl>} Does hospital have more than one NPI?}
 
-\item{org_status}{\verb{<enum>} Organization status
+\item{status}{\verb{<enum>} Organization status
 \itemize{
 \item \code{P} = Proprietary
 \item \code{N} = Non-Profit
 \item \code{D} = Unknown
 }}
 
-\item{org_type}{\verb{<enum>} Organization structure type}
-
-\item{provider_type}{\verb{<enum>} Provider type;
+\item{org_type}{\verb{<enum>} Organization structure type
 \itemize{
-\item \code{hospital} = Part A Hospital
+\item \code{corp} = Corporation
+\item \code{other} = Other
+\item \code{llc} = LLC
+\item \code{partner} = Partnership
+\item \code{sole} = Sole Proprietor
+}}
+
+\item{prov_type}{\verb{<enum>} Provider type;
+\itemize{
+\item \code{hosp} = Part A Hospital
 \item \code{reh} = Rural Emergency Hospital
 \item \code{cah} = Critical Access Hospital
 }}
 
-\item{location_type}{\verb{<enum>} Practice location type
+\item{loc_type}{\verb{<enum>} Practice location type
 \itemize{
 \item \code{main} = Main/Primary Hospital Location
 \item \code{psych} = Hospital Psychiatric Unit
@@ -108,7 +115,7 @@ hospitals2(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 
-\item{acute}{\verb{<lgl>} Acute Care}
+\item{acute}{\verb{<lgl>} Acute/Short Term Care Hospital}
 
 \item{drug}{\verb{<lgl>} Alcohol/Drug Treatment}
 
@@ -153,7 +160,9 @@ type and address.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
-hospitals(state = "GA", provider_type = "reh")
+hospitals2(count = TRUE)
+
+hospitals(state = "GA", prov_type = "reh")
 
 x <- hospitals(
   city = "Atlanta",

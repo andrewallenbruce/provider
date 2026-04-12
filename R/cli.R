@@ -2,17 +2,19 @@
 cli_red <- cli::combine_ansi_styles("red", "bold")
 
 #' @noRd
+left <- function(x, ...) {
+  format(x, justify = "left", ...)
+}
+
+#' @noRd
 cli_no_query <- function(endpoint) {
-  cli::cli_alert_warning(c(
-    "{.emph No Query} to {.strong {endpoint}}",
-    cli::symbol$arrow_right,
-    " Returning first {.strong 10} rows."
-  ))
+  # endpoint <- cli::cat_rule(left = cli_red(endpoint), width = 10)
+  cli::cli_alert_warning(" {.strong {endpoint}} {cli::symbol$cross} {.emph No Query}")
+  cli::cli_alert_info("Returning first {.strong 10} rows...")
 }
 
 #' @noRd
 cli_results <- function(x, endpoint) {
-  # cli::cat_rule(left = cli::style_bold(endpoint), width = 10)
   msg <- c(
     "{.strong {endpoint}} returned ",
     "{.strong {mark(x)}} ",
@@ -28,13 +30,13 @@ cli_results <- function(x, endpoint) {
 
 #' @noRd
 cli_results2 <- function(x, endpoint) {
-  cli_results(x = collapse::fsum(x), endpoint)
+  cli_results(x = sum2(x), endpoint)
 
   cli::cat_bullet(
     paste0(
-      cli::col_yellow(format(names(x), justify = "left")),
+      cli::col_yellow(left(names(x))),
       cli::col_silver(" : "),
-      format(mark(unname(x)), justify = "left")
+      left(mark(unname(x)))
     ),
     bullet_col = "silver"
   )
@@ -50,6 +52,6 @@ cli_pages <- function(x, limit, endpoint) {
 #' @noRd
 cli_pages2 <- function(x, limit, endpoint) {
   cli_results2(x, endpoint)
-  PAGE <- collapse::fsum(cheapr::seq_size(0L, unlist_(x), limit))
+  PAGE <- sum2(cheapr::seq_size(0L, unlist_(x), limit))
   cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
 }

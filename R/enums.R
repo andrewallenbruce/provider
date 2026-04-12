@@ -55,17 +55,17 @@ enumerations <- function(arg) {
       registration = 9
     ),
     # <hospitals>
-    provider_type = list(
-      hospital = "00-09",
+    prov_type = list(
+      hosp = "00-09",
       reh = "00-24",
       cah = "00-85"
     ),
     # <hospitals>
-    location_type = list(
+    loc_type = list(
       other = "OTHER HOSPITAL PRACTICE LOCATION",
       main = "MAIN/PRIMARY HOSPITAL LOCATION",
-      psych_unit = "HOSPITAL PSYCHIATRIC UNIT",
-      rehab_unit = "HOSPITAL REHABILITATION UNIT",
+      psych = "HOSPITAL PSYCHIATRIC UNIT",
+      rehab = "HOSPITAL REHABILITATION UNIT",
       ext = "OPT EXTENSION SITE"
     ),
     # <hospitals>
