@@ -200,7 +200,6 @@ hospitals2 <- function(
       countyparish = county,
       hospital_type = hosp_type,
       hospital_ownership = ownership
-    ),
-    call = caller_env()
+    )
   )
 }

@@ -1,9 +1,9 @@
 #' @noRd
 #' @autoglobal
-exec_prov <- function(END, COUNT, ARG, call) {
+exec_prov <- function(END, COUNT, ARG) {
   check_online()
   check_bool(COUNT)
-  check_modifiers(ARG, END, call = call)
+  check_modifiers(ARG, END)
 
   .c(BASE, LIMIT, NM) %=% constants(END)
 
@@ -12,7 +12,7 @@ exec_prov <- function(END, COUNT, ARG, call) {
     if (COUNT) {
       N <- request_count(BASE)
 
-      cli_results(N, END)
+      cli_total(N, END)
 
       return(invisible(N))
     }
@@ -74,7 +74,7 @@ exec_cms <- function(END, COUNT, SET, ARG) {
   if (!length(ARG)) {
     if (COUNT) {
       N <- request_rows(BASE)
-      cli_results(N, END)
+      cli_total(N, END)
       return(invisible(N))
     }
 
@@ -149,7 +149,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   if (!length(ARG)) {
     if (COUNT) {
       N <- purrr::map_int(BASE, \(x, nm) request_rows(x))
-      cli_results2(N, END)
+      cli_total2(N, END)
       return(invisible(N))
     }
 

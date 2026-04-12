@@ -84,8 +84,8 @@ A Clinician or Group must have:
 clinicians(count = TRUE)
 clinicians(enid = "I20081002000549")
 clinicians(first = "ETAN")
-clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-clinicians(city = "Atlanta", state = "GA", year = 2025)
+clinicians(count = TRUE, city = starts_with("Atl"), state = "GA", year = 2025)
+clinicians(count = TRUE, city = "Atlanta", state = "GA", year = 2025)
 \dontshow{\}) # examplesIf}
 }
 \references{

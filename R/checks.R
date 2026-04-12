@@ -35,10 +35,13 @@ check_subgroups <- function(x) {
 }
 
 #' @noRd
-check_modifiers <- function(x, end, call = call) {
+check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
     if (any2(unlist_(x) %in_% c("ENDS WITH", "NOT+IN"))) {
-      cli::cli_abort("{.fn ends_with} & {.fn excludes} cannot be used in {.fn {end}}.", call = call)
+      cli::cli_abort(
+        "{.fn ends_with} & {.fn excludes} cannot be used in {.fn {end}}.",
+        call = call2(end)
+      )
     }
   }
 }

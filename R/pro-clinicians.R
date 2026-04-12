@@ -42,8 +42,8 @@
 #' clinicians(count = TRUE)
 #' clinicians(enid = "I20081002000549")
 #' clinicians(first = "ETAN")
-#' clinicians(city = starts_with("Atl"), state = "GA", year = 2025, count = TRUE)
-#' clinicians(city = "Atlanta", state = "GA", year = 2025)
+#' clinicians(count = TRUE, city = starts_with("Atl"), state = "GA", year = 2025)
+#' clinicians(count = TRUE, city = "Atlanta", state = "GA", year = 2025)
 #' @autoglobal
 #' @export
 clinicians <- function(
@@ -87,7 +87,6 @@ clinicians <- function(
       citytown = city,
       state = state,
       zip_code = zip
-    ),
-    call = caller_env()
+    )
   )
 }

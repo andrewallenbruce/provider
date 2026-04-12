@@ -60,7 +60,6 @@ affiliations <- function(
       facility_type = enum_(facility_type),
       facility_affiliations_certification_number = facility_ccn,
       facility_type_certification_number = parent_ccn
-    ),
-    call = caller_env()
+    )
   )
 }

@@ -9,8 +9,34 @@ left <- function(x, ...) {
 #' @noRd
 cli_no_query <- function(endpoint) {
   # endpoint <- cli::cat_rule(left = cli_red(endpoint), width = 10)
-  cli::cli_alert_warning(" {.strong {endpoint}} {cli::symbol$cross} {.emph No Query}")
+  cli::cli_alert_warning(
+    " {.strong {endpoint}} {cli::symbol$cross} {.emph No Query}"
+  )
   cli::cli_alert_info("Returning first {.strong 10} rows...")
+}
+
+#' @noRd
+cli_total <- function(x, endpoint) {
+  msg <- c(
+    "{.strong {endpoint}} has ",
+    "{.strong {mark(x)}} total ",
+    "{cli::qty(x)}row{?s}."
+  )
+  cli::cli_alert_info(msg)
+}
+
+#' @noRd
+cli_total2 <- function(x, endpoint) {
+  cli_total(x = sum2(x), endpoint)
+
+  cli::cat_bullet(
+    paste0(
+      cli::col_yellow(left(names(x))),
+      cli::col_silver(" : "),
+      left(mark(unname(x)))
+    ),
+    bullet_col = "silver"
+  )
 }
 
 #' @noRd
