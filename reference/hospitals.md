@@ -19,10 +19,10 @@ hospitals(
   state = NULL,
   zip = NULL,
   multi = NULL,
-  org_status = NULL,
+  status = NULL,
   org_type = NULL,
-  provider_type = NULL,
-  location_type = NULL,
+  prov_type = NULL,
+  loc_type = NULL,
   subgroup = subgroups(),
   count = FALSE,
   set = FALSE
@@ -96,7 +96,7 @@ hospitals2(
 
   `<lgl>` Does hospital have more than one NPI?
 
-- org_status:
+- status:
 
   `<enum>` Organization status
 
@@ -110,17 +110,27 @@ hospitals2(
 
   `<enum>` Organization structure type
 
-- provider_type:
+  - `corp` = Corporation
+
+  - `other` = Other
+
+  - `llc` = LLC
+
+  - `partner` = Partnership
+
+  - `sole` = Sole Proprietor
+
+- prov_type:
 
   `<enum>` Provider type;
 
-  - `hospital` = Part A Hospital
+  - `hosp` = Part A Hospital
 
   - `reh` = Rural Emergency Hospital
 
   - `cah` = Critical Access Hospital
 
-- location_type:
+- loc_type:
 
   `<enum>` Practice location type
 
@@ -148,7 +158,7 @@ hospitals2(
 
 - acute:
 
-  `<lgl>` Acute Care
+  `<lgl>` Acute/Short Term Care Hospital
 
 - drug:
 
@@ -221,7 +231,10 @@ A `<subgroups>` object
 ``` r
 hospitals(count = TRUE)
 #> ✔ hospitals returned 9,187 results.
-hospitals(state = "GA", provider_type = "reh")
+hospitals2(count = TRUE)
+#> ✔ hospitals2 returned 5,426 results.
+
+hospitals(state = "GA", prov_type = "reh")
 #> ✔ hospitals returned 1 result.
 #> # A data frame: 1 × 39
 #>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
@@ -264,7 +277,8 @@ hospitals2(ccn = x$ccn)
 #> 2 114032 SO CRESC… 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Governme… Not A…
 
 x <- hospitals2()
-#> ! No Query to hospitals2→ Returning first 10 rows.
+#> !  hospitals2 ✖ No Query
+#> ℹ Returning first 10 rows...
 x
 #> # A data frame: 10 × 11
 #>    ccn    org_name address city  state zip   county phone type  ownership rating

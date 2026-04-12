@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9066</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9067</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,10 +72,10 @@ type and address.</p>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  org_status <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  provider_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  location_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  loc_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subgroup <span class="op">=</span> <span class="fu">subgroups</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -151,7 +151,7 @@ type and address.</p>
 <dd><p><code>&lt;lgl&gt;</code> Does hospital have more than one NPI?</p></dd>
 
 
-<dt id="arg-org-status">org_status<a class="anchor" aria-label="anchor" href="#arg-org-status"></a></dt>
+<dt id="arg-status">status<a class="anchor" aria-label="anchor" href="#arg-status"></a></dt>
 <dd><p><code>&lt;enum&gt;</code> Organization status</p><ul><li><p><code>P</code> = Proprietary</p></li>
 <li><p><code>N</code> = Non-Profit</p></li>
 <li><p><code>D</code> = Unknown</p></li>
@@ -159,17 +159,22 @@ type and address.</p>
 
 
 <dt id="arg-org-type">org_type<a class="anchor" aria-label="anchor" href="#arg-org-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Organization structure type</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Organization structure type</p><ul><li><p><code>corp</code> = Corporation</p></li>
+<li><p><code>other</code> = Other</p></li>
+<li><p><code>llc</code> = LLC</p></li>
+<li><p><code>partner</code> = Partnership</p></li>
+<li><p><code>sole</code> = Sole Proprietor</p></li>
+</ul></dd>
 
 
-<dt id="arg-provider-type">provider_type<a class="anchor" aria-label="anchor" href="#arg-provider-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Provider type;</p><ul><li><p><code>hospital</code> = Part A Hospital</p></li>
+<dt id="arg-prov-type">prov_type<a class="anchor" aria-label="anchor" href="#arg-prov-type"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Provider type;</p><ul><li><p><code>hosp</code> = Part A Hospital</p></li>
 <li><p><code>reh</code> = Rural Emergency Hospital</p></li>
 <li><p><code>cah</code> = Critical Access Hospital</p></li>
 </ul></dd>
 
 
-<dt id="arg-location-type">location_type<a class="anchor" aria-label="anchor" href="#arg-location-type"></a></dt>
+<dt id="arg-loc-type">loc_type<a class="anchor" aria-label="anchor" href="#arg-loc-type"></a></dt>
 <dd><p><code>&lt;enum&gt;</code> Practice location type</p><ul><li><p><code>main</code> = Main/Primary Hospital Location</p></li>
 <li><p><code>psych</code> = Hospital Psychiatric Unit</p></li>
 <li><p><code>rehab</code> = Hospital Rehabilitation Unit</p></li>
@@ -191,7 +196,7 @@ type and address.</p>
 
 
 <dt id="arg-acute">acute<a class="anchor" aria-label="anchor" href="#arg-acute"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Acute Care</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Acute/Short Term Care Hospital</p></dd>
 
 
 <dt id="arg-drug">drug<a class="anchor" aria-label="anchor" href="#arg-drug"></a></dt>
@@ -264,7 +269,10 @@ type and address.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">9,187</span> results.</span>
-<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, provider_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">5,426</span> results.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, prov_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 1 × 39</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2</span>
@@ -307,7 +315,8 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 114032 SO CRESC… 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Governme… Not A…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals2</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> to <span style="font-weight: bold;">hospitals2</span>→ Returning first <span style="font-weight: bold;">10</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span>  <span style="font-weight: bold;">hospitals2</span> ✖ <span style="font-style: italic;">No Query</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 10 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    org_name address city  state zip   county phone type  ownership rating</span>
