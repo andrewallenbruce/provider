@@ -2,10 +2,6 @@
 
 > **Tidy Healthcare Provider API Interface**
 
-  
-
-  
-
 You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
@@ -22,25 +18,29 @@ library(provider)
 ``` r
 # Provider/Facility Affiliations
 affiliations(facility_ccn = 370781)
-✔ `affiliations` returned 15 results.
-# A tibble: 15 × 9
+✔ affiliations returned 19 results.
+# A data frame: 19 × 9
    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
-   <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
+ * <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
  1 NICOLE  LEE   <NA>   <NA>   1003… 1254… Hospital      370781       <NA>      
  2 LEILA   SEE   DANIE… <NA>   1013… 6800… Hospital      370781       <NA>      
  3 AARON   SIZE… S      <NA>   1053… 7618… Hospital      370781       <NA>      
  4 KEITH   KASS… J      <NA>   1083… 6406… Hospital      370781       <NA>      
- 5 STEVE   MADR… M      <NA>   1245… 4082… Hospital      370781       <NA>      
- 6 CHESTER BEAM  WRAY   <NA>   1316… 2769… Hospital      370781       <NA>      
- 7 COREY   FINCH D      <NA>   1407… 3870… Hospital      370781       <NA>      
- 8 THOMAS  MCGA… <NA>   <NA>   1427… 7517… Hospital      370781       <NA>      
- 9 NICHOL… RUSS… <NA>   <NA>   1487… 8426… Hospital      370781       <NA>      
-10 DWAYNE  SCHM… A      <NA>   1568… 3870… Hospital      370781       <NA>      
-11 JANA    MORR… NIKOLE <NA>   1629… 6103… Hospital      370781       <NA>      
-12 TIMOTHY GRAH… AARON  <NA>   1710… 9739… Hospital      370781       <NA>      
-13 RICHARD COST… F      JR.    1710… 2163… Hospital      370781       <NA>      
-14 VEDMIA  FONK… <NA>   <NA>   1801… 9436… Hospital      370781       <NA>      
-15 JESS    ARMOR F      <NA>   1922… 9032… Hospital      370781       <NA>      
+ 5 BRENDA  HUEN… K      <NA>   1225… 2466… Hospital      370781       <NA>      
+ 6 STEVE   MADR… M      <NA>   1245… 4082… Hospital      370781       <NA>      
+ 7 CHESTER BEAM  WRAY   <NA>   1316… 2769… Hospital      370781       <NA>      
+ 8 COREY   FINCH D      <NA>   1407… 3870… Hospital      370781       <NA>      
+ 9 THOMAS  MCGA… <NA>   <NA>   1427… 7517… Hospital      370781       <NA>      
+10 NICHOL… RUSS… <NA>   <NA>   1487… 8426… Hospital      370781       <NA>      
+11 DWAYNE  SCHM… A      <NA>   1568… 3870… Hospital      370781       <NA>      
+12 JANA    MORR… NIKOLE <NA>   1629… 6103… Hospital      370781       <NA>      
+13 TIMOTHY GRAH… AARON  <NA>   1710… 9739… Hospital      370781       <NA>      
+14 RICHARD COST… F      JR.    1710… 2163… Hospital      370781       <NA>      
+15 AMBER   PENA  M      <NA>   1720… 6507… Hospital      370781       <NA>      
+16 TODD    REGI… S      <NA>   1780… 2668… Hospital      370781       <NA>      
+17 CHRIST… KOOP… L      <NA>   1780… 1052… Hospital      370781       <NA>      
+18 VEDMIA  FONK… <NA>   <NA>   1801… 9436… Hospital      370781       <NA>      
+19 JESS    ARMOR F      <NA>   1922… 9032… Hospital      370781       <NA>      
 ```
 
 ``` r
@@ -49,11 +49,11 @@ reassignments(
   first = starts_with("J"), 
   state = "GA", 
   specialty = contains("Gastro"))
-✔ `reassignments` returned 86 results.
-# A tibble: 86 × 14
+✔ reassignments returned 86 results.
+# A data frame: 86 × 14
    first   last  state specialty ind_assoc npi   pac   enid  org_name org_assign
-   <chr>   <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
- 1 Jai Eun Min   GA    Gastroen… 2         1508… 2961… I201… Aga Cli… 34        
+ * <chr>   <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>    <chr>     
+ 1 Jai Eun Min   GA    Gastroen… 2         1508… 2961… I201… Aga Cli… 36        
  2 James   Barl… GA    Gastroen… 2         1568… 2668… I201… Aga Pro… 160       
  3 Joel    Cami… GA    Gastroen… 3         1144… 1456… I201… Aga Pro… 160       
  4 James   Camp… GA    Gastroen… 2         1053… 1658… I202… Aga Pro… 160       
@@ -73,10 +73,10 @@ reassignments(
 revocations(
   specialty = contains("CARDIO"), 
   state = not("TX"))
-✔ `revocations` returned 46 results.
-# A tibble: 46 × 12
+✔ revocations returned 46 results.
+# A data frame: 46 × 12
    org_name first    middle last       enid   npi   multi state specialty reason
-   <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
+ * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
  1 <NA>     RONALD   A      CARLISH    I2003… 1639… N     CA    PRACTITI… 424.5…
  2 <NA>     STEVE    E      NOZAD      I2003… 1962… N     NY    PRACTITI… 424.5…
  3 <NA>     RAED     A      JITAN      I2004… 1033… N     WV    PRACTITI… 424.5…
@@ -98,21 +98,21 @@ clinicians(
   state = "GA", 
   gender = "F",
   year = 2025)
-✔ `clinicians` returned 293 results.
-# A tibble: 293 × 25
-   first      middle last  suffix gender cred  school year  specialty spec_other
-   <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
- 1 THAO       <NA>   HOANG <NA>   F      PA    OTHER  2025  PHYSICIA… <NA>      
- 2 MADISON    <NA>   THUR… <NA>   F      OD    ILLIN… 2025  OPHTHALM… <NA>      
- 3 MADISON    <NA>   THUR… <NA>   F      OD    ILLIN… 2025  OPHTHALM… <NA>      
- 4 KERRINGTON <NA>   PUGH  <NA>   F      <NA>  OTHER  2025  PHYSICIA… <NA>      
- 5 MARA       S.     DETR… <NA>   F      <NA>  MERCE… 2025  PHYSICIA… <NA>      
- 6 KRYSTAL    GAIL   DENN… <NA>   F      NP    OTHER  2025  NURSE PR… <NA>      
- 7 LAUREN     <NA>   FOX   <NA>   F      NP    OTHER  2025  NURSE PR… <NA>      
- 8 KAITLYN    <NA>   OZCE… <NA>   F      PT    OTHER  2025  PHYSICAL… <NA>      
- 9 KAYLA      JEAN   KLEIN <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
-10 SHYKIRA    <NA>   THOM… <NA>   F      PA    OTHER  2025  PHYSICIA… <NA>      
-# ℹ 283 more rows
+✔ clinicians returned 333 results.
+# A data frame: 333 × 25
+   first     middle last   suffix gender cred  school year  specialty spec_other
+ * <chr>     <chr>  <chr>  <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
+ 1 BRITTANY  MARIE  STENTO <NA>   F      <NA>  MERCE… 2025  PHYSICIA… <NA>      
+ 2 ALANA     MARIE  JOHNS… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+ 3 MORGAN    LEIGH  GRAVES <NA>   F      CNA   OTHER  2025  CERTIFIE… <NA>      
+ 4 ISABELLA  A      NAVAR… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+ 5 MACKENSIE <NA>   HOGAN  <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+ 6 TEKIAH    S      MCCLA… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+ 7 GABRIELLA <NA>   CAO    <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+ 8 GRACE     <NA>   YIM    <NA>   F      CNA   OTHER  2025  CERTIFIE… <NA>      
+ 9 BRENDA    N      NGUYEN <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+10 KAMRYN    R      POSS   <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
+# ℹ 323 more rows
 # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
@@ -124,10 +124,10 @@ clinicians(
 opt_out(
   specialty = "Psychiatry", 
   order_refer = FALSE)
-✔ `opt_out` returned 790 results.
-# A tibble: 790 × 13
+✔ opt_out returned 798 results.
+# A data frame: 798 × 13
    npi       first last  specialty start_date end_date updated add_1 add_2 city 
-   <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
+ * <chr>     <chr> <chr> <chr>     <chr>      <chr>    <chr>   <chr> <chr> <chr>
  1 17204445… Jona… Rain… Psychiat… 1/30/1998  1/30/20… 2/16/2… 1629… P O … GLAD…
  2 15988021… Mart… Leat… Psychiat… 4/1/2012   4/1/2026 10/15/… 1314… #5101 SAN …
  3 19726233… Nancy Shos… Psychiat… 3/2/2012   3/2/2026 10/15/… 1288… <NA>  DALL…
@@ -138,7 +138,7 @@ opt_out(
  8 18715013… Ingr… Schm… Psychiat… 9/2/2010   9/2/2026 10/15/… 5750… STE … AUST…
  9 14776142… Lore… Henry Psychiat… 5/26/2012  5/26/20… 10/15/… 1721… SUIT… COLL…
 10 19322840… Patr… Mcgr… Psychiat… 6/1/2012   6/1/2026 7/15/2… 100 … SUIT… NEW …
-# ℹ 780 more rows
+# ℹ 788 more rows
 # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
 
@@ -151,10 +151,10 @@ order_refer(
   hha = FALSE,
   pmd = TRUE,
   hospice = FALSE)
-✔ `order_refer` returned 4 results.
-# A tibble: 4 × 8
+✔ order_refer returned 4 results.
+# A data frame: 4 × 8
   first    last        npi        part_b dme   hha   pmd   hospice
-  <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
+* <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
 1 MEGAN    BAUMGARDNER 1023796711 Y      Y     N     Y     N      
 2 KRISTINA BERRY       1295461192 Y      Y     N     Y     N      
 3 BONNIE   BETTS       1306821129 Y      Y     N     Y     N      
@@ -166,16 +166,15 @@ order_refer(
 pending(
   first = starts_with("V"),
   last = starts_with("A"))
-✔ `pending` returned 4 results.
-• Physician     : 2
-• Non-Physician : 2
-# A tibble: 4 × 4
-  prov_type     first    last      npi       
-  <fct>         <chr>    <chr>     <chr>     
-1 Physician     VICTOR   ABADOM    1265939722
-2 Physician     VICTORIA ARREDONDO 1548150287
-3 Non-Physician VICTOR   ALLEN     1306481510
-4 Non-Physician VICTORIA ALTAMIRA  1366301384
+✔ pending returned 3 results.
+• Physician     : 0
+• Non-Physician : 3
+# A data frame: 3 × 4
+  prov_type     first     last    npi       
+* <fct>         <chr>     <chr>   <chr>     
+1 Non-Physician VER JASON ASTORGA 1073294369
+2 Non-Physician VICTOR    ALLEN   1306481510
+3 Non-Physician VICTORIA  AUFIERO 1598165698
 ```
 
 ``` r
@@ -184,10 +183,10 @@ providers(
   first = contains("C"),
   state = "AK",
   spec = ends_with("30"))
-✔ `providers` returned 33 results.
-# A tibble: 33 × 11
+✔ providers returned 33 results.
+# A data frame: 33 × 11
    org_name first     middle last  state spec  specialty npi   multi pac   enid 
-   <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
+ * <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
  1 <NA>     CHAKRI    <NA>   INAM… AK    14-30 PRACTITI… 1245… N     3476… I200…
  2 <NA>     CHRISTOP… <NA>   KOTT… AK    14-30 PRACTITI… 1396… N     2769… I200…
  3 <NA>     CLAIRE    <NA>   WAITE AK    14-30 PRACTITI… 1164… N     0042… I200…
@@ -209,54 +208,54 @@ hospitals(
   subgroup = subgroups(
     acute = FALSE,
     psych = TRUE))
-✔ `hospitals` returned 2 results.
-# A tibble: 2 × 39
+✔ hospitals returned 2 results.
+# A data frame: 2 × 39
   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
-  <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+* <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 1 UHS OF ANCHO… ANCHOR… O201… GA         00-09 PART A P… 1023… Y     1140… <NA> 
 2 UHS OF PEACH… PEACHF… O201… GA         00-09 PART A P… 1093… N     1140… <NA> 
-# ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>, str <chr>,
-#   str_otxt <chr>, design <chr>, add_1 <chr>, add_2 <chr>, city <chr>,
-#   state <chr>, zip <chr>, loc <chr>, loc_otxt <chr>, reh_ind <chr>,
-#   reh_date <chr>, sub_general <chr>, sub_acute <chr>, sub_drug <chr>,
-#   sub_child <chr>, sub_long <chr>, sub_psych <chr>, sub_rehab <chr>,
-#   sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
+# ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
+#   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
+#   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
+#   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
+#   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
+#   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
 ```
 
 ``` r
 # CLIA Laboratories
 clia(name = starts_with("CDC"))
-✔ `clia` returned 23 results.
-# A tibble: 23 × 82
-   name_1  name_2 ccn   xref  chow_n chow_date chow_prv pos   status add_1 add_2
-   <chr>   <chr>  <chr> <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr> <chr>
- 1 CDC AC… <NA>   36D1… <NA>  0      <NA>      <NA>     N     B      7690… <NA> 
- 2 CDC AR… CENTE… 02D0… <NA>  0      <NA>      <NA>     N     A      4055… <NA> 
- 3 CDC HO… <NA>   36D1… <NA>  0      <NA>      <NA>     N     <NA>   807 … <NA> 
- 4 CDC HO… <NA>   36D2… <NA>  0      <NA>      <NA>     N     <NA>   8900… <NA> 
- 5 CDC MI… <NA>   36D2… <NA>  0      <NA>      <NA>     N     <NA>   6749… <NA> 
- 6 CDC OC… <NA>   06D2… <NA>  0      <NA>      <NA>     N     <NA>   3156… <NA> 
- 7 CDC OC… <NA>   06D2… <NA>  0      <NA>      <NA>     N     <NA>   3156… <NA> 
- 8 CDC OC… <NA>   11D2… <NA>  0      <NA>      <NA>     N     <NA>   1600… ROOM…
- 9 CDC OF… <NA>   09D0… <NA>  0      <NA>      <NA>     N     <NA>   3178… <NA> 
-10 CDC OF… <NA>   49D0… <NA>  0      <NA>      <NA>     N     <NA>   8003… <NA> 
+✔ clia returned 23 results.
+# A data frame: 23 × 82
+   name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1
+ * <chr>  <chr>  <chr> <chr>  <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr>
+ 1 CDC A… <NA>   36D1… <NA>   <NA>  0      <NA>      <NA>     N     B      7690…
+ 2 CDC A… CENTE… 02D0… <NA>   <NA>  0      <NA>      <NA>     N     A      4055…
+ 3 CDC H… <NA>   36D1… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   807 …
+ 4 CDC H… <NA>   36D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   8900…
+ 5 CDC M… <NA>   36D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   6749…
+ 6 CDC O… <NA>   06D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   3156…
+ 7 CDC O… <NA>   06D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   3156…
+ 8 CDC O… <NA>   11D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   1600…
+ 9 CDC O… <NA>   09D0… 092512 <NA>  0      <NA>      <NA>     N     <NA>   3178…
+10 CDC O… <NA>   49D0… 492535 <NA>  0      <NA>      <NA>     N     <NA>   8003…
 # ℹ 13 more rows
-# ℹ 71 more variables: phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#   zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, eligible <chr>,
-#   term_pgm <chr>, term_clia <chr>, apl_type <chr>, cert_type <chr>,
-#   fac_type <chr>, owner <chr>, cert_action <chr>, orig_date <chr>,
-#   apl_date <chr>, cert_date <chr>, eff_date <chr>, mail_date <chr>, …
+# ℹ 71 more variables: add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>,
+#   state <chr>, zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>,
+#   ssa_cty <chr>, fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>,
+#   eligible <chr>, term_pgm <chr>, term_clia <chr>, apl_type <chr>,
+#   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
+#   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>, …
 ```
 
 ``` r
 # Hospital Transparency Enforcement
 transparency(action = contains("CMP"))
-✔ `transparency` returned 26 results.
-# A tibble: 26 × 7
+✔ transparency returned 26 results.
+# A data frame: 26 × 7
    id    name                           address   city  state action action_date
-   <chr> <chr>                          <chr>     <chr> <chr> <chr>  <chr>      
+ * <chr> <chr>                          <chr>     <chr> <chr> <chr>  <chr>      
  1 25    Kell West Regional Hospital    5420 Kel… Wich… TX    CMP N… 2023-04-19 
  2 42    Northside Hospital Atlanta     1000 Joh… Atla… GA    CMP N… 2022-06-07 
  3 89    Community First Medical Center 5645 W A… Chic… IL    CMP N… 2023-07-24 

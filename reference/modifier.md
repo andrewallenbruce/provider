@@ -55,66 +55,76 @@ format.
 ## Examples
 
 ``` r
-params(
-   state = excludes(state.abb[1:5]),
-   title = ends_with("bar"),
-   name = starts_with("foo"),
-   n = less_than(1000),
-   avg = less_than(0.125, or_equal = TRUE),
-   rank = greater_than(1000),
-   score = greater_than(0.125, or_equal = TRUE),
-   interval = between(0.125, 2),
-   category = contains("baz"),
-   type = not("standard")
+list(
+   # !x %in% c("AL", "AK", "AZ")
+   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
+   # endsWith(x, "bar")
+   `ends_with("bar")` = ends_with("bar"),
+   # startsWith(x, "foo")
+   `starts_with("foo")` = starts_with("foo"),
+   # x < 1000
+   `less_than(1000)` = less_than(1000),
+   # x <= 1000
+   `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
+   # x > 1000
+   `greater_than(1000)` = greater_than(1000),
+   # x >= 1000
+   `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
+   # x > 0.125 & x < 2
+   `between(0.125, 2)` = between(0.125, 2),
+   # grepl("baz", x)
+   `contains("baz")` = contains("baz"),
+   # x != "zzz"
+   `not("zzz")` = not("zzz")
  )
-#> $state
+#> $`excludes(c("AL", "AK", "AZ"))`
 #> <Modifier>
 #> Operator: NOT+IN
-#> Values: AL, AK, AZ, AR, CA
+#> Values: AL, AK, AZ
 #> 
-#> $title
+#> $`ends_with("bar")`
 #> <Modifier>
 #> Operator: ENDS WITH
 #> Value: bar
 #> 
-#> $name
+#> $`starts_with("foo")`
 #> <Modifier>
 #> Operator: STARTS WITH
 #> Value: foo
 #> 
-#> $n
+#> $`less_than(1000)`
 #> <Modifier>
 #> Operator: <
 #> Value: 1000
 #> 
-#> $avg
+#> $`less_than(0.125, or_equal = TRUE)`
 #> <Modifier>
 #> Operator: <=
 #> Value: 0.125
 #> 
-#> $rank
+#> $`greater_than(1000)`
 #> <Modifier>
 #> Operator: >
 #> Value: 1000
 #> 
-#> $score
+#> $`greater_than(0.125, or_equal = TRUE)`
 #> <Modifier>
 #> Operator: >=
 #> Value: 0.125
 #> 
-#> $interval
+#> $`between(0.125, 2)`
 #> <Modifier>
 #> Operator: BETWEEN
 #> Values: 0.125, 2
 #> 
-#> $category
+#> $`contains("baz")`
 #> <Modifier>
 #> Operator: CONTAINS
 #> Value: baz
 #> 
-#> $type
+#> $`not("zzz")`
 #> <Modifier>
 #> Operator: <>
-#> Value: standard
+#> Value: zzz
 #> 
 ```

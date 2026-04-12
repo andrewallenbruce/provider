@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9068 (2026-04-12)
+
+- fixed bug in `exec_cms2()`
+- re-render readme
+
 ## provider 0.0.1.9067 (2026-04-11)
 
 - documentation, typos
