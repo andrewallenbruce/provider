@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9069 (2026-04-12)
+
+* differentiate between a "count" call and a "query + count" call
+
+
 # provider 0.0.1.9068 (2026-04-12)
 
 * fixed bug in `exec_cms2()`
