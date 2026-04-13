@@ -11,8 +11,8 @@ providers(
   first = NULL,
   middle = NULL,
   last = NULL,
-  spec = NULL,
-  specialty = NULL,
+  prov_type = NULL,
+  prov_desc = NULL,
   state = NULL,
   org_name = NULL,
   multi = NULL,
@@ -29,9 +29,9 @@ providers(
 
 \item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
-\item{spec}{\verb{<chr>} Enrollment specialty code}
+\item{prov_type}{\verb{<chr>} Enrollment specialty code}
 
-\item{specialty}{\verb{<chr>} Enrollment specialty description}
+\item{prov_desc}{\verb{<chr>} Enrollment specialty description}
 
 \item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
 

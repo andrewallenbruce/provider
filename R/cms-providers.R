@@ -12,8 +12,8 @@
 #' @param pac `<chr>` 10-digit PECOS Associate Control ID
 #' @param enid `<chr>` 15-digit Medicare Enrollment ID
 #' @param first,middle,last `<chr>` Individual provider's name
-#' @param spec `<chr>` Enrollment specialty code
-#' @param specialty `<chr>` Enrollment specialty description
+#' @param prov_type `<chr>` Enrollment specialty code
+#' @param prov_desc `<chr>` Enrollment specialty description
 #' @param state `<chr>` Enrollment state, full or abbreviation
 #' @param org_name `<chr>` Organization name
 #' @param multi `<lgl>` Provider has multiple NPIs
@@ -34,8 +34,8 @@ providers <- function(
   first = NULL,
   middle = NULL,
   last = NULL,
-  spec = NULL,
-  specialty = NULL,
+  prov_type = NULL,
+  prov_desc = NULL,
   state = NULL,
   org_name = NULL,
   multi = NULL,
@@ -53,8 +53,8 @@ providers <- function(
       MULTIPLE_NPI_FLAG = bool_(multi),
       PECOS_ASCT_CNTL_ID = pac,
       ENRLMT_ID = enid,
-      PROVIDER_TYPE_CD = spec,
-      PROVIDER_TYPE_DESC = specialty,
+      PROVIDER_TYPE_CD = prov_type,
+      PROVIDER_TYPE_DESC = prov_desc,
       STATE_CD = state,
       LAST_NAME = last,
       FIRST_NAME = first,

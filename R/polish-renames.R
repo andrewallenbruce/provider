@@ -21,7 +21,7 @@ column_renames <- function(endpoint) {
       gndr = "gender",
       cred = "cred",
       med_sch = "school",
-      grd_yr = "year",
+      grd_yr = "grad_year",
       pri_spec = "specialty",
       sec_spec_all = "spec_other",
       npi = "npi",
@@ -189,8 +189,8 @@ column_renames <- function(endpoint) {
       MDL_NAME = "middle",
       LAST_NAME = "last",
       STATE_CD = "state",
-      PROVIDER_TYPE_CD = "spec",
-      PROVIDER_TYPE_DESC = "specialty",
+      PROVIDER_TYPE_CD = "prov_type",
+      PROVIDER_TYPE_DESC = "prov_desc",
       NPI = "npi",
       MULTIPLE_NPI_FLAG = "multi",
       PECOS_ASCT_CNTL_ID = "pac",
@@ -246,7 +246,7 @@ column_renames <- function(endpoint) {
       NPI = "npi",
       MULTIPLE_NPI_FLAG = "multi",
       STATE_CD = "state",
-      PROVIDER_TYPE_DESC = "specialty",
+      PROVIDER_TYPE_DESC = "prov_desc",
       REVOCATION_RSN = "reason",
       REVOCATION_EFCTV_DT = "start_date",
       REENROLLMENT_BAR_EXPRTN_DT = "end_date"
@@ -260,10 +260,6 @@ column_renames <- function(endpoint) {
       Action = "action",
       Date_of_Action = "action_date"
     ),
-    utilization = c(),
-    quality = c(),
-    rhc = c(),
-    fqhc = c(),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
