@@ -44,7 +44,7 @@ affiliations(facility_ccn = 370781)
 ```
 
 ``` r
-# Provider/Organization Reassignment of Benefits
+# Reassignment of Benefits
 reassignments(
   first = starts_with("J"), 
   state = "GA", 
@@ -75,7 +75,7 @@ revocations(
   state = not("TX"))
 ✔ revocations returned 46 results.
 # A data frame: 46 × 12
-   org_name first    middle last       enid   npi   multi state specialty reason
+   org_name first    middle last       enid   npi   multi state prov_desc reason
  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
  1 <NA>     RONALD   A      CARLISH    I2003… 1639… N     CA    PRACTITI… 424.5…
  2 <NA>     STEVE    E      NOZAD      I2003… 1962… N     NY    PRACTITI… 424.5…
@@ -97,22 +97,13 @@ clinicians(
   city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  year = 2025)
-✔ clinicians returned 333 results.
-# A data frame: 333 × 25
-   first     middle last   suffix gender cred  school year  specialty spec_other
- * <chr>     <chr>  <chr>  <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>     
- 1 BRITTANY  MARIE  STENTO <NA>   F      <NA>  MERCE… 2025  PHYSICIA… <NA>      
- 2 ALANA     MARIE  JOHNS… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
- 3 MORGAN    LEIGH  GRAVES <NA>   F      CNA   OTHER  2025  CERTIFIE… <NA>      
- 4 ISABELLA  A      NAVAR… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
- 5 MACKENSIE <NA>   HOGAN  <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
- 6 TEKIAH    S      MCCLA… <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
- 7 GABRIELLA <NA>   CAO    <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
- 8 GRACE     <NA>   YIM    <NA>   F      CNA   OTHER  2025  CERTIFIE… <NA>      
- 9 BRENDA    N      NGUYEN <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
-10 KAMRYN    R      POSS   <NA>   F      <NA>  OTHER  2025  ANESTHES… <NA>      
-# ℹ 323 more rows
+  grad_year = 2026)
+✔ clinicians returned 2 results.
+# A data frame: 2 × 25
+  first   middle last  suffix gender cred  school grad_year specialty spec_other
+* <chr>   <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
+1 CHRIST… <NA>   AGYE… <NA>   F      <NA>  OTHER  2026      PHYSICIA… <NA>      
+2 CHRIST… <NA>   AGYE… <NA>   F      <NA>  OTHER  2026      PHYSICIA… <NA>      
 # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
@@ -145,63 +136,77 @@ opt_out(
 ``` r
 # Ordering & Referral Eligibility
 order_refer(
-  last = starts_with("B"),
   part_b = TRUE,
   dme = TRUE,
   hha = FALSE,
   pmd = TRUE,
   hospice = FALSE)
-✔ order_refer returned 4 results.
-# A data frame: 4 × 8
-  first    last        npi        part_b dme   hha   pmd   hospice
-* <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
-1 MEGAN    BAUMGARDNER 1023796711 Y      Y     N     Y     N      
-2 KRISTINA BERRY       1295461192 Y      Y     N     Y     N      
-3 BONNIE   BETTS       1306821129 Y      Y     N     Y     N      
-4 LAURA    BOBROWSKI   1013297019 Y      Y     N     Y     N      
+✔ order_refer returned 51 results.
+# A data frame: 51 × 8
+   first    last        npi        part_b dme   hha   pmd   hospice
+ * <chr>    <chr>       <chr>      <chr>  <chr> <chr> <chr> <chr>  
+ 1 ROBYN    AYER        1659094290 Y      Y     N     Y     N      
+ 2 MEGAN    BAUMGARDNER 1023796711 Y      Y     N     Y     N      
+ 3 KRISTINA BERRY       1295461192 Y      Y     N     Y     N      
+ 4 BONNIE   BETTS       1306821129 Y      Y     N     Y     N      
+ 5 LAURA    BOBROWSKI   1013297019 Y      Y     N     Y     N      
+ 6 LISA     CHRISTIAN   1235636697 Y      Y     N     Y     N      
+ 7 TRAVIS   DANIEL      1134813934 Y      Y     N     Y     N      
+ 8 LYNELL   DAWSON      1962852533 Y      Y     N     Y     N      
+ 9 BETH     DETRICH     1124364203 Y      Y     N     Y     N      
+10 BRIDGET  DIETZ       1720522592 Y      Y     N     Y     N      
+# ℹ 41 more rows
 ```
 
 ``` r
-# Pending Enrollment Applications
+# Pending Enrollments
 pending(
-  first = starts_with("V"),
+  first = ends_with("E"),
   last = starts_with("A"))
-✔ pending returned 3 results.
-• Physician     : 0
-• Non-Physician : 3
-# A data frame: 3 × 4
-  prov_type     first     last    npi       
-* <fct>         <chr>     <chr>   <chr>     
-1 Non-Physician VER JASON ASTORGA 1073294369
-2 Non-Physician VICTOR    ALLEN   1306481510
-3 Non-Physician VICTORIA  AUFIERO 1598165698
+✔ pending returned 54 results.
+• Physician     : 18
+• Non-Physician : 36
+# A data frame: 54 × 4
+   prov_type first     last        npi       
+ * <fct>     <chr>     <chr>       <chr>     
+ 1 Physician JOSE      ABREU-ELIAS 1821010513
+ 2 Physician GEORGE    ADAMS       1649409947
+ 3 Physician ABOJE     ADUGBA      1184416976
+ 4 Physician LUCIE     AHN         1558209502
+ 5 Physician OLUMIDE   AJAYI       1740029511
+ 6 Physician JUDE      ALCIDE      1578876108
+ 7 Physician EMILIE    ALLAERT     1922809870
+ 8 Physician KATHERINE ALLEN       1851823488
+ 9 Physician ILEANE    AMADOR      1568427268
+10 Physician JASMINE   AMBROSIO    1881584712
+# ℹ 44 more rows
 ```
 
 ``` r
-# Medicare Provider Enrollment
+# Medicare Enrollment
 providers(
   first = contains("C"),
   state = "AK",
-  spec = ends_with("30"))
-✔ providers returned 33 results.
-# A data frame: 33 × 11
-   org_name first     middle last  state spec  specialty npi   multi pac   enid 
- * <chr>    <chr>     <chr>  <chr> <chr> <chr> <chr>     <chr> <chr> <chr> <chr>
- 1 <NA>     CHAKRI    <NA>   INAM… AK    14-30 PRACTITI… 1245… N     3476… I200…
- 2 <NA>     CHRISTOP… <NA>   KOTT… AK    14-30 PRACTITI… 1396… N     2769… I200…
- 3 <NA>     CLAIRE    <NA>   WAITE AK    14-30 PRACTITI… 1164… N     0042… I200…
- 4 <NA>     SCOTT     <NA>   NASP… AK    14-30 PRACTITI… 1891… N     7618… I200…
- 5 <NA>     CHRISTOP… <NA>   REED  AK    14-30 PRACTITI… 1417… N     4486… I200…
- 6 <NA>     LAURENCE  <NA>   CAMB… AK    14-30 PRACTITI… 1417… N     6103… I200…
- 7 <NA>     SCOTT     D      HARR… AK    14-30 PRACTITI… 1558… N     9931… I200…
- 8 <NA>     MARC      RICHA… BECK  AK    14-30 PRACTITI… 1437… N     6305… I200…
- 9 <NA>     JANICE    <NA>   CHEN  AK    14-30 PRACTITI… 1841… N     2163… I201…
-10 <NA>     MICHAEL   T      SMITH AK    14-30 PRACTITI… 1356… N     6305… I201…
-# ℹ 23 more rows
+  prov_type = ends_with(50))
+✔ providers returned 172 results.
+# A data frame: 172 × 11
+   org_name first middle last  state prov_type prov_desc npi   multi pac   enid 
+ * <chr>    <chr> <chr>  <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>
+ 1 <NA>     CHRI… M      BABC… AK    14-50     PRACTITI… 1013… N     3072… I200…
+ 2 <NA>     MICH… R      AIKEN AK    14-50     PRACTITI… 1174… N     0840… I200…
+ 3 <NA>     CHRI… <NA>   KRAM… AK    14-50     PRACTITI… 1942… N     4688… I200…
+ 4 <NA>     CATH… A      LIDD… AK    14-50     PRACTITI… 1629… N     0345… I200…
+ 5 <NA>     REBE… A      YOUNG AK    14-50     PRACTITI… 1740… N     8729… I200…
+ 6 <NA>     CHAR… M      NELS… AK    14-50     PRACTITI… 1073… N     7618… I200…
+ 7 <NA>     CONN… L      CHEV… AK    14-50     PRACTITI… 1316… N     1850… I200…
+ 8 <NA>     JOYCE E      ZIMM… AK    14-50     PRACTITI… 1316… N     5294… I200…
+ 9 <NA>     DARCY M      LUCEY AK    14-50     PRACTITI… 1366… N     7315… I200…
+10 <NA>     CYNT… G      JONES AK    14-50     PRACTITI… 1962… N     3870… I200…
+# ℹ 162 more rows
 ```
 
 ``` r
-# Hospitals Enrolled in Medicare Part A
+# Medicare Part A Hospitals
 hospitals(
   city = "Atlanta",
   state = "GA",
@@ -251,7 +256,7 @@ clia(name = starts_with("CDC"))
 
 ``` r
 # Hospital Transparency Enforcement
-transparency(action = contains("CMP"))
+transparency(action = "cmp")
 ✔ transparency returned 26 results.
 # A data frame: 26 × 7
    id    name                           address   city  state action action_date

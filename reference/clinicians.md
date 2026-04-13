@@ -128,6 +128,8 @@ A Clinician or Group must have:
 ``` r
 clinicians(count = TRUE)
 #> ℹ clinicians has 2,857,460 rows.
+clinicians(count = TRUE, org_name = not(""))
+#> ✔ clinicians returned 2,586,064 results.
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
 #> # A data frame: 1 × 25
@@ -138,7 +140,7 @@ clinicians(enid = "I20081002000549")
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
-clinicians(first = "ETAN")
+clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
 #> # A data frame: 11 × 25
 #>    first middle last   suffix gender cred  school grad_year specialty spec_other

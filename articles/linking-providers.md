@@ -123,9 +123,26 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 ```
 
 ``` r
-clinicians(facility_name = "Elizabethtown Community Hospital")
-#> Error in `clinicians()`:
-#> ! unused argument (facility_name = "Elizabethtown Community Hospital")
+clinicians(org_name = "Elizabethtown Community Hospital")
+#> ✔ clinicians returned 58 results.
+#> # A data frame: 58 × 25
+#>    first  middle last  suffix gender cred  school grad_year specialty spec_other
+#>  * <chr>  <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
+#>  1 GAVIN  L      NOBLE NA     M      MD    STATE… 1999      CARDIOVA… INTERNAL …
+#>  2 DMITR… G      AKSE… NA     M      MD    STATE… 2007      DIAGNOST… NA        
+#>  3 ROBERT NA     PERC… NA     M      MD    NEW Y… 2009      INTERVEN… NA        
+#>  4 BENJA… NA     LANGE NA     M      MD    HARVA… 2009      DIAGNOST… INTERVENT…
+#>  5 BENJA… NA     BAMF… NA     M      MD    UNIVE… 1992      DIAGNOST… NA        
+#>  6 JOSHUA NA     WARN… NA     F      NP    OTHER  2023      NURSE PR… NA        
+#>  7 DAGMAR NA     HOEG… NA     F      MD    OTHER  1996      DIAGNOST… NA        
+#>  8 CARLY  J      SLEE… NA     F      NA    ALBAN… 2012      PHYSICIA… NA        
+#>  9 ROB    L      DEMU… NA     M      MD    STATE… 1996      INTERNAL… NA        
+#> 10 JAMES  E      EAST  NA     M      MD    OTHER  2016      DIAGNOST… NA        
+#> # ℹ 48 more rows
+#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
+#> #   tlh <chr>
 ```
 
 ``` r
