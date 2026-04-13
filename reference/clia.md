@@ -185,7 +185,7 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ℹ clia has 671,570 total rows.
+#> ℹ clia has 671,570 rows.
 clia(compliant = TRUE, count = TRUE)
 #> ✔ clia returned 72,855 results.
 clia(ccn = provider:::cdc_labs$ccn)

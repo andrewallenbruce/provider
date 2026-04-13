@@ -230,9 +230,9 @@ A `<subgroups>` object
 
 ``` r
 hospitals(count = TRUE)
-#> ℹ hospitals has 9,187 total rows.
+#> ℹ hospitals has 9,187 rows.
 hospitals2(count = TRUE)
-#> ℹ hospitals2 has 5,426 total rows.
+#> ℹ hospitals2 has 5,426 rows.
 
 hospitals(state = "GA", prov_type = "reh")
 #> ✔ hospitals returned 1 result.
@@ -277,7 +277,7 @@ hospitals2(ccn = x$ccn)
 #> 2 114032 SO CRESC… 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Governme… Not A…
 
 x <- hospitals2()
-#> !  hospitals2 ✖ No Query
+#> ! hospitals2 ✖ No Query
 #> ℹ Returning first 10 rows...
 x
 #> # A data frame: 10 × 11

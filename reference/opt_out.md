@@ -105,7 +105,7 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> ℹ opt_out has 55,330 total rows.
+#> ℹ opt_out has 55,330 rows.
 opt_out(npi = 1043522824)
 #> ✔ opt_out returned 1 result.
 #> # A data frame: 1 × 13

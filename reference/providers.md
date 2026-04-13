@@ -13,8 +13,8 @@ providers(
   first = NULL,
   middle = NULL,
   last = NULL,
-  spec = NULL,
-  specialty = NULL,
+  prov_type = NULL,
+  prov_desc = NULL,
   state = NULL,
   org_name = NULL,
   multi = NULL,
@@ -41,11 +41,11 @@ providers(
 
   `<chr>` Individual provider's name
 
-- spec:
+- prov_type:
 
   `<chr>` Enrollment specialty code
 
-- specialty:
+- prov_desc:
 
   `<chr>` Enrollment specialty description
 
@@ -85,23 +85,23 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ℹ providers has 2,957,262 total rows.
+#> ℹ providers has 2,957,262 rows.
 providers(enid = "I20040309000221")
 #> ✔ providers returned 1 result.
 #> # A data frame: 1 × 11
-#>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
-#> * <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
-#> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
+#>   org_name first  middle last  state prov_type prov_desc npi   multi pac   enid 
+#> * <chr>    <chr>  <chr>  <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>
+#> 1 NA       STEVEN D      SHEI… FL    14-41     PRACTITI… 1417… N     3870… I200…
 providers(npi = 1417918293)
 #> ✔ providers returned 1 result.
 #> # A data frame: 1 × 11
-#>   org_name first  middle last    state spec  specialty   npi   multi pac   enid 
-#> * <chr>    <chr>  <chr>  <chr>   <chr> <chr> <chr>       <chr> <chr> <chr> <chr>
-#> 1 NA       STEVEN D      SHEINER FL    14-41 PRACTITION… 1417… N     3870… I200…
+#>   org_name first  middle last  state prov_type prov_desc npi   multi pac   enid 
+#> * <chr>    <chr>  <chr>  <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>
+#> 1 NA       STEVEN D      SHEI… FL    14-41     PRACTITI… 1417… N     3870… I200…
 providers(pac = 2860305554)
 #> ✔ providers returned 1 result.
 #> # A data frame: 1 × 11
-#>   org_name first  middle last   state spec  specialty    npi   multi pac   enid 
-#> * <chr>    <chr>  <chr>  <chr>  <chr> <chr> <chr>        <chr> <chr> <chr> <chr>
-#> 1 NA       ROBERT NA     YEAMAN TX    14-41 PRACTITIONE… 1134… N     2860… I200…
+#>   org_name first  middle last  state prov_type prov_desc npi   multi pac   enid 
+#> * <chr>    <chr>  <chr>  <chr> <chr> <chr>     <chr>     <chr> <chr> <chr> <chr>
+#> 1 NA       ROBERT NA     YEAM… TX    14-41     PRACTITI… 1134… N     2860… I200…
 ```

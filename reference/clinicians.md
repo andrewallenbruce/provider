@@ -127,32 +127,33 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE)
-#> ℹ clinicians has 2,857,460 total rows.
+#> ℹ clinicians has 2,857,460 rows.
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
 #> # A data frame: 1 × 25
-#>   first middle last  suffix gender cred  school year  specialty spec_other npi  
-#> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr> <chr>     <chr>      <chr>
-#> 1 DORO… E      MCCU… NA     F      AU    OTHER  2008  QUALIFIE… NA         1407…
-#> # ℹ 14 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>, org_state <chr>,
-#> #   org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>, tlh <chr>
+#>   first   middle last  suffix gender cred  school grad_year specialty spec_other
+#> * <chr>   <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
+#> 1 DOROTHY E      MCCU… NA     F      AU    OTHER  2008      QUALIFIE… NA        
+#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
+#> #   tlh <chr>
 clinicians(first = "ETAN")
 #> ✔ clinicians returned 11 results.
 #> # A data frame: 11 × 25
-#>    first middle last     suffix gender cred  school   year  specialty spec_other
-#>  * <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>    <chr> <chr>     <chr>     
-#>  1 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
-#>  2 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
-#>  3 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO… 2013  PATHOLOGY NA        
-#>  4 ETAN  NA     DAYAN    NA     M      MD    STATE U… 2012  DIAGNOST… NA        
-#>  5 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
-#>  6 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
-#>  7 ETAN  NA     SPIRA    NA     M      MD    NEW YOR… 2007  GASTROEN… INTERNAL …
-#>  8 ETAN  NA     EITCHES  NA     M      MD    COLUMBI… 2010  EMERGENC… NA        
-#>  9 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
-#> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
-#> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT … 2011  ORTHOPED… NA        
+#>    first middle last   suffix gender cred  school grad_year specialty spec_other
+#>  * <chr> <chr>  <chr>  <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
+#>  1 ETAN  ARIEL  MARKS  NA     M      DO    NOVA … 2013      PATHOLOGY NA        
+#>  2 ETAN  NA     EITCH… NA     M      MD    COLUM… 2010      EMERGENC… NA        
+#>  3 ETAN  ARIEL  MARKS  NA     M      DO    NOVA … 2013      PATHOLOGY NA        
+#>  4 ETAN  NA     DAYAN  NA     M      MD    STATE… 2012      DIAGNOST… NA        
+#>  5 ETAN  NA     SPIRA  NA     M      MD    NEW Y… 2007      GASTROEN… INTERNAL …
+#>  6 ETAN  NA     EITCH… NA     M      MD    COLUM… 2010      EMERGENC… NA        
+#>  7 ETAN  NA     SPIRA  NA     M      MD    NEW Y… 2007      GASTROEN… INTERNAL …
+#>  8 ETAN  NA     EITCH… NA     M      MD    COLUM… 2010      EMERGENC… NA        
+#>  9 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
+#> 10 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
+#> 11 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
 #> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,

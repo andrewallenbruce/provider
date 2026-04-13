@@ -88,11 +88,11 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> ℹ revocations has 7,465 total rows.
+#> ℹ revocations has 7,465 rows.
 revocations(state = "GA")
 #> ✔ revocations returned 213 results.
 #> # A data frame: 213 × 12
-#>    org_name first    middle last       enid   npi   multi state specialty reason
+#>    org_name first    middle last       enid   npi   multi state prov_desc reason
 #>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       WALLACE  S      ANDERSON   I2003… 1881… N     GA    PRACTITI… 424.5…
 #>  2 NA       LEO      G      FRANGIPANE I2003… 1073… N     GA    PRACTITI… 424.5…
@@ -109,7 +109,7 @@ revocations(state = "GA")
 revocations(specialty = contains("CARDIO"), state = not("TX"))
 #> ✔ revocations returned 46 results.
 #> # A data frame: 46 × 12
-#>    org_name first    middle last       enid   npi   multi state specialty reason
+#>    org_name first    middle last       enid   npi   multi state prov_desc reason
 #>  * <chr>    <chr>    <chr>  <chr>      <chr>  <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       RONALD   A      CARLISH    I2003… 1639… N     CA    PRACTITI… 424.5…
 #>  2 NA       STEVE    E      NOZAD      I2003… 1962… N     NY    PRACTITI… 424.5…
@@ -126,7 +126,7 @@ revocations(specialty = contains("CARDIO"), state = not("TX"))
 revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
 #> ✔ revocations returned 43 results.
 #> # A data frame: 43 × 12
-#>    org_name first   middle last      enid     npi   multi state specialty reason
+#>    org_name first   middle last      enid     npi   multi state prov_desc reason
 #>  * <chr>    <chr>   <chr>  <chr>     <chr>    <chr> <chr> <chr> <chr>     <chr> 
 #>  1 NA       RONALD  A      CARLISH   I200311… 1639… N     CA    PRACTITI… 424.5…
 #>  2 NA       STEVE   E      NOZAD     I200312… 1962… N     NY    PRACTITI… 424.5…

@@ -44,7 +44,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ℹ pending has 9,453 total rows.
+#> ℹ pending has 9,453 rows.
 #> • Physician     : 3,323
 #> • Non-Physician : 6,130
 pending(first = "Victor", count = TRUE)

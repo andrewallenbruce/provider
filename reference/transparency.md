@@ -106,7 +106,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> ℹ transparency has 10,726 total rows.
+#> ℹ transparency has 10,726 rows.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.
 #> # A data frame: 1 × 7

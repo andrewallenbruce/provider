@@ -93,7 +93,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ℹ order_refer has 2,004,978 total rows.
+#> ℹ order_refer has 2,004,978 rows.
 order_refer(npi = 1003026055)
 #> ✔ order_refer returned 1 result.
 #> # A data frame: 1 × 8

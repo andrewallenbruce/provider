@@ -95,7 +95,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 reassignments(count = TRUE)
-#> ℹ reassignments has 3,511,984 total rows.
+#> ℹ reassignments has 3,511,984 rows.
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.
 #> # A data frame: 6 × 14
