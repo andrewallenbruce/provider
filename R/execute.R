@@ -105,7 +105,8 @@ exec_cms <- function(END, COUNT, SET, ARG) {
   }
 
   # QUERY --> Request Count
-  N <- request_rows(BASE, query(END, ARG))
+  N <- request_rows(BASE, build(arg_cms(ARG)))
+  # N <- request_rows(BASE, query(END, ARG))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -117,7 +118,7 @@ exec_cms <- function(END, COUNT, SET, ARG) {
   if (N <= LIMIT) {
     cli_results(N, END)
 
-    res <- request_cms(BASE, LIMIT, query(END, ARG)) |>
+    res <- request_cms(BASE, LIMIT, build(arg_cms(ARG))) |>
       polish(NM)
 
     return(res)
@@ -129,7 +130,7 @@ exec_cms <- function(END, COUNT, SET, ARG) {
   URL <- url_str(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    query(END, ARG)
+    build(arg_cms(ARG))
   )
   URL <- create_offset(N, LIMIT, URL)
 

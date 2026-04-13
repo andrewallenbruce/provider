@@ -3,6 +3,12 @@
 \name{affiliations}
 \alias{affiliations}
 \title{Provider-Facility Affiliations}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
+}
+}
 \usage{
 affiliations(
   npi = NULL,
@@ -24,7 +30,7 @@ affiliations(
 
 \item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{facility_type}{\verb{<chr>} facility type:
+\item{facility_type}{\verb{<enum>} facility type:
 \itemize{
 \item \code{esrd} = Dialysis facility
 \item \code{hha} = Home health agency
@@ -59,10 +65,4 @@ affiliations(facility_ccn = "33Z302")
 affiliations(parent_ccn = 331302)
 affiliations(facility_ccn = 331302)
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
-\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
-}
 }

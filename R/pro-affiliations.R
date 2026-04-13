@@ -3,14 +3,14 @@
 #' @description Access information concerning individual providers'
 #'    affiliations with organizations/facilities.
 #'
-#' @references
+#' @source
 #'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 #'    * [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
 #' @param first,middle,last,suffix `<chr>` Individual provider's name
-#' @param facility_type `<chr>` facility type:
+#' @param facility_type `<enum>` facility type:
 #'    - `esrd` = Dialysis facility
 #'    - `hha` = Home health agency
 #'    - `hospice` = Hospice

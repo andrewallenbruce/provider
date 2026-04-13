@@ -3,6 +3,13 @@
 \name{clinicians}
 \alias{clinicians}
 \title{Clinician Demographics}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{API: National Downloadable File}
+\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Dictionary: Provider Data Catalog (PDC)}
+\item \href{https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources}{Source Information}
+}
+}
 \usage{
 clinicians(
   npi = NULL,
@@ -16,12 +23,12 @@ clinicians(
   credential = NULL,
   specialty = NULL,
   school = NULL,
-  year = NULL,
+  grad_year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  facility_name = NULL,
-  facility_pac = NULL,
+  org_name = NULL,
+  org_pac = NULL,
   count = FALSE
 )
 }
@@ -34,7 +41,7 @@ clinicians(
 
 \item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
 
-\item{gender}{\verb{<chr>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
+\item{gender}{\verb{<enum>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
 \item{credential}{\verb{<chr>} Provider's credential, i.e. \code{"MD"}, \code{"OD"}}
 
@@ -42,13 +49,13 @@ clinicians(
 
 \item{school}{\verb{<chr>} Provider’s medical school}
 
-\item{year}{\verb{<int>} Provider’s graduation year}
+\item{grad_year}{\verb{<int>} Provider’s graduation year}
 
 \item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 
-\item{facility_name}{\verb{<chr>} Facility associated with Provider}
+\item{org_name}{\verb{<chr>} Facility associated with Provider}
 
-\item{facility_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
+\item{org_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
 }
@@ -84,14 +91,9 @@ A Clinician or Group must have:
 clinicians(count = TRUE)
 clinicians(enid = "I20081002000549")
 clinicians(first = "ETAN")
-clinicians(count = TRUE, city = starts_with("Atl"), state = "GA", year = 2025)
-clinicians(count = TRUE, city = "Atlanta", state = "GA", year = 2025)
+clinicians(count = TRUE,
+           city = starts_with("Atl"),
+           state = "GA",
+           grad_year = 2025)
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{API: National Downloadable File}
-\item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Dictionary: Provider Data Catalog (PDC)}
-\item \href{https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources}{Source Information}
-}
 }

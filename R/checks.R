@@ -16,12 +16,30 @@ check_online <- function() {
 }
 
 #' @noRd
-check_numeric <- function(x) {
-  if (!rlang::is_bare_numeric(x)) {
-    cli::cli_abort(c(
-      "{.arg x} must be a numeric vector, not {.obj_type_friendly {x}}"
-    ))
+check_numeric <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (!missing(x)) {
+    if (rlang::is_bare_numeric(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
   }
+
+  rlang::stop_input_type(
+    x,
+    "a numeric vector",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
 }
 
 #' @noRd
