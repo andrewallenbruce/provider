@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9072 (2026-04-13)
+
+- added enums
+
 ## provider 0.0.1.9071 (2026-04-13)
 
 - init recode\_\* methods
@@ -42,7 +46,7 @@
 ## provider 0.0.1.9062 (2026-03-23)
 
 - added
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals2.md)
   endpoint
 
 ## provider 0.0.1.9061 (2026-03-20)
@@ -96,7 +100,7 @@
 
 - rebuild readme, documentation
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)’
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
   helper now exported
 - `cli_hybrid` for calls to different APIs within one function
 
@@ -206,7 +210,7 @@
 ## provider 0.0.1.9027 (2026-03-10)
 
 - added
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
   helper
 - added `cdc_labs` CLIA example dataset
 

@@ -12,9 +12,6 @@ provided by the hospital, in accordance with regulation (45 CFR 180).
 This data set includes the name of each hospital or hospital location, the
 hospital or hospital location address, the outcome or action following a
 CMS compliance review and the date of the outcome or action taken.
-
-
-
 Actions:
 
 
@@ -37,6 +34,9 @@ action plan or comply with the requirements of a corrective action plan.
 CMP notices are publicized.
 Appealed: The hospital filed an appeal of CMS' decision to issue a
 civil monetary penalty.
+
+
+
 
 
 
@@ -53,9 +53,6 @@ provided by the hospital, in accordance with regulation (45 CFR 180).
 This data set includes the name of each hospital or hospital location, the
 hospital or hospital location address, the outcome or action following a
 CMS compliance review and the date of the outcome or action taken.
-
-
-
 Actions:
 
 
@@ -81,6 +78,9 @@ civil monetary penalty.
 
 
 
+
+
+
 "><meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -89,7 +89,7 @@ civil monetary penalty.
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9071</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9072</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,18 +136,15 @@ hospital's compliance with the Hospital Price Transparency regulations.</p><div 
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a></h3>
 
 
-<p>The Hospital Price Transparency Enforcement Activities and Outcomes dataset
+<p>The <strong>Hospital Price Transparency Enforcement Activities and Outcomes</strong> dataset
 contains information related to enforcement actions taken by CMS following a
 compliance review of a hospital's obligation to establish, update and make
 public a list of the hospital's standard charges for items and services
 provided by the hospital, in accordance with regulation (45 CFR 180).</p>
 <p>This data set includes the name of each hospital or hospital location, the
 hospital or hospital location address, the outcome or action following a
-CMS compliance review and the date of the outcome or action taken.</p>
-</div>
-
-<div class="section">
-<h3 id="actions-">Actions:<a class="anchor" aria-label="anchor" href="#actions-"></a></h3>
+CMS compliance review and the date of the outcome or action taken.</p><div class="section">
+<h4 id="actions-">Actions:<a class="anchor" aria-label="anchor" href="#actions-"></a></h4>
 
 <ul><li><p><strong>Met Requirements:</strong> The hospital was reviewed by CMS and no deficiencies
 were cited. This category includes hospitals that were found to be in
@@ -169,6 +166,9 @@ CMP <a href="https://www.cms.gov/priorities/key-initiatives/hospital-price-trans
 <li><p><strong>Appealed:</strong> The hospital filed an appeal of CMS' decision to issue a
 civil monetary penalty.</p></li>
 </ul></div>
+
+
+</div>
 
     </div>
 
@@ -211,7 +211,14 @@ civil monetary penalty.</p></li>
 
 
 <dt id="arg-action">action<a class="anchor" aria-label="anchor" href="#arg-action"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Action taken by CMS following a Compliance Review</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Action taken by CMS following a Compliance Review (see Details)</p><ul><li><p><code>"met"</code>: Met Requirements</p></li>
+<li><p><code>"admin"</code>: Administrative Closure</p></li>
+<li><p><code>"warning"</code>: Warning Notice</p></li>
+<li><p><code>"cap"</code>: CAP Request</p></li>
+<li><p><code>"closure"</code>: Closure Notice</p></li>
+<li><p><code>"cmp"</code>: CMP Notice</p></li>
+<li><p><code>"appeal"</code> : Appealed</p></li>
+</ul></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -231,6 +238,8 @@ civil monetary penalty.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">transparency</span> has <span style="font-weight: bold;">10,726</span> rows.</span>
+<span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, action <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">transparency</span> returned <span style="font-weight: bold;">2,695</span> results.</span>
 <span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">transparency</span> returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 1 × 7</span></span>

@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9071</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9072</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,37 +76,9 @@ type and address.</p>
 <span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  loc_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  subgroup <span class="op">=</span> <span class="fu">subgroups</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">subgroups</span><span class="op">(</span></span>
-<span>  acute <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  child <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  general <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  long <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  short <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  psych <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  rehab <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  swing <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  psych_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  rehab_unit <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  other <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">hospitals2</span><span class="op">(</span></span>
-<span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hosp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ownership <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -184,7 +156,7 @@ type and address.</p>
 
 
 <dt id="arg-subgroup">subgroup<a class="anchor" aria-label="anchor" href="#arg-subgroup"></a></dt>
-<dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit. See <code>subgroups()</code>.</p></dd>
+<dd><p><code>&lt;subgroups&gt;</code> Hospital’s subgroup/unit. See <code><a href="subgroups.html">subgroups()</a></code>.</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -194,82 +166,17 @@ type and address.</p>
 <dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the entire dataset</p></dd>
 
-
-<dt id="arg-acute">acute<a class="anchor" aria-label="anchor" href="#arg-acute"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Acute/Short Term Care Hospital</p></dd>
-
-
-<dt id="arg-drug">drug<a class="anchor" aria-label="anchor" href="#arg-drug"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Alcohol/Drug Treatment</p></dd>
-
-
-<dt id="arg-child">child<a class="anchor" aria-label="anchor" href="#arg-child"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Children's Hospital</p></dd>
-
-
-<dt id="arg-general">general<a class="anchor" aria-label="anchor" href="#arg-general"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> General Hospital</p></dd>
-
-
-<dt id="arg-long">long<a class="anchor" aria-label="anchor" href="#arg-long"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Long-Term Care</p></dd>
-
-
-<dt id="arg-short">short<a class="anchor" aria-label="anchor" href="#arg-short"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Short-Term Care</p></dd>
-
-
-<dt id="arg-psych">psych<a class="anchor" aria-label="anchor" href="#arg-psych"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Psychiatric</p></dd>
-
-
-<dt id="arg-rehab">rehab<a class="anchor" aria-label="anchor" href="#arg-rehab"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Rehabilitation</p></dd>
-
-
-<dt id="arg-swing">swing<a class="anchor" aria-label="anchor" href="#arg-swing"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Swing-Bed Approved</p></dd>
-
-
-<dt id="arg-psych-unit">psych_unit<a class="anchor" aria-label="anchor" href="#arg-psych-unit"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Psychiatric Unit</p></dd>
-
-
-<dt id="arg-rehab-unit">rehab_unit<a class="anchor" aria-label="anchor" href="#arg-rehab-unit"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Rehabilitation Unit</p></dd>
-
-
-<dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Specialty Hospital</p></dd>
-
-
-<dt id="arg-other">other<a class="anchor" aria-label="anchor" href="#arg-other"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Unlisted on CMS form</p></dd>
-
-
-<dt id="arg-county">county<a class="anchor" aria-label="anchor" href="#arg-county"></a></dt>
-<dd><p><code>&lt;chr&gt;</code></p></dd>
-
-
-<dt id="arg-hosp-type">hosp_type<a class="anchor" aria-label="anchor" href="#arg-hosp-type"></a></dt>
-<dd><p><code>&lt;chr&gt;</code></p></dd>
-
-
-<dt id="arg-ownership">ownership<a class="anchor" aria-label="anchor" href="#arg-ownership"></a></dt>
-<dd><p><code>&lt;chr&gt;</code></p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
-<p>A <code>&lt;subgroups&gt;</code> object</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">hospitals</span> has <span style="font-weight: bold;">9,187</span> rows.</span>
-<span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hospitals2.html">hospitals2</a></span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">hospitals2</span> has <span style="font-weight: bold;">5,426</span> rows.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, prov_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
@@ -289,7 +196,7 @@ type and address.</p>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
 <span class="r-in"><span>  state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
-<span class="r-in"><span>  subgroup <span class="op">=</span> <span class="fu">subgroups</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  subgroup <span class="op">=</span> <span class="fu"><a href="subgroups.html">subgroups</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    acute <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>    psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span>
@@ -306,7 +213,7 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hospitals2.html">hospitals2</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 2 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ccn    org_name  address city  state zip   county phone type  ownership rating</span>
@@ -314,7 +221,7 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 114010 PEACHFOR… 2151 P… ATLA… GA    30338 DE KA… (770… Psyc… Propriet… Not A…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 114032 SO CRESC… 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Governme… Not A…</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals2</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="hospitals2.html">hospitals2</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">hospitals2</span> ✖ <span style="font-style: italic;">No Query</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
@@ -351,10 +258,6 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_drug &lt;chr&gt;, sub_child &lt;chr&gt;, sub_long &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab &lt;chr&gt;, sub_short &lt;chr&gt;, sub_swing &lt;chr&gt;, sub_psych_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_rehab_unit &lt;chr&gt;, sub_specialty &lt;chr&gt;, sub_other &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">subgroups</span><span class="op">(</span>acute <span class="op">=</span> <span class="cn">TRUE</span>, rehab <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;subgroups&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> SUBGROUP %2D ACUTE CARE    <span style="color: #555555;"> : </span>Y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> SUBGROUP %2D REHABILITATION<span style="color: #555555;"> : </span>Y</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

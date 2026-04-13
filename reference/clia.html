@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9071</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9072</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,22 +101,22 @@ services the facility provides.</p>
 
 
 <dt id="arg-certificate">certificate<a class="anchor" aria-label="anchor" href="#arg-certificate"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> CLIA certificate type (see details):</p><ul><li><p><code>"waiver"</code>: Waiver</p></li>
-<li><p><code>"ppm"</code>: Provider-Performed Microscopy (PPM)</p></li>
-<li><p><code>"registration"</code>: Registration</p></li>
-<li><p><code>"compliance"</code>: Compliance</p></li>
-<li><p><code>"accreditation"</code>: Accreditation</p></li>
+<dd><p><code>&lt;enum&gt;</code> CLIA certificate type (see details):</p><ul><li><p><code>"waiver"</code> = Waiver</p></li>
+<li><p><code>"ppm"</code> = Provider-Performed Microscopy (PPM)</p></li>
+<li><p><code>"registration"</code> = Registration</p></li>
+<li><p><code>"compliance"</code> = Compliance</p></li>
+<li><p><code>"accreditation"</code> = Accreditation</p></li>
 </ul></dd>
 
 
 <dt id="arg-accreditation">accreditation<a class="anchor" aria-label="anchor" href="#arg-accreditation"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> CLIA accrediting organization (see details):</p><ul><li><p><code>"a2la"</code>: A2LA</p></li>
-<li><p><code>"aabb"</code>: AABB</p></li>
-<li><p><code>"aoa"</code>: AOA</p></li>
-<li><p><code>"ashi"</code>: ASHI-HLA</p></li>
-<li><p><code>"cap"</code>: CAP</p></li>
-<li><p><code>"cola"</code>: COLA</p></li>
-<li><p><code>"jcaho"</code>: JCAHO</p></li>
+<dd><p><code>&lt;enum&gt;</code> CLIA accrediting organization (see details):</p><ul><li><p><code>"a2la"</code> = A2LA</p></li>
+<li><p><code>"aabb"</code> = AABB</p></li>
+<li><p><code>"aoa"</code> = AOA</p></li>
+<li><p><code>"ashi"</code> = ASHI-HLA</p></li>
+<li><p><code>"cap"</code> = CAP</p></li>
+<li><p><code>"cola"</code> = COLA</p></li>
+<li><p><code>"jcaho"</code> = JCAHO</p></li>
 </ul></dd>
 
 
@@ -197,8 +197,8 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">clia</span> has <span style="font-weight: bold;">671,570</span> rows.</span>
-<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>compliant <span class="op">=</span> <span class="cn">TRUE</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">72,855</span> results.</span>
+<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>compliant <span class="op">=</span> <span class="cn">FALSE</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">5,161</span> results.</span>
 <span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>ccn <span class="op">=</span> <span class="fu">provider</span><span class="fu">:::</span><span class="va">cdc_labs</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">6</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 6 × 82</span></span>
@@ -217,11 +217,9 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, owner &lt;chr&gt;, cert_action &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   orig_date &lt;chr&gt;, apl_date &lt;chr&gt;, cert_date &lt;chr&gt;, eff_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mail_date &lt;chr&gt;, term_date &lt;chr&gt;, a2la_cred &lt;chr&gt;, a2la_date &lt;chr&gt;, …</span></span>
-<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  certificate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accreditation"</span>, <span class="st">"registration"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Valdosta"</span>,</span></span>
-<span class="r-in"><span>  state <span class="op">=</span> <span class="st">"GA"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>certificate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"accreditation"</span>, <span class="st">"registration"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>     city <span class="op">=</span> <span class="st">"Valdosta"</span>,</span></span>
+<span class="r-in"><span>     state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">18</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 18 × 82</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1</span>

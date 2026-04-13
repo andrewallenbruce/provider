@@ -1,8 +1,6 @@
-# Subgroup Helper
+# Subgroups
 
-For use in
-[`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-`subgroup` argument
+Subgroups
 
 ## Usage
 
@@ -28,7 +26,7 @@ subgroups(
 
 - acute:
 
-  `<lgl>` Acute Care
+  `<lgl>` Acute/Short Term Care Hospital
 
 - drug:
 
@@ -85,7 +83,8 @@ A `<subgroups>` object
 ## Examples
 
 ``` r
-if (FALSE) {
 subgroups(acute = TRUE, rehab = TRUE)
-}
+#> <subgroups>
+#> • SUBGROUP %2D ACUTE CARE     : Y
+#> • SUBGROUP %2D REHABILITATION : Y
 ```

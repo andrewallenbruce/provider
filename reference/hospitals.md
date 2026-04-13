@@ -27,34 +27,6 @@ hospitals(
   count = FALSE,
   set = FALSE
 )
-
-subgroups(
-  acute = NULL,
-  drug = NULL,
-  child = NULL,
-  general = NULL,
-  long = NULL,
-  short = NULL,
-  psych = NULL,
-  rehab = NULL,
-  swing = NULL,
-  psych_unit = NULL,
-  rehab_unit = NULL,
-  specialty = NULL,
-  other = NULL
-)
-
-hospitals2(
-  ccn = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  county = NULL,
-  hosp_type = NULL,
-  ownership = NULL,
-  count = FALSE
-)
 ```
 
 ## Source
@@ -146,7 +118,8 @@ hospitals2(
 
 - subgroup:
 
-  `<subgroups>` Hospital’s subgroup/unit. See `subgroups()`.
+  `<subgroups>` Hospital’s subgroup/unit. See
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
 
 - count:
 
@@ -156,75 +129,9 @@ hospitals2(
 
   `<lgl>` Return the entire dataset
 
-- acute:
-
-  `<lgl>` Acute/Short Term Care Hospital
-
-- drug:
-
-  `<lgl>` Alcohol/Drug Treatment
-
-- child:
-
-  `<lgl>` Children's Hospital
-
-- general:
-
-  `<lgl>` General Hospital
-
-- long:
-
-  `<lgl>` Long-Term Care
-
-- short:
-
-  `<lgl>` Short-Term Care
-
-- psych:
-
-  `<lgl>` Psychiatric
-
-- rehab:
-
-  `<lgl>` Rehabilitation
-
-- swing:
-
-  `<lgl>` Swing-Bed Approved
-
-- psych_unit:
-
-  `<lgl>` Psychiatric Unit
-
-- rehab_unit:
-
-  `<lgl>` Rehabilitation Unit
-
-- specialty:
-
-  `<lgl>` Specialty Hospital
-
-- other:
-
-  `<lgl>` Unlisted on CMS form
-
-- county:
-
-  `<chr>`
-
-- hosp_type:
-
-  `<chr>`
-
-- ownership:
-
-  `<chr>`
-
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
-A `<subgroups>` object
 
 ## Examples
 
@@ -313,8 +220,4 @@ hospitals(ccn = x$ccn)
 #> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
 #> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
 #> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
-subgroups(acute = TRUE, rehab = TRUE)
-#> <subgroups>
-#> • SUBGROUP %2D ACUTE CARE     : Y
-#> • SUBGROUP %2D REHABILITATION : Y
 ```

@@ -61,33 +61,33 @@ clia(
 
   `<enum>` CLIA certificate type (see details):
 
-  - `"waiver"`: Waiver
+  - `"waiver"` = Waiver
 
-  - `"ppm"`: Provider-Performed Microscopy (PPM)
+  - `"ppm"` = Provider-Performed Microscopy (PPM)
 
-  - `"registration"`: Registration
+  - `"registration"` = Registration
 
-  - `"compliance"`: Compliance
+  - `"compliance"` = Compliance
 
-  - `"accreditation"`: Accreditation
+  - `"accreditation"` = Accreditation
 
 - accreditation:
 
   `<enum>` CLIA accrediting organization (see details):
 
-  - `"a2la"`: A2LA
+  - `"a2la"` = A2LA
 
-  - `"aabb"`: AABB
+  - `"aabb"` = AABB
 
-  - `"aoa"`: AOA
+  - `"aoa"` = AOA
 
-  - `"ashi"`: ASHI-HLA
+  - `"ashi"` = ASHI-HLA
 
-  - `"cap"`: CAP
+  - `"cap"` = CAP
 
-  - `"cola"`: COLA
+  - `"cola"` = COLA
 
-  - `"jcaho"`: JCAHO
+  - `"jcaho"` = JCAHO
 
 - city:
 
@@ -186,8 +186,8 @@ complexity:
 ``` r
 clia(count = TRUE)
 #> ℹ clia has 671,570 rows.
-clia(compliant = TRUE, count = TRUE)
-#> ✔ clia returned 72,855 results.
+clia(compliant = FALSE, count = TRUE)
+#> ✔ clia returned 5,161 results.
 clia(ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
 #> # A data frame: 6 × 82
@@ -206,11 +206,9 @@ clia(ccn = provider:::cdc_labs$ccn)
 #> #   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
 #> #   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>,
 #> #   mail_date <chr>, term_date <chr>, a2la_cred <chr>, a2la_date <chr>, …
-clia(
-  certificate = c("accreditation", "registration"),
-  city = "Valdosta",
-  state = "GA"
-)
+clia(certificate = c("accreditation", "registration"),
+     city = "Valdosta",
+     state = "GA")
 #> ✔ clia returned 18 results.
 #> # A data frame: 18 × 82
 #>    name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1

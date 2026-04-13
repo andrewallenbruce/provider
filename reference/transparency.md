@@ -5,7 +5,7 @@ hospital's compliance with the Hospital Price Transparency regulations.
 
 ### Overview
 
-The Hospital Price Transparency Enforcement Activities and Outcomes
+The **Hospital Price Transparency Enforcement Activities and Outcomes**
 dataset contains information related to enforcement actions taken by CMS
 following a compliance review of a hospital's obligation to establish,
 update and make public a list of the hospital's standard charges for
@@ -17,7 +17,7 @@ the hospital or hospital location address, the outcome or action
 following a CMS compliance review and the date of the outcome or action
 taken.
 
-### Actions:
+#### Actions:
 
 - **Met Requirements:** The hospital was reviewed by CMS and no
   deficiencies were cited. This category includes hospitals that were
@@ -88,7 +88,22 @@ transparency(
 
 - action:
 
-  `<chr>` Action taken by CMS following a Compliance Review
+  `<enum>` Action taken by CMS following a Compliance Review (see
+  Details)
+
+  - `"met"`: Met Requirements
+
+  - `"admin"`: Administrative Closure
+
+  - `"warning"`: Warning Notice
+
+  - `"cap"`: CAP Request
+
+  - `"closure"`: Closure Notice
+
+  - `"cmp"`: CMP Notice
+
+  - `"appeal"` : Appealed
 
 - count:
 
@@ -107,6 +122,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 transparency(count = TRUE)
 #> ℹ transparency has 10,726 rows.
+transparency(count = TRUE, action = "warning")
+#> ✔ transparency returned 2,695 results.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.
 #> # A data frame: 1 × 7
