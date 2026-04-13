@@ -112,6 +112,8 @@ hospitals <- function(
   )
 }
 
+#' Subgroups
+#'
 #' @param acute `<lgl>` Acute/Short Term Care Hospital
 #' @param drug `<lgl>` Alcohol/Drug Treatment
 #' @param child `<lgl>` Children's Hospital
@@ -128,7 +130,7 @@ hospitals <- function(
 #' @returns A `<subgroups>` object
 #' @examples
 #' subgroups(acute = TRUE, rehab = TRUE)
-#' @rdname hospitals
+#' @keywords internal
 #' @export
 subgroups <- function(
   acute = NULL,
@@ -171,10 +173,12 @@ is_subgroups <- function(x) {
   inherits(x, "subgroups")
 }
 
+#' Hospitals 2
+#'
 #' @param county `<chr>`
 #' @param hosp_type `<chr>`
 #' @param ownership `<chr>`
-#' @rdname hospitals
+#' @keywords internal
 #' @autoglobal
 #' @export
 hospitals2 <- function(

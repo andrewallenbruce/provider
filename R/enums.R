@@ -3,12 +3,7 @@ bool_ <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
-
-  cheapr::val_match(
-    x,
-    TRUE ~ "Y",
-    FALSE ~ "N"
-  )
+  cheapr::val_match(x, TRUE ~ "Y", FALSE ~ "N")
 }
 
 #' @noRd
@@ -35,6 +30,24 @@ enum_ <- function(x = NULL) {
 enumerations <- function(arg) {
   switch(
     arg,
+    # <transparency>
+    action = list(
+      met = "Met Requirements",
+      admin = "Administrative Closure",
+      warning = "Warning Notice",
+      cap = "CAP Request",
+      closure = "Closure Notice",
+      cmp = "CMP Notice",
+      appeal = "Appealed"
+    ),
+    # <clia>
+    certificate = list(
+      compliance = 1,
+      waiver = 2,
+      accreditation = 3,
+      ppm = 4,
+      registration = 9
+    ),
     # <affiliations>
     facility_type = list(
       hospital = "Hospital",
@@ -45,14 +58,6 @@ enumerations <- function(arg) {
       snf = "Skilled nursing facility",
       hospice = "Hospice",
       esrd = "Dialysis facility"
-    ),
-    # <clia>
-    certificate = list(
-      compliance = 1,
-      waiver = 2,
-      accreditation = 3,
-      ppm = 4,
-      registration = 9
     ),
     # <hospitals>
     prov_type = list(

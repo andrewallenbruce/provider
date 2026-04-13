@@ -39,22 +39,22 @@ clia(
 
 \item{certificate}{\verb{<enum>} CLIA certificate type (see details):
 \itemize{
-\item \code{"waiver"}: Waiver
-\item \code{"ppm"}: Provider-Performed Microscopy (PPM)
-\item \code{"registration"}: Registration
-\item \code{"compliance"}: Compliance
-\item \code{"accreditation"}: Accreditation
+\item \code{"waiver"} = Waiver
+\item \code{"ppm"} = Provider-Performed Microscopy (PPM)
+\item \code{"registration"} = Registration
+\item \code{"compliance"} = Compliance
+\item \code{"accreditation"} = Accreditation
 }}
 
 \item{accreditation}{\verb{<enum>} CLIA accrediting organization (see details):
 \itemize{
-\item \code{"a2la"}: A2LA
-\item \code{"aabb"}: AABB
-\item \code{"aoa"}: AOA
-\item \code{"ashi"}: ASHI-HLA
-\item \code{"cap"}: CAP
-\item \code{"cola"}: COLA
-\item \code{"jcaho"}: JCAHO
+\item \code{"a2la"} = A2LA
+\item \code{"aabb"} = AABB
+\item \code{"aoa"} = AOA
+\item \code{"ashi"} = ASHI-HLA
+\item \code{"cap"} = CAP
+\item \code{"cola"} = COLA
+\item \code{"jcaho"} = JCAHO
 }}
 
 \item{city}{\verb{<chr>} City}
@@ -124,13 +124,11 @@ laboratory is accredited by one of the CMS-approved organizations:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
-clia(compliant = TRUE, count = TRUE)
+clia(compliant = FALSE, count = TRUE)
 clia(ccn = provider:::cdc_labs$ccn)
-clia(
-  certificate = c("accreditation", "registration"),
-  city = "Valdosta",
-  state = "GA"
-)
+clia(certificate = c("accreditation", "registration"),
+     city = "Valdosta",
+     state = "GA")
 clia(accreditation = "jcaho", count = TRUE)
 clia(accreditation = "a2la")
 \dontshow{\}) # examplesIf}

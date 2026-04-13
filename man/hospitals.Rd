@@ -2,8 +2,6 @@
 % Please edit documentation in R/cms-hospitals.R
 \name{hospitals}
 \alias{hospitals}
-\alias{subgroups}
-\alias{hospitals2}
 \title{Hospitals Enrolled in Medicare}
 \source{
 \itemize{
@@ -30,34 +28,6 @@ hospitals(
   subgroup = subgroups(),
   count = FALSE,
   set = FALSE
-)
-
-subgroups(
-  acute = NULL,
-  drug = NULL,
-  child = NULL,
-  general = NULL,
-  long = NULL,
-  short = NULL,
-  psych = NULL,
-  rehab = NULL,
-  swing = NULL,
-  psych_unit = NULL,
-  rehab_unit = NULL,
-  specialty = NULL,
-  other = NULL
-)
-
-hospitals2(
-  ccn = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  county = NULL,
-  hosp_type = NULL,
-  ownership = NULL,
-  count = FALSE
 )
 }
 \arguments{
@@ -114,43 +84,9 @@ hospitals2(
 \item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
-
-\item{acute}{\verb{<lgl>} Acute/Short Term Care Hospital}
-
-\item{drug}{\verb{<lgl>} Alcohol/Drug Treatment}
-
-\item{child}{\verb{<lgl>} Children's Hospital}
-
-\item{general}{\verb{<lgl>} General Hospital}
-
-\item{long}{\verb{<lgl>} Long-Term Care}
-
-\item{short}{\verb{<lgl>} Short-Term Care}
-
-\item{psych}{\verb{<lgl>} Psychiatric}
-
-\item{rehab}{\verb{<lgl>} Rehabilitation}
-
-\item{swing}{\verb{<lgl>} Swing-Bed Approved}
-
-\item{psych_unit}{\verb{<lgl>} Psychiatric Unit}
-
-\item{rehab_unit}{\verb{<lgl>} Rehabilitation Unit}
-
-\item{specialty}{\verb{<lgl>} Specialty Hospital}
-
-\item{other}{\verb{<lgl>} Unlisted on CMS form}
-
-\item{county}{\verb{<chr>}}
-
-\item{hosp_type}{\verb{<chr>}}
-
-\item{ownership}{\verb{<chr>}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
-
-A \verb{<subgroups>} object
 }
 \description{
 Hospitals currently enrolled in Medicare. Data includes the hospital's
@@ -177,5 +113,4 @@ x <- hospitals2()
 x
 hospitals(ccn = x$ccn)
 \dontshow{\}) # examplesIf}
-subgroups(acute = TRUE, rehab = TRUE)
 }

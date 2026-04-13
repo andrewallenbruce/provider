@@ -6,7 +6,7 @@
 #'
 #' ### Overview
 #'
-#' The Hospital Price Transparency Enforcement Activities and Outcomes dataset
+#' The __Hospital Price Transparency Enforcement Activities and Outcomes__ dataset
 #' contains information related to enforcement actions taken by CMS following a
 #' compliance review of a hospital's obligation to establish, update and make
 #' public a list of the hospital's standard charges for items and services
@@ -16,7 +16,7 @@
 #' hospital or hospital location address, the outcome or action following a
 #' CMS compliance review and the date of the outcome or action taken.
 #'
-#' ### Actions:
+#' #### Actions:
 #'    - __Met Requirements:__ The hospital was reviewed by CMS and no deficiencies
 #'    were cited. This category includes hospitals that were found to be in
 #'    compliance upon CMS' first review.
@@ -44,12 +44,22 @@
 #' @param address `<chr>` Hospital address
 #' @param city `<chr>` Hospital city
 #' @param state `<chr>` Hospital state
-#' @param action `<chr>` Action taken by CMS following a Compliance Review
+#' @param action `<enum>` Action taken by CMS following a Compliance Review (see Details)
+#'    - `"met"`: Met Requirements
+#'    - `"admin"`: Administrative Closure
+#'    - `"warning"`: Warning Notice
+#'    - `"cap"`: CAP Request
+#'    - `"closure"`: Closure Notice
+#'    - `"cmp"`: CMP Notice
+#'    - `"appeal"` : Appealed
 #' @param count `<lgl>` Return the dataset's total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
+#' transparency(count = TRUE, action = "warning")
 #' transparency(state = "GA", city = "Valdosta")
 #' @autoglobal
 #' @export
@@ -62,6 +72,8 @@ transparency <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_character(action, allow_null = TRUE)
+
   exec_cms(
     END = call_name(call_match()),
     COUNT = count,
@@ -71,7 +83,7 @@ transparency <- function(
       Hosp_Address = address,
       City = city,
       State = state,
-      Action = action
+      Action = enum_(action)
     )
   )
 }

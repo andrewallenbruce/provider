@@ -28,7 +28,16 @@ transparency(
 
 \item{state}{\verb{<chr>} Hospital state}
 
-\item{action}{\verb{<chr>} Action taken by CMS following a Compliance Review}
+\item{action}{\verb{<enum>} Action taken by CMS following a Compliance Review (see Details)
+\itemize{
+\item \code{"met"}: Met Requirements
+\item \code{"admin"}: Administrative Closure
+\item \code{"warning"}: Warning Notice
+\item \code{"cap"}: CAP Request
+\item \code{"closure"}: Closure Notice
+\item \code{"cmp"}: CMP Notice
+\item \code{"appeal"} : Appealed
+}}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
 
@@ -42,7 +51,7 @@ Information on enforcement actions as a result of CMS' assessment of a
 hospital's compliance with the Hospital Price Transparency regulations.
 \subsection{Overview}{
 
-The Hospital Price Transparency Enforcement Activities and Outcomes dataset
+The \strong{Hospital Price Transparency Enforcement Activities and Outcomes} dataset
 contains information related to enforcement actions taken by CMS following a
 compliance review of a hospital's obligation to establish, update and make
 public a list of the hospital's standard charges for items and services
@@ -51,8 +60,6 @@ provided by the hospital, in accordance with regulation (45 CFR 180).
 This data set includes the name of each hospital or hospital location, the
 hospital or hospital location address, the outcome or action following a
 CMS compliance review and the date of the outcome or action taken.
-}
-
 \subsection{Actions:}{
 \itemize{
 \item \strong{Met Requirements:} The hospital was reviewed by CMS and no deficiencies
@@ -76,10 +83,13 @@ CMP \href{https://www.cms.gov/priorities/key-initiatives/hospital-price-transpar
 civil monetary penalty.
 }
 }
+
+}
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 transparency(count = TRUE)
+transparency(count = TRUE, action = "warning")
 transparency(state = "GA", city = "Valdosta")
 \dontshow{\}) # examplesIf}
 }

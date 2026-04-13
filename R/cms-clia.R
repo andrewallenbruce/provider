@@ -28,19 +28,19 @@
 #' @param ccn `<chr>` 10-character CLIA number
 #' @param parent `<chr>` 6-character CLIA number
 #' @param certificate `<enum>` CLIA certificate type (see details):
-#'    - `"waiver"`: Waiver
-#'    - `"ppm"`: Provider-Performed Microscopy (PPM)
-#'    - `"registration"`: Registration
-#'    - `"compliance"`: Compliance
-#'    - `"accreditation"`: Accreditation
+#'    - `"waiver"` = Waiver
+#'    - `"ppm"` = Provider-Performed Microscopy (PPM)
+#'    - `"registration"` = Registration
+#'    - `"compliance"` = Compliance
+#'    - `"accreditation"` = Accreditation
 #' @param accreditation `<enum>` CLIA accrediting organization (see details):
-#'    - `"a2la"`: A2LA
-#'    - `"aabb"`: AABB
-#'    - `"aoa"`: AOA
-#'    - `"ashi"`: ASHI-HLA
-#'    - `"cap"`: CAP
-#'    - `"cola"`: COLA
-#'    - `"jcaho"`: JCAHO
+#'    - `"a2la"` = A2LA
+#'    - `"aabb"` = AABB
+#'    - `"aoa"` = AOA
+#'    - `"ashi"` = ASHI-HLA
+#'    - `"cap"` = CAP
+#'    - `"cola"` = COLA
+#'    - `"jcaho"` = JCAHO
 #' @param city `<chr>` City
 #' @param state `<chr>` State
 #' @param zip `<chr>` Zip code
@@ -51,13 +51,11 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
-#' clia(compliant = TRUE, count = TRUE)
+#' clia(compliant = FALSE, count = TRUE)
 #' clia(ccn = provider:::cdc_labs$ccn)
-#' clia(
-#'   certificate = c("accreditation", "registration"),
-#'   city = "Valdosta",
-#'   state = "GA"
-#' )
+#' clia(certificate = c("accreditation", "registration"),
+#'      city = "Valdosta",
+#'      state = "GA")
 #' clia(accreditation = "jcaho", count = TRUE)
 #' clia(accreditation = "a2la")
 #' @autoglobal
