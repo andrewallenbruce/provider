@@ -57,7 +57,7 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 ```
 
 ```{r}
-clinicians(facility_name = "Elizabethtown Community Hospital")
+clinicians(org_name = "Elizabethtown Community Hospital")
 ```
 
 ```{r}

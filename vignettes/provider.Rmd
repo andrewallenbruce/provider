@@ -3,8 +3,10 @@ title: "Overview of Provider"
 output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Overview of Provider}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}

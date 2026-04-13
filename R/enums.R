@@ -7,7 +7,7 @@ bool_ <- function(x = NULL) {
 }
 
 #' @noRd
-enum_ <- function(x = NULL) {
+enum_ <- function(x = NULL, call = caller_env()) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -20,7 +20,8 @@ enum_ <- function(x = NULL) {
     arg = x,
     values = names2(ENUM),
     multiple = TRUE,
-    error_arg = VAR
+    error_arg = VAR,
+    error_call = call
   )
 
   unlist_(ENUM[x])

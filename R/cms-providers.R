@@ -22,9 +22,8 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
-#' providers(enid = "I20040309000221")
-#' providers(npi = 1417918293)
-#' providers(pac = 2860305554)
+#' providers(count = TRUE, org_name = not(""))
+#' providers(org_name = starts_with("Z"), multi = TRUE)
 #' @autoglobal
 #' @export
 providers <- function(

@@ -5,7 +5,9 @@ exec_prov <- function(END, COUNT, ARG) {
   check_bool(COUNT)
   check_modifiers(ARG, END)
 
-  .c(BASE, LIMIT, NM) %=% constants(END)
+  LIMIT <- 1500L
+
+  .c(BASE, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -26,7 +28,7 @@ exec_prov <- function(END, COUNT, ARG) {
   }
 
   # QUERY --> Request Count
-  N <- request_count(BASE, query(END, ARG))
+  N <- request_count(BASE, build(arg_pro(ARG)))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -38,7 +40,7 @@ exec_prov <- function(END, COUNT, ARG) {
   if (N <= LIMIT) {
     cli_results(N, END)
 
-    res <- request_pro(BASE, LIMIT, query(END, ARG)) |>
+    res <- request_pro(BASE, LIMIT, build(arg_pro(ARG))) |>
       polish(NM)
 
     return(res)
@@ -54,7 +56,7 @@ exec_prov <- function(END, COUNT, ARG) {
     limit = LIMIT,
     offset = "<<i>>"
   )
-  URL <- url_str(BASE, OPT, query(END, ARG))
+  URL <- url_str(BASE, OPT, build(arg_pro(ARG)))
   URL <- create_offset(N, LIMIT, URL)
 
   parallel_results(URL) |>
@@ -68,7 +70,9 @@ exec_cms <- function(END, COUNT, SET, ARG) {
   check_bool(COUNT)
   check_bool(SET)
 
-  .c(BASE, LIMIT, NM) %=% constants(END)
+  LIMIT <- 5000L
+
+  .c(BASE, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -106,7 +110,6 @@ exec_cms <- function(END, COUNT, SET, ARG) {
 
   # QUERY --> Request Count
   N <- request_rows(BASE, build(arg_cms(ARG)))
-  # N <- request_rows(BASE, query(END, ARG))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -144,7 +147,9 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   check_online()
   check_bool(COUNT)
 
-  .c(BASE, LIMIT, NM) %=% constants(END)
+  LIMIT <- 5000L
+
+  .c(BASE, NM) %=% constants(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -165,7 +170,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
   }
 
   # QUERY --> Request Count
-  N <- purrr::imap_vec(BASE, \(x, n) request_rows(x, query(END, ARG)))
+  N <- purrr::imap_vec(BASE, \(x, n) request_rows(x, build(arg_cms(ARG))))
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (sum2(N) == 0L || COUNT) {
@@ -178,7 +183,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id) {
     cli_results2(N, END)
 
     res <- purrr::imap(BASE, \(x, nm) {
-      request_cms(x, LIMIT, query(END, ARG))
+      request_cms(x, LIMIT, build(arg_cms(ARG)))
     }) |>
       collapse::rowbind(idcol = .id, return = 4L) |>
       polish(c(rlang::set_names(.id), NM))

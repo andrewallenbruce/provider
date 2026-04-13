@@ -65,7 +65,7 @@ affiliations(facility_ccn = 370781)
 
 ```{r}
 #| label: reassignments
-# Provider/Organization Reassignment of Benefits
+# Reassignment of Benefits
 reassignments(
   first = starts_with("J"), 
   state = "GA", 
@@ -87,7 +87,7 @@ clinicians(
   city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  year = 2025)
+  grad_year = 2026)
 ```
 
 ```{r}
@@ -102,7 +102,6 @@ opt_out(
 #| label: order_refer
 # Ordering & Referral Eligibility
 order_refer(
-  last = starts_with("B"),
   part_b = TRUE,
   dme = TRUE,
   hha = FALSE,
@@ -112,24 +111,24 @@ order_refer(
 
 ```{r}
 #| label: pending
-# Pending Enrollment Applications
+# Pending Enrollments
 pending(
-  first = starts_with("V"),
+  first = ends_with("E"),
   last = starts_with("A"))
 ```
 
 ```{r}
 #| label: providers
-# Medicare Provider Enrollment
+# Medicare Enrollment
 providers(
   first = contains("C"),
   state = "AK",
-  spec = ends_with("30"))
+  prov_type = ends_with(50))
 ```
 
 ```{r}
 #| label: hospitals
-# Hospitals Enrolled in Medicare Part A
+# Medicare Part A Hospitals
 hospitals(
   city = "Atlanta",
   state = "GA",
@@ -147,7 +146,7 @@ clia(name = starts_with("CDC"))
 ```{r}
 #| label: transparency
 # Hospital Transparency Enforcement
-transparency(action = contains("CMP"))
+transparency(action = "cmp")
 ```
 
 <br>

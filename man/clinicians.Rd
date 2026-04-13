@@ -89,8 +89,9 @@ A Clinician or Group must have:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clinicians(count = TRUE)
+clinicians(count = TRUE, org_name = not(""))
 clinicians(enid = "I20081002000549")
-clinicians(first = "ETAN")
+clinicians(first = "Etan")
 clinicians(count = TRUE,
            city = starts_with("Atl"),
            state = "GA",

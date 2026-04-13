@@ -36,10 +36,6 @@ utils::globalVariables(c(
   # <exec_prov>
   # <exec_cms>
   # <exec_cms2>
-  "LIMIT",
-  # <exec_prov>
-  # <exec_cms>
-  # <exec_cms2>
   "NM",
   # <recode_opt_out>
   # <recode_clinicians>

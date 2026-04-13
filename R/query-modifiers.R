@@ -118,13 +118,13 @@ less_than <- function(x, or_equal = FALSE) {
 #' @rdname modifier
 #' @export
 starts_with <- function(x) {
-  check_string(x)
+  check_required(x)
   Modifier("STARTS WITH", value = x)
 }
 
 #' @rdname modifier
 #' @export
 ends_with <- function(x) {
-  check_string(x)
+  check_required(x)
   Modifier("ENDS WITH", value = x)
 }

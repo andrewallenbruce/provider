@@ -2,7 +2,7 @@
 url2 <- function(n, limit, base, opts = opts(), args = NULL) {
   create_offset(
     n = n,
-    limit = LIMIT,
+    limit = limit,
     url = url_str(
       base = base,
       opts = opts,
@@ -66,21 +66,9 @@ uuid <- function(endpoint) {
 }
 
 #' @noRd
-limit <- function(endpoint) {
-  switch(
-    endpoint,
-    affiliations = ,
-    hospitals2 = ,
-    clinicians = 1500L,
-    5000L
-  )
-}
-
-#' @noRd
 constants <- function(endpoint) {
   list(
     url = uuid(endpoint),
-    limit = limit(endpoint),
     names = column_renames(endpoint)
   )
 }
