@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9071 (2026-04-13)
+
+* init recode_* methods
+
+
 # provider 0.0.1.9070 (2026-04-12)
 
 * experimenting with S7 query build
