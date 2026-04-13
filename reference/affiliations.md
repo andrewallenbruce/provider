@@ -20,6 +20,14 @@ affiliations(
 )
 ```
 
+## Source
+
+- [API: Physician Facility
+  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+
+- [Certification Number (CCN) State
+  Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
+
 ## Arguments
 
 - npi:
@@ -36,7 +44,7 @@ affiliations(
 
 - facility_type:
 
-  `<chr>` facility type:
+  `<enum>` facility type:
 
   - `esrd` = Dialysis facility
 
@@ -71,14 +79,6 @@ affiliations(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
-## References
-
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-
-- [Certification Number (CCN) State
-  Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 
 ## Examples
 

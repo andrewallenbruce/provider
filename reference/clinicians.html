@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9069</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9070</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,16 +66,23 @@
 <span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  school <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  grad_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  facility_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  facility_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+
+<ul><li><p><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">API: National Downloadable File</a></p></li>
+<li><p><a href="https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf" class="external-link">Dictionary: Provider Data Catalog (PDC)</a></p></li>
+<li><p><a href="https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources" class="external-link">Source Information</a></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
@@ -97,7 +104,7 @@
 
 
 <dt id="arg-gender">gender<a class="anchor" aria-label="anchor" href="#arg-gender"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's gender; <code>"F"</code> (Female), <code>"M"</code> (Male), or <code>"U"</code> (Unknown)</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Provider's gender; <code>"F"</code> (Female), <code>"M"</code> (Male), or <code>"U"</code> (Unknown)</p></dd>
 
 
 <dt id="arg-credential">credential<a class="anchor" aria-label="anchor" href="#arg-credential"></a></dt>
@@ -112,7 +119,7 @@
 <dd><p><code>&lt;chr&gt;</code> Provider’s medical school</p></dd>
 
 
-<dt id="arg-year">year<a class="anchor" aria-label="anchor" href="#arg-year"></a></dt>
+<dt id="arg-grad-year">grad_year<a class="anchor" aria-label="anchor" href="#arg-grad-year"></a></dt>
 <dd><p><code>&lt;int&gt;</code> Provider’s graduation year</p></dd>
 
 
@@ -120,11 +127,11 @@
 <dd><p><code>&lt;chr&gt;</code> Facility's city, state, zip</p></dd>
 
 
-<dt id="arg-facility-name">facility_name<a class="anchor" aria-label="anchor" href="#arg-facility-name"></a></dt>
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Facility associated with Provider</p></dd>
 
 
-<dt id="arg-facility-pac">facility_pac<a class="anchor" aria-label="anchor" href="#arg-facility-pac"></a></dt>
+<dt id="arg-org-pac">org_pac<a class="anchor" aria-label="anchor" href="#arg-org-pac"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Facility's PECOS Associate Control ID</p></dd>
 
 
@@ -156,13 +163,6 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 </ul></div>
 
     </div>
-    <div class="section level2">
-    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-
-<ul><li><p><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">API: National Downloadable File</a></p></li>
-<li><p><a href="https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf" class="external-link">Dictionary: Provider Data Catalog (PDC)</a></p></li>
-<li><p><a href="https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources" class="external-link">Source Information</a></p></li>
-</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -197,9 +197,10 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_pac &lt;chr&gt;, org_mem &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;, org_city &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_state &lt;chr&gt;, org_zip &lt;chr&gt;, org_phone &lt;chr&gt;, ind &lt;chr&gt;, org &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tlh &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"Atl"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2025</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">389</span> results.</span>
-<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, year <span class="op">=</span> <span class="fl">2025</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>           city <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"Atl"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>           state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
+<span class="r-in"><span>           grad_year <span class="op">=</span> <span class="fl">2025</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">389</span> results.</span>
 </code></pre></div>
     </div>

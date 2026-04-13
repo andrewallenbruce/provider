@@ -17,15 +17,26 @@ clinicians(
   credential = NULL,
   specialty = NULL,
   school = NULL,
-  year = NULL,
+  grad_year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  facility_name = NULL,
-  facility_pac = NULL,
+  org_name = NULL,
+  org_pac = NULL,
   count = FALSE
 )
 ```
+
+## Source
+
+- [API: National Downloadable
+  File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+
+- [Dictionary: Provider Data Catalog
+  (PDC)](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
+
+- [Source
+  Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
 
 ## Arguments
 
@@ -47,7 +58,7 @@ clinicians(
 
 - gender:
 
-  `<chr>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
+  `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
   (Unknown)
 
 - credential:
@@ -62,7 +73,7 @@ clinicians(
 
   `<chr>` Provider’s medical school
 
-- year:
+- grad_year:
 
   `<int>` Provider’s graduation year
 
@@ -70,11 +81,11 @@ clinicians(
 
   `<chr>` Facility's city, state, zip
 
-- facility_name:
+- org_name:
 
   `<chr>` Facility associated with Provider
 
-- facility_pac:
+- org_pac:
 
   `<chr>` Facility's PECOS Associate Control ID
 
@@ -112,17 +123,6 @@ A Clinician or Group must have:
 
 - Two approved clinicians reassigning their benefits to the group
 
-## References
-
-- [API: National Downloadable
-  File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
-
-- [Dictionary: Provider Data Catalog
-  (PDC)](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
-
-- [Source
-  Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
-
 ## Examples
 
 ``` r
@@ -157,8 +157,9 @@ clinicians(first = "ETAN")
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
 #> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
 #> #   tlh <chr>
-clinicians(count = TRUE, city = starts_with("Atl"), state = "GA", year = 2025)
-#> ✔ clinicians returned 389 results.
-clinicians(count = TRUE, city = "Atlanta", state = "GA", year = 2025)
+clinicians(count = TRUE,
+           city = starts_with("Atl"),
+           state = "GA",
+           grad_year = 2025)
 #> ✔ clinicians returned 389 results.
 ```
