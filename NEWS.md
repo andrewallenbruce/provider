@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9073 (2026-04-13)
+
+* fixed bug in modifiers
+* fixed bug in enum
+* rebuilt README
+
+
 # provider 0.0.1.9072 (2026-04-13)
 
 * added enums
