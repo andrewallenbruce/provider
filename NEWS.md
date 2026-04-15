@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9075 (2026-04-15)
+
+* added more `recode_with` implementations
+
+
 # provider 0.0.1.9074 (2026-04-15)
 
 * added helpers for building queries
