@@ -130,7 +130,6 @@ providers(
 #| label: hospitals
 # Medicare Part A Hospitals
 hospitals(
-  city = "Atlanta",
   state = "GA",
   subgroup = subgroups(
     acute = FALSE,
