@@ -63,7 +63,6 @@ opt_out <- function(
   check_bool(order_refer, allow_null = TRUE)
 
   exec_cms(
-    END = call_name(call_match()),
     COUNT = count,
     SET = set,
     ARG = param_cms(

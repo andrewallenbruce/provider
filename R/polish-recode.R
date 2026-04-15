@@ -4,8 +4,9 @@ RC_npi <- function(x) {
 }
 
 #' @noRd
-RC_affiliations <- function(x) {
-  RC_npi(x)
+RC_npi_multi <- function(x) {
+  RC_npi(x) |>
+    collapse::tfmv("multi", bin_col)
 }
 
 #' @noRd
@@ -59,17 +60,6 @@ RC_hospitals <- function(x) {
 }
 
 #' @noRd
-RC_providers <- function(x) {
-  RC_npi(x) |>
-    collapse::tfmv("multi", bin_col)
-}
-
-#' @noRd
-RC_pending <- function(x) {
-  RC_npi(x)
-}
-
-#' @noRd
 #' @autoglobal
 RC_opt_out <- function(x) {
   RC_npi(x) |>
@@ -85,7 +75,7 @@ RC_opt_out <- function(x) {
 #' @noRd
 RC_order_refer <- function(x) {
   RC_npi(x) |>
-    collapse::tfmv(c("part_b", "dme", "hha", "pmd", "hospice"), bin_col)
+    collapse::tfmv(c("ptb", "dme", "hha", "pmd", "hospice"), bin_col)
 }
 
 #' @noRd
@@ -95,8 +85,7 @@ RC_reassignments <- function(x) {
 
 #' @noRd
 RC_revocations <- function(x) {
-  RC_npi(x) |>
-    collapse::tfmv("multi", bin_col) |>
+  RC_npi_multi(x) |>
     collapse::tfmv(c("start_date", "end_date"), as_date_ymd)
 }
 

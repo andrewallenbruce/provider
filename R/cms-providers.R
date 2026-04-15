@@ -44,7 +44,6 @@ providers <- function(
   check_bool(multi, allow_null = TRUE)
 
   exec_cms(
-    END = call_name(call_match()),
     COUNT = count,
     SET = set,
     ARG = param_cms(

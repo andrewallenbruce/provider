@@ -9,6 +9,36 @@ create_offset <- function(n, limit, url) {
 }
 
 #' @noRd
+flatten_opts <- function(x) {
+  paste0(names(x), "=", unlist_(x), collapse = "&")
+}
+
+#' @noRd
+opts_prov <- function(
+  count = NULL,
+  results = NULL,
+  limit = NULL,
+  offset = NULL
+) {
+  x <- params(count = count, results = results, limit = limit, offset = offset)
+
+  if (length(x) == 0L) {
+    return(NULL)
+  }
+  flatten_opts(x)
+}
+
+#' @noRd
+opts_cms <- function(size = NULL, offset = NULL) {
+  x <- params(size = size, offset = offset)
+
+  if (length(x) == 0L) {
+    return(NULL)
+  }
+  flatten_opts(x)
+}
+
+#' @noRd
 opts <- function(
   count = NULL,
   results = NULL,
@@ -29,8 +59,7 @@ opts <- function(
   if (length(x) == 0L) {
     return(NULL)
   }
-
-  paste0(names(x), "=", unlist_(x), collapse = "&")
+  flatten_opts(x)
 }
 
 #' @noRd

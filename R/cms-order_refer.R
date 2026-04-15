@@ -64,7 +64,6 @@ order_refer <- function(
   check_bool(hospice, allow_null = TRUE)
 
   exec_cms(
-    END = call_name(call_match()),
     COUNT = count,
     SET = set,
     ARG = param_cms(

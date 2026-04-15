@@ -212,7 +212,7 @@ column_renames <- function(endpoint) {
       FIRST_NAME = "first",
       LAST_NAME = "last",
       NPI = "npi",
-      PARTB = "part_b",
+      PARTB = "ptb",
       DME = "dme",
       HHA = "hha",
       PMD = "pmd",

@@ -1,10 +1,11 @@
 #' @noRd
 #' @autoglobal
-exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
+exec_prov <- function(COUNT, ARG, LIMIT = 1500L) {
   check_online()
   check_bool(COUNT)
   check_modifiers(ARG, END)
 
+  END <- call_name(call_match(call = caller_call(), fn = caller_fn()))
   BASE <- uuid_prov(END)
 
   # COUNT --> Return Invisibly
@@ -53,11 +54,12 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
 
 #' @noRd
 #' @autoglobal
-exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
+exec_cms <- function(COUNT, SET, ARG, LIMIT = 5000L) {
   check_online()
   check_bool(COUNT)
   check_bool(SET)
 
+  END <- call_name(call_match(call = caller_call(), fn = caller_fn()))
   BASE <- uuid_cms(END)
 
   # N0 QUERY
@@ -119,10 +121,11 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
 
 #' @noRd
 #' @autoglobal
-exec_cms2 <- function(END, COUNT, ARG, .id, LIMIT = 5000L) {
+exec_cms2 <- function(COUNT, ARG, .id, LIMIT = 5000L) {
   check_online()
   check_bool(COUNT)
 
+  END <- call_name(call_match(call = caller_call(), fn = caller_fn()))
   BASE <- uuid_cms(END)
 
   # COUNT --> Return Invisibly

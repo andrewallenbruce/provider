@@ -29,7 +29,6 @@ pending <- function(
   count = FALSE
 ) {
   exec_cms2(
-    END = call_name(call_match()),
     COUNT = count,
     ARG = param_cms(
       NPI = npi,
