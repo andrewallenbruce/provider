@@ -132,17 +132,16 @@ clinicians(count = TRUE, org_name = not(""))
 #> ✔ clinicians returned 2,586,064 results.
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
-#> # A data frame: 1 × 25
+#> # A data frame: 1 × 22
 #>   first   middle last  suffix gender cred  school grad_year specialty spec_other
 #> * <chr>   <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
 #> 1 DOROTHY E      MCCU… NA     F      AU    OTHER  2008      QUALIFIE… NA        
-#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> # ℹ 12 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
-#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
-#> #   tlh <chr>
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>
 clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
-#> # A data frame: 11 × 25
+#> # A data frame: 11 × 22
 #>    first middle last   suffix gender cred  school grad_year specialty spec_other
 #>  * <chr> <chr>  <chr>  <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
 #>  1 ETAN  ARIEL  MARKS  NA     M      DO    NOVA … 2013      PATHOLOGY NA        
@@ -156,10 +155,9 @@ clinicians(first = "Etan")
 #>  9 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
 #> 10 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
 #> 11 ETAN  NA     SUGAR… NA     M      NA    ALBER… 2011      ORTHOPED… NA        
-#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> # ℹ 12 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
-#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
-#> #   tlh <chr>
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>
 clinicians(count = TRUE,
            city = starts_with("Atl"),
            state = "GA",

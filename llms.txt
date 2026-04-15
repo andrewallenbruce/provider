@@ -99,15 +99,14 @@ clinicians(
   gender = "F",
   grad_year = 2026)
 ✔ clinicians returned 2 results.
-# A data frame: 2 × 25
+# A data frame: 2 × 22
   first   middle last  suffix gender cred  school grad_year specialty spec_other
 * <chr>   <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
 1 CHRIST… <NA>   AGYE… <NA>   F      <NA>  OTHER  2026      PHYSICIA… <NA>      
 2 CHRIST… <NA>   AGYE… <NA>   F      <NA>  OTHER  2026      PHYSICIA… <NA>      
-# ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+# ℹ 12 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
-#   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
-#   tlh <chr>
+#   org_state <chr>, org_zip <chr>, org_phone <chr>
 ```
 
 ``` r
@@ -163,10 +162,10 @@ order_refer(
 pending(
   first = ends_with("E"),
   last = starts_with("A"))
-✔ pending returned 54 results.
-• Physician     : 18
-• Non-Physician : 36
-# A data frame: 54 × 4
+✔ pending returned 58 results.
+• Physician     : 19
+• Non-Physician : 39
+# A data frame: 58 × 4
    prov_type first     last        npi       
  * <fct>     <chr>     <chr>       <chr>     
  1 Physician JOSE      ABREU-ELIAS 1821010513
@@ -175,11 +174,11 @@ pending(
  4 Physician LUCIE     AHN         1558209502
  5 Physician OLUMIDE   AJAYI       1740029511
  6 Physician JUDE      ALCIDE      1578876108
- 7 Physician EMILIE    ALLAERT     1922809870
- 8 Physician KATHERINE ALLEN       1851823488
- 9 Physician ILEANE    AMADOR      1568427268
-10 Physician JASMINE   AMBROSIO    1881584712
-# ℹ 44 more rows
+ 7 Physician CATHERINE ALDER       1235996307
+ 8 Physician EMILIE    ALLAERT     1922809870
+ 9 Physician KATHERINE ALLEN       1851823488
+10 Physician ILEANE    AMADOR      1568427268
+# ℹ 48 more rows
 ```
 
 ``` r
@@ -215,7 +214,7 @@ hospitals(
     psych = TRUE))
 ✔ hospitals returned 2 results.
 # A data frame: 2 × 39
-  org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
+  org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn2 
 * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 1 UHS OF ANCHO… ANCHOR… O201… GA         00-09 PART A P… 1023… Y     1140… <NA> 
 2 UHS OF PEACH… PEACHF… O201… GA         00-09 PART A P… 1093… N     1140… <NA> 
@@ -233,45 +232,45 @@ hospitals(
 clia(name = starts_with("CDC"))
 ✔ clia returned 23 results.
 # A data frame: 23 × 82
-   name_1 name_2 ccn   parent xref  chow_n chow_date chow_prv pos   status add_1
- * <chr>  <chr>  <chr> <chr>  <chr> <chr>  <chr>     <chr>    <chr> <chr>  <chr>
- 1 CDC A… <NA>   36D1… <NA>   <NA>  0      <NA>      <NA>     N     B      7690…
- 2 CDC A… CENTE… 02D0… <NA>   <NA>  0      <NA>      <NA>     N     A      4055…
- 3 CDC H… <NA>   36D1… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   807 …
- 4 CDC H… <NA>   36D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   8900…
- 5 CDC M… <NA>   36D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   6749…
- 6 CDC O… <NA>   06D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   3156…
- 7 CDC O… <NA>   06D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   3156…
- 8 CDC O… <NA>   11D2… <NA>   <NA>  0      <NA>      <NA>     N     <NA>   1600…
- 9 CDC O… <NA>   09D0… 092512 <NA>  0      <NA>      <NA>     N     <NA>   3178…
-10 CDC O… <NA>   49D0… 492535 <NA>  0      <NA>      <NA>     N     <NA>   8003…
+   fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
+ * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
+ 1 CDC ACCESSC… <NA>       36D1074001   <NA>       <NA>        <NA>  0     <NA> 
+ 2 CDC ARCTIC … CENTERS F… 02D0873639   <NA>       <NA>        <NA>  0     <NA> 
+ 3 CDC HOME CA… <NA>       36D1072971   <NA>       <NA>        <NA>  0     <NA> 
+ 4 CDC HOMECAR… <NA>       36D2093880   <NA>       <NA>        <NA>  0     <NA> 
+ 5 CDC MIDDLEB… <NA>       36D2143885   <NA>       <NA>        <NA>  0     <NA> 
+ 6 CDC OCCUPAT… <NA>       06D2096269   <NA>       <NA>        <NA>  0     <NA> 
+ 7 CDC OCCUPAT… <NA>       06D2328787   <NA>       <NA>        <NA>  0     <NA> 
+ 8 CDC OCCUPAT… <NA>       11D2099528   <NA>       <NA>        <NA>  0     <NA> 
+ 9 CDC OF NE W… <NA>       09D0694204   092512     <NA>        <NA>  0     <NA> 
+10 CDC OF SPRI… <NA>       49D0714214   492535     <NA>        <NA>  0     <NA> 
 # ℹ 13 more rows
-# ℹ 71 more variables: add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>,
-#   state <chr>, zip <chr>, region <chr>, region_st <chr>, ssa_st <chr>,
-#   ssa_cty <chr>, fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>,
-#   eligible <chr>, term_pgm <chr>, term_clia <chr>, apl_type <chr>,
-#   cert_type <chr>, fac_type <chr>, owner <chr>, cert_action <chr>,
-#   orig_date <chr>, apl_date <chr>, cert_date <chr>, eff_date <chr>, …
+# ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
+#   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
+#   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
+#   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
+#   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
+#   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, …
 ```
 
 ``` r
 # Hospital Transparency Enforcement
-transparency(action = "cmp")
-✔ transparency returned 26 results.
-# A data frame: 26 × 7
-   id    name                           address   city  state action action_date
- * <chr> <chr>                          <chr>     <chr> <chr> <chr>  <chr>      
- 1 25    Kell West Regional Hospital    5420 Kel… Wich… TX    CMP N… 2023-04-19 
- 2 42    Northside Hospital Atlanta     1000 Joh… Atla… GA    CMP N… 2022-06-07 
- 3 89    Community First Medical Center 5645 W A… Chic… IL    CMP N… 2023-07-24 
- 4 99    Northside Hospital - Cherokee  450 Nort… Cant… GA    CMP N… 2022-06-07 
- 5 287   Jackson Memorial Hospital      1611 NW … Miami FL    CMP N… 2024-07-03 
- 6 334   Baytown Medical Center         1626 W B… Bayt… TX    CMP N… 2024-12-19 
- 7 368   HCA Frisbie Memorial Hospital  11 White… Roch… NH    CMP N… 2023-04-19 
- 8 555   First Surgical Hospital        4801 Bis… Bell… TX    CMP N… 2025-01-16 
- 9 563   Fulton County Hospital         679 N Ma… Salem AR    CMP N… 2023-07-20 
-10 697   West Chase Houston Hospital    6011 W S… Hous… TX    CMP N… 2024-12-19 
-# ℹ 16 more rows
+transparency(action = "warn", state = c("FL", "GA"))
+✔ transparency returned 230 results.
+# A data frame: 230 × 7
+   id    name                             address city  state action action_date
+ * <chr> <chr>                            <chr>   <chr> <chr> <chr>  <chr>      
+ 1 10    Bethesda Hospital East           2815 S… Boyn… FL    Warni… 2024-01-31 
+ 2 22    Bethesda Hospital West           9655  … Boyn… FL    Warni… 2024-02-01 
+ 3 42    Northside Hospital Atlanta       1000 J… Atla… GA    Warni… 2021-04-19 
+ 4 66    UF Health Jacksonville           655 W … Jack… FL    Warni… 2021-06-23 
+ 5 68    Wellstar Kennestone Regional Me… 677 Ch… Mari… GA    Warni… 2021-04-19 
+ 6 75    Northeast Georgia Medical Cente… 743 Sp… Gain… GA    Warni… 2021-04-19 
+ 7 79    Holmes Regional Medical Center   1350 H… Melb… FL    Warni… 2021-04-19 
+ 8 88    Larkin Hospital Palm Springs     1475 W… Hial… FL    Warni… 2021-04-19 
+ 9 99    Northside Hospital - Cherokee    450 No… Cant… GA    Warni… 2021-05-18 
+10 113   Halifax Health Medical Center o… 303 N … Dayt… FL    Warni… 2021-05-18 
+# ℹ 220 more rows
 ```
 
   

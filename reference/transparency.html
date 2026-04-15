@@ -89,7 +89,7 @@ civil monetary penalty.
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9073</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9074</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -211,13 +211,13 @@ civil monetary penalty.</p></li>
 
 
 <dt id="arg-action">action<a class="anchor" aria-label="anchor" href="#arg-action"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Action taken by CMS following a Compliance Review (see Details)</p><ul><li><p><code>"met"</code>: Met Requirements</p></li>
-<li><p><code>"admin"</code>: Administrative Closure</p></li>
-<li><p><code>"warning"</code>: Warning Notice</p></li>
-<li><p><code>"cap"</code>: CAP Request</p></li>
-<li><p><code>"closure"</code>: Closure Notice</p></li>
-<li><p><code>"cmp"</code>: CMP Notice</p></li>
-<li><p><code>"appeal"</code> : Appealed</p></li>
+<dd><p><code>&lt;enum&gt;</code> Action taken by CMS following a Compliance Review (see Details)</p><ul><li><p><code>"met"</code> = Met Requirements</p></li>
+<li><p><code>"admin"</code> = Administrative Closure</p></li>
+<li><p><code>"warn"</code> = Warning Notice</p></li>
+<li><p><code>"cap"</code> = CAP Request</p></li>
+<li><p><code>"closure"</code> = Closure Notice</p></li>
+<li><p><code>"cmp"</code> = CMP Notice</p></li>
+<li><p><code>"appeal"</code> = Appealed</p></li>
 </ul></dd>
 
 
@@ -238,7 +238,7 @@ civil monetary penalty.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">transparency</span> has <span style="font-weight: bold;">10,726</span> rows.</span>
-<span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, action <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, action <span class="op">=</span> <span class="st">"warn"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">transparency</span> returned <span style="font-weight: bold;">2,695</span> results.</span>
 <span class="r-in"><span><span class="fu">transparency</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">transparency</span> returned <span style="font-weight: bold;">1</span> result.</span>

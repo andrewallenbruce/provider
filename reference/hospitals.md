@@ -88,7 +88,7 @@ hospitals(
 
   - `llc` = LLC
 
-  - `partner` = Partnership
+  - `part` = Partnership
 
   - `sole` = Sole Proprietor
 
@@ -96,7 +96,7 @@ hospitals(
 
   `<enum>` Provider type;
 
-  - `hosp` = Part A Hospital
+  - `hospital` = Part A Hospital
 
   - `reh` = Rural Emergency Hospital
 
@@ -141,19 +141,28 @@ hospitals(count = TRUE)
 hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
 
-hospitals(state = "GA", prov_type = "reh")
-#> ✔ hospitals returned 1 result.
-#> # A data frame: 1 × 39
-#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
-#> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
-#> 1 IRWIN COUNTY… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
+hospitals(prov_type = "reh")
+#> ✔ hospitals returned 44 results.
+#> # A data frame: 44 × 39
+#>    org_name     org_dba enid  enid_state spec  specialty npi   multi ccn   ccn2 
+#>  * <chr>        <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
+#>  1 GUADALUPE C… GUADAL… O202… NM         00-24 PART A P… 1346… N     3207… 3200…
+#>  2 CROSBYTON C… NA      O202… TX         00-24 PART A P… 1063… N     6707… 4513…
+#>  3 STILLWATER … STILLW… O202… OK         00-24 PART A P… 1003… N     3707… 3701…
+#>  4 ANSON HOSPI… ANSON … O202… TX         00-24 PART A P… 1457… N     6707… 4500…
+#>  5 FALLS COMMU… NA      O202… TX         00-24 PART A P… 1841… N     6707… 4503…
+#>  6 IRWIN COUNT… PROGRE… O202… GA         00-24 PART A P… 1720… N     1107… 1101…
+#>  7 MEMORIAL ME… CHI ST… O202… TX         00-24 PART A P… 1578… N     6707… 4513…
+#>  8 STILLWATER … STILLW… O202… OK         00-24 PART A P… 1104… N     3707… 3700…
+#>  9 OUR LADY OF… NA      O202… LA         00-24 PART A P… 1609… N     1907… 1913…
+#> 10 STURGIS HOS… STURGI… O202… MI         00-24 PART A P… 1598… N     2307… 2300…
+#> # ℹ 34 more rows
 #> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
 #> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
 #> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
 #> #   reh_ind <chr>, reh_date <chr>, sub_general <chr>, sub_acute <chr>,
 #> #   sub_drug <chr>, sub_child <chr>, sub_long <chr>, sub_psych <chr>,
-#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>,
-#> #   sub_rehab_unit <chr>, sub_specialty <chr>, sub_other <chr>, …
+#> #   sub_rehab <chr>, sub_short <chr>, sub_swing <chr>, sub_psych_unit <chr>, …
 
 x <- hospitals(
   city = "Atlanta",
@@ -164,7 +173,7 @@ x <- hospitals(
 #> ✔ hospitals returned 2 results.
 x
 #> # A data frame: 2 × 39
-#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
+#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn2 
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 UHS OF ANCHO… ANCHOR… O201… GA         00-09 PART A P… 1023… Y     1140… NA   
 #> 2 UHS OF PEACH… PEACHF… O201… GA         00-09 PART A P… 1093… N     1140… NA   
@@ -203,7 +212,7 @@ x
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
 #> # A data frame: 8 × 39
-#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
+#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn2 
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 HOUSTON COUN… SOUTHE… O200… AL         00-09 PART A P… 1164… N     0100… NA   
 #> 2 HH HEALTH SY… MARSHA… O201… AL         00-09 PART A P… 1407… N     0100… NA   

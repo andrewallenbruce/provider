@@ -93,7 +93,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ℹ order_refer has 2,004,978 rows.
+#> ℹ order_refer has 2,005,720 rows.
 order_refer(npi = 1003026055)
 #> ✔ order_refer returned 1 result.
 #> # A data frame: 1 × 8
@@ -105,16 +105,16 @@ order_refer(first = "Jennifer", last = "Smith")
 #> # A data frame: 135 × 8
 #>    first    last  npi        part_b dme   hha   pmd   hospice
 #>  * <chr>    <chr> <chr>      <chr>  <chr> <chr> <chr> <chr>  
-#>  1 JENNIFER SMITH 1255983557 Y      Y     Y     N     Y      
-#>  2 JENNIFER SMITH 1063260172 Y      Y     Y     Y     N      
-#>  3 JENNIFER SMITH 1972332542 Y      Y     Y     Y     N      
-#>  4 JENNIFER SMITH 1588617773 Y      Y     Y     Y     N      
-#>  5 JENNIFER SMITH 1023408291 Y      Y     Y     Y     N      
-#>  6 JENNIFER SMITH 1336652726 Y      Y     Y     Y     N      
-#>  7 JENNIFER SMITH 1528351160 Y      Y     Y     Y     Y      
-#>  8 JENNIFER SMITH 1992396162 Y      Y     N     N     N      
-#>  9 JENNIFER SMITH 1942592324 Y      Y     Y     Y     N      
-#> 10 JENNIFER SMITH 1134237498 Y      Y     Y     Y     Y      
+#>  1 JENNIFER SMITH 1386871028 Y      Y     Y     Y     Y      
+#>  2 JENNIFER SMITH 1922290519 Y      Y     Y     Y     Y      
+#>  3 JENNIFER SMITH 1881115061 Y      Y     N     N     N      
+#>  4 JENNIFER SMITH 1700809498 Y      Y     Y     Y     N      
+#>  5 JENNIFER SMITH 1215919170 Y      Y     Y     Y     Y      
+#>  6 JENNIFER SMITH 1275917817 Y      Y     Y     Y     N      
+#>  7 JENNIFER SMITH 1588849350 Y      Y     Y     Y     N      
+#>  8 JENNIFER SMITH 1497270268 Y      Y     Y     Y     N      
+#>  9 JENNIFER SMITH 1497230395 Y      Y     Y     Y     N      
+#> 10 JENNIFER SMITH 1033486725 Y      Y     Y     Y     N      
 #> # ℹ 125 more rows
 order_refer(
   part_b = TRUE,

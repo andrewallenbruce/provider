@@ -44,18 +44,18 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ℹ pending has 9,453 rows.
-#> • Physician     : 3,323
-#> • Non-Physician : 6,130
+#> ℹ pending has 9,477 rows.
+#> • Physician     : 3,402
+#> • Non-Physician : 6,075
 pending(first = "Victor", count = TRUE)
 #> ✔ pending returned 5 results.
-#> • Physician     : 4
-#> • Non-Physician : 1
+#> • Physician     : 3
+#> • Non-Physician : 2
 pending(first = starts_with("V"))
-#> ✔ pending returned 126 results.
-#> • Physician     : 41
-#> • Non-Physician : 85
-#> # A data frame: 126 × 4
+#> ✔ pending returned 132 results.
+#> • Physician     : 38
+#> • Non-Physician : 94
+#> # A data frame: 132 × 4
 #>    prov_type first        last             npi       
 #>  * <fct>     <chr>        <chr>            <chr>     
 #>  1 Physician VADIN        LALL DASS        1144512724
@@ -68,5 +68,5 @@ pending(first = starts_with("V"))
 #>  8 Physician VENKATARAMAN PATLA            1124038419
 #>  9 Physician VENNELA      PULIKANTI        1821238999
 #> 10 Physician VERNON       SHARP            1023616224
-#> # ℹ 116 more rows
+#> # ℹ 122 more rows
 ```

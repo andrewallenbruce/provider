@@ -48,7 +48,7 @@ ccn |> str()
 #>  $ npi           : chr  "1033270699" "1508845637" "1568419976" "1306849708" ...
 #>  $ multi         : chr  "N" "N" "N" "N" ...
 #>  $ ccn           : chr  "330250" "470001" "470003" "470011" ...
-#>  $ ccn_2         : chr  NA NA NA NA ...
+#>  $ ccn2          : chr  NA NA NA NA ...
 #>  $ pac           : chr  "2769396878" "9335138817" "3779491071" "9335112929" ...
 #>  $ inc_date      : chr  "1926-01-01" "1984-03-01" "1995-01-01" "1904-10-26" ...
 #>  $ inc_state     : chr  "NY" "VT" "VT" "VT" ...
@@ -109,7 +109,7 @@ providers(org_name = "Elizabethtown Community Hospital")
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
 #> # A data frame: 2 × 39
-#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn_2
+#>   org_name      org_dba enid  enid_state spec  specialty npi   multi ccn   ccn2 
 #> * <chr>         <chr>   <chr> <chr>      <chr> <chr>     <chr> <chr> <chr> <chr>
 #> 1 ELIZABETHTOW… NA      O201… NY         00-85 PART A P… 1891… Y     3313… NA   
 #> 2 ELIZABETHTOW… NA      O202… NY         00-85 PART A P… 1407… N     33Z3… NA   
@@ -125,7 +125,7 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 ``` r
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 58 results.
-#> # A data frame: 58 × 25
+#> # A data frame: 58 × 22
 #>    first  middle last  suffix gender cred  school grad_year specialty spec_other
 #>  * <chr>  <chr>  <chr> <chr>  <chr>  <chr> <chr>  <chr>     <chr>     <chr>     
 #>  1 GAVIN  L      NOBLE NA     M      MD    STATE… 1999      CARDIOVA… INTERNAL …
@@ -139,10 +139,9 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #>  9 ROB    L      DEMU… NA     M      MD    STATE… 1996      INTERNAL… NA        
 #> 10 JAMES  E      EAST  NA     M      MD    OTHER  2016      DIAGNOST… NA        
 #> # ℹ 48 more rows
-#> # ℹ 15 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
+#> # ℹ 12 more variables: npi <chr>, pac <chr>, enid <chr>, org_name <chr>,
 #> #   org_pac <chr>, org_mem <chr>, add_1 <chr>, add_2 <chr>, org_city <chr>,
-#> #   org_state <chr>, org_zip <chr>, org_phone <chr>, ind <chr>, org <chr>,
-#> #   tlh <chr>
+#> #   org_state <chr>, org_zip <chr>, org_phone <chr>
 ```
 
 ``` r

@@ -1,6 +1,6 @@
-# Subgroups
+# Hospital Subgroups
 
-Subgroups
+Hospital Subgroups
 
 ## Usage
 

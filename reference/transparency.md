@@ -91,19 +91,19 @@ transparency(
   `<enum>` Action taken by CMS following a Compliance Review (see
   Details)
 
-  - `"met"`: Met Requirements
+  - `"met"` = Met Requirements
 
-  - `"admin"`: Administrative Closure
+  - `"admin"` = Administrative Closure
 
-  - `"warning"`: Warning Notice
+  - `"warn"` = Warning Notice
 
-  - `"cap"`: CAP Request
+  - `"cap"` = CAP Request
 
-  - `"closure"`: Closure Notice
+  - `"closure"` = Closure Notice
 
-  - `"cmp"`: CMP Notice
+  - `"cmp"` = CMP Notice
 
-  - `"appeal"` : Appealed
+  - `"appeal"` = Appealed
 
 - count:
 
@@ -122,7 +122,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 transparency(count = TRUE)
 #> ℹ transparency has 10,726 rows.
-transparency(count = TRUE, action = "warning")
+transparency(count = TRUE, action = "warn")
 #> ✔ transparency returned 2,695 results.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.

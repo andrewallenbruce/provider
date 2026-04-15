@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9074 (2026-04-15)
+
+- added helpers for building queries
+
 ## provider 0.0.1.9073 (2026-04-13)
 
 - fixed bug in modifiers
