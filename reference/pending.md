@@ -55,9 +55,9 @@ pending(first = starts_with("V"))
 #> ✔ pending returned 132 results.
 #> • Physician     : 38
 #> • Non-Physician : 94
-#> # A data frame: 132 × 4
-#>    prov_type first        last             npi       
-#>  * <fct>     <chr>        <chr>            <chr>     
+#> # A tibble: 132 × 4
+#>    prov_type first        last                    npi
+#>  * <chr>     <chr>        <chr>                 <int>
 #>  1 Physician VADIN        LALL DASS        1144512724
 #>  2 Physician VAJEH        VATANKHAHI       1003754821
 #>  3 Physician VALENTINA    TURBAY CABALLERO 1689304545

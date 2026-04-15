@@ -43,7 +43,7 @@ conditions.
 
 ``` r
 hrsa_items()
-#> # A data frame: 11 × 10
+#> # A tibble: 11 × 10
 #>       id name      parentLayerId defaultVisibility subLayerIds minScale maxScale
 #>  * <int> <chr>             <int> <lgl>             <lgl>          <int>    <int>
 #>  1     0 Hospitals            -1 FALSE             NA                 0        0

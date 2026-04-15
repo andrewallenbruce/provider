@@ -87,7 +87,7 @@ affiliations(middle = "", count = TRUE)
 #> ✔ affiliations returned 558,466 results.
 affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.
-#> # A data frame: 4 × 9
+#> # A tibble: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #> * <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #> 1 JEFFREY KLOTZ  NA     NA     1073… 3870… Nursing home  33Z302       331302    
@@ -96,7 +96,7 @@ affiliations(facility_ccn = "33Z302")
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 4 results.
-#> # A data frame: 4 × 9
+#> # A tibble: 4 × 9
 #>   first   last   middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #> * <chr>   <chr>  <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #> 1 JEFFREY KLOTZ  NA     NA     1073… 3870… Nursing home  33Z302       331302    
@@ -105,7 +105,7 @@ affiliations(parent_ccn = 331302)
 #> 4 DRAGOS  BANU   NA     NA     1558… 6709… Nursing home  33Z302       331302    
 affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
-#> # A data frame: 206 × 9
+#> # A tibble: 206 × 9
 #>    first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
 #>  * <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
 #>  1 LAURA   GREE… A      NA     1003… 1759… Hospital      331302       NA        

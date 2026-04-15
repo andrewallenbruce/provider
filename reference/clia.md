@@ -190,7 +190,7 @@ clia(compliant = FALSE, count = TRUE)
 #> ✔ clia returned 5,161 results.
 clia(ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
-#> # A data frame: 6 × 82
+#> # A tibble: 6 × 82
 #>   fac_name_1    fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
 #> * <chr>         <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
 #> 1 CDC ARCTIC I… CENTERS F… 02D0873639   NA         NA          NA    0     NA   
@@ -210,7 +210,7 @@ clia(certificate = c("accreditation", "registration"),
      city = "Valdosta",
      state = "GA")
 #> ✔ clia returned 18 results.
-#> # A data frame: 18 × 82
+#> # A tibble: 18 × 82
 #>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
 #>  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
 #>  1 SGMC HEALTH  NA         11D0022233   110122     NA          NA    0     NA   
@@ -242,7 +242,7 @@ clia(accreditation = "jcaho", count = TRUE)
 #> ✔ clia returned 2,765 results.
 clia(accreditation = "a2la")
 #> ✔ clia returned 11 results.
-#> # A data frame: 11 × 82
+#> # A tibble: 11 × 82
 #>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
 #>  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
 #>  1 ONCOLOGY SP… NA         01D0680765   NA         NA          NA    0     NA   
