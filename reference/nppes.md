@@ -167,7 +167,13 @@ Medicare program.
 ## Examples
 
 ``` r
-# nppes(npi = 1528060837)
+nppes(npi = 1528060837)
+#> # A tibble: 1 × 11
+#>   addresses basic        created_epoch endpoints enumeration_type identifiers 
+#> * <list>    <list>       <chr>         <list>    <chr>            <list>      
+#> 1 <df>      <named list> 1117631856000 <NULL>    NPI-1            <df [8 × 5]>
+#> # ℹ 5 more variables: last_updated_epoch <chr>, number <chr>,
+#> #   other_names <list>, practiceLocations <list>, taxonomies <list>
 wildcard("Jo")
 #> [1] "Jo*"
 #> attr(,"class")

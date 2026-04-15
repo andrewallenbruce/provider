@@ -190,8 +190,8 @@ list(
 #> 
 #> $individual
 #> # A tibble: 206 × 6
-#>    first   last            middle suffix npi        pac       
-#>    <chr>   <chr>           <chr>  <chr>  <chr>      <chr>     
+#>    first   last            middle suffix        npi pac       
+#>    <chr>   <chr>           <chr>  <chr>       <int> <chr>     
 #>  1 LAURA   GREENE          A      NA     1003845272 1759384035
 #>  2 NAROD   VASSILIAN       NA     NA     1013539584 9133544109
 #>  3 EMILY   TRIPLETT        NA     NA     1013595560 3375947401
@@ -225,8 +225,8 @@ list(
 #> 
 #> $individual
 #> # A tibble: 4 × 6
-#>   first   last     middle suffix npi        pac       
-#>   <chr>   <chr>    <chr>  <chr>  <chr>      <chr>     
+#>   first   last     middle suffix        npi pac       
+#>   <chr>   <chr>    <chr>  <chr>       <int> <chr>     
 #> 1 JEFFREY KLOTZ    NA     NA     1073258398 3870095805
 #> 2 MARY    HALLORAN K      NA     1396989059 8921259557
 #> 3 IL      CHON     JUN    NA     1538173869 0547299091

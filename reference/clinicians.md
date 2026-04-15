@@ -126,9 +126,7 @@ A Clinician or Group must have:
 ## Examples
 
 ``` r
-clinicians(count = TRUE)
-#> ℹ clinicians has 2,857,460 rows.
-clinicians(count = TRUE, org_name = not(""))
+clinicians(count = TRUE, org_name = not_na())
 #> ✔ clinicians returned 2,586,064 results.
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.

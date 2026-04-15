@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9077 (2026-04-15)
+
+- added
+  [`not_na()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  modifier
+
 ## provider 0.0.1.9076 (2026-04-15)
 
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
