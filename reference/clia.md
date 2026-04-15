@@ -185,9 +185,9 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ℹ clia has 671,570 rows.
+#> ℹ clia has 676,051 rows.
 clia(compliant = FALSE, count = TRUE)
-#> ✔ clia returned 5,161 results.
+#> ✔ clia returned 5,193 results.
 clia(ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
 #> # A tibble: 6 × 82
@@ -239,23 +239,22 @@ clia(certificate = c("accreditation", "registration"),
 #> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
 #> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
 clia(accreditation = "jcaho", count = TRUE)
-#> ✔ clia returned 2,765 results.
+#> ✔ clia returned 2,766 results.
 clia(accreditation = "a2la")
-#> ✔ clia returned 11 results.
-#> # A tibble: 11 × 82
+#> ✔ clia returned 10 results.
+#> # A tibble: 10 × 82
 #>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
 #>  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
 #>  1 ONCOLOGY SP… NA         01D0680765   NA         NA          NA    0     NA   
 #>  2 EUROFINS CE… NA         03D2269071   NA         NA          NA    0     NA   
 #>  3 CDC/NCEH/DI… NA         11D0668290   NA         NA          NA    0     NA   
 #>  4 ADVANCED DI… NA         45D2187621   NA         NA          NA    0     NA   
-#>  5 PROTEOCYTE … NA         45D2293946   NA         NA          NA    0     NA   
-#>  6 RARECYTE     NA         50D2168083   NA         NA          NA    0     NA   
-#>  7 LIFE LENGTH… NA         99D2112462   NA         NA          NA    0     NA   
-#>  8 PROTEOCYTE … NA         99D2275002   NA         NA          NA    0     NA   
-#>  9 RNA DIAGNOS… NA         99D2298044   NA         NA          NA    0     NA   
-#> 10 PATHASSISTA… NA         99D2317195   NA         NA          NA    0     NA   
-#> 11 EARLY OM LDT NA         99D2320513   NA         NA          NA    0     NA   
+#>  5 RARECYTE     NA         50D2168083   NA         NA          NA    0     NA   
+#>  6 LIFE LENGTH… NA         99D2112462   NA         NA          NA    0     NA   
+#>  7 PROTEOCYTE … NA         99D2275002   NA         NA          NA    0     NA   
+#>  8 RNA DIAGNOS… NA         99D2298044   NA         NA          NA    0     NA   
+#>  9 PATHASSISTA… NA         99D2317195   NA         NA          NA    0     NA   
+#> 10 EARLY OM LDT NA         99D2320513   NA         NA          NA    0     NA   
 #> # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
 #> #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
 #> #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,

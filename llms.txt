@@ -267,10 +267,22 @@ clia(name = starts_with("CDC"))
 
 ``` r
 # Hospital Transparency Enforcement
-transparency(action = "warn", state = c("FL", "GA"))
-✔ transparency returned 230 results.
-Error in `ckmatch()`:
-! Unknown columns: npi
+transparency(action = "warn", state = c("AL", "GA"))
+✔ transparency returned 106 results.
+# A tibble: 106 × 7
+      id name                             address city  state action action_date
+ * <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
+ 1    42 Northside Hospital Atlanta       1000 J… Atla… GA    Warni… 2021-04-19 
+ 2    68 Wellstar Kennestone Regional Me… 677 Ch… Mari… GA    Warni… 2021-04-19 
+ 3    75 Northeast Georgia Medical Cente… 743 Sp… Gain… GA    Warni… 2021-04-19 
+ 4    99 Northside Hospital - Cherokee    450 No… Cant… GA    Warni… 2021-05-18 
+ 5   105 DCH Regional Medical Center      809 Un… Tusc… AL    Warni… 2021-05-18 
+ 6   116 Wellstar Atlanta Medical Center  303 Pa… Atla… GA    Warni… 2021-04-19 
+ 7   117 Tift Regional Medical Center     901 Ea… Tift… GA    Warni… 2023-03-01 
+ 8   127 Flowers Hospital                 4370 W… Doth… AL    Warni… 2023-01-13 
+ 9   136 Piedmont Columbus Regional Midt… 710 Ce… Colu… GA    Warni… 2021-04-19 
+10   141 Mobile Infirmary Medical Center  5 Mobi… Mobi… AL    Warni… 2021-04-19 
+# ℹ 96 more rows
 ```
 
   

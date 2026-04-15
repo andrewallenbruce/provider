@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9078</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9079</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -324,10 +324,22 @@
 <span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#   term_pgm &lt;chr&gt;, term_clia &lt;chr&gt;, app_type &lt;chr&gt;, cert_type &lt;chr&gt;,</span></span>
 <span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#   fac_type &lt;chr&gt;, owner &lt;chr&gt;, action &lt;chr&gt;, orig_date &lt;chr&gt;, …</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Hospital Transparency Enforcement</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">transparency</span>(<span class="at">action =</span> <span class="st">"warn"</span>, <span class="at">state =</span> <span class="fu">c</span>(<span class="st">"FL"</span>, <span class="st">"GA"</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>✔ transparency returned <span class="dv">230</span> results.</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">ckmatch()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="sc">!</span> Unknown columns<span class="sc">:</span> npi</span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">transparency</span>(<span class="at">action =</span> <span class="st">"warn"</span>, <span class="at">state =</span> <span class="fu">c</span>(<span class="st">"AL"</span>, <span class="st">"GA"</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>✔ transparency returned <span class="dv">106</span> results.</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># A tibble: 106 × 7</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>      id name                             address city  state action action_date</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a> <span class="sc">*</span> <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                            <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>date<span class="sc">&gt;</span>     </span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a> <span class="dv">1</span>    <span class="dv">42</span> Northside Hospital Atlanta       <span class="dv">1000</span> J… Atla… GA    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a> <span class="dv">2</span>    <span class="dv">68</span> Wellstar Kennestone Regional Me… <span class="dv">677</span> Ch… Mari… GA    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a> <span class="dv">3</span>    <span class="dv">75</span> Northeast Georgia Medical Cente… <span class="dv">743</span> Sp… Gain… GA    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a> <span class="dv">4</span>    <span class="dv">99</span> Northside Hospital <span class="sc">-</span> Cherokee    <span class="dv">450</span> No… Cant… GA    Warni… <span class="dv">2021-05-18</span> </span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a> <span class="dv">5</span>   <span class="dv">105</span> DCH Regional Medical Center      <span class="dv">809</span> Un… Tusc… AL    Warni… <span class="dv">2021-05-18</span> </span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a> <span class="dv">6</span>   <span class="dv">116</span> Wellstar Atlanta Medical Center  <span class="dv">303</span> Pa… Atla… GA    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a> <span class="dv">7</span>   <span class="dv">117</span> Tift Regional Medical Center     <span class="dv">901</span> Ea… Tift… GA    Warni… <span class="dv">2023-03-01</span> </span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a> <span class="dv">8</span>   <span class="dv">127</span> Flowers Hospital                 <span class="dv">4370</span> W… Doth… AL    Warni… <span class="dv">2023-01-13</span> </span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a> <span class="dv">9</span>   <span class="dv">136</span> Piedmont Columbus Regional Midt… <span class="dv">710</span> Ce… Colu… GA    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="dv">10</span>   <span class="dv">141</span> Mobile Infirmary Medical Center  <span class="dv">5</span> Mobi… Mobi… AL    Warni… <span class="dv">2021-04-19</span> </span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co"># ℹ 96 more rows</span></span></code></pre></div>
 <p><br></p>
 <hr>
 <p><br></p>

@@ -126,5 +126,8 @@ transparency(count = TRUE, action = "warn")
 #> ✔ transparency returned 2,695 results.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.
-#> Error in ckmatch(cols, nam): Unknown columns: npi
+#> # A tibble: 1 × 7
+#>      id name             address             city     state action   action_date
+#> * <int> <chr>            <chr>               <chr>    <chr> <chr>    <date>     
+#> 1  6131 Greenleaf Center 2209 Pineview Drive Valdosta GA    Met Req… 2025-08-01 
 ```
