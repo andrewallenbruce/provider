@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9081 (2026-04-15)
+
+* building S7 url base class
+
+
 # provider 0.0.1.9080 (2026-04-15)
 
 * fixed bug in `RC_clinicians`
