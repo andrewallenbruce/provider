@@ -135,7 +135,7 @@ clinicians(enid = "I20081002000549")
 #>   first middle last  suffix gender cred  school grad_year specialty    npi pac  
 #> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
 #> 1 DORO… E      MCCU… NA     F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022…
-#> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <chr>,
+#> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <int>,
 #> #   org_city <chr>, org_state <chr>, org_zip <chr>, org_phone <chr>,
 #> #   org_add <chr>
 
@@ -156,6 +156,6 @@ clinicians(first = "Etan")
 #> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <chr>, org_city <chr>, org_state <chr>, org_zip <chr>,
+#> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
 #> #   org_phone <chr>, org_add <chr>
 ```

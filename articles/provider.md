@@ -55,9 +55,9 @@ it is returned. Each function has a `tidy` parameter that is set to
 order_refer(npi = 1043477615)
 #> ✔ order_refer returned 1 result.
 #> # A tibble: 1 × 8
-#>   first last           npi part_b   dme   hha   pmd hospice
-#> * <chr> <chr>        <int>  <int> <int> <int> <int>   <int>
-#> 1 SARAH HUSSAIN 1043477615      1     1     1     1       1
+#>   first last           npi   ptb   dme   hha   pmd hospice
+#> * <chr> <chr>        <int> <int> <int> <int> <int>   <int>
+#> 1 SARAH HUSSAIN 1043477615     1     1     1     1       1
 ```
 
   

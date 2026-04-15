@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9079</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9081</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Hospitals 2</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/R/cms-hospitals.R" class="external-link"><code>R/cms-hospitals.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/R/prov-hospitals2.R" class="external-link"><code>R/prov-hospitals2.R</code></a></small>
       <div class="d-none name"><code>hospitals2.Rd</code></div>
     </div>
 
@@ -71,7 +71,19 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-county">county<a class="anchor" aria-label="anchor" href="#arg-county"></a></dt>
+<dl><dt id="arg-ccn">ccn<a class="anchor" aria-label="anchor" href="#arg-ccn"></a></dt>
+<dd><p><code>&lt;int&gt;</code> CMS Certification Number</p></dd>
+
+
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Legal business name</p></dd>
+
+
+<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Location city, state, zip</p></dd>
+
+
+<dt id="arg-county">county<a class="anchor" aria-label="anchor" href="#arg-county"></a></dt>
 <dd><p><code>&lt;chr&gt;</code></p></dd>
 
 
@@ -81,6 +93,10 @@
 
 <dt id="arg-ownership">ownership<a class="anchor" aria-label="anchor" href="#arg-ownership"></a></dt>
 <dd><p><code>&lt;chr&gt;</code></p></dd>
+
+
+<dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 </dl></div>
 

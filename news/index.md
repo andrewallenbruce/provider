@@ -1,5 +1,15 @@
 # Changelog
 
+## provider 0.0.1.9081 (2026-04-15)
+
+- building S7 url base class
+
+## provider 0.0.1.9080 (2026-04-15)
+
+- fixed bug in `RC_clinicians`
+- updated dependencies
+- init url class/execute method
+
 ## provider 0.0.1.9079 (2026-04-15)
 
 - rebuild README

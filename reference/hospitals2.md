@@ -20,6 +20,18 @@ hospitals2(
 
 ## Arguments
 
+- ccn:
+
+  `<int>` CMS Certification Number
+
+- org_name:
+
+  `<chr>` Legal business name
+
+- city, state, zip:
+
+  `<chr>` Location city, state, zip
+
 - county:
 
   `<chr>`
@@ -31,3 +43,7 @@ hospitals2(
 - ownership:
 
   `<chr>`
+
+- count:
+
+  `<lgl>` Return the total row count
