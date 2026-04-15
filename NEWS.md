@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9077 (2026-04-15)
+
+* added `not_na()` modifier
+
+
 # provider 0.0.1.9076 (2026-04-15)
 
 * `hospitals()` fixes
