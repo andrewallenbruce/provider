@@ -1,4 +1,15 @@
 #' @noRd
+data_frame <- function(x, call = rlang::caller_call()) {
+  check_data_frame(x, call = call)
+  structure(x, class = c("tbl_df", "tbl", "data.frame"))
+}
+
+#' @noRd
+df_tbl_ <- function(x) {
+  `class<-`(cheapr::as_df(x), c("tbl_df", "tbl", "data.frame"))
+}
+
+#' @noRd
 offset <- function(n, limit, which = "size") {
   check_number_whole(n, min = 0)
   check_number_whole(limit, min = 1)

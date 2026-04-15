@@ -1,5 +1,5 @@
 #' @noRd
-uuid_pro <- function(endpoint) {
+uuid_prov <- function(endpoint) {
   paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/query/",
     switch(

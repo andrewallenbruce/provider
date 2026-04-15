@@ -5,7 +5,7 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
   check_bool(COUNT)
   check_modifiers(ARG, END)
 
-  .c(BASE, NM) %=% constants(END)
+  BASE <- uuid_prov(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -20,7 +20,7 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
     # EMPTY QUERY --> First 10 Rows
     cli_no_query(END)
 
-    res <- polish(request_pro(BASE), NM)
+    res <- polish(request_pro(BASE), END)
 
     return(res)
   }
@@ -39,7 +39,7 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
     cli_results(N, END)
 
     res <- request_pro(BASE, LIMIT, build(ARG)) |>
-      polish(NM)
+      polish(END)
 
     return(res)
   }
@@ -58,7 +58,7 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
   URL <- create_offset(N, LIMIT, URL)
 
   parallel_results(URL) |>
-    polish(NM)
+    polish(END)
 }
 
 #' @noRd
@@ -68,16 +68,10 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
   check_bool(COUNT)
   check_bool(SET)
 
-  .c(BASE, NM) %=% constants(END)
+  BASE <- uuid_cms(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
-    if (COUNT) {
-      N <- request_rows(BASE)
-      cli_total(N, END)
-      return(invisible(N))
-    }
-
     if (SET) {
       # SET --> Return Entire Dataset
       N <- request_rows(BASE)
@@ -92,14 +86,19 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
         )
       )
 
-      parallel_request(URL) |>
-        polish(NM)
+      return(polish(parallel_request(URL), END))
+    }
+
+    if (COUNT) {
+      N <- request_rows(BASE)
+      cli_total(N, END)
+      return(invisible(N))
     }
 
     # EMPTY QUERY --> First 10 Rows
     cli_no_query(END)
 
-    res <- polish(request_cms(BASE), NM)
+    res <- polish(request_cms(BASE), END)
 
     return(res)
   }
@@ -118,7 +117,7 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
     cli_results(N, END)
 
     res <- request_cms(BASE, LIMIT, build(ARG)) |>
-      polish(NM)
+      polish(END)
 
     return(res)
   }
@@ -129,12 +128,12 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
   URL <- url_str(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    build(arg_cms(ARG))
+    build(ARG)
   )
   URL <- create_offset(N, LIMIT, URL)
 
   parallel_request(URL) |>
-    polish(NM)
+    polish(END)
 }
 
 #' @noRd
@@ -143,7 +142,7 @@ exec_cms2 <- function(END, COUNT, ARG, .id, LIMIT = 5000L) {
   check_online()
   check_bool(COUNT)
 
-  .c(BASE, NM) %=% constants(END)
+  BASE <- uuid_cms(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -157,8 +156,8 @@ exec_cms2 <- function(END, COUNT, ARG, .id, LIMIT = 5000L) {
     cli_no_query(END)
 
     res <- purrr::imap(BASE, \(x, i) request_cms(x)) |>
-      collapse::rowbind(idcol = .id, return = 4L) |>
-      polish(c(rlang::set_names(.id), NM))
+      collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
+      polish(END, .id = .id)
 
     return(res)
   }
@@ -179,8 +178,8 @@ exec_cms2 <- function(END, COUNT, ARG, .id, LIMIT = 5000L) {
     res <- purrr::imap(BASE, \(x, nm) {
       request_cms(x, LIMIT, build(ARG))
     }) |>
-      collapse::rowbind(idcol = .id, return = 4L) |>
-      polish(c(rlang::set_names(.id), NM))
+      collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
+      polish(END, .id = .id)
 
     return(res)
   }
@@ -203,6 +202,6 @@ exec_cms2 <- function(END, COUNT, ARG, .id, LIMIT = 5000L) {
   })
 
   purrr::imap(URL, \(x, nm) parallel_request(x)) |>
-    collapse::rowbind(idcol = .id, return = 4L) |>
-    polish(c(rlang::set_names(.id), NM))
+    collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
+    polish(END, .id = .id)
 }

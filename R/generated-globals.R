@@ -3,69 +3,29 @@
 utils::globalVariables(c(
   # <api_medicare2>
   "accessURL",
-  # <RC_transparency>
-  "action_date",
-  # <RC_opt_out>
   # <RC_clinicians>
+  # <RC_opt_out>
   "add_1",
-  # <RC_opt_out>
   # <RC_clinicians>
+  # <RC_opt_out>
   "add_2",
-  # <exec_prov>
-  # <exec_cms>
-  # <exec_cms2>
-  "BASE",
   # <api_medicare2>
   "describedBy",
   # <api_medicare2>
   "description",
-  # <RC_order_refer>
-  "dme",
-  # <RC_opt_out>
-  "end_date",
-  # <RC_clinicians>
-  "grad_year",
-  # <RC_order_refer>
-  "hha",
-  # <RC_order_refer>
-  "hospice",
-  # <RC_transparency>
-  "id",
   # <api_medicare2>
   "identifier",
-  # <RC_providers>
-  "multi",
-  # <exec_prov>
-  # <exec_cms>
-  # <exec_cms2>
-  "NM",
-  # <RC_providers>
-  # <RC_pending>
-  # <RC_opt_out>
-  # <RC_clinicians>
-  # <RC_order_refer>
-  "npi",
   # <query_pro>
   # <query_cms>
   "O",
-  # <RC_order_refer>
-  "part_b",
-  # <RC_order_refer>
-  "pmd",
-  # <RC_pending>
-  "prov_type",
   # <RC_clinicians>
   "spec_other",
   # <RC_clinicians>
   "specialty",
-  # <RC_opt_out>
-  "start_date",
   # <api_provider>
   # <api_medicare>
   # <api_medicare2>
   "title",
-  # <RC_opt_out>
-  "updated",
   # <query_pro>
   # <query_cms>
   "V",
