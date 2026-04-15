@@ -55,7 +55,7 @@ request_rows <- function(base, args = NULL) {
 }
 
 #' @noRd
-request_pro <- function(base, limit = 10, args = NULL) {
+request_prov <- function(base, limit = 10, args = NULL) {
   request_bare(
     base = base,
     opts = opts(

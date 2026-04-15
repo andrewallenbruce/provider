@@ -5,6 +5,7 @@
 \alias{excludes}
 \alias{contains}
 \alias{not}
+\alias{not_na}
 \alias{between}
 \alias{greater_than}
 \alias{less_than}
@@ -20,6 +21,8 @@ excludes(...)
 contains(x)
 
 not(x)
+
+not_na(x)
 
 between(...)
 
@@ -50,25 +53,27 @@ in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/js
 }
 \examples{
 list(
-   # !x \%in\% c("AL", "AK", "AZ")
    `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-   # endsWith(x, "bar")
+   # !x \%in\% c("AL", "AK", "AZ")
    `ends_with("bar")` = ends_with("bar"),
-   # startsWith(x, "foo")
+   # endsWith(x, "bar")
    `starts_with("foo")` = starts_with("foo"),
-   # x < 1000
+   # startsWith(x, "foo")
    `less_than(1000)` = less_than(1000),
-   # x <= 1000
+   # x < 1000
    `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
-   # x > 1000
+   # x <= 1000
    `greater_than(1000)` = greater_than(1000),
-   # x >= 1000
+   # x > 1000
    `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
-   # x > 0.125 & x < 2
+   # x >= 1000
    `between(0.125, 2)` = between(0.125, 2),
-   # grepl("baz", x)
+   # x > 0.125 & x < 2
    `contains("baz")` = contains("baz"),
+   # grepl("baz", x)
+   `not("zzz")` = not("zzz"),
    # x != "zzz"
-   `not("zzz")` = not("zzz")
+   `not_na()` = not_na()
+   # !is.na(x)
  )
 }

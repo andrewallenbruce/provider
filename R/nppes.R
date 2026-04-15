@@ -82,7 +82,7 @@
 #'    it *is not* `"US"`.
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
-#' # nppes(npi = 1528060837)
+#' nppes(npi = 1528060837)
 #' @export
 nppes <- function(
   npi = NULL,
@@ -120,7 +120,8 @@ nppes <- function(
       pretty = "on" #on/off
     )
 
-  httr2::req_perform(req)
+  parse_string(httr2::req_perform(req))$results |>
+    data_frame()
 }
 
 #' Wildcards

@@ -133,7 +133,7 @@ program.
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-# nppes(npi = 1528060837)
+nppes(npi = 1528060837)
 \dontshow{\}) # examplesIf}
 wildcard("Jo")
 }

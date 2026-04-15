@@ -11,22 +11,18 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
   if (!length(ARG)) {
     if (COUNT) {
       N <- request_count(BASE)
-
       cli_total(N, END)
-
       return(invisible(N))
     }
 
     # EMPTY QUERY --> First 10 Rows
     cli_no_query(END)
-
-    res <- polish(request_pro(BASE), END)
-
-    return(res)
+    return(polish(request_prov(BASE), END))
   }
 
   # QUERY --> Request Count
-  N <- request_count(BASE, build(ARG))
+  ARG <- build(ARG)
+  N <- request_count(BASE, ARG)
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -37,11 +33,7 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
   # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N, END)
-
-    res <- request_pro(BASE, LIMIT, build(ARG)) |>
-      polish(END)
-
-    return(res)
+    return(polish(request_prov(BASE, LIMIT, ARG), END))
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
@@ -54,11 +46,9 @@ exec_prov <- function(END, COUNT, ARG, LIMIT = 1500L) {
     limit = LIMIT,
     offset = "<<i>>"
   )
-  URL <- url_str(BASE, OPT, build(ARG))
-  URL <- create_offset(N, LIMIT, URL)
 
-  parallel_results(URL) |>
-    polish(END)
+  URL <- create_offset(N, LIMIT, url_str(BASE, OPT, ARG))
+  polish(parallel_results(URL), END)
 }
 
 #' @noRd
@@ -70,7 +60,7 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
 
   BASE <- uuid_cms(END)
 
-  # COUNT --> Return Invisibly
+  # N0 QUERY
   if (!length(ARG)) {
     if (SET) {
       # SET --> Return Entire Dataset
@@ -85,26 +75,24 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
           opts(size = LIMIT, offset = "<<i>>")
         )
       )
-
       return(polish(parallel_request(URL), END))
     }
 
+    # COUNT --> Return Invisibly
     if (COUNT) {
       N <- request_rows(BASE)
       cli_total(N, END)
       return(invisible(N))
     }
 
-    # EMPTY QUERY --> First 10 Rows
+    # !COUNT --> First 10 Rows
     cli_no_query(END)
-
-    res <- polish(request_cms(BASE), END)
-
-    return(res)
+    return(polish(request_cms(BASE), END))
   }
 
   # QUERY --> Request Count
-  N <- request_rows(BASE, build(ARG))
+  ARG <- build(ARG)
+  N <- request_rows(BASE, ARG)
 
   # NO RESULTS or COUNT --> Return Invisibly
   if (N == 0L || COUNT) {
@@ -115,11 +103,7 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
   # COUNT BELOW LIMIT --> Single Request
   if (N <= LIMIT) {
     cli_results(N, END)
-
-    res <- request_cms(BASE, LIMIT, build(ARG)) |>
-      polish(END)
-
-    return(res)
+    return(polish(request_cms(BASE, LIMIT, ARG), END))
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
@@ -128,12 +112,9 @@ exec_cms <- function(END, COUNT, SET, ARG, LIMIT = 5000L) {
   URL <- url_str(
     paste0(BASE, "?"),
     opts(size = LIMIT, offset = "<<i>>"),
-    build(ARG)
+    ARG
   )
-  URL <- create_offset(N, LIMIT, URL)
-
-  parallel_request(URL) |>
-    polish(END)
+  polish(parallel_request(create_offset(N, LIMIT, URL)), END)
 }
 
 #' @noRd

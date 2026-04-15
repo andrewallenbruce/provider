@@ -13,26 +13,28 @@
 #' @name modifier
 #' @examples
 #' list(
-#'    # !x %in% c("AL", "AK", "AZ")
 #'    `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-#'    # endsWith(x, "bar")
+#'    # !x %in% c("AL", "AK", "AZ")
 #'    `ends_with("bar")` = ends_with("bar"),
-#'    # startsWith(x, "foo")
+#'    # endsWith(x, "bar")
 #'    `starts_with("foo")` = starts_with("foo"),
-#'    # x < 1000
+#'    # startsWith(x, "foo")
 #'    `less_than(1000)` = less_than(1000),
-#'    # x <= 1000
+#'    # x < 1000
 #'    `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
-#'    # x > 1000
+#'    # x <= 1000
 #'    `greater_than(1000)` = greater_than(1000),
-#'    # x >= 1000
+#'    # x > 1000
 #'    `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
-#'    # x > 0.125 & x < 2
+#'    # x >= 1000
 #'    `between(0.125, 2)` = between(0.125, 2),
-#'    # grepl("baz", x)
+#'    # x > 0.125 & x < 2
 #'    `contains("baz")` = contains("baz"),
+#'    # grepl("baz", x)
+#'    `not("zzz")` = not("zzz"),
 #'    # x != "zzz"
-#'    `not("zzz")` = not("zzz")
+#'    `not_na()` = not_na()
+#'    # !is.na(x)
 #'  )
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)
@@ -88,6 +90,12 @@ contains <- function(x) {
 not <- function(x) {
   check_required(x)
   Modifier("<>", value = x)
+}
+
+#' @rdname modifier
+#' @export
+not_na <- function(x) {
+  not("")
 }
 
 #' @rdname modifier

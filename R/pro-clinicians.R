@@ -39,8 +39,7 @@
 #' @param count `<lgl>` Return the dataset's total row count
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
-#' clinicians(count = TRUE)
-#' clinicians(count = TRUE, org_name = not(""))
+#' clinicians(count = TRUE, org_name = not_na())
 #' clinicians(enid = "I20081002000549")
 #' clinicians(first = "Etan")
 #' clinicians(count = TRUE,

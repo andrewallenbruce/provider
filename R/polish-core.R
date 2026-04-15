@@ -28,6 +28,7 @@ rename_with <- function(x, nm) {
 recode_with <- function(x, endpoint) {
   switch(
     endpoint,
+    affiliations = RC_affiliations(x),
     clinicians = RC_clinicians(x),
     hospitals = RC_hospitals(x),
     opt_out = RC_opt_out(x),

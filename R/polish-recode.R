@@ -1,4 +1,9 @@
 #' @noRd
+RC_affiliations <- function(x) {
+  collapse::tfmv(x, "npi", as.integer)
+}
+
+#' @noRd
 #' @autoglobal
 RC_clinicians <- function(x) {
   collapse::tfmv(x, c("npi", "grad_year"), as.integer) |>
@@ -7,10 +12,7 @@ RC_clinicians <- function(x) {
       org_add = combine_cols(add_1, add_2),
       spec_other = NULL,
       add_1 = NULL,
-      add_2 = NULL,
-      ind = NULL,
-      org = NULL,
-      tlh = NULL
+      add_2 = NULL
     )
 }
 
