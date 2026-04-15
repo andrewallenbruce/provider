@@ -1,6 +1,11 @@
 #' @noRd
-RC_affiliations <- function(x) {
+RC_npi <- function(x) {
   collapse::tfmv(x, "npi", as.integer)
+}
+
+#' @noRd
+RC_affiliations <- function(x) {
+  RC_npi(x)
 }
 
 #' @noRd
@@ -19,7 +24,7 @@ RC_clinicians <- function(x) {
 #' @noRd
 #' @autoglobal
 RC_hospitals <- function(x) {
-  collapse::tfmv(x, "npi", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv(
       c(
         "multi",
@@ -55,19 +60,19 @@ RC_hospitals <- function(x) {
 
 #' @noRd
 RC_providers <- function(x) {
-  collapse::tfmv(x, "npi", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv("multi", bin_col)
 }
 
 #' @noRd
 RC_pending <- function(x) {
-  collapse::tfmv(x, "npi", as.integer)
+  RC_npi(x)
 }
 
 #' @noRd
 #' @autoglobal
 RC_opt_out <- function(x) {
-  collapse::tfmv(x, "npi", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv("order_refer", bin_col) |>
     collapse::tfmv(c("start_date", "end_date", "updated"), as_date_mdy) |>
     collapse::mtt(
@@ -79,7 +84,7 @@ RC_opt_out <- function(x) {
 
 #' @noRd
 RC_order_refer <- function(x) {
-  collapse::tfmv(x, "npi", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv(c("part_b", "dme", "hha", "pmd", "hospice"), bin_col)
 }
 
@@ -90,13 +95,13 @@ RC_reassignments <- function(x) {
 
 #' @noRd
 RC_revocations <- function(x) {
-  collapse::tfmv(x, "npi", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv("multi", bin_col) |>
     collapse::tfmv(c("start_date", "end_date"), as_date_ymd)
 }
 
 #' @noRd
 RC_transparency <- function(x) {
-  collapse::tfmv(x, "id", as.integer) |>
+  RC_npi(x) |>
     collapse::tfmv("action_date", as_date_ymd)
 }

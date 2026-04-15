@@ -102,7 +102,7 @@ opt_out(
 #| label: order_refer
 # Ordering & Referral Eligibility
 order_refer(
-  part_b = TRUE,
+  ptb = TRUE,
   dme = TRUE,
   hha = FALSE,
   pmd = TRUE,

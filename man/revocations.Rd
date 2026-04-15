@@ -63,8 +63,7 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
-revocations(state = "GA")
-revocations(specialty = contains("CARDIO"), state = not("TX"))
+revocations(count = TRUE, org_name = not_na())
 revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
 \dontshow{\}) # examplesIf}
 }

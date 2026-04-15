@@ -8,7 +8,7 @@ order_refer(
   npi = NULL,
   first = NULL,
   last = NULL,
-  part_b = NULL,
+  ptb = NULL,
   dme = NULL,
   hha = NULL,
   pmd = NULL,
@@ -22,9 +22,9 @@ order_refer(
 
 \item{first, last}{\verb{<chr>} Individual provider's first/last name}
 
-\item{part_b, dme, hha, pmd, hospice}{\verb{<lgl>} Eligibility for:
+\item{ptb, dme, hha, pmd, hospice}{\verb{<lgl>} Eligibility for:
 \itemize{
-\item \code{part_b}: Medicare Part B
+\item \code{ptb}: Medicare Part B
 \item \code{dme}: Durable Medical Equipment
 \item \code{hha}: Home Health Agency
 \item \code{pmd}: Power Mobility Devices
@@ -71,14 +71,12 @@ Eligibility to order and refer within Medicare
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 order_refer(count = TRUE)
+
 order_refer(npi = 1003026055)
+
 order_refer(first = "Jennifer", last = "Smith")
-order_refer(
-  part_b = TRUE,
-  dme = TRUE,
-  hha = FALSE,
-  pmd = TRUE,
-  hospice = FALSE)
+
+order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 \dontshow{\}) # examplesIf}
 }
 \references{

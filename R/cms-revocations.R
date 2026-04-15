@@ -27,8 +27,7 @@
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
-#' revocations(state = "GA")
-#' revocations(specialty = contains("CARDIO"), state = not("TX"))
+#' revocations(count = TRUE, org_name = not_na())
 #' revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
 #' @autoglobal
 #' @export
