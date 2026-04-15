@@ -45,13 +45,13 @@
 #' @param city `<chr>` Hospital city
 #' @param state `<chr>` Hospital state
 #' @param action `<enum>` Action taken by CMS following a Compliance Review (see Details)
-#'    - `"met"`: Met Requirements
-#'    - `"admin"`: Administrative Closure
-#'    - `"warning"`: Warning Notice
-#'    - `"cap"`: CAP Request
-#'    - `"closure"`: Closure Notice
-#'    - `"cmp"`: CMP Notice
-#'    - `"appeal"` : Appealed
+#'    - `"met"` = Met Requirements
+#'    - `"admin"` = Administrative Closure
+#'    - `"warn"` = Warning Notice
+#'    - `"cap"` = CAP Request
+#'    - `"closure"` = Closure Notice
+#'    - `"cmp"` = CMP Notice
+#'    - `"appeal"` = Appealed
 #' @param count `<lgl>` Return the dataset's total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
@@ -59,7 +59,7 @@
 #'
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
-#' transparency(count = TRUE, action = "warning")
+#' transparency(count = TRUE, action = "warn")
 #' transparency(state = "GA", city = "Valdosta")
 #' @autoglobal
 #' @export
@@ -78,7 +78,7 @@ transparency <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       Hosp_Name = name,
       Hosp_Address = address,
       City = city,

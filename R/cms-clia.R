@@ -83,7 +83,7 @@ clia <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       FAC_NAME = name,
       PRVDR_NUM = ccn,
       CLIA_MDCR_NUM = parent,
@@ -91,36 +91,31 @@ clia <- function(
       CITY_NAME = city,
       STATE_CD = state,
       ZIP_CD = zip,
-      CMPLNC_STUS_CD = comp_(compliant),
-      PGM_TRMNTN_CD = active_(active),
-      !!!accredit(accreditation)
+      CMPLNC_STUS_CD = cmp_(compliant),
+      PGM_TRMNTN_CD = act_(active),
+      !!!accr_(accreditation)
     )
   )
 }
 
 #' @noRd
-active_ <- function(active) {
-  if (is.null(active)) {
-    return(NULL)
-  }
-  if (active) "00" else NULL
-}
-
-#' @noRd
-comp_ <- function(x = NULL) {
+act_ <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
-
-  cheapr::val_match(
-    x,
-    TRUE ~ "A",
-    FALSE ~ "B"
-  )
+  if (x) "00" else NULL
 }
 
 #' @noRd
-accredit <- function(x) {
+cmp_ <- function(x = NULL) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+  cheapr::val_match(x, TRUE ~ "A", FALSE ~ "B")
+}
+
+#' @noRd
+accr_ <- function(x) {
   if (is.null(x)) {
     return(NULL)
   }

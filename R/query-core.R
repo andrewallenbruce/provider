@@ -46,28 +46,27 @@ query_cms <- function(x, N) {
   )
 }
 
-#' @noRd
-query <- function(endpoint, args) {
-  purrr::imap(
-    args,
-    \(x, n) {
-      switch(
-        endpoint,
-        affiliations = ,
-        hospitals2 = ,
-        clinicians = query_pro(x, n),
-        query_cms(x, n)
-      )
-    }
-  ) |>
-    unname() |>
-    purrr::imap_chr(
-      \(x, idx) {
-        paste0(
-          sub_idx(x, idx - 1L),
-          collapse = "&"
-        )
-      }
-    ) |>
-    (\(x) paste0(x, collapse = "&"))()
-}
+# query <- function(endpoint, args) {
+#   purrr::imap(
+#     args,
+#     \(x, n) {
+#       switch(
+#         endpoint,
+#         affiliations = ,
+#         hospitals2 = ,
+#         clinicians = query_pro(x, n),
+#         query_cms(x, n)
+#       )
+#     }
+#   ) |>
+#     unname() |>
+#     purrr::imap_chr(
+#       \(x, idx) {
+#         paste0(
+#           sub_idx(x, idx - 1L),
+#           collapse = "&"
+#         )
+#       }
+#     ) |>
+#     (\(x) paste0(x, collapse = "&"))()
+# }

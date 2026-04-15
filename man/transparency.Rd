@@ -30,13 +30,13 @@ transparency(
 
 \item{action}{\verb{<enum>} Action taken by CMS following a Compliance Review (see Details)
 \itemize{
-\item \code{"met"}: Met Requirements
-\item \code{"admin"}: Administrative Closure
-\item \code{"warning"}: Warning Notice
-\item \code{"cap"}: CAP Request
-\item \code{"closure"}: Closure Notice
-\item \code{"cmp"}: CMP Notice
-\item \code{"appeal"} : Appealed
+\item \code{"met"} = Met Requirements
+\item \code{"admin"} = Administrative Closure
+\item \code{"warn"} = Warning Notice
+\item \code{"cap"} = CAP Request
+\item \code{"closure"} = Closure Notice
+\item \code{"cmp"} = CMP Notice
+\item \code{"appeal"} = Appealed
 }}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
@@ -89,7 +89,7 @@ civil monetary penalty.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 transparency(count = TRUE)
-transparency(count = TRUE, action = "warning")
+transparency(count = TRUE, action = "warn")
 transparency(state = "GA", city = "Valdosta")
 \dontshow{\}) # examplesIf}
 }

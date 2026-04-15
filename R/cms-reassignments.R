@@ -50,7 +50,7 @@ reassignments <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       `Individual NPI` = npi,
       `Individual PAC ID` = pac,
       `Individual Enrollment ID` = enid,

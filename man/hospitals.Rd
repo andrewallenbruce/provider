@@ -59,13 +59,13 @@ hospitals(
 \item \code{corp} = Corporation
 \item \code{other} = Other
 \item \code{llc} = LLC
-\item \code{partner} = Partnership
+\item \code{part} = Partnership
 \item \code{sole} = Sole Proprietor
 }}
 
 \item{prov_type}{\verb{<enum>} Provider type;
 \itemize{
-\item \code{hosp} = Part A Hospital
+\item \code{hospital} = Part A Hospital
 \item \code{reh} = Rural Emergency Hospital
 \item \code{cah} = Critical Access Hospital
 }}
@@ -98,7 +98,7 @@ type and address.
 hospitals(count = TRUE)
 hospitals2(count = TRUE)
 
-hospitals(state = "GA", prov_type = "reh")
+hospitals(prov_type = "reh")
 
 x <- hospitals(
   city = "Atlanta",

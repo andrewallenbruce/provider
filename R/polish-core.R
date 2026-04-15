@@ -27,6 +27,23 @@ rename_with <- function(x, nm) {
 }
 
 #' @noRd
+recode_with <- function(x, endpoint) {
+  if (is.null(endpoint)) {
+    return(x)
+  }
+  switch(
+    endpoint,
+    clinicians = RC_clinicians(x),
+    opt_out = RC_opt_out(x),
+    order_refer = RC_order_refer(x),
+    pending = RC_pending(x),
+    providers = RC_providers(x),
+    transparency = RC_transparency(x),
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+  )
+}
+
+#' @noRd
 data_frame <- function(x, call = rlang::caller_call()) {
   check_data_frame(x, call = call)
   structure(x, class = c("tbl", "data.frame"))
@@ -55,62 +72,4 @@ bin_ <- function(x) {
 #' @noRd
 as_date <- function(x, ..., fmt = "%Y-%m-%d") {
   as.Date(x, ..., format = fmt)
-}
-
-#' @noRd
-#' @autoglobal
-recode_opt_out <- function(x) {
-  collapse::mtt(
-    x,
-    npi = as.integer(npi),
-    start_date = as_date(start_date, fmt = "%m/%d/%Y"),
-    end_date = as_date(end_date, fmt = "%m/%d/%Y"),
-    updated = as_date(updated, fmt = "%m/%d/%Y"),
-    address = combine_(add_1, add_2),
-    order_refer = bin_(order_refer),
-    add_1 = NULL,
-    add_2 = NULL
-  )
-}
-
-#' @noRd
-#' @autoglobal
-recode_clinicians <- function(x) {
-  collapse::mtt(
-    x,
-    npi = as.integer(npi),
-    grad_year = as.integer(grad_year),
-    specialty = combine_(specialty, spec_other),
-    org_add = combine_(add_1, add_2),
-    spec_other = NULL,
-    add_1 = NULL,
-    add_2 = NULL,
-    ind = NULL,
-    org = NULL,
-    tlh = NULL
-  )
-}
-
-#' @noRd
-#' @autoglobal
-recode_order_refer <- function(x) {
-  collapse::mtt(
-    x,
-    npi = as.integer(npi),
-    part_b = bin_(part_b),
-    dme = bin_(dme),
-    hha = bin_(hha),
-    pmd = bin_(pmd),
-    hospice = bin_(hospice)
-  )
-}
-
-#' @noRd
-#' @autoglobal
-recode_transparency <- function(x) {
-  collapse::mtt(
-    x,
-    id = as.integer(id),
-    action_date = as_date(action_date)
-  )
 }

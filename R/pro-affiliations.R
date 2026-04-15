@@ -50,7 +50,7 @@ affiliations <- function(
   exec_prov(
     END = call_name(call_match()),
     COUNT = count,
-    ARG = params(
+    ARG = param_prov(
       npi = npi,
       ind_pac_id = pac,
       provider_last_name = last,

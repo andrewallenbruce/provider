@@ -2,7 +2,7 @@
 % Please edit documentation in R/cms-hospitals.R
 \name{subgroups}
 \alias{subgroups}
-\title{Subgroups}
+\title{Hospital Subgroups}
 \usage{
 subgroups(
   acute = NULL,
@@ -51,7 +51,7 @@ subgroups(
 A \verb{<subgroups>} object
 }
 \description{
-Subgroups
+Hospital Subgroups
 }
 \examples{
 subgroups(acute = TRUE, rehab = TRUE)

@@ -35,7 +35,7 @@ enumerations <- function(arg) {
     action = list(
       met = "Met Requirements",
       admin = "Administrative Closure",
-      warning = "Warning Notice",
+      warn = "Warning Notice",
       cap = "CAP Request",
       closure = "Closure Notice",
       cmp = "CMP Notice",
@@ -62,7 +62,7 @@ enumerations <- function(arg) {
     ),
     # <hospitals>
     prov_type = list(
-      hosp = "00-09",
+      hospital = "00-09",
       reh = "00-24",
       cah = "00-85"
     ),
@@ -79,7 +79,7 @@ enumerations <- function(arg) {
       corp = "CORPORATION",
       other = "OTHER",
       llc = "LLC",
-      partner = "PARTNERSHIP",
+      part = "PARTNERSHIP",
       sole = "SOLE PROPRIETOR"
     ),
     cli::cli_abort("{.arg arg} {.val {arg}} invalid.")

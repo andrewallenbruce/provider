@@ -52,7 +52,7 @@ revocations <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       NPI = npi,
       ENRLMT_ID = enid,
       FIRST_NAME = first,

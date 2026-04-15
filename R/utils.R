@@ -1,12 +1,3 @@
-#' Parameter list helper
-#'
-#' @param ... dots
-#' @keywords internal
-#' @export
-params <- function(...) {
-  purrr::compact(rlang::list2(...))
-}
-
 #' @noRd
 offset <- function(n, limit, which = "size") {
   check_number_whole(n, min = 0)

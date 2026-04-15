@@ -24,10 +24,10 @@
 #'    - `corp` = Corporation
 #'    - `other` = Other
 #'    - `llc` = LLC
-#'    - `partner` = Partnership
+#'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
 #' @param prov_type `<enum>` Provider type;
-#'    - `hosp` = Part A Hospital
+#'    - `hospital` = Part A Hospital
 #'    - `reh` = Rural Emergency Hospital
 #'    - `cah` = Critical Access Hospital
 #' @param loc_type `<enum>` Practice location type
@@ -44,7 +44,7 @@
 #' hospitals(count = TRUE)
 #' hospitals2(count = TRUE)
 #'
-#' hospitals(state = "GA", prov_type = "reh")
+#' hospitals(prov_type = "reh")
 #'
 #' x <- hospitals(
 #'   city = "Atlanta",
@@ -91,7 +91,7 @@ hospitals <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       NPI = npi,
       CCN = ccn,
       `ASSOCIATE ID` = pac,
@@ -112,7 +112,7 @@ hospitals <- function(
   )
 }
 
-#' Subgroups
+#' Hospital Subgroups
 #'
 #' @param acute `<lgl>` Acute/Short Term Care Hospital
 #' @param drug `<lgl>` Alcohol/Drug Treatment
@@ -195,7 +195,7 @@ hospitals2 <- function(
   exec_prov(
     END = call_name(call_match()),
     COUNT = count,
-    ARG = params(
+    ARG = param_prov(
       facility_id = ccn,
       facility_name = org_name,
       citytown = city,

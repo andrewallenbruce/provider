@@ -47,7 +47,7 @@ providers <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       NPI = npi,
       MULTIPLE_NPI_FLAG = bool_(multi),
       PECOS_ASCT_CNTL_ID = pac,

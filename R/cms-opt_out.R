@@ -66,7 +66,7 @@ opt_out <- function(
     END = call_name(call_match()),
     COUNT = count,
     SET = set,
-    ARG = params(
+    ARG = param_cms(
       NPI = npi,
       `First Name` = first,
       `Last Name` = last,

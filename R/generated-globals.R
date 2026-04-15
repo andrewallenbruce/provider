@@ -3,13 +3,13 @@
 utils::globalVariables(c(
   # <api_medicare2>
   "accessURL",
-  # <recode_transparency>
+  # <RC_transparency>
   "action_date",
-  # <recode_opt_out>
-  # <recode_clinicians>
+  # <RC_opt_out>
+  # <RC_clinicians>
   "add_1",
-  # <recode_opt_out>
-  # <recode_clinicians>
+  # <RC_opt_out>
+  # <RC_clinicians>
   "add_2",
   # <exec_prov>
   # <exec_cms>
@@ -19,46 +19,52 @@ utils::globalVariables(c(
   "describedBy",
   # <api_medicare2>
   "description",
-  # <recode_order_refer>
+  # <RC_order_refer>
   "dme",
-  # <recode_opt_out>
+  # <RC_opt_out>
   "end_date",
-  # <recode_clinicians>
+  # <RC_clinicians>
   "grad_year",
-  # <recode_order_refer>
+  # <RC_order_refer>
   "hha",
-  # <recode_order_refer>
+  # <RC_order_refer>
   "hospice",
-  # <recode_transparency>
+  # <RC_transparency>
   "id",
   # <api_medicare2>
   "identifier",
+  # <RC_providers>
+  "multi",
   # <exec_prov>
   # <exec_cms>
   # <exec_cms2>
   "NM",
-  # <recode_opt_out>
-  # <recode_clinicians>
-  # <recode_order_refer>
+  # <RC_providers>
+  # <RC_pending>
+  # <RC_opt_out>
+  # <RC_clinicians>
+  # <RC_order_refer>
   "npi",
   # <query_pro>
   # <query_cms>
   "O",
-  # <recode_order_refer>
+  # <RC_order_refer>
   "part_b",
-  # <recode_order_refer>
+  # <RC_order_refer>
   "pmd",
-  # <recode_clinicians>
+  # <RC_pending>
+  "prov_type",
+  # <RC_clinicians>
   "spec_other",
-  # <recode_clinicians>
+  # <RC_clinicians>
   "specialty",
-  # <recode_opt_out>
+  # <RC_opt_out>
   "start_date",
   # <api_provider>
   # <api_medicare>
   # <api_medicare2>
   "title",
-  # <recode_opt_out>
+  # <RC_opt_out>
   "updated",
   # <query_pro>
   # <query_cms>

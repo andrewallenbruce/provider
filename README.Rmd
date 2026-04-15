@@ -146,7 +146,7 @@ clia(name = starts_with("CDC"))
 ```{r}
 #| label: transparency
 # Hospital Transparency Enforcement
-transparency(action = "cmp")
+transparency(action = "warn", state = c("FL", "GA"))
 ```
 
 <br>
