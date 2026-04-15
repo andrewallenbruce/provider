@@ -20,12 +20,12 @@ Imports:
     cli (>= 3.6.6),
     collapse (>= 2.1.6),
     httr2 (>= 1.2.2),
-    purrr (>= 1.2.1),
+    purrr (>= 1.2.2),
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.2.0),
-    S7 (>= 0.2.1),
+    S7 (>= 0.2.1-1),
     stringr (>= 1.6.0),
-    vctrs (>= 0.7.2),
+    vctrs (>= 0.7.3),
     arcgislayers (>= 0.6.0),
     memoise (>= 2.0.1)
 Suggests: 
