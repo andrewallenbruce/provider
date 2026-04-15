@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9080 (2026-04-15)
+
+* fixed bug in `RC_clinicians`
+* updated dependencies
+* init url class/execute method
+
+
 # provider 0.0.1.9079 (2026-04-15)
 
 * rebuild README
