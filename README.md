@@ -114,19 +114,29 @@ revocations(
 ``` r
 # Clinician Demographics
 clinicians(
-  city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  grad_year = 2026)
-✔ clinicians returned 2 results.
-# A tibble: 2 × 20
-  first middle last  suffix gender cred  school grad_year specialty    npi pac  
-* <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
-1 CHRI… <NA>   AGYE… <NA>   F      <NA>  OTHER       2026 PHYSICIA… 1.15e9 5991…
-2 CHRI… <NA>   AGYE… <NA>   F      <NA>  OTHER       2026 PHYSICIA… 1.15e9 5991…
-# ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <chr>,
-#   org_city <chr>, org_state <chr>, org_zip <chr>, org_phone <chr>,
-#   org_add <chr>
+  specialty = "Nurse Practitioner",
+  org_name = starts_with("North"),
+  grad_year = 2024)
+✔ clinicians returned 25 results.
+# A tibble: 25 × 20
+   first     middle  last  suffix gender cred  school grad_year specialty    npi
+ * <chr>     <chr>   <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
+ 1 CLAIRE    OLIVIA  CARD… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.14e9
+ 2 JANNA     CAROLE  SMITH <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.27e9
+ 3 ALEXANDRA MARIE   DUDL… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.42e9
+ 4 KATHERINE ANN     BULL… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.51e9
+ 5 WENDY     MCADAMS JARR… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.70e9
+ 6 AMANDA    IYOBOS… OMOR… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.30e9
+ 7 SANGITA   S.      DESAI <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.24e9
+ 8 CAROLINE  ELIZAB… MITC… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.45e9
+ 9 KIMBERLY  <NA>    DAVIS <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.06e9
+10 SREEJU    <NA>    VALL… <NA>   F      <NA>  OTHER       2024 NURSE PR… 1.70e9
+# ℹ 15 more rows
+# ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
+#   org_phone <chr>, org_add <chr>
 ```
 
 ``` r

@@ -84,10 +84,11 @@ revocations(
 #| label: clinicians
 # Clinician Demographics
 clinicians(
-  city = c("Atlanta", "Macon"), 
   state = "GA", 
   gender = "F",
-  grad_year = 2026)
+  specialty = "Nurse Practitioner",
+  org_name = starts_with("North"),
+  grad_year = 2024)
 ```
 
 ```{r}

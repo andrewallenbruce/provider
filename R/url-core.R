@@ -1,4 +1,55 @@
 #' @noRd
+base_cms <- S7::new_class(
+  "base_cms",
+  package = NULL,
+  properties = list(
+    end = S7::class_character,
+    base = S7::new_property(
+      S7::class_character,
+      getter = function(self) {
+        paste0(
+          "https://data.cms.gov/data-api/v1/dataset/",
+          uuid_cms2(self@end),
+          "/data"
+        )
+      }
+    ),
+    opts = S7::new_property(
+      S7::class_list,
+      default = list(size = 5000L, offset = 0L)
+    )
+  )
+)
+
+#' @noRd
+base_prov <- S7::new_class(
+  "base_prov",
+  package = NULL,
+  properties = list(
+    end = S7::class_character,
+    base = S7::new_property(
+      S7::class_character,
+      getter = function(self) {
+        paste0(
+          "https://data.cms.gov/provider-data/api/1/datastore/query/",
+          uuid_prov2(self@end),
+          "/0?"
+        )
+      }
+    ),
+    opts = S7::new_property(
+      S7::class_list,
+      default = list(
+        limit = 1500L,
+        offset = 0L,
+        results = "false",
+        count = "false"
+      )
+    )
+  )
+)
+
+#' @noRd
 create_offset <- function(n, limit, url) {
   purrr::map_chr(
     offset(n, limit, "seq"),

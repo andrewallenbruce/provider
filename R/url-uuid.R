@@ -61,3 +61,34 @@ uuid_cms <- function(endpoint) {
     p0(x)
   }
 }
+
+#' @noRd
+uuid_cms2 <- function(endpoint) {
+  switch(
+    endpoint,
+    clia = "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
+    hospitals = "f6f6505c-e8b0-4d57-b258-e2b94133aaf2",
+    opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
+    order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",
+    pending = list(
+      Physician = "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
+      `Non-Physician` = "261b83b6-b89f-43ad-ae7b-0d419a3bc24b"
+    ),
+    providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
+    reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
+    revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
+    transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+  )
+}
+
+#' @noRd
+uuid_prov2 <- function(endpoint) {
+  switch(
+    endpoint,
+    affiliations = "27ea-46a8",
+    clinicians = "mj5m-pzi6",
+    hospitals2 = "xubh-q36u",
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+  )
+}
