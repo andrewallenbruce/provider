@@ -11,7 +11,7 @@ type and address."><meta property="og:image" content="https://andrewallenbruce.g
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9075</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9076</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,6 +150,7 @@ type and address.</p>
 <dd><p><code>&lt;enum&gt;</code> Practice location type</p><ul><li><p><code>main</code> = Main/Primary Hospital Location</p></li>
 <li><p><code>psych</code> = Hospital Psychiatric Unit</p></li>
 <li><p><code>rehab</code> = Hospital Rehabilitation Unit</p></li>
+<li><p><code>swing</code> = Hospital Swing-Bed Unit</p></li>
 <li><p><code>ext</code> = Opt Extension Site</p></li>
 <li><p><code>other</code> = Other Hospital Practice Location</p></li>
 </ul></dd>
@@ -181,26 +182,26 @@ type and address.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>prov_type <span class="op">=</span> <span class="st">"reh"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">44</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 44 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    org_name org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> GUADALU… GUADAL… O202… NM         00-24     PART A P… 1346… N     3207… 3200…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CROSBYT… <span style="color: #BB0000;">NA</span>      O202… TX         00-24     PART A P… 1063… N     6707… 4513…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> STILLWA… STILLW… O202… OK         00-24     PART A P… 1003… N     3707… 3701…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANSON H… ANSON … O202… TX         00-24     PART A P… 1457… N     6707… 4500…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALLS C… <span style="color: #BB0000;">NA</span>      O202… TX         00-24     PART A P… 1841… N     6707… 4503…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> IRWIN C… PROGRE… O202… GA         00-24     PART A P… 1720… N     1107… 1101…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MEMORIA… CHI ST… O202… TX         00-24     PART A P… 1578… N     6707… 4513…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> STILLWA… STILLW… O202… OK         00-24     PART A P… 1104… N     3707… 3700…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> OUR LAD… <span style="color: #BB0000;">NA</span>      O202… LA         00-24     PART A P… 1609… N     1907… 1913…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> STURGIS… STURGI… O202… MI         00-24     PART A P… 1598… N     2307… 2300…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 44 × 38</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> GUADALUPE CO… GUADAL… O202… NM         00-24     PART A P… 1.35<span style="color: #949494;">e</span>9     0 3207…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CROSBYTON CL… <span style="color: #BB0000;">NA</span>      O202… TX         00-24     PART A P… 1.06<span style="color: #949494;">e</span>9     0 6707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> STILLWATER M… STILLW… O202… OK         00-24     PART A P… 1.00<span style="color: #949494;">e</span>9     0 3707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANSON HOSPIT… ANSON … O202… TX         00-24     PART A P… 1.46<span style="color: #949494;">e</span>9     0 6707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALLS COMMUN… <span style="color: #BB0000;">NA</span>      O202… TX         00-24     PART A P… 1.84<span style="color: #949494;">e</span>9     0 6707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> IRWIN COUNTY… PROGRE… O202… GA         00-24     PART A P… 1.72<span style="color: #949494;">e</span>9     0 1107…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> MEMORIAL MED… CHI ST… O202… TX         00-24     PART A P… 1.58<span style="color: #949494;">e</span>9     0 6707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> STILLWATER M… STILLW… O202… OK         00-24     PART A P… 1.10<span style="color: #949494;">e</span>9     0 3707…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> OUR LADY OF … <span style="color: #BB0000;">NA</span>      O202… LA         00-24     PART A P… 1.61<span style="color: #949494;">e</span>9     0 1907…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> STURGIS HOSP… STURGI… O202… MI         00-24     PART A P… 1.60<span style="color: #949494;">e</span>9     0 2307…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 34 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, org_status &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_gen &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;chr&gt;, sub_child &lt;chr&gt;, sub_ltc &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;chr&gt;, sub_stc &lt;chr&gt;, sub_sba &lt;chr&gt;, sub_psychu &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;date&gt;, inc_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, status &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;int&gt;, reh_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ccn &lt;chr&gt;, sub_acute &lt;int&gt;, sub_gen &lt;int&gt;, sub_spec &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;int&gt;, sub_child &lt;int&gt;, sub_ltc &lt;int&gt;, sub_psy &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;int&gt;, sub_stc &lt;int&gt;, sub_sba &lt;int&gt;, sub_psu &lt;int&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
@@ -210,18 +211,18 @@ type and address.</p>
 <span class="r-in"><span>    psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name  org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UHS OF A… ANCHOR… O201… GA         00-09     PART A P… 1023… Y     1140… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF P… PEACHF… O201… GA         00-09     PART A P… 1093… N     1140… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, org_status &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_gen &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;chr&gt;, sub_child &lt;chr&gt;, sub_ltc &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;chr&gt;, sub_stc &lt;chr&gt;, sub_sba &lt;chr&gt;, sub_psychu &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_iru &lt;chr&gt;, sub_spec &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otxt &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 38</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02<span style="color: #949494;">e</span>9     1 1140… 4486…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09<span style="color: #949494;">e</span>9     0 1140… 9234…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 28 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_otxt &lt;chr&gt;, status &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;int&gt;, reh_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ccn &lt;chr&gt;, sub_acute &lt;int&gt;, sub_gen &lt;int&gt;, sub_spec &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;int&gt;, sub_child &lt;int&gt;, sub_ltc &lt;int&gt;, sub_psy &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;int&gt;, sub_stc &lt;int&gt;, sub_sba &lt;int&gt;, sub_psu &lt;int&gt;, sub_iru &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_oth &lt;int&gt;, sub_otxt &lt;chr&gt;, address &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu"><a href="hospitals2.html">hospitals2</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 11</span></span>
@@ -249,24 +250,24 @@ type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 010019 HELEN KELLE… 1300 S… SHEF… AL    35660 COLBE… (256… Acut… Gove… 2     </span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">8</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name  org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> HOUSTON … SOUTHE… O200… AL         00-09     PART A P… 1164… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> HH HEALT… MARSHA… O201… AL         00-09     PART A P… 1407… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> RCHP - F… NORTH … O201… AL         00-09     PART A P… 1477… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MIZELL M… <span style="color: #BB0000;">NA</span>      O200… AL         00-09     PART A P… 1013… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ST. VINC… ST. VI… O200… AL         00-09     PART A P… 1841… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> HH HEALT… DEKALB… O202… AL         00-09     PART A P… 1770… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> BBH SBMC… BAPTIS… O201… AL         00-09     PART A P… 1811… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> HH HEALT… HELEN … O201… AL         00-09     PART A P… 1508… N     0100… <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: pac &lt;chr&gt;, inc_date &lt;chr&gt;, inc_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_type &lt;chr&gt;, org_otxt &lt;chr&gt;, org_status &lt;chr&gt;, add_1 &lt;chr&gt;, add_2 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ind &lt;chr&gt;, reh_date &lt;chr&gt;, sub_gen &lt;chr&gt;, sub_acute &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;chr&gt;, sub_child &lt;chr&gt;, sub_ltc &lt;chr&gt;, sub_psych &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;chr&gt;, sub_stc &lt;chr&gt;, sub_sba &lt;chr&gt;, sub_psychu &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_iru &lt;chr&gt;, sub_spec &lt;chr&gt;, sub_other &lt;chr&gt;, sub_otxt &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 38</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16<span style="color: #949494;">e</span>9     0 0100… 9436…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> HH HEAL… MARSHA… O201… AL         00-09     PART A P… 1.41<span style="color: #949494;">e</span>9     0 0100… 8527…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> RCHP - … NORTH … O201… AL         00-09     PART A P… 1.48<span style="color: #949494;">e</span>9     0 0100… 8123…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MIZELL … <span style="color: #BB0000;">NA</span>      O200… AL         00-09     PART A P… 1.01<span style="color: #949494;">e</span>9     0 0100… 6507…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ST. VIN… ST. VI… O200… AL         00-09     PART A P… 1.84<span style="color: #949494;">e</span>9     0 0100… 8921…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77<span style="color: #949494;">e</span>9     0 0100… 6709…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81<span style="color: #949494;">e</span>9     0 0100… 7810…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51<span style="color: #949494;">e</span>9     0 0100… 1759…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 28 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_otxt &lt;chr&gt;, status &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;int&gt;, reh_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_ccn &lt;chr&gt;, sub_acute &lt;int&gt;, sub_gen &lt;int&gt;, sub_spec &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_adu &lt;int&gt;, sub_child &lt;int&gt;, sub_ltc &lt;int&gt;, sub_psy &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_irf &lt;int&gt;, sub_stc &lt;int&gt;, sub_sba &lt;int&gt;, sub_psu &lt;int&gt;, sub_iru &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sub_oth &lt;int&gt;, sub_otxt &lt;chr&gt;, address &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

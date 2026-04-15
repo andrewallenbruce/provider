@@ -112,6 +112,8 @@ hospitals(
 
   - `rehab` = Hospital Rehabilitation Unit
 
+  - `swing` = Hospital Swing-Bed Unit
+
   - `ext` = Opt Extension Site
 
   - `other` = Other Hospital Practice Location
@@ -143,26 +145,26 @@ hospitals2(count = TRUE)
 
 hospitals(prov_type = "reh")
 #> ✔ hospitals returned 44 results.
-#> # A tibble: 44 × 39
-#>    org_name org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 
-#>  * <chr>    <chr>   <chr> <chr>      <chr>     <chr>     <chr> <chr> <chr> <chr>
-#>  1 GUADALU… GUADAL… O202… NM         00-24     PART A P… 1346… N     3207… 3200…
-#>  2 CROSBYT… NA      O202… TX         00-24     PART A P… 1063… N     6707… 4513…
-#>  3 STILLWA… STILLW… O202… OK         00-24     PART A P… 1003… N     3707… 3701…
-#>  4 ANSON H… ANSON … O202… TX         00-24     PART A P… 1457… N     6707… 4500…
-#>  5 FALLS C… NA      O202… TX         00-24     PART A P… 1841… N     6707… 4503…
-#>  6 IRWIN C… PROGRE… O202… GA         00-24     PART A P… 1720… N     1107… 1101…
-#>  7 MEMORIA… CHI ST… O202… TX         00-24     PART A P… 1578… N     6707… 4513…
-#>  8 STILLWA… STILLW… O202… OK         00-24     PART A P… 1104… N     3707… 3700…
-#>  9 OUR LAD… NA      O202… LA         00-24     PART A P… 1609… N     1907… 1913…
-#> 10 STURGIS… STURGI… O202… MI         00-24     PART A P… 1598… N     2307… 2300…
+#> # A tibble: 44 × 38
+#>    org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  
+#>  * <chr>         <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr>
+#>  1 GUADALUPE CO… GUADAL… O202… NM         00-24     PART A P… 1.35e9     0 3207…
+#>  2 CROSBYTON CL… NA      O202… TX         00-24     PART A P… 1.06e9     0 6707…
+#>  3 STILLWATER M… STILLW… O202… OK         00-24     PART A P… 1.00e9     0 3707…
+#>  4 ANSON HOSPIT… ANSON … O202… TX         00-24     PART A P… 1.46e9     0 6707…
+#>  5 FALLS COMMUN… NA      O202… TX         00-24     PART A P… 1.84e9     0 6707…
+#>  6 IRWIN COUNTY… PROGRE… O202… GA         00-24     PART A P… 1.72e9     0 1107…
+#>  7 MEMORIAL MED… CHI ST… O202… TX         00-24     PART A P… 1.58e9     0 6707…
+#>  8 STILLWATER M… STILLW… O202… OK         00-24     PART A P… 1.10e9     0 3707…
+#>  9 OUR LADY OF … NA      O202… LA         00-24     PART A P… 1.61e9     0 1907…
+#> 10 STURGIS HOSP… STURGI… O202… MI         00-24     PART A P… 1.60e9     0 2307…
 #> # ℹ 34 more rows
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_gen <chr>, sub_acute <chr>,
-#> #   sub_adu <chr>, sub_child <chr>, sub_ltc <chr>, sub_psych <chr>,
-#> #   sub_irf <chr>, sub_stc <chr>, sub_sba <chr>, sub_psychu <chr>, …
+#> # ℹ 29 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
+#> #   org_type <chr>, org_otxt <chr>, status <chr>, city <chr>, state <chr>,
+#> #   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
+#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
+#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
+#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, …
 
 x <- hospitals(
   city = "Atlanta",
@@ -172,18 +174,18 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x
-#> # A tibble: 2 × 39
-#>   org_name  org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 
-#> * <chr>     <chr>   <chr> <chr>      <chr>     <chr>     <chr> <chr> <chr> <chr>
-#> 1 UHS OF A… ANCHOR… O201… GA         00-09     PART A P… 1023… Y     1140… NA   
-#> 2 UHS OF P… PEACHF… O201… GA         00-09     PART A P… 1093… N     1140… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_gen <chr>, sub_acute <chr>,
-#> #   sub_adu <chr>, sub_child <chr>, sub_ltc <chr>, sub_psych <chr>,
-#> #   sub_irf <chr>, sub_stc <chr>, sub_sba <chr>, sub_psychu <chr>,
-#> #   sub_iru <chr>, sub_spec <chr>, sub_other <chr>, sub_otxt <chr>
+#> # A tibble: 2 × 38
+#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
+#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
+#> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
+#> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
+#> # ℹ 28 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
+#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
+#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
+#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
+#> #   sub_oth <int>, sub_otxt <chr>, address <chr>
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
 #> # A tibble: 2 × 11
@@ -211,22 +213,22 @@ x
 #> 10 010019 HELEN KELLE… 1300 S… SHEF… AL    35660 COLBE… (256… Acut… Gove… 2     
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
-#> # A tibble: 8 × 39
-#>   org_name  org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 
-#> * <chr>     <chr>   <chr> <chr>      <chr>     <chr>     <chr> <chr> <chr> <chr>
-#> 1 HOUSTON … SOUTHE… O200… AL         00-09     PART A P… 1164… N     0100… NA   
-#> 2 HH HEALT… MARSHA… O201… AL         00-09     PART A P… 1407… N     0100… NA   
-#> 3 RCHP - F… NORTH … O201… AL         00-09     PART A P… 1477… N     0100… NA   
-#> 4 MIZELL M… NA      O200… AL         00-09     PART A P… 1013… N     0100… NA   
-#> 5 ST. VINC… ST. VI… O200… AL         00-09     PART A P… 1841… N     0100… NA   
-#> 6 HH HEALT… DEKALB… O202… AL         00-09     PART A P… 1770… N     0100… NA   
-#> 7 BBH SBMC… BAPTIS… O201… AL         00-09     PART A P… 1811… N     0100… NA   
-#> 8 HH HEALT… HELEN … O201… AL         00-09     PART A P… 1508… N     0100… NA   
-#> # ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#> #   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
-#> #   reh_ind <chr>, reh_date <chr>, sub_gen <chr>, sub_acute <chr>,
-#> #   sub_adu <chr>, sub_child <chr>, sub_ltc <chr>, sub_psych <chr>,
-#> #   sub_irf <chr>, sub_stc <chr>, sub_sba <chr>, sub_psychu <chr>,
-#> #   sub_iru <chr>, sub_spec <chr>, sub_other <chr>, sub_otxt <chr>
+#> # A tibble: 8 × 38
+#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
+#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
+#> 1 HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16e9     0 0100… 9436…
+#> 2 HH HEAL… MARSHA… O201… AL         00-09     PART A P… 1.41e9     0 0100… 8527…
+#> 3 RCHP - … NORTH … O201… AL         00-09     PART A P… 1.48e9     0 0100… 8123…
+#> 4 MIZELL … NA      O200… AL         00-09     PART A P… 1.01e9     0 0100… 6507…
+#> 5 ST. VIN… ST. VI… O200… AL         00-09     PART A P… 1.84e9     0 0100… 8921…
+#> 6 HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77e9     0 0100… 6709…
+#> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
+#> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
+#> # ℹ 28 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
+#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
+#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
+#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
+#> #   sub_oth <int>, sub_otxt <chr>, address <chr>
 ```

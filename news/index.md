@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9076 (2026-04-15)
+
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  fixes
+
 ## provider 0.0.1.9075 (2026-04-15)
 
 - added more `recode_with` implementations
