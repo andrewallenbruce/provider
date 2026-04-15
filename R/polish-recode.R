@@ -15,6 +15,43 @@ RC_clinicians <- function(x) {
 }
 
 #' @noRd
+#' @autoglobal
+RC_hospitals <- function(x) {
+  collapse::tfmv(x, "npi", as.integer) |>
+    collapse::tfmv(
+      c(
+        "multi",
+        "reh_ind",
+        paste0(
+          "sub_",
+          c(
+            "gen",
+            "acute",
+            "adu",
+            "child",
+            "ltc",
+            "psy",
+            "irf",
+            "stc",
+            "sba",
+            "psu",
+            "iru",
+            "spec",
+            "oth"
+          )
+        )
+      ),
+      bin_col
+    ) |>
+    collapse::tfmv(c("inc_date", "reh_date"), as_date_ymd) |>
+    collapse::mtt(
+      address = combine_cols(add_1, add_2),
+      add_1 = NULL,
+      add_2 = NULL
+    )
+}
+
+#' @noRd
 RC_providers <- function(x) {
   collapse::tfmv(x, "npi", as.integer) |>
     collapse::tfmv("multi", bin_col)

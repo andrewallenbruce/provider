@@ -29,6 +29,7 @@ recode_with <- function(x, endpoint) {
   switch(
     endpoint,
     clinicians = RC_clinicians(x),
+    hospitals = RC_hospitals(x),
     opt_out = RC_opt_out(x),
     order_refer = RC_order_refer(x),
     pending = RC_pending(x),

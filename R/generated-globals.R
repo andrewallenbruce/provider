@@ -4,9 +4,11 @@ utils::globalVariables(c(
   # <api_medicare2>
   "accessURL",
   # <RC_clinicians>
+  # <RC_hospitals>
   # <RC_opt_out>
   "add_1",
   # <RC_clinicians>
+  # <RC_hospitals>
   # <RC_opt_out>
   "add_2",
   # <api_medicare2>

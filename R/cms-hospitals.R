@@ -34,6 +34,7 @@
 #'    - `main` = Main/Primary Hospital Location
 #'    - `psych` = Hospital Psychiatric Unit
 #'    - `rehab` = Hospital Rehabilitation Unit
+#'    - `swing` = Hospital Swing-Bed Unit
 #'    - `ext` = Opt Extension Site
 #'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].

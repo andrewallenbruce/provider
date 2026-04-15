@@ -72,6 +72,7 @@ enumerations <- function(arg) {
       main = "MAIN/PRIMARY HOSPITAL LOCATION",
       psych = "HOSPITAL PSYCHIATRIC UNIT",
       rehab = "HOSPITAL REHABILITATION UNIT",
+      swing = "HOSPITAL SWING-BED UNIT",
       ext = "OPT EXTENSION SITE"
     ),
     # <hospitals>

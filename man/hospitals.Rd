@@ -75,6 +75,7 @@ hospitals(
 \item \code{main} = Main/Primary Hospital Location
 \item \code{psych} = Hospital Psychiatric Unit
 \item \code{rehab} = Hospital Rehabilitation Unit
+\item \code{swing} = Hospital Swing-Bed Unit
 \item \code{ext} = Opt Extension Site
 \item \code{other} = Other Hospital Practice Location
 }}
