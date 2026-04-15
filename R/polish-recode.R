@@ -12,7 +12,7 @@ RC_npi_multi <- function(x) {
 #' @noRd
 #' @autoglobal
 RC_clinicians <- function(x) {
-  collapse::tfmv(x, c("npi", "grad_year"), as.integer) |>
+  collapse::tfmv(x, c("npi", "grad_year", "org_mem"), as.integer) |>
     collapse::mtt(
       specialty = combine_cols(specialty, spec_other),
       org_add = combine_cols(add_1, add_2),

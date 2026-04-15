@@ -120,7 +120,8 @@ nppes <- function(
       pretty = "on" #on/off
     )
 
-  parse_string(httr2::req_perform(req))$results |>
+  httr2::req_perform(req) |>
+    parse_string(query = "results") |>
     data_frame()
 }
 

@@ -155,26 +155,25 @@ opt_out(
 ``` r
 # Ordering & Referral Eligibility
 order_refer(
+  last = contains("ABAY"),
   ptb = TRUE,
   dme = TRUE,
-  hha = FALSE,
-  pmd = TRUE,
-  hospice = FALSE)
-✔ order_refer returned 51 results.
-# A tibble: 51 × 8
-   first    last               npi part_b   dme   hha   pmd hospice
- * <chr>    <chr>            <int>  <int> <int> <int> <int>   <int>
- 1 ROBYN    AYER        1659094290      1     1     0     1       0
- 2 MEGAN    BAUMGARDNER 1023796711      1     1     0     1       0
- 3 KRISTINA BERRY       1295461192      1     1     0     1       0
- 4 BONNIE   BETTS       1306821129      1     1     0     1       0
- 5 LAURA    BOBROWSKI   1013297019      1     1     0     1       0
- 6 LISA     CHRISTIAN   1235636697      1     1     0     1       0
- 7 TRAVIS   DANIEL      1134813934      1     1     0     1       0
- 8 LYNELL   DAWSON      1962852533      1     1     0     1       0
- 9 BETH     DETRICH     1124364203      1     1     0     1       0
-10 BRIDGET  DIETZ       1720522592      1     1     0     1       0
-# ℹ 41 more rows
+  hha = FALSE)
+✔ order_refer returned 11 results.
+# A tibble: 11 × 8
+   first   last                npi   ptb   dme   hha   pmd hospice
+ * <chr>   <chr>             <int> <int> <int> <int> <int>   <int>
+ 1 LEAH    ABAY         1285306712     1     1     0     0       0
+ 2 VANESSA ABAYON       1932234119     1     1     0     0       0
+ 3 ANNA    BABAYAN      1528872694     1     1     0     0       0
+ 4 EDWARD  BABAYAN      1225551625     1     1     0     0       0
+ 5 THOMAS  BABAYAN      1114109030     1     1     0     0       0
+ 6 LUCINA  BABAYANTS    1396222634     1     1     0     0       0
+ 7 MIKHAIL BABAYEV      1518296706     1     1     0     0       0
+ 8 MARILYN CABAY        1417007816     1     1     0     0       0
+ 9 SERENE  HABAYEB      1104439058     1     1     0     0       0
+10 ABIGAIL LABAY        1831220961     1     1     0     0       0
+11 YAEL    LEVRAN GABAY 1114644424     1     1     0     0       0
 ```
 
 ``` r
@@ -261,28 +260,30 @@ hospitals(
 
 ``` r
 # CLIA Laboratories
-clia(name = starts_with("CDC"))
-✔ clia returned 23 results.
-# A tibble: 23 × 82
+clia(parent = starts_with(11), city = "Valdosta")
+✔ clia returned 12 results.
+# A tibble: 12 × 82
    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
- 1 CDC ACCESSC… <NA>       36D1074001   <NA>       <NA>        <NA>  0     <NA> 
- 2 CDC ARCTIC … CENTERS F… 02D0873639   <NA>       <NA>        <NA>  0     <NA> 
- 3 CDC HOME CA… <NA>       36D1072971   <NA>       <NA>        <NA>  0     <NA> 
- 4 CDC HOMECAR… <NA>       36D2093880   <NA>       <NA>        <NA>  0     <NA> 
- 5 CDC MIDDLEB… <NA>       36D2143885   <NA>       <NA>        <NA>  0     <NA> 
- 6 CDC OCCUPAT… <NA>       06D2096269   <NA>       <NA>        <NA>  0     <NA> 
- 7 CDC OCCUPAT… <NA>       06D2328787   <NA>       <NA>        <NA>  0     <NA> 
- 8 CDC OCCUPAT… <NA>       11D2099528   <NA>       <NA>        <NA>  0     <NA> 
- 9 CDC OF NE W… <NA>       09D0694204   092512     <NA>        <NA>  0     <NA> 
-10 CDC OF SPRI… <NA>       49D0714214   492535     <NA>        <NA>  0     <NA> 
-# ℹ 13 more rows
+ 1 SGMC HEALTH  <NA>       11D0022233   110122     <NA>        <NA>  0     <NA> 
+ 2 SGMC- SMITH… <NA>       11D0022241   110037     <NA>        <NA>  0     <NA> 
+ 3 PRUITTHEATL… <NA>       11D0265565   115385     <NA>        <NA>  0     <NA> 
+ 4 GHHS HEALTH… DBA GEORG… 11D0265571   117058     <NA>        <NA>  0     <NA> 
+ 5 PRUITTHEALT… <NA>       11D0265573   115377     <NA>        <NA>  0     <NA> 
+ 6 PRUITT HEAL… <NA>       11D0265578   115373     <NA>        <NA>  0     <NA> 
+ 7 QUEST DIAGN… SOLSTAS L… 11D0646134   11L0008004 <NA>        <NA>  0     <NA> 
+ 8 INTREPID US… <NA>       11D0679259   117073     <NA>        <NA>  0     <NA> 
+ 9 SOUTH GA ME… <NA>       11D0680179   110122     <NA>        <NA>  0     <NA> 
+10 SOUTH GEORG… <NA>       11D0722385   110122     <NA>        <NA>  0     <NA> 
+11 GAMBRO HEAL… <NA>       11D0893461   112597     <NA>        <NA>  0     <NA> 
+12 LANGDALE HO… <NA>       11D1071730   111531     <NA>        <NA>  0     <NA> 
 # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
 #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
 #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
 #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
 #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
-#   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, …
+#   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
+#   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
 ```
 
 ``` r

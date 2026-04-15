@@ -102,11 +102,10 @@ opt_out(
 #| label: order_refer
 # Ordering & Referral Eligibility
 order_refer(
+  last = contains("ABAY"),
   ptb = TRUE,
   dme = TRUE,
-  hha = FALSE,
-  pmd = TRUE,
-  hospice = FALSE)
+  hha = FALSE)
 ```
 
 ```{r}
@@ -139,7 +138,7 @@ hospitals(
 ```{r}
 #| label: clia
 # CLIA Laboratories
-clia(name = starts_with("CDC"))
+clia(parent = starts_with(11), city = "Valdosta")
 ```
 
 ```{r}

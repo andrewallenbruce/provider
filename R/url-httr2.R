@@ -1,9 +1,10 @@
 #' @noRd
-parse_string <- function(resp, query = NULL) {
-  PS <- function(x, qry = NULL) {
-    RcppSimdJson::fparse(httr2::resp_body_string(x), query = qry)
-  }
+PS <- function(x, qry = NULL) {
+  RcppSimdJson::fparse(httr2::resp_body_string(x), query = qry)
+}
 
+#' @noRd
+parse_string <- function(resp, query = NULL) {
   if (is.null(query)) {
     return(PS(resp))
   }
