@@ -102,6 +102,6 @@ RC_revocations <- function(x) {
 
 #' @noRd
 RC_transparency <- function(x) {
-  RC_npi(x) |>
+  collapse::tfmv(x, "id", as.integer) |>
     collapse::tfmv("action_date", as_date_ymd)
 }
