@@ -128,6 +128,7 @@ A Clinician or Group must have:
 ``` r
 clinicians(count = TRUE, org_name = not_na())
 #> ✔ clinicians returned 2,586,064 results.
+
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
 #> # A tibble: 1 × 20
@@ -137,6 +138,7 @@ clinicians(enid = "I20081002000549")
 #> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <chr>,
 #> #   org_city <chr>, org_state <chr>, org_zip <chr>, org_phone <chr>,
 #> #   org_add <chr>
+
 clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
 #> # A tibble: 11 × 20
@@ -156,9 +158,4 @@ clinicians(first = "Etan")
 #> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #> #   org_mem <chr>, org_city <chr>, org_state <chr>, org_zip <chr>,
 #> #   org_phone <chr>, org_add <chr>
-clinicians(count = TRUE,
-           city = starts_with("Atl"),
-           state = "GA",
-           grad_year = 2025)
-#> ✔ clinicians returned 389 results.
 ```

@@ -20,27 +20,27 @@ library(provider)
 affiliations(facility_ccn = 370781)
 ✔ affiliations returned 19 results.
 # A tibble: 19 × 9
-   first   last  middle suffix npi   pac   facility_type facility_ccn parent_ccn
- * <chr>   <chr> <chr>  <chr>  <chr> <chr> <chr>         <chr>        <chr>     
- 1 NICOLE  LEE   <NA>   <NA>   1003… 1254… Hospital      370781       <NA>      
- 2 LEILA   SEE   DANIE… <NA>   1013… 6800… Hospital      370781       <NA>      
- 3 AARON   SIZE… S      <NA>   1053… 7618… Hospital      370781       <NA>      
- 4 KEITH   KASS… J      <NA>   1083… 6406… Hospital      370781       <NA>      
- 5 BRENDA  HUEN… K      <NA>   1225… 2466… Hospital      370781       <NA>      
- 6 STEVE   MADR… M      <NA>   1245… 4082… Hospital      370781       <NA>      
- 7 CHESTER BEAM  WRAY   <NA>   1316… 2769… Hospital      370781       <NA>      
- 8 COREY   FINCH D      <NA>   1407… 3870… Hospital      370781       <NA>      
- 9 THOMAS  MCGA… <NA>   <NA>   1427… 7517… Hospital      370781       <NA>      
-10 NICHOL… RUSS… <NA>   <NA>   1487… 8426… Hospital      370781       <NA>      
-11 DWAYNE  SCHM… A      <NA>   1568… 3870… Hospital      370781       <NA>      
-12 JANA    MORR… NIKOLE <NA>   1629… 6103… Hospital      370781       <NA>      
-13 TIMOTHY GRAH… AARON  <NA>   1710… 9739… Hospital      370781       <NA>      
-14 RICHARD COST… F      JR.    1710… 2163… Hospital      370781       <NA>      
-15 AMBER   PENA  M      <NA>   1720… 6507… Hospital      370781       <NA>      
-16 TODD    REGI… S      <NA>   1780… 2668… Hospital      370781       <NA>      
-17 CHRIST… KOOP… L      <NA>   1780… 1052… Hospital      370781       <NA>      
-18 VEDMIA  FONK… <NA>   <NA>   1801… 9436… Hospital      370781       <NA>      
-19 JESS    ARMOR F      <NA>   1922… 9032… Hospital      370781       <NA>      
+   first  last  middle suffix    npi pac   facility_type facility_ccn parent_ccn
+ * <chr>  <chr> <chr>  <chr>   <int> <chr> <chr>         <chr>        <chr>     
+ 1 NICOLE LEE   <NA>   <NA>   1.00e9 1254… Hospital      370781       <NA>      
+ 2 LEILA  SEE   DANIE… <NA>   1.01e9 6800… Hospital      370781       <NA>      
+ 3 AARON  SIZE… S      <NA>   1.05e9 7618… Hospital      370781       <NA>      
+ 4 KEITH  KASS… J      <NA>   1.08e9 6406… Hospital      370781       <NA>      
+ 5 BRENDA HUEN… K      <NA>   1.23e9 2466… Hospital      370781       <NA>      
+ 6 STEVE  MADR… M      <NA>   1.25e9 4082… Hospital      370781       <NA>      
+ 7 CHEST… BEAM  WRAY   <NA>   1.32e9 2769… Hospital      370781       <NA>      
+ 8 COREY  FINCH D      <NA>   1.41e9 3870… Hospital      370781       <NA>      
+ 9 THOMAS MCGA… <NA>   <NA>   1.43e9 7517… Hospital      370781       <NA>      
+10 NICHO… RUSS… <NA>   <NA>   1.49e9 8426… Hospital      370781       <NA>      
+11 DWAYNE SCHM… A      <NA>   1.57e9 3870… Hospital      370781       <NA>      
+12 JANA   MORR… NIKOLE <NA>   1.63e9 6103… Hospital      370781       <NA>      
+13 TIMOT… GRAH… AARON  <NA>   1.71e9 9739… Hospital      370781       <NA>      
+14 RICHA… COST… F      JR.    1.71e9 2163… Hospital      370781       <NA>      
+15 AMBER  PENA  M      <NA>   1.72e9 6507… Hospital      370781       <NA>      
+16 TODD   REGI… S      <NA>   1.78e9 2668… Hospital      370781       <NA>      
+17 CHRIS… KOOP… L      <NA>   1.78e9 1052… Hospital      370781       <NA>      
+18 VEDMIA FONK… <NA>   <NA>   1.80e9 9436… Hospital      370781       <NA>      
+19 JESS   ARMOR F      <NA>   1.92e9 9032… Hospital      370781       <NA>      
 ```
 
 ``` r
@@ -135,7 +135,7 @@ opt_out(
 ``` r
 # Ordering & Referral Eligibility
 order_refer(
-  part_b = TRUE,
+  ptb = TRUE,
   dme = TRUE,
   hha = FALSE,
   pmd = TRUE,
@@ -213,30 +213,30 @@ hospitals(
     acute = FALSE,
     psych = TRUE))
 ✔ hospitals returned 14 results.
-# A tibble: 14 × 39
-   org_name org_dba enid  enid_state prov_type prov_desc npi   multi ccn   ccn2 
- * <chr>    <chr>   <chr> <chr>      <chr>     <chr>     <chr> <chr> <chr> <chr>
- 1 UHS OF … COASTA… O200… GA         00-09     PART A P… 1679… Y     1140… <NA> 
- 2 HHC ST.… ST. SI… O200… GA         00-09     PART A P… 1972… N     1140… <NA> 
- 3 UHS OF … SUMMIT… O200… GA         00-09     PART A P… 1407… N     1140… <NA> 
- 4 RIVERWO… LAKEVI… O200… GA         00-09     PART A P… 1770… Y     1140… <NA> 
- 5 DEPARTM… WEST C… O200… GA         00-09     PART A P… 1912… N     1140… <NA> 
- 6 DEPARTM… GEORGI… O200… GA         00-09     PART A P… 1942… N     1140… <NA> 
- 7 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1023… Y     1140… <NA> 
- 8 DEPARTM… GEORGI… O201… GA         00-09     PART A P… 1124… N     1140… <NA> 
- 9 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1093… N     1140… <NA> 
-10 GREENLE… GREENL… O201… GA         00-09     PART A P… 1538… N     1140… <NA> 
-11 VEST MO… RIDGEV… O201… GA         00-09     PART A P… 1073… N     1140… <NA> 
-12 RV BEHA… RIDGEV… O201… GA         00-09     PART A P… 1427… N     1140… <NA> 
-13 DONALSO… <NA>    O201… GA         00-09     PART A P… 1932… N     11S1… <NA> 
-14 HOSPITA… JEFFER… O202… GA         00-09     PART A P… 1417… N     11S1… <NA> 
-# ℹ 29 more variables: pac <chr>, inc_date <chr>, inc_state <chr>,
-#   org_type <chr>, org_otxt <chr>, org_status <chr>, add_1 <chr>, add_2 <chr>,
-#   city <chr>, state <chr>, zip <chr>, loc_type <chr>, loc_otxt <chr>,
-#   reh_ind <chr>, reh_date <chr>, sub_gen <chr>, sub_acute <chr>,
-#   sub_adu <chr>, sub_child <chr>, sub_ltc <chr>, sub_psych <chr>,
-#   sub_irf <chr>, sub_stc <chr>, sub_sba <chr>, sub_psychu <chr>,
-#   sub_iru <chr>, sub_spec <chr>, sub_other <chr>, sub_otxt <chr>
+# A tibble: 14 × 38
+   org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  
+ * <chr>         <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr>
+ 1 UHS OF SAVAN… COASTA… O200… GA         00-09     PART A P… 1.68e9     1 1140…
+ 2 HHC ST. SIMO… ST. SI… O200… GA         00-09     PART A P… 1.97e9     0 1140…
+ 3 UHS OF SUMMI… SUMMIT… O200… GA         00-09     PART A P… 1.41e9     0 1140…
+ 4 RIVERWOODS B… LAKEVI… O200… GA         00-09     PART A P… 1.77e9     1 1140…
+ 5 DEPARTMENT O… WEST C… O200… GA         00-09     PART A P… 1.91e9     0 1140…
+ 6 DEPARTMENT O… GEORGI… O200… GA         00-09     PART A P… 1.94e9     0 1140…
+ 7 UHS OF ANCHO… ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140…
+ 8 DEPARTMENT O… GEORGI… O201… GA         00-09     PART A P… 1.12e9     0 1140…
+ 9 UHS OF PEACH… PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140…
+10 GREENLEAF CE… GREENL… O201… GA         00-09     PART A P… 1.54e9     0 1140…
+11 VEST MONROE,… RIDGEV… O201… GA         00-09     PART A P… 1.07e9     0 1140…
+12 RV BEHAVIORA… RIDGEV… O201… GA         00-09     PART A P… 1.43e9     0 1140…
+13 DONALSONVILL… <NA>    O201… GA         00-09     PART A P… 1.93e9     0 11S1…
+14 HOSPITAL AUT… JEFFER… O202… GA         00-09     PART A P… 1.42e9     0 11S1…
+# ℹ 29 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
+#   org_type <chr>, org_otxt <chr>, status <chr>, city <chr>, state <chr>,
+#   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
+#   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
+#   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
+#   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
+#   sub_oth <int>, sub_otxt <chr>, address <chr>
 ```
 
 ``` r
@@ -269,20 +269,8 @@ clia(name = starts_with("CDC"))
 # Hospital Transparency Enforcement
 transparency(action = "warn", state = c("FL", "GA"))
 ✔ transparency returned 230 results.
-# A tibble: 230 × 7
-      id name                             address city  state action action_date
- * <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
- 1    10 Bethesda Hospital East           2815 S… Boyn… FL    Warni… 2024-01-31 
- 2    22 Bethesda Hospital West           9655  … Boyn… FL    Warni… 2024-02-01 
- 3    42 Northside Hospital Atlanta       1000 J… Atla… GA    Warni… 2021-04-19 
- 4    66 UF Health Jacksonville           655 W … Jack… FL    Warni… 2021-06-23 
- 5    68 Wellstar Kennestone Regional Me… 677 Ch… Mari… GA    Warni… 2021-04-19 
- 6    75 Northeast Georgia Medical Cente… 743 Sp… Gain… GA    Warni… 2021-04-19 
- 7    79 Holmes Regional Medical Center   1350 H… Melb… FL    Warni… 2021-04-19 
- 8    88 Larkin Hospital Palm Springs     1475 W… Hial… FL    Warni… 2021-04-19 
- 9    99 Northside Hospital - Cherokee    450 No… Cant… GA    Warni… 2021-05-18 
-10   113 Halifax Health Medical Center o… 303 N … Dayt… FL    Warni… 2021-05-18 
-# ℹ 220 more rows
+Error in `ckmatch()`:
+! Unknown columns: npi
 ```
 
   

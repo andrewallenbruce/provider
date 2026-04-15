@@ -9,7 +9,7 @@ order_refer(
   npi = NULL,
   first = NULL,
   last = NULL,
-  part_b = NULL,
+  ptb = NULL,
   dme = NULL,
   hha = NULL,
   pmd = NULL,
@@ -29,11 +29,11 @@ order_refer(
 
   `<chr>` Individual provider's first/last name
 
-- part_b, dme, hha, pmd, hospice:
+- ptb, dme, hha, pmd, hospice:
 
   `<lgl>` Eligibility for:
 
-  - `part_b`: Medicare Part B
+  - `ptb`: Medicare Part B
 
   - `dme`: Durable Medical Equipment
 
@@ -94,12 +94,14 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 order_refer(count = TRUE)
 #> ℹ order_refer has 2,005,720 rows.
+
 order_refer(npi = 1003026055)
 #> ✔ order_refer returned 1 result.
 #> # A tibble: 1 × 8
 #>   first   last          npi part_b   dme   hha   pmd hospice
 #> * <chr>   <chr>       <int>  <int> <int> <int> <int>   <int>
 #> 1 RADHIKA PHADKE 1003026055      1     1     1     1       1
+
 order_refer(first = "Jennifer", last = "Smith")
 #> ✔ order_refer returned 135 results.
 #> # A tibble: 135 × 8
@@ -116,12 +118,8 @@ order_refer(first = "Jennifer", last = "Smith")
 #>  9 JENNIFER SMITH 1497230395      1     1     1     1       0
 #> 10 JENNIFER SMITH 1033486725      1     1     1     1       0
 #> # ℹ 125 more rows
-order_refer(
-  part_b = TRUE,
-  dme = TRUE,
-  hha = FALSE,
-  pmd = TRUE,
-  hospice = FALSE)
+
+order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 #> ✔ order_refer returned 51 results.
 #> # A tibble: 51 × 8
 #>    first    last               npi part_b   dme   hha   pmd hospice
