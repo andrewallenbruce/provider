@@ -47,7 +47,7 @@ affiliations <- function(
 ) {
   check_character(facility_type, allow_null = TRUE)
 
-  exec_prov(
+  exec_prov2(
     COUNT = count,
     ARG = param_prov(
       npi = npi,

@@ -1,12 +1,16 @@
 #' @noRd
+EndPoint <- expr(call_name(call_match(call = caller_call(), fn = caller_fn())))
+
+#' @noRd
 #' @autoglobal
 exec_prov <- function(COUNT, ARG, LIMIT = 1500L) {
+
+  END <- eval_bare(EndPoint)
+  BASE <- uuid_prov(END)
+
   check_online()
   check_bool(COUNT)
   check_modifiers(ARG, END)
-
-  END <- call_name(call_match(call = caller_call(), fn = caller_fn()))
-  BASE <- uuid_prov(END)
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
@@ -59,7 +63,7 @@ exec_cms <- function(COUNT, SET, ARG, LIMIT = 5000L) {
   check_bool(COUNT)
   check_bool(SET)
 
-  END <- call_name(call_match(call = caller_call(), fn = caller_fn()))
+  END <- eval_bare(EndPoint)
   BASE <- uuid_cms(END)
 
   # N0 QUERY

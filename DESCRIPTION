@@ -16,18 +16,18 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
+    arcgislayers (>= 0.6.0),
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),
     collapse (>= 2.1.6),
     httr2 (>= 1.2.2),
+    memoise (>= 2.0.1),
     purrr (>= 1.2.2),
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.2.0),
     S7 (>= 0.2.1),
     stringr (>= 1.6.0),
-    vctrs (>= 0.7.3),
-    arcgislayers (>= 0.6.0),
-    memoise (>= 2.0.1)
+    vctrs (>= 0.7.3)
 Suggests: 
     knitr,
     roxyglobals (>= 1.0.0),

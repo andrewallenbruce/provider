@@ -18,7 +18,7 @@ hospitals2 <- function(
   ownership = NULL,
   count = FALSE
 ) {
-  exec_prov(
+  exec_prov2(
     COUNT = count,
     ARG = param_prov(
       facility_id = ccn,
