@@ -239,3 +239,57 @@ exec_prov2 <- function(COUNT = FALSE, ARG = arg_prov()) {
   req_multi(x, ARG, N) |>
     polish(x@end)
 }
+
+#' @noRd
+#' @autoglobal
+exec_cms3 <- function(COUNT = FALSE, SET = FALSE, ARG = arg_cms()) {
+  x <- base_cms(eval_bare(EndPoint))
+
+  check_online()
+  check_bool(COUNT)
+  check_bool(SET)
+
+  # N0 QUERY
+  if (!length(ARG)) {
+    if (SET) {
+      # SET --> Return Entire Dataset
+      N <- req_count(x)
+      cli_pages(N, x@limit, x@end)
+
+      req_multi(x, ARG, N) |>
+        polish(x@end)
+    }
+
+    # COUNT --> Return Invisibly
+    if (COUNT) {
+      N <- req_count(x)
+      cli_total(N, x@end)
+      return(invisible(N))
+    }
+
+    # EMPTY QUERY --> First 10 Rows
+    return(req_ten(x) |> polish(x@end))
+  }
+
+  # QUERY --> Request Count
+  ARG <- build(ARG)
+  N <- req_count(x, ARG)
+
+  # NO RESULTS or COUNT --> Return Invisibly
+  if (N == 0L || COUNT) {
+    cli_results(N, x@end)
+    return(invisible(N))
+  }
+
+  # COUNT BELOW LIMIT --> Single Request
+  if (N <= x@limit) {
+    cli_results(N, x@end)
+    return(req_single(x, ARG) |> polish(x@end))
+  }
+
+  # COUNT ABOVE LIMIT --> Multiple Requests
+  cli_pages(N, x@limit, x@end)
+
+  req_multi(x, ARG, N) |>
+    polish(x@end)
+}

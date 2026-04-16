@@ -46,7 +46,7 @@ reassignments <- function(
   count = FALSE,
   set = FALSE
 ) {
-  exec_cms(
+  exec_cms3(
     COUNT = count,
     SET = set,
     ARG = param_cms(

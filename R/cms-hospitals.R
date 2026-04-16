@@ -88,7 +88,7 @@ hospitals <- function(
   check_character(loc_type, allow_null = TRUE)
   check_character(prov_type, allow_null = TRUE)
 
-  exec_cms(
+  exec_cms3(
     COUNT = count,
     SET = set,
     ARG = param_cms(
