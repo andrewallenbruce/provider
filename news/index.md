@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9083 (2026-04-16)
+
+- testing S7 methods with CMS endpoints
+
 ## provider 0.0.1.9082 (2026-04-16)
 
 - S7 url class/methods
