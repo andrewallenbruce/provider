@@ -107,7 +107,7 @@ transparency(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
 
 - set:
 

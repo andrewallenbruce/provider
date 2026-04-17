@@ -23,6 +23,8 @@ reassignments(
   last = NULL,
   state = NULL,
   specialty = NULL,
+  employers = NULL,
+  employees = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -36,15 +38,15 @@ reassignments(
 
 - npi:
 
-  `<int>` 10-digit National Provider Identifier
+  `<int>` National Provider Identifier
 
 - pac:
 
-  `<chr>` 10-digit PECOS Associate Control ID
+  `<chr>` PECOS Associate Control ID
 
 - enid:
 
-  `<chr>` 15-digit Medicare Enrollment ID
+  `<chr>` Medicare Enrollment ID
 
 - first, last:
 
@@ -58,17 +60,21 @@ reassignments(
 
   `<chr>` Enrollment specialty
 
+- employers, employees:
+
+  `<int>` Enrollment specialty
+
 - org_name:
 
   `<chr>` Legal business name
 
 - org_pac:
 
-  `<chr>` 10-digit PECOS Associate Control ID
+  `<chr>` PECOS Associate Control ID
 
 - org_enid:
 
-  `<chr>` 15-digit Medicare Enrollment ID
+  `<chr>` Medicare Enrollment ID
 
 - org_state:
 
@@ -76,7 +82,7 @@ reassignments(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
 
 - set:
 
@@ -96,6 +102,10 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 reassignments(count = TRUE)
 #> ℹ reassignments has 3,511,984 rows.
+
+reassignments(count = TRUE, employers = greater_than(20, equal = TRUE))
+#> ✔ reassignments returned 24,751 results.
+
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.
 #> # A tibble: 6 × 14
@@ -109,6 +119,7 @@ reassignments(org_enid = "I20070209000135")
 #> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   rec_type <chr>
+
 reassignments(pac = 9830437441)
 #> ✔ reassignments returned 2 results.
 #> # A tibble: 2 × 14
@@ -118,6 +129,7 @@ reassignments(pac = 9830437441)
 #> 2 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… Clermon…         1
 #> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #> #   rec_type <chr>
+
 reassignments(org_pac = 3173525888)
 #> ✔ reassignments returned 6 results.
 #> # A tibble: 6 × 14

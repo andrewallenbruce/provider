@@ -29,7 +29,7 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9086</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9087</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@ providers and suppliers who are revoked and under a current re-enrollment bar.
 This dataset includes provider and supplier names, NPIs, revocation
 authorities pursuant to <a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535" class="external-link">42 CFR § 424.535</a>, revocation effective dates, and
 re-enrollment bar expiration dates. This dataset is based on information
-gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
+gathered from the <em>Provider Enrollment, Chain and Ownership System (PECOS)</em>.</p>
 </div>
 
     </div>
@@ -113,11 +113,11 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;int&gt;</code> 10-digit Individual National Provider Identifier</p></dd>
+<dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-middle-last">first, middle, last<a class="anchor" aria-label="anchor" href="#arg-first-middle-last"></a></dt>
@@ -133,7 +133,7 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
 
 
 <dt id="arg-state">state<a class="anchor" aria-label="anchor" href="#arg-state"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Enrollment state, full or abbreviation</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Enrollment state abbreviation</p></dd>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
@@ -141,11 +141,11 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
 
 
 <dt id="arg-reason">reason<a class="anchor" aria-label="anchor" href="#arg-reason"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> reason for revocation</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Reason for revocation</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 
 <dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
@@ -161,24 +161,26 @@ gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">revocations</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">revocations</span> has <span style="font-weight: bold;">7,465</span> rows.</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revocations</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">not_na</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revocations</span> returned <span style="font-weight: bold;">4,199</span> results.</span>
-<span class="r-in"><span><span class="fu">revocations</span><span class="op">(</span>specialty <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"CARDIO"</span><span class="op">)</span>, state <span class="op">=</span> <span class="fu"><a href="modifier.html">excludes</a></span><span class="op">(</span><span class="st">"TX"</span>, <span class="st">"OH"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revocations</span> returned <span style="font-weight: bold;">43</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 43 × 12</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">revocations</span><span class="op">(</span>specialty <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"CARDIO"</span><span class="op">)</span>, state <span class="op">=</span> <span class="fu"><a href="modifier.html">excludes</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"OH"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revocations</span> returned <span style="font-weight: bold;">45</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 45 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    org_name first   middle last      enid       npi multi state prov_desc reason</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>       RONALD  A      CARLISH   I20031… 1.64<span style="color: #949494;">e</span>9     0 CA    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>       STEVE   E      NOZAD     I20031… 1.96<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #BB0000;">NA</span>       RAED    A      JITAN     I20040… 1.03<span style="color: #949494;">e</span>9     0 WV    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #BB0000;">NA</span>       RAYMOND <span style="color: #BB0000;">NA</span>     CATANIA   I20040… 1.02<span style="color: #949494;">e</span>9     0 NJ    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #BB0000;">NA</span>       ROBERT  ALDO   VACCARINO I20040… 1.92<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #BB0000;">NA</span>       STEVEN  B      HEFTER    I20040… 1.61<span style="color: #949494;">e</span>9     0 AL    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #BB0000;">NA</span>       BRYAN   F      PERRY     I20040… 1.24<span style="color: #949494;">e</span>9     0 OK    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #BB0000;">NA</span>       KLAUS   P      RENTROP   I20050… 1.19<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #BB0000;">NA</span>       JOHN    MILES  MCCLURE   I20050… 1.43<span style="color: #949494;">e</span>9     0 MI    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #BB0000;">NA</span>       FAZAL   R      PANEZAI   I20050… 1.71<span style="color: #949494;">e</span>9     0 NJ    PRACTITI… 424.5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 33 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>       JUAN    Y      KURDI     I20031… 1.57<span style="color: #949494;">e</span>9     0 TX    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #BB0000;">NA</span>       RONALD  A      CARLISH   I20031… 1.64<span style="color: #949494;">e</span>9     0 CA    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #BB0000;">NA</span>       STEVE   E      NOZAD     I20031… 1.96<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #BB0000;">NA</span>       RAED    A      JITAN     I20040… 1.03<span style="color: #949494;">e</span>9     0 WV    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #BB0000;">NA</span>       RAYMOND <span style="color: #BB0000;">NA</span>     CATANIA   I20040… 1.02<span style="color: #949494;">e</span>9     0 NJ    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #BB0000;">NA</span>       ROBERT  ALDO   VACCARINO I20040… 1.92<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #BB0000;">NA</span>       STEVEN  B      HEFTER    I20040… 1.61<span style="color: #949494;">e</span>9     0 AL    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #BB0000;">NA</span>       BRYAN   F      PERRY     I20040… 1.24<span style="color: #949494;">e</span>9     0 OK    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #BB0000;">NA</span>       KLAUS   P      RENTROP   I20050… 1.19<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #BB0000;">NA</span>       JOHN    MILES  MCCLURE   I20050… 1.43<span style="color: #949494;">e</span>9     0 MI    PRACTITI… 424.5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 35 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: start_date &lt;date&gt;, end_date &lt;date&gt;</span></span>
 </code></pre></div>
     </div>

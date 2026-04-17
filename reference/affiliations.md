@@ -85,6 +85,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 affiliations(middle = "", count = TRUE)
 #> ✔ affiliations returned 558,466 results.
+
 affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.
 #> # A tibble: 4 × 9
@@ -94,6 +95,7 @@ affiliations(facility_ccn = "33Z302")
 #> 2 MARY    HALL… K      NA     1.40e9 8921… Nursing home  33Z302       331302    
 #> 3 IL      CHON  JUN    NA     1.54e9 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU  NA     NA     1.56e9 6709… Nursing home  33Z302       331302    
+
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 4 results.
 #> # A tibble: 4 × 9
@@ -103,6 +105,7 @@ affiliations(parent_ccn = 331302)
 #> 2 MARY    HALL… K      NA     1.40e9 8921… Nursing home  33Z302       331302    
 #> 3 IL      CHON  JUN    NA     1.54e9 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU  NA     NA     1.56e9 6709… Nursing home  33Z302       331302    
+
 affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 #> # A tibble: 206 × 9

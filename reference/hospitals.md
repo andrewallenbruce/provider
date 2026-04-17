@@ -140,6 +140,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 hospitals(count = TRUE)
 #> ℹ hospitals has 9,187 rows.
+
 hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
 
@@ -186,6 +187,7 @@ x
 #> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
 #> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
 #> #   sub_otxt <chr>, address <chr>
+
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
 #> # A tibble: 2 × 11
@@ -211,6 +213,7 @@ x
 #>  8 010016 SHELBY BAPT… 1000 F… ALAB… AL    35007 SHELBY (205… Acut… Volu… 2     
 #>  9 010018 CALLAHAN EY… 1720 U… BIRM… AL    35233 JEFFE… (205… Acut… Volu… Not A…
 #> 10 010019 HELEN KELLE… 1300 S… SHEF… AL    35660 COLBE… (256… Acut… Gove… 2     
+
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
 #> # A tibble: 8 × 37

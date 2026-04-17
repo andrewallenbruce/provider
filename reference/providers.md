@@ -27,15 +27,15 @@ providers(
 
 - npi:
 
-  `<int>` 10-digit Individual National Provider Identifier
+  `<int>` National Provider Identifier
 
 - pac:
 
-  `<chr>` 10-digit PECOS Associate Control ID
+  `<chr>` PECOS Associate Control ID
 
 - enid:
 
-  `<chr>` 15-digit Medicare Enrollment ID
+  `<chr>` Medicare Enrollment ID
 
 - first, middle, last:
 
@@ -55,7 +55,7 @@ providers(
 
 - org_name:
 
-  `<chr>` Organization name
+  `<chr>` Organizational provider's name
 
 - multi:
 
@@ -63,7 +63,7 @@ providers(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
 
 - set:
 
@@ -86,22 +86,25 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 providers(count = TRUE)
 #> ℹ providers has 2,957,262 rows.
-providers(count = TRUE, org_name = not(""))
+
+providers(count = TRUE, org_name = not_na())
 #> ✔ providers returned 433,293 results.
-providers(org_name = starts_with("Z"), multi = TRUE)
-#> ✔ providers returned 10 results.
-#> # A tibble: 10 × 11
+
+providers(org_name = starts_with("Z"))
+#> ✔ providers returned 873 results.
+#> # A tibble: 873 × 11
 #>    org_name      first middle last  state prov_type prov_desc    npi multi pac  
 #>  * <chr>         <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>
-#>  1 ZEPF CENTER   NA    NA     NA    OH    12-70     PART B S… 1.22e9     1 5395…
-#>  2 ZOLLINGER PH… NA    NA     NA    CA    12-65     PART B S… 1.86e9     1 3577…
-#>  3 ZEITER EYE M… NA    NA     NA    CA    12-70     PART B S… 1.73e9     1 8527…
-#>  4 ZACOALCO MED… NA    NA     NA    CA    12-70     PART B S… 1.68e9     1 4183…
-#>  5 ZEPHYRHILLS … NA    NA     NA    FL    12-70     PART B S… 1.90e9     1 8628…
-#>  6 ZOOM REHABIL… NA    NA     NA    TX    00-14     PART A P… 1.86e9     1 9133…
-#>  7 ZANESVILLE V… NA    NA     NA    OH    12-70     PART B S… 1.89e9     1 4082…
-#>  8 ZYMEK CARDIO… NA    NA     NA    AZ    12-70     PART B S… 1.23e9     1 4082…
-#>  9 ZION HEALTH … NA    NA     NA    FL    12-70     PART B S… 1.02e9     1 8224…
-#> 10 ZOHAS PHARMA… NA    NA     NA    CA    12-73     PART B S… 1.81e9     1 9436…
+#>  1 Z & B HEALTH… NA    NA     NA    TX    00-08     PART A P… 1.53e9     0 1254…
+#>  2 Z & C MEDICA… NA    NA     NA    CA    12-70     PART B S… 1.30e9     0 2567…
+#>  3 Z & E DYNAST… NA    NA     NA    DC    12-70     PART B S… 1.95e9     0 1850…
+#>  4 Z & Z MEDICA… NA    NA     NA    TX    12-70     PART B S… 1.62e9     0 8224…
+#>  5 Z AFFORDABLE… NA    NA     NA    TX    12-70     PART B S… 1.31e9     0 1355…
+#>  6 Z AND Z PODI… NA    NA     NA    NV    12-70     PART B S… 1.98e9     0 8224…
+#>  7 Z AND Z PODI… NA    NA     NA    AZ    12-70     PART B S… 1.98e9     0 8224…
+#>  8 Z AND Z PODI… NA    NA     NA    CA    12-70     PART B S… 1.98e9     0 8224…
+#>  9 Z AND Z PODI… NA    NA     NA    NV    30-48     DME SUPP… 1.98e9     0 8224…
+#> 10 Z AUDIOLOGY … NA    NA     NA    FL    12-70     PART B S… 1.35e9     0 9436…
+#> # ℹ 863 more rows
 #> # ℹ 1 more variable: enid <chr>
 ```

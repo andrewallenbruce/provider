@@ -9,7 +9,7 @@ actively approved to bill Medicare."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9086</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9087</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,15 +79,15 @@ actively approved to bill Medicare.</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;int&gt;</code> 10-digit Individual National Provider Identifier</p></dd>
+<dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-middle-last">first, middle, last<a class="anchor" aria-label="anchor" href="#arg-first-middle-last"></a></dt>
@@ -107,7 +107,7 @@ actively approved to bill Medicare.</p>
 
 
 <dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Organization name</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Organizational provider's name</p></dd>
 
 
 <dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
@@ -115,7 +115,7 @@ actively approved to bill Medicare.</p>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 
 <dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
@@ -137,23 +137,26 @@ actively approved to bill Medicare.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">providers</span> has <span style="font-weight: bold;">2,957,262</span> rows.</span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">not</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">not_na</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">providers</span> returned <span style="font-weight: bold;">433,293</span> results.</span>
-<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"Z"</span><span class="op">)</span>, multi <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">providers</span> returned <span style="font-weight: bold;">10</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">providers</span><span class="op">(</span>org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">starts_with</a></span><span class="op">(</span><span class="st">"Z"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">providers</span> returned <span style="font-weight: bold;">873</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 873 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    org_name      first middle last  state prov_type prov_desc    npi multi pac  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ZEPF CENTER   <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    OH    12-70     PART B S… 1.22<span style="color: #949494;">e</span>9     1 5395…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ZOLLINGER PH… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-65     PART B S… 1.86<span style="color: #949494;">e</span>9     1 3577…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ZEITER EYE M… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-70     PART B S… 1.73<span style="color: #949494;">e</span>9     1 8527…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ZACOALCO MED… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-70     PART B S… 1.68<span style="color: #949494;">e</span>9     1 4183…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ZEPHYRHILLS … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    FL    12-70     PART B S… 1.90<span style="color: #949494;">e</span>9     1 8628…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ZOOM REHABIL… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    TX    00-14     PART A P… 1.86<span style="color: #949494;">e</span>9     1 9133…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ZANESVILLE V… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    OH    12-70     PART B S… 1.89<span style="color: #949494;">e</span>9     1 4082…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ZYMEK CARDIO… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    AZ    12-70     PART B S… 1.23<span style="color: #949494;">e</span>9     1 4082…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ZION HEALTH … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    FL    12-70     PART B S… 1.02<span style="color: #949494;">e</span>9     1 8224…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ZOHAS PHARMA… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-73     PART B S… 1.81<span style="color: #949494;">e</span>9     1 9436…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Z &amp; B HEALTH… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    TX    00-08     PART A P… 1.53<span style="color: #949494;">e</span>9     0 1254…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Z &amp; C MEDICA… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-70     PART B S… 1.30<span style="color: #949494;">e</span>9     0 2567…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Z &amp; E DYNAST… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    DC    12-70     PART B S… 1.95<span style="color: #949494;">e</span>9     0 1850…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Z &amp; Z MEDICA… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    TX    12-70     PART B S… 1.62<span style="color: #949494;">e</span>9     0 8224…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Z AFFORDABLE… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    TX    12-70     PART B S… 1.31<span style="color: #949494;">e</span>9     0 1355…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Z AND Z PODI… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NV    12-70     PART B S… 1.98<span style="color: #949494;">e</span>9     0 8224…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Z AND Z PODI… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    AZ    12-70     PART B S… 1.98<span style="color: #949494;">e</span>9     0 8224…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Z AND Z PODI… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    CA    12-70     PART B S… 1.98<span style="color: #949494;">e</span>9     0 8224…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Z AND Z PODI… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    NV    30-48     DME SUPP… 1.98<span style="color: #949494;">e</span>9     0 8224…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Z AUDIOLOGY … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    FL    12-70     PART B S… 1.35<span style="color: #949494;">e</span>9     0 9436…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 863 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: enid &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>

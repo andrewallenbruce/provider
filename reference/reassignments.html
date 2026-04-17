@@ -19,7 +19,7 @@ reassign their billing to, including individual employer association counts."><m
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9086</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9087</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +77,8 @@ reassign their billing to, including individual employer association counts.</p>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  employers <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  employees <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -91,15 +93,15 @@ reassign their billing to, including individual employer association counts.</p>
 
 
 <dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;int&gt;</code> 10-digit National Provider Identifier</p></dd>
+<dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-first-last">first, last<a class="anchor" aria-label="anchor" href="#arg-first-last"></a></dt>
@@ -114,16 +116,20 @@ reassign their billing to, including individual employer association counts.</p>
 <dd><p><code>&lt;chr&gt;</code> Enrollment specialty</p></dd>
 
 
+<dt id="arg-employers-employees">employers, employees<a class="anchor" aria-label="anchor" href="#arg-employers-employees"></a></dt>
+<dd><p><code>&lt;int&gt;</code> Enrollment specialty</p></dd>
+
+
 <dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Legal business name</p></dd>
 
 
 <dt id="arg-org-pac">org_pac<a class="anchor" aria-label="anchor" href="#arg-org-pac"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 10-digit PECOS Associate Control ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> PECOS Associate Control ID</p></dd>
 
 
 <dt id="arg-org-enid">org_enid<a class="anchor" aria-label="anchor" href="#arg-org-enid"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> 15-digit Medicare Enrollment ID</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID</p></dd>
 
 
 <dt id="arg-org-state">org_state<a class="anchor" aria-label="anchor" href="#arg-org-state"></a></dt>
@@ -131,7 +137,7 @@ reassign their billing to, including individual employer association counts.</p>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the dataset's total row count</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 
 <dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
@@ -152,6 +158,10 @@ reassign their billing to, including individual employer association counts.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">reassignments</span> has <span style="font-weight: bold;">3,511,984</span> rows.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, employers <span class="op">=</span> <span class="fu"><a href="modifier.html">greater_than</a></span><span class="op">(</span><span class="fl">20</span>, equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="font-weight: bold;">24,751</span> results.</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>org_enid <span class="op">=</span> <span class="st">"I20070209000135"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="font-weight: bold;">6</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 14</span></span>
@@ -165,6 +175,7 @@ reassign their billing to, including individual employer association counts.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Ashley  Royce  FL    Optometry         2 1.44<span style="color: #949494;">e</span>9 8224… I201… <span style="color: #BB0000;">NA</span>               6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: org_pac &lt;chr&gt;, org_enid &lt;chr&gt;, org_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   rec_type &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">9830437441</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span></span>
@@ -174,6 +185,7 @@ reassign their billing to, including individual employer association counts.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Joah  Aliancy FL    Ophthalmo…         2 1.08<span style="color: #949494;">e</span>9 9830… I202… Clermon…         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: org_pac &lt;chr&gt;, org_enid &lt;chr&gt;, org_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   rec_type &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">reassignments</span><span class="op">(</span>org_pac <span class="op">=</span> <span class="fl">3173525888</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="font-weight: bold;">6</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 14</span></span>
