@@ -7,17 +7,19 @@ Helpers for use in constructing conditions in queries.
 ``` r
 excludes(...)
 
+between(...)
+
 contains(x)
 
 not(x)
 
-not_na(x)
+not_na()
 
-between(...)
+na()
 
-greater_than(x, or_equal = FALSE)
+greater_than(x, equal = FALSE)
 
-less_than(x, or_equal = FALSE)
+less_than(x, equal = FALSE)
 
 starts_with(x)
 
@@ -39,9 +41,9 @@ Parameters](https://jsonapi.org/format/#query-parameters)
 
   input
 
-- or_equal:
+- equal:
 
-  `<lgl>` append `=`
+  `<lgl>` append `=` to `less_than()` or `greater_than()`
 
 ## Value
 
@@ -58,30 +60,20 @@ format.
 
 ``` r
 list(
-   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-   # !x %in% c("AL", "AK", "AZ")
+   `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
    `ends_with("bar")` = ends_with("bar"),
-   # endsWith(x, "bar")
    `starts_with("foo")` = starts_with("foo"),
-   # startsWith(x, "foo")
    `less_than(1000)` = less_than(1000),
-   # x < 1000
-   `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
-   # x <= 1000
+   `less_than(0.125, equal = TRUE)` = less_than(0.125, equal = TRUE),
    `greater_than(1000)` = greater_than(1000),
-   # x > 1000
-   `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
-   # x >= 1000
+   `greater_than(0.125, equal = TRUE)` = greater_than(0.125, equal = TRUE),
    `between(0.125, 2)` = between(0.125, 2),
-   # x > 0.125 & x < 2
    `contains("baz")` = contains("baz"),
-   # grepl("baz", x)
    `not("zzz")` = not("zzz"),
-   # x != "zzz"
-   `not_na()` = not_na()
-   # !is.na(x)
+   `not_na()` = not_na(),
+   `na()` = na()
  )
-#> $`excludes(c("AL", "AK", "AZ"))`
+#> $`excludes("AL", "AK", "AZ")`
 #> <Modifier>
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
@@ -101,7 +93,7 @@ list(
 #> Operator: <
 #> Value: 1000
 #> 
-#> $`less_than(0.125, or_equal = TRUE)`
+#> $`less_than(0.125, equal = TRUE)`
 #> <Modifier>
 #> Operator: <=
 #> Value: 0.125
@@ -111,7 +103,7 @@ list(
 #> Operator: >
 #> Value: 1000
 #> 
-#> $`greater_than(0.125, or_equal = TRUE)`
+#> $`greater_than(0.125, equal = TRUE)`
 #> <Modifier>
 #> Operator: >=
 #> Value: 0.125
@@ -134,6 +126,11 @@ list(
 #> $`not_na()`
 #> <Modifier>
 #> Operator: <>
+#> Value:
+#> 
+#> $`na()`
+#> <Modifier>
+#> Operator: =
 #> Value:
 #> 
 ```
