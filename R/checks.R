@@ -1,7 +1,7 @@
 #' @noRd
-check_named <- function(x, call = rlang::caller_env()) {
-  if (rlang::is_named(x)) {
-    cli::cli_abort("Inputs cannot be named.", call = call)
+check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (any2(rlang::have_name(x))) {
+    cli::cli_abort("Inputs cannot be named.", arg = arg, call = call)
   }
 }
 

@@ -9,32 +9,22 @@
 #'
 #' @param x input
 #' @param ... input
-#' @param or_equal `<lgl>` append `=`
+#' @param equal `<lgl>` append `=` to `less_than()` or `greater_than()`
 #' @name modifier
 #' @examples
 #' list(
-#'    `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-#'    # !x %in% c("AL", "AK", "AZ")
+#'    `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
 #'    `ends_with("bar")` = ends_with("bar"),
-#'    # endsWith(x, "bar")
 #'    `starts_with("foo")` = starts_with("foo"),
-#'    # startsWith(x, "foo")
 #'    `less_than(1000)` = less_than(1000),
-#'    # x < 1000
-#'    `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
-#'    # x <= 1000
+#'    `less_than(0.125, equal = TRUE)` = less_than(0.125, equal = TRUE),
 #'    `greater_than(1000)` = greater_than(1000),
-#'    # x > 1000
-#'    `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
-#'    # x >= 1000
+#'    `greater_than(0.125, equal = TRUE)` = greater_than(0.125, equal = TRUE),
 #'    `between(0.125, 2)` = between(0.125, 2),
-#'    # x > 0.125 & x < 2
 #'    `contains("baz")` = contains("baz"),
-#'    # grepl("baz", x)
 #'    `not("zzz")` = not("zzz"),
-#'    # x != "zzz"
-#'    `not_na()` = not_na()
-#'    # !is.na(x)
+#'    `not_na()` = not_na(),
+#'    `na()` = na()
 #'  )
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)
@@ -52,6 +42,17 @@ Modifier <- S7::new_class(
 #' @noRd
 is_modifier <- function(x) {
   S7::S7_inherits(x, Modifier)
+}
+
+#' @noRd
+check_not_modifier <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (any2(purrr::map_lgl(x, is_modifier))) {
+    cli::cli_abort(
+      "A {.cls Modifier} cannot be an input to another {.cls Modifier}.",
+      arg = arg,
+      call = call
+    )
+  }
 }
 
 #' @noRd
@@ -73,15 +74,29 @@ S7::method(value, Modifier) <- function(x) {
 #' @rdname modifier
 #' @export
 excludes <- function(...) {
-  x <- c(...)
-  check_named(x)
+  x <- rlang::list2(...)
+  check_required(x)
+  check_not_modifier(x)
+  x <- unlist_(x)
   Modifier("NOT+IN", value = x)
+}
+
+#' @rdname modifier
+#' @export
+between <- function(...) {
+  x <- rlang::list2(...)
+  check_required(x)
+  check_not_modifier(x)
+  x <- unlist_(x)
+  check_numeric(x)
+  Modifier("BETWEEN", value = collapse::frange(x, na.rm = TRUE))
 }
 
 #' @rdname modifier
 #' @export
 contains <- function(x) {
   check_required(x)
+  check_not_modifier(x)
   Modifier("CONTAINS", value = x)
 }
 
@@ -89,44 +104,54 @@ contains <- function(x) {
 #' @export
 not <- function(x) {
   check_required(x)
+  check_not_modifier(x)
   Modifier("<>", value = x)
+}
+
+#' @noRd
+equals <- function(x) {
+  check_required(x)
+  check_not_modifier(x)
+  Modifier("=", value = x)
 }
 
 #' @rdname modifier
 #' @export
-not_na <- function(x) {
+not_na <- function() {
   not("")
 }
 
 #' @rdname modifier
 #' @export
-between <- function(...) {
-  x <- c(...)
-  check_named(x)
-  check_numeric(x)
-  Modifier("BETWEEN", value = collapse::frange(x, na.rm = TRUE))
+na <- function() {
+  equals("")
 }
 
 #' @rdname modifier
 #' @export
-greater_than <- function(x, or_equal = FALSE) {
+greater_than <- function(x, equal = FALSE) {
+  check_required(x)
+  check_not_modifier(x)
   check_number_decimal(x)
-  check_bool(or_equal)
-  Modifier(ifelse(!or_equal, ">", ">="), value = x)
+  check_bool(equal)
+  Modifier(ifelse(!equal, ">", ">="), value = x)
 }
 
 #' @rdname modifier
 #' @export
-less_than <- function(x, or_equal = FALSE) {
+less_than <- function(x, equal = FALSE) {
+  check_required(x)
+  check_not_modifier(x)
   check_number_decimal(x)
-  check_bool(or_equal)
-  Modifier(ifelse(!or_equal, "<", "<="), value = x)
+  check_bool(equal)
+  Modifier(ifelse(!equal, "<", "<="), value = x)
 }
 
 #' @rdname modifier
 #' @export
 starts_with <- function(x) {
   check_required(x)
+  check_not_modifier(x)
   Modifier("STARTS WITH", value = x)
 }
 
@@ -134,5 +159,6 @@ starts_with <- function(x) {
 #' @export
 ends_with <- function(x) {
   check_required(x)
+  check_not_modifier(x)
   Modifier("ENDS WITH", value = x)
 }

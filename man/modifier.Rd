@@ -3,10 +3,11 @@
 \name{modifier}
 \alias{modifier}
 \alias{excludes}
+\alias{between}
 \alias{contains}
 \alias{not}
 \alias{not_na}
-\alias{between}
+\alias{na}
 \alias{greater_than}
 \alias{less_than}
 \alias{starts_with}
@@ -18,17 +19,19 @@
 \usage{
 excludes(...)
 
+between(...)
+
 contains(x)
 
 not(x)
 
-not_na(x)
+not_na()
 
-between(...)
+na()
 
-greater_than(x, or_equal = FALSE)
+greater_than(x, equal = FALSE)
 
-less_than(x, or_equal = FALSE)
+less_than(x, equal = FALSE)
 
 starts_with(x)
 
@@ -39,7 +42,7 @@ ends_with(x)
 
 \item{x}{input}
 
-\item{or_equal}{\verb{<lgl>} append \code{=}}
+\item{equal}{\verb{<lgl>} append \code{=} to \code{less_than()} or \code{greater_than()}}
 }
 \value{
 An S7 \verb{<Modifier>} object.
@@ -53,27 +56,17 @@ in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/js
 }
 \examples{
 list(
-   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-   # !x \%in\% c("AL", "AK", "AZ")
+   `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
    `ends_with("bar")` = ends_with("bar"),
-   # endsWith(x, "bar")
    `starts_with("foo")` = starts_with("foo"),
-   # startsWith(x, "foo")
    `less_than(1000)` = less_than(1000),
-   # x < 1000
-   `less_than(0.125, or_equal = TRUE)` = less_than(0.125, or_equal = TRUE),
-   # x <= 1000
+   `less_than(0.125, equal = TRUE)` = less_than(0.125, equal = TRUE),
    `greater_than(1000)` = greater_than(1000),
-   # x > 1000
-   `greater_than(0.125, or_equal = TRUE)` = greater_than(0.125, or_equal = TRUE),
-   # x >= 1000
+   `greater_than(0.125, equal = TRUE)` = greater_than(0.125, equal = TRUE),
    `between(0.125, 2)` = between(0.125, 2),
-   # x > 0.125 & x < 2
    `contains("baz")` = contains("baz"),
-   # grepl("baz", x)
    `not("zzz")` = not("zzz"),
-   # x != "zzz"
-   `not_na()` = not_na()
-   # !is.na(x)
+   `not_na()` = not_na(),
+   `na()` = na()
  )
 }
