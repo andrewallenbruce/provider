@@ -171,10 +171,10 @@ order_refer(
 pending(
   first = ends_with("E"),
   last = starts_with("A"))
-✔ pending returned 58 results.
-• Physician     : 19
-• Non-Physician : 39
-# A tibble: 58 × 4
+✔ pending returned 52 results.
+• Physician     : 17
+• Non-Physician : 35
+# A tibble: 52 × 4
    prov_type first     last               npi
  * <chr>     <chr>     <chr>            <int>
  1 Physician JOSE      ABREU-ELIAS 1821010513
@@ -182,12 +182,12 @@ pending(
  3 Physician ABOJE     ADUGBA      1184416976
  4 Physician LUCIE     AHN         1558209502
  5 Physician OLUMIDE   AJAYI       1740029511
- 6 Physician JUDE      ALCIDE      1578876108
- 7 Physician CATHERINE ALDER       1235996307
- 8 Physician EMILIE    ALLAERT     1922809870
- 9 Physician KATHERINE ALLEN       1851823488
-10 Physician ILEANE    AMADOR      1568427268
-# ℹ 48 more rows
+ 6 Physician BABATUNDE AKINWUNMI   1417638826
+ 7 Physician JUDE      ALCIDE      1578876108
+ 8 Physician CATHERINE ALDER       1235996307
+ 9 Physician ILEANE    AMADOR      1568427268
+10 Physician STEPHANIE ANDERSON    1174358667
+# ℹ 42 more rows
 ```
 
 ``` r
@@ -222,7 +222,7 @@ hospitals(
     acute = FALSE,
     psych = TRUE))
 ✔ hospitals returned 14 results.
-# A tibble: 14 × 38
+# A tibble: 14 × 37
    org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  
  * <chr>         <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr>
  1 UHS OF SAVAN… COASTA… O200… GA         00-09     PART A P… 1.68e9     1 1140…
@@ -239,13 +239,13 @@ hospitals(
 12 RV BEHAVIORA… RIDGEV… O201… GA         00-09     PART A P… 1.43e9     0 1140…
 13 DONALSONVILL… <NA>    O201… GA         00-09     PART A P… 1.93e9     0 11S1…
 14 HOSPITAL AUT… JEFFER… O202… GA         00-09     PART A P… 1.42e9     0 11S1…
-# ℹ 29 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
+# ℹ 28 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
 #   org_type <chr>, org_otxt <chr>, status <chr>, city <chr>, state <chr>,
-#   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
-#   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
-#   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
-#   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
-#   sub_oth <int>, sub_otxt <chr>, address <chr>
+#   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
+#   sub_otxt <chr>, address <chr>
 ```
 
 ``` r

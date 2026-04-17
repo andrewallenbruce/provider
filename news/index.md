@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9088 (2026-04-17)
+
+- Completed initial S7 url/request implementation
+
 ## provider 0.0.1.9087 (2026-04-17)
 
 - switch to new execute methods
