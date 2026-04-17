@@ -1,7 +1,7 @@
 #' @noRd
-polish <- function(x, endpoint, .id = NULL) {
+polish <- function(x, endpoint, id = NULL) {
   replace_nz(x) |>
-    rename_with(c(.id %&&% set_names(.id), column_renames(endpoint))) |>
+    rename_with(c(id %&&% set_names(id), column_renames(endpoint))) |>
     recode_with(endpoint) |>
     data_frame()
 }

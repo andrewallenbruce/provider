@@ -15,6 +15,7 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
 #' @param count `<lgl>` Return the dataset's total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
@@ -26,10 +27,12 @@ pending <- function(
   npi = NULL,
   first = NULL,
   last = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
-  exec_cms2(
+  exec_cms4(
     COUNT = count,
+    SET = set,
     ARG = param_cms(
       NPI = npi,
       LAST_NAME = last,

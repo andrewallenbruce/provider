@@ -11,7 +11,7 @@ Medicare Pending Initial Logging and Tracking:
 }
 }
 \usage{
-pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
+pending(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
@@ -19,6 +19,8 @@ pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
 \item{first, last}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the dataset's total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
