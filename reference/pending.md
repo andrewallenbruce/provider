@@ -9,7 +9,7 @@ not been processed by CMS contractors.
 ## Usage
 
 ``` r
-pending(npi = NULL, first = NULL, last = NULL, count = FALSE)
+pending(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
 ```
 
 ## Source
@@ -35,6 +35,10 @@ Medicare Pending Initial Logging and Tracking:
 - count:
 
   `<lgl>` Return the dataset's total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 

@@ -19,7 +19,6 @@ h4, .h4 {
 }
 
 dt {
-  color: rgb(38, 38, 38);
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 3px;
@@ -37,10 +36,6 @@ img {
 
 .roles {
     color: rgb(90, 1, 3) !important;
-}
-
-.me-auto {
-    color: darkblue !important;
 }
 
 .active .nav-link {
