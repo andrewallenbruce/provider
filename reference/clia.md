@@ -7,9 +7,9 @@ services the facility provides.
 
 ``` r
 clia(
-  name = NULL,
-  ccn = NULL,
-  parent = NULL,
+  facility_name = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL,
   certificate = NULL,
   accreditation = NULL,
   city = NULL,
@@ -45,21 +45,21 @@ clia(
 
 ## Arguments
 
-- name:
+- facility_name:
 
-  `<chr>` Provider or clinical laboratory's name
+  `<chr>` Provider/Laboratory name
 
-- ccn:
+- facility_ccn:
 
-  `<chr>` 10-character CLIA number
+  `<chr>` 10-digit CMS Certification Number
 
-- parent:
+- parent_ccn:
 
-  `<chr>` 6-character CLIA number
+  `<chr>` 6-digit CMS Certification Number
 
 - certificate:
 
-  `<enum>` CLIA certificate type (see details):
+  `<enum>` CLIA certificate type (see Details):
 
   - `"waiver"` = Waiver
 
@@ -73,7 +73,7 @@ clia(
 
 - accreditation:
 
-  `<enum>` CLIA accrediting organization (see details):
+  `<enum>` CLIA accrediting organization (see Details):
 
   - `"a2la"` = A2LA
 
@@ -89,29 +89,21 @@ clia(
 
   - `"jcaho"` = JCAHO
 
-- city:
+- city, state, zip:
 
-  `<chr>` City
-
-- state:
-
-  `<chr>` State
-
-- zip:
-
-  `<chr>` Zip code
+  `<chr>` Lab city, state, zip
 
 - compliant:
 
-  `<lgl>` Compliant or Non-Compliant
+  `<lgl>` Return only compliant or non-compliant labs
 
 - active:
 
-  `<lgl>` Return only active providers
+  `<lgl>` Return only active labs
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
 
 - set:
 
@@ -186,9 +178,11 @@ complexity:
 ``` r
 clia(count = TRUE)
 #> ℹ clia has 676,051 rows.
-clia(compliant = FALSE, count = TRUE)
-#> ✔ clia returned 5,193 results.
-clia(ccn = provider:::cdc_labs$ccn)
+
+clia(compliant = FALSE, active = TRUE, count = TRUE)
+#> ✔ clia returned 2,578 results.
+
+clia(facility_ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
 #> # A tibble: 6 × 82
 #>   fac_name_1    fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
@@ -206,9 +200,8 @@ clia(ccn = provider:::cdc_labs$ccn)
 #> #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
 #> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
 #> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
-clia(certificate = c("accreditation", "registration"),
-     city = "Valdosta",
-     state = "GA")
+
+clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results.
 #> # A tibble: 18 × 82
 #>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
@@ -238,23 +231,13 @@ clia(certificate = c("accreditation", "registration"),
 #> #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
 #> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
 #> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
-clia(accreditation = "jcaho", count = TRUE)
-#> ✔ clia returned 2,766 results.
-clia(accreditation = "a2la")
-#> ✔ clia returned 10 results.
-#> # A tibble: 10 × 82
-#>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
-#>  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
-#>  1 ONCOLOGY SP… NA         01D0680765   NA         NA          NA    0     NA   
-#>  2 EUROFINS CE… NA         03D2269071   NA         NA          NA    0     NA   
-#>  3 CDC/NCEH/DI… NA         11D0668290   NA         NA          NA    0     NA   
-#>  4 ADVANCED DI… NA         45D2187621   NA         NA          NA    0     NA   
-#>  5 RARECYTE     NA         50D2168083   NA         NA          NA    0     NA   
-#>  6 LIFE LENGTH… NA         99D2112462   NA         NA          NA    0     NA   
-#>  7 PROTEOCYTE … NA         99D2275002   NA         NA          NA    0     NA   
-#>  8 RNA DIAGNOS… NA         99D2298044   NA         NA          NA    0     NA   
-#>  9 PATHASSISTA… NA         99D2317195   NA         NA          NA    0     NA   
-#> 10 EARLY OM LDT NA         99D2320513   NA         NA          NA    0     NA   
+
+clia(accreditation = c("cap", "cola", "jcaho"))
+#> ✔ clia returned 1 result.
+#> # A tibble: 1 × 82
+#>   fac_name_1    fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
+#> * <chr>         <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
+#> 1 LEXINGTON ME… NA         42D0665325   420073     NA          NA    0     NA   
 #> # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
 #> #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
 #> #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,

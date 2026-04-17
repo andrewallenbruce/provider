@@ -38,7 +38,7 @@ list(
 ccn <- hospitals(ccn = pac$facility_ccn)
 #> ✔ hospitals returned 5 results.
 ccn |> str()
-#> tibble [5 × 38] (S3: tbl_df/tbl/data.frame)
+#> tibble [5 × 37] (S3: tbl_df/tbl/data.frame)
 #>  $ org_name  : chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...
 #>  $ org_dba   : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...
 #>  $ enid      : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...
@@ -59,7 +59,6 @@ ccn |> str()
 #>  $ zip       : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...
 #>  $ loc_type  : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...
 #>  $ loc_otxt  : chr [1:5] NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" NA ...
-#>  $ reh_ind   : int [1:5] 0 0 0 0 0
 #>  $ reh_date  : Date[1:5], format: NA NA ...
 #>  $ reh_ccn   : chr [1:5] NA NA NA NA ...
 #>  $ sub_acute : int [1:5] 1 1 1 0 0
@@ -107,18 +106,18 @@ providers(org_name = "Elizabethtown Community Hospital")
 ``` r
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
-#> # A tibble: 2 × 38
+#> # A tibble: 2 × 37
 #>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 #> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
 #> 1 ELIZABE… NA      O201… NY         00-85     PART A P… 1.89e9     1 3313… 3577…
 #> 2 ELIZABE… NA      O202… NY         00-85     PART A P… 1.41e9     0 33Z3… 3577…
-#> # ℹ 28 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
 #> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
-#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
-#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
-#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
-#> #   sub_oth <int>, sub_otxt <chr>, address <chr>
+#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
+#> #   sub_otxt <chr>, address <chr>
 ```
 
 ``` r

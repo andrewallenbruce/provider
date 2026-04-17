@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9084</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9085</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,7 @@
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">facility_ccn</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">5</span> results.</span></span>
 <span><span class="va">ccn</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [5 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [5 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ org_name  : chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...</span></span>
 <span><span class="co">#&gt;  $ org_dba   : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...</span></span>
 <span><span class="co">#&gt;  $ enid      : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...</span></span>
@@ -146,7 +146,6 @@
 <span><span class="co">#&gt;  $ zip       : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...</span></span>
 <span><span class="co">#&gt;  $ loc_type  : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
 <span><span class="co">#&gt;  $ loc_otxt  : chr [1:5] NA NA "HOSPITAL - GENERAL PRACTICE AND CLINICS" NA ...</span></span>
-<span><span class="co">#&gt;  $ reh_ind   : int [1:5] 0 0 0 0 0</span></span>
 <span><span class="co">#&gt;  $ reh_date  : Date[1:5], format: NA NA ...</span></span>
 <span><span class="co">#&gt;  $ reh_ccn   : chr [1:5] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ sub_acute : int [1:5] 1 1 1 0 0</span></span>
@@ -190,18 +189,18 @@ insights. For example, there is a hospital in New York named
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 38</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 37</span></span></span>
 <span><span class="co">#&gt;   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABE… <span style="color: #BB0000;">NA</span>      O201… NY         00-85     PART A P… 1.89<span style="color: #949494;">e</span>9     1 3313… 3577…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABE… <span style="color: #BB0000;">NA</span>      O202… NY         00-85     PART A P… 1.41<span style="color: #949494;">e</span>9     0 33Z3… 3577…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 28 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 27 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   org_otxt &lt;chr&gt;, status &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_ind &lt;int&gt;, reh_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   reh_ccn &lt;chr&gt;, sub_acute &lt;int&gt;, sub_gen &lt;int&gt;, sub_spec &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_adu &lt;int&gt;, sub_child &lt;int&gt;, sub_ltc &lt;int&gt;, sub_psy &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_irf &lt;int&gt;, sub_stc &lt;int&gt;, sub_sba &lt;int&gt;, sub_psu &lt;int&gt;, sub_iru &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sub_oth &lt;int&gt;, sub_otxt &lt;chr&gt;, address &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, loc_otxt &lt;chr&gt;, reh_date &lt;date&gt;, reh_ccn &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_acute &lt;int&gt;, sub_gen &lt;int&gt;, sub_spec &lt;int&gt;, sub_adu &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_child &lt;int&gt;, sub_ltc &lt;int&gt;, sub_psy &lt;int&gt;, sub_irf &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_stc &lt;int&gt;, sub_sba &lt;int&gt;, sub_psu &lt;int&gt;, sub_iru &lt;int&gt;, sub_oth &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sub_otxt &lt;chr&gt;, address &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">58</span> results.</span></span>

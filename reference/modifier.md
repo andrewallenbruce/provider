@@ -74,63 +74,63 @@ list(
    `na()` = na()
  )
 #> $`excludes("AL", "AK", "AZ")`
-#> <Modifier>
+#> <modifier>
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
 #> 
 #> $`ends_with("bar")`
-#> <Modifier>
+#> <modifier>
 #> Operator: ENDS WITH
 #> Value: bar
 #> 
 #> $`starts_with("foo")`
-#> <Modifier>
+#> <modifier>
 #> Operator: STARTS WITH
 #> Value: foo
 #> 
 #> $`less_than(1000)`
-#> <Modifier>
+#> <modifier>
 #> Operator: <
 #> Value: 1000
 #> 
 #> $`less_than(0.125, equal = TRUE)`
-#> <Modifier>
+#> <modifier>
 #> Operator: <=
 #> Value: 0.125
 #> 
 #> $`greater_than(1000)`
-#> <Modifier>
+#> <modifier>
 #> Operator: >
 #> Value: 1000
 #> 
 #> $`greater_than(0.125, equal = TRUE)`
-#> <Modifier>
+#> <modifier>
 #> Operator: >=
 #> Value: 0.125
 #> 
 #> $`between(0.125, 2)`
-#> <Modifier>
+#> <modifier>
 #> Operator: BETWEEN
 #> Values: 0.125, 2
 #> 
 #> $`contains("baz")`
-#> <Modifier>
+#> <modifier>
 #> Operator: CONTAINS
 #> Value: baz
 #> 
 #> $`not("zzz")`
-#> <Modifier>
+#> <modifier>
 #> Operator: <>
 #> Value: zzz
 #> 
 #> $`not_na()`
-#> <Modifier>
+#> <modifier>
 #> Operator: <>
-#> Value:
+#> Value: ""
 #> 
 #> $`na()`
-#> <Modifier>
+#> <modifier>
 #> Operator: =
-#> Value:
+#> Value: ""
 #> 
 ```

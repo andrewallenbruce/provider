@@ -145,7 +145,7 @@ hospitals2(count = TRUE)
 
 hospitals(prov_type = "reh")
 #> ✔ hospitals returned 44 results.
-#> # A tibble: 44 × 38
+#> # A tibble: 44 × 37
 #>    org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  
 #>  * <chr>         <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr>
 #>  1 GUADALUPE CO… GUADAL… O202… NM         00-24     PART A P… 1.35e9     0 3207…
@@ -159,12 +159,12 @@ hospitals(prov_type = "reh")
 #>  9 OUR LADY OF … NA      O202… LA         00-24     PART A P… 1.61e9     0 1907…
 #> 10 STURGIS HOSP… STURGI… O202… MI         00-24     PART A P… 1.60e9     0 2307…
 #> # ℹ 34 more rows
-#> # ℹ 29 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
+#> # ℹ 28 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
 #> #   org_type <chr>, org_otxt <chr>, status <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
-#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
-#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
-#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, …
+#> #   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, …
 
 x <- hospitals(
   city = "Atlanta",
@@ -174,18 +174,18 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x
-#> # A tibble: 2 × 38
+#> # A tibble: 2 × 37
 #>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 #> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
 #> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
 #> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
-#> # ℹ 28 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
 #> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
-#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
-#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
-#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
-#> #   sub_oth <int>, sub_otxt <chr>, address <chr>
+#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
+#> #   sub_otxt <chr>, address <chr>
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
 #> # A tibble: 2 × 11
@@ -213,7 +213,7 @@ x
 #> 10 010019 HELEN KELLE… 1300 S… SHEF… AL    35660 COLBE… (256… Acut… Gove… 2     
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
-#> # A tibble: 8 × 38
+#> # A tibble: 8 × 37
 #>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 #> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
 #> 1 HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16e9     0 0100… 9436…
@@ -224,11 +224,11 @@ hospitals(ccn = x$ccn)
 #> 6 HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77e9     0 0100… 6709…
 #> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
 #> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
-#> # ℹ 28 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
 #> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_ind <int>, reh_date <date>,
-#> #   reh_ccn <chr>, sub_acute <int>, sub_gen <int>, sub_spec <int>,
-#> #   sub_adu <int>, sub_child <int>, sub_ltc <int>, sub_psy <int>,
-#> #   sub_irf <int>, sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>,
-#> #   sub_oth <int>, sub_otxt <chr>, address <chr>
+#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
+#> #   sub_otxt <chr>, address <chr>
 ```
