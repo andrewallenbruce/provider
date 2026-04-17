@@ -101,6 +101,16 @@ set_args <- function(fn) {
 }
 
 #' @noRd
+set_names2 <- function(x, y, ...) {
+  rlang::set_names(x, nm = rlang::names2(y), ...)
+}
+
+#' @noRd
+rowbind2 <- function(x, nm, fill = FALSE) {
+  collapse::rowbind(x, idcol = nm, id.factor = FALSE, return = 4L, fill = fill)
+}
+
+#' @noRd
 sum2 <- function(x, ...) {
   collapse::fsum(x, na.rm = TRUE, ...)
 }

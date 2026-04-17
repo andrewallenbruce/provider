@@ -117,8 +117,7 @@ exec_cms2 <- function(COUNT, SET, ARG, .id) {
       N <- req_count(x)
       cli_pages2(N, x@limit, x@end)
       return(
-        req_multi(x, count = N) |>
-          collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
+        req_multi(x, count = N, id = .id) |>
           polish(x@end, id = .id)
       )
     }
@@ -132,9 +131,8 @@ exec_cms2 <- function(COUNT, SET, ARG, .id) {
 
     # EMPTY QUERY --> First 10 Rows
     return(
-      req_empty(x) |>
-        collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
-        polish(x@end, id = .id)
+      req_empty(x, .id) |>
+        polish(x@end, .id)
     )
   }
 
@@ -152,16 +150,14 @@ exec_cms2 <- function(COUNT, SET, ARG, .id) {
   if (all2(N <= x@limit)) {
     cli_results2(N, x@end)
     return(
-      req_single(x, ARG) |>
-        collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
-        polish(x@end, id = .id)
+      req_single(x, ARG, .id) |>
+        polish(x@end, .id)
     )
   }
 
   # COUNT ABOVE LIMIT --> Multiple Requests
   cli_pages2(N, x@limit, x@end)
 
-  req_multi(x, ARG, N) |>
-    collapse::rowbind(idcol = .id, id.factor = FALSE, return = 4L) |>
-    polish(x@end, id = .id)
+  req_multi(x, ARG, N, .id) |>
+    polish(x@end, .id)
 }
