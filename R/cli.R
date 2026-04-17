@@ -1,12 +1,4 @@
 #' @noRd
-cli_red <- cli::combine_ansi_styles("red", "bold")
-
-#' @noRd
-left <- function(x, ...) {
-  format(x, justify = "left", ...)
-}
-
-#' @noRd
 cli_apis <- function(x) {
   cli::cat_bullet(
     paste0(

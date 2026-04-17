@@ -130,6 +130,7 @@ hospitals <- function(
 #' @returns A `<subgroups>` object
 #' @examples
 #' subgroups(acute = TRUE, rehab = TRUE)
+#' subgroups()
 #' @keywords internal
 #' @export
 subgroups <- function(
@@ -147,6 +148,9 @@ subgroups <- function(
   specialty = NULL,
   other = NULL
 ) {
+  check_bool(general, allow_null = TRUE)
+  check_bool(acute, allow_null = TRUE)
+
   x <- purrr::map(
     list(
       `SUBGROUP %2D GENERAL` = general,
@@ -171,4 +175,15 @@ subgroups <- function(
 #' @noRd
 is_subgroups <- function(x) {
   inherits(x, "subgroups")
+}
+
+#' @export
+#' @exportS3Method base::print
+print.subgroups <- function(x, ...) {
+  v <- length(x)
+  cli::cli_text(cli::col_cyan("<subgroups[{v}]>"))
+  if (v) {
+    cli_apis(x)
+  }
+  invisible(x)
 }

@@ -24,16 +24,16 @@
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
-#' @param name `<chr>` Provider or clinical laboratory's name
-#' @param ccn `<chr>` 10-character CLIA number
-#' @param parent `<chr>` 6-character CLIA number
-#' @param certificate `<enum>` CLIA certificate type (see details):
+#' @param facility_name `<chr>` Provider/Laboratory name
+#' @param facility_ccn `<chr>` 10-digit CMS Certification Number
+#' @param parent_ccn `<chr>` 6-digit CMS Certification Number
+#' @param certificate `<enum>` CLIA certificate type (see Details):
 #'    - `"waiver"` = Waiver
 #'    - `"ppm"` = Provider-Performed Microscopy (PPM)
 #'    - `"registration"` = Registration
 #'    - `"compliance"` = Compliance
 #'    - `"accreditation"` = Accreditation
-#' @param accreditation `<enum>` CLIA accrediting organization (see details):
+#' @param accreditation `<enum>` CLIA accrediting organization (see Details):
 #'    - `"a2la"` = A2LA
 #'    - `"aabb"` = AABB
 #'    - `"aoa"` = AOA
@@ -41,29 +41,31 @@
 #'    - `"cap"` = CAP
 #'    - `"cola"` = COLA
 #'    - `"jcaho"` = JCAHO
-#' @param city `<chr>` City
-#' @param state `<chr>` State
-#' @param zip `<chr>` Zip code
-#' @param compliant `<lgl>` Compliant or Non-Compliant
-#' @param active `<lgl>` Return only active providers
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param city,state,zip `<chr>` Lab city, state, zip
+#' @param compliant `<lgl>` Return only compliant or non-compliant labs
+#' @param active `<lgl>` Return only active labs
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
-#' clia(compliant = FALSE, count = TRUE)
-#' clia(ccn = provider:::cdc_labs$ccn)
-#' clia(certificate = c("accreditation", "registration"),
-#'      city = "Valdosta",
-#'      state = "GA")
-#' clia(accreditation = "jcaho", count = TRUE)
-#' clia(accreditation = "a2la")
+#'
+#' clia(compliant = FALSE, active = TRUE, count = TRUE)
+#'
+#' clia(facility_ccn = provider:::cdc_labs$ccn)
+#'
+#' clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
+#'
+#' clia(accreditation = c("cap", "cola", "jcaho"))
+#'
 #' @autoglobal
 #' @export
 clia <- function(
-  name = NULL,
-  ccn = NULL,
-  parent = NULL,
+  facility_name = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL,
   certificate = NULL,
   accreditation = NULL,
   city = NULL,
@@ -83,9 +85,9 @@ clia <- function(
     COUNT = count,
     SET = set,
     ARG = param_cms(
-      FAC_NAME = name,
-      PRVDR_NUM = ccn,
-      CLIA_MDCR_NUM = parent,
+      FAC_NAME = facility_name,
+      PRVDR_NUM = facility_ccn,
+      CLIA_MDCR_NUM = parent_ccn,
       CRTFCT_TYPE_CD = enum_(certificate),
       CITY_NAME = city,
       STATE_CD = state,
@@ -114,26 +116,10 @@ cmp_ <- function(x = NULL) {
 }
 
 #' @noRd
-accr_ <- function(x) {
-  if (is.null(x)) {
+accr_ <- function(accreditation) {
+  if (is.null(accreditation)) {
     return(NULL)
   }
-  arg_match(
-    x,
-    c("a2la", "aabb", "aoa", "ashi", "cap", "cola", "jcaho"),
-    multiple = FALSE,
-    error_arg = "accreditation",
-    error_call = call2("clia")
-  )
-  x <- switch(
-    x,
-    a2la = "A2LA_ACRDTD_Y_MATCH_SW",
-    aabb = "AABB_ACRDTD_Y_MATCH_SW",
-    aoa = "AOA_ACRDTD_Y_MATCH_SW",
-    ashi = "ASHI_ACRDTD_Y_MATCH_SW",
-    cap = "CAP_ACRDTD_Y_MATCH_SW",
-    cola = "COLA_ACRDTD_Y_MATCH_SW",
-    jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
-  )
-  set_names(list("Y"), x)
+  x <- enum_(accreditation)
+  set_names(as.list(rep.int("Y", length(x))), x)
 }

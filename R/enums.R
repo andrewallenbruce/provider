@@ -28,9 +28,19 @@ enum_ <- function(x = NULL, call = caller_env()) {
 }
 
 #' @noRd
-enumerations <- function(arg) {
+enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
   switch(
-    arg,
+    x,
+    # <clia>
+    accreditation = list(
+      a2la = "A2LA_ACRDTD_Y_MATCH_SW",
+      aabb = "AABB_ACRDTD_Y_MATCH_SW",
+      aoa = "AOA_ACRDTD_Y_MATCH_SW",
+      ashi = "ASHI_ACRDTD_Y_MATCH_SW",
+      cap = "CAP_ACRDTD_Y_MATCH_SW",
+      cola = "COLA_ACRDTD_Y_MATCH_SW",
+      jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
+    ),
     # <transparency>
     action = list(
       met = "Met Requirements",
@@ -66,7 +76,7 @@ enumerations <- function(arg) {
       reh = "00-24",
       cah = "00-85"
     ),
-    # <hospitals>
+    # <hospitals> location
     loc_type = list(
       other = "OTHER HOSPITAL PRACTICE LOCATION",
       main = "MAIN/PRIMARY HOSPITAL LOCATION",
@@ -75,7 +85,7 @@ enumerations <- function(arg) {
       swing = "HOSPITAL SWING-BED UNIT",
       ext = "OPT EXTENSION SITE"
     ),
-    # <hospitals>
+    # <hospitals> structure
     org_type = list(
       corp = "CORPORATION",
       other = "OTHER",
@@ -83,6 +93,10 @@ enumerations <- function(arg) {
       part = "PARTNERSHIP",
       sole = "SOLE PROPRIETOR"
     ),
-    cli::cli_abort("{.arg arg} {.val {arg}} invalid.")
+    cli::cli_abort(
+      "{.val {arg}} is not an {.cls enum}",
+      arg = arg,
+      call = call
+    )
   )
 }

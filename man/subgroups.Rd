@@ -55,5 +55,6 @@ Hospital Subgroups
 }
 \examples{
 subgroups(acute = TRUE, rehab = TRUE)
+subgroups()
 }
 \keyword{internal}

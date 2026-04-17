@@ -1,3 +1,56 @@
+#' @noRd
+Modifier <- S7::new_class(
+  name = "Modifier",
+  parent = S7::class_character,
+  package = NULL,
+  properties = list(value = S7::class_atomic)
+)
+
+#' @noRd
+is_modifier <- function(x) {
+  S7::S7_inherits(x, Modifier)
+}
+
+#' @noRd
+operator <- S7::new_generic("operator", "x")
+
+#' @noRd
+value <- S7::new_generic("value", "x")
+
+#' @noRd
+S7::method(operator, Modifier) <- function(x) {
+  S7::S7_data(x)
+}
+
+#' @noRd
+S7::method(value, Modifier) <- function(x) {
+  S7::prop(x, "value")
+}
+
+#' @export
+#' @exportS3Method base::print
+print.Modifier <- function(x, ...) {
+  cli::cli_text(cli::col_cyan("<modifier>"))
+  cli::cli_text(c(
+    cli::col_silver("Operator: "),
+    cli::col_red(cli::style_bold(operator(x)))
+  ))
+
+  V <- if (any2(value(x) == "")) {
+    encodeString(value(x), quote = '"', na.encode = FALSE)
+  } else {
+    value(x)
+  }
+
+  cli::cli_text(
+    c(
+      cli::col_silver("{cli::qty(length(V))}Value{?s}: "),
+      cli::col_yellow(toString(V, width = 20L))
+    )
+  )
+  invisible(x)
+}
+
 #' A variety of different query operators
 #'
 #' @description
@@ -29,47 +82,6 @@
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)
 NULL
-
-#' @noRd
-Modifier <- S7::new_class(
-  name = "Modifier",
-  parent = S7::class_character,
-  package = NULL,
-  properties = list(
-    value = S7::class_atomic
-  )
-)
-#' @noRd
-is_modifier <- function(x) {
-  S7::S7_inherits(x, Modifier)
-}
-
-#' @noRd
-check_not_modifier <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (any2(purrr::map_lgl(x, is_modifier))) {
-    cli::cli_abort(
-      "A {.cls Modifier} cannot be an input to another {.cls Modifier}.",
-      arg = arg,
-      call = call
-    )
-  }
-}
-
-#' @noRd
-operator <- S7::new_generic("operator", "x")
-
-#' @noRd
-value <- S7::new_generic("value", "x")
-
-#' @noRd
-S7::method(operator, Modifier) <- function(x) {
-  S7::S7_data(x)
-}
-
-#' @noRd
-S7::method(value, Modifier) <- function(x) {
-  S7::prop(x, "value")
-}
 
 #' @rdname modifier
 #' @export

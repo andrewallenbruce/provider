@@ -52,14 +52,28 @@ check_subgroups <- function(x) {
   }
 }
 
+# check_modifiers(param_prov(ccn = excludes("ASGSAH")), "add")
 #' @noRd
 check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
-    if (any2(unlist_(x) %in_% c("ENDS WITH", "NOT+IN"))) {
+    if (any2(unlist_(x) %in% c("ENDS WITH", "NOT+IN"))) {
       cli::cli_abort(
-        "{.fn ends_with} & {.fn excludes} cannot be used in {.fn {end}}.",
+        c("Invalid {.cls modifier} usage: ",
+          "x" = "{.fn ends_with} & {.fn excludes} cannot be used with {.fn {end}}."),
         call = call2(end)
       )
     }
+  }
+}
+
+# param_prov(ccn = excludes("ASGSAH", not_na()))
+#' @noRd
+check_not_modifier <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (any2(purrr::map_lgl(x, is_modifier))) {
+    cli::cli_abort(
+      "A {.cls modifier} cannot be an input to another {.cls modifier}.",
+      arg = arg,
+      call = call
+    )
   }
 }

@@ -1,5 +1,5 @@
 #' @noRd
-data_frame <- function(x, call = rlang::caller_call()) {
+data_frame <- function(x, call = caller_env()) {
   check_data_frame(x, call = call)
   structure(x, class = c("tbl_df", "tbl", "data.frame"))
 }
@@ -66,11 +66,25 @@ sub_idx <- function(what, with) {
 }
 
 #' @noRd
-provider_types <- function(code = NULL, type = NULL, spec = NULL) {
+provider_types <- function(
+  code = NULL,
+  type = NULL,
+  spec = NULL,
+  desc = NULL,
+  negate = FALSE
+) {
   x <- provider::provider_type_code
   x <- if (!is.null(code)) collapse::ss(x, x$code %iin% code) else x
   x <- if (!is.null(type)) collapse::ss(x, x$type %iin% type) else x
   x <- if (!is.null(spec)) collapse::ss(x, x$spec %iin% spec) else x
+  x <- if (!is.null(desc)) {
+    collapse::ss(
+      x,
+      stringr::str_which(x$spec_description, desc, negate = negate)
+    )
+  } else {
+    x
+  }
   return(x)
 }
 
@@ -104,6 +118,11 @@ all2 <- function(x) {
 #' @noRd
 mark <- function(x) {
   prettyNum(x, big.mark = ",")
+}
+
+#' @noRd
+left <- function(x, ...) {
+  format(x, justify = "left", ...)
 }
 
 #' @noRd

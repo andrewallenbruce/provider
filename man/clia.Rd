@@ -16,9 +16,9 @@
 }
 \usage{
 clia(
-  name = NULL,
-  ccn = NULL,
-  parent = NULL,
+  facility_name = NULL,
+  facility_ccn = NULL,
+  parent_ccn = NULL,
   certificate = NULL,
   accreditation = NULL,
   city = NULL,
@@ -31,13 +31,13 @@ clia(
 )
 }
 \arguments{
-\item{name}{\verb{<chr>} Provider or clinical laboratory's name}
+\item{facility_name}{\verb{<chr>} Provider/Laboratory name}
 
-\item{ccn}{\verb{<chr>} 10-character CLIA number}
+\item{facility_ccn}{\verb{<chr>} 10-digit CMS Certification Number}
 
-\item{parent}{\verb{<chr>} 6-character CLIA number}
+\item{parent_ccn}{\verb{<chr>} 6-digit CMS Certification Number}
 
-\item{certificate}{\verb{<enum>} CLIA certificate type (see details):
+\item{certificate}{\verb{<enum>} CLIA certificate type (see Details):
 \itemize{
 \item \code{"waiver"} = Waiver
 \item \code{"ppm"} = Provider-Performed Microscopy (PPM)
@@ -46,7 +46,7 @@ clia(
 \item \code{"accreditation"} = Accreditation
 }}
 
-\item{accreditation}{\verb{<enum>} CLIA accrediting organization (see details):
+\item{accreditation}{\verb{<enum>} CLIA accrediting organization (see Details):
 \itemize{
 \item \code{"a2la"} = A2LA
 \item \code{"aabb"} = AABB
@@ -57,17 +57,13 @@ clia(
 \item \code{"jcaho"} = JCAHO
 }}
 
-\item{city}{\verb{<chr>} City}
+\item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
 
-\item{state}{\verb{<chr>} State}
+\item{compliant}{\verb{<lgl>} Return only compliant or non-compliant labs}
 
-\item{zip}{\verb{<chr>} Zip code}
+\item{active}{\verb{<lgl>} Return only active labs}
 
-\item{compliant}{\verb{<lgl>} Compliant or Non-Compliant}
-
-\item{active}{\verb{<lgl>} Return only active providers}
-
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
@@ -124,12 +120,13 @@ laboratory is accredited by one of the CMS-approved organizations:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
-clia(compliant = FALSE, count = TRUE)
-clia(ccn = provider:::cdc_labs$ccn)
-clia(certificate = c("accreditation", "registration"),
-     city = "Valdosta",
-     state = "GA")
-clia(accreditation = "jcaho", count = TRUE)
-clia(accreditation = "a2la")
+
+clia(compliant = FALSE, active = TRUE, count = TRUE)
+
+clia(facility_ccn = provider:::cdc_labs$ccn)
+
+clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
+
+clia(accreditation = c("cap", "cola", "jcaho"))
 \dontshow{\}) # examplesIf}
 }
