@@ -3,7 +3,7 @@
 #' @description
 #' Providers with pending Medicare enrollment applications.
 #'
-#' The Pending Initial Logging and Tracking (L & T) dataset provides a list of
+#' The _Pending Initial Logging and Tracking (L & T)_ dataset provides a list of
 #' pending applications for both Physicians and Non-Physicians that have not
 #' been processed by CMS contractors.
 #'
@@ -14,13 +14,18 @@
 #'
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
+#'
 #' pending(first = "Victor", count = TRUE)
+#'
 #' pending(first = starts_with("V"))
+#'
 #' @autoglobal
 #' @export
 pending <- function(
@@ -30,7 +35,7 @@ pending <- function(
   count = FALSE,
   set = FALSE
 ) {
-  exec_cms4(
+  exec_cms2(
     COUNT = count,
     SET = set,
     ARG = param_cms(

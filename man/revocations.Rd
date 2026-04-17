@@ -25,9 +25,9 @@ revocations(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
@@ -35,13 +35,13 @@ revocations(
 
 \item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
-\item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
+\item{state}{\verb{<chr>} Enrollment state abbreviation}
 
 \item{specialty}{\verb{<chr>} Enrollment specialty description}
 
-\item{reason}{\verb{<chr>} reason for revocation}
+\item{reason}{\verb{<chr>} Reason for revocation}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
@@ -57,13 +57,15 @@ providers and suppliers who are revoked and under a current re-enrollment bar.
 This dataset includes provider and supplier names, NPIs, revocation
 authorities pursuant to \href{https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535}{42 CFR § 424.535}, revocation effective dates, and
 re-enrollment bar expiration dates. This dataset is based on information
-gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+gathered from the \emph{Provider Enrollment, Chain and Ownership System (PECOS)}.
 }
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
+
 revocations(count = TRUE, org_name = not_na())
-revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
+
+revocations(specialty = contains("CARDIO"), state = excludes("GA", "OH"))
 \dontshow{\}) # examplesIf}
 }

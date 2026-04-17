@@ -11,24 +11,33 @@
 #' @references
 #'    - [API: Medicare Revalidation Reassignment List](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
-#' @param npi `<int>` 10-digit National Provider Identifier
-#' @param pac `<chr>` 10-digit PECOS Associate Control ID
-#' @param enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param npi `<int>` National Provider Identifier
+#' @param pac `<chr>` PECOS Associate Control ID
+#' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,last `<chr>` Provider's name
 #' @param state `<chr>` Enrollment state abbreviation
 #' @param specialty `<chr>` Enrollment specialty
+#' @param employers,employees `<int>` Enrollment specialty
 #' @param org_name `<chr>` Legal business name
-#' @param org_pac `<chr>` 10-digit PECOS Associate Control ID
-#' @param org_enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param org_pac `<chr>` PECOS Associate Control ID
+#' @param org_enid `<chr>` Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
+#'
+#' reassignments(count = TRUE, employers = greater_than(20, equal = TRUE))
+#'
 #' reassignments(org_enid = "I20070209000135")
+#'
 #' reassignments(pac = 9830437441)
+#'
 #' reassignments(org_pac = 3173525888)
+#'
 #' @autoglobal
 #' @export
 reassignments <- function(
@@ -39,6 +48,8 @@ reassignments <- function(
   last = NULL,
   state = NULL,
   specialty = NULL,
+  employers = NULL,
+  employees = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -46,7 +57,7 @@ reassignments <- function(
   count = FALSE,
   set = FALSE
 ) {
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(
@@ -57,7 +68,9 @@ reassignments <- function(
       `Individual Last Name` = last,
       `Individual State Code` = state,
       `Individual Specialty Description` = specialty,
+      `Individual Total Employer Associations` = employers,
       `Group Legal Business Name` = org_name,
+      `Group Reassignments and Physician Assistants` = employees,
       `Group PAC ID` = org_pac,
       `Group Enrollment ID` = org_enid,
       `Group State Code` = org_state

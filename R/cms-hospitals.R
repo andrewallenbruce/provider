@@ -40,9 +40,12 @@
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
+#'
 #' hospitals2(count = TRUE)
 #'
 #' hospitals(prov_type = "reh")
@@ -54,11 +57,14 @@
 #'     acute = FALSE,
 #'     psych = TRUE))
 #' x
+#'
 #' hospitals2(ccn = x$ccn)
 #'
 #' x <- hospitals2()
 #' x
+#'
 #' hospitals(ccn = x$ccn)
+#'
 #' @autoglobal
 #' @export
 hospitals <- function(
@@ -88,7 +94,7 @@ hospitals <- function(
   check_character(loc_type, allow_null = TRUE)
   check_character(prov_type, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(
@@ -127,10 +133,14 @@ hospitals <- function(
 #' @param rehab_unit `<lgl>` Rehabilitation Unit
 #' @param specialty `<lgl>` Specialty Hospital
 #' @param other `<lgl>` Unlisted on CMS form
+#'
 #' @returns A `<subgroups>` object
+#'
 #' @examples
 #' subgroups(acute = TRUE, rehab = TRUE)
+#'
 #' subgroups()
+#'
 #' @keywords internal
 #' @export
 subgroups <- function(
@@ -150,6 +160,17 @@ subgroups <- function(
 ) {
   check_bool(general, allow_null = TRUE)
   check_bool(acute, allow_null = TRUE)
+  check_bool(drug, allow_null = TRUE)
+  check_bool(child, allow_null = TRUE)
+  check_bool(long, allow_null = TRUE)
+  check_bool(psych, allow_null = TRUE)
+  check_bool(rehab, allow_null = TRUE)
+  check_bool(short, allow_null = TRUE)
+  check_bool(swing, allow_null = TRUE)
+  check_bool(psych_unit, allow_null = TRUE)
+  check_bool(rehab_unit, allow_null = TRUE)
+  check_bool(specialty, allow_null = TRUE)
+  check_bool(other, allow_null = TRUE)
 
   x <- purrr::map(
     list(

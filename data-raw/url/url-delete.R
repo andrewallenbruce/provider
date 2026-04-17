@@ -1,5 +1,5 @@
 #' @noRd
-uuid_prov <- function(endpoint) {
+uuid_prov_old <- function(endpoint) {
   paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/query/",
     switch(
@@ -14,7 +14,7 @@ uuid_prov <- function(endpoint) {
 }
 
 #' @noRd
-uuid_cms <- function(endpoint) {
+uuid_cms_old <- function(endpoint) {
   p0 <- function(id) {
     paste0(
       "https://data.cms.gov/",
@@ -170,7 +170,7 @@ parallel_results <- function(x) {
 
 #' @noRd
 #' @autoglobal
-exec_prov <- function(COUNT, ARG, LIMIT = 1500L) {
+exec_prov_old <- function(COUNT, ARG, LIMIT = 1500L) {
   END <- eval_bare(EndPoint)
   BASE <- uuid_prov(END)
 
@@ -224,7 +224,7 @@ exec_prov <- function(COUNT, ARG, LIMIT = 1500L) {
 
 #' @noRd
 #' @autoglobal
-exec_cms <- function(COUNT, SET, ARG, LIMIT = 5000L) {
+exec_cms_old <- function(COUNT, SET, ARG, LIMIT = 5000L) {
   check_online()
   check_bool(COUNT)
   check_bool(SET)

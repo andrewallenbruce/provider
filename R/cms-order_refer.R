@@ -63,7 +63,7 @@ order_refer <- function(
   check_bool(pmd, allow_null = TRUE)
   check_bool(hospice, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(

@@ -8,22 +8,27 @@
 #'    - [API: Medicare Provider Supplier Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #'    - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' @param npi `<int>` 10-digit Individual National Provider Identifier
-#' @param pac `<chr>` 10-digit PECOS Associate Control ID
-#' @param enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param npi `<int>` National Provider Identifier
+#' @param pac `<chr>` PECOS Associate Control ID
+#' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,middle,last `<chr>` Individual provider's name
 #' @param prov_type `<chr>` Enrollment specialty code
 #' @param prov_desc `<chr>` Enrollment specialty description
 #' @param state `<chr>` Enrollment state, full or abbreviation
-#' @param org_name `<chr>` Organization name
+#' @param org_name `<chr>` Organizational provider's name
 #' @param multi `<lgl>` Provider has multiple NPIs
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
-#' providers(count = TRUE, org_name = not(""))
-#' providers(org_name = starts_with("Z"), multi = TRUE)
+#'
+#' providers(count = TRUE, org_name = not_na())
+#'
+#' providers(org_name = starts_with("Z"))
+#'
 #' @autoglobal
 #' @export
 providers <- function(
@@ -43,7 +48,7 @@ providers <- function(
 ) {
   check_bool(multi, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(

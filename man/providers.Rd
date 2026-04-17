@@ -21,11 +21,11 @@ providers(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} 10-digit Individual National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
@@ -35,11 +35,11 @@ providers(
 
 \item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
 
-\item{org_name}{\verb{<chr>} Organization name}
+\item{org_name}{\verb{<chr>} Organizational provider's name}
 
 \item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
@@ -53,8 +53,10 @@ actively approved to bill Medicare.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 providers(count = TRUE)
-providers(count = TRUE, org_name = not(""))
-providers(org_name = starts_with("Z"), multi = TRUE)
+
+providers(count = TRUE, org_name = not_na())
+
+providers(org_name = starts_with("Z"))
 \dontshow{\}) # examplesIf}
 }
 \references{

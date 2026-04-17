@@ -52,7 +52,7 @@
 #'    - `"closure"` = Closure Notice
 #'    - `"cmp"` = CMP Notice
 #'    - `"appeal"` = Appealed
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
 #' @returns A [tibble][tibble::tibble-package]
@@ -74,7 +74,7 @@ transparency <- function(
 ) {
   check_character(action, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(

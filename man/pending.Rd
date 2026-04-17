@@ -18,7 +18,7 @@ pending(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
 
 \item{first, last}{\verb{<chr>} Provider's name}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
@@ -28,14 +28,16 @@ A \link[tibble:tibble-package]{tibble}
 \description{
 Providers with pending Medicare enrollment applications.
 
-The Pending Initial Logging and Tracking (L & T) dataset provides a list of
+The \emph{Pending Initial Logging and Tracking (L & T)} dataset provides a list of
 pending applications for both Physicians and Non-Physicians that have not
 been processed by CMS contractors.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 pending(count = TRUE)
+
 pending(first = "Victor", count = TRUE)
+
 pending(first = starts_with("V"))
 \dontshow{\}) # examplesIf}
 }

@@ -9,26 +9,31 @@
 #' This dataset includes provider and supplier names, NPIs, revocation
 #' authorities pursuant to [42 CFR § 424.535](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535), revocation effective dates, and
 #' re-enrollment bar expiration dates. This dataset is based on information
-#' gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+#' gathered from the _Provider Enrollment, Chain and Ownership System (PECOS)_.
 #'
 #' @source
 #'    - [API: Revoked Medicare Providers and Suppliers](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revoked-medicare-providers-and-suppliers)
 #'
-#' @param npi `<int>` 10-digit Individual National Provider Identifier
-#' @param enid `<chr>` 15-digit Medicare Enrollment ID
+#' @param npi `<int>` National Provider Identifier
+#' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,middle,last `<chr>` Individual provider's name
 #' @param specialty `<chr>` Enrollment specialty description
-#' @param state `<chr>` Enrollment state, full or abbreviation
+#' @param state `<chr>` Enrollment state abbreviation
 #' @param org_name `<chr>` Organization name
 #' @param multi `<lgl>` Provider has multiple NPIs
-#' @param reason `<chr>` reason for revocation
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param reason `<chr>` Reason for revocation
+#' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
+#'
 #' revocations(count = TRUE, org_name = not_na())
-#' revocations(specialty = contains("CARDIO"), state = excludes("TX", "OH"))
+#'
+#' revocations(specialty = contains("CARDIO"), state = excludes("GA", "OH"))
+#'
 #' @autoglobal
 #' @export
 revocations <- function(
@@ -47,7 +52,7 @@ revocations <- function(
 ) {
   check_bool(multi, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(

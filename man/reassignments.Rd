@@ -12,6 +12,8 @@ reassignments(
   last = NULL,
   state = NULL,
   specialty = NULL,
+  employers = NULL,
+  employees = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -21,11 +23,11 @@ reassignments(
 )
 }
 \arguments{
-\item{npi}{\verb{<int>} 10-digit National Provider Identifier}
+\item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
+\item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{first, last}{\verb{<chr>} Provider's name}
 
@@ -33,15 +35,17 @@ reassignments(
 
 \item{specialty}{\verb{<chr>} Enrollment specialty}
 
+\item{employers, employees}{\verb{<int>} Enrollment specialty}
+
 \item{org_name}{\verb{<chr>} Legal business name}
 
-\item{org_pac}{\verb{<chr>} 10-digit PECOS Associate Control ID}
+\item{org_pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{org_enid}{\verb{<chr>} 15-digit Medicare Enrollment ID}
+\item{org_enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{org_state}{\verb{<chr>} Enrollment state abbreviation}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
@@ -61,8 +65,13 @@ reassign their billing to, including individual employer association counts.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 reassignments(count = TRUE)
+
+reassignments(count = TRUE, employers = greater_than(20, equal = TRUE))
+
 reassignments(org_enid = "I20070209000135")
+
 reassignments(pac = 9830437441)
+
 reassignments(org_pac = 3173525888)
 \dontshow{\}) # examplesIf}
 }

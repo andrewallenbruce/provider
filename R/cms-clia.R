@@ -81,7 +81,7 @@ clia <- function(
   check_bool(compliant, allow_null = TRUE)
   check_bool(active, allow_null = TRUE)
 
-  exec_cms3(
+  exec_cms(
     COUNT = count,
     SET = set,
     ARG = param_cms(

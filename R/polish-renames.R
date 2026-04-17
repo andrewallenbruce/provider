@@ -60,7 +60,6 @@ column_renames <- function(endpoint) {
       `ZIP CODE` = "zip",
       `PRACTICE LOCATION TYPE` = "loc_type",
       `LOCATION OTHER TYPE TEXT` = "loc_otxt",
-      # `REH CONVERSION FLAG` = "reh_ind",
       `REH CONVERSION DATE` = "reh_date",
       `CAH OR HOSPITAL CCN` = "reh_ccn",
       `SUBGROUP - ACUTE CARE` = "sub_acute",

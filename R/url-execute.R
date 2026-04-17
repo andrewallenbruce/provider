@@ -3,7 +3,7 @@ EndPoint <- expr(call_name(call_match(call = caller_call(), fn = caller_fn())))
 
 #' @noRd
 #' @autoglobal
-exec_prov2 <- function(COUNT = FALSE, ARG = arg_prov()) {
+exec_prov <- function(COUNT, ARG) {
   x <- base_prov(eval_bare(EndPoint))
 
   check_online()
@@ -47,7 +47,7 @@ exec_prov2 <- function(COUNT = FALSE, ARG = arg_prov()) {
 
 #' @noRd
 #' @autoglobal
-exec_cms3 <- function(COUNT, SET, ARG) {
+exec_cms <- function(COUNT, SET, ARG) {
   x <- base_cms(eval_bare(EndPoint))
 
   check_online()
@@ -103,7 +103,7 @@ exec_cms3 <- function(COUNT, SET, ARG) {
 
 #' @noRd
 #' @autoglobal
-exec_cms4 <- function(COUNT, SET, ARG, .id) {
+exec_cms2 <- function(COUNT, SET, ARG, .id) {
   x <- base_cms(eval_bare(EndPoint))
 
   check_online()

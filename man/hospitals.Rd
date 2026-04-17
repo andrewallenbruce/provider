@@ -97,6 +97,7 @@ type and address.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
+
 hospitals2(count = TRUE)
 
 hospitals(prov_type = "reh")
@@ -108,10 +109,12 @@ x <- hospitals(
     acute = FALSE,
     psych = TRUE))
 x
+
 hospitals2(ccn = x$ccn)
 
 x <- hospitals2()
 x
+
 hospitals(ccn = x$ccn)
 \dontshow{\}) # examplesIf}
 }

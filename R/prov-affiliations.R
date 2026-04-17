@@ -25,12 +25,18 @@
 #' @param parent_ccn `<int>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
 #' @param count `<lgl>` Return the dataset's total row count
+#'
 #' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
 #' affiliations(middle = "", count = TRUE)
+#'
 #' affiliations(facility_ccn = "33Z302")
+#'
 #' affiliations(parent_ccn = 331302)
+#'
 #' affiliations(facility_ccn = 331302)
+#'
 #' @autoglobal
 #' @export
 affiliations <- function(
@@ -47,7 +53,7 @@ affiliations <- function(
 ) {
   check_character(facility_type, allow_null = TRUE)
 
-  exec_prov2(
+  exec_prov(
     COUNT = count,
     ARG = param_prov(
       npi = npi,

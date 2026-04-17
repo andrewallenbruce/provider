@@ -71,7 +71,7 @@ clinicians <- function(
   check_character(gender, allow_null = TRUE)
   check_numeric(grad_year, allow_null = TRUE)
 
-  exec_prov2(
+  exec_prov(
     COUNT = count,
     ARG = param_prov(
       npi = npi,
