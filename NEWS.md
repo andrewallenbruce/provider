@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9086 (2026-04-17)
+
+* execute method for multiple APIs
+
+
 # provider 0.0.1.9085 (2026-04-17)
 
 * checks, print methods
