@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9090 (2026-04-18)
+
+* initial rhc_* impls
+
+
 # provider 0.0.1.9089 (2026-04-17)
 
 * quality impl setup
