@@ -6,6 +6,8 @@
 \alias{provider-package}
 \title{provider: Tidy Healthcare Provider API Interface}
 \description{
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
+
 Provides various features to facilitate easy access to publicly available healthcare provider data. Includes functions to tidy the data being accessed, whether for reporting purposes or updating internal records.
 }
 \seealso{
@@ -19,6 +21,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Andrew Allen Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
+
+Authors:
+\itemize{
+  \item Andrew Allen Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
+}
 
 }
 \keyword{internal}

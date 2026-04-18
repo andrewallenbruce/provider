@@ -24,7 +24,6 @@ library(tibble)
 library(provider)
 ```
 
-
 > NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
 
 #### Individual Provider
@@ -36,67 +35,49 @@ list(
   organization = pac[7:9])
 ```
 
-
 ```{r}
 ccn <- hospitals(ccn = pac$facility_ccn)
 ccn |> str()
 ```
 
-<br>
-
 #### Organizational Provider
-
-Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
+Exploring links between providers can lead to many interesting insights. For
+example, there is a hospital in New York named **Elizabethtown Community Hospital**.
 
 ```{r}
 providers(org_name = "Elizabethtown Community Hospital")
-```
-
-```{r}
 hospitals(org_name = "Elizabethtown Community Hospital")
-```
-
-```{r}
 clinicians(org_name = "Elizabethtown Community Hospital")
-```
-
-```{r}
 reassignments(org_name = "Elizabethtown Community Hospital")
 ```
 
-<br>
-
-The **Hospital Enrollment** API includes only Medicare Part A (hospital) providers, so we only get two rows back, but those include a new data point: two facility CCNs. Plugging those into the **Facility Affiliations** API, we can retrieve information on the individual providers practicing at this hospital. First, the all-numeric CCN (`331302`):
-
-<br>
+The **Hospital Enrollment** API includes only Medicare Part A (hospital)
+providers, so we only get two rows back, but those include a new data point: two
+facility CCNs. Plugging those into the **Facility Affiliations** API, we can
+retrieve information on the individual providers practicing at this hospital.
+First, the all-numeric CCN (`331302`):
 
 ```{r}
 ccn <- affiliations(facility_ccn = 331302)
 list(
   organization = as.data.frame(t(unique(ccn[7:9]))),
-  individual = unique(ccn[1:6])
-  )
+  individual = unique(ccn[1:6]))
 ```
 
-
-<br>
-
-That returns individual providers affiliated with the hospital. Now to search the alphanumeric CCN (`33Z302`):
-
+That returns individual providers affiliated with the hospital. Now to search
+the alphanumeric CCN (`33Z302`):
 
 ```{r}
 ccn2 <- affiliations(facility_ccn = "33Z302")
 list(
-  organization = as.data.frame(t(unique(ccn2[7:9]))),
-  individual = unique(ccn2[1:6])
-  )
+  organization = as.data.frame(t(unique(ccn2[7:9]))), 
+  individual = unique(ccn2[1:6]))
 ```
 
-<br>
+That returns more affiliated individual providers that practice in the
+Hospital's nursing home.
 
-That returns more affiliated individual providers that practice in the Hospital's nursing home..
-
-<br>
-
-> An *alphanumeric* CCN represents a sub-unit of the hospital, here a nursing home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `affiliations(parent_ccn = 331302)`
+> An *alphanumeric* CCN represents a `sub-unit` of the hospital, here a nursing
+home. We would get the same result if we'd set the `parent_ccn` argument to the
+numeric CCN, i.e. `affiliations(parent_ccn = 331302)`
 

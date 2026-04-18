@@ -29,7 +29,6 @@ RC_hospitals <- function(x) {
     collapse::tfmv(
       c(
         "multi",
-        # "reh_ind",
         paste0(
           "sub_",
           c(

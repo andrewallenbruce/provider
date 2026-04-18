@@ -90,7 +90,7 @@ reference:
 
 - subtitle: General
   desc: >
-    Access Current Provider Data.
+    Current Provider Data
   contents:
   - affiliations
   - reassignments
@@ -98,21 +98,23 @@ reference:
   - nppes
 - subtitle: Individual
   desc: >
-    Access Current Individual Provider Data.
+    Current Individual Providers
   contents:
   - clinicians
   - opt_out
   - order_refer
   - pending
   - providers
-- subtitle: Organization
+- subtitle: Organizational
   desc: >
-    Access Current Organizational Provider Data.
+    Current Organizational Providers
   contents:
   - clia
   - hospitals
   - hrsa
   - transparency
+  - rhc_enroll
+  - rhc_owner
 
 - title: Query Modifiers
   contents:

@@ -42,6 +42,9 @@ base_prov <- S7::new_class(
 )
 
 #' @noRd
+req_total <- S7::new_generic("req_total", "x")
+
+#' @noRd
 req_count <- S7::new_generic("req_count", "x")
 
 #' @noRd
@@ -52,6 +55,24 @@ req_single <- S7::new_generic("req_single", "x")
 
 #' @noRd
 req_multi <- S7::new_generic("req_multi", "x")
+
+#' @noRd
+S7::method(req_total, base_cms) <- function(x) {
+  url <- flatten_url(paste0(x@url, "/stats?"))
+
+  if (length(url) > 1L) {
+    purrr::map_int(url, base_request, query = "total_rows") |>
+      set_names2(x@url)
+  } else {
+    base_request(url, query = "total_rows")
+  }
+}
+
+#' @noRd
+S7::method(req_total, base_prov) <- function(x) {
+  flatten_url(x@url, opts_prov(count = "true", results = "false")) |>
+    base_request(query = "count")
+}
 
 #' @noRd
 S7::method(req_count, base_cms) <- function(x, args = NULL) {
@@ -80,7 +101,7 @@ S7::method(req_empty, base_cms) <- function(x, id = NULL) {
   if (length(url) > 1L) {
     purrr::map(url, base_request) |>
       set_names2(x@url) |>
-      rowbind2(nm = id)
+      rowbind2(nm = id, fill = TRUE)
   } else {
     base_request(url)
   }

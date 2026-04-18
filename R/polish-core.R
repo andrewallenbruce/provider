@@ -20,6 +20,9 @@ replace_nz <- function(i) {
 
 #' @noRd
 rename_with <- function(x, nm) {
+  if (is_null(nm)) {
+    return(x)
+  }
   collapse::setrename(x, nm, .nse = FALSE)
   collapse::gv(x, unlist_(nm))
 }
@@ -38,6 +41,7 @@ recode_with <- function(x, endpoint) {
     reassignments = RC_reassignments(x),
     revocations = RC_revocations(x),
     transparency = RC_transparency(x),
+    rhc = x,
     x
   )
 }
