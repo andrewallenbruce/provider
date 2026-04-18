@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Overview of Provider • provider</title>
+<title>Get started with provider • provider</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -19,7 +19,12 @@
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Overview of Provider">
+<meta property="og:title" content="Get started with provider">
+<meta name="description" content="An overview of the basic workflow of provider and the type of data it provides access to.
+">
+<meta property="og:description" content="An overview of the basic workflow of provider and the type of data it provides access to.
+">
+<meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -29,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9089</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9090</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +85,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>Overview of Provider</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>Get started with provider</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/vignettes/provider.Rmd" class="external-link"><code>vignettes/provider.Rmd</code></a></small>
@@ -94,48 +99,36 @@
 <p>The overarching goal of <a href="https://andrewallenbruce.github.io/provider/">provider</a> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
-through the following goals:</p>
-<ul>
-<li><p>Non-Destructive <strong>Tidy Output</strong>, with an option to
-turn it off by setting a function’s <code>tidy</code> parameter to
-<code>FALSE</code>.</p></li>
-<li><p><strong>Variable Standardization</strong>, for the express
-purpose of making it easier to understand (and make connections between)
-each API’s output. This will also allow for the removal of duplicate
-information and greatly simplify the process of merging data across
-outputs.</p></li>
-<li><p><strong>Input Validation</strong>. Not only is this simply good
-practice, it also prevents unnecessary querying of APIs.</p></li>
-<li><p><strong>Helpful Documentation</strong>. The impetus for this
-package was to cobble together a motivating example of using a
-programming language to streamline the process of data acquisition for,
-among other things, medical coding, billing, and healthcare revenue
-cycle management. Though it’s now grown beyond that, the intended
-audience remains the same: non-programmers in healthcare who are
-interested in what a programming language like R can do to make their
-work easier. As such, the documentation is written with in a way that
-assumes no prior knowledge of R or programming in general.
-Domain-specific terminology and concepts are explained in detail, as
-there is not one person in existence that understands every aspect of
-the business of health care, including the author of this
-package.</p></li>
-</ul>
-<p><br></p>
+through the following goals: - <strong>Variable
+Standardization</strong>, for the express purpose of making it easier to
+understand (and make connections between) each API’s output. This will
+also allow for the removal of duplicate information and greatly simplify
+the process of merging data across outputs. - <strong>Input
+Validation</strong>. Not only is this simply good practice, it also
+prevents unnecessary querying of APIs. - <strong>Helpful
+Documentation</strong>. The impetus for this package was to cobble
+together a motivating example of using a programming language to
+streamline the process of data acquisition for, among other things,
+medical coding, billing, and healthcare revenue cycle management. Though
+it’s now grown beyond that, the intended audience remains the same:
+non-programmers in healthcare who are interested in what a programming
+language like R can do to make their work easier. As such, the
+documentation is written with in a way that assumes no prior knowledge
+of R or programming in general. Domain-specific terminology and concepts
+are explained in detail, as there is not one person in existence that
+understands every aspect of the business of health care, including the
+author of this package.</p>
 <div class="section level2">
 <h2 id="tidy-output">Tidy Output<a class="anchor" aria-label="anchor" href="#tidy-output"></a>
 </h2>
 <p>In <a href="https://tidyr.tidyverse.org/articles/tidy-data.html" class="external-link"><strong>tidy
 data</strong></a>, every <strong>column</strong> is a <em>variable</em>,
 every <strong>row</strong> is an <em>observation</em>, and every
-<strong>cell</strong> is a <em>single value</em>.</p>
-<p>Many of the outputs of these APIs violate this form by</p>
-<ul>
-<li>Storing column headers as values, not variable names</li>
-<li>Storing multiple variables in one column</li>
-</ul>
-<p>To remedy this, there is some post-processing done to the output
-before it is returned. Each function has a <code>tidy</code> parameter
-that is set to <code>TRUE</code> by default:</p>
+<strong>cell</strong> is a <em>single value</em>. Many of the outputs of
+these APIs violate this form by: - Storing column headers as values, not
+variable names - Storing multiple variables in one column To remedy
+this, there is some post-processing done to the output before it is
+returned:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">1</span> result.</span></span>
@@ -143,88 +136,29 @@ that is set to <code>TRUE</code> by default:</p>
 <span><span class="co">#&gt;   first last           npi   ptb   dme   hha   pmd hospice</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> SARAH HUSSAIN <span style="text-decoration: underline;">1</span>043<span style="text-decoration: underline;">477</span>615     1     1     1     1       1</span></span></code></pre></div>
-<p><br></p>
-<p>Setting <code>tidy</code> to <code>FALSE</code> will return a
-data.frame of the API’s un-processed output:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<p>Several functions also have arguments that implement additional
-optional transformations to the output, such as <code>pivot</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
-function include:</p>
-<ul>
-<li>Favoring a long format over wide.</li>
-<li>More descriptive, thematic variable names involving prefixes and a
-standardized vocabulary across all outputs</li>
-<li>Various quality-of-life data transformations (e.g., using
-<code>snake_case</code> for variable names, replacing empty character
-cells with <code>NA</code>; converting years, dates, booleans to their
-respective data types)</li>
-<li>Nesting large groups of related columns into lists, to initially
-emphasize the most important output.</li>
-</ul>
-<p>However, in the event that you would prefer to do your own
-transformations, simply turn it off with <code>tidy = FALSE</code>.</p>
-<p><br></p>
+function include: - Favoring a long format over wide. - More
+descriptive, thematic variable names, involving prefixes and a
+standardized vocabulary across all outputs - Various quality-of-life
+data transformations (e.g., using <code>snake_case</code> for variable
+names, replacing empty character cells with <code>NA</code>; converting
+years, dates, booleans to their respective data types) - Nesting large
+groups of related columns into lists, to initially emphasize the most
+important output.</p>
 </div>
 <div class="section level2">
-<h2 id="helper-functions">Helper Functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
+<h2 id="provider-identifiers">Provider Identifiers<a class="anchor" aria-label="anchor" href="#provider-identifiers"></a>
 </h2>
-<p>Several functions have a required <code>year</code> argument. The
-years available to query these APIs might change at any time, so there
-is an accompanying helper function to retrieve the years available, in
-the form of <code>&lt;function_name&gt;_years()</code>. For instance,
-<code>quality_payment()</code>’s is:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>These can also be used in a pipeline, for searching all available
-years:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">map_dfr</span><span class="op">(</span><span class="fu">qpp_years</span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">quality_payment</span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">participation_type</span>, </span>
-<span>         <span class="va">beneficiaries</span>,</span>
-<span>         <span class="va">services</span>,</span>
-<span>         <span class="va">charges</span>,</span>
-<span>         <span class="va">final_score</span>,</span>
-<span>         <span class="va">pay_adjust</span>, </span>
-<span>         <span class="va">org_size</span>, </span>
-<span>         <span class="va">apms_entity_name</span><span class="op">)</span></span></code></pre></div>
-<p>Several functions have <em>parallelized</em> versions, denoted by an
-underscore at the end of their name (<code>_</code>):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">quality_payment_</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">participation_type</span>, </span>
-<span>         <span class="va">beneficiaries</span>,</span>
-<span>         <span class="va">services</span>,</span>
-<span>         <span class="va">charges</span>,</span>
-<span>         <span class="va">final_score</span>,</span>
-<span>         <span class="va">pay_adjust</span>, </span>
-<span>         <span class="va">org_size</span>, </span>
-<span>         <span class="va">apms_entity_name</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="validation-checks">Validation Checks<a class="anchor" aria-label="anchor" href="#validation-checks"></a>
-</h2>
-<p>Several validation checks have been implemented, including checks for
-<em>NPIs</em>, <em>PAC IDs</em>, and <em>Enrollment IDs</em>:</p>
 <blockquote>
-<p><strong>National Provider Identifier</strong>: A National Provider
-Identifier (NPI) is a unique 10-digit identification number issued to
-health care providers in the United States by the Centers for Medicare
-and Medicaid Services (CMS) through the National Plan and Provider
-Enumeration System (NPPES). All individual HIPAA–covered healthcare
-providers or organizations must obtain an NPI. Once assigned, a
-provider’s NPI is permanent and remains with the provider regardless of
-job or location changes.</p>
+<p><strong>NPI</strong>: A National Provider Identifier (NPI) is a
+unique 10-digit identification number issued to health care providers in
+the United States by the Centers for Medicare and Medicaid Services
+(CMS) through the National Plan and Provider Enumeration System (NPPES).
+All individual HIPAA–covered healthcare providers or organizations must
+obtain an NPI. Once assigned, a provider’s NPI is permanent and remains
+with the provider regardless of job or location changes.</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
 <span></span>
@@ -232,32 +166,29 @@ job or location changes.</p>
 <span><span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span>, type <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
+<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><strong>Provider Associate-level Control ID</strong>: A Provider
-associate-level control ID (PAC ID) is a 10-digit unique numeric
-identifier that is assigned to each individual or organization in PECOS.
-The PAC ID links all entity-level information (e.g., tax identification
-numbers and organizational names) and may be associated with multiple
-enrollment IDs if the individual or organization enrolled multiple times
-under different circumstances.</p>
+<p><strong>PAC</strong>: A Provider associate-level control ID (PAC ID)
+is a 10-digit unique numeric identifier that is assigned to each
+individual or organization in PECOS. The PAC ID links all entity-level
+information (e.g., tax identification numbers and organizational names)
+and may be associated with multiple enrollment IDs if the individual or
+organization enrolled multiple times under different circumstances.</p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
 <blockquote>
-<p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a
-15-digit unique alphanumeric identifier that is assigned to each new
-provider enrollment application. All enrollment-level information (e.g.,
-enrollment type, enrollment state, provider specialty and reassignment
-of benefits) is linked through the Enrollment ID.</p>
+<p><strong>ENID</strong>: A Medicare Enrollment ID is a 15-digit unique
+alphanumeric identifier that is assigned to each new provider enrollment
+application. All enrollment-level information (e.g., enrollment type,
+enrollment state, provider specialty and reassignment of benefits) is
+linked through the Enrollment ID.</p>
 </blockquote>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span></span>
@@ -269,7 +200,37 @@ of benefits) is linked through the Enrollment ID.</p>
 <span></span>
 <span><span class="co"># Some functions require one of ID types</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>enid_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span></code></pre></div>
-<hr>
+<blockquote>
+<p><strong>CCN</strong>: A CMS Certification Number is a standardized
+sequence of alphanumeric characters that uniquely identify health care
+providers and suppliers who interact with the Medicare and Medicaid
+programs. Providers and suppliers paid under Medicare Part A have a 6
+digit CCN. Suppliers paid by Part B carriers have a 10-digit CCN.</p>
+</blockquote>
+<blockquote>
+<p><strong>Taxonomy Code</strong>: A NUCC Healthcare Taxonomy Code is
+a.</p>
+</blockquote>
+<blockquote>
+<p><strong>Provider Type Code</strong>: A Medicare Provider Type Code is
+a.</p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="va"><a href="../reference/provider_type_code.html">provider_type_code</a></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 305 × 5</span></span></span>
+<span><span class="co">#&gt;    code  type  type_description spec  spec_description                          </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 00-00 00    PART A PROVIDER  00    RELIGIOUS NON-MEDICAL HEALTH CARE INSTITU…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 00-01 00    PART A PROVIDER  01    COMMUNITY MENTAL HEALTH CENTER            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 00-02 00    PART A PROVIDER  02    COMPREHENSIVE OUTPATIENT REHABILITATION F…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 00-03 00    PART A PROVIDER  03    END-STAGE RENAL DISEASE FACILITY (ESRD)   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 00-04 00    PART A PROVIDER  04    FEDERALLY QUALIFIED HEALTH CENTER (FQHC)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 00-05 00    PART A PROVIDER  05    HISTOCOMPATIBILITY LABORATORY             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 00-06 00    PART A PROVIDER  06    HOME HEALTH AGENCY                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 00-08 00    PART A PROVIDER  08    HOSPICE                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 00-09 00    PART A PROVIDER  09    HOSPITAL                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 00-10 00    PART A PROVIDER  10    INDIAN HEALTH SERVICES FACILITY           </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 295 more rows</span></span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

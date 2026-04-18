@@ -1,4 +1,4 @@
-# Overview of Provider
+# Get started with provider
 
 ``` r
 library(provider)
@@ -8,48 +8,32 @@ The overarching goal of
 [provider](https://andrewallenbruce.github.io/provider/) is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
-through the following goals:
-
-- Non-Destructive **Tidy Output**, with an option to turn it off by
-  setting a function’s `tidy` parameter to `FALSE`.
-
-- **Variable Standardization**, for the express purpose of making it
-  easier to understand (and make connections between) each API’s output.
-  This will also allow for the removal of duplicate information and
-  greatly simplify the process of merging data across outputs.
-
-- **Input Validation**. Not only is this simply good practice, it also
-  prevents unnecessary querying of APIs.
-
-- **Helpful Documentation**. The impetus for this package was to cobble
-  together a motivating example of using a programming language to
-  streamline the process of data acquisition for, among other things,
-  medical coding, billing, and healthcare revenue cycle management.
-  Though it’s now grown beyond that, the intended audience remains the
-  same: non-programmers in healthcare who are interested in what a
-  programming language like R can do to make their work easier. As such,
-  the documentation is written with in a way that assumes no prior
-  knowledge of R or programming in general. Domain-specific terminology
-  and concepts are explained in detail, as there is not one person in
-  existence that understands every aspect of the business of health
-  care, including the author of this package.
-
-  
+through the following goals: - **Variable Standardization**, for the
+express purpose of making it easier to understand (and make connections
+between) each API’s output. This will also allow for the removal of
+duplicate information and greatly simplify the process of merging data
+across outputs. - **Input Validation**. Not only is this simply good
+practice, it also prevents unnecessary querying of APIs. - **Helpful
+Documentation**. The impetus for this package was to cobble together a
+motivating example of using a programming language to streamline the
+process of data acquisition for, among other things, medical coding,
+billing, and healthcare revenue cycle management. Though it’s now grown
+beyond that, the intended audience remains the same: non-programmers in
+healthcare who are interested in what a programming language like R can
+do to make their work easier. As such, the documentation is written with
+in a way that assumes no prior knowledge of R or programming in general.
+Domain-specific terminology and concepts are explained in detail, as
+there is not one person in existence that understands every aspect of
+the business of health care, including the author of this package.
 
 ## Tidy Output
 
 In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html),
 every **column** is a *variable*, every **row** is an *observation*, and
-every **cell** is a *single value*.
-
-Many of the outputs of these APIs violate this form by
-
-- Storing column headers as values, not variable names
-- Storing multiple variables in one column
-
-To remedy this, there is some post-processing done to the output before
-it is returned. Each function has a `tidy` parameter that is set to
-`TRUE` by default:
+every **cell** is a *single value*. Many of the outputs of these APIs
+violate this form by: - Storing column headers as values, not variable
+names - Storing multiple variables in one column To remedy this, there
+is some post-processing done to the output before it is returned:
 
 ``` r
 order_refer(npi = 1043477615)
@@ -60,101 +44,24 @@ order_refer(npi = 1043477615)
 #> 1 SARAH HUSSAIN 1043477615     1     1     1     1       1
 ```
 
-  
-
-Setting `tidy` to `FALSE` will return a data.frame of the API’s
-un-processed output:
-
-``` r
-order_refer(npi = 1043477615, tidy = FALSE)
-```
-
-  
-
-Several functions also have arguments that implement additional optional
-transformations to the output, such as `pivot`:
-
-``` r
-order_refer(npi = 1043477615, pivot = FALSE)
-```
-
-  
-
 The `tidy` transformations applied to the output of each function
-include:
+include: - Favoring a long format over wide. - More descriptive,
+thematic variable names, involving prefixes and a standardized
+vocabulary across all outputs - Various quality-of-life data
+transformations (e.g., using `snake_case` for variable names, replacing
+empty character cells with `NA`; converting years, dates, booleans to
+their respective data types) - Nesting large groups of related columns
+into lists, to initially emphasize the most important output.
 
-- Favoring a long format over wide.
-- More descriptive, thematic variable names involving prefixes and a
-  standardized vocabulary across all outputs
-- Various quality-of-life data transformations (e.g., using `snake_case`
-  for variable names, replacing empty character cells with `NA`;
-  converting years, dates, booleans to their respective data types)
-- Nesting large groups of related columns into lists, to initially
-  emphasize the most important output.
+## Provider Identifiers
 
-However, in the event that you would prefer to do your own
-transformations, simply turn it off with `tidy = FALSE`.
-
-  
-
-## Helper Functions
-
-Several functions have a required `year` argument. The years available
-to query these APIs might change at any time, so there is an
-accompanying helper function to retrieve the years available, in the
-form of `<function_name>_years()`. For instance, `quality_payment()`’s
-is:
-
-``` r
-qpp_years()
-```
-
-These can also be used in a pipeline, for searching all available years:
-
-``` r
-map_dfr(qpp_years(), ~ quality_payment(year = .x, npi = 1043477615)) |> 
-  select(year, 
-         participation_type, 
-         beneficiaries,
-         services,
-         charges,
-         final_score,
-         pay_adjust, 
-         org_size, 
-         apms_entity_name)
-```
-
-Several functions have *parallelized* versions, denoted by an underscore
-at the end of their name (`_`):
-
-``` r
-quality_payment_(npi = 1043477615) |> 
-  select(year, 
-         participation_type, 
-         beneficiaries,
-         services,
-         charges,
-         final_score,
-         pay_adjust, 
-         org_size, 
-         apms_entity_name)
-```
-
-  
-
-## Validation Checks
-
-Several validation checks have been implemented, including checks for
-*NPIs*, *PAC IDs*, and *Enrollment IDs*:
-
-> **National Provider Identifier**: A National Provider Identifier (NPI)
-> is a unique 10-digit identification number issued to health care
-> providers in the United States by the Centers for Medicare and
-> Medicaid Services (CMS) through the National Plan and Provider
-> Enumeration System (NPPES). All individual HIPAA–covered healthcare
-> providers or organizations must obtain an NPI. Once assigned, a
-> provider’s NPI is permanent and remains with the provider regardless
-> of job or location changes.
+> **NPI**: A National Provider Identifier (NPI) is a unique 10-digit
+> identification number issued to health care providers in the United
+> States by the Centers for Medicare and Medicaid Services (CMS) through
+> the National Plan and Provider Enumeration System (NPPES). All
+> individual HIPAA–covered healthcare providers or organizations must
+> obtain an NPI. Once assigned, a provider’s NPI is permanent and
+> remains with the provider regardless of job or location changes.
 
 ``` r
 # Must be 10 digits long
@@ -164,18 +71,15 @@ open_payments(year = 2021, npi = 12345691234)
 nppes(npi = "O12345678912")
 
 # Must pass Luhn check
-pending(npi = 001234569123, type = "P")
+pending(npi = 001234569123)
 ```
 
-  
-
-> **Provider Associate-level Control ID**: A Provider associate-level
-> control ID (PAC ID) is a 10-digit unique numeric identifier that is
-> assigned to each individual or organization in PECOS. The PAC ID links
-> all entity-level information (e.g., tax identification numbers and
-> organizational names) and may be associated with multiple enrollment
-> IDs if the individual or organization enrolled multiple times under
-> different circumstances.
+> **PAC**: A Provider associate-level control ID (PAC ID) is a 10-digit
+> unique numeric identifier that is assigned to each individual or
+> organization in PECOS. The PAC ID links all entity-level information
+> (e.g., tax identification numbers and organizational names) and may be
+> associated with multiple enrollment IDs if the individual or
+> organization enrolled multiple times under different circumstances.
 
 ``` r
 # Must be 10 digits long
@@ -185,13 +89,11 @@ affiliations(pac = 0123456789)
 hospitals(pac_org = "O12345678912")
 ```
 
-  
-
-> **Medicare Enrollment ID**: An Enrollment ID is a 15-digit unique
-> alphanumeric identifier that is assigned to each new provider
-> enrollment application. All enrollment-level information (e.g.,
-> enrollment type, enrollment state, provider specialty and reassignment
-> of benefits) is linked through the Enrollment ID.
+> **ENID**: A Medicare Enrollment ID is a 15-digit unique alphanumeric
+> identifier that is assigned to each new provider enrollment
+> application. All enrollment-level information (e.g., enrollment type,
+> enrollment state, provider specialty and reassignment of benefits) is
+> linked through the Enrollment ID.
 
 ``` r
 # Must be a character vector
@@ -207,4 +109,30 @@ providers(enid = "L12345678912345")
 hospitals(enid_org = "I20180115000174")
 ```
 
-------------------------------------------------------------------------
+> **CCN**: A CMS Certification Number is a standardized sequence of
+> alphanumeric characters that uniquely identify health care providers
+> and suppliers who interact with the Medicare and Medicaid programs.
+> Providers and suppliers paid under Medicare Part A have a 6 digit CCN.
+> Suppliers paid by Part B carriers have a 10-digit CCN.
+
+> **Taxonomy Code**: A NUCC Healthcare Taxonomy Code is a.
+
+> **Provider Type Code**: A Medicare Provider Type Code is a.
+
+``` r
+provider::provider_type_code
+#> # A tibble: 305 × 5
+#>    code  type  type_description spec  spec_description                          
+#>    <chr> <chr> <chr>            <chr> <chr>                                     
+#>  1 00-00 00    PART A PROVIDER  00    RELIGIOUS NON-MEDICAL HEALTH CARE INSTITU…
+#>  2 00-01 00    PART A PROVIDER  01    COMMUNITY MENTAL HEALTH CENTER            
+#>  3 00-02 00    PART A PROVIDER  02    COMPREHENSIVE OUTPATIENT REHABILITATION F…
+#>  4 00-03 00    PART A PROVIDER  03    END-STAGE RENAL DISEASE FACILITY (ESRD)   
+#>  5 00-04 00    PART A PROVIDER  04    FEDERALLY QUALIFIED HEALTH CENTER (FQHC)  
+#>  6 00-05 00    PART A PROVIDER  05    HISTOCOMPATIBILITY LABORATORY             
+#>  7 00-06 00    PART A PROVIDER  06    HOME HEALTH AGENCY                        
+#>  8 00-08 00    PART A PROVIDER  08    HOSPICE                                   
+#>  9 00-09 00    PART A PROVIDER  09    HOSPITAL                                  
+#> 10 00-10 00    PART A PROVIDER  10    INDIAN HEALTH SERVICES FACILITY           
+#> # ℹ 295 more rows
+```

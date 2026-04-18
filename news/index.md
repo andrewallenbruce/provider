@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9090 (2026-04-18)
+
+- initial rhc\_\* impls
+
 ## provider 0.0.1.9089 (2026-04-17)
 
 - quality impl setup

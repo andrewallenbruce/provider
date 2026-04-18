@@ -78,8 +78,6 @@ ccn |> str()
 #>  $ address   : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
 ```
 
-  
-
 #### Organizational Provider
 
 Exploring links between providers can lead to many interesting insights.
@@ -101,9 +99,6 @@ providers(org_name = "Elizabethtown Community Hospital")
 #> 7 ELIZABE… NA    NA     NA    VT    12-70     PART B S… 1.05e9     0 3577… O202…
 #> 8 ELIZABE… NA    NA     NA    NH    12-70     PART B S… 1.05e9     0 3577… O202…
 #> 9 ELIZABE… NA    NA     NA    CO    12-70     PART B S… 1.05e9     0 3577… O202…
-```
-
-``` r
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
 #> # A tibble: 2 × 37
@@ -118,9 +113,6 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
 #> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
 #> #   sub_otxt <chr>, address <chr>
-```
-
-``` r
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 58 results.
 #> # A tibble: 58 × 20
@@ -140,9 +132,6 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
 #> #   org_phone <chr>, org_add <chr>
-```
-
-``` r
 reassignments(org_name = "Elizabethtown Community Hospital")
 #> ✔ reassignments returned 370 results.
 #> # A tibble: 370 × 14
@@ -163,8 +152,6 @@ reassignments(org_name = "Elizabethtown Community Hospital")
 #> #   rec_type <chr>
 ```
 
-  
-
 The **Hospital Enrollment** API includes only Medicare Part A (hospital)
 providers, so we only get two rows back, but those include a new data
 point: two facility CCNs. Plugging those into the **Facility
@@ -172,15 +159,12 @@ Affiliations** API, we can retrieve information on the individual
 providers practicing at this hospital. First, the all-numeric CCN
 (`331302`):
 
-  
-
 ``` r
 ccn <- affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 list(
   organization = as.data.frame(t(unique(ccn[7:9]))),
-  individual = unique(ccn[1:6])
-  )
+  individual = unique(ccn[1:6]))
 #> $organization
 #>                     V1
 #> facility_type Hospital
@@ -204,8 +188,6 @@ list(
 #> # ℹ 196 more rows
 ```
 
-  
-
 That returns individual providers affiliated with the hospital. Now to
 search the alphanumeric CCN (`33Z302`):
 
@@ -213,9 +195,8 @@ search the alphanumeric CCN (`33Z302`):
 ccn2 <- affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.
 list(
-  organization = as.data.frame(t(unique(ccn2[7:9]))),
-  individual = unique(ccn2[1:6])
-  )
+  organization = as.data.frame(t(unique(ccn2[7:9]))), 
+  individual = unique(ccn2[1:6]))
 #> $organization
 #>                         V1
 #> facility_type Nursing home
@@ -232,14 +213,10 @@ list(
 #> 4 DRAGOS  BANU     NA     NA     1558659367 6709004682
 ```
 
-  
-
 That returns more affiliated individual providers that practice in the
-Hospital’s nursing home..
+Hospital’s nursing home.
 
-  
-
-> An *alphanumeric* CCN represents a sub-unit of the hospital, here a
+> An *alphanumeric* CCN represents a `sub-unit` of the hospital, here a
 > nursing home. We would get the same result if we’d set the
 > `parent_ccn` argument to the numeric CCN,
 > i.e. `affiliations(parent_ccn = 331302)`

@@ -19,3 +19,7 @@ Useful links:
 
 **Maintainer**: Andrew Allen Bruce <andrewallenbruce@gmail.com>
 \[copyright holder\]
+
+Authors:
+
+- Andrew Allen Bruce <andrewallenbruce@gmail.com> \[copyright holder\]

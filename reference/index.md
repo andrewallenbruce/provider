@@ -4,7 +4,7 @@
 
 ### General
 
-Access Current Provider Data.
+Current Provider Data
 
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
   : Provider-Facility Affiliations
@@ -18,7 +18,7 @@ Access Current Provider Data.
 
 ### Individual
 
-Access Current Individual Provider Data.
+Current Individual Providers
 
 - [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
   : Clinician Demographics
@@ -31,9 +31,9 @@ Access Current Individual Provider Data.
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
   : Provider Enrollment in Medicare
 
-### Organization
+### Organizational
 
-Access Current Organizational Provider Data.
+Current Organizational Providers
 
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
@@ -46,6 +46,10 @@ Access Current Organizational Provider Data.
   : HRSA Facilities
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
+- [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/rhc_enroll.md)
+  : Rural Health Clinics
+- [`rhc_owner()`](https://andrewallenbruce.github.io/provider/reference/rhc_owner.md)
+  : Rural Health Clinic Owners
 
 ## Query Modifiers
 
