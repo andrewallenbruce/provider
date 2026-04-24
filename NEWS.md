@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9095 (2026-04-24)
+
+* added fqhc_* endpoints
+
+
 # provider 0.0.1.9094 (2026-04-24)
 
 * fix to rhc_owner recode method
