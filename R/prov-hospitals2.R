@@ -4,6 +4,8 @@
 #' @param county `<chr>`
 #' @param hosp_type `<chr>`
 #' @param ownership `<chr>`
+#' @param count `<lgl>` Return the total row count
+#' @param set `<lgl>` Return the entire dataset
 #' @keywords internal
 #' @autoglobal
 #' @export
@@ -16,10 +18,12 @@ hospitals2 <- function(
   county = NULL,
   hosp_type = NULL,
   ownership = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   exec_prov(
     COUNT = count,
+    SET = set,
     ARG = param_prov(
       facility_id = ccn,
       facility_name = org_name,

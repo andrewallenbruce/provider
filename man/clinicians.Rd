@@ -29,7 +29,8 @@ clinicians(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -57,7 +58,9 @@ clinicians(
 
 \item{org_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

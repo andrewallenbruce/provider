@@ -3,7 +3,7 @@ EndPoint <- expr(call_name(call_match(call = caller_call(), fn = caller_fn())))
 
 #' @noRd
 #' @autoglobal
-exec_prov <- function(COUNT, ARG) {
+exec_prov <- function(COUNT, SET, ARG) {
   x <- base_prov(eval_bare(EndPoint))
 
   check_online()
@@ -12,6 +12,17 @@ exec_prov <- function(COUNT, ARG) {
 
   # COUNT --> Return Invisibly
   if (!length(ARG)) {
+    if (SET) {
+      # SET --> Return Entire Dataset
+      N <- req_count(x)
+      cli_pages(N, x@limit, x@end)
+
+      return(
+        req_multi(x, count = N) |>
+          polish(x@end)
+      )
+    }
+
     if (COUNT) {
       N <- req_count(x)
       cli_total(N, x@end)

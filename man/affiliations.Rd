@@ -20,7 +20,8 @@ affiliations(
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -49,7 +50,9 @@ provider provides services.}
 \item{parent_ccn}{\verb{<int>} CCN of the \strong{primary} hospital containing the
 unit where the individual provider provides services.}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

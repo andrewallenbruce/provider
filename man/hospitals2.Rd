@@ -13,7 +13,8 @@ hospitals2(
   county = NULL,
   hosp_type = NULL,
   ownership = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ hospitals2(
 \item{ownership}{\verb{<chr>}}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Hospitals 2

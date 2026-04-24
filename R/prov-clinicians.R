@@ -36,7 +36,8 @@
 #' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param org_name `<chr>` Facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
+#' @param set `<lgl>` Return the entire dataset
 #'
 #' @returns A [tibble][tibble::tibble-package]
 #'
@@ -66,13 +67,15 @@ clinicians <- function(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_character(gender, allow_null = TRUE)
   check_numeric(grad_year, allow_null = TRUE)
 
   exec_prov(
     COUNT = count,
+    SET = set,
     ARG = param_prov(
       npi = npi,
       ind_pac_id = pac,

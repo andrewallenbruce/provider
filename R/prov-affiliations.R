@@ -24,7 +24,8 @@
 #'    provider provides services.
 #' @param parent_ccn `<int>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
-#' @param count `<lgl>` Return the dataset's total row count
+#' @param count `<lgl>` Return the total row count
+#' @param set `<lgl>` Return the entire dataset
 #'
 #' @returns A [tibble][tibble::tibble-package]
 #'
@@ -49,12 +50,14 @@ affiliations <- function(
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 ) {
   check_character(facility_type, allow_null = TRUE)
 
   exec_prov(
     COUNT = count,
+    SET = set,
     ARG = param_prov(
       npi = npi,
       ind_pac_id = pac,
