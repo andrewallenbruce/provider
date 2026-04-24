@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9097 (2026-04-24)
+
+* added enums to `hospitals2()`
+* added `rc_integer_supp` (as.integer with suppressed NA conversion)
+
+
 # provider 0.0.1.9096 (2026-04-24)
 
 * added `set` param to prov endpoints
