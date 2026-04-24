@@ -363,6 +363,10 @@ Organizational Provider Data
   : Rural Health Clinics
 - [`rhc_owner()`](https://andrewallenbruce.github.io/provider/reference/rhc_owner.md)
   : Rural Health Clinic Owners
+- [`fqhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/fqhc_enroll.md)
+  : Federally Qualified Healthcare Clinics
+- [`fqhc_owner()`](https://andrewallenbruce.github.io/provider/reference/fqhc_owner.md)
+  : FQHC Owners
 
 ### Sanctions
 
