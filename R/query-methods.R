@@ -1,7 +1,4 @@
 #' @noRd
-build <- S7::new_generic("build", "x")
-
-#' @noRd
 arg_cms <- S7::new_class("arg_cms", S7::class_list, NULL)
 
 #' @noRd
