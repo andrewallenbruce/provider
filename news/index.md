@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9101 (2026-04-24)
+
+- refactored checks for modifiers with dots
+
 ## provider 0.0.1.9100 (2026-04-24)
 
 - init S7 execute method
