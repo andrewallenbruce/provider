@@ -113,6 +113,8 @@ reference:
   - hrsa
   - rhc_enroll
   - rhc_owner
+  - fqhc_enroll
+  - fqhc_owner
 - subtitle: Sanctions
   desc: >
     Providers who have incurred penalties or corrective actions

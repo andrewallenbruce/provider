@@ -14,6 +14,8 @@ recode_with <- function(x, endpoint) {
     transparency = RC_transparency(x),
     rhc_enroll = RC_rhc_enroll(x),
     rhc_owner = RC_rhc_owner(x),
+    fqhc_enroll = RC_fqhc_enroll(x),
+    fqhc_owner = RC_fqhc_owner(x),
     x
   )
 }
@@ -106,6 +108,33 @@ RC_rhc_enroll <- function(x) {
 #' @noRd
 #' @autoglobal
 RC_rhc_owner <- function(x) {
+  rc_integer(x, "own_code") |>
+    rc_double("own_pct") |>
+    rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>
+    rc_date_ymd("own_date") |>
+    collapse::mtt(
+      own_add = combine_cols(own_add_1, own_add_2),
+      own_add_1 = NULL,
+      own_add_2 = NULL
+    )
+}
+
+#' @noRd
+#' @autoglobal
+RC_fqhc_enroll <- function(x) {
+  rc_integer(x, "npi") |>
+    rc_bin("multi") |>
+    rc_date_ymd("inc_date") |>
+    collapse::mtt(
+      address = combine_cols(add_1, add_2),
+      add_1 = NULL,
+      add_2 = NULL
+    )
+}
+
+#' @noRd
+#' @autoglobal
+RC_fqhc_owner <- function(x) {
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
     rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>

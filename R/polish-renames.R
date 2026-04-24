@@ -1,6 +1,6 @@
 #' @noRd
 rename_with <- function(x, nm) {
-  if (is_null(nm)) {
+  if (rlang::is_null(nm)) {
     return(x)
   }
   collapse::setrename(x, nm, .nse = FALSE)
@@ -256,6 +256,69 @@ column_renames <- function(endpoint) {
       REVOCATION_EFCTV_DT = "start_date",
       REENROLLMENT_BAR_EXPRTN_DT = "end_date"
     ),
+    fqhc_enroll = c(
+      `ENROLLMENT ID` = "enid",
+      `ENROLLMENT STATE` = "enid_state",
+      `PROVIDER TYPE CODE` = "prov_type",
+      `PROVIDER TYPE TEXT` = "prov_desc",
+      NPI = "npi",
+      `MULTIPLE NPI FLAG` = "multi",
+      CCN = "ccn",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `DOING BUSINESS AS NAME` = "org_dba",
+      `INCORPORATION DATE` = "inc_date",
+      `INCORPORATION STATE` = "inc_state",
+      `ORGANIZATION TYPE STRUCTURE` = "org_type",
+      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
+      PROPRIETARY_NONPROFIT = "status",
+      `ADDRESS LINE 1` = "add_1",
+      `ADDRESS LINE 2` = "add_2",
+      CITY = "city",
+      STATE = "state",
+      `ZIP CODE` = "zip",
+      `TELEPHONE NUMBER` = "phone"
+    ),
+    fqhc_owner = c(
+      `ENROLLMENT ID` = "enid",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `ASSOCIATE ID - OWNER` = "own_pac",
+      `TYPE - OWNER` = "own_type",
+      `ROLE CODE - OWNER` = "own_code",
+      `ROLE TEXT - OWNER` = "own_role",
+      `ASSOCIATION DATE - OWNER` = "own_date",
+      `FIRST NAME - OWNER` = "own_first",
+      `MIDDLE NAME - OWNER` = "own_middle",
+      `LAST NAME - OWNER` = "own_last",
+      `TITLE - OWNER` = "own_title",
+      `ORGANIZATION NAME - OWNER` = "own_org",
+      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
+      `ADDRESS LINE 1 - OWNER` = "own_add_1",
+      `ADDRESS LINE 2 - OWNER` = "own_add_2",
+      `CITY - OWNER` = "own_city",
+      `STATE - OWNER` = "own_state",
+      `ZIP CODE - OWNER` = "own_zip",
+      `PERCENTAGE OWNERSHIP` = "own_pct",
+      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
+      `CORPORATION - OWNER` = "corp_ind",
+      `LLC - OWNER` = "llc_ind",
+      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
+      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
+      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
+      `HOLDING COMPANY - OWNER` = "hld_ind",
+      `INVESTMENT FIRM - OWNER` = "inv_ind",
+      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
+      `CONSULTING FIRM - OWNER` = "con_ind",
+      `FOR PROFIT - OWNER` = "fp_ind",
+      `NON PROFIT - OWNER` = "np_ind",
+      `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
+      `REIT - OWNER` = "reit_ind",
+      `CHAIN HOME OFFICE - OWNER` = "cho_ind",
+      `OTHER TYPE - OWNER` = "oth_ind",
+      `OTHER TYPE TEXT - OWNER` = "oth_txt",
+      `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
+    ),
     rhc_enroll = c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
@@ -326,6 +389,7 @@ column_renames <- function(endpoint) {
       Action = "action",
       Date_of_Action = "action_date"
     ),
-    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+    c()
+    # cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

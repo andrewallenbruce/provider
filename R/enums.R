@@ -76,7 +76,8 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       reh = "00-24",
       cah = "00-85"
     ),
-    # <hospitals> location
+    # TODO: rename `location`
+    # <hospitals>
     loc_type = list(
       other = "OTHER HOSPITAL PRACTICE LOCATION",
       main = "MAIN/PRIMARY HOSPITAL LOCATION",
@@ -85,7 +86,9 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       swing = "HOSPITAL SWING-BED UNIT",
       ext = "OPT EXTENSION SITE"
     ),
-    # <hospitals> structure
+    # TODO: rename `structure`
+    # <hospitals>
+    # <rhc_enroll>
     org_type = list(
       corp = "CORPORATION",
       other = "OTHER",
