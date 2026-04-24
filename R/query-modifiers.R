@@ -87,7 +87,7 @@ NULL
 #' @export
 excludes <- function(...) {
   x <- rlang::list2(...)
-  check_required(x)
+  check_dots(x)
   check_not_modifier(x)
   x <- unlist_(x)
   Modifier("NOT+IN", value = x)
@@ -97,7 +97,7 @@ excludes <- function(...) {
 #' @export
 between <- function(...) {
   x <- rlang::list2(...)
-  check_required(x)
+  check_dots(x)
   check_not_modifier(x)
   x <- unlist_(x)
   check_numeric(x)

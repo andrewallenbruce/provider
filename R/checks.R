@@ -1,11 +1,4 @@
 #' @noRd
-check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (any2(rlang::have_name(x))) {
-    cli::cli_abort("Inputs cannot be named.", arg = arg, call = call)
-  }
-}
-
-#' @noRd
 check_count_set <- function(count, set, call = caller_env()) {
   if (count && set) {
     cli::cli_abort(
@@ -62,6 +55,24 @@ check_subgroups <- function(x) {
       "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(x)}}",
       "i" = "Use the {.fn subgroups} helper function"
     ))
+  }
+}
+
+# |=================|
+# | MODIFIER CHECKS |
+# |=================|
+
+#' @noRd
+check_dots <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (length(x) == 0L) {
+    cli::cli_abort("Dots ({.arg ...}) cannot be empty.", arg = arg, call = call)
+  }
+}
+
+#' @noRd
+check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (any2(rlang::have_name(x))) {
+    cli::cli_abort("Inputs cannot be named.", arg = arg, call = call)
   }
 }
 

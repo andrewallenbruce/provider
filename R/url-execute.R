@@ -9,9 +9,10 @@ exec_prov <- function(COUNT, SET, ARG) {
   check_online()
   check_bool(COUNT)
   check_modifiers(ARG, x@end)
-  # |==============
-  # | EMPTY QUERY |
-  # |==============
+
+  # |==============|
+  # | EMPTY QUERY  |
+  # |==============|
   if (!length(ARG)) {
     # TODO: more clearly defined empty query behavior
     if (SET) {
@@ -32,15 +33,15 @@ exec_prov <- function(COUNT, SET, ARG) {
       return(invisible(N))
     }
 
-    # |========================================
+    # |=======================================|
     # | END EMPTY QUERY: Return First 10 Rows |
-    # |========================================
+    # |=======================================|
     return(req_empty(x) |> polish(x@end))
   }
 
-  # |============
+  # |===========|
   # | HAS QUERY |
-  # |============
+  # |===========|
 
   # 1. Build query
   ARG <- build(ARG)

@@ -30,7 +30,7 @@
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
 #'
-#' reassignments(count = TRUE, employers = greater_than(20, equal = TRUE))
+#' reassignments(count = TRUE, employers = greater_than(50, equal = TRUE))
 #'
 #' reassignments(org_enid = "I20070209000135")
 #'

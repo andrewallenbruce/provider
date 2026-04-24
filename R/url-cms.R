@@ -16,7 +16,7 @@ base_cms <- S7::new_class(
         if (rlang::is_list(uid)) set_names2(as.list(url), uid) else url
       }
     ),
-    mult = S7::new_property(
+    multi = S7::new_property(
       S7::class_logical,
       getter = function(self) length(self@url) > 1L
     )
@@ -27,7 +27,7 @@ base_cms <- S7::new_class(
 S7::method(req_total, base_cms) <- function(x) {
   url <- flatten_url(paste0(x@url, "/stats?"))
 
-  if (x@mult) {
+  if (x@multi) {
     return(multi_count(url, x@url, "total_rows"))
   }
   base_request(url, "total_rows")
@@ -37,7 +37,7 @@ S7::method(req_total, base_cms) <- function(x) {
 S7::method(req_count, base_cms) <- function(x, args = NULL) {
   url <- flatten_url(paste0(x@url, "/stats?"), args)
 
-  if (x@mult) {
+  if (x@multi) {
     return(multi_count(url, x@url, "found_rows"))
   }
   base_request(url, "found_rows")
@@ -49,7 +49,7 @@ S7::method(req_empty, base_cms) <- function(x, id = NULL) {
 
   url <- flatten_url(paste0(x@url, "?"), opts = opts_cms(size = 10L))
 
-  if (x@mult) {
+  if (x@multi) {
     return(multi_base(url, x@url, id))
   }
   base_request(url)
@@ -59,7 +59,7 @@ S7::method(req_empty, base_cms) <- function(x, id = NULL) {
 S7::method(req_single, base_cms) <- function(x, args = NULL, id = NULL) {
   url <- flatten_url(paste0(x@url, "?"), args, opts_cms())
 
-  if (x@mult) {
+  if (x@multi) {
     return(multi_base(url, x@url, id))
   }
   base_request(url)
@@ -74,13 +74,9 @@ S7::method(req_multi, base_cms) <- function(
 ) {
   url <- flatten_url(paste0(x@url, "?"), args, opts_cms(offset = "<<i>>"))
 
-  if (length(url) > 1L) {
-    offset3(url, count, x@limit) |>
-      purrr::map(parallel_request) |>
-      set_names2(x@url) |>
-      rowbind2(nm = id)
-  } else {
-    offset2(url, count, x@limit) |>
-      parallel_request()
+  if (x@mult) {
+    return(multi_parallel(url, count, x@limit, x@url, id))
   }
+
+  base_parallel(url, count, x@limit)
 }

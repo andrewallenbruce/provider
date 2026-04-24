@@ -160,3 +160,17 @@ multi_base <- function(url, nm, id) {
     set_names2(nm) |>
     rowbind2(id, fill = TRUE)
 }
+
+#' @noRd
+base_parallel <- function(url, cnt, lmt) {
+  offset2(url, cnt, lmt) |>
+    parallel_request()
+}
+
+#' @noRd
+multi_parallel <- function(url, cnt, lmt, nm, id) {
+  offset3(url, cnt, lmt) |>
+    purrr::map(parallel_request) |>
+    set_names2(nm) |>
+    rowbind2(id)
+}
