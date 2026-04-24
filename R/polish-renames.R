@@ -1,4 +1,13 @@
 #' @noRd
+rename_with <- function(x, nm) {
+  if (is_null(nm)) {
+    return(x)
+  }
+  collapse::setrename(x, nm, .nse = FALSE)
+  collapse::gv(x, unlist_(nm))
+}
+
+#' @noRd
 column_renames <- function(endpoint) {
   switch(
     endpoint,

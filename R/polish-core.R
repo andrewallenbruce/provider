@@ -19,31 +19,23 @@ replace_nz <- function(i) {
 }
 
 #' @noRd
-rename_with <- function(x, nm) {
-  if (is_null(nm)) {
-    return(x)
-  }
-  collapse::setrename(x, nm, .nse = FALSE)
-  collapse::gv(x, unlist_(nm))
+rc_as_integer <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as.integer)
 }
 
 #' @noRd
-recode_with <- function(x, endpoint) {
-  switch(
-    endpoint,
-    affiliations = RC_npi(x),
-    clinicians = RC_clinicians(x),
-    hospitals = RC_hospitals(x),
-    opt_out = RC_opt_out(x),
-    order_refer = RC_order_refer(x),
-    pending = RC_npi(x),
-    providers = RC_npi_multi(x),
-    reassignments = RC_reassignments(x),
-    revocations = RC_revocations(x),
-    transparency = RC_transparency(x),
-    rhc = x,
-    x
-  )
+rc_as_bin <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = bin_col)
+}
+
+#' @noRd
+rc_as_date_ymd <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as_date_ymd)
+}
+
+#' @noRd
+rc_as_date_mdy <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as_date_mdy)
 }
 
 #' @noRd
