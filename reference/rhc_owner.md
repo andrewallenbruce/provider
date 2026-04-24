@@ -37,7 +37,7 @@ rhc_owner(count = TRUE)
 #> ℹ rhc_owner has 65,551 rows.
 
 rhc_owner() |> str()
-#> ! rhc_owner ◯ No Query
+#> ! rhc_owner ❯ No Query
 #> ℹ Returning first 10 rows...
 #> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000023" "O20020813000023" "O20020813000023" "O20020813000023" ...

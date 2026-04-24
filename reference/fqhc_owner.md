@@ -37,7 +37,7 @@ fqhc_owner(count = TRUE)
 #> ℹ fqhc_owner has 148,919 rows.
 
 fqhc_owner() |> str()
-#> ! fqhc_owner ◯ No Query
+#> ! fqhc_owner ❯ No Query
 #> ℹ Returning first 10 rows...
 #> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020819000009" "O20020819000009" "O20020819000009" "O20020819000009" ...

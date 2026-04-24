@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9097 (2026-04-24)
+
+- added enums to
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- added `rc_integer_supp` (as.integer with suppressed NA conversion)
+
 ## provider 0.0.1.9096 (2026-04-24)
 
 - added `set` param to prov endpoints
@@ -152,7 +158,7 @@
 ## provider 0.0.1.9062 (2026-03-23)
 
 - added
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals2.md)
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   endpoint
 
 ## provider 0.0.1.9061 (2026-03-20)

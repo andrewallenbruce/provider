@@ -115,20 +115,20 @@ opt_out(npi = 1043522824)
 #> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 opt_out(state = "AK")
 #> ✔ opt_out returned 260 results.
-#> # A tibble: 258 × 12
+#> # A tibble: 260 × 12
 #>           npi first last  specialty start_date end_date   updated    city  state
 #>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
-#>  1 1265553432 Henry Chap… Physicia… 2012-04-01 2026-04-01 2024-05-15 ANCH… AK   
-#>  2 1487879664 Ann   Stoc… Clinical… 2012-04-01 2026-04-01 2024-05-15 ANCH… AK   
+#>  1 1265553432 Henry Chap… Physicia… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
+#>  2 1487879664 Ann   Stoc… Clinical… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
 #>  3 1043559362 Amber Shea  Nurse Pr… 2013-04-01 2027-04-01 2025-05-15 WASI… AK   
 #>  4 1598825663 Robe… Skala Family P… 2013-06-04 2027-06-04 2025-07-15 EAGL… AK   
 #>  5 1508198276 Robe… Cass… Dentist   2013-07-23 2027-07-23 2025-09-15 WASI… AK   
-#>  6 1952340358 Eliz… Desc… Family P… 2014-04-01 2026-04-01 2024-05-15 ANCH… AK   
+#>  6 1952340358 Eliz… Desc… Family P… 2014-04-01 2028-04-01 2026-04-16 ANCH… AK   
 #>  7 1124176227 Evel… Wisz… Clinical… 2018-07-01 2026-07-01 2024-08-15 KODI… AK   
-#>  8 1154467520 Suza… Stra… Nurse Pr… 2014-04-01 2026-04-01 2024-05-15 EAGL… AK   
+#>  8 1154467520 Suza… Stra… Nurse Pr… 2014-04-01 2028-04-01 2026-04-16 EAGL… AK   
 #>  9 1295755296 Will… Berg… Oral Sur… 2018-11-05 2026-11-05 2024-12-15 ANCH… AK   
 #> 10 1225058977 Ray   Holl… Oral Sur… 2014-06-16 2026-06-16 2024-07-15 ANCH… AK   
-#> # ℹ 248 more rows
+#> # ℹ 250 more rows
 #> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ opt_out returned 798 results.
