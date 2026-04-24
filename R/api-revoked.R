@@ -30,7 +30,9 @@
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
 #'
-#' revocations(count = TRUE, org_name = not_na())
+#' revocations(count = TRUE, org_name = not_blank())
+#'
+#' revocations(org_name = starts_with("B"))
 #'
 #' revocations(specialty = contains("CARDIO"), state = excludes("GA", "OH"))
 #'

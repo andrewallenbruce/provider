@@ -6,8 +6,8 @@
 \alias{between}
 \alias{contains}
 \alias{not}
-\alias{not_na}
-\alias{na}
+\alias{not_blank}
+\alias{is_blank}
 \alias{greater_than}
 \alias{less_than}
 \alias{starts_with}
@@ -25,9 +25,9 @@ contains(x)
 
 not(x)
 
-not_na()
+not_blank()
 
-na()
+is_blank()
 
 greater_than(x, equal = FALSE)
 
@@ -51,8 +51,10 @@ An S7 \verb{<Modifier>} object.
 Helpers for use in constructing conditions in queries.
 }
 \details{
-Query modifiers are a small DSL for use in constructing query conditions,
-in the \href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering}{JSON-API} format.
+Query modifiers are a small DSL for use in constructing query
+conditions, in the
+\href{https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering}{JSON-API}
+format.
 }
 \examples{
 list(
@@ -66,7 +68,7 @@ list(
    `between(0.125, 2)` = between(0.125, 2),
    `contains("baz")` = contains("baz"),
    `not("zzz")` = not("zzz"),
-   `not_na()` = not_na(),
-   `na()` = na()
+   `not_blank()` = not_blank(),
+   `is_blank()` = is_blank()
  )
 }

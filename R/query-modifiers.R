@@ -2,7 +2,6 @@
 Modifier <- S7::new_class(
   name = "Modifier",
   parent = S7::class_character,
-  package = NULL,
   properties = list(value = S7::class_atomic)
 )
 
@@ -28,8 +27,7 @@ S7::method(value, Modifier) <- function(x) {
 }
 
 #' @export
-#' @exportS3Method base::print
-print.Modifier <- function(x, ...) {
+`print.provider::Modifier` <- function(x, ...) {
   cli::cli_text(cli::col_cyan("<modifier>"))
   cli::cli_text(c(
     cli::col_silver("Operator: "),
@@ -53,17 +51,19 @@ print.Modifier <- function(x, ...) {
 
 #' A variety of different query operators
 #'
-#' @description
-#' Helpers for use in constructing conditions in queries.
+#' @description Helpers for use in constructing conditions in queries.
 #'
-#' @details
-#' Query modifiers are a small DSL for use in constructing query conditions,
-#' in the [JSON-API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering) format.
+#' @details Query modifiers are a small DSL for use in constructing query
+#'   conditions, in the
+#'   [JSON-API](https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering)
+#'   format.
 #'
 #' @param x input
 #' @param ... input
 #' @param equal `<lgl>` append `=` to `less_than()` or `greater_than()`
+#'
 #' @name modifier
+#'
 #' @examples
 #' list(
 #'    `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
@@ -76,8 +76,8 @@ print.Modifier <- function(x, ...) {
 #'    `between(0.125, 2)` = between(0.125, 2),
 #'    `contains("baz")` = contains("baz"),
 #'    `not("zzz")` = not("zzz"),
-#'    `not_na()` = not_na(),
-#'    `na()` = na()
+#'    `not_blank()` = not_blank(),
+#'    `is_blank()` = is_blank()
 #'  )
 #' @returns An S7 `<Modifier>` object.
 #' @source [JSON-API: Query Parameters](https://jsonapi.org/format/#query-parameters)
@@ -129,13 +129,13 @@ equals <- function(x) {
 
 #' @rdname modifier
 #' @export
-not_na <- function() {
+not_blank <- function() {
   not("")
 }
 
 #' @rdname modifier
 #' @export
-na <- function() {
+is_blank <- function() {
   equals("")
 }
 

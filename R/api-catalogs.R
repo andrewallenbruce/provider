@@ -1,5 +1,4 @@
 #' @noRd
-#' @autoglobal
 api_provider <- function() {
   rex <- paste0(
     c(
@@ -17,10 +16,10 @@ api_provider <- function() {
     collapse = "|"
   )
 
-  RcppSimdJson::fload(
-    "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
-  ) |>
-    collapse::sbt(stringr::str_which(title, rex)) |>
+  x <- "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items" |>
+    RcppSimdJson::fload()
+
+  collapse::sbt(x, stringr::str_which(x$title, rex)) |>
     collapse::gv(c(
       "title",
       "released",
@@ -34,7 +33,6 @@ api_provider <- function() {
 }
 
 #' @noRd
-#' @autoglobal
 api_medicare <- function() {
   rex <- paste0(
     c(
@@ -69,11 +67,12 @@ api_medicare <- function() {
     collapse = "|"
   )
 
-  RcppSimdJson::fload(
+  x <- RcppSimdJson::fload(
     json = "https://data.cms.gov/data.json",
     query = "/dataset"
-  ) |>
-    collapse::sbt(stringr::str_which(title, rex)) |>
+  )
+
+  collapse::sbt(x, stringr::str_which(x$title, rex)) |>
     collapse::gv(c("title", "modified", "description", "identifier")) |>
     collapse::roworderv(c("title", "modified")) |>
     data_frame()

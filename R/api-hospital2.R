@@ -1,7 +1,15 @@
-#' Hospitals 2
+#' Hospital General Information
+#'
+#' @description A list of all hospitals that have been registered with Medicare.
+#'   The list includes addresses, phone numbers, hospital type, and overall
+#'   hospital rating.
+#'
+#' #' @source
+#'    * [API: Hospital General Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Data Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 #'
 #' @param county `<chr>` Location county
-#' @param hosp_type `<enum>` Provider type;
+#' @param hosp_type `<enum>` Provider type:
 #'    - `acute` = Acute Care Hospitals
 #'    - `cah` = Critical Access Hospitals
 #'    - `child` = Children's
@@ -10,7 +18,7 @@
 #'    - `psych` = Psychiatric
 #'    - `reh` = Rural Emergency Hospital
 #'    - `vha` = Acute Care - Veterans Administration
-#' @param ownership `<enum>` Provider type;
+#' @param ownership `<enum>` Ownership type:
 #'    - `private` = Voluntary non-profit - Private
 #'    - `other` = Voluntary non-profit - Other
 #'    - `church` = Voluntary non-profit - Church

@@ -372,7 +372,7 @@ column_renames <- function(endpoint) {
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
     ),
     transparency = c(
-      Case_ID = "id",
+      Case_ID = "case",
       Hosp_Name = "name",
       Hosp_Address = "address",
       City = "city",

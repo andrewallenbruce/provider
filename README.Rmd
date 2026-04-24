@@ -51,52 +51,50 @@ library(provider)
 ```
 
 ```{r}
-#| label: affiliations
+#| label: affiliation
 # Provider/Facility Affiliations
-affiliations(facility_ccn = 370781)
+affiliations(first = starts_with("Ab"), facility_type = "ltch")
 ```
 
 ```{r}
-#| label: reassignments
+#| label: reassignment
 # Reassignment of Benefits
 reassignments(
   first = starts_with("J"), 
-  state = "GA", 
-  specialty = contains("Gastro"))
+  state = "MI", 
+  employers = greater_than(20, equal = TRUE))
 ```
 
 ```{r}
-#| label: revocations
+#| label: revoked
 # Revoked Medicare Providers
-revocations(
-  specialty = contains("CARDIO"), 
-  state = not("TX"))
+revocations(org_name = starts_with("B"), state = "GA")
 ```
 
 ```{r}
-#| label: clinicians
+#| label: clinician
 # Clinician Demographics
 clinicians(
-  state = "GA", 
-  gender = "F",
-  specialty = "Nurse Practitioner",
+  org_state = "GA", 
   org_name = starts_with("North"),
-  grad_year = 2024)
+  gender = "M",
+  specialty = "Nurse Practitioner",
+  grad_year = 2023:2025)
 ```
 
 ```{r}
-#| label: opt_out
+#| label: opted_out
 # Opt-Out Affidavits
 opt_out(
-  specialty = "Psychiatry", 
-  order_refer = FALSE)
+  first = starts_with("Bo"),
+  specialty = contains("Obstetrics"))
 ```
 
 ```{r}
 #| label: order_refer
 # Ordering & Referral Eligibility
 order_refer(
-  last = contains("ABAY"),
+  first = contains("ABAY"),
   ptb = TRUE,
   dme = TRUE,
   hha = FALSE)
@@ -106,39 +104,39 @@ order_refer(
 #| label: pending
 # Pending Enrollments
 pending(
-  first = ends_with("E"),
-  last = starts_with("A"))
+  first = starts_with("A"),
+  last = ends_with("E"))
 ```
 
 ```{r}
-#| label: providers
+#| label: enrolled
 # Medicare Enrollment
 providers(
-  first = contains("C"),
-  state = "AK",
-  prov_type = ends_with(50))
+  org_name = contains("ARL"),
+  state = "AL")
 ```
 
 ```{r}
-#| label: hospitals
+#| label: hospital
 # Medicare Part A Hospitals
 hospitals(
+  dba_name = starts_with("Pied"),
   state = "GA",
   subgroup = subgroups(
-    acute = FALSE,
-    psych = TRUE))
+    psych = FALSE,
+    psych_unit = TRUE))
 ```
 
 ```{r}
 #| label: clia
 # CLIA Laboratories
-clia(parent = starts_with(11), city = "Valdosta")
+clia(city = "Valdosta", parent_ccn = not_blank())
 ```
 
 ```{r}
 #| label: transparency
 # Hospital Transparency Enforcement
-transparency(action = "warn", state = c("AL", "GA"))
+transparency(action = "warn", state = "GA")
 ```
 
 <br>

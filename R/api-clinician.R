@@ -33,7 +33,7 @@
 #' @param school `<chr>` Provider’s medical school
 #' @param grad_year `<int>` Provider’s graduation year
 #' @param specialty `<chr>` Provider’s primary medical specialty
-#' @param city,state,zip `<chr>` Facility's city, state, zip
+#' @param org_city,org_state,org_zip `<chr>` Facility's city, state, zip
 #' @param org_name `<chr>` Facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param count `<lgl>` Return the total row count
@@ -42,7 +42,7 @@
 #' @returns A [tibble][tibble::tibble-package]
 #'
 #' @examplesIf httr2::is_online()
-#' clinicians(count = TRUE, org_name = not_na())
+#' clinicians(count = TRUE, org_name = not_blank())
 #'
 #' clinicians(enid = "I20081002000549")
 #'
@@ -62,9 +62,9 @@ clinicians <- function(
   specialty = NULL,
   school = NULL,
   grad_year = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
+  org_city = NULL,
+  org_state = NULL,
+  org_zip = NULL,
   org_name = NULL,
   org_pac = NULL,
   count = FALSE,
@@ -91,9 +91,9 @@ clinicians <- function(
       pri_spec = specialty,
       facility_name = org_name,
       org_pac_id = org_pac,
-      citytown = city,
-      state = state,
-      zip_code = zip
+      citytown = org_city,
+      state = org_state,
+      zip_code = org_zip
     )
   )
 }

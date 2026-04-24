@@ -155,6 +155,6 @@ RC_fqhc_owner <- function(x) {
 
 #' @noRd
 RC_transparency <- function(x) {
-  rc_integer(x, "id") |>
+  rc_integer(x, "case") |>
     rc_date_ymd("action_date")
 }

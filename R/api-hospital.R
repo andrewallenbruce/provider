@@ -1,9 +1,8 @@
 #' Hospitals Enrolled in Medicare
 #'
-#' @description
-#' Hospitals currently enrolled in Medicare. Data includes the hospital's
-#' sub-group types, legal business name, doing-business-as name, organization
-#' type and address.
+#' @description Hospitals currently enrolled in Medicare. Data includes the
+#'   hospital's sub-group types, legal business name, doing-business-as name,
+#'   organization type and address.
 #'
 #' @source
 #'    - [API: Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
@@ -26,8 +25,8 @@
 #'    - `llc` = LLC
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
-#' @param prov_type `<enum>` Provider type;
-#'    - `hospital` = Part A Hospital
+#' @param prov_type `<enum>` Provider type:
+#'    - `hospital` = Medicare Part A Hospital
 #'    - `reh` = Rural Emergency Hospital
 #'    - `cah` = Critical Access Hospital
 #' @param loc_type `<enum>` Practice location type
