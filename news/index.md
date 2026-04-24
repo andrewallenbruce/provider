@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9094 (2026-04-24)
+
+- fix to rhc_owner recode method
+
 ## provider 0.0.1.9093 (2026-04-24)
 
 - polish methods for both rhc endpoints
