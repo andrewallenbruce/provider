@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9099 (2026-04-24)
+
+* streamlining req_* methods
+
+
 # provider 0.0.1.9098 (2026-04-24)
 
 * renamed modifiers `na()`/`not_na()` to `is_blank()`/`not_blank()`
