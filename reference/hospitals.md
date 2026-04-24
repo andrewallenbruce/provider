@@ -186,7 +186,7 @@ x
 #> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
 #> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
 #> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <chr>, address <chr>
+#> #   sub_otxt <int>, address <chr>
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
@@ -233,5 +233,5 @@ hospitals(ccn = x$ccn)
 #> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
 #> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
 #> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <chr>, address <chr>
+#> #   sub_otxt <int>, address <chr>
 ```

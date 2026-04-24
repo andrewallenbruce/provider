@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9093 (2026-04-24)
+
+- polish methods for both rhc endpoints
+
 ## provider 0.0.1.9092 (2026-04-24)
 
 - refactored polish_recode methods

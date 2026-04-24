@@ -74,7 +74,7 @@ ccn |> str()
 #>  $ sub_psu   : int [1:5] 0 0 0 0 0
 #>  $ sub_iru   : int [1:5] 0 0 0 0 0
 #>  $ sub_oth   : int [1:5] 0 0 1 0 0
-#>  $ sub_otxt  : chr [1:5] NA NA "ORGAN TRANSPLANT PROGRAM" NA ...
+#>  $ sub_otxt  : int [1:5] NA NA NA NA NA
 #>  $ address   : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
 ```
 
@@ -111,7 +111,7 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
 #> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
 #> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <chr>, address <chr>
+#> #   sub_otxt <int>, address <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 58 results.
 #> # A tibble: 58 × 20
