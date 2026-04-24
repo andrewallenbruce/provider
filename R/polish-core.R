@@ -19,22 +19,27 @@ replace_nz <- function(i) {
 }
 
 #' @noRd
-rc_as_integer <- function(x, v) {
+rc_integer <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as.integer)
 }
 
 #' @noRd
-rc_as_bin <- function(x, v) {
+rc_double <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as.double)
+}
+
+#' @noRd
+rc_bin <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = bin_col)
 }
 
 #' @noRd
-rc_as_date_ymd <- function(x, v) {
+rc_date_ymd <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as_date_ymd)
 }
 
 #' @noRd
-rc_as_date_mdy <- function(x, v) {
+rc_date_mdy <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as_date_mdy)
 }
 
