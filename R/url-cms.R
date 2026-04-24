@@ -23,19 +23,12 @@ base_cms <- S7::new_class(
   )
 )
 
-
-#' @noRd
-multi_total <- function(url, nm, qry) {
-  purrr::map_int(url, base_request, query = qry) |>
-    set_names2(nm)
-}
-
 #' @noRd
 S7::method(req_total, base_cms) <- function(x) {
   url <- flatten_url(paste0(x@url, "/stats?"))
 
   if (x@mult) {
-    return(multi_total(url, x@url, "total_rows"))
+    return(multi_count(url, x@url, "total_rows"))
   }
   base_request(url, "total_rows")
 }
@@ -45,7 +38,7 @@ S7::method(req_count, base_cms) <- function(x, args = NULL) {
   url <- flatten_url(paste0(x@url, "/stats?"), args)
 
   if (x@mult) {
-    return(multi_total(url, x@url, "found_rows"))
+    return(multi_count(url, x@url, "found_rows"))
   }
   base_request(url, "found_rows")
 }
@@ -56,26 +49,20 @@ S7::method(req_empty, base_cms) <- function(x, id = NULL) {
 
   url <- flatten_url(paste0(x@url, "?"), opts = opts_cms(size = 10L))
 
-  if (length(url) > 1L) {
-    purrr::map(url, base_request) |>
-      set_names2(x@url) |>
-      rowbind2(nm = id, fill = TRUE)
-  } else {
-    base_request(url)
+  if (x@mult) {
+    return(multi_base(url, x@url, id))
   }
+  base_request(url)
 }
 
 #' @noRd
 S7::method(req_single, base_cms) <- function(x, args = NULL, id = NULL) {
   url <- flatten_url(paste0(x@url, "?"), args, opts_cms())
 
-  if (length(url) > 1L) {
-    purrr::map(url, base_request) |>
-      set_names2(x@url) |>
-      rowbind2(nm = id)
-  } else {
-    base_request(url)
+  if (x@mult) {
+    return(multi_base(url, x@url, id))
   }
+  base_request(url)
 }
 
 #' @noRd

@@ -9,11 +9,13 @@ exec_prov <- function(COUNT, SET, ARG) {
   check_online()
   check_bool(COUNT)
   check_modifiers(ARG, x@end)
-
-  # COUNT --> Return Invisibly
+  # |==============
+  # | EMPTY QUERY |
+  # |==============
   if (!length(ARG)) {
+    # TODO: more clearly defined empty query behavior
     if (SET) {
-      # SET --> Return Entire Dataset
+      # SET: Return entire dataset
       N <- req_count(x)
       cli_pages(N, x@limit, x@end)
 
@@ -23,33 +25,41 @@ exec_prov <- function(COUNT, SET, ARG) {
       )
     }
 
+    # COUNT: Return count invisibly
     if (COUNT) {
       N <- req_count(x)
       cli_total(N, x@end)
       return(invisible(N))
     }
 
-    # EMPTY QUERY --> First 10 Rows
+    # |========================================
+    # | END EMPTY QUERY: Return First 10 Rows |
+    # |========================================
     return(req_empty(x) |> polish(x@end))
   }
 
-  # QUERY --> Request Count
+  # |============
+  # | HAS QUERY |
+  # |============
+
+  # 1. Build query
   ARG <- build(ARG)
+  # 2. Request count
   N <- req_count(x, ARG)
 
-  # NO RESULTS or COUNT --> Return Invisibly
+  # 0 RESULTS or COUNT: Return Invisibly
   if (N == 0L || COUNT) {
     cli_results(N, x@end)
     return(invisible(N))
   }
 
-  # COUNT BELOW LIMIT --> Single Request
+  # COUNT below LIMIT: Single Request
   if (N <= x@limit) {
     cli_results(N, x@end)
     return(req_single(x, ARG) |> polish(x@end))
   }
 
-  # COUNT ABOVE LIMIT --> Multiple Requests
+  # COUNT above LIMIT: Multiple Requests
   cli_pages(N, x@limit, x@end)
 
   req_multi(x, ARG, N) |>
