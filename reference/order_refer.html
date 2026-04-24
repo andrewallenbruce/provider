@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9097</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9098</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Order and Refer Eligibility</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/R/api-cms-order_refer.R" class="external-link"><code>R/api-cms-order_refer.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/main/R/api-order_refer.R" class="external-link"><code>R/api-order_refer.R</code></a></small>
       <div class="d-none name"><code>order_refer.Rd</code></div>
     </div>
 
@@ -135,35 +135,35 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">order_refer</span> has <span style="font-weight: bold;">2,007,536</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">order_refer</span> has <span style="font-weight: bold;">1,994,820</span> rows.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   first   last          npi   ptb   dme   hha   pmd hospice</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> RADHIKA PHADKE <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">026</span>055     1     1     1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> RADHIKA PHADKE <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">026</span>055     0     1     0     1       0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Jennifer"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">135</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 135 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first    last         npi   ptb   dme   hha   pmd hospice</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>124<span style="text-decoration: underline;">421</span>995     1     1     1     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>487<span style="text-decoration: underline;">972</span>238     1     1     0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>154<span style="text-decoration: underline;">778</span>181     1     1     1     1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>083<span style="text-decoration: underline;">750</span>079     1     1     0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>588<span style="text-decoration: underline;">291</span>215     1     1     1     1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>427<span style="text-decoration: underline;">168</span>814     1     1     1     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>063<span style="text-decoration: underline;">644</span>995     1     1     0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>407<span style="text-decoration: underline;">630</span>973     1     1     0     0       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>366<span style="text-decoration: underline;">003</span>840     1     1     1     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>134<span style="text-decoration: underline;">344</span>286     1     1     1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>881<span style="text-decoration: underline;">004</span>869     1     1     1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>265<span style="text-decoration: underline;">005</span>615     1     1     1     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>790<span style="text-decoration: underline;">243</span>723     1     1     1     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>255<span style="text-decoration: underline;">333</span>522     1     1     1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>700<span style="text-decoration: underline;">323</span>680     1     1     1     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>265<span style="text-decoration: underline;">417</span>687     0     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>063<span style="text-decoration: underline;">436</span>590     1     1     1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>861<span style="text-decoration: underline;">169</span>211     1     1     1     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>588<span style="text-decoration: underline;">849</span>350     1     1     1     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>922<span style="text-decoration: underline;">290</span>519     1     1     1     1       1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 125 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>ptb <span class="op">=</span> <span class="cn">TRUE</span>, dme <span class="op">=</span> <span class="cn">TRUE</span>, hha <span class="op">=</span> <span class="cn">FALSE</span>, pmd <span class="op">=</span> <span class="cn">TRUE</span>, hospice <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">51</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 51 × 8</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">45</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 45 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first    last               npi   ptb   dme   hha   pmd hospice</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ROBYN    AYER        <span style="text-decoration: underline;">1</span>659<span style="text-decoration: underline;">094</span>290     1     1     0     1       0</span>
@@ -171,12 +171,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> KRISTINA BERRY       <span style="text-decoration: underline;">1</span>295<span style="text-decoration: underline;">461</span>192     1     1     0     1       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BONNIE   BETTS       <span style="text-decoration: underline;">1</span>306<span style="text-decoration: underline;">821</span>129     1     1     0     1       0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> LAURA    BOBROWSKI   <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">297</span>019     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> LISA     CHRISTIAN   <span style="text-decoration: underline;">1</span>235<span style="text-decoration: underline;">636</span>697     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> TRAVIS   DANIEL      <span style="text-decoration: underline;">1</span>134<span style="text-decoration: underline;">813</span>934     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> LYNELL   DAWSON      <span style="text-decoration: underline;">1</span>962<span style="text-decoration: underline;">852</span>533     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> BETH     DETRICH     <span style="text-decoration: underline;">1</span>124<span style="text-decoration: underline;">364</span>203     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> BRIDGET  DIETZ       <span style="text-decoration: underline;">1</span>720<span style="text-decoration: underline;">522</span>592     1     1     0     1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 41 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> BRIDGET  DIETZ       <span style="text-decoration: underline;">1</span>720<span style="text-decoration: underline;">522</span>592     1     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JAMIE    DUBOSE      <span style="text-decoration: underline;">1</span>720<span style="text-decoration: underline;">506</span>520     1     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ANNA     DYKSTRA     <span style="text-decoration: underline;">1</span>174<span style="text-decoration: underline;">278</span>626     1     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> SUSAN    ENGLEBERT   <span style="text-decoration: underline;">1</span>487<span style="text-decoration: underline;">145</span>967     1     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> RONALD   FANCHER     <span style="text-decoration: underline;">1</span>598<span style="text-decoration: underline;">744</span>989     1     1     0     1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 35 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

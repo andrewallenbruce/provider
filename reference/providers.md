@@ -87,7 +87,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 providers(count = TRUE)
 #> ℹ providers has 2,981,799 rows.
 
-providers(count = TRUE, org_name = not_na())
+providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results.
 
 providers(org_name = starts_with("Z"))

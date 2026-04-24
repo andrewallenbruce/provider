@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9097</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9098</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,9 +62,9 @@
 <span></span>
 <span><span class="fu">not</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">not_na</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">not_blank</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">na</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">is_blank</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">greater_than</span><span class="op">(</span><span class="va">x</span>, equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -101,8 +101,10 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Query modifiers are a small DSL for use in constructing query conditions,
-in the <a href="https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering" class="external-link">JSON-API</a> format.</p>
+    <p>Query modifiers are a small DSL for use in constructing query
+conditions, in the
+<a href="https://www.drupal.org/docs/core-modules-and-themes/core-modules/jsonapi-module/filtering" class="external-link">JSON-API</a>
+format.</p>
     </div>
 
     <div class="section level2">
@@ -118,8 +120,8 @@ in the <a href="https://www.drupal.org/docs/core-modules-and-themes/core-modules
 <span class="r-in"><span>   `between(0.125, 2)` <span class="op">=</span> <span class="fu">between</span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   `contains("baz")` <span class="op">=</span> <span class="fu">contains</span><span class="op">(</span><span class="st">"baz"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>   `not("zzz")` <span class="op">=</span> <span class="fu">not</span><span class="op">(</span><span class="st">"zzz"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   `not_na()` <span class="op">=</span> <span class="fu">not_na</span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   `na()` <span class="op">=</span> <span class="fu">na</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   `not_blank()` <span class="op">=</span> <span class="fu">not_blank</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   `is_blank()` <span class="op">=</span> <span class="fu">is_blank</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`excludes("AL", "AK", "AZ")`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;modifier&gt;</span></span>
@@ -171,12 +173,12 @@ in the <a href="https://www.drupal.org/docs/core-modules-and-themes/core-modules
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Operator: </span><span style="color: #BB0000; font-weight: bold;">&lt;&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Value: </span><span style="color: #BBBB00;">zzz</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`not_na()`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`not_blank()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;modifier&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Operator: </span><span style="color: #BB0000; font-weight: bold;">&lt;&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Value: </span><span style="color: #BBBB00;">""</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`na()`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`is_blank()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">&lt;modifier&gt;</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Operator: </span><span style="color: #BB0000; font-weight: bold;">=</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Value: </span><span style="color: #BBBB00;">""</span></span>

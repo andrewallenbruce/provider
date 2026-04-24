@@ -13,9 +13,9 @@ contains(x)
 
 not(x)
 
-not_na()
+not_blank()
 
-na()
+is_blank()
 
 greater_than(x, equal = FALSE)
 
@@ -70,8 +70,8 @@ list(
    `between(0.125, 2)` = between(0.125, 2),
    `contains("baz")` = contains("baz"),
    `not("zzz")` = not("zzz"),
-   `not_na()` = not_na(),
-   `na()` = na()
+   `not_blank()` = not_blank(),
+   `is_blank()` = is_blank()
  )
 #> $`excludes("AL", "AK", "AZ")`
 #> <modifier>
@@ -123,12 +123,12 @@ list(
 #> Operator: <>
 #> Value: zzz
 #> 
-#> $`not_na()`
+#> $`not_blank()`
 #> <modifier>
 #> Operator: <>
 #> Value: ""
 #> 
-#> $`na()`
+#> $`is_blank()`
 #> <modifier>
 #> Operator: =
 #> Value: ""

@@ -18,9 +18,9 @@ clinicians(
   specialty = NULL,
   school = NULL,
   grad_year = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
+  org_city = NULL,
+  org_state = NULL,
+  org_zip = NULL,
   org_name = NULL,
   org_pac = NULL,
   count = FALSE,
@@ -78,7 +78,7 @@ clinicians(
 
   `<int>` Provider’s graduation year
 
-- city, state, zip:
+- org_city, org_state, org_zip:
 
   `<chr>` Facility's city, state, zip
 
@@ -131,7 +131,7 @@ A Clinician or Group must have:
 ## Examples
 
 ``` r
-clinicians(count = TRUE, org_name = not_na())
+clinicians(count = TRUE, org_name = not_blank())
 #> ✔ clinicians returned 2,586,064 results.
 
 clinicians(enid = "I20081002000549")

@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9098 (2026-04-24)
+
+- renamed modifiers `na()`/`not_na()` to
+  [`is_blank()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)/[`not_blank()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+- re-rendered README
+
 ## provider 0.0.1.9097 (2026-04-24)
 
 - added enums to
@@ -89,9 +95,7 @@
 
 ## provider 0.0.1.9077 (2026-04-15)
 
-- added
-  [`not_na()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  modifier
+- added `not_na()` modifier
 
 ## provider 0.0.1.9076 (2026-04-15)
 

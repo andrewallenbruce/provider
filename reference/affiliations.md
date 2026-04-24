@@ -26,9 +26,6 @@ affiliations(
 - [API: Physician Facility
   Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 
-- [Certification Number (CCN) State
-  Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
-
 ## Arguments
 
 - npi:

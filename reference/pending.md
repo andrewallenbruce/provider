@@ -48,31 +48,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ℹ pending has 9,580 rows.
-#> • Physician     : 3,537
-#> • Non-Physician : 6,043
+#> ℹ pending has 9,661 rows.
+#> • Physician     : 3,626
+#> • Non-Physician : 6,035
 
 pending(first = "Victor", count = TRUE)
-#> ✔ pending returned 6 results.
-#> • Physician     : 4
+#> ✔ pending returned 7 results.
+#> • Physician     : 5
 #> • Non-Physician : 2
 
 pending(first = starts_with("V"))
-#> ✔ pending returned 128 results.
-#> • Physician     : 41
-#> • Non-Physician : 87
-#> # A tibble: 128 × 4
-#>    prov_type first     last                    npi
-#>  * <chr>     <chr>     <chr>                 <int>
-#>  1 Physician VADIN     LALL DASS        1144512724
-#>  2 Physician VALENTINA LOGUNOVA         1871909960
-#>  3 Physician VALENTINA TURBAY CABALLERO 1689304545
-#>  4 Physician VALENTINE NRIAGU           1942904024
-#>  5 Physician VALERIE   SOTO             1215825310
-#>  6 Physician VALJEAN   BACOT-DAVIS      1407597651
-#>  7 Physician VANDAN    PATEL            1588308712
-#>  8 Physician VANESSA   NWOKOYE          1205530045
-#>  9 Physician VANSHANI  PATEL            1649118753
-#> 10 Physician VARUNIL   SHAH             1972442267
-#> # ℹ 118 more rows
+#> ✔ pending returned 121 results.
+#> • Physician     : 39
+#> • Non-Physician : 82
+#> # A tibble: 121 × 4
+#>    prov_type first        last                    npi
+#>  * <chr>     <chr>        <chr>                 <int>
+#>  1 Physician VADIN        LALL DASS        1144512724
+#>  2 Physician VALENTINA    TURBAY CABALLERO 1689304545
+#>  3 Physician VALERIE      SOTO             1215825310
+#>  4 Physician VALJEAN      BACOT-DAVIS      1407597651
+#>  5 Physician VANESSA      NWOKOYE          1205530045
+#>  6 Physician VANITA       JAYSWAL          1790626414
+#>  7 Physician VANSHANI     PATEL            1649118753
+#>  8 Physician VARUNIL      SHAH             1972442267
+#>  9 Physician VENKATARAMAN PATLA            1124038419
+#> 10 Physician VENNELA      PULIKANTI        1821238999
+#> # ℹ 111 more rows
 ```

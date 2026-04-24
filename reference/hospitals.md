@@ -4,6 +4,18 @@ Hospitals currently enrolled in Medicare. Data includes the hospital's
 sub-group types, legal business name, doing-business-as name,
 organization type and address.
 
+A list of all hospitals that have been registered with Medicare. The
+list includes addresses, phone numbers, hospital type, and overall
+hospital rating.
+
+\#' @source
+
+- [API: Hospital General
+  Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+
+- [API: Data
+  Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
+
 ## Usage
 
 ``` r
@@ -108,9 +120,9 @@ hospitals2(
 
 - prov_type:
 
-  `<enum>` Provider type;
+  `<enum>` Provider type:
 
-  - `hospital` = Part A Hospital
+  - `hospital` = Medicare Part A Hospital
 
   - `reh` = Rural Emergency Hospital
 
@@ -151,7 +163,7 @@ hospitals2(
 
 - hosp_type:
 
-  `<enum>` Provider type;
+  `<enum>` Provider type:
 
   - `acute` = Acute Care Hospitals
 
@@ -171,7 +183,7 @@ hospitals2(
 
 - ownership:
 
-  `<enum>` Provider type;
+  `<enum>` Ownership type:
 
   - `private` = Voluntary non-profit - Private
 
@@ -209,7 +221,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ℹ hospitals has 9,187 rows.
+#> ℹ hospitals has 9,182 rows.
 
 hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
