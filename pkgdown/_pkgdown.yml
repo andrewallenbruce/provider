@@ -90,15 +90,14 @@ reference:
 
 - subtitle: General
   desc: >
-    Current Provider Data
+    General Provider Data
   contents:
   - affiliations
   - reassignments
-  - revocations
   - nppes
 - subtitle: Individual
   desc: >
-    Current Individual Providers
+    Individual Provider Data
   contents:
   - clinicians
   - opt_out
@@ -107,14 +106,19 @@ reference:
   - providers
 - subtitle: Organizational
   desc: >
-    Current Organizational Providers
+    Organizational Provider Data
   contents:
   - clia
   - hospitals
   - hrsa
-  - transparency
   - rhc_enroll
   - rhc_owner
+- subtitle: Sanctions
+  desc: >
+    Providers who have incurred penalties or corrective actions
+  contents:
+  - revocations
+  - transparency
 
 - title: Query Modifiers
   contents:

@@ -4,12 +4,56 @@
 \alias{rhc_enroll}
 \title{Rural Health Clinics}
 \usage{
-rhc_enroll(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+rhc_enroll(
+  npi = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
+  enid_state = NULL,
+  org_name = NULL,
+  dba_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  multi = NULL,
+  status = NULL,
+  org_type = NULL,
+  count = FALSE,
+  set = FALSE
+)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{first, last}{\verb{<chr>} Provider's name}
+\item{ccn}{\verb{<int>} CMS Certification Number}
+
+\item{pac}{\verb{<chr>} PECOS Associate Control ID}
+
+\item{enid, enid_state}{\verb{<chr>} Medicare Enrollment ID, Enrollment state}
+
+\item{org_name}{\verb{<chr>} Legal business name}
+
+\item{dba_name}{\verb{<chr>} Doing-business-as name}
+
+\item{city, state, zip}{\verb{<chr>} Location city, state, zip}
+
+\item{multi}{\verb{<lgl>} Does hospital have more than one NPI?}
+
+\item{status}{\verb{<enum>} Organization status
+\itemize{
+\item \code{P} = Proprietary
+\item \code{N} = Non-Profit
+\item \code{D} = Unknown
+}}
+
+\item{org_type}{\verb{<enum>} Organization structure type
+\itemize{
+\item \code{corp} = Corporation
+\item \code{other} = Other
+\item \code{llc} = LLC
+\item \code{part} = Partnership
+\item \code{sole} = Sole Proprietor
+}}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 

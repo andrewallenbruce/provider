@@ -18,6 +18,9 @@ uuid_cms <- function(endpoint) {
     rhc_enroll = "3b7e7659-067e-41ea-8e36-f9ee2036e1f6",
     rhc_owner = "ab03c9bc-0c22-4ca4-b032-21dd3408210d",
 
+    fqhc_enroll = "4bcae866-3411-439a-b762-90a6187c194b",
+    fqhc_owner = "ed289c89-0bb8-4221-a20a-85776066381b",
+
     rhc = list(
       Enrollment = "3b7e7659-067e-41ea-8e36-f9ee2036e1f6",
       Owners = "ab03c9bc-0c22-4ca4-b032-21dd3408210d"

@@ -250,8 +250,6 @@ column_renames <- function(endpoint) {
     rhc_enroll = c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
-      `PROVIDER TYPE CODE` = "prov_type",
-      `PROVIDER TYPE TEXT` = "prov_desc",
       NPI = "npi",
       `MULTIPLE NPI FLAG` = "multi",
       CCN = "ccn",
