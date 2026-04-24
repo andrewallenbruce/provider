@@ -96,6 +96,31 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       part = "PARTNERSHIP",
       sole = "SOLE PROPRIETOR"
     ),
+    # <hospitals2>
+    ownership = c(
+      dod = "Department of Defense",
+      profit = "Proprietary",
+      physician = "Physician",
+      tribal = "Tribal",
+      private = "Voluntary non-profit - Private",
+      other = "Voluntary non-profit - Other",
+      church = "Voluntary non-profit - Church",
+      district = "Government - Hospital District or Authority",
+      local = "Government - Local",
+      federal = "Government - Federal",
+      state = "Government - State",
+      vha = "Veterans Health Administration"
+    ),
+    hosp_type = c(
+      acute = "Acute Care Hospitals",
+      cah = "Critical Access Hospitals",
+      child = "Childrens",
+      dod = "Acute Care - Department of Defense",
+      ltc = "Long-term",
+      psych = "Psychiatric",
+      reh = "Rural Emergency Hospital",
+      vha = "Acute Care - Veterans Administration"
+    ),
     cli::cli_abort(
       "{.val {arg}} is not an {.cls enum}",
       arg = arg,

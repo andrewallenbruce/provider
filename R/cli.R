@@ -13,7 +13,7 @@ cli_apis <- function(x) {
 #' @noRd
 cli_no_query <- function(endpoint) {
   cli::cli_alert_warning(
-    "{.strong {endpoint}} {cli::symbol$circle} {.emph No Query}"
+    "{.strong {endpoint}} {cli::symbol$pointer} {.emph No Query}"
   )
   cli::cli_alert_info("Returning first {.strong 10} rows...")
 }

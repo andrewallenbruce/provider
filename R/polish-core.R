@@ -1,9 +1,18 @@
 #' @noRd
 polish <- function(x, endpoint, id = NULL) {
   replace_nz(x) |>
-    rename_with(c(id %&&% set_names(id), column_renames(endpoint))) |>
+    rename_with(nm = c(id %&&% set_names(id), column_renames(endpoint))) |>
     recode_with(endpoint) |>
     data_frame()
+}
+
+#' @noRd
+rename_with <- function(x, nm) {
+  if (rlang::is_null(nm)) {
+    return(x)
+  }
+  collapse::setrename(x, nm, .nse = FALSE)
+  collapse::gv(x, unlist_(nm))
 }
 
 #' @noRd
@@ -21,6 +30,11 @@ replace_nz <- function(i) {
 #' @noRd
 rc_integer <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as.integer)
+}
+
+#' @noRd
+rc_integer_supp <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as_integer_supp)
 }
 
 #' @noRd
@@ -56,6 +70,11 @@ bin_col <- function(x) {
     "N" ~ 0L,
     .default = NA_integer_
   )
+}
+
+#' @noRd
+as_integer_supp <- function(x, ...) {
+  suppressWarnings(as.integer(x, ...))
 }
 
 #' @noRd

@@ -5,6 +5,7 @@ recode_with <- function(x, endpoint) {
     affiliations = RC_affiliations(x),
     clinicians = RC_clinicians(x),
     hospitals = RC_hospitals(x),
+    hospitals2 = RC_hospitals2(x),
     opt_out = RC_opt_out(x),
     order_refer = RC_order_refer(x),
     pending = RC_pending(x),
@@ -48,6 +49,12 @@ RC_hospitals <- function(x) {
       add_1 = NULL,
       add_2 = NULL
     )
+}
+
+#' @noRd
+#' @autoglobal
+RC_hospitals2 <- function(x) {
+  rc_integer_supp(x, "rating")
 }
 
 #' @noRd

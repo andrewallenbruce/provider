@@ -1,13 +1,4 @@
 #' @noRd
-rename_with <- function(x, nm) {
-  if (rlang::is_null(nm)) {
-    return(x)
-  }
-  collapse::setrename(x, nm, .nse = FALSE)
-  collapse::gv(x, unlist_(nm))
-}
-
-#' @noRd
 column_renames <- function(endpoint) {
   switch(
     endpoint,
@@ -89,15 +80,15 @@ column_renames <- function(endpoint) {
     hospitals2 = c(
       facility_id = "ccn",
       facility_name = "org_name",
+      hospital_type = "hosp_type",
+      hospital_ownership = "ownership",
+      hospital_overall_rating = "rating",
       address = "address",
       citytown = "city",
       state = "state",
       zip_code = "zip",
       countyparish = "county",
-      telephone_number = "phone",
-      hospital_type = "type",
-      hospital_ownership = "owner",
-      hospital_overall_rating = "rating"
+      telephone_number = "phone"
     ),
     clia = c(
       FAC_NAME = "fac_name_1",

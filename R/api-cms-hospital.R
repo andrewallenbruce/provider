@@ -48,7 +48,8 @@
 #'
 #' hospitals2(count = TRUE)
 #'
-#' hospitals(prov_type = "reh")
+#' hospitals(prov_type = "reh", count = TRUE)
+#' hospitals2(hosp_type = "reh", count = TRUE)
 #'
 #' x <- hospitals(
 #'   city = "Atlanta",
@@ -65,6 +66,7 @@
 #'
 #' hospitals(ccn = x$ccn)
 #'
+#' hospitals2(state = "GA", rating = 5) |> str()
 #' @autoglobal
 #' @export
 hospitals <- function(
