@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9096 (2026-04-24)
+
+- added `set` param to prov endpoints
+
 ## provider 0.0.1.9095 (2026-04-24)
 
 - added fqhc\_\* endpoints

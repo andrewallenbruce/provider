@@ -14,7 +14,8 @@ hospitals2(
   county = NULL,
   hosp_type = NULL,
   ownership = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -47,3 +48,7 @@ hospitals2(
 - count:
 
   `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset

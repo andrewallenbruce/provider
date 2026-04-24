@@ -16,7 +16,8 @@ affiliations(
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -74,7 +75,11 @@ affiliations(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 

@@ -23,7 +23,8 @@ clinicians(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
-  count = FALSE
+  count = FALSE,
+  set = FALSE
 )
 ```
 
@@ -91,7 +92,11 @@ clinicians(
 
 - count:
 
-  `<lgl>` Return the dataset's total row count
+  `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
 
 ## Value
 
