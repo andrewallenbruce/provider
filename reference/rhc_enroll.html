@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9090</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9091</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,23 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rhc_enroll</span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, first <span class="op">=</span> <span class="cn">NULL</span>, last <span class="op">=</span> <span class="cn">NULL</span>, count <span class="op">=</span> <span class="cn">FALSE</span>, set <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rhc_enroll</span><span class="op">(</span></span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enid_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dba_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,8 +81,48 @@
 <dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
 
 
-<dt id="arg-first-last">first, last<a class="anchor" aria-label="anchor" href="#arg-first-last"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+<dt id="arg-ccn">ccn<a class="anchor" aria-label="anchor" href="#arg-ccn"></a></dt>
+<dd><p><code>&lt;int&gt;</code> CMS Certification Number</p></dd>
+
+
+<dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> PECOS Associate Control ID</p></dd>
+
+
+<dt id="arg-enid-enid-state">enid, enid_state<a class="anchor" aria-label="anchor" href="#arg-enid-enid-state"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Medicare Enrollment ID, Enrollment state</p></dd>
+
+
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Legal business name</p></dd>
+
+
+<dt id="arg-dba-name">dba_name<a class="anchor" aria-label="anchor" href="#arg-dba-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Doing-business-as name</p></dd>
+
+
+<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Location city, state, zip</p></dd>
+
+
+<dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Does hospital have more than one NPI?</p></dd>
+
+
+<dt id="arg-status">status<a class="anchor" aria-label="anchor" href="#arg-status"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Organization status</p><ul><li><p><code>P</code> = Proprietary</p></li>
+<li><p><code>N</code> = Non-Profit</p></li>
+<li><p><code>D</code> = Unknown</p></li>
+</ul></dd>
+
+
+<dt id="arg-org-type">org_type<a class="anchor" aria-label="anchor" href="#arg-org-type"></a></dt>
+<dd><p><code>&lt;enum&gt;</code> Organization structure type</p><ul><li><p><code>corp</code> = Corporation</p></li>
+<li><p><code>other</code> = Other</p></li>
+<li><p><code>llc</code> = LLC</p></li>
+<li><p><code>part</code> = Partnership</p></li>
+<li><p><code>sole</code> = Sole Proprietor</p></li>
+</ul></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -85,16 +141,14 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rhc_enroll</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">rhc_enroll</span> has <span style="font-weight: bold;">5,454</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">rhc_enroll</span> has <span style="font-weight: bold;">5,530</span> rows.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rhc_enroll</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">rhc_enroll</span> ✖ <span style="font-style: italic;">No Query</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">rhc_enroll</span> ◯ <span style="font-style: italic;">No Query</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [10 × 21] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [10 × 19] (S3: tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid      : chr [1:10] "O20020813000023" "O20020813000025" "O20020814000001" "O20020814000004" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid_state: chr [1:10] "ND" "ND" "SD" "ND" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prov_type : chr [1:10] "00-17" "00-17" "00-17" "00-17" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prov_desc : chr [1:10] "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi       : chr [1:10] "1497856025" "1760570394" "1801987904" "1831286160" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi     : chr [1:10] "N" "N" "N" "N" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn       : chr [1:10] "353982" "353983" "433987" "353981" ...</span>

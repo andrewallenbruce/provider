@@ -5,7 +5,23 @@ Providers with pending Medicare enrollment applications.
 ## Usage
 
 ``` r
-rhc_enroll(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+rhc_enroll(
+  npi = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
+  enid_state = NULL,
+  org_name = NULL,
+  dba_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  multi = NULL,
+  status = NULL,
+  org_type = NULL,
+  count = FALSE,
+  set = FALSE
+)
 ```
 
 ## Arguments
@@ -14,9 +30,57 @@ rhc_enroll(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
 
   `<int>` National Provider Identifier
 
-- first, last:
+- ccn:
 
-  `<chr>` Provider's name
+  `<int>` CMS Certification Number
+
+- pac:
+
+  `<chr>` PECOS Associate Control ID
+
+- enid, enid_state:
+
+  `<chr>` Medicare Enrollment ID, Enrollment state
+
+- org_name:
+
+  `<chr>` Legal business name
+
+- dba_name:
+
+  `<chr>` Doing-business-as name
+
+- city, state, zip:
+
+  `<chr>` Location city, state, zip
+
+- multi:
+
+  `<lgl>` Does hospital have more than one NPI?
+
+- status:
+
+  `<enum>` Organization status
+
+  - `P` = Proprietary
+
+  - `N` = Non-Profit
+
+  - `D` = Unknown
+
+- org_type:
+
+  `<enum>` Organization structure type
+
+  - `corp` = Corporation
+
+  - `other` = Other
+
+  - `llc` = LLC
+
+  - `part` = Partnership
+
+  - `sole` = Sole Proprietor
 
 - count:
 
@@ -34,16 +98,14 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 rhc_enroll(count = TRUE)
-#> ℹ rhc_enroll has 5,454 rows.
+#> ℹ rhc_enroll has 5,530 rows.
 
 rhc_enroll() |> str()
-#> ! rhc_enroll ✖ No Query
+#> ! rhc_enroll ◯ No Query
 #> ℹ Returning first 10 rows...
-#> tibble [10 × 21] (S3: tbl_df/tbl/data.frame)
+#> tibble [10 × 19] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000023" "O20020813000025" "O20020814000001" "O20020814000004" ...
 #>  $ enid_state: chr [1:10] "ND" "ND" "SD" "ND" ...
-#>  $ prov_type : chr [1:10] "00-17" "00-17" "00-17" "00-17" ...
-#>  $ prov_desc : chr [1:10] "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" "PART A PROVIDER - RURAL HEALTH CLINIC" ...
 #>  $ npi       : chr [1:10] "1497856025" "1760570394" "1801987904" "1831286160" ...
 #>  $ multi     : chr [1:10] "N" "N" "N" "N" ...
 #>  $ ccn       : chr [1:10] "353982" "353983" "433987" "353981" ...

@@ -1,5 +1,12 @@
 # Changelog
 
+## provider 0.0.1.9091 (2026-04-24)
+
+- updated S7 dependency
+- filled out
+  [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/rhc_enroll.md)
+  structure
+
 ## provider 0.0.1.9090 (2026-04-18)
 
 - initial rhc\_\* impls

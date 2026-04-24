@@ -145,8 +145,8 @@ hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
 
 hospitals(prov_type = "reh")
-#> ✔ hospitals returned 44 results.
-#> # A tibble: 44 × 37
+#> ✔ hospitals returned 48 results.
+#> # A tibble: 48 × 37
 #>    org_name      org_dba enid  enid_state prov_type prov_desc    npi multi ccn  
 #>  * <chr>         <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr>
 #>  1 GUADALUPE CO… GUADAL… O202… NM         00-24     PART A P… 1.35e9     0 3207…
@@ -159,7 +159,7 @@ hospitals(prov_type = "reh")
 #>  8 STILLWATER M… STILLW… O202… OK         00-24     PART A P… 1.10e9     0 3707…
 #>  9 OUR LADY OF … NA      O202… LA         00-24     PART A P… 1.61e9     0 1907…
 #> 10 STURGIS HOSP… STURGI… O202… MI         00-24     PART A P… 1.60e9     0 2307…
-#> # ℹ 34 more rows
+#> # ℹ 38 more rows
 #> # ℹ 28 more variables: pac <chr>, inc_date <date>, inc_state <chr>,
 #> #   org_type <chr>, org_otxt <chr>, status <chr>, city <chr>, state <chr>,
 #> #   zip <chr>, loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
@@ -197,7 +197,7 @@ hospitals2(ccn = x$ccn)
 #> 2 114032 SO CRESCENT … 5454 Y… COLL… GA    30349 FULTON (770… Psyc… Gove… Not A…
 
 x <- hospitals2()
-#> ! hospitals2 ✖ No Query
+#> ! hospitals2 ◯ No Query
 #> ℹ Returning first 10 rows...
 x
 #> # A tibble: 10 × 11

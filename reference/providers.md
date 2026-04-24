@@ -85,14 +85,14 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ℹ providers has 2,957,262 rows.
+#> ℹ providers has 2,981,799 rows.
 
 providers(count = TRUE, org_name = not_na())
-#> ✔ providers returned 433,293 results.
+#> ✔ providers returned 433,496 results.
 
 providers(org_name = starts_with("Z"))
-#> ✔ providers returned 873 results.
-#> # A tibble: 873 × 11
+#> ✔ providers returned 884 results.
+#> # A tibble: 884 × 11
 #>    org_name      first middle last  state prov_type prov_desc    npi multi pac  
 #>  * <chr>         <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>
 #>  1 Z & B HEALTH… NA    NA     NA    TX    00-08     PART A P… 1.53e9     0 1254…
@@ -105,6 +105,6 @@ providers(org_name = starts_with("Z"))
 #>  8 Z AND Z PODI… NA    NA     NA    CA    12-70     PART B S… 1.98e9     0 8224…
 #>  9 Z AND Z PODI… NA    NA     NA    NV    30-48     DME SUPP… 1.98e9     0 8224…
 #> 10 Z AUDIOLOGY … NA    NA     NA    FL    12-70     PART B S… 1.35e9     0 9436…
-#> # ℹ 863 more rows
+#> # ℹ 874 more rows
 #> # ℹ 1 more variable: enid <chr>
 ```
