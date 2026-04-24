@@ -76,6 +76,7 @@ clia <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_character(certificate, allow_null = TRUE)
   check_character(accreditation, allow_null = TRUE)
   check_bool(compliant, allow_null = TRUE)

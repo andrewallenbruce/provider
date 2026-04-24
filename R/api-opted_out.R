@@ -60,6 +60,7 @@ opt_out <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_bool(order_refer, allow_null = TRUE)
 
   exec_cms(

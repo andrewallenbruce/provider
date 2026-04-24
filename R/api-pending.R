@@ -35,6 +35,7 @@ pending <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   exec_cms2(
     COUNT = count,
     SET = set,

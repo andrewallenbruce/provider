@@ -50,6 +50,7 @@ fqhc_enroll <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_bool(multi, allow_null = TRUE)
   check_character(status, allow_null = TRUE)
   check_character(org_type, allow_null = TRUE)

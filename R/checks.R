@@ -6,12 +6,25 @@ check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
 }
 
 #' @noRd
-check_online <- function() {
+check_count_set <- function(count, set, call = caller_env()) {
+  if (count && set) {
+    cli::cli_abort(
+      "Exactly {.emph one} of {.arg count} or {.arg set} can be set to {.val TRUE}.",
+      call = call
+    )
+  }
+}
+
+#' @noRd
+check_online <- function(call = caller_env()) {
   if (!httr2::is_online()) {
-    cli::cli_abort(c(
-      "You are not online.",
-      "i" = "Check your internet connection."
-    ))
+    cli::cli_abort(
+      c(
+        "You are not online.",
+        "i" = "Check your internet connection."
+      ),
+      call = call
+    )
   }
 }
 
@@ -58,8 +71,10 @@ check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
     if (any2(unlist_(x) %in% c("ENDS WITH", "NOT+IN"))) {
       cli::cli_abort(
-        c("Invalid {.cls modifier} usage: ",
-          "x" = "{.fn ends_with} & {.fn excludes} cannot be used with {.fn {end}}."),
+        c(
+          "Invalid {.cls modifier} usage: ",
+          "x" = "{.fn ends_with} & {.fn excludes} cannot be used with {.fn {end}}."
+        ),
         call = call2(end)
       )
     }

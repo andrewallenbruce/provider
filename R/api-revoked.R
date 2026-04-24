@@ -52,6 +52,7 @@ revocations <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_bool(multi, allow_null = TRUE)
 
   exec_cms(

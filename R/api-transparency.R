@@ -72,6 +72,7 @@ transparency <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_character(action, allow_null = TRUE)
 
   exec_cms(

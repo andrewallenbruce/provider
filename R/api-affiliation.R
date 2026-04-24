@@ -52,6 +52,7 @@ affiliations <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_character(facility_type, allow_null = TRUE)
 
   exec_prov(

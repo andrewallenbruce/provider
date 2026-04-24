@@ -57,6 +57,7 @@ order_refer <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_bool(ptb, allow_null = TRUE)
   check_bool(dme, allow_null = TRUE)
   check_bool(hha, allow_null = TRUE)

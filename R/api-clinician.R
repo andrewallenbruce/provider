@@ -70,6 +70,7 @@ clinicians <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   check_character(gender, allow_null = TRUE)
   check_numeric(grad_year, allow_null = TRUE)
 

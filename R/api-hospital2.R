@@ -52,6 +52,7 @@ hospitals2 <- function(
   count = FALSE,
   set = FALSE
 ) {
+  check_count_set(count, set)
   exec_prov(
     COUNT = count,
     SET = set,

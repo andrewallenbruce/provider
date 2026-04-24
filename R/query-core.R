@@ -46,12 +46,6 @@ query_cms <- function(x, N) {
   )
 }
 
-#' @noRd
-arg_cms <- S7::new_class("arg_cms", S7::class_list, NULL)
-
-#' @noRd
-arg_prov <- S7::new_class("arg_prov", S7::class_list, NULL)
-
 S7::method(build, arg_cms) <- function(x) {
   S7::S7_data(x) |>
     purrr::imap(\(x, n) query_cms(x, n)) |>

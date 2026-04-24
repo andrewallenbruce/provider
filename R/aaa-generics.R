@@ -1,4 +1,10 @@
 #' @noRd
+arg_cms <- S7::new_class("arg_cms", S7::class_list, NULL)
+
+#' @noRd
+arg_prov <- S7::new_class("arg_prov", S7::class_list, NULL)
+
+#' @noRd
 build <- S7::new_generic("build", "x")
 
 #' @noRd
