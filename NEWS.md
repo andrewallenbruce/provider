@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9091 (2026-04-24)
+
+* updated S7 dependency
+* filled out `rhc_enroll()` structure
+
+
 # provider 0.0.1.9090 (2026-04-18)
 
 * initial rhc_* impls
