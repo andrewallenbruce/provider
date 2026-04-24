@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9100 (2026-04-24)
+
+- init S7 execute method
+
 ## provider 0.0.1.9099 (2026-04-24)
 
 - streamlining req\_\* methods
