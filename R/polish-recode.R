@@ -13,7 +13,7 @@ recode_with <- function(x, endpoint) {
     revocations = RC_revocations(x),
     transparency = RC_transparency(x),
     rhc_enroll = RC_rhc_enroll(x),
-    rhc_owners = RC_rhc_owners(x),
+    rhc_owner = RC_rhc_owner(x),
     x
   )
 }
@@ -105,10 +105,10 @@ RC_rhc_enroll <- function(x) {
 
 #' @noRd
 #' @autoglobal
-RC_rhc_owners <- function(x) {
+RC_rhc_owner <- function(x) {
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
-    collapse::gvr(x, "multi|_ind$", return = 2L) |>
+    rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>
     rc_date_ymd("own_date") |>
     collapse::mtt(
       own_add = combine_cols(own_add_1, own_add_2),
