@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9099 (2026-04-24)
+
+- streamlining req\_\* methods
+
 ## provider 0.0.1.9098 (2026-04-24)
 
 - renamed modifiers `na()`/`not_na()` to

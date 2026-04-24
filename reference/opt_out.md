@@ -114,7 +114,7 @@ opt_out(npi = 1043522824)
 #> 1 1043522824 James Smith Nurse Pra… 2019-07-01 2027-07-01 2025-08-15 SCOT… AZ   
 #> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 opt_out(state = "AK")
-#> ✔ opt_out returned 258 results.
+#> ✔ opt_out returned 260 results.
 #> # A tibble: 260 × 12
 #>           npi first last  specialty start_date end_date   updated    city  state
 #>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
@@ -131,7 +131,7 @@ opt_out(state = "AK")
 #> # ℹ 250 more rows
 #> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#> ✔ opt_out returned 798 results.
+#> ✔ opt_out returned 813 results.
 #> # A tibble: 798 × 12
 #>           npi first last  specialty start_date end_date   updated    city  state
 #>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>

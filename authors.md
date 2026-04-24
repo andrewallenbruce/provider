@@ -10,13 +10,13 @@ Source:
 [`DESCRIPTION`](https://github.com/andrewallenbruce/provider/blob/main/DESCRIPTION)
 
 Bruce AA (2026). *provider: Tidy Healthcare Provider API Interface*. R
-package version 0.0.1.9098,
+package version 0.0.1.9099,
 <https://andrewallenbruce.github.io/provider/>.
 
     @Manual{,
       title = {provider: Tidy Healthcare Provider API Interface},
       author = {Andrew Allen Bruce},
       year = {2026},
-      note = {R package version 0.0.1.9098},
+      note = {R package version 0.0.1.9099},
       url = {https://andrewallenbruce.github.io/provider/},
     }
