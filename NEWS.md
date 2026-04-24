@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9092 (2026-04-24)
+
+* refactored polish_recode methods
+
+
 # provider 0.0.1.9091 (2026-04-24)
 
 * updated S7 dependency
