@@ -29,7 +29,7 @@
 #' @returns A [tibble][tibble::tibble-package]
 #'
 #' @examplesIf httr2::is_online()
-#' affiliations(middle = "", count = TRUE)
+#' affiliations(count = TRUE)
 #'
 #' affiliations(facility_ccn = "33Z302")
 #'

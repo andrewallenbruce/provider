@@ -70,7 +70,7 @@ flatten_url <- function(base, args = NULL, opts = NULL) {
 
 #' @noRd
 opts_cms <- function(size = 5000L, offset = 0L) {
-  flatten_opts(params(size = size, offset = 0L))
+  flatten_opts(params(size = size, offset = offset))
 }
 
 #' @noRd
@@ -133,9 +133,8 @@ parse_string <- function(resp, query = NULL) {
 #' @noRd
 base_request <- function(url, query = NULL) {
   httr2::request(url) |>
-    httr2::req_error(body = function(resp) {
-      httr2::resp_body_json(resp)$message
-    }) |>
+    httr2::req_retry(retry_on_failure = TRUE, max_tries = 2) |>
+    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }

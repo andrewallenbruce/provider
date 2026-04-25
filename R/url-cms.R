@@ -1,3 +1,8 @@
+# multi = S7::new_property(S7::class_logical, getter = \(self) {
+#   length(self@url) > 1L
+# }),
+# id = NULL | S7::class_character
+
 #' @noRd
 URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
 

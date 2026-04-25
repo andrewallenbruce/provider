@@ -1,66 +1,80 @@
 #' @noRd
 execute <- S7::new_generic("execute", "x")
 
-# enrolled(org_name = not_blank(), count = TRUE)
 #' @noRd
 base_cms2 <- S7::new_class(
   "base_cms2",
   package = NULL,
   properties = list(
     end = S7::class_character,
-    count = S7::new_property(S7::class_logical, default = FALSE),
-    set = S7::new_property(S7::class_logical, default = FALSE),
-    limit = S7::new_property(S7::class_integer, default = 5000L),
-    query = arg_cms,
-    query_empty = S7::new_property(
-      S7::class_logical,
-      getter = function(self) length(self@query) == 0L
-    ),
     url = S7::new_property(
-      S7::class_character | S7::class_list,
+      S7::class_character,
       getter = function(self) {
-        uid <- uuid_cms(self@end)
-        url <- paste0(URL_CMS[1], uid, URL_CMS[2])
-        if (rlang::is_list(uid)) set_names2(as.list(url), uid) else url
+        paste0(URL_CMS[1], uuid_cms(self@end), URL_CMS[2])
       }
     ),
-    url_multi = S7::new_property(
-      S7::class_logical,
-      getter = function(self) length(self@url) > 1L
+    count = S7::class_logical,
+    set = S7::class_logical,
+    limit = S7::new_property(S7::class_integer, default = 5000L),
+    arg = arg_cms,
+    query = S7::new_property(S7::class_character, getter = function(self) {
+        if (length(self@arg) != 0L) build(self@arg)
+      }
     ),
-    url_id = NULL | S7::class_character
+    N = S7::new_property(S7::class_integer,
+      getter = function(self) {
+        url <- paste0(self@url, "/stats?")
+        if (self@set || (self@count && !length(self@arg))) {
+          return(base_request(flatten_url(url), "total_rows"))
+        }
+        if (self@count || length(self@arg)) {
+          return(base_request(flatten_url(url, self@query), "found_rows"))
+        }
+      }
+    )
   )
 )
 
-#' @noRd
-S7::method(req_total, base_cms2) <- function(x) {
-  url <- flatten_url(paste0(x@url, "/stats?"))
+# enrolled(count = TRUE)
+# enrolled(set = TRUE)
+# enrolled(org_name = starts_with("Z"))
+# enrolled(org_name = starts_with("AB"), state = c("TX", "CA"), multi = TRUE)
+# req_empty(enrolled())
+# req_single(enrolled(org_name = starts_with("AB"), state = c("TX", "CA")))
+# req_multi(enrolled(org_name = starts_with("U")))
 
-  if (x@mult) {
-    return(multi_count(url, x@url, "total_rows"))
-  }
-  base_request(url, "total_rows")
+#' @noRd
+S7::method(req_empty, base_cms2) <- function(x) {
+  cli_no_query(x@end)
+  base_request(flatten_url(paste0(x@url, "?"), opts = opts_cms(size = 10L)))
 }
 
 #' @noRd
-S7::method(execute, base_cms2) <- function(x) {
-  if (x@query_empty) {
-    if (x@set) {
-      N <- req_count(x)
-      cli_pages2(N, x@limit, x@end)
-      return(
-        req_multi(x, count = N, id = .id)
-      )
-    }
+S7::method(req_single, base_cms2) <- function(x) {
+  base_request(flatten_url(paste0(x@url, "?"), x@query, opts_cms()))
+}
 
-    if (x@count) {
-      N <- req_count(x)
-      cli_total2(N, x@end)
-      return(invisible(N))
-    }
+#' @noRd
+S7::method(req_multi, base_cms2) <- function(x, count) {
+  base_parallel(
+    flatten_url(
+      paste0(x@url, "?"),
+      x@query,
+      opts_cms(offset = "<<i>>")),
+    x@N,
+    x@limit
+  )
+}
 
-    return(req_empty(x, .id))
-  }
+#' @noRd
+S7::method(req_set, base_cms2) <- function(x) {
+  base_parallel(
+    flatten_url(
+      paste0(x@url, "?"),
+      opts = opts_cms(offset = "<<i>>")),
+    x@N,
+    x@limit
+  )
 }
 
 #' Enrollment in Medicare
@@ -113,12 +127,12 @@ enrolled <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  check_bool(multi, allow_null = TRUE)
+  check_bool_(multi)
   base_cms2(
     end = "providers",
     count = count,
     set = set,
-    query = param_cms(
+    arg = param_cms(
       NPI = npi,
       MULTIPLE_NPI_FLAG = bool_(multi),
       PECOS_ASCT_CNTL_ID = pac,
