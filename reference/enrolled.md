@@ -87,7 +87,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 enrolled(count = TRUE)
 #> ℹ providers has 2,981,799 rows.
 enrolled(count = TRUE, org_name = not_blank())
-#> ℹ providers has 433,496 rows.
+#> ✔ providers returned 433,496 results.
 enrolled()
 #> ! providers ❯ No Query
 #> ℹ Returning first 10 rows...
