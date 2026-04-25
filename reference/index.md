@@ -6,10 +6,6 @@
 
 General Provider Data
 
-- [`affiliated()`](https://andrewallenbruce.github.io/provider/reference/affiliated.md)
-  : Provider-Facility Affiliations
-- [`enrolled()`](https://andrewallenbruce.github.io/provider/reference/enrolled.md)
-  : Enrollment in Medicare
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
   : Provider-Facility Affiliations
 - [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)

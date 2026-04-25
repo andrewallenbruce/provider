@@ -84,10 +84,10 @@ A `<subgroups>` object
 
 ``` r
 subgroups(acute = TRUE, rehab = TRUE)
-#> <subgroups[2]>
+#> ══ <subgroups[2]> ════
 #> • SUBGROUP %2D ACUTE CARE     : Y
 #> • SUBGROUP %2D REHABILITATION : Y
 
 subgroups()
-#> <subgroups[0]>
+#> ══ <subgroups[0]> ════
 ```
