@@ -50,106 +50,121 @@ pak::pak("andrewallenbruce/provider")
 library(provider)
 ```
 
+##### Facility Affiliations
+
 ```{r}
 #| label: affiliation
-# Provider/Facility Affiliations
-affiliations(first = starts_with("Ab"), facility_type = "ltch")
+affiliations(
+  first = starts_with("Ab"), 
+  facility_type = "ltch")
 ```
+
+##### Reassignment of Benefits
 
 ```{r}
 #| label: reassignment
-# Reassignment of Benefits
 reassignments(
-  first = starts_with("J"), 
-  state = "MI", 
-  employers = greater_than(20, equal = TRUE))
+  state = "NY",
+  employers = greater_than(50, equal = TRUE))
 ```
+
+##### Revoked Medicare Providers
 
 ```{r}
 #| label: revoked
-# Revoked Medicare Providers
-revocations(org_name = starts_with("B"), state = "GA")
+revocations(
+  org_name = starts_with("C"),
+  state = "GA")
 ```
+
+##### Clinician Demographics
 
 ```{r}
 #| label: clinician
-# Clinician Demographics
 clinicians(
   org_state = "GA", 
   org_name = starts_with("North"),
   gender = "M",
   specialty = "Nurse Practitioner",
-  grad_year = 2023:2025)
+  grad_year = 2023:2026)
 ```
+
+##### Opt-Out Affidavits
 
 ```{r}
 #| label: opted_out
-# Opt-Out Affidavits
 opt_out(
-  first = starts_with("Bo"),
-  specialty = contains("Obstetrics"))
+  first = starts_with("B"),
+  specialty = starts_with("Oral"))
 ```
+
+##### Order & Referral Eligibility
 
 ```{r}
 #| label: order_refer
-# Ordering & Referral Eligibility
 order_refer(
-  first = contains("ABAY"),
+  first = contains("LESS"),
   ptb = TRUE,
-  dme = TRUE,
+  hospice = FALSE,
   hha = FALSE)
 ```
 
-```{r}
-#| label: pending
-# Pending Enrollments
-pending(
-  first = starts_with("A"),
-  last = ends_with("E"))
-```
+##### Medicare Enrollments
 
 ```{r}
 #| label: enrolled
-# Medicare Enrollment
 providers(
-  org_name = contains("ARL"),
-  state = "AL")
+  org_name = contains("Rehab"),
+  state = "AL",
+  prov_type = ends_with(18))
 ```
+
+##### Pending Enrollments
+
+```{r}
+#| label: pending
+pending(
+  first = contains("A"),
+  last = ends_with("E"))
+```
+
+##### Medicare Part A Hospitals
 
 ```{r}
 #| label: hospital
-# Medicare Part A Hospitals
 hospitals(
-  dba_name = starts_with("Pied"),
+  org_dba = starts_with("A"),
   state = "GA",
   subgroup = subgroups(
     psych = FALSE,
     psych_unit = TRUE))
 ```
 
+##### CLIA Laboratories
+
 ```{r}
 #| label: clia
-# CLIA Laboratories
-clia(city = "Valdosta", parent_ccn = not_blank())
+clia(
+  state = "GA",
+  parent_ccn = not_blank())
 ```
+
+##### Hospital Transparency Enforcement
 
 ```{r}
 #| label: transparency
-# Hospital Transparency Enforcement
-transparency(action = "warn", state = "GA")
+transparency(
+  action = "closure", 
+  state = "GA")
 ```
-
-<br>
 
 ------------------------------------------------------------------------------
 
-<br>
+### :balance_scale: Code of Conduct
 
-## :balance_scale: Code of Conduct
-
-Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the **`provider`** project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
 
-## :classical_building: Governance
+### :classical_building: Governance
 
 This project is primarily maintained by [Andrew Bruce](https://github.com/andrewallenbruce). Other authors may occasionally assist with some of these duties.

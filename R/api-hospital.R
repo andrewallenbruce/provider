@@ -12,7 +12,7 @@
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid,enid_state `<chr>` Medicare Enrollment ID, Enrollment state
 #' @param org_name `<chr>` Legal business name
-#' @param dba_name `<chr>` Doing-business-as name
+#' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
 #' @param multi `<lgl>` Does hospital have more than one NPI?
 #' @param status `<enum>` Organization status
@@ -75,7 +75,7 @@ hospitals <- function(
   enid = NULL,
   enid_state = NULL,
   org_name = NULL,
-  dba_name = NULL,
+  org_dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -106,7 +106,7 @@ hospitals <- function(
       `ENROLLMENT ID` = enid,
       `ENROLLMENT STATE` = enid_state,
       `ORGANIZATION NAME` = org_name,
-      `DOING BUSINESS AS NAME` = dba_name,
+      `DOING BUSINESS AS NAME` = org_dba,
       CITY = city,
       STATE = state,
       `ZIP CODE` = zip,

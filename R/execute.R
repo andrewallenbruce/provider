@@ -92,7 +92,7 @@ S7::method(execute, base_cms2) <- function(x) {
 #'
 #' enrolled(count = TRUE, org_name = not_blank())
 #'
-#' enrolled(org_name = starts_with("Z"))
+#' enrolled(org_name = starts_with("AB"), state = c("TX", "CA"), multi = TRUE)
 #'
 #' @autoglobal
 #' @noRd

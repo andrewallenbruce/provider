@@ -74,7 +74,7 @@ S7::method(req_multi, base_cms) <- function(
 ) {
   url <- flatten_url(paste0(x@url, "?"), args, opts_cms(offset = "<<i>>"))
 
-  if (x@mult) {
+  if (x@multi) {
     return(multi_parallel(url, count, x@limit, x@url, id))
   }
 
