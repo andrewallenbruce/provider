@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9103 (2026-04-25)
+
+- added arg check wrappers
+
 ## provider 0.0.1.9102 (2026-04-24)
 
 - fixed bug in `req_multi` method for `base_cms` class
