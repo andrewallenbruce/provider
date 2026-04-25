@@ -11,7 +11,7 @@ rhc_enroll(
   enid = NULL,
   enid_state = NULL,
   org_name = NULL,
-  dba_name = NULL,
+  org_dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -33,7 +33,7 @@ rhc_enroll(
 
 \item{org_name}{\verb{<chr>} Legal business name}
 
-\item{dba_name}{\verb{<chr>} Doing-business-as name}
+\item{org_dba}{\verb{<chr>} Doing-business-as name}
 
 \item{city, state, zip}{\verb{<chr>} Location city, state, zip}
 

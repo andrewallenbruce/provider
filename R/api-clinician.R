@@ -74,27 +74,30 @@ clinicians <- function(
   check_char_(gender)
   check_numeric(grad_year)
 
-  exec_prov(
-    COUNT = count,
-    SET = set,
-    ARG = param_prov(
-      npi = npi,
-      ind_pac_id = pac,
-      ind_enrl_id = enid,
-      provider_last_name = last,
-      provider_first_name = first,
-      provider_middle_name = middle,
-      suff = suffix,
-      gndr = gender,
-      cred = credential,
-      med_sch = school,
-      grd_yr = grad_year,
-      pri_spec = specialty,
-      facility_name = org_name,
-      org_pac_id = org_pac,
-      citytown = org_city,
-      state = org_state,
-      zip_code = org_zip
+  execute(
+    base_prov2(
+      end = "clinicians",
+      count = count,
+      set = set,
+      arg = param_prov(
+        npi = npi,
+        ind_pac_id = pac,
+        ind_enrl_id = enid,
+        provider_last_name = last,
+        provider_first_name = first,
+        provider_middle_name = middle,
+        suff = suffix,
+        gndr = gender,
+        cred = credential,
+        med_sch = school,
+        grd_yr = grad_year,
+        pri_spec = specialty,
+        facility_name = org_name,
+        org_pac_id = org_pac,
+        citytown = org_city,
+        state = org_state,
+        zip_code = org_zip
+      )
     )
   )
 }

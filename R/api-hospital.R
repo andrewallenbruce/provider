@@ -96,26 +96,29 @@ hospitals <- function(
   check_char_(loc_type)
   check_char_(prov_type)
 
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      CCN = ccn,
-      `ASSOCIATE ID` = pac,
-      `ENROLLMENT ID` = enid,
-      `ENROLLMENT STATE` = enid_state,
-      `ORGANIZATION NAME` = org_name,
-      `DOING BUSINESS AS NAME` = org_dba,
-      CITY = city,
-      STATE = state,
-      `ZIP CODE` = zip,
-      `MULTIPLE NPI FLAG` = bool_(multi),
-      PROPRIETARY_NONPROFIT = status,
-      `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
-      `PROVIDER TYPE CODE` = enum_(prov_type),
-      `PRACTICE LOCATION TYPE` = enum_(loc_type),
-      !!!subgroup
+  execute(
+    base_cms2(
+      end = "hospitals",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        CCN = ccn,
+        `ASSOCIATE ID` = pac,
+        `ENROLLMENT ID` = enid,
+        `ENROLLMENT STATE` = enid_state,
+        `ORGANIZATION NAME` = org_name,
+        `DOING BUSINESS AS NAME` = org_dba,
+        CITY = city,
+        STATE = state,
+        `ZIP CODE` = zip,
+        `MULTIPLE NPI FLAG` = bool_(multi),
+        PROPRIETARY_NONPROFIT = status,
+        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
+        `PROVIDER TYPE CODE` = enum_(prov_type),
+        `PRACTICE LOCATION TYPE` = enum_(loc_type),
+        !!!subgroup
+      )
     )
   )
 }

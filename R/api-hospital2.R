@@ -53,19 +53,22 @@ hospitals2 <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  exec_prov(
-    COUNT = count,
-    SET = set,
-    ARG = param_prov(
-      facility_id = ccn,
-      facility_name = org_name,
-      citytown = city,
-      state = state,
-      zip_code = zip,
-      countyparish = county,
-      hospital_type = enum_(hosp_type),
-      hospital_ownership = enum_(ownership),
-      hospital_overall_rating = rating
+  execute(
+    base_prov2(
+      end = "hospitals2",
+      count = count,
+      set = set,
+      arg = param_prov(
+        facility_id = ccn,
+        facility_name = org_name,
+        citytown = city,
+        state = state,
+        zip_code = zip,
+        countyparish = county,
+        hospital_type = enum_(hosp_type),
+        hospital_ownership = enum_(ownership),
+        hospital_overall_rating = rating
+      )
     )
   )
 }

@@ -54,7 +54,6 @@ affiliations <- function(
 ) {
   check_count_set(count, set)
   check_char_(facility_type)
-
   execute(
     base_prov2(
       end = "affiliations",

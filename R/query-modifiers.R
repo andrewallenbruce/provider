@@ -34,9 +34,9 @@ S7::method(value, Modifier) <- function(x) {
     value(x)
   }
 
-  m <- cli::format_inline(cli::col_blue("<modifier[{length(v)}]>"))
+  m <- cli::format_inline(cli::col_cyan("<modifier[{length(v)}]>"))
 
-  cli::cat_rule(m, width = 22, line = 2, line_col = "blue")
+  cli::cat_rule(m, width = 20, line = 2, line_col = "cyan")
   cli::cli_text(c(
     cli::col_silver("Operator: "),
     cli::col_red(cli::style_bold(operator(x)))

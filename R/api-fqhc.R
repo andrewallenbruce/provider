@@ -8,7 +8,7 @@
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid,enid_state `<chr>` Medicare Enrollment ID, Enrollment state
 #' @param org_name `<chr>` Legal business name
-#' @param dba_name `<chr>` Doing-business-as name
+#' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
 #' @param multi `<lgl>` Does hospital have more than one NPI?
 #' @param status `<enum>` Organization status
@@ -40,7 +40,7 @@ fqhc_enroll <- function(
   enid = NULL,
   enid_state = NULL,
   org_name = NULL,
-  dba_name = NULL,
+  org_dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -54,24 +54,26 @@ fqhc_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      CCN = ccn,
-      `ASSOCIATE ID` = pac,
-      `ENROLLMENT ID` = enid,
-      `ENROLLMENT STATE` = enid_state,
-      `ORGANIZATION NAME` = org_name,
-      `DOING BUSINESS AS NAME` = dba_name,
-      CITY = city,
-      STATE = state,
-      `ZIP CODE` = zip,
-      `MULTIPLE NPI FLAG` = bool_(multi),
-      PROPRIETARY_NONPROFIT = status,
-      `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+  execute(
+    base_cms2(
+      end = "fqhc_enroll",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        CCN = ccn,
+        `ASSOCIATE ID` = pac,
+        `ENROLLMENT ID` = enid,
+        `ENROLLMENT STATE` = enid_state,
+        `ORGANIZATION NAME` = org_name,
+        `DOING BUSINESS AS NAME` = org_dba,
+        CITY = city,
+        STATE = state,
+        `ZIP CODE` = zip,
+        `MULTIPLE NPI FLAG` = bool_(multi),
+        PROPRIETARY_NONPROFIT = status,
+        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+      )
     )
   )
 }
@@ -82,7 +84,8 @@ fqhc_enroll <- function(
 #' Providers with pending Medicare enrollment applications.
 #'
 #' @param npi `<int>` National Provider Identifier
-#' @param first,last `<chr>` Provider's name
+#' @param ccn `<chr>` Provider's name
+#' @param pac `<chr>` Provider's name
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
@@ -97,18 +100,31 @@ fqhc_enroll <- function(
 #' @export
 fqhc_owner <- function(
   npi = NULL,
-  first = NULL,
-  last = NULL,
+  ccn = NULL,
+  pac = NULL,
   count = FALSE,
   set = FALSE
 ) {
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      LAST_NAME = last,
-      FIRST_NAME = first
+  execute(
+    base_cms2(
+      end = "fqhc_owner",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        CCN = ccn,
+        `ASSOCIATE ID` = pac
+        # `ENROLLMENT ID` = enid,
+        # `ENROLLMENT STATE` = enid_state,
+        # `ORGANIZATION NAME` = org_name,
+        # `DOING BUSINESS AS NAME` = dba_name,
+        # CITY = city,
+        # STATE = state,
+        # `ZIP CODE` = zip,
+        # `MULTIPLE NPI FLAG` = bool_(multi),
+        # PROPRIETARY_NONPROFIT = status,
+        # `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+      )
     )
   )
 }

@@ -54,21 +54,23 @@ revocations <- function(
 ) {
   check_count_set(count, set)
   check_bool_(multi)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      ENRLMT_ID = enid,
-      FIRST_NAME = first,
-      MDL_NAME = middle,
-      LAST_NAME = last,
-      ORG_NAME = org_name,
-      MULTIPLE_NPI_FLAG = bool_(multi),
-      STATE_CD = state,
-      PROVIDER_TYPE_DESC = specialty,
-      REVOCATION_RSN = reason
+  execute(
+    base_cms2(
+      end = "revocations",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        ENRLMT_ID = enid,
+        FIRST_NAME = first,
+        MDL_NAME = middle,
+        LAST_NAME = last,
+        ORG_NAME = org_name,
+        MULTIPLE_NPI_FLAG = bool_(multi),
+        STATE_CD = state,
+        PROVIDER_TYPE_DESC = specialty,
+        REVOCATION_RSN = reason
+      )
     )
   )
 }

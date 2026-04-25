@@ -81,21 +81,23 @@ clia <- function(
   check_char_(accreditation)
   check_bool_(compliant)
   check_bool_(active)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      FAC_NAME = facility_name,
-      PRVDR_NUM = facility_ccn,
-      CLIA_MDCR_NUM = parent_ccn,
-      CRTFCT_TYPE_CD = enum_(certificate),
-      CITY_NAME = city,
-      STATE_CD = state,
-      ZIP_CD = zip,
-      CMPLNC_STUS_CD = cmp_(compliant),
-      PGM_TRMNTN_CD = act_(active),
-      !!!accr_(accreditation)
+  execute(
+    base_cms2(
+      end = "clia",
+      count = count,
+      set = set,
+      arg = param_cms(
+        FAC_NAME = facility_name,
+        PRVDR_NUM = facility_ccn,
+        CLIA_MDCR_NUM = parent_ccn,
+        CRTFCT_TYPE_CD = enum_(certificate),
+        CITY_NAME = city,
+        STATE_CD = state,
+        ZIP_CD = zip,
+        CMPLNC_STUS_CD = cmp_(compliant),
+        PGM_TRMNTN_CD = act_(active),
+        !!!accr_(accreditation)
+      )
     )
   )
 }

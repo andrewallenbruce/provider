@@ -63,19 +63,21 @@ order_refer <- function(
   check_bool_(hha)
   check_bool_(pmd)
   check_bool_(hospice)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      FIRST_NAME = first,
-      LAST_NAME = last,
-      PARTB = bool_(ptb),
-      DME = bool_(dme),
-      HHA = bool_(hha),
-      PMD = bool_(pmd),
-      HOSPICE = bool_(hospice)
+  execute(
+    base_cms2(
+      end = "order_refer",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        FIRST_NAME = first,
+        LAST_NAME = last,
+        PARTB = bool_(ptb),
+        DME = bool_(dme),
+        HHA = bool_(hha),
+        PMD = bool_(pmd),
+        HOSPICE = bool_(hospice)
+      )
     )
   )
 }

@@ -8,7 +8,7 @@
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid,enid_state `<chr>` Medicare Enrollment ID, Enrollment state
 #' @param org_name `<chr>` Legal business name
-#' @param dba_name `<chr>` Doing-business-as name
+#' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
 #' @param multi `<lgl>` Does hospital have more than one NPI?
 #' @param status `<enum>` Organization status
@@ -40,7 +40,7 @@ rhc_enroll <- function(
   enid = NULL,
   enid_state = NULL,
   org_name = NULL,
-  dba_name = NULL,
+  org_dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -54,24 +54,26 @@ rhc_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      CCN = ccn,
-      `ASSOCIATE ID` = pac,
-      `ENROLLMENT ID` = enid,
-      `ENROLLMENT STATE` = enid_state,
-      `ORGANIZATION NAME` = org_name,
-      `DOING BUSINESS AS NAME` = dba_name,
-      CITY = city,
-      STATE = state,
-      `ZIP CODE` = zip,
-      `MULTIPLE NPI FLAG` = bool_(multi),
-      PROPRIETARY_NONPROFIT = status,
-      `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+  execute(
+    base_cms2(
+      end = "rhc_enroll",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        CCN = ccn,
+        `ASSOCIATE ID` = pac,
+        `ENROLLMENT ID` = enid,
+        `ENROLLMENT STATE` = enid_state,
+        `ORGANIZATION NAME` = org_name,
+        `DOING BUSINESS AS NAME` = org_dba,
+        CITY = city,
+        STATE = state,
+        `ZIP CODE` = zip,
+        `MULTIPLE NPI FLAG` = bool_(multi),
+        PROPRIETARY_NONPROFIT = status,
+        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+      )
     )
   )
 }
@@ -103,13 +105,16 @@ rhc_owner <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      LAST_NAME = last,
-      FIRST_NAME = first
+  execute(
+    base_cms2(
+      end = "rhc_owner",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        LAST_NAME = last,
+        FIRST_NAME = first
+      )
     )
   )
 }

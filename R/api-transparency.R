@@ -74,16 +74,18 @@ transparency <- function(
 ) {
   check_count_set(count, set)
   check_char_(action)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      Hosp_Name = name,
-      Hosp_Address = address,
-      City = city,
-      State = state,
-      Action = enum_(action)
+  execute(
+    base_cms2(
+      end = "transparency",
+      count = count,
+      set = set,
+      arg = param_cms(
+        Hosp_Name = name,
+        Hosp_Address = address,
+        City = city,
+        State = state,
+        Action = enum_(action)
+      )
     )
   )
 }

@@ -62,20 +62,22 @@ opt_out <- function(
 ) {
   check_count_set(count, set)
   check_bool_(order_refer)
-
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      `First Name` = first,
-      `Last Name` = last,
-      Specialty = specialty,
-      `First Line Street Address` = address,
-      `City Name` = city,
-      `State Code` = state,
-      `Zip code` = zip,
-      `Eligible to Order and Refer` = bool_(order_refer)
+  execute(
+    base_cms2(
+      end = "opt_out",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        `First Name` = first,
+        `Last Name` = last,
+        Specialty = specialty,
+        `First Line Street Address` = address,
+        `City Name` = city,
+        `State Code` = state,
+        `Zip code` = zip,
+        `Eligible to Order and Refer` = bool_(order_refer)
+      )
     )
   )
 }

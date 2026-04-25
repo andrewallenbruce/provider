@@ -30,7 +30,8 @@
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
 #'
-#' reassignments(count = TRUE, employers = greater_than(50, equal = TRUE))
+#' reassignments(count = TRUE,
+#'               employers = greater_than(50, equal = TRUE))
 #'
 #' reassignments(org_enid = "I20070209000135")
 #'
@@ -58,23 +59,26 @@ reassignments <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      `Individual NPI` = npi,
-      `Individual PAC ID` = pac,
-      `Individual Enrollment ID` = enid,
-      `Individual First Name` = first,
-      `Individual Last Name` = last,
-      `Individual State Code` = state,
-      `Individual Specialty Description` = specialty,
-      `Individual Total Employer Associations` = employers,
-      `Group Legal Business Name` = org_name,
-      `Group Reassignments and Physician Assistants` = employees,
-      `Group PAC ID` = org_pac,
-      `Group Enrollment ID` = org_enid,
-      `Group State Code` = org_state
+  execute(
+    base_cms2(
+      end = "reassignments",
+      count = count,
+      set = set,
+      arg = param_cms(
+        `Individual NPI` = npi,
+        `Individual PAC ID` = pac,
+        `Individual Enrollment ID` = enid,
+        `Individual First Name` = first,
+        `Individual Last Name` = last,
+        `Individual State Code` = state,
+        `Individual Specialty Description` = specialty,
+        `Individual Total Employer Associations` = employers,
+        `Group Legal Business Name` = org_name,
+        `Group Reassignments and Physician Assistants` = employees,
+        `Group PAC ID` = org_pac,
+        `Group Enrollment ID` = org_enid,
+        `Group State Code` = org_state
+      )
     )
   )
 }

@@ -4,12 +4,14 @@
 \alias{fqhc_owner}
 \title{FQHC Owners}
 \usage{
-fqhc_owner(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+fqhc_owner(npi = NULL, ccn = NULL, pac = NULL, count = FALSE, set = FALSE)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
 
-\item{first, last}{\verb{<chr>} Provider's name}
+\item{ccn}{\verb{<chr>} Provider's name}
+
+\item{pac}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
