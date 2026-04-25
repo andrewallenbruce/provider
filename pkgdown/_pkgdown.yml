@@ -92,8 +92,6 @@ reference:
   desc: >
     General Provider Data
   contents:
-  - affiliated
-  - enrolled
   - affiliations
   - reassignments
   - nppes

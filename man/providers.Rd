@@ -53,10 +53,10 @@ actively approved to bill Medicare.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 providers(count = TRUE)
-
 providers(count = TRUE, org_name = not_blank())
-
-providers(org_name = starts_with("Z"))
+providers()
+providers(org_name = starts_with("AB"), state = c("TX", "CA"))
+providers(org_name = starts_with("U"), count = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \references{

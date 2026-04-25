@@ -203,7 +203,12 @@ is_subgroups <- function(x) {
 #' @export
 print.subgroups <- function(x, ...) {
   v <- length(x)
-  cli::cli_text(cli::col_cyan("<subgroups[{v}]>"))
+  cli::cat_rule(
+    cli::format_inline(cli::col_cyan("<subgroups[{v}]>")),
+    width = 22,
+    line = 2,
+    line_col = "cyan"
+  )
   if (v) {
     cli_apis(x)
   }

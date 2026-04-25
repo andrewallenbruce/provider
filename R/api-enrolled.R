@@ -24,11 +24,10 @@
 #'
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
-#'
 #' providers(count = TRUE, org_name = not_blank())
-#'
-#' providers(org_name = starts_with("Z"))
-#'
+#' providers()
+#' providers(org_name = starts_with("AB"), state = c("TX", "CA"))
+#' providers(org_name = starts_with("U"), count = TRUE)
 #' @autoglobal
 #' @export
 providers <- function(
@@ -49,21 +48,24 @@ providers <- function(
   check_count_set(count, set)
   check_bool_(multi)
 
-  exec_cms(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      MULTIPLE_NPI_FLAG = bool_(multi),
-      PECOS_ASCT_CNTL_ID = pac,
-      ENRLMT_ID = enid,
-      PROVIDER_TYPE_CD = prov_type,
-      PROVIDER_TYPE_DESC = prov_desc,
-      STATE_CD = state,
-      LAST_NAME = last,
-      FIRST_NAME = first,
-      MDL_NAME = middle,
-      ORG_NAME = org_name
+  execute(
+    base_cms2(
+      end = "providers",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        MULTIPLE_NPI_FLAG = bool_(multi),
+        PECOS_ASCT_CNTL_ID = pac,
+        ENRLMT_ID = enid,
+        PROVIDER_TYPE_CD = prov_type,
+        PROVIDER_TYPE_DESC = prov_desc,
+        STATE_CD = state,
+        LAST_NAME = last,
+        FIRST_NAME = first,
+        MDL_NAME = middle,
+        ORG_NAME = org_name
+      )
     )
   )
 }

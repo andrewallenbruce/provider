@@ -30,13 +30,13 @@
 #'
 #' @examplesIf httr2::is_online()
 #' affiliations(count = TRUE)
-#'
-#' affiliations(facility_ccn = "33Z302")
-#'
+#' affiliations(count = TRUE, facility_ccn = 331302)
+#' affiliations()
 #' affiliations(parent_ccn = 331302)
-#'
 #' affiliations(facility_ccn = 331302)
-#'
+#' affiliations(first = "Andrew",
+#'              last = contains("B"),
+#'              facility_type = "hospital")
 #' @autoglobal
 #' @export
 affiliations <- function(
@@ -55,19 +55,22 @@ affiliations <- function(
   check_count_set(count, set)
   check_char_(facility_type)
 
-  exec_prov(
-    COUNT = count,
-    SET = set,
-    ARG = param_prov(
-      npi = npi,
-      ind_pac_id = pac,
-      provider_last_name = last,
-      provider_first_name = first,
-      provider_middle_name = middle,
-      suff = suffix,
-      facility_type = enum_(facility_type),
-      facility_affiliations_certification_number = facility_ccn,
-      facility_type_certification_number = parent_ccn
+  execute(
+    base_prov2(
+      end = "affiliations",
+      count = count,
+      set = set,
+      arg = param_prov(
+        npi = npi,
+        ind_pac_id = pac,
+        provider_last_name = last,
+        provider_first_name = first,
+        provider_middle_name = middle,
+        suff = suffix,
+        facility_type = enum_(facility_type),
+        facility_affiliations_certification_number = facility_ccn,
+        facility_type_certification_number = parent_ccn
+      )
     )
   )
 }

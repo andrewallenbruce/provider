@@ -28,22 +28,24 @@ S7::method(value, Modifier) <- function(x) {
 
 #' @export
 `print.provider::Modifier` <- function(x, ...) {
-  cli::cli_text(cli::col_cyan("<modifier>"))
-  cli::cli_text(c(
-    cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold(operator(x)))
-  ))
-
-  V <- if (any2(value(x) == "")) {
+  v <- if (any2(value(x) == "")) {
     encodeString(value(x), quote = '"', na.encode = FALSE)
   } else {
     value(x)
   }
 
+  m <- cli::format_inline(cli::col_blue("<modifier[{length(v)}]>"))
+
+  cli::cat_rule(m, width = 22, line = 2, line_col = "blue")
+  cli::cli_text(c(
+    cli::col_silver("Operator: "),
+    cli::col_red(cli::style_bold(operator(x)))
+  ))
+
   cli::cli_text(
     c(
-      cli::col_silver("{cli::qty(length(V))}Value{?s}: "),
-      cli::col_yellow(toString(V, width = 20L))
+      cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
+      cli::col_yellow(toString(v, width = 20L))
     )
   )
   invisible(x)
