@@ -2,6 +2,7 @@
 
 S3method(print,"provider::Modifier")
 S3method(print,subgroups)
+export(affiliated)
 export(affiliations)
 export(between)
 export(clia)

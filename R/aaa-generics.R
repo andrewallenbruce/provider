@@ -8,6 +8,9 @@ arg_prov <- S7::new_class("arg_prov", S7::class_list, NULL)
 build <- S7::new_generic("build", "x")
 
 #' @noRd
+execute <- S7::new_generic("execute", "x")
+
+#' @noRd
 req_total <- S7::new_generic("req_total", "x")
 
 #' @noRd

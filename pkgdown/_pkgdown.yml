@@ -92,6 +92,8 @@ reference:
   desc: >
     General Provider Data
   contents:
+  - affiliated
+  - enrolled
   - affiliations
   - reassignments
   - nppes
@@ -99,7 +101,6 @@ reference:
   desc: >
     Individual Provider Data
   contents:
-  - enrolled
   - clinicians
   - opt_out
   - order_refer

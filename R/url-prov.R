@@ -22,7 +22,7 @@ base_prov <- S7::new_class(
 
 #' @noRd
 S7::method(req_total, base_prov) <- function(x) {
-  flatten_url(x@url, opts_prov(results = "false")) |>
+  flatten_url(x@url, opts = opts_prov(results = "false")) |>
     base_request(query = "count")
 }
 

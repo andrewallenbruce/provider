@@ -1,7 +1,4 @@
 #' @noRd
-execute <- S7::new_generic("execute", "x")
-
-#' @noRd
 base_cms2 <- S7::new_class(
   "base_cms2",
   package = NULL,
@@ -88,35 +85,28 @@ S7::method(req_set, base_cms2) <- function(x) {
 
 #' @noRd
 S7::method(execute, base_cms2) <- function(x) {
-  # N0 QUERY
   if (!length(x@arg)) {
-    # RETURN DATASET
     if (x@set) {
       return(polish(req_set(x), x@end))
     }
 
-    # COUNT
     if (x@count) {
       cli_total(x@N, x@end)
       return(invisible(x))
     }
 
-    # EMPTY QUERY
     return(polish(req_empty(x), x@end))
   }
 
-  # NO RESULTS or COUNT
   if (x@N == 0L || x@count) {
-    cli_total(x@N, x@end)
+    cli_results(x@N, x@end)
     return(invisible(x))
   }
 
-  # COUNT BELOW LIMIT
   if (x@N <= x@limit) {
     return(polish(req_single(x), x@end))
   }
 
-  # COUNT ABOVE LIMIT
   polish(req_multi(x), x@end)
 }
 
