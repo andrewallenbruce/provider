@@ -99,6 +99,7 @@ reference:
   desc: >
     Individual Provider Data
   contents:
+  - enrolled
   - clinicians
   - opt_out
   - order_refer

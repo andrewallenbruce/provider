@@ -18,63 +18,106 @@ base_cms2 <- S7::new_class(
     limit = S7::new_property(S7::class_integer, default = 5000L),
     arg = arg_cms,
     query = S7::new_property(S7::class_character, getter = function(self) {
-        if (length(self@arg) != 0L) build(self@arg)
+      if (length(self@arg) != 0L) build(self@arg)
+    }),
+    N = S7::new_property(S7::class_integer, getter = function(self) {
+      url <- paste0(self@url, "/stats?")
+      if (self@set || (self@count && !length(self@arg))) {
+        return(base_request(flatten_url(url), "total_rows"))
       }
-    ),
-    N = S7::new_property(S7::class_integer,
-      getter = function(self) {
-        url <- paste0(self@url, "/stats?")
-        if (self@set || (self@count && !length(self@arg))) {
-          return(base_request(flatten_url(url), "total_rows"))
-        }
-        if (self@count || length(self@arg)) {
-          return(base_request(flatten_url(url, self@query), "found_rows"))
-        }
+      if (self@count || length(self@arg)) {
+        return(base_request(flatten_url(url, self@query), "found_rows"))
       }
-    )
+    })
   )
 )
-
-# enrolled(count = TRUE)
-# enrolled(set = TRUE)
-# enrolled(org_name = starts_with("Z"))
-# enrolled(org_name = starts_with("AB"), state = c("TX", "CA"), multi = TRUE)
-# req_empty(enrolled())
-# req_single(enrolled(org_name = starts_with("AB"), state = c("TX", "CA")))
-# req_multi(enrolled(org_name = starts_with("U")))
 
 #' @noRd
 S7::method(req_empty, base_cms2) <- function(x) {
   cli_no_query(x@end)
-  base_request(flatten_url(paste0(x@url, "?"), opts = opts_cms(size = 10L)))
+
+  flatten_url(
+    base = paste0(x@url, "?"),
+    args = NULL,
+    opts = opts_cms(size = 10L)
+  ) |>
+    base_request()
 }
 
 #' @noRd
 S7::method(req_single, base_cms2) <- function(x) {
-  base_request(flatten_url(paste0(x@url, "?"), x@query, opts_cms()))
+  cli_results(x@N, x@end)
+
+  flatten_url(
+    base = paste0(x@url, "?"),
+    args = x@query,
+    opts = opts_cms()
+  ) |>
+    base_request()
 }
 
 #' @noRd
-S7::method(req_multi, base_cms2) <- function(x, count) {
-  base_parallel(
-    flatten_url(
-      paste0(x@url, "?"),
-      x@query,
-      opts_cms(offset = "<<i>>")),
-    x@N,
-    x@limit
-  )
+S7::method(req_multi, base_cms2) <- function(x) {
+  cli_pages(x@N, x@limit, x@end)
+
+  flatten_url(
+    base = paste0(x@url, "?"),
+    args = x@query,
+    opts = opts_cms(offset = "<<i>>")
+  ) |>
+    base_parallel(
+      cnt = x@N,
+      lmt = x@limit
+    )
 }
 
 #' @noRd
 S7::method(req_set, base_cms2) <- function(x) {
-  base_parallel(
-    flatten_url(
-      paste0(x@url, "?"),
-      opts = opts_cms(offset = "<<i>>")),
-    x@N,
-    x@limit
-  )
+  cli_pages(x@N, x@limit, x@end)
+
+  flatten_url(
+    base = paste0(x@url, "?"),
+    args = NULL,
+    opts = opts_cms(offset = "<<i>>")
+  ) |>
+    base_parallel(
+      cnt = x@N,
+      lmt = x@limit
+    )
+}
+
+#' @noRd
+S7::method(execute, base_cms2) <- function(x) {
+  # N0 QUERY
+  if (!length(x@arg)) {
+    # RETURN DATASET
+    if (x@set) {
+      return(req_set(x))
+    }
+
+    # COUNT
+    if (x@count) {
+      cli_total(x@N, x@end)
+      return(invisible(x))
+    }
+
+    # EMPTY QUERY
+    return(req_empty(x))
+  }
+
+  # NO RESULTS or COUNT
+  if (x@N == 0L || x@count) {
+    cli_total(x@N, x@end)
+    return(invisible(x))
+  }
+
+  # COUNT BELOW LIMIT
+  if (x@N <= x@limit) {
+    return(req_single(x))
+  }
+
+  # COUNT ABOVE LIMIT
+  req_multi(x)
 }
 
 #' Enrollment in Medicare
@@ -103,14 +146,12 @@ S7::method(req_set, base_cms2) <- function(x) {
 #'
 #' @examplesIf httr2::is_online()
 #' enrolled(count = TRUE)
-#'
 #' enrolled(count = TRUE, org_name = not_blank())
-#'
-#' enrolled(org_name = starts_with("AB"), state = c("TX", "CA"), multi = TRUE)
-#'
+#' enrolled()
+#' enrolled(org_name = starts_with("AB"), state = c("TX", "CA"))
+#' enrolled(org_name = starts_with("U"))
 #' @autoglobal
-#' @noRd
-#' @keywords internal
+#' @export
 enrolled <- function(
   npi = NULL,
   pac = NULL,
@@ -128,22 +169,25 @@ enrolled <- function(
 ) {
   check_count_set(count, set)
   check_bool_(multi)
-  base_cms2(
-    end = "providers",
-    count = count,
-    set = set,
-    arg = param_cms(
-      NPI = npi,
-      MULTIPLE_NPI_FLAG = bool_(multi),
-      PECOS_ASCT_CNTL_ID = pac,
-      ENRLMT_ID = enid,
-      PROVIDER_TYPE_CD = prov_type,
-      PROVIDER_TYPE_DESC = prov_desc,
-      STATE_CD = state,
-      LAST_NAME = last,
-      FIRST_NAME = first,
-      MDL_NAME = middle,
-      ORG_NAME = org_name
+
+  execute(
+    base_cms2(
+      end = "providers",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        MULTIPLE_NPI_FLAG = bool_(multi),
+        PECOS_ASCT_CNTL_ID = pac,
+        ENRLMT_ID = enid,
+        PROVIDER_TYPE_CD = prov_type,
+        PROVIDER_TYPE_DESC = prov_desc,
+        STATE_CD = state,
+        LAST_NAME = last,
+        FIRST_NAME = first,
+        MDL_NAME = middle,
+        ORG_NAME = org_name
+      )
     )
   )
 }
