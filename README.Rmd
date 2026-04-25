@@ -54,9 +54,7 @@ library(provider)
 
 ```{r}
 #| label: affiliation
-affiliations(
-  first = starts_with("Ab"), 
-  facility_type = "ltch")
+affiliations(facility_ccn = 110122)
 ```
 
 ##### Reassignment of Benefits
@@ -64,8 +62,8 @@ affiliations(
 ```{r}
 #| label: reassignment
 reassignments(
-  state = "NY",
-  employers = greater_than(50, equal = TRUE))
+  org_name = starts_with("SGMC"),
+  state = "GA")
 ```
 
 ##### Revoked Medicare Providers
@@ -73,7 +71,7 @@ reassignments(
 ```{r}
 #| label: revoked
 revocations(
-  org_name = starts_with("C"),
+  org_name = starts_with("SGMC"),
   state = "GA")
 ```
 
@@ -82,11 +80,8 @@ revocations(
 ```{r}
 #| label: clinician
 clinicians(
-  org_state = "GA", 
-  org_name = starts_with("North"),
-  gender = "M",
-  specialty = "Nurse Practitioner",
-  grad_year = 2023:2026)
+  org_name = starts_with("SGMC"),
+  org_state = "GA")
 ```
 
 ##### Opt-Out Affidavits
@@ -114,9 +109,8 @@ order_refer(
 ```{r}
 #| label: enrolled
 providers(
-  org_name = contains("Rehab"),
-  state = "AL",
-  prov_type = ends_with(18))
+  org_name = starts_with("SGMC"),
+  state = "GA")
 ```
 
 ##### Pending Enrollments
@@ -132,12 +126,7 @@ pending(
 
 ```{r}
 #| label: hospital
-hospitals(
-  org_dba = starts_with("A"),
-  state = "GA",
-  subgroup = subgroups(
-    psych = FALSE,
-    psych_unit = TRUE))
+hospitals(ccn = "110122")
 ```
 
 ##### CLIA Laboratories
@@ -145,8 +134,8 @@ hospitals(
 ```{r}
 #| label: clia
 clia(
-  state = "GA",
-  parent_ccn = not_blank())
+  facility_name = starts_with("SGMC"),
+  state = "GA")
 ```
 
 ##### Hospital Transparency Enforcement
@@ -155,7 +144,7 @@ clia(
 #| label: transparency
 transparency(
   action = "closure", 
-  state = "GA")
+  state = "WA")
 ```
 
 ------------------------------------------------------------------------------

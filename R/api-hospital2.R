@@ -4,7 +4,7 @@
 #'   The list includes addresses, phone numbers, hospital type, and overall
 #'   hospital rating.
 #'
-#' #' @source
+#' @source
 #'    * [API: Hospital General Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 #'    * [API: Data Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 #'

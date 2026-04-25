@@ -8,6 +8,11 @@
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{API: Hospital Enrollments}
 }
+
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Hospital General Information}
+\item \href{https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary}{API: Data Dictionary}
+}
 }
 \usage{
 hospitals(
@@ -144,12 +149,6 @@ organization type and address.
 A list of all hospitals that have been registered with Medicare.
 The list includes addresses, phone numbers, hospital type, and overall
 hospital rating.
-
-#' @source
-\itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Hospital General Information}
-\item \href{https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary}{API: Data Dictionary}
-}
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
