@@ -18,6 +18,8 @@ General Provider Data
 
 Individual Provider Data
 
+- [`enrolled()`](https://andrewallenbruce.github.io/provider/reference/enrolled.md)
+  : Enrollment in Medicare
 - [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
   : Clinician Demographics
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)

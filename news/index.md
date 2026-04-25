@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9105 (2026-04-25)
+
+- testing more integrated S7 endpoint class
+
 ## provider 0.0.1.9104 (2026-04-25)
 
 - fixed bug in flatten_opts
