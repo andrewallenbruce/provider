@@ -56,7 +56,7 @@ enrolled(count = TRUE)
 enrolled(count = TRUE, org_name = not_blank())
 enrolled()
 enrolled(org_name = starts_with("AB"), state = c("TX", "CA"))
-enrolled(org_name = starts_with("U"))
+# enrolled(org_name = starts_with("U"))
 \dontshow{\}) # examplesIf}
 }
 \references{

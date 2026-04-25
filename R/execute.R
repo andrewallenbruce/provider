@@ -92,7 +92,7 @@ S7::method(execute, base_cms2) <- function(x) {
   if (!length(x@arg)) {
     # RETURN DATASET
     if (x@set) {
-      return(req_set(x))
+      return(polish(req_set(x), x@end))
     }
 
     # COUNT
@@ -102,7 +102,7 @@ S7::method(execute, base_cms2) <- function(x) {
     }
 
     # EMPTY QUERY
-    return(req_empty(x))
+    return(polish(req_empty(x), x@end))
   }
 
   # NO RESULTS or COUNT
@@ -113,11 +113,11 @@ S7::method(execute, base_cms2) <- function(x) {
 
   # COUNT BELOW LIMIT
   if (x@N <= x@limit) {
-    return(req_single(x))
+    return(polish(req_single(x), x@end))
   }
 
   # COUNT ABOVE LIMIT
-  req_multi(x)
+  polish(req_multi(x), x@end)
 }
 
 #' Enrollment in Medicare
@@ -149,7 +149,7 @@ S7::method(execute, base_cms2) <- function(x) {
 #' enrolled(count = TRUE, org_name = not_blank())
 #' enrolled()
 #' enrolled(org_name = starts_with("AB"), state = c("TX", "CA"))
-#' enrolled(org_name = starts_with("U"))
+#' # enrolled(org_name = starts_with("U"))
 #' @autoglobal
 #' @export
 enrolled <- function(
