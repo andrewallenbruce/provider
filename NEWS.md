@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9106 (2026-04-25)
+
+* refining execute method
+
+
 # provider 0.0.1.9105 (2026-04-25)
 
 * testing more integrated S7 endpoint class
