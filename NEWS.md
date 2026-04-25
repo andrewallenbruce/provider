@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9102 (2026-04-24)
+
+* fixed bug in `req_multi` method for `base_cms` class
+* renamed hospital param; dba_name -> org_dba
+* re-rendered README
+
+
 # provider 0.0.1.9101 (2026-04-24)
 
 * refactored checks for modifiers with dots
