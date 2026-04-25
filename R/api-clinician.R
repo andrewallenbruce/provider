@@ -71,8 +71,8 @@ clinicians <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  check_character(gender, allow_null = TRUE)
-  check_numeric(grad_year, allow_null = TRUE)
+  check_char_(gender)
+  check_numeric(grad_year)
 
   exec_prov(
     COUNT = count,

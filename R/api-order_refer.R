@@ -58,11 +58,11 @@ order_refer <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  check_bool(ptb, allow_null = TRUE)
-  check_bool(dme, allow_null = TRUE)
-  check_bool(hha, allow_null = TRUE)
-  check_bool(pmd, allow_null = TRUE)
-  check_bool(hospice, allow_null = TRUE)
+  check_bool_(ptb)
+  check_bool_(dme)
+  check_bool_(hha)
+  check_bool_(pmd)
+  check_bool_(hospice)
 
   exec_cms(
     COUNT = count,

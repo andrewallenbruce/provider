@@ -90,11 +90,11 @@ hospitals <- function(
 ) {
   check_count_set(count, set)
   check_subgroups(subgroup)
-  check_bool(multi, allow_null = TRUE)
-  check_character(status, allow_null = TRUE)
-  check_character(org_type, allow_null = TRUE)
-  check_character(loc_type, allow_null = TRUE)
-  check_character(prov_type, allow_null = TRUE)
+  check_bool_(multi)
+  check_char_(status)
+  check_char_(org_type)
+  check_char_(loc_type)
+  check_char_(prov_type)
 
   exec_cms(
     COUNT = count,
@@ -160,19 +160,19 @@ subgroups <- function(
   specialty = NULL,
   other = NULL
 ) {
-  check_bool(general, allow_null = TRUE)
-  check_bool(acute, allow_null = TRUE)
-  check_bool(drug, allow_null = TRUE)
-  check_bool(child, allow_null = TRUE)
-  check_bool(long, allow_null = TRUE)
-  check_bool(psych, allow_null = TRUE)
-  check_bool(rehab, allow_null = TRUE)
-  check_bool(short, allow_null = TRUE)
-  check_bool(swing, allow_null = TRUE)
-  check_bool(psych_unit, allow_null = TRUE)
-  check_bool(rehab_unit, allow_null = TRUE)
-  check_bool(specialty, allow_null = TRUE)
-  check_bool(other, allow_null = TRUE)
+  check_bool_(general)
+  check_bool_(acute)
+  check_bool_(drug)
+  check_bool_(child)
+  check_bool_(long)
+  check_bool_(psych)
+  check_bool_(rehab)
+  check_bool_(short)
+  check_bool_(swing)
+  check_bool_(psych_unit)
+  check_bool_(rehab_unit)
+  check_bool_(specialty)
+  check_bool_(other)
 
   x <- purrr::map(
     list(
@@ -201,7 +201,6 @@ is_subgroups <- function(x) {
 }
 
 #' @export
-#' @exportS3Method base::print
 print.subgroups <- function(x, ...) {
   v <- length(x)
   cli::cli_text(cli::col_cyan("<subgroups[{v}]>"))

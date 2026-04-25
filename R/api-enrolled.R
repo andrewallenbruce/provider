@@ -47,7 +47,7 @@ providers <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  check_bool(multi, allow_null = TRUE)
+  check_bool_(multi)
 
   exec_cms(
     COUNT = count,

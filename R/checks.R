@@ -22,10 +22,34 @@ check_online <- function(call = caller_env()) {
 }
 
 #' @noRd
+check_bool_ <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
+  check_bool(
+    x,
+    ...,
+    allow_na = FALSE,
+    allow_null = TRUE,
+    arg = arg,
+    call = call
+  )
+}
+
+#' @noRd
+check_char_ <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
+  check_character(
+    x,
+    ...,
+    allow_na = TRUE,
+    allow_null = TRUE,
+    arg = arg,
+    call = call
+  )
+}
+
+#' @noRd
 check_numeric <- function(
   x,
   ...,
-  allow_null = FALSE,
+  allow_null = TRUE,
   arg = caller_arg(x),
   call = caller_env()
 ) {

@@ -77,10 +77,10 @@ clia <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  check_character(certificate, allow_null = TRUE)
-  check_character(accreditation, allow_null = TRUE)
-  check_bool(compliant, allow_null = TRUE)
-  check_bool(active, allow_null = TRUE)
+  check_char_(certificate)
+  check_char_(accreditation)
+  check_bool_(compliant)
+  check_bool_(active)
 
   exec_cms(
     COUNT = count,
