@@ -12,7 +12,7 @@ rhc_enroll(
   enid = NULL,
   enid_state = NULL,
   org_name = NULL,
-  dba_name = NULL,
+  org_dba = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -46,7 +46,7 @@ rhc_enroll(
 
   `<chr>` Legal business name
 
-- dba_name:
+- org_dba:
 
   `<chr>` Doing-business-as name
 

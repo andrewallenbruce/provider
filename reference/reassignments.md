@@ -103,7 +103,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 reassignments(count = TRUE)
 #> ℹ reassignments has 3,511,984 rows.
 
-reassignments(count = TRUE, employers = greater_than(50, equal = TRUE))
+reassignments(count = TRUE,
+              employers = greater_than(50, equal = TRUE))
 #> ✔ reassignments returned 1,189 results.
 
 reassignments(org_enid = "I20070209000135")

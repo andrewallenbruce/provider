@@ -5,7 +5,7 @@ Providers with pending Medicare enrollment applications.
 ## Usage
 
 ``` r
-fqhc_owner(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+fqhc_owner(npi = NULL, ccn = NULL, pac = NULL, count = FALSE, set = FALSE)
 ```
 
 ## Arguments
@@ -14,7 +14,11 @@ fqhc_owner(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
 
   `<int>` National Provider Identifier
 
-- first, last:
+- ccn:
+
+  `<chr>` Provider's name
+
+- pac:
 
   `<chr>` Provider's name
 

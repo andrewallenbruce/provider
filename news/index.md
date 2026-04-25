@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9109 (2026-04-25)
+
+- replaced all cms & prov endpoints with new execute method (non-groups)
+
 ## provider 0.0.1.9108 (2026-04-25)
 
 - begin moving to new execute method

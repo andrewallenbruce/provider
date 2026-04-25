@@ -74,62 +74,62 @@ list(
    `is_blank()` = is_blank()
  )
 #> $`excludes("AL", "AK", "AZ")`
-#> ══ <modifier[3]> ═════
+#> ══ <modifier[3]> ═══
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
 #> 
 #> $`ends_with("bar")`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: ENDS WITH
 #> Value: bar
 #> 
 #> $`starts_with("foo")`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: STARTS WITH
 #> Value: foo
 #> 
 #> $`less_than(1000)`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: <
 #> Value: 1000
 #> 
 #> $`less_than(0.125, equal = TRUE)`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: <=
 #> Value: 0.125
 #> 
 #> $`greater_than(1000)`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: >
 #> Value: 1000
 #> 
 #> $`greater_than(0.125, equal = TRUE)`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: >=
 #> Value: 0.125
 #> 
 #> $`between(0.125, 2)`
-#> ══ <modifier[2]> ═════
+#> ══ <modifier[2]> ═══
 #> Operator: BETWEEN
 #> Values: 0.125, 2
 #> 
 #> $`contains("baz")`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: CONTAINS
 #> Value: baz
 #> 
 #> $`not("zzz")`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: <>
 #> Value: zzz
 #> 
 #> $`not_blank()`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: <>
 #> Value: ""
 #> 
 #> $`is_blank()`
-#> ══ <modifier[1]> ═════
+#> ══ <modifier[1]> ═══
 #> Operator: =
 #> Value: ""
 #> 
