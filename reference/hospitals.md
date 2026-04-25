@@ -8,14 +8,6 @@ A list of all hospitals that have been registered with Medicare. The
 list includes addresses, phone numbers, hospital type, and overall
 hospital rating.
 
-\#' @source
-
-- [API: Hospital General
-  Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-
-- [API: Data
-  Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
-
 ## Usage
 
 ``` r
@@ -59,6 +51,14 @@ hospitals2(
 
 - [API: Hospital
   Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+
+&nbsp;
+
+- [API: Hospital General
+  Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+
+- [API: Data
+  Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 
 ## Arguments
 

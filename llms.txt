@@ -18,47 +18,45 @@ library(provider)
 ##### Facility Affiliations
 
 ``` r
-affiliations(
-  first = starts_with("Ab"), 
-  facility_type = "ltch")
-✔ affiliations returned 21 results.
-# A tibble: 21 × 9
+affiliations(facility_ccn = 110122)
+✔ affiliations returned 397 results.
+# A tibble: 397 × 9
    first  last  middle suffix    npi pac   facility_type facility_ccn parent_ccn
  * <chr>  <chr> <chr>  <chr>   <int> <chr> <chr>         <chr>        <chr>     
- 1 ABIGA… MALL… E      <NA>   1.01e9 5597… Long-term ca… 052031       <NA>      
- 2 ABHA   GUPTA <NA>   <NA>   1.06e9 2264… Long-term ca… 102022       <NA>      
- 3 ABANA  AZAR… <NA>   <NA>   1.06e9 4385… Long-term ca… 112003       <NA>      
- 4 ABDUL… KAZMI IBRAH… <NA>   1.16e9 5193… Long-term ca… 232012       <NA>      
- 5 ABA    BARD… YVONNE <NA>   1.36e9 5698… Long-term ca… 392050       <NA>      
- 6 ABID   IQBAL MD     <NA>   1.36e9 8921… Long-term ca… 452118       <NA>      
- 7 ABIGA… THOM… <NA>   <NA>   1.58e9 9032… Long-term ca… 332006       <NA>      
- 8 ABUBA… TAUS… <NA>   <NA>   1.59e9 4183… Long-term ca… 282001       <NA>      
- 9 ABDUL  SHAI… S      <NA>   1.62e9 5294… Long-term ca… 232034       <NA>      
-10 ABRAH… GOLB… <NA>   <NA>   1.64e9 8325… Long-term ca… 052050       <NA>      
-# ℹ 11 more rows
+ 1 JEREMY COLY… STEPH… <NA>   1.00e9 1254… Hospital      110122       <NA>      
+ 2 COLE   BURG… <NA>   <NA>   1.00e9 1850… Hospital      110122       <NA>      
+ 3 VIVEK  YADAV <NA>   <NA>   1.00e9 2365… Hospital      110122       <NA>      
+ 4 FELIX  VALD… G      <NA>   1.02e9 2860… Hospital      110122       <NA>      
+ 5 STEPH… FOX   G      <NA>   1.02e9 5698… Hospital      110122       <NA>      
+ 6 ERIC   STIE… CHRIS… <NA>   1.02e9 5799… Hospital      110122       <NA>      
+ 7 ROBERT BENN… D      <NA>   1.02e9 1759… Hospital      110122       <NA>      
+ 8 NATHAN ROBE… KELLY  <NA>   1.02e9 6507… Hospital      110122       <NA>      
+ 9 WILLI… MULL… THOMAS JR.    1.02e9 8527… Hospital      110122       <NA>      
+10 RACHEL ARMS… KATHL… <NA>   1.03e9 7113… Hospital      110122       <NA>      
+# ℹ 387 more rows
 ```
 
 ##### Reassignment of Benefits
 
 ``` r
 reassignments(
-  state = "NY",
-  employers = greater_than(50, equal = TRUE))
-✔ reassignments returned 52 results.
-# A tibble: 52 × 14
+  org_name = starts_with("SGMC"),
+  state = "GA")
+✔ reassignments returned 210 results.
+# A tibble: 210 × 14
    first   last  state specialty employers    npi pac   enid  org_name employees
  * <chr>   <chr> <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
- 1 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Advance…         5
- 2 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Arteler…        11
- 3 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Bayheal…         3
- 4 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Bridgep…         3
- 5 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Butler …         2
- 6 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Central…         2
- 7 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Central…         2
- 8 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Central…         6
- 9 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Christi…         3
-10 William Zinn  NY    Diagnost…        52 1.91e9 2062… I201… Coastal…         2
-# ℹ 42 more rows
+ 1 Carter  Adams GA    Nurse Pr…         2 1.50e9 8628… I202… Sgmc Af…        49
+ 2 Jessica Alfe… GA    Nurse Pr…         9 1.24e9 7416… I201… Sgmc Af…        49
+ 3 Ginger  Ambr… GA    Nurse Pr…         2 1.88e9 3779… I202… Sgmc Af…        49
+ 4 Grant   Bark… GA    Emergenc…         2 1.48e9 4082… I202… Sgmc Af…        49
+ 5 Stacy   Beck  GA    Nurse Pr…         3 1.73e9 4385… I201… Sgmc Af…        49
+ 6 Lila    Benn… GA    Nurse Pr…         3 1.93e9 5991… I201… Sgmc Af…        49
+ 7 Margar… Cart… GA    Nurse Pr…         8 1.24e9 6507… I201… Sgmc Af…        49
+ 8 Clayton Char… GA    Hospital…         4 1.08e9 6204… I201… Sgmc Af…        49
+ 9 Michel… Char… GA    Nurse Pr…         3 1.44e9 4183… I201… Sgmc Af…        49
+10 Hunter  Clan… GA    Nurse Pr…         4 1.45e9 9032… I202… Sgmc Af…        49
+# ℹ 200 more rows
 # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
 #   rec_type <chr>
 ```
@@ -67,52 +65,32 @@ reassignments(
 
 ``` r
 revocations(
-  org_name = starts_with("C"),
+  org_name = starts_with("SGMC"),
   state = "GA")
-✔ revocations returned 8 results.
-# A tibble: 8 × 12
-  org_name          first middle last  enid     npi multi state prov_desc reason
-* <chr>             <chr> <chr>  <chr> <chr>  <int> <int> <chr> <chr>     <chr> 
-1 COMPREHENSIVE FA… <NA>  <NA>   <NA>  O200… 1.13e9     0 GA    PART B S… 424.5…
-2 CHANGE AGENTS, I… <NA>  <NA>   <NA>  O200… 1.36e9     0 GA    PART B S… 424.5…
-3 CAINCARE, INC     <NA>  <NA>   <NA>  O201… 1.14e9     0 GA    DME SUPP… 424.5…
-4 C H MARTIN COMPA… <NA>  <NA>   <NA>  O201… 1.26e9     0 GA    DME SUPP… 424.5…
-5 COASTAL PHARMACY… <NA>  <NA>   <NA>  O201… 1.18e9     0 GA    DME SUPP… 424.5…
-6 CENTER FOR MEDIC… <NA>  <NA>   <NA>  O201… 1.60e9     0 GA    PART B S… 424.5…
-7 COBB MEDICAL SUP… <NA>  <NA>   <NA>  O202… 1.31e9     0 GA    DME SUPP… 424.5…
-8 CAPABLE SUPPLIES… <NA>  <NA>   <NA>  O202… 1.54e9     0 GA    DME SUPP… 424.5…
-# ℹ 2 more variables: start_date <date>, end_date <date>
+! revocations returned 0 results.
 ```
 
 ##### Clinician Demographics
 
 ``` r
 clinicians(
-  org_state = "GA", 
-  org_name = starts_with("North"),
-  gender = "M",
-  specialty = "Nurse Practitioner",
-  grad_year = 2023:2026)
-✔ clinicians returned 16 results.
-# A tibble: 16 × 20
-   first      middle last  suffix gender cred  school grad_year specialty    npi
- * <chr>      <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
- 1 RYLEY      CADE   SNELL <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.45e9
- 2 DAN        H      BUI   <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.75e9
- 3 EMMANUEL   <NA>   GWIB… <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.06e9
- 4 ROBERT     BLAKE  JOHN… <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.75e9
- 5 GREGORY    NATHAN GART… <NA>   M      <NA>  UNIVE…      2023 NURSE PR… 1.72e9
- 6 TAYLOR     JAMES  HARK… <NA>   M      NP    UNIVE…      2023 NURSE PR… 1.03e9
- 7 TAYLOR     JAMES  HARK… <NA>   M      NP    UNIVE…      2023 NURSE PR… 1.03e9
- 8 TAYLOR     JAMES  HARK… <NA>   M      NP    UNIVE…      2023 NURSE PR… 1.03e9
- 9 ALEXANDER  <NA>   GRAH… <NA>   M      <NA>  OTHER       2025 NURSE PR… 1.65e9
-10 TAYLOR     JAMES  HARK… <NA>   M      NP    UNIVE…      2023 NURSE PR… 1.03e9
-11 CANDLER    DASHER ONEAL <NA>   M      <NA>  OTHER       2025 NURSE PR… 1.63e9
-12 ROBERT     BLAKE  JOHN… <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.75e9
-13 COLIN      PATRI… ANDE… <NA>   M      NP    OTHER       2024 NURSE PR… 1.53e9
-14 ROBERT     BLAKE  JOHN… <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.75e9
-15 CHRISTOPH… ALAN   NELMS <NA>   M      <NA>  OTHER       2024 NURSE PR… 1.75e9
-16 JOHN       T      MACL… <NA>   M      <NA>  OTHER       2023 NURSE PR… 1.75e9
+  org_name = starts_with("SGMC"),
+  org_state = "GA")
+✔ clinicians returned 167 results.
+# A tibble: 167 × 20
+   first    middle last    suffix gender cred  school grad_year specialty    npi
+ * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
+ 1 MANDY    <NA>   LUCAS   <NA>   F      <NA>  MEHAR…      2011 FAMILY P… 1.35e9
+ 2 BHUMIBEN KUSHAL PATEL   <NA>   F      NP    OTHER       2018 NURSE PR… 1.47e9
+ 3 WILLIAM  <NA>   NASH    <NA>   M      MD    MEDIC…      1992 FAMILY P… 1.24e9
+ 4 VERA     C      GARCIA  <NA>   M      MD    OTHER       1991 FAMILY P… 1.15e9
+ 5 ALBERTO  E      GARCIA  <NA>   M      MD    OTHER       1996 FAMILY P… 1.52e9
+ 6 JULENE   D      SMITH   <NA>   F      NP    OTHER       2015 NURSE PR… 1.08e9
+ 7 KASSI    LAITEN COPELA… <NA>   F      <NA>  OTHER       2025 NURSE PR… 1.16e9
+ 8 JYNGER   MORRIS HULING  <NA>   F      <NA>  OTHER       2003 MENTAL H… 1.35e9
+ 9 WENDY    <NA>   VANDEM… <NA>   F      MD    NORTH…      2000 PSYCHIAT… 1.39e9
+10 MYRA     <NA>   JORDAN  <NA>   F      <NA>  OTHER       2004 MARRIAGE… 1.46e9
+# ℹ 157 more rows
 # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
 #   org_phone <chr>, org_add <chr>
@@ -171,25 +149,14 @@ order_refer(
 
 ``` r
 providers(
-  org_name = contains("Rehab"),
-  state = "AL",
-  prov_type = ends_with(18))
-✔ providers returned 54 results.
-# A tibble: 54 × 11
-   org_name      first middle last  state prov_type prov_desc    npi multi pac  
- * <chr>         <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>
- 1 VALLEY VIEW … <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.85e9     0 0840…
- 2 CIVIC CENTER… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.26e9     0 2163…
- 3 SOUTH HEALTH… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.43e9     0 7315…
- 4 OAK KNOLL HE… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.70e9     0 0345…
- 5 WETUMPKA HEA… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.59e9     0 8426…
- 6 GLEN HAVEN H… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.74e9     0 1557…
- 7 HUNTER CREEK… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.75e9     0 3274…
- 8 OPP HEALTH A… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.65e9     0 4183…
- 9 OZARK HEALTH… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.75e9     0 8628…
-10 LINEVILLE HE… <NA>  <NA>   <NA>  AL    00-18     PART A P… 1.52e9     0 4486…
-# ℹ 44 more rows
-# ℹ 1 more variable: enid <chr>
+  org_name = starts_with("SGMC"),
+  state = "GA")
+✔ providers returned 2 results.
+# A tibble: 2 × 11
+  org_name first middle last  state prov_type prov_desc    npi multi pac   enid 
+* <chr>    <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
+1 SGMC PH… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.42e9     0 4082… O202…
+2 SGMC AF… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.11e9     0 5496… O202…
 ```
 
 ##### Pending Enrollments
@@ -220,21 +187,12 @@ pending(
 ##### Medicare Part A Hospitals
 
 ``` r
-hospitals(
-  org_dba = starts_with("A"),
-  state = "GA",
-  subgroup = subgroups(
-    psych = FALSE,
-    psych_unit = TRUE))
-✔ hospitals returned 5 results.
-# A tibble: 5 × 37
+hospitals(ccn = "110122")
+✔ hospitals returned 1 result.
+# A tibble: 1 × 37
   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-1 JOHN D … ARCHBO… O200… GA         00-09     PART A P… 1.73e9     0 11S0… 4981…
-2 FLOYD H… ATRIUM… O200… GA         00-09     PART A P… 1.02e9     0 11S0… 5193…
-3 THE BAX… APPLIN… O200… GA         00-09     PART A P… 1.86e9     0 1100… 8426…
-4 THE BAX… APPLIN… O200… GA         00-09     PART A P… 1.10e9     0 11S0… 8426…
-5 THE MED… ATRIUM… O201… GA         00-09     PART A P… 1.86e9     0 11S1… 3678…
+1 SOUTH G… SGMC H… O202… GA         00-09     PART A P… 1.14e9     0 1101… 1052…
 # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
 #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
 #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
@@ -248,23 +206,23 @@ hospitals(
 
 ``` r
 clia(
-  state = "GA",
-  parent_ccn = not_blank())
-✔ clia returned 1,798 results.
-# A tibble: 1,798 × 82
+  facility_name = starts_with("SGMC"),
+  state = "GA")
+✔ clia returned 32 results.
+# A tibble: 32 × 82
    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
- 1 THOMAS A AT… <NA>       01D0689241   000081936  <NA>        <NA>  0     <NA> 
- 2 JUNCTION CI… <NA>       02D0682860   109220311  <NA>        <NA>  0     <NA> 
- 3 PRUITTHEALT… <NA>       05D0687589   11A507     <NA>        <NA>  0     <NA> 
- 4 WELLSTAR CO… <NA>       11D0020351   110143     <NA>        <NA>  0     <NA> 
- 5 DEKALB COUN… <NA>       11D0020369   00051906A  <NA>        <NA>  0     <NA> 
- 6 DECATUR HOS… <NA>       11D0020370   110178     <NA>        <NA>  0     <NA> 
- 7 EMORY PARKW… <NA>       11D0020430   110179     <NA>        <NA>  0     <NA> 
- 8 BRAWNER NOR… <NA>       11D0020552   114000     <NA>        <NA>  0     <NA> 
- 9 BOWDON AREA… <NA>       11D0020640   110174     <NA>        <NA>  0     <NA> 
-10 TANNER MEDI… <NA>       11D0020665   110011     <NA>        <NA>  0     <NA> 
-# ℹ 1,788 more rows
+ 1 SGMC HEALTH  <NA>       11D0022233   110122     <NA>        <NA>  0     <NA> 
+ 2 SGMC- SMITH… <NA>       11D0022241   110037     <NA>        <NA>  0     <NA> 
+ 3 SGMC WOMENS… <NA>       11D0265511   <NA>       <NA>        <NA>  0     <NA> 
+ 4 SGMC VALDOS… <NA>       11D0265607   258589220A <NA>        <NA>  0     <NA> 
+ 5 SGMC- LANIE… <NA>       11D0265646   110097     <NA>        <NA>  0     <NA> 
+ 6 SGMC-BERRIE… <NA>       11D0265664   11-0112    <NA>        <NA>  0     <NA> 
+ 7 SGMC PRIMAR… <NA>       11D0699064   256864445D <NA>        <NA>  0     <NA> 
+ 8 SGMC HEALTH… <NA>       11D0915865   <NA>       <NA>        <NA>  0     <NA> 
+ 9 SGMC PRIMAR… <NA>       11D0933615   <NA>       <NA>        <NA>  0     <NA> 
+10 SGMC FAMILY… <NA>       11D0948594   <NA>       <NA>        <NA>  0     <NA> 
+# ℹ 22 more rows
 # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
 #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
 #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
@@ -278,22 +236,22 @@ clia(
 ``` r
 transparency(
   action = "closure", 
-  state = "GA")
-✔ transparency returned 75 results.
-# A tibble: 75 × 7
+  state = "WA")
+✔ transparency returned 38 results.
+# A tibble: 38 × 7
     case name                             address city  state action action_date
  * <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
- 1    42 Northside Hospital Atlanta       1000 J… Atla… GA    Closu… 2022-08-01 
- 2    68 Wellstar Kennestone Regional Me… 677 Ch… Mari… GA    Closu… 2022-03-08 
- 3    75 Northeast Georgia Medical Cente… 743 Sp… Gain… GA    Closu… 2022-01-11 
- 4    99 Northside Hospital - Cherokee    450 No… Cant… GA    Closu… 2022-08-01 
- 5   116 Wellstar Atlanta Medical Center  303 Pa… Atla… GA    Closu… 2022-02-24 
- 6   117 Tift Regional Medical Center     901 Ea… Tift… GA    Closu… 2023-09-28 
- 7   136 Piedmont Columbus Regional Midt… 710 Ce… Colu… GA    Closu… 2022-02-28 
- 8   163 Emory Johns Creek Hospital       6325 H… John… GA    Closu… 2021-12-01 
- 9   248 Ridgeview Institute Smyrna       3995 S… Smyr… GA    Closu… 2024-05-13 
-10   256 Coffee Regional Medical Center   1101 O… Doug… GA    Closu… 2023-11-17 
-# ℹ 65 more rows
+ 1   164 UW Medical Center - Montlake     1959 N… Seat… WA    Closu… 2023-03-17 
+ 2   253 Valley Medical Center            400 S.… Rent… WA    Closu… 2024-08-09 
+ 3   344 Providence Sacred Heart Childre… 101 We… Spok… WA    Closu… 2023-05-08 
+ 4   416 Providence Regional Medical Cen… 916 Pa… Ever… WA    Closu… 2023-03-23 
+ 5   578 Fairfax Behavioral Health        10200 … Kirk… WA    Closu… 2023-07-20 
+ 6   836 Overlake Medical Center          1035 1… Bell… WA    Closu… 2024-07-03 
+ 7   866 East Adams Rural Healthcare      903 S … Ritz… WA    Closu… 2024-02-29 
+ 8   871 Forks Community Hospital         530 Bo… Forks WA    Closu… 2023-04-26 
+ 9   886 Othello Community Hospital       315 N … Othe… WA    Closu… 2023-09-01 
+10   918 Newport Hospital and Health Ser… 714 We… Newp… WA    Closu… 2023-06-23 
+# ℹ 28 more rows
 ```
 
 ------------------------------------------------------------------------
