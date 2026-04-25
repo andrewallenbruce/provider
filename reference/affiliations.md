@@ -85,8 +85,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
-affiliations(middle = "", count = TRUE)
-#> ✔ affiliations returned 558,466 results.
+affiliations(count = TRUE)
+#> ℹ affiliations has 1,638,995 rows.
 
 affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.

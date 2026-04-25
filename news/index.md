@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9104 (2026-04-25)
+
+- fixed bug in flatten_opts
+  ([\#100](https://github.com/andrewallenbruce/provider/issues/100))
+
 ## provider 0.0.1.9103 (2026-04-25)
 
 - added arg check wrappers
