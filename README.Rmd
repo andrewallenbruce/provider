@@ -27,10 +27,10 @@ library(tibble)
 > <b>Tidy Healthcare Provider API Interface</b>
 
 <!-- badges: start -->
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/andrewallenbruce/provider)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+[![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 <!-- badges: end -->
 
 You can install `provider` from [GitHub](https://github.com/) with:
@@ -40,7 +40,7 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-### :beginner: Usage
+### :rocket: Usage
 
 ```{r}
 #| label: load
@@ -50,14 +50,14 @@ pak::pak("andrewallenbruce/provider")
 library(provider)
 ```
 
-##### Facility Affiliations
+#### :calling: Facility Affiliations
 
 ```{r}
 #| label: affiliation
 affiliations(facility_ccn = 110122)
 ```
 
-##### Reassignment of Benefits
+#### :handshake: Reassignment of Benefits
 
 ```{r}
 #| label: reassignment
@@ -66,7 +66,7 @@ reassignments(
   state = "GA")
 ```
 
-##### Revoked Medicare Providers
+#### :-1: Revoked Medicare Providers
 
 ```{r}
 #| label: revoked
@@ -75,7 +75,7 @@ revocations(
   state = "GA")
 ```
 
-##### Clinician Demographics
+#### :identification_card: Clinician Demographics
 
 ```{r}
 #| label: clinician
@@ -84,7 +84,7 @@ clinicians(
   org_state = "GA")
 ```
 
-##### Opt-Out Affidavits
+##### :outbox_tray: Opt-Out Affidavits
 
 ```{r}
 #| label: opted_out
@@ -93,7 +93,7 @@ opt_out(
   specialty = starts_with("Oral"))
 ```
 
-##### Order & Referral Eligibility
+##### :receipt: Order & Referral Eligibility
 
 ```{r}
 #| label: order_refer
@@ -104,7 +104,7 @@ order_refer(
   hha = FALSE)
 ```
 
-##### Medicare Enrollments
+##### :health_worker: Medicare Enrollments
 
 ```{r}
 #| label: enrolled
@@ -113,7 +113,7 @@ providers(
   state = "GA")
 ```
 
-##### Pending Enrollments
+##### :calendar: Pending Enrollments
 
 ```{r}
 #| label: pending
@@ -122,14 +122,14 @@ pending(
   last = ends_with("E"))
 ```
 
-##### Medicare Part A Hospitals
+##### :hospital: Medicare Part A Hospitals
 
 ```{r}
 #| label: hospital
 hospitals(ccn = "110122")
 ```
 
-##### CLIA Laboratories
+##### :test_tube: CLIA Laboratories
 
 ```{r}
 #| label: clia
@@ -138,7 +138,7 @@ clia(
   state = "GA")
 ```
 
-##### Hospital Transparency Enforcement
+##### :mag_right: Hospital Transparency Enforcement
 
 ```{r}
 #| label: transparency

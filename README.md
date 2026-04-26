@@ -7,13 +7,13 @@
 
 <!-- badges: start -->
 
-[![License:
-MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
-[![code
-size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
+[![Ask
+DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/andrewallenbruce/provider)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+[![code
+size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 <!-- badges: end -->
 
 You can install `provider` from [GitHub](https://github.com/) with:
@@ -23,13 +23,13 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-### :beginner: Usage
+### :rocket: Usage
 
 ``` r
 library(provider)
 ```
 
-##### Facility Affiliations
+#### :calling: Facility Affiliations
 
 ``` r
 affiliations(facility_ccn = 110122)
@@ -50,7 +50,7 @@ affiliations(facility_ccn = 110122)
 # ℹ 387 more rows
 ```
 
-##### Reassignment of Benefits
+#### :handshake: Reassignment of Benefits
 
 ``` r
 reassignments(
@@ -75,7 +75,7 @@ reassignments(
 #   rec_type <chr>
 ```
 
-##### Revoked Medicare Providers
+#### :-1: Revoked Medicare Providers
 
 ``` r
 revocations(
@@ -84,7 +84,7 @@ revocations(
 ! revocations returned 0 results.
 ```
 
-##### Clinician Demographics
+#### :identification_card: Clinician Demographics
 
 ``` r
 clinicians(
@@ -110,7 +110,7 @@ clinicians(
 #   org_phone <chr>, org_add <chr>
 ```
 
-##### Opt-Out Affidavits
+##### :outbox_tray: Opt-Out Affidavits
 
 ``` r
 opt_out(
@@ -134,7 +134,7 @@ opt_out(
 # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 ```
 
-##### Order & Referral Eligibility
+##### :receipt: Order & Referral Eligibility
 
 ``` r
 order_refer(
@@ -159,7 +159,7 @@ order_refer(
 # ℹ 28 more rows
 ```
 
-##### Medicare Enrollments
+##### :health_worker: Medicare Enrollments
 
 ``` r
 providers(
@@ -173,7 +173,7 @@ providers(
 2 SGMC AF… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.11e9     0 5496… O202…
 ```
 
-##### Pending Enrollments
+##### :calendar: Pending Enrollments
 
 ``` r
 pending(
@@ -198,7 +198,7 @@ pending(
 # ℹ 529 more rows
 ```
 
-##### Medicare Part A Hospitals
+##### :hospital: Medicare Part A Hospitals
 
 ``` r
 hospitals(ccn = "110122")
@@ -216,7 +216,7 @@ hospitals(ccn = "110122")
 #   sub_otxt <int>, address <chr>
 ```
 
-##### CLIA Laboratories
+##### :test_tube: CLIA Laboratories
 
 ``` r
 clia(
@@ -245,7 +245,7 @@ clia(
 #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, …
 ```
 
-##### Hospital Transparency Enforcement
+##### :mag_right: Hospital Transparency Enforcement
 
 ``` r
 transparency(
