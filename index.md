@@ -9,13 +9,13 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-### 🔰 Usage
+### 🚀 Usage
 
 ``` r
 library(provider)
 ```
 
-##### Facility Affiliations
+#### 📲 Facility Affiliations
 
 ``` r
 affiliations(facility_ccn = 110122)
@@ -36,7 +36,7 @@ affiliations(facility_ccn = 110122)
 # ℹ 387 more rows
 ```
 
-##### Reassignment of Benefits
+#### 🤝 Reassignment of Benefits
 
 ``` r
 reassignments(
@@ -61,7 +61,7 @@ reassignments(
 #   rec_type <chr>
 ```
 
-##### Revoked Medicare Providers
+#### 👎 Revoked Medicare Providers
 
 ``` r
 revocations(
@@ -70,7 +70,7 @@ revocations(
 ! revocations returned 0 results.
 ```
 
-##### Clinician Demographics
+#### 🪪 Clinician Demographics
 
 ``` r
 clinicians(
@@ -96,7 +96,7 @@ clinicians(
 #   org_phone <chr>, org_add <chr>
 ```
 
-##### Opt-Out Affidavits
+##### 📤 Opt-Out Affidavits
 
 ``` r
 opt_out(
@@ -120,7 +120,7 @@ opt_out(
 # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 ```
 
-##### Order & Referral Eligibility
+##### 🧾 Order & Referral Eligibility
 
 ``` r
 order_refer(
@@ -145,7 +145,7 @@ order_refer(
 # ℹ 28 more rows
 ```
 
-##### Medicare Enrollments
+##### 🧑‍⚕️ Medicare Enrollments
 
 ``` r
 providers(
@@ -159,7 +159,7 @@ providers(
 2 SGMC AF… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.11e9     0 5496… O202…
 ```
 
-##### Pending Enrollments
+##### 📆 Pending Enrollments
 
 ``` r
 pending(
@@ -184,7 +184,7 @@ pending(
 # ℹ 529 more rows
 ```
 
-##### Medicare Part A Hospitals
+##### 🏥 Medicare Part A Hospitals
 
 ``` r
 hospitals(ccn = "110122")
@@ -202,7 +202,7 @@ hospitals(ccn = "110122")
 #   sub_otxt <int>, address <chr>
 ```
 
-##### CLIA Laboratories
+##### 🧪 CLIA Laboratories
 
 ``` r
 clia(
@@ -231,7 +231,7 @@ clia(
 #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, …
 ```
 
-##### Hospital Transparency Enforcement
+##### 🔎 Hospital Transparency Enforcement
 
 ``` r
 transparency(

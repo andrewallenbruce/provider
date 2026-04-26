@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9111</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9112</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,14 +97,15 @@
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="beginner-usage">
-<span class="emoji" data-emoji="beginner">🔰</span> Usage<a class="anchor" aria-label="anchor" href="#beginner-usage"></a>
+<h3 id="rocket-usage">
+<span class="emoji" data-emoji="rocket">🚀</span> Usage<a class="anchor" aria-label="anchor" href="#rocket-usage"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level5">
-<h5 id="facility-affiliations">Facility Affiliations<a class="anchor" aria-label="anchor" href="#facility-affiliations"></a>
-</h5>
+<div class="section level4">
+<h4 id="calling-facility-affiliations">
+<span class="emoji" data-emoji="calling">📲</span> Facility Affiliations<a class="anchor" aria-label="anchor" href="#calling-facility-affiliations"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">affiliations</span>(<span class="at">facility_ccn =</span> <span class="dv">110122</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>✔ affiliations returned <span class="dv">397</span> results.</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># A tibble: 397 × 9</span></span>
@@ -122,9 +123,10 @@
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dv">10</span> RACHEL ARMS… KATHL… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   <span class="fl">1.03e9</span> <span class="dv">7113</span>… Hospital      <span class="dv">110122</span>       <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>      </span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co"># ℹ 387 more rows</span></span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 id="reassignment-of-benefits">Reassignment of Benefits<a class="anchor" aria-label="anchor" href="#reassignment-of-benefits"></a>
-</h5>
+<div class="section level4">
+<h4 id="handshake-reassignment-of-benefits">
+<span class="emoji" data-emoji="handshake">🤝</span> Reassignment of Benefits<a class="anchor" aria-label="anchor" href="#handshake-reassignment-of-benefits"></a>
+</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">reassignments</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
@@ -146,17 +148,19 @@
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co"># ℹ 4 more variables: org_pac &lt;chr&gt;, org_enid &lt;chr&gt;, org_state &lt;chr&gt;,</span></span>
 <span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#   rec_type &lt;chr&gt;</span></span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 id="revoked-medicare-providers">Revoked Medicare Providers<a class="anchor" aria-label="anchor" href="#revoked-medicare-providers"></a>
-</h5>
+<div class="section level4">
+<h4 id="id_-1-revoked-medicare-providers">
+<span class="emoji" data-emoji="-1">👎</span> Revoked Medicare Providers<a class="anchor" aria-label="anchor" href="#id_-1-revoked-medicare-providers"></a>
+</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">revocations</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="sc">!</span> revocations returned <span class="dv">0</span> results.</span></code></pre></div>
 </div>
-<div class="section level5">
-<h5 id="clinician-demographics">Clinician Demographics<a class="anchor" aria-label="anchor" href="#clinician-demographics"></a>
-</h5>
+<div class="section level4">
+<h4 id="identification_card-clinician-demographics">
+<span class="emoji" data-emoji="identification_card">🪪</span> Clinician Demographics<a class="anchor" aria-label="anchor" href="#identification_card-clinician-demographics"></a>
+</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">clinicians</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">org_state =</span> <span class="st">"GA"</span>)</span>
@@ -178,9 +182,9 @@
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># ℹ 10 more variables: pac &lt;chr&gt;, enid &lt;chr&gt;, org_name &lt;chr&gt;, org_pac &lt;chr&gt;,</span></span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#   org_mem &lt;int&gt;, org_city &lt;chr&gt;, org_state &lt;chr&gt;, org_zip &lt;chr&gt;,</span></span>
 <span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#   org_phone &lt;chr&gt;, org_add &lt;chr&gt;</span></span></code></pre></div>
-</div>
 <div class="section level5">
-<h5 id="opt-out-affidavits">Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#opt-out-affidavits"></a>
+<h5 id="outbox_tray-opt-out-affidavits">
+<span class="emoji" data-emoji="outbox_tray">📤</span> Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#outbox_tray-opt-out-affidavits"></a>
 </h5>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">opt_out</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">starts_with</span>(<span class="st">"B"</span>),</span>
@@ -203,7 +207,8 @@
 <span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co"># ℹ 3 more variables: zip &lt;chr&gt;, order_refer &lt;int&gt;, address &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="order--referral-eligibility">Order &amp; Referral Eligibility<a class="anchor" aria-label="anchor" href="#order--referral-eligibility"></a>
+<h5 id="receipt-order--referral-eligibility">
+<span class="emoji" data-emoji="receipt">🧾</span> Order &amp; Referral Eligibility<a class="anchor" aria-label="anchor" href="#receipt-order--referral-eligibility"></a>
 </h5>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">order_refer</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">contains</span>(<span class="st">"LESS"</span>),</span>
@@ -227,7 +232,8 @@
 <span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co"># ℹ 28 more rows</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="medicare-enrollments">Medicare Enrollments<a class="anchor" aria-label="anchor" href="#medicare-enrollments"></a>
+<h5 id="health_worker-medicare-enrollments">
+<span class="emoji" data-emoji="health_worker">🧑‍⚕️</span> Medicare Enrollments<a class="anchor" aria-label="anchor" href="#health_worker-medicare-enrollments"></a>
 </h5>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">providers</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
@@ -240,7 +246,8 @@
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="dv">2</span> SGMC AF… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  <span class="er">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   <span class="er">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  GA    <span class="dv">12-70</span>     PART B S… <span class="fl">1.11e9</span>     <span class="dv">0</span> <span class="dv">5496</span>… O202…</span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="pending-enrollments">Pending Enrollments<a class="anchor" aria-label="anchor" href="#pending-enrollments"></a>
+<h5 id="calendar-pending-enrollments">
+<span class="emoji" data-emoji="calendar">📆</span> Pending Enrollments<a class="anchor" aria-label="anchor" href="#calendar-pending-enrollments"></a>
 </h5>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">pending</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">contains</span>(<span class="st">"A"</span>),</span>
@@ -264,7 +271,8 @@
 <span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co"># ℹ 529 more rows</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="medicare-part-a-hospitals">Medicare Part A Hospitals<a class="anchor" aria-label="anchor" href="#medicare-part-a-hospitals"></a>
+<h5 id="hospital-medicare-part-a-hospitals">
+<span class="emoji" data-emoji="hospital">🏥</span> Medicare Part A Hospitals<a class="anchor" aria-label="anchor" href="#hospital-medicare-part-a-hospitals"></a>
 </h5>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">hospitals</span>(<span class="at">ccn =</span> <span class="st">"110122"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>✔ hospitals returned <span class="dv">1</span> result.</span>
@@ -281,7 +289,8 @@
 <span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#   sub_otxt &lt;int&gt;, address &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="clia-laboratories">CLIA Laboratories<a class="anchor" aria-label="anchor" href="#clia-laboratories"></a>
+<h5 id="test_tube-clia-laboratories">
+<span class="emoji" data-emoji="test_tube">🧪</span> CLIA Laboratories<a class="anchor" aria-label="anchor" href="#test_tube-clia-laboratories"></a>
 </h5>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">clia</span>(</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="at">facility_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
@@ -309,7 +318,8 @@
 <span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#   fac_type &lt;chr&gt;, owner &lt;chr&gt;, action &lt;chr&gt;, orig_date &lt;chr&gt;, …</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="hospital-transparency-enforcement">Hospital Transparency Enforcement<a class="anchor" aria-label="anchor" href="#hospital-transparency-enforcement"></a>
+<h5 id="mag_right-hospital-transparency-enforcement">
+<span class="emoji" data-emoji="mag_right">🔎</span> Hospital Transparency Enforcement<a class="anchor" aria-label="anchor" href="#mag_right-hospital-transparency-enforcement"></a>
 </h5>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">transparency</span>(</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="at">action =</span> <span class="st">"closure"</span>, </span>
@@ -330,6 +340,7 @@
 <span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="dv">10</span>   <span class="dv">918</span> Newport Hospital and Health Ser… <span class="dv">714</span> We… Newp… WA    Closu… <span class="dv">2023-06-23</span> </span>
 <span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co"># ℹ 28 more rows</span></span></code></pre></div>
 <hr>
+</div>
 </div>
 </div>
 <div class="section level3">
@@ -385,10 +396,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
-<li><a href="https://github.com/andrewallenbruce/provider" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg" alt="code size"></a></li>
+<li><a href="https://deepwiki.com/andrewallenbruce/provider" class="external-link"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a></li>
 <li><a href="https://app.codecov.io/gh/andrewallenbruce/provider?branch=main" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/andrewallenbruce/provider" class="external-link"><img src="https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge" alt="CodeFactor"></a></li>
+<li><a href="https://github.com/andrewallenbruce/provider" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg" alt="code size"></a></li>
 </ul>
 </div>
 
