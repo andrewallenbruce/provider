@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9112 (2026-04-26)
+
+* rebuild README
+* file reorganization
+
+
 # provider 0.0.1.9111 (2026-04-26)
 
 * list_cms class and methods
