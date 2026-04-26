@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9111 (2026-04-26)
+
+- list_cms class and methods
+
 ## provider 0.0.1.9110 (2026-04-25)
 
 - re-rendered README
