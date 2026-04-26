@@ -36,14 +36,17 @@ pending <- function(
   set = FALSE
 ) {
   check_count_set(count, set)
-  exec_cms2(
-    COUNT = count,
-    SET = set,
-    ARG = param_cms(
-      NPI = npi,
-      LAST_NAME = last,
-      FIRST_NAME = first
-    ),
-    .id = "prov_type"
+  execute(
+    list_cms(
+      end = "pending",
+      id = "prov_type",
+      count = count,
+      set = set,
+      arg = param_cms(
+        NPI = npi,
+        LAST_NAME = last,
+        FIRST_NAME = first
+      )
+    )
   )
 }
