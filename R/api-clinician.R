@@ -73,8 +73,8 @@ clinicians <- function(
   check_count_set(count, set)
   check_char_(gender)
   execute(
-    base_prov2(
-      end = "clinicians",
+    base_prov(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_prov(

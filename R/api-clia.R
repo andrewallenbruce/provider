@@ -82,8 +82,8 @@ clia <- function(
   check_bool_(compliant)
   check_bool_(active)
   execute(
-    base_cms2(
-      end = "clia",
+    base_cms(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_cms(

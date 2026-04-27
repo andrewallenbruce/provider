@@ -61,8 +61,8 @@ reassignments <- function(
 ) {
   check_count_set(count, set)
   execute(
-    base_cms2(
-      end = "reassignments",
+    base_cms(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_cms(

@@ -48,8 +48,8 @@ providers <- function(
   check_count_set(count, set)
   check_bool_(multi)
   execute(
-    base_cms2(
-      end = "providers",
+    base_cms(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_cms(

@@ -1,4 +1,10 @@
 #' @noRd
+END_EXP <- rlang::expr(rlang::call_name(rlang::call_match(
+  call = rlang::caller_call(),
+  fn = rlang::caller_fn()
+)))
+
+#' @noRd
 URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
 
 #' @noRd
@@ -87,8 +93,8 @@ S7::method(req_set, list_cms) <- function(x) {
 }
 
 #' @noRd
-base_cms2 <- S7::new_class(
-  "base_cms2",
+base_cms <- S7::new_class(
+  "base_cms",
   package = NULL,
   properties = list(
     end = S7::class_character,
@@ -118,7 +124,7 @@ base_cms2 <- S7::new_class(
 )
 
 #' @noRd
-S7::method(req_empty, base_cms2) <- function(x) {
+S7::method(req_empty, base_cms) <- function(x) {
   cli_empty(x@end)
 
   flatten_url(
@@ -130,7 +136,7 @@ S7::method(req_empty, base_cms2) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_single, base_cms2) <- function(x) {
+S7::method(req_single, base_cms) <- function(x) {
   cli_results(x@N, x@end)
 
   flatten_url(
@@ -142,7 +148,7 @@ S7::method(req_single, base_cms2) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_multi, base_cms2) <- function(x) {
+S7::method(req_multi, base_cms) <- function(x) {
   cli_pages(x@N, x@limit, x@end)
 
   flatten_url(
@@ -157,7 +163,7 @@ S7::method(req_multi, base_cms2) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_set, base_cms2) <- function(x) {
+S7::method(req_set, base_cms) <- function(x) {
   cli_pages(x@N, x@limit, x@end)
 
   flatten_url(
@@ -178,8 +184,8 @@ URL_PROV <- c(
 )
 
 #' @noRd
-base_prov2 <- S7::new_class(
-  "base_prov2",
+base_prov <- S7::new_class(
+  "base_prov",
   package = NULL,
   properties = list(
     end = S7::class_character,
@@ -214,21 +220,21 @@ base_prov2 <- S7::new_class(
 )
 
 #' @noRd
-S7::method(req_empty, base_prov2) <- function(x) {
+S7::method(req_empty, base_prov) <- function(x) {
   cli_empty(x@end)
   flatten_url(x@url, opts = opts_prov(limit = 10L)) |>
     base_request(query = "results")
 }
 
 #' @noRd
-S7::method(req_single, base_prov2) <- function(x) {
+S7::method(req_single, base_prov) <- function(x) {
   cli_results(x@N, x@end)
   flatten_url(x@url, x@query, opts_prov()) |>
     base_request(query = "results")
 }
 
 #' @noRd
-S7::method(req_multi, base_prov2) <- function(x) {
+S7::method(req_multi, base_prov) <- function(x) {
   cli_pages(x@N, x@limit, x@end)
   flatten_url(x@url, x@query, opts_prov(offset = "<<i>>")) |>
     offset2(x@N, x@limit) |>
@@ -236,7 +242,7 @@ S7::method(req_multi, base_prov2) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_set, base_prov2) <- function(x) {
+S7::method(req_set, base_prov) <- function(x) {
   cli_pages(x@N, x@limit, x@end)
   flatten_url(x@url, opts = opts_prov(offset = "<<i>>")) |>
     offset2(x@N, x@limit) |>
@@ -244,7 +250,7 @@ S7::method(req_set, base_prov2) <- function(x) {
 }
 
 #' @noRd
-S7::method(execute, base_cms2 | base_prov2) <- function(x) {
+S7::method(execute, base_cms | base_prov) <- function(x) {
   if (!length(x@arg)) {
     if (x@set) {
       return(polish(req_set(x), x@end))

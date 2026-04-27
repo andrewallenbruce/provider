@@ -38,7 +38,7 @@ pending <- function(
   check_count_set(count, set)
   execute(
     list_cms(
-      end = "pending",
+      end = eval_bare(END_EXP),
       id = "prov_type",
       count = count,
       set = set,

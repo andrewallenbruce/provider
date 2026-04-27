@@ -54,8 +54,8 @@ hospitals2 <- function(
 ) {
   check_count_set(count, set)
   execute(
-    base_prov2(
-      end = "hospitals2",
+    base_prov(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_prov(

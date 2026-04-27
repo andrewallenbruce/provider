@@ -18,8 +18,10 @@ revocations(
   org_name = NULL,
   multi = NULL,
   state = NULL,
-  specialty = NULL,
+  prov_desc = NULL,
   reason = NULL,
+  year_start = NULL,
+  year_end = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -29,7 +31,7 @@ revocations(
 
 \item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
-\item{first, middle, last}{\verb{<chr>} Individual provider's name}
+\item{first, middle, last}{\verb{<chr>} Individual provider name}
 
 \item{org_name}{\verb{<chr>} Organization name}
 
@@ -37,9 +39,11 @@ revocations(
 
 \item{state}{\verb{<chr>} Enrollment state abbreviation}
 
-\item{specialty}{\verb{<chr>} Enrollment specialty description}
+\item{prov_desc}{\verb{<chr>} Provider type enrollment description}
 
 \item{reason}{\verb{<chr>} Reason for revocation}
+
+\item{year_start, year_end}{\verb{<int>} year of revocation/expiration}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -64,14 +68,12 @@ gathered from the \emph{Provider Enrollment, Chain and Ownership System (PECOS)}
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
 
-revocations(
-  count = TRUE,
-  org_name = not_blank())
+revocations(org_name = not_blank(), count = TRUE)
 
-revocations(org_name = starts("B"))
+revocations(org_name = starts("B"), count = TRUE)
 
 revocations(
-  specialty = contains("CARDIO"),
+  prov_desc = contains("CARDIO"),
   state = excludes(c("GA", "OH")))
 \dontshow{\}) # examplesIf}
 }

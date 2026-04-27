@@ -97,8 +97,8 @@ hospitals <- function(
   check_char_(prov_type)
 
   execute(
-    base_cms2(
-      end = "hospitals",
+    base_cms(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_cms(

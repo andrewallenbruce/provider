@@ -120,8 +120,8 @@ is_blank <- function() {
 #' @export
 greater <- function(x, equal = FALSE) {
   check_required(x)
-  check_not_modifier(x)
   check_number_decimal(x)
+  check_bool(equal)
   Modifier(ifelse(!equal, ">", ">="), value = x)
 }
 
@@ -129,8 +129,8 @@ greater <- function(x, equal = FALSE) {
 #' @export
 less <- function(x, equal = FALSE) {
   check_required(x)
-  check_not_modifier(x)
   check_number_decimal(x)
+  check_bool(equal)
   Modifier(ifelse(!equal, "<", "<="), value = x)
 }
 

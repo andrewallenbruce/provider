@@ -16,12 +16,13 @@
 #'
 #' @param npi `<int>` National Provider Identifier
 #' @param enid `<chr>` Medicare Enrollment ID
-#' @param first,middle,last `<chr>` Individual provider's name
-#' @param specialty `<chr>` Enrollment specialty description
+#' @param first,middle,last `<chr>` Individual provider name
+#' @param prov_desc `<chr>` Provider type enrollment description
 #' @param state `<chr>` Enrollment state abbreviation
 #' @param org_name `<chr>` Organization name
 #' @param multi `<lgl>` Provider has multiple NPIs
 #' @param reason `<chr>` Reason for revocation
+#' @param year_start,year_end `<int>` year of revocation/expiration
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
@@ -30,14 +31,12 @@
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
 #'
-#' revocations(
-#'   count = TRUE,
-#'   org_name = not_blank())
+#' revocations(org_name = not_blank(), count = TRUE)
 #'
-#' revocations(org_name = starts("B"))
+#' revocations(org_name = starts("B"), count = TRUE)
 #'
 #' revocations(
-#'   specialty = contains("CARDIO"),
+#'   prov_desc = contains("CARDIO"),
 #'   state = excludes(c("GA", "OH")))
 #'
 #' @autoglobal
@@ -51,16 +50,20 @@ revocations <- function(
   org_name = NULL,
   multi = NULL,
   state = NULL,
-  specialty = NULL,
+  prov_desc = NULL,
   reason = NULL,
+  year_start = NULL,
+  year_end = NULL,
   count = FALSE,
   set = FALSE
 ) {
   check_count_set(count, set)
   check_bool_(multi)
+  check_numeric(year_start)
+  check_numeric(year_end)
   execute(
-    base_cms2(
-      end = "revocations",
+    base_cms(
+      end = eval_bare(END_EXP),
       count = count,
       set = set,
       arg = param_cms(
@@ -72,8 +75,10 @@ revocations <- function(
         ORG_NAME = org_name,
         MULTIPLE_NPI_FLAG = bool_(multi),
         STATE_CD = state,
-        PROVIDER_TYPE_DESC = specialty,
-        REVOCATION_RSN = reason
+        PROVIDER_TYPE_DESC = prov_desc,
+        REVOCATION_RSN = reason,
+        REVOCATION_EFCTV_DT = year_start,
+        REENROLLMENT_BAR_EXPRTN_DT = year_end
       )
     )
   )
