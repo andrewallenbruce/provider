@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9113 (2026-04-27)
+
+* cleaning, restructuring, dynamic dots removed from use in modifiers
+* rebuilt README
+
+
 # provider 0.0.1.9112 (2026-04-26)
 
 * rebuild README
