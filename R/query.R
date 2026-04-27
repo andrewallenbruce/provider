@@ -49,12 +49,14 @@ query <- function(api, x, N) {
   )
 }
 
+#' @noRd
 S7::method(build, arg_cms) <- function(x) {
   S7::S7_data(x) |>
     purrr::imap(\(x, n) query(api = "cms", x, n)) |>
     flatten_query()
 }
 
+#' @noRd
 S7::method(build, arg_prov) <- function(x) {
   S7::S7_data(x) |>
     purrr::imap(\(x, n) query(api = "prov", x, n)) |>

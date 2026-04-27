@@ -20,6 +20,7 @@ Imports:
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),
     collapse (>= 2.1.6),
+    glue,
     httr2 (>= 1.2.2),
     memoise (>= 2.0.1),
     purrr (>= 1.2.2),

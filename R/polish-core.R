@@ -73,6 +73,20 @@ bin_col <- function(x) {
 }
 
 #' @noRd
+entity_ <- function(x, type = c("int", "chr")) {
+  switch(
+    match.arg(type, c("int", "chr")),
+    int = cheapr::val_match(x, 1 ~ 1L, 2 ~ 2L, .default = NA_integer_),
+    chr = cheapr::val_match(
+      x,
+      "NPI-1" ~ 1L,
+      "NPI-2" ~ 2L,
+      .default = NA_integer_
+    ),
+  )
+}
+
+#' @noRd
 as_integer_supp <- function(x, ...) {
   suppressWarnings(as.integer(x, ...))
 }

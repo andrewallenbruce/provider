@@ -22,6 +22,7 @@ utils::globalVariables(c(
   "na_chr",
   "own_add_1",
   "own_add_2",
+  "prog_year",
   NULL
 ))
 

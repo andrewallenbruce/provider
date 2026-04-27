@@ -1,3 +1,116 @@
+# @examplesIf FALSE
+# qpp_metrics <- quality_metrics(year = 2018:2025)
+#
+# qpp_eligible <- quality_eligibility(
+#   year = 2018:2024,
+#   npi = c(1144544834, 1043477615, 1932365699, 1225701881))
+#
+# qpp_experience <- build(
+#   endpoint("qppe"),
+#   query(npi = any_of(1144544834, 1043477615, 1932365699, 1225701881)))
+#
+#
+# qpp_exp <- qpp_experience@string |>
+#   providertwo:::gremove("/stats") |>
+#   providertwo:::greplace("size=1", "size=5000") |>
+#   providertwo:::map_perform_parallel() |>
+#   providertwo:::set_clean(qpp_experience@year) |>
+#   purrr::list_rbind(names_to = "prog_year") |>
+#   providertwo:::map_na_if() |>
+#   fastplyr::as_tbl()
+#
+# list(
+#   experience  = providertwo:::set_clean(qpp_exp, names(qpp_exp)),
+#   eligibility = qpp_eligible,
+#   metrics     = qpp_metrics)
+
+#' @autoglobal
+#' @noRd
+quality_metrics <- function(year) {
+  check_required(year)
+  purrr::map(year, function(y) {
+    cheapr::fast_df(
+      year = rep.int(as.integer(y), 4L),
+      category = c(rep.int("Individual", 2L), rep.int("Group", 2L)),
+      metric = rep.int(c("HCC Risk Score", "Dual Eligibility Ratio"), 2L),
+      mean = httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
+        httr2::req_url_query(year = y) |>
+        httr2::req_perform() |>
+        httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
+        collapse::get_elem("data") |>
+        unlist_()
+    )
+  }) |>
+    collapse::rowbind() |>
+    collapse::roworderv(c("metric", "category", "year"), decreasing = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+quality_eligibility <- function(year, npi) {
+  check_required(year)
+  check_required(npi)
+  check_number_whole(year, min = 2018)
+
+  url <- glue::as_glue("https://qpp.cms.gov/api/eligibility/npis/") +
+    glue::glue_collapse(npi, sep = ",") +
+    glue::glue("?year={year}")
+
+  res <- purrr::map(url, function(x) {
+    httr2::request(x) |>
+      httr2::req_headers(Accept = "application/vnd.qpp.cms.gov.v6+json") |>
+      httr2::req_error(body = \(resp) {
+        httr2::resp_body_json(resp)$error$message
+      }) |>
+      httr2::req_perform() |>
+      httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
+      collapse::get_elem("data")
+  }) |>
+    rlang::set_names(year) |>
+    purrr::list_rbind(names_to = "prog_year")
+
+  if (rlang::has_name(res, "error")) {
+    res$error <- NULL
+  }
+
+  res |>
+    collapse::mtt(
+      prog_year = as.integer(prog_year),
+      # nationalProviderIdentifierType = entity_(nationalProviderIdentifierType),
+      # firstApprovedDate = as_date(firstApprovedDate),
+      specialty = as.character(glue::glue(
+        "{res$specialty$specialtyDescription} [D] {res$specialty$typeDescription} [T] {res$specialty$categoryReference} [C]"
+      ))
+    ) |>
+    collapse::rnm(
+      firstName = "first_name",
+      middleName = "middle_name",
+      lastName = "last_name",
+      nationalProviderIdentifierType = "entity",
+      newlyEnrolled = "is_new",
+      firstApprovedDate = "date_enrolled",
+      isMaqi = "is_maqi",
+      # qpStatus                       = "qp_status",
+      # qpScoreType                    = "qp_score_type",
+      # amsMipsEligibleClinician       = "ams_mips_elig",
+      organizations = "ORGS"
+    ) |>
+    collapse::colorderv(c(
+      "prog_year",
+      "npi",
+      "entity",
+      "last_name",
+      "first_name",
+      "middle_name",
+      "specialty",
+      "date_enrolled",
+      "is_new",
+      "is_maqi"
+    )) |>
+    collapse::roworderv(c("npi", "prog_year"), decreasing = TRUE) |>
+    data_frame()
+}
+
 # The Quality Payment Program (QPP) Experience dataset provides
 # participation and performance information in the Merit-based
 # Incentive Payment System (MIPS) during each performance year.
