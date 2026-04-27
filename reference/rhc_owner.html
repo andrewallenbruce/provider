@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9113</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9114</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,49 +85,14 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rhc_owner</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">rhc_owner</span> has <span style="font-weight: bold;">65,551</span> rows.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"):</span> <span style="color: #BBBB00;">!</span> Could not evaluate cli `{}` expression: `mark(x)`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error</span> in `uuid_cms(self@end)`:</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rhc_owner</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">rhc_owner</span> ❯ <span style="font-style: italic;">No Query</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">eval</span> ❯ <span style="font-style: italic;">No Query</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid      : chr [1:10] "O20020813000023" "O20020813000023" "O20020813000023" "O20020813000023" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac       : chr [1:10] "0042127045" "0042127045" "0042127045" "0042127045" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name  : chr [1:10] "WEST RIVER HEALTH SERVICES" "WEST RIVER HEALTH SERVICES" "WEST RIVER HEALTH SERVICES" "WEST RIVER HEALTH SERVICES" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pac   : chr [1:10] "3072814896" "3072814896" "6305216268" "6305216268" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type  : chr [1:10] "I" "I" "I" "I" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_code  : int [1:10] 40 42 40 42 41 41 40 40 42 40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_role  : chr [1:10] "CORPORATE OFFICER" "W-2 MANAGING EMPLOYEE" "CORPORATE OFFICER" "W-2 MANAGING EMPLOYEE" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_date  : Date[1:10], format: "2025-11-03" "2025-11-03" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_first : chr [1:10] "KURT" "KURT" "ALYSON" "ALYSON" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_middle: chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_last  : chr [1:10] "SARGENT" "SARGENT" "FREELAND" "FREELAND" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_title : chr [1:10] "CHIEF FINANCIAL OFFICER" "CHIEF FINANCIAL OFFICER" "CHIEF EXECUTIVE OFFICER" "AD;" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_org   : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_dba   : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_city  : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_state : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_zip   : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pct   : num [1:10] 0 0 0 0 NA NA NA 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ acq_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ corp_ind  : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ llc_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ mps_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ msr_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ mst_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hld_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inv_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fin_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ con_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fp_ind    : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ np_ind    : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pe_ind    : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ reit_ind  : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cho_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ oth_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ oth_txt   : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ano_ind   : int [1:10] NA NA NA NA NA NA NA NA NA NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_add   : chr [1:10] NA NA NA NA ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uuid_cms(self@end):</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

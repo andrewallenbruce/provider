@@ -177,72 +177,19 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ℹ clia has 676,051 rows.
+#> Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"): ! Could not evaluate cli `{}` expression: `mark(x)`.
+#> Caused by error in `uuid_cms(self@end)`:
+#> ! `endpoint` "eval" is invalid.
 
 clia(compliant = FALSE, active = TRUE, count = TRUE)
-#> ✔ clia returned 2,578 results.
+#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
 
 clia(facility_ccn = provider:::cdc_labs$ccn)
-#> ✔ clia returned 6 results.
-#> # A tibble: 6 × 82
-#>   fac_name_1    fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
-#> * <chr>         <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
-#> 1 CDC ARCTIC I… CENTERS F… 02D0873639   NA         NA          NA    0     NA   
-#> 2 CENTERS FOR … DIVISION … 06D0880233   NA         NA          NA    0     NA   
-#> 3 CDC/NCEH/DIV… NA         11D0668290   NA         NA          NA    0     NA   
-#> 4 CENTERS FOR … NA         11D0668319   NA         NA          NA    0     NA   
-#> 5 CDC/CGH/DGHA… ATTENTION… 11D1061576   NA         NA          NA    0     NA   
-#> 6 CENTERS FOR … DENGUE BR… 40D0869394   NA         NA          NA    0     NA   
-#> # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
-#> #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
-#> #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
-#> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
-#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
+#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
 
 clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
-#> ✔ clia returned 18 results.
-#> # A tibble: 18 × 82
-#>    fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
-#>  * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
-#>  1 SGMC HEALTH  NA         11D0022233   110122     NA          NA    0     NA   
-#>  2 SGMC- SMITH… NA         11D0022241   110037     NA          NA    0     NA   
-#>  3 SMITH & DEN… NA         11D0265567   254623647A NA          NA    0     NA   
-#>  4 QUEST DIAGN… SOLSTAS L… 11D0646134   11L0008004 NA          NA    0     NA   
-#>  5 SOUTH GA ME… NA         11D0680179   110122     NA          NA    0     NA   
-#>  6 NORTHSIDE M… WILLIAM C… 11D0902131   NA         NA          NA    0     NA   
-#>  7 SOUTH GEORG… NA         11D0914178   NA         NA          NA    0     NA   
-#>  8 SOUTHERN PH… NA         11D0960358   NA         NA          NA    0     NA   
-#>  9 VALDOSTA CB… NA         11D1001568   NA         NA          NA    0     NA   
-#> 10 ALLEGIANT S… NA         11D1065138   NA         NA          NA    0     NA   
-#> 11 CARE MEDICA… NA         11D2027917   NA         NA          NA    0     NA   
-#> 12 GULF COAST … NA         11D2053438   NA         NA          NA    0     NA   
-#> 13 BPC PLASMA,… NA         11D2079448   NA         NA          NA    0     NA   
-#> 14 SOUTH GEORG… NA         11D2101175   NA         NA          NA    0     NA   
-#> 15 SGMC POINT … NA         11D2144796   NA         NA          NA    0     NA   
-#> 16 SGMC FAMILY… NA         11D2144934   NA         NA          NA    0     NA   
-#> 17 OCTAPHARMA … NA         11D2193538   NA         NA          NA    0     NA   
-#> 18 VEEDHATA OM… NA         11D2223235   NA         NA          NA    0     NA   
-#> # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
-#> #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
-#> #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
-#> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
-#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
+#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
 
 clia(accreditation = c("cap", "cola", "jcaho"))
-#> ✔ clia returned 1 result.
-#> # A tibble: 1 × 82
-#>   fac_name_1    fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
-#> * <chr>         <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
-#> 1 LEXINGTON ME… NA         42D0665325   420073     NA          NA    0     NA   
-#> # ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
-#> #   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#> #   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#> #   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
-#> #   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
-#> #   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, app_date <chr>,
-#> #   cert_date <chr>, eff_date <chr>, mail_date <chr>, term_date <chr>, …
+#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
 ```

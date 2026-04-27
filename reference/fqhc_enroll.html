@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9113</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9114</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,32 +141,14 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fqhc_enroll</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">fqhc_enroll</span> has <span style="font-weight: bold;">11,063</span> rows.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"):</span> <span style="color: #BBBB00;">!</span> Could not evaluate cli `{}` expression: `mark(x)`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error</span> in `uuid_cms(self@end)`:</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fqhc_enroll</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">fqhc_enroll</span> ❯ <span style="font-style: italic;">No Query</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">eval</span> ❯ <span style="font-style: italic;">No Query</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [10 × 20] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid      : chr [1:10] "O20020819000009" "O20020829000010" "O20020927000008" "O20021011000005" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid_state: chr [1:10] "FL" "NY" "FL" "IL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prov_type : chr [1:10] "00-04" "00-04" "00-04" "00-04" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prov_desc : chr [1:10] "PART A PROVIDER - FEDERALLY QUALIFIED HEALTH CENTER (FQHC)" "PART A PROVIDER - FEDERALLY QUALIFIED HEALTH CENTER (FQHC)" "PART A PROVIDER - FEDERALLY QUALIFIED HEALTH CENTER (FQHC)" "PART A PROVIDER - FEDERALLY QUALIFIED HEALTH CENTER (FQHC)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi       : int [1:10] 1801826268 1619969458 1164642419 1629156807 1417149766 1598895542 1417005919 1629078274 1245246917 1487764759</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi     : int [1:10] 0 0 0 0 0 0 0 0 0 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn       : chr [1:10] "101936" "331916" "101937" "141927" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac       : chr [1:10] "2365359387" "6608783568" "2365359387" "9537076112" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name  : chr [1:10] "TRENTON MEDICAL CENTER INC" "SUN RIVER HEALTH INC." "TRENTON MEDICAL CENTER INC" "ACCESS COMMUNITY HEALTH NETWORK" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba   : chr [1:10] "PALMS MEDICAL GROUP" NA "PALMS MEDICAL GROUP" "AUBURN-GRESHAM FAMILY HEALTH CENTER" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date  : Date[1:10], format: "1988-01-14" "1975-08-05" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_state : chr [1:10] "FL" "NY" "FL" "IL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type  : chr [1:10] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_otxt  : chr [1:10] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ status    : chr [1:10] "N" "N" "N" "N" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city      : chr [1:10] "TRENTON" "POUGHKEEPSIE" "BELL" "CHICAGO" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state     : chr [1:10] "FL" "NY" "FL" "IL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip       : chr [1:10] "326933239" "126012303" "326194713" "606204625" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ phone     : chr [1:10] "3524632374" "8457907990" "3524631100" "7738741400" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address   : chr [1:10] "911 S MAIN ST" "75 WASHINGTON ST" "1830 N MAIN ST" "8234 S ASHLAND AVE" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uuid_cms(self@end):</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

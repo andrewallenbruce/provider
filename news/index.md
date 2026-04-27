@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9114 (2026-04-27)
+
+- completed migration to new execute engine
+- added test structure for testing Modifier behavior
+
 ## provider 0.0.1.9113 (2026-04-27)
 
 - cleaning, restructuring, dynamic dots removed from use in modifiers
