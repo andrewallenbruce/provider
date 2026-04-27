@@ -5,33 +5,12 @@ Modifier <- S7::new_class(
   properties = list(value = S7::class_atomic)
 )
 
-#' @noRd
-is_modifier <- function(x) {
-  S7::S7_inherits(x, Modifier)
-}
-
-#' @noRd
-operator <- S7::new_generic("operator", "x")
-
-#' @noRd
-value <- S7::new_generic("value", "x")
-
-#' @noRd
-S7::method(operator, Modifier) <- function(x) {
-  S7::S7_data(x)
-}
-
-#' @noRd
-S7::method(value, Modifier) <- function(x) {
-  S7::prop(x, "value")
-}
-
 #' @export
 `print.provider::Modifier` <- function(x, ...) {
-  v <- if (any2(value(x) == "")) {
-    encodeString(value(x), quote = '"', na.encode = FALSE)
+  v <- if (any2(x@value == "")) {
+    encodeString(x@value, quote = '"', na.encode = FALSE)
   } else {
-    value(x)
+    x@value
   }
 
   m <- cli::format_inline(cli::col_cyan("<modifier[{length(v)}]>"))
@@ -39,7 +18,7 @@ S7::method(value, Modifier) <- function(x) {
   cli::cat_rule(m, width = 20, line = 2, line_col = "cyan")
   cli::cli_text(c(
     cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold(operator(x)))
+    cli::col_red(cli::style_bold(S7::S7_data(x)))
   ))
 
   cli::cli_text(
@@ -61,20 +40,20 @@ S7::method(value, Modifier) <- function(x) {
 #'   format.
 #'
 #' @param x input
-#' @param ... input
-#' @param equal `<lgl>` append `=` to `less_than()` or `greater_than()`
+#' @param y input
+#' @param equal `<lgl>` append `=` to `less()` or `greater()`
 #'
 #' @name modifier
 #'
 #' @examples
 #' list(
-#'    `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
-#'    `ends_with("bar")` = ends_with("bar"),
-#'    `starts_with("foo")` = starts_with("foo"),
-#'    `less_than(1000)` = less_than(1000),
-#'    `less_than(0.125, equal = TRUE)` = less_than(0.125, equal = TRUE),
-#'    `greater_than(1000)` = greater_than(1000),
-#'    `greater_than(0.125, equal = TRUE)` = greater_than(0.125, equal = TRUE),
+#'    `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
+#'    `ends("bar")` = ends("bar"),
+#'    `starts("foo")` = starts("foo"),
+#'    `less(1000)` = less(1000),
+#'    `less(0.125, equal = TRUE)` = less(0.125, equal = TRUE),
+#'    `greater(1000)` = greater(1000),
+#'    `greater(0.125, equal = TRUE)` = greater(0.125, equal = TRUE),
 #'    `between(0.125, 2)` = between(0.125, 2),
 #'    `contains("baz")` = contains("baz"),
 #'    `not("zzz")` = not("zzz"),
@@ -87,23 +66,19 @@ NULL
 
 #' @rdname modifier
 #' @export
-excludes <- function(...) {
-  x <- rlang::list2(...)
-  check_dots(x)
+excludes <- function(x) {
   check_not_modifier(x)
-  x <- unlist_(x)
   Modifier("NOT+IN", value = x)
 }
 
 #' @rdname modifier
 #' @export
-between <- function(...) {
-  x <- rlang::list2(...)
-  check_dots(x)
+between <- function(x, y) {
   check_not_modifier(x)
-  x <- unlist_(x)
+  check_not_modifier(y)
   check_numeric(x)
-  Modifier("BETWEEN", value = collapse::frange(x, na.rm = TRUE))
+  check_numeric(y)
+  Modifier("BETWEEN", value = c(x, y))
 }
 
 #' @rdname modifier
@@ -143,27 +118,25 @@ is_blank <- function() {
 
 #' @rdname modifier
 #' @export
-greater_than <- function(x, equal = FALSE) {
+greater <- function(x, equal = FALSE) {
   check_required(x)
   check_not_modifier(x)
   check_number_decimal(x)
-  check_bool(equal)
   Modifier(ifelse(!equal, ">", ">="), value = x)
 }
 
 #' @rdname modifier
 #' @export
-less_than <- function(x, equal = FALSE) {
+less <- function(x, equal = FALSE) {
   check_required(x)
   check_not_modifier(x)
   check_number_decimal(x)
-  check_bool(equal)
   Modifier(ifelse(!equal, "<", "<="), value = x)
 }
 
 #' @rdname modifier
 #' @export
-starts_with <- function(x) {
+starts <- function(x) {
   check_required(x)
   check_not_modifier(x)
   Modifier("STARTS WITH", value = x)
@@ -171,7 +144,7 @@ starts_with <- function(x) {
 
 #' @rdname modifier
 #' @export
-ends_with <- function(x) {
+ends <- function(x) {
   check_required(x)
   check_not_modifier(x)
   Modifier("ENDS WITH", value = x)

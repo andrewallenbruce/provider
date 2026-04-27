@@ -24,7 +24,7 @@
 #'
 #' pending(first = "Victor", count = TRUE)
 #'
-#' pending(first = starts_with("V"))
+#' pending(first = starts("V"))
 #'
 #' @autoglobal
 #' @export

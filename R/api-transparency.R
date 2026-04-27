@@ -59,7 +59,7 @@
 #'
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
-#' transparency(count = TRUE, action = "warn")
+#' transparency(count = TRUE, action = "met")
 #' transparency(state = "GA", city = "Valdosta")
 #' @autoglobal
 #' @export

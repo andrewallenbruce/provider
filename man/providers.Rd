@@ -55,8 +55,8 @@ actively approved to bill Medicare.
 providers(count = TRUE)
 providers(count = TRUE, org_name = not_blank())
 providers()
-providers(org_name = starts_with("AB"), state = c("TX", "CA"))
-providers(org_name = starts_with("U"), count = TRUE)
+providers(org_name = starts("AB"), state = c("TX", "CA"))
+providers(org_name = starts("U"), count = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -1,4 +1,9 @@
 #' @noRd
+cli_Pmsg <- function(PAGE) {
+  cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
+}
+
+#' @noRd
 cli_apis <- function(x) {
   cli::cat_bullet(
     paste0(
@@ -11,21 +16,22 @@ cli_apis <- function(x) {
 }
 
 #' @noRd
-cli_no_query <- function(endpoint) {
-  cli::cli_alert_warning(
-    "{.strong {endpoint}} {cli::symbol$pointer} {.emph No Query}"
-  )
+cli_empty <- function(endpoint) {
+  cli::cli_alert_warning(c(
+    "{.strong {endpoint}} ",
+    "{cli::symbol$pointer} ",
+    "{.emph No Query}"
+  ))
   cli::cli_alert_info("Returning first {.strong 10} rows...")
 }
 
 #' @noRd
 cli_total <- function(x, endpoint) {
-  msg <- c(
+  cli::cli_alert_info(c(
     "{.strong {endpoint}} has ",
     "{.strong {mark(x)}} ",
     "{cli::qty(x)}row{?s}."
-  )
-  cli::cli_alert_info(msg)
+  ))
 }
 
 #' @noRd
@@ -36,16 +42,18 @@ cli_total2 <- function(x, endpoint) {
 
 #' @noRd
 cli_results <- function(x, endpoint) {
-  msg <- c(
-    "{.strong {endpoint}} returned ",
-    "{.strong {mark(x)}} ",
-    "{cli::qty(x)}result{?s}."
-  )
-
-  if (!x) {
-    cli::cli_alert_warning(msg)
+  if (x == 0L) {
+    cli::cli_alert_warning(c(
+      "{.strong {endpoint}} returned ",
+      "{.strong {mark(x)}} ",
+      "{cli::qty(x)}result{?s}."
+    ))
   } else {
-    cli::cli_alert_success(msg)
+    cli::cli_alert_success(c(
+      "{.strong {endpoint}} returned ",
+      "{.strong {mark(x)}} ",
+      "{cli::qty(x)}result{?s}."
+    ))
   }
 }
 
@@ -58,13 +66,11 @@ cli_results2 <- function(x, endpoint) {
 #' @noRd
 cli_pages <- function(x, limit, endpoint) {
   cli_results(x, endpoint)
-  PAGE <- offset(n = x, limit = limit)
-  cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
+  cli_Pmsg(offset(n = x, limit = limit))
 }
 
 #' @noRd
 cli_pages2 <- function(x, limit, endpoint) {
   cli_results2(x, endpoint)
-  PAGE <- sum2(cheapr::seq_size(0L, unlist_(x), limit))
-  cli::cli_alert_info("Retrieving {.strong {PAGE}} page{?s}...")
+  cli_Pmsg(sum2(cheapr::seq_size(0L, unlist_(x), limit)))
 }

@@ -64,10 +64,14 @@ gathered from the \emph{Provider Enrollment, Chain and Ownership System (PECOS)}
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 revocations(count = TRUE)
 
-revocations(count = TRUE, org_name = not_blank())
+revocations(
+  count = TRUE,
+  org_name = not_blank())
 
-revocations(org_name = starts_with("B"))
+revocations(org_name = starts("B"))
 
-revocations(specialty = contains("CARDIO"), state = excludes("GA", "OH"))
+revocations(
+  specialty = contains("CARDIO"),
+  state = excludes(c("GA", "OH")))
 \dontshow{\}) # examplesIf}
 }

@@ -54,7 +54,7 @@ affiliations(facility_ccn = 110122)
 
 ``` r
 reassignments(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ✔ reassignments returned 210 results.
 # A tibble: 210 × 14
@@ -79,7 +79,7 @@ reassignments(
 
 ``` r
 revocations(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ! revocations returned 0 results.
 ```
@@ -88,7 +88,7 @@ revocations(
 
 ``` r
 clinicians(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   org_state = "GA")
 ✔ clinicians returned 167 results.
 # A tibble: 167 × 20
@@ -114,8 +114,8 @@ clinicians(
 
 ``` r
 opt_out(
-  first = starts_with("B"),
-  specialty = starts_with("Oral"))
+  first = starts("B"),
+  specialty = starts("Oral"))
 ✔ opt_out returned 214 results.
 # A tibble: 214 × 12
           npi first last  specialty start_date end_date   updated    city  state
@@ -163,7 +163,7 @@ order_refer(
 
 ``` r
 providers(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ✔ providers returned 2 results.
 # A tibble: 2 × 11
@@ -178,7 +178,7 @@ providers(
 ``` r
 pending(
   first = contains("A"),
-  last = ends_with("E"))
+  last = ends("E"))
 ✔ pending returned 539 results.
 • Physician     : 159
 • Non-Physician : 380
@@ -198,7 +198,7 @@ pending(
 # ℹ 529 more rows
 ```
 
-##### :hospital: Medicare Part A Hospitals
+##### :hospital: Medicare Hospitals
 
 ``` r
 hospitals(ccn = "110122")
@@ -220,7 +220,7 @@ hospitals(ccn = "110122")
 
 ``` r
 clia(
-  facility_name = starts_with("SGMC"),
+  facility_name = starts("SGMC"),
   state = "GA")
 ✔ clia returned 32 results.
 # A tibble: 32 × 82

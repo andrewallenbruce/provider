@@ -40,7 +40,7 @@ list_cms <- S7::new_class(
 
 #' @noRd
 S7::method(req_empty, list_cms) <- function(x) {
-  cli_no_query(x@end)
+  cli_empty(x@end)
 
   flatten_url(
     base = paste0(x@url, "?"),
@@ -119,7 +119,7 @@ base_cms2 <- S7::new_class(
 
 #' @noRd
 S7::method(req_empty, base_cms2) <- function(x) {
-  cli_no_query(x@end)
+  cli_empty(x@end)
 
   flatten_url(
     base = paste0(x@url, "?"),
@@ -215,7 +215,7 @@ base_prov2 <- S7::new_class(
 
 #' @noRd
 S7::method(req_empty, base_prov2) <- function(x) {
-  cli_no_query(x@end)
+  cli_empty(x@end)
   flatten_url(x@url, opts = opts_prov(limit = 10L)) |>
     base_request(query = "results")
 }

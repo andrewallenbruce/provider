@@ -38,6 +38,6 @@ pending(count = TRUE)
 
 pending(first = "Victor", count = TRUE)
 
-pending(first = starts_with("V"))
+pending(first = starts("V"))
 \dontshow{\}) # examplesIf}
 }

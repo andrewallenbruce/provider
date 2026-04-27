@@ -72,8 +72,6 @@ clinicians <- function(
 ) {
   check_count_set(count, set)
   check_char_(gender)
-  check_numeric(grad_year)
-
   execute(
     base_prov2(
       end = "clinicians",

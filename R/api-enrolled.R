@@ -26,8 +26,8 @@
 #' providers(count = TRUE)
 #' providers(count = TRUE, org_name = not_blank())
 #' providers()
-#' providers(org_name = starts_with("AB"), state = c("TX", "CA"))
-#' providers(org_name = starts_with("U"), count = TRUE)
+#' providers(org_name = starts("AB"), state = c("TX", "CA"))
+#' providers(org_name = starts("U"), count = TRUE)
 #' @autoglobal
 #' @export
 providers <- function(
@@ -47,7 +47,6 @@ providers <- function(
 ) {
   check_count_set(count, set)
   check_bool_(multi)
-
   execute(
     base_cms2(
       end = "providers",

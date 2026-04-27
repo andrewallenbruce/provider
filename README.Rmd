@@ -62,7 +62,7 @@ affiliations(facility_ccn = 110122)
 ```{r}
 #| label: reassignment
 reassignments(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ```
 
@@ -71,7 +71,7 @@ reassignments(
 ```{r}
 #| label: revoked
 revocations(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ```
 
@@ -80,7 +80,7 @@ revocations(
 ```{r}
 #| label: clinician
 clinicians(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   org_state = "GA")
 ```
 
@@ -89,8 +89,8 @@ clinicians(
 ```{r}
 #| label: opted_out
 opt_out(
-  first = starts_with("B"),
-  specialty = starts_with("Oral"))
+  first = starts("B"),
+  specialty = starts("Oral"))
 ```
 
 ##### :receipt: Order & Referral Eligibility
@@ -109,7 +109,7 @@ order_refer(
 ```{r}
 #| label: enrolled
 providers(
-  org_name = starts_with("SGMC"),
+  org_name = starts("SGMC"),
   state = "GA")
 ```
 
@@ -119,10 +119,10 @@ providers(
 #| label: pending
 pending(
   first = contains("A"),
-  last = ends_with("E"))
+  last = ends("E"))
 ```
 
-##### :hospital: Medicare Part A Hospitals
+##### :hospital: Medicare Hospitals
 
 ```{r}
 #| label: hospital
@@ -134,7 +134,7 @@ hospitals(ccn = "110122")
 ```{r}
 #| label: clia
 clia(
-  facility_name = starts_with("SGMC"),
+  facility_name = starts("SGMC"),
   state = "GA")
 ```
 

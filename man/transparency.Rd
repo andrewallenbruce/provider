@@ -89,7 +89,7 @@ civil monetary penalty.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 transparency(count = TRUE)
-transparency(count = TRUE, action = "warn")
+transparency(count = TRUE, action = "met")
 transparency(state = "GA", city = "Valdosta")
 \dontshow{\}) # examplesIf}
 }
