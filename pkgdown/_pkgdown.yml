@@ -87,18 +87,11 @@ navbar:
 
 reference:
 - title: Endpoints
-
-- subtitle: General
-  desc: >
-    General Provider Data
-  contents:
-  - affiliations
-  - reassignments
-  - nppes
 - subtitle: Individual
   desc: >
-    Individual Provider Data
+    Demographics, credentials, and eligibility for individuals.
   contents:
+  - reassignments
   - clinicians
   - opt_out
   - order_refer
@@ -106,7 +99,7 @@ reference:
   - providers
 - subtitle: Organizational
   desc: >
-    Organizational Provider Data
+    Facility-level data, laboratory certifications, and clinic enrollments.
   contents:
   - clia
   - hospitals
@@ -115,12 +108,18 @@ reference:
   - rhc_owner
   - fqhc_enroll
   - fqhc_owner
-- subtitle: Sanctions
+- subtitle: Compliance
   desc: >
-    Providers who have incurred penalties or corrective actions
+    Sanctioned providers and price transparency enforcement.
   contents:
   - revocations
   - transparency
+- subtitle: Registry
+  desc: >
+    Core identity (NPI) and relationship mapping between individuals and orgs.
+  contents:
+  - affiliations
+  - nppes
 
 - title: Query Modifiers
   contents:

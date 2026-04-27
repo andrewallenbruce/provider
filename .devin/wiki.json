@@ -1,0 +1,290 @@
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level introduction to the `provider` R package: its purpose, the healthcare data ecosystem it targets, key design principles (tidy output, input validation, unified S7 execution), and a map to child pages for deeper exploration.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "Installation, basic usage patterns, package philosophy (tidy data, snake_case columns, list-columns), and a quick tour of the main function families with minimal examples.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Package Architecture Overview",
+      "purpose": "Summarises the three-layer architecture: user-facing API functions → S7 execute pipeline → HTTP/JSON layer. Introduces the S7 class hierarchy, the role of `polish`, and how the two CMS API flavours (Data API vs Provider Data API) are handled. Links to child pages for details.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Core Execution Engine",
+      "purpose": "Deep dive into the internal machinery that powers every API call: S7 class definitions, the execute dispatch loop, URL construction, pagination, and parallel request handling. Parent page linking to child pages for each sub-system.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "S7 Class Hierarchy and Generics",
+      "purpose": "Documents every S7 class (`list_cms`, `base_cms2`, `base_prov2`, `arg_cms`, `arg_prov`, `Modifier`, `Endpoint`, `Medicare`) and every generic (`execute`, `build`, `req_empty`, `req_single`, `req_multi`, `req_set`, `req_total`, `req_count`). Explains inheritance and method dispatch.",
+      "parent": "Core Execution Engine",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "URL Construction and UUID Registry",
+      "purpose": "Explains how human-readable endpoint names are mapped to CMS dataset UUIDs (`uuid_cms`, `uuid_prov`, `uuid_cms_list`), how base URLs are assembled (`flatten_url`, `opts_cms`, `opts_prov`), and the two API URL patterns (Data API v1 vs Provider Data API).",
+      "parent": "Core Execution Engine",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Pagination and Parallel Requests",
+      "purpose": "Covers the pagination engine: how `@N` (record count) is fetched via `/stats`, how `offset2`/`offset3` generate URL sequences, and how `httr2::req_perform_parallel` is used in `req_multi` to fetch large datasets concurrently. Includes the `offset()` utility and `limit` defaults (5000 CMS / 1500 Provider).",
+      "parent": "Core Execution Engine",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Query Building and Modifiers",
+      "purpose": "Documents the query DSL: the `Modifier` S7 class, all exported modifier functions (`starts_with`, `ends_with`, `contains`, `not`, `excludes`, `between`, `greater_than`, `less_than`, `is_blank`, `not_blank`), and how `build()` / `query_cms` / `query_pro` translate them into API-specific filter strings.",
+      "parent": "Core Execution Engine",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Endpoints Reference",
+      "purpose": "Overview of all user-facing API functions grouped by domain (General, Individual, Organizational, Sanctions/Compliance). Each child page covers a logical group of endpoints in detail. Links to child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Individual Provider Endpoints",
+      "purpose": "Detailed reference for `affiliations()`, `clinicians()`, `providers()`, `opt_out()`, `order_refer()`, and `pending()`. Covers parameters, return schema, inclusion criteria (FFS claim requirement for clinicians), and usage examples.",
+      "parent": "Data Endpoints Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Organizational Provider Endpoints",
+      "purpose": "Detailed reference for `hospitals()`, `hospitals2()`, `clia()`, `fqhc_enroll()`, `fqhc_owner()`, `rhc_enroll()`, `rhc_owner()`, and `hrsa_*()`. Covers parameters, enumeration values, the `subgroups()` helper, and cross-referencing between enrollment and general-information datasets.",
+      "parent": "Data Endpoints Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "General and Sanctions Endpoints",
+      "purpose": "Covers `nppes()`, `reassignments()`, `revocations()`, and `transparency()`. Explains the NPPES NPI Registry (Type 1 vs Type 2 entities, Luhn check), reassignment-of-benefits logic, revocation reasons, and hospital price transparency enforcement data.",
+      "parent": "Data Endpoints Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "HRSA Geospatial Facilities Interface",
+      "purpose": "Documents the `hrsa_items()`, `hrsa_layers()`, `hrsa_fields()`, and `hrsa_select()` functions that wrap `arcgislayers` to query HRSA's ArcGIS MapServer for CMS-approved facility data. Covers facility type codes, memoisation via `memoise`, and the `.onLoad` hook.",
+      "parent": "Data Endpoints Reference",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Processing Pipeline",
+      "purpose": "Explains how raw API JSON responses are transformed into tidy tibbles. Parent page linking to child pages on renaming, recoding, and validation.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Column Renaming (polish-renames)",
+      "purpose": "Documents the `column_renames()` switch and the `rename_with()` helper. Shows the full mapping tables for each endpoint (affiliations, clinicians, hospitals, hospitals2, clia, opt_out, order_refer, reassignments, revocations, transparency, fqhc, rhc, pending) from raw API field names to tidy snake_case names.",
+      "parent": "Data Processing Pipeline",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Recoding and Type Casting (polish-recode)",
+      "purpose": "Documents the `recode_with()` dispatch, `polish()` orchestrator, and all type-casting helpers: `rc_integer`, `rc_integer_supp`, `rc_double`, `rc_bin`, `rc_date_ymd`, `rc_date_mdy`, `bin_col`, `replace_nz`, and `combine_cols`. Explains the `as_integer_supp` NA-suppression pattern.",
+      "parent": "Data Processing Pipeline",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Enumeration Mapping (enums)",
+      "purpose": "Documents `R/enums.R`: the `enum_()` function, `bool_()` converter, and the `enumerations()` switch table covering `prov_type`, `loc_type`, `org_type`, `ownership`, `hosp_type`, `facility_type`, `accreditation`, and `certificate`. Explains how user-supplied short-codes are validated and translated to CMS string values.",
+      "parent": "Data Processing Pipeline",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Input Validation and Error Reporting",
+      "purpose": "Covers the validation layer that runs before any network request, and the CLI feedback system that reports progress and results. Links to child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Input Validation (checks)",
+      "purpose": "Documents all `check_*` functions in `R/checks.R`: `check_count_set`, `check_online`, `check_numeric`, `check_subgroups`, `check_modifiers`, `check_not_modifier`, `check_char_`, `check_bool`, `check_required`, and the standalone type-check imports. Explains the `rlang::caller_env()` pattern for accurate error attribution.",
+      "parent": "Input Validation and Error Reporting",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "CLI Feedback and Progress Reporting",
+      "purpose": "Documents all `cli_*` functions in `R/cli.R`: `cli_results`, `cli_results2`, `cli_pages`, `cli_pages2`, `cli_apis`, `cli_no_query`, and `cli_total`. Explains the three-phase feedback loop (pre-retrieval notice → pagination calculation → post-retrieval status) and the colour conventions used.",
+      "parent": "Input Validation and Error Reporting",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Utility Functions and Internal Data",
+      "purpose": "Reference for shared internal helpers and bundled datasets used across the package. Links to child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "General Utilities (utils)",
+      "purpose": "Documents `R/utils.R` helpers: `data_frame`, `df_tbl_`, `offset`, `provider_types`, `uuid_from_url`, `extract_year`, `to_string`, `plus`, `under`, `mark`, `is_numeric`, `sum2`, `rowbind2`, `set_args`, and `unlist_`. Explains the `cheapr`/`collapse` integration for performance.",
+      "parent": "Utility Functions and Internal Data",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Bundled Datasets and API Catalog",
+      "purpose": "Documents the exported `provider_type_code` dataset (108-row CMS provider type reference), the `R/sysdata.rda` internal data, and the `api_provider()` / `api_medicare()` / `api_medicare2()` catalog functions in `R/aaa-catalogs.R` that enumerate available CMS datasets at runtime.",
+      "parent": "Utility Functions and Internal Data",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Linking Providers: Cross-Dataset Workflows",
+      "purpose": "Practical guide to joining data across multiple endpoints using shared identifiers (NPI, PAC, CCN, ENID). Walks through the 'Elizabethtown Community Hospital' example from the vignette: providers → hospitals → affiliations → clinicians. Explains alphanumeric CCN sub-unit semantics.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Development and Infrastructure",
+      "purpose": "Covers the package's development tooling, CI/CD, documentation site, and data-raw scripts. Links to child pages.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Documentation Site (pkgdown)",
+      "purpose": "Explains the pkgdown configuration: Bootstrap 5 theme, Tango syntax highlighting, Inter/Recursive/JetBrains Mono font stack, brand colours (#202C56 / #A6081A), GoatCounter telemetry, and the reference index grouping (General / Individual / Organizational / Sanctions).",
+      "parent": "Development and Infrastructure",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "CI/CD and Testing",
+      "purpose": "Documents the GitHub Actions workflows (pkgdown deployment, test coverage via codecov), the `tests/testthat` setup, and the single test file for query modifiers. Notes the `air.toml` formatter configuration and `.Rbuildignore` / `.gitignore` conventions.",
+      "parent": "Development and Infrastructure",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Data-Raw Scripts and Archive",
+      "purpose": "Explains the purpose of the `data-raw/` directory: URL/UUID prototype scripts (`url-cms.R`, `url-execute.R`, `url-prov.R`), recode generation scripts (`recode_hospital.R`, `revocation_reasons.R`), NPPES JSON sample (`nppes.json`), CMS API notes (`CMS_API_Notes.Rmd`), and the `archive/` folder of superseded implementations.",
+      "parent": "Development and Infrastructure",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Definitions of every codebase-specific term, healthcare identifier, acronym, and R/S7 concept that an onboarding engineer needs to know, with code pointers.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
