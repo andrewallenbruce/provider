@@ -48,13 +48,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"): ! Could not evaluate cli `{}` expression: `mark(x)`.
-#> Caused by error in `uuid_cms_list(self@end)`:
-#> ! `endpoint` "eval" is invalid.
+#> ℹ pending has 9,661 rows.
+#> • Physician     : 3,626
+#> • Non-Physician : 6,035
 
 pending(first = "Victor", count = TRUE)
-#> Error in uuid_cms_list(self@end): `endpoint` "eval" is invalid.
+#> ✔ pending returned 7 results.
+#> • Physician     : 5
+#> • Non-Physician : 2
 
 pending(first = starts("V"))
-#> Error in uuid_cms_list(self@end): `endpoint` "eval" is invalid.
+#> ✔ pending returned 121 results.
+#> • Physician     : 39
+#> • Non-Physician : 82
+#> # A tibble: 121 × 4
+#>    prov_type first        last                    npi
+#>  * <chr>     <chr>        <chr>                 <int>
+#>  1 Physician VADIN        LALL DASS        1144512724
+#>  2 Physician VALENTINA    TURBAY CABALLERO 1689304545
+#>  3 Physician VALERIE      SOTO             1215825310
+#>  4 Physician VALJEAN      BACOT-DAVIS      1407597651
+#>  5 Physician VANESSA      NWOKOYE          1205530045
+#>  6 Physician VANITA       JAYSWAL          1790626414
+#>  7 Physician VANSHANI     PATEL            1649118753
+#>  8 Physician VARUNIL      SHAH             1972442267
+#>  9 Physician VENKATARAMAN PATLA            1124038419
+#> 10 Physician VENNELA      PULIKANTI        1821238999
+#> # ℹ 111 more rows
 ```

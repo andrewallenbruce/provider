@@ -94,18 +94,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"): ! Could not evaluate cli `{}` expression: `mark(x)`.
-#> Caused by error in `uuid_cms(self@end)`:
-#> ! `endpoint` "eval" is invalid.
+#> ℹ revocations has 7,465 rows.
 
 revocations(org_name = not_blank(), count = TRUE)
-#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
+#> ✔ revocations returned 4,199 results.
 
 revocations(org_name = starts("B"), count = TRUE)
-#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
+#> ✔ revocations returned 223 results.
 
 revocations(
   prov_desc = contains("CARDIO"),
   state = excludes(c("GA", "OH")))
-#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
+#> ✔ revocations returned 45 results.
+#> # A tibble: 45 × 12
+#>    org_name first   middle last      enid       npi multi state prov_desc reason
+#>  * <chr>    <chr>   <chr>  <chr>     <chr>    <int> <int> <chr> <chr>     <chr> 
+#>  1 NA       JUAN    Y      KURDI     I20031… 1.57e9     0 TX    PRACTITI… 424.5…
+#>  2 NA       RONALD  A      CARLISH   I20031… 1.64e9     0 CA    PRACTITI… 424.5…
+#>  3 NA       STEVE   E      NOZAD     I20031… 1.96e9     0 NY    PRACTITI… 424.5…
+#>  4 NA       RAED    A      JITAN     I20040… 1.03e9     0 WV    PRACTITI… 424.5…
+#>  5 NA       RAYMOND NA     CATANIA   I20040… 1.02e9     0 NJ    PRACTITI… 424.5…
+#>  6 NA       ROBERT  ALDO   VACCARINO I20040… 1.92e9     0 NY    PRACTITI… 424.5…
+#>  7 NA       STEVEN  B      HEFTER    I20040… 1.61e9     0 AL    PRACTITI… 424.5…
+#>  8 NA       BRYAN   F      PERRY     I20040… 1.24e9     0 OK    PRACTITI… 424.5…
+#>  9 NA       KLAUS   P      RENTROP   I20050… 1.19e9     0 NY    PRACTITI… 424.5…
+#> 10 NA       JOHN    MILES  MCCLURE   I20050… 1.43e9     0 MI    PRACTITI… 424.5…
+#> # ℹ 35 more rows
+#> # ℹ 2 more variables: start_date <date>, end_date <date>
 ```

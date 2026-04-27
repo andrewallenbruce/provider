@@ -121,11 +121,13 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"): ! Could not evaluate cli `{}` expression: `mark(x)`.
-#> Caused by error in `uuid_cms(self@end)`:
-#> ! `endpoint` "eval" is invalid.
+#> ℹ transparency has 10,726 rows.
 transparency(count = TRUE, action = "met")
-#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
+#> ✔ transparency returned 3,114 results.
 transparency(state = "GA", city = "Valdosta")
-#> Error in uuid_cms(self@end): `endpoint` "eval" is invalid.
+#> ✔ transparency returned 1 result.
+#> # A tibble: 1 × 7
+#>    case name             address             city     state action   action_date
+#> * <int> <chr>            <chr>               <chr>    <chr> <chr>    <date>     
+#> 1  6131 Greenleaf Center 2209 Pineview Drive Valdosta GA    Met Req… 2025-08-01 
 ```

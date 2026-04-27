@@ -13,7 +13,7 @@ been processed by CMS contractors."><meta property="og:image" content="https://a
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9115</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9116</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,15 +99,33 @@ been processed by CMS contractors.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("cli::cli_alert_info(c(\"{.strong {endpoint}} has \", \"{.strong {mark(x)}} \", ", "    \"{cli::qty(x)}row{?s}.\"))"):</span> <span style="color: #BBBB00;">!</span> Could not evaluate cli `{}` expression: `mark(x)`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error</span> in `uuid_cms_list(self@end)`:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">pending</span> has <span style="font-weight: bold;">9,661</span> rows.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>3,626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>6,035</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Victor"</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uuid_cms_list(self@end):</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">7</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>first <span class="op">=</span> <span class="fu"><a href="modifier.html">starts</a></span><span class="op">(</span><span class="st">"V"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in uuid_cms_list(self@end):</span> `endpoint` <span style="color: #0000BB;">"eval"</span> is invalid.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">121</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 121 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    prov_type first        last                    npi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Physician VADIN        LALL DASS        <span style="text-decoration: underline;">1</span>144<span style="text-decoration: underline;">512</span>724</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Physician VALENTINA    TURBAY CABALLERO <span style="text-decoration: underline;">1</span>689<span style="text-decoration: underline;">304</span>545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Physician VALERIE      SOTO             <span style="text-decoration: underline;">1</span>215<span style="text-decoration: underline;">825</span>310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Physician VALJEAN      BACOT-DAVIS      <span style="text-decoration: underline;">1</span>407<span style="text-decoration: underline;">597</span>651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Physician VANESSA      NWOKOYE          <span style="text-decoration: underline;">1</span>205<span style="text-decoration: underline;">530</span>045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Physician VANITA       JAYSWAL          <span style="text-decoration: underline;">1</span>790<span style="text-decoration: underline;">626</span>414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Physician VANSHANI     PATEL            <span style="text-decoration: underline;">1</span>649<span style="text-decoration: underline;">118</span>753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Physician VARUNIL      SHAH             <span style="text-decoration: underline;">1</span>972<span style="text-decoration: underline;">442</span>267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Physician VENKATARAMAN PATLA            <span style="text-decoration: underline;">1</span>124<span style="text-decoration: underline;">038</span>419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Physician VENNELA      PULIKANTI        <span style="text-decoration: underline;">1</span>821<span style="text-decoration: underline;">238</span>999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 111 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -132,11 +132,35 @@ A Clinician or Group must have:
 
 ``` r
 clinicians(count = TRUE, org_name = not_blank())
-#> Error in uuid_prov(self@end): `endpoint` "eval" is invalid.
+#> ✔ clinicians returned 2,586,064 results.
 
 clinicians(enid = "I20081002000549")
-#> Error in uuid_prov(self@end): `endpoint` "eval" is invalid.
+#> ✔ clinicians returned 1 result.
+#> # A tibble: 1 × 20
+#>   first middle last  suffix gender cred  school grad_year specialty    npi pac  
+#> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
+#> 1 DORO… E      MCCU… NA     F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022…
+#> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <int>,
+#> #   org_city <chr>, org_state <chr>, org_zip <chr>, org_phone <chr>,
+#> #   org_add <chr>
 
 clinicians(first = "Etan")
-#> Error in uuid_prov(self@end): `endpoint` "eval" is invalid.
+#> ✔ clinicians returned 11 results.
+#> # A tibble: 11 × 20
+#>    first middle last     suffix gender cred  school   grad_year specialty    npi
+#>  * <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>        <int> <chr>      <int>
+#>  1 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO…      2013 PATHOLOGY 1.53e9
+#>  2 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
+#>  3 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO…      2013 PATHOLOGY 1.53e9
+#>  4 ETAN  NA     DAYAN    NA     M      MD    STATE U…      2012 DIAGNOST… 1.70e9
+#>  5 ETAN  NA     SPIRA    NA     M      MD    NEW YOR…      2007 GASTROEN… 1.00e9
+#>  6 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
+#>  7 ETAN  NA     SPIRA    NA     M      MD    NEW YOR…      2007 GASTROEN… 1.00e9
+#>  8 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
+#>  9 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
+#> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
+#> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
+#> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
+#> #   org_phone <chr>, org_add <chr>
 ```
