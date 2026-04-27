@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9116 (2026-04-27)
+
+* rolled back to manually entering the function name into the base_* class
+
+
 # provider 0.0.1.9115 (2026-04-27)
 
 * fixed eval bug in execute
