@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9118 (2026-04-27)
+
+* quality_metrics impl
+
+
 # provider 0.0.1.9117 (2026-04-27)
 
 * documentation
