@@ -114,6 +114,7 @@ reference:
   contents:
   - revocations
   - transparency
+  - quality_metrics
 - subtitle: Registry
   desc: >
     Core identity (NPI) and relationship mapping between individuals and orgs.

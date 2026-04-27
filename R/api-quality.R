@@ -23,26 +23,11 @@
 #   experience  = providertwo:::set_clean(qpp_exp, names(qpp_exp)),
 #   eligibility = qpp_eligible,
 #   metrics     = qpp_metrics)
+# check_number_whole(year, min = 2018, max = next_year())
 
-#' @autoglobal
 #' @noRd
-quality_metrics <- function(year) {
-  check_required(year)
-  purrr::map(year, function(y) {
-    cheapr::fast_df(
-      year = rep.int(as.integer(y), 4L),
-      category = c(rep.int("Individual", 2L), rep.int("Group", 2L)),
-      metric = rep.int(c("HCC Risk Score", "Dual Eligibility Ratio"), 2L),
-      mean = httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
-        httr2::req_url_query(year = y) |>
-        httr2::req_perform() |>
-        httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
-        collapse::get_elem("data") |>
-        unlist_()
-    )
-  }) |>
-    collapse::rowbind() |>
-    collapse::roworderv(c("metric", "category", "year"), decreasing = TRUE)
+next_year <- function() {
+  as.integer(substring(Sys.Date(), 1L, 4L)) + 1L
 }
 
 #' @autoglobal
