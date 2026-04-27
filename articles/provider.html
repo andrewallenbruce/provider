@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9117</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9118</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,25 +99,29 @@
 <p>The overarching goal of <a href="https://andrewallenbruce.github.io/provider/">provider</a> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
-through the following goals: - <strong>Variable
-Standardization</strong>, for the express purpose of making it easier to
-understand (and make connections between) each API’s output. This will
-also allow for the removal of duplicate information and greatly simplify
-the process of merging data across outputs. - <strong>Input
-Validation</strong>. Not only is this simply good practice, it also
-prevents unnecessary querying of APIs. - <strong>Helpful
-Documentation</strong>. The impetus for this package was to cobble
-together a motivating example of using a programming language to
-streamline the process of data acquisition for, among other things,
-medical coding, billing, and healthcare revenue cycle management. Though
-it’s now grown beyond that, the intended audience remains the same:
-non-programmers in healthcare who are interested in what a programming
-language like R can do to make their work easier. As such, the
-documentation is written with in a way that assumes no prior knowledge
-of R or programming in general. Domain-specific terminology and concepts
-are explained in detail, as there is not one person in existence that
-understands every aspect of the business of health care, including the
-author of this package.</p>
+through the following goals:</p>
+<ul>
+<li><p><strong>Variable Standardization</strong>: for the express
+purpose of making it easier to understand (and make connections between)
+each API’s output. This will also allow for the removal of duplicate
+information and greatly simplify the process of merging data across
+outputs.</p></li>
+<li><p><strong>Input Validation</strong>: Not only is this simply good
+practice, it also prevents unnecessary querying of APIs.</p></li>
+<li><p><strong>Helpful Documentation</strong>: The impetus for this
+package was to cobble together a motivating example of using a
+programming language to streamline the process of data acquisition for,
+among other things, medical coding, billing, and healthcare revenue
+cycle management. Though it’s now grown beyond that, the intended
+audience remains the same: non-programmers in healthcare who are
+interested in what a programming language like R can do to make their
+work easier. As such, the documentation is written with in a way that
+assumes no prior knowledge of R or programming in general.
+Domain-specific terminology and concepts are explained in detail, as
+there is not one person in existence that understands every aspect of
+the business of health care, including the author of this
+package.</p></li>
+</ul>
 <div class="section level2">
 <h2 id="package-architecture">Package Architecture<a class="anchor" aria-label="anchor" href="#package-architecture"></a>
 </h2>
@@ -134,36 +138,43 @@ unified execution pipeline.</p>
 (Natural Language/R function calls) into network requests, and finally
 into tidy data frames.</p>
 <ol style="list-style-type: decimal">
-<li>User-Facing API Layer: This layer consists of exported functions
-like clinicians(), hospitals(), and nppes(). These functions perform
-input validation using the check_* family of functions and capture user
-arguments into S7 classes (arg_cms or arg_prov).</li>
-<li>S7 Execute Pipeline: The core logic is encapsulated in the execute
-generic. When a user-facing function calls execute(), the S7 dispatch
-system determines the correct URL construction, pagination strategy, and
-parallelization logic based on the class of the input object.</li>
-<li>HTTP/JSON Layer: The bottom layer interacts with the web via httr2.
-It handles the raw JSON responses from CMS, which are then parsed by
-RcppSimdJson and passed to the polish() function for renaming and type
-casting.</li>
+<li>
+<strong>User-Facing API Layer</strong>: This layer consists of
+exported functions like <code><a href="../reference/clinicians.html">clinicians()</a></code>,
+<code><a href="../reference/hospitals.html">hospitals()</a></code>, and <code><a href="../reference/nppes.html">nppes()</a></code>. These functions
+perform input validation using the check_* family of functions and
+capture user arguments into S7 classes (<code>arg_cms</code> or
+<code>arg_prov</code>).</li>
+<li>
+<strong>S7 Execute Pipeline</strong>: The core logic is encapsulated
+in the execute generic. When a user-facing function calls
+<code>execute()</code>, the S7 dispatch system determines the correct
+URL construction, pagination strategy, and parallelization logic based
+on the class of the input object.</li>
+<li>
+<strong>HTTP/JSON Layer</strong>: The bottom layer interacts with
+the web via <code>httr2</code>. It handles the raw JSON responses from
+CMS, which are then parsed by <code>RcppSimdJson</code> and passed to
+the <code>polish()</code> function for renaming and type casting.</li>
 </ol>
 </div>
-</div>
-<div class="section level2">
-<h2 id="handling-api-flavors">Handling API Flavors<a class="anchor" aria-label="anchor" href="#handling-api-flavors"></a>
-</h2>
+<div class="section level3">
+<h3 id="handling-api-flavors">Handling API Flavors<a class="anchor" aria-label="anchor" href="#handling-api-flavors"></a>
+</h3>
 <p>The package distinguishes between two primary CMS infrastructures.
 This distinction is vital because they use different pagination
-parameters and filtering syntax.</p>
+parameters and filtering syntax:</p>
 <ol style="list-style-type: decimal">
-<li>Data API (CMS):
+<li>
+<strong>Data API (CMS)</strong>:
 <ul>
 <li>Base URL: data.cms.gov/data-api/v1/dataset/…</li>
 <li>Pagination: Uses size(5000) and offset.</li>
 <li>Logic: Handled by arg_cms and req_multi.base_cms2.</li>
 </ul>
 </li>
-<li>Provider Data API (PROV):
+<li>
+<strong>Provider Data API (PROV)</strong>:
 <ul>
 <li>Base URL: data.cms.gov/provider-data/api/v1/dataset/…</li>
 <li>Pagination: Uses limit(1500) and offset.</li>
@@ -172,11 +183,11 @@ parameters and filtering syntax.</p>
 </li>
 </ol>
 </div>
-<div class="section level2">
-<h2 id="the-role-of-polish">The Role of polish<a class="anchor" aria-label="anchor" href="#the-role-of-polish"></a>
-</h2>
-<p>The polish() function is the final stage of the pipeline. It
-orchestrates three critical transformations:</p>
+<div class="section level3">
+<h3 id="the-role-of-polish">The Role of <code>polish</code><a class="anchor" aria-label="anchor" href="#the-role-of-polish"></a>
+</h3>
+<p>The <code>polish()</code> function is the final stage of the
+pipeline. It orchestrates three critical transformations:</p>
 <ol style="list-style-type: decimal">
 <li>Renaming: Converts raw API keys (e.g., adr_ln_1) into snake_case
 (e.g., address_1) via column_renames().</li>
@@ -186,6 +197,8 @@ strings (e.g., “Community Hospital”) using recode_with().</li>
 integers, and dates are parsed correctly via helpers like
 rc_integer_supp and rc_date_ymd.</li>
 </ol>
+<hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="provider-identifiers">Provider Identifiers<a class="anchor" aria-label="anchor" href="#provider-identifiers"></a>

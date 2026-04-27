@@ -50,6 +50,8 @@ Sanctioned providers and price transparency enforcement.
   : Revoked Providers & Suppliers
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
+- [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  : Quality Payment Program
 
 ### Registry
 
