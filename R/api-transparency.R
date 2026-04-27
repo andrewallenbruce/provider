@@ -76,7 +76,7 @@ transparency <- function(
   check_char_(action)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "transparency",
       count = count,
       set = set,
       arg = param_cms(

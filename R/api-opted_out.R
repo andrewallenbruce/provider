@@ -64,7 +64,7 @@ opt_out <- function(
   check_bool_(order_refer)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "opt_out",
       count = count,
       set = set,
       arg = param_cms(

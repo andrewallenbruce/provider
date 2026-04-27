@@ -56,7 +56,7 @@ affiliations <- function(
   check_char_(facility_type)
   execute(
     base_prov(
-      end = eval_bare(END_EXP),
+      end = "affiliations",
       count = count,
       set = set,
       arg = param_prov(

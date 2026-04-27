@@ -56,7 +56,7 @@ rhc_enroll <- function(
   check_char_(org_type)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "rhc_enroll",
       count = count,
       set = set,
       arg = param_cms(
@@ -107,7 +107,7 @@ rhc_owner <- function(
   check_count_set(count, set)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "rhc_owner",
       count = count,
       set = set,
       arg = param_cms(

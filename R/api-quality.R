@@ -111,6 +111,9 @@ quality_eligibility <- function(year, npi) {
     data_frame()
 }
 
+# QPP Submissions API
+# https://preview.qpp.cms.gov/api/submissions/public/docs/
+
 # The Quality Payment Program (QPP) Experience dataset provides
 # participation and performance information in the Merit-based
 # Incentive Payment System (MIPS) during each performance year.

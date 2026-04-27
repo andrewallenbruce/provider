@@ -81,9 +81,10 @@ clia <- function(
   check_char_(accreditation)
   check_bool_(compliant)
   check_bool_(active)
+
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "clia",
       count = count,
       set = set,
       arg = param_cms(

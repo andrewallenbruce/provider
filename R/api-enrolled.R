@@ -49,7 +49,7 @@ providers <- function(
   check_bool_(multi)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "providers",
       count = count,
       set = set,
       arg = param_cms(

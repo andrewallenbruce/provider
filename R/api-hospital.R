@@ -98,7 +98,7 @@ hospitals <- function(
 
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "hospitals",
       count = count,
       set = set,
       arg = param_cms(

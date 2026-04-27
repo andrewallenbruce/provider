@@ -63,7 +63,7 @@ revocations <- function(
   check_numeric(year_end)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "revocations",
       count = count,
       set = set,
       arg = param_cms(

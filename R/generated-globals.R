@@ -6,10 +6,14 @@ utils::globalVariables(c(
   # <RC_clinicians>
   # <RC_hospitals>
   # <RC_opt_out>
+  # <RC_rhc_enroll>
+  # <RC_fqhc_enroll>
   "add_1",
   # <RC_clinicians>
   # <RC_hospitals>
   # <RC_opt_out>
+  # <RC_rhc_enroll>
+  # <RC_fqhc_enroll>
   "add_2",
   # <api_medicare2>
   "describedBy",
@@ -17,19 +21,19 @@ utils::globalVariables(c(
   "description",
   # <api_medicare2>
   "identifier",
-  # <query_pro>
-  # <query_cms>
-  "O",
+  # <RC_rhc_owner>
+  # <RC_fqhc_owner>
+  "own_add_1",
+  # <RC_rhc_owner>
+  # <RC_fqhc_owner>
+  "own_add_2",
+  # <quality_eligibility>
+  "prog_year",
   # <RC_clinicians>
   "spec_other",
   # <RC_clinicians>
   "specialty",
-  # <api_provider>
-  # <api_medicare>
   # <api_medicare2>
   "title",
-  # <query_pro>
-  # <query_cms>
-  "V",
   NULL
 ))

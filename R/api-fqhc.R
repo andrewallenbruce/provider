@@ -56,7 +56,7 @@ fqhc_enroll <- function(
   check_char_(org_type)
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "fqhc_enroll",
       count = count,
       set = set,
       arg = param_cms(
@@ -107,7 +107,7 @@ fqhc_owner <- function(
 ) {
   execute(
     base_cms(
-      end = eval_bare(END_EXP),
+      end = "fqhc_owner",
       count = count,
       set = set,
       arg = param_cms(
