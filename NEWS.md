@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9115 (2026-04-27)
+
+* fixed eval bug in execute
+
+
 # provider 0.0.1.9114 (2026-04-27)
 
 * completed migration to new execute engine
