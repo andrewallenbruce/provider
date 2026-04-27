@@ -50,7 +50,7 @@ pak::pak("andrewallenbruce/provider")
 library(provider)
 ```
 
-#### :calling: Facility Affiliations
+#### :office: Facility Affiliations
 
 ```{r}
 #| label: affiliation

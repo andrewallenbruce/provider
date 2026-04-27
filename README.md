@@ -29,7 +29,7 @@ pak::pak("andrewallenbruce/provider")
 library(provider)
 ```
 
-#### :calling: Facility Affiliations
+#### :office: Facility Affiliations
 
 ``` r
 affiliations(facility_ccn = 110122)
