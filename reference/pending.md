@@ -57,7 +57,7 @@ pending(first = "Victor", count = TRUE)
 #> • Physician     : 5
 #> • Non-Physician : 2
 
-pending(first = starts_with("V"))
+pending(first = starts("V"))
 #> ✔ pending returned 121 results.
 #> • Physician     : 39
 #> • Non-Physician : 82

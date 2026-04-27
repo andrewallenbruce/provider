@@ -5,9 +5,9 @@ Helpers for use in constructing conditions in queries.
 ## Usage
 
 ``` r
-excludes(...)
+excludes(x)
 
-between(...)
+between(x, y)
 
 contains(x)
 
@@ -17,13 +17,13 @@ not_blank()
 
 is_blank()
 
-greater_than(x, equal = FALSE)
+greater(x, equal = FALSE)
 
-less_than(x, equal = FALSE)
+less(x, equal = FALSE)
 
-starts_with(x)
+starts(x)
 
-ends_with(x)
+ends(x)
 ```
 
 ## Source
@@ -33,17 +33,17 @@ Parameters](https://jsonapi.org/format/#query-parameters)
 
 ## Arguments
 
-- ...:
+- x:
 
   input
 
-- x:
+- y:
 
   input
 
 - equal:
 
-  `<lgl>` append `=` to `less_than()` or `greater_than()`
+  `<lgl>` append `=` to `less()` or `greater()`
 
 ## Value
 
@@ -60,50 +60,50 @@ format.
 
 ``` r
 list(
-   `excludes("AL", "AK", "AZ")` = excludes("AL", "AK", "AZ"),
-   `ends_with("bar")` = ends_with("bar"),
-   `starts_with("foo")` = starts_with("foo"),
-   `less_than(1000)` = less_than(1000),
-   `less_than(0.125, equal = TRUE)` = less_than(0.125, equal = TRUE),
-   `greater_than(1000)` = greater_than(1000),
-   `greater_than(0.125, equal = TRUE)` = greater_than(0.125, equal = TRUE),
+   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
+   `ends("bar")` = ends("bar"),
+   `starts("foo")` = starts("foo"),
+   `less(1000)` = less(1000),
+   `less(0.125, equal = TRUE)` = less(0.125, equal = TRUE),
+   `greater(1000)` = greater(1000),
+   `greater(0.125, equal = TRUE)` = greater(0.125, equal = TRUE),
    `between(0.125, 2)` = between(0.125, 2),
    `contains("baz")` = contains("baz"),
    `not("zzz")` = not("zzz"),
    `not_blank()` = not_blank(),
    `is_blank()` = is_blank()
  )
-#> $`excludes("AL", "AK", "AZ")`
+#> $`excludes(c("AL", "AK", "AZ"))`
 #> ══ <modifier[3]> ═══
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
 #> 
-#> $`ends_with("bar")`
+#> $`ends("bar")`
 #> ══ <modifier[1]> ═══
 #> Operator: ENDS WITH
 #> Value: bar
 #> 
-#> $`starts_with("foo")`
+#> $`starts("foo")`
 #> ══ <modifier[1]> ═══
 #> Operator: STARTS WITH
 #> Value: foo
 #> 
-#> $`less_than(1000)`
+#> $`less(1000)`
 #> ══ <modifier[1]> ═══
 #> Operator: <
 #> Value: 1000
 #> 
-#> $`less_than(0.125, equal = TRUE)`
+#> $`less(0.125, equal = TRUE)`
 #> ══ <modifier[1]> ═══
 #> Operator: <=
 #> Value: 0.125
 #> 
-#> $`greater_than(1000)`
+#> $`greater(1000)`
 #> ══ <modifier[1]> ═══
 #> Operator: >
 #> Value: 1000
 #> 
-#> $`greater_than(0.125, equal = TRUE)`
+#> $`greater(0.125, equal = TRUE)`
 #> ══ <modifier[1]> ═══
 #> Operator: >=
 #> Value: 0.125

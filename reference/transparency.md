@@ -122,8 +122,8 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 transparency(count = TRUE)
 #> ℹ transparency has 10,726 rows.
-transparency(count = TRUE, action = "warn")
-#> ✔ transparency returned 2,695 results.
+transparency(count = TRUE, action = "met")
+#> ✔ transparency returned 3,114 results.
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.
 #> # A tibble: 1 × 7

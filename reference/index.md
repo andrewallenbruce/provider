@@ -69,8 +69,8 @@ Providers who have incurred penalties or corrective actions
   [`not()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`not_blank()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`is_blank()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`greater_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`less_than()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`starts_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  [`ends_with()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`greater()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`less()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`starts()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
+  [`ends()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   : A variety of different query operators

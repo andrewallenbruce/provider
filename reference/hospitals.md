@@ -227,7 +227,7 @@ hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
 
 hospitals(prov_type = "reh", count = TRUE)
-#> ✔ hospitals returned 44 results.
+#> ✔ hospitals returned 48 results.
 hospitals2(hosp_type = "reh", count = TRUE)
 #> ✔ hospitals2 returned 39 results.
 

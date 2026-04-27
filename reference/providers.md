@@ -105,7 +105,7 @@ providers()
 #>  9 NA       ELVIA      ARELIS AYALA PR    14-01     PRACTITI… 1.50e9     0 1254…
 #> 10 NA       ARNOLD     NA     WEIN… MI    14-68     PRACTITI… 1.44e9     0 9234…
 #> # ℹ 1 more variable: enid <chr>
-providers(org_name = starts_with("AB"), state = c("TX", "CA"))
+providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> ✔ providers returned 231 results.
 #> # A tibble: 231 × 11
 #>    org_name      first middle last  state prov_type prov_desc    npi multi pac  
@@ -122,6 +122,6 @@ providers(org_name = starts_with("AB"), state = c("TX", "CA"))
 #> 10 ABHAY PARIKH… NA    NA     NA    CA    12-70     PART B S… 1.44e9     0 4587…
 #> # ℹ 221 more rows
 #> # ℹ 1 more variable: enid <chr>
-providers(org_name = starts_with("U"), count = TRUE)
+providers(org_name = starts("U"), count = TRUE)
 #> ✔ providers returned 5,830 results.
 ```

@@ -90,10 +90,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 revocations(count = TRUE)
 #> ℹ revocations has 7,465 rows.
 
-revocations(count = TRUE, org_name = not_blank())
+revocations(
+  count = TRUE,
+  org_name = not_blank())
 #> ✔ revocations returned 4,199 results.
 
-revocations(org_name = starts_with("B"))
+revocations(org_name = starts("B"))
 #> ✔ revocations returned 223 results.
 #> # A tibble: 223 × 12
 #>    org_name         first middle last  enid     npi multi state prov_desc reason
@@ -111,7 +113,9 @@ revocations(org_name = starts_with("B"))
 #> # ℹ 213 more rows
 #> # ℹ 2 more variables: start_date <date>, end_date <date>
 
-revocations(specialty = contains("CARDIO"), state = excludes("GA", "OH"))
+revocations(
+  specialty = contains("CARDIO"),
+  state = excludes(c("GA", "OH")))
 #> ✔ revocations returned 45 results.
 #> # A tibble: 45 × 12
 #>    org_name first   middle last      enid       npi multi state prov_desc reason

@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9112</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9113</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,7 +128,7 @@
 <span class="emoji" data-emoji="handshake">🤝</span> Reassignment of Benefits<a class="anchor" aria-label="anchor" href="#handshake-reassignment-of-benefits"></a>
 </h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">reassignments</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>✔ reassignments returned <span class="dv">210</span> results.</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># A tibble: 210 × 14</span></span>
@@ -153,7 +153,7 @@
 <span class="emoji" data-emoji="-1">👎</span> Revoked Medicare Providers<a class="anchor" aria-label="anchor" href="#id_-1-revoked-medicare-providers"></a>
 </h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">revocations</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="sc">!</span> revocations returned <span class="dv">0</span> results.</span></code></pre></div>
 </div>
@@ -162,7 +162,7 @@
 <span class="emoji" data-emoji="identification_card">🪪</span> Clinician Demographics<a class="anchor" aria-label="anchor" href="#identification_card-clinician-demographics"></a>
 </h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">clinicians</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">org_state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>✔ clinicians returned <span class="dv">167</span> results.</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># A tibble: 167 × 20</span></span>
@@ -187,8 +187,8 @@
 <span class="emoji" data-emoji="outbox_tray">📤</span> Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#outbox_tray-opt-out-affidavits"></a>
 </h5>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">opt_out</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">starts_with</span>(<span class="st">"B"</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">specialty =</span> <span class="fu">starts_with</span>(<span class="st">"Oral"</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">starts</span>(<span class="st">"B"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">specialty =</span> <span class="fu">starts</span>(<span class="st">"Oral"</span>))</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>✔ opt_out returned <span class="dv">214</span> results.</span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># A tibble: 214 × 12</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>          npi first last  specialty start_date end_date   updated    city  state</span>
@@ -236,7 +236,7 @@
 <span class="emoji" data-emoji="health_worker">🧑‍⚕️</span> Medicare Enrollments<a class="anchor" aria-label="anchor" href="#health_worker-medicare-enrollments"></a>
 </h5>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">providers</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>✔ providers returned <span class="dv">2</span> results.</span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># A tibble: 2 × 11</span></span>
@@ -251,7 +251,7 @@
 </h5>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">pending</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">first =</span> <span class="fu">contains</span>(<span class="st">"A"</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">last =</span> <span class="fu">ends_with</span>(<span class="st">"E"</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">last =</span> <span class="fu">ends</span>(<span class="st">"E"</span>))</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>✔ pending returned <span class="dv">539</span> results.</span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>• Physician     <span class="sc">:</span> <span class="dv">159</span></span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>• Non<span class="sc">-</span>Physician <span class="sc">:</span> <span class="dv">380</span></span>
@@ -271,8 +271,8 @@
 <span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co"># ℹ 529 more rows</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="hospital-medicare-part-a-hospitals">
-<span class="emoji" data-emoji="hospital">🏥</span> Medicare Part A Hospitals<a class="anchor" aria-label="anchor" href="#hospital-medicare-part-a-hospitals"></a>
+<h5 id="hospital-medicare-hospitals">
+<span class="emoji" data-emoji="hospital">🏥</span> Medicare Hospitals<a class="anchor" aria-label="anchor" href="#hospital-medicare-hospitals"></a>
 </h5>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">hospitals</span>(<span class="at">ccn =</span> <span class="st">"110122"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>✔ hospitals returned <span class="dv">1</span> result.</span>
@@ -293,7 +293,7 @@
 <span class="emoji" data-emoji="test_tube">🧪</span> CLIA Laboratories<a class="anchor" aria-label="anchor" href="#test_tube-clia-laboratories"></a>
 </h5>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">clia</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="at">facility_name =</span> <span class="fu">starts_with</span>(<span class="st">"SGMC"</span>),</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="at">facility_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>✔ clia returned <span class="dv">32</span> results.</span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># A tibble: 32 × 82</span></span>
