@@ -9,7 +9,49 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-### 🚀 Usage
+## Overview
+
+The `provider` package is a high-level interface designed to streamline
+access to publicly available healthcare provider data from the Centers
+for Medicare and Medicaid Services (CMS) and other federal sources. It
+provides a unified, tidy framework for querying complex datasets that
+are essential for medical coding, billing, and healthcare revenue cycle
+management.
+
+The provider package is a technical interface for accessing publicly
+available healthcare provider data from the Centers for Medicare and
+Medicaid Services (CMS) and the Health Resources and Services
+Administration (HRSA). It provides a unified, tidy API for querying
+complex datasets such as the NPPES NPI Registry, PECOS enrollment data,
+and hospital transparency records.
+
+## Purpose & Scope
+
+Navigating the healthcare data ecosystem often involves disparate APIs
+with inconsistent field names and data structures. `provider` abstracts
+these complexities into a consistent set of R functions that return
+“tidy” data frames.
+
+The package targets several key data domains:
+
+- **Individual Providers**: Clinician demographics, enrollments, and
+  opt-out affidavits
+- **Organizational Providers**: Hospital data, CLIA labs, and Rural
+  Health Clinics (RHC)
+- **Compliance & Sanctions**: Medicare revocations and hospital price
+  transparency enforcement
+- **General Registry**: NPPES NPI registry and reassignment of benefits
+
+### 🚀 Basic Usage Patterns
+
+Most functions in `provider` follow a similar pattern: they accept
+identifiers (like an `npi`) or search criteria (like an `org_name`) and
+return a `tibble`.
+
+#### Query Modifiers
+
+`provider` supports query modifiers for more precise filtering. These
+are implemented as Modifier S7 classes
 
 ``` r
 library(provider)
@@ -64,10 +106,23 @@ reassignments(
 #### 👎 Revoked Medicare Providers
 
 ``` r
-revocations(
-  org_name = starts("SGMC"),
-  state = "GA")
-! revocations returned 0 results.
+revocations(state = "GA")
+✔ revocations returned 213 results.
+# A tibble: 213 × 12
+   org_name first    middle last       enid     npi multi state prov_desc reason
+ * <chr>    <chr>    <chr>  <chr>      <chr>  <int> <int> <chr> <chr>     <chr> 
+ 1 <NA>     WALLACE  S      ANDERSON   I200… 1.88e9     0 GA    PRACTITI… 424.5…
+ 2 <NA>     LEO      G      FRANGIPANE I200… 1.07e9     0 GA    PRACTITI… 424.5…
+ 3 <NA>     ANTHONY  D      MILLS      I200… 1.27e9     0 GA    PRACTITI… 424.5…
+ 4 <NA>     JEFFREY  M.     GALLUPS    I200… 1.85e9     0 GA    PRACTITI… 424.5…
+ 5 <NA>     CURTIS   <NA>   CHEEKS     I200… 1.53e9     0 GA    PRACTITI… 424.5…
+ 6 <NA>     ZAVIER   C      ASH        I200… 1.77e9     0 GA    PRACTITI… 424.5…
+ 7 <NA>     SHAWN    E      TYWON      I200… 1.68e9     0 GA    PRACTITI… 424.5…
+ 8 <NA>     ANAND    P      LALAJI     I200… 1.65e9     0 GA    PRACTITI… 424.5…
+ 9 <NA>     TIFFANNI D      FORBES     I200… 1.21e9     0 GA    PRACTITI… 424.5…
+10 <NA>     STEPHEN  T      BASHUK     I200… 1.95e9     0 GA    PRACTITI… 424.5…
+# ℹ 203 more rows
+# ℹ 2 more variables: start_date <date>, end_date <date>
 ```
 
 #### 🪪 Clinician Demographics

@@ -2,22 +2,12 @@
 
 ## Endpoints
 
-### General
-
-General Provider Data
-
-- [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
-  : Provider-Facility Affiliations
-- [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
-  : Reassignment of Benefits
-- [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
-  [`wildcard()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
-  : National Registry of Health Care Providers
-
 ### Individual
 
-Individual Provider Data
+Demographics, credentials, and eligibility for individuals.
 
+- [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
+  : Reassignment of Benefits
 - [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
   : Clinician Demographics
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
@@ -31,7 +21,7 @@ Individual Provider Data
 
 ### Organizational
 
-Organizational Provider Data
+Facility-level data, laboratory certifications, and clinic enrollments.
 
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
@@ -52,14 +42,25 @@ Organizational Provider Data
 - [`fqhc_owner()`](https://andrewallenbruce.github.io/provider/reference/fqhc_owner.md)
   : FQHC Owners
 
-### Sanctions
+### Compliance
 
-Providers who have incurred penalties or corrective actions
+Sanctioned providers and price transparency enforcement.
 
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
   : Revoked Providers & Suppliers
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
+
+### Registry
+
+Core identity (NPI) and relationship mapping between individuals and
+orgs.
+
+- [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
+  : Provider-Facility Affiliations
+- [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  [`wildcard()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  : National Registry of Health Care Providers
 
 ## Query Modifiers
 

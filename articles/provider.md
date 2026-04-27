@@ -26,32 +26,62 @@ Domain-specific terminology and concepts are explained in detail, as
 there is not one person in existence that understands every aspect of
 the business of health care, including the author of this package.
 
-## Tidy Output
+## Package Architecture
 
-In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html),
-every **column** is a *variable*, every **row** is an *observation*, and
-every **cell** is a *single value*. Many of the outputs of these APIs
-violate this form by: - Storing column headers as values, not variable
-names - Storing multiple variables in one column To remedy this, there
-is some post-processing done to the output before it is returned:
+The provider package is built on a three-layer architecture designed to
+abstract the complexities of the Centers for Medicare & Medicaid
+Services (CMS) APIs into a tidy, R-native interface. It leverages the S7
+object system to handle the disparate requirements of the two primary
+CMS API “flavors” (the Data API and the Provider Data API) through a
+unified execution pipeline.
 
-``` r
-order_refer(npi = 1043477615)
-#> ✔ order_refer returned 1 result.
-#> # A tibble: 1 × 8
-#>   first last           npi   ptb   dme   hha   pmd hospice
-#> * <chr> <chr>        <int> <int> <int> <int> <int>   <int>
-#> 1 SARAH HUSSAIN 1043477615     1     1     1     1       1
-```
+### The Three-Layer Architecture
 
-The `tidy` transformations applied to the output of each function
-include: - Favoring a long format over wide. - More descriptive,
-thematic variable names, involving prefixes and a standardized
-vocabulary across all outputs - Various quality-of-life data
-transformations (e.g., using `snake_case` for variable names, replacing
-empty character cells with `NA`; converting years, dates, booleans to
-their respective data types) - Nesting large groups of related columns
-into lists, to initially emphasize the most important output.
+The system operates as a linear pipeline that transforms user intent
+(Natural Language/R function calls) into network requests, and finally
+into tidy data frames.
+
+1.  User-Facing API Layer: This layer consists of exported functions
+    like clinicians(), hospitals(), and nppes(). These functions perform
+    input validation using the check\_\* family of functions and capture
+    user arguments into S7 classes (arg_cms or arg_prov).
+2.  S7 Execute Pipeline: The core logic is encapsulated in the execute
+    generic. When a user-facing function calls execute(), the S7
+    dispatch system determines the correct URL construction, pagination
+    strategy, and parallelization logic based on the class of the input
+    object.
+3.  HTTP/JSON Layer: The bottom layer interacts with the web via httr2.
+    It handles the raw JSON responses from CMS, which are then parsed by
+    RcppSimdJson and passed to the polish() function for renaming and
+    type casting.
+
+## Handling API Flavors
+
+The package distinguishes between two primary CMS infrastructures. This
+distinction is vital because they use different pagination parameters
+and filtering syntax.
+
+1.  Data API (CMS):
+    - Base URL: data.cms.gov/data-api/v1/dataset/…
+    - Pagination: Uses size(5000) and offset.
+    - Logic: Handled by arg_cms and req_multi.base_cms2.
+2.  Provider Data API (PROV):
+    - Base URL: data.cms.gov/provider-data/api/v1/dataset/…
+    - Pagination: Uses limit(1500) and offset.
+    - Logic: Handled by arg_prov and req_multi.base_prov2.
+
+## The Role of polish
+
+The polish() function is the final stage of the pipeline. It
+orchestrates three critical transformations:
+
+1.  Renaming: Converts raw API keys (e.g., adr_ln_1) into snake_case
+    (e.g., address_1) via column_renames().
+2.  Recoding: Converts coded values (e.g., “01”) into human-readable
+    strings (e.g., “Community Hospital”) using recode_with().
+3.  Type Casting: Ensures numeric strings are converted to doubles or
+    integers, and dates are parsed correctly via helpers like
+    rc_integer_supp and rc_date_ymd.
 
 ## Provider Identifiers
 

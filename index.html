@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9116</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9117</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,12 +96,39 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>The <code>provider</code> package is a high-level interface designed to streamline access to publicly available healthcare provider data from the Centers for Medicare and Medicaid Services (CMS) and other federal sources. It provides a unified, tidy framework for querying complex datasets that are essential for medical coding, billing, and healthcare revenue cycle management.</p>
+<p>The provider package is a technical interface for accessing publicly available healthcare provider data from the Centers for Medicare and Medicaid Services (CMS) and the Health Resources and Services Administration (HRSA). It provides a unified, tidy API for querying complex datasets such as the NPPES NPI Registry, PECOS enrollment data, and hospital transparency records.</p>
+</div>
+<div class="section level2">
+<h2 id="purpose--scope">Purpose &amp; Scope<a class="anchor" aria-label="anchor" href="#purpose--scope"></a>
+</h2>
+<p>Navigating the healthcare data ecosystem often involves disparate APIs with inconsistent field names and data structures. <code>provider</code> abstracts these complexities into a consistent set of R functions that return “tidy” data frames.</p>
+<p>The package targets several key data domains:</p>
+<ul>
+<li>
+<strong>Individual Providers</strong>: Clinician demographics, enrollments, and opt-out affidavits</li>
+<li>
+<strong>Organizational Providers</strong>: Hospital data, CLIA labs, and Rural Health Clinics (RHC)</li>
+<li>
+<strong>Compliance &amp; Sanctions</strong>: Medicare revocations and hospital price transparency enforcement</li>
+<li>
+<strong>General Registry</strong>: NPPES NPI registry and reassignment of benefits</li>
+</ul>
 <div class="section level3">
-<h3 id="rocket-usage">
-<span class="emoji" data-emoji="rocket">🚀</span> Usage<a class="anchor" aria-label="anchor" href="#rocket-usage"></a>
+<h3 id="rocket-basic-usage-patterns">
+<span class="emoji" data-emoji="rocket">🚀</span> Basic Usage Patterns<a class="anchor" aria-label="anchor" href="#rocket-basic-usage-patterns"></a>
 </h3>
+<p>Most functions in <code>provider</code> follow a similar pattern: they accept identifiers (like an <code>npi</code>) or search criteria (like an <code>org_name</code>) and return a <code>tibble</code>.</p>
+<div class="section level4">
+<h4 id="query-modifiers">Query Modifiers<a class="anchor" aria-label="anchor" href="#query-modifiers"></a>
+</h4>
+<p><code>provider</code> supports query modifiers for more precise filtering. These are implemented as Modifier S7 classes</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+</div>
 <div class="section level4">
 <h4 id="office-facility-affiliations">
 <span class="emoji" data-emoji="office">🏢</span> Facility Affiliations<a class="anchor" aria-label="anchor" href="#office-facility-affiliations"></a>
@@ -152,10 +179,23 @@
 <h4 id="id_-1-revoked-medicare-providers">
 <span class="emoji" data-emoji="-1">👎</span> Revoked Medicare Providers<a class="anchor" aria-label="anchor" href="#id_-1-revoked-medicare-providers"></a>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">revocations</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">org_name =</span> <span class="fu">starts</span>(<span class="st">"SGMC"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">state =</span> <span class="st">"GA"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="sc">!</span> revocations returned <span class="dv">0</span> results.</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">revocations</span>(<span class="at">state =</span> <span class="st">"GA"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>✔ revocations returned <span class="dv">213</span> results.</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># A tibble: 213 × 12</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>   org_name first    middle last       enid     npi multi state prov_desc reason</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a> <span class="sc">*</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a> <span class="dv">1</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     WALLACE  S      ANDERSON   I200… <span class="fl">1.88e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a> <span class="dv">2</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     LEO      G      FRANGIPANE I200… <span class="fl">1.07e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a> <span class="dv">3</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     ANTHONY  D      MILLS      I200… <span class="fl">1.27e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a> <span class="dv">4</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     JEFFREY  M.     GALLUPS    I200… <span class="fl">1.85e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a> <span class="dv">5</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     CURTIS   <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   CHEEKS     I200… <span class="fl">1.53e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a> <span class="dv">6</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     ZAVIER   C      ASH        I200… <span class="fl">1.77e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a> <span class="dv">7</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     SHAWN    E      TYWON      I200… <span class="fl">1.68e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a> <span class="dv">8</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     ANAND    P      LALAJI     I200… <span class="fl">1.65e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a> <span class="dv">9</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     TIFFANNI D      FORBES     I200… <span class="fl">1.21e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="dv">10</span> <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     STEPHEN  T      BASHUK     I200… <span class="fl">1.95e9</span>     <span class="dv">0</span> GA    PRACTITI… <span class="fl">424.5</span>…</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># ℹ 203 more rows</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># ℹ 2 more variables: start_date &lt;date&gt;, end_date &lt;date&gt;</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="identification_card-clinician-demographics">
@@ -354,6 +394,7 @@
 <span class="emoji" data-emoji="classical_building">🏛️</span> Governance<a class="anchor" aria-label="anchor" href="#classical_building-governance"></a>
 </h3>
 <p>This project is primarily maintained by <a href="https://github.com/andrewallenbruce" class="external-link">Andrew Bruce</a>. Other authors may occasionally assist with some of these duties.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

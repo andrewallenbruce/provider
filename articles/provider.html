@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9116</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9117</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,32 +119,73 @@ are explained in detail, as there is not one person in existence that
 understands every aspect of the business of health care, including the
 author of this package.</p>
 <div class="section level2">
-<h2 id="tidy-output">Tidy Output<a class="anchor" aria-label="anchor" href="#tidy-output"></a>
+<h2 id="package-architecture">Package Architecture<a class="anchor" aria-label="anchor" href="#package-architecture"></a>
 </h2>
-<p>In <a href="https://tidyr.tidyverse.org/articles/tidy-data.html" class="external-link"><strong>tidy
-data</strong></a>, every <strong>column</strong> is a <em>variable</em>,
-every <strong>row</strong> is an <em>observation</em>, and every
-<strong>cell</strong> is a <em>single value</em>. Many of the outputs of
-these APIs violate this form by: - Storing column headers as values, not
-variable names - Storing multiple variables in one column To remedy
-this, there is some post-processing done to the output before it is
-returned:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">1</span> result.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
-<span><span class="co">#&gt;   first last           npi   ptb   dme   hha   pmd hospice</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> SARAH HUSSAIN <span style="text-decoration: underline;">1</span>043<span style="text-decoration: underline;">477</span>615     1     1     1     1       1</span></span></code></pre></div>
-<p>The <code>tidy</code> transformations applied to the output of each
-function include: - Favoring a long format over wide. - More
-descriptive, thematic variable names, involving prefixes and a
-standardized vocabulary across all outputs - Various quality-of-life
-data transformations (e.g., using <code>snake_case</code> for variable
-names, replacing empty character cells with <code>NA</code>; converting
-years, dates, booleans to their respective data types) - Nesting large
-groups of related columns into lists, to initially emphasize the most
-important output.</p>
+<p>The provider package is built on a three-layer architecture designed
+to abstract the complexities of the Centers for Medicare &amp; Medicaid
+Services (CMS) APIs into a tidy, R-native interface. It leverages the S7
+object system to handle the disparate requirements of the two primary
+CMS API “flavors” (the Data API and the Provider Data API) through a
+unified execution pipeline.</p>
+<div class="section level3">
+<h3 id="the-three-layer-architecture">The Three-Layer Architecture<a class="anchor" aria-label="anchor" href="#the-three-layer-architecture"></a>
+</h3>
+<p>The system operates as a linear pipeline that transforms user intent
+(Natural Language/R function calls) into network requests, and finally
+into tidy data frames.</p>
+<ol style="list-style-type: decimal">
+<li>User-Facing API Layer: This layer consists of exported functions
+like clinicians(), hospitals(), and nppes(). These functions perform
+input validation using the check_* family of functions and capture user
+arguments into S7 classes (arg_cms or arg_prov).</li>
+<li>S7 Execute Pipeline: The core logic is encapsulated in the execute
+generic. When a user-facing function calls execute(), the S7 dispatch
+system determines the correct URL construction, pagination strategy, and
+parallelization logic based on the class of the input object.</li>
+<li>HTTP/JSON Layer: The bottom layer interacts with the web via httr2.
+It handles the raw JSON responses from CMS, which are then parsed by
+RcppSimdJson and passed to the polish() function for renaming and type
+casting.</li>
+</ol>
+</div>
+</div>
+<div class="section level2">
+<h2 id="handling-api-flavors">Handling API Flavors<a class="anchor" aria-label="anchor" href="#handling-api-flavors"></a>
+</h2>
+<p>The package distinguishes between two primary CMS infrastructures.
+This distinction is vital because they use different pagination
+parameters and filtering syntax.</p>
+<ol style="list-style-type: decimal">
+<li>Data API (CMS):
+<ul>
+<li>Base URL: data.cms.gov/data-api/v1/dataset/…</li>
+<li>Pagination: Uses size(5000) and offset.</li>
+<li>Logic: Handled by arg_cms and req_multi.base_cms2.</li>
+</ul>
+</li>
+<li>Provider Data API (PROV):
+<ul>
+<li>Base URL: data.cms.gov/provider-data/api/v1/dataset/…</li>
+<li>Pagination: Uses limit(1500) and offset.</li>
+<li>Logic: Handled by arg_prov and req_multi.base_prov2.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="the-role-of-polish">The Role of polish<a class="anchor" aria-label="anchor" href="#the-role-of-polish"></a>
+</h2>
+<p>The polish() function is the final stage of the pipeline. It
+orchestrates three critical transformations:</p>
+<ol style="list-style-type: decimal">
+<li>Renaming: Converts raw API keys (e.g., adr_ln_1) into snake_case
+(e.g., address_1) via column_renames().</li>
+<li>Recoding: Converts coded values (e.g., “01”) into human-readable
+strings (e.g., “Community Hospital”) using recode_with().</li>
+<li>Type Casting: Ensures numeric strings are converted to doubles or
+integers, and dates are parsed correctly via helpers like
+rc_integer_supp and rc_date_ymd.</li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="provider-identifiers">Provider Identifiers<a class="anchor" aria-label="anchor" href="#provider-identifiers"></a>
@@ -158,7 +199,7 @@ All individual HIPAA–covered healthcare providers or organizations must
 obtain an NPI. Once assigned, a provider’s NPI is permanent and remains
 with the provider regardless of job or location changes.</p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu">open_payments</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
 <span></span>
@@ -175,7 +216,7 @@ information (e.g., tax identification numbers and organizational names)
 and may be associated with multiple enrollment IDs if the individual or
 organization enrolled multiple times under different circumstances.</p>
 </blockquote>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span></span>
@@ -188,7 +229,7 @@ application. All enrollment-level information (e.g., enrollment type,
 enrollment state, provider specialty and reassignment of benefits) is
 linked through the Enrollment ID.</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enid <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span></span>
@@ -215,7 +256,7 @@ a.</p>
 <p><strong>Provider Type Code</strong>: A Medicare Provider Type Code is
 a.</p>
 </blockquote>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="va"><a href="../reference/provider_type_code.html">provider_type_code</a></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 305 × 5</span></span></span>
 <span><span class="co">#&gt;    code  type  type_description spec  spec_description                          </span></span>
