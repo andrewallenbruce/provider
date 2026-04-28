@@ -1,7 +1,23 @@
 #' Quality Payment Program
 #'
+#' The Quality Payment Program (QPP) Experience dataset provides participation
+#' and performance information in the Merit-based Incentive Payment System
+#' (MIPS) during each performance year. They cover eligibility and
+#' participation, performance categories, and final score and payment
+#' adjustments.
+#'
+#' The dataset provides additional details at the TIN/NPI level on what was
+#' published in the previous performance year. You can sort the data by
+#' variables like clinician type, practice size, scores, and payment
+#' adjustments.
+#'
 #' @param year `<int>` A vector of years from 2018 to 2025
+#'
+#' @returns A [tibble][tibble::tibble-package]
+#'
 #' @examplesIf httr2::is_online()
+#' quality_metrics(2018:2025)
+#'
 #' @autoglobal
 #' @export
 quality_metrics <- function(year) {
@@ -20,7 +36,8 @@ quality_metrics <- function(year) {
     set_names(year) |>
     collapse::unlist2d(idcols = c("year", "category", "metric")) |>
     collapse::rnm(c("V1" = "mean"), .nse = FALSE) |>
-    data_frame()
+    data_frame() |>
+    rc_integer("year")
 
   collapse::recode_char(
     x,

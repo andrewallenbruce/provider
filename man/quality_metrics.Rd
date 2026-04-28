@@ -9,6 +9,24 @@ quality_metrics(year)
 \arguments{
 \item{year}{\verb{<int>} A vector of years from 2018 to 2025}
 }
+\value{
+A \link[tibble:tibble-package]{tibble}
+}
 \description{
-Quality Payment Program
+The Quality Payment Program (QPP) Experience dataset provides participation
+and performance information in the Merit-based Incentive Payment System
+(MIPS) during each performance year. They cover eligibility and
+participation, performance categories, and final score and payment
+adjustments.
+}
+\details{
+The dataset provides additional details at the TIN/NPI level on what was
+published in the previous performance year. You can sort the data by
+variables like clinician type, practice size, scores, and payment
+adjustments.
+}
+\examples{
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+quality_metrics(2018:2025)
+\dontshow{\}) # examplesIf}
 }
