@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9119 (2026-04-27)
+
+- added example for
+  [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+
 ## provider 0.0.1.9118 (2026-04-27)
 
 - quality_metrics impl
