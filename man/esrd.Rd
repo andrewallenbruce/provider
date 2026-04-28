@@ -12,6 +12,7 @@
 esrd(
   ccn = NULL,
   facility_name = NULL,
+  chain_name = NULL,
   stars = NULL,
   network = NULL,
   address = NULL,
@@ -20,8 +21,6 @@ esrd(
   zip = NULL,
   county = NULL,
   status = NULL,
-  chain_owned = NULL,
-  chain_name = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -31,17 +30,15 @@ esrd(
 
 \item{facility_name}{\verb{<chr>} facility type}
 
+\item{chain_name}{\verb{<chr>} facility type}
+
 \item{stars}{\verb{<int>} 1 - 5}
 
 \item{network}{\verb{<int>} 1 - 18}
 
 \item{address, city, state, zip, county}{\verb{<chr>} Individual provider's name}
 
-\item{status}{\verb{<enum>} Non-profit/profit}
-
-\item{chain_owned}{\verb{<lgl>} CCN of the \strong{primary} hospital containing}
-
-\item{chain_name}{\verb{<chr>} facility type}
+\item{status}{\verb{<enum>} Non-profit or profit}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -58,7 +55,7 @@ affiliations with organizations/facilities.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 esrd(count = TRUE)
 esrd()
-esrd(stars = "1.0")
-esrd(network = 18)
+esrd(stars = 1)
+esrd(network = 15:18)
 \dontshow{\}) # examplesIf}
 }

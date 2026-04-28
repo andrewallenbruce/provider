@@ -253,7 +253,6 @@ column_renames <- function(endpoint) {
       five_star = "stars",
       network = "network",
       profit_or_nonprofit = "status",
-      chain_owned = "chain_owned",
       chain_organization = "chain_name",
       certification_date = "cert_date",
       address_line_1 = "add_1",

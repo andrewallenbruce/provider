@@ -64,14 +64,19 @@ combine_cols <- function(e1, e2, sep = ", ") {
 
 #' @noRd
 bin_col <- function(x) {
-  cheapr::val_match(
-    x,
-    "Y" ~ 1L,
-    "N" ~ 0L,
-    "Yes" ~ 1L,
-    "No" ~ 0L,
+  cheapr::case(
+    x %in_% c("Y", "Yes") ~ 1L,
+    x %in_% c("N", "No") ~ 0L,
     .default = NA_integer_
   )
+  # cheapr::val_match(
+  #   x,
+  #   "Y" ~ 1L,
+  #   "N" ~ 0L,
+  #   "Yes" ~ 1L,
+  #   "No" ~ 0L,
+  #   .default = NA_integer_
+  # )
 }
 
 #' @noRd

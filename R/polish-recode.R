@@ -25,7 +25,6 @@ recode_with <- function(x, endpoint) {
 #' @noRd
 RC_esrd <- function(x) {
   rc_integer(x, c("network", "stars")) |>
-    rc_bin("chain_owned") |>
     rc_date_ymd("cert_date") |>
     collapse::mtt(
       address = combine_cols(add_1, add_2),
