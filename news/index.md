@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9120 (2026-04-28)
+
+- added
+  [`esrd()`](https://andrewallenbruce.github.io/provider/reference/esrd.md)
+
 ## provider 0.0.1.9119 (2026-04-27)
 
 - added example for
