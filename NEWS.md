@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9120 (2026-04-28)
+
+* added `esrd()`
+
+
 # provider 0.0.1.9119 (2026-04-27)
 
 * added example for `quality_metrics()`
