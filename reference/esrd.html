@@ -9,7 +9,7 @@ affiliations with organizations/facilities."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9120</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9121</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +60,7 @@ affiliations with organizations/facilities.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">esrd</span><span class="op">(</span></span>
 <span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chain_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stars <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  network <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -68,8 +69,6 @@ affiliations with organizations/facilities.</p>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  chain_owned <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  chain_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -92,6 +91,10 @@ affiliations with organizations/facilities.</p>
 <dd><p><code>&lt;chr&gt;</code> facility type</p></dd>
 
 
+<dt id="arg-chain-name">chain_name<a class="anchor" aria-label="anchor" href="#arg-chain-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> facility type</p></dd>
+
+
 <dt id="arg-stars">stars<a class="anchor" aria-label="anchor" href="#arg-stars"></a></dt>
 <dd><p><code>&lt;int&gt;</code> 1 - 5</p></dd>
 
@@ -105,15 +108,7 @@ affiliations with organizations/facilities.</p>
 
 
 <dt id="arg-status">status<a class="anchor" aria-label="anchor" href="#arg-status"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Non-profit/profit</p></dd>
-
-
-<dt id="arg-chain-owned">chain_owned<a class="anchor" aria-label="anchor" href="#arg-chain-owned"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> CCN of the <strong>primary</strong> hospital containing</p></dd>
-
-
-<dt id="arg-chain-name">chain_name<a class="anchor" aria-label="anchor" href="#arg-chain-name"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> facility type</p></dd>
+<dd><p><code>&lt;enum&gt;</code> Non-profit or profit</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -136,57 +131,54 @@ affiliations with organizations/facilities.</p>
 <span class="r-in"><span><span class="fu">esrd</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">esrd</span> ❯ <span style="font-style: italic;">No Query</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_owned chain_name cert_date </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012306 CHILDRENS HOSP…    <span style="color: #BB0000;">NA</span>       8 Non-p… 0           Independe… 1982-11-17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012500 FMC CAPITOL CI…     2       8 Profit 1           Fresenius… 1976-09-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012501 DaVita Gadsden…     2       8 Profit 1           DaVita     1976-09-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012502 DaVita Tuscalo…     2       8 Profit 1           DaVita     1977-10-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012505 DaVita PDI-Mon…     2       8 Profit 1           DaVita     1977-12-14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012506 DaVita Dothan …     3       8 Profit 1           DaVita     1977-11-28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012507 FMC MOBILE          4       8 Profit 1           Fresenius… 1979-01-04</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012508 DaVita Birming…     2       8 Profit 1           DaVita     1979-06-28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012512 FMC SELMA           2       8 Profit 1           Fresenius… 1980-08-25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012513 BMA LANGDALE        5       8 Profit 1           Fresenius… 1981-02-12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, county &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">esrd</span><span class="op">(</span>stars <span class="op">=</span> <span class="st">"1.0"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_name cert_date  city  state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012306 CHILDRENS HOSP…    <span style="color: #BB0000;">NA</span>       8 Non-p… Independe… 1982-11-17 BIRM… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012500 FMC CAPITOL CI…     2       8 Profit Fresenius… 1976-09-01 MONT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012501 DaVita Gadsden…     2       8 Profit DaVita     1976-09-01 GADS… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012502 DaVita Tuscalo…     2       8 Profit DaVita     1977-10-21 TUSC… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012505 DaVita PDI-Mon…     2       8 Profit DaVita     1977-12-14 MONT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012506 DaVita Dothan …     3       8 Profit DaVita     1977-11-28 DOTH… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012507 FMC MOBILE          4       8 Profit Fresenius… 1979-01-04 MOBI… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012508 DaVita Birming…     2       8 Profit DaVita     1979-06-28 BIRM… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012512 FMC SELMA           2       8 Profit Fresenius… 1980-08-25 SELMA AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012513 BMA LANGDALE        5       8 Profit Fresenius… 1981-02-12 VALL… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: zip &lt;chr&gt;, county &lt;chr&gt;, phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">esrd</span><span class="op">(</span>stars <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">esrd</span> returned <span style="font-weight: bold;">823</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 823 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_owned chain_name cert_date </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012533 DaVita Walker …     1       8 Profit 1           DaVita     1987-12-29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012543 DaVita Demopol…     1       8 Profit 1           DaVita     1992-05-20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012545 DaVita Tuscalo…     1       8 Profit 1           DaVita     1992-08-11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012570 DaVita Northpo…     1       8 Profit 1           DaVita     1996-12-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012576 DCI MONTGOMERY      1       8 Non-p… 1           Dialysis … 1998-06-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012598 DCI PHENIX CITY     1       8 Profit 1           Dialysis … 2000-02-09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012606 FMC CHASE           1       8 Profit 1           Fresenius… 2002-09-19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012613 FMC DISCOVERY       1       8 Profit 1           Fresenius… 2004-03-17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012618 RRC NORTHRIDGE      1       8 Profit 1           Fresenius… 2006-10-25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012641 DCI EVERGREEN       1       8 Non-p… 1           Dialysis … 2011-01-27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 823 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_name cert_date  city  state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012533 DaVita Walker …     1       8 Profit DaVita     1987-12-29 JASP… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012543 DaVita Demopol…     1       8 Profit DaVita     1992-05-20 Demo… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012545 DaVita Tuscalo…     1       8 Profit DaVita     1992-08-11 TUSC… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012570 DaVita Northpo…     1       8 Profit DaVita     1996-12-03 NORT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012576 DCI MONTGOMERY      1       8 Non-p… Dialysis … 1998-06-05 MONT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012598 DCI PHENIX CITY     1       8 Profit Dialysis … 2000-02-09 PHEN… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012606 FMC CHASE           1       8 Profit Fresenius… 2002-09-19 HUNT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012613 FMC DISCOVERY       1       8 Profit Fresenius… 2004-03-17 HUNT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012618 RRC NORTHRIDGE      1       8 Profit Fresenius… 2006-10-25 NORT… AL   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012641 DCI EVERGREEN       1       8 Non-p… Dialysis … 2011-01-27 EVER… AL   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 813 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, county &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">esrd</span><span class="op">(</span>network <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">esrd</span> returned <span style="font-weight: bold;">460</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 460 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_owned chain_name cert_date </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 052311 St. Joseph Hos…     4      18 Non-p… 0           Independe… 1977-08-15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 052321 Childrens Hosp…    <span style="color: #BB0000;">NA</span>      18 Non-p… 0           Independe… 1977-07-28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 052323 Kaiser Foundat…     3      18 Non-p… 1           Kaiser Pe… 1977-07-25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 052334 Arrowhead Regi…     4      18 Non-p… 0           Independe… 2006-04-28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 052380 Kaiser Foundat…     1      18 Non-p… 1           Kaiser Pe… 1991-07-24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 052381 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1991-10-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 052382 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1992-11-25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 052384 Kaiser Foundat…     3      18 Non-p… 1           Kaiser Pe… 1993-04-26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 052389 Kaiser Foundat…     5      18 Non-p… 1           Kaiser Pe… 1994-12-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 052394 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1999-11-30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 450 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, county &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: zip &lt;chr&gt;, county &lt;chr&gt;, phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">esrd</span><span class="op">(</span>network <span class="op">=</span> <span class="fl">15</span><span class="op">:</span><span class="fl">18</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">esrd</span> returned <span style="font-weight: bold;">1,404</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,404 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    facility_name   stars network status chain_name cert_date  city  state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 022500 USRC LAUREL ST…     3      16 Profit US Renal … 1976-09-01 ANCH… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 022502 USRC FAIRBANKS      3      16 Profit Fresenius… 1985-06-27 FAIR… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 022503 USRC GROUP WAS…     3      16 Profit Fresenius… 2004-03-29 WASI… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 022504 JUNEAU DIALYSI…     5      16 Profit Fresenius… 2004-03-26 JUNE… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 022506 USRC DIMOND         5      16 Profit US Renal … 2009-05-07 ANCH… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 022508 USRC SOLDOTNA       5      16 Profit Fresenius… 2009-12-08 SOLD… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 022509 USRC DENALI DI…     5      16 Profit US Renal … 2012-11-29 ANCH… AK   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 032302 Valleywise Com…     3      15 Non-p… Independe… 1997-10-07 PHOE… AZ   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 032314 032314 PHOENIX…    <span style="color: #BB0000;">NA</span>      15 Non-p… Independe… 2001-10-22 PHOE… AZ   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 032315 032315 GILA RI…     3      15 Non-p… Independe… 2006-01-04 SACA… AZ   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,394 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: zip &lt;chr&gt;, county &lt;chr&gt;, phone &lt;chr&gt;, address &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

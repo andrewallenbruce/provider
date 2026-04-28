@@ -48,9 +48,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ℹ pending has 9,661 rows.
-#> • Physician     : 3,626
-#> • Non-Physician : 6,035
+#> ℹ pending has 9,722 rows.
+#> • Physician     : 3,696
+#> • Non-Physician : 6,026
 
 pending(first = "Victor", count = TRUE)
 #> ✔ pending returned 7 results.
@@ -59,20 +59,20 @@ pending(first = "Victor", count = TRUE)
 
 pending(first = starts("V"))
 #> ✔ pending returned 121 results.
-#> • Physician     : 39
-#> • Non-Physician : 82
+#> • Physician     : 44
+#> • Non-Physician : 77
 #> # A tibble: 121 × 4
-#>    prov_type first        last                    npi
-#>  * <chr>     <chr>        <chr>                 <int>
-#>  1 Physician VADIN        LALL DASS        1144512724
-#>  2 Physician VALENTINA    TURBAY CABALLERO 1689304545
-#>  3 Physician VALERIE      SOTO             1215825310
-#>  4 Physician VALJEAN      BACOT-DAVIS      1407597651
-#>  5 Physician VANESSA      NWOKOYE          1205530045
-#>  6 Physician VANITA       JAYSWAL          1790626414
-#>  7 Physician VANSHANI     PATEL            1649118753
-#>  8 Physician VARUNIL      SHAH             1972442267
-#>  9 Physician VENKATARAMAN PATLA            1124038419
-#> 10 Physician VENNELA      PULIKANTI        1821238999
+#>    prov_type first         last                    npi
+#>  * <chr>     <chr>         <chr>                 <int>
+#>  1 Physician VADIN         LALL DASS        1144512724
+#>  2 Physician VALENTINA     TURBAY CABALLERO 1689304545
+#>  3 Physician VALERIE       SOTO             1215825310
+#>  4 Physician VALJEAN       BACOT-DAVIS      1407597651
+#>  5 Physician VAMSI KRISHNA LAVU             1407534472
+#>  6 Physician VANDAN        PATEL            1588308712
+#>  7 Physician VANESSA       NWOKOYE          1205530045
+#>  8 Physician VANI          SENTHIL          1700774759
+#>  9 Physician VANITA        JAYSWAL          1790626414
+#> 10 Physician VANSHANI      PATEL            1649118753
 #> # ℹ 111 more rows
 ```

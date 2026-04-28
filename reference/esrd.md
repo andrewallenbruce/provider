@@ -9,6 +9,7 @@ organizations/facilities.
 esrd(
   ccn = NULL,
   facility_name = NULL,
+  chain_name = NULL,
   stars = NULL,
   network = NULL,
   address = NULL,
@@ -17,8 +18,6 @@ esrd(
   zip = NULL,
   county = NULL,
   status = NULL,
-  chain_owned = NULL,
-  chain_name = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -39,6 +38,10 @@ esrd(
 
   `<chr>` facility type
 
+- chain_name:
+
+  `<chr>` facility type
+
 - stars:
 
   `<int>` 1 - 5
@@ -53,15 +56,7 @@ esrd(
 
 - status:
 
-  `<enum>` Non-profit/profit
-
-- chain_owned:
-
-  `<lgl>` CCN of the **primary** hospital containing
-
-- chain_name:
-
-  `<chr>` facility type
+  `<enum>` Non-profit or profit
 
 - count:
 
@@ -83,55 +78,52 @@ esrd(count = TRUE)
 esrd()
 #> ! esrd ❯ No Query
 #> ℹ Returning first 10 rows...
-#> # A tibble: 10 × 14
-#>    ccn    facility_name   stars network status chain_owned chain_name cert_date 
-#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>       <chr>      <date>    
-#>  1 012306 CHILDRENS HOSP…    NA       8 Non-p… 0           Independe… 1982-11-17
-#>  2 012500 FMC CAPITOL CI…     2       8 Profit 1           Fresenius… 1976-09-01
-#>  3 012501 DaVita Gadsden…     2       8 Profit 1           DaVita     1976-09-01
-#>  4 012502 DaVita Tuscalo…     2       8 Profit 1           DaVita     1977-10-21
-#>  5 012505 DaVita PDI-Mon…     2       8 Profit 1           DaVita     1977-12-14
-#>  6 012506 DaVita Dothan …     3       8 Profit 1           DaVita     1977-11-28
-#>  7 012507 FMC MOBILE          4       8 Profit 1           Fresenius… 1979-01-04
-#>  8 012508 DaVita Birming…     2       8 Profit 1           DaVita     1979-06-28
-#>  9 012512 FMC SELMA           2       8 Profit 1           Fresenius… 1980-08-25
-#> 10 012513 BMA LANGDALE        5       8 Profit 1           Fresenius… 1981-02-12
-#> # ℹ 6 more variables: city <chr>, state <chr>, zip <chr>, county <chr>,
-#> #   phone <chr>, address <chr>
-esrd(stars = "1.0")
+#> # A tibble: 10 × 13
+#>    ccn    facility_name   stars network status chain_name cert_date  city  state
+#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>      <date>     <chr> <chr>
+#>  1 012306 CHILDRENS HOSP…    NA       8 Non-p… Independe… 1982-11-17 BIRM… AL   
+#>  2 012500 FMC CAPITOL CI…     2       8 Profit Fresenius… 1976-09-01 MONT… AL   
+#>  3 012501 DaVita Gadsden…     2       8 Profit DaVita     1976-09-01 GADS… AL   
+#>  4 012502 DaVita Tuscalo…     2       8 Profit DaVita     1977-10-21 TUSC… AL   
+#>  5 012505 DaVita PDI-Mon…     2       8 Profit DaVita     1977-12-14 MONT… AL   
+#>  6 012506 DaVita Dothan …     3       8 Profit DaVita     1977-11-28 DOTH… AL   
+#>  7 012507 FMC MOBILE          4       8 Profit Fresenius… 1979-01-04 MOBI… AL   
+#>  8 012508 DaVita Birming…     2       8 Profit DaVita     1979-06-28 BIRM… AL   
+#>  9 012512 FMC SELMA           2       8 Profit Fresenius… 1980-08-25 SELMA AL   
+#> 10 012513 BMA LANGDALE        5       8 Profit Fresenius… 1981-02-12 VALL… AL   
+#> # ℹ 4 more variables: zip <chr>, county <chr>, phone <chr>, address <chr>
+esrd(stars = 1)
 #> ✔ esrd returned 823 results.
-#> # A tibble: 823 × 14
-#>    ccn    facility_name   stars network status chain_owned chain_name cert_date 
-#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>       <chr>      <date>    
-#>  1 012533 DaVita Walker …     1       8 Profit 1           DaVita     1987-12-29
-#>  2 012543 DaVita Demopol…     1       8 Profit 1           DaVita     1992-05-20
-#>  3 012545 DaVita Tuscalo…     1       8 Profit 1           DaVita     1992-08-11
-#>  4 012570 DaVita Northpo…     1       8 Profit 1           DaVita     1996-12-03
-#>  5 012576 DCI MONTGOMERY      1       8 Non-p… 1           Dialysis … 1998-06-05
-#>  6 012598 DCI PHENIX CITY     1       8 Profit 1           Dialysis … 2000-02-09
-#>  7 012606 FMC CHASE           1       8 Profit 1           Fresenius… 2002-09-19
-#>  8 012613 FMC DISCOVERY       1       8 Profit 1           Fresenius… 2004-03-17
-#>  9 012618 RRC NORTHRIDGE      1       8 Profit 1           Fresenius… 2006-10-25
-#> 10 012641 DCI EVERGREEN       1       8 Non-p… 1           Dialysis … 2011-01-27
+#> # A tibble: 823 × 13
+#>    ccn    facility_name   stars network status chain_name cert_date  city  state
+#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>      <date>     <chr> <chr>
+#>  1 012533 DaVita Walker …     1       8 Profit DaVita     1987-12-29 JASP… AL   
+#>  2 012543 DaVita Demopol…     1       8 Profit DaVita     1992-05-20 Demo… AL   
+#>  3 012545 DaVita Tuscalo…     1       8 Profit DaVita     1992-08-11 TUSC… AL   
+#>  4 012570 DaVita Northpo…     1       8 Profit DaVita     1996-12-03 NORT… AL   
+#>  5 012576 DCI MONTGOMERY      1       8 Non-p… Dialysis … 1998-06-05 MONT… AL   
+#>  6 012598 DCI PHENIX CITY     1       8 Profit Dialysis … 2000-02-09 PHEN… AL   
+#>  7 012606 FMC CHASE           1       8 Profit Fresenius… 2002-09-19 HUNT… AL   
+#>  8 012613 FMC DISCOVERY       1       8 Profit Fresenius… 2004-03-17 HUNT… AL   
+#>  9 012618 RRC NORTHRIDGE      1       8 Profit Fresenius… 2006-10-25 NORT… AL   
+#> 10 012641 DCI EVERGREEN       1       8 Non-p… Dialysis … 2011-01-27 EVER… AL   
 #> # ℹ 813 more rows
-#> # ℹ 6 more variables: city <chr>, state <chr>, zip <chr>, county <chr>,
-#> #   phone <chr>, address <chr>
-esrd(network = 18)
-#> ✔ esrd returned 460 results.
-#> # A tibble: 460 × 14
-#>    ccn    facility_name   stars network status chain_owned chain_name cert_date 
-#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>       <chr>      <date>    
-#>  1 052311 St. Joseph Hos…     4      18 Non-p… 0           Independe… 1977-08-15
-#>  2 052321 Childrens Hosp…    NA      18 Non-p… 0           Independe… 1977-07-28
-#>  3 052323 Kaiser Foundat…     3      18 Non-p… 1           Kaiser Pe… 1977-07-25
-#>  4 052334 Arrowhead Regi…     4      18 Non-p… 0           Independe… 2006-04-28
-#>  5 052380 Kaiser Foundat…     1      18 Non-p… 1           Kaiser Pe… 1991-07-24
-#>  6 052381 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1991-10-02
-#>  7 052382 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1992-11-25
-#>  8 052384 Kaiser Foundat…     3      18 Non-p… 1           Kaiser Pe… 1993-04-26
-#>  9 052389 Kaiser Foundat…     5      18 Non-p… 1           Kaiser Pe… 1994-12-01
-#> 10 052394 Kaiser Foundat…     4      18 Non-p… 1           Kaiser Pe… 1999-11-30
-#> # ℹ 450 more rows
-#> # ℹ 6 more variables: city <chr>, state <chr>, zip <chr>, county <chr>,
-#> #   phone <chr>, address <chr>
+#> # ℹ 4 more variables: zip <chr>, county <chr>, phone <chr>, address <chr>
+esrd(network = 15:18)
+#> ✔ esrd returned 1,404 results.
+#> # A tibble: 1,404 × 13
+#>    ccn    facility_name   stars network status chain_name cert_date  city  state
+#>  * <chr>  <chr>           <int>   <int> <chr>  <chr>      <date>     <chr> <chr>
+#>  1 022500 USRC LAUREL ST…     3      16 Profit US Renal … 1976-09-01 ANCH… AK   
+#>  2 022502 USRC FAIRBANKS      3      16 Profit Fresenius… 1985-06-27 FAIR… AK   
+#>  3 022503 USRC GROUP WAS…     3      16 Profit Fresenius… 2004-03-29 WASI… AK   
+#>  4 022504 JUNEAU DIALYSI…     5      16 Profit Fresenius… 2004-03-26 JUNE… AK   
+#>  5 022506 USRC DIMOND         5      16 Profit US Renal … 2009-05-07 ANCH… AK   
+#>  6 022508 USRC SOLDOTNA       5      16 Profit Fresenius… 2009-12-08 SOLD… AK   
+#>  7 022509 USRC DENALI DI…     5      16 Profit US Renal … 2012-11-29 ANCH… AK   
+#>  8 032302 Valleywise Com…     3      15 Non-p… Independe… 1997-10-07 PHOE… AZ   
+#>  9 032314 032314 PHOENIX…    NA      15 Non-p… Independe… 2001-10-22 PHOE… AZ   
+#> 10 032315 032315 GILA RI…     3      15 Non-p… Independe… 2006-01-04 SACA… AZ   
+#> # ℹ 1,394 more rows
+#> # ℹ 4 more variables: zip <chr>, county <chr>, phone <chr>, address <chr>
 ```
