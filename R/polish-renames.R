@@ -247,6 +247,23 @@ column_renames <- function(endpoint) {
       REVOCATION_EFCTV_DT = "start_date",
       REENROLLMENT_BAR_EXPRTN_DT = "end_date"
     ),
+    esrd = c(
+      cms_certification_number_ccn = "ccn",
+      facility_name = "facility_name",
+      five_star = "stars",
+      network = "network",
+      profit_or_nonprofit = "status",
+      chain_owned = "chain_owned",
+      chain_organization = "chain_name",
+      certification_date = "cert_date",
+      address_line_1 = "add_1",
+      address_line_2 = "add_2",
+      citytown = "city",
+      state = "state",
+      zip_code = "zip",
+      countyparish = "county",
+      telephone_number = "phone"
+    ),
     fqhc_enroll = c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",

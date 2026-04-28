@@ -68,6 +68,8 @@ bin_col <- function(x) {
     x,
     "Y" ~ 1L,
     "N" ~ 0L,
+    "Yes" ~ 1L,
+    "No" ~ 0L,
     .default = NA_integer_
   )
 }

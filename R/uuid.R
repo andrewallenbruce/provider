@@ -45,6 +45,7 @@ uuid_prov <- function(endpoint) {
     affiliations = "27ea-46a8",
     clinicians = "mj5m-pzi6",
     hospitals2 = "xubh-q36u",
+    esrd = "23ew-n7w9",
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

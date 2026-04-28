@@ -15,7 +15,7 @@ create_vec <- function(x) {
 
   res <- cheapr::paste_(lhs, " = ", rhs, collapse = ", ")
   res <- cheapr::paste_(wrp[1], res, wrp[2], collapse = "")
-  res <- styler::style_text(text = res, strict = TRUE)
+  res <- styler::style_text(text = res)
 
   return(res)
 }

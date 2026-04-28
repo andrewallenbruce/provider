@@ -4,6 +4,7 @@ recode_with <- function(x, endpoint) {
     endpoint,
     affiliations = RC_affiliations(x),
     clinicians = RC_clinicians(x),
+    esrd = RC_esrd(x),
     hospitals = RC_hospitals(x),
     hospitals2 = RC_hospitals2(x),
     opt_out = RC_opt_out(x),
@@ -22,9 +23,22 @@ recode_with <- function(x, endpoint) {
 }
 
 #' @noRd
+RC_esrd <- function(x) {
+  rc_integer(x, c("network", "stars")) |>
+    rc_bin("chain_owned") |>
+    rc_date_ymd("cert_date") |>
+    collapse::mtt(
+      address = combine_cols(add_1, add_2),
+      add_1 = NULL,
+      add_2 = NULL
+    )
+}
+
+#' @noRd
 RC_affiliations <- function(x) {
   rc_integer(x, "npi")
 }
+
 #' @noRd
 #' @autoglobal
 RC_clinicians <- function(x) {
