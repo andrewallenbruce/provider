@@ -131,7 +131,7 @@ opt_out(state = "AK")
 #> # ℹ 250 more rows
 #> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
-#> ✔ opt_out returned 798 results.
+#> ✔ opt_out returned 813 results.
 #> # A tibble: 813 × 12
 #>           npi first last  specialty start_date end_date   updated    city  state
 #>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
