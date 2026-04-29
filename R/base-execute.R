@@ -1,17 +1,7 @@
-#' @noRd
-END_EXP <- rlang::expr(rlang::call_name(rlang::call_match(
-  call = rlang::caller_call(),
-  fn = rlang::caller_fn()
-)))
+#' @include base-prov.R
 
 #' @noRd
-URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
-
-#' @noRd
-URL_PROV <- c(
-  "https://data.cms.gov/provider-data/api/1/datastore/query/",
-  "/0?"
-)
+execute <- S7::new_generic("execute", "x")
 
 #' @noRd
 S7::method(execute, base_cms | base_prov) <- function(x) {

@@ -1,3 +1,11 @@
+#' @include base-generics.R
+
+#' @noRd
+URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
+
+#' @noRd
+arg_cms <- S7::new_class("arg_cms", S7::class_list, NULL)
+
 #' @noRd
 base_cms <- S7::new_class(
   "base_cms",

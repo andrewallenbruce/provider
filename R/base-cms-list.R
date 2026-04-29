@@ -1,3 +1,5 @@
+#' @include base-cms.R
+
 #' @noRd
 list_cms <- S7::new_class(
   "list_cms",

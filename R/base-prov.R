@@ -1,4 +1,13 @@
 #' @noRd
+URL_PROV <- c(
+  "https://data.cms.gov/provider-data/api/1/datastore/query/",
+  "/0?"
+)
+
+#' @noRd
+arg_prov <- S7::new_class("arg_prov", S7::class_list, NULL)
+
+#' @noRd
 base_prov <- S7::new_class(
   "base_prov",
   package = NULL,
