@@ -11,8 +11,13 @@ data_frame <- function(x, call = caller_env()) {
 }
 
 #' @noRd
-df_tbl_ <- function(x) {
+as_data_frame <- function(x) {
   `class<-`(cheapr::as_df(x), c("tbl_df", "tbl", "data.frame"))
+}
+
+#' @noRd
+new_data_frame <- function(...) {
+  `class<-`(cheapr::new_df(...), c("tbl_df", "tbl", "data.frame"))
 }
 
 #' @noRd

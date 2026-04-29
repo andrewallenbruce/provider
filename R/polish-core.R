@@ -89,7 +89,7 @@ entity_ <- function(x, type = c("int", "chr")) {
       "NPI-1" ~ 1L,
       "NPI-2" ~ 2L,
       .default = NA_integer_
-    ),
+    )
   )
 }
 
