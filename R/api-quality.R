@@ -77,11 +77,6 @@ quality_metrics <- function(year) {
 #   metrics     = qpp_metrics)
 # check_number_whole(year, min = 2018, max = next_year())
 
-#' @noRd
-next_year <- function() {
-  as.integer(substring(Sys.Date(), 1L, 4L)) + 1L
-}
-
 #' @autoglobal
 #' @noRd
 quality_eligibility <- function(year, npi) {

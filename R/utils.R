@@ -36,6 +36,11 @@ extract_year <- function(x) {
 }
 
 #' @noRd
+next_year <- function() {
+  as.integer(substring(Sys.Date(), 1L, 4L)) + 1L
+}
+
+#' @noRd
 sub_idx <- function(what, with) {
   gsub(
     x = what,
