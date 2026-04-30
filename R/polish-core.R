@@ -53,6 +53,11 @@ rc_date_ymd <- function(x, v) {
 }
 
 #' @noRd
+rc_date_ymd2 <- function(x, v) {
+  collapse::tfmv(.data = x, vars = v, FUN = as_date_ymd2)
+}
+
+#' @noRd
 rc_date_mdy <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as_date_mdy)
 }
@@ -69,28 +74,6 @@ bin_col <- function(x) {
     x %in_% c("N", "No") ~ 0L,
     .default = NA_integer_
   )
-  # cheapr::val_match(
-  #   x,
-  #   "Y" ~ 1L,
-  #   "N" ~ 0L,
-  #   "Yes" ~ 1L,
-  #   "No" ~ 0L,
-  #   .default = NA_integer_
-  # )
-}
-
-#' @noRd
-entity_ <- function(x, type = c("int", "chr")) {
-  switch(
-    match.arg(type, c("int", "chr")),
-    int = cheapr::val_match(x, 1 ~ 1L, 2 ~ 2L, .default = NA_integer_),
-    chr = cheapr::val_match(
-      x,
-      "NPI-1" ~ 1L,
-      "NPI-2" ~ 2L,
-      .default = NA_integer_
-    )
-  )
 }
 
 #' @noRd
@@ -101,6 +84,11 @@ as_integer_supp <- function(x, ...) {
 #' @noRd
 as_date_ymd <- function(x, ...) {
   as.Date(x, ..., format = "%Y-%m-%d")
+}
+
+#' @noRd
+as_date_ymd2 <- function(x, ...) {
+  as.Date(x, ..., format = "%Y%m%d")
 }
 
 #' @noRd
