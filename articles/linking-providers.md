@@ -114,7 +114,7 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> #   sub_otxt <int>, address <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 58 results.
-#> # A tibble: 58 × 20
+#> # A tibble: 58 × 21
 #>    first    middle last    suffix gender cred  school grad_year specialty    npi
 #>  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
 #>  1 GAVIN    L      NOBLE   NA     M      MD    STATE…      1999 CARDIOVA… 1.75e9
@@ -128,9 +128,9 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #>  9 ROB      L      DEMURO  NA     M      MD    STATE…      1996 INTERNAL… 1.80e9
 #> 10 JAMES    E      EAST    NA     M      MD    OTHER       2016 DIAGNOST… 1.95e9
 #> # ℹ 48 more rows
-#> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#> # ℹ 11 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#> #   org_phone <chr>, org_add <chr>
+#> #   org_phone <chr>, org_add <chr>, specialty <chr>
 reassignments(org_name = "Elizabethtown Community Hospital")
 #> ✔ reassignments returned 370 results.
 #> # A tibble: 370 × 14

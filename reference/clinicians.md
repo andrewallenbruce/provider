@@ -136,17 +136,17 @@ clinicians(count = TRUE, org_name = not_blank())
 
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
-#> # A tibble: 1 × 20
+#> # A tibble: 1 × 21
 #>   first middle last  suffix gender cred  school grad_year specialty    npi pac  
 #> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
 #> 1 DORO… E      MCCU… NA     F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022…
-#> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <int>,
-#> #   org_city <chr>, org_state <chr>, org_zip <chr>, org_phone <chr>,
-#> #   org_add <chr>
+#> # ℹ 10 more variables: enid <chr>, org_name <chr>, org_pac <chr>,
+#> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
+#> #   org_phone <chr>, org_add <chr>, specialty <chr>
 
 clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
-#> # A tibble: 11 × 20
+#> # A tibble: 11 × 21
 #>    first middle last     suffix gender cred  school   grad_year specialty    npi
 #>  * <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>        <int> <chr>      <int>
 #>  1 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO…      2013 PATHOLOGY 1.53e9
@@ -160,7 +160,7 @@ clinicians(first = "Etan")
 #>  9 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
-#> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#> # ℹ 11 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#> #   org_phone <chr>, org_add <chr>
+#> #   org_phone <chr>, org_add <chr>, specialty <chr>
 ```
