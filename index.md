@@ -5,6 +5,7 @@
 You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("andrewallenbruce/provider")
 ```
@@ -54,6 +55,7 @@ return a `tibble`.
 are implemented as Modifier S7 classes
 
 ``` r
+
 library(provider)
 ```
 

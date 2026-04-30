@@ -1,6 +1,7 @@
 # Get started with provider
 
 ``` r
+
 library(provider)
 ```
 
@@ -106,6 +107,7 @@ orchestrates three critical transformations:
 > remains with the provider regardless of job or location changes.
 
 ``` r
+
 # Must be 10 digits long
 open_payments(year = 2021, npi = 12345691234)
 
@@ -124,6 +126,7 @@ pending(npi = 001234569123)
 > organization enrolled multiple times under different circumstances.
 
 ``` r
+
 # Must be 10 digits long
 affiliations(pac = 0123456789)
 
@@ -138,6 +141,7 @@ hospitals(pac_org = "O12345678912")
 > linked through the Enrollment ID.
 
 ``` r
+
 # Must be a character vector
 clinicians(enid = 0123456789123456)
 
@@ -162,6 +166,7 @@ hospitals(enid_org = "I20180115000174")
 > **Provider Type Code**: A Medicare Provider Type Code is a.
 
 ``` r
+
 provider::provider_type_code
 #> # A tibble: 305 × 5
 #>    code  type  type_description spec  spec_description                          

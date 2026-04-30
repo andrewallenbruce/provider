@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9126 (2026-04-30)
+
+- Endpoint is automatically determined upon eval
+
 ## provider 0.0.1.9125 (2026-04-29)
 
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)

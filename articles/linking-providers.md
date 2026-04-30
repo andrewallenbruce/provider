@@ -1,6 +1,7 @@
 # Linking Providers
 
 ``` r
+
 library(provider)
 ```
 
@@ -9,6 +10,7 @@ library(provider)
 #### Individual Provider
 
 ``` r
+
 pac <- affiliations(pac = 7810891009)
 #> ✔ affiliations returned 5 results.
 list(
@@ -35,6 +37,7 @@ list(
 ```
 
 ``` r
+
 ccn <- hospitals(ccn = pac$facility_ccn)
 #> ✔ hospitals returned 5 results.
 ccn |> str()
@@ -85,6 +88,7 @@ For example, there is a hospital in New York named **Elizabethtown
 Community Hospital**.
 
 ``` r
+
 providers(org_name = "Elizabethtown Community Hospital")
 #> ✔ providers returned 8 results.
 #> # A tibble: 8 × 11
@@ -159,6 +163,7 @@ providers practicing at this hospital. First, the all-numeric CCN
 (`331302`):
 
 ``` r
+
 ccn <- affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 list(
@@ -191,6 +196,7 @@ That returns individual providers affiliated with the hospital. Now to
 search the alphanumeric CCN (`33Z302`):
 
 ``` r
+
 ccn2 <- affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.
 list(

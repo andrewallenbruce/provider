@@ -60,83 +60,10 @@ hrsa_items()
 #> # ℹ 3 more variables: type <chr>, geometryType <chr>,
 #> #   supportsDynamicLegends <lgl>
 hrsa_layers()
-#> $`0`
-#> <FeatureLayer>
-#> Name: Hospitals
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`1`
-#> <FeatureLayer>
-#> Name: Critical Access Hospitals
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`2`
-#> <FeatureLayer>
-#> Name: Federally Qualified Health Centers
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`3`
-#> <FeatureLayer>
-#> Name: Rural Health Clinics
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`4`
-#> <FeatureLayer>
-#> Name: Hospices
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`5`
-#> <FeatureLayer>
-#> Name: Intermediate Care Facility-Mentally Retarded
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`6`
-#> <FeatureLayer>
-#> Name: Ambulatory Surgical Centers
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`7`
-#> <FeatureLayer>
-#> Name: Skilled Nursing Facilities
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`8`
-#> <FeatureLayer>
-#> Name: Skilled Nursing Facility_Dually
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`9`
-#> <FeatureLayer>
-#> Name: Skilled Nursing Facility_Distinct
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
-#> $`10`
-#> <FeatureLayer>
-#> Name: Nursing Facilities
-#> Geometry Type: esriGeometryPoint
-#> CRS: 3857
-#> Capabilities: Map,Query,Data
-#> 
+#> Error in as_layer_class(clear_url_query(url), token, layer_type): Failed to perform HTTP request.
+#> Caused by error in `curl::curl_fetch_memory()`:
+#> ! Failure when receiving data from the peer [gisportal.hrsa.gov]:
+#> Recv failure: Connection reset by peer
 hrsa_fields("snf_all")
 #> # A data frame: 19 × 5
 #>    name                          type                  alias       domain length
