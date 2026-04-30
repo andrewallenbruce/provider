@@ -49,7 +49,6 @@ providers <- function(
   check_bool_(multi)
   execute(
     base_cms(
-      end = "providers",
       count = count,
       set = set,
       arg = param_cms(
@@ -109,7 +108,6 @@ pending <- function(
   check_count_set(count, set)
   execute(
     list_cms(
-      end = "pending",
       id = "prov_type",
       count = count,
       set = set,

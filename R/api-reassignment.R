@@ -62,7 +62,6 @@ reassignments <- function(
   check_count_set(count, set)
   execute(
     base_cms(
-      end = "reassignments",
       count = count,
       set = set,
       arg = param_cms(

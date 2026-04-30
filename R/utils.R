@@ -5,6 +5,9 @@ END_EXP <- rlang::expr(rlang::call_name(rlang::call_match(
 )))
 
 #' @noRd
+EndPoint <- expr(call_name(call_match(call = caller_call(), fn = caller_fn())))
+
+#' @noRd
 data_frame <- function(x, call = caller_env()) {
   check_data_frame(x, call = call)
   structure(x, class = c("tbl_df", "tbl", "data.frame"))

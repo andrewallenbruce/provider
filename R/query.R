@@ -77,12 +77,4 @@ params <- function(...) {
   purrr::compact(rlang::list2(...))
 }
 
-#' @noRd
-param_prov <- function(...) {
-  arg_prov(params(...))
-}
 
-#' @noRd
-param_cms <- function(...) {
-  arg_cms(params(...))
-}

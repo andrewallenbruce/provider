@@ -5,7 +5,13 @@ list_cms <- S7::new_class(
   "list_cms",
   package = NULL,
   properties = list(
-    end = S7::class_character,
+    end = S7::new_property(
+      S7::class_character,
+      default = rlang::expr(rlang::call_name(rlang::call_match(
+        call = rlang::caller_call(),
+        fn = rlang::caller_fn()
+      )))
+    ),
     id = S7::class_character,
     url = S7::new_property(S7::class_list, getter = function(self) {
       uid <- uuid_cms_list(self@end)

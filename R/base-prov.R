@@ -5,14 +5,25 @@ URL_PROV <- c(
 )
 
 #' @noRd
-arg_prov <- S7::new_class("arg_prov", S7::class_list, NULL)
+arg_prov <- S7::new_class("arg_prov", S7::class_list, package = NULL)
+
+#' @noRd
+param_prov <- function(...) {
+  arg_prov(params(...))
+}
 
 #' @noRd
 base_prov <- S7::new_class(
   "base_prov",
   package = NULL,
   properties = list(
-    end = S7::class_character,
+    end = S7::new_property(
+      S7::class_character,
+      default = rlang::expr(rlang::call_name(rlang::call_match(
+        call = rlang::caller_call(),
+        fn = rlang::caller_fn()
+      )))
+    ),
     url = S7::new_property(
       S7::class_character,
       getter = function(self) {

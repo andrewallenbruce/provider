@@ -84,7 +84,6 @@ clia <- function(
 
   execute(
     base_cms(
-      end = "clia",
       count = count,
       set = set,
       arg = param_cms(

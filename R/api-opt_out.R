@@ -64,7 +64,6 @@ opt_out <- function(
   check_bool_(order_refer)
   execute(
     base_cms(
-      end = "opt_out",
       count = count,
       set = set,
       arg = param_cms(
@@ -149,7 +148,6 @@ order_refer <- function(
   check_bool_(hospice)
   execute(
     base_cms(
-      end = "order_refer",
       count = count,
       set = set,
       arg = param_cms(

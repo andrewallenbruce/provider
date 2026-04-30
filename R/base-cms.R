@@ -4,14 +4,25 @@
 URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
 
 #' @noRd
-arg_cms <- S7::new_class("arg_cms", S7::class_list, NULL)
+arg_cms <- S7::new_class("arg_cms", S7::class_list, package = NULL)
+
+#' @noRd
+param_cms <- function(...) {
+  arg_cms(params(...))
+}
 
 #' @noRd
 base_cms <- S7::new_class(
   "base_cms",
   package = NULL,
   properties = list(
-    end = S7::class_character,
+    end = S7::new_property(
+      S7::class_character,
+      default = rlang::expr(rlang::call_name(rlang::call_match(
+        call = rlang::caller_call(),
+        fn = rlang::caller_fn()
+      )))
+    ),
     url = S7::new_property(
       S7::class_character,
       getter = function(self) {

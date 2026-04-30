@@ -63,7 +63,6 @@ revocations <- function(
   check_numeric(year_end)
   execute(
     base_cms(
-      end = "revocations",
       count = count,
       set = set,
       arg = param_cms(
@@ -162,7 +161,6 @@ transparency <- function(
   check_char_(action)
   execute(
     base_cms(
-      end = "transparency",
       count = count,
       set = set,
       arg = param_cms(

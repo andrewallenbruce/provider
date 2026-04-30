@@ -56,7 +56,6 @@ affiliations <- function(
   check_char_(facility_type)
   execute(
     base_prov(
-      end = "affiliations",
       count = count,
       set = set,
       arg = param_prov(
@@ -150,7 +149,6 @@ clinicians <- function(
   check_char_(gender)
   execute(
     base_prov(
-      end = "clinicians",
       count = count,
       set = set,
       arg = param_prov(
@@ -222,7 +220,6 @@ esrd <- function(
   check_numeric(stars)
   execute(
     base_prov(
-      end = "esrd",
       count = count,
       set = set,
       arg = param_prov(

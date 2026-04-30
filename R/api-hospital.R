@@ -98,7 +98,6 @@ hospitals <- function(
 
   execute(
     base_cms(
-      end = "hospitals",
       count = count,
       set = set,
       arg = param_cms(
@@ -275,7 +274,6 @@ hospitals2 <- function(
   check_count_set(count, set)
   execute(
     base_prov(
-      end = "hospitals2",
       count = count,
       set = set,
       arg = param_prov(
