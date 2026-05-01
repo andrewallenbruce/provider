@@ -136,10 +136,7 @@ affiliations(facility_ccn = 331302)
 #> 10 ROBERT BENAK L      NA     1.06e9 3476… Hospital      331302       NA        
 #> # ℹ 196 more rows
 
-affiliations(
-   first = "Andrew",
-   last = contains("B"),
-   facility_type = "hospital")
+affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 #> ✔ affiliations returned 1,601 results.
 #> ℹ Retrieving 2 pages...
 #> # A tibble: 1,601 × 9
