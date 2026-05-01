@@ -30,13 +30,20 @@
 #'
 #' @examplesIf httr2::is_online()
 #' affiliations(count = TRUE)
+#'
 #' affiliations(count = TRUE, facility_ccn = 331302)
+#'
 #' affiliations()
+#'
 #' affiliations(parent_ccn = 331302)
+#'
 #' affiliations(facility_ccn = 331302)
-#' affiliations(first = "Andrew",
-#'              last = contains("B"),
-#'              facility_type = "hospital")
+#'
+#' affiliations(
+#'    first = "Andrew",
+#'    last = contains("B"),
+#'    facility_type = "hospital")
+#'
 #' @autoglobal
 #' @export
 affiliations <- function(
@@ -53,19 +60,21 @@ affiliations <- function(
   set = FALSE
 ) {
   check_char_(facility_type)
-  execute(
-    as_pdc(
-      npi = npi,
-      ind_pac_id = pac,
-      provider_last_name = last,
-      provider_first_name = first,
-      provider_middle_name = middle,
-      suff = suffix,
-      facility_type = enum_(facility_type),
-      facility_affiliations_certification_number = facility_ccn,
-      facility_type_certification_number = parent_ccn,
-      .count = count,
-      .set = set,
+  polish2(
+    execute(
+      as_pdc(
+        npi = npi,
+        ind_pac_id = pac,
+        provider_last_name = last,
+        provider_first_name = first,
+        provider_middle_name = middle,
+        suff = suffix,
+        facility_type = enum_(facility_type),
+        facility_affiliations_certification_number = facility_ccn,
+        facility_type_certification_number = parent_ccn,
+        .count = count,
+        .set = set,
+      )
     )
   )
 }
@@ -142,13 +151,10 @@ clinicians <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_char_(gender)
-  execute(
-    base_prov(
-      count = count,
-      set = set,
-      arg = param_prov(
+  polish2(
+    execute(
+      as_pdc(
         npi = npi,
         ind_pac_id = pac,
         ind_enrl_id = enid,
@@ -165,7 +171,9 @@ clinicians <- function(
         org_pac_id = org_pac,
         citytown = org_city,
         state = org_state,
-        zip_code = org_zip
+        zip_code = org_zip,
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -193,9 +201,13 @@ clinicians <- function(
 #'
 #' @examplesIf httr2::is_online()
 #' esrd(count = TRUE)
+#'
 #' esrd()
+#'
 #' esrd(stars = 1)
+#'
 #' esrd(network = 15:18)
+#'
 #' @autoglobal
 #' @export
 esrd <- function(
@@ -213,13 +225,10 @@ esrd <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_numeric(stars)
-  execute(
-    base_prov(
-      count = count,
-      set = set,
-      arg = param_prov(
+  polish2(
+    execute(
+      as_pdc(
         cms_certification_number_ccn = ccn,
         network = network,
         facility_name = facility_name,
@@ -230,7 +239,9 @@ esrd <- function(
         zip_code = zip,
         countyparish = county,
         profit_or_nonprofit = status,
-        chain_organization = chain_name
+        chain_organization = chain_name,
+        .count = count,
+        .set = set,
       )
     )
   )

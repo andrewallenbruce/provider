@@ -54,8 +54,11 @@ affiliations with organizations/facilities.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 esrd(count = TRUE)
+
 esrd()
+
 esrd(stars = 1)
+
 esrd(network = 15:18)
 \dontshow{\}) # examplesIf}
 }
