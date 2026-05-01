@@ -51,7 +51,7 @@ providers <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         MULTIPLE_NPI_FLAG = bool_(multi),
         PECOS_ASCT_CNTL_ID = pac,
@@ -111,7 +111,7 @@ pending <- function(
       id = "prov_type",
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         LAST_NAME = last,
         FIRST_NAME = first

@@ -66,7 +66,7 @@ opt_out <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         `First Name` = first,
         `Last Name` = last,
@@ -150,7 +150,7 @@ order_refer <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         FIRST_NAME = first,
         LAST_NAME = last,

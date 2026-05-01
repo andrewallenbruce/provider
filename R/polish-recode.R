@@ -2,12 +2,12 @@
 recode_with <- function(x, endpoint) {
   switch(
     endpoint,
-    affiliations = RC_affiliations(x),
+    # affiliations = RC_affiliations(x),
     clia = RC_clia(x),
-    clinicians = RC_clinicians(x),
-    esrd = RC_esrd(x),
+    # clinicians = RC_clinicians(x),
+    # esrd = RC_esrd(x),
     hospitals = RC_hospitals(x),
-    hospitals2 = RC_hospitals2(x),
+    # hospitals2 = RC_hospitals2(x),
     opt_out = RC_opt_out(x),
     order_refer = RC_order_refer(x),
     pending = RC_pending(x),
@@ -70,11 +70,6 @@ RC_esrd <- function(x) {
 }
 
 #' @noRd
-RC_affiliations <- function(x) {
-  rc_integer(x, "npi")
-}
-
-#' @noRd
 #' @autoglobal
 RC_clinicians <- function(x) {
   x <- collapse::av(
@@ -95,11 +90,6 @@ RC_hospitals <- function(x) {
   rc_integer(x, "npi") |>
     rc_date_ymd(c("inc_date", "reh_date")) |>
     rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L))
-}
-
-#' @noRd
-RC_hospitals2 <- function(x) {
-  rc_integer_supp(x, "rating")
 }
 
 #' @noRd

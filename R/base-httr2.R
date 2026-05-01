@@ -76,6 +76,12 @@ parallel_request <- function(x, query = NULL) {
 }
 
 #' @noRd
+base_parallel <- function(url, n, limit, query = NULL) {
+  offset2(url, n, limit) |>
+    parallel_request(query = query)
+}
+
+#' @noRd
 multi_count <- function(url, nm, qry) {
   purrr::map_int(url, base_request, query = qry) |>
     set_names2(nm)
@@ -86,12 +92,6 @@ multi_base <- function(url, nm, id) {
   purrr::map(url, base_request) |>
     set_names2(nm) |>
     rowbind2(id, fill = TRUE)
-}
-
-#' @noRd
-base_parallel <- function(url, cnt, lmt) {
-  offset2(url, cnt, lmt) |>
-    parallel_request()
 }
 
 #' @noRd

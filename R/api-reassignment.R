@@ -64,7 +64,7 @@ reassignments <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         `Individual NPI` = npi,
         `Individual PAC ID` = pac,
         `Individual Enrollment ID` = enid,

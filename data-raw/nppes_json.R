@@ -88,6 +88,10 @@ MM <- set_names(
   M$number
 )
 
+x <- secretbase::shake256("secret base", bits = 32L, convert = NA)
+y <- secretbase::shake256("secret base", bits = 32L, convert = NA)
+identical(x, y)
+
 # waldo::compare(LL, MM, max_diffs = 200, quote_strings = FALSE)
 veq <- vctrs::vec_equal(LL, MM)
 both <- names(MM[cheapr::which_(veq, invert = TRUE)])

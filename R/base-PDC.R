@@ -1,6 +1,7 @@
-#' @include base-generics.R
-#' @include base-execute.R
-NULL
+#' @noRd
+add_class <- function(x, endpoint) {
+  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
+}
 
 #' @noRd
 URL_PDC <- function(x) {
@@ -10,8 +11,6 @@ URL_PDC <- function(x) {
     "/0?"
   )
 }
-#' @noRd
-ParamPDC <- new_class("ParamPDC", class_list, package = NULL)
 
 #' @noRd
 param_pdc <- function(...) {
@@ -19,43 +18,13 @@ param_pdc <- function(...) {
 }
 
 #' @noRd
-S7::method(build, ParamPDC) <- function(x) {
-  S7::S7_data(x) %0% return(NULL)
+method(build, ParamPDC) <- function(x) {
+  S7_data(x) %0% return(NULL)
 
-  S7::S7_data(x) |>
+  S7_data(x) |>
     purrr::imap(\(x, n) query(api = "prov", x, n)) |>
     flatten_query()
 }
-
-#' @noRd
-PDC <- new_class(
-  "PDC",
-  package = NULL,
-  properties = list(
-    end = class_character,
-    url = new_property(
-      class_character,
-      getter = function(self) URL_PDC(self@end)
-    ),
-    limit = new_property(
-      class_integer,
-      default = 1500L
-    ),
-    query = class_character,
-    action = class_character,
-    results = new_property(
-      class_integer,
-      getter = function(self) {
-        flatten_url(
-          self@url,
-          self@query %0% NULL,
-          opts_prov(results = "false")
-        ) |>
-          base_request("count")
-      }
-    )
-  )
-)
 
 #' @noRd
 as_pdc <- function(
@@ -85,15 +54,7 @@ as_pdc <- function(
 }
 
 #' @noRd
-add_class <- function(x, endpoint) {
-  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
-}
-
-#' @noRd
-request_preview <- S7::new_generic("request_preview", "x")
-
-#' @noRd
-S7::method(request_preview, PDC) <- function(x) {
+method(request_preview, PDC) <- function(x) {
   cli_empty(x@end)
   flatten_url(x@url, NULL, opts_prov(limit = 10L)) |>
     base_request("results") |>
@@ -101,7 +62,7 @@ S7::method(request_preview, PDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_single, PDC) <- function(x) {
+method(req_single, PDC) <- function(x) {
   cli_results(x@results, x@end)
   flatten_url(x@url, x@query, opts_prov()) |>
     base_request("results") |>
@@ -109,29 +70,20 @@ S7::method(req_single, PDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(req_multi, PDC) <- function(x) {
+method(req_multi, PDC) <- function(x) {
   cli_pages(x@results, x@limit, x@end)
   flatten_url(x@url, x@query %0% NULL, opts_prov(offset = "<<i>>")) |>
-    offset2(x@results, x@limit) |>
-    parallel_request("results") |>
+    base_parallel(x@results, x@limit, "results") |>
     add_class(x@end)
 }
 
 #' @noRd
-S7::method(req_set, PDC) <- function(x) {
+method(req_set, PDC) <- function(x) {
   req_multi(x)
 }
 
 #' @noRd
-empty <- S7::new_generic("empty", "x")
-
-#' @noRd
-S7::method(empty, PDC) <- function(x) {
-  length(x@query) == 0L
-}
-
-#' @noRd
-S7::method(execute, PDC) <- function(x) {
+method(execute, PDC) <- function(x) {
   if (empty(x)) {
     cli_total(x@results, x@end)
     if (x@action == "set") {
@@ -157,13 +109,9 @@ S7::method(execute, PDC) <- function(x) {
 }
 
 #' Polish generic
-#'
 #' Defines data cleaning methods for results
-#'
 #' @param x data.frame
-#'
 #' @returns data.frame
-#'
 #' @export
 #' @keywords internal
 polish2 <- function(x) {
@@ -248,5 +196,74 @@ polish2.esrd <- function(x) {
       telephone_number = "phone"
     )) |>
     RC_esrd() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish2.hospitals2 <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      facility_id = "ccn",
+      facility_name = "org_name",
+      hospital_type = "hosp_type",
+      hospital_ownership = "ownership",
+      hospital_overall_rating = "rating",
+      address = "address",
+      citytown = "city",
+      state = "state",
+      zip_code = "zip",
+      countyparish = "county",
+      telephone_number = "phone"
+    )) |>
+    rc_integer_supp("rating") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish2.hospitals <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      `ORGANIZATION NAME` = "org_name",
+      `DOING BUSINESS AS NAME` = "org_dba",
+      `ENROLLMENT ID` = "enid",
+      `ENROLLMENT STATE` = "enid_state",
+      `PROVIDER TYPE CODE` = "prov_type",
+      `PROVIDER TYPE TEXT` = "prov_desc",
+      NPI = "npi",
+      `MULTIPLE NPI FLAG` = "multi",
+      CCN = "ccn",
+      `ASSOCIATE ID` = "pac",
+      `INCORPORATION DATE` = "inc_date",
+      `INCORPORATION STATE` = "inc_state",
+      `ORGANIZATION TYPE STRUCTURE` = "org_type",
+      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
+      `PROPRIETARY NONPROFIT` = "status",
+      `ADDRESS LINE 1` = "add_1",
+      `ADDRESS LINE 2` = "add_2",
+      CITY = "city",
+      STATE = "state",
+      `ZIP CODE` = "zip",
+      `PRACTICE LOCATION TYPE` = "loc_type",
+      `LOCATION OTHER TYPE TEXT` = "loc_otxt",
+      `REH CONVERSION DATE` = "reh_date",
+      `CAH OR HOSPITAL CCN` = "reh_ccn",
+      `SUBGROUP - ACUTE CARE` = "sub_acute",
+      `SUBGROUP - GENERAL` = "sub_gen",
+      `SUBGROUP - SPECIALTY HOSPITAL` = "sub_spec",
+      `SUBGROUP - ALCOHOL DRUG` = "sub_adu",
+      `SUBGROUP - CHILDRENS` = "sub_child",
+      `SUBGROUP - LONG-TERM` = "sub_ltc",
+      `SUBGROUP - PSYCHIATRIC` = "sub_psy",
+      `SUBGROUP - REHABILITATION` = "sub_irf",
+      `SUBGROUP - SHORT-TERM` = "sub_stc",
+      `SUBGROUP - SWING-BED APPROVED` = "sub_sba",
+      `SUBGROUP - PSYCHIATRIC UNIT` = "sub_psu",
+      `SUBGROUP - REHABILITATION UNIT` = "sub_iru",
+      `SUBGROUP - OTHER` = "sub_oth",
+      `SUBGROUP - OTHER TEXT` = "sub_otxt"
+    )) |>
+    RC_hospitals() |>
     data_frame()
 }

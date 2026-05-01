@@ -58,7 +58,7 @@ fqhc_enroll <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -108,7 +108,7 @@ fqhc_owner <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac
@@ -187,7 +187,7 @@ rhc_enroll <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -237,7 +237,7 @@ rhc_owner <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         LAST_NAME = last,
         FIRST_NAME = first

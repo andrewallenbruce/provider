@@ -9,6 +9,7 @@
 
 [![Ask
 DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/andrewallenbruce/provider)
+[![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/andrewallenbruce/provider)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
@@ -146,7 +147,7 @@ clinicians(
   org_name = starts("SGMC"),
   org_state = "GA")
 ✔ clinicians returned 167 results.
-# A tibble: 167 × 20
+# A tibble: 167 × 21
    first    middle last    suffix gender cred  school grad_year specialty    npi
  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
  1 MANDY    <NA>   LUCAS   <NA>   F      <NA>  MEHAR…      2011 FAMILY P… 1.35e9
@@ -160,9 +161,9 @@ clinicians(
  9 WENDY    <NA>   VANDEM… <NA>   F      MD    NORTH…      2000 PSYCHIAT… 1.39e9
 10 MYRA     <NA>   JORDAN  <NA>   F      <NA>  OTHER       2004 MARRIAGE… 1.46e9
 # ℹ 157 more rows
-# ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+# ℹ 11 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#   org_phone <chr>, org_add <chr>
+#   org_phone <chr>, org_add <chr>, specialty <chr>
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits
@@ -234,23 +235,23 @@ providers(
 pending(
   first = contains("A"),
   last = ends("E"))
-✔ pending returned 539 results.
-• Physician     : 159
-• Non-Physician : 380
-# A tibble: 539 × 4
-   prov_type first     last                 npi
- * <chr>     <chr>     <chr>              <int>
- 1 Physician BABATUNDE ADESEYE       1558204693
- 2 Physician MIA       ALDRIDGE      1437890761
- 3 Physician ETHAN     ANGLE         1821939810
- 4 Physician SOCHIMA   ANIKE         1265019822
- 5 Physician HARLEY    ARRAUT-WHITE  1548906621
- 6 Physician ADESEYE   AWE           1942796479
- 7 Physician FRANCISCO BARAJAS DUQUE 1710794219
- 8 Physician FRANTZ    BAZILE        1285826180
- 9 Physician HANNA     BERUKE        1235433905
-10 Physician KATHLEEN  BLAINE        1457904690
-# ℹ 529 more rows
+✔ pending returned 551 results.
+• Physician     : 176
+• Non-Physician : 375
+# A tibble: 551 × 4
+   prov_type first     last                npi
+ * <chr>     <chr>     <chr>             <int>
+ 1 Physician BABATUNDE ADESEYE      1558204693
+ 2 Physician MELISSA   ALDRIDGE     1073132429
+ 3 Physician MIA       ALDRIDGE     1437890761
+ 4 Physician ETHAN     ANGLE        1821939810
+ 5 Physician SOCHIMA   ANIKE        1265019822
+ 6 Physician HARLEY    ARRAUT-WHITE 1548906621
+ 7 Physician JUAN      ARROYAVE     1104766104
+ 8 Physician MARIAM    ATOBILOYE    1992405476
+ 9 Physician ADESEYE   AWE          1942796479
+10 Physician KALENE    BADREE       1578405635
+# ℹ 541 more rows
 ```
 
 ##### :hospital: Medicare Hospitals
@@ -258,17 +259,6 @@ pending(
 ``` r
 hospitals(ccn = "110122")
 ✔ hospitals returned 1 result.
-# A tibble: 1 × 37
-  org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-* <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-1 SOUTH G… SGMC H… O202… GA         00-09     PART A P… 1.14e9     0 1101… 1052…
-# ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#   sub_otxt <int>, address <chr>
 ```
 
 ##### :test_tube: CLIA Laboratories
@@ -278,26 +268,26 @@ clia(
   facility_name = starts("SGMC"),
   state = "GA")
 ✔ clia returned 32 results.
-# A tibble: 32 × 82
-   fac_name_1   fac_name_2 facility_ccn parent_ccn related_ccn xref  chown chowd
- * <chr>        <chr>      <chr>        <chr>      <chr>       <chr> <chr> <chr>
- 1 SGMC HEALTH  <NA>       11D0022233   110122     <NA>        <NA>  0     <NA> 
- 2 SGMC- SMITH… <NA>       11D0022241   110037     <NA>        <NA>  0     <NA> 
- 3 SGMC WOMENS… <NA>       11D0265511   <NA>       <NA>        <NA>  0     <NA> 
- 4 SGMC VALDOS… <NA>       11D0265607   258589220A <NA>        <NA>  0     <NA> 
- 5 SGMC- LANIE… <NA>       11D0265646   110097     <NA>        <NA>  0     <NA> 
- 6 SGMC-BERRIE… <NA>       11D0265664   11-0112    <NA>        <NA>  0     <NA> 
- 7 SGMC PRIMAR… <NA>       11D0699064   256864445D <NA>        <NA>  0     <NA> 
- 8 SGMC HEALTH… <NA>       11D0915865   <NA>       <NA>        <NA>  0     <NA> 
- 9 SGMC PRIMAR… <NA>       11D0933615   <NA>       <NA>        <NA>  0     <NA> 
-10 SGMC FAMILY… <NA>       11D0948594   <NA>       <NA>        <NA>  0     <NA> 
+# A tibble: 32 × 61
+   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
+ * <chr>        <chr>      <chr>    <chr>      <chr> <chr> <date>      <int>
+ 1 11D0022233   110122     <NA>     <NA>       <NA>  0     NA              0
+ 2 11D0022241   110037     <NA>     <NA>       <NA>  0     NA              0
+ 3 11D0265511   <NA>       <NA>     <NA>       <NA>  0     NA              0
+ 4 11D0265607   258589220A <NA>     <NA>       <NA>  0     NA              0
+ 5 11D0265646   110097     <NA>     <NA>       <NA>  0     NA              0
+ 6 11D0265664   11-0112    <NA>     <NA>       <NA>  0     NA              0
+ 7 11D0699064   256864445D <NA>     <NA>       <NA>  0     NA              0
+ 8 11D0915865   <NA>       <NA>     <NA>       <NA>  0     NA              0
+ 9 11D0933615   <NA>       <NA>     <NA>       <NA>  0     NA              0
+10 11D0948594   <NA>       <NA>     <NA>       <NA>  0     NA              0
 # ℹ 22 more rows
-# ℹ 74 more variables: chowd_2 <chr>, poc <chr>, compliant <chr>, add_1 <chr>,
-#   add_2 <chr>, phone_1 <chr>, phone_2 <chr>, city <chr>, state <chr>,
-#   zip <chr>, reg_cd <chr>, reg_st <chr>, ssa_st <chr>, ssa_cty <chr>,
-#   fips_st <chr>, fips_cty <chr>, cbsa_1 <chr>, cbsa_2 <chr>, elig <chr>,
-#   term_pgm <chr>, term_clia <chr>, app_type <chr>, cert_type <chr>,
-#   fac_type <chr>, owner <chr>, action <chr>, orig_date <chr>, …
+# ℹ 53 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
+#   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
+#   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
+#   orig_date <date>, app_date <date>, cert_date <date>, eff_date <date>,
+#   mail_date <date>, term_date <date>, a2la_date <date>, a2la_ind <int>,
+#   aabb_date <date>, aabb_ind <int>, aoa_date <date>, aoa_ind <int>, …
 ```
 
 ##### :mag_right: Hospital Transparency Enforcement
@@ -306,21 +296,21 @@ clia(
 transparency(
   action = "closure", 
   state = "WA")
-✔ transparency returned 38 results.
-# A tibble: 38 × 7
+✔ transparency returned 39 results.
+# A tibble: 39 × 7
     case name                             address city  state action action_date
  * <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
- 1   164 UW Medical Center - Montlake     1959 N… Seat… WA    Closu… 2023-03-17 
- 2   253 Valley Medical Center            400 S.… Rent… WA    Closu… 2024-08-09 
- 3   344 Providence Sacred Heart Childre… 101 We… Spok… WA    Closu… 2023-05-08 
- 4   416 Providence Regional Medical Cen… 916 Pa… Ever… WA    Closu… 2023-03-23 
- 5   578 Fairfax Behavioral Health        10200 … Kirk… WA    Closu… 2023-07-20 
- 6   836 Overlake Medical Center          1035 1… Bell… WA    Closu… 2024-07-03 
- 7   866 East Adams Rural Healthcare      903 S … Ritz… WA    Closu… 2024-02-29 
- 8   871 Forks Community Hospital         530 Bo… Forks WA    Closu… 2023-04-26 
- 9   886 Othello Community Hospital       315 N … Othe… WA    Closu… 2023-09-01 
-10   918 Newport Hospital and Health Ser… 714 We… Newp… WA    Closu… 2023-06-23 
-# ℹ 28 more rows
+ 1  1291 Arbor Health Morton Hospital     521 Ad… Mort… WA    Closu… 2023-04-13 
+ 2  2248 Arbor Health Morton Hospital     521 Ad… Mort… WA    Closu… 2024-05-30 
+ 3  2849 Astria Toppenish Hospital        502 W … Topp… WA    Closu… 2024-12-30 
+ 4  6638 Cascade Medical Center           817 Co… Leav… WA    Closu… 2025-12-18 
+ 5  4578 CHI Franciscan Rehabilitation H… 815 S … Taco… WA    Closu… 2025-08-25 
+ 6  6707 Columbia Basin Hospital          200 Na… Ephr… WA    Closu… 2026-01-12 
+ 7  6717 Coulee Medical Center            411 Fo… Gran… WA    Closu… 2025-12-30 
+ 8  6731 Dayton General Hospital          1012 S… Dayt… WA    Closu… 2025-12-01 
+ 9   866 East Adams Rural Healthcare      903 S … Ritz… WA    Closu… 2024-02-29 
+10  6191 EvergreenHealth Kirkland         12040 … Kirk… WA    Closu… 2025-12-19 
+# ℹ 29 more rows
 ```
 
 ------------------------------------------------------------------------

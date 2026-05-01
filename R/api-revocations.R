@@ -65,7 +65,7 @@ revocations <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         NPI = npi,
         ENRLMT_ID = enid,
         FIRST_NAME = first,
@@ -163,7 +163,7 @@ transparency <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         Hosp_Name = name,
         Hosp_Address = address,
         City = city,

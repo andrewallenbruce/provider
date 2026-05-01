@@ -2,7 +2,8 @@
 % Please edit documentation in R/base-PDC.R
 \name{polish2}
 \alias{polish2}
-\title{Polish generic}
+\title{Polish generic
+Defines data cleaning methods for results}
 \usage{
 polish2(x)
 }
@@ -13,6 +14,7 @@ polish2(x)
 data.frame
 }
 \description{
+Polish generic
 Defines data cleaning methods for results
 }
 \keyword{internal}

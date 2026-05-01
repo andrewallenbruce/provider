@@ -86,7 +86,7 @@ clia <- function(
     base_cms(
       count = count,
       set = set,
-      arg = param_cms(
+      arg = par_cms(
         FAC_NAME = facility_name,
         PRVDR_NUM = facility_ccn,
         CLIA_MDCR_NUM = parent_ccn,

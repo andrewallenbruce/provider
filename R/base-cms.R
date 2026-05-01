@@ -1,103 +1,107 @@
-#' @include base-generics.R
-
 #' @noRd
-URL_CMS <- c("https://data.cms.gov/data-api/v1/dataset/", "/data")
-
-#' @noRd
-arg_cms <- S7::new_class("arg_cms", S7::class_list, package = NULL)
+URL_CMS <- function(x) {
+  paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    uuid_cms(x),
+    "/data"
+  )
+}
 
 #' @noRd
 param_cms <- function(...) {
-  arg_cms(params(...))
+  ParamCMS(params(...))
 }
 
 #' @noRd
-base_cms <- S7::new_class(
-  "base_cms",
-  package = NULL,
-  properties = list(
-    end = S7::new_property(
-      S7::class_character,
-      default = rlang::expr(rlang::call_name(rlang::call_match(
-        call = rlang::caller_call(),
-        fn = rlang::caller_fn()
-      )))
-    ),
-    url = S7::new_property(
-      S7::class_character,
-      getter = function(self) {
-        paste0(URL_CMS[1], uuid_cms(self@end), URL_CMS[2])
-      }
-    ),
-    count = S7::class_logical,
-    set = S7::class_logical,
-    limit = S7::new_property(S7::class_integer, default = 5000L),
-    arg = arg_cms,
-    query = S7::new_property(S7::class_character, getter = function(self) {
-      if (length(self@arg) != 0L) build(self@arg)
-    }),
-    N = S7::new_property(S7::class_integer, getter = function(self) {
-      url <- paste0(self@url, "/stats?")
-      if (self@set || (self@count && !length(self@arg))) {
-        return(base_request(flatten_url(url), "total_rows"))
-      }
-      if (self@count || length(self@arg)) {
-        return(base_request(flatten_url(url, self@query), "found_rows"))
-      }
-    })
+method(build, ParamCMS) <- function(x) {
+  S7_data(x) %0% return(NULL)
+
+  S7_data(x) |>
+    purrr::imap(\(x, n) query(api = "cms", x, n)) |>
+    flatten_query()
+}
+
+#' @noRd
+as_cms <- function(
+  ...,
+  .count = FALSE,
+  .set = FALSE,
+  end = call_name(call_match(
+    call = caller_call(),
+    fn = caller_fn()
+  ))
+) {
+  check_bool_(.count)
+  check_bool_(.set)
+  check_count_set(.count, .set)
+
+  CMS(
+    end = end,
+    query = build(param_cms(...)) %||% character(0),
+    action = if (.count) {
+      "count"
+    } else if (.set) {
+      "set"
+    } else {
+      ""
+    }
   )
-)
+}
 
 #' @noRd
-S7::method(req_empty, base_cms) <- function(x) {
+method(request_preview, CMS) <- function(x) {
   cli_empty(x@end)
+  flatten_url(x@url, NULL, opts_prov(limit = 10L)) |>
+    base_request() |>
+    add_class(x@end)
+}
 
-  flatten_url(
-    base = paste0(x@url, "?"),
-    args = NULL,
-    opts = opts_cms(size = 10L)
-  ) |>
+#' @noRd
+S7::method(req_single, CMS) <- function(x) {
+  cli_results(x@results, x@end)
+  flatten_url(paste0(x@url, "?"), x@query, opts_cms()) |>
     base_request()
 }
 
 #' @noRd
-S7::method(req_single, base_cms) <- function(x) {
-  cli_results(x@N, x@end)
-
+method(req_multi, CMS) <- function(x) {
+  cli_pages(x@results, x@limit, x@end)
   flatten_url(
-    base = paste0(x@url, "?"),
-    args = x@query,
-    opts = opts_cms()
+    paste0(x@url, "?"),
+    x@query %0% NULL,
+    opts_cms(offset = "<<i>>")
   ) |>
-    base_request()
+    base_parallel(x@results, x@limit) |>
+    add_class(x@end)
 }
 
 #' @noRd
-S7::method(req_multi, base_cms) <- function(x) {
-  cli_pages(x@N, x@limit, x@end)
-
-  flatten_url(
-    base = paste0(x@url, "?"),
-    args = x@query,
-    opts = opts_cms(offset = "<<i>>")
-  ) |>
-    base_parallel(
-      cnt = x@N,
-      lmt = x@limit
-    )
+method(req_set, CMS) <- function(x) {
+  req_multi(x)
 }
 
 #' @noRd
-S7::method(req_set, base_cms) <- function(x) {
-  cli_pages(x@N, x@limit, x@end)
+method(execute, CMS) <- function(x) {
+  if (empty(x)) {
+    cli_total(x@results, x@end)
+    if (x@action == "set") {
+      return(req_set(x))
+    }
 
-  flatten_url(
-    base = paste0(x@url, "?"),
-    args = NULL,
-    opts = opts_cms(offset = "<<i>>")
-  ) |>
-    base_parallel(
-      cnt = x@N,
-      lmt = x@limit
-    )
+    if (x@action == "count") {
+      return(invisible(x@results))
+    }
+
+    return(request_preview(x))
+  }
+
+  if (x@results == 0L || x@action == "count") {
+    cli_results(x@results, x@end)
+    return(invisible(x@results))
+  }
+
+  if (x@results <= x@limit) {
+    return(req_single(x))
+  }
+  req_multi(x)
 }
