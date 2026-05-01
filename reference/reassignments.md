@@ -101,12 +101,10 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 reassignments(count = TRUE)
-#> ℹ reassignments has 3,511,984 rows.
+#> ℹ reassignments has 3,521,074 rows.
 
-reassignments(
-  count = TRUE,
-  employers = greater(50, equal = TRUE))
-#> ✔ reassignments returned 1,189 results.
+reassignments(count = TRUE, employers = greater(50, equal = TRUE))
+#> ✔ reassignments returned 1,292 results.
 
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.

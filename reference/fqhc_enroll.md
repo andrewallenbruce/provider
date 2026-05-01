@@ -101,6 +101,7 @@ fqhc_enroll(count = TRUE)
 #> ℹ fqhc_enroll has 11,063 rows.
 
 fqhc_enroll() |> str()
+#> ℹ fqhc_enroll has 11,063 rows.
 #> ! fqhc_enroll ❯ No Query
 #> ℹ Returning first 10 rows...
 #> tibble [10 × 20] (S3: tbl_df/tbl/data.frame)

@@ -102,9 +102,7 @@ revocations(org_name = not_blank(), count = TRUE)
 revocations(org_name = starts("B"), count = TRUE)
 #> ✔ revocations returned 223 results.
 
-revocations(
-  prov_desc = contains("CARDIO"),
-  state = excludes(c("GA", "OH")))
+revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #> ✔ revocations returned 45 results.
 #> # A tibble: 45 × 12
 #>    org_name first   middle last      enid       npi multi state prov_desc reason

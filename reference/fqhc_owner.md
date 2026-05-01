@@ -41,6 +41,7 @@ fqhc_owner(count = TRUE)
 #> ℹ fqhc_owner has 148,919 rows.
 
 fqhc_owner() |> str()
+#> ℹ fqhc_owner has 148,919 rows.
 #> ! fqhc_owner ❯ No Query
 #> ℹ Returning first 10 rows...
 #> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)

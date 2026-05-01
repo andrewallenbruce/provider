@@ -1,12 +1,17 @@
 # Changelog
 
+## provider 0.0.1.9130 (2026-05-01)
+
+- backend refactoring completed
+
 ## provider 0.0.1.9129 (2026-05-01)
 
 - more S7 backend work
 
 ## provider 0.0.1.9128 (2026-04-30)
 
-- `polish()` S3 generic
+- [`polish()`](https://andrewallenbruce.github.io/provider/reference/polish.md)
+  S3 generic
 
 ## provider 0.0.1.9127 (2026-04-30)
 

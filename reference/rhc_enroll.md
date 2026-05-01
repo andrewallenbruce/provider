@@ -101,6 +101,7 @@ rhc_enroll(count = TRUE)
 #> ℹ rhc_enroll has 5,530 rows.
 
 rhc_enroll() |> str()
+#> ℹ rhc_enroll has 5,530 rows.
 #> ! rhc_enroll ❯ No Query
 #> ℹ Returning first 10 rows...
 #> tibble [10 × 18] (S3: tbl_df/tbl/data.frame)

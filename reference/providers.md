@@ -86,9 +86,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 providers(count = TRUE)
 #> ℹ providers has 2,981,799 rows.
+
 providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results.
+
 providers()
+#> ℹ providers has 2,981,799 rows.
 #> ! providers ❯ No Query
 #> ℹ Returning first 10 rows...
 #> # A tibble: 10 × 11
@@ -105,6 +108,7 @@ providers()
 #>  9 NA       ELVIA      ARELIS AYALA PR    14-01     PRACTITI… 1.50e9     0 1254…
 #> 10 NA       ARNOLD     NA     WEIN… MI    14-68     PRACTITI… 1.44e9     0 9234…
 #> # ℹ 1 more variable: enid <chr>
+
 providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> ✔ providers returned 231 results.
 #> # A tibble: 231 × 11
@@ -122,6 +126,7 @@ providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> 10 ABHAY PARIKH… NA    NA     NA    CA    12-70     PART B S… 1.44e9     0 4587…
 #> # ℹ 221 more rows
 #> # ℹ 1 more variable: enid <chr>
+
 providers(org_name = starts("U"), count = TRUE)
 #> ✔ providers returned 5,830 results.
 ```
