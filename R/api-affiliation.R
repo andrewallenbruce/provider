@@ -60,7 +60,7 @@ affiliations <- function(
   set = FALSE
 ) {
   check_char_(facility_type)
-  polish2(
+  polish(
     execute(
       as_pdc(
         npi = npi,
@@ -152,7 +152,7 @@ clinicians <- function(
   set = FALSE
 ) {
   check_char_(gender)
-  polish2(
+  polish(
     execute(
       as_pdc(
         npi = npi,
@@ -226,7 +226,7 @@ esrd <- function(
   set = FALSE
 ) {
   check_numeric(stars)
-  polish2(
+  polish(
     execute(
       as_pdc(
         cms_certification_number_ccn = ccn,
@@ -311,7 +311,7 @@ hospitals2 <- function(
   count = FALSE,
   set = FALSE
 ) {
-  polish2(
+  polish(
     execute(
       as_pdc(
         facility_id = ccn,

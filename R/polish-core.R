@@ -1,12 +1,4 @@
 #' @noRd
-polish <- function(x, endpoint, id = NULL) {
-  replace_nz(x) |>
-    rename_with(nm = c(id %&&% set_names(id), column_renames(endpoint))) |>
-    recode_with(endpoint) |>
-    data_frame()
-}
-
-#' @noRd
 rename_with <- function(x, nm) {
   if (rlang::is_null(nm)) {
     return(x)

@@ -35,9 +35,7 @@
 #'
 #' revocations(org_name = starts("B"), count = TRUE)
 #'
-#' revocations(
-#'   prov_desc = contains("CARDIO"),
-#'   state = excludes(c("GA", "OH")))
+#' revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #'
 #' @autoglobal
 #' @export
@@ -57,15 +55,12 @@ revocations <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(multi)
   check_numeric(year_start)
   check_numeric(year_end)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         ENRLMT_ID = enid,
         FIRST_NAME = first,
@@ -77,7 +72,9 @@ revocations <- function(
         PROVIDER_TYPE_DESC = prov_desc,
         REVOCATION_RSN = reason,
         REVOCATION_EFCTV_DT = year_start,
-        REENROLLMENT_BAR_EXPRTN_DT = year_end
+        REENROLLMENT_BAR_EXPRTN_DT = year_end,
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -144,9 +141,11 @@ revocations <- function(
 #'
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
+#'
 #' transparency(count = TRUE, action = "met")
+#'
 #' transparency(state = "GA", city = "Valdosta")
-#' @autoglobal
+#'
 #' @export
 transparency <- function(
   name = NULL,
@@ -157,18 +156,17 @@ transparency <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_char_(action)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         Hosp_Name = name,
         Hosp_Address = address,
         City = city,
         State = state,
-        Action = enum_(action)
+        Action = enum_(action),
+        .count = count,
+        .set = set,
       )
     )
   )

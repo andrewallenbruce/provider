@@ -38,6 +38,36 @@ CMS <- new_class(
 )
 
 #' @noRd
+ListCMS <- new_class(
+  "ListCMS",
+  API,
+  package = NULL,
+  properties = list(
+    end = class_character,
+    url = new_property(
+      class_list,
+      getter = function(self) URL_ListCMS(self@end)
+    ),
+    limit = new_property(
+      class_integer,
+      default = 5000L
+    ),
+    query = class_character,
+    action = class_character,
+    results = new_property(
+      class_integer,
+      getter = function(self) {
+        flatten_url(
+          paste0(self@url, "/stats?"),
+          self@query %0% NULL
+        ) |>
+          multi_count(self@url, "found_rows")
+      }
+    )
+  )
+)
+
+#' @noRd
 PDC <- new_class(
   "PDC",
   API,

@@ -42,9 +42,13 @@
 #' @return A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
+#'
 #' opt_out(npi = 1043522824)
+#'
 #' opt_out(state = "AK")
+#'
 #' opt_out(specialty = "Psychiatry", order_refer = FALSE)
+#'
 #' @autoglobal
 #' @export
 opt_out <- function(
@@ -60,13 +64,10 @@ opt_out <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(order_refer)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         `First Name` = first,
         `Last Name` = last,
@@ -75,7 +76,9 @@ opt_out <- function(
         `City Name` = city,
         `State Code` = state,
         `Zip code` = zip,
-        `Eligible to Order and Refer` = bool_(order_refer)
+        `Eligible to Order and Refer` = bool_(order_refer),
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -140,17 +143,14 @@ order_refer <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(ptb)
   check_bool_(dme)
   check_bool_(hha)
   check_bool_(pmd)
   check_bool_(hospice)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         FIRST_NAME = first,
         LAST_NAME = last,
@@ -158,7 +158,9 @@ order_refer <- function(
         DME = bool_(dme),
         HHA = bool_(hha),
         PMD = bool_(pmd),
-        HOSPICE = bool_(hospice)
+        HOSPICE = bool_(hospice),
+        .count = count,
+        .set = set,
       )
     )
   )

@@ -94,8 +94,7 @@ hospitals <- function(
   check_char_(org_type)
   check_char_(loc_type)
   check_char_(prov_type)
-
-  polish2(
+  polish(
     execute(
       as_cms(
         NPI = npi,

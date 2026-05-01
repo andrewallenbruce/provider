@@ -50,15 +50,12 @@ fqhc_enroll <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -71,7 +68,9 @@ fqhc_enroll <- function(
         `ZIP CODE` = zip,
         `MULTIPLE NPI FLAG` = bool_(multi),
         PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -104,24 +103,14 @@ fqhc_owner <- function(
   count = FALSE,
   set = FALSE
 ) {
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         CCN = ccn,
-        `ASSOCIATE ID` = pac
-        # `ENROLLMENT ID` = enid,
-        # `ENROLLMENT STATE` = enid_state,
-        # `ORGANIZATION NAME` = org_name,
-        # `DOING BUSINESS AS NAME` = dba_name,
-        # CITY = city,
-        # STATE = state,
-        # `ZIP CODE` = zip,
-        # `MULTIPLE NPI FLAG` = bool_(multi),
-        # PROPRIETARY_NONPROFIT = status,
-        # `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+        `ASSOCIATE ID` = pac,
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -179,15 +168,12 @@ rhc_enroll <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -200,7 +186,9 @@ rhc_enroll <- function(
         `ZIP CODE` = zip,
         `MULTIPLE NPI FLAG` = bool_(multi),
         PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type)
+        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -232,15 +220,14 @@ rhc_owner <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         LAST_NAME = last,
-        FIRST_NAME = first
+        FIRST_NAME = first,
+        .count = count,
+        .set = set,
       )
     )
   )

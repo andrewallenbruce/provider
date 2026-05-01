@@ -30,9 +30,7 @@
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
 #'
-#' reassignments(
-#'   count = TRUE,
-#'   employers = greater(50, equal = TRUE))
+#' reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 #'
 #' reassignments(org_enid = "I20070209000135")
 #'
@@ -59,12 +57,9 @@ reassignments <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         `Individual NPI` = npi,
         `Individual PAC ID` = pac,
         `Individual Enrollment ID` = enid,
@@ -77,7 +72,9 @@ reassignments <- function(
         `Group Reassignments and Physician Assistants` = employees,
         `Group PAC ID` = org_pac,
         `Group Enrollment ID` = org_enid,
-        `Group State Code` = org_state
+        `Group State Code` = org_state,
+        .count = count,
+        .set = set,
       )
     )
   )

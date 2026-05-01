@@ -1,8 +1,31 @@
-#' @noRd
-column_renames <- function(endpoint) {
-  switch(
-    endpoint,
-    affiliations = c(
+#' Polish generic
+#' Defines data cleaning methods for results
+#' @param x data.frame
+#' @returns data.frame
+#' @export
+#' @keywords internal
+polish <- function(x) {
+  UseMethod("polish")
+}
+
+#' @export
+#' @keywords internal
+polish.default <- function(x) {
+  replace_nz(x) |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.integer <- function(x) {
+  invisible(x)
+}
+
+#' @export
+#' @keywords internal
+polish.affiliations <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       provider_first_name = "first",
       provider_last_name = "last",
       provider_middle_name = "middle",
@@ -12,8 +35,16 @@ column_renames <- function(endpoint) {
       facility_type = "facility_type",
       facility_affiliations_certification_number = "facility_ccn",
       facility_type_certification_number = "parent_ccn"
-    ),
-    clinicians = c(
+    )) |>
+    rc_integer("npi") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.clinicians <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       provider_first_name = "first",
       provider_middle_name = "middle",
       provider_last_name = "last",
@@ -36,8 +67,61 @@ column_renames <- function(endpoint) {
       state = "org_state",
       zip_code = "org_zip",
       telephone_number = "org_phone"
-    ),
-    hospitals = c(
+    )) |>
+    RC_clinicians() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.esrd <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      cms_certification_number_ccn = "ccn",
+      facility_name = "facility_name",
+      five_star = "stars",
+      network = "network",
+      profit_or_nonprofit = "status",
+      chain_organization = "chain_name",
+      certification_date = "cert_date",
+      address_line_1 = "add_1",
+      address_line_2 = "add_2",
+      citytown = "city",
+      state = "state",
+      zip_code = "zip",
+      countyparish = "county",
+      telephone_number = "phone"
+    )) |>
+    RC_esrd() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.hospitals2 <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      facility_id = "ccn",
+      facility_name = "org_name",
+      hospital_type = "hosp_type",
+      hospital_ownership = "ownership",
+      hospital_overall_rating = "rating",
+      address = "address",
+      citytown = "city",
+      state = "state",
+      zip_code = "zip",
+      countyparish = "county",
+      telephone_number = "phone"
+    )) |>
+    rc_integer_supp("rating") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.hospitals <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       `ORGANIZATION NAME` = "org_name",
       `DOING BUSINESS AS NAME` = "org_dba",
       `ENROLLMENT ID` = "enid",
@@ -76,21 +160,52 @@ column_renames <- function(endpoint) {
       `SUBGROUP - REHABILITATION UNIT` = "sub_iru",
       `SUBGROUP - OTHER` = "sub_oth",
       `SUBGROUP - OTHER TEXT` = "sub_otxt"
-    ),
-    hospitals2 = c(
-      facility_id = "ccn",
-      facility_name = "org_name",
-      hospital_type = "hosp_type",
-      hospital_ownership = "ownership",
-      hospital_overall_rating = "rating",
-      address = "address",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip",
-      countyparish = "county",
-      telephone_number = "phone"
-    ),
-    clia = c(
+    )) |>
+    RC_hospitals() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.pending <- function(x) {
+  rowbind2(x, "prov_type", fill = TRUE) |>
+    replace_nz() |>
+    rename_with(c(
+      FIRST_NAME = "first",
+      LAST_NAME = "last",
+      NPI = "npi"
+    )) |>
+    rc_integer("npi") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.providers <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      ORG_NAME = "org_name",
+      FIRST_NAME = "first",
+      MDL_NAME = "middle",
+      LAST_NAME = "last",
+      STATE_CD = "state",
+      PROVIDER_TYPE_CD = "prov_type",
+      PROVIDER_TYPE_DESC = "prov_desc",
+      NPI = "npi",
+      MULTIPLE_NPI_FLAG = "multi",
+      PECOS_ASCT_CNTL_ID = "pac",
+      ENRLMT_ID = "enid"
+    )) |>
+    rc_integer("npi") |>
+    rc_bin("multi") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.clia <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       FAC_NAME = "fac_name_1",
       ADDTNL_FAC_NAME = "fac_name_2",
       PRVDR_NUM = "facility_ccn",
@@ -166,97 +281,16 @@ column_renames <- function(endpoint) {
       LAB_TEMP_TSTG_SITE_SW = "tmp_ind",
       DRCTLY_AFLTD_LAB_CNT = "alabs",
       LAB_SITE_CNT = "sites"
-    ),
-    pending = c(
-      FIRST_NAME = "first",
-      LAST_NAME = "last",
-      NPI = "npi"
-    ),
-    providers = c(
-      ORG_NAME = "org_name",
-      FIRST_NAME = "first",
-      MDL_NAME = "middle",
-      LAST_NAME = "last",
-      STATE_CD = "state",
-      PROVIDER_TYPE_CD = "prov_type",
-      PROVIDER_TYPE_DESC = "prov_desc",
-      NPI = "npi",
-      MULTIPLE_NPI_FLAG = "multi",
-      PECOS_ASCT_CNTL_ID = "pac",
-      ENRLMT_ID = "enid"
-    ),
-    opt_out = c(
-      NPI = "npi",
-      `First Name` = "first",
-      `Last Name` = "last",
-      Specialty = "specialty",
-      `Optout Effective Date` = "start_date",
-      `Optout End Date` = "end_date",
-      `Last updated` = "updated",
-      `First Line Street Address` = "add_1",
-      `Second Line Street Address` = "add_2",
-      `City Name` = "city",
-      `State Code` = "state",
-      `Zip code` = "zip",
-      `Eligible to Order and Refer` = "order_refer"
-    ),
-    order_refer = c(
-      FIRST_NAME = "first",
-      LAST_NAME = "last",
-      NPI = "npi",
-      PARTB = "ptb",
-      DME = "dme",
-      HHA = "hha",
-      PMD = "pmd",
-      HOSPICE = "hospice"
-    ),
-    reassignments = c(
-      `Individual First Name` = "first",
-      `Individual Last Name` = "last",
-      `Individual State Code` = "state",
-      `Individual Specialty Description` = "specialty",
-      `Individual Total Employer Associations` = "employers",
-      `Individual NPI` = "npi",
-      `Individual PAC ID` = "pac",
-      `Individual Enrollment ID` = "enid",
-      `Group Legal Business Name` = "org_name",
-      `Group Reassignments and Physician Assistants` = "employees",
-      `Group PAC ID` = "org_pac",
-      `Group Enrollment ID` = "org_enid",
-      `Group State Code` = "org_state",
-      `Record Type` = "rec_type"
-    ),
-    revocations = c(
-      ORG_NAME = "org_name",
-      FIRST_NAME = "first",
-      MDL_NAME = "middle",
-      LAST_NAME = "last",
-      ENRLMT_ID = "enid",
-      NPI = "npi",
-      MULTIPLE_NPI_FLAG = "multi",
-      STATE_CD = "state",
-      PROVIDER_TYPE_DESC = "prov_desc",
-      REVOCATION_RSN = "reason",
-      REVOCATION_EFCTV_DT = "start_date",
-      REENROLLMENT_BAR_EXPRTN_DT = "end_date"
-    ),
-    esrd = c(
-      cms_certification_number_ccn = "ccn",
-      facility_name = "facility_name",
-      five_star = "stars",
-      network = "network",
-      profit_or_nonprofit = "status",
-      chain_organization = "chain_name",
-      certification_date = "cert_date",
-      address_line_1 = "add_1",
-      address_line_2 = "add_2",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip",
-      countyparish = "county",
-      telephone_number = "phone"
-    ),
-    fqhc_enroll = c(
+    )) |>
+    RC_clia() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.fqhc_enroll <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
       `PROVIDER TYPE CODE` = "prov_type",
@@ -278,8 +312,16 @@ column_renames <- function(endpoint) {
       STATE = "state",
       `ZIP CODE` = "zip",
       `TELEPHONE NUMBER` = "phone"
-    ),
-    fqhc_owner = c(
+    )) |>
+    RC_fqhc_enroll() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.fqhc_owner <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       `ENROLLMENT ID` = "enid",
       `ASSOCIATE ID` = "pac",
       `ORGANIZATION NAME` = "org_name",
@@ -318,8 +360,16 @@ column_renames <- function(endpoint) {
       `OTHER TYPE - OWNER` = "oth_ind",
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    ),
-    rhc_enroll = c(
+    )) |>
+    RC_fqhc_owner() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.rhc_enroll <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
       NPI = "npi",
@@ -339,8 +389,16 @@ column_renames <- function(endpoint) {
       STATE = "state",
       `ZIP CODE` = "zip",
       `TELEPHONE NUMBER` = "phone"
-    ),
-    rhc_owner = c(
+    )) |>
+    RC_rhc_enroll() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.rhc_owner <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       `ENROLLMENT ID` = "enid",
       `ASSOCIATE ID` = "pac",
       `ORGANIZATION NAME` = "org_name",
@@ -379,8 +437,16 @@ column_renames <- function(endpoint) {
       `OTHER TYPE - OWNER` = "oth_ind",
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    ),
-    transparency = c(
+    )) |>
+    RC_rhc_owner() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.transparency <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
       Case_ID = "case",
       Hosp_Name = "name",
       Hosp_Address = "address",
@@ -388,8 +454,98 @@ column_renames <- function(endpoint) {
       State = "state",
       Action = "action",
       Date_of_Action = "action_date"
-    ),
-    c()
-    # cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
-  )
+    )) |>
+    rc_integer("case") |>
+    rc_date_ymd("action_date") |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.order_refer <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      FIRST_NAME = "first",
+      LAST_NAME = "last",
+      NPI = "npi",
+      PARTB = "ptb",
+      DME = "dme",
+      HHA = "hha",
+      PMD = "pmd",
+      HOSPICE = "hospice"
+    )) |>
+    rc_integer("npi") |>
+    rc_bin(c("ptb", "dme", "hha", "pmd", "hospice")) |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.opt_out <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      NPI = "npi",
+      `First Name` = "first",
+      `Last Name` = "last",
+      Specialty = "specialty",
+      `Optout Effective Date` = "start_date",
+      `Optout End Date` = "end_date",
+      `Last updated` = "updated",
+      `First Line Street Address` = "add_1",
+      `Second Line Street Address` = "add_2",
+      `City Name` = "city",
+      `State Code` = "state",
+      `Zip code` = "zip",
+      `Eligible to Order and Refer` = "order_refer"
+    )) |>
+    RC_opt_out() |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.reassignments <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      `Individual First Name` = "first",
+      `Individual Last Name` = "last",
+      `Individual State Code` = "state",
+      `Individual Specialty Description` = "specialty",
+      `Individual Total Employer Associations` = "employers",
+      `Individual NPI` = "npi",
+      `Individual PAC ID` = "pac",
+      `Individual Enrollment ID` = "enid",
+      `Group Legal Business Name` = "org_name",
+      `Group Reassignments and Physician Assistants` = "employees",
+      `Group PAC ID` = "org_pac",
+      `Group Enrollment ID` = "org_enid",
+      `Group State Code` = "org_state",
+      `Record Type` = "rec_type"
+    )) |>
+    rc_integer(c("npi", "employers", "employees")) |>
+    data_frame()
+}
+
+#' @export
+#' @keywords internal
+polish.revocations <- function(x) {
+  replace_nz(x) |>
+    rename_with(c(
+      ORG_NAME = "org_name",
+      FIRST_NAME = "first",
+      MDL_NAME = "middle",
+      LAST_NAME = "last",
+      ENRLMT_ID = "enid",
+      NPI = "npi",
+      MULTIPLE_NPI_FLAG = "multi",
+      STATE_CD = "state",
+      PROVIDER_TYPE_DESC = "prov_desc",
+      REVOCATION_RSN = "reason",
+      REVOCATION_EFCTV_DT = "start_date",
+      REENROLLMENT_BAR_EXPRTN_DT = "end_date"
+    )) |>
+    rc_integer("npi") |>
+    rc_bin("multi") |>
+    rc_date_ymd(c("start_date", "end_date")) |>
+    data_frame()
 }

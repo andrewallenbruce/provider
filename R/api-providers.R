@@ -24,10 +24,15 @@
 #'
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
+#'
 #' providers(count = TRUE, org_name = not_blank())
+#'
 #' providers()
+#'
 #' providers(org_name = starts("AB"), state = c("TX", "CA"))
+#'
 #' providers(org_name = starts("U"), count = TRUE)
+#'
 #' @autoglobal
 #' @export
 providers <- function(
@@ -45,13 +50,10 @@ providers <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_bool_(multi)
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         NPI = npi,
         MULTIPLE_NPI_FLAG = bool_(multi),
         PECOS_ASCT_CNTL_ID = pac,
@@ -62,7 +64,9 @@ providers <- function(
         LAST_NAME = last,
         FIRST_NAME = first,
         MDL_NAME = middle,
-        ORG_NAME = org_name
+        ORG_NAME = org_name,
+        .count = count,
+        .set = set,
       )
     )
   )
@@ -105,16 +109,14 @@ pending <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
-  execute(
-    list_cms(
-      id = "prov_type",
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cmslist(
         NPI = npi,
         LAST_NAME = last,
-        FIRST_NAME = first
+        FIRST_NAME = first,
+        .count = count,
+        .set = set,
       )
     )
   )

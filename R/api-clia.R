@@ -76,17 +76,13 @@ clia <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_char_(certificate)
   check_char_(accreditation)
   check_bool_(compliant)
   check_bool_(active)
-
-  execute(
-    base_cms(
-      count = count,
-      set = set,
-      arg = par_cms(
+  polish(
+    execute(
+      as_cms(
         FAC_NAME = facility_name,
         PRVDR_NUM = facility_ccn,
         CLIA_MDCR_NUM = parent_ccn,
@@ -96,7 +92,9 @@ clia <- function(
         ZIP_CD = zip,
         CMPLNC_STUS_CD = cmp_(compliant),
         PGM_TRMNTN_CD = act_(active),
-        !!!accr_(accreditation)
+        !!!accr_(accreditation),
+        .count = count,
+        .set = set,
       )
     )
   )
