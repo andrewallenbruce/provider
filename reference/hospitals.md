@@ -1,16 +1,30 @@
-# Hospitals Enrolled in Medicare
-
-Hospitals currently enrolled in Medicare. Data includes the hospital's
-sub-group types, legal business name, doing-business-as name,
-organization type and address.
+# Hospital General Information
 
 A list of all hospitals that have been registered with Medicare. The
 list includes addresses, phone numbers, hospital type, and overall
 hospital rating.
 
+Hospitals currently enrolled in Medicare. Data includes the hospital's
+sub-group types, legal business name, doing-business-as name,
+organization type and address.
+
 ## Usage
 
 ``` r
+hospitals2(
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  hosp_type = NULL,
+  ownership = NULL,
+  rating = NULL,
+  count = FALSE,
+  set = FALSE
+)
+
 hospitals(
   npi = NULL,
   ccn = NULL,
@@ -31,28 +45,9 @@ hospitals(
   count = FALSE,
   set = FALSE
 )
-
-hospitals2(
-  ccn = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  county = NULL,
-  hosp_type = NULL,
-  ownership = NULL,
-  rating = NULL,
-  count = FALSE,
-  set = FALSE
-)
 ```
 
 ## Source
-
-- [API: Hospital
-  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
-
-&nbsp;
 
 - [API: Hospital General
   Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
@@ -60,15 +55,92 @@ hospitals2(
 - [API: Data
   Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 
+&nbsp;
+
+- [API: Hospital
+  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+
 ## Arguments
-
-- npi:
-
-  `<int>` National Provider Identifier
 
 - ccn:
 
   `<int>` CMS Certification Number
+
+- org_name:
+
+  `<chr>` Legal business name
+
+- city, state, zip:
+
+  `<chr>` Location city, state, zip
+
+- county:
+
+  `<chr>` Location county
+
+- hosp_type:
+
+  `<enum>` Provider type:
+
+  - `acute` = Acute Care Hospitals
+
+  - `cah` = Critical Access Hospitals
+
+  - `child` = Children's
+
+  - `dod` = Acute Care - Department of Defense
+
+  - `ltc` = Long-term
+
+  - `psych` = Psychiatric
+
+  - `reh` = Rural Emergency Hospital
+
+  - `vha` = Acute Care - Veterans Administration
+
+- ownership:
+
+  `<enum>` Ownership type:
+
+  - `private` = Voluntary non-profit - Private
+
+  - `other` = Voluntary non-profit - Other
+
+  - `church` = Voluntary non-profit - Church
+
+  - `district` = Government - Hospital District or Authority
+
+  - `local` = Government - Local
+
+  - `federal` = Government - Federal
+
+  - `state` = Government - State
+
+  - `dod` = Department of Defense
+
+  - `profit` = Proprietary
+
+  - `physician` = Physician
+
+  - `tribal` = Tribal
+
+  - `vha` = Veterans Health Administration
+
+- rating:
+
+  `<num>` Hospital rating; 1-5 or "Not Available"
+
+- count:
+
+  `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
+
+- npi:
+
+  `<int>` National Provider Identifier
 
 - pac:
 
@@ -78,17 +150,9 @@ hospitals2(
 
   `<chr>` Medicare Enrollment ID, Enrollment state
 
-- org_name:
-
-  `<chr>` Legal business name
-
 - org_dba:
 
   `<chr>` Doing-business-as name
-
-- city, state, zip:
-
-  `<chr>` Location city, state, zip
 
 - multi:
 
@@ -149,70 +213,6 @@ hospitals2(
   `<subgroups>` Hospital’s subgroup/unit. See
   [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
 
-- count:
-
-  `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
-
-- county:
-
-  `<chr>` Location county
-
-- hosp_type:
-
-  `<enum>` Provider type:
-
-  - `acute` = Acute Care Hospitals
-
-  - `cah` = Critical Access Hospitals
-
-  - `child` = Children's
-
-  - `dod` = Acute Care - Department of Defense
-
-  - `ltc` = Long-term
-
-  - `psych` = Psychiatric
-
-  - `reh` = Rural Emergency Hospital
-
-  - `vha` = Acute Care - Veterans Administration
-
-- ownership:
-
-  `<enum>` Ownership type:
-
-  - `private` = Voluntary non-profit - Private
-
-  - `other` = Voluntary non-profit - Other
-
-  - `church` = Voluntary non-profit - Church
-
-  - `district` = Government - Hospital District or Authority
-
-  - `local` = Government - Local
-
-  - `federal` = Government - Federal
-
-  - `state` = Government - State
-
-  - `dod` = Department of Defense
-
-  - `profit` = Proprietary
-
-  - `physician` = Physician
-
-  - `tribal` = Tribal
-
-  - `vha` = Veterans Health Administration
-
-- rating:
-
-  `<num>` Hospital rating; 1-5 or "Not Available"
-
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -239,29 +239,67 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x
-#> # A tibble: 2 × 37
-#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
-#> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
-#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <int>, address <chr>
+#>     ENROLLMENT ID ENROLLMENT STATE PROVIDER TYPE CODE
+#> 1 O20100521000547               GA              00-09
+#> 2 O20100803001043               GA              00-09
+#>           PROVIDER TYPE TEXT        NPI MULTIPLE NPI FLAG    CCN ASSOCIATE ID
+#> 1 PART A PROVIDER - HOSPITAL 1023095429                 Y 114032   4486684784
+#> 2 PART A PROVIDER - HOSPITAL 1093781544                 N 114010   9234123894
+#>        ORGANIZATION NAME                        DOING BUSINESS AS NAME
+#> 1     UHS OF ANCHOR L.P.                               ANCHOR HOSPITAL
+#> 2 UHS OF PEACHFORD, L.P. PEACHFORD BEHAVIORAL HEALTH SYSTEM OF ATLANTA
+#>   INCORPORATION DATE INCORPORATION STATE ORGANIZATION TYPE STRUCTURE
+#> 1         2000-06-02                  DE                 PARTNERSHIP
+#> 2         2000-06-02                  DE                 PARTNERSHIP
+#>   ORGANIZATION OTHER TYPE TEXT PROPRIETARY NONPROFIT       ADDRESS LINE 1
+#> 1                                                  P 5454 YORKTOWNE DRIVE
+#> 2                                                  P  2151 PEACHFORD ROAD
+#>    ADDRESS LINE 2    CITY STATE  ZIP CODE           PRACTICE LOCATION TYPE
+#> 1 ANCHOR HOSPITAL ATLANTA    GA 303495317 OTHER HOSPITAL PRACTICE LOCATION
+#> 2                 ATLANTA    GA 303386534 OTHER HOSPITAL PRACTICE LOCATION
+#>   LOCATION OTHER TYPE TEXT SUBGROUP - GENERAL SUBGROUP - ACUTE CARE
+#> 1                                           N                     N
+#> 2                                           N                     N
+#>   SUBGROUP - ALCOHOL DRUG SUBGROUP - CHILDRENS SUBGROUP - LONG-TERM
+#> 1                       N                    N                    N
+#> 2                       N                    N                    N
+#>   SUBGROUP - PSYCHIATRIC SUBGROUP - REHABILITATION SUBGROUP - SHORT-TERM
+#> 1                      Y                         N                     N
+#> 2                      Y                         N                     N
+#>   SUBGROUP - SWING-BED APPROVED SUBGROUP - PSYCHIATRIC UNIT
+#> 1                             N                           N
+#> 2                             N                           Y
+#>   SUBGROUP - REHABILITATION UNIT SUBGROUP - SPECIALTY HOSPITAL SUBGROUP - OTHER
+#> 1                              N                             N                N
+#> 2                              N                             N                N
+#>   SUBGROUP - OTHER TEXT REH CONVERSION FLAG REH CONVERSION DATE
+#> 1                                         N                    
+#> 2                                         N                    
+#>   CAH OR HOSPITAL CCN
+#> 1                    
+#> 2                    
 
 hospitals2(ccn = x$ccn)
-#> ✔ hospitals2 returned 2 results.
-#> # A tibble: 2 × 11
-#>   ccn    org_name    hosp_type ownership rating address city  state zip   county
-#> * <chr>  <chr>       <chr>     <chr>      <int> <chr>   <chr> <chr> <chr> <chr> 
-#> 1 114010 PEACHFORD … Psychiat… Propriet…     NA 2151 P… ATLA… GA    30338 DE KA…
-#> 2 114032 SO CRESCEN… Psychiat… Governme…     NA 5454 Y… COLL… GA    30349 FULTON
+#> ℹ hospitals2 has 5,426 rows.
+#> ! hospitals2 ❯ No Query
+#> ℹ Returning first 10 rows...
+#> # A tibble: 10 × 11
+#>    ccn    org_name   hosp_type ownership rating address city  state zip   county
+#>  * <chr>  <chr>      <chr>     <chr>      <int> <chr>   <chr> <chr> <chr> <chr> 
+#>  1 010001 SOUTHEAST… Acute Ca… Governme…      4 1108 R… DOTH… AL    36301 HOUST…
+#>  2 010005 MARSHALL … Acute Ca… Governme…      3 2505 U… BOAZ  AL    35957 MARSH…
+#>  3 010006 NORTH ALA… Acute Ca… Propriet…      2 1701 V… FLOR… AL    35630 LAUDE…
+#>  4 010007 MIZELL ME… Acute Ca… Voluntar…      1 702 N … OPP   AL    36467 COVIN…
+#>  5 010008 CRENSHAW … Acute Ca… Propriet…     NA 101 HO… LUVE… AL    36049 CRENS…
+#>  6 010011 ST. VINCE… Acute Ca… Voluntar…      2 50 MED… BIRM… AL    35235 JEFFE…
+#>  7 010012 DEKALB RE… Acute Ca… Propriet…      3 200 ME… FORT… AL    35968 DE KA…
+#>  8 010016 SHELBY BA… Acute Ca… Voluntar…      2 1000 F… ALAB… AL    35007 SHELBY
+#>  9 010018 CALLAHAN … Acute Ca… Voluntar…     NA 1720 U… BIRM… AL    35233 JEFFE…
+#> 10 010019 HELEN KEL… Acute Ca… Governme…      2 1300 S… SHEF… AL    35660 COLBE…
 #> # ℹ 1 more variable: phone <chr>
 
 x <- hospitals2()
+#> ℹ hospitals2 has 5,426 rows.
 #> ! hospitals2 ❯ No Query
 #> ℹ Returning first 10 rows...
 x
@@ -282,24 +320,6 @@ x
 
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
-#> # A tibble: 8 × 37
-#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16e9     0 0100… 9436…
-#> 2 HH HEAL… MARSHA… O201… AL         00-09     PART A P… 1.41e9     0 0100… 8527…
-#> 3 RCHP - … NORTH … O201… AL         00-09     PART A P… 1.48e9     0 0100… 8123…
-#> 4 MIZELL … NA      O200… AL         00-09     PART A P… 1.01e9     0 0100… 6507…
-#> 5 ST. VIN… ST. VI… O200… AL         00-09     PART A P… 1.84e9     0 0100… 8921…
-#> 6 HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77e9     0 0100… 6709…
-#> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
-#> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
-#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <int>, address <chr>
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.

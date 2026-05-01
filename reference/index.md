@@ -27,9 +27,9 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   : Clinical Laboratories
 - [`esrd()`](https://andrewallenbruce.github.io/provider/reference/esrd.md)
   : Dialysis Facilities
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  : Hospitals Enrolled in Medicare
+- [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  : Hospital General Information
 - [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_fields()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
