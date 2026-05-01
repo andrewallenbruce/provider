@@ -45,7 +45,6 @@ RC_esrd <- function(x) {
 }
 
 #' @noRd
-#' @autoglobal
 RC_clinicians <- function(x) {
   x <- collapse::av(
     x,

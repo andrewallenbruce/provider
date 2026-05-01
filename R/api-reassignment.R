@@ -38,7 +38,6 @@
 #'
 #' reassignments(org_pac = 3173525888)
 #'
-#' @autoglobal
 #' @export
 reassignments <- function(
   npi = NULL,

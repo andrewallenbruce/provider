@@ -49,7 +49,6 @@
 #'
 #' opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #'
-#' @autoglobal
 #' @export
 opt_out <- function(
   npi = NULL,

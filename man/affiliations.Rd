@@ -72,9 +72,6 @@ affiliations(parent_ccn = 331302)
 
 affiliations(facility_ccn = 331302)
 
-affiliations(
-   first = "Andrew",
-   last = contains("B"),
-   facility_type = "hospital")
+affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 \dontshow{\}) # examplesIf}
 }

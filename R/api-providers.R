@@ -33,7 +33,6 @@
 #'
 #' providers(org_name = starts("U"), count = TRUE)
 #'
-#' @autoglobal
 #' @export
 providers <- function(
   npi = NULL,
@@ -100,7 +99,6 @@ providers <- function(
 #'
 #' pending(first = starts("V"))
 #'
-#' @autoglobal
 #' @export
 pending <- function(
   npi = NULL,

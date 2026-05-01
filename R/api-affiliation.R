@@ -39,12 +39,8 @@
 #'
 #' affiliations(facility_ccn = 331302)
 #'
-#' affiliations(
-#'    first = "Andrew",
-#'    last = contains("B"),
-#'    facility_type = "hospital")
+#' affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 #'
-#' @autoglobal
 #' @export
 affiliations <- function(
   npi = NULL,
@@ -208,7 +204,6 @@ clinicians <- function(
 #'
 #' esrd(network = 15:18)
 #'
-#' @autoglobal
 #' @export
 esrd <- function(
   ccn = NULL,
@@ -247,17 +242,16 @@ esrd <- function(
   )
 }
 
-#' @autoglobal
 #' @noRd
 convert_stars <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
-  if (!all2(x %in% 1:5)) {
+  if (!any2(x %in% 1:5)) {
     cli::cli_abort("{.arg stars} must be a whole number between 1 and 5.")
   }
 
-  names(set_names(1:5, paste0, ".0")[x])
+  names2(set_names(1:5, paste0, ".0")[unique(x)])
 }
 
 #' Hospital General Information

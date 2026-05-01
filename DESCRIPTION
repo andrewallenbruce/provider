@@ -37,7 +37,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Config/Needs/website: gt, tibble
-Config/roxygen2/version: 7.3.3.9000
+Config/roxygen2/version: 8.0.0
 Config/roxyglobals/filename: generated-globals.R
 Config/roxyglobals/unique: TRUE
 Config/testthat/edition: 3

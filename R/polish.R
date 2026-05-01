@@ -9,20 +9,17 @@ polish <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.default <- function(x) {
   replace_nz(x) |>
     data_frame()
 }
 
 #' @export
-#' @keywords internal
 polish.integer <- function(x) {
   invisible(x)
 }
 
 #' @export
-#' @keywords internal
 polish.affiliations <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -41,7 +38,6 @@ polish.affiliations <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.clinicians <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -73,7 +69,6 @@ polish.clinicians <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.esrd <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -97,7 +92,6 @@ polish.esrd <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.hospitals2 <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -118,7 +112,6 @@ polish.hospitals2 <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.hospitals <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -166,7 +159,6 @@ polish.hospitals <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.pending <- function(x) {
   rowbind2(x, "prov_type", fill = TRUE) |>
     replace_nz() |>
@@ -180,7 +172,6 @@ polish.pending <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.providers <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -202,7 +193,6 @@ polish.providers <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.clia <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -287,7 +277,6 @@ polish.clia <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.fqhc_enroll <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -318,7 +307,6 @@ polish.fqhc_enroll <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.fqhc_owner <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -366,7 +354,6 @@ polish.fqhc_owner <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.rhc_enroll <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -395,7 +382,6 @@ polish.rhc_enroll <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.rhc_owner <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -443,7 +429,6 @@ polish.rhc_owner <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.transparency <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -461,7 +446,6 @@ polish.transparency <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.order_refer <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -480,7 +464,6 @@ polish.order_refer <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.opt_out <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -503,7 +486,6 @@ polish.opt_out <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.reassignments <- function(x) {
   replace_nz(x) |>
     rename_with(c(
@@ -527,7 +509,6 @@ polish.reassignments <- function(x) {
 }
 
 #' @export
-#' @keywords internal
 polish.revocations <- function(x) {
   replace_nz(x) |>
     rename_with(c(

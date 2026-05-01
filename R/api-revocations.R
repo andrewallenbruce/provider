@@ -37,7 +37,6 @@
 #'
 #' revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #'
-#' @autoglobal
 #' @export
 revocations <- function(
   npi = NULL,

@@ -66,7 +66,7 @@
 #' hospitals(ccn = x$ccn)
 #'
 #' hospitals2(state = "GA", rating = 5) |> str()
-#' @autoglobal
+#'
 #' @export
 hospitals <- function(
   npi = NULL,

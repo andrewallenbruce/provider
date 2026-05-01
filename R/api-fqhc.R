@@ -31,7 +31,6 @@
 #'
 #' fqhc_enroll() |> str()
 #'
-#' @autoglobal
 #' @export
 fqhc_enroll <- function(
   npi = NULL,
@@ -94,7 +93,6 @@ fqhc_enroll <- function(
 #'
 #' fqhc_owner() |> str()
 #'
-#' @autoglobal
 #' @export
 fqhc_owner <- function(
   npi = NULL,
@@ -149,7 +147,6 @@ fqhc_owner <- function(
 #'
 #' rhc_enroll() |> str()
 #'
-#' @autoglobal
 #' @export
 rhc_enroll <- function(
   npi = NULL,
@@ -211,7 +208,6 @@ rhc_enroll <- function(
 #'
 #' rhc_owner() |> str()
 #'
-#' @autoglobal
 #' @export
 rhc_owner <- function(
   npi = NULL,

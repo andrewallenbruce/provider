@@ -18,7 +18,6 @@
 #' @examplesIf httr2::is_online()
 #' quality_metrics(2018:2025)
 #'
-#' @autoglobal
 #' @export
 quality_metrics <- function(year) {
   check_numeric(year)

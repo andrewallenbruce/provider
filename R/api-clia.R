@@ -60,7 +60,6 @@
 #'
 #' clia(accreditation = c("cap", "cola", "jcaho"))
 #'
-#' @autoglobal
 #' @export
 clia <- function(
   facility_name = NULL,
