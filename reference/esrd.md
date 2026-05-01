@@ -75,7 +75,9 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 esrd(count = TRUE)
 #> ℹ esrd has 7,557 rows.
+
 esrd()
+#> ℹ esrd has 7,557 rows.
 #> ! esrd ❯ No Query
 #> ℹ Returning first 10 rows...
 #> # A tibble: 10 × 13
@@ -92,6 +94,7 @@ esrd()
 #>  9 012512 FMC SELMA           2       8 Profit Fresenius… 1980-08-25 SELMA AL   
 #> 10 012513 BMA LANGDALE        5       8 Profit Fresenius… 1981-02-12 VALL… AL   
 #> # ℹ 4 more variables: zip <chr>, county <chr>, phone <chr>, address <chr>
+
 esrd(stars = 1)
 #> ✔ esrd returned 823 results.
 #> # A tibble: 823 × 13
@@ -109,6 +112,7 @@ esrd(stars = 1)
 #> 10 012641 DCI EVERGREEN       1       8 Non-p… Dialysis … 2011-01-27 EVER… AL   
 #> # ℹ 813 more rows
 #> # ℹ 4 more variables: zip <chr>, county <chr>, phone <chr>, address <chr>
+
 esrd(network = 15:18)
 #> ✔ esrd returned 1,404 results.
 #> # A tibble: 1,404 × 13

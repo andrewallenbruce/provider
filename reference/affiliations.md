@@ -87,9 +87,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 affiliations(count = TRUE)
 #> ℹ affiliations has 1,638,995 rows.
+
 affiliations(count = TRUE, facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
+
 affiliations()
+#> ℹ affiliations has 1,638,995 rows.
 #> ! affiliations ❯ No Query
 #> ℹ Returning first 10 rows...
 #> # A tibble: 10 × 9
@@ -105,6 +108,7 @@ affiliations()
 #>  8 DAE    KIM   NA     NA     1.00e9 4082… Hospital      370001       NA        
 #>  9 DAE    KIM   NA     NA     1.00e9 4082… Hospital      370202       NA        
 #> 10 DAE    KIM   NA     NA     1.00e9 4082… Hospital      370057       NA        
+
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 4 results.
 #> # A tibble: 4 × 9
@@ -114,6 +118,7 @@ affiliations(parent_ccn = 331302)
 #> 2 MARY    HALL… K      NA     1.40e9 8921… Nursing home  33Z302       331302    
 #> 3 IL      CHON  JUN    NA     1.54e9 0547… Nursing home  33Z302       331302    
 #> 4 DRAGOS  BANU  NA     NA     1.56e9 6709… Nursing home  33Z302       331302    
+
 affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 #> # A tibble: 206 × 9
@@ -130,9 +135,11 @@ affiliations(facility_ccn = 331302)
 #>  9 JOHN   YOUNG NA     NA     1.06e9 9436… Hospital      331302       NA        
 #> 10 ROBERT BENAK L      NA     1.06e9 3476… Hospital      331302       NA        
 #> # ℹ 196 more rows
-affiliations(first = "Andrew",
-             last = contains("B"),
-             facility_type = "hospital")
+
+affiliations(
+   first = "Andrew",
+   last = contains("B"),
+   facility_type = "hospital")
 #> ✔ affiliations returned 1,601 results.
 #> ℹ Retrieving 2 pages...
 #> # A tibble: 1,601 × 9
