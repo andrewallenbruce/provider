@@ -221,13 +221,13 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ℹ hospitals has 9,182 rows.
+#> ℹ hospitals has 9,187 rows.
 
 hospitals2(count = TRUE)
 #> ℹ hospitals2 has 5,426 rows.
 
 hospitals(prov_type = "reh", count = TRUE)
-#> ✔ hospitals returned 48 results.
+#> ✔ hospitals returned 44 results.
 hospitals2(hosp_type = "reh", count = TRUE)
 #> ✔ hospitals2 returned 39 results.
 

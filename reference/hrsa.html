@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9126</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9127</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,51 +90,11 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hrsa_items</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       id name      parentLayerId defaultVisibility subLayerIds minScale maxScale</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     0 Hospitals            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     1 Critical…            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     2 Federall…            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     3 Rural He…            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     4 Hospices             -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     5 Intermed…            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     6 Ambulato…            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     7 Skilled …            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     8 Skilled …            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     9 Skilled …            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>    10 Nursing …            -<span style="color: #BB0000;">1</span> FALSE             <span style="color: #BB0000;">NA</span>                 0        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: type &lt;chr&gt;, geometryType &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   supportsDynamicLegends &lt;lgl&gt;</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">hrsa_items</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hrsa_layers</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as_layer_class(clear_url_query(url), token, layer_type):</span> Failed to perform HTTP request.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `curl::curl_fetch_memory()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failure when receiving data from the peer [gisportal.hrsa.gov]:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Recv failure: Connection reset by peer</span>
 <span class="r-in"><span><span class="fu">hrsa_fields</span><span class="op">(</span><span class="st">"snf_all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A data frame: 19 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name                          type                  alias       domain length</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> CERTIFIED_BED_CT              esriFieldTypeInteger  CERTIFIED_… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> CMS_PROVIDER_ADDRESS          esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>        150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> CMS_PROVIDER_CAT_CD           esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> CMS_PROVIDER_CAT_SUB_TYP_CD   esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> CMS_PROVIDER_CITY             esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>         50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> CMS_PROVIDER_NUM              esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>         10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> CMS_PROVIDER_ZIP_CD           esriFieldTypeString   CMS_PROVID… <span style="color: #BB0000;">NA</span>         15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> CMS_PROVIDER_CAT_DESC         esriFieldTypeString   Facility C… <span style="color: #BB0000;">NA</span>        100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FACILITY_NM                   esriFieldTypeString   Facility N… <span style="color: #BB0000;">NA</span>        100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> CMS_PROVIDER_CAT_SUB_TYP_DESC esriFieldTypeString   Facility S… <span style="color: #BB0000;">NA</span>        100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> FAX_NUM                       esriFieldTypeString   FAX_NUM     <span style="color: #BB0000;">NA</span>         25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> MEDICAID_SNF_BED_CT           esriFieldTypeInteger  MEDICAID_S… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> MEDICARE_MEDICAID_SNF_BED_CT  esriFieldTypeInteger  MEDICARE_M… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> MEDICARE_SNF_BED_CT           esriFieldTypeInteger  MEDICARE_S… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> OBJECTID                      esriFieldTypeOID      OBJECTID    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> PHONE_NUM                     esriFieldTypeString   PHONE_NUM   <span style="color: #BB0000;">NA</span>         25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Shape                         esriFieldTypeGeometry Shape       <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> CMS_PROVIDER_STATE_ABBR       esriFieldTypeString   State Abbr… <span style="color: #BB0000;">NA</span>          2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> TOT_BED_CT                    esriFieldTypeInteger  TOT_BED_CT  <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
