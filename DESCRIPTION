@@ -1,7 +1,7 @@
 Type: Package
 Package: provider
 Title: Tidy Healthcare Provider API Interface
-Version: 0.0.1.9128
+Version: 0.0.1.9129
 Authors@R: 
     person(c("Andrew", "Allen"), "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
@@ -47,4 +47,3 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
-

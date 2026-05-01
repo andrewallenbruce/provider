@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9129 (2026-05-01)
+
+* more S7 backend work
+
+
 # provider 0.0.1.9128 (2026-04-30)
 
 * `polish()` S3 generic
