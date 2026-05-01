@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9127 (2026-04-30)
+
+* experimenting with S7
+
+
 # provider 0.0.1.9126 (2026-04-30)
 
 * Endpoint is automatically determined upon eval
