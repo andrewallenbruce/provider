@@ -52,23 +52,20 @@ affiliations <- function(
   count = FALSE,
   set = FALSE
 ) {
-  check_count_set(count, set)
   check_char_(facility_type)
   execute(
-    base_prov(
-      count = count,
-      set = set,
-      arg = param_prov(
-        npi = npi,
-        ind_pac_id = pac,
-        provider_last_name = last,
-        provider_first_name = first,
-        provider_middle_name = middle,
-        suff = suffix,
-        facility_type = enum_(facility_type),
-        facility_affiliations_certification_number = facility_ccn,
-        facility_type_certification_number = parent_ccn
-      )
+    as_pdc(
+      npi = npi,
+      ind_pac_id = pac,
+      provider_last_name = last,
+      provider_first_name = first,
+      provider_middle_name = middle,
+      suff = suffix,
+      facility_type = enum_(facility_type),
+      facility_affiliations_certification_number = facility_ccn,
+      facility_type_certification_number = parent_ccn,
+      .count = count,
+      .set = set,
     )
   )
 }

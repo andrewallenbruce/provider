@@ -64,6 +64,7 @@ Collate:
     'base-cms-list.R'
     'base-prov.R'
     'base-execute.R'
+    'base-PDC.R'
     'base-httr2.R'
     'base-uuid.R'
     'catalogs.R'

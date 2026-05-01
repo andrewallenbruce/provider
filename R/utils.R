@@ -94,6 +94,11 @@ set_args <- function(fn) {
 }
 
 #' @noRd
+`%0%` <- function(x, y) {
+  if (length(x) == 0L) y else x
+}
+
+#' @noRd
 set_names2 <- function(x, y, ...) {
   rlang::set_names(x, nm = rlang::names2(y), ...)
 }

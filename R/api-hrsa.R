@@ -10,7 +10,7 @@
 #' @param ... arguments passed on to `arcgislayers::arc_select()`
 #' @name hrsa
 #' @returns A list of endpoints.
-#' @examples
+#' @examplesIf FALSE
 #' hrsa_items()
 #' hrsa_layers()
 #' hrsa_fields("snf_all")

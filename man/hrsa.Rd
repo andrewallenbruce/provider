@@ -34,7 +34,9 @@ Health Resources & Services Administration
 Query modifiers are a small DSL for use in constructing query conditions.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 hrsa_items()
 hrsa_layers()
 hrsa_fields("snf_all")
+\dontshow{\}) # examplesIf}
 }

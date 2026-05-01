@@ -1,4 +1,7 @@
 #' @include base-prov.R
+#' @include base-cms.R
+#' @include base-cms-list.R
+NULL
 
 #' @noRd
 execute <- S7::new_generic("execute", "x")

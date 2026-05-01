@@ -1,3 +1,5 @@
+#' @include base-generics.R
+
 #' @noRd
 URL_PROV <- c(
   "https://data.cms.gov/provider-data/api/1/datastore/query/",
