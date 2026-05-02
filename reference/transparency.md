@@ -121,7 +121,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> ℹ transparency has 11,440 rows.
+#> ✔ transparency returned 11,440 results.
 
 transparency(count = TRUE, action = "met")
 #> ✔ transparency returned 3,340 results.

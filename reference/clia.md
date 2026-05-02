@@ -177,7 +177,7 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ℹ clia has 676,051 rows.
+#> ✔ clia returned 676,051 results.
 
 clia(compliant = FALSE, active = TRUE, count = TRUE)
 #> ✔ clia returned 2,578 results.

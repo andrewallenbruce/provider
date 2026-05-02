@@ -101,7 +101,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 reassignments(count = TRUE)
-#> ℹ reassignments has 3,521,074 rows.
+#> ✔ reassignments returned 3,521,074 results.
 
 reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 #> ✔ reassignments returned 1,292 results.

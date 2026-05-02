@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9132 (2026-05-02)
+
+- naming things is impossible
+- file organization is coming along
+
 ## provider 0.0.1.9131 (2026-05-01)
 
 - exported S3 polish methods

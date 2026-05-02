@@ -98,12 +98,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 rhc_enroll(count = TRUE)
-#> ℹ rhc_enroll has 5,530 rows.
+#> ✔ rhc_enroll returned 5,530 results.
 
 rhc_enroll() |> str()
-#> ℹ rhc_enroll has 5,530 rows.
+#> ✔ rhc_enroll returned 5,530 results.
 #> ! rhc_enroll ❯ No Query
-#> ℹ Returning first 10 rows...
+#> ℹ No Query ❯ Returning first 10 rows...
 #> tibble [10 × 18] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000023" "O20020813000025" "O20020814000001" "O20020814000004" ...
 #>  $ enid_state: chr [1:10] "ND" "ND" "SD" "ND" ...

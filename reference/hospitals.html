@@ -17,7 +17,7 @@ organization type and address."><meta property="og:image" content="https://andre
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9131</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9132</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,9 +133,9 @@ organization type and address.</p>
 
 
 <dt id="arg-hosp-type">hosp_type<a class="anchor" aria-label="anchor" href="#arg-hosp-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Provider type:</p><ul><li><p><code>acute</code> = Acute Care Hospitals</p></li>
-<li><p><code>cah</code> = Critical Access Hospitals</p></li>
-<li><p><code>child</code> = Children's</p></li>
+<dd><p><code>&lt;enum&gt;</code> Provider type:</p><ul><li><p><code>acute</code> = Acute Care</p></li>
+<li><p><code>cah</code> = Critical Access Hospital</p></li>
+<li><p><code>child</code> = Childrens' Hospital</p></li>
 <li><p><code>dod</code> = Acute Care - Department of Defense</p></li>
 <li><p><code>ltc</code> = Long-term</p></li>
 <li><p><code>psych</code> = Psychiatric</p></li>
@@ -161,7 +161,7 @@ organization type and address.</p>
 
 
 <dt id="arg-rating">rating<a class="anchor" aria-label="anchor" href="#arg-rating"></a></dt>
-<dd><p><code>&lt;num&gt;</code> Hospital rating; 1-5 or "Not Available"</p></dd>
+<dd><p><code>&lt;int&gt;</code> Hospital rating; 1-5 or "Not Available"</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -237,10 +237,10 @@ organization type and address.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">hospitals</span> has <span style="font-weight: bold;">9,182</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">9,182</span> results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">hospitals2</span> has <span style="font-weight: bold;">5,426</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">5,426</span> results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>prov_type <span class="op">=</span> <span class="st">"reh"</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">48</span> results.</span>
@@ -278,9 +278,9 @@ organization type and address.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: phone &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals2</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-weight: bold;">hospitals2</span> has <span style="font-weight: bold;">5,426</span> rows.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">5,426</span> results.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">hospitals2</span> ❯ <span style="font-style: italic;">No Query</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="font-style: italic;">No Query</span> ❯ Returning first <span style="font-weight: bold;">10</span> rows...</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    org_name   hosp_type ownership rating address city  state zip   county</span>

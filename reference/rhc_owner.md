@@ -34,12 +34,12 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 rhc_owner(count = TRUE)
-#> ℹ rhc_owner has 65,551 rows.
+#> ✔ rhc_owner returned 65,551 results.
 
 rhc_owner() |> str()
-#> ℹ rhc_owner has 65,551 rows.
+#> ✔ rhc_owner returned 65,551 results.
 #> ! rhc_owner ❯ No Query
-#> ℹ Returning first 10 rows...
+#> ℹ No Query ❯ Returning first 10 rows...
 #> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000023" "O20020813000023" "O20020813000023" "O20020813000023" ...
 #>  $ pac       : chr [1:10] "0042127045" "0042127045" "0042127045" "0042127045" ...

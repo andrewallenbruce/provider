@@ -94,7 +94,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> ℹ revocations has 7,465 rows.
+#> ✔ revocations returned 7,465 results.
 
 revocations(org_name = not_blank(), count = TRUE)
 #> ✔ revocations returned 4,199 results.

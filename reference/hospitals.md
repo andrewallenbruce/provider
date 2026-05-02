@@ -82,11 +82,11 @@ hospitals(
 
   `<enum>` Provider type:
 
-  - `acute` = Acute Care Hospitals
+  - `acute` = Acute Care
 
-  - `cah` = Critical Access Hospitals
+  - `cah` = Critical Access Hospital
 
-  - `child` = Children's
+  - `child` = Childrens' Hospital
 
   - `dod` = Acute Care - Department of Defense
 
@@ -128,7 +128,7 @@ hospitals(
 
 - rating:
 
-  `<num>` Hospital rating; 1-5 or "Not Available"
+  `<int>` Hospital rating; 1-5 or "Not Available"
 
 - count:
 
@@ -221,10 +221,10 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ℹ hospitals has 9,182 rows.
+#> ✔ hospitals returned 9,182 results.
 
 hospitals2(count = TRUE)
-#> ℹ hospitals2 has 5,426 rows.
+#> ✔ hospitals2 returned 5,426 results.
 
 hospitals(prov_type = "reh", count = TRUE)
 #> ✔ hospitals returned 48 results.
@@ -262,9 +262,9 @@ hospitals2(ccn = x$ccn)
 #> # ℹ 1 more variable: phone <chr>
 
 x <- hospitals2()
-#> ℹ hospitals2 has 5,426 rows.
+#> ✔ hospitals2 returned 5,426 results.
 #> ! hospitals2 ❯ No Query
-#> ℹ Returning first 10 rows...
+#> ℹ No Query ❯ Returning first 10 rows...
 x
 #> # A tibble: 10 × 11
 #>    ccn    org_name   hosp_type ownership rating address city  state zip   county

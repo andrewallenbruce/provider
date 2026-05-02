@@ -85,15 +85,15 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ℹ providers has 2,981,799 rows.
+#> ✔ providers returned 2,981,799 results.
 
 providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results.
 
 providers()
-#> ℹ providers has 2,981,799 rows.
+#> ✔ providers returned 2,981,799 results.
 #> ! providers ❯ No Query
-#> ℹ Returning first 10 rows...
+#> ℹ No Query ❯ Returning first 10 rows...
 #> # A tibble: 10 × 11
 #>    org_name first      middle last  state prov_type prov_desc    npi multi pac  
 #>  * <chr>    <chr>      <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>

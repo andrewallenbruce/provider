@@ -48,7 +48,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ℹ pending has 10,013 rows.
+#> ✔ pending returned 10,013 results.
 #> • Physician     : 3,893
 #> • Non-Physician : 6,120
 
@@ -58,6 +58,9 @@ pending(first = "Victor", count = TRUE)
 #> • Non-Physician : 2
 
 pending(first = starts("V"))
+#> ✔ pending returned 129 results.
+#> • Physician     : 51
+#> • Non-Physician : 78
 #> ✔ pending returned 129 results.
 #> • Physician     : 51
 #> • Non-Physician : 78
