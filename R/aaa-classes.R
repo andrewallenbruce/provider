@@ -1,4 +1,11 @@
 #' @noRd
+Modifier <- new_class(
+  "Modifier",
+  class_character,
+  properties = list(value = class_atomic)
+)
+
+#' @noRd
 ParamCMS <- new_class("ParamCMS", class_list, package = NULL)
 
 #' @noRd
@@ -24,7 +31,7 @@ CMS <- new_class(
     ),
     query = class_character,
     action = class_character,
-    results = new_property(
+    count = new_property(
       class_integer,
       getter = function(self) {
         flatten_url(
@@ -32,6 +39,12 @@ CMS <- new_class(
           self@query %0% NULL
         ) |>
           base_request("found_rows")
+      }
+    ),
+    pages = new_property(
+      class_integer,
+      getter = function(self) {
+        offset(n = self@count, limit = self@limit)
       }
     )
   )
@@ -54,7 +67,7 @@ ListCMS <- new_class(
     ),
     query = class_character,
     action = class_character,
-    results = new_property(
+    count = new_property(
       class_integer,
       getter = function(self) {
         flatten_url(
@@ -62,6 +75,12 @@ ListCMS <- new_class(
           self@query %0% NULL
         ) |>
           multi_count(self@url, "found_rows")
+      }
+    ),
+    pages = new_property(
+      class_integer,
+      getter = function(self) {
+        sum2(cheapr::seq_size(0L, unlist_(self@count), self@limit))
       }
     )
   )
@@ -84,7 +103,7 @@ PDC <- new_class(
     ),
     query = class_character,
     action = class_character,
-    results = new_property(
+    count = new_property(
       class_integer,
       getter = function(self) {
         flatten_url(
@@ -94,41 +113,12 @@ PDC <- new_class(
         ) |>
           base_request("count")
       }
+    ),
+    pages = new_property(
+      class_integer,
+      getter = function(self) {
+        offset(n = self@count, limit = self@limit)
+      }
     )
   )
 )
-
-#' @noRd
-build <- S7::new_generic("build", "x")
-
-#' @noRd
-execute <- S7::new_generic("execute", "x")
-
-#' @noRd
-empty <- new_generic("empty", "x")
-
-#' @noRd
-method(empty, API) <- function(x) {
-  length(x@query) == 0L
-}
-
-#' @noRd
-request_preview <- new_generic("request_preview", "x")
-
-#' @noRd
-req_total <- S7::new_generic("req_total", "x")
-
-#' @noRd
-req_count <- S7::new_generic("req_count", "x")
-
-#' @noRd
-req_empty <- S7::new_generic("req_empty", "x")
-
-#' @noRd
-req_single <- S7::new_generic("req_single", "x")
-
-#' @noRd
-req_multi <- S7::new_generic("req_multi", "x")
-
-#' @noRd
-req_set <- S7::new_generic("req_set", "x")

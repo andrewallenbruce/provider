@@ -11,7 +11,7 @@ URL_ListCMS <- function(x) {
 }
 
 #' @noRd
-as_cmslist <- function(
+list_cms <- function(
   ...,
   .count = FALSE,
   .set = FALSE,
@@ -46,47 +46,23 @@ method(request_preview, ListCMS) <- function(x) {
 }
 
 #' @noRd
-method(req_single, ListCMS) <- function(x) {
-  cli_results2(x@results, x@end)
+method(request_single, ListCMS) <- function(x) {
+  report_count(x)
   flatten_url(paste0(x@url, "?"), x@query, opts_cms()) |>
     multi_base(x@url) |>
     add_class(x@end)
 }
 
 #' @noRd
-method(req_multi, ListCMS) <- function(x) {
-  cli_pages2(x@results, x@limit, x@end)
+method(request_multi, ListCMS) <- function(x) {
+  cli_pages2(x@count, x@limit, x@end)
   flatten_url(
     paste0(x@url, "?"),
     x@query %0% NULL,
     opts_cms(offset = "<<i>>")
   ) |>
-    multi_parallel(x@results, x@limit, x@url) |>
+    multi_parallel(x@count, x@limit, x@url) |>
     add_class(x@end)
 }
 
-#' @noRd
-method(execute, ListCMS) <- function(x) {
-  if (empty(x)) {
-    cli_total2(x@results, x@end)
-    if (x@action == "set") {
-      return(req_multi(x))
-    }
 
-    if (x@action == "count") {
-      return(x@results)
-    }
-
-    return(request_preview(x))
-  }
-
-  if (sum2(x@results) == 0L || x@action == "count") {
-    cli_results2(x@results, x@end)
-    return(x@results)
-  }
-
-  if (all2(x@results <= x@limit)) {
-    return(req_single(x))
-  }
-  req_multi(x)
-}

@@ -81,7 +81,7 @@ clia <- function(
   check_bool_(active)
   polish(
     execute(
-      as_cms(
+      cms(
         FAC_NAME = facility_name,
         PRVDR_NUM = facility_ccn,
         CLIA_MDCR_NUM = parent_ccn,

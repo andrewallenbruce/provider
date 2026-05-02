@@ -61,9 +61,9 @@ hospitals(
 
 \item{hosp_type}{\verb{<enum>} Provider type:
 \itemize{
-\item \code{acute} = Acute Care Hospitals
-\item \code{cah} = Critical Access Hospitals
-\item \code{child} = Children's
+\item \code{acute} = Acute Care
+\item \code{cah} = Critical Access Hospital
+\item \code{child} = Childrens' Hospital
 \item \code{dod} = Acute Care - Department of Defense
 \item \code{ltc} = Long-term
 \item \code{psych} = Psychiatric
@@ -87,7 +87,7 @@ hospitals(
 \item \code{vha} = Veterans Health Administration
 }}
 
-\item{rating}{\verb{<num>} Hospital rating; 1-5 or "Not Available"}
+\item{rating}{\verb{<int>} Hospital rating; 1-5 or "Not Available"}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 

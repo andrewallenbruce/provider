@@ -1,3 +1,8 @@
+#' @noRd
+add_class <- function(x, endpoint) {
+  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
+}
+
 #' Polish generic
 #' Defines data cleaning methods for results
 #' @param x data.frame

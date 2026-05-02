@@ -58,7 +58,7 @@ reassignments <- function(
 ) {
   polish(
     execute(
-      as_cms(
+      cms(
         `Individual NPI` = npi,
         `Individual PAC ID` = pac,
         `Individual Enrollment ID` = enid,

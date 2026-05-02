@@ -22,7 +22,7 @@ cli_empty <- function(endpoint) {
     "{cli::symbol$pointer} ",
     "{.emph No Query}"
   ))
-  cli::cli_alert_info("Returning first {.strong 10} rows...")
+  cli::cli_alert_info("{.emph No Query} {cli::symbol$pointer} Returning first {.strong 10} rows...")
 }
 
 #' @noRd
@@ -32,6 +32,11 @@ cli_total <- function(x, endpoint) {
     "{.strong {mark(x)}} ",
     "{cli::qty(x)}row{?s}."
   ))
+  cli::cli_alert_warning(c(
+    "{.emph No Query} ",
+    "{cli::symbol$pointer} ",
+    "Returning first {.strong 10} rows..."
+    ))
 }
 
 #' @noRd

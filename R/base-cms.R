@@ -22,7 +22,7 @@ method(build, ParamCMS) <- function(x) {
 }
 
 #' @noRd
-as_cms <- function(
+cms <- function(
   ...,
   .count = FALSE,
   .set = FALSE,
@@ -57,21 +57,21 @@ method(request_preview, CMS) <- function(x) {
 }
 
 #' @noRd
-method(req_single, CMS) <- function(x) {
-  cli_results(x@results, x@end)
+method(request_single, CMS) <- function(x) {
+  report_count(x)
   flatten_url(paste0(x@url, "?"), x@query, opts_cms()) |>
     base_request() |>
     add_class(x@end)
 }
 
 #' @noRd
-method(req_multi, CMS) <- function(x) {
-  cli_pages(x@results, x@limit, x@end)
+method(request_multi, CMS) <- function(x) {
+  cli_pages(x@count, x@limit, x@end)
   flatten_url(
     paste0(x@url, "?"),
     x@query %0% NULL,
     opts_cms(offset = "<<i>>")
   ) |>
-    base_parallel(x@results, x@limit) |>
+    base_parallel(x@count, x@limit) |>
     add_class(x@end)
 }

@@ -52,7 +52,7 @@ providers <- function(
   check_bool_(multi)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         MULTIPLE_NPI_FLAG = bool_(multi),
         PECOS_ASCT_CNTL_ID = pac,
@@ -109,7 +109,7 @@ pending <- function(
 ) {
   polish(
     execute(
-      as_cmslist(
+      list_cms(
         NPI = npi,
         LAST_NAME = last,
         FIRST_NAME = first,

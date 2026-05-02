@@ -66,7 +66,7 @@ opt_out <- function(
   check_bool_(order_refer)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         `First Name` = first,
         `Last Name` = last,
@@ -149,7 +149,7 @@ order_refer <- function(
   check_bool_(hospice)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         FIRST_NAME = first,
         LAST_NAME = last,

@@ -58,7 +58,7 @@ affiliations <- function(
   check_char_(facility_type)
   polish(
     execute(
-      as_pdc(
+      pdc(
         npi = npi,
         ind_pac_id = pac,
         provider_last_name = last,
@@ -150,7 +150,7 @@ clinicians <- function(
   check_char_(gender)
   polish(
     execute(
-      as_pdc(
+      pdc(
         npi = npi,
         ind_pac_id = pac,
         ind_enrl_id = enid,
@@ -223,7 +223,7 @@ esrd <- function(
   check_numeric(stars)
   polish(
     execute(
-      as_pdc(
+      pdc(
         cms_certification_number_ccn = ccn,
         network = network,
         facility_name = facility_name,
@@ -266,9 +266,9 @@ convert_stars <- function(x = NULL) {
 #'
 #' @param county `<chr>` Location county
 #' @param hosp_type `<enum>` Provider type:
-#'    - `acute` = Acute Care Hospitals
-#'    - `cah` = Critical Access Hospitals
-#'    - `child` = Children's
+#'    - `acute` = Acute Care
+#'    - `cah` = Critical Access Hospital
+#'    - `child` = Childrens' Hospital
 #'    - `dod` = Acute Care - Department of Defense
 #'    - `ltc` = Long-term
 #'    - `psych` = Psychiatric
@@ -287,7 +287,7 @@ convert_stars <- function(x = NULL) {
 #'    - `physician` = Physician
 #'    - `tribal` = Tribal
 #'    - `vha` = Veterans Health Administration
-#' @param rating `<num>` Hospital rating; 1-5 or "Not Available"
+#' @param rating `<int>` Hospital rating; 1-5 or "Not Available"
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #' @rdname hospitals
@@ -307,7 +307,7 @@ hospitals2 <- function(
 ) {
   polish(
     execute(
-      as_pdc(
+      pdc(
         facility_id = ccn,
         facility_name = org_name,
         citytown = city,

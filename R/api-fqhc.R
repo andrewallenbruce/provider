@@ -54,7 +54,7 @@ fqhc_enroll <- function(
   check_char_(org_type)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -103,7 +103,7 @@ fqhc_owner <- function(
 ) {
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -170,7 +170,7 @@ rhc_enroll <- function(
   check_char_(org_type)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,
@@ -218,7 +218,7 @@ rhc_owner <- function(
 ) {
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         LAST_NAME = last,
         FIRST_NAME = first,

@@ -96,7 +96,7 @@ hospitals <- function(
   check_char_(prov_type)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         CCN = ccn,
         `ASSOCIATE ID` = pac,

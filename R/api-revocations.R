@@ -59,7 +59,7 @@ revocations <- function(
   check_numeric(year_end)
   polish(
     execute(
-      as_cms(
+      cms(
         NPI = npi,
         ENRLMT_ID = enid,
         FIRST_NAME = first,
@@ -158,7 +158,7 @@ transparency <- function(
   check_char_(action)
   polish(
     execute(
-      as_cms(
+      cms(
         Hosp_Name = name,
         Hosp_Address = address,
         City = city,

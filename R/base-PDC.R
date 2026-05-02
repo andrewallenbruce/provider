@@ -1,9 +1,4 @@
 #' @noRd
-add_class <- function(x, endpoint) {
-  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
-}
-
-#' @noRd
 URL_PDC <- function(x) {
   paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/query/",
@@ -27,7 +22,7 @@ method(build, ParamPDC) <- function(x) {
 }
 
 #' @noRd
-as_pdc <- function(
+pdc <- function(
   ...,
   .count = FALSE,
   .set = FALSE,
@@ -62,43 +57,17 @@ method(request_preview, PDC) <- function(x) {
 }
 
 #' @noRd
-method(req_single, PDC) <- function(x) {
-  cli_results(x@results, x@end)
+method(request_single, PDC) <- function(x) {
+  report_count(x)
   flatten_url(x@url, x@query, opts_prov()) |>
     base_request("results") |>
     add_class(x@end)
 }
 
 #' @noRd
-method(req_multi, PDC) <- function(x) {
-  cli_pages(x@results, x@limit, x@end)
+method(request_multi, PDC) <- function(x) {
+  cli_pages(x@count, x@limit, x@end)
   flatten_url(x@url, x@query %0% NULL, opts_prov(offset = "<<i>>")) |>
-    base_parallel(x@results, x@limit, "results") |>
+    base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)
-}
-
-#' @noRd
-method(execute, API) <- function(x) {
-  if (empty(x)) {
-    cli_total(x@results, x@end)
-    if (x@action == "set") {
-      return(req_multi(x))
-    }
-
-    if (x@action == "count") {
-      return(x@results)
-    }
-
-    return(request_preview(x))
-  }
-
-  if (x@results == 0L || x@action == "count") {
-    cli_results(x@results, x@end)
-    return(x@results)
-  }
-
-  if (x@results <= x@limit) {
-    return(req_single(x))
-  }
-  req_multi(x)
 }

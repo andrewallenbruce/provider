@@ -1,35 +1,3 @@
-#' @noRd
-Modifier <- S7::new_class(
-  name = "Modifier",
-  parent = S7::class_character,
-  properties = list(value = S7::class_atomic)
-)
-
-#' @export
-`print.provider::Modifier` <- function(x, ...) {
-  v <- if (any2(x@value == "")) {
-    encodeString(x@value, quote = '"', na.encode = FALSE)
-  } else {
-    x@value
-  }
-
-  m <- cli::format_inline(cli::col_cyan("<modifier[{length(v)}]>"))
-
-  cli::cat_rule(m, width = 20, line = 2, line_col = "cyan")
-  cli::cli_text(c(
-    cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold(S7::S7_data(x)))
-  ))
-
-  cli::cli_text(
-    c(
-      cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
-      cli::col_yellow(toString(v, width = 20L))
-    )
-  )
-  invisible(x)
-}
-
 #' A variety of different query operators
 #'
 #' @description Helpers for use in constructing conditions in queries.
