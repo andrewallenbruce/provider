@@ -92,35 +92,12 @@ RC_clia <- function(x) {
     own_type = clia_own_type(x$own_type),
     fac_type = clia_fac_type(x$fac_type),
     act_type = clia_act_type(x$act_type)
-
-    # region = combine_cols(x$reg_cd, x$reg_st),
-    # ssa = combine_cols(x$ssa_st, x$ssa_cty),
-    # fips = combine_cols(x$fips_st, x$fips_cty),
-    # cbsa = combine_cols(x$cbsa_1, x$cbsa_2)
   )
 
-  collapse::gv(
-    x,
-    c(
-      "fac_name_1",
-      "fac_name_2",
-      "add_1",
-      "add_2",
-      "phone_1",
-      "phone_2"
-      # "reg_cd",
-      # "reg_st",
-      # "ssa_st",
-      # "ssa_cty",
-      # "fips_st",
-      # "fips_cty",
-      # "cbsa_1",
-      # "cbsa_2"
-    )
-  ) <- NULL
+  collapse::gvr(x, "fac_name_|add_|phone_") <- NULL
 
-  rc_bin(x, collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
+  rc_bin(x, collapse::gvr(x, "_ind$", return = 3L)) |>
+    rc_date_ymd2(collapse::gvr(x, "_date$", return = 3L)) |>
     rc_integer(
       c(
         "chown",
@@ -138,7 +115,7 @@ RC_clia <- function(x) {
 #' @noRd
 RC_esrd <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
-  collapse::gv(x, c("add_1", "add_2")) <- NULL
+  collapse::gvr(x, "add_") <- NULL
 
   rc_integer(x, c("network", "stars")) |>
     rc_date_ymd("cert_date")
@@ -151,7 +128,7 @@ RC_clinicians <- function(x) {
     org_add = combine_cols(x$add_1, x$add_2),
     specialty = combine_cols(x$specialty, x$spec_other)
   )
-  collapse::gv(x, c("add_1", "add_2", "spec_other")) <- NULL
+  collapse::gvr(x, "add_|spec_") <- NULL
 
   rc_integer(x, c("npi", "grad_year", "org_mem"))
 }
@@ -159,17 +136,17 @@ RC_clinicians <- function(x) {
 #' @noRd
 RC_hospitals <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
-  collapse::gv(x, c("add_1", "add_2")) <- NULL
+  collapse::gvr(x, "add_") <- NULL
 
   rc_integer(x, "npi") |>
-    rc_date_ymd(c("inc_date", "reh_date")) |>
-    rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L))
+    rc_date_ymd(collapse::gvr(x, "_date$", return = 3L)) |>
+    rc_bin(collapse::gvr(x, "multi|^sub_", return = 3L))
 }
 
 #' @noRd
 RC_opt_out <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
-  collapse::gv(x, c("add_1", "add_2")) <- NULL
+  collapse::gvr(x, "add_") <- NULL
 
   rc_integer(x, "npi") |>
     rc_bin("order_refer") |>
@@ -179,7 +156,7 @@ RC_opt_out <- function(x) {
 #' @noRd
 RC_rhc_enroll <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
-  collapse::gv(x, c("add_1", "add_2")) <- NULL
+  collapse::gvr(x, "add_") <- NULL
 
   rc_integer(x, "npi") |>
     rc_bin("multi") |>
@@ -189,18 +166,18 @@ RC_rhc_enroll <- function(x) {
 #' @noRd
 RC_rhc_owner <- function(x) {
   x <- collapse::av(x, own_add = combine_cols(x$own_add_1, x$own_add_2))
-  collapse::gv(x, c("own_add_1", "own_add_2")) <- NULL
+  collapse::gvr(x, "own_add_") <- NULL
 
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
-    rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
     rc_date_ymd("own_date")
 }
 
 #' @noRd
 RC_fqhc_enroll <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
-  collapse::gv(x, c("add_1", "add_2")) <- NULL
+  collapse::gvr(x, "add_") <- NULL
 
   rc_integer(x, "npi") |>
     rc_bin("multi") |>
@@ -210,10 +187,51 @@ RC_fqhc_enroll <- function(x) {
 #' @noRd
 RC_fqhc_owner <- function(x) {
   x <- collapse::av(x, own_add = combine_cols(x$own_add_1, x$own_add_2))
-  collapse::gv(x, c("own_add_1", "own_add_2")) <- NULL
+  collapse::gvr(x, "own_add_") <- NULL
 
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
-    rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
     rc_date_ymd("own_date")
+}
+
+#' @noRd
+fqhc_owner_pivot <- function(x) {
+  y <- collapse::gvr(x, "own_pac|_ind$") |>
+    collapse::pivot(
+      ids = "own_pac",
+      factor = FALSE,
+      names = list(variable = "var", value = "ind"),
+      na.rm = TRUE
+    )
+
+  if (nrow(x) == 0L) {
+    collapse::gvr(x, "_ind$") <- NULL
+    return(x)
+  }
+
+  y <- collapse::ss(y, y$ind %==% 1L)
+
+  collapse::gvr(y, "var") <- cheapr::val_match(
+    collapse::gvr(y, "var"),
+    "acq_ind" ~ "Created for Aquisition",
+    "corp_ind" ~ "Corporation",
+    "llc_ind" ~ "LLC",
+    "mps_ind" ~ "Medical Provider/Supplier",
+    "msr_ind" ~ "Management Services Company",
+    "mst_ind" ~ "Medical Staffing Company",
+    "hld_ind" ~ "Holding Company",
+    "inv_ind" ~ "Investment Firm",
+    "fin_ind" ~ "Financial Institution",
+    "con_ind" ~ "Consulting Firm",
+    "fp_ind" ~ "For Profit",
+    "np_ind" ~ "Non Profit",
+    "pe_ind" ~ "Private Equity",
+    "reit_ind" ~ "REIT",
+    "cho_ind" ~ "Chain Home Office",
+    "oth_ind" ~ "Other",
+    "ano_ind" ~ "Owned by Another Org/Ind",
+    .default = NA_character_
+  )
+  return(y)
 }

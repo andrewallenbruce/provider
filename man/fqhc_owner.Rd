@@ -4,14 +4,62 @@
 \alias{fqhc_owner}
 \title{FQHC Owners}
 \usage{
-fqhc_owner(npi = NULL, ccn = NULL, pac = NULL, count = FALSE, set = FALSE)
+fqhc_owner(
+  enid = NULL,
+  pac = NULL,
+  org_name = NULL,
+  own_pac = NULL,
+  own_type = NULL,
+  own_role = NULL,
+  own_first = NULL,
+  own_middle = NULL,
+  own_last = NULL,
+  own_title = NULL,
+  own_org = NULL,
+  own_dba = NULL,
+  own_address = NULL,
+  own_city = NULL,
+  own_state = NULL,
+  own_zip = NULL,
+  own_pct = NULL,
+  count = FALSE,
+  set = FALSE
+)
 }
 \arguments{
-\item{npi}{\verb{<int>} National Provider Identifier}
-
-\item{ccn}{\verb{<chr>} Provider's name}
+\item{enid}{\verb{<chr>} National Provider Identifier}
 
 \item{pac}{\verb{<chr>} Provider's name}
+
+\item{org_name}{\verb{<chr>} Provider's name}
+
+\item{own_pac}{\verb{<chr>} Provider's name}
+
+\item{own_type}{\verb{<chr>} Provider's name}
+
+\item{own_role}{\verb{<chr>} Provider's name}
+
+\item{own_first}{\verb{<chr>} Provider's name}
+
+\item{own_middle}{\verb{<chr>} Provider's name}
+
+\item{own_last}{\verb{<chr>} Provider's name}
+
+\item{own_title}{\verb{<chr>} Provider's name}
+
+\item{own_org}{\verb{<chr>} Provider's name}
+
+\item{own_dba}{\verb{<chr>} Provider's name}
+
+\item{own_address}{\verb{<chr>} Provider's name}
+
+\item{own_city}{\verb{<chr>} Provider's name}
+
+\item{own_state}{\verb{<chr>} Provider's name}
+
+\item{own_zip}{\verb{<chr>} Provider's name}
+
+\item{own_pct}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 

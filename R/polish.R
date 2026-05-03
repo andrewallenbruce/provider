@@ -26,8 +26,9 @@ polish.integer <- function(x) {
 
 #' @export
 polish.affiliations <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       provider_first_name = "first",
       provider_last_name = "last",
       provider_middle_name = "middle",
@@ -37,15 +38,18 @@ polish.affiliations <- function(x) {
       facility_type = "facility_type",
       facility_affiliations_certification_number = "facility_ccn",
       facility_type_certification_number = "parent_ccn"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     rc_integer("npi") |>
     data_frame()
 }
 
 #' @export
 polish.clinicians <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       provider_first_name = "first",
       provider_middle_name = "middle",
       provider_last_name = "last",
@@ -68,15 +72,18 @@ polish.clinicians <- function(x) {
       state = "org_state",
       zip_code = "org_zip",
       telephone_number = "org_phone"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_clinicians() |>
     data_frame()
 }
 
 #' @export
 polish.esrd <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       cms_certification_number_ccn = "ccn",
       facility_name = "facility_name",
       five_star = "stars",
@@ -91,15 +98,18 @@ polish.esrd <- function(x) {
       zip_code = "zip",
       countyparish = "county",
       telephone_number = "phone"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_esrd() |>
     data_frame()
 }
 
 #' @export
 polish.hospitals2 <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       facility_id = "ccn",
       facility_name = "org_name",
       hospital_type = "hosp_type",
@@ -111,15 +121,18 @@ polish.hospitals2 <- function(x) {
       zip_code = "zip",
       countyparish = "county",
       telephone_number = "phone"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     rc_integer_supp("rating") |>
     data_frame()
 }
 
 #' @export
 polish.hospitals <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `ORGANIZATION NAME` = "org_name",
       `DOING BUSINESS AS NAME` = "org_dba",
       `ENROLLMENT ID` = "enid",
@@ -158,7 +171,9 @@ polish.hospitals <- function(x) {
       `SUBGROUP - REHABILITATION UNIT` = "sub_iru",
       `SUBGROUP - OTHER` = "sub_oth",
       `SUBGROUP - OTHER TEXT` = "sub_otxt"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_hospitals() |>
     data_frame()
 }
@@ -178,8 +193,9 @@ polish.pending <- function(x) {
 
 #' @export
 polish.providers <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       ORG_NAME = "org_name",
       FIRST_NAME = "first",
       MDL_NAME = "middle",
@@ -191,7 +207,9 @@ polish.providers <- function(x) {
       MULTIPLE_NPI_FLAG = "multi",
       PECOS_ASCT_CNTL_ID = "pac",
       ENRLMT_ID = "enid"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     data_frame()
@@ -199,8 +217,9 @@ polish.providers <- function(x) {
 
 #' @export
 polish.clia <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       FAC_NAME = "fac_name_1",
       ADDTNL_FAC_NAME = "fac_name_2",
       PRVDR_NUM = "facility_ccn",
@@ -276,15 +295,18 @@ polish.clia <- function(x) {
       LAB_TEMP_TSTG_SITE_SW = "tmp_ind",
       DRCTLY_AFLTD_LAB_CNT = "alabs",
       LAB_SITE_CNT = "sites"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_clia() |>
     data_frame()
 }
 
 #' @export
 polish.fqhc_enroll <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
       `PROVIDER TYPE CODE` = "prov_type",
@@ -306,15 +328,18 @@ polish.fqhc_enroll <- function(x) {
       STATE = "state",
       `ZIP CODE` = "zip",
       `TELEPHONE NUMBER` = "phone"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_fqhc_enroll() |>
     data_frame()
 }
 
 #' @export
 polish.fqhc_owner <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `ENROLLMENT ID` = "enid",
       `ASSOCIATE ID` = "pac",
       `ORGANIZATION NAME` = "org_name",
@@ -353,15 +378,18 @@ polish.fqhc_owner <- function(x) {
       `OTHER TYPE - OWNER` = "oth_ind",
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_fqhc_owner() |>
     data_frame()
 }
 
 #' @export
 polish.rhc_enroll <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `ENROLLMENT ID` = "enid",
       `ENROLLMENT STATE` = "enid_state",
       NPI = "npi",
@@ -381,15 +409,18 @@ polish.rhc_enroll <- function(x) {
       STATE = "state",
       `ZIP CODE` = "zip",
       `TELEPHONE NUMBER` = "phone"
-    )) |>
+    )
+  )
+  replace_nz(x) |>
     RC_rhc_enroll() |>
     data_frame()
 }
 
 #' @export
 polish.rhc_owner <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `ENROLLMENT ID` = "enid",
       `ASSOCIATE ID` = "pac",
       `ORGANIZATION NAME` = "org_name",
@@ -428,15 +459,19 @@ polish.rhc_owner <- function(x) {
       `OTHER TYPE - OWNER` = "oth_ind",
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     RC_rhc_owner() |>
     data_frame()
 }
 
 #' @export
 polish.transparency <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       Case_ID = "case",
       Hosp_Name = "name",
       Hosp_Address = "address",
@@ -444,7 +479,10 @@ polish.transparency <- function(x) {
       State = "state",
       Action = "action",
       Date_of_Action = "action_date"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     rc_integer("case") |>
     rc_date_ymd("action_date") |>
     data_frame()
@@ -452,8 +490,9 @@ polish.transparency <- function(x) {
 
 #' @export
 polish.order_refer <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       FIRST_NAME = "first",
       LAST_NAME = "last",
       NPI = "npi",
@@ -462,7 +501,10 @@ polish.order_refer <- function(x) {
       HHA = "hha",
       PMD = "pmd",
       HOSPICE = "hospice"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     rc_integer("npi") |>
     rc_bin(c("ptb", "dme", "hha", "pmd", "hospice")) |>
     data_frame()
@@ -470,8 +512,9 @@ polish.order_refer <- function(x) {
 
 #' @export
 polish.opt_out <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       NPI = "npi",
       `First Name` = "first",
       `Last Name` = "last",
@@ -485,15 +528,19 @@ polish.opt_out <- function(x) {
       `State Code` = "state",
       `Zip code` = "zip",
       `Eligible to Order and Refer` = "order_refer"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     RC_opt_out() |>
     data_frame()
 }
 
 #' @export
 polish.reassignments <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       `Individual First Name` = "first",
       `Individual Last Name` = "last",
       `Individual State Code` = "state",
@@ -508,15 +555,19 @@ polish.reassignments <- function(x) {
       `Group Enrollment ID` = "org_enid",
       `Group State Code` = "org_state",
       `Record Type` = "rec_type"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     rc_integer(c("npi", "employers", "employees")) |>
     data_frame()
 }
 
 #' @export
 polish.revocations <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
+  rename_with(
+    x,
+    c(
       ORG_NAME = "org_name",
       FIRST_NAME = "first",
       MDL_NAME = "middle",
@@ -529,7 +580,10 @@ polish.revocations <- function(x) {
       REVOCATION_RSN = "reason",
       REVOCATION_EFCTV_DT = "start_date",
       REENROLLMENT_BAR_EXPRTN_DT = "end_date"
-    )) |>
+    )
+  )
+
+  replace_nz(x) |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_date_ymd(c("start_date", "end_date")) |>

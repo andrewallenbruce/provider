@@ -20,6 +20,11 @@ replace_nz <- function(i) {
 }
 
 #' @noRd
+rc_integerv <- function(x, v) {
+  collapse::settfmv(.data = x, vars = v, FUN = as.integer)
+}
+
+#' @noRd
 rc_integer <- function(x, v) {
   collapse::tfmv(.data = x, vars = v, FUN = as.integer)
 }
