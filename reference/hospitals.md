@@ -233,7 +233,7 @@ hospitals2(count = TRUE)
 #> 
 
 hospitals(prov_type = "reh", count = TRUE)
-#> ✔ hospitals returned 48 results.
+#> ✔ hospitals returned 44 results.
 hospitals2(hosp_type = "reh", count = TRUE)
 #> ✔ hospitals2 returned 39 results.
 

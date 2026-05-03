@@ -187,65 +187,65 @@ clia(compliant = FALSE, active = TRUE, count = TRUE)
 
 clia(facility_ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
-#> # A tibble: 6 × 61
+#> # A tibble: 6 × 59
 #>   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#> * <chr>        <chr>      <chr>    <chr>      <chr> <chr> <date>      <int>
-#> 1 02D0873639   NA         NA       NA         NA    0     NA              0
-#> 2 06D0880233   NA         NA       NA         NA    0     NA              1
-#> 3 11D0668290   NA         NA       NA         NA    0     NA              0
-#> 4 11D0668319   NA         NA       NA         NA    0     NA              0
-#> 5 11D1061576   NA         NA       NA         NA    0     NA              0
-#> 6 40D0869394   NA         NA       NA         NA    0     NA              0
-#> # ℹ 53 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
+#> * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
+#> 1 02D0873639   NA         NA       NA         NA        0 NA              0
+#> 2 06D0880233   NA         NA       NA         NA        0 NA              1
+#> 3 11D0668290   NA         NA       NA         NA        0 NA              0
+#> 4 11D0668319   NA         NA       NA         NA        0 NA              0
+#> 5 11D1061576   NA         NA       NA         NA        0 NA              0
+#> 6 40D0869394   NA         NA       NA         NA        0 NA              0
+#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
 #> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, app_date <date>, cert_date <date>, eff_date <date>,
-#> #   mail_date <date>, term_date <date>, a2la_date <date>, a2la_ind <int>,
-#> #   aabb_date <date>, aabb_ind <int>, aoa_date <date>, aoa_ind <int>,
-#> #   ashi_date <date>, ashi_ind <int>, cap_date <date>, cap_ind <int>, …
+#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
+#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
+#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
+#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
 
 clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results.
-#> # A tibble: 18 × 61
+#> # A tibble: 18 × 59
 #>    facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#>  * <chr>        <chr>      <chr>    <chr>      <chr> <chr> <date>      <int>
-#>  1 11D0022233   110122     NA       NA         NA    0     NA              0
-#>  2 11D0022241   110037     NA       NA         NA    0     NA              0
-#>  3 11D0265567   254623647A NA       NA         NA    0     NA              0
-#>  4 11D0646134   11L0008004 NA       NA         NA    0     NA              0
-#>  5 11D0680179   110122     NA       NA         NA    0     NA              0
-#>  6 11D0902131   NA         NA       NA         NA    0     NA              0
-#>  7 11D0914178   NA         NA       NA         NA    0     NA              0
-#>  8 11D0960358   NA         NA       NA         NA    0     NA              0
-#>  9 11D1001568   NA         NA       NA         NA    0     NA              0
-#> 10 11D1065138   NA         NA       NA         NA    0     NA              0
-#> 11 11D2027917   NA         NA       NA         NA    0     NA              0
-#> 12 11D2053438   NA         NA       NA         NA    0     NA              0
-#> 13 11D2079448   NA         NA       NA         NA    0     NA              0
-#> 14 11D2101175   NA         NA       NA         NA    0     NA              0
-#> 15 11D2144796   NA         NA       NA         NA    0     NA              0
-#> 16 11D2144934   NA         NA       NA         NA    0     NA              0
-#> 17 11D2193538   NA         NA       NA         NA    0     NA              0
-#> 18 11D2223235   NA         NA       NA         NA    0     NA              0
-#> # ℹ 53 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
+#>  * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
+#>  1 11D0022233   110122     NA       NA         NA        0 NA              0
+#>  2 11D0022241   110037     NA       NA         NA        0 NA              0
+#>  3 11D0265567   254623647A NA       NA         NA        0 NA              0
+#>  4 11D0646134   11L0008004 NA       NA         NA        0 NA              0
+#>  5 11D0680179   110122     NA       NA         NA        0 NA              0
+#>  6 11D0902131   NA         NA       NA         NA        0 NA              0
+#>  7 11D0914178   NA         NA       NA         NA        0 NA              0
+#>  8 11D0960358   NA         NA       NA         NA        0 NA              0
+#>  9 11D1001568   NA         NA       NA         NA        0 NA              0
+#> 10 11D1065138   NA         NA       NA         NA        0 NA              0
+#> 11 11D2027917   NA         NA       NA         NA        0 NA              0
+#> 12 11D2053438   NA         NA       NA         NA        0 NA              0
+#> 13 11D2079448   NA         NA       NA         NA        0 NA              0
+#> 14 11D2101175   NA         NA       NA         NA        0 NA              0
+#> 15 11D2144796   NA         NA       NA         NA        0 NA              0
+#> 16 11D2144934   NA         NA       NA         NA        0 NA              0
+#> 17 11D2193538   NA         NA       NA         NA        0 NA              0
+#> 18 11D2223235   NA         NA       NA         NA        0 NA              0
+#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
 #> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, app_date <date>, cert_date <date>, eff_date <date>,
-#> #   mail_date <date>, term_date <date>, a2la_date <date>, a2la_ind <int>,
-#> #   aabb_date <date>, aabb_ind <int>, aoa_date <date>, aoa_ind <int>,
-#> #   ashi_date <date>, ashi_ind <int>, cap_date <date>, cap_ind <int>, …
+#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
+#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
+#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
+#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
 
 clia(accreditation = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result.
-#> # A tibble: 1 × 61
+#> # A tibble: 1 × 59
 #>   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#> * <chr>        <chr>      <chr>    <chr>      <chr> <chr> <date>      <int>
-#> 1 42D0665325   420073     NA       NA         NA    0     NA              0
-#> # ℹ 53 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
+#> * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
+#> 1 42D0665325   420073     NA       NA         NA        0 NA              0
+#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
 #> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, app_date <date>, cert_date <date>, eff_date <date>,
-#> #   mail_date <date>, term_date <date>, a2la_date <date>, a2la_ind <int>,
-#> #   aabb_date <date>, aabb_ind <int>, aoa_date <date>, aoa_ind <int>,
-#> #   ashi_date <date>, ashi_ind <int>, cap_date <date>, cap_ind <int>, …
+#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
+#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
+#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
+#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
 ```
