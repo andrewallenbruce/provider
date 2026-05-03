@@ -38,12 +38,17 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 fqhc_owner(count = TRUE)
-#> ✔ fqhc_owner returned 148,919 results.
+#> ══ fqhc_owner Totals
+#> • Rows  : 148,919
+#> • Pages : 30     
+#> 
 
 fqhc_owner() |> str()
-#> ✔ fqhc_owner returned 148,919 results.
-#> ! fqhc_owner ❯ No Query
-#> ℹ No Query ❯ Returning first 10 rows...
+#> ══ fqhc_owner Totals
+#> • Rows  : 148,919
+#> • Pages : 30     
+#> 
+#> ! No Query ❯ Returning first 10 rows...
 #> tibble [10 × 37] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020819000009" "O20020819000009" "O20020819000009" "O20020819000009" ...
 #>  $ pac       : chr [1:10] "2365359387" "2365359387" "2365359387" "2365359387" ...

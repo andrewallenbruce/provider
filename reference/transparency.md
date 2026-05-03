@@ -121,7 +121,10 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> ✔ transparency returned 11,440 results.
+#> ══ transparency Tota
+#> • Rows  : 11,440
+#> • Pages : 3     
+#> 
 
 transparency(count = TRUE, action = "met")
 #> ✔ transparency returned 3,340 results.

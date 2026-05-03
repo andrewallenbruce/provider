@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9133 (2026-05-02)
+
+- cli messaging
+  ([\#101](https://github.com/andrewallenbruce/provider/issues/101))
+
 ## provider 0.0.1.9132 (2026-05-02)
 
 - naming things is impossible

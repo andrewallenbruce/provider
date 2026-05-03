@@ -177,7 +177,10 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ✔ clia returned 676,051 results.
+#> ══ clia Totals ═════
+#> • Rows  : 676,051
+#> • Pages : 136    
+#> 
 
 clia(compliant = FALSE, active = TRUE, count = TRUE)
 #> ✔ clia returned 2,578 results.
