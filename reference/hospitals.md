@@ -221,13 +221,13 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospitals(count = TRUE)
-#> ══ hospitals Totals 
+#> ═ hospitals Totals
 #> • Rows  : 9,182
 #> • Pages : 2    
 #> 
 
 hospitals2(count = TRUE)
-#> ══ hospitals2 Totals
+#> ═ hospitals2 Totals
 #> • Rows  : 5,426
 #> • Pages : 4    
 #> 
@@ -268,11 +268,12 @@ hospitals2(ccn = x$ccn)
 #> # ℹ 1 more variable: phone <chr>
 
 x <- hospitals2()
-#> ══ hospitals2 Totals
+#> ═ hospitals2 Totals
 #> • Rows  : 5,426
 #> • Pages : 4    
 #> 
 #> ! No Query ❯ Returning first 10 rows...
+#> 
 x
 #> # A tibble: 10 × 11
 #>    ccn    org_name   hosp_type ownership rating address city  state zip   county

@@ -74,17 +74,18 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 esrd(count = TRUE)
-#> ══ esrd Totals ═════
+#> ═ esrd Totals
 #> • Rows  : 7,557
 #> • Pages : 6    
 #> 
 
 esrd()
-#> ══ esrd Totals ═════
+#> ═ esrd Totals
 #> • Rows  : 7,557
 #> • Pages : 6    
 #> 
 #> ! No Query ❯ Returning first 10 rows...
+#> 
 #> # A tibble: 10 × 13
 #>    ccn    facility_name   stars network status chain_name cert_date  city  state
 #>  * <chr>  <chr>           <int>   <int> <chr>  <chr>      <date>     <chr> <chr>

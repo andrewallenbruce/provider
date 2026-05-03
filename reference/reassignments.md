@@ -101,7 +101,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 reassignments(count = TRUE)
-#> ══ reassignments Tot
+#> ═ reassignments Totals
 #> • Rows  : 3,521,074
 #> • Pages : 705      
 #> 

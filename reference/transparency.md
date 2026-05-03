@@ -121,7 +121,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 transparency(count = TRUE)
-#> ══ transparency Tota
+#> ═ transparency Totals
 #> • Rows  : 11,440
 #> • Pages : 3     
 #> 
