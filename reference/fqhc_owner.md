@@ -5,20 +5,96 @@ Providers with pending Medicare enrollment applications.
 ## Usage
 
 ``` r
-fqhc_owner(npi = NULL, ccn = NULL, pac = NULL, count = FALSE, set = FALSE)
+fqhc_owner(
+  enid = NULL,
+  pac = NULL,
+  org_name = NULL,
+  own_pac = NULL,
+  own_type = NULL,
+  own_role = NULL,
+  own_first = NULL,
+  own_middle = NULL,
+  own_last = NULL,
+  own_title = NULL,
+  own_org = NULL,
+  own_dba = NULL,
+  own_address = NULL,
+  own_city = NULL,
+  own_state = NULL,
+  own_zip = NULL,
+  own_pct = NULL,
+  count = FALSE,
+  set = FALSE
+)
 ```
 
 ## Arguments
 
-- npi:
+- enid:
 
-  `<int>` National Provider Identifier
+  `<chr>` National Provider Identifier
 
-- ccn:
+- pac:
 
   `<chr>` Provider's name
 
-- pac:
+- org_name:
+
+  `<chr>` Provider's name
+
+- own_pac:
+
+  `<chr>` Provider's name
+
+- own_type:
+
+  `<chr>` Provider's name
+
+- own_role:
+
+  `<chr>` Provider's name
+
+- own_first:
+
+  `<chr>` Provider's name
+
+- own_middle:
+
+  `<chr>` Provider's name
+
+- own_last:
+
+  `<chr>` Provider's name
+
+- own_title:
+
+  `<chr>` Provider's name
+
+- own_org:
+
+  `<chr>` Provider's name
+
+- own_dba:
+
+  `<chr>` Provider's name
+
+- own_address:
+
+  `<chr>` Provider's name
+
+- own_city:
+
+  `<chr>` Provider's name
+
+- own_state:
+
+  `<chr>` Provider's name
+
+- own_zip:
+
+  `<chr>` Provider's name
+
+- own_pct:
 
   `<chr>` Provider's name
 

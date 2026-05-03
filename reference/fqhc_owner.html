@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9134</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9135</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,22 +54,98 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fqhc_owner</span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, ccn <span class="op">=</span> <span class="cn">NULL</span>, pac <span class="op">=</span> <span class="cn">NULL</span>, count <span class="op">=</span> <span class="cn">FALSE</span>, set <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fqhc_owner</span><span class="op">(</span></span>
+<span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_role <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_address <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_pct <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
-<dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
-
-
-<dt id="arg-ccn">ccn<a class="anchor" aria-label="anchor" href="#arg-ccn"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+<dl><dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> National Provider Identifier</p></dd>
 
 
 <dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-pac">own_pac<a class="anchor" aria-label="anchor" href="#arg-own-pac"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-type">own_type<a class="anchor" aria-label="anchor" href="#arg-own-type"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-role">own_role<a class="anchor" aria-label="anchor" href="#arg-own-role"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-first">own_first<a class="anchor" aria-label="anchor" href="#arg-own-first"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-middle">own_middle<a class="anchor" aria-label="anchor" href="#arg-own-middle"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-last">own_last<a class="anchor" aria-label="anchor" href="#arg-own-last"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-title">own_title<a class="anchor" aria-label="anchor" href="#arg-own-title"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-org">own_org<a class="anchor" aria-label="anchor" href="#arg-own-org"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-dba">own_dba<a class="anchor" aria-label="anchor" href="#arg-own-dba"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-address">own_address<a class="anchor" aria-label="anchor" href="#arg-own-address"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-city">own_city<a class="anchor" aria-label="anchor" href="#arg-own-city"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-state">own_state<a class="anchor" aria-label="anchor" href="#arg-own-state"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-zip">own_zip<a class="anchor" aria-label="anchor" href="#arg-own-zip"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-pct">own_pct<a class="anchor" aria-label="anchor" href="#arg-own-pct"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 

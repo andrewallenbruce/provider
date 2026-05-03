@@ -101,41 +101,41 @@ order_refer(count = TRUE)
 order_refer(npi = 1003026055)
 #> ✔ order_refer returned 1 result.
 #> # A tibble: 1 × 8
-#>   first   last          npi   ptb   dme   hha   pmd hospice
-#> * <chr>   <chr>       <int> <int> <int> <int> <int>   <int>
-#> 1 RADHIKA PHADKE 1003026055     0     1     0     1       0
+#>          npi last   first     ptb   dme   hha   pmd hospice
+#> *      <int> <chr>  <chr>   <int> <int> <int> <int>   <int>
+#> 1 1003026055 PHADKE RADHIKA     0     1     0     1       0
 
 order_refer(first = "Jennifer", last = "Smith")
 #> ✔ order_refer returned 136 results.
 #> # A tibble: 136 × 8
-#>    first    last         npi   ptb   dme   hha   pmd hospice
-#>  * <chr>    <chr>      <int> <int> <int> <int> <int>   <int>
-#>  1 JENNIFER SMITH 1992162556     1     1     0     0       0
-#>  2 JENNIFER SMITH 1811518566     1     1     0     0       0
-#>  3 JENNIFER SMITH 1134237498     1     1     1     1       1
-#>  4 JENNIFER SMITH 1992396162     1     1     0     0       0
-#>  5 JENNIFER SMITH 1942592324     1     1     1     1       0
-#>  6 JENNIFER SMITH 1396151817     1     1     1     0       1
-#>  7 JENNIFER SMITH 1336652726     1     1     1     1       0
-#>  8 JENNIFER SMITH 1528351160     1     1     1     1       1
-#>  9 JENNIFER SMITH 1588291215     1     1     1     1       1
-#> 10 JENNIFER SMITH 1063644995     1     1     0     0       0
+#>           npi last  first      ptb   dme   hha   pmd hospice
+#>  *      <int> <chr> <chr>    <int> <int> <int> <int>   <int>
+#>  1 1992162556 SMITH JENNIFER     1     1     0     0       0
+#>  2 1811518566 SMITH JENNIFER     1     1     0     0       0
+#>  3 1134237498 SMITH JENNIFER     1     1     1     1       1
+#>  4 1992396162 SMITH JENNIFER     1     1     0     0       0
+#>  5 1942592324 SMITH JENNIFER     1     1     1     1       0
+#>  6 1396151817 SMITH JENNIFER     1     1     1     0       1
+#>  7 1336652726 SMITH JENNIFER     1     1     1     1       0
+#>  8 1528351160 SMITH JENNIFER     1     1     1     1       1
+#>  9 1588291215 SMITH JENNIFER     1     1     1     1       1
+#> 10 1063644995 SMITH JENNIFER     1     1     0     0       0
 #> # ℹ 126 more rows
 
 order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 #> ✔ order_refer returned 47 results.
 #> # A tibble: 47 × 8
-#>    first    last               npi   ptb   dme   hha   pmd hospice
-#>  * <chr>    <chr>            <int> <int> <int> <int> <int>   <int>
-#>  1 ROBYN    AYER        1659094290     1     1     0     1       0
-#>  2 MEGAN    BAUMGARDNER 1023796711     1     1     0     1       0
-#>  3 KRISTINA BERRY       1295461192     1     1     0     1       0
-#>  4 BONNIE   BETTS       1306821129     1     1     0     1       0
-#>  5 LAURA    BOBROWSKI   1013297019     1     1     0     1       0
-#>  6 KAELYN   CARROLL     1003706912     1     1     0     1       0
-#>  7 BRIDGET  DIETZ       1720522592     1     1     0     1       0
-#>  8 JAMIE    DUBOSE      1720506520     1     1     0     1       0
-#>  9 ANNA     DYKSTRA     1174278626     1     1     0     1       0
-#> 10 SUSAN    ENGLEBERT   1487145967     1     1     0     1       0
+#>           npi last        first      ptb   dme   hha   pmd hospice
+#>  *      <int> <chr>       <chr>    <int> <int> <int> <int>   <int>
+#>  1 1659094290 AYER        ROBYN        1     1     0     1       0
+#>  2 1023796711 BAUMGARDNER MEGAN        1     1     0     1       0
+#>  3 1295461192 BERRY       KRISTINA     1     1     0     1       0
+#>  4 1306821129 BETTS       BONNIE       1     1     0     1       0
+#>  5 1013297019 BOBROWSKI   LAURA        1     1     0     1       0
+#>  6 1003706912 CARROLL     KAELYN       1     1     0     1       0
+#>  7 1720522592 DIETZ       BRIDGET      1     1     0     1       0
+#>  8 1720506520 DUBOSE      JAMIE        1     1     0     1       0
+#>  9 1174278626 DYKSTRA     ANNA         1     1     0     1       0
+#> 10 1487145967 ENGLEBERT   SUSAN        1     1     0     1       0
 #> # ℹ 37 more rows
 ```

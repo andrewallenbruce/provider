@@ -187,65 +187,65 @@ clia(compliant = FALSE, active = TRUE, count = TRUE)
 
 clia(facility_ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
-#> # A tibble: 6 × 59
-#>   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#> * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
-#> 1 02D0873639   NA         NA       NA         NA        0 NA              0
-#> 2 06D0880233   NA         NA       NA         NA        0 NA              1
-#> 3 11D0668290   NA         NA       NA         NA        0 NA              0
-#> 4 11D0668319   NA         NA       NA         NA        0 NA              0
-#> 5 11D1061576   NA         NA       NA         NA        0 NA              0
-#> 6 40D0869394   NA         NA       NA         NA        0 NA              0
-#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
-#> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
-#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
-#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
-#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
+#> # A tibble: 6 × 104
+#>   PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD chown chow_date city     poc_ind compliant
+#> * <chr>                <chr>          <int> <date>    <chr>      <int> <chr>    
+#> 1 01                   22                 0 NA        ANCHORA…       0 A        
+#> 2 01                   22                 0 NA        FORT CO…       1 A        
+#> 3 01                   22                 0 NA        ATLANTA        0 A        
+#> 4 01                   22                 0 NA        ATLANTA        0 B        
+#> 5 01                   22                 0 NA        ATLANTA        0 NA       
+#> 6 01                   22                 0 NA        SAN JUAN       0 A        
+#> # ℹ 97 more variables: SSA_CNTY_CD <chr>, xref_ccn <chr>, cert_date <date>,
+#> #   elig_ind <int>, mac <chr>, MDCD_VNDR_NUM <chr>, orig_date <date>,
+#> #   CHOW_PRIOR_DT <chr>, INTRMDRY_CARR_PRIOR_CD <chr>, facility_ccn <chr>,
+#> #   RGN_CD <chr>, SKLTN_REC_SW <chr>, state <chr>, SSA_STATE_CD <chr>,
+#> #   STATE_RGN_CD <chr>, term_pgm <chr>, term_date <date>, act_type <chr>,
+#> #   own_type <chr>, zip <chr>, FIPS_STATE_CD <chr>, FIPS_CNTY_CD <chr>,
+#> #   CBSA_URBN_RRL_IND <chr>, CBSA_CD <chr>, …
 
 clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results.
-#> # A tibble: 18 × 59
-#>    facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#>  * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
-#>  1 11D0022233   110122     NA       NA         NA        0 NA              0
-#>  2 11D0022241   110037     NA       NA         NA        0 NA              0
-#>  3 11D0265567   254623647A NA       NA         NA        0 NA              0
-#>  4 11D0646134   11L0008004 NA       NA         NA        0 NA              0
-#>  5 11D0680179   110122     NA       NA         NA        0 NA              0
-#>  6 11D0902131   NA         NA       NA         NA        0 NA              0
-#>  7 11D0914178   NA         NA       NA         NA        0 NA              0
-#>  8 11D0960358   NA         NA       NA         NA        0 NA              0
-#>  9 11D1001568   NA         NA       NA         NA        0 NA              0
-#> 10 11D1065138   NA         NA       NA         NA        0 NA              0
-#> 11 11D2027917   NA         NA       NA         NA        0 NA              0
-#> 12 11D2053438   NA         NA       NA         NA        0 NA              0
-#> 13 11D2079448   NA         NA       NA         NA        0 NA              0
-#> 14 11D2101175   NA         NA       NA         NA        0 NA              0
-#> 15 11D2144796   NA         NA       NA         NA        0 NA              0
-#> 16 11D2144934   NA         NA       NA         NA        0 NA              0
-#> 17 11D2193538   NA         NA       NA         NA        0 NA              0
-#> 18 11D2223235   NA         NA       NA         NA        0 NA              0
-#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
-#> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
-#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
-#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
-#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
+#> # A tibble: 18 × 104
+#>    PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD chown chow_date city    poc_ind compliant
+#>  * <chr>                <chr>          <int> <date>    <chr>     <int> <chr>    
+#>  1 01                   22                 0 NA        VALDOS…       0 A        
+#>  2 01                   22                 0 NA        VALDOS…       0 A        
+#>  3 01                   22                 0 NA        VALDOS…       0 NA       
+#>  4 01                   22                 0 NA        VALDOS…       0 A        
+#>  5 01                   22                 0 NA        VALDOS…       0 NA       
+#>  6 01                   22                 0 NA        VALDOS…       0 NA       
+#>  7 01                   22                 0 NA        VALDOS…       0 NA       
+#>  8 01                   22                 0 NA        VALDOS…       0 NA       
+#>  9 01                   22                 0 NA        VALDOS…       0 NA       
+#> 10 01                   22                 0 NA        VALDOS…       0 NA       
+#> 11 01                   22                 0 NA        VALDOS…       0 A        
+#> 12 01                   22                 0 NA        VALDOS…       0 NA       
+#> 13 01                   22                 0 NA        VALDOS…       0 A        
+#> 14 01                   22                 0 NA        VALDOS…       0 NA       
+#> 15 01                   22                 0 NA        VALDOS…       0 NA       
+#> 16 01                   22                 0 NA        VALDOS…       0 NA       
+#> 17 01                   22                 0 NA        VALDOS…       0 NA       
+#> 18 01                   22                 0 NA        VALDOS…       0 NA       
+#> # ℹ 97 more variables: SSA_CNTY_CD <chr>, xref_ccn <chr>, cert_date <date>,
+#> #   elig_ind <int>, mac <chr>, MDCD_VNDR_NUM <chr>, orig_date <date>,
+#> #   CHOW_PRIOR_DT <chr>, INTRMDRY_CARR_PRIOR_CD <chr>, facility_ccn <chr>,
+#> #   RGN_CD <chr>, SKLTN_REC_SW <chr>, state <chr>, SSA_STATE_CD <chr>,
+#> #   STATE_RGN_CD <chr>, term_pgm <chr>, term_date <date>, act_type <chr>,
+#> #   own_type <chr>, zip <chr>, FIPS_STATE_CD <chr>, FIPS_CNTY_CD <chr>,
+#> #   CBSA_URBN_RRL_IND <chr>, CBSA_CD <chr>, …
 
 clia(accreditation = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result.
-#> # A tibble: 1 × 59
-#>   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
-#> * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
-#> 1 42D0665325   420073     NA       NA         NA        0 NA              0
-#> # ℹ 51 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
-#> #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#> #   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
-#> #   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
-#> #   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>,
-#> #   cap_date <date>, cap_ind <int>, cola_date <date>, cola_ind <int>, …
+#> # A tibble: 1 × 104
+#>   PRVDR_CTGRY_SBTYP_CD PRVDR_CTGRY_CD chown chow_date city     poc_ind compliant
+#> * <chr>                <chr>          <int> <date>    <chr>      <int> <chr>    
+#> 1 01                   22                 0 NA        WEST CO…       0 NA       
+#> # ℹ 97 more variables: SSA_CNTY_CD <chr>, xref_ccn <chr>, cert_date <date>,
+#> #   elig_ind <int>, mac <chr>, MDCD_VNDR_NUM <chr>, orig_date <date>,
+#> #   CHOW_PRIOR_DT <chr>, INTRMDRY_CARR_PRIOR_CD <chr>, facility_ccn <chr>,
+#> #   RGN_CD <chr>, SKLTN_REC_SW <chr>, state <chr>, SSA_STATE_CD <chr>,
+#> #   STATE_RGN_CD <chr>, term_pgm <chr>, term_date <date>, act_type <chr>,
+#> #   own_type <chr>, zip <chr>, FIPS_STATE_CD <chr>, FIPS_CNTY_CD <chr>,
+#> #   CBSA_URBN_RRL_IND <chr>, CBSA_CD <chr>, …
 ```

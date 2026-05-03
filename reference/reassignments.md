@@ -111,39 +111,39 @@ reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.
-#> # A tibble: 6 × 14
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#> * <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
-#> #   rec_type <chr>
+#> # A tibble: 6 × 16
+#>   org_pac  org_enid org_name org_state `Group Due Date` employees rec_type pac  
+#> * <chr>    <chr>    <chr>    <chr>     <chr>                <int> <chr>    <chr>
+#> 1 3173525… I200702… NA       FL        TBD                      6 Reassig… 9830…
+#> 2 3173525… I200702… NA       FL        TBD                      6 Reassig… 1850…
+#> 3 3173525… I200702… NA       FL        TBD                      6 Reassig… 6305…
+#> 4 3173525… I200702… NA       FL        TBD                      6 Reassig… 3577…
+#> 5 3173525… I200702… NA       FL        TBD                      6 Reassig… 4385…
+#> 6 3173525… I200702… NA       FL        TBD                      6 Reassig… 8224…
+#> # ℹ 8 more variables: enid <chr>, npi <int>, first <chr>, last <chr>,
+#> #   state <chr>, specialty <chr>, `Individual Due Date` <chr>, employers <int>
 
 reassignments(pac = 9830437441)
 #> ✔ reassignments returned 2 results.
-#> # A tibble: 2 × 14
-#>   first last    state specialty  employers    npi pac   enid  org_name employees
-#> * <chr> <chr>   <chr> <chr>          <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… NA               6
-#> 2 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… Clermon…         1
-#> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
-#> #   rec_type <chr>
+#> # A tibble: 2 × 16
+#>   org_pac  org_enid org_name org_state `Group Due Date` employees rec_type pac  
+#> * <chr>    <chr>    <chr>    <chr>     <chr>                <int> <chr>    <chr>
+#> 1 3173525… I200702… NA       FL        TBD                      6 Reassig… 9830…
+#> 2 5799295… O202506… Clermon… FL        TBD                      1 Reassig… 9830…
+#> # ℹ 8 more variables: enid <chr>, npi <int>, first <chr>, last <chr>,
+#> #   state <chr>, specialty <chr>, `Individual Due Date` <chr>, employers <int>
 
 reassignments(org_pac = 3173525888)
 #> ✔ reassignments returned 6 results.
-#> # A tibble: 6 × 14
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#> * <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
-#> #   rec_type <chr>
+#> # A tibble: 6 × 16
+#>   org_pac  org_enid org_name org_state `Group Due Date` employees rec_type pac  
+#> * <chr>    <chr>    <chr>    <chr>     <chr>                <int> <chr>    <chr>
+#> 1 3173525… I200702… NA       FL        TBD                      6 Reassig… 9830…
+#> 2 3173525… I200702… NA       FL        TBD                      6 Reassig… 1850…
+#> 3 3173525… I200702… NA       FL        TBD                      6 Reassig… 6305…
+#> 4 3173525… I200702… NA       FL        TBD                      6 Reassig… 3577…
+#> 5 3173525… I200702… NA       FL        TBD                      6 Reassig… 4385…
+#> 6 3173525… I200702… NA       FL        TBD                      6 Reassig… 8224…
+#> # ℹ 8 more variables: enid <chr>, npi <int>, first <chr>, last <chr>,
+#> #   state <chr>, specialty <chr>, `Individual Due Date` <chr>, employers <int>
 ```
