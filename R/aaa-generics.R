@@ -40,40 +40,36 @@ method(report_count, ListCMS) <- function(x) {
 
 #' @noRd
 method(report_total, API) <- function(x) {
-  cli::cli({
-    cli::cat_rule(
-      left = paste0(cli::style_bold(cli::col_cyan(x@end)), " Totals"),
-      width = 20L,
-      line = 2L,
-      line_col = "grey"
-    )
-    cli::cat_bullet(
-      paste0(
-        cli::col_yellow(left(c("Rows", "Pages"))),
-        cli::col_silver(" : "),
-        left(mark(c(x@count, x@pages)))
-      ),
-      bullet_col = "silver"
-    )
-  })
+  cli::cli_text(
+    cli::style_bold(cli::col_grey(cli::symbol$double_line)),
+    cli::style_bold(cli::col_cyan(paste0(" ", x@end))),
+    " Totals"
+  )
+  cli::cat_bullet(
+    paste0(
+      cli::col_yellow(left(c("Rows", "Pages"))),
+      cli::col_silver(" : "),
+      left(mark(c(x@count, x@pages)))
+    ),
+    bullet_col = "silver"
+  )
+  cli::cli_text()
 }
 
 #' @noRd
 method(report_total, ListCMS) <- function(x) {
-  cli::cli({
-    cli::cat_rule(
-      left = paste0(cli::style_bold(cli::col_cyan(x@end)), " Totals"),
-      width = 20L,
-      line = 2L,
-      line_col = "grey"
-    )
-    cli::cat_bullet(
-      paste0(
-        cli::col_yellow(left(c("Rows", "Pages"))),
-        cli::col_silver(" : "),
-        left(mark(c(sum2(x@count), x@pages)))
-      ),
-      bullet_col = "silver"
-    )
-  })
+  cli::cli_text(
+    cli::style_bold(cli::col_grey(cli::symbol$double_line)),
+    cli::style_bold(cli::col_cyan(paste0(" ", x@end))),
+    " Totals"
+  )
+  cli::cat_bullet(
+    paste0(
+      cli::col_yellow(left(c("Rows", "Pages"))),
+      cli::col_silver(" : "),
+      left(mark(c(sum2(x@count), x@pages)))
+    ),
+    bullet_col = "silver"
+  )
+  cli::cli_text()
 }

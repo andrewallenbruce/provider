@@ -36,9 +36,8 @@ method(execute, ListCMS) <- function(x) {
     }
     return(request_preview(x))
   }
-  report_count(x)
-
   if (sum2(x@count) == 0L || x@action == "count") {
+    report_count(x)
     return(x@count)
   }
 

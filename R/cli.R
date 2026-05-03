@@ -22,6 +22,7 @@ cli_empty <- function(endpoint) {
     cli::col_red(cli::symbol$pointer),
     " Returning first {.strong 10} rows..."
   ))
+  cli::cli_text()
 }
 
 #' @noRd
