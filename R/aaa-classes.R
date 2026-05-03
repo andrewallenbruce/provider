@@ -109,7 +109,7 @@ PDC <- new_class(
         flatten_url(
           self@url,
           self@query %0% NULL,
-          opts_prov(results = "false")
+          opts_pdc(results = "false")
         ) |>
           base_request("count")
       }

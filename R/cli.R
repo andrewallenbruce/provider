@@ -18,31 +18,10 @@ cli_apis <- function(x) {
 #' @noRd
 cli_empty <- function(endpoint) {
   cli::cli_alert_warning(c(
-    "{.strong {endpoint}} ",
-    "{cli::symbol$pointer} ",
-    "{.emph No Query}"
-  ))
-  cli::cli_alert_info("{.emph No Query} {cli::symbol$pointer} Returning first {.strong 10} rows...")
-}
-
-#' @noRd
-cli_total <- function(x, endpoint) {
-  cli::cli_alert_info(c(
-    "{.strong {endpoint}} has ",
-    "{.strong {mark(x)}} ",
-    "{cli::qty(x)}row{?s}."
-  ))
-  cli::cli_alert_warning(c(
     "{.emph No Query} ",
-    "{cli::symbol$pointer} ",
-    "Returning first {.strong 10} rows..."
-    ))
-}
-
-#' @noRd
-cli_total2 <- function(x, endpoint) {
-  cli_total(x = sum2(x), endpoint)
-  cli_apis(x)
+    cli::col_red(cli::symbol$pointer),
+    " Returning first {.strong 10} rows..."
+  ))
 }
 
 #' @noRd

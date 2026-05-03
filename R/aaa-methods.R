@@ -1,32 +1,7 @@
-#' @export
-`print.provider::Modifier` <- function(x, ...) {
-  v <- if (any2(x@value == "")) {
-    encodeString(x@value, quote = '"', na.encode = FALSE)
-  } else {
-    x@value
-  }
-
-  m <- cli::format_inline(cli::col_cyan("<modifier[{length(v)}]>"))
-
-  cli::cat_rule(m, width = 20, line = 2, line_col = "cyan")
-  cli::cli_text(c(
-    cli::col_silver("Operator: "),
-    cli::col_red(cli::style_bold(S7::S7_data(x)))
-  ))
-
-  cli::cli_text(
-    c(
-      cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
-      cli::col_yellow(toString(v, width = 20L))
-    )
-  )
-  invisible(x)
-}
-
 #' @noRd
 method(execute, API) <- function(x) {
   if (empty(x)) {
-    report_count(x)
+    report_total(x)
     if (x@action == "set") {
       return(request_multi(x))
     }
@@ -52,7 +27,7 @@ method(execute, API) <- function(x) {
 #' @noRd
 method(execute, ListCMS) <- function(x) {
   if (empty(x)) {
-    report_count(x)
+    report_total(x)
     if (x@action == "set") {
       return(request_multi(x))
     }
@@ -71,4 +46,28 @@ method(execute, ListCMS) <- function(x) {
     return(request_single(x))
   }
   request_multi(x)
+}
+
+#' @export
+`print.provider::Modifier` <- function(x, ...) {
+  v <- if (any2(x@value == "")) {
+    encodeString(x@value, quote = '"', na.encode = FALSE)
+  } else {
+    x@value
+  }
+
+  cli::cli_text(cli::col_cyan("<modifier[{length(v)}]>"))
+
+  cli::cli_text(c(
+    cli::col_silver("Operator: "),
+    cli::col_red(cli::style_bold(S7::S7_data(x)))
+  ))
+
+  cli::cli_text(
+    c(
+      cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
+      cli::col_yellow(toString(v, width = 20L))
+    )
+  )
+  invisible(x)
 }

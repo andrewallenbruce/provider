@@ -1,6 +1,6 @@
 #' @noRd
 is_modifier <- function(x) {
-  S7::S7_inherits(x, Modifier)
+  S7_inherits(x, Modifier)
 }
 
 #' @noRd
@@ -12,7 +12,7 @@ preprocess <- function(x) {
   }
 
   O <- if (is_modifier(x)) {
-    S7::S7_data(x)
+    S7_data(x)
   } else if (length(V) > 1L) {
     "IN"
   } else {
@@ -28,7 +28,7 @@ query <- function(api, x, N) {
 
   switch(
     api,
-    prov = c(
+    pdc = c(
       paste0("conditions[<<i>>][property]=", plus(N)),
       paste0("conditions[<<i>>][operator]=", tolower(plus(x$O))),
       paste0(

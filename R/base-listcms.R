@@ -1,12 +1,26 @@
 #' @noRd
+uuid_cms_list <- function(endpoint) {
+  switch(
+    endpoint,
+    pending = list(
+      Physician = "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
+      `Non-Physician` = "261b83b6-b89f-43ad-ae7b-0d419a3bc24b"
+    ),
+    utilization = list(
+      Geography = "6fea9d79-0129-4e4c-b1b8-23cd86a4f435",
+      Provider = "8889d81e-2ee7-448f-8713-f071038289b5",
+      Service = "92396110-2aed-4d63-a6a2-5d6207d46a29"
+    ),
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+  )
+}
+
+#' @noRd
 URL_ListCMS <- function(x) {
+  x <- uuid_cms_list(x)
   set_names2(
-    as.list(paste0(
-      "https://data.cms.gov/data-api/v1/dataset/",
-      uuid_cms_list(x),
-      "/data"
-    )),
-    uuid_cms_list(x)
+    as.list(paste0("https://data.cms.gov/data-api/v1/dataset/", x, "/data")),
+    x
   )
 }
 
@@ -64,5 +78,3 @@ method(request_multi, ListCMS) <- function(x) {
     multi_parallel(x@count, x@limit, x@url) |>
     add_class(x@end)
 }
-
-

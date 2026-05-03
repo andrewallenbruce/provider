@@ -1,8 +1,38 @@
 #' @noRd
+uuid_pdc <- function(endpoint) {
+  switch(
+    endpoint,
+    affiliations = "27ea-46a8",
+    clinicians = "mj5m-pzi6",
+    hospitals2 = "xubh-q36u",
+    esrd = "23ew-n7w9",
+    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+  )
+}
+
+#' @noRd
+opts_pdc <- function(
+  results = "true",
+  limit = 1500L,
+  offset = 0L
+) {
+  flatten_opts(params(
+    count = "true",
+    results = results,
+    limit = limit,
+    offset = offset,
+    format = "json",
+    rowIds = "false",
+    schema = "false",
+    keys = "true"
+  ))
+}
+
+#' @noRd
 URL_PDC <- function(x) {
   paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/query/",
-    uuid_prov(x),
+    uuid_pdc(x),
     "/0?"
   )
 }
@@ -17,7 +47,7 @@ method(build, ParamPDC) <- function(x) {
   S7_data(x) %0% return(NULL)
 
   S7_data(x) |>
-    purrr::imap(\(x, n) query(api = "prov", x, n)) |>
+    purrr::imap(\(x, n) query("pdc", x, n)) |>
     flatten_query()
 }
 
@@ -51,7 +81,7 @@ pdc <- function(
 #' @noRd
 method(request_preview, PDC) <- function(x) {
   cli_empty(x@end)
-  flatten_url(x@url, NULL, opts_prov(limit = 10L)) |>
+  flatten_url(x@url, NULL, opts_pdc(limit = 10L)) |>
     base_request("results") |>
     add_class(x@end)
 }
@@ -59,7 +89,7 @@ method(request_preview, PDC) <- function(x) {
 #' @noRd
 method(request_single, PDC) <- function(x) {
   report_count(x)
-  flatten_url(x@url, x@query, opts_prov()) |>
+  flatten_url(x@url, x@query, opts_pdc()) |>
     base_request("results") |>
     add_class(x@end)
 }
@@ -67,7 +97,7 @@ method(request_single, PDC) <- function(x) {
 #' @noRd
 method(request_multi, PDC) <- function(x) {
   cli_pages(x@count, x@limit, x@end)
-  flatten_url(x@url, x@query %0% NULL, opts_prov(offset = "<<i>>")) |>
+  flatten_url(x@url, x@query %0% NULL, opts_pdc(offset = "<<i>>")) |>
     base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)
 }
