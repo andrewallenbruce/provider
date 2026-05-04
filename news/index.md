@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9136 (2026-05-03)
+
+- owner pivot method
+
 ## provider 0.0.1.9135 (2026-05-03)
 
 - polish work
