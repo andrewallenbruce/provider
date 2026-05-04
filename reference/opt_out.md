@@ -113,44 +113,44 @@ opt_out(count = TRUE)
 opt_out(npi = 1043522824)
 #> ✔ opt_out returned 1 result.
 #> # A tibble: 1 × 12
-#>   first last         npi specialty       start_date end_date   city  state zip  
-#> * <chr> <chr>      <int> <chr>           <date>     <date>     <chr> <chr> <chr>
-#> 1 James Smith 1043522824 Nurse Practiti… 2019-07-01 2027-07-01 SCOT… AZ    8525…
-#> # ℹ 3 more variables: order_refer <int>, updated <date>, address <chr>
+#>          npi first last  specialty  start_date end_date   updated    city  state
+#> *      <int> <chr> <chr> <chr>      <date>     <date>     <date>     <chr> <chr>
+#> 1 1043522824 James Smith Nurse Pra… 2019-07-01 2027-07-01 2025-08-15 SCOT… AZ   
+#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 
 opt_out(state = "AK")
 #> ✔ opt_out returned 260 results.
-#> # A tibble: 258 × 12
-#>    first     last          npi specialty start_date end_date   city  state zip  
-#>  * <chr>     <chr>       <int> <chr>     <date>     <date>     <chr> <chr> <chr>
-#>  1 Henry     Chapman    1.27e9 Physicia… 2012-04-01 2026-04-01 ANCH… AK    9950…
-#>  2 Ann       Stockman   1.49e9 Clinical… 2012-04-01 2026-04-01 ANCH… AK    9950…
-#>  3 Amber     Shea       1.04e9 Nurse Pr… 2013-04-01 2027-04-01 WASI… AK    9965…
-#>  4 Robert    Skala      1.60e9 Family P… 2013-06-04 2027-06-04 EAGL… AK    9957…
-#>  5 Robert    Cassell    1.51e9 Dentist   2013-07-23 2027-07-23 WASI… AK    9965…
-#>  6 Elizabeth Deschwein… 1.95e9 Family P… 2014-04-01 2026-04-01 ANCH… AK    9950…
-#>  7 Evelyn    Wiszinckas 1.12e9 Clinical… 2018-07-01 2026-07-01 KODI… AK    99615
-#>  8 Suzanne   Straub     1.15e9 Nurse Pr… 2014-04-01 2026-04-01 EAGL… AK    9957…
-#>  9 William   Bergeron   1.30e9 Oral Sur… 2018-11-05 2026-11-05 ANCH… AK    9950…
-#> 10 Ray       Holloway   1.23e9 Oral Sur… 2014-06-16 2026-06-16 ANCH… AK    9950…
-#> # ℹ 248 more rows
-#> # ℹ 3 more variables: order_refer <int>, updated <date>, address <chr>
+#> # A tibble: 260 × 12
+#>           npi first last  specialty start_date end_date   updated    city  state
+#>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
+#>  1 1265553432 Henry Chap… Physicia… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
+#>  2 1487879664 Ann   Stoc… Clinical… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
+#>  3 1043559362 Amber Shea  Nurse Pr… 2013-04-01 2027-04-01 2025-05-15 WASI… AK   
+#>  4 1598825663 Robe… Skala Family P… 2013-06-04 2027-06-04 2025-07-15 EAGL… AK   
+#>  5 1508198276 Robe… Cass… Dentist   2013-07-23 2027-07-23 2025-09-15 WASI… AK   
+#>  6 1952340358 Eliz… Desc… Family P… 2014-04-01 2028-04-01 2026-04-16 ANCH… AK   
+#>  7 1124176227 Evel… Wisz… Clinical… 2018-07-01 2026-07-01 2024-08-15 KODI… AK   
+#>  8 1154467520 Suza… Stra… Nurse Pr… 2014-04-01 2028-04-01 2026-04-16 EAGL… AK   
+#>  9 1295755296 Will… Berg… Oral Sur… 2018-11-05 2026-11-05 2024-12-15 ANCH… AK   
+#> 10 1225058977 Ray   Holl… Oral Sur… 2014-06-16 2026-06-16 2024-07-15 ANCH… AK   
+#> # ℹ 250 more rows
+#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ opt_out returned 813 results.
 #> # A tibble: 798 × 12
-#>    first    last           npi specialty start_date end_date   city  state zip  
-#>  * <chr>    <chr>        <int> <chr>     <date>     <date>     <chr> <chr> <chr>
-#>  1 Jonathan Raines      1.72e9 Psychiat… 1998-01-30 2028-01-30 GLAD… PA    1903…
-#>  2 Martha   Leatherman  1.60e9 Psychiat… 2012-04-01 2026-04-01 SAN … TX    7825…
-#>  3 Nancy    Shosid      1.97e9 Psychiat… 2012-03-02 2026-03-02 DALL… TX    7523…
-#>  4 Namir    Damluji     1.12e9 Psychiat… 2020-07-26 2026-07-26 ENCI… CA    9202…
-#>  5 Lawrence Cormier     1.43e9 Psychiat… 2012-05-10 2026-05-10 DENV… CO    8020…
-#>  6 Charles  Schaffer    1.11e9 Psychiat… 2012-06-14 2026-06-14 SACR… CA    9581…
-#>  7 Andrew   Popper      1.09e9 Psychiat… 2012-06-01 2026-06-01 NEWT… MA    2459…
-#>  8 Ingrid   Schmidt     1.87e9 Psychiat… 2010-09-02 2026-09-02 AUST… TX    7873…
-#>  9 Lorene   Henry       1.48e9 Psychiat… 2012-05-26 2026-05-26 COLL… TX    7784…
-#> 10 Patrick  Mcgrath     1.93e9 Psychiat… 2012-06-01 2026-06-01 NEW … NY    10017
+#>           npi first last  specialty start_date end_date   updated    city  state
+#>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
+#>  1 1720444581 Jona… Rain… Psychiat… 1998-01-30 2028-01-30 2026-02-16 GLAD… PA   
+#>  2 1598802100 Mart… Leat… Psychiat… 2012-04-01 2026-04-01 2024-10-15 SAN … TX   
+#>  3 1972623346 Nancy Shos… Psychiat… 2012-03-02 2026-03-02 2024-10-15 DALL… TX   
+#>  4 1124116793 Namir Daml… Psychiat… 2020-07-26 2026-07-26 2024-08-15 ENCI… CA   
+#>  5 1427146331 Lawr… Corm… Psychiat… 2012-05-10 2026-05-10 2024-10-15 DENV… CO   
+#>  6 1114132313 Char… Scha… Psychiat… 2012-06-14 2026-06-14 2024-10-15 SACR… CA   
+#>  7 1093894420 Andr… Popp… Psychiat… 2012-06-01 2026-06-01 2026-01-15 NEWT… MA   
+#>  8 1871501395 Ingr… Schm… Psychiat… 2010-09-02 2026-09-02 2024-10-15 AUST… TX   
+#>  9 1477614204 Lore… Henry Psychiat… 2012-05-26 2026-05-26 2024-10-15 COLL… TX   
+#> 10 1932284098 Patr… Mcgr… Psychiat… 2012-06-01 2026-06-01 2024-07-15 NEW … NY   
 #> # ℹ 788 more rows
-#> # ℹ 3 more variables: order_refer <int>, updated <date>, address <chr>
+#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 ```

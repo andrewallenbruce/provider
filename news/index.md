@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9137 (2026-05-04)
+
+- added hospital_owner, hospice_enroll/\_owner, snf_enroll/\_owner
+
 ## provider 0.0.1.9136 (2026-05-03)
 
 - owner pivot method

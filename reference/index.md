@@ -30,6 +30,8 @@ Facility-level data, laboratory certifications, and clinic enrollments.
 - [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospital General Information
+- [`hospital_owner()`](https://andrewallenbruce.github.io/provider/reference/hospital_owner.md)
+  : Hospital Owners
 - [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_fields()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
@@ -43,6 +45,14 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   : Federally Qualified Healthcare Clinics
 - [`fqhc_owner()`](https://andrewallenbruce.github.io/provider/reference/fqhc_owner.md)
   : FQHC Owners
+- [`snf_enroll()`](https://andrewallenbruce.github.io/provider/reference/snf_enroll.md)
+  : Skilled Nursing Facilities
+- [`snf_owner()`](https://andrewallenbruce.github.io/provider/reference/snf_owner.md)
+  : Skilled Nursing Facility Owners
+- [`hospice_enroll()`](https://andrewallenbruce.github.io/provider/reference/hospice_enroll.md)
+  : Hospice Facilities
+- [`hospice_owner()`](https://andrewallenbruce.github.io/provider/reference/hospice_owner.md)
+  : Hospice Owners
 
 ### Compliance
 
