@@ -60,7 +60,6 @@ api_medicare <- function() {
       "Home Health Agency",
       "Hospital Change",
       "Hospital Provider Cost Report",
-      "Income and Asset Ownership",
       "Nursing Home Chain",
       "Payroll Based Journal"
     ),
@@ -105,7 +104,6 @@ api_medicare2 <- function(x) {
       "Home Health Agency",
       "Hospital Change",
       "Hospital Provider Cost Report",
-      "Income and Asset Ownership",
       "Nursing Home Chain",
       "Payroll Based Journal"
     ),

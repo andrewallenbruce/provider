@@ -1,8 +1,3 @@
-#' @noRd
-add_class <- function(x, endpoint) {
-  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
-}
-
 #' Polish generic
 #' Defines data cleaning methods for results
 #' @param x data.frame
@@ -39,8 +34,8 @@ polish.affiliations <- function(x) {
       facility_affiliations_certification_number = "facility_ccn",
       facility_type_certification_number = "parent_ccn"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer("npi") |>
     data_frame()
 }
@@ -70,11 +65,10 @@ polish.clinicians <- function(x) {
       adr_ln_2 = "add_2",
       citytown = "org_city",
       state = "org_state",
-      zip_code = "org_zip",
-      telephone_number = "org_phone"
+      zip_code = "org_zip"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_clinicians() |>
     data_frame()
 }
@@ -96,11 +90,10 @@ polish.esrd <- function(x) {
       citytown = "city",
       state = "state",
       zip_code = "zip",
-      countyparish = "county",
-      telephone_number = "phone"
+      countyparish = "county"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_esrd() |>
     data_frame()
 }
@@ -119,11 +112,10 @@ polish.hospitals2 <- function(x) {
       citytown = "city",
       state = "state",
       zip_code = "zip",
-      countyparish = "county",
-      telephone_number = "phone"
+      countyparish = "county"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer_supp("rating") |>
     data_frame()
 }
@@ -172,8 +164,8 @@ polish.hospitals <- function(x) {
       `SUBGROUP - OTHER` = "sub_oth",
       `SUBGROUP - OTHER TEXT` = "sub_otxt"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_hospitals() |>
     data_frame()
 }
@@ -208,8 +200,8 @@ polish.providers <- function(x) {
       PECOS_ASCT_CNTL_ID = "pac",
       ENRLMT_ID = "enid"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     data_frame()
@@ -233,8 +225,8 @@ polish.clia <- function(x) {
       CMPLNC_STUS_CD = "compliant",
       ST_ADR = "add_1",
       ADDTNL_ST_ADR = "add_2",
-      PHNE_NUM = "phone_1",
-      FAX_PHNE_NUM = "phone_2",
+      # PHNE_NUM = "phone_1",
+      # FAX_PHNE_NUM = "phone_2",
       CITY_NAME = "city",
       STATE_CD = "state",
       ZIP_CD = "zip",
@@ -296,8 +288,8 @@ polish.clia <- function(x) {
       DRCTLY_AFLTD_LAB_CNT = "alabs",
       LAB_SITE_CNT = "sites"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_clia() |>
     data_frame()
 }
@@ -326,11 +318,10 @@ polish.fqhc_enroll <- function(x) {
       `ADDRESS LINE 2` = "add_2",
       CITY = "city",
       STATE = "state",
-      `ZIP CODE` = "zip",
-      `TELEPHONE NUMBER` = "phone"
+      `ZIP CODE` = "zip"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_fqhc_enroll() |>
     data_frame()
 }
@@ -379,8 +370,8 @@ polish.fqhc_owner <- function(x) {
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_fqhc_owner() |>
     data_frame()
 }
@@ -407,11 +398,72 @@ polish.rhc_enroll <- function(x) {
       `ADDRESS LINE 2` = "add_2",
       CITY = "city",
       STATE = "state",
-      `ZIP CODE` = "zip",
-      `TELEPHONE NUMBER` = "phone"
+      `ZIP CODE` = "zip"
     )
-  )
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
+    RC_rhc_enroll() |>
+    data_frame()
+}
+
+#' @export
+polish.hospice_enroll <- function(x) {
+  rename_with(
+    x,
+    c(
+      `ENROLLMENT ID` = "enid",
+      `ENROLLMENT STATE` = "enid_state",
+      NPI = "npi",
+      `MULTIPLE NPI FLAG` = "multi",
+      CCN = "ccn",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `DOING BUSINESS AS NAME` = "org_dba",
+      `INCORPORATION DATE` = "inc_date",
+      `INCORPORATION STATE` = "inc_state",
+      `ORGANIZATION TYPE STRUCTURE` = "org_type",
+      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
+      PROPRIETARY_NONPROFIT = "status",
+      `ADDRESS LINE 1` = "add_1",
+      `ADDRESS LINE 2` = "add_2",
+      CITY = "city",
+      STATE = "state",
+      `ZIP CODE` = "zip"
+    )
+  ) |>
+    replace_nz() |>
+    RC_rhc_enroll() |>
+    data_frame()
+}
+
+#' @export
+polish.snf_enroll <- function(x) {
+  rename_with(
+    x,
+    c(
+      `ENROLLMENT ID` = "enid",
+      `ENROLLMENT STATE` = "enid_state",
+      NPI = "npi",
+      `MULTIPLE NPI FLAG` = "multi",
+      CCN = "ccn",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `DOING BUSINESS AS NAME` = "org_dba",
+      `INCORPORATION DATE` = "inc_date",
+      `INCORPORATION STATE` = "inc_state",
+      `ORGANIZATION TYPE STRUCTURE` = "org_type",
+      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
+      PROPRIETARY_NONPROFIT = "status",
+      `NURSING HOME PROVIDER NAME` = "nh_name",
+      `AFFILIATION ENTITY NAME` = "aff_name",
+      `ADDRESS LINE 1` = "add_1",
+      `ADDRESS LINE 2` = "add_2",
+      CITY = "city",
+      STATE = "state",
+      `ZIP CODE` = "zip"
+    )
+  ) |>
+    replace_nz() |>
     RC_rhc_enroll() |>
     data_frame()
 }
@@ -460,9 +512,150 @@ polish.rhc_owner <- function(x) {
       `OTHER TYPE TEXT - OWNER` = "oth_txt",
       `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
     )
-  )
+  ) |>
+    replace_nz() |>
+    RC_rhc_owner() |>
+    data_frame()
+}
 
-  replace_nz(x) |>
+#' @export
+polish.hospital_owner <- function(x) {
+  rename_with(
+    x,
+    c(
+      `ENROLLMENT ID` = "enid",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `ASSOCIATE ID - OWNER` = "own_pac",
+      `TYPE - OWNER` = "own_type",
+      `ROLE CODE - OWNER` = "own_code",
+      `ROLE TEXT - OWNER` = "own_role",
+      `ASSOCIATION DATE - OWNER` = "own_date",
+      `FIRST NAME - OWNER` = "own_first",
+      `MIDDLE NAME - OWNER` = "own_middle",
+      `LAST NAME - OWNER` = "own_last",
+      `TITLE - OWNER` = "own_title",
+      `ORGANIZATION NAME - OWNER` = "own_org",
+      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
+      `ADDRESS LINE 1 - OWNER` = "own_add_1",
+      `ADDRESS LINE 2 - OWNER` = "own_add_2",
+      `CITY - OWNER` = "own_city",
+      `STATE - OWNER` = "own_state",
+      `ZIP CODE - OWNER` = "own_zip",
+      `PERCENTAGE OWNERSHIP` = "own_pct",
+      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
+      `CORPORATION - OWNER` = "corp_ind",
+      `LLC - OWNER` = "llc_ind",
+      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
+      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
+      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
+      `HOLDING COMPANY - OWNER` = "hld_ind",
+      `INVESTMENT FIRM - OWNER` = "inv_ind",
+      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
+      `CONSULTING FIRM - OWNER` = "con_ind",
+      `FOR PROFIT - OWNER` = "fp_ind",
+      `NON PROFIT - OWNER` = "np_ind",
+      `OTHER TYPE - OWNER` = "oth_ind",
+      `OTHER TYPE TEXT - OWNER` = "oth_txt"
+    )
+  ) |>
+    replace_nz() |>
+    RC_rhc_owner() |>
+    data_frame()
+}
+
+#' @export
+polish.hospice_owner <- function(x) {
+  rename_with(
+    x,
+    c(
+      `ENROLLMENT ID` = "enid",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `ASSOCIATE ID - OWNER` = "own_pac",
+      `TYPE - OWNER` = "own_type",
+      `ROLE CODE - OWNER` = "own_code",
+      `ROLE TEXT - OWNER` = "own_role",
+      `ASSOCIATION DATE - OWNER` = "own_date",
+      `FIRST NAME - OWNER` = "own_first",
+      `MIDDLE NAME - OWNER` = "own_middle",
+      `LAST NAME - OWNER` = "own_last",
+      `TITLE - OWNER` = "own_title",
+      `ORGANIZATION NAME - OWNER` = "own_org",
+      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
+      `ADDRESS LINE 1 - OWNER` = "own_add_1",
+      `ADDRESS LINE 2 - OWNER` = "own_add_2",
+      `CITY - OWNER` = "own_city",
+      `STATE - OWNER` = "own_state",
+      `ZIP CODE - OWNER` = "own_zip",
+      `PERCENTAGE OWNERSHIP` = "own_pct",
+      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
+      `CORPORATION - OWNER` = "corp_ind",
+      `LLC - OWNER` = "llc_ind",
+      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
+      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
+      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
+      `HOLDING COMPANY - OWNER` = "hld_ind",
+      `INVESTMENT FIRM - OWNER` = "inv_ind",
+      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
+      `CONSULTING FIRM - OWNER` = "con_ind",
+      `FOR PROFIT - OWNER` = "fp_ind",
+      `NON PROFIT - OWNER` = "np_ind",
+      `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
+      `REIT - OWNER` = "reit_ind",
+      `CHAIN HOME OFFICE - OWNER` = "cho_ind",
+      `OTHER TYPE - OWNER` = "oth_ind",
+      `OTHER TYPE TEXT - OWNER` = "oth_txt",
+      `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
+    )
+  ) |>
+    replace_nz() |>
+    RC_rhc_owner() |>
+    data_frame()
+}
+
+#' @export
+polish.snf_owner <- function(x) {
+  rename_with(
+    x,
+    c(
+      `ENROLLMENT ID` = "enid",
+      `ASSOCIATE ID` = "pac",
+      `ORGANIZATION NAME` = "org_name",
+      `ASSOCIATE ID - OWNER` = "own_pac",
+      `TYPE - OWNER` = "own_type",
+      `ROLE CODE - OWNER` = "own_code",
+      `ROLE TEXT - OWNER` = "own_role",
+      `ASSOCIATION DATE - OWNER` = "own_date",
+      `FIRST NAME - OWNER` = "own_first",
+      `MIDDLE NAME - OWNER` = "own_middle",
+      `LAST NAME - OWNER` = "own_last",
+      `TITLE - OWNER` = "own_title",
+      `ORGANIZATION NAME - OWNER` = "own_org",
+      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
+      `ADDRESS LINE 1 - OWNER` = "own_add_1",
+      `ADDRESS LINE 2 - OWNER` = "own_add_2",
+      `CITY - OWNER` = "own_city",
+      `STATE - OWNER` = "own_state",
+      `ZIP CODE - OWNER` = "own_zip",
+      `PERCENTAGE OWNERSHIP` = "own_pct",
+      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
+      `CORPORATION - OWNER` = "corp_ind",
+      `LLC - OWNER` = "llc_ind",
+      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
+      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
+      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
+      `HOLDING COMPANY - OWNER` = "hld_ind",
+      `INVESTMENT FIRM - OWNER` = "inv_ind",
+      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
+      `CONSULTING FIRM - OWNER` = "con_ind",
+      `FOR PROFIT - OWNER` = "fp_ind",
+      `NON PROFIT - OWNER` = "np_ind",
+      `OTHER TYPE - OWNER` = "oth_ind",
+      `OTHER TYPE TEXT - OWNER` = "oth_txt"
+    )
+  ) |>
+    replace_nz() |>
     RC_rhc_owner() |>
     data_frame()
 }
@@ -480,9 +673,8 @@ polish.transparency <- function(x) {
       Action = "action",
       Date_of_Action = "action_date"
     )
-  )
-
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer("case") |>
     rc_date_ymd("action_date") |>
     data_frame()
@@ -502,9 +694,8 @@ polish.order_refer <- function(x) {
       PMD = "pmd",
       HOSPICE = "hospice"
     )
-  )
-
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer("npi") |>
     rc_bin(c("ptb", "dme", "hha", "pmd", "hospice")) |>
     data_frame()
@@ -529,9 +720,8 @@ polish.opt_out <- function(x) {
       `Zip code` = "zip",
       `Eligible to Order and Refer` = "order_refer"
     )
-  )
-
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     RC_opt_out() |>
     data_frame()
 }
@@ -556,9 +746,8 @@ polish.reassignments <- function(x) {
       `Group State Code` = "org_state",
       `Record Type` = "rec_type"
     )
-  )
-
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer(c("npi", "employers", "employees")) |>
     data_frame()
 }
@@ -581,9 +770,8 @@ polish.revocations <- function(x) {
       REVOCATION_EFCTV_DT = "start_date",
       REENROLLMENT_BAR_EXPRTN_DT = "end_date"
     )
-  )
-
-  replace_nz(x) |>
+  ) |>
+    replace_nz() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_date_ymd(c("start_date", "end_date")) |>

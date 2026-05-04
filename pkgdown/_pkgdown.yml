@@ -104,11 +104,16 @@ reference:
   - clia
   - esrd
   - hospitals
+  - hospital_owner
   - hrsa
   - rhc_enroll
   - rhc_owner
   - fqhc_enroll
   - fqhc_owner
+  - snf_enroll
+  - snf_owner
+  - hospice_enroll
+  - hospice_owner
 - subtitle: Compliance
   desc: >
     Sanctioned providers and price transparency enforcement.
