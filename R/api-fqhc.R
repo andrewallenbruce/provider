@@ -182,7 +182,7 @@ rhc_enroll <- function(
 #' @examplesIf httr2::is_online()
 #' rhc_owner(count = TRUE)
 #'
-#' rhc_owner() |> str()
+#' rhc_owner(own_state = c("GA", "FL")) |> str()
 #'
 #' @export
 rhc_owner <- function(
@@ -263,7 +263,7 @@ rhc_owner <- function(
 #' @examplesIf httr2::is_online()
 #' fqhc_owner(count = TRUE)
 #'
-#' fqhc_owner() |> str()
+#' fqhc_owner(own_state = c("GA", "FL")) |> str()
 #'
 #' @export
 fqhc_owner <- function(

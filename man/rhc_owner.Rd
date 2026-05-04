@@ -75,6 +75,6 @@ Providers with pending Medicare enrollment applications.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 rhc_owner(count = TRUE)
 
-rhc_owner() |> str()
+rhc_owner(own_state = c("GA", "FL")) |> str()
 \dontshow{\}) # examplesIf}
 }

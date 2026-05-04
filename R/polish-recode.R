@@ -171,7 +171,8 @@ RC_rhc_owner <- function(x) {
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
     rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
-    rc_date_ymd("own_date")
+    rc_date_ymd("own_date") |>
+    fqhc_owner_pivot()
 }
 
 #' @noRd
@@ -192,7 +193,8 @@ RC_fqhc_owner <- function(x) {
   rc_integer(x, "own_code") |>
     rc_double("own_pct") |>
     rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
-    rc_date_ymd("own_date")
+    rc_date_ymd("own_date") |>
+    fqhc_owner_pivot()
 }
 
 #' @noRd
@@ -207,13 +209,14 @@ fqhc_owner_pivot <- function(x) {
 
   if (nrow(x) == 0L) {
     collapse::gvr(x, "_ind$") <- NULL
+    x <- collapse::av(x, var = rep.int(NA_character_, nrow(x)))
     return(x)
   }
 
   y <- collapse::ss(y, y$ind %==% 1L)
 
-  collapse::gvr(y, "var") <- cheapr::val_match(
-    collapse::gvr(y, "var"),
+  y$var <- cheapr::val_match(
+    y$var,
     "acq_ind" ~ "Created for Aquisition",
     "corp_ind" ~ "Corporation",
     "llc_ind" ~ "LLC",
@@ -233,5 +236,10 @@ fqhc_owner_pivot <- function(x) {
     "ano_ind" ~ "Owned by Another Org/Ind",
     .default = NA_character_
   )
-  return(y)
+
+  collapse::gv(y, "ind") <- NULL
+  collapse::gvr(x, "_ind$") <- NULL
+  y <- collapse::funique(y)
+  x <- collapse::join(x, y, on = "own_pac", verbose = 0L)
+  return(x)
 }
