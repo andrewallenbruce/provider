@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9141 (2026-05-05)
+
+* More tolerant column-renaming method
+* Pivot methods refactor
+
+
 # provider 0.0.1.9140 (2026-05-05)
 
 * `clia()` pivot acr_org
