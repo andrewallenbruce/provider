@@ -118,7 +118,6 @@ rhc_owner(count = TRUE)
 #> • Rows  : 65,551
 #> • Pages : 14    
 #> 
-#> [1] 65551
 
 rhc_owner(own_state = c("GA", "FL")) |> str()
 #> ✔ rhc_owner returned 136 results.

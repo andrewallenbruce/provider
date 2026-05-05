@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9140 (2026-05-05)
+
+- [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
+  pivot acr_org
+
 ## provider 0.0.1.9139 (2026-05-05)
 
 - owner_pivot work

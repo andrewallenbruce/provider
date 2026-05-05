@@ -181,73 +181,71 @@ clia(count = TRUE)
 #> • Rows  : 676,051
 #> • Pages : 136    
 #> 
-#> [1] 676051
 
 clia(compliant = FALSE, active = TRUE, count = TRUE)
 #> ✔ clia returned 2,578 results.
-#> [1] 2578
 
 clia(facility_ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
-#> # A tibble: 6 × 65
-#>   fac_name fac_ccn clia_ccn xrf_ccn shr_ccn app_type cert_type fac_type own_type
-#> * <chr>    <chr>   <chr>    <chr>   <chr>   <chr>    <chr>     <chr>    <chr>   
-#> 1 CDC ARC… 02D087… NA       NA      NA      1        1         29       08      
-#> 2 CENTERS… 06D088… NA       NA      NA      1        1         29       08      
-#> 3 CDC/NCE… 11D066… NA       NA      NA      3        3         29       08      
-#> 4 CENTERS… 11D066… NA       NA      NA      1        1         29       08      
-#> 5 CDC/CGH… 11D106… NA       NA      NA      3        3         24       08      
-#> 6 CENTERS… 40D086… NA       NA      NA      1        1         29       08      
-#> # ℹ 56 more variables: act_type <chr>, cert_type <chr>, own_type <chr>,
-#> #   fac_type <chr>, act_type <chr>, poc_ind <int>, elig_ind <int>,
-#> #   a2la_ind <int>, aabb_ind <int>, aoa_ind <int>, ashi_ind <int>,
-#> #   cap_ind <int>, cola_ind <int>, jcaho_ind <int>, multi_ind <int>,
-#> #   hosp_ind <int>, non_ind <int>, tmp_ind <int>, a2la_cred <chr>,
-#> #   aabb_cred <chr>, aoa_cred <chr>, ashi_cred <chr>, cap_cred <chr>,
-#> #   cola_cred <chr>, jcaho_cred <chr>, chow_date <date>, orig_date <date>, …
+#> # A tibble: 6 × 37
+#>   fac_name   fac_ccn clia_ccn xrf_ccn shr_ccn acr_org poc_ind elig_ind multi_ind
+#> * <chr>      <chr>   <chr>    <chr>   <chr>   <chr>     <int>    <int>     <int>
+#> 1 CDC ARCTI… 02D087… NA       NA      NA      NA            0        1         0
+#> 2 CENTERS F… 06D088… NA       NA      NA      NA            1        1         0
+#> 3 CDC/NCEH/… 11D066… NA       NA      NA      A2LA          0        1         0
+#> 4 CENTERS F… 11D066… NA       NA      NA      NA            0        1         1
+#> 5 CDC/CGH/D… 11D106… NA       NA      NA      CAP           0        0         0
+#> 6 CENTERS F… 40D086… NA       NA      NA      NA            0        1         0
+#> # ℹ 28 more variables: hosp_ind <int>, non_ind <int>, tmp_ind <int>,
+#> #   term_type <chr>, app_type <chr>, cert_type <chr>, fac_type <chr>,
+#> #   own_type <chr>, act_type <chr>, chow_date <date>, orig_date <date>,
+#> #   cert_date <date>, eff_date <date>, term_date <date>, acr_date <date>,
+#> #   chow_cnt <int>, srv_cnt <int>, acr_cnt <int>, cmp_cnt <int>, ppm_cnt <int>,
+#> #   wvd_cnt <int>, alab_cnt <int>, site_cnt <int>, compliant <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, address <chr>
 
 clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results.
-#> # A tibble: 18 × 65
-#>    fac_name         fac_ccn clia_ccn xrf_ccn shr_ccn app_type cert_type fac_type
-#>  * <chr>            <chr>   <chr>    <chr>   <chr>   <chr>    <chr>     <chr>   
-#>  1 SGMC HEALTH      11D002… 110122   NA      NA      3        3         14      
-#>  2 SGMC- SMITH NOR… 11D002… 110037   NA      NA      3        3         02      
-#>  3 SMITH & DENNARD… 11D026… 2546236… NA      NA      3        9         21      
-#>  4 QUEST DIAGNOSTI… 11D064… 11L0008… NA      NA      3        3         15      
-#>  5 SOUTH GA MED CT… 11D068… 110122   NA      NA      3        3         29      
-#>  6 NORTHSIDE MEDIC… 11D090… NA       NA      NA      3        3         21      
-#>  7 SOUTH GEORGIA W… 11D091… NA       NA      NA      3        9         21      
-#>  8 SOUTHERN PHYSIC… 11D096… NA       NA      NA      3        9         21      
-#>  9 VALDOSTA CBOC    11D100… NA       NA      NA      3        3         06      
-#> 10 ALLEGIANT SOLUT… 11D106… NA       NA      NA      3        3         15      
-#> 11 CARE MEDICAL CE… 11D202… NA       NA      NA      3        3         29      
-#> 12 GULF COAST DERM… 11D205… NA       NA      NA      1        9         21      
-#> 13 BPC PLASMA, INC… 11D207… NA       NA      NA      3        3         29      
-#> 14 SOUTH GEORGIA T… 11D210… NA       NA      NA      3        3         15      
-#> 15 SGMC POINT OF C… 11D214… NA       NA      NA      3        3         14      
-#> 16 SGMC FAMILY PRA… 11D214… NA       NA      NA      3        3         21      
-#> 17 OCTAPHARMA PLAS… 11D219… NA       NA      NA      3        3         29      
-#> 18 VEEDHATA OM LLC… 11D222… NA       NA      NA      3        3         15      
-#> # ℹ 57 more variables: own_type <chr>, act_type <chr>, cert_type <chr>,
-#> #   own_type <chr>, fac_type <chr>, act_type <chr>, poc_ind <int>,
-#> #   elig_ind <int>, a2la_ind <int>, aabb_ind <int>, aoa_ind <int>,
-#> #   ashi_ind <int>, cap_ind <int>, cola_ind <int>, jcaho_ind <int>,
-#> #   multi_ind <int>, hosp_ind <int>, non_ind <int>, tmp_ind <int>,
-#> #   a2la_cred <chr>, aabb_cred <chr>, aoa_cred <chr>, ashi_cred <chr>,
-#> #   cap_cred <chr>, cola_cred <chr>, jcaho_cred <chr>, chow_date <date>, …
+#> # A tibble: 18 × 37
+#>    fac_name  fac_ccn clia_ccn xrf_ccn shr_ccn acr_org poc_ind elig_ind multi_ind
+#>  * <chr>     <chr>   <chr>    <chr>   <chr>   <chr>     <int>    <int>     <int>
+#>  1 SGMC HEA… 11D002… 110122   NA      NA      JCAHO         0        1         0
+#>  2 SGMC- SM… 11D002… 110037   NA      NA      CAP           0        1         0
+#>  3 SMITH & … 11D026… 2546236… NA      NA      NA            0        0         0
+#>  4 QUEST DI… 11D064… 11L0008… NA      NA      NA            0        1         0
+#>  5 SOUTH GA… 11D068… 110122   NA      NA      CAP           0        0         0
+#>  6 NORTHSID… 11D090… NA       NA      NA      NA            0        0         0
+#>  7 SOUTH GE… 11D091… NA       NA      NA      NA            0        0         0
+#>  8 SOUTHERN… 11D096… NA       NA      NA      NA            0        0         0
+#>  9 VALDOSTA… 11D100… NA       NA      NA      JCAHO         0        0         0
+#> 10 ALLEGIAN… 11D106… NA       NA      NA      COLA          0        0         0
+#> 11 CARE MED… 11D202… NA       NA      NA      COLA          0        1         0
+#> 12 GULF COA… 11D205… NA       NA      NA      NA            0        0         0
+#> 13 BPC PLAS… 11D207… NA       NA      NA      COLA          0        1         0
+#> 14 SOUTH GE… 11D210… NA       NA      NA      COLA          0        0         0
+#> 15 SGMC POI… 11D214… NA       NA      NA      JCAHO         0        0         0
+#> 16 SGMC FAM… 11D214… NA       NA      NA      NA            0        0         0
+#> 17 OCTAPHAR… 11D219… NA       NA      NA      COLA          0        0         0
+#> 18 VEEDHATA… 11D222… NA       NA      NA      COLA          0        0         0
+#> # ℹ 28 more variables: hosp_ind <int>, non_ind <int>, tmp_ind <int>,
+#> #   term_type <chr>, app_type <chr>, cert_type <chr>, fac_type <chr>,
+#> #   own_type <chr>, act_type <chr>, chow_date <date>, orig_date <date>,
+#> #   cert_date <date>, eff_date <date>, term_date <date>, acr_date <date>,
+#> #   chow_cnt <int>, srv_cnt <int>, acr_cnt <int>, cmp_cnt <int>, ppm_cnt <int>,
+#> #   wvd_cnt <int>, alab_cnt <int>, site_cnt <int>, compliant <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, address <chr>
 
 clia(accreditation = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result.
-#> # A tibble: 1 × 65
-#>   fac_name fac_ccn clia_ccn xrf_ccn shr_ccn app_type cert_type fac_type own_type
-#> * <chr>    <chr>   <chr>    <chr>   <chr>   <chr>    <chr>     <chr>    <chr>   
-#> 1 LEXINGT… 42D066… 420073   NA      NA      3        3         14       06      
-#> # ℹ 56 more variables: act_type <chr>, cert_type <chr>, own_type <chr>,
-#> #   fac_type <chr>, act_type <chr>, poc_ind <int>, elig_ind <int>,
-#> #   a2la_ind <int>, aabb_ind <int>, aoa_ind <int>, ashi_ind <int>,
-#> #   cap_ind <int>, cola_ind <int>, jcaho_ind <int>, multi_ind <int>,
-#> #   hosp_ind <int>, non_ind <int>, tmp_ind <int>, a2la_cred <chr>,
-#> #   aabb_cred <chr>, aoa_cred <chr>, ashi_cred <chr>, cap_cred <chr>,
-#> #   cola_cred <chr>, jcaho_cred <chr>, chow_date <date>, orig_date <date>, …
+#> # A tibble: 1 × 37
+#>   fac_name   fac_ccn clia_ccn xrf_ccn shr_ccn acr_org poc_ind elig_ind multi_ind
+#> * <chr>      <chr>   <chr>    <chr>   <chr>   <chr>     <int>    <int>     <int>
+#> 1 LEXINGTON… 42D066… 420073   NA      NA      CAP           0        0         0
+#> # ℹ 28 more variables: hosp_ind <int>, non_ind <int>, tmp_ind <int>,
+#> #   term_type <chr>, app_type <chr>, cert_type <chr>, fac_type <chr>,
+#> #   own_type <chr>, act_type <chr>, chow_date <date>, orig_date <date>,
+#> #   cert_date <date>, eff_date <date>, term_date <date>, acr_date <date>,
+#> #   chow_cnt <int>, srv_cnt <int>, acr_cnt <int>, cmp_cnt <int>, ppm_cnt <int>,
+#> #   wvd_cnt <int>, alab_cnt <int>, site_cnt <int>, compliant <chr>, city <chr>,
+#> #   state <chr>, zip <chr>, address <chr>
 ```

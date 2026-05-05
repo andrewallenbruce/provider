@@ -31,6 +31,13 @@ dt {
   padding-bottom: 10px;
 }
 
+li {
+  margin-block: 0.5em;
+  color: gray;
+  font-family: monospace;
+  font-size: 0.8em;
+}
+
 img {
   border-radius: 4px;
 }
