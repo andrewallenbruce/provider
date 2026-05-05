@@ -23,6 +23,8 @@ utils::globalVariables(c(
   "own_add_1",
   "own_add_2",
   "prog_year",
+  "own_pac",
+  "own_ind",
   NULL
 ))
 

@@ -24,9 +24,9 @@ clinicians(
   specialty = NULL,
   school = NULL,
   grad_year = NULL,
-  org_city = NULL,
-  org_state = NULL,
-  org_zip = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   org_name = NULL,
   org_pac = NULL,
   count = FALSE,
@@ -52,7 +52,7 @@ clinicians(
 
 \item{grad_year}{\verb{<int>} Provider’s graduation year}
 
-\item{org_city, org_state, org_zip}{\verb{<chr>} Facility's city, state, zip}
+\item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 
 \item{org_name}{\verb{<chr>} Facility associated with Provider}
 

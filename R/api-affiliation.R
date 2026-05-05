@@ -110,7 +110,7 @@ affiliations <- function(
 #' @param school `<chr>` Provider’s medical school
 #' @param grad_year `<int>` Provider’s graduation year
 #' @param specialty `<chr>` Provider’s primary medical specialty
-#' @param org_city,org_state,org_zip `<chr>` Facility's city, state, zip
+#' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param org_name `<chr>` Facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param count `<lgl>` Return the total row count
@@ -139,9 +139,9 @@ clinicians <- function(
   specialty = NULL,
   school = NULL,
   grad_year = NULL,
-  org_city = NULL,
-  org_state = NULL,
-  org_zip = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   org_name = NULL,
   org_pac = NULL,
   count = FALSE,
@@ -165,9 +165,9 @@ clinicians <- function(
         pri_spec = specialty,
         facility_name = org_name,
         org_pac_id = org_pac,
-        citytown = org_city,
-        state = org_state,
-        zip_code = org_zip,
+        citytown = city,
+        state = state,
+        zip_code = zip,
         .count = count,
         .set = set,
       )

@@ -3,7 +3,7 @@ RC_esrd <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
   collapse::gvr(x, "add_") <- NULL
 
-  rc_integer(x, c("network", "stars")) |>
+  rc_integer(x, c("network", "rating")) |>
     rc_date_ymd("cert_date")
 }
 

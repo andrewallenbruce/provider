@@ -88,26 +88,29 @@ as_date_mdy <- function(x, ...) {
   as.Date(x, ..., format = "%m/%d/%Y")
 }
 
+#' @autoglobal
 #' @noRd
 fqhc_owner_pivot <- function(x) {
   y <- collapse::gvr(x, "own_pac|_ind$") |>
     collapse::pivot(
       ids = "own_pac",
       factor = FALSE,
-      names = list(variable = "var", value = "ind"),
+      names = list(variable = "own_ind", value = "bin"),
       na.rm = TRUE
-    )
+    ) |>
+    collapse::funique() |>
+    collapse::roworderv("own_pac")
 
   if (nrow(x) == 0L) {
     collapse::gvr(x, "_ind$") <- NULL
-    x <- collapse::av(x, var = rep.int(NA_character_, nrow(x)))
+    x <- collapse::av(x, own_ind = rep.int(NA_character_, nrow(x)))
     return(x)
   }
 
-  y <- collapse::ss(y, y$ind %==% 1L)
+  y <- collapse::ss(y, y$bin %==% 1L)
 
-  y$var <- cheapr::val_match(
-    y$var,
+  y$own_ind <- cheapr::val_match(
+    y$own_ind,
     "acq_ind" ~ "Created for Aquisition",
     "corp_ind" ~ "Corporation",
     "llc_ind" ~ "LLC",
@@ -118,8 +121,8 @@ fqhc_owner_pivot <- function(x) {
     "inv_ind" ~ "Investment Firm",
     "fin_ind" ~ "Financial Institution",
     "con_ind" ~ "Consulting Firm",
-    "fp_ind" ~ "For Profit",
-    "np_ind" ~ "Non Profit",
+    "fp_ind" ~ "For-Profit",
+    "np_ind" ~ "Non-Profit",
     "pe_ind" ~ "Private Equity",
     "reit_ind" ~ "REIT",
     "cho_ind" ~ "Chain Home Office",
@@ -128,11 +131,16 @@ fqhc_owner_pivot <- function(x) {
     .default = NA_character_
   )
 
-  collapse::gv(y, "ind") <- NULL
+  collapse::gv(y, "bin") <- NULL
   collapse::gvr(x, "_ind$") <- NULL
-  y <- collapse::funique(y)
-  x <- collapse::join(x, y, on = "own_pac", verbose = 0L)
-  return(x)
+
+  y <- collapse::roworderv(y, "own_pac") |>
+    collapse::gby(own_pac) |>
+    collapse::mtt(own_ind = paste0(own_ind, collapse = ", ")) |>
+    collapse::fungroup() |>
+    collapse::funique()
+
+  collapse::join(x, y, on = "own_pac", verbose = 0L)
 }
 
 #' @noRd
