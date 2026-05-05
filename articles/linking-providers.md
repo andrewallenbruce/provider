@@ -133,8 +133,8 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #> 10 JAMES    E      EAST    NA     M      MD    OTHER       2016 DIAGNOST… 1.95e9
 #> # ℹ 48 more rows
 #> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#> #   org_add <chr>, specialty <chr>
+#> #   org_mem <int>, city <chr>, state <chr>, zip <chr>, org_add <chr>,
+#> #   specialty <chr>
 reassignments(org_name = "Elizabethtown Community Hospital")
 #> ✔ reassignments returned 380 results.
 #> # A tibble: 380 × 14

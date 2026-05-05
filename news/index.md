@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9139 (2026-05-05)
+
+- owner_pivot work
+
 ## provider 0.0.1.9138 (2026-05-04)
 
 - fixed bug in `polish.pending`

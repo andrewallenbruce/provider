@@ -18,9 +18,9 @@ clinicians(
   specialty = NULL,
   school = NULL,
   grad_year = NULL,
-  org_city = NULL,
-  org_state = NULL,
-  org_zip = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   org_name = NULL,
   org_pac = NULL,
   count = FALSE,
@@ -78,7 +78,7 @@ clinicians(
 
   `<int>` Provider’s graduation year
 
-- org_city, org_state, org_zip:
+- city, state, zip:
 
   `<chr>` Facility's city, state, zip
 
@@ -141,8 +141,7 @@ clinicians(enid = "I20081002000549")
 #> * <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
 #> 1 DORO… E      MCCU… NA     F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022…
 #> # ℹ 9 more variables: enid <chr>, org_name <chr>, org_pac <chr>, org_mem <int>,
-#> #   org_city <chr>, org_state <chr>, org_zip <chr>, org_add <chr>,
-#> #   specialty <chr>
+#> #   city <chr>, state <chr>, zip <chr>, org_add <chr>, specialty <chr>
 
 clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
@@ -161,6 +160,6 @@ clinicians(first = "Etan")
 #> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
 #> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#> #   org_add <chr>, specialty <chr>
+#> #   org_mem <int>, city <chr>, state <chr>, zip <chr>, org_add <chr>,
+#> #   specialty <chr>
 ```
