@@ -56,23 +56,24 @@ affiliations <- function(
   set = FALSE
 ) {
   check_char_(facility_type)
-  polish(
-    execute(
-      pdc(
-        npi = npi,
-        ind_pac_id = pac,
-        provider_last_name = last,
-        provider_first_name = first,
-        provider_middle_name = middle,
-        suff = suffix,
-        facility_type = tag_enum(facility_type),
-        facility_affiliations_certification_number = facility_ccn,
-        facility_type_certification_number = parent_ccn,
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- pdc(
+    npi = npi,
+    ind_pac_id = pac,
+    provider_last_name = last,
+    provider_first_name = first,
+    provider_middle_name = middle,
+    suff = suffix,
+    facility_type = tag_enum(facility_type),
+    facility_affiliations_certification_number = facility_ccn,
+    facility_type_certification_number = parent_ccn,
+    .count = count,
+    .set = set
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' Clinician Demographics
@@ -148,31 +149,31 @@ clinicians <- function(
   set = FALSE
 ) {
   check_char_(gender)
-  polish(
-    execute(
-      pdc(
-        npi = npi,
-        ind_pac_id = pac,
-        ind_enrl_id = enid,
-        provider_last_name = last,
-        provider_first_name = first,
-        provider_middle_name = middle,
-        suff = suffix,
-        gndr = gender,
-        cred = credential,
-        med_sch = school,
-        grd_yr = grad_year,
-        pri_spec = specialty,
-        facility_name = org_name,
-        org_pac_id = org_pac,
-        citytown = city,
-        state = state,
-        zip_code = zip,
-        .count = count,
-        .set = set,
-      )
-    )
+  x <- pdc(
+    npi = npi,
+    ind_pac_id = pac,
+    ind_enrl_id = enid,
+    provider_last_name = last,
+    provider_first_name = first,
+    provider_middle_name = middle,
+    suff = suffix,
+    gndr = gender,
+    cred = credential,
+    med_sch = school,
+    grd_yr = grad_year,
+    pri_spec = specialty,
+    facility_name = org_name,
+    org_pac_id = org_pac,
+    citytown = city,
+    state = state,
+    zip_code = zip,
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' Dialysis Facilities

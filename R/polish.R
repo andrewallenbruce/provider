@@ -10,96 +10,96 @@ polish <- function(x) {
 
 #' @export
 polish.affiliations <- function(x) {
-  rename_with(
-    x,
-    c(
-      provider_first_name = "first",
-      provider_last_name = "last",
-      provider_middle_name = "middle",
-      suff = "suffix",
-      npi = "npi",
-      ind_pac_id = "pac",
-      facility_type = "facility_type",
-      facility_affiliations_certification_number = "facility_ccn",
-      facility_type_certification_number = "parent_ccn"
-    )
-  ) |>
-    replace_nz() |>
+  collapse::recode_char(
+    colnames(x),
+    provider_first_name = "first",
+    provider_last_name = "last",
+    provider_middle_name = "middle",
+    suff = "suffix",
+    npi = "npi",
+    ind_pac_id = "pac",
+    facility_type = "facility_type",
+    facility_affiliations_certification_number = "facility_ccn",
+    facility_type_certification_number = "parent_ccn",
+    set = TRUE
+  )
+
+  replace_nz(x) |>
     rc_integer("npi") |>
     data_frame()
 }
 
 #' @export
 polish.clia <- function(x) {
-  x <- rename_with(
-    x,
-    c(
-      FAC_NAME = "fac_1",
-      ADDTNL_FAC_NAME = "fac_2",
-      PRVDR_NUM = "fac_ccn",
-      CLIA_MDCR_NUM = "clia_ccn",
-      CROSS_REF_PROVIDER_NUMBER = "xrf_ccn",
-      SHARED_LAB_XREF_NUMBER = "shr_ccn",
-      # INTRMDRY_CARR_CD = "mac",
-      CHOW_CNT = "chow_cnt",
-      CHOW_DT = "chow_date",
-      ACPTBL_POC_SW = "poc_ind",
-      CMPLNC_STUS_CD = "compliant",
-      ST_ADR = "add_1",
-      ADDTNL_ST_ADR = "add_2",
-      CITY_NAME = "city",
-      STATE_CD = "state",
-      ZIP_CD = "zip",
-      ELGBLTY_SW = "elig_ind",
-      # PGM_TRMNTN_CD = "pgm_term",
-      CLIA_TRMNTN_CD = "term_type",
-      APLCTN_TYPE_CD = "app_type",
-      CRTFCT_TYPE_CD = "cert_type",
-      GNRL_FAC_TYPE_CD = "fac_type",
-      GNRL_CNTL_TYPE_CD = "own_type",
-      CRTFCTN_ACTN_TYPE_CD = "act_type",
-      ORGNL_PRTCPTN_DT = "orig_date",
-      CRTFCTN_DT = "cert_date",
-      CRTFCT_EFCTV_DT = "eff_date",
-      TRMNTN_EXPRTN_DT = "term_date",
-      # A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
-      A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
-      A2LA_ACRDTD_Y_MATCH_SW = "a2la_ind",
-      # AABB_ACRDTD_CD = "aabb_cred",
-      AABB_ACRDTD_Y_MATCH_DT = "aabb_date",
-      AABB_ACRDTD_Y_MATCH_SW = "aabb_ind",
-      # AOA_ACRDTD_CD = "aoa_cred",
-      AOA_ACRDTD_Y_MATCH_DT = "aoa_date",
-      AOA_ACRDTD_Y_MATCH_SW = "aoa_ind",
-      # ASHI_ACRDTD_CD = "ashi_cred",
-      ASHI_ACRDTD_Y_MATCH_DT = "ashi_date",
-      ASHI_ACRDTD_Y_MATCH_SW = "ashi_ind",
-      # CAP_ACRDTD_CD = "cap_cred",
-      CAP_ACRDTD_Y_MATCH_DT = "cap_date",
-      CAP_ACRDTD_Y_MATCH_SW = "cap_ind",
-      # COLA_ACRDTD_CD = "cola_cred",
-      COLA_ACRDTD_Y_MATCH_DT = "cola_date",
-      COLA_ACRDTD_Y_MATCH_SW = "cola_ind",
-      # JCAHO_ACRDTD_CD = "jcaho_cred",
-      JCAHO_ACRDTD_Y_MATCH_DT = "jcaho_date",
-      JCAHO_ACRDTD_Y_MATCH_SW = "jcaho_ind",
-      # ACRDTN_SCHDL_CD = "acr_sch",
-      # FORM_1557_CRTFCT_SCHDL_CD = "crt_sch",
-      # FORM_1557_CMPLNC_SCHDL_CD = "cmp_sch",
-      FORM_1557_TEST_VOL_CNT = "srv_cnt",
-      FORM_116_ACRDTD_TEST_VOL_CNT = "acr_cnt",
-      FORM_116_TEST_VOL_CNT = "cmp_cnt",
-      PPMP_TEST_VOL_CNT = "ppm_cnt",
-      WVD_TEST_VOL_CNT = "wvd_cnt",
-      MLT_SITE_EXCPTN_SW = "multi_ind",
-      HOSP_LAB_EXCPTN_SW = "hosp_ind",
-      NON_PRFT_EXCPTN_SW = "non_ind",
-      LAB_TEMP_TSTG_SITE_SW = "tmp_ind",
-      DRCTLY_AFLTD_LAB_CNT = "alab_cnt",
-      LAB_SITE_CNT = "site_cnt"
-    )
+  NAMES <- list(
+    FAC_NAME = "fac_1",
+    ADDTNL_FAC_NAME = "fac_2",
+    PRVDR_NUM = "fac_ccn",
+    CLIA_MDCR_NUM = "clia_ccn",
+    CROSS_REF_PROVIDER_NUMBER = "xrf_ccn",
+    SHARED_LAB_XREF_NUMBER = "shr_ccn",
+    # INTRMDRY_CARR_CD = "mac",
+    CHOW_CNT = "chow_cnt",
+    CHOW_DT = "chow_date",
+    ACPTBL_POC_SW = "poc_ind",
+    CMPLNC_STUS_CD = "compliant",
+    ST_ADR = "add_1",
+    ADDTNL_ST_ADR = "add_2",
+    CITY_NAME = "city",
+    STATE_CD = "state",
+    ZIP_CD = "zip",
+    ELGBLTY_SW = "elig_ind",
+    # PGM_TRMNTN_CD = "pgm_term",
+    CLIA_TRMNTN_CD = "term_type",
+    APLCTN_TYPE_CD = "app_type",
+    CRTFCT_TYPE_CD = "cert_type",
+    GNRL_FAC_TYPE_CD = "fac_type",
+    GNRL_CNTL_TYPE_CD = "own_type",
+    CRTFCTN_ACTN_TYPE_CD = "act_type",
+    ORGNL_PRTCPTN_DT = "orig_date",
+    CRTFCTN_DT = "cert_date",
+    CRTFCT_EFCTV_DT = "eff_date",
+    TRMNTN_EXPRTN_DT = "term_date",
+    # A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
+    A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
+    A2LA_ACRDTD_Y_MATCH_SW = "a2la_ind",
+    # AABB_ACRDTD_CD = "aabb_cred",
+    AABB_ACRDTD_Y_MATCH_DT = "aabb_date",
+    AABB_ACRDTD_Y_MATCH_SW = "aabb_ind",
+    # AOA_ACRDTD_CD = "aoa_cred",
+    AOA_ACRDTD_Y_MATCH_DT = "aoa_date",
+    AOA_ACRDTD_Y_MATCH_SW = "aoa_ind",
+    # ASHI_ACRDTD_CD = "ashi_cred",
+    ASHI_ACRDTD_Y_MATCH_DT = "ashi_date",
+    ASHI_ACRDTD_Y_MATCH_SW = "ashi_ind",
+    # CAP_ACRDTD_CD = "cap_cred",
+    CAP_ACRDTD_Y_MATCH_DT = "cap_date",
+    CAP_ACRDTD_Y_MATCH_SW = "cap_ind",
+    # COLA_ACRDTD_CD = "cola_cred",
+    COLA_ACRDTD_Y_MATCH_DT = "cola_date",
+    COLA_ACRDTD_Y_MATCH_SW = "cola_ind",
+    # JCAHO_ACRDTD_CD = "jcaho_cred",
+    JCAHO_ACRDTD_Y_MATCH_DT = "jcaho_date",
+    JCAHO_ACRDTD_Y_MATCH_SW = "jcaho_ind",
+    # ACRDTN_SCHDL_CD = "acr_sch",
+    # FORM_1557_CRTFCT_SCHDL_CD = "crt_sch",
+    # FORM_1557_CMPLNC_SCHDL_CD = "cmp_sch",
+    FORM_1557_TEST_VOL_CNT = "srv_cnt",
+    FORM_116_ACRDTD_TEST_VOL_CNT = "acr_cnt",
+    FORM_116_TEST_VOL_CNT = "cmp_cnt",
+    PPMP_TEST_VOL_CNT = "ppm_cnt",
+    WVD_TEST_VOL_CNT = "wvd_cnt",
+    MLT_SITE_EXCPTN_SW = "multi_ind",
+    HOSP_LAB_EXCPTN_SW = "hosp_ind",
+    NON_PRFT_EXCPTN_SW = "non_ind",
+    LAB_TEMP_TSTG_SITE_SW = "tmp_ind",
+    DRCTLY_AFLTD_LAB_CNT = "alab_cnt",
+    LAB_SITE_CNT = "site_cnt"
   )
-  x <- replace_nz(x) |>
+  rlang::inject(collapse::recode_char(colnames(x), !!!NAMES, set = TRUE))
+
+  x <- collapse::gv(x, unlist_(NAMES)) |>
+    replace_nz() |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(collapse::gvr(x, "_cnt$", return = 2L)) |>

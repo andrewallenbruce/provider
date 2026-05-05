@@ -101,7 +101,7 @@ fqhc_owner_pivot <- function(x) {
     collapse::funique() |>
     collapse::roworderv("own_pac")
 
-  if (nrow(x) == 0L) {
+  if (nrow(y) == 0L) {
     collapse::gvr(x, "_ind$") <- NULL
     x <- collapse::av(x, own_ind = rep.int(NA_character_, nrow(x)))
     return(x)
@@ -109,26 +109,33 @@ fqhc_owner_pivot <- function(x) {
 
   y <- collapse::ss(y, y$bin %==% 1L)
 
-  y$own_ind <- cheapr::val_match(
+  if (nrow(y) == 0L) {
+    collapse::gvr(x, "_ind$") <- NULL
+    x <- collapse::av(x, own_ind = rep.int(NA_character_, nrow(x)))
+    return(x)
+  }
+
+  collapse::recode_char(
     y$own_ind,
-    "acq_ind" ~ "Created for Aquisition",
-    "corp_ind" ~ "Corporation",
-    "llc_ind" ~ "LLC",
-    "mps_ind" ~ "Medical Provider/Supplier",
-    "msr_ind" ~ "Management Services Company",
-    "mst_ind" ~ "Medical Staffing Company",
-    "hld_ind" ~ "Holding Company",
-    "inv_ind" ~ "Investment Firm",
-    "fin_ind" ~ "Financial Institution",
-    "con_ind" ~ "Consulting Firm",
-    "fp_ind" ~ "For-Profit",
-    "np_ind" ~ "Non-Profit",
-    "pe_ind" ~ "Private Equity",
-    "reit_ind" ~ "REIT",
-    "cho_ind" ~ "Chain Home Office",
-    "oth_ind" ~ "Other",
-    "ano_ind" ~ "Owned by Another Org/Ind",
-    .default = NA_character_
+    "acq_ind" = "Created for Aquisition",
+    "corp_ind" = "Corporation",
+    "llc_ind" = "LLC",
+    "mps_ind" = "Medical Provider/Supplier",
+    "msr_ind" = "Management Services Company",
+    "mst_ind" = "Medical Staffing Company",
+    "hld_ind" = "Holding Company",
+    "inv_ind" = "Investment Firm",
+    "fin_ind" = "Financial Institution",
+    "con_ind" = "Consulting Firm",
+    "fp_ind" = "For-Profit",
+    "np_ind" = "Non-Profit",
+    "pe_ind" = "Private Equity",
+    "reit_ind" = "REIT",
+    "cho_ind" = "Chain Home Office",
+    "oth_ind" = "Other",
+    "ano_ind" = "Owned by Another Org/Ind",
+    default = NA_character_,
+    set = TRUE
   )
 
   collapse::gv(y, "bin") <- NULL
@@ -146,10 +153,9 @@ fqhc_owner_pivot <- function(x) {
 #' @autoglobal
 #' @noRd
 clia_acr_pivot <- function(x) {
-  y <- collapse::gvr(
-    x,
-    c("fac_ccn", "a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
-  ) |>
+  col_acr <- c("a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
+
+  y <- collapse::gvr(x, c("fac_ccn", col_acr)) |>
     collapse::roworderv("fac_ccn")
 
   i <- collapse::gvr(y, c("fac_ccn", "_ind")) |>
@@ -161,7 +167,21 @@ clia_acr_pivot <- function(x) {
     ) |>
     collapse::funique()
 
-  i <- i[i$bin %==% 1L, 1:2]
+  if (nrow(i) == 0L) {
+    collapse::gvr(x, col_acr) <- NULL
+    n <- rep.int(NA_character_, nrow(x))
+    x <- collapse::av(x, acr_org = n, acr_date = n)
+    return(x)
+  }
+
+  i <- collapse::ss(i, i$bin %==% 1L, 1:2)
+
+  if (nrow(i) == 0L) {
+    collapse::gvr(x, col_acr) <- NULL
+    n <- rep.int(NA_character_, nrow(x))
+    x <- collapse::av(x, acr_org = n, acr_date = n)
+    return(x)
+  }
 
   d <- collapse::gvr(y, c("fac_ccn", "_date")) |>
     collapse::pivot(
@@ -170,8 +190,9 @@ clia_acr_pivot <- function(x) {
       names = list(value = "acr_date"),
       na.rm = TRUE
     ) |>
-    collapse::funique() |>
-    _[c(1, 3)]
+    collapse::funique()
+
+  d <- collapse::ss(d, j = c(1L, 3L))
 
   y <- collapse::join(i, d, on = "fac_ccn", verbose = 0L)
 
@@ -188,18 +209,7 @@ clia_acr_pivot <- function(x) {
     set = TRUE
   )
 
-  collapse::gvr(
-    x,
-    c(
-      "a2la_",
-      "aabb_",
-      "aoa_",
-      "ashi_",
-      "cap_",
-      "cola_",
-      "jcaho_"
-    )
-  ) <- NULL
+  collapse::gvr(x, col_acr) <- NULL
 
-  collapse::join(x, y, on = "fac_ccn", verbose = 0L)
+  collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
 }
