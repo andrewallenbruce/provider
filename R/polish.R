@@ -40,7 +40,7 @@ polish.clia <- function(x) {
       CLIA_MDCR_NUM = "clia_ccn",
       CROSS_REF_PROVIDER_NUMBER = "xrf_ccn",
       SHARED_LAB_XREF_NUMBER = "shr_ccn",
-      INTRMDRY_CARR_CD = "mac",
+      # INTRMDRY_CARR_CD = "mac",
       CHOW_CNT = "chow_cnt",
       CHOW_DT = "chow_date",
       ACPTBL_POC_SW = "poc_ind",
@@ -51,8 +51,8 @@ polish.clia <- function(x) {
       STATE_CD = "state",
       ZIP_CD = "zip",
       ELGBLTY_SW = "elig_ind",
-      PGM_TRMNTN_CD = "pgm_term",
-      CLIA_TRMNTN_CD = "clia_term",
+      # PGM_TRMNTN_CD = "pgm_term",
+      CLIA_TRMNTN_CD = "term_type",
       APLCTN_TYPE_CD = "app_type",
       CRTFCT_TYPE_CD = "cert_type",
       GNRL_FAC_TYPE_CD = "fac_type",
@@ -62,30 +62,30 @@ polish.clia <- function(x) {
       CRTFCTN_DT = "cert_date",
       CRTFCT_EFCTV_DT = "eff_date",
       TRMNTN_EXPRTN_DT = "term_date",
-      A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
+      # A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
       A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
       A2LA_ACRDTD_Y_MATCH_SW = "a2la_ind",
-      AABB_ACRDTD_CD = "aabb_cred",
+      # AABB_ACRDTD_CD = "aabb_cred",
       AABB_ACRDTD_Y_MATCH_DT = "aabb_date",
       AABB_ACRDTD_Y_MATCH_SW = "aabb_ind",
-      AOA_ACRDTD_CD = "aoa_cred",
+      # AOA_ACRDTD_CD = "aoa_cred",
       AOA_ACRDTD_Y_MATCH_DT = "aoa_date",
       AOA_ACRDTD_Y_MATCH_SW = "aoa_ind",
-      ASHI_ACRDTD_CD = "ashi_cred",
+      # ASHI_ACRDTD_CD = "ashi_cred",
       ASHI_ACRDTD_Y_MATCH_DT = "ashi_date",
       ASHI_ACRDTD_Y_MATCH_SW = "ashi_ind",
-      CAP_ACRDTD_CD = "cap_cred",
+      # CAP_ACRDTD_CD = "cap_cred",
       CAP_ACRDTD_Y_MATCH_DT = "cap_date",
       CAP_ACRDTD_Y_MATCH_SW = "cap_ind",
-      COLA_ACRDTD_CD = "cola_cred",
+      # COLA_ACRDTD_CD = "cola_cred",
       COLA_ACRDTD_Y_MATCH_DT = "cola_date",
       COLA_ACRDTD_Y_MATCH_SW = "cola_ind",
-      JCAHO_ACRDTD_CD = "jcaho_cred",
+      # JCAHO_ACRDTD_CD = "jcaho_cred",
       JCAHO_ACRDTD_Y_MATCH_DT = "jcaho_date",
       JCAHO_ACRDTD_Y_MATCH_SW = "jcaho_ind",
-      ACRDTN_SCHDL_CD = "acr_sch",
-      FORM_1557_CRTFCT_SCHDL_CD = "crt_sch",
-      FORM_1557_CMPLNC_SCHDL_CD = "cmp_sch",
+      # ACRDTN_SCHDL_CD = "acr_sch",
+      # FORM_1557_CRTFCT_SCHDL_CD = "crt_sch",
+      # FORM_1557_CMPLNC_SCHDL_CD = "cmp_sch",
       FORM_1557_TEST_VOL_CNT = "srv_cnt",
       FORM_116_ACRDTD_TEST_VOL_CNT = "acr_cnt",
       FORM_116_TEST_VOL_CNT = "cmp_cnt",
@@ -108,25 +108,137 @@ polish.clia <- function(x) {
   x <- collapse::av(
     x,
     fac_name = combine_cols(x$fac_1, x$fac_2),
-    address = combine_cols(x$add_1, x$add_2),
-    cert_type = clia_cert_type(x$cert_type),
-    own_type = clia_own_type(x$own_type),
-    fac_type = clia_fac_type(x$fac_type),
-    act_type = clia_act_type(x$act_type)
+    address = combine_cols(x$add_1, x$add_2)
   )
 
-  collapse::gvr(x, "fac_[12]$|add_[12]$") <- NULL
+  collapse::gvr(x, "_[12]$") <- NULL
+
+  collapse::recode_char(
+    x$term_type,
+    "00" = "Active",
+    "01" = "Voluntary-Merger/Closure",
+    "02" = "Voluntary-Reimbursement Dissatisfaction",
+    "03" = "Voluntary-Termination Risk",
+    "04" = "Voluntary-Other",
+    "05" = "Involuntary-Health/Safety Failure",
+    "06" = "Involuntary-Agreement Failure",
+    "07" = "Other Status Change",
+    "08" = "Fee Nonpayment (CLIA)",
+    "09" = "Unsuccessful PT (CLIA)",
+    "10" = "Other (CLIA)",
+    "11" = "Incomplete Application (CLIA)",
+    "12" = "Not Performing Tests (CLIA)",
+    "13" = "Multiple to Single Site (CLIA)",
+    "14" = "Shared Laboratory (CLIA)",
+    "15" = "Failure to Renew Waiver PPM (CLIA)",
+    "16" = "Duplicate CLIA (CLIA)",
+    "17" = "Mail Returned Cert Ended (CLIA)",
+    "20" = "Bankruptcy (CLIA)",
+    "33" = "Accreditation Unconfirmed (CLIA)",
+    "80" = "Awaiting State Approval",
+    "99" = "OIG Do Not Activate (CLIA)",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    x$cert_type,
+    "1" = "Compliance",
+    "2" = "Waiver",
+    "3" = "Accreditation",
+    "4" = "PPM",
+    "9" = "Registration",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    x$app_type,
+    "1" = "Compliance",
+    "2" = "Waiver",
+    "3" = "Accreditation",
+    "4" = "PPM",
+    "9" = "Registration",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    x$own_type,
+    "01" = "Religious Affiliation",
+    "02" = "Private",
+    "03" = "Other",
+    "04" = "Proprietary",
+    "05" = "Validation",
+    "05" = "Govt-City",
+    "06" = "Govt-County",
+    "07" = "Govt-State",
+    "08" = "Govt-Federal",
+    "09" = "Govt-Other",
+    "10" = "Unknown",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    x$fac_type,
+    "01" = "Ambulance",
+    "02" = "ASC",
+    "03" = "Ancillary Site",
+    "04" = "ALF",
+    "05" = "Blood Bank",
+    "06" = "Community Clinic",
+    "07" = "CORF",
+    "08" = "ESRD",
+    "09" = "FQHC",
+    "10" = "Health Fair",
+    "11" = "HMO",
+    "12" = "HHA",
+    "13" = "Hospice",
+    "14" = "Hospital",
+    "15" = "Independent",
+    "16" = "Industrial",
+    "17" = "Insurance",
+    "18" = "ICF-IID",
+    "19" = "Mobile Lab",
+    "20" = "Pharmacy",
+    "21" = "Physician",
+    "22" = "Other Practitioner",
+    "23" = "Prison",
+    "24" = "Public Health",
+    "25" = "RHC",
+    "26" = "SHS",
+    "27" = "SNF",
+    "28" = "Tissue Bank",
+    "29" = "Other",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    x$act_type,
+    "1" = "Initial",
+    "2" = "Recertification",
+    "3" = "Termination",
+    "4" = "Change of Ownership",
+    "5" = "Validation",
+    "8" = "Full Survey After Complaint",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  x <- clia_acr_pivot(x)
+
   collapse::colorderv(
     x,
     c(
       "^fac_name$",
       "_ccn$",
-      "_type$",
+      "acr_org",
       "_ind$",
-      "_cred$",
+      "_type$",
       "_date$",
-      "_cnt$",
-      "_sch$"
+      "_cnt$"
     ),
     regex = TRUE
   )

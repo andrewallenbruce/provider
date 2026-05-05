@@ -143,85 +143,63 @@ fqhc_owner_pivot <- function(x) {
   collapse::join(x, y, on = "own_pac", verbose = 0L)
 }
 
+#' @autoglobal
 #' @noRd
-clia_fac_type <- function(x) {
-  cheapr::val_match(
+clia_acr_pivot <- function(x) {
+  y <- collapse::gvr(
     x,
-    "01" ~ "Ambulance",
-    "02" ~ "ASC",
-    "03" ~ "Ancillary Site",
-    "04" ~ "ALF",
-    "05" ~ "Blood Bank",
-    "06" ~ "Community Clinic",
-    "07" ~ "CORF",
-    "08" ~ "ESRD",
-    "09" ~ "FQHC",
-    "10" ~ "Health Fair",
-    "11" ~ "HMO",
-    "12" ~ "HHA",
-    "13" ~ "Hospice",
-    "14" ~ "Hospital",
-    "15" ~ "Independent",
-    "16" ~ "Industrial",
-    "17" ~ "Insurance",
-    "18" ~ "ICF-IID",
-    "19" ~ "Mobile Lab",
-    "20" ~ "Pharmacy",
-    "21" ~ "Physician",
-    "22" ~ "Other Practitioner",
-    "23" ~ "Prison",
-    "24" ~ "Public Health",
-    "25" ~ "RHC",
-    "26" ~ "SHS",
-    "27" ~ "SNF",
-    "28" ~ "Tissue Bank",
-    "29" ~ "Other",
-    .default = NA_character_
-  )
-}
+    c("fac_ccn", "a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
+  ) |>
+    collapse::roworderv("fac_ccn")
 
-#' @noRd
-clia_cert_type <- function(x) {
-  cheapr::val_match(
-    x,
-    "1" ~ "Compliance",
-    "2" ~ "Waiver",
-    "3" ~ "Accreditation",
-    "4" ~ "PPM",
-    "9" ~ "Registration",
-    .default = NA_character_
-  )
-}
+  i <- collapse::gvr(y, c("fac_ccn", "_ind")) |>
+    collapse::pivot(
+      ids = "fac_ccn",
+      factor = FALSE,
+      names = list(variable = "acr_org", value = "bin"),
+      na.rm = TRUE
+    ) |>
+    collapse::funique()
 
-#' @noRd
-clia_act_type <- function(x) {
-  cheapr::val_match(
-    x,
-    "1" ~ "Initial",
-    "2" ~ "Recertification",
-    "3" ~ "Termination",
-    "4" ~ "Change of Ownership",
-    "5" ~ "Validation",
-    "8" ~ "Full Survey After Complaint",
-    .default = NA_character_
-  )
-}
+  i <- i[i$bin %==% 1L, 1:2]
 
-#' @noRd
-clia_own_type <- function(x) {
-  cheapr::val_match(
-    x,
-    "01" ~ "Religious Affiliation",
-    "02" ~ "Private",
-    "03" ~ "Other",
-    "04" ~ "Proprietary",
-    "05" ~ "Validation",
-    "05" ~ "Govt-City",
-    "06" ~ "Govt-County",
-    "07" ~ "Govt-State",
-    "08" ~ "Govt-Federal",
-    "09" ~ "Govt-Other",
-    "10" ~ "Unknown",
-    .default = NA_character_
+  d <- collapse::gvr(y, c("fac_ccn", "_date")) |>
+    collapse::pivot(
+      ids = "fac_ccn",
+      factor = FALSE,
+      names = list(value = "acr_date"),
+      na.rm = TRUE
+    ) |>
+    collapse::funique() |>
+    _[c(1, 3)]
+
+  y <- collapse::join(i, d, on = "fac_ccn", verbose = 0L)
+
+  collapse::recode_char(
+    y$acr_org,
+    "a2la_ind" = "A2LA",
+    "aabb_ind" = "AABB",
+    "aoa_ind" = "AOA",
+    "ashi_ind" = "ASHI-HLA",
+    "cap_ind" = "CAP",
+    "cola_ind" = "COLA",
+    "jcaho_ind" = "JCAHO",
+    default = NA_character_,
+    set = TRUE
   )
+
+  collapse::gvr(
+    x,
+    c(
+      "a2la_",
+      "aabb_",
+      "aoa_",
+      "ashi_",
+      "cap_",
+      "cola_",
+      "jcaho_"
+    )
+  ) <- NULL
+
+  collapse::join(x, y, on = "fac_ccn", verbose = 0L)
 }

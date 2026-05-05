@@ -96,10 +96,7 @@ clia <- function(
   )
 
   x <- execute(x)
-
-  x <- polish(x)
-
-  return(x)
+  polish(x)
 }
 
 #' @noRd

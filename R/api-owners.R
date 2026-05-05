@@ -318,10 +318,7 @@ rhc_owner <- function(
   )
 
   x <- execute(x)
-
-  x <- polish(x)
-
-  return(x)
+  polish(x)
 }
 
 #' Skilled Nursing Facility Owners
