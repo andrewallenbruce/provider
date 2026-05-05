@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9140 (2026-05-05)
+
+* `clia()` pivot acr_org
+
+
 # provider 0.0.1.9139 (2026-05-05)
 
 * owner_pivot work
