@@ -237,10 +237,12 @@ clia(certificate = c("accreditation", "registration"), city = "Valdosta", state 
 
 clia(accreditation = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result.
-#> # A tibble: 1 × 37
+#> # A tibble: 3 × 37
 #>   fac_name   fac_ccn clia_ccn xrf_ccn shr_ccn acr_org poc_ind elig_ind multi_ind
 #> * <chr>      <chr>   <chr>    <chr>   <chr>   <chr>     <int>    <int>     <int>
 #> 1 LEXINGTON… 42D066… 420073   NA      NA      CAP           0        0         0
+#> 2 LEXINGTON… 42D066… 420073   NA      NA      COLA          0        0         0
+#> 3 LEXINGTON… 42D066… 420073   NA      NA      JCAHO         0        0         0
 #> # ℹ 28 more variables: hosp_ind <int>, non_ind <int>, tmp_ind <int>,
 #> #   term_type <chr>, app_type <chr>, cert_type <chr>, fac_type <chr>,
 #> #   own_type <chr>, act_type <chr>, chow_date <date>, orig_date <date>,

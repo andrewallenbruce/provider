@@ -18,12 +18,12 @@ list(
   organization = pac[7:9])
 #> $individual
 #>                V1
-#> first        MARK
-#> last         FUNG
-#> middle          K
-#> suffix       <NA>
 #> npi    1043245657
 #> pac    7810891009
+#> last         FUNG
+#> first        MARK
+#> middle          K
+#> suffix       <NA>
 #> 
 #> $organization
 #> # A tibble: 5 × 3
@@ -177,18 +177,18 @@ list(
 #> 
 #> $individual
 #> # A tibble: 206 × 6
-#>    first   last            middle suffix        npi pac       
-#>    <chr>   <chr>           <chr>  <chr>       <int> <chr>     
-#>  1 LAURA   GREENE          A      NA     1003845272 1759384035
-#>  2 NAROD   VASSILIAN       NA     NA     1013539584 9133544109
-#>  3 EMILY   TRIPLETT        NA     NA     1013595560 3375947401
-#>  4 JOSE    ACOSTAMADIEDO   M      NA     1013910256 5890719371
-#>  5 LINDSEY WILHELM         B      NA     1023377843 6901115278
-#>  6 ANTHONY TRAMONTANO      F      NA     1043397656 4183764558
-#>  7 VANESSA FIORINI FURTADO NA     NA     1043672140 7214229350
-#>  8 CONOR   O'NEILL         NA     NA     1053686196 9234432576
-#>  9 JOHN    YOUNG           NA     NA     1063420891 9436051687
-#> 10 ROBERT  BENAK           L      NA     1063423523 3476552878
+#>           npi pac        last            first   middle suffix
+#>         <int> <chr>      <chr>           <chr>   <chr>  <chr> 
+#>  1 1003845272 1759384035 GREENE          LAURA   A      NA    
+#>  2 1013539584 9133544109 VASSILIAN       NAROD   NA     NA    
+#>  3 1013595560 3375947401 TRIPLETT        EMILY   NA     NA    
+#>  4 1013910256 5890719371 ACOSTAMADIEDO   JOSE    M      NA    
+#>  5 1023377843 6901115278 WILHELM         LINDSEY B      NA    
+#>  6 1043397656 4183764558 TRAMONTANO      ANTHONY F      NA    
+#>  7 1043672140 7214229350 FIORINI FURTADO VANESSA NA     NA    
+#>  8 1053686196 9234432576 O'NEILL         CONOR   NA     NA    
+#>  9 1063420891 9436051687 YOUNG           JOHN    NA     NA    
+#> 10 1063423523 3476552878 BENAK           ROBERT  L      NA    
 #> # ℹ 196 more rows
 ```
 
@@ -210,12 +210,12 @@ list(
 #> 
 #> $individual
 #> # A tibble: 4 × 6
-#>   first   last     middle suffix        npi pac       
-#>   <chr>   <chr>    <chr>  <chr>       <int> <chr>     
-#> 1 JEFFREY KLOTZ    NA     NA     1073258398 3870095805
-#> 2 MARY    HALLORAN K      NA     1396989059 8921259557
-#> 3 IL      CHON     JUN    NA     1538173869 0547299091
-#> 4 DRAGOS  BANU     NA     NA     1558659367 6709004682
+#>          npi pac        last     first   middle suffix
+#>        <int> <chr>      <chr>    <chr>   <chr>  <chr> 
+#> 1 1073258398 3870095805 KLOTZ    JEFFREY NA     NA    
+#> 2 1396989059 8921259557 HALLORAN MARY    K      NA    
+#> 3 1538173869 0547299091 CHON     IL      JUN    NA    
+#> 4 1558659367 6709004682 BANU     DRAGOS  NA     NA
 ```
 
 That returns more affiliated individual providers that practice in the

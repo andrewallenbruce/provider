@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9141 (2026-05-05)
+
+- More tolerant column-renaming method
+- Pivot methods refactor
+
 ## provider 0.0.1.9140 (2026-05-05)
 
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
