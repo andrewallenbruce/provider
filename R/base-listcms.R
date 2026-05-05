@@ -29,6 +29,7 @@ list_cms <- function(
   ...,
   .count = FALSE,
   .set = FALSE,
+  .idcol,
   end = call_name(call_match(
     call = caller_call(),
     fn = caller_fn()
@@ -37,9 +38,11 @@ list_cms <- function(
   check_bool_(.count)
   check_bool_(.set)
   check_count_set(.count, .set)
+  check_char_(.idcol)
 
   ListCMS(
     end = end,
+    idcol = .idcol,
     query = build(param_cms(...)) %||% character(0),
     action = if (.count) {
       "count"
@@ -56,6 +59,7 @@ method(request_preview, ListCMS) <- function(x) {
   cli_empty(x@end)
   flatten_url(paste0(x@url, "?"), NULL, opts_cms(size = 10L)) |>
     multi_base(x@url) |>
+    rowbind2(x@idcol, fill = TRUE) |>
     add_class(x@end)
 }
 
@@ -64,6 +68,7 @@ method(request_single, ListCMS) <- function(x) {
   report_count(x)
   flatten_url(paste0(x@url, "?"), x@query, opts_cms()) |>
     multi_base(x@url) |>
+    rowbind2(x@idcol, fill = TRUE) |>
     add_class(x@end)
 }
 
@@ -76,5 +81,6 @@ method(request_multi, ListCMS) <- function(x) {
     opts_cms(offset = "<<i>>")
   ) |>
     multi_parallel(x@count, x@limit, x@url) |>
+    rowbind2(x@idcol, fill = TRUE) |>
     add_class(x@end)
 }

@@ -54,7 +54,7 @@ providers <- function(
     execute(
       cms(
         NPI = npi,
-        MULTIPLE_NPI_FLAG = bool_(multi),
+        MULTIPLE_NPI_FLAG = convert_bool(multi),
         PECOS_ASCT_CNTL_ID = pac,
         ENRLMT_ID = enid,
         PROVIDER_TYPE_CD = prov_type,
@@ -115,6 +115,7 @@ pending <- function(
         FIRST_NAME = first,
         .count = count,
         .set = set,
+        .idcol = "prov_type"
       )
     )
   )

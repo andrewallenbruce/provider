@@ -1,34 +1,4 @@
 #' @noRd
-RC_clia <- function(x) {
-  x <- collapse::av(
-    x,
-    facility_name = combine_cols(x$fac_name_1, x$fac_name_2),
-    address = combine_cols(x$add_1, x$add_2),
-    cert_type = clia_cert_type(x$cert_type),
-    own_type = clia_own_type(x$own_type),
-    fac_type = clia_fac_type(x$fac_type),
-    act_type = clia_act_type(x$act_type)
-  )
-
-  collapse::gvr(x, "fac_name_|add_") <- NULL
-
-  rc_bin(x, collapse::gvr(x, "_ind$", return = 3L)) |>
-    rc_date_ymd2(collapse::gvr(x, "_date$", return = 3L)) |>
-    rc_integer(
-      c(
-        "chown",
-        "sites",
-        "alabs",
-        "srv_vol",
-        "acr_vol",
-        "cmp_vol",
-        "ppm_vol",
-        "wvd_vol"
-      )
-    )
-}
-
-#' @noRd
 RC_esrd <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
   collapse::gvr(x, "add_") <- NULL

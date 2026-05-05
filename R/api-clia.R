@@ -79,28 +79,31 @@ clia <- function(
   check_char_(accreditation)
   check_bool_(compliant)
   check_bool_(active)
-  polish(
-    execute(
-      cms(
-        FAC_NAME = facility_name,
-        PRVDR_NUM = facility_ccn,
-        CLIA_MDCR_NUM = parent_ccn,
-        CRTFCT_TYPE_CD = enum_(certificate),
-        CITY_NAME = city,
-        STATE_CD = state,
-        ZIP_CD = zip,
-        CMPLNC_STUS_CD = cmp_(compliant),
-        PGM_TRMNTN_CD = act_(active),
-        !!!accr_(accreditation),
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    FAC_NAME = facility_name,
+    PRVDR_NUM = facility_ccn,
+    CLIA_MDCR_NUM = parent_ccn,
+    CRTFCT_TYPE_CD = tag_enum(certificate),
+    CITY_NAME = city,
+    STATE_CD = state,
+    ZIP_CD = zip,
+    CMPLNC_STUS_CD = convert_compliant(compliant),
+    PGM_TRMNTN_CD = convert_active(active),
+    !!!convert_accreditation(accreditation),
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  x <- polish(x)
+
+  return(x)
 }
 
 #' @noRd
-act_ <- function(x = NULL) {
+convert_active <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -108,7 +111,7 @@ act_ <- function(x = NULL) {
 }
 
 #' @noRd
-cmp_ <- function(x = NULL) {
+convert_compliant <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -116,10 +119,10 @@ cmp_ <- function(x = NULL) {
 }
 
 #' @noRd
-accr_ <- function(accreditation) {
+convert_accreditation <- function(accreditation) {
   if (is.null(accreditation)) {
     return(NULL)
   }
-  x <- enum_(accreditation)
+  x <- tag_enum(accreditation)
   set_names(as.list(rep.int("Y", length(x))), x)
 }

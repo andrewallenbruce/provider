@@ -107,11 +107,11 @@ hospitals <- function(
         CITY = city,
         STATE = state,
         `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = bool_(multi),
+        `MULTIPLE NPI FLAG` = convert_bool(multi),
         PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = enum_(org_type),
-        `PROVIDER TYPE CODE` = enum_(prov_type),
-        `PRACTICE LOCATION TYPE` = enum_(loc_type),
+        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+        `PROVIDER TYPE CODE` = tag_enum(prov_type),
+        `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
         !!!subgroup,
         .count = count,
         .set = set,
@@ -190,7 +190,7 @@ subgroups <- function(
       `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
       `SUBGROUP %2D OTHER` = other
     ),
-    bool_
+    convert_bool
   )
   structure(params(!!!x), class = "subgroups")
 }

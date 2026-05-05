@@ -5,7 +5,7 @@
 \title{Dialysis Facilities}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/23ew-n7w9}{API: Dialysis Facility - Listing by Facility}
 }
 }
 \usage{
@@ -13,7 +13,7 @@ esrd(
   ccn = NULL,
   facility_name = NULL,
   chain_name = NULL,
-  stars = NULL,
+  rating = NULL,
   network = NULL,
   address = NULL,
   city = NULL,
@@ -26,19 +26,19 @@ esrd(
 )
 }
 \arguments{
-\item{ccn}{\verb{<chr>} Individual National Provider Identifier}
+\item{ccn}{\verb{<chr>} Facility CMS Certification Number}
 
-\item{facility_name}{\verb{<chr>} facility type}
+\item{facility_name}{\verb{<chr>} Facility name}
 
-\item{chain_name}{\verb{<chr>} facility type}
+\item{chain_name}{\verb{<chr>} Name of the chain organization the facility is owned/managed by}
 
-\item{stars}{\verb{<int>} 1 - 5}
+\item{rating}{\verb{<int>} Facility's Quality of Care star rating (1 - 5)}
 
-\item{network}{\verb{<int>} 1 - 18}
+\item{network}{\verb{<int>} Numeric code for the network the facility participates in (1 - 18)}
 
-\item{address, city, state, zip, county}{\verb{<chr>} Individual provider's name}
+\item{address, city, state, zip, county}{\verb{<chr>} Facility's city, state, zip, county}
 
-\item{status}{\verb{<enum>} Non-profit or profit}
+\item{status}{\verb{<enum>} \code{Non-profit} or \code{profit}}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -48,8 +48,9 @@ esrd(
 A \link[tibble:tibble-package]{tibble}
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+A list of all dialysis facilities registered with Medicare that
+includes addresses and phone numbers, as well as services and quality of
+care provided.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
@@ -57,7 +58,7 @@ esrd(count = TRUE)
 
 esrd()
 
-esrd(stars = 1)
+esrd(rating = 1)
 
 esrd(network = 15:18)
 \dontshow{\}) # examplesIf}

@@ -8,8 +8,10 @@ rename_with <- function(x, nm) {
   if (rlang::is_null(nm)) {
     return(x)
   }
-  collapse::setrename(x, nm, .nse = FALSE)
-  collapse::gv(x, unlist_(nm))
+  collapse::rnm(x, nm, .nse = FALSE) |>
+    collapse::gv(unlist_(nm))
+  # collapse::setrename(x, nm, .nse = FALSE)
+  # collapse::gv(x, unlist_(nm))
 }
 
 #' @noRd
@@ -25,44 +27,32 @@ replace_nz <- function(i) {
 }
 
 #' @noRd
-rc_integerv <- function(x, v) {
-  collapse::settfmv(.data = x, vars = v, FUN = as.integer)
+rc_ <- function(.f) {
+  function(x, v) {
+    collapse::tfmv(.data = x, vars = v, FUN = .f)
+  }
 }
 
 #' @noRd
-rc_integer <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as.integer)
-}
+rc_integer <- rc_(as.integer)
 
 #' @noRd
-rc_integer_supp <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as_integer_supp)
-}
+rc_integer_supp <- rc_(as_integer_supp)
 
 #' @noRd
-rc_double <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as.double)
-}
+rc_double <- rc_(as.double)
 
 #' @noRd
-rc_bin <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = bin_col)
-}
+rc_bin <- rc_(bin_col)
 
 #' @noRd
-rc_date_ymd <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as_date_ymd)
-}
+rc_date_ymd <- rc_(as_date_ymd)
 
 #' @noRd
-rc_date_ymd2 <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as_date_ymd2)
-}
+rc_date_ymd2 <- rc_(as_date_ymd2)
 
 #' @noRd
-rc_date_mdy <- function(x, v) {
-  collapse::tfmv(.data = x, vars = v, FUN = as_date_mdy)
-}
+rc_date_mdy <- rc_(as_date_mdy)
 
 #' @noRd
 combine_cols <- function(e1, e2, sep = ", ") {

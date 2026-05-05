@@ -57,6 +57,7 @@ ListCMS <- new_class(
   package = NULL,
   properties = list(
     end = class_character,
+    idcol = class_character,
     url = new_property(
       class_list,
       getter = function(self) URL_ListCMS(self@end)

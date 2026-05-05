@@ -55,7 +55,7 @@ healthcare provider data from the Centers for Medicare and Medicaid Services
 unified, tidy API for querying complex datasets such as the NPPES NPI Registry,
 PECOS enrollment data, and hospital transparency records.
 
-## Purpose & Scope
+### Purpose & Scope
 
 Navigating the healthcare data ecosystem often involves disparate APIs with
 inconsistent field names and data structures. `provider` abstracts these
@@ -124,8 +124,8 @@ clinicians(
 ```{r}
 #| label: opted_out
 opt_out(
-  first = starts("B"),
-  specialty = starts("Oral"))
+  city = "Valdosta",
+  state = "GA")
 ```
 
 ##### :receipt: Order & Referral Eligibility
@@ -144,7 +144,7 @@ order_refer(
 ```{r}
 #| label: enrolled
 providers(
-  org_name = starts("SGMC"),
+  org_name = contains("SGMC"),
   state = "GA")
 ```
 
@@ -161,7 +161,7 @@ pending(
 
 ```{r}
 #| label: hospital
-hospitals(ccn = "110122")
+hospitals(org_dba = contains("SGMC"))
 ```
 
 ##### :test_tube: CLIA Laboratories

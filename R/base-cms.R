@@ -78,11 +78,19 @@ cms <- function(
     }
   )
 }
+#' @noRd
+flatten_cms <- function(url, query = NULL, ...) {
+  flatten_url(
+    base = paste0(url, "?"),
+    query %0% NULL,
+    opts_cms(...)
+  )
+}
 
 #' @noRd
 method(request_preview, CMS) <- function(x) {
   cli_empty(x@end)
-  flatten_url(paste0(x@url, "?"), NULL, opts_cms(size = 10L)) |>
+  flatten_cms(x@url, NULL, size = 10L) |>
     base_request() |>
     add_class(x@end)
 }
@@ -90,7 +98,7 @@ method(request_preview, CMS) <- function(x) {
 #' @noRd
 method(request_single, CMS) <- function(x) {
   report_count(x)
-  flatten_url(paste0(x@url, "?"), x@query, opts_cms()) |>
+  flatten_cms(x@url, x@query) |>
     base_request() |>
     add_class(x@end)
 }
@@ -98,11 +106,7 @@ method(request_single, CMS) <- function(x) {
 #' @noRd
 method(request_multi, CMS) <- function(x) {
   cli_pages(x@count, x@limit, x@end)
-  flatten_url(
-    paste0(x@url, "?"),
-    x@query %0% NULL,
-    opts_cms(offset = "<<i>>")
-  ) |>
+  flatten_cms(x@url, x@query %0% NULL, offset = "<<i>>") |>
     base_parallel(x@count, x@limit) |>
     add_class(x@end)
 }

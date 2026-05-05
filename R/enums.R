@@ -1,5 +1,5 @@
 #' @noRd
-bool_ <- function(x = NULL) {
+convert_bool <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -7,7 +7,7 @@ bool_ <- function(x = NULL) {
 }
 
 #' @noRd
-enum_ <- function(x = NULL, call = caller_env()) {
+tag_enum <- function(x = NULL, call = caller_env()) {
   if (is.null(x)) {
     return(NULL)
   }

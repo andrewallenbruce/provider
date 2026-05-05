@@ -172,9 +172,9 @@ polish.hospitals <- function(x) {
 
 #' @export
 polish.pending <- function(x) {
-  rowbind2(x, "prov_type", fill = TRUE) |>
-    replace_nz() |>
+  replace_nz(x) |>
     rename_with(c(
+      prov_type = "prov_type",
       FIRST_NAME = "first",
       LAST_NAME = "last",
       NPI = "npi"
@@ -209,7 +209,7 @@ polish.providers <- function(x) {
 
 #' @export
 polish.clia <- function(x) {
-  rename_with(
+  x <- rename_with(
     x,
     c(
       FAC_NAME = "fac_name_1",
@@ -225,19 +225,9 @@ polish.clia <- function(x) {
       CMPLNC_STUS_CD = "compliant",
       ST_ADR = "add_1",
       ADDTNL_ST_ADR = "add_2",
-      # PHNE_NUM = "phone_1",
-      # FAX_PHNE_NUM = "phone_2",
       CITY_NAME = "city",
       STATE_CD = "state",
       ZIP_CD = "zip",
-      # RGN_CD = "reg_cd",
-      # STATE_RGN_CD = "reg_st",
-      # SSA_STATE_CD = "ssa_st",
-      # SSA_CNTY_CD = "ssa_cty",
-      # FIPS_STATE_CD = "fips_st",
-      # FIPS_CNTY_CD = "fips_cty",
-      # CBSA_CD = "cbsa_1",
-      # CBSA_URBN_RRL_IND = "cbsa_2",
       ELGBLTY_SW = "elig_ind",
       PGM_TRMNTN_CD = "term_pgm",
       CLIA_TRMNTN_CD = "term_clia",
@@ -247,10 +237,8 @@ polish.clia <- function(x) {
       GNRL_CNTL_TYPE_CD = "own_type",
       CRTFCTN_ACTN_TYPE_CD = "act_type",
       ORGNL_PRTCPTN_DT = "orig_date",
-      # APLCTN_RCVD_DT = "app_date",
       CRTFCTN_DT = "cert_date",
       CRTFCT_EFCTV_DT = "eff_date",
-      # CRTFCT_MAIL_DT = "mail_date",
       TRMNTN_EXPRTN_DT = "term_date",
       # A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
       A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
@@ -288,10 +276,36 @@ polish.clia <- function(x) {
       DRCTLY_AFLTD_LAB_CNT = "alabs",
       LAB_SITE_CNT = "sites"
     )
-  ) |>
-    replace_nz() |>
-    RC_clia() |>
+  )
+  x <- replace_nz(x) |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_date_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
+    rc_integer(
+      c(
+        "chown",
+        "sites",
+        "alabs",
+        "srv_vol",
+        "acr_vol",
+        "cmp_vol",
+        "ppm_vol",
+        "wvd_vol"
+      )
+    ) |>
     data_frame()
+
+  x <- collapse::av(
+    x,
+    facility_name = combine_cols(x$fac_name_1, x$fac_name_2),
+    address = combine_cols(x$add_1, x$add_2),
+    cert_type = clia_cert_type(x$cert_type),
+    own_type = clia_own_type(x$own_type),
+    fac_type = clia_fac_type(x$fac_type),
+    act_type = clia_act_type(x$act_type)
+  )
+
+  collapse::gvr(x, "fac_name_|add_") <- NULL
+  return(x)
 }
 
 #' @export

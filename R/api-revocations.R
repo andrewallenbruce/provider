@@ -66,7 +66,7 @@ revocations <- function(
         MDL_NAME = middle,
         LAST_NAME = last,
         ORG_NAME = org_name,
-        MULTIPLE_NPI_FLAG = bool_(multi),
+        MULTIPLE_NPI_FLAG = convert_bool(multi),
         STATE_CD = state,
         PROVIDER_TYPE_DESC = prov_desc,
         REVOCATION_RSN = reason,
@@ -163,7 +163,7 @@ transparency <- function(
         Hosp_Address = address,
         City = city,
         State = state,
-        Action = enum_(action),
+        Action = tag_enum(action),
         .count = count,
         .set = set,
       )
