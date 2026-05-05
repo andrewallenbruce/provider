@@ -1,7 +1,8 @@
 # Dialysis Facilities
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+A list of all dialysis facilities registered with Medicare that includes
+addresses and phone numbers, as well as services and quality of care
+provided.
 
 ## Usage
 
@@ -10,7 +11,7 @@ esrd(
   ccn = NULL,
   facility_name = NULL,
   chain_name = NULL,
-  stars = NULL,
+  rating = NULL,
   network = NULL,
   address = NULL,
   city = NULL,
@@ -25,38 +26,40 @@ esrd(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Dialysis Facility - Listing by
+  Facility](https://data.cms.gov/provider-data/dataset/23ew-n7w9)
 
 ## Arguments
 
 - ccn:
 
-  `<chr>` Individual National Provider Identifier
+  `<chr>` Facility CMS Certification Number
 
 - facility_name:
 
-  `<chr>` facility type
+  `<chr>` Facility name
 
 - chain_name:
 
-  `<chr>` facility type
+  `<chr>` Name of the chain organization the facility is owned/managed
+  by
 
-- stars:
+- rating:
 
-  `<int>` 1 - 5
+  `<int>` Facility's Quality of Care star rating (1 - 5)
 
 - network:
 
-  `<int>` 1 - 18
+  `<int>` Numeric code for the network the facility participates in (1 -
+  18)
 
 - address, city, state, zip, county:
 
-  `<chr>` Individual provider's name
+  `<chr>` Facility's city, state, zip, county
 
 - status:
 
-  `<enum>` Non-profit or profit
+  `<enum>` `Non-profit` or `profit`
 
 - count:
 
@@ -101,7 +104,7 @@ esrd()
 #> 10 012513 BMA LANGDALE        5       8 Profit Fresenius… 1981-02-12 VALL… AL   
 #> # ℹ 3 more variables: zip <chr>, county <chr>, address <chr>
 
-esrd(stars = 1)
+esrd(rating = 1)
 #> ✔ esrd returned 823 results.
 #> # A tibble: 823 × 12
 #>    ccn    facility_name   stars network status chain_name cert_date  city  state

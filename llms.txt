@@ -26,7 +26,7 @@ Administration (HRSA). It provides a unified, tidy API for querying
 complex datasets such as the NPPES NPI Registry, PECOS enrollment data,
 and hospital transparency records.
 
-## Purpose & Scope
+### Purpose & Scope
 
 Navigating the healthcare data ecosystem often involves disparate APIs
 with inconsistent field names and data structures. `provider` abstracts
@@ -134,7 +134,7 @@ clinicians(
   org_name = starts("SGMC"),
   org_state = "GA")
 ✔ clinicians returned 167 results.
-# A tibble: 167 × 21
+# A tibble: 167 × 20
    first    middle last    suffix gender cred  school grad_year specialty    npi
  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
  1 MANDY    <NA>   LUCAS   <NA>   F      <NA>  MEHAR…      2011 FAMILY P… 1.35e9
@@ -148,32 +148,25 @@ clinicians(
  9 WENDY    <NA>   VANDEM… <NA>   F      MD    NORTH…      2000 PSYCHIAT… 1.39e9
 10 MYRA     <NA>   JORDAN  <NA>   F      <NA>  OTHER       2004 MARRIAGE… 1.46e9
 # ℹ 157 more rows
-# ℹ 11 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+# ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
 #   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#   org_phone <chr>, org_add <chr>, specialty <chr>
+#   org_add <chr>, specialty <chr>
 ```
 
 ##### 📤 Opt-Out Affidavits
 
 ``` r
 opt_out(
-  first = starts("B"),
-  specialty = starts("Oral"))
-✔ opt_out returned 214 results.
-# A tibble: 214 × 12
-          npi first last  specialty start_date end_date   updated    city  state
- *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
- 1 1689981722 Byron Capps Oral And… 2025-10-27 2027-10-27 2026-01-15 GREE… NC   
- 2 1295740603 Brian Pick… Oral Sur… 2012-03-23 2028-03-23 2026-04-16 COLO… CO   
- 3 1164493581 Brian Wilk… Oral Sur… 2012-05-10 2026-05-10 2024-06-15 LAWR… KS   
- 4 1114910668 Bern… Krupp Oral Sur… 2012-07-01 2026-07-01 2024-08-15 TOWS… MD   
- 5 1376656900 Brian Reig… Oral Sur… 2006-07-07 2026-07-07 2024-08-15 SPRI… PA   
- 6 1255308789 Brian Camp  Oral Sur… 2012-05-29 2026-05-29 2024-06-15 RALE… NC   
- 7 1780603688 Byron Henry Oral Sur… 2012-07-09 2026-07-09 2024-08-15 WORT… OH   
- 8 1760438410 Barry Coop… Oral Sur… 2012-07-22 2026-07-22 2024-08-15 HEWL… NY   
- 9 1730114950 Bob   Onei… Oral Sur… 2012-08-16 2026-08-16 2024-09-15 CHES… VA   
-10 1932137825 Brad… Trot… Oral Sur… 2017-02-09 2027-02-09 2025-03-17 HAMP… VA   
-# ℹ 204 more rows
+  city = "Valdosta",
+  state = "GA")
+✔ opt_out returned 4 results.
+# A tibble: 4 × 12
+         npi first  last  specialty start_date end_date   updated    city  state
+*      <int> <chr>  <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
+1 1992848659 Jeffe… Wood  Maxillof… 2016-01-11 2028-01-11 2026-02-16 VALD… GA   
+2 1073632659 Ferna… Alva… Oral Sur… 2017-07-01 2027-07-01 2025-08-15 VALD… GA   
+3 1811005655 Sonya  Merr… Plastic … 2022-01-01 2028-01-01 2026-01-15 VALD… GA   
+4 1720717887 Rebec… Schi… Mental H… 2024-03-22 2028-03-22 2026-04-16 VALD… GA   
 # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
 ```
 
@@ -206,7 +199,7 @@ order_refer(
 
 ``` r
 providers(
-  org_name = starts("SGMC"),
+  org_name = contains("SGMC"),
   state = "GA")
 ✔ providers returned 2 results.
 # A tibble: 2 × 11
@@ -225,27 +218,38 @@ pending(
 ✔ pending returned 551 results.
 • Physician     : 176
 • Non-Physician : 375
-# A tibble: 551 × 4
-   prov_type first     last                npi
- * <chr>     <chr>     <chr>             <int>
- 1 Physician BABATUNDE ADESEYE      1558204693
- 2 Physician MELISSA   ALDRIDGE     1073132429
- 3 Physician MIA       ALDRIDGE     1437890761
- 4 Physician ETHAN     ANGLE        1821939810
- 5 Physician SOCHIMA   ANIKE        1265019822
- 6 Physician HARLEY    ARRAUT-WHITE 1548906621
- 7 Physician JUAN      ARROYAVE     1104766104
- 8 Physician MARIAM    ATOBILOYE    1992405476
- 9 Physician ADESEYE   AWE          1942796479
-10 Physician KALENE    BADREE       1578405635
+# A tibble: 551 × 3
+   first     last                npi
+ * <chr>     <chr>             <int>
+ 1 BABATUNDE ADESEYE      1558204693
+ 2 MELISSA   ALDRIDGE     1073132429
+ 3 MIA       ALDRIDGE     1437890761
+ 4 ETHAN     ANGLE        1821939810
+ 5 SOCHIMA   ANIKE        1265019822
+ 6 HARLEY    ARRAUT-WHITE 1548906621
+ 7 JUAN      ARROYAVE     1104766104
+ 8 MARIAM    ATOBILOYE    1992405476
+ 9 ADESEYE   AWE          1942796479
+10 KALENE    BADREE       1578405635
 # ℹ 541 more rows
 ```
 
 ##### 🏥 Medicare Hospitals
 
 ``` r
-hospitals(ccn = "110122")
+hospitals(org_dba = contains("SGMC"))
 ✔ hospitals returned 1 result.
+# A tibble: 1 × 37
+  org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
+* <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
+1 SOUTH G… SGMC H… O202… GA         00-09     PART A P… 1.14e9     0 1101… 1052…
+# ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
+#   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
+#   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
+#   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
+#   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
+#   sub_otxt <int>, address <chr>
 ```
 
 ##### 🧪 CLIA Laboratories
@@ -255,26 +259,26 @@ clia(
   facility_name = starts("SGMC"),
   state = "GA")
 ✔ clia returned 32 results.
-# A tibble: 32 × 61
+# A tibble: 32 × 58
    facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
- * <chr>        <chr>      <chr>    <chr>      <chr> <chr> <date>      <int>
- 1 11D0022233   110122     <NA>     <NA>       <NA>  0     NA              0
- 2 11D0022241   110037     <NA>     <NA>       <NA>  0     NA              0
- 3 11D0265511   <NA>       <NA>     <NA>       <NA>  0     NA              0
- 4 11D0265607   258589220A <NA>     <NA>       <NA>  0     NA              0
- 5 11D0265646   110097     <NA>     <NA>       <NA>  0     NA              0
- 6 11D0265664   11-0112    <NA>     <NA>       <NA>  0     NA              0
- 7 11D0699064   256864445D <NA>     <NA>       <NA>  0     NA              0
- 8 11D0915865   <NA>       <NA>     <NA>       <NA>  0     NA              0
- 9 11D0933615   <NA>       <NA>     <NA>       <NA>  0     NA              0
-10 11D0948594   <NA>       <NA>     <NA>       <NA>  0     NA              0
+ * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
+ 1 11D0022233   110122     <NA>     <NA>       <NA>      0 NA              0
+ 2 11D0022241   110037     <NA>     <NA>       <NA>      0 NA              0
+ 3 11D0265511   <NA>       <NA>     <NA>       <NA>      0 NA              0
+ 4 11D0265607   258589220A <NA>     <NA>       <NA>      0 NA              0
+ 5 11D0265646   110097     <NA>     <NA>       <NA>      0 NA              0
+ 6 11D0265664   11-0112    <NA>     <NA>       <NA>      0 NA              0
+ 7 11D0699064   256864445D <NA>     <NA>       <NA>      0 NA              0
+ 8 11D0915865   <NA>       <NA>     <NA>       <NA>      0 NA              0
+ 9 11D0933615   <NA>       <NA>     <NA>       <NA>      0 NA              0
+10 11D0948594   <NA>       <NA>     <NA>       <NA>      0 NA              0
 # ℹ 22 more rows
-# ℹ 53 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
+# ℹ 50 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
 #   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
 #   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#   orig_date <date>, app_date <date>, cert_date <date>, eff_date <date>,
-#   mail_date <date>, term_date <date>, a2la_date <date>, a2la_ind <int>,
-#   aabb_date <date>, aabb_ind <int>, aoa_date <date>, aoa_ind <int>, …
+#   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
+#   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
+#   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>, …
 ```
 
 ##### 🔎 Hospital Transparency Enforcement

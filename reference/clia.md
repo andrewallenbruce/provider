@@ -181,9 +181,11 @@ clia(count = TRUE)
 #> • Rows  : 676,051
 #> • Pages : 136    
 #> 
+#> [1] 676051
 
 clia(compliant = FALSE, active = TRUE, count = TRUE)
 #> ✔ clia returned 2,578 results.
+#> [1] 2578
 
 clia(facility_ccn = provider:::cdc_labs$ccn)
 #> ✔ clia returned 6 results.
