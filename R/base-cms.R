@@ -89,7 +89,7 @@ flatten_cms <- function(url, query = NULL, ...) {
 
 #' @noRd
 method(request_preview, CMS) <- function(x) {
-  cli_empty(x@end)
+  report_empty()
   flatten_cms(x@url, NULL, size = 10L) |>
     base_request() |>
     add_class(x@end)
@@ -105,7 +105,7 @@ method(request_single, CMS) <- function(x) {
 
 #' @noRd
 method(request_multi, CMS) <- function(x) {
-  cli_pages(x@count, x@limit, x@end)
+  report_pages(x)
   flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit) |>
     add_class(x@end)

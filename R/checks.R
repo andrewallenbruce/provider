@@ -111,32 +111,6 @@ check_subgroups <- function(x) {
   }
 }
 
-# |=================|
-# | MODIFIER CHECKS |
-# |=================|
-
-#' @noRd
-check_dots <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (length(x) == 0L) {
-    cli::cli_abort("Dots ({.arg ...}) cannot be empty.", arg = arg, call = call)
-  }
-}
-
-#' @noRd
-check_named <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (!all2(rlang::have_name(x))) {
-    cli::cli_abort("All parameters must be named.", arg = arg, call = call)
-  }
-}
-
-
-#' @noRd
-check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (any2(rlang::have_name(x))) {
-    cli::cli_abort("Inputs cannot be named.", arg = arg, call = call)
-  }
-}
-
 # check_modifiers(param_pdc(ccn = excludes("ASGSAH")), "add")
 #' @noRd
 check_modifiers <- function(x, end) {
@@ -144,24 +118,11 @@ check_modifiers <- function(x, end) {
     if (any2(c(x) %in% c("ends", "excludes"))) {
       cli::cli_abort(
         c(
-          "Invalid {.cls modifier} usage: ",
-          "x" = "{.fn ends} & {.fn excludes} will not work with {.fn {end}}."
+          "Invalid {.cls modifier} used in {.fn {end}}: ",
+          "x" = "{.fn ends} & {.fn excludes} do not work with the underlying API."
         ),
         call = call2(end)
       )
     }
-  }
-}
-
-# param_pdc(ccn = excludes("ASGSAH", not_na()))
-# ParamPDC(list(ccn = excludes("ASGSAH")))
-#' @noRd
-check_not_modifier <- function(x, arg = caller_arg(x), call = caller_env()) {
-  if (any2(purrr::map_lgl(x, is_modifier))) {
-    cli::cli_abort(
-      "A {.cls modifier} cannot be an input to another {.cls modifier}.",
-      arg = arg,
-      call = call
-    )
   }
 }

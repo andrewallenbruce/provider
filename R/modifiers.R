@@ -44,10 +44,7 @@ NULL
 excludes <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "excludes",
     operator = "NOT+IN",
     value = x
   )
@@ -59,10 +56,7 @@ between <- function(x, y) {
   check_number_decimal(x)
   check_number_decimal(y)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "between",
     operator = "BETWEEN",
     value = c(x, y)
   )
@@ -73,10 +67,7 @@ between <- function(x, y) {
 contains <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "contains",
     operator = "CONTAINS",
     value = x
   )
@@ -87,10 +78,7 @@ contains <- function(x) {
 not <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "not",
     operator = "<>",
     value = x
   )
@@ -100,10 +88,7 @@ not <- function(x) {
 equals <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "equals",
     operator = "=",
     value = x
   )
@@ -127,10 +112,7 @@ greater <- function(x, equal = FALSE) {
   check_number_decimal(x)
   check_bool(equal)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "greater",
     operator = ifelse(!equal, ">", ">="),
     value = x
   )
@@ -142,10 +124,7 @@ less <- function(x, equal = FALSE) {
   check_number_decimal(x)
   check_bool(equal)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "less",
     operator = ifelse(!equal, "<", "<="),
     value = x
   )
@@ -156,10 +135,7 @@ less <- function(x, equal = FALSE) {
 starts <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "starts",
     operator = "STARTS WITH",
     value = x
   )
@@ -170,10 +146,7 @@ starts <- function(x) {
 ends <- function(x) {
   check_atomic(x)
   Modifier(
-    call_name(call_match(
-      call = caller_call(),
-      fn = caller_fn()
-    )),
+    "ends",
     operator = "ENDS WITH",
     value = x
   )

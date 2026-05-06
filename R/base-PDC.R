@@ -65,9 +65,13 @@ pdc <- function(
   check_bool_(.set)
   check_count_set(.count, .set)
 
+  x <- param_pdc(...)
+
+  check_modifiers(x, end)
+
   PDC(
     end = end,
-    query = build(param_pdc(...)) %||% character(0),
+    query = build(x) %||% character(0),
     action = if (.count) {
       "count"
     } else if (.set) {
@@ -89,7 +93,7 @@ flatten_pdc <- function(url, query = NULL, ...) {
 
 #' @noRd
 method(request_preview, PDC) <- function(x) {
-  cli_empty(x@end)
+  report_empty()
   flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results") |>
     add_class(x@end)
@@ -105,7 +109,7 @@ method(request_single, PDC) <- function(x) {
 
 #' @noRd
 method(request_multi, PDC) <- function(x) {
-  cli_pages(x@count, x@limit, x@end)
+  report_pages(x)
   flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)

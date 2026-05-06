@@ -16,29 +16,16 @@ cli_apis <- function(x) {
 }
 
 #' @noRd
-cli_empty <- function(endpoint) {
-  cli::cli_alert_warning(c(
-    "{.emph No Query} ",
-    cli::col_red(cli::symbol$pointer),
-    " Returning first {.strong 10} rows..."
-  ))
-  cli::cli_text()
-}
-
-#' @noRd
 cli_results <- function(x, endpoint) {
+  msg <- c(
+    "{.strong {endpoint}} returned ",
+    "{.strong {mark(x)}} ",
+    "{cli::qty(x)}result{?s}."
+  )
   if (x == 0L) {
-    cli::cli_alert_warning(c(
-      "{.strong {endpoint}} returned ",
-      "{.strong {mark(x)}} ",
-      "{cli::qty(x)}result{?s}."
-    ))
+    cli::cli_alert_warning(msg)
   } else {
-    cli::cli_alert_success(c(
-      "{.strong {endpoint}} returned ",
-      "{.strong {mark(x)}} ",
-      "{cli::qty(x)}result{?s}."
-    ))
+    cli::cli_alert_success(msg)
   }
 }
 

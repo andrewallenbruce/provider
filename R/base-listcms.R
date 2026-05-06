@@ -56,7 +56,7 @@ list_cms <- function(
 
 #' @noRd
 method(request_preview, ListCMS) <- function(x) {
-  cli_empty(x@end)
+  report_empty()
   flatten_cms(x@url, NULL, size = 10L) |>
     multi_base(x@url) |>
     rowbind2(x@idcol, fill = TRUE) |>
@@ -74,7 +74,7 @@ method(request_single, ListCMS) <- function(x) {
 
 #' @noRd
 method(request_multi, ListCMS) <- function(x) {
-  cli_pages2(x@count, x@limit, x@end)
+  report_pages(x)
   flatten_cms(x@url, x@query, offset = "<<i>>") |>
     multi_parallel(x@count, x@limit, x@url) |>
     rowbind2(x@idcol, fill = TRUE) |>
