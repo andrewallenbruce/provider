@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9142 (2026-05-05)
+
+- renaming column specs moved to internally exported list
+
 ## provider 0.0.1.9141 (2026-05-05)
 
 - More tolerant column-renaming method
