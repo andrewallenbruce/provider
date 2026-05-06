@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9144 (2026-05-06)
+
+* Modifier class now captures call name
+
+
 # provider 0.0.1.9143 (2026-05-06)
 
 * added more arguments to `clia()`
