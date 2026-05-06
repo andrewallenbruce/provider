@@ -116,7 +116,7 @@ revocations(state = "GA")
 #| label: clinician
 clinicians(
   org_name = starts("SGMC"),
-  org_state = "GA")
+  state = "GA")
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits

@@ -42,8 +42,23 @@
 #'    - `"cola"` = COLA
 #'    - `"jcaho"` = JCAHO
 #' @param city,state,zip `<chr>` Lab city, state, zip
-#' @param compliant `<lgl>` Return only compliant or non-compliant labs
+#' @param chow `<int>` Number of times there has been a Change of Ownership.
+#' @param compliant `<lgl>` Provider compliance status at time of certification
+#'   survey.
 #' @param active `<lgl>` Return only active labs
+#' @param multi `<lgl>` Indicates lab has applied for a single site CLIA to
+#'   cover multiple testing locations.
+#' @param campus `<lgl>` Indicates single site CLIA is for hospital with several
+#'   labs on a single hospital campus.
+#' @param non_profit `<lgl>` Indicates single site CLIA is for multiple sites
+#'   with non-profit, federal, state or local government status and engaged in
+#'   limited public health testing.
+#' @param eligible `<lgl>` Indicates lab is eligible to participate in
+#'   Medicare/Medicaid.
+#' @param temp_site `<lgl>` Indicates single site CLIA is for lab with multiple
+#'   temporary testing sites.
+#' @param poc `<lgl>` Indicates provider is in compliance with Plan of
+#'   Correction.
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
@@ -70,8 +85,15 @@ clia <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
+  chow = NULL,
   compliant = NULL,
   active = NULL,
+  multi = NULL,
+  campus = NULL,
+  non_profit = NULL,
+  eligible = NULL,
+  temp_site = NULL,
+  poc = NULL,
   count = FALSE,
   set = FALSE
 ) {
@@ -79,6 +101,13 @@ clia <- function(
   check_char_(accreditation)
   check_bool_(compliant)
   check_bool_(active)
+  check_bool_(multi)
+  check_bool_(campus)
+  check_bool_(non_profit)
+  check_bool_(eligible)
+  check_bool_(temp_site)
+  check_bool_(poc)
+  # check_numeric(chow)
 
   x <- cms(
     FAC_NAME = facility_name,
@@ -88,8 +117,15 @@ clia <- function(
     CITY_NAME = city,
     STATE_CD = state,
     ZIP_CD = zip,
+    CHOW_CNT = chow,
     CMPLNC_STUS_CD = convert_compliant(compliant),
     PGM_TRMNTN_CD = convert_active(active),
+    ELGBLTY_SW = convert_bool(eligible),
+    MLT_SITE_EXCPTN_SW = convert_bool(multi),
+    HOSP_LAB_EXCPTN_SW = convert_bool(campus),
+    NON_PRFT_EXCPTN_SW = convert_bool(non_profit),
+    LAB_TEMP_TSTG_SITE_SW = convert_bool(temp_site),
+    ACPTBL_POC_SW = convert_bool(poc),
     !!!convert_accreditation(accreditation),
     .count = count,
     .set = set,

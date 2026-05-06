@@ -24,8 +24,15 @@ clia(
   city = NULL,
   state = NULL,
   zip = NULL,
+  chow = NULL,
   compliant = NULL,
   active = NULL,
+  multi = NULL,
+  campus = NULL,
+  non_profit = NULL,
+  eligible = NULL,
+  temp_site = NULL,
+  poc = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -59,9 +66,31 @@ clia(
 
 \item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
 
-\item{compliant}{\verb{<lgl>} Return only compliant or non-compliant labs}
+\item{chow}{\verb{<int>} Number of times there has been a Change of Ownership.}
+
+\item{compliant}{\verb{<lgl>} Provider compliance status at time of certification
+survey.}
 
 \item{active}{\verb{<lgl>} Return only active labs}
+
+\item{multi}{\verb{<lgl>} Indicates lab has applied for a single site CLIA to
+cover multiple testing locations.}
+
+\item{campus}{\verb{<lgl>} Indicates single site CLIA is for hospital with several
+labs on a single hospital campus.}
+
+\item{non_profit}{\verb{<lgl>} Indicates single site CLIA is for multiple sites
+with non-profit, federal, state or local government status and engaged in
+limited public health testing.}
+
+\item{eligible}{\verb{<lgl>} Indicates lab is eligible to participate in
+Medicare/Medicaid.}
+
+\item{temp_site}{\verb{<lgl>} Indicates single site CLIA is for lab with multiple
+temporary testing sites.}
+
+\item{poc}{\verb{<lgl>} Indicates provider is in compliance with Plan of
+Correction.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 

@@ -13,6 +13,9 @@ rename_with <- function(x, endpoint) {
     !!!RE_NAME[[endpoint]],
     set = TRUE
   ))
+  collapse::gv(x, unlist_(RE_NAME[[endpoint]])) |>
+    replace_nz() |>
+    data_frame()
 }
 
 #' @noRd
