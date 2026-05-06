@@ -217,7 +217,7 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ═ clia Totals
+#> clia Totals
 #> • Rows  : 676,051
 #> • Pages : 136    
 #> 

@@ -114,7 +114,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospice_owner(count = TRUE)
-#> ═ hospice_owner Totals
+#> hospice_owner Totals
 #> • Rows  : 71,133
 #> • Pages : 15    
 #> 

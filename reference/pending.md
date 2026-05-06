@@ -48,7 +48,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 pending(count = TRUE)
-#> ═ pending Totals
+#> pending Totals
 #> • Rows  : 10,124
 #> • Pages : 3     
 #> 

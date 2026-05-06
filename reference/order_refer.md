@@ -93,7 +93,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 order_refer(count = TRUE)
-#> ═ order_refer Totals
+#> order_refer Totals
 #> • Rows  : 1,996,876
 #> • Pages : 400      
 #> 

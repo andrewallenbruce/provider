@@ -98,17 +98,17 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 snf_enroll(count = TRUE)
-#> ═ snf_enroll Totals
+#> snf_enroll Totals
 #> • Rows  : 14,426
 #> • Pages : 3     
 #> 
 
 snf_enroll() |> str()
-#> ═ snf_enroll Totals
+#> snf_enroll Totals
 #> • Rows  : 14,426
 #> • Pages : 3     
 #> 
-#> ! No Query ❯ Returning first 10 rows...
+#> ! No Query ❯ Returning first 10 rows.
 #> 
 #> tibble [10 × 19] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020801000000" "O20020805000004" "O20020814000007" "O20020814000013" ...

@@ -98,17 +98,17 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospice_enroll(count = TRUE)
-#> ═ hospice_enroll Totals
+#> hospice_enroll Totals
 #> • Rows  : 6,066
 #> • Pages : 2    
 #> 
 
 hospice_enroll() |> str()
-#> ═ hospice_enroll Totals
+#> hospice_enroll Totals
 #> • Rows  : 6,066
 #> • Pages : 2    
 #> 
-#> ! No Query ❯ Returning first 10 rows...
+#> ! No Query ❯ Returning first 10 rows.
 #> 
 #> tibble [10 × 17] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000008" "O20020813000010" "O20020820000009" "O20020823000006" ...

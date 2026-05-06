@@ -86,7 +86,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 affiliations(count = TRUE)
-#> ═ affiliations Totals
+#> affiliations Totals
 #> • Rows  : 1,638,995
 #> • Pages : 1,093    
 #> 
@@ -95,11 +95,11 @@ affiliations(count = TRUE, facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 
 affiliations()
-#> ═ affiliations Totals
+#> affiliations Totals
 #> • Rows  : 1,638,995
 #> • Pages : 1,093    
 #> 
-#> ! No Query ❯ Returning first 10 rows...
+#> ! No Query ❯ Returning first 10 rows.
 #> 
 #> # A tibble: 10 × 9
 #>    first  last  middle suffix    npi pac   facility_type facility_ccn parent_ccn

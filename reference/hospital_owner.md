@@ -114,7 +114,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 hospital_owner(count = TRUE)
-#> ═ hospital_owner Totals
+#> hospital_owner Totals
 #> • Rows  : 23,028
 #> • Pages : 5     
 #> 

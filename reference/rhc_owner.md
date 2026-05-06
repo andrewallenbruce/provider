@@ -114,7 +114,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 rhc_owner(count = TRUE)
-#> ═ rhc_owner Totals
+#> rhc_owner Totals
 #> • Rows  : 65,551
 #> • Pages : 14    
 #> 

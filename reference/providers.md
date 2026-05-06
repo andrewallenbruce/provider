@@ -85,7 +85,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 providers(count = TRUE)
-#> ═ providers Totals
+#> providers Totals
 #> • Rows  : 2,981,799
 #> • Pages : 597      
 #> 
@@ -94,11 +94,11 @@ providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results.
 
 providers()
-#> ═ providers Totals
+#> providers Totals
 #> • Rows  : 2,981,799
 #> • Pages : 597      
 #> 
-#> ! No Query ❯ Returning first 10 rows...
+#> ! No Query ❯ Returning first 10 rows.
 #> 
 #> # A tibble: 10 × 11
 #>    org_name first      middle last  state prov_type prov_desc    npi multi pac  

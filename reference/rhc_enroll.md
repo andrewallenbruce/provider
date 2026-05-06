@@ -98,17 +98,17 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 rhc_enroll(count = TRUE)
-#> ═ rhc_enroll Totals
+#> rhc_enroll Totals
 #> • Rows  : 5,530
 #> • Pages : 2    
 #> 
 
 rhc_enroll() |> str()
-#> ═ rhc_enroll Totals
+#> rhc_enroll Totals
 #> • Rows  : 5,530
 #> • Pages : 2    
 #> 
-#> ! No Query ❯ Returning first 10 rows...
+#> ! No Query ❯ Returning first 10 rows.
 #> 
 #> tibble [10 × 17] (S3: tbl_df/tbl/data.frame)
 #>  $ enid      : chr [1:10] "O20020813000023" "O20020813000025" "O20020814000001" "O20020814000004" ...

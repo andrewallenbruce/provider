@@ -105,7 +105,7 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> ═ opt_out Totals
+#> opt_out Totals
 #> • Rows  : 55,898
 #> • Pages : 12    
 #> 

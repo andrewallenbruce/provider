@@ -114,7 +114,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 snf_owner(count = TRUE)
-#> ═ snf_owner Totals
+#> snf_owner Totals
 #> • Rows  : 116,973
 #> • Pages : 24     
 #> 

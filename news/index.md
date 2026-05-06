@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9145 (2026-05-06)
+
+- Modifier check in PDC class
+- Reporting methods
+
 ## provider 0.0.1.9144 (2026-05-06)
 
 - Modifier class now captures call name

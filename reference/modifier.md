@@ -57,73 +57,73 @@ format.
 ``` r
 excludes(c("AL", "AK", "AZ"))
 #> <modifier[3]>
-#> Alias: eval
+#> Alias: excludes
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
 
 ends("bar")
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: ends
 #> Operator: ENDS WITH
 #> Value: bar
 
 starts("foo")
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: starts
 #> Operator: STARTS WITH
 #> Value: foo
 
 contains("baz")
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: contains
 #> Operator: CONTAINS
 #> Value: baz
 
 not("zzz")
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: not
 #> Operator: <>
 #> Value: zzz
 
 less(1000)
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: less
 #> Operator: <
 #> Value: 1000
 
 less(0.125, equal = TRUE)
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: less
 #> Operator: <=
 #> Value: 0.125
 
 greater(1000)
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: greater
 #> Operator: >
 #> Value: 1000
 
 greater(0.125, equal = TRUE)
 #> <modifier[1]>
-#> Alias: eval
+#> Alias: greater
 #> Operator: >=
 #> Value: 0.125
 
 between(0.125, 2)
 #> <modifier[2]>
-#> Alias: eval
+#> Alias: between
 #> Operator: BETWEEN
 #> Values: 0.125, 2
 
 not_blank()
 #> <modifier[1]>
-#> Alias: not_blank
+#> Alias: not
 #> Operator: <>
 #> Value: ""
 
 is_blank()
 #> <modifier[1]>
-#> Alias: is_blank
+#> Alias: equals
 #> Operator: =
 #> Value: ""
 ```

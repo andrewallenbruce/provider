@@ -94,7 +94,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 revocations(count = TRUE)
-#> ═ revocations Totals
+#> revocations Totals
 #> • Rows  : 7,465
 #> • Pages : 2    
 #> 
