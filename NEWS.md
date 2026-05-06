@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9146 (2026-05-06)
+
+* NOTE: odd rcmdcheck warnings, re: the `c()` function?:
+
+
 # provider 0.0.1.9145 (2026-05-06)
 
 * Modifier check in PDC class
