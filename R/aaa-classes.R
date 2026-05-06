@@ -2,7 +2,10 @@
 Modifier <- new_class(
   "Modifier",
   class_character,
-  properties = list(value = class_atomic)
+  properties = list(
+    operator = class_character,
+    value = class_atomic
+  )
 )
 
 #' @noRd

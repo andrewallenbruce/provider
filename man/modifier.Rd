@@ -38,9 +38,7 @@ starts(x)
 ends(x)
 }
 \arguments{
-\item{x}{input}
-
-\item{y}{input}
+\item{x, y}{input}
 
 \item{equal}{\verb{<lgl>} append \code{=} to \code{less()} or \code{greater()}}
 }
@@ -57,18 +55,28 @@ conditions, in the
 format.
 }
 \examples{
-list(
-   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-   `ends("bar")` = ends("bar"),
-   `starts("foo")` = starts("foo"),
-   `less(1000)` = less(1000),
-   `less(0.125, equal = TRUE)` = less(0.125, equal = TRUE),
-   `greater(1000)` = greater(1000),
-   `greater(0.125, equal = TRUE)` = greater(0.125, equal = TRUE),
-   `between(0.125, 2)` = between(0.125, 2),
-   `contains("baz")` = contains("baz"),
-   `not("zzz")` = not("zzz"),
-   `not_blank()` = not_blank(),
-   `is_blank()` = is_blank()
- )
+excludes(c("AL", "AK", "AZ"))
+
+ends("bar")
+
+starts("foo")
+
+contains("baz")
+
+not("zzz")
+
+less(1000)
+
+less(0.125, equal = TRUE)
+
+greater(1000)
+
+greater(0.125, equal = TRUE)
+
+between(0.125, 2)
+
+not_blank()
+
+is_blank()
+
 }

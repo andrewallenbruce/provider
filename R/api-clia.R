@@ -107,7 +107,7 @@ clia <- function(
   check_bool_(eligible)
   check_bool_(temp_site)
   check_bool_(poc)
-  # check_numeric(chow)
+  check_numeric(chow)
 
   x <- cms(
     FAC_NAME = facility_name,

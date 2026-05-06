@@ -12,7 +12,7 @@ preprocess <- function(x) {
   }
 
   O <- if (is_modifier(x)) {
-    S7_data(x)
+    x@operator
   } else if (length(V) > 1L) {
     "IN"
   } else {

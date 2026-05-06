@@ -2,15 +2,13 @@
 method(execute, API) <- function(x) {
   if (empty(x)) {
     report_total(x)
-    if (x@action == "set") {
-      return(request_multi(x))
-    }
 
-    if (x@action == "count") {
-      return(x@count)
-    }
-
-    return(request_preview(x))
+    switch(
+      x@action,
+      count = return(x@count),
+      set = return(request_multi(x)),
+      return(request_preview(x))
+    )
   }
 
   if (x@count == 0L || x@action == "count") {
@@ -28,13 +26,13 @@ method(execute, API) <- function(x) {
 method(execute, ListCMS) <- function(x) {
   if (empty(x)) {
     report_total(x)
-    if (x@action == "set") {
-      return(request_multi(x))
-    }
-    if (x@action == "count") {
-      return(x@count)
-    }
-    return(request_preview(x))
+
+    switch(
+      x@action,
+      count = return(x@count),
+      set = return(request_multi(x)),
+      return(request_preview(x))
+    )
   }
   if (sum2(x@count) == 0L || x@action == "count") {
     report_count(x)
@@ -58,8 +56,13 @@ method(execute, ListCMS) <- function(x) {
   cli::cli_text(cli::col_cyan("<modifier[{length(v)}]>"))
 
   cli::cli_text(c(
-    cli::col_silver("Operator: "),
+    cli::col_silver("Alias: "),
     cli::col_red(cli::style_bold(S7::S7_data(x)))
+  ))
+
+  cli::cli_text(c(
+    cli::col_silver("Operator: "),
+    cli::col_white(cli::style_bold(x@operator))
   ))
 
   cli::cli_text(

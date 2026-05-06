@@ -75,6 +75,33 @@ check_numeric <- function(
 }
 
 #' @noRd
+check_atomic <- function(
+  x,
+  ...,
+  allow_null = FALSE,
+  arg = caller_arg(x),
+  call = caller_env()
+) {
+  if (!missing(x)) {
+    if (rlang::is_bare_atomic(x)) {
+      return(invisible(NULL))
+    }
+    if (allow_null && is_null(x)) {
+      return(invisible(NULL))
+    }
+  }
+
+  rlang::stop_input_type(
+    x,
+    "an atomic vector",
+    ...,
+    allow_null = allow_null,
+    arg = arg,
+    call = call
+  )
+}
+
+#' @noRd
 check_subgroups <- function(x) {
   if (!is_subgroups(x)) {
     cli::cli_abort(c(
@@ -96,21 +123,29 @@ check_dots <- function(x, arg = caller_arg(x), call = caller_env()) {
 }
 
 #' @noRd
+check_named <- function(x, arg = caller_arg(x), call = caller_env()) {
+  if (!all2(rlang::have_name(x))) {
+    cli::cli_abort("All parameters must be named.", arg = arg, call = call)
+  }
+}
+
+
+#' @noRd
 check_unnamed <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (any2(rlang::have_name(x))) {
     cli::cli_abort("Inputs cannot be named.", arg = arg, call = call)
   }
 }
 
-# check_modifiers(param_prov(ccn = excludes("ASGSAH")), "add")
+# check_modifiers(param_pdc(ccn = excludes("ASGSAH")), "add")
 #' @noRd
 check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
-    if (any2(unlist_(x) %in% c("ENDS WITH", "NOT+IN"))) {
+    if (any2(c(x) %in% c("ends", "excludes"))) {
       cli::cli_abort(
         c(
           "Invalid {.cls modifier} usage: ",
-          "x" = "{.fn ends_with} & {.fn excludes} cannot be used with {.fn {end}}."
+          "x" = "{.fn ends} & {.fn excludes} will not work with {.fn {end}}."
         ),
         call = call2(end)
       )
@@ -118,7 +153,8 @@ check_modifiers <- function(x, end) {
   }
 }
 
-# param_prov(ccn = excludes("ASGSAH", not_na()))
+# param_pdc(ccn = excludes("ASGSAH", not_na()))
+# ParamPDC(list(ccn = excludes("ASGSAH")))
 #' @noRd
 check_not_modifier <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (any2(purrr::map_lgl(x, is_modifier))) {

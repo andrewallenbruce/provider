@@ -79,9 +79,18 @@ pdc <- function(
 }
 
 #' @noRd
+flatten_pdc <- function(url, query = NULL, ...) {
+  flatten_url(
+    base = url,
+    query %0% NULL,
+    opts_pdc(...)
+  )
+}
+
+#' @noRd
 method(request_preview, PDC) <- function(x) {
   cli_empty(x@end)
-  flatten_url(x@url, NULL, opts_pdc(limit = 10L)) |>
+  flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results") |>
     add_class(x@end)
 }
@@ -89,7 +98,7 @@ method(request_preview, PDC) <- function(x) {
 #' @noRd
 method(request_single, PDC) <- function(x) {
   report_count(x)
-  flatten_url(x@url, x@query, opts_pdc()) |>
+  flatten_pdc(x@url, x@query) |>
     base_request("results") |>
     add_class(x@end)
 }
@@ -97,7 +106,7 @@ method(request_single, PDC) <- function(x) {
 #' @noRd
 method(request_multi, PDC) <- function(x) {
   cli_pages(x@count, x@limit, x@end)
-  flatten_url(x@url, x@query %0% NULL, opts_pdc(offset = "<<i>>")) |>
+  flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)
 }

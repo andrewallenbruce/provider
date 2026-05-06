@@ -106,7 +106,7 @@ method(request_single, CMS) <- function(x) {
 #' @noRd
 method(request_multi, CMS) <- function(x) {
   cli_pages(x@count, x@limit, x@end)
-  flatten_cms(x@url, x@query %0% NULL, offset = "<<i>>") |>
+  flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit) |>
     add_class(x@end)
 }
