@@ -11,7 +11,7 @@
 #' @param equal `<lgl>` append `=` to `less()` or `greater()`
 #' @name modifier
 #' @examples
-#' excludes(c("AL", "AK", "AZ"))
+excludes(c("AL", "AK", "AZ"))
 #'
 #' ends("bar")
 #'

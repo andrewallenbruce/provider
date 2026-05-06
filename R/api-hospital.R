@@ -200,12 +200,4 @@ is_subgroups <- function(x) {
   inherits(x, "subgroups")
 }
 
-#' @export
-print.subgroups <- function(x, ...) {
-  v <- length(x)
-  cli::cli_text(cli::col_cyan("<subgroups[{length(v)}]>"))
-  if (v) {
-    cli_apis(x)
-  }
-  invisible(x)
-}
+

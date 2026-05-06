@@ -126,3 +126,73 @@ PDC <- new_class(
     )
   )
 )
+
+#' @noRd
+build <- new_generic("build", "x")
+
+#' @noRd
+execute <- new_generic("execute", "x")
+
+#' @noRd
+empty <- new_generic("empty", "x")
+
+#' @noRd
+method(empty, API) <- function(x) {
+  length(x@query) == 0L
+}
+
+#' @noRd
+request_preview <- new_generic("request_preview", "x")
+
+#' @noRd
+request_single <- new_generic("request_single", "x")
+
+#' @noRd
+request_multi <- new_generic("request_multi", "x")
+
+#' @noRd
+method(execute, API) <- function(x) {
+  if (empty(x)) {
+    report_total(x)
+
+    switch(
+      x@action,
+      count = return(x@count),
+      set = return(request_multi(x)),
+      return(request_preview(x))
+    )
+  }
+
+  if (x@count == 0L || x@action == "count") {
+    report_count(x)
+    return(x@count)
+  }
+
+  if (x@count <= x@limit) {
+    return(request_single(x))
+  }
+  request_multi(x)
+}
+
+#' @noRd
+method(execute, ListCMS) <- function(x) {
+  if (empty(x)) {
+    report_total(x)
+
+    switch(
+      x@action,
+      count = return(x@count),
+      set = return(request_multi(x)),
+      return(request_preview(x))
+    )
+  }
+  if (sum2(x@count) == 0L || x@action == "count") {
+    report_count(x)
+    return(x@count)
+  }
+
+  if (all2(x@count <= x@limit)) {
+    return(request_single(x))
+  }
+  request_multi(x)
+}

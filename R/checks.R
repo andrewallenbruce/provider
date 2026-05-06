@@ -115,7 +115,7 @@ check_subgroups <- function(x) {
 #' @noRd
 check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
-    if (any2(c(x) %in% c("ends", "excludes"))) {
+    if (any2(S7_data(x) %in% c("ends", "excludes"))) {
       cli::cli_abort(
         c(
           "Invalid {.cls modifier} used in {.fn {end}}: ",
