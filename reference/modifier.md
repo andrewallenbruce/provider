@@ -33,11 +33,7 @@ Parameters](https://jsonapi.org/format/#query-parameters)
 
 ## Arguments
 
-- x:
-
-  input
-
-- y:
+- x, y:
 
   input
 
@@ -59,78 +55,75 @@ format.
 ## Examples
 
 ``` r
-list(
-   `excludes(c("AL", "AK", "AZ"))` = excludes(c("AL", "AK", "AZ")),
-   `ends("bar")` = ends("bar"),
-   `starts("foo")` = starts("foo"),
-   `less(1000)` = less(1000),
-   `less(0.125, equal = TRUE)` = less(0.125, equal = TRUE),
-   `greater(1000)` = greater(1000),
-   `greater(0.125, equal = TRUE)` = greater(0.125, equal = TRUE),
-   `between(0.125, 2)` = between(0.125, 2),
-   `contains("baz")` = contains("baz"),
-   `not("zzz")` = not("zzz"),
-   `not_blank()` = not_blank(),
-   `is_blank()` = is_blank()
- )
-#> $`excludes(c("AL", "AK", "AZ"))`
+excludes(c("AL", "AK", "AZ"))
 #> <modifier[3]>
+#> Alias: eval
 #> Operator: NOT+IN
 #> Values: AL, AK, AZ
-#> 
-#> $`ends("bar")`
+
+ends("bar")
 #> <modifier[1]>
+#> Alias: eval
 #> Operator: ENDS WITH
 #> Value: bar
-#> 
-#> $`starts("foo")`
+
+starts("foo")
 #> <modifier[1]>
+#> Alias: eval
 #> Operator: STARTS WITH
 #> Value: foo
-#> 
-#> $`less(1000)`
+
+contains("baz")
 #> <modifier[1]>
-#> Operator: <
-#> Value: 1000
-#> 
-#> $`less(0.125, equal = TRUE)`
-#> <modifier[1]>
-#> Operator: <=
-#> Value: 0.125
-#> 
-#> $`greater(1000)`
-#> <modifier[1]>
-#> Operator: >
-#> Value: 1000
-#> 
-#> $`greater(0.125, equal = TRUE)`
-#> <modifier[1]>
-#> Operator: >=
-#> Value: 0.125
-#> 
-#> $`between(0.125, 2)`
-#> <modifier[2]>
-#> Operator: BETWEEN
-#> Values: 0.125, 2
-#> 
-#> $`contains("baz")`
-#> <modifier[1]>
+#> Alias: eval
 #> Operator: CONTAINS
 #> Value: baz
-#> 
-#> $`not("zzz")`
+
+not("zzz")
 #> <modifier[1]>
+#> Alias: eval
 #> Operator: <>
 #> Value: zzz
-#> 
-#> $`not_blank()`
+
+less(1000)
 #> <modifier[1]>
+#> Alias: eval
+#> Operator: <
+#> Value: 1000
+
+less(0.125, equal = TRUE)
+#> <modifier[1]>
+#> Alias: eval
+#> Operator: <=
+#> Value: 0.125
+
+greater(1000)
+#> <modifier[1]>
+#> Alias: eval
+#> Operator: >
+#> Value: 1000
+
+greater(0.125, equal = TRUE)
+#> <modifier[1]>
+#> Alias: eval
+#> Operator: >=
+#> Value: 0.125
+
+between(0.125, 2)
+#> <modifier[2]>
+#> Alias: eval
+#> Operator: BETWEEN
+#> Values: 0.125, 2
+
+not_blank()
+#> <modifier[1]>
+#> Alias: not_blank
 #> Operator: <>
 #> Value: ""
-#> 
-#> $`is_blank()`
+
+is_blank()
 #> <modifier[1]>
+#> Alias: is_blank
 #> Operator: =
 #> Value: ""
-#> 
 ```
