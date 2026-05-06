@@ -4,14 +4,15 @@ add_class <- function(x, endpoint) {
 }
 
 #' @noRd
-rename_with <- function(x, nm) {
-  if (rlang::is_null(nm)) {
+rename_with <- function(x, endpoint) {
+  if (rlang::is_null(RE_NAME[[endpoint]])) {
     return(x)
   }
-  collapse::rnm(x, nm, .nse = FALSE) |>
-    collapse::gv(unlist_(nm))
-  # collapse::setrename(x, nm, .nse = FALSE)
-  # collapse::gv(x, unlist_(nm))
+  rlang::inject(collapse::recode_char(
+    colnames(x),
+    !!!RE_NAME[[endpoint]],
+    set = TRUE
+  ))
 }
 
 #' @noRd

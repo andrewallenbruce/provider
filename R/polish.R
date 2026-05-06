@@ -10,95 +10,17 @@ polish <- function(x) {
 
 #' @export
 polish.affiliations <- function(x) {
-  collapse::recode_char(
-    colnames(x),
-    provider_first_name = "first",
-    provider_last_name = "last",
-    provider_middle_name = "middle",
-    suff = "suffix",
-    npi = "npi",
-    ind_pac_id = "pac",
-    facility_type = "facility_type",
-    facility_affiliations_certification_number = "facility_ccn",
-    facility_type_certification_number = "parent_ccn",
-    set = TRUE
-  )
-
-  replace_nz(x) |>
+  rename_with(x, "affiliations")
+  collapse::gv(x, unlist_(RE_NAME$affiliations)) |>
+    replace_nz() |>
     rc_integer("npi") |>
     data_frame()
 }
 
 #' @export
 polish.clia <- function(x) {
-  NAMES <- list(
-    FAC_NAME = "fac_1",
-    ADDTNL_FAC_NAME = "fac_2",
-    PRVDR_NUM = "fac_ccn",
-    CLIA_MDCR_NUM = "clia_ccn",
-    CROSS_REF_PROVIDER_NUMBER = "xrf_ccn",
-    SHARED_LAB_XREF_NUMBER = "shr_ccn",
-    # INTRMDRY_CARR_CD = "mac",
-    CHOW_CNT = "chow_cnt",
-    CHOW_DT = "chow_date",
-    ACPTBL_POC_SW = "poc_ind",
-    CMPLNC_STUS_CD = "compliant",
-    ST_ADR = "add_1",
-    ADDTNL_ST_ADR = "add_2",
-    CITY_NAME = "city",
-    STATE_CD = "state",
-    ZIP_CD = "zip",
-    ELGBLTY_SW = "elig_ind",
-    # PGM_TRMNTN_CD = "pgm_term",
-    CLIA_TRMNTN_CD = "term_type",
-    APLCTN_TYPE_CD = "app_type",
-    CRTFCT_TYPE_CD = "cert_type",
-    GNRL_FAC_TYPE_CD = "fac_type",
-    GNRL_CNTL_TYPE_CD = "own_type",
-    CRTFCTN_ACTN_TYPE_CD = "act_type",
-    ORGNL_PRTCPTN_DT = "orig_date",
-    CRTFCTN_DT = "cert_date",
-    CRTFCT_EFCTV_DT = "eff_date",
-    TRMNTN_EXPRTN_DT = "term_date",
-    # A2LA_ACRDTD_CD = "a2la_cred", # X=ACCREDITED
-    A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
-    A2LA_ACRDTD_Y_MATCH_SW = "a2la_ind",
-    # AABB_ACRDTD_CD = "aabb_cred",
-    AABB_ACRDTD_Y_MATCH_DT = "aabb_date",
-    AABB_ACRDTD_Y_MATCH_SW = "aabb_ind",
-    # AOA_ACRDTD_CD = "aoa_cred",
-    AOA_ACRDTD_Y_MATCH_DT = "aoa_date",
-    AOA_ACRDTD_Y_MATCH_SW = "aoa_ind",
-    # ASHI_ACRDTD_CD = "ashi_cred",
-    ASHI_ACRDTD_Y_MATCH_DT = "ashi_date",
-    ASHI_ACRDTD_Y_MATCH_SW = "ashi_ind",
-    # CAP_ACRDTD_CD = "cap_cred",
-    CAP_ACRDTD_Y_MATCH_DT = "cap_date",
-    CAP_ACRDTD_Y_MATCH_SW = "cap_ind",
-    # COLA_ACRDTD_CD = "cola_cred",
-    COLA_ACRDTD_Y_MATCH_DT = "cola_date",
-    COLA_ACRDTD_Y_MATCH_SW = "cola_ind",
-    # JCAHO_ACRDTD_CD = "jcaho_cred",
-    JCAHO_ACRDTD_Y_MATCH_DT = "jcaho_date",
-    JCAHO_ACRDTD_Y_MATCH_SW = "jcaho_ind",
-    # ACRDTN_SCHDL_CD = "acr_sch",
-    # FORM_1557_CRTFCT_SCHDL_CD = "crt_sch",
-    # FORM_1557_CMPLNC_SCHDL_CD = "cmp_sch",
-    FORM_1557_TEST_VOL_CNT = "srv_cnt",
-    FORM_116_ACRDTD_TEST_VOL_CNT = "acr_cnt",
-    FORM_116_TEST_VOL_CNT = "cmp_cnt",
-    PPMP_TEST_VOL_CNT = "ppm_cnt",
-    WVD_TEST_VOL_CNT = "wvd_cnt",
-    MLT_SITE_EXCPTN_SW = "multi_ind",
-    HOSP_LAB_EXCPTN_SW = "hosp_ind",
-    NON_PRFT_EXCPTN_SW = "non_ind",
-    LAB_TEMP_TSTG_SITE_SW = "tmp_ind",
-    DRCTLY_AFLTD_LAB_CNT = "alab_cnt",
-    LAB_SITE_CNT = "site_cnt"
-  )
-  rlang::inject(collapse::recode_char(colnames(x), !!!NAMES, set = TRUE))
-
-  x <- collapse::gv(x, unlist_(NAMES)) |>
+  rename_with(x, "clia")
+  x <- collapse::gv(x, unlist_(RE_NAME$clia)) |>
     replace_nz() |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
@@ -113,119 +35,12 @@ polish.clia <- function(x) {
 
   collapse::gvr(x, "_[12]$") <- NULL
 
-  collapse::recode_char(
-    x$term_type,
-    "00" = "Active",
-    "01" = "Voluntary-Merger/Closure",
-    "02" = "Voluntary-Reimbursement Dissatisfaction",
-    "03" = "Voluntary-Termination Risk",
-    "04" = "Voluntary-Other",
-    "05" = "Involuntary-Health/Safety Failure",
-    "06" = "Involuntary-Agreement Failure",
-    "07" = "Other Status Change",
-    "08" = "Fee Nonpayment (CLIA)",
-    "09" = "Unsuccessful PT (CLIA)",
-    "10" = "Other (CLIA)",
-    "11" = "Incomplete Application (CLIA)",
-    "12" = "Not Performing Tests (CLIA)",
-    "13" = "Multiple to Single Site (CLIA)",
-    "14" = "Shared Laboratory (CLIA)",
-    "15" = "Failure to Renew Waiver PPM (CLIA)",
-    "16" = "Duplicate CLIA (CLIA)",
-    "17" = "Mail Returned Cert Ended (CLIA)",
-    "20" = "Bankruptcy (CLIA)",
-    "33" = "Accreditation Unconfirmed (CLIA)",
-    "80" = "Awaiting State Approval",
-    "99" = "OIG Do Not Activate (CLIA)",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    x$cert_type,
-    "1" = "Compliance",
-    "2" = "Waiver",
-    "3" = "Accreditation",
-    "4" = "PPM",
-    "9" = "Registration",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    x$app_type,
-    "1" = "Compliance",
-    "2" = "Waiver",
-    "3" = "Accreditation",
-    "4" = "PPM",
-    "9" = "Registration",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    x$own_type,
-    "01" = "Religious Affiliation",
-    "02" = "Private",
-    "03" = "Other",
-    "04" = "Proprietary",
-    "05" = "Validation",
-    "05" = "Govt-City",
-    "06" = "Govt-County",
-    "07" = "Govt-State",
-    "08" = "Govt-Federal",
-    "09" = "Govt-Other",
-    "10" = "Unknown",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    x$fac_type,
-    "01" = "Ambulance",
-    "02" = "ASC",
-    "03" = "Ancillary Site",
-    "04" = "ALF",
-    "05" = "Blood Bank",
-    "06" = "Community Clinic",
-    "07" = "CORF",
-    "08" = "ESRD",
-    "09" = "FQHC",
-    "10" = "Health Fair",
-    "11" = "HMO",
-    "12" = "HHA",
-    "13" = "Hospice",
-    "14" = "Hospital",
-    "15" = "Independent",
-    "16" = "Industrial",
-    "17" = "Insurance",
-    "18" = "ICF-IID",
-    "19" = "Mobile Lab",
-    "20" = "Pharmacy",
-    "21" = "Physician",
-    "22" = "Other Practitioner",
-    "23" = "Prison",
-    "24" = "Public Health",
-    "25" = "RHC",
-    "26" = "SHS",
-    "27" = "SNF",
-    "28" = "Tissue Bank",
-    "29" = "Other",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    x$act_type,
-    "1" = "Initial",
-    "2" = "Recertification",
-    "3" = "Termination",
-    "4" = "Change of Ownership",
-    "5" = "Validation",
-    "8" = "Full Survey After Complaint",
-    default = NA_character_,
-    set = TRUE
-  )
+  RC_clia_term_type(x$term_type)
+  RC_clia_cert_type(x$cert_type)
+  RC_clia_cert_type(x$app_type)
+  RC_clia_own_type(x$own_type)
+  RC_clia_fac_type(x$fac_type)
+  RC_clia_act_type(x$act_type)
 
   x <- clia_acr_pivot(x)
 
@@ -246,32 +61,8 @@ polish.clia <- function(x) {
 
 #' @export
 polish.clinicians <- function(x) {
-  rename_with(
-    x,
-    c(
-      provider_first_name = "first",
-      provider_middle_name = "middle",
-      provider_last_name = "last",
-      suff = "suffix",
-      gndr = "gender",
-      cred = "cred",
-      med_sch = "school",
-      grd_yr = "grad_year",
-      pri_spec = "specialty",
-      sec_spec_all = "spec_other",
-      npi = "npi",
-      ind_pac_id = "pac",
-      ind_enrl_id = "enid",
-      facility_name = "org_name",
-      org_pac_id = "org_pac",
-      num_org_mem = "org_mem",
-      adr_ln_1 = "add_1",
-      adr_ln_2 = "add_2",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip"
-    )
-  ) |>
+  rename_with(x, "clinicians")
+  collapse::gv(x, unlist_(RE_NAME$clinicians)) |>
     replace_nz() |>
     RC_clinicians() |>
     data_frame()
@@ -285,56 +76,19 @@ polish.default <- function(x) {
 
 #' @export
 polish.esrd <- function(x) {
-  rename_with(
-    x,
-    c(
-      cms_certification_number_ccn = "ccn",
-      facility_name = "facility_name",
-      five_star = "rating",
-      network = "network",
-      profit_or_nonprofit = "status",
-      chain_organization = "chain_name",
-      certification_date = "cert_date",
-      address_line_1 = "add_1",
-      address_line_2 = "add_2",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip",
-      countyparish = "county"
-    )
-  ) |>
+  rename_with(x, "esrd")
+  collapse::gv(x, unlist_(RE_NAME$esrd)) |>
     replace_nz() |>
+    rc_integer(c("network", "rating")) |>
+    rc_date_ymd("cert_date") |>
     RC_esrd() |>
     data_frame()
 }
 
 #' @export
 polish.fqhc_enroll <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ENROLLMENT STATE` = "enid_state",
-      `PROVIDER TYPE CODE` = "prov_type",
-      `PROVIDER TYPE TEXT` = "prov_desc",
-      NPI = "npi",
-      `MULTIPLE NPI FLAG` = "multi",
-      CCN = "ccn",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "org_dba",
-      `INCORPORATION DATE` = "inc_date",
-      `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-      PROPRIETARY_NONPROFIT = "status",
-      `ADDRESS LINE 1` = "add_1",
-      `ADDRESS LINE 2` = "add_2",
-      CITY = "city",
-      STATE = "state",
-      `ZIP CODE` = "zip"
-    )
-  ) |>
+  rename_with(x, "fqhc_enroll")
+  collapse::gv(x, unlist_(RE_NAME$fqhc_enroll)) |>
     replace_nz() |>
     RC_fqhc_enroll() |>
     data_frame()
@@ -342,49 +96,8 @@ polish.fqhc_enroll <- function(x) {
 
 #' @export
 polish.fqhc_owner <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `ASSOCIATE ID - OWNER` = "own_pac",
-      `TYPE - OWNER` = "own_type",
-      `ROLE CODE - OWNER` = "own_code",
-      `ROLE TEXT - OWNER` = "own_role",
-      `ASSOCIATION DATE - OWNER` = "own_date",
-      `FIRST NAME - OWNER` = "own_first",
-      `MIDDLE NAME - OWNER` = "own_middle",
-      `LAST NAME - OWNER` = "own_last",
-      `TITLE - OWNER` = "own_title",
-      `ORGANIZATION NAME - OWNER` = "own_org",
-      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-      `ADDRESS LINE 1 - OWNER` = "own_add_1",
-      `ADDRESS LINE 2 - OWNER` = "own_add_2",
-      `CITY - OWNER` = "own_city",
-      `STATE - OWNER` = "own_state",
-      `ZIP CODE - OWNER` = "own_zip",
-      `PERCENTAGE OWNERSHIP` = "own_pct",
-      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-      `CORPORATION - OWNER` = "corp_ind",
-      `LLC - OWNER` = "llc_ind",
-      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-      `HOLDING COMPANY - OWNER` = "hld_ind",
-      `INVESTMENT FIRM - OWNER` = "inv_ind",
-      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-      `CONSULTING FIRM - OWNER` = "con_ind",
-      `FOR PROFIT - OWNER` = "fp_ind",
-      `NON PROFIT - OWNER` = "np_ind",
-      `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
-      `REIT - OWNER` = "reit_ind",
-      `CHAIN HOME OFFICE - OWNER` = "cho_ind",
-      `OTHER TYPE - OWNER` = "oth_ind",
-      `OTHER TYPE TEXT - OWNER` = "oth_txt",
-      `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    )
-  ) |>
+  rename_with(x, "fqhc_owner")
+  collapse::gv(x, unlist_(RE_NAME$fqhc_owner)) |>
     replace_nz() |>
     RC_fqhc_owner() |>
     data_frame()
@@ -392,29 +105,8 @@ polish.fqhc_owner <- function(x) {
 
 #' @export
 polish.hospice_enroll <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ENROLLMENT STATE` = "enid_state",
-      NPI = "npi",
-      `MULTIPLE NPI FLAG` = "multi",
-      CCN = "ccn",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "org_dba",
-      `INCORPORATION DATE` = "inc_date",
-      `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-      PROPRIETARY_NONPROFIT = "status",
-      `ADDRESS LINE 1` = "add_1",
-      `ADDRESS LINE 2` = "add_2",
-      CITY = "city",
-      STATE = "state",
-      `ZIP CODE` = "zip"
-    )
-  ) |>
+  rename_with(x, "hospice_enroll")
+  collapse::gv(x, unlist_(RE_NAME$hospice_enroll)) |>
     replace_nz() |>
     RC_rhc_enroll() |>
     data_frame()
@@ -422,49 +114,8 @@ polish.hospice_enroll <- function(x) {
 
 #' @export
 polish.hospice_owner <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `ASSOCIATE ID - OWNER` = "own_pac",
-      `TYPE - OWNER` = "own_type",
-      `ROLE CODE - OWNER` = "own_code",
-      `ROLE TEXT - OWNER` = "own_role",
-      `ASSOCIATION DATE - OWNER` = "own_date",
-      `FIRST NAME - OWNER` = "own_first",
-      `MIDDLE NAME - OWNER` = "own_middle",
-      `LAST NAME - OWNER` = "own_last",
-      `TITLE - OWNER` = "own_title",
-      `ORGANIZATION NAME - OWNER` = "own_org",
-      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-      `ADDRESS LINE 1 - OWNER` = "own_add_1",
-      `ADDRESS LINE 2 - OWNER` = "own_add_2",
-      `CITY - OWNER` = "own_city",
-      `STATE - OWNER` = "own_state",
-      `ZIP CODE - OWNER` = "own_zip",
-      `PERCENTAGE OWNERSHIP` = "own_pct",
-      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-      `CORPORATION - OWNER` = "corp_ind",
-      `LLC - OWNER` = "llc_ind",
-      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-      `HOLDING COMPANY - OWNER` = "hld_ind",
-      `INVESTMENT FIRM - OWNER` = "inv_ind",
-      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-      `CONSULTING FIRM - OWNER` = "con_ind",
-      `FOR PROFIT - OWNER` = "fp_ind",
-      `NON PROFIT - OWNER` = "np_ind",
-      `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
-      `REIT - OWNER` = "reit_ind",
-      `CHAIN HOME OFFICE - OWNER` = "cho_ind",
-      `OTHER TYPE - OWNER` = "oth_ind",
-      `OTHER TYPE TEXT - OWNER` = "oth_txt",
-      `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    )
-  ) |>
+  rename_with(x, "hospice_owner")
+  collapse::gv(x, unlist_(RE_NAME$hospice_owner)) |>
     replace_nz() |>
     RC_rhc_owner() |>
     data_frame()
@@ -472,45 +123,8 @@ polish.hospice_owner <- function(x) {
 
 #' @export
 polish.hospital_owner <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `ASSOCIATE ID - OWNER` = "own_pac",
-      `TYPE - OWNER` = "own_type",
-      `ROLE CODE - OWNER` = "own_code",
-      `ROLE TEXT - OWNER` = "own_role",
-      `ASSOCIATION DATE - OWNER` = "own_date",
-      `FIRST NAME - OWNER` = "own_first",
-      `MIDDLE NAME - OWNER` = "own_middle",
-      `LAST NAME - OWNER` = "own_last",
-      `TITLE - OWNER` = "own_title",
-      `ORGANIZATION NAME - OWNER` = "own_org",
-      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-      `ADDRESS LINE 1 - OWNER` = "own_add_1",
-      `ADDRESS LINE 2 - OWNER` = "own_add_2",
-      `CITY - OWNER` = "own_city",
-      `STATE - OWNER` = "own_state",
-      `ZIP CODE - OWNER` = "own_zip",
-      `PERCENTAGE OWNERSHIP` = "own_pct",
-      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-      `CORPORATION - OWNER` = "corp_ind",
-      `LLC - OWNER` = "llc_ind",
-      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-      `HOLDING COMPANY - OWNER` = "hld_ind",
-      `INVESTMENT FIRM - OWNER` = "inv_ind",
-      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-      `CONSULTING FIRM - OWNER` = "con_ind",
-      `FOR PROFIT - OWNER` = "fp_ind",
-      `NON PROFIT - OWNER` = "np_ind",
-      `OTHER TYPE - OWNER` = "oth_ind",
-      `OTHER TYPE TEXT - OWNER` = "oth_txt"
-    )
-  ) |>
+  rename_with(x, "hospital_owner")
+  collapse::gv(x, unlist_(RE_NAME$hospital_owner)) |>
     replace_nz() |>
     RC_rhc_owner() |>
     data_frame()
@@ -518,49 +132,8 @@ polish.hospital_owner <- function(x) {
 
 #' @export
 polish.hospitals <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "org_dba",
-      `ENROLLMENT ID` = "enid",
-      `ENROLLMENT STATE` = "enid_state",
-      `PROVIDER TYPE CODE` = "prov_type",
-      `PROVIDER TYPE TEXT` = "prov_desc",
-      NPI = "npi",
-      `MULTIPLE NPI FLAG` = "multi",
-      CCN = "ccn",
-      `ASSOCIATE ID` = "pac",
-      `INCORPORATION DATE` = "inc_date",
-      `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-      `PROPRIETARY NONPROFIT` = "status",
-      `ADDRESS LINE 1` = "add_1",
-      `ADDRESS LINE 2` = "add_2",
-      CITY = "city",
-      STATE = "state",
-      `ZIP CODE` = "zip",
-      `PRACTICE LOCATION TYPE` = "loc_type",
-      `LOCATION OTHER TYPE TEXT` = "loc_otxt",
-      `REH CONVERSION DATE` = "reh_date",
-      `CAH OR HOSPITAL CCN` = "reh_ccn",
-      `SUBGROUP - ACUTE CARE` = "sub_acute",
-      `SUBGROUP - GENERAL` = "sub_gen",
-      `SUBGROUP - SPECIALTY HOSPITAL` = "sub_spec",
-      `SUBGROUP - ALCOHOL DRUG` = "sub_adu",
-      `SUBGROUP - CHILDRENS` = "sub_child",
-      `SUBGROUP - LONG-TERM` = "sub_ltc",
-      `SUBGROUP - PSYCHIATRIC` = "sub_psy",
-      `SUBGROUP - REHABILITATION` = "sub_irf",
-      `SUBGROUP - SHORT-TERM` = "sub_stc",
-      `SUBGROUP - SWING-BED APPROVED` = "sub_sba",
-      `SUBGROUP - PSYCHIATRIC UNIT` = "sub_psu",
-      `SUBGROUP - REHABILITATION UNIT` = "sub_iru",
-      `SUBGROUP - OTHER` = "sub_oth",
-      `SUBGROUP - OTHER TEXT` = "sub_otxt"
-    )
-  ) |>
+  rename_with(x, "hospitals")
+  collapse::gv(x, unlist_(RE_NAME$hospitals)) |>
     replace_nz() |>
     RC_hospitals() |>
     data_frame()
@@ -568,21 +141,8 @@ polish.hospitals <- function(x) {
 
 #' @export
 polish.hospitals2 <- function(x) {
-  rename_with(
-    x,
-    c(
-      facility_id = "ccn",
-      facility_name = "org_name",
-      hospital_type = "hosp_type",
-      hospital_ownership = "ownership",
-      hospital_overall_rating = "rating",
-      address = "address",
-      citytown = "city",
-      state = "state",
-      zip_code = "zip",
-      countyparish = "county"
-    )
-  ) |>
+  rename_with(x, "hospitals2")
+  collapse::gv(x, unlist_(RE_NAME$hospitals2)) |>
     replace_nz() |>
     rc_integer_supp("rating") |>
     data_frame()
@@ -595,24 +155,8 @@ polish.integer <- function(x) {
 
 #' @export
 polish.opt_out <- function(x) {
-  rename_with(
-    x,
-    c(
-      NPI = "npi",
-      `First Name` = "first",
-      `Last Name` = "last",
-      Specialty = "specialty",
-      `Optout Effective Date` = "start_date",
-      `Optout End Date` = "end_date",
-      `Last updated` = "updated",
-      `First Line Street Address` = "add_1",
-      `Second Line Street Address` = "add_2",
-      `City Name` = "city",
-      `State Code` = "state",
-      `Zip code` = "zip",
-      `Eligible to Order and Refer` = "order_refer"
-    )
-  ) |>
+  rename_with(x, "opt_out")
+  collapse::gv(x, unlist_(RE_NAME$opt_out)) |>
     replace_nz() |>
     RC_opt_out() |>
     data_frame()
@@ -620,19 +164,8 @@ polish.opt_out <- function(x) {
 
 #' @export
 polish.order_refer <- function(x) {
-  rename_with(
-    x,
-    c(
-      FIRST_NAME = "first",
-      LAST_NAME = "last",
-      NPI = "npi",
-      PARTB = "ptb",
-      DME = "dme",
-      HHA = "hha",
-      PMD = "pmd",
-      HOSPICE = "hospice"
-    )
-  ) |>
+  rename_with(x, "order_refer")
+  collapse::gv(x, unlist_(RE_NAME$order_refer)) |>
     replace_nz() |>
     rc_integer("npi") |>
     rc_bin(c("ptb", "dme", "hha", "pmd", "hospice")) |>
@@ -641,35 +174,17 @@ polish.order_refer <- function(x) {
 
 #' @export
 polish.pending <- function(x) {
-  replace_nz(x) |>
-    rename_with(c(
-      prov_type = "prov_type",
-      FIRST_NAME = "first",
-      LAST_NAME = "last",
-      NPI = "npi"
-    )) |>
+  rename_with(x, "pending")
+  collapse::gv(x, unlist_(RE_NAME$pending)) |>
+    replace_nz() |>
     rc_integer("npi") |>
     data_frame()
 }
 
 #' @export
 polish.providers <- function(x) {
-  rename_with(
-    x,
-    c(
-      ORG_NAME = "org_name",
-      FIRST_NAME = "first",
-      MDL_NAME = "middle",
-      LAST_NAME = "last",
-      STATE_CD = "state",
-      PROVIDER_TYPE_CD = "prov_type",
-      PROVIDER_TYPE_DESC = "prov_desc",
-      NPI = "npi",
-      MULTIPLE_NPI_FLAG = "multi",
-      PECOS_ASCT_CNTL_ID = "pac",
-      ENRLMT_ID = "enid"
-    )
-  ) |>
+  rename_with(x, "providers")
+  collapse::gv(x, unlist_(RE_NAME$providers)) |>
     replace_nz() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -678,25 +193,8 @@ polish.providers <- function(x) {
 
 #' @export
 polish.reassignments <- function(x) {
-  rename_with(
-    x,
-    c(
-      `Individual First Name` = "first",
-      `Individual Last Name` = "last",
-      `Individual State Code` = "state",
-      `Individual Specialty Description` = "specialty",
-      `Individual Total Employer Associations` = "employers",
-      `Individual NPI` = "npi",
-      `Individual PAC ID` = "pac",
-      `Individual Enrollment ID` = "enid",
-      `Group Legal Business Name` = "org_name",
-      `Group Reassignments and Physician Assistants` = "employees",
-      `Group PAC ID` = "org_pac",
-      `Group Enrollment ID` = "org_enid",
-      `Group State Code` = "org_state",
-      `Record Type` = "rec_type"
-    )
-  ) |>
+  rename_with(x, "reassignments")
+  collapse::gv(x, unlist_(RE_NAME$reassignments)) |>
     replace_nz() |>
     rc_integer(c("npi", "employers", "employees")) |>
     data_frame()
@@ -704,29 +202,8 @@ polish.reassignments <- function(x) {
 
 #' @export
 polish.rhc_enroll <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ENROLLMENT STATE` = "enid_state",
-      NPI = "npi",
-      `MULTIPLE NPI FLAG` = "multi",
-      CCN = "ccn",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "org_dba",
-      `INCORPORATION DATE` = "inc_date",
-      `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-      PROPRIETARY_NONPROFIT = "status",
-      `ADDRESS LINE 1` = "add_1",
-      `ADDRESS LINE 2` = "add_2",
-      CITY = "city",
-      STATE = "state",
-      `ZIP CODE` = "zip"
-    )
-  ) |>
+  rename_with(x, "rhc_enroll")
+  collapse::gv(x, unlist_(RE_NAME$rhc_enroll)) |>
     replace_nz() |>
     RC_rhc_enroll() |>
     data_frame()
@@ -734,49 +211,8 @@ polish.rhc_enroll <- function(x) {
 
 #' @export
 polish.rhc_owner <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `ASSOCIATE ID - OWNER` = "own_pac",
-      `TYPE - OWNER` = "own_type",
-      `ROLE CODE - OWNER` = "own_code",
-      `ROLE TEXT - OWNER` = "own_role",
-      `ASSOCIATION DATE - OWNER` = "own_date",
-      `FIRST NAME - OWNER` = "own_first",
-      `MIDDLE NAME - OWNER` = "own_middle",
-      `LAST NAME - OWNER` = "own_last",
-      `TITLE - OWNER` = "own_title",
-      `ORGANIZATION NAME - OWNER` = "own_org",
-      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-      `ADDRESS LINE 1 - OWNER` = "own_add_1",
-      `ADDRESS LINE 2 - OWNER` = "own_add_2",
-      `CITY - OWNER` = "own_city",
-      `STATE - OWNER` = "own_state",
-      `ZIP CODE - OWNER` = "own_zip",
-      `PERCENTAGE OWNERSHIP` = "own_pct",
-      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-      `CORPORATION - OWNER` = "corp_ind",
-      `LLC - OWNER` = "llc_ind",
-      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-      `HOLDING COMPANY - OWNER` = "hld_ind",
-      `INVESTMENT FIRM - OWNER` = "inv_ind",
-      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-      `CONSULTING FIRM - OWNER` = "con_ind",
-      `FOR PROFIT - OWNER` = "fp_ind",
-      `NON PROFIT - OWNER` = "np_ind",
-      `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
-      `REIT - OWNER` = "reit_ind",
-      `CHAIN HOME OFFICE - OWNER` = "cho_ind",
-      `OTHER TYPE - OWNER` = "oth_ind",
-      `OTHER TYPE TEXT - OWNER` = "oth_txt",
-      `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-    )
-  ) |>
+  rename_with(x, "rhc_owner")
+  collapse::gv(x, unlist_(RE_NAME$rhc_owner)) |>
     replace_nz() |>
     RC_rhc_owner() |>
     data_frame()
@@ -784,23 +220,8 @@ polish.rhc_owner <- function(x) {
 
 #' @export
 polish.revocations <- function(x) {
-  rename_with(
-    x,
-    c(
-      ORG_NAME = "org_name",
-      FIRST_NAME = "first",
-      MDL_NAME = "middle",
-      LAST_NAME = "last",
-      ENRLMT_ID = "enid",
-      NPI = "npi",
-      MULTIPLE_NPI_FLAG = "multi",
-      STATE_CD = "state",
-      PROVIDER_TYPE_DESC = "prov_desc",
-      REVOCATION_RSN = "reason",
-      REVOCATION_EFCTV_DT = "start_date",
-      REENROLLMENT_BAR_EXPRTN_DT = "end_date"
-    )
-  ) |>
+  rename_with(x, "revocations")
+  collapse::gv(x, unlist_(RE_NAME$revocations)) |>
     replace_nz() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -810,31 +231,8 @@ polish.revocations <- function(x) {
 
 #' @export
 polish.snf_enroll <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ENROLLMENT STATE` = "enid_state",
-      NPI = "npi",
-      `MULTIPLE NPI FLAG` = "multi",
-      CCN = "ccn",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `DOING BUSINESS AS NAME` = "org_dba",
-      `INCORPORATION DATE` = "inc_date",
-      `INCORPORATION STATE` = "inc_state",
-      `ORGANIZATION TYPE STRUCTURE` = "org_type",
-      `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-      PROPRIETARY_NONPROFIT = "status",
-      `NURSING HOME PROVIDER NAME` = "nh_name",
-      `AFFILIATION ENTITY NAME` = "aff_name",
-      `ADDRESS LINE 1` = "add_1",
-      `ADDRESS LINE 2` = "add_2",
-      CITY = "city",
-      STATE = "state",
-      `ZIP CODE` = "zip"
-    )
-  ) |>
+  rename_with(x, "snf_enroll")
+  collapse::gv(x, unlist_(RE_NAME$snf_enroll)) |>
     replace_nz() |>
     RC_rhc_enroll() |>
     data_frame()
@@ -842,45 +240,8 @@ polish.snf_enroll <- function(x) {
 
 #' @export
 polish.snf_owner <- function(x) {
-  rename_with(
-    x,
-    c(
-      `ENROLLMENT ID` = "enid",
-      `ASSOCIATE ID` = "pac",
-      `ORGANIZATION NAME` = "org_name",
-      `ASSOCIATE ID - OWNER` = "own_pac",
-      `TYPE - OWNER` = "own_type",
-      `ROLE CODE - OWNER` = "own_code",
-      `ROLE TEXT - OWNER` = "own_role",
-      `ASSOCIATION DATE - OWNER` = "own_date",
-      `FIRST NAME - OWNER` = "own_first",
-      `MIDDLE NAME - OWNER` = "own_middle",
-      `LAST NAME - OWNER` = "own_last",
-      `TITLE - OWNER` = "own_title",
-      `ORGANIZATION NAME - OWNER` = "own_org",
-      `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-      `ADDRESS LINE 1 - OWNER` = "own_add_1",
-      `ADDRESS LINE 2 - OWNER` = "own_add_2",
-      `CITY - OWNER` = "own_city",
-      `STATE - OWNER` = "own_state",
-      `ZIP CODE - OWNER` = "own_zip",
-      `PERCENTAGE OWNERSHIP` = "own_pct",
-      `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-      `CORPORATION - OWNER` = "corp_ind",
-      `LLC - OWNER` = "llc_ind",
-      `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-      `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-      `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-      `HOLDING COMPANY - OWNER` = "hld_ind",
-      `INVESTMENT FIRM - OWNER` = "inv_ind",
-      `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-      `CONSULTING FIRM - OWNER` = "con_ind",
-      `FOR PROFIT - OWNER` = "fp_ind",
-      `NON PROFIT - OWNER` = "np_ind",
-      `OTHER TYPE - OWNER` = "oth_ind",
-      `OTHER TYPE TEXT - OWNER` = "oth_txt"
-    )
-  ) |>
+  rename_with(x, "snf_owner")
+  collapse::gv(x, unlist_(RE_NAME$snf_owner)) |>
     replace_nz() |>
     RC_rhc_owner() |>
     data_frame()
@@ -888,18 +249,8 @@ polish.snf_owner <- function(x) {
 
 #' @export
 polish.transparency <- function(x) {
-  rename_with(
-    x,
-    c(
-      Case_ID = "case",
-      Hosp_Name = "name",
-      Hosp_Address = "address",
-      City = "city",
-      State = "state",
-      Action = "action",
-      Date_of_Action = "action_date"
-    )
-  ) |>
+  rename_with(x, "transparency")
+  collapse::gv(x, unlist_(RE_NAME$transparency)) |>
     replace_nz() |>
     rc_integer("case") |>
     rc_date_ymd("action_date") |>
