@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9143 (2026-05-06)
+
+- added more arguments to
+  [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
+- deduped a chunk of polish code
+
 ## provider 0.0.1.9142 (2026-05-05)
 
 - renaming column specs moved to internally exported list

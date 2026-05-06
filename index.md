@@ -132,7 +132,7 @@ revocations(state = "GA")
 ``` r
 clinicians(
   org_name = starts("SGMC"),
-  org_state = "GA")
+  state = "GA")
 ✔ clinicians returned 167 results.
 # A tibble: 167 × 20
    first    middle last    suffix gender cred  school grad_year specialty    npi
@@ -149,8 +149,8 @@ clinicians(
 10 MYRA     <NA>   JORDAN  <NA>   F      <NA>  OTHER       2004 MARRIAGE… 1.46e9
 # ℹ 157 more rows
 # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#   org_mem <int>, org_city <chr>, org_state <chr>, org_zip <chr>,
-#   org_add <chr>, specialty <chr>
+#   org_mem <int>, city <chr>, state <chr>, zip <chr>, org_add <chr>,
+#   specialty <chr>
 ```
 
 ##### 📤 Opt-Out Affidavits
@@ -215,23 +215,23 @@ providers(
 pending(
   first = contains("A"),
   last = ends("E"))
-✔ pending returned 551 results.
-• Physician     : 176
-• Non-Physician : 375
-# A tibble: 551 × 3
-   first     last                npi
- * <chr>     <chr>             <int>
- 1 BABATUNDE ADESEYE      1558204693
- 2 MELISSA   ALDRIDGE     1073132429
- 3 MIA       ALDRIDGE     1437890761
- 4 ETHAN     ANGLE        1821939810
- 5 SOCHIMA   ANIKE        1265019822
- 6 HARLEY    ARRAUT-WHITE 1548906621
- 7 JUAN      ARROYAVE     1104766104
- 8 MARIAM    ATOBILOYE    1992405476
- 9 ADESEYE   AWE          1942796479
-10 KALENE    BADREE       1578405635
-# ℹ 541 more rows
+✔ pending returned 533 results.
+• Physician     : 169
+• Non-Physician : 364
+# A tibble: 533 × 4
+   prov_type first     last                 npi
+ * <chr>     <chr>     <chr>              <int>
+ 1 Physician BABATUNDE ADESEYE       1558204693
+ 2 Physician MELISSA   ALDRIDGE      1073132429
+ 3 Physician MIA       ALDRIDGE      1437890761
+ 4 Physician HARLEY    ARRAUT-WHITE  1548906621
+ 5 Physician JUAN      ARROYAVE      1104766104
+ 6 Physician MARIAM    ATOBILOYE     1992405476
+ 7 Physician ADESEYE   AWE           1942796479
+ 8 Physician IVANA     BALDIE        1720929433
+ 9 Physician FRANCISCO BARAJAS DUQUE 1710794219
+10 Physician FRANTZ    BAZILE        1285826180
+# ℹ 523 more rows
 ```
 
 ##### 🏥 Medicare Hospitals
@@ -259,26 +259,26 @@ clia(
   facility_name = starts("SGMC"),
   state = "GA")
 ✔ clia returned 32 results.
-# A tibble: 32 × 58
-   facility_ccn parent_ccn xref_ccn shared_ccn mac   chown chow_date poc_ind
- * <chr>        <chr>      <chr>    <chr>      <chr> <int> <date>      <int>
- 1 11D0022233   110122     <NA>     <NA>       <NA>      0 NA              0
- 2 11D0022241   110037     <NA>     <NA>       <NA>      0 NA              0
- 3 11D0265511   <NA>       <NA>     <NA>       <NA>      0 NA              0
- 4 11D0265607   258589220A <NA>     <NA>       <NA>      0 NA              0
- 5 11D0265646   110097     <NA>     <NA>       <NA>      0 NA              0
- 6 11D0265664   11-0112    <NA>     <NA>       <NA>      0 NA              0
- 7 11D0699064   256864445D <NA>     <NA>       <NA>      0 NA              0
- 8 11D0915865   <NA>       <NA>     <NA>       <NA>      0 NA              0
- 9 11D0933615   <NA>       <NA>     <NA>       <NA>      0 NA              0
-10 11D0948594   <NA>       <NA>     <NA>       <NA>      0 NA              0
+# A tibble: 32 × 30
+   fac_name  fac_ccn clia_ccn xrf_ccn shr_ccn acr_org multi_ind hosp_ind non_ind
+ * <chr>     <chr>   <chr>    <chr>   <chr>   <chr>       <int>    <int>   <int>
+ 1 SGMC HEA… 11D002… 110122   <NA>    <NA>    JCAHO           0        0       0
+ 2 SGMC- SM… 11D002… 110037   <NA>    <NA>    CAP             0        0       0
+ 3 SGMC WOM… 11D026… <NA>     <NA>    <NA>    <NA>            0        0       0
+ 4 SGMC VAL… 11D026… 2585892… <NA>    <NA>    <NA>            0        0       0
+ 5 SGMC- LA… 11D026… 110097   <NA>    <NA>    CAP             1        1       0
+ 6 SGMC-BER… 11D026… 11-0112  <NA>    <NA>    CAP             0        0       0
+ 7 SGMC PRI… 11D069… 2568644… <NA>    <NA>    <NA>            0        0       0
+ 8 SGMC HEA… 11D091… <NA>     <NA>    <NA>    <NA>            0        0       0
+ 9 SGMC PRI… 11D093… <NA>     <NA>    <NA>    <NA>            0        0       0
+10 SGMC FAM… 11D094… <NA>     <NA>    <NA>    <NA>            0        0       0
 # ℹ 22 more rows
-# ℹ 50 more variables: compliant <chr>, city <chr>, state <chr>, zip <chr>,
-#   elig_ind <int>, term_pgm <chr>, term_clia <chr>, app_type <chr>,
-#   cert_type <chr>, fac_type <chr>, own_type <chr>, act_type <chr>,
-#   orig_date <date>, cert_date <date>, eff_date <date>, term_date <date>,
-#   a2la_date <date>, a2la_ind <int>, aabb_date <date>, aabb_ind <int>,
-#   aoa_date <date>, aoa_ind <int>, ashi_date <date>, ashi_ind <int>, …
+# ℹ 21 more variables: tmp_ind <int>, poc_ind <int>, elig_ind <int>,
+#   term_type <chr>, cert_type <chr>, fac_type <chr>, own_type <chr>,
+#   act_type <chr>, orig_date <date>, cert_date <date>, eff_date <date>,
+#   term_date <date>, acr_date <date>, chow_cnt <int>, alab_cnt <int>,
+#   site_cnt <int>, compliant <chr>, city <chr>, state <chr>, zip <chr>,
+#   address <chr>
 ```
 
 ##### 🔎 Hospital Transparency Enforcement
