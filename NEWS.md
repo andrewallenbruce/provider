@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9148 (2026-05-07)
+
+* polish and pivot work
+
+
 # provider 0.0.1.9147 (2026-05-07)
 
 * NOTE: `c()` bug is in print method for modifiers
