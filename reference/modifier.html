@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9146</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9147</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,50 +105,65 @@ format.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">excludes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AL"</span>, <span class="st">"AK"</span>, <span class="st">"AZ"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "excludes"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "NOT+IN"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr [1:3] "AL" "AK" "AZ"</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ends</span><span class="op">(</span><span class="st">"bar"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "ends"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "ENDS WITH"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr "bar"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">starts</span><span class="op">(</span><span class="st">"foo"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "starts"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "STARTS WITH"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr "foo"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">contains</span><span class="op">(</span><span class="st">"baz"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "contains"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "CONTAINS"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr "baz"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">not</span><span class="op">(</span><span class="st">"zzz"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "not"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&lt;&gt;"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr "zzz"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">less</span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "less"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&lt;"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : num 1000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">less</span><span class="op">(</span><span class="fl">0.125</span>, equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "less"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&lt;="</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : num 0.125</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">greater</span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "greater"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&gt;"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : num 1000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">greater</span><span class="op">(</span><span class="fl">0.125</span>, equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "greater"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&gt;="</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : num 0.125</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">between</span><span class="op">(</span><span class="fl">0.125</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[2]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "between"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "BETWEEN"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : num [1:2] 0.125 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">not_blank</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "not"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "&lt;&gt;"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr ""</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">is_blank</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">&lt;modifier[1]&gt;</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘c’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;provider::Modifier&gt; chr "equals"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ operator: chr "="</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ value   : chr ""</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -245,18 +245,14 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x
-#> # A tibble: 2 × 37
+#> # A tibble: 2 × 22
 #>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 #> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
 #> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
 #> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
-#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <int>, address <chr>
+#> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> #   status <chr>, city <chr>, state <chr>, zip <chr>, loc_type <chr>,
+#> #   reh_date <date>, reh_ccn <chr>, address <chr>, subgroup <chr>
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
@@ -290,7 +286,7 @@ x
 
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
-#> # A tibble: 8 × 37
+#> # A tibble: 8 × 22
 #>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
 #> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
 #> 1 HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16e9     0 0100… 9436…
@@ -301,13 +297,9 @@ hospitals(ccn = x$ccn)
 #> 6 HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77e9     0 0100… 6709…
 #> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
 #> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
-#> # ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#> #   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#> #   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#> #   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#> #   sub_otxt <int>, address <chr>
+#> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> #   status <chr>, city <chr>, state <chr>, zip <chr>, loc_type <chr>,
+#> #   reh_date <date>, reh_ccn <chr>, address <chr>, subgroup <chr>
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.

@@ -55,48 +55,63 @@ format.
 ## Examples
 
 ``` r
+excludes(c("AL", "AK", "AZ"))
+#> <provider::Modifier> chr "excludes"
+#>  @ operator: chr "NOT+IN"
+#>  @ value   : chr [1:3] "AL" "AK" "AZ"
 
 ends("bar")
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "ends"
+#>  @ operator: chr "ENDS WITH"
+#>  @ value   : chr "bar"
 
 starts("foo")
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "starts"
+#>  @ operator: chr "STARTS WITH"
+#>  @ value   : chr "foo"
 
 contains("baz")
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "contains"
+#>  @ operator: chr "CONTAINS"
+#>  @ value   : chr "baz"
 
 not("zzz")
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "not"
+#>  @ operator: chr "<>"
+#>  @ value   : chr "zzz"
 
 less(1000)
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "less"
+#>  @ operator: chr "<"
+#>  @ value   : num 1000
 
 less(0.125, equal = TRUE)
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "less"
+#>  @ operator: chr "<="
+#>  @ value   : num 0.125
 
 greater(1000)
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "greater"
+#>  @ operator: chr ">"
+#>  @ value   : num 1000
 
 greater(0.125, equal = TRUE)
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "greater"
+#>  @ operator: chr ">="
+#>  @ value   : num 0.125
 
 between(0.125, 2)
-#> <modifier[2]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "between"
+#>  @ operator: chr "BETWEEN"
+#>  @ value   : num [1:2] 0.125 2
 
 not_blank()
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "not"
+#>  @ operator: chr "<>"
+#>  @ value   : chr ""
 
 is_blank()
-#> <modifier[1]>
-#> Error in loadNamespace(x): there is no package called ‘c’
+#> <provider::Modifier> chr "equals"
+#>  @ operator: chr "="
+#>  @ value   : chr ""
 ```
