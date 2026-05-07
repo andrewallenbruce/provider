@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9147 (2026-05-07)
+
+* NOTE: `c()` bug is in print method for modifiers
+* pivot methods, column reduction
+
+
 # provider 0.0.1.9146 (2026-05-06)
 
 * NOTE: odd rcmdcheck warnings, re: the `c()` function?:
