@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9146 (2026-05-06)
+
+- NOTE: odd rcmdcheck warnings, re: the
+  [`c()`](https://rdrr.io/r/base/c.html) function?:
+
 ## provider 0.0.1.9145 (2026-05-06)
 
 - Modifier check in PDC class

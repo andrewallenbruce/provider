@@ -55,75 +55,48 @@ format.
 ## Examples
 
 ``` r
-excludes(c("AL", "AK", "AZ"))
-#> <modifier[3]>
-#> Alias: excludes
-#> Operator: NOT+IN
-#> Values: AL, AK, AZ
 
 ends("bar")
 #> <modifier[1]>
-#> Alias: ends
-#> Operator: ENDS WITH
-#> Value: bar
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 starts("foo")
 #> <modifier[1]>
-#> Alias: starts
-#> Operator: STARTS WITH
-#> Value: foo
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 contains("baz")
 #> <modifier[1]>
-#> Alias: contains
-#> Operator: CONTAINS
-#> Value: baz
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 not("zzz")
 #> <modifier[1]>
-#> Alias: not
-#> Operator: <>
-#> Value: zzz
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 less(1000)
 #> <modifier[1]>
-#> Alias: less
-#> Operator: <
-#> Value: 1000
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 less(0.125, equal = TRUE)
 #> <modifier[1]>
-#> Alias: less
-#> Operator: <=
-#> Value: 0.125
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 greater(1000)
 #> <modifier[1]>
-#> Alias: greater
-#> Operator: >
-#> Value: 1000
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 greater(0.125, equal = TRUE)
 #> <modifier[1]>
-#> Alias: greater
-#> Operator: >=
-#> Value: 0.125
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 between(0.125, 2)
 #> <modifier[2]>
-#> Alias: between
-#> Operator: BETWEEN
-#> Values: 0.125, 2
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 not_blank()
 #> <modifier[1]>
-#> Alias: not
-#> Operator: <>
-#> Value: ""
+#> Error in loadNamespace(x): there is no package called ‘c’
 
 is_blank()
 #> <modifier[1]>
-#> Alias: equals
-#> Operator: =
-#> Value: ""
+#> Error in loadNamespace(x): there is no package called ‘c’
 ```
