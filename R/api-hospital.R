@@ -94,30 +94,31 @@ hospitals <- function(
   check_char_(org_type)
   check_char_(loc_type)
   check_char_(prov_type)
-  polish(
-    execute(
-      cms(
-        NPI = npi,
-        CCN = ccn,
-        `ASSOCIATE ID` = pac,
-        `ENROLLMENT ID` = enid,
-        `ENROLLMENT STATE` = enid_state,
-        `ORGANIZATION NAME` = org_name,
-        `DOING BUSINESS AS NAME` = org_dba,
-        CITY = city,
-        STATE = state,
-        `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = convert_bool(multi),
-        PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-        `PROVIDER TYPE CODE` = tag_enum(prov_type),
-        `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
-        !!!subgroup,
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ENROLLMENT STATE` = enid_state,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+    `PROVIDER TYPE CODE` = tag_enum(prov_type),
+    `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
+    !!!subgroup,
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' Hospital Subgroups
@@ -199,5 +200,3 @@ subgroups <- function(
 is_subgroups <- function(x) {
   inherits(x, "subgroups")
 }
-
-

@@ -43,7 +43,7 @@ method(report_count, ListCMS) <- function(x) {
   } else {
     cli::cli_alert_success(msg)
   }
- cli::cat_bullet(
+  cli::cat_bullet(
     paste0(
       cli::col_yellow(left(names(x@count))),
       cli::col_silver(" : "),
@@ -93,34 +93,34 @@ method(report_total, ListCMS) <- function(x) {
   cli::cli_text()
 }
 
-#' @export
-`print.provider::Modifier` <- function(x, ...) {
-  value <- if (any2(x@value == "")) {
-    encodeString(x@value, quote = '"', na.encode = FALSE)
-  } else {
-    x@value
-  }
-
- cli::cli_text(cli::col_silver("<modifier[{length(value)}]>"))
-
-  c::cli_text(c(
-    cli::col_silver("Alias: "),
-    cli::col_red(cli::style_bold(S7::S7_data(x)))
-  ))
-
-  cli::cli_text(c(
-    cli::col_silver("Operator: "),
-    cli::style_bold(x@operator)
-  ))
-
-  cli::cli_text(
-    c(
-      cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
-      cli::col_yellow(toString(value, width = 20L))
-    )
-  )
-  invisible(x)
-}
+# @export
+# `print.provider::Modifier` <- function(x, ...) {
+#   value <- if (any2(x@value == "")) {
+#     encodeString(x@value, quote = '"', na.encode = FALSE)
+#   } else {
+#     x@value
+#   }
+#
+#  cli::cli_text(cli::col_silver("<modifier[{length(value)}]>"))
+#
+#   c::cli_text(c(
+#     cli::col_silver("Alias: "),
+#     cli::col_red(cli::style_bold(S7::S7_data(x)))
+#   ))
+#
+#   cli::cli_text(c(
+#     cli::col_silver("Operator: "),
+#     cli::style_bold(x@operator)
+#   ))
+#
+#   cli::cli_text(
+#     c(
+#       cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
+#       cli::col_yellow(toString(value, width = 20L))
+#     )
+#   )
+#   invisible(x)
+# }
 
 #' @export
 print.subgroups <- function(x, ...) {

@@ -35,7 +35,7 @@ polish.clia <- function(x) {
   RC_clia_fac_type(x$fac_type)
   RC_clia_act_type(x$act_type)
 
-  x <- clia_acr_pivot(x)
+  x <- credit_pivot(x)
 
   collapse::colorderv(
     x,

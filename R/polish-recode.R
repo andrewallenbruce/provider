@@ -22,9 +22,30 @@ RC_hospitals <- function(x) {
   x <- collapse::av(x, address = combine_cols(x$add_1, x$add_2))
   collapse::gvr(x, "add_") <- NULL
 
+  i <- cheapr::which_not_na(x$org_otxt)
+
+  if (is_empty(i)) {
+    collapse::gv(x, "org_otxt") <- NULL
+  } else {
+    other <- paste0("OTHER: ", x[i, "org_otxt", drop = TRUE])
+    collapse::gv(x[i, ], "org_type") <- other
+    collapse::gv(x, "org_otxt") <- NULL
+  }
+
+  i <- cheapr::which_not_na(x$loc_otxt)
+
+  if (is_empty(i)) {
+    collapse::gv(x, "loc_otxt") <- NULL
+  } else {
+    other <- paste0("OTHER: ", x[i, "loc_otxt", drop = TRUE])
+    collapse::gv(x[i, ], "loc_type") <- other
+    collapse::gv(x, "loc_otxt") <- NULL
+  }
+
   rc_integer(x, "npi") |>
     rc_date_ymd(collapse::gvr(x, "_date$", return = 3L)) |>
-    rc_bin(collapse::gvr(x, "multi|^sub_", return = 3L))
+    rc_bin(collapse::gvr(x, "multi|^sub_", return = 3L)) |>
+    subgroup_pivot()
 }
 
 #' @noRd
@@ -56,7 +77,7 @@ RC_rhc_owner <- function(x) {
     rc_double("own_pct") |>
     rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
     rc_date_ymd("own_date") |>
-    fqhc_owner_pivot()
+    owner_pivot()
 }
 
 #' @noRd
@@ -78,7 +99,7 @@ RC_fqhc_owner <- function(x) {
     rc_double("own_pct") |>
     rc_bin(collapse::gvr(x, "multi|_ind$", return = 3L)) |>
     rc_date_ymd("own_date") |>
-    fqhc_owner_pivot()
+    owner_pivot()
 }
 
 #' @noRd

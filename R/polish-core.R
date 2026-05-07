@@ -94,7 +94,7 @@ as_date_mdy <- function(x, ...) {
 
 #' @autoglobal
 #' @noRd
-fqhc_owner_pivot <- function(x) {
+owner_pivot <- function(x) {
   y <- collapse::gvr(x, "own_pac|_ind$") |>
     collapse::pivot(
       ids = "own_pac",
@@ -156,7 +156,7 @@ fqhc_owner_pivot <- function(x) {
 
 #' @autoglobal
 #' @noRd
-clia_acr_pivot <- function(x) {
+credit_pivot <- function(x) {
   col_acr <- c("a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
 
   y <- collapse::gvr(x, c("fac_ccn", col_acr)) |>
@@ -216,4 +216,68 @@ clia_acr_pivot <- function(x) {
   collapse::gvr(x, col_acr) <- NULL
 
   collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+subgroup_pivot <- function(x) {
+  y <- collapse::gvr(x, "^enid$|sub_") |>
+    collapse::roworderv("enid") |>
+    collapse::pivot(
+      ids = c("enid", "sub_otxt"),
+      factor = FALSE,
+      names = list("subgroup", "ind"),
+      na.rm = TRUE
+    )
+
+  y <- collapse::ss(y, y$ind %==% 1L, -4L)
+
+  collapse::recode_char(
+    y$subgroup,
+    "sub_acute" = "Acute",
+    "sub_gen" = "General",
+    "sub_spec" = "Specialty",
+    "sub_adu" = "ADH",
+    "sub_child" = "Child",
+    "sub_ltc" = "LTC",
+    "sub_psy" = "Psych",
+    "sub_irf" = "IRF",
+    "sub_stc" = "STC",
+    "sub_sba" = "Swing-Bed",
+    "sub_psu" = "Psych Unit",
+    "sub_iru" = "IRF Unit",
+    "sub_oth" = "Other",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  # o <- cheapr::which_(
+  #   y$subgroup %==% "Other" &
+  #   cheapr::which_not_na(y$sub_otxt)
+  # )
+
+  # if (empty(o)) {
+  # Handle Other Text
+  # }
+
+  collapse::gvr(x, "sub_") <- NULL
+
+  y <- collapse::ss(y, j = c(1, 3)) |>
+    collapse::funique() |>
+    collapse::roworderv(c("enid", "subgroup")) |>
+    collapse::fcountv("enid", add = TRUE)
+
+  z <- cheapr::sset(y, cheapr::which_(y$N > 1L), 1:2)
+  y <- cheapr::sset(y, cheapr::which_(y$N == 1L), 1:2)
+
+  g <- collapse::GRP(z$enid)
+  y <- collapse::gsplit(z$subgroup, g) |>
+    set_names(collapse::GRPnames(g)) |>
+    purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
+    cheapr::as_df() |>
+    set_names(c("enid", "subgroup")) |>
+    collapse::rowbind(y) |>
+    collapse::roworderv(c("enid", "subgroup"))
+
+  collapse::join(x, y, on = "enid", verbose = 0L)
 }

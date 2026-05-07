@@ -11,7 +11,7 @@
 #' @param equal `<lgl>` append `=` to `less()` or `greater()`
 #' @name modifier
 #' @examples
-# excludes(c("AL", "AK", "AZ"))
+#' excludes(c("AL", "AK", "AZ"))
 #'
 #' ends("bar")
 #'
@@ -58,7 +58,7 @@ between <- function(x, y) {
   Modifier(
     "between",
     operator = "BETWEEN",
-    value = c(x, y)
+    value = vctrs::vec_c(x, y)
   )
 }
 

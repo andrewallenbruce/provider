@@ -19,7 +19,6 @@ RE_NAME = list(
     CROSS_REF_PROVIDER_NUMBER = "xrf_ccn",
     SHARED_LAB_XREF_NUMBER = "shr_ccn",
     CHOW_CNT = "chow_cnt",
-    # CHOW_DT = "chow_date",
     CMPLNC_STUS_CD = "compliant",
     ST_ADR = "add_1",
     ADDTNL_ST_ADR = "add_2",

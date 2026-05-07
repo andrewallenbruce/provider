@@ -55,6 +55,7 @@ conditions, in the
 format.
 }
 \examples{
+excludes(c("AL", "AK", "AZ"))
 
 ends("bar")
 
