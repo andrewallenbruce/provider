@@ -49,31 +49,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 pending(count = TRUE)
 #> pending Totals
-#> • Rows  : 10,124
+#> • Rows  : 10,579
 #> • Pages : 3     
 #> 
 
 pending(first = "Victor", count = TRUE)
 #> ✔ pending returned 7 results.
-#> • Physician     : 5
-#> • Non-Physician : 2
+#> • Physician     : 6
+#> • Non-Physician : 1
 
 pending(first = starts("V"))
-#> ✔ pending returned 136 results.
-#> • Physician     : 53
-#> • Non-Physician : 83
-#> # A tibble: 136 × 4
-#>    prov_type first     last                    npi
-#>  * <chr>     <chr>     <chr>                 <int>
-#>  1 Physician VADIN     LALL DASS        1144512724
-#>  2 Physician VALENTINA TURBAY CABALLERO 1689304545
-#>  3 Physician VALERIE   SOTO             1215825310
-#>  4 Physician VALJEAN   BACOT-DAVIS      1407597651
-#>  5 Physician VANI      SENTHIL          1700774759
-#>  6 Physician VANITA    JAYSWAL          1790626414
-#>  7 Physician VARTAN    PAHALYANTS       1518545672
-#>  8 Physician VARUNIL   SHAH             1972442267
-#>  9 Physician VASILIY   SAKHONENKO       1518831262
-#> 10 Physician VAUGHN    POWELL           1790406213
-#> # ℹ 126 more rows
+#> ✔ pending returned 141 results.
+#> • Physician     : 61
+#> • Non-Physician : 80
+#> # A tibble: 141 × 4
+#>    prov_type first         last                    npi
+#>  * <chr>     <chr>         <chr>                 <int>
+#>  1 Physician VADIN         LALL DASS        1144512724
+#>  2 Physician VALENTINA     TURBAY CABALLERO 1689304545
+#>  3 Physician VALERIE       GRAVES           1265373518
+#>  4 Physician VALERIE       SOTO             1215825310
+#>  5 Physician VALJEAN       BACOT-DAVIS      1407597651
+#>  6 Physician VAMSI KRISHNA LAVU             1407534472
+#>  7 Physician VANESA        CARRENO          1437094257
+#>  8 Physician VANESSA       DONALDSON        1861237943
+#>  9 Physician VARTAN        PAHALYANTS       1518545672
+#> 10 Physician VARUNIL       SHAH             1972442267
+#> # ℹ 131 more rows
 ```

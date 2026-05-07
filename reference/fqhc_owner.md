@@ -6,23 +6,23 @@ Providers with pending Medicare enrollment applications.
 
 ``` r
 fqhc_owner(
-  enid = NULL,
-  pac = NULL,
+  org_enid = NULL,
+  org_pac = NULL,
   org_name = NULL,
   own_pac = NULL,
-  own_type = NULL,
-  own_role = NULL,
-  own_first = NULL,
-  own_middle = NULL,
-  own_last = NULL,
-  own_title = NULL,
   own_org = NULL,
   own_dba = NULL,
-  own_address = NULL,
-  own_city = NULL,
-  own_state = NULL,
-  own_zip = NULL,
   own_pct = NULL,
+  own_role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -30,11 +30,11 @@ fqhc_owner(
 
 ## Arguments
 
-- enid:
+- org_enid:
 
   `<chr>` National Provider Identifier
 
-- pac:
+- org_pac:
 
   `<chr>` Provider's name
 
@@ -46,30 +46,6 @@ fqhc_owner(
 
   `<chr>` Provider's name
 
-- own_type:
-
-  `<chr>` Provider's name
-
-- own_role:
-
-  `<chr>` Provider's name
-
-- own_first:
-
-  `<chr>` Provider's name
-
-- own_middle:
-
-  `<chr>` Provider's name
-
-- own_last:
-
-  `<chr>` Provider's name
-
-- own_title:
-
-  `<chr>` Provider's name
-
 - own_org:
 
   `<chr>` Provider's name
@@ -78,23 +54,27 @@ fqhc_owner(
 
   `<chr>` Provider's name
 
-- own_address:
-
-  `<chr>` Provider's name
-
-- own_city:
-
-  `<chr>` Provider's name
-
-- own_state:
-
-  `<chr>` Provider's name
-
-- own_zip:
-
-  `<chr>` Provider's name
-
 - own_pct:
+
+  `<chr>` Provider's name
+
+- own_role:
+
+  `<chr>` Provider's name
+
+- entity:
+
+  `<chr>` Provider's name
+
+- first, middle, last:
+
+  `<chr>` Provider's name
+
+- title:
+
+  `<chr>` Provider's name
+
+- address, city, state, zip:
 
   `<chr>` Provider's name
 
@@ -119,28 +99,23 @@ fqhc_owner(count = TRUE)
 #> • Pages : 30     
 #> 
 
-fqhc_owner(own_state = c("GA", "FL")) |> str()
+fqhc_owner(state = c("GA", "FL"))
 #> ✔ fqhc_owner returned 254 results.
-#> tibble [254 × 21] (S3: tbl_df/tbl/data.frame)
-#>  $ enid      : chr [1:254] "O20030417000004" "O20030417000004" "O20030417000009" "O20030417000009" ...
-#>  $ pac       : chr [1:254] "3577472422" "3577472422" "3577472422" "3577472422" ...
-#>  $ org_name  : chr [1:254] "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" ...
-#>  $ own_pac   : chr [1:254] "3577472422" "3577472422" "3577472422" "3577472422" ...
-#>  $ own_type  : chr [1:254] "O" "O" "O" "O" ...
-#>  $ own_code  : int [1:254] 34 43 34 43 43 43 34 43 34 34 ...
-#>  $ own_role  : chr [1:254] "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" ...
-#>  $ own_date  : Date[1:254], format: "1993-07-01" "1993-10-01" ...
-#>  $ own_first : chr [1:254] NA NA NA NA ...
-#>  $ own_middle: chr [1:254] NA NA NA NA ...
-#>  $ own_last  : chr [1:254] NA NA NA NA ...
-#>  $ own_title : chr [1:254] NA NA NA NA ...
-#>  $ own_org   : chr [1:254] "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" "NORTH BROWARD HOSPITAL DISTRICT" ...
-#>  $ own_dba   : chr [1:254] "BROWARD HEALTH MEDICAL CENTER OUTPATIENT PHARMACY" "BROWARD HEALTH MEDICAL CENTER OUTPATIENT PHARMACY" "BROWARD HEALTH MEDICAL CENTER OUTPATIENT PHARMACY" "BROWARD HEALTH MEDICAL CENTER OUTPATIENT PHARMACY" ...
-#>  $ own_city  : chr [1:254] "FORT LAUDERDALE" "FORT LAUDERDALE" "FT LAUDERDALE" "FT LAUDERDALE" ...
-#>  $ own_state : chr [1:254] "FL" "FL" "FL" "FL" ...
-#>  $ own_zip   : chr [1:254] "333093092" "333093092" "333121638" "333121638" ...
-#>  $ own_pct   : num [1:254] 100 100 100 100 0 100 NA 0 NA NA ...
-#>  $ oth_txt   : chr [1:254] "GOVERNMENT" "GOVERNMENT" NA NA ...
-#>  $ own_add   : chr [1:254] "1800 NW 49TH ST, STE 110" "1800 NW 49TH ST, STE 110" "1111 W BROWARD BLVD" "1111 W BROWARD BLVD" ...
-#>  $ own_ind   : chr [1:254] "Created for Aquisition, Non-Profit, Other" "Created for Aquisition, Non-Profit, Other" "Created for Aquisition, Non-Profit, Other" "Created for Aquisition, Non-Profit, Other" ...
+#> # A tibble: 254 × 20
+#>    enid       pac   org_name own_pac own_role own_date   own_org own_dba own_pct
+#>  * <chr>      <chr> <chr>    <chr>   <chr>    <date>     <chr>   <chr>     <dbl>
+#>  1 O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100
+#>  2 O20030417… 3577… NORTH B… 357747… OPERATI… 1993-10-01 NORTH … BROWAR…     100
+#>  3 O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100
+#>  4 O20030417… 3577… NORTH B… 357747… OPERATI… 1993-07-01 NORTH … BROWAR…     100
+#>  5 O20070613… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0
+#>  6 O20090826… 2365… TRENTON… 236535… OPERATI… 2014-02-27 TRENTO… PALMS …     100
+#>  7 O20100510… 7214… MCR HEA… 721484… 5% OR G… 2009-11-02 MCR HE… MCR HE…      NA
+#>  8 O20100809… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0
+#>  9 O20100902… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      NA
+#> 10 O20100907… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      NA
+#> # ℹ 244 more rows
+#> # ℹ 11 more variables: entity <chr>, title <chr>, first <chr>, middle <chr>,
+#> #   last <chr>, add_1 <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
+#> #   own_ind <chr>
 ```

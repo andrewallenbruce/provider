@@ -113,44 +113,44 @@ opt_out(count = TRUE)
 opt_out(npi = 1043522824)
 #> ✔ opt_out returned 1 result.
 #> # A tibble: 1 × 12
-#>          npi first last  specialty  start_date end_date   updated    city  state
-#> *      <int> <chr> <chr> <chr>      <date>     <date>     <date>     <chr> <chr>
-#> 1 1043522824 James Smith Nurse Pra… 2019-07-01 2027-07-01 2025-08-15 SCOT… AZ   
-#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
+#>          npi first last  specialty  start_date end_date   updated    add_1 city 
+#>        <int> <chr> <chr> <chr>      <date>     <date>     <date>     <chr> <chr>
+#> 1 1043522824 James Smith Nurse Pra… 2019-07-01 2027-07-01 2025-08-15 STE … SCOT…
+#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
 
 opt_out(state = "AK")
 #> ✔ opt_out returned 260 results.
 #> # A tibble: 260 × 12
-#>           npi first last  specialty start_date end_date   updated    city  state
-#>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
-#>  1 1265553432 Henry Chap… Physicia… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
-#>  2 1487879664 Ann   Stoc… Clinical… 2012-04-01 2028-04-01 2026-04-16 ANCH… AK   
-#>  3 1043559362 Amber Shea  Nurse Pr… 2013-04-01 2027-04-01 2025-05-15 WASI… AK   
-#>  4 1598825663 Robe… Skala Family P… 2013-06-04 2027-06-04 2025-07-15 EAGL… AK   
-#>  5 1508198276 Robe… Cass… Dentist   2013-07-23 2027-07-23 2025-09-15 WASI… AK   
-#>  6 1952340358 Eliz… Desc… Family P… 2014-04-01 2028-04-01 2026-04-16 ANCH… AK   
-#>  7 1124176227 Evel… Wisz… Clinical… 2018-07-01 2026-07-01 2024-08-15 KODI… AK   
-#>  8 1154467520 Suza… Stra… Nurse Pr… 2014-04-01 2028-04-01 2026-04-16 EAGL… AK   
-#>  9 1295755296 Will… Berg… Oral Sur… 2018-11-05 2026-11-05 2024-12-15 ANCH… AK   
-#> 10 1225058977 Ray   Holl… Oral Sur… 2014-06-16 2026-06-16 2024-07-15 ANCH… AK   
+#>           npi first last  specialty start_date end_date   updated    add_1 city 
+#>         <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
+#>  1 1265553432 Henry Chap… Physicia… 2012-04-01 2028-04-01 2026-04-16 STE … ANCH…
+#>  2 1487879664 Ann   Stoc… Clinical… 2012-04-01 2028-04-01 2026-04-16 STE … ANCH…
+#>  3 1043559362 Amber Shea  Nurse Pr… 2013-04-01 2027-04-01 2025-05-15 5805… WASI…
+#>  4 1598825663 Robe… Skala Family P… 2013-06-04 2027-06-04 2025-07-15 STE … EAGL…
+#>  5 1508198276 Robe… Cass… Dentist   2013-07-23 2027-07-23 2025-09-15 STE 1 WASI…
+#>  6 1952340358 Eliz… Desc… Family P… 2014-04-01 2028-04-01 2026-04-16 STE … ANCH…
+#>  7 1124176227 Evel… Wisz… Clinical… 2018-07-01 2026-07-01 2024-08-15 104 … KODI…
+#>  8 1154467520 Suza… Stra… Nurse Pr… 2014-04-01 2028-04-01 2026-04-16 STE … EAGL…
+#>  9 1295755296 Will… Berg… Oral Sur… 2018-11-05 2026-11-05 2024-12-15 STE … ANCH…
+#> 10 1225058977 Ray   Holl… Oral Sur… 2014-06-16 2026-06-16 2024-07-15 STE … ANCH…
 #> # ℹ 250 more rows
-#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
+#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
 
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ opt_out returned 813 results.
 #> # A tibble: 813 × 12
-#>           npi first last  specialty start_date end_date   updated    city  state
-#>  *      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
-#>  1 1720444581 Jona… Rain… Psychiat… 1998-01-30 2028-01-30 2026-02-16 GLAD… PA   
-#>  2 1598802100 Mart… Leat… Psychiat… 2012-04-01 2028-04-01 2026-04-16 SAN … TX   
-#>  3 1972623346 Nancy Shos… Psychiat… 2012-03-02 2028-03-02 2026-04-16 DALL… TX   
-#>  4 1124116793 Namir Daml… Psychiat… 2020-07-26 2026-07-26 2024-08-15 ENCI… CA   
-#>  5 1427146331 Lawr… Corm… Psychiat… 2012-05-10 2026-05-10 2024-10-15 DENV… CO   
-#>  6 1114132313 Char… Scha… Psychiat… 2012-06-14 2026-06-14 2024-10-15 SACR… CA   
-#>  7 1093894420 Andr… Popp… Psychiat… 2012-06-01 2026-06-01 2026-01-15 NEWT… MA   
-#>  8 1871501395 Ingr… Schm… Psychiat… 2010-09-02 2026-09-02 2024-10-15 AUST… TX   
-#>  9 1477614204 Lore… Henry Psychiat… 2012-05-26 2026-05-26 2024-10-15 COLL… TX   
-#> 10 1932284098 Patr… Mcgr… Psychiat… 2012-06-01 2026-06-01 2024-07-15 NEW … NY   
+#>           npi first last  specialty start_date end_date   updated    add_1 city 
+#>         <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
+#>  1 1720444581 Jona… Rain… Psychiat… 1998-01-30 2028-01-30 2026-02-16 P O … GLAD…
+#>  2 1598802100 Mart… Leat… Psychiat… 2012-04-01 2028-04-01 2026-04-16 #5101 SAN …
+#>  3 1972623346 Nancy Shos… Psychiat… 2012-03-02 2028-03-02 2026-04-16 1288… DALL…
+#>  4 1124116793 Namir Daml… Psychiat… 2020-07-26 2026-07-26 2024-08-15 STE … ENCI…
+#>  5 1427146331 Lawr… Corm… Psychiat… 2012-05-10 2026-05-10 2024-10-15 3773… DENV…
+#>  6 1114132313 Char… Scha… Psychiat… 2012-06-14 2026-06-14 2024-10-15 1455… SACR…
+#>  7 1093894420 Andr… Popp… Psychiat… 2012-06-01 2026-06-01 2026-01-15 STE … NEWT…
+#>  8 1871501395 Ingr… Schm… Psychiat… 2010-09-02 2026-09-02 2024-10-15 STE … AUST…
+#>  9 1477614204 Lore… Henry Psychiat… 2012-05-26 2026-05-26 2024-10-15 SUIT… COLL…
+#> 10 1932284098 Patr… Mcgr… Psychiat… 2012-06-01 2026-06-01 2024-07-15 SUIT… NEW …
 #> # ℹ 803 more rows
-#> # ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
+#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
 ```

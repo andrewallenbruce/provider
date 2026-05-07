@@ -56,13 +56,13 @@ ccn |> str()
 #>  $ inc_state : chr [1:5] "NY" "VT" "VT" "VT" ...
 #>  $ org_type  : chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...
 #>  $ status    : chr [1:5] "N" "N" "N" "N" ...
+#>  $ add_1     : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
 #>  $ city      : chr [1:5] "PLATTSBURGH" "BERLIN" "BURLINGTON" "BRATTLEBORO" ...
 #>  $ state     : chr [1:5] "NY" "VT" "VT" "VT" ...
 #>  $ zip       : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...
 #>  $ loc_type  : chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER: HOSPITAL - GENERAL PRACTICE AND CLINICS" "OTHER HOSPITAL PRACTICE LOCATION" ...
 #>  $ reh_date  : Date[1:5], format: NA NA ...
 #>  $ reh_ccn   : chr [1:5] NA NA NA NA ...
-#>  $ address   : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
 #>  $ subgroup  : chr [1:5] "Acute" "Acute" "Acute, Other" "General" ...
 ```
 
@@ -89,17 +89,23 @@ providers(org_name = "Elizabethtown Community Hospital")
 #> 8 ELIZABE… NA    NA     NA    CO    12-70     PART B S… 1.05e9     0 3577… O202…
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
-#> Error in `scv()`:
-#> ! length(v) must be <= length(x)
+#> # A tibble: 2 × 22
+#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
+#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
+#> 1 ELIZABE… NA      O201… NY         00-85     PART A P… 1.89e9     1 3313… 3577…
+#> 2 ELIZABE… NA      O202… NY         00-85     PART A P… 1.41e9     0 33Z3… 3577…
+#> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
+#> #   status <chr>, add_1 <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, reh_date <date>, reh_ccn <chr>, subgroup <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 58 results.
-#> # A tibble: 58 × 20
+#> # A tibble: 58 × 19
 #>    first    middle last    suffix gender cred  school grad_year specialty    npi
-#>  * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
-#>  1 GAVIN    L      NOBLE   NA     M      MD    STATE…      1999 CARDIOVA… 1.75e9
+#>    <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
+#>  1 GAVIN    L      NOBLE   NA     M      MD    STATE…      1999 INTERNAL… 1.75e9
 #>  2 DMITRIY  G      AKSELR… NA     M      MD    STATE…      2007 DIAGNOST… 1.63e9
 #>  3 ROBERT   NA     PERCAR… NA     M      MD    NEW Y…      2009 INTERVEN… 1.36e9
-#>  4 BENJAMIN NA     LANGE   NA     M      MD    HARVA…      2009 DIAGNOST… 1.77e9
+#>  4 BENJAMIN NA     LANGE   NA     M      MD    HARVA…      2009 INTERVEN… 1.77e9
 #>  5 BENJAMIN NA     BAMFORD NA     M      MD    UNIVE…      1992 DIAGNOST… 1.15e9
 #>  6 JOSHUA   NA     WARNER  NA     F      NP    OTHER       2023 NURSE PR… 1.76e9
 #>  7 DAGMAR   NA     HOEGEM… NA     F      MD    OTHER       1996 DIAGNOST… 1.87e9
@@ -107,9 +113,8 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #>  9 ROB      L      DEMURO  NA     M      MD    STATE…      1996 INTERNAL… 1.80e9
 #> 10 JAMES    E      EAST    NA     M      MD    OTHER       2016 DIAGNOST… 1.95e9
 #> # ℹ 48 more rows
-#> # ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   org_mem <int>, city <chr>, state <chr>, zip <chr>, org_add <chr>,
-#> #   specialty <chr>
+#> # ℹ 9 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
+#> #   org_mem <int>, add_1 <chr>, city <chr>, state <chr>, zip <chr>
 reassignments(org_name = "Elizabethtown Community Hospital")
 #> ✔ reassignments returned 380 results.
 #> # A tibble: 380 × 14

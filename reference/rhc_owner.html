@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9147</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9148</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,23 +55,23 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rhc_owner</span><span class="op">(</span></span>
-<span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  own_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_role <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  own_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  own_dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_address <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  own_pct <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_role <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -81,11 +81,11 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-enid">enid<a class="anchor" aria-label="anchor" href="#arg-enid"></a></dt>
+<dl><dt id="arg-org-enid">org_enid<a class="anchor" aria-label="anchor" href="#arg-org-enid"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> National Provider Identifier</p></dd>
 
 
-<dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
+<dt id="arg-org-pac">org_pac<a class="anchor" aria-label="anchor" href="#arg-org-pac"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
@@ -97,30 +97,6 @@
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-type">own_type<a class="anchor" aria-label="anchor" href="#arg-own-type"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-role">own_role<a class="anchor" aria-label="anchor" href="#arg-own-role"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-first">own_first<a class="anchor" aria-label="anchor" href="#arg-own-first"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-middle">own_middle<a class="anchor" aria-label="anchor" href="#arg-own-middle"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-last">own_last<a class="anchor" aria-label="anchor" href="#arg-own-last"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-title">own_title<a class="anchor" aria-label="anchor" href="#arg-own-title"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
 <dt id="arg-own-org">own_org<a class="anchor" aria-label="anchor" href="#arg-own-org"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
@@ -129,23 +105,27 @@
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-address">own_address<a class="anchor" aria-label="anchor" href="#arg-own-address"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-city">own_city<a class="anchor" aria-label="anchor" href="#arg-own-city"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-state">own_state<a class="anchor" aria-label="anchor" href="#arg-own-state"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
-<dt id="arg-own-zip">own_zip<a class="anchor" aria-label="anchor" href="#arg-own-zip"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
-
-
 <dt id="arg-own-pct">own_pct<a class="anchor" aria-label="anchor" href="#arg-own-pct"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-own-role">own_role<a class="anchor" aria-label="anchor" href="#arg-own-role"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-entity">entity<a class="anchor" aria-label="anchor" href="#arg-entity"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-first-middle-last">first, middle, last<a class="anchor" aria-label="anchor" href="#arg-first-middle-last"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
+
+
+<dt id="arg-address-city-state-zip">address, city, state, zip<a class="anchor" aria-label="anchor" href="#arg-address-city-state-zip"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
@@ -170,30 +150,29 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>14    </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">rhc_owner</span><span class="op">(</span>own_state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">rhc_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">rhc_owner</span> returned <span style="font-weight: bold;">136</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [136 × 21] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid      : chr [1:136] "O20030724000023" "O20031013000024" "O20040217000406" "O20040712000362" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac       : chr [1:136] "7214848027" "3476462078" "6204721566" "8426036930" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name  : chr [1:136] "TRI-COUNTY PRIMARY CARE INC" "ACV COMMUNITY SERVICES LLC" "LONDON WOMEN'S CARE LLC" "ACUTE CARE PEDIATRICS,PA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pac   : chr [1:136] "5496911505" "3476462078" "8224385521" "8729997929" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type  : chr [1:136] "O" "O" "O" "O" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_code  : int [1:136] 34 34 43 34 34 34 34 35 35 35 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_role  : chr [1:136] "5% OR GREATER DIRECT OWNERSHIP INTEREST" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER DIRECT OWNERSHIP INTEREST" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_date  : Date[1:136], format: "2021-06-26" "2003-11-01" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_first : chr [1:136] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_middle: chr [1:136] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_last  : chr [1:136] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_title : chr [1:136] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_org   : chr [1:136] "GNT ASSOCIATES LLC" "ACV COMMUNITY SERVICES LLC" "PHYSICIAN BUSINESS SERVICES, LLC" "NORTH FLORIDA PEDIATRICS, PA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_dba   : chr [1:136] NA "ADVENTR CHRISTIAN VILLAGE HOME CARE AGENCY" NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_city  : chr [1:136] "GAINESVILLE" "LIVE OAK" "TAMPA" "LAKE CITY" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_state : chr [1:136] "FL" "FL" "FL" "FL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_zip   : chr [1:136] "326069331" "320608243" "336091104" "320256966" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pct   : num [1:136] 100 NA 100 NA 100 100 100 6.49 6.49 6.49 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ oth_txt   : chr [1:136] "FILLING AS S-CORP" NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_add   : chr [1:136] "13603 NW 30TH RD" "10820 MARVIN E JONES BLVD" "5002 W LEMON ST" "1859 SW NEWLAND WAY" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_ind   : chr [1:136] "LLC, Other" "LLC" "LLC, For-Profit" "Corporation, For-Profit, Owned by Another Org/Ind" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [136 × 20] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:136] "O20030724000023" "O20031013000024" "O20040217000406" "O20040712000362" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:136] "7214848027" "3476462078" "6204721566" "8426036930" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:136] "TRI-COUNTY PRIMARY CARE INC" "ACV COMMUNITY SERVICES LLC" "LONDON WOMEN'S CARE LLC" "ACUTE CARE PEDIATRICS,PA" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pac : chr [1:136] "5496911505" "3476462078" "8224385521" "8729997929" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_role: chr [1:136] "5% OR GREATER DIRECT OWNERSHIP INTEREST" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER DIRECT OWNERSHIP INTEREST" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_date: Date[1:136], format: "2021-06-26" "2003-11-01" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_org : chr [1:136] "GNT ASSOCIATES LLC" "ACV COMMUNITY SERVICES LLC" "PHYSICIAN BUSINESS SERVICES, LLC" "NORTH FLORIDA PEDIATRICS, PA" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_dba : chr [1:136] NA "ADVENTR CHRISTIAN VILLAGE HOME CARE AGENCY" NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_pct : num [1:136] 100 NA 100 NA 100 100 100 6.49 6.49 6.49 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ entity  : chr [1:136] "O" "O" "O" "O" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ title   : chr [1:136] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ first   : chr [1:136] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ middle  : chr [1:136] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ last    : chr [1:136] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ add_1   : chr [1:136] "13603 NW 30TH RD" "10820 MARVIN E JONES BLVD" "5002 W LEMON ST" "1859 SW NEWLAND WAY" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:136] "GAINESVILLE" "LIVE OAK" "TAMPA" "LAKE CITY" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:136] "FL" "FL" "FL" "FL" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:136] "326069331" "320608243" "336091104" "320256966" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ oth_txt : chr [1:136] "FILLING AS S-CORP" NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_ind : chr [1:136] "LLC, Other" "LLC" "LLC, For-Profit" "Corporation, For-Profit, Owned by Another Org/Ind" ...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
