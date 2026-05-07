@@ -5,61 +5,51 @@
 \title{FQHC Owners}
 \usage{
 fqhc_owner(
-  enid = NULL,
-  pac = NULL,
+  org_enid = NULL,
+  org_pac = NULL,
   org_name = NULL,
   own_pac = NULL,
-  own_type = NULL,
-  own_role = NULL,
-  own_first = NULL,
-  own_middle = NULL,
-  own_last = NULL,
-  own_title = NULL,
   own_org = NULL,
   own_dba = NULL,
-  own_address = NULL,
-  own_city = NULL,
-  own_state = NULL,
-  own_zip = NULL,
   own_pct = NULL,
+  own_role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE,
   set = FALSE
 )
 }
 \arguments{
-\item{enid}{\verb{<chr>} National Provider Identifier}
+\item{org_enid}{\verb{<chr>} National Provider Identifier}
 
-\item{pac}{\verb{<chr>} Provider's name}
+\item{org_pac}{\verb{<chr>} Provider's name}
 
 \item{org_name}{\verb{<chr>} Provider's name}
 
 \item{own_pac}{\verb{<chr>} Provider's name}
 
-\item{own_type}{\verb{<chr>} Provider's name}
-
-\item{own_role}{\verb{<chr>} Provider's name}
-
-\item{own_first}{\verb{<chr>} Provider's name}
-
-\item{own_middle}{\verb{<chr>} Provider's name}
-
-\item{own_last}{\verb{<chr>} Provider's name}
-
-\item{own_title}{\verb{<chr>} Provider's name}
-
 \item{own_org}{\verb{<chr>} Provider's name}
 
 \item{own_dba}{\verb{<chr>} Provider's name}
 
-\item{own_address}{\verb{<chr>} Provider's name}
-
-\item{own_city}{\verb{<chr>} Provider's name}
-
-\item{own_state}{\verb{<chr>} Provider's name}
-
-\item{own_zip}{\verb{<chr>} Provider's name}
-
 \item{own_pct}{\verb{<chr>} Provider's name}
+
+\item{own_role}{\verb{<chr>} Provider's name}
+
+\item{entity}{\verb{<chr>} Provider's name}
+
+\item{first, middle, last}{\verb{<chr>} Provider's name}
+
+\item{title}{\verb{<chr>} Provider's name}
+
+\item{address, city, state, zip}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -75,6 +65,6 @@ Providers with pending Medicare enrollment applications.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 fqhc_owner(count = TRUE)
 
-fqhc_owner(own_state = c("GA", "FL")) |> str()
+fqhc_owner(state = c("GA", "FL"))
 \dontshow{\}) # examplesIf}
 }

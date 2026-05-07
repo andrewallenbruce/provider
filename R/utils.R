@@ -82,11 +82,17 @@ provider_types <- function(
 }
 
 #' @noRd
-set_args <- function(fn) {
+set_args <- function(fn, ...) {
   invisible(
     list2env(
-      as.list(
-        rlang::fn_fmls(fn)
+      purrr::list_merge(
+        end = as.character(substitute(fn)),
+        purrr::list_assign(
+          as.list(
+            rlang::fn_fmls(fn)
+          ),
+          ...
+        )
       ),
       envir = .GlobalEnv
     )

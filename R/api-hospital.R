@@ -95,7 +95,8 @@ hospitals <- function(
   check_char_(loc_type)
   check_char_(prov_type)
 
-  x <- cms(
+  x <- inject(cms(
+    # end = "hospitals",
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -114,7 +115,7 @@ hospitals <- function(
     !!!subgroup,
     .count = count,
     .set = set,
-  )
+  ))
 
   x <- execute(x)
 
