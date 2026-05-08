@@ -37,7 +37,7 @@ polish.clinicians <- function(x) {
   rename_with(x, "clinicians") |>
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
     combine_columns(main = "specialty", other = "spec_other", sep = ", ") |>
-    rc_integer(c("npi", "grad_year", "org_mem"))
+    rc_integer(c("npi", "grad_year", "members"))
 }
 
 #' @export

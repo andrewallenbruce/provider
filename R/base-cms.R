@@ -53,20 +53,10 @@ cms <- function(
     fn = caller_fn()
   ))
 ) {
-  check_bool_(.count)
-  check_bool_(.set)
-  check_count_set(.count, .set)
-
   CMS(
     end = end,
     query = build(param_cms(...)) %||% character(0),
-    action = if (.count) {
-      "count"
-    } else if (.set) {
-      "set"
-    } else {
-      ""
-    }
+    action = count_set(.count, .set)
   )
 }
 #' @noRd

@@ -97,7 +97,7 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       sole = "SOLE PROPRIETOR"
     ),
     # <hospitals2>
-    ownership = c(
+    own_type = c(
       dod = "Department of Defense",
       profit = "Proprietary",
       physician = "Physician",

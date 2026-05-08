@@ -23,7 +23,7 @@ hospitals2(
   zip = NULL,
   county = NULL,
   hosp_type = NULL,
-  ownership = NULL,
+  own_type = NULL,
   rating = NULL,
   count = FALSE,
   set = FALSE
@@ -71,7 +71,7 @@ hospitals(
 \item \code{vha} = Acute Care - Veterans Administration
 }}
 
-\item{ownership}{\verb{<enum>} Ownership type:
+\item{own_type}{\verb{<enum>} Ownership type:
 \itemize{
 \item \code{private} = Voluntary non-profit - Private
 \item \code{other} = Voluntary non-profit - Other

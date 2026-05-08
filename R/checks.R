@@ -1,13 +1,20 @@
 #' @noRd
-check_count_set <- function(count, set, call = caller_env()) {
-  if (!is.null(count) && !is.null(set)) {
-    if (count && set) {
-      cli::cli_abort(
-        "Exactly {.emph one} of {.arg count} or {.arg set} can be set to {.val TRUE}.",
-        call = call
-      )
-    }
+count_set <- function(count, set, call = caller_env()) {
+  check_bool_(count)
+  check_bool_(set)
+  if (count && set) {
+    cli::cli_abort(
+      "Exactly {.emph one} of {.arg count} or {.arg set} can be set to {.val TRUE}.",
+      call = call
+    )
   }
+  if (count) {
+    return("count")
+  }
+  if (set) {
+    return("set")
+  }
+  return("")
 }
 
 #' @noRd

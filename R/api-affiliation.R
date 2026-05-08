@@ -282,7 +282,7 @@ convert_rating <- function(x = NULL, call = caller_env()) {
 #'    - `psych` = Psychiatric
 #'    - `reh` = Rural Emergency Hospital
 #'    - `vha` = Acute Care - Veterans Administration
-#' @param ownership `<enum>` Ownership type:
+#' @param own_type `<enum>` Ownership type:
 #'    - `private` = Voluntary non-profit - Private
 #'    - `other` = Voluntary non-profit - Other
 #'    - `church` = Voluntary non-profit - Church
@@ -308,7 +308,7 @@ hospitals2 <- function(
   zip = NULL,
   county = NULL,
   hosp_type = NULL,
-  ownership = NULL,
+  own_type = NULL,
   rating = NULL,
   count = FALSE,
   set = FALSE
@@ -323,7 +323,7 @@ hospitals2 <- function(
         zip_code = zip,
         countyparish = county,
         hospital_type = tag_enum(hosp_type),
-        hospital_ownership = tag_enum(ownership),
+        hospital_ownership = tag_enum(own_type),
         hospital_overall_rating = rating,
         .count = count,
         .set = set,

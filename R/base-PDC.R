@@ -52,10 +52,6 @@ pdc <- function(
     fn = caller_fn()
   ))
 ) {
-  check_bool_(.count)
-  check_bool_(.set)
-  check_count_set(.count, .set)
-
   x <- param_pdc(...)
 
   check_modifiers(x, end)
@@ -63,13 +59,7 @@ pdc <- function(
   PDC(
     end = end,
     query = build(x) %||% character(0),
-    action = if (.count) {
-      "count"
-    } else if (.set) {
-      "set"
-    } else {
-      ""
-    }
+    action = count_set(.count, .set)
   )
 }
 
