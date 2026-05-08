@@ -101,21 +101,20 @@ hospital_owner(count = TRUE)
 
 hospital_owner(state = c("GA", "FL"))
 #> ✔ hospital_owner returned 137 results.
-#> # A tibble: 137 × 20
+#> # A tibble: 137 × 19
 #>    org_enid    org_pac org_name pac   entity role  asc_date   first middle last 
-#>  * <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
-#>  1 O200407090… 953714… PROMISE… 1759… O      5% O… 2014-03-17 NA    NA     NA   
-#>  2 O200407090… 953714… PROMISE… 2860… O      5% O… 2003-11-04 NA    NA     NA   
-#>  3 O200407090… 953714… PROMISE… 3577… O      5% O… 2014-03-17 NA    NA     NA   
-#>  4 O200407090… 953714… PROMISE… 3971… O      5% O… 2004-06-30 NA    NA     NA   
-#>  5 O200407090… 953714… PROMISE… 3971… O      OPER… 2004-06-30 NA    NA     NA   
-#>  6 O200407090… 953714… PROMISE… 8224… O      5% O… 2003-11-04 NA    NA     NA   
-#>  7 O200602030… 872998… BERT FI… 1456… O      OTHER 2011-06-30 NA    NA     NA   
-#>  8 O200602030… 872998… BERT FI… 8729… O      5% O… 1995-03-13 NA    NA     NA   
-#>  9 O200602130… 630585… HERNAND… 1759… O      5% O… 2014-01-27 NA    NA     NA   
-#> 10 O200701230… 004212… MAYO CL… 5698… O      OPER… 2012-03-01 NA    NA     NA   
+#>    <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
+#>  1 O201101120… 761816… MHA LLC  0143… O      5% O… 2010-12-07 NA    NA     NA   
+#>  2 O201607150… 630513… SELECT … 0143… O      5% O… 2023-01-01 NA    NA     NA   
+#>  3 O201711140… 539500… NAVICEN… 0345… O      5% O… 2017-11-02 NA    NA     NA   
+#>  4 O202201260… 135574… NAVICEN… 0345… O      5% O… 2017-10-01 NA    NA     NA   
+#>  5 O201701310… 892138… LIFEBRI… 0345… O      5% O… 2016-10-12 NA    NA     NA   
+#>  6 O201701310… 892138… LIFEBRI… 0345… O      OPER… 2016-10-12 NA    NA     NA   
+#>  7 O201701310… 892138… LIFEBRI… 0345… O      5% O… 2017-01-30 NA    NA     NA   
+#>  8 O202409100… 155780… BRADLEY… 0446… O      5% O… 2024-08-01 NA    NA     NA   
+#>  9 O202011170… 660828… OHI WES… 0547… O      5% O… 2020-10-01 NA    NA     NA   
+#> 10 O202011170… 660828… OHI WES… 0547… O      OTHER 2020-10-01 NA    NA     NA   
 #> # ℹ 127 more rows
-#> # ℹ 10 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, oth_txt <chr>,
-#> #   owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, owner_type <chr>
 ```

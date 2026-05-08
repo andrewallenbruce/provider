@@ -101,21 +101,20 @@ rhc_owner(count = TRUE)
 
 rhc_owner(state = c("GA", "FL"))
 #> ✔ rhc_owner returned 136 results.
-#> # A tibble: 136 × 20
+#> # A tibble: 136 × 19
 #>    org_enid   org_pac org_name pac   role  asc_date   owner dba   percent entity
-#>  * <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
-#>  1 O20030724… 721484… TRI-COU… 5496… 5% O… 2021-06-26 GNT … NA     100    O     
-#>  2 O20031013… 347646… ACV COM… 3476… 5% O… 2003-11-01 ACV … ADVE…   NA    O     
-#>  3 O20040217… 620472… LONDON … 8224… OPER… 2020-12-31 PHYS… NA     100    O     
-#>  4 O20040712… 842603… ACUTE C… 8729… 5% O… 2024-05-01 NORT… NA      NA    O     
-#>  5 O20061202… 953716… HEARTLA… 7618… 5% O… 2014-01-01 CENT… NA     100    O     
-#>  6 O20070507… 468877… HEARTLA… 7618… 5% O… 2014-01-01 CENT… NA     100    O     
-#>  7 O20071016… 549684… ACUTE C… 8729… 5% O… 2024-05-01 NORT… NA     100    O     
-#>  8 O20080915… 620490… TATTNAL… 9638… 5% O… 2018-07-20 AURO… NA       6.49 O     
-#>  9 O20080915… 620490… TATTNAL… 2860… 5% O… 2018-07-20 AURO… NA       6.49 O     
-#> 10 O20090621… 620490… TATTNAL… 2860… 5% O… 2018-07-20 AURO… NA       6.49 O     
+#>    <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
+#>  1 O20130617… 024422… THE HOS… 0244… 5% O… 2013-02-04 THE … MILL…      NA O     
+#>  2 O20130604… 337579… THE MED… 0345… 5% O… 2011-11-01 NAVI… NA        100 O     
+#>  3 O20170208… 892138… LIFEBRI… 0345… 5% O… 2016-10-12 LIFE… NA        100 O     
+#>  4 O20170208… 892138… LIFEBRI… 0345… OPER… 2016-10-12 LIFE… NA         NA O     
+#>  5 O20181113… 892138… LIFEBRI… 0345… 5% O… 2017-01-31 LIFE… NA        100 O     
+#>  6 O20171013… 347645… BAPTIST… 0547… 5% O… 2024-10-01 ORLA… ORLA…       0 O     
+#>  7 O20171013… 347645… BAPTIST… 0547… OPER… 2024-10-01 ORLA… ORLA…      NA O     
+#>  8 O20030404… 872999… TMC HAR… 0547… 5% O… 2003-02-01 TMC/… TANN…      NA O     
+#>  9 O20150311… 084019… CHATUGE… 0840… OPER… 2014-09-12 CHAT… HAYE…     100 O     
+#> 10 O20191011… 185043… MERIWET… 0840… 5% O… 2009-10-30 PINN… NA          5 O     
 #> # ℹ 126 more rows
-#> # ℹ 10 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
-#> #   owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, owner_type <chr>
 ```

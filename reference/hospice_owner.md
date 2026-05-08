@@ -101,21 +101,20 @@ hospice_owner(count = TRUE)
 
 hospice_owner(state = c("GA", "FL"))
 #> ✔ hospice_owner returned 1,961 results.
-#> # A tibble: 1,961 × 20
+#> # A tibble: 1,961 × 19
 #>    org_enid    org_pac org_name pac   entity role  asc_date   first middle last 
-#>  * <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
-#>  1 O200301150… 448656… CAPITAL… 2567… O      OPER… 2023-05-01 NA    NA     NA   
-#>  2 O200304300… 448656… CAPITAL… 1254… O      OPER… 2004-08-26 NA    NA     NA   
-#>  3 O200304300… 448656… CAPITAL… 2567… O      OPER… 2023-05-01 NA    NA     NA   
-#>  4 O200308290… 094111… PORTERC… 5597… O      5% O… 2001-10-01 NA    NA     NA   
-#>  5 O200308290… 094111… PORTERC… 5597… O      OPER… 2023-08-01 NA    NA     NA   
-#>  6 O200310210… 660878… EAST BA… 2567… O      OPER… 2025-10-01 NA    NA     NA   
-#>  7 O200402190… 822492… VITAS H… 4486… O      5% O… 2001-04-27 NA    NA     NA   
-#>  8 O200402190… 822492… VITAS H… 7113… O      5% O… 2025-08-11 NA    NA     NA   
-#>  9 O200404210… 569868… VITAS H… 4486… O      5% O… 2001-04-27 NA    NA     NA   
-#> 10 O200404210… 569868… VITAS H… 7113… O      5% O… 2001-04-27 NA    NA     NA   
+#>    <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
+#>  1 O201512220… 347685… AUGUSTA… 0143… O      5% O… 2025-12-31 NA    NA     NA   
+#>  2 O201803150… 539500… GODLY H… 0244… O      5% O… 2022-02-14 NA    NA     NA   
+#>  3 O200603080… 347656… CATHOLI… 0345… O      OPER… 2010-04-16 NA    NA     NA   
+#>  4 O200711280… 367847… THE MED… 0345… O      5% O… 1994-11-01 NA    NA     NA   
+#>  5 O201202230… 408287… ST. JOS… 0345… O      5% O… 2010-11-09 NA    NA     NA   
+#>  6 O201203130… 408287… ST. JOS… 0345… O      5% O… 2010-11-09 NA    NA     NA   
+#>  7 O201112140… 135551… SERENIT… 0446… O      5% O… 2020-10-30 NA    NA     NA   
+#>  8 O201405290… 226459… ST CROI… 0446… O      5% O… 2020-10-30 NA    NA     NA   
+#>  9 O201508070… 226459… ST CROI… 0446… O      5% O… 2020-10-30 NA    NA     NA   
+#> 10 O201906260… 226459… ST CROI… 0446… O      5% O… 2020-10-30 NA    NA     NA   
 #> # ℹ 1,951 more rows
-#> # ℹ 10 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, oth_txt <chr>,
-#> #   owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, owner_type <chr>
 ```

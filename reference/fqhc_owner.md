@@ -101,21 +101,20 @@ fqhc_owner(count = TRUE)
 
 fqhc_owner(state = c("GA", "FL"))
 #> ✔ fqhc_owner returned 254 results.
-#> # A tibble: 254 × 20
+#> # A tibble: 254 × 19
 #>    org_enid   org_pac org_name pac   role  asc_date   owner dba   percent entity
-#>  * <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
-#>  1 O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     
-#>  2 O20030417… 357747… NORTH B… 3577… OPER… 1993-10-01 NORT… BROW…     100 O     
-#>  3 O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     
-#>  4 O20030417… 357747… NORTH B… 3577… OPER… 1993-07-01 NORT… BROW…     100 O     
-#>  5 O20070613… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     
-#>  6 O20090826… 236535… TRENTON… 2365… OPER… 2014-02-27 TREN… PALM…     100 O     
-#>  7 O20100510… 721484… MCR HEA… 7214… 5% O… 2009-11-02 MCR … MCR …      NA O     
-#>  8 O20100809… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     
-#>  9 O20100902… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      NA O     
-#> 10 O20100907… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      NA O     
+#>    <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
+#>  1 O20101007… 014312… CENTRAL… 0143… 5% O… 1994-10-01 CENT… CENT…     100 O     
+#>  2 O20160930… 014312… CENTRAL… 0143… 5% O… 2016-09-30 CENT… CENT…      NA O     
+#>  3 O20160930… 014312… CENTRAL… 0143… 5% O… 2020-01-01 CENT… CENT…      NA O     
+#>  4 O20160930… 014312… CENTRAL… 0143… 5% O… 2016-08-01 CENT… CENT…      NA O     
+#>  5 O20200608… 014312… CENTRAL… 0143… 5% O… 2020-05-11 CENT… CENT…      NA O     
+#>  6 O20220309… 014312… CENTRAL… 0143… 5% O… 2022-04-01 CENT… CENT…     100 O     
+#>  7 O20240515… 014312… CENTRAL… 0143… 5% O… 2024-05-02 CENT… CENT…     100 O     
+#>  8 O20221216… 024422… SMA HEA… 0244… OPER… 2022-10-01 SMA … NA        100 O     
+#>  9 O20221216… 024422… SMA HEA… 0244… OTHER 2022-10-01 SMA … NA          0 O     
+#> 10 O20190326… 044615… PROJECT… 0446… 5% O… 1974-12-12 PROJ… LANG…     100 O     
 #> # ℹ 244 more rows
-#> # ℹ 10 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
-#> #   owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, owner_type <chr>
 ```
