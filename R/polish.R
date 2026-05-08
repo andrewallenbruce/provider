@@ -64,16 +64,6 @@ polish.fqhc_enroll <- function(x) {
 }
 
 #' @export
-polish.fqhc_owner <- function(x) {
-  rename_with(x, "fqhc_owner") |>
-    combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_double("own_pct") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd("own_date") |>
-    owner_pivot()
-}
-
-#' @export
 polish.hospice_enroll <- function(x) {
   rename_with(x, "hospice_enroll") |>
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
@@ -83,12 +73,60 @@ polish.hospice_enroll <- function(x) {
 }
 
 #' @export
+polish.rhc_enroll <- function(x) {
+  rename_with(x, "rhc_enroll") |>
+    combine_columns(main = "address", other = "add_2", sep = ", ") |>
+    rc_integer("npi") |>
+    rc_bin("multi") |>
+    rc_date_ymd("inc_date")
+}
+
+#' @export
+polish.snf_enroll <- function(x) {
+  rename_with(x, "snf_enroll") |>
+    combine_columns(main = "address", other = "add_2", sep = ", ") |>
+    rc_integer("npi") |>
+    rc_bin("multi") |>
+    rc_date_ymd("inc_date")
+}
+
+#' @export
+polish.snf_owner <- function(x) {
+  rename_with(x, "snf_owner") |>
+    combine_columns(x, main = "address", other = "add_2", sep = ", ") |>
+    rc_double("percent") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_date_ymd("asc_date") |>
+    owner_pivot()
+}
+
+#' @export
+polish.rhc_owner <- function(x) {
+  rename_with(x, "rhc_owner") |>
+    combine_columns(main = "address", other = "add_2", sep = ", ") |>
+    rc_double("percent") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_date_ymd("asc_date") |>
+    owner_pivot()
+}
+
+#' @export
+polish.fqhc_owner <- function(x) {
+  rename_with(x, "fqhc_owner") |>
+    combine_columns(main = "address", other = "add_2", sep = ", ") |>
+    rc_double("percent") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_date_ymd("asc_date") |>
+    owner_pivot()
+}
+
+#' @export
 polish.hospice_owner <- function(x) {
   rename_with(x, "hospice_owner") |>
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_double("own_pct") |>
+    rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd("own_date") |>
+    rc_date_ymd("asc_date") |>
     owner_pivot()
 }
 
@@ -96,9 +134,9 @@ polish.hospice_owner <- function(x) {
 polish.hospital_owner <- function(x) {
   rename_with(x, "hospital_owner") |>
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_double("own_pct") |>
+    rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd("own_date") |>
+    rc_date_ymd("asc_date") |>
     owner_pivot()
 }
 
@@ -171,49 +209,11 @@ polish.reassignments <- function(x) {
 }
 
 #' @export
-polish.rhc_enroll <- function(x) {
-  rename_with(x, "rhc_enroll") |>
-    combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_integer("npi") |>
-    rc_bin("multi") |>
-    rc_date_ymd("inc_date")
-}
-
-#' @export
-polish.rhc_owner <- function(x) {
-  rename_with(x, "rhc_owner") |>
-    combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_double("own_pct") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd("own_date") |>
-    owner_pivot()
-}
-
-#' @export
 polish.revocations <- function(x) {
   rename_with(x, "revocations") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_date_ymd(c("start_date", "end_date"))
-}
-
-#' @export
-polish.snf_enroll <- function(x) {
-  rename_with(x, "snf_enroll") |>
-    combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_integer("npi") |>
-    rc_bin("multi") |>
-    rc_date_ymd("inc_date")
-}
-
-#' @export
-polish.snf_owner <- function(x) {
-  rename_with(x, "snf_owner") |>
-    combine_columns(main = "address", other = "add_2", sep = ", ") |>
-    rc_double("own_pct") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_date_ymd("own_date") |>
-    owner_pivot()
 }
 
 #' @export

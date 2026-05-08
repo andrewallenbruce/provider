@@ -182,47 +182,6 @@ RC_owner_type <- function(xcol) {
 
 #' @autoglobal
 #' @noRd
-owner_pivot <- function(x) {
-  y <- collapse::gvr(x, "own_pac|_ind$") |>
-    collapse::pivot(
-      ids = "own_pac",
-      factor = FALSE,
-      names = list(variable = "own_ind", value = "bin"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique() |>
-    collapse::roworderv("own_pac")
-
-  if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$") <- NULL
-    x <- collapse::av(x, own_ind = rep.int(NA_character_, nrow(x)))
-    return(x)
-  }
-
-  y <- collapse::ss(y, y$bin %==% 1L)
-
-  if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$") <- NULL
-    x <- collapse::av(x, own_ind = rep.int(NA_character_, nrow(x)))
-    return(x)
-  }
-
-  RC_owner_type(y$own_ind)
-
-  collapse::gv(y, "bin") <- NULL
-  collapse::gvr(x, "_ind$") <- NULL
-
-  y <- collapse::roworderv(y, "own_pac") |>
-    collapse::gby(own_pac) |>
-    collapse::mtt(own_ind = paste0(own_ind, collapse = ", ")) |>
-    collapse::fungroup() |>
-    collapse::funique()
-
-  collapse::join(x, y, on = "own_pac", verbose = 0L)
-}
-
-#' @autoglobal
-#' @noRd
 credit_pivot <- function(x) {
   col_acr <- c("a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
 
@@ -264,14 +223,65 @@ credit_pivot <- function(x) {
     collapse::funique()
 
   d <- collapse::ss(d, j = c(1L, 3L))
-
   y <- collapse::join(i, d, on = "fac_ccn", verbose = 0L)
 
   RC_clia_credit_type(y$acr_org)
-
   collapse::gvr(x, col_acr) <- NULL
-
   collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
+}
+
+#' @autoglobal
+#' @noRd
+owner_pivot <- function(x) {
+  y <- collapse::gvr(x, "^pac$|_ind$|_txt$") |>
+    collapse::pivot(
+      ids = c("pac", "oth_txt"),
+      factor = FALSE,
+      names = list(variable = "owner_type", value = "bin"),
+      na.rm = TRUE
+    ) |>
+    collapse::funique() |>
+    collapse::roworderv("pac")
+
+  if (nrow(y) == 0L) {
+    collapse::gvr(x, "_ind$") <- NULL
+    x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
+    return(x)
+  }
+
+  y <- collapse::ss(y, y$bin %==% 1L, 1:3)
+
+  if (nrow(y) == 0L) {
+    collapse::gvr(x, "_ind$") <- NULL
+    x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
+    return(x)
+  }
+
+  RC_owner_type(y$owner_type)
+  collapse::gvr(x, "_ind$") <- NULL
+  y <- combine_columns(
+    y,
+    main = "owner_type",
+    other = "oth_txt",
+    prefix = "Other: ",
+    sep = ""
+  ) |>
+    collapse::fcountv("pac", add = TRUE) |>
+    collapse::funique()
+
+  z <- cheapr::sset(y, cheapr::which_(y$N > 1L), 1:2)
+  y <- cheapr::sset(y, cheapr::which_(y$N == 1L), 1:2)
+  g <- collapse::GRP(z$pac)
+
+  y <- collapse::gsplit(z$owner_type, g) |>
+    set_names(collapse::GRPnames(g)) |>
+    purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
+    cheapr::as_df() |>
+    set_names(c("pac", "owner_type")) |>
+    collapse::rowbind(y) |>
+    collapse::roworderv(c("pac", "owner_type"))
+
+  collapse::join(x, y, on = "pac", verbose = 0L)
 }
 
 #' @autoglobal
@@ -304,27 +314,21 @@ subgroup_pivot <- function(x) {
   }
 
   RC_subgroup_type(y$subgroup)
-
-  # o <- cheapr::which_(
-  #   y$subgroup %==% "Other" &
-  #   cheapr::which_not_na(y$sub_otxt)
-  # )
-
-  # if (empty(o)) {
-  # Handle Other Text
-  # }
-
   collapse::gvr(x, "sub_") <- NULL
-
-  y <- collapse::ss(y, j = c(1, 3)) |>
-    collapse::funique() |>
-    collapse::roworderv(c("enid", "subgroup")) |>
-    collapse::fcountv("enid", add = TRUE)
+  y <- combine_columns(
+    y,
+    main = "subgroup",
+    other = "sub_otxt",
+    prefix = "Other: ",
+    sep = ""
+  ) |>
+    collapse::fcountv("enid", add = TRUE) |>
+    collapse::funique()
 
   z <- cheapr::sset(y, cheapr::which_(y$N > 1L), 1:2)
   y <- cheapr::sset(y, cheapr::which_(y$N == 1L), 1:2)
-
   g <- collapse::GRP(z$enid)
+
   y <- collapse::gsplit(z$subgroup, g) |>
     set_names(collapse::GRPnames(g)) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>

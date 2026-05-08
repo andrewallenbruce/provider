@@ -8,11 +8,11 @@ rhc_owner(
   org_enid = NULL,
   org_pac = NULL,
   org_name = NULL,
-  own_pac = NULL,
-  own_org = NULL,
-  own_dba = NULL,
-  own_pct = NULL,
-  own_role = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
   entity = NULL,
   first = NULL,
   middle = NULL,
@@ -33,15 +33,15 @@ rhc_owner(
 
 \item{org_name}{\verb{<chr>} Provider's name}
 
-\item{own_pac}{\verb{<chr>} Provider's name}
+\item{pac}{\verb{<chr>} Provider's name}
 
-\item{own_org}{\verb{<chr>} Provider's name}
+\item{owner}{\verb{<chr>} Provider's name}
 
-\item{own_dba}{\verb{<chr>} Provider's name}
+\item{dba}{\verb{<chr>} Provider's name}
 
-\item{own_pct}{\verb{<chr>} Provider's name}
+\item{percent}{\verb{<chr>} Provider's name}
 
-\item{own_role}{\verb{<chr>} Provider's name}
+\item{role}{\verb{<chr>} Provider's name}
 
 \item{entity}{\verb{<chr>} Provider's name}
 
@@ -65,6 +65,6 @@ Providers with pending Medicare enrollment applications.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 rhc_owner(count = TRUE)
 
-rhc_owner(state = c("GA", "FL")) |> str()
+rhc_owner(state = c("GA", "FL"))
 \dontshow{\}) # examplesIf}
 }
