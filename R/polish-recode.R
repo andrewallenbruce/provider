@@ -3,27 +3,27 @@ RC_clia_term_type <- function(xcol) {
   collapse::recode_char(
     xcol,
     "00" = "Active",
-    "01" = "Voluntary-Merger/Closure",
-    "02" = "Voluntary-Reimbursement Dissatisfaction",
-    "03" = "Voluntary-Termination Risk",
-    "04" = "Voluntary-Other",
-    "05" = "Involuntary-Health/Safety Failure",
-    "06" = "Involuntary-Agreement Failure",
-    "07" = "Other Status Change",
+    "01" = "Voluntary [Merger/Closure]",
+    "02" = "Voluntary [Reimbursement]",
+    "03" = "Voluntary [Term Risk]",
+    "04" = "Voluntary [Other]",
+    "05" = "Involuntary [Safety]",
+    "06" = "Involuntary [Agreement]",
+    "07" = "Other",
     "08" = "Fee Nonpayment (CLIA)",
     "09" = "Unsuccessful PT (CLIA)",
     "10" = "Other (CLIA)",
     "11" = "Incomplete Application (CLIA)",
     "12" = "Not Performing Tests (CLIA)",
-    "13" = "Multiple to Single Site (CLIA)",
-    "14" = "Shared Laboratory (CLIA)",
-    "15" = "Failure to Renew Waiver PPM (CLIA)",
+    "13" = "Multiple to Single (CLIA)",
+    "14" = "Shared Lab (CLIA)",
+    "15" = "Unrenewed Waiver PPM (CLIA)",
     "16" = "Duplicate CLIA (CLIA)",
-    "17" = "Mail Returned Cert Ended (CLIA)",
+    "17" = "Unable to Contact (CLIA)",
     "20" = "Bankruptcy (CLIA)",
     "33" = "Accreditation Unconfirmed (CLIA)",
     "80" = "Awaiting State Approval",
-    "99" = "OIG Do Not Activate (CLIA)",
+    "99" = "OIG Action (CLIA)",
     default = NA_character_,
     set = TRUE
   )
@@ -47,16 +47,16 @@ RC_clia_cert_type <- function(xcol) {
 RC_clia_own_type <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "01" = "Religious Affiliation",
+    "01" = "RNHCI",
     "02" = "Private",
     "03" = "Other",
     "04" = "Proprietary",
     "05" = "Validation",
-    "05" = "Govt-City",
-    "06" = "Govt-County",
-    "07" = "Govt-State",
-    "08" = "Govt-Federal",
-    "09" = "Govt-Other",
+    "05" = "[GOE] City",
+    "06" = "[GOE] County",
+    "07" = "[GOE] State",
+    "08" = "[GOE] Federal",
+    "09" = "[GOE] Other",
     "10" = "Unknown",
     default = NA_character_,
     set = TRUE
@@ -69,7 +69,7 @@ RC_clia_fac_type <- function(xcol) {
     xcol,
     "01" = "Ambulance",
     "02" = "ASC",
-    "03" = "Ancillary Site",
+    "03" = "Ancillary",
     "04" = "ALF",
     "05" = "Blood Bank",
     "06" = "Community Clinic",
@@ -85,7 +85,7 @@ RC_clia_fac_type <- function(xcol) {
     "16" = "Industrial",
     "17" = "Insurance",
     "18" = "ICF-IID",
-    "19" = "Mobile Lab",
+    "19" = "Mobile",
     "20" = "Pharmacy",
     "21" = "Physician",
     "22" = "Other Practitioner",
@@ -105,12 +105,12 @@ RC_clia_fac_type <- function(xcol) {
 RC_clia_act_type <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "1" = "Initial",
-    "2" = "Recertification",
-    "3" = "Termination",
-    "4" = "Change of Ownership",
-    "5" = "Validation",
-    "8" = "Full Survey After Complaint",
+    "1" = "Init",
+    "2" = "Recert",
+    "3" = "Term",
+    "4" = "CHOW",
+    "5" = "Validate",
+    "8" = "Survey (Complaint)",
     default = NA_character_,
     set = TRUE
   )
@@ -120,13 +120,13 @@ RC_clia_act_type <- function(xcol) {
 RC_clia_credit_type <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "a2la_ind" = "A2LA",
-    "aabb_ind" = "AABB",
-    "aoa_ind" = "AOA",
-    "ashi_ind" = "ASHI-HLA",
-    "cap_ind" = "CAP",
-    "cola_ind" = "COLA",
-    "jcaho_ind" = "JCAHO",
+    "a2la_date" = "A2LA",
+    "aabb_date" = "AABB",
+    "aoa_date" = "AOA",
+    "ashi_date" = "ASHI-HLA",
+    "cap_date" = "CAP",
+    "cola_date" = "COLA",
+    "jcaho_date" = "JCAHO",
     default = NA_character_,
     set = TRUE
   )
@@ -161,20 +161,20 @@ RC_owner_type <- function(xcol) {
     "acq_ind" = "Created for Aquisition",
     "corp_ind" = "Corporation",
     "llc_ind" = "LLC",
-    "mps_ind" = "Medical Provider/Supplier",
-    "msr_ind" = "Management Services Company",
-    "mst_ind" = "Medical Staffing Company",
+    "mps_ind" = "Provider/Supplier",
+    "msr_ind" = "Management Service",
+    "mst_ind" = "Medical Staffing",
     "hld_ind" = "Holding Company",
     "inv_ind" = "Investment Firm",
-    "fin_ind" = "Financial Institution",
+    "fin_ind" = "Bank",
     "con_ind" = "Consulting Firm",
     "fp_ind" = "For-Profit",
     "np_ind" = "Non-Profit",
     "pe_ind" = "Private Equity",
     "reit_ind" = "REIT",
-    "cho_ind" = "Chain Home Office",
+    "cho_ind" = "Chain",
     "oth_ind" = "Other",
-    "ano_ind" = "Owned by Another Org/Ind",
+    "ano_ind" = "Another Org/Ind",
     default = NA_character_,
     set = TRUE
   )
@@ -186,47 +186,30 @@ credit_pivot <- function(x) {
   col_acr <- c("a2la_", "aabb_", "aoa_", "ashi_", "cap_", "cola_", "jcaho_")
 
   y <- collapse::gvr(x, c("fac_ccn", col_acr)) |>
+    collapse::gvr(c("fac_ccn", "_date")) |>
+    collapse::pivot(
+      ids = "fac_ccn",
+      names = list(variable = "acr_org", value = "acr_date"),
+      na.rm = TRUE
+    ) |>
+    collapse::funique() |>
     collapse::roworderv("fac_ccn")
 
-  i <- collapse::gvr(y, c("fac_ccn", "_ind")) |>
-    collapse::pivot(
-      ids = "fac_ccn",
-      factor = FALSE,
-      names = list(variable = "acr_org", value = "bin"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique()
-
-  if (nrow(i) == 0L) {
+  if (nrow(y) == 0L) {
     collapse::gvr(x, col_acr) <- NULL
-    n <- rep.int(NA_character_, nrow(x))
-    x <- collapse::av(x, acr_org = n, acr_date = n)
-    return(x)
+    return(collapse::av(
+      x,
+      acr_org = cheapr::na_init(y$acr_org, nrow(x)),
+      acr_date = cheapr::na_init(y$acr_date, nrow(x))
+    ))
   }
 
-  i <- collapse::ss(i, i$bin %==% 1L, 1:2)
-
-  if (nrow(i) == 0L) {
-    collapse::gvr(x, col_acr) <- NULL
-    n <- rep.int(NA_character_, nrow(x))
-    x <- collapse::av(x, acr_org = n, acr_date = n)
-    return(x)
-  }
-
-  d <- collapse::gvr(y, c("fac_ccn", "_date")) |>
-    collapse::pivot(
-      ids = "fac_ccn",
-      factor = FALSE,
-      names = list(value = "acr_date"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique()
-
-  d <- collapse::ss(d, j = c(1L, 3L))
-  y <- collapse::join(i, d, on = "fac_ccn", verbose = 0L)
+  collapse::settfmv(y, "acr_org", as.character)
 
   RC_clia_credit_type(y$acr_org)
+
   collapse::gvr(x, col_acr) <- NULL
+
   collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
 }
 
@@ -236,7 +219,6 @@ owner_pivot <- function(x) {
   y <- collapse::gvr(x, "^pac$|_ind$|_txt$") |>
     collapse::pivot(
       ids = c("pac", "oth_txt"),
-      factor = FALSE,
       names = list(variable = "owner_type", value = "bin"),
       na.rm = TRUE
     ) |>
@@ -245,20 +227,22 @@ owner_pivot <- function(x) {
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "_ind$|_txt$") <- NULL
-    x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
-    return(x)
+    return(collapse::av(x, owner_type = rep.int(NA_character_, nrow(x))))
   }
 
   y <- collapse::ss(y, y$bin %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "_ind$|_txt$") <- NULL
-    x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
-    return(x)
+    return(collapse::av(x, owner_type = rep.int(NA_character_, nrow(x))))
   }
 
+  collapse::settfmv(y, "owner_type", as.character)
+
   RC_owner_type(y$owner_type)
+
   collapse::gvr(x, "_ind$|_txt$") <- NULL
+
   y <- combine_columns(
     y,
     main = "owner_type",
@@ -269,14 +253,21 @@ owner_pivot <- function(x) {
     collapse::fcountv("pac", add = TRUE) |>
     collapse::funique()
 
-  z <- cheapr::sset(y, cheapr::which_(y$N > 1L), 1:2)
-  y <- cheapr::sset(y, cheapr::which_(y$N == 1L), 1:2)
-  g <- collapse::GRP(z$pac)
+  if (collapse::fsum(y$N > 1L) == 0L) {
+    return(collapse::join(
+      x,
+      collapse::ss(y, j = 1:2),
+      on = "pac",
+      verbose = 0L
+    ))
+  }
 
-  y <- collapse::gsplit(z$owner_type, g) |>
-    set_names(collapse::GRPnames(g)) |>
+  y <- collapse::ss(y, j = 1:2)
+  g <- collapse::GRP(y$pac, call = FALSE)
+
+  y <- collapse::gsplit(y$owner_type, g, use.g.names = TRUE) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
-    cheapr::as_df() |>
+    as_data_frame() |>
     set_names(c("pac", "owner_type")) |>
     collapse::rowbind(y) |>
     collapse::roworderv(c("pac", "owner_type"))
@@ -288,33 +279,32 @@ owner_pivot <- function(x) {
 #' @noRd
 subgroup_pivot <- function(x) {
   y <- collapse::gvr(x, "^enid$|sub_") |>
-    collapse::roworderv("enid") |>
     collapse::pivot(
       ids = c("enid", "sub_otxt"),
-      factor = FALSE,
       names = list("subgroup", "ind"),
       na.rm = TRUE
     ) |>
-    collapse::funique()
+    collapse::funique() |>
+    collapse::roworderv("enid")
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "sub_") <- NULL
-    n <- rep.int(NA_character_, nrow(x))
-    x <- collapse::av(x, subgroup = n)
-    return(x)
+    return(collapse::av(x, subgroup = rep.int(NA_character_, nrow(x))))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "sub_") <- NULL
-    n <- rep.int(NA_character_, nrow(x))
-    x <- collapse::av(x, subgroup = n)
-    return(x)
+    return(collapse::av(x, subgroup = rep.int(NA_character_, nrow(x))))
   }
 
+  collapse::settfmv(y, "subgroup", as.character)
+
   RC_subgroup_type(y$subgroup)
+
   collapse::gvr(x, "sub_") <- NULL
+
   y <- combine_columns(
     y,
     main = "subgroup",
@@ -325,14 +315,21 @@ subgroup_pivot <- function(x) {
     collapse::fcountv("enid", add = TRUE) |>
     collapse::funique()
 
-  z <- cheapr::sset(y, cheapr::which_(y$N > 1L), 1:2)
-  y <- cheapr::sset(y, cheapr::which_(y$N == 1L), 1:2)
-  g <- collapse::GRP(z$enid)
+  if (collapse::fsum(y$N > 1L) == 0L) {
+    return(collapse::join(
+      x,
+      collapse::ss(y, j = 1:2),
+      on = "enid",
+      verbose = 0L
+    ))
+  }
 
-  y <- collapse::gsplit(z$subgroup, g) |>
-    set_names(collapse::GRPnames(g)) |>
+  y <- collapse::ss(y, j = 1:2)
+  g <- collapse::GRP(y$enid, call = FALSE)
+
+  y <- collapse::gsplit(y$subgroup, g, use.g.names = TRUE) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
-    cheapr::as_df() |>
+    as_data_frame() |>
     set_names(c("enid", "subgroup")) |>
     collapse::rowbind(y) |>
     collapse::roworderv(c("enid", "subgroup"))

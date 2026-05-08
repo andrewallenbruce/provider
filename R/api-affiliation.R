@@ -257,6 +257,8 @@ convert_rating <- function(x = NULL, call = caller_env()) {
     )
   }
 
+  # TODO convert to tag_enum
+
   names2(set_names(1:5, paste0, ".0")[unique(x)])
 }
 

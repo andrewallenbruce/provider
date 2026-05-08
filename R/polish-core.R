@@ -59,11 +59,6 @@ rc_date_ymd2 <- rc_(as_date_ymd2)
 rc_date_mdy <- rc_(as_date_mdy)
 
 #' @noRd
-combine_cols <- function(e1, e2, sep = ", ") {
-  cheapr::if_else_(cheapr::is_na(e2), e1, cheapr::paste_(e1, e2, sep = sep))
-}
-
-#' @noRd
 combine_columns <- function(
   x,
   main,
