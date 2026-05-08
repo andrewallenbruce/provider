@@ -60,7 +60,14 @@ polish.fqhc_enroll <- function(x) {
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
-    rc_date_ymd("inc_date")
+    rc_date_ymd("inc_date") |>
+    combine_columns(
+      main = "org_type",
+      other = "org_otxt",
+      prefix = "Other: ",
+      sep = ""
+    ) |>
+    collapse::roworderv(c("enid"))
 }
 
 #' @export
@@ -69,7 +76,14 @@ polish.hospice_enroll <- function(x) {
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
-    rc_date_ymd("inc_date")
+    rc_date_ymd("inc_date") |>
+    combine_columns(
+      main = "org_type",
+      other = "org_otxt",
+      prefix = "Other: ",
+      sep = ""
+    ) |>
+    collapse::roworderv(c("enid"))
 }
 
 #' @export
@@ -78,7 +92,14 @@ polish.rhc_enroll <- function(x) {
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
-    rc_date_ymd("inc_date")
+    rc_date_ymd("inc_date") |>
+    combine_columns(
+      main = "org_type",
+      other = "org_otxt",
+      prefix = "Other: ",
+      sep = ""
+    ) |>
+    collapse::roworderv(c("enid"))
 }
 
 #' @export
@@ -87,7 +108,14 @@ polish.snf_enroll <- function(x) {
     combine_columns(main = "address", other = "add_2", sep = ", ") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
-    rc_date_ymd("inc_date")
+    rc_date_ymd("inc_date") |>
+    combine_columns(
+      main = "org_type",
+      other = "org_otxt",
+      prefix = "Other: ",
+      sep = ""
+    ) |>
+    collapse::roworderv(c("enid"))
 }
 
 #' @export
@@ -97,7 +125,8 @@ polish.snf_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd("asc_date") |>
-    owner_pivot()
+    owner_pivot() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
@@ -107,7 +136,8 @@ polish.rhc_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd("asc_date") |>
-    owner_pivot()
+    owner_pivot() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
@@ -117,7 +147,8 @@ polish.fqhc_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd("asc_date") |>
-    owner_pivot()
+    owner_pivot() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
@@ -127,7 +158,8 @@ polish.hospice_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd("asc_date") |>
-    owner_pivot()
+    owner_pivot() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
@@ -137,7 +169,8 @@ polish.hospital_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_date_ymd("asc_date") |>
-    owner_pivot()
+    owner_pivot() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
@@ -199,7 +232,8 @@ polish.pending <- function(x) {
 polish.providers <- function(x) {
   rename_with(x, "providers") |>
     rc_integer("npi") |>
-    rc_bin("multi")
+    rc_bin("multi") |>
+    collapse::roworderv(c("pac", "npi"))
 }
 
 #' @export

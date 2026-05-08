@@ -244,7 +244,7 @@ owner_pivot <- function(x) {
     collapse::roworderv("pac")
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$") <- NULL
+    collapse::gvr(x, "_ind$|_txt$") <- NULL
     x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
     return(x)
   }
@@ -252,13 +252,13 @@ owner_pivot <- function(x) {
   y <- collapse::ss(y, y$bin %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$") <- NULL
+    collapse::gvr(x, "_ind$|_txt$") <- NULL
     x <- collapse::av(x, owner_type = rep.int(NA_character_, nrow(x)))
     return(x)
   }
 
   RC_owner_type(y$owner_type)
-  collapse::gvr(x, "_ind$") <- NULL
+  collapse::gvr(x, "_ind$|_txt$") <- NULL
   y <- combine_columns(
     y,
     main = "owner_type",
