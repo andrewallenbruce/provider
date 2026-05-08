@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9152 (2026-05-08)
+
+* pivot method refinement
+
+
 # provider 0.0.1.9151 (2026-05-08)
 
 * experimenting with post-process row sorting
