@@ -96,7 +96,6 @@ hospitals <- function(
   check_char_(prov_type)
 
   x <- inject(cms(
-    # end = "hospitals",
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,

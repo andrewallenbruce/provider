@@ -67,22 +67,32 @@ combine_cols <- function(e1, e2, sep = ", ") {
 combine_columns <- function(
   x,
   main,
-  otxt,
+  other,
   prefix = NULL,
-  sep = ", "
+  sep = ", ",
+  arg = caller_arg(other),
+  call = caller_env()
 ) {
-  i <- cheapr::which_not_na(x[[otxt]])
+  if (rlang::is_null(x[[other]])) {
+    cli::cli_abort(
+      "Column {.val {other}} does not exist in {.var x}.",
+      arg = arg,
+      call = call
+    )
+  }
+
+  i <- cheapr::which_not_na(x[[other]])
 
   if (rlang::is_empty(i)) {
-    collapse::gv(x, otxt) <- NULL
+    collapse::gv(x, other) <- NULL
     return(x)
   }
 
-  COL <- paste0(prefix, paste(x[i, otxt, drop = TRUE], sep = sep))
+  COL <- paste0(prefix, paste(x[i, other, drop = TRUE], sep = sep))
 
   collapse::gv(x[i, ], main) <- COL
-  collapse::gv(x, otxt) <- NULL
-  x
+  collapse::gv(x, other) <- NULL
+  return(x)
 }
 
 #' @noRd

@@ -43,15 +43,6 @@ param_pdc <- function(...) {
 }
 
 #' @noRd
-method(build, ParamPDC) <- function(x) {
-  S7_data(x) %0% return(NULL)
-
-  S7_data(x) |>
-    purrr::imap(\(x, n) query("pdc", x, n)) |>
-    flatten_query()
-}
-
-#' @noRd
 pdc <- function(
   ...,
   .count = FALSE,

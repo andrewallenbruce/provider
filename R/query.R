@@ -23,6 +23,22 @@ preprocess <- function(x) {
 }
 
 #' @noRd
+get_values <- function(x) {
+  if (is_modifier(x)) {
+    return(plus(x@value))
+  }
+  plus(unlist_(x))
+}
+
+#' @noRd
+get_operators <- function(x) {
+  if (is_modifier(x)) {
+    return(x@operator)
+  }
+  if (length(unlist_(x)) > 1L) "IN" else "="
+}
+
+#' @noRd
 query <- function(api, x, N) {
   x <- preprocess(x)
 
@@ -61,4 +77,22 @@ flatten_query <- function(x) {
 #' @noRd
 params <- function(...) {
   purrr::compact(rlang::list2(...))
+}
+
+#' @noRd
+method(build, ParamCMS) <- function(x) {
+  S7_data(x) %0% return(NULL)
+
+  S7_data(x) |>
+    purrr::imap(\(x, n) query("cms", x, n)) |>
+    flatten_query()
+}
+
+#' @noRd
+method(build, ParamPDC) <- function(x) {
+  S7_data(x) %0% return(NULL)
+
+  S7_data(x) |>
+    purrr::imap(\(x, n) query("pdc", x, n)) |>
+    flatten_query()
 }

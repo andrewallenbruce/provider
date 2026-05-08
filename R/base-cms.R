@@ -44,15 +44,6 @@ param_cms <- function(...) {
 }
 
 #' @noRd
-method(build, ParamCMS) <- function(x) {
-  S7_data(x) %0% return(NULL)
-
-  S7_data(x) |>
-    purrr::imap(\(x, n) query("cms", x, n)) |>
-    flatten_query()
-}
-
-#' @noRd
 cms <- function(
   ...,
   .count = FALSE,
