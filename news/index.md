@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9150 (2026-05-08)
+
+- owner pivot methods
+
 ## provider 0.0.1.9149 (2026-05-07)
 
 - standardized `combine_columns()` functionality

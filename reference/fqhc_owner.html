@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9149</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9150</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,11 +58,11 @@
 <span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_pct <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  own_role <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  owner <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  role <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -93,23 +93,23 @@
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-pac">own_pac<a class="anchor" aria-label="anchor" href="#arg-own-pac"></a></dt>
+<dt id="arg-pac">pac<a class="anchor" aria-label="anchor" href="#arg-pac"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-org">own_org<a class="anchor" aria-label="anchor" href="#arg-own-org"></a></dt>
+<dt id="arg-owner">owner<a class="anchor" aria-label="anchor" href="#arg-owner"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-dba">own_dba<a class="anchor" aria-label="anchor" href="#arg-own-dba"></a></dt>
+<dt id="arg-dba">dba<a class="anchor" aria-label="anchor" href="#arg-dba"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-pct">own_pct<a class="anchor" aria-label="anchor" href="#arg-own-pct"></a></dt>
+<dt id="arg-percent">percent<a class="anchor" aria-label="anchor" href="#arg-percent"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
-<dt id="arg-own-role">own_role<a class="anchor" aria-label="anchor" href="#arg-own-role"></a></dt>
+<dt id="arg-role">role<a class="anchor" aria-label="anchor" href="#arg-role"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider's name</p></dd>
 
 
@@ -153,22 +153,22 @@
 <span class="r-in"><span><span class="fu">fqhc_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">fqhc_owner</span> returned <span style="font-weight: bold;">254</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 254 × 20</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    enid       pac   org_name own_pac own_role own_date   own_org own_dba own_pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> O20030417… 3577… NORTH B… 357747… OPERATI… 1993-10-01 NORTH … BROWAR…     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> O20030417… 3577… NORTH B… 357747… OPERATI… 1993-07-01 NORTH … BROWAR…     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> O20070613… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O20090826… 2365… TRENTON… 236535… OPERATI… 2014-02-27 TRENTO… PALMS …     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> O20100510… 7214… MCR HEA… 721484… 5% OR G… 2009-11-02 MCR HE… MCR HE…      <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> O20100809… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> O20100902… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      <span style="color: #BB0000;">NA</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> O20100907… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      <span style="color: #BB0000;">NA</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    org_enid   org_pac org_name pac   role  asc_date   owner dba   percent entity</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> O20030417… 357747… NORTH B… 3577… OPER… 1993-10-01 NORT… BROW…     100 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> O20030417… 357747… NORTH B… 3577… OPER… 1993-07-01 NORT… BROW…     100 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> O20070613… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O20090826… 236535… TRENTON… 2365… OPER… 2014-02-27 TREN… PALM…     100 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> O20100510… 721484… MCR HEA… 7214… 5% O… 2009-11-02 MCR … MCR …      <span style="color: #BB0000;">NA</span> O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> O20100809… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> O20100902… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      <span style="color: #BB0000;">NA</span> O     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> O20100907… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      <span style="color: #BB0000;">NA</span> O     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 244 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: entity &lt;chr&gt;, title &lt;chr&gt;, first &lt;chr&gt;, middle &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   oth_txt &lt;chr&gt;, own_ind &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: title &lt;chr&gt;, first &lt;chr&gt;, middle &lt;chr&gt;, last &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, oth_txt &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   owner_type &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

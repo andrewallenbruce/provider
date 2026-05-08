@@ -6,23 +6,23 @@ Providers with pending Medicare enrollment applications.
 
 ``` r
 hospice_owner(
-  enid = NULL,
-  pac = NULL,
+  org_enid = NULL,
+  org_pac = NULL,
   org_name = NULL,
-  own_pac = NULL,
-  own_type = NULL,
-  own_role = NULL,
-  own_first = NULL,
-  own_middle = NULL,
-  own_last = NULL,
-  own_title = NULL,
-  own_org = NULL,
-  own_dba = NULL,
-  own_address = NULL,
-  own_city = NULL,
-  own_state = NULL,
-  own_zip = NULL,
-  own_pct = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -30,11 +30,11 @@ hospice_owner(
 
 ## Arguments
 
-- enid:
+- org_enid:
 
   `<chr>` National Provider Identifier
 
-- pac:
+- org_pac:
 
   `<chr>` Provider's name
 
@@ -42,59 +42,39 @@ hospice_owner(
 
   `<chr>` Provider's name
 
-- own_pac:
+- pac:
 
   `<chr>` Provider's name
 
-- own_type:
+- owner:
 
   `<chr>` Provider's name
 
-- own_role:
+- dba:
 
   `<chr>` Provider's name
 
-- own_first:
+- percent:
 
   `<chr>` Provider's name
 
-- own_middle:
+- role:
 
   `<chr>` Provider's name
 
-- own_last:
+- entity:
 
   `<chr>` Provider's name
 
-- own_title:
+- first, middle, last:
 
   `<chr>` Provider's name
 
-- own_org:
+- title:
 
   `<chr>` Provider's name
 
-- own_dba:
-
-  `<chr>` Provider's name
-
-- own_address:
-
-  `<chr>` Provider's name
-
-- own_city:
-
-  `<chr>` Provider's name
-
-- own_state:
-
-  `<chr>` Provider's name
-
-- own_zip:
-
-  `<chr>` Provider's name
-
-- own_pct:
+- address, city, state, zip:
 
   `<chr>` Provider's name
 
@@ -119,27 +99,23 @@ hospice_owner(count = TRUE)
 #> • Pages : 15    
 #> 
 
-hospice_owner(own_state = c("GA", "FL")) |> str()
+hospice_owner(state = c("GA", "FL"))
 #> ✔ hospice_owner returned 1,961 results.
-#> tibble [1,961 × 20] (S3: tbl_df/tbl/data.frame)
-#>  $ enid      : chr [1:1961] "O20030115000001" "O20030430000023" "O20030430000023" "O20030829000035" ...
-#>  $ pac       : chr [1:1961] "4486562394" "4486562394" "4486562394" "0941110886" ...
-#>  $ org_name  : chr [1:1961] "CAPITAL HOSPICE" "CAPITAL HOSPICE" "CAPITAL HOSPICE" "PORTERCARE ADVENTIST HEALTH SYSTEM" ...
-#>  $ own_pac   : chr [1:1961] "2567436199" "1254728306" "2567436199" "5597676429" ...
-#>  $ own_type  : chr [1:1961] "O" "O" "O" "O" ...
-#>  $ own_role  : chr [1:1961] "OPERATIONAL/MANAGERIAL CONTROL" "OPERATIONAL/MANAGERIAL CONTROL" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER DIRECT OWNERSHIP INTEREST" ...
-#>  $ own_date  : Date[1:1961], format: "2023-05-01" "2004-08-26" ...
-#>  $ own_first : chr [1:1961] NA NA NA NA ...
-#>  $ own_middle: chr [1:1961] NA NA NA NA ...
-#>  $ own_last  : chr [1:1961] NA NA NA NA ...
-#>  $ own_title : chr [1:1961] NA NA NA NA ...
-#>  $ own_org   : chr [1:1961] "CHAPTERS HEALTH SYSTEM INC" "CAPITAL CARING HEATLH INC" "CHAPTERS HEALTH SYSTEM INC" "ADVENTIST HEALTH SYSTEM SUNBELT HEALTHCARE CORPORATION" ...
-#>  $ own_dba   : chr [1:1961] "CHAPTERS HEALTH SYSTEM" "CAPITAL CARING HEALTH" "CHAPTERS HEALTH SYSTEM" "SUNBELT HEALTH CARE AND SUBACUTE CENTER APOPKA" ...
-#>  $ address   : chr [1:1961] "STE 301" "STE 301" "STE 301" "900 HOPE WAY" ...
-#>  $ own_city  : chr [1:1961] "TEMPLE TERRACE" "TEMPLE TERRACE" "TEMPLE TERRACE" "ALTAMONTE SPRINGS" ...
-#>  $ own_state : chr [1:1961] "FL" "FL" "FL" "FL" ...
-#>  $ own_zip   : chr [1:1961] "336370904" "336370904" "336370904" "327141502" ...
-#>  $ own_pct   : num [1:1961] 100 100 100 100 NA NA 100 100 100 100 ...
-#>  $ oth_txt   : chr [1:1961] NA NA NA NA ...
-#>  $ own_ind   : chr [1:1961] "Corporation, Management Services Company, Holding Company, Non-Profit, Other" "Non-Profit" "Corporation, Management Services Company, Holding Company, Non-Profit, Other" "Corporation, Non-Profit, Chain Home Office" ...
+#> # A tibble: 1,961 × 20
+#>    org_enid    org_pac org_name pac   entity role  asc_date   first middle last 
+#>  * <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
+#>  1 O200301150… 448656… CAPITAL… 2567… O      OPER… 2023-05-01 NA    NA     NA   
+#>  2 O200304300… 448656… CAPITAL… 1254… O      OPER… 2004-08-26 NA    NA     NA   
+#>  3 O200304300… 448656… CAPITAL… 2567… O      OPER… 2023-05-01 NA    NA     NA   
+#>  4 O200308290… 094111… PORTERC… 5597… O      5% O… 2001-10-01 NA    NA     NA   
+#>  5 O200308290… 094111… PORTERC… 5597… O      OPER… 2023-08-01 NA    NA     NA   
+#>  6 O200310210… 660878… EAST BA… 2567… O      OPER… 2025-10-01 NA    NA     NA   
+#>  7 O200402190… 822492… VITAS H… 4486… O      5% O… 2001-04-27 NA    NA     NA   
+#>  8 O200402190… 822492… VITAS H… 7113… O      5% O… 2025-08-11 NA    NA     NA   
+#>  9 O200404210… 569868… VITAS H… 4486… O      5% O… 2001-04-27 NA    NA     NA   
+#> 10 O200404210… 569868… VITAS H… 7113… O      5% O… 2001-04-27 NA    NA     NA   
+#> # ℹ 1,951 more rows
+#> # ℹ 10 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, oth_txt <chr>,
+#> #   owner_type <chr>
 ```

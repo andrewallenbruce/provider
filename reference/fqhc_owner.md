@@ -9,11 +9,11 @@ fqhc_owner(
   org_enid = NULL,
   org_pac = NULL,
   org_name = NULL,
-  own_pac = NULL,
-  own_org = NULL,
-  own_dba = NULL,
-  own_pct = NULL,
-  own_role = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
   entity = NULL,
   first = NULL,
   middle = NULL,
@@ -42,23 +42,23 @@ fqhc_owner(
 
   `<chr>` Provider's name
 
-- own_pac:
+- pac:
 
   `<chr>` Provider's name
 
-- own_org:
+- owner:
 
   `<chr>` Provider's name
 
-- own_dba:
+- dba:
 
   `<chr>` Provider's name
 
-- own_pct:
+- percent:
 
   `<chr>` Provider's name
 
-- own_role:
+- role:
 
   `<chr>` Provider's name
 
@@ -102,20 +102,20 @@ fqhc_owner(count = TRUE)
 fqhc_owner(state = c("GA", "FL"))
 #> ✔ fqhc_owner returned 254 results.
 #> # A tibble: 254 × 20
-#>    enid       pac   org_name own_pac own_role own_date   own_org own_dba own_pct
-#>  * <chr>      <chr> <chr>    <chr>   <chr>    <date>     <chr>   <chr>     <dbl>
-#>  1 O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100
-#>  2 O20030417… 3577… NORTH B… 357747… OPERATI… 1993-10-01 NORTH … BROWAR…     100
-#>  3 O20030417… 3577… NORTH B… 357747… 5% OR G… 1993-07-01 NORTH … BROWAR…     100
-#>  4 O20030417… 3577… NORTH B… 357747… OPERATI… 1993-07-01 NORTH … BROWAR…     100
-#>  5 O20070613… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0
-#>  6 O20090826… 2365… TRENTON… 236535… OPERATI… 2014-02-27 TRENTO… PALMS …     100
-#>  7 O20100510… 7214… MCR HEA… 721484… 5% OR G… 2009-11-02 MCR HE… MCR HE…      NA
-#>  8 O20100809… 9931… FLORIDA… 993101… OPERATI… 2018-04-01 FLORID… FORT P…       0
-#>  9 O20100902… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      NA
-#> 10 O20100907… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      NA
+#>    org_enid   org_pac org_name pac   role  asc_date   owner dba   percent entity
+#>  * <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
+#>  1 O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     
+#>  2 O20030417… 357747… NORTH B… 3577… OPER… 1993-10-01 NORT… BROW…     100 O     
+#>  3 O20030417… 357747… NORTH B… 3577… 5% O… 1993-07-01 NORT… BROW…     100 O     
+#>  4 O20030417… 357747… NORTH B… 3577… OPER… 1993-07-01 NORT… BROW…     100 O     
+#>  5 O20070613… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     
+#>  6 O20090826… 236535… TRENTON… 2365… OPER… 2014-02-27 TREN… PALM…     100 O     
+#>  7 O20100510… 721484… MCR HEA… 7214… 5% O… 2009-11-02 MCR … MCR …      NA O     
+#>  8 O20100809… 993101… FLORIDA… 9931… OPER… 2018-04-01 FLOR… FORT…       0 O     
+#>  9 O20100902… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      NA O     
+#> 10 O20100907… 721484… MCR HEA… 7214… 5% O… 1977-10-11 MCR … MCR …      NA O     
 #> # ℹ 244 more rows
-#> # ℹ 11 more variables: entity <chr>, title <chr>, first <chr>, middle <chr>,
-#> #   last <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   oth_txt <chr>, own_ind <chr>
+#> # ℹ 10 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
+#> #   owner_type <chr>
 ```

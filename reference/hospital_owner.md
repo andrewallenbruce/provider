@@ -6,23 +6,23 @@ Providers with pending Medicare enrollment applications.
 
 ``` r
 hospital_owner(
-  enid = NULL,
-  pac = NULL,
+  org_enid = NULL,
+  org_pac = NULL,
   org_name = NULL,
-  own_pac = NULL,
-  own_type = NULL,
-  own_role = NULL,
-  own_first = NULL,
-  own_middle = NULL,
-  own_last = NULL,
-  own_title = NULL,
-  own_org = NULL,
-  own_dba = NULL,
-  own_address = NULL,
-  own_city = NULL,
-  own_state = NULL,
-  own_zip = NULL,
-  own_pct = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -30,11 +30,11 @@ hospital_owner(
 
 ## Arguments
 
-- enid:
+- org_enid:
 
   `<chr>` National Provider Identifier
 
-- pac:
+- org_pac:
 
   `<chr>` Provider's name
 
@@ -42,59 +42,39 @@ hospital_owner(
 
   `<chr>` Provider's name
 
-- own_pac:
+- pac:
 
   `<chr>` Provider's name
 
-- own_type:
+- owner:
 
   `<chr>` Provider's name
 
-- own_role:
+- dba:
 
   `<chr>` Provider's name
 
-- own_first:
+- percent:
 
   `<chr>` Provider's name
 
-- own_middle:
+- role:
 
   `<chr>` Provider's name
 
-- own_last:
+- entity:
 
   `<chr>` Provider's name
 
-- own_title:
+- first, middle, last:
 
   `<chr>` Provider's name
 
-- own_org:
+- title:
 
   `<chr>` Provider's name
 
-- own_dba:
-
-  `<chr>` Provider's name
-
-- own_address:
-
-  `<chr>` Provider's name
-
-- own_city:
-
-  `<chr>` Provider's name
-
-- own_state:
-
-  `<chr>` Provider's name
-
-- own_zip:
-
-  `<chr>` Provider's name
-
-- own_pct:
+- address, city, state, zip:
 
   `<chr>` Provider's name
 
@@ -119,27 +99,23 @@ hospital_owner(count = TRUE)
 #> • Pages : 5     
 #> 
 
-hospital_owner(own_state = c("GA", "FL")) |> str()
+hospital_owner(state = c("GA", "FL"))
 #> ✔ hospital_owner returned 137 results.
-#> tibble [137 × 20] (S3: tbl_df/tbl/data.frame)
-#>  $ enid      : chr [1:137] "O20040709000649" "O20040709000649" "O20040709000649" "O20040709000649" ...
-#>  $ pac       : chr [1:137] "9537147244" "9537147244" "9537147244" "9537147244" ...
-#>  $ org_name  : chr [1:137] "PROMISE HOSPITAL OF EAST LOS ANGELES LP" "PROMISE HOSPITAL OF EAST LOS ANGELES LP" "PROMISE HOSPITAL OF EAST LOS ANGELES LP" "PROMISE HOSPITAL OF EAST LOS ANGELES LP" ...
-#>  $ own_pac   : chr [1:137] "1759514318" "2860470572" "3577796143" "3971415928" ...
-#>  $ own_type  : chr [1:137] "O" "O" "O" "O" ...
-#>  $ own_role  : chr [1:137] "5% OR GREATER INDIRECT OWNERSHIP INTEREST" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "5% OR GREATER INDIRECT OWNERSHIP INTEREST" "5% OR GREATER INDIRECT OWNERSHIP INTEREST" ...
-#>  $ own_date  : Date[1:137], format: "2014-03-17" "2003-11-04" ...
-#>  $ own_first : chr [1:137] NA NA NA NA ...
-#>  $ own_middle: chr [1:137] NA NA NA NA ...
-#>  $ own_last  : chr [1:137] NA NA NA NA ...
-#>  $ own_title : chr [1:137] NA NA NA NA ...
-#>  $ own_org   : chr [1:137] "PROMISE HEALTHCARE HOLDINGS, INC." "PROMISE HEALTHCARE OF CALIFORNIA, INC." "PROMISE HEALTHCARE GROUP, LLC" "PROMISE HEALTHCARE, INC" ...
-#>  $ own_dba   : chr [1:137] NA NA NA "PROMISE HEALTHCARE" ...
-#>  $ address   : chr [1:137] "FL 3" "FL 3" "FL 3" "THIRD FLOOR" ...
-#>  $ own_city  : chr [1:137] "BOCA RATON" "BOCA RATON" "BOCA RATON" "BOCA RATON" ...
-#>  $ own_state : chr [1:137] "FL" "FL" "FL" "FL" ...
-#>  $ own_zip   : chr [1:137] "334314477" "334314477" "334314477" "334314477" ...
-#>  $ own_pct   : num [1:137] 96 50 96 100 100 50 100 100 99 NA ...
-#>  $ oth_txt   : chr [1:137] NA NA NA NA ...
-#>  $ own_ind   : chr [1:137] "Corporation" "Created for Aquisition, Corporation" "LLC" "Corporation, For-Profit" ...
+#> # A tibble: 137 × 20
+#>    org_enid    org_pac org_name pac   entity role  asc_date   first middle last 
+#>  * <chr>       <chr>   <chr>    <chr> <chr>  <chr> <date>     <chr> <chr>  <chr>
+#>  1 O200407090… 953714… PROMISE… 1759… O      5% O… 2014-03-17 NA    NA     NA   
+#>  2 O200407090… 953714… PROMISE… 2860… O      5% O… 2003-11-04 NA    NA     NA   
+#>  3 O200407090… 953714… PROMISE… 3577… O      5% O… 2014-03-17 NA    NA     NA   
+#>  4 O200407090… 953714… PROMISE… 3971… O      5% O… 2004-06-30 NA    NA     NA   
+#>  5 O200407090… 953714… PROMISE… 3971… O      OPER… 2004-06-30 NA    NA     NA   
+#>  6 O200407090… 953714… PROMISE… 8224… O      5% O… 2003-11-04 NA    NA     NA   
+#>  7 O200602030… 872998… BERT FI… 1456… O      OTHER 2011-06-30 NA    NA     NA   
+#>  8 O200602030… 872998… BERT FI… 8729… O      5% O… 1995-03-13 NA    NA     NA   
+#>  9 O200602130… 630585… HERNAND… 1759… O      5% O… 2014-01-27 NA    NA     NA   
+#> 10 O200701230… 004212… MAYO CL… 5698… O      OPER… 2012-03-01 NA    NA     NA   
+#> # ℹ 127 more rows
+#> # ℹ 10 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
+#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, oth_txt <chr>,
+#> #   owner_type <chr>
 ```

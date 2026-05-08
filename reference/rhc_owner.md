@@ -9,11 +9,11 @@ rhc_owner(
   org_enid = NULL,
   org_pac = NULL,
   org_name = NULL,
-  own_pac = NULL,
-  own_org = NULL,
-  own_dba = NULL,
-  own_pct = NULL,
-  own_role = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
   entity = NULL,
   first = NULL,
   middle = NULL,
@@ -42,23 +42,23 @@ rhc_owner(
 
   `<chr>` Provider's name
 
-- own_pac:
+- pac:
 
   `<chr>` Provider's name
 
-- own_org:
+- owner:
 
   `<chr>` Provider's name
 
-- own_dba:
+- dba:
 
   `<chr>` Provider's name
 
-- own_pct:
+- percent:
 
   `<chr>` Provider's name
 
-- own_role:
+- role:
 
   `<chr>` Provider's name
 
@@ -99,27 +99,23 @@ rhc_owner(count = TRUE)
 #> • Pages : 14    
 #> 
 
-rhc_owner(state = c("GA", "FL")) |> str()
+rhc_owner(state = c("GA", "FL"))
 #> ✔ rhc_owner returned 136 results.
-#> tibble [136 × 20] (S3: tbl_df/tbl/data.frame)
-#>  $ enid    : chr [1:136] "O20030724000023" "O20031013000024" "O20040217000406" "O20040712000362" ...
-#>  $ pac     : chr [1:136] "7214848027" "3476462078" "6204721566" "8426036930" ...
-#>  $ org_name: chr [1:136] "TRI-COUNTY PRIMARY CARE INC" "ACV COMMUNITY SERVICES LLC" "LONDON WOMEN'S CARE LLC" "ACUTE CARE PEDIATRICS,PA" ...
-#>  $ own_pac : chr [1:136] "5496911505" "3476462078" "8224385521" "8729997929" ...
-#>  $ own_role: chr [1:136] "5% OR GREATER DIRECT OWNERSHIP INTEREST" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER DIRECT OWNERSHIP INTEREST" ...
-#>  $ own_date: Date[1:136], format: "2021-06-26" "2003-11-01" ...
-#>  $ own_org : chr [1:136] "GNT ASSOCIATES LLC" "ACV COMMUNITY SERVICES LLC" "PHYSICIAN BUSINESS SERVICES, LLC" "NORTH FLORIDA PEDIATRICS, PA" ...
-#>  $ own_dba : chr [1:136] NA "ADVENTR CHRISTIAN VILLAGE HOME CARE AGENCY" NA NA ...
-#>  $ own_pct : num [1:136] 100 NA 100 NA 100 100 100 6.49 6.49 6.49 ...
-#>  $ entity  : chr [1:136] "O" "O" "O" "O" ...
-#>  $ title   : chr [1:136] NA NA NA NA ...
-#>  $ first   : chr [1:136] NA NA NA NA ...
-#>  $ middle  : chr [1:136] NA NA NA NA ...
-#>  $ last    : chr [1:136] NA NA NA NA ...
-#>  $ address : chr [1:136] "13603 NW 30TH RD" "10820 MARVIN E JONES BLVD" "5002 W LEMON ST" "1859 SW NEWLAND WAY" ...
-#>  $ city    : chr [1:136] "GAINESVILLE" "LIVE OAK" "TAMPA" "LAKE CITY" ...
-#>  $ state   : chr [1:136] "FL" "FL" "FL" "FL" ...
-#>  $ zip     : chr [1:136] "326069331" "320608243" "336091104" "320256966" ...
-#>  $ oth_txt : chr [1:136] "FILLING AS S-CORP" NA NA NA ...
-#>  $ own_ind : chr [1:136] "LLC, Other" "LLC" "LLC, For-Profit" "Corporation, For-Profit, Owned by Another Org/Ind" ...
+#> # A tibble: 136 × 20
+#>    org_enid   org_pac org_name pac   role  asc_date   owner dba   percent entity
+#>  * <chr>      <chr>   <chr>    <chr> <chr> <date>     <chr> <chr>   <dbl> <chr> 
+#>  1 O20030724… 721484… TRI-COU… 5496… 5% O… 2021-06-26 GNT … NA     100    O     
+#>  2 O20031013… 347646… ACV COM… 3476… 5% O… 2003-11-01 ACV … ADVE…   NA    O     
+#>  3 O20040217… 620472… LONDON … 8224… OPER… 2020-12-31 PHYS… NA     100    O     
+#>  4 O20040712… 842603… ACUTE C… 8729… 5% O… 2024-05-01 NORT… NA      NA    O     
+#>  5 O20061202… 953716… HEARTLA… 7618… 5% O… 2014-01-01 CENT… NA     100    O     
+#>  6 O20070507… 468877… HEARTLA… 7618… 5% O… 2014-01-01 CENT… NA     100    O     
+#>  7 O20071016… 549684… ACUTE C… 8729… 5% O… 2024-05-01 NORT… NA     100    O     
+#>  8 O20080915… 620490… TATTNAL… 9638… 5% O… 2018-07-20 AURO… NA       6.49 O     
+#>  9 O20080915… 620490… TATTNAL… 2860… 5% O… 2018-07-20 AURO… NA       6.49 O     
+#> 10 O20090621… 620490… TATTNAL… 2860… 5% O… 2018-07-20 AURO… NA       6.49 O     
+#> # ℹ 126 more rows
+#> # ℹ 10 more variables: title <chr>, first <chr>, middle <chr>, last <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
+#> #   owner_type <chr>
 ```
