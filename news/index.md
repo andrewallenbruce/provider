@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9152 (2026-05-08)
+
+- pivot method refinement
+
 ## provider 0.0.1.9151 (2026-05-08)
 
 - experimenting with post-process row sorting
