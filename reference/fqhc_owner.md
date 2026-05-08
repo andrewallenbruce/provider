@@ -116,6 +116,6 @@ fqhc_owner(state = c("GA", "FL"))
 #> 10 O20100907… 7214… MCR HEA… 721484… 5% OR G… 1977-10-11 MCR HE… MCR HE…      NA
 #> # ℹ 244 more rows
 #> # ℹ 11 more variables: entity <chr>, title <chr>, first <chr>, middle <chr>,
-#> #   last <chr>, add_1 <chr>, city <chr>, state <chr>, zip <chr>, oth_txt <chr>,
-#> #   own_ind <chr>
+#> #   last <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   oth_txt <chr>, own_ind <chr>
 ```

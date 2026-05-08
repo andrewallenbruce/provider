@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9149 (2026-05-07)
+
+- standardized `combine_columns()` functionality
+
 ## provider 0.0.1.9148 (2026-05-07)
 
 - polish and pivot work

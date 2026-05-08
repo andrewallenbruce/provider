@@ -251,7 +251,7 @@ x
 #> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
 #> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
 #> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   status <chr>, add_1 <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   status <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, reh_date <date>, reh_ccn <chr>, subgroup <chr>
 
 hospitals2(ccn = x$ccn)
@@ -298,7 +298,7 @@ hospitals(ccn = x$ccn)
 #> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
 #> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
 #> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   status <chr>, add_1 <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   status <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, reh_date <date>, reh_ccn <chr>, subgroup <chr>
 
 hospitals2(state = "GA", rating = 5) |> str()
