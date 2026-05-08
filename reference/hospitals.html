@@ -17,7 +17,7 @@ organization type and address."><meta property="og:image" content="https://andre
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9152</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9153</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@ organization type and address.</p>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hosp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ownership <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  own_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rating <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -144,7 +144,7 @@ organization type and address.</p>
 </ul></dd>
 
 
-<dt id="arg-ownership">ownership<a class="anchor" aria-label="anchor" href="#arg-ownership"></a></dt>
+<dt id="arg-own-type">own_type<a class="anchor" aria-label="anchor" href="#arg-own-type"></a></dt>
 <dd><p><code>&lt;enum&gt;</code> Ownership type:</p><ul><li><p><code>private</code> = Voluntary non-profit - Private</p></li>
 <li><p><code>other</code> = Voluntary non-profit - Other</p></li>
 <li><p><code>church</code> = Voluntary non-profit - Church</p></li>
@@ -261,22 +261,21 @@ organization type and address.</p>
 <span class="r-in"><span>    psych <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-in"><span><span class="va">x</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02<span style="color: #949494;">e</span>9     1 1140… 4486…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09<span style="color: #949494;">e</span>9     0 1140… 9234…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, reh_ccn &lt;chr&gt;, subgroup &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> UHS OF ANCH… ANCHOR… O201… 1.02<span style="color: #949494;">e</span>9     1 1140… 4486… 2000-06-02 PARTNER… P     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> UHS OF PEAC… PEACHF… O201… 1.09<span style="color: #949494;">e</span>9     0 1140… 9234… 2000-06-02 PARTNER… P     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, subgroup &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">2</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ccn    org_name    hosp_type ownership rating address city  state zip   county</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 114010 PEACHFORD … Psychiat… Propriet…     <span style="color: #BB0000;">NA</span> 2151 P… ATLA… GA    30338 DE KA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 114032 SO CRESCEN… Psychiat… Governme…     <span style="color: #BB0000;">NA</span> 5454 Y… COLL… GA    30349 FULTON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ccn    org_name     prov_type own_type rating address city  state zip   county</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 114010 PEACHFORD B… Psychiat… Proprie…     <span style="color: #BB0000;">NA</span> 2151 P… ATLA… GA    30338 DE KA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 114032 SO CRESCENT… Psychiat… Governm…     <span style="color: #BB0000;">NA</span> 5454 Y… COLL… GA    30349 FULTON</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">hospitals2</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">hospitals2</span> Totals</span>
@@ -287,43 +286,42 @@ organization type and address.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    org_name   hosp_type ownership rating address city  state zip   county</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 010001 SOUTHEAST… Acute Ca… Governme…      4 1108 R… DOTH… AL    36301 HOUST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 010005 MARSHALL … Acute Ca… Governme…      3 2505 U… BOAZ  AL    35957 MARSH…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 010006 NORTH ALA… Acute Ca… Propriet…      2 1701 V… FLOR… AL    35630 LAUDE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 010007 MIZELL ME… Acute Ca… Voluntar…      1 702 N … OPP   AL    36467 COVIN…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 010008 CRENSHAW … Acute Ca… Propriet…     <span style="color: #BB0000;">NA</span> 101 HO… LUVE… AL    36049 CRENS…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 010011 ST. VINCE… Acute Ca… Voluntar…      2 50 MED… BIRM… AL    35235 JEFFE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 010012 DEKALB RE… Acute Ca… Propriet…      3 200 ME… FORT… AL    35968 DE KA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 010016 SHELBY BA… Acute Ca… Voluntar…      2 1000 F… ALAB… AL    35007 SHELBY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 010018 CALLAHAN … Acute Ca… Voluntar…     <span style="color: #BB0000;">NA</span> 1720 U… BIRM… AL    35233 JEFFE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 010019 HELEN KEL… Acute Ca… Governme…      2 1300 S… SHEF… AL    35660 COLBE…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    org_name    prov_type own_type rating address city  state zip   county</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 010001 SOUTHEAST … Acute Ca… Governm…      4 1108 R… DOTH… AL    36301 HOUST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 010005 MARSHALL M… Acute Ca… Governm…      3 2505 U… BOAZ  AL    35957 MARSH…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 010006 NORTH ALAB… Acute Ca… Proprie…      2 1701 V… FLOR… AL    35630 LAUDE…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 010007 MIZELL MEM… Acute Ca… Volunta…      1 702 N … OPP   AL    36467 COVIN…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 010008 CRENSHAW C… Acute Ca… Proprie…     <span style="color: #BB0000;">NA</span> 101 HO… LUVE… AL    36049 CRENS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 010011 ST. VINCEN… Acute Ca… Volunta…      2 50 MED… BIRM… AL    35235 JEFFE…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 010012 DEKALB REG… Acute Ca… Proprie…      3 200 ME… FORT… AL    35968 DE KA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 010016 SHELBY BAP… Acute Ca… Volunta…      2 1000 F… ALAB… AL    35007 SHELBY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 010018 CALLAHAN E… Acute Ca… Volunta…     <span style="color: #BB0000;">NA</span> 1720 U… BIRM… AL    35233 JEFFE…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 010019 HELEN KELL… Acute Ca… Governm…      2 1300 S… SHEF… AL    35660 COLBE…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">8</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16<span style="color: #949494;">e</span>9     0 0100… 9436…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> HH HEAL… MARSHA… O201… AL         00-09     PART A P… 1.41<span style="color: #949494;">e</span>9     0 0100… 8527…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> RCHP - … NORTH … O201… AL         00-09     PART A P… 1.48<span style="color: #949494;">e</span>9     0 0100… 8123…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MIZELL … <span style="color: #BB0000;">NA</span>      O200… AL         00-09     PART A P… 1.01<span style="color: #949494;">e</span>9     0 0100… 6507…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ST. VIN… ST. VI… O200… AL         00-09     PART A P… 1.84<span style="color: #949494;">e</span>9     0 0100… 8921…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77<span style="color: #949494;">e</span>9     0 0100… 6709…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81<span style="color: #949494;">e</span>9     0 0100… 7810…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51<span style="color: #949494;">e</span>9     0 0100… 1759…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: inc_date &lt;date&gt;, inc_state &lt;chr&gt;, org_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, reh_ccn &lt;chr&gt;, subgroup &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> HOUSTON COU… SOUTHE… O200… 1.16<span style="color: #949494;">e</span>9     0 0100… 9436… 1957-09-01 CORPORA… N     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> HH HEALTH S… MARSHA… O201… 1.41<span style="color: #949494;">e</span>9     0 0100… 8527… 2018-08-20 OTHER: … N     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> RCHP - FLOR… NORTH … O201… 1.48<span style="color: #949494;">e</span>9     0 0100… 8123… 2010-04-28 LLC      P     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> MIZELL MEMO… <span style="color: #BB0000;">NA</span>      O200… 1.01<span style="color: #949494;">e</span>9     0 0100… 6507… 1945-11-26 CORPORA… N     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ST. VINCENT… ST. VI… O200… 1.84<span style="color: #949494;">e</span>9     0 0100… 8921… 1968-07-22 CORPORA… N     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> HH HEALTH S… DEKALB… O202… 1.77<span style="color: #949494;">e</span>9     0 0100… 6709… <span style="color: #BB0000;">NA</span>         LLC      P     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> BBH SBMC, L… BAPTIS… O201… 1.81<span style="color: #949494;">e</span>9     0 0100… 7810… 2015-06-19 LLC      P     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> HH HEALTH S… HELEN … O201… 1.51<span style="color: #949494;">e</span>9     0 0100… 1759… 2014-11-14 LLC      N     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, subgroup &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospitals2</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, rating <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="font-weight: bold;">4</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> tibble [4 × 10] (S3: tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn      : chr [1:4] "110050" "110128" "110200" "110237"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name : chr [1:4] "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" "NORTHEAST GEORGIA MEDICAL CENTER LUMPKIN"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hosp_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ownership: chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ prov_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ rating   : int [1:4] 5 5 5 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ address  : chr [1:4] "707 OLD DALTON ELLIJAY ROAD, PO BOX 1406" "ONE MEADOWS PARKWAY" "100 FRIST COURT" "227 MOUNTAIN DRIVE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city     : chr [1:4] "CHATSWORTH" "VIDALIA" "COLUMBUS" "DAHLONEGA"</span>

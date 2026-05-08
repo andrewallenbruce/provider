@@ -19,7 +19,7 @@ hospitals2(
   zip = NULL,
   county = NULL,
   hosp_type = NULL,
-  ownership = NULL,
+  own_type = NULL,
   rating = NULL,
   count = FALSE,
   set = FALSE
@@ -98,7 +98,7 @@ hospitals(
 
   - `vha` = Acute Care - Veterans Administration
 
-- ownership:
+- own_type:
 
   `<enum>` Ownership type:
 
@@ -245,22 +245,21 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x
-#> # A tibble: 2 × 22
-#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 UHS OF … ANCHOR… O201… GA         00-09     PART A P… 1.02e9     1 1140… 4486…
-#> 2 UHS OF … PEACHF… O201… GA         00-09     PART A P… 1.09e9     0 1140… 9234…
-#> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   status <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, reh_date <date>, reh_ccn <chr>, subgroup <chr>
+#> # A tibble: 2 × 17
+#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
+#> * <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
+#> 1 UHS OF ANCH… ANCHOR… O201… 1.02e9     1 1140… 4486… 2000-06-02 PARTNER… P     
+#> 2 UHS OF PEAC… PEACHF… O201… 1.09e9     0 1140… 9234… 2000-06-02 PARTNER… P     
+#> # ℹ 7 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, reh_date <date>, subgroup <chr>
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
 #> # A tibble: 2 × 10
-#>   ccn    org_name    hosp_type ownership rating address city  state zip   county
-#> * <chr>  <chr>       <chr>     <chr>      <int> <chr>   <chr> <chr> <chr> <chr> 
-#> 1 114010 PEACHFORD … Psychiat… Propriet…     NA 2151 P… ATLA… GA    30338 DE KA…
-#> 2 114032 SO CRESCEN… Psychiat… Governme…     NA 5454 Y… COLL… GA    30349 FULTON
+#>   ccn    org_name     prov_type own_type rating address city  state zip   county
+#> * <chr>  <chr>        <chr>     <chr>     <int> <chr>   <chr> <chr> <chr> <chr> 
+#> 1 114010 PEACHFORD B… Psychiat… Proprie…     NA 2151 P… ATLA… GA    30338 DE KA…
+#> 2 114032 SO CRESCENT… Psychiat… Governm…     NA 5454 Y… COLL… GA    30349 FULTON
 
 x <- hospitals2()
 #> hospitals2 Totals
@@ -271,43 +270,42 @@ x <- hospitals2()
 #> 
 x
 #> # A tibble: 10 × 10
-#>    ccn    org_name   hosp_type ownership rating address city  state zip   county
-#>  * <chr>  <chr>      <chr>     <chr>      <int> <chr>   <chr> <chr> <chr> <chr> 
-#>  1 010001 SOUTHEAST… Acute Ca… Governme…      4 1108 R… DOTH… AL    36301 HOUST…
-#>  2 010005 MARSHALL … Acute Ca… Governme…      3 2505 U… BOAZ  AL    35957 MARSH…
-#>  3 010006 NORTH ALA… Acute Ca… Propriet…      2 1701 V… FLOR… AL    35630 LAUDE…
-#>  4 010007 MIZELL ME… Acute Ca… Voluntar…      1 702 N … OPP   AL    36467 COVIN…
-#>  5 010008 CRENSHAW … Acute Ca… Propriet…     NA 101 HO… LUVE… AL    36049 CRENS…
-#>  6 010011 ST. VINCE… Acute Ca… Voluntar…      2 50 MED… BIRM… AL    35235 JEFFE…
-#>  7 010012 DEKALB RE… Acute Ca… Propriet…      3 200 ME… FORT… AL    35968 DE KA…
-#>  8 010016 SHELBY BA… Acute Ca… Voluntar…      2 1000 F… ALAB… AL    35007 SHELBY
-#>  9 010018 CALLAHAN … Acute Ca… Voluntar…     NA 1720 U… BIRM… AL    35233 JEFFE…
-#> 10 010019 HELEN KEL… Acute Ca… Governme…      2 1300 S… SHEF… AL    35660 COLBE…
+#>    ccn    org_name    prov_type own_type rating address city  state zip   county
+#>  * <chr>  <chr>       <chr>     <chr>     <int> <chr>   <chr> <chr> <chr> <chr> 
+#>  1 010001 SOUTHEAST … Acute Ca… Governm…      4 1108 R… DOTH… AL    36301 HOUST…
+#>  2 010005 MARSHALL M… Acute Ca… Governm…      3 2505 U… BOAZ  AL    35957 MARSH…
+#>  3 010006 NORTH ALAB… Acute Ca… Proprie…      2 1701 V… FLOR… AL    35630 LAUDE…
+#>  4 010007 MIZELL MEM… Acute Ca… Volunta…      1 702 N … OPP   AL    36467 COVIN…
+#>  5 010008 CRENSHAW C… Acute Ca… Proprie…     NA 101 HO… LUVE… AL    36049 CRENS…
+#>  6 010011 ST. VINCEN… Acute Ca… Volunta…      2 50 MED… BIRM… AL    35235 JEFFE…
+#>  7 010012 DEKALB REG… Acute Ca… Proprie…      3 200 ME… FORT… AL    35968 DE KA…
+#>  8 010016 SHELBY BAP… Acute Ca… Volunta…      2 1000 F… ALAB… AL    35007 SHELBY
+#>  9 010018 CALLAHAN E… Acute Ca… Volunta…     NA 1720 U… BIRM… AL    35233 JEFFE…
+#> 10 010019 HELEN KELL… Acute Ca… Governm…      2 1300 S… SHEF… AL    35660 COLBE…
 
 hospitals(ccn = x$ccn)
 #> ✔ hospitals returned 8 results.
-#> # A tibble: 8 × 22
-#>   org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-#> * <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 HOUSTON… SOUTHE… O200… AL         00-09     PART A P… 1.16e9     0 0100… 9436…
-#> 2 HH HEAL… MARSHA… O201… AL         00-09     PART A P… 1.41e9     0 0100… 8527…
-#> 3 RCHP - … NORTH … O201… AL         00-09     PART A P… 1.48e9     0 0100… 8123…
-#> 4 MIZELL … NA      O200… AL         00-09     PART A P… 1.01e9     0 0100… 6507…
-#> 5 ST. VIN… ST. VI… O200… AL         00-09     PART A P… 1.84e9     0 0100… 8921…
-#> 6 HH HEAL… DEKALB… O202… AL         00-09     PART A P… 1.77e9     0 0100… 6709…
-#> 7 BBH SBM… BAPTIS… O201… AL         00-09     PART A P… 1.81e9     0 0100… 7810…
-#> 8 HH HEAL… HELEN … O201… AL         00-09     PART A P… 1.51e9     0 0100… 1759…
-#> # ℹ 12 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#> #   status <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, reh_date <date>, reh_ccn <chr>, subgroup <chr>
+#> # A tibble: 8 × 17
+#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
+#> * <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
+#> 1 HOUSTON COU… SOUTHE… O200… 1.16e9     0 0100… 9436… 1957-09-01 CORPORA… N     
+#> 2 HH HEALTH S… MARSHA… O201… 1.41e9     0 0100… 8527… 2018-08-20 OTHER: … N     
+#> 3 RCHP - FLOR… NORTH … O201… 1.48e9     0 0100… 8123… 2010-04-28 LLC      P     
+#> 4 MIZELL MEMO… NA      O200… 1.01e9     0 0100… 6507… 1945-11-26 CORPORA… N     
+#> 5 ST. VINCENT… ST. VI… O200… 1.84e9     0 0100… 8921… 1968-07-22 CORPORA… N     
+#> 6 HH HEALTH S… DEKALB… O202… 1.77e9     0 0100… 6709… NA         LLC      P     
+#> 7 BBH SBMC, L… BAPTIS… O201… 1.81e9     0 0100… 7810… 2015-06-19 LLC      P     
+#> 8 HH HEALTH S… HELEN … O201… 1.51e9     0 0100… 1759… 2014-11-14 LLC      N     
+#> # ℹ 7 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, reh_date <date>, subgroup <chr>
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.
 #> tibble [4 × 10] (S3: tbl_df/tbl/data.frame)
 #>  $ ccn      : chr [1:4] "110050" "110128" "110200" "110237"
 #>  $ org_name : chr [1:4] "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" "NORTHEAST GEORGIA MEDICAL CENTER LUMPKIN"
-#>  $ hosp_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
-#>  $ ownership: chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
+#>  $ prov_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
+#>  $ own_type : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
 #>  $ rating   : int [1:4] 5 5 5 5
 #>  $ address  : chr [1:4] "707 OLD DALTON ELLIJAY ROAD, PO BOX 1406" "ONE MEADOWS PARKWAY" "100 FRIST COURT" "227 MOUNTAIN DRIVE"
 #>  $ city     : chr [1:4] "CHATSWORTH" "VIDALIA" "COLUMBUS" "DAHLONEGA"

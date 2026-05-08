@@ -115,6 +115,7 @@ snf_owner(state = c("GA", "FL"))
 #>  9 O202502270… 741647… OAK GLE… 0042… O      5% O… 2024-12-06 NA    NA     NA   
 #> 10 O200901060… 014311… HOSPITA… 0143… O      OPER… 2008-11-21 NA    NA     NA   
 #> # ℹ 4,165 more rows
-#> # ℹ 9 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, owner_name <chr>, owner_dba <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, percent <dbl>,
+#> #   owner_type <chr>
 ```

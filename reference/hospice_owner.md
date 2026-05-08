@@ -115,6 +115,7 @@ hospice_owner(state = c("GA", "FL"))
 #>  9 O201508070… 226459… ST CROI… 0446… O      5% O… 2020-10-30 NA    NA     NA   
 #> 10 O201906260… 226459… ST CROI… 0446… O      5% O… 2020-10-30 NA    NA     NA   
 #> # ℹ 1,951 more rows
-#> # ℹ 9 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, owner_name <chr>, owner_dba <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, percent <dbl>,
+#> #   owner_type <chr>
 ```

@@ -115,6 +115,7 @@ hospital_owner(state = c("GA", "FL"))
 #>  9 O202011170… 660828… OHI WES… 0547… O      5% O… 2020-10-01 NA    NA     NA   
 #> 10 O202011170… 660828… OHI WES… 0547… O      OTHER 2020-10-01 NA    NA     NA   
 #> # ℹ 127 more rows
-#> # ℹ 9 more variables: title <chr>, owner <chr>, dba <chr>, address <chr>,
-#> #   city <chr>, state <chr>, zip <chr>, percent <dbl>, owner_type <chr>
+#> # ℹ 9 more variables: title <chr>, owner_name <chr>, owner_dba <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, percent <dbl>,
+#> #   owner_type <chr>
 ```
