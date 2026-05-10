@@ -31,32 +31,29 @@ replace_nz <- function(i) {
 }
 
 #' @noRd
-rc_ <- function(.f) {
+recoder <- function(.f) {
   function(x, v) {
     collapse::tfmv(.data = x, vars = v, FUN = .f)
   }
 }
 
 #' @noRd
-rc_integer <- rc_(as.integer)
+rc_integer <- recoder(as_integer_supp)
 
 #' @noRd
-rc_integer_supp <- rc_(as_integer_supp)
+rc_double <- recoder(as.double)
 
 #' @noRd
-rc_double <- rc_(as.double)
+rc_bin <- recoder(bin_col)
 
 #' @noRd
-rc_bin <- rc_(bin_col)
+rc_ymd <- recoder(as_date_ymd)
 
 #' @noRd
-rc_date_ymd <- rc_(as_date_ymd)
+rc_ymd2 <- recoder(as_date_ymd2)
 
 #' @noRd
-rc_date_ymd2 <- rc_(as_date_ymd2)
-
-#' @noRd
-rc_date_mdy <- rc_(as_date_mdy)
+rc_mdy <- recoder(as_date_mdy)
 
 #' @noRd
 combine_columns <- function(
@@ -88,6 +85,22 @@ combine_columns <- function(
   collapse::gv(x[i, ], main) <- COL
   collapse::gv(x, other) <- NULL
   return(x)
+}
+
+#' @noRd
+rc_address <- function(x, main = "address", other = "add_2") {
+  combine_columns(x, main = main, other = other, sep = ", ")
+}
+
+#' @noRd
+rc_other <- function(x, stub) {
+  combine_columns(
+    x,
+    main = paste0(stub, "_type"),
+    other = paste0(stub, "_otxt"),
+    prefix = "OTHER: ",
+    sep = ""
+  )
 }
 
 #' @noRd

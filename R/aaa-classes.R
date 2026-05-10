@@ -15,10 +15,13 @@ ParamCMS <- new_class("ParamCMS", class_list, package = NULL)
 ParamPDC <- new_class("ParamPDC", class_list, package = NULL)
 
 #' @noRd
-QueryCMS <- new_class("QueryCMS", class_list, package = NULL)
+Query <- new_class("Query", class_list, package = NULL)
 
 #' @noRd
-QueryPDC <- new_class("QueryPDC", class_list, package = NULL)
+QueryCMS <- new_class("QueryCMS", Query, package = NULL)
+
+#' @noRd
+QueryPDC <- new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
 API <- new_class("API", package = NULL, abstract = TRUE)

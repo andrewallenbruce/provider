@@ -31,7 +31,7 @@ clia(
   campus = NULL,
   non_profit = NULL,
   eligible = NULL,
-  temp_site = NULL,
+  temporary = NULL,
   poc = NULL,
   count = FALSE,
   set = FALSE
@@ -86,7 +86,7 @@ limited public health testing.}
 \item{eligible}{\verb{<lgl>} Indicates lab is eligible to participate in
 Medicare/Medicaid.}
 
-\item{temp_site}{\verb{<lgl>} Indicates single site CLIA is for lab with multiple
+\item{temporary}{\verb{<lgl>} Indicates single site CLIA is for lab with multiple
 temporary testing sites.}
 
 \item{poc}{\verb{<lgl>} Indicates provider is in compliance with Plan of

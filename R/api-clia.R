@@ -55,7 +55,7 @@
 #'   limited public health testing.
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
-#' @param temp_site `<lgl>` Indicates single site CLIA is for lab with multiple
+#' @param temporary `<lgl>` Indicates single site CLIA is for lab with multiple
 #'   temporary testing sites.
 #' @param poc `<lgl>` Indicates provider is in compliance with Plan of
 #'   Correction.
@@ -92,7 +92,7 @@ clia <- function(
   campus = NULL,
   non_profit = NULL,
   eligible = NULL,
-  temp_site = NULL,
+  temporary = NULL,
   poc = NULL,
   count = FALSE,
   set = FALSE
@@ -105,7 +105,7 @@ clia <- function(
   check_bool_(campus)
   check_bool_(non_profit)
   check_bool_(eligible)
-  check_bool_(temp_site)
+  check_bool_(temporary)
   check_bool_(poc)
   check_numeric(chow)
 
@@ -124,7 +124,7 @@ clia <- function(
     MLT_SITE_EXCPTN_SW = convert_bool(multi),
     HOSP_LAB_EXCPTN_SW = convert_bool(campus),
     NON_PRFT_EXCPTN_SW = convert_bool(non_profit),
-    LAB_TEMP_TSTG_SITE_SW = convert_bool(temp_site),
+    LAB_TEMP_TSTG_SITE_SW = convert_bool(temporary),
     ACPTBL_POC_SW = convert_bool(poc),
     !!!convert_accreditation(accreditation),
     .count = count,

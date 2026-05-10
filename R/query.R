@@ -23,22 +23,6 @@ preprocess <- function(x) {
 }
 
 #' @noRd
-get_values <- function(x) {
-  if (is_modifier(x)) {
-    return(plus(x@value))
-  }
-  plus(unlist_(x))
-}
-
-#' @noRd
-get_operators <- function(x) {
-  if (is_modifier(x)) {
-    return(x@operator)
-  }
-  if (length(unlist_(x)) > 1L) "IN" else "="
-}
-
-#' @noRd
 query <- function(api, x, N) {
   x <- preprocess(x)
 
