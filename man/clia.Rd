@@ -150,12 +150,17 @@ laboratory is accredited by one of the CMS-approved organizations:
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
 
-clia(compliant = FALSE, active = TRUE, count = TRUE)
+clia(compliant = FALSE,
+     active = TRUE,
+     count = TRUE)
 
-clia(facility_ccn = provider:::cdc_labs$ccn)
+clia(facility_ccn = provider:::cdc_labs$ccn) |> str()
 
-clia(certificate = c("accreditation", "registration"), city = "Valdosta", state = "GA")
+clia(certificate = c("accreditation", "registration"),
+     city = "Valdosta",
+     state = "GA") |>
+     str()
 
-clia(accreditation = c("cap", "cola", "jcaho"))
+clia(accreditation = c("cap", "cola", "jcaho")) |> str()
 \dontshow{\}) # examplesIf}
 }

@@ -60,9 +60,9 @@ cms <- function(
   )
 }
 #' @noRd
-flatten_cms <- function(url, query = NULL, ...) {
+flatten_cms <- function(url, query = NULL, append = "?", ...) {
   flatten_url(
-    base = paste0(url, "?"),
+    base = paste0(url, append),
     query %0% NULL,
     opts_cms(...)
   )

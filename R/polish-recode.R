@@ -30,7 +30,7 @@ credit_pivot <- function(x) {
 
   collapse::settfmv(y, "acr_org", as.character)
 
-  RC_clia_credit_type(y$acr_org)
+  RC_clia_credit(y$acr_org)
 
   collapse::gvr(x, cols) <- NULL
 
@@ -39,37 +39,37 @@ credit_pivot <- function(x) {
 
 #' @noRd
 owner_pivot <- function(x) {
-  y <- collapse::gvr(x, "^pac$|_ind$|_txt$") |>
+  y <- collapse::gvr(x, "^pac$|_ind$|_otxt$") |>
     collapse::pivot(
-      ids = c("pac", "oth_txt"),
-      names = list(variable = "owner_type", value = "bin"),
+      ids = c("pac", "own_otxt"),
+      names = list(variable = "own_type", value = "bin"),
       na.rm = TRUE
     ) |>
     collapse::funique() |>
     collapse::roworderv("pac")
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$|_txt$") <- NULL
-    return(collapse::av(x, owner_type = rep.int(NA_character_, nrow(x))))
+    collapse::gvr(x, "_ind$|_otxt$") <- NULL
+    return(collapse::av(x, own_type = rep.int(NA_character_, nrow(x))))
   }
 
   y <- collapse::ss(y, y$bin %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, "_ind$|_txt$") <- NULL
-    return(collapse::av(x, owner_type = rep.int(NA_character_, nrow(x))))
+    collapse::gvr(x, "_ind$|_otxt$") <- NULL
+    return(collapse::av(x, own_type = rep.int(NA_character_, nrow(x))))
   }
 
-  collapse::settfmv(y, "owner_type", as.character)
+  collapse::settfmv(y, "own_type", as.character)
 
-  RC_owner_type(y$owner_type)
+  RC_own_type(y$own_type)
 
-  collapse::gvr(x, "_ind$|_txt$") <- NULL
+  collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
   y <- combine_columns(
     y,
-    main = "owner_type",
-    other = "oth_txt",
+    main = "own_type",
+    other = "own_otxt",
     prefix = "Other: ",
     sep = ""
   ) |>
@@ -88,12 +88,12 @@ owner_pivot <- function(x) {
   y <- collapse::ss(y, j = 1:2)
   g <- collapse::GRP(y$pac, call = FALSE)
 
-  y <- collapse::gsplit(y$owner_type, g, use.g.names = TRUE) |>
+  y <- collapse::gsplit(y$ow_type, g, use.g.names = TRUE) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
     as_data_frame() |>
-    set_names(c("pac", "owner_type")) |>
+    set_names(c("pac", "own_type")) |>
     collapse::rowbind(y) |>
-    collapse::roworderv(c("pac", "owner_type"))
+    collapse::roworderv(c("pac", "own_type"))
 
   collapse::join(x, y, on = "pac", verbose = 0L)
 }
@@ -123,7 +123,7 @@ subgroup_pivot <- function(x) {
 
   collapse::settfmv(y, "subgroup", as.character)
 
-  RC_subgroup_type(y$subgroup)
+  RC_subgroup(y$subgroup)
 
   collapse::gvr(x, "sub_") <- NULL
 
@@ -160,7 +160,7 @@ subgroup_pivot <- function(x) {
 }
 
 #' @noRd
-RC_clia_term_type <- function(xcol) {
+RC_clia_term <- function(xcol) {
   collapse::recode_char(
     xcol,
     "00" = "Active",
@@ -191,7 +191,7 @@ RC_clia_term_type <- function(xcol) {
 }
 
 #' @noRd
-RC_clia_cert_type <- function(xcol) {
+RC_clia_cert <- function(xcol) {
   collapse::recode_char(
     xcol,
     "1" = "Compliance",
@@ -205,7 +205,7 @@ RC_clia_cert_type <- function(xcol) {
 }
 
 #' @noRd
-RC_clia_own_type <- function(xcol) {
+RC_clia_own <- function(xcol) {
   collapse::recode_char(
     xcol,
     "01" = "RNHCI",
@@ -225,7 +225,7 @@ RC_clia_own_type <- function(xcol) {
 }
 
 #' @noRd
-RC_clia_fac_type <- function(xcol) {
+RC_clia_fac <- function(xcol) {
   collapse::recode_char(
     xcol,
     "01" = "Ambulance",
@@ -263,7 +263,7 @@ RC_clia_fac_type <- function(xcol) {
 }
 
 #' @noRd
-RC_clia_act_type <- function(xcol) {
+RC_clia_act <- function(xcol) {
   collapse::recode_char(
     xcol,
     "1" = "Init",
@@ -278,7 +278,7 @@ RC_clia_act_type <- function(xcol) {
 }
 
 #' @noRd
-RC_clia_credit_type <- function(xcol) {
+RC_clia_credit <- function(xcol) {
   collapse::recode_char(
     xcol,
     "a2la_date" = "A2LA",
@@ -294,7 +294,7 @@ RC_clia_credit_type <- function(xcol) {
 }
 
 #' @noRd
-RC_subgroup_type <- function(xcol) {
+RC_subgroup <- function(xcol) {
   collapse::recode_char(
     xcol,
     "sub_acute" = "Acute",
@@ -316,7 +316,7 @@ RC_subgroup_type <- function(xcol) {
 }
 
 #' @noRd
-RC_owner_type <- function(xcol) {
+RC_own_type <- function(xcol) {
   collapse::recode_char(
     xcol,
     "acq_ind" = "Created for Aquisition",

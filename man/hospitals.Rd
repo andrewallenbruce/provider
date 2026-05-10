@@ -34,7 +34,6 @@ hospitals(
   ccn = NULL,
   pac = NULL,
   enid = NULL,
-  enid_state = NULL,
   org_name = NULL,
   org_dba = NULL,
   city = NULL,
@@ -97,7 +96,7 @@ hospitals(
 
 \item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{enid, enid_state}{\verb{<chr>} Medicare Enrollment ID, Enrollment state}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID, Enrollment state}
 
 \item{org_dba}{\verb{<chr>} Doing-business-as name}
 
@@ -165,14 +164,14 @@ x <- hospitals(
   subgroup = subgroups(
     acute = FALSE,
     psych = TRUE))
-x
+x |> str()
 
 hospitals2(ccn = x$ccn)
 
 x <- hospitals2()
 x
 
-hospitals(ccn = x$ccn)
+hospitals(ccn = x$ccn) |> str()
 
 hospitals2(state = "GA", rating = 5) |> str()
 \dontshow{\}) # examplesIf}

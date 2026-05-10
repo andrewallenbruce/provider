@@ -23,11 +23,11 @@ polish.clia <- function(x) {
     rc_address() |>
     rc_address(main = "fac_name", other = "fac_2")
 
-  RC_clia_term_type(x$term)
-  RC_clia_cert_type(x$cert)
-  RC_clia_own_type(x$owner)
-  RC_clia_fac_type(x$facility)
-  RC_clia_act_type(x$action)
+  RC_clia_term(x$term)
+  RC_clia_cert(x$cert)
+  RC_clia_own(x$owner)
+  RC_clia_fac(x$facility)
+  RC_clia_act(x$action)
 
   credit_pivot(x)
 }

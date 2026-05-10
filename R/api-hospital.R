@@ -10,7 +10,7 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
-#' @param enid,enid_state `<chr>` Medicare Enrollment ID, Enrollment state
+#' @param enid `<chr>` Medicare Enrollment ID, Enrollment state
 #' @param org_name `<chr>` Legal business name
 #' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
@@ -56,14 +56,14 @@
 #'   subgroup = subgroups(
 #'     acute = FALSE,
 #'     psych = TRUE))
-#' x
+#' x |> str()
 #'
 #' hospitals2(ccn = x$ccn)
 #'
 #' x <- hospitals2()
 #' x
 #'
-#' hospitals(ccn = x$ccn)
+#' hospitals(ccn = x$ccn) |> str()
 #'
 #' hospitals2(state = "GA", rating = 5) |> str()
 #'
@@ -73,7 +73,6 @@ hospitals <- function(
   ccn = NULL,
   pac = NULL,
   enid = NULL,
-  enid_state = NULL,
   org_name = NULL,
   org_dba = NULL,
   city = NULL,
@@ -100,7 +99,6 @@ hospitals <- function(
     CCN = ccn,
     `ASSOCIATE ID` = pac,
     `ENROLLMENT ID` = enid,
-    `ENROLLMENT STATE` = enid_state,
     `ORGANIZATION NAME` = org_name,
     `DOING BUSINESS AS NAME` = org_dba,
     CITY = city,

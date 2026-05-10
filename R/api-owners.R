@@ -1,4 +1,4 @@
-#' FQHC Owners
+#' Facility Owners
 #'
 #' @description
 #' Providers with pending Medicare enrollment applications.
@@ -20,11 +20,27 @@
 #'
 #' @returns A [tibble][tibble::tibble-package]
 #'
+#' @name owners
+#'
 #' @examplesIf httr2::is_online()
 #' fqhc_owner(count = TRUE)
+#' hospital_owner(count = TRUE)
+#' hospice_owner(count = TRUE)
+#' rhc_owner(count = TRUE)
+#' snf_owner(count = TRUE)
 #'
-#' fqhc_owner(state = c("GA", "FL"))
+#' fqhc_owner(state = c("GA", "FL")) |> str()
 #'
+#' hospital_owner(state = c("GA", "FL")) |> str()
+#'
+#' hospice_owner(state = c("GA", "FL")) |> str()
+#'
+#' rhc_owner(state = c("GA", "FL")) |> str()
+#'
+#' snf_owner(state = c("GA", "FL")) |> str()
+NULL
+
+#' @rdname owners
 #' @export
 fqhc_owner <- function(
   org_enid = NULL,
@@ -74,33 +90,7 @@ fqhc_owner <- function(
   polish(x)
 }
 
-#' Hospital Owners
-#'
-#' @description
-#' Providers with pending Medicare enrollment applications.
-#'
-#' @param org_enid `<chr>` National Provider Identifier
-#' @param org_pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
-#' @param pac `<chr>` Provider's name
-#' @param owner `<chr>` Provider's name
-#' @param dba `<chr>` Provider's name
-#' @param percent `<chr>` Provider's name
-#' @param role `<chr>` Provider's name
-#' @param entity `<chr>` Provider's name
-#' @param title `<chr>` Provider's name
-#' @param first,middle,last `<chr>` Provider's name
-#' @param address,city,state,zip `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @examplesIf httr2::is_online()
-#' hospital_owner(count = TRUE)
-#'
-#' hospital_owner(state = c("GA", "FL"))
-#'
+#' @rdname owners
 #' @export
 hospital_owner <- function(
   org_enid = NULL,
@@ -150,33 +140,7 @@ hospital_owner <- function(
   polish(x)
 }
 
-#' Hospice Owners
-#'
-#' @description
-#' Providers with pending Medicare enrollment applications.
-#'
-#' @param org_enid `<chr>` National Provider Identifier
-#' @param org_pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
-#' @param pac `<chr>` Provider's name
-#' @param owner `<chr>` Provider's name
-#' @param dba `<chr>` Provider's name
-#' @param percent `<chr>` Provider's name
-#' @param role `<chr>` Provider's name
-#' @param entity `<chr>` Provider's name
-#' @param title `<chr>` Provider's name
-#' @param first,middle,last `<chr>` Provider's name
-#' @param address,city,state,zip `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @examplesIf httr2::is_online()
-#' hospice_owner(count = TRUE)
-#'
-#' hospice_owner(state = c("GA", "FL"))
-#'
+#' @rdname owners
 #' @export
 hospice_owner <- function(
   org_enid = NULL,
@@ -226,33 +190,7 @@ hospice_owner <- function(
   polish(x)
 }
 
-#' Rural Health Clinic Owners
-#'
-#' @description
-#' Providers with pending Medicare enrollment applications.
-#'
-#' @param org_enid `<chr>` National Provider Identifier
-#' @param org_pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
-#' @param pac `<chr>` Provider's name
-#' @param owner `<chr>` Provider's name
-#' @param dba `<chr>` Provider's name
-#' @param percent `<chr>` Provider's name
-#' @param role `<chr>` Provider's name
-#' @param entity `<chr>` Provider's name
-#' @param title `<chr>` Provider's name
-#' @param first,middle,last `<chr>` Provider's name
-#' @param address,city,state,zip `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @examplesIf httr2::is_online()
-#' rhc_owner(count = TRUE)
-#'
-#' rhc_owner(state = c("GA", "FL"))
-#'
+#' @rdname owners
 #' @export
 rhc_owner <- function(
   org_enid = NULL,
@@ -302,33 +240,7 @@ rhc_owner <- function(
   polish(x)
 }
 
-#' Skilled Nursing Facility Owners
-#'
-#' @description
-#' Providers with pending Medicare enrollment applications.
-#'
-#' @param org_enid `<chr>` National Provider Identifier
-#' @param org_pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
-#' @param pac `<chr>` Provider's name
-#' @param owner `<chr>` Provider's name
-#' @param dba `<chr>` Provider's name
-#' @param percent `<chr>` Provider's name
-#' @param role `<chr>` Provider's name
-#' @param entity `<chr>` Provider's name
-#' @param title `<chr>` Provider's name
-#' @param first,middle,last `<chr>` Provider's name
-#' @param address,city,state,zip `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @examplesIf httr2::is_online()
-#' snf_owner(count = TRUE)
-#'
-#' snf_owner(state = c("GA", "FL"))
-#'
+#' @rdname owners
 #' @export
 snf_owner <- function(
   org_enid = NULL,

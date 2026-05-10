@@ -8,12 +8,18 @@ rename_with <- function(x, endpoint) {
   if (rlang::is_null(RE_NAME[[endpoint]])) {
     return(x)
   }
-  rlang::inject(collapse::recode_char(
-    colnames(x),
-    !!!RE_NAME[[endpoint]],
-    set = TRUE
-  ))
-  collapse::gv(x, unlist_(RE_NAME[[endpoint]])) |>
+
+  NM <- RE_NAME[[endpoint]]
+
+  rlang::inject(
+    collapse::recode_char(
+      colnames(x),
+      !!!NM,
+      set = TRUE
+    )
+  )
+
+  collapse::gvr(x, paste0(unlist_(NM), collapse = "|")) |>
     replace_nz() |>
     data_frame()
 }

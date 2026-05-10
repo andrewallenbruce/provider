@@ -18,7 +18,6 @@ clinicians(
   first = NULL,
   middle = NULL,
   last = NULL,
-  suffix = NULL,
   gender = NULL,
   credential = NULL,
   specialty = NULL,
@@ -40,7 +39,7 @@ clinicians(
 
 \item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
-\item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
+\item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
 \item{gender}{\verb{<enum>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 

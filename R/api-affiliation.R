@@ -8,7 +8,7 @@
 #'
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
-#' @param first,middle,last,suffix `<chr>` Individual provider's name
+#' @param first,middle,last `<chr>` Individual provider's name
 #' @param facility_type `<enum>` facility type:
 #'    - `esrd` = Dialysis facility
 #'    - `hha` = Home health agency
@@ -48,7 +48,6 @@ affiliations <- function(
   first = NULL,
   middle = NULL,
   last = NULL,
-  suffix = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
@@ -63,7 +62,6 @@ affiliations <- function(
     provider_last_name = last,
     provider_first_name = first,
     provider_middle_name = middle,
-    suff = suffix,
     facility_type = tag_enum(facility_type),
     facility_affiliations_certification_number = facility_ccn,
     facility_type_certification_number = parent_ccn,
@@ -105,7 +103,7 @@ affiliations <- function(
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
-#' @param first,middle,last,suffix `<chr>` Individual provider's name
+#' @param first,middle,last `<chr>` Individual provider's name
 #' @param gender `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
 #' @param credential `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
 #' @param school `<chr>` Provider’s medical school
@@ -134,7 +132,6 @@ clinicians <- function(
   first = NULL,
   middle = NULL,
   last = NULL,
-  suffix = NULL,
   gender = NULL,
   credential = NULL,
   specialty = NULL,
@@ -156,7 +153,6 @@ clinicians <- function(
     provider_last_name = last,
     provider_first_name = first,
     provider_middle_name = middle,
-    suff = suffix,
     gndr = gender,
     cred = credential,
     med_sch = school,

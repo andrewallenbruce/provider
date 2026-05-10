@@ -83,17 +83,27 @@ ListCMS <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_url(
-          paste0(self@url, "/stats?"),
-          self@query %0% NULL
+        flatten_cms(
+          self@url,
+          self@query,
+          append = "/stats?"
         ) |>
-          multi_count(self@url, "found_rows")
+          multi_count(
+            self@url,
+            "found_rows"
+          )
       }
     ),
     pages = new_property(
       class_integer,
       getter = function(self) {
-        sum2(cheapr::seq_size(0L, unlist_(self@count), self@limit))
+        sum2(
+          cheapr::seq_size(
+            0L,
+            unlist_(self@count),
+            self@limit
+          )
+        )
       }
     )
   )
@@ -119,10 +129,10 @@ PDC <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_url(
+        flatten_pdc(
           self@url,
-          self@query %0% NULL,
-          opts_pdc(results = "false")
+          self@query,
+          results = "false"
         ) |>
           base_request("count")
       }

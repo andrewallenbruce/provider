@@ -15,7 +15,6 @@ affiliations(
   first = NULL,
   middle = NULL,
   last = NULL,
-  suffix = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
@@ -28,7 +27,7 @@ affiliations(
 
 \item{pac}{\verb{<chr>} Individual PECOS Associate Control ID}
 
-\item{first, middle, last, suffix}{\verb{<chr>} Individual provider's name}
+\item{first, middle, last}{\verb{<chr>} Individual provider's name}
 
 \item{facility_type}{\verb{<enum>} facility type:
 \itemize{
