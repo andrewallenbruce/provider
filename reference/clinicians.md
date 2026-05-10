@@ -12,7 +12,6 @@ clinicians(
   first = NULL,
   middle = NULL,
   last = NULL,
-  suffix = NULL,
   gender = NULL,
   credential = NULL,
   specialty = NULL,
@@ -53,7 +52,7 @@ clinicians(
 
   `<chr>` Medicare Enrollment ID
 
-- first, middle, last, suffix:
+- first, middle, last:
 
   `<chr>` Individual provider's name
 
@@ -136,29 +135,29 @@ clinicians(count = TRUE, org_name = not_blank())
 
 clinicians(enid = "I20081002000549")
 #> ✔ clinicians returned 1 result.
-#> # A tibble: 1 × 19
-#>   first middle last  suffix gender cred  school grad_year specialty    npi pac  
-#>   <chr> <chr>  <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>      <int> <chr>
-#> 1 DORO… E      MCCU… NA     F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022…
-#> # ℹ 8 more variables: enid <chr>, org_name <chr>, org_pac <chr>, members <int>,
+#> # A tibble: 1 × 18
+#>       npi pac   enid  last  first middle gender cred  school grad_year specialty
+#>     <int> <chr> <chr> <chr> <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>    
+#> 1  1.41e9 8022… I200… MCCU… DORO… E      F      AU    OTHER       2008 QUALIFIE…
+#> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 
 clinicians(first = "Etan")
 #> ✔ clinicians returned 11 results.
-#> # A tibble: 11 × 19
-#>    first middle last     suffix gender cred  school   grad_year specialty    npi
-#>    <chr> <chr>  <chr>    <chr>  <chr>  <chr> <chr>        <int> <chr>      <int>
-#>  1 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO…      2013 PATHOLOGY 1.53e9
-#>  2 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
-#>  3 ETAN  ARIEL  MARKS    NA     M      DO    NOVA SO…      2013 PATHOLOGY 1.53e9
-#>  4 ETAN  NA     DAYAN    NA     M      MD    STATE U…      2012 DIAGNOST… 1.70e9
-#>  5 ETAN  NA     SPIRA    NA     M      MD    NEW YOR…      2007 INTERNAL… 1.00e9
-#>  6 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
-#>  7 ETAN  NA     SPIRA    NA     M      MD    NEW YOR…      2007 INTERNAL… 1.00e9
-#>  8 ETAN  NA     EITCHES  NA     M      MD    COLUMBI…      2010 EMERGENC… 1.41e9
-#>  9 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
-#> 10 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
-#> 11 ETAN  NA     SUGARMAN NA     M      NA    ALBERT …      2011 ORTHOPED… 1.24e9
-#> # ℹ 9 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#> #   members <int>, address <chr>, city <chr>, state <chr>, zip <chr>
+#> # A tibble: 11 × 18
+#>       npi pac   enid  last  first middle gender cred  school grad_year specialty
+#>     <int> <chr> <chr> <chr> <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>    
+#>  1 1.53e9 7113… I202… MARKS ETAN  ARIEL  M      DO    NOVA …      2013 PATHOLOGY
+#>  2 1.41e9 9638… I202… EITC… ETAN  NA     M      MD    COLUM…      2010 EMERGENC…
+#>  3 1.53e9 7113… I201… MARKS ETAN  ARIEL  M      DO    NOVA …      2013 PATHOLOGY
+#>  4 1.70e9 7618… I202… DAYAN ETAN  NA     M      MD    STATE…      2012 DIAGNOST…
+#>  5 1.00e9 4587… I201… SPIRA ETAN  NA     M      MD    NEW Y…      2007 INTERNAL…
+#>  6 1.41e9 9638… I202… EITC… ETAN  NA     M      MD    COLUM…      2010 EMERGENC…
+#>  7 1.00e9 4587… I201… SPIRA ETAN  NA     M      MD    NEW Y…      2007 INTERNAL…
+#>  8 1.41e9 9638… I202… EITC… ETAN  NA     M      MD    COLUM…      2010 EMERGENC…
+#>  9 1.24e9 0244… I202… SUGA… ETAN  NA     M      NA    ALBER…      2011 ORTHOPED…
+#> 10 1.24e9 0244… I202… SUGA… ETAN  NA     M      NA    ALBER…      2011 ORTHOPED…
+#> 11 1.24e9 0244… I202… SUGA… ETAN  NA     M      NA    ALBER…      2011 ORTHOPED…
+#> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>
 ```

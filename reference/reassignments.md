@@ -112,35 +112,35 @@ reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.
 #> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#> * <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#>   org_pac   org_enid org_name org_state employees pac   enid     npi first last 
+#> * <chr>     <chr>    <chr>    <chr>         <int> <chr> <chr>  <int> <chr> <chr>
+#> 1 31735258… I200702… NA       FL                6 9830… I202… 1.08e9 Joah  Alia…
+#> 2 31735258… I200702… NA       FL                6 1850… I201… 1.87e9 Kyle  Bett…
+#> 3 31735258… I200702… NA       FL                6 6305… I201… 1.85e9 Craig Cole 
+#> 4 31735258… I200702… NA       FL                6 3577… I201… 1.76e9 Rich… Jabl…
+#> 5 31735258… I200702… NA       FL                6 4385… I202… 1.68e9 Asyv… Powe…
+#> 6 31735258… I200702… NA       FL                6 8224… I201… 1.44e9 Ashl… Royce
+#> # ℹ 3 more variables: state <chr>, specialty <chr>, employers <int>
 
 reassignments(pac = 9830437441)
 #> ✔ reassignments returned 2 results.
 #> # A tibble: 2 × 13
-#>   first last    state specialty  employers    npi pac   enid  org_name employees
-#> * <chr> <chr>   <chr> <chr>          <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… NA               6
-#> 2 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… Clermon…         1
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#>   org_pac   org_enid org_name org_state employees pac   enid     npi first last 
+#> * <chr>     <chr>    <chr>    <chr>         <int> <chr> <chr>  <int> <chr> <chr>
+#> 1 31735258… I200702… NA       FL                6 9830… I202… 1.08e9 Joah  Alia…
+#> 2 57992955… O202506… Clermon… FL                1 9830… I202… 1.08e9 Joah  Alia…
+#> # ℹ 3 more variables: state <chr>, specialty <chr>, employers <int>
 
 reassignments(org_pac = 3173525888)
 #> ✔ reassignments returned 6 results.
 #> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#> * <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#>   org_pac   org_enid org_name org_state employees pac   enid     npi first last 
+#> * <chr>     <chr>    <chr>    <chr>         <int> <chr> <chr>  <int> <chr> <chr>
+#> 1 31735258… I200702… NA       FL                6 9830… I202… 1.08e9 Joah  Alia…
+#> 2 31735258… I200702… NA       FL                6 1850… I201… 1.87e9 Kyle  Bett…
+#> 3 31735258… I200702… NA       FL                6 6305… I201… 1.85e9 Craig Cole 
+#> 4 31735258… I200702… NA       FL                6 3577… I201… 1.76e9 Rich… Jabl…
+#> 5 31735258… I200702… NA       FL                6 4385… I202… 1.68e9 Asyv… Powe…
+#> 6 31735258… I200702… NA       FL                6 8224… I201… 1.44e9 Ashl… Royce
+#> # ℹ 3 more variables: state <chr>, specialty <chr>, employers <int>
 ```

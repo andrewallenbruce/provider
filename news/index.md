@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9155 (2026-05-10)
+
+- owners/enrollment
+
 ## provider 0.0.1.9154 (2026-05-10)
 
 - generalized `combine_columns()`
@@ -285,7 +289,7 @@
 
 - updated S7 dependency
 - filled out
-  [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/rhc_enroll.md)
+  [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   structure
 
 ## provider 0.0.1.9090 (2026-04-18)
