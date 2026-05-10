@@ -88,7 +88,7 @@ owner_pivot <- function(x) {
   y <- collapse::ss(y, j = 1:2)
   g <- collapse::GRP(y$pac, call = FALSE)
 
-  y <- collapse::gsplit(y$ow_type, g, use.g.names = TRUE) |>
+  y <- collapse::gsplit(y$own_type, g, use.g.names = TRUE) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
     as_data_frame() |>
     set_names(c("pac", "own_type")) |>
