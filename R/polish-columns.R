@@ -11,8 +11,6 @@ RE_ENROLL = list(
   `ORGANIZATION TYPE STRUCTURE` = "org_type",
   `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
   PROPRIETARY_NONPROFIT = "status",
-  `NURSING HOME PROVIDER NAME` = "nhp_name",
-  `AFFILIATION ENTITY NAME` = "aff_name",
   `ADDRESS LINE 1` = "address",
   `ADDRESS LINE 2` = "add_2",
   CITY = "city",
@@ -53,11 +51,16 @@ RE_OWNER = list(
   `CONSULTING FIRM - OWNER` = "con_ind",
   `FOR PROFIT - OWNER` = "fp_ind",
   `NON PROFIT - OWNER` = "np_ind",
+  `OTHER TYPE - OWNER` = "oth_ind",
+  `OTHER TYPE TEXT - OWNER` = "own_otxt"
+)
+
+#' @noRd
+RE_OWNER2 = c(
+  RE_OWNER,
   `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
   `REIT - OWNER` = "reit_ind",
   `CHAIN HOME OFFICE - OWNER` = "cho_ind",
-  `OTHER TYPE - OWNER` = "oth_ind",
-  `OTHER TYPE TEXT - OWNER` = "own_otxt",
   `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
 )
 
@@ -69,8 +72,8 @@ RE_NAME = list(
     provider_middle_name = "middle",
     npi = "npi",
     ind_pac_id = "pac",
-    facility_type = "facility_type",
-    facility_affiliations_certification_number = "facility_ccn",
+    facility_type = "prov_type",
+    facility_affiliations_certification_number = "prov_ccn",
     facility_type_certification_number = "parent_ccn"
   ),
   clia = list(
@@ -92,17 +95,17 @@ RE_NAME = list(
     GNRL_FAC_TYPE_CD = "facility",
     GNRL_CNTL_TYPE_CD = "owner",
     CRTFCTN_ACTN_TYPE_CD = "action",
-    ORGNL_PRTCPTN_DT = "orig_date",
+    # ORGNL_PRTCPTN_DT = "orig_date",
     CRTFCTN_DT = "cert_date",
     CRTFCT_EFCTV_DT = "eff_date",
     TRMNTN_EXPRTN_DT = "term_date",
-    A2LA_ACRDTD_Y_MATCH_DT = "a2la_date",
-    AABB_ACRDTD_Y_MATCH_DT = "aabb_date",
-    AOA_ACRDTD_Y_MATCH_DT = "aoa_date",
-    ASHI_ACRDTD_Y_MATCH_DT = "ashi_date",
-    CAP_ACRDTD_Y_MATCH_DT = "cap_date",
-    COLA_ACRDTD_Y_MATCH_DT = "cola_date",
-    JCAHO_ACRDTD_Y_MATCH_DT = "jcaho_date",
+    A2LA_ACRDTD_Y_MATCH_DT = "acr_a2la_date",
+    AABB_ACRDTD_Y_MATCH_DT = "acr_aabb_date",
+    AOA_ACRDTD_Y_MATCH_DT = "acr_aoa_date",
+    ASHI_ACRDTD_Y_MATCH_DT = "acr_ashi_date",
+    CAP_ACRDTD_Y_MATCH_DT = "acr_cap_date",
+    COLA_ACRDTD_Y_MATCH_DT = "acr_cola_date",
+    JCAHO_ACRDTD_Y_MATCH_DT = "acr_jcaho_date",
     DRCTLY_AFLTD_LAB_CNT = "labs",
     LAB_SITE_CNT = "sites",
     # FORM_1557_TEST_VOL_CNT = "srv_cnt",
@@ -286,10 +289,14 @@ RE_NAME = list(
   fqhc_enroll = RE_ENROLL,
   hospice_enroll = RE_ENROLL,
   rhc_enroll = RE_ENROLL,
-  snf_enroll = RE_ENROLL,
-  fqhc_owner = RE_OWNER,
-  hospice_owner = RE_OWNER,
+  snf_enroll = c(
+    RE_ENROLL,
+    `NURSING HOME PROVIDER NAME` = "nhp_name",
+    `AFFILIATION ENTITY NAME` = "aff_name"
+  ),
+  fqhc_owner = RE_OWNER2,
+  hospice_owner = RE_OWNER2,
+  rhc_owner = RE_OWNER2,
   hospital_owner = RE_OWNER,
-  rhc_owner = RE_OWNER,
   snf_owner = RE_OWNER
 )

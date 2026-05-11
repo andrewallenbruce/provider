@@ -1,16 +1,6 @@
 #' @noRd
 credit_pivot <- function(x) {
-  cols <- c(
-    "a2la_",
-    "aabb_",
-    "aoa_",
-    "ashi_",
-    "cap_",
-    "cola_",
-    "jcaho_"
-  )
-
-  y <- collapse::gvr(x, c("fac_ccn", cols)) |>
+  y <- collapse::gvr(x, "^fac_ccn$|^acr_") |>
     collapse::pivot(
       ids = "fac_ccn",
       names = list(variable = "acr_org", value = "acr_date"),
@@ -20,7 +10,7 @@ credit_pivot <- function(x) {
     collapse::roworderv("fac_ccn")
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, cols) <- NULL
+    collapse::gvr(x, "^acr_") <- NULL
     return(collapse::av(
       x,
       acr_org = cheapr::na_init(y$acr_org, nrow(x)),
@@ -32,7 +22,7 @@ credit_pivot <- function(x) {
 
   RC_clia_credit(y$acr_org)
 
-  collapse::gvr(x, cols) <- NULL
+  collapse::gvr(x, "^acr_") <- NULL
 
   collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
 }
@@ -45,8 +35,8 @@ owner_pivot <- function(x) {
       names = list(variable = "own_type", value = "ind"),
       na.rm = TRUE
     ) |>
-    collapse::funique() |>
-    collapse::roworderv("pac")
+    collapse::roworderv("pac") |>
+    collapse::funique()
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "_ind$|_otxt$") <- NULL
@@ -85,13 +75,10 @@ owner_pivot <- function(x) {
     ))
   }
 
-  y <- collapse::ss(y, j = 1:2)
-
-  y <- collapse::rsplit(y$own_type, y$pac, flatten = TRUE) |>
-    purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
-    as_data_frame() |>
-    set_names(c("pac", "own_type")) |>
-    collapse::rowbind(y) |>
+  y <- collapse::rsplit(y$own_type, y$pac) |>
+    purrr::map(\(x) paste0(x, collapse = ", ")) |>
+    collapse::unlist2d() |>
+    rlang::set_names(c("pac", "own_type")) |>
     collapse::roworderv(c("pac", "own_type")) |>
     collapse::funique()
 
@@ -146,15 +133,12 @@ subgroup_pivot <- function(x) {
     ))
   }
 
-  y <- collapse::ss(y, j = 1:2)
-  g <- collapse::GRP(y$enid, call = FALSE)
-
-  y <- collapse::gsplit(y$subgroup, g, use.g.names = TRUE) |>
-    purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
-    as_data_frame() |>
-    set_names(c("enid", "subgroup")) |>
-    collapse::rowbind(y) |>
-    collapse::roworderv(c("enid", "subgroup"))
+  y <- collapse::rsplit(y$subgroup, y$enid) |>
+    purrr::map(\(x) paste0(x, collapse = ", ")) |>
+    collapse::unlist2d() |>
+    rlang::set_names(c("enid", "subgroup")) |>
+    collapse::roworderv(c("enid", "subgroup")) |>
+    collapse::funique()
 
   collapse::join(x, y, on = "enid", verbose = 0L)
 }

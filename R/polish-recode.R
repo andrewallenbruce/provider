@@ -120,13 +120,13 @@ RC_clia_act <- function(xcol) {
 RC_clia_credit <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "a2la_date" = "A2LA",
-    "aabb_date" = "AABB",
-    "aoa_date" = "AOA",
-    "ashi_date" = "ASHI-HLA",
-    "cap_date" = "CAP",
-    "cola_date" = "COLA",
-    "jcaho_date" = "JCAHO",
+    "acr_a2la_date" = "A2LA",
+    "acr_aabb_date" = "AABB",
+    "acr_aoa_date" = "AOA",
+    "acr_ashi_date" = "ASHI-HLA",
+    "acr_cap_date" = "CAP",
+    "acr_cola_date" = "COLA",
+    "acr_jcaho_date" = "JCAHO",
     default = NA_character_,
     set = TRUE
   )
