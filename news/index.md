@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9160 (2026-05-11)
+
+- fixes for `count_set` and `check_modifiers`
+
 ## provider 0.0.1.9159 (2026-05-11)
 
 - bug fixes for `rename_with`, `owner_pivot` and `subgroup_pivot`

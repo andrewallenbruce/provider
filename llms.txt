@@ -348,9 +348,9 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   : Clinical Laboratories
 - [`esrd()`](https://andrewallenbruce.github.io/provider/reference/esrd.md)
   : Dialysis Facilities
-- [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  : Hospital General Information
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  : Hospitals Enrolled in Medicare
 - [`fqhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   [`hospice_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)

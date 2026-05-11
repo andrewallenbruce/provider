@@ -1,30 +1,16 @@
-# Hospital General Information
-
-A list of all hospitals that have been registered with Medicare. The
-list includes addresses, phone numbers, hospital type, and overall
-hospital rating.
+# Hospitals Enrolled in Medicare
 
 Hospitals currently enrolled in Medicare. Data includes the hospital's
 sub-group types, legal business name, doing-business-as name,
 organization type and address.
 
+A list of all hospitals that have been registered with Medicare. The
+list includes addresses, phone numbers, hospital type, and overall
+hospital rating.
+
 ## Usage
 
 ``` r
-hospitals2(
-  ccn = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  county = NULL,
-  hosp_type = NULL,
-  own_type = NULL,
-  rating = NULL,
-  count = FALSE,
-  set = FALSE
-)
-
 hospitals(
   npi = NULL,
   ccn = NULL,
@@ -44,9 +30,28 @@ hospitals(
   count = FALSE,
   set = FALSE
 )
+
+hospitals2(
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  hosp_type = NULL,
+  own_type = NULL,
+  rating = NULL,
+  count = FALSE,
+  set = FALSE
+)
 ```
 
 ## Source
+
+- [API: Hospital
+  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+
+&nbsp;
 
 - [API: Hospital General
   Information](https://data.cms.gov/provider-data/dataset/27ea-46a8)
@@ -54,92 +59,15 @@ hospitals(
 - [API: Data
   Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 
-&nbsp;
-
-- [API: Hospital
-  Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
-
 ## Arguments
-
-- ccn:
-
-  `<int>` CMS Certification Number
-
-- org_name:
-
-  `<chr>` Legal business name
-
-- city, state, zip:
-
-  `<chr>` Location city, state, zip
-
-- county:
-
-  `<chr>` Location county
-
-- hosp_type:
-
-  `<enum>` Provider type:
-
-  - `acute` = Acute Care
-
-  - `cah` = Critical Access Hospital
-
-  - `child` = Childrens' Hospital
-
-  - `dod` = Acute Care - Department of Defense
-
-  - `ltc` = Long-term
-
-  - `psych` = Psychiatric
-
-  - `reh` = Rural Emergency Hospital
-
-  - `vha` = Acute Care - Veterans Administration
-
-- own_type:
-
-  `<enum>` Ownership type:
-
-  - `private` = Voluntary non-profit - Private
-
-  - `other` = Voluntary non-profit - Other
-
-  - `church` = Voluntary non-profit - Church
-
-  - `district` = Government - Hospital District or Authority
-
-  - `local` = Government - Local
-
-  - `federal` = Government - Federal
-
-  - `state` = Government - State
-
-  - `dod` = Department of Defense
-
-  - `profit` = Proprietary
-
-  - `physician` = Physician
-
-  - `tribal` = Tribal
-
-  - `vha` = Veterans Health Administration
-
-- rating:
-
-  `<int>` Hospital rating; 1-5 or "Not Available"
-
-- count:
-
-  `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 - npi:
 
   `<int>` National Provider Identifier
+
+- ccn:
+
+  `<int>` CMS Certification Number
 
 - pac:
 
@@ -149,9 +77,17 @@ hospitals(
 
   `<chr>` Medicare Enrollment ID, Enrollment state
 
+- org_name:
+
+  `<chr>` Legal business name
+
 - org_dba:
 
   `<chr>` Doing-business-as name
+
+- city, state, zip:
+
+  `<chr>` Location city, state, zip
 
 - multi:
 
@@ -211,6 +147,70 @@ hospitals(
 
   `<subgroups>` Hospital’s subgroup/unit. See
   [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
+
+- count:
+
+  `<lgl>` Return the total row count
+
+- set:
+
+  `<lgl>` Return the entire dataset
+
+- county:
+
+  `<chr>` Location county
+
+- hosp_type:
+
+  `<enum>` Provider type:
+
+  - `acute` = Acute Care
+
+  - `cah` = Critical Access Hospital
+
+  - `child` = Childrens' Hospital
+
+  - `dod` = Acute Care - Department of Defense
+
+  - `ltc` = Long-term
+
+  - `psych` = Psychiatric
+
+  - `reh` = Rural Emergency Hospital
+
+  - `vha` = Acute Care - Veterans Administration
+
+- own_type:
+
+  `<enum>` Ownership type:
+
+  - `private` = Voluntary non-profit - Private
+
+  - `other` = Voluntary non-profit - Other
+
+  - `church` = Voluntary non-profit - Church
+
+  - `district` = Government - Hospital District or Authority
+
+  - `local` = Government - Local
+
+  - `federal` = Government - Federal
+
+  - `state` = Government - State
+
+  - `dod` = Department of Defense
+
+  - `profit` = Proprietary
+
+  - `physician` = Physician
+
+  - `tribal` = Tribal
+
+  - `vha` = Veterans Health Administration
+
+- rating:
+
+  `<int>` Hospital rating; 1-5 or "Not Available"
 
 ## Value
 
