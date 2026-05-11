@@ -304,15 +304,15 @@ clia(accreditation = c("cap", "cola", "jcaho")) |> str()
 #>  $ chows    : int [1:3] 0 0 0
 #>  $ city     : chr [1:3] "WEST COLUMBIA" "WEST COLUMBIA" "WEST COLUMBIA"
 #>  $ poc_ind  : int [1:3] 0 0 0
-#>  $ compliant: chr [1:3] NA NA NA
-#>  $ xrf_ccn  : chr [1:3] NA NA NA
+#>  $ compliant: chr [1:3] "" "" ""
+#>  $ xrf_ccn  : chr [1:3] "" "" ""
 #>  $ cert_date: Date[1:3], format: "1993-01-13" "1993-01-13" ...
 #>  $ elig_ind : int [1:3] 0 0 0
-#>  $ fac_name : chr [1:3] "LEXINGTON MEDICAL CENTER-LABORATORY" "LEXINGTON MEDICAL CENTER-LABORATORY" "LEXINGTON MEDICAL CENTER-LABORATORY"
+#>  $ fac_name : chr [1:3] "" "" ""
 #>  $ orig_date: Date[1:3], format: "1993-01-13" "1993-01-13" ...
 #>  $ fac_ccn  : chr [1:3] "42D0665325" "42D0665325" "42D0665325"
 #>  $ state    : chr [1:3] "SC" "SC" "SC"
-#>  $ address  : chr [1:3] "2720 SUNSET BOULEVARD" "2720 SUNSET BOULEVARD" "2720 SUNSET BOULEVARD"
+#>  $ address  : chr [1:3] "" "" ""
 #>  $ term_date: Date[1:3], format: "2027-01-02" "2027-01-02" ...
 #>  $ action   : chr [1:3] NA NA NA
 #>  $ owner    : chr [1:3] "[GOE] County" "[GOE] County" "[GOE] County"
@@ -328,7 +328,7 @@ clia(accreditation = c("cap", "cola", "jcaho")) |> str()
 #>  $ non_ind  : int [1:3] 0 0 0
 #>  $ tmp_ind  : int [1:3] 0 0 0
 #>  $ sites    : int [1:3] 0 0 0
-#>  $ shr_ccn  : chr [1:3] NA NA NA
+#>  $ shr_ccn  : chr [1:3] "" "" ""
 #>  $ acr_org  : chr [1:3] "CAP" "COLA" "JCAHO"
 #>  $ acr_date : Date[1:3], format: "2015-12-28" "2007-03-20" ...
 ```

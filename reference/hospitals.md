@@ -255,7 +255,7 @@ x |> str()
 #>  $ inc_date: Date[1:2], format: "2000-06-02" "2000-06-02"
 #>  $ org_type: chr [1:2] "PARTNERSHIP" "PARTNERSHIP"
 #>  $ status  : chr [1:2] "P" "P"
-#>  $ address : chr [1:2] "ANCHOR HOSPITAL" "2151 PEACHFORD ROAD"
+#>  $ address : chr [1:2] "ANCHOR HOSPITAL" ""
 #>  $ city    : chr [1:2] "ATLANTA" "ATLANTA"
 #>  $ state   : chr [1:2] "GA" "GA"
 #>  $ zip     : chr [1:2] "303495317" "303386534"
@@ -265,12 +265,11 @@ x |> str()
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
-#> # A tibble: 2 × 11
+#> # A tibble: 2 × 10
 #>   ccn    org_name       address city  state zip   county prov_type status rating
 #> * <chr>  <chr>          <chr>   <chr> <chr> <chr> <chr>  <chr>     <chr>   <int>
 #> 1 114010 PEACHFORD BEH… 2151 P… ATLA… GA    30338 DE KA… Psychiat… Propr…     NA
 #> 2 114032 SO CRESCENT B… 5454 Y… COLL… GA    30349 FULTON Psychiat… Gover…     NA
-#> # ℹ 1 more variable: hospital_overall_rating_footnote <chr>
 
 x <- hospitals2()
 #> hospitals2 Totals
@@ -280,7 +279,7 @@ x <- hospitals2()
 #> ! No Query ❯ Returning first 10 rows.
 #> 
 x
-#> # A tibble: 10 × 11
+#> # A tibble: 10 × 10
 #>    ccn    org_name      address city  state zip   county prov_type status rating
 #>  * <chr>  <chr>         <chr>   <chr> <chr> <chr> <chr>  <chr>     <chr>   <int>
 #>  1 010001 SOUTHEAST HE… 1108 R… DOTH… AL    36301 HOUST… Acute Ca… Gover…      4
@@ -293,7 +292,6 @@ x
 #>  8 010016 SHELBY BAPTI… 1000 F… ALAB… AL    35007 SHELBY Acute Ca… Volun…      2
 #>  9 010018 CALLAHAN EYE… 1720 U… BIRM… AL    35233 JEFFE… Acute Ca… Volun…     NA
 #> 10 010019 HELEN KELLER… 1300 S… SHEF… AL    35660 COLBE… Acute Ca… Gover…      2
-#> # ℹ 1 more variable: hospital_overall_rating_footnote <chr>
 
 hospitals(ccn = x$ccn) |> str()
 #> ✔ hospitals returned 8 results.
@@ -304,7 +302,7 @@ hospitals(ccn = x$ccn) |> str()
 #>  $ ccn     : chr [1:8] "010001" "010005" "010006" "010007" ...
 #>  $ pac     : chr [1:8] "9436062296" "8527301654" "8123151354" "6507820990" ...
 #>  $ org_name: chr [1:8] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
-#>  $ org_dba : chr [1:8] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" NA ...
+#>  $ org_dba : chr [1:8] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" "" ...
 #>  $ inc_date: Date[1:8], format: "1957-09-01" "2018-08-20" ...
 #>  $ org_type: chr [1:8] "CORPORATION" "OTHER: HEALTH CARE AUTHORITY" "LLC" "CORPORATION" ...
 #>  $ status  : chr [1:8] "N" "N" "P" "N" ...
@@ -318,16 +316,15 @@ hospitals(ccn = x$ccn) |> str()
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.
-#> tibble [4 × 11] (S3: tbl_df/tbl/data.frame)
-#>  $ ccn                             : chr [1:4] "110050" "110128" "110200" "110237"
-#>  $ org_name                        : chr [1:4] "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" "NORTHEAST GEORGIA MEDICAL CENTER LUMPKIN"
-#>  $ address                         : chr [1:4] "707 OLD DALTON ELLIJAY ROAD, PO BOX 1406" "ONE MEADOWS PARKWAY" "100 FRIST COURT" "227 MOUNTAIN DRIVE"
-#>  $ city                            : chr [1:4] "CHATSWORTH" "VIDALIA" "COLUMBUS" "DAHLONEGA"
-#>  $ state                           : chr [1:4] "GA" "GA" "GA" "GA"
-#>  $ zip                             : chr [1:4] "30705" "30474" "31909" "30533"
-#>  $ county                          : chr [1:4] "MURRAY" "TOOMBS" "MUSCOGEE" "LUMPKIN"
-#>  $ prov_type                       : chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
-#>  $ status                          : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
-#>  $ rating                          : int [1:4] 5 5 5 5
-#>  $ hospital_overall_rating_footnote: chr [1:4] NA NA NA NA
+#> tibble [4 × 10] (S3: tbl_df/tbl/data.frame)
+#>  $ ccn      : chr [1:4] "110050" "110128" "110200" "110237"
+#>  $ org_name : chr [1:4] "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" "NORTHEAST GEORGIA MEDICAL CENTER LUMPKIN"
+#>  $ address  : chr [1:4] "707 OLD DALTON ELLIJAY ROAD, PO BOX 1406" "ONE MEADOWS PARKWAY" "100 FRIST COURT" "227 MOUNTAIN DRIVE"
+#>  $ city     : chr [1:4] "CHATSWORTH" "VIDALIA" "COLUMBUS" "DAHLONEGA"
+#>  $ state    : chr [1:4] "GA" "GA" "GA" "GA"
+#>  $ zip      : chr [1:4] "30705" "30474" "31909" "30533"
+#>  $ county   : chr [1:4] "MURRAY" "TOOMBS" "MUSCOGEE" "LUMPKIN"
+#>  $ prov_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
+#>  $ status   : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
+#>  $ rating   : int [1:4] 5 5 5 5
 ```

@@ -138,7 +138,7 @@ clinicians(enid = "I20081002000549")
 #> # A tibble: 1 × 18
 #>       npi pac   enid  last  first middle gender cred  school grad_year specialty
 #>     <int> <chr> <chr> <chr> <chr> <chr>  <chr>  <chr> <chr>      <int> <chr>    
-#> 1  1.41e9 8022… I200… MCCU… DORO… E      F      AU    OTHER       2008 QUALIFIE…
+#> 1  1.41e9 8022… I200… MCCU… DORO… E      F      AU    OTHER       2008 ""       
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 
