@@ -244,18 +244,18 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x |> str()
-#> tibble [2 × 17] (S3: tbl_df/tbl/data.frame)
+#> hospitls [2 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+#>  $ org_name: chr [1:2] "UHS OF ANCHOR L.P." "UHS OF PEACHFORD, L.P."
+#>  $ org_dba : chr [1:2] "ANCHOR HOSPITAL" "PEACHFORD BEHAVIORAL HEALTH SYSTEM OF ATLANTA"
 #>  $ enid    : chr [1:2] "O20100521000547" "O20100803001043"
 #>  $ npi     : int [1:2] 1023095429 1093781544
 #>  $ multi   : int [1:2] 1 0
 #>  $ ccn     : chr [1:2] "114032" "114010"
 #>  $ pac     : chr [1:2] "4486684784" "9234123894"
-#>  $ org_name: chr [1:2] "UHS OF ANCHOR L.P." "UHS OF PEACHFORD, L.P."
-#>  $ org_dba : chr [1:2] "ANCHOR HOSPITAL" "PEACHFORD BEHAVIORAL HEALTH SYSTEM OF ATLANTA"
 #>  $ inc_date: Date[1:2], format: "2000-06-02" "2000-06-02"
 #>  $ org_type: chr [1:2] "PARTNERSHIP" "PARTNERSHIP"
 #>  $ status  : chr [1:2] "P" "P"
-#>  $ address : chr [1:2] "ANCHOR HOSPITAL" ""
+#>  $ address : chr [1:2] "ANCHOR HOSPITAL" "2151 PEACHFORD ROAD"
 #>  $ city    : chr [1:2] "ATLANTA" "ATLANTA"
 #>  $ state   : chr [1:2] "GA" "GA"
 #>  $ zip     : chr [1:2] "303495317" "303386534"
@@ -266,10 +266,10 @@ x |> str()
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
 #> # A tibble: 2 × 10
-#>   ccn    org_name       address city  state zip   county prov_type status rating
-#> * <chr>  <chr>          <chr>   <chr> <chr> <chr> <chr>  <chr>     <chr>   <int>
-#> 1 114010 PEACHFORD BEH… 2151 P… ATLA… GA    30338 DE KA… Psychiat… Propr…     NA
-#> 2 114032 SO CRESCENT B… 5454 Y… COLL… GA    30349 FULTON Psychiat… Gover…     NA
+#>   ccn    org_name       prov_type status rating address city  state zip   county
+#>   <chr>  <chr>          <chr>     <chr>   <int> <chr>   <chr> <chr> <chr> <chr> 
+#> 1 114010 PEACHFORD BEH… Psychiat… Propr…     NA 2151 P… ATLA… GA    30338 DE KA…
+#> 2 114032 SO CRESCENT B… Psychiat… Gover…     NA 5454 Y… COLL… GA    30349 FULTON
 
 x <- hospitals2()
 #> hospitals2 Totals
@@ -280,29 +280,29 @@ x <- hospitals2()
 #> 
 x
 #> # A tibble: 10 × 10
-#>    ccn    org_name      address city  state zip   county prov_type status rating
-#>  * <chr>  <chr>         <chr>   <chr> <chr> <chr> <chr>  <chr>     <chr>   <int>
-#>  1 010001 SOUTHEAST HE… 1108 R… DOTH… AL    36301 HOUST… Acute Ca… Gover…      4
-#>  2 010005 MARSHALL MED… 2505 U… BOAZ  AL    35957 MARSH… Acute Ca… Gover…      3
-#>  3 010006 NORTH ALABAM… 1701 V… FLOR… AL    35630 LAUDE… Acute Ca… Propr…      2
-#>  4 010007 MIZELL MEMOR… 702 N … OPP   AL    36467 COVIN… Acute Ca… Volun…      1
-#>  5 010008 CRENSHAW COM… 101 HO… LUVE… AL    36049 CRENS… Acute Ca… Propr…     NA
-#>  6 010011 ST. VINCENT'… 50 MED… BIRM… AL    35235 JEFFE… Acute Ca… Volun…      2
-#>  7 010012 DEKALB REGIO… 200 ME… FORT… AL    35968 DE KA… Acute Ca… Propr…      3
-#>  8 010016 SHELBY BAPTI… 1000 F… ALAB… AL    35007 SHELBY Acute Ca… Volun…      2
-#>  9 010018 CALLAHAN EYE… 1720 U… BIRM… AL    35233 JEFFE… Acute Ca… Volun…     NA
-#> 10 010019 HELEN KELLER… 1300 S… SHEF… AL    35660 COLBE… Acute Ca… Gover…      2
+#>    ccn    org_name      prov_type status rating address city  state zip   county
+#>    <chr>  <chr>         <chr>     <chr>   <int> <chr>   <chr> <chr> <chr> <chr> 
+#>  1 010001 SOUTHEAST HE… Acute Ca… Gover…      4 1108 R… DOTH… AL    36301 HOUST…
+#>  2 010005 MARSHALL MED… Acute Ca… Gover…      3 2505 U… BOAZ  AL    35957 MARSH…
+#>  3 010006 NORTH ALABAM… Acute Ca… Propr…      2 1701 V… FLOR… AL    35630 LAUDE…
+#>  4 010007 MIZELL MEMOR… Acute Ca… Volun…      1 702 N … OPP   AL    36467 COVIN…
+#>  5 010008 CRENSHAW COM… Acute Ca… Propr…     NA 101 HO… LUVE… AL    36049 CRENS…
+#>  6 010011 ST. VINCENT'… Acute Ca… Volun…      2 50 MED… BIRM… AL    35235 JEFFE…
+#>  7 010012 DEKALB REGIO… Acute Ca… Propr…      3 200 ME… FORT… AL    35968 DE KA…
+#>  8 010016 SHELBY BAPTI… Acute Ca… Volun…      2 1000 F… ALAB… AL    35007 SHELBY
+#>  9 010018 CALLAHAN EYE… Acute Ca… Volun…     NA 1720 U… BIRM… AL    35233 JEFFE…
+#> 10 010019 HELEN KELLER… Acute Ca… Gover…      2 1300 S… SHEF… AL    35660 COLBE…
 
 hospitals(ccn = x$ccn) |> str()
 #> ✔ hospitals returned 8 results.
-#> tibble [8 × 17] (S3: tbl_df/tbl/data.frame)
+#> hospitls [8 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+#>  $ org_name: chr [1:8] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
+#>  $ org_dba : chr [1:8] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" NA ...
 #>  $ enid    : chr [1:8] "O20080425000450" "O20190513002452" "O20101122000631" "O20080922000250" ...
 #>  $ npi     : int [1:8] 1164403861 1407313760 1477874337 1013937705 1841308020 1770344665 1811341167 1508952235
 #>  $ multi   : int [1:8] 0 0 0 0 0 0 0 0
 #>  $ ccn     : chr [1:8] "010001" "010005" "010006" "010007" ...
 #>  $ pac     : chr [1:8] "9436062296" "8527301654" "8123151354" "6507820990" ...
-#>  $ org_name: chr [1:8] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
-#>  $ org_dba : chr [1:8] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" "" ...
 #>  $ inc_date: Date[1:8], format: "1957-09-01" "2018-08-20" ...
 #>  $ org_type: chr [1:8] "CORPORATION" "OTHER: HEALTH CARE AUTHORITY" "LLC" "CORPORATION" ...
 #>  $ status  : chr [1:8] "N" "N" "P" "N" ...
@@ -316,15 +316,15 @@ hospitals(ccn = x$ccn) |> str()
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.
-#> tibble [4 × 10] (S3: tbl_df/tbl/data.frame)
+#> hosptls2 [4 × 10] (S3: hospitals2/tbl_df/tbl/data.frame)
 #>  $ ccn      : chr [1:4] "110050" "110128" "110200" "110237"
 #>  $ org_name : chr [1:4] "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" "NORTHEAST GEORGIA MEDICAL CENTER LUMPKIN"
+#>  $ prov_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
+#>  $ status   : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
+#>  $ rating   : int [1:4] 5 5 5 5
 #>  $ address  : chr [1:4] "707 OLD DALTON ELLIJAY ROAD, PO BOX 1406" "ONE MEADOWS PARKWAY" "100 FRIST COURT" "227 MOUNTAIN DRIVE"
 #>  $ city     : chr [1:4] "CHATSWORTH" "VIDALIA" "COLUMBUS" "DAHLONEGA"
 #>  $ state    : chr [1:4] "GA" "GA" "GA" "GA"
 #>  $ zip      : chr [1:4] "30705" "30474" "31909" "30533"
 #>  $ county   : chr [1:4] "MURRAY" "TOOMBS" "MUSCOGEE" "LUMPKIN"
-#>  $ prov_type: chr [1:4] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals"
-#>  $ status   : chr [1:4] "Voluntary non-profit - Private" "Proprietary" "Proprietary" "Voluntary non-profit - Other"
-#>  $ rating   : int [1:4] 5 5 5 5
 ```

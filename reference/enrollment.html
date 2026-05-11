@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9157</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9158</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -213,61 +213,19 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fqhc_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">fqhc_enroll</span> returned <span style="font-weight: bold;">768</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [768 × 14] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:768] "O20020819000009" "O20020927000008" "O20021207000004" "O20030207000029" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi     : int [1:768] 1801826268 1164642419 1811947245 1285644799 1033229059 1609037944 1497773055 1689692246 1609814219 1538163043 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi   : int [1:768] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn     : chr [1:768] "101936" "101937" "101938" "101916" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:768] "2365359387" "2365359387" "9931017126" "3870402548" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:768] "TRENTON MEDICAL CENTER INC" "TRENTON MEDICAL CENTER INC" "FLORIDA COMMUNITY HEALTH CENTERS INC" "SUNCOAST COMMUNITY HEALTH CENTERS, INC" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba : chr [1:768] "PALMS MEDICAL GROUP" "PALMS MEDICAL GROUP" "ST. LUCIE WOMEN AND CHILDREN" "RUSKIN HEALTH CENTER" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date: Date[1:768], format: "1988-01-14" "1988-01-14" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:768] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ status  : chr [1:768] "N" "N" "N" "N" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:768] "911 S MAIN ST" "1830 N MAIN ST" "STE 200" "2814 14TH AVE SE" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:768] "TRENTON" "BELL" "PORT ST LUCIE" "RUSKIN" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:768] "FL" "FL" "FL" "FL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:768] "326933239" "326194713" "349527585" "335705471" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ckmatch(cols, nam):</span> Unknown columns: nhp_name, aff_name</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospice_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospice_enroll</span> returned <span style="font-weight: bold;">312</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [312 × 14] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:312] "O20040216000832" "O20040715000105" "O20040715000161" "O20040817000027" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi     : int [1:312] 1003872276 1801834593 1891733580 1205960473 1932242260 1043257934 1134126774 1144328881 1063450666 1154369171 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi   : int [1:312] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn     : chr [1:312] "101528" "111560" "111559" "111621" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:312] "5597650994" "5597663104" "5597663104" "7517930720" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:312] "AVOW HOSPICE INC" "VISTACARE USA, LLC" "VISTACARE USA, LLC" "HARBOR GRACE HOSPICE, INC." ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba : chr [1:312] "HOSPICE OF NAPLES INC" "GENTIVA" "GENTIVA" "HARBOR GRACE HOSPICE" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date: Date[1:312], format: "1982-04-05" NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:312] "CORPORATION" "LLC" "LLC" "CORPORATION" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ status  : chr [1:312] "N" "P" "P" "P" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:312] "1095 WHIPPOORWILL LN" "STE 100" "STE 100" "SUITE 401" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:312] "NAPLES" "COLUMBUS" "WARNER ROBINS" "FAYETTEVILLE" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:312] "FL" "GA" "GA" "GA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:312] "341053847" "319049255" "310889241" "302147638" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ckmatch(cols, nam):</span> Unknown columns: nhp_name, aff_name</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rhc_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">rhc_enroll</span> returned <span style="font-weight: bold;">220</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [220 × 14] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:220] "O20021021000000" "O20021113000013" "O20021118000017" "O20030227000008" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi     : int [1:220] 1952357519 1255477360 1154533677 1437271509 1033114285 1992710610 1497760243 1508929050 1285706879 1437225067 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi   : int [1:220] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn     : chr [1:220] "103951" "103920" "108947" "108941" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:220] "6709794332" "8426966854" "2668380924" "7810806288" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:220] "EXPRESS CARE OF BELLEVIEW, LLC" "HEALTHFLO MEDICAL CLINICS INC" "SOUTHERN FAMILY HEALTHCARE, P.A." "DOCTORS MEDICAL CENTER OF WALTON COUNTY PA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba : chr [1:220] NA "BUSHNELL MEDICAL CLINIC" "N/A" "N/A" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date: Date[1:220], format: "2012-09-04" "1996-05-17" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:220] "LLC" "CORPORATION" "CORPORATION" "CORPORATION" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ status  : chr [1:220] "P" "P" "P" "P" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:220] "10762 S US HIGHWAY 441" "STE A" "SUITE 4" "21W MAIN AVE" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:220] "BELLEVIEW" "BUSHNELL" "CHIPLEY" "DEFUNIAK SPRINGS" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:220] "FL" "FL" "FL" "FL" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:220] "344203805" "335135101" "324281855" "324352529" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ckmatch(cols, nam):</span> Unknown columns: nhp_name, aff_name</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">snf_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">snf_enroll</span> returned <span style="font-weight: bold;">1,044</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [1,044 × 16] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> snf_nrll [1,044 × 16] (S3: snf_enroll/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:1044] "O20020829000002" "O20020910000037" "O20020912000012" "O20020916000022" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi     : int [1:1044] 1265427934 1558308692 1235171174 1043252083 1952485989 1871519736 1235249368 1881628105 1962459487 1073677167 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi   : int [1:1044] 0 0 0 0 0 0 0 0 0 0 ...</span>

@@ -63,17 +63,17 @@ pending(first = starts("V"))
 #> • Physician     : 61
 #> • Non-Physician : 80
 #> # A tibble: 141 × 4
-#>    prov_type        npi last             first        
-#>  * <chr>          <int> <chr>            <chr>        
-#>  1 Physician 1144512724 LALL DASS        VADIN        
-#>  2 Physician 1689304545 TURBAY CABALLERO VALENTINA    
-#>  3 Physician 1265373518 GRAVES           VALERIE      
-#>  4 Physician 1215825310 SOTO             VALERIE      
-#>  5 Physician 1407597651 BACOT-DAVIS      VALJEAN      
-#>  6 Physician 1407534472 LAVU             VAMSI KRISHNA
-#>  7 Physician 1437094257 CARRENO          VANESA       
-#>  8 Physician 1861237943 DONALDSON        VANESSA      
-#>  9 Physician 1518545672 PAHALYANTS       VARTAN       
-#> 10 Physician 1972442267 SHAH             VARUNIL      
+#>    prov_type first         last                    npi
+#>    <chr>     <chr>         <chr>                 <int>
+#>  1 Physician VADIN         LALL DASS        1144512724
+#>  2 Physician VALENTINA     TURBAY CABALLERO 1689304545
+#>  3 Physician VALERIE       GRAVES           1265373518
+#>  4 Physician VALERIE       SOTO             1215825310
+#>  5 Physician VALJEAN       BACOT-DAVIS      1407597651
+#>  6 Physician VAMSI KRISHNA LAVU             1407534472
+#>  7 Physician VANESA        CARRENO          1437094257
+#>  8 Physician VANESSA       DONALDSON        1861237943
+#>  9 Physician VARTAN        PAHALYANTS       1518545672
+#> 10 Physician VARUNIL       SHAH             1972442267
 #> # ℹ 131 more rows
 ```
