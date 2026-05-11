@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9156 (2026-05-10)
+
+- possible fix to bug in `owner_pivot`
+
 ## provider 0.0.1.9155 (2026-05-10)
 
 - owners/enrollment
