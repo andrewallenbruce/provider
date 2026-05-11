@@ -56,25 +56,25 @@ reassignments <- function(
   count = FALSE,
   set = FALSE
 ) {
-  polish(
-    execute(
-      cms(
-        `Individual NPI` = npi,
-        `Individual PAC ID` = pac,
-        `Individual Enrollment ID` = enid,
-        `Individual First Name` = first,
-        `Individual Last Name` = last,
-        `Individual State Code` = state,
-        `Individual Specialty Description` = specialty,
-        `Individual Total Employer Associations` = employers,
-        `Group Legal Business Name` = org_name,
-        `Group Reassignments and Physician Assistants` = employees,
-        `Group PAC ID` = org_pac,
-        `Group Enrollment ID` = org_enid,
-        `Group State Code` = org_state,
-        .count = count,
-        .set = set,
-      )
-    )
+  x <- cms(
+    `Individual NPI` = npi,
+    `Individual PAC ID` = pac,
+    `Individual Enrollment ID` = enid,
+    `Individual First Name` = first,
+    `Individual Last Name` = last,
+    `Individual State Code` = state,
+    `Individual Specialty Description` = specialty,
+    `Individual Total Employer Associations` = employers,
+    `Group Legal Business Name` = org_name,
+    `Group Reassignments and Physician Assistants` = employees,
+    `Group PAC ID` = org_pac,
+    `Group Enrollment ID` = org_enid,
+    `Group State Code` = org_state,
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }

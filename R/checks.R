@@ -1,7 +1,7 @@
 #' @noRd
 count_set <- function(count, set, call = caller_env()) {
-  check_bool_(count)
-  check_bool_(set)
+  check_bool(count)
+  check_bool(set)
   if (count && set) {
     cli::cli_abort(
       "Exactly {.emph one} of {.arg count} or {.arg set} can be set to {.val TRUE}.",
@@ -118,11 +118,19 @@ check_subgroups <- function(x) {
   }
 }
 
-# check_modifiers(param_pdc(ccn = excludes("ASGSAH")), "add")
+# check_modifiers(
+#   param_pdc(
+#     first = "ANDREW",
+#     ccn = excludes("ASGSAH"),
+#     facility = ends("sdgdgs")
+#   ),
+#   "ENDPOINT"
+# )
 #' @noRd
 check_modifiers <- function(x, end) {
   if (any2(purrr::map_lgl(x, is_modifier))) {
-    if (any2(S7_data(x) %in% c("ends", "excludes"))) {
+    mods <- unlist_(x[purrr::map_lgl(x, is_modifier)])
+    if (any2(mods %in% c("ends", "excludes"))) {
       cli::cli_abort(
         c(
           "Invalid {.cls modifier} used in {.fn {end}}: ",
