@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9158 (2026-05-11)
+
+* potential bug fix in `replace_nz`
+
+
 # provider 0.0.1.9157 (2026-05-11)
 
 * trying a few different things
