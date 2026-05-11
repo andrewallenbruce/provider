@@ -64,26 +64,27 @@ fqhc_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  polish(
-    execute(
-      cms(
-        NPI = npi,
-        CCN = ccn,
-        `ASSOCIATE ID` = pac,
-        `ENROLLMENT ID` = enid,
-        `ORGANIZATION NAME` = org_name,
-        `DOING BUSINESS AS NAME` = org_dba,
-        CITY = city,
-        STATE = state,
-        `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = convert_bool(multi),
-        PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' @rdname enrollment
@@ -107,26 +108,27 @@ hospice_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  polish(
-    execute(
-      cms(
-        NPI = npi,
-        CCN = ccn,
-        `ASSOCIATE ID` = pac,
-        `ENROLLMENT ID` = enid,
-        `ORGANIZATION NAME` = org_name,
-        `DOING BUSINESS AS NAME` = org_dba,
-        CITY = city,
-        STATE = state,
-        `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = convert_bool(multi),
-        PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' @rdname enrollment
@@ -150,26 +152,27 @@ rhc_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  polish(
-    execute(
-      cms(
-        NPI = npi,
-        CCN = ccn,
-        `ASSOCIATE ID` = pac,
-        `ENROLLMENT ID` = enid,
-        `ORGANIZATION NAME` = org_name,
-        `DOING BUSINESS AS NAME` = org_dba,
-        CITY = city,
-        STATE = state,
-        `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = convert_bool(multi),
-        PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }
 
 #' @rdname enrollment
@@ -193,24 +196,25 @@ snf_enroll <- function(
   check_bool_(multi)
   check_char_(status)
   check_char_(org_type)
-  polish(
-    execute(
-      cms(
-        NPI = npi,
-        CCN = ccn,
-        `ASSOCIATE ID` = pac,
-        `ENROLLMENT ID` = enid,
-        `ORGANIZATION NAME` = org_name,
-        `DOING BUSINESS AS NAME` = org_dba,
-        CITY = city,
-        STATE = state,
-        `ZIP CODE` = zip,
-        `MULTIPLE NPI FLAG` = convert_bool(multi),
-        PROPRIETARY_NONPROFIT = status,
-        `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-        .count = count,
-        .set = set,
-      )
-    )
+
+  x <- cms(
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
+    .count = count,
+    .set = set,
   )
+
+  x <- execute(x)
+
+  polish(x)
 }

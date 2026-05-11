@@ -42,7 +42,7 @@ owner_pivot <- function(x) {
   y <- collapse::gvr(x, "^pac$|_ind$|_otxt$") |>
     collapse::pivot(
       ids = c("pac", "own_otxt"),
-      names = list(variable = "own_type", value = "bin"),
+      names = list(variable = "own_type", value = "ind"),
       na.rm = TRUE
     ) |>
     collapse::funique() |>
@@ -53,7 +53,7 @@ owner_pivot <- function(x) {
     return(collapse::av(x, own_type = rep.int(NA_character_, nrow(x))))
   }
 
-  y <- collapse::ss(y, y$bin %==% 1L, 1:3)
+  y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
     collapse::gvr(x, "_ind$|_otxt$") <- NULL
@@ -73,8 +73,8 @@ owner_pivot <- function(x) {
     prefix = "Other: ",
     sep = ""
   ) |>
-    collapse::fcountv("pac", add = TRUE) |>
-    collapse::funique()
+    collapse::funique() |>
+    collapse::fcountv("pac", add = TRUE)
 
   if (sum2(y$N > 1L) == 0L) {
     return(collapse::join(
@@ -86,14 +86,14 @@ owner_pivot <- function(x) {
   }
 
   y <- collapse::ss(y, j = 1:2)
-  g <- collapse::GRP(y$pac, call = FALSE)
 
-  y <- collapse::gsplit(y$own_type, g, use.g.names = TRUE) |>
+  y <- collapse::rsplit(y$own_type, y$pac, flatten = TRUE) |>
     purrr::map_chr(\(x) paste0(x, collapse = ", ")) |>
     as_data_frame() |>
     set_names(c("pac", "own_type")) |>
     collapse::rowbind(y) |>
-    collapse::roworderv(c("pac", "own_type"))
+    collapse::roworderv(c("pac", "own_type")) |>
+    collapse::funique()
 
   collapse::join(x, y, on = "pac", verbose = 0L)
 }
@@ -134,8 +134,8 @@ subgroup_pivot <- function(x) {
     prefix = "Other: ",
     sep = ""
   ) |>
-    collapse::fcountv("enid", add = TRUE) |>
-    collapse::funique()
+    collapse::funique() |>
+    collapse::fcountv("enid", add = TRUE)
 
   if (sum2(y$N > 1L) == 0L) {
     return(collapse::join(
