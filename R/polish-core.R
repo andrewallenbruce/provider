@@ -1,6 +1,12 @@
 #' @noRd
 add_class <- function(x, endpoint) {
-  structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
+  `class<-`(cheapr::as_df(x), c(endpoint, "tbl_df", "tbl", "data.frame"))
+  # structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
+}
+
+#' @noRd
+column_rex <- function(x) {
+  paste0(paste0("^", unlist_(x), "$"), collapse = "|")
 }
 
 #' @noRd
@@ -19,21 +25,20 @@ rename_with <- function(x, endpoint) {
     )
   )
 
-  collapse::gvr(x, paste0(unlist_(NM), collapse = "|")) |>
-    replace_nz() |>
+  replace_nz(x)
+
+  collapse::gvr(x, column_rex(NM)) |>
     data_frame()
 }
 
 #' @noRd
-replace_nz <- function(i) {
-  purrr::modify_if(i, is.character, function(x) {
-    vctrs::vec_assign(
-      x,
-      i = vctrs::vec_in(x, haystack = ""),
-      value = NA_character_,
-      slice_value = TRUE
-    )
-  })
+set_replace_nz <- function(x) {
+  collapse::setv(x, x %==% "", NA_character_)
+}
+
+#' @noRd
+replace_nz <- function(x) {
+  collapse::settfmv(x, is.character, set_replace_nz)
 }
 
 #' @noRd

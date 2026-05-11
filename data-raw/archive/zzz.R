@@ -1,3 +1,14 @@
+# replace_nz <- function(i) {
+#   purrr::modify_if(i, is.character, function(x) {
+#     vctrs::vec_assign(
+#       x,
+#       i = vctrs::vec_in(x, haystack = ""),
+#       value = NA_character_,
+#       slice_value = TRUE
+#     )
+#   })
+# }
+
 # .onLoad <- function(libname, pkgname) {
 #   .__distros <<- distributions_cms()
 # }

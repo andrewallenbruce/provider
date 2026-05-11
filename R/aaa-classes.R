@@ -46,9 +46,10 @@ CMS <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_url(
-          paste0(self@url, "/stats?"),
-          self@query %0% NULL
+        flatten_cms(
+          self@url,
+          self@query,
+          append = "/stats?"
         ) |>
           base_request("found_rows")
       }
@@ -61,6 +62,7 @@ CMS <- new_class(
     )
   )
 )
+
 
 #' @noRd
 ListCMS <- new_class(
