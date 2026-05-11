@@ -42,6 +42,7 @@ polish.clinicians <- function(x) {
 
 #' @export
 polish.default <- function(x) {
+  cli::cli_alert_warning("Using {.cls polish.default} method")
   replace_nz(x) |>
     as_data_frame()
 }

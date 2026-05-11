@@ -27,13 +27,12 @@ rename_with <- function(x, endpoint) {
 
   replace_nz(x)
 
-  collapse::gvr(x, column_rex(NM)) |>
-    data_frame()
+  collapse::gv(x, unlist_(NM))
 }
 
 #' @noRd
 set_replace_nz <- function(x) {
-  collapse::setv(x, x %==% "", NA_character_)
+  collapse::setv(x, "", NA_character_)
 }
 
 #' @noRd
