@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9159 (2026-05-11)
+
+* bug fixes for `rename_with`, `owner_pivot` and `subgroup_pivot`
+
+
 # provider 0.0.1.9158 (2026-05-11)
 
 * potential bug fix in `replace_nz`
