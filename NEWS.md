@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9157 (2026-05-11)
+
+* trying a few different things
+
+
 # provider 0.0.1.9156 (2026-05-10)
 
 * possible fix to bug in `owner_pivot`
