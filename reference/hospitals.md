@@ -261,7 +261,7 @@ x |> str()
 #>  $ zip     : chr [1:2] "303495317" "303386534"
 #>  $ loc_type: chr [1:2] "OTHER HOSPITAL PRACTICE LOCATION" "OTHER HOSPITAL PRACTICE LOCATION"
 #>  $ reh_date: Date[1:2], format: NA NA
-#>  $ subgroup: chr [1:2] "Psych" "Psych"
+#>  $ subgroup: chr [1:2] "Psych" "Psych, Psych Unit"
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
@@ -312,7 +312,7 @@ hospitals(ccn = x$ccn) |> str()
 #>  $ zip     : chr [1:8] "363013022" "359575908" "356304928" "364671626" ...
 #>  $ loc_type: chr [1:8] "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" ...
 #>  $ reh_date: Date[1:8], format: NA NA ...
-#>  $ subgroup: chr [1:8] "Acute" "Acute" "Acute" "Acute" ...
+#>  $ subgroup: chr [1:8] "Acute" "Acute, General" "Acute, General" "Acute, Swing-Bed, Psych Unit" ...
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 4 results.
