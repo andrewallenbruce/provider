@@ -64,6 +64,8 @@ fqhc_owner <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,
@@ -80,9 +82,7 @@ fqhc_owner <- function(
     `ADDRESS LINE 1 - OWNER` = address,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
-    `ZIP CODE - OWNER` = zip,
-    .count = count,
-    .set = set
+    `ZIP CODE - OWNER` = zip
   )
 
   x <- execute(x)
@@ -114,6 +114,8 @@ hospital_owner <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,
@@ -130,9 +132,7 @@ hospital_owner <- function(
     `ADDRESS LINE 1 - OWNER` = address,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
-    `ZIP CODE - OWNER` = zip,
-    .count = count,
-    .set = set
+    `ZIP CODE - OWNER` = zip
   )
 
   x <- execute(x)
@@ -164,6 +164,8 @@ hospice_owner <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,
@@ -180,9 +182,7 @@ hospice_owner <- function(
     `ADDRESS LINE 1 - OWNER` = address,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
-    `ZIP CODE - OWNER` = zip,
-    .count = count,
-    .set = set
+    `ZIP CODE - OWNER` = zip
   )
 
   x <- execute(x)
@@ -214,6 +214,8 @@ rhc_owner <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,
@@ -230,9 +232,7 @@ rhc_owner <- function(
     `ADDRESS LINE 1 - OWNER` = address,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
-    `ZIP CODE - OWNER` = zip,
-    .count = count,
-    .set = set
+    `ZIP CODE - OWNER` = zip
   )
 
   x <- execute(x)
@@ -264,6 +264,8 @@ snf_owner <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,
@@ -280,9 +282,7 @@ snf_owner <- function(
     `ADDRESS LINE 1 - OWNER` = address,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
-    `ZIP CODE - OWNER` = zip,
-    .count = count,
-    .set = set
+    `ZIP CODE - OWNER` = zip
   )
 
   x <- execute(x)

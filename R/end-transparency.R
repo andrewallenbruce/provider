@@ -77,13 +77,13 @@ transparency <- function(
   check_char_(action)
 
   x <- cms(
+    count = count,
+    set = set,
     Hosp_Name = name,
     Hosp_Address = address,
     City = city,
     State = state,
-    Action = tag_enum(action),
-    .count = count,
-    .set = set,
+    Action = tag_enum(action)
   )
 
   x <- execute(x)

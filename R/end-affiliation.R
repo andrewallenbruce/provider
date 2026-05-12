@@ -57,6 +57,8 @@ affiliations <- function(
   check_char_(facility_type)
 
   x <- pdc(
+    count = count,
+    set = set,
     npi = npi,
     ind_pac_id = pac,
     provider_last_name = last,
@@ -64,9 +66,7 @@ affiliations <- function(
     provider_middle_name = middle,
     facility_type = tag_enum(facility_type),
     facility_affiliations_certification_number = facility_ccn,
-    facility_type_certification_number = parent_ccn,
-    .count = count,
-    .set = set
+    facility_type_certification_number = parent_ccn
   )
 
   x <- execute(x)

@@ -59,6 +59,8 @@ revocations <- function(
   check_numeric(year_end)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     ENRLMT_ID = enid,
     FIRST_NAME = first,
@@ -70,9 +72,7 @@ revocations <- function(
     PROVIDER_TYPE_DESC = prov_desc,
     REVOCATION_RSN = reason,
     REVOCATION_EFCTV_DT = year_start,
-    REENROLLMENT_BAR_EXPRTN_DT = year_end,
-    .count = count,
-    .set = set,
+    REENROLLMENT_BAR_EXPRTN_DT = year_end
   )
 
   x <- execute(x)

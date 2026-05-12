@@ -5,9 +5,6 @@ END_EXP <- rlang::expr(rlang::call_name(rlang::call_match(
 )))
 
 #' @noRd
-EndPoint <- expr(call_name(call_match(call = caller_call(), fn = caller_fn())))
-
-#' @noRd
 data_frame <- function(x, call = caller_env()) {
   check_data_frame(x, call = call)
   structure(x, class = c("tbl_df", "tbl", "data.frame"))
@@ -130,16 +127,6 @@ all2 <- function(x) {
 }
 
 #' @noRd
-mark <- function(x) {
-  prettyNum(x, big.mark = ",")
-}
-
-#' @noRd
-left <- function(x, ...) {
-  format(x, justify = "left", ...)
-}
-
-#' @noRd
 plus <- function(x) {
   gsub(" ", "+", x, fixed = TRUE)
 }
@@ -162,9 +149,4 @@ has_letter <- function(x) {
 #' @noRd
 is_numeric <- function(x) {
   !has_letter(x)
-}
-
-#' @noRd
-to_string <- function(x) {
-  purrr::map_chr(x, \(i) toString(unlist_(i), width = NULL))
 }

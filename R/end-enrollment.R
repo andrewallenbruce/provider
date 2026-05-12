@@ -66,6 +66,8 @@ fqhc_enroll <- function(
   check_char_(org_type)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -77,9 +79,7 @@ fqhc_enroll <- function(
     `ZIP CODE` = zip,
     `MULTIPLE NPI FLAG` = convert_bool(multi),
     PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-    .count = count,
-    .set = set,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
 
   x <- execute(x)
@@ -110,6 +110,8 @@ hospice_enroll <- function(
   check_char_(org_type)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -121,9 +123,7 @@ hospice_enroll <- function(
     `ZIP CODE` = zip,
     `MULTIPLE NPI FLAG` = convert_bool(multi),
     PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-    .count = count,
-    .set = set,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
 
   x <- execute(x)
@@ -154,6 +154,8 @@ rhc_enroll <- function(
   check_char_(org_type)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -165,9 +167,7 @@ rhc_enroll <- function(
     `ZIP CODE` = zip,
     `MULTIPLE NPI FLAG` = convert_bool(multi),
     PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-    .count = count,
-    .set = set,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
 
   x <- execute(x)
@@ -198,6 +198,8 @@ snf_enroll <- function(
   check_char_(org_type)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -209,9 +211,7 @@ snf_enroll <- function(
     `ZIP CODE` = zip,
     `MULTIPLE NPI FLAG` = convert_bool(multi),
     PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
-    .count = count,
-    .set = set,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
 
   x <- execute(x)

@@ -72,6 +72,8 @@ clinicians <- function(
   check_char_(gender)
 
   x <- pdc(
+    count = count,
+    set = set,
     npi = npi,
     ind_pac_id = pac,
     ind_enrl_id = enid,
@@ -87,9 +89,7 @@ clinicians <- function(
     org_pac_id = org_pac,
     citytown = city,
     state = state,
-    zip_code = zip,
-    .count = count,
-    .set = set,
+    zip_code = zip
   )
 
   x <- execute(x)

@@ -50,6 +50,8 @@ hospitals2 <- function(
   set = FALSE
 ) {
   x <- pdc(
+    count = count,
+    set = set,
     facility_id = ccn,
     facility_name = org_name,
     citytown = city,
@@ -58,9 +60,7 @@ hospitals2 <- function(
     countyparish = county,
     hospital_type = tag_enum(hosp_type),
     hospital_ownership = tag_enum(own_type),
-    hospital_overall_rating = rating,
-    .count = count,
-    .set = set,
+    hospital_overall_rating = rating
   )
 
   x <- execute(x)

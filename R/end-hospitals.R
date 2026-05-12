@@ -95,6 +95,8 @@ hospitals <- function(
   check_char_(prov_type)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,
@@ -109,9 +111,7 @@ hospitals <- function(
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
     `PROVIDER TYPE CODE` = tag_enum(prov_type),
     `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
-    !!!subgroup,
-    .count = count,
-    .set = set,
+    !!!subgroup
   )
 
   x <- execute(x)

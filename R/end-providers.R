@@ -52,6 +52,8 @@ providers <- function(
   check_bool_(multi)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     MULTIPLE_NPI_FLAG = convert_bool(multi),
     PECOS_ASCT_CNTL_ID = pac,
@@ -62,9 +64,7 @@ providers <- function(
     LAST_NAME = last,
     FIRST_NAME = first,
     MDL_NAME = middle,
-    ORG_NAME = org_name,
-    .count = count,
-    .set = set,
+    ORG_NAME = org_name
   )
 
   x <- execute(x)

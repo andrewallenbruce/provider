@@ -10,35 +10,35 @@
 }
 \usage{
 esrd(
-  ccn = NULL,
-  facility_name = NULL,
-  chain_name = NULL,
+  fac_ccn = NULL,
+  fac_name = NULL,
+  org_name = NULL,
   rating = NULL,
   network = NULL,
+  status = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   county = NULL,
-  status = NULL,
   count = FALSE,
   set = FALSE
 )
 }
 \arguments{
-\item{ccn}{\verb{<chr>} Facility CMS Certification Number}
+\item{fac_ccn}{\verb{<chr>} Facility CMS Certification Number}
 
-\item{facility_name}{\verb{<chr>} Facility name}
+\item{fac_name}{\verb{<chr>} Facility name}
 
-\item{chain_name}{\verb{<chr>} Name of the chain organization the facility is owned/managed by}
+\item{org_name}{\verb{<chr>} Name of the chain organization the facility is owned/managed by}
 
-\item{rating}{\verb{<int>} Facility's Quality of Care star rating (1 - 5)}
+\item{rating}{\verb{<int>} Facility's Quality of Care star rating; (1-5)}
 
-\item{network}{\verb{<int>} Numeric code for the network the facility participates in (1 - 18)}
+\item{network}{\verb{<int>} Numeric code for the network the facility participates in; (1-18)}
+
+\item{status}{\verb{<enum>} \code{Non-profit} or \code{Profit}}
 
 \item{address, city, state, zip, county}{\verb{<chr>} Facility's city, state, zip, county}
-
-\item{status}{\verb{<enum>} \code{Non-profit} or \code{profit}}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -55,11 +55,8 @@ care provided.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 esrd(count = TRUE)
-
-esrd()
-
+esrd(count = TRUE, rating = 1:5)
+esrd(count = TRUE, org_name = "DaVita")
 esrd(rating = 1)
-
-esrd(network = 15:18)
 \dontshow{\}) # examplesIf}
 }

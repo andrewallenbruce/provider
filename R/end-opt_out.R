@@ -66,6 +66,8 @@ opt_out <- function(
   check_bool_(order_refer)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     `First Name` = first,
     `Last Name` = last,
@@ -74,9 +76,7 @@ opt_out <- function(
     `City Name` = city,
     `State Code` = state,
     `Zip code` = zip,
-    `Eligible to Order and Refer` = convert_bool(order_refer),
-    .count = count,
-    .set = set,
+    `Eligible to Order and Refer` = convert_bool(order_refer)
   )
 
   x <- execute(x)

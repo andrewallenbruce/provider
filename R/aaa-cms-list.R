@@ -16,30 +16,32 @@ uuid_cms_list <- function(endpoint) {
 }
 
 #' @noRd
-URL_ListCMS <- function(x) {
-  x <- uuid_cms_list(x)
-  set_names2(
-    as.list(paste0("https://data.cms.gov/data-api/v1/dataset/", x, "/data")),
-    x
-  )
+URL_CMS_List <- function(x) {
+  as.list(
+    paste0(
+      "https://data.cms.gov/data-api/v1/dataset/",
+      uuid_cms_list(x),
+      "/data"
+    )
+  ) |>
+    set_names2(uuid_cms_list(x))
 }
 
 #' @noRd
-list_cms <- function(
+cms_list <- function(
+  count = FALSE,
+  set = FALSE,
+  idcol,
   ...,
-  .count = FALSE,
-  .set = FALSE,
-  .idcol,
-  end = call_name(call_match(
-    call = caller_call(),
-    fn = caller_fn()
-  ))
+  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
+  x <- param_cms(...)
+
   ListCMS(
     end = end,
-    idcol = .idcol,
-    query = build(param_cms(...)) %||% character(0),
-    action = count_set(.count, .set)
+    idcol = idcol,
+    query = build(x) %||% character(0),
+    action = count_set(count, set)
   )
 }
 

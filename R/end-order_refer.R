@@ -64,6 +64,8 @@ order_refer <- function(
   check_bool_(hospice)
 
   x <- cms(
+    count = count,
+    set = set,
     NPI = npi,
     FIRST_NAME = first,
     LAST_NAME = last,
@@ -71,9 +73,7 @@ order_refer <- function(
     DME = convert_bool(dme),
     HHA = convert_bool(hha),
     PMD = convert_bool(pmd),
-    HOSPICE = convert_bool(hospice),
-    .count = count,
-    .set = set,
+    HOSPICE = convert_bool(hospice)
   )
 
   x <- execute(x)

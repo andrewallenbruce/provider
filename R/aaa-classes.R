@@ -74,7 +74,7 @@ ListCMS <- new_class(
     idcol = class_character,
     url = new_property(
       class_list,
-      getter = function(self) URL_ListCMS(self@end)
+      getter = function(self) URL_CMS_List(self@end)
     ),
     limit = new_property(
       class_integer,

@@ -1,4 +1,14 @@
 #' @noRd
+mark <- function(x) {
+  prettyNum(x, big.mark = ",")
+}
+
+#' @noRd
+left <- function(x, ...) {
+  format(x, justify = "left", ...)
+}
+
+#' @noRd
 report_total <- new_generic("report_total", "x")
 
 #' @noRd

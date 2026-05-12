@@ -57,6 +57,8 @@ reassignments <- function(
   set = FALSE
 ) {
   x <- cms(
+    count = count,
+    set = set,
     `Individual NPI` = npi,
     `Individual PAC ID` = pac,
     `Individual Enrollment ID` = enid,
@@ -69,9 +71,7 @@ reassignments <- function(
     `Group Reassignments and Physician Assistants` = employees,
     `Group PAC ID` = org_pac,
     `Group Enrollment ID` = org_enid,
-    `Group State Code` = org_state,
-    .count = count,
-    .set = set,
+    `Group State Code` = org_state
   )
 
   x <- execute(x)

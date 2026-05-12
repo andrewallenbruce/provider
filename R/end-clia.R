@@ -115,6 +115,8 @@ clia <- function(
   check_numeric(chow)
 
   x <- cms(
+    count = count,
+    set = set,
     FAC_NAME = facility_name,
     PRVDR_NUM = facility_ccn,
     CLIA_MDCR_NUM = parent_ccn,
@@ -131,9 +133,7 @@ clia <- function(
     NON_PRFT_EXCPTN_SW = convert_bool(non_profit),
     LAB_TEMP_TSTG_SITE_SW = convert_bool(temporary),
     ACPTBL_POC_SW = convert_bool(poc),
-    !!!convert_accreditation(accreditation),
-    .count = count,
-    .set = set,
+    !!!convert_accreditation(accreditation)
   )
 
   x <- execute(x)

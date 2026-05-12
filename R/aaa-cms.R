@@ -45,18 +45,17 @@ param_cms <- function(...) {
 
 #' @noRd
 cms <- function(
+  count = FALSE,
+  set = FALSE,
   ...,
-  .count = FALSE,
-  .set = FALSE,
-  end = call_name(call_match(
-    call = caller_call(),
-    fn = caller_fn()
-  ))
+  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
+  x <- param_cms(...)
+
   CMS(
     end = end,
-    query = build(param_cms(...)) %||% character(0),
-    action = count_set(.count, .set)
+    query = build(x) %||% character(0),
+    action = count_set(count, set)
   )
 }
 #' @noRd

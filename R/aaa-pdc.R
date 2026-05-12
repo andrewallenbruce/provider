@@ -44,13 +44,10 @@ param_pdc <- function(...) {
 
 #' @noRd
 pdc <- function(
+  count = FALSE,
+  set = FALSE,
   ...,
-  .count = FALSE,
-  .set = FALSE,
-  end = call_name(call_match(
-    call = caller_call(),
-    fn = caller_fn()
-  ))
+  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
   x <- param_pdc(...)
 
@@ -59,7 +56,7 @@ pdc <- function(
   PDC(
     end = end,
     query = build(x) %||% character(0),
-    action = count_set(.count, .set)
+    action = count_set(count, set)
   )
 }
 

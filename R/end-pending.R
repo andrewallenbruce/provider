@@ -34,13 +34,13 @@ pending <- function(
   count = FALSE,
   set = FALSE
 ) {
-  x <- list_cms(
+  x <- cms_list(
+    count = count,
+    set = set,
+    idcol = "prov_type",
     NPI = npi,
     LAST_NAME = last,
-    FIRST_NAME = first,
-    .count = count,
-    .set = set,
-    .idcol = "prov_type"
+    FIRST_NAME = first
   )
 
   x <- execute(x)
