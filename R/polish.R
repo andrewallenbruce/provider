@@ -17,7 +17,7 @@ polish.affiliations <- function(x) {
 #' @export
 polish.clia <- function(x) {
   x <- rename_with(x, "clia") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
@@ -29,7 +29,8 @@ polish.clia <- function(x) {
   RC_clia_fac(x$facility)
   RC_clia_act(x$action)
 
-  credit_pivot(x)
+  pivot_credit(x) |>
+    pivot_multi()
 }
 
 #' @export
@@ -106,7 +107,7 @@ polish.snf_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
-    owner_pivot() |>
+    pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
 }
 
@@ -117,7 +118,7 @@ polish.rhc_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
-    owner_pivot() |>
+    pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
 }
 
@@ -128,7 +129,7 @@ polish.fqhc_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
-    owner_pivot() |>
+    pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
 }
 
@@ -139,7 +140,7 @@ polish.hospice_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
-    owner_pivot() |>
+    pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
 }
 
@@ -150,7 +151,7 @@ polish.hospital_owner <- function(x) {
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
-    owner_pivot() |>
+    pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
 }
 
@@ -163,7 +164,7 @@ polish.hospitals <- function(x) {
     rc_integer("npi") |>
     rc_ymd(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L)) |>
-    subgroup_pivot()
+    pivot_subgroup()
 }
 
 #' @export

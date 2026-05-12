@@ -37,7 +37,7 @@ cms_list <- function(
 ) {
   x <- param_cms(...)
 
-  ListCMS(
+  CMSList(
     end = end,
     idcol = idcol,
     query = build(x) %||% character(0),
@@ -46,7 +46,7 @@ cms_list <- function(
 }
 
 #' @noRd
-method(request_preview, ListCMS) <- function(x) {
+method(request_preview, CMSList) <- function(x) {
   report_empty()
   flatten_cms(x@url, NULL, size = 10L) |>
     multi_base(x@url) |>
@@ -55,7 +55,7 @@ method(request_preview, ListCMS) <- function(x) {
 }
 
 #' @noRd
-method(request_single, ListCMS) <- function(x) {
+method(request_single, CMSList) <- function(x) {
   report_count(x)
   flatten_cms(x@url, x@query) |>
     multi_base(x@url) |>
@@ -64,7 +64,7 @@ method(request_single, ListCMS) <- function(x) {
 }
 
 #' @noRd
-method(request_multi, ListCMS) <- function(x) {
+method(request_multi, CMSList) <- function(x) {
   report_pages(x)
   flatten_cms(x@url, x@query, offset = "<<i>>") |>
     multi_parallel(x@count, x@limit, x@url) |>

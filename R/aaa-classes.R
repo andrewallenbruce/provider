@@ -65,23 +65,16 @@ CMS <- new_class(
 
 
 #' @noRd
-ListCMS <- new_class(
-  "ListCMS",
-  API,
+CMSList <- new_class(
+  "CMSList",
+  CMS,
   package = NULL,
   properties = list(
-    end = class_character,
     idcol = class_character,
     url = new_property(
       class_list,
       getter = function(self) URL_CMS_List(self@end)
     ),
-    limit = new_property(
-      class_integer,
-      default = 5000L
-    ),
-    query = class_character,
-    action = class_character,
     count = new_property(
       class_integer,
       getter = function(self) {
@@ -196,7 +189,7 @@ method(execute, API) <- function(x) {
 }
 
 #' @noRd
-method(execute, ListCMS) <- function(x) {
+method(execute, CMSList) <- function(x) {
   if (empty(x)) {
     report_total(x)
 

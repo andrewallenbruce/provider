@@ -42,7 +42,7 @@ method(report_count, API) <- function(x) {
 }
 
 #' @noRd
-method(report_count, ListCMS) <- function(x) {
+method(report_count, CMSList) <- function(x) {
   msg <- c(
     "{.strong {x@end}} returned ",
     "{.strong {mark(sum2(x@count))}} ",
@@ -87,7 +87,7 @@ method(report_total, API) <- function(x) {
 }
 
 #' @noRd
-method(report_total, ListCMS) <- function(x) {
+method(report_total, CMSList) <- function(x) {
   cli::cli_text(
     cli::style_bold(paste0(" ", x@end)),
     " Totals"

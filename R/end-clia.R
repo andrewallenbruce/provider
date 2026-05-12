@@ -42,7 +42,7 @@
 #'    - `"cola"` = COLA
 #'    - `"jcaho"` = JCAHO
 #' @param city,state,zip `<chr>` Lab city, state, zip
-#' @param chow `<int>` Number of times there has been a Change of Ownership.
+#' @param chows `<int>` Number of times there has been a Change of Ownership.
 #' @param compliant `<lgl>` Provider compliance status at time of certification
 #'   survey.
 #' @param active `<lgl>` Return only active labs
@@ -90,7 +90,7 @@ clia <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
-  chow = NULL,
+  chows = NULL,
   compliant = NULL,
   active = NULL,
   multi = NULL,
@@ -112,7 +112,6 @@ clia <- function(
   check_bool_(eligible)
   check_bool_(temporary)
   check_bool_(poc)
-  check_numeric(chow)
 
   x <- cms(
     count = count,
@@ -124,7 +123,7 @@ clia <- function(
     CITY_NAME = city,
     STATE_CD = state,
     ZIP_CD = zip,
-    CHOW_CNT = chow,
+    CHOW_CNT = chows,
     CMPLNC_STUS_CD = convert_compliant(compliant),
     PGM_TRMNTN_CD = convert_active(active),
     ELGBLTY_SW = convert_bool(eligible),
@@ -146,7 +145,7 @@ convert_active <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
-  if (x) "00" else NULL
+  if (x) "00" else not("00")
 }
 
 #' @noRd

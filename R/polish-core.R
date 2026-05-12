@@ -77,7 +77,7 @@ combine_columns <- function(
 ) {
   if (rlang::is_null(x[[other]])) {
     cli::cli_abort(
-      "Column {.val {other}} does not exist in {.var x}.",
+      "{.val {other}} is not a column in {.var x}.",
       arg = arg,
       call = call
     )
@@ -116,8 +116,8 @@ rc_other <- function(x, stub) {
 #' @noRd
 bin_col <- function(x) {
   cheapr::case(
-    x %in_% c("Y", "Yes") ~ 1L,
-    x %in_% c("N", "No") ~ 0L,
+    x %in_% c("Y", "Yes", "A") ~ 1L,
+    x %in_% c("N", "No", "B") ~ 0L,
     .default = NA_integer_
   )
 }
@@ -129,15 +129,15 @@ as_integer_supp <- function(x, ...) {
 
 #' @noRd
 as_date_ymd <- function(x, ...) {
-  as.Date(x, ..., format = "%Y-%m-%d")
+  as.Date.character(x, format = "%Y-%m-%d", ...)
 }
 
 #' @noRd
 as_date_ymd2 <- function(x, ...) {
-  as.Date(x, ..., format = "%Y%m%d")
+  as.Date.character(x, format = "%Y%m%d", ...)
 }
 
 #' @noRd
 as_date_mdy <- function(x, ...) {
-  as.Date(x, ..., format = "%m/%d/%Y")
+  as.Date.character(x, format = "%m/%d/%Y", ...)
 }

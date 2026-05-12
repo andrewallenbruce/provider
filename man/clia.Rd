@@ -24,7 +24,7 @@ clia(
   city = NULL,
   state = NULL,
   zip = NULL,
-  chow = NULL,
+  chows = NULL,
   compliant = NULL,
   active = NULL,
   multi = NULL,
@@ -66,7 +66,7 @@ clia(
 
 \item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
 
-\item{chow}{\verb{<int>} Number of times there has been a Change of Ownership.}
+\item{chows}{\verb{<int>} Number of times there has been a Change of Ownership.}
 
 \item{compliant}{\verb{<lgl>} Provider compliance status at time of certification
 survey.}

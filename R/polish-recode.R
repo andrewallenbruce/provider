@@ -71,12 +71,12 @@ RC_clia_fac <- function(xcol) {
     "02" = "ASC",
     "03" = "Ancillary",
     "04" = "ALF",
-    "05" = "Blood Bank",
-    "06" = "Community Clinic",
+    "05" = "Blood",
+    "06" = "Community",
     "07" = "CORF",
     "08" = "ESRD",
     "09" = "FQHC",
-    "10" = "Health Fair",
+    "10" = "Fair",
     "11" = "HMO",
     "12" = "HHA",
     "13" = "Hospice",
@@ -90,11 +90,11 @@ RC_clia_fac <- function(xcol) {
     "21" = "Physician",
     "22" = "Other Practitioner",
     "23" = "Prison",
-    "24" = "Public Health",
+    "24" = "Public",
     "25" = "RHC",
     "26" = "SHS",
     "27" = "SNF",
-    "28" = "Tissue Bank",
+    "28" = "Tissue",
     "29" = "Other",
     default = NA_character_,
     set = TRUE
@@ -105,12 +105,12 @@ RC_clia_fac <- function(xcol) {
 RC_clia_act <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "1" = "Init",
-    "2" = "Recert",
-    "3" = "Term",
+    "1" = "Initial",
+    "2" = "Recertify",
+    "3" = "Terminate",
     "4" = "CHOW",
     "5" = "Validate",
-    "8" = "Survey (Complaint)",
+    "8" = "Survey",
     default = NA_character_,
     set = TRUE
   )
@@ -127,6 +127,19 @@ RC_clia_credit <- function(xcol) {
     "acr_cap_date" = "CAP",
     "acr_cola_date" = "COLA",
     "acr_jcaho_date" = "JCAHO",
+    default = NA_character_,
+    set = TRUE
+  )
+}
+
+#' @noRd
+RC_clia_multi <- function(xcol) {
+  collapse::recode_char(
+    xcol,
+    "multi_ind" = "Applied",
+    "hosp_ind" = "Hospital Campus",
+    "non_ind" = "Non-profit",
+    "tmp_ind" = "Temporary",
     default = NA_character_,
     set = TRUE
   )
@@ -158,16 +171,16 @@ RC_subgroup <- function(xcol) {
 RC_own_type <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "acq_ind" = "Created for Aquisition",
+    "acq_ind" = "Acquisition",
     "corp_ind" = "Corporation",
     "llc_ind" = "LLC",
     "mps_ind" = "Provider/Supplier",
-    "msr_ind" = "Management Service",
-    "mst_ind" = "Medical Staffing",
-    "hld_ind" = "Holding Company",
-    "inv_ind" = "Investment Firm",
+    "msr_ind" = "Management",
+    "mst_ind" = "Staffing",
+    "hld_ind" = "Holding",
+    "inv_ind" = "Investment",
     "fin_ind" = "Bank",
-    "con_ind" = "Consulting Firm",
+    "con_ind" = "Consulting",
     "fp_ind" = "For-Profit",
     "np_ind" = "Non-Profit",
     "pe_ind" = "Private Equity",
