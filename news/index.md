@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9162 (2026-05-12)
+
+- simplified pivot methods
+
 ## provider 0.0.1.9161 (2026-05-12)
 
 - standardized API calls, helper names
