@@ -136,10 +136,10 @@ RC_clia_credit <- function(xcol) {
 RC_clia_multi <- function(xcol) {
   collapse::recode_char(
     xcol,
-    "multi_ind" = "Applied",
-    "hosp_ind" = "Hospital Campus",
-    "non_ind" = "Non-profit",
-    "tmp_ind" = "Temporary",
+    "site_multi" = "Applied",
+    "hosp_multi" = "Hospital Campus",
+    "non_multi" = "Non-profit",
+    "tmp_multi" = "Temporary",
     default = NA_character_,
     set = TRUE
   )

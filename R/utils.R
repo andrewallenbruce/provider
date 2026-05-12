@@ -117,6 +117,18 @@ sum2 <- function(x, ...) {
 }
 
 #' @noRd
+join2 <- function(x, y, on = NULL, multiple = TRUE, ...) {
+  collapse::join(
+    x,
+    y,
+    on = on,
+    multiple = multiple,
+    verbose = 0L,
+    ...
+  )
+}
+
+#' @noRd
 any2 <- function(x) {
   collapse::anyv(x, TRUE)
 }

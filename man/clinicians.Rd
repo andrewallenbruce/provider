@@ -28,6 +28,7 @@ clinicians(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
+  members = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -56,6 +57,8 @@ clinicians(
 \item{org_name}{\verb{<chr>} Facility associated with Provider}
 
 \item{org_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
+
+\item{members}{\verb{<int>} Number of members in Organization}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -95,5 +98,10 @@ clinicians(count = TRUE, org_name = not_blank())
 clinicians(enid = "I20081002000549")
 
 clinicians(first = "Etan")
+
+clinicians(members = 100, count = TRUE)
+# clinicians(members = less(100), count = TRUE)
+# clinicians(members = greater(100), count = TRUE)
+# clinicians(members = greater(1000), count = TRUE)
 \dontshow{\}) # examplesIf}
 }

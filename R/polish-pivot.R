@@ -1,6 +1,14 @@
 #' @noRd
+collapse_rows <- function(x, key, var) {
+  collapse::rsplit(x[[var]], x[[key]]) |>
+    purrr::map(\(x) paste0(x, collapse = ", ")) |>
+    collapse::unlist2d() |>
+    rlang::set_names(c(key, var))
+}
+
+#' @noRd
 pivot_compliance <- function(x) {
-  y <- collapse::gvr(x, "^fac_ccn$|^cmp_$|^poc_|^elig_") |>
+  y <- collapse::gvr(x, "^fac_ccn$|_ind$") |>
     collapse::pivot(
       ids = "fac_ccn",
       names = list(variable = "compliance", value = "ind"),
@@ -10,40 +18,63 @@ pivot_compliance <- function(x) {
     collapse::roworderv("fac_ccn")
 
   collapse::settfmv(y, "compliance", as.character)
+  collapse::gvr(x, "_ind$") <- NULL
 
   if (nrow(y) == 0L) {
-    collapse::gvr(x, "^multi_|^hosp_|^non_|^tmp_") <- NULL
-    return(collapse::av(x, multi = rep.int(NA_character_, nrow(x))))
+    return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
   }
+
+  COMP <- collapse::ss(y, y$compliance %==% "cmp_ind")
+
+  if (nrow(COMP) == 0L) {
+    y <- collapse::ss(y, y$ind %==% 1L, 1:2)
+    if (nrow(y) == 0L) {
+      return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
+    }
+    collapse::recode_char(
+      y$compliance,
+      "poc_ind" = "Compliant (POC)",
+      "elig_ind" = "Eligible (CMS)",
+      default = NA_character_,
+      set = TRUE
+    )
+    if (sum2(cheapr::counts(y$fac_ccn)$count > 1L) == 0L) {
+      return(join2(x, y, on = "fac_ccn"))
+    }
+
+    return(join2(x, collapse_rows(y, "fac_ccn", "compliance"), on = "fac_ccn"))
+  }
+
+  COMP$compliance <- cheapr::case(
+    COMP$ind == 1L ~ "Compliant (Survey)",
+    COMP$ind == 0L ~ "Non-compliant (Survey)",
+    .default = NA_character_
+  )
+
+  COMP <- collapse::ss(COMP, j = 1:2)
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
-
-  if (nrow(y) == 0L) {
-    collapse::gvr(x, "^multi_|^hosp_|^non_|^tmp_") <- NULL
-    return(collapse::av(x, multi = rep.int(NA_character_, nrow(x))))
-  }
-
-  collapse::gvr(x, "^multi_|^hosp_|^non_|^tmp_") <- NULL
+  y <- collapse::ss(y, y$compliance %!=% "cmp_ind")
 
   collapse::recode_char(
     y$compliance,
-    "cmp_ind" = "Compliant at Certification",
-    "poc_ind" = "Compliant with Plan of Correction",
-    "elig_ind" = "Eligible forMedicare/Medicaid",
+    "poc_ind" = "Compliant (POC)",
+    "elig_ind" = "Eligible (CMS)",
     default = NA_character_,
     set = TRUE
   )
 
-  if (sum2(cheapr::counts(y$fac_ccn)$count > 1L) == 0L) {
-    return(collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE))
+  y <- cheapr::row_c(COMP, y)
+
+  if (nrow(y) == 0L) {
+    return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
   }
 
-  y <- collapse::rsplit(y$multi, y$fac_ccn) |>
-    purrr::map(\(x) paste0(x, collapse = ", ")) |>
-    collapse::unlist2d() |>
-    rlang::set_names(c("fac_ccn", "multi"))
+  if (sum2(cheapr::counts(y$fac_ccn)$count > 1L) == 0L) {
+    return(join2(x, y, on = "fac_ccn"))
+  }
 
-  collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
+  join2(x, collapse_rows(y, "fac_ccn", "compliance"), on = "fac_ccn")
 }
 
 #' @noRd
@@ -73,15 +104,11 @@ pivot_multi <- function(x) {
   RC_clia_multi(y$multi)
 
   if (sum2(cheapr::counts(y$fac_ccn)$count > 1L) == 0L) {
-    return(collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE))
+    return(join2(x, y, on = "fac_ccn"))
   }
 
-  y <- collapse::rsplit(y$multi, y$fac_ccn) |>
-    purrr::map(\(x) paste0(x, collapse = ", ")) |>
-    collapse::unlist2d() |>
-    rlang::set_names(c("fac_ccn", "multi"))
-
-  collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
+  y <- collapse_rows(y, "fac_ccn", "multi")
+  join2(x, y, on = "fac_ccn")
 }
 
 #' @noRd
@@ -104,7 +131,7 @@ pivot_credit <- function(x) {
   }
 
   RC_clia_credit(y$acr_org)
-  collapse::join(x, y, on = "fac_ccn", verbose = 0L, multiple = TRUE)
+  join2(x, y, on = "fac_ccn")
 }
 
 #' @noRd
@@ -143,15 +170,11 @@ pivot_owner <- function(x) {
     collapse::funique()
 
   if (sum2(cheapr::counts(y$pac)$count > 1L) == 0L) {
-    return(collapse::join(x, y, on = "pac", verbose = 0L))
+    return(join2(x, y, on = "pac"))
   }
 
-  y <- collapse::rsplit(y$own_type, y$pac) |>
-    purrr::map(\(x) paste0(x, collapse = ", ")) |>
-    collapse::unlist2d() |>
-    rlang::set_names(c("pac", "own_type"))
-
-  collapse::join(x, y, on = "pac", verbose = 0L)
+  y <- collapse_rows(y, "pac", "own_type")
+  join2(x, y, on = "pac")
 }
 
 #' @noRd
@@ -190,13 +213,9 @@ pivot_subgroup <- function(x) {
     collapse::funique()
 
   if (sum2(cheapr::counts(y$enid)$count > 1L) == 0L) {
-    return(collapse::join(x, y, on = "enid", verbose = 0L))
+    return(join2(x, y, on = "enid"))
   }
 
-  y <- collapse::rsplit(y$subgroup, y$enid) |>
-    purrr::map(\(x) paste0(x, collapse = ", ")) |>
-    collapse::unlist2d() |>
-    rlang::set_names(c("enid", "subgroup"))
-
-  collapse::join(x, y, on = "enid", verbose = 0L)
+  y <- collapse_rows(y, "enid", "subgroup")
+  join2(x, y, on = "enid")
 }

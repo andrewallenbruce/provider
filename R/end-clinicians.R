@@ -36,6 +36,7 @@
 #' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param org_name `<chr>` Facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
+#' @param members `<int>` Number of members in Organization
 #' @param count `<lgl>` Return the total row count
 #' @param set `<lgl>` Return the entire dataset
 #'
@@ -47,6 +48,11 @@
 #' clinicians(enid = "I20081002000549")
 #'
 #' clinicians(first = "Etan")
+#'
+#' clinicians(members = 100, count = TRUE)
+#' # clinicians(members = less(100), count = TRUE)
+#' # clinicians(members = greater(100), count = TRUE)
+#' # clinicians(members = greater(1000), count = TRUE)
 #'
 #' @export
 clinicians <- function(
@@ -66,6 +72,7 @@ clinicians <- function(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
+  members = NULL,
   count = FALSE,
   set = FALSE
 ) {
@@ -87,6 +94,7 @@ clinicians <- function(
     pri_spec = specialty,
     facility_name = org_name,
     org_pac_id = org_pac,
+    num_org_mem = members,
     citytown = city,
     state = state,
     zip_code = zip

@@ -91,7 +91,7 @@ library(provider)
 
 ```{r}
 #| label: affiliation
-affiliations(facility_ccn = 110122)
+affiliations(last = "Bruce")
 ```
 
 #### :handshake: Reassignment of Benefits
@@ -99,15 +99,19 @@ affiliations(facility_ccn = 110122)
 ```{r}
 #| label: reassignment
 reassignments(
-  org_name = starts("SGMC"),
-  state = "GA")
+  employers = greater(40), 
+  state = "GA"
+)
 ```
 
 #### :-1: Revoked Medicare Providers
 
 ```{r}
 #| label: revoked
-revocations(state = "GA")
+revocations(
+  state = "NY", 
+  org_name = not_blank()
+)
 ```
 
 #### :identification_card: Clinician Demographics
@@ -115,17 +119,20 @@ revocations(state = "GA")
 ```{r}
 #| label: clinician
 clinicians(
-  org_name = starts("SGMC"),
-  state = "GA")
+  state = "GA", 
+  school = not("OTHER"), 
+  grad_year = 2025
+)
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits
 
 ```{r}
 #| label: opted_out
-opt_out(
-  city = "Valdosta",
+x <- opt_out(
+  city = "Atlanta",
   state = "GA")
+x
 ```
 
 ##### :receipt: Order & Referral Eligibility
@@ -133,10 +140,8 @@ opt_out(
 ```{r}
 #| label: order_refer
 order_refer(
-  first = contains("LESS"),
-  ptb = TRUE,
-  hospice = FALSE,
-  hha = FALSE)
+  npi = x[x$order_refer == 1L, ]$npi[1:100]
+)
 ```
 
 ##### :health_worker: Medicare Enrollments
@@ -144,8 +149,9 @@ order_refer(
 ```{r}
 #| label: enrolled
 providers(
-  org_name = contains("SGMC"),
-  state = "GA")
+  org_name = contains("West"),
+  state = "GA"
+)
 ```
 
 ##### :calendar: Pending Enrollments
@@ -153,15 +159,18 @@ providers(
 ```{r}
 #| label: pending
 pending(
-  first = contains("A"),
-  last = ends("E"))
+  first = starts("E"),
+  last = ends("A"))
 ```
 
 ##### :hospital: Medicare Hospitals
 
 ```{r}
 #| label: hospital
-hospitals(org_dba = contains("SGMC"))
+hospitals(
+  city = "Valdosta", 
+  state = "GA"
+) |> str()
 ```
 
 ##### :test_tube: CLIA Laboratories
@@ -170,7 +179,8 @@ hospitals(org_dba = contains("SGMC"))
 #| label: clia
 clia(
   facility_name = starts("SGMC"),
-  state = "GA")
+  state = "GA"
+) |> str()
 ```
 
 ##### :mag_right: Hospital Transparency Enforcement

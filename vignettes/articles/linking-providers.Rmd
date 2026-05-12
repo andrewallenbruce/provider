@@ -31,12 +31,12 @@ library(provider)
 ```{r}
 pac <- affiliations(pac = 7810891009)
 list(
-  individual = as.data.frame(t(unique(pac[1:6]))),
-  organization = pac[7:9])
+  individual = as.data.frame(t(unique(pac[1:5]))),
+  organization = pac[6:8])
 ```
 
 ```{r}
-ccn <- hospitals(ccn = pac$facility_ccn)
+ccn <- hospitals(ccn = pac$prov_ccn)
 ccn |> str()
 ```
 
@@ -60,8 +60,8 @@ First, the all-numeric CCN (`331302`):
 ```{r}
 ccn <- affiliations(facility_ccn = 331302)
 list(
-  organization = as.data.frame(t(unique(ccn[7:9]))),
-  individual = unique(ccn[1:6]))
+  organization = as.data.frame(t(unique(ccn[6:8]))),
+  individual = unique(ccn[1:5]))
 ```
 
 That returns individual providers affiliated with the hospital. Now to search
@@ -70,8 +70,8 @@ the alphanumeric CCN (`33Z302`):
 ```{r}
 ccn2 <- affiliations(facility_ccn = "33Z302")
 list(
-  organization = as.data.frame(t(unique(ccn2[7:9]))), 
-  individual = unique(ccn2[1:6]))
+  organization = as.data.frame(t(unique(ccn2[6:8]))), 
+  individual = unique(ccn2[1:5]))
 ```
 
 That returns more affiliated individual providers that practice in the
