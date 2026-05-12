@@ -14,43 +14,50 @@ library(provider)
 pac <- affiliations(pac = 7810891009)
 #> ✔ affiliations returned 5 results.
 list(
-  individual = as.data.frame(t(unique(pac[1:6]))),
-  organization = pac[7:9])
-#> Error in `pac[7:9]`:
-#> ! Can't subset columns past the end.
-#> ℹ Location 9 doesn't exist.
-#> ℹ There are only 8 columns.
+  individual = as.data.frame(t(unique(pac[1:5]))),
+  organization = pac[6:8])
+#> $individual
+#>                V1
+#> first        MARK
+#> last         FUNG
+#> middle          K
+#> npi    1043245657
+#> pac    7810891009
+#> 
+#> $organization
+#> # A tibble: 5 × 3
+#>   prov_type prov_ccn parent_ccn
+#>   <chr>     <chr>    <chr>     
+#> 1 Hospital  470003   NA        
+#> 2 Hospital  330250   NA        
+#> 3 Hospital  470001   NA        
+#> 4 Hospital  471307   NA        
+#> 5 Hospital  470011   NA
 ```
 
 ``` r
 
-ccn <- hospitals(ccn = pac$facility_ccn)
-#> Warning: Unknown or uninitialised column: `facility_ccn`.
-#> hospitals Totals
-#> • Rows  : 9,182
-#> • Pages : 2
-#> 
-#> ! No Query ❯ Returning first 10 rows.
-#> 
+ccn <- hospitals(ccn = pac$prov_ccn)
+#> ✔ hospitals returned 5 results.
 ccn |> str()
-#> hospitls [10 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
-#>  $ org_name: chr [1:10] "SOUTHERN TENNESSEE MEDICAL CENTER LLC" "CENTRAL MAINE MEDICAL CENTER" "ADCARE HOSPITAL OF WORCESTER, INC" "CAPE COD HOSPITAL INC" ...
-#>  $ org_dba : chr [1:10] "HIGHPOINT HEALTH - WINCHESTER WITH ASCENSION SAINT THOMAS" NA "ADCARE HOSPITAL OF WORCESTER" "CAPE COD HOSPITAL" ...
-#>  $ enid    : chr [1:10] "O20020812000015" "O20020814000009" "O20020815000027" "O20020821000019" ...
-#>  $ npi     : int [1:10] 1467408781 1689653487 1134281280 1114984671 1205807013 1588664007 1942392600 1164481529 1083609150 1396745832
-#>  $ multi   : int [1:10] 0 0 0 0 0 0 0 0 0 0
-#>  $ ccn     : chr [1:10] "440058" "200024" "220062" "220012" ...
-#>  $ pac     : chr [1:10] "5193632180" "2567379563" "8325955347" "8921915950" ...
-#>  $ inc_date: Date[1:10], format: "1998-11-09" "1888-01-01" ...
-#>  $ org_type: chr [1:10] "LLC" "CORPORATION" "CORPORATION" "CORPORATION" ...
-#>  $ status  : chr [1:10] "P" "N" "P" "N" ...
-#>  $ address : chr [1:10] "185 HOSPITAL RD" "300 MAIN ST" "107 LINCOLN ST" "CAPE COD HOSPITAL" ...
-#>  $ city    : chr [1:10] "WINCHESTER" "LEWISTON" "WORCESTER" "HYANNIS" ...
-#>  $ state   : chr [1:10] "TN" "ME" "MA" "MA" ...
-#>  $ zip     : chr [1:10] "373982404" "42407027" "16052401" "26015230" ...
-#>  $ loc_type: chr [1:10] "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...
-#>  $ reh_date: Date[1:10], format: NA NA ...
-#>  $ subgroup: chr [1:10] "Acute, General, IRF" "General" "Acute, General" "General, Psych" ...
+#> hospitls [5 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+#>  $ org_name: chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...
+#>  $ org_dba : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...
+#>  $ enid    : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...
+#>  $ npi     : int [1:5] 1033270699 1508845637 1568419976 1306849708 1740291400
+#>  $ multi   : int [1:5] 0 0 0 0 1
+#>  $ ccn     : chr [1:5] "330250" "470001" "470003" "470011" ...
+#>  $ pac     : chr [1:5] "2769396878" "9335138817" "3779491071" "9335112929" ...
+#>  $ inc_date: Date[1:5], format: "1926-01-01" "1984-03-01" ...
+#>  $ org_type: chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...
+#>  $ status  : chr [1:5] "N" "N" "N" "N" ...
+#>  $ address : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
+#>  $ city    : chr [1:5] "PLATTSBURGH" "BERLIN" "BURLINGTON" "BRATTLEBORO" ...
+#>  $ state   : chr [1:5] "NY" "VT" "VT" "VT" ...
+#>  $ zip     : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...
+#>  $ loc_type: chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER: HOSPITAL - GENERAL PRACTICE AND CLINICS" "OTHER HOSPITAL PRACTICE LOCATION" ...
+#>  $ reh_date: Date[1:5], format: NA NA ...
+#>  $ subgroup: chr [1:5] "Acute" "Acute" "Acute, Other" "General" ...
 ```
 
 #### Organizational Provider
@@ -132,12 +139,29 @@ providers practicing at this hospital. First, the all-numeric CCN
 ccn <- affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 206 results.
 list(
-  organization = as.data.frame(t(unique(ccn[7:9]))),
-  individual = unique(ccn[1:6]))
-#> Error in `ccn[7:9]`:
-#> ! Can't subset columns past the end.
-#> ℹ Location 9 doesn't exist.
-#> ℹ There are only 8 columns.
+  organization = as.data.frame(t(unique(ccn[6:8]))),
+  individual = unique(ccn[1:5]))
+#> $organization
+#>                  V1
+#> prov_type  Hospital
+#> prov_ccn     331302
+#> parent_ccn     <NA>
+#> 
+#> $individual
+#> # A tibble: 206 × 5
+#>    first   last            middle        npi pac       
+#>    <chr>   <chr>           <chr>       <int> <chr>     
+#>  1 LAURA   GREENE          A      1003845272 1759384035
+#>  2 NAROD   VASSILIAN       NA     1013539584 9133544109
+#>  3 EMILY   TRIPLETT        NA     1013595560 3375947401
+#>  4 JOSE    ACOSTAMADIEDO   M      1013910256 5890719371
+#>  5 LINDSEY WILHELM         B      1023377843 6901115278
+#>  6 ANTHONY TRAMONTANO      F      1043397656 4183764558
+#>  7 VANESSA FIORINI FURTADO NA     1043672140 7214229350
+#>  8 CONOR   O'NEILL         NA     1053686196 9234432576
+#>  9 JOHN    YOUNG           NA     1063420891 9436051687
+#> 10 ROBERT  BENAK           L      1063423523 3476552878
+#> # ℹ 196 more rows
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -148,12 +172,22 @@ search the alphanumeric CCN (`33Z302`):
 ccn2 <- affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 4 results.
 list(
-  organization = as.data.frame(t(unique(ccn2[7:9]))), 
-  individual = unique(ccn2[1:6]))
-#> Error in `ccn2[7:9]`:
-#> ! Can't subset columns past the end.
-#> ℹ Location 9 doesn't exist.
-#> ℹ There are only 8 columns.
+  organization = as.data.frame(t(unique(ccn2[6:8]))), 
+  individual = unique(ccn2[1:5]))
+#> $organization
+#>                      V1
+#> prov_type  Nursing home
+#> prov_ccn         33Z302
+#> parent_ccn       331302
+#> 
+#> $individual
+#> # A tibble: 4 × 5
+#>   first   last     middle        npi pac       
+#>   <chr>   <chr>    <chr>       <int> <chr>     
+#> 1 JEFFREY KLOTZ    NA     1073258398 3870095805
+#> 2 MARY    HALLORAN K      1396989059 8921259557
+#> 3 IL      CHON     JUN    1538173869 0547299091
+#> 4 DRAGOS  BANU     NA     1558659367 6709004682
 ```
 
 That returns more affiliated individual providers that practice in the

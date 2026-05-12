@@ -22,6 +22,7 @@ clinicians(
   zip = NULL,
   org_name = NULL,
   org_pac = NULL,
+  members = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -88,6 +89,10 @@ clinicians(
 - org_pac:
 
   `<chr>` Facility's PECOS Associate Control ID
+
+- members:
+
+  `<int>` Number of members in Organization
 
 - count:
 
@@ -160,4 +165,10 @@ clinicians(first = "Etan")
 #> 11 ETAN  NA     SUGA… M      NA    ALBER…      2011 ORTHOPED… 1.24e9 0244… I202…
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
+
+clinicians(members = 100, count = TRUE)
+#> ✔ clinicians returned 3,411 results.
+# clinicians(members = less(100), count = TRUE)
+# clinicians(members = greater(100), count = TRUE)
+# clinicians(members = greater(1000), count = TRUE)
 ```

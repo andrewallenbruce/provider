@@ -62,68 +62,71 @@ library(provider)
 #### 🏢 Facility Affiliations
 
 ``` r
-affiliations(facility_ccn = 110122)
-✔ affiliations returned 397 results.
-# A tibble: 397 × 9
-   first  last  middle suffix    npi pac   facility_type facility_ccn parent_ccn
- * <chr>  <chr> <chr>  <chr>   <int> <chr> <chr>         <chr>        <chr>     
- 1 JEREMY COLY… STEPH… <NA>   1.00e9 1254… Hospital      110122       <NA>      
- 2 COLE   BURG… <NA>   <NA>   1.00e9 1850… Hospital      110122       <NA>      
- 3 VIVEK  YADAV <NA>   <NA>   1.00e9 2365… Hospital      110122       <NA>      
- 4 FELIX  VALD… G      <NA>   1.02e9 2860… Hospital      110122       <NA>      
- 5 STEPH… FOX   G      <NA>   1.02e9 5698… Hospital      110122       <NA>      
- 6 ERIC   STIE… CHRIS… <NA>   1.02e9 5799… Hospital      110122       <NA>      
- 7 ROBERT BENN… D      <NA>   1.02e9 1759… Hospital      110122       <NA>      
- 8 NATHAN ROBE… KELLY  <NA>   1.02e9 6507… Hospital      110122       <NA>      
- 9 WILLI… MULL… THOMAS JR.    1.02e9 8527… Hospital      110122       <NA>      
-10 RACHEL ARMS… KATHL… <NA>   1.03e9 7113… Hospital      110122       <NA>      
-# ℹ 387 more rows
+affiliations(last = "Bruce")
+✔ affiliations returned 247 results.
+# A tibble: 247 × 8
+   first    last  middle        npi pac        prov_type prov_ccn parent_ccn
+   <chr>    <chr> <chr>       <int> <chr>      <chr>     <chr>    <chr>     
+ 1 SIDNEY   BRUCE D      1003044520 2466795406 Hospital  150173   <NA>      
+ 2 SIDNEY   BRUCE D      1003044520 2466795406 Hospital  151312   <NA>      
+ 3 SIDNEY   BRUCE D      1003044520 2466795406 Hospital  151316   <NA>      
+ 4 MARGARET BRUCE E      1003444332 0840619235 Hospital  500016   <NA>      
+ 5 LAUREN   BRUCE C      1003863192 4385530377 Hospital  390331   <NA>      
+ 6 TIMOTHY  BRUCE <NA>   1013228907 7315239902 Hospital  520008   <NA>      
+ 7 SARAH    BRUCE <NA>   1023571882 8224498597 Hospital  390111   <NA>      
+ 8 DAVID    BRUCE S      1043213069 6406929694 Hospital  190036   <NA>      
+ 9 DAVID    BRUCE <NA>   1043634017 0840422127 Hospital  110107   <NA>      
+10 CARLEIGH BRUCE NICOLE 1043772858 8729403746 Hospital  520177   <NA>      
+# ℹ 237 more rows
 ```
 
 #### 🤝 Reassignment of Benefits
 
 ``` r
 reassignments(
-  org_name = starts("SGMC"),
-  state = "GA")
-✔ reassignments returned 210 results.
-# A tibble: 210 × 14
+  employers = greater(40), 
+  state = "GA"
+)
+✔ reassignments returned 86 results.
+# A tibble: 86 × 13
    first   last  state specialty employers    npi pac   enid  org_name employees
- * <chr>   <chr> <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
- 1 Carter  Adams GA    Nurse Pr…         2 1.50e9 8628… I202… Sgmc Af…        49
- 2 Jessica Alfe… GA    Nurse Pr…         9 1.24e9 7416… I201… Sgmc Af…        49
- 3 Ginger  Ambr… GA    Nurse Pr…         2 1.88e9 3779… I202… Sgmc Af…        49
- 4 Grant   Bark… GA    Emergenc…         2 1.48e9 4082… I202… Sgmc Af…        49
- 5 Stacy   Beck  GA    Nurse Pr…         3 1.73e9 4385… I201… Sgmc Af…        49
- 6 Lila    Benn… GA    Nurse Pr…         3 1.93e9 5991… I201… Sgmc Af…        49
- 7 Margar… Cart… GA    Nurse Pr…         8 1.24e9 6507… I201… Sgmc Af…        49
- 8 Clayton Char… GA    Hospital…         4 1.08e9 6204… I201… Sgmc Af…        49
- 9 Michel… Char… GA    Nurse Pr…         3 1.44e9 4183… I201… Sgmc Af…        49
-10 Hunter  Clan… GA    Nurse Pr…         4 1.45e9 9032… I202… Sgmc Af…        49
-# ℹ 200 more rows
-# ℹ 4 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>,
-#   rec_type <chr>
+   <chr>   <chr> <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
+ 1 Naushe… Nave… GA    Diagnost…        42 1.51e9 8022… I201… Advance…         1
+ 2 Dean    Moes… GA    Diagnost…        44 1.51e9 6709… I200… Amboy M…         1
+ 3 Naushe… Nave… GA    Diagnost…        42 1.51e9 8022… I201… Atlanti…        40
+ 4 Dean    Moes… GA    Diagnost…        44 1.51e9 6709… I200… Baxter …         1
+ 5 Naushe… Nave… GA    Diagnost…        42 1.51e9 8022… I201… Brooks …        48
+ 6 Dean    Moes… GA    Diagnost…        44 1.51e9 6709… I200… Butler …         4
+ 7 Naushe… Nave… GA    Diagnost…        42 1.51e9 8022… I201… Central…        34
+ 8 Dean    Moes… GA    Diagnost…        44 1.51e9 6709… I200… Charles…         5
+ 9 Dean    Moes… GA    Diagnost…        44 1.51e9 6709… I200… Coastal…        51
+10 Naushe… Nave… GA    Diagnost…        42 1.51e9 8022… I201… Concord…         4
+# ℹ 76 more rows
+# ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
 ```
 
 #### 👎 Revoked Medicare Providers
 
 ``` r
-revocations(state = "GA")
-✔ revocations returned 213 results.
-# A tibble: 213 × 12
-   org_name first    middle last       enid     npi multi state prov_desc reason
- * <chr>    <chr>    <chr>  <chr>      <chr>  <int> <int> <chr> <chr>     <chr> 
- 1 <NA>     WALLACE  S      ANDERSON   I200… 1.88e9     0 GA    PRACTITI… 424.5…
- 2 <NA>     LEO      G      FRANGIPANE I200… 1.07e9     0 GA    PRACTITI… 424.5…
- 3 <NA>     ANTHONY  D      MILLS      I200… 1.27e9     0 GA    PRACTITI… 424.5…
- 4 <NA>     JEFFREY  M.     GALLUPS    I200… 1.85e9     0 GA    PRACTITI… 424.5…
- 5 <NA>     CURTIS   <NA>   CHEEKS     I200… 1.53e9     0 GA    PRACTITI… 424.5…
- 6 <NA>     ZAVIER   C      ASH        I200… 1.77e9     0 GA    PRACTITI… 424.5…
- 7 <NA>     SHAWN    E      TYWON      I200… 1.68e9     0 GA    PRACTITI… 424.5…
- 8 <NA>     ANAND    P      LALAJI     I200… 1.65e9     0 GA    PRACTITI… 424.5…
- 9 <NA>     TIFFANNI D      FORBES     I200… 1.21e9     0 GA    PRACTITI… 424.5…
-10 <NA>     STEPHEN  T      BASHUK     I200… 1.95e9     0 GA    PRACTITI… 424.5…
-# ℹ 203 more rows
+revocations(
+  state = "NY", 
+  org_name = not_blank()
+)
+✔ revocations returned 350 results.
+# A tibble: 350 × 12
+   org_name        first middle last  enid      npi multi state prov_desc reason
+   <chr>           <chr> <chr>  <chr> <chr>   <int> <int> <chr> <chr>     <chr> 
+ 1 CARDIO VASC IM… <NA>  <NA>   <NA>  O200… NA          0 NY    PART B S… 424.5…
+ 2 BROOKLYN NUCLE… <NA>  <NA>   <NA>  O200…  1.52e9     1 NY    PART B S… 424.5…
+ 3 SO NASSAU CARD… <NA>  <NA>   <NA>  O200… NA          0 NY    PART B S… 424.5…
+ 4 MEADOWS NUCLEA… <NA>  <NA>   <NA>  O200… NA          0 NY    PART B S… 424.5…
+ 5 STONY BROOK RA… <NA>  <NA>   <NA>  O200…  1.30e9     0 NY    PART B S… 424.5…
+ 6 FOREST HILLS N… <NA>  <NA>   <NA>  O200…  1.34e9     0 NY    PART B S… 424.5…
+ 7 MEADOWS NUCLEA… <NA>  <NA>   <NA>  O200…  1.96e9     0 NY    PART B S… 424.5…
+ 8 GRAMERCY CARDI… <NA>  <NA>   <NA>  O200…  1.34e9     1 NY    PART B S… 424.5…
+ 9 MEDICAL OFFICE… <NA>  <NA>   <NA>  O200…  1.13e9     0 NY    PART B S… 424.5…
+10 CHOICE SPINE J… <NA>  <NA>   <NA>  O200…  1.11e9     0 NY    PART B S… 424.5…
+# ℹ 340 more rows
 # ℹ 2 more variables: start_date <date>, end_date <date>
 ```
 
@@ -131,125 +134,153 @@ revocations(state = "GA")
 
 ``` r
 clinicians(
-  org_name = starts("SGMC"),
-  state = "GA")
-✔ clinicians returned 167 results.
-# A tibble: 167 × 20
-   first    middle last    suffix gender cred  school grad_year specialty    npi
- * <chr>    <chr>  <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>      <int>
- 1 MANDY    <NA>   LUCAS   <NA>   F      <NA>  MEHAR…      2011 FAMILY P… 1.35e9
- 2 BHUMIBEN KUSHAL PATEL   <NA>   F      NP    OTHER       2018 NURSE PR… 1.47e9
- 3 WILLIAM  <NA>   NASH    <NA>   M      MD    MEDIC…      1992 FAMILY P… 1.24e9
- 4 VERA     C      GARCIA  <NA>   M      MD    OTHER       1991 FAMILY P… 1.15e9
- 5 ALBERTO  E      GARCIA  <NA>   M      MD    OTHER       1996 FAMILY P… 1.52e9
- 6 JULENE   D      SMITH   <NA>   F      NP    OTHER       2015 NURSE PR… 1.08e9
- 7 KASSI    LAITEN COPELA… <NA>   F      <NA>  OTHER       2025 NURSE PR… 1.16e9
- 8 JYNGER   MORRIS HULING  <NA>   F      <NA>  OTHER       2003 MENTAL H… 1.35e9
- 9 WENDY    <NA>   VANDEM… <NA>   F      MD    NORTH…      2000 PSYCHIAT… 1.39e9
-10 MYRA     <NA>   JORDAN  <NA>   F      <NA>  OTHER       2004 MARRIAGE… 1.46e9
-# ℹ 157 more rows
-# ℹ 10 more variables: pac <chr>, enid <chr>, org_name <chr>, org_pac <chr>,
-#   org_mem <int>, city <chr>, state <chr>, zip <chr>, org_add <chr>,
-#   specialty <chr>
+  state = "GA", 
+  school = not("OTHER"), 
+  grad_year = 2025
+)
+✔ clinicians returned 192 results.
+# A tibble: 192 × 18
+   first middle last  gender cred  school grad_year specialty    npi pac   enid 
+   <chr> <chr>  <chr> <chr>  <chr> <chr>      <int> <chr>      <int> <chr> <chr>
+ 1 MADI… MANN   HANC… F      PA    UNIVE…      2025 PHYSICIA… 1.00e9 5698… I202…
+ 2 BRIT… MARIE  STEN… F      <NA>  MERCE…      2025 PHYSICIA… 1.04e9 7214… I202…
+ 3 FORE… STUART HARD… M      <NA>  EDWAR…      2025 ANESTHES… 1.27e9 4880… I202…
+ 4 ASIA  ZENNE… WATK… F      <NA>  EMORY…      2025 PHYSICIA… 1.88e9 9830… I202…
+ 5 BRIT… MARIE  STEN… F      <NA>  MERCE…      2025 PHYSICIA… 1.04e9 7214… I202…
+ 6 WESL… WHITF… LONG  M      CNA   UNIVE…      2025 CERTIFIE… 1.82e9 9638… I202…
+ 7 HAYL… N      LAKE  F      <NA>  UNIVE…      2025 PHYSICIA… 1.40e9 4981… I202…
+ 8 COLE  THORN… STUA… M      DC    LIFE …      2025 CHIROPRA… 1.54e9 6709… I202…
+ 9 SUMM… LYNN   LIND… F      <NA>  MERCE…      2025 PHYSICIA… 1.15e9 5991… I202…
+10 NICH… <NA>   HADL… M      <NA>  UNIVE…      2025 PHYSICAL… 1.19e9 3971… I202…
+# ℹ 182 more rows
+# ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
+#   address <chr>, city <chr>, state <chr>, zip <chr>
 ```
 
 ##### 📤 Opt-Out Affidavits
 
 ``` r
-opt_out(
-  city = "Valdosta",
+x <- opt_out(
+  city = "Atlanta",
   state = "GA")
-✔ opt_out returned 4 results.
-# A tibble: 4 × 12
-         npi first  last  specialty start_date end_date   updated    city  state
-*      <int> <chr>  <chr> <chr>     <date>     <date>     <date>     <chr> <chr>
-1 1992848659 Jeffe… Wood  Maxillof… 2016-01-11 2028-01-11 2026-02-16 VALD… GA   
-2 1073632659 Ferna… Alva… Oral Sur… 2017-07-01 2027-07-01 2025-08-15 VALD… GA   
-3 1811005655 Sonya  Merr… Plastic … 2022-01-01 2028-01-01 2026-01-15 VALD… GA   
-4 1720717887 Rebec… Schi… Mental H… 2024-03-22 2028-03-22 2026-04-16 VALD… GA   
-# ℹ 3 more variables: zip <chr>, order_refer <int>, address <chr>
+✔ opt_out returned 352 results.
+x
+# A tibble: 352 × 12
+        npi first last  specialty start_date end_date   updated    address city 
+      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
+ 1   1.88e9 Ana   Adel… Clinical… 2012-07-01 2026-07-01 2024-08-15 SUITE … ATLA…
+ 2   1.68e9 Sher… Born… Clinical… 2012-04-01 2028-04-01 2026-04-16 SUITE … ATLA…
+ 3   1.70e9 Nich… Hume  Clinical… 2018-07-01 2026-07-01 2024-08-15 693 MO… ATLA…
+ 4   1.31e9 Keri… Anas… Nurse Pr… 2012-07-01 2026-07-01 2024-08-15 SUITE … ATLA…
+ 5   1.60e9 Carol Kran… Psychiat… 2012-01-01 2028-01-01 2026-01-15 STE 210 ATLA…
+ 6   1.12e9 Lawr… Gius… Psychiat… 2012-07-01 2026-07-01 2024-08-15 STE 202 ATLA…
+ 7   1.39e9 Ceana Nezh… Obstetri… 2012-10-01 2026-10-01 2024-11-15 SUITE … ATLA…
+ 8   1.07e9 Frank Mata… Integrat… 2018-04-11 2026-04-11 2024-05-15 STE 405 ATLA…
+ 9   1.07e9 Vikt… Bouq… General … 2012-10-01 2026-10-01 2024-11-15 4646 N… ATLA…
+10   1.79e9 Will… Oven  Clinical… 2017-01-23 2027-01-23 2025-02-15 SUITE … ATLA…
+# ℹ 342 more rows
+# ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
 ```
 
 ##### 🧾 Order & Referral Eligibility
 
 ``` r
 order_refer(
-  first = contains("LESS"),
-  ptb = TRUE,
-  hospice = FALSE,
-  hha = FALSE)
-✔ order_refer returned 38 results.
-# A tibble: 38 × 8
-   first       last                  npi   ptb   dme   hha   pmd hospice
- * <chr>       <chr>               <int> <int> <int> <int> <int>   <int>
- 1 ALESSANDRA  ALTOVINO       1518559350     1     1     0     0       0
- 2 VELESSAUNIA BRIDGES-WILSON 1649501503     1     1     0     0       0
- 3 ALESSANDRA  CALHOUN        1730412420     1     1     0     0       0
- 4 ALESSANDRA  CARUSO         1790206852     1     1     0     0       0
- 5 ALESSANDRA  CARVALHO       1851178206     1     1     0     0       0
- 6 BLESSY      CHACKO         1659024842     1     1     0     0       0
- 7 BLESSING    CHINEDUOBI     1205255106     1     1     0     0       0
- 8 ALESSANDRA  CITRO          1639875172     1     1     0     0       0
- 9 MELESSA     DILLINGHAM     1992341721     1     1     0     0       0
-10 ARLESS      DODSON         1346520582     1     1     0     0       0
-# ℹ 28 more rows
+  npi = x[x$order_refer == 1L, ]$npi[1:100]
+)
+✔ order_refer returned 100 results.
+# A tibble: 100 × 8
+   first   last             npi   ptb   dme   hha   pmd hospice
+   <chr>   <chr>          <int> <int> <int> <int> <int>   <int>
+ 1 SHAMINA HENKEL    1003851494     1     1     1     1       1
+ 2 APRIL   TEFFAULT  1003890211     1     1     0     0       0
+ 3 MAURIE  MINTZ     1033231048     1     1     1     1       1
+ 4 LAUREN  BRASWELL  1033309828     1     1     0     0       0
+ 5 LAURA   WESTEN    1043454150     1     1     0     0       0
+ 6 BARBARA NAMA      1053472894     1     1     0     0       0
+ 7 SANDRA  HAYES     1053608489     1     1     1     1       0
+ 8 VIKTOR  BOUQUETTE 1073730552     1     1     1     1       1
+ 9 FRANK   MATALONE  1073739249     1     1     1     0       1
+10 GARLAND ANDRES    1083850630     1     1     1     1       0
+# ℹ 90 more rows
 ```
 
 ##### 🧑‍⚕️ Medicare Enrollments
 
 ``` r
 providers(
-  org_name = contains("SGMC"),
-  state = "GA")
-✔ providers returned 2 results.
-# A tibble: 2 × 11
-  org_name first middle last  state prov_type prov_desc    npi multi pac   enid 
-* <chr>    <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
-1 SGMC PH… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.42e9     0 4082… O202…
-2 SGMC AF… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.11e9     0 5496… O202…
+  org_name = contains("West"),
+  state = "GA"
+)
+✔ providers returned 144 results.
+# A tibble: 144 × 11
+   org_name      first middle last  state prov_type prov_desc    npi multi pac  
+   <chr>         <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>
+ 1 WESTSIDE END… <NA>  <NA>   <NA>  GA    12-49     PART B S… 1.49e9     0 0143…
+ 2 WEST GEORGIA… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.88e9     0 0244…
+ 3 WEST PACES S… <NA>  <NA>   <NA>  GA    12-49     PART B S… 1.99e9     0 0345…
+ 4 NORTHWEST GE… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.57e9     0 0345…
+ 5 CROSSROADS T… <NA>  <NA>   <NA>  GA    12-D5     PART B S… 1.36e9     0 0345…
+ 6 WEST GEORGIA… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.84e9     0 0446…
+ 7 PREFERRED VA… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.79e9     0 0446…
+ 8 WEST COBB SP… <NA>  <NA>   <NA>  GA    12-A5     PART B S… 1.18e9     0 0446…
+ 9 NORTHWEST IO… <NA>  <NA>   <NA>  GA    12-70     PART B S… 1.22e9     0 0749…
+10 NORTHWEST EN… <NA>  <NA>   <NA>  GA    12-49     PART B S… 1.99e9     0 0749…
+# ℹ 134 more rows
+# ℹ 1 more variable: enid <chr>
 ```
 
 ##### 📆 Pending Enrollments
 
 ``` r
 pending(
-  first = contains("A"),
-  last = ends("E"))
-✔ pending returned 533 results.
-• Physician     : 169
-• Non-Physician : 364
-# A tibble: 533 × 4
-   prov_type first     last                 npi
- * <chr>     <chr>     <chr>              <int>
- 1 Physician BABATUNDE ADESEYE       1558204693
- 2 Physician MELISSA   ALDRIDGE      1073132429
- 3 Physician MIA       ALDRIDGE      1437890761
- 4 Physician HARLEY    ARRAUT-WHITE  1548906621
- 5 Physician JUAN      ARROYAVE      1104766104
- 6 Physician MARIAM    ATOBILOYE     1992405476
- 7 Physician ADESEYE   AWE           1942796479
- 8 Physician IVANA     BALDIE        1720929433
- 9 Physician FRANCISCO BARAJAS DUQUE 1710794219
-10 Physician FRANTZ    BAZILE        1285826180
-# ℹ 523 more rows
+  first = starts("E"),
+  last = ends("A"))
+✔ pending returned 36 results.
+• Physician     : 16
+• Non-Physician : 20
+# A tibble: 36 × 4
+   prov_type first     last             npi
+   <chr>     <chr>     <chr>          <int>
+ 1 Physician EDMUND    TAKATA    1518808906
+ 2 Physician EDWARD    KEDDA     1639871965
+ 3 Physician EILEEN    SANTA     1952440083
+ 4 Physician ELIAS     SALAMA    1508660655
+ 5 Physician ELISABETH HODARA    1447871546
+ 6 Physician ELIZABETH CARADONNA 1073453312
+ 7 Physician ELIZABETH PERAZZA   1942230891
+ 8 Physician ELLEN     HUHULEA   1659219442
+ 9 Physician ELYSSA    MOLINA    1508624891
+10 Physician EMILY     MEARA     1508706516
+# ℹ 26 more rows
 ```
 
 ##### 🏥 Medicare Hospitals
 
 ``` r
-hospitals(org_dba = contains("SGMC"))
-✔ hospitals returned 1 result.
-# A tibble: 1 × 37
-  org_name org_dba enid  enid_state prov_type prov_desc    npi multi ccn   pac  
-* <chr>    <chr>   <chr> <chr>      <chr>     <chr>      <int> <int> <chr> <chr>
-1 SOUTH G… SGMC H… O202… GA         00-09     PART A P… 1.14e9     0 1101… 1052…
-# ℹ 27 more variables: inc_date <date>, inc_state <chr>, org_type <chr>,
-#   org_otxt <chr>, status <chr>, city <chr>, state <chr>, zip <chr>,
-#   loc_type <chr>, loc_otxt <chr>, reh_date <date>, reh_ccn <chr>,
-#   sub_acute <int>, sub_gen <int>, sub_spec <int>, sub_adu <int>,
-#   sub_child <int>, sub_ltc <int>, sub_psy <int>, sub_irf <int>,
-#   sub_stc <int>, sub_sba <int>, sub_psu <int>, sub_iru <int>, sub_oth <int>,
-#   sub_otxt <int>, address <chr>
+hospitals(
+  city = "Valdosta", 
+  state = "GA"
+) |> str()
+✔ hospitals returned 3 results.
+hospitls [3 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+ $ org_name: chr [1:3] "GREENLEAF CENTER LLC" "SOUTH GEORGIA MEDICAL CENTER INC" "SOUTH GEORGIA MEDICAL CENTER INC"
+ $ org_dba : chr [1:3] "GREENLEAF BEHAVIORAL HEALTH HOSPITAL" "SGMC HEALTH" NA
+ $ enid    : chr [1:3] "O20121213000437" "O20240409003369" "O20240410002397"
+ $ npi     : int [1:3] 1538417753 1144096553 1598531907
+ $ multi   : int [1:3] 0 0 0
+ $ ccn     : chr [1:3] "114036" "110122" "11T122"
+ $ pac     : chr [1:3] "7416109731" "1052764677" "1052764677"
+ $ inc_date: Date[1:3], format: "2012-07-13" "2021-11-09" ...
+ $ org_type: chr [1:3] "LLC" "CORPORATION" "CORPORATION"
+ $ status  : chr [1:3] "P" "N" "N"
+ $ address : chr [1:3] "2209 PINEVIEW DRIVE" "2501 N PATTERSON ST" "2501 N PATTERSON ST"
+ $ city    : chr [1:3] "VALDOSTA" "VALDOSTA" "VALDOSTA"
+ $ state   : chr [1:3] "GA" "GA" "GA"
+ $ zip     : chr [1:3] "316027316" "316021735" "316021735"
+ $ loc_type: chr [1:3] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "HOSPITAL REHABILITATION UNIT"
+ $ reh_date: Date[1:3], format: NA NA ...
+ $ subgroup: chr [1:3] "Psych" "Acute" "IRF Unit"
 ```
 
 ##### 🧪 CLIA Laboratories
@@ -257,28 +288,34 @@ hospitals(org_dba = contains("SGMC"))
 ``` r
 clia(
   facility_name = starts("SGMC"),
-  state = "GA")
+  state = "GA"
+) |> str()
 ✔ clia returned 32 results.
-# A tibble: 32 × 30
-   fac_name  fac_ccn clia_ccn xrf_ccn shr_ccn acr_org multi_ind hosp_ind non_ind
- * <chr>     <chr>   <chr>    <chr>   <chr>   <chr>       <int>    <int>   <int>
- 1 SGMC HEA… 11D002… 110122   <NA>    <NA>    JCAHO           0        0       0
- 2 SGMC- SM… 11D002… 110037   <NA>    <NA>    CAP             0        0       0
- 3 SGMC WOM… 11D026… <NA>     <NA>    <NA>    <NA>            0        0       0
- 4 SGMC VAL… 11D026… 2585892… <NA>    <NA>    <NA>            0        0       0
- 5 SGMC- LA… 11D026… 110097   <NA>    <NA>    CAP             1        1       0
- 6 SGMC-BER… 11D026… 11-0112  <NA>    <NA>    CAP             0        0       0
- 7 SGMC PRI… 11D069… 2568644… <NA>    <NA>    <NA>            0        0       0
- 8 SGMC HEA… 11D091… <NA>     <NA>    <NA>    <NA>            0        0       0
- 9 SGMC PRI… 11D093… <NA>     <NA>    <NA>    <NA>            0        0       0
-10 SGMC FAM… 11D094… <NA>     <NA>    <NA>    <NA>            0        0       0
-# ℹ 22 more rows
-# ℹ 21 more variables: tmp_ind <int>, poc_ind <int>, elig_ind <int>,
-#   term_type <chr>, cert_type <chr>, fac_type <chr>, own_type <chr>,
-#   act_type <chr>, orig_date <date>, cert_date <date>, eff_date <date>,
-#   term_date <date>, acr_date <date>, chow_cnt <int>, alab_cnt <int>,
-#   site_cnt <int>, compliant <chr>, city <chr>, state <chr>, zip <chr>,
-#   address <chr>
+clia [32 × 24] (S3: clia/tbl_df/tbl/data.frame)
+ $ fac_name  : chr [1:32] "SGMC HEALTH" "SGMC- SMITH NORTHVIEW CAMPUS" "SGMC WOMENS HEALTH - OAK" "SGMC VALDOSTA MEDICAL CLINIC" ...
+ $ fac_ccn   : chr [1:32] "11D0022233" "11D0022241" "11D0265511" "11D0265607" ...
+ $ clia_ccn  : chr [1:32] "110122" "110037" NA "258589220A" ...
+ $ xrf_ccn   : chr [1:32] NA NA NA NA ...
+ $ shr_ccn   : chr [1:32] NA NA NA NA ...
+ $ chows     : int [1:32] 0 0 0 0 0 0 0 0 0 0 ...
+ $ address   : chr [1:32] "2501 N PATTERSON STREET" "4280 NORTH VALDOSTA ROAD" "3312 NORTH OAK STREET, SUITE F & G" "3207 COUNTRY CLUB DRIVE" ...
+ $ city      : chr [1:32] "VALDOSTA" "VALDOSTA" "VALDOSTA" "VALDOSTA" ...
+ $ state     : chr [1:32] "GA" "GA" "GA" "GA" ...
+ $ zip       : chr [1:32] "31602" "31602" "31605" "31605" ...
+ $ term      : chr [1:32] "Active" "Active" "Active" "Active" ...
+ $ cert      : chr [1:32] "Accreditation" "Accreditation" "Waiver" "Waiver" ...
+ $ facility  : chr [1:32] "Hospital" "ASC" "Physician" "Physician" ...
+ $ owner     : chr [1:32] "[GOE] County" "[GOE] County" "Other" "Other" ...
+ $ action    : chr [1:32] "Validate" "Validate" NA "Initial" ...
+ $ cert_date : Date[1:32], format: "2003-12-09" "2012-02-08" ...
+ $ eff_date  : Date[1:32], format: "2025-02-28" "2025-12-07" ...
+ $ term_date : Date[1:32], format: "2027-02-27" "2027-12-06" ...
+ $ labs      : int [1:32] 1 1 0 2 3 8 0 0 1 0 ...
+ $ sites     : int [1:32] 0 0 0 0 2 0 0 0 0 0 ...
+ $ multi     : chr [1:32] NA NA NA NA ...
+ $ compliance: chr [1:32] "Compliant (Survey), Eligible (CMS)" "Compliant (Survey), Eligible (CMS)" NA "Compliant (Survey), Eligible (CMS)" ...
+ $ acr_org   : chr [1:32] "JCAHO" "CAP" NA NA ...
+ $ acr_date  : Date[1:32], format: "2016-06-06" "2023-05-17" ...
 ```
 
 ##### 🔎 Hospital Transparency Enforcement
@@ -290,7 +327,7 @@ transparency(
 ✔ transparency returned 39 results.
 # A tibble: 39 × 7
     case name                             address city  state action action_date
- * <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
+   <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
  1  1291 Arbor Health Morton Hospital     521 Ad… Mort… WA    Closu… 2023-04-13 
  2  2248 Arbor Health Morton Hospital     521 Ad… Mort… WA    Closu… 2024-05-30 
  3  2849 Astria Toppenish Hospital        502 W … Topp… WA    Closu… 2024-12-30 

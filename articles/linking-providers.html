@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9162</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9163</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,40 +101,47 @@
 <code class="sourceCode R"><span><span class="va">pac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">5</span> results.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pac</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  organization <span class="op">=</span> <span class="va">pac</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pac[7:9]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 9 doesn't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 8 columns.</span></span></code></pre></div>
+<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pac</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  organization <span class="op">=</span> <span class="va">pac</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $individual</span></span>
+<span><span class="co">#&gt;                V1</span></span>
+<span><span class="co">#&gt; first        MARK</span></span>
+<span><span class="co">#&gt; last         FUNG</span></span>
+<span><span class="co">#&gt; middle          K</span></span>
+<span><span class="co">#&gt; npi    1043245657</span></span>
+<span><span class="co">#&gt; pac    7810891009</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $organization</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
+<span><span class="co">#&gt;   prov_type prov_ccn parent_ccn</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hospital  470003   <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Hospital  330250   <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Hospital  470001   <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Hospital  471307   <span style="color: #BB0000;">NA</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Hospital  470011   <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">facility_ccn</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `facility_ccn`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">hospitals</span> Totals</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>9,182</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>2</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> <span style="color: #BB0000;">❯</span> Returning first <span style="font-weight: bold;">10</span> rows.</span></span>
-<span><span class="co">#&gt; </span></span>
+<code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">prov_ccn</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">5</span> results.</span></span>
 <span><span class="va">ccn</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; hospitls [10 × 17] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ org_name: chr [1:10] "SOUTHERN TENNESSEE MEDICAL CENTER LLC" "CENTRAL MAINE MEDICAL CENTER" "ADCARE HOSPITAL OF WORCESTER, INC" "CAPE COD HOSPITAL INC" ...</span></span>
-<span><span class="co">#&gt;  $ org_dba : chr [1:10] "HIGHPOINT HEALTH - WINCHESTER WITH ASCENSION SAINT THOMAS" NA "ADCARE HOSPITAL OF WORCESTER" "CAPE COD HOSPITAL" ...</span></span>
-<span><span class="co">#&gt;  $ enid    : chr [1:10] "O20020812000015" "O20020814000009" "O20020815000027" "O20020821000019" ...</span></span>
-<span><span class="co">#&gt;  $ npi     : int [1:10] 1467408781 1689653487 1134281280 1114984671 1205807013 1588664007 1942392600 1164481529 1083609150 1396745832</span></span>
-<span><span class="co">#&gt;  $ multi   : int [1:10] 0 0 0 0 0 0 0 0 0 0</span></span>
-<span><span class="co">#&gt;  $ ccn     : chr [1:10] "440058" "200024" "220062" "220012" ...</span></span>
-<span><span class="co">#&gt;  $ pac     : chr [1:10] "5193632180" "2567379563" "8325955347" "8921915950" ...</span></span>
-<span><span class="co">#&gt;  $ inc_date: Date[1:10], format: "1998-11-09" "1888-01-01" ...</span></span>
-<span><span class="co">#&gt;  $ org_type: chr [1:10] "LLC" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
-<span><span class="co">#&gt;  $ status  : chr [1:10] "P" "N" "P" "N" ...</span></span>
-<span><span class="co">#&gt;  $ address : chr [1:10] "185 HOSPITAL RD" "300 MAIN ST" "107 LINCOLN ST" "CAPE COD HOSPITAL" ...</span></span>
-<span><span class="co">#&gt;  $ city    : chr [1:10] "WINCHESTER" "LEWISTON" "WORCESTER" "HYANNIS" ...</span></span>
-<span><span class="co">#&gt;  $ state   : chr [1:10] "TN" "ME" "MA" "MA" ...</span></span>
-<span><span class="co">#&gt;  $ zip     : chr [1:10] "373982404" "42407027" "16052401" "26015230" ...</span></span>
-<span><span class="co">#&gt;  $ loc_type: chr [1:10] "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
-<span><span class="co">#&gt;  $ reh_date: Date[1:10], format: NA NA ...</span></span>
-<span><span class="co">#&gt;  $ subgroup: chr [1:10] "Acute, General, IRF" "General" "Acute, General" "General, Psych" ...</span></span></code></pre></div>
+<span><span class="co">#&gt; hospitls [5 × 17] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ org_name: chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...</span></span>
+<span><span class="co">#&gt;  $ org_dba : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...</span></span>
+<span><span class="co">#&gt;  $ enid    : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...</span></span>
+<span><span class="co">#&gt;  $ npi     : int [1:5] 1033270699 1508845637 1568419976 1306849708 1740291400</span></span>
+<span><span class="co">#&gt;  $ multi   : int [1:5] 0 0 0 0 1</span></span>
+<span><span class="co">#&gt;  $ ccn     : chr [1:5] "330250" "470001" "470003" "470011" ...</span></span>
+<span><span class="co">#&gt;  $ pac     : chr [1:5] "2769396878" "9335138817" "3779491071" "9335112929" ...</span></span>
+<span><span class="co">#&gt;  $ inc_date: Date[1:5], format: "1926-01-01" "1984-03-01" ...</span></span>
+<span><span class="co">#&gt;  $ org_type: chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
+<span><span class="co">#&gt;  $ status  : chr [1:5] "N" "N" "N" "N" ...</span></span>
+<span><span class="co">#&gt;  $ address : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...</span></span>
+<span><span class="co">#&gt;  $ city    : chr [1:5] "PLATTSBURGH" "BERLIN" "BURLINGTON" "BRATTLEBORO" ...</span></span>
+<span><span class="co">#&gt;  $ state   : chr [1:5] "NY" "VT" "VT" "VT" ...</span></span>
+<span><span class="co">#&gt;  $ zip     : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...</span></span>
+<span><span class="co">#&gt;  $ loc_type: chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER: HOSPITAL - GENERAL PRACTICE AND CLINICS" "OTHER HOSPITAL PRACTICE LOCATION" ...</span></span>
+<span><span class="co">#&gt;  $ reh_date: Date[1:5], format: NA NA ...</span></span>
+<span><span class="co">#&gt;  $ subgroup: chr [1:5] "Acute" "Acute" "Acute, Other" "General" ...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="organizational-provider">Organizational Provider<a class="anchor" aria-label="anchor" href="#organizational-provider"></a>
@@ -210,24 +217,51 @@ all-numeric CCN (<code>331302</code>):</p>
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">206</span> results.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `ccn[7:9]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 9 doesn't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 8 columns.</span></span></code></pre></div>
+<span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $organization</span></span>
+<span><span class="co">#&gt;                  V1</span></span>
+<span><span class="co">#&gt; prov_type  Hospital</span></span>
+<span><span class="co">#&gt; prov_ccn     331302</span></span>
+<span><span class="co">#&gt; parent_ccn     &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $individual</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 206 × 5</span></span></span>
+<span><span class="co">#&gt;    first   last            middle        npi pac       </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> LAURA   GREENE          A      <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">845</span>272 1759384035</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NAROD   VASSILIAN       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">539</span>584 9133544109</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EMILY   TRIPLETT        <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">595</span>560 3375947401</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> JOSE    ACOSTAMADIEDO   M      <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">910</span>256 5890719371</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> LINDSEY WILHELM         B      <span style="text-decoration: underline;">1</span>023<span style="text-decoration: underline;">377</span>843 6901115278</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ANTHONY TRAMONTANO      F      <span style="text-decoration: underline;">1</span>043<span style="text-decoration: underline;">397</span>656 4183764558</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> VANESSA FIORINI FURTADO <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>043<span style="text-decoration: underline;">672</span>140 7214229350</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CONOR   O'NEILL         <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">686</span>196 9234432576</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> JOHN    YOUNG           <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>063<span style="text-decoration: underline;">420</span>891 9436051687</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ROBERT  BENAK           L      <span style="text-decoration: underline;">1</span>063<span style="text-decoration: underline;">423</span>523 3476552878</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 196 more rows</span></span></span></code></pre></div>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">4</span> results.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `ccn2[7:9]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 9 doesn't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 8 columns.</span></span></code></pre></div>
+<span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $organization</span></span>
+<span><span class="co">#&gt;                      V1</span></span>
+<span><span class="co">#&gt; prov_type  Nursing home</span></span>
+<span><span class="co">#&gt; prov_ccn         33Z302</span></span>
+<span><span class="co">#&gt; parent_ccn       331302</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $individual</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<span><span class="co">#&gt;   first   last     middle        npi pac       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> JEFFREY KLOTZ    <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>073<span style="text-decoration: underline;">258</span>398 3870095805</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> MARY    HALLORAN K      <span style="text-decoration: underline;">1</span>396<span style="text-decoration: underline;">989</span>059 8921259557</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> IL      CHON     JUN    <span style="text-decoration: underline;">1</span>538<span style="text-decoration: underline;">173</span>869 0547299091</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> DRAGOS  BANU     <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">1</span>558<span style="text-decoration: underline;">659</span>367 6709004682</span></span></code></pre></div>
 <p>That returns more affiliated individual providers that practice in
 the Hospital’s nursing home.</p>
 <blockquote>
