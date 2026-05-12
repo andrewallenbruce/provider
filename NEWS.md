@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9161 (2026-05-12)
+
+* standardized API calls, helper names
+
+
 # provider 0.0.1.9160 (2026-05-11)
 
 * fixes for `count_set` and `check_modifiers`
