@@ -94,7 +94,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 order_refer(count = TRUE)
 #> order_refer Totals
-#> • Rows  : 1,998,241
+#> • Rows  : 1,998,438
 #> • Pages : 400      
 #> 
 
@@ -110,21 +110,21 @@ order_refer(first = "Jennifer", last = "Smith")
 #> # A tibble: 136 × 8
 #>    first    last         npi   ptb   dme   hha   pmd hospice
 #>    <chr>    <chr>      <int> <int> <int> <int> <int>   <int>
-#>  1 JENNIFER SMITH 1699184895     1     1     1     1       0
-#>  2 JENNIFER SMITH 1215919170     1     1     1     1       1
-#>  3 JENNIFER SMITH 1053842450     1     1     1     1       1
-#>  4 JENNIFER SMITH 1063180420     1     1     1     1       0
-#>  5 JENNIFER SMITH 1952073652     1     1     1     1       0
-#>  6 JENNIFER SMITH 1285898619     1     1     1     0       1
-#>  7 JENNIFER SMITH 1861988990     1     1     1     0       1
-#>  8 JENNIFER SMITH 1821069931     1     1     1     1       0
-#>  9 JENNIFER SMITH 1790063832     1     1     1     1       1
-#> 10 JENNIFER SMITH 1184142903     1     1     1     1       0
+#>  1 JENNIFER SMITH 1366164576     1     1     1     1       0
+#>  2 JENNIFER SMITH 1073921029     1     1     1     1       0
+#>  3 JENNIFER SMITH 1588617773     1     1     1     1       0
+#>  4 JENNIFER SMITH 1497270268     1     1     1     1       0
+#>  5 JENNIFER SMITH 1285220533     1     1     1     1       0
+#>  6 JENNIFER SMITH 1013988013     1     1     1     1       1
+#>  7 JENNIFER SMITH 1013227818     1     1     0     0       0
+#>  8 JENNIFER SMITH 1982656898     1     1     1     1       1
+#>  9 JENNIFER SMITH 1992396162     1     1     0     0       0
+#> 10 JENNIFER SMITH 1861169211     1     1     1     1       0
 #> # ℹ 126 more rows
 
 order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
-#> ✔ order_refer returned 47 results.
-#> # A tibble: 47 × 8
+#> ✔ order_refer returned 48 results.
+#> # A tibble: 48 × 8
 #>    first     last               npi   ptb   dme   hha   pmd hospice
 #>    <chr>     <chr>            <int> <int> <int> <int> <int>   <int>
 #>  1 ROBYN     AYER        1659094290     1     1     0     1       0
@@ -137,5 +137,5 @@ order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 #>  8 KAELYN    CARROLL     1003706912     1     1     0     1       0
 #>  9 BRIDGET   DIETZ       1720522592     1     1     0     1       0
 #> 10 JAMIE     DUBOSE      1720506520     1     1     0     1       0
-#> # ℹ 37 more rows
+#> # ℹ 38 more rows
 ```

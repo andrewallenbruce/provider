@@ -49,31 +49,31 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 pending(count = TRUE)
 #> pending Totals
-#> • Rows  : 10,579
+#> • Rows  : 10,617
 #> • Pages : 3     
 #> 
 
 pending(first = "Victor", count = TRUE)
-#> ✔ pending returned 7 results.
-#> • Physician     : 6
+#> ✔ pending returned 6 results.
+#> • Physician     : 5
 #> • Non-Physician : 1
 
 pending(first = starts("V"))
-#> ✔ pending returned 141 results.
-#> • Physician     : 61
-#> • Non-Physician : 80
-#> # A tibble: 141 × 4
-#>    prov_type first         last                    npi
-#>    <chr>     <chr>         <chr>                 <int>
-#>  1 Physician VADIN         LALL DASS        1144512724
-#>  2 Physician VALENTINA     TURBAY CABALLERO 1689304545
-#>  3 Physician VALERIE       GRAVES           1265373518
-#>  4 Physician VALERIE       SOTO             1215825310
-#>  5 Physician VALJEAN       BACOT-DAVIS      1407597651
-#>  6 Physician VAMSI KRISHNA LAVU             1407534472
-#>  7 Physician VANESA        CARRENO          1437094257
-#>  8 Physician VANESSA       DONALDSON        1861237943
-#>  9 Physician VARTAN        PAHALYANTS       1518545672
-#> 10 Physician VARUNIL       SHAH             1972442267
-#> # ℹ 131 more rows
+#> ✔ pending returned 144 results.
+#> • Physician     : 63
+#> • Non-Physician : 81
+#> # A tibble: 144 × 4
+#>    prov_type first         last                        npi
+#>    <chr>     <chr>         <chr>                     <int>
+#>  1 Physician VADIN         LALL DASS            1144512724
+#>  2 Physician VALENTINA     TURBAY CABALLERO     1689304545
+#>  3 Physician VALERIE       GRAVES               1265373518
+#>  4 Physician VALERIE       SOTO                 1215825310
+#>  5 Physician VALJEAN       BACOT-DAVIS          1407597651
+#>  6 Physician VALYNN        ANTOINE              1811480510
+#>  7 Physician VAMSI KRISHNA LAVU                 1407534472
+#>  8 Physician VANESA        CARRENO              1437094257
+#>  9 Physician VANESSA       BERMUDEZ-VILLALPANDO 1053251975
+#> 10 Physician VANESSA       DE BARROS            1487529939
+#> # ℹ 134 more rows
 ```

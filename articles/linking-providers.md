@@ -31,8 +31,8 @@ list(
 #> 1 Hospital  470003   NA        
 #> 2 Hospital  330250   NA        
 #> 3 Hospital  470001   NA        
-#> 4 Hospital  471307   NA        
-#> 5 Hospital  470011   NA
+#> 4 Hospital  331321   NA        
+#> 5 Hospital  471307   NA
 ```
 
 ``` r
@@ -41,23 +41,23 @@ ccn <- hospitals(ccn = pac$prov_ccn)
 #> ✔ hospitals returned 5 results.
 ccn |> str()
 #> hospitls [5 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
-#>  $ org_name: chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" "BRATTLEBORO MEMORIAL HOSPITAL" ...
-#>  $ org_dba : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" NA ...
-#>  $ enid    : chr [1:5] "O20120110000201" "O20050809000650" "O20021111000009" "O20040812001170" ...
-#>  $ npi     : int [1:5] 1033270699 1508845637 1568419976 1306849708 1740291400
+#>  $ org_name: chr [1:5] "CHAMPLAIN VALLEY PHYSICIANS HOSPITAL MEDICAL CENTER" "ALICE HYDE MEDICAL CENTER" "CENTRAL VERMONT MEDICAL CENTER INC" "UNIVERSITY OF VERMONT MEDICAL CENTER INC" ...
+#>  $ org_dba : chr [1:5] "THE UNIVERSITY OF VT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSP" "THE UNIVERSITY OF VERMONT HEALTH NETWORK-ALICE HYDE MEDICAL CENTER" NA "UNIVERSITY OF VERMONT MEDICAL CENTER" ...
+#>  $ enid    : chr [1:5] "O20120110000201" "O20230512000344" "O20050809000650" "O20021111000009" ...
+#>  $ npi     : int [1:5] 1033270699 1114954682 1508845637 1568419976 1740291400
 #>  $ multi   : int [1:5] 0 0 0 0 1
-#>  $ ccn     : chr [1:5] "330250" "470001" "470003" "470011" ...
-#>  $ pac     : chr [1:5] "2769396878" "9335138817" "3779491071" "9335112929" ...
-#>  $ inc_date: Date[1:5], format: "1926-01-01" "1984-03-01" ...
+#>  $ ccn     : chr [1:5] "330250" "331321" "470001" "470003" ...
+#>  $ pac     : chr [1:5] "2769396878" "4082525837" "9335138817" "3779491071" ...
+#>  $ inc_date: Date[1:5], format: "1926-01-01" "1905-04-13" ...
 #>  $ org_type: chr [1:5] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...
 #>  $ status  : chr [1:5] "N" "N" "N" "N" ...
-#>  $ address : chr [1:5] "75 BEEKMAN ST" "130 FISHER RD" "111 COLCHESTER AVE" "17 BELMONT AVE" ...
-#>  $ city    : chr [1:5] "PLATTSBURGH" "BERLIN" "BURLINGTON" "BRATTLEBORO" ...
-#>  $ state   : chr [1:5] "NY" "VT" "VT" "VT" ...
-#>  $ zip     : chr [1:5] "129011438" "56029516" "54011473" "53017601" ...
-#>  $ loc_type: chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER: HOSPITAL - GENERAL PRACTICE AND CLINICS" "OTHER HOSPITAL PRACTICE LOCATION" ...
+#>  $ address : chr [1:5] "75 BEEKMAN ST" "133 PARK ST" "130 FISHER RD" "111 COLCHESTER AVE" ...
+#>  $ city    : chr [1:5] "PLATTSBURGH" "MALONE" "BERLIN" "BURLINGTON" ...
+#>  $ state   : chr [1:5] "NY" "NY" "VT" "VT" ...
+#>  $ zip     : chr [1:5] "129011438" "129531244" "56029516" "54011473" ...
+#>  $ loc_type: chr [1:5] "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER: HOSPITAL - GENERAL PRACTICE AND CLINICS" ...
 #>  $ reh_date: Date[1:5], format: NA NA ...
-#>  $ subgroup: chr [1:5] "Acute" "Acute" "Acute, Other" "General" ...
+#>  $ subgroup: chr [1:5] "Acute" NA "Acute" "Acute, Other" ...
 ```
 
 #### Organizational Provider
@@ -91,21 +91,21 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> # ℹ 7 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, reh_date <date>, subgroup <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
-#> ✔ clinicians returned 58 results.
-#> # A tibble: 58 × 18
+#> ✔ clinicians returned 77 results.
+#> # A tibble: 77 × 18
 #>    first middle last  gender cred  school grad_year specialty    npi pac   enid 
 #>    <chr> <chr>  <chr> <chr>  <chr> <chr>      <int> <chr>      <int> <chr> <chr>
 #>  1 GAVIN L      NOBLE M      MD    STATE…      1999 INTERNAL… 1.75e9 6002… I202…
-#>  2 DMIT… G      AKSE… M      MD    STATE…      2007 DIAGNOST… 1.63e9 4385… I201…
-#>  3 ROBE… NA     PERC… M      MD    NEW Y…      2009 INTERVEN… 1.36e9 5991… I202…
-#>  4 BENJ… NA     LANGE M      MD    HARVA…      2009 INTERVEN… 1.77e9 2365… I201…
-#>  5 BENJ… NA     BAMF… M      MD    UNIVE…      1992 DIAGNOST… 1.15e9 9638… I201…
-#>  6 JOSH… NA     WARN… F      NP    OTHER       2023 NURSE PR… 1.76e9 8123… I202…
-#>  7 DAGM… NA     HOEG… F      MD    OTHER       1996 DIAGNOST… 1.87e9 4880… I200…
-#>  8 CARLY J      SLEE… F      NA    ALBAN…      2012 PHYSICIA… 1.66e9 8921… I201…
-#>  9 ROB   L      DEMU… M      MD    STATE…      1996 INTERNAL… 1.80e9 3577… I200…
-#> 10 JAMES E      EAST  M      MD    OTHER       2016 DIAGNOST… 1.95e9 2961… I202…
-#> # ℹ 48 more rows
+#>  2 JOSE… NA     PEKA… M      MD    GEISE…      1999 DIAGNOST… 1.37e9 3274… I200…
+#>  3 DMIT… G      AKSE… M      MD    STATE…      2007 DIAGNOST… 1.63e9 4385… I201…
+#>  4 ROBE… NA     PERC… M      MD    NEW Y…      2009 INTERVEN… 1.36e9 5991… I202…
+#>  5 BENJ… NA     LANGE M      MD    HARVA…      2009 INTERVEN… 1.77e9 2365… I201…
+#>  6 BENJ… NA     BAMF… M      MD    UNIVE…      1992 DIAGNOST… 1.15e9 9638… I201…
+#>  7 JOSH… NA     WARN… F      NP    OTHER       2023 NURSE PR… 1.76e9 8123… I202…
+#>  8 EMILY NA     POLO… F      NP    OTHER       2014 NURSE PR… 1.92e9 8729… I202…
+#>  9 DAGM… NA     HOEG… F      MD    OTHER       1996 DIAGNOST… 1.87e9 4880… I200…
+#> 10 LUCY  NA     LANE  F      MD    OTHER       2012 DIAGNOST… 1.03e9 7911… I201…
+#> # ℹ 67 more rows
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 reassignments(org_name = "Elizabethtown Community Hospital")
@@ -137,7 +137,7 @@ providers practicing at this hospital. First, the all-numeric CCN
 ``` r
 
 ccn <- affiliations(facility_ccn = 331302)
-#> ✔ affiliations returned 206 results.
+#> ✔ affiliations returned 334 results.
 list(
   organization = as.data.frame(t(unique(ccn[6:8]))),
   individual = unique(ccn[1:5]))
@@ -148,20 +148,20 @@ list(
 #> parent_ccn     <NA>
 #> 
 #> $individual
-#> # A tibble: 206 × 5
-#>    first   last            middle        npi pac       
-#>    <chr>   <chr>           <chr>       <int> <chr>     
-#>  1 LAURA   GREENE          A      1003845272 1759384035
-#>  2 NAROD   VASSILIAN       NA     1013539584 9133544109
-#>  3 EMILY   TRIPLETT        NA     1013595560 3375947401
-#>  4 JOSE    ACOSTAMADIEDO   M      1013910256 5890719371
-#>  5 LINDSEY WILHELM         B      1023377843 6901115278
-#>  6 ANTHONY TRAMONTANO      F      1043397656 4183764558
-#>  7 VANESSA FIORINI FURTADO NA     1043672140 7214229350
-#>  8 CONOR   O'NEILL         NA     1053686196 9234432576
-#>  9 JOHN    YOUNG           NA     1063420891 9436051687
-#> 10 ROBERT  BENAK           L      1063423523 3476552878
-#> # ℹ 196 more rows
+#> # A tibble: 334 × 5
+#>    first   last           middle         npi pac       
+#>    <chr>   <chr>          <chr>        <int> <chr>     
+#>  1 STACI   CARTER-KELLY   L       1003029125 6204824378
+#>  2 DYLAN   ESTES          A       1003278144 6608167523
+#>  3 ANA     MORALES MEJIA  MARIELA 1003421496 6103287404
+#>  4 ARMIN   AFSAR KESHMIRI NA      1003815184 4082693676
+#>  5 LAURA   GREENE         A       1003845272 1759384035
+#>  6 DEBORAH KAMPSCHROR     M       1013141860 8022069558
+#>  7 NAROD   VASSILIAN      NA      1013539584 9133544109
+#>  8 EMILY   TRIPLETT       NA      1013595560 3375947401
+#>  9 BARDIA  BARIMANI       NA      1013793736 9436503646
+#> 10 JOSE    ACOSTAMADIEDO  M       1013910256 5890719371
+#> # ℹ 324 more rows
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -170,7 +170,7 @@ search the alphanumeric CCN (`33Z302`):
 ``` r
 
 ccn2 <- affiliations(facility_ccn = "33Z302")
-#> ✔ affiliations returned 4 results.
+#> ✔ affiliations returned 6 results.
 list(
   organization = as.data.frame(t(unique(ccn2[6:8]))), 
   individual = unique(ccn2[1:5]))
@@ -181,13 +181,15 @@ list(
 #> parent_ccn       331302
 #> 
 #> $individual
-#> # A tibble: 4 × 5
+#> # A tibble: 6 × 5
 #>   first   last     middle        npi pac       
 #>   <chr>   <chr>    <chr>       <int> <chr>     
 #> 1 JEFFREY KLOTZ    NA     1073258398 3870095805
-#> 2 MARY    HALLORAN K      1396989059 8921259557
-#> 3 IL      CHON     JUN    1538173869 0547299091
-#> 4 DRAGOS  BANU     NA     1558659367 6709004682
+#> 2 CARLOS  MARTINEZ E      1154332062 5890739734
+#> 3 MARY    HALLORAN K      1396989059 8921259557
+#> 4 IL      CHON     JUN    1538173869 0547299091
+#> 5 DRAGOS  BANU     NA     1558659367 6709004682
+#> 6 JOSHUA  WARNER   NA     1760167712 8123473469
 ```
 
 That returns more affiliated individual providers that practice in the
