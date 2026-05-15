@@ -109,7 +109,6 @@ opt_out(count = TRUE)
 #> • Rows  : 55,898
 #> • Pages : 12    
 #> 
-#> [1] 55898
 
 opt_out(npi = 1043522824) |> str()
 #> ✔ opt_out returned 1 result.

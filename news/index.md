@@ -1,10 +1,16 @@
 # Changelog
 
+## provider 0.0.1.9171 (2026-05-15)
+
+- fixed `count` bug in
+  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- streamlined `rc_clia` columns method
+
 ## provider 0.0.1.9170 (2026-05-15)
 
 - quick fix for
   [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
-  ([\#130](https://github.com/andrewallenbruce/provider/issues/130))
+  ([\#103](https://github.com/andrewallenbruce/provider/issues/103))
 
 ## provider 0.0.1.9169 (2026-05-15)
 
