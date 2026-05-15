@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9168 (2026-05-15)
+
+- Updated `rlang` standalone files
+- Removed dependencies: `memoise` & `roxyglobals`
+
 ## provider 0.0.1.9167 (2026-05-15)
 
 - removed old code
