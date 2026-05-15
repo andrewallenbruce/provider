@@ -22,7 +22,6 @@ Imports:
     collapse (>= 2.1.6),
     glue,
     httr2 (>= 1.2.2),
-    memoise (>= 2.0.1),
     purrr (>= 1.2.2),
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.2.0),
@@ -31,19 +30,15 @@ Imports:
     vctrs (>= 0.7.3)
 Suggests: 
     knitr,
-    roxyglobals (>= 1.0.0),
     testthat (>= 3.3.2),
     tibble (>= 3.3.1)
 VignetteBuilder: 
     knitr
 Config/Needs/website: gt, tibble
 Config/roxygen2/version: 8.0.0
-Config/roxyglobals/filename: generated-globals.R
-Config/roxyglobals/unique: TRUE
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
-    "roxyglobals::global_roclet"))
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd"))

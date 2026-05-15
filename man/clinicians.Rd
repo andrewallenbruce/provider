@@ -93,6 +93,7 @@ A Clinician or Group must have:
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+clinicians(count = TRUE)
 clinicians(count = TRUE, org_name = not_blank())
 
 clinicians(enid = "I20081002000549")

@@ -78,7 +78,6 @@ api_medicare <- function() {
 }
 
 #' @noRd
-#' @autoglobal
 api_medicare2 <- function(x) {
   rex <- paste0(
     c(

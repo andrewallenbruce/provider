@@ -170,6 +170,8 @@ request_multi <- new_generic("request_multi", "x")
 
 #' @noRd
 method(execute, API) <- function(x) {
+  check_online()
+
   if (empty(x)) {
     report_total(x)
 
@@ -194,6 +196,8 @@ method(execute, API) <- function(x) {
 
 #' @noRd
 method(execute, CMSList) <- function(x) {
+  check_online()
+
   if (empty(x)) {
     report_total(x)
 

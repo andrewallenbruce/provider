@@ -44,7 +44,8 @@ polish.clinicians <- function(x) {
   rename_with(x, "clinicians") |>
     rc_address() |>
     rc_address(main = "specialty", other = "spec_other") |>
-    rc_integer(c("npi", "grad_year", "members"))
+    rc_integer(c("npi", "grad_year", "members")) |>
+    collapse::roworderv(c("npi"))
 }
 
 #' @export
@@ -192,7 +193,8 @@ polish.providers <- function(x) {
 #' @export
 polish.reassignments <- function(x) {
   rename_with(x, "reassignments") |>
-    rc_integer(c("npi", "employers", "employees"))
+    rc_integer(c("npi", "employers", "employees")) |>
+    collapse::roworderv(c("npi"))
 }
 
 #' @export
