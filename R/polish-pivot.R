@@ -25,13 +25,7 @@ pivot2 <- function(x, rex, id, var, val) {
 
 #' @noRd
 pivot_multi <- function(x) {
-  y <- pivot2(
-    x,
-    rex = "^fac_ccn$|_multi$",
-    id = "fac_ccn",
-    var = "multi",
-    val = "ind"
-  )
+  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi", "ind")
 
   collapse::settfmv(y, "multi", as.character)
   collapse::gvr(x, "_multi$") <- NULL
@@ -57,14 +51,13 @@ pivot_multi <- function(x) {
 
 #' @noRd
 pivot_credit <- function(x) {
-  y <- collapse::gvr(x, "^fac_ccn$|^acr_") |>
-    collapse::pivot(
-      ids = "fac_ccn",
-      names = list(variable = "acr_org", value = "acr_date"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique() |>
-    collapse::roworderv("fac_ccn")
+  y <- pivot2(
+    x,
+    rex = "^fac_ccn$|^acr_",
+    id = "fac_ccn",
+    var = "acr_org",
+    val = "acr_date"
+  )
 
   collapse::settfmv(y, "acr_org", as.character)
   collapse::gvr(x, "^acr_") <- NULL
@@ -80,14 +73,13 @@ pivot_credit <- function(x) {
 
 #' @noRd
 pivot_owner <- function(x) {
-  y <- collapse::gvr(x, "^pac$|_ind$|_otxt$") |>
-    collapse::pivot(
-      ids = c("pac", "own_otxt"),
-      names = list(variable = "own_type", value = "ind"),
-      na.rm = TRUE
-    ) |>
-    collapse::roworderv("pac") |>
-    collapse::funique()
+  y <- pivot2(
+    x,
+    rex = "^pac$|_ind$|_otxt$",
+    id = c("pac", "own_otxt"),
+    var = "own_type",
+    val = "ind"
+  )
 
   collapse::settfmv(y, "own_type", as.character)
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
@@ -104,13 +96,7 @@ pivot_owner <- function(x) {
 
   RC_own_type(y$own_type)
 
-  y <- combine_columns(
-    y,
-    main = "own_type",
-    other = "own_otxt",
-    prefix = "Other: ",
-    sep = ""
-  ) |>
+  y <- rc_other(y, stub = "own") |>
     collapse::funique()
 
   if (count_zero(y$pac)) {
@@ -122,44 +108,37 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- collapse::gvr(x, "^enid$|sub_") |>
-    collapse::pivot(
-      ids = c("enid", "sub_otxt"),
-      names = list("subgroup", "ind"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique() |>
-    collapse::roworderv("enid")
+  y <- pivot2(
+    x,
+    rex = "^enid$|sub_",
+    id = c("enid", "sub_otxt"),
+    var = "sub_group",
+    val = "ind"
+  )
 
-  collapse::settfmv(y, "subgroup", as.character)
+  collapse::settfmv(y, "sub_group", as.character)
   collapse::gvr(x, "sub_") <- NULL
 
   if (nrow(y) == 0L) {
-    return(collapse::av(x, subgroup = rep.int(NA_character_, nrow(x))))
+    return(collapse::av(x, sub_group = rep.int(NA_character_, nrow(x))))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow(y) == 0L) {
-    return(collapse::av(x, subgroup = rep.int(NA_character_, nrow(x))))
+    return(collapse::av(x, sub_group = rep.int(NA_character_, nrow(x))))
   }
 
-  RC_subgroup(y$subgroup)
+  RC_subgroup(y$sub_group)
 
-  y <- combine_columns(
-    y,
-    main = "subgroup",
-    other = "sub_otxt",
-    prefix = "Other: ",
-    sep = ""
-  ) |>
+  y <- rc_other(y, stub = "sub") |>
     collapse::funique()
 
   if (count_zero(y$enid)) {
     return(join2(x, y, on = "enid"))
   }
 
-  join2(x, collapse_rows(y, "enid", "subgroup"), on = "enid")
+  join2(x, collapse_rows(y, "enid", "sub_group"), on = "enid")
 }
 
 #' @noRd
