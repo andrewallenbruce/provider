@@ -34,9 +34,9 @@ polish.clia <- function(x) {
   RC_clia_fac(x$facility)
   RC_clia_act(x$action)
 
-  pivot_multi(x) |>
+  pivot_multi_site(x) |>
     # pivot_compliance() |>
-    pivot_credit()
+    pivot_acr_org()
 }
 
 #' @export

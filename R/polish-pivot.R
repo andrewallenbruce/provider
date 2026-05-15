@@ -24,33 +24,33 @@ pivot2 <- function(x, rex, id, var, val) {
 }
 
 #' @noRd
-pivot_multi <- function(x) {
-  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi", "ind")
+pivot_multi_site <- function(x) {
+  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site", "ind")
 
-  collapse::settfmv(y, "multi", as.character)
+  collapse::settfmv(y, "multi_site", as.character)
   collapse::gvr(x, "_multi$") <- NULL
 
   if (nrow(y) == 0L) {
-    return(collapse::av(x, multi = rep.int(NA_character_, nrow(x))))
+    return(collapse::av(x, multi_site = rep.int(NA_character_, nrow(x))))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (nrow(y) == 0L) {
-    return(collapse::av(x, multi = rep.int(NA_character_, nrow(x))))
+    return(collapse::av(x, multi_site = rep.int(NA_character_, nrow(x))))
   }
 
-  RC_clia_multi(y$multi)
+  RC_clia_multi(y$multi_site)
 
   if (count_zero(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
-  join2(x, collapse_rows(y, "fac_ccn", "multi"), on = "fac_ccn")
+  join2(x, collapse_rows(y, "fac_ccn", "multi_site"), on = "fac_ccn")
 }
 
 #' @noRd
-pivot_credit <- function(x) {
+pivot_acr_org <- function(x) {
   y <- pivot2(x, "^fac_ccn$|^acr_", "fac_ccn", "acr_org", "ind")
   collapse::settfmv(y, "acr_org", as.character)
   collapse::gvr(x, "^acr_") <- NULL
