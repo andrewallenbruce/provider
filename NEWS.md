@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9164 (2026-05-15)
+
+* simplified pivot methods
+
+
 # provider 0.0.1.9163 (2026-05-12)
 
 * more pivot refinement
