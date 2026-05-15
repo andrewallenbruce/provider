@@ -2,7 +2,7 @@
 
 # provider 0.0.1.9170 (2026-05-15)
 
-* quick fix for `opt_out()` (#130)
+* quick fix for `opt_out()` (#103)
 
 
 # provider 0.0.1.9169 (2026-05-15)

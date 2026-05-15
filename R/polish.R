@@ -22,20 +22,20 @@ polish.affiliations <- function(x) {
 #' @export
 polish.clia <- function(x) {
   x <- rename_with(x, "clia") |>
-    rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
+    # rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
     rc_address(main = "fac_name", other = "fac_2")
 
-  RC_clia_term(x$term)
-  RC_clia_cert(x$cert)
-  RC_clia_own(x$owner)
-  RC_clia_fac(x$facility)
-  RC_clia_act(x$action)
+  rc_clia(x, "term")
+  rc_clia(x, "cert")
+  rc_clia(x, "owner")
+  rc_clia(x, "facility")
+  rc_clia(x, "action")
 
   pivot_multi_site(x) |>
-    # pivot_compliance() |>
     pivot_acr_org()
 }
 

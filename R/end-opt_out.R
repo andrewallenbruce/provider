@@ -80,7 +80,11 @@ opt_out <- function(
   x <- execute(x)
   x <- polish(x)
 
-  if (count || set) {
+  if (count) {
+    return(invisible(x))
+  }
+
+  if (set) {
     return(x)
   }
 

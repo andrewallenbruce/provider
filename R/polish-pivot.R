@@ -30,17 +30,23 @@ pivot_multi_site <- function(x) {
   collapse::settfmv(y, "multi_site", as.character)
   collapse::gvr(x, "_multi$") <- NULL
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, multi_site = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      multi_site = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, multi_site = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      multi_site = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
-  RC_clia_multi(y$multi_site)
+  rc_clia(y, "multi_site")
 
   if (count_zero(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
@@ -56,11 +62,14 @@ pivot_acr_org <- function(x) {
   collapse::gvr(x, "^acr_") <- NULL
   y <- collapse::ss(y, j = 1:2)
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, acr_org = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      acr_org = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
-  RC_clia_credit(y$acr_org)
+  rc_clia(y, "acr_org")
 
   if (count_zero(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
@@ -75,17 +84,23 @@ pivot_owner <- function(x) {
   collapse::settfmv(y, "own_type", as.character)
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, own_type = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      own_type = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, own_type = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      own_type = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
-  RC_own_type(y$own_type)
+  rc_own_type(y, "own_type")
 
   y <- rc_other(y, stub = "own") |>
     collapse::funique()
@@ -103,17 +118,23 @@ pivot_subgroup <- function(x) {
   collapse::settfmv(y, "sub_group", as.character)
   collapse::gvr(x, "sub_") <- NULL
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, sub_group = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      sub_group = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, sub_group = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      sub_group = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
-  RC_subgroup(y$sub_group)
+  rc_subgroup(y, "sub_group")
 
   y <- rc_other(y, stub = "sub") |>
     collapse::funique()
@@ -139,16 +160,22 @@ pivot_compliance <- function(x) {
   collapse::settfmv(y, "compliance", as.character)
   collapse::gvr(x, "_ind$") <- NULL
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      compliance = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
   COMP <- collapse::ss(y, y$compliance %==% "cmp_ind")
 
-  if (nrow(COMP) == 0L) {
+  if (collapse::fnrow(COMP) == 0L) {
     y <- collapse::ss(y, y$ind %==% 1L, 1:2)
-    if (nrow(y) == 0L) {
-      return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
+    if (collapse::fnrow(y) == 0L) {
+      return(collapse::av(
+        x,
+        compliance = rep.int(NA_character_, collapse::fnrow(x))
+      ))
     }
     collapse::recode_char(
       y$compliance,
@@ -186,8 +213,11 @@ pivot_compliance <- function(x) {
 
   y <- cheapr::row_c(COMP, y)
 
-  if (nrow(y) == 0L) {
-    return(collapse::av(x, compliance = rep.int(NA_character_, nrow(x))))
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      compliance = rep.int(NA_character_, collapse::fnrow(x))
+    ))
   }
 
   if (count_zero(y$fac_ccn)) {
