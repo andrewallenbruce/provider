@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9170 (2026-05-15)
+
+- quick fix for
+  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+  ([\#130](https://github.com/andrewallenbruce/provider/issues/130))
+
 ## provider 0.0.1.9169 (2026-05-15)
 
 - sketch of bug fix for
