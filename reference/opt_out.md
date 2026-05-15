@@ -109,20 +109,24 @@ opt_out(count = TRUE)
 #> • Rows  : 55,898
 #> • Pages : 12    
 #> 
+#> Error in x[["order_refer"]]: subscript out of bounds
 
 opt_out(npi = 1043522824)
 #> ✔ opt_out returned 1 result.
-#> # A tibble: 1 × 12
+#> ✔ order_refer returned 1 result.
+#> # A tibble: 1 × 16
 #>         npi first last  specialty start_date end_date   updated    address city 
-#>       <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
+#> *     <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
 #> 1    1.04e9 James Smith Nurse Pr… 2019-07-01 2027-07-01 2025-08-15 STE 111 SCOT…
-#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
+#> # ℹ 7 more variables: state <chr>, zip <chr>, order_refer <int>, ptb <int>,
+#> #   dme <int>, hha <int>, hospice <int>
 
 opt_out(state = "AK")
 #> ✔ opt_out returned 260 results.
-#> # A tibble: 260 × 12
+#> ✔ order_refer returned 136 results.
+#> # A tibble: 260 × 16
 #>         npi first last  specialty start_date end_date   updated    address city 
-#>       <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
+#>  *    <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
 #>  1   1.27e9 Henry Chap… Physicia… 2012-04-01 2028-04-01 2026-04-16 STE 101 ANCH…
 #>  2   1.49e9 Ann   Stoc… Clinical… 2012-04-01 2028-04-01 2026-04-16 STE 214 ANCH…
 #>  3   1.04e9 Amber Shea  Nurse Pr… 2013-04-01 2027-04-01 2025-05-15 5805 E… WASI…
@@ -134,7 +138,8 @@ opt_out(state = "AK")
 #>  9   1.30e9 Will… Berg… Oral Sur… 2018-11-05 2026-11-05 2024-12-15 STE 203 ANCH…
 #> 10   1.23e9 Ray   Holl… Oral Sur… 2014-06-16 2026-06-16 2024-07-15 STE 203 ANCH…
 #> # ℹ 250 more rows
-#> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <int>
+#> # ℹ 7 more variables: state <chr>, zip <chr>, order_refer <int>, ptb <int>,
+#> #   dme <int>, hha <int>, hospice <int>
 
 opt_out(specialty = "Psychiatry", order_refer = FALSE)
 #> ✔ opt_out returned 813 results.
