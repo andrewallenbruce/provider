@@ -80,6 +80,36 @@ opt_out <- function(
   )
 
   x <- execute(x)
+  x <- polish(x)
 
-  polish(x)
+  npis <- collapse::ss(x, collapse::whichv(x[["order_refer"]], 1L), c("npi"))
+  npis <- collapse::funique(unlist_(npis))
+
+  if (length(npis) == 0L) {
+    return(x)
+  }
+
+  blocks <- cheapr::seq_size(1L, length(npis), 150L)
+
+  if (blocks == 1L) {
+    o <- order_refer(npi = npis)
+    o <- collapse::ss(o, j = c("npi", "ptb", "dme", "hha", "hospice"))
+    return(join2(x, o, on = "npi"))
+  }
+
+  npis <- vctrs::vec_split(
+    npis,
+    cheapr::rep_each_(
+      cheapr::seq_(1L, blocks),
+      150L
+    )[
+      seq_along(npis)
+    ]
+  )$val
+
+  o <- purrr::map(npis, \(x) order_refer(npi = x)) |>
+    collapse::rowbind() |>
+    collapse::ss(j = c("npi", "ptb", "dme", "hha", "hospice"))
+
+  join2(x, o, on = "npi")
 }
