@@ -2,8 +2,7 @@
 % Please edit documentation in R/polish.R
 \name{polish}
 \alias{polish}
-\title{Polish generic
-Defines data cleaning methods for results}
+\title{Polish generic}
 \usage{
 polish(x)
 }
@@ -14,7 +13,6 @@ polish(x)
 data.frame
 }
 \description{
-Polish generic
 Defines data cleaning methods for results
 }
 \keyword{internal}

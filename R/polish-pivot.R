@@ -51,36 +51,27 @@ pivot_multi <- function(x) {
 
 #' @noRd
 pivot_credit <- function(x) {
-  y <- pivot2(
-    x,
-    rex = "^fac_ccn$|^acr_",
-    id = "fac_ccn",
-    var = "acr_org",
-    val = "acr_date"
-  )
-
+  y <- pivot2(x, "^fac_ccn$|^acr_", "fac_ccn", "acr_org", "ind")
   collapse::settfmv(y, "acr_org", as.character)
   collapse::gvr(x, "^acr_") <- NULL
+  y <- collapse::ss(y, j = 1:2)
 
   if (nrow(y) == 0L) {
-    N <- rep.int(NA_character_, nrow(x))
-    return(collapse::av(x, acr_org = N, acr_date = N))
+    return(collapse::av(x, acr_org = rep.int(NA_character_, nrow(x))))
   }
 
   RC_clia_credit(y$acr_org)
-  join2(x, y, on = "fac_ccn")
+
+  if (count_zero(y$fac_ccn)) {
+    return(join2(x, y, on = "fac_ccn"))
+  }
+
+  join2(x, collapse_rows(y, "fac_ccn", "acr_org"), on = "fac_ccn")
 }
 
 #' @noRd
 pivot_owner <- function(x) {
-  y <- pivot2(
-    x,
-    rex = "^pac$|_ind$|_otxt$",
-    id = c("pac", "own_otxt"),
-    var = "own_type",
-    val = "ind"
-  )
-
+  y <- pivot2(x, "^pac$|_ind$|_otxt$", c("pac", "own_otxt"), "own_type", "ind")
   collapse::settfmv(y, "own_type", as.character)
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
@@ -108,14 +99,7 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- pivot2(
-    x,
-    rex = "^enid$|sub_",
-    id = c("enid", "sub_otxt"),
-    var = "sub_group",
-    val = "ind"
-  )
-
+  y <- pivot2(x, "^enid$|sub_", c("enid", "sub_otxt"), "sub_group", "ind")
   collapse::settfmv(y, "sub_group", as.character)
   collapse::gvr(x, "sub_") <- NULL
 

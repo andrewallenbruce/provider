@@ -1,8 +1,13 @@
 #' Polish generic
+#'
 #' Defines data cleaning methods for results
+#'
 #' @param x data.frame
+#'
 #' @returns data.frame
+#'
 #' @export
+#'
 #' @keywords internal
 polish <- function(x) {
   UseMethod("polish")
@@ -30,7 +35,7 @@ polish.clia <- function(x) {
   RC_clia_act(x$action)
 
   pivot_multi(x) |>
-    pivot_compliance() |>
+    # pivot_compliance() |>
     pivot_credit()
 }
 
@@ -57,103 +62,78 @@ polish.esrd <- function(x) {
     rc_address()
 }
 
-#' @export
-polish.fqhc_enroll <- function(x) {
-  rename_with(x, "fqhc_enroll") |>
-    rc_address() |>
+#' @noRd
+polish_enroll <- function(x) {
+  rc_address(x) |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
     rc_other(stub = "org") |>
     collapse::roworderv(c("enid"))
+}
+
+#' @export
+polish.fqhc_enroll <- function(x) {
+  rename_with(x, "fqhc_enroll") |>
+    polish_enroll()
 }
 
 #' @export
 polish.hospice_enroll <- function(x) {
   rename_with(x, "hospice_enroll") |>
-    rc_address() |>
-    rc_integer("npi") |>
-    rc_bin("multi") |>
-    rc_ymd("inc_date") |>
-    rc_other(stub = "org") |>
-    collapse::roworderv(c("enid"))
+    polish_enroll()
 }
 
 #' @export
 polish.rhc_enroll <- function(x) {
   rename_with(x, "rhc_enroll") |>
-    rc_address() |>
-    rc_integer("npi") |>
-    rc_bin("multi") |>
-    rc_ymd("inc_date") |>
-    rc_other(stub = "org") |>
-    collapse::roworderv(c("enid"))
+    polish_enroll()
 }
 
 #' @export
 polish.snf_enroll <- function(x) {
   rename_with(x, "snf_enroll") |>
-    rc_address() |>
-    rc_integer("npi") |>
-    rc_bin("multi") |>
-    rc_ymd("inc_date") |>
-    rc_other(stub = "org") |>
-    collapse::roworderv(c("enid"))
+    polish_enroll()
+}
+
+#' @noRd
+polish_owner <- function(x) {
+  rc_address(x) |>
+    rc_double("percent") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_ymd("asc_date") |>
+    pivot_owner() |>
+    collapse::roworderv(c("pac", "org_enid"))
 }
 
 #' @export
 polish.snf_owner <- function(x) {
   rename_with(x, "snf_owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner() |>
-    collapse::roworderv(c("pac", "org_enid"))
+    polish_owner()
 }
 
 #' @export
 polish.rhc_owner <- function(x) {
   rename_with(x, "rhc_owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner() |>
-    collapse::roworderv(c("pac", "org_enid"))
+    polish_owner()
 }
 
 #' @export
 polish.fqhc_owner <- function(x) {
   rename_with(x, "fqhc_owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner() |>
-    collapse::roworderv(c("pac", "org_enid"))
+    polish_owner()
 }
 
 #' @export
 polish.hospice_owner <- function(x) {
   rename_with(x, "hospice_owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner() |>
-    collapse::roworderv(c("pac", "org_enid"))
+    polish_owner()
 }
 
 #' @export
 polish.hospital_owner <- function(x) {
   rename_with(x, "hospital_owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner() |>
-    collapse::roworderv(c("pac", "org_enid"))
+    polish_owner()
 }
 
 #' @export

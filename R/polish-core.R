@@ -66,24 +66,6 @@ rc_ymd2 <- recoder(as_date_ymd2)
 rc_mdy <- recoder(as_date_mdy)
 
 #' @noRd
-set_recoder <- function(.f) {
-  function(x, v) {
-    collapse::settfmv(.data = x, vars = v, FUN = .f)
-  }
-}
-
-#' @noRd
-set_double <- set_recoder(as.double)
-
-#' @noRd
-set_integer <- set_recoder(as.integer)
-
-#' @noRd
-set_character <- function(x, v) {
-  collapse::settfmv(.data = x, vars = v, FUN = as.character)
-}
-
-#' @noRd
 combine_columns <- function(
   x,
   main,
