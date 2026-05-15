@@ -54,20 +54,17 @@ address <- set_names(x$addresses, x$number) |>
   ) |>
   collapse::gvr("^number$|^address_[12p]|^city$|^state$|postal|phone") |>
   collapse::funique() |>
-  (\(x) {
-    collapse::av(
-      x,
-      purpose = tolower(x$address_purpose),
-      address = combine_cols(x$address_1, x$address_2),
-      phone = x$telephone_number
-    )
-  })() |>
+  collapse::rnm(
+    address = "address_1",
+    add_2 = "address_2",
+    phone = "telephone_number",
+    purpose = "address_purpose",
+    zip = "postal_code"
+  ) |>
+  rc_address() |>
   collapse::roworderv(c("number", "purpose"))
 
-collapse::gvr(
-  address,
-  "address_purpose|address_1|address_2|telephone_number"
-) <- NULL
+address$purpose <- tolower(address$purpose)
 
 address$phone <- cheapr::if_else_(
   cheapr::is_na(address$phone) & address$purpose == "mailing",
@@ -88,11 +85,11 @@ MM <- set_names(
   M$number
 )
 
-x <- secretbase::shake256("secret base", bits = 32L, convert = NA)
-y <- secretbase::shake256("secret base", bits = 32L, convert = NA)
-identical(x, y)
-
+# x <- secretbase::shake256("secret base", bits = 32L, convert = NA)
+# y <- secretbase::shake256("secret base", bits = 32L, convert = NA)
+# identical(x, y)
 # waldo::compare(LL, MM, max_diffs = 200, quote_strings = FALSE)
+
 veq <- vctrs::vec_equal(LL, MM)
 both <- names(MM[cheapr::which_(veq, invert = TRUE)])
 one <- names(MM[cheapr::which_(veq)])

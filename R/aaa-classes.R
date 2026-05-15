@@ -42,6 +42,10 @@ CMS <- new_class(
       default = 5000L
     ),
     query = class_character,
+    length = new_property(
+      class_integer,
+      getter = function(self) nchar(self@query)
+    ),
     action = class_character,
     count = new_property(
       class_integer,
