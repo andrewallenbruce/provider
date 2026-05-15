@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9171 (2026-05-15)
+
+* fixed `count` bug in `opt_out()`
+* streamlined `rc_clia` columns method
+
+
 # provider 0.0.1.9170 (2026-05-15)
 
 * quick fix for `opt_out()` (#103)
