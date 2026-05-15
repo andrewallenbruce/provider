@@ -43,11 +43,9 @@
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #'
-#' opt_out(npi = 1043522824)
+#' opt_out(npi = 1043522824) |> str()
 #'
-#' opt_out(state = "AK")
-#'
-#' opt_out(specialty = "Psychiatry", order_refer = FALSE)
+#' opt_out(state = "GA", specialty = contains("Psych"))
 #'
 #' @export
 opt_out <- function(
@@ -82,33 +80,38 @@ opt_out <- function(
   x <- execute(x)
   x <- polish(x)
 
-  npis <- collapse::ss(x, collapse::whichv(x[["order_refer"]], 1L), c("npi"))
-  npis <- collapse::funique(unlist_(npis))
-
-  if (length(npis) == 0L) {
+  if (count || set) {
     return(x)
   }
 
-  blocks <- cheapr::seq_size(1L, length(npis), 150L)
+  npis <- collapse::ss(x, collapse::whichv(x[["order_refer"]], 1L), c("npi"))
+  npis <- collapse::funique(unlist_(npis))
+
+  if (collapse::fnobs(npis) == 0L) {
+    return(x)
+  }
+
+  blocks <- cheapr::seq_size(1L, collapse::fnobs(npis), 150L)
 
   if (blocks == 1L) {
     o <- order_refer(npi = npis)
-    o <- collapse::ss(o, j = c("npi", "ptb", "dme", "hha", "hospice"))
-    return(join2(x, o, on = "npi"))
+
+    if (nrow(o) == 0L) {
+      return(x)
+    }
+
+    return(join2(
+      x,
+      collapse::ss(o, j = c("npi", "ptb", "dme", "hha", "hospice")),
+      on = "npi"
+    ))
   }
 
-  npis <- vctrs::vec_split(
-    npis,
-    cheapr::rep_each_(
-      cheapr::seq_(1L, blocks),
-      150L
-    )[
-      seq_along(npis)
-    ]
-  )$val
+  groups <- cheapr::rep_each_(cheapr::seq_(1L, blocks), 150L)[seq_along(npis)]
+  npis <- vctrs::vec_split(npis, groups)$val
 
   o <- purrr::map(npis, \(x) order_refer(npi = x)) |>
-    collapse::rowbind() |>
+    collapse::rowbind(return = 4L) |>
     collapse::ss(j = c("npi", "ptb", "dme", "hha", "hospice"))
 
   join2(x, o, on = "npi")
