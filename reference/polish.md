@@ -1,6 +1,6 @@
-# Polish generic Defines data cleaning methods for results
+# Polish generic
 
-Polish generic Defines data cleaning methods for results
+Defines data cleaning methods for results
 
 ## Usage
 
