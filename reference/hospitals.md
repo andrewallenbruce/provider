@@ -255,7 +255,7 @@ x |> str()
 #>  $ inc_date : Date[1:2], format: "2000-06-02" "2000-06-02"
 #>  $ org_type : chr [1:2] "PARTNERSHIP" "PARTNERSHIP"
 #>  $ status   : chr [1:2] "P" "P"
-#>  $ address  : chr [1:2] "ANCHOR HOSPITAL" "2151 PEACHFORD ROAD"
+#>  $ address  : chr [1:2] "5454 YORKTOWNE DRIVE, ANCHOR HOSPITAL" "2151 PEACHFORD ROAD"
 #>  $ city     : chr [1:2] "ATLANTA" "ATLANTA"
 #>  $ state    : chr [1:2] "GA" "GA"
 #>  $ zip      : chr [1:2] "303495317" "303386534"

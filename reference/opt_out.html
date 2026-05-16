@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9171</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9172</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,7 +159,7 @@ fee-for-service (Part B).</p>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043522824</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">opt_out</span> returned <span style="font-weight: bold;">1</span> result.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> opt_out [1 × 16] (S3: opt_out/tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> opt_out [1 × 12] (S3: opt_out/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi        : int 1043522824</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ first      : chr "James"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ last       : chr "Smith"</span>
@@ -167,35 +167,30 @@ fee-for-service (Part B).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ start_date : Date[1:1], format: "2019-07-01"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ end_date   : Date[1:1], format: "2027-07-01"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ updated    : Date[1:1], format: "2025-08-15"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address    : chr "STE 111"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address    : chr "8585 E HARTFORD DR, STE 111"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city       : chr "SCOTTSDALE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state      : chr "AZ"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip        : chr "852555472"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ order_refer: int 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ptb        : int 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dme        : int 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hha        : int 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hospice    : int 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ order_refer: chr "Part B, DME, HHA, PMD"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"Psych"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">opt_out</span> returned <span style="font-weight: bold;">226</span> results.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">128</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 226 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 226 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         npi first last  specialty start_date end_date   updated    address city </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   1.88<span style="color: #949494;">e</span>9 Ana   Adel… Clinical… 2012-07-01 2026-07-01 2024-08-15 SUITE … ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   1.98<span style="color: #949494;">e</span>9 Joan  Mill… Clinical… 2014-07-01 2026-07-01 2024-08-15 SUITE … MARI…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   1.68<span style="color: #949494;">e</span>9 Sher… Born… Clinical… 2012-04-01 2028-04-01 2026-04-16 SUITE … ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   1.88<span style="color: #949494;">e</span>9 Ana   Adel… Clinical… 2012-07-01 2026-07-01 2024-08-15 675 SE… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   1.98<span style="color: #949494;">e</span>9 Joan  Mill… Clinical… 2014-07-01 2026-07-01 2024-08-15 2520 W… MARI…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   1.68<span style="color: #949494;">e</span>9 Sher… Born… Clinical… 2012-04-01 2028-04-01 2026-04-16 990 HA… ATLA…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>   1.70<span style="color: #949494;">e</span>9 Nich… Hume  Clinical… 2018-07-01 2026-07-01 2024-08-15 693 MO… ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   1.60<span style="color: #949494;">e</span>9 Carol Kran… Psychiat… 2012-01-01 2028-01-01 2026-01-15 STE 210 ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   1.12<span style="color: #949494;">e</span>9 Lawr… Gius… Psychiat… 2012-07-01 2026-07-01 2024-08-15 STE 202 ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   1.84<span style="color: #949494;">e</span>9 David Lips… Psychiat… 2012-07-01 2026-07-01 2024-08-15 SUITE4… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   1.60<span style="color: #949494;">e</span>9 Carol Kran… Psychiat… 2012-01-01 2028-01-01 2026-01-15 3133 M… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   1.12<span style="color: #949494;">e</span>9 Lawr… Gius… Psychiat… 2012-07-01 2026-07-01 2024-08-15 1945 C… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   1.84<span style="color: #949494;">e</span>9 David Lips… Psychiat… 2012-07-01 2026-07-01 2024-08-15 12 PIE… ATLA…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   1.88<span style="color: #949494;">e</span>9 Barb… Da V… Psychiat… 2012-07-01 2026-07-01 2024-08-15 143 FO… ST S…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   1.29<span style="color: #949494;">e</span>9 Matt… Norm… Psychiat… 2012-10-01 2026-10-01 2024-11-15 12 PIE… ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   1.30<span style="color: #949494;">e</span>9 Linda Ande… Clinical… 2013-01-01 2027-01-01 2025-01-15 SUITE … ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   1.29<span style="color: #949494;">e</span>9 Matt… Norm… Psychiat… 2012-10-01 2026-10-01 2024-11-15 3495 P… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   1.30<span style="color: #949494;">e</span>9 Linda Ande… Clinical… 2013-01-01 2027-01-01 2025-01-15 4675 N… ATLA…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 216 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, order_refer &lt;int&gt;, ptb &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dme &lt;int&gt;, hha &lt;int&gt;, hospice &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, order_refer &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
