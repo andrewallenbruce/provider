@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9172 (2026-05-15)
+
+* fixed bug in `rc_address`
+* pivot method for `order_refer`
+
+
 # provider 0.0.1.9171 (2026-05-15)
 
 * fixed `count` bug in `opt_out()`
