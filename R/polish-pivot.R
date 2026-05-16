@@ -24,6 +24,43 @@ pivot2 <- function(x, rex, id, var, val) {
 }
 
 #' @noRd
+pivot_order_refer <- function(x) {
+  y <- pivot2(
+    x,
+    "^npi$|^ptb$|^dme$|^hha$|^pmd$|^hospice$",
+    "npi",
+    "order_refer",
+    "ind"
+  )
+  collapse::settfmv(y, "order_refer", as.character)
+  collapse::gvr(x, "^order_refer$|^ptb$|^dme$|^hha$|^pmd$|^hospice$") <- NULL
+  y <- collapse::ss(y, y$ind %==% 1L, 1:2)
+
+  if (collapse::fnrow(y) == 0L) {
+    return(collapse::av(
+      x,
+      order_refer = rep.int(NA_character_, collapse::fnrow(x))
+    ))
+  }
+
+  collapse::recode_char(
+    y$order_refer,
+    "ptb" = "Part B",
+    "dme" = "DME",
+    "hha" = "HHA",
+    "pmd" = "PMD",
+    "hospice" = "Hospice",
+    default = NA_character_,
+    set = TRUE
+  )
+
+  if (count_zero(y$npi)) {
+    return(join2(x, y, on = "npi"))
+  }
+  join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")
+}
+
+#' @noRd
 pivot_multi_site <- function(x) {
   y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site", "ind")
 

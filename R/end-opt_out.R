@@ -88,35 +88,35 @@ opt_out <- function(
     return(x)
   }
 
-  npis <- collapse::ss(x, collapse::whichv(x[["order_refer"]], 1L), c("npi"))
-  npis <- collapse::funique(unlist_(npis))
+  NPI <- collapse::ss(x, x[["order_refer"]] %==% 1L, c("npi")) |>
+    unlist_() |>
+    collapse::funique()
 
-  if (collapse::fnobs(npis) == 0L) {
+  if (collapse::fnobs(NPI) == 0L) {
     return(x)
   }
 
-  blocks <- cheapr::seq_size(1L, collapse::fnobs(npis), 150L)
+  BLOCK <- cheapr::seq_size(1L, collapse::fnobs(NPI), 150L)
 
-  if (blocks == 1L) {
-    o <- order_refer(npi = npis)
+  if (BLOCK == 1L) {
+    y <- order_refer(npi = NPI)
 
-    if (nrow(o) == 0L) {
+    if (collapse::fnrow(y) == 0L) {
       return(x)
     }
-
-    return(join2(
-      x,
-      collapse::ss(o, j = c("npi", "ptb", "dme", "hha", "hospice")),
-      on = "npi"
-    ))
+    x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
+    return(pivot_order_refer(x))
   }
 
-  groups <- cheapr::rep_each_(cheapr::seq_(1L, blocks), 150L)[seq_along(npis)]
-  npis <- vctrs::vec_split(npis, groups)$val
+  GRP <- cheapr::rep_each_(cheapr::seq_(1L, BLOCK), 150L)[seq_along(NPI)]
+  NPI <- vctrs::vec_split(NPI, GRP)$val
 
-  o <- purrr::map(npis, \(x) order_refer(npi = x)) |>
-    collapse::rowbind(return = 4L) |>
-    collapse::ss(j = c("npi", "ptb", "dme", "hha", "hospice"))
+  y <- purrr::map(NPI, \(x) order_refer(npi = x)) |>
+    rowbind2(nm = NULL)
 
-  join2(x, o, on = "npi")
+  if (collapse::fnrow(y) == 0L) {
+    return(x)
+  }
+  x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
+  pivot_order_refer(x)
 }

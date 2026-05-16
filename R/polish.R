@@ -27,7 +27,7 @@ polish.clia <- function(x) {
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
-    rc_address(main = "fac_name", other = "fac_2")
+    rc_address(add1 = "fac_name", add2 = "fac_2")
 
   rc_clia(x, "term")
   rc_clia(x, "cert")
@@ -43,7 +43,7 @@ polish.clia <- function(x) {
 polish.clinicians <- function(x) {
   rename_with(x, "clinicians") |>
     rc_address() |>
-    rc_address(main = "specialty", other = "spec_other") |>
+    rc_address(add1 = "specialty", add2 = "spec_other") |>
     rc_integer(c("npi", "grad_year", "members")) |>
     collapse::roworderv(c("npi"))
 }

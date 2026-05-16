@@ -98,8 +98,32 @@ combine_columns <- function(
 }
 
 #' @noRd
-rc_address <- function(x, main = "address", other = "add_2") {
-  combine_columns(x, main = main, other = other, sep = ", ")
+rc_address <- function(
+  x,
+  add1 = "address",
+  add2 = "add_2",
+  sep = ", ",
+  arg = caller_arg(add2),
+  call = caller_env()
+) {
+  if (rlang::is_null(x[[add2]])) {
+    cli::cli_abort(
+      "{.val {add2}} is not a column in {.var x}.",
+      arg = arg,
+      call = call
+    )
+  }
+
+  i <- cheapr::which_not_na(x[[add2]])
+
+  if (rlang::is_empty(i)) {
+    collapse::gv(x, add2) <- NULL
+    return(x)
+  }
+  COL <- paste(x[i, add1, drop = TRUE], x[i, add2, drop = TRUE], sep = ", ")
+  collapse::gv(x[i, ], add1) <- COL
+  collapse::gv(x, add2) <- NULL
+  return(x)
 }
 
 #' @noRd
