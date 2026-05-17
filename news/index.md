@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9179 (2026-05-17)
+
+- rebuilt README
+- more tests for modifiers
+
 ## provider 0.0.1.9178 (2026-05-17)
 
 - pivot tinkering
