@@ -140,8 +140,8 @@ rc_other <- function(x, stub) {
 #' @noRd
 bin_col <- function(x) {
   cheapr::case(
-    x %in_% c("Y", "Yes", "A") ~ 1L,
-    x %in_% c("N", "No", "B") ~ 0L,
+    x %in_% c("YES", "Y", "Yes") ~ 1L,
+    x %in_% c("NO", "N", "No") ~ 0L,
     .default = NA_integer_
   )
 }

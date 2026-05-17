@@ -1,0 +1,77 @@
+{
+  "result_count": 1,
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_1": "1414 WALNUT ST",
+          "address_purpose": "LOCATION",
+          "address_type": "DOM",
+          "city": "PHILADELPHIA",
+          "country_code": "US",
+          "country_name": "United States",
+          "postal_code": "191023824",
+          "state": "PA",
+          "telephone_number": "855-563-2639"
+        },
+        {
+          "address_1": "333 S DESPLAINES ST STE 201",
+          "address_purpose": "MAILING",
+          "address_type": "DOM",
+          "city": "CHICAGO",
+          "country_code": "US",
+          "country_name": "United States",
+          "postal_code": "606615514",
+          "state": "IL",
+          "telephone_number": "855-563-2639"
+        }
+      ],
+      "basic": {
+        "authorized_official_credential": "DO",
+        "authorized_official_first_name": "FAHIMEH",
+        "authorized_official_last_name": "SASAN",
+        "authorized_official_name_prefix": "Dr.",
+        "authorized_official_telephone_number": "8555632639",
+        "authorized_official_title_or_position": "Founding OBGYN",
+        "certification_date": "2024-05-20",
+        "enumeration_date": "2022-03-02",
+        "last_updated": "2024-05-20",
+        "organization_name": "PEACH STATE MEDICAL PRACTICE, PC",
+        "organizational_subpart": "NO",
+        "status": "A"
+      },
+      "created_epoch": "1646266470000",
+      "endpoints": [],
+      "enumeration_type": "NPI-2",
+      "identifiers": [],
+      "last_updated_epoch": "1716222184000",
+      "number": "1174270805",
+      "other_names": [
+        {
+          "code": "3",
+          "organization_name": "KINDBODY OF PA MEDICAL PRACTICE, PC",
+          "type": "Doing Business As"
+        }
+      ],
+      "practiceLocations": [],
+      "taxonomies": [
+        {
+          "code": "207VE0102X",
+          "desc": "Obstetrics & Gynecology, Reproductive Endocrinology",
+          "license": null,
+          "primary": true,
+          "state": null,
+          "taxonomy_group": "193200000X - Multi-Specialty Group"
+        },
+        {
+          "code": "207VG0400X",
+          "desc": "Obstetrics & Gynecology, Gynecology",
+          "license": null,
+          "primary": false,
+          "state": null,
+          "taxonomy_group": "193200000X - Multi-Specialty Group"
+        }
+      ]
+    }
+  ]
+}

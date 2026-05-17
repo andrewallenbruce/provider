@@ -24,39 +24,33 @@
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
-#' @param facility_name `<chr>` Provider/Laboratory name
-#' @param facility_ccn `<chr>` 10-digit CMS Certification Number
-#' @param parent_ccn `<chr>` 6-digit CMS Certification Number
-#' @param certificate `<enum>` CLIA certificate type (see Details):
-#'    - `"waiver"` = Waiver
+#' @param fac_name `<chr>` Provider/Laboratory name
+#' @param fac_ccn `<chr>` 10-digit CMS Certification Number
+#' @param clia_ccn `<chr>` 6-digit CMS Certification Number
+#' @param cert_type `<enum>` CLIA certificate type (see Details):
+#'    - `"wav"` = Waiver
 #'    - `"ppm"` = Provider-Performed Microscopy (PPM)
-#'    - `"registration"` = Registration
-#'    - `"compliance"` = Compliance
-#'    - `"accreditation"` = Accreditation
-#' @param accreditation `<enum>` CLIA accrediting organization (see Details):
-#'    - `"a2la"` = A2LA
-#'    - `"aabb"` = AABB
-#'    - `"aoa"` = AOA
-#'    - `"ashi"` = ASHI-HLA
-#'    - `"cap"` = CAP
-#'    - `"cola"` = COLA
-#'    - `"jcaho"` = JCAHO
+#'    - `"reg"` = Registration
+#'    - `"cmp"` = Compliance
+#'    - `"acr"` = Accreditation
+#' @param acr_org `<enum>` CLIA accrediting organization (see Details):
+#'    - `"a2la"` = American Association for Laboratory Accreditation
+#'    - `"aabb"` = Association for the Advancement of Blood & Biotherapies
+#'    - `"aoa"` = American Osteopathic Association
+#'    - `"ashi"` = American Society for Histocompatibility & Immunogenetics
+#'    - `"cap"` = College of American Pathologists
+#'    - `"cola"` = Commission on Office Laboratory Accreditation
+#'    - `"jcaho"` = The Joint Commission
+#' @param multi_site `<enum>`  Single site CLIA multiple-site exceptions:
+#'    - `"applied"` = Applied for to cover multiple testing locations
+#'    - `"campus"` = Hospital with several labs on single hospital campus
+#'    - `"non"` = Multiple sites with non-profit, federal, state or local government status (limited public health testing)
+#'    - `"temp"` = Lab with multiple temporary testing sites
 #' @param city,state,zip `<chr>` Lab city, state, zip
 #' @param chows `<int>` Number of times there has been a Change of Ownership.
-#' @param compliant `<lgl>` Provider compliance status at time of certification
-#'   survey.
 #' @param active `<lgl>` Return only active labs
-#' @param multi `<lgl>` Indicates lab has applied for a single site CLIA to
-#'   cover multiple testing locations.
-#' @param campus `<lgl>` Indicates single site CLIA is for hospital with several
-#'   labs on a single hospital campus.
-#' @param non_profit `<lgl>` Indicates single site CLIA is for multiple sites
-#'   with non-profit, federal, state or local government status and engaged in
-#'   limited public health testing.
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
-#' @param temporary `<lgl>` Indicates single site CLIA is for lab with multiple
-#'   temporary testing sites.
 #' @param poc `<lgl>` Indicates provider is in compliance with Plan of
 #'   Correction.
 #' @param count `<lgl>` Return the total row count
@@ -67,72 +61,52 @@
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
 #'
-#' clia(compliant = FALSE,
-#'      active = TRUE,
-#'      count = TRUE)
+#' clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #'
-#' clia(facility_ccn = provider:::cdc_labs$ccn) |> str()
+#' clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #'
-#' clia(certificate = c("accreditation", "registration"),
-#'      city = "Valdosta",
-#'      state = "GA") |>
-#'      str()
-#'
-#' clia(accreditation = c("cap", "cola", "jcaho")) |> str()
+#' clia(multi_site = c("temp", "campus")) |> str()
 #'
 #' @export
 clia <- function(
-  facility_name = NULL,
-  facility_ccn = NULL,
-  parent_ccn = NULL,
-  certificate = NULL,
-  accreditation = NULL,
+  fac_name = NULL,
+  fac_ccn = NULL,
+  clia_ccn = NULL,
+  cert_type = NULL,
+  acr_org = NULL,
+  multi_site = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   chows = NULL,
-  compliant = NULL,
   active = NULL,
-  multi = NULL,
-  campus = NULL,
-  non_profit = NULL,
   eligible = NULL,
-  temporary = NULL,
   poc = NULL,
   count = FALSE,
   set = FALSE
 ) {
-  check_char_(certificate)
-  check_char_(accreditation)
-  check_bool_(compliant)
+  check_char_(cert_type)
+  check_char_(acr_org)
   check_bool_(active)
-  check_bool_(multi)
-  check_bool_(campus)
-  check_bool_(non_profit)
   check_bool_(eligible)
-  check_bool_(temporary)
   check_bool_(poc)
 
   x <- cms(
     count = count,
     set = set,
-    FAC_NAME = facility_name,
-    PRVDR_NUM = facility_ccn,
-    CLIA_MDCR_NUM = parent_ccn,
-    CRTFCT_TYPE_CD = tag_enum(certificate),
+    FAC_NAME = fac_name,
+    PRVDR_NUM = fac_ccn,
+    CLIA_MDCR_NUM = clia_ccn,
+    CRTFCT_TYPE_CD = tag_enum(cert_type),
     CITY_NAME = city,
     STATE_CD = state,
     ZIP_CD = zip,
     CHOW_CNT = chows,
-    CMPLNC_STUS_CD = convert_compliant(compliant),
-    PGM_TRMNTN_CD = convert_active(active),
+    PGM_TRMNTN_CD = tag_active(active),
     ELGBLTY_SW = convert_bool(eligible),
-    MLT_SITE_EXCPTN_SW = convert_bool(multi),
-    HOSP_LAB_EXCPTN_SW = convert_bool(campus),
-    NON_PRFT_EXCPTN_SW = convert_bool(non_profit),
-    LAB_TEMP_TSTG_SITE_SW = convert_bool(temporary),
     ACPTBL_POC_SW = convert_bool(poc),
-    !!!convert_accreditation(accreditation)
+    !!!tag_acr_org(acr_org),
+    !!!tag_multi_site(multi_site)
   )
 
   x <- execute(x)
@@ -141,7 +115,7 @@ clia <- function(
 }
 
 #' @noRd
-convert_active <- function(x = NULL) {
+tag_active <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -149,18 +123,19 @@ convert_active <- function(x = NULL) {
 }
 
 #' @noRd
-convert_compliant <- function(x = NULL) {
-  if (is.null(x)) {
+tag_acr_org <- function(acr_org) {
+  if (is.null(acr_org)) {
     return(NULL)
   }
-  cheapr::val_match(x, TRUE ~ "A", FALSE ~ "B")
+  x <- tag_enum(acr_org)
+  set_names(as.list(rep.int("Y", length(x))), x)
 }
 
 #' @noRd
-convert_accreditation <- function(accreditation) {
-  if (is.null(accreditation)) {
+tag_multi_site <- function(multi_site) {
+  if (is.null(multi_site)) {
     return(NULL)
   }
-  x <- tag_enum(accreditation)
+  x <- tag_enum(multi_site)
   set_names(as.list(rep.int("Y", length(x))), x)
 }

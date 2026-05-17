@@ -1,13 +1,18 @@
+library(provider)
 library(collapse)
 library(pillar)
+
 nppes_json <- fs::path(here::here("data-raw"), "nppes", ext = "json")
 x <- llmjson::repair_json_file(nppes_json, return_objects = FALSE)
 x <- RcppSimdJson::fparse(x)$results |> data_frame()
+
+# Remove created_epoch/last_epoch/endpoints fields
 collapse::gvr(x, "epoch|endpoints") <- NULL
+x
 
 # TBL 1: Primary Key
 key <- new_data_frame(
-  number = x$number,
+  number = as.integer(x$number),
   entity = cheapr::val_match(
     x$enumeration_type,
     "NPI-1" ~ 1L,
@@ -22,6 +27,7 @@ basic <- set_names(x$basic, x$number) |>
   collapse::qTBL() |>
   collapse::recode_char(
     "--" = NA_character_,
+    # "." = "",
     "certification_date" = "cert_date",
     "enumeration_date" = "enum_date",
     "last_updated" = "updated",
@@ -29,7 +35,8 @@ basic <- set_names(x$basic, x$number) |>
     "credential" = "cred",
     "first_name" = "first",
     "middle_name" = "middle",
-    "last_name" = "last"
+    "last_name" = "last",
+    fixed = TRUE
   )
 
 basic <- collapse::ss(
@@ -42,15 +49,48 @@ basic <- collapse::ss(
     names = "var",
     values = "V1",
     check.dups = TRUE
-  )
+  ) |>
+  rc_integer("number") |>
+  rc_bin("sole") |>
+  rc_ymd(c("enum_date", "cert_date", "updated"))
+
+basic
+
+# TBL 4: PRACTICE LOCATIONS
+location <- set_names(x$practiceLocations, x$number) |>
+  cheapr::list_drop_null() |>
+  collapse::rowbind(
+    idcol = "number",
+    fill = TRUE,
+    id.factor = TRUE,
+    return = 4L
+  ) |>
+  collapse::recode_char("--" = NA_character_) |>
+  collapse::gvr("^number$|^address_[12p]|^city$|^state$|postal|phone") |>
+  collapse::funique() |>
+  collapse::rnm(
+    address = "address_1",
+    add_2 = "address_2",
+    phone = "telephone_number",
+    purpose = "address_purpose",
+    zip = "postal_code"
+  ) |>
+  rc_address() |>
+  collapse::roworderv(c("number")) |>
+  collapse::qTBL()
+
+collapse::settfmv(location, "number", as.character)
+collapse::settfmv(location, "number", as.integer)
+collapse::settfmv(location, "purpose", tolower)
+location
 
 # TBL 3: ADDRESS
 address <- set_names(x$addresses, x$number) |>
   collapse::rowbind(
     idcol = "number",
     fill = TRUE,
-    id.factor = FALSE,
-    return = 4
+    id.factor = TRUE,
+    return = 4L
   ) |>
   collapse::gvr("^number$|^address_[12p]|^city$|^state$|postal|phone") |>
   collapse::funique() |>
@@ -64,7 +104,10 @@ address <- set_names(x$addresses, x$number) |>
   rc_address() |>
   collapse::roworderv(c("number", "purpose"))
 
-address$purpose <- tolower(address$purpose)
+collapse::settfmv(address, "number", as.character)
+collapse::settfmv(address, "number", as.integer)
+collapse::settfmv(address, "purpose", tolower)
+
 
 address$phone <- cheapr::if_else_(
   cheapr::is_na(address$phone) & address$purpose == "mailing",
@@ -72,6 +115,7 @@ address$phone <- cheapr::if_else_(
   address$phone
 )
 
+## Which addresses are identical
 address <- collapse::rsplit(address, ~purpose)
 
 L <- as.list(address$location)
@@ -79,6 +123,7 @@ LL <- set_names(
   purrr::map(collapse::t_list(unname(L)), paste0, collapse = ""),
   L$number
 )
+
 M <- as.list(address$mailing)
 MM <- set_names(
   purrr::map(collapse::t_list(unname(M)), paste0, collapse = ""),
@@ -105,16 +150,20 @@ address <- collapse::rowbind(
 ) |>
   collapse::roworderv(c("number", "purpose"))
 
+collapse::rowbind(
+  location,
+  address
+) |>
+  collapse::roworderv(c("number", "address", "purpose")) |>
+  collapse::fcountv("number", add = TRUE) |>
+  collapse::roworderv("N", decreasing = TRUE) |>
+  print(n = Inf)
+
 collapse::join(key, basic, on = "number") |>
   collapse::join(address, on = "number", multiple = TRUE)
 
-other_names <- set_names(x$other_names, x$number) |>
-  cheapr::list_drop_null() |>
-  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
-  collapse::recode_char("--" = NA_character_) |>
-  collapse::qTBL()
 
-set_names(x$practiceLocations, x$number) |>
+other_names <- set_names(x$other_names, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>

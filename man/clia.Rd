@@ -16,78 +16,66 @@
 }
 \usage{
 clia(
-  facility_name = NULL,
-  facility_ccn = NULL,
-  parent_ccn = NULL,
-  certificate = NULL,
-  accreditation = NULL,
+  fac_name = NULL,
+  fac_ccn = NULL,
+  clia_ccn = NULL,
+  cert_type = NULL,
+  acr_org = NULL,
+  multi_site = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   chows = NULL,
-  compliant = NULL,
   active = NULL,
-  multi = NULL,
-  campus = NULL,
-  non_profit = NULL,
   eligible = NULL,
-  temporary = NULL,
   poc = NULL,
   count = FALSE,
   set = FALSE
 )
 }
 \arguments{
-\item{facility_name}{\verb{<chr>} Provider/Laboratory name}
+\item{fac_name}{\verb{<chr>} Provider/Laboratory name}
 
-\item{facility_ccn}{\verb{<chr>} 10-digit CMS Certification Number}
+\item{fac_ccn}{\verb{<chr>} 10-digit CMS Certification Number}
 
-\item{parent_ccn}{\verb{<chr>} 6-digit CMS Certification Number}
+\item{clia_ccn}{\verb{<chr>} 6-digit CMS Certification Number}
 
-\item{certificate}{\verb{<enum>} CLIA certificate type (see Details):
+\item{cert_type}{\verb{<enum>} CLIA certificate type (see Details):
 \itemize{
-\item \code{"waiver"} = Waiver
+\item \code{"wav"} = Waiver
 \item \code{"ppm"} = Provider-Performed Microscopy (PPM)
-\item \code{"registration"} = Registration
-\item \code{"compliance"} = Compliance
-\item \code{"accreditation"} = Accreditation
+\item \code{"reg"} = Registration
+\item \code{"cmp"} = Compliance
+\item \code{"acr"} = Accreditation
 }}
 
-\item{accreditation}{\verb{<enum>} CLIA accrediting organization (see Details):
+\item{acr_org}{\verb{<enum>} CLIA accrediting organization (see Details):
 \itemize{
-\item \code{"a2la"} = A2LA
-\item \code{"aabb"} = AABB
-\item \code{"aoa"} = AOA
-\item \code{"ashi"} = ASHI-HLA
-\item \code{"cap"} = CAP
-\item \code{"cola"} = COLA
-\item \code{"jcaho"} = JCAHO
+\item \code{"a2la"} = American Association for Laboratory Accreditation
+\item \code{"aabb"} = Association for the Advancement of Blood & Biotherapies
+\item \code{"aoa"} = American Osteopathic Association
+\item \code{"ashi"} = American Society for Histocompatibility & Immunogenetics
+\item \code{"cap"} = College of American Pathologists
+\item \code{"cola"} = Commission on Office Laboratory Accreditation
+\item \code{"jcaho"} = The Joint Commission
+}}
+
+\item{multi_site}{\verb{<enum>}  Single site CLIA multiple-site exceptions:
+\itemize{
+\item \code{"applied"} = Applied for to cover multiple testing locations
+\item \code{"campus"} = Hospital with several labs on single hospital campus
+\item \code{"non"} = Multiple sites with non-profit, federal, state or local government status (limited public health testing)
+\item \code{"temp"} = Lab with multiple temporary testing sites
 }}
 
 \item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
 
 \item{chows}{\verb{<int>} Number of times there has been a Change of Ownership.}
 
-\item{compliant}{\verb{<lgl>} Provider compliance status at time of certification
-survey.}
-
 \item{active}{\verb{<lgl>} Return only active labs}
-
-\item{multi}{\verb{<lgl>} Indicates lab has applied for a single site CLIA to
-cover multiple testing locations.}
-
-\item{campus}{\verb{<lgl>} Indicates single site CLIA is for hospital with several
-labs on a single hospital campus.}
-
-\item{non_profit}{\verb{<lgl>} Indicates single site CLIA is for multiple sites
-with non-profit, federal, state or local government status and engaged in
-limited public health testing.}
 
 \item{eligible}{\verb{<lgl>} Indicates lab is eligible to participate in
 Medicare/Medicaid.}
-
-\item{temporary}{\verb{<lgl>} Indicates single site CLIA is for lab with multiple
-temporary testing sites.}
 
 \item{poc}{\verb{<lgl>} Indicates provider is in compliance with Plan of
 Correction.}
@@ -150,17 +138,10 @@ laboratory is accredited by one of the CMS-approved organizations:
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
 
-clia(compliant = FALSE,
-     active = TRUE,
-     count = TRUE)
+clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 
-clia(facility_ccn = provider:::cdc_labs$ccn) |> str()
+clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 
-clia(certificate = c("accreditation", "registration"),
-     city = "Valdosta",
-     state = "GA") |>
-     str()
-
-clia(accreditation = c("cap", "cola", "jcaho")) |> str()
+clia(multi_site = c("temp", "campus")) |> str()
 \dontshow{\}) # examplesIf}
 }

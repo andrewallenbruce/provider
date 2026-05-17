@@ -1,0 +1,61 @@
+{
+  "result_count": 1,
+  "results": [
+    {
+      "addresses": [
+        {
+          "address_1": "26400 W 12 MILE RD STE 140",
+          "address_purpose": "LOCATION",
+          "address_type": "DOM",
+          "city": "SOUTHFIELD",
+          "country_code": "US",
+          "country_name": "United States",
+          "postal_code": "480341753",
+          "state": "MI",
+          "telephone_number": "866-658-8214"
+        },
+        {
+          "address_1": "26400 W 12 MILE RD STE 140",
+          "address_purpose": "MAILING",
+          "address_type": "DOM",
+          "city": "SOUTHFIELD",
+          "country_code": "US",
+          "country_name": "United States",
+          "postal_code": "480341753",
+          "state": "MI",
+          "telephone_number": "866-658-8214"
+        }
+      ],
+      "basic": {
+        "authorized_official_first_name": "KATRINA",
+        "authorized_official_last_name": "MARSHALL",
+        "authorized_official_telephone_number": "7734359036",
+        "authorized_official_title_or_position": "Dir Ins Cred & Payor Contracts",
+        "certification_date": "2024-02-12",
+        "enumeration_date": "2021-07-29",
+        "last_updated": "2024-02-12",
+        "organization_name": "VIOS FERTILITY INSTITUTE MICHIGAN PLLC",
+        "organizational_subpart": "NO",
+        "status": "A"
+      },
+      "created_epoch": "1627585585000",
+      "endpoints": [],
+      "enumeration_type": "NPI-2",
+      "identifiers": [],
+      "last_updated_epoch": "1707768606000",
+      "number": "1225701881",
+      "other_names": [],
+      "practiceLocations": [],
+      "taxonomies": [
+        {
+          "code": "207VE0102X",
+          "desc": "Obstetrics & Gynecology, Reproductive Endocrinology",
+          "license": null,
+          "primary": true,
+          "state": null,
+          "taxonomy_group": "193400000X - Multiple Single Specialty Group"
+        }
+      ]
+    }
+  ]
+}

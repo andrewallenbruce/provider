@@ -32,7 +32,7 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
   switch(
     x,
     # <clia>
-    accreditation = list(
+    acr_org = list(
       a2la = "A2LA_ACRDTD_Y_MATCH_SW",
       aabb = "AABB_ACRDTD_Y_MATCH_SW",
       aoa = "AOA_ACRDTD_Y_MATCH_SW",
@@ -40,6 +40,19 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       cap = "CAP_ACRDTD_Y_MATCH_SW",
       cola = "COLA_ACRDTD_Y_MATCH_SW",
       jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
+    ),
+    cert_type = list(
+      cmp = 1,
+      wav = 2,
+      acr = 3,
+      ppm = 4,
+      reg = 9
+    ),
+    multi_site = list(
+      applied = "MLT_SITE_EXCPTN_SW",
+      campus = "HOSP_LAB_EXCPTN_SW",
+      non = "NON_PRFT_EXCPTN_SW",
+      temp = "LAB_TEMP_TSTG_SITE_SW"
     ),
     # <transparency>
     action = list(
@@ -50,14 +63,6 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       closure = "Closure Notice",
       cmp = "CMP Notice",
       appeal = "Appealed"
-    ),
-    # <clia>
-    certificate = list(
-      compliance = 1,
-      waiver = 2,
-      accreditation = 3,
-      ppm = 4,
-      registration = 9
     ),
     # <affiliations>
     facility_type = list(
@@ -97,7 +102,7 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       sole = "SOLE PROPRIETOR"
     ),
     # <hospitals2>
-    own_type = c(
+    own_type = list(
       dod = "Department of Defense",
       profit = "Proprietary",
       physician = "Physician",
@@ -111,7 +116,7 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       state = "Government - State",
       vha = "Veterans Health Administration"
     ),
-    hosp_type = c(
+    hosp_type = list(
       acute = "Acute Care Hospitals",
       cah = "Critical Access Hospitals",
       child = "Childrens",

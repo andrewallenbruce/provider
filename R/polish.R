@@ -30,9 +30,9 @@ polish.clia <- function(x) {
     rc_address(add1 = "fac_name", add2 = "fac_2")
 
   rc_clia(x, "term")
-  rc_clia(x, "cert")
+  rc_clia(x, "cert_type")
   rc_clia(x, "owner")
-  rc_clia(x, "facility")
+  rc_clia(x, "fac_type")
   rc_clia(x, "action")
 
   pivot_multi_site(x) |>
