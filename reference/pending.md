@@ -62,6 +62,7 @@ pending(first = starts("V"))
 #> ✔ pending returned 157 results.
 #> • Physician     : 69
 #> • Non-Physician : 88
+#> ℹ Retrieving 2 pages...
 #> # A tibble: 157 × 4
 #>    prov_type first         last                        npi
 #>    <chr>     <chr>         <chr>                     <int>
