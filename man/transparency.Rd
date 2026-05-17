@@ -10,7 +10,7 @@
 }
 \usage{
 transparency(
-  name = NULL,
+  fac_name = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
@@ -20,7 +20,7 @@ transparency(
 )
 }
 \arguments{
-\item{name}{\verb{<chr>} Hospital name}
+\item{fac_name}{\verb{<chr>} Hospital name}
 
 \item{address}{\verb{<chr>} Hospital address}
 

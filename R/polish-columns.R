@@ -272,7 +272,7 @@ RE_NAME = list(
   ),
   transparency = list(
     Case_ID = "case",
-    Hosp_Name = "name",
+    Hosp_Name = "fac_name",
     Hosp_Address = "address",
     City = "city",
     State = "state",

@@ -44,17 +44,15 @@
 #'
 #' @examplesIf httr2::is_online()
 #' clinicians(count = TRUE)
-#' clinicians(count = TRUE, org_name = not_blank())
+#' clinicians(org_name = not_blank(), count = TRUE)
 #'
-#' clinicians(enid = "I20081002000549")
+#' clinicians(enid = "I20081002000549") |> str()
 #'
 #' clinicians(first = "Etan")
 #'
+#' clinicians(members = not_blank(), count = TRUE)
+#' clinicians(members = is_blank(), count = TRUE)
 #' clinicians(members = 100, count = TRUE)
-#' # clinicians(members = less(100), count = TRUE)
-#' # clinicians(members = greater(100), count = TRUE)
-#' # clinicians(members = greater(1000), count = TRUE)
-#'
 #' @export
 clinicians <- function(
   npi = NULL,

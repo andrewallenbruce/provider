@@ -54,7 +54,7 @@ pivot_order_refer <- function(x) {
     set = TRUE
   )
 
-  if (count_zero(y$npi)) {
+  if (!collapse::any_duplicated(y$npi)) {
     return(join2(x, y, on = "npi"))
   }
   join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")
@@ -85,7 +85,7 @@ pivot_multi_site <- function(x) {
 
   rc_clia(y, "multi_site")
 
-  if (count_zero(y$fac_ccn)) {
+  if (!collapse::any_duplicated(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -108,7 +108,7 @@ pivot_acr_org <- function(x) {
 
   rc_clia(y, "acr_org")
 
-  if (count_zero(y$fac_ccn)) {
+  if (!collapse::any_duplicated(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -142,7 +142,7 @@ pivot_owner <- function(x) {
   y <- rc_other(y, stub = "own") |>
     collapse::funique()
 
-  if (count_zero(y$pac)) {
+  if (!collapse::any_duplicated(y$pac)) {
     return(join2(x, y, on = "pac"))
   }
 
@@ -176,7 +176,7 @@ pivot_subgroup <- function(x) {
   y <- rc_other(y, stub = "sub") |>
     collapse::funique()
 
-  if (count_zero(y$enid)) {
+  if (!collapse::any_duplicated(y$enid)) {
     return(join2(x, y, on = "enid"))
   }
 

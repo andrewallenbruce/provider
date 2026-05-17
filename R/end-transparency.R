@@ -40,7 +40,7 @@
 #' @source
 #'    - [API: Hospital Price Transparency Enforcement Activities and Outcomes](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-price-transparency-enforcement-activities-and-outcomes)
 #'
-#' @param name `<chr>` Hospital name
+#' @param fac_name `<chr>` Hospital name
 #' @param address `<chr>` Hospital address
 #' @param city `<chr>` Hospital city
 #' @param state `<chr>` Hospital state
@@ -66,7 +66,7 @@
 #'
 #' @export
 transparency <- function(
-  name = NULL,
+  fac_name = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
@@ -79,7 +79,7 @@ transparency <- function(
   x <- cms(
     count = count,
     set = set,
-    Hosp_Name = name,
+    Hosp_Name = fac_name,
     Hosp_Address = address,
     City = city,
     State = state,

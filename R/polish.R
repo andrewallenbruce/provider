@@ -222,5 +222,6 @@ polish.revocations <- function(x) {
 polish.transparency <- function(x) {
   rename_with(x, "transparency") |>
     rc_integer("case") |>
-    rc_ymd("action_date")
+    rc_ymd("action_date") |>
+    collapse::roworderv(c("fac_name", "case"))
 }
