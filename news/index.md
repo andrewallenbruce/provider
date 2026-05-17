@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9180 (2026-05-17)
+
+- converted `polish` generic to S7
+
 ## provider 0.0.1.9179 (2026-05-17)
 
 - rebuilt README
@@ -236,8 +240,7 @@
 
 ## provider 0.0.1.9128 (2026-04-30)
 
-- [`polish()`](https://andrewallenbruce.github.io/provider/reference/polish.md)
-  S3 generic
+- `polish()` S3 generic
 
 ## provider 0.0.1.9127 (2026-04-30)
 

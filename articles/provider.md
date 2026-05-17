@@ -63,9 +63,8 @@ into tidy data frames.
     the input object.
 3.  **HTTP/JSON Layer**: The bottom layer interacts with the web via
     `httr2`. It handles the raw JSON responses from CMS, which are then
-    parsed by `RcppSimdJson` and passed to the
-    [`polish()`](https://andrewallenbruce.github.io/provider/reference/polish.md)
-    function for renaming and type casting.
+    parsed by `RcppSimdJson` and passed to the `polish()` function for
+    renaming and type casting.
 
 ### Handling API Flavors
 
@@ -84,10 +83,8 @@ and filtering syntax:
 
 ### The Role of `polish`
 
-The
-[`polish()`](https://andrewallenbruce.github.io/provider/reference/polish.md)
-function is the final stage of the pipeline. It orchestrates three
-critical transformations:
+The `polish()` function is the final stage of the pipeline. It
+orchestrates three critical transformations:
 
 1.  Renaming: Converts raw API keys (e.g., adr_ln_1) into snake_case
     (e.g., address_1) via column_renames().

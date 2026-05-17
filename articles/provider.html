@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9179</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9180</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,7 +155,7 @@ on the class of the input object.</li>
 <strong>HTTP/JSON Layer</strong>: The bottom layer interacts with
 the web via <code>httr2</code>. It handles the raw JSON responses from
 CMS, which are then parsed by <code>RcppSimdJson</code> and passed to
-the <code><a href="../reference/polish.html">polish()</a></code> function for renaming and type casting.</li>
+the <code>polish()</code> function for renaming and type casting.</li>
 </ol>
 </div>
 <div class="section level3">
@@ -186,7 +186,7 @@ parameters and filtering syntax:</p>
 <div class="section level3">
 <h3 id="the-role-of-polish">The Role of <code>polish</code><a class="anchor" aria-label="anchor" href="#the-role-of-polish"></a>
 </h3>
-<p>The <code><a href="../reference/polish.html">polish()</a></code> function is the final stage of the
+<p>The <code>polish()</code> function is the final stage of the
 pipeline. It orchestrates three critical transformations:</p>
 <ol style="list-style-type: decimal">
 <li>Renaming: Converts raw API keys (e.g., adr_ln_1) into snake_case

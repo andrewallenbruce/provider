@@ -19,8 +19,8 @@ list(
 #> $individual
 #>                V1
 #> first        MARK
-#> last         FUNG
 #> middle          K
+#> last         FUNG
 #> npi    1043245657
 #> pac    7810891009
 #> 
@@ -149,18 +149,18 @@ list(
 #> 
 #> $individual
 #> # A tibble: 334 × 5
-#>    first   last           middle         npi pac       
-#>    <chr>   <chr>          <chr>        <int> <chr>     
-#>  1 STACI   CARTER-KELLY   L       1003029125 6204824378
-#>  2 DYLAN   ESTES          A       1003278144 6608167523
-#>  3 ANA     MORALES MEJIA  MARIELA 1003421496 6103287404
-#>  4 ARMIN   AFSAR KESHMIRI NA      1003815184 4082693676
-#>  5 LAURA   GREENE         A       1003845272 1759384035
-#>  6 DEBORAH KAMPSCHROR     M       1013141860 8022069558
-#>  7 NAROD   VASSILIAN      NA      1013539584 9133544109
-#>  8 EMILY   TRIPLETT       NA      1013595560 3375947401
-#>  9 BARDIA  BARIMANI       NA      1013793736 9436503646
-#> 10 JOSE    ACOSTAMADIEDO  M       1013910256 5890719371
+#>    first   middle  last                  npi pac       
+#>    <chr>   <chr>   <chr>               <int> <chr>     
+#>  1 STACI   L       CARTER-KELLY   1003029125 6204824378
+#>  2 DYLAN   A       ESTES          1003278144 6608167523
+#>  3 ANA     MARIELA MORALES MEJIA  1003421496 6103287404
+#>  4 ARMIN   NA      AFSAR KESHMIRI 1003815184 4082693676
+#>  5 LAURA   A       GREENE         1003845272 1759384035
+#>  6 DEBORAH M       KAMPSCHROR     1013141860 8022069558
+#>  7 NAROD   NA      VASSILIAN      1013539584 9133544109
+#>  8 EMILY   NA      TRIPLETT       1013595560 3375947401
+#>  9 BARDIA  NA      BARIMANI       1013793736 9436503646
+#> 10 JOSE    M       ACOSTAMADIEDO  1013910256 5890719371
 #> # ℹ 324 more rows
 ```
 
@@ -182,14 +182,14 @@ list(
 #> 
 #> $individual
 #> # A tibble: 6 × 5
-#>   first   last     middle        npi pac       
-#>   <chr>   <chr>    <chr>       <int> <chr>     
-#> 1 JEFFREY KLOTZ    NA     1073258398 3870095805
-#> 2 CARLOS  MARTINEZ E      1154332062 5890739734
-#> 3 MARY    HALLORAN K      1396989059 8921259557
-#> 4 IL      CHON     JUN    1538173869 0547299091
-#> 5 DRAGOS  BANU     NA     1558659367 6709004682
-#> 6 JOSHUA  WARNER   NA     1760167712 8123473469
+#>   first   middle last            npi pac       
+#>   <chr>   <chr>  <chr>         <int> <chr>     
+#> 1 JEFFREY NA     KLOTZ    1073258398 3870095805
+#> 2 CARLOS  E      MARTINEZ 1154332062 5890739734
+#> 3 MARY    K      HALLORAN 1396989059 8921259557
+#> 4 IL      JUN    CHON     1538173869 0547299091
+#> 5 DRAGOS  NA     BANU     1558659367 6709004682
+#> 6 JOSHUA  NA     WARNER   1760167712 8123473469
 ```
 
 That returns more affiliated individual providers that practice in the
