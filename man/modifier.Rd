@@ -3,15 +3,15 @@
 \name{modifier}
 \alias{modifier}
 \alias{excludes}
-\alias{between}
 \alias{contains}
+\alias{starts}
+\alias{ends}
 \alias{not}
 \alias{not_blank}
 \alias{is_blank}
 \alias{greater}
 \alias{less}
-\alias{starts}
-\alias{ends}
+\alias{between}
 \title{A variety of different query operators}
 \source{
 \href{https://jsonapi.org/format/#query-parameters}{JSON-API: Query Parameters}
@@ -19,9 +19,11 @@
 \usage{
 excludes(x)
 
-between(x, y)
-
 contains(x)
+
+starts(x)
+
+ends(x)
 
 not(x)
 
@@ -33,9 +35,7 @@ greater(x, equal = FALSE)
 
 less(x, equal = FALSE)
 
-starts(x)
-
-ends(x)
+between(x, y)
 }
 \arguments{
 \item{x, y}{input}

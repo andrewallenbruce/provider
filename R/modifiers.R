@@ -52,23 +52,33 @@ excludes <- function(x) {
 
 #' @rdname modifier
 #' @export
-between <- function(x, y) {
-  check_number_decimal(x)
-  check_number_decimal(y)
-  Modifier(
-    "between",
-    operator = "BETWEEN",
-    value = vctrs::vec_c(x, y)
-  )
-}
-
-#' @rdname modifier
-#' @export
 contains <- function(x) {
   check_atomic(x)
   Modifier(
     "contains",
     operator = "CONTAINS",
+    value = x
+  )
+}
+
+#' @rdname modifier
+#' @export
+starts <- function(x) {
+  check_atomic(x)
+  Modifier(
+    "starts",
+    operator = "STARTS WITH",
+    value = x
+  )
+}
+
+#' @rdname modifier
+#' @export
+ends <- function(x) {
+  check_atomic(x)
+  Modifier(
+    "ends",
+    operator = "ENDS WITH",
     value = x
   )
 }
@@ -132,22 +142,19 @@ less <- function(x, equal = FALSE) {
 
 #' @rdname modifier
 #' @export
-starts <- function(x) {
-  check_atomic(x)
-  Modifier(
-    "starts",
-    operator = "STARTS WITH",
-    value = x
+between <- function(x, y) {
+  check_number_decimal(x, min = 0, allow_infinite = FALSE)
+  check_number_decimal(
+    y,
+    min = .Machine[["double.eps"]],
+    allow_infinite = FALSE
   )
-}
-
-#' @rdname modifier
-#' @export
-ends <- function(x) {
-  check_atomic(x)
+  # if (x >= y) {
+  #   cli::cli_abort("{.var x} must be less than {.var y}")
+  # }
   Modifier(
-    "ends",
-    operator = "ENDS WITH",
-    value = x
+    "between",
+    operator = "BETWEEN",
+    value = c(x, y)
   )
 }
