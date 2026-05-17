@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9175 (2026-05-17)
+
+- added
+  [`hha_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
+  &
+  [`hha_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
+- added check in `rc_clia` method
+
 ## provider 0.0.1.9174 (2026-05-17)
 
 - added checks and tests for numeric modifiers

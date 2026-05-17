@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9174</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9175</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,23 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fqhc_enroll</span><span class="op">(</span></span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hha_enroll</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -210,6 +227,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>14,426</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>3     </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu">hha_enroll</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">hha_enroll</span> Totals</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>11,508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>3     </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fqhc_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">fqhc_enroll</span> returned <span style="font-weight: bold;">768</span> results.</span>
@@ -228,6 +250,25 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:768] "TRENTON" "BELL" "PORT ST LUCIE" "RUSKIN" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:768] "FL" "FL" "FL" "FL" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:768] "326933239" "326194713" "349527585" "335705471" ...</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hha_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hha_enroll</span> returned <span style="font-weight: bold;">1,173</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hha_nrll [1,173 × 15] (S3: hha_enroll/tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid    : chr [1:1173] "O20020811000000" "O20021202000011" "O20021220000018" "O20030228000021" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi     : int [1:1173] 1437180767 1689603870 1730118027 1891725693 1497789192 1336127893 1194776138 1174665293 1992710719 1730119538 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi   : int [1:1173] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ccn     : chr [1:1173] "117090" "107290B" "107768" "117132" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:1173] "7618884529" "8527976877" "2860309671" "7618884529" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:1173] "CENTERWELL CERTIFIED HEALTHCARE CORP" "CENTERWELL HEALTH SERVICES CERTIFIED, INC." "BAYADA HOME HEALTH CARE, INC." "CENTERWELL CERTIFIED HEALTHCARE CORP" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba : chr [1:1173] "CENTERWELL HOME HEALTH" "CENTERWELL HOME HEALTH" NA "CENTERWELL HOME HEALTH" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date: Date[1:1173], format: "1983-04-19" "1998-09-29" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:1173] "CORPORATION" "CORPORATION" "CORPORATION" "CORPORATION" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ status  : chr [1:1173] "P" "P" "N" "P" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:1173] "2280 E VICTORY DR, # B" "350 CORPORATE WAY, STE 250" "3001 EXECUTIVE DR, STE 250" "1303 HIGHTOWER TRL, STE 105" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:1173] "SAVANNAH" "ORANGE PARK" "CLEARWATER" "ATLANTA" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:1173] "GA" "FL" "FL" "GA" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:1173] "314043957" "320732853" "337625324" "303502919" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ loc_type: chr [1:1173] NA NA NA NA ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospice_enroll</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospice_enroll</span> returned <span style="font-weight: bold;">312</span> results.</span>
@@ -276,7 +317,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:1044] "SUN CITY CENTER ASSOCIATES LTD LP" "TOOMBS NURSING HOME LLC" "TAYLOR COUNTY HEALTH CARE LLC" "SPARTA HEALTH CARE LLC" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_dba : chr [1:1044] "SUN TERRACE HEALTH CARE CENTER" "OXLEY PARK HEALTH AND REHABILITATION" "TAYLOR COUNTY HEALTH AND REHABILITATION" "SPARTA HEALTH AND REHABILITATION" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ inc_date: Date[1:1044], format: "1963-01-12" "2002-07-01" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:1044] "OTHER: LIMITED PARTNERSHIP" "LLC" "LLC" "LLC" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_type: chr [1:1044] "Other: LIMITED PARTNERSHIP" "LLC" "LLC" "LLC" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ status  : chr [1:1044] "P" "N" "N" "N" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:1044] "105 TRINITY LAKES DR" "181 OXLEY DR" "165 S BROAD ST" "11744 GA HIGHWAY 22" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:1044] "SUN CITY CENTER" "LYONS" "BUTLER" "SPARTA" ...</span>

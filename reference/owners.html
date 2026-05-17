@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9174</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9175</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,28 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fqhc_owner</span><span class="op">(</span></span>
+<span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  owner <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dba <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  role <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hha_owner</span><span class="op">(</span></span>
 <span>  org_enid <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_pac <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -257,6 +279,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>116,973</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>24     </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu">hha_owner</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">hha_owner</span> Totals</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>101,100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>21     </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fqhc_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">fqhc_owner</span> returned <span style="font-weight: bold;">254</span> results.</span>
@@ -279,7 +306,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:254] "WINTER HAVEN" "WINTER HAVEN" "WINTER HAVEN" "WINTER HAVEN" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:254] "FL" "FL" "FL" "FL" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:254] "338814672" "338814672" "338814672" "338814672" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:254] "OTHER: FQHC" "OTHER: FQHC" "OTHER: FQHC" "OTHER: FQHC" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:254] "Other: FQHC" "Other: FQHC" "Other: FQHC" "Other: FQHC" ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">hospital_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospital_owner</span> returned <span style="font-weight: bold;">137</span> results.</span>
@@ -325,7 +352,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:1961] "AUGUSTA" "ATLANTA" "LAUDERDALE LAKES" "MACON" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:1961] "GA" "GA" "FL" "GA" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:1961] "309012612" "303395946" "333195860" "312012187" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:1961] "Corporation, Chain, Another Org/Ind" "OTHER: LIMITED PARTNERSHIP" NA "Corporation, Non-Profit" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:1961] "Corporation, Chain, Another Org/Ind" "Other: LIMITED PARTNERSHIP" NA "Corporation, Non-Profit" ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rhc_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">rhc_owner</span> returned <span style="font-weight: bold;">136</span> results.</span>
@@ -348,7 +375,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:136] "COLQUITT" "MACON" "BROOKHAVEN" "BROOKHAVEN" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:136] "GA" "GA" "GA" "GA" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:136] "398373518" "312012187" "303291905" "303291905" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:136] "OTHER: GOV'T ENTITY" "Corporation, Non-Profit" "LLC, For-Profit" "LLC, For-Profit" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:136] "Other: GOV'T ENTITY" "Corporation, Non-Profit" "LLC, For-Profit" "LLC, For-Profit" ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">snf_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">snf_owner</span> returned <span style="font-weight: bold;">4,175</span> results.</span>
@@ -372,6 +399,29 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:4175] "GA" "GA" "GA" "GA" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:4175] "30635" "30635" "303462115" "303502519" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:4175] NA NA "Acquisition, LLC" "Acquisition, LLC" ...</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">hha_owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hha_owner</span> returned <span style="font-weight: bold;">1,799</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hha_ownr [1,799 × 19] (S3: hha_owner/tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_enid: chr [1:1799] "O20080922000171" "O20080515000169" "O20080515000169" "O20220110002706" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_pac : chr [1:1799] "8527135367" "0042389132" "0042389132" "5799177473" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name: chr [1:1799] "ORLANDO INTERIM ACQUISITION COMPANY, LLC" "APOGEE HEALTH CARE INC." "APOGEE HEALTH CARE INC." "ILS HHA OF PALM BEACH LLC" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac     : chr [1:1799] "0042387896" "0042389132" "0042389132" "0042520280" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ role    : chr [1:1799] "5% OR GREATER DIRECT OWNERSHIP INTEREST" "5% OR GREATER DIRECT OWNERSHIP INTEREST" "OPERATIONAL/MANAGERIAL CONTROL" "5% OR GREATER INDIRECT OWNERSHIP INTEREST" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ asc_date: Date[1:1799], format: "2009-04-20" "2009-12-01" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_name: chr [1:1799] "INTERIM OF CENTRAL FLORIDA LLC" "APOGEE HEALTH CARE INC." "APOGEE HEALTH CARE INC." "OAK ILS BLOCKER CORP" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_dba : chr [1:1799] NA "APOGEE HOME HEALTH" "APOGEE HOME HEALTH" NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ percent : num [1:1799] 100 NA NA 24.8 23.9 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ entity  : chr [1:1799] "O" "O" "O" "O" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ title   : chr [1:1799] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ first   : chr [1:1799] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ middle  : chr [1:1799] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ last    : chr [1:1799] NA NA NA NA ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address : chr [1:1799] "1890 STATE ROAD 436, SUITE 300" "15127 S JOG RD, STE 202" "15127 S JOG RD, STE 202" "4601 NW 77TH AVE" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city    : chr [1:1799] "WINTER PARK" "DELRAY BEACH" "DELRAY BEACH" "MIAMI" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state   : chr [1:1799] "FL" "FL" "FL" "FL" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip     : chr [1:1799] "327922285" "334461251" "334461251" "331666449" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ own_type: chr [1:1799] "LLC" "Corporation, For-Profit" "Corporation, For-Profit" "Corporation, For-Profit" ...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

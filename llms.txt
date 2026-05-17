@@ -389,11 +389,13 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
 - [`fqhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
+  [`hha_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   [`hospice_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   [`snf_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
   : Facility Enrollment
 - [`fqhc_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
+  [`hha_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
   [`hospital_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
   [`hospice_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
   [`rhc_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
