@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9176 (2026-05-17)
+
+- simplified pivot methods
+
 ## provider 0.0.1.9175 (2026-05-17)
 
 - added

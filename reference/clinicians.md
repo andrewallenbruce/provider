@@ -140,17 +140,30 @@ clinicians(count = TRUE)
 #> • Rows  : 3,378,753
 #> • Pages : 2,253    
 #> 
-clinicians(count = TRUE, org_name = not_blank())
+clinicians(org_name = not_blank(), count = TRUE)
 #> ✔ clinicians returned 3,030,173 results.
 
-clinicians(enid = "I20081002000549")
+clinicians(enid = "I20081002000549") |> str()
 #> ✔ clinicians returned 1 result.
-#> # A tibble: 1 × 18
-#>   first  middle last  gender cred  school grad_year specialty    npi pac   enid 
-#>   <chr>  <chr>  <chr> <chr>  <chr> <chr>      <int> <chr>      <int> <chr> <chr>
-#> 1 DOROT… E      MCCU… F      AU    OTHER       2008 QUALIFIE… 1.41e9 8022… I200…
-#> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>
+#> clinicns [1 × 18] (S3: clinicians/tbl_df/tbl/data.frame)
+#>  $ first    : chr "DOROTHY"
+#>  $ middle   : chr "E"
+#>  $ last     : chr "MCCURLEY"
+#>  $ gender   : chr "F"
+#>  $ cred     : chr "AU"
+#>  $ school   : chr "OTHER"
+#>  $ grad_year: int 2008
+#>  $ specialty: chr "QUALIFIED AUDIOLOGIST"
+#>  $ npi      : int 1407031495
+#>  $ pac      : chr "8022186162"
+#>  $ enid     : chr "I20081002000549"
+#>  $ org_name : chr NA
+#>  $ org_pac  : chr NA
+#>  $ members  : int NA
+#>  $ address  : chr "457 WASHINGTON ST SE, SUITE D"
+#>  $ city     : chr "ALBUQUERQUE"
+#>  $ state    : chr "NM"
+#>  $ zip      : chr "871082713"
 
 clinicians(first = "Etan")
 #> ✔ clinicians returned 12 results.
@@ -172,9 +185,10 @@ clinicians(first = "Etan")
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 
+clinicians(members = not_blank(), count = TRUE)
+#> ✔ clinicians returned 3,030,172 results.
+clinicians(members = is_blank(), count = TRUE)
+#> ✔ clinicians returned 348,581 results.
 clinicians(members = 100, count = TRUE)
 #> ✔ clinicians returned 3,884 results.
-# clinicians(members = less(100), count = TRUE)
-# clinicians(members = greater(100), count = TRUE)
-# clinicians(members = greater(1000), count = TRUE)
 ```
