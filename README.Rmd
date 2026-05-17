@@ -49,35 +49,10 @@ Medicaid Services (CMS) and other federal sources. It provides a unified, tidy
 framework for querying complex datasets that are essential for medical coding,
 billing, and healthcare revenue cycle management.
 
-The provider package is a technical interface for accessing publicly available
-healthcare provider data from the Centers for Medicare and Medicaid Services
-(CMS) and the Health Resources and Services Administration (HRSA). It provides a
-unified, tidy API for querying complex datasets such as the NPPES NPI Registry,
-PECOS enrollment data, and hospital transparency records.
-
-### Purpose & Scope
-
-Navigating the healthcare data ecosystem often involves disparate APIs with
-inconsistent field names and data structures. `provider` abstracts these
-complexities into a consistent set of R functions that return "tidy" data
-frames.
-
-The package targets several key data domains:
-
-   - __Individual Providers__: Clinician demographics, enrollments, and opt-out affidavits
-   - __Organizational Providers__: Hospital data, CLIA labs, and Rural Health Clinics (RHC)
-   - __Compliance & Sanctions__: Medicare revocations and hospital price transparency enforcement
-   - __General Registry__: NPPES NPI registry and reassignment of benefits
-
 ### :rocket: Basic Usage Patterns
 
 Most functions in `provider` follow a similar pattern: they accept identifiers
 (like an `npi`) or search criteria (like an `org_name`) and return a `tibble`.
-
-#### Query Modifiers
-
-`provider` supports query modifiers for more precise filtering. These are
-implemented as Modifier S7 classes
 
 ```{r}
 #| label: load
@@ -99,9 +74,8 @@ affiliations(last = "Bruce")
 ```{r}
 #| label: reassignment
 reassignments(
-  employers = greater(40), 
-  state = "GA"
-)
+  state = "GA",
+  employers = greater(40, equal = TRUE))
 ```
 
 #### :-1: Revoked Medicare Providers
@@ -109,9 +83,8 @@ reassignments(
 ```{r}
 #| label: revoked
 revocations(
-  state = "NY", 
-  org_name = not_blank()
-)
+  state = "GA", 
+  org_name = not_blank())
 ```
 
 #### :identification_card: Clinician Demographics
@@ -121,75 +94,57 @@ revocations(
 clinicians(
   state = "GA", 
   school = not("OTHER"), 
-  grad_year = 2025
-)
+  org_name = not_blank(),
+  grad_year = 2025)
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits
 
 ```{r}
 #| label: opted_out
-x <- opt_out(
-  city = "Atlanta",
-  state = "GA")
-x
+opt_out(city = "Atlanta", state = "GA")
 ```
 
 ##### :receipt: Order & Referral Eligibility
 
 ```{r}
 #| label: order_refer
-order_refer(
-  npi = x[x$order_refer == 1L, ]$npi[1:100]
-)
+order_refer(first = "Jennifer", last = "Smith")
 ```
 
 ##### :health_worker: Medicare Enrollments
 
 ```{r}
 #| label: enrolled
-providers(
-  org_name = contains("West"),
-  state = "GA"
-)
+providers(state = "GA", org_name = contains("West"))
 ```
 
 ##### :calendar: Pending Enrollments
 
 ```{r}
 #| label: pending
-pending(
-  first = starts("E"),
-  last = ends("A"))
+pending(first = starts("E"), last = ends("A"))
 ```
 
 ##### :hospital: Medicare Hospitals
 
 ```{r}
 #| label: hospital
-hospitals(
-  city = "Valdosta", 
-  state = "GA"
-) |> str()
+hospitals(city = "Valdosta", state = "GA")
 ```
 
 ##### :test_tube: CLIA Laboratories
 
 ```{r}
 #| label: clia
-clia(
-  facility_name = starts("SGMC"),
-  state = "GA"
-) |> str()
+clia(fac_name = starts("SGMC"), state = "GA")
 ```
 
 ##### :mag_right: Hospital Transparency Enforcement
 
 ```{r}
 #| label: transparency
-transparency(
-  action = "closure", 
-  state = "WA")
+transparency(action = "cap", state = "GA")
 ```
 
 ------------------------------------------------------------------------------
