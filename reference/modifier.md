@@ -7,9 +7,11 @@ Helpers for use in constructing conditions in queries.
 ``` r
 excludes(x)
 
-between(x, y)
-
 contains(x)
+
+starts(x)
+
+ends(x)
 
 not(x)
 
@@ -21,9 +23,7 @@ greater(x, equal = FALSE)
 
 less(x, equal = FALSE)
 
-starts(x)
-
-ends(x)
+between(x, y)
 ```
 
 ## Source

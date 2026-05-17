@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9174 (2026-05-17)
+
+- added checks and tests for numeric modifiers
+
 ## provider 0.0.1.9173 (2026-05-16)
 
 - more
