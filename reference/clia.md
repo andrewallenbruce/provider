@@ -7,22 +7,18 @@ services the facility provides.
 
 ``` r
 clia(
-  facility_name = NULL,
-  facility_ccn = NULL,
-  parent_ccn = NULL,
-  certificate = NULL,
-  accreditation = NULL,
+  fac_name = NULL,
+  fac_ccn = NULL,
+  clia_ccn = NULL,
+  cert_type = NULL,
+  acr_org = NULL,
+  multi_site = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   chows = NULL,
-  compliant = NULL,
   active = NULL,
-  multi = NULL,
-  campus = NULL,
-  non_profit = NULL,
   eligible = NULL,
-  temporary = NULL,
   poc = NULL,
   count = FALSE,
   set = FALSE
@@ -52,49 +48,62 @@ clia(
 
 ## Arguments
 
-- facility_name:
+- fac_name:
 
   `<chr>` Provider/Laboratory name
 
-- facility_ccn:
+- fac_ccn:
 
   `<chr>` 10-digit CMS Certification Number
 
-- parent_ccn:
+- clia_ccn:
 
   `<chr>` 6-digit CMS Certification Number
 
-- certificate:
+- cert_type:
 
   `<enum>` CLIA certificate type (see Details):
 
-  - `"waiver"` = Waiver
+  - `"wav"` = Waiver
 
   - `"ppm"` = Provider-Performed Microscopy (PPM)
 
-  - `"registration"` = Registration
+  - `"reg"` = Registration
 
-  - `"compliance"` = Compliance
+  - `"cmp"` = Compliance
 
-  - `"accreditation"` = Accreditation
+  - `"acr"` = Accreditation
 
-- accreditation:
+- acr_org:
 
   `<enum>` CLIA accrediting organization (see Details):
 
-  - `"a2la"` = A2LA
+  - `"a2la"` = American Association for Laboratory Accreditation
 
-  - `"aabb"` = AABB
+  - `"aabb"` = Association for the Advancement of Blood & Biotherapies
 
-  - `"aoa"` = AOA
+  - `"aoa"` = American Osteopathic Association
 
-  - `"ashi"` = ASHI-HLA
+  - `"ashi"` = American Society for Histocompatibility & Immunogenetics
 
-  - `"cap"` = CAP
+  - `"cap"` = College of American Pathologists
 
-  - `"cola"` = COLA
+  - `"cola"` = Commission on Office Laboratory Accreditation
 
-  - `"jcaho"` = JCAHO
+  - `"jcaho"` = The Joint Commission
+
+- multi_site:
+
+  `<enum>` Single site CLIA multiple-site exceptions:
+
+  - `"applied"` = Applied for to cover multiple testing locations
+
+  - `"campus"` = Hospital with several labs on single hospital campus
+
+  - `"non"` = Multiple sites with non-profit, federal, state or local
+    government status (limited public health testing)
+
+  - `"temp"` = Lab with multiple temporary testing sites
 
 - city, state, zip:
 
@@ -104,38 +113,13 @@ clia(
 
   `<int>` Number of times there has been a Change of Ownership.
 
-- compliant:
-
-  `<lgl>` Provider compliance status at time of certification survey.
-
 - active:
 
   `<lgl>` Return only active labs
 
-- multi:
-
-  `<lgl>` Indicates lab has applied for a single site CLIA to cover
-  multiple testing locations.
-
-- campus:
-
-  `<lgl>` Indicates single site CLIA is for hospital with several labs
-  on a single hospital campus.
-
-- non_profit:
-
-  `<lgl>` Indicates single site CLIA is for multiple sites with
-  non-profit, federal, state or local government status and engaged in
-  limited public health testing.
-
 - eligible:
 
   `<lgl>` Indicates lab is eligible to participate in Medicare/Medicaid.
-
-- temporary:
-
-  `<lgl>` Indicates single site CLIA is for lab with multiple temporary
-  testing sites.
 
 - poc:
 
@@ -222,98 +206,82 @@ clia(count = TRUE)
 #> • Pages : 136    
 #> 
 
-clia(compliant = FALSE,
-     active = TRUE,
-     count = TRUE)
-#> ✔ clia returned 2,578 results.
-
-clia(facility_ccn = provider:::cdc_labs$ccn) |> str()
-#> ✔ clia returned 6 results.
-#> clia [6 × 25] (S3: clia/tbl_df/tbl/data.frame)
-#>  $ fac_name  : chr [1:6] "CDC ARCTIC INVESTIGATIONS PROGRAM, CENTERS FOR DISEASE CONTROL AND PREV" "CENTERS FOR DISEASE CONTROL & PREVENTION, DIVISION OF VECTOR-BORNE INFECTIOUS DISEASES" "CDC/NCEH/DIVISION OF LABORATORY SCIENCES" "CENTERS FOR DISEASE CONTROL AND PREVENTION I" ...
-#>  $ fac_ccn   : chr [1:6] "02D0873639" "06D0880233" "11D0668290" "11D0668319" ...
-#>  $ clia_ccn  : chr [1:6] NA NA NA NA ...
-#>  $ xrf_ccn   : chr [1:6] NA NA NA NA ...
-#>  $ shr_ccn   : chr [1:6] NA NA NA NA ...
-#>  $ chows     : int [1:6] 0 0 0 0 0 0
-#>  $ address   : chr [1:6] "4055 TUDOR CENTRE DRIVE" "3156 RAMPART RD" "4770 BUFORD HIGHWAY NE MAILSTOP S102-2, ATTN MIKE ROLLINS" "1600 CLIFTON ROAD NE, BUILDINGS 17,18 AND 23" ...
-#>  $ city      : chr [1:6] "ANCHORAGE" "FORT COLLINS" "ATLANTA" "ATLANTA" ...
-#>  $ state     : chr [1:6] "AK" "CO" "GA" "GA" ...
-#>  $ zip       : chr [1:6] "99508" "80521" "30341" "30329" ...
-#>  $ term      : chr [1:6] "Voluntary [Merger/Closure]" "Active" "Active" "Active" ...
-#>  $ cert      : chr [1:6] "Compliance" "Compliance" "Accreditation" "Compliance" ...
-#>  $ facility  : chr [1:6] "Other" "Other" "Other" "Other" ...
-#>  $ owner     : chr [1:6] "[GOE] Federal" "[GOE] Federal" "[GOE] Federal" "[GOE] Federal" ...
-#>  $ action    : chr [1:6] "Recertify" "Recertify" "Recertify" "Recertify" ...
-#>  $ cert_date : Date[1:6], format: "2023-11-09" "2024-06-06" ...
-#>  $ eff_date  : Date[1:6], format: "2024-08-15" "2024-12-09" ...
-#>  $ term_date : Date[1:6], format: "2025-05-06" "2026-12-08" ...
-#>  $ labs      : int [1:6] 0 1 0 1 0 1
-#>  $ sites     : int [1:6] 0 0 0 2 0 0
-#>  $ elig_ind  : chr [1:6] "Y" "Y" "Y" "Y" ...
-#>  $ poc_ind   : chr [1:6] "N" "Y" "N" "N" ...
-#>  $ cmp_ind   : chr [1:6] "A" "A" "A" "B" ...
-#>  $ multi_site: chr [1:6] NA NA NA "Applied, Non-profit" ...
-#>  $ acr_org   : chr [1:6] NA NA "A2LA" NA ...
-
-clia(certificate = c("accreditation", "registration"),
-     city = "Valdosta",
-     state = "GA") |>
-     str()
+clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results.
-#> clia [18 × 25] (S3: clia/tbl_df/tbl/data.frame)
-#>  $ fac_name  : chr [1:18] "SGMC HEALTH" "SGMC- SMITH NORTHVIEW CAMPUS" "SMITH & DENNARD MD PC" "QUEST DIAGNOSTICS/DOCTORS LABORATORY, INC, SOLSTAS LAB PARTNERS" ...
-#>  $ fac_ccn   : chr [1:18] "11D0022233" "11D0022241" "11D0265567" "11D0646134" ...
-#>  $ clia_ccn  : chr [1:18] "110122" "110037" "254623647A" "11L0008004" ...
-#>  $ xrf_ccn   : chr [1:18] NA NA NA NA ...
-#>  $ shr_ccn   : chr [1:18] NA NA NA NA ...
-#>  $ chows     : int [1:18] 0 0 0 0 0 0 0 0 0 0 ...
-#>  $ address   : chr [1:18] "2501 N PATTERSON STREET" "4280 NORTH VALDOSTA ROAD" "2910 N PATTERSON ST" "341 NORTHSIDE DRIVE" ...
-#>  $ city      : chr [1:18] "VALDOSTA" "VALDOSTA" "VALDOSTA" "VALDOSTA" ...
-#>  $ state     : chr [1:18] "GA" "GA" "GA" "GA" ...
-#>  $ zip       : chr [1:18] "31602" "31602" "31602" "31602" ...
-#>  $ term      : chr [1:18] "Active" "Active" "Accreditation Unconfirmed (CLIA)" "Accreditation Unconfirmed (CLIA)" ...
-#>  $ cert      : chr [1:18] "Accreditation" "Accreditation" "Registration" "Accreditation" ...
-#>  $ facility  : chr [1:18] "Hospital" "ASC" "Physician" "Independent" ...
-#>  $ owner     : chr [1:18] "[GOE] County" "[GOE] County" "Proprietary" "Proprietary" ...
-#>  $ action    : chr [1:18] "Validate" "Validate" NA "Initial" ...
-#>  $ cert_date : Date[1:18], format: "2003-12-09" "2012-02-08" ...
-#>  $ eff_date  : Date[1:18], format: "2025-02-28" "2025-12-07" ...
-#>  $ term_date : Date[1:18], format: "2027-02-27" "2027-12-06" ...
-#>  $ labs      : int [1:18] 1 1 0 2 0 0 0 0 15 4 ...
-#>  $ sites     : int [1:18] 0 0 0 0 0 0 0 0 0 0 ...
-#>  $ elig_ind  : chr [1:18] "Y" "Y" "N" "Y" ...
-#>  $ poc_ind   : chr [1:18] "N" "N" "N" "N" ...
-#>  $ cmp_ind   : chr [1:18] "A" "A" NA "A" ...
-#>  $ multi_site: chr [1:18] NA NA NA NA ...
-#>  $ acr_org   : chr [1:18] "JCAHO" "CAP" NA NA ...
+#> # A tibble: 18 × 22
+#>    fac_name   fac_ccn clia_ccn chows  labs sites address city  state zip   term 
+#>  * <chr>      <chr>   <chr>    <int> <int> <int> <chr>   <chr> <chr> <chr> <chr>
+#>  1 SGMC HEAL… 11D002… 110122       0     1     0 2501 N… VALD… GA    31602 Acti…
+#>  2 SGMC- SMI… 11D002… 110037       0     1     0 4280 N… VALD… GA    31602 Acti…
+#>  3 SMITH & D… 11D026… 2546236…     0     0     0 2910 N… VALD… GA    31602 Accr…
+#>  4 QUEST DIA… 11D064… 11L0008…     0     2     0 341 NO… VALD… GA    31602 Accr…
+#>  5 SOUTH GA … 11D068… 110122       0     0     0 2501 N… VALD… GA    31602 Acti…
+#>  6 NORTHSIDE… 11D090… NA           0     0     0 201 PE… VALD… GA    31602 Volu…
+#>  7 SOUTH GEO… 11D091… NA           0     0     0 201 PE… VALD… GA    31602 Accr…
+#>  8 SOUTHERN … 11D096… NA           0     0     0 2740 M… VALD… GA    31604 Fee …
+#>  9 VALDOSTA … 11D100… NA           0    15     0 2841 N… VALD… GA    31602 Acti…
+#> 10 ALLEGIANT… 11D106… NA           0     4     0 5101 N… VALD… GA    31605 Volu…
+#> 11 CARE MEDI… 11D202… NA           0     1     0 2804-C… VALD… GA    31602 Acti…
+#> 12 GULF COAS… 11D205… NA           0     0     0 2804 N… VALD… GA    31602 Volu…
+#> 13 BPC PLASM… 11D207… NA           0     1     0 311 N … VALD… GA    31601 Acti…
+#> 14 SOUTH GEO… 11D210… NA           0     2     0 3312 N… VALD… GA    31605 Acti…
+#> 15 SGMC POIN… 11D214… NA           0     2     0 2501 N… VALD… GA    31602 Volu…
+#> 16 SGMC FAMI… 11D214… NA           0     2     0 3386 G… VALD… GA    31605 Volu…
+#> 17 OCTAPHARM… 11D219… NA           0     0     0 1713 N… VALD… GA    31601 Acti…
+#> 18 VEEDHATA … 11D222… NA           0     3     0 3386 G… VALD… GA    31605 Acti…
+#> # ℹ 11 more variables: cert_type <chr>, fac_type <chr>, owner <chr>,
+#> #   action <chr>, cert_date <date>, eff_date <date>, term_date <date>,
+#> #   elig_ind <chr>, poc_ind <chr>, multi_site <chr>, acr_org <chr>
 
-clia(accreditation = c("cap", "cola", "jcaho")) |> str()
+clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #> ✔ clia returned 1 result.
-#> clia [1 × 25] (S3: clia/tbl_df/tbl/data.frame)
+#> clia [1 × 22] (S3: clia/tbl_df/tbl/data.frame)
 #>  $ fac_name  : chr "LEXINGTON MEDICAL CENTER-LABORATORY"
 #>  $ fac_ccn   : chr "42D0665325"
 #>  $ clia_ccn  : chr "420073"
-#>  $ xrf_ccn   : chr NA
-#>  $ shr_ccn   : chr NA
 #>  $ chows     : int 0
+#>  $ labs      : int 1
+#>  $ sites     : int 0
 #>  $ address   : chr "2720 SUNSET BOULEVARD"
 #>  $ city      : chr "WEST COLUMBIA"
 #>  $ state     : chr "SC"
 #>  $ zip       : chr "29169"
 #>  $ term      : chr "Active"
-#>  $ cert      : chr "Accreditation"
-#>  $ facility  : chr "Hospital"
+#>  $ cert_type : chr "3"
+#>  $ fac_type  : chr "14"
 #>  $ owner     : chr "[GOE] County"
 #>  $ action    : chr NA
 #>  $ cert_date : Date[1:1], format: "1993-01-13"
 #>  $ eff_date  : Date[1:1], format: "2025-01-03"
 #>  $ term_date : Date[1:1], format: "2027-01-02"
-#>  $ labs      : int 1
-#>  $ sites     : int 0
 #>  $ elig_ind  : chr "N"
 #>  $ poc_ind   : chr "N"
-#>  $ cmp_ind   : chr NA
 #>  $ multi_site: chr NA
 #>  $ acr_org   : chr "CAP, COLA, JCAHO"
+
+clia(multi_site = c("temp", "campus")) |> str()
+#> ✔ clia returned 110 results.
+#> clia [110 × 22] (S3: clia/tbl_df/tbl/data.frame)
+#>  $ fac_name  : chr [1:110] "UAB UNIVERSITY OF ALABAMA HOSPITAL LAB" "BBAHC KANAKANAK HOSPITAL" "ST JOSEPH'S HOSPITAL & MEDICAL CENTER" "UAMS DEPT OF LABORATORY SCIENCES" ...
+#>  $ fac_ccn   : chr [1:110] "01D0678593" "02D0706717" "03D0526691" "04D2160128" ...
+#>  $ clia_ccn  : chr [1:110] NA "020021" "A20000010" NA ...
+#>  $ chows     : int [1:110] 0 0 0 0 0 0 0 0 0 0 ...
+#>  $ labs      : int [1:110] 0 0 1 0 0 1 0 1 1 2 ...
+#>  $ sites     : int [1:110] 5 7 3 2 2 3 6 2 3 4 ...
+#>  $ address   : chr [1:110] "619 19TH STREET SOUTH  SW S257" "6000 KANAKANAK ROAD" "350 W THOMAS RD 2ND FLOOR" "300 HOOPER DRIVE BUILDING 5, ROOM G15" ...
+#>  $ city      : chr [1:110] "BIRMINGHAM" "DILLINGHAM" "PHOENIX" "LITTLE ROCK" ...
+#>  $ state     : chr [1:110] "AL" "AK" "AZ" "AR" ...
+#>  $ zip       : chr [1:110] "35249" "99576" "85013" "72205" ...
+#>  $ term      : chr [1:110] "Active" "Active" "Active" "Active" ...
+#>  $ cert_type : chr [1:110] "3" "2" "3" "2" ...
+#>  $ fac_type  : chr [1:110] "14" "03" "14" "10" ...
+#>  $ owner     : chr [1:110] "[GOE] State" "[GOE] Federal" "RNHCI" "[GOE] State" ...
+#>  $ action    : chr [1:110] NA NA "Validate" NA ...
+#>  $ cert_date : Date[1:110], format: "1993-01-15" "1992-12-23" ...
+#>  $ eff_date  : Date[1:110], format: "2025-02-28" "2024-07-22" ...
+#>  $ term_date : Date[1:110], format: "2027-02-27" "2026-07-21" ...
+#>  $ elig_ind  : chr [1:110] "N" "N" "Y" "N" ...
+#>  $ poc_ind   : chr [1:110] "N" "N" "N" "N" ...
+#>  $ multi_site: chr [1:110] "Applied, Hospital Campus, Temporary" "Applied, Hospital Campus, Non-profit, Temporary" "Applied, Hospital Campus, Temporary" "Applied, Hospital Campus, Non-profit, Temporary" ...
+#>  $ acr_org   : chr [1:110] "CAP" NA "CAP" NA ...
 ```
