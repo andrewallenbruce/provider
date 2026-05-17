@@ -7,12 +7,7 @@ collapse_rows <- function(x, key, var) {
 }
 
 #' @noRd
-count_zero <- function(x) {
-  sum2(cheapr::counts(x)$count > 1L) == 0L
-}
-
-#' @noRd
-pivot2 <- function(x, rex, id, var, val) {
+pivot2 <- function(x, rex, id, var, val = "ind") {
   collapse::gvr(x, rex) |>
     collapse::pivot(
       ids = id,
@@ -24,23 +19,24 @@ pivot2 <- function(x, rex, id, var, val) {
 }
 
 #' @noRd
+rep_NA <- function(x) {
+  cheapr::rep_(NA_character_, collapse::fnrow(x))
+}
+
+#' @noRd
 pivot_order_refer <- function(x) {
   y <- pivot2(
     x,
     "^npi$|^ptb$|^dme$|^hha$|^pmd$|^hospice$",
     "npi",
-    "order_refer",
-    "ind"
+    "order_refer"
   )
   collapse::settfmv(y, "order_refer", as.character)
   collapse::gvr(x, "^order_refer$|^ptb$|^dme$|^hha$|^pmd$|^hospice$") <- NULL
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      order_refer = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, order_refer = rep_NA(x)))
   }
 
   collapse::recode_char(
@@ -62,25 +58,19 @@ pivot_order_refer <- function(x) {
 
 #' @noRd
 pivot_multi_site <- function(x) {
-  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site", "ind")
+  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site")
 
   collapse::settfmv(y, "multi_site", as.character)
   collapse::gvr(x, "_multi$") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      multi_site = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, multi_site = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      multi_site = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, multi_site = rep_NA(x)))
   }
 
   rc_clia(y, "multi_site")
@@ -94,16 +84,13 @@ pivot_multi_site <- function(x) {
 
 #' @noRd
 pivot_acr_org <- function(x) {
-  y <- pivot2(x, "^fac_ccn$|^acr_", "fac_ccn", "acr_org", "ind")
+  y <- pivot2(x, "^fac_ccn$|^acr_", "fac_ccn", "acr_org")
   collapse::settfmv(y, "acr_org", as.character)
   collapse::gvr(x, "^acr_") <- NULL
   y <- collapse::ss(y, j = 1:2)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      acr_org = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, acr_org = rep_NA(x)))
   }
 
   rc_clia(y, "acr_org")
@@ -117,24 +104,18 @@ pivot_acr_org <- function(x) {
 
 #' @noRd
 pivot_owner <- function(x) {
-  y <- pivot2(x, "^pac$|_ind$|_otxt$", c("pac", "own_otxt"), "own_type", "ind")
+  y <- pivot2(x, "^pac$|_ind$|_otxt$", c("pac", "own_otxt"), "own_type")
   collapse::settfmv(y, "own_type", as.character)
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      own_type = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, own_type = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      own_type = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, own_type = rep_NA(x)))
   }
 
   rc_own_type(y, "own_type")
@@ -151,24 +132,18 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- pivot2(x, "^enid$|sub_", c("enid", "sub_otxt"), "sub_group", "ind")
+  y <- pivot2(x, "^enid$|sub_", c("enid", "sub_otxt"), "sub_group")
   collapse::settfmv(y, "sub_group", as.character)
   collapse::gvr(x, "sub_") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      sub_group = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, sub_group = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      sub_group = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, sub_group = rep_NA(x)))
   }
 
   rc_subgroup(y, "sub_group")
@@ -198,10 +173,7 @@ pivot_compliance <- function(x) {
   collapse::gvr(x, "_ind$") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      compliance = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, compliance = rep_NA(x)))
   }
 
   COMP <- collapse::ss(y, y$compliance %==% "cmp_ind")
@@ -209,10 +181,7 @@ pivot_compliance <- function(x) {
   if (collapse::fnrow(COMP) == 0L) {
     y <- collapse::ss(y, y$ind %==% 1L, 1:2)
     if (collapse::fnrow(y) == 0L) {
-      return(collapse::av(
-        x,
-        compliance = rep.int(NA_character_, collapse::fnrow(x))
-      ))
+      return(collapse::av(x, compliance = rep_NA(x)))
     }
     collapse::recode_char(
       y$compliance,
@@ -222,7 +191,7 @@ pivot_compliance <- function(x) {
       set = TRUE
     )
 
-    if (count_zero(y$fac_ccn)) {
+    if (!collapse::any_duplicated(y$fac_ccn)) {
       return(join2(x, y, on = "fac_ccn"))
     }
 
@@ -251,13 +220,10 @@ pivot_compliance <- function(x) {
   y <- cheapr::row_c(COMP, y)
 
   if (collapse::fnrow(y) == 0L) {
-    return(collapse::av(
-      x,
-      compliance = rep.int(NA_character_, collapse::fnrow(x))
-    ))
+    return(collapse::av(x, compliance = rep_NA(x)))
   }
 
-  if (count_zero(y$fac_ccn)) {
+  if (!collapse::any_duplicated(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
