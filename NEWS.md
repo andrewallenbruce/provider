@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9173 (2026-05-16)
+
+* more `clia()` tinkering
+
+
 # provider 0.0.1.9172 (2026-05-15)
 
 * fixed bug in `rc_address`
