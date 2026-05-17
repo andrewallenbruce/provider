@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9178 (2026-05-17)
+
+* pivot tinkering
+
+
 # provider 0.0.1.9177 (2026-05-17)
 
 * added modifier tests
