@@ -1,9 +1,9 @@
 #' @noRd
-convert_bool <- function(x = NULL) {
+tag_bool <- function(x = NULL) {
   if (is.null(x)) {
     return(NULL)
   }
-  cheapr::val_match(x, TRUE ~ "Y", FALSE ~ "N")
+  if (x) "Y" else "N"
 }
 
 #' @noRd

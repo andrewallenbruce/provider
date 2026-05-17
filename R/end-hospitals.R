@@ -106,7 +106,7 @@ hospitals <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
     `PROVIDER TYPE CODE` = tag_enum(prov_type),
@@ -189,7 +189,7 @@ subgroups <- function(
       `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
       `SUBGROUP %2D OTHER` = other
     ),
-    convert_bool
+    tag_bool
   )
   structure(params(!!!x), class = "subgroups")
 }

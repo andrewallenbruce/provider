@@ -16,7 +16,6 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    arcgislayers (>= 0.6.0),
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),
     collapse (>= 2.1.6),
@@ -26,15 +25,16 @@ Imports:
     RcppSimdJson (>= 0.1.15),
     rlang (>= 1.2.0),
     S7 (>= 0.2.2),
-    stringr (>= 1.6.0),
+    stringr,
     vctrs (>= 0.7.3)
 Suggests: 
     knitr,
+    arcgislayers (>= 0.6.0),
     testthat (>= 3.3.2),
     tibble (>= 3.3.1)
 VignetteBuilder: 
     knitr
-Config/Needs/website: gt, tibble
+Config/Needs/website: tibble
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true

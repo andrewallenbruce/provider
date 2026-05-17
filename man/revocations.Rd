@@ -54,14 +54,66 @@ A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Information on providers and suppliers currently revoked from the Medicare program.
-\subsection{Details}{
-
+}
+\details{
 The Revoked Medicare Providers and Suppliers dataset contains information on
 providers and suppliers who are revoked and under a current re-enrollment bar.
 This dataset includes provider and supplier names, NPIs, revocation
 authorities pursuant to \href{https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535}{42 CFR § 424.535}, revocation effective dates, and
 re-enrollment bar expiration dates. This dataset is based on information
 gathered from the \emph{Provider Enrollment, Chain and Ownership System (PECOS)}.
+\subsection{Reasons}{
+\itemize{
+\item § 424.535 \emph{Revocation of enrollment in the Medicare program.}
+\enumerate{
+\item Noncompliance
+\itemize{
+\item Business Location Not Properly Licensed
+\item Enrollment Requirements
+\item Not Professionally Licensed
+\item Provider/Supplier Type Requirements Not Met
+\itemize{
+\item DME Standards Not Met
+\item IDTF Standards Not Met
+}
+}
+\item Provider Or Supplier Conduct
+\itemize{
+\item Exclusion
+\item Other
+}
+\item Felonies
+\item False Or Misleading Information
+\item On-Site Review
+\item Grounds related to provider and supplier screening requirements
+\item Misuse of billing number
+\item Abuse Of Billing Privileges
+\itemize{
+\item Pattern Or Practice
+}
+\item Failure To Report
+\item Failure To Document
+\item Initial reserve operating funds
+\item Other Program Termination
+- Medicaid
+- Other Federal Health Care Program
+\item Prescribing Authority
+\item Improper Prescribing Practices
+\item False Claims Act (FCA)
+\item \emph{Reserved}
+\item Debt Referred To Treasury
+\item Revoked Under Different Name, Numerical Identifier Or Business Identity
+\item Affiliation That Poses An Undue Risk
+\item Billing from non-compliant location
+\item Abusive ordering, certifying, referring, or prescribing of Part A or B services, items or drugs
+\item Patient Harm
+\item Violation Of Provider And Supplier Standards
+}
+}
+
+Source: \href{https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535}{Code of Federal Regulations}
+
+(a) Reasons for revocation.  CMS may revoke a currently enrolled provide
 }
 }
 \examples{

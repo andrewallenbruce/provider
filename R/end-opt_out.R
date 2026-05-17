@@ -74,7 +74,7 @@ opt_out <- function(
     `City Name` = city,
     `State Code` = state,
     `Zip code` = zip,
-    `Eligible to Order and Refer` = convert_bool(order_refer)
+    `Eligible to Order and Refer` = tag_bool(order_refer)
   )
 
   x <- execute(x)

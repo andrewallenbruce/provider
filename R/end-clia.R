@@ -103,8 +103,8 @@ clia <- function(
     ZIP_CD = zip,
     CHOW_CNT = chows,
     PGM_TRMNTN_CD = tag_active(active),
-    ELGBLTY_SW = convert_bool(eligible),
-    ACPTBL_POC_SW = convert_bool(poc),
+    ELGBLTY_SW = tag_bool(eligible),
+    ACPTBL_POC_SW = tag_bool(poc),
     !!!tag_acr_org(acr_org),
     !!!tag_multi_site(multi_site)
   )

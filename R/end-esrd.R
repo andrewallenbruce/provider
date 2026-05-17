@@ -49,7 +49,7 @@ esrd <- function(
     cms_certification_number_ccn = fac_ccn,
     facility_name = fac_name,
     chain_organization = org_name,
-    five_star = convert_rating(rating),
+    five_star = tag_rating(rating),
     network = network,
     profit_or_nonprofit = status,
     address_line_1 = address,
@@ -65,7 +65,7 @@ esrd <- function(
 }
 
 #' @noRd
-convert_rating <- function(x = NULL, call = caller_env()) {
+tag_rating <- function(x = NULL, call = caller_env()) {
   if (is.null(x)) {
     return(NULL)
   }

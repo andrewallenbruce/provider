@@ -1,14 +1,6 @@
 #' @noRd
-collapse_rows <- function(x, key, var) {
-  collapse::rsplit(x[[var]], x[[key]]) |>
-    purrr::map(\(x) paste0(x, collapse = ", ")) |>
-    collapse::unlist2d() |>
-    rlang::set_names(c(key, var))
-}
-
-#' @noRd
 pivot2 <- function(x, rex, id, var, val = "ind") {
-  collapse::gvr(x, rex) |>
+  x <- collapse::gvr(x, rex) |>
     collapse::pivot(
       ids = id,
       names = list(variable = var, value = val),
@@ -16,11 +8,23 @@ pivot2 <- function(x, rex, id, var, val = "ind") {
     ) |>
     collapse::funique() |>
     collapse::roworderv(id[1])
+
+  collapse::settfmv(x, var, as.character)
+
+  return(x)
 }
 
 #' @noRd
 rep_NA <- function(x) {
   cheapr::rep_(NA_character_, collapse::fnrow(x))
+}
+
+#' @noRd
+collapse_rows <- function(x, key, var) {
+  collapse::rsplit(x[[var]], x[[key]]) |>
+    purrr::map(\(x) paste0(x, collapse = ", ")) |>
+    collapse::unlist2d() |>
+    rlang::set_names(c(key, var))
 }
 
 #' @noRd
@@ -31,8 +35,11 @@ pivot_order_refer <- function(x) {
     "npi",
     "order_refer"
   )
-  collapse::settfmv(y, "order_refer", as.character)
-  collapse::gvr(x, "^order_refer$|^ptb$|^dme$|^hha$|^pmd$|^hospice$") <- NULL
+
+  cols <- c("order_refer", "ptb", "dme", "hha", "pmd", "hospice")
+
+  collapse::gv(x, cols) <- NULL
+
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (collapse::fnrow(y) == 0L) {
@@ -60,7 +67,6 @@ pivot_order_refer <- function(x) {
 pivot_multi_site <- function(x) {
   y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site")
 
-  collapse::settfmv(y, "multi_site", as.character)
   collapse::gvr(x, "_multi$") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
@@ -85,8 +91,9 @@ pivot_multi_site <- function(x) {
 #' @noRd
 pivot_acr_org <- function(x) {
   y <- pivot2(x, "^fac_ccn$|^acr_", "fac_ccn", "acr_org")
-  collapse::settfmv(y, "acr_org", as.character)
+
   collapse::gvr(x, "^acr_") <- NULL
+
   y <- collapse::ss(y, j = 1:2)
 
   if (collapse::fnrow(y) == 0L) {
@@ -105,7 +112,7 @@ pivot_acr_org <- function(x) {
 #' @noRd
 pivot_owner <- function(x) {
   y <- pivot2(x, "^pac$|_ind$|_otxt$", c("pac", "own_otxt"), "own_type")
-  collapse::settfmv(y, "own_type", as.character)
+
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
   if (collapse::fnrow(y) == 0L) {
@@ -133,7 +140,7 @@ pivot_owner <- function(x) {
 #' @noRd
 pivot_subgroup <- function(x) {
   y <- pivot2(x, "^enid$|sub_", c("enid", "sub_otxt"), "sub_group")
-  collapse::settfmv(y, "sub_group", as.character)
+
   collapse::gvr(x, "sub_") <- NULL
 
   if (collapse::fnrow(y) == 0L) {

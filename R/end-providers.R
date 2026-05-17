@@ -55,7 +55,7 @@ providers <- function(
     count = count,
     set = set,
     NPI = npi,
-    MULTIPLE_NPI_FLAG = convert_bool(multi),
+    MULTIPLE_NPI_FLAG = tag_bool(multi),
     PECOS_ASCT_CNTL_ID = pac,
     ENRLMT_ID = enid,
     PROVIDER_TYPE_CD = prov_type,

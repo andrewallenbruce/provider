@@ -80,7 +80,7 @@ fqhc_enroll <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
@@ -124,7 +124,7 @@ hha_enroll <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
@@ -168,7 +168,7 @@ hospice_enroll <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
@@ -212,7 +212,7 @@ rhc_enroll <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )
@@ -256,7 +256,7 @@ snf_enroll <- function(
     CITY = city,
     STATE = state,
     `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
     PROPRIETARY_NONPROFIT = status,
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
   )

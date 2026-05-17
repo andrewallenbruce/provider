@@ -69,11 +69,11 @@ order_refer <- function(
     NPI = npi,
     FIRST_NAME = first,
     LAST_NAME = last,
-    PARTB = convert_bool(ptb),
-    DME = convert_bool(dme),
-    HHA = convert_bool(hha),
-    PMD = convert_bool(pmd),
-    HOSPICE = convert_bool(hospice)
+    PARTB = tag_bool(ptb),
+    DME = tag_bool(dme),
+    HHA = tag_bool(hha),
+    PMD = tag_bool(pmd),
+    HOSPICE = tag_bool(hospice)
   )
 
   x <- execute(x)
