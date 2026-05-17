@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9176 (2026-05-17)
+
+* simplified pivot methods
+
+
 # provider 0.0.1.9175 (2026-05-17)
 
 * added `hha_enroll()` & `hha_owner()`
