@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9180 (2026-05-17)
+
+* converted `polish` generic to S7
+
+
 # provider 0.0.1.9179 (2026-05-17)
 
 * rebuilt README
