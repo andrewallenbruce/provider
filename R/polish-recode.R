@@ -50,7 +50,7 @@ rc_own_type <- function(x, column) {
 rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
   switch(
     column,
-    action = collapse::recode_char(
+    CRTFCTN_ACTN_TYPE_CD = collapse::recode_char(
       x[[column]],
       "1" = "Initial",
       "2" = "Recertify",
@@ -73,7 +73,7 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
       default = NA_character_,
       set = TRUE
     ),
-    cert_type = collapse::recode_char(
+    CRTFCT_TYPE_CD = collapse::recode_char(
       x[[column]],
       "1" = "Compliance",
       "2" = "Waiver",
@@ -83,7 +83,7 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
       default = NA_character_,
       set = TRUE
     ),
-    fac_type = collapse::recode_char(
+    GNRL_FAC_TYPE_CD = collapse::recode_char(
       x[[column]],
       "01" = "Ambulance",
       "02" = "ASC",
@@ -117,7 +117,7 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
       default = NA_character_,
       set = TRUE
     ),
-    owner = collapse::recode_char(
+    GNRL_CNTL_TYPE_CD = collapse::recode_char(
       x[[column]],
       "01" = "RNHCI",
       "02" = "Private",
@@ -142,7 +142,7 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
       default = NA_character_,
       set = TRUE
     ),
-    term = collapse::recode_char(
+    CLIA_TRMNTN_CD = collapse::recode_char(
       x[[column]],
       "00" = "Active",
       "01" = "Voluntary [Merger/Closure]",

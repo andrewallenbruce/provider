@@ -1,4 +1,9 @@
 #' @noRd
+column_rex <- function(x) {
+  paste0(paste0("^", unlist_(x), "$"), collapse = "|")
+}
+
+#' @noRd
 pivot2 <- function(x, rex, id, var, val = "ind") {
   x <- collapse::gvr(x, rex) |>
     collapse::pivot(

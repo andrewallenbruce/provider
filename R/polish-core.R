@@ -1,12 +1,6 @@
 #' @noRd
 add_class <- function(x, endpoint) {
   `class<-`(cheapr::as_df(x), c(endpoint, "tbl_df", "tbl", "data.frame"))
-  # structure(x, class = c(endpoint, "tbl_df", "tbl", "data.frame"))
-}
-
-#' @noRd
-column_rex <- function(x) {
-  paste0(paste0("^", unlist_(x), "$"), collapse = "|")
 }
 
 #' @noRd
@@ -25,6 +19,7 @@ rename_with <- function(x, endpoint) {
     )
   )
 
+  x <- rc_trim(x)
   replace_nz(x)
 
   collapse::gv(x, unlist_(NM))
@@ -39,6 +34,13 @@ set_replace_nz <- function(x) {
 replace_nz <- function(x) {
   collapse::settfmv(x, is.character, set_replace_nz)
 }
+
+#' @noRd
+rc_trim <- function(x) {
+  purrr::modify_if(x, is.character, trimws)
+  # collapse::settfmv(x, is.character, trimws, apply = TRUE)
+}
+
 
 #' @noRd
 recoder <- function(.f) {

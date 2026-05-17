@@ -1,46 +1,45 @@
-#' Polish generic
-#'
-#' Defines data cleaning methods for results
-#'
-#' @param x data.frame
-#'
-#' @returns data.frame
-#'
-#' @export
-#'
-#' @keywords internal
-polish <- function(x) {
-  UseMethod("polish")
+#' @noRd
+polish <- S7::new_generic("polish", "x")
+
+#' @noRd
+S7::method(polish, S7::class_integer) <- function(x) {
+  invisible(x)
 }
 
-#' @export
-polish.affiliations <- function(x) {
+#' @noRd
+S7::method(polish, S7::class_data.frame) <- function(x) {
+  cli::cli_alert_warning("Using default {.cls polish} method")
+  replace_nz(x) |>
+    as_data_frame()
+}
+
+#' @noRd
+S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
   rename_with(x, "affiliations") |>
     rc_integer("npi")
 }
 
-#' @export
-polish.clia <- function(x) {
-  x <- rename_with(x, "clia") |>
+#' @noRd
+S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
+  rc_clia(x, "CLIA_TRMNTN_CD")
+  rc_clia(x, "CRTFCT_TYPE_CD")
+  rc_clia(x, "GNRL_FAC_TYPE_CD")
+  rc_clia(x, "GNRL_CNTL_TYPE_CD")
+  rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
+
+  rename_with(x, "clia") |>
     # rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_bin(collapse::gvr(x, "_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
-    rc_address(add1 = "fac_name", add2 = "fac_2")
-
-  rc_clia(x, "term")
-  rc_clia(x, "cert_type")
-  rc_clia(x, "owner")
-  rc_clia(x, "fac_type")
-  rc_clia(x, "action")
-
-  pivot_multi_site(x) |>
+    rc_address(add1 = "fac_name", add2 = "fac_2") |>
+    pivot_multi_site() |>
     pivot_acr_org()
 }
 
-#' @export
-polish.clinicians <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
   rename_with(x, "clinicians") |>
     rc_address() |>
     rc_address(add1 = "specialty", add2 = "spec_other") |>
@@ -48,15 +47,8 @@ polish.clinicians <- function(x) {
     collapse::roworderv(c("npi"))
 }
 
-#' @export
-polish.default <- function(x) {
-  cli::cli_alert_warning("Using {.cls polish.default} method")
-  replace_nz(x) |>
-    as_data_frame()
-}
-
-#' @export
-polish.esrd <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("esrd")) <- function(x) {
   rename_with(x, "esrd") |>
     rc_integer(c("network", "rating")) |>
     rc_ymd("cert_date") |>
@@ -73,33 +65,33 @@ polish_enroll <- function(x) {
     collapse::roworderv(c("enid"))
 }
 
-#' @export
-polish.fqhc_enroll <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("fqhc_enroll")) <- function(x) {
   rename_with(x, "fqhc_enroll") |>
     polish_enroll()
 }
 
-#' @export
-polish.hha_enroll <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hha_enroll")) <- function(x) {
   rename_with(x, "hha_enroll") |>
     rc_other(stub = "loc") |>
     polish_enroll()
 }
 
-#' @export
-polish.hospice_enroll <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hospice_enroll")) <- function(x) {
   rename_with(x, "hospice_enroll") |>
     polish_enroll()
 }
 
-#' @export
-polish.rhc_enroll <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("rhc_enroll")) <- function(x) {
   rename_with(x, "rhc_enroll") |>
     polish_enroll()
 }
 
-#' @export
-polish.snf_enroll <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("snf_enroll")) <- function(x) {
   rename_with(x, "snf_enroll") |>
     polish_enroll()
 }
@@ -114,44 +106,44 @@ polish_owner <- function(x) {
     collapse::roworderv(c("pac", "org_enid"))
 }
 
-#' @export
-polish.snf_owner <- function(x) {
-  rename_with(x, "snf_owner") |>
-    polish_owner()
-}
-
-#' @export
-polish.rhc_owner <- function(x) {
-  rename_with(x, "rhc_owner") |>
-    polish_owner()
-}
-
-#' @export
-polish.fqhc_owner <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("fqhc_owner")) <- function(x) {
   rename_with(x, "fqhc_owner") |>
     polish_owner()
 }
 
-#' @export
-polish.hha_owner <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hha_owner")) <- function(x) {
   rename_with(x, "hha_owner") |>
     polish_owner()
 }
 
-#' @export
-polish.hospice_owner <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hospice_owner")) <- function(x) {
   rename_with(x, "hospice_owner") |>
     polish_owner()
 }
 
-#' @export
-polish.hospital_owner <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hospital_owner")) <- function(x) {
   rename_with(x, "hospital_owner") |>
     polish_owner()
 }
 
-#' @export
-polish.hospitals <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("rhc_owner")) <- function(x) {
+  rename_with(x, "rhc_owner") |>
+    polish_owner()
+}
+
+#' @noRd
+S7::method(polish, S7::new_S3_class("snf_owner")) <- function(x) {
+  rename_with(x, "snf_owner") |>
+    polish_owner()
+}
+
+#' @noRd
+S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   rename_with(x, "hospitals") |>
     rc_other(stub = "org") |>
     rc_other(stub = "loc") |>
@@ -162,19 +154,14 @@ polish.hospitals <- function(x) {
     pivot_subgroup()
 }
 
-#' @export
-polish.hospitals2 <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
   rename_with(x, "hospitals2") |>
     rc_integer("rating")
 }
 
-#' @export
-polish.integer <- function(x) {
-  invisible(x)
-}
-
-#' @export
-polish.opt_out <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
   rename_with(x, "opt_out") |>
     rc_address() |>
     rc_integer("npi") |>
@@ -182,44 +169,44 @@ polish.opt_out <- function(x) {
     rc_mdy(c("start_date", "end_date", "updated"))
 }
 
-#' @export
-polish.order_refer <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
   rename_with(x, "order_refer") |>
     rc_integer("npi") |>
     rc_bin(c("ptb", "dme", "hha", "pmd", "hospice"))
 }
 
-#' @export
-polish.pending <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
   rename_with(x, "pending") |>
     rc_integer("npi")
 }
 
-#' @export
-polish.providers <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
   rename_with(x, "providers") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     collapse::roworderv(c("pac", "npi"))
 }
 
-#' @export
-polish.reassignments <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
   rename_with(x, "reassignments") |>
     rc_integer(c("npi", "employers", "employees")) |>
     collapse::roworderv(c("npi"))
 }
 
-#' @export
-polish.revocations <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
   rename_with(x, "revocations") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_ymd(c("start_date", "end_date"))
 }
 
-#' @export
-polish.transparency <- function(x) {
+#' @noRd
+S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
   rename_with(x, "transparency") |>
     rc_integer("case") |>
     rc_ymd("action_date") |>
