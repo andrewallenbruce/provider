@@ -1,37 +1,68 @@
-describe("S7 numeric Modifiers", {
+describe("Query Modifiers", {
+  describe("is_blank()", {
+    it("has expected class, value & operator", {
+      x <- is_blank()
+      expect_s7_class(x, Modifier)
+      expect_equal(x@value, "")
+      expect_equal(x@operator, "=")
+    })
+    it("errors with input", expect_error(is_blank("AAA")))
+  })
+
+  describe("not_blank()", {
+    it("has expected class, value & operator", {
+      x <- not_blank()
+      expect_s7_class(x, Modifier)
+      expect_equal(x@value, "")
+      expect_equal(x@operator, "<>")
+    })
+    it("errors with input", expect_error(not_blank("AAA")))
+  })
+
   describe("greater()", {
-    it("has Modifier class", expect_s7_class(greater(500), Modifier))
-    it("has expected value", expect_equal(greater(500)@value, 500))
-    it("has expected operator", expect_equal(greater(500, TRUE)@operator, ">="))
+    it("has expected class, value & operator", {
+      x <- greater(5)
+      expect_s7_class(x, Modifier)
+      expect_equal(x@value, 5)
+      expect_equal(x@operator, ">")
+      expect_equal(greater(5, equal = TRUE)@operator, ">=")
+    })
     it("errors with nested Modifier", expect_error(greater(less(5))))
     it("errors with no input", expect_error(greater()))
-    it("errors with non-bool `equal`", expect_error(greater(5, NULL)))
-    it("errors with non-number", expect_error(greater("5")))
+    it("errors with non-numeric input", expect_error(greater("5")))
+    it(
+      "errors with non-bool `equal` input",
+      expect_error(greater(5, equal = NULL))
+    )
   })
 
   describe("less()", {
-    it("has Modifier class", expect_s7_class(less(500), Modifier))
-    it("has expected value", expect_equal(less(500)@value, 500))
-    it("has expected operator", expect_equal(less(500, TRUE)@operator, "<="))
+    it("has expected class, value & operator", {
+      x <- less(5)
+      expect_s7_class(x, Modifier)
+      expect_equal(x@value, 5)
+      expect_equal(x@operator, "<")
+      expect_equal(less(5, equal = TRUE)@operator, "<=")
+    })
     it("errors with nested Modifier", expect_error(less(greater(5))))
     it("errors with no input", expect_error(less()))
-    it("errors with non-bool `equal`", expect_error(less(5, NULL)))
-    it("errors with non-number", expect_error(less("5")))
+    it("errors with non-numeric input", expect_error(less("5")))
+    it(
+      "errors with non-bool `equal` input",
+      expect_error(less(5, equal = NULL))
+    )
   })
 
   describe("between()", {
-    it("has Modifier class", expect_s7_class(between(500, 1000), Modifier))
-    it(
-      "has expected value",
-      expect_equal(between(500, 1000)@value, c(500, 1000))
-    )
-    it(
-      "has expected operator",
-      expect_equal(between(500, 1000)@operator, "BETWEEN")
-    )
-    it("errors with nested Modifier", expect_error(between(500, greater(500))))
+    it("has expected class, value & operator", {
+      x <- between(5, 10)
+      expect_s7_class(x, Modifier)
+      expect_equal(x@value, c(5, 10))
+      expect_equal(x@operator, "BETWEEN")
+    })
+    it("errors with nested Modifier", expect_error(between(5, greater(10))))
     it("errors with no input", expect_error(between()))
-    it("errors with non-number", expect_error(between(1, "5")))
+    it("errors with non-numeric input", expect_error(between(5, "10")))
     it("errors when `x` >= `y`", {
       expect_error(between(1, 0))
       expect_error(between(1, 1))

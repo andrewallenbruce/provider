@@ -184,37 +184,12 @@ method(execute, API) <- function(x) {
     )
   }
 
-  if (x@count == 0L || x@action == "count") {
+  if (x@pages == 0L || x@action == "count") {
     report_count(x)
     return(x@count)
   }
 
-  if (x@count <= x@limit) {
-    return(request_single(x))
-  }
-  request_multi(x)
-}
-
-#' @noRd
-method(execute, CMSList) <- function(x) {
-  check_online()
-
-  if (empty(x)) {
-    report_total(x)
-
-    switch(
-      x@action,
-      count = return(x@count),
-      set = return(request_multi(x)),
-      return(request_preview(x))
-    )
-  }
-  if (sum2(x@count) == 0L || x@action == "count") {
-    report_count(x)
-    return(x@count)
-  }
-
-  if (all2(x@count <= x@limit)) {
+  if (x@pages == 1L) {
     return(request_single(x))
   }
   request_multi(x)
