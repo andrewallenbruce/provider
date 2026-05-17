@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9175 (2026-05-17)
+
+* added `hha_enroll()` & `hha_owner()`
+* added check in `rc_clia` method
+
+
 # provider 0.0.1.9174 (2026-05-17)
 
 * added checks and tests for numeric modifiers
