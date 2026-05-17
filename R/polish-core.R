@@ -132,7 +132,7 @@ rc_other <- function(x, stub) {
     x,
     main = paste0(stub, "_type"),
     other = paste0(stub, "_otxt"),
-    prefix = "OTHER: ",
+    prefix = "Other: ",
     sep = ""
   )
 }

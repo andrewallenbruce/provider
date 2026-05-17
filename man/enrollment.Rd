@@ -3,12 +3,30 @@
 \name{enrollment}
 \alias{enrollment}
 \alias{fqhc_enroll}
+\alias{hha_enroll}
 \alias{hospice_enroll}
 \alias{rhc_enroll}
 \alias{snf_enroll}
 \title{Facility Enrollment}
 \usage{
 fqhc_enroll(
+  npi = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
+  org_name = NULL,
+  org_dba = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  multi = NULL,
+  status = NULL,
+  org_type = NULL,
+  count = FALSE,
+  set = FALSE
+)
+
+hha_enroll(
   npi = NULL,
   ccn = NULL,
   pac = NULL,
@@ -125,8 +143,11 @@ fqhc_enroll(count = TRUE)
 hospice_enroll(count = TRUE)
 rhc_enroll(count = TRUE)
 snf_enroll(count = TRUE)
+hha_enroll(count = TRUE)
 
 fqhc_enroll(state = c("GA", "FL")) |> str()
+
+hha_enroll(state = c("GA", "FL")) |> str()
 
 hospice_enroll(state = c("GA", "FL")) |> str()
 

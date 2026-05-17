@@ -80,6 +80,13 @@ polish.fqhc_enroll <- function(x) {
 }
 
 #' @export
+polish.hha_enroll <- function(x) {
+  rename_with(x, "hha_enroll") |>
+    rc_other(stub = "loc") |>
+    polish_enroll()
+}
+
+#' @export
 polish.hospice_enroll <- function(x) {
   rename_with(x, "hospice_enroll") |>
     polish_enroll()
@@ -122,6 +129,12 @@ polish.rhc_owner <- function(x) {
 #' @export
 polish.fqhc_owner <- function(x) {
   rename_with(x, "fqhc_owner") |>
+    polish_owner()
+}
+
+#' @export
+polish.hha_owner <- function(x) {
+  rename_with(x, "hha_owner") |>
     polish_owner()
 }
 

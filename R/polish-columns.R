@@ -280,6 +280,11 @@ RE_NAME = list(
     Date_of_Action = "action_date"
   ),
   fqhc_enroll = RE_ENROLL,
+  hha_enroll = c(
+    RE_ENROLL,
+    `PRACTICE LOCATION TYPE` = "loc_type",
+    `LOCATION OTHER TYPE TEXT` = "loc_otxt"
+  ),
   hospice_enroll = RE_ENROLL,
   rhc_enroll = RE_ENROLL,
   snf_enroll = c(
@@ -288,6 +293,7 @@ RE_NAME = list(
     `AFFILIATION ENTITY NAME` = "aff_name"
   ),
   fqhc_owner = RE_OWNER2,
+  hha_owner = RE_OWNER2,
   hospice_owner = RE_OWNER2,
   rhc_owner = RE_OWNER2,
   hospital_owner = RE_OWNER,

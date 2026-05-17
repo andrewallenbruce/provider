@@ -3,6 +3,7 @@
 \name{owners}
 \alias{owners}
 \alias{fqhc_owner}
+\alias{hha_owner}
 \alias{hospital_owner}
 \alias{hospice_owner}
 \alias{rhc_owner}
@@ -10,6 +11,28 @@
 \title{Facility Owners}
 \usage{
 fqhc_owner(
+  org_enid = NULL,
+  org_pac = NULL,
+  org_name = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  count = FALSE,
+  set = FALSE
+)
+
+hha_owner(
   org_enid = NULL,
   org_pac = NULL,
   org_name = NULL,
@@ -161,6 +184,7 @@ hospital_owner(count = TRUE)
 hospice_owner(count = TRUE)
 rhc_owner(count = TRUE)
 snf_owner(count = TRUE)
+hha_owner(count = TRUE)
 
 fqhc_owner(state = c("GA", "FL")) |> str()
 
@@ -171,5 +195,7 @@ hospice_owner(state = c("GA", "FL")) |> str()
 rhc_owner(state = c("GA", "FL")) |> str()
 
 snf_owner(state = c("GA", "FL")) |> str()
+
+hha_owner(state = c("GA", "FL")) |> str()
 \dontshow{\}) # examplesIf}
 }

@@ -47,7 +47,7 @@ rc_own_type <- function(x, column) {
 }
 
 #' @noRd
-rc_clia <- function(x, column) {
+rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
   switch(
     column,
     action = collapse::recode_char(
@@ -73,7 +73,7 @@ rc_clia <- function(x, column) {
       default = NA_character_,
       set = TRUE
     ),
-    cert = collapse::recode_char(
+    cert_type = collapse::recode_char(
       x[[column]],
       "1" = "Compliance",
       "2" = "Waiver",
@@ -83,7 +83,7 @@ rc_clia <- function(x, column) {
       default = NA_character_,
       set = TRUE
     ),
-    facility = collapse::recode_char(
+    fac_type = collapse::recode_char(
       x[[column]],
       "01" = "Ambulance",
       "02" = "ASC",
@@ -168,6 +168,11 @@ rc_clia <- function(x, column) {
       "99" = "OIG Action (CLIA)",
       default = NA_character_,
       set = TRUE
+    ),
+    cli::cli_abort(
+      "{.val {arg}} is not a column in {.var x}",
+      arg = arg,
+      call = call
     )
   )
 }

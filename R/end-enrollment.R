@@ -33,8 +33,11 @@
 #' hospice_enroll(count = TRUE)
 #' rhc_enroll(count = TRUE)
 #' snf_enroll(count = TRUE)
+#' hha_enroll(count = TRUE)
 #'
 #' fqhc_enroll(state = c("GA", "FL")) |> str()
+#'
+#' hha_enroll(state = c("GA", "FL")) |> str()
 #'
 #' hospice_enroll(state = c("GA", "FL")) |> str()
 #'
@@ -46,6 +49,50 @@ NULL
 #' @rdname enrollment
 #' @export
 fqhc_enroll <- function(
+  npi = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
+  org_name = NULL,
+  org_dba = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  multi = NULL,
+  status = NULL,
+  org_type = NULL,
+  count = FALSE,
+  set = FALSE
+) {
+  check_bool_(multi)
+  check_char_(status)
+  check_char_(org_type)
+
+  x <- cms(
+    count = count,
+    set = set,
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = convert_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' @rdname enrollment
+#' @export
+hha_enroll <- function(
   npi = NULL,
   ccn = NULL,
   pac = NULL,

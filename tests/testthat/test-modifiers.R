@@ -32,7 +32,14 @@ describe("S7 numeric Modifiers", {
     it("errors with nested Modifier", expect_error(between(500, greater(500))))
     it("errors with no input", expect_error(between()))
     it("errors with non-number", expect_error(between(1, "5")))
-    it("errors when `x` is greater than `y`", expect_error(between(1, 0)))
-    it("errors with two zeroes", expect_error(between(0, 0)))
+    it("errors when `x` >= `y`", {
+      expect_error(between(1, 0))
+      expect_error(between(1, 1))
+      expect_error(between(0, 0))
+    })
+    it("errors with vector input", {
+      expect_error(between(c(1, 5), 0))
+      expect_error(between(0, c(1, 5)))
+    })
   })
 })

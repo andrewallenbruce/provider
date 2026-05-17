@@ -94,26 +94,24 @@ not <- function(x) {
   )
 }
 
-#' @noRd
-equals <- function(x) {
-  check_atomic(x)
+#' @rdname modifier
+#' @export
+not_blank <- function() {
   Modifier(
-    "equals",
-    operator = "=",
-    value = x
+    "not_blank",
+    operator = "<>",
+    value = ""
   )
 }
 
 #' @rdname modifier
 #' @export
-not_blank <- function() {
-  not("")
-}
-
-#' @rdname modifier
-#' @export
 is_blank <- function() {
-  equals("")
+  Modifier(
+    "is_blank",
+    operator = "=",
+    value = ""
+  )
 }
 
 #' @rdname modifier
@@ -123,7 +121,7 @@ greater <- function(x, equal = FALSE) {
   check_bool(equal)
   Modifier(
     "greater",
-    operator = ifelse(!equal, ">", ">="),
+    operator = ifelse(equal, ">=", ">"),
     value = x
   )
 }
@@ -135,7 +133,7 @@ less <- function(x, equal = FALSE) {
   check_bool(equal)
   Modifier(
     "less",
-    operator = ifelse(!equal, "<", "<="),
+    operator = ifelse(equal, "<=", "<"),
     value = x
   )
 }
@@ -144,14 +142,12 @@ less <- function(x, equal = FALSE) {
 #' @export
 between <- function(x, y) {
   check_number_decimal(x, min = 0, allow_infinite = FALSE)
-  check_number_decimal(
-    y,
-    min = .Machine[["double.eps"]],
-    allow_infinite = FALSE
-  )
-  # if (x >= y) {
-  #   cli::cli_abort("{.var x} must be less than {.var y}")
-  # }
+  check_number_decimal(y, allow_infinite = FALSE)
+
+  if (x >= y) {
+    cli::cli_abort("{.var x} must be less than {.var y}")
+  }
+
   Modifier(
     "between",
     operator = "BETWEEN",

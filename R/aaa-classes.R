@@ -2,6 +2,7 @@
 Modifier <- new_class(
   "Modifier",
   class_character,
+  package = NULL,
   properties = list(
     operator = class_character,
     value = class_atomic
