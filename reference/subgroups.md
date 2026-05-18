@@ -83,10 +83,10 @@ A `<subgroups>` object
 ## Examples
 
 ``` r
-subgroups(acute = TRUE, rehab = TRUE)
+subgroups(acute = TRUE, rehab = FALSE)
 #> <subgroups[2]>
 #> • SUBGROUP %2D ACUTE CARE     : Y
-#> • SUBGROUP %2D REHABILITATION : Y
+#> • SUBGROUP %2D REHABILITATION : N
 
 subgroups()
 #> <subgroups[0]>

@@ -101,8 +101,6 @@ hospitals2(
 
   - `N` = Non-Profit
 
-  - `D` = Unknown
-
 - org_type:
 
   `<enum>` Organization structure type
@@ -224,7 +222,6 @@ hospitals(count = TRUE)
 #> • Rows  : 9,182
 #> • Pages : 2    
 #> 
-
 hospitals2(count = TRUE)
 #> hospitals2 Totals
 #> • Rows  : 5,432
@@ -244,7 +241,7 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x |> str()
-#> hospitls [2 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+#> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "UHS OF ANCHOR L.P." "UHS OF PEACHFORD, L.P."
 #>  $ org_dba  : chr [1:2] "ANCHOR HOSPITAL" "PEACHFORD BEHAVIORAL HEALTH SYSTEM OF ATLANTA"
 #>  $ enid     : chr [1:2] "O20100521000547" "O20100803001043"
@@ -254,13 +251,14 @@ x |> str()
 #>  $ pac      : chr [1:2] "4486684784" "9234123894"
 #>  $ inc_date : Date[1:2], format: "2000-06-02" "2000-06-02"
 #>  $ org_type : chr [1:2] "PARTNERSHIP" "PARTNERSHIP"
-#>  $ status   : chr [1:2] "P" "P"
+#>  $ status   : chr [1:2] "For-Profit" "For-Profit"
 #>  $ address  : chr [1:2] "5454 YORKTOWNE DRIVE, ANCHOR HOSPITAL" "2151 PEACHFORD ROAD"
 #>  $ city     : chr [1:2] "ATLANTA" "ATLANTA"
 #>  $ state    : chr [1:2] "GA" "GA"
 #>  $ zip      : chr [1:2] "303495317" "303386534"
-#>  $ loc_type : chr [1:2] "OTHER HOSPITAL PRACTICE LOCATION" "OTHER HOSPITAL PRACTICE LOCATION"
+#>  $ loc_type : chr [1:2] "Other" "Other"
 #>  $ reh_date : Date[1:2], format: NA NA
+#>  $ prov_type: chr [1:2] NA NA
 #>  $ sub_group: chr [1:2] "Psych" "Psych, Psych Unit"
 
 hospitals2(ccn = x$ccn)
@@ -295,7 +293,7 @@ x
 
 hospitals(ccn = x$ccn) |> str()
 #> ✔ hospitals returned 9 results.
-#> hospitls [9 × 17] (S3: hospitals/tbl_df/tbl/data.frame)
+#> hospitls [9 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:9] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
 #>  $ org_dba  : chr [1:9] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" NA ...
 #>  $ enid     : chr [1:9] "O20080425000450" "O20190513002452" "O20101122000631" "O20080922000250" ...
@@ -305,13 +303,14 @@ hospitals(ccn = x$ccn) |> str()
 #>  $ pac      : chr [1:9] "9436062296" "8527301654" "8123151354" "6507820990" ...
 #>  $ inc_date : Date[1:9], format: "1957-09-01" "2018-08-20" ...
 #>  $ org_type : chr [1:9] "CORPORATION" "Other: HEALTH CARE AUTHORITY" "LLC" "CORPORATION" ...
-#>  $ status   : chr [1:9] "N" "N" "P" "N" ...
+#>  $ status   : chr [1:9] "Non-Profit" "Non-Profit" "For-Profit" "Non-Profit" ...
 #>  $ address  : chr [1:9] "1108 ROSS CLARK CIR" "2505 US HIGHWAY 431" "1701 VETERANS DR" "702N MAIN ST" ...
 #>  $ city     : chr [1:9] "DOTHAN" "BOAZ" "FLORENCE" "OPP" ...
 #>  $ state    : chr [1:9] "AL" "AL" "AL" "AL" ...
 #>  $ zip      : chr [1:9] "363013022" "359575908" "356304928" "364671626" ...
-#>  $ loc_type : chr [1:9] "MAIN/PRIMARY HOSPITAL LOCATION" "OTHER HOSPITAL PRACTICE LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" "MAIN/PRIMARY HOSPITAL LOCATION" ...
+#>  $ loc_type : chr [1:9] "Primary" "Other" "Primary" "Primary" ...
 #>  $ reh_date : Date[1:9], format: NA NA ...
+#>  $ prov_type: chr [1:9] NA NA NA NA ...
 #>  $ sub_group: chr [1:9] "Acute" "Acute, General" "Acute, General" "Acute, Swing-Bed, Psych Unit" ...
 
 hospitals2(state = "GA", rating = 5) |> str()

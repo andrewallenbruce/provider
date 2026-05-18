@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9182 (2026-05-18)
+
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  polish/pivot reworking
+
 ## provider 0.0.1.9181 (2026-05-17)
 
 - refactored `rc_other`
