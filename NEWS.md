@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9182 (2026-05-18)
+
+* `hospitals()` polish/pivot reworking
+
+
 # provider 0.0.1.9181 (2026-05-17)
 
 * refactored `rc_other`
