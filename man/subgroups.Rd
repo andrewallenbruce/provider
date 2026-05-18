@@ -54,7 +54,7 @@ A \verb{<subgroups>} object
 Hospital Subgroups
 }
 \examples{
-subgroups(acute = TRUE, rehab = TRUE)
+subgroups(acute = TRUE, rehab = FALSE)
 
 subgroups()
 

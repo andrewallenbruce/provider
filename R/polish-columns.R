@@ -168,6 +168,8 @@ RE_NAME = list(
     `PRACTICE LOCATION TYPE` = "loc_type",
     `LOCATION OTHER TYPE TEXT` = "loc_otxt",
     `REH CONVERSION DATE` = "reh_date",
+    `PROVIDER TYPE CODE` = "prov_type",
+    `REH CONVERSION FLAG` = "sub_reh",
     `SUBGROUP - ACUTE CARE` = "sub_acute",
     `SUBGROUP - GENERAL` = "sub_gen",
     `SUBGROUP - SPECIALTY HOSPITAL` = "sub_spec",
@@ -181,7 +183,7 @@ RE_NAME = list(
     `SUBGROUP - PSYCHIATRIC UNIT` = "sub_psu",
     `SUBGROUP - REHABILITATION UNIT` = "sub_iru",
     `SUBGROUP - OTHER` = "sub_oth",
-    `SUBGROUP - OTHER TEXT` = "sub_otxt"
+    `SUBGROUP - OTHER TEXT` = "sg_otxt"
   ),
   hospitals2 = list(
     facility_id = "ccn",

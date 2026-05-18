@@ -18,7 +18,6 @@
 #' @param status `<enum>` Organization status
 #'    - `P` = Proprietary
 #'    - `N` = Non-Profit
-#'    - `D` = Unknown
 #' @param org_type `<enum>` Organization structure type
 #'    - `corp` = Corporation
 #'    - `other` = Other
@@ -44,7 +43,6 @@
 #'
 #' @examplesIf httr2::is_online()
 #' hospitals(count = TRUE)
-#'
 #' hospitals2(count = TRUE)
 #'
 #' hospitals(prov_type = "reh", count = TRUE)
@@ -87,6 +85,7 @@ hospitals <- function(
   count = FALSE,
   set = FALSE
 ) {
+  force(subgroup)
   check_subgroups(subgroup)
   check_bool_(multi)
   check_char_(status)
@@ -111,7 +110,7 @@ hospitals <- function(
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
     `PROVIDER TYPE CODE` = tag_enum(prov_type),
     `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
-    !!!subgroup
+    !!!subgroup@x
   )
 
   x <- execute(x)
@@ -138,63 +137,102 @@ hospitals <- function(
 #' @returns A `<subgroups>` object
 #'
 #' @examples
-#' subgroups(acute = TRUE, rehab = TRUE)
+#' subgroups(acute = TRUE, rehab = FALSE)
 #'
 #' subgroups()
 #'
 #' @keywords internal
 #' @export
-subgroups <- function(
-  acute = NULL,
-  drug = NULL,
-  child = NULL,
-  general = NULL,
-  long = NULL,
-  short = NULL,
-  psych = NULL,
-  rehab = NULL,
-  swing = NULL,
-  psych_unit = NULL,
-  rehab_unit = NULL,
-  specialty = NULL,
-  other = NULL
-) {
-  check_bool_(general)
-  check_bool_(acute)
-  check_bool_(drug)
-  check_bool_(child)
-  check_bool_(long)
-  check_bool_(psych)
-  check_bool_(rehab)
-  check_bool_(short)
-  check_bool_(swing)
-  check_bool_(psych_unit)
-  check_bool_(rehab_unit)
-  check_bool_(specialty)
-  check_bool_(other)
+subgroups <- S7::new_class(
+  "subgroups",
+  package = NULL,
+  properties = list(
+    x = S7::class_list
+  ),
+  constructor = function(
+    acute = NULL,
+    drug = NULL,
+    child = NULL,
+    general = NULL,
+    long = NULL,
+    short = NULL,
+    psych = NULL,
+    rehab = NULL,
+    swing = NULL,
+    psych_unit = NULL,
+    rehab_unit = NULL,
+    specialty = NULL,
+    other = NULL
+  ) {
+    check_bool_(general)
+    check_bool_(acute)
+    check_bool_(drug)
+    check_bool_(child)
+    check_bool_(long)
+    check_bool_(psych)
+    check_bool_(rehab)
+    check_bool_(short)
+    check_bool_(swing)
+    check_bool_(psych_unit)
+    check_bool_(rehab_unit)
+    check_bool_(specialty)
+    check_bool_(other)
 
-  x <- purrr::map(
-    list(
-      `SUBGROUP %2D GENERAL` = general,
-      `SUBGROUP %2D ACUTE CARE` = acute,
-      `SUBGROUP %2D ALCOHOL DRUG` = drug,
-      `SUBGROUP %2D CHILDRENS` = child,
-      `SUBGROUP %2D LONG-TERM` = long,
-      `SUBGROUP %2D PSYCHIATRIC` = psych,
-      `SUBGROUP %2D REHABILITATION` = rehab,
-      `SUBGROUP %2D SHORT-TERM` = short,
-      `SUBGROUP %2D SWING-BED APPROVED` = swing,
-      `SUBGROUP %2D PSYCHIATRIC UNIT` = psych_unit,
-      `SUBGROUP %2D REHABILITATION UNIT` = rehab_unit,
-      `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
-      `SUBGROUP %2D OTHER` = other
-    ),
-    tag_bool
-  )
-  structure(params(!!!x), class = "subgroups")
-}
+    x <- purrr::map(
+      list(
+        `SUBGROUP %2D GENERAL` = general,
+        `SUBGROUP %2D ACUTE CARE` = acute,
+        `SUBGROUP %2D ALCOHOL DRUG` = drug,
+        `SUBGROUP %2D CHILDRENS` = child,
+        `SUBGROUP %2D LONG-TERM` = long,
+        `SUBGROUP %2D PSYCHIATRIC` = psych,
+        `SUBGROUP %2D REHABILITATION` = rehab,
+        `SUBGROUP %2D SHORT-TERM` = short,
+        `SUBGROUP %2D SWING-BED APPROVED` = swing,
+        `SUBGROUP %2D PSYCHIATRIC UNIT` = psych_unit,
+        `SUBGROUP %2D REHABILITATION UNIT` = rehab_unit,
+        `SUBGROUP %2D SPECIALTY HOSPITAL` = specialty,
+        `SUBGROUP %2D OTHER` = other
+      ),
+      tag_bool
+    )
+
+    S7::new_object(
+      S7::S7_object(),
+      x = params(!!!x)
+    )
+  }
+)
 
 #' @noRd
 is_subgroups <- function(x) {
-  inherits(x, "subgroups")
+  S7::S7_inherits(x, subgroups)
+}
+
+#' @noRd
+S7::method(print, subgroups) <- function(x, ...) {
+  x <- x@x
+  LEN <- cheapr::unlisted_length(x)
+  cli::cli_text(cli::col_cyan("<subgroups[{LEN}]>"))
+  if (length(x)) {
+    cli::cat_bullet(
+      paste0(
+        cli::col_yellow(left(names(x))),
+        cli::col_silver(" : "),
+        left(mark(unname(x)))
+      ),
+      bullet_col = "silver"
+    )
+  }
+  invisible(x)
+}
+
+#' @noRd
+check_subgroups <- function(x) {
+  if (!is_subgroups(x)) {
+    cli::cli_abort(c(
+      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(x)}}",
+      "i" = "Use the {.fn subgroups} helper function"
+    ))
+  }
 }

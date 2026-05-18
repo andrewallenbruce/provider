@@ -108,16 +108,6 @@ check_atomic <- function(
   )
 }
 
-#' @noRd
-check_subgroups <- function(x) {
-  if (!is_subgroups(x)) {
-    cli::cli_abort(c(
-      "{.arg subgroup} must be a {.cls subgroups} object, not a {.cls {class(x)}}",
-      "i" = "Use the {.fn subgroups} helper function"
-    ))
-  }
-}
-
 # check_modifiers(
 #   param_pdc(
 #     first = "ANDREW",

@@ -1,22 +1,60 @@
 #' @noRd
-rc_subgroup <- function(x, column) {
-  collapse::recode_char(
-    x[[column]],
-    "sub_acute" = "Acute",
-    "sub_gen" = "General",
-    "sub_spec" = "Specialty",
-    "sub_adu" = "ADH",
-    "sub_child" = "Child",
-    "sub_ltc" = "LTC",
-    "sub_psy" = "Psych",
-    "sub_irf" = "IRF",
-    "sub_stc" = "STC",
-    "sub_sba" = "Swing-Bed",
-    "sub_psu" = "Psych Unit",
-    "sub_iru" = "IRF Unit",
-    "sub_oth" = "Other",
-    default = NA_character_,
-    set = TRUE
+rc_hospitals <- function(
+  x,
+  column,
+  arg = caller_arg(column),
+  call = caller_env()
+) {
+  switch(
+    column,
+    sub_type = collapse::recode_char(
+      x[[column]],
+      "sub_acute" = "Acute",
+      "sub_gen" = "General",
+      "sub_spec" = "Specialty",
+      "sub_adu" = "ADH",
+      "sub_child" = "Child",
+      "sub_ltc" = "LTC",
+      "sub_psy" = "Psych",
+      "sub_irf" = "IRF",
+      "sub_stc" = "STC",
+      "sub_sba" = "Swing-Bed",
+      "sub_psu" = "Psych Unit",
+      "sub_iru" = "IRF Unit",
+      "sub_oth" = "Other",
+      default = NA_character_,
+      set = TRUE
+    ),
+    `PROVIDER TYPE CODE` = collapse::recode_char(
+      x[[column]],
+      "00-24" = "REH",
+      "00-85" = "CAH",
+      default = NA_character_,
+      set = TRUE
+    ),
+    `PROPRIETARY NONPROFIT` = collapse::recode_char(
+      x[[column]],
+      "P" = "For-Profit",
+      "N" = "Non-Profit",
+      default = NA_character_,
+      set = TRUE
+    ),
+    `PRACTICE LOCATION TYPE` = collapse::recode_char(
+      x[[column]],
+      "MAIN/PRIMARY HOSPITAL LOCATION" = "Primary",
+      "HOSPITAL PSYCHIATRIC UNIT" = "Psych",
+      "HOSPITAL REHABILITATION UNIT" = "Rehab",
+      "HOSPITAL SWING-BED UNIT" = "Swing-Bed",
+      "OPT EXTENSION SITE" = "Extension",
+      "OTHER HOSPITAL PRACTICE LOCATION" = "Other",
+      default = NA_character_,
+      set = TRUE
+    ),
+    cli::cli_abort(
+      "{.val {arg}} is not a column in {.var x}",
+      arg = arg,
+      call = call
+    )
   )
 }
 

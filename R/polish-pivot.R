@@ -154,100 +154,30 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- pivot2(x, "^enid$|sub_", c("enid", "sub_otxt"), "sub_group")
+  y <- pivot2(x, "^enid$|^sub_|^sg_", c("enid", "sg_otxt"), "sub_type") |>
+    collapse::rnm("sg_otxt" = "sub_otxt", .nse = FALSE)
 
-  collapse::gvr(x, "sub_") <- NULL
-
-  if (nrow0(y)) {
-    return(collapse::av(x, sub_group = rep_NA(x)))
-  }
-
-  y <- collapse::ss(y, y$ind %==% 1L, 1:3)
+  collapse::gvr(x, "^sub_|^sg_") <- NULL
 
   if (nrow0(y)) {
     return(collapse::av(x, sub_group = rep_NA(x)))
   }
 
-  rc_subgroup(y, "sub_group")
+  y <- collapse::ss(y, y$ind %==% 1L, c("enid", "sub_otxt", "sub_type"))
+
+  if (nrow0(y)) {
+    return(collapse::av(x, sub_group = rep_NA(x)))
+  }
+
+  rc_hospitals(y, "sub_type")
 
   y <- rc_other(y, stub = "sub") |>
-    collapse::funique()
+    collapse::funique() |>
+    collapse::rnm("sub_type" = "sub_group", .nse = FALSE)
 
   if (all_unique(y$enid)) {
     return(join2(x, y, on = "enid"))
   }
 
-  join2(x, collapse_rows(y, "enid", "sub_group"), on = "enid")
-}
-
-#' @noRd
-pivot_compliance <- function(x) {
-  y <- collapse::gvr(x, "^fac_ccn$|_ind$") |>
-    collapse::pivot(
-      ids = "fac_ccn",
-      names = list(variable = "compliance", value = "ind"),
-      na.rm = TRUE
-    ) |>
-    collapse::funique() |>
-    collapse::roworderv("fac_ccn")
-
-  collapse::settfmv(y, "compliance", as.character)
-  collapse::gvr(x, "_ind$") <- NULL
-
-  if (nrow0(y)) {
-    return(collapse::av(x, compliance = rep_NA(x)))
-  }
-
-  COMP <- collapse::ss(y, y$compliance %==% "cmp_ind")
-
-  if (nrow0(COMP)) {
-    y <- collapse::ss(y, y$ind %==% 1L, 1:2)
-    if (nrow0(y)) {
-      return(collapse::av(x, compliance = rep_NA(x)))
-    }
-    collapse::recode_char(
-      y$compliance,
-      "poc_ind" = "Compliant (POC)",
-      "elig_ind" = "Eligible (CMS)",
-      default = NA_character_,
-      set = TRUE
-    )
-
-    if (all_unique(y$fac_ccn)) {
-      return(join2(x, y, on = "fac_ccn"))
-    }
-
-    return(join2(x, collapse_rows(y, "fac_ccn", "compliance"), on = "fac_ccn"))
-  }
-
-  COMP$compliance <- cheapr::case(
-    COMP$ind == 1L ~ "Compliant (Survey)",
-    COMP$ind == 0L ~ "Non-compliant (Survey)",
-    .default = NA_character_
-  )
-
-  COMP <- collapse::ss(COMP, j = 1:2)
-
-  y <- collapse::ss(y, y$ind %==% 1L, 1:2)
-  y <- collapse::ss(y, y$compliance %!=% "cmp_ind")
-
-  collapse::recode_char(
-    y$compliance,
-    "poc_ind" = "Compliant (POC)",
-    "elig_ind" = "Eligible (CMS)",
-    default = NA_character_,
-    set = TRUE
-  )
-
-  y <- cheapr::row_c(COMP, y)
-
-  if (nrow0(y)) {
-    return(collapse::av(x, compliance = rep_NA(x)))
-  }
-
-  if (all_unique(y$fac_ccn)) {
-    return(join2(x, y, on = "fac_ccn"))
-  }
-
-  join2(x, collapse_rows(y, "fac_ccn", "compliance"), on = "fac_ccn")
+  join2(x, collapse_rows(y, "enid", "sub_group"), on = c("enid"))
 }

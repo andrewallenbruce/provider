@@ -19,7 +19,6 @@ rename_with <- function(x, endpoint) {
     )
   )
 
-  x <- rc_trim(x)
   replace_nz(x)
 
   collapse::gv(x, unlist_(NM))
@@ -86,10 +85,13 @@ rc_other <- function(x, stub, call = caller_env()) {
     return(x)
   }
 
-  OTXT <- paste0("Other: ", x[i, otxt, drop = TRUE])
+  collapse::gv(x[i, ], main) <- paste0(
+    "Other: ",
+    x[i, otxt, drop = TRUE]
+  )
 
-  collapse::gv(x[i, ], main) <- OTXT
   collapse::gv(x, otxt) <- NULL
+
   return(x)
 }
 
@@ -115,9 +117,16 @@ rc_address <- function(
     collapse::gv(x, add2) <- NULL
     return(x)
   }
-  COL <- paste(x[i, add1, drop = TRUE], x[i, add2, drop = TRUE], sep = ", ")
+
+  COL <- paste(
+    x[i, add1, drop = TRUE],
+    x[i, add2, drop = TRUE],
+    sep = ", "
+  )
+
   collapse::gv(x[i, ], add1) <- COL
   collapse::gv(x, add2) <- NULL
+
   return(x)
 }
 

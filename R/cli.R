@@ -131,19 +131,3 @@ method(report_total, CMSList) <- function(x) {
 #   )
 #   invisible(x)
 # }
-
-#' @export
-print.subgroups <- function(x, ...) {
-  cli::cli_text(cli::col_cyan("<subgroups[{cheapr::unlisted_length(x)}]>"))
-  if (length(x)) {
-    cli::cat_bullet(
-      paste0(
-        cli::col_yellow(left(names(x))),
-        cli::col_silver(" : "),
-        left(mark(unname(x)))
-      ),
-      bullet_col = "silver"
-    )
-  }
-  invisible(x)
-}

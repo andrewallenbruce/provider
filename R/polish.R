@@ -143,8 +143,12 @@ S7::method(polish, S7::new_S3_class("snf_owner")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
+  rc_hospitals(x, "PROVIDER TYPE CODE")
+  rc_hospitals(x, "PROPRIETARY NONPROFIT")
+  rc_hospitals(x, "PRACTICE LOCATION TYPE")
+
   rename_with(x, "hospitals") |>
-    rc_other(x, stub = "org") |>
+    rc_other(stub = "org") |>
     rc_other(stub = "loc") |>
     rc_address() |>
     rc_integer("npi") |>
@@ -201,6 +205,7 @@ S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
   rename_with(x, "revocations") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
+    rc_trim() |>
     rc_ymd(c("start_date", "end_date"))
 }
 
@@ -209,5 +214,6 @@ S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
   rename_with(x, "transparency") |>
     rc_integer("case") |>
     rc_ymd("action_date") |>
+    rc_trim() |>
     collapse::roworderv(c("fac_name", "case"))
 }

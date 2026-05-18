@@ -70,7 +70,6 @@ hospitals2(
 \itemize{
 \item \code{P} = Proprietary
 \item \code{N} = Non-Profit
-\item \code{D} = Unknown
 }}
 
 \item{org_type}{\verb{<enum>} Organization structure type
@@ -152,7 +151,6 @@ hospital rating.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 hospitals(count = TRUE)
-
 hospitals2(count = TRUE)
 
 hospitals(prov_type = "reh", count = TRUE)
