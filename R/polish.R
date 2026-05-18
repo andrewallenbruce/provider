@@ -74,7 +74,6 @@ S7::method(polish, S7::new_S3_class("fqhc_enroll")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("hha_enroll")) <- function(x) {
   rename_with(x, "hha_enroll") |>
-    rc_other(stub = "loc") |>
     polish_enroll()
 }
 
@@ -145,7 +144,7 @@ S7::method(polish, S7::new_S3_class("snf_owner")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   rename_with(x, "hospitals") |>
-    rc_other(stub = "org") |>
+    rc_other(x, stub = "org") |>
     rc_other(stub = "loc") |>
     rc_address() |>
     rc_integer("npi") |>

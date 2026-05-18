@@ -68,34 +68,28 @@ rc_ymd2 <- recoder(as_date_ymd2)
 rc_mdy <- recoder(as_date_mdy)
 
 #' @noRd
-combine_columns <- function(
-  x,
-  main,
-  other,
-  prefix = NULL,
-  sep = ", ",
-  arg = caller_arg(other),
-  call = caller_env()
-) {
-  if (rlang::is_null(x[[other]])) {
+rc_other <- function(x, stub, call = caller_env()) {
+  main <- paste0(stub, "_type")
+  otxt <- paste0(stub, "_otxt")
+
+  if (rlang::is_null(x[[otxt]])) {
     cli::cli_abort(
-      "{.val {other}} is not a column in {.var x}.",
-      arg = arg,
+      "{.val {otxt}} is not a column in {.var x}.",
       call = call
     )
   }
 
-  i <- cheapr::which_not_na(x[[other]])
+  i <- cheapr::which_not_na(x[[otxt]])
 
   if (rlang::is_empty(i)) {
-    collapse::gv(x, other) <- NULL
+    collapse::gv(x, otxt) <- NULL
     return(x)
   }
 
-  COL <- paste0(prefix, paste(x[i, other, drop = TRUE], sep = sep))
+  OTXT <- paste0("Other: ", x[i, otxt, drop = TRUE])
 
-  collapse::gv(x[i, ], main) <- COL
-  collapse::gv(x, other) <- NULL
+  collapse::gv(x[i, ], main) <- OTXT
+  collapse::gv(x, otxt) <- NULL
   return(x)
 }
 
@@ -104,13 +98,12 @@ rc_address <- function(
   x,
   add1 = "address",
   add2 = "add_2",
-  sep = ", ",
   arg = caller_arg(add2),
   call = caller_env()
 ) {
   if (rlang::is_null(x[[add2]])) {
     cli::cli_abort(
-      "{.val {add2}} is not a column in {.var x}.",
+      "{.val {arg}} is not a column in {.var x}.",
       arg = arg,
       call = call
     )
@@ -126,17 +119,6 @@ rc_address <- function(
   collapse::gv(x[i, ], add1) <- COL
   collapse::gv(x, add2) <- NULL
   return(x)
-}
-
-#' @noRd
-rc_other <- function(x, stub) {
-  combine_columns(
-    x,
-    main = paste0(stub, "_type"),
-    other = paste0(stub, "_otxt"),
-    prefix = "Other: ",
-    sep = ""
-  )
 }
 
 #' @noRd

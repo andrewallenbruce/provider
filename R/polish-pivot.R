@@ -4,6 +4,16 @@ column_rex <- function(x) {
 }
 
 #' @noRd
+nrow0 <- function(x) {
+  collapse::fnrow(x) == 0L
+}
+
+#' @noRd
+all_unique <- function(x) {
+  !collapse::any_duplicated(x)
+}
+
+#' @noRd
 pivot2 <- function(x, rex, id, var, val = "ind") {
   x <- collapse::gvr(x, rex) |>
     collapse::pivot(
@@ -47,7 +57,7 @@ pivot_order_refer <- function(x) {
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, order_refer = rep_NA(x)))
   }
 
@@ -62,7 +72,7 @@ pivot_order_refer <- function(x) {
     set = TRUE
   )
 
-  if (!collapse::any_duplicated(y$npi)) {
+  if (all_unique(y$npi)) {
     return(join2(x, y, on = "npi"))
   }
   join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")
@@ -74,19 +84,19 @@ pivot_multi_site <- function(x) {
 
   collapse::gvr(x, "_multi$") <- NULL
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, multi_site = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, multi_site = rep_NA(x)))
   }
 
   rc_clia(y, "multi_site")
 
-  if (!collapse::any_duplicated(y$fac_ccn)) {
+  if (all_unique(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -101,13 +111,13 @@ pivot_acr_org <- function(x) {
 
   y <- collapse::ss(y, j = 1:2)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, acr_org = rep_NA(x)))
   }
 
   rc_clia(y, "acr_org")
 
-  if (!collapse::any_duplicated(y$fac_ccn)) {
+  if (all_unique(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -120,13 +130,13 @@ pivot_owner <- function(x) {
 
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, own_type = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, own_type = rep_NA(x)))
   }
 
@@ -135,7 +145,7 @@ pivot_owner <- function(x) {
   y <- rc_other(y, stub = "own") |>
     collapse::funique()
 
-  if (!collapse::any_duplicated(y$pac)) {
+  if (all_unique(y$pac)) {
     return(join2(x, y, on = "pac"))
   }
 
@@ -148,13 +158,13 @@ pivot_subgroup <- function(x) {
 
   collapse::gvr(x, "sub_") <- NULL
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, sub_group = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, sub_group = rep_NA(x)))
   }
 
@@ -163,7 +173,7 @@ pivot_subgroup <- function(x) {
   y <- rc_other(y, stub = "sub") |>
     collapse::funique()
 
-  if (!collapse::any_duplicated(y$enid)) {
+  if (all_unique(y$enid)) {
     return(join2(x, y, on = "enid"))
   }
 
@@ -184,15 +194,15 @@ pivot_compliance <- function(x) {
   collapse::settfmv(y, "compliance", as.character)
   collapse::gvr(x, "_ind$") <- NULL
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, compliance = rep_NA(x)))
   }
 
   COMP <- collapse::ss(y, y$compliance %==% "cmp_ind")
 
-  if (collapse::fnrow(COMP) == 0L) {
+  if (nrow0(COMP)) {
     y <- collapse::ss(y, y$ind %==% 1L, 1:2)
-    if (collapse::fnrow(y) == 0L) {
+    if (nrow0(y)) {
       return(collapse::av(x, compliance = rep_NA(x)))
     }
     collapse::recode_char(
@@ -203,7 +213,7 @@ pivot_compliance <- function(x) {
       set = TRUE
     )
 
-    if (!collapse::any_duplicated(y$fac_ccn)) {
+    if (all_unique(y$fac_ccn)) {
       return(join2(x, y, on = "fac_ccn"))
     }
 
@@ -231,11 +241,11 @@ pivot_compliance <- function(x) {
 
   y <- cheapr::row_c(COMP, y)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(collapse::av(x, compliance = rep_NA(x)))
   }
 
-  if (!collapse::any_duplicated(y$fac_ccn)) {
+  if (all_unique(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
