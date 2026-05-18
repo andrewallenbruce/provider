@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9181 (2026-05-17)
+
+- refactored `rc_other`
+
 ## provider 0.0.1.9180 (2026-05-17)
 
 - converted `polish` generic to S7
