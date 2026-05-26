@@ -24,6 +24,7 @@
 #'   - [Dictionary: Provider Data Catalog (PDC)](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'   - [Source Information](https://data.cms.gov/provider-data/topics/doctors-clinicians/data-sources)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
@@ -37,11 +38,6 @@
 #' @param org_name `<chr>` Facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param members `<int>` Number of members in Organization
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' clinicians(count = TRUE)
 #' clinicians(org_name = not_blank(), count = TRUE)

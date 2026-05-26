@@ -48,8 +48,8 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("esrd")) <- function(x) {
-  rename_with(x, "esrd") |>
+S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
+  rename_with(x, "dialysis") |>
     rc_integer(c("network", "rating")) |>
     rc_ymd("cert_date") |>
     rc_address()

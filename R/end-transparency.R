@@ -40,6 +40,7 @@
 #' @source
 #'    - [API: Hospital Price Transparency Enforcement Activities and Outcomes](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-price-transparency-enforcement-activities-and-outcomes)
 #'
+#' @inheritParams provider_common_params
 #' @param fac_name `<chr>` Hospital name
 #' @param address `<chr>` Hospital address
 #' @param city `<chr>` Hospital city
@@ -52,11 +53,6 @@
 #'    - `"closure"` = Closure Notice
 #'    - `"cmp"` = CMP Notice
 #'    - `"appeal"` = Appealed
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' transparency(count = TRUE)
 #'

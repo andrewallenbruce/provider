@@ -35,12 +35,9 @@ opt_out(
 
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
-}
-\value{
-A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Information on providers who have decided not to participate in Medicare.

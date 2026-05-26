@@ -11,6 +11,7 @@
 #' @references
 #'    - [API: Medicare Revalidation Reassignment List](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
@@ -22,11 +23,6 @@
 #' @param org_pac `<chr>` PECOS Associate Control ID
 #' @param org_enid `<chr>` Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
 #'

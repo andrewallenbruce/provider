@@ -31,12 +31,9 @@ order_refer(
 \item \code{hospice}: Hospice
 }}
 
-\item{count}{\verb{<lgl>} Return the dataset's total row count}
+\item{count}{\verb{<lgl>} Return the total row count}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
-}
-\value{
-A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Eligibility to order and refer within Medicare

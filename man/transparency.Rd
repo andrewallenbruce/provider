@@ -43,9 +43,6 @@ transparency(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Information on enforcement actions as a result of CMS' assessment of a
 hospital's compliance with the Hospital Price Transparency regulations.

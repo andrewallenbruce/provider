@@ -52,9 +52,6 @@ unit where the individual provider provides services.}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Access information concerning individual providers'
 affiliations with organizations/facilities.

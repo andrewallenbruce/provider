@@ -19,6 +19,7 @@
 #' @source
 #'    - [API: Revoked Medicare Providers and Suppliers](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revoked-medicare-providers-and-suppliers)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,middle,last `<chr>` Individual provider name
@@ -28,11 +29,6 @@
 #' @param multi `<lgl>` Provider has multiple NPIs
 #' @param reason `<chr>` Reason for revocation
 #' @param year_start,year_end `<int>` year of revocation/expiration
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
 #'

@@ -49,9 +49,6 @@ revocations(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Information on providers and suppliers currently revoked from the Medicare program.
 }

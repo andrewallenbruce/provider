@@ -171,9 +171,6 @@ snf_owner(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Providers with pending Medicare enrollment applications.
 }

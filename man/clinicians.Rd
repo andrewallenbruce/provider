@@ -64,9 +64,6 @@ clinicians(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Demographics of clinicians listed in the Provider Data Catalog (PDC)
 }

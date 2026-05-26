@@ -3,6 +3,8 @@
 #' @description
 #' Providers with pending Medicare enrollment applications.
 #'
+#' @name owners
+#' @inheritParams provider_common_params
 #' @param org_enid `<chr>` National Provider Identifier
 #' @param org_pac `<chr>` Provider's name
 #' @param org_name `<chr>` Provider's name
@@ -15,13 +17,6 @@
 #' @param title `<chr>` Provider's name
 #' @param first,middle,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @name owners
-#'
 #' @examplesIf httr2::is_online()
 #' fqhc_owner(count = TRUE)
 #' hospital_owner(count = TRUE)

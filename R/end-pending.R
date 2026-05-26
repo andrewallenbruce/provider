@@ -12,13 +12,9 @@
 #'    - [API: Physicians](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #'    - [API: Non-Physicians](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
 #'

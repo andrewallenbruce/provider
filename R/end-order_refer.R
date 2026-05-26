@@ -22,6 +22,7 @@
 #'    - [API: Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 #'    - [CMS: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Individual provider's first/last name
 #' @param ptb,dme,hha,pmd,hospice `<lgl>` Eligibility for:
@@ -30,11 +31,6 @@
 #'    - `hha`: Home Health Agency
 #'    - `pmd`: Power Mobility Devices
 #'    - `hospice`: Hospice
-#' @param count `<lgl>` Return the dataset's total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
 #' order_refer(count = TRUE)
 #'

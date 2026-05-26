@@ -133,7 +133,7 @@ RE_NAME = list(
     state = "state",
     zip_code = "zip"
   ),
-  esrd = list(
+  dialysis = list(
     cms_certification_number_ccn = "fac_ccn",
     facility_name = "fac_name",
     five_star = "rating",

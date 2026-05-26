@@ -7,6 +7,7 @@
 #' @source
 #'    - [API: Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID

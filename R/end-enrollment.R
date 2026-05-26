@@ -3,6 +3,8 @@
 #' @description
 #' Providers with pending Medicare enrollment applications.
 #'
+#' @name enrollment
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -21,13 +23,6 @@
 #'    - `llc` = LLC
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
-#' @name enrollment
-#'
 #' @examplesIf httr2::is_online()
 #' fqhc_enroll(count = TRUE)
 #' hospice_enroll(count = TRUE)

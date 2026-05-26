@@ -29,6 +29,7 @@
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
+#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
 #' @param specialty `<chr>` Provider's specialty
@@ -37,9 +38,6 @@
 #' @param state `<chr>` Provider's state abbreviation
 #' @param zip `<chr>` Provider's zip code
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
-#' @param count `<lgl>` Return the dataset's total row count
-#' @param set `<lgl>` Return the entire dataset
-#' @return A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #'

@@ -43,9 +43,6 @@ providers(
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Enrollment data on individual and organizational providers that are
 actively approved to bill Medicare.
