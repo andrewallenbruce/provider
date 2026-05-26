@@ -102,7 +102,7 @@ reference:
     Facility-level data, laboratory certifications, and clinic enrollments.
   contents:
   - clia
-  - esrd
+  - dialysis
   - hospitals
   - enrollment
   - owners
