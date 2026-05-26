@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9184 (2026-05-26)
+
+* `esrd()` renamed to `dialysis()`
+* tests for internal pdc functions
+* collapse dependency updated
+
+
 # provider 0.0.1.9183 (2026-05-26)
 
 * testing `common_params` roxygen2 documentation
