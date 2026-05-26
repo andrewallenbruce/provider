@@ -323,38 +323,16 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   : Dialysis Facilities
 - [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
   : Facilities
+- [`owner()`](https://andrewallenbruce.github.io/provider/reference/owner.md)
+  : Owners
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
-- [`fqhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  [`hha_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  [`hospice_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  [`snf_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  : Facility Enrollment
-- [`fqhc_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  [`hha_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  [`hospital_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  [`hospice_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  [`rhc_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  [`snf_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
-  : Facility Owners
 - [`hrsa_items()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_layers()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_fields()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   [`hrsa_select()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md)
   : HRSA Facilities
-
-### Compliance
-
-Sanctioned providers and price transparency enforcement.
-
-- [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
-  : Revoked Providers & Suppliers
-- [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
-  : Hospital Transparency Enforcement
-- [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
-  : Quality Payment Program
 
 ### Registry
 
@@ -366,6 +344,17 @@ orgs.
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   [`wildcard()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
+
+### Compliance
+
+Sanctioned providers and price transparency enforcement.
+
+- [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
+  : Revoked Providers & Suppliers
+- [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
+  : Hospital Transparency Enforcement
+- [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  : Quality Payment Program
 
 ## Query Modifiers
 

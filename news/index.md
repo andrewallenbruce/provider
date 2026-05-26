@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9187 (2026-05-26)
+
+- [`owner()`](https://andrewallenbruce.github.io/provider/reference/owner.md)
+  hybrid method
+
 ## provider 0.0.1.9186 (2026-05-26)
 
 - [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
@@ -53,10 +58,7 @@
 
 ## provider 0.0.1.9175 (2026-05-17)
 
-- added
-  [`hha_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  &
-  [`hha_owner()`](https://andrewallenbruce.github.io/provider/reference/owners.md)
+- added `hha_enroll()` & `hha_owner()`
 - added check in `rc_clia` method
 
 ## provider 0.0.1.9174 (2026-05-17)
@@ -432,9 +434,7 @@
 ## provider 0.0.1.9091 (2026-04-24)
 
 - updated S7 dependency
-- filled out
-  [`rhc_enroll()`](https://andrewallenbruce.github.io/provider/reference/enrollment.md)
-  structure
+- filled out `rhc_enroll()` structure
 
 ## provider 0.0.1.9090 (2026-04-18)
 
