@@ -75,10 +75,6 @@ revocations(
 
   `<lgl>` Return the entire dataset
 
-## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
 ## Details
 
 The Revoked Medicare Providers and Suppliers dataset contains

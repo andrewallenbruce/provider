@@ -83,25 +83,19 @@ dialysis(count = TRUE, org_name = "DaVita")
 #> ✔ dialysis returned 2,800 results.
 dialysis(rating = 1)
 #> ✔ dialysis returned 823 results.
-#> ! Using default <polish> method
-#> # A tibble: 823 × 142
-#>    cms_certification_number_ccn network facility_name   five_star_date five_star
-#>    <chr>                        <chr>   <chr>           <chr>          <chr>    
-#>  1 012533                       8       DaVita Walker … 01Jan2021-31D… 1.0      
-#>  2 012543                       8       DaVita Demopol… 01Jan2021-31D… 1.0      
-#>  3 012545                       8       DaVita Tuscalo… 01Jan2021-31D… 1.0      
-#>  4 012570                       8       DaVita Northpo… 01Jan2021-31D… 1.0      
-#>  5 012576                       8       DCI MONTGOMERY  01Jan2021-31D… 1.0      
-#>  6 012598                       8       DCI PHENIX CITY 01Jan2021-31D… 1.0      
-#>  7 012606                       8       FMC CHASE       01Jan2021-31D… 1.0      
-#>  8 012613                       8       FMC DISCOVERY   01Jan2021-31D… 1.0      
-#>  9 012618                       8       RRC NORTHRIDGE  01Jan2021-31D… 1.0      
-#> 10 012641                       8       DCI EVERGREEN   01Jan2021-31D… 1.0      
+#> # A tibble: 823 × 12
+#>    fac_ccn fac_name    rating network status chain_name cert_date  address city 
+#>    <chr>   <chr>        <int>   <int> <chr>  <chr>      <date>     <chr>   <chr>
+#>  1 012533  DaVita Wal…      1       8 Profit DaVita     1987-12-29 260 6t… JASP…
+#>  2 012543  DaVita Dem…      1       8 Profit DaVita     1992-05-20 305 So… Demo…
+#>  3 012545  DaVita Tus…      1       8 Profit DaVita     1992-08-11 805 OL… TUSC…
+#>  4 012570  DaVita Nor…      1       8 Profit DaVita     1996-12-03 400 Mc… NORT…
+#>  5 012576  DCI MONTGO…      1       8 Non-p… Dialysis … 1998-06-05 544 SO… MONT…
+#>  6 012598  DCI PHENIX…      1       8 Profit Dialysis … 2000-02-09 1611 2… PHEN…
+#>  7 012606  FMC CHASE        1       8 Profit Fresenius… 2002-09-19 1849 K… HUNT…
+#>  8 012613  FMC DISCOV…      1       8 Profit Fresenius… 2004-03-17 1131 E… HUNT…
+#>  9 012618  RRC NORTHR…      1       8 Profit Fresenius… 2006-10-25 4400 W… NORT…
+#> 10 012641  DCI EVERGR…      1       8 Non-p… Dialysis … 2011-01-27 822 WI… EVER…
 #> # ℹ 813 more rows
-#> # ℹ 137 more variables: five_star_data_availability_code <chr>,
-#> #   address_line_1 <chr>, address_line_2 <chr>, citytown <chr>, state <chr>,
-#> #   zip_code <chr>, countyparish <chr>, telephone_number <chr>,
-#> #   profit_or_nonprofit <chr>, chain_owned <chr>, chain_organization <chr>,
-#> #   late_shift <chr>, of_dialysis_stations <chr>,
-#> #   offers_incenter_hemodialysis <chr>, offers_peritoneal_dialysis <chr>, …
+#> # ℹ 3 more variables: state <chr>, zip <chr>, county <chr>
 ```

@@ -157,10 +157,6 @@ snf_enroll(
 
   `<lgl>` Return the entire dataset
 
-## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
 ## Examples
 
 ``` r

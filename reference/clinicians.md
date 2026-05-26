@@ -102,10 +102,6 @@ clinicians(
 
   `<lgl>` Return the entire dataset
 
-## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
 ## Data Source
 
 The Doctors and Clinicians National Downloadable File is organized such

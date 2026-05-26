@@ -11,7 +11,7 @@ care provided."><meta property="og:image" content="https://andrewallenbruce.gith
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9184</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9185</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,27 +136,21 @@ care provided.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">dialysis</span> returned <span style="font-weight: bold;">2,800</span> results.</span>
 <span class="r-in"><span><span class="fu">dialysis</span><span class="op">(</span>rating <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">dialysis</span> returned <span style="font-weight: bold;">823</span> results.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Using default <span style="color: #0000BB;">&lt;polish&gt;</span> method</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 823 × 142</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cms_certification_number_ccn network facility_name   five_star_date five_star</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012533                       8       DaVita Walker … 01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012543                       8       DaVita Demopol… 01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012545                       8       DaVita Tuscalo… 01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012570                       8       DaVita Northpo… 01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012576                       8       DCI MONTGOMERY  01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012598                       8       DCI PHENIX CITY 01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012606                       8       FMC CHASE       01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012613                       8       FMC DISCOVERY   01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012618                       8       RRC NORTHRIDGE  01Jan2021-31D… 1.0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012641                       8       DCI EVERGREEN   01Jan2021-31D… 1.0      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 823 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    fac_ccn fac_name    rating network status chain_name cert_date  address city </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012533  DaVita Wal…      1       8 Profit DaVita     1987-12-29 260 6t… JASP…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012543  DaVita Dem…      1       8 Profit DaVita     1992-05-20 305 So… Demo…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012545  DaVita Tus…      1       8 Profit DaVita     1992-08-11 805 OL… TUSC…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012570  DaVita Nor…      1       8 Profit DaVita     1996-12-03 400 Mc… NORT…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012576  DCI MONTGO…      1       8 Non-p… Dialysis … 1998-06-05 544 SO… MONT…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012598  DCI PHENIX…      1       8 Profit Dialysis … 2000-02-09 1611 2… PHEN…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012606  FMC CHASE        1       8 Profit Fresenius… 2002-09-19 1849 K… HUNT…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012613  FMC DISCOV…      1       8 Profit Fresenius… 2004-03-17 1131 E… HUNT…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012618  RRC NORTHR…      1       8 Profit Fresenius… 2006-10-25 4400 W… NORT…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012641  DCI EVERGR…      1       8 Non-p… Dialysis … 2011-01-27 822 WI… EVER…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 813 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 137 more variables: five_star_data_availability_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address_line_1 &lt;chr&gt;, address_line_2 &lt;chr&gt;, citytown &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, countyparish &lt;chr&gt;, telephone_number &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   profit_or_nonprofit &lt;chr&gt;, chain_owned &lt;chr&gt;, chain_organization &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   late_shift &lt;chr&gt;, of_dialysis_stations &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   offers_incenter_hemodialysis &lt;chr&gt;, offers_peritoneal_dialysis &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, county &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
