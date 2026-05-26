@@ -24,6 +24,7 @@
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
+#' @inheritParams provider_common_params
 #' @param fac_name `<chr>` Provider/Laboratory name
 #' @param fac_ccn `<chr>` 10-digit CMS Certification Number
 #' @param clia_ccn `<chr>` 6-digit CMS Certification Number
@@ -53,11 +54,6 @@
 #'   Medicare/Medicaid.
 #' @param poc `<lgl>` Indicates provider is in compliance with Plan of
 #'   Correction.
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
 #'
