@@ -11,6 +11,21 @@ uuid_cms_list <- function(endpoint) {
       Provider = "8889d81e-2ee7-448f-8713-f071038289b5",
       Service = "92396110-2aed-4d63-a6a2-5d6207d46a29"
     ),
+    facility = list(
+      HHA = "15f64ab4-3172-4a27-b589-ebd67a6d28aa",
+      RHC = "3b7e7659-067e-41ea-8e36-f9ee2036e1f6",
+      FQHC = "4bcae866-3411-439a-b762-90a6187c194b",
+      SNF = "5f2c306f-3b1c-42cd-b037-187b2ce22126",
+      Hospice = "25704213-e833-4b8b-9dbc-58dd17149209"
+    ),
+    owner = list(
+      HHA = "fc009b2d-7846-44b1-b4a1-692f0c143879",
+      RHC = "ab03c9bc-0c22-4ca4-b032-21dd3408210d",
+      FQHC = "ed289c89-0bb8-4221-a20a-85776066381b",
+      SNF = "a4358712-e910-4eaf-8f24-5e90ba3cf8d0",
+      Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
+      Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
+    ),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

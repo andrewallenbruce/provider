@@ -66,6 +66,13 @@ polish_enroll <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
+  rename_with(x, "facility") |>
+    polish_enroll() |>
+    collapse::roworderv(c("pac", "ccn"))
+}
+
+#' @noRd
 S7::method(polish, S7::new_S3_class("fqhc_enroll")) <- function(x) {
   rename_with(x, "fqhc_enroll") |>
     polish_enroll()

@@ -279,6 +279,10 @@ RE_NAME = list(
     Action = "action",
     Date_of_Action = "action_date"
   ),
+  facility = c(
+    fac_type = "fac_type",
+    RE_ENROLL
+  ),
   fqhc_enroll = RE_ENROLL,
   hha_enroll = RE_ENROLL,
   hospice_enroll = RE_ENROLL,
