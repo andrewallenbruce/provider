@@ -18,7 +18,7 @@ Depends:
 Imports: 
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),
-    collapse (>= 2.1.6),
+    collapse (>= 2.1.7),
     glue,
     httr2 (>= 1.2.2),
     purrr (>= 1.2.2),
@@ -28,8 +28,8 @@ Imports:
     stringr,
     vctrs (>= 0.7.3)
 Suggests: 
-    knitr,
     arcgislayers (>= 0.6.0),
+    knitr,
     testthat (>= 3.3.2),
     tibble (>= 3.3.1)
 VignetteBuilder: 

@@ -7,6 +7,7 @@
 #' @source
 #'    * [API: Dialysis Facility - Listing by Facility](https://data.cms.gov/provider-data/dataset/23ew-n7w9)
 #'
+#' @inheritParams provider_common_params
 #' @param fac_ccn `<chr>` Facility CMS Certification Number
 #' @param fac_name `<chr>` Facility name
 #' @param org_name `<chr>` Name of the chain organization the facility is owned/managed by
@@ -14,18 +15,13 @@
 #' @param network `<int>` Numeric code for the network the facility participates in; (1-18)
 #' @param status `<enum>` `Non-profit` or `Profit`
 #' @param address,city,state,zip,county `<chr>` Facility's city, state, zip, county
-#' @param count `<lgl>` Return the total row count
-#' @param set `<lgl>` Return the entire dataset
-#'
-#' @returns A [tibble][tibble::tibble-package]
-#'
 #' @examplesIf httr2::is_online()
-#' esrd(count = TRUE)
-#' esrd(count = TRUE, rating = 1:5)
-#' esrd(count = TRUE, org_name = "DaVita")
-#' esrd(rating = 1)
+#' dialysis(count = TRUE)
+#' dialysis(count = TRUE, rating = 1:5)
+#' dialysis(count = TRUE, org_name = "DaVita")
+#' dialysis(rating = 1)
 #' @export
-esrd <- function(
+dialysis <- function(
   fac_ccn = NULL,
   fac_name = NULL,
   org_name = NULL,

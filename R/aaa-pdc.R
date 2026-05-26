@@ -1,11 +1,27 @@
 #' @noRd
+check_modifiers <- function(x, end) {
+  if (any2(purrr::map_lgl(x, is_modifier))) {
+    mods <- unlist_(x[purrr::map_lgl(x, is_modifier)])
+    if (any2(mods %in% c("ends", "excludes"))) {
+      cli::cli_abort(
+        c(
+          "Invalid {.cls modifier} used in {.fn {end}}: ",
+          "x" = "{.fn ends} & {.fn excludes} do not work with the underlying API."
+        ),
+        call = call2(end)
+      )
+    }
+  }
+}
+
+#' @noRd
 uuid_pdc <- function(endpoint) {
   switch(
     endpoint,
     affiliations = "27ea-46a8",
     clinicians = "mj5m-pzi6",
     hospitals2 = "xubh-q36u",
-    esrd = "23ew-n7w9",
+    dialysis = "23ew-n7w9",
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

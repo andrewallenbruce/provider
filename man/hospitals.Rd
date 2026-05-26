@@ -136,9 +136,6 @@ hospitals2(
 
 \item{rating}{\verb{<int>} Hospital rating; 1-5 or "Not Available"}
 }
-\value{
-A \link[tibble:tibble-package]{tibble}
-}
 \description{
 Hospitals currently enrolled in Medicare. Data includes the
 hospital's sub-group types, legal business name, doing-business-as name,

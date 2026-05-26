@@ -107,27 +107,3 @@ check_atomic <- function(
     call = call
   )
 }
-
-# check_modifiers(
-#   param_pdc(
-#     first = "ANDREW",
-#     ccn = excludes("ASGSAH"),
-#     facility = ends("sdgdgs")
-#   ),
-#   "ENDPOINT"
-# )
-#' @noRd
-check_modifiers <- function(x, end) {
-  if (any2(purrr::map_lgl(x, is_modifier))) {
-    mods <- unlist_(x[purrr::map_lgl(x, is_modifier)])
-    if (any2(mods %in% c("ends", "excludes"))) {
-      cli::cli_abort(
-        c(
-          "Invalid {.cls modifier} used in {.fn {end}}: ",
-          "x" = "{.fn ends} & {.fn excludes} do not work with the underlying API."
-        ),
-        call = call2(end)
-      )
-    }
-  }
-}
