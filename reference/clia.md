@@ -133,11 +133,6 @@ clia(
 
   `<lgl>` Return the entire dataset
 
-## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-containing the search results.
-
 ## CLIA
 
 CMS regulates all laboratory testing (except research) performed on

@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9183 (2026-05-26)
+
+- testing `common_params` roxygen2 documentation
+
 ## provider 0.0.1.9182 (2026-05-18)
 
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)

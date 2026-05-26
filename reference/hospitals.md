@@ -219,7 +219,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 hospitals(count = TRUE)
 #> hospitals Totals
-#> • Rows  : 9,182
+#> • Rows  : 9,175
 #> • Pages : 2    
 #> 
 hospitals2(count = TRUE)
