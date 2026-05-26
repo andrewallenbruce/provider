@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9185 (2026-05-26)
+
+* reuse `common_params` throughout
+* fix pkgdown reference
+
+
 # provider 0.0.1.9184 (2026-05-26)
 
 * `esrd()` renamed to `dialysis()`
