@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9186 (2026-05-26)
+
+- [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
+  hybrid method
+
 ## provider 0.0.1.9185 (2026-05-26)
 
 - reuse `common_params` throughout

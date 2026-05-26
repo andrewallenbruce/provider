@@ -27,6 +27,8 @@ Facility-level data, laboratory certifications, and clinic enrollments.
   : Clinical Laboratories
 - [`dialysis()`](https://andrewallenbruce.github.io/provider/reference/dialysis.md)
   : Dialysis Facilities
+- [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
+  : Facilities
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
