@@ -29,7 +29,6 @@ RE_OWNER = list(
   `ORGANIZATION NAME - OWNER` = "own_name",
   `DOING BUSINESS AS NAME - OWNER` = "own_dba",
   `PERCENTAGE OWNERSHIP` = "percent",
-  `TYPE - OWNER` = "entity",
   `TITLE - OWNER` = "title",
   `FIRST NAME - OWNER` = "first",
   `MIDDLE NAME - OWNER` = "middle",
@@ -282,6 +281,10 @@ RE_NAME = list(
   facility = c(
     fac_type = "fac_type",
     RE_ENROLL
+  ),
+  owner = c(
+    fac_type = "fac_type",
+    RE_OWNER
   ),
   fqhc_enroll = RE_ENROLL,
   hha_enroll = RE_ENROLL,

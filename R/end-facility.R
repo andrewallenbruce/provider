@@ -1,10 +1,18 @@
-#' Facility Enrollment
+#' Facilities
 #'
 #' @description
-#' Providers with pending Medicare enrollment applications.
+#' Facilities enrolled in Medicare.
 #'
-#' @name enrollment
+#' @source
+#' Medicare
+#'
 #' @inheritParams provider_common_params
+#' @param fac_type `<enum>` Facility type
+#'    - `hha` = Home Health Agency
+#'    - `rhc` = Rural Health Clinic
+#'    - `fqhc` = Federally Qualified Health Clinic
+#'    - `snf` = Skilled Nursing Facility
+#'    - `hospice` = Hospice
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -24,25 +32,58 @@
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
 #' @examplesIf httr2::is_online()
-#' fqhc_enroll(count = TRUE)
-#' hospice_enroll(count = TRUE)
-#' rhc_enroll(count = TRUE)
-#' snf_enroll(count = TRUE)
-#' hha_enroll(count = TRUE)
+#' facility(count = TRUE)
 #'
-#' fqhc_enroll(state = c("GA", "FL")) |> str()
+#' facility(state = c("GA", "FL"), count = TRUE)
 #'
-#' hha_enroll(state = c("GA", "FL")) |> str()
+#' facility(city = "Valdosta", state = "GA")
 #'
-#' hospice_enroll(state = c("GA", "FL")) |> str()
-#'
-#' rhc_enroll(state = c("GA", "FL")) |> str()
-#'
-#' snf_enroll(state = c("GA", "FL")) |> str()
-NULL
-
-#' @rdname enrollment
 #' @export
+facility <- function(
+  fac_type = NULL,
+  npi = NULL,
+  ccn = NULL,
+  pac = NULL,
+  enid = NULL,
+  org_name = NULL,
+  org_dba = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  multi = NULL,
+  status = NULL,
+  org_type = NULL,
+  count = FALSE
+) {
+  check_bool_(multi)
+  check_char_(status)
+  check_char_(org_type)
+  check_char_(fac_type)
+
+  x <- cms_list(
+    count = count,
+    set = FALSE,
+    idcol = "fac_type",
+    NPI = npi,
+    CCN = ccn,
+    `ASSOCIATE ID` = pac,
+    `ENROLLMENT ID` = enid,
+    `ORGANIZATION NAME` = org_name,
+    `DOING BUSINESS AS NAME` = org_dba,
+    CITY = city,
+    STATE = state,
+    `ZIP CODE` = zip,
+    `MULTIPLE NPI FLAG` = tag_bool(multi),
+    PROPRIETARY_NONPROFIT = status,
+    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' @noRd
 fqhc_enroll <- function(
   npi = NULL,
   ccn = NULL,
@@ -85,8 +126,7 @@ fqhc_enroll <- function(
   polish(x)
 }
 
-#' @rdname enrollment
-#' @export
+#' @noRd
 hha_enroll <- function(
   npi = NULL,
   ccn = NULL,
@@ -129,8 +169,7 @@ hha_enroll <- function(
   polish(x)
 }
 
-#' @rdname enrollment
-#' @export
+#' @noRd
 hospice_enroll <- function(
   npi = NULL,
   ccn = NULL,
@@ -173,8 +212,7 @@ hospice_enroll <- function(
   polish(x)
 }
 
-#' @rdname enrollment
-#' @export
+#' @noRd
 rhc_enroll <- function(
   npi = NULL,
   ccn = NULL,
@@ -217,8 +255,7 @@ rhc_enroll <- function(
   polish(x)
 }
 
-#' @rdname enrollment
-#' @export
+#' @noRd
 snf_enroll <- function(
   npi = NULL,
   ccn = NULL,

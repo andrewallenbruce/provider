@@ -6,11 +6,6 @@ uuid_cms_list <- function(endpoint) {
       Physician = "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
       `Non-Physician` = "261b83b6-b89f-43ad-ae7b-0d419a3bc24b"
     ),
-    utilization = list(
-      Geography = "6fea9d79-0129-4e4c-b1b8-23cd86a4f435",
-      Provider = "8889d81e-2ee7-448f-8713-f071038289b5",
-      Service = "92396110-2aed-4d63-a6a2-5d6207d46a29"
-    ),
     facility = list(
       HHA = "15f64ab4-3172-4a27-b589-ebd67a6d28aa",
       RHC = "3b7e7659-067e-41ea-8e36-f9ee2036e1f6",

@@ -1,10 +1,19 @@
-#' Facility Owners
+#' Owners
 #'
 #' @description
-#' Providers with pending Medicare enrollment applications.
+#' Owners of facilities enrolled in Medicare.
 #'
-#' @name owners
+#' @source
+#' Medicare
+#'
 #' @inheritParams provider_common_params
+#' @param fac_type `<enum>` Facility type
+#'    - `hha` = Home Health Agency
+#'    - `rhc` = Rural Health Clinic
+#'    - `fqhc` = Federally Qualified Health Clinic
+#'    - `snf` = Skilled Nursing Facility
+#'    - `hospice` = Hospice
+#'    - `hospital` = Hospital
 #' @param org_enid `<chr>` National Provider Identifier
 #' @param org_pac `<chr>` Provider's name
 #' @param org_name `<chr>` Provider's name
@@ -18,28 +27,65 @@
 #' @param first,middle,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
 #' @examplesIf httr2::is_online()
-#' fqhc_owner(count = TRUE)
-#' hospital_owner(count = TRUE)
-#' hospice_owner(count = TRUE)
-#' rhc_owner(count = TRUE)
-#' snf_owner(count = TRUE)
-#' hha_owner(count = TRUE)
+#' owner(count = TRUE)
 #'
-#' fqhc_owner(state = c("GA", "FL")) |> str()
+#' owner(state = c("GA", "FL"), count = TRUE)
 #'
-#' hospital_owner(state = c("GA", "FL")) |> str()
+#' owner(city = "Valdosta", state = "GA")
 #'
-#' hospice_owner(state = c("GA", "FL")) |> str()
-#'
-#' rhc_owner(state = c("GA", "FL")) |> str()
-#'
-#' snf_owner(state = c("GA", "FL")) |> str()
-#'
-#' hha_owner(state = c("GA", "FL")) |> str()
-NULL
-
-#' @rdname owners
 #' @export
+owner <- function(
+  fac_type = NULL,
+  org_enid = NULL,
+  org_pac = NULL,
+  org_name = NULL,
+  pac = NULL,
+  owner = NULL,
+  dba = NULL,
+  percent = NULL,
+  role = NULL,
+  entity = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  title = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  count = FALSE
+) {
+  check_char_(fac_type)
+
+  x <- cms_list(
+    count = count,
+    set = FALSE,
+    idcol = "fac_type",
+    `ENROLLMENT ID` = org_enid,
+    `ASSOCIATE ID` = org_pac,
+    `ORGANIZATION NAME` = org_name,
+    `ASSOCIATE ID - OWNER` = pac,
+    `ORGANIZATION NAME - OWNER` = owner,
+    `DOING BUSINESS AS NAME - OWNER` = dba,
+    `PERCENTAGE OWNERSHIP` = percent,
+    `ROLE TEXT - OWNER` = role,
+    `TYPE - OWNER` = entity,
+    `FIRST NAME - OWNER` = first,
+    `MIDDLE NAME - OWNER` = middle,
+    `LAST NAME - OWNER` = last,
+    `TITLE - OWNER` = title,
+    `ADDRESS LINE 1 - OWNER` = address,
+    `CITY - OWNER` = city,
+    `STATE - OWNER` = state,
+    `ZIP CODE - OWNER` = zip
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' @noRd
 fqhc_owner <- function(
   org_enid = NULL,
   org_pac = NULL,
@@ -88,8 +134,7 @@ fqhc_owner <- function(
   polish(x)
 }
 
-#' @rdname owners
-#' @export
+#' @noRd
 hha_owner <- function(
   org_enid = NULL,
   org_pac = NULL,
@@ -138,8 +183,7 @@ hha_owner <- function(
   polish(x)
 }
 
-#' @rdname owners
-#' @export
+#' @noRd
 hospital_owner <- function(
   org_enid = NULL,
   org_pac = NULL,
@@ -188,8 +232,7 @@ hospital_owner <- function(
   polish(x)
 }
 
-#' @rdname owners
-#' @export
+#' @noRd
 hospice_owner <- function(
   org_enid = NULL,
   org_pac = NULL,
@@ -238,8 +281,7 @@ hospice_owner <- function(
   polish(x)
 }
 
-#' @rdname owners
-#' @export
+#' @noRd
 rhc_owner <- function(
   org_enid = NULL,
   org_pac = NULL,
@@ -288,8 +330,7 @@ rhc_owner <- function(
   polish(x)
 }
 
-#' @rdname owners
-#' @export
+#' @noRd
 snf_owner <- function(
   org_enid = NULL,
   org_pac = NULL,

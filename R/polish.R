@@ -68,8 +68,7 @@ polish_enroll <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
   rename_with(x, "facility") |>
-    polish_enroll() |>
-    collapse::roworderv(c("pac", "ccn"))
+    polish_enroll()
 }
 
 #' @noRd
@@ -110,6 +109,12 @@ polish_owner <- function(x) {
     rc_ymd("asc_date") |>
     pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
+}
+
+#' @noRd
+S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
+  rename_with(x, "owner") |>
+    polish_owner()
 }
 
 #' @noRd

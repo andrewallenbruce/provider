@@ -104,10 +104,15 @@ reference:
   - clia
   - dialysis
   - facility
+  - owner
   - hospitals
-  - enrollment
-  - owners
   - hrsa
+- subtitle: Registry
+  desc: >
+    Core identity (NPI) and relationship mapping between individuals and orgs.
+  contents:
+  - affiliations
+  - nppes
 - subtitle: Compliance
   desc: >
     Sanctioned providers and price transparency enforcement.
@@ -115,12 +120,6 @@ reference:
   - revocations
   - transparency
   - quality_metrics
-- subtitle: Registry
-  desc: >
-    Core identity (NPI) and relationship mapping between individuals and orgs.
-  contents:
-  - affiliations
-  - nppes
 
 - title: Query Modifiers
   contents:
