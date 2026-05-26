@@ -210,10 +210,6 @@ hospitals2(
 
   `<int>` Hospital rating; 1-5 or "Not Available"
 
-## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
 ## Examples
 
 ``` r

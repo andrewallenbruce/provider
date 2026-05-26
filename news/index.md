@@ -1,5 +1,12 @@
 # Changelog
 
+## provider 0.0.1.9184 (2026-05-26)
+
+- `esrd()` renamed to
+  [`dialysis()`](https://andrewallenbruce.github.io/provider/reference/dialysis.md)
+- tests for internal pdc functions
+- collapse dependency updated
+
 ## provider 0.0.1.9183 (2026-05-26)
 
 - testing `common_params` roxygen2 documentation
@@ -286,8 +293,7 @@
 
 ## provider 0.0.1.9120 (2026-04-28)
 
-- added
-  [`esrd()`](https://andrewallenbruce.github.io/provider/reference/esrd.md)
+- added `esrd()`
 
 ## provider 0.0.1.9119 (2026-04-27)
 
