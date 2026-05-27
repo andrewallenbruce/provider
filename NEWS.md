@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9190 (2026-05-27)
+
+* simplify `opt_out()`
+
+
 # provider 0.0.1.9189 (2026-05-27)
 
 * `opt_out()` - `start_year` arg
