@@ -17,8 +17,7 @@ opt_out(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -51,10 +50,6 @@ opt_out(
 - count:
 
   `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 ## Opting Out
 

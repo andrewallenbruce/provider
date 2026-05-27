@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9190 (2026-05-27)
+
+- simplify
+  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+
 ## provider 0.0.1.9189 (2026-05-27)
 
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md) -
