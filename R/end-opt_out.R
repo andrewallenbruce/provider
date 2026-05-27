@@ -33,17 +33,26 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
 #' @param specialty `<chr>` Provider's specialty
-#' @param address `<chr>` Provider's address
-#' @param city `<chr>` Provider's city
-#' @param state `<chr>` Provider's state abbreviation
-#' @param zip `<chr>` Provider's zip code
+#' @param start_year `<int>` Opt-out effective date year
+#' @param address,city,state,zip `<chr>` Provider's address, city, state, zip
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #'
+#' opt_out(start_year = 2026, count = TRUE)
+#'
+#' opt_out(start_year = 2000)
+#'
 #' opt_out(npi = 1043522824) |> str()
 #'
-#' opt_out(state = "GA", specialty = contains("Psych"))
+#' opt_out(state = "GA",
+#'         specialty = contains("Psych"),
+#'         order_refer = FALSE) |>
+#'         str()
+#'
+#' opt_out(state = "GA",
+#'         specialty = contains("Psych")) |>
+#'         str()
 #'
 #' @export
 opt_out <- function(
@@ -51,6 +60,7 @@ opt_out <- function(
   first = NULL,
   last = NULL,
   specialty = NULL,
+  start_year = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
@@ -60,6 +70,16 @@ opt_out <- function(
   set = FALSE
 ) {
   check_bool_(order_refer)
+  check_number_whole(
+    start_year,
+    allow_null = TRUE,
+    min = 1998,
+    max = as.numeric(this_year())
+  )
+
+  if (!is.null(start_year)) {
+    start_year <- ends(start_year)
+  }
 
   x <- cms(
     count = count,
@@ -68,6 +88,7 @@ opt_out <- function(
     `First Name` = first,
     `Last Name` = last,
     Specialty = specialty,
+    `Optout Effective Date` = start_year,
     `First Line Street Address` = address,
     `City Name` = city,
     `State Code` = state,
@@ -80,6 +101,10 @@ opt_out <- function(
 
   if (count) {
     return(invisible(x))
+  }
+
+  if (!is.null(order_refer) && !order_refer) {
+    x$order_refer <- NA_character_
   }
 
   if (set) {
@@ -99,7 +124,7 @@ opt_out <- function(
   if (BLOCK == 1L) {
     y <- order_refer(npi = NPI)
 
-    if (collapse::fnrow(y) == 0L) {
+    if (nrow0(y)) {
       return(x)
     }
     x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
@@ -112,7 +137,7 @@ opt_out <- function(
   y <- purrr::map(NPI, \(x) order_refer(npi = x)) |>
     rowbind2(nm = NULL)
 
-  if (collapse::fnrow(y) == 0L) {
+  if (nrow0(y)) {
     return(x)
   }
   x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")

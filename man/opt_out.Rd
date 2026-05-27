@@ -9,6 +9,7 @@ opt_out(
   first = NULL,
   last = NULL,
   specialty = NULL,
+  start_year = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
@@ -25,13 +26,9 @@ opt_out(
 
 \item{specialty}{\verb{<chr>} Provider's specialty}
 
-\item{address}{\verb{<chr>} Provider's address}
+\item{start_year}{\verb{<int>} Opt-out effective date year}
 
-\item{city}{\verb{<chr>} Provider's city}
-
-\item{state}{\verb{<chr>} Provider's state abbreviation}
-
-\item{zip}{\verb{<chr>} Provider's zip code}
+\item{address, city, state, zip}{\verb{<chr>} Provider's address, city, state, zip}
 
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 
@@ -75,9 +72,20 @@ fee-for-service (Part B).
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 opt_out(count = TRUE)
 
+opt_out(start_year = 2026, count = TRUE)
+
+opt_out(start_year = 2000)
+
 opt_out(npi = 1043522824) |> str()
 
-opt_out(state = "GA", specialty = contains("Psych"))
+opt_out(state = "GA",
+        specialty = contains("Psych"),
+        order_refer = FALSE) |>
+        str()
+
+opt_out(state = "GA",
+        specialty = contains("Psych")) |>
+        str()
 \dontshow{\}) # examplesIf}
 }
 \references{

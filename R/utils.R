@@ -41,8 +41,13 @@ extract_year <- function(x) {
 }
 
 #' @noRd
+this_year <- function() {
+  as.integer(substring(Sys.Date(), 1L, 4L))
+}
+
+#' @noRd
 next_year <- function() {
-  as.integer(substring(Sys.Date(), 1L, 4L)) + 1L
+  this_year() + 1L
 }
 
 #' @noRd

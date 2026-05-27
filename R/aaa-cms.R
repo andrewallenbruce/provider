@@ -11,19 +11,6 @@ uuid_cms <- function(endpoint) {
     revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
     transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
     quality = "7adb8b1b-b85c-4ed3-b314-064776e50180",
-
-    hha_enroll = "15f64ab4-3172-4a27-b589-ebd67a6d28aa",
-    rhc_enroll = "3b7e7659-067e-41ea-8e36-f9ee2036e1f6",
-    fqhc_enroll = "4bcae866-3411-439a-b762-90a6187c194b",
-    snf_enroll = "5f2c306f-3b1c-42cd-b037-187b2ce22126",
-    hospice_enroll = "25704213-e833-4b8b-9dbc-58dd17149209",
-    hha_owner = "fc009b2d-7846-44b1-b4a1-692f0c143879",
-    rhc_owner = "ab03c9bc-0c22-4ca4-b032-21dd3408210d",
-    fqhc_owner = "ed289c89-0bb8-4221-a20a-85776066381b",
-    hospital_owner = "60625dc8-b621-45f0-9423-077fd133b13e",
-    snf_owner = "a4358712-e910-4eaf-8f24-5e90ba3cf8d0",
-    hospice_owner = "e983965e-1603-4cb8-82b5-c40090e380d1",
-
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
