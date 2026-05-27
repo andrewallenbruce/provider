@@ -36,7 +36,7 @@ Medicare
 
 - fac_type:
 
-  `<enum>` Facility type
+  `<enum>` Facility type; if NULL (default), will search all:
 
   - `hha` = Home Health Agency
 

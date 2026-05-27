@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9188 (2026-05-27)
+
+- polish
+
 ## provider 0.0.1.9187 (2026-05-26)
 
 - [`owner()`](https://andrewallenbruce.github.io/provider/reference/owner.md)
