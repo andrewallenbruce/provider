@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9188 (2026-05-27)
+
+* polish
+
+
 # provider 0.0.1.9187 (2026-05-26)
 
 * `owner()` hybrid method
