@@ -30,7 +30,7 @@ owner(
 )
 }
 \arguments{
-\item{fac_type}{\verb{<enum>} Facility type
+\item{fac_type}{\verb{<enum>} Facility type; if NULL (default), will search all:
 \itemize{
 \item \code{hha} = Home Health Agency
 \item \code{rhc} = Rural Health Clinic

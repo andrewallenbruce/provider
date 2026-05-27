@@ -1,14 +1,41 @@
-test_that("check_modifiers() works", {
-  expect_error(
-    check_modifiers(
-      param_pdc(
-        first = "ANDREW",
-        ccn = excludes("ASGSAH"),
-        facility = ends("sdgdgs")
-      ),
-      "ENDPOINT"
+describe("check_modifiers()", {
+  it("succeeds with valid input", {
+    expect_no_error(
+      check_modifiers(
+        param_pdc(ccn = contains("ASGSAH"), facility = starts("sdgdgs")),
+        end = "ENDPOINT"
+      )
     )
-  )
+    expect_no_error(
+      check_modifiers(
+        param_pdc(ccn = "ASGSAH", facility = "sdgdgs"),
+        end = "ENDPOINT"
+      )
+    )
+    # FIXME Should this error?
+    # -> No `end` argument supplied to check_modifiers
+    # -> Because `end` is never evaluated
+    # -> In the cli::abort message since there are no modifiers to check
+    expect_no_error(
+      check_modifiers(
+        param_pdc()
+      )
+    )
+  })
+  it("errors with incorrect input", {
+    expect_error(
+      check_modifiers(
+        param_pdc(ccn = excludes("ASGSAH"), facility = starts("sdgdgs")),
+        end = "ENDPOINT"
+      )
+    )
+    expect_error(
+      check_modifiers(
+        param_pdc(excludes("sdfg")),
+        end = "ENDPOINT"
+      )
+    )
+  })
 })
 
 test_that("uuid_pdc() works", {

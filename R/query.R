@@ -42,6 +42,7 @@ query <- function(api, x, N) {
       paste0("filter[<<i>>][condition][operator]=", under(x$O)),
       paste0(
         "filter[<<i>>][condition][value]",
+        # if (length(x$V) > 1L) "[]=" else "=",
         if (length(x$V) > 1L) paste0("[", seq_along(x$V), "]=") else "=",
         x$V
       )

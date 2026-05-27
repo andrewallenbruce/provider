@@ -7,7 +7,7 @@
 #' Medicare
 #'
 #' @inheritParams provider_common_params
-#' @param fac_type `<enum>` Facility type
+#' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
 #'    - `hha` = Home Health Agency
 #'    - `rhc` = Rural Health Clinic
 #'    - `fqhc` = Federally Qualified Health Clinic
@@ -20,12 +20,12 @@
 #' @param org_name `<chr>` Legal business name
 #' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip
-#' @param multi `<lgl>` Does hospital have more than one NPI?
-#' @param status `<enum>` Organization status
+#' @param multi `<lgl>` Does facility have more than one NPI?
+#' @param status `<enum>` Facility organization status
 #'    - `P` = Proprietary
 #'    - `N` = Non-Profit
 #'    - `D` = Unknown
-#' @param org_type `<enum>` Organization structure type
+#' @param org_type `<enum>` Facility organization structure type
 #'    - `corp` = Corporation
 #'    - `other` = Other
 #'    - `llc` = LLC
@@ -64,221 +64,6 @@ facility <- function(
     count = count,
     set = FALSE,
     idcol = "fac_type",
-    NPI = npi,
-    CCN = ccn,
-    `ASSOCIATE ID` = pac,
-    `ENROLLMENT ID` = enid,
-    `ORGANIZATION NAME` = org_name,
-    `DOING BUSINESS AS NAME` = org_dba,
-    CITY = city,
-    STATE = state,
-    `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = tag_bool(multi),
-    PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' @noRd
-fqhc_enroll <- function(
-  npi = NULL,
-  ccn = NULL,
-  pac = NULL,
-  enid = NULL,
-  org_name = NULL,
-  org_dba = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  multi = NULL,
-  status = NULL,
-  org_type = NULL,
-  count = FALSE,
-  set = FALSE
-) {
-  check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
-
-  x <- cms(
-    count = count,
-    set = set,
-    NPI = npi,
-    CCN = ccn,
-    `ASSOCIATE ID` = pac,
-    `ENROLLMENT ID` = enid,
-    `ORGANIZATION NAME` = org_name,
-    `DOING BUSINESS AS NAME` = org_dba,
-    CITY = city,
-    STATE = state,
-    `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = tag_bool(multi),
-    PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' @noRd
-hha_enroll <- function(
-  npi = NULL,
-  ccn = NULL,
-  pac = NULL,
-  enid = NULL,
-  org_name = NULL,
-  org_dba = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  multi = NULL,
-  status = NULL,
-  org_type = NULL,
-  count = FALSE,
-  set = FALSE
-) {
-  check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
-
-  x <- cms(
-    count = count,
-    set = set,
-    NPI = npi,
-    CCN = ccn,
-    `ASSOCIATE ID` = pac,
-    `ENROLLMENT ID` = enid,
-    `ORGANIZATION NAME` = org_name,
-    `DOING BUSINESS AS NAME` = org_dba,
-    CITY = city,
-    STATE = state,
-    `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = tag_bool(multi),
-    PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' @noRd
-hospice_enroll <- function(
-  npi = NULL,
-  ccn = NULL,
-  pac = NULL,
-  enid = NULL,
-  org_name = NULL,
-  org_dba = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  multi = NULL,
-  status = NULL,
-  org_type = NULL,
-  count = FALSE,
-  set = FALSE
-) {
-  check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
-
-  x <- cms(
-    count = count,
-    set = set,
-    NPI = npi,
-    CCN = ccn,
-    `ASSOCIATE ID` = pac,
-    `ENROLLMENT ID` = enid,
-    `ORGANIZATION NAME` = org_name,
-    `DOING BUSINESS AS NAME` = org_dba,
-    CITY = city,
-    STATE = state,
-    `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = tag_bool(multi),
-    PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' @noRd
-rhc_enroll <- function(
-  npi = NULL,
-  ccn = NULL,
-  pac = NULL,
-  enid = NULL,
-  org_name = NULL,
-  org_dba = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  multi = NULL,
-  status = NULL,
-  org_type = NULL,
-  count = FALSE,
-  set = FALSE
-) {
-  check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
-
-  x <- cms(
-    count = count,
-    set = set,
-    NPI = npi,
-    CCN = ccn,
-    `ASSOCIATE ID` = pac,
-    `ENROLLMENT ID` = enid,
-    `ORGANIZATION NAME` = org_name,
-    `DOING BUSINESS AS NAME` = org_dba,
-    CITY = city,
-    STATE = state,
-    `ZIP CODE` = zip,
-    `MULTIPLE NPI FLAG` = tag_bool(multi),
-    PROPRIETARY_NONPROFIT = status,
-    `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type)
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' @noRd
-snf_enroll <- function(
-  npi = NULL,
-  ccn = NULL,
-  pac = NULL,
-  enid = NULL,
-  org_name = NULL,
-  org_dba = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  multi = NULL,
-  status = NULL,
-  org_type = NULL,
-  count = FALSE,
-  set = FALSE
-) {
-  check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
-
-  x <- cms(
-    count = count,
-    set = set,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,

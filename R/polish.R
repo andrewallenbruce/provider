@@ -56,7 +56,7 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 }
 
 #' @noRd
-polish_enroll <- function(x) {
+polish_facility <- function(x) {
   rc_address(x) |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -68,37 +68,7 @@ polish_enroll <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
   rename_with(x, "facility") |>
-    polish_enroll()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("fqhc_enroll")) <- function(x) {
-  rename_with(x, "fqhc_enroll") |>
-    polish_enroll()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("hha_enroll")) <- function(x) {
-  rename_with(x, "hha_enroll") |>
-    polish_enroll()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("hospice_enroll")) <- function(x) {
-  rename_with(x, "hospice_enroll") |>
-    polish_enroll()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("rhc_enroll")) <- function(x) {
-  rename_with(x, "rhc_enroll") |>
-    polish_enroll()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("snf_enroll")) <- function(x) {
-  rename_with(x, "snf_enroll") |>
-    polish_enroll()
+    polish_facility()
 }
 
 #' @noRd
@@ -114,42 +84,6 @@ polish_owner <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
   rename_with(x, "owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("fqhc_owner")) <- function(x) {
-  rename_with(x, "fqhc_owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("hha_owner")) <- function(x) {
-  rename_with(x, "hha_owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("hospice_owner")) <- function(x) {
-  rename_with(x, "hospice_owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("hospital_owner")) <- function(x) {
-  rename_with(x, "hospital_owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("rhc_owner")) <- function(x) {
-  rename_with(x, "rhc_owner") |>
-    polish_owner()
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("snf_owner")) <- function(x) {
-  rename_with(x, "snf_owner") |>
     polish_owner()
 }
 
