@@ -66,15 +66,14 @@ opt_out <- function(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_bool_(order_refer)
   check_number_whole(
     start_year,
     allow_null = TRUE,
     min = 1998,
-    max = as.numeric(this_year())
+    max = this_year()
   )
 
   if (!is.null(start_year)) {
@@ -83,7 +82,7 @@ opt_out <- function(
 
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     NPI = npi,
     `First Name` = first,
     `Last Name` = last,
@@ -107,22 +106,14 @@ opt_out <- function(
     x$order_refer <- NA_character_
   }
 
-  if (set) {
+  key <- extract_key(x)
+
+  if (!length(key)) {
     return(x)
   }
 
-  NPI <- collapse::ss(x, x[["order_refer"]] %==% 1L, c("npi")) |>
-    unlist_() |>
-    collapse::funique()
-
-  if (collapse::fnobs(NPI) == 0L) {
-    return(x)
-  }
-
-  BLOCK <- cheapr::seq_size(1L, collapse::fnobs(NPI), 150L)
-
-  if (BLOCK == 1L) {
-    y <- order_refer(npi = NPI)
+  if (n_chunks(key) == 1L) {
+    y <- order_refer(npi = key)
 
     if (nrow0(y)) {
       return(x)
@@ -131,10 +122,7 @@ opt_out <- function(
     return(pivot_order_refer(x))
   }
 
-  GRP <- cheapr::rep_each_(cheapr::seq_(1L, BLOCK), 150L)[seq_along(NPI)]
-  NPI <- vctrs::vec_split(NPI, GRP)$val
-
-  y <- purrr::map(NPI, \(x) order_refer(npi = x)) |>
+  y <- purrr::map(split_chunks(key), function(x) order_refer(npi = x)) |>
     rowbind2(nm = NULL)
 
   if (nrow0(y)) {
@@ -142,4 +130,23 @@ opt_out <- function(
   }
   x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
   pivot_order_refer(x)
+}
+
+#' @noRd
+extract_key <- function(x) {
+  collapse::ss(x, x[["order_refer"]] %==% 1L, c("npi")) |>
+    unlist_() |>
+    collapse::funique()
+}
+
+#' @noRd
+n_chunks <- function(n, size = 150L) {
+  cheapr::seq_size(from = 1L, to = collapse::fnobs(n), by = size)
+}
+
+#' @noRd
+split_chunks <- function(k, size = 150L) {
+  N <- n_chunks(k)
+  S <- cheapr::rep_each_(cheapr::seq_(1L, N), size)[seq_along(N)]
+  vctrs::vec_split(k, S)$val
 }

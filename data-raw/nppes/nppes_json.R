@@ -2,7 +2,7 @@ library(provider)
 library(collapse)
 library(pillar)
 
-nppes_json <- fs::path(here::here("data-raw"), "nppes", ext = "json")
+nppes_json <- fs::path(here::here("data-raw/nppes"), "nppes", ext = "json")
 x <- llmjson::repair_json_file(nppes_json, return_objects = FALSE)
 x <- RcppSimdJson::fparse(x)$results |> data_frame()
 
@@ -54,7 +54,87 @@ basic <- collapse::ss(
   rc_bin("sole") |>
   rc_ymd(c("enum_date", "cert_date", "updated"))
 
-basic
+key <- collapse::join(key, basic, on = "number") |>
+  collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
+  collapse::gv(c(
+    "number",
+    "entity",
+    "cred",
+    "first",
+    "middle",
+    "last",
+    "sex",
+    "sole",
+    "enum_date",
+    "cert_date",
+    "updated"
+  ))
+
+# 1 = Former
+# 2 = Professional
+# 5 = Other
+o_names <- set_names(x$other_names, x$number) |>
+  cheapr::list_drop_null() |>
+  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
+  collapse::recode_char("--" = NA_character_) |>
+  collapse::qTBL() |>
+  collapse::funique() |>
+  collapse::rnm(
+    cred = "credential",
+    first = "first_name",
+    middle = "middle_name",
+    last = "last_name"
+  ) |>
+  collapse::gv(c(
+    "number",
+    "cred",
+    "code",
+    "type",
+    "first",
+    "middle",
+    "last"
+  )) |>
+  collapse::add_stub(stub = "o_", cols = -1)
+
+# 1 = Other (Non-Medicare)
+# 5 = Medicaid
+# if cheapr::is_na(issuer) "Medicaid" else x
+ids <- set_names(x$identifiers, x$number) |>
+  cheapr::list_drop_null() |>
+  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
+  collapse::recode_char("--" = NA_character_) |>
+  collapse::qTBL() |>
+  collapse::funique() |>
+  collapse::rnm(id = "identifier") |>
+  collapse::gv(c("number", "id", "issuer", "state")) |>
+  collapse::mtt(
+    issuer = cheapr::if_else_(cheapr::is_na(issuer), "Medicaid", issuer)
+  ) |>
+  collapse::add_stub(stub = "i_", cols = -1) |>
+  print(n = Inf)
+
+set_names(x$taxonomies, x$number) |>
+  cheapr::list_drop_null() |>
+  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
+  collapse::recode_char("--" = NA_character_) |>
+  provider:::replace_nz() |>
+  provider:::rc_trim() |>
+  collapse::qTBL() |>
+  collapse::funique() |>
+  collapse::rnm(group = "taxonomy_group") |>
+  collapse::gv(c(
+    "number",
+    "code",
+    "desc",
+    "license",
+    "primary",
+    "state",
+    "group"
+  )) |>
+  collapse::roworderv("number") |>
+  collapse::add_stub(stub = "x_", cols = -1) |>
+  collapse::rsplit(~x_primary)
+
 
 # TBL 4: PRACTICE LOCATIONS
 location <- set_names(x$practiceLocations, x$number) |>
@@ -158,38 +238,3 @@ collapse::rowbind(
   collapse::fcountv("number", add = TRUE) |>
   collapse::roworderv("N", decreasing = TRUE) |>
   print(n = Inf)
-
-collapse::join(key, basic, on = "number") |>
-  collapse::join(address, on = "number", multiple = TRUE)
-
-
-other_names <- set_names(x$other_names, x$number) |>
-  cheapr::list_drop_null() |>
-  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
-  collapse::recode_char("--" = NA_character_) |>
-  collapse::qTBL()
-
-set_names(x$identifiers, x$number) |>
-  cheapr::list_drop_null() |>
-  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
-  collapse::recode_char("--" = NA_character_) |>
-  collapse::qTBL()
-
-set_names(x$taxonomies, x$number) |>
-  cheapr::list_drop_null() |>
-  collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
-  collapse::recode_char("--" = NA_character_) |>
-  provider:::replace_nz() |>
-  collapse::qTBL()
-
-collapse::rnm(
-  ex,
-  c(
-    add_purp = "address_purpose",
-    zip = "postal_code",
-    enum_type = "enumeration_type",
-    tx_group = "tx_taxonomy_group",
-    id_ID = "id_identifier"
-  ),
-  .nse = FALSE
-)

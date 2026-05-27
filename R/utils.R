@@ -42,7 +42,7 @@ extract_year <- function(x) {
 
 #' @noRd
 this_year <- function() {
-  as.integer(substring(Sys.Date(), 1L, 4L))
+  as.double(substring(Sys.Date(), 1L, 4L))
 }
 
 #' @noRd

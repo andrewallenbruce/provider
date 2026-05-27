@@ -15,8 +15,7 @@ opt_out(
   state = NULL,
   zip = NULL,
   order_refer = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -33,8 +32,6 @@ opt_out(
 \item{order_refer}{\verb{<lgl>} Indicates order and refer eligibility}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Information on providers who have decided not to participate in Medicare.

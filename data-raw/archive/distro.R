@@ -22,31 +22,42 @@ cms_distro <- \() {
     httr2::req_perform()
 
   resp <- arknpi::as_date(
-    regmatches(resp[["headers"]][["Last-Modified"]],
-    regexpr("[0-9]{2} [A-Za-z]{3} [0-9]{4}",
-            resp[["headers"]][["Last-Modified"]],
-            perl = TRUE)),
-    fmt = "%d %b %Y")
+    regmatches(
+      resp[["headers"]][["Last-Modified"]],
+      regexpr(
+        "[0-9]{2} [A-Za-z]{3} [0-9]{4}",
+        resp[["headers"]][["Last-Modified"]],
+        perl = TRUE
+      )
+    ),
+    fmt = "%d %b %Y"
+  )
 
   arrow_cms <- arrow::read_json_arrow(
     file = "https://data.cms.gov/data.json",
-    col_select = c("dataset"))
+    col_select = c("dataset")
+  )
 
   arrow_cms <- arrow_cms[["dataset"]][[1]][
-    c("title", "modified", "distribution")] |>
+    c("title", "modified", "distribution")
+  ] |>
     collapse::fsubset(
       codex::sf_detect(
         title,
         codex::sf_smush(
-          unname(datasets), "|")
+          unname(datasets),
+          "|"
         )
-      ) |>
+      )
+    ) |>
     tidyr::unnest(
       cols = distribution,
       names_sep = "_",
-      keep_empty = TRUE) |>
+      keep_empty = TRUE
+    ) |>
     collapse::fsubset(
-      distribution_format %==% "API") |>
+      distribution_format %==% "API"
+    ) |>
     collapse::fcompute(
       year = as.integer(
         regmatches(
@@ -54,50 +65,48 @@ cms_distro <- \() {
           regexpr(
             "\\d{4}(?=-\\d{2}-\\d{2})",
             distribution_title,
-            perl = TRUE))),
+            perl = TRUE
+          )
+        )
+      ),
       modified = as.Date.character(distribution_modified),
       distribution = regmatches(
         distribution_accessURL,
         regexpr(
           "(?<=dataset/).*?(?=/data)",
           distribution_accessURL,
-          perl = TRUE)),
-      keep = "title") |>
+          perl = TRUE
+        )
+      ),
+      keep = "title"
+    ) |>
     collapse::fsubset(
       data.table::rleid(
         title,
         year,
-        modified) != collapse::flag(
-        data.table::rleid(
-          title,
-          year,
-          modified
+        modified
+      ) !=
+        collapse::flag(
+          data.table::rleid(
+            title,
+            year,
+            modified
           ),
-        -1)
-      )
+          -1
+        )
+    )
 
   list(
     last_modified = resp,
     distributions = arrow_cms
-    )
+  )
 }
-
-c(
-  "Managing Clinician Aggregation Group Performance",
-  "Quarterly Prescription Drug Plan Formulary, Pharmacy Network, and Pricing Information",
-  "Medicare Clinical Laboratory Fee Schedule Private Payer Rates and Volumes",
-  "Hospital Price Transparency Enforcement Activities and Outcomes",
-  "Federally Qualified Health Center Enrollments",
-  "Rural Health Clinic Enrollments"
-)
-
 
 body <- RcppSimdJson::fparse(
   resp$body
 )[["dataset"]][
-  c("title",
-    "modified",
-    "distribution")]
+  c("title", "modified", "distribution")
+]
 
 #
 # lastmod <- regmatches(

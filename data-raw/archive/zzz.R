@@ -9,12 +9,33 @@
 #   })
 # }
 
-# .onLoad <- function(libname, pkgname) {
-#   .__distros <<- distributions_cms()
-# }
+# @export
+# `print.provider::Modifier` <- function(x, ...) {
+#   value <- if (any2(x@value == "")) {
+#     encodeString(x@value, quote = '"', na.encode = FALSE)
+#   } else {
+#     x@value
+#   }
 #
-# .onUnload <- function(libpath) {
-#   remove(".__distros", envir = .GlobalEnv)
+#  cli::cli_text(cli::col_silver("<modifier[{length(value)}]>"))
+#
+#   c::cli_text(c(
+#     cli::col_silver("Alias: "),
+#     cli::col_red(cli::style_bold(S7::S7_data(x)))
+#   ))
+#
+#   cli::cli_text(c(
+#     cli::col_silver("Operator: "),
+#     cli::style_bold(x@operator)
+#   ))
+#
+#   cli::cli_text(
+#     c(
+#       cli::col_silver("{cli::qty(length(v))}Value{?s}: "),
+#       cli::col_yellow(toString(value, width = 20L))
+#     )
+#   )
+#   invisible(x)
 # }
 
 #' Main CMS Distributions, datetime last modified
