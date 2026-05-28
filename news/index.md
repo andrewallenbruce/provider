@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9191 (2026-05-27)
+
+- exploring `vcr` tests
+
 ## provider 0.0.1.9190 (2026-05-27)
 
 - simplify
