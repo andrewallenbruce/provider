@@ -1,0 +1,258 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data/stats?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928214.3523a2d1
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '48'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:14 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:14 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '40281'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '8'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cef811ca-591f-11f1-9079-a7e85ffd2ac7
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '{"found_rows":2,"total_rows":9175}'
+  recorded_at: 2026-05-28 00:30:15
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data/stats?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928215.3523a3e4
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '48'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:15 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:15 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '40281'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '8'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cef811ca-591f-11f1-9079-a7e85ffd2ac7
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '{"found_rows":2,"total_rows":9175}'
+  recorded_at: 2026-05-28 00:30:15
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data/stats?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928215.3523a413
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '48'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:15 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:15 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '40281'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '8'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cef811ca-591f-11f1-9079-a7e85ffd2ac7
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '{"found_rows":2,"total_rows":9175}'
+  recorded_at: 2026-05-28 00:30:15
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data/stats?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928215.3523a463
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '48'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:15 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:15 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '40281'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '8'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cef811ca-591f-11f1-9079-a7e85ffd2ac7
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '{"found_rows":2,"total_rows":9175}'
+  recorded_at: 2026-05-28 00:30:16
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data/stats?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928215.3523a4ca
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '48'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:15 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:15 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '40281'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '8'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cef811ca-591f-11f1-9079-a7e85ffd2ac7
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '{"found_rows":2,"total_rows":9175}'
+  recorded_at: 2026-05-28 00:30:16
+- request:
+    method: GET
+    uri: https://data.cms.gov/data-api/v1/dataset/f6f6505c-e8b0-4d57-b258-e2b94133aaf2/data?size=5000&offset=0&filter%5B0%5D%5Bcondition%5D%5Bpath%5D=CITY&filter%5B0%5D%5Bcondition%5D%5Boperator%5D=&filter%5B0%5D%5Bcondition%5D%5Bvalue%5D=Atlanta&filter%5B1%5D%5Bcondition%5D%5Bpath%5D=STATE&filter%5B1%5D%5Bcondition%5D%5Boperator%5D=&filter%5B1%5D%5Bcondition%5D%5Bvalue%5D=GA&filter%5B2%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+ACUTE+CARE&filter%5B2%5D%5Bcondition%5D%5Boperator%5D=&filter%5B2%5D%5Bcondition%5D%5Bvalue%5D=N&filter%5B3%5D%5Bcondition%5D%5Bpath%5D=SUBGROUP+-+PSYCHIATRIC&filter%5B3%5D%5Bcondition%5D%5Boperator%5D=&filter%5B3%5D%5Bcondition%5D%5Bvalue%5D=Y
+  response:
+    status: 200
+    headers:
+      accept-ranges: bytes
+      akamai-grn: 0.3bfe3117.1779928217.3523a91f
+      cache-control: max-age=0, no-cache, no-store
+      content-encoding: gzip
+      content-language: en
+      content-length: '614'
+      content-security-policy: report-uri /report-csp-violation
+      content-type: application/json
+      date: Thu, 28 May 2026 00:30:17 GMT
+      etag: '"1779812857-gzip"'
+      expires: Thu, 28 May 2026 00:30:17 GMT
+      last-modified: Tue, 26 May 2026 16:27:37 GMT
+      pragma: no-cache
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+      vary: Accept-Encoding
+      x-age: '1295'
+      x-ah-environment: prod
+      x-akamai-original-url: 08ff4c8072129a48657f3e6043a1820662e60637
+      x-cache-hits: '1'
+      x-consumer-id: 07eafadc-1bac-4607-8441-20c35fa46f17
+      x-content-type-options: nosniff
+      x-drupal-dynamic-cache: HIT
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 10 (https://www.drupal.org)
+      x-request-id: v-cf1a56b8-591f-11f1-8776-3bd8c86ae472
+      x-xss-protection:
+      - 1; mode=block
+      - 1; mode=block
+    body:
+      string: '[{"ENROLLMENT ID":"O20100521000547","ENROLLMENT STATE":"GA","PROVIDER
+        TYPE CODE":"00-09","PROVIDER TYPE TEXT":"PART A PROVIDER - HOSPITAL","NPI":"1023095429","MULTIPLE
+        NPI FLAG":"Y","CCN":"114032","ASSOCIATE ID":"4486684784","ORGANIZATION NAME":"UHS
+        OF ANCHOR L.P.","DOING BUSINESS AS NAME":"ANCHOR HOSPITAL","INCORPORATION
+        DATE":"2000-06-02","INCORPORATION STATE":"DE","ORGANIZATION TYPE STRUCTURE":"PARTNERSHIP","ORGANIZATION
+        OTHER TYPE TEXT":"","PROPRIETARY NONPROFIT":"P","ADDRESS LINE 1":"5454 YORKTOWNE
+        DRIVE","ADDRESS LINE 2":"ANCHOR HOSPITAL","CITY":"ATLANTA","STATE":"GA","ZIP
+        CODE":"303495317","PRACTICE LOCATION TYPE":"OTHER HOSPITAL PRACTICE LOCATION","LOCATION
+        OTHER TYPE TEXT":"","SUBGROUP - GENERAL":"N","SUBGROUP - ACUTE CARE":"N","SUBGROUP
+        - ALCOHOL DRUG":"N","SUBGROUP - CHILDRENS":"N","SUBGROUP - LONG-TERM":"N","SUBGROUP
+        - PSYCHIATRIC":"Y","SUBGROUP - REHABILITATION":"N","SUBGROUP - SHORT-TERM":"N","SUBGROUP
+        - SWING-BED APPROVED":"N","SUBGROUP - PSYCHIATRIC UNIT":"N","SUBGROUP - REHABILITATION
+        UNIT":"N","SUBGROUP - SPECIALTY HOSPITAL":"N","SUBGROUP - OTHER":"N","SUBGROUP
+        - OTHER TEXT":"","REH CONVERSION FLAG":"N","REH CONVERSION DATE":"","CAH OR
+        HOSPITAL CCN":""},{"ENROLLMENT ID":"O20100803001043","ENROLLMENT STATE":"GA","PROVIDER
+        TYPE CODE":"00-09","PROVIDER TYPE TEXT":"PART A PROVIDER - HOSPITAL","NPI":"1093781544","MULTIPLE
+        NPI FLAG":"N","CCN":"114010","ASSOCIATE ID":"9234123894","ORGANIZATION NAME":"UHS
+        OF PEACHFORD, L.P.","DOING BUSINESS AS NAME":"PEACHFORD BEHAVIORAL HEALTH
+        SYSTEM OF ATLANTA","INCORPORATION DATE":"2000-06-02","INCORPORATION STATE":"DE","ORGANIZATION
+        TYPE STRUCTURE":"PARTNERSHIP","ORGANIZATION OTHER TYPE TEXT":"","PROPRIETARY
+        NONPROFIT":"P","ADDRESS LINE 1":"2151 PEACHFORD ROAD","ADDRESS LINE 2":"","CITY":"ATLANTA","STATE":"GA","ZIP
+        CODE":"303386534","PRACTICE LOCATION TYPE":"OTHER HOSPITAL PRACTICE LOCATION","LOCATION
+        OTHER TYPE TEXT":"","SUBGROUP - GENERAL":"N","SUBGROUP - ACUTE CARE":"N","SUBGROUP
+        - ALCOHOL DRUG":"N","SUBGROUP - CHILDRENS":"N","SUBGROUP - LONG-TERM":"N","SUBGROUP
+        - PSYCHIATRIC":"Y","SUBGROUP - REHABILITATION":"N","SUBGROUP - SHORT-TERM":"N","SUBGROUP
+        - SWING-BED APPROVED":"N","SUBGROUP - PSYCHIATRIC UNIT":"Y","SUBGROUP - REHABILITATION
+        UNIT":"N","SUBGROUP - SPECIALTY HOSPITAL":"N","SUBGROUP - OTHER":"N","SUBGROUP
+        - OTHER TEXT":"","REH CONVERSION FLAG":"N","REH CONVERSION DATE":"","CAH OR
+        HOSPITAL CCN":""}]'
+  recorded_at: 2026-05-28 00:30:17
+recorded_with: VCR-vcr/2.1.0

@@ -31,7 +31,8 @@ Suggests:
     arcgislayers (>= 0.6.0),
     knitr,
     testthat (>= 3.3.2),
-    tibble (>= 3.3.1)
+    tibble (>= 3.3.1),
+    vcr (>= 2.1.0)
 VignetteBuilder: 
     knitr
 Config/Needs/website: tibble
