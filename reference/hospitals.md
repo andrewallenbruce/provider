@@ -237,7 +237,7 @@ x <- hospitals(
     psych = TRUE))
 #> ✔ hospitals returned 2 results.
 x |> str()
-#> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
+#> hospitls [2 × 18] (S3: hospitals/provider/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "UHS OF ANCHOR L.P." "UHS OF PEACHFORD, L.P."
 #>  $ org_dba  : chr [1:2] "ANCHOR HOSPITAL" "PEACHFORD BEHAVIORAL HEALTH SYSTEM OF ATLANTA"
 #>  $ enid     : chr [1:2] "O20100521000547" "O20100803001043"
@@ -289,7 +289,7 @@ x
 
 hospitals(ccn = x$ccn) |> str()
 #> ✔ hospitals returned 9 results.
-#> hospitls [9 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
+#> hospitls [9 × 18] (S3: hospitals/provider/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:9] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
 #>  $ org_dba  : chr [1:9] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" NA ...
 #>  $ enid     : chr [1:9] "O20080425000450" "O20190513002452" "O20101122000631" "O20080922000250" ...
@@ -311,7 +311,7 @@ hospitals(ccn = x$ccn) |> str()
 
 hospitals2(state = "GA", rating = 5) |> str()
 #> ✔ hospitals2 returned 6 results.
-#> hosptls2 [6 × 10] (S3: hospitals2/tbl_df/tbl/data.frame)
+#> hosptls2 [6 × 10] (S3: hospitals2/provider/tbl_df/tbl/data.frame)
 #>  $ ccn      : chr [1:6] "110016" "110050" "110128" "110200" ...
 #>  $ org_name : chr [1:6] "WELLSTAR WEST GEORGIA MEDICAL CENTER" "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" ...
 #>  $ prov_type: chr [1:6] "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" "Acute Care Hospitals" ...

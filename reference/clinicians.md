@@ -141,7 +141,7 @@ clinicians(org_name = not_blank(), count = TRUE)
 
 clinicians(enid = "I20081002000549") |> str()
 #> ✔ clinicians returned 1 result.
-#> clinicns [1 × 18] (S3: clinicians/tbl_df/tbl/data.frame)
+#> clinicns [1 × 18] (S3: clinicians/provider/tbl_df/tbl/data.frame)
 #>  $ first    : chr "DOROTHY"
 #>  $ middle   : chr "E"
 #>  $ last     : chr "MCCURLEY"

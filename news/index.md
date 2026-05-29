@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9192 (2026-05-29)
+
+- added default print method
+
 ## provider 0.0.1.9191 (2026-05-27)
 
 - exploring `vcr` tests

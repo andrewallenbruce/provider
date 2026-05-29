@@ -120,7 +120,7 @@ opt_out(start_year = 2000)
 opt_out(npi = 1043522824) |> str()
 #> ✔ opt_out returned 1 result.
 #> ✔ order_refer returned 1 result.
-#> opt_out [1 × 12] (S3: opt_out/tbl_df/tbl/data.frame)
+#> opt_out [1 × 12] (S3: opt_out/provider/tbl_df/tbl/data.frame)
 #>  $ npi        : int 1043522824
 #>  $ first      : chr "James"
 #>  $ last       : chr "Smith"
@@ -139,7 +139,7 @@ opt_out(state = "GA",
         order_refer = FALSE) |>
         str()
 #> ✔ opt_out returned 98 results.
-#> opt_out [98 × 12] (S3: opt_out/tbl_df/tbl/data.frame)
+#> opt_out [98 × 12] (S3: opt_out/provider/tbl_df/tbl/data.frame)
 #>  $ npi        : int [1:98] 1881778967 1982776308 1699766568 1881876175 1821238791 1528283736 1689781692 1730235912 1427291087 1609044916 ...
 #>  $ first      : chr [1:98] "Ana" "Joan" "Nicholas" "Barbara" ...
 #>  $ last       : chr [1:98] "Adelstein" "Miller" "Hume" "Da Vanzo" ...
@@ -158,7 +158,7 @@ opt_out(state = "GA",
         str()
 #> ✔ opt_out returned 226 results.
 #> ✔ order_refer returned 128 results.
-#> opt_out [226 × 12] (S3: opt_out/tbl_df/tbl/data.frame)
+#> opt_out [226 × 12] (S3: opt_out/provider/tbl_df/tbl/data.frame)
 #>  $ npi        : int [1:226] 1881778967 1982776308 1679613319 1699766568 1598942070 1124202387 1841409182 1881876175 1285843516 1295956217 ...
 #>  $ first      : chr [1:226] "Ana" "Joan" "Sherri" "Nicholas" ...
 #>  $ last       : chr [1:226] "Adelstein" "Miller" "Bornstein" "Hume" ...

@@ -90,7 +90,7 @@ order_refer(
 ``` r
 order_refer(count = TRUE)
 #> order_refer Totals
-#> • Rows  : 2,004,629
+#> • Rows  : 2,002,385
 #> • Pages : 401      
 #> 
 
@@ -102,25 +102,25 @@ order_refer(npi = 1003026055)
 #> 1 RADHIKA PHADKE 1003026055     0     1     0     1       0
 
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ order_refer returned 136 results.
-#> # A tibble: 136 × 8
+#> ✔ order_refer returned 135 results.
+#> # A tibble: 135 × 8
 #>    first    last         npi   ptb   dme   hha   pmd hospice
 #>    <chr>    <chr>      <int> <int> <int> <int> <int>   <int>
 #>  1 JENNIFER SMITH 1699184895     1     1     1     1       0
-#>  2 JENNIFER SMITH 1215919170     1     1     1     1       1
+#>  2 JENNIFER SMITH 1598994923     1     1     1     1       0
 #>  3 JENNIFER SMITH 1053842450     1     1     1     1       1
 #>  4 JENNIFER SMITH 1477127207     1     1     0     0       0
-#>  5 JENNIFER SMITH 1598994923     1     1     1     1       0
-#>  6 JENNIFER SMITH 1467884627     1     1     0     0       0
-#>  7 JENNIFER SMITH 1184142903     1     1     1     1       0
-#>  8 JENNIFER SMITH 1063180420     1     1     1     1       0
-#>  9 JENNIFER SMITH 1952073652     1     1     1     1       0
-#> 10 JENNIFER SMITH 1821069931     1     1     1     1       0
-#> # ℹ 126 more rows
+#>  5 JENNIFER SMITH 1215919170     1     1     1     1       1
+#>  6 JENNIFER SMITH 1952073652     1     1     1     1       0
+#>  7 JENNIFER SMITH 1821069931     1     1     1     1       0
+#>  8 JENNIFER SMITH 1790063832     1     1     1     1       1
+#>  9 JENNIFER SMITH 1285898619     1     1     1     0       1
+#> 10 JENNIFER SMITH 1184142903     1     1     1     1       0
+#> # ℹ 125 more rows
 
 order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
-#> ✔ order_refer returned 48 results.
-#> # A tibble: 48 × 8
+#> ✔ order_refer returned 47 results.
+#> # A tibble: 47 × 8
 #>    first     last               npi   ptb   dme   hha   pmd hospice
 #>    <chr>     <chr>            <int> <int> <int> <int> <int>   <int>
 #>  1 ROBYN     AYER        1659094290     1     1     0     1       0
@@ -133,5 +133,5 @@ order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 #>  8 BRIDGET   DIETZ       1720522592     1     1     0     1       0
 #>  9 JAMIE     DUBOSE      1720506520     1     1     0     1       0
 #> 10 ANNA      DYKSTRA     1174278626     1     1     0     1       0
-#> # ℹ 38 more rows
+#> # ℹ 37 more rows
 ```
