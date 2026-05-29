@@ -1,11 +1,33 @@
 #' @noRd
-add_class <- function(x, endpoint) {
-  `class<-`(cheapr::as_df(x), c(endpoint, "tbl_df", "tbl", "data.frame"))
+add_class <- function(x, endpoint = NULL) {
+  `class<-`(
+    cheapr::as_df(x),
+    c(
+      if (!is.null(endpoint)) endpoint,
+      "provider",
+      "tbl_df",
+      "tbl",
+      "data.frame"
+    )
+  )
+}
+
+#' @export
+print.provider <- function(x, ...) {
+  withr::with_options(
+    list(
+      pillar.bold = TRUE,
+      pillar.subtle_num = TRUE,
+      pillar.print_min = 20L
+    ),
+    NextMethod()
+  )
+  invisible(x)
 }
 
 #' @noRd
 rename_with <- function(x, endpoint) {
-  if (rlang::is_null(RE_NAME[[endpoint]])) {
+  if (is.null(RE_NAME[[endpoint]])) {
     return(x)
   }
 
@@ -71,7 +93,7 @@ rc_other <- function(x, stub, call = caller_env()) {
   main <- paste0(stub, "_type")
   otxt <- paste0(stub, "_otxt")
 
-  if (rlang::is_null(x[[otxt]])) {
+  if (is.null(x[[otxt]])) {
     cli::cli_abort(
       "{.val {otxt}} is not a column in {.var x}.",
       call = call
@@ -103,7 +125,7 @@ rc_address <- function(
   arg = caller_arg(add2),
   call = caller_env()
 ) {
-  if (rlang::is_null(x[[add2]])) {
+  if (is.null(x[[add2]])) {
     cli::cli_abort(
       "{.val {arg}} is not a column in {.var x}.",
       arg = arg,

@@ -187,3 +187,51 @@ api_medicare2 <- function(x) {
       collapse::rsplit(~title)
   )
 }
+
+#' @noRd
+ss_na <- function(x) {
+  cheapr::sset(x, cheapr::which_(cheapr::row_na_counts(x) < 3L))
+}
+
+#' @noRd
+rm_year <- function(x) {
+  gsub(
+    " : [0-9]{4}-[0-9]{2}-[0-9]{2}([0-9A-Za-z]{1,3})?$",
+    "",
+    x,
+    perl = TRUE
+  )
+}
+
+#' @noRd
+qpp_data <- function(x) {
+  x <- RcppSimdJson::fload(
+    json = "https://data.cms.gov/data.json",
+    query = "/dataset"
+  )
+
+  d <- collapse::get_elem(x, "distribution") |>
+    collapse::rowbind(fill = TRUE) |>
+    collapse::qTBL()
+  d <- collapse::av(d, year = extract_year(d$title), pos = 1L)
+
+  d$title <- rm_year(d$title)
+  d$format <- collapse::ss(d$format, cheapr::which_na(d$description))
+
+  d <- collapse::roworderv(d, c("title", "year"), decreasing = c(FALSE, TRUE))
+  d <- ss_na(d)
+  d <- collapse::ss(d, d$format %==% "latest") |>
+    collapse::gv(c("year", "title", "accessURL", "resourcesAPI", "description"))
+
+  x <- collapse::av(x, uuid = uuid_from_url(x$identifier), pos = 1L) |>
+    collapse::qTBL() |>
+    collapse::gv(c("title", "uuid", "describedBy", "description", "identifier"))
+
+  x <- collapse::join(x, d, on = "title", verbose = 0, multiple = TRUE) |>
+    collapse::roworderv("title") |>
+    collapse::colorderv(c("year", "title", "description"))
+
+  x <- ss_na(x)
+
+  collapse::ss(d, grepl("^Quality", d$title, perl = TRUE))
+}

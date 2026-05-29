@@ -9,8 +9,8 @@ S7::method(polish, S7::class_integer) <- function(x) {
 #' @noRd
 S7::method(polish, S7::class_data.frame) <- function(x) {
   cli::cli_alert_warning("Using default {.cls polish} method")
-  replace_nz(x) |>
-    as_data_frame()
+  add_class(x) |>
+    replace_nz()
 }
 
 #' @noRd
@@ -56,8 +56,9 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 }
 
 #' @noRd
-polish_facility <- function(x) {
-  rc_address(x) |>
+S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
+  rename_with(x, "facility") |>
+    rc_address() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
@@ -66,25 +67,14 @@ polish_facility <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
-  rename_with(x, "facility") |>
-    polish_facility()
-}
-
-#' @noRd
-polish_owner <- function(x) {
-  rc_address(x) |>
+S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
+  rename_with(x, "owner") |>
+    rc_address() |>
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
     pivot_owner() |>
     collapse::roworderv(c("pac", "org_enid"))
-}
-
-#' @noRd
-S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
-  rename_with(x, "owner") |>
-    polish_owner()
 }
 
 #' @noRd
