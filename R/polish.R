@@ -2,6 +2,51 @@
 polish <- S7::new_generic("polish", "x")
 
 #' @noRd
+ResultAffiliations <- S7::new_S3_class("affiliations")
+
+#' @noRd
+ResultCLIA <- S7::new_S3_class("clia")
+
+#' @noRd
+ResultClinicians <- S7::new_S3_class("clinicians")
+
+#' @noRd
+ResultDialysis <- S7::new_S3_class("dialysis")
+
+#' @noRd
+ResultFacility <- S7::new_S3_class("facility")
+
+#' @noRd
+ResultOwner <- S7::new_S3_class("owner")
+
+#' @noRd
+ResultHospitals <- S7::new_S3_class("hospitals")
+
+#' @noRd
+ResultHospitals2 <- S7::new_S3_class("hospitals2")
+
+#' @noRd
+ResultOptOut <- S7::new_S3_class("opt_out")
+
+#' @noRd
+ResultOrderRefer <- S7::new_S3_class("order_refer")
+
+#' @noRd
+ResultPending <- S7::new_S3_class("pending")
+
+#' @noRd
+ResultProviders <- S7::new_S3_class("providers")
+
+#' @noRd
+ResultReassignments <- S7::new_S3_class("reassignments")
+
+#' @noRd
+ResultRevocations <- S7::new_S3_class("revocations")
+
+#' @noRd
+ResultTransparency <- S7::new_S3_class("transparency")
+
+#' @noRd
 S7::method(polish, S7::class_integer) <- function(x) {
   invisible(x)
 }
@@ -14,13 +59,13 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
+S7::method(polish, ResultAffiliations) <- function(x) {
   rename_with(x, "affiliations") |>
     rc_integer("npi")
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
+S7::method(polish, ResultCLIA) <- function(x) {
   rc_clia(x, "CLIA_TRMNTN_CD")
   rc_clia(x, "CRTFCT_TYPE_CD")
   rc_clia(x, "GNRL_FAC_TYPE_CD")
@@ -38,7 +83,7 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
+S7::method(polish, ResultClinicians) <- function(x) {
   rename_with(x, "clinicians") |>
     rc_address() |>
     rc_address(add1 = "specialty", add2 = "spec_other") |>
@@ -47,7 +92,7 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
+S7::method(polish, ResultDialysis) <- function(x) {
   rename_with(x, "dialysis") |>
     rc_integer(c("network", "rating")) |>
     rc_ymd("cert_date") |>
@@ -55,7 +100,7 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
+S7::method(polish, ResultFacility) <- function(x) {
   rename_with(x, "facility") |>
     rc_address() |>
     rc_integer("npi") |>
@@ -66,7 +111,7 @@ S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
+S7::method(polish, ResultOwner) <- function(x) {
   rename_with(x, "owner") |>
     rc_address() |>
     rc_double("percent") |>
@@ -77,7 +122,7 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
+S7::method(polish, ResultHospitals) <- function(x) {
   rc_hospitals(x, "PROVIDER TYPE CODE")
   rc_hospitals(x, "PROPRIETARY NONPROFIT")
   rc_hospitals(x, "PRACTICE LOCATION TYPE")
@@ -93,13 +138,13 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
+S7::method(polish, ResultHospitals2) <- function(x) {
   rename_with(x, "hospitals2") |>
     rc_integer("rating")
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
+S7::method(polish, ResultOptOut) <- function(x) {
   rename_with(x, "opt_out") |>
     rc_address() |>
     rc_integer("npi") |>
@@ -108,20 +153,20 @@ S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
+S7::method(polish, ResultOrderRefer) <- function(x) {
   rename_with(x, "order_refer") |>
     rc_integer("npi") |>
     rc_bin(c("ptb", "dme", "hha", "pmd", "hospice"))
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
+S7::method(polish, ResultPending) <- function(x) {
   rename_with(x, "pending") |>
     rc_integer("npi")
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
+S7::method(polish, ResultProviders) <- function(x) {
   rename_with(x, "providers") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -129,14 +174,14 @@ S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
+S7::method(polish, ResultReassignments) <- function(x) {
   rename_with(x, "reassignments") |>
     rc_integer(c("npi", "employers", "employees")) |>
     collapse::roworderv(c("npi"))
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
+S7::method(polish, ResultRevocations) <- function(x) {
   rename_with(x, "revocations") |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -145,7 +190,7 @@ S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
+S7::method(polish, ResultTransparency) <- function(x) {
   rename_with(x, "transparency") |>
     rc_integer("case") |>
     rc_ymd("action_date") |>
