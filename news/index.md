@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9196 (2026-05-30)
+
+- plugging away at quality_payment
+
 ## provider 0.0.1.9195 (2026-05-30)
 
 - S3 classes for polish
