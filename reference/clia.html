@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9192</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9193</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ services the facility provides.</p>
 <span>  clia_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cert_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  acr_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  multi_site <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -123,7 +123,7 @@ services the facility provides.</p>
 </ul></dd>
 
 
-<dt id="arg-multi-site">multi_site<a class="anchor" aria-label="anchor" href="#arg-multi-site"></a></dt>
+<dt id="arg-multi">multi<a class="anchor" aria-label="anchor" href="#arg-multi"></a></dt>
 <dd><p><code>&lt;enum&gt;</code>  Single site CLIA multiple-site exceptions:</p><ul><li><p><code>"applied"</code> = Applied for to cover multiple testing locations</p></li>
 <li><p><code>"campus"</code> = Hospital with several labs on single hospital campus</p></li>
 <li><p><code>"non"</code> = Multiple sites with non-profit, federal, state or local government status (limited public health testing)</p></li>
@@ -212,7 +212,7 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>cert_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acr"</span>, <span class="st">"reg"</span><span class="op">)</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">18</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 22</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 21</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    fac_name   fac_ccn clia_ccn chows  labs sites address city  state zip   term </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SGMC HEAL… 11D002… 110122       0     1     0 2501 N… VALD… GA    31602 Acti…</span>
@@ -233,13 +233,13 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> SGMC FAMI… 11D214… <span style="color: #BB0000;">NA</span>           0     2     0 3386 G… VALD… GA    31605 Vol …</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> OCTAPHARM… 11D219… <span style="color: #BB0000;">NA</span>           0     0     0 1713 N… VALD… GA    31601 Acti…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> VEEDHATA … 11D222… <span style="color: #BB0000;">NA</span>           0     3     0 3386 G… VALD… GA    31605 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, owner &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, owner &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   action &lt;chr&gt;, cert_date &lt;date&gt;, eff_date &lt;date&gt;, term_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   elig_ind &lt;chr&gt;, poc_ind &lt;chr&gt;, multi_site &lt;chr&gt;, acr_org &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   elig_ind &lt;int&gt;, multi_site &lt;chr&gt;, acr_org &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>acr_org <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cap"</span>, <span class="st">"cola"</span>, <span class="st">"jcaho"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> clia [1 × 22] (S3: clia/provider/tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> clia [1 × 21] (S3: clia/provider/tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fac_name  : chr "LEXINGTON MEDICAL CENTER-LABORATORY"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fac_ccn   : chr "42D0665325"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ clia_ccn  : chr "420073"</span>
@@ -258,36 +258,13 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ cert_date : Date[1:1], format: "1993-01-13"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ eff_date  : Date[1:1], format: "2025-01-03"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ term_date : Date[1:1], format: "2027-01-02"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elig_ind  : chr "N"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ poc_ind   : chr "N"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elig_ind  : int 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi_site: chr NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ acr_org   : chr "CAP, COLA, JCAHO"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>multi_site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp"</span>, <span class="st">"campus"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>multi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp"</span>, <span class="st">"campus"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="font-weight: bold;">110</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> clia [110 × 22] (S3: clia/provider/tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fac_name  : chr [1:110] "UAB UNIVERSITY OF ALABAMA HOSPITAL LAB" "BBAHC KANAKANAK HOSPITAL" "ST JOSEPH'S HOSPITAL &amp; MEDICAL CENTER" "UAMS DEPT OF LABORATORY SCIENCES" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fac_ccn   : chr [1:110] "01D0678593" "02D0706717" "03D0526691" "04D2160128" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ clia_ccn  : chr [1:110] NA "020021" "A20000010" NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ chows     : int [1:110] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ labs      : int [1:110] 0 0 1 0 0 1 0 1 1 2 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sites     : int [1:110] 5 7 3 2 2 3 6 2 3 4 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address   : chr [1:110] "619 19TH STREET SOUTH  SW S257" "6000 KANAKANAK ROAD" "350 W THOMAS RD 2ND FLOOR" "300 HOOPER DRIVE BUILDING 5, ROOM G15" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city      : chr [1:110] "BIRMINGHAM" "DILLINGHAM" "PHOENIX" "LITTLE ROCK" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state     : chr [1:110] "AL" "AK" "AZ" "AR" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip       : chr [1:110] "35249" "99576" "85013" "72205" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ term      : chr [1:110] "Active" "Active" "Active" "Active" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cert_type : chr [1:110] "Accreditation" "Waiver" "Accreditation" "Waiver" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fac_type  : chr [1:110] "Hospital" "Anc" "Hospital" "Fair" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ owner     : chr [1:110] "[GOV] State" "[GOV] Federal" "RNHCI" "[GOV] State" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ action    : chr [1:110] NA NA "Validate" NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cert_date : Date[1:110], format: "1993-01-15" "1992-12-23" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ eff_date  : Date[1:110], format: "2025-02-28" "2024-07-22" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ term_date : Date[1:110], format: "2027-02-27" "2026-07-21" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elig_ind  : chr [1:110] "N" "N" "Y" "N" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ poc_ind   : chr [1:110] "N" "N" "N" "N" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ multi_site: chr [1:110] "Applied, Campus, Temporary" "Applied, Campus, Non-profit, Temporary" "Applied, Campus, Temporary" "Applied, Campus, Non-profit, Temporary" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ acr_org   : chr [1:110] "CAP" NA "CAP" NA ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in pivot_multi_site(rc_address(rc_address(rc_integer(rc_ymd2(rc_bin(rename_with(x,     "clia"), collapse::gvr(x, "_ind$|_multi$", return = 2L)),     collapse::gvr(x, "_date$", return = 2L)), c("chows", "labs",     "sites"))), add1 = "fac_name", add2 = "fac_2")):</span> <span style="color: #0000BB;">"\"multi_site\""</span> is not a column in `x`</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
