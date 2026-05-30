@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9195 (2026-05-30)
+
+* S3 classes for polish
+
+
 # provider 0.0.1.9194 (2026-05-30)
 
 * cleaning up
