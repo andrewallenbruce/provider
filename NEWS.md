@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9193 (2026-05-29)
+
+* quality payment backend
+
+
 # provider 0.0.1.9192 (2026-05-29)
 
 * added default print method
