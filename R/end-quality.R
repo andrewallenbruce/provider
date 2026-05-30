@@ -75,8 +75,6 @@ quality_metrics <- function(year) {
 # https://preview.qpp.cms.gov/api/submissions/public/docs/
 # https://data.cms.gov/resources/quality-payment-program-experience-data-dictionary
 #
-# "?count=true&results=true&offset=0&limit=1"
-#
 # === `quality_totals` ===
 #    year   nrows ncols
 #   <int>   <int> <int>
@@ -88,124 +86,6 @@ quality_metrics <- function(year) {
 # 6  2018  881959    92
 # 7  2017 1054657    92
 
-# ex <- paste0(qpp$identifier, "?offset=0&size=5") |>
-#   map_perform_parallel() |>
-#   rlang::set_names(qpp$year) |>
-#   purrr::map(replace_nz) |>
-#   purrr::map(tibble::as_tibble)
-#
-# ex_17_21 <- ex[names(ex) %in% 2017:2021] |> rowbind2(nm = "year")
-# ex_22_23 <- ex[!names(ex) %in% 2017:2021]
-#
-# x <- temporal(qpp)
-# quality_totals <- fastplyr::new_tbl(
-#   year = as.integer(names(x$total)),
-#   nrows = as.integer(x$total),
-#   ncols = as.integer(collapse::vlengths(x$fields, use.names = FALSE))
-# )
-
-# 2017 - 2021
-qpp_2017_2021 <- list(
-  npi = "npi",
-  `practice state or us territory` = "state",
-  `practice size` = "size",
-  `clinician specialty` = "specialty",
-  `years in medicare` = "years",
-  `medicare patients` = "patients",
-  `allowed charges` = "charges",
-  services = "services",
-  `final score` = "final_score",
-  `payment adjustment percentage` = "adjustment",
-  `participation type` = "part_opt",
-  `complex patient bonus` = "complex_bonus",
-  `ambulatory surgical center` = "asc_ind",
-  engaged = "engaged_ind",
-  `extreme hardship` = "extreme_ind",
-  `facility-based` = "facility_ind",
-  `hpsa clinician` = "hpsa_ind",
-  `hospital-based clinician` = "hospital_ind",
-  `non-patient facing` = "nonpat_ind",
-  `opted into mips` = "optin_ind",
-  `rural clinician` = "rural_ind",
-  `small practitioner` = "small_ind",
-  `quality category score` = "qua_score",
-  `quality improvement bonus` = "qua_improve",
-  `promoting interoperability (pi) category score` = "pi_score",
-  `ia score` = "ia_score",
-  `cost score` = "cost_score"
-)
-
-# 2022
-qpp_2022 <- list(
-  npi = "npi",
-  `practice state or us territory` = "state",
-  `practice size` = "size",
-  `clinician type` = "cred",
-  `clinician specialty` = "specialty",
-  `years in medicare` = "years",
-  `medicare patients` = "patients",
-  `allowed charges` = "charges",
-  services = "services",
-  `final score` = "final_score",
-  `payment adjustment percentage` = "adjustment",
-  `dual eligibility ratio` = "dual_ratio",
-  `participation option` = "part_opt",
-  `small practice bonus` = "small_bonus",
-  `complex patient bonus` = "complex_bonus",
-  `ambulatory surgical center-based status` = "asc_ind",
-  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
-  `facility-based status` = "facility_ind",
-  `health professional shortage area status` = "hpsa_ind",
-  `hospital-based status` = "hospital_ind",
-  `non-patient facing status` = "nonpat_ind",
-  `non-reporting` = "nonrep_ind",
-  `opted into mips` = "optin_ind",
-  `rural status` = "rural_ind",
-  `safety-net status` = "safety_ind",
-  `small practice status` = "small_ind",
-  `quality category score` = "qua_score",
-  `quality improvement score` = "qua_improve",
-  `promoting interoperability (pi) category score` = "pi_score",
-  `improvement activities (ia) category score` = "ia_score",
-  `cost category score` = "cost_score"
-)
-
-# 2023-2024
-qpp_2023_2024 <- list(
-  npi = "npi",
-  `practice state or us territory` = "state",
-  `practice size` = "size",
-  `clinician type` = "cred",
-  `clinician specialty` = "specialty",
-  `years in medicare` = "years",
-  `medicare patients` = "patients",
-  `allowed charges` = "charges",
-  services = "services",
-  `dual eligibility ratio` = "dual_ratio",
-  `final score` = "final_score",
-  `payment adjustment percentage` = "adjustment",
-  `reporting option` = "rep_opt",
-  `participation option` = "part_opt",
-  `complex patient bonus` = "complex_bonus",
-  `small practice bonus` = "small_bonus",
-  `facility-based status` = "facility_ind",
-  `ambulatory surgical center-based status` = "asc_ind",
-  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
-  `health professional shortage area status` = "hpsa_ind",
-  `hospital-based status` = "hospital_ind",
-  `opted into mips` = "optin_ind",
-  `non-patient facing status` = "nonpat_ind",
-  `non-reporting` = "nonrep_ind",
-  `rural status` = "rural_ind",
-  `safety-net status` = "safety_ind",
-  `small practice status` = "small_ind",
-  `quality category score` = "qua_score",
-  `quality improvement score` = "qua_improve",
-  `promoting interoperability (pi) category score` = "pi_score",
-  `improvement activities (ia) category score` = "ia_score",
-  `cost category score` = "cost_score",
-  `cost improvement score` = "cost_improve"
-)
 #
 # x <- qpp_uuid()
 # x <- as.list(set_names(paste0(x$accessURL, "?size=10"), x$year))

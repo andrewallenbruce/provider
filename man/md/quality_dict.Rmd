@@ -1,46 +1,56 @@
 ---
-title: "quality_dict"
+title: "Dictionary: Quality Payment Program Experience"
 output: 
   html_document: 
     keep_md: true
 ---
 
-```{r, echo=FALSE}
+## Dual Eligibility Ratio
+
+$$ D = \frac{x_{total} - x_{medicaid}}{x_{total}} $$
+
+Where:
+
+   * $D$ Dual Eligibility Ratio
+   * $x_{total}$ Number of unique Medicare patients seen
+   * $x_{medicaid}$ Number of unique Medicare patients seen that are also eligible for Medicaid
+
+<br>
+
+```{r, echo=FALSE, results='asis'}
 x <- list(
   # CLINICIAN
-  npi = "The National Provider Identifier (NPI) assigned to the clinician when they enrolled in Medicare. Multiple rows for the same NPI indicate that an individual clinician has reassigned billing rights to multiple TINs and was identified as a MIPS eligible clinician under multiple TIN/NPI combinations.",
-  `practice state or us territory` = "The Practice State or United States (US) territory code location of the Taxpayer Identifier Numbers (TIN) associated with the clinician.",
-  `practice size` = "Count of clinicians associated with the TIN through Medicare Part B claims from October 1, 2022, through September 30, 2023 (the second 12-month segment of the MIPS eligibility determination period for the 2023 performance year).",
-  `clinician type` = "Clinician type is derived from the category associated with the specialty included on Medicare Part B claims and submitted to the Centers for Medicare & Medicaid Services (CMS) for reimbursement; clinician type is determined for each unique TIN/NPI combination associated with an individual clinician.",
-  `clinician specialty` = "Specialty is derived from the specialty codes in Medicare Part B claims submitted to CMS for reimbursement; specialty is determined for each unique TIN/NPI combination associated with an individual clinician.",
-  `years in medicare` = "The number of years since the first date on which an enrollment was approved for this NPI across all enrollments in PECOS (Provider, Enrollment, Chain and Ownership System).",
-  `medicare patients` = "The number of Medicare patients who received covered professional services during one of the two 12-month segments of the MIPS eligibility determination period.",
-  `allowed charges` = "The allowed charges under the Physician Fee Schedule on Medicare Part B claims with a service date during one of the two 12-month segments of the MIPS eligibility determination period.",
-  services = "The number of covered professional services provided to Medicare Part B patients with a service date during one of the two 12-month segments of the MIPS eligibility determination period.",
-  `dual eligibility ratio` = "Dual Eligibility Ratio is derived by using the following formula: the number of unique Medicare patients who are also Medicaid eligible and who received covered professional services between October 1, 2022, and September 30, 2023, divided by the number of unique Medicare patients seen during the same time period.",
-  `payment adjustment percentage` = "The total payment adjustment percentage associated with the clinician’s 2023 final score. Payment adjustments are determined by comparing the final score to the performance thresholds and then scaled to ensure budget neutrality. 2025 is the payment year for performance year 2023. Max Negative: The maximum negative payment adjustment is -9%. Final score between 0 and 18.75 points. Negative: A negative payment adjustment is between -9% and 0%. Final score between 18.76 and 74.99 points. Neutral: A neutral payment adjustment is 0% (i.e., no increase or decrease in payment). Final score of 75 points. Positive: A positive payment adjustment is greater than 0%. Final score between 75.01 and 100 points.",
-  `complex patient bonus` = "The complex patient bonus points (added to the final score, based on the medical and social complexity of the patient population) associated with the final score attributed to the clinician.",
-  `small practice bonus` = "The small practice bonus points received for the quality category (if applicable).",
+  NPI = "National Provider Identifier. Multiple rows for the same NPI indicate that an individual clinician has reassigned billing rights to multiple TINs and was identified as a MIPS eligible clinician under multiple TIN/NPI combinations.",
+  `practice state or us territory` = "The practice state of the TIN associated with the clinician.",
+  `practice size` = "Number of clinicians associated with the TIN through Medicare Part B claims for the performance year.",
+  `clinician type` = "Derived from the category associated with the specialty included on Medicare Part B claims.",
+  `clinician specialty` = "Derived from the specialty codes in Medicare Part B claims.",
+  `years in medicare` = "Number of years since NPI's first approved enrollment date across all enrollments in PECOS.",
+  `medicare patients` = "Number of Medicare patients who received covered professional services during MIPS eligibility determination period.",
+  `allowed charges` = "Allowed charges under the PFS on Medicare Part B claims with a service date during MIPS eligibility determination period.",
+  services = "Number of covered professional services provided to Medicare Part B patients with a service date during MIPS eligibility determination period.",
+  `dual eligibility ratio` = "Derived from the following formula: <br><br> $n$ Medicare patients that are Medicaid eligible and received covered professional services <b>divided</b> by the number of unique Medicare patients seen during the same time period.",
+  `payment adjustment percentage` = "Determined by comparing the <b>final score</b> to performance thresholds and scaling to ensure budget neutrality. <br><br><b>Max Negative:</b> The maximum negative payment adjustment is -9%. Final score between 0 and 18.75 points. <br><br><b>Negative:</b> A negative payment adjustment is between -9% and 0%. Final score between 18.76 and 74.99 points. <br><br><b>Neutral:</b> A neutral payment adjustment is 0% (i.e., no increase or decrease in payment). Final score of 75 points. <br><br><b>Positive:</b> A positive payment adjustment is greater than 0%. Final score between 75.01 and 100 points.",
+  `complex patient bonus` = "Bonus points added to the final score, based on the medical and social complexity of the patient population associated with the clinician.",
+  `small practice bonus` = "Bonus points received for the quality category (if applicable).",
 
-  `participation type` = "The level at which data is collected and submitted to CMS for MIPS. There are 5 participation options for 2023: Individual: Data is collected and submitted by or on behalf of an individual MIPS eligible clinician (identified by TIN/NPI). Group: Data is collected and submitted on behalf of all MIPS eligible clinicians in a practice (identified by TIN). Subgroup: (New) Data is collected by a subset of clinicians in a group (at least 2 clinicians) that contains at least one individually eligible MIPS eligible clinician. Only available for reporting an MVP and requires advance registration. Virtual group: Data is collected and submitted on behalf of all MIPS eligible clinicians in a CMS-approved virtual group (identified by virtual group ID). APM Entity: Data is collected and submitted on behalf of the MIPS eligible clinicians in an APM Entity (identified by APM ID).",
-  `participation option` = "The level at which data is collected and submitted to CMS for MIPS. There are 5 participation options for 2023: Individual: Data is collected and submitted by or on behalf of an individual MIPS eligible clinician (identified by TIN/NPI). Group: Data is collected and submitted on behalf of all MIPS eligible clinicians in a practice (identified by TIN). Subgroup: (New) Data is collected by a subset of clinicians in a group (at least 2 clinicians) that contains at least one individually eligible MIPS eligible clinician. Only available for reporting an MVP and requires advance registration. Virtual group: Data is collected and submitted on behalf of all MIPS eligible clinicians in a CMS-approved virtual group (identified by virtual group ID). APM Entity: Data is collected and submitted on behalf of the MIPS eligible clinicians in an APM Entity (identified by APM ID).",
-  `reporting option` = "The way that a MIPS eligible clinician chooses to meet their MIPS reporting requirements. There are 3 MIPS reporting options for 2023: Traditional MIPS, established in the first year of QPP, is the original reporting option for MIPS eligible clinicians. The Alternative Payment Model (APM) Performance Pathway (APP) is a streamlined reporting option for clinicians who participate in a MIPS APM. MIPS Value Pathways (MVPs) are the newest reporting option that offer clinicians a subset of measures and activities relevant to a specialty or medical condition.",
-  `mips value pathway title` = 'The name of the MVP associated with the MVP used for the clinician’s final score; this field will only be populated if “MIPS Value Pathways" is the reporting option identified in column I.',
+  `participation type/option` = "Level at which data is collected and submitted to CMS for MIPS. There are 5 participation options for 2023: <br><br><b>Individual:</b> Data is collected and submitted by or on behalf of an individual MIPS eligible clinician (identified by TIN/NPI). <br><br><b>Group:</b> Data is collected and submitted on behalf of all MIPS eligible clinicians in a practice (identified by TIN). <br><br><b>Subgroup:</b> (New) Data is collected by a subset of clinicians in a group (at least 2 clinicians) that contains at least one individually eligible MIPS eligible clinician. Only available for reporting an MVP and requires advance registration. <br><br><b>Virtual group:</b> Data is collected and submitted on behalf of all MIPS eligible clinicians in a CMS-approved virtual group (identified by virtual group ID). <br><br><b>APM Entity:</b> Data is collected and submitted on behalf of the MIPS eligible clinicians in an APM Entity (identified by APM ID).",
+
+  `reporting option` = "Method a MIPS eligible clinician chooses to meet their MIPS reporting requirements. There are 3 MIPS reporting options for 2023: <br><br><b>Traditional MIPS</b>, established in the first year of QPP, is the original reporting option for MIPS eligible clinicians. <br><br><b>The Alternative Payment Model (APM) Performance Pathway (APP)</b> is a streamlined reporting option for clinicians who participate in a MIPS APM. <br><br><b>MIPS Value Pathways (MVPs)</b> are the newest reporting option that offer clinicians a subset of measures and activities relevant to a specialty or medical condition.",
+  `mips value pathway title` = 'The name of the MVP associated with the MVP used for the clinician’s final score; this field will only be populated if "MIPS Value Pathways" is the reporting option.',
 
   # SCORE
   `final score` = "The MIPS final score attributed to the clinician (identified by TIN/NPI combination).",
-  `quality category score` = "The unweighted quality score is the sum of points earned (including small practice bonus points) divided by the sum of available points for the performance category plus quality improvement. The unweighted score is represented as a percentage from 0 – 100, before it’s multiplied by the performance category’s weight.",
+  `quality category score` = "The unweighted quality score is the sum of points earned (including small practice bonus points) divided by the sum of available points for the performance category plus quality improvement. The unweighted score is represented as a percentage from 0 – 100, before it’s multiplied by the performance category's weight.",
   `quality category weight` = "The weight represents the performance category’s contribution to a clinician’s final score. For example, if the quality category is weighted at 30% of the final score, it can contribute up to 30 points towards the final score.",
   `quality improvement score` = "The points representing the rate of improvement from the prior year’s quality score; there are between 0 and 10 percentage points available for quality improvement.",
   `quality improvement bonus` = "The bonus points received for the quality category (small practice bonus and quality improvement, if applicable).",
-  `quality bonus` = "The bonus points received for the quality category (small practice bonus and quality improvement, if applicable).",
   `pi bonus` = "The total bonus points received by the clinician, group or APM Entity for the Promoting Interoperability performance category.",
   `promoting interoperability (pi) category score` = "The unweighted quality score is the sum of points achieved (including bonus points) divided by the sum of available points for the performance category. The unweighted score is represented as a percentage from 0 – 100, before it’s multiplied by the performance category’s weight.",
   `promoting interoperability (pi) category weight` = "The weight represents the performance category’s contribution to a clinician’s final score. For example, if the Promoting Interoperability category is weighted at 25% of the final score, it can contribute up to 25 points towards the final score.",
   `improvement activities (ia) category score` = "The score received for the improvement activities performance category is based on all the activities the clinician or group implemented and that contributed to the final score.",
   `improvement activities (ia) category weight` = "The weight represents the performance category’s contribution to a clinician’s final score. For example, if the improvement activities category is weighted at 15% of the final score, it can contribute up to 15 points towards the final score.",
   `ia score` = "The score received for the improvement activities performance category based on all the activities picked for the category that contributed to the final score.",
-  `cost score` = "The unweighted score received for the cost performance category based on all the cost measures used for final scoring. Will display as “0” for 2021 as cost was reweighted in the 2021 performance year.",
   `cost category score` = "The unweighted cost category score is the sum of points achieved on the attributed cost measure(s) divided by the sum of available points for the performance category. The unweighted score is represented as a percentage from 0 – 100, before it’s multiplied by the performance category’s weight.",
   `cost improvement score` = "The points representing the rate of improvement from the prior year’s cost score; there are between 0 and 1 percentage points available for cost improvement.",
   `cost category weight` = "The weight represents the performance category’s contribution to a clinician’s final score. For example, if the cost category is weighted at 30% of the final score, it can contribute up to 30 points towards the final score.",
@@ -84,6 +94,6 @@ x <- list(
 cheapr::fast_df(
   Variable = names(x), 
   Definition = provider:::unlist_(x)) |> 
-  knitr::kable()
+  knitr::kable(format = "pipe")
 ```
 
