@@ -28,8 +28,7 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
   rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
 
   rename_with(x, "clia") |>
-    # rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
-    rc_bin(collapse::gvr(x, "_multi$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>

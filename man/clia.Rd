@@ -21,7 +21,7 @@ clia(
   clia_ccn = NULL,
   cert_type = NULL,
   acr_org = NULL,
-  multi_site = NULL,
+  multi = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -60,7 +60,7 @@ clia(
 \item \code{"jcaho"} = The Joint Commission
 }}
 
-\item{multi_site}{\verb{<enum>}  Single site CLIA multiple-site exceptions:
+\item{multi}{\verb{<enum>}  Single site CLIA multiple-site exceptions:
 \itemize{
 \item \code{"applied"} = Applied for to cover multiple testing locations
 \item \code{"campus"} = Hospital with several labs on single hospital campus
@@ -139,6 +139,6 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 
 clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 
-clia(multi_site = c("temp", "campus")) |> str()
+clia(multi = c("temp", "campus")) |> str()
 \dontshow{\}) # examplesIf}
 }

@@ -68,7 +68,6 @@ CMS <- new_class(
   )
 )
 
-
 #' @noRd
 CMSList <- new_class(
   "CMSList",

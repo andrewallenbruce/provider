@@ -171,7 +171,7 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
       default = NA_character_,
       set = TRUE
     ),
-    multi_site = collapse::recode_char(
+    multi = collapse::recode_char(
       x[[column]],
       "site_multi" = "Applied",
       "hosp_multi" = "Campus",

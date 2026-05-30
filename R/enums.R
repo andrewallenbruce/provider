@@ -48,7 +48,7 @@ enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
       ppm = 4,
       reg = 9
     ),
-    multi_site = list(
+    multi = list(
       applied = "MLT_SITE_EXCPTN_SW",
       campus = "HOSP_LAB_EXCPTN_SW",
       non = "NON_PRFT_EXCPTN_SW",

@@ -42,7 +42,7 @@
 #'    - `"cap"` = College of American Pathologists
 #'    - `"cola"` = Commission on Office Laboratory Accreditation
 #'    - `"jcaho"` = The Joint Commission
-#' @param multi_site `<enum>`  Single site CLIA multiple-site exceptions:
+#' @param multi `<enum>`  Single site CLIA multiple-site exceptions:
 #'    - `"applied"` = Applied for to cover multiple testing locations
 #'    - `"campus"` = Hospital with several labs on single hospital campus
 #'    - `"non"` = Multiple sites with non-profit, federal, state or local government status (limited public health testing)
@@ -61,7 +61,7 @@
 #'
 #' clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #'
-#' clia(multi_site = c("temp", "campus")) |> str()
+#' clia(multi = c("temp", "campus")) |> str()
 #'
 #' @export
 clia <- function(
@@ -70,7 +70,7 @@ clia <- function(
   clia_ccn = NULL,
   cert_type = NULL,
   acr_org = NULL,
-  multi_site = NULL,
+  multi = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -102,7 +102,7 @@ clia <- function(
     ELGBLTY_SW = tag_bool(eligible),
     ACPTBL_POC_SW = tag_bool(poc),
     !!!tag_acr_org(acr_org),
-    !!!tag_multi_site(multi_site)
+    !!!tag_multi(multi)
   )
 
   x <- execute(x)
@@ -128,10 +128,10 @@ tag_acr_org <- function(acr_org) {
 }
 
 #' @noRd
-tag_multi_site <- function(multi_site) {
-  if (is.null(multi_site)) {
+tag_multi <- function(multi) {
+  if (is.null(multi)) {
     return(NULL)
   }
-  x <- tag_enum(multi_site)
+  x <- tag_enum(multi)
   set_names(as.list(rep.int("Y", length(x))), x)
 }
