@@ -105,135 +105,199 @@ quality_metrics <- function(year) {
 # )
 
 # 2017 - 2021
-qpp_2017_2021 <- c(
-  year = "year",
+qpp_2017_2021 <- list(
+  npi = "npi",
   `practice state or us territory` = "state",
-  `practice size` = "psize",
+  `practice size` = "size",
   `clinician specialty` = "specialty",
   `years in medicare` = "years",
-  npi = "npi",
-  engaged = "eng_ind",
-  `participation type` = "ptype",
   `medicare patients` = "patients",
   `allowed charges` = "charges",
   services = "services",
-  `opted into mips` = "mip_ind",
-  `small practitioner` = "sml_ind",
-  `rural clinician` = "rur_ind",
-  `hpsa clinician` = "hpsa_ind",
-  `ambulatory surgical center` = "asc_ind",
-  `hospital-based clinician` = "hsp_ind",
-  `non-patient facing` = "non_ind",
-  `facility-based` = "fac_ind",
-  `extreme hardship` = "extr_ind",
   `final score` = "final_score",
-  `payment adjustment percentage` = "adj_pct",
-  `complex patient bonus` = "cplx_ind",
-  `extreme hardship quality` = "qa_extr",
-  `quality category score` = "qa_score",
-  `quality improvement bonus` = "qi_bonus",
-  `quality bonus` = "qa_bonus",
+  `payment adjustment percentage` = "adjustment",
+  `participation type` = "part_opt",
+  `complex patient bonus` = "complex_bonus",
+  `ambulatory surgical center` = "asc_ind",
+  engaged = "engaged_ind",
+  `extreme hardship` = "extreme_ind",
+  `facility-based` = "facility_ind",
+  `hpsa clinician` = "hpsa_ind",
+  `hospital-based clinician` = "hospital_ind",
+  `non-patient facing` = "nonpat_ind",
+  `opted into mips` = "optin_ind",
+  `rural clinician` = "rural_ind",
+  `small practitioner` = "small_ind",
+  `quality category score` = "qua_score",
+  `quality improvement bonus` = "qua_improve",
   `promoting interoperability (pi) category score` = "pi_score",
-  `extreme hardship pi` = "pi_extr",
-  `pi hardship` = "pi_hard",
-  `pi reweighting` = "pi_rw",
-  `pi bonus` = "pi_bonus",
   `ia score` = "ia_score",
-  `extreme hardship ia` = "ia_extr",
-  `ia study` = "ia_study",
-  `cost score` = "cs_score",
-  `extreme hardship cost` = "cs_extr"
+  `cost score` = "cost_score"
 )
 
 # 2022
-qpp_2022 <- c(
+qpp_2022 <- list(
+  npi = "npi",
   `practice state or us territory` = "state",
-  `practice size` = "psize",
-  `clinician type` = "ctype",
+  `practice size` = "size",
+  `clinician type` = "cred",
   `clinician specialty` = "specialty",
   `years in medicare` = "years",
-  npi = "npi",
-  `non-reporting` = "nreport",
-  `participation option` = "ptype",
   `medicare patients` = "patients",
   `allowed charges` = "charges",
   services = "services",
-  `opted into mips` = "mip_ind",
-  `small practice status` = "sml_ind",
-  `rural status` = "rur_ind",
-  `health professional shortage area status` = "hpsa_ind",
-  `ambulatory surgical center-based status` = "asc_ind",
-  `hospital-based status` = "hsp_ind",
-  `non-patient facing status` = "non_ind",
-  `facility-based status` = "fac_ind",
-  `dual eligibility ratio` = "dual_ratio",
-  `safety-net status` = "safe_ind",
-  `extreme uncontrollable circumstance (euc)` = "euc_ind",
   `final score` = "final_score",
-  `payment adjustment percentage` = "adj_pct",
-  `complex patient bonus` = "cplx_ind",
-  `quality reweighting (euc)` = "qa_rw",
-  `quality category score` = "qa_score",
-  `quality improvement score` = "qi_score",
-  `small practice bonus` = "sml_bns",
+  `payment adjustment percentage` = "adjustment",
+  `dual eligibility ratio` = "dual_ratio",
+  `participation option` = "part_opt",
+  `small practice bonus` = "small_bonus",
+  `complex patient bonus` = "complex_bonus",
+  `ambulatory surgical center-based status` = "asc_ind",
+  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
+  `facility-based status` = "facility_ind",
+  `health professional shortage area status` = "hpsa_ind",
+  `hospital-based status` = "hospital_ind",
+  `non-patient facing status` = "nonpat_ind",
+  `non-reporting` = "nonrep_ind",
+  `opted into mips` = "optin_ind",
+  `rural status` = "rural_ind",
+  `safety-net status` = "safety_ind",
+  `small practice status` = "small_ind",
+  `quality category score` = "qua_score",
+  `quality improvement score` = "qua_improve",
   `promoting interoperability (pi) category score` = "pi_score",
-  `pi reweighting (euc)` = "pi_rw_euc",
-  `pi reweighting (hardship exception)` = "pi_rw_hs",
-  `pi reweighting (special status or clinician type)` = "pi_rw_sp",
   `improvement activities (ia) category score` = "ia_score",
-  `ia reweighting (euc)` = "ia_rw_euc",
-  `ia credit` = "ia_credit",
-  `cost category score` = "cost_score",
-  `cost reweighting (euc)` = "cost_rw_euc"
+  `cost category score` = "cost_score"
 )
 
-# 2023
-qpp_2023 <- c(
-  `practice state or us territory` = "practice_state_or_us_territory",
-  `practice size` = "practice_size",
-  `clinician type` = "clinician_type",
-  `clinician specialty` = "clinician_specialty",
-  `years in medicare` = "years_in_medicare",
+# 2023-2024
+qpp_2023_2024 <- list(
   npi = "npi",
-  `non-reporting` = "non_reporting",
-  `reporting option` = "reporting_option",
-  `participation option` = "participation_option",
-  `mips value pathway id` = "mips_value_pathway_id",
-  `mips value pathway title` = "mips_value_pathway_title",
-  `medicare patients` = "medicare_patients",
-  `allowed charges` = "allowed_charges",
+  `practice state or us territory` = "state",
+  `practice size` = "size",
+  `clinician type` = "cred",
+  `clinician specialty` = "specialty",
+  `years in medicare` = "years",
+  `medicare patients` = "patients",
+  `allowed charges` = "charges",
   services = "services",
-  `opted into mips` = "opted_into_mips",
-  `small practice status` = "small_practice_status",
-  `rural status` = "rural_status",
-  `health professional shortage area status` = "health_professional_shortage_area_status",
-  `ambulatory surgical center-based status` = "ambulatory_surgical_center_based_status",
-  `hospital-based status` = "hospital_based_status",
-  `non-patient facing status` = "non_patient_facing_status",
-  `facility-based status` = "facility_based_status",
-  `dual eligibility ratio` = "dual_eligibility_ratio",
-  `safety-net status` = "safety_net_status",
-  `extreme uncontrollable circumstance (euc)` = "extreme_uncontrollable_circumstance__euc_",
-  `received facility score` = "received_facility_score",
+  `dual eligibility ratio` = "dual_ratio",
   `final score` = "final_score",
-  `payment adjustment percentage` = "payment_adjustment_percentage",
-  `complex patient bonus` = "complex_patient_bonus",
-  `quality reweighting (euc)` = "quality_reweighting__euc_",
-  `quality category score` = "quality_category_score",
-  `quality category weight` = "quality_category_weight",
-  `quality improvement score` = "quality_improvement_score",
-  `small practice bonus` = "small_practice_bonus",
-  `promoting interoperability (pi) category score` = "promoting_interoperability__pi__category_score",
-  `promoting interoperability (pi) category weight` = "promoting_interoperability__pi__category_weight",
-  `pi reweighting (euc)` = "pi_reweighting__euc_",
-  `pi reweighting (hardship exception)` = "pi_reweighting__hardship_exception_",
-  `pi reweighting (special status or clinician type)` = "pi_reweighting__special_status_or_clinician_type_",
-  `improvement activities (ia) category score` = "improvement_activities__ia__category_score",
-  `improvement activities (ia) category weight` = "improvement_activities__ia__category_weight",
-  `ia reweighting (euc)` = "ia_reweighting__euc_",
-  `ia credit` = "ia_credit",
-  `cost category score` = "cost_category_score",
-  `cost improvement score` = "cost_improvement_score",
-  `cost category weight` = "cost_category_weight",
-  `cost reweighting (euc)` = "cost_reweighting__euc_"
+  `payment adjustment percentage` = "adjustment",
+  `reporting option` = "rep_opt",
+  `participation option` = "part_opt",
+  `complex patient bonus` = "complex_bonus",
+  `small practice bonus` = "small_bonus",
+  `facility-based status` = "facility_ind",
+  `ambulatory surgical center-based status` = "asc_ind",
+  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
+  `health professional shortage area status` = "hpsa_ind",
+  `hospital-based status` = "hospital_ind",
+  `opted into mips` = "optin_ind",
+  `non-patient facing status` = "nonpat_ind",
+  `non-reporting` = "nonrep_ind",
+  `rural status` = "rural_ind",
+  `safety-net status` = "safety_ind",
+  `small practice status` = "small_ind",
+  `quality category score` = "qua_score",
+  `quality improvement score` = "qua_improve",
+  `promoting interoperability (pi) category score` = "pi_score",
+  `improvement activities (ia) category score` = "ia_score",
+  `cost category score` = "cost_score",
+  `cost improvement score` = "cost_improve"
 )
+#
+# x <- qpp_uuid()
+# x <- as.list(set_names(paste0(x$accessURL, "?size=10"), x$year))
+# x <- purrr::map(x, httr2::request) |>
+#   httr2::req_perform_parallel(on_error = "continue") |>
+#   purrr::map(function(resp) parse_string(resp) |> collapse::qTBL()) |>
+#   set_names2(x)
+#
+# x_1721 <- purrr::map(x[names(x) %in% 2017:2021], function(x) {
+#   collapse::frename(x, qpp_2017_2021, .nse = FALSE) |>
+#     collapse::gv(unlist_(qpp_2017_2021))
+# }) |>
+#   rowbind2("year") |>
+#   replace_nz() |>
+#   rc_bin(collapse::gvr(x_1721, "_ind$", return = 2L)) |>
+#   rc_integer(c(
+#     "year",
+#     "npi",
+#     "size",
+#     "years",
+#     "patients",
+#     "charges",
+#     "services"
+#   )) |>
+#   rc_double(c(
+#     "final_score",
+#     "adjustment",
+#     "complex_bonus",
+#     "qua_score",
+#     "pi_score",
+#     "ia_score",
+#     "cost_score"
+#   ))
+#
+# x_22 <- collapse::frename(x$`2022`, qpp_2022, .nse = FALSE) |>
+#   collapse::gv(unlist_(qpp_2022)) |>
+#   replace_nz()
+#
+# x_22$year <- 2022L
+#
+# x_22 <- x_22 |>
+#   rc_bin(collapse::gvr(x_22, "_ind$", return = 2L)) |>
+#   rc_integer(c(
+#     "year",
+#     "npi",
+#     "size",
+#     "years",
+#     "patients",
+#     "charges",
+#     "services"
+#   )) |>
+#   rc_double(c(
+#     "final_score",
+#     "adjustment",
+#     "complex_bonus",
+#     "small_bonus",
+#     "qua_score",
+#     "qua_improve",
+#     "pi_score",
+#     "ia_score",
+#     "cost_score",
+#     "dual_ratio"
+#   ))
+#
+# x_2324 <- purrr::map(x[names(x) %in% 2023:2024], function(x) {
+#   collapse::frename(x, qpp_2023_2024, .nse = FALSE) |>
+#     collapse::gv(unlist_(qpp_2023_2024))
+# }) |>
+#   rowbind2("year") |>
+#   replace_nz() |>
+#   rc_bin(collapse::gvr(x_2324, "_ind$", return = 2L)) |>
+#   rc_integer(c(
+#     "year",
+#     "npi",
+#     "size",
+#     "years",
+#     "patients",
+#     "charges",
+#     "services"
+#   )) |>
+#   rc_double(c(
+#     "final_score",
+#     "adjustment",
+#     "complex_bonus",
+#     "small_bonus",
+#     "qua_score",
+#     "qua_improve",
+#     "pi_score",
+#     "ia_score",
+#     "cost_score",
+#     "cost_improve",
+#     "dual_ratio"
+#   ))
+#
+# collapse::rowbind(x_1721, x_22, x_2324, fill = TRUE)

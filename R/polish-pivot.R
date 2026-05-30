@@ -80,27 +80,27 @@ pivot_order_refer <- function(x) {
 
 #' @noRd
 pivot_multi_site <- function(x) {
-  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi_site")
+  y <- pivot2(x, "^fac_ccn$|_multi$", "fac_ccn", "multi")
 
   collapse::gvr(x, "_multi$") <- NULL
 
   if (nrow0(y)) {
-    return(collapse::av(x, multi_site = rep_NA(x)))
+    return(collapse::av(x, multi = rep_NA(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (nrow0(y)) {
-    return(collapse::av(x, multi_site = rep_NA(x)))
+    return(collapse::av(x, multi = rep_NA(x)))
   }
 
-  rc_clia(y, "multi_site")
+  rc_clia(y, "multi")
 
   if (all_unique(y$fac_ccn)) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
-  join2(x, collapse_rows(y, "fac_ccn", "multi_site"), on = "fac_ccn")
+  join2(x, collapse_rows(y, "fac_ccn", "multi"), on = "fac_ccn")
 }
 
 #' @noRd

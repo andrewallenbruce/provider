@@ -20,4 +20,4 @@ create_vec <- function(x) {
   return(res)
 }
 
-create_vec(colnames(ex$`2022`))
+create_vec(colnames(x$`2024`))

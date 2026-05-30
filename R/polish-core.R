@@ -62,7 +62,6 @@ rc_trim <- function(x) {
   # collapse::settfmv(x, is.character, trimws, apply = TRUE)
 }
 
-
 #' @noRd
 recoder <- function(.f) {
   function(x, v) {
@@ -155,8 +154,8 @@ rc_address <- function(
 #' @noRd
 bin_col <- function(x) {
   cheapr::case(
-    x %in_% c("YES", "Y", "Yes") ~ 1L,
-    x %in_% c("NO", "N", "No") ~ 0L,
+    x %in_% c("YES", "Y", "Yes", "True") ~ 1L,
+    x %in_% c("NO", "N", "No", "False") ~ 0L,
     .default = NA_integer_
   )
 }
