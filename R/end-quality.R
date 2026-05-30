@@ -86,21 +86,22 @@ quality_metrics <- function(year) {
 # 6  2018  881959    92
 # 7  2017 1054657    92
 
-#
 # x <- qpp_uuid()
-# x <- as.list(set_names(paste0(x$accessURL, "?size=10"), x$year))
+# x <- as.list(set_names(x$accessURL, x$year))
+# # x <- as.list(set_names(paste0(x$accessURL, "?size=10"), x$year))
 # x <- purrr::map(x, httr2::request) |>
 #   httr2::req_perform_parallel(on_error = "continue") |>
 #   purrr::map(function(resp) parse_string(resp) |> collapse::qTBL()) |>
 #   set_names2(x)
 #
-# x_1721 <- purrr::map(x[names(x) %in% 2017:2021], function(x) {
-#   collapse::frename(x, qpp_2017_2021, .nse = FALSE) |>
-#     collapse::gv(unlist_(qpp_2017_2021))
+# x
+
+# x_17 <- purrr::map(x[names(x) %iin% 2017:2021], function(x) {
+#   collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
+#     collapse::gv(unlist_(QPP$`_17`))
 # }) |>
 #   rowbind2("year") |>
 #   replace_nz() |>
-#   rc_bin(collapse::gvr(x_1721, "_ind$", return = 2L)) |>
 #   rc_integer(c(
 #     "year",
 #     "npi",
@@ -120,8 +121,10 @@ quality_metrics <- function(year) {
 #     "cost_score"
 #   ))
 #
-# x_22 <- collapse::frename(x$`2022`, qpp_2022, .nse = FALSE) |>
-#   collapse::gv(unlist_(qpp_2022)) |>
+# x_17 <- rc_bin(x_17, collapse::gvr(x_17, "_ind$", return = 2L))
+#
+# x_22 <- collapse::frename(x$`2022`, QPP$`_22`, .nse = FALSE) |>
+#   collapse::gv(unlist_(QPP$`_22`)) |>
 #   replace_nz()
 #
 # x_22$year <- 2022L
@@ -150,13 +153,12 @@ quality_metrics <- function(year) {
 #     "dual_ratio"
 #   ))
 #
-# x_2324 <- purrr::map(x[names(x) %in% 2023:2024], function(x) {
-#   collapse::frename(x, qpp_2023_2024, .nse = FALSE) |>
-#     collapse::gv(unlist_(qpp_2023_2024))
+# x_24 <- purrr::map(x[names(x) %iin% 2023:2024], function(x) {
+#   collapse::frename(x, QPP$`_24`, .nse = FALSE) |>
+#     collapse::gv(unlist_(QPP$`_24`))
 # }) |>
 #   rowbind2("year") |>
 #   replace_nz() |>
-#   rc_bin(collapse::gvr(x_2324, "_ind$", return = 2L)) |>
 #   rc_integer(c(
 #     "year",
 #     "npi",
@@ -180,4 +182,70 @@ quality_metrics <- function(year) {
 #     "dual_ratio"
 #   ))
 #
-# collapse::rowbind(x_1721, x_22, x_2324, fill = TRUE)
+# x_24 <- rc_bin(x_24, collapse::gvr(x_24, "_ind$", return = 2L))
+#
+# dupes <- c(
+#   1023093879L,
+#   1063412971L,
+#   1073922217L,
+#   1205478450L,
+#   1235169244L,
+#   1275777583L,
+#   1346214525L,
+#   1346592458L,
+#   1366409385L,
+#   1376584573L,
+#   1386690972L,
+#   1457763823L,
+#   1497056154L,
+#   1528038692L,
+#   1588027270L,
+#   1679826812L,
+#   1699928796L,
+#   1730111477L,
+#   1770874570L,
+#   1871819268L,
+#   1891135737L,
+#   1922321686L,
+#   1952491508L,
+#   1952846008L,
+#   1962456988L,
+#   1992784854L
+# )
+#
+# x <- collapse::rowbind(x_17, x_22, x_24, fill = TRUE) |>
+#   collapse::roworderv(c("npi", "year"))
+#
+# y <- pivot2(x, rex = "^year$|^npi$|_ind$", id = c("year", "npi"), var = "flags")
+#
+# collapse::gvr(x, "_ind$") <- NULL
+#
+# y <- collapse::ss(y, y$ind %==% 1L, 1:3) |>
+#   collapse::funique(c("year", "npi"))
+#
+# collapse::recode_char(
+#   y$flags,
+#   "asc_ind" = "ASC",
+#   "extreme_ind" = "Extreme",
+#   "hpsa_ind" = "HPSA",
+#   "hospital_ind" = "Hospital",
+#   "nonpat_ind" = "Non-Patient Facing",
+#   "rural_ind" = "Rural",
+#   "small_ind" = "Small Practice",
+#   "engaged_ind" = "Engaged",
+#   "facility_ind" = "Facility",
+#   "safety_ind" = "Safety Net",
+#   "optin_ind" = "Opt-In MIPS",
+#   "nonrep_ind" = "Non-Report",
+#   default = NA_character_,
+#   set = TRUE
+# )
+#
+# collapse::GRP(y, ~ npi + year)
+#
+# collapse::gby(y, year, npi) |>
+#   collapse::mtt(flags = purrr::map_chr(flags, \(x) paste0(x, collapse = ", ")))
+# collapse::unlist2d() |>
+#   rlang::set_names(c(key, var))
+#
+# join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")

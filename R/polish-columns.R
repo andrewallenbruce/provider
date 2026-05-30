@@ -1,7 +1,7 @@
 #' @noRd
 QPP = list(
   # 2017 - 2021
-  i = list(
+  `_17` = list(
     npi = "npi",
     `practice state or us territory` = "state",
     `practice size` = "size",
@@ -30,7 +30,8 @@ QPP = list(
     `ia score` = "ia_score",
     `cost score` = "cost_score"
   ),
-  ii = list( # 2022
+  # 2022
+  `_22` = list(
     npi = "npi",
     `practice state or us territory` = "state",
     `practice size` = "size",
@@ -63,7 +64,7 @@ QPP = list(
     `improvement activities (ia) category score` = "ia_score",
     `cost category score` = "cost_score"
   ),
-  iii = list(
+  `_24` = list(
     # 2023 - 2024
     npi = "npi",
     `practice state or us territory` = "state",
