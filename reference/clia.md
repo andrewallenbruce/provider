@@ -226,34 +226,55 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> 18 VEEDHATA … 11D222… NA           0     3     0 3386 G… VALD… GA    31605 Acti…
 #> # ℹ 10 more variables: cert_type <chr>, fac_type <chr>, owner <chr>,
 #> #   action <chr>, cert_date <date>, eff_date <date>, term_date <date>,
-#> #   elig_ind <int>, multi_site <chr>, acr_org <chr>
+#> #   elig_ind <int>, multi <chr>, acr_org <chr>
 
 clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #> ✔ clia returned 1 result.
 #> clia [1 × 21] (S3: clia/provider/tbl_df/tbl/data.frame)
-#>  $ fac_name  : chr "LEXINGTON MEDICAL CENTER-LABORATORY"
-#>  $ fac_ccn   : chr "42D0665325"
-#>  $ clia_ccn  : chr "420073"
-#>  $ chows     : int 0
-#>  $ labs      : int 1
-#>  $ sites     : int 0
-#>  $ address   : chr "2720 SUNSET BOULEVARD"
-#>  $ city      : chr "WEST COLUMBIA"
-#>  $ state     : chr "SC"
-#>  $ zip       : chr "29169"
-#>  $ term      : chr "Active"
-#>  $ cert_type : chr "Accreditation"
-#>  $ fac_type  : chr "Hospital"
-#>  $ owner     : chr "[GOV] County"
-#>  $ action    : chr NA
-#>  $ cert_date : Date[1:1], format: "1993-01-13"
-#>  $ eff_date  : Date[1:1], format: "2025-01-03"
-#>  $ term_date : Date[1:1], format: "2027-01-02"
-#>  $ elig_ind  : int 0
-#>  $ multi_site: chr NA
-#>  $ acr_org   : chr "CAP, COLA, JCAHO"
+#>  $ fac_name : chr "LEXINGTON MEDICAL CENTER-LABORATORY"
+#>  $ fac_ccn  : chr "42D0665325"
+#>  $ clia_ccn : chr "420073"
+#>  $ chows    : int 0
+#>  $ labs     : int 1
+#>  $ sites    : int 0
+#>  $ address  : chr "2720 SUNSET BOULEVARD"
+#>  $ city     : chr "WEST COLUMBIA"
+#>  $ state    : chr "SC"
+#>  $ zip      : chr "29169"
+#>  $ term     : chr "Active"
+#>  $ cert_type: chr "Accreditation"
+#>  $ fac_type : chr "Hospital"
+#>  $ owner    : chr "[GOV] County"
+#>  $ action   : chr NA
+#>  $ cert_date: Date[1:1], format: "1993-01-13"
+#>  $ eff_date : Date[1:1], format: "2025-01-03"
+#>  $ term_date: Date[1:1], format: "2027-01-02"
+#>  $ elig_ind : int 0
+#>  $ multi    : chr NA
+#>  $ acr_org  : chr "CAP, COLA, JCAHO"
 
 clia(multi = c("temp", "campus")) |> str()
 #> ✔ clia returned 110 results.
-#> Error in pivot_multi_site(rc_address(rc_address(rc_integer(rc_ymd2(rc_bin(rename_with(x,     "clia"), collapse::gvr(x, "_ind$|_multi$", return = 2L)),     collapse::gvr(x, "_date$", return = 2L)), c("chows", "labs",     "sites"))), add1 = "fac_name", add2 = "fac_2")): "\"multi_site\"" is not a column in `x`
+#> clia [110 × 21] (S3: clia/provider/tbl_df/tbl/data.frame)
+#>  $ fac_name : chr [1:110] "UAB UNIVERSITY OF ALABAMA HOSPITAL LAB" "BBAHC KANAKANAK HOSPITAL" "ST JOSEPH'S HOSPITAL & MEDICAL CENTER" "UAMS DEPT OF LABORATORY SCIENCES" ...
+#>  $ fac_ccn  : chr [1:110] "01D0678593" "02D0706717" "03D0526691" "04D2160128" ...
+#>  $ clia_ccn : chr [1:110] NA "020021" "A20000010" NA ...
+#>  $ chows    : int [1:110] 0 0 0 0 0 0 0 0 0 0 ...
+#>  $ labs     : int [1:110] 0 0 1 0 0 1 0 1 1 2 ...
+#>  $ sites    : int [1:110] 5 7 3 2 2 3 6 2 3 4 ...
+#>  $ address  : chr [1:110] "619 19TH STREET SOUTH  SW S257" "6000 KANAKANAK ROAD" "350 W THOMAS RD 2ND FLOOR" "300 HOOPER DRIVE BUILDING 5, ROOM G15" ...
+#>  $ city     : chr [1:110] "BIRMINGHAM" "DILLINGHAM" "PHOENIX" "LITTLE ROCK" ...
+#>  $ state    : chr [1:110] "AL" "AK" "AZ" "AR" ...
+#>  $ zip      : chr [1:110] "35249" "99576" "85013" "72205" ...
+#>  $ term     : chr [1:110] "Active" "Active" "Active" "Active" ...
+#>  $ cert_type: chr [1:110] "Accreditation" "Waiver" "Accreditation" "Waiver" ...
+#>  $ fac_type : chr [1:110] "Hospital" "Anc" "Hospital" "Fair" ...
+#>  $ owner    : chr [1:110] "[GOV] State" "[GOV] Federal" "RNHCI" "[GOV] State" ...
+#>  $ action   : chr [1:110] NA NA "Validate" NA ...
+#>  $ cert_date: Date[1:110], format: "1993-01-15" "1992-12-23" ...
+#>  $ eff_date : Date[1:110], format: "2025-02-28" "2024-07-22" ...
+#>  $ term_date: Date[1:110], format: "2027-02-27" "2026-07-21" ...
+#>  $ elig_ind : int [1:110] 0 0 1 0 0 0 1 0 0 0 ...
+#>  $ multi    : chr [1:110] "Applied, Campus, Temporary" "Applied, Campus, Non-profit, Temporary" "Applied, Campus, Temporary" "Applied, Campus, Non-profit, Temporary" ...
+#>  $ acr_org  : chr [1:110] "CAP" NA "CAP" NA ...
 ```
