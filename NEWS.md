@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9197 (2026-05-30)
+
+* quality_payment polish
+
+
 # provider 0.0.1.9196 (2026-05-30)
 
 * plugging away at quality_payment
