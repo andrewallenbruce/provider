@@ -88,14 +88,11 @@ quality_metrics <- function(year) {
 
 # x <- qpp_uuid()
 # x <- as.list(set_names(x$accessURL, x$year))
-# # x <- as.list(set_names(paste0(x$accessURL, "?size=10"), x$year))
 # x <- purrr::map(x, httr2::request) |>
 #   httr2::req_perform_parallel(on_error = "continue") |>
 #   purrr::map(function(resp) parse_string(resp) |> collapse::qTBL()) |>
 #   set_names2(x)
 #
-# x
-
 # x_17 <- purrr::map(x[names(x) %iin% 2017:2021], function(x) {
 #   collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
 #     collapse::gv(unlist_(QPP$`_17`))
@@ -116,6 +113,7 @@ quality_metrics <- function(year) {
 #     "adjustment",
 #     "complex_bonus",
 #     "qua_score",
+#     "qua_improve",
 #     "pi_score",
 #     "ia_score",
 #     "cost_score"
@@ -184,47 +182,18 @@ quality_metrics <- function(year) {
 #
 # x_24 <- rc_bin(x_24, collapse::gvr(x_24, "_ind$", return = 2L))
 #
-# dupes <- c(
-#   1023093879L,
-#   1063412971L,
-#   1073922217L,
-#   1205478450L,
-#   1235169244L,
-#   1275777583L,
-#   1346214525L,
-#   1346592458L,
-#   1366409385L,
-#   1376584573L,
-#   1386690972L,
-#   1457763823L,
-#   1497056154L,
-#   1528038692L,
-#   1588027270L,
-#   1679826812L,
-#   1699928796L,
-#   1730111477L,
-#   1770874570L,
-#   1871819268L,
-#   1891135737L,
-#   1922321686L,
-#   1952491508L,
-#   1952846008L,
-#   1962456988L,
-#   1992784854L
-# )
-#
 # x <- collapse::rowbind(x_17, x_22, x_24, fill = TRUE) |>
 #   collapse::roworderv(c("npi", "year"))
 #
-# y <- pivot2(x, rex = "^year$|^npi$|_ind$", id = c("year", "npi"), var = "flags")
-#
+# y <- pivot2(x, rex = "^year$|^npi$|_ind$", id = c("year", "npi"), var = "flag")
 # collapse::gvr(x, "_ind$") <- NULL
+# x <- collapse::funique(x, c("year", "npi"))
 #
 # y <- collapse::ss(y, y$ind %==% 1L, 1:3) |>
 #   collapse::funique(c("year", "npi"))
 #
 # collapse::recode_char(
-#   y$flags,
+#   y$flag,
 #   "asc_ind" = "ASC",
 #   "extreme_ind" = "Extreme",
 #   "hpsa_ind" = "HPSA",
@@ -241,11 +210,15 @@ quality_metrics <- function(year) {
 #   set = TRUE
 # )
 #
-# collapse::GRP(y, ~ npi + year)
+# y <- collapse::rsplit(y, ~year, simplify = TRUE) |>
+#   purrr::map(\(x) collapse_rows(x, "npi", "flag")) |>
+#   collapse::rowbind(idcol = "year") |>
+#   collapse::qTBL()
 #
-# collapse::gby(y, year, npi) |>
-#   collapse::mtt(flags = purrr::map_chr(flags, \(x) paste0(x, collapse = ", ")))
-# collapse::unlist2d() |>
-#   rlang::set_names(c(key, var))
 #
-# join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")
+# x <- join2(x, y, on = c("npi", "year")) |>
+#   collapse::roworderv(c("year", "npi"))
+#
+# o <- cheapr::overview(x)
+# o$numeric
+# o$categorical
