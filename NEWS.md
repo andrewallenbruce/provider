@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9199 (2026-06-01)
+
+* `quality()` draft
+
+
 # provider 0.0.1.9198 (2026-05-31)
 
 * quality_payment refinement
