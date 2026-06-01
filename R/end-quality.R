@@ -30,7 +30,7 @@
 #' quality(count = TRUE)
 #' quality(count = TRUE, state = "GA")
 #'
-#' quality()
+#' quality() |> str()
 #'
 #'
 #' quality_metrics(2018:2025)

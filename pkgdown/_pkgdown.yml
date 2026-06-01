@@ -5,10 +5,6 @@ template:
   theme: tango
   light-switch: true
   bslib:
-    primary: "#202C56"
-    border_radius: 0.5rem
-    button-border-radius: 0.25rem
-    danger: "#A6081A"
     base_font: {google: "Inter"}
     heading_font: {google: "Recursive"}
     code_font: {google: "JetBrains Mono"}

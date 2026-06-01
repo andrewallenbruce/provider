@@ -51,95 +51,104 @@ ResultQuality <- S7::new_S3_class("quality")
 
 #' @noRd
 S7::method(polish, ResultQuality) <- function(x) {
-  x1 <- collapse::get_elem(x, as.character(2017:2021)) |>
-    purrr::map(function(x) {
+  x1 <- collapse::get_elem(x, as.character(2017:2021))
+
+  if (!rlang::is_empty(x1)) {
+    x1 <- purrr::map(x1, function(x) {
       collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
         collapse::gv(unlist_(QPP$`_17`))
-    }) |>
-    rowbind2("year") |>
-    replace_nz() |>
-    rc_integer(c(
-      "year",
-      "npi",
-      "size",
-      "years",
-      "patients",
-      "charges",
-      "services"
-    )) |>
-    rc_double(c(
-      "final_score",
-      "adjustment",
-      "complex_bonus",
-      "qa_score",
-      "qi_bonus",
-      "pi_score",
-      "ia_score",
-      "cost_score"
-    ))
+    })
 
-  x1 <- rc_bin(x1, collapse::gvr(x1, "_ind$", return = 2L))
+    x1 <- rowbind2(x1, "year") |>
+      rc_bin(collapse::gvr(x1, "_ind$", return = 2L)) |>
+      replace_nz() |>
+      rc_integer(c(
+        "year",
+        "npi",
+        "size",
+        "years",
+        "patients",
+        "charges",
+        "services"
+      )) |>
+      rc_double(c(
+        "final_score",
+        "adjustment",
+        "complex_bonus",
+        "qa_score",
+        "qi_bonus",
+        "pi_score",
+        "ia_score",
+        "cost_score"
+      ))
+  }
 
-  x2 <- collapse::frename(x$`2022`, QPP$`_22`, .nse = FALSE) |>
-    collapse::gv(unlist_(QPP$`_22`)) |>
-    replace_nz()
+  x2 <- collapse::get_elem(x, as.character(2022))
 
-  x2$year <- 2022L
+  if (!rlang::is_empty(x2)) {
+    x2 <- collapse::frename(x2, QPP$`_22`, .nse = FALSE) |>
+      collapse::gv(unlist_(QPP$`_22`)) |>
+      cheapr::df_modify(list(year = 2022L))
 
-  x2 <- x2 |>
-    rc_bin(collapse::gvr(x2, "_ind$", return = 2L)) |>
-    rc_integer(c(
-      "year",
-      "npi",
-      "size",
-      "years",
-      "patients",
-      "charges",
-      "services"
-    )) |>
-    rc_double(c(
-      "final_score",
-      "adjustment",
-      "complex_bonus",
-      "small_bonus",
-      "qa_score",
-      "qi_bonus",
-      "pi_score",
-      "ia_score",
-      "cost_score",
-      "dual_ratio"
-    ))
+    x2 <- x2 |>
+      rc_bin(collapse::gvr(x2, "_ind$", return = 2L)) |>
+      replace_nz() |>
+      rc_integer(c(
+        "year",
+        "npi",
+        "size",
+        "years",
+        "patients",
+        "charges",
+        "services"
+      )) |>
+      rc_double(c(
+        "final_score",
+        "adjustment",
+        "complex_bonus",
+        "small_bonus",
+        "qa_score",
+        "qi_bonus",
+        "pi_score",
+        "ia_score",
+        "cost_score",
+        "dual_ratio"
+      ))
+  }
 
-  x4 <- collapse::get_elem(x, as.character(2023:2024)) |>
-    purrr::map(function(x) {
+  x4 <- collapse::get_elem(x, as.character(2023:2024))
+
+  if (!rlang::is_empty(x4)) {
+    x4 <- purrr::map(x4, function(x) {
       collapse::frename(x, QPP$`_24`, .nse = FALSE) |>
         collapse::gv(unlist_(QPP$`_24`))
-    }) |>
-    rowbind2("year") |>
-    replace_nz() |>
-    rc_integer(c(
-      "year",
-      "npi",
-      "size",
-      "years",
-      "patients",
-      "charges",
-      "services"
-    )) |>
-    rc_double(c(
-      "final_score",
-      "adjustment",
-      "complex_bonus",
-      "small_bonus",
-      "qa_score",
-      "qi_bonus",
-      "pi_score",
-      "ia_score",
-      "cost_score",
-      "dual_ratio"
-    ))
+    })
 
-  x4 <- rc_bin(x4, collapse::gvr(x4, "_ind$", return = 2L))
+    x4 <- rowbind2(x4, "year") |>
+      rc_bin(collapse::gvr(x4, "_ind$", return = 2L)) |>
+      replace_nz() |>
+      rc_integer(c(
+        "year",
+        "npi",
+        "size",
+        "years",
+        "patients",
+        "charges",
+        "services"
+      )) |>
+      rc_double(c(
+        "final_score",
+        "adjustment",
+        "complex_bonus",
+        "small_bonus",
+        "qa_score",
+        "qi_bonus",
+        "pi_score",
+        "ia_score",
+        "cost_score",
+        "dual_ratio"
+      ))
+  }
 
   x <- collapse::rowbind(x1, x2, x4, fill = TRUE)
 
@@ -147,7 +156,7 @@ S7::method(polish, ResultQuality) <- function(x) {
     x,
     rex = "^year$|^npi$|_ind$",
     id = c("year", "npi"),
-    var = "flag"
+    var = "indicators"
   )
 
   collapse::gvr(x, "_ind$") <- NULL
@@ -157,10 +166,10 @@ S7::method(polish, ResultQuality) <- function(x) {
     collapse::funique(c("year", "npi"))
 
   if (nrow0(y)) {
-    return(collapse::av(x, flag = rep_NA(x)))
+    return(collapse::av(x, indicators = rep_NA(x)))
   }
 
-  rc_qpp_ind(y, "flag")
+  rc_qpp_ind(y, "indicators")
 
   if (all_unique(y$npi)) {
     return(join2(x, y, on = c("year", "npi")))
