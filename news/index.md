@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9200 (2026-06-01)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  polish and pivot methods
+
 ## provider 0.0.1.9199 (2026-06-01)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
