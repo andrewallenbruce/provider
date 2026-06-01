@@ -237,3 +237,24 @@ rc_own_role <- function(x, column) {
     set = TRUE
   )
 }
+
+#' @noRd
+rc_qpp_ind <- function(x, column) {
+  collapse::recode_char(
+    x[[column]],
+    "asc_ind" = "ASC-Based",
+    "euc_ind" = "Extreme Uncontrollable Circumstance",
+    "fac_ind" = "Facility-Based",
+    "hpsa_ind" = "HPSA Clinician",
+    "hosp_ind" = "Hospital-Based",
+    "non_ind" = "Non-Patient Facing",
+    "nrep_ind" = "Non-Reporting",
+    "rural_ind" = "Rural Clinician",
+    "snet_ind" = "Safety Net",
+    "small_ind" = "Small Practice",
+    "eng_ind" = "Engaged",
+    "opt_ind" = "Opted Into MIPS",
+    default = NA_character_,
+    set = TRUE
+  )
+}

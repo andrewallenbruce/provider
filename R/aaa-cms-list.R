@@ -1,4 +1,23 @@
 #' @noRd
+qpp_uuid <- function() {
+  x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
+    collapse::get_elem("distribution") |>
+    collapse::rowbind(fill = TRUE)
+
+  x <- collapse::ss(
+    x,
+    grepl("^Quality", x$title, perl = TRUE) &
+      !cheapr::is_na(x$accessURL) &
+      cheapr::is_na(x$description)
+  )
+
+  set_names(
+    as.list(uuid_from_url(x$accessURL)),
+    extract_year(x$title)
+  )
+}
+
+#' @noRd
 uuid_cms_list <- function(endpoint) {
   switch(
     endpoint,
@@ -21,6 +40,7 @@ uuid_cms_list <- function(endpoint) {
       Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
+    quality = qpp_uuid(),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
@@ -58,10 +78,13 @@ cms_list <- function(
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
   report_empty()
-  flatten_cms(x@url, NULL, size = 10L) |>
+  y <- flatten_cms(x@url, NULL, size = 10L) |>
     multi_base(x@url) |>
-    rowbind2(x@idcol, fill = TRUE) |>
-    add_class(x@end)
+    purrr::map(collapse::qTBL) |>
+    purrr::map(\(y) add_class(y, x@end))
+
+  class(y) <- c(x@end, class(y))
+  return(y)
 }
 
 #' @noRd
@@ -69,8 +92,7 @@ method(request_single, CMSList) <- function(x) {
   report_count(x)
   flatten_cms(x@url, x@query) |>
     multi_base(x@url) |>
-    rowbind2(x@idcol, fill = TRUE) |>
-    add_class(x@end)
+    purrr::map(x@end, add_class)
 }
 
 #' @noRd
@@ -78,6 +100,6 @@ method(request_multi, CMSList) <- function(x) {
   report_pages(x)
   flatten_cms(x@url, x@query, offset = "<<i>>") |>
     multi_parallel(x@count, x@limit, x@url) |>
-    rowbind2(x@idcol, fill = TRUE) |>
     add_class(x@end)
+  # purrr::map(\(y) add_class(y, x@end))
 }

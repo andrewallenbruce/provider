@@ -9,5 +9,6 @@ utils::globalVariables(c(
 ))
 
 .onLoad <- function(libname, pkgname) {
+  qpp_uuid <<- memoise::memoise(qpp_uuid)
   S7::methods_register()
 }

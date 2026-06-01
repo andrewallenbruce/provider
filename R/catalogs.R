@@ -187,18 +187,3 @@ api_medicare2 <- function(x) {
       collapse::rsplit(~title)
   )
 }
-
-#' @noRd
-ss_na <- function(x) {
-  cheapr::sset(x, cheapr::which_(cheapr::row_na_counts(x) < 3L))
-}
-
-#' @noRd
-rm_year <- function(x) {
-  gsub(
-    " : [0-9]{4}-[0-9]{2}-[0-9]{2}([0-9A-Za-z]{1,3})?$",
-    "",
-    x,
-    perl = TRUE
-  )
-}

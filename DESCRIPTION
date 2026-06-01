@@ -25,7 +25,8 @@ Imports:
     rlang (>= 1.2.0),
     S7 (>= 0.2.2),
     stringr,
-    vctrs (>= 0.7.3)
+    vctrs (>= 0.7.3),
+    memoise (>= 2.0.1)
 Suggests: 
     arcgislayers (>= 0.6.0),
     knitr,

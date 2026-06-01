@@ -2,12 +2,49 @@
 % Please edit documentation in R/end-quality.R
 \name{quality_metrics}
 \alias{quality_metrics}
+\alias{quality}
 \title{Quality Payment Program}
 \usage{
 quality_metrics(year)
+
+quality(
+  npi = NULL,
+  state = NULL,
+  size = NULL,
+  specialty = NULL,
+  years = NULL,
+  patients = NULL,
+  charges = NULL,
+  services = NULL,
+  final_score = NULL,
+  adjustment = NULL,
+  count = FALSE
+)
 }
 \arguments{
 \item{year}{\verb{<int>} A vector of years from 2018 to 2025}
+
+\item{npi}{description}
+
+\item{state}{description}
+
+\item{size}{description}
+
+\item{specialty}{description}
+
+\item{years}{description}
+
+\item{patients}{description}
+
+\item{charges}{description}
+
+\item{services}{description}
+
+\item{final_score}{description}
+
+\item{adjustment}{description}
+
+\item{count}{\verb{<lgl>} Return the total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -27,6 +64,12 @@ adjustments.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+quality(count = TRUE)
+quality(count = TRUE, state = "GA")
+
+quality()
+
+
 quality_metrics(2018:2025)
 \dontshow{\}) # examplesIf}
 }

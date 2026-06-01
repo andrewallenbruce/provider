@@ -47,6 +47,135 @@ ResultRevocations <- S7::new_S3_class("revocations")
 ResultTransparency <- S7::new_S3_class("transparency")
 
 #' @noRd
+ResultQuality <- S7::new_S3_class("quality")
+
+#' @noRd
+S7::method(polish, ResultQuality) <- function(x) {
+  x1 <- collapse::get_elem(x, as.character(2017:2021)) |>
+    purrr::map(function(x) {
+      collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
+        collapse::gv(unlist_(QPP$`_17`))
+    }) |>
+    rowbind2("year") |>
+    replace_nz() |>
+    rc_integer(c(
+      "year",
+      "npi",
+      "size",
+      "years",
+      "patients",
+      "charges",
+      "services"
+    )) |>
+    rc_double(c(
+      "final_score",
+      "adjustment",
+      "complex_bonus",
+      "qa_score",
+      "qi_bonus",
+      "pi_score",
+      "ia_score",
+      "cost_score"
+    ))
+
+  x1 <- rc_bin(x1, collapse::gvr(x1, "_ind$", return = 2L))
+
+  x2 <- collapse::frename(x$`2022`, QPP$`_22`, .nse = FALSE) |>
+    collapse::gv(unlist_(QPP$`_22`)) |>
+    replace_nz()
+
+  x2$year <- 2022L
+
+  x2 <- x2 |>
+    rc_bin(collapse::gvr(x2, "_ind$", return = 2L)) |>
+    rc_integer(c(
+      "year",
+      "npi",
+      "size",
+      "years",
+      "patients",
+      "charges",
+      "services"
+    )) |>
+    rc_double(c(
+      "final_score",
+      "adjustment",
+      "complex_bonus",
+      "small_bonus",
+      "qa_score",
+      "qi_bonus",
+      "pi_score",
+      "ia_score",
+      "cost_score",
+      "dual_ratio"
+    ))
+
+  x4 <- collapse::get_elem(x, as.character(2023:2024)) |>
+    purrr::map(function(x) {
+      collapse::frename(x, QPP$`_24`, .nse = FALSE) |>
+        collapse::gv(unlist_(QPP$`_24`))
+    }) |>
+    rowbind2("year") |>
+    replace_nz() |>
+    rc_integer(c(
+      "year",
+      "npi",
+      "size",
+      "years",
+      "patients",
+      "charges",
+      "services"
+    )) |>
+    rc_double(c(
+      "final_score",
+      "adjustment",
+      "complex_bonus",
+      "small_bonus",
+      "qa_score",
+      "qi_bonus",
+      "pi_score",
+      "ia_score",
+      "cost_score",
+      "dual_ratio"
+    ))
+
+  x4 <- rc_bin(x4, collapse::gvr(x4, "_ind$", return = 2L))
+
+  x <- collapse::rowbind(x1, x2, x4, fill = TRUE)
+
+  y <- pivot2(
+    x,
+    rex = "^year$|^npi$|_ind$",
+    id = c("year", "npi"),
+    var = "flag"
+  )
+
+  collapse::gvr(x, "_ind$") <- NULL
+  x <- collapse::funique(x, c("year", "npi"))
+
+  y <- collapse::ss(y, y$ind %==% 1L, 1:3) |>
+    collapse::funique(c("year", "npi"))
+
+  if (nrow0(y)) {
+    return(collapse::av(x, flag = rep_NA(x)))
+  }
+
+  rc_qpp_ind(y, "flag")
+
+  if (all_unique(y$npi)) {
+    return(join2(x, y, on = c("year", "npi")))
+  }
+
+  y <- collapse::rsplit(y, y$year, simplify = TRUE) |>
+    purrr::map(\(x) collapse_rows(x, "npi", "flag")) |>
+    rowbind2("year") |>
+    collapse::qTBL()
+
+  join2(x, y, on = c("year", "npi"))
+}
+
+
+#' @noRd
 S7::method(polish, S7::class_integer) <- function(x) {
   invisible(x)
 }
@@ -101,7 +230,8 @@ S7::method(polish, ResultDialysis) <- function(x) {
 
 #' @noRd
 S7::method(polish, ResultFacility) <- function(x) {
-  rename_with(x, "facility") |>
+  rowbind2(x, "fac_type", fill = TRUE) |>
+    rename_with("facility") |>
     rc_address() |>
     rc_integer("npi") |>
     rc_bin("multi") |>
@@ -112,7 +242,8 @@ S7::method(polish, ResultFacility) <- function(x) {
 
 #' @noRd
 S7::method(polish, ResultOwner) <- function(x) {
-  rename_with(x, "owner") |>
+  rowbind2(x, "fac_type", fill = TRUE) |>
+    rename_with("owner") |>
     rc_address() |>
     rc_double("percent") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
@@ -161,7 +292,8 @@ S7::method(polish, ResultOrderRefer) <- function(x) {
 
 #' @noRd
 S7::method(polish, ResultPending) <- function(x) {
-  rename_with(x, "pending") |>
+  rowbind2(x, "prov_type", fill = TRUE) |>
+    rename_with("pending") |>
     rc_integer("npi")
 }
 
