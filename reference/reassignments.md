@@ -98,12 +98,12 @@ reassignments(
 ``` r
 reassignments(count = TRUE)
 #> reassignments Totals
-#> • Rows  : 3,521,074
-#> • Pages : 705      
+#> • Rows  : 3,527,875
+#> • Pages : 706      
 #> 
 
 reassignments(count = TRUE, employers = greater(50, equal = TRUE))
-#> ✔ reassignments returned 1,292 results.
+#> ✔ reassignments returned 1,317 results.
 
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results.

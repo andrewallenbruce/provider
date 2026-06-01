@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9199 (2026-06-01)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  draft
+
 ## provider 0.0.1.9198 (2026-05-31)
 
 - quality_payment refinement

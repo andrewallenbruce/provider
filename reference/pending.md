@@ -59,7 +59,7 @@ pending(first = starts("V"))
 #> • Physician     : 67
 #> • Non-Physician : 93
 #> ℹ Retrieving 2 pages...
-#> # A tibble: 160 × 4
+#> # A tibble: 186 × 4
 #>    prov_type first     last                    npi
 #>    <chr>     <chr>     <chr>                 <int>
 #>  1 Physician VADIN     LALL DASS        1144512724
@@ -72,5 +72,5 @@ pending(first = starts("V"))
 #>  8 Physician VALYNN    ANTOINE          1811480510
 #>  9 Physician VAMSI     REDDY MALLU      1750229845
 #> 10 Physician VANESA    WEBB-BARRAGAN    1487502654
-#> # ℹ 150 more rows
+#> # ℹ 176 more rows
 ```

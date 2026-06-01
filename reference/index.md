@@ -60,6 +60,7 @@ Sanctioned providers and price transparency enforcement.
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
   : Quality Payment Program
 
 ## Query Modifiers

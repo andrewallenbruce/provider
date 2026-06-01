@@ -110,21 +110,21 @@ clinicians(org_name = "Elizabethtown Community Hospital")
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 reassignments(org_name = "Elizabethtown Community Hospital")
-#> ✔ reassignments returned 380 results.
-#> # A tibble: 380 × 13
+#> ✔ reassignments returned 398 results.
+#> # A tibble: 398 × 13
 #>    first   last  state specialty employers    npi pac   enid  org_name employees
 #>    <chr>   <chr> <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#>  1 Jose    Acos… NY    Medical …         5 1.01e9 5890… I201… Elizabe…       196
-#>  2 Jose    Acos… NY    Medical …         5 1.01e9 5890… I201… Elizabe…       129
-#>  3 Lindsey Wilh… NY    Family P…         4 1.02e9 6901… I201… Elizabe…       196
-#>  4 Lindsey Wilh… NY    Family P…         4 1.02e9 6901… I201… Elizabe…       129
-#>  5 Lucy    Lane  NY    Diagnost…         5 1.03e9 7911… I202… Elizabe…       196
-#>  6 Lucy    Lane  NY    Diagnost…         5 1.03e9 7911… I202… Elizabe…       129
+#>  1 Jose    Acos… NY    Medical …         5 1.01e9 5890… I201… Elizabe…       202
+#>  2 Jose    Acos… NY    Medical …         5 1.01e9 5890… I201… Elizabe…       141
+#>  3 Lindsey Wilh… NY    Family P…         3 1.02e9 6901… I201… Elizabe…       202
+#>  4 Lindsey Wilh… NY    Family P…         3 1.02e9 6901… I201… Elizabe…       141
+#>  5 Lucy    Lane  NY    Diagnost…         5 1.03e9 7911… I202… Elizabe…       202
+#>  6 Lucy    Lane  NY    Diagnost…         5 1.03e9 7911… I202… Elizabe…       141
 #>  7 Lucy    Lane  VT    Diagnost…        14 1.03e9 7911… I201… Elizabe…        33
-#>  8 Vanessa Fior… NY    Medical …         3 1.04e9 7214… I202… Elizabe…       196
+#>  8 Vanessa Fior… NY    Medical …         3 1.04e9 7214… I202… Elizabe…       202
 #>  9 Vanessa Fior… NY    Medical …         3 1.04e9 7214… I202… Elizabe…        15
-#> 10 Janusz  Kikut NY    Diagnost…         5 1.05e9 1658… I202… Elizabe…       196
-#> # ℹ 370 more rows
+#> 10 Janusz  Kikut NY    Diagnost…         5 1.05e9 1658… I202… Elizabe…       202
+#> # ℹ 388 more rows
 #> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
 ```
 
