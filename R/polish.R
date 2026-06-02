@@ -140,13 +140,16 @@ S7::method(polish, ResultCLIA) <- function(x) {
   rc_clia(x, "GNRL_FAC_TYPE_CD")
   rc_clia(x, "GNRL_CNTL_TYPE_CD")
   rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
+  collapse::settfmv(x, "CHOW_CNT", as.integer)
+  collapse::settfmv(x, "DRCTLY_AFLTD_LAB_CNT", as.integer)
+  collapse::settfmv(x, "LAB_SITE_CNT", as.integer)
 
   rename_with(x, "clia") |>
     rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
-    rc_integer(c("chows", "labs", "sites")) |>
+    # rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
-    rc_address(add1 = "fac_name", add2 = "fac_2") |>
+    rc_address("fac_name", "fac_2") |>
     pivot_multi_site() |>
     pivot_acr_org()
 }

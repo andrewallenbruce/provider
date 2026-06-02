@@ -105,9 +105,6 @@ quality_metrics <- function(year) {
 # https://preview.qpp.cms.gov/api/submissions/public/docs/
 # https://data.cms.gov/resources/quality-payment-program-experience-data-dictionary
 
-# x <- URL_CMS_List("quality")
-# cms_list(end = "quality", count = TRUE, idcol = "year")
-
 # x <- purrr::map(x, httr2::request) |>
 #   httr2::req_perform_parallel(on_error = "continue") |>
 #   purrr::map(function(resp) parse_string(resp) |> collapse::qTBL()) |>
