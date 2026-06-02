@@ -1,24 +1,43 @@
 #' @noRd
-qpp_uuid <- function() {
+practitioners_uuid <- function(year = NULL) {
   x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
     collapse::get_elem("distribution") |>
     collapse::rowbind(fill = TRUE)
 
-  x <- collapse::ss(
-    x,
-    grepl("^Quality", x$title, perl = TRUE) &
-      !cheapr::is_na(x$accessURL) &
-      cheapr::is_na(x$description)
-  )
+  x <- collapse::ss(x, grep("Other Practitioners - by Provider :", x$title, perl = TRUE))
+  x <- collapse::ss(x, !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description))
+  x <- uuid_from_url(x$accessURL) |>
+    as.list() |>
+    set_names(extract_year(x$title))
 
-  set_names(
-    as.list(uuid_from_url(x$accessURL)),
-    extract_year(x$title)
-  )
+  if (!is.null(year)) {
+    match.arg(as.character(year), names(x), several.ok = TRUE)
+    x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
+  }
+  return(x)
 }
 
 #' @noRd
-uuid_cms_list <- function(endpoint) {
+qualitypayment_uuid <- function(year = NULL) {
+  x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
+    collapse::get_elem("distribution") |>
+    collapse::rowbind(fill = TRUE)
+
+  x <- collapse::ss(x, grep("^Quality", x$title, perl = TRUE))
+  x <- collapse::ss(x, !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description))
+  x <- uuid_from_url(x$accessURL) |>
+    as.list() |>
+    set_names(extract_year(x$title))
+
+  if (!is.null(year)) {
+    match.arg(as.character(year), names(x), several.ok = TRUE)
+    x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
+  }
+  return(x)
+}
+
+#' @noRd
+uuid_cms_list <- function(endpoint, year = NULL) {
   switch(
     endpoint,
     pending = list(
@@ -40,7 +59,8 @@ uuid_cms_list <- function(endpoint) {
       Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
-    quality = qpp_uuid(),
+    quality = qualitypayment_uuid(year = year),
+    utilization = practitioners_uuid(year = year),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }

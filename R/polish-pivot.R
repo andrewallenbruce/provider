@@ -179,7 +179,7 @@ pivot_subgroup <- function(x) {
     return(join2(x, y, on = "enid"))
   }
 
-  join2(x, collapse_rows(y, "enid", "sub_group"), on = c("enid"))
+  join2(x, collapse_rows(y, "enid", "sub_group"), on = "enid")
 }
 
 #' @noRd

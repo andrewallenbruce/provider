@@ -51,25 +51,14 @@ ResultQuality <- S7::new_S3_class("quality")
 
 #' @noRd
 S7::method(polish, ResultQuality) <- function(x) {
-  toi <- c("year", "npi", "size", "years", "patients", "charges", "services")
-
   x1 <- collapse::get_elem(x, as.character(2017:2021))
 
   if (!rlang::is_empty(x1)) {
     x1 <- purrr::map(x1, function(x) {
       collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
         collapse::gv(unlist_(QPP$`_17`))
-    })
-
-    x1 <- rowbind2(x1, "year") |>
-      rc_bin(collapse::gvr(x1, "_ind$", return = 3L)) |>
-      rc_double(collapse::gvr(
-        x1,
-        "_score$|_bonus$|^adjust|_ratio$",
-        return = 3L
-      )) |>
-      replace_nz() |>
-      rc_integer(toi)
+    }) |>
+      rowbind2("year")
   }
 
   x2 <- collapse::get_elem(x, as.character(2022))
@@ -78,16 +67,6 @@ S7::method(polish, ResultQuality) <- function(x) {
     x2 <- collapse::frename(x2, QPP$`_22`, .nse = FALSE) |>
       collapse::gv(unlist_(QPP$`_22`)) |>
       cheapr::df_modify(list(year = 2022L))
-
-    x2 <- x2 |>
-      rc_bin(collapse::gvr(x2, "_ind$", return = 2L)) |>
-      rc_double(collapse::gvr(
-        x2,
-        "_score$|_bonus$|^adjust|_ratio$",
-        return = 2L
-      )) |>
-      replace_nz() |>
-      rc_integer(toi)
   }
 
   x4 <- collapse::get_elem(x, as.character(2023:2024))
@@ -96,20 +75,26 @@ S7::method(polish, ResultQuality) <- function(x) {
     x4 <- purrr::map(x4, function(x) {
       collapse::frename(x, QPP$`_24`, .nse = FALSE) |>
         collapse::gv(unlist_(QPP$`_24`))
-    })
-
-    x4 <- rowbind2(x4, "year") |>
-      rc_bin(collapse::gvr(x4, "_ind$", return = 2L)) |>
-      rc_double(collapse::gvr(
-        x4,
-        "_score$|_bonus$|^adjust|_ratio$",
-        return = 2L
-      )) |>
-      replace_nz() |>
-      rc_integer(toi)
+    }) |>
+      rowbind2("year")
   }
 
   x <- collapse::rowbind(x1, x2, x4, fill = TRUE)
+
+  x <- replace_nz(x) |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 3L)) |>
+    rc_integer(c("year", "npi", "size", "years", "patients", "charges", "services"))
+
+  collapse::settfmv(x, "adjustment", as.double)
+  collapse::settfmv(x, "dual_ratio", as.double)
+  collapse::settfmv(x, "final_score", as.double)
+  collapse::settfmv(x, "qa_score", as.double)
+  collapse::settfmv(x, "pi_score", as.double)
+  collapse::settfmv(x, "ia_score", as.double)
+  collapse::settfmv(x, "cost_score", as.double)
+  collapse::settfmv(x, "complex_bonus", as.double)
+  collapse::settfmv(x, "qi_bonus", as.double)
+  collapse::settfmv(x, "small_bonus", as.double)
 
   pivot_quality(x)
 }
@@ -147,7 +132,6 @@ S7::method(polish, ResultCLIA) <- function(x) {
   rename_with(x, "clia") |>
     rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
-    # rc_integer(c("chows", "labs", "sites")) |>
     rc_address() |>
     rc_address("fac_name", "fac_2") |>
     pivot_multi_site() |>
@@ -158,7 +142,7 @@ S7::method(polish, ResultCLIA) <- function(x) {
 S7::method(polish, ResultClinicians) <- function(x) {
   rename_with(x, "clinicians") |>
     rc_address() |>
-    rc_address(add1 = "specialty", add2 = "spec_other") |>
+    rc_address("specialty", "spec_other") |>
     rc_integer(c("npi", "grad_year", "members")) |>
     collapse::roworderv(c("npi"))
 }

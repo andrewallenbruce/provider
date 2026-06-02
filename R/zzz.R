@@ -3,12 +3,11 @@ utils::globalVariables(c(
   "describedBy",
   "description",
   "identifier",
-  "prog_year",
   "title",
   NULL
 ))
 
 .onLoad <- function(libname, pkgname) {
-  qpp_uuid <<- memoise::memoise(qpp_uuid)
+  uuid_cms_list <<- memoise::memoise(uuid_cms_list)
   S7::methods_register()
 }

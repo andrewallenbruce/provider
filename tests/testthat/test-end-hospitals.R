@@ -24,8 +24,8 @@ describe("subgroups()", {
 })
 
 test_that("hospitals()", {
-  vcr::local_vcr_configure_log(file = stdout())
-  vcr::local_cassette("hospitals")
+  # vcr::local_vcr_configure_log(file = stdout())
+  # vcr::local_cassette("hospitals")
   x <- hospitals(
     city = "Atlanta",
     state = "GA",
