@@ -45,32 +45,32 @@ Medicare Pending Initial Logging and Tracking:
 ``` r
 pending(count = TRUE)
 #> pending Totals
-#> • Rows  : 11,849
+#> • Rows  : 11,737
 #> • Pages : 4     
 #> 
 
 pending(first = "Victor", count = TRUE)
-#> ✔ pending returned 6 results.
-#> • Physician     : 4
+#> ✔ pending returned 7 results.
+#> • Physician     : 5
 #> • Non-Physician : 2
 
 pending(first = starts("V"))
-#> ✔ pending returned 160 results.
-#> • Physician     : 67
+#> ✔ pending returned 159 results.
+#> • Physician     : 66
 #> • Non-Physician : 93
 #> ℹ Retrieving 2 pages...
 #> # A tibble: 186 × 4
-#>    prov_type first     last                    npi
-#>    <chr>     <chr>     <chr>                 <int>
-#>  1 Physician VADIN     LALL DASS        1144512724
-#>  2 Physician VAIDEHI   KOTHARI          1447190517
-#>  3 Physician VAIDHEESH VARAGANTIWAR     1265399984
-#>  4 Physician VALENTINA SEDLACEK         1003590118
-#>  5 Physician VALENTINA TURBAY CABALLERO 1689304545
-#>  6 Physician VALERIA   SILVA            1154292712
-#>  7 Physician VALJEAN   BACOT-DAVIS      1407597651
-#>  8 Physician VALYNN    ANTOINE          1811480510
-#>  9 Physician VAMSI     REDDY MALLU      1750229845
-#> 10 Physician VANESA    WEBB-BARRAGAN    1487502654
+#>    prov_type first     last                 npi
+#>    <chr>     <chr>     <chr>              <int>
+#>  1 Physician VADIN     LALL DASS     1144512724
+#>  2 Physician VAIDEHI   KOTHARI       1447190517
+#>  3 Physician VAIDHEESH VARAGANTIWAR  1265399984
+#>  4 Physician VALENTINA SEDLACEK      1003590118
+#>  5 Physician VALERIA   SILVA         1154292712
+#>  6 Physician VALJEAN   BACOT-DAVIS   1407597651
+#>  7 Physician VALYNN    ANTOINE       1811480510
+#>  8 Physician VAMSI     REDDY MALLU   1750229845
+#>  9 Physician VANESA    WEBB-BARRAGAN 1487502654
+#> 10 Physician VANESSA   DE BARROS     1487529939
 #> # ℹ 176 more rows
 ```

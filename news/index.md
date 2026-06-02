@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9202 (2026-06-02)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  work
+
 ## provider 0.0.1.9201 (2026-06-01)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)

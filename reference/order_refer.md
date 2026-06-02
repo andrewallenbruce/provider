@@ -90,7 +90,7 @@ order_refer(
 ``` r
 order_refer(count = TRUE)
 #> order_refer Totals
-#> • Rows  : 2,002,385
+#> • Rows  : 2,003,186
 #> • Pages : 401      
 #> 
 
@@ -106,15 +106,15 @@ order_refer(first = "Jennifer", last = "Smith")
 #> # A tibble: 135 × 8
 #>    first    last         npi   ptb   dme   hha   pmd hospice
 #>    <chr>    <chr>      <int> <int> <int> <int> <int>   <int>
-#>  1 JENNIFER SMITH 1699184895     1     1     1     1       0
+#>  1 JENNIFER SMITH 1215919170     1     1     1     1       1
 #>  2 JENNIFER SMITH 1598994923     1     1     1     1       0
 #>  3 JENNIFER SMITH 1053842450     1     1     1     1       1
 #>  4 JENNIFER SMITH 1477127207     1     1     0     0       0
-#>  5 JENNIFER SMITH 1215919170     1     1     1     1       1
-#>  6 JENNIFER SMITH 1952073652     1     1     1     1       0
-#>  7 JENNIFER SMITH 1821069931     1     1     1     1       0
-#>  8 JENNIFER SMITH 1790063832     1     1     1     1       1
-#>  9 JENNIFER SMITH 1285898619     1     1     1     0       1
+#>  5 JENNIFER SMITH 1699184895     1     1     1     1       0
+#>  6 JENNIFER SMITH 1821069931     1     1     1     1       0
+#>  7 JENNIFER SMITH 1790063832     1     1     1     1       1
+#>  8 JENNIFER SMITH 1285898619     1     1     1     0       1
+#>  9 JENNIFER SMITH 1952073652     1     1     1     1       0
 #> 10 JENNIFER SMITH 1184142903     1     1     1     1       0
 #> # ℹ 125 more rows
 
