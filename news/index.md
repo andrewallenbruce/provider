@@ -1,13 +1,18 @@
 # Changelog
 
+## provider 0.0.1.9201 (2026-06-01)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  gets another pass
+
 ## provider 0.0.1.9200 (2026-06-01)
 
-- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
   polish and pivot methods
 
 ## provider 0.0.1.9199 (2026-06-01)
 
-- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
   draft
 
 ## provider 0.0.1.9198 (2026-05-31)
@@ -366,7 +371,7 @@
 ## provider 0.0.1.9119 (2026-04-27)
 
 - added example for
-  [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality_metrics.md)
+  [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
 
 ## provider 0.0.1.9118 (2026-04-27)
 
