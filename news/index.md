@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9203 (2026-06-02)
+
+- fixed bug in page count
+  ([\#104](https://github.com/andrewallenbruce/provider/issues/104))
+
 ## provider 0.0.1.9202 (2026-06-02)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)

@@ -46,7 +46,7 @@ Medicare Pending Initial Logging and Tracking:
 pending(count = TRUE)
 #> pending Totals
 #> • Rows  : 11,737
-#> • Pages : 4     
+#> • Pages : 2     
 #> 
 
 pending(first = "Victor", count = TRUE)

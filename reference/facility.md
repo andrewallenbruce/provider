@@ -109,7 +109,7 @@ Medicare
 facility(count = TRUE)
 #> facility Totals
 #> • Rows  : 48,593
-#> • Pages : 13    
+#> • Pages : 5     
 #> 
 
 facility(state = c("GA", "FL"), count = TRUE)
@@ -127,7 +127,7 @@ facility(city = "Valdosta", state = "GA")
 #> • FQHC    : 2
 #> • SNF     : 4
 #> • Hospice : 4
-#> ℹ Retrieving 5 pages...
+#> ℹ Retrieving 4 pages...
 #> # A tibble: 16 × 15
 #>    fac_type enid      npi multi ccn   pac   org_name org_dba inc_date   org_type
 #>    <chr>    <chr>   <int> <int> <chr> <chr> <chr>    <chr>   <date>     <chr>   
