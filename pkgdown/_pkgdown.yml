@@ -113,9 +113,9 @@ reference:
   desc: >
     Sanctioned providers and price transparency enforcement.
   contents:
+  - quality
   - revocations
   - transparency
-  - quality_metrics
 
 - title: Query Modifiers
   contents:

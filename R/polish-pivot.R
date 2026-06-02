@@ -181,3 +181,36 @@ pivot_subgroup <- function(x) {
 
   join2(x, collapse_rows(y, "enid", "sub_group"), on = c("enid"))
 }
+
+#' @noRd
+pivot_quality <- function(x) {
+  y <- pivot2(
+    x,
+    rex = "^year$|^npi$|_ind$",
+    id = c("year", "npi"),
+    var = "indicators"
+  )
+
+  collapse::gvr(x, "_ind$") <- NULL
+  x <- collapse::funique(x, c("year", "npi"))
+
+  y <- collapse::ss(y, y$ind %==% 1L, 1:3) |>
+    collapse::funique(c("year", "npi"))
+
+  if (nrow0(y)) {
+    return(collapse::av(x, indicators = rep_NA(x)))
+  }
+
+  rc_qpp_ind(y, "indicators")
+
+  if (all_unique(y$npi)) {
+    return(join2(x, y, on = c("year", "npi")))
+  }
+
+  y <- collapse::rsplit(y, y$year, simplify = TRUE) |>
+    purrr::map(\(x) collapse_rows(x, "npi", "indicators")) |>
+    rowbind2("year") |>
+    collapse::qTBL()
+
+  join2(x, y, on = c("year", "npi"))
+}

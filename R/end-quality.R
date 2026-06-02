@@ -13,17 +13,17 @@
 #'
 #' @inheritParams provider_common_params
 #' @param year `<int>` A vector of years from 2018 to 2025
-#' @param npi description
+#' @param npi `<int>` description
 #' @param state description
-#' @param size description
+#' @param size `<int>` description
 #' @param specialty description
-#' @param years description
-#' @param patients description
-#' @param charges description
-#' @param services description
-#' @param final_score description
-#' @param adjustment description
-#' @param years description
+#' @param years `<int>` description
+#' @param patients `<int>` description
+#' @param charges `<int>` description
+#' @param services `<int>` description
+#' @param final_score `<int>` description
+#' @param adjustment `<int>` description
+#' @param years `<int>` description
 #' @returns A [tibble][tibble::tibble-package]
 #'
 #' @examplesIf httr2::is_online()
@@ -35,37 +35,6 @@
 #'
 #' quality_metrics(2018:2025)
 #'
-#' @export
-quality_metrics <- function(year) {
-  check_numeric(year)
-
-  x <- purrr::map(
-    year,
-    function(yr) {
-      httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
-        httr2::req_url_query(year = yr) |>
-        httr2::req_perform() |>
-        httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
-        _$data
-    }
-  ) |>
-    set_names(year) |>
-    collapse::unlist2d(idcols = c("year", "category", "metric")) |>
-    collapse::rnm(c("V1" = "mean"), .nse = FALSE) |>
-    data_frame() |>
-    rc_integer("year")
-
-  collapse::recode_char(
-    x,
-    individual = "ind",
-    dualEligibilityAverage = "Dual Eligible Ratio",
-    hccRiskScoreAverage = "HCC Risk Score",
-    set = TRUE
-  )
-  return(x)
-}
-
-#' @rdname quality_metrics
 #' @export
 quality <- function(
   npi = NULL,
@@ -99,6 +68,37 @@ quality <- function(
   x <- execute(x)
 
   polish(x)
+}
+
+#' @rdname quality
+#' @export
+quality_metrics <- function(year) {
+  check_numeric(year)
+
+  x <- purrr::map(
+    year,
+    function(yr) {
+      httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
+        httr2::req_url_query(year = yr) |>
+        httr2::req_perform() |>
+        httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
+        _$data
+    }
+  ) |>
+    set_names(year) |>
+    collapse::unlist2d(idcols = c("year", "category", "metric")) |>
+    collapse::rnm(c("V1" = "mean"), .nse = FALSE) |>
+    data_frame() |>
+    rc_integer("year")
+
+  collapse::recode_char(
+    x,
+    individual = "ind",
+    dualEligibilityAverage = "Dual Eligible Ratio",
+    hccRiskScoreAverage = "HCC Risk Score",
+    set = TRUE
+  )
+  return(x)
 }
 
 # QPP Submissions API
