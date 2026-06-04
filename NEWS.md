@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9207 (2026-06-04)
+
+* simplified quality polish method
+
+
 # provider 0.0.1.9206 (2026-06-04)
 
 * removed `provider` print class
