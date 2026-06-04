@@ -106,10 +106,13 @@ Medicare
 
 ``` r
 owner(count = TRUE)
-#> owner Totals
-#> • Rows  : 526,704
-#> • Pages : 6      
-#> 
+#> ✔ owner returned 526,704 results.
+#> • HHA      : 101,100
+#> • RHC      : 65,551 
+#> • FQHC     : 148,919
+#> • SNF      : 116,973
+#> • Hospice  : 71,133 
+#> • Hospital : 23,028 
 
 owner(state = c("GA", "FL"), count = TRUE)
 #> ✔ owner returned 8,462 results.
@@ -129,21 +132,5 @@ owner(city = "Valdosta", state = "GA")
 #> • Hospice  : 1
 #> • Hospital : 8
 #> ℹ Retrieving 4 pages...
-#> # A tibble: 32 × 19
-#>    fac_type org_enid    org_pac org_name pac   role  asc_date   own_name own_dba
-#>    <chr>    <chr>       <chr>   <chr>    <chr> <chr> <date>     <chr>    <chr>  
-#>  1 Hospital O202401310… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  2 Hospital O202403220… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  3 SNF      O202403280… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  4 SNF      O202403280… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  5 SNF      O202403280… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  6 SNF      O202403280… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  7 Hospital O202404090… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  8 Hospital O202404100… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…
-#>  9 Hospital O200803120… 135533… HOSPITA… 1355… 5% O… 2014-07-25 HOSPITA… SOUTH …
-#> 10 Hospital O200803130… 135533… HOSPITA… 1355… 5% O… 2014-07-25 HOSPITA… SOUTH …
-#> # ℹ 22 more rows
-#> # ℹ 10 more variables: percent <dbl>, title <chr>, first <chr>, middle <chr>,
-#> #   last <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   own_type <chr>
+#> Error in scv(y, 1L, y[1L], vind1 = TRUE): length(v) must be <= length(x)
 ```

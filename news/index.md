@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9204 (2026-06-03)
+
+- refactoring
+
 ## provider 0.0.1.9203 (2026-06-02)
 
 - fixed bug in page count
@@ -380,8 +384,7 @@
 
 ## provider 0.0.1.9119 (2026-04-27)
 
-- added example for
-  [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+- added example for `quality_metrics()`
 
 ## provider 0.0.1.9118 (2026-04-27)
 

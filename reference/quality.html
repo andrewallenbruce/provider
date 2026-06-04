@@ -15,7 +15,7 @@ adjustments."><meta property="og:image" content="https://andrewallenbruce.github
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9203</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9204</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@ adjustments.</p>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">quality_metrics</span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">metrics</span><span class="op">(</span>year <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -172,46 +172,13 @@ adjustments.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> <span style="color: #BB0000;">❯</span> Returning first <span style="font-weight: bold;">10</span> rows.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [80 × 22] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year         : int [1:80] 2021 2021 2021 2021 2021 2021 2021 2021 2021 2021 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi          : int [1:80] 1487963492 1417413022 1598059354 1609097500 1780868182 1932201423 1932495876 1619234945 1699154567 1649275769 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state        : chr [1:80] "WI" "VA" "WI" "GA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ size         : int [1:80] 3985 13 1 4 1678 216 371 568 374 337 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ specialty    : chr [1:80] "Internal Medicine" "Physician Assistant" "Podiatry" "Physical Therapist in Private Practice" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ years        : int [1:80] 10 3 10 15 11 18 11 8 6 18 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ patients     : int [1:80] 105665 1148 384 126 27358 23182 40417 17508 19603 23432 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ charges      : int [1:80] 111610820 176315 201105 149650 33151499 11949059 4690599 14930044 15503921 16122113 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ services     : int [1:80] 1253108 1468 2412 4810 303940 125172 73230 154328 164262 166671 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ final_score  : num [1:80] 100 79.6 85.1 100 100 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ adjustment   : num [1:80] 2.34 0.06 0.2 2.34 2.34 2.09 0.07 1.5 2.34 2.34 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ complex_bonus: num [1:80] 6.16 4.7 3.28 3.18 7.02 6.34 4.34 7.24 5.2 4.62 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ qa_score     : num [1:80] 99.5 70.5 74 100 86.1 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pi_score     : num [1:80] 100 0 87 0 100 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ part_option  : chr [1:80] "MIPS APM" "Group" "Individual" "Group" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ qi_bonus     : num [1:80] 0 0 0.32 0 0 0 1.2 0 0 0.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ia_score     : num [1:80] 40 40 40 40 40 40 40 40 40 40 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cost_score   : num [1:80] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cred         : chr [1:80] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dual_ratio   : num [1:80] NA NA NA NA NA NA NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ small_bonus  : num [1:80] NA NA NA NA NA NA NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ indicators   : chr [1:80] "Engaged" "Engaged" "Engaged" "Opted Into MIPS" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(url, base_request):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `curl::curl_parse_url()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to parse URL: Bad scheme</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">quality_metrics</span><span class="op">(</span><span class="fl">2018</span><span class="op">:</span><span class="fl">2025</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year category metric               mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 ind      HCC Risk Score      1.84 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>018 ind      Dual Eligible Ratio 0.288</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 group    HCC Risk Score      1.44 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 group    Dual Eligible Ratio 0.230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>019 ind      HCC Risk Score      1.64 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019 ind      Dual Eligible Ratio 0.269</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019 group    HCC Risk Score      1.32 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019 group    Dual Eligible Ratio 0.216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>020 ind      HCC Risk Score      1.57 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>020 ind      Dual Eligible Ratio 0.261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more rows</span></span>
+<span class="r-in"><span><span class="fu">metrics</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ckmatch(ovars, attr(X, "names")):</span> Unknown columns: c("metric", "category", "year")</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

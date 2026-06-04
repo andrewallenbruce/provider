@@ -350,7 +350,7 @@ orgs.
 Sanctioned providers and price transparency enforcement.
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
-  [`quality_metrics()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  [`metrics()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
   : Quality Payment Program
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
   : Revoked Providers & Suppliers
