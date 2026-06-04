@@ -98,45 +98,34 @@ reassignments(
 ``` r
 reassignments(count = TRUE)
 #> reassignments Totals
-#> • Rows  : 3,527,875
-#> • Pages : 706      
-#> 
+#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
 reassignments(count = TRUE, employers = greater(50, equal = TRUE))
-#> ✔ reassignments returned 1,317 results.
+#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
 reassignments(org_enid = "I20070209000135")
-#> ✔ reassignments returned 6 results.
-#> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
 reassignments(pac = 9830437441)
-#> ✔ reassignments returned 2 results.
-#> # A tibble: 2 × 13
-#>   first last    state specialty  employers    npi pac   enid  org_name employees
-#>   <chr> <chr>   <chr> <chr>          <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… NA               6
-#> 2 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… Clermon…         1
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
 reassignments(org_pac = 3173525888)
-#> ✔ reassignments returned 6 results.
-#> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 ```

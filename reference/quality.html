@@ -15,7 +15,7 @@ adjustments."><meta property="og:image" content="https://andrewallenbruce.github
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9206</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9207</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,91 +151,39 @@ adjustments.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">quality</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">quality</span> Totals</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>6,154,354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>8        </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>downloaded length 0 != reported length 794</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open URL 'https://data.cms.gov/data.json': HTTP status was '429 Unknown Error'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in download.file(url = .url, destfile = .destfile, method = .method,     quiet = !verbose, headers = .headers):</span> cannot open URL 'https://data.cms.gov/data.json'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">quality</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">quality</span> returned <span style="font-weight: bold;">203,295</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2024</span><span style="color: #555555;"> : </span>18,171</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2023</span><span style="color: #555555;"> : </span>17,948</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2022</span><span style="color: #555555;"> : </span>20,903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2021</span><span style="color: #555555;"> : </span>23,617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2020</span><span style="color: #555555;"> : </span>32,565</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2019</span><span style="color: #555555;"> : </span>31,468</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2018</span><span style="color: #555555;"> : </span>27,308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2017</span><span style="color: #555555;"> : </span>31,315</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>downloaded length 0 != reported length 794</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open URL 'https://data.cms.gov/data.json': HTTP status was '429 Unknown Error'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in download.file(url = .url, destfile = .destfile, method = .method,     quiet = !verbose, headers = .headers):</span> cannot open URL 'https://data.cms.gov/data.json'</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">quality</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">quality</span> Totals</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>6,154,354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>8        </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="font-style: italic;">No Query</span> <span style="color: #BB0000;">❯</span> Returning first <span style="font-weight: bold;">10</span> rows.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> quality [60 × 22] (S3: quality/tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year         : int [1:60] 2021 2021 2021 2021 2021 2021 2021 2021 2021 2021 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi          : int [1:60] 1487963492 1417413022 1598059354 1609097500 1780868182 1932201423 1932495876 1619234945 1699154567 1649275769 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state        : chr [1:60] "WI" "VA" "WI" "GA" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ size         : int [1:60] 3985 13 1 4 1678 216 371 568 374 337 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ specialty    : chr [1:60] "Internal Medicine" "Physician Assistant" "Podiatry" "Physical Therapist in Private Practice" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ years        : int [1:60] 10 3 10 15 11 18 11 8 6 18 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ patients     : int [1:60] 105665 1148 384 126 27358 23182 40417 17508 19603 23432 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ charges      : int [1:60] 111610820 176315 201105 149650 33151499 11949059 4690599 14930044 15503921 16122113 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ services     : int [1:60] 1253108 1468 2412 4810 303940 125172 73230 154328 164262 166671 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ final_score  : num [1:60] 100 79.6 85.1 100 100 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ adjustment   : num [1:60] 2.34 0.06 0.2 2.34 2.34 2.09 0.07 1.5 2.34 2.34 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ complex_bonus: num [1:60] 6.16 4.7 3.28 3.18 7.02 6.34 4.34 7.24 5.2 4.62 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ qa_score     : num [1:60] 99.5 70.5 74 100 86.1 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pi_score     : num [1:60] 100 0 87 0 100 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ part_option  : chr [1:60] "MIPS APM" "Group" "Individual" "Group" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ qi_bonus     : num [1:60] 0 0 0.32 0 0 0 1.2 0 0 0.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ ia_score     : num [1:60] 40 40 40 40 40 40 40 40 40 40 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cost_score   : num [1:60] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cred         : chr [1:60] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ dual_ratio   : num [1:60] NA NA NA NA NA NA NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ small_bonus  : chr [1:60] NA NA NA NA ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ indicators   : chr [1:60] "Engaged" "Engaged" "Engaged" "Opted Into MIPS" ...</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map_int(url, base_request, query = query):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::req_perform()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to parse error body with method defined in `req_error()`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::resp_body_json()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Unexpected content type "text/html".</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Expecting type "application/json" or suffix "json".</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">quality</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1316939655</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">quality</span> returned <span style="font-weight: bold;">3</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2024</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2023</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2022</span><span style="color: #555555;"> : </span>1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2021</span><span style="color: #555555;"> : </span>1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2020</span><span style="color: #555555;"> : </span>1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2019</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2018</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2017</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Retrieving <span style="font-weight: bold;">3</span> pages...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year    npi state  size specialty years patients charges services final_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>021 1.32<span style="color: #949494;">e</span>9 NY      455 Physicia…    17    <span style="text-decoration: underline;">23</span>586  1.09<span style="color: #949494;">e</span>7   <span style="text-decoration: underline;">116</span>187        91.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 1.32<span style="color: #949494;">e</span>9 NY      295 Missing      16    <span style="text-decoration: underline;">22</span>242  9.12<span style="color: #949494;">e</span>6   <span style="text-decoration: underline;">101</span>308        93.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>022 1.32<span style="color: #949494;">e</span>9 NY      352 Physicia…    18    <span style="text-decoration: underline;">23</span>244  1.05<span style="color: #949494;">e</span>7   <span style="text-decoration: underline;">110</span>514        80.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: adjustment &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qa_score &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pi_score &lt;dbl&gt;, part_option &lt;chr&gt;, qi_bonus &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cost_score &lt;dbl&gt;, cred &lt;chr&gt;, dual_ratio &lt;dbl&gt;, small_bonus &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   indicators &lt;chr&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map_int(url, base_request, query = query):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::req_perform()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to parse error body with method defined in `req_error()`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::resp_body_json()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Unexpected content type "text/html".</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Expecting type "application/json" or suffix "json".</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">quality</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043245657</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">quality</span> returned <span style="font-weight: bold;">1</span> result.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2024</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2023</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2022</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2021</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2020</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2019</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2018</span><span style="color: #555555;"> : </span>0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">2017</span><span style="color: #555555;"> : </span>1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year    npi state  size specialty years patients charges services final_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1.04<span style="color: #949494;">e</span>9 VT      936 Pathology    16    <span style="text-decoration: underline;">54</span>678  4.47<span style="color: #949494;">e</span>7       <span style="color: #BB0000;">NA</span>        88.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: adjustment &lt;dbl&gt;, complex_bonus &lt;dbl&gt;, qa_score &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pi_score &lt;dbl&gt;, part_option &lt;chr&gt;, qi_bonus &lt;dbl&gt;, ia_score &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cost_score &lt;dbl&gt;, indicators &lt;chr&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map_int(url, base_request, query = query):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::req_perform()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to parse error body with method defined in `req_error()`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::resp_body_json()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Unexpected content type "text/html".</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Expecting type "application/json" or suffix "json".</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">metrics</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 4</span></span>
