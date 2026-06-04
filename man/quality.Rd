@@ -65,11 +65,15 @@ adjustments.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 quality(count = TRUE)
+
 quality(count = TRUE, state = "GA")
 
 quality() |> str()
 
+quality(npi = 1316939655)
 
-metrics() |> print(n = 50)
+quality(npi = 1043245657)
+
+metrics()
 \dontshow{\}) # examplesIf}
 }

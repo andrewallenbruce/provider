@@ -77,6 +77,6 @@ facility(count = TRUE)
 
 facility(state = c("GA", "FL"), count = TRUE)
 
-# facility(city = "Valdosta", state = "GA")
+facility(city = "Valdosta", state = "GA")
 \dontshow{\}) # examplesIf}
 }

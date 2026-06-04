@@ -36,7 +36,7 @@
 #'
 #' facility(state = c("GA", "FL"), count = TRUE)
 #'
-#' # facility(city = "Valdosta", state = "GA")
+#' facility(city = "Valdosta", state = "GA")
 #'
 #' @export
 facility <- function(
@@ -63,7 +63,6 @@ facility <- function(
   x <- cms_list(
     count = count,
     set = FALSE,
-    idcol = "fac_type",
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,

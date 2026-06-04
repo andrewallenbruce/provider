@@ -10,7 +10,6 @@ temporal_uuid <- function(rex, year = NULL) {
   x <- collapse::ss(x, cheapr::which_(S))
   x <- as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
 
-
   if (!is.null(year)) {
     match.arg(as.character(year), names(x), several.ok = TRUE)
     x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
@@ -42,7 +41,10 @@ uuid_cms_list <- function(endpoint, year = NULL) {
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
     quality = temporal_uuid("^Quality", year = year),
-    utilization = temporal_uuid("Other Practitioners - by Provider :", year = year),
+    utilization = temporal_uuid(
+      "Other Practitioners - by Provider :",
+      year = year
+    ),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
@@ -79,14 +81,15 @@ cms_list <- function(
 method(request_preview, CMSList) <- function(x) {
   report_empty()
 
-  y <- flatten_cms(
-    rev(x@url)[cheapr::which_(x@count)],
-    NULL,
-    size = 10L
-  ) |>
-    multi_base(rev(x@url)) |>
-    purrr::map(collapse::qTBL) |>
-    purrr::map(\(y) add_class(y, x@end))
+  END <- names(which(x@count > 0L))
+
+  URL <- x@url[END]
+
+  N <- unname(x@count[END])
+
+  y <- flatten_cms(URL, NULL, size = 10L) |>
+    purrr::map(base_request) |>
+    set_names2(URL)
 
   class(y) <- c(x@end, class(y))
   return(y)
@@ -96,26 +99,35 @@ method(request_preview, CMSList) <- function(x) {
 method(request_single, CMSList) <- function(x) {
   report_count(x)
 
-  URL <- rev(x@url)[cheapr::which_(x@count)]
+  END <- names(which(x@count > 0L))
 
-  purrr::map(flatten_cms(URL, x@query), base_request) |>
+  URL <- x@url[END]
+
+  N <- unname(x@count[END])
+
+  y <- flatten_cms(URL, x@query) |>
+    purrr::map(base_request) |>
     set_names2(URL)
 
-  multi_base(flatten_cms(URL, x@query), URL) |>
-    add_class(x@end)
-
-  flatten_cms(URL, x@query) |>
-    multi_base(nm = URL) |>
-    purrr::map(x@end, add_class)
+  class(y) <- c(x@end, class(y))
+  return(y)
 }
 
 #' @noRd
 method(request_multi, CMSList) <- function(x) {
   report_pages(x)
 
-  rev(x@url)[cheapr::which_(x@count)] |>
-    flatten_cms(x@query, offset = "<<i>>") |>
-    multi_parallel(x@count, x@limit, x@url) |>
-    add_class(x@end)
-  # purrr::map(\(y) add_class(y, x@end))
+  END <- names(which(x@count > 0L))
+
+  URL <- x@url[END]
+
+  N <- unname(x@count[END])
+
+  y <- flatten_cms(URL, x@query, offset = "<<i>>") |>
+    offset3(N, x@limit) |>
+    purrr::map(\(x) parallel_request(x) |> collapse::qTBL()) |>
+    set_names2(URL)
+
+  class(y) <- c(x@end, class(y))
+  return(y)
 }

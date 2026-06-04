@@ -57,7 +57,6 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
   )
 }
 
-# rev(x@url)[cheapr::which_(x@count)]
 #' @noRd
 method(request_preview, CMS) <- function(x) {
   report_empty()

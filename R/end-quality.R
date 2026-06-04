@@ -28,12 +28,16 @@
 #'
 #' @examplesIf httr2::is_online()
 #' quality(count = TRUE)
+#'
 #' quality(count = TRUE, state = "GA")
 #'
 #' quality() |> str()
 #'
+#' quality(npi = 1316939655)
 #'
-#' metrics() |> print(n = 50)
+#' quality(npi = 1043245657)
+#'
+#' metrics()
 #'
 #' @export
 quality <- function(
@@ -100,7 +104,7 @@ metrics <- function(year = NULL) {
 
   collapse::settfmv(x, "year", as.integer)
   collapse::settfmv(x, "mean", as.numeric)
-  collapse::roworder(x, c("metric", "category", "year"))
+  collapse::roworderv(x, c("metric", "category", "year"))
 }
 
 # QPP Submissions API

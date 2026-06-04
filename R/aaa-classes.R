@@ -164,14 +164,6 @@ build <- new_generic("build", "x")
 execute <- new_generic("execute", "x")
 
 #' @noRd
-empty <- new_generic("empty", "x")
-
-#' @noRd
-method(empty, API) <- function(x) {
-  length(x@query) == 0L
-}
-
-#' @noRd
 request_preview <- new_generic("request_preview", "x")
 
 #' @noRd
@@ -184,7 +176,7 @@ request_multi <- new_generic("request_multi", "x")
 method(execute, API) <- function(x) {
   check_online()
 
-  if (empty(x)) {
+  if (length(x@query) == 0L) {
     report_total(x)
 
     switch(
