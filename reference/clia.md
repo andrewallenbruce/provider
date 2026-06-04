@@ -230,7 +230,7 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 
 clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #> ✔ clia returned 1 result.
-#> clia [1 × 21] (S3: clia/provider/tbl_df/tbl/data.frame)
+#> clia [1 × 21] (S3: clia/tbl_df/tbl/data.frame)
 #>  $ fac_name : chr "LEXINGTON MEDICAL CENTER-LABORATORY"
 #>  $ fac_ccn  : chr "42D0665325"
 #>  $ clia_ccn : chr "420073"
@@ -255,7 +255,7 @@ clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 
 clia(multi = c("temp", "campus")) |> str()
 #> ✔ clia returned 110 results.
-#> clia [110 × 21] (S3: clia/provider/tbl_df/tbl/data.frame)
+#> clia [110 × 21] (S3: clia/tbl_df/tbl/data.frame)
 #>  $ fac_name : chr [1:110] "UAB UNIVERSITY OF ALABAMA HOSPITAL LAB" "BBAHC KANAKANAK HOSPITAL" "ST JOSEPH'S HOSPITAL & MEDICAL CENTER" "UAMS DEPT OF LABORATORY SCIENCES" ...
 #>  $ fac_ccn  : chr [1:110] "01D0678593" "02D0706717" "03D0526691" "04D2160128" ...
 #>  $ clia_ccn : chr [1:110] NA "020021" "A20000010" NA ...

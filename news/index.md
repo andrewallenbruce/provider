@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9206 (2026-06-04)
+
+- removed `provider` print class
+
 ## provider 0.0.1.9205 (2026-06-04)
 
 - refactoring cms_list methods

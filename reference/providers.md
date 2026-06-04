@@ -112,16 +112,23 @@ providers()
 #> # ℹ 1 more variable: enid <chr>
 
 providers(org_name = starts("AB"), state = c("TX", "CA"))
-#> Error in "cli::cli_alert_success(msg)": ! Could not evaluate cli `{}` expression: `mark(x@count)`.
-#> Caused by error in `httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url), …`:
-#> ! Failed to parse error body with method defined in `req_error()`.
-#> Caused by error in `httr2::resp_body_json()`:
-#> ! Unexpected content type "text/html".
-#> • Expecting type "application/json" or suffix "json".
+#> ✔ providers returned 231 results.
+#> # A tibble: 231 × 11
+#>    org_name      first middle last  state prov_type prov_desc    npi multi pac  
+#>    <chr>         <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr>
+#>  1 ABUL H SHIRA… NA    NA     NA    CA    12-70     PART B S… 1.00e9     0 0941…
+#>  2 ABC MEDICAL … NA    NA     NA    CA    12-70     PART B S… 1.01e9     0 4486…
+#>  3 ABC MEDICINE… NA    NA     NA    CA    12-A5     PART B S… 1.02e9     0 8921…
+#>  4 ABC MEDICINE… NA    NA     NA    CA    30-A5     DME SUPP… 1.02e9     0 8921…
+#>  5 ABRX PHARMAC… NA    NA     NA    CA    12-A5     PART B S… 1.02e9     0 1557…
+#>  6 ABRI MD GROU… NA    NA     NA    CA    12-70     PART B S… 1.03e9     0 4082…
+#>  7 ABBAS KASHAN… NA    NA     NA    CA    12-70     PART B S… 1.06e9     0 9830…
+#>  8 ABSOLUTE COM… NA    NA     NA    CA    00-08     PART A P… 1.06e9     0 7416…
+#>  9 ABDULLAH IBI… NA    NA     NA    CA    12-70     PART B S… 1.07e9     0 8820…
+#> 10 ABSOLUTE CAR… NA    NA     NA    CA    00-06     PART A P… 1.08e9     0 5496…
+#> # ℹ 221 more rows
+#> # ℹ 1 more variable: enid <chr>
 
 providers(org_name = starts("U"), count = TRUE)
-#> Error in httr2::req_perform(httr2::req_error(httr2::req_retry(httr2::request(url),     retry_on_failure = TRUE, max_tries = 2), body = function(resp) httr2::resp_body_json(resp)$message)): Failed to parse error body with method defined in `req_error()`.
-#> Caused by error in `httr2::resp_body_json()`:
-#> ! Unexpected content type "text/html".
-#> • Expecting type "application/json" or suffix "json".
+#> ✔ providers returned 5,830 results.
 ```
