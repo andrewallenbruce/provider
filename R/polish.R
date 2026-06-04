@@ -99,7 +99,6 @@ S7::method(polish, ResultQuality) <- function(x) {
   pivot_quality(x)
 }
 
-
 #' @noRd
 S7::method(polish, S7::class_integer) <- function(x) {
   invisible(x)

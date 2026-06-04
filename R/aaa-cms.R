@@ -10,7 +10,6 @@ uuid_cms <- function(endpoint) {
     reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
     revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
     transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
-    quality = "7adb8b1b-b85c-4ed3-b314-064776e50180",
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
@@ -58,6 +57,7 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
   )
 }
 
+# rev(x@url)[cheapr::which_(x@count)]
 #' @noRd
 method(request_preview, CMS) <- function(x) {
   report_empty()

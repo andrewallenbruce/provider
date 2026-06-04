@@ -40,7 +40,7 @@ CMS <- new_class(
     ),
     limit = new_property(
       class_integer,
-      default = 5000L
+      getter = function(self) 5000L
     ),
     query = class_character,
     length = new_property(
@@ -77,7 +77,6 @@ CMSList <- new_class(
   CMS,
   package = NULL,
   properties = list(
-    idcol = class_character,
     url = new_property(
       class_list,
       getter = function(self) URL_CMS_List(self@end)
@@ -131,7 +130,7 @@ PDC <- new_class(
     ),
     limit = new_property(
       class_integer,
-      default = 1500L
+      getter = function(self) 1500L
     ),
     query = class_character,
     action = class_character,

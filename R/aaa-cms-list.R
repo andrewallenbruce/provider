@@ -1,33 +1,15 @@
 #' @noRd
-practitioners_uuid <- function(year = NULL) {
+temporal_uuid <- function(rex, year = NULL) {
   x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
     collapse::get_elem("distribution") |>
     collapse::rowbind(fill = TRUE)
 
-  x <- collapse::ss(x, grep("Other Practitioners - by Provider :", x$title, perl = TRUE))
-  x <- collapse::ss(x, !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description))
-  x <- uuid_from_url(x$accessURL) |>
-    as.list() |>
-    set_names(extract_year(x$title))
+  E <- grep(rex, x$title, perl = TRUE)
+  x <- collapse::ss(x, E)
+  S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
+  x <- collapse::ss(x, cheapr::which_(S))
+  x <- as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
 
-  if (!is.null(year)) {
-    match.arg(as.character(year), names(x), several.ok = TRUE)
-    x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
-  }
-  return(x)
-}
-
-#' @noRd
-qualitypayment_uuid <- function(year = NULL) {
-  x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
-    collapse::get_elem("distribution") |>
-    collapse::rowbind(fill = TRUE)
-
-  x <- collapse::ss(x, grep("^Quality", x$title, perl = TRUE))
-  x <- collapse::ss(x, !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description))
-  x <- uuid_from_url(x$accessURL) |>
-    as.list() |>
-    set_names(extract_year(x$title))
 
   if (!is.null(year)) {
     match.arg(as.character(year), names(x), several.ok = TRUE)
@@ -59,8 +41,8 @@ uuid_cms_list <- function(endpoint, year = NULL) {
       Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
-    quality = qualitypayment_uuid(year = year),
-    utilization = practitioners_uuid(year = year),
+    quality = temporal_uuid("^Quality", year = year),
+    utilization = temporal_uuid("Other Practitioners - by Provider :", year = year),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
@@ -81,7 +63,6 @@ URL_CMS_List <- function(x) {
 cms_list <- function(
   count = FALSE,
   set = FALSE,
-  idcol,
   ...,
   end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
@@ -89,7 +70,6 @@ cms_list <- function(
 
   CMSList(
     end = end,
-    idcol = idcol,
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
@@ -98,8 +78,13 @@ cms_list <- function(
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
   report_empty()
-  y <- flatten_cms(x@url, NULL, size = 10L) |>
-    multi_base(x@url) |>
+
+  y <- flatten_cms(
+    rev(x@url)[cheapr::which_(x@count)],
+    NULL,
+    size = 10L
+  ) |>
+    multi_base(rev(x@url)) |>
     purrr::map(collapse::qTBL) |>
     purrr::map(\(y) add_class(y, x@end))
 
@@ -110,15 +95,26 @@ method(request_preview, CMSList) <- function(x) {
 #' @noRd
 method(request_single, CMSList) <- function(x) {
   report_count(x)
-  flatten_cms(x@url, x@query) |>
-    multi_base(x@url) |>
+
+  URL <- rev(x@url)[cheapr::which_(x@count)]
+
+  purrr::map(flatten_cms(URL, x@query), base_request) |>
+    set_names2(URL)
+
+  multi_base(flatten_cms(URL, x@query), URL) |>
+    add_class(x@end)
+
+  flatten_cms(URL, x@query) |>
+    multi_base(nm = URL) |>
     purrr::map(x@end, add_class)
 }
 
 #' @noRd
 method(request_multi, CMSList) <- function(x) {
   report_pages(x)
-  flatten_cms(x@url, x@query, offset = "<<i>>") |>
+
+  rev(x@url)[cheapr::which_(x@count)] |>
+    flatten_cms(x@query, offset = "<<i>>") |>
     multi_parallel(x@count, x@limit, x@url) |>
     add_class(x@end)
   # purrr::map(\(y) add_class(y, x@end))

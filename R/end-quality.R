@@ -33,7 +33,7 @@
 #' quality() |> str()
 #'
 #'
-#' quality_metrics(2018:2025)
+#' metrics() |> print(n = 50)
 #'
 #' @export
 quality <- function(
@@ -52,7 +52,6 @@ quality <- function(
   x <- cms_list(
     count = count,
     set = FALSE,
-    idcol = "year",
     npi = npi,
     `practice state or us territory` = state,
     `practice size` = size,
@@ -72,33 +71,36 @@ quality <- function(
 
 #' @rdname quality
 #' @export
-quality_metrics <- function(year) {
+metrics <- function(year = NULL) {
   check_numeric(year)
 
-  x <- purrr::map(
-    year,
-    function(yr) {
-      httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
-        httr2::req_url_query(year = yr) |>
-        httr2::req_perform() |>
-        httr2::resp_body_json(simplifyVector = TRUE, check_type = FALSE) |>
-        _$data
-    }
-  ) |>
+  if (is.null(year)) {
+    year <- 2018:2025
+  }
+
+  x <- purrr::map(year, \(y) {
+    httr2::request("https://qpp.cms.gov/api/eligibility/stats") |>
+      httr2::req_url_query(year = y)
+  }) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    purrr::map(\(x) parse_string(x)$data) |>
     set_names(year) |>
     collapse::unlist2d(idcols = c("year", "category", "metric")) |>
     collapse::rnm(c("V1" = "mean"), .nse = FALSE) |>
-    data_frame() |>
-    rc_integer("year")
+    collapse::qTBL()
 
   collapse::recode_char(
     x,
-    individual = "ind",
-    dualEligibilityAverage = "Dual Eligible Ratio",
-    hccRiskScoreAverage = "HCC Risk Score",
+    "individual" = "Individual",
+    "group" = "Group",
+    "dualEligibilityAverage" = "Dual Eligible Ratio",
+    "hccRiskScoreAverage" = "HCC Risk Score",
     set = TRUE
   )
-  return(x)
+
+  collapse::settfmv(x, "year", as.integer)
+  collapse::settfmv(x, "mean", as.numeric)
+  collapse::roworder(x, c("metric", "category", "year"))
 }
 
 # QPP Submissions API

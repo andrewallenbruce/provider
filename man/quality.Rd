@@ -2,7 +2,7 @@
 % Please edit documentation in R/end-quality.R
 \name{quality}
 \alias{quality}
-\alias{quality_metrics}
+\alias{metrics}
 \title{Quality Payment Program}
 \usage{
 quality(
@@ -19,7 +19,7 @@ quality(
   count = FALSE
 )
 
-quality_metrics(year)
+metrics(year = NULL)
 }
 \arguments{
 \item{npi}{\verb{<int>} description}
@@ -70,6 +70,6 @@ quality(count = TRUE, state = "GA")
 quality() |> str()
 
 
-quality_metrics(2018:2025)
+metrics() |> print(n = 50)
 \dontshow{\}) # examplesIf}
 }
