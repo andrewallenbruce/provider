@@ -44,7 +44,7 @@ qpp_2224 = c(
 #' @noRd
 QPP = list(
   # 2017 - 2021
-  `_17` = c(
+  `2017` = c(
     qpp_all,
     `participation type` = "part_option",
     `ambulatory surgical center` = "asc_ind",
@@ -60,8 +60,8 @@ QPP = list(
     `ia score` = "ia_score",
     `cost score` = "cost_score"
   ),
-  `_22` = qpp_2224, # 2022
-  `_24` = qpp_2224 # 2023 - 2024
+  `2022` = qpp_2224, # 2022
+  `2024` = qpp_2224 # 2023 - 2024
 )
 
 #' @noRd

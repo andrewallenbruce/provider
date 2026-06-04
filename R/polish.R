@@ -50,35 +50,51 @@ ResultTransparency <- S7::new_S3_class("transparency")
 ResultQuality <- S7::new_S3_class("quality")
 
 #' @noRd
+has_ <- function(x, y) {
+  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+
+  collapse::has_elem(
+    x,
+    switch(
+      y,
+      "2017" = as.character(2017:2021),
+      "2022" = "2022",
+      "2024" = as.character(2023:2024)
+    )
+  )
+}
+
+#' @noRd
+quality_ <- function(x, y) {
+  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+
+  x <- collapse::get_elem(
+    x,
+    if (y == "2017") as.character(2017:2021) else y,
+    keep.tree = TRUE
+  )
+
+  x |>
+    purrr::map(\(x) {
+      collapse::frename(x, QPP[[y]], .nse = FALSE) |>
+        collapse::gv(unlist_(QPP[[y]]))
+    }) |>
+    rowbind2("year")
+}
+
+#' @noRd
 S7::method(polish, ResultQuality) <- function(x) {
   a <- b <- c <- list()
 
-  if (collapse::has_elem(x, as.character(2017:2021))) {
-    a <- collapse::get_elem(x, as.character(2017:2021), keep.tree = TRUE) |>
-      purrr::map(\(x) {
-        collapse::frename(x, QPP$`_17`, .nse = FALSE) |>
-          collapse::gv(unlist_(QPP$`_17`))
-      }) |>
-      rowbind2("year")
+  if (has_(x, 2017)) {
+    a <- quality_(x, 2017)
   }
-
-  if (collapse::has_elem(x, as.character(2022))) {
-    b <- collapse::get_elem(x, as.character(2022), keep.tree = TRUE) |>
-      purrr::map(\(x) {
-        collapse::frename(x, QPP$`_22`, .nse = FALSE) |>
-          collapse::gv(unlist_(QPP$`_22`))
-      }) |>
-      rowbind2("year")
+  if (has_(x, 2022)) {
+    b <- quality_(x, 2022)
     collapse::settfmv(b, "dual_ratio", as.numeric)
   }
-
-  if (collapse::has_elem(x, as.character(2023:2024))) {
-    c <- collapse::get_elem(x, as.character(2022), keep.tree = TRUE) |>
-      purrr::map(\(x) {
-        collapse::frename(x, QPP$`_22`, .nse = FALSE) |>
-          collapse::gv(unlist_(QPP$`_22`))
-      }) |>
-      rowbind2("year")
+  if (has_(x, 2024)) {
+    c <- quality_(x, 2024)
     collapse::settfmv(c, "dual_ratio", as.numeric)
   }
 
@@ -109,7 +125,8 @@ S7::method(polish, ResultQuality) <- function(x) {
   collapse::settfmv(x, "qi_bonus", as.numeric)
 
   pivot_quality(x) |>
-    add_class("quality")
+    add_class("quality") |>
+    collapse::roworderv(c("year"))
 }
 
 #' @noRd
