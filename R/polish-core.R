@@ -4,25 +4,11 @@ add_class <- function(x, endpoint = NULL) {
     cheapr::as_df(x),
     c(
       if (!is.null(endpoint)) endpoint,
-      "provider",
       "tbl_df",
       "tbl",
       "data.frame"
     )
   )
-}
-
-#' @export
-print.provider <- function(x, ...) {
-  withr::with_options(
-    list(
-      pillar.bold = TRUE,
-      pillar.subtle_num = TRUE,
-      pillar.print_min = 20L
-    ),
-    NextMethod()
-  )
-  invisible(x)
 }
 
 #' @noRd
