@@ -58,5 +58,18 @@ pending(first = starts("V"))
 #> • Physician     : 66
 #> • Non-Physician : 93
 #> ℹ Retrieving 2 pages...
-#> Error in scv(y, 1L, y[1L], vind1 = TRUE): length(v) must be <= length(x)
+#> # A tibble: 159 × 4
+#>    prov_type first     last                 npi
+#>    <chr>     <chr>     <chr>              <int>
+#>  1 Physician VADIN     LALL DASS     1144512724
+#>  2 Physician VAIDEHI   KOTHARI       1447190517
+#>  3 Physician VAIDHEESH VARAGANTIWAR  1265399984
+#>  4 Physician VALENTINA SEDLACEK      1003590118
+#>  5 Physician VALERIA   SILVA         1154292712
+#>  6 Physician VALJEAN   BACOT-DAVIS   1407597651
+#>  7 Physician VALYNN    ANTOINE       1811480510
+#>  8 Physician VAMSI     REDDY MALLU   1750229845
+#>  9 Physician VANESA    WEBB-BARRAGAN 1487502654
+#> 10 Physician VANESSA   DE BARROS     1487529939
+#> # ℹ 149 more rows
 ```

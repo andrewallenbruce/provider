@@ -92,32 +92,61 @@ adjustments.
 ``` r
 quality(count = TRUE)
 #> quality Totals
-#> • Rows  : 6,154,354
-#> • Pages : 8        
-#> 
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
+
 quality(count = TRUE, state = "GA")
-#> ✔ quality returned 203,295 results.
-#> • 2024 : 18,171
-#> • 2023 : 17,948
-#> • 2022 : 20,903
-#> • 2021 : 23,617
-#> • 2020 : 32,565
-#> • 2019 : 31,468
-#> • 2018 : 27,308
-#> • 2017 : 31,315
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
 quality() |> str()
 #> quality Totals
-#> • Rows  : 6,154,354
-#> • Pages : 8        
-#> 
-#> ! No Query ❯ Returning first 10 rows.
-#> 
-#> Error in purrr::map(url, base_request): ℹ In index: 1.
-#> Caused by error in `curl::curl_parse_url()`:
-#> ! Failed to parse URL: Bad scheme
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
+quality(npi = 1316939655)
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for retry backoff ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
 
-metrics() |> print(n = 50)
-#> Error in ckmatch(ovars, attr(X, "names")): Unknown columns: c("metric", "category", "year")
+quality(npi = 1043245657)
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! Failed to parse error body with method defined in `req_error()`.
+#> Caused by error in `httr2::resp_body_json()`:
+#> ! Unexpected content type "text/html".
+#> • Expecting type "application/json" or suffix "json".
+
+metrics()
+#> # A tibble: 32 × 4
+#>     year category   metric               mean
+#>    <int> <chr>      <chr>               <dbl>
+#>  1  2018 Group      Dual Eligible Ratio 0.230
+#>  2  2019 Group      Dual Eligible Ratio 0.216
+#>  3  2020 Group      Dual Eligible Ratio 0.210
+#>  4  2021 Group      Dual Eligible Ratio 0.208
+#>  5  2022 Group      Dual Eligible Ratio 0.211
+#>  6  2023 Group      Dual Eligible Ratio 0.206
+#>  7  2024 Group      Dual Eligible Ratio 0.202
+#>  8  2025 Group      Dual Eligible Ratio 0.202
+#>  9  2018 Individual Dual Eligible Ratio 0.288
+#> 10  2019 Individual Dual Eligible Ratio 0.269
+#> # ℹ 22 more rows
 ```

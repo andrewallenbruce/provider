@@ -259,6 +259,7 @@ x |> str()
 
 hospitals2(ccn = x$ccn)
 #> ✔ hospitals2 returned 2 results.
+#> Warning: NAs introduced by coercion
 #> # A tibble: 2 × 10
 #>   ccn    org_name       prov_type status rating address city  state zip   county
 #>   <chr>  <chr>          <chr>     <chr>   <int> <chr>   <chr> <chr> <chr> <chr> 
@@ -272,6 +273,7 @@ x <- hospitals2()
 #> 
 #> ! No Query ❯ Returning first 10 rows.
 #> 
+#> Warning: NAs introduced by coercion
 x
 #> # A tibble: 10 × 10
 #>    ccn    org_name      prov_type status rating address city  state zip   county
