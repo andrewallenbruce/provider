@@ -51,14 +51,11 @@ uuid_cms_list <- function(endpoint, year = NULL) {
 
 #' @noRd
 URL_CMS_List <- function(x) {
-  as.list(
-    paste0(
-      "https://data.cms.gov/data-api/v1/dataset/",
-      uuid_cms_list(x),
-      "/data"
-    )
-  ) |>
-    set_names2(uuid_cms_list(x))
+  x <- uuid_cms_list(x)
+
+  paste0("https://data.cms.gov/data-api/v1/dataset/", x, "/data") |>
+    as.list() |>
+    set_names2(x)
 }
 
 #' @noRd
@@ -81,17 +78,14 @@ cms_list <- function(
 method(request_preview, CMSList) <- function(x) {
   report_empty()
 
-  END <- names(which(x@count > 0L))
-
-  URL <- x@url[END]
-
-  N <- unname(x@count[END])
+  URL <- x@url[names(which(x@count > 0L))]
 
   y <- flatten_cms(URL, NULL, size = 10L) |>
     purrr::map(base_request) |>
     set_names2(URL)
 
   class(y) <- c(x@end, class(y))
+
   return(y)
 }
 
@@ -99,17 +93,14 @@ method(request_preview, CMSList) <- function(x) {
 method(request_single, CMSList) <- function(x) {
   report_count(x)
 
-  END <- names(which(x@count > 0L))
-
-  URL <- x@url[END]
-
-  N <- unname(x@count[END])
+  URL <- x@url[names(which(x@count > 0L))]
 
   y <- flatten_cms(URL, x@query) |>
     purrr::map(base_request) |>
     set_names2(URL)
 
   class(y) <- c(x@end, class(y))
+
   return(y)
 }
 
@@ -125,9 +116,10 @@ method(request_multi, CMSList) <- function(x) {
 
   y <- flatten_cms(URL, x@query, offset = "<<i>>") |>
     offset3(N, x@limit) |>
-    purrr::map(\(x) parallel_request(x) |> collapse::qTBL()) |>
+    purrr::map(parallel_request) |>
     set_names2(URL)
 
   class(y) <- c(x@end, class(y))
+
   return(y)
 }

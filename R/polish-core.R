@@ -33,6 +33,39 @@ rename_with <- function(x, endpoint) {
 }
 
 #' @noRd
+quality_has <- function(x, y) {
+  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+
+  collapse::has_elem(
+    x,
+    switch(
+      y,
+      "2017" = as.character(2017:2021),
+      "2022" = "2022",
+      "2024" = as.character(2023:2024)
+    )
+  )
+}
+
+#' @noRd
+quality_get <- function(x, y) {
+  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+
+  x <- collapse::get_elem(
+    x,
+    if (y == "2017") as.character(2017:2021) else y,
+    keep.tree = TRUE
+  )
+
+  x |>
+    purrr::map(\(x) {
+      collapse::frename(x, QPP[[y]], .nse = FALSE) |>
+        collapse::gv(unlist_(QPP[[y]]))
+    }) |>
+    rowbind2("year")
+}
+
+#' @noRd
 set_replace_nz <- function(x) {
   collapse::setv(x, "", NA_character_)
 }

@@ -39,7 +39,6 @@ parse_string <- function(resp, query = NULL) {
 base_request <- function(url, query = NULL) {
   httr2::request(url) |>
     httr2::req_retry(retry_on_failure = TRUE, max_tries = 2) |>
-    httr2::req_error(body = \(resp) httr2::resp_body_json(resp)$message) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }

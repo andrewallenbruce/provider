@@ -8,6 +8,6 @@ utils::globalVariables(c(
 ))
 
 .onLoad <- function(libname, pkgname) {
-  uuid_cms_list <<- memoise::memoise(uuid_cms_list)
+  temporal_uuid <<- memoise::memoise(temporal_uuid)
   S7::methods_register()
 }
