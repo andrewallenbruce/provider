@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9209 (2026-06-04)
+
+- fixed bug in CMSList page count
+
 ## provider 0.0.1.9208 (2026-06-04)
 
 - tidying up

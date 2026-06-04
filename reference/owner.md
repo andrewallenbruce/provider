@@ -131,7 +131,6 @@ owner(city = "Valdosta", state = "GA")
 #> • SNF      : 2
 #> • Hospice  : 1
 #> • Hospital : 8
-#> ℹ Retrieving 4 pages...
 #> # A tibble: 13 × 19
 #>    fac_type org_enid    org_pac org_name pac   role  asc_date   own_name own_dba
 #>  * <chr>    <chr>       <chr>   <chr>    <chr> <chr> <date>     <chr>    <chr>  

@@ -93,7 +93,7 @@ adjustments.
 quality(count = TRUE)
 #> quality Totals
 #> • Rows  : 6,154,354
-#> • Pages : 8        
+#> • Pages : 1,233    
 #> 
 
 quality(count = TRUE, state = "GA")
@@ -110,7 +110,7 @@ quality(count = TRUE, state = "GA")
 quality() |> str()
 #> quality Totals
 #> • Rows  : 6,154,354
-#> • Pages : 8        
+#> • Pages : 1,233    
 #> 
 #> ! No Query ❯ Returning first 10 rows.
 #> 
@@ -148,7 +148,6 @@ quality(npi = 1316939655)
 #> • 2019 : 0
 #> • 2018 : 0
 #> • 2017 : 0
-#> ℹ Retrieving 3 pages...
 #> # A tibble: 3 × 22
 #>    year    npi state  size specialty years patients charges services final_score
 #>   <int>  <int> <chr> <int> <chr>     <int>    <int>   <int>    <int>       <dbl>
