@@ -1,24 +1,23 @@
 #' @noRd
-temporal_uuid <- function(rex, year = NULL) {
+temporal_uuid <- function(rex) {
   x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
     collapse::get_elem("distribution") |>
     collapse::rowbind(fill = TRUE)
 
-  E <- grep(rex, x$title, perl = TRUE)
-  x <- collapse::ss(x, E)
+  x <- collapse::ss(x, grep(rex, x$title, perl = TRUE))
   S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
   x <- collapse::ss(x, cheapr::which_(S))
   x <- as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
 
-  if (!is.null(year)) {
-    match.arg(as.character(year), names(x), several.ok = TRUE)
-    x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
-  }
+  # if (!is.null(year)) {
+  #   match.arg(as.character(year), names(x), several.ok = TRUE)
+  #   x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
+  # }
   return(x)
 }
 
 #' @noRd
-uuid_cms_list <- function(endpoint, year = NULL) {
+uuid_cms_list <- function(endpoint) {
   switch(
     endpoint,
     pending = list(
@@ -40,11 +39,10 @@ uuid_cms_list <- function(endpoint, year = NULL) {
       Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
-    quality = temporal_uuid("^Quality", year = year),
-    utilization = temporal_uuid(
-      "Other Practitioners - by Provider :",
-      year = year
-    ),
+    quality = temporal_uuid("^Quality"),
+    utilization = temporal_uuid("Practitioners - by Provider :"),
+    service = temporal_uuid("Practitioners - by Provider and Service :"),
+    geography = temporal_uuid("Practitioners - by Geography and Service :"),
     cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
   )
 }
@@ -78,11 +76,11 @@ cms_list <- function(
 method(request_preview, CMSList) <- function(x) {
   report_empty()
 
-  URL <- x@url[names(which(x@count > 0L))]
-
-  y <- flatten_cms(URL, NULL, size = 10L) |>
-    purrr::map(base_request) |>
-    set_names2(URL)
+  y <- flatten_cms(x@url, NULL, size = 10L) |>
+    purrr::map(httr2::request) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    purrr::map(parse_string) |>
+    set_names2(x@url)
 
   class(y) <- c(x@end, class(y))
 
@@ -96,7 +94,9 @@ method(request_single, CMSList) <- function(x) {
   URL <- x@url[names(which(x@count > 0L))]
 
   y <- flatten_cms(URL, x@query) |>
-    purrr::map(base_request) |>
+    purrr::map(httr2::request) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    purrr::map(parse_string) |>
     set_names2(URL)
 
   class(y) <- c(x@end, class(y))
@@ -116,7 +116,10 @@ method(request_multi, CMSList) <- function(x) {
 
   y <- flatten_cms(URL, x@query, offset = "<<i>>") |>
     offset3(N, x@limit) |>
-    purrr::map(parallel_request) |>
+    unlist_() |>
+    purrr::map(httr2::request) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    purrr::map(parse_string) |>
     set_names2(URL)
 
   class(y) <- c(x@end, class(y))

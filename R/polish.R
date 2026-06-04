@@ -142,7 +142,8 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
-  collapse::settfmv(x, "hospital_overall_rating", as.integer)
+  suppressWarnings(collapse::settfmv(x, "hospital_overall_rating", as.integer))
+
   rename_with(x, "hospitals2")
 }
 

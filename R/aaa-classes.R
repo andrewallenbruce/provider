@@ -104,11 +104,11 @@ CMSList <- new_class(
         sum2(
           cheapr::seq_size(
             0L,
-            collapse::whichv(
+            unlist_(self@count)[collapse::whichv(
               unlist_(self@count),
               0L,
               invert = TRUE
-            ),
+            )],
             self@limit
           )
         )
@@ -193,6 +193,32 @@ method(execute, API) <- function(x) {
   }
 
   if (x@pages == 1L) {
+    return(request_single(x))
+  }
+  request_multi(x)
+}
+
+#' @noRd
+method(execute, CMSList) <- function(x) {
+  check_online()
+
+  if (length(x@query) == 0L) {
+    report_total(x)
+
+    switch(
+      x@action,
+      count = return(x@count),
+      set = return(request_multi(x)),
+      return(request_preview(x))
+    )
+  }
+
+  if (x@pages == 0L || x@action == "count") {
+    report_count(x)
+    return(x@count)
+  }
+
+  if (x@pages <= length(x@url)) {
     return(request_single(x))
   }
   request_multi(x)
