@@ -88,7 +88,7 @@ flatten_pdc <- function(url, query = NULL, ...) {
 
 #' @noRd
 method(request_preview, PDC) <- function(x) {
-  report_empty()
+  cli::cli_progress_step("Returning first {.strong 10} rows")
   flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results") |>
     add_class(x@end)
@@ -104,7 +104,11 @@ method(request_single, PDC) <- function(x) {
 
 #' @noRd
 method(request_multi, PDC) <- function(x) {
-  report_pages(x)
+  report_count(x)
+  cli::cli_progress_step(
+    "Retrieving {.strong {x@pages}} page{?s}",
+    msg_done = "Retrieved {.strong {x@pages}} page{?s}"
+    )
   flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)

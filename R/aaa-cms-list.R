@@ -7,8 +7,7 @@ temporal_uuid <- function(rex) {
   x <- collapse::ss(x, grep(rex, x$title, perl = TRUE))
   S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
   x <- collapse::ss(x, cheapr::which_(S))
-  x <- as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
-  return(x)
+  as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
 }
 
 #' @noRd
@@ -77,7 +76,7 @@ cms_list <- function(
 
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
-  report_empty()
+  cli::cli_progress_step("Returning first {.strong 10} rows")
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
     purrr::map(httr2::request) |>
@@ -109,7 +108,11 @@ method(request_single, CMSList) <- function(x) {
 
 #' @noRd
 method(request_multi, CMSList) <- function(x) {
-  report_pages(x)
+  report_count(x)
+  cli::cli_progress_step(
+    "Retrieving {.strong {x@pages}} page{?s}",
+    msg_done = "Retrieved {.strong {x@pages}} page{?s}"
+  )
 
   END <- names(which(x@count > 0L))
 
