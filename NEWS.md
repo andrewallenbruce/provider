@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9213 (2026-06-05)
+
+* added timing to cli messages
+
+
 # provider 0.0.1.9212 (2026-06-05)
 
 * restructuring internal classes
