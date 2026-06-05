@@ -50,24 +50,32 @@ quality_has <- function(x, y) {
 #' @noRd
 quality_get <- function(x, y) {
   y <- match.arg(as.character(y), c("2017", "2022", "2023"))
+  z <- if (y == "2017") as.character(2017:2021) else y
 
-  x <- collapse::get_elem(
-    x,
-    if (y == "2017") as.character(2017:2021) else y,
-    keep.tree = TRUE
-  )
-
-  x |>
-    purrr::map(\(x) {
-      collapse::frename(x, QPP[[y]], .nse = FALSE) |>
-        collapse::gv(unlist_(QPP[[y]]))
-    }) |>
+  x <- collapse::get_elem(x, z, keep.tree = TRUE) |>
     rowbind2("year")
+
+  collapse::setrename(x, QPP[[y]], .nse = FALSE)
+  replace_nz(x)
+
+  x <- collapse::gv(x, unlist_(QPP[[y]])) |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    pivot_quality()
+
+  if (y %in% c("2022", "2023")) {
+    collapse::settfmv(x, "dual_ratio", as.numeric)
+  }
+  return(x)
 }
 
 #' @noRd
 set_replace_nz <- function(x) {
   collapse::setv(x, "", NA_character_)
+}
+
+#' @noRd
+set_integer <- function(x, var) {
+  collapse::settfmv(x, var, as.integer)
 }
 
 #' @noRd

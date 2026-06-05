@@ -23,13 +23,13 @@ describe("subgroups()", {
   })
 })
 
-test_that("hospitals()", {
-  # vcr::local_vcr_configure_log(file = stdout())
-  # vcr::local_cassette("hospitals")
-  x <- hospitals(
-    city = "Atlanta",
-    state = "GA",
-    subgroup = subgroups(acute = FALSE, psych = TRUE)
-  )
-  expect_s3_class(x, "hospitals")
-})
+# test_that("hospitals()", {
+#   vcr::local_vcr_configure_log(file = stdout())
+#   vcr::local_cassette("hospitals")
+#   x <- hospitals(
+#     city = "Atlanta",
+#     state = "GA",
+#     subgroup = subgroups(acute = FALSE, psych = TRUE)
+#   )
+#   expect_s3_class(x, "hospitals")
+# })

@@ -1,5 +1,6 @@
 #' @noRd
 qpp_ALL = list(
+  year = "year",
   `practice state or us territory` = "state",
   `practice size` = "size",
   `clinician specialty` = "specialty",
