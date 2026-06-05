@@ -94,7 +94,8 @@ affiliations()
 #> • Rows  : 2,247,604
 #> • Pages : 1,499    
 #> 
-#> ! No Query ❯ Returning first 10 rows.
+#> ℹ Returning first 10 rows
+#> ✔ Returning first 10 rows [36ms]
 #> 
 #> # A tibble: 10 × 8
 #>    first    middle last             npi pac        prov_type prov_ccn parent_ccn
@@ -139,5 +140,23 @@ affiliations(facility_ccn = 331302)
 #> 10 JOSE    M       ACOSTAMADIEDO  1013910256 5890… Hospital  331302   NA        
 #> # ℹ 324 more rows
 
-# affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
+affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
+#> ✔ affiliations returned 2,093 results.
+#> ℹ Retrieving 2 pages
+#> ✔ Retrieved 2 pages [809ms]
+#> 
+#> # A tibble: 2,093 × 8
+#>    first  middle last              npi pac        prov_type prov_ccn parent_ccn
+#>    <chr>  <chr>  <chr>           <int> <chr>      <chr>     <chr>    <chr>     
+#>  1 ANDREW LEWIS  RODENBURG  1003253634 8628345642 Hospital  350002   NA        
+#>  2 ANDREW NA     BELLANTONI 1003278680 8729327556 Hospital  330234   NA        
+#>  3 ANDREW J      KUBISCH    1003479494 9032446414 Hospital  520045   NA        
+#>  4 ANDREW NA     BERNER     1003530478 4082081914 Hospital  390133   NA        
+#>  5 ANDREW S      BOMBACK    1013129816 9739239856 Hospital  330101   NA        
+#>  6 ANDREW NA     BARBAS     1013174275 4587951728 Hospital  340030   NA        
+#>  7 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180020   NA        
+#>  8 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180002   NA        
+#>  9 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180127   NA        
+#> 10 ANDREW NA     BAREFOOT   1013438274 2466725031 Hospital  450039   NA        
+#> # ℹ 2,083 more rows
 ```
