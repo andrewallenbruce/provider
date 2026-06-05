@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9211 (2026-06-05)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  polish method refactoring
+
 ## provider 0.0.1.9210 (2026-06-04)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)

@@ -118,9 +118,9 @@ quality(npi = 1043245657)
 #> • 2018 : 0
 #> • 2017 : 1
 #> # A tibble: 1 × 19
-#>    year state  size specialty years    npi patients charges services final_score
-#>   <int> <chr> <int> <chr>     <int>  <int>    <int>   <int>    <int>       <dbl>
-#> 1  2017 VT      936 Pathology    16 1.04e9    54678  4.47e7       NA        88.4
+#>   year  state size  specialty years npi    patients charges services final_score
+#>   <chr> <chr> <chr> <chr>     <chr> <chr>  <chr>    <chr>   <chr>          <dbl>
+#> 1 2017  VT    936   Pathology 16    10432… 54678    447356… NA              88.4
 #> # ℹ 9 more variables: adjustment <dbl>, complex_bonus <dbl>, qa_score <dbl>,
 #> #   pi_score <dbl>, part_opt <chr>, qi_bonus <dbl>, ia_score <dbl>,
 #> #   cost_score <dbl>, indicators <chr>
@@ -136,16 +136,16 @@ quality(npi = c(1003026055, 1316939655))
 #> • 2018 : 1
 #> • 2017 : 2
 #> # A tibble: 8 × 23
-#>    year state  size specialty years    npi patients charges services final_score
-#>   <int> <chr> <int> <chr>     <int>  <int>    <int>   <int>    <int>       <dbl>
-#> 1  2017 FL      189 Endocrin…     8 1.00e9    13189  5.84e6       NA        60  
-#> 2  2018 FL      135 Endocrin…     8 1.00e9    12317  5.02e6        0        57.7
-#> 3  2019 FL      150 Endocrin…     9 1.00e9    12415  5.62e6    52009        78.5
-#> 4  2020 FL      151 Endocrin…    10 1.00e9    12917  5.46e6    53599        51.0
-#> 5  2020 NY      295 Missing      16 1.32e9    22242  9.12e6   101308        93.2
-#> 6  2021 FL        9 Endocrin…    11 1.00e9     1181  6.98e5     7068        60  
-#> 7  2021 NY      455 Physicia…    17 1.32e9    23586  1.09e7   116187        91.1
-#> 8  2022 NY      352 Physicia…    18 1.32e9    23244  1.05e7   110514        80.3
+#>   year  state size  specialty  years npi   patients charges services final_score
+#>   <chr> <chr> <chr> <chr>      <chr> <chr> <chr>    <chr>   <chr>          <dbl>
+#> 1 2017  FL    189   Endocrino… 8     1003… 13189    5840610 NA              60  
+#> 2 2018  FL    135   Endocrino… 8     1003… 12317    5022828 0               57.7
+#> 3 2019  FL    150   Endocrino… 9     1003… 12415    5616617 52009           78.5
+#> 4 2020  FL    151   Endocrino… 10    1003… 12917    5464461 53599           51.0
+#> 5 2020  NY    295   Missing    16    1316… 22242    9118669 101308          93.2
+#> 6 2021  FL    9     Endocrino… 11    1003… 1181     698003  7068            60  
+#> 7 2021  NY    455   Physician… 17    1316… 23586    109495… 116187          91.1
+#> 8 2022  NY    352   Physician… 18    1316… 23244    105141… 110514          80.3
 #> # ℹ 13 more variables: adjustment <dbl>, complex_bonus <dbl>, qa_score <dbl>,
 #> #   pi_score <dbl>, part_opt <chr>, qi_bonus <dbl>, ia_score <dbl>,
 #> #   cost_score <dbl>, indicators <chr>, cred <chr>, dual_ratio <dbl>,
