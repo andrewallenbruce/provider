@@ -15,6 +15,7 @@
 #' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
+#' @param prov_type description
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
 #'
@@ -24,15 +25,16 @@
 #'
 #' @export
 pending <- function(
+  prov_type = NULL,
   npi = NULL,
   first = NULL,
   last = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   x <- cms_list(
     count = count,
-    set = set,
+    set = FALSE,
+    select = prov_type,
     idcol = "prov_type",
     NPI = npi,
     LAST_NAME = last,

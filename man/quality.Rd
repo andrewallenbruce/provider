@@ -6,6 +6,7 @@
 \title{Quality Payment Program}
 \usage{
 quality(
+  year = NULL,
   npi = NULL,
   state = NULL,
   size = NULL,
@@ -22,6 +23,8 @@ quality(
 metrics(year = NULL)
 }
 \arguments{
+\item{year}{\verb{<int>} A vector of years from 2018 to 2025}
+
 \item{npi}{\verb{<int>} description}
 
 \item{state}{description}
@@ -43,8 +46,6 @@ metrics(year = NULL)
 \item{adjustment}{\verb{<int>} description}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{year}{\verb{<int>} A vector of years from 2018 to 2025}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -66,7 +67,7 @@ adjustments.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 quality(count = TRUE)
 
-quality(count = TRUE, state = "GA")
+quality(year = c(2021, 2024), state = "GA", count = TRUE)
 
 quality(npi = 1043245657)
 

@@ -29,7 +29,7 @@
 #' @examplesIf httr2::is_online()
 #' quality(count = TRUE)
 #'
-#' quality(count = TRUE, state = "GA")
+#' quality(year = c(2021, 2024), state = "GA", count = TRUE)
 #'
 #' quality(npi = 1043245657)
 #'
@@ -39,6 +39,7 @@
 #'
 #' @export
 quality <- function(
+  year = NULL,
   npi = NULL,
   state = NULL,
   size = NULL,
@@ -54,6 +55,7 @@ quality <- function(
   x <- cms_list(
     count = count,
     set = FALSE,
+    select = year,
     npi = npi,
     `practice state or us territory` = state,
     `practice size` = size,

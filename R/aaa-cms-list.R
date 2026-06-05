@@ -8,11 +8,6 @@ temporal_uuid <- function(rex) {
   S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
   x <- collapse::ss(x, cheapr::which_(S))
   x <- as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
-
-  # if (!is.null(year)) {
-  #   match.arg(as.character(year), names(x), several.ok = TRUE)
-  #   x <- cheapr::sset(x, collapse::fmatch(year, names(x), nomatch = 0L))
-  # }
   return(x)
 }
 
@@ -60,13 +55,21 @@ URL_CMS_List <- function(x) {
 cms_list <- function(
   count = FALSE,
   set = FALSE,
+  select = NULL,
   ...,
   end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
   x <- param_cms(...)
+  url <- URL_CMS_List(end)
+
+  if (!is.null(select)) {
+    match.arg(as.character(select), names(url), several.ok = TRUE)
+    url <- url[collapse::fmatch(select, names(url), nomatch = 0L)]
+  }
 
   CMSList(
     end = end,
+    url = url,
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )

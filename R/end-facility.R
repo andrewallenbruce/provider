@@ -8,11 +8,11 @@
 #'
 #' @inheritParams provider_common_params
 #' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
-#'    - `hha` = Home Health Agency
-#'    - `rhc` = Rural Health Clinic
-#'    - `fqhc` = Federally Qualified Health Clinic
-#'    - `snf` = Skilled Nursing Facility
-#'    - `hospice` = Hospice
+#'    - `HHA` = Home Health Agency
+#'    - `RHC` = Rural Health Clinic
+#'    - `FQHC` = Federally Qualified Health Clinic
+#'    - `SNF` = Skilled Nursing Facility
+#'    - `Hospice` = Hospice
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -63,6 +63,7 @@ facility <- function(
   x <- cms_list(
     count = count,
     set = FALSE,
+    select = fac_type,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,

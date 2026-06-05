@@ -8,12 +8,12 @@
 #'
 #' @inheritParams provider_common_params
 #' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
-#'    - `hha` = Home Health Agency
-#'    - `rhc` = Rural Health Clinic
-#'    - `fqhc` = Federally Qualified Health Clinic
-#'    - `snf` = Skilled Nursing Facility
-#'    - `hospice` = Hospice
-#'    - `hospital` = Hospital
+#'    - `HHA` = Home Health Agency
+#'    - `RHC` = Rural Health Clinic
+#'    - `FQHC` = Federally Qualified Health Clinic
+#'    - `SNF` = Skilled Nursing Facility
+#'    - `Hospice` = Hospice
+#'    - `Hospital` = Hospital
 #' @param org_enid `<chr>` National Provider Identifier
 #' @param org_pac `<chr>` Provider's name
 #' @param org_name `<chr>` Provider's name
@@ -60,7 +60,7 @@ owner <- function(
   x <- cms_list(
     count = count,
     set = FALSE,
-    idcol = "fac_type",
+    select = fac_type,
     `ENROLLMENT ID` = org_enid,
     `ASSOCIATE ID` = org_pac,
     `ORGANIZATION NAME` = org_name,

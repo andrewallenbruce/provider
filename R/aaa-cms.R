@@ -44,6 +44,7 @@ cms <- function(
 
   CMS(
     end = end,
+    url = URL_CMS(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )

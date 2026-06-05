@@ -32,12 +32,12 @@ owner(
 \arguments{
 \item{fac_type}{\verb{<enum>} Facility type; if NULL (default), will search all:
 \itemize{
-\item \code{hha} = Home Health Agency
-\item \code{rhc} = Rural Health Clinic
-\item \code{fqhc} = Federally Qualified Health Clinic
-\item \code{snf} = Skilled Nursing Facility
-\item \code{hospice} = Hospice
-\item \code{hospital} = Hospital
+\item \code{HHA} = Home Health Agency
+\item \code{RHC} = Rural Health Clinic
+\item \code{FQHC} = Federally Qualified Health Clinic
+\item \code{SNF} = Skilled Nursing Facility
+\item \code{Hospice} = Hospice
+\item \code{Hospital} = Hospital
 }}
 
 \item{org_enid}{\verb{<chr>} National Provider Identifier}

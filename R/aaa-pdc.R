@@ -71,6 +71,7 @@ pdc <- function(
 
   PDC(
     end = end,
+    url = URL_PDC(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )

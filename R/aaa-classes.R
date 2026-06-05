@@ -34,10 +34,7 @@ CMS <- new_class(
   package = NULL,
   properties = list(
     end = class_character,
-    url = new_property(
-      class_character,
-      getter = function(self) URL_CMS(self@end)
-    ),
+    url = class_character | class_list,
     limit = new_property(
       class_integer,
       getter = function(self) 5000L
@@ -77,10 +74,6 @@ CMSList <- new_class(
   CMS,
   package = NULL,
   properties = list(
-    url = new_property(
-      class_list,
-      getter = function(self) URL_CMS_List(self@end)
-    ),
     count = new_property(
       class_integer,
       getter = function(self) {
@@ -89,10 +82,7 @@ CMSList <- new_class(
           self@query,
           append = "/stats?"
         ) |>
-          multi_count(
-            self@url,
-            "found_rows"
-          )
+          multi_count(self@url, "found_rows")
       }
     ),
     pages = new_property(
@@ -116,10 +106,7 @@ PDC <- new_class(
   package = NULL,
   properties = list(
     end = class_character,
-    url = new_property(
-      class_character,
-      getter = function(self) URL_PDC(self@end)
-    ),
+    url = class_character,
     limit = new_property(
       class_integer,
       getter = function(self) 1500L

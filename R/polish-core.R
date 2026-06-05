@@ -75,7 +75,7 @@ set_replace_nz <- function(x) {
 
 #' @noRd
 set_integer <- function(x, var) {
-  collapse::settfmv(x, var, as.integer)
+  collapse::settfmv(.data = x, vars = var, FUN = as.integer)
 }
 
 #' @noRd

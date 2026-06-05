@@ -11,16 +11,16 @@ Medicare Pending Initial Logging and Tracking:
 }
 }
 \usage{
-pending(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+pending(prov_type = NULL, npi = NULL, first = NULL, last = NULL, count = FALSE)
 }
 \arguments{
+\item{prov_type}{description}
+
 \item{npi}{\verb{<int>} National Provider Identifier}
 
 \item{first, last}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Providers with pending Medicare enrollment applications.
