@@ -68,11 +68,9 @@ quality(count = TRUE)
 
 quality(count = TRUE, state = "GA")
 
-quality() |> str()
-
-quality(npi = 1316939655)
-
 quality(npi = 1043245657)
+
+quality(npi = c(1003026055, 1316939655))
 
 metrics()
 \dontshow{\}) # examplesIf}

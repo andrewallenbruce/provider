@@ -98,20 +98,12 @@ CMSList <- new_class(
     pages = new_property(
       class_integer,
       getter = function(self) {
-        if (collapse::allv(unlist_(self@count), 0L)) {
+        x <- unlist_(self@count)
+        if (collapse::allv(x, 0L)) {
           return(0L)
         }
-        sum2(
-          cheapr::seq_size(
-            0L,
-            unlist_(self@count)[collapse::whichv(
-              unlist_(self@count),
-              0L,
-              invert = TRUE
-            )],
-            self@limit
-          )
-        )
+        x <- x[collapse::whichv(x, 0L, invert = TRUE)]
+        sum2(cheapr::seq_size(0L, x, self@limit))
       }
     )
   )
@@ -133,6 +125,10 @@ PDC <- new_class(
       getter = function(self) 1500L
     ),
     query = class_character,
+    length = new_property(
+      class_integer,
+      getter = function(self) nchar(self@query)
+    ),
     action = class_character,
     count = new_property(
       class_integer,

@@ -18,21 +18,27 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
   a <- b <- c <- list()
 
   if (quality_has(x, 2017)) {
-    a <- quality_get(x, 2017)
+    a <- quality_get(x, 2017) |>
+      replace_nz()
+    a <- rc_bin(a, collapse::gvr(a, "_ind$", return = 3L)) |>
+      pivot_quality()
   }
   if (quality_has(x, 2022)) {
-    b <- quality_get(x, 2022)
+    b <- quality_get(x, 2022) |>
+      replace_nz()
+    b <- rc_bin(b, collapse::gvr(b, "_ind$", return = 3L)) |>
+      pivot_quality()
     collapse::settfmv(b, "dual_ratio", as.numeric)
   }
-  if (quality_has(x, 2024)) {
-    c <- quality_get(x, 2024)
+  if (quality_has(x, 2023)) {
+    c <- quality_get(x, 2023) |>
+      replace_nz()
+    c <- rc_bin(c, collapse::gvr(c, "_ind$", return = 3L)) |>
+      pivot_quality()
     collapse::settfmv(c, "dual_ratio", as.numeric)
   }
 
   x <- collapse::rowbind(a, b, c, fill = TRUE)
-
-  x <- replace_nz(x) |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 3L))
 
   collapse::settfmv(x, "year", as.integer)
   collapse::settfmv(x, "npi", as.integer)
@@ -50,8 +56,7 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
   collapse::settfmv(x, "cost_score", as.numeric)
   collapse::settfmv(x, "qi_bonus", as.numeric)
 
-  pivot_quality(x) |>
-    add_class("quality") |>
+  add_class(x, "quality") |>
     collapse::roworderv(c("year"))
 }
 

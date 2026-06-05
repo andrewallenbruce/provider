@@ -1,67 +1,94 @@
-# COMMON TO ALL
 #' @noRd
-qpp_all = list(
-  npi = "npi",
+qpp_ALL = list(
   `practice state or us territory` = "state",
   `practice size` = "size",
   `clinician specialty` = "specialty",
   `years in medicare` = "years",
+  npi = "npi",
   `medicare patients` = "patients",
   `allowed charges` = "charges",
   services = "services",
+  `opted into mips` = "opted_ind",
   `final score` = "final_score",
   `payment adjustment percentage` = "adjustment",
   `complex patient bonus` = "complex_bonus",
-  `opted into mips` = "opt_ind",
   `quality category score` = "qa_score",
   `promoting interoperability (pi) category score` = "pi_score"
 )
 
-# COMMON TO _22 & _24
 #' @noRd
-qpp_2224 = c(
-  qpp_all,
-  `clinician type` = "cred",
-  `dual eligibility ratio` = "dual_ratio",
-  `participation option` = "part_option",
-  `small practice bonus` = "small_bonus",
-  `ambulatory surgical center-based status` = "asc_ind",
-  `extreme uncontrollable circumstance (euc)` = "euc_ind",
-  `facility-based status` = "fac_ind",
-  `health professional shortage area status` = "hpsa_ind",
-  `hospital-based status` = "hosp_ind",
-  `non-patient facing status` = "non_ind",
-  `non-reporting` = "nrep_ind",
-  `opted into mips` = "opt_ind",
-  `rural status` = "rural_ind",
-  `safety-net status` = "snet_ind",
-  `small practice status` = "small_ind",
-  `quality improvement score` = "qi_bonus",
-  `improvement activities (ia) category score` = "ia_score",
-  `cost category score` = "cost_score"
+qpp_17 = list(
+  engaged = "engaged_ind",
+  `participation type` = "part_opt",
+  `small practitioner` = "small_ind",
+  `rural clinician` = "rural_ind",
+  `hpsa clinician` = "hpsa_ind",
+  `ambulatory surgical center` = "asc_ind",
+  `hospital-based clinician` = "hospital_ind",
+  `non-patient facing` = "non_patient_ind",
+  `facility-based` = "facility_ind",
+  `extreme hardship` = "extreme_ind",
+  `extreme hardship quality` = "qa_ext_ind",
+  `quality improvement bonus` = "qi_bonus",
+  `quality bonus` = "qa_bonus_ind",
+  `extreme hardship pi` = "pi_ext_ind",
+  `pi hardship` = "pi_hard_ind",
+  `pi reweighting` = "pi_rw_ind",
+  `pi bonus` = "pi_bonus_ind",
+  `ia score` = "ia_score",
+  `extreme hardship ia` = "ia_ext_ind",
+  `cost score` = "cost_score",
+  `extreme hardship cost` = "cost_ext_ind"
 )
 
 #' @noRd
+qpp_22 = list(
+  `clinician type` = "cred",
+  `non-reporting` = "non_report_ind",
+  `participation option` = "part_opt",
+  `small practice status` = "small_ind",
+  `rural status` = "rural_ind",
+  `health professional shortage area status` = "hpsa_ind",
+  `ambulatory surgical center-based status` = "asc_ind",
+  `hospital-based status` = "hospital_ind",
+  `non-patient facing status` = "non_patient_ind",
+  `facility-based status` = "facility_ind",
+  `dual eligibility ratio` = "dual_ratio",
+  `safety-net status` = "safety_ind",
+  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
+  `quality improvement score` = "qi_score",
+  `quality reweighting (euc)` = "qa_ext_ind",
+  `small practice bonus` = "small_bonus",
+  `pi reweighting (euc)` = "pi_ext_ind",
+  `pi reweighting (hardship exception)` = "pi_hard_ind",
+  `pi reweighting (special status or clinician type)` = "pi_spec_ind",
+  `improvement activities (ia) category score` = "ia_score",
+  `ia reweighting (euc)` = "ia_ext_ind",
+  `ia credit` = "ia_credit_ind",
+  `cost category score` = "cost_score",
+  `cost reweighting (euc)` = "cost_ext_ind"
+)
+
+#' @noRd
+qpp_23 = list(
+  `reporting option` = "report_opt",
+  `mips value pathway title` = "mvp_title",
+  `received facility score` = "fac_score_ind",
+  `quality category weight` = "qa_weight",
+  `promoting interoperability (pi) category weight` = "pi_weight",
+  `improvement activities (ia) category weight` = "ia_weight",
+  `cost improvement score` = "ci_score",
+  `cost category weight` = "cost_weight"
+)
+
+# 2017      == 17 + ALL
+# 2022      == 22 + ALL
+# 2023:2024 == 23 + 22 + ALL
+#' @noRd
 QPP = list(
-  # 2017 - 2021
-  `2017` = c(
-    qpp_all,
-    `participation type` = "part_option",
-    `ambulatory surgical center` = "asc_ind",
-    `engaged` = "eng_ind",
-    `extreme hardship` = "euc_ind",
-    `facility-based` = "fac_ind",
-    `hpsa clinician` = "hpsa_ind",
-    `hospital-based clinician` = "hosp_ind",
-    `non-patient facing` = "non_ind",
-    `rural clinician` = "rural_ind",
-    `small practitioner` = "small_ind",
-    `quality improvement bonus` = "qi_bonus",
-    `ia score` = "ia_score",
-    `cost score` = "cost_score"
-  ),
-  `2022` = qpp_2224, # 2022
-  `2024` = qpp_2224 # 2023 - 2024
+  `2017` = cheapr::list_combine(qpp_ALL, qpp_17),
+  `2022` = cheapr::list_combine(qpp_ALL, qpp_22),
+  `2023` = cheapr::list_combine(qpp_ALL, qpp_22, qpp_23)
 )
 
 #' @noRd

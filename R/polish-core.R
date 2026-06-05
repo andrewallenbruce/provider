@@ -34,7 +34,7 @@ rename_with <- function(x, endpoint) {
 
 #' @noRd
 quality_has <- function(x, y) {
-  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+  y <- match.arg(as.character(y), c("2017", "2022", "2023"))
 
   collapse::has_elem(
     x,
@@ -42,14 +42,14 @@ quality_has <- function(x, y) {
       y,
       "2017" = as.character(2017:2021),
       "2022" = "2022",
-      "2024" = as.character(2023:2024)
+      "2023" = as.character(2023:2024)
     )
   )
 }
 
 #' @noRd
 quality_get <- function(x, y) {
-  y <- match.arg(as.character(y), c("2017", "2022", "2024"))
+  y <- match.arg(as.character(y), c("2017", "2022", "2023"))
 
   x <- collapse::get_elem(
     x,
