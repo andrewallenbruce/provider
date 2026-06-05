@@ -47,14 +47,13 @@ affiliations <- function(
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_char_(facility_type)
 
   x <- pdc(
     count = count,
-    set = set,
+    set = FALSE,
     npi = npi,
     ind_pac_id = pac,
     provider_last_name = last,

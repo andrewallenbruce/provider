@@ -68,14 +68,13 @@ clinicians <- function(
   org_name = NULL,
   org_pac = NULL,
   members = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_char_(gender)
 
   x <- pdc(
     count = count,
-    set = set,
+    set = FALSE,
     npi = npi,
     ind_pac_id = pac,
     ind_enrl_id = enid,

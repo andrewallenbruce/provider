@@ -60,28 +60,42 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 
 #' @noRd
 method(request_preview, CMS) <- function(x) {
-  cli::cli_progress_step("Returning first {.strong 10} rows")
-  flatten_cms(x@url, NULL, size = 10L) |>
-    base_request() |>
-    add_class(x@end)
+  cli::cli_progress_step(
+    "Returning first {.strong 10} rows",
+    msg_done = "Returned first {.strong 10} rows"
+  )
+
+  res <- flatten_cms(x@url, NULL, size = 10L) |>
+    base_request()
+
+  cli::cli_progress_cleanup()
+
+  return(add_class(res, x@end))
 }
 
 #' @noRd
 method(request_single, CMS) <- function(x) {
   report_count(x)
-  flatten_cms(x@url, x@query) |>
-    base_request() |>
-    add_class(x@end)
+
+  res <- flatten_cms(x@url, x@query) |>
+    base_request()
+
+  return(add_class(res, x@end))
 }
 
 #' @noRd
 method(request_multi, CMS) <- function(x) {
   report_count(x)
+
   cli::cli_progress_step(
     "Retrieving {.strong {x@pages}} page{?s}",
     msg_done = "Retrieved {.strong {x@pages}} page{?s}"
   )
-  flatten_cms(x@url, x@query, offset = "<<i>>") |>
-    base_parallel(x@count, x@limit) |>
-    add_class(x@end)
+
+  res <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
+    base_parallel(x@count, x@limit)
+
+  cli::cli_progress_cleanup()
+
+  return(add_class(res, x@end))
 }

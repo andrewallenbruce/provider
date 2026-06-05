@@ -29,8 +29,7 @@ clinicians(
   org_name = NULL,
   org_pac = NULL,
   members = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -61,8 +60,6 @@ clinicians(
 \item{members}{\verb{<int>} Number of members in Organization}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Demographics of clinicians listed in the Provider Data Catalog (PDC)

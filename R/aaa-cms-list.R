@@ -76,13 +76,18 @@ cms_list <- function(
 
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
-  cli::cli_progress_step("Returning first {.strong 10} rows")
+  cli::cli_progress_step(
+    "Returning first {.strong 10} rows",
+    msg_done = "Returned first {.strong 10} rows"
+  )
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     set_names2(x@url)
+
+  cli::cli_progress_cleanup()
 
   class(y) <- c(x@end, class(y))
 
@@ -92,6 +97,10 @@ method(request_preview, CMSList) <- function(x) {
 #' @noRd
 method(request_single, CMSList) <- function(x) {
   report_count(x)
+  cli::cli_progress_step(
+    "Retrieving {.strong {x@pages}} page{?s}",
+    msg_done = "Retrieved {.strong {x@pages}} page{?s}"
+  )
 
   URL <- x@url[names(which(x@count > 0L))]
 
@@ -100,6 +109,8 @@ method(request_single, CMSList) <- function(x) {
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     set_names2(URL)
+
+  cli::cli_progress_cleanup()
 
   class(y) <- c(x@end, class(y))
 
@@ -127,6 +138,8 @@ method(request_multi, CMSList) <- function(x) {
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     set_names2(URL)
+
+  cli::cli_progress_cleanup()
 
   class(y) <- c(x@end, class(y))
 

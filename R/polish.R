@@ -14,57 +14,8 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
-  a <- b <- c <- list()
-
-  if (quality_has(x, 2017)) {
-    a <- quality_get(x, 2017)
-  }
-  if (quality_has(x, 2022)) {
-    b <- quality_get(x, 2022)
-  }
-  if (quality_has(x, 2023)) {
-    c <- quality_get(x, 2023)
-  }
-
-  x <- collapse::rowbind(a, b, c, fill = TRUE)
-
-  collapse::settfmv(
-    x,
-    c(
-      "year",
-      "npi",
-      "size",
-      "years",
-      "patients",
-      "charges",
-      "services"
-    ),
-    as.integer
-  )
-  collapse::settfmv(
-    x,
-    c(
-      "adjustment",
-      "final_score",
-      "complex_bonus",
-      "qa_score",
-      "pi_score",
-      "ia_score",
-      "cost_score",
-      "qi_bonus"
-    ),
-    as.numeric
-  )
-
-  add_class(x, "quality") |>
-    collapse::roworderv(c("year", "npi"))
-}
-
-#' @noRd
 S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
-  set_integer(x, "npi")
   rename_with(x, "affiliations")
 }
 
@@ -118,17 +69,6 @@ S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
-  rowbind2(x, "fac_type", fill = TRUE) |>
-    rename_with("owner") |>
-    rc_address() |>
-    rc_double("percent") |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
-    pivot_owner()
-}
-
-#' @noRd
 S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   rc_hospitals(x, "PROVIDER TYPE CODE")
   rc_hospitals(x, "PROPRIETARY NONPROFIT")
@@ -167,6 +107,17 @@ S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
+  rowbind2(x, "fac_type", fill = TRUE) |>
+    rename_with("owner") |>
+    rc_address() |>
+    rc_double("percent") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
+    rc_ymd("asc_date") |>
+    pivot_owner()
+}
+
+#' @noRd
 S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
   rowbind2(x, "prov_type", fill = TRUE) |>
     rename_with("pending") |>
@@ -178,6 +129,54 @@ S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   rename_with(x, "providers") |>
     rc_bin("multi")
+}
+
+#' @noRd
+S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
+  a <- b <- c <- list()
+
+  if (quality_has(x, 2017)) {
+    a <- quality_get(x, 2017)
+  }
+  if (quality_has(x, 2022)) {
+    b <- quality_get(x, 2022)
+  }
+  if (quality_has(x, 2023)) {
+    c <- quality_get(x, 2023)
+  }
+
+  x <- collapse::rowbind(a, b, c, fill = TRUE)
+
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "npi",
+      "size",
+      "years",
+      "patients",
+      "charges",
+      "services",
+      "ia_score",
+      "pi_score"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "adjustment",
+      "final_score",
+      "complex_bonus",
+      "qa_score",
+      "cost_score",
+      "qi_score"
+    ),
+    as.double
+  )
+
+  add_class(x, "quality") |>
+    collapse::roworderv(c("year", "npi"))
 }
 
 #' @noRd

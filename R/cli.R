@@ -53,14 +53,19 @@ method(report_count, CMSList) <- function(x) {
   } else {
     cli::cli_alert_success(msg)
   }
-  cli::cat_bullet(
-    paste0(
-      cli::col_yellow(left(names(x@count))),
-      cli::col_silver(" : "),
-      left(mark(unname(x@count)))
-    ),
-    bullet_col = "silver"
-  )
+
+  if (sum2(x@count) > 0L) {
+    END <- names(which(x@count > 0L))
+    N <- unname(x@count[END])
+    cli::cat_bullet(
+      paste0(
+        cli::col_yellow(left(END)),
+        cli::col_silver(" : "),
+        left(mark(N))
+      ),
+      bullet_col = "silver"
+    )
+  }
 }
 
 #' @noRd

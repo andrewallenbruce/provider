@@ -18,8 +18,7 @@ affiliations(
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -49,8 +48,6 @@ provider provides services.}
 unit where the individual provider provides services.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Access information concerning individual providers'

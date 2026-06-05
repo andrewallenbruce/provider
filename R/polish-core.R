@@ -63,7 +63,11 @@ quality_get <- function(x, y) {
     pivot_quality()
 
   if (y %in% c("2022", "2023")) {
-    collapse::settfmv(x, "dual_ratio", as.numeric)
+    collapse::settfmv(x, "dual_ratio", as.double)
+    collapse::settfmv(x, "small_bonus", as.integer)
+  }
+  if (y %in% c("2023")) {
+    collapse::settfmv(x, "ci_score", as.double)
   }
   return(x)
 }
@@ -74,11 +78,6 @@ set_replace_nz <- function(x) {
 }
 
 #' @noRd
-set_integer <- function(x, var) {
-  collapse::settfmv(.data = x, vars = var, FUN = as.integer)
-}
-
-#' @noRd
 replace_nz <- function(x) {
   collapse::settfmv(x, is.character, set_replace_nz)
 }
@@ -86,7 +85,6 @@ replace_nz <- function(x) {
 #' @noRd
 rc_trim <- function(x) {
   purrr::modify_if(x, is.character, trimws)
-  # collapse::settfmv(x, is.character, trimws, apply = TRUE)
 }
 
 #' @noRd
