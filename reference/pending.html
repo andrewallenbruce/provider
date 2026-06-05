@@ -13,7 +13,7 @@ been processed by CMS contractors."><meta property="og:image" content="https://a
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9211</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9212</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ been processed by CMS contractors.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pending</span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, first <span class="op">=</span> <span class="cn">NULL</span>, last <span class="op">=</span> <span class="cn">NULL</span>, count <span class="op">=</span> <span class="cn">FALSE</span>, set <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pending</span><span class="op">(</span>prov_type <span class="op">=</span> <span class="cn">NULL</span>, npi <span class="op">=</span> <span class="cn">NULL</span>, first <span class="op">=</span> <span class="cn">NULL</span>, last <span class="op">=</span> <span class="cn">NULL</span>, count <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -75,7 +75,11 @@ been processed by CMS contractors.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
+<dl><dt id="arg-prov-type">prov_type<a class="anchor" aria-label="anchor" href="#arg-prov-type"></a></dt>
+<dd><p>description</p></dd>
+
+
+<dt id="arg-npi">npi<a class="anchor" aria-label="anchor" href="#arg-npi"></a></dt>
 <dd><p><code>&lt;int&gt;</code> National Provider Identifier</p></dd>
 
 
@@ -86,18 +90,14 @@ been processed by CMS contractors.</p>
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
-
-<dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the entire dataset</p></dd>
-
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">11,737</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>5,613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>6,124</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">12,236</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>6,057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>6,179</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Victor"</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">7</span> results.</span>
@@ -105,23 +105,23 @@ been processed by CMS contractors.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>first <span class="op">=</span> <span class="fu"><a href="modifier.html">starts</a></span><span class="op">(</span><span class="st">"V"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">159</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 159 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    prov_type first     last                 npi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Physician VADIN     LALL DASS     <span style="text-decoration: underline;">1</span>144<span style="text-decoration: underline;">512</span>724</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Physician VAIDEHI   KOTHARI       <span style="text-decoration: underline;">1</span>447<span style="text-decoration: underline;">190</span>517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Physician VAIDHEESH VARAGANTIWAR  <span style="text-decoration: underline;">1</span>265<span style="text-decoration: underline;">399</span>984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Physician VALENTINA SEDLACEK      <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">590</span>118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Physician VALERIA   SILVA         <span style="text-decoration: underline;">1</span>154<span style="text-decoration: underline;">292</span>712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Physician VALJEAN   BACOT-DAVIS   <span style="text-decoration: underline;">1</span>407<span style="text-decoration: underline;">597</span>651</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Physician VALYNN    ANTOINE       <span style="text-decoration: underline;">1</span>811<span style="text-decoration: underline;">480</span>510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Physician VAMSI     REDDY MALLU   <span style="text-decoration: underline;">1</span>750<span style="text-decoration: underline;">229</span>845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Physician VANESA    WEBB-BARRAGAN <span style="text-decoration: underline;">1</span>487<span style="text-decoration: underline;">502</span>654</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Physician VANESSA   DE BARROS     <span style="text-decoration: underline;">1</span>487<span style="text-decoration: underline;">529</span>939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 149 more rows</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="font-weight: bold;">165</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Physician    </span><span style="color: #555555;"> : </span>74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Non-Physician</span><span style="color: #555555;"> : </span>91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 165 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    prov_type first     last                npi</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Physician VADIN     LALL DASS    <span style="text-decoration: underline;">1</span>144<span style="text-decoration: underline;">512</span>724</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Physician VAGHARSH  ANTANESIAN   <span style="text-decoration: underline;">1</span>700<span style="text-decoration: underline;">451</span>846</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Physician VAIDEHI   KOTHARI      <span style="text-decoration: underline;">1</span>447<span style="text-decoration: underline;">190</span>517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Physician VAIDHEESH VARAGANTIWAR <span style="text-decoration: underline;">1</span>265<span style="text-decoration: underline;">399</span>984</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Physician VALENTINA SEDLACEK     <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">590</span>118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Physician VALERIA   SILVA        <span style="text-decoration: underline;">1</span>154<span style="text-decoration: underline;">292</span>712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Physician VALJEAN   BACOT-DAVIS  <span style="text-decoration: underline;">1</span>407<span style="text-decoration: underline;">597</span>651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Physician VALYNN    ANTOINE      <span style="text-decoration: underline;">1</span>811<span style="text-decoration: underline;">480</span>510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Physician VAMSI     REDDY MALLU  <span style="text-decoration: underline;">1</span>750<span style="text-decoration: underline;">229</span>845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Physician VANESSA   DE BARROS    <span style="text-decoration: underline;">1</span>487<span style="text-decoration: underline;">529</span>939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 155 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

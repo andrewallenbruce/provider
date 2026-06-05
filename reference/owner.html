@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9211</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9212</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,12 +86,12 @@
 
 
 <dl><dt id="arg-fac-type">fac_type<a class="anchor" aria-label="anchor" href="#arg-fac-type"></a></dt>
-<dd><p><code>&lt;enum&gt;</code> Facility type; if NULL (default), will search all:</p><ul><li><p><code>hha</code> = Home Health Agency</p></li>
-<li><p><code>rhc</code> = Rural Health Clinic</p></li>
-<li><p><code>fqhc</code> = Federally Qualified Health Clinic</p></li>
-<li><p><code>snf</code> = Skilled Nursing Facility</p></li>
-<li><p><code>hospice</code> = Hospice</p></li>
-<li><p><code>hospital</code> = Hospital</p></li>
+<dd><p><code>&lt;enum&gt;</code> Facility type; if NULL (default), will search all:</p><ul><li><p><code>HHA</code> = Home Health Agency</p></li>
+<li><p><code>RHC</code> = Rural Health Clinic</p></li>
+<li><p><code>FQHC</code> = Federally Qualified Health Clinic</p></li>
+<li><p><code>SNF</code> = Skilled Nursing Facility</p></li>
+<li><p><code>Hospice</code> = Hospice</p></li>
+<li><p><code>Hospital</code> = Hospital</p></li>
 </ul></dd>
 
 
@@ -151,13 +151,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">owner</span> returned <span style="font-weight: bold;">526,704</span> results.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">HHA     </span><span style="color: #555555;"> : </span>101,100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">RHC     </span><span style="color: #555555;"> : </span>65,551 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">FQHC    </span><span style="color: #555555;"> : </span>148,919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">SNF     </span><span style="color: #555555;"> : </span>116,973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Hospice </span><span style="color: #555555;"> : </span>71,133 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Hospital</span><span style="color: #555555;"> : </span>23,028 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">owner</span> Totals</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Rows </span><span style="color: #555555;"> : </span>526,704</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>109    </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"FL"</span><span class="op">)</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">owner</span> returned <span style="font-weight: bold;">8,462</span> results.</span>

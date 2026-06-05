@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9212 (2026-06-05)
+
+- restructuring internal classes
+
 ## provider 0.0.1.9211 (2026-06-05)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)

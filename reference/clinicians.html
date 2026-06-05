@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9211</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9212</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,14 +188,14 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ gender   : chr "F"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ cred     : chr "AU"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ school   : chr "OTHER"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ grad_year: chr "2008"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ grad_year: int 2008</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ specialty: chr "QUALIFIED AUDIOLOGIST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi      : chr "1407031495"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi      : int 1407031495</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ pac      : chr "8022186162"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ enid     : chr "I20081002000549"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_name : chr NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ org_pac  : chr NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ members  : chr NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ members  : int NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ address  : chr "457 WASHINGTON ST SE, SUITE D"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ city     : chr "ALBUQUERQUE"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ state    : chr "NM"</span>
@@ -204,21 +204,21 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 <span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Etan"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">12</span> results.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first middle last   gender cred  school grad_year specialty npi   pac   enid </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ETAN  ARIEL  MARKS  M      DO    NOVA … 2013      PATHOLOGY 1528… 7113… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ETAN  <span style="color: #BB0000;">NA</span>     EITCH… M      MD    COLUM… 2010      EMERGENC… 1407… 9638… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ETAN  ARIEL  MARKS  M      DO    NOVA … 2013      PATHOLOGY 1528… 7113… I201…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ETAN  <span style="color: #BB0000;">NA</span>     DAYAN  M      MD    STATE… 2012      DIAGNOST… 1699… 7618… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ETAN  <span style="color: #BB0000;">NA</span>     SPIRA  M      MD    NEW Y… 2007      GASTROEN… 1003… 4587… I201…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ETAN  <span style="color: #BB0000;">NA</span>     EITCH… M      MD    COLUM… 2010      EMERGENC… 1407… 9638… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ETAN  <span style="color: #BB0000;">NA</span>     ABER   M      MD    COLUM… 2019      HEMATOLO… 1841… 5092… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ETAN  <span style="color: #BB0000;">NA</span>     SPIRA  M      MD    NEW Y… 2007      GASTROEN… 1003… 4587… I201…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ETAN  <span style="color: #BB0000;">NA</span>     EITCH… M      MD    COLUM… 2010      EMERGENC… 1407… 9638… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGAR… M      <span style="color: #BB0000;">NA</span>    ALBER… 2011      ORTHOPED… 1235… 0244… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGAR… M      <span style="color: #BB0000;">NA</span>    ALBER… 2011      ORTHOPED… 1235… 0244… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGAR… M      <span style="color: #BB0000;">NA</span>    ALBER… 2011      ORTHOPED… 1235… 0244… I202…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: org_name &lt;chr&gt;, org_pac &lt;chr&gt;, members &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    first middle last  gender cred  school grad_year specialty    npi pac   enid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ETAN  ARIEL  MARKS M      DO    NOVA …      <span style="text-decoration: underline;">2</span>013 PATHOLOGY 1.53<span style="color: #949494;">e</span>9 7113… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ETAN  <span style="color: #BB0000;">NA</span>     EITC… M      MD    COLUM…      <span style="text-decoration: underline;">2</span>010 EMERGENC… 1.41<span style="color: #949494;">e</span>9 9638… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ETAN  ARIEL  MARKS M      DO    NOVA …      <span style="text-decoration: underline;">2</span>013 PATHOLOGY 1.53<span style="color: #949494;">e</span>9 7113… I201…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ETAN  <span style="color: #BB0000;">NA</span>     DAYAN M      MD    STATE…      <span style="text-decoration: underline;">2</span>012 DIAGNOST… 1.70<span style="color: #949494;">e</span>9 7618… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ETAN  <span style="color: #BB0000;">NA</span>     SPIRA M      MD    NEW Y…      <span style="text-decoration: underline;">2</span>007 GASTROEN… 1.00<span style="color: #949494;">e</span>9 4587… I201…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ETAN  <span style="color: #BB0000;">NA</span>     EITC… M      MD    COLUM…      <span style="text-decoration: underline;">2</span>010 EMERGENC… 1.41<span style="color: #949494;">e</span>9 9638… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ETAN  <span style="color: #BB0000;">NA</span>     ABER  M      MD    COLUM…      <span style="text-decoration: underline;">2</span>019 HEMATOLO… 1.84<span style="color: #949494;">e</span>9 5092… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ETAN  <span style="color: #BB0000;">NA</span>     SPIRA M      MD    NEW Y…      <span style="text-decoration: underline;">2</span>007 GASTROEN… 1.00<span style="color: #949494;">e</span>9 4587… I201…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ETAN  <span style="color: #BB0000;">NA</span>     EITC… M      MD    COLUM…      <span style="text-decoration: underline;">2</span>010 EMERGENC… 1.41<span style="color: #949494;">e</span>9 9638… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGA… M      <span style="color: #BB0000;">NA</span>    ALBER…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGA… M      <span style="color: #BB0000;">NA</span>    ALBER…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ETAN  <span style="color: #BB0000;">NA</span>     SUGA… M      <span style="color: #BB0000;">NA</span>    ALBER…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: org_name &lt;chr&gt;, org_pac &lt;chr&gt;, members &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>members <span class="op">=</span> <span class="fu"><a href="modifier.html">not_blank</a></span><span class="op">(</span><span class="op">)</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

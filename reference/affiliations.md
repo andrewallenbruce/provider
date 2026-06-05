@@ -97,8 +97,8 @@ affiliations()
 #> ! No Query ❯ Returning first 10 rows.
 #> 
 #> # A tibble: 10 × 8
-#>    first    middle last      npi        pac        prov_type prov_ccn parent_ccn
-#>    <chr>    <chr>  <chr>     <chr>      <chr>      <chr>     <chr>    <chr>     
+#>    first    middle last             npi pac        prov_type prov_ccn parent_ccn
+#>    <chr>    <chr>  <chr>          <int> <chr>      <chr>     <chr>    <chr>     
 #>  1 ARDALAN  NA     ENKESHAFI 1003000126 7517003643 Hospital  090012   NA        
 #>  2 RASHID   NA     KHALIL    1003000142 9931380672 Hospital  360112   NA        
 #>  3 JENNIFER A      VELOTTA   1003000423 9133397268 Hospital  360098   NA        
@@ -113,8 +113,8 @@ affiliations()
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 6 results.
 #> # A tibble: 6 × 8
-#>   first   middle last     npi        pac        prov_type    prov_ccn parent_ccn
-#>   <chr>   <chr>  <chr>    <chr>      <chr>      <chr>        <chr>    <chr>     
+#>   first   middle last            npi pac        prov_type    prov_ccn parent_ccn
+#>   <chr>   <chr>  <chr>         <int> <chr>      <chr>        <chr>    <chr>     
 #> 1 JEFFREY NA     KLOTZ    1073258398 3870095805 Nursing home 33Z302   331302    
 #> 2 CARLOS  E      MARTINEZ 1154332062 5890739734 Nursing home 33Z302   331302    
 #> 3 MARY    K      HALLORAN 1396989059 8921259557 Nursing home 33Z302   331302    
@@ -125,8 +125,8 @@ affiliations(parent_ccn = 331302)
 affiliations(facility_ccn = 331302)
 #> ✔ affiliations returned 334 results.
 #> # A tibble: 334 × 8
-#>    first   middle  last           npi        pac   prov_type prov_ccn parent_ccn
-#>    <chr>   <chr>   <chr>          <chr>      <chr> <chr>     <chr>    <chr>     
+#>    first   middle  last                  npi pac   prov_type prov_ccn parent_ccn
+#>    <chr>   <chr>   <chr>               <int> <chr> <chr>     <chr>    <chr>     
 #>  1 STACI   L       CARTER-KELLY   1003029125 6204… Hospital  331302   NA        
 #>  2 DYLAN   A       ESTES          1003278144 6608… Hospital  331302   NA        
 #>  3 ANA     MARIELA MORALES MEJIA  1003421496 6103… Hospital  331302   NA        
@@ -139,21 +139,5 @@ affiliations(facility_ccn = 331302)
 #> 10 JOSE    M       ACOSTAMADIEDO  1013910256 5890… Hospital  331302   NA        
 #> # ℹ 324 more rows
 
-affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
-#> ✔ affiliations returned 2,093 results.
-#> ℹ Retrieving 2 pages...
-#> # A tibble: 2,093 × 8
-#>    first  middle last       npi        pac        prov_type prov_ccn parent_ccn
-#>    <chr>  <chr>  <chr>      <chr>      <chr>      <chr>     <chr>    <chr>     
-#>  1 ANDREW LEWIS  RODENBURG  1003253634 8628345642 Hospital  350002   NA        
-#>  2 ANDREW NA     BELLANTONI 1003278680 8729327556 Hospital  330234   NA        
-#>  3 ANDREW J      KUBISCH    1003479494 9032446414 Hospital  520045   NA        
-#>  4 ANDREW NA     BERNER     1003530478 4082081914 Hospital  390133   NA        
-#>  5 ANDREW S      BOMBACK    1013129816 9739239856 Hospital  330101   NA        
-#>  6 ANDREW NA     BARBAS     1013174275 4587951728 Hospital  340030   NA        
-#>  7 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180020   NA        
-#>  8 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180002   NA        
-#>  9 ANDREW D      BUCKLEY    1013273853 8628222783 Hospital  180127   NA        
-#> 10 ANDREW NA     BAREFOOT   1013438274 2466725031 Hospital  450039   NA        
-#> # ℹ 2,083 more rows
+# affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 ```

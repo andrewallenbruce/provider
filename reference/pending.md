@@ -9,7 +9,7 @@ have not been processed by CMS contractors.
 ## Usage
 
 ``` r
-pending(npi = NULL, first = NULL, last = NULL, count = FALSE, set = FALSE)
+pending(prov_type = NULL, npi = NULL, first = NULL, last = NULL, count = FALSE)
 ```
 
 ## Source
@@ -24,6 +24,10 @@ Medicare Pending Initial Logging and Tracking:
 
 ## Arguments
 
+- prov_type:
+
+  description
+
 - npi:
 
   `<int>` National Provider Identifier
@@ -36,17 +40,13 @@ Medicare Pending Initial Logging and Tracking:
 
   `<lgl>` Return the total row count
 
-- set:
-
-  `<lgl>` Return the entire dataset
-
 ## Examples
 
 ``` r
 pending(count = TRUE)
-#> ✔ pending returned 11,737 results.
-#> • Physician     : 5,613
-#> • Non-Physician : 6,124
+#> ✔ pending returned 12,236 results.
+#> • Physician     : 6,057
+#> • Non-Physician : 6,179
 
 pending(first = "Victor", count = TRUE)
 #> ✔ pending returned 7 results.
@@ -54,21 +54,21 @@ pending(first = "Victor", count = TRUE)
 #> • Non-Physician : 2
 
 pending(first = starts("V"))
-#> ✔ pending returned 159 results.
-#> • Physician     : 66
-#> • Non-Physician : 93
-#> # A tibble: 159 × 4
-#>    prov_type first     last                 npi
-#>    <chr>     <chr>     <chr>              <int>
-#>  1 Physician VADIN     LALL DASS     1144512724
-#>  2 Physician VAIDEHI   KOTHARI       1447190517
-#>  3 Physician VAIDHEESH VARAGANTIWAR  1265399984
-#>  4 Physician VALENTINA SEDLACEK      1003590118
-#>  5 Physician VALERIA   SILVA         1154292712
-#>  6 Physician VALJEAN   BACOT-DAVIS   1407597651
-#>  7 Physician VALYNN    ANTOINE       1811480510
-#>  8 Physician VAMSI     REDDY MALLU   1750229845
-#>  9 Physician VANESA    WEBB-BARRAGAN 1487502654
-#> 10 Physician VANESSA   DE BARROS     1487529939
-#> # ℹ 149 more rows
+#> ✔ pending returned 165 results.
+#> • Physician     : 74
+#> • Non-Physician : 91
+#> # A tibble: 165 × 4
+#>    prov_type first     last                npi
+#>    <chr>     <chr>     <chr>             <int>
+#>  1 Physician VADIN     LALL DASS    1144512724
+#>  2 Physician VAGHARSH  ANTANESIAN   1700451846
+#>  3 Physician VAIDEHI   KOTHARI      1447190517
+#>  4 Physician VAIDHEESH VARAGANTIWAR 1265399984
+#>  5 Physician VALENTINA SEDLACEK     1003590118
+#>  6 Physician VALERIA   SILVA        1154292712
+#>  7 Physician VALJEAN   BACOT-DAVIS  1407597651
+#>  8 Physician VALYNN    ANTOINE      1811480510
+#>  9 Physician VAMSI     REDDY MALLU  1750229845
+#> 10 Physician VANESSA   DE BARROS    1487529939
+#> # ℹ 155 more rows
 ```

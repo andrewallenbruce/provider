@@ -33,15 +33,15 @@ Medicare
 
   `<enum>` Facility type; if NULL (default), will search all:
 
-  - `hha` = Home Health Agency
+  - `HHA` = Home Health Agency
 
-  - `rhc` = Rural Health Clinic
+  - `RHC` = Rural Health Clinic
 
-  - `fqhc` = Federally Qualified Health Clinic
+  - `FQHC` = Federally Qualified Health Clinic
 
-  - `snf` = Skilled Nursing Facility
+  - `SNF` = Skilled Nursing Facility
 
-  - `hospice` = Hospice
+  - `Hospice` = Hospice
 
 - npi:
 

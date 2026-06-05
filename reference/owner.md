@@ -38,17 +38,17 @@ Medicare
 
   `<enum>` Facility type; if NULL (default), will search all:
 
-  - `hha` = Home Health Agency
+  - `HHA` = Home Health Agency
 
-  - `rhc` = Rural Health Clinic
+  - `RHC` = Rural Health Clinic
 
-  - `fqhc` = Federally Qualified Health Clinic
+  - `FQHC` = Federally Qualified Health Clinic
 
-  - `snf` = Skilled Nursing Facility
+  - `SNF` = Skilled Nursing Facility
 
-  - `hospice` = Hospice
+  - `Hospice` = Hospice
 
-  - `hospital` = Hospital
+  - `Hospital` = Hospital
 
 - org_enid:
 
@@ -106,13 +106,10 @@ Medicare
 
 ``` r
 owner(count = TRUE)
-#> ✔ owner returned 526,704 results.
-#> • HHA      : 101,100
-#> • RHC      : 65,551 
-#> • FQHC     : 148,919
-#> • SNF      : 116,973
-#> • Hospice  : 71,133 
-#> • Hospital : 23,028 
+#> owner Totals
+#> • Rows  : 526,704
+#> • Pages : 109    
+#> 
 
 owner(state = c("GA", "FL"), count = TRUE)
 #> ✔ owner returned 8,462 results.
