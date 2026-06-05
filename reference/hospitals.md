@@ -271,7 +271,7 @@ x <- hospitals2()
 #> • Pages : 4    
 #> 
 #> ℹ Returning first 10 rows
-#> ✔ Returning first 10 rows [39ms]
+#> ✔ Returned first 10 rows [73ms]
 #> 
 x
 #> # A tibble: 10 × 10

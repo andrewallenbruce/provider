@@ -23,8 +23,7 @@ clinicians(
   org_name = NULL,
   org_pac = NULL,
   members = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -97,10 +96,6 @@ clinicians(
 - count:
 
   `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 ## Data Source
 

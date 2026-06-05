@@ -9,7 +9,7 @@ affiliations with organizations/facilities."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9213</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9214</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,8 +66,7 @@ affiliations with organizations/facilities.</p>
 <span>  facility_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  set <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -118,10 +117,6 @@ unit where the individual provider provides services.</p></dd>
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
-
-<dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Return the entire dataset</p></dd>
-
 </dl></div>
 
     <div class="section level2">
@@ -141,7 +136,7 @@ unit where the individual provider provides services.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Pages</span><span style="color: #555555;"> : </span>1,499    </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Returning first <span style="font-weight: bold;">10</span> rows</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Returning first <span style="font-weight: bold;">10</span> rows <span style="color: #B2B2B2;">[36ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Returned first <span style="font-weight: bold;">10</span> rows <span style="color: #B2B2B2;">[73ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first    middle last             npi pac        prov_type prov_ccn parent_ccn</span>
@@ -189,22 +184,11 @@ unit where the individual provider provides services.</p></dd>
 <span class="r-in"><span><span class="fu">affiliations</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, last <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"B"</span><span class="op">)</span>, facility_type <span class="op">=</span> <span class="st">"hospital"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">2,093</span> results.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Retrieving <span style="font-weight: bold;">2</span> pages</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieved <span style="font-weight: bold;">2</span> pages <span style="color: #B2B2B2;">[809ms]</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in "\"id\" %in% names(args)":</span> <span style="color: #BBBB00;">!</span> Could not evaluate cli `{}` expression: `x@pages`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error</span> in `eval(expr, envir = envir)`:</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'x' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Retrieving <span style="font-weight: bold;">2</span> pages <span style="color: #B2B2B2;">[1000ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,093 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first  middle last              npi pac        prov_type prov_ccn parent_ccn</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ANDREW LEWIS  RODENBURG  <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">253</span>634 8628345642 Hospital  350002   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ANDREW <span style="color: #BB0000;">NA</span>     BELLANTONI <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">278</span>680 8729327556 Hospital  330234   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ANDREW J      KUBISCH    <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">479</span>494 9032446414 Hospital  520045   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANDREW <span style="color: #BB0000;">NA</span>     BERNER     <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">530</span>478 4082081914 Hospital  390133   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ANDREW S      BOMBACK    <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">129</span>816 9739239856 Hospital  330101   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ANDREW <span style="color: #BB0000;">NA</span>     BARBAS     <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">174</span>275 4587951728 Hospital  340030   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ANDREW D      BUCKLEY    <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">273</span>853 8628222783 Hospital  180020   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ANDREW D      BUCKLEY    <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">273</span>853 8628222783 Hospital  180002   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ANDREW D      BUCKLEY    <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">273</span>853 8628222783 Hospital  180127   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ANDREW <span style="color: #BB0000;">NA</span>     BAREFOOT   <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">438</span>274 2466725031 Hospital  450039   <span style="color: #BB0000;">NA</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,083 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

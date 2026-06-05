@@ -95,7 +95,7 @@ providers()
 #> • Pages : 597      
 #> 
 #> ℹ Returning first 10 rows
-#> ✔ Returning first 10 rows [59ms]
+#> ✔ Returned first 10 rows [80ms]
 #> 
 #> # A tibble: 10 × 11
 #>    org_name      first middle last  state prov_type prov_desc    npi multi pac  
