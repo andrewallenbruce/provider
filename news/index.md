@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9210 (2026-06-04)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  refinement
+
 ## provider 0.0.1.9209 (2026-06-04)
 
 - fixed bug in CMSList page count
