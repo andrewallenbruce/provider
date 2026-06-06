@@ -76,7 +76,11 @@ cms_list <- function(
 
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
-  cli::cli_progress_step("Returning first {.strong 10} rows")
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step("Returning first {.strong 10} rows")
+  } else {
+    cli::cli_alert_success("Returning first {.strong 10} rows")
+  }
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
     purrr::map(httr2::request) |>
@@ -86,7 +90,9 @@ method(request_preview, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  cli::cli_progress_cleanup()
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
 
   return(y)
 }
@@ -94,8 +100,14 @@ method(request_preview, CMSList) <- function(x) {
 #' @noRd
 method(request_single, CMSList) <- function(x) {
   report_count(x)
+
   msg <- cli::format_inline("Retrieving {.strong {length(x@url)}} page{?s}")
-  cli::cli_progress_step(msg = msg)
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
 
   URL <- x@url[names(which(x@count > 0L))]
 
@@ -107,7 +119,9 @@ method(request_single, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  cli::cli_progress_cleanup()
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
 
   return(y)
 }
@@ -115,8 +129,14 @@ method(request_single, CMSList) <- function(x) {
 #' @noRd
 method(request_multi, CMSList) <- function(x) {
   report_count(x)
+
   msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
-  cli::cli_progress_step(msg = msg)
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
 
   END <- names(which(x@count > 0L))
 
@@ -134,7 +154,9 @@ method(request_multi, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  cli::cli_progress_cleanup()
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
 
   return(y)
 }

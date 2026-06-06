@@ -18,30 +18,6 @@ qpp_ALL = list(
 )
 
 #' @noRd
-qpp_17 = list(
-  engaged = "engaged_ind",
-  `participation type` = "part_opt",
-  `small practitioner` = "small_ind",
-  `rural clinician` = "rural_ind",
-  `hpsa clinician` = "hpsa_ind",
-  `ambulatory surgical center` = "asc_ind",
-  `hospital-based clinician` = "hospital_ind",
-  `non-patient facing` = "non_patient_ind",
-  `facility-based` = "facility_ind",
-  `extreme hardship` = "extreme_ind",
-  `quality improvement bonus` = "qi_score",
-  `pi bonus` = "pi_bonus_ind",
-  `ia score` = "ia_score",
-  `cost score` = "cost_score"
-  # `extreme hardship quality` = "qa_ext_ind",
-  # `extreme hardship pi` = "pi_ext_ind",
-  # `pi hardship` = "pi_hard_ind",
-  # `pi reweighting` = "pi_rw_ind",
-  # `extreme hardship ia` = "ia_ext_ind",
-  # `extreme hardship cost` = "cost_ext_ind",
-)
-
-#' @noRd
 qpp_22 = list(
   `clinician type` = "cred",
   `non-reporting` = "non_report_ind",
@@ -61,24 +37,6 @@ qpp_22 = list(
   `improvement activities (ia) category score` = "ia_score",
   `ia credit` = "ia_credit_ind",
   `cost category score` = "cost_score"
-  # `quality reweighting (euc)` = "qa_ext_ind",
-  # `pi reweighting (euc)` = "pi_ext_ind",
-  # `pi reweighting (hardship exception)` = "pi_hard_ind",
-  # `pi reweighting (special status or clinician type)` = "pi_spec_ind",
-  # `cost reweighting (euc)` = "cost_ext_ind",
-  # `ia reweighting (euc)` = "ia_ext_ind",
-)
-
-#' @noRd
-qpp_23 = list(
-  `reporting option` = "report_opt",
-  `mips value pathway title` = "mvp_title",
-  `received facility score` = "fac_score_ind",
-  `cost improvement score` = "ci_score"
-  # `quality category weight` = "qa_weight",
-  # `promoting interoperability (pi) category weight` = "pi_weight",
-  # `improvement activities (ia) category weight` = "ia_weight",
-  # `cost category weight` = "cost_weight",
 )
 
 # 2017      == 17 + ALL
@@ -86,9 +44,36 @@ qpp_23 = list(
 # 2023:2024 == 23 + 22 + ALL
 #' @noRd
 QPP = list(
-  `2017` = cheapr::list_combine(qpp_ALL, qpp_17),
+  `2017` = cheapr::list_combine(
+    qpp_ALL,
+    list(
+      engaged = "engaged_ind",
+      `participation type` = "part_opt",
+      `small practitioner` = "small_ind",
+      `rural clinician` = "rural_ind",
+      `hpsa clinician` = "hpsa_ind",
+      `ambulatory surgical center` = "asc_ind",
+      `hospital-based clinician` = "hospital_ind",
+      `non-patient facing` = "non_patient_ind",
+      `facility-based` = "facility_ind",
+      `extreme hardship` = "extreme_ind",
+      `quality improvement bonus` = "qi_score",
+      `pi bonus` = "pi_bonus_ind",
+      `ia score` = "ia_score",
+      `cost score` = "cost_score"
+    )
+  ),
   `2022` = cheapr::list_combine(qpp_ALL, qpp_22),
-  `2023` = cheapr::list_combine(qpp_ALL, qpp_22, qpp_23)
+  `2023` = cheapr::list_combine(
+    qpp_ALL,
+    qpp_22,
+    list(
+      `reporting option` = "report_opt",
+      `mips value pathway title` = "mvp_title",
+      `received facility score` = "fac_score_ind",
+      `cost improvement score` = "ci_score"
+    )
+  )
 )
 
 #' @noRd

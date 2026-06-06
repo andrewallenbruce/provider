@@ -16,7 +16,9 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
-  rename_with(x, "affiliations")
+  collapse::setrename(x, RE_NAME[["affiliations"]], .nse = FALSE)
+  replace_nz(x)
+  collapse::gv(x, unlist_(RE_NAME[["affiliations"]]))
 }
 
 #' @noRd
@@ -26,9 +28,13 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
   rc_clia(x, "GNRL_FAC_TYPE_CD")
   rc_clia(x, "GNRL_CNTL_TYPE_CD")
   rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
-  collapse::settfmv(x, "CHOW_CNT", as.integer)
-  collapse::settfmv(x, "DRCTLY_AFLTD_LAB_CNT", as.integer)
-  collapse::settfmv(x, "LAB_SITE_CNT", as.integer)
+
+  collapse::settfmv(
+    x,
+    c("CHOW_CNT", "DRCTLY_AFLTD_LAB_CNT", "LAB_SITE_CNT"),
+    as.integer
+  )
+
   rename_with(x, "clia") |>
     rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
@@ -40,9 +46,8 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
-  collapse::settfmv(x, "npi", as.integer)
-  collapse::settfmv(x, "grd_yr", as.integer)
-  collapse::settfmv(x, "num_org_mem", as.integer)
+  collapse::settfmv(x, c("npi", "grd_yr", "num_org_mem"), as.integer)
+
   rename_with(x, "clinicians") |>
     rc_address() |>
     rc_address("specialty", "spec_other")
@@ -50,8 +55,8 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
-  collapse::settfmv(x, "five_star", as.integer)
-  collapse::settfmv(x, "network", as.integer)
+  collapse::settfmv(x, c("five_star", "network"), as.integer)
+
   rename_with(x, "dialysis") |>
     rc_ymd("cert_date") |>
     rc_address()
@@ -59,10 +64,11 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
-  rowbind2(x, "fac_type", fill = TRUE) |>
-    rename_with("facility") |>
+  x <- rowbind2(x, "fac_type", fill = TRUE)
+  collapse::settfmv(x, "NPI", as.integer)
+
+  rename_with(x, "facility") |>
     rc_address() |>
-    rc_integer("npi") |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
     rc_other(stub = "org")
@@ -87,7 +93,9 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
   suppressWarnings(collapse::settfmv(x, "hospital_overall_rating", as.integer))
-  rename_with(x, "hospitals2")
+  collapse::setrename(x, RE_NAME[["hospitals2"]], .nse = FALSE)
+  replace_nz(x)
+  collapse::gv(x, unlist_(RE_NAME[["hospitals2"]]))
 }
 
 #' @noRd
@@ -102,8 +110,11 @@ S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  rename_with(x, "order_refer") |>
-    rc_bin(c("ptb", "dme", "hha", "pmd", "hospice"))
+  collapse::setrename(x, RE_NAME[["order_refer"]], .nse = FALSE)
+  replace_nz(x)
+
+  rc_bin(x, c("ptb", "dme", "hha", "pmd", "hospice")) |>
+    collapse::gv(unlist_(RE_NAME[["order_refer"]]))
 }
 
 #' @noRd
@@ -119,17 +130,20 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
-  x <- rowbind2(x, "prov_type", fill = TRUE) |>
-    rename_with("pending")
+  x <- rowbind2(x, "prov_type", fill = TRUE)
+  collapse::setrename(x, RE_NAME[["pending"]], .nse = FALSE)
   collapse::settfmv(x, "npi", as.integer)
-  return(x)
+  replace_nz(x)
+  collapse::gv(x, unlist_(RE_NAME[["pending"]]))
 }
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  rename_with(x, "providers") |>
-    rc_bin("multi")
+  collapse::setrename(x, RE_NAME[["providers"]], .nse = FALSE)
+  replace_nz(x)
+  rc_bin(x, "multi") |>
+    collapse::gv(unlist_(RE_NAME[["pending"]]))
 }
 
 #' @noRd
@@ -182,11 +196,13 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
-  collapse::settfmv(x, "Individual NPI", as.integer)
-  collapse::settfmv(x, "Individual Total Employer Associations", as.integer)
   collapse::settfmv(
     x,
-    "Group Reassignments and Physician Assistants",
+    c(
+      "Individual NPI",
+      "Individual Total Employer Associations",
+      "Group Reassignments and Physician Assistants"
+    ),
     as.integer
   )
   rename_with(x, "reassignments")

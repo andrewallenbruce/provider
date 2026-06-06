@@ -88,12 +88,20 @@ flatten_pdc <- function(url, query = NULL, ...) {
 
 #' @noRd
 method(request_preview, PDC) <- function(x) {
-  cli::cli_progress_step("Returning first {.strong 10} rows")
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step("Returning first {.strong 10} rows")
+  } else {
+    cli::cli_alert_success("Returning first {.strong 10} rows")
+  }
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results")
 
-  return(add_class(res, x@end))
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
+
+  add_class(res, x@end)
 }
 
 #' @noRd
@@ -103,17 +111,27 @@ method(request_single, PDC) <- function(x) {
   res <- flatten_pdc(x@url, x@query) |>
     base_request("results")
 
-  return(add_class(res, x@end))
+  add_class(res, x@end)
 }
 
 #' @noRd
 method(request_multi, PDC) <- function(x) {
   report_count(x)
+
   msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
-  cli::cli_progress_step(msg = msg)
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
 
   res <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results")
 
-  return(add_class(res, x@end))
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
+
+  add_class(res, x@end)
 }
