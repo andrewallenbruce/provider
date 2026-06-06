@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9216 (2026-06-06)
+
+- cli timing only if interactive
+
 ## provider 0.0.1.9215 (2026-06-05)
 
 - cli output is fixed

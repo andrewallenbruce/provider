@@ -126,9 +126,7 @@ facility(city = "Valdosta", state = "GA")
 #> • FQHC    : 2
 #> • SNF     : 4
 #> • Hospice : 4
-#> ℹ Retrieving 5 pages
-#> ✔ Retrieving 5 pages [211ms]
-#> 
+#> ✔ Retrieving 5 pages
 #> # A tibble: 12 × 15
 #>    fac_type enid      npi multi ccn   pac   org_name org_dba inc_date   org_type
 #>    <chr>    <chr>   <int> <int> <chr> <chr> <chr>    <chr>   <date>     <chr>   

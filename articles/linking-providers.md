@@ -71,17 +71,17 @@ Community Hospital**.
 
 providers(org_name = "Elizabethtown Community Hospital")
 #> ✔ providers returned 8 results.
-#> # A tibble: 8 × 11
-#>   org_name first middle last  state prov_type prov_desc    npi multi pac   enid 
-#>   <chr>    <chr> <chr>  <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 ELIZABE… NA    NA     NA    CT    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 2 ELIZABE… NA    NA     NA    FL    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 3 ELIZABE… NA    NA     NA    VT    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 4 ELIZABE… NA    NA     NA    NH    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 5 ELIZABE… NA    NA     NA    CO    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 6 ELIZABE… NA    NA     NA    NY    12-70     PART B S… 1.05e9     1 3577… O200…
-#> 7 ELIZABE… NA    NA     NA    NY    00-85     PART A P… 1.41e9     0 3577… O202…
-#> 8 ELIZABE… NA    NA     NA    NY    00-85     PART A P… 1.89e9     1 3577… O201…
+#> # A tibble: 8 × 4
+#>   prov_type first last         npi
+#>   <chr>     <chr> <chr>      <int>
+#> 1 12-70     NA    NA    1053656744
+#> 2 12-70     NA    NA    1053656744
+#> 3 12-70     NA    NA    1053656744
+#> 4 12-70     NA    NA    1053656744
+#> 5 12-70     NA    NA    1053656744
+#> 6 12-70     NA    NA    1053656744
+#> 7 00-85     NA    NA    1407061591
+#> 8 00-85     NA    NA    1891785184
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
 #> # A tibble: 2 × 18

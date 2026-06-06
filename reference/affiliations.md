@@ -89,9 +89,7 @@ affiliations()
 #> • Rows  : 2,247,604
 #> • Pages : 1,499    
 #> 
-#> ℹ Returning first 10 rows
-#> ✔ Returning first 10 rows [36ms]
-#> 
+#> ✔ Returning first 10 rows
 #> # A tibble: 10 × 8
 #>    first    middle last             npi pac        prov_type prov_ccn parent_ccn
 #>    <chr>    <chr>  <chr>          <int> <chr>      <chr>     <chr>    <chr>     
@@ -137,9 +135,7 @@ affiliations(facility_ccn = 331302)
 
 affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 #> ✔ affiliations returned 2,093 results.
-#> ℹ Retrieving 2 pages
-#> ✔ Retrieving 2 pages [126ms]
-#> 
+#> ✔ Retrieving 2 pages
 #> # A tibble: 2,093 × 8
 #>    first  middle last              npi pac        prov_type prov_ccn parent_ccn
 #>    <chr>  <chr>  <chr>           <int> <chr>      <chr>     <chr>    <chr>     

@@ -270,9 +270,7 @@ x <- hospitals2()
 #> • Rows  : 5,432
 #> • Pages : 4    
 #> 
-#> ℹ Returning first 10 rows
-#> ✔ Returning first 10 rows [36ms]
-#> 
+#> ✔ Returning first 10 rows
 x
 #> # A tibble: 10 × 10
 #>    ccn    org_name      prov_type status rating address city  state zip   county
