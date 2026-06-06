@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9215 (2026-06-05)
+
+- cli output is fixed
+
 ## provider 0.0.1.9214 (2026-06-05)
 
 - trying to get cli to work
