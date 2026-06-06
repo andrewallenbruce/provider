@@ -35,7 +35,6 @@ pending <- function(
     count = count,
     set = FALSE,
     select = prov_type,
-    idcol = "prov_type",
     NPI = npi,
     LAST_NAME = last,
     FIRST_NAME = first

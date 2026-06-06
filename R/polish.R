@@ -119,9 +119,10 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
-  rowbind2(x, "prov_type", fill = TRUE) |>
-    rename_with("pending") |>
-    rc_integer("npi")
+  x <- rowbind2(x, "prov_type", fill = TRUE) |>
+    rename_with("pending")
+  collapse::settfmv(x, "npi", as.integer)
+  return(x)
 }
 
 #' @noRd
