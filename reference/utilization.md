@@ -8,159 +8,100 @@ healthcare professionals; aggregated by provider, service and geography.
 
 ``` r
 utilization(
-  year,
-  type,
+  year = NULL,
   npi = NULL,
   first = NULL,
   last = NULL,
-  organization = NULL,
-  credential = NULL,
-  gender = NULL,
-  entype = NULL,
+  cred = NULL,
+  entity = NULL,
+  address = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  fips = NULL,
-  ruca = NULL,
-  country = NULL,
   specialty = NULL,
-  par = NULL,
-  level = NULL,
+  participating = NULL,
   hcpcs = NULL,
-  drug = NULL,
-  pos = NULL,
-  tidy = TRUE,
-  nest = TRUE,
-  detailed = FALSE,
-  rbcs = TRUE,
-  na.rm = TRUE,
-  ...
+  patients = NULL,
+  services = NULL,
+  charges = NULL,
+  allowed = NULL,
+  payment = NULL,
+  avg_age = NULL,
+  count = FALSE
 )
-
-utilization_(year = util_years(), ...)
 ```
 
 ## Arguments
 
 - year:
 
-  `<int>` // **required** Year data was reported, in `YYYY` format. Run
-  [`util_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  to return a vector of the years currently available.
-
-- type:
-
-  `<chr>` // **required** dataset to query, `"Provider"`, `"Service"`,
-  `"Geography"`
+  `<int>` Year data was reported
 
 - npi:
 
   `<int>` 10-digit national provider identifier
 
-- first, last, organization:
+- first, last:
 
   `<chr>` Individual/Organizational provider's name
 
-- credential:
+- cred:
 
   `<chr>` Individual provider's credentials
 
-- gender:
-
-  `<chr>` Individual provider's gender; `"F"` (Female), `"M"` (Male)
-
-- entype:
+- entity:
 
   `<chr>` Provider entity type; `"I"` (Individual), `"O"` (Organization)
 
-- city:
+- address, city, state, zip:
 
-  `<chr>` City where provider is located
-
-- state:
-
-  `<chr>` State where provider is located
-
-- zip:
-
-  `<chr>` Provider’s zip code
-
-- fips:
-
-  `<chr>` Provider's state's FIPS code
-
-- ruca:
-
-  `<chr>` Provider’s RUCA code
-
-- country:
-
-  `<chr>` Country where provider is located
+  description
 
 - specialty:
 
-  `<chr>` Provider specialty code reported on the largest number of
-  claims submitted
+  `<chr>` Provider specialty reported on the largest number of claims
+  submitted
 
-- par:
+- participating:
 
   `<lgl>` Identifies whether the provider participates in Medicare
   and/or accepts assignment of Medicare allowed amounts
 
-- level:
-
-  `<chr>` Geographic level by which the data will be aggregated:
-
-  - `"State"`: Data is aggregated for each state
-
-  - `"National"`: Data is aggregated across all states for a given HCPCS
-    Code
-
 - hcpcs:
 
-  `<chr>` HCPCS code used to identify the specific medical service
-  furnished by the provider
+  description
 
-- drug:
+- patients:
 
-  `<lgl>` Identifies whether the HCPCS code is listed in the Medicare
-  Part B Drug Average Sales Price (ASP) File
+  description
 
-- pos:
+- services:
 
-  `<chr>` Identifies whether the Place of Service (POS) submitted on the
-  claims is a:
+  description
 
-  - Facility (`"F"`): Hospital, Skilled Nursing Facility, etc.
+- charges:
 
-  - Non-facility (`"O"`): Office, Home, etc.
+  description
 
-- tidy:
+- allowed:
 
-  `<lgl>` // **default:** `TRUE` Tidy output
+  description
 
-- nest:
+- payment:
 
-  `<lgl>` // **default:** `TRUE` Nest `performance`, `demographics` and
-  `conditions` columns
+  description
 
-- detailed:
+- avg_age:
 
-  `<lgl>` // **default:** `FALSE` Include nested `medical` and `drug`
-  columns
+  description
 
-- rbcs:
+- count:
 
-  `<lgl>` // **default:** `TRUE` Add Restructured BETOS Classifications
-  to HCPCS codes
+  `<lgl>` Return the total row count
 
-- na.rm:
+## Value
 
-  `<lgl>` // **default:** `TRUE` Remove empty rows and columns
-
-- ...:
-
-  Pass arguments to utilization().
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ## By Provider
 
@@ -190,14 +131,6 @@ provided. Data have been aggregated based on the place of service
 because separate fee schedules apply depending on whether the place of
 service submitted on the claim is facility or non-facility.
 
-## By Geography and Service
-
-**type =**`"Geography"`:
-
-The **Geography and Service** dataset contains information on
-utilization, allowed amount, Medicare payment, and submitted charges
-organized nationally and state-wide by HCPCS code and place of service.
-
 ## Links
 
 - [Medicare Physician & Other Practitioners: by Provider
@@ -209,40 +142,115 @@ organized nationally and state-wide by HCPCS code and place of service.
 - [Medicare Physician & Other Practitioners: by Geography and Service
   API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
 
-*Update Frequency:* **Annually**
-
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
-utilization(year = 2020,
-            type = 'Provider',
-            npi = 1003000423)
+utilization(count = TRUE)
+#> utilization Totals
+#> • Rows  : 13,528,933
+#> • Pages : 2,712     
+#> 
 
-utilization(year = 2019,
-            type = 'Service',
-            npi = 1003000126)
+utilization(npi = 1003000423)
+#> ✔ utilization returned 12 results.
+#> • 2024 : 1
+#> • 2023 : 1
+#> • 2022 : 1
+#> • 2021 : 1
+#> • 2020 : 1
+#> • 2019 : 1
+#> • 2018 : 1
+#> • 2017 : 1
+#> • 2016 : 1
+#> • 2015 : 1
+#> • 2014 : 1
+#> • 2013 : 1
+#> ✔ Retrieving 12 pages
+#> # A tibble: 12 × 25
+#>     year        npi first last  cred  entity address city  state zip   specialty
+#>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
+#>  1  2013 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  2  2014 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  3  2015 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  4  2016 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  5  2017 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  6  2018 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  7  2019 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
+#>  8  2020 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
+#>  9  2021 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
+#> 10  2022 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
+#> 11  2023 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
+#> 12  2024 1003000423 Jenn… Velo… M.D.  I      8300 T… Ment… OH    44060 Obstetri…
+#> # ℹ 14 more variables: part_ind <int>, hcpcs <int>, patients <int>,
+#> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>,
+#> #   standard <dbl>, avg_age <int>, female <int>, male <int>, dual <int>,
+#> #   ndual <int>, risk_score <dbl>
 
-utilization(year = 2020,
-            type = 'Geography',
-            hcpcs = '0002A')
+utilization(npi = 1003000126)
+#> ✔ utilization returned 12 results.
+#> • 2024 : 1
+#> • 2023 : 1
+#> • 2022 : 1
+#> • 2021 : 1
+#> • 2020 : 1
+#> • 2019 : 1
+#> • 2018 : 1
+#> • 2017 : 1
+#> • 2016 : 1
+#> • 2015 : 1
+#> • 2014 : 1
+#> • 2013 : 1
+#> ✔ Retrieving 12 pages
+#> # A tibble: 12 × 25
+#>     year        npi first last  cred  entity address city  state zip   specialty
+#>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
+#>  1  2013 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  2  2014 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  3  2015 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  4  2016 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  5  2017 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  6  2018 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  7  2019 1003000126 ARDA… ENKE… M.D.  I      900 SE… CUMB… MD    21502 Internal…
+#>  8  2020 1003000126 Arda… Enke… M.D.  I      6410 R… Beth… MD    20817 Internal…
+#>  9  2021 1003000126 Arda… Enke… M.D.  I      6410 R… Beth… MD    20817 Internal…
+#> 10  2022 1003000126 Arda… Enke… M.D.  I      6410 R… Beth… MD    20817 Internal…
+#> 11  2023 1003000126 Arda… Enke… M.D.  I      6410 R… Beth… MD    20817 Hospital…
+#> 12  2024 1003000126 Arda… Enke… M.D.  I      6410 R… Beth… MD    20817 Internal…
+#> # ℹ 14 more variables: part_ind <int>, hcpcs <int>, patients <int>,
+#> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>,
+#> #   standard <dbl>, avg_age <int>, female <int>, male <int>, dual <int>,
+#> #   ndual <int>, risk_score <dbl>
 
-# Use the years helper function to
-# retrieve results for every year:
-util_years() |>
-map(\(x) utilization(year = x,
-                     type = 'Provider',
-                     npi = 1043477615)) |>
-list_rbind()
-
-# Parallelized version
-utilization_(type = 'Provider',
-             npi = 1043477615)
-
-utilization_(type = 'Service',
-             npi = 1043477615)
-
-utilization_(type = 'Geography',
-             hcpcs = '0002A')
-}
+utilization(npi = 1043477615)
+#> ✔ utilization returned 11 results.
+#> • 2024 : 1
+#> • 2023 : 1
+#> • 2022 : 1
+#> • 2021 : 1
+#> • 2020 : 1
+#> • 2019 : 1
+#> • 2018 : 1
+#> • 2017 : 1
+#> • 2016 : 1
+#> • 2015 : 1
+#> • 2014 : 1
+#> ✔ Retrieving 12 pages
+#> # A tibble: 11 × 25
+#>     year        npi first last  cred  entity address city  state zip   specialty
+#>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
+#>  1  2014 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Cardiac …
+#>  2  2015 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Cardiac …
+#>  3  2016 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Clinical…
+#>  4  2017 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Clinical…
+#>  5  2018 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Clinical…
+#>  6  2019 1043477615 SARAH HUSS… MD    I      500 UN… HERS… PA    17033 Clinical…
+#>  7  2020 1043477615 Sarah Huss… MD    I      500 Un… Hers… PA    17033 Clinical…
+#>  8  2021 1043477615 Sarah Huss… MD    I      500 Un… Hers… PA    17033 Clinical…
+#>  9  2022 1043477615 Sarah Huss… MD    I      500 Un… Hers… PA    17033 Clinical…
+#> 10  2023 1043477615 Sarah Huss… MD    I      500 Un… Hers… PA    17033 Clinical…
+#> 11  2024 1043477615 Sarah Huss… MD    I      500 Un… Hers… PA    17033 Clinical…
+#> # ℹ 14 more variables: part_ind <int>, hcpcs <int>, patients <int>,
+#> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>,
+#> #   standard <dbl>, avg_age <int>, female <int>, male <int>, dual <int>,
+#> #   ndual <int>, risk_score <dbl>
 ```

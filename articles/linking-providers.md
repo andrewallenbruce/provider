@@ -16,23 +16,10 @@ pac <- affiliations(pac = 7810891009)
 list(
   individual = as.data.frame(t(unique(pac[1:5]))),
   organization = pac[6:8])
-#> $individual
-#>                V1
-#> first        MARK
-#> middle          K
-#> last         FUNG
-#> npi    1043245657
-#> pac    7810891009
-#> 
-#> $organization
-#> # A tibble: 5 × 3
-#>   prov_type prov_ccn parent_ccn
-#>   <chr>     <chr>    <chr>     
-#> 1 Hospital  470003   NA        
-#> 2 Hospital  330250   NA        
-#> 3 Hospital  470001   NA        
-#> 4 Hospital  331321   NA        
-#> 5 Hospital  471307   NA
+#> Error in `pac[6:8]`:
+#> ! Can't subset columns past the end.
+#> ℹ Location 8 doesn't exist.
+#> ℹ There are only 7 columns.
 ```
 
 ``` r
@@ -71,17 +58,17 @@ Community Hospital**.
 
 providers(org_name = "Elizabethtown Community Hospital")
 #> ✔ providers returned 8 results.
-#> # A tibble: 8 × 4
-#>   prov_type first last         npi
-#>   <chr>     <chr> <chr>      <int>
-#> 1 12-70     NA    NA    1053656744
-#> 2 12-70     NA    NA    1053656744
-#> 3 12-70     NA    NA    1053656744
-#> 4 12-70     NA    NA    1053656744
-#> 5 12-70     NA    NA    1053656744
-#> 6 12-70     NA    NA    1053656744
-#> 7 00-85     NA    NA    1407061591
-#> 8 00-85     NA    NA    1891785184
+#> # A tibble: 8 × 10
+#>   org_name        first last  state prov_type prov_desc    npi multi pac   enid 
+#>   <chr>           <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
+#> 1 ELIZABETHTOWN … NA    NA    CT    12-70     PART B S… 1.05e9     0 3577… O202…
+#> 2 ELIZABETHTOWN … NA    NA    FL    12-70     PART B S… 1.05e9     0 3577… O202…
+#> 3 ELIZABETHTOWN … NA    NA    VT    12-70     PART B S… 1.05e9     0 3577… O202…
+#> 4 ELIZABETHTOWN … NA    NA    NH    12-70     PART B S… 1.05e9     0 3577… O202…
+#> 5 ELIZABETHTOWN … NA    NA    CO    12-70     PART B S… 1.05e9     0 3577… O202…
+#> 6 ELIZABETHTOWN … NA    NA    NY    12-70     PART B S… 1.05e9     1 3577… O200…
+#> 7 ELIZABETHTOWN … NA    NA    NY    00-85     PART A P… 1.41e9     0 3577… O202…
+#> 8 ELIZABETHTOWN … NA    NA    NY    00-85     PART A P… 1.89e9     1 3577… O201…
 hospitals(org_name = "Elizabethtown Community Hospital")
 #> ✔ hospitals returned 2 results.
 #> # A tibble: 2 × 18
@@ -93,19 +80,19 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> #   loc_type <chr>, reh_date <date>, prov_type <chr>, sub_group <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
 #> ✔ clinicians returned 77 results.
-#> # A tibble: 77 × 18
-#>    first middle last  gender cred  school grad_year specialty    npi pac   enid 
-#>    <chr> <chr>  <chr> <chr>  <chr> <chr>      <int> <chr>      <int> <chr> <chr>
-#>  1 GAVIN L      NOBLE M      MD    STATE…      1999 CARDIOVA… 1.75e9 6002… I202…
-#>  2 JOSE… NA     PEKA… M      MD    GEISE…      1999 DIAGNOST… 1.37e9 3274… I200…
-#>  3 DMIT… G      AKSE… M      MD    STATE…      2007 DIAGNOST… 1.63e9 4385… I201…
-#>  4 ROBE… NA     PERC… M      MD    NEW Y…      2009 INTERVEN… 1.36e9 5991… I202…
-#>  5 BENJ… NA     LANGE M      MD    HARVA…      2009 DIAGNOST… 1.77e9 2365… I201…
-#>  6 BENJ… NA     BAMF… M      MD    UNIVE…      1992 DIAGNOST… 1.15e9 9638… I201…
-#>  7 JOSH… NA     WARN… F      NP    OTHER       2023 NURSE PR… 1.76e9 8123… I202…
-#>  8 EMILY NA     POLO… F      NP    OTHER       2014 NURSE PR… 1.92e9 8729… I202…
-#>  9 DAGM… NA     HOEG… F      MD    OTHER       1996 DIAGNOST… 1.87e9 4880… I200…
-#> 10 LUCY  NA     LANE  F      MD    OTHER       2012 DIAGNOST… 1.03e9 7911… I201…
+#> # A tibble: 77 × 17
+#>    first    last      gender cred  school grad_year specialty    npi pac   enid 
+#>    <chr>    <chr>     <chr>  <chr> <chr>      <int> <chr>      <int> <chr> <chr>
+#>  1 GAVIN    NOBLE     M      MD    STATE…      1999 CARDIOVA… 1.75e9 6002… I202…
+#>  2 JOSEPH   PEKALA    M      MD    GEISE…      1999 DIAGNOST… 1.37e9 3274… I200…
+#>  3 DMITRIY  AKSELROD  M      MD    STATE…      2007 DIAGNOST… 1.63e9 4385… I201…
+#>  4 ROBERT   PERCARPIO M      MD    NEW Y…      2009 INTERVEN… 1.36e9 5991… I202…
+#>  5 BENJAMIN LANGE     M      MD    HARVA…      2009 DIAGNOST… 1.77e9 2365… I201…
+#>  6 BENJAMIN BAMFORD   M      MD    UNIVE…      1992 DIAGNOST… 1.15e9 9638… I201…
+#>  7 JOSHUA   WARNER    F      NP    OTHER       2023 NURSE PR… 1.76e9 8123… I202…
+#>  8 EMILY    POLOJI    F      NP    OTHER       2014 NURSE PR… 1.92e9 8729… I202…
+#>  9 DAGMAR   HOEGEMAN… F      MD    OTHER       1996 DIAGNOST… 1.87e9 4880… I200…
+#> 10 LUCY     LANE      F      MD    OTHER       2012 DIAGNOST… 1.03e9 7911… I201…
 #> # ℹ 67 more rows
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
@@ -142,27 +129,10 @@ ccn <- affiliations(facility_ccn = 331302)
 list(
   organization = as.data.frame(t(unique(ccn[6:8]))),
   individual = unique(ccn[1:5]))
-#> $organization
-#>                  V1
-#> prov_type  Hospital
-#> prov_ccn     331302
-#> parent_ccn     <NA>
-#> 
-#> $individual
-#> # A tibble: 334 × 5
-#>    first   middle  last                  npi pac       
-#>    <chr>   <chr>   <chr>               <int> <chr>     
-#>  1 STACI   L       CARTER-KELLY   1003029125 6204824378
-#>  2 DYLAN   A       ESTES          1003278144 6608167523
-#>  3 ANA     MARIELA MORALES MEJIA  1003421496 6103287404
-#>  4 ARMIN   NA      AFSAR KESHMIRI 1003815184 4082693676
-#>  5 LAURA   A       GREENE         1003845272 1759384035
-#>  6 DEBORAH M       KAMPSCHROR     1013141860 8022069558
-#>  7 NAROD   NA      VASSILIAN      1013539584 9133544109
-#>  8 EMILY   NA      TRIPLETT       1013595560 3375947401
-#>  9 BARDIA  NA      BARIMANI       1013793736 9436503646
-#> 10 JOSE    M       ACOSTAMADIEDO  1013910256 5890719371
-#> # ℹ 324 more rows
+#> Error in `ccn[6:8]`:
+#> ! Can't subset columns past the end.
+#> ℹ Location 8 doesn't exist.
+#> ℹ There are only 7 columns.
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -175,22 +145,10 @@ ccn2 <- affiliations(facility_ccn = "33Z302")
 list(
   organization = as.data.frame(t(unique(ccn2[6:8]))), 
   individual = unique(ccn2[1:5]))
-#> $organization
-#>                      V1
-#> prov_type  Nursing home
-#> prov_ccn         33Z302
-#> parent_ccn       331302
-#> 
-#> $individual
-#> # A tibble: 6 × 5
-#>   first   middle last            npi pac       
-#>   <chr>   <chr>  <chr>         <int> <chr>     
-#> 1 JEFFREY NA     KLOTZ    1073258398 3870095805
-#> 2 CARLOS  E      MARTINEZ 1154332062 5890739734
-#> 3 MARY    K      HALLORAN 1396989059 8921259557
-#> 4 IL      JUN    CHON     1538173869 0547299091
-#> 5 DRAGOS  NA     BANU     1558659367 6709004682
-#> 6 JOSHUA  NA     WARNER   1760167712 8123473469
+#> Error in `ccn2[6:8]`:
+#> ! Can't subset columns past the end.
+#> ℹ Location 8 doesn't exist.
+#> ℹ There are only 7 columns.
 ```
 
 That returns more affiliated individual providers that practice in the

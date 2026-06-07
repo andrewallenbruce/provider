@@ -62,6 +62,8 @@ Sanctioned providers and price transparency enforcement.
   : Revoked Providers & Suppliers
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
+- [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  : Provider Utilization & Demographics by Year
 
 ## Query Modifiers
 

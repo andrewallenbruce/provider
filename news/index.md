@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9217 (2026-06-06)
+
+- [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  implementation
+
 ## provider 0.0.1.9216 (2026-06-06)
 
 - cli timing only if interactive

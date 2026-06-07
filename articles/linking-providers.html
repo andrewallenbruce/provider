@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9216</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9217</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,23 +102,10 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pac</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  organization <span class="op">=</span> <span class="va">pac</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt;                V1</span></span>
-<span><span class="co">#&gt; first        MARK</span></span>
-<span><span class="co">#&gt; middle          K</span></span>
-<span><span class="co">#&gt; last         FUNG</span></span>
-<span><span class="co">#&gt; npi    1043245657</span></span>
-<span><span class="co">#&gt; pac    7810891009</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
-<span><span class="co">#&gt;   prov_type prov_ccn parent_ccn</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hospital  470003   <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Hospital  330250   <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Hospital  470001   <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Hospital  331321   <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Hospital  471307   <span style="color: #BB0000;">NA</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pac[6:8]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 8 doesn't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 7 columns.</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">pac</span><span class="op">$</span><span class="va">prov_ccn</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">5</span> results.</span></span>
@@ -152,17 +139,17 @@ insights. For example, there is a hospital in New York named
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">providers</span> returned <span style="font-weight: bold;">8</span> results.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 4</span></span></span>
-<span><span class="co">#&gt;   prov_type first last         npi</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 12-70     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>053<span style="text-decoration: underline;">656</span>744</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 00-85     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>407<span style="text-decoration: underline;">061</span>591</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 00-85     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="text-decoration: underline;">1</span>891<span style="text-decoration: underline;">785</span>184</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 10</span></span></span>
+<span><span class="co">#&gt;   org_name        first last  state prov_type prov_desc    npi multi pac   enid </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    CT    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    FL    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    VT    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    NH    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    CO    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    NY    12-70     PART B S… 1.05<span style="color: #949494;">e</span>9     1 3577… O200…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    NY    00-85     PART A P… 1.41<span style="color: #949494;">e</span>9     0 3577… O202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> ELIZABETHTOWN … <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    NY    00-85     PART A P… 1.89<span style="color: #949494;">e</span>9     1 3577… O201…</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 18</span></span></span>
@@ -174,19 +161,19 @@ insights. For example, there is a hospital in New York named
 <span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, prov_type &lt;chr&gt;, sub_group &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">77</span> results.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 77 × 18</span></span></span>
-<span><span class="co">#&gt;    first middle last  gender cred  school grad_year specialty    npi pac   enid </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> GAVIN L      NOBLE M      MD    STATE…      <span style="text-decoration: underline;">1</span>999 CARDIOVA… 1.75<span style="color: #949494;">e</span>9 6002… I202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> JOSE… <span style="color: #BB0000;">NA</span>     PEKA… M      MD    GEISE…      <span style="text-decoration: underline;">1</span>999 DIAGNOST… 1.37<span style="color: #949494;">e</span>9 3274… I200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> DMIT… G      AKSE… M      MD    STATE…      <span style="text-decoration: underline;">2</span>007 DIAGNOST… 1.63<span style="color: #949494;">e</span>9 4385… I201…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ROBE… <span style="color: #BB0000;">NA</span>     PERC… M      MD    NEW Y…      <span style="text-decoration: underline;">2</span>009 INTERVEN… 1.36<span style="color: #949494;">e</span>9 5991… I202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> BENJ… <span style="color: #BB0000;">NA</span>     LANGE M      MD    HARVA…      <span style="text-decoration: underline;">2</span>009 DIAGNOST… 1.77<span style="color: #949494;">e</span>9 2365… I201…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> BENJ… <span style="color: #BB0000;">NA</span>     BAMF… M      MD    UNIVE…      <span style="text-decoration: underline;">1</span>992 DIAGNOST… 1.15<span style="color: #949494;">e</span>9 9638… I201…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> JOSH… <span style="color: #BB0000;">NA</span>     WARN… F      NP    OTHER       <span style="text-decoration: underline;">2</span>023 NURSE PR… 1.76<span style="color: #949494;">e</span>9 8123… I202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EMILY <span style="color: #BB0000;">NA</span>     POLO… F      NP    OTHER       <span style="text-decoration: underline;">2</span>014 NURSE PR… 1.92<span style="color: #949494;">e</span>9 8729… I202…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DAGM… <span style="color: #BB0000;">NA</span>     HOEG… F      MD    OTHER       <span style="text-decoration: underline;">1</span>996 DIAGNOST… 1.87<span style="color: #949494;">e</span>9 4880… I200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> LUCY  <span style="color: #BB0000;">NA</span>     LANE  F      MD    OTHER       <span style="text-decoration: underline;">2</span>012 DIAGNOST… 1.03<span style="color: #949494;">e</span>9 7911… I201…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 77 × 17</span></span></span>
+<span><span class="co">#&gt;    first    last      gender cred  school grad_year specialty    npi pac   enid </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> GAVIN    NOBLE     M      MD    STATE…      <span style="text-decoration: underline;">1</span>999 CARDIOVA… 1.75<span style="color: #949494;">e</span>9 6002… I202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> JOSEPH   PEKALA    M      MD    GEISE…      <span style="text-decoration: underline;">1</span>999 DIAGNOST… 1.37<span style="color: #949494;">e</span>9 3274… I200…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> DMITRIY  AKSELROD  M      MD    STATE…      <span style="text-decoration: underline;">2</span>007 DIAGNOST… 1.63<span style="color: #949494;">e</span>9 4385… I201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ROBERT   PERCARPIO M      MD    NEW Y…      <span style="text-decoration: underline;">2</span>009 INTERVEN… 1.36<span style="color: #949494;">e</span>9 5991… I202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> BENJAMIN LANGE     M      MD    HARVA…      <span style="text-decoration: underline;">2</span>009 DIAGNOST… 1.77<span style="color: #949494;">e</span>9 2365… I201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> BENJAMIN BAMFORD   M      MD    UNIVE…      <span style="text-decoration: underline;">1</span>992 DIAGNOST… 1.15<span style="color: #949494;">e</span>9 9638… I201…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> JOSHUA   WARNER    F      NP    OTHER       <span style="text-decoration: underline;">2</span>023 NURSE PR… 1.76<span style="color: #949494;">e</span>9 8123… I202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EMILY    POLOJI    F      NP    OTHER       <span style="text-decoration: underline;">2</span>014 NURSE PR… 1.92<span style="color: #949494;">e</span>9 8729… I202…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DAGMAR   HOEGEMAN… F      MD    OTHER       <span style="text-decoration: underline;">1</span>996 DIAGNOST… 1.87<span style="color: #949494;">e</span>9 4880… I200…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> LUCY     LANE      F      MD    OTHER       <span style="text-decoration: underline;">2</span>012 DIAGNOST… 1.03<span style="color: #949494;">e</span>9 7911… I201…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 67 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: org_name &lt;chr&gt;, org_pac &lt;chr&gt;, members &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span></span>
@@ -219,27 +206,10 @@ all-numeric CCN (<code>331302</code>):</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt;                  V1</span></span>
-<span><span class="co">#&gt; prov_type  Hospital</span></span>
-<span><span class="co">#&gt; prov_ccn     331302</span></span>
-<span><span class="co">#&gt; parent_ccn     &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 334 × 5</span></span></span>
-<span><span class="co">#&gt;    first   middle  last                  npi pac       </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> STACI   L       CARTER-KELLY   <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">029</span>125 6204824378</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> DYLAN   A       ESTES          <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">278</span>144 6608167523</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ANA     MARIELA MORALES MEJIA  <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">421</span>496 6103287404</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ARMIN   <span style="color: #BB0000;">NA</span>      AFSAR KESHMIRI <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">815</span>184 4082693676</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> LAURA   A       GREENE         <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">845</span>272 1759384035</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> DEBORAH M       KAMPSCHROR     <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">141</span>860 8022069558</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NAROD   <span style="color: #BB0000;">NA</span>      VASSILIAN      <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">539</span>584 9133544109</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EMILY   <span style="color: #BB0000;">NA</span>      TRIPLETT       <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">595</span>560 3375947401</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> BARDIA  <span style="color: #BB0000;">NA</span>      BARIMANI       <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">793</span>736 9436503646</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> JOSE    M       ACOSTAMADIEDO  <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">910</span>256 5890719371</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 324 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `ccn[6:8]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 8 doesn't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 7 columns.</span></span></code></pre></div>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -248,22 +218,10 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt;                      V1</span></span>
-<span><span class="co">#&gt; prov_type  Nursing home</span></span>
-<span><span class="co">#&gt; prov_ccn         33Z302</span></span>
-<span><span class="co">#&gt; parent_ccn       331302</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
-<span><span class="co">#&gt;   first   middle last            npi pac       </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> JEFFREY <span style="color: #BB0000;">NA</span>     KLOTZ    <span style="text-decoration: underline;">1</span>073<span style="text-decoration: underline;">258</span>398 3870095805</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CARLOS  E      MARTINEZ <span style="text-decoration: underline;">1</span>154<span style="text-decoration: underline;">332</span>062 5890739734</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> MARY    K      HALLORAN <span style="text-decoration: underline;">1</span>396<span style="text-decoration: underline;">989</span>059 8921259557</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> IL      JUN    CHON     <span style="text-decoration: underline;">1</span>538<span style="text-decoration: underline;">173</span>869 0547299091</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> DRAGOS  <span style="color: #BB0000;">NA</span>     BANU     <span style="text-decoration: underline;">1</span>558<span style="text-decoration: underline;">659</span>367 6709004682</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> JOSHUA  <span style="color: #BB0000;">NA</span>     WARNER   <span style="text-decoration: underline;">1</span>760<span style="text-decoration: underline;">167</span>712 8123473469</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `ccn2[6:8]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 8 doesn't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 7 columns.</span></span></code></pre></div>
 <p>That returns more affiliated individual providers that practice in
 the Hospital’s nursing home.</p>
 <blockquote>

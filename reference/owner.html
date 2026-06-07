@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9216</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9217</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,9 +167,30 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">owner</span> returned <span style="font-weight: bold;">13</span> results.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map_int(url, base_request, query = query):</span> <span style="color: #00BBBB;">ℹ</span> In index: 4.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::req_perform()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> HTTP 429 Too Many Requests.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">HHA     </span><span style="color: #555555;"> : </span>2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">SNF     </span><span style="color: #555555;"> : </span>2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Hospice </span><span style="color: #555555;"> : </span>1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">•</span> <span style="color: #BBBB00;">Hospital</span><span style="color: #555555;"> : </span>8</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="font-weight: bold;">6</span> pages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 19</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    fac_type org_enid    org_pac org_name pac   role  asc_date   own_name own_dba</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> HHA      O201204270… 317378… GHHS HE… 2860… 5% O… 2011-06-23 LJP MED… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> HHA      O201204270… 317378… GHHS HE… 2860… OPER… 2011-06-23 LJP MED… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SNF      O201406120… 135533… HOSPITA… 1355… 5% O… 2014-05-04 HOSPITA… SOUTH …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SNF      O202403280… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Hospice  O200602090… 135535… SOUTH G… 1355… 5% O… 2006-07-07 SOUTH G… HOSPIC…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Hospital O200803120… 135533… HOSPITA… 1355… 5% O… 2014-07-25 HOSPITA… SOUTH …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Hospital O200803130… 135533… HOSPITA… 1355… 5% O… 2014-07-25 HOSPITA… SOUTH …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Hospital O201405050… 135533… HOSPITA… 1355… 5% O… 2014-05-01 HOSPITA… SOUTH …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Hospital O201406130… 135533… HOSPITA… 1355… 5% O… 2014-05-01 HOSPITA… SOUTH …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Hospital O202401310… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Hospital O202403220… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Hospital O202404090… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Hospital O202404100… 105276… SOUTH G… 1052… 5% O… 2023-11-01 SOUTH G… SGMC H…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: percent &lt;dbl&gt;, title &lt;chr&gt;, first &lt;chr&gt;, middle &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   own_type &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
