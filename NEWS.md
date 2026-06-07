@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9218 (2026-06-06)
+
+* fixed `order_refer()` bug
+* `utilization()` documentation
+* simplified uuid -> url lookup, added tests
+
+
 # provider 0.0.1.9217 (2026-06-06)
 
 * `utilization()` implementation
