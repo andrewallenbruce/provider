@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9221 (2026-06-07)
+
+* added tests for offset generation
+
+
 # provider 0.0.1.9220 (2026-06-07)
 
 * throttling still
