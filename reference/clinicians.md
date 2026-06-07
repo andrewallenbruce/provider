@@ -10,7 +10,6 @@ clinicians(
   pac = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   gender = NULL,
   credential = NULL,
@@ -52,7 +51,7 @@ clinicians(
 
   `<chr>` Medicare Enrollment ID
 
-- first, middle, last:
+- first, last:
 
   `<chr>` Individual provider's name
 

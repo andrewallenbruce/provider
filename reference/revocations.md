@@ -10,7 +10,6 @@ revocations(
   npi = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   org_name = NULL,
   multi = NULL,
@@ -39,7 +38,7 @@ revocations(
 
   `<chr>` Medicare Enrollment ID
 
-- first, middle, last:
+- first, last:
 
   `<chr>` Individual provider name
 
@@ -168,31 +167,14 @@ provide
 ``` r
 revocations(count = TRUE)
 #> revocations Totals
-#> • Rows  : 7,465
-#> • Pages : 2    
-#> 
+#> Error in httr2::req_perform(httr2::req_retry(httr2::request(url), retry_on_failure = TRUE,     max_tries = 2)): HTTP 429 Too Many Requests.
 
 revocations(org_name = not_blank(), count = TRUE)
-#> ✔ revocations returned 4,199 results.
+#> Error in httr2::req_perform(httr2::req_retry(httr2::request(url), retry_on_failure = TRUE,     max_tries = 2)): HTTP 429 Too Many Requests.
 
 revocations(org_name = starts("B"), count = TRUE)
-#> ✔ revocations returned 223 results.
+#> Error in httr2::req_perform(httr2::req_retry(httr2::request(url), retry_on_failure = TRUE,     max_tries = 2)): HTTP 429 Too Many Requests.
 
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
-#> ✔ revocations returned 45 results.
-#> # A tibble: 45 × 11
-#>    org_name first   last    enid     npi multi state prov_desc reason start_date
-#>    <chr>    <chr>   <chr>   <chr>  <int> <int> <chr> <chr>     <chr>  <date>    
-#>  1 NA       JUAN    KURDI   I200… 1.57e9     0 TX    PRACTITI… 424.5… 2023-09-28
-#>  2 NA       RONALD  CARLISH I200… 1.64e9     0 CA    PRACTITI… 424.5… 2022-12-13
-#>  3 NA       STEVE   NOZAD   I200… 1.96e9     0 NY    PRACTITI… 424.5… 2020-10-30
-#>  4 NA       RAED    JITAN   I200… 1.03e9     0 WV    PRACTITI… 424.5… 2020-02-14
-#>  5 NA       RAYMOND CATANIA I200… 1.02e9     0 NJ    PRACTITI… 424.5… 2021-03-08
-#>  6 NA       ROBERT  VACCAR… I200… 1.92e9     0 NY    PRACTITI… 424.5… 2023-08-20
-#>  7 NA       STEVEN  HEFTER  I200… 1.61e9     0 AL    PRACTITI… 424.5… 2017-12-01
-#>  8 NA       BRYAN   PERRY   I200… 1.24e9     0 OK    PRACTITI… 424.5… 2020-05-21
-#>  9 NA       KLAUS   RENTROP I200… 1.19e9     0 NY    PRACTITI… 424.5… 2023-09-15
-#> 10 NA       JOHN    MCCLURE I200… 1.43e9     0 MI    PRACTITI… 424.5… 2022-11-02
-#> # ℹ 35 more rows
-#> # ℹ 1 more variable: end_date <date>
+#> Error in httr2::req_perform(httr2::req_retry(httr2::request(url), retry_on_failure = TRUE,     max_tries = 2)): HTTP 429 Too Many Requests.
 ```

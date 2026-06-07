@@ -10,7 +10,6 @@ affiliations(
   npi = NULL,
   pac = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
@@ -34,7 +33,7 @@ affiliations(
 
   `<chr>` Individual PECOS Associate Control ID
 
-- first, middle, last:
+- first, last:
 
   `<chr>` Individual provider's name
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## provider 0.0.1.9218 (2026-06-06)
+
+- fixed
+  [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
+  bug
+- [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  documentation
+- simplified uuid -\> url lookup, added tests
+
 ## provider 0.0.1.9217 (2026-06-06)
 
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)

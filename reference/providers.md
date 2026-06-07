@@ -11,7 +11,6 @@ providers(
   pac = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   prov_type = NULL,
   prov_desc = NULL,
@@ -37,7 +36,7 @@ providers(
 
   `<chr>` Medicare Enrollment ID
 
-- first, middle, last:
+- first, last:
 
   `<chr>` Individual provider's name
 
