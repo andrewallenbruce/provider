@@ -66,7 +66,7 @@ Eligibility to order and refer within Medicare
 }
 
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 order_refer(count = TRUE)
 
 order_refer(npi = 1003026055)

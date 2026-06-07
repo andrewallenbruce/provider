@@ -13,7 +13,6 @@ revocations(
   npi = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   org_name = NULL,
   multi = NULL,
@@ -31,7 +30,7 @@ revocations(
 
 \item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
-\item{first, middle, last}{\verb{<chr>} Individual provider name}
+\item{first, last}{\verb{<chr>} Individual provider name}
 
 \item{org_name}{\verb{<chr>} Organization name}
 

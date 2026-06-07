@@ -24,6 +24,7 @@ utilization(
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
+  risk_score = NULL,
   count = FALSE
 )
 }
@@ -36,28 +37,41 @@ utilization(
 
 \item{cred}{\verb{<chr>} Individual provider's credentials}
 
-\item{entity}{\verb{<chr>} Provider entity type; \code{"I"} (Individual), \code{"O"} (Organization)}
+\item{entity}{\verb{<chr>} Provider entity type; \code{"I"} (Individual), \code{"O"}
+(Organization)}
 
 \item{address, city, state, zip}{description}
 
-\item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of claims submitted}
+\item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of
+claims submitted}
 
-\item{participating}{\verb{<lgl>} Identifies whether the provider participates in Medicare
-and/or accepts assignment of Medicare allowed amounts}
+\item{participating}{\verb{<lgl>} Identifies whether the provider participates in
+Medicare and/or accepts assignment of Medicare allowed amounts}
 
-\item{hcpcs}{description}
+\item{hcpcs}{\verb{<int>} Total number of unique HCPCS codes}
 
-\item{patients}{description}
+\item{patients}{\verb{<int>} Total Medicare beneficiaries receiving services from
+the provider}
 
-\item{services}{description}
+\item{services}{\verb{<int>} Total provider services}
 
-\item{charges}{description}
+\item{charges}{\verb{<int>} The total charges that the provider submitted for all
+services}
 
-\item{allowed}{description}
+\item{allowed}{\verb{<dbl>} The Medicare allowed amount for all provider services.
+This figure is the sum of the amount Medicare pays, the deductible and
+coinsurance amounts that the beneficiary is responsible for paying, and any
+amounts that a third party is responsible for paying.}
 
-\item{payment}{description}
+\item{payment}{\verb{<dbl>} Total amount that Medicare paid after deductible and
+coinsurance amounts have been deducted for all the provider's line item
+services.}
 
-\item{avg_age}{description}
+\item{avg_age}{\verb{<int>} Average age of beneficiaries. Beneficiary age is
+calculated at the end of the calendar year or at the time of death}
+
+\item{risk_score}{\verb{<dbl>} Average Hierarchical Condition Category (HCC) risk
+score of beneficiaries}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }

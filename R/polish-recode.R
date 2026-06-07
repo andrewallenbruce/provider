@@ -59,32 +59,6 @@ rc_hospitals <- function(
 }
 
 #' @noRd
-rc_own_type <- function(x, column) {
-  collapse::recode_char(
-    x[[column]],
-    "acq_ind" = "Acquisition",
-    "corp_ind" = "Corp",
-    "llc_ind" = "LLC",
-    "mps_ind" = "Prov/Supp",
-    "msr_ind" = "Mgmt",
-    "mst_ind" = "Staff",
-    "hld_ind" = "Holding",
-    "inv_ind" = "Investment",
-    "fin_ind" = "Bank",
-    "con_ind" = "Consult",
-    "fp_ind" = "For-Profit",
-    "np_ind" = "Non-Profit",
-    "pe_ind" = "PE",
-    "reit_ind" = "Real Estate",
-    "cho_ind" = "Chain",
-    "oth_ind" = "Other",
-    "ano_ind" = "Another Org/Ind",
-    default = NA_character_,
-    set = TRUE
-  )
-}
-
-#' @noRd
 rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
   switch(
     column,
@@ -216,30 +190,60 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
 }
 
 #' @noRd
-rc_own_role <- function(x, column) {
-  collapse::recode_char(
-    x[[column]],
-    "01" = "5%+ Ownership",
-    "03" = "Partner",
-    "25" = "Contracted Mgmt Employee",
-    "34" = "5%+ Ownership (Direct)",
-    "35" = "5%+ Ownership (Indirect)",
-    "36" = "5%+ Mortgage",
-    "37" = "5%+ Security",
-    "38" = "General Partner",
-    "39" = "Limited Partner",
-    "40" = "Officer",
-    "41" = "Director",
-    "42" = "W2 Mgmt Employee",
-    "43" = "Ops/Mgmt Control",
-    "44" = "Other",
-    default = NA_character_,
-    set = TRUE
+rc_owner <- function(x, column, arg = caller_arg(column), call = caller_env()) {
+  switch(
+    column,
+    own_type = collapse::recode_char(
+      x[[column]],
+      "acq_ind" = "Acquisition",
+      "corp_ind" = "Corp",
+      "llc_ind" = "LLC",
+      "mps_ind" = "Prov/Supp",
+      "msr_ind" = "Mgmt",
+      "mst_ind" = "Staff",
+      "hld_ind" = "Holding",
+      "inv_ind" = "Investment",
+      "fin_ind" = "Bank",
+      "con_ind" = "Consult",
+      "fp_ind" = "For-Profit",
+      "np_ind" = "Non-Profit",
+      "pe_ind" = "PE",
+      "reit_ind" = "Real Estate",
+      "cho_ind" = "Chain",
+      "oth_ind" = "Other",
+      "ano_ind" = "Another Org/Ind",
+      default = NA_character_,
+      set = TRUE
+    ),
+    `ROLE CODE - OWNER` = collapse::recode_char(
+      x[[column]],
+      "01" = "5%+ Ownership",
+      "03" = "Partner",
+      "25" = "Contracted Mgmt Employee",
+      "34" = "5%+ Ownership (Direct)",
+      "35" = "5%+ Ownership (Indirect)",
+      "36" = "5%+ Mortgage",
+      "37" = "5%+ Security",
+      "38" = "General Partner",
+      "39" = "Limited Partner",
+      "40" = "Officer",
+      "41" = "Director",
+      "42" = "W2 Mgmt Employee",
+      "43" = "Ops/Mgmt Control",
+      "44" = "Other",
+      default = NA_character_,
+      set = TRUE
+    ),
+    cli::cli_abort(
+      "{.val {arg}} is not a column in {.var x}",
+      arg = arg,
+      call = call
+    )
   )
 }
 
 #' @noRd
-rc_qpp_ind <- function(x, column) {
+rc_quality <- function(x, column) {
   collapse::recode_char(
     x[[column]],
     "asc_ind" = "ASC-Based",

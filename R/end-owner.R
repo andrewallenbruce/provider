@@ -24,7 +24,7 @@
 #' @param role `<chr>` Provider's name
 #' @param entity `<chr>` Provider's name
 #' @param title `<chr>` Provider's name
-#' @param first,middle,last `<chr>` Provider's name
+#' @param first,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
 #' @examplesIf httr2::is_online()
 #' owner(count = TRUE)
@@ -46,7 +46,6 @@ owner <- function(
   role = NULL,
   entity = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   title = NULL,
   address = NULL,
@@ -68,10 +67,9 @@ owner <- function(
     `ORGANIZATION NAME - OWNER` = owner,
     `DOING BUSINESS AS NAME - OWNER` = dba,
     `PERCENTAGE OWNERSHIP` = percent,
-    `ROLE TEXT - OWNER` = role,
+    `ROLE CODE - OWNER` = role,
     `TYPE - OWNER` = entity,
     `FIRST NAME - OWNER` = first,
-    `MIDDLE NAME - OWNER` = middle,
     `LAST NAME - OWNER` = last,
     `TITLE - OWNER` = title,
     `ADDRESS LINE 1 - OWNER` = address,

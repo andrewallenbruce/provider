@@ -28,7 +28,7 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
-#' @param first,middle,last `<chr>` Individual provider's name
+#' @param first,last `<chr>` Individual provider's name
 #' @param gender `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
 #' @param credential `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
 #' @param school `<chr>` Provider’s medical school
@@ -55,7 +55,6 @@ clinicians <- function(
   pac = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   gender = NULL,
   credential = NULL,
@@ -78,9 +77,8 @@ clinicians <- function(
     npi = npi,
     ind_pac_id = pac,
     ind_enrl_id = enid,
-    provider_last_name = last,
     provider_first_name = first,
-    provider_middle_name = middle,
+    provider_last_name = last,
     gndr = gender,
     cred = credential,
     med_sch = school,

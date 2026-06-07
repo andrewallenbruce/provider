@@ -12,7 +12,7 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
-#' @param first,middle,last `<chr>` Individual provider's name
+#' @param first,last `<chr>` Individual provider's name
 #' @param prov_type `<chr>` Enrollment specialty code
 #' @param prov_desc `<chr>` Enrollment specialty description
 #' @param state `<chr>` Enrollment state, full or abbreviation
@@ -35,7 +35,6 @@ providers <- function(
   pac = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   prov_type = NULL,
   prov_desc = NULL,
@@ -59,7 +58,6 @@ providers <- function(
     STATE_CD = state,
     LAST_NAME = last,
     FIRST_NAME = first,
-    MDL_NAME = middle,
     ORG_NAME = org_name
   )
 

@@ -1,4 +1,20 @@
 #' @noRd
+report_preview <- function() {
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step("Returning first {.strong 10} rows")
+  } else {
+    cli::cli_alert_success("Returning first {.strong 10} rows")
+  }
+}
+
+#' @noRd
+report_cleanup <- function() {
+  if (rlang::is_interactive()) {
+    cli::cli_progress_cleanup()
+  }
+}
+
+#' @noRd
 mark <- function(x) {
   prettyNum(x, big.mark = ",")
 }

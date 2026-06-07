@@ -22,7 +22,7 @@
 #' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param enid `<chr>` Medicare Enrollment ID
-#' @param first,middle,last `<chr>` Individual provider name
+#' @param first,last `<chr>` Individual provider name
 #' @param prov_desc `<chr>` Provider type enrollment description
 #' @param state `<chr>` Enrollment state abbreviation
 #' @param org_name `<chr>` Organization name
@@ -43,7 +43,6 @@ revocations <- function(
   npi = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   org_name = NULL,
   multi = NULL,
@@ -65,7 +64,6 @@ revocations <- function(
     NPI = npi,
     ENRLMT_ID = enid,
     FIRST_NAME = first,
-    MDL_NAME = middle,
     LAST_NAME = last,
     ORG_NAME = org_name,
     MULTIPLE_NPI_FLAG = tag_bool(multi),

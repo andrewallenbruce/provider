@@ -38,14 +38,14 @@ describe("check_modifiers()", {
   })
 })
 
-describe("uuid_pdc()", {
+describe("url_pdc()", {
   it("succeeds with valid input", {
-    expect_equal(uuid_pdc("affiliations"), "27ea-46a8")
-    expect_equal(uuid_pdc("clinicians"), "mj5m-pzi6")
-    expect_equal(uuid_pdc("hospitals2"), "xubh-q36u")
-    expect_equal(uuid_pdc("dialysis"), "23ew-n7w9")
+    expect_equal(url_pdc("affiliations"), "https://data.cms.gov/provider-data/api/1/datastore/query/27ea-46a8/0?")
+    expect_equal(url_pdc("clinicians"), "https://data.cms.gov/provider-data/api/1/datastore/query/mj5m-pzi6/0?")
+    expect_equal(url_pdc("hospitals2"), "https://data.cms.gov/provider-data/api/1/datastore/query/xubh-q36u/0?")
+    expect_equal(url_pdc("dialysis"), "https://data.cms.gov/provider-data/api/1/datastore/query/23ew-n7w9/0?")
   })
   it("errors with incorrect input", {
-    expect_error(uuid_pdc("ENDPOINT"))
+    expect_error(url_pdc("ENDPOINT"))
   })
 })

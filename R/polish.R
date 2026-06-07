@@ -134,6 +134,7 @@ S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
 S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE)
   collapse::settfmv(x, "PERCENTAGE OWNERSHIP", as.double)
+  rc_owner(x, "ROLE CODE - OWNER")
   collapse::setrename(x, RE_NAME[["owner"]], .nse = FALSE)
   replace_nz(x)
 
@@ -274,8 +275,7 @@ S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
     c(
       "Bene_Avg_Risk_Scre",
       "Tot_Mdcr_Alowd_Amt",
-      "Tot_Mdcr_Pymt_Amt",
-      "Tot_Mdcr_Stdzd_Amt"
+      "Tot_Mdcr_Pymt_Amt"
     ),
     as.double
   )
@@ -283,7 +283,7 @@ S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
   replace_nz(x)
 
   x <- collapse::gv(x, unlist_(RE_NAME[["utilization"]])) |>
-    rc_bin("part_ind") |>
+    rc_bin("participating") |>
     rc_address()
 
   add_class(x, "utilization") |>

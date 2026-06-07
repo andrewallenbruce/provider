@@ -9,7 +9,7 @@
 #' @inheritParams provider_common_params
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
-#' @param first,middle,last `<chr>` Individual provider's name
+#' @param first,last `<chr>` Individual provider's name
 #' @param facility_type `<enum>` facility type:
 #'    - `esrd` = Dialysis facility
 #'    - `hha` = Home health agency
@@ -43,7 +43,6 @@ affiliations <- function(
   npi = NULL,
   pac = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
@@ -57,9 +56,8 @@ affiliations <- function(
     set = FALSE,
     npi = npi,
     ind_pac_id = pac,
-    provider_last_name = last,
     provider_first_name = first,
-    provider_middle_name = middle,
+    provider_last_name = last,
     facility_type = tag_enum(facility_type),
     facility_affiliations_certification_number = facility_ccn,
     facility_type_certification_number = parent_ccn

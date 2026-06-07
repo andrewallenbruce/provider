@@ -9,7 +9,6 @@ providers(
   pac = NULL,
   enid = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   prov_type = NULL,
   prov_desc = NULL,
@@ -27,7 +26,7 @@ providers(
 
 \item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
-\item{first, middle, last}{\verb{<chr>} Individual provider's name}
+\item{first, last}{\verb{<chr>} Individual provider's name}
 
 \item{prov_type}{\verb{<chr>} Enrollment specialty code}
 

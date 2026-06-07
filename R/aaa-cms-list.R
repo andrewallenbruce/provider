@@ -11,9 +11,9 @@ temporal_uuid <- function(rex) {
 }
 
 #' @noRd
-uuid_cms_list <- function(endpoint) {
-  switch(
-    endpoint,
+url_cms_list <- function(x) {
+  x <- switch(
+    x,
     pending = list(
       Physician = "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
       `Non-Physician` = "261b83b6-b89f-43ad-ae7b-0d419a3bc24b"
@@ -37,13 +37,8 @@ uuid_cms_list <- function(endpoint) {
     utilization = temporal_uuid("Practitioners - by Provider :"),
     service = temporal_uuid("Practitioners - by Provider and Service :"),
     geography = temporal_uuid("Practitioners - by Geography and Service :"),
-    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
+    cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
   )
-}
-
-#' @noRd
-URL_CMS_List <- function(x) {
-  x <- uuid_cms_list(x)
 
   paste0("https://data.cms.gov/data-api/v1/dataset/", x, "/data") |>
     as.list() |>
@@ -59,7 +54,7 @@ cms_list <- function(
   end = call_name(call_match(call = caller_call(), fn = caller_fn()))
 ) {
   x <- param_cms(...)
-  url <- URL_CMS_List(end)
+  url <- url_cms_list(end)
 
   if (!is.null(select)) {
     match.arg(as.character(select), names(url), several.ok = TRUE)
@@ -76,11 +71,7 @@ cms_list <- function(
 
 #' @noRd
 method(request_preview, CMSList) <- function(x) {
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step("Returning first {.strong 10} rows")
-  } else {
-    cli::cli_alert_success("Returning first {.strong 10} rows")
-  }
+  report_preview()
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
     purrr::map(httr2::request) |>
@@ -90,9 +81,7 @@ method(request_preview, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   return(y)
 }
@@ -101,15 +90,15 @@ method(request_preview, CMSList) <- function(x) {
 method(request_single, CMSList) <- function(x) {
   report_count(x)
 
-  msg <- cli::format_inline("Retrieving {.strong {length(x@url)}} page{?s}")
+  URL <- x@url[names(which(x@count > 0L))]
+
+  msg <- cli::format_inline("Retrieving {.strong {length(URL)}} page{?s}")
 
   if (rlang::is_interactive()) {
     cli::cli_progress_step(msg = msg)
   } else {
     cli::cli_alert_success(text = msg)
   }
-
-  URL <- x@url[names(which(x@count > 0L))]
 
   y <- flatten_cms(URL, x@query) |>
     purrr::map(httr2::request) |>
@@ -119,9 +108,7 @@ method(request_single, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   return(y)
 }
@@ -130,19 +117,19 @@ method(request_single, CMSList) <- function(x) {
 method(request_multi, CMSList) <- function(x) {
   report_count(x)
 
-  msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
+  END <- names(which(x@count > 0L))
+
+  URL <- x@url[END]
+
+  N <- unname(x@count[END])
+
+  msg <- cli::format_inline("Retrieving {.strong {length(URL)}} page{?s}")
 
   if (rlang::is_interactive()) {
     cli::cli_progress_step(msg = msg)
   } else {
     cli::cli_alert_success(text = msg)
   }
-
-  END <- names(which(x@count > 0L))
-
-  URL <- x@url[END]
-
-  N <- unname(x@count[END])
 
   y <- flatten_cms(URL, x@query, offset = "<<i>>") |>
     offset3(N, x@limit) |>
@@ -154,9 +141,7 @@ method(request_multi, CMSList) <- function(x) {
 
   class(y) <- c(x@end, class(y))
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   return(y)
 }

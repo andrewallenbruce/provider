@@ -15,18 +15,6 @@ check_modifiers <- function(x, end) {
 }
 
 #' @noRd
-uuid_pdc <- function(endpoint) {
-  switch(
-    endpoint,
-    affiliations = "27ea-46a8",
-    clinicians = "mj5m-pzi6",
-    hospitals2 = "xubh-q36u",
-    dialysis = "23ew-n7w9",
-    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
-  )
-}
-
-#' @noRd
 opts_pdc <- function(
   results = "true",
   limit = 1500L,
@@ -45,10 +33,17 @@ opts_pdc <- function(
 }
 
 #' @noRd
-URL_PDC <- function(x) {
+url_pdc <- function(x) {
   paste0(
     "https://data.cms.gov/provider-data/api/1/datastore/query/",
-    uuid_pdc(x),
+    switch(
+      x,
+      affiliations = "27ea-46a8",
+      clinicians = "mj5m-pzi6",
+      hospitals2 = "xubh-q36u",
+      dialysis = "23ew-n7w9",
+      cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
+    ),
     "/0?"
   )
 }
@@ -71,7 +66,7 @@ pdc <- function(
 
   PDC(
     end = end,
-    url = URL_PDC(end),
+    url = url_pdc(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
@@ -88,18 +83,12 @@ flatten_pdc <- function(url, query = NULL, ...) {
 
 #' @noRd
 method(request_preview, PDC) <- function(x) {
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step("Returning first {.strong 10} rows")
-  } else {
-    cli::cli_alert_success("Returning first {.strong 10} rows")
-  }
+  report_preview()
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results")
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   add_class(res, x@end)
 }
@@ -129,9 +118,7 @@ method(request_multi, PDC) <- function(x) {
   res <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results")
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   add_class(res, x@end)
 }

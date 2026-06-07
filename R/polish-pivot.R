@@ -54,7 +54,7 @@ pivot_order_refer <- function(x) {
     return(collapse::av(x, order_refer = rep_NA(x)))
   }
 
-  rc_clia(y, "order_refer")
+  rc_order_refer(y, "order_refer")
 
   if (all_unique(y$npi)) {
     return(join2(x, y, on = "npi"))
@@ -124,7 +124,7 @@ pivot_owner <- function(x) {
     return(collapse::av(x, own_type = rep_NA(x)))
   }
 
-  rc_own_type(y, "own_type")
+  rc_owner(y, "own_type")
 
   y <- rc_other(y, stub = "own") |>
     collapse::funique()
@@ -168,12 +168,7 @@ pivot_subgroup <- function(x) {
 
 #' @noRd
 pivot_quality <- function(x) {
-  y <- pivot2(
-    x,
-    rex = "^year$|^npi$|_ind$",
-    id = c("year", "npi"),
-    var = "indicators"
-  )
+  y <- pivot2(x, "^year$|^npi$|_ind$", c("year", "npi"), "indicators")
 
   collapse::gvr(x, "_ind$") <- NULL
   x <- collapse::funique(x, c("year", "npi"))
@@ -185,7 +180,7 @@ pivot_quality <- function(x) {
     return(collapse::av(x, indicators = rep_NA(x)))
   }
 
-  rc_qpp_ind(y, "indicators")
+  rc_quality(y, "indicators")
 
   if (all_unique(y$npi)) {
     return(join2(x, y, on = c("year", "npi")))

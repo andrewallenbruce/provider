@@ -19,7 +19,6 @@ owner(
   role = NULL,
   entity = NULL,
   first = NULL,
-  middle = NULL,
   last = NULL,
   title = NULL,
   address = NULL,
@@ -58,7 +57,7 @@ owner(
 
 \item{entity}{\verb{<chr>} Provider's name}
 
-\item{first, middle, last}{\verb{<chr>} Provider's name}
+\item{first, last}{\verb{<chr>} Provider's name}
 
 \item{title}{\verb{<chr>} Provider's name}
 

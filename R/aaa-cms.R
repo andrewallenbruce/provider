@@ -1,29 +1,24 @@
 #' @noRd
-uuid_cms <- function(endpoint) {
-  switch(
-    endpoint,
-    clia = "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
-    hospitals = "f6f6505c-e8b0-4d57-b258-e2b94133aaf2",
-    opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
-    order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",
-    providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
-    reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
-    revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
-    transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
-    cli::cli_abort("{.arg endpoint} {.val {endpoint}} is invalid.")
-  )
-}
-
-#' @noRd
 opts_cms <- function(size = 5000L, offset = 0L) {
   flatten_opts(params(size = size, offset = offset))
 }
 
 #' @noRd
-URL_CMS <- function(x) {
+url_cms <- function(x) {
   paste0(
     "https://data.cms.gov/data-api/v1/dataset/",
-    uuid_cms(x),
+    switch(
+      x,
+      clia = "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
+      hospitals = "f6f6505c-e8b0-4d57-b258-e2b94133aaf2",
+      opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
+      order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",
+      providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
+      reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
+      revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
+      transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
+      cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
+    ),
     "/data"
   )
 }
@@ -44,7 +39,7 @@ cms <- function(
 
   CMS(
     end = end,
-    url = URL_CMS(end),
+    url = url_cms(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
@@ -60,18 +55,12 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 
 #' @noRd
 method(request_preview, CMS) <- function(x) {
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step("Returning first {.strong 10} rows")
-  } else {
-    cli::cli_alert_success("Returning first {.strong 10} rows")
-  }
+  report_preview()
 
   res <- flatten_cms(x@url, NULL, size = 10L) |>
     base_request()
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   add_class(res, x@end)
 }
@@ -101,9 +90,7 @@ method(request_multi, CMS) <- function(x) {
   res <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit)
 
-  if (rlang::is_interactive()) {
-    cli::cli_progress_cleanup()
-  }
+  report_cleanup()
 
   add_class(res, x@end)
 }

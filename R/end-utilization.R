@@ -39,18 +39,30 @@
 #' @param npi `<int>` 10-digit national provider identifier
 #' @param first,last `<chr>` Individual/Organizational provider's name
 #' @param cred `<chr>` Individual provider's credentials
-#' @param entity `<chr>` Provider entity type; `"I"` (Individual), `"O"` (Organization)
+#' @param entity `<chr>` Provider entity type; `"I"` (Individual), `"O"`
+#'   (Organization)
 #' @param address,city,state,zip description
-#' @param specialty `<chr>` Provider specialty reported on the largest number of claims submitted
-#' @param participating `<lgl>` Identifies whether the provider participates in Medicare
-#'   and/or accepts assignment of Medicare allowed amounts
-#' @param hcpcs description
-#' @param patients description
-#' @param services description
-#' @param charges description
-#' @param allowed description
-#' @param payment description
-#' @param avg_age description
+#' @param specialty `<chr>` Provider specialty reported on the largest number of
+#'   claims submitted
+#' @param participating `<lgl>` Identifies whether the provider participates in
+#'   Medicare and/or accepts assignment of Medicare allowed amounts
+#' @param hcpcs `<int>` Total number of unique HCPCS codes
+#' @param patients `<int>` Total Medicare beneficiaries receiving services from
+#'   the provider
+#' @param services `<int>` Total provider services
+#' @param charges `<int>` The total charges that the provider submitted for all
+#'   services
+#' @param allowed `<dbl>` The Medicare allowed amount for all provider services.
+#'   This figure is the sum of the amount Medicare pays, the deductible and
+#'   coinsurance amounts that the beneficiary is responsible for paying, and any
+#'   amounts that a third party is responsible for paying.
+#' @param payment `<dbl>` Total amount that Medicare paid after deductible and
+#'   coinsurance amounts have been deducted for all the provider's line item
+#'   services.
+#' @param avg_age `<int>` Average age of beneficiaries. Beneficiary age is
+#'   calculated at the end of the calendar year or at the time of death
+#' @param risk_score `<dbl>` Average Hierarchical Condition Category (HCC) risk
+#'   score of beneficiaries
 #' @returns A [tibble][tibble::tibble-package]
 #'
 #' @examplesIf httr2::is_online()
@@ -83,8 +95,11 @@ utilization <- function(
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
+  risk_score = NULL,
   count = FALSE
 ) {
+  check_bool_(participating)
+
   x <- cms_list(
     count = count,
     set = FALSE,
@@ -99,14 +114,15 @@ utilization <- function(
     Rndrng_Prvdr_State_Abrvtn = state,
     Rndrng_Prvdr_Zip5 = zip,
     Rndrng_Prvdr_Type = specialty,
-    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = participating,
+    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(participating),
     Tot_HCPCS_Cds = hcpcs,
     Tot_Benes = patients,
     Tot_Srvcs = services,
     Tot_Sbmtd_Chrg = charges,
     Tot_Mdcr_Alowd_Amt = allowed,
     Tot_Mdcr_Pymt_Amt = payment,
-    Bene_Avg_Age = avg_age
+    Bene_Avg_Age = avg_age,
+    Bene_Avg_Risk_Scre = risk_score
   )
 
   x <- execute(x)
