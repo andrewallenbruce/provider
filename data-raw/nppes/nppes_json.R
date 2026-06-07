@@ -33,14 +33,13 @@ basic <- set_names(x$basic, x$number) |>
     "sole_proprietor" = "sole",
     "credential" = "cred",
     "first_name" = "first",
-    "middle_name" = "middle",
     "last_name" = "last",
     fixed = TRUE
   )
 
 basic <- collapse::ss(
   basic,
-  basic$var %!iin% c("status", "name_prefix", "name_suffix")
+  basic$var %!iin% c("status", "name_prefix", "name_suffix", "middle_name")
 ) |>
   collapse::pivot(
     ids = "number",
@@ -60,7 +59,6 @@ key <- collapse::join(key, basic, on = "number") |>
     "entity",
     "cred",
     "first",
-    "middle",
     "last",
     "sex",
     "sole",
@@ -79,18 +77,17 @@ o_names <- set_names(x$other_names, x$number) |>
   collapse::qTBL() |>
   collapse::funique() |>
   collapse::rnm(
-    cred = "credential",
-    first = "first_name",
-    middle = "middle_name",
-    last = "last_name"
+    "cred" = "credential",
+    "first" = "first_name",
+    "last" = "last_name",
+    .nse = FALSE
   ) |>
+  rc_integer("code") |>
   collapse::gv(c(
     "number",
     "cred",
     "code",
-    "type",
     "first",
-    "middle",
     "last"
   )) |>
   collapse::add_stub(stub = "o_", cols = -1)
@@ -98,7 +95,7 @@ o_names <- set_names(x$other_names, x$number) |>
 # 1 = Other (Non-Medicare)
 # 5 = Medicaid
 # if cheapr::is_na(issuer) "Medicaid" else x
-ids <- set_names(x$identifiers, x$number) |>
+id <- set_names(x$identifiers, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>
@@ -106,13 +103,11 @@ ids <- set_names(x$identifiers, x$number) |>
   collapse::funique() |>
   collapse::rnm("id" = "identifier", .nse = FALSE) |>
   collapse::gv(c("number", "id", "issuer", "state")) |>
-  # collapse::mtt(issuer = cheapr::if_else_(cheapr::is_na(issuer), "Medicaid", issuer)) |>
-  collapse::add_stub(stub = "i_", cols = -1) |>
-  print(n = Inf)
+  collapse::add_stub(stub = "i_", cols = -1)
 
-collapse::setv(ids$issuer, NA_character_, "Medicaid")
+collapse::setv(id$i_issuer, NA, "Medicaid")
 
-set_names(x$taxonomies, x$number) |>
+tx <- set_names(x$taxonomies, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>
@@ -120,7 +115,7 @@ set_names(x$taxonomies, x$number) |>
   provider:::rc_trim() |>
   collapse::qTBL() |>
   collapse::funique() |>
-  collapse::rnm(group = "taxonomy_group") |>
+  collapse::rnm("group" = "taxonomy_group", .nse = FALSE) |>
   collapse::gv(c(
     "number",
     "code",
@@ -130,10 +125,24 @@ set_names(x$taxonomies, x$number) |>
     "state",
     "group"
   )) |>
+  rc_integer("number") |>
   collapse::roworderv("number") |>
-  collapse::add_stub(stub = "x_", cols = -1) |>
-  collapse::rsplit(~x_primary)
+  collapse::add_stub(stub = "tx_", cols = -1) |>
+  collapse::rsplit(~tx_primary)
 
+tx$`TRUE`$tx_order <- 0L
+
+txg <- collapse::GRP(tx$`FALSE`, by = "number")
+collapse::gsplit(NULL, txg, use.g.names = TRUE)
+
+collapse::greorder(collapse::gsplit(tx$`FALSE`, txg), txg)
+
+tx$`FALSE` |>
+  collapse::add_vars(rid = collapse::seq_row(tx$`FALSE`))
+collapse::fgroup_by(number) |>
+  collapse::mtt(tx_order = collapse::fcumsum(as.numeric(number)))
+collapse::fcount(number, add = TRUE) |>
+  print(n = Inf)
 
 # TBL 4: PRACTICE LOCATIONS
 location <- set_names(x$practiceLocations, x$number) |>
