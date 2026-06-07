@@ -83,19 +83,17 @@ providers(count = TRUE)
 #> providers Totals
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 2,981,799
 #> • Pages : 597      
 #> 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 providers(count = TRUE, org_name = not_blank())
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ providers returned 433,496 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
@@ -103,7 +101,6 @@ providers(count = TRUE, org_name = not_blank())
 
 providers()
 #> providers Totals
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
@@ -111,6 +108,7 @@ providers()
 #> • Pages : 597      
 #> 
 #> ✔ Returning first 10 rows
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> # A tibble: 10 × 10
 #>    org_name       first last  state prov_type prov_desc    npi multi pac   enid 
 #>    <chr>          <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
@@ -128,11 +126,10 @@ providers()
 providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ providers returned 231 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
@@ -157,6 +154,7 @@ providers(org_name = starts("U"), count = TRUE)
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ providers returned 5,830 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 

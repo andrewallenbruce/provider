@@ -138,6 +138,7 @@ clinicians(count = TRUE)
 clinicians(org_name = not_blank(), count = TRUE)
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 3,030,173 results.
@@ -145,9 +146,10 @@ clinicians(org_name = not_blank(), count = TRUE)
 clinicians(enid = "I20081002000549") |> str()
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
@@ -177,6 +179,10 @@ clinicians(first = "Etan")
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 12 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
@@ -199,26 +205,28 @@ clinicians(first = "Etan")
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 
 clinicians(members = not_blank(), count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 3,030,172 results.
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 clinicians(members = is_blank(), count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 348,581 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 clinicians(members = 100, count = TRUE)
-#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 3,884 results.
 #> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
