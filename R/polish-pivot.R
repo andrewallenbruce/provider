@@ -44,16 +44,9 @@ collapse_rows <- function(x, key, var) {
 
 #' @noRd
 pivot_order_refer <- function(x) {
-  y <- pivot2(
-    x,
-    "^npi$|^ptb$|^dme$|^hha$|^pmd$|^hospice$",
-    "npi",
-    "order_refer"
-  )
+  y <- pivot2(x, "^npi$|_ind$", "npi", "order_refer")
 
-  cols <- c("order_refer", "ptb", "dme", "hha", "pmd", "hospice")
-
-  collapse::gv(x, cols) <- NULL
+  collapse::gvr(x, "^order_refer$|_ind$") <- NULL
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
@@ -61,16 +54,7 @@ pivot_order_refer <- function(x) {
     return(collapse::av(x, order_refer = rep_NA(x)))
   }
 
-  collapse::recode_char(
-    y$order_refer,
-    "ptb" = "Part B",
-    "dme" = "DME",
-    "hha" = "HHA",
-    "pmd" = "PMD",
-    "hospice" = "Hospice",
-    default = NA_character_,
-    set = TRUE
-  )
+  rc_clia(y, "order_refer")
 
   if (all_unique(y$npi)) {
     return(join2(x, y, on = "npi"))

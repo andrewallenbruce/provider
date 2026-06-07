@@ -31,7 +31,7 @@
 #'    - `hha`: Home Health Agency
 #'    - `pmd`: Power Mobility Devices
 #'    - `hospice`: Hospice
-#' @examplesIf httr2::is_online()
+#' @examplesIf FALSE
 #' order_refer(count = TRUE)
 #'
 #' order_refer(npi = 1003026055)

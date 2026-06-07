@@ -49,6 +49,9 @@ unit where the individual provider provides services.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble}
+}
 \description{
 Access information concerning individual providers'
 affiliations with organizations/facilities.

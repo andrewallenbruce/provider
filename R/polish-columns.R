@@ -1,3 +1,6 @@
+# 2017      == 17 + ALL
+# 2022      == 22 + ALL
+# 2023:2024 == 23 + 22 + ALL
 #' @noRd
 qpp_ALL = list(
   year = "year",
@@ -37,43 +40,6 @@ qpp_22 = list(
   `improvement activities (ia) category score` = "ia_score",
   `ia credit` = "ia_credit_ind",
   `cost category score` = "cost_score"
-)
-
-# 2017      == 17 + ALL
-# 2022      == 22 + ALL
-# 2023:2024 == 23 + 22 + ALL
-#' @noRd
-QPP = list(
-  `2017` = cheapr::list_combine(
-    qpp_ALL,
-    list(
-      engaged = "engaged_ind",
-      `participation type` = "part_opt",
-      `small practitioner` = "small_ind",
-      `rural clinician` = "rural_ind",
-      `hpsa clinician` = "hpsa_ind",
-      `ambulatory surgical center` = "asc_ind",
-      `hospital-based clinician` = "hospital_ind",
-      `non-patient facing` = "non_patient_ind",
-      `facility-based` = "facility_ind",
-      `extreme hardship` = "extreme_ind",
-      `quality improvement bonus` = "qi_score",
-      `pi bonus` = "pi_bonus_ind",
-      `ia score` = "ia_score",
-      `cost score` = "cost_score"
-    )
-  ),
-  `2022` = cheapr::list_combine(qpp_ALL, qpp_22),
-  `2023` = cheapr::list_combine(
-    qpp_ALL,
-    qpp_22,
-    list(
-      `reporting option` = "report_opt",
-      `mips value pathway title` = "mvp_title",
-      `received facility score` = "fac_score_ind",
-      `cost improvement score` = "ci_score"
-    )
-  )
 )
 
 #' @noRd
@@ -145,7 +111,7 @@ RE_OWNER2 = c(
 RE_NAME = list(
   affiliations = list(
     provider_first_name = "first",
-    provider_middle_name = "middle",
+    # provider_middle_name = "middle",
     provider_last_name = "last",
     npi = "npi",
     ind_pac_id = "pac",
@@ -189,7 +155,7 @@ RE_NAME = list(
   ),
   clinicians = list(
     provider_first_name = "first",
-    provider_middle_name = "middle",
+    # provider_middle_name = "middle",
     provider_last_name = "last",
     gndr = "gender",
     cred = "cred",
@@ -292,11 +258,11 @@ RE_NAME = list(
     FIRST_NAME = "first",
     LAST_NAME = "last",
     NPI = "npi",
-    PARTB = "ptb",
-    DME = "dme",
-    HHA = "hha",
-    PMD = "pmd",
-    HOSPICE = "hospice"
+    PARTB = "ptb_ind",
+    DME = "dme_ind",
+    HHA = "hha_ind",
+    PMD = "pmd_ind",
+    HOSPICE = "hsp_ind"
   ),
   pending = list(
     prov_type = "prov_type",
@@ -307,7 +273,7 @@ RE_NAME = list(
   providers = list(
     ORG_NAME = "org_name",
     FIRST_NAME = "first",
-    MDL_NAME = "middle",
+    # MDL_NAME = "middle",
     LAST_NAME = "last",
     STATE_CD = "state",
     PROVIDER_TYPE_CD = "prov_type",
@@ -316,6 +282,38 @@ RE_NAME = list(
     MULTIPLE_NPI_FLAG = "multi",
     PECOS_ASCT_CNTL_ID = "pac",
     ENRLMT_ID = "enid"
+  ),
+  quality = list(
+    `2017` = cheapr::list_combine(
+      qpp_ALL,
+      list(
+        engaged = "engaged_ind",
+        `participation type` = "part_opt",
+        `small practitioner` = "small_ind",
+        `rural clinician` = "rural_ind",
+        `hpsa clinician` = "hpsa_ind",
+        `ambulatory surgical center` = "asc_ind",
+        `hospital-based clinician` = "hospital_ind",
+        `non-patient facing` = "non_patient_ind",
+        `facility-based` = "facility_ind",
+        `extreme hardship` = "extreme_ind",
+        `quality improvement bonus` = "qi_score",
+        `pi bonus` = "pi_bonus_ind",
+        `ia score` = "ia_score",
+        `cost score` = "cost_score"
+      )
+    ),
+    `2022` = cheapr::list_combine(qpp_ALL, qpp_22),
+    `2023` = cheapr::list_combine(
+      qpp_ALL,
+      qpp_22,
+      list(
+        `reporting option` = "report_opt",
+        `mips value pathway title` = "mvp_title",
+        `received facility score` = "fac_score_ind",
+        `cost improvement score` = "ci_score"
+      )
+    )
   ),
   reassignments = list(
     `Individual First Name` = "first",
@@ -335,7 +333,7 @@ RE_NAME = list(
   revocations = list(
     ORG_NAME = "org_name",
     FIRST_NAME = "first",
-    MDL_NAME = "middle",
+    # MDL_NAME = "middle",
     LAST_NAME = "last",
     ENRLMT_ID = "enid",
     NPI = "npi",
@@ -355,6 +353,34 @@ RE_NAME = list(
     Action = "action",
     Date_of_Action = "action_date"
   ),
+  utilization = list(
+    year = "year",
+    Rndrng_NPI = "npi",
+    Rndrng_Prvdr_First_Name = "first",
+    Rndrng_Prvdr_Last_Org_Name = "last",
+    Rndrng_Prvdr_Crdntls = "cred",
+    Rndrng_Prvdr_Ent_Cd = "entity",
+    Rndrng_Prvdr_St1 = "address",
+    Rndrng_Prvdr_St2 = "add_2",
+    Rndrng_Prvdr_City = "city",
+    Rndrng_Prvdr_State_Abrvtn = "state",
+    Rndrng_Prvdr_Zip5 = "zip",
+    Rndrng_Prvdr_Type = "specialty",
+    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = "part_ind",
+    Tot_HCPCS_Cds = "hcpcs",
+    Tot_Benes = "patients",
+    Tot_Srvcs = "services",
+    Tot_Sbmtd_Chrg = "charges",
+    Tot_Mdcr_Alowd_Amt = "allowed",
+    Tot_Mdcr_Pymt_Amt = "payment",
+    Tot_Mdcr_Stdzd_Amt = "standard",
+    Bene_Avg_Age = "avg_age",
+    Bene_Feml_Cnt = "female",
+    Bene_Male_Cnt = "male",
+    Bene_Dual_Cnt = "dual",
+    Bene_Ndual_Cnt = "ndual",
+    Bene_Avg_Risk_Scre = "risk_score"
+  ),
   facility = c(
     fac_type = "fac_type",
     RE_ENROLL
@@ -362,20 +388,21 @@ RE_NAME = list(
   owner = c(
     fac_type = "fac_type",
     RE_OWNER
-  ),
-  fqhc_enroll = RE_ENROLL,
-  hha_enroll = RE_ENROLL,
-  hospice_enroll = RE_ENROLL,
-  rhc_enroll = RE_ENROLL,
-  snf_enroll = c(
-    RE_ENROLL,
-    `NURSING HOME PROVIDER NAME` = "nhp_name",
-    `AFFILIATION ENTITY NAME` = "aff_name"
-  ),
-  fqhc_owner = RE_OWNER2,
-  hha_owner = RE_OWNER2,
-  hospice_owner = RE_OWNER2,
-  rhc_owner = RE_OWNER2,
-  hospital_owner = RE_OWNER,
-  snf_owner = RE_OWNER
+  )
 )
+
+# fqhc_enroll = RE_ENROLL,
+# hha_enroll = RE_ENROLL,
+# hospice_enroll = RE_ENROLL,
+# rhc_enroll = RE_ENROLL,
+# snf_enroll = c(
+#   RE_ENROLL,
+#   `NURSING HOME PROVIDER NAME` = "nhp_name",
+#   `AFFILIATION ENTITY NAME` = "aff_name"
+# ),
+# fqhc_owner = RE_OWNER2,
+# hha_owner = RE_OWNER2,
+# hospice_owner = RE_OWNER2,
+# rhc_owner = RE_OWNER2,
+# hospital_owner = RE_OWNER,
+# snf_owner = RE_OWNER

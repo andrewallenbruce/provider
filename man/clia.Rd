@@ -84,6 +84,9 @@ Correction.}
 
 \item{set}{\verb{<lgl>} Return the entire dataset}
 }
+\value{
+A \link[tibble:tibble-package]{tibble}
+}
 \description{
 Clinical laboratories including demographics and the type of testing
 services the facility provides.

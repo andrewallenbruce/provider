@@ -54,6 +54,7 @@
 #'   Medicare/Medicaid.
 #' @param poc `<lgl>` Indicates provider is in compliance with Plan of
 #'   Correction.
+#' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
 #'

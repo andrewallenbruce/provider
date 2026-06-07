@@ -73,27 +73,11 @@
 #'
 #' utilization_(type = 'Geography',
 #'              hcpcs = '0002A')
-#'
-#' @name utilization
-NULL
-
-#' @param year `<int>` // **required** Year data was reported, in `YYYY` format.
-#'   Run [util_years()] to return a vector of the years currently available.
-#'
-#' @param type `<chr>` // **required** dataset to query, `"Provider"`,
-#'   `"Service"`, `"Geography"`
-#'
+#' @param year `<int>` Year data was reported, in `YYYY` format
 #' @param npi `<int>` 10-digit national provider identifier
-#'
-#' @param first,last,organization `<chr>` Individual/Organizational provider's
-#'   name
-#'
+#' @param first,last `<chr>` Individual/Organizational provider's name
 #' @param credential `<chr>` Individual provider's credentials
-#'
-#' @param gender `<chr>` Individual provider's gender; `"F"` (Female), `"M"`
-#'   (Male)
-#'
-#' @param entype `<chr>` Provider entity type; `"I"` (Individual), `"O"`
+#' @param entity `<chr>` Entity type; `"I"` (Individual), `"O"`
 #'   (Organization)
 #'
 #' @param city `<chr>` City where provider is located

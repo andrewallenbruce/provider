@@ -55,10 +55,10 @@ quality_get <- function(x, y) {
   x <- collapse::get_elem(x, z, keep.tree = TRUE) |>
     rowbind2("year")
 
-  collapse::setrename(x, QPP[[y]], .nse = FALSE)
+  collapse::setrename(x, RE_NAME[["quality"]][[y]], .nse = FALSE)
   replace_nz(x)
 
-  x <- collapse::gv(x, unlist_(QPP[[y]])) |>
+  x <- collapse::gv(x, unlist_(RE_NAME[["quality"]][[y]])) |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     pivot_quality()
 

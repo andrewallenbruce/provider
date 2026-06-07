@@ -259,3 +259,17 @@ rc_qpp_ind <- function(x, column) {
     set = TRUE
   )
 }
+
+#' @noRd
+rc_order_refer <- function(x, column) {
+  collapse::recode_char(
+    x[[column]],
+    "ptb_ind" = "Part B",
+    "dme_ind" = "DME",
+    "hha_ind" = "HHA",
+    "pmd_ind" = "PMD",
+    "hsp_ind" = "Hospice",
+    default = NA_character_,
+    set = TRUE
+  )
+}
