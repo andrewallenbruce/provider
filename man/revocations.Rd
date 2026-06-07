@@ -108,8 +108,6 @@ gathered from the \emph{Provider Enrollment, Chain and Ownership System (PECOS)}
 }
 
 Source: \href{https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535}{Code of Federal Regulations}
-
-(a) Reasons for revocation.  CMS may revoke a currently enrolled provide
 }
 }
 \examples{

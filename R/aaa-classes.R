@@ -1,15 +1,4 @@
 #' @noRd
-Modifier <- new_class(
-  "Modifier",
-  class_character,
-  package = NULL,
-  properties = list(
-    operator = class_character,
-    value = class_atomic
-  )
-)
-
-#' @noRd
 ParamCMS <- new_class("ParamCMS", class_list, package = NULL)
 
 #' @noRd

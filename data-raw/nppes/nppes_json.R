@@ -27,7 +27,6 @@ basic <- set_names(x$basic, x$number) |>
   collapse::qTBL() |>
   collapse::recode_char(
     "--" = NA_character_,
-    # "." = "",
     "certification_date" = "cert_date",
     "enumeration_date" = "enum_date",
     "last_updated" = "updated",
@@ -105,13 +104,13 @@ ids <- set_names(x$identifiers, x$number) |>
   collapse::recode_char("--" = NA_character_) |>
   collapse::qTBL() |>
   collapse::funique() |>
-  collapse::rnm(id = "identifier") |>
+  collapse::rnm("id" = "identifier", .nse = FALSE) |>
   collapse::gv(c("number", "id", "issuer", "state")) |>
-  collapse::mtt(
-    issuer = cheapr::if_else_(cheapr::is_na(issuer), "Medicaid", issuer)
-  ) |>
+  # collapse::mtt(issuer = cheapr::if_else_(cheapr::is_na(issuer), "Medicaid", issuer)) |>
   collapse::add_stub(stub = "i_", cols = -1) |>
   print(n = Inf)
+
+collapse::setv(ids$issuer, NA_character_, "Medicaid")
 
 set_names(x$taxonomies, x$number) |>
   cheapr::list_drop_null() |>

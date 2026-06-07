@@ -36,7 +36,3 @@
       23. Violation Of Provider And Supplier Standards
 
 Source: [Code of Federal Regulations](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.535)
-
-
-
-(a) Reasons for revocation.  CMS may revoke a currently enrolled provide

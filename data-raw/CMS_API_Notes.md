@@ -1,19 +1,3 @@
----
-title: "API Notes"
-editor_options: 
-  chunk_output_type: console
-output: 
-  html_document: 
-    toc: true
-    toc_depth: 5
-    highlight: zenburn
-    theme: united
-    keep_md: true
-    df_print: tibble
----
-
-
-
 ## CMS
 
    - [data.CMS.gov API FAQ]("https://data.cms.gov/sites/default/files/2024-10/7ef65521-65a4-41ed-b600-3a0011f8ec4b/API%20Guide%20Formatted%201_6.pdf")

@@ -1,3 +1,14 @@
+#' @noRd
+Modifier <- new_class(
+  "Modifier",
+  class_character,
+  package = NULL,
+  properties = list(
+    operator = class_character,
+    value = class_atomic
+  )
+)
+
 #' A variety of different query operators
 #'
 #' @description Helpers for use in constructing conditions in queries.

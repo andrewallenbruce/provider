@@ -38,7 +38,7 @@ parse_string <- function(resp, query = NULL) {
 #' @noRd
 base_request <- function(url, query = NULL) {
   httr2::request(url) |>
-    httr2::req_retry(retry_on_failure = TRUE, max_tries = 2) |>
+    httr2::req_throttle(capacity = 30, fill_time_s = 60) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }
