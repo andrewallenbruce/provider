@@ -30,7 +30,7 @@ parse_string <- function(resp, query = NULL) {
     count = PS(resp)$count,
     found_rows = PS(resp)$found_rows,
     total_rows = PS(resp)$total_rows,
-    names = rlang::names2(PS(resp)),
+    names = names2(PS(resp)),
     PS(resp, qry = query)
   )
 }
@@ -38,7 +38,7 @@ parse_string <- function(resp, query = NULL) {
 #' @noRd
 base_request <- function(url, query = NULL) {
   httr2::request(url) |>
-    httr2::req_throttle(capacity = 30, fill_time_s = 60) |>
+    # httr2::req_throttle(capacity = 120, fill_time_s = 60) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }
