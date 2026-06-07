@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9220 (2026-06-07)
+
+* throttling still
+
+
 # provider 0.0.1.9219 (2026-06-07)
 
 * trying to get throttling problem under control
