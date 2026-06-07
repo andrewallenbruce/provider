@@ -93,18 +93,142 @@ adjustments.
 ``` r
 quality(count = TRUE)
 #> quality Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 6,154,354
 #> • Pages : 1,233    
 #> 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ quality returned 41,788 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • 2021 : 23,617
 #> • 2024 : 18,171
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 quality(npi = 1043245657)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ quality returned 1 result.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • 2017 : 1
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ Retrieving 1 page
 #> # A tibble: 1 × 19
 #>    year state  size specialty years    npi patients charges services final_score
@@ -115,13 +239,94 @@ quality(npi = 1043245657)
 #> #   cost_score <dbl>, indicators <chr>
 
 quality(npi = c(1003026055, 1316939655))
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ quality returned 10 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • 2022 : 1
 #> • 2021 : 2
 #> • 2020 : 3
 #> • 2019 : 1
 #> • 2018 : 1
 #> • 2017 : 2
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ Retrieving 6 pages
 #> # A tibble: 8 × 22
 #>    year state  size specialty years    npi patients charges services final_score

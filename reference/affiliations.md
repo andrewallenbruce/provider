@@ -137,8 +137,16 @@ affiliations(facility_ccn = 331302)
 #> # ℹ 324 more rows
 
 affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ affiliations returned 2,093 results.
-#> ✔ Retrieving 2 pages
+#> ✔ Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Retrieving 2 pages
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> # A tibble: 2,093 × 7
 #>    first  last              npi pac        prov_type prov_ccn parent_ccn
 #>    <chr>  <chr>           <int> <chr>      <chr>     <chr>    <chr>     

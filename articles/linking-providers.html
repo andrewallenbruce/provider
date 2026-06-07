@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9218</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9219</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,6 +160,10 @@ insights. For example, there is a hospital in New York named
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, reh_date &lt;date&gt;, prov_type &lt;chr&gt;, sub_group &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">77</span> results.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 77 × 17</span></span></span>
 <span><span class="co">#&gt;    first    last      gender cred  school grad_year specialty    npi pac   enid </span></span>
@@ -202,6 +206,14 @@ on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">334</span> results.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -214,7 +226,14 @@ all-numeric CCN (<code>331302</code>):</p>
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ccn2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span></span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="font-weight: bold;">6</span> results.</span></span>
+<span><span class="co">#&gt; Waiting 2s for throttling delay <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  </span></span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ccn2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>

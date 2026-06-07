@@ -45,254 +45,62 @@ Medicare Pending Initial Logging and Tracking:
 ``` r
 pending(count = TRUE)
 #> pending Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 12,236
 #> • Pages : 4     
 #> 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 pending(first = "Victor", count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ pending returned 7 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Physician     : 5
 #> • Non-Physician : 2
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 pending(first = starts("V"))
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ pending returned 165 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Physician     : 74
 #> • Non-Physician : 91
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ Retrieving 2 pages
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 5s for rate limit ■■■■■■■                         
-#> Waiting 5s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 5s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 9s for rate limit ■■■■■■■                         
-#> Waiting 9s for rate limit ■■■■■■■■■■■■■■■■■■              
-#> Waiting 9s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 9s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 24s for rate limit ■■■■                            
-#> Waiting 24s for rate limit ■■■■■■■■                        
-#> Waiting 24s for rate limit ■■■■■■■■■■■                     
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■                 
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
-#> Waiting 24s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 57s for rate limit ■■                              
-#> Waiting 57s for rate limit ■■■                             
-#> Waiting 57s for rate limit ■■■■■                           
-#> Waiting 57s for rate limit ■■■■■■■                         
-#> Waiting 57s for rate limit ■■■■■■■■                        
-#> Waiting 57s for rate limit ■■■■■■■■■■                      
-#> Waiting 57s for rate limit ■■■■■■■■■■■                     
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■                 
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■              
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■           
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 57s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 42s for rate limit ■■■                             
-#> Waiting 42s for rate limit ■■■■■                           
-#> Waiting 42s for rate limit ■■■■■■■                         
-#> Waiting 42s for rate limit ■■■■■■■■■                       
-#> Waiting 42s for rate limit ■■■■■■■■■■■                     
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■              
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■        
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■     
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 42s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> Waiting 60s for rate limit ■■                              
-#> Waiting 60s for rate limit ■■■■                            
-#> Waiting 60s for rate limit ■■■■■                           
-#> Waiting 60s for rate limit ■■■■■■■                         
-#> Waiting 60s for rate limit ■■■■■■■■                        
-#> Waiting 60s for rate limit ■■■■■■■■■■                      
-#> Waiting 60s for rate limit ■■■■■■■■■■■                     
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■                   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■                  
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■                
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■               
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■             
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■            
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■          
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■         
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■       
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■      
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■    
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> Waiting 60s for rate limit ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
-#> [waiting] (2 + 2) -> 0 -> 0 | ■                                  0%
-#> [working] (0 + 30) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 165 × 4
 #>    prov_type first     last                npi
 #>    <chr>     <chr>     <chr>             <int>

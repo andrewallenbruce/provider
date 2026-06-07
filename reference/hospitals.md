@@ -215,18 +215,37 @@ hospitals2(
 ``` r
 hospitals(count = TRUE)
 #> hospitals Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 9,175
 #> • Pages : 2    
 #> 
 hospitals2(count = TRUE)
 #> hospitals2 Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 5,432
 #> • Pages : 4    
 #> 
 
 hospitals(prov_type = "reh", count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals returned 48 results.
 hospitals2(hosp_type = "reh", count = TRUE)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals2 returned 41 results.
 
 x <- hospitals(
@@ -235,7 +254,16 @@ x <- hospitals(
   subgroup = subgroups(
     acute = FALSE,
     psych = TRUE))
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals returned 2 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 x |> str()
 #> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "UHS OF ANCHOR L.P." "UHS OF PEACHFORD, L.P."
@@ -258,7 +286,14 @@ x |> str()
 #>  $ sub_group: chr [1:2] "Psych" "Psych, Psych Unit"
 
 hospitals2(ccn = x$ccn)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals2 returned 2 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> # A tibble: 2 × 10
 #>   ccn    org_name       prov_type status rating address city  state zip   county
 #>   <chr>  <chr>          <chr>     <chr>   <int> <chr>   <chr> <chr> <chr> <chr> 
@@ -267,10 +302,15 @@ hospitals2(ccn = x$ccn)
 
 x <- hospitals2()
 #> hospitals2 Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 5,432
 #> • Pages : 4    
 #> 
 #> ✔ Returning first 10 rows
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 x
 #> # A tibble: 10 × 10
 #>    ccn    org_name      prov_type status rating address city  state zip   county
@@ -287,7 +327,15 @@ x
 #> 10 010021 DALE MEDICAL… Acute Ca… Gover…     NA 126 HO… OZARK AL    36360 DALE  
 
 hospitals(ccn = x$ccn) |> str()
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals returned 9 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> hospitls [9 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:9] "HOUSTON COUNTY HEALTHCARE AUTHORITY" "HH HEALTH SYSTEM - MARSHALL LLC" "RCHP - FLORENCE LLC" "MIZELL MEMORIAL HOSPITAL, INC." ...
 #>  $ org_dba  : chr [1:9] "SOUTHEAST HEALTH MEDICAL CENTER" "MARSHALL MEDICAL CENTERS" "NORTH ALABAMA MEDICAL CENTER" NA ...
@@ -309,7 +357,16 @@ hospitals(ccn = x$ccn) |> str()
 #>  $ sub_group: chr [1:9] "Acute" "Acute, General" "Acute, General" "Acute, Swing-Bed, Psych Unit" ...
 
 hospitals2(state = "GA", rating = 5) |> str()
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ hospitals2 returned 6 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> hosptls2 [6 × 10] (S3: hospitals2/tbl_df/tbl/data.frame)
 #>  $ ccn      : chr [1:6] "110016" "110050" "110128" "110200" ...
 #>  $ org_name : chr [1:6] "WELLSTAR WEST GEORGIA MEDICAL CENTER" "ADVENTHEALTH MURRAY" "MEMORIAL HEALTH MEADOWS HOSPITAL" "PIEDMONT COLUMBUS REGIONAL NORTHSIDE" ...

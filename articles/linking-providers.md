@@ -79,6 +79,10 @@ hospitals(org_name = "Elizabethtown Community Hospital")
 #> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, reh_date <date>, prov_type <chr>, sub_group <chr>
 clinicians(org_name = "Elizabethtown Community Hospital")
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clinicians returned 77 results.
 #> # A tibble: 77 × 17
 #>    first    last      gender cred  school grad_year specialty    npi pac   enid 
@@ -125,6 +129,14 @@ providers practicing at this hospital. First, the all-numeric CCN
 ``` r
 
 ccn <- affiliations(facility_ccn = 331302)
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ affiliations returned 334 results.
 list(
   organization = as.data.frame(t(unique(ccn[6:8]))),
@@ -141,7 +153,14 @@ search the alphanumeric CCN (`33Z302`):
 ``` r
 
 ccn2 <- affiliations(facility_ccn = "33Z302")
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ affiliations returned 6 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 list(
   organization = as.data.frame(t(unique(ccn2[6:8]))), 
   individual = unique(ccn2[1:5]))

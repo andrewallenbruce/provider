@@ -201,12 +201,26 @@ complexity:
 ``` r
 clia(count = TRUE)
 #> clia Totals
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> • Rows  : 676,051
 #> • Pages : 136    
 #> 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clia returned 18 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> # A tibble: 18 × 21
 #>    fac_name   fac_ccn clia_ccn chows  labs sites address city  state zip   term 
 #>  * <chr>      <chr>   <chr>    <int> <int> <int> <chr>   <chr> <chr> <chr> <chr>
@@ -233,6 +247,13 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> #   elig_ind <int>, multi <chr>, acr_org <chr>
 
 clia(acr_org = c("cap", "cola", "jcaho")) |> str()
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clia returned 1 result.
 #> clia [1 × 21] (S3: clia/tbl_df/tbl/data.frame)
 #>  $ fac_name : chr "LEXINGTON MEDICAL CENTER-LABORATORY"
@@ -258,7 +279,19 @@ clia(acr_org = c("cap", "cola", "jcaho")) |> str()
 #>  $ acr_org  : chr "CAP, COLA, JCAHO"
 
 clia(multi = c("temp", "campus")) |> str()
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> ✔ clia returned 110 results.
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■                 
+#> Waiting 2s for throttling delay ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  
 #> clia [110 × 21] (S3: clia/tbl_df/tbl/data.frame)
 #>  $ fac_name : chr [1:110] "UAB UNIVERSITY OF ALABAMA HOSPITAL LAB" "BBAHC KANAKANAK HOSPITAL" "ST JOSEPH'S HOSPITAL & MEDICAL CENTER" "UAMS DEPT OF LABORATORY SCIENCES" ...
 #>  $ fac_ccn  : chr [1:110] "01D0678593" "02D0706717" "03D0526691" "04D2160128" ...

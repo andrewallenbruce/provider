@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9219 (2026-06-07)
+
+- trying to get throttling problem under control
+
 ## provider 0.0.1.9218 (2026-06-06)
 
 - fixed
