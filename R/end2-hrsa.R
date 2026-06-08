@@ -15,6 +15,8 @@
 #' hrsa_layers()
 #' hrsa_fields("snf_all")
 #' @source [API: HRSA](https://data.hrsa.gov/tools/web-services/registration#serviceInfo)
+#' @noRd
+#' @keywords internal
 NULL
 
 #' @noRd
@@ -44,25 +46,25 @@ hrsa_facility <- function(x) {
 }
 
 #' @rdname hrsa
-#' @export
+#' @noRd
 hrsa_items <- function() {
   data_frame(arcgislayers::list_items(hrsa_open()))
 }
 
 #' @rdname hrsa
-#' @export
+#' @noRd
 hrsa_layers <- function() {
   arcgislayers::get_all_layers(hrsa_open())$layers
 }
 
 #' @rdname hrsa
-#' @export
+#' @noRd
 hrsa_fields <- function(facility) {
   arcgislayers::list_fields(hrsa_layers()[[hrsa_facility(facility)]])
 }
 
 #' @rdname hrsa
-#' @export
+#' @noRd
 hrsa_select <- function(facility, ...) {
   arcgislayers::arc_select(
     x = hrsa_layers()[[hrsa_facility(facility)]],

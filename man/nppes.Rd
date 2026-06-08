@@ -2,7 +2,6 @@
 % Please edit documentation in R/end2-nppes.R
 \name{nppes}
 \alias{nppes}
-\alias{wildcard}
 \title{National Registry of Health Care Providers}
 \usage{
 nppes(
@@ -20,8 +19,6 @@ nppes(
   zip = NULL,
   country = NULL
 )
-
-wildcard(x)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
@@ -50,23 +47,13 @@ parameter besides \code{entity} or \code{country} is required.}
 
 \item{country}{\verb{<chr>} Country abbreviation. Can be the only input if
 it \emph{is not} \code{"US"}.}
-
-\item{x}{\verb{<chr>} input}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
-
-A \verb{<wildcard>} object
 }
 \description{
 Search the National Plan and Provider Enumeration System (NPPES)
 NPI Registry, a free directory of all active NPI records.
-
-Trailing Wildcard Entries
-
-Arguments that allow trailing wildcard entries are denoted in the parameter
-description with \verb{<WC>}. Wildcard entries require at least two characters to
-be entered, e.g. \code{"jo*"}
 }
 \section{\strong{National Provider Identifier (NPI)}}{
  Healthcare providers acquire
@@ -135,7 +122,6 @@ program.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 nppes(npi = 1528060837)
 \dontshow{\}) # examplesIf}
-wildcard("Jo")
 }
 \references{
 \itemize{

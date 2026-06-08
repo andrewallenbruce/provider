@@ -21,8 +21,6 @@ key <- provider:::new_data_frame(
   )
 )
 
-# collapse::any_duplicated(key$number)
-
 # TBL 2: BASIC
 basic <- set_names(x$basic, x$number) |>
   collapse::unlist2d(idcols = c("number", "var")) |>
@@ -50,9 +48,10 @@ basic <- collapse::ss(
     values = "V1",
     check.dups = TRUE
   ) |>
-  rc_integer("number") |>
   rc_bin("sole") |>
   rc_ymd(c("enum_date", "cert_date", "updated"))
+
+collapse::settransformv(basic, "number", as.integer)
 
 key <- collapse::join(key, basic, on = "number") |>
   collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
@@ -84,7 +83,6 @@ o_names <- set_names(x$other_names, x$number) |>
     "last" = "last_name",
     .nse = FALSE
   ) |>
-  rc_integer("code") |>
   collapse::gv(c(
     "number",
     "code",
@@ -94,11 +92,14 @@ o_names <- set_names(x$other_names, x$number) |>
   )) |>
   collapse::add_stub(stub = "o_", cols = -1)
 
-o_names <- cheapr::new_df(
-  number = as.integer(o_names$number),
-  onames = list(o_names[-1])
-) |>
-  collapse::qTBL()
+collapse::settransformv(o_names, "o_code", as.integer)
+
+o_names <- cheapr::as_df(o_names)
+res <- vctrs::vec_split(o_names[colnames(o_names)[-1]], o_names["number"])
+o_names <- vctrs::vec_cbind(
+  res$key,
+  tibble::new_tibble(list(o_names = res$val))
+)
 
 key <- collapse::join(key, o_names, on = "number") |>
   collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
@@ -113,7 +114,7 @@ key <- collapse::join(key, o_names, on = "number") |>
     "enum_date",
     "cert_date",
     "updated",
-    "onames"
+    "o_names"
   ))
 
 # 1 = Other (Non-Medicare)
@@ -130,15 +131,11 @@ id <- set_names(x$identifiers, x$number) |>
 
 collapse::setv(id$i_issuer, NA, "Medicaid")
 
-id
+id <- cheapr::as_df(id)
+res <- vctrs::vec_split(id[colnames(id)[-1]], id["number"])
+id <- vctrs::vec_cbind(res$key, tibble::new_tibble(list(id = res$val)))
 
-id <- cheapr::new_df(
-  number = as.integer(id$number),
-  ids = list(id[-1])
-) |>
-  collapse::qTBL()
-
-key <- collapse::join(key, o_names, on = "number") |>
+key <- collapse::join(key, id, on = "number") |>
   collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
   collapse::gv(c(
     "number",
@@ -151,7 +148,8 @@ key <- collapse::join(key, o_names, on = "number") |>
     "enum_date",
     "cert_date",
     "updated",
-    "onames"
+    "o_names",
+    "id"
   ))
 
 
@@ -173,48 +171,32 @@ tx <- set_names(x$taxonomies, x$number) |>
     "state",
     "group"
   )) |>
-  # c("number", "primary")
-  rc_integer(c("number")) |>
   collapse::roworderv(c("number", "primary"), decreasing = TRUE) |>
-  collapse::add_stub(stub = "tx_", cols = -1) |>
-  collapse::fcount(number, add = TRUE)
+  collapse::add_stub(stub = "tx_", cols = -1)
 
+collapse::settransformv(tx, "number", as.integer)
 
-# vctrs::vec_identify_runs(tx$number)
-# vctrs::vec_run_sizes(tx$number)
-# vctrs::vec_unrep(tx$number)
-#
-# tx2 <- collapse::sbt(tx, N == 2L) |>
-#   collapse::fgroup_by(number) |>
-#   collapse::mtt(
-#     tx_code2 = cheapr::lag_(tx_code),
-#     tx_equal = tx_code == tx_code2
-#     ) |>
-#   collapse::colorder(tx_code, tx_code2, tx_equal) |>
-#   collapse::fungroup()
-#
-# tx2 <- collapse::rowbind(
-#   collapse::sbt(tx2, tx_primary),
-#   collapse::sbt(tx2, !tx_equal)) |>
-#   collapse::gv(c(
-#     "number",
-#     "tx_code",
-#     "tx_desc",
-#     "tx_license",
-#     "tx_primary",
-#     "tx_state",
-#     "tx_group"
-#   )) |>
-#   collapse::roworderv(c("number", "tx_primary"))
-#
-# collapse::sbt(tx, N == 3L) |>
-#   collapse::fgroup_by(number) |>
-#   collapse::mtt(
-#     tx_code2 = cheapr::lag_(tx_code),
-#     tx_equal = tx_code == tx_code2
-#   ) |>
-#   collapse::colorder(tx_code, tx_code2, tx_equal) |>
-#   collapse::fungroup()
+tx <- cheapr::as_df(tx)
+res <- vctrs::vec_split(tx[colnames(tx)[-1]], tx["number"])
+tx <- vctrs::vec_cbind(res$key, tibble::new_tibble(list(tx = res$val)))
+
+key <- collapse::join(key, tx, on = "number") |>
+  collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
+  collapse::gv(c(
+    "number",
+    "entity",
+    "cred",
+    "first",
+    "last",
+    "sex",
+    "sole",
+    "enum_date",
+    "cert_date",
+    "updated",
+    "o_names",
+    "id",
+    "tx"
+  ))
 
 # TBL 4: PRACTICE LOCATIONS
 location <- set_names(x$practiceLocations, x$number) |>
@@ -307,6 +289,30 @@ address <- collapse::rowbind(
   location,
   address
 ) |>
-  collapse::roworderv(c("number", "address", "purpose")) |>
-  collapse::fcountv("number", add = TRUE) |>
-  collapse::roworderv("N", decreasing = TRUE)
+  collapse::roworderv(c("number", "address", "purpose"))
+
+address <- cheapr::as_df(address)
+res <- vctrs::vec_split(address[colnames(address)[-1]], address["number"])
+address <- vctrs::vec_cbind(
+  res$key,
+  tibble::new_tibble(list(address = res$val))
+)
+
+key <- collapse::join(key, address, on = "number") |>
+  collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
+  collapse::gv(c(
+    "number",
+    "entity",
+    "cred",
+    "first",
+    "last",
+    "sex",
+    "sole",
+    "enum_date",
+    "cert_date",
+    "updated",
+    "address",
+    "o_names",
+    "id",
+    "tx"
+  ))

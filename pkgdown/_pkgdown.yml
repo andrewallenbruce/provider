@@ -83,37 +83,21 @@ navbar:
 
 reference:
 - title: Endpoints
-- subtitle: Individual
-  desc: >
-    Demographics, credentials, and eligibility for individuals.
-  contents:
-  - reassignments
-  - clinicians
-  - opt_out
-  - order_refer
-  - pending
-  - providers
-- subtitle: Organizational
-  desc: >
-    Facility-level data, laboratory certifications, and clinic enrollments.
-  contents:
-  - clia
-  - dialysis
-  - facility
-  - owner
-  - hospitals
-  - hrsa
-- subtitle: Registry
-  desc: >
-    Core identity (NPI) and relationship mapping between individuals and orgs.
   contents:
   - affiliations
+  - clia
+  - clinicians
+  - dialysis
+  - facility
+  - hospitals
   - nppes
-- subtitle: Compliance
-  desc: >
-    Sanctioned providers and price transparency enforcement.
-  contents:
+  - opt_out
+  - order_refer
+  - owner
+  - pending
+  - providers
   - quality
+  - reassignments
   - revocations
   - transparency
   - utilization
