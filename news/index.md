@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9224 (2026-06-08)
+
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  polishing
+
 ## provider 0.0.1.9223 (2026-06-07)
 
 - removed more dead code

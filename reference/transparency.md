@@ -118,11 +118,17 @@ transparency(
 ``` r
 transparency(count = TRUE)
 #> transparency Totals
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> • Rows  : 11,440
+#> • Pages : 3     
+#> 
 
 transparency(count = TRUE, action = "met")
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> ✔ transparency returned 3,340 results.
 
 transparency(state = "GA", city = "Valdosta")
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> ✔ transparency returned 1 result.
+#> # A tibble: 1 × 7
+#>    case fac_name         address             city     state action   action_date
+#>   <int> <chr>            <chr>               <chr>    <chr> <chr>    <date>     
+#> 1  6131 Greenleaf Center 2209 Pineview Drive Valdosta GA    Met Req… 2025-08-01 
 ```
