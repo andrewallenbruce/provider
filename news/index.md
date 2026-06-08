@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9223 (2026-06-07)
+
+- removed more dead code
+- simplified count requests
+- `set_rename`/`get_columns` now uses class of object to retrieve name
+  remapping scheme
+- added tests for `url_cms_list`
+
 ## provider 0.0.1.9222 (2026-06-07)
 
 - made `report_pages` generic
