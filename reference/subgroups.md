@@ -78,16 +78,16 @@ subgroups(
 
 ## Value
 
-A `<subgroups>` object
+A `<Subgroups>` object
 
 ## Examples
 
 ``` r
 subgroups(acute = TRUE, rehab = FALSE)
-#> <subgroups[2]>
+#> <Subgroups[2]>
 #> • SUBGROUP %2D ACUTE CARE     : Y
 #> • SUBGROUP %2D REHABILITATION : N
 
 subgroups()
-#> <subgroups[0]>
+#> <Subgroups[0]>
 ```

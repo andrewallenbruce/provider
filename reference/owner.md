@@ -104,21 +104,6 @@ Medicare
 ## Examples
 
 ``` r
-owner(count = TRUE)
-#> owner Totals
-#> • Rows  : 526,704
-#> • Pages : 109    
-#> 
-
-owner(state = c("GA", "FL"), count = TRUE)
-#> ✔ owner returned 8,462 results.
-#> • HHA      : 1,799
-#> • RHC      : 136  
-#> • FQHC     : 254  
-#> • SNF      : 4,175
-#> • Hospice  : 1,961
-#> • Hospital : 137  
-
 owner(city = "Valdosta", state = "GA")
 #> ✔ owner returned 13 results.
 #> • HHA      : 2

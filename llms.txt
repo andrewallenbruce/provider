@@ -328,13 +328,12 @@ occasionally assist with some of these duties.
   : Reassignment of Benefits
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
   : Revoked Providers & Suppliers
+- [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  : Hospital Subgroups
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
   : Provider Utilization & Demographics by Year
-
-## Query Modifiers
-
 - [`excludes()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`starts()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)

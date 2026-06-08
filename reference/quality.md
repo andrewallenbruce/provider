@@ -92,24 +92,18 @@ adjustments.
 
 ``` r
 quality(count = TRUE)
-#> Warning: downloaded length 0 != reported length 795
-#> Warning: cannot open URL 'https://data.cms.gov/data.json': HTTP status was '429 Unknown Error'
-#> Error in download.file(url = .url, destfile = .destfile, method = .method,     quiet = !verbose, headers = .headers): cannot open URL 'https://data.cms.gov/data.json'
+#> quality Totals
+#> • Rows  : 6,154,354
+#> • Pages : 1,233    
 
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
-#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
-#> Caused by error in `httr2::req_perform()`:
-#> ! HTTP 429 Too Many Requests.
+#> ✔ quality returned 41,788 results.
+#> • 2021 : 23,617
+#> • 2024 : 18,171
 
-quality(npi = 1043245657)
-#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
-#> Caused by error in `httr2::req_perform()`:
-#> ! HTTP 429 Too Many Requests.
+# quality(npi = 1043245657)
 
-quality(npi = c(1003026055, 1316939655))
-#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
-#> Caused by error in `httr2::req_perform()`:
-#> ! HTTP 429 Too Many Requests.
+# quality(npi = c(1003026055, 1316939655))
 
 metrics()
 #> # A tibble: 32 × 4

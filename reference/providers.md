@@ -81,18 +81,26 @@ providers(
 ``` r
 providers(count = TRUE)
 #> providers Totals
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> • Rows  : 2,981,799
+#> • Pages : 597      
 
 providers(count = TRUE, org_name = not_blank())
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
-
-providers()
-#> providers Totals
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> ✔ providers returned 433,496 results.
 
 providers(org_name = starts("AB"), state = c("TX", "CA"))
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
-
-providers(org_name = starts("U"), count = TRUE)
-#> Error in httr2::req_perform(httr2::request(url)): HTTP 429 Too Many Requests.
+#> ✔ providers returned 231 results.
+#> # A tibble: 231 × 10
+#>    org_name       first last  state prov_type prov_desc    npi multi pac   enid 
+#>    <chr>          <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
+#>  1 ABUL H SHIRAZ… NA    NA    CA    12-70     PART B S… 1.00e9     0 0941… O200…
+#>  2 ABC MEDICAL C… NA    NA    CA    12-70     PART B S… 1.01e9     0 4486… O200…
+#>  3 ABC MEDICINE … NA    NA    CA    12-A5     PART B S… 1.02e9     0 8921… O201…
+#>  4 ABC MEDICINE … NA    NA    CA    30-A5     DME SUPP… 1.02e9     0 8921… O201…
+#>  5 ABRX PHARMACY… NA    NA    CA    12-A5     PART B S… 1.02e9     0 1557… O202…
+#>  6 ABRI MD GROUP… NA    NA    CA    12-70     PART B S… 1.03e9     0 4082… O202…
+#>  7 ABBAS KASHANI… NA    NA    CA    12-70     PART B S… 1.06e9     0 9830… O200…
+#>  8 ABSOLUTE COMP… NA    NA    CA    00-08     PART A P… 1.06e9     0 7416… O201…
+#>  9 ABDULLAH IBIS… NA    NA    CA    12-70     PART B S… 1.07e9     0 8820… O202…
+#> 10 ABSOLUTE CARE… NA    NA    CA    00-06     PART A P… 1.08e9     0 5496… O201…
+#> # ℹ 221 more rows
 ```

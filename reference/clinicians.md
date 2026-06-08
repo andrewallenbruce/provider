@@ -125,35 +125,6 @@ A Clinician or Group must have:
 ## Examples
 
 ``` r
-clinicians(count = TRUE)
-#> clinicians Totals
-#> • Rows  : 3,378,753
-#> • Pages : 2,253    
-#> 
-clinicians(org_name = not_blank(), count = TRUE)
-#> ✔ clinicians returned 3,030,173 results.
-
-clinicians(enid = "I20081002000549") |> str()
-#> ✔ clinicians returned 1 result.
-#> clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
-#>  $ first    : chr "DOROTHY"
-#>  $ last     : chr "MCCURLEY"
-#>  $ gender   : chr "F"
-#>  $ cred     : chr "AU"
-#>  $ school   : chr "OTHER"
-#>  $ grad_year: int 2008
-#>  $ specialty: chr "QUALIFIED AUDIOLOGIST"
-#>  $ npi      : int 1407031495
-#>  $ pac      : chr "8022186162"
-#>  $ enid     : chr "I20081002000549"
-#>  $ org_name : chr NA
-#>  $ org_pac  : chr NA
-#>  $ members  : int NA
-#>  $ address  : chr "457 WASHINGTON ST SE, SUITE D"
-#>  $ city     : chr "ALBUQUERQUE"
-#>  $ state    : chr "NM"
-#>  $ zip      : chr "871082713"
-
 clinicians(first = "Etan")
 #> ✔ clinicians returned 12 results.
 #> # A tibble: 12 × 17
@@ -173,11 +144,4 @@ clinicians(first = "Etan")
 #> 12 ETAN  SUGARMAN M      NA    ALBERT EI…      2011 ORTHOPED… 1.24e9 0244… I202…
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
-
-clinicians(members = not_blank(), count = TRUE)
-#> ✔ clinicians returned 3,030,172 results.
-clinicians(members = is_blank(), count = TRUE)
-#> ✔ clinicians returned 348,581 results.
-clinicians(members = 100, count = TRUE)
-#> ✔ clinicians returned 3,884 results.
 ```

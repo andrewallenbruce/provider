@@ -106,20 +106,6 @@ Medicare
 ## Examples
 
 ``` r
-facility(count = TRUE)
-#> facility Totals
-#> • Rows  : 48,592
-#> • Pages : 13    
-#> 
-
-facility(state = c("GA", "FL"), count = TRUE)
-#> ✔ facility returned 3,517 results.
-#> • HHA     : 1,173
-#> • RHC     : 220  
-#> • FQHC    : 768  
-#> • SNF     : 1,044
-#> • Hospice : 312  
-
 facility(city = "Valdosta", state = "GA")
 #> ✔ facility returned 12 results.
 #> • HHA     : 2
