@@ -16,10 +16,7 @@
 #' @param status `<enum>` `Non-profit` or `Profit`
 #' @param address,city,state,zip,county `<chr>` Facility's city, state, zip, county
 #' @examplesIf httr2::is_online()
-#' dialysis(count = TRUE)
-#' dialysis(count = TRUE, rating = 1:5)
-#' dialysis(count = TRUE, org_name = "DaVita")
-#' dialysis(rating = 1)
+#' dialysis(org_name = "DaVita")
 #' @export
 dialysis <- function(
   fac_ccn = NULL,

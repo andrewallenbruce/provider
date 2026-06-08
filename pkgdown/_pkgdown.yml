@@ -99,9 +99,7 @@ reference:
   - quality
   - reassignments
   - revocations
+  - subgroups
   - transparency
   - utilization
-
-- title: Query Modifiers
-  contents:
   - modifier

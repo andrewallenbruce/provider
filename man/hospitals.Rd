@@ -147,27 +147,16 @@ hospital rating.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-hospitals(count = TRUE)
-hospitals2(count = TRUE)
-
 hospitals(prov_type = "reh", count = TRUE)
+
 hospitals2(hosp_type = "reh", count = TRUE)
 
-x <- hospitals(
-  city = "Atlanta",
-  state = "GA",
-  subgroup = subgroups(
-    acute = FALSE,
-    psych = TRUE))
-x |> str()
+x <- subgroups(acute = FALSE, psych = TRUE)
 
-hospitals2(ccn = x$ccn)
+hospitals(city = "Atlanta", state = "GA", subgroup = x)
 
-x <- hospitals2()
-x
+hospitals2(ccn = hospitals()$ccn)
 
-hospitals(ccn = x$ccn) |> str()
-
-hospitals2(state = "GA", rating = 5) |> str()
+hospitals(ccn = hospitals2()$ccn)
 \dontshow{\}) # examplesIf}
 }

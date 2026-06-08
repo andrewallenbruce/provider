@@ -73,10 +73,6 @@ Facilities enrolled in Medicare.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-facility(count = TRUE)
-
-facility(state = c("GA", "FL"), count = TRUE)
-
 facility(city = "Valdosta", state = "GA")
 \dontshow{\}) # examplesIf}
 }

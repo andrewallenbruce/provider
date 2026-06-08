@@ -111,7 +111,7 @@ method(report_total, API) <- function(x) {
     ),
     bullet_col = "silver"
   )
-  cli::cli_text()
+  invisible(x)
 }
 
 #' @noRd
@@ -128,5 +128,5 @@ method(report_total, CMSList) <- function(x) {
     ),
     bullet_col = "silver"
   )
-  cli::cli_text()
+  invisible(x)
 }

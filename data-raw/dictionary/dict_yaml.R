@@ -1,16 +1,16 @@
 library(yaml12)
 
 
-apis <- c(
-  main = c(
+apis <- list(
+  main = list(
     hospitals = "Hospital Enrollments",
     laboratories = "Provider of Services File - Clinical Laboratories",
     order_refer = "Order and Referring",
-    providers = "Medicare Fee-For-Service  Public Provider Enrollment",
+    providers = "Medicare Fee-For-Service Public Provider Enrollment",
     reassignments = "Revalidation Reassignment List",
-    opt_out = "Opt Out Affidavits",
+    opt_out = "Opt Out Affidavits"
   ),
-  other = c(
+  other = list(
     affiliations = "Facility Affiliation Data",
     clinicians = "National Downloadable File",
     open_payments = "General Payment Data"
@@ -31,4 +31,4 @@ x <- list(
   )
 )
 
-format_yaml(x) |> cat("\n")
+format_yaml(apis) |> cat("\n")

@@ -33,8 +33,6 @@ been processed by CMS contractors.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 pending(count = TRUE)
 
-pending(first = "Victor", count = TRUE)
-
 pending(first = starts("V"))
 \dontshow{\}) # examplesIf}
 }

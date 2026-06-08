@@ -163,11 +163,10 @@ method(execute, CMSList) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {
-    report_total(x)
 
     switch(
       x@action,
-      count = return(x@count),
+      count = return(report_total(x)),
       set = return(request_multi(x)),
       return(request_preview(x))
     )

@@ -52,18 +52,11 @@
 #' @param active `<lgl>` Return only active labs
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
-#' @param poc `<lgl>` Indicates provider is in compliance with Plan of
-#'   Correction.
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
-#' clia(count = TRUE)
-#'
 #' clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #'
-#' clia(acr_org = c("cap", "cola", "jcaho")) |> str()
-#'
-#' clia(multi = c("temp", "campus")) |> str()
-#'
+#' clia(acr_org = c("cap", "cola", "jcaho"))
 #' @export
 clia <- function(
   fac_name = NULL,
@@ -78,7 +71,6 @@ clia <- function(
   chows = NULL,
   active = NULL,
   eligible = NULL,
-  poc = NULL,
   count = FALSE,
   set = FALSE
 ) {
@@ -86,7 +78,6 @@ clia <- function(
   check_char_(acr_org)
   check_bool_(active)
   check_bool_(eligible)
-  check_bool_(poc)
 
   x <- cms(
     count = count,
@@ -101,7 +92,6 @@ clia <- function(
     CHOW_CNT = chows,
     PGM_TRMNTN_CD = tag_active(active),
     ELGBLTY_SW = tag_bool(eligible),
-    ACPTBL_POC_SW = tag_bool(poc),
     !!!tag_acr_org(acr_org),
     !!!tag_multi(multi)
   )

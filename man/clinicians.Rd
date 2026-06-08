@@ -86,15 +86,6 @@ A Clinician or Group must have:
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-clinicians(count = TRUE)
-clinicians(org_name = not_blank(), count = TRUE)
-
-clinicians(enid = "I20081002000549") |> str()
-
 clinicians(first = "Etan")
-
-clinicians(members = not_blank(), count = TRUE)
-clinicians(members = is_blank(), count = TRUE)
-clinicians(members = 100, count = TRUE)
 \dontshow{\}) # examplesIf}
 }

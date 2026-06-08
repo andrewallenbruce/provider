@@ -69,11 +69,7 @@ Eligibility to order and refer within Medicare
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 order_refer(count = TRUE)
 
-order_refer(npi = 1003026055)
-
 order_refer(first = "Jennifer", last = "Smith")
-
-order_refer(ptb = TRUE, dme = TRUE, hha = FALSE, pmd = TRUE, hospice = FALSE)
 \dontshow{\}) # examplesIf}
 }
 \references{

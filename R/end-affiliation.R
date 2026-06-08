@@ -26,18 +26,8 @@
 #'    unit where the individual provider provides services.
 #' @returns A [tibble][tibble::tibble-package]
 #' @examplesIf httr2::is_online()
-#' affiliations(count = TRUE)
-#'
-#' affiliations(count = TRUE, facility_ccn = 331302)
-#'
-#' affiliations()
-#'
 #' affiliations(parent_ccn = 331302)
-#'
 #' affiliations(facility_ccn = 331302)
-#'
-#' affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
-#'
 #' @export
 affiliations <- function(
   npi = NULL,

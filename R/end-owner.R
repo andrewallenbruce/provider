@@ -27,10 +27,6 @@
 #' @param first,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
 #' @examplesIf httr2::is_online()
-#' owner(count = TRUE)
-#'
-#' owner(state = c("GA", "FL"), count = TRUE)
-#'
 #' owner(city = "Valdosta", state = "GA")
 #'
 #' @export

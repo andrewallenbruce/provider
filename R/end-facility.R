@@ -32,10 +32,6 @@
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
 #' @examplesIf httr2::is_online()
-#' facility(count = TRUE)
-#'
-#' facility(state = c("GA", "FL"), count = TRUE)
-#'
 #' facility(city = "Valdosta", state = "GA")
 #'
 #' @export

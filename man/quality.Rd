@@ -69,9 +69,9 @@ quality(count = TRUE)
 
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
 
-quality(npi = 1043245657)
+# quality(npi = 1043245657)
 
-quality(npi = c(1003026055, 1316939655))
+# quality(npi = c(1003026055, 1316939655))
 
 metrics()
 \dontshow{\}) # examplesIf}

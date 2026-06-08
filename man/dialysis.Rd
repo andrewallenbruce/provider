@@ -51,9 +51,6 @@ care provided.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-dialysis(count = TRUE)
-dialysis(count = TRUE, rating = 1:5)
-dialysis(count = TRUE, org_name = "DaVita")
-dialysis(rating = 1)
+dialysis(org_name = "DaVita")
 \dontshow{\}) # examplesIf}
 }

@@ -48,7 +48,7 @@ subgroups(
 \item{other}{\verb{<lgl>} Unlisted on CMS form}
 }
 \value{
-A \verb{<subgroups>} object
+A \verb{<Subgroups>} object
 }
 \description{
 Hospital Subgroups
@@ -59,4 +59,3 @@ subgroups(acute = TRUE, rehab = FALSE)
 subgroups()
 
 }
-\keyword{internal}

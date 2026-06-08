@@ -127,8 +127,8 @@ utilization(count = TRUE)
 
 utilization(npi = 1003000423)
 
-utilization(npi = 1003000126)
+# utilization(npi = 1003000126)
 
-utilization(npi = 1043477615)
+# utilization(npi = 1043477615)
 \dontshow{\}) # examplesIf}
 }

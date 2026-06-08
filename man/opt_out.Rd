@@ -69,20 +69,7 @@ fee-for-service (Part B).
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 opt_out(count = TRUE)
 
-opt_out(start_year = 2026, count = TRUE)
-
-opt_out(start_year = 2000)
-
-opt_out(npi = 1043522824) |> str()
-
-opt_out(state = "GA",
-        specialty = contains("Psych"),
-        order_refer = FALSE) |>
-        str()
-
-opt_out(state = "GA",
-        specialty = contains("Psych")) |>
-        str()
+opt_out(state = "GA", specialty = contains("Psych"))
 \dontshow{\}) # examplesIf}
 }
 \references{

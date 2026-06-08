@@ -23,11 +23,7 @@
 #'
 #' providers(count = TRUE, org_name = not_blank())
 #'
-#' providers()
-#'
 #' providers(org_name = starts("AB"), state = c("TX", "CA"))
-#'
-#' providers(org_name = starts("U"), count = TRUE)
 #'
 #' @export
 providers <- function(

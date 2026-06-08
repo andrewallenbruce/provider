@@ -19,8 +19,6 @@
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
 #'
-#' pending(first = "Victor", count = TRUE)
-#'
 #' pending(first = starts("V"))
 #'
 #' @export

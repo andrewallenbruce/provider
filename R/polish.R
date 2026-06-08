@@ -2,7 +2,7 @@
 polish <- S7::new_generic("polish", "x")
 
 #' @noRd
-S7::method(polish, S7::class_integer) <- function(x) {
+S7::method(polish, S7::class_integer | API) <- function(x) {
   invisible(x)
 }
 
@@ -36,7 +36,7 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
 
   set_rename(x)
   get_columns(x) |>
-    rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "eligible$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_address() |>
     rc_address("fac_name", "fac_2") |>

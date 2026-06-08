@@ -149,7 +149,7 @@ RE_NAME = list(
     HOSP_LAB_EXCPTN_SW = "hosp_multi",
     NON_PRFT_EXCPTN_SW = "non_multi",
     LAB_TEMP_TSTG_SITE_SW = "tmp_multi",
-    ELGBLTY_SW = "elig_ind"
+    ELGBLTY_SW = "eligible"
   ),
   clinicians = list(
     provider_first_name = "first",

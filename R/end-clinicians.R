@@ -39,16 +39,7 @@
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
 #' @param members `<int>` Number of members in Organization
 #' @examplesIf httr2::is_online()
-#' clinicians(count = TRUE)
-#' clinicians(org_name = not_blank(), count = TRUE)
-#'
-#' clinicians(enid = "I20081002000549") |> str()
-#'
 #' clinicians(first = "Etan")
-#'
-#' clinicians(members = not_blank(), count = TRUE)
-#' clinicians(members = is_blank(), count = TRUE)
-#' clinicians(members = 100, count = TRUE)
 #' @export
 clinicians <- function(
   npi = NULL,

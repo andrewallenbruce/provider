@@ -1,10 +1,10 @@
 describe("subgroups()", {
   x <- subgroups(acute = TRUE, other = FALSE)
   it("has expected class/data", {
-    expect_s7_class(x, subgroups)
+    expect_s7_class(x, Subgroups)
     expect_true(is_subgroups(x))
     expect_equal(
-      x@x,
+      S7_data(x),
       list(`SUBGROUP %2D ACUTE CARE` = "Y", `SUBGROUP %2D OTHER` = "N")
     )
   })

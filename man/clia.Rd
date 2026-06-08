@@ -28,7 +28,6 @@ clia(
   chows = NULL,
   active = NULL,
   eligible = NULL,
-  poc = NULL,
   count = FALSE,
   set = FALSE
 )
@@ -76,9 +75,6 @@ clia(
 
 \item{eligible}{\verb{<lgl>} Indicates lab is eligible to participate in
 Medicare/Medicaid.}
-
-\item{poc}{\verb{<lgl>} Indicates provider is in compliance with Plan of
-Correction.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
@@ -136,12 +132,8 @@ laboratory is accredited by one of the CMS-approved organizations:
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-clia(count = TRUE)
-
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 
-clia(acr_org = c("cap", "cola", "jcaho")) |> str()
-
-clia(multi = c("temp", "campus")) |> str()
+clia(acr_org = c("cap", "cola", "jcaho"))
 \dontshow{\}) # examplesIf}
 }
