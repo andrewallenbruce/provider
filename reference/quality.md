@@ -92,52 +92,24 @@ adjustments.
 
 ``` r
 quality(count = TRUE)
-#> quality Totals
-#> • Rows  : 6,154,354
-#> • Pages : 1,233    
-#> 
+#> Warning: downloaded length 0 != reported length 794
+#> Warning: cannot open URL 'https://data.cms.gov/data.json': HTTP status was '429 Unknown Error'
+#> Error in download.file(url = .url, destfile = .destfile, method = .method,     quiet = !verbose, headers = .headers): cannot open URL 'https://data.cms.gov/data.json'
 
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
-#> ✔ quality returned 41,788 results.
-#> • 2021 : 23,617
-#> • 2024 : 18,171
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! HTTP 429 Too Many Requests.
 
 quality(npi = 1043245657)
-#> ✔ quality returned 1 result.
-#> • 2017 : 1
-#> ✔ Retrieving 1 page
-#> # A tibble: 1 × 19
-#>    year state  size specialty years    npi patients charges services final_score
-#>   <int> <chr> <int> <chr>     <int>  <int>    <int>   <int>    <int>       <dbl>
-#> 1  2017 VT      936 Pathology    16 1.04e9    54678  4.47e7       NA        88.4
-#> # ℹ 9 more variables: adjustment <dbl>, complex_bonus <dbl>, qa_score <dbl>,
-#> #   pi_score <int>, part_opt <chr>, qi_score <dbl>, ia_score <int>,
-#> #   cost_score <dbl>, indicators <chr>
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! HTTP 429 Too Many Requests.
 
 quality(npi = c(1003026055, 1316939655))
-#> ✔ quality returned 10 results.
-#> • 2022 : 1
-#> • 2021 : 2
-#> • 2020 : 3
-#> • 2019 : 1
-#> • 2018 : 1
-#> • 2017 : 2
-#> ✔ Retrieving 6 pages
-#> # A tibble: 8 × 22
-#>    year state  size specialty years    npi patients charges services final_score
-#>   <int> <chr> <int> <chr>     <int>  <int>    <int>   <int>    <int>       <dbl>
-#> 1  2017 FL      189 Endocrin…     8 1.00e9    13189  5.84e6       NA        60  
-#> 2  2018 FL      135 Endocrin…     8 1.00e9    12317  5.02e6        0        57.7
-#> 3  2019 FL      150 Endocrin…     9 1.00e9    12415  5.62e6    52009        78.5
-#> 4  2020 FL      151 Endocrin…    10 1.00e9    12917  5.46e6    53599        51.0
-#> 5  2020 NY      295 Missing      16 1.32e9    22242  9.12e6   101308        93.2
-#> 6  2021 FL        9 Endocrin…    11 1.00e9     1181  6.98e5     7068        60  
-#> 7  2021 NY      455 Physicia…    17 1.32e9    23586  1.09e7   116187        91.1
-#> 8  2022 NY      352 Physicia…    18 1.32e9    23244  1.05e7   110514        80.3
-#> # ℹ 12 more variables: adjustment <dbl>, complex_bonus <dbl>, qa_score <dbl>,
-#> #   pi_score <int>, part_opt <chr>, qi_score <dbl>, ia_score <int>,
-#> #   cost_score <dbl>, indicators <chr>, cred <chr>, dual_ratio <dbl>,
-#> #   small_bonus <int>
+#> Error in purrr::map_int(url, base_request, query = query): ℹ In index: 1.
+#> Caused by error in `httr2::req_perform()`:
+#> ! HTTP 429 Too Many Requests.
 
 metrics()
 #> # A tibble: 32 × 4
