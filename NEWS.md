@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9226 (2026-06-08)
+
+* reduced number of examples so as not to violate rate limit
+
+
 # provider 0.0.1.9225 (2026-06-08)
 
 * nppes work
