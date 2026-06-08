@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9224 (2026-06-08)
+
+* `quality()` polishing
+
+
 # provider 0.0.1.9223 (2026-06-07)
 
 * removed more dead code
