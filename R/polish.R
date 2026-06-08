@@ -16,9 +16,8 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
-  collapse::setrename(x, RE_NAME[["affiliations"]], .nse = FALSE)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["affiliations"]]))
+  set_rename(x, "affiliations")
+  get_columns(x, "affiliations")
 }
 
 #' @noRd
@@ -35,10 +34,8 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
     as.integer
   )
 
-  collapse::setrename(x, RE_NAME[["clia"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["clia"]])) |>
+  set_rename(x, "clia")
+  get_columns(x, "clia") |>
     rc_bin(collapse::gvr(x, "_ind$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_address() |>
@@ -50,10 +47,8 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
   collapse::settfmv(x, c("npi", "grd_yr", "num_org_mem"), as.integer)
-  collapse::setrename(x, RE_NAME[["clinicians"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["clinicians"]])) |>
+  set_rename(x, "clinicians")
+  get_columns(x, "clinicians") |>
     rc_address() |>
     rc_address("specialty", "spec_other")
 }
@@ -61,10 +56,8 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
   collapse::settfmv(x, c("five_star", "network"), as.integer)
-  collapse::setrename(x, RE_NAME[["dialysis"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["dialysis"]])) |>
+  set_rename(x, "dialysis")
+  get_columns(x, "dialysis") |>
     rc_ymd("cert_date") |>
     rc_address()
 }
@@ -73,10 +66,8 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE)
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["facility"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["facility"]])) |>
+  set_rename(x, "facility")
+  get_columns(x, "facility") |>
     rc_address() |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
@@ -89,10 +80,8 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   rc_hospitals(x, "PROPRIETARY NONPROFIT")
   rc_hospitals(x, "PRACTICE LOCATION TYPE")
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["hospitals"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["hospitals"]])) |>
+  set_rename(x, "hospitals")
+  get_columns(x, "hospitals") |>
     rc_other(stub = "org") |>
     rc_other(stub = "loc") |>
     rc_address() |>
@@ -104,17 +93,15 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
   suppressWarnings(collapse::settfmv(x, "hospital_overall_rating", as.integer))
-  collapse::setrename(x, RE_NAME[["hospitals2"]], .nse = FALSE)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["hospitals2"]]))
+  set_rename(x, "hospitals2")
+  get_columns(x, "hospitals2")
 }
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["opt_out"]], .nse = FALSE)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["opt_out"]])) |>
+  set_rename(x, "opt_out")
+  get_columns(x, "opt_out") |>
     rc_address() |>
     rc_bin("order_refer") |>
     rc_mdy(c("start_date", "end_date", "updated"))
@@ -123,11 +110,9 @@ S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["order_refer"]], .nse = FALSE)
-  replace_nz(x)
-
-  rc_bin(x, collapse::gvr(x, "_ind$", return = 2L)) |>
-    collapse::gv(unlist_(RE_NAME[["order_refer"]]))
+  set_rename(x, "order_refer")
+  get_columns(x, "order_refer") |>
+    rc_bin(collapse::gvr(x, "_ind$", return = 2L))
 }
 
 #' @noRd
@@ -135,10 +120,8 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE)
   collapse::settfmv(x, "PERCENTAGE OWNERSHIP", as.double)
   rc_owner(x, "ROLE CODE - OWNER")
-  collapse::setrename(x, RE_NAME[["owner"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["owner"]])) |>
+  set_rename(x, "owner")
+  get_columns(x, "owner") |>
     rc_address() |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
@@ -148,18 +131,16 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
   x <- rowbind2(x, "prov_type", fill = TRUE)
-  collapse::setrename(x, RE_NAME[["pending"]], .nse = FALSE)
-  collapse::settfmv(x, "npi", as.integer)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["pending"]]))
+  collapse::settfmv(x, "NPI", as.integer)
+  set_rename(x, "pending")
+  get_columns(x, "pending")
 }
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["providers"]], .nse = FALSE)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["providers"]])) |>
+  set_rename(x, "providers")
+  get_columns(x, "providers") |>
     rc_bin("multi")
 }
 
@@ -222,18 +203,15 @@ S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
     ),
     as.integer
   )
-  collapse::setrename(x, RE_NAME[["reassignments"]], .nse = FALSE)
-  replace_nz(x)
-  collapse::gv(x, unlist_(RE_NAME[["reassignments"]]))
+  set_rename(x, "reassignments")
+  get_columns(x, "reassignments")
 }
 
 #' @noRd
 S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
-  collapse::setrename(x, RE_NAME[["revocations"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["revocations"]])) |>
+  set_rename(x, "revocations")
+  get_columns(x, "revocations") |>
     rc_bin("multi") |>
     rc_trim() |>
     rc_ymd(c("start_date", "end_date"))
@@ -242,10 +220,8 @@ S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
   collapse::settfmv(x, "Case_ID", as.integer)
-  collapse::setrename(x, RE_NAME[["transparency"]], .nse = FALSE)
-  replace_nz(x)
-
-  collapse::gv(x, unlist_(RE_NAME[["transparency"]])) |>
+  set_rename(x, "transparency")
+  get_columns(x, "transparency") |>
     rc_ymd("action_date") |>
     rc_trim()
 }
@@ -253,6 +229,7 @@ S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
 #' @noRd
 S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
   x <- rowbind2(x, "year", fill = TRUE)
+
   collapse::settfmv(
     x,
     c(
@@ -279,13 +256,10 @@ S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
     ),
     as.double
   )
-  collapse::setrename(x, RE_NAME[["utilization"]], .nse = FALSE)
-  replace_nz(x)
-
-  x <- collapse::gv(x, unlist_(RE_NAME[["utilization"]])) |>
+  set_rename(x, "utilization")
+  get_columns(x, "utilization") |>
     rc_bin("participating") |>
-    rc_address()
-
-  add_class(x, "utilization") |>
+    rc_address() |>
+    add_class("utilization") |>
     collapse::roworderv(c("year", "npi"))
 }

@@ -34,16 +34,6 @@ report_count <- new_generic("report_count", "x")
 report_pages <- new_generic("report_pages", "x")
 
 #' @noRd
-report_empty <- function() {
-  cli::cli_alert_warning(c(
-    "{.emph No Query} ",
-    cli::col_red(cli::symbol$pointer),
-    " Returning first {.strong 10} rows."
-  ))
-  cli::cli_text()
-}
-
-#' @noRd
 method(report_count, API) <- function(x) {
   msg <- c(
     "{.strong {x@end}} returned ",
@@ -86,8 +76,25 @@ method(report_count, CMSList) <- function(x) {
 
 #' @noRd
 method(report_pages, API) <- function(x) {
-  report_count(x)
-  cli::cli_alert_info("Retrieving {.strong {x@pages}} page{?s}...")
+  msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
+}
+
+#' @noRd
+method(report_pages, CMSList) <- function(x) {
+  URL <- x@url[names(which(x@count > 0L))]
+  msg <- cli::format_inline("Retrieving {.strong {length(URL)}} page{?s}")
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
 }
 
 #' @noRd

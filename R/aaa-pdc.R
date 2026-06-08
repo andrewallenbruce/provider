@@ -106,14 +106,7 @@ method(request_single, PDC) <- function(x) {
 #' @noRd
 method(request_multi, PDC) <- function(x) {
   report_count(x)
-
-  msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
-
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step(msg = msg)
-  } else {
-    cli::cli_alert_success(text = msg)
-  }
+  report_pages(x)
 
   res <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results")

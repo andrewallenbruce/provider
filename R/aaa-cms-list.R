@@ -89,22 +89,15 @@ method(request_preview, CMSList) <- function(x) {
 #' @noRd
 method(request_single, CMSList) <- function(x) {
   report_count(x)
+  report_pages(x)
 
-  URL <- x@url[names(which(x@count > 0L))]
+  u <- x@url[names(which(x@count > 0L))]
 
-  msg <- cli::format_inline("Retrieving {.strong {length(URL)}} page{?s}")
-
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step(msg = msg)
-  } else {
-    cli::cli_alert_success(text = msg)
-  }
-
-  y <- flatten_cms(URL, x@query) |>
+  y <- flatten_cms(u, x@query) |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
-    set_names2(URL)
+    set_names2(u)
 
   class(y) <- c(x@end, class(y))
 
@@ -116,28 +109,19 @@ method(request_single, CMSList) <- function(x) {
 #' @noRd
 method(request_multi, CMSList) <- function(x) {
   report_count(x)
+  report_pages(x)
 
-  END <- names(which(x@count > 0L))
+  i <- names(which(x@count > 0L))
+  u <- x@url[i]
+  n <- unname(x@count[i])
 
-  URL <- x@url[END]
-
-  N <- unname(x@count[END])
-
-  msg <- cli::format_inline("Retrieving {.strong {length(URL)}} page{?s}")
-
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step(msg = msg)
-  } else {
-    cli::cli_alert_success(text = msg)
-  }
-
-  y <- flatten_cms(URL, x@query, offset = "<<i>>") |>
-    offset3(N, x@limit) |>
+  y <- flatten_cms(u, x@query, offset = "<<i>>") |>
+    offset3(n, x@limit) |>
     unlist_() |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
-    set_names2(URL)
+    set_names2(u)
 
   class(y) <- c(x@end, class(y))
 

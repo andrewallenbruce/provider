@@ -11,7 +11,7 @@ collapse::gvr(x, "epoch|endpoints") <- NULL
 x
 
 # TBL 1: Primary Key
-key <- new_data_frame(
+key <- provider:::new_data_frame(
   number = as.integer(x$number),
   entity = cheapr::val_match(
     x$enumeration_type,
@@ -20,6 +20,8 @@ key <- new_data_frame(
     .default = NA_integer_
   )
 )
+
+# collapse::any_duplicated(key$number)
 
 # TBL 2: BASIC
 basic <- set_names(x$basic, x$number) |>
@@ -85,16 +87,37 @@ o_names <- set_names(x$other_names, x$number) |>
   rc_integer("code") |>
   collapse::gv(c(
     "number",
-    "cred",
     "code",
     "first",
-    "last"
+    "last",
+    "cred"
   )) |>
   collapse::add_stub(stub = "o_", cols = -1)
 
+o_names <- cheapr::new_df(
+  number = as.integer(o_names$number),
+  onames = list(o_names[-1])
+) |>
+  collapse::qTBL()
+
+key <- collapse::join(key, o_names, on = "number") |>
+  collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
+  collapse::gv(c(
+    "number",
+    "entity",
+    "cred",
+    "first",
+    "last",
+    "sex",
+    "sole",
+    "enum_date",
+    "cert_date",
+    "updated",
+    "onames"
+  ))
+
 # 1 = Other (Non-Medicare)
 # 5 = Medicaid
-# if cheapr::is_na(issuer) "Medicaid" else x
 id <- set_names(x$identifiers, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
@@ -102,10 +125,35 @@ id <- set_names(x$identifiers, x$number) |>
   collapse::qTBL() |>
   collapse::funique() |>
   collapse::rnm("id" = "identifier", .nse = FALSE) |>
-  collapse::gv(c("number", "id", "issuer", "state")) |>
+  collapse::gv(c("number", "state", "id", "issuer")) |>
   collapse::add_stub(stub = "i_", cols = -1)
 
 collapse::setv(id$i_issuer, NA, "Medicaid")
+
+id
+
+id <- cheapr::new_df(
+  number = as.integer(id$number),
+  ids = list(id[-1])
+) |>
+  collapse::qTBL()
+
+key <- collapse::join(key, o_names, on = "number") |>
+  collapse::roworderv(c("number", "updated"), decreasing = TRUE) |>
+  collapse::gv(c(
+    "number",
+    "entity",
+    "cred",
+    "first",
+    "last",
+    "sex",
+    "sole",
+    "enum_date",
+    "cert_date",
+    "updated",
+    "onames"
+  ))
+
 
 tx <- set_names(x$taxonomies, x$number) |>
   cheapr::list_drop_null() |>
@@ -125,24 +173,48 @@ tx <- set_names(x$taxonomies, x$number) |>
     "state",
     "group"
   )) |>
-  rc_integer("number") |>
-  collapse::roworderv("number") |>
+  # c("number", "primary")
+  rc_integer(c("number")) |>
+  collapse::roworderv(c("number", "primary"), decreasing = TRUE) |>
   collapse::add_stub(stub = "tx_", cols = -1) |>
-  collapse::rsplit(~tx_primary)
+  collapse::fcount(number, add = TRUE)
 
-tx$`TRUE`$tx_order <- 0L
 
-txg <- collapse::GRP(tx$`FALSE`, by = "number")
-collapse::gsplit(NULL, txg, use.g.names = TRUE)
-
-collapse::greorder(collapse::gsplit(tx$`FALSE`, txg), txg)
-
-tx$`FALSE` |>
-  collapse::add_vars(rid = collapse::seq_row(tx$`FALSE`))
-collapse::fgroup_by(number) |>
-  collapse::mtt(tx_order = collapse::fcumsum(as.numeric(number)))
-collapse::fcount(number, add = TRUE) |>
-  print(n = Inf)
+# vctrs::vec_identify_runs(tx$number)
+# vctrs::vec_run_sizes(tx$number)
+# vctrs::vec_unrep(tx$number)
+#
+# tx2 <- collapse::sbt(tx, N == 2L) |>
+#   collapse::fgroup_by(number) |>
+#   collapse::mtt(
+#     tx_code2 = cheapr::lag_(tx_code),
+#     tx_equal = tx_code == tx_code2
+#     ) |>
+#   collapse::colorder(tx_code, tx_code2, tx_equal) |>
+#   collapse::fungroup()
+#
+# tx2 <- collapse::rowbind(
+#   collapse::sbt(tx2, tx_primary),
+#   collapse::sbt(tx2, !tx_equal)) |>
+#   collapse::gv(c(
+#     "number",
+#     "tx_code",
+#     "tx_desc",
+#     "tx_license",
+#     "tx_primary",
+#     "tx_state",
+#     "tx_group"
+#   )) |>
+#   collapse::roworderv(c("number", "tx_primary"))
+#
+# collapse::sbt(tx, N == 3L) |>
+#   collapse::fgroup_by(number) |>
+#   collapse::mtt(
+#     tx_code2 = cheapr::lag_(tx_code),
+#     tx_equal = tx_code == tx_code2
+#   ) |>
+#   collapse::colorder(tx_code, tx_code2, tx_equal) |>
+#   collapse::fungroup()
 
 # TBL 4: PRACTICE LOCATIONS
 location <- set_names(x$practiceLocations, x$number) |>
@@ -170,7 +242,6 @@ location <- set_names(x$practiceLocations, x$number) |>
 collapse::settfmv(location, "number", as.character)
 collapse::settfmv(location, "number", as.integer)
 collapse::settfmv(location, "purpose", tolower)
-location
 
 # TBL 3: ADDRESS
 address <- set_names(x$addresses, x$number) |>
@@ -196,7 +267,6 @@ collapse::settfmv(address, "number", as.character)
 collapse::settfmv(address, "number", as.integer)
 collapse::settfmv(address, "purpose", tolower)
 
-
 address$phone <- cheapr::if_else_(
   cheapr::is_na(address$phone) & address$purpose == "mailing",
   cheapr::lag_(address$phone),
@@ -218,11 +288,6 @@ MM <- set_names(
   M$number
 )
 
-# x <- secretbase::shake256("secret base", bits = 32L, convert = NA)
-# y <- secretbase::shake256("secret base", bits = 32L, convert = NA)
-# identical(x, y)
-# waldo::compare(LL, MM, max_diffs = 200, quote_strings = FALSE)
-
 veq <- vctrs::vec_equal(LL, MM)
 both <- names(MM[cheapr::which_(veq, invert = TRUE)])
 one <- names(MM[cheapr::which_(veq)])
@@ -238,11 +303,10 @@ address <- collapse::rowbind(
 ) |>
   collapse::roworderv(c("number", "purpose"))
 
-collapse::rowbind(
+address <- collapse::rowbind(
   location,
   address
 ) |>
   collapse::roworderv(c("number", "address", "purpose")) |>
   collapse::fcountv("number", add = TRUE) |>
-  collapse::roworderv("N", decreasing = TRUE) |>
-  print(n = Inf)
+  collapse::roworderv("N", decreasing = TRUE)

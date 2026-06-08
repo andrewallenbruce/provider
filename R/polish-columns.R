@@ -1,47 +1,3 @@
-# 2017      == 17 + ALL
-# 2022      == 22 + ALL
-# 2023:2024 == 23 + 22 + ALL
-#' @noRd
-qpp_ALL = list(
-  year = "year",
-  `practice state or us territory` = "state",
-  `practice size` = "size",
-  `clinician specialty` = "specialty",
-  `years in medicare` = "years",
-  npi = "npi",
-  `medicare patients` = "patients",
-  `allowed charges` = "charges",
-  services = "services",
-  `opted into mips` = "opted_ind",
-  `final score` = "final_score",
-  `payment adjustment percentage` = "adjustment",
-  `complex patient bonus` = "complex_bonus",
-  `quality category score` = "qa_score",
-  `promoting interoperability (pi) category score` = "pi_score"
-)
-
-#' @noRd
-qpp_22 = list(
-  `clinician type` = "cred",
-  `non-reporting` = "non_report_ind",
-  `participation option` = "part_opt",
-  `small practice status` = "small_ind",
-  `rural status` = "rural_ind",
-  `health professional shortage area status` = "hpsa_ind",
-  `ambulatory surgical center-based status` = "asc_ind",
-  `hospital-based status` = "hospital_ind",
-  `non-patient facing status` = "non_patient_ind",
-  `facility-based status` = "facility_ind",
-  `dual eligibility ratio` = "dual_ratio",
-  `safety-net status` = "safety_ind",
-  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
-  `quality improvement score` = "qi_score",
-  `small practice bonus` = "small_bonus",
-  `improvement activities (ia) category score` = "ia_score",
-  `ia credit` = "ia_credit_ind",
-  `cost category score` = "cost_score"
-)
-
 #' @noRd
 RE_ENROLL = list(
   `ENROLLMENT ID` = "enid",
@@ -104,6 +60,50 @@ RE_OWNER2 = c(
   `REIT - OWNER` = "reit_ind",
   `CHAIN HOME OFFICE - OWNER` = "cho_ind",
   `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
+)
+
+# 2017      == 17 + ALL
+# 2022      == 22 + ALL
+# 2023:2024 == 23 + 22 + ALL
+#' @noRd
+qpp_ALL = list(
+  year = "year",
+  npi = "npi",
+  `practice state or us territory` = "state",
+  `practice size` = "size",
+  `clinician specialty` = "specialty",
+  `years in medicare` = "years",
+  `medicare patients` = "patients",
+  `allowed charges` = "charges",
+  services = "services",
+  `final score` = "final_score",
+  `payment adjustment percentage` = "adjustment",
+  `promoting interoperability (pi) category score` = "pi_score",
+  `quality category score` = "qa_score",
+  `complex patient bonus` = "complex_bonus",
+  `opted into mips` = "opted_ind"
+)
+
+#' @noRd
+qpp_22 = list(
+  `clinician type` = "cred",
+  `participation option` = "part_opt",
+  `dual eligibility ratio` = "dual_ratio",
+  `quality improvement score` = "qi_score",
+  `small practice bonus` = "small_bonus",
+  `improvement activities (ia) category score` = "ia_score",
+  `cost category score` = "cost_score",
+  `non-reporting` = "non_report_ind",
+  `safety-net status` = "safety_ind",
+  `extreme uncontrollable circumstance (euc)` = "extreme_ind",
+  `small practice status` = "small_ind",
+  `rural status` = "rural_ind",
+  `health professional shortage area status` = "hpsa_ind",
+  `ambulatory surgical center-based status` = "asc_ind",
+  `hospital-based status` = "hospital_ind",
+  `non-patient facing status` = "non_patient_ind",
+  `facility-based status` = "facility_ind",
+  `ia credit` = "ia_credit_ind"
 )
 
 #' @noRd
@@ -283,8 +283,11 @@ RE_NAME = list(
     `2017` = cheapr::list_combine(
       qpp_ALL,
       list(
-        engaged = "engaged_ind",
         `participation type` = "part_opt",
+        `quality improvement bonus` = "qi_score",
+        `ia score` = "ia_score",
+        `cost score` = "cost_score",
+        engaged = "engaged_ind",
         `small practitioner` = "small_ind",
         `rural clinician` = "rural_ind",
         `hpsa clinician` = "hpsa_ind",
@@ -292,11 +295,8 @@ RE_NAME = list(
         `hospital-based clinician` = "hospital_ind",
         `non-patient facing` = "non_patient_ind",
         `facility-based` = "facility_ind",
-        `extreme hardship` = "extreme_ind",
-        `quality improvement bonus` = "qi_score",
         `pi bonus` = "pi_bonus_ind",
-        `ia score` = "ia_score",
-        `cost score` = "cost_score"
+        `extreme hardship` = "extreme_ind"
       )
     ),
     `2022` = cheapr::list_combine(qpp_ALL, qpp_22),
@@ -306,8 +306,8 @@ RE_NAME = list(
       list(
         `reporting option` = "report_opt",
         `mips value pathway title` = "mvp_title",
-        `received facility score` = "fac_score_ind",
-        `cost improvement score` = "ci_score"
+        `cost improvement score` = "ci_score",
+        `received facility score` = "fac_score_ind"
       )
     )
   ),
@@ -369,11 +369,11 @@ RE_NAME = list(
     Tot_Mdcr_Alowd_Amt = "allowed",
     Tot_Mdcr_Pymt_Amt = "payment",
     Bene_Avg_Age = "avg_age",
+    Bene_Avg_Risk_Scre = "avg_risk",
     Bene_Feml_Cnt = "female",
     Bene_Male_Cnt = "male",
     Bene_Dual_Cnt = "dual",
-    Bene_Ndual_Cnt = "ndual",
-    Bene_Avg_Risk_Scre = "risk_score"
+    Bene_Ndual_Cnt = "ndual"
   ),
   facility = c(
     fac_type = "fac_type",

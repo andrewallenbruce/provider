@@ -78,14 +78,7 @@ method(request_single, CMS) <- function(x) {
 #' @noRd
 method(request_multi, CMS) <- function(x) {
   report_count(x)
-
-  msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
-
-  if (rlang::is_interactive()) {
-    cli::cli_progress_step(msg = msg)
-  } else {
-    cli::cli_alert_success(text = msg)
-  }
+  report_pages(x)
 
   res <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit)

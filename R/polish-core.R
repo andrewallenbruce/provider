@@ -12,24 +12,14 @@ add_class <- function(x, endpoint = NULL) {
 }
 
 #' @noRd
-rename_with <- function(x, endpoint) {
-  if (is.null(RE_NAME[[endpoint]])) {
-    return(x)
-  }
-
-  NM <- RE_NAME[[endpoint]]
-
-  rlang::inject(
-    collapse::recode_char(
-      colnames(x),
-      !!!NM,
-      set = TRUE
-    )
-  )
-
+set_rename <- function(x, endpoint) {
+  collapse::setrename(x, RE_NAME[[endpoint]], .nse = FALSE)
   replace_nz(x)
+}
 
-  collapse::gv(x, unlist_(NM))
+#' @noRd
+get_columns <- function(x, endpoint) {
+  collapse::gv(x, unlist_(RE_NAME[[endpoint]]))
 }
 
 #' @noRd
@@ -93,12 +83,6 @@ recoder <- function(.f) {
     collapse::tfmv(.data = x, vars = v, FUN = .f)
   }
 }
-
-#' @noRd
-rc_integer <- recoder(as_integer_supp)
-
-#' @noRd
-rc_double <- recoder(as.double)
 
 #' @noRd
 rc_bin <- recoder(bin_col)
@@ -183,11 +167,6 @@ bin_col <- function(x) {
     x %in_% c("NO", "N", "No", "False") ~ 0L,
     .default = NA_integer_
   )
-}
-
-#' @noRd
-as_integer_supp <- function(x, ...) {
-  suppressWarnings(as.integer(x, ...))
 }
 
 #' @noRd
