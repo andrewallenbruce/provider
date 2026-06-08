@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9222 (2026-06-07)
+
+* made `report_pages` generic
+* removed dead code
+
+
 # provider 0.0.1.9221 (2026-06-07)
 
 * added tests for offset generation
