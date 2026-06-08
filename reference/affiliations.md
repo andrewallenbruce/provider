@@ -139,8 +139,6 @@ affiliations(facility_ccn = 331302)
 affiliations(first = "Andrew", last = contains("B"), facility_type = "hospital")
 #> ✔ affiliations returned 2,093 results.
 #> ✔ Retrieving 2 pages
-#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
-#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 2,093 × 7
 #>    first  last              npi pac        prov_type prov_ccn parent_ccn
 #>    <chr>  <chr>           <int> <chr>      <chr>     <chr>    <chr>     

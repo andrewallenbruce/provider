@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9225 (2026-06-08)
+
+- nppes work
+
 ## provider 0.0.1.9224 (2026-06-08)
 
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
@@ -736,9 +740,7 @@
 
 ## provider 0.0.1.9060 (2026-03-20)
 
-- added
-  [`hrsa_select()`](https://andrewallenbruce.github.io/provider/reference/hrsa.md),
-  `provider_types()`
+- added `hrsa_select()`, `provider_types()`
 
 ## provider 0.0.1.9059 (2026-03-20)
 

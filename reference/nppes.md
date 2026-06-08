@@ -3,12 +3,6 @@
 Search the National Plan and Provider Enumeration System (NPPES) NPI
 Registry, a free directory of all active NPI records.
 
-Trailing Wildcard Entries
-
-Arguments that allow trailing wildcard entries are denoted in the
-parameter description with `<WC>`. Wildcard entries require at least two
-characters to be entered, e.g. `"jo*"`
-
 ## Usage
 
 ``` r
@@ -27,8 +21,6 @@ nppes(
   zip = NULL,
   country = NULL
 )
-
-wildcard(x)
 ```
 
 ## Arguments
@@ -84,15 +76,9 @@ wildcard(x)
   `<chr>` Country abbreviation. Can be the only input if it *is not*
   `"US"`.
 
-- x:
-
-  `<chr>` input
-
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
-A `<wildcard>` object
 
 ## **National Provider Identifier (NPI)**
 
@@ -174,8 +160,4 @@ nppes(npi = 1528060837)
 #> 1 <df>      <named list> 1117631856000 <NULL>    NPI-1            <df [8 × 5]>
 #> # ℹ 5 more variables: last_updated_epoch <chr>, number <chr>,
 #> #   other_names <list>, practiceLocations <list>, taxonomies <list>
-wildcard("Jo")
-#> [1] "Jo*"
-#> attr(,"class")
-#> [1] "wildcard"
 ```
