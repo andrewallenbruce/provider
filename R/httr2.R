@@ -62,16 +62,3 @@ multi_count <- function(url, nm, query = NULL) {
   purrr::map_int(url, base_request, query = query) |>
     set_names2(nm)
 }
-
-#' @noRd
-multi_base <- function(url, nm) {
-  purrr::map(url, base_request) |>
-    set_names2(nm)
-}
-
-#' @noRd
-multi_parallel <- function(url, n, limit, nm, query = NULL) {
-  offset3(url, n, limit) |>
-    purrr::map(parallel_request, query = query) |>
-    set_names2(nm)
-}

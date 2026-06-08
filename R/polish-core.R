@@ -12,14 +12,14 @@ add_class <- function(x, endpoint = NULL) {
 }
 
 #' @noRd
-set_rename <- function(x, endpoint) {
-  collapse::setrename(x, RE_NAME[[endpoint]], .nse = FALSE)
+set_rename <- function(x) {
+  collapse::setrename(x, RE_NAME[[class(x)[1]]], .nse = FALSE)
   replace_nz(x)
 }
 
 #' @noRd
-get_columns <- function(x, endpoint) {
-  collapse::gv(x, unlist_(RE_NAME[[endpoint]]))
+get_columns <- function(x) {
+  collapse::gv(x, unlist_(RE_NAME[[class(x)[1]]]))
 }
 
 #' @noRd

@@ -37,12 +37,8 @@ CMS <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_cms(
-          self@url,
-          self@query,
-          append = "/stats?"
-        ) |>
-          base_request("found_rows")
+        x <- flatten_cms(self@url, self@query, "/stats?")
+        base_request(x, "found_rows")
       }
     ),
     pages = new_property(
@@ -66,12 +62,8 @@ CMSList <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_cms(
-          self@url,
-          self@query,
-          append = "/stats?"
-        ) |>
-          multi_count(self@url, "found_rows")
+        x <- flatten_cms(self@url, self@query, "/stats?")
+        multi_count(x, self@url, "found_rows")
       }
     ),
     pages = new_property(
@@ -109,12 +101,8 @@ PDC <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        flatten_pdc(
-          self@url,
-          self@query,
-          results = "false"
-        ) |>
-          base_request("count")
+        x <- flatten_pdc(self@url, self@query, results = "false")
+        base_request(x, "count")
       }
     ),
     pages = new_property(
