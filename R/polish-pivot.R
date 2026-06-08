@@ -171,10 +171,8 @@ pivot_quality <- function(x) {
   y <- pivot2(x, "^year$|^npi$|_ind$", c("year", "npi"), "indicators")
 
   collapse::gvr(x, "_ind$") <- NULL
-  x <- collapse::funique(x, c("year", "npi"))
 
-  y <- collapse::ss(y, y$ind %==% 1L, 1:3) |>
-    collapse::funique(c("year", "npi"))
+  y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow0(y)) {
     return(collapse::av(x, indicators = rep_NA(x)))
@@ -186,7 +184,9 @@ pivot_quality <- function(x) {
     return(join2(x, y, on = c("year", "npi")))
   }
 
-  y <- collapse::rsplit(y, y$year, simplify = TRUE) |>
+  y <- collapse::ss(y, collapse::whichNA(y$indicators, invert = TRUE))
+
+  y <- collapse::rsplit(y, y$year) |>
     purrr::map(\(x) collapse_rows(x, "npi", "indicators")) |>
     rowbind2("year") |>
     collapse::qTBL()

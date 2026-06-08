@@ -40,10 +40,18 @@ quality_has <- function(x, y) {
 #' @noRd
 quality_get <- function(x, y) {
   y <- match.arg(as.character(y), c("2017", "2022", "2023"))
-  z <- if (y == "2017") as.character(2017:2021) else y
 
-  x <- collapse::get_elem(x, z, keep.tree = TRUE) |>
-    rowbind2("year")
+  x <- collapse::get_elem(
+    x,
+    switch(
+      y,
+      "2017" = as.character(2017:2021),
+      "2022" = "2022",
+      "2023" = as.character(2023:2024)
+    ),
+    keep.tree = TRUE
+  ) |>
+    rowbind2("year", fill = TRUE)
 
   collapse::setrename(x, RE_NAME[["quality"]][[y]], .nse = FALSE)
   replace_nz(x)
@@ -52,11 +60,33 @@ quality_get <- function(x, y) {
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     pivot_quality()
 
-  if (y %in% c("2022", "2023")) {
+  if (y == "2017") {
+    x <- collapse::av(
+      x,
+      cred = cheapr::na_init(character(0), collapse::fnrow(x)),
+      dual_ratio = cheapr::na_init(double(0), collapse::fnrow(x)),
+      small_bonus = cheapr::na_init(integer(0), collapse::fnrow(x)),
+      report_opt = cheapr::na_init(character(0), collapse::fnrow(x)),
+      mvp_title = cheapr::na_init(character(0), collapse::fnrow(x)),
+      ci_score = cheapr::na_init(double(0), collapse::fnrow(x))
+    )
+  }
+
+  if (y == "2022") {
     collapse::settfmv(x, "dual_ratio", as.double)
     collapse::settfmv(x, "small_bonus", as.integer)
+
+    x <- collapse::av(
+      x,
+      report_opt = cheapr::na_init(character(0), collapse::fnrow(x)),
+      mvp_title = cheapr::na_init(character(0), collapse::fnrow(x)),
+      ci_score = cheapr::na_init(double(0), collapse::fnrow(x))
+    )
   }
-  if (y %in% c("2023")) {
+
+  if (y == "2023") {
+    collapse::settfmv(x, "dual_ratio", as.double)
+    collapse::settfmv(x, "small_bonus", as.integer)
     collapse::settfmv(x, "ci_score", as.double)
   }
   return(x)
