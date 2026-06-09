@@ -63,43 +63,35 @@ quality_get <- function(x, y) {
   if (y == "2017") {
     x <- collapse::av(
       x,
-      cred = cheapr::na_init(character(0), collapse::fnrow(x)),
-      dual_ratio = cheapr::na_init(double(0), collapse::fnrow(x)),
-      small_bonus = cheapr::na_init(integer(0), collapse::fnrow(x)),
-      report_opt = cheapr::na_init(character(0), collapse::fnrow(x)),
-      mvp_title = cheapr::na_init(character(0), collapse::fnrow(x)),
-      ci_score = cheapr::na_init(double(0), collapse::fnrow(x))
+      cred = vec_na(x),
+      dual_ratio = vec_na(x, "double"),
+      small_bonus = vec_na(x, "integer"),
+      report_opt = vec_na(x),
+      mvp_title = vec_na(x),
+      ci_score = vec_na(x, "double")
     )
   }
 
   if (y == "2022") {
-    collapse::settfmv(x, "dual_ratio", as.double)
-    collapse::settfmv(x, "small_bonus", as.integer)
-
     x <- collapse::av(
       x,
-      report_opt = cheapr::na_init(character(0), collapse::fnrow(x)),
-      mvp_title = cheapr::na_init(character(0), collapse::fnrow(x)),
-      ci_score = cheapr::na_init(double(0), collapse::fnrow(x))
+      report_opt = vec_na(x),
+      mvp_title = vec_na(x),
+      ci_score = vec_na(x, "double")
     )
   }
 
-  if (y == "2023") {
-    collapse::settfmv(x, "dual_ratio", as.double)
-    collapse::settfmv(x, "small_bonus", as.integer)
-    collapse::settfmv(x, "ci_score", as.double)
-  }
   return(x)
 }
 
 #' @noRd
-set_replace_nz <- function(x) {
+set_nz <- function(x) {
   collapse::setv(x, "", NA_character_)
 }
 
 #' @noRd
 replace_nz <- function(x) {
-  collapse::settfmv(x, is.character, set_replace_nz)
+  collapse::settfmv(x, is.character, set_nz)
 }
 
 #' @noRd
@@ -154,30 +146,27 @@ rc_combine <- function(x, e1, e2) {
 }
 
 #' @noRd
-rc_other <- function(x, stub, call = caller_env()) {
-  main <- paste0(stub, "_type")
-  otxt <- paste0(stub, "_otxt")
-
-  if (is.null(x[[otxt]])) {
+rc_other <- function(x, e1, e2) {
+  if (e2 %!in_% colnames(x)) {
     cli::cli_abort(
-      "{.val {otxt}} is not a column in {.var x}.",
-      call = call
+      "{.arg {e2}} is not a column in {.var x}.",
+      call = rlang::caller_env()
     )
   }
 
-  i <- cheapr::which_not_na(x[[otxt]])
+  idx <- collapse::whichNA(x[[e2]], invert = TRUE)
 
-  if (rlang::is_empty(i)) {
-    collapse::gv(x, otxt) <- NULL
+  if (rlang::is_empty(idx)) {
+    collapse::gv(x, e2) <- NULL
     return(x)
   }
 
-  collapse::gv(x[i, ], main) <- paste0(
+  collapse::gv(x[idx, ], e1) <- paste0(
     "Other: ",
-    x[i, otxt, drop = TRUE]
+    unlist_(collapse::ss(x, idx, e2, check = FALSE))
   )
 
-  collapse::gv(x, otxt) <- NULL
+  collapse::gv(x, e2) <- NULL
 
   return(x)
 }

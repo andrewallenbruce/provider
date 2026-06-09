@@ -74,7 +74,7 @@ S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
     rc_combine("address", "add_2") |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
-    rc_other(stub = "org")
+    rc_other("org_type", "org_otxt")
 }
 
 #' @noRd
@@ -85,8 +85,8 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
-    rc_other(stub = "org") |>
-    rc_other(stub = "loc") |>
+    rc_other("org_type", "org_otxt") |>
+    rc_other("loc_type", "loc_otxt") |>
     rc_combine("address", "add_2") |>
     rc_ymd(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L)) |>
@@ -180,7 +180,8 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
       "charges",
       "services",
       "ia_score",
-      "pi_score"
+      "pi_score",
+      "small_bonus"
     ),
     as.integer
   )
@@ -192,7 +193,9 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
       "complex_bonus",
       "qa_score",
       "cost_score",
-      "qi_score"
+      "qi_score",
+      "dual_ratio",
+      "ci_score"
     ),
     as.double
   )
@@ -251,9 +254,7 @@ S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
       "Tot_Sbmtd_Chrg",
       "Bene_Avg_Age",
       "Bene_Dual_Cnt",
-      "Bene_Ndual_Cnt",
-      "Bene_Feml_Cnt",
-      "Bene_Male_Cnt"
+      "Bene_Ndual_Cnt"
     ),
     as.integer
   )

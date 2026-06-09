@@ -30,8 +30,8 @@ pivot2 <- function(x, rex, id, var, val = "ind") {
 }
 
 #' @noRd
-rep_NA <- function(x) {
-  cheapr::rep_(NA_character_, collapse::fnrow(x))
+vec_na <- function(x, type = "character") {
+  cheapr::na_init(vector(mode = type), collapse::fnrow(x))
 }
 
 #' @noRd
@@ -51,7 +51,7 @@ pivot_order_refer <- function(x) {
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (nrow0(y)) {
-    return(collapse::av(x, order_refer = rep_NA(x)))
+    return(collapse::av(x, order_refer = vec_na(x)))
   }
 
   rc_order_refer(y, "order_refer")
@@ -69,13 +69,13 @@ pivot_multi_site <- function(x) {
   collapse::gvr(x, "_multi$") <- NULL
 
   if (nrow0(y)) {
-    return(collapse::av(x, multi = rep_NA(x)))
+    return(collapse::av(x, multi = vec_na(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:2)
 
   if (nrow0(y)) {
-    return(collapse::av(x, multi = rep_NA(x)))
+    return(collapse::av(x, multi = vec_na(x)))
   }
 
   rc_clia(y, "multi")
@@ -96,7 +96,7 @@ pivot_acr_org <- function(x) {
   y <- collapse::ss(y, j = 1:2)
 
   if (nrow0(y)) {
-    return(collapse::av(x, acr_org = rep_NA(x)))
+    return(collapse::av(x, acr_org = vec_na(x)))
   }
 
   rc_clia(y, "acr_org")
@@ -115,18 +115,18 @@ pivot_owner <- function(x) {
   collapse::gvr(x, "_ind$|_otxt$") <- NULL
 
   if (nrow0(y)) {
-    return(collapse::av(x, own_type = rep_NA(x)))
+    return(collapse::av(x, own_type = vec_na(x)))
   }
 
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow0(y)) {
-    return(collapse::av(x, own_type = rep_NA(x)))
+    return(collapse::av(x, own_type = vec_na(x)))
   }
 
   rc_owner(y, "own_type")
 
-  y <- rc_other(y, stub = "own") |>
+  y <- rc_other(y, "own_type", "own_otxt") |>
     collapse::funique()
 
   if (all_unique(y$pac)) {
@@ -138,26 +138,24 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- pivot2(x, "^enid$|^sub_|^sg_", c("enid", "sg_otxt"), "sub_type") |>
-    collapse::rnm("sg_otxt" = "sub_otxt", .nse = FALSE)
+  y <- pivot2(x, "^enid$|^sub_|^sg_", c("enid", "sg_otxt"), "sub_group")
 
   collapse::gvr(x, "^sub_|^sg_") <- NULL
 
   if (nrow0(y)) {
-    return(collapse::av(x, sub_group = rep_NA(x)))
+    return(collapse::av(x, sub_group = vec_na(x)))
   }
 
-  y <- collapse::ss(y, y$ind %==% 1L, c("enid", "sub_otxt", "sub_type"))
+  y <- collapse::ss(y, y$ind %==% 1L, c("enid", "sg_otxt", "sub_group"))
 
   if (nrow0(y)) {
-    return(collapse::av(x, sub_group = rep_NA(x)))
+    return(collapse::av(x, sub_group = vec_na(x)))
   }
 
-  rc_hospitals(y, "sub_type")
+  rc_hospitals(y, "sub_group")
 
-  y <- rc_other(y, stub = "sub") |>
-    collapse::funique() |>
-    collapse::rnm("sub_type" = "sub_group", .nse = FALSE)
+  y <- rc_other(y, "sub_group", "sg_otxt") |>
+    collapse::funique()
 
   if (all_unique(y$enid)) {
     return(join2(x, y, on = "enid"))
@@ -175,7 +173,7 @@ pivot_quality <- function(x) {
   y <- collapse::ss(y, y$ind %==% 1L, 1:3)
 
   if (nrow0(y)) {
-    return(collapse::av(x, indicators = rep_NA(x)))
+    return(collapse::av(x, indicators = vec_na(x)))
   }
 
   rc_quality(y, "indicators")

@@ -7,7 +7,7 @@ rc_hospitals <- function(
 ) {
   switch(
     column,
-    sub_type = collapse::recode_char(
+    sub_group = collapse::recode_char(
       x[[column]],
       "sub_acute" = "Acute",
       "sub_gen" = "General",

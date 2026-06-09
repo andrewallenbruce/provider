@@ -370,8 +370,6 @@ RE_NAME = list(
     Tot_Mdcr_Pymt_Amt = "payment",
     Bene_Avg_Age = "avg_age",
     Bene_Avg_Risk_Scre = "avg_risk",
-    Bene_Feml_Cnt = "female",
-    Bene_Male_Cnt = "male",
     Bene_Dual_Cnt = "dual",
     Bene_Ndual_Cnt = "ndual"
   ),

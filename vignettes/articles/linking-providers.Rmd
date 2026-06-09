@@ -24,31 +24,32 @@ library(tibble)
 library(provider)
 ```
 
-> NPIs, PACs, ENIDs, CCNs, CLIAs and Many More
-
 #### Individual Provider
 
 ```{r}
 pac <- affiliations(pac = 7810891009)
-list(
-  individual = as.data.frame(t(unique(pac[1:5]))),
-  organization = pac[6:8])
-```
+pac <- list(
+  individual = as.data.frame(t(unique(pac[1:4]))),
+  organization = pac[5:6])
+pac
 
-```{r}
 ccn <- hospitals(ccn = pac$prov_ccn)
-ccn |> str()
+pac$organization <- ccn
+pac |> str()
 ```
 
 #### Organizational Provider
-Exploring links between providers can lead to many interesting insights. For
-example, there is a hospital in New York named **Elizabethtown Community Hospital**.
 
 ```{r}
-providers(org_name = "Elizabethtown Community Hospital")
-hospitals(org_name = "Elizabethtown Community Hospital")
-clinicians(org_name = "Elizabethtown Community Hospital")
-reassignments(org_name = "Elizabethtown Community Hospital")
+x <- "Elizabethtown Community Hospital"
+
+providers(org_name = x)
+
+hospitals(org_name = x) |> str()
+
+clinicians(org_name = x) |> str()
+
+reassignments(org_name = x)
 ```
 
 The **Hospital Enrollment** API includes only Medicare Part A (hospital)
@@ -59,9 +60,10 @@ First, the all-numeric CCN (`331302`):
 
 ```{r}
 ccn <- affiliations(facility_ccn = 331302)
+
 list(
-  organization = as.data.frame(t(unique(ccn[6:8]))),
-  individual = unique(ccn[1:5]))
+  organization = as.data.frame(t(unique(ccn[5:7]))),
+  individual = unique(ccn[1:4]))
 ```
 
 That returns individual providers affiliated with the hospital. Now to search
@@ -69,9 +71,10 @@ the alphanumeric CCN (`33Z302`):
 
 ```{r}
 ccn2 <- affiliations(facility_ccn = "33Z302")
+
 list(
-  organization = as.data.frame(t(unique(ccn2[6:8]))), 
-  individual = unique(ccn2[1:5]))
+  organization = as.data.frame(t(unique(ccn2[5:7]))), 
+  individual = unique(ccn2[1:4]))
 ```
 
 That returns more affiliated individual providers that practice in the
