@@ -38,8 +38,8 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
   get_columns(x) |>
     rc_bin(collapse::gvr(x, "eligible$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
-    rc_address() |>
-    rc_address("fac_name", "fac_2") |>
+    rc_combine("address", "add_2") |>
+    rc_combine("fac_name", "fac_2") |>
     pivot_multi_site() |>
     pivot_acr_org()
 }
@@ -49,8 +49,8 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
   collapse::settfmv(x, c("npi", "grd_yr", "num_org_mem"), as.integer)
   set_rename(x)
   get_columns(x) |>
-    rc_address() |>
-    rc_address("specialty", "spec_other")
+    rc_combine("address", "add_2") |>
+    rc_combine("specialty", "spec_other")
 }
 
 #' @noRd
@@ -59,7 +59,7 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_ymd("cert_date") |>
-    rc_address()
+    rc_combine("address", "add_2")
 }
 
 #' @noRd
@@ -71,7 +71,7 @@ S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
 
   set_rename(x)
   get_columns(x) |>
-    rc_address() |>
+    rc_combine("address", "add_2") |>
     rc_bin("multi") |>
     rc_ymd("inc_date") |>
     rc_other(stub = "org")
@@ -87,7 +87,7 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   get_columns(x) |>
     rc_other(stub = "org") |>
     rc_other(stub = "loc") |>
-    rc_address() |>
+    rc_combine("address", "add_2") |>
     rc_ymd(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L)) |>
     pivot_subgroup()
@@ -105,7 +105,7 @@ S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
-    rc_address() |>
+    rc_combine("address", "add_2") |>
     rc_bin("order_refer") |>
     rc_mdy(c("start_date", "end_date", "updated"))
 }
@@ -128,7 +128,7 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 
   set_rename(x)
   get_columns(x) |>
-    rc_address() |>
+    rc_combine("address", "add_2") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
     rc_ymd("asc_date") |>
     pivot_owner()
@@ -269,6 +269,6 @@ S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_bin("participating") |>
-    rc_address() |>
+    rc_combine("address", "add_2") |>
     collapse::roworderv(c("year", "npi"))
 }

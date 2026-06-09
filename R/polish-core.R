@@ -127,6 +127,33 @@ rc_ymd2 <- recoder(as_date_ymd2)
 rc_mdy <- recoder(as_date_mdy)
 
 #' @noRd
+rc_combine <- function(x, e1, e2) {
+  if (e2 %!in_% colnames(x)) {
+    cli::cli_abort(
+      "{.arg {e2}} is not a column in {.var x}.",
+      call = rlang::caller_env()
+    )
+  }
+
+  idx <- collapse::whichNA(x[[e2]], invert = TRUE)
+
+  if (rlang::is_empty(idx)) {
+    collapse::gv(x, e2) <- NULL
+    return(x)
+  }
+
+  collapse::gv(x[idx, ], e1) <- paste(
+    unlist_(collapse::ss(x, idx, e1, check = FALSE)),
+    unlist_(collapse::ss(x, idx, e2, check = FALSE)),
+    sep = ", "
+  )
+
+  collapse::gv(x, e2) <- NULL
+
+  return(x)
+}
+
+#' @noRd
 rc_other <- function(x, stub, call = caller_env()) {
   main <- paste0(stub, "_type")
   otxt <- paste0(stub, "_otxt")
@@ -151,41 +178,6 @@ rc_other <- function(x, stub, call = caller_env()) {
   )
 
   collapse::gv(x, otxt) <- NULL
-
-  return(x)
-}
-
-#' @noRd
-rc_address <- function(
-  x,
-  add1 = "address",
-  add2 = "add_2",
-  arg = caller_arg(add2),
-  call = caller_env()
-) {
-  if (is.null(x[[add2]])) {
-    cli::cli_abort(
-      "{.val {arg}} is not a column in {.var x}.",
-      arg = arg,
-      call = call
-    )
-  }
-
-  i <- cheapr::which_not_na(x[[add2]])
-
-  if (rlang::is_empty(i)) {
-    collapse::gv(x, add2) <- NULL
-    return(x)
-  }
-
-  COL <- paste(
-    x[i, add1, drop = TRUE],
-    x[i, add2, drop = TRUE],
-    sep = ", "
-  )
-
-  collapse::gv(x[i, ], add1) <- COL
-  collapse::gv(x, add2) <- NULL
 
   return(x)
 }

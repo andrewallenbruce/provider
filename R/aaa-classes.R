@@ -37,8 +37,12 @@ CMS <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        x <- flatten_cms(self@url, self@query, "/stats?")
-        base_request(x, "found_rows")
+        if (length(self@query) > 0L || self@action == "count") {
+          x <- flatten_cms(self@url, self@query, "/stats?")
+          x <- base_request(x, "found_rows")
+          return(x)
+        }
+        return(0L)
       }
     ),
     pages = new_property(
@@ -62,8 +66,12 @@ CMSList <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        x <- flatten_cms(self@url, self@query, "/stats?")
-        multi_count(x, self@url, "found_rows")
+        if (length(self@query) > 0L || self@action == "count") {
+          x <- flatten_cms(self@url, self@query, "/stats?")
+          x <- multi_count(x, self@url, "found_rows")
+          return(x)
+        }
+        return(0L)
       }
     ),
     pages = new_property(
@@ -101,8 +109,12 @@ PDC <- new_class(
     count = new_property(
       class_integer,
       getter = function(self) {
-        x <- flatten_pdc(self@url, self@query, results = "false")
-        base_request(x, "count")
+        if (length(self@query) > 0L || self@action == "count") {
+          x <- flatten_pdc(self@url, self@query, results = "false")
+          x <- base_request(x, "count")
+          return(x)
+        }
+        return(0L)
       }
     ),
     pages = new_property(
@@ -137,11 +149,9 @@ method(execute, API) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {
-    report_total(x)
-
     switch(
       x@action,
-      count = return(x@count),
+      count = return(report_total(x)),
       set = return(request_multi(x)),
       return(request_preview(x))
     )
@@ -163,7 +173,6 @@ method(execute, CMSList) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {
-
     switch(
       x@action,
       count = return(report_total(x)),

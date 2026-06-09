@@ -23,27 +23,45 @@ quality(
 metrics(year = NULL)
 }
 \arguments{
-\item{year}{\verb{<int>} A vector of years from 2018 to 2025}
+\item{year}{\verb{<int>} A vector of years; for \code{quality()}, 2013-2024; for
+\code{metrics()} 2018-2025}
 
-\item{npi}{\verb{<int>} description}
+\item{npi}{\verb{<int>} National Provider Identifier. Multiple rows for the same
+NPI indicate that an individual clinician has reassigned billing rights to
+multiple TINs and was identified as a MIPS eligible clinician under
+multiple TIN/NPI combinations.}
 
-\item{state}{description}
+\item{state}{The practice state of the TIN associated with the clinician.}
 
-\item{size}{\verb{<int>} description}
+\item{size}{\verb{<int>} Number of clinicians associated with the TIN through
+Medicare Part B claims for the performance year.}
 
-\item{specialty}{description}
+\item{specialty}{Derived from the specialty codes in Medicare Part B claims.}
 
-\item{years}{\verb{<int>} description}
+\item{years}{\verb{<int>} Number of years since NPI's first approved enrollment
+date across all enrollments in PECOS.}
 
-\item{patients}{\verb{<int>} description}
+\item{patients}{\verb{<int>} Number of Medicare patients who received covered
+professional services during MIPS eligibility determination period.}
 
-\item{charges}{\verb{<int>} description}
+\item{charges}{\verb{<int>} Allowed charges under the PFS on Medicare Part B
+claims with a service date during MIPS eligibility determination period.}
 
-\item{services}{\verb{<int>} description}
+\item{services}{\verb{<int>} Number of covered professional services provided to
+Medicare Part B patients with a service date during MIPS eligibility
+determination period.}
 
-\item{final_score}{\verb{<int>} description}
+\item{final_score}{\verb{<int>} The MIPS final score attributed to the clinician
+(identified by TIN/NPI combination).}
 
-\item{adjustment}{\verb{<int>} description}
+\item{adjustment}{\verb{<dbl>} Determined by comparing the \code{final_score} to
+performance thresholds and scaling to ensure budget neutrality.
+\itemize{
+\item The \strong{Maximum negative} adjustment is \verb{-9\%}. (\code{final_score} = 0 - 18.75)
+\item A \strong{negative} adjustment is between \verb{-9\%} and\verb{0\%}. (\code{final_score} = 18.76 - 74.99)
+\item A \strong{neutral} adjustment is \verb{0\%}. (\code{final_score} = 75)
+\item A \strong{positive} adjustment is greater than \verb{0\%}. (\code{final_score} = 75.01 - 100)
+}}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
@@ -65,13 +83,9 @@ adjustments.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-quality(count = TRUE)
-
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
 
-# quality(npi = 1043245657)
-
-# quality(npi = c(1003026055, 1316939655))
+quality(npi = c(1003026055, 1316939655))
 
 metrics()
 \dontshow{\}) # examplesIf}
