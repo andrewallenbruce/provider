@@ -232,9 +232,6 @@ hospitals(city = "Atlanta", state = "GA", subgroup = x)
 #> #   loc_type <chr>, reh_date <date>, prov_type <chr>, sub_group <chr>
 
 hospitals2(ccn = hospitals()$ccn)
-#> hospitals Totals
-#> • Rows  : 9,175
-#> • Pages : 2    
 #> ✔ Returning first 10 rows
 #> ✔ hospitals2 returned 9 results.
 #> # A tibble: 9 × 10
@@ -251,9 +248,6 @@ hospitals2(ccn = hospitals()$ccn)
 #> 9 440058 SOUTHERN TENN… Acute Ca… Propr…      3 185 HO… WINC… TN    37398 FRANK…
 
 hospitals(ccn = hospitals2()$ccn)
-#> hospitals2 Totals
-#> • Rows  : 5,432
-#> • Pages : 4    
 #> ✔ Returning first 10 rows
 #> ✔ hospitals returned 9 results.
 #> # A tibble: 9 × 18

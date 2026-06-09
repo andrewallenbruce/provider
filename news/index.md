@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9227 (2026-06-09)
+
+- refactored `rc_combine`
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  documentation
+
 ## provider 0.0.1.9226 (2026-06-08)
 
 - reduced number of examples so as not to violate rate limit

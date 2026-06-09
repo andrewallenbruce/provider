@@ -31,47 +31,70 @@ metrics(year = NULL)
 
 - year:
 
-  `<int>` A vector of years from 2018 to 2025
+  `<int>` A vector of years; for `quality()`, 2013-2024; for `metrics()`
+  2018-2025
 
 - npi:
 
-  `<int>` description
+  `<int>` National Provider Identifier. Multiple rows for the same NPI
+  indicate that an individual clinician has reassigned billing rights to
+  multiple TINs and was identified as a MIPS eligible clinician under
+  multiple TIN/NPI combinations.
 
 - state:
 
-  description
+  The practice state of the TIN associated with the clinician.
 
 - size:
 
-  `<int>` description
+  `<int>` Number of clinicians associated with the TIN through Medicare
+  Part B claims for the performance year.
 
 - specialty:
 
-  description
+  Derived from the specialty codes in Medicare Part B claims.
 
 - years:
 
-  `<int>` description
+  `<int>` Number of years since NPI's first approved enrollment date
+  across all enrollments in PECOS.
 
 - patients:
 
-  `<int>` description
+  `<int>` Number of Medicare patients who received covered professional
+  services during MIPS eligibility determination period.
 
 - charges:
 
-  `<int>` description
+  `<int>` Allowed charges under the PFS on Medicare Part B claims with a
+  service date during MIPS eligibility determination period.
 
 - services:
 
-  `<int>` description
+  `<int>` Number of covered professional services provided to Medicare
+  Part B patients with a service date during MIPS eligibility
+  determination period.
 
 - final_score:
 
-  `<int>` description
+  `<int>` The MIPS final score attributed to the clinician (identified
+  by TIN/NPI combination).
 
 - adjustment:
 
-  `<int>` description
+  `<dbl>` Determined by comparing the `final_score` to performance
+  thresholds and scaling to ensure budget neutrality.
+
+  - The **Maximum negative** adjustment is `-9%`. (`final_score` = 0 -
+    18.75)
+
+  - A **negative** adjustment is between `-9%` and`0%`. (`final_score` =
+    18.76 - 74.99)
+
+  - A **neutral** adjustment is `0%`. (`final_score` = 75)
+
+  - A **positive** adjustment is greater than `0%`. (`final_score` =
+    75.01 - 100)
 
 - count:
 
@@ -91,19 +114,38 @@ adjustments.
 ## Examples
 
 ``` r
-quality(count = TRUE)
-#> quality Totals
-#> • Rows  : 6,154,354
-#> • Pages : 1,233    
-
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
 #> ✔ quality returned 41,788 results.
 #> • 2021 : 23,617
 #> • 2024 : 18,171
 
-# quality(npi = 1043245657)
-
-# quality(npi = c(1003026055, 1316939655))
+quality(npi = c(1003026055, 1316939655))
+#> ✔ quality returned 10 results.
+#> • 2022 : 1
+#> • 2021 : 2
+#> • 2020 : 3
+#> • 2019 : 1
+#> • 2018 : 1
+#> • 2017 : 2
+#> ✔ Retrieving 6 pages
+#> # A tibble: 10 × 25
+#>     year        npi state  size specialty        years patients charges services
+#>    <int>      <int> <chr> <int> <chr>            <int>    <int>   <int>    <int>
+#>  1  2017 1003026055 FL      189 Endocrinology        8    13189  5.84e6       NA
+#>  2  2017 1003026055 NC      191 Endocrinology        8    14784  8.90e6       NA
+#>  3  2018 1003026055 FL      135 Endocrinology        8    12317  5.02e6        0
+#>  4  2019 1003026055 FL      150 Endocrinology        9    12415  5.62e6    52009
+#>  5  2020 1003026055 FL      151 Endocrinology       10    12917  5.46e6    53599
+#>  6  2020 1003026055 FL        7 Endocrinology       10     1244  7.19e5     8160
+#>  7  2020 1316939655 NY      295 Missing             16    22242  9.12e6   101308
+#>  8  2021 1003026055 FL        9 Endocrinology       11     1181  6.98e5     7068
+#>  9  2021 1316939655 NY      455 Physician Assis…    17    23586  1.09e7   116187
+#> 10  2022 1316939655 NY      352 Physician Assis…    18    23244  1.05e7   110514
+#> # ℹ 16 more variables: final_score <dbl>, adjustment <dbl>, pi_score <int>,
+#> #   qa_score <dbl>, complex_bonus <dbl>, part_opt <chr>, qi_score <dbl>,
+#> #   ia_score <int>, cost_score <dbl>, indicators <chr>, cred <chr>,
+#> #   dual_ratio <dbl>, small_bonus <int>, report_opt <chr>, mvp_title <chr>,
+#> #   ci_score <dbl>
 
 metrics()
 #> # A tibble: 32 × 4
