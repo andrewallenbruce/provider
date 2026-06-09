@@ -178,7 +178,7 @@ utilization(npi = 1003000423)
 #> • 2014 : 1
 #> • 2013 : 1
 #> ✔ Retrieving 12 pages
-#> # A tibble: 12 × 24
+#> # A tibble: 12 × 22
 #>     year        npi first last  cred  entity address city  state zip   specialty
 #>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
 #>  1  2013 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
@@ -193,9 +193,9 @@ utilization(npi = 1003000423)
 #> 10  2022 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
 #> 11  2023 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
 #> 12  2024 1003000423 Jenn… Velo… M.D.  I      8300 T… Ment… OH    44060 Obstetri…
-#> # ℹ 13 more variables: participating <int>, hcpcs <int>, patients <int>,
+#> # ℹ 11 more variables: participating <int>, hcpcs <int>, patients <int>,
 #> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>, avg_age <int>,
-#> #   avg_risk <dbl>, female <int>, male <int>, dual <int>, ndual <int>
+#> #   avg_risk <dbl>, dual <int>, ndual <int>
 
 # utilization(npi = 1003000126)
 
