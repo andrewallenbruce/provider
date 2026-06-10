@@ -22,7 +22,7 @@ key <- provider:::new_data_frame(
 )
 
 # TBL 2: BASIC
-basic <- set_names(x$basic, x$number) |>
+basic <- rlang::set_names(x$basic, x$number) |>
   collapse::unlist2d(idcols = c("number", "var")) |>
   collapse::qTBL() |>
   collapse::recode_char(
@@ -48,8 +48,8 @@ basic <- collapse::ss(
     values = "V1",
     check.dups = TRUE
   ) |>
-  rc_bin("sole") |>
-  rc_ymd(c("enum_date", "cert_date", "updated"))
+  provider:::rc_bin("sole") |>
+  provider:::rc_ymd(c("enum_date", "cert_date", "updated"))
 
 collapse::settransformv(basic, "number", as.integer)
 
@@ -68,10 +68,11 @@ key <- collapse::join(key, basic, on = "number") |>
     "updated"
   ))
 
+# TBL 3: OTHER NAMES
 # 1 = Former
 # 2 = Professional
 # 5 = Other
-o_names <- set_names(x$other_names, x$number) |>
+o_names <- rlang::set_names(x$other_names, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>
@@ -117,9 +118,10 @@ key <- collapse::join(key, o_names, on = "number") |>
     "o_names"
   ))
 
+# TBL 4: IDENTIFIERS
 # 1 = Other (Non-Medicare)
 # 5 = Medicaid
-id <- set_names(x$identifiers, x$number) |>
+id <- rlang::set_names(x$identifiers, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>
@@ -152,8 +154,8 @@ key <- collapse::join(key, id, on = "number") |>
     "id"
   ))
 
-
-tx <- set_names(x$taxonomies, x$number) |>
+# TBL 5: TAXONOMIES
+tx <- rlang::set_names(x$taxonomies, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(idcol = "number", fill = TRUE, id.factor = FALSE) |>
   collapse::recode_char("--" = NA_character_) |>
@@ -198,8 +200,8 @@ key <- collapse::join(key, tx, on = "number") |>
     "tx"
   ))
 
-# TBL 4: PRACTICE LOCATIONS
-location <- set_names(x$practiceLocations, x$number) |>
+# TBL 6: PRACTICE LOCATIONS
+location <- rlang::set_names(x$practiceLocations, x$number) |>
   cheapr::list_drop_null() |>
   collapse::rowbind(
     idcol = "number",
@@ -217,7 +219,7 @@ location <- set_names(x$practiceLocations, x$number) |>
     purpose = "address_purpose",
     zip = "postal_code"
   ) |>
-  rc_address() |>
+  provider:::rc_combine("address", "add_2") |>
   collapse::roworderv(c("number")) |>
   collapse::qTBL()
 
@@ -225,8 +227,8 @@ collapse::settfmv(location, "number", as.character)
 collapse::settfmv(location, "number", as.integer)
 collapse::settfmv(location, "purpose", tolower)
 
-# TBL 3: ADDRESS
-address <- set_names(x$addresses, x$number) |>
+# TBL 7: ADDRESSES
+address <- rlang::set_names(x$addresses, x$number) |>
   collapse::rowbind(
     idcol = "number",
     fill = TRUE,
@@ -242,7 +244,7 @@ address <- set_names(x$addresses, x$number) |>
     purpose = "address_purpose",
     zip = "postal_code"
   ) |>
-  rc_address() |>
+  provider:::rc_combine("address", "add_2") |>
   collapse::roworderv(c("number", "purpose"))
 
 collapse::settfmv(address, "number", as.character)
@@ -285,10 +287,7 @@ address <- collapse::rowbind(
 ) |>
   collapse::roworderv(c("number", "purpose"))
 
-address <- collapse::rowbind(
-  location,
-  address
-) |>
+address <- collapse::rowbind(location, address) |>
   collapse::roworderv(c("number", "address", "purpose"))
 
 address <- cheapr::as_df(address)

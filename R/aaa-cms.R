@@ -33,19 +33,27 @@ cms <- function(
   count = FALSE,
   set = FALSE,
   ...,
-  end = rlang::call_name(rlang::call_match(
-    call = rlang::caller_call(),
-    fn = rlang::caller_fn()
-  ))
+  end = NULL
 ) {
+  if (is.null(end)) {
+    end <- rlang::eval_bare(
+      rlang::call_name(rlang::caller_call()),
+      parent.frame(3)
+    )
+  }
+
   x <- param_cms(...)
 
-  CMS(
+  x <- CMS(
     end = end,
     url = url_cms(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
+
+  x@count <- request_count(x)
+
+  return(x)
 }
 
 #' @noRd
@@ -85,6 +93,8 @@ S7::method(request_single, CMS) <- function(x) {
 
   res <- flatten_cms(x@url, x@query) |>
     base_request()
+
+  report_cleanup()
 
   add_class(res, x@end)
 }

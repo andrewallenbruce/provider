@@ -70,7 +70,6 @@ hospitals <- function(
   count = FALSE,
   set = FALSE
 ) {
-  # force(subgroup)
   check_subgroups(subgroup)
   check_bool_(multi)
   check_char_(status)

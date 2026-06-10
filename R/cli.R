@@ -36,15 +36,16 @@ report_pages <- S7::new_generic("report_pages", "x")
 #' @noRd
 S7::method(report_count, API) <- function(x) {
   total <- sum2(x@count)
-  msg <- c(
+  msg <- cli::format_inline(
     "{.strong {x@end}} returned ",
     "{.strong {mark(total)}} ",
-    "{cli::qty(total)}result{?s}."
+    "{cli::qty(total)}result{?s}"
   )
-  if (total == 0L) {
-    cli::cli_alert_warning(msg)
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
   } else {
-    cli::cli_alert_success(msg)
+    cli::cli_alert_success(text = msg)
   }
 }
 

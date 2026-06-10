@@ -58,21 +58,29 @@ pdc <- function(
   count = FALSE,
   set = FALSE,
   ...,
-  end = rlang::call_name(rlang::call_match(
-    call = rlang::caller_call(),
-    fn = rlang::caller_fn()
-  ))
+  end = NULL
 ) {
+  if (is.null(end)) {
+    end <- rlang::eval_bare(
+      rlang::call_name(rlang::caller_call()),
+      parent.frame(3)
+    )
+  }
+
   x <- param_pdc(...)
 
   check_modifiers(x, end)
 
-  PDC(
+  x <- PDC(
     end = end,
     url = url_pdc(end),
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
+
+  x@count <- request_count(x)
+
+  return(x)
 }
 
 #' @noRd
@@ -112,6 +120,8 @@ S7::method(request_single, PDC) <- function(x) {
 
   res <- flatten_pdc(x@url, x@query) |>
     base_request("results")
+
+  report_cleanup()
 
   add_class(res, x@end)
 }

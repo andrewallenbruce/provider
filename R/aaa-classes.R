@@ -34,17 +34,7 @@ CMS <- S7::new_class(
       getter = function(self) nchar(self@query)
     ),
     action = S7::class_character,
-    count = S7::new_property(
-      S7::class_integer,
-      getter = function(self) {
-        if (length(self@query) > 0L || self@action == "count") {
-          x <- flatten_cms(self@url, self@query, "/stats?")
-          x <- base_request(x, "found_rows")
-          return(x)
-        }
-        return(0L)
-      }
-    ),
+    count = S7::new_property(S7::class_integer, default = 0L),
     pages = S7::new_property(
       S7::class_integer,
       getter = function(self) {
@@ -63,17 +53,6 @@ CMSList <- S7::new_class(
   CMS,
   package = NULL,
   properties = list(
-    count = S7::new_property(
-      S7::class_integer,
-      getter = function(self) {
-        if (length(self@query) > 0L || self@action == "count") {
-          x <- flatten_cms(self@url, self@query, "/stats?")
-          x <- multi_count(x, self@url, "found_rows")
-          return(x)
-        }
-        return(0L)
-      }
-    ),
     pages = S7::new_property(
       S7::class_integer,
       getter = function(self) {
@@ -106,17 +85,7 @@ PDC <- S7::new_class(
       getter = function(self) nchar(self@query)
     ),
     action = S7::class_character,
-    count = S7::new_property(
-      S7::class_integer,
-      getter = function(self) {
-        if (length(self@query) > 0L || self@action == "count") {
-          x <- flatten_pdc(self@url, self@query, results = "false")
-          x <- base_request(x, "count")
-          return(x)
-        }
-        return(0L)
-      }
-    ),
+    count = S7::new_property(S7::class_integer, default = 0L),
     pages = S7::new_property(
       S7::class_integer,
       getter = function(self) {
@@ -162,6 +131,7 @@ S7::method(execute, API) <- function(x) {
 
   if (x@pages == 0L || x@action == "count") {
     report_count(x)
+    report_cleanup()
     return(x@count)
   }
 
@@ -186,6 +156,7 @@ S7::method(execute, CMSList) <- function(x) {
 
   if (x@pages == 0L || x@action == "count") {
     report_count(x)
+    report_cleanup()
     return(x@count)
   }
 

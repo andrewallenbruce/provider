@@ -51,12 +51,17 @@ cms_list <- function(
   set = FALSE,
   select = NULL,
   ...,
-  end = rlang::call_name(rlang::call_match(
-    call = rlang::caller_call(),
-    fn = rlang::caller_fn()
-  ))
+  end = NULL
 ) {
+  if (is.null(end)) {
+    end <- rlang::eval_bare(
+      rlang::call_name(rlang::caller_call()),
+      parent.frame(3)
+    )
+  }
+
   x <- param_cms(...)
+
   url <- url_cms_list(end)
 
   if (!is.null(select)) {
@@ -64,19 +69,23 @@ cms_list <- function(
     url <- url[collapse::fmatch(select, names(url), nomatch = 0L)]
   }
 
-  CMSList(
+  x <- CMSList(
     end = end,
     url = url,
     query = build(x) %||% character(0),
     action = count_set(count, set)
   )
+
+  x@count <- request_count(x)
+
+  return(x)
 }
 
 #' @noRd
 S7::method(request_count, CMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    x <- flatten_cms(x@url, x@query, "/stats?")
-    x <- multi_count(x, x@url, "found_rows")
+    u <- flatten_cms(x@url, x@query, "/stats?")
+    x <- multi_count(u, x@url, "found_rows")
     return(x)
   }
   return(0L)
