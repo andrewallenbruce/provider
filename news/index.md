@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9230 (2026-06-10)
+
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  polishing
+
 ## provider 0.0.1.9229 (2026-06-10)
 
 - namespaced all imported functions

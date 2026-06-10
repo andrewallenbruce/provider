@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9229</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9230</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,7 +124,7 @@
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ individual  :'data.frame':    4 obs. of  1 variable:</span></span>
 <span><span class="co">#&gt;   ..$ V1: chr [1:4] "MARK" "FUNG" "1043245657" "7810891009"</span></span>
-<span><span class="co">#&gt;  $ organization: hospitls [10 × 18] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ organization: hospitls [10 × 16] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ org_name : chr [1:10] "SOUTHERN TENNESSEE MEDICAL CENTER LLC" "CENTRAL MAINE MEDICAL CENTER" "ADCARE HOSPITAL OF WORCESTER, INC" "CAPE COD HOSPITAL INC" ...</span></span>
 <span><span class="co">#&gt;   ..$ org_dba  : chr [1:10] "HIGHPOINT HEALTH - WINCHESTER WITH ASCENSION SAINT THOMAS" NA "ADCARE HOSPITAL OF WORCESTER" "CAPE COD HOSPITAL" ...</span></span>
 <span><span class="co">#&gt;   ..$ enid     : chr [1:10] "O20020812000015" "O20020814000009" "O20020815000027" "O20020821000019" ...</span></span>
@@ -133,16 +133,14 @@
 <span><span class="co">#&gt;   ..$ ccn      : chr [1:10] "440058" "200024" "220062" "220012" ...</span></span>
 <span><span class="co">#&gt;   ..$ pac      : chr [1:10] "5193632180" "2567379563" "8325955347" "8921915950" ...</span></span>
 <span><span class="co">#&gt;   ..$ inc_date : Date[1:10], format: "1998-11-09" "1888-01-01" ...</span></span>
-<span><span class="co">#&gt;   ..$ org_type : chr [1:10] "LLC" "CORPORATION" "CORPORATION" "CORPORATION" ...</span></span>
+<span><span class="co">#&gt;   ..$ org_type : chr [1:10] "LLC" "Corporation" "Corporation" "Corporation" ...</span></span>
 <span><span class="co">#&gt;   ..$ status   : chr [1:10] "For-Profit" "Non-Profit" "For-Profit" "Non-Profit" ...</span></span>
 <span><span class="co">#&gt;   ..$ address  : chr [1:10] "185 HOSPITAL RD" "300 MAIN ST" "107 LINCOLN ST" "27 PARK STREET, CAPE COD HOSPITAL" ...</span></span>
 <span><span class="co">#&gt;   ..$ city     : chr [1:10] "WINCHESTER" "LEWISTON" "WORCESTER" "HYANNIS" ...</span></span>
 <span><span class="co">#&gt;   ..$ state    : chr [1:10] "TN" "ME" "MA" "MA" ...</span></span>
 <span><span class="co">#&gt;   ..$ zip      : chr [1:10] "373982404" "42407027" "16052401" "26015230" ...</span></span>
 <span><span class="co">#&gt;   ..$ loc_type : chr [1:10] "Primary" "Other" "Primary" "Other" ...</span></span>
-<span><span class="co">#&gt;   ..$ reh_date : Date[1:10], format: NA NA ...</span></span>
-<span><span class="co">#&gt;   ..$ prov_type: chr [1:10] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;   ..$ sub_group: chr [1:10] "Acute, General, IRF" "General" "Acute, General" "General, Psych" ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ sub_group: chr [1:10] "Acute, General, IRF" "General" "Acute, General" "General, Psychiatric" ...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="organizational-provider">Organizational Provider<a class="anchor" aria-label="anchor" href="#organizational-provider"></a>
@@ -166,7 +164,7 @@
 <span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="font-weight: bold;">2</span> results.</span></span>
-<span><span class="co">#&gt; hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; hospitls [2 × 16] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"</span></span>
 <span><span class="co">#&gt;  $ org_dba  : chr [1:2] NA NA</span></span>
 <span><span class="co">#&gt;  $ enid     : chr [1:2] "O20101110000259" "O20220827000145"</span></span>
@@ -175,16 +173,14 @@
 <span><span class="co">#&gt;  $ ccn      : chr [1:2] "331302" "33Z302"</span></span>
 <span><span class="co">#&gt;  $ pac      : chr [1:2] "3577554138" "3577554138"</span></span>
 <span><span class="co">#&gt;  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"</span></span>
-<span><span class="co">#&gt;  $ org_type : chr [1:2] "CORPORATION" "CORPORATION"</span></span>
+<span><span class="co">#&gt;  $ org_type : chr [1:2] "Corporation" "Corporation"</span></span>
 <span><span class="co">#&gt;  $ status   : chr [1:2] "Non-Profit" "Non-Profit"</span></span>
 <span><span class="co">#&gt;  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"</span></span>
 <span><span class="co">#&gt;  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"</span></span>
 <span><span class="co">#&gt;  $ state    : chr [1:2] "NY" "NY"</span></span>
 <span><span class="co">#&gt;  $ zip      : chr [1:2] "129322300" "129322300"</span></span>
 <span><span class="co">#&gt;  $ loc_type : chr [1:2] "Other" "Other"</span></span>
-<span><span class="co">#&gt;  $ reh_date : Date[1:2], format: NA NA</span></span>
-<span><span class="co">#&gt;  $ prov_type: chr [1:2] "CAH" "CAH"</span></span>
-<span><span class="co">#&gt;  $ sub_group: chr [1:2] NA NA</span></span>
+<span><span class="co">#&gt;  $ sub_group: chr [1:2] "CAH" "CAH"</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">77</span> results.</span></span>
