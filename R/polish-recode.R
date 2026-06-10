@@ -31,6 +31,7 @@ rc_hospitals <- function(
       "CORPORATION" = "Corporation",
       "OTHER" = "Other",
       "PARTNERSHIP" = "Partnership",
+      "SOLE PROPRIETOR" = "Sole Proprietor",
       default = NA_character_,
       set = TRUE
     ),
