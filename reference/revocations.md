@@ -168,13 +168,13 @@ revocations(count = TRUE)
 #> ◉ Pages : 2    
 
 revocations(org_name = not_blank(), count = TRUE)
-#> ✔ revocations returned 3,876 results.
+#> ✔ revocations returned 3,876 results
 
 revocations(org_name = starts("B"), count = TRUE)
-#> ✔ revocations returned 204 results.
+#> ✔ revocations returned 204 results
 
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
-#> ✔ revocations returned 45 results.
+#> ✔ revocations returned 45 results
 #> # A tibble: 45 × 11
 #>    org_name first   last    enid     npi multi state prov_desc reason start_date
 #>    <chr>    <chr>   <chr>   <chr>  <int> <int> <chr> <chr>     <chr>  <date>    

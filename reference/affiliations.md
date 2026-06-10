@@ -79,7 +79,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 affiliations(parent_ccn = 331302)
-#> ✔ affiliations returned 6 results.
+#> ✔ affiliations returned 6 results
 #> # A tibble: 6 × 7
 #>   first   last            npi pac        prov_type    prov_ccn parent_ccn
 #>   <chr>   <chr>         <int> <chr>      <chr>        <chr>    <chr>     
@@ -90,7 +90,7 @@ affiliations(parent_ccn = 331302)
 #> 5 DRAGOS  BANU     1558659367 6709004682 Nursing home 33Z302   331302    
 #> 6 JOSHUA  WARNER   1760167712 8123473469 Nursing home 33Z302   331302    
 affiliations(facility_ccn = 331302)
-#> ✔ affiliations returned 334 results.
+#> ✔ affiliations returned 334 results
 #> # A tibble: 334 × 7
 #>    first   last                  npi pac        prov_type prov_ccn parent_ccn
 #>    <chr>   <chr>               <int> <chr>      <chr>     <chr>    <chr>     

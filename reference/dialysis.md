@@ -73,7 +73,7 @@ dialysis(
 
 ``` r
 dialysis(org_name = "DaVita")
-#> ✔ dialysis returned 2,800 results.
+#> ✔ dialysis returned 2,800 results
 #> ✔ Retrieving 2 pages
 #> # A tibble: 2,800 × 12
 #>    fac_ccn fac_name    rating network status chain_name cert_date  address city 

@@ -167,7 +167,7 @@ utilization(count = TRUE)
 #> • Pages : 2,712     
 
 utilization(npi = 1003000423)
-#> ✔ utilization returned 12 results.
+#> ✔ utilization returned 12 results
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
 #>     year        npi first last  cred  entity address city  state zip   specialty

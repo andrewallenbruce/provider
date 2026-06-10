@@ -214,15 +214,15 @@ hospitals2(
 
 ``` r
 hospitals(prov_type = "reh", count = TRUE)
-#> ✔ hospitals returned 48 results.
+#> ✔ hospitals returned 48 results
 
 hospitals2(hosp_type = "reh", count = TRUE)
-#> ✔ hospitals2 returned 41 results.
+#> ✔ hospitals2 returned 41 results
 
 x <- subgroups(acute = FALSE, psych = TRUE)
 
 hospitals(city = "Atlanta", state = "GA", subgroup = x)
-#> ✔ hospitals returned 2 results.
+#> ✔ hospitals returned 2 results
 #> # A tibble: 2 × 16
 #>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #> * <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
@@ -233,7 +233,7 @@ hospitals(city = "Atlanta", state = "GA", subgroup = x)
 
 hospitals2(ccn = hospitals()$ccn)
 #> ✔ Returning first 10 rows
-#> ✔ hospitals2 returned 9 results.
+#> ✔ hospitals2 returned 9 results
 #> # A tibble: 9 × 10
 #>   ccn    org_name       prov_type status rating address city  state zip   county
 #>   <chr>  <chr>          <chr>     <chr>   <int> <chr>   <chr> <chr> <chr> <chr> 
@@ -249,7 +249,7 @@ hospitals2(ccn = hospitals()$ccn)
 
 hospitals(ccn = hospitals2()$ccn)
 #> ✔ Returning first 10 rows
-#> ✔ hospitals returned 9 results.
+#> ✔ hospitals returned 9 results
 #> # A tibble: 9 × 16
 #>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #> * <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 

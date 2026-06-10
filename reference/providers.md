@@ -85,10 +85,10 @@ providers(count = TRUE)
 #> ◉ Pages : 597      
 
 providers(count = TRUE, org_name = not_blank())
-#> ✔ providers returned 433,496 results.
+#> ✔ providers returned 433,496 results
 
 providers(org_name = starts("AB"), state = c("TX", "CA"))
-#> ✔ providers returned 231 results.
+#> ✔ providers returned 231 results
 #> # A tibble: 231 × 10
 #>    org_name       first last  state prov_type prov_desc    npi multi pac   enid 
 #>    <chr>          <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>

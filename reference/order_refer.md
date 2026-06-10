@@ -94,7 +94,7 @@ order_refer(count = TRUE)
 #> ◉ Pages : 402      
 
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ order_refer returned 135 results.
+#> ✔ order_refer returned 135 results
 #> # A tibble: 135 × 8
 #>    first    last         npi ptb_ind dme_ind hha_ind pmd_ind hsp_ind
 #>    <chr>    <chr>      <int>   <int>   <int>   <int>   <int>   <int>

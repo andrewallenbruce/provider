@@ -107,7 +107,7 @@ Medicare
 
 ``` r
 facility(city = "Valdosta", state = "GA")
-#> ✔ facility returned 12 results.
+#> ✔ facility returned 12 results
 #> ✔ Retrieving 4 pages
 #> # A tibble: 12 × 15
 #>    fac_type enid      npi multi ccn   pac   org_name org_dba inc_date   org_type

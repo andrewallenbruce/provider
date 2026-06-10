@@ -115,10 +115,10 @@ adjustments.
 
 ``` r
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
-#> ✔ quality returned 41,788 results.
+#> ✔ quality returned 41,788 results
 
 quality(npi = c(1003026055, 1316939655))
-#> ✔ quality returned 10 results.
+#> ✔ quality returned 10 results
 #> ✔ Retrieving 6 pages
 #> # A tibble: 10 × 25
 #>     year        npi state  size specialty        years patients services charges
