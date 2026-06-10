@@ -1,8 +1,14 @@
-# Provider Utilization & Demographics by Year
+# Provider Utilization by Year
 
 Access information on services and procedures provided to Original
 Medicare (fee-for-service) Part B beneficiaries by physicians and other
 healthcare professionals; aggregated by provider, service and geography.
+
+The **Provider** dataset allows the user access to data such as services
+and procedures performed; charges submitted and payment received; and
+beneficiary demographic and health characteristics for providers
+treating Original Medicare (fee-for-service) Part B beneficiaries,
+aggregated by year.
 
 ## Usage
 
@@ -27,7 +33,9 @@ utilization(
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
-  risk_score = NULL,
+  avg_risk = NULL,
+  dual = NULL,
+  ndual = NULL,
   count = FALSE
 )
 ```
@@ -52,11 +60,14 @@ utilization(
 
 - entity:
 
-  `<chr>` Provider entity type; `"I"` (Individual), `"O"` (Organization)
+  `<chr>` Type of entity reported in NPPES. An entity code of `I`
+  identifies providers registered as individuals and an entity type code
+  of `O` identifies providers registered as organizations.
 
 - address, city, state, zip:
 
-  description
+  The provider's street address, city, state and zip code, as reported
+  in NPPES.
 
 - specialty:
 
@@ -66,7 +77,13 @@ utilization(
 - participating:
 
   `<lgl>` Identifies whether the provider participates in Medicare
-  and/or accepts assignment of Medicare allowed amounts
+  and/or accepts assignment of Medicare allowed amounts. The value will
+  be `Y` for any provider that had at least one claim identifying the
+  provider as participating in Medicare or accepting assignment of
+  Medicare allowed amounts within HCPCS code and place of service. A
+  non-participating provider may elect to accept Medicare allowed
+  amounts for some services and not accept Medicare allowed amounts for
+  other services.
 
 - hcpcs:
 
@@ -100,13 +117,27 @@ utilization(
 
 - avg_age:
 
-  `<int>` Average age of beneficiaries. Beneficiary age is calculated at
+  `<dbl>` Average age of beneficiaries. Beneficiary age is calculated at
   the end of the calendar year or at the time of death
 
-- risk_score:
+- avg_risk:
 
   `<dbl>` Average Hierarchical Condition Category (HCC) risk score of
   beneficiaries
+
+- dual:
+
+  `<int>` Number of Medicare beneficiaries qualified to receive Medicare
+  and Medicaid benefits. Beneficiaries are classified as Medicare and
+  Medicaid entitlement if in any month in the given calendar year they
+  were receiving full or partial Medicaid benefits.
+
+- ndual:
+
+  `<int>` Number of Medicare beneficiaries qualified to receive Medicare
+  only benefits. Beneficiaries are classified as Medicare only
+  entitlement if they received zero months of any Medicaid benefits
+  (full or partial) in the given calendar year.
 
 - count:
 
@@ -115,34 +146,6 @@ utilization(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-
-## By Provider
-
-**type =**`"Provider"`:
-
-The **Provider** dataset allows the user access to data such as services
-and procedures performed; charges submitted and payment received; and
-beneficiary demographic and health characteristics for providers
-treating Original Medicare (fee-for-service) Part B beneficiaries,
-aggregated by year.
-
-## By Provider and Service
-
-**type =**`"Service"`:
-
-The **Provider and Service** dataset is aggregated by:
-
-1.  Rendering provider's NPI
-
-2.  Healthcare Common Procedure Coding System (HCPCS) code
-
-3.  Place of Service (Facility or Non-facility)
-
-There can be multiple records for a given NPI based on the number of
-distinct HCPCS codes that were billed and where the services were
-provided. Data have been aggregated based on the place of service
-because separate fee schedules apply depending on whether the place of
-service submitted on the claim is facility or non-facility.
 
 ## Links
 
@@ -165,18 +168,6 @@ utilization(count = TRUE)
 
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results.
-#> • 2024 : 1
-#> • 2023 : 1
-#> • 2022 : 1
-#> • 2021 : 1
-#> • 2020 : 1
-#> • 2019 : 1
-#> • 2018 : 1
-#> • 2017 : 1
-#> • 2016 : 1
-#> • 2015 : 1
-#> • 2014 : 1
-#> • 2013 : 1
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
 #>     year        npi first last  cred  entity address city  state zip   specialty
@@ -196,8 +187,4 @@ utilization(npi = 1003000423)
 #> # ℹ 11 more variables: participating <int>, hcpcs <int>, patients <int>,
 #> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>, avg_age <int>,
 #> #   avg_risk <dbl>, dual <int>, ndual <int>
-
-# utilization(npi = 1003000126)
-
-# utilization(npi = 1043477615)
 ```

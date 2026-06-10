@@ -89,9 +89,9 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> opt_out Totals
-#> • Rows  : 56,300
-#> • Pages : 12    
+#> opt_out summary
+#> ◉ Rows  : 56,300
+#> ◉ Pages : 12    
 
 opt_out(state = "GA", specialty = contains("Psych"))
 #> ✔ opt_out returned 226 results.

@@ -106,10 +106,6 @@ Medicare
 ``` r
 owner(city = "Valdosta", state = "GA")
 #> ✔ owner returned 13 results.
-#> • HHA      : 2
-#> • SNF      : 2
-#> • Hospice  : 1
-#> • Hospital : 8
 #> ✔ Retrieving 4 pages
 #> # A tibble: 13 × 18
 #>    fac_type org_enid    org_pac org_name pac   role  asc_date   own_name own_dba

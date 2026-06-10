@@ -39,7 +39,7 @@
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
-  : Provider Utilization & Demographics by Year
+  : Provider Utilization by Year
 - [`excludes()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`starts()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)

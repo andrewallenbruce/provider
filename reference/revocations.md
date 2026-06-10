@@ -163,15 +163,15 @@ Regulations](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-
 
 ``` r
 revocations(count = TRUE)
-#> revocations Totals
-#> • Rows  : 7,465
-#> • Pages : 2    
+#> revocations summary
+#> ◉ Rows  : 7,059
+#> ◉ Pages : 2    
 
 revocations(org_name = not_blank(), count = TRUE)
-#> ✔ revocations returned 4,199 results.
+#> ✔ revocations returned 3,876 results.
 
 revocations(org_name = starts("B"), count = TRUE)
-#> ✔ revocations returned 223 results.
+#> ✔ revocations returned 204 results.
 
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #> ✔ revocations returned 45 results.

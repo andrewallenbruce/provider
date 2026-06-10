@@ -117,12 +117,12 @@ transparency(
 
 ``` r
 transparency(count = TRUE)
-#> transparency Totals
-#> • Rows  : 11,440
-#> • Pages : 3     
+#> transparency summary
+#> ◉ Rows  : 12,334
+#> ◉ Pages : 3     
 
 transparency(count = TRUE, action = "met")
-#> ✔ transparency returned 3,340 results.
+#> ✔ transparency returned 3,506 results.
 
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result.

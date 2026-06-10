@@ -80,9 +80,9 @@ providers(
 
 ``` r
 providers(count = TRUE)
-#> providers Totals
-#> • Rows  : 2,981,799
-#> • Pages : 597      
+#> providers summary
+#> ◉ Rows  : 2,981,799
+#> ◉ Pages : 597      
 
 providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results.

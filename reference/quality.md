@@ -17,8 +17,8 @@ quality(
   specialty = NULL,
   years = NULL,
   patients = NULL,
-  charges = NULL,
   services = NULL,
+  charges = NULL,
   final_score = NULL,
   adjustment = NULL,
   count = FALSE
@@ -43,7 +43,7 @@ metrics(year = NULL)
 
 - state:
 
-  The practice state of the TIN associated with the clinician.
+  `<chr>` The practice state of the TIN associated with the clinician.
 
 - size:
 
@@ -52,7 +52,7 @@ metrics(year = NULL)
 
 - specialty:
 
-  Derived from the specialty codes in Medicare Part B claims.
+  `<chr>` Derived from the specialty codes in Medicare Part B claims.
 
 - years:
 
@@ -64,16 +64,16 @@ metrics(year = NULL)
   `<int>` Number of Medicare patients who received covered professional
   services during MIPS eligibility determination period.
 
-- charges:
-
-  `<int>` Allowed charges under the PFS on Medicare Part B claims with a
-  service date during MIPS eligibility determination period.
-
 - services:
 
   `<int>` Number of covered professional services provided to Medicare
   Part B patients with a service date during MIPS eligibility
   determination period.
+
+- charges:
+
+  `<int>` Allowed charges under the PFS on Medicare Part B claims with a
+  service date during MIPS eligibility determination period.
 
 - final_score:
 
@@ -116,31 +116,23 @@ adjustments.
 ``` r
 quality(year = c(2021, 2024), state = "GA", count = TRUE)
 #> ✔ quality returned 41,788 results.
-#> • 2021 : 23,617
-#> • 2024 : 18,171
 
 quality(npi = c(1003026055, 1316939655))
 #> ✔ quality returned 10 results.
-#> • 2022 : 1
-#> • 2021 : 2
-#> • 2020 : 3
-#> • 2019 : 1
-#> • 2018 : 1
-#> • 2017 : 2
 #> ✔ Retrieving 6 pages
 #> # A tibble: 10 × 25
-#>     year        npi state  size specialty        years patients charges services
-#>    <int>      <int> <chr> <int> <chr>            <int>    <int>   <int>    <int>
-#>  1  2017 1003026055 FL      189 Endocrinology        8    13189  5.84e6       NA
-#>  2  2017 1003026055 NC      191 Endocrinology        8    14784  8.90e6       NA
-#>  3  2018 1003026055 FL      135 Endocrinology        8    12317  5.02e6        0
-#>  4  2019 1003026055 FL      150 Endocrinology        9    12415  5.62e6    52009
-#>  5  2020 1003026055 FL      151 Endocrinology       10    12917  5.46e6    53599
-#>  6  2020 1003026055 FL        7 Endocrinology       10     1244  7.19e5     8160
-#>  7  2020 1316939655 NY      295 Missing             16    22242  9.12e6   101308
-#>  8  2021 1003026055 FL        9 Endocrinology       11     1181  6.98e5     7068
-#>  9  2021 1316939655 NY      455 Physician Assis…    17    23586  1.09e7   116187
-#> 10  2022 1316939655 NY      352 Physician Assis…    18    23244  1.05e7   110514
+#>     year        npi state  size specialty        years patients services charges
+#>    <int>      <int> <chr> <int> <chr>            <int>    <int>    <int>   <int>
+#>  1  2017 1003026055 FL      189 Endocrinology        8    13189       NA  5.84e6
+#>  2  2017 1003026055 NC      191 Endocrinology        8    14784       NA  8.90e6
+#>  3  2018 1003026055 FL      135 Endocrinology        8    12317        0  5.02e6
+#>  4  2019 1003026055 FL      150 Endocrinology        9    12415    52009  5.62e6
+#>  5  2020 1003026055 FL      151 Endocrinology       10    12917    53599  5.46e6
+#>  6  2020 1003026055 FL        7 Endocrinology       10     1244     8160  7.19e5
+#>  7  2020 1316939655 NY      295 Missing             16    22242   101308  9.12e6
+#>  8  2021 1003026055 FL        9 Endocrinology       11     1181     7068  6.98e5
+#>  9  2021 1316939655 NY      455 Physician Assis…    17    23586   116187  1.09e7
+#> 10  2022 1316939655 NY      352 Physician Assis…    18    23244   110514  1.05e7
 #> # ℹ 16 more variables: final_score <dbl>, adjustment <dbl>, pi_score <int>,
 #> #   qa_score <dbl>, complex_bonus <dbl>, part_opt <chr>, qi_score <dbl>,
 #> #   ia_score <int>, cost_score <dbl>, indicators <chr>, cred <chr>,

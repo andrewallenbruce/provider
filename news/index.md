@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9229 (2026-06-10)
+
+- namespaced all imported functions
+
 ## provider 0.0.1.9228 (2026-06-09)
 
 - refactored `rc_other`
