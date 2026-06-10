@@ -8,7 +8,7 @@ check_modifiers <- function(x, end) {
           "Invalid {.cls modifier} used in {.fn {end}}: ",
           "x" = "{.fn ends} & {.fn excludes} do not work with the underlying API."
         ),
-        call = call2(end)
+        call = rlang::call2(end)
       )
     }
   }
@@ -58,7 +58,10 @@ pdc <- function(
   count = FALSE,
   set = FALSE,
   ...,
-  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
+  end = rlang::call_name(rlang::call_match(
+    call = rlang::caller_call(),
+    fn = rlang::caller_fn()
+  ))
 ) {
   x <- param_pdc(...)
 
@@ -82,7 +85,17 @@ flatten_pdc <- function(url, query = NULL, ...) {
 }
 
 #' @noRd
-method(request_preview, PDC) <- function(x) {
+S7::method(request_count, PDC) <- function(x) {
+  if (length(x@query) > 0L || x@action == "count") {
+    x <- flatten_pdc(x@url, x@query, results = "false")
+    x <- base_request(x, "count")
+    return(x)
+  }
+  return(0L)
+}
+
+#' @noRd
+S7::method(request_preview, PDC) <- function(x) {
   report_preview()
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
@@ -94,7 +107,7 @@ method(request_preview, PDC) <- function(x) {
 }
 
 #' @noRd
-method(request_single, PDC) <- function(x) {
+S7::method(request_single, PDC) <- function(x) {
   report_count(x)
 
   res <- flatten_pdc(x@url, x@query) |>
@@ -104,7 +117,7 @@ method(request_single, PDC) <- function(x) {
 }
 
 #' @noRd
-method(request_multi, PDC) <- function(x) {
+S7::method(request_multi, PDC) <- function(x) {
   report_count(x)
   report_pages(x)
 

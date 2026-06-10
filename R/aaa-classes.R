@@ -1,41 +1,41 @@
 #' @noRd
-ParamCMS <- new_class("ParamCMS", class_list, package = NULL)
+ParamCMS <- S7::new_class("ParamCMS", S7::class_list, package = NULL)
 
 #' @noRd
-ParamPDC <- new_class("ParamPDC", class_list, package = NULL)
+ParamPDC <- S7::new_class("ParamPDC", S7::class_list, package = NULL)
 
 #' @noRd
-Query <- new_class("Query", class_list, package = NULL)
+Query <- S7::new_class("Query", S7::class_list, package = NULL)
 
 #' @noRd
-QueryCMS <- new_class("QueryCMS", Query, package = NULL)
+QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
 
 #' @noRd
-QueryPDC <- new_class("QueryPDC", Query, package = NULL)
+QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
-API <- new_class("API", package = NULL, abstract = TRUE)
+API <- S7::new_class("API", package = NULL, abstract = TRUE)
 
 #' @noRd
-CMS <- new_class(
+CMS <- S7::new_class(
   "CMS",
   API,
   package = NULL,
   properties = list(
-    end = class_character,
-    url = class_character | class_list,
-    limit = new_property(
-      class_integer,
+    end = S7::class_character,
+    url = S7::class_character | S7::class_list,
+    limit = S7::new_property(
+      S7::class_integer,
       getter = function(self) 5000L
     ),
-    query = class_character,
-    length = new_property(
-      class_integer,
+    query = S7::class_character,
+    length = S7::new_property(
+      S7::class_integer,
       getter = function(self) nchar(self@query)
     ),
-    action = class_character,
-    count = new_property(
-      class_integer,
+    action = S7::class_character,
+    count = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         if (length(self@query) > 0L || self@action == "count") {
           x <- flatten_cms(self@url, self@query, "/stats?")
@@ -45,8 +45,8 @@ CMS <- new_class(
         return(0L)
       }
     ),
-    pages = new_property(
-      class_integer,
+    pages = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         if (self@count == 0L) {
           return(0L)
@@ -58,13 +58,13 @@ CMS <- new_class(
 )
 
 #' @noRd
-CMSList <- new_class(
+CMSList <- S7::new_class(
   "CMSList",
   CMS,
   package = NULL,
   properties = list(
-    count = new_property(
-      class_integer,
+    count = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         if (length(self@query) > 0L || self@action == "count") {
           x <- flatten_cms(self@url, self@query, "/stats?")
@@ -74,8 +74,8 @@ CMSList <- new_class(
         return(0L)
       }
     ),
-    pages = new_property(
-      class_integer,
+    pages = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         x <- unlist_(self@count)
         if (collapse::allv(x, 0L)) {
@@ -89,25 +89,25 @@ CMSList <- new_class(
 )
 
 #' @noRd
-PDC <- new_class(
+PDC <- S7::new_class(
   "PDC",
   API,
   package = NULL,
   properties = list(
-    end = class_character,
-    url = class_character,
-    limit = new_property(
-      class_integer,
+    end = S7::class_character,
+    url = S7::class_character,
+    limit = S7::new_property(
+      S7::class_integer,
       getter = function(self) 1500L
     ),
-    query = class_character,
-    length = new_property(
-      class_integer,
+    query = S7::class_character,
+    length = S7::new_property(
+      S7::class_integer,
       getter = function(self) nchar(self@query)
     ),
-    action = class_character,
-    count = new_property(
-      class_integer,
+    action = S7::class_character,
+    count = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         if (length(self@query) > 0L || self@action == "count") {
           x <- flatten_pdc(self@url, self@query, results = "false")
@@ -117,8 +117,8 @@ PDC <- new_class(
         return(0L)
       }
     ),
-    pages = new_property(
-      class_integer,
+    pages = S7::new_property(
+      S7::class_integer,
       getter = function(self) {
         if (self@count == 0L) {
           return(0L)
@@ -130,22 +130,25 @@ PDC <- new_class(
 )
 
 #' @noRd
-build <- new_generic("build", "x")
+build <- S7::new_generic("build", "x")
 
 #' @noRd
-execute <- new_generic("execute", "x")
+execute <- S7::new_generic("execute", "x")
 
 #' @noRd
-request_preview <- new_generic("request_preview", "x")
+request_count <- S7::new_generic("request_count", "x")
 
 #' @noRd
-request_single <- new_generic("request_single", "x")
+request_preview <- S7::new_generic("request_preview", "x")
 
 #' @noRd
-request_multi <- new_generic("request_multi", "x")
+request_single <- S7::new_generic("request_single", "x")
 
 #' @noRd
-method(execute, API) <- function(x) {
+request_multi <- S7::new_generic("request_multi", "x")
+
+#' @noRd
+S7::method(execute, API) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {
@@ -169,7 +172,7 @@ method(execute, API) <- function(x) {
 }
 
 #' @noRd
-method(execute, CMSList) <- function(x) {
+S7::method(execute, CMSList) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {

@@ -33,7 +33,10 @@ cms <- function(
   count = FALSE,
   set = FALSE,
   ...,
-  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
+  end = rlang::call_name(rlang::call_match(
+    call = rlang::caller_call(),
+    fn = rlang::caller_fn()
+  ))
 ) {
   x <- param_cms(...)
 
@@ -44,6 +47,7 @@ cms <- function(
     action = count_set(count, set)
   )
 }
+
 #' @noRd
 flatten_cms <- function(url, query = NULL, append = "?", ...) {
   flatten_url(
@@ -54,7 +58,17 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 }
 
 #' @noRd
-method(request_preview, CMS) <- function(x) {
+S7::method(request_count, CMS) <- function(x) {
+  if (length(x@query) > 0L || x@action == "count") {
+    x <- flatten_cms(x@url, x@query, "/stats?")
+    x <- base_request(x, "found_rows")
+    return(x)
+  }
+  return(0L)
+}
+
+#' @noRd
+S7::method(request_preview, CMS) <- function(x) {
   report_preview()
 
   res <- flatten_cms(x@url, NULL, size = 10L) |>
@@ -66,7 +80,7 @@ method(request_preview, CMS) <- function(x) {
 }
 
 #' @noRd
-method(request_single, CMS) <- function(x) {
+S7::method(request_single, CMS) <- function(x) {
   report_count(x)
 
   res <- flatten_cms(x@url, x@query) |>
@@ -76,7 +90,7 @@ method(request_single, CMS) <- function(x) {
 }
 
 #' @noRd
-method(request_multi, CMS) <- function(x) {
+S7::method(request_multi, CMS) <- function(x) {
   report_count(x)
   report_pages(x)
 

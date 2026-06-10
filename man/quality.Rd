@@ -13,8 +13,8 @@ quality(
   specialty = NULL,
   years = NULL,
   patients = NULL,
-  charges = NULL,
   services = NULL,
+  charges = NULL,
   final_score = NULL,
   adjustment = NULL,
   count = FALSE
@@ -31,12 +31,14 @@ NPI indicate that an individual clinician has reassigned billing rights to
 multiple TINs and was identified as a MIPS eligible clinician under
 multiple TIN/NPI combinations.}
 
-\item{state}{The practice state of the TIN associated with the clinician.}
+\item{state}{\verb{<chr>} The practice state of the TIN associated with the
+clinician.}
 
 \item{size}{\verb{<int>} Number of clinicians associated with the TIN through
 Medicare Part B claims for the performance year.}
 
-\item{specialty}{Derived from the specialty codes in Medicare Part B claims.}
+\item{specialty}{\verb{<chr>} Derived from the specialty codes in Medicare Part B
+claims.}
 
 \item{years}{\verb{<int>} Number of years since NPI's first approved enrollment
 date across all enrollments in PECOS.}
@@ -44,12 +46,12 @@ date across all enrollments in PECOS.}
 \item{patients}{\verb{<int>} Number of Medicare patients who received covered
 professional services during MIPS eligibility determination period.}
 
-\item{charges}{\verb{<int>} Allowed charges under the PFS on Medicare Part B
-claims with a service date during MIPS eligibility determination period.}
-
 \item{services}{\verb{<int>} Number of covered professional services provided to
 Medicare Part B patients with a service date during MIPS eligibility
 determination period.}
+
+\item{charges}{\verb{<int>} Allowed charges under the PFS on Medicare Part B
+claims with a service date during MIPS eligibility determination period.}
 
 \item{final_score}{\verb{<int>} The MIPS final score attributed to the clinician
 (identified by TIN/NPI combination).}

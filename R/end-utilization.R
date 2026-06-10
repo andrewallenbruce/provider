@@ -1,33 +1,15 @@
-#' Provider Utilization & Demographics by Year
+#' Provider Utilization by Year
 #'
 #' @description
 #' Access information on services and procedures provided to Original
 #' Medicare (fee-for-service) Part B beneficiaries by physicians and other
 #' healthcare professionals; aggregated by provider, service and geography.
 #'
-#' @section By Provider:
-#' __type =__`"Provider"`:
-#'
 #' The __Provider__ dataset allows the user access to data such as
 #' services and procedures performed; charges submitted and payment received;
 #' and beneficiary demographic and health characteristics for providers
 #' treating Original Medicare (fee-for-service) Part B beneficiaries,
 #' aggregated by year.
-#'
-#' @section By Provider and Service:
-#' __type =__`"Service"`:
-#'
-#' The __Provider and Service__ dataset is aggregated by:
-#'
-#'    1. Rendering provider's NPI
-#'    2. Healthcare Common Procedure Coding System (HCPCS) code
-#'    3. Place of Service (Facility or Non-facility)
-#'
-#' There can be multiple records for a given NPI based on the number of
-#' distinct HCPCS codes that were billed and where the services were
-#' provided. Data have been aggregated based on the place of service
-#' because separate fee schedules apply depending on whether the place
-#' of service submitted on the claim is facility or non-facility.
 #'
 #' @section Links:
 #'   - [Medicare Physician & Other Practitioners: by Provider API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)
@@ -39,13 +21,20 @@
 #' @param npi `<int>` 10-digit national provider identifier
 #' @param first,last `<chr>` Individual/Organizational provider's name
 #' @param cred `<chr>` Individual provider's credentials
-#' @param entity `<chr>` Provider entity type; `"I"` (Individual), `"O"`
-#'   (Organization)
-#' @param address,city,state,zip description
+#' @param entity `<chr>` Type of entity reported in NPPES. An entity code of `I`
+#'   identifies providers registered as individuals and an entity type code of
+#'   `O` identifies providers registered as organizations.
+#' @param address,city,state,zip The provider's street address, city, state and
+#'   zip code, as reported in NPPES.
 #' @param specialty `<chr>` Provider specialty reported on the largest number of
 #'   claims submitted
 #' @param participating `<lgl>` Identifies whether the provider participates in
-#'   Medicare and/or accepts assignment of Medicare allowed amounts
+#'   Medicare and/or accepts assignment of Medicare allowed amounts. The value
+#'   will be `Y` for any provider that had at least one claim identifying the
+#'   provider as participating in Medicare or accepting assignment of Medicare
+#'   allowed amounts within HCPCS code and place of service. A non-participating
+#'   provider may elect to accept Medicare allowed amounts for some services and
+#'   not accept Medicare allowed amounts for other services.
 #' @param hcpcs `<int>` Total number of unique HCPCS codes
 #' @param patients `<int>` Total Medicare beneficiaries receiving services from
 #'   the provider
@@ -59,20 +48,24 @@
 #' @param payment `<dbl>` Total amount that Medicare paid after deductible and
 #'   coinsurance amounts have been deducted for all the provider's line item
 #'   services.
-#' @param avg_age `<int>` Average age of beneficiaries. Beneficiary age is
+#' @param avg_age `<dbl>` Average age of beneficiaries. Beneficiary age is
 #'   calculated at the end of the calendar year or at the time of death
-#' @param risk_score `<dbl>` Average Hierarchical Condition Category (HCC) risk
+#' @param avg_risk `<dbl>` Average Hierarchical Condition Category (HCC) risk
 #'   score of beneficiaries
+#' @param dual `<int>` Number of Medicare beneficiaries qualified to receive
+#'   Medicare and Medicaid benefits. Beneficiaries are classified as Medicare
+#'   and Medicaid entitlement if in any month in the given calendar year they
+#'   were receiving full or partial Medicaid benefits.
+#' @param ndual `<int>` Number of Medicare beneficiaries qualified to receive
+#'   Medicare only benefits. Beneficiaries are classified as Medicare only
+#'   entitlement if they received zero months of any Medicaid benefits (full or
+#'   partial) in the given calendar year.
 #' @returns A [tibble][tibble::tibble-package]
 #'
 #' @examplesIf httr2::is_online()
 #' utilization(count = TRUE)
 #'
 #' utilization(npi = 1003000423)
-#'
-#' # utilization(npi = 1003000126)
-#'
-#' # utilization(npi = 1043477615)
 #'
 #' @export
 utilization <- function(
@@ -95,7 +88,9 @@ utilization <- function(
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
-  risk_score = NULL,
+  avg_risk = NULL,
+  dual = NULL,
+  ndual = NULL,
   count = FALSE
 ) {
   check_bool_(participating)
@@ -122,7 +117,9 @@ utilization <- function(
     Tot_Mdcr_Alowd_Amt = allowed,
     Tot_Mdcr_Pymt_Amt = payment,
     Bene_Avg_Age = avg_age,
-    Bene_Avg_Risk_Scre = risk_score
+    Bene_Avg_Risk_Scre = avg_risk,
+    Bene_Dual_Cnt = dual,
+    Bene_Ndual_Cnt = ndual
   )
 
   x <- execute(x)

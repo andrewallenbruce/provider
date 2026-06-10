@@ -15,13 +15,13 @@ get_operators <- function(x) {
 }
 
 #' @noRd
-build2 <- new_generic("build2", "x")
+build2 <- S7::new_generic("build2", "x")
 
 #' @noRd
-method(build2, ParamCMS) <- function(x) {
-  S7_data(x) %0% return(NULL)
+S7::method(build2, ParamCMS) <- function(x) {
+  S7::S7_data(x) %0% return(NULL)
 
-  S7_data(x) |>
+  S7::S7_data(x) |>
     purrr::imap(
       \(x, N) {
         V <- get_values(x)
@@ -43,10 +43,10 @@ method(build2, ParamCMS) <- function(x) {
 }
 
 #' @noRd
-method(build2, ParamPDC) <- function(x) {
-  S7_data(x) %0% return(NULL)
+S7::method(build2, ParamPDC) <- function(x) {
+  S7::S7_data(x) %0% return(NULL)
 
-  S7_data(x) |>
+  S7::S7_data(x) |>
     purrr::imap(
       \(x, N) {
         V <- get_values(x)
@@ -68,29 +68,29 @@ method(build2, ParamPDC) <- function(x) {
 }
 
 #' @noRd
-index <- new_generic("index", "x")
+index <- S7::new_generic("index", "x")
 
 #' @noRd
-method(index, Query) <- function(x) {
-  S7_data(x) |>
+S7::method(index, Query) <- function(x) {
+  S7::S7_data(x) |>
     unname() |>
     purrr::imap_chr(\(x, i) {
       paste0(sub_idx(x, i - 1L), collapse = "&")
     }) |>
-    set_names2(S7_data(x))
+    set_names2(S7::S7_data(x))
 }
 
 #' @noRd
-flatten <- new_generic("flatten", "x")
+flatten <- S7::new_generic("flatten", "x")
 
 #' @noRd
-method(flatten, class_any) <- function(x) {
+S7::method(flatten, S7::class_any) <- function(x) {
   NULL
 }
 
 #' @noRd
-method(flatten, Query) <- function(x) {
-  S7_data(x) |>
+S7::method(flatten, Query) <- function(x) {
+  S7::S7_data(x) |>
     unname() |>
     purrr::imap_chr(\(x, i) {
       paste0(sub_idx(x, i - 1L), collapse = "&")

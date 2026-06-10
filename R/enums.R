@@ -7,18 +7,18 @@ tag_bool <- function(x = NULL) {
 }
 
 #' @noRd
-tag_enum <- function(x = NULL, call = caller_env()) {
+tag_enum <- function(x = NULL, call = rlang::caller_env()) {
   if (is.null(x)) {
     return(NULL)
   }
 
-  VAR <- as_string(call_args(call_match())$x)
+  VAR <- rlang::as_string(rlang::call_args(rlang::call_match())$x)
 
   ENUM <- enumerations(VAR)
 
-  x <- arg_match(
+  x <- rlang::arg_match(
     arg = x,
-    values = names2(ENUM),
+    values = rlang::names2(ENUM),
     multiple = TRUE,
     error_arg = VAR,
     error_call = call
@@ -28,7 +28,11 @@ tag_enum <- function(x = NULL, call = caller_env()) {
 }
 
 #' @noRd
-enumerations <- function(x, arg = caller_arg(x), call = caller_env()) {
+enumerations <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
   switch(
     x,
     # <clia>

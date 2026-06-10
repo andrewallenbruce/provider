@@ -2,8 +2,8 @@
 rc_hospitals <- function(
   x,
   column,
-  arg = caller_arg(column),
-  call = caller_env()
+  arg = rlang::caller_arg(column),
+  call = rlang::caller_env()
 ) {
   switch(
     column,
@@ -59,7 +59,12 @@ rc_hospitals <- function(
 }
 
 #' @noRd
-rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
+rc_clia <- function(
+  x,
+  column,
+  arg = rlang::caller_arg(column),
+  call = rlang::caller_env()
+) {
   switch(
     column,
     CRTFCTN_ACTN_TYPE_CD = collapse::recode_char(
@@ -190,7 +195,12 @@ rc_clia <- function(x, column, arg = caller_arg(column), call = caller_env()) {
 }
 
 #' @noRd
-rc_owner <- function(x, column, arg = caller_arg(column), call = caller_env()) {
+rc_owner <- function(
+  x,
+  column,
+  arg = rlang::caller_arg(column),
+  call = rlang::caller_env()
+) {
   switch(
     column,
     own_type = collapse::recode_char(

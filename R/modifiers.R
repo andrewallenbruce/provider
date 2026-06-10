@@ -1,11 +1,11 @@
 #' @noRd
-Modifier <- new_class(
+Modifier <- S7::new_class(
   "Modifier",
-  class_character,
+  S7::class_character,
   package = NULL,
   properties = list(
-    operator = class_character,
-    value = class_atomic
+    operator = S7::class_character,
+    value = S7::class_atomic
   )
 )
 
@@ -128,8 +128,8 @@ is_blank <- function() {
 #' @rdname modifier
 #' @export
 greater <- function(x, equal = FALSE) {
-  check_number_decimal(x)
-  check_bool(equal)
+  rlang::check_number_decimal(x)
+  rlang::check_bool(equal)
   Modifier(
     "greater",
     operator = ifelse(equal, ">=", ">"),
@@ -140,8 +140,8 @@ greater <- function(x, equal = FALSE) {
 #' @rdname modifier
 #' @export
 less <- function(x, equal = FALSE) {
-  check_number_decimal(x)
-  check_bool(equal)
+  rlang::check_number_decimal(x)
+  rlang::check_bool(equal)
   Modifier(
     "less",
     operator = ifelse(equal, "<=", "<"),
@@ -152,8 +152,8 @@ less <- function(x, equal = FALSE) {
 #' @rdname modifier
 #' @export
 between <- function(x, y) {
-  check_number_decimal(x, min = 0, allow_infinite = FALSE)
-  check_number_decimal(y, allow_infinite = FALSE)
+  rlang::check_number_decimal(x, min = 0, allow_infinite = FALSE)
+  rlang::check_number_decimal(y, allow_infinite = FALSE)
 
   if (x >= y) {
     cli::cli_abort("{.var x} must be less than {.var y}")

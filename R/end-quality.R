@@ -18,19 +18,21 @@
 #'   NPI indicate that an individual clinician has reassigned billing rights to
 #'   multiple TINs and was identified as a MIPS eligible clinician under
 #'   multiple TIN/NPI combinations.
-#' @param state The practice state of the TIN associated with the clinician.
+#' @param state `<chr>` The practice state of the TIN associated with the
+#'   clinician.
 #' @param size `<int>` Number of clinicians associated with the TIN through
 #'   Medicare Part B claims for the performance year.
-#' @param specialty Derived from the specialty codes in Medicare Part B claims.
+#' @param specialty `<chr>` Derived from the specialty codes in Medicare Part B
+#'   claims.
 #' @param years `<int>` Number of years since NPI's first approved enrollment
 #'   date across all enrollments in PECOS.
 #' @param patients `<int>` Number of Medicare patients who received covered
 #'   professional services during MIPS eligibility determination period.
-#' @param charges `<int>` Allowed charges under the PFS on Medicare Part B
-#'   claims with a service date during MIPS eligibility determination period.
 #' @param services `<int>` Number of covered professional services provided to
 #'   Medicare Part B patients with a service date during MIPS eligibility
 #'   determination period.
+#' @param charges `<int>` Allowed charges under the PFS on Medicare Part B
+#'   claims with a service date during MIPS eligibility determination period.
 #' @param final_score `<int>` The MIPS final score attributed to the clinician
 #'   (identified by TIN/NPI combination).
 #' @param adjustment `<dbl>` Determined by comparing the `final_score` to
@@ -56,8 +58,8 @@ quality <- function(
   specialty = NULL,
   years = NULL,
   patients = NULL,
-  charges = NULL,
   services = NULL,
+  charges = NULL,
   final_score = NULL,
   adjustment = NULL,
   count = FALSE
@@ -72,8 +74,8 @@ quality <- function(
     `clinician specialty` = specialty,
     `years in medicare` = years,
     `medicare patients` = patients,
-    `allowed charges` = charges,
     services = services,
+    `allowed charges` = charges,
     `final score` = final_score,
     `payment adjustment percentage` = adjustment
   )

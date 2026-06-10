@@ -74,8 +74,8 @@ qpp_ALL = list(
   `clinician specialty` = "specialty",
   `years in medicare` = "years",
   `medicare patients` = "patients",
-  `allowed charges` = "charges",
   services = "services",
+  `allowed charges` = "charges",
   `final score` = "final_score",
   `payment adjustment percentage` = "adjustment",
   `promoting interoperability (pi) category score` = "pi_score",
@@ -304,8 +304,8 @@ RE_NAME = list(
       qpp_ALL,
       qpp_22,
       list(
-        `reporting option` = "report_opt",
-        `mips value pathway title` = "mvp_title",
+        `reporting option` = "rep_opt",
+        `mips value pathway title` = "mvp",
         `cost improvement score` = "ci_score",
         `received facility score` = "fac_score_ind"
       )

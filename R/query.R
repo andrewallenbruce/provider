@@ -1,6 +1,6 @@
 #' @noRd
 is_modifier <- function(x) {
-  S7_inherits(x, Modifier)
+  S7::S7_inherits(x, Modifier)
 }
 
 #' @noRd
@@ -65,19 +65,19 @@ params <- function(...) {
 }
 
 #' @noRd
-method(build, ParamCMS) <- function(x) {
-  S7_data(x) %0% return(NULL)
+S7::method(build, ParamCMS) <- function(x) {
+  S7::S7_data(x) %0% return(NULL)
 
-  S7_data(x) |>
+  S7::S7_data(x) |>
     purrr::imap(\(x, n) query("cms", x, n)) |>
     flatten_query()
 }
 
 #' @noRd
-method(build, ParamPDC) <- function(x) {
-  S7_data(x) %0% return(NULL)
+S7::method(build, ParamPDC) <- function(x) {
+  S7::S7_data(x) %0% return(NULL)
 
-  S7_data(x) |>
+  S7::S7_data(x) |>
     purrr::imap(\(x, n) query("pdc", x, n)) |>
     flatten_query()
 }

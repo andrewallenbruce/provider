@@ -56,7 +56,7 @@ opt_out <- function(
   count = FALSE
 ) {
   check_bool_(order_refer)
-  check_number_whole(
+  rlang::check_number_whole(
     start_year,
     allow_null = TRUE,
     min = 1998,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/end-utilization.R
 \name{utilization}
 \alias{utilization}
-\title{Provider Utilization & Demographics by Year}
+\title{Provider Utilization by Year}
 \usage{
 utilization(
   year = NULL,
@@ -24,7 +24,9 @@ utilization(
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
-  risk_score = NULL,
+  avg_risk = NULL,
+  dual = NULL,
+  ndual = NULL,
   count = FALSE
 )
 }
@@ -37,16 +39,23 @@ utilization(
 
 \item{cred}{\verb{<chr>} Individual provider's credentials}
 
-\item{entity}{\verb{<chr>} Provider entity type; \code{"I"} (Individual), \code{"O"}
-(Organization)}
+\item{entity}{\verb{<chr>} Type of entity reported in NPPES. An entity code of \code{I}
+identifies providers registered as individuals and an entity type code of
+\code{O} identifies providers registered as organizations.}
 
-\item{address, city, state, zip}{description}
+\item{address, city, state, zip}{The provider's street address, city, state and
+zip code, as reported in NPPES.}
 
 \item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of
 claims submitted}
 
 \item{participating}{\verb{<lgl>} Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts}
+Medicare and/or accepts assignment of Medicare allowed amounts. The value
+will be \code{Y} for any provider that had at least one claim identifying the
+provider as participating in Medicare or accepting assignment of Medicare
+allowed amounts within HCPCS code and place of service. A non-participating
+provider may elect to accept Medicare allowed amounts for some services and
+not accept Medicare allowed amounts for other services.}
 
 \item{hcpcs}{\verb{<int>} Total number of unique HCPCS codes}
 
@@ -67,11 +76,21 @@ amounts that a third party is responsible for paying.}
 coinsurance amounts have been deducted for all the provider's line item
 services.}
 
-\item{avg_age}{\verb{<int>} Average age of beneficiaries. Beneficiary age is
+\item{avg_age}{\verb{<dbl>} Average age of beneficiaries. Beneficiary age is
 calculated at the end of the calendar year or at the time of death}
 
-\item{risk_score}{\verb{<dbl>} Average Hierarchical Condition Category (HCC) risk
+\item{avg_risk}{\verb{<dbl>} Average Hierarchical Condition Category (HCC) risk
 score of beneficiaries}
+
+\item{dual}{\verb{<int>} Number of Medicare beneficiaries qualified to receive
+Medicare and Medicaid benefits. Beneficiaries are classified as Medicare
+and Medicaid entitlement if in any month in the given calendar year they
+were receiving full or partial Medicaid benefits.}
+
+\item{ndual}{\verb{<int>} Number of Medicare beneficiaries qualified to receive
+Medicare only benefits. Beneficiaries are classified as Medicare only
+entitlement if they received zero months of any Medicaid benefits (full or
+partial) in the given calendar year.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
@@ -82,10 +101,6 @@ A \link[tibble:tibble-package]{tibble}
 Access information on services and procedures provided to Original
 Medicare (fee-for-service) Part B beneficiaries by physicians and other
 healthcare professionals; aggregated by provider, service and geography.
-}
-\section{By Provider}{
-
-\strong{type =}\code{"Provider"}:
 
 The \strong{Provider} dataset allows the user access to data such as
 services and procedures performed; charges submitted and payment received;
@@ -93,25 +108,6 @@ and beneficiary demographic and health characteristics for providers
 treating Original Medicare (fee-for-service) Part B beneficiaries,
 aggregated by year.
 }
-
-\section{By Provider and Service}{
-
-\strong{type =}\code{"Service"}:
-
-The \strong{Provider and Service} dataset is aggregated by:
-\enumerate{
-\item Rendering provider's NPI
-\item Healthcare Common Procedure Coding System (HCPCS) code
-\item Place of Service (Facility or Non-facility)
-}
-
-There can be multiple records for a given NPI based on the number of
-distinct HCPCS codes that were billed and where the services were
-provided. Data have been aggregated based on the place of service
-because separate fee schedules apply depending on whether the place
-of service submitted on the claim is facility or non-facility.
-}
-
 \section{Links}{
 
 \itemize{
@@ -126,9 +122,5 @@ of service submitted on the claim is facility or non-facility.
 utilization(count = TRUE)
 
 utilization(npi = 1003000423)
-
-# utilization(npi = 1003000126)
-
-# utilization(npi = 1043477615)
 \dontshow{\}) # examplesIf}
 }

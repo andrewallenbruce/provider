@@ -7,7 +7,7 @@ temporal_uuid <- function(rex) {
   x <- collapse::ss(x, grep(rex, x$title, perl = TRUE))
   S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
   x <- collapse::ss(x, cheapr::which_(S))
-  as.list(uuid_from_url(x$accessURL)) |> set_names(extract_year(x$title))
+  as.list(uuid_from_url(x$accessURL)) |> rlang::set_names(extract_year(x$title))
 }
 
 #' @noRd
@@ -51,7 +51,10 @@ cms_list <- function(
   set = FALSE,
   select = NULL,
   ...,
-  end = call_name(call_match(call = caller_call(), fn = caller_fn()))
+  end = rlang::call_name(rlang::call_match(
+    call = rlang::caller_call(),
+    fn = rlang::caller_fn()
+  ))
 ) {
   x <- param_cms(...)
   url <- url_cms_list(end)
@@ -70,7 +73,17 @@ cms_list <- function(
 }
 
 #' @noRd
-method(request_preview, CMSList) <- function(x) {
+S7::method(request_count, CMSList) <- function(x) {
+  if (length(x@query) > 0L || x@action == "count") {
+    x <- flatten_cms(x@url, x@query, "/stats?")
+    x <- multi_count(x, x@url, "found_rows")
+    return(x)
+  }
+  return(0L)
+}
+
+#' @noRd
+S7::method(request_preview, CMSList) <- function(x) {
   report_preview()
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
@@ -87,7 +100,7 @@ method(request_preview, CMSList) <- function(x) {
 }
 
 #' @noRd
-method(request_single, CMSList) <- function(x) {
+S7::method(request_single, CMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 
@@ -107,7 +120,7 @@ method(request_single, CMSList) <- function(x) {
 }
 
 #' @noRd
-method(request_multi, CMSList) <- function(x) {
+S7::method(request_multi, CMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 

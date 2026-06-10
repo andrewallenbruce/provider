@@ -1,7 +1,7 @@
 #' @noRd
-count_set <- function(count, set, call = caller_env()) {
-  check_bool(count)
-  check_bool(set)
+count_set <- function(count, set, call = rlang::caller_env()) {
+  rlang::check_bool(count)
+  rlang::check_bool(set)
   if (count && set) {
     cli::cli_abort(
       "Exactly {.emph one} of {.arg count} or {.arg set} can be set to {.val TRUE}.",
@@ -18,7 +18,7 @@ count_set <- function(count, set, call = caller_env()) {
 }
 
 #' @noRd
-check_online <- function(call = caller_env()) {
+check_online <- function(call = rlang::caller_env()) {
   if (!httr2::is_online()) {
     cli::cli_abort(
       c(
@@ -31,8 +31,13 @@ check_online <- function(call = caller_env()) {
 }
 
 #' @noRd
-check_bool_ <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
-  check_bool(
+check_bool_ <- function(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
+  rlang::check_bool(
     x,
     ...,
     allow_na = FALSE,
@@ -43,7 +48,12 @@ check_bool_ <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
 }
 
 #' @noRd
-check_char_ <- function(x, ..., arg = caller_arg(x), call = caller_env()) {
+check_char_ <- function(
+  x,
+  ...,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
   check_character(
     x,
     ...,
@@ -59,14 +69,14 @@ check_numeric <- function(
   x,
   ...,
   allow_null = TRUE,
-  arg = caller_arg(x),
-  call = caller_env()
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
 ) {
   if (!missing(x)) {
     if (rlang::is_bare_numeric(x)) {
       return(invisible(NULL))
     }
-    if (allow_null && is_null(x)) {
+    if (allow_null && rlang::is_null(x)) {
       return(invisible(NULL))
     }
   }
@@ -86,14 +96,14 @@ check_atomic <- function(
   x,
   ...,
   allow_null = FALSE,
-  arg = caller_arg(x),
-  call = caller_env()
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
 ) {
   if (!missing(x)) {
     if (rlang::is_bare_atomic(x)) {
       return(invisible(NULL))
     }
-    if (allow_null && is_null(x)) {
+    if (allow_null && rlang::is_null(x)) {
       return(invisible(NULL))
     }
   }

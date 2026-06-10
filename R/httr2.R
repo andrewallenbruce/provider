@@ -5,7 +5,7 @@ flatten_opts <- function(x) {
 
 #' @noRd
 flatten_url <- function(base, args = NULL, opts = NULL) {
-  check_required(base)
+  rlang::check_required(base)
 
   if (is.null(args) || length(args) == 0L) {
     return(paste0(base, opts))
@@ -30,7 +30,7 @@ parse_string <- function(resp, query = NULL) {
     count = PS(resp)$count,
     found_rows = PS(resp)$found_rows,
     total_rows = PS(resp)$total_rows,
-    names = names2(PS(resp)),
+    names = rlang::names2(PS(resp)),
     PS(resp, qry = query)
   )
 }
