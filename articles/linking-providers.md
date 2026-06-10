@@ -9,12 +9,13 @@ library(provider)
 
 ``` r
 
-pac <- affiliations(pac = 7810891009)
+x <- affiliations(pac = 7810891009)
 #> ✔ affiliations returned 5 results.
-pac <- list(
-  individual = as.data.frame(t(unique(pac[1:4]))),
-  organization = pac[5:6])
-pac
+x <- list(
+  individual = as.data.frame(t(unique(x[1:4]))),
+  organization = hospitals(ccn = x$prov_ccn))
+#> ✔ hospitals returned 5 results.
+x
 #> $individual
 #>               V1
 #> first       MARK
@@ -23,39 +24,54 @@ pac
 #> pac   7810891009
 #> 
 #> $organization
-#> # A tibble: 5 × 2
-#>   prov_type prov_ccn
-#>   <chr>     <chr>   
-#> 1 Hospital  470003  
-#> 2 Hospital  330250  
-#> 3 Hospital  470001  
-#> 4 Hospital  331321  
-#> 5 Hospital  471307
+#> # A tibble: 5 × 16
+#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
+#>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
+#> 1 CHAMPLAIN V… THE UN… O201… 1.03e9     0 3302… 2769… 1926-01-01 Corpora… Non-P…
+#> 2 ALICE HYDE … THE UN… O202… 1.11e9     0 3313… 4082… 1905-04-13 Corpora… Non-P…
+#> 3 CENTRAL VER… NA      O200… 1.51e9     0 4700… 9335… 1984-03-01 Corpora… Non-P…
+#> 4 UNIVERSITY … UNIVER… O200… 1.57e9     0 4700… 3779… 1995-01-01 Corpora… Non-P…
+#> 5 PORTER HOSP… NA      O200… 1.74e9     1 4713… 1850… 1986-11-14 Corpora… Non-P…
+#> # ℹ 6 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, sub_group <chr>
 
-ccn <- hospitals(ccn = pac$prov_ccn)
-#> ✔ Returning first 10 rows
-pac$organization <- ccn
-pac |> str()
-#> List of 2
-#>  $ individual  :'data.frame':    4 obs. of  1 variable:
-#>   ..$ V1: chr [1:4] "MARK" "FUNG" "1043245657" "7810891009"
-#>  $ organization: hospitls [10 × 16] (S3: hospitals/tbl_df/tbl/data.frame)
-#>   ..$ org_name : chr [1:10] "SOUTHERN TENNESSEE MEDICAL CENTER LLC" "CENTRAL MAINE MEDICAL CENTER" "ADCARE HOSPITAL OF WORCESTER, INC" "CAPE COD HOSPITAL INC" ...
-#>   ..$ org_dba  : chr [1:10] "HIGHPOINT HEALTH - WINCHESTER WITH ASCENSION SAINT THOMAS" NA "ADCARE HOSPITAL OF WORCESTER" "CAPE COD HOSPITAL" ...
-#>   ..$ enid     : chr [1:10] "O20020812000015" "O20020814000009" "O20020815000027" "O20020821000019" ...
-#>   ..$ npi      : int [1:10] 1467408781 1689653487 1134281280 1114984671 1205807013 1588664007 1942392600 1164481529 1083609150 1396745832
-#>   ..$ multi    : int [1:10] 0 0 0 0 0 0 0 0 0 0
-#>   ..$ ccn      : chr [1:10] "440058" "200024" "220062" "220012" ...
-#>   ..$ pac      : chr [1:10] "5193632180" "2567379563" "8325955347" "8921915950" ...
-#>   ..$ inc_date : Date[1:10], format: "1998-11-09" "1888-01-01" ...
-#>   ..$ org_type : chr [1:10] "LLC" "Corporation" "Corporation" "Corporation" ...
-#>   ..$ status   : chr [1:10] "For-Profit" "Non-Profit" "For-Profit" "Non-Profit" ...
-#>   ..$ address  : chr [1:10] "185 HOSPITAL RD" "300 MAIN ST" "107 LINCOLN ST" "27 PARK STREET, CAPE COD HOSPITAL" ...
-#>   ..$ city     : chr [1:10] "WINCHESTER" "LEWISTON" "WORCESTER" "HYANNIS" ...
-#>   ..$ state    : chr [1:10] "TN" "ME" "MA" "MA" ...
-#>   ..$ zip      : chr [1:10] "373982404" "42407027" "16052401" "26015230" ...
-#>   ..$ loc_type : chr [1:10] "Primary" "Other" "Primary" "Other" ...
-#>   ..$ sub_group: chr [1:10] "Acute, General, IRF" "General" "Acute, General" "General, Psychiatric" ...
+reassignments(pac = 7810891009) |> str()
+#> ✔ reassignments returned 1 result.
+#> rssgnmnt [1 × 13] (S3: reassignments/tbl_df/tbl/data.frame)
+#>  $ first    : chr "Mark"
+#>  $ last     : chr "Fung"
+#>  $ state    : chr "VT"
+#>  $ specialty: chr "Pathology"
+#>  $ employers: int 1
+#>  $ npi      : int 1043245657
+#>  $ pac      : chr "7810891009"
+#>  $ enid     : chr "I20031120000251"
+#>  $ org_name : chr "University Of Vermont Medical Center Inc"
+#>  $ employees: int 1585
+#>  $ org_pac  : chr "3779491071"
+#>  $ org_enid : chr "O20040406001047"
+#>  $ org_state: chr "VT"
+
+clinicians(pac = 7810891009) |> str()
+#> ✔ clinicians returned 1 result.
+#> clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
+#>  $ first    : chr "MARK"
+#>  $ last     : chr "FUNG"
+#>  $ gender   : chr "M"
+#>  $ cred     : chr "MD"
+#>  $ school   : chr "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"
+#>  $ grad_year: int 1999
+#>  $ specialty: chr "PATHOLOGY"
+#>  $ npi      : int 1043245657
+#>  $ pac      : chr "7810891009"
+#>  $ enid     : chr "I20031120000251"
+#>  $ org_name : chr "UNIVERSITY OF VERMONT MEDICAL CENTER INC"
+#>  $ org_pac  : chr "3779491071"
+#>  $ members  : int 1189
+#>  $ address  : chr "111 COLCHESTER AVE"
+#>  $ city     : chr "BURLINGTON"
+#>  $ state    : chr "VT"
+#>  $ zip      : chr "054011473"
 ```
 
 #### Organizational Provider
@@ -63,20 +79,6 @@ pac |> str()
 ``` r
 
 x <- "Elizabethtown Community Hospital"
-
-providers(org_name = x)
-#> ✔ providers returned 8 results.
-#> # A tibble: 8 × 10
-#>   org_name        first last  state prov_type prov_desc    npi multi pac   enid 
-#>   <chr>           <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
-#> 1 ELIZABETHTOWN … NA    NA    CT    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 2 ELIZABETHTOWN … NA    NA    FL    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 3 ELIZABETHTOWN … NA    NA    VT    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 4 ELIZABETHTOWN … NA    NA    NH    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 5 ELIZABETHTOWN … NA    NA    CO    12-70     PART B S… 1.05e9     0 3577… O202…
-#> 6 ELIZABETHTOWN … NA    NA    NY    12-70     PART B S… 1.05e9     1 3577… O200…
-#> 7 ELIZABETHTOWN … NA    NA    NY    00-85     PART A P… 1.41e9     0 3577… O202…
-#> 8 ELIZABETHTOWN … NA    NA    NY    00-85     PART A P… 1.89e9     1 3577… O201…
 
 hospitals(org_name = x) |> str()
 #> ✔ hospitals returned 2 results.
