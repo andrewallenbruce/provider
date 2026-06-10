@@ -82,15 +82,17 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
   rc_hospitals(x, "PROVIDER TYPE CODE")
   rc_hospitals(x, "PROPRIETARY NONPROFIT")
   rc_hospitals(x, "PRACTICE LOCATION TYPE")
+  rc_hospitals(x, "ORGANIZATION TYPE STRUCTURE")
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
+    rc_combine("address", "add_2") |>
     rc_other("org_type", "org_otxt") |>
     rc_other("loc_type", "loc_otxt") |>
-    rc_combine("address", "add_2") |>
     rc_ymd(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L)) |>
-    pivot_subgroup()
+    pivot_subgroup() |>
+    rc_ptype()
 }
 
 #' @noRd

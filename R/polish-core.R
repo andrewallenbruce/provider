@@ -172,6 +172,39 @@ rc_other <- function(x, e1, e2) {
 }
 
 #' @noRd
+rc_ptype <- function(x) {
+
+  p <- !cheapr::is_na(x$prov_type)
+
+  if (rlang::is_empty(cheapr::which_(p))) {
+    collapse::gv(x, "prov_type") <- NULL
+    return(x)
+  }
+
+  i <- cheapr::which_(p & !cheapr::is_na(x$sub_group))
+
+  if (!rlang::is_empty(i)) {
+    collapse::gv(x[i, ], "sub_group") <- rc_combine(
+      collapse::ss(x, i, c("prov_type", "sub_group")),
+      "sub_group",
+      "prov_type"
+    )
+  }
+
+  i <- cheapr::which_(p & cheapr::is_na(x$sub_group))
+
+  if (!rlang::is_empty(i)) {
+    collapse::gv(x[i, ], "sub_group") <- unlist_(
+      collapse::ss(x, i, "prov_type")
+    )
+  }
+
+  collapse::gv(x, "prov_type") <- NULL
+
+  return(x)
+}
+
+#' @noRd
 bin_col <- function(x) {
   cheapr::case(
     x %in_% c("YES", "Y", "Yes", "True") ~ 1L,

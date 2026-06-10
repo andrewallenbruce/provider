@@ -154,8 +154,8 @@ pivot_subgroup <- function(x) {
 
   rc_hospitals(y, "sub_group")
 
-  y <- rc_other(y, "sub_group", "sg_otxt") |>
-    collapse::funique()
+  y <- rc_other(y, "sub_group", "sg_otxt")
+  y <- collapse::funique(y)
 
   if (all_unique(y$enid)) {
     return(join2(x, y, on = "enid"))
