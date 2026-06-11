@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9234 (2026-06-11)
+
+- changed API class names -\> Endpoint
+
 ## provider 0.0.1.9233 (2026-06-11)
 
 - `cli_progress_step` instances now use

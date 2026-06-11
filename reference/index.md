@@ -50,4 +50,4 @@
   [`greater()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`less()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`between()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
-  : A variety of different query operators
+  : Query Modifiers

@@ -1,4 +1,4 @@
-# A variety of different query operators
+# Query Modifiers
 
 Helpers for use in constructing conditions in queries.
 
