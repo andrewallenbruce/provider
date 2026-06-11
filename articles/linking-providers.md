@@ -11,10 +11,12 @@ library(provider)
 
 x <- affiliations(pac = 7810891009)
 #> ✔ affiliations returned 5 results
+#> ✔ Retrieving 1 page
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
   organization = hospitals(ccn = x$prov_ccn))
 #> ✔ hospitals returned 5 results
+#> ✔ Retrieving 1 page
 x
 #> $individual
 #>               V1
@@ -37,6 +39,7 @@ x
 
 reassignments(pac = 7810891009) |> str()
 #> ✔ reassignments returned 1 result
+#> ✔ Retrieving 1 page
 #> rssgnmnt [1 × 13] (S3: reassignments/tbl_df/tbl/data.frame)
 #>  $ first    : chr "Mark"
 #>  $ last     : chr "Fung"
@@ -54,6 +57,7 @@ reassignments(pac = 7810891009) |> str()
 
 clinicians(pac = 7810891009) |> str()
 #> ✔ clinicians returned 1 result
+#> ✔ Retrieving 1 page
 #> clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
 #>  $ first    : chr "MARK"
 #>  $ last     : chr "FUNG"
@@ -67,7 +71,7 @@ clinicians(pac = 7810891009) |> str()
 #>  $ enid     : chr "I20031120000251"
 #>  $ org_name : chr "UNIVERSITY OF VERMONT MEDICAL CENTER INC"
 #>  $ org_pac  : chr "3779491071"
-#>  $ members  : int 1189
+#>  $ members  : int 1194
 #>  $ address  : chr "111 COLCHESTER AVE"
 #>  $ city     : chr "BURLINGTON"
 #>  $ state    : chr "VT"
@@ -82,6 +86,7 @@ x <- "Elizabethtown Community Hospital"
 
 hospitals(org_name = x) |> str()
 #> ✔ hospitals returned 2 results
+#> ✔ Retrieving 1 page
 #> hospitls [2 × 16] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
 #>  $ org_dba  : chr [1:2] NA NA
@@ -101,28 +106,30 @@ hospitals(org_name = x) |> str()
 #>  $ sub_group: chr [1:2] "CAH" "CAH"
 
 clinicians(org_name = x) |> str()
-#> ✔ clinicians returned 77 results
-#> clinicns [77 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
-#>  $ first    : chr [1:77] "GAVIN" "JOSEPH" "DMITRIY" "ROBERT" ...
-#>  $ last     : chr [1:77] "NOBLE" "PEKALA" "AKSELROD" "PERCARPIO" ...
-#>  $ gender   : chr [1:77] "M" "M" "M" "M" ...
-#>  $ cred     : chr [1:77] "MD" "MD" "MD" "MD" ...
-#>  $ school   : chr [1:77] "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" "GEISEL SCHOOL OF MEDICINE AT DARTMOUTH" "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" "NEW YORK MEDICAL COLLEGE" ...
-#>  $ grad_year: int [1:77] 1999 1999 2007 2009 2009 1992 2023 2014 1996 2012 ...
-#>  $ specialty: chr [1:77] "CARDIOVASCULAR DISEASE (CARDIOLOGY), INTERNAL MEDICINE" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" "INTERVENTIONAL RADIOLOGY" ...
-#>  $ npi      : int [1:77] 1750335014 1366468951 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 1033478565 ...
-#>  $ pac      : chr [1:77] "6002861804" "3274579073" "4385805696" "5991948382" ...
-#>  $ enid     : chr [1:77] "I20200824000234" "I20050701000411" "I20170524000768" "I20230928000333" ...
-#>  $ org_name : chr [1:77] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" ...
-#>  $ org_pac  : chr [1:77] "3577554138" "3577554138" "3577554138" "3577554138" ...
-#>  $ members  : int [1:77] 54 54 54 54 54 54 54 54 54 54 ...
-#>  $ address  : chr [1:77] "101 ADIRONDACK DR, SUITE 1" "108 PRESTON RD" "1355 CHURCH HILL RD" "1437 N RD" ...
-#>  $ city     : chr [1:77] "TICONDEROGA" "LYME" "CHARLOTTE" "HINESBURG" ...
-#>  $ state    : chr [1:77] "NY" "NH" "VT" "VT" ...
-#>  $ zip      : chr [1:77] "128839334" "037683508" "054459594" "054619697" ...
+#> ✔ clinicians returned 78 results
+#> ✔ Retrieving 1 page
+#> clinicns [78 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
+#>  $ first    : chr [1:78] "GAVIN" "JOSEPH" "BENJAMIN" "DMITRIY" ...
+#>  $ last     : chr [1:78] "NOBLE" "PEKALA" "SAWATZKY" "AKSELROD" ...
+#>  $ gender   : chr [1:78] "M" "M" "M" "M" ...
+#>  $ cred     : chr [1:78] "MD" "MD" "MD" "MD" ...
+#>  $ school   : chr [1:78] "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" "OTHER" "TEMPLE UNIVERSITY SCHOOL OF MEDICINE" "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" ...
+#>  $ grad_year: int [1:78] 1999 1999 2014 2007 2009 2009 1992 2023 2014 1996 ...
+#>  $ specialty: chr [1:78] "CARDIOVASCULAR DISEASE (CARDIOLOGY), INTERNAL MEDICINE" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" ...
+#>  $ npi      : int [1:78] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 ...
+#>  $ pac      : chr [1:78] "6002861804" "3274579073" "0345559357" "4385805696" ...
+#>  $ enid     : chr [1:78] "I20200824000234" "I20050701000411" "I20200715002569" "I20170524000768" ...
+#>  $ org_name : chr [1:78] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" ...
+#>  $ org_pac  : chr [1:78] "3577554138" "3577554138" "3577554138" "3577554138" ...
+#>  $ members  : int [1:78] 54 54 54 54 54 54 54 54 54 54 ...
+#>  $ address  : chr [1:78] "101 ADIRONDACK DR, SUITE 1" "108 PRESTON RD" "119 BRADLEY LN" "1355 CHURCH HILL RD" ...
+#>  $ city     : chr [1:78] "TICONDEROGA" "LYME" "WILLISTON" "CHARLOTTE" ...
+#>  $ state    : chr [1:78] "NY" "NH" "VT" "VT" ...
+#>  $ zip      : chr [1:78] "128839334" "037683508" "054957007" "054459594" ...
 
 reassignments(org_name = x)
 #> ✔ reassignments returned 398 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 398 × 13
 #>    first   last  state specialty employers    npi pac   enid  org_name employees
 #>    <chr>   <chr> <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
@@ -150,7 +157,8 @@ providers practicing at this hospital. First, the all-numeric CCN
 ``` r
 
 ccn <- affiliations(facility_ccn = 331302)
-#> ✔ affiliations returned 334 results
+#> ✔ affiliations returned 329 results
+#> ✔ Retrieving 1 page
 
 list(
   organization = as.data.frame(t(unique(ccn[5:7]))),
@@ -162,20 +170,20 @@ list(
 #> parent_ccn     <NA>
 #> 
 #> $individual
-#> # A tibble: 334 × 4
+#> # A tibble: 329 × 4
 #>    first   last                  npi pac       
 #>    <chr>   <chr>               <int> <chr>     
 #>  1 STACI   CARTER-KELLY   1003029125 6204824378
 #>  2 DYLAN   ESTES          1003278144 6608167523
-#>  3 ANA     MORALES MEJIA  1003421496 6103287404
-#>  4 ARMIN   AFSAR KESHMIRI 1003815184 4082693676
-#>  5 LAURA   GREENE         1003845272 1759384035
-#>  6 DEBORAH KAMPSCHROR     1013141860 8022069558
-#>  7 NAROD   VASSILIAN      1013539584 9133544109
-#>  8 EMILY   TRIPLETT       1013595560 3375947401
-#>  9 BARDIA  BARIMANI       1013793736 9436503646
-#> 10 JOSE    ACOSTAMADIEDO  1013910256 5890719371
-#> # ℹ 324 more rows
+#>  3 ARMIN   AFSAR KESHMIRI 1003815184 4082693676
+#>  4 LAURA   GREENE         1003845272 1759384035
+#>  5 DEBORAH KAMPSCHROR     1013141860 8022069558
+#>  6 NAROD   VASSILIAN      1013539584 9133544109
+#>  7 EMILY   TRIPLETT       1013595560 3375947401
+#>  8 BARDIA  BARIMANI       1013793736 9436503646
+#>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371
+#> 10 LINDSEY WILHELM        1023377843 6901115278
+#> # ℹ 319 more rows
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -185,6 +193,7 @@ search the alphanumeric CCN (`33Z302`):
 
 ccn2 <- affiliations(facility_ccn = "33Z302")
 #> ✔ affiliations returned 6 results
+#> ✔ Retrieving 1 page
 
 list(
   organization = as.data.frame(t(unique(ccn2[5:7]))), 

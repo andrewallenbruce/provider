@@ -89,13 +89,13 @@ fee-for-service (Part B).
 
 ``` r
 opt_out(count = TRUE)
-#> opt_out summary
-#> ◉ Rows  : 56,300
-#> ◉ Pages : 12    
+#> ◼ opt_out summary | 56,300 rows | 12 pages
 
 opt_out(state = "GA", specialty = contains("Psych"))
 #> ✔ opt_out returned 226 results
+#> ✔ Retrieving 1 page
 #> ✔ order_refer returned 128 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 226 × 12
 #>         npi first last  specialty start_date end_date   updated    address city 
 #>  *    <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>

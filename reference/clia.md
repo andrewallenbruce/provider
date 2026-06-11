@@ -196,6 +196,7 @@ complexity:
 ``` r
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 18 × 21
 #>    fac_name   fac_ccn clia_ccn chows  labs sites address city  state zip   term 
 #>  * <chr>      <chr>   <chr>    <int> <int> <int> <chr>   <chr> <chr> <chr> <chr>
@@ -223,6 +224,7 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 
 clia(acr_org = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result
+#> ✔ Retrieving 1 page
 #> # A tibble: 1 × 21
 #>   fac_name    fac_ccn clia_ccn chows  labs sites address city  state zip   term 
 #> * <chr>       <chr>   <chr>    <int> <int> <int> <chr>   <chr> <chr> <chr> <chr>

@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9233 (2026-06-11)
+
+- `cli_progress_step` instances now use
+  [`withr::defer_parent`](https://withr.r-lib.org/reference/defer.html)
+  on exit
+
 ## provider 0.0.1.9232 (2026-06-10)
 
 - `count` is no longer a computed property

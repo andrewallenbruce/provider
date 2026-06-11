@@ -117,15 +117,14 @@ transparency(
 
 ``` r
 transparency(count = TRUE)
-#> transparency summary
-#> ◉ Rows  : 12,334
-#> ◉ Pages : 3     
+#> ◼ transparency summary | 12,334 rows | 3 pages
 
 transparency(count = TRUE, action = "met")
 #> ✔ transparency returned 3,506 results
 
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result
+#> ✔ Retrieving 1 page
 #> # A tibble: 1 × 7
 #>    case fac_name         address             city     state action   action_date
 #>   <int> <chr>            <chr>               <chr>    <chr> <chr>    <date>     

@@ -44,9 +44,7 @@ Medicare Pending Initial Logging and Tracking:
 
 ``` r
 pending(count = TRUE)
-#> pending Totals
-#> • Rows  : 12,502
-#> • Pages : 4     
+#> ◼ pending summary | 12,502 rows | 4 pages
 
 pending(first = starts("V"))
 #> ✔ pending returned 173 results

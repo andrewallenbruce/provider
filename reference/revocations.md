@@ -163,9 +163,7 @@ Regulations](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-
 
 ``` r
 revocations(count = TRUE)
-#> revocations summary
-#> ◉ Rows  : 7,059
-#> ◉ Pages : 2    
+#> ◼ revocations summary | 7,059 rows | 2 pages
 
 revocations(org_name = not_blank(), count = TRUE)
 #> ✔ revocations returned 3,876 results
@@ -175,6 +173,7 @@ revocations(org_name = starts("B"), count = TRUE)
 
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #> ✔ revocations returned 45 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 45 × 11
 #>    org_name first   last    enid     npi multi state prov_desc reason start_date
 #>    <chr>    <chr>   <chr>   <chr>  <int> <int> <chr> <chr>     <chr>  <date>    

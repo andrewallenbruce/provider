@@ -127,6 +127,7 @@ A Clinician or Group must have:
 ``` r
 clinicians(first = "Etan")
 #> ✔ clinicians returned 12 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 12 × 17
 #>    first last     gender cred  school     grad_year specialty    npi pac   enid 
 #>    <chr> <chr>    <chr>  <chr> <chr>          <int> <chr>      <int> <chr> <chr>

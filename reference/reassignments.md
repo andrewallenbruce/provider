@@ -97,15 +97,14 @@ reassignments(
 
 ``` r
 reassignments(count = TRUE)
-#> reassignments summary
-#> ◉ Rows  : 3,527,875
-#> ◉ Pages : 706      
+#> ◼ reassignments summary | 3,527,875 rows | 706 pages
 
 reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 #> ✔ reassignments returned 1,317 results
 
 reassignments(org_enid = "I20070209000135")
 #> ✔ reassignments returned 6 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 6 × 13
 #>   first   last   state specialty employers    npi pac   enid  org_name employees
 #>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
@@ -119,6 +118,7 @@ reassignments(org_enid = "I20070209000135")
 
 reassignments(pac = 9830437441)
 #> ✔ reassignments returned 2 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 2 × 13
 #>   first last    state specialty  employers    npi pac   enid  org_name employees
 #>   <chr> <chr>   <chr> <chr>          <int>  <int> <chr> <chr> <chr>        <int>
@@ -128,6 +128,7 @@ reassignments(pac = 9830437441)
 
 reassignments(org_pac = 3173525888)
 #> ✔ reassignments returned 6 results
+#> ✔ Retrieving 1 page
 #> # A tibble: 6 × 13
 #>   first   last   state specialty employers    npi pac   enid  org_name employees
 #>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
