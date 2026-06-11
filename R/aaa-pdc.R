@@ -71,7 +71,7 @@ pdc <- function(
 
   check_modifiers(x, end)
 
-  x <- PDC(
+  x <- EndpointPDC(
     end = end,
     url = url_pdc(end),
     query = build(x) %||% character(0),
@@ -93,7 +93,7 @@ flatten_pdc <- function(url, query = NULL, ...) {
 }
 
 #' @noRd
-S7::method(request_count, PDC) <- function(x) {
+S7::method(request_count, EndpointPDC) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     x <- flatten_pdc(x@url, x@query, results = "false")
     x <- base_request(x, "count")
@@ -103,7 +103,7 @@ S7::method(request_count, PDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, PDC) <- function(x) {
+S7::method(request_preview, EndpointPDC) <- function(x) {
   report_preview()
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
@@ -114,7 +114,7 @@ S7::method(request_preview, PDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_single, PDC) <- function(x) {
+S7::method(request_single, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 
@@ -126,7 +126,7 @@ S7::method(request_single, PDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_multi, PDC) <- function(x) {
+S7::method(request_multi, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 

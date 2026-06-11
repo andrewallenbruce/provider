@@ -18,7 +18,7 @@ report_count <- S7::new_generic("report_count", "x")
 report_pages <- S7::new_generic("report_pages", "x")
 
 #' @noRd
-S7::method(report_count, API) <- function(x) {
+S7::method(report_count, Endpoint) <- function(x) {
   total <- sum2(x@count)
   msg <- cli::format_inline(
     "{.strong {x@end}} returned ",
@@ -35,7 +35,7 @@ S7::method(report_count, API) <- function(x) {
 }
 
 #' @noRd
-S7::method(report_pages, API) <- function(x) {
+S7::method(report_pages, Endpoint) <- function(x) {
   msg <- cli::format_inline("Retrieving {.strong {x@pages}} page{?s}")
 
   if (rlang::is_interactive()) {
@@ -47,7 +47,7 @@ S7::method(report_pages, API) <- function(x) {
 }
 
 #' @noRd
-S7::method(report_pages, CMSList) <- function(x) {
+S7::method(report_pages, EndpointCMSList) <- function(x) {
   pgs <- length(x@url[names(which(x@count > 0L))])
   msg <- cli::format_inline("Retrieving {.strong {pgs}} page{?s}")
 
@@ -60,7 +60,7 @@ S7::method(report_pages, CMSList) <- function(x) {
 }
 
 #' @noRd
-S7::method(report_total, API) <- function(x) {
+S7::method(report_total, Endpoint) <- function(x) {
   cli::cli_text(
     cli::col_silver(cli::symbol$square_small_filled),
     " ",

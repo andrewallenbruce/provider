@@ -1,9 +1,4 @@
 #' @noRd
-is_modifier <- function(x) {
-  S7::S7_inherits(x, Modifier)
-}
-
-#' @noRd
 preprocess <- function(x) {
   V <- if (is_modifier(x)) {
     plus(x@value)
@@ -60,9 +55,7 @@ flatten_query <- function(x) {
 }
 
 #' @noRd
-params <- function(...) {
-  purrr::compact(rlang::list2(...))
-}
+build <- S7::new_generic("build", "x")
 
 #' @noRd
 S7::method(build, ParamCMS) <- function(x) {

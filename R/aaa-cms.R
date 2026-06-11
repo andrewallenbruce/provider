@@ -44,7 +44,7 @@ cms <- function(
 
   x <- param_cms(...)
 
-  x <- CMS(
+  x <- EndpointCMS(
     end = end,
     url = url_cms(end),
     query = build(x) %||% character(0),
@@ -66,7 +66,7 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 }
 
 #' @noRd
-S7::method(request_count, CMS) <- function(x) {
+S7::method(request_count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     x <- flatten_cms(x@url, x@query, "/stats?")
     x <- base_request(x, "found_rows")
@@ -76,7 +76,7 @@ S7::method(request_count, CMS) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, CMS) <- function(x) {
+S7::method(request_preview, EndpointCMS) <- function(x) {
   report_preview()
 
   res <- flatten_cms(x@url, NULL, size = 10L) |>
@@ -87,7 +87,7 @@ S7::method(request_preview, CMS) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_single, CMS) <- function(x) {
+S7::method(request_single, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 
@@ -99,7 +99,7 @@ S7::method(request_single, CMS) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_multi, CMS) <- function(x) {
+S7::method(request_multi, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 

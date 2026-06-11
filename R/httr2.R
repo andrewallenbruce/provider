@@ -1,4 +1,9 @@
 #' @noRd
+params <- function(...) {
+  purrr::compact(rlang::list2(...))
+}
+
+#' @noRd
 flatten_opts <- function(x) {
   paste0(names(x), "=", unlist_(x), collapse = "&")
 }
@@ -38,7 +43,6 @@ parse_string <- function(resp, query = NULL) {
 #' @noRd
 base_request <- function(url, query = NULL) {
   httr2::request(url) |>
-    # httr2::req_throttle(capacity = 120, fill_time_s = 60) |>
     httr2::req_perform() |>
     parse_string(query = query)
 }

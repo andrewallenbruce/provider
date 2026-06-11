@@ -5,7 +5,10 @@ describe("subgroups()", {
     expect_true(is_subgroups(x))
     expect_equal(
       S7_data(x),
-      list(`SUBGROUP %2D ACUTE CARE` = "Y", `SUBGROUP %2D OTHER` = "N")
+      list(
+        `SUBGROUP %2D ACUTE CARE` = "Y",
+        `SUBGROUP %2D OTHER` = "N"
+      )
     )
   })
   it("succeeds with valid input", {

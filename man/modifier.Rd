@@ -12,7 +12,7 @@
 \alias{greater}
 \alias{less}
 \alias{between}
-\title{A variety of different query operators}
+\title{Query Modifiers}
 \source{
 \href{https://jsonapi.org/format/#query-parameters}{JSON-API: Query Parameters}
 }

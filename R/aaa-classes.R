@@ -14,20 +14,12 @@ QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
 QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
-API <- S7::new_class("API", package = NULL, abstract = TRUE)
-
-#' @noRd
-CMS <- S7::new_class(
-  "CMS",
-  API,
+Endpoint <- S7::new_class(
+  "Endpoint",
   package = NULL,
   properties = list(
     end = S7::class_character,
     url = S7::class_character | S7::class_list,
-    limit = S7::new_property(
-      S7::class_integer,
-      getter = function(self) 5000L
-    ),
     query = S7::class_character,
     length = S7::new_property(
       S7::class_integer,
@@ -48,9 +40,22 @@ CMS <- S7::new_class(
 )
 
 #' @noRd
-CMSList <- S7::new_class(
-  "CMSList",
-  CMS,
+EndpointCMS <- S7::new_class(
+  "EndpointCMS",
+  Endpoint,
+  package = NULL,
+  properties = list(
+    limit = S7::new_property(
+      S7::class_integer,
+      getter = function(self) 5000L
+    )
+  )
+)
+
+#' @noRd
+EndpointCMSList <- S7::new_class(
+  "EndpointCMSList",
+  EndpointCMS,
   package = NULL,
   properties = list(
     pages = S7::new_property(
@@ -68,41 +73,17 @@ CMSList <- S7::new_class(
 )
 
 #' @noRd
-PDC <- S7::new_class(
-  "PDC",
-  API,
+EndpointPDC <- S7::new_class(
+  "EndpointPDC",
+  Endpoint,
   package = NULL,
   properties = list(
-    end = S7::class_character,
-    url = S7::class_character,
     limit = S7::new_property(
       S7::class_integer,
       getter = function(self) 1500L
-    ),
-    query = S7::class_character,
-    length = S7::new_property(
-      S7::class_integer,
-      getter = function(self) nchar(self@query)
-    ),
-    action = S7::class_character,
-    count = S7::new_property(S7::class_integer, default = 0L),
-    pages = S7::new_property(
-      S7::class_integer,
-      getter = function(self) {
-        if (self@count == 0L) {
-          return(0L)
-        }
-        offset(self@count, self@limit)
-      }
     )
   )
 )
-
-#' @noRd
-build <- S7::new_generic("build", "x")
-
-#' @noRd
-execute <- S7::new_generic("execute", "x")
 
 #' @noRd
 request_count <- S7::new_generic("request_count", "x")
@@ -117,7 +98,10 @@ request_single <- S7::new_generic("request_single", "x")
 request_multi <- S7::new_generic("request_multi", "x")
 
 #' @noRd
-S7::method(execute, API) <- function(x) {
+execute <- S7::new_generic("execute", "x")
+
+#' @noRd
+S7::method(execute, Endpoint) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {
@@ -141,7 +125,7 @@ S7::method(execute, API) <- function(x) {
 }
 
 #' @noRd
-S7::method(execute, CMSList) <- function(x) {
+S7::method(execute, EndpointCMSList) <- function(x) {
   check_online()
 
   if (length(x@query) == 0L) {

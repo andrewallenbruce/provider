@@ -9,7 +9,12 @@ Modifier <- S7::new_class(
   )
 )
 
-#' A variety of different query operators
+#' @noRd
+is_modifier <- function(x) {
+  S7::S7_inherits(x, Modifier)
+}
+
+#' Query Modifiers
 #'
 #' @description Helpers for use in constructing conditions in queries.
 #'

@@ -69,7 +69,7 @@ cms_list <- function(
     url <- url[collapse::fmatch(select, names(url), nomatch = 0L)]
   }
 
-  x <- CMSList(
+  x <- EndpointCMSList(
     end = end,
     url = url,
     query = build(x) %||% character(0),
@@ -82,7 +82,7 @@ cms_list <- function(
 }
 
 #' @noRd
-S7::method(request_count, CMSList) <- function(x) {
+S7::method(request_count, EndpointCMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     u <- flatten_cms(x@url, x@query, "/stats?")
     x <- multi_count(u, x@url, "found_rows")
@@ -92,7 +92,7 @@ S7::method(request_count, CMSList) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, CMSList) <- function(x) {
+S7::method(request_preview, EndpointCMSList) <- function(x) {
   report_preview()
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>
@@ -106,7 +106,7 @@ S7::method(request_preview, CMSList) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_single, CMSList) <- function(x) {
+S7::method(request_single, EndpointCMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 
@@ -123,7 +123,7 @@ S7::method(request_single, CMSList) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_multi, CMSList) <- function(x) {
+S7::method(request_multi, EndpointCMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 
