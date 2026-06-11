@@ -80,23 +80,22 @@ S7::method(request_preview, CMS) <- function(x) {
   report_preview()
 
   res <- flatten_cms(x@url, NULL, size = 10L) |>
-    base_request()
+    base_request() |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }
 
 #' @noRd
 S7::method(request_single, CMS) <- function(x) {
   report_count(x)
+  report_pages(x)
 
   res <- flatten_cms(x@url, x@query) |>
-    base_request()
+    base_request() |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }
 
 #' @noRd
@@ -105,9 +104,8 @@ S7::method(request_multi, CMS) <- function(x) {
   report_pages(x)
 
   res <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
-    base_parallel(x@count, x@limit)
+    base_parallel(x@count, x@limit) |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }

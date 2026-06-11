@@ -1,8 +1,22 @@
 #' @noRd
-END_EXP <- rlang::expr(rlang::call_name(rlang::call_match(
-  call = rlang::caller_call(),
-  fn = rlang::caller_fn()
-)))
+column_rex <- function(x) {
+  paste0(paste0("^", unlist_(x), "$"), collapse = "|")
+}
+
+#' @noRd
+nrow0 <- function(x) {
+  collapse::fnrow(x) == 0L
+}
+
+#' @noRd
+all_unique <- function(x) {
+  !collapse::any_duplicated(x)
+}
+
+#' @noRd
+vec_na <- function(x, type = "character") {
+  cheapr::na_init(vector(mode = type), collapse::fnrow(x))
+}
 
 #' @noRd
 data_frame <- function(x, call = rlang::caller_env()) {
@@ -58,6 +72,16 @@ sub_idx <- function(what, with) {
     replacement = with,
     fixed = TRUE
   )
+}
+
+#' @noRd
+mark <- function(x) {
+  prettyNum(x, big.mark = ",")
+}
+
+#' @noRd
+left <- function(x, ...) {
+  format(x, justify = "left", ...)
 }
 
 #' @noRd

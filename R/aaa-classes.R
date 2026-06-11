@@ -131,7 +131,6 @@ S7::method(execute, API) <- function(x) {
 
   if (x@pages == 0L || x@action == "count") {
     report_count(x)
-    report_cleanup()
     return(x@count)
   }
 
@@ -156,7 +155,6 @@ S7::method(execute, CMSList) <- function(x) {
 
   if (x@pages == 0L || x@action == "count") {
     report_count(x)
-    report_cleanup()
     return(x@count)
   }
 

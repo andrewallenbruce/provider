@@ -102,9 +102,6 @@ S7::method(request_preview, CMSList) <- function(x) {
     set_names2(x@url)
 
   class(y) <- c(x@end, class(y))
-
-  report_cleanup()
-
   return(y)
 }
 
@@ -122,9 +119,6 @@ S7::method(request_single, CMSList) <- function(x) {
     set_names2(u)
 
   class(y) <- c(x@end, class(y))
-
-  report_cleanup()
-
   return(y)
 }
 
@@ -146,8 +140,5 @@ S7::method(request_multi, CMSList) <- function(x) {
     set_names2(u)
 
   class(y) <- c(x@end, class(y))
-
-  report_cleanup()
-
   return(y)
 }

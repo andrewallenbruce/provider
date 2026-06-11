@@ -107,23 +107,22 @@ S7::method(request_preview, PDC) <- function(x) {
   report_preview()
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
-    base_request("results")
+    base_request("results") |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }
 
 #' @noRd
 S7::method(request_single, PDC) <- function(x) {
   report_count(x)
+  report_pages(x)
 
   res <- flatten_pdc(x@url, x@query) |>
-    base_request("results")
+    base_request("results") |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }
 
 #' @noRd
@@ -132,9 +131,8 @@ S7::method(request_multi, PDC) <- function(x) {
   report_pages(x)
 
   res <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
-    base_parallel(x@count, x@limit, "results")
+    base_parallel(x@count, x@limit, "results") |>
+    add_class(x@end)
 
-  report_cleanup()
-
-  add_class(res, x@end)
+  return(res)
 }

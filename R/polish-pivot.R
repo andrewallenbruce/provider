@@ -1,19 +1,4 @@
 #' @noRd
-column_rex <- function(x) {
-  paste0(paste0("^", unlist_(x), "$"), collapse = "|")
-}
-
-#' @noRd
-nrow0 <- function(x) {
-  collapse::fnrow(x) == 0L
-}
-
-#' @noRd
-all_unique <- function(x) {
-  !collapse::any_duplicated(x)
-}
-
-#' @noRd
 pivot2 <- function(x, rex, id, var, val = "ind") {
   x <- collapse::gvr(x, rex) |>
     collapse::pivot(
@@ -27,11 +12,6 @@ pivot2 <- function(x, rex, id, var, val = "ind") {
   collapse::settfmv(x, var, as.character)
 
   return(x)
-}
-
-#' @noRd
-vec_na <- function(x, type = "character") {
-  cheapr::na_init(vector(mode = type), collapse::fnrow(x))
 }
 
 #' @noRd
