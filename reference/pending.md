@@ -26,7 +26,7 @@ Medicare Pending Initial Logging and Tracking:
 
 - prov_type:
 
-  description
+  `<chr>` `"Physician"` or `"Non-Physician"`
 
 - npi:
 

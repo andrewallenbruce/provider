@@ -12,10 +12,10 @@ clinicians(
   first = NULL,
   last = NULL,
   gender = NULL,
-  credential = NULL,
+  cred = NULL,
   specialty = NULL,
   school = NULL,
-  grad_year = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -60,7 +60,7 @@ clinicians(
   `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"`
   (Unknown)
 
-- credential:
+- cred:
 
   `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
 
@@ -72,7 +72,7 @@ clinicians(
 
   `<chr>` Provider’s medical school
 
-- grad_year:
+- year:
 
   `<int>` Provider’s graduation year
 

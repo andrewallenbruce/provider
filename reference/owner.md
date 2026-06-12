@@ -75,7 +75,7 @@ Medicare
 
 - percent:
 
-  `<chr>` Provider's name
+  `<dbl>` Provider's name
 
 - role:
 
@@ -83,7 +83,7 @@ Medicare
 
 - entity:
 
-  `<chr>` Provider's name
+  `<enum>` Provider's name
 
 - first, last:
 

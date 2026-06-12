@@ -58,8 +58,7 @@ transparency(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -74,17 +73,9 @@ transparency(
 
   `<chr>` Hospital name
 
-- address:
+- address, city, state:
 
-  `<chr>` Hospital address
-
-- city:
-
-  `<chr>` Hospital city
-
-- state:
-
-  `<chr>` Hospital state
+  `<chr>` Hospital address, city, state
 
 - action:
 
@@ -108,10 +99,6 @@ transparency(
 - count:
 
   `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 ## Examples
 

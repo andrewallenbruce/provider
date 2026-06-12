@@ -17,8 +17,7 @@ providers(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -40,13 +39,9 @@ providers(
 
   `<chr>` Individual provider's name
 
-- prov_type:
+- prov_type, prov_desc:
 
-  `<chr>` Enrollment specialty code
-
-- prov_desc:
-
-  `<chr>` Enrollment specialty description
+  `<chr>` Enrollment specialty code/description
 
 - state:
 
@@ -63,10 +58,6 @@ providers(
 - count:
 
   `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 ## References
 

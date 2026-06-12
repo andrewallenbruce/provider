@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9235 (2026-06-12)
+
+- refactored several internal checks
+
 ## provider 0.0.1.9234 (2026-06-11)
 
 - changed API class names -\> Endpoint

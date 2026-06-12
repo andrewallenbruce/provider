@@ -16,10 +16,9 @@ revocations(
   state = NULL,
   prov_desc = NULL,
   reason = NULL,
-  year_start = NULL,
-  year_end = NULL,
-  count = FALSE,
-  set = FALSE
+  start_year = NULL,
+  end_year = NULL,
+  count = FALSE
 )
 ```
 
@@ -62,17 +61,13 @@ revocations(
 
   `<chr>` Reason for revocation
 
-- year_start, year_end:
+- start_year, end_year:
 
   `<int>` year of revocation/expiration
 
 - count:
 
   `<lgl>` Return the total row count
-
-- set:
-
-  `<lgl>` Return the entire dataset
 
 ## Details
 
