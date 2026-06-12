@@ -19,10 +19,9 @@ revocations(
   state = NULL,
   prov_desc = NULL,
   reason = NULL,
-  year_start = NULL,
-  year_end = NULL,
-  count = FALSE,
-  set = FALSE
+  start_year = NULL,
+  end_year = NULL,
+  count = FALSE
 )
 }
 \arguments{
@@ -42,11 +41,9 @@ revocations(
 
 \item{reason}{\verb{<chr>} Reason for revocation}
 
-\item{year_start, year_end}{\verb{<int>} year of revocation/expiration}
+\item{start_year, end_year}{\verb{<int>} year of revocation/expiration}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Information on providers and suppliers currently revoked from the Medicare program.

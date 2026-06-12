@@ -25,7 +25,9 @@ url_cms <- function(x) {
 
 #' @noRd
 param_cms <- function(...) {
-  ParamCMS(params(...))
+  x <- ParamCMS(params(...))
+  check_named(x)
+  return(x)
 }
 
 #' @noRd

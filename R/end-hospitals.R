@@ -94,7 +94,7 @@ hospitals <- function(
     `ORGANIZATION TYPE STRUCTURE` = tag_enum(org_type),
     `PROVIDER TYPE CODE` = tag_enum(prov_type),
     `PRACTICE LOCATION TYPE` = tag_enum(loc_type),
-    !!!S7_data(subgroup)
+    !!!S7::S7_data(subgroup)
   )
 
   x <- execute(x)

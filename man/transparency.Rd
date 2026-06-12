@@ -15,18 +15,13 @@ transparency(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
 \item{fac_name}{\verb{<chr>} Hospital name}
 
-\item{address}{\verb{<chr>} Hospital address}
-
-\item{city}{\verb{<chr>} Hospital city}
-
-\item{state}{\verb{<chr>} Hospital state}
+\item{address, city, state}{\verb{<chr>} Hospital address, city, state}
 
 \item{action}{\verb{<enum>} Action taken by CMS following a Compliance Review (see Details)
 \itemize{
@@ -40,8 +35,6 @@ transparency(
 }}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Information on enforcement actions as a result of CMS' assessment of a

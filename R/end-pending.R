@@ -15,7 +15,7 @@
 #' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
-#' @param prov_type description
+#' @param prov_type `<chr>` `"Physician"` or `"Non-Physician"`
 #' @examplesIf httr2::is_online()
 #' pending(count = TRUE)
 #'

@@ -51,11 +51,11 @@ owner(
 
 \item{dba}{\verb{<chr>} Provider's name}
 
-\item{percent}{\verb{<chr>} Provider's name}
+\item{percent}{\verb{<dbl>} Provider's name}
 
 \item{role}{\verb{<chr>} Provider's name}
 
-\item{entity}{\verb{<chr>} Provider's name}
+\item{entity}{\verb{<enum>} Provider's name}
 
 \item{first, last}{\verb{<chr>} Provider's name}
 

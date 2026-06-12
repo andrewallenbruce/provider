@@ -30,9 +30,9 @@
 #' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,last `<chr>` Individual provider's name
 #' @param gender `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
-#' @param credential `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
+#' @param cred `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
 #' @param school `<chr>` Provider’s medical school
-#' @param grad_year `<int>` Provider’s graduation year
+#' @param year `<int>` Provider’s graduation year
 #' @param specialty `<chr>` Provider’s primary medical specialty
 #' @param city,state,zip `<chr>` Facility's city, state, zip
 #' @param org_name `<chr>` Facility associated with Provider
@@ -48,10 +48,10 @@ clinicians <- function(
   first = NULL,
   last = NULL,
   gender = NULL,
-  credential = NULL,
+  cred = NULL,
   specialty = NULL,
   school = NULL,
-  grad_year = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -71,9 +71,9 @@ clinicians <- function(
     provider_first_name = first,
     provider_last_name = last,
     gndr = gender,
-    cred = credential,
+    cred = cred,
     med_sch = school,
-    grd_yr = grad_year,
+    grd_yr = year,
     pri_spec = specialty,
     facility_name = org_name,
     org_pac_id = org_pac,

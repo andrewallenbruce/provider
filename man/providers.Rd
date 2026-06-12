@@ -15,8 +15,7 @@ providers(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -28,9 +27,7 @@ providers(
 
 \item{first, last}{\verb{<chr>} Individual provider's name}
 
-\item{prov_type}{\verb{<chr>} Enrollment specialty code}
-
-\item{prov_desc}{\verb{<chr>} Enrollment specialty description}
+\item{prov_type, prov_desc}{\verb{<chr>} Enrollment specialty code/description}
 
 \item{state}{\verb{<chr>} Enrollment state, full or abbreviation}
 
@@ -39,8 +36,6 @@ providers(
 \item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \description{
 Enrollment data on individual and organizational providers that are

@@ -65,8 +65,13 @@ cms_list <- function(
   url <- url_cms_list(end)
 
   if (!is.null(select)) {
-    match.arg(as.character(select), names(url), several.ok = TRUE)
-    url <- url[collapse::fmatch(select, names(url), nomatch = 0L)]
+    select <- as.character(select)
+    select <- rlang::arg_match(
+      select,
+      rlang::names2(url),
+      multiple = TRUE
+    )
+    url <- url[collapse::fmatch(select, rlang::names2(url), nomatch = 0L)]
   }
 
   x <- EndpointCMSList(

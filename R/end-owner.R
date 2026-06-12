@@ -20,9 +20,9 @@
 #' @param pac `<chr>` Provider's name
 #' @param owner `<chr>` Provider's name
 #' @param dba `<chr>` Provider's name
-#' @param percent `<chr>` Provider's name
+#' @param percent `<dbl>` Provider's name
 #' @param role `<chr>` Provider's name
-#' @param entity `<chr>` Provider's name
+#' @param entity `<enum>` Provider's name
 #' @param title `<chr>` Provider's name
 #' @param first,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
@@ -50,7 +50,13 @@ owner <- function(
   zip = NULL,
   count = FALSE
 ) {
-  check_char_(fac_type)
+  if (!is.null(fac_type)) {
+    fac_type <- rlang::arg_match(
+      fac_type,
+      c("HHA", "RHC", "FQHC", "SNF", "Hospice", "Hospital"),
+      multiple = TRUE
+    )
+  }
 
   x <- cms_list(
     count = count,

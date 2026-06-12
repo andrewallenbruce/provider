@@ -18,10 +18,10 @@ clinicians(
   first = NULL,
   last = NULL,
   gender = NULL,
-  credential = NULL,
+  cred = NULL,
   specialty = NULL,
   school = NULL,
-  grad_year = NULL,
+  year = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -42,13 +42,13 @@ clinicians(
 
 \item{gender}{\verb{<enum>} Provider's gender; \code{"F"} (Female), \code{"M"} (Male), or \code{"U"} (Unknown)}
 
-\item{credential}{\verb{<chr>} Provider's credential, i.e. \code{"MD"}, \code{"OD"}}
+\item{cred}{\verb{<chr>} Provider's credential, i.e. \code{"MD"}, \code{"OD"}}
 
 \item{specialty}{\verb{<chr>} Provider’s primary medical specialty}
 
 \item{school}{\verb{<chr>} Provider’s medical school}
 
-\item{grad_year}{\verb{<int>} Provider’s graduation year}
+\item{year}{\verb{<int>} Provider’s graduation year}
 
 \item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 

@@ -14,7 +14,7 @@ Medicare Pending Initial Logging and Tracking:
 pending(prov_type = NULL, npi = NULL, first = NULL, last = NULL, count = FALSE)
 }
 \arguments{
-\item{prov_type}{description}
+\item{prov_type}{\verb{<chr>} \code{"Physician"} or \code{"Non-Physician"}}
 
 \item{npi}{\verb{<int>} National Provider Identifier}
 

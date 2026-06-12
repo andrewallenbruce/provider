@@ -93,7 +93,34 @@ utilization <- function(
   ndual = NULL,
   count = FALSE
 ) {
+  check_numeric(year)
+  check_numeric(npi)
+  check_numeric(hcpcs)
+  check_numeric(patients)
+  check_numeric(services)
+  check_numeric(charges)
+  check_numeric(allowed)
+  check_numeric(payment)
+  check_numeric(avg_age)
+  check_numeric(avg_risk)
+  check_numeric(dual)
+  check_numeric(ndual)
+  check_char_(city)
+  check_char_(state)
+  check_char_(specialty)
   check_bool_(participating)
+
+  if (!is.null(year)) {
+    year <- as.character(year)
+  }
+
+  if (!is.null(entity)) {
+    entity <- rlang::arg_match(
+      entity,
+      c("I", "O"),
+      multiple = TRUE
+    )
+  }
 
   x <- cms_list(
     count = count,

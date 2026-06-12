@@ -13,8 +13,7 @@
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
 #' @param first,last `<chr>` Individual provider's name
-#' @param prov_type `<chr>` Enrollment specialty code
-#' @param prov_desc `<chr>` Enrollment specialty description
+#' @param prov_type,prov_desc `<chr>` Enrollment specialty code/description
 #' @param state `<chr>` Enrollment state, full or abbreviation
 #' @param org_name `<chr>` Organizational provider's name
 #' @param multi `<lgl>` Provider has multiple NPIs
@@ -37,14 +36,13 @@ providers <- function(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_bool_(multi)
 
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     NPI = npi,
     MULTIPLE_NPI_FLAG = tag_bool(multi),
     PECOS_ASCT_CNTL_ID = pac,

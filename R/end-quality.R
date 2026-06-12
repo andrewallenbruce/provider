@@ -64,6 +64,22 @@ quality <- function(
   adjustment = NULL,
   count = FALSE
 ) {
+  check_numeric(year)
+  check_numeric(npi)
+  check_numeric(size)
+  check_numeric(years)
+  check_numeric(patients)
+  check_numeric(services)
+  check_numeric(charges)
+  check_numeric(final_score)
+  check_numeric(adjustment)
+  check_char_(state)
+  check_char_(specialty)
+
+  if (!is.null(year)) {
+    year <- as.character(year)
+  }
+
   x <- cms_list(
     count = count,
     set = FALSE,

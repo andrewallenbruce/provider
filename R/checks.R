@@ -31,20 +31,36 @@ check_online <- function(call = rlang::caller_env()) {
 }
 
 #' @noRd
+check_named <- function(x, call = rlang::caller_env()) {
+  if (!rlang::is_empty(x) && !all2(rlang::have_name(x))) {
+    cli::cli_abort(
+      "All arguments of {.obj_type_friendly {x}} must be named",
+      call = call
+    )
+  }
+}
+
+#' @noRd
 check_bool_ <- function(
   x,
   ...,
   arg = rlang::caller_arg(x),
   call = rlang::caller_env()
 ) {
-  rlang::check_bool(
-    x,
-    ...,
-    allow_na = FALSE,
-    allow_null = TRUE,
-    arg = arg,
-    call = call
-  )
+  if (is.null(x)) {
+    return(invisible(NULL))
+  }
+
+  if (!is_modifier(x)) {
+    rlang::check_bool(
+      x,
+      ...,
+      allow_na = FALSE,
+      allow_null = TRUE,
+      arg = arg,
+      call = call
+    )
+  }
 }
 
 #' @noRd
@@ -54,14 +70,20 @@ check_char_ <- function(
   arg = rlang::caller_arg(x),
   call = rlang::caller_env()
 ) {
-  check_character(
-    x,
-    ...,
-    allow_na = TRUE,
-    allow_null = TRUE,
-    arg = arg,
-    call = call
-  )
+  if (is.null(x)) {
+    return(invisible(NULL))
+  }
+
+  if (!is_modifier(x)) {
+    check_character(
+      x,
+      ...,
+      allow_na = TRUE,
+      allow_null = TRUE,
+      arg = arg,
+      call = call
+    )
+  }
 }
 
 #' @noRd
@@ -72,23 +94,29 @@ check_numeric <- function(
   arg = rlang::caller_arg(x),
   call = rlang::caller_env()
 ) {
-  if (!missing(x)) {
-    if (rlang::is_bare_numeric(x)) {
-      return(invisible(NULL))
-    }
-    if (allow_null && rlang::is_null(x)) {
-      return(invisible(NULL))
-    }
+  if (is.null(x)) {
+    return(invisible(NULL))
   }
 
-  rlang::stop_input_type(
-    x,
-    "a numeric vector",
-    ...,
-    allow_null = allow_null,
-    arg = arg,
-    call = call
-  )
+  if (!is_modifier(x)) {
+    if (!missing(x)) {
+      if (rlang::is_bare_numeric(x)) {
+        return(invisible(NULL))
+      }
+      if (allow_null && rlang::is_null(x)) {
+        return(invisible(NULL))
+      }
+    }
+
+    rlang::stop_input_type(
+      x,
+      "a numeric vector",
+      ...,
+      allow_null = allow_null,
+      arg = arg,
+      call = call
+    )
+  }
 }
 
 #' @noRd

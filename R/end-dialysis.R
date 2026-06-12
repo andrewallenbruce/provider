@@ -58,7 +58,7 @@ dialysis <- function(
 }
 
 #' @noRd
-tag_rating <- function(x = NULL, call = caller_env()) {
+tag_rating <- function(x = NULL, call = rlang::caller_env()) {
   if (is.null(x)) {
     return(NULL)
   }
@@ -70,5 +70,5 @@ tag_rating <- function(x = NULL, call = caller_env()) {
   }
 
   # TODO convert to tag_enum
-  names2(set_names(1:5, paste0, ".0")[unique(x)])
+  rlang::names2(rlang::set_names(1:5, paste0, ".0")[collapse::funique(x)])
 }

@@ -1,12 +1,17 @@
 #' @noRd
-check_modifiers <- function(x, end) {
-  if (any2(purrr::map_lgl(x, is_modifier))) {
-    mods <- unlist_(x[purrr::map_lgl(x, is_modifier)])
+check_modifiers <- S7::new_generic("check_modifiers", "x")
+
+#' @noRd
+S7::method(check_modifiers, ParamPDC) <- function(x, end) {
+  mods <- purrr::map_lgl(x, is_modifier)
+
+  if (any2(mods)) {
+    mods <- unlist_(x[mods])
     if (any2(mods %in% c("ends", "excludes"))) {
       cli::cli_abort(
         c(
           "Invalid {.cls modifier} used in {.fn {end}}: ",
-          "x" = "{.fn ends} & {.fn excludes} do not work with the underlying API."
+          "x" = "{.fn ends} & {.fn excludes} do not work with the Provider Data Catalog API."
         ),
         call = rlang::call2(end)
       )
@@ -50,7 +55,9 @@ url_pdc <- function(x) {
 
 #' @noRd
 param_pdc <- function(...) {
-  ParamPDC(params(...))
+  x <- ParamPDC(params(...))
+  check_named(x)
+  return(x)
 }
 
 #' @noRd

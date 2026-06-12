@@ -28,7 +28,7 @@
 #' @param org_name `<chr>` Organization name
 #' @param multi `<lgl>` Provider has multiple NPIs
 #' @param reason `<chr>` Reason for revocation
-#' @param year_start,year_end `<int>` year of revocation/expiration
+#' @param start_year,end_year `<int>` year of revocation/expiration
 #' @examplesIf httr2::is_online()
 #' revocations(count = TRUE)
 #'
@@ -49,18 +49,25 @@ revocations <- function(
   state = NULL,
   prov_desc = NULL,
   reason = NULL,
-  year_start = NULL,
-  year_end = NULL,
-  count = FALSE,
-  set = FALSE
+  start_year = NULL,
+  end_year = NULL,
+  count = FALSE
 ) {
   check_bool_(multi)
-  check_numeric(year_start)
-  check_numeric(year_end)
+  check_numeric(start_year)
+  check_numeric(end_year)
+
+  if (!is.null(start_year)) {
+    start_year <- starts(start_year)
+  }
+
+  if (!is.null(end_year)) {
+    end_year <- starts(end_year)
+  }
 
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     NPI = npi,
     ENRLMT_ID = enid,
     FIRST_NAME = first,
@@ -70,8 +77,8 @@ revocations <- function(
     STATE_CD = state,
     PROVIDER_TYPE_DESC = prov_desc,
     REVOCATION_RSN = reason,
-    REVOCATION_EFCTV_DT = year_start,
-    REENROLLMENT_BAR_EXPRTN_DT = year_end
+    REVOCATION_EFCTV_DT = start_year,
+    REENROLLMENT_BAR_EXPRTN_DT = end_year
   )
 
   x <- execute(x)

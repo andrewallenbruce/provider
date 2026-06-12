@@ -42,9 +42,7 @@
 #'
 #' @inheritParams provider_common_params
 #' @param fac_name `<chr>` Hospital name
-#' @param address `<chr>` Hospital address
-#' @param city `<chr>` Hospital city
-#' @param state `<chr>` Hospital state
+#' @param address,city,state `<chr>` Hospital address, city, state
 #' @param action `<enum>` Action taken by CMS following a Compliance Review (see Details)
 #'    - `"met"` = Met Requirements
 #'    - `"admin"` = Administrative Closure
@@ -67,14 +65,13 @@ transparency <- function(
   city = NULL,
   state = NULL,
   action = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_char_(action)
 
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     Hosp_Name = fac_name,
     Hosp_Address = address,
     City = city,

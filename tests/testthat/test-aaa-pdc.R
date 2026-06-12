@@ -2,13 +2,13 @@ describe("check_modifiers()", {
   it("succeeds with valid input", {
     expect_no_error(
       check_modifiers(
-        param_pdc(ccn = contains("ASGSAH"), facility = starts("sdgdgs")),
-        end = "ENDPOINT"
-      )
-    )
-    expect_no_error(
-      check_modifiers(
-        param_pdc(ccn = "ASGSAH", facility = "sdgdgs"),
+        # FIXME Should duplicate arg names error?
+        param_pdc(
+          ccn = contains("ASGSAH"),
+          facility = starts("sdgdgs"),
+          ccn = "ASGSAH",
+          facility = "sdgdgs"
+        ),
         end = "ENDPOINT"
       )
     )

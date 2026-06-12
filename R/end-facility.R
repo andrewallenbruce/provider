@@ -51,10 +51,28 @@ facility <- function(
   org_type = NULL,
   count = FALSE
 ) {
+  check_numeric(npi)
   check_bool_(multi)
-  check_char_(status)
-  check_char_(org_type)
   check_char_(fac_type)
+  check_char_(org_type)
+  check_char_(status)
+
+
+  if (!is.null(fac_type)) {
+    fac_type <- rlang::arg_match(
+      fac_type,
+      c("HHA", "RHC", "FQHC", "SNF", "Hospice"),
+      multiple = TRUE
+    )
+  }
+
+  if (!is.null(status)) {
+    status <- rlang::arg_match(
+      status,
+      c("P", "N", "D"),
+      multiple = TRUE
+    )
+  }
 
   x <- cms_list(
     count = count,
