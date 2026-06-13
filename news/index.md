@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9237 (2026-06-13)
+
+- fixed
+  [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  renaming
+
 ## provider 0.0.1.9236 (2026-06-13)
 
 - clean-up/restructure

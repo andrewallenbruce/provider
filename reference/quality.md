@@ -134,9 +134,9 @@ quality(npi = c(1003026055, 1316939655))
 #>  9  2021 1316939655 NY      455 Physician Assis…    17    23586   116187  1.09e7
 #> 10  2022 1316939655 NY      352 Physician Assis…    18    23244   110514  1.05e7
 #> # ℹ 16 more variables: final_score <dbl>, adjustment <dbl>, pi_score <int>,
-#> #   qa_score <dbl>, complex_bonus <dbl>, part_opt <chr>, qi_score <dbl>,
+#> #   qa_score <dbl>, complex_bonus <dbl>, participation <chr>, qi_score <dbl>,
 #> #   ia_score <int>, cost_score <dbl>, indicators <chr>, cred <chr>,
-#> #   dual_ratio <dbl>, small_bonus <int>, report_opt <chr>, mvp_title <chr>,
+#> #   dual_ratio <dbl>, small_bonus <int>, reporting <chr>, mvp <chr>,
 #> #   ci_score <dbl>
 
 metrics()
