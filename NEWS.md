@@ -3,7 +3,7 @@
 # provider 0.0.1.9239 (2026-06-13)
 
 * fixed article (#108)
-* draft: `key` and `chain` (#203)
+* draft: `key` and `chain` (#103)
 
 
 # provider 0.0.1.9238 (2026-06-13)
