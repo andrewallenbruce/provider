@@ -71,7 +71,7 @@ providers(
 
 ``` r
 providers(count = TRUE)
-#> ◼ providers  | 2,981,799 rows | 597 pages
+#> ◼ providers | 2,981,799 rows | 597 pages
 
 providers(count = TRUE, org_name = not_blank())
 #> ✔ providers returned 433,496 results

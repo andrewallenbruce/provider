@@ -23,8 +23,8 @@ reassignments(
   last = NULL,
   state = NULL,
   specialty = NULL,
-  employers = NULL,
-  employees = NULL,
+  memberships = NULL,
+  members = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -60,7 +60,7 @@ reassignments(
 
   `<chr>` Enrollment specialty
 
-- employers, employees:
+- memberships, members:
 
   `<int>` Enrollment specialty
 
@@ -97,46 +97,23 @@ reassignments(
 
 ``` r
 reassignments(count = TRUE)
-#> ◼ reassignments  | 3,527,875 rows | 706 pages
-
-reassignments(count = TRUE, employers = greater(50, equal = TRUE))
-#> ✔ reassignments returned 1,317 results
-
-reassignments(org_enid = "I20070209000135")
-#> ✔ reassignments returned 6 results
+#> ◼ reassignments | 3,527,875 rows | 706 pages
+reassignments(org_enid = starts("I"), members = greater(50, equal = TRUE))
+#> ✔ reassignments returned 52 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
-
-reassignments(pac = 9830437441)
-#> ✔ reassignments returned 2 results
-#> ✔ Retrieving 1 page
-#> # A tibble: 2 × 13
-#>   first last    state specialty  employers    npi pac   enid  org_name employees
-#>   <chr> <chr>   <chr> <chr>          <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… NA               6
-#> 2 Joah  Aliancy FL    Ophthalmo…         2 1.08e9 9830… I202… Clermon…         1
-#> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
-
-reassignments(org_pac = 3173525888)
-#> ✔ reassignments returned 6 results
-#> ✔ Retrieving 1 page
-#> # A tibble: 6 × 13
-#>   first   last   state specialty employers    npi pac   enid  org_name employees
-#>   <chr>   <chr>  <chr> <chr>         <int>  <int> <chr> <chr> <chr>        <int>
-#> 1 Joah    Alian… FL    Ophthalm…         2 1.08e9 9830… I202… NA               6
-#> 2 Kyle    Bettis FL    Optometry         2 1.87e9 1850… I201… NA               6
-#> 3 Craig   Cole   FL    Ophthalm…         2 1.85e9 6305… I201… NA               6
-#> 4 Richard Jablo… FL    Ophthalm…         1 1.76e9 3577… I201… NA               6
-#> 5 Asyvia  Powel… FL    Ophthalm…         1 1.68e9 4385… I202… NA               6
-#> 6 Ashley  Royce  FL    Optometry         2 1.44e9 8224… I201… NA               6
+#> # A tibble: 52 × 13
+#>    first   last  state specialty memberships    npi pac   enid  org_name members
+#>    <chr>   <chr> <chr> <chr>           <int>  <int> <chr> <chr> <chr>      <int>
+#>  1 Hilario Alva… TX    Family P…           2 1.83e9 6103… I201… NA            52
+#>  2 James   Bagg… TX    Emergenc…           2 1.92e9 9638… I200… NA            52
+#>  3 Todd    Baker TX    Family P…           2 1.37e9 5799… I200… NA            52
+#>  4 Ami     Besh… TX    Family P…           2 1.84e9 5193… I200… NA            52
+#>  5 Dennis  Bish… TX    Emergenc…           7 1.86e9 2567… I201… NA            52
+#>  6 Cristi… Blej… TX    Family P…           2 1.32e9 3452… I201… NA            52
+#>  7 James   Bugg  TX    Family P…           2 1.84e9 3274… I201… NA            52
+#>  8 Richard Camp… TX    Emergenc…           2 1.89e9 5092… I200… NA            52
+#>  9 John    Cantu TX    Family P…           2 1.01e9 8820… I200… NA            52
+#> 10 David   Cart… TX    Family P…           5 1.82e9 7416… I201… NA            52
+#> # ℹ 42 more rows
 #> # ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
 ```

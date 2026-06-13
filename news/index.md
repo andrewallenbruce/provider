@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9238 (2026-06-13)
+
+- fixed bug in
+  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+  chunking method
+  ([\#103](https://github.com/andrewallenbruce/provider/issues/103))
+- re-rendered README
+
 ## provider 0.0.1.9237 (2026-06-13)
 
 - fixed

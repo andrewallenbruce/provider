@@ -162,7 +162,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 utilization(count = TRUE)
-#> ◼ utilization  | 13,528,933 rows | 2,712 pages
+#> ◼ utilization | 13,528,933 rows | 2,712 pages
 
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results

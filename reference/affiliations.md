@@ -11,8 +11,8 @@ affiliations(
   pac = NULL,
   first = NULL,
   last = NULL,
-  facility_type = NULL,
-  facility_ccn = NULL,
+  fac_type = NULL,
+  fac_ccn = NULL,
   parent_ccn = NULL,
   count = FALSE
 )
@@ -37,7 +37,7 @@ affiliations(
 
   `<chr>` Individual provider's name
 
-- facility_type:
+- fac_type:
 
   `<enum>` facility type:
 
@@ -57,9 +57,9 @@ affiliations(
 
   - `snf` = Skilled nursing facility
 
-- facility_ccn:
+- fac_ccn:
 
-  `<chr>` CCN of `facility_type` column's facility **or** of a **unit**
+  `<chr>` CCN of `fac_type` column's facility **or** of a **unit**
   within the hospital where the individual provider provides services.
 
 - parent_ccn:
@@ -82,29 +82,29 @@ affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 6 results
 #> ✔ Retrieving 1 page
 #> # A tibble: 6 × 7
-#>   first   last            npi pac        prov_type    prov_ccn parent_ccn
-#>   <chr>   <chr>         <int> <chr>      <chr>        <chr>    <chr>     
-#> 1 JEFFREY KLOTZ    1073258398 3870095805 Nursing home 33Z302   331302    
-#> 2 CARLOS  MARTINEZ 1154332062 5890739734 Nursing home 33Z302   331302    
-#> 3 MARY    HALLORAN 1396989059 8921259557 Nursing home 33Z302   331302    
-#> 4 IL      CHON     1538173869 0547299091 Nursing home 33Z302   331302    
-#> 5 DRAGOS  BANU     1558659367 6709004682 Nursing home 33Z302   331302    
-#> 6 JOSHUA  WARNER   1760167712 8123473469 Nursing home 33Z302   331302    
-affiliations(facility_ccn = 331302)
+#>   first   last            npi pac        fac_type     fac_ccn parent_ccn
+#>   <chr>   <chr>         <int> <chr>      <chr>        <chr>   <chr>     
+#> 1 JEFFREY KLOTZ    1073258398 3870095805 Nursing home 33Z302  331302    
+#> 2 CARLOS  MARTINEZ 1154332062 5890739734 Nursing home 33Z302  331302    
+#> 3 MARY    HALLORAN 1396989059 8921259557 Nursing home 33Z302  331302    
+#> 4 IL      CHON     1538173869 0547299091 Nursing home 33Z302  331302    
+#> 5 DRAGOS  BANU     1558659367 6709004682 Nursing home 33Z302  331302    
+#> 6 JOSHUA  WARNER   1760167712 8123473469 Nursing home 33Z302  331302    
+affiliations(fac_ccn = 331302)
 #> ✔ affiliations returned 329 results
 #> ✔ Retrieving 1 page
 #> # A tibble: 329 × 7
-#>    first   last                  npi pac        prov_type prov_ccn parent_ccn
-#>    <chr>   <chr>               <int> <chr>      <chr>     <chr>    <chr>     
-#>  1 STACI   CARTER-KELLY   1003029125 6204824378 Hospital  331302   NA        
-#>  2 DYLAN   ESTES          1003278144 6608167523 Hospital  331302   NA        
-#>  3 ARMIN   AFSAR KESHMIRI 1003815184 4082693676 Hospital  331302   NA        
-#>  4 LAURA   GREENE         1003845272 1759384035 Hospital  331302   NA        
-#>  5 DEBORAH KAMPSCHROR     1013141860 8022069558 Hospital  331302   NA        
-#>  6 NAROD   VASSILIAN      1013539584 9133544109 Hospital  331302   NA        
-#>  7 EMILY   TRIPLETT       1013595560 3375947401 Hospital  331302   NA        
-#>  8 BARDIA  BARIMANI       1013793736 9436503646 Hospital  331302   NA        
-#>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371 Hospital  331302   NA        
-#> 10 LINDSEY WILHELM        1023377843 6901115278 Hospital  331302   NA        
+#>    first   last                  npi pac        fac_type fac_ccn parent_ccn
+#>    <chr>   <chr>               <int> <chr>      <chr>    <chr>   <chr>     
+#>  1 STACI   CARTER-KELLY   1003029125 6204824378 Hospital 331302  NA        
+#>  2 DYLAN   ESTES          1003278144 6608167523 Hospital 331302  NA        
+#>  3 ARMIN   AFSAR KESHMIRI 1003815184 4082693676 Hospital 331302  NA        
+#>  4 LAURA   GREENE         1003845272 1759384035 Hospital 331302  NA        
+#>  5 DEBORAH KAMPSCHROR     1013141860 8022069558 Hospital 331302  NA        
+#>  6 NAROD   VASSILIAN      1013539584 9133544109 Hospital 331302  NA        
+#>  7 EMILY   TRIPLETT       1013595560 3375947401 Hospital 331302  NA        
+#>  8 BARDIA  BARIMANI       1013793736 9436503646 Hospital 331302  NA        
+#>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371 Hospital 331302  NA        
+#> 10 LINDSEY WILHELM        1023377843 6901115278 Hospital 331302  NA        
 #> # ℹ 319 more rows
 ```

@@ -89,7 +89,7 @@ order_refer(
 
 ``` r
 order_refer(count = TRUE)
-#> ◼ order_refer  | 2,008,024 rows | 402 pages
+#> ◼ order_refer | 2,008,024 rows | 402 pages
 
 order_refer(first = "Jennifer", last = "Smith")
 #> ✔ order_refer returned 135 results
