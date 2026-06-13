@@ -90,6 +90,15 @@ fee-for-service (Part B).
 ``` r
 opt_out(count = TRUE)
 #> ◼ opt_out | 56,300 rows | 12 pages
+#> <EndpointCMS>
+#>  @ end   : chr "opt_out"
+#>  @ url   : chr "https://data.cms.gov/data-api/v1/dataset/9887a515-7552-4693-bf58-735c77af46d7/data"
+#>  @ query : chr(0) 
+#>  @ length: int(0) 
+#>  @ action: chr "count"
+#>  @ count : int 56300
+#>  @ pages : int 12
+#>  @ limit : int 5000
 
 opt_out(state = "GA", specialty = contains("Psych"))
 #> ✔ opt_out returned 226 results

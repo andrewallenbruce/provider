@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9238</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9240</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,6 +136,15 @@ fee-for-service (Part B).</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">opt_out</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">56,300</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">12</span> pages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;EndpointCMS&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ end   : chr "opt_out"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ url   : chr "https://data.cms.gov/data-api/v1/dataset/9887a515-7552-4693-bf58-735c77af46d7/data"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ query : chr(0) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ length: int(0) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ action: chr "count"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ count : int 56300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ pages : int 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  @ limit : int 5000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"Psych"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">opt_out</span> returned <span style="color: #BBBB00; font-weight: bold;">226</span> results</span>
