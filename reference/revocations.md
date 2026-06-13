@@ -158,7 +158,7 @@ Regulations](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-
 
 ``` r
 revocations(count = TRUE)
-#> ◼ revocations summary | 7,059 rows | 2 pages
+#> ◼ revocations  | 7,059 rows | 2 pages
 
 revocations(org_name = not_blank(), count = TRUE)
 #> ✔ revocations returned 3,876 results

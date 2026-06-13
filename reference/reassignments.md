@@ -97,7 +97,7 @@ reassignments(
 
 ``` r
 reassignments(count = TRUE)
-#> ◼ reassignments summary | 3,527,875 rows | 706 pages
+#> ◼ reassignments  | 3,527,875 rows | 706 pages
 
 reassignments(count = TRUE, employers = greater(50, equal = TRUE))
 #> ✔ reassignments returned 1,317 results

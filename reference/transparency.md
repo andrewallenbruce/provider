@@ -104,7 +104,7 @@ transparency(
 
 ``` r
 transparency(count = TRUE)
-#> ◼ transparency summary | 12,334 rows | 3 pages
+#> ◼ transparency  | 12,334 rows | 3 pages
 
 transparency(count = TRUE, action = "met")
 #> ✔ transparency returned 3,506 results

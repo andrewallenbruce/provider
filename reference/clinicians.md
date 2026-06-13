@@ -70,11 +70,11 @@ clinicians(
 
 - school:
 
-  `<chr>` Provider’s medical school
+  `<chr>` Provider's medical school
 
 - year:
 
-  `<int>` Provider’s graduation year
+  `<int>` Provider's graduation year
 
 - city, state, zip:
 
@@ -82,7 +82,7 @@ clinicians(
 
 - org_name:
 
-  `<chr>` Facility associated with Provider
+  `<chr>` Name of facility associated with Provider
 
 - org_pac:
 
@@ -90,7 +90,7 @@ clinicians(
 
 - members:
 
-  `<int>` Number of members in Organization
+  `<int>` Number of members in facility's organization
 
 - count:
 
@@ -143,6 +143,24 @@ clinicians(first = "Etan")
 #> 10 ETAN  SUGARMAN M      NA    ALBERT EI…      2011 ORTHOPED… 1.24e9 0244… I202…
 #> 11 ETAN  SUGARMAN M      NA    ALBERT EI…      2011 ORTHOPED… 1.24e9 0244… I202…
 #> 12 ETAN  SUGARMAN M      NA    ALBERT EI…      2011 ORTHOPED… 1.24e9 0244… I202…
+#> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>
+clinicians(year = greater(2030))
+#> ✔ clinicians returned 10 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 10 × 17
+#>    first   last   gender cred  school grad_year specialty        npi pac   enid 
+#>    <chr>   <chr>  <chr>  <chr> <chr>      <int> <chr>          <int> <chr> <chr>
+#>  1 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#>  2 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#>  3 MOLLY   MILLS  F      CNA   OTHER       2032 CERTIFIED RE… 1.95e9 0840… I202…
+#>  4 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#>  5 TONYA   REAGAN F      NA    OTHER       2035 HOSPICE/PALL… 1.09e9 0840… I202…
+#>  6 TONYA   REAGAN F      NA    OTHER       2035 HOSPICE/PALL… 1.09e9 0840… I202…
+#>  7 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#>  8 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#>  9 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
+#> 10 ANTHONY HAGE   M      MD    OTHER       2031 INTERVENTION… 1.92e9 8527… I202…
 #> # ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
 #> #   address <chr>, city <chr>, state <chr>, zip <chr>
 ```

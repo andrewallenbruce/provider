@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9235</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9236</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,11 @@
 
 
 <dt id="arg-school">school<a class="anchor" aria-label="anchor" href="#arg-school"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Provider’s medical school</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Provider's medical school</p></dd>
 
 
 <dt id="arg-year">year<a class="anchor" aria-label="anchor" href="#arg-year"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Provider’s graduation year</p></dd>
+<dd><p><code>&lt;int&gt;</code> Provider's graduation year</p></dd>
 
 
 <dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
@@ -127,7 +127,7 @@
 
 
 <dt id="arg-org-name">org_name<a class="anchor" aria-label="anchor" href="#arg-org-name"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Facility associated with Provider</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Name of facility associated with Provider</p></dd>
 
 
 <dt id="arg-org-pac">org_pac<a class="anchor" aria-label="anchor" href="#arg-org-pac"></a></dt>
@@ -135,7 +135,7 @@
 
 
 <dt id="arg-members">members<a class="anchor" aria-label="anchor" href="#arg-members"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Number of members in Organization</p></dd>
+<dd><p><code>&lt;int&gt;</code> Number of members in facility's organization</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
@@ -166,8 +166,8 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Etan"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="font-weight: bold;">12</span> results</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="font-weight: bold;">1</span> page</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">12</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 17</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first last     gender cred  school     grad_year specialty    npi pac   enid </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -183,6 +183,24 @@ linking to multiple practice locations are listed on multiple lines.</p><div cla
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ETAN  SUGARMAN M      <span style="color: #BB0000;">NA</span>    ALBERT EI…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ETAN  SUGARMAN M      <span style="color: #BB0000;">NA</span>    ALBERT EI…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ETAN  SUGARMAN M      <span style="color: #BB0000;">NA</span>    ALBERT EI…      <span style="text-decoration: underline;">2</span>011 ORTHOPED… 1.24<span style="color: #949494;">e</span>9 0244… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: org_name &lt;chr&gt;, org_pac &lt;chr&gt;, members &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">clinicians</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="modifier.html">greater</a></span><span class="op">(</span><span class="fl">2030</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">10</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    first   last   gender cred  school grad_year specialty        npi pac   enid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> MOLLY   MILLS  F      CNA   OTHER       <span style="text-decoration: underline;">2</span>032 CERTIFIED RE… 1.95<span style="color: #949494;">e</span>9 0840… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> TONYA   REAGAN F      <span style="color: #BB0000;">NA</span>    OTHER       <span style="text-decoration: underline;">2</span>035 HOSPICE/PALL… 1.09<span style="color: #949494;">e</span>9 0840… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TONYA   REAGAN F      <span style="color: #BB0000;">NA</span>    OTHER       <span style="text-decoration: underline;">2</span>035 HOSPICE/PALL… 1.09<span style="color: #949494;">e</span>9 0840… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ANTHONY HAGE   M      MD    OTHER       <span style="text-decoration: underline;">2</span>031 INTERVENTION… 1.92<span style="color: #949494;">e</span>9 8527… I202…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: org_name &lt;chr&gt;, org_pac &lt;chr&gt;, members &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
 </code></pre></div>

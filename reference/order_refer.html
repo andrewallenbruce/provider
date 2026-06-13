@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9235</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9236</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,24 +131,24 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">order_refer</span> <span style="font-weight: 100; font-style: italic;">summary</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">2,005,842</span> rows<span style="color: #555555;"> | </span><span style="color: #BBBB00;">402</span> pages</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">order_refer</span> <span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">2,008,024</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">402</span> pages</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Jennifer"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="font-weight: bold;">135</span> results</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="font-weight: bold;">1</span> page</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="color: #BBBB00; font-weight: bold;">135</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 135 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    first    last         npi ptb_ind dme_ind hha_ind pmd_ind hsp_ind</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>073<span style="text-decoration: underline;">921</span>029       1       1       1       1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>427<span style="text-decoration: underline;">292</span>986       1       1       1       1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>366<span style="text-decoration: underline;">601</span>932       1       1       1       1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>780<span style="text-decoration: underline;">354</span>217       1       1       1       1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>750<span style="text-decoration: underline;">729</span>497       1       1       1       1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>760<span style="text-decoration: underline;">504</span>674       1       1       1       0       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>417<span style="text-decoration: underline;">514</span>035       1       1       1       1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>972<span style="text-decoration: underline;">574</span>770       1       1       1       1       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>659<span style="text-decoration: underline;">822</span>211       1       1       1       1       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>316<span style="text-decoration: underline;">939</span>655       1       1       1       1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>417<span style="text-decoration: underline;">514</span>035       1       1       1       1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>972<span style="text-decoration: underline;">574</span>770       1       1       1       1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>316<span style="text-decoration: underline;">939</span>655       1       1       1       1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>265<span style="text-decoration: underline;">417</span>687       0       1       0       1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>083<span style="text-decoration: underline;">750</span>079       1       1       0       0       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">239</span>268       1       1       0       0       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>457<span style="text-decoration: underline;">578</span>197       1       1       0       0       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>861<span style="text-decoration: underline;">169</span>211       1       1       1       1       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>255<span style="text-decoration: underline;">333</span>522       1       1       1       1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> JENNIFER SMITH <span style="text-decoration: underline;">1</span>225<span style="text-decoration: underline;">032</span>758       1       1       1       1       1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 125 more rows</span></span>
 </code></pre></div>
     </div>

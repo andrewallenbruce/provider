@@ -75,7 +75,7 @@ hospitals2(
 
 - enid:
 
-  `<chr>` Medicare Enrollment ID, Enrollment state
+  `<chr>` Medicare Enrollment ID
 
 - org_name:
 
