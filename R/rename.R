@@ -87,7 +87,7 @@ qpp_ALL = list(
 #' @noRd
 qpp_22 = list(
   `clinician type` = "cred",
-  `participation option` = "part_opt",
+  `participation option` = "participation",
   `dual eligibility ratio` = "dual_ratio",
   `quality improvement score` = "qi_score",
   `small practice bonus` = "small_bonus",
@@ -283,7 +283,7 @@ RE_NAME = list(
     `2017` = cheapr::list_combine(
       qpp_ALL,
       list(
-        `participation type` = "part_opt",
+        `participation type` = "participation",
         `quality improvement bonus` = "qi_score",
         `ia score` = "ia_score",
         `cost score` = "cost_score",
@@ -304,7 +304,7 @@ RE_NAME = list(
       qpp_ALL,
       qpp_22,
       list(
-        `reporting option` = "rep_opt",
+        `reporting option` = "reporting",
         `mips value pathway title` = "mvp",
         `cost improvement score` = "ci_score",
         `received facility score` = "fac_score_ind"

@@ -23,68 +23,6 @@ get_columns <- function(x) {
 }
 
 #' @noRd
-quality_has <- function(x, y) {
-  y <- match.arg(as.character(y), c("2017", "2022", "2023"))
-
-  collapse::has_elem(
-    x,
-    switch(
-      y,
-      "2017" = as.character(2017:2021),
-      "2022" = "2022",
-      "2023" = as.character(2023:2024)
-    )
-  )
-}
-
-#' @noRd
-quality_get <- function(x, y) {
-  y <- match.arg(as.character(y), c("2017", "2022", "2023"))
-
-  x <- collapse::get_elem(
-    x,
-    switch(
-      y,
-      "2017" = as.character(2017:2021),
-      "2022" = "2022",
-      "2023" = as.character(2023:2024)
-    ),
-    keep.tree = TRUE
-  ) |>
-    rowbind2("year", fill = TRUE)
-
-  collapse::setrename(x, RE_NAME[["quality"]][[y]], .nse = FALSE)
-  replace_nz(x)
-
-  x <- collapse::gv(x, unlist_(RE_NAME[["quality"]][[y]])) |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    pivot_quality()
-
-  if (y == "2017") {
-    x <- collapse::av(
-      x,
-      cred = vec_na(x),
-      dual_ratio = vec_na(x, "double"),
-      small_bonus = vec_na(x, "integer"),
-      report_opt = vec_na(x),
-      mvp_title = vec_na(x),
-      ci_score = vec_na(x, "double")
-    )
-  }
-
-  if (y == "2022") {
-    x <- collapse::av(
-      x,
-      report_opt = vec_na(x),
-      mvp_title = vec_na(x),
-      ci_score = vec_na(x, "double")
-    )
-  }
-
-  return(x)
-}
-
-#' @noRd
 set_nz <- function(x) {
   collapse::setv(x, "", NA_character_)
 }
@@ -173,7 +111,6 @@ rc_other <- function(x, e1, e2) {
 
 #' @noRd
 rc_ptype <- function(x) {
-
   p <- !cheapr::is_na(x$prov_type)
 
   if (rlang::is_empty(cheapr::which_(p))) {
