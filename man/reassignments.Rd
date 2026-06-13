@@ -12,8 +12,8 @@ reassignments(
   last = NULL,
   state = NULL,
   specialty = NULL,
-  employers = NULL,
-  employees = NULL,
+  memberships = NULL,
+  members = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -35,7 +35,7 @@ reassignments(
 
 \item{specialty}{\verb{<chr>} Enrollment specialty}
 
-\item{employers, employees}{\verb{<int>} Enrollment specialty}
+\item{memberships, members}{\verb{<int>} Enrollment specialty}
 
 \item{org_name}{\verb{<chr>} Legal business name}
 
@@ -62,14 +62,7 @@ reassign their billing to, including individual employer association counts.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 reassignments(count = TRUE)
-
-reassignments(count = TRUE, employers = greater(50, equal = TRUE))
-
-reassignments(org_enid = "I20070209000135")
-
-reassignments(pac = 9830437441)
-
-reassignments(org_pac = 3173525888)
+reassignments(org_enid = starts("I"), members = greater(50, equal = TRUE))
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -18,22 +18,14 @@
 #' @param first,last `<chr>` Provider's name
 #' @param state `<chr>` Enrollment state abbreviation
 #' @param specialty `<chr>` Enrollment specialty
-#' @param employers,employees `<int>` Enrollment specialty
+#' @param memberships,members `<int>` Enrollment specialty
 #' @param org_name `<chr>` Legal business name
 #' @param org_pac `<chr>` PECOS Associate Control ID
 #' @param org_enid `<chr>` Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
-#'
-#' reassignments(count = TRUE, employers = greater(50, equal = TRUE))
-#'
-#' reassignments(org_enid = "I20070209000135")
-#'
-#' reassignments(pac = 9830437441)
-#'
-#' reassignments(org_pac = 3173525888)
-#'
+#' reassignments(org_enid = starts("I"), members = greater(50, equal = TRUE))
 #' @export
 reassignments <- function(
   npi = NULL,
@@ -43,8 +35,8 @@ reassignments <- function(
   last = NULL,
   state = NULL,
   specialty = NULL,
-  employers = NULL,
-  employees = NULL,
+  memberships = NULL,
+  members = NULL,
   org_name = NULL,
   org_pac = NULL,
   org_enid = NULL,
@@ -62,9 +54,9 @@ reassignments <- function(
     `Individual Last Name` = last,
     `Individual State Code` = state,
     `Individual Specialty Description` = specialty,
-    `Individual Total Employer Associations` = employers,
+    `Individual Total Employer Associations` = memberships,
     `Group Legal Business Name` = org_name,
-    `Group Reassignments and Physician Assistants` = employees,
+    `Group Reassignments and Physician Assistants` = members,
     `Group PAC ID` = org_pac,
     `Group Enrollment ID` = org_enid,
     `Group State Code` = org_state

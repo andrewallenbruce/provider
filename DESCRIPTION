@@ -28,7 +28,6 @@ Imports:
     stringr (>= 1.6.0),
     vctrs (>= 0.7.3)
 Suggests: 
-    arcgislayers (>= 0.6.0),
     knitr,
     testthat (>= 3.3.2),
     tibble (>= 3.3.1),

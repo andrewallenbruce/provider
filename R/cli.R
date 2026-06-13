@@ -38,7 +38,6 @@ report_total <- function(x) {
     bar,
     " ",
     cli::style_bold(x@end),
-    " ",
     sep,
     fmt(x@count),
     " rows",

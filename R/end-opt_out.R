@@ -128,12 +128,13 @@ extract_key <- function(x) {
 
 #' @noRd
 n_chunks <- function(n, size = 150L) {
-  cheapr::seq_size(from = 1L, to = collapse::fnobs(n), by = size)
+  cheapr::seq_size(1L, collapse::fnobs(n), size)
 }
 
 #' @noRd
 split_chunks <- function(k, size = 150L) {
-  N <- n_chunks(k)
-  S <- cheapr::rep_each_(cheapr::seq_(1L, N), size)[seq_along(N)]
-  vctrs::vec_split(k, S)$val
+  N <- n_chunks(k, size = size)
+  S <- cheapr::seq_(1L, N)
+  E <- cheapr::rep_each_(S, size)[cheapr::seq_(1L, length(k))]
+  vctrs::vec_split(k, E)$val
 }

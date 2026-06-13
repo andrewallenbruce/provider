@@ -14,8 +14,8 @@ affiliations(
   pac = NULL,
   first = NULL,
   last = NULL,
-  facility_type = NULL,
-  facility_ccn = NULL,
+  fac_type = NULL,
+  fac_ccn = NULL,
   parent_ccn = NULL,
   count = FALSE
 )
@@ -27,7 +27,7 @@ affiliations(
 
 \item{first, last}{\verb{<chr>} Individual provider's name}
 
-\item{facility_type}{\verb{<enum>} facility type:
+\item{fac_type}{\verb{<enum>} facility type:
 \itemize{
 \item \code{esrd} = Dialysis facility
 \item \code{hha} = Home health agency
@@ -39,7 +39,7 @@ affiliations(
 \item \code{snf} = Skilled nursing facility
 }}
 
-\item{facility_ccn}{\verb{<chr>} CCN of \code{facility_type} column's
+\item{fac_ccn}{\verb{<chr>} CCN of \code{fac_type} column's
 facility \strong{or} of a \strong{unit} within the hospital where the individual
 provider provides services.}
 
@@ -58,6 +58,6 @@ affiliations with organizations/facilities.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 affiliations(parent_ccn = 331302)
-affiliations(facility_ccn = 331302)
+affiliations(fac_ccn = 331302)
 \dontshow{\}) # examplesIf}
 }

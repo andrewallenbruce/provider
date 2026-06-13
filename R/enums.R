@@ -69,7 +69,7 @@ enumerations <- function(
       appeal = "Appealed"
     ),
     # <affiliations>
-    facility_type = list(
+    fac_type = list(
       hospital = "Hospital",
       ltch = "Long-term care hospital",
       nurse = "Nursing home",

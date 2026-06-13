@@ -41,8 +41,6 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-## Overview
-
 The `provider` package is a high-level interface designed to streamline access 
 to publicly available healthcare provider data from the Centers for Medicare and
 Medicaid Services (CMS) and other federal sources. It provides a unified, tidy
@@ -74,8 +72,8 @@ affiliations(last = "Bruce")
 ```{r}
 #| label: reassignment
 reassignments(
-  state = "GA",
-  employers = greater(40, equal = TRUE))
+  org_enid = starts("I"), 
+  members = greater(50, equal = TRUE))
 ```
 
 #### :-1: Revoked Medicare Providers
@@ -95,7 +93,7 @@ clinicians(
   state = "GA", 
   school = not("OTHER"), 
   org_name = not_blank(),
-  grad_year = 2025)
+  year = 2025)
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits
@@ -109,42 +107,55 @@ opt_out(city = "Atlanta", state = "GA")
 
 ```{r}
 #| label: order_refer
-order_refer(first = "Jennifer", last = "Smith")
+order_refer(
+  first = "Jennifer", 
+  last = "Smith",
+  ptb = FALSE)
 ```
 
-##### :health_worker: Medicare Enrollments
+##### :health_worker: Medicare Provider Enrollments
 
 ```{r}
 #| label: enrolled
-providers(state = "GA", org_name = contains("West"))
+providers(
+  state = "GA", 
+  org_name = contains("West"))
 ```
 
 ##### :calendar: Pending Enrollments
 
 ```{r}
 #| label: pending
-pending(first = starts("E"), last = ends("A"))
+pending(
+  first = starts("E"), 
+  last = ends("A"))
 ```
 
 ##### :hospital: Medicare Hospitals
 
 ```{r}
 #| label: hospital
-hospitals(city = "Valdosta", state = "GA")
+hospitals(
+  city = "Valdosta", 
+  state = "GA")
 ```
 
 ##### :test_tube: CLIA Laboratories
 
 ```{r}
 #| label: clia
-clia(fac_name = starts("SGMC"), state = "GA")
+clia(
+  fac_name = starts("SGMC"), 
+  state = "GA")
 ```
 
 ##### :mag_right: Hospital Transparency Enforcement
 
 ```{r}
 #| label: transparency
-transparency(action = "cap", state = "GA")
+transparency(
+  action = "cap", 
+  state = "GA")
 ```
 
 ------------------------------------------------------------------------------
