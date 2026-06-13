@@ -81,19 +81,22 @@ cms_list <- function(
     action = count_set(count, set)
   )
 
-  x@count <- request_count(x)
+  x <- request_count(x)
 
   return(x)
 }
 
+#' @include aaa-generics.R
 #' @noRd
 S7::method(request_count, EndpointCMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    u <- flatten_cms(x@url, x@query, "/stats?")
-    x <- multi_count(u, x@url, "found_rows")
-    return(x)
+    x@count <- multi_count(
+      flatten_cms(x@url, x@query, "/stats?"),
+      x@url,
+      "found_rows"
+    )
   }
-  return(0L)
+  return(x)
 }
 
 #' @noRd

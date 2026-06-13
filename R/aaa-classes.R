@@ -86,64 +86,36 @@ EndpointPDC <- S7::new_class(
 )
 
 #' @noRd
-request_count <- S7::new_generic("request_count", "x")
-
+s3_affiliations <- S7::new_S3_class("affiliations")
 #' @noRd
-request_preview <- S7::new_generic("request_preview", "x")
-
+s3_clia <- S7::new_S3_class("clia")
 #' @noRd
-request_single <- S7::new_generic("request_single", "x")
-
+s3_clinicians <- S7::new_S3_class("clinicians")
 #' @noRd
-request_multi <- S7::new_generic("request_multi", "x")
-
+s3_dialysis <- S7::new_S3_class("dialysis")
 #' @noRd
-execute <- S7::new_generic("execute", "x")
-
+s3_facility <- S7::new_S3_class("facility")
 #' @noRd
-S7::method(execute, Endpoint) <- function(x) {
-  check_online()
-
-  if (length(x@query) == 0L) {
-    switch(
-      x@action,
-      count = return(report_total(x)),
-      set = return(request_multi(x)),
-      return(request_preview(x))
-    )
-  }
-
-  if (x@pages == 0L || x@action == "count") {
-    report_count(x)
-    return(x@count)
-  }
-
-  if (x@pages == 1L) {
-    return(request_single(x))
-  }
-  request_multi(x)
-}
-
+s3_hospitals <- S7::new_S3_class("hospitals")
 #' @noRd
-S7::method(execute, EndpointCMSList) <- function(x) {
-  check_online()
-
-  if (length(x@query) == 0L) {
-    switch(
-      x@action,
-      count = return(report_total(x)),
-      set = return(request_multi(x)),
-      return(request_preview(x))
-    )
-  }
-
-  if (x@pages == 0L || x@action == "count") {
-    report_count(x)
-    return(x@count)
-  }
-
-  if (x@pages <= length(x@url)) {
-    return(request_single(x))
-  }
-  request_multi(x)
-}
+s3_hospitals2 <- S7::new_S3_class("hospitals2")
+#' @noRd
+s3_opt_out <- S7::new_S3_class("opt_out")
+#' @noRd
+s3_order_refer <- S7::new_S3_class("order_refer")
+#' @noRd
+s3_owner <- S7::new_S3_class("owner")
+#' @noRd
+s3_pending <- S7::new_S3_class("pending")
+#' @noRd
+s3_providers <- S7::new_S3_class("providers")
+#' @noRd
+s3_quality <- S7::new_S3_class("quality")
+#' @noRd
+s3_reassignments <- S7::new_S3_class("reassignments")
+#' @noRd
+s3_revocations <- S7::new_S3_class("revocations")
+#' @noRd
+s3_transparency <- S7::new_S3_class("transparency")
+#' @noRd
+s3_utilization <- S7::new_S3_class("utilization")

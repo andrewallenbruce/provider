@@ -53,6 +53,7 @@ url_pdc <- function(x) {
   )
 }
 
+#' @include aaa-classes.R
 #' @noRd
 param_pdc <- function(...) {
   x <- ParamPDC(params(...))
@@ -85,7 +86,7 @@ pdc <- function(
     action = count_set(count, set)
   )
 
-  x@count <- request_count(x)
+  x <- request_count(x)
 
   return(x)
 }
@@ -99,14 +100,16 @@ flatten_pdc <- function(url, query = NULL, ...) {
   )
 }
 
+#' @include aaa-generics.R
 #' @noRd
 S7::method(request_count, EndpointPDC) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    x <- flatten_pdc(x@url, x@query, results = "false")
-    x <- base_request(x, "count")
-    return(x)
+    x@count <- base_request(
+      flatten_pdc(x@url, x@query, results = "false"),
+      "count"
+    )
   }
-  return(0L)
+  return(x)
 }
 
 #' @noRd

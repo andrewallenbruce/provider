@@ -1,6 +1,5 @@
-#' @noRd
-polish <- S7::new_generic("polish", "x")
-
+#' @include aaa-classes.R
+#' @include aaa-generics.R
 #' @noRd
 S7::method(polish, S7::class_integer | Endpoint) <- function(x) {
   invisible(x)
@@ -14,14 +13,14 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("affiliations")) <- function(x) {
+S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   set_rename(x)
   get_columns(x)
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
+S7::method(polish, s3_clia) <- function(x) {
   rc_clia(x, "CLIA_TRMNTN_CD")
   rc_clia(x, "CRTFCT_TYPE_CD")
   rc_clia(x, "GNRL_FAC_TYPE_CD")
@@ -45,7 +44,7 @@ S7::method(polish, S7::new_S3_class("clia")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
+S7::method(polish, s3_clinicians) <- function(x) {
   collapse::settfmv(x, c("npi", "grd_yr", "num_org_mem"), as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -54,7 +53,7 @@ S7::method(polish, S7::new_S3_class("clinicians")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
+S7::method(polish, s3_dialysis) <- function(x) {
   collapse::settfmv(x, c("five_star", "network"), as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -63,7 +62,7 @@ S7::method(polish, S7::new_S3_class("dialysis")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
+S7::method(polish, s3_facility) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE) |>
     add_class("facility")
 
@@ -78,7 +77,7 @@ S7::method(polish, S7::new_S3_class("facility")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
+S7::method(polish, s3_hospitals) <- function(x) {
   rc_hospitals(x, "PROVIDER TYPE CODE")
   rc_hospitals(x, "PROPRIETARY NONPROFIT")
   rc_hospitals(x, "PRACTICE LOCATION TYPE")
@@ -96,14 +95,14 @@ S7::method(polish, S7::new_S3_class("hospitals")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("hospitals2")) <- function(x) {
+S7::method(polish, s3_hospitals2) <- function(x) {
   suppressWarnings(collapse::settfmv(x, "hospital_overall_rating", as.integer))
   set_rename(x)
   get_columns(x)
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
+S7::method(polish, s3_opt_out) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -113,7 +112,7 @@ S7::method(polish, S7::new_S3_class("opt_out")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
+S7::method(polish, s3_order_refer) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -121,7 +120,7 @@ S7::method(polish, S7::new_S3_class("order_refer")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
+S7::method(polish, s3_owner) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE) |>
     add_class("owner")
 
@@ -137,7 +136,7 @@ S7::method(polish, S7::new_S3_class("owner")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
+S7::method(polish, s3_pending) <- function(x) {
   x <- rowbind2(x, "prov_type", fill = TRUE) |>
     add_class("pending") |>
     rc_trim()
@@ -148,7 +147,7 @@ S7::method(polish, S7::new_S3_class("pending")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
+S7::method(polish, s3_providers) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -156,7 +155,7 @@ S7::method(polish, S7::new_S3_class("providers")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
+S7::method(polish, s3_quality) <- function(x) {
   a <- b <- c <- list()
 
   if (quality_has(x, 2017)) {
@@ -207,7 +206,7 @@ S7::method(polish, S7::new_S3_class("quality")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
+S7::method(polish, s3_reassignments) <- function(x) {
   collapse::settfmv(
     x,
     c(
@@ -222,7 +221,7 @@ S7::method(polish, S7::new_S3_class("reassignments")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
+S7::method(polish, s3_revocations) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -232,7 +231,7 @@ S7::method(polish, S7::new_S3_class("revocations")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
+S7::method(polish, s3_transparency) <- function(x) {
   collapse::settfmv(x, "Case_ID", as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -241,7 +240,7 @@ S7::method(polish, S7::new_S3_class("transparency")) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, S7::new_S3_class("utilization")) <- function(x) {
+S7::method(polish, s3_utilization) <- function(x) {
   x <- rowbind2(x, "year", fill = TRUE) |>
     add_class("utilization")
 

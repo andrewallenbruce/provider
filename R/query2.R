@@ -25,14 +25,13 @@ S7::method(build2, ParamCMS) <- function(x) {
     purrr::imap(
       \(x, N) {
         V <- get_values(x)
+        PREFIX <- "filter[<<i>>][condition]"
         c(
-          paste0("filter[<<i>>][condition][path]=", plus(N)),
+          paste0(PREFIX, "[path]=", plus(N)),
+          paste0(PREFIX, "[operator]=", under(get_operators(x))),
           paste0(
-            "filter[<<i>>][condition][operator]=",
-            under(get_operators(x))
-          ),
-          paste0(
-            "filter[<<i>>][condition][value]",
+            PREFIX,
+            "[value]",
             if (length(V) > 1L) paste0("[", seq_along(V), "]=") else "=",
             V
           )
@@ -50,17 +49,11 @@ S7::method(build2, ParamPDC) <- function(x) {
     purrr::imap(
       \(x, N) {
         V <- get_values(x)
+        PREFIX <- "conditions[<<i>>]"
         c(
-          paste0("conditions[<<i>>][property]=", plus(N)),
-          paste0(
-            "conditions[<<i>>][operator]=",
-            tolower(plus(get_operators(x)))
-          ),
-          paste0(
-            "conditions[<<i>>][value]",
-            if (length(V) > 1L) "[]=" else "=",
-            V
-          )
+          paste0(PREFIX, "[property]=", plus(N)),
+          paste0(PREFIX, "[operator]=", tolower(plus(get_operators(x)))),
+          paste0(PREFIX, "[value]", if (length(V) > 1L) "[]=" else "=", V)
         )
       }
     ) |>

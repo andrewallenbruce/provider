@@ -11,7 +11,7 @@
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
-#' @param enid `<chr>` Medicare Enrollment ID, Enrollment state
+#' @param enid `<chr>` Medicare Enrollment ID
 #' @param org_name `<chr>` Legal business name
 #' @param org_dba `<chr>` Doing-business-as name
 #' @param city,state,zip `<chr>` Location city, state, zip

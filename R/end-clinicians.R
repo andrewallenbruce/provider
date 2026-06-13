@@ -31,15 +31,16 @@
 #' @param first,last `<chr>` Individual provider's name
 #' @param gender `<enum>` Provider's gender; `"F"` (Female), `"M"` (Male), or `"U"` (Unknown)
 #' @param cred `<chr>` Provider's credential, i.e. `"MD"`, `"OD"`
-#' @param school `<chr>` Provider’s medical school
-#' @param year `<int>` Provider’s graduation year
+#' @param school `<chr>` Provider's medical school
+#' @param year `<int>` Provider's graduation year
 #' @param specialty `<chr>` Provider’s primary medical specialty
 #' @param city,state,zip `<chr>` Facility's city, state, zip
-#' @param org_name `<chr>` Facility associated with Provider
+#' @param org_name `<chr>` Name of facility associated with Provider
 #' @param org_pac `<chr>` Facility's PECOS Associate Control ID
-#' @param members `<int>` Number of members in Organization
+#' @param members `<int>` Number of members in facility's organization
 #' @examplesIf httr2::is_online()
 #' clinicians(first = "Etan")
+#' clinicians(year = greater(2030))
 #' @export
 clinicians <- function(
   npi = NULL,

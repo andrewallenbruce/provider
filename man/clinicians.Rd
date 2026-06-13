@@ -46,17 +46,17 @@ clinicians(
 
 \item{specialty}{\verb{<chr>} Provider’s primary medical specialty}
 
-\item{school}{\verb{<chr>} Provider’s medical school}
+\item{school}{\verb{<chr>} Provider's medical school}
 
-\item{year}{\verb{<int>} Provider’s graduation year}
+\item{year}{\verb{<int>} Provider's graduation year}
 
 \item{city, state, zip}{\verb{<chr>} Facility's city, state, zip}
 
-\item{org_name}{\verb{<chr>} Facility associated with Provider}
+\item{org_name}{\verb{<chr>} Name of facility associated with Provider}
 
 \item{org_pac}{\verb{<chr>} Facility's PECOS Associate Control ID}
 
-\item{members}{\verb{<int>} Number of members in Organization}
+\item{members}{\verb{<int>} Number of members in facility's organization}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
@@ -87,5 +87,6 @@ A Clinician or Group must have:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clinicians(first = "Etan")
+clinicians(year = greater(2030))
 \dontshow{\}) # examplesIf}
 }

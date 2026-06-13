@@ -21,8 +21,7 @@ NULL
 
 #' @noRd
 hrsa_open <- function() {
-  # https://data.hrsa.gov/tools/web-services/registration#serviceInfo
-  url <- "https://gisportal.hrsa.gov/server/rest/services/FeatureServices/CMSApprovedFacilities_FS/MapServer"
+  url <- "https://gisportal.hrsa.gov/server/rest/services/HealthCareFacilities/CMSApprovedFacilities_FS/MapServer"
   arcgislayers::arc_open(url)
 }
 

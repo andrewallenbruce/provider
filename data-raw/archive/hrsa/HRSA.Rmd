@@ -1,0 +1,72 @@
+---
+title: "HRSA"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| include: FALSE
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE,
+  message   = TRUE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+  )
+library(tibble)
+library(provider)
+library(arcgislayers)
+```
+
+# `arc_open`
+
+```{r}
+#| label: arc_open
+url <- "https://gisportal.hrsa.gov/server/rest/services/HealthCareFacilities/CMSApprovedFacilities_FS/MapServer"
+hrsa <- arcgislayers::arc_open(url)
+hrsa
+```
+
+# `list_items`
+
+```{r}
+#| label: list_items
+items <- arcgislayers::list_items(hrsa)
+collapse::qTBL(items) |> 
+  collapse::slt(c("id", "name", "type", "geometryType"))
+```
+
+# `get_all_layers`
+
+```{r}
+#| label: get_all_layers
+layers <- arcgislayers::get_all_layers(hrsa)$layers
+layers
+```
+
+# `list_fields`
+
+```{r}
+#| label: list_fields
+fields <- purrr::map(layers, arcgislayers::list_fields) |> 
+  rlang::set_names(items$name) |> 
+  collapse::rowbind(idcol = "facility") |> 
+  collapse::slt(c("facility", "alias", "name", "type"))
+fields |> 
+  collapse::sbt(facility == "Hospitals")
+```
+
+# `arc_select`
+
+```{r}
+#| label: arc_select
+arcgislayers::arc_select(
+    x = layers$`0`
+)
+```
+

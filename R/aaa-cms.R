@@ -23,6 +23,7 @@ url_cms <- function(x) {
   )
 }
 
+#' @include aaa-classes.R
 #' @noRd
 param_cms <- function(...) {
   x <- ParamCMS(params(...))
@@ -53,7 +54,7 @@ cms <- function(
     action = count_set(count, set)
   )
 
-  x@count <- request_count(x)
+  x <- request_count(x)
 
   return(x)
 }
@@ -67,14 +68,16 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
   )
 }
 
+#' @include aaa-generics.R
 #' @noRd
 S7::method(request_count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    x <- flatten_cms(x@url, x@query, "/stats?")
-    x <- base_request(x, "found_rows")
-    return(x)
+    x@count <- base_request(
+      flatten_cms(x@url, x@query, "/stats?"),
+      "found_rows"
+    )
   }
-  return(0L)
+  return(x)
 }
 
 #' @noRd

@@ -56,7 +56,7 @@ hospitals2(
 
 \item{pac}{\verb{<chr>} PECOS Associate Control ID}
 
-\item{enid}{\verb{<chr>} Medicare Enrollment ID, Enrollment state}
+\item{enid}{\verb{<chr>} Medicare Enrollment ID}
 
 \item{org_name}{\verb{<chr>} Legal business name}
 
