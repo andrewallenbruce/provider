@@ -30,7 +30,7 @@ library(provider)
 x <- affiliations(pac = 7810891009)
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
-  organization = hospitals(ccn = x$prov_ccn))
+  organization = hospitals(ccn = x$fac_ccn))
 x
 
 reassignments(pac = 7810891009) |> str()
@@ -57,22 +57,22 @@ retrieve information on the individual providers practicing at this hospital.
 First, the all-numeric CCN (`331302`):
 
 ```{r}
-ccn <- affiliations(facility_ccn = 331302)
+x <- affiliations(fac_ccn = 331302)
 
 list(
-  organization = as.data.frame(t(unique(ccn[5:7]))),
-  individual = unique(ccn[1:4]))
+  organization = as.data.frame(t(unique(x[5:7]))),
+  individual = unique(x[1:4]))
 ```
 
 That returns individual providers affiliated with the hospital. Now to search
 the alphanumeric CCN (`33Z302`):
 
 ```{r}
-ccn2 <- affiliations(facility_ccn = "33Z302")
+x <- affiliations(fac_ccn = "33Z302")
 
 list(
-  organization = as.data.frame(t(unique(ccn2[5:7]))), 
-  individual = unique(ccn2[1:4]))
+  organization = as.data.frame(t(unique(x[5:7]))), 
+  individual = unique(x[1:4]))
 ```
 
 That returns more affiliated individual providers that practice in the
