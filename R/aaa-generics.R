@@ -14,7 +14,10 @@ request_multi <- S7::new_generic("request_multi", "x")
 build <- S7::new_generic("build", "x")
 
 #' @noRd
-combine <- S7::new_generic("combine", c("x", "y"))
+key <- S7::new_generic("key", "x")
+
+#' @noRd
+chain <- S7::new_generic("chain", c("x", "y"))
 
 #' @noRd
 polish <- S7::new_generic("polish", "x")

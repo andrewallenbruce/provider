@@ -14,6 +14,43 @@ QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
 QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
+Key <- S7::new_class(
+  "Key",
+  S7::class_character,
+  package = NULL,
+  properties = list(
+    size = S7::new_property(
+      S7::class_integer,
+      getter = function(self) 150L
+    ),
+    length = S7::new_property(
+      S7::class_integer,
+      getter = function(self) collapse::fnobs(self)
+    ),
+    chunks = S7::new_property(
+      S7::class_integer,
+      getter = function(self) {
+        cheapr::seq_size(1L, self@length, self@size)
+      }
+    ),
+    split = S7::new_property(
+      S7::class_character,
+      getter = function(self) {
+        if (self@chunks <= 1L) {
+          return()
+        }
+        vctrs::vec_split(
+          cheapr::attrs_rm(self),
+          seq_len(self@chunks) |>
+            cheapr::rep_each_(self@size) |>
+            cheapr::sset(seq_len(self@length))
+        )[["val"]]
+      }
+    )
+  )
+)
+
+#' @noRd
 Endpoint <- S7::new_class(
   "Endpoint",
   package = NULL,

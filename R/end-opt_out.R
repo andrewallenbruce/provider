@@ -86,21 +86,22 @@ opt_out <- function(
   x <- polish(x)
 
   if (count) {
-    return(invisible(x))
+    return(x)
   }
 
   if (!is.null(order_refer) && !order_refer) {
     x$order_refer <- NA_character_
-  }
-
-  key <- extract_key(x)
-
-  if (!length(key)) {
     return(x)
   }
 
-  if (n_chunks(key) == 1L) {
-    y <- order_refer(npi = key)
+  k <- key(x)
+
+  if (!k@length) {
+    return(x)
+  }
+
+  if (k@chunks == 1L) {
+    y <- order_refer(npi = S7::S7_data(k))
 
     if (nrow0(y)) {
       return(x)
@@ -109,7 +110,8 @@ opt_out <- function(
     return(pivot_order_refer(x))
   }
 
-  y <- purrr::map(split_chunks(key), function(x) order_refer(npi = x)) |>
+  y <- k@split |>
+    purrr::map(\(x) order_refer(npi = x)) |>
     rowbind2(nm = NULL)
 
   if (nrow0(y)) {
@@ -117,24 +119,4 @@ opt_out <- function(
   }
   x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
   pivot_order_refer(x)
-}
-
-#' @noRd
-extract_key <- function(x) {
-  collapse::ss(x, x[["order_refer"]] %==% 1L, c("npi")) |>
-    unlist_() |>
-    collapse::funique()
-}
-
-#' @noRd
-n_chunks <- function(n, size = 150L) {
-  cheapr::seq_size(1L, collapse::fnobs(n), size)
-}
-
-#' @noRd
-split_chunks <- function(k, size = 150L) {
-  N <- n_chunks(k, size = size)
-  S <- cheapr::seq_(1L, N)
-  E <- cheapr::rep_each_(S, size)[cheapr::seq_(1L, length(k))]
-  vctrs::vec_split(k, E)$val
 }
