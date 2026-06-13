@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9237 (2026-06-13)
+
+* fixed `quality()` renaming
+
+
 # provider 0.0.1.9236 (2026-06-13)
 
 * clean-up/restructure
