@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9241 (2026-06-13)
+
+* iterating on `key` -> `chain`
+
+
 # provider 0.0.1.9240 (2026-06-13)
 
 - Same as previous version.
