@@ -1,12 +1,17 @@
 # Changelog
 
+## provider 0.0.1.9242 (2026-06-14)
+
+- refining `key/chain`
+
 ## provider 0.0.1.9241 (2026-06-13)
 
 - iterating on `key` -\> `chain`
 
 ## provider 0.0.1.9240 (2026-06-13)
 
-- Same as previous version.
+- fixed NEWS typo in previous commit referencing a non-existent github
+  issue number
 
 ## provider 0.0.1.9239 (2026-06-13)
 
