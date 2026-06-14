@@ -26,9 +26,9 @@ collapse_rows <- function(x, key, var) {
 pivot_order_refer <- function(x) {
   y <- pivot2(x, "^npi$|_ind$", "npi", "order_refer")
 
-  collapse::gvr(x, "^order_refer$|_ind$") <- NULL
+  collapse::gvr(x, "_ind$") <- NULL
 
-  y <- collapse::ss(y, y$ind %==% 1L, 1:2)
+  y <- collapse::ss(y, y$ind %==% 1L, c("npi", "order_refer"))
 
   if (nrow0(y)) {
     return(collapse::av(x, order_refer = vec_na(x)))

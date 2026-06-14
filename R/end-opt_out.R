@@ -63,6 +63,7 @@ opt_out <- function(
     max = this_year()
   )
 
+  # TODO better implementation
   if (!is.null(start_year)) {
     start_year <- ends(start_year)
   }
@@ -90,33 +91,11 @@ opt_out <- function(
   }
 
   if (!is.null(order_refer) && !order_refer) {
-    x$order_refer <- NA_character_
+    collapse::gv(x, "order_refer") <- NA_character_
     return(x)
   }
 
-  k <- key(x)
+  fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
 
-  if (!k@length) {
-    return(x)
-  }
-
-  if (k@chunks == 1L) {
-    y <- order_refer(npi = S7::S7_data(k))
-
-    if (nrow0(y)) {
-      return(x)
-    }
-    x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
-    return(pivot_order_refer(x))
-  }
-
-  y <- k@split |>
-    purrr::map(\(x) order_refer(npi = x)) |>
-    rowbind2(nm = NULL)
-
-  if (nrow0(y)) {
-    return(x)
-  }
-  x <- join2(x, collapse::ss(y, j = 3:8), on = "npi")
-  pivot_order_refer(x)
+  chain(x, fn_order_refer)
 }
