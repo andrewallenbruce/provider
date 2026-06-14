@@ -21,7 +21,7 @@ Key <- S7::new_class(
   properties = list(
     size = S7::new_property(
       S7::class_integer,
-      getter = function(self) 150L
+      default = 150L
     ),
     length = S7::new_property(
       S7::class_integer,

@@ -56,12 +56,7 @@ opt_out <- function(
   count = FALSE
 ) {
   check_bool_(order_refer)
-  rlang::check_number_whole(
-    start_year,
-    allow_null = TRUE,
-    min = 1998,
-    max = this_year()
-  )
+  check_numeric(start_year)
 
   # TODO better implementation
   if (!is.null(start_year)) {
@@ -87,7 +82,7 @@ opt_out <- function(
   x <- polish(x)
 
   if (count) {
-    return(x)
+    return(invisible(x))
   }
 
   if (!is.null(order_refer) && !order_refer) {

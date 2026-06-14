@@ -7,7 +7,7 @@
 
 # provider 0.0.1.9240 (2026-06-13)
 
-- Same as previous version.
+* fixed NEWS typo in previous commit referencing a non-existent github issue number
 
 
 # provider 0.0.1.9239 (2026-06-13)
