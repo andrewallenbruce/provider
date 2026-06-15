@@ -103,6 +103,7 @@ metrics(year = NULL)
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## Details
 

@@ -146,6 +146,7 @@ utilization(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## Links
 
@@ -163,7 +164,6 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 utilization(count = TRUE)
 #> ◼ utilization | 13,528,933 rows | 2,712 pages
-
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results
 #> ✔ Retrieving 12 pages

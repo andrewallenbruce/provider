@@ -79,6 +79,7 @@ nppes(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## **National Provider Identifier (NPI)**
 

@@ -14,8 +14,7 @@ order_refer(
   hha = NULL,
   pmd = NULL,
   hospice = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -47,9 +46,10 @@ order_refer(
 
   `<lgl>` Return the total row count
 
-- set:
+## Value
 
-  `<lgl>` Return the entire dataset
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## Criteria
 

@@ -27,8 +27,7 @@ hospitals(
   prov_type = NULL,
   loc_type = NULL,
   subgroup = subgroups(),
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 
 hospitals2(
@@ -41,8 +40,7 @@ hospitals2(
   hosp_type = NULL,
   own_type = NULL,
   rating = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
@@ -150,10 +148,6 @@ hospitals2(
 
   `<lgl>` Return the total row count
 
-- set:
-
-  `<lgl>` Return the entire dataset
-
 - county:
 
   `<chr>` Location county
@@ -210,6 +204,14 @@ hospitals2(
 
   `<int>` Hospital rating; 1-5 or "Not Available"
 
+## Value
+
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
+
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
+
 ## Examples
 
 ``` r
@@ -219,24 +221,7 @@ hospitals(
  )
 #> ✔ hospitals returned 65 results
 #> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 31 results
-#> ✔ Retrieving 1 page
-#> # A tibble: 65 × 18
-#>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
-#>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-#>  1 BROOKS COU… ARCHBO… O200… 1.58e9     0 11Z3… 1557… NA         Other: … Non-P…
-#>  2 HOSPITAL A… ARCHBO… O200… 1.70e9     0 1113… 6002… NA         Other: … Non-P…
-#>  3 HOSPITAL A… ARCHBO… O200… 1.44e9     0 11Z3… 6002… NA         Other: … Non-P…
-#>  4 PUTNAM GEN… PUTNAM… O200… 1.39e9     0 1113… 4688… 1968-03-01 Other: … Non-P…
-#>  5 PUTNAM GEN… PUTNAM… O200… 1.55e9     0 11Z3… 4688… 1968-03-01 Other: … For-P…
-#>  6 THE HOSPIT… MILLER… O200… 1.11e9     0 1113… 0244… NA         Other: … Non-P…
-#>  7 THE HOSPIT… MILLER… O200… 1.29e9     0 11Z3… 0244… NA         Other: … Non-P…
-#>  8 PROFESSION… MOUNTA… O200… 1.33e9     0 1113… 1052… 2004-12-17 LLC      For-P…
-#>  9 HOSPITAL A… WILLS … O200… 1.62e9     0 1113… 8628… NA         Other: … Non-P…
-#> 10 HOSPITAL A… WILLS … O200… 1.48e9     0 11Z3… 8628… NA         Other: … Non-P…
-#> # ℹ 55 more rows
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> Error in extract_key(k): object 'x' not found
 
 hospitals(
   city = "Atlanta",
@@ -247,44 +232,11 @@ hospitals(
  )
 #> ✔ hospitals returned 12 results
 #> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 5 results
-#> ✔ Retrieving 1 page
-#> # A tibble: 12 × 18
-#>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
-#>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-#>  1 SCOTTISH R… CHILDR… O200… 1.92e9     0 1133… 4981… 1915-04-10 Corpora… Non-P…
-#>  2 PIEDMONT H… NA      O200… 1.96e9     0 1100… 8628… 1940-06-26 Corpora… Non-P…
-#>  3 EMORY UNIV… EMORY … O200… 1.44e9     1 11S0… 3173… 1994-03-04 Corpora… Non-P…
-#>  4 EMORY UNIV… EMORY … O200… 1.36e9     1 11T0… 3173… 1994-03-04 Corpora… Non-P…
-#>  5 ARTHUR M. … NA      O200… 1.69e9     0 1133… 2567… 1943-09-18 Corpora… Non-P…
-#>  6 GRADY MEMO… GRADY … O200… 1.63e9     0 11S0… 7517… 2007-12-21 Corpora… Non-P…
-#>  7 UHS OF ANC… ANCHOR… O201… 1.02e9     1 1140… 4486… 2000-06-02 Partner… For-P…
-#>  8 UHS OF PEA… PEACHF… O201… 1.09e9     0 1140… 9234… 2000-06-02 Partner… For-P…
-#>  9 SHEPHERD C… NA      O201… 1.04e9     0 1120… 1052… 1975-04-21 Corpora… Non-P…
-#> 10 ES REHABIL… EMORY … O201… 1.55e9     0 1130… 1254… 2013-10-15 LLC      For-P…
-#> 11 SELECT SPE… SELECT… O201… 1.24e9     0 1120… 6305… NA         LLC      For-P…
-#> 12 REHABILITA… REHABI… O202… 1.54e9     0 1130… 5698… 2020-10-16 LLC      For-P…
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> Error in extract_key(k): object 'x' not found
 
 hospitals(ccn = hospitals2()$ccn)
 #> ✔ Returning first 10 rows
 #> ✔ hospitals returned 9 results
 #> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 9 results
-#> ✔ Retrieving 1 page
-#> # A tibble: 9 × 18
-#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
-#>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-#> 1 HOUSTON COU… SOUTHE… O200… 1.16e9     0 0100… 9436… 1957-09-01 Corpora… Non-P…
-#> 2 HH HEALTH S… MARSHA… O201… 1.41e9     0 0100… 8527… 2018-08-20 Other: … Non-P…
-#> 3 RCHP - FLOR… NORTH … O201… 1.48e9     0 0100… 8123… 2010-04-28 LLC      For-P…
-#> 4 MIZELL MEMO… NA      O200… 1.01e9     0 0100… 6507… 1945-11-26 Corpora… Non-P…
-#> 5 ST. VINCENT… ST. VI… O200… 1.84e9     0 0100… 8921… 1968-07-22 Corpora… Non-P…
-#> 6 HH HEALTH S… DEKALB… O202… 1.77e9     0 0100… 6709… NA         LLC      For-P…
-#> 7 BBH SBMC, L… BAPTIS… O201… 1.81e9     0 0100… 7810… 2015-06-19 LLC      For-P…
-#> 8 HH HEALTH S… HELEN … O201… 1.51e9     0 0100… 1759… 2014-11-14 LLC      Non-P…
-#> 9 DALE MEDICA… NA      O200… 1.94e9     0 0100… 3476… 2007-03-20 Other: … Non-P…
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> Error in extract_key(k): object 'x' not found
 ```

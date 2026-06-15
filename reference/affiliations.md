@@ -74,6 +74,7 @@ affiliations(
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## Examples
 

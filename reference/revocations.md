@@ -69,6 +69,11 @@ revocations(
 
   `<lgl>` Return the total row count
 
+## Value
+
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
+
 ## Details
 
 The Revoked Medicare Providers and Suppliers dataset contains

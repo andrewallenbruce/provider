@@ -96,6 +96,11 @@ clinicians(
 
   `<lgl>` Return the total row count
 
+## Value
+
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
+
 ## Data Source
 
 The Doctors and Clinicians National Downloadable File is organized such

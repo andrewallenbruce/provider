@@ -124,13 +124,10 @@ clia(
 
   `<lgl>` Return the total row count
 
-- set:
-
-  `<lgl>` Return the entire dataset
-
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## CLIA
 
@@ -221,7 +218,6 @@ clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> # ℹ 10 more variables: cert_type <chr>, fac_type <chr>, owner <chr>,
 #> #   action <chr>, cert_date <date>, eff_date <date>, term_date <date>,
 #> #   eligible <int>, multi <chr>, acr_org <chr>
-
 clia(acr_org = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result
 #> ✔ Retrieving 1 page
