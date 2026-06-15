@@ -17,18 +17,25 @@ x <- list(
   organization = hospitals(ccn = x$fac_ccn))
 #> ✔ hospitals returned 5 results
 #> ✔ Retrieving 1 page
-#> Error in `x[[key]]`:
-#> ! Can't extract column with `key`.
-#> ✖ Subscript `key` must be size 1, not 3.
 x
-#> # A tibble: 5 × 7
-#>   first last         npi pac        fac_type fac_ccn parent_ccn
-#>   <chr> <chr>      <int> <chr>      <chr>    <chr>   <chr>     
-#> 1 MARK  FUNG  1043245657 7810891009 Hospital 470003  NA        
-#> 2 MARK  FUNG  1043245657 7810891009 Hospital 330250  NA        
-#> 3 MARK  FUNG  1043245657 7810891009 Hospital 470001  NA        
-#> 4 MARK  FUNG  1043245657 7810891009 Hospital 471307  NA        
-#> 5 MARK  FUNG  1043245657 7810891009 Hospital 331321  NA
+#> $individual
+#>               V1
+#> first       MARK
+#> last        FUNG
+#> npi   1043245657
+#> pac   7810891009
+#> 
+#> $organization
+#> # A tibble: 5 × 16
+#>   org_name      org_dba enid  npi   multi ccn   pac   inc_date   org_type status
+#>   <chr>         <chr>   <chr> <chr> <int> <chr> <chr> <date>     <chr>    <chr> 
+#> 1 CHAMPLAIN VA… THE UN… O201… 1033…     0 3302… 2769… 1926-01-01 Corpora… Non-P…
+#> 2 ALICE HYDE M… THE UN… O202… 1114…     0 3313… 4082… 1905-04-13 Corpora… Non-P…
+#> 3 CENTRAL VERM… NA      O200… 1508…     0 4700… 9335… 1984-03-01 Corpora… Non-P…
+#> 4 UNIVERSITY O… UNIVER… O200… 1568…     0 4700… 3779… 1995-01-01 Corpora… Non-P…
+#> 5 PORTER HOSPI… NA      O200… 1740…     1 4713… 1850… 1986-11-14 Corpora… Non-P…
+#> # ℹ 6 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, sub_group <chr>
 
 reassignments(pac = 7810891009) |> str()
 #> ✔ reassignments returned 1 result
@@ -80,9 +87,23 @@ x <- "Elizabethtown Community Hospital"
 hospitals(org_name = x) |> str()
 #> ✔ hospitals returned 2 results
 #> ✔ Retrieving 1 page
-#> Error in `x[[key]]`:
-#> ! Can't extract column with `key`.
-#> ✖ Subscript `key` must be size 1, not 3.
+#> hospitls [2 × 16] (S3: hospitals/tbl_df/tbl/data.frame)
+#>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
+#>  $ org_dba  : chr [1:2] NA NA
+#>  $ enid     : chr [1:2] "O20101110000259" "O20220827000145"
+#>  $ npi      : chr [1:2] "1891785184" "1407061591"
+#>  $ multi    : int [1:2] 1 0
+#>  $ ccn      : chr [1:2] "331302" "33Z302"
+#>  $ pac      : chr [1:2] "3577554138" "3577554138"
+#>  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"
+#>  $ org_type : chr [1:2] "Corporation" "Corporation"
+#>  $ status   : chr [1:2] "Non-Profit" "Non-Profit"
+#>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
+#>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
+#>  $ state    : chr [1:2] "NY" "NY"
+#>  $ zip      : chr [1:2] "129322300" "129322300"
+#>  $ loc_type : chr [1:2] "Other" "Other"
+#>  $ sub_group: chr [1:2] "CAH" "CAH"
 
 clinicians(org_name = x) |> str()
 #> ✔ clinicians returned 78 results
