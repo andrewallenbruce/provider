@@ -12,8 +12,8 @@ add_class <- function(x, endpoint = NULL) {
 }
 
 #' @noRd
-add_class2 <- function(x, endpoint = NULL) {
-  `class<-`(c(if (!is.null(endpoint)) endpoint, class(x)))
+add_class2 <- function(x, endpoint) {
+  `class<-`(x, c(endpoint, class(x)))
 }
 
 #' @noRd
