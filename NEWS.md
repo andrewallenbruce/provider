@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9251 (2026-06-15)
+
+* added `link` generic
+
+
 # provider 0.0.1.9250 (2026-06-15)
 
 * fixed bug in `add_class2`
