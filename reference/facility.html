@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9249</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9250</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,7 +147,23 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">facility</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">facility</span> returned <span style="color: #BBBB00; font-weight: bold;">12</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">4</span> pages</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in `class&lt;-`(c(if (!is.null(endpoint)) endpoint, class(x))):</span> 1 argument passed to 'class&lt;-' which requires 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    fac_type enid      npi multi ccn   pac   org_name org_dba inc_date   org_type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> HHA      O2012… 1.29<span style="color: #949494;">e</span>9     0 1170… 6002… PUBLIC … <span style="color: #BB0000;">NA</span>      1994-03-07 CORPORA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> HHA      O2012… 1.11<span style="color: #949494;">e</span>9     0 1170… 3173… GHHS HE… GEORGI… <span style="color: #BB0000;">NA</span>         LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FQHC     O2018… 1.64<span style="color: #949494;">e</span>9     0 1110… 1951… SOUTH C… NORTHS… 1992-06-19 CORPORA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FQHC     O2024… 1.47<span style="color: #949494;">e</span>9     0 C210… 1951… SOUTH C… SOUTH … 2024-02-01 CORPORA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SNF      O2020… 1.06<span style="color: #949494;">e</span>9     0 1153… 9032… PRUITTH… PRUITT… <span style="color: #BB0000;">NA</span>         LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SNF      O2021… 1.88<span style="color: #949494;">e</span>9     0 1153… 8022… PRUITTH… PRUITT… 2020-04-22 LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SNF      O2021… 1.77<span style="color: #949494;">e</span>9     0 1153… 1456… PRUITTH… PRUITT… 2020-04-22 LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SNF      O2021… 1.97<span style="color: #949494;">e</span>9     0 1155… 7416… PRUITTH… PRUITT… 2020-04-22 LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Hospice  O2005… 1.06<span style="color: #949494;">e</span>9     0 1115… 2264… PRUITTH… PRUITT… 1993-10-14 CORPORA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Hospice  O2006… 1.75<span style="color: #949494;">e</span>9     0 1115… 1355… SOUTH G… HOSPIC… 1986-07-11 CORPORA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Hospice  O2007… 1.97<span style="color: #949494;">e</span>9     0 1115… 1052… BETHANY… AFFINI… 2007-06-16 LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Hospice  O2008… 1.60<span style="color: #949494;">e</span>9     0 1116… 0042… GRACE H… HEART … <span style="color: #BB0000;">NA</span>         LLC     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: status &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

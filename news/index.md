@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9250 (2026-06-15)
+
+- fixed bug in `add_class2`
+
 ## provider 0.0.1.9249 (2026-06-15)
 
 - added
