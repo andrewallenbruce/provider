@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9252 (2026-06-15)
+
+- added `Result` class
+- fixed `extract_key` bug
+
 ## provider 0.0.1.9251 (2026-06-15)
 
 - added `link` generic
