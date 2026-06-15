@@ -14,6 +14,15 @@ QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
 QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
+Result <- S7::new_class(
+  "Result",
+  package = NULL,
+  properties = list(
+    df = S7::new_S3_class("tbl_df")
+  )
+)
+
+#' @noRd
 chunk <- function(x, chunks, size, length) {
   idx <- cheapr::rep_each_(seq_len(chunks), size) |>
     cheapr::sset(seq_len(length))

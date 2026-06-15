@@ -26,7 +26,7 @@ recode <- S7::new_generic("recode", "x")
 key <- S7::new_generic("key", "x")
 
 #' @noRd
-chain <- S7::new_generic("chain", c("x", "endpoint"))
+chain <- S7::new_generic("chain", c("x", "end"))
 
 #' @noRd
 link <- S7::new_generic("link", c("x", "y"))
@@ -77,4 +77,31 @@ S7::method(execute, EndpointCMSList) <- function(x) {
     return(request_single(x))
   }
   request_multi(x)
+}
+
+#' @noRd
+S7::method(chain, list(Result, S7::class_function)) <- function(x, end) {
+  x <- x@df
+  k <- key(x)
+
+  if (!is_key(k)) {
+    if (is.null(k)) {
+      return(x)
+    }
+    y <- end(k)
+
+    if (no_rows(y)) {
+      return(x)
+    }
+
+    return(link(x, y))
+  }
+
+  y <- rowbind2(purrr::map(k@split, end))
+
+  if (no_rows(y)) {
+    return(x)
+  }
+
+  link(x, y)
 }

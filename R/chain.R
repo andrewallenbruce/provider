@@ -9,15 +9,15 @@ fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
 fn_hospitals2 <- rlang::as_function(~ hospitals2(ccn = .x))
 
 #' @noRd
-extract_key <- function(k) {
+extract_key <- function(x) {
   check_key(x)
-  if (k@length == 0L) {
+  if (x@length == 0L) {
     return(NULL)
   }
-  if (k@chunks == 1L) {
-    return(S7::S7_data(k))
+  if (x@chunks == 1L) {
+    return(S7::S7_data(x))
   }
-  return(k)
+  return(x)
 }
 
 #' @noRd
@@ -52,61 +52,4 @@ S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
   )
   x <- join2(x, y, on = "ccn")
   rc_combine(x, "status", "status_y")
-}
-
-#' @noRd
-S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
-  x,
-  endpoint
-) {
-  k <- key(x)
-
-  if (!is_key(k)) {
-    if (is.null(k)) {
-      return(x)
-    }
-    y <- endpoint(k)
-
-    if (no_rows(y)) {
-      return(x)
-    }
-
-    return(link(x, y))
-  }
-
-  y <- rowbind2(purrr::map(k@split, endpoint))
-
-  if (no_rows(y)) {
-    return(x)
-  }
-
-  link(x, y)
-}
-
-#' @noRd
-S7::method(chain, list(s3_hospitals, S7::class_function)) <- function(
-  x,
-  endpoint
-) {
-  k <- key(x)
-
-  if (!is_key(k)) {
-    if (is.null(k)) {
-      return(x)
-    }
-    y <- endpoint(k)
-
-    if (no_rows(y)) {
-      return(x)
-    }
-    return(link(x, y))
-  }
-
-  y <- rowbind2(purrr::map(k@split, endpoint))
-
-  if (no_rows(y)) {
-    return(x)
-  }
-
-  link(x, y)
 }

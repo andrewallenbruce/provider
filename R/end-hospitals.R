@@ -107,6 +107,8 @@ hospitals <- function(
     return(invisible(x))
   }
 
+  x <- Result(x)
+
   chain(x, fn_hospitals2)
 }
 
