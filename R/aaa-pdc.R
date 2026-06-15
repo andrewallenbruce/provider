@@ -104,7 +104,7 @@ flatten_pdc <- function(url, query = NULL, ...) {
 #' @noRd
 S7::method(count, EndpointPDC) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    x@count <- base_request(
+    S7::prop(x, "count") <- base_request(
       flatten_pdc(x@url, x@query, results = "false"),
       "count"
     )
@@ -116,11 +116,11 @@ S7::method(count, EndpointPDC) <- function(x) {
 S7::method(preview, EndpointPDC) <- function(x) {
   report_preview()
 
-  res <- flatten_pdc(x@url, NULL, limit = 10L) |>
+  x <- flatten_pdc(x@url, NULL, limit = 10L) |>
     base_request("results") |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }
 
 #' @noRd
@@ -128,11 +128,11 @@ S7::method(request_single, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  res <- flatten_pdc(x@url, x@query) |>
+  x <- flatten_pdc(x@url, x@query) |>
     base_request("results") |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }
 
 #' @noRd
@@ -140,9 +140,9 @@ S7::method(request_multi, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  res <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
+  x <- flatten_pdc(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit, "results") |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }

@@ -1,9 +1,9 @@
 #' @noRd
-ss_key <- function(x, columns, key = "ind") {
+ss_key <- function(x, cols, key = "ind") {
   collapse::ss(
     x = x,
     i = x[[key]] %==% 1L,
-    j = columns,
+    j = cols,
     check = FALSE
   )
 }
@@ -58,13 +58,13 @@ pivot_order_refer <- function(x) {
 
   collapse::gvr(x, "_ind$") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "order_refer"))
   }
 
   y <- ss_key(y, c("npi", "order_refer"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "order_refer"))
   }
 
@@ -91,13 +91,13 @@ pivot_multi_site <- function(x) {
 
   collapse::gvr(x, "_multi$") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "multi"))
   }
 
   y <- ss_key(y, c("fac_ccn", "multi"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "multi"))
   }
 
@@ -124,13 +124,13 @@ pivot_acr_org <- function(x) {
 
   collapse::gvr(x, "^acr_") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "acr_org"))
   }
 
   y <- collapse::ss(y, j = c("fac_ccn", "acr_org"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "acr_org"))
   }
 
@@ -158,15 +158,15 @@ pivot_acr_org <- function(x) {
 pivot_owner <- function(x) {
   y <- pivot2(x, "pac", "_ind$", "own_type", "own_otxt")
 
-  collapse::gvr(x, "_ind$|_otxt$") <- NULL
+  collapse::gvr(x, "_ind$|own_otxt") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "own_type"))
   }
 
   y <- ss_key(y, c("pac", "own_type", "own_otxt"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "own_type"))
   }
 
@@ -209,13 +209,13 @@ pivot_subgroup <- function(x) {
 
   collapse::gvr(x, "_ind$|other_otxt") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "sub_group"))
   }
 
   y <- ss_key(y, c("enid", "other_otxt", "sub_group"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "sub_group"))
   }
 
@@ -254,13 +254,13 @@ pivot_quality <- function(x) {
 
   collapse::gvr(x, "_ind$") <- NULL
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "indicators"))
   }
 
   y <- ss_key(y, c("npi", "indicators", "year"))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(add_empty(x, "indicators"))
   }
 

@@ -72,7 +72,7 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 #' @noRd
 S7::method(count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    x@count <- base_request(
+    S7::prop(x, "count") <- base_request(
       flatten_cms(x@url, x@query, "/stats?"),
       "found_rows"
     )
@@ -84,11 +84,11 @@ S7::method(count, EndpointCMS) <- function(x) {
 S7::method(preview, EndpointCMS) <- function(x) {
   report_preview()
 
-  res <- flatten_cms(x@url, NULL, size = 10L) |>
+  x <- flatten_cms(x@url, NULL, size = 10L) |>
     base_request() |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }
 
 #' @noRd
@@ -96,11 +96,11 @@ S7::method(request_single, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  res <- flatten_cms(x@url, x@query) |>
+  x <- flatten_cms(x@url, x@query) |>
     base_request() |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }
 
 #' @noRd
@@ -108,9 +108,9 @@ S7::method(request_multi, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  res <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
+  x <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit) |>
     add_class(x@end)
 
-  return(res)
+  return(x)
 }

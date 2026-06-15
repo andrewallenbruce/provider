@@ -26,7 +26,7 @@ recode <- S7::new_generic("recode", "x")
 key <- S7::new_generic("key", "x")
 
 #' @noRd
-chain <- S7::new_generic("chain", c("x", "endpoint_fn"))
+chain <- S7::new_generic("chain", c("x", "endpoint"))
 
 
 #' @noRd

@@ -4,8 +4,7 @@ column_rex <- function(x) {
 }
 
 #' @noRd
-nrow0 <- function(x) {
-  # TODO rename to no_rows
+no_rows <- function(x) {
   collapse::fnrow(x) == 0L
 }
 

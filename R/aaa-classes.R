@@ -45,7 +45,7 @@ Key <- S7::new_class(
       }
     ),
     split = S7::new_property(
-      S7::class_character,
+      S7::class_list,
       getter = function(self) {
         if (self@chunks <= 1L) {
           return()
@@ -60,6 +60,11 @@ Key <- S7::new_class(
     )
   )
 )
+
+#' @noRd
+is_key <- function(x) {
+  S7::S7_inherits(x, Key)
+}
 
 #' @noRd
 Endpoint <- S7::new_class(

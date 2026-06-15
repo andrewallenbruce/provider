@@ -38,15 +38,18 @@
 #'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @examplesIf httr2::is_online()
-#' hospitals(prov_type = "reh", count = TRUE)
+#' hospitals(
+#'   prov_type = "cah",
+#'   state = "GA"
+#'  )
 #'
-#' hospitals2(hosp_type = "reh", count = TRUE)
-#'
-#' x <- subgroups(acute = FALSE, psych = TRUE)
-#'
-#' hospitals(city = "Atlanta", state = "GA", subgroup = x)
-#'
-#' hospitals2(ccn = hospitals()$ccn)
+#' hospitals(
+#'   city = "Atlanta",
+#'   state = "GA",
+#'   subgroup = subgroups(
+#'     acute = FALSE
+#'    )
+#'  )
 #'
 #' hospitals(ccn = hospitals2()$ccn)
 #'
@@ -98,13 +101,21 @@ hospitals <- function(
   )
 
   x <- execute(x)
+  x <- polish(x)
 
-  polish(x)
+  if (count) {
+    return(invisible(x))
+  }
+
+  chain(x, fn_hospitals2)
 }
 
-
 #' @noRd
-Subgroups <- S7::new_class("Subgroups", S7::class_list, package = NULL)
+Subgroups <- S7::new_class(
+  "Subgroups",
+  S7::class_list,
+  package = NULL
+)
 
 #' Hospital Subgroups
 #'

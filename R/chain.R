@@ -21,14 +21,9 @@ S7::method(key, s3_opt_out) <- function(x) {
 }
 
 #' @noRd
-is_key <- function(x) {
-  S7::S7_inherits(x, Key)
-}
-
-#' @noRd
 S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
   x,
-  endpoint_fn
+  endpoint
 ) {
   finish <- function(x, y) {
     y <- pivot_order_refer(y)
@@ -43,20 +38,82 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
     if (is.null(k)) {
       return(x)
     }
-    y <- endpoint_fn(k)
+    y <- endpoint(k)
 
-    if (nrow0(y)) {
+    if (no_rows(y)) {
       return(x)
     }
 
     return(finish(x, y))
   }
 
-  y <- rowbind2(purrr::map(k@split, endpoint_fn))
+  y <- rowbind2(purrr::map(k@split, endpoint))
 
-  if (nrow0(y)) {
+  if (no_rows(y)) {
     return(x)
   }
 
   finish(x, y)
+}
+
+#' @noRd
+fn_hospitals2 <- rlang::as_function(~ hospitals2(ccn = .x))
+
+#' @noRd
+S7::method(key, s3_hospitals) <- function(x) {
+  x <- collapse::funique(collapse::na_rm(x[["ccn"]]))
+  k <- Key(x, 200L)
+
+  if (!k@length) {
+    return(NULL)
+  }
+  if (k@chunks == 1L) {
+    return(S7::S7_data(k))
+  }
+  return(k)
+}
+
+#' @noRd
+S7::method(chain, list(s3_hospitals, S7::class_function)) <- function(
+  x,
+  endpoint
+) {
+  k <- key(x)
+
+  if (!is_key(k)) {
+    if (is.null(k)) {
+      return(x)
+    }
+    y <- hospitals2(ccn = k)
+
+    if (no_rows(y)) {
+      return(x)
+    }
+    y <- collapse::ss(
+      y,
+      j = c("ccn", "rating", "county", "status"),
+      check = FALSE
+    )
+
+    x <- join2(x, y, on = "ccn") |>
+      rc_combine("status", "status_y")
+
+    return(x)
+  }
+
+  y <- purrr::map(k@split, \(x) hospitals2(ccn = x)) |>
+    rowbind2()
+
+  if (no_rows(y)) {
+    return(x)
+  }
+
+  y <- collapse::ss(
+    y,
+    j = c("ccn", "rating", "county", "status"),
+    check = FALSE
+  )
+
+  join2(x, y, on = "ccn") |>
+    rc_combine("status", "status_y")
 }

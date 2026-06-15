@@ -12,6 +12,11 @@ add_class <- function(x, endpoint = NULL) {
 }
 
 #' @noRd
+add_class2 <- function(x, endpoint = NULL) {
+  `class<-`(c(if (!is.null(endpoint)) endpoint, class(x)))
+}
+
+#' @noRd
 set_rename <- function(x) {
   collapse::setrename(x, RE_NAME[[class(x)[1]]], .nse = FALSE)
   replace_nz(x)
