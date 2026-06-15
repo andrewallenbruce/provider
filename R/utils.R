@@ -9,13 +9,18 @@ nrow0 <- function(x) {
 }
 
 #' @noRd
-all_unique <- function(x) {
+is_unique <- function(x) {
   !collapse::any_duplicated(x)
 }
 
 #' @noRd
 vec_na <- function(x, type = "character") {
   cheapr::na_init(vector(mode = type), collapse::fnrow(x))
+}
+
+#' @noRd
+add_empty <- function(x, column_name) {
+  collapse::av(x, rlang::set_names(list(vec_na(x)), column_name))
 }
 
 #' @noRd

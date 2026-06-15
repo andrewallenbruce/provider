@@ -110,7 +110,25 @@ S7::method(polish, s3_owner) <- function(x) {
     add_class("owner")
 
   collapse::settfmv(x, "PERCENTAGE OWNERSHIP", as.double)
-  rc_owner(x, "ROLE CODE - OWNER")
+  collapse::recode_char(
+    x[["ROLE CODE - OWNER"]],
+    "01" = "5%+ Ownership",
+    "03" = "Partner",
+    "25" = "Contracted Mgmt Employee",
+    "34" = "5%+ Ownership (Direct)",
+    "35" = "5%+ Ownership (Indirect)",
+    "36" = "5%+ Mortgage",
+    "37" = "5%+ Security",
+    "38" = "General Partner",
+    "39" = "Limited Partner",
+    "40" = "Officer",
+    "41" = "Director",
+    "42" = "W2 Mgmt Employee",
+    "43" = "Ops/Mgmt Control",
+    "44" = "Other",
+    default = NA_character_,
+    set = TRUE
+  )
 
   set_rename(x)
   get_columns(x) |>
