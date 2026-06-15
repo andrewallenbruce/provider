@@ -38,7 +38,10 @@ pivot2 <- function(
   x <- collapse::pivot(
     data = x,
     ids = keys,
-    names = list(variable = new_column, value = "ind"),
+    names = list(
+      variable = new_column,
+      value = "ind"
+    ),
     na.rm = TRUE
   ) |>
     collapse::funique() |>
@@ -84,7 +87,7 @@ pivot_order_refer <- function(x) {
 
 #' @noRd
 pivot_multi_site <- function(x) {
-  y <- pivot2(x, "npi", "_multi$", "multi")
+  y <- pivot2(x, "fac_ccn", "_multi$", "multi")
 
   collapse::gvr(x, "_multi$") <- NULL
 
@@ -92,7 +95,7 @@ pivot_multi_site <- function(x) {
     return(add_empty(x, "multi"))
   }
 
-  y <- ss_key(y, c("npi", "multi"))
+  y <- ss_key(y, c("fac_ccn", "multi"))
 
   if (nrow0(y)) {
     return(add_empty(x, "multi"))
@@ -125,7 +128,7 @@ pivot_acr_org <- function(x) {
     return(add_empty(x, "acr_org"))
   }
 
-  y <- collapse::ss(y, j = c("npi", "acr_org"))
+  y <- collapse::ss(y, j = c("fac_ccn", "acr_org"))
 
   if (nrow0(y)) {
     return(add_empty(x, "acr_org"))
@@ -202,15 +205,15 @@ pivot_owner <- function(x) {
 
 #' @noRd
 pivot_subgroup <- function(x) {
-  y <- pivot2(x, "enid", "^sub_", "sub_group", "sg_otxt")
+  y <- pivot2(x, "enid", "_ind$", "sub_group", "other_otxt")
 
-  collapse::gvr(x, "^sub_|^sg_") <- NULL
+  collapse::gvr(x, "_ind$|other_otxt") <- NULL
 
   if (nrow0(y)) {
     return(add_empty(x, "sub_group"))
   }
 
-  y <- ss_key(y, c("enid", "sg_otxt", "sub_group"))
+  y <- ss_key(y, c("enid", "other_otxt", "sub_group"))
 
   if (nrow0(y)) {
     return(add_empty(x, "sub_group"))
@@ -218,24 +221,24 @@ pivot_subgroup <- function(x) {
 
   collapse::recode_char(
     y[["sub_group"]],
-    "sub_acute" = "Acute",
-    "sub_gen" = "General",
-    "sub_spec" = "Specialty",
-    "sub_adu" = "ADH",
-    "sub_child" = "Children's",
-    "sub_ltc" = "Long-Term",
-    "sub_psy" = "Psychiatric",
-    "sub_irf" = "IRF",
-    "sub_stc" = "Short-Term",
-    "sub_sba" = "Swing-Bed Unit",
-    "sub_psu" = "Psychiatric Unit",
-    "sub_iru" = "Rehab Unit",
-    "sub_oth" = "Other",
+    "acute_ind" = "Acute",
+    "gen_ind" = "General",
+    "spec_ind" = "Specialty",
+    "adu_ind" = "ADH",
+    "child_ind" = "Children's",
+    "ltc_ind" = "Long-Term",
+    "psy_ind" = "Psychiatric",
+    "irf_ind" = "IRF",
+    "stc_ind" = "Short-Term",
+    "sba_ind" = "Swing-Bed Unit",
+    "psu_ind" = "Psychiatric Unit",
+    "iru_ind" = "Rehab Unit",
+    "other_ind" = "Other",
     default = NA_character_,
     set = TRUE
   )
 
-  y <- rc_other(y, "sub_group", "sg_otxt")
+  y <- rc_other(y, "sub_group", "other_otxt")
   y <- collapse::funique(y)
 
   if (is_unique(y[["enid"]])) {

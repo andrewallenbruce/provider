@@ -1,6 +1,17 @@
 #' @noRd
+recast <- function(.data, ...) {
+  name <- as.character(substitute(.data))
+  if (length(name) != 1L || name == ".") {
+    stop("Cannot assign to name: ", deparse(substitute(.data)))
+  }
+  res <- collapse::ftransformv(.data, ...)
+  assign(name, res, envir = parent.frame(3L))
+  invisible(res)
+}
+
+#' @noRd
 S7::method(recode, s3_hospitals) <- function(x) {
-  collapse::settfmv(x, "NPI", as.integer)
+  recast(x, "NPI", as.integer)
   collapse::recode_char(
     x[["PROVIDER TYPE CODE"]],
     "00-24" = "REH",
@@ -40,7 +51,7 @@ S7::method(recode, s3_hospitals) <- function(x) {
 
 #' @noRd
 S7::method(recode, s3_clia) <- function(x) {
-  collapse::settfmv(
+  recast(
     x,
     c("CHOW_CNT", "DRCTLY_AFLTD_LAB_CNT", "LAB_SITE_CNT"),
     as.integer
@@ -152,7 +163,7 @@ S7::method(recode, s3_clia) <- function(x) {
 
 #' @noRd
 S7::method(recode, s3_quality) <- function(x) {
-  collapse::settfmv(
+  x <- collapse::tfmv(
     x,
     c(
       "year",
@@ -168,7 +179,7 @@ S7::method(recode, s3_quality) <- function(x) {
     ),
     as.integer
   )
-  collapse::settfmv(
+  collapse::tfmv(
     x,
     c(
       "adjustment",

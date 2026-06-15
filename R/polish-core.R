@@ -111,14 +111,14 @@ rc_other <- function(x, e1, e2) {
 
 #' @noRd
 rc_ptype <- function(x) {
-  p <- !cheapr::is_na(x$prov_type)
+  p <- !cheapr::is_na(x[["prov_type"]])
 
   if (rlang::is_empty(cheapr::which_(p))) {
     collapse::gv(x, "prov_type") <- NULL
     return(x)
   }
 
-  i <- cheapr::which_(p & !cheapr::is_na(x$sub_group))
+  i <- cheapr::which_(p & !cheapr::is_na(x[["sub_group"]]))
 
   if (!rlang::is_empty(i)) {
     collapse::gv(x[i, ], "sub_group") <- rc_combine(
@@ -128,7 +128,7 @@ rc_ptype <- function(x) {
     )
   }
 
-  i <- cheapr::which_(p & cheapr::is_na(x$sub_group))
+  i <- cheapr::which_(p & cheapr::is_na(x[["sub_group"]]))
 
   if (!rlang::is_empty(i)) {
     collapse::gv(x[i, ], "sub_group") <- unlist_(

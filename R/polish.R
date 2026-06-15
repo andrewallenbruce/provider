@@ -74,14 +74,20 @@ S7::method(polish, s3_hospitals) <- function(x) {
     rc_other("org_type", "org_otxt") |>
     rc_other("loc_type", "loc_otxt") |>
     rc_ymd(collapse::gvr(x, "_date$", return = 2L)) |>
-    rc_bin(collapse::gvr(x, "multi|^sub_", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "multi|_ind$", return = 2L)) |>
     pivot_subgroup() |>
     rc_ptype()
 }
 
 #' @noRd
 S7::method(polish, s3_hospitals2) <- function(x) {
-  suppressWarnings(collapse::settfmv(x, "hospital_overall_rating", as.integer))
+  suppressWarnings(
+    collapse::settfmv(
+      x,
+      "hospital_overall_rating",
+      as.integer
+    )
+  )
   set_rename(x)
   get_columns(x)
 }
@@ -210,8 +216,8 @@ S7::method(polish, s3_quality) <- function(x) {
     collapse::rowbind(fill = TRUE) |>
     add_class("quality")
 
-  recode(x)
-  collapse::roworderv(x, c("year", "npi"))
+  x <- recode(x)
+  collapse::roworderv(x, c("npi", "year"))
 }
 
 #' @noRd
