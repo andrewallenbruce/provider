@@ -121,22 +121,23 @@ quality(npi = c(1003026055, 1316939655))
 #> ✔ quality returned 10 results
 #> ✔ Retrieving 6 pages
 #> # A tibble: 10 × 25
-#>    year  npi   state size  specialty years patients services charges final_score
-#>    <chr> <chr> <chr> <chr> <chr>     <chr> <chr>    <chr>    <chr>   <chr>      
-#>  1 2017  1003… FL    189   Endocrin… 8     13189    NA       5840610 60         
-#>  2 2017  1003… NC    191   Endocrin… 8     14784    NA       8899721 100        
-#>  3 2018  1003… FL    135   Endocrin… 8     12317    0        5022828 57.73      
-#>  4 2019  1003… FL    150   Endocrin… 9     12415    52009    5616617 78.54      
-#>  5 2020  1003… FL    151   Endocrin… 10    12917    53599    5464461 51.04      
-#>  6 2020  1003… FL    7     Endocrin… 10    1244     8160     719152  95.54      
-#>  7 2020  1316… NY    295   Missing   16    22242    101308   9118669 93.15      
-#>  8 2021  1003… FL    9     Endocrin… 11    1181     7068     698003  60         
-#>  9 2021  1316… NY    455   Physicia… 17    23586    116187   109495… 91.11      
-#> 10 2022  1316… NY    352   Physicia… 18    23244    110514   105141… 80.31      
-#> # ℹ 15 more variables: adjustment <chr>, pi_score <chr>, qa_score <chr>,
-#> #   complex_bonus <chr>, participation <chr>, qi_score <chr>, ia_score <chr>,
-#> #   cost_score <chr>, indicators <chr>, cred <chr>, dual_ratio <chr>,
-#> #   small_bonus <chr>, reporting <chr>, mvp <chr>, ci_score <dbl>
+#>     year        npi state  size specialty        years patients services charges
+#>    <int>      <int> <chr> <int> <chr>            <int>    <int>    <int>   <int>
+#>  1  2017 1003026055 FL      189 Endocrinology        8    13189       NA  5.84e6
+#>  2  2017 1003026055 NC      191 Endocrinology        8    14784       NA  8.90e6
+#>  3  2018 1003026055 FL      135 Endocrinology        8    12317        0  5.02e6
+#>  4  2019 1003026055 FL      150 Endocrinology        9    12415    52009  5.62e6
+#>  5  2020 1003026055 FL      151 Endocrinology       10    12917    53599  5.46e6
+#>  6  2020 1003026055 FL        7 Endocrinology       10     1244     8160  7.19e5
+#>  7  2021 1003026055 FL        9 Endocrinology       11     1181     7068  6.98e5
+#>  8  2020 1316939655 NY      295 Missing             16    22242   101308  9.12e6
+#>  9  2021 1316939655 NY      455 Physician Assis…    17    23586   116187  1.09e7
+#> 10  2022 1316939655 NY      352 Physician Assis…    18    23244   110514  1.05e7
+#> # ℹ 16 more variables: final_score <dbl>, adjustment <dbl>, pi_score <int>,
+#> #   qa_score <dbl>, complex_bonus <dbl>, participation <chr>, qi_score <dbl>,
+#> #   ia_score <int>, cost_score <dbl>, indicators <chr>, cred <chr>,
+#> #   dual_ratio <dbl>, small_bonus <int>, reporting <chr>, mvp <chr>,
+#> #   ci_score <dbl>
 
 metrics()
 #> # A tibble: 32 × 4
