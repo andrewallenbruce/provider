@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9245 (2026-06-15)
+
+* `check_bool_` no longer checks for modifiers
+* fixed bug in `pivot:recode` functions
+
+
 # provider 0.0.1.9244 (2026-06-15)
 
 * refactored `pivot2`
