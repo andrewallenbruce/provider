@@ -1,4 +1,14 @@
 #' @noRd
+ss_ind <- function(x, columns) {
+  collapse::ss(
+    x = x,
+    i = x[["ind"]] %==% 1L,
+    j = columns,
+    check = FALSE
+  )
+}
+
+#' @noRd
 collapse_rows <- function(x, key, var) {
   collapse::rsplit(x[[var]], x[[key]]) |>
     purrr::map(\(x) paste0(x, collapse = ", ")) |>
@@ -49,12 +59,7 @@ pivot_order_refer <- function(x) {
     return(add_empty(x, "order_refer"))
   }
 
-  y <- collapse::ss(
-    y,
-    y[["ind"]] %==% 1L,
-    c("npi", "order_refer"),
-    check = FALSE
-  )
+  y <- ss_ind(y, c("npi", "order_refer"))
 
   if (nrow0(y)) {
     return(add_empty(x, "order_refer"))
@@ -87,14 +92,14 @@ pivot_multi_site <- function(x) {
     return(add_empty(x, "multi"))
   }
 
-  y <- collapse::ss(y, y$ind %==% 1L, 1:2)
+  y <- ss_ind(y, c("npi", "multi"))
 
   if (nrow0(y)) {
     return(add_empty(x, "multi"))
   }
 
   collapse::recode_char(
-    x[["multi"]],
+    y[["multi"]],
     "site_multi" = "Applied",
     "hosp_multi" = "Campus",
     "non_multi" = "Non-profit",
@@ -103,7 +108,7 @@ pivot_multi_site <- function(x) {
     set = TRUE
   )
 
-  if (is_unique(y$fac_ccn)) {
+  if (is_unique(y[["fac_ccn"]])) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -116,14 +121,18 @@ pivot_acr_org <- function(x) {
 
   collapse::gvr(x, "^acr_") <- NULL
 
-  y <- collapse::ss(y, j = 1:2)
+  if (nrow0(y)) {
+    return(add_empty(x, "acr_org"))
+  }
+
+  y <- collapse::ss(y, j = c("npi", "acr_org"))
 
   if (nrow0(y)) {
     return(add_empty(x, "acr_org"))
   }
 
   collapse::recode_char(
-    x[["acr_org"]],
+    y[["acr_org"]],
     "acr_a2la_date" = "A2LA",
     "acr_aabb_date" = "AABB",
     "acr_aoa_date" = "AOA",
@@ -135,7 +144,7 @@ pivot_acr_org <- function(x) {
     set = TRUE
   )
 
-  if (is_unique(y$fac_ccn)) {
+  if (is_unique(y[["fac_ccn"]])) {
     return(join2(x, y, on = "fac_ccn"))
   }
 
@@ -152,14 +161,14 @@ pivot_owner <- function(x) {
     return(add_empty(x, "own_type"))
   }
 
-  y <- collapse::ss(y, y$ind %==% 1L, 1:3)
+  y <- ss_ind(y, c("pac", "own_type", "own_otxt"))
 
   if (nrow0(y)) {
     return(add_empty(x, "own_type"))
   }
 
   collapse::recode_char(
-    x[["own_type"]],
+    y[["own_type"]],
     "acq_ind" = "Acquisition",
     "corp_ind" = "Corp",
     "llc_ind" = "LLC",
@@ -184,7 +193,7 @@ pivot_owner <- function(x) {
   y <- rc_other(y, "own_type", "own_otxt")
   y <- collapse::funique(y)
 
-  if (is_unique(y$pac)) {
+  if (is_unique(y[["pac"]])) {
     return(join2(x, y, on = "pac"))
   }
 
@@ -201,14 +210,14 @@ pivot_subgroup <- function(x) {
     return(add_empty(x, "sub_group"))
   }
 
-  y <- collapse::ss(y, y$ind %==% 1L, c("enid", "sg_otxt", "sub_group"))
+  y <- ss_ind(y, c("enid", "sg_otxt", "sub_group"))
 
   if (nrow0(y)) {
     return(add_empty(x, "sub_group"))
   }
 
   collapse::recode_char(
-    x[["sub_group"]],
+    y[["sub_group"]],
     "sub_acute" = "Acute",
     "sub_gen" = "General",
     "sub_spec" = "Specialty",
@@ -229,7 +238,7 @@ pivot_subgroup <- function(x) {
   y <- rc_other(y, "sub_group", "sg_otxt")
   y <- collapse::funique(y)
 
-  if (is_unique(y$enid)) {
+  if (is_unique(y[["enid"]])) {
     return(join2(x, y, on = "enid"))
   }
 
@@ -242,14 +251,18 @@ pivot_quality <- function(x) {
 
   collapse::gvr(x, "_ind$") <- NULL
 
-  y <- collapse::ss(y, y$ind %==% 1L, 1:3)
+  if (nrow0(y)) {
+    return(add_empty(x, "indicators"))
+  }
+
+  y <- ss_ind(y, c("npi", "indicators", "year"))
 
   if (nrow0(y)) {
     return(add_empty(x, "indicators"))
   }
 
   collapse::recode_char(
-    x[["indicators"]],
+    y[["indicators"]],
     "asc_ind" = "ASC-Based",
     "extreme_ind" = "Extreme Hardship",
     "engaged_ind" = "Engaged",
@@ -267,13 +280,19 @@ pivot_quality <- function(x) {
     set = TRUE
   )
 
-  if (is_unique(y$npi)) {
+  if (is_unique(y[["npi"]])) {
     return(join2(x, y, on = c("year", "npi")))
   }
 
-  y <- collapse::ss(y, collapse::whichNA(y$indicators, invert = TRUE))
+  y <- collapse::ss(
+    y,
+    collapse::whichNA(
+      y[["indicators"]],
+      invert = TRUE
+    )
+  )
 
-  y <- collapse::rsplit(y, y$year) |>
+  y <- collapse::rsplit(y, y[["year"]]) |>
     purrr::map(\(x) collapse_rows(x, "npi", "indicators")) |>
     rowbind2("year") |>
     collapse::qTBL()

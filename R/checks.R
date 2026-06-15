@@ -50,17 +50,14 @@ check_bool_ <- function(
   if (is.null(x)) {
     return(invisible(NULL))
   }
-
-  if (!is_modifier(x)) {
-    rlang::check_bool(
-      x,
-      ...,
-      allow_na = FALSE,
-      allow_null = TRUE,
-      arg = arg,
-      call = call
-    )
-  }
+  rlang::check_bool(
+    x,
+    ...,
+    allow_na = FALSE,
+    allow_null = TRUE,
+    arg = arg,
+    call = call
+  )
 }
 
 #' @noRd
