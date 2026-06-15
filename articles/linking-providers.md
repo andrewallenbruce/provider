@@ -17,6 +17,8 @@ x <- list(
   organization = hospitals(ccn = x$fac_ccn))
 #> ✔ hospitals returned 5 results
 #> ✔ Retrieving 1 page
+#> ✔ hospitals2 returned 5 results
+#> ✔ Retrieving 1 page
 x
 #> $individual
 #>               V1
@@ -26,7 +28,7 @@ x
 #> pac   7810891009
 #> 
 #> $organization
-#> # A tibble: 5 × 16
+#> # A tibble: 5 × 18
 #>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
 #> 1 CHAMPLAIN V… THE UN… O201… 1.03e9     0 3302… 2769… 1926-01-01 Corpora… Non-P…
@@ -34,8 +36,8 @@ x
 #> 3 CENTRAL VER… NA      O200… 1.51e9     0 4700… 9335… 1984-03-01 Corpora… Non-P…
 #> 4 UNIVERSITY … UNIVER… O200… 1.57e9     0 4700… 3779… 1995-01-01 Corpora… Non-P…
 #> 5 PORTER HOSP… NA      O200… 1.74e9     1 4713… 1850… 1986-11-14 Corpora… Non-P…
-#> # ℹ 6 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>
+#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
+#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
 
 reassignments(pac = 7810891009) |> str()
 #> ✔ reassignments returned 1 result
@@ -87,7 +89,9 @@ x <- "Elizabethtown Community Hospital"
 hospitals(org_name = x) |> str()
 #> ✔ hospitals returned 2 results
 #> ✔ Retrieving 1 page
-#> hospitls [2 × 16] (S3: hospitals/tbl_df/tbl/data.frame)
+#> ✔ hospitals2 returned 1 result
+#> ✔ Retrieving 1 page
+#> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
 #>  $ org_dba  : chr [1:2] NA NA
 #>  $ enid     : chr [1:2] "O20101110000259" "O20220827000145"
@@ -97,13 +101,15 @@ hospitals(org_name = x) |> str()
 #>  $ pac      : chr [1:2] "3577554138" "3577554138"
 #>  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"
 #>  $ org_type : chr [1:2] "Corporation" "Corporation"
-#>  $ status   : chr [1:2] "Non-Profit" "Non-Profit"
+#>  $ status   : chr [1:2] "Non-Profit, Voluntary non-profit - Private" "Non-Profit"
 #>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
 #>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
 #>  $ state    : chr [1:2] "NY" "NY"
 #>  $ zip      : chr [1:2] "129322300" "129322300"
 #>  $ loc_type : chr [1:2] "Other" "Other"
 #>  $ sub_group: chr [1:2] "CAH" "CAH"
+#>  $ rating   : int [1:2] 4 NA
+#>  $ county   : chr [1:2] "ESSEX" NA
 
 clinicians(org_name = x) |> str()
 #> ✔ clinicians returned 78 results

@@ -49,18 +49,5 @@ pending(count = TRUE)
 pending(first = starts("V"))
 #> ✔ pending returned 183 results
 #> ✔ Retrieving 2 pages
-#> # A tibble: 183 × 4
-#>    prov_type first     last                npi
-#>    <chr>     <chr>     <chr>             <int>
-#>  1 Physician VADIN     LALL DASS    1144512724
-#>  2 Physician VAGHARSH  ANTANESIAN   1700451846
-#>  3 Physician VAIDEHI   KOTHARI      1447190517
-#>  4 Physician VAIDEHI   PATEL        1528761558
-#>  5 Physician VAIDHEESH VARAGANTIWAR 1265399984
-#>  6 Physician VALENTINA ROA FORSTER  1144178302
-#>  7 Physician VALERIA   SILVA        1154292712
-#>  8 Physician VALERIE   INGLESE      1437090404
-#>  9 Physician VALYNN    ANTOINE      1811480510
-#> 10 Physician VANE      BOLBOLIAN    1740053446
-#> # ℹ 173 more rows
+#> Error in `class<-`(c(if (!is.null(endpoint)) endpoint, class(x))): 1 argument passed to 'class<-' which requires 2
 ```

@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9249 (2026-06-15)
+
+- added
+  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  -\>
+  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  chain
+
 ## provider 0.0.1.9248 (2026-06-15)
 
 - fixed bugs in several pivots
