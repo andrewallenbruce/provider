@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9246 (2026-06-15)
+
+* `ss_key` helper function
+* renamed `count` & `preview` generics
+* `quality()` recode method
+
+
 # provider 0.0.1.9245 (2026-06-15)
 
 * `check_bool_` no longer checks for modifiers
