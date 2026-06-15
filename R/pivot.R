@@ -1,5 +1,5 @@
 #' @noRd
-ss_key <- function(x, key = "ind", columns) {
+ss_key <- function(x, columns, key = "ind") {
   collapse::ss(
     x = x,
     i = x[[key]] %==% 1L,

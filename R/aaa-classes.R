@@ -14,6 +14,14 @@ QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
 QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
 
 #' @noRd
+chunk <- function(x, chunks, size, length) {
+  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
+    cheapr::sset(seq_len(length))
+
+  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
+}
+
+#' @noRd
 Key <- S7::new_class(
   "Key",
   S7::class_character,
@@ -30,6 +38,9 @@ Key <- S7::new_class(
     chunks = S7::new_property(
       S7::class_integer,
       getter = function(self) {
+        if (self@length == 0L) {
+          return(0L)
+        }
         cheapr::seq_size(1L, self@length, self@size)
       }
     ),
@@ -39,12 +50,12 @@ Key <- S7::new_class(
         if (self@chunks <= 1L) {
           return()
         }
-        vctrs::vec_split(
-          cheapr::attrs_rm(self),
-          seq_len(self@chunks) |>
-            cheapr::rep_each_(self@size) |>
-            cheapr::sset(seq_len(self@length))
-        )[["val"]]
+        chunk(
+          self,
+          self@chunks,
+          self@size,
+          self@length
+        )
       }
     )
   )
