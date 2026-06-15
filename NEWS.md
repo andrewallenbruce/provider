@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9247 (2026-06-15)
+
+* fixed bug in `ssk_key` helper
+
+
 # provider 0.0.1.9246 (2026-06-15)
 
 * `ss_key` helper function
