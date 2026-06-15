@@ -210,37 +210,7 @@ S7::method(polish, s3_quality) <- function(x) {
     collapse::rowbind(fill = TRUE) |>
     add_class("quality")
 
-  collapse::settfmv(
-    x,
-    c(
-      "year",
-      "npi",
-      "size",
-      "years",
-      "patients",
-      "charges",
-      "services",
-      "ia_score",
-      "pi_score",
-      "small_bonus"
-    ),
-    as.integer
-  )
-  collapse::settfmv(
-    x,
-    c(
-      "adjustment",
-      "final_score",
-      "complex_bonus",
-      "qa_score",
-      "cost_score",
-      "qi_score",
-      "dual_ratio",
-      "ci_score"
-    ),
-    as.double
-  )
-
+  recode(x)
   collapse::roworderv(x, c("year", "npi"))
 }
 

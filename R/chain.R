@@ -26,7 +26,10 @@ is_key <- function(x) {
 }
 
 #' @noRd
-S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
+S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
+  x,
+  endpoint_fn
+) {
   finish <- function(x, y) {
     y <- pivot_order_refer(y)
     y <- collapse::ss(y, j = c("npi", "order_refer"))
@@ -40,7 +43,7 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
     if (is.null(k)) {
       return(x)
     }
-    y <- fn(k)
+    y <- endpoint_fn(k)
 
     if (nrow0(y)) {
       return(x)
@@ -49,7 +52,7 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
     return(finish(x, y))
   }
 
-  y <- rowbind2(purrr::map(k@split, fn))
+  y <- rowbind2(purrr::map(k@split, endpoint_fn))
 
   if (nrow0(y)) {
     return(x)

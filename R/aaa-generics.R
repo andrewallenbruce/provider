@@ -17,7 +17,7 @@ build <- S7::new_generic("build", "x")
 key <- S7::new_generic("key", "x")
 
 #' @noRd
-chain <- S7::new_generic("chain", c("x", "fn"))
+chain <- S7::new_generic("chain", c("x", "endpoint_fn"))
 
 #' @noRd
 polish <- S7::new_generic("polish", "x")

@@ -5,6 +5,7 @@ column_rex <- function(x) {
 
 #' @noRd
 nrow0 <- function(x) {
+  # TODO rename to no_rows
   collapse::fnrow(x) == 0L
 }
 
@@ -20,6 +21,7 @@ vec_na <- function(x, type = "character") {
 
 #' @noRd
 add_empty <- function(x, column_name) {
+  # TODO work with multiple columns
   collapse::av(x, rlang::set_names(list(vec_na(x)), column_name))
 }
 

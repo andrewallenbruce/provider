@@ -149,3 +149,37 @@ S7::method(recode, s3_clia) <- function(x) {
     set = TRUE
   )
 }
+
+#' @noRd
+S7::method(recode, s3_quality) <- function(x) {
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "npi",
+      "size",
+      "years",
+      "patients",
+      "charges",
+      "services",
+      "ia_score",
+      "pi_score",
+      "small_bonus"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "adjustment",
+      "final_score",
+      "complex_bonus",
+      "qa_score",
+      "cost_score",
+      "qi_score",
+      "dual_ratio",
+      "ci_score"
+    ),
+    as.double
+  )
+}
