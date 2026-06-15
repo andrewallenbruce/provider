@@ -21,18 +21,7 @@ S7::method(polish, s3_affiliations) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_clia) <- function(x) {
-  rc_clia(x, "CLIA_TRMNTN_CD")
-  rc_clia(x, "CRTFCT_TYPE_CD")
-  rc_clia(x, "GNRL_FAC_TYPE_CD")
-  rc_clia(x, "GNRL_CNTL_TYPE_CD")
-  rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
-
-  collapse::settfmv(
-    x,
-    c("CHOW_CNT", "DRCTLY_AFLTD_LAB_CNT", "LAB_SITE_CNT"),
-    as.integer
-  )
-
+  recode(x)
   set_rename(x)
   get_columns(x) |>
     rc_bin(collapse::gvr(x, "eligible$|_multi$", return = 2L)) |>
@@ -78,11 +67,7 @@ S7::method(polish, s3_facility) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_hospitals) <- function(x) {
-  rc_hospitals(x, "PROVIDER TYPE CODE")
-  rc_hospitals(x, "PROPRIETARY NONPROFIT")
-  rc_hospitals(x, "PRACTICE LOCATION TYPE")
-  rc_hospitals(x, "ORGANIZATION TYPE STRUCTURE")
-  collapse::settfmv(x, "NPI", as.integer)
+  recode(x)
   set_rename(x)
   get_columns(x) |>
     rc_combine("address", "add_2") |>
@@ -204,7 +189,8 @@ quality_get <- function(x, y) {
 S7::method(polish, s3_quality) <- function(x) {
   x <- c(2017, 2022, 2023) |>
     purrr::map(\(year) quality_get(x, year)) |>
-    collapse::rowbind(fill = TRUE)
+    collapse::rowbind(fill = TRUE) |>
+    add_class("quality")
 
   collapse::settfmv(
     x,
@@ -237,8 +223,7 @@ S7::method(polish, s3_quality) <- function(x) {
     as.double
   )
 
-  add_class(x, "quality") |>
-    collapse::roworderv(c("year", "npi"))
+  collapse::roworderv(x, c("year", "npi"))
 }
 
 #' @noRd

@@ -1,4 +1,13 @@
 #' @noRd
+S7::method(recode, s3_hospitals) <- function(x) {
+  rc_hospitals(x, "PROVIDER TYPE CODE")
+  rc_hospitals(x, "PROPRIETARY NONPROFIT")
+  rc_hospitals(x, "PRACTICE LOCATION TYPE")
+  rc_hospitals(x, "ORGANIZATION TYPE STRUCTURE")
+  collapse::settfmv(x, "NPI", as.integer)
+}
+
+#' @noRd
 rc_hospitals <- function(
   x,
   column,
@@ -65,6 +74,21 @@ rc_hospitals <- function(
       arg = arg,
       call = call
     )
+  )
+}
+
+#' @noRd
+S7::method(recode, s3_clia) <- function(x) {
+  rc_clia(x, "CLIA_TRMNTN_CD")
+  rc_clia(x, "CRTFCT_TYPE_CD")
+  rc_clia(x, "GNRL_FAC_TYPE_CD")
+  rc_clia(x, "GNRL_CNTL_TYPE_CD")
+  rc_clia(x, "CRTFCTN_ACTN_TYPE_CD")
+
+  collapse::settfmv(
+    x,
+    c("CHOW_CNT", "DRCTLY_AFLTD_LAB_CNT", "LAB_SITE_CNT"),
+    as.integer
   )
 }
 

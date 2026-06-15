@@ -23,6 +23,9 @@ chain <- S7::new_generic("chain", c("x", "fn"))
 polish <- S7::new_generic("polish", "x")
 
 #' @noRd
+recode <- S7::new_generic("recode", "x")
+
+#' @noRd
 execute <- S7::new_generic("execute", "x")
 
 #' @noRd

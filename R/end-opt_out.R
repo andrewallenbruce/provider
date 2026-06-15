@@ -90,7 +90,7 @@ opt_out <- function(
     return(x)
   }
 
-  fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
+  # fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
 
   chain(x, fn_order_refer)
 }

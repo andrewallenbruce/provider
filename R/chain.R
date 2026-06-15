@@ -1,5 +1,10 @@
 #' @include aaa-classes.R
 #' @include aaa-generics.R
+NULL
+
+#' @noRd
+fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
+
 #' @noRd
 S7::method(key, s3_opt_out) <- function(x) {
   x <- unlist_(collapse::ss(x, x[["order_refer"]] %==% 1L, "npi"))
@@ -22,6 +27,13 @@ is_key <- function(x) {
 
 #' @noRd
 S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
+  finish <- function(x, y) {
+    y <- pivot_order_refer(y)
+    y <- collapse::ss(y, j = c("npi", "order_refer"))
+    collapse::gv(x, "order_refer") <- NULL
+    join2(x, y, "npi")
+  }
+
   k <- key(x)
 
   if (!is_key(k)) {
@@ -34,10 +46,7 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
       return(x)
     }
 
-    y <- pivot_order_refer(y)
-    y <- collapse::ss(y, j = c("npi", "order_refer"))
-    collapse::gv(x, "order_refer") <- NULL
-    return(join2(x, y, "npi"))
+    return(finish(x, y))
   }
 
   y <- rowbind2(purrr::map(k@split, fn))
@@ -46,8 +55,5 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(x, fn) {
     return(x)
   }
 
-  y <- pivot_order_refer(y)
-  y <- collapse::ss(y, j = c("npi", "order_refer"))
-  collapse::gv(x, "order_refer") <- NULL
-  join2(x, y, "npi")
+  finish(x, y)
 }
