@@ -16,7 +16,6 @@
 #'   - [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
 #'   - [Medicare Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
 #'
-#' @inheritParams provider_common_params
 #' @param year `<int>` Year data was reported
 #' @param npi `<int>` 10-digit national provider identifier
 #' @param first,last `<chr>` Individual/Organizational provider's name
@@ -60,13 +59,11 @@
 #'   Medicare only benefits. Beneficiaries are classified as Medicare only
 #'   entitlement if they received zero months of any Medicaid benefits (full or
 #'   partial) in the given calendar year.
-#' @returns A [tibble][tibble::tibble-package]
-#'
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' utilization(count = TRUE)
-#'
 #' utilization(npi = 1003000423)
-#'
 #' @export
 utilization <- function(
   year = NULL,

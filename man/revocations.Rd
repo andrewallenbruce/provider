@@ -45,6 +45,9 @@ revocations(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Information on providers and suppliers currently revoked from the Medicare program.
 }

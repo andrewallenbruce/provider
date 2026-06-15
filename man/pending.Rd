@@ -22,6 +22,9 @@ pending(prov_type = NULL, npi = NULL, first = NULL, last = NULL, count = FALSE)
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Providers with pending Medicare enrollment applications.
 

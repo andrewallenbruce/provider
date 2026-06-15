@@ -6,12 +6,12 @@ NULL
 fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
 
 #' @noRd
-S7::method(key, s3_opt_out) <- function(x) {
-  x <- unlist_(ss_key(x, "npi", "order_refer"))
-  x <- as.character(collapse::funique(x))
-  k <- Key(x, 150L)
+fn_hospitals2 <- rlang::as_function(~ hospitals2(ccn = .x))
 
-  if (!k@length) {
+#' @noRd
+extract_key <- function(k) {
+  check_key(x)
+  if (k@length == 0L) {
     return(NULL)
   }
   if (k@chunks == 1L) {
@@ -21,17 +21,44 @@ S7::method(key, s3_opt_out) <- function(x) {
 }
 
 #' @noRd
+S7::method(key, s3_opt_out) <- function(x) {
+  x <- unlist_(ss_key(x, "npi", "order_refer"))
+  x <- as.character(collapse::funique(x))
+  k <- Key(x, 150L)
+  extract_key(k)
+}
+
+#' @noRd
+S7::method(key, s3_hospitals) <- function(x) {
+  x <- collapse::funique(collapse::na_rm(x[["ccn"]]))
+  k <- Key(x, 200L)
+  extract_key(k)
+}
+
+#' @noRd
+S7::method(link, list(s3_opt_out, s3_order_refer)) <- function(x, y) {
+  y <- pivot_order_refer(y)
+  y <- collapse::ss(y, j = c("npi", "order_refer"), check = FALSE)
+  collapse::gv(x, "order_refer") <- NULL
+  join2(x, y, "npi")
+}
+
+#' @noRd
+S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
+  y <- collapse::ss(
+    y,
+    j = c("ccn", "rating", "county", "status"),
+    check = FALSE
+  )
+  x <- join2(x, y, on = "ccn")
+  rc_combine(x, "status", "status_y")
+}
+
+#' @noRd
 S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
   x,
   endpoint
 ) {
-  finish <- function(x, y) {
-    y <- pivot_order_refer(y)
-    y <- collapse::ss(y, j = c("npi", "order_refer"))
-    collapse::gv(x, "order_refer") <- NULL
-    join2(x, y, "npi")
-  }
-
   k <- key(x)
 
   if (!is_key(k)) {
@@ -44,7 +71,7 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
       return(x)
     }
 
-    return(finish(x, y))
+    return(link(x, y))
   }
 
   y <- rowbind2(purrr::map(k@split, endpoint))
@@ -53,24 +80,7 @@ S7::method(chain, list(s3_opt_out, S7::class_function)) <- function(
     return(x)
   }
 
-  finish(x, y)
-}
-
-#' @noRd
-fn_hospitals2 <- rlang::as_function(~ hospitals2(ccn = .x))
-
-#' @noRd
-S7::method(key, s3_hospitals) <- function(x) {
-  x <- collapse::funique(collapse::na_rm(x[["ccn"]]))
-  k <- Key(x, 200L)
-
-  if (!k@length) {
-    return(NULL)
-  }
-  if (k@chunks == 1L) {
-    return(S7::S7_data(k))
-  }
-  return(k)
+  link(x, y)
 }
 
 #' @noRd
@@ -84,36 +94,19 @@ S7::method(chain, list(s3_hospitals, S7::class_function)) <- function(
     if (is.null(k)) {
       return(x)
     }
-    y <- hospitals2(ccn = k)
+    y <- endpoint(k)
 
     if (no_rows(y)) {
       return(x)
     }
-    y <- collapse::ss(
-      y,
-      j = c("ccn", "rating", "county", "status"),
-      check = FALSE
-    )
-
-    x <- join2(x, y, on = "ccn") |>
-      rc_combine("status", "status_y")
-
-    return(x)
+    return(link(x, y))
   }
 
-  y <- purrr::map(k@split, \(x) hospitals2(ccn = x)) |>
-    rowbind2()
+  y <- rowbind2(purrr::map(k@split, endpoint))
 
   if (no_rows(y)) {
     return(x)
   }
 
-  y <- collapse::ss(
-    y,
-    j = c("ccn", "rating", "county", "status"),
-    check = FALSE
-  )
-
-  join2(x, y, on = "ccn") |>
-    rc_combine("status", "status_y")
+  link(x, y)
 }

@@ -65,6 +65,9 @@ owner(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Owners of facilities enrolled in Medicare.
 }

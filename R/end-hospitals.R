@@ -7,7 +7,6 @@
 #' @source
 #'    - [API: Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param ccn `<int>` CMS Certification Number
 #' @param pac `<chr>` PECOS Associate Control ID
@@ -37,6 +36,8 @@
 #'    - `ext` = Opt Extension Site
 #'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' hospitals(
 #'   prov_type = "cah",
@@ -70,8 +71,7 @@ hospitals <- function(
   prov_type = NULL,
   loc_type = NULL,
   subgroup = subgroups(),
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_subgroups(subgroup)
   check_bool_(multi)
@@ -82,7 +82,7 @@ hospitals <- function(
 
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     NPI = npi,
     CCN = ccn,
     `ASSOCIATE ID` = pac,

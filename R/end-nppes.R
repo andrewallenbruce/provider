@@ -80,7 +80,7 @@
 #' @param zip `<chr>` __WC__ 5-9 digit zip code, no hyphen.
 #' @param country `<chr>` Country abbreviation. Can be the only input if
 #'    it *is not* `"US"`.
-#' @returns A [tibble][tibble::tibble-package]
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' nppes(npi = 1528060837)
 #' @export

@@ -37,6 +37,9 @@ providers(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Enrollment data on individual and organizational providers that are
 actively approved to bill Medicare.

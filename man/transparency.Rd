@@ -36,6 +36,9 @@ transparency(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Information on enforcement actions as a result of CMS' assessment of a
 hospital's compliance with the Hospital Price Transparency regulations.

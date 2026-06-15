@@ -29,13 +29,14 @@
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
-#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param first,last `<chr>` Provider's name
 #' @param specialty `<chr>` Provider's specialty
 #' @param start_year `<int>` Opt-out effective date year
 #' @param address,city,state,zip `<chr>` Provider's address, city, state, zip
 #' @param order_refer `<lgl>` Indicates order and refer eligibility
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #'

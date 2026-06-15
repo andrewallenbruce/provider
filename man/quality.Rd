@@ -68,7 +68,7 @@ performance thresholds and scaling to ensure budget neutrality.
 \item{count}{\verb{<lgl>} Return the total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 The Quality Payment Program (QPP) Experience dataset provides participation

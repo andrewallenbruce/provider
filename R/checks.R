@@ -31,6 +31,21 @@ check_online <- function(call = rlang::caller_env()) {
 }
 
 #' @noRd
+check_key <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
+  if (!is_key(x)) {
+    cli::cli_abort(
+      "{.arg {arg}} must be a {.cls {Key}} object, not {.obj_type_friendly {x}}",
+      arg = arg,
+      call = call
+    )
+  }
+}
+
+#' @noRd
 check_named <- function(x, call = rlang::caller_env()) {
   if (!rlang::is_empty(x) && !all2(rlang::have_name(x))) {
     cli::cli_abort(

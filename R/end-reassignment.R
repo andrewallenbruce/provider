@@ -11,7 +11,6 @@
 #' @references
 #'    - [API: Medicare Revalidation Reassignment List](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 #'
-#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
@@ -23,6 +22,8 @@
 #' @param org_pac `<chr>` PECOS Associate Control ID
 #' @param org_enid `<chr>` Medicare Enrollment ID
 #' @param org_state `<chr>` Enrollment state abbreviation
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' reassignments(count = TRUE)
 #' reassignments(org_enid = starts("I"), members = greater(50, equal = TRUE))
@@ -41,12 +42,11 @@ reassignments <- function(
   org_pac = NULL,
   org_enid = NULL,
   org_state = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   x <- cms(
     count = count,
-    set = set,
+    set = FALSE,
     `Individual NPI` = npi,
     `Individual PAC ID` = pac,
     `Individual Enrollment ID` = enid,

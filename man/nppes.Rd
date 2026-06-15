@@ -49,7 +49,7 @@ parameter besides \code{entity} or \code{country} is required.}
 it \emph{is not} \code{"US"}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Search the National Plan and Provider Enumeration System (NPPES)

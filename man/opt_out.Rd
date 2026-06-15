@@ -33,6 +33,9 @@ opt_out(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Information on providers who have decided not to participate in Medicare.
 }

@@ -77,11 +77,9 @@ clia(
 Medicare/Medicaid.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Clinical laboratories including demographics and the type of testing
@@ -133,7 +131,6 @@ laboratory is accredited by one of the CMS-approved organizations:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
-
 clia(acr_org = c("cap", "cola", "jcaho"))
 \dontshow{\}) # examplesIf}
 }

@@ -18,8 +18,7 @@ reassignments(
   org_pac = NULL,
   org_enid = NULL,
   org_state = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -46,8 +45,9 @@ reassignments(
 \item{org_state}{\verb{<chr>} Enrollment state abbreviation}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
+}
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Returns information about:

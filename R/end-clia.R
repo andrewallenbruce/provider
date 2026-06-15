@@ -24,7 +24,6 @@
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
-#' @inheritParams provider_common_params
 #' @param fac_name `<chr>` Provider/Laboratory name
 #' @param fac_ccn `<chr>` 10-digit CMS Certification Number
 #' @param clia_ccn `<chr>` 6-digit CMS Certification Number
@@ -52,10 +51,10 @@
 #' @param active `<lgl>` Return only active labs
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
-#' @returns A [tibble][tibble::tibble-package]
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
-#'
 #' clia(acr_org = c("cap", "cola", "jcaho"))
 #' @export
 clia <- function(

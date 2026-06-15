@@ -6,7 +6,6 @@
 #' @source
 #' Medicare
 #'
-#' @inheritParams provider_common_params
 #' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
 #'    - `HHA` = Home Health Agency
 #'    - `RHC` = Rural Health Clinic
@@ -31,9 +30,10 @@
 #'    - `llc` = LLC
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' facility(city = "Valdosta", state = "GA")
-#'
 #' @export
 facility <- function(
   fac_type = NULL,
@@ -56,7 +56,6 @@ facility <- function(
   check_char_(fac_type)
   check_char_(org_type)
   check_char_(status)
-
 
   if (!is.null(fac_type)) {
     fac_type <- rlang::arg_match(

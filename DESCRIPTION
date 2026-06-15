@@ -80,7 +80,6 @@ Collate:
     'pivot.R'
     'polish-core.R'
     'polish.R'
-    'provider-common-params.R'
     'provider-package.R'
     'query.R'
     'query2.R'

@@ -6,7 +6,6 @@
 #' @source
 #'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 #'
-#' @inheritParams provider_common_params
 #' @param npi `<int>` Individual National Provider Identifier
 #' @param pac `<chr>` Individual PECOS Associate Control ID
 #' @param first,last `<chr>` Individual provider's name
@@ -24,7 +23,8 @@
 #'    provider provides services.
 #' @param parent_ccn `<int>` CCN of the **primary** hospital containing the
 #'    unit where the individual provider provides services.
-#' @returns A [tibble][tibble::tibble-package]
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' affiliations(parent_ccn = 331302)
 #' affiliations(fac_ccn = 331302)

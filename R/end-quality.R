@@ -11,7 +11,6 @@
 #' variables like clinician type, practice size, scores, and payment
 #' adjustments.
 #'
-#' @inheritParams provider_common_params
 #' @param year `<int>` A vector of years; for `quality()`, 2013-2024; for
 #'   `metrics()` 2018-2025
 #' @param npi `<int>` National Provider Identifier. Multiple rows for the same
@@ -41,7 +40,8 @@
 #'    - A **negative** adjustment is between `-9%` and`0%`. (`final_score` = 18.76 - 74.99)
 #'    - A **neutral** adjustment is `0%`. (`final_score` = 75)
 #'    - A **positive** adjustment is greater than `0%`. (`final_score` = 75.01 - 100)
-#' @returns A [tibble][tibble::tibble-package]
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' quality(year = c(2021, 2024), state = "GA", count = TRUE)
 #'
@@ -75,10 +75,6 @@ quality <- function(
   check_numeric(adjustment)
   check_char_(state)
   check_char_(specialty)
-
-  if (!is.null(year)) {
-    year <- as.character(year)
-  }
 
   x <- cms_list(
     count = count,

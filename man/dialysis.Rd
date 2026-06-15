@@ -41,8 +41,9 @@ dialysis(
 \item{address, city, state, zip, county}{\verb{<chr>} Facility's city, state, zip, county}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
+}
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 A list of all dialysis facilities registered with Medicare that

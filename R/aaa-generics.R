@@ -28,6 +28,8 @@ key <- S7::new_generic("key", "x")
 #' @noRd
 chain <- S7::new_generic("chain", c("x", "endpoint"))
 
+#' @noRd
+link <- S7::new_generic("link", c("x", "y"))
 
 #' @noRd
 S7::method(execute, Endpoint) <- function(x) {

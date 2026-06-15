@@ -32,6 +32,8 @@
 #'    - `tribal` = Tribal
 #'    - `vha` = Veterans Health Administration
 #' @param rating `<int>` Hospital rating; 1-5 or "Not Available"
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @rdname hospitals
 #' @export
 hospitals2 <- function(
@@ -44,12 +46,11 @@ hospitals2 <- function(
   hosp_type = NULL,
   own_type = NULL,
   rating = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   x <- pdc(
     count = count,
-    set = set,
+    set = FALSE,
     facility_id = ccn,
     facility_name = org_name,
     citytown = city,

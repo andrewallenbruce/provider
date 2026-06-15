@@ -13,8 +13,7 @@ order_refer(
   hha = NULL,
   pmd = NULL,
   hospice = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -32,8 +31,9 @@ order_refer(
 }}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{set}{\verb{<lgl>} Return the entire dataset}
+}
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Eligibility to order and refer within Medicare

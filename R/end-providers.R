@@ -8,7 +8,6 @@
 #'    - [API: Medicare Provider Supplier Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #'    - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' @inheritParams provider_common_params
 #' @param npi `<int>` National Provider Identifier
 #' @param pac `<chr>` PECOS Associate Control ID
 #' @param enid `<chr>` Medicare Enrollment ID
@@ -17,6 +16,8 @@
 #' @param state `<chr>` Enrollment state, full or abbreviation
 #' @param org_name `<chr>` Organizational provider's name
 #' @param multi `<lgl>` Provider has multiple NPIs
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' providers(count = TRUE)
 #'

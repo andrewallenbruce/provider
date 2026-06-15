@@ -95,7 +95,7 @@ partial) in the given calendar year.}
 \item{count}{\verb{<lgl>} Return the total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Access information on services and procedures provided to Original
@@ -120,7 +120,6 @@ aggregated by year.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 utilization(count = TRUE)
-
 utilization(npi = 1003000423)
 \dontshow{\}) # examplesIf}
 }

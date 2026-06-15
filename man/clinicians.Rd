@@ -60,6 +60,9 @@ clinicians(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
 Demographics of clinicians listed in the Provider Data Catalog (PDC)
 }

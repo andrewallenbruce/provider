@@ -31,8 +31,7 @@ hospitals(
   prov_type = NULL,
   loc_type = NULL,
   subgroup = subgroups(),
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 
 hospitals2(
@@ -45,8 +44,7 @@ hospitals2(
   hosp_type = NULL,
   own_type = NULL,
   rating = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{
@@ -102,8 +100,6 @@ hospitals2(
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
-\item{set}{\verb{<lgl>} Return the entire dataset}
-
 \item{county}{\verb{<chr>} Location county}
 
 \item{hosp_type}{\verb{<enum>} Provider type:
@@ -135,6 +131,11 @@ hospitals2(
 }}
 
 \item{rating}{\verb{<int>} Hospital rating; 1-5 or "Not Available"}
+}
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Hospitals currently enrolled in Medicare. Data includes the

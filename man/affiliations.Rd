@@ -49,7 +49,7 @@ unit where the individual provider provides services.}
 \item{count}{\verb{<lgl>} Return the total row count}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Access information concerning individual providers'

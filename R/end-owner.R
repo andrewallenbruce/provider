@@ -6,7 +6,6 @@
 #' @source
 #' Medicare
 #'
-#' @inheritParams provider_common_params
 #' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
 #'    - `HHA` = Home Health Agency
 #'    - `RHC` = Rural Health Clinic
@@ -26,9 +25,10 @@
 #' @param title `<chr>` Provider's name
 #' @param first,last `<chr>` Provider's name
 #' @param address,city,state,zip `<chr>` Provider's name
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' owner(city = "Valdosta", state = "GA")
-#'
 #' @export
 owner <- function(
   fac_type = NULL,
