@@ -54,7 +54,7 @@ cms <- function(
     action = count_set(count, set)
   )
 
-  x <- request_count(x)
+  x <- count(x)
 
   return(x)
 }
@@ -70,7 +70,7 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 
 #' @include aaa-generics.R
 #' @noRd
-S7::method(request_count, EndpointCMS) <- function(x) {
+S7::method(count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     x@count <- base_request(
       flatten_cms(x@url, x@query, "/stats?"),
@@ -81,7 +81,7 @@ S7::method(request_count, EndpointCMS) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, EndpointCMS) <- function(x) {
+S7::method(preview, EndpointCMS) <- function(x) {
   report_preview()
 
   res <- flatten_cms(x@url, NULL, size = 10L) |>

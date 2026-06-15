@@ -7,7 +7,7 @@ fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
 
 #' @noRd
 S7::method(key, s3_opt_out) <- function(x) {
-  x <- unlist_(collapse::ss(x, x[["order_refer"]] %==% 1L, "npi"))
+  x <- unlist_(ss_key(x, "order_refer", "npi"))
   x <- as.character(collapse::funique(x))
   k <- Key(x, 150L)
 

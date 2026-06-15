@@ -1,8 +1,11 @@
 #' @noRd
-request_count <- S7::new_generic("request_count", "x")
+build <- S7::new_generic("build", "x")
 
 #' @noRd
-request_preview <- S7::new_generic("request_preview", "x")
+count <- S7::new_generic("count", "x")
+
+#' @noRd
+preview <- S7::new_generic("preview", "x")
 
 #' @noRd
 request_single <- S7::new_generic("request_single", "x")
@@ -11,13 +14,7 @@ request_single <- S7::new_generic("request_single", "x")
 request_multi <- S7::new_generic("request_multi", "x")
 
 #' @noRd
-build <- S7::new_generic("build", "x")
-
-#' @noRd
-key <- S7::new_generic("key", "x")
-
-#' @noRd
-chain <- S7::new_generic("chain", c("x", "endpoint_fn"))
+execute <- S7::new_generic("execute", "x")
 
 #' @noRd
 polish <- S7::new_generic("polish", "x")
@@ -26,7 +23,11 @@ polish <- S7::new_generic("polish", "x")
 recode <- S7::new_generic("recode", "x")
 
 #' @noRd
-execute <- S7::new_generic("execute", "x")
+key <- S7::new_generic("key", "x")
+
+#' @noRd
+chain <- S7::new_generic("chain", c("x", "endpoint_fn"))
+
 
 #' @noRd
 S7::method(execute, Endpoint) <- function(x) {
@@ -37,7 +38,7 @@ S7::method(execute, Endpoint) <- function(x) {
       x@action,
       count = return(report_total(x)),
       set = return(request_multi(x)),
-      return(request_preview(x))
+      return(preview(x))
     )
   }
 
@@ -61,7 +62,7 @@ S7::method(execute, EndpointCMSList) <- function(x) {
       x@action,
       count = return(report_total(x)),
       set = return(request_multi(x)),
-      return(request_preview(x))
+      return(preview(x))
     )
   }
 

@@ -1,8 +1,8 @@
 #' @noRd
-ss_ind <- function(x, columns) {
+ss_key <- function(x, key = "ind", columns) {
   collapse::ss(
     x = x,
-    i = x[["ind"]] %==% 1L,
+    i = x[[key]] %==% 1L,
     j = columns,
     check = FALSE
   )
@@ -59,7 +59,7 @@ pivot_order_refer <- function(x) {
     return(add_empty(x, "order_refer"))
   }
 
-  y <- ss_ind(y, c("npi", "order_refer"))
+  y <- ss_key(y, c("npi", "order_refer"))
 
   if (nrow0(y)) {
     return(add_empty(x, "order_refer"))
@@ -92,7 +92,7 @@ pivot_multi_site <- function(x) {
     return(add_empty(x, "multi"))
   }
 
-  y <- ss_ind(y, c("npi", "multi"))
+  y <- ss_key(y, c("npi", "multi"))
 
   if (nrow0(y)) {
     return(add_empty(x, "multi"))
@@ -161,7 +161,7 @@ pivot_owner <- function(x) {
     return(add_empty(x, "own_type"))
   }
 
-  y <- ss_ind(y, c("pac", "own_type", "own_otxt"))
+  y <- ss_key(y, c("pac", "own_type", "own_otxt"))
 
   if (nrow0(y)) {
     return(add_empty(x, "own_type"))
@@ -210,7 +210,7 @@ pivot_subgroup <- function(x) {
     return(add_empty(x, "sub_group"))
   }
 
-  y <- ss_ind(y, c("enid", "sg_otxt", "sub_group"))
+  y <- ss_key(y, c("enid", "sg_otxt", "sub_group"))
 
   if (nrow0(y)) {
     return(add_empty(x, "sub_group"))
@@ -255,7 +255,7 @@ pivot_quality <- function(x) {
     return(add_empty(x, "indicators"))
   }
 
-  y <- ss_ind(y, c("npi", "indicators", "year"))
+  y <- ss_key(y, c("npi", "indicators", "year"))
 
   if (nrow0(y)) {
     return(add_empty(x, "indicators"))

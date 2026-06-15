@@ -81,14 +81,14 @@ cms_list <- function(
     action = count_set(count, set)
   )
 
-  x <- request_count(x)
+  x <- count(x)
 
   return(x)
 }
 
 #' @include aaa-generics.R
 #' @noRd
-S7::method(request_count, EndpointCMSList) <- function(x) {
+S7::method(count, EndpointCMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     x@count <- multi_count(
       flatten_cms(x@url, x@query, "/stats?"),
@@ -100,7 +100,7 @@ S7::method(request_count, EndpointCMSList) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, EndpointCMSList) <- function(x) {
+S7::method(preview, EndpointCMSList) <- function(x) {
   report_preview()
 
   y <- flatten_cms(x@url, NULL, size = 10L) |>

@@ -86,7 +86,7 @@ pdc <- function(
     action = count_set(count, set)
   )
 
-  x <- request_count(x)
+  x <- count(x)
 
   return(x)
 }
@@ -102,7 +102,7 @@ flatten_pdc <- function(url, query = NULL, ...) {
 
 #' @include aaa-generics.R
 #' @noRd
-S7::method(request_count, EndpointPDC) <- function(x) {
+S7::method(count, EndpointPDC) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
     x@count <- base_request(
       flatten_pdc(x@url, x@query, results = "false"),
@@ -113,7 +113,7 @@ S7::method(request_count, EndpointPDC) <- function(x) {
 }
 
 #' @noRd
-S7::method(request_preview, EndpointPDC) <- function(x) {
+S7::method(preview, EndpointPDC) <- function(x) {
   report_preview()
 
   res <- flatten_pdc(x@url, NULL, limit = 10L) |>
