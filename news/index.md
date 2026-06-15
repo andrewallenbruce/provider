@@ -1,5 +1,12 @@
 # Changelog
 
+## provider 0.0.1.9246 (2026-06-15)
+
+- `ss_key` helper function
+- renamed `count` & `preview` generics
+- [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
+  recode method
+
 ## provider 0.0.1.9245 (2026-06-15)
 
 - `check_bool_` no longer checks for modifiers
