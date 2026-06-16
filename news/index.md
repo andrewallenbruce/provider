@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9254 (2026-06-16)
+
+- `nppes` polish method
+
 ## provider 0.0.1.9253 (2026-06-16)
 
 - `nppes` work

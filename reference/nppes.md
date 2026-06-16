@@ -6,7 +6,9 @@ Registry, a free directory of all active NPI records.
 ## Usage
 
 ``` r
-nppes(
+nppes(npi)
+
+nppes2(
   npi = NULL,
   entity = NULL,
   specialty = NULL,
@@ -21,8 +23,6 @@ nppes(
   zip = NULL,
   country = NULL
 )
-
-nppes2(npi)
 ```
 
 ## Arguments
@@ -156,16 +156,17 @@ Medicare program.
 ## Examples
 
 ``` r
-nppes(npi = 1528060837)
-#> # A tibble: 1 × 11
-#>   addresses basic        created_epoch endpoints enumeration_type identifiers 
-#> * <list>    <list>       <chr>         <list>    <chr>            <list>      
-#> 1 <df>      <named list> 1117631856000 <NULL>    NPI-1            <df [8 × 5]>
-#> # ℹ 5 more variables: last_updated_epoch <chr>, number <chr>,
-#> #   other_names <list>, practiceLocations <list>, taxonomies <list>
-nppes2(npi = 1528060837)
-#> # A tibble: 1 × 8
+nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
+#> # A tibble: 9 × 8
 #>          npi entity address       basic        id     other  location taxonomy
-#> *      <int>  <int> <list>        <list>       <list> <list> <list>   <list>  
-#> 1 1528060837      1 <df [2 × 11]> <named list> <df>   <NULL> <NULL>   <df>    
+#>        <int>  <int> <list>        <list>       <list> <list> <list>   <list>  
+#> 1 1851713903      1 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
+#> 2 1588817837      1 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
+#> 3 1255782751      1 <df [2 × 9]>  <named list> <NULL> <df>   <df>     <df>    
+#> 4 1255877502      1 <df [2 × 10]> <named list> <df>   <NULL> <NULL>   <df>    
+#> 5 1841008505      1 <df [2 × 9]>  <named list> <NULL> <df>   <NULL>   <df>    
+#> 6 1003826272      1 <df [2 × 10]> <named list> <df>   <df>   <NULL>   <df>    
+#> 7 1174270805      2 <df [2 × 9]>  <named list> <NULL> <df>   <NULL>   <df>    
+#> 8 1225701881      2 <df [2 × 9]>  <named list> <NULL> <NULL> <NULL>   <df>    
+#> 9 1982059275      2 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
 ```
