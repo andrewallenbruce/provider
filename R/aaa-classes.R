@@ -23,14 +23,6 @@ Result <- S7::new_class(
 )
 
 #' @noRd
-chunk <- function(x, chunks, size, length) {
-  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
-    cheapr::sset(seq_len(length))
-
-  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
-}
-
-#' @noRd
 Key <- S7::new_class(
   "Key",
   S7::class_character,
@@ -69,11 +61,6 @@ Key <- S7::new_class(
     )
   )
 )
-
-#' @noRd
-is_key <- function(x) {
-  S7::S7_inherits(x, Key)
-}
 
 #' @noRd
 Endpoint <- S7::new_class(

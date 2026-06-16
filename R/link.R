@@ -24,5 +24,5 @@ S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
     check = FALSE
   )
   x <- join2(x, y, on = "ccn")
-  rc_combine(x, "status", "status_y")
+  rc_replace(x, "status", "status_y")
 }

@@ -87,7 +87,7 @@ pivot_order_refer <- function(x) {
 
 #' @noRd
 pivot_multi_site <- function(x) {
-  y <- pivot2(x, "fac_ccn", "_multi$", "multi")
+  y <- pivot2(x, "ccn", "_multi$", "multi")
 
   collapse::gvr(x, "_multi$") <- NULL
 
@@ -95,7 +95,7 @@ pivot_multi_site <- function(x) {
     return(add_empty(x, "multi"))
   }
 
-  y <- ss_key(y, c("fac_ccn", "multi"))
+  y <- ss_key(y, c("ccn", "multi"))
 
   if (no_rows(y)) {
     return(add_empty(x, "multi"))
@@ -111,16 +111,16 @@ pivot_multi_site <- function(x) {
     set = TRUE
   )
 
-  if (is_unique(y[["fac_ccn"]])) {
-    return(join2(x, y, on = "fac_ccn"))
+  if (is_unique(y[["ccn"]])) {
+    return(join2(x, y, on = "ccn"))
   }
 
-  join2(x, collapse_rows(y, "fac_ccn", "multi"), on = "fac_ccn")
+  join2(x, collapse_rows(y, "ccn", "multi"), on = "ccn")
 }
 
 #' @noRd
 pivot_acr_org <- function(x) {
-  y <- pivot2(x, "fac_ccn", "^acr_", "acr_org")
+  y <- pivot2(x, "ccn", "^acr_", "acr_org")
 
   collapse::gvr(x, "^acr_") <- NULL
 
@@ -128,7 +128,7 @@ pivot_acr_org <- function(x) {
     return(add_empty(x, "acr_org"))
   }
 
-  y <- collapse::ss(y, j = c("fac_ccn", "acr_org"))
+  y <- collapse::ss(y, j = c("ccn", "acr_org"))
 
   if (no_rows(y)) {
     return(add_empty(x, "acr_org"))
@@ -147,11 +147,11 @@ pivot_acr_org <- function(x) {
     set = TRUE
   )
 
-  if (is_unique(y[["fac_ccn"]])) {
-    return(join2(x, y, on = "fac_ccn"))
+  if (is_unique(y[["ccn"]])) {
+    return(join2(x, y, on = "ccn"))
   }
 
-  join2(x, collapse_rows(y, "fac_ccn", "acr_org"), on = "fac_ccn")
+  join2(x, collapse_rows(y, "ccn", "acr_org"), on = "ccn")
 }
 
 #' @noRd

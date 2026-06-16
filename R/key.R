@@ -3,6 +3,19 @@
 NULL
 
 #' @noRd
+chunk <- function(x, chunks, size, length) {
+  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
+    cheapr::sset(seq_len(length))
+
+  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
+}
+
+#' @noRd
+is_key <- function(x) {
+  S7::S7_inherits(x, Key)
+}
+
+#' @noRd
 extract_key <- function(x) {
   check_key(x)
   if (x@length == 0L) {

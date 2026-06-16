@@ -51,6 +51,7 @@ Collate:
     'aaa-pdc.R'
     'checks.R'
     'cli.R'
+    'combine.R'
     'data.R'
     'end-affiliation.R'
     'end-clia.R'

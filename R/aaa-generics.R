@@ -81,7 +81,7 @@ S7::method(execute, EndpointCMSList) <- function(x) {
 
 #' @noRd
 S7::method(chain, list(Result, S7::class_function)) <- function(x, end) {
-  x <- x@df
+  x <- S7::prop(x, "df")
   k <- key(x)
 
   if (!is_key(k)) {
@@ -97,7 +97,7 @@ S7::method(chain, list(Result, S7::class_function)) <- function(x, end) {
     return(link(x, y))
   }
 
-  y <- rowbind2(purrr::map(k@split, end))
+  y <- rowbind2(purrr::map(S7::prop(k, "split"), end))
 
   if (no_rows(y)) {
     return(x)

@@ -60,7 +60,7 @@ nppes_entity_1 <- function(x) {
     collapse::unlist2d(idcols = c("npi", "var")) |>
     collapse::qTBL()
 
-  if (!no_rows(x)) {
+  if (!no_rows(b)) {
     collapse::recode_char(
       b,
       "--" = NA_character_,
