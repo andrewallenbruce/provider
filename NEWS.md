@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9255 (2026-06-16)
+
+* added polish method for `nppes()`
+
+
 # provider 0.0.1.9254 (2026-06-16)
 
 * `nppes` polish method
