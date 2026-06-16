@@ -157,16 +157,48 @@ Medicare program.
 
 ``` r
 nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
-#> # A tibble: 9 × 8
-#>          npi entity address       basic        id     other  location taxonomy
-#>        <int>  <int> <list>        <list>       <list> <list> <list>   <list>  
-#> 1 1851713903      1 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
-#> 2 1588817837      1 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
-#> 3 1255782751      1 <df [2 × 9]>  <named list> <NULL> <df>   <df>     <df>    
-#> 4 1255877502      1 <df [2 × 10]> <named list> <df>   <NULL> <NULL>   <df>    
-#> 5 1841008505      1 <df [2 × 9]>  <named list> <NULL> <df>   <NULL>   <df>    
-#> 6 1003826272      1 <df [2 × 10]> <named list> <df>   <df>   <NULL>   <df>    
-#> 7 1174270805      2 <df [2 × 9]>  <named list> <NULL> <df>   <NULL>   <df>    
-#> 8 1225701881      2 <df [2 × 9]>  <named list> <NULL> <NULL> <NULL>   <df>    
-#> 9 1982059275      2 <df [2 × 10]> <named list> <NULL> <NULL> <NULL>   <df>    
+#> $type_1
+#> # A tibble: 15 × 29
+#>        npi entity cred  enum_date  first last  updated    sex    sole cert_date 
+#>      <int>  <int> <chr> <date>     <chr> <chr> <date>     <chr> <int> <date>    
+#>  1  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F         1 NA        
+#>  2  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F         1 NA        
+#>  3  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F         0 NA        
+#>  4  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F         0 NA        
+#>  5  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
+#>  6  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
+#>  7  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
+#>  8  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F         0 NA        
+#>  9  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F         0 NA        
+#> 10  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F         1 2024-12-26
+#> 11  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F         1 2024-12-26
+#> 12  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
+#> 13  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
+#> 14  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
+#> 15  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
+#> # ℹ 19 more variables: o_code <int>, o_first <chr>, o_last <chr>, o_cred <chr>,
+#> #   id_code <int>, id_identifier <chr>, id_issuer <chr>, id_state <chr>,
+#> #   tax_code <chr>, tax_desc <chr>, tax_license <chr>, tax_prime <int>,
+#> #   tax_state <chr>, tax_group <chr>, address <chr>, purpose <chr>, city <chr>,
+#> #   zip <chr>, state <chr>
+#> 
+#> $type_2
+#> # A tibble: 10 × 24
+#>           npi entity cred  first   last   title cert_date  enum_date  updated   
+#>         <int>  <int> <chr> <chr>   <chr>  <chr> <date>     <date>     <date>    
+#>  1 1174270805      2 DO    FAHIMEH SASAN  Foun… 2024-05-20 2022-03-02 2024-05-20
+#>  2 1174270805      2 DO    FAHIMEH SASAN  Foun… 2024-05-20 2022-03-02 2024-05-20
+#>  3 1174270805      2 DO    FAHIMEH SASAN  Foun… 2024-05-20 2022-03-02 2024-05-20
+#>  4 1174270805      2 DO    FAHIMEH SASAN  Foun… 2024-05-20 2022-03-02 2024-05-20
+#>  5 1225701881      2 NA    KATRINA MARSH… Dir … 2024-02-12 2021-07-29 2024-02-12
+#>  6 1225701881      2 NA    KATRINA MARSH… Dir … 2024-02-12 2021-07-29 2024-02-12
+#>  7 1982059275      2 NA    HANNAH  JOHNS… Dire… NA         2016-04-25 2016-04-25
+#>  8 1982059275      2 NA    HANNAH  JOHNS… Dire… NA         2016-04-25 2016-04-25
+#>  9 1982059275      2 NA    HANNAH  JOHNS… Dire… NA         2016-04-25 2016-04-25
+#> 10 1982059275      2 NA    HANNAH  JOHNS… Dire… NA         2016-04-25 2016-04-25
+#> # ℹ 15 more variables: org_name <chr>, subpart <int>, o_code <int>,
+#> #   o_name <chr>, tax_code <chr>, tax_desc <chr>, tax_license <chr>,
+#> #   tax_prime <int>, tax_state <chr>, tax_group <chr>, address <chr>,
+#> #   purpose <chr>, city <chr>, zip <chr>, state <chr>
+#> 
 ```
