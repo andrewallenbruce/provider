@@ -21,6 +21,8 @@ nppes(
   zip = NULL,
   country = NULL
 )
+
+nppes2(npi)
 ```
 
 ## Arguments
@@ -161,4 +163,9 @@ nppes(npi = 1528060837)
 #> 1 <df>      <named list> 1117631856000 <NULL>    NPI-1            <df [8 × 5]>
 #> # ℹ 5 more variables: last_updated_epoch <chr>, number <chr>,
 #> #   other_names <list>, practiceLocations <list>, taxonomies <list>
+nppes2(npi = 1528060837)
+#> # A tibble: 1 × 8
+#>          npi entity address       basic        id     other  location taxonomy
+#> *      <int>  <int> <list>        <list>       <list> <list> <list>   <list>  
+#> 1 1528060837      1 <df [2 × 11]> <named list> <df>   <NULL> <NULL>   <df>    
 ```

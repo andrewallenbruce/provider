@@ -55,17 +55,17 @@ pending(first = starts("V"))
 #> ✔ pending returned 183 results
 #> ✔ Retrieving 2 pages
 #> # A tibble: 183 × 4
-#>    prov_type first     last                npi
-#>    <chr>     <chr>     <chr>             <int>
-#>  1 Physician VADIN     LALL DASS    1144512724
-#>  2 Physician VAGHARSH  ANTANESIAN   1700451846
-#>  3 Physician VAIDEHI   KOTHARI      1447190517
-#>  4 Physician VAIDEHI   PATEL        1528761558
-#>  5 Physician VAIDHEESH VARAGANTIWAR 1265399984
-#>  6 Physician VALENTINA ROA FORSTER  1144178302
-#>  7 Physician VALERIA   SILVA        1154292712
-#>  8 Physician VALERIE   INGLESE      1437090404
-#>  9 Physician VALYNN    ANTOINE      1811480510
-#> 10 Physician VANE      BOLBOLIAN    1740053446
+#>    prov_type        npi first     last        
+#>    <chr>          <int> <chr>     <chr>       
+#>  1 Physician 1144512724 VADIN     LALL DASS   
+#>  2 Physician 1700451846 VAGHARSH  ANTANESIAN  
+#>  3 Physician 1447190517 VAIDEHI   KOTHARI     
+#>  4 Physician 1528761558 VAIDEHI   PATEL       
+#>  5 Physician 1265399984 VAIDHEESH VARAGANTIWAR
+#>  6 Physician 1144178302 VALENTINA ROA FORSTER 
+#>  7 Physician 1154292712 VALERIA   SILVA       
+#>  8 Physician 1437090404 VALERIE   INGLESE     
+#>  9 Physician 1811480510 VALYNN    ANTOINE     
+#> 10 Physician 1740053446 VANE      BOLBOLIAN   
 #> # ℹ 173 more rows
 ```

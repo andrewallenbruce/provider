@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9253 (2026-06-16)
+
+- `nppes` work
+
 ## provider 0.0.1.9252 (2026-06-15)
 
 - added `Result` class

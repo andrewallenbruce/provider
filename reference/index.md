@@ -16,6 +16,7 @@
   [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   : Hospitals Enrolled in Medicare
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  [`nppes2()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
   : Opt-Out Providers
