@@ -106,8 +106,13 @@ S7::method(polish, s3_nppes) <- function(x) {
     set = TRUE
   )
 
-  collapse::colorderv(x, c("npi", "entity")) |>
+  x <- collapse::colorderv(x, c("npi", "entity")) |>
     collapse::roworderv("entity")
+
+  list(
+    type_1 = nppes_entity_1(x),
+    type_2 = nppes_entity_2(x)
+  )
 }
 
 #' @noRd
@@ -179,52 +184,6 @@ S7::method(polish, s3_providers) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_bin("multi")
-}
-
-#' @noRd
-quality_get <- function(x, y) {
-  y <- match.arg(as.character(y), c("2017", "2022", "2023"))
-  z <- switch(
-    y,
-    "2017" = as.character(2017:2021),
-    "2022" = "2022",
-    "2023" = as.character(2023:2024)
-  )
-
-  if (!collapse::has_elem(x, z)) {
-    return(list())
-  }
-
-  x <- collapse::get_elem(x, z, keep.tree = TRUE) |>
-    rowbind2("year", fill = TRUE)
-
-  NMS <- RE_NAME[["quality"]][[y]]
-
-  collapse::setrename(x, NMS, .nse = FALSE)
-  replace_nz(x)
-
-  x <- collapse::gv(x, unlist_(NMS)) |>
-    rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    pivot_quality()
-
-  if (y == "2017") {
-    x <- collapse::av(
-      x,
-      cred = vec_na(x),
-      dual_ratio = vec_na(x, "double"),
-      small_bonus = vec_na(x, "integer")
-    )
-  }
-
-  if (y %in% c("2017", "2022")) {
-    x <- collapse::av(
-      x,
-      reporting = vec_na(x),
-      mvp = vec_na(x),
-      ci_score = vec_na(x, "double")
-    )
-  }
-  return(x)
 }
 
 #' @noRd
