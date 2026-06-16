@@ -31,7 +31,7 @@ npi_test <- c(
   1003826272
 )
 
-x <- nppes2(npi_test)
+x <- nppes(npi_test)
 x <- collapse::rsplit(x, ~entity, keep.by = TRUE)
 
 #==========| ENTITY Type 1 |=========

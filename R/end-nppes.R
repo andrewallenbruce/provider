@@ -82,10 +82,29 @@
 #'    it *is not* `"US"`.
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' nppes(npi = 1528060837)
-#' nppes2(npi = 1528060837)
+#' nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 #' @export
-nppes <- function(
+nppes <- function(npi) {
+  check_numeric(npi)
+
+  x <- purrr::map(npi, \(N) {
+    httr2::request("https://npiregistry.cms.hhs.gov/api/?") |>
+      httr2::req_url_query(
+        version = "2.1",
+        number = N
+      )
+  }) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    purrr::map(\(x) parse_string(x, query = "results")) |>
+    collapse::rowbind() |>
+    add_class("nppes")
+
+  polish(x)
+}
+
+#' @export
+#' @rdname nppes
+nppes2 <- function(
   npi = NULL,
   entity = NULL,
   specialty = NULL,
@@ -124,48 +143,4 @@ nppes <- function(
   httr2::req_perform(req) |>
     parse_string(query = "results") |>
     data_frame()
-}
-
-#' @export
-#' @rdname nppes
-nppes2 <- function(npi) {
-  check_numeric(npi)
-
-  x <- purrr::map(npi, \(n) {
-    httr2::request("https://npiregistry.cms.hhs.gov/api/?") |>
-      httr2::req_url_query(
-        version = "2.1",
-        number = n
-      )
-  }) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    purrr::map(\(x) parse_string(x, query = "results")) |>
-    collapse::rowbind() |>
-    collapse::qTBL()
-
-  collapse::gvr(x, "_epoch$|^endpoints$") <- NULL
-
-  collapse::settfmv(x, "number", as.integer)
-
-  x[["enumeration_type"]] <- cheapr::val_match(
-    x[["enumeration_type"]],
-    "NPI-1" ~ 1L,
-    "NPI-2" ~ 2L,
-    .default = NA_integer_
-  )
-
-  collapse::recode_char(
-    colnames(x),
-    "number" = "npi",
-    "enumeration_type" = "entity",
-    "practiceLocations" = "location",
-    "identifiers" = "id",
-    "other_names" = "other",
-    "taxonomies" = "taxonomy",
-    "addresses" = "address",
-    set = TRUE
-  )
-
-  collapse::colorderv(x, c("npi", "entity")) |>
-    collapse::roworderv("entity")
 }

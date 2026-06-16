@@ -5,7 +5,9 @@
 \alias{nppes2}
 \title{National Registry of Health Care Providers}
 \usage{
-nppes(
+nppes(npi)
+
+nppes2(
   npi = NULL,
   entity = NULL,
   specialty = NULL,
@@ -20,8 +22,6 @@ nppes(
   zip = NULL,
   country = NULL
 )
-
-nppes2(npi)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
@@ -123,8 +123,7 @@ program.
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-nppes(npi = 1528060837)
-nppes2(npi = 1528060837)
+nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 \dontshow{\}) # examplesIf}
 }
 \references{

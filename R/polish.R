@@ -81,15 +81,33 @@ S7::method(polish, s3_hospitals) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_hospitals2) <- function(x) {
-  suppressWarnings(
-    collapse::settfmv(
-      x,
-      "hospital_overall_rating",
-      as.integer
-    )
-  )
+  collapse::setv(x[["hospital_overall_rating"]], "N/A", NA_character_)
+  collapse::settfmv(x, "hospital_overall_rating", as.integer)
   set_rename(x)
   get_columns(x)
+}
+
+#' @noRd
+S7::method(polish, s3_nppes) <- function(x) {
+  collapse::gvr(x, "_epoch$|^endpoints$") <- NULL
+  collapse::setv(x[["enumeration_type"]], "NPI-1", "1")
+  collapse::setv(x[["enumeration_type"]], "NPI-2", "2")
+  collapse::settfmv(x, c("number", "enumeration_type"), as.integer)
+
+  collapse::recode_char(
+    colnames(x),
+    "number" = "npi",
+    "enumeration_type" = "entity",
+    "practiceLocations" = "location",
+    "identifiers" = "id",
+    "other_names" = "other",
+    "taxonomies" = "taxonomy",
+    "addresses" = "address",
+    set = TRUE
+  )
+
+  collapse::colorderv(x, c("npi", "entity")) |>
+    collapse::roworderv("entity")
 }
 
 #' @noRd

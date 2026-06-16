@@ -162,6 +162,8 @@ s3_hospitals <- S7::new_S3_class("hospitals")
 #' @noRd
 s3_hospitals2 <- S7::new_S3_class("hospitals2")
 #' @noRd
+s3_nppes <- S7::new_S3_class("nppes")
+#' @noRd
 s3_opt_out <- S7::new_S3_class("opt_out")
 #' @noRd
 s3_order_refer <- S7::new_S3_class("order_refer")
