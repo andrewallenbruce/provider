@@ -49,12 +49,12 @@ containing the search results.
 
 ``` r
 pending(count = TRUE)
-#> ◼ pending | 12,879 rows | 4 pages
+#> ◼ pending | 13,191 rows | 4 pages
 
 pending(first = starts("V"))
-#> ✔ pending returned 183 results
+#> ✔ pending returned 187 results
 #> ✔ Retrieving 2 pages
-#> # A tibble: 183 × 4
+#> # A tibble: 187 × 4
 #>    prov_type        npi first     last        
 #>    <chr>          <int> <chr>     <chr>       
 #>  1 Physician 1144512724 VADIN     LALL DASS   
@@ -67,5 +67,5 @@ pending(first = starts("V"))
 #>  8 Physician 1437090404 VALERIE   INGLESE     
 #>  9 Physician 1811480510 VALYNN    ANTOINE     
 #> 10 Physician 1740053446 VANE      BOLBOLIAN   
-#> # ℹ 173 more rows
+#> # ℹ 177 more rows
 ```
