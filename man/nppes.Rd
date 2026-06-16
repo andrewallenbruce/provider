@@ -2,6 +2,7 @@
 % Please edit documentation in R/end-nppes.R
 \name{nppes}
 \alias{nppes}
+\alias{nppes2}
 \title{National Registry of Health Care Providers}
 \usage{
 nppes(
@@ -19,6 +20,8 @@ nppes(
   zip = NULL,
   country = NULL
 )
+
+nppes2(npi)
 }
 \arguments{
 \item{npi}{\verb{<int>} National Provider Identifier}
@@ -121,6 +124,7 @@ program.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 nppes(npi = 1528060837)
+nppes2(npi = 1528060837)
 \dontshow{\}) # examplesIf}
 }
 \references{

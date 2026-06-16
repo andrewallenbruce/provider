@@ -1,24 +1,4 @@
 #' @noRd
-RE_ENROLL = list(
-  `ENROLLMENT ID` = "enid",
-  NPI = "npi",
-  `MULTIPLE NPI FLAG` = "multi",
-  CCN = "ccn",
-  `ASSOCIATE ID` = "pac",
-  `ORGANIZATION NAME` = "org_name",
-  `DOING BUSINESS AS NAME` = "org_dba",
-  `INCORPORATION DATE` = "inc_date",
-  `ORGANIZATION TYPE STRUCTURE` = "org_type",
-  `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
-  PROPRIETARY_NONPROFIT = "status",
-  `ADDRESS LINE 1` = "address",
-  `ADDRESS LINE 2` = "add_2",
-  CITY = "city",
-  STATE = "state",
-  `ZIP CODE` = "zip"
-)
-
-#' @noRd
 RE_OWNER = list(
   `ENROLLMENT ID` = "org_enid",
   `ASSOCIATE ID` = "org_pac",
@@ -62,9 +42,6 @@ RE_OWNER2 = c(
   `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
 )
 
-# 2017      == 17 + ALL
-# 2022      == 22 + ALL
-# 2023:2024 == 23 + 22 + ALL
 #' @noRd
 qpp_ALL = list(
   year = "year",
@@ -120,8 +97,8 @@ RE_NAME = list(
   clia = list(
     FAC_NAME = "fac_name",
     ADDTNL_FAC_NAME = "fac_2",
-    PRVDR_NUM = "fac_ccn",
-    CLIA_MDCR_NUM = "clia_ccn",
+    PRVDR_NUM = "ccn",
+    CLIA_MDCR_NUM = "clia",
     CHOW_CNT = "chows",
     DRCTLY_AFLTD_LAB_CNT = "labs",
     LAB_SITE_CNT = "sites",
@@ -173,7 +150,7 @@ RE_NAME = list(
     zip_code = "zip"
   ),
   dialysis = list(
-    cms_certification_number_ccn = "fac_ccn",
+    cms_certification_number_ccn = "ccn",
     facility_name = "fac_name",
     five_star = "rating",
     network = "network",
@@ -186,6 +163,25 @@ RE_NAME = list(
     state = "state",
     zip_code = "zip",
     countyparish = "county"
+  ),
+  facility = c(
+    fac_type = "fac_type",
+    `ENROLLMENT ID` = "enid",
+    NPI = "npi",
+    `MULTIPLE NPI FLAG` = "multi",
+    CCN = "ccn",
+    `ASSOCIATE ID` = "pac",
+    `ORGANIZATION NAME` = "org_name",
+    `DOING BUSINESS AS NAME` = "org_dba",
+    `INCORPORATION DATE` = "inc_date",
+    `ORGANIZATION TYPE STRUCTURE` = "org_type",
+    `ORGANIZATION OTHER TYPE TEXT` = "org_otxt",
+    PROPRIETARY_NONPROFIT = "status",
+    `ADDRESS LINE 1` = "address",
+    `ADDRESS LINE 2` = "add_2",
+    CITY = "city",
+    STATE = "state",
+    `ZIP CODE` = "zip"
   ),
   hospitals = list(
     `ORGANIZATION NAME` = "org_name",
@@ -262,9 +258,9 @@ RE_NAME = list(
   ),
   pending = list(
     prov_type = "prov_type",
+    NPI = "npi",
     FIRST_NAME = "first",
-    LAST_NAME = "last",
-    NPI = "npi"
+    LAST_NAME = "last"
   ),
   providers = list(
     ORG_NAME = "org_name",
@@ -371,10 +367,6 @@ RE_NAME = list(
     Bene_Avg_Risk_Scre = "avg_risk",
     Bene_Dual_Cnt = "dual",
     Bene_Ndual_Cnt = "ndual"
-  ),
-  facility = c(
-    fac_type = "fac_type",
-    RE_ENROLL
   ),
   owner = c(
     fac_type = "fac_type",

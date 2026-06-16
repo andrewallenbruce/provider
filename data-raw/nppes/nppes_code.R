@@ -71,6 +71,7 @@ key <- collapse::join(key, basic, on = "number") |>
 # TBL 3: OTHER NAMES
 # 1 = Former
 # 2 = Professional
+# 3 = Doing Business As
 # 5 = Other
 o_names <- rlang::set_names(x$other_names, x$number) |>
   cheapr::list_drop_null() |>
