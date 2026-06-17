@@ -23,7 +23,7 @@ library(collapse)
 library(pillar)
 library(provider)
 
-npi_test <- c(
+npi <- c(
   1851713903,
   1174270805,
   1225701881,
@@ -32,8 +32,10 @@ npi_test <- c(
   1255782751,
   1255877502,
   1841008505,
-  1003826272
-)
+  1003826272,
+  kindbody
+) |>
+  collapse::funique()
 
 x <- nppes(npi_test)
 y <- nppes(unique(x$type_2$npi))

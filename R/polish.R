@@ -1,5 +1,7 @@
 #' @include aaa-classes.R
 #' @include aaa-generics.R
+NULL
+
 #' @noRd
 S7::method(polish, S7::class_integer | Endpoint) <- function(x) {
   invisible(x)
@@ -81,7 +83,7 @@ S7::method(polish, s3_hospitals) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_hospitals2) <- function(x) {
-  collapse::setv(x[["hospital_overall_rating"]], "N/A", NA_character_)
+  collapse::setv(x[["hospital_overall_rating"]], "Not Available", NA)
   collapse::settfmv(x, "hospital_overall_rating", as.integer)
   set_rename(x)
   get_columns(x)
@@ -105,9 +107,6 @@ S7::method(polish, s3_nppes) <- function(x) {
     "addresses" = "address",
     set = TRUE
   )
-
-  x <- collapse::colorderv(x, c("npi", "entity")) |>
-    collapse::roworderv("entity")
 
   list(
     type_1 = nppes_entity_1(x),

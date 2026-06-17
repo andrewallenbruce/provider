@@ -1,4 +1,22 @@
 #' @noRd
+add_class <- function(x, endpoint = NULL) {
+  `class<-`(
+    cheapr::as_df(x),
+    c(
+      if (!is.null(endpoint)) endpoint,
+      "tbl_df",
+      "tbl",
+      "data.frame"
+    )
+  )
+}
+
+#' @noRd
+add_class2 <- function(x, endpoint) {
+  `class<-`(x, c(endpoint, class(x)))
+}
+
+#' @noRd
 column_rex <- function(x) {
   paste0(paste0("^", unlist_(x), "$"), collapse = "|")
 }

@@ -57,8 +57,7 @@ nppes_entity_1 <- function(x) {
 
   # BASIC
   b <- rlang::set_names(x$basic, x$npi) |>
-    collapse::unlist2d(idcols = c("npi", "var")) |>
-    collapse::qTBL()
+    collapse::unlist2d(idcols = c("npi", "var"))
 
   if (!no_rows(b)) {
     collapse::recode_char(
@@ -67,7 +66,7 @@ nppes_entity_1 <- function(x) {
       "certification_date" = "cert_date",
       "enumeration_date" = "enum_date",
       "last_updated" = "updated",
-      "sole_proprietor" = "sole",
+      "sole_proprietor" = "type",
       "credential" = "cred",
       "first_name" = "first",
       "last_name" = "last",
@@ -75,7 +74,12 @@ nppes_entity_1 <- function(x) {
       set = TRUE
     )
 
-    remove <- c("status", "name_prefix", "name_suffix", "middle_name")
+    remove <- c(
+      "status",
+      "name_prefix",
+      "name_suffix",
+      "middle_name"
+      )
 
     b <- collapse::ss(b, b[["var"]] %!iin% remove) |>
       collapse::pivot(
@@ -85,10 +89,12 @@ nppes_entity_1 <- function(x) {
         values = "V1",
         check.dups = TRUE
       ) |>
-      rc_bin("sole") |>
+      rc_bin("type") |>
       rc_ymd(c("enum_date", "cert_date", "updated"))
 
     collapse::settransformv(b, "npi", as.integer)
+
+    b$type <- cheapr::if_else_(b$type == 1L, "Sole Proprietor", NA_character_)
 
     k <- collapse::join(k, b, on = "npi", multiple = TRUE, verbose = 0L)
   }
@@ -100,23 +106,23 @@ nppes_entity_1 <- function(x) {
   if (!rlang::is_empty(o)) {
     o <- collapse::rowbind(o, idcol = "npi", fill = TRUE) |>
       collapse::recode_char("--" = NA_character_) |>
-      collapse::qTBL() |>
       collapse::rnm(
-        "cred" = "credential",
-        "first" = "first_name",
-        "last" = "last_name",
+        "code" = "type",
+        "credential" = "cred",
+        "first_name" = "first",
+        "middle_name" = "middle",
+        "last_name" = "last",
         .nse = FALSE
-      ) |>
-      collapse::gv(c(
-        "npi",
-        "code",
-        "first",
-        "last",
-        "cred"
-      )) |>
-      collapse::add_stub(stub = "o_", cols = -1)
+      )
 
-    collapse::settransformv(o, "o_code", as.integer)
+    o$name <- glue::glue("{o$first} {o$middle} {o$last} {o$cred}", .na = "") |>
+      as.character() |>
+      stringr::str_squish()
+
+    o <- collapse::gv(o, c("npi", "type", "name")) |>
+      collapse::add_stub(stub = "oth_", cols = -1)
+
+    collapse::settransformv(o, "oth_type", as.integer)
     collapse::settransformv(o, "npi", as.character)
     collapse::settransformv(o, "npi", as.integer)
 
@@ -130,11 +136,15 @@ nppes_entity_1 <- function(x) {
   if (!rlang::is_empty(i)) {
     i <- collapse::rowbind(i, idcol = "npi", fill = TRUE) |>
       collapse::recode_char("--" = NA_character_) |>
-      collapse::qTBL() |>
-      collapse::gv(c("npi", "code", "identifier", "issuer", "state")) |>
+      collapse::rnm(
+        "code" = "type",
+        "identifier" = "code",
+        .nse = FALSE
+      ) |>
+      collapse::gv(c("npi", "type", "code", "issuer", "state")) |>
       collapse::add_stub(stub = "id_", cols = -1)
 
-    collapse::settransformv(i, "id_code", as.integer)
+    collapse::settransformv(i, "id_type", as.integer)
     collapse::settransformv(i, "npi", as.character)
     collapse::settransformv(i, "npi", as.integer)
 
@@ -153,12 +163,12 @@ nppes_entity_1 <- function(x) {
       collapse::qTBL() |>
       collapse::rnm(
         "group" = "taxonomy_group",
-        "prime" = "primary",
+        "prim" = "primary",
         .nse = FALSE
       ) |>
       collapse::add_stub(stub = "tax_", cols = -1)
 
-    collapse::settransformv(t, "tax_prime", as.integer)
+    collapse::settransformv(t, "tax_prim", as.integer)
     collapse::settransformv(t, "npi", as.character)
     collapse::settransformv(t, "npi", as.integer)
 

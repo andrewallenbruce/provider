@@ -1,4 +1,15 @@
 #' @noRd
+set_rename <- function(x) {
+  collapse::setrename(x, RE_NAME[[class(x)[1]]], .nse = FALSE)
+  replace_nz(x)
+}
+
+#' @noRd
+get_columns <- function(x) {
+  collapse::gv(x, unlist_(RE_NAME[[class(x)[1]]]))
+}
+
+#' @noRd
 RE_OWNER = list(
   `ENROLLMENT ID` = "org_enid",
   `ASSOCIATE ID` = "org_pac",

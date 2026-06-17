@@ -80,7 +80,6 @@ Collate:
     'modifiers.R'
     'offset.R'
     'pivot.R'
-    'polish-core.R'
     'polish-pre.R'
     'polish.R'
     'provider-package.R'
