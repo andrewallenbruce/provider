@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9257 (2026-06-17)
+
+- [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  refactoring
+
 ## provider 0.0.1.9256 (2026-06-16)
 
 - cleaning up nppes polish

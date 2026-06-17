@@ -223,7 +223,6 @@ hospitals(
 #> ✔ Retrieving 1 page
 #> ✔ hospitals2 returned 31 results
 #> ✔ Retrieving 1 page
-#> Warning: NAs introduced by coercion
 #> # A tibble: 65 × 18
 #>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
@@ -252,7 +251,6 @@ hospitals(
 #> ✔ Retrieving 1 page
 #> ✔ hospitals2 returned 5 results
 #> ✔ Retrieving 1 page
-#> Warning: NAs introduced by coercion
 #> # A tibble: 12 × 18
 #>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
@@ -273,12 +271,10 @@ hospitals(
 
 hospitals(ccn = hospitals2()$ccn)
 #> ✔ Returning first 10 rows
-#> Warning: NAs introduced by coercion
 #> ✔ hospitals returned 9 results
 #> ✔ Retrieving 1 page
 #> ✔ hospitals2 returned 9 results
 #> ✔ Retrieving 1 page
-#> Warning: NAs introduced by coercion
 #> # A tibble: 9 × 18
 #>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 

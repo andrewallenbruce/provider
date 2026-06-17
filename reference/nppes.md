@@ -158,29 +158,29 @@ Medicare program.
 ``` r
 nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 #> $type_1
-#> # A tibble: 15 × 29
-#>        npi entity cred  enum_date  first last  updated    sex    sole cert_date 
-#>      <int>  <int> <chr> <date>     <chr> <chr> <date>     <chr> <int> <date>    
-#>  1  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F         1 NA        
-#>  2  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F         1 NA        
-#>  3  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F         0 NA        
-#>  4  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F         0 NA        
-#>  5  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
-#>  6  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
-#>  7  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F         0 NA        
-#>  8  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F         0 NA        
-#>  9  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F         0 NA        
-#> 10  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F         1 2024-12-26
-#> 11  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F         1 2024-12-26
-#> 12  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
-#> 13  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
-#> 14  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
-#> 15  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F         0 2024-05-07
-#> # ℹ 19 more variables: o_code <int>, o_first <chr>, o_last <chr>, o_cred <chr>,
-#> #   id_code <int>, id_identifier <chr>, id_issuer <chr>, id_state <chr>,
-#> #   tax_code <chr>, tax_desc <chr>, tax_license <chr>, tax_prime <int>,
-#> #   tax_state <chr>, tax_group <chr>, address <chr>, purpose <chr>, city <chr>,
-#> #   zip <chr>, state <chr>
+#> # A tibble: 15 × 27
+#>        npi entity cred  enum_date  first last  updated    sex   type  cert_date 
+#>      <int>  <int> <chr> <date>     <chr> <chr> <date>     <chr> <chr> <date>    
+#>  1  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F     Sole… NA        
+#>  2  1.85e9      1 MSW   2014-01-08 JOSE… DANW… 2014-01-16 F     Sole… NA        
+#>  3  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F     NA    NA        
+#>  4  1.59e9      1 RN    2008-10-30 JOSE… DAPA… 2008-10-30 F     NA    NA        
+#>  5  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F     NA    NA        
+#>  6  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F     NA    NA        
+#>  7  1.26e9      1 MD    2016-06-26 JOSE… DAVIS 2019-10-31 F     NA    NA        
+#>  8  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F     NA    NA        
+#>  9  1.26e9      1 M.A.… 2017-01-10 JOSE… DE L… 2018-03-27 F     NA    NA        
+#> 10  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F     Sole… 2024-12-26
+#> 11  1.84e9      1 ALC,… 2024-12-26 JOSIE DAVI… 2024-12-26 F     Sole… 2024-12-26
+#> 12  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F     NA    2024-05-07
+#> 13  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F     NA    2024-05-07
+#> 14  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F     NA    2024-05-07
+#> 15  1.00e9      1 MD    2006-08-09 JO    DEAL  2024-05-07 F     NA    2024-05-07
+#> # ℹ 17 more variables: oth_type <int>, oth_name <chr>, id_type <int>,
+#> #   id_code <chr>, id_issuer <chr>, id_state <chr>, tax_code <chr>,
+#> #   tax_desc <chr>, tax_license <chr>, tax_prim <int>, tax_state <chr>,
+#> #   tax_group <chr>, address <chr>, purpose <chr>, city <chr>, zip <chr>,
+#> #   state <chr>
 #> 
 #> $type_2
 #> # A tibble: 10 × 24
