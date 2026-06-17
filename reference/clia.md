@@ -7,9 +7,9 @@ services the facility provides.
 
 ``` r
 clia(
-  fac_name = NULL,
-  fac_ccn = NULL,
-  clia_ccn = NULL,
+  name = NULL,
+  ccn = NULL,
+  clia = NULL,
   cert_type = NULL,
   acr_org = NULL,
   multi = NULL,
@@ -47,15 +47,15 @@ clia(
 
 ## Arguments
 
-- fac_name:
+- name:
 
   `<chr>` Provider/Laboratory name
 
-- fac_ccn:
+- ccn:
 
   `<chr>` 10-digit CMS Certification Number
 
-- clia_ccn:
+- clia:
 
   `<chr>` 6-digit CMS Certification Number
 

@@ -76,8 +76,6 @@ containing the search results.
 dialysis(org_name = "DaVita")
 #> ✔ dialysis returned 2,800 results
 #> ✔ Retrieving 2 pages
-#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
-#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 2,800 × 12
 #>    ccn    fac_name     rating network status chain_name cert_date  address city 
 #>    <chr>  <chr>         <int>   <int> <chr>  <chr>      <date>     <chr>   <chr>

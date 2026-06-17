@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9258 (2026-06-17)
+
+- nppes polishing
+
 ## provider 0.0.1.9257 (2026-06-17)
 
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
