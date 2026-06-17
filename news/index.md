@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9259 (2026-06-17)
+
+- split nppes processing into sections
+
 ## provider 0.0.1.9258 (2026-06-17)
 
 - nppes polishing
