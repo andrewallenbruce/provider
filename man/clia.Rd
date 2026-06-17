@@ -16,9 +16,9 @@
 }
 \usage{
 clia(
-  fac_name = NULL,
-  fac_ccn = NULL,
-  clia_ccn = NULL,
+  name = NULL,
+  ccn = NULL,
+  clia = NULL,
   cert_type = NULL,
   acr_org = NULL,
   multi = NULL,
@@ -33,11 +33,11 @@ clia(
 )
 }
 \arguments{
-\item{fac_name}{\verb{<chr>} Provider/Laboratory name}
+\item{name}{\verb{<chr>} Provider/Laboratory name}
 
-\item{fac_ccn}{\verb{<chr>} 10-digit CMS Certification Number}
+\item{ccn}{\verb{<chr>} 10-digit CMS Certification Number}
 
-\item{clia_ccn}{\verb{<chr>} 6-digit CMS Certification Number}
+\item{clia}{\verb{<chr>} 6-digit CMS Certification Number}
 
 \item{cert_type}{\verb{<enum>} CLIA certificate type (see Details):
 \itemize{

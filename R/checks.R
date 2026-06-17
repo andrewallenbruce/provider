@@ -90,7 +90,7 @@ check_char_ <- function(
     check_character(
       x,
       ...,
-      allow_na = TRUE,
+      allow_na = FALSE,
       allow_null = TRUE,
       arg = arg,
       call = call

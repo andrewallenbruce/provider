@@ -24,9 +24,9 @@
 #' ```{r, child = "man/md/clia_links.md"}
 #' ```
 #'
-#' @param fac_name `<chr>` Provider/Laboratory name
-#' @param fac_ccn `<chr>` 10-digit CMS Certification Number
-#' @param clia_ccn `<chr>` 6-digit CMS Certification Number
+#' @param name `<chr>` Provider/Laboratory name
+#' @param ccn `<chr>` 10-digit CMS Certification Number
+#' @param clia `<chr>` 6-digit CMS Certification Number
 #' @param cert_type `<enum>` CLIA certificate type (see Details):
 #'    - `"wav"` = Waiver
 #'    - `"ppm"` = Provider-Performed Microscopy (PPM)
@@ -58,9 +58,9 @@
 #' clia(acr_org = c("cap", "cola", "jcaho"))
 #' @export
 clia <- function(
-  fac_name = NULL,
-  fac_ccn = NULL,
-  clia_ccn = NULL,
+  name = NULL,
+  ccn = NULL,
+  clia = NULL,
   cert_type = NULL,
   acr_org = NULL,
   multi = NULL,
@@ -81,9 +81,9 @@ clia <- function(
   x <- cms(
     count = count,
     set = set,
-    FAC_NAME = fac_name,
-    PRVDR_NUM = fac_ccn,
-    CLIA_MDCR_NUM = clia_ccn,
+    FAC_NAME = name,
+    PRVDR_NUM = ccn,
+    CLIA_MDCR_NUM = clia,
     CRTFCT_TYPE_CD = tag_enum(cert_type),
     CITY_NAME = city,
     STATE_CD = state,

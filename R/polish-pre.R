@@ -79,7 +79,7 @@ nppes_entity_1 <- function(x) {
       "name_prefix",
       "name_suffix",
       "middle_name"
-      )
+    )
 
     b <- collapse::ss(b, b[["var"]] %!iin% remove) |>
       collapse::pivot(
@@ -94,9 +94,15 @@ nppes_entity_1 <- function(x) {
 
     collapse::settransformv(b, "npi", as.integer)
 
-    b$type <- cheapr::if_else_(b$type == 1L, "Sole Proprietor", NA_character_)
+    b$cred <- gsub(".", "", b$cred, fixed = TRUE)
 
-    k <- collapse::join(k, b, on = "npi", multiple = TRUE, verbose = 0L)
+    b$type <- cheapr::if_else_(
+      b$type == 1L,
+      "Sole Proprietor",
+      NA_character_
+    )
+
+    k <- join2(k, b, on = "npi")
   }
 
   # OTHER NAMES
@@ -115,18 +121,20 @@ nppes_entity_1 <- function(x) {
         .nse = FALSE
       )
 
+    o$cred <- gsub(".", "", o$cred, fixed = TRUE)
+
     o$name <- glue::glue("{o$first} {o$middle} {o$last} {o$cred}", .na = "") |>
       as.character() |>
       stringr::str_squish()
 
     o <- collapse::gv(o, c("npi", "type", "name")) |>
-      collapse::add_stub(stub = "oth_", cols = -1)
+      collapse::add_stub(stub = "other_", cols = -1)
 
-    collapse::settransformv(o, "oth_type", as.integer)
+    collapse::settransformv(o, "other_type", as.integer)
     collapse::settransformv(o, "npi", as.character)
     collapse::settransformv(o, "npi", as.integer)
 
-    k <- collapse::join(k, o, on = "npi", verbose = 0L)
+    k <- join2(k, o, on = "npi")
   }
 
   # IDENTIFIERS
@@ -148,7 +156,7 @@ nppes_entity_1 <- function(x) {
     collapse::settransformv(i, "npi", as.character)
     collapse::settransformv(i, "npi", as.integer)
 
-    k <- collapse::join(k, i, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, i, on = "npi")
   }
 
   # TAXONOMY
@@ -172,7 +180,7 @@ nppes_entity_1 <- function(x) {
     collapse::settransformv(t, "npi", as.character)
     collapse::settransformv(t, "npi", as.integer)
 
-    k <- collapse::join(k, t, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, t, on = "npi")
   }
 
   # PRACTICE LOCATIONS
@@ -226,7 +234,7 @@ nppes_entity_1 <- function(x) {
     if (!rlang::is_empty(l)) {
       a <- collapse::rowbind(a, l)
     }
-    k <- collapse::join(k, a, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, a, on = "npi")
   }
   return(k)
 }
@@ -244,8 +252,7 @@ nppes_entity_2 <- function(x) {
 
   # BASIC
   b <- rlang::set_names(x$basic, x$npi) |>
-    collapse::unlist2d(idcols = c("npi", "var")) |>
-    collapse::qTBL()
+    collapse::unlist2d(idcols = c("npi", "var"))
 
   if (!no_rows(b)) {
     collapse::recode_char(
@@ -259,7 +266,7 @@ nppes_entity_2 <- function(x) {
       "authorized_official_first_name" = "first",
       "authorized_official_last_name" = "last",
       "organization_name" = "org_name",
-      "organizational_subpart" = "subpart",
+      "organizational_subpart" = "type",
       fixed = TRUE,
       set = TRUE
     )
@@ -280,12 +287,19 @@ nppes_entity_2 <- function(x) {
         values = "V1",
         check.dups = TRUE
       ) |>
-      rc_bin("subpart") |>
+      rc_bin("type") |>
       rc_ymd(c("enum_date", "cert_date", "updated"))
 
     collapse::settransformv(b, "npi", as.integer)
 
-    k <- collapse::join(k, b, on = "npi", multiple = TRUE, verbose = 0L)
+    b$type <- cheapr::if_else_(b$type == 1L, "Org Subpart", NA_character_)
+    b$cred <- glue::glue("{b$cred} {b$title}", .na = "") |>
+      as.character() |>
+      stringr::str_squish()
+
+    b$title <- NULL
+
+    k <- join2(k, b, on = "npi")
   }
 
   # OTHER NAMES
@@ -298,13 +312,13 @@ nppes_entity_2 <- function(x) {
       collapse::qTBL() |>
       collapse::rnm("name" = "organization_name", .nse = FALSE) |>
       collapse::gv(c("npi", "code", "name")) |>
-      collapse::add_stub(stub = "o_", cols = -1)
+      collapse::add_stub(stub = "other_", cols = -1)
 
-    collapse::settransformv(o, "o_code", as.integer)
+    collapse::settransformv(o, "other_code", as.integer)
     collapse::settransformv(o, "npi", as.character)
     collapse::settransformv(o, "npi", as.integer)
 
-    k <- collapse::join(k, o, on = "npi", verbose = 0L)
+    k <- join2(k, o, on = "npi")
   }
 
   # IDENTIFIERS
@@ -322,7 +336,7 @@ nppes_entity_2 <- function(x) {
     collapse::settransformv(i, "npi", as.character)
     collapse::settransformv(i, "npi", as.integer)
 
-    k <- collapse::join(k, i, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, i, on = "npi")
   }
 
   # TAXONOMY
@@ -332,9 +346,8 @@ nppes_entity_2 <- function(x) {
   if (!rlang::is_empty(t)) {
     t <- collapse::rowbind(t, idcol = "npi", fill = TRUE) |>
       collapse::recode_char("--" = NA_character_) |>
-      provider:::replace_nz() |>
-      provider:::rc_trim() |>
-      collapse::qTBL() |>
+      replace_nz() |>
+      rc_trim() |>
       collapse::rnm(
         "group" = "taxonomy_group",
         "prime" = "primary",
@@ -346,7 +359,7 @@ nppes_entity_2 <- function(x) {
     collapse::settransformv(t, "npi", as.character)
     collapse::settransformv(t, "npi", as.integer)
 
-    k <- collapse::join(k, t, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, t, on = "npi")
   }
 
   # PRACTICE LOCATIONS
@@ -400,7 +413,7 @@ nppes_entity_2 <- function(x) {
     if (!rlang::is_empty(l)) {
       a <- collapse::rowbind(a, l)
     }
-    k <- collapse::join(k, a, on = "npi", multiple = TRUE, verbose = 0L)
+    k <- join2(k, a, on = "npi")
   }
   return(k)
 }

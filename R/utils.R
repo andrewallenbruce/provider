@@ -161,7 +161,13 @@ set_names2 <- function(x, y, ...) {
 
 #' @noRd
 rowbind2 <- function(x, nm = NULL, fill = FALSE) {
-  collapse::rowbind(x, idcol = nm, id.factor = FALSE, return = 4L, fill = fill)
+  collapse::rowbind(
+    x,
+    idcol = nm,
+    id.factor = FALSE,
+    return = 4L,
+    fill = fill
+  )
 }
 
 #' @noRd
