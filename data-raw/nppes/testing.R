@@ -21,7 +21,7 @@ kindbody <- c(
 
 library(collapse)
 library(pillar)
-library(provider)
+# library(provider)
 
 npi <- c(
   1851713903,

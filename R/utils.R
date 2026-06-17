@@ -198,6 +198,11 @@ all2 <- function(x) {
 }
 
 #' @noRd
+which2 <- function(x, negate = FALSE) {
+  collapse::whichv(x, TRUE, invert = negate)
+}
+
+#' @noRd
 plus <- function(x) {
   gsub(" ", "+", x, fixed = TRUE)
 }

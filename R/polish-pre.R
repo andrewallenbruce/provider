@@ -45,17 +45,7 @@ quality_get <- function(x, y) {
 }
 
 #' @noRd
-nppes_entity_1 <- function(x) {
-  x <- collapse::ss(x, x[["entity"]] == 1L)
-
-  if (no_rows(x)) {
-    return(NULL)
-  }
-
-  # KEY
-  k <- collapse::ss(x, j = c("npi", "entity"))
-
-  # BASIC
+nppes_basic <- function(x, key, entity) {
   b <- rlang::set_names(x$basic, x$npi) |>
     collapse::unlist2d(idcols = c("npi", "var"))
 
@@ -70,6 +60,12 @@ nppes_entity_1 <- function(x) {
       "credential" = "cred",
       "first_name" = "first",
       "last_name" = "last",
+      "authorized_official_credential" = "cred",
+      "authorized_official_title_or_position" = "title",
+      "authorized_official_first_name" = "first",
+      "authorized_official_last_name" = "last",
+      "organization_name" = "org_name",
+      "organizational_subpart" = "type",
       fixed = TRUE,
       set = TRUE
     )
@@ -78,7 +74,11 @@ nppes_entity_1 <- function(x) {
       "status",
       "name_prefix",
       "name_suffix",
-      "middle_name"
+      "middle_name",
+      "authorized_official_name_prefix",
+      "authorized_official_name_suffix",
+      "authorized_official_middle_name",
+      "authorized_official_telephone_number"
     )
 
     b <- collapse::ss(b, b[["var"]] %!iin% remove) |>
@@ -93,17 +93,47 @@ nppes_entity_1 <- function(x) {
       rc_ymd(c("enum_date", "cert_date", "updated"))
 
     collapse::settransformv(b, "npi", as.integer)
+    collapse::settransformv(b, "type", as.character)
 
-    b$cred <- gsub(".", "", b$cred, fixed = TRUE)
+    if (entity == 1) {
+      collapse::setv(b[["type"]], "1", "Sole Proprietor")
+    }
 
-    b$type <- cheapr::if_else_(
-      b$type == 1L,
-      "Sole Proprietor",
-      NA_character_
-    )
+    if (entity == 2) {
+      collapse::setv(b[["type"]], "1", "Org Subpart")
 
-    k <- join2(k, b, on = "npi")
+      collapse::gv(b, "cred") <- glue::glue(
+        "{b$cred} {b$title}",
+        .na = ""
+      ) |>
+        as.character() |>
+        stringr::str_squish()
+
+      collapse::gv(b, "title") <- NULL
+    }
+
+    b[["type"]] <- cheapr::val_replace(b[["type"]], "0", NA_character_)
+    b[["cred"]] <- gsub(".", "", b[["cred"]], fixed = TRUE) |>
+      stringr::str_squish()
+
+    key <- join2(key, b, on = "npi")
   }
+  return(key)
+}
+
+#' @noRd
+nppes_entity_1 <- function(x) {
+  x <- collapse::ss(x, x[["entity"]] == 1L)
+
+  if (no_rows(x)) {
+    return(NULL)
+  }
+
+  # KEY
+  k <- collapse::ss(x, j = c("npi", "entity"))
+
+  # BASIC
+  k <- nppes_basic(x, k, 1)
 
   # OTHER NAMES
   o <- rlang::set_names(x$other, x$npi) |>
@@ -251,56 +281,7 @@ nppes_entity_2 <- function(x) {
   k <- collapse::ss(x, j = c("npi", "entity"))
 
   # BASIC
-  b <- rlang::set_names(x$basic, x$npi) |>
-    collapse::unlist2d(idcols = c("npi", "var"))
-
-  if (!no_rows(b)) {
-    collapse::recode_char(
-      b,
-      "--" = NA_character_,
-      "certification_date" = "cert_date",
-      "enumeration_date" = "enum_date",
-      "last_updated" = "updated",
-      "authorized_official_credential" = "cred",
-      "authorized_official_title_or_position" = "title",
-      "authorized_official_first_name" = "first",
-      "authorized_official_last_name" = "last",
-      "organization_name" = "org_name",
-      "organizational_subpart" = "type",
-      fixed = TRUE,
-      set = TRUE
-    )
-
-    remove <- c(
-      "status",
-      "authorized_official_name_prefix",
-      "authorized_official_name_suffix",
-      "authorized_official_middle_name",
-      "authorized_official_telephone_number"
-    )
-
-    b <- collapse::ss(b, b[["var"]] %!iin% remove) |>
-      collapse::pivot(
-        ids = "npi",
-        how = "w",
-        names = "var",
-        values = "V1",
-        check.dups = TRUE
-      ) |>
-      rc_bin("type") |>
-      rc_ymd(c("enum_date", "cert_date", "updated"))
-
-    collapse::settransformv(b, "npi", as.integer)
-
-    b$type <- cheapr::if_else_(b$type == 1L, "Org Subpart", NA_character_)
-    b$cred <- glue::glue("{b$cred} {b$title}", .na = "") |>
-      as.character() |>
-      stringr::str_squish()
-
-    b$title <- NULL
-
-    k <- join2(k, b, on = "npi")
-  }
+  k <- nppes_basic(x, k, 2)
 
   # OTHER NAMES
   o <- rlang::set_names(x$other, x$npi) |>

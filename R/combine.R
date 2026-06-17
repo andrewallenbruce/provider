@@ -105,3 +105,44 @@ rc_ptype <- function(x) {
 
   return(x)
 }
+
+# rc_combine_na <- function(x, col_1, col_2) {
+#   col1_is <- cheapr::is_na(x[[col_1]])
+#   col1_no <- !cheapr::is_na(x[[col_1]])
+#
+#   col2_is <- cheapr::is_na(x[[col_2]])
+#   col2_no <- !cheapr::is_na(x[[col_2]])
+#
+#   i <- cheapr::which_(col1_no)
+#
+#   if (rlang::is_empty(i)) {
+#     collapse::gv(x, col_1) <- NULL
+#     return(x)
+#   }
+#
+#   i <- cheapr::which_(e1_not & !cheapr::is_na(x[[e2]]))
+#
+#   if (!rlang::is_empty(i)) {
+#     collapse::gv(x[i, ], e2) <- rc_combine(
+#       collapse::ss(
+#         x,
+#         i,
+#         c(e1, e2)
+#       ),
+#       e2,
+#       e1
+#     )
+#   }
+#
+#   i <- cheapr::which_(e1_not & cheapr::is_na(x[[e2]]))
+#
+#   if (!rlang::is_empty(i)) {
+#     collapse::gv(x[i, ], e2) <- unlist_(
+#       collapse::ss(x, i, e1)
+#     )
+#   }
+#
+#   collapse::gv(x, e1) <- NULL
+#
+#   return(x)
+# }
