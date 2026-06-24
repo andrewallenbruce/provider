@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9264 (2026-06-24)
+
+- offset tests, nocov directives
+
 ## provider 0.0.1.9263 (2026-06-24)
 
 - removed intermediate object creation during count/request process
