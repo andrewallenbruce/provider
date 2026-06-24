@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9263 (2026-06-24)
+
+- removed intermediate object creation during count/request process
+
 ## provider 0.0.1.9262 (2026-06-24)
 
 - need to rethink cred polishing

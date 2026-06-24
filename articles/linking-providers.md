@@ -15,9 +15,9 @@ x <- affiliations(pac = 7810891009)
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
   organization = hospitals(ccn = x$fac_ccn))
-#> ✔ hospitals returned 5 results
-#> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 5 results
+#> Warning: Unknown or uninitialised column: `fac_ccn`.
+#> ✔ Returning first 10 rows
+#> ✔ hospitals2 returned 9 results
 #> ✔ Retrieving 1 page
 x
 #> $individual
@@ -28,14 +28,19 @@ x
 #> pac   7810891009
 #> 
 #> $organization
-#> # A tibble: 5 × 18
-#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
-#>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-#> 1 CHAMPLAIN V… THE UN… O201… 1.03e9     0 3302… 2769… 1926-01-01 Corpora… Volun…
-#> 2 ALICE HYDE … THE UN… O202… 1.11e9     0 3313… 4082… 1905-04-13 Corpora… Volun…
-#> 3 CENTRAL VER… NA      O200… 1.51e9     0 4700… 9335… 1984-03-01 Corpora… Volun…
-#> 4 UNIVERSITY … UNIVER… O200… 1.57e9     0 4700… 3779… 1995-01-01 Corpora… Volun…
-#> 5 PORTER HOSP… NA      O200… 1.74e9     1 4713… 1850… 1986-11-14 Corpora… Volun…
+#> # A tibble: 10 × 18
+#>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
+#>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
+#>  1 SOUTHERN T… HIGHPO… O200… 1.47e9     0 4400… 5193… 1998-11-09 LLC      Propr…
+#>  2 CENTRAL MA… NA      O200… 1.69e9     0 2000… 2567… 1888-01-01 Corpora… Volun…
+#>  3 ADCARE HOS… ADCARE… O200… 1.13e9     0 2200… 8325… NA         Corpora… Propr…
+#>  4 CAPE COD H… CAPE C… O200… 1.11e9     0 2200… 8921… 1919-08-22 Corpora… Volun…
+#>  5 CARRINGTON… CHI ST… O200… 1.21e9     0 3513… 0547… 1986-06-30 Corpora… Volun…
+#>  6 SELECT SPE… SELECT… O200… 1.59e9     0 1120… 6002… 2001-12-05 Corpora… For-P…
+#>  7 THE FINLEY… FINLEY… O200… 1.94e9     0 1601… 5092… NA         Corpora… Volun…
+#>  8 ST CHARLES… NA      O200… 1.16e9     0 3302… 6103… 1958-09-30 Corpora… Volun…
+#>  9 WASHINGTON… NA      O200… 1.08e9     0 0400… 7214… NA         Other: … Volun…
+#> 10 ARIZONA SP… NA      O200… 1.40e9     0 0301… 4486… 2000-10-26 LLC      Physi…
 #> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
 
@@ -163,33 +168,18 @@ providers practicing at this hospital. First, the all-numeric CCN
 ``` r
 
 x <- affiliations(fac_ccn = 331302)
-#> ✔ affiliations returned 329 results
-#> ✔ Retrieving 1 page
+#> Error in `affiliations()`:
+#> ! unused argument (fac_ccn = 331302)
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))),
   individual = unique(x[1:4]))
 #> $organization
-#>                  V1
-#> fac_type   Hospital
-#> fac_ccn      331302
-#> parent_ccn     <NA>
+#>     V1
+#> 1 <NA>
 #> 
 #> $individual
-#> # A tibble: 329 × 4
-#>    first   last                  npi pac       
-#>    <chr>   <chr>               <int> <chr>     
-#>  1 STACI   CARTER-KELLY   1003029125 6204824378
-#>  2 DYLAN   ESTES          1003278144 6608167523
-#>  3 ARMIN   AFSAR KESHMIRI 1003815184 4082693676
-#>  4 LAURA   GREENE         1003845272 1759384035
-#>  5 DEBORAH KAMPSCHROR     1013141860 8022069558
-#>  6 NAROD   VASSILIAN      1013539584 9133544109
-#>  7 EMILY   TRIPLETT       1013595560 3375947401
-#>  8 BARDIA  BARIMANI       1013793736 9436503646
-#>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371
-#> 10 LINDSEY WILHELM        1023377843 6901115278
-#> # ℹ 319 more rows
+#> [1] "Elizabethtown Community Hospital" NA
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -198,28 +188,18 @@ search the alphanumeric CCN (`33Z302`):
 ``` r
 
 x <- affiliations(fac_ccn = "33Z302")
-#> ✔ affiliations returned 6 results
-#> ✔ Retrieving 1 page
+#> Error in `affiliations()`:
+#> ! unused argument (fac_ccn = "33Z302")
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))), 
   individual = unique(x[1:4]))
 #> $organization
-#>                      V1
-#> fac_type   Nursing home
-#> fac_ccn          33Z302
-#> parent_ccn       331302
+#>     V1
+#> 1 <NA>
 #> 
 #> $individual
-#> # A tibble: 6 × 4
-#>   first   last            npi pac       
-#>   <chr>   <chr>         <int> <chr>     
-#> 1 JEFFREY KLOTZ    1073258398 3870095805
-#> 2 CARLOS  MARTINEZ 1154332062 5890739734
-#> 3 MARY    HALLORAN 1396989059 8921259557
-#> 4 IL      CHON     1538173869 0547299091
-#> 5 DRAGOS  BANU     1558659367 6709004682
-#> 6 JOSHUA  WARNER   1760167712 8123473469
+#> [1] "Elizabethtown Community Hospital" NA
 ```
 
 That returns more affiliated individual providers that practice in the
