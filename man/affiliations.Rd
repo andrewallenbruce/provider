@@ -15,7 +15,7 @@ affiliations(
   first = NULL,
   last = NULL,
   fac_type = NULL,
-  fac_ccn = NULL,
+  ccn = NULL,
   parent_ccn = NULL,
   count = FALSE
 )
@@ -39,7 +39,7 @@ affiliations(
 \item \code{snf} = Skilled nursing facility
 }}
 
-\item{fac_ccn}{\verb{<chr>} CCN of \code{fac_type} column's
+\item{ccn}{\verb{<chr>} CCN of \code{fac_type} column's
 facility \strong{or} of a \strong{unit} within the hospital where the individual
 provider provides services.}
 
@@ -57,7 +57,7 @@ affiliations with organizations/facilities.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+affiliations(ccn = 331302)
 affiliations(parent_ccn = 331302)
-affiliations(fac_ccn = 331302)
 \dontshow{\}) # examplesIf}
 }

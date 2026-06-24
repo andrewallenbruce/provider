@@ -102,7 +102,7 @@ RE_NAME = list(
     npi = "npi",
     ind_pac_id = "pac",
     facility_type = "fac_type",
-    facility_affiliations_certification_number = "fac_ccn",
+    facility_affiliations_certification_number = "ccn",
     facility_type_certification_number = "parent_ccn"
   ),
   clia = list(

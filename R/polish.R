@@ -17,6 +17,19 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 #' @noRd
 S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
+  collapse::recode_char(
+    x[["facility_type"]],
+    "Dialysis facility" = "ESRD",
+    "Home health agency" = "HHA",
+    "Hospice" = "Hospice",
+    "Hospital" = "Hospital",
+    "Inpatient rehabilitation facility" = "IRF",
+    "Long-term care hospital" = "LTCH",
+    "Nursing home" = "NH",
+    "Skilled nursing facility" = "SNF",
+    default = NA_character_,
+    set = TRUE
+  )
   set_rename(x)
   get_columns(x)
 }
@@ -41,7 +54,6 @@ S7::method(polish, s3_clinicians) <- function(x) {
   get_columns(x) |>
     rc_combine("address", "add_2") |>
     rc_combine("specialty", "spec_other")
-  # rm_period("cred")
 }
 
 #' @noRd
@@ -204,8 +216,6 @@ S7::method(polish, s3_utilization) <- function(x) {
     ),
     as.double
   )
-
-  # x <- rm_period(x, "cred")
 
   set_rename(x)
   get_columns(x) |>

@@ -29,3 +29,6 @@ rlang::call_modify(
   ptb = FALSE
 ) |>
   rlang::eval_bare()
+
+x <- affiliations(parent_ccn = between(370001, 370200))
+collapse::roworderv(x, "parent_ccn")

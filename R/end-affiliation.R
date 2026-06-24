@@ -18,7 +18,7 @@
 #'    - `ltch` = Long-term care hospital
 #'    - `nurse` = Nursing home
 #'    - `snf` = Skilled nursing facility
-#' @param fac_ccn `<chr>` CCN of `fac_type` column's
+#' @param ccn `<chr>` CCN of `fac_type` column's
 #'    facility **or** of a **unit** within the hospital where the individual
 #'    provider provides services.
 #' @param parent_ccn `<int>` CCN of the **primary** hospital containing the
@@ -26,8 +26,8 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
+#' affiliations(ccn = 331302)
 #' affiliations(parent_ccn = 331302)
-#' affiliations(fac_ccn = 331302)
 #' @export
 affiliations <- function(
   npi = NULL,
@@ -35,7 +35,7 @@ affiliations <- function(
   first = NULL,
   last = NULL,
   fac_type = NULL,
-  fac_ccn = NULL,
+  ccn = NULL,
   parent_ccn = NULL,
   count = FALSE
 ) {
@@ -49,7 +49,7 @@ affiliations <- function(
     provider_first_name = first,
     provider_last_name = last,
     facility_type = tag_enum(fac_type),
-    facility_affiliations_certification_number = fac_ccn,
+    facility_affiliations_certification_number = ccn,
     facility_type_certification_number = parent_ccn
   )
 

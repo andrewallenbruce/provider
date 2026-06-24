@@ -54,9 +54,7 @@ cms <- function(
     action = count_set(count, set)
   )
 
-  x <- count(x)
-
-  return(x)
+  count(x)
 }
 
 #' @noRd
@@ -84,11 +82,9 @@ S7::method(count, EndpointCMS) <- function(x) {
 S7::method(preview, EndpointCMS) <- function(x) {
   report_preview()
 
-  x <- flatten_cms(x@url, NULL, size = 10L) |>
+  flatten_cms(x@url, NULL, size = 10L) |>
     base_request() |>
     add_class(x@end)
-
-  return(x)
 }
 
 #' @noRd
@@ -96,11 +92,9 @@ S7::method(request_single, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  x <- flatten_cms(x@url, x@query) |>
+  flatten_cms(x@url, x@query) |>
     base_request() |>
     add_class(x@end)
-
-  return(x)
 }
 
 #' @noRd
@@ -108,9 +102,7 @@ S7::method(request_multi, EndpointCMS) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  x <- flatten_cms(x@url, x@query, offset = "<<i>>") |>
+  flatten_cms(x@url, x@query, offset = "<<i>>") |>
     base_parallel(x@count, x@limit) |>
     add_class(x@end)
-
-  return(x)
 }

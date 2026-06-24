@@ -14,7 +14,7 @@ URL: https://andrewallenbruce.github.io/provider/,
     https://github.com/andrewallenbruce/provider
 BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 Imports: 
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),

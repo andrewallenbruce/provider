@@ -90,10 +90,7 @@ nppes_basic <- function(x, key, entity) {
 
       collapse::gv(b, "title") <- NULL
     }
-
     b[["sub_type"]] <- cheapr::val_replace(b[["sub_type"]], "0", NA_character_)
-    # b <- rm_period(b, "cred") |> stringr::str_squish()
-
     key <- join2(key, b, on = "npi")
   }
   return(key)
@@ -118,8 +115,6 @@ nppes_other <- function(x, key, entity) {
         "last_name" = "last",
         .nse = FALSE
       )
-
-      # o <- rm_period(o, "cred")
 
       o[["name"]] <- glue::glue(
         "{o$first} {o$middle} {o$last} {o$cred}",

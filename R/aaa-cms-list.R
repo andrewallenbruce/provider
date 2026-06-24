@@ -81,9 +81,7 @@ cms_list <- function(
     action = count_set(count, set)
   )
 
-  x <- count(x)
-
-  return(x)
+  count(x)
 }
 
 #' @include aaa-generics.R
@@ -103,14 +101,12 @@ S7::method(count, EndpointCMSList) <- function(x) {
 S7::method(preview, EndpointCMSList) <- function(x) {
   report_preview()
 
-  x <- flatten_cms(x@url, NULL, size = 10L) |>
+  flatten_cms(x@url, NULL, size = 10L) |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     set_names2(x@url) |>
     add_class2(x@end)
-
-  return(x)
 }
 
 #' @noRd
@@ -120,14 +116,12 @@ S7::method(request_single, EndpointCMSList) <- function(x) {
 
   u <- x@url[names(which(x@count > 0L))]
 
-  x <- flatten_cms(u, x@query) |>
+  flatten_cms(u, x@query) |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     set_names2(u) |>
     add_class2(x@end)
-
-  return(x)
 }
 
 #' @noRd
@@ -139,7 +133,7 @@ S7::method(request_multi, EndpointCMSList) <- function(x) {
   u <- x@url[i]
   n <- unname(x@count[i])
 
-  x <- flatten_cms(u, x@query, offset = "<<i>>") |>
+  flatten_cms(u, x@query, offset = "<<i>>") |>
     offset3(n, x@limit) |>
     unlist_() |>
     purrr::map(httr2::request) |>
@@ -147,6 +141,4 @@ S7::method(request_multi, EndpointCMSList) <- function(x) {
     purrr::map(parse_string) |>
     set_names2(u) |>
     add_class2(x@end)
-
-  return(x)
 }
