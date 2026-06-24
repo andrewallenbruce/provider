@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9262 (2026-06-24)
+
+- need to rethink cred polishing
+
 ## provider 0.0.1.9261 (2026-06-24)
 
 - nppes addresses

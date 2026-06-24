@@ -162,23 +162,23 @@ Medicare program.
 nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 #> $type_1
 #> # A tibble: 15 × 27
-#>           npi entity cred     enum_date  first   last  updated    sex   sub_type
-#>         <int>  <int> <chr>    <date>     <chr>   <chr> <date>     <chr> <chr>   
-#>  1 1851713903      1 MSW      2014-01-08 JOSEFI… DANW… 2014-01-16 F     Sole Pr…
-#>  2 1851713903      1 MSW      2014-01-08 JOSEFI… DANW… 2014-01-16 F     Sole Pr…
-#>  3 1588817837      1 RN       2008-10-30 JOSEPH… DAPA… 2008-10-30 F     NA      
-#>  4 1588817837      1 RN       2008-10-30 JOSEPH… DAPA… 2008-10-30 F     NA      
-#>  5 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
-#>  6 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
-#>  7 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
-#>  8 1255877502      1 MA BCBA  2017-01-10 JOSEPH… DE L… 2018-03-27 F     NA      
-#>  9 1255877502      1 MA BCBA  2017-01-10 JOSEPH… DE L… 2018-03-27 F     NA      
-#> 10 1841008505      1 ALC, NCC 2024-12-26 JOSIE   DAVI… 2024-12-26 F     Sole Pr…
-#> 11 1841008505      1 ALC, NCC 2024-12-26 JOSIE   DAVI… 2024-12-26 F     Sole Pr…
-#> 12 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
-#> 13 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
-#> 14 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
-#> 15 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
+#>           npi entity cred      enum_date  first  last  updated    sex   sub_type
+#>         <int>  <int> <chr>     <date>     <chr>  <chr> <date>     <chr> <chr>   
+#>  1 1851713903      1 MSW       2014-01-08 JOSEF… DANW… 2014-01-16 F     Sole Pr…
+#>  2 1851713903      1 MSW       2014-01-08 JOSEF… DANW… 2014-01-16 F     Sole Pr…
+#>  3 1588817837      1 RN        2008-10-30 JOSEP… DAPA… 2008-10-30 F     NA      
+#>  4 1588817837      1 RN        2008-10-30 JOSEP… DAPA… 2008-10-30 F     NA      
+#>  5 1255782751      1 MD        2016-06-26 JOSEP… DAVIS 2019-10-31 F     NA      
+#>  6 1255782751      1 MD        2016-06-26 JOSEP… DAVIS 2019-10-31 F     NA      
+#>  7 1255782751      1 MD        2016-06-26 JOSEP… DAVIS 2019-10-31 F     NA      
+#>  8 1255877502      1 M.A. BCBA 2017-01-10 JOSEP… DE L… 2018-03-27 F     NA      
+#>  9 1255877502      1 M.A. BCBA 2017-01-10 JOSEP… DE L… 2018-03-27 F     NA      
+#> 10 1841008505      1 ALC, NCC  2024-12-26 JOSIE  DAVI… 2024-12-26 F     Sole Pr…
+#> 11 1841008505      1 ALC, NCC  2024-12-26 JOSIE  DAVI… 2024-12-26 F     Sole Pr…
+#> 12 1003826272      1 MD        2006-08-09 JO     DEAL  2024-05-07 F     NA      
+#> 13 1003826272      1 MD        2006-08-09 JO     DEAL  2024-05-07 F     NA      
+#> 14 1003826272      1 MD        2006-08-09 JO     DEAL  2024-05-07 F     NA      
+#> 15 1003826272      1 MD        2006-08-09 JO     DEAL  2024-05-07 F     NA      
 #> # ℹ 18 more variables: cert_date <date>, other_type <int>, other_name <chr>,
 #> #   id_type <int>, id_code <chr>, id_issuer <chr>, id_state <chr>,
 #> #   tax_code <chr>, tax_desc <chr>, tax_license <chr>, tax_prim <int>,

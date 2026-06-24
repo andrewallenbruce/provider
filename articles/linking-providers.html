@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9261</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9262</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,24 @@
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt;  chr "MD"</span></span></code></pre></div>
+<span><span class="co">#&gt; clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ first    : chr "MARK"</span></span>
+<span><span class="co">#&gt;  $ last     : chr "FUNG"</span></span>
+<span><span class="co">#&gt;  $ gender   : chr "M"</span></span>
+<span><span class="co">#&gt;  $ cred     : chr "MD"</span></span>
+<span><span class="co">#&gt;  $ school   : chr "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"</span></span>
+<span><span class="co">#&gt;  $ year     : int 1999</span></span>
+<span><span class="co">#&gt;  $ specialty: chr "PATHOLOGY"</span></span>
+<span><span class="co">#&gt;  $ npi      : int 1043245657</span></span>
+<span><span class="co">#&gt;  $ pac      : chr "7810891009"</span></span>
+<span><span class="co">#&gt;  $ enid     : chr "I20031120000251"</span></span>
+<span><span class="co">#&gt;  $ org_name : chr "UNIVERSITY OF VERMONT MEDICAL CENTER INC"</span></span>
+<span><span class="co">#&gt;  $ org_pac  : chr "3779491071"</span></span>
+<span><span class="co">#&gt;  $ members  : int 1194</span></span>
+<span><span class="co">#&gt;  $ address  : chr "111 COLCHESTER AVE"</span></span>
+<span><span class="co">#&gt;  $ city     : chr "BURLINGTON"</span></span>
+<span><span class="co">#&gt;  $ state    : chr "VT"</span></span>
+<span><span class="co">#&gt;  $ zip      : chr "054011473"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="organizational-provider">Organizational Provider<a class="anchor" aria-label="anchor" href="#organizational-provider"></a>
@@ -181,7 +198,24 @@
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">78</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt;  chr [1:78] "MD" "MD" "MD" "MD" "MD" "MD" "MD" "NP" "NP" "MD" "MD" "MD" ...</span></span>
+<span><span class="co">#&gt; clinicns [78 × 17] (S3: clinicians/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ first    : chr [1:78] "GAVIN" "JOSEPH" "BENJAMIN" "DMITRIY" ...</span></span>
+<span><span class="co">#&gt;  $ last     : chr [1:78] "NOBLE" "PEKALA" "SAWATZKY" "AKSELROD" ...</span></span>
+<span><span class="co">#&gt;  $ gender   : chr [1:78] "M" "M" "M" "M" ...</span></span>
+<span><span class="co">#&gt;  $ cred     : chr [1:78] "MD" "MD" "MD" "MD" ...</span></span>
+<span><span class="co">#&gt;  $ school   : chr [1:78] "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" "OTHER" "TEMPLE UNIVERSITY SCHOOL OF MEDICINE" "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" ...</span></span>
+<span><span class="co">#&gt;  $ year     : int [1:78] 1999 1999 2014 2007 2009 2009 1992 2023 2014 1996 ...</span></span>
+<span><span class="co">#&gt;  $ specialty: chr [1:78] "CARDIOVASCULAR DISEASE (CARDIOLOGY), INTERNAL MEDICINE" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" ...</span></span>
+<span><span class="co">#&gt;  $ npi      : int [1:78] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 ...</span></span>
+<span><span class="co">#&gt;  $ pac      : chr [1:78] "6002861804" "3274579073" "0345559357" "4385805696" ...</span></span>
+<span><span class="co">#&gt;  $ enid     : chr [1:78] "I20200824000234" "I20050701000411" "I20200715002569" "I20170524000768" ...</span></span>
+<span><span class="co">#&gt;  $ org_name : chr [1:78] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" ...</span></span>
+<span><span class="co">#&gt;  $ org_pac  : chr [1:78] "3577554138" "3577554138" "3577554138" "3577554138" ...</span></span>
+<span><span class="co">#&gt;  $ members  : int [1:78] 54 54 54 54 54 54 54 54 54 54 ...</span></span>
+<span><span class="co">#&gt;  $ address  : chr [1:78] "101 ADIRONDACK DR, SUITE 1" "108 PRESTON RD" "119 BRADLEY LN" "1355 CHURCH HILL RD" ...</span></span>
+<span><span class="co">#&gt;  $ city     : chr [1:78] "TICONDEROGA" "LYME" "WILLISTON" "CHARLOTTE" ...</span></span>
+<span><span class="co">#&gt;  $ state    : chr [1:78] "NY" "NH" "VT" "VT" ...</span></span>
+<span><span class="co">#&gt;  $ zip      : chr [1:78] "128839334" "037683508" "054957007" "054459594" ...</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="color: #BBBB00; font-weight: bold;">398</span> results</span></span>
