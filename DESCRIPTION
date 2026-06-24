@@ -19,7 +19,7 @@ Imports:
     cheapr (>= 1.5.1),
     cli (>= 3.6.6),
     collapse (>= 2.1.7),
-    httr2 (>= 1.2.2),
+    httr2 (>= 1.2.3),
     memoise (>= 2.0.1),
     purrr (>= 1.2.2),
     RcppSimdJson (>= 0.1.15),
@@ -32,7 +32,7 @@ Suggests:
     testthat (>= 3.3.2),
     tibble (>= 3.3.1),
     vcr (>= 2.1.0),
-    withr (>= 3.0.2)
+    withr (>= 3.0.3)
 VignetteBuilder: 
     knitr
 Config/Needs/website: tibble
@@ -80,7 +80,8 @@ Collate:
     'modifiers.R'
     'offset.R'
     'pivot.R'
-    'polish-pre.R'
+    'polish-nppes.R'
+    'polish-quality.R'
     'polish.R'
     'provider-package.R'
     'query.R'

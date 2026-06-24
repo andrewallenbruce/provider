@@ -90,31 +90,6 @@ S7::method(polish, s3_hospitals2) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_nppes) <- function(x) {
-  collapse::gvr(x, "_epoch$|^endpoints$") <- NULL
-  collapse::setv(x[["enumeration_type"]], "NPI-1", "1")
-  collapse::setv(x[["enumeration_type"]], "NPI-2", "2")
-  collapse::settfmv(x, c("number", "enumeration_type"), as.integer)
-
-  collapse::recode_char(
-    colnames(x),
-    "number" = "npi",
-    "enumeration_type" = "entity",
-    "practiceLocations" = "location",
-    "identifiers" = "id",
-    "other_names" = "other",
-    "taxonomies" = "taxonomy",
-    "addresses" = "address",
-    set = TRUE
-  )
-
-  list(
-    type_1 = nppes_entity_1(x),
-    type_2 = nppes_entity_2(x)
-  )
-}
-
-#' @noRd
 S7::method(polish, s3_opt_out) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
@@ -183,17 +158,6 @@ S7::method(polish, s3_providers) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_bin("multi")
-}
-
-#' @noRd
-S7::method(polish, s3_quality) <- function(x) {
-  x <- c(2017, 2022, 2023) |>
-    purrr::map(\(year) quality_get(x, year)) |>
-    collapse::rowbind(fill = TRUE) |>
-    add_class("quality")
-
-  x <- recode(x)
-  collapse::roworderv(x, c("npi", "year"))
 }
 
 #' @noRd

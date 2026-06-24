@@ -37,7 +37,7 @@ npi <- c(
 ) |>
   collapse::funique()
 
-x <- nppes(npi_test)
+x <- nppes(npi)
 y <- nppes(unique(x$type_2$npi))
 y
 z <- nppes(unique(x$type_1$npi))
