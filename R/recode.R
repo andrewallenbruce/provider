@@ -1,4 +1,9 @@
 #' @noRd
+rm_period <- function(x, col = "cred") {
+  gsub(".", "", x[[col]], fixed = TRUE)
+}
+
+#' @noRd
 set_nz <- function(x) {
   collapse::setv(x, "", NA_character_)
 }
@@ -66,46 +71,6 @@ recast <- function(.data, ...) {
   res <- collapse::ftransformv(.data, ...)
   assign(name, res, envir = parent.frame(3L))
   invisible(res)
-}
-
-#' @noRd
-S7::method(recode, s3_hospitals) <- function(x) {
-  recast(x, "NPI", as.integer)
-  collapse::recode_char(
-    x[["PROVIDER TYPE CODE"]],
-    "00-24" = "REH",
-    "00-85" = "CAH",
-    default = NA_character_,
-    set = TRUE
-  )
-  collapse::recode_char(
-    x[["PROPRIETARY NONPROFIT"]],
-    "P" = "For-Profit",
-    "N" = "Non-Profit",
-    default = NA_character_,
-    set = TRUE
-  )
-  collapse::recode_char(
-    x[["PRACTICE LOCATION TYPE"]],
-    "MAIN/PRIMARY HOSPITAL LOCATION" = "Primary",
-    "HOSPITAL PSYCHIATRIC UNIT" = "Psychiatric Unit",
-    "HOSPITAL REHABILITATION UNIT" = "Rehabilitation Unit",
-    "HOSPITAL SWING-BED UNIT" = "Swing-Bed Unit",
-    "OPT EXTENSION SITE" = "Opt Extension",
-    "OTHER HOSPITAL PRACTICE LOCATION" = "Other",
-    default = NA_character_,
-    set = TRUE
-  )
-  collapse::recode_char(
-    x[["ORGANIZATION TYPE STRUCTURE"]],
-    "LLC" = "LLC",
-    "CORPORATION" = "Corporation",
-    "OTHER" = "Other",
-    "PARTNERSHIP" = "Partnership",
-    "SOLE PROPRIETOR" = "Sole Proprietor",
-    default = NA_character_,
-    set = TRUE
-  )
 }
 
 #' @noRd
@@ -215,6 +180,70 @@ S7::method(recode, s3_clia) <- function(x) {
     "33" = "Unconfirmed Accred [CLIA]",
     "80" = "State Approval Pending",
     "99" = "OIG [CLIA]",
+    default = NA_character_,
+    set = TRUE
+  )
+}
+
+#' @noRd
+S7::method(recode, s3_hospitals) <- function(x) {
+  recast(x, "NPI", as.integer)
+  collapse::recode_char(
+    x[["PROVIDER TYPE CODE"]],
+    "00-24" = "REH",
+    "00-85" = "CAH",
+    default = NA_character_,
+    set = TRUE
+  )
+  collapse::recode_char(
+    x[["PROPRIETARY NONPROFIT"]],
+    "P" = "For-Profit",
+    "N" = "Non-Profit",
+    default = NA_character_,
+    set = TRUE
+  )
+  collapse::recode_char(
+    x[["PRACTICE LOCATION TYPE"]],
+    "MAIN/PRIMARY HOSPITAL LOCATION" = "Primary",
+    "HOSPITAL PSYCHIATRIC UNIT" = "Psychiatric Unit",
+    "HOSPITAL REHABILITATION UNIT" = "Rehabilitation Unit",
+    "HOSPITAL SWING-BED UNIT" = "Swing-Bed Unit",
+    "OPT EXTENSION SITE" = "Opt Extension",
+    "OTHER HOSPITAL PRACTICE LOCATION" = "Other",
+    default = NA_character_,
+    set = TRUE
+  )
+  collapse::recode_char(
+    x[["ORGANIZATION TYPE STRUCTURE"]],
+    "LLC" = "LLC",
+    "CORPORATION" = "Corporation",
+    "OTHER" = "Other",
+    "PARTNERSHIP" = "Partnership",
+    "SOLE PROPRIETOR" = "Sole Proprietor",
+    default = NA_character_,
+    set = TRUE
+  )
+}
+
+#' @noRd
+S7::method(recode, s3_owner) <- function(x) {
+  recast(x, "PERCENTAGE OWNERSHIP", as.double)
+  collapse::recode_char(
+    x[["ROLE CODE - OWNER"]],
+    "01" = "5%+ Ownership",
+    "03" = "Partner",
+    "25" = "Contracted Mgmt Employee",
+    "34" = "5%+ Ownership (Direct)",
+    "35" = "5%+ Ownership (Indirect)",
+    "36" = "5%+ Mortgage",
+    "37" = "5%+ Security",
+    "38" = "General Partner",
+    "39" = "Limited Partner",
+    "40" = "Officer",
+    "41" = "Director",
+    "42" = "W2 Mgmt Employee",
+    "43" = "Ops/Mgmt Control",
+    "44" = "Other",
     default = NA_character_,
     set = TRUE
   )

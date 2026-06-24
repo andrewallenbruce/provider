@@ -40,7 +40,8 @@ S7::method(polish, s3_clinicians) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_combine("address", "add_2") |>
-    rc_combine("specialty", "spec_other")
+    rc_combine("specialty", "spec_other") |>
+    rm_period("cred")
 }
 
 #' @noRd
@@ -112,27 +113,7 @@ S7::method(polish, s3_owner) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE) |>
     add_class("owner")
 
-  collapse::settfmv(x, "PERCENTAGE OWNERSHIP", as.double)
-  collapse::recode_char(
-    x[["ROLE CODE - OWNER"]],
-    "01" = "5%+ Ownership",
-    "03" = "Partner",
-    "25" = "Contracted Mgmt Employee",
-    "34" = "5%+ Ownership (Direct)",
-    "35" = "5%+ Ownership (Indirect)",
-    "36" = "5%+ Mortgage",
-    "37" = "5%+ Security",
-    "38" = "General Partner",
-    "39" = "Limited Partner",
-    "40" = "Officer",
-    "41" = "Director",
-    "42" = "W2 Mgmt Employee",
-    "43" = "Ops/Mgmt Control",
-    "44" = "Other",
-    default = NA_character_,
-    set = TRUE
-  )
-
+  recode(x)
   set_rename(x)
   get_columns(x) |>
     rc_combine("address", "add_2") |>
@@ -227,5 +208,6 @@ S7::method(polish, s3_utilization) <- function(x) {
   get_columns(x) |>
     rc_bin("participating") |>
     rc_combine("address", "add_2") |>
+    rm_period("cred") |>
     collapse::roworderv(c("year", "npi"))
 }

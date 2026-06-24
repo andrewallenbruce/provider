@@ -23,7 +23,11 @@
 #'
 #'   A solo practitioner is not necessarily a sole proprietor, and vice versa.
 #'   The following factors do not affect whether a sole proprietor is a Type 1
-#'   entity: + Multiple office locations + Having employees + Having an EIN
+#'   entity:
+#'
+#'      * Multiple office locations
+#'      * Having employees
+#'      * Having an EIN
 #'
 #'   __Type 2__: Organizational providers are eligible for _Entity Type 2_ NPIs.
 #'
@@ -82,7 +86,7 @@
 #'    it *is not* `"US"`.
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
+#' nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 #' @export
 nppes <- function(npi) {
   check_numeric(npi)

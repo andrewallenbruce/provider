@@ -81,7 +81,12 @@ while the corporation has its own Type 2 NPI.
 
 A solo practitioner is not necessarily a sole proprietor, and vice versa.
 The following factors do not affect whether a sole proprietor is a Type 1
-entity: + Multiple office locations + Having employees + Having an EIN
+entity:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ * Multiple office locations
+ * Having employees
+ * Having an EIN
+}\if{html}{\out{</div>}}
 
 \strong{Type 2}: Organizational providers are eligible for \emph{Entity Type 2} NPIs.
 
@@ -123,7 +128,7 @@ program.
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
+nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 \dontshow{\}) # examplesIf}
 }
 \references{

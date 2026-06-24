@@ -38,6 +38,22 @@ npi <- c(
   collapse::funique()
 
 x <- nppes(npi)
+x
+
+collapse::ss(
+  x$type_2,
+  j = c(
+    "npi",
+    "address",
+    "location",
+    "city",
+    "state",
+    "zip"
+  )
+) |>
+  collapse::funique() |>
+  print(n = Inf)
+
 y <- nppes(unique(x$type_2$npi))
 y
 z <- nppes(unique(x$type_1$npi))
