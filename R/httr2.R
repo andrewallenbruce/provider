@@ -17,7 +17,7 @@ flatten_url <- function(base, args = NULL, opts = NULL) {
   }
   paste(paste0(base, opts), args, sep = "&")
 }
-
+# nocov start
 #' @noRd
 PS <- function(x, qry = NULL) {
   RcppSimdJson::fparse(httr2::resp_body_string(x), query = qry)
@@ -66,3 +66,4 @@ multi_count <- function(url, nm, query = NULL) {
   purrr::map_int(url, base_request, query = query) |>
     set_names2(nm)
 }
+# nocov end

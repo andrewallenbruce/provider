@@ -18,19 +18,6 @@ count_set <- function(count, set, call = rlang::caller_env()) {
 }
 
 #' @noRd
-check_online <- function(call = rlang::caller_env()) {
-  if (!httr2::is_online()) {
-    cli::cli_abort(
-      c(
-        "You are not online.",
-        "i" = "Check your internet connection."
-      ),
-      call = call
-    )
-  }
-}
-
-#' @noRd
 check_key <- function(
   x,
   arg = rlang::caller_arg(x),
@@ -50,6 +37,20 @@ check_named <- function(x, call = rlang::caller_env()) {
   if (!rlang::is_empty(x) && !all2(rlang::have_name(x))) {
     cli::cli_abort(
       "All arguments of {.obj_type_friendly {x}} must be named",
+      call = call
+    )
+  }
+}
+
+# nocov start
+#' @noRd
+check_online <- function(call = rlang::caller_env()) {
+  if (!httr2::is_online()) {
+    cli::cli_abort(
+      c(
+        "You are not online.",
+        "i" = "Check your internet connection."
+      ),
       call = call
     )
   }
@@ -157,3 +158,4 @@ check_atomic <- function(
     call = call
   )
 }
+# nocov end

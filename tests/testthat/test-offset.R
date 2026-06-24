@@ -1,11 +1,16 @@
 test_that("offset() works correctly", {
-  expect_equal(offset(n = 10000, limit = 50), 201)
-  expect_equal(offset(n = 10000, limit = 5000, "seq"), c(0, 5000, 10000))
+  expect_equal(offset(10000L, 50L), 201L)
+  expect_equal(offset(0L, 50L), 0L)
+  expect_equal(offset(10000L, 5000L, "seq"), c(0L, 5000L, 10000L))
+
+  expect_error(offset(-1L, 0L))
+  expect_error(offset(1L, 0L))
+  expect_error(offset(0L, 0L))
 })
 
 test_that("offset2() works correctly", {
   expect_equal(
-    offset2("url-<<i>>", 10000, 5000),
+    offset2("url-<<i>>", 10000L, 5000L),
     c("url-0", "url-5000", "url-10000")
   )
 })
@@ -17,8 +22,8 @@ test_that("offset3() works correctly", {
         "https://example.com/v1/data?offset=<<i>>&first=John",
         "https://example.com/v2/data?offset=<<i>>&first=John"
       ),
-      c(10000, 20000),
-      5000
+      c(10000L, 20000L),
+      5000L
     ),
     list(
       c(
