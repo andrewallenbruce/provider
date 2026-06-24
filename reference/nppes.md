@@ -108,8 +108,11 @@ NPI while the corporation has its own Type 2 NPI.
 
 A solo practitioner is not necessarily a sole proprietor, and vice
 versa. The following factors do not affect whether a sole proprietor is
-a Type 1 entity: + Multiple office locations + Having employees + Having
-an EIN
+a Type 1 entity:
+
+     * Multiple office locations
+     * Having employees
+     * Having an EIN
 
 **Type 2**: Organizational providers are eligible for *Entity Type 2*
 NPIs.
@@ -156,31 +159,31 @@ Medicare program.
 ## Examples
 
 ``` r
-nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
+nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
 #> $type_1
 #> # A tibble: 15 × 27
-#>           npi entity cred     enum_date  first    last  updated    sex   subtype
-#>         <int>  <int> <chr>    <date>     <chr>    <chr> <date>     <chr> <chr>  
-#>  1 1851713903      1 MSW      2014-01-08 JOSEFINA DANW… 2014-01-16 F     Sole P…
-#>  2 1851713903      1 MSW      2014-01-08 JOSEFINA DANW… 2014-01-16 F     Sole P…
-#>  3 1588817837      1 RN       2008-10-30 JOSEPHI… DAPA… 2008-10-30 F     NA     
-#>  4 1588817837      1 RN       2008-10-30 JOSEPHI… DAPA… 2008-10-30 F     NA     
-#>  5 1255782751      1 MD       2016-06-26 JOSEPHI… DAVIS 2019-10-31 F     NA     
-#>  6 1255782751      1 MD       2016-06-26 JOSEPHI… DAVIS 2019-10-31 F     NA     
-#>  7 1255782751      1 MD       2016-06-26 JOSEPHI… DAVIS 2019-10-31 F     NA     
-#>  8 1255877502      1 MA BCBA  2017-01-10 JOSEPHI… DE L… 2018-03-27 F     NA     
-#>  9 1255877502      1 MA BCBA  2017-01-10 JOSEPHI… DE L… 2018-03-27 F     NA     
-#> 10 1841008505      1 ALC, NCC 2024-12-26 JOSIE    DAVI… 2024-12-26 F     Sole P…
-#> 11 1841008505      1 ALC, NCC 2024-12-26 JOSIE    DAVI… 2024-12-26 F     Sole P…
-#> 12 1003826272      1 MD       2006-08-09 JO       DEAL  2024-05-07 F     NA     
-#> 13 1003826272      1 MD       2006-08-09 JO       DEAL  2024-05-07 F     NA     
-#> 14 1003826272      1 MD       2006-08-09 JO       DEAL  2024-05-07 F     NA     
-#> 15 1003826272      1 MD       2006-08-09 JO       DEAL  2024-05-07 F     NA     
+#>           npi entity cred     enum_date  first   last  updated    sex   sub_type
+#>         <int>  <int> <chr>    <date>     <chr>   <chr> <date>     <chr> <chr>   
+#>  1 1851713903      1 MSW      2014-01-08 JOSEFI… DANW… 2014-01-16 F     Sole Pr…
+#>  2 1851713903      1 MSW      2014-01-08 JOSEFI… DANW… 2014-01-16 F     Sole Pr…
+#>  3 1588817837      1 RN       2008-10-30 JOSEPH… DAPA… 2008-10-30 F     NA      
+#>  4 1588817837      1 RN       2008-10-30 JOSEPH… DAPA… 2008-10-30 F     NA      
+#>  5 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
+#>  6 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
+#>  7 1255782751      1 MD       2016-06-26 JOSEPH… DAVIS 2019-10-31 F     NA      
+#>  8 1255877502      1 MA BCBA  2017-01-10 JOSEPH… DE L… 2018-03-27 F     NA      
+#>  9 1255877502      1 MA BCBA  2017-01-10 JOSEPH… DE L… 2018-03-27 F     NA      
+#> 10 1841008505      1 ALC, NCC 2024-12-26 JOSIE   DAVI… 2024-12-26 F     Sole Pr…
+#> 11 1841008505      1 ALC, NCC 2024-12-26 JOSIE   DAVI… 2024-12-26 F     Sole Pr…
+#> 12 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
+#> 13 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
+#> 14 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
+#> 15 1003826272      1 MD       2006-08-09 JO      DEAL  2024-05-07 F     NA      
 #> # ℹ 18 more variables: cert_date <date>, other_type <int>, other_name <chr>,
 #> #   id_type <int>, id_code <chr>, id_issuer <chr>, id_state <chr>,
 #> #   tax_code <chr>, tax_desc <chr>, tax_license <chr>, tax_prim <int>,
-#> #   tax_state <chr>, tax_group <chr>, address <chr>, purpose <chr>, city <chr>,
-#> #   zip <chr>, state <chr>
+#> #   tax_state <chr>, tax_group <chr>, address <chr>, location <chr>,
+#> #   city <chr>, zip <chr>, state <chr>
 #> 
 #> $type_2
 #> # A tibble: 10 × 23
@@ -196,9 +199,9 @@ nppes(npi = c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 125578
 #>  8 1982059275      2 Dire… HANN… JOHN… NA         2016-04-25 2016-04-25 VIOS FE…
 #>  9 1982059275      2 Dire… HANN… JOHN… NA         2016-04-25 2016-04-25 VIOS FE…
 #> 10 1982059275      2 Dire… HANN… JOHN… NA         2016-04-25 2016-04-25 VIOS FE…
-#> # ℹ 14 more variables: subtype <chr>, other_type <int>, other_name <chr>,
+#> # ℹ 14 more variables: sub_type <chr>, other_type <int>, other_name <chr>,
 #> #   tax_code <chr>, tax_desc <chr>, tax_license <chr>, tax_prime <int>,
-#> #   tax_state <chr>, tax_group <chr>, address <chr>, purpose <chr>, city <chr>,
-#> #   zip <chr>, state <chr>
+#> #   tax_state <chr>, tax_group <chr>, address <chr>, location <chr>,
+#> #   city <chr>, zip <chr>, state <chr>
 #> 
 ```

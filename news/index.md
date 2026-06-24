@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9261 (2026-06-24)
+
+- nppes addresses
+
 ## provider 0.0.1.9260 (2026-06-24)
 
 - nppes processing

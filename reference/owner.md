@@ -112,8 +112,6 @@ containing the search results.
 owner(city = "Valdosta", state = "GA")
 #> ✔ owner returned 13 results
 #> ✔ Retrieving 4 pages
-#> [working] (0 + 0) -> 2 -> 2 | ■■■■■■■■■■■■■■■■                  50%
-#> [working] (0 + 0) -> 0 -> 4 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 13 × 18
 #>    fac_type org_enid    org_pac org_name pac   role  asc_date   own_name own_dba
 #>  * <chr>    <chr>       <chr>   <chr>    <chr> <chr> <date>     <chr>    <chr>  
