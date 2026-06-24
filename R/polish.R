@@ -40,8 +40,8 @@ S7::method(polish, s3_clinicians) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     rc_combine("address", "add_2") |>
-    rc_combine("specialty", "spec_other") |>
-    rm_period("cred")
+    rc_combine("specialty", "spec_other")
+  # rm_period("cred")
 }
 
 #' @noRd
@@ -204,10 +204,12 @@ S7::method(polish, s3_utilization) <- function(x) {
     ),
     as.double
   )
+
+  # x <- rm_period(x, "cred")
+
   set_rename(x)
   get_columns(x) |>
     rc_bin("participating") |>
     rc_combine("address", "add_2") |>
-    rm_period("cred") |>
     collapse::roworderv(c("year", "npi"))
 }

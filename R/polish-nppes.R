@@ -92,8 +92,7 @@ nppes_basic <- function(x, key, entity) {
     }
 
     b[["sub_type"]] <- cheapr::val_replace(b[["sub_type"]], "0", NA_character_)
-    b[["cred"]] <- rm_period(b, "cred") |>
-      stringr::str_squish()
+    # b <- rm_period(b, "cred") |> stringr::str_squish()
 
     key <- join2(key, b, on = "npi")
   }
@@ -120,7 +119,7 @@ nppes_other <- function(x, key, entity) {
         .nse = FALSE
       )
 
-      o[["cred"]] <- rm_period(o, "cred")
+      # o <- rm_period(o, "cred")
 
       o[["name"]] <- glue::glue(
         "{o$first} {o$middle} {o$last} {o$cred}",

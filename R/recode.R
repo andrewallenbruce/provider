@@ -1,6 +1,7 @@
 #' @noRd
 rm_period <- function(x, col = "cred") {
-  gsub(".", "", x[[col]], fixed = TRUE)
+  x[[col]] <- gsub(".", "", x[[col]], fixed = TRUE)
+  return(x)
 }
 
 #' @noRd
