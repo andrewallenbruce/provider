@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9265 (2026-06-24)
+
+- `nppes_by_type`
+
 ## provider 0.0.1.9264 (2026-06-24)
 
 - offset tests, nocov directives
