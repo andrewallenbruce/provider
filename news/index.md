@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9260 (2026-06-24)
+
+- nppes processing
+
 ## provider 0.0.1.9259 (2026-06-17)
 
 - split nppes processing into sections
