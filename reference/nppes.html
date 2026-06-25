@@ -9,7 +9,7 @@ NPI Registry, a free directory of all active NPI records."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9269</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9270</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -200,45 +200,7 @@ program.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1851713903</span>, <span class="fl">1174270805</span>, <span class="fl">1225701881</span>, <span class="fl">1588817837</span>, <span class="fl">1982059275</span>, <span class="fl">1255782751</span>, <span class="fl">1255877502</span>, <span class="fl">1841008505</span>, <span class="fl">1003826272</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $type_1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 25</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         npi entity first last  cred  sub_type address loc_type city  state zip  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   1.85<span style="color: #949494;">e</span>9      1 JOSE… DANW… MSW   Sole Pr… 18302 … primary  HESP… CA    9234…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   1.59<span style="color: #949494;">e</span>9      1 JOSE… DAPA… RN    <span style="color: #BB0000;">NA</span>       2160 B… primary  BRONX NY    1046…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   1.26<span style="color: #949494;">e</span>9      1 JOSE… DAVIS MD    <span style="color: #BB0000;">NA</span>       2140 J… primary  STUR… SD    5778…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>   1.26<span style="color: #949494;">e</span>9      1 JOSE… DAVIS MD    <span style="color: #BB0000;">NA</span>       983075… seconda… OMAHA NE    6819…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   1.26<span style="color: #949494;">e</span>9      1 JOSE… DE L… M.A.… <span style="color: #BB0000;">NA</span>       1233 N… primary  WILM… CA    9074…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   1.26<span style="color: #949494;">e</span>9      1 JOSE… DE L… M.A.… <span style="color: #BB0000;">NA</span>       3752 A… mailing  LONG… CA    9080…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   1.84<span style="color: #949494;">e</span>9      1 JOSIE DAVI… ALC,… Sole Pr… 574 AZ… primary  MOBI… AL    3660…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   1.84<span style="color: #949494;">e</span>9      1 JOSIE DAVI… ALC,… Sole Pr… 6517 B… mailing  MOBI… AL    3669…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   1.00<span style="color: #949494;">e</span>9      1 JO    DEAL  MD    <span style="color: #BB0000;">NA</span>       766 LA… primary  JACK… MS    3921…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   1.00<span style="color: #949494;">e</span>9      1 JO    DEAL  MD    <span style="color: #BB0000;">NA</span>       6255 W… mailing  LOS … CA    9002…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>   1.00<span style="color: #949494;">e</span>9      1 JO    DEAL  MD    <span style="color: #BB0000;">NA</span>       766 LA… primary  JACK… MS    3921…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   1.00<span style="color: #949494;">e</span>9      1 JO    DEAL  MD    <span style="color: #BB0000;">NA</span>       6255 W… mailing  LOS … CA    9002…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: id_code &lt;chr&gt;, id_issuer &lt;chr&gt;, id_state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_license &lt;chr&gt;, tx_prm &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_grp &lt;chr&gt;, on_type &lt;int&gt;, on_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   enum_date &lt;date&gt;, last_update &lt;date&gt;, cert_date &lt;date&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $type_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 23</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      npi entity org_name first last  cred  sub_type address loc_type city  state</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1.17<span style="color: #949494;">e</span>9      2 PEACH S… FAHI… SASAN DO F… <span style="color: #BB0000;">NA</span>       1414 W… primary  PHIL… PA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1.17<span style="color: #949494;">e</span>9      2 PEACH S… FAHI… SASAN DO F… <span style="color: #BB0000;">NA</span>       333 S … mailing  CHIC… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1.17<span style="color: #949494;">e</span>9      2 PEACH S… FAHI… SASAN DO F… <span style="color: #BB0000;">NA</span>       1414 W… primary  PHIL… PA   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1.17<span style="color: #949494;">e</span>9      2 PEACH S… FAHI… SASAN DO F… <span style="color: #BB0000;">NA</span>       333 S … mailing  CHIC… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1.23<span style="color: #949494;">e</span>9      2 VIOS FE… KATR… MARS… Dir … <span style="color: #BB0000;">NA</span>       26400 … primary  SOUT… MI   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 1.98<span style="color: #949494;">e</span>9      2 VIOS FE… HANN… JOHN… Dire… <span style="color: #BB0000;">NA</span>       1455 N… primary  CHIC… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 1.98<span style="color: #949494;">e</span>9      2 VIOS FE… HANN… JOHN… Dire… <span style="color: #BB0000;">NA</span>       2516 W… mailing  GLEN… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 1.98<span style="color: #949494;">e</span>9      2 VIOS FE… HANN… JOHN… Dire… <span style="color: #BB0000;">NA</span>       1455 N… primary  CHIC… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> 1.98<span style="color: #949494;">e</span>9      2 VIOS FE… HANN… JOHN… Dire… <span style="color: #BB0000;">NA</span>       2516 W… mailing  GLEN… IL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: zip &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tx_license &lt;chr&gt;, tx_prm &lt;int&gt;, tx_state &lt;chr&gt;, tx_grp &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   on_type &lt;int&gt;, on_name &lt;chr&gt;, cert_date &lt;date&gt;, enum_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last_update &lt;date&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ckmatch(cols, nam):</span> Unknown columns: org_par</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
