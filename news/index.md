@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9269 (2026-06-25)
+
+- `nppes_address`, `nppes_other` refinement
+
 ## provider 0.0.1.9268 (2026-06-25)
 
 - fix bug in `nppes_colorder`
