@@ -331,8 +331,8 @@ nppes_address <- function(x, key) {
     .nse = FALSE
   )
 
-  collapse::settfmv(a, "npi", as.integer)
-  collapse::settfmv(a, "loc_type", tolower)
+  collapse::settfmv(x, "npi", as.integer)
+  collapse::settfmv(x, "loc_type", tolower)
 
   x[x[["loc_type"]] == "location", ][["loc_type"]] <- "primary"
 
