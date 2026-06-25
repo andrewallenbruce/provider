@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9270</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9271</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,10 +99,10 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  organization <span class="op">=</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">fac_ccn</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `fac_ccn`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Returning first <span style="color: #BBBB00; font-weight: bold;">10</span> rows</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="color: #BBBB00; font-weight: bold;">9</span> results</span></span>
+<span>  organization <span class="op">=</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; $individual</span></span>
@@ -113,19 +113,14 @@
 <span><span class="co">#&gt; pac   7810891009</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 18</span></span></span>
-<span><span class="co">#&gt;    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> SOUTHERN T… HIGHPO… O200… 1.47<span style="color: #949494;">e</span>9     0 4400… 5193… 1998-11-09 LLC      Propr…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> CENTRAL MA… <span style="color: #BB0000;">NA</span>      O200… 1.69<span style="color: #949494;">e</span>9     0 2000… 2567… 1888-01-01 Corpora… Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ADCARE HOS… ADCARE… O200… 1.13<span style="color: #949494;">e</span>9     0 2200… 8325… <span style="color: #BB0000;">NA</span>         Corpora… Propr…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CAPE COD H… CAPE C… O200… 1.11<span style="color: #949494;">e</span>9     0 2200… 8921… 1919-08-22 Corpora… Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CARRINGTON… CHI ST… O200… 1.21<span style="color: #949494;">e</span>9     0 3513… 0547… 1986-06-30 Corpora… Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> SELECT SPE… SELECT… O200… 1.59<span style="color: #949494;">e</span>9     0 1120… 6002… 2001-12-05 Corpora… For-P…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> THE FINLEY… FINLEY… O200… 1.94<span style="color: #949494;">e</span>9     0 1601… 5092… <span style="color: #BB0000;">NA</span>         Corpora… Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ST CHARLES… <span style="color: #BB0000;">NA</span>      O200… 1.16<span style="color: #949494;">e</span>9     0 3302… 6103… 1958-09-30 Corpora… Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> WASHINGTON… <span style="color: #BB0000;">NA</span>      O200… 1.08<span style="color: #949494;">e</span>9     0 0400… 7214… <span style="color: #BB0000;">NA</span>         Other: … Volun…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ARIZONA SP… <span style="color: #BB0000;">NA</span>      O200… 1.40<span style="color: #949494;">e</span>9     0 0301… 4486… 2000-10-26 LLC      Physi…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 18</span></span></span>
+<span><span class="co">#&gt;   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> CHAMPLAIN V… THE UN… O201… 1.03<span style="color: #949494;">e</span>9     0 3302… 2769… 1926-01-01 Corpora… Volun…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ALICE HYDE … THE UN… O202… 1.11<span style="color: #949494;">e</span>9     0 3313… 4082… 1905-04-13 Corpora… Volun…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> CENTRAL VER… <span style="color: #BB0000;">NA</span>      O200… 1.51<span style="color: #949494;">e</span>9     0 4700… 9335… 1984-03-01 Corpora… Volun…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> UNIVERSITY … UNIVER… O200… 1.57<span style="color: #949494;">e</span>9     0 4700… 3779… 1995-01-01 Corpora… Volun…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> PORTER HOSP… <span style="color: #BB0000;">NA</span>      O200… 1.74<span style="color: #949494;">e</span>9     1 4713… 1850… 1986-11-14 Corpora… Volun…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, sub_group &lt;chr&gt;, rating &lt;int&gt;, county &lt;chr&gt;</span></span></span>
 <span></span>
@@ -247,35 +242,60 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>fac_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> unused argument (fac_ccn = 331302)</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="color: #BBBB00; font-weight: bold;">329</span> results</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt;     V1</span></span>
-<span><span class="co">#&gt; 1 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                  V1</span></span>
+<span><span class="co">#&gt; fac_type   Hospital</span></span>
+<span><span class="co">#&gt; ccn          331302</span></span>
+<span><span class="co">#&gt; parent_ccn     &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt; [1] "Elizabethtown Community Hospital" NA</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 329 × 4</span></span></span>
+<span><span class="co">#&gt;    first   last                  npi pac       </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> STACI   CARTER-KELLY   <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">029</span>125 6204824378</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> DYLAN   ESTES          <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">278</span>144 6608167523</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ARMIN   AFSAR KESHMIRI <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">815</span>184 4082693676</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> LAURA   GREENE         <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">845</span>272 1759384035</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> DEBORAH KAMPSCHROR     <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">141</span>860 8022069558</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NAROD   VASSILIAN      <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">539</span>584 9133544109</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EMILY   TRIPLETT       <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">595</span>560 3375947401</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> BARDIA  BARIMANI       <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">793</span>736 9436503646</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> JOSE    ACOSTAMADIEDO  <span style="text-decoration: underline;">1</span>013<span style="text-decoration: underline;">910</span>256 5890719371</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> LINDSEY WILHELM        <span style="text-decoration: underline;">1</span>023<span style="text-decoration: underline;">377</span>843 6901115278</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 319 more rows</span></span></span></code></pre></div>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>fac_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> unused argument (fac_ccn = "33Z302")</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">affiliations</span> returned <span style="color: #BBBB00; font-weight: bold;">6</span> results</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  organization <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $organization</span></span>
-<span><span class="co">#&gt;     V1</span></span>
-<span><span class="co">#&gt; 1 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                V1</span></span>
+<span><span class="co">#&gt; fac_type       NH</span></span>
+<span><span class="co">#&gt; ccn        33Z302</span></span>
+<span><span class="co">#&gt; parent_ccn 331302</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $individual</span></span>
-<span><span class="co">#&gt; [1] "Elizabethtown Community Hospital" NA</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">#&gt;   first   last            npi pac       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> JEFFREY KLOTZ    <span style="text-decoration: underline;">1</span>073<span style="text-decoration: underline;">258</span>398 3870095805</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CARLOS  MARTINEZ <span style="text-decoration: underline;">1</span>154<span style="text-decoration: underline;">332</span>062 5890739734</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> MARY    HALLORAN <span style="text-decoration: underline;">1</span>396<span style="text-decoration: underline;">989</span>059 8921259557</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> IL      CHON     <span style="text-decoration: underline;">1</span>538<span style="text-decoration: underline;">173</span>869 0547299091</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> DRAGOS  BANU     <span style="text-decoration: underline;">1</span>558<span style="text-decoration: underline;">659</span>367 6709004682</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> JOSHUA  WARNER   <span style="text-decoration: underline;">1</span>760<span style="text-decoration: underline;">167</span>712 8123473469</span></span></code></pre></div>
 <p>That returns more affiliated individual providers that practice in
 the Hospital’s nursing home.</p>
 <blockquote>

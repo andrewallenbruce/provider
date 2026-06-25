@@ -160,5 +160,59 @@ Medicare program.
 
 ``` r
 nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
-#> Error in ckmatch(cols, nam): Unknown columns: org_par
+#> $type_1
+#> $type_1$base
+#> # A tibble: 7 × 17
+#>         npi entity first last  cred  sub_type id_code id_issuer id_state tx_code
+#>       <int>  <int> <chr> <chr> <chr> <chr>    <chr>   <chr>     <chr>    <chr>  
+#> 1    1.85e9      1 JOSE… DANW… MSW   Sole Pr… NA      NA        NA       225400…
+#> 2    1.59e9      1 JOSE… DAPA… RN    NA       NA      NA        NA       163W00…
+#> 3    1.26e9      1 JOSE… DAVIS MD    NA       NA      NA        NA       207Q00…
+#> 4    1.26e9      1 JOSE… DE L… M.A.… NA       27-038… Californ… CA       103K00…
+#> 5    1.84e9      1 JOSIE DAVI… ALC,… Sole Pr… NA      NA        NA       101YM0…
+#> 6    1.00e9      1 JO    DEAL  MD    NA       000183… Medicaid  MS       207RI0…
+#> 7    1.00e9      1 JO    DEAL  MD    NA       P01065… Railroad… MS       207RI0…
+#> # ℹ 7 more variables: tx_lic <chr>, tx_prim <int>, tx_state <chr>,
+#> #   tx_grp <chr>, enum_date <date>, last_update <date>, cert_date <date>
+#> 
+#> $type_1$address
+#> # A tibble: 10 × 6
+#>           npi address                     loc_type  city        state zip      
+#>         <int> <chr>                       <chr>     <chr>       <chr> <chr>    
+#>  1 1851713903 18302 WESTLAWN ST           primary   HESPERIA    CA    923456923
+#>  2 1588817837 2160 BOLTON ST              primary   BRONX       NY    104621364
+#>  3 1255782751 2140 JUNCTION AVE           primary   STURGIS     SD    577852358
+#>  4 1255782751 983075 NEBRASKA MEDICAL CTR secondary OMAHA       NE    681983075
+#>  5 1255877502 1233 N NEPTUNE AVE          primary   WILMINGTON  CA    907443134
+#>  6 1255877502 3752 ATLANTIC AVE           mailing   LONG BEACH  CA    908076667
+#>  7 1841008505 574 AZALEA RD STE 105       primary   MOBILE      AL    366091517
+#>  8 1841008505 6517 BUGGY WHIP CT          mailing   MOBILE      AL    366953100
+#>  9 1003826272 766 LAKELAND DR # A         primary   JACKSON     MS    392164610
+#> 10 1003826272 6255 W SUNSET BLVD FL 21    mailing   LOS ANGELES CA    900287422
+#> 
+#> 
+#> $type_2
+#> $type_2$base
+#> # A tibble: 5 × 16
+#>          npi entity org_name    org_par org_dba first last  cred  tx_code tx_lic
+#>        <int>  <int> <chr>       <chr>   <chr>   <chr> <chr> <chr> <chr>   <chr> 
+#> 1 1174270805      2 PEACH STAT… NA      KINDBO… FAHI… SASAN DO F… 207VE0… NA    
+#> 2 1174270805      2 PEACH STAT… NA      KINDBO… FAHI… SASAN DO F… 207VG0… NA    
+#> 3 1225701881      2 VIOS FERTI… NA      NA      KATR… MARS… Dir … 207VE0… NA    
+#> 4 1982059275      2 VIOS FERTI… NA      NA      HANN… JOHN… Dire… 207VE0… 336.0…
+#> 5 1982059275      2 VIOS FERTI… NA      NA      HANN… JOHN… Dire… 207VE0… 336.0…
+#> # ℹ 6 more variables: tx_prim <int>, tx_state <chr>, tx_grp <chr>,
+#> #   cert_date <date>, enum_date <date>, last_update <date>
+#> 
+#> $type_2$address
+#> # A tibble: 5 × 6
+#>          npi address                     loc_type city         state zip      
+#>        <int> <chr>                       <chr>    <chr>        <chr> <chr>    
+#> 1 1174270805 1414 WALNUT ST              primary  PHILADELPHIA PA    191023824
+#> 2 1174270805 333 S DESPLAINES ST STE 201 mailing  CHICAGO      IL    606615514
+#> 3 1225701881 26400 W 12 MILE RD STE 140  primary  SOUTHFIELD   MI    480341753
+#> 4 1982059275 1455 N MILWAUKEE AVE        primary  CHICAGO      IL    606222015
+#> 5 1982059275 2516 WAUKEGAN RD            mailing  GLENVIEW     IL    600251774
+#> 
+#> 
 ```
