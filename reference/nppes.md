@@ -160,44 +160,5 @@ Medicare program.
 
 ``` r
 nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
-#> $type_1
-#> # A tibble: 15 × 21
-#>         npi entity first last  cred  sub_type sex   address location city  state
-#>       <int>  <int> <chr> <chr> <chr> <chr>    <chr> <chr>   <chr>    <chr> <chr>
-#>  1   1.85e9      1 JOSE… DANW… MSW   Sole Pr… F     18302 … mailing  HESP… CA   
-#>  2   1.85e9      1 JOSE… DANW… MSW   Sole Pr… F     18302 … primary  HESP… CA   
-#>  3   1.59e9      1 JOSE… DAPA… RN    NA       F     2160 B… mailing  BRONX NY   
-#>  4   1.59e9      1 JOSE… DAPA… RN    NA       F     2160 B… primary  BRONX NY   
-#>  5   1.26e9      1 JOSE… DAVIS MD    NA       F     2140 J… mailing  STUR… SD   
-#>  6   1.26e9      1 JOSE… DAVIS MD    NA       F     2140 J… primary  STUR… SD   
-#>  7   1.26e9      1 JOSE… DAVIS MD    NA       F     983075… seconda… OMAHA NE   
-#>  8   1.26e9      1 JOSE… DE L… M.A.… NA       F     3752 A… mailing  LONG… CA   
-#>  9   1.26e9      1 JOSE… DE L… M.A.… NA       F     1233 N… primary  WILM… CA   
-#> 10   1.84e9      1 JOSIE DAVI… ALC,… Sole Pr… F     574 AZ… primary  MOBI… AL   
-#> 11   1.84e9      1 JOSIE DAVI… ALC,… Sole Pr… F     6517 B… mailing  MOBI… AL   
-#> 12   1.00e9      1 JO    DEAL  MD    NA       F     766 LA… primary  JACK… MS   
-#> 13   1.00e9      1 JO    DEAL  MD    NA       F     6255 W… mailing  LOS … CA   
-#> 14   1.00e9      1 JO    DEAL  MD    NA       F     766 LA… primary  JACK… MS   
-#> 15   1.00e9      1 JO    DEAL  MD    NA       F     6255 W… mailing  LOS … CA   
-#> # ℹ 10 more variables: zip <chr>, id_type <int>, id_code <chr>,
-#> #   id_issuer <chr>, id_state <chr>, other_type <int>, other_name <chr>,
-#> #   enum_date <date>, last_update <date>, cert_date <date>
-#> 
-#> $type_2
-#> # A tibble: 10 × 17
-#>           npi entity org_name  first last  cred  sub_type address location city 
-#>         <int>  <int> <chr>     <chr> <chr> <chr> <chr>    <chr>   <chr>    <chr>
-#>  1 1174270805      2 PEACH ST… FAHI… SASAN DO F… NA       1414 W… primary  PHIL…
-#>  2 1174270805      2 PEACH ST… FAHI… SASAN DO F… NA       333 S … mailing  CHIC…
-#>  3 1174270805      2 PEACH ST… FAHI… SASAN DO F… NA       1414 W… primary  PHIL…
-#>  4 1174270805      2 PEACH ST… FAHI… SASAN DO F… NA       333 S … mailing  CHIC…
-#>  5 1225701881      2 VIOS FER… KATR… MARS… Dir … NA       26400 … primary  SOUT…
-#>  6 1225701881      2 VIOS FER… KATR… MARS… Dir … NA       26400 … mailing  SOUT…
-#>  7 1982059275      2 VIOS FER… HANN… JOHN… Dire… NA       2516 W… mailing  GLEN…
-#>  8 1982059275      2 VIOS FER… HANN… JOHN… Dire… NA       1455 N… primary  CHIC…
-#>  9 1982059275      2 VIOS FER… HANN… JOHN… Dire… NA       2516 W… mailing  GLEN…
-#> 10 1982059275      2 VIOS FER… HANN… JOHN… Dire… NA       1455 N… primary  CHIC…
-#> # ℹ 7 more variables: state <chr>, zip <chr>, other_type <int>,
-#> #   other_name <chr>, cert_date <date>, enum_date <date>, last_update <date>
-#> 
+#> Error in nppes_address(x, k): object 'a' not found
 ```
