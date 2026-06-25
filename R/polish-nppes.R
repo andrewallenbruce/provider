@@ -36,11 +36,7 @@ nppes_by_type <- function(x, type) {
   }
 
   # KEY
-  k <- collapse::ss(
-    x,
-    j = c("npi", "entity"),
-    check = FALSE
-  )
+  k <- collapse::ss(x, j = c("npi", "entity"), check = FALSE)
 
   # BASIC
   k <- nppes_basic(x, k, type)
@@ -160,6 +156,11 @@ nppes_basic <- function(x, key, type) {
   join2(key, x, "npi")
 }
 
+# TBL 3: OTHER NAMES
+# 1 = Former
+# 2 = Professional
+# 3 = Doing Business As
+# 5 = Other
 #' @noRd
 nppes_other <- function(x, key, type) {
   x <- rlang::set_names(
@@ -231,14 +232,11 @@ nppes_identifier <- function(x, key) {
       "identifier" = "code",
       .nse = FALSE
     ) |>
-    collapse::gv(c("npi", "type", "code", "issuer", "state")) |>
+    collapse::gv(c("npi", "code", "issuer", "state")) |>
     collapse::add_stub(stub = "id_", cols = -1)
 
-  collapse::settransformv(x, "id_type", as.integer)
   collapse::settransformv(x, "npi", as.integer)
-  # id_type == 5L -> id_issuer == "Medicaid
-  # id_type <- NULL
-
+  collapse::setv(x[["id_issuer"]], NA, "Medicaid")
   join2(key, x, "npi")
 }
 
@@ -320,10 +318,7 @@ nppes_address <- function(x, key) {
     return(join2(key, sec, "npi"))
   }
 
-  x <- collapse::gvr(
-    x,
-    "^npi$|^address_[1p]|^city$|^state$|postal"
-  )
+  x <- collapse::gvr(x, "^npi$|^address_[1p]|^city$|^state$|postal")
 
   collapse::setrename(
     x,
@@ -336,7 +331,10 @@ nppes_address <- function(x, key) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::settfmv(x, "loc_type", tolower)
 
-  x[x[["loc_type"]] == "location", ][["loc_type"]] <- "primary"
+  x <- collapse::roworderv(x, c("npi", "loc_type")) |>
+    collapse::funique(cols = c("npi", "address", "city", "state", "zip"))
+
+  collapse::setv(x[["loc_type"]], "location", "primary")
 
   if (!rlang::is_empty(sec)) {
     x <- collapse::rowbind(x, sec)

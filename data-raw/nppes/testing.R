@@ -1,3 +1,7 @@
+library(collapse)
+library(pillar)
+# library(provider)
+
 kindbody <- c(
   1225701881,
   1174270805,
@@ -18,10 +22,6 @@ kindbody <- c(
   1689182859,
   1982059275
 )
-
-library(collapse)
-library(pillar)
-# library(provider)
 
 npi <- c(
   1851713903,
@@ -95,7 +95,6 @@ vctrs::vec_set_difference(
 )
 
 collapse::colorderv(x$type_1, c("npi", "entity"))
-
 
 
 cheapr::col_c(
