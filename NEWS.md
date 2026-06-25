@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9267 (2026-06-25)
+
+* fix bug in `nppes_address`
+
+
 # provider 0.0.1.9266 (2026-06-25)
 
 * nppes refinement
