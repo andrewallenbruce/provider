@@ -160,5 +160,5 @@ Medicare program.
 
 ``` r
 nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
-#> Error in nppes_address(x, k): object 'a' not found
+#> Error in ckmatch(cols, nam): Unknown columns: location
 ```
