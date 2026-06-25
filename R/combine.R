@@ -1,5 +1,5 @@
 #' @noRd
-rc_combine <- function(x, e1, e2) {
+rc_combine <- function(x, e1, e2, sep = ", ") {
   if (e2 %!in_% colnames(x)) {
     cli::cli_abort(
       "{.arg {e2}} is not a column in {.var x}.",
@@ -17,7 +17,7 @@ rc_combine <- function(x, e1, e2) {
   collapse::gv(x[idx, ], e1) <- paste(
     unlist_(collapse::ss(x, idx, e1, check = FALSE)),
     unlist_(collapse::ss(x, idx, e2, check = FALSE)),
-    sep = ", "
+    sep = sep
   )
 
   collapse::gv(x, e2) <- NULL

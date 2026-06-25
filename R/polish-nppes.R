@@ -17,10 +17,34 @@ S7::method(polish, s3_nppes) <- function(x) {
     set = TRUE
   )
 
-  list(
+  x <- list(
     type_1 = nppes_by_type(x, 1L),
     type_2 = nppes_by_type(x, 2L)
   )
+
+  collapse::gv(
+    x[["type_1"]],
+    c("on_name", "on_type")
+  ) <- NULL
+
+  collapse::gv(
+    x[["type_2"]],
+    c("sub_type", "on_type")
+  ) <- NULL
+
+  collapse::setrename(
+    x[["type_2"]],
+    "on_name" = "org_dba",
+    .nse = FALSE
+  )
+
+  x[["type_2"]] <- collapse::colorderv(
+    x[["type_2"]],
+    c("org_name", "org_par", "org_dba"),
+    pos = "after"
+  )
+
+  return(x)
 }
 
 #' @noRd
@@ -99,7 +123,7 @@ nppes_basic <- function(x, key, type) {
     "authorized_official_last_name" = "last",
     "organization_name" = "org_name",
     "organizational_subpart" = "sub_type",
-    "parent_organization_legal_business_name" = "org_dba",
+    "parent_organization_legal_business_name" = "org_par",
     set = TRUE
   )
 
@@ -204,6 +228,14 @@ nppes_other <- function(x, key, type) {
     )
   }
 
+  # TODO change "on_name" -> "org_dba"
+  # when entity == 2
+  # remove "on_type"
+
+  # TODO possibly remove
+  # "on_name" and "on_type"
+  # for entity == 1
+
   x <- collapse::gv(x, c("npi", "type", "name")) |>
     collapse::add_stub(stub = "on_", cols = -1)
 
@@ -258,13 +290,16 @@ nppes_taxonomy <- function(x, key) {
     rc_trim() |>
     collapse::rnm(
       "grp" = "taxonomy_group",
-      "prm" = "primary",
+      "prim" = "primary",
+      "lic" = "license",
       .nse = FALSE
     ) |>
     collapse::add_stub(stub = "tx_", cols = -1)
 
-  collapse::settransformv(x, "tx_prm", as.integer)
+  collapse::settransformv(x, "tx_prim", as.integer)
   collapse::settransformv(x, "npi", as.integer)
+
+  x <- rc_combine(x, "tx_code", "tx_desc", sep = " - ")
 
   join2(key, x, "npi")
 }
@@ -302,6 +337,9 @@ nppes_location <- function(x) {
 
 #' @noRd
 nppes_address <- function(x, key) {
+  # TODO remove "mailing" location
+  # unless the only address for an npi
+
   sec <- nppes_location(x)
 
   x <- rlang::set_names(
