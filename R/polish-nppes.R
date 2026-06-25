@@ -40,11 +40,37 @@ S7::method(polish, s3_nppes) <- function(x) {
 
   x[["type_2"]] <- collapse::colorderv(
     x[["type_2"]],
-    c("org_name", "org_par", "org_dba"),
+    "^org_",
+    regex = TRUE,
     pos = "after"
   )
 
-  return(x)
+  list(
+    type_1 = list(
+      base = collapse::ss(
+        x$type_1,
+        j = c(1:6, 12:22),
+        check = FALSE) |>
+        collapse::funique(),
+      address = collapse::ss(
+        x$type_1,
+        j = c(1L, 7:11),
+        check = FALSE) |>
+        collapse::funique()
+      ),
+    type_2 = list(
+      base = collapse::ss(
+        x$type_2,
+        j = c(1:8, 14:21),
+        check = FALSE) |>
+        collapse::funique(),
+      address = collapse::ss(
+        x$type_2,
+        j = c(1L, 9:13),
+        check = FALSE) |>
+        collapse::funique()
+    )
+  )
 }
 
 #' @noRd
@@ -169,6 +195,10 @@ nppes_basic <- function(x, key, type) {
       stringr::str_squish()
 
     collapse::gv(x, "title") <- NULL
+
+    if ("org_par" %!in_% colnames(x)) {
+      x <- add_empty(x, "org_par")
+    }
   }
 
   x[["sub_type"]] <- cheapr::val_replace(
