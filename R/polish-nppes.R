@@ -66,8 +66,8 @@ nppes_colorder <- function(x) {
     collapse::gv(x, c("npi", "entity")),
     collapse::gvr(x, "^org_"),
     collapse::gv(x, c("first", "last", "cred", "sub_type")),
-    collapse::gvr(x, "^sex$"),
-    collapse::gv(x, c("address", "location", "city", "state", "zip")),
+    # collapse::gvr(x, "^sex$"),
+    collapse::gv(x, c("address", "loc_type", "city", "state", "zip")),
     collapse::gvr(x, "^id_"),
     collapse::gvr(x, "^tx_"),
     collapse::gvr(x, "^on_"),
@@ -236,6 +236,8 @@ nppes_identifier <- function(x, key) {
 
   collapse::settransformv(x, "id_type", as.integer)
   collapse::settransformv(x, "npi", as.integer)
+  # id_type == 5L -> id_issuer == "Medicaid
+  # id_type <- NULL
 
   join2(key, x, "npi")
 }
