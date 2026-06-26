@@ -54,18 +54,7 @@ pending(count = TRUE)
 pending(first = starts("V"))
 #> ✔ pending returned 204 results
 #> ✔ Retrieving 2 pages
-#> # A tibble: 204 × 4
-#>    prov_type        npi first     last             
-#>    <chr>          <int> <chr>     <chr>            
-#>  1 Physician 1932839230 VA        SI               
-#>  2 Physician 1093652463 VADIM     DOLGOV           
-#>  3 Physician 1144512724 VADIN     LALL DASS        
-#>  4 Physician 1700451846 VAGHARSH  ANTANESIAN       
-#>  5 Physician 1073202859 VAHE      KHACHATRYAN      
-#>  6 Physician 1447190517 VAIDEHI   KOTHARI          
-#>  7 Physician 1871107623 VAIDEHI   SHAH             
-#>  8 Physician 1265399984 VAIDHEESH VARAGANTIWAR     
-#>  9 Physician 1770420010 VALBERTO  SANHA            
-#> 10 Physician 1447194386 VALENTINA MONTANEZ AZCARATE
-#> # ℹ 194 more rows
+#> Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string): ℹ In index: 1.
+#> Caused by error in `httr2::resp_body_string()`:
+#> ! `resp` must be an HTTP response object, not a <httr2_failure> object.
 ```

@@ -114,21 +114,7 @@ containing the search results.
 facility(city = "Valdosta", state = "GA")
 #> ✔ facility returned 12 results
 #> ✔ Retrieving 4 pages
-#> # A tibble: 12 × 15
-#>    fac_type enid      npi multi ccn   pac   org_name org_dba inc_date   org_type
-#>    <chr>    <chr>   <int> <int> <chr> <chr> <chr>    <chr>   <date>     <chr>   
-#>  1 HHA      O2012… 1.29e9     0 1170… 6002… PUBLIC … NA      1994-03-07 CORPORA…
-#>  2 HHA      O2012… 1.11e9     0 1170… 3173… GHHS HE… GEORGI… NA         LLC     
-#>  3 FQHC     O2018… 1.64e9     0 1110… 1951… SOUTH C… NORTHS… 1992-06-19 CORPORA…
-#>  4 FQHC     O2024… 1.47e9     0 C210… 1951… SOUTH C… SOUTH … 2024-02-01 CORPORA…
-#>  5 SNF      O2020… 1.06e9     0 1153… 9032… PRUITTH… PRUITT… NA         LLC     
-#>  6 SNF      O2021… 1.88e9     0 1153… 8022… PRUITTH… PRUITT… 2020-04-22 LLC     
-#>  7 SNF      O2021… 1.77e9     0 1153… 1456… PRUITTH… PRUITT… 2020-04-22 LLC     
-#>  8 SNF      O2021… 1.97e9     0 1155… 7416… PRUITTH… PRUITT… 2020-04-22 LLC     
-#>  9 Hospice  O2005… 1.06e9     0 1115… 2264… PRUITTH… PRUITT… 1993-10-14 CORPORA…
-#> 10 Hospice  O2006… 1.75e9     0 1115… 1355… SOUTH G… HOSPIC… 1986-07-11 CORPORA…
-#> 11 Hospice  O2007… 1.97e9     0 1115… 1052… BETHANY… AFFINI… 2007-06-16 LLC     
-#> 12 Hospice  O2008… 1.60e9     0 1116… 0042… GRACE H… HEART … NA         LLC     
-#> # ℹ 5 more variables: status <chr>, address <chr>, city <chr>, state <chr>,
-#> #   zip <chr>
+#> Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string): ℹ In index: 1.
+#> Caused by error in `httr2::resp_body_string()`:
+#> ! `resp` must be an HTTP response object, not a <httr2_failure> object.
 ```

@@ -20,12 +20,8 @@ utilization(
   last = NULL,
   cred = NULL,
   entity = NULL,
-  address = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
   specialty = NULL,
-  participating = NULL,
+  par = NULL,
   hcpcs = NULL,
   patients = NULL,
   services = NULL,
@@ -36,6 +32,10 @@ utilization(
   avg_risk = NULL,
   dual = NULL,
   ndual = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE
 )
 ```
@@ -64,17 +64,12 @@ utilization(
   identifies providers registered as individuals and an entity type code
   of `O` identifies providers registered as organizations.
 
-- address, city, state, zip:
-
-  The provider's street address, city, state and zip code, as reported
-  in NPPES.
-
 - specialty:
 
   `<chr>` Provider specialty reported on the largest number of claims
   submitted
 
-- participating:
+- par:
 
   `<lgl>` Identifies whether the provider participates in Medicare
   and/or accepts assignment of Medicare allowed amounts. The value will
@@ -139,6 +134,11 @@ utilization(
   entitlement if they received zero months of any Medicaid benefits
   (full or partial) in the given calendar year.
 
+- address, city, state, zip:
+
+  The provider's street address, city, state and zip code, as reported
+  in NPPES.
+
 - count:
 
   `<lgl>` Return the total row count
@@ -167,22 +167,7 @@ utilization(count = TRUE)
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 12 × 22
-#>     year        npi first last  cred  entity address city  state zip   specialty
-#>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
-#>  1  2013 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  2  2014 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  3  2015 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  4  2016 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  5  2017 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  6  2018 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  7  2019 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  8  2020 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#>  9  2021 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 10  2022 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 11  2023 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 12  2024 1003000423 Jenn… Velo… M.D.  I      8300 T… Ment… OH    44060 Obstetri…
-#> # ℹ 11 more variables: participating <int>, hcpcs <int>, patients <int>,
-#> #   services <int>, charges <int>, allowed <dbl>, payment <dbl>, avg_age <int>,
-#> #   avg_risk <dbl>, dual <int>, ndual <int>
+#> Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string): ℹ In index: 1.
+#> Caused by error in `httr2::resp_body_string()`:
+#> ! `resp` must be an HTTP response object, not a <httr2_failure> object.
 ```

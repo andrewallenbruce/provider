@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9272 (2026-06-26)
+
+- simplify httr2 request creation
+
 ## provider 0.0.1.9271 (2026-06-25)
 
 - nppes working

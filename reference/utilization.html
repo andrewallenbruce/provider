@@ -21,7 +21,7 @@ aggregated by year."><meta property="og:image" content="https://andrewallenbruce
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9271</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9272</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,12 +82,8 @@ aggregated by year.</p>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  participating <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -98,6 +94,10 @@ aggregated by year.</p>
 <span>  avg_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dual <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ndual <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -128,17 +128,12 @@ identifies providers registered as individuals and an entity type code of
 <code>O</code> identifies providers registered as organizations.</p></dd>
 
 
-<dt id="arg-address-city-state-zip">address, city, state, zip<a class="anchor" aria-label="anchor" href="#arg-address-city-state-zip"></a></dt>
-<dd><p>The provider's street address, city, state and
-zip code, as reported in NPPES.</p></dd>
-
-
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Provider specialty reported on the largest number of
 claims submitted</p></dd>
 
 
-<dt id="arg-participating">participating<a class="anchor" aria-label="anchor" href="#arg-participating"></a></dt>
+<dt id="arg-par">par<a class="anchor" aria-label="anchor" href="#arg-par"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Identifies whether the provider participates in
 Medicare and/or accepts assignment of Medicare allowed amounts. The value
 will be <code>Y</code> for any provider that had at least one claim identifying the
@@ -203,6 +198,11 @@ entitlement if they received zero months of any Medicaid benefits (full or
 partial) in the given calendar year.</p></dd>
 
 
+<dt id="arg-address-city-state-zip">address, city, state, zip<a class="anchor" aria-label="anchor" href="#arg-address-city-state-zip"></a></dt>
+<dd><p>The provider's street address, city, state and
+zip code, as reported in NPPES.</p></dd>
+
+
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
@@ -227,24 +227,9 @@ partial) in the given calendar year.</p></dd>
 <span class="r-in"><span><span class="fu">utilization</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">utilization</span> returned <span style="color: #BBBB00; font-weight: bold;">12</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">12</span> pages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year        npi first last  cred  entity address city  state zip   specialty</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>013 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>014 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>015 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>016 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>020 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>022 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>023 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>024 <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">000</span>423 Jenn… Velo… M.D.  I      8300 T… Ment… OH    44060 Obstetri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: participating &lt;int&gt;, hcpcs &lt;int&gt;, patients &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   services &lt;int&gt;, charges &lt;int&gt;, allowed &lt;dbl&gt;, payment &lt;dbl&gt;, avg_age &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_risk &lt;dbl&gt;, dual &lt;int&gt;, ndual &lt;int&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::resp_body_string()`:</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `resp` must be an HTTP response object, not a &lt;httr2_failure&gt; object.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
