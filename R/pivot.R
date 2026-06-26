@@ -1,5 +1,5 @@
 #' @noRd
-ss_key <- function(x, cols, key = "ind") {
+ss_ind <- function(x, cols, key = "ind") {
   collapse::ss(
     x = x,
     i = x[[key]] %==% 1L,
@@ -62,7 +62,7 @@ pivot_order_refer <- function(x) {
     return(add_empty(x, "order_refer"))
   }
 
-  y <- ss_key(y, c("npi", "order_refer"))
+  y <- ss_ind(y, c("npi", "order_refer"))
 
   if (no_rows(y)) {
     return(add_empty(x, "order_refer"))
@@ -80,9 +80,9 @@ pivot_order_refer <- function(x) {
   )
 
   if (is_unique(y[["npi"]])) {
-    return(join2(x, y, on = "npi"))
+    return(join2(x, y, "npi"))
   }
-  join2(x, collapse_rows(y, "npi", "order_refer"), on = "npi")
+  join2(x, collapse_rows(y, "npi", "order_refer"), "npi")
 }
 
 #' @noRd
@@ -95,7 +95,7 @@ pivot_multi_site <- function(x) {
     return(add_empty(x, "multi"))
   }
 
-  y <- ss_key(y, c("ccn", "multi"))
+  y <- ss_ind(y, c("ccn", "multi"))
 
   if (no_rows(y)) {
     return(add_empty(x, "multi"))
@@ -112,10 +112,10 @@ pivot_multi_site <- function(x) {
   )
 
   if (is_unique(y[["ccn"]])) {
-    return(join2(x, y, on = "ccn"))
+    return(join2(x, y, "ccn"))
   }
 
-  join2(x, collapse_rows(y, "ccn", "multi"), on = "ccn")
+  join2(x, collapse_rows(y, "ccn", "multi"), "ccn")
 }
 
 #' @noRd
@@ -128,7 +128,11 @@ pivot_acr_org <- function(x) {
     return(add_empty(x, "acr_org"))
   }
 
-  y <- collapse::ss(y, j = c("ccn", "acr_org"))
+  y <- collapse::ss(
+    y,
+    j = c("ccn", "acr_org"),
+    check = FALSE
+  )
 
   if (no_rows(y)) {
     return(add_empty(x, "acr_org"))
@@ -148,10 +152,10 @@ pivot_acr_org <- function(x) {
   )
 
   if (is_unique(y[["ccn"]])) {
-    return(join2(x, y, on = "ccn"))
+    return(join2(x, y, "ccn"))
   }
 
-  join2(x, collapse_rows(y, "ccn", "acr_org"), on = "ccn")
+  join2(x, collapse_rows(y, "ccn", "acr_org"), "ccn")
 }
 
 #' @noRd
@@ -164,7 +168,7 @@ pivot_owner <- function(x) {
     return(add_empty(x, "own_type"))
   }
 
-  y <- ss_key(y, c("pac", "own_type", "own_otxt"))
+  y <- ss_ind(y, c("pac", "own_type", "own_otxt"))
 
   if (no_rows(y)) {
     return(add_empty(x, "own_type"))
@@ -197,10 +201,10 @@ pivot_owner <- function(x) {
   y <- collapse::funique(y)
 
   if (is_unique(y[["pac"]])) {
-    return(join2(x, y, on = "pac"))
+    return(join2(x, y, "pac"))
   }
 
-  join2(x, collapse_rows(y, "pac", "own_type"), on = "pac")
+  join2(x, collapse_rows(y, "pac", "own_type"), "pac")
 }
 
 #' @noRd
@@ -213,7 +217,7 @@ pivot_subgroup <- function(x) {
     return(add_empty(x, "sub_group"))
   }
 
-  y <- ss_key(y, c("enid", "other_otxt", "sub_group"))
+  y <- ss_ind(y, c("enid", "other_otxt", "sub_group"))
 
   if (no_rows(y)) {
     return(add_empty(x, "sub_group"))
@@ -242,10 +246,10 @@ pivot_subgroup <- function(x) {
   y <- collapse::funique(y)
 
   if (is_unique(y[["enid"]])) {
-    return(join2(x, y, on = "enid"))
+    return(join2(x, y, "enid"))
   }
 
-  join2(x, collapse_rows(y, "enid", "sub_group"), on = "enid")
+  join2(x, collapse_rows(y, "enid", "sub_group"), "enid")
 }
 
 #' @noRd
@@ -258,7 +262,7 @@ pivot_quality <- function(x) {
     return(add_empty(x, "indicators"))
   }
 
-  y <- ss_key(y, c("npi", "indicators", "year"))
+  y <- ss_ind(y, c("npi", "indicators", "year"))
 
   if (no_rows(y)) {
     return(add_empty(x, "indicators"))
@@ -284,7 +288,7 @@ pivot_quality <- function(x) {
   )
 
   if (is_unique(y[["npi"]])) {
-    return(join2(x, y, on = c("year", "npi")))
+    return(join2(x, y, c("year", "npi")))
   }
 
   y <- collapse::ss(
@@ -295,10 +299,16 @@ pivot_quality <- function(x) {
     )
   )
 
-  y <- collapse::rsplit(y, y[["year"]]) |>
-    purrr::map(\(x) collapse_rows(x, "npi", "indicators")) |>
-    rowbind2("year") |>
-    collapse::qTBL()
+  y <- collapse::rsplit(
+    y,
+    y[["year"]]
+  ) |>
+    purrr::map(
+      function(x) {
+        collapse_rows(x, "npi", "indicators")
+      }
+    ) |>
+    rowbind2("year")
 
-  join2(x, y, on = c("year", "npi"))
+  join2(x, y, c("year", "npi"))
 }

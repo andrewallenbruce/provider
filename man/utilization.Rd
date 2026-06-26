@@ -11,12 +11,8 @@ utilization(
   last = NULL,
   cred = NULL,
   entity = NULL,
-  address = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
   specialty = NULL,
-  participating = NULL,
+  par = NULL,
   hcpcs = NULL,
   patients = NULL,
   services = NULL,
@@ -27,6 +23,10 @@ utilization(
   avg_risk = NULL,
   dual = NULL,
   ndual = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE
 )
 }
@@ -43,13 +43,10 @@ utilization(
 identifies providers registered as individuals and an entity type code of
 \code{O} identifies providers registered as organizations.}
 
-\item{address, city, state, zip}{The provider's street address, city, state and
-zip code, as reported in NPPES.}
-
 \item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of
 claims submitted}
 
-\item{participating}{\verb{<lgl>} Identifies whether the provider participates in
+\item{par}{\verb{<lgl>} Identifies whether the provider participates in
 Medicare and/or accepts assignment of Medicare allowed amounts. The value
 will be \code{Y} for any provider that had at least one claim identifying the
 provider as participating in Medicare or accepting assignment of Medicare
@@ -91,6 +88,9 @@ were receiving full or partial Medicaid benefits.}
 Medicare only benefits. Beneficiaries are classified as Medicare only
 entitlement if they received zero months of any Medicaid benefits (full or
 partial) in the given calendar year.}
+
+\item{address, city, state, zip}{The provider's street address, city, state and
+zip code, as reported in NPPES.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }

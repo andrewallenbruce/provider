@@ -101,11 +101,17 @@ flatten_pdc <- function(url, query = NULL, ...) {
 #' @include aaa-generics.R
 #' @noRd
 S7::method(count, EndpointPDC) <- function(x) {
-  if (length(x@query) > 0L || x@action == "count") {
-    S7::prop(x, "count") <- base_request(
-      flatten_pdc(x@url, x@query, results = "false"),
-      "count"
-    )
+  if (length(S7::prop(x, "query")) > 0L || S7::prop(x, "action") == "count") {
+    r <- flatten_pdc(
+      S7::prop(x, "url"),
+      S7::prop(x, "query"),
+      results = "false"
+    ) |>
+      httr2::request() |>
+      httr2::req_perform() |>
+      parse_string("count")
+
+    S7::prop(x, "count") <- r
   }
   return(x)
 }
@@ -114,9 +120,15 @@ S7::method(count, EndpointPDC) <- function(x) {
 S7::method(preview, EndpointPDC) <- function(x) {
   report_preview()
 
-  flatten_pdc(x@url, NULL, limit = 10L) |>
-    base_request("results") |>
-    add_class(x@end)
+  flatten_pdc(
+    S7::prop(x, "url"),
+    NULL,
+    limit = 10L
+  ) |>
+    httr2::request() |>
+    httr2::req_perform() |>
+    parse_string("results") |>
+    add_class(S7::prop(x, "end"))
 }
 
 #' @noRd
@@ -124,9 +136,15 @@ S7::method(request_single, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  flatten_pdc(x@url, x@query) |>
-    base_request("results") |>
-    add_class(x@end)
+  flatten_pdc(
+    S7::prop(x, "url"),
+    S7::prop(x, "query"),
+    limit = 10L
+  ) |>
+    httr2::request() |>
+    httr2::req_perform() |>
+    parse_string("results") |>
+    add_class(S7::prop(x, "end"))
 }
 
 #' @noRd
@@ -134,7 +152,17 @@ S7::method(request_multi, EndpointPDC) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  flatten_pdc(x@url, x@query, offset = "<<i>>") |>
-    base_parallel(x@count, x@limit, "results") |>
-    add_class(x@end)
+  flatten_pdc(
+    S7::prop(x, "url"),
+    S7::prop(x, "query"),
+    offset = "<<i>>"
+  ) |>
+    offset2(
+      S7::prop(x, "count"),
+      S7::prop(x, "limit")
+    ) |>
+    purrr::map(httr2::request) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    httr2::resps_data(function(resp) parse_string(resp, "results")) |>
+    add_class(S7::prop(x, "end"))
 }

@@ -27,7 +27,7 @@
 #'   zip code, as reported in NPPES.
 #' @param specialty `<chr>` Provider specialty reported on the largest number of
 #'   claims submitted
-#' @param participating `<lgl>` Identifies whether the provider participates in
+#' @param par `<lgl>` Identifies whether the provider participates in
 #'   Medicare and/or accepts assignment of Medicare allowed amounts. The value
 #'   will be `Y` for any provider that had at least one claim identifying the
 #'   provider as participating in Medicare or accepting assignment of Medicare
@@ -72,12 +72,8 @@ utilization <- function(
   last = NULL,
   cred = NULL,
   entity = NULL,
-  address = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
   specialty = NULL,
-  participating = NULL,
+  par = NULL,
   hcpcs = NULL,
   patients = NULL,
   services = NULL,
@@ -88,6 +84,10 @@ utilization <- function(
   avg_risk = NULL,
   dual = NULL,
   ndual = NULL,
+  address = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
   count = FALSE
 ) {
   check_numeric(year)
@@ -105,11 +105,7 @@ utilization <- function(
   check_char_(city)
   check_char_(state)
   check_char_(specialty)
-  check_bool_(participating)
-
-  if (!is.null(year)) {
-    year <- as.character(year)
-  }
+  check_bool_(par)
 
   if (!is.null(entity)) {
     entity <- rlang::arg_match(
@@ -133,7 +129,7 @@ utilization <- function(
     Rndrng_Prvdr_State_Abrvtn = state,
     Rndrng_Prvdr_Zip5 = zip,
     Rndrng_Prvdr_Type = specialty,
-    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(participating),
+    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(par),
     Tot_HCPCS_Cds = hcpcs,
     Tot_Benes = patients,
     Tot_Srvcs = services,

@@ -70,10 +70,14 @@ flatten_cms <- function(url, query = NULL, append = "?", ...) {
 #' @noRd
 S7::method(count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    S7::prop(x, "count") <- base_request(
-      flatten_cms(x@url, x@query, "/stats?"),
-      "found_rows"
-    )
+    S7::prop(x, "count") <- flatten_cms(
+      x@url,
+      x@query,
+      "/stats?"
+    ) |>
+      httr2::request() |>
+      httr2::req_perform() |>
+      parse_string("found_rows")
   }
   return(x)
 }
@@ -82,8 +86,14 @@ S7::method(count, EndpointCMS) <- function(x) {
 S7::method(preview, EndpointCMS) <- function(x) {
   report_preview()
 
-  flatten_cms(x@url, NULL, size = 10L) |>
-    base_request() |>
+  flatten_cms(
+    x@url,
+    NULL,
+    size = 10L
+  ) |>
+    httr2::request() |>
+    httr2::req_perform() |>
+    parse_string() |>
     add_class(x@end)
 }
 
@@ -93,7 +103,9 @@ S7::method(request_single, EndpointCMS) <- function(x) {
   report_pages(x)
 
   flatten_cms(x@url, x@query) |>
-    base_request() |>
+    httr2::request() |>
+    httr2::req_perform() |>
+    parse_string() |>
     add_class(x@end)
 }
 
@@ -103,6 +115,9 @@ S7::method(request_multi, EndpointCMS) <- function(x) {
   report_pages(x)
 
   flatten_cms(x@url, x@query, offset = "<<i>>") |>
-    base_parallel(x@count, x@limit) |>
+    offset2(x@count, x@limit) |>
+    purrr::map(httr2::request) |>
+    httr2::req_perform_parallel(on_error = "continue") |>
+    httr2::resps_data(function(resp) parse_string(resp)) |>
     add_class(x@end)
 }

@@ -219,7 +219,7 @@ S7::method(polish, s3_utilization) <- function(x) {
 
   set_rename(x)
   get_columns(x) |>
-    rc_bin("participating") |>
+    rc_bin("par") |>
     rc_combine("address", "add_2") |>
     collapse::roworderv(c("year", "npi"))
 }

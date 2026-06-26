@@ -226,3 +226,31 @@ has_letter <- function(x) {
 is_numeric <- function(x) {
   !has_letter(x)
 }
+
+#' Make a case statement
+#' @param x,y 2 vectors of equal length
+#' @returns A character vector, the results of the following conditions:
+#'    - Both `x` & `y` != `NA` and *identical* ==> **`x`**
+#'    - Both `x` & `y` != `NA` and *not identical* ==> **`x : y`**
+#'    - `x` != `NA` and `y` == `NA` ==> **`x`**
+#'    - `x` == `NA` and `y` != `NA` ==> **`y`**
+#'    - Otherwise, **`<UNKNOWN>`**
+#' @examples
+#' make_case(x = c("1", "1", "3", NA),
+#'           y = c("1", "2", NA, "4"))
+#'
+#' make_case(x = c(1L, 2L, "3", NA),
+#'           y = c(2L, "2", NA, NA))
+#' @noRd
+make_case <- function(x, y, sep = ", ") {
+  both_not <- !cheapr::is_na(x) & !cheapr::is_na(y)
+  both_are <- cheapr::is_na(x) & cheapr::is_na(y)
+  cheapr::case(
+    both_are ~ NA_character_,
+    both_not & x == y ~ x,
+    both_not & x != y ~ paste0(x, sep, y),
+    !cheapr::is_na(x) & cheapr::is_na(y) ~ x,
+    cheapr::is_na(x) & !cheapr::is_na(y) ~ y,
+    .default = "<UNKNOWN>"
+  )
+}

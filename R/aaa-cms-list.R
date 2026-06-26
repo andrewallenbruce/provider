@@ -1,13 +1,32 @@
 #' @noRd
 temporal_uuid <- function(rex) {
-  x <- RcppSimdJson::fload("https://data.cms.gov/data.json", "/dataset") |>
+  x <- RcppSimdJson::fload(
+    "https://data.cms.gov/data.json",
+    "/dataset"
+  ) |>
     collapse::get_elem("distribution") |>
     collapse::rowbind(fill = TRUE)
 
-  x <- collapse::ss(x, grep(rex, x$title, perl = TRUE))
-  S <- !cheapr::is_na(x$accessURL) & cheapr::is_na(x$description)
-  x <- collapse::ss(x, cheapr::which_(S))
-  as.list(uuid_from_url(x$accessURL)) |> rlang::set_names(extract_year(x$title))
+  x <- collapse::ss(x, grep(rex, x[["title"]], perl = TRUE))
+
+  x <- collapse::ss(
+    x,
+    cheapr::which_(
+      !cheapr::is_na(x[["accessURL"]]) &
+        cheapr::is_na(x[["description"]])
+    )
+  )
+
+  as.list(
+    uuid_from_url(
+      x[["accessURL"]]
+    )
+  ) |>
+    rlang::set_names(
+      extract_year(
+        x[["title"]]
+      )
+    )
 }
 
 #' @noRd
@@ -40,7 +59,11 @@ url_cms_list <- function(x) {
     cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
   )
 
-  paste0("https://data.cms.gov/data-api/v1/dataset/", x, "/data") |>
+  paste0(
+    "https://data.cms.gov/data-api/v1/dataset/",
+    x,
+    "/data"
+  ) |>
     as.list() |>
     set_names2(x)
 }
@@ -88,11 +111,17 @@ cms_list <- function(
 #' @noRd
 S7::method(count, EndpointCMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    S7::prop(x, "count") <- multi_count(
-      flatten_cms(x@url, x@query, "/stats?"),
+    S7::prop(x, "count") <- flatten_cms(
       x@url,
-      "found_rows"
-    )
+      x@query,
+      "/stats?"
+    ) |>
+      purrr::map_int(\(x) {
+        httr2::request(x) |>
+          httr2::req_perform() |>
+          parse_string(query = "found_rows")
+      }) |>
+      set_names2(x@url)
   }
   return(x)
 }
@@ -114,7 +143,7 @@ S7::method(request_single, EndpointCMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  u <- x@url[names(which(x@count > 0L))]
+  u <- x@url[rlang::names2(cheapr::which_(x@count > 0L))]
 
   flatten_cms(u, x@query) |>
     purrr::map(httr2::request) |>
@@ -129,7 +158,7 @@ S7::method(request_multi, EndpointCMSList) <- function(x) {
   report_count(x)
   report_pages(x)
 
-  i <- names(which(x@count > 0L))
+  i <- rlang::names2(cheapr::which_(x@count > 0L))
   u <- x@url[i]
   n <- unname(x@count[i])
 
