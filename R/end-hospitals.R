@@ -39,10 +39,10 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' hospitals(
-#'   prov_type = "cah",
-#'   state = "GA"
-#'  )
+# hospitals(
+#   prov_type = "cah",
+#   state = "GA"
+#  )
 #'
 #' hospitals(
 #'   city = "Atlanta",
@@ -107,7 +107,7 @@ hospitals <- function(
     return(invisible(x))
   }
 
-  x <- Result(x)
+  x <- as_result(x)
 
-  chain(x, fn_hospitals2)
+  chain(x, keychain$hospitals2)
 }

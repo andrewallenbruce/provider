@@ -1,5 +1,10 @@
 #' @noRd
-key <- S7::new_generic("key", "x")
+chunk <- function(x, chunks, size, length) {
+  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
+    cheapr::sset(seq_len(length))
+
+  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
+}
 
 #' @noRd
 Key <- S7::new_class(
@@ -62,16 +67,11 @@ check_key <- function(
 }
 
 #' @noRd
-chunk <- function(x, chunks, size, length) {
-  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
-    cheapr::sset(seq_len(length))
-
-  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
-}
-
-#' @noRd
-extract_key <- function(x) {
-  check_key(x)
+as_key <- function(x, size = 150L) {
+  x <- Key(
+    collapse::funique(collapse::na_rm(x)),
+    size = size
+  )
   if (x@length == 0L) {
     return(NULL)
   }
@@ -82,23 +82,21 @@ extract_key <- function(x) {
 }
 
 #' @noRd
-S7::method(key, s3_opt_out) <- function(x) {
+shave <- S7::new_generic("shave", "x")
+
+#' @noRd
+S7::method(shave, s3_opt_out) <- function(x) {
   x <- collapse::ss(
     x = x,
     i = x[["order_refer"]] %==% 1L,
     j = "npi",
     check = FALSE
   )
-  x <- unlist_(x)
-  x <- collapse::funique(collapse::na_rm(x))
-  x <- as.character(x)
-  k <- Key(x, 150L)
-  extract_key(k)
+  x <- as.character(unlist_(x))
+  as_key(x, 150L)
 }
 
 #' @noRd
-S7::method(key, s3_hospitals) <- function(x) {
-  x <- collapse::funique(collapse::na_rm(x[["ccn"]]))
-  k <- Key(x, 200L)
-  extract_key(k)
+S7::method(shave, s3_hospitals) <- function(x) {
+  as_key(x[["ccn"]], 200L)
 }

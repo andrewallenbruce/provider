@@ -198,10 +198,6 @@ subgroups(acute = TRUE, rehab = FALSE)
 subgroups()
 
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-hospitals(
-  prov_type = "cah",
-  state = "GA"
- )
 
 hospitals(
   city = "Atlanta",

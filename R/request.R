@@ -74,7 +74,7 @@ count <- S7::new_generic("count", "x")
 #' @noRd
 S7::method(count, EndpointCMS) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    N <- flatten_cms(
+    S7::prop(x, "count") <- flatten_cms(
       S7::prop(x, "url"),
       S7::prop(x, "query"),
       "/stats?"
@@ -82,8 +82,6 @@ S7::method(count, EndpointCMS) <- function(x) {
       httr2::request() |>
       httr2::req_perform() |>
       parse_string("found_rows")
-
-    S7::prop(x, "count") <- N
   }
   return(x)
 }
@@ -91,7 +89,7 @@ S7::method(count, EndpointCMS) <- function(x) {
 #' @noRd
 S7::method(count, EndpointPDC) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    N <- flatten_pdc(
+    S7::prop(x, "count") <- flatten_pdc(
       S7::prop(x, "url"),
       S7::prop(x, "query"),
       results = "false"
@@ -99,8 +97,6 @@ S7::method(count, EndpointPDC) <- function(x) {
       httr2::request() |>
       httr2::req_perform() |>
       parse_string("count")
-
-    S7::prop(x, "count") <- N
   }
   return(x)
 }
@@ -108,20 +104,17 @@ S7::method(count, EndpointPDC) <- function(x) {
 #' @noRd
 S7::method(count, EndpointCMSList) <- function(x) {
   if (length(x@query) > 0L || x@action == "count") {
-    U <- flatten_cms(
+    S7::prop(x, "count") <- flatten_cms(
       S7::prop(x, "url"),
       S7::prop(x, "query"),
       "/stats?"
-    )
-
-    N <- purrr::map_int(U, function(x) {
-      httr2::request(x) |>
-        httr2::req_perform() |>
-        parse_string("found_rows")
-    }) |>
+    ) |>
+      purrr::map_int(\(x) {
+        httr2::request(x) |>
+          httr2::req_perform() |>
+          parse_string("found_rows")
+      }) |>
       set_names2(S7::prop(x, "url"))
-
-    S7::prop(x, "count") <- N
   }
   return(x)
 }
@@ -231,13 +224,20 @@ S7::method(request_multi, EndpointCMS) <- function(x) {
   inform_count(x)
   inform_pages(x)
 
-  flatten_cms(x@url, x@query, offset = "<<i>>") |>
-    offset2(x@count, x@limit) |>
+  flatten_cms(
+    S7::prop(x, "url"),
+    S7::prop(x, "query"),
+    offset = "<<i>>"
+  ) |>
+    offset2(
+      S7::prop(x, "count"),
+      S7::prop(x, "limit")
+    ) |>
     purrr::map(httr2::request) |>
     httr2::req_perform_parallel(on_error = "continue") |>
     purrr::map(parse_string) |>
     rowbind2() |>
-    add_class(x@end)
+    add_class(S7::prop(x, "end"))
 }
 
 #' @noRd

@@ -92,7 +92,7 @@ opt_out <- function(
     return(x)
   }
 
-  x <- Result(x)
+  x <- as_result(x)
 
-  chain(x, fn_order_refer)
+  chain(x, keychain$order_refer)
 }

@@ -6,45 +6,48 @@ Result <- S7::new_class(
   "Result",
   package = NULL,
   properties = list(
-    df = S7::new_S3_class("tbl_df")
+    df = S7::new_S3_class("tbl_df"),
+    key = S7::new_property(Key | S7::class_character)
   )
 )
+
+#' @noRd
+as_result <- function(x) {
+  Result(df = x, key = shave(x))
+}
 
 #' @noRd
 chain <- S7::new_generic("chain", c("x", "end"))
 
 #' @noRd
 S7::method(chain, list(Result, S7::class_function)) <- function(x, end) {
-  x <- S7::prop(x, "df")
-  k <- key(x)
-
-  if (!is_key(k)) {
-    if (is.null(k)) {
-      return(x)
+  if (!is_key(x@key)) {
+    if (is.null(x@key)) {
+      return(x@df)
     }
-    y <- end(k)
+    y <- end(x@key)
 
     if (no_rows(y)) {
-      return(x)
+      return(x@df)
     }
 
-    return(link(x, y))
+    return(link(x@df, y))
   }
 
-  y <- rowbind2(purrr::map(S7::prop(k, "split"), end))
+  y <- rowbind2(purrr::map(x@key@split, end))
 
   if (no_rows(y)) {
-    return(x)
+    return(x@df)
   }
 
-  link(x, y)
+  link(x@df, y)
 }
 
 #' @noRd
-fn_order_refer <- rlang::as_function(~ order_refer(npi = .x))
-
-#' @noRd
-fn_hospitals2 <- rlang::as_function(~ hospitals2(ccn = .x))
+keychain <- list(
+  order_refer = rlang::as_function(~ order_refer(npi = .x)),
+  hospitals2 = rlang::as_function(~ hospitals2(ccn = .x))
+)
 
 #' @noRd
 link <- S7::new_generic("link", c("x", "y"))
