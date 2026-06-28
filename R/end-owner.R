@@ -58,7 +58,7 @@ owner <- function(
     )
   }
 
-  x <- cms_list(
+  x <- end_cmslist(
     count = count,
     set = FALSE,
     select = fac_type,

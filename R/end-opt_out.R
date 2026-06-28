@@ -40,7 +40,8 @@
 #' @examplesIf httr2::is_online()
 #' opt_out(count = TRUE)
 #'
-#' opt_out(state = "GA", specialty = contains("Psych"))
+#' opt_out(state = "GA",
+#'         specialty = contains("Psych"))
 #'
 #' @export
 opt_out <- function(
@@ -64,7 +65,7 @@ opt_out <- function(
     start_year <- ends(start_year)
   }
 
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     NPI = npi,

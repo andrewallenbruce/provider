@@ -1,4 +1,7 @@
 #' @noRd
+recode <- S7::new_generic("recode", "x")
+
+#' @noRd
 rm_period <- function(x, col = "cred") {
   x[[col]] <- gsub(".", "", x[[col]], fixed = TRUE)
   return(x)

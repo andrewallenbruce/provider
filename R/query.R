@@ -54,8 +54,9 @@ flatten_query <- function(x) {
     (\(x) paste0(x, collapse = "&"))()
 }
 
-#' @include aaa-classes.R
-#' @include aaa-generics.R
+#' @noRd
+build <- S7::new_generic("build", "x")
+
 #' @noRd
 S7::method(build, ParamCMS) <- function(x) {
   S7::S7_data(x) %0% return(NULL)

@@ -1,3 +1,4 @@
+#' @include polish.R
 #' @noRd
 S7::method(polish, s3_nppes) <- function(x) {
   collapse::gvr(x, "_epoch$|^endpoints$") <- NULL
@@ -50,24 +51,28 @@ S7::method(polish, s3_nppes) <- function(x) {
       base = collapse::ss(
         x$type_1,
         j = c(1:6, 12:22),
-        check = FALSE) |>
+        check = FALSE
+      ) |>
         collapse::funique(),
       address = collapse::ss(
         x$type_1,
         j = c(1L, 7:11),
-        check = FALSE) |>
+        check = FALSE
+      ) |>
         collapse::funique()
-      ),
+    ),
     type_2 = list(
       base = collapse::ss(
         x$type_2,
         j = c(1:8, 14:21),
-        check = FALSE) |>
+        check = FALSE
+      ) |>
         collapse::funique(),
       address = collapse::ss(
         x$type_2,
         j = c(1L, 9:13),
-        check = FALSE) |>
+        check = FALSE
+      ) |>
         collapse::funique()
     )
   )

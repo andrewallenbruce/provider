@@ -1,4 +1,20 @@
 #' @noRd
+check_endpoint <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
+  if (S7::S7_inherits(x, Endpoint)) {
+    return(invisible(NULL))
+  }
+  cli::cli_abort(
+    "{.arg {arg}} must be an {.cls Endpoint}, not {.obj_type_friendly {x}}",
+    arg = arg,
+    call = call
+  )
+}
+
+#' @noRd
 count_set <- function(count, set, call = rlang::caller_env()) {
   rlang::check_bool(count)
   rlang::check_bool(set)
@@ -15,21 +31,6 @@ count_set <- function(count, set, call = rlang::caller_env()) {
     return("set")
   }
   return("")
-}
-
-#' @noRd
-check_key <- function(
-  x,
-  arg = rlang::caller_arg(x),
-  call = rlang::caller_env()
-) {
-  if (!is_key(x)) {
-    cli::cli_abort(
-      "{.arg {arg}} must be a {.cls {Key}} object, not {.obj_type_friendly {x}}",
-      arg = arg,
-      call = call
-    )
-  }
 }
 
 #' @noRd

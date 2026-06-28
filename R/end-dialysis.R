@@ -31,15 +31,14 @@ dialysis <- function(
   state = NULL,
   zip = NULL,
   county = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_numeric(rating)
   check_numeric(network)
 
-  x <- pdc(
+  x <- end_pdc(
     count = count,
-    set = set,
+    set = FALSE,
     cms_certification_number_ccn = fac_ccn,
     facility_name = fac_name,
     chain_organization = org_name,

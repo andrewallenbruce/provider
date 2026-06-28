@@ -48,7 +48,7 @@ hospitals2 <- function(
   rating = NULL,
   count = FALSE
 ) {
-  x <- pdc(
+  x <- end_pdc(
     count = count,
     set = FALSE,
     facility_id = ccn,

@@ -70,7 +70,7 @@ transparency <- function(
 ) {
   check_char_(action)
 
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     Hosp_Name = fac_name,

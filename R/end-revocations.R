@@ -66,7 +66,7 @@ revocations <- function(
     end_year <- starts(end_year)
   }
 
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     NPI = npi,

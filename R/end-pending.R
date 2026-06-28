@@ -30,7 +30,7 @@ pending <- function(
   last = NULL,
   count = FALSE
 ) {
-  x <- cms_list(
+  x <- end_cmslist(
     count = count,
     set = FALSE,
     select = prov_type,

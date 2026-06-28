@@ -12,15 +12,6 @@ describe("check_modifiers()", {
         end = "ENDPOINT"
       )
     )
-    # FIXME Should this error?
-    # -> No `end` argument supplied to `check_modifiers`
-    # -> Because `end` is never evaluated
-    # -> In the cli::abort message since there are no modifiers to check
-    expect_no_error(
-      check_modifiers(
-        param_pdc()
-      )
-    )
   })
   it("errors with incorrect input", {
     expect_error(
@@ -33,6 +24,11 @@ describe("check_modifiers()", {
       check_modifiers(
         param_pdc(excludes("sdfg")),
         end = "ENDPOINT"
+      )
+    )
+    expect_error(
+      check_modifiers(
+        param_pdc()
       )
     )
   })

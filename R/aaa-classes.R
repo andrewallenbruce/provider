@@ -5,64 +5,6 @@ ParamCMS <- S7::new_class("ParamCMS", S7::class_list, package = NULL)
 ParamPDC <- S7::new_class("ParamPDC", S7::class_list, package = NULL)
 
 #' @noRd
-Query <- S7::new_class("Query", S7::class_list, package = NULL)
-
-#' @noRd
-QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
-
-#' @noRd
-QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
-
-#' @noRd
-Result <- S7::new_class(
-  "Result",
-  package = NULL,
-  properties = list(
-    df = S7::new_S3_class("tbl_df")
-  )
-)
-
-#' @noRd
-Key <- S7::new_class(
-  "Key",
-  S7::class_character,
-  package = NULL,
-  properties = list(
-    size = S7::new_property(
-      S7::class_integer,
-      default = 150L
-    ),
-    length = S7::new_property(
-      S7::class_integer,
-      getter = function(self) collapse::fnobs(self)
-    ),
-    chunks = S7::new_property(
-      S7::class_integer,
-      getter = function(self) {
-        if (self@length == 0L) {
-          return(0L)
-        }
-        cheapr::seq_size(1L, self@length, self@size)
-      }
-    ),
-    split = S7::new_property(
-      S7::class_list,
-      getter = function(self) {
-        if (self@chunks <= 1L) {
-          return()
-        }
-        chunk(
-          self,
-          self@chunks,
-          self@size,
-          self@length
-        )
-      }
-    )
-  )
-)
-
-#' @noRd
 Endpoint <- S7::new_class(
   "Endpoint",
   package = NULL,

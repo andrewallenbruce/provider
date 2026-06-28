@@ -1,4 +1,13 @@
 #' @noRd
+Query <- S7::new_class("Query", S7::class_list, package = NULL)
+
+#' @noRd
+QueryCMS <- S7::new_class("QueryCMS", Query, package = NULL)
+
+#' @noRd
+QueryPDC <- S7::new_class("QueryPDC", Query, package = NULL)
+
+#' @noRd
 get_values <- function(x) {
   if (is_modifier(x)) {
     return(plus(x@value))

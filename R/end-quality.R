@@ -76,7 +76,7 @@ quality <- function(
   check_char_(state)
   check_char_(specialty)
 
-  x <- cms_list(
+  x <- end_cmslist(
     count = count,
     set = FALSE,
     select = year,

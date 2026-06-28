@@ -70,17 +70,16 @@ clia <- function(
   chows = NULL,
   active = NULL,
   eligible = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 ) {
   check_char_(cert_type)
   check_char_(acr_org)
   check_bool_(active)
   check_bool_(eligible)
 
-  x <- cms(
+  x <- end_cms(
     count = count,
-    set = set,
+    set = FALSE,
     FAC_NAME = name,
     PRVDR_NUM = ccn,
     CLIA_MDCR_NUM = clia,

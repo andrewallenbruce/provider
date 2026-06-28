@@ -28,8 +28,7 @@ clia(
   chows = NULL,
   active = NULL,
   eligible = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 }
 \arguments{

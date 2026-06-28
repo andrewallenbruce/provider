@@ -41,7 +41,7 @@ affiliations <- function(
 ) {
   check_char_(fac_type)
 
-  x <- pdc(
+  x <- end_pdc(
     count = count,
     set = FALSE,
     npi = npi,

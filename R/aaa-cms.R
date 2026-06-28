@@ -1,9 +1,4 @@
 #' @noRd
-opts_cms <- function(size = 5000L, offset = 0L) {
-  flatten_opts(params(size = size, offset = offset))
-}
-
-#' @noRd
 url_cms <- function(x) {
   paste0(
     "https://data.cms.gov/data-api/v1/dataset/",
@@ -17,13 +12,12 @@ url_cms <- function(x) {
       reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
       revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
       transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
-      cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
+      cli::cli_abort("{.strong {.pkg CMS} Endpoint} `{.field {x}}` not found.")
     ),
     "/data"
   )
 }
 
-#' @include aaa-classes.R
 #' @noRd
 param_cms <- function(...) {
   x <- ParamCMS(params(...))
@@ -32,7 +26,7 @@ param_cms <- function(...) {
 }
 
 #' @noRd
-cms <- function(
+end_cms <- function(
   count = FALSE,
   set = FALSE,
   ...,
@@ -58,66 +52,15 @@ cms <- function(
 }
 
 #' @noRd
+opts_cms <- function(size = 5000L, offset = 0L) {
+  flatten_opts(params(size = size, offset = offset))
+}
+
+#' @noRd
 flatten_cms <- function(url, query = NULL, append = "?", ...) {
   flatten_url(
     base = paste0(url, append),
     query %0% NULL,
     opts_cms(...)
   )
-}
-
-#' @include aaa-generics.R
-#' @noRd
-S7::method(count, EndpointCMS) <- function(x) {
-  if (length(x@query) > 0L || x@action == "count") {
-    S7::prop(x, "count") <- flatten_cms(
-      x@url,
-      x@query,
-      "/stats?"
-    ) |>
-      httr2::request() |>
-      httr2::req_perform() |>
-      parse_string("found_rows")
-  }
-  return(x)
-}
-
-#' @noRd
-S7::method(preview, EndpointCMS) <- function(x) {
-  report_preview()
-
-  flatten_cms(
-    x@url,
-    NULL,
-    size = 10L
-  ) |>
-    httr2::request() |>
-    httr2::req_perform() |>
-    parse_string() |>
-    add_class(x@end)
-}
-
-#' @noRd
-S7::method(request_single, EndpointCMS) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  flatten_cms(x@url, x@query) |>
-    httr2::request() |>
-    httr2::req_perform() |>
-    parse_string() |>
-    add_class(x@end)
-}
-
-#' @noRd
-S7::method(request_multi, EndpointCMS) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  flatten_cms(x@url, x@query, offset = "<<i>>") |>
-    offset2(x@count, x@limit) |>
-    purrr::map(httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    httr2::resps_data(function(resp) parse_string(resp)) |>
-    add_class(x@end)
 }

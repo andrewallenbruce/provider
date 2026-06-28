@@ -1,22 +1,23 @@
 #' @noRd
-check_modifiers <- S7::new_generic("check_modifiers", "x")
-
-#' @noRd
-S7::method(check_modifiers, ParamPDC) <- function(x, end) {
-  mods <- purrr::map_lgl(x, is_modifier)
-
-  if (any2(mods)) {
-    mods <- unlist_(x[mods])
-    if (any2(mods %in% c("ends", "excludes"))) {
-      cli::cli_abort(
-        c(
-          "Invalid {.cls modifier} used in {.fn {end}}: ",
-          "x" = "{.fn ends} & {.fn excludes} do not work with the Provider Data Catalog API."
-        ),
-        call = rlang::call2(end)
-      )
+check_modifiers <- function(x, end) {
+  rlang::check_required(end)
+  if (S7::S7_inherits(x, ParamPDC)) {
+    if (purrr::some(x, is_modifier)) {
+      x <- unlist_(x[purrr::map_lgl(x, is_modifier)])
+      if (any2(x %in% c("ends", "excludes"))) {
+        cli::cli_abort(
+          c(
+            "x" = "Invalid query {.cls modifier} used in {.fn {end}}",
+            ">" = "Modifiers that do not work with {.strong Provider Data Catalog} endpoints: ",
+            "*" = "{.fn ends}",
+            "*" = "{.fn excludes}"
+          ),
+          call = rlang::call2(end)
+        )
+      }
     }
   }
+  invisible()
 }
 
 #' @noRd
@@ -47,7 +48,7 @@ url_pdc <- function(x) {
       clinicians = "mj5m-pzi6",
       hospitals2 = "xubh-q36u",
       dialysis = "23ew-n7w9",
-      cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
+      cli::cli_abort("{.strong {.pkg PDC} Endpoint} `{.field {x}}` not found.")
     ),
     "/0?"
   )
@@ -62,7 +63,7 @@ param_pdc <- function(...) {
 }
 
 #' @noRd
-pdc <- function(
+end_pdc <- function(
   count = FALSE,
   set = FALSE,
   ...,
@@ -96,73 +97,4 @@ flatten_pdc <- function(url, query = NULL, ...) {
     query %0% NULL,
     opts_pdc(...)
   )
-}
-
-#' @include aaa-generics.R
-#' @noRd
-S7::method(count, EndpointPDC) <- function(x) {
-  if (length(S7::prop(x, "query")) > 0L || S7::prop(x, "action") == "count") {
-    r <- flatten_pdc(
-      S7::prop(x, "url"),
-      S7::prop(x, "query"),
-      results = "false"
-    ) |>
-      httr2::request() |>
-      httr2::req_perform() |>
-      parse_string("count")
-
-    S7::prop(x, "count") <- r
-  }
-  return(x)
-}
-
-#' @noRd
-S7::method(preview, EndpointPDC) <- function(x) {
-  report_preview()
-
-  flatten_pdc(
-    S7::prop(x, "url"),
-    NULL,
-    limit = 10L
-  ) |>
-    httr2::request() |>
-    httr2::req_perform() |>
-    parse_string("results") |>
-    add_class(S7::prop(x, "end"))
-}
-
-#' @noRd
-S7::method(request_single, EndpointPDC) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  flatten_pdc(
-    S7::prop(x, "url"),
-    S7::prop(x, "query"),
-    limit = 10L
-  ) |>
-    httr2::request() |>
-    httr2::req_perform() |>
-    parse_string("results") |>
-    add_class(S7::prop(x, "end"))
-}
-
-#' @noRd
-S7::method(request_multi, EndpointPDC) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  flatten_pdc(
-    S7::prop(x, "url"),
-    S7::prop(x, "query"),
-    offset = "<<i>>"
-  ) |>
-    offset2(
-      S7::prop(x, "count"),
-      S7::prop(x, "limit")
-    ) |>
-    purrr::map(httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    httr2::resps_data(function(resp) parse_string(resp, "results")) |>
-    add_class(S7::prop(x, "end"))
 }

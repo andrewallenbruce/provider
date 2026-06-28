@@ -1,3 +1,4 @@
+#' @include polish.R
 #' @noRd
 quality_get <- function(x, y) {
   y <- as.character(y)

@@ -44,7 +44,7 @@ reassignments <- function(
   org_state = NULL,
   count = FALSE
 ) {
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     `Individual NPI` = npi,

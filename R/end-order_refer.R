@@ -55,7 +55,7 @@ order_refer <- function(
   check_bool_(pmd)
   check_bool_(hospice)
 
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     NPI = npi,

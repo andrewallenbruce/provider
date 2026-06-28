@@ -41,7 +41,7 @@ providers <- function(
 ) {
   check_bool_(multi)
 
-  x <- cms(
+  x <- end_cms(
     count = count,
     set = FALSE,
     NPI = npi,

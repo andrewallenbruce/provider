@@ -1,32 +1,55 @@
 #' @noRd
-temporal_uuid <- function(rex) {
+cms_temporal <- function(rex = NULL) {
   x <- RcppSimdJson::fload(
-    "https://data.cms.gov/data.json",
-    "/dataset"
+    json = "https://data.cms.gov/data.json",
+    query = "/dataset"
   ) |>
-    collapse::get_elem("distribution") |>
+    collapse::get_elem(elem = "distribution") |>
     collapse::rowbind(fill = TRUE)
 
-  x <- collapse::ss(x, grep(rex, x[["title"]], perl = TRUE))
+  if (!is.null(rex)) {
+    x <- collapse::ss(
+      x,
+      grep(rex, x[["title"]], perl = TRUE),
+      check = FALSE
+    )
+  }
+
+  cheapr::lag_(x[["downloadURL"]], -1L, set = TRUE)
+
+  i_1 <- !cheapr::is_na(x[["accessURL"]])
+  i_2 <- cheapr::is_na(x[["description"]])
 
   x <- collapse::ss(
     x,
-    cheapr::which_(
-      !cheapr::is_na(x[["accessURL"]]) &
-        cheapr::is_na(x[["description"]])
-    )
+    cheapr::which_(i_1 & i_2),
+    c(
+      "title",
+      "modified",
+      "temporal",
+      "accessURL",
+      "resourcesAPI",
+      "downloadURL"
+    ),
+    check = FALSE
   )
 
-  as.list(
-    uuid_from_url(
-      x[["accessURL"]]
+  if (is.null(rex)) {
+    x[["title"]] <- purrr::map_chr(
+      strsplit(
+        x = x[["title"]],
+        split = " : ",
+        fixed = TRUE
+      ),
+      function(x) purrr::pluck(x, 1)
     )
-  ) |>
-    rlang::set_names(
-      extract_year(
-        x[["title"]]
-      )
-    )
+    return(collapse::qTBL(x))
+  }
+
+  rlang::set_names(
+    as.list(uuid_from_url(x[["accessURL"]])),
+    extract_year(x[["title"]])
+  )
 }
 
 #' @noRd
@@ -52,24 +75,23 @@ url_cms_list <- function(x) {
       Hospice = "e983965e-1603-4cb8-82b5-c40090e380d1",
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
-    quality = temporal_uuid("^Quality"),
-    utilization = temporal_uuid("Practitioners - by Provider :"),
-    service = temporal_uuid("Practitioners - by Provider and Service :"),
-    geography = temporal_uuid("Practitioners - by Geography and Service :"),
-    cli::cli_abort("{.arg endpoint} {.val {x}} is invalid.")
+    quality = cms_temporal("^Quality"),
+    utilization = cms_temporal("Practitioners - by Provider :"),
+    service = cms_temporal("Practitioners - by Provider and Service :"),
+    geography = cms_temporal("Practitioners - by Geography and Service :"),
+    cli::cli_abort(
+      "{.strong {.pkg CMS LIST} Endpoint} `{.field {x}}` not found."
+    )
   )
 
-  paste0(
-    "https://data.cms.gov/data-api/v1/dataset/",
-    x,
-    "/data"
-  ) |>
-    as.list() |>
-    set_names2(x)
+  a <- "https://data.cms.gov/data-api/v1/dataset/"
+  z <- "/data"
+
+  set_names2(as.list(paste0(a, x, z)), x)
 }
 
 #' @noRd
-cms_list <- function(
+end_cmslist <- function(
   count = FALSE,
   set = FALSE,
   select = NULL,
@@ -105,69 +127,4 @@ cms_list <- function(
   )
 
   count(x)
-}
-
-#' @include aaa-generics.R
-#' @noRd
-S7::method(count, EndpointCMSList) <- function(x) {
-  if (length(x@query) > 0L || x@action == "count") {
-    S7::prop(x, "count") <- flatten_cms(
-      x@url,
-      x@query,
-      "/stats?"
-    ) |>
-      purrr::map_int(\(x) {
-        httr2::request(x) |>
-          httr2::req_perform() |>
-          parse_string(query = "found_rows")
-      }) |>
-      set_names2(x@url)
-  }
-  return(x)
-}
-
-#' @noRd
-S7::method(preview, EndpointCMSList) <- function(x) {
-  report_preview()
-
-  flatten_cms(x@url, NULL, size = 10L) |>
-    purrr::map(httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    purrr::map(parse_string) |>
-    set_names2(x@url) |>
-    add_class2(x@end)
-}
-
-#' @noRd
-S7::method(request_single, EndpointCMSList) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  u <- x@url[rlang::names2(cheapr::which_(x@count > 0L))]
-
-  flatten_cms(u, x@query) |>
-    purrr::map(httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    purrr::map(parse_string) |>
-    set_names2(u) |>
-    add_class2(x@end)
-}
-
-#' @noRd
-S7::method(request_multi, EndpointCMSList) <- function(x) {
-  report_count(x)
-  report_pages(x)
-
-  i <- rlang::names2(cheapr::which_(x@count > 0L))
-  u <- x@url[i]
-  n <- unname(x@count[i])
-
-  flatten_cms(u, x@query, offset = "<<i>>") |>
-    offset3(n, x@limit) |>
-    unlist_() |>
-    purrr::map(httr2::request) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
-    purrr::map(parse_string) |>
-    set_names2(u) |>
-    add_class2(x@end)
 }

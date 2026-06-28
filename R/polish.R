@@ -1,6 +1,5 @@
-#' @include aaa-classes.R
-#' @include aaa-generics.R
-NULL
+#' @noRd
+polish <- S7::new_generic("polish", "x")
 
 #' @noRd
 S7::method(polish, S7::class_integer | Endpoint) <- function(x) {

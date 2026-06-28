@@ -1,6 +1,65 @@
-#' @include aaa-classes.R
-#' @include aaa-generics.R
-NULL
+#' @noRd
+key <- S7::new_generic("key", "x")
+
+#' @noRd
+Key <- S7::new_class(
+  "Key",
+  S7::class_character,
+  package = NULL,
+  properties = list(
+    size = S7::new_property(
+      S7::class_integer,
+      default = 150L
+    ),
+    length = S7::new_property(
+      S7::class_integer,
+      getter = function(self) collapse::fnobs(self)
+    ),
+    chunks = S7::new_property(
+      S7::class_integer,
+      getter = function(self) {
+        if (self@length == 0L) {
+          return(0L)
+        }
+        cheapr::seq_size(1L, self@length, self@size)
+      }
+    ),
+    split = S7::new_property(
+      S7::class_list,
+      getter = function(self) {
+        if (self@chunks <= 1L) {
+          return()
+        }
+        chunk(
+          self,
+          self@chunks,
+          self@size,
+          self@length
+        )
+      }
+    )
+  )
+)
+
+#' @noRd
+is_key <- function(x) {
+  S7::S7_inherits(x, Key)
+}
+
+#' @noRd
+check_key <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
+  if (!is_key(x)) {
+    cli::cli_abort(
+      "{.arg {arg}} must be a {.cls {Key}} object, not {.obj_type_friendly {x}}",
+      arg = arg,
+      call = call
+    )
+  }
+}
 
 #' @noRd
 chunk <- function(x, chunks, size, length) {
@@ -8,11 +67,6 @@ chunk <- function(x, chunks, size, length) {
     cheapr::sset(seq_len(length))
 
   vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
-}
-
-#' @noRd
-is_key <- function(x) {
-  S7::S7_inherits(x, Key)
 }
 
 #' @noRd

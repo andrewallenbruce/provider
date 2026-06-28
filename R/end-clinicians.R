@@ -64,7 +64,7 @@ clinicians <- function(
 ) {
   check_char_(gender)
 
-  x <- pdc(
+  x <- end_pdc(
     count = count,
     set = FALSE,
     npi = npi,

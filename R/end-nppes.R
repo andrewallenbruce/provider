@@ -86,7 +86,10 @@
 #'    it *is not* `"US"`.
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' nppes(c(1851713903, 1174270805, 1225701881, 1588817837, 1982059275, 1255782751, 1255877502, 1841008505, 1003826272))
+#' nppes(
+#'   c(1851713903, 1174270805, 1225701881,
+#'     1588817837, 1982059275, 1255782751,
+#'     1255877502, 1841008505, 1003826272))
 #' @export
 nppes <- function(npi) {
   check_numeric(npi)

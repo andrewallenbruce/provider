@@ -1,20 +1,5 @@
 #' @noRd
-check_endpoint <- function(
-  x,
-  arg = rlang::caller_arg(x),
-  call = rlang::caller_env()
-) {
-  if (!S7::S7_inherits(x, Endpoint)) {
-    cli::cli_abort(
-      "{.arg {arg}} must be an {.cls Endpoint}, not {.obj_type_friendly {x}}",
-      arg = arg,
-      call = call
-    )
-  }
-}
-
-#' @noRd
-report_preview <- function() {
+inform_preview <- function() {
   msg <- cli::format_inline(
     "Returning first {.strong {cli::col_yellow(10)}} rows"
   )
@@ -27,7 +12,7 @@ report_preview <- function() {
 }
 
 #' @noRd
-report_total <- function(x) {
+inform_summary <- function(x) {
   check_endpoint(x)
 
   sep <- cli::style_bold(cli::col_silver(" | "))
@@ -37,12 +22,12 @@ report_total <- function(x) {
   cli::cli_text(
     bar,
     " ",
-    cli::style_bold(x@end),
+    cli::style_bold(S7::prop(x, "end")),
     sep,
-    fmt(x@count),
+    fmt(S7::prop(x, "count")),
     " rows",
     sep,
-    fmt(x@pages),
+    fmt(S7::prop(x, "pages")),
     " pages"
   )
 
@@ -50,13 +35,14 @@ report_total <- function(x) {
 }
 
 #' @noRd
-report_count <- function(x) {
+inform_count <- function(x) {
   check_endpoint(x)
 
-  N <- sum2(x@count)
+  N <- sum2(S7::prop(x, "count"))
+  E <- S7::prop(x, "end")
 
   msg <- cli::format_inline(
-    "{.strong {x@end}} returned ",
+    "{.strong {E}} returned ",
     "{.strong {cli::col_yellow(mark(N))}} ",
     "{cli::qty(N)}result{?s}"
   )
@@ -70,19 +56,29 @@ report_count <- function(x) {
 }
 
 #' @noRd
-report_pages <- function(x) {
+inform_pages <- function(x) {
   check_endpoint(x)
 
   if (S7::S7_inherits(x, EndpointCMSList)) {
-    pgs <- length(x@url[names(which(x@count > 0L))])
+    pgs <- length(
+      S7::prop(x, "url")[
+        rlang::names2(
+          cheapr::which_(
+            S7::prop(x, "count") > 0L
+          )
+        )
+      ]
+    )
+
     msg <- cli::format_inline(
       "Retrieving {.strong {cli::col_yellow(pgs)}} {cli::qty(pgs)}page{?s}"
     )
   }
 
   if (S7::S7_inherits(x, Endpoint)) {
+    pgs <- S7::prop(x, "pages")
     msg <- cli::format_inline(
-      "Retrieving {.strong {cli::col_yellow(x@pages)}} {cli::qty(x@pages)}page{?s}"
+      "Retrieving {.strong {cli::col_yellow(pgs)}} {cli::qty(pgs)}page{?s}"
     )
   }
 
