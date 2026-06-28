@@ -14,6 +14,13 @@ quality_get <- function(x, y) {
     return(list())
   }
 
+  if (collapse::has_elem(x, z)) {
+    test <- unlist_(collapse::get_elem(x, z, keep.tree = TRUE))
+    if (rlang::is_empty(test)) {
+      return(list())
+    }
+  }
+
   x <- collapse::get_elem(x, z, keep.tree = TRUE) |>
     rowbind2("year", fill = TRUE)
 
