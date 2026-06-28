@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9274 (2026-06-28)
+
+- fixed `quality_get`
+
 ## provider 0.0.1.9273 (2026-06-28)
 
 - `cms_temporal()` rewrite
