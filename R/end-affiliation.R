@@ -26,6 +26,7 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
+#' affiliations(count = TRUE)
 #' affiliations(ccn = 331302)
 #' affiliations(parent_ccn = 331302)
 #' @export

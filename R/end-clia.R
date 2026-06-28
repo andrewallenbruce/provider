@@ -54,6 +54,7 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
+#' clia(count = TRUE)
 #' clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #' clia(acr_org = c("cap", "cola", "jcaho"))
 #' @export

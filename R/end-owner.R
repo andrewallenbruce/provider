@@ -28,6 +28,7 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
+#' owner(count = TRUE)
 #' owner(city = "Valdosta", state = "GA")
 #' @export
 owner <- function(

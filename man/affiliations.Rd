@@ -57,6 +57,7 @@ affiliations with organizations/facilities.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+affiliations(count = TRUE)
 affiliations(ccn = 331302)
 affiliations(parent_ccn = 331302)
 \dontshow{\}) # examplesIf}

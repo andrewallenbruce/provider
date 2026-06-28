@@ -7,7 +7,7 @@
 #' @source
 #'    * [API: Dialysis Facility - Listing by Facility](https://data.cms.gov/provider-data/dataset/23ew-n7w9)
 #'
-#' @param fac_ccn `<chr>` Facility CMS Certification Number
+#' @param ccn `<chr>` Facility CMS Certification Number
 #' @param fac_name `<chr>` Facility name
 #' @param org_name `<chr>` Name of the chain organization the facility is owned/managed by
 #' @param rating `<int>` Facility's Quality of Care star rating; (1-5)
@@ -17,10 +17,11 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' dialysis(org_name = "DaVita")
+#' dialysis(count = TRUE)
+#' dialysis(org_name = "DaVita", state = "GA")
 #' @export
 dialysis <- function(
-  fac_ccn = NULL,
+  ccn = NULL,
   fac_name = NULL,
   org_name = NULL,
   rating = NULL,
@@ -39,7 +40,7 @@ dialysis <- function(
   x <- end_pdc(
     count = count,
     set = FALSE,
-    cms_certification_number_ccn = fac_ccn,
+    cms_certification_number_ccn = ccn,
     facility_name = fac_name,
     chain_organization = org_name,
     five_star = tag_rating(rating),

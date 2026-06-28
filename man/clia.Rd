@@ -129,6 +129,7 @@ laboratory is accredited by one of the CMS-approved organizations:
 
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+clia(count = TRUE)
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 clia(acr_org = c("cap", "cola", "jcaho"))
 \dontshow{\}) # examplesIf}

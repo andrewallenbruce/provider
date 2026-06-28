@@ -39,20 +39,15 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-# hospitals(
-#   prov_type = "cah",
-#   state = "GA"
-#  )
+#' hospitals(count = TRUE)
+#'
+#' hospitals(prov_type = "cah", state = "GA")
 #'
 #' hospitals(
 #'   city = "Atlanta",
 #'   state = "GA",
-#'   subgroup = subgroups(
-#'     acute = FALSE
-#'    )
-#'  )
-#'
-#' hospitals(ccn = hospitals2()$ccn)
+#'   subgroup = subgroups(acute = FALSE)
+#' )
 #'
 #' @export
 hospitals <- function(

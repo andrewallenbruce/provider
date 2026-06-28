@@ -19,57 +19,57 @@ S7::method(polish, s3_nppes) <- function(x) {
   )
 
   x <- list(
-    type_1 = nppes_by_type(x, 1L),
-    type_2 = nppes_by_type(x, 2L)
+    ind = nppes_by_type(x, 1L),
+    org = nppes_by_type(x, 2L)
   )
 
   collapse::gv(
-    x[["type_1"]],
+    x[["ind"]],
     c("on_name", "on_type")
   ) <- NULL
 
   collapse::gv(
-    x[["type_2"]],
+    x[["org"]],
     c("sub_type", "on_type")
   ) <- NULL
 
   collapse::setrename(
-    x[["type_2"]],
+    x[["org"]],
     "on_name" = "org_dba",
     .nse = FALSE
   )
 
-  x[["type_2"]] <- collapse::colorderv(
-    x[["type_2"]],
+  x[["org"]] <- collapse::colorderv(
+    x[["org"]],
     "^org_",
     regex = TRUE,
     pos = "after"
   )
 
   list(
-    type_1 = list(
+    ind = list(
       base = collapse::ss(
-        x$type_1,
+        x$ind,
         j = c(1:6, 12:22),
         check = FALSE
       ) |>
         collapse::funique(),
       address = collapse::ss(
-        x$type_1,
+        x$ind,
         j = c(1L, 7:11),
         check = FALSE
       ) |>
         collapse::funique()
     ),
-    type_2 = list(
+    org = list(
       base = collapse::ss(
-        x$type_2,
+        x$org,
         j = c(1:8, 14:21),
         check = FALSE
       ) |>
         collapse::funique(),
       address = collapse::ss(
-        x$type_2,
+        x$org,
         j = c(1L, 9:13),
         check = FALSE
       ) |>

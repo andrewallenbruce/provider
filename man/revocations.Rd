@@ -116,8 +116,6 @@ revocations(count = TRUE)
 
 revocations(org_name = not_blank(), count = TRUE)
 
-revocations(org_name = starts("B"), count = TRUE)
-
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 \dontshow{\}) # examplesIf}
 }

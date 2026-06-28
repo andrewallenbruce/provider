@@ -33,6 +33,7 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
+#' facility(count = TRUE)
 #' facility(city = "Valdosta", state = "GA")
 #' @export
 facility <- function(

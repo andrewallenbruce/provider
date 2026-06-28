@@ -10,7 +10,7 @@
 }
 \usage{
 dialysis(
-  fac_ccn = NULL,
+  ccn = NULL,
   fac_name = NULL,
   org_name = NULL,
   rating = NULL,
@@ -25,7 +25,7 @@ dialysis(
 )
 }
 \arguments{
-\item{fac_ccn}{\verb{<chr>} Facility CMS Certification Number}
+\item{ccn}{\verb{<chr>} Facility CMS Certification Number}
 
 \item{fac_name}{\verb{<chr>} Facility name}
 
@@ -51,6 +51,7 @@ care provided.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-dialysis(org_name = "DaVita")
+dialysis(count = TRUE)
+dialysis(org_name = "DaVita", state = "GA")
 \dontshow{\}) # examplesIf}
 }

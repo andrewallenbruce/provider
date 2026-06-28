@@ -73,6 +73,7 @@ Owners of facilities enrolled in Medicare.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+owner(count = TRUE)
 owner(city = "Valdosta", state = "GA")
 \dontshow{\}) # examplesIf}
 }

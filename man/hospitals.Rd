@@ -198,15 +198,14 @@ subgroups(acute = TRUE, rehab = FALSE)
 subgroups()
 
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+hospitals(count = TRUE)
+
+hospitals(prov_type = "cah", state = "GA")
 
 hospitals(
   city = "Atlanta",
   state = "GA",
-  subgroup = subgroups(
-    acute = FALSE
-   )
- )
-
-hospitals(ccn = hospitals2()$ccn)
+  subgroup = subgroups(acute = FALSE)
+)
 \dontshow{\}) # examplesIf}
 }

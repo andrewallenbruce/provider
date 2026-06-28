@@ -85,9 +85,11 @@ adjustments.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
-quality(year = c(2021, 2024), state = "GA", count = TRUE)
+quality(count = TRUE)
 
-quality(npi = c(1003026055, 1316939655))
+quality(count = TRUE, year = c(2021, 2024), state = "GA")
+
+quality(npi = 1003026055)
 
 metrics()
 \dontshow{\}) # examplesIf}
