@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9275 (2026-06-28)
+
+- retooling of key-chain-link
+
 ## provider 0.0.1.9274 (2026-06-28)
 
 - fixed `quality_get`
