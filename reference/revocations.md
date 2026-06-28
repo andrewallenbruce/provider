@@ -168,9 +168,6 @@ revocations(count = TRUE)
 revocations(org_name = not_blank(), count = TRUE)
 #> ✔ revocations returned 3,876 results
 
-revocations(org_name = starts("B"), count = TRUE)
-#> ✔ revocations returned 204 results
-
 revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #> ✔ revocations returned 45 results
 #> ✔ Retrieving 1 page

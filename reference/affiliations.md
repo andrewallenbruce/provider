@@ -79,6 +79,8 @@ containing the search results.
 ## Examples
 
 ``` r
+affiliations(count = TRUE)
+#> ◼ affiliations | 2,239,952 rows | 1,494 pages
 affiliations(ccn = 331302)
 #> ✔ affiliations returned 329 results
 #> ✔ Retrieving 1 page

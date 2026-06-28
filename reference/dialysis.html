@@ -11,7 +11,7 @@ care provided."><meta property="og:image" content="https://andrewallenbruce.gith
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9275</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9276</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ care provided.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dialysis</span><span class="op">(</span></span>
-<span>  fac_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fac_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rating <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -85,7 +85,7 @@ care provided.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-fac-ccn">fac_ccn<a class="anchor" aria-label="anchor" href="#arg-fac-ccn"></a></dt>
+<dl><dt id="arg-ccn">ccn<a class="anchor" aria-label="anchor" href="#arg-ccn"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Facility CMS Certification Number</p></dd>
 
 
@@ -124,23 +124,25 @@ care provided.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dialysis</span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"DaVita"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">dialysis</span> returned <span style="color: #BBBB00; font-weight: bold;">2,800</span> results</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">2</span> pages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,800 × 12</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">dialysis</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">dialysis</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">7,557</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">6</span> pages</span>
+<span class="r-in"><span><span class="fu">dialysis</span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"DaVita"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">dialysis</span> returned <span style="color: #BBBB00; font-weight: bold;">139</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 139 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    ccn    fac_name     rating network status chain_name cert_date  address city </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 012501 DaVita Gads…      2       8 Profit DaVita     1976-09-01 409 SO… GADS…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 012502 DaVita Tusc…      2       8 Profit DaVita     1977-10-21 220 15… TUSC…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 012505 DaVita PDI-…      2       8 Profit DaVita     1977-12-14 1001 F… MONT…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 012506 DaVita Doth…      3       8 Profit DaVita     1977-11-28 216 GR… DOTH…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 012508 DaVita Birm…      2       8 Profit DaVita     1979-06-28 1105 E… BIRM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 012517 DaVita Athe…      2       8 Profit DaVita     1983-01-21 15953 … ATHE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 012523 DaVita Phen…      2       8 Profit DaVita     1985-09-23 4391 R… PHEN…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 012529 DaVita Flor…      4       8 Profit DaVita     1986-09-16 422 EA… FLOR…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 012533 DaVita Walk…      1       8 Profit DaVita     1987-12-29 260 6t… JASP…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 012535 DaVita PDI-…      3       8 Profit DaVita     1990-01-26 600 Mc… PRAT…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,790 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 112505 DaVita Rome…      3       6 Profit DaVita     1976-09-01 20 Riv… ROME </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 112513 DaVita Athe…      1       6 Profit DaVita     1977-07-18 1747 L… Watk…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 112514 DaVita Brun…      3       6 Profit DaVita     1977-07-14 53 SCR… BRUN…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 112515 DaVita Oak …      2       6 Profit DaVita     1977-09-26 2704 N… VALD…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 112517 DaVita Jone…      3       6 Profit DaVita     1979-04-09 1595 S… Jone…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 112523 DaVita Sout…      1       6 Profit DaVita     1981-06-24 3620 M… ATLA…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 112526 DaVita Doug…      2       6 Profit DaVita     1982-10-04 3899 L… DOUG…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 112528 DaVita Amer…      1       6 Profit DaVita     1983-02-11 227 N … AMER…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 112532 DaVita Jesu…      3       6 Profit DaVita     1984-05-08 301 PE… JESUP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 112535 DaVita Doug…      2       6 Profit DaVita     1985-02-13 190 WE… DOUG…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 129 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, county &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>

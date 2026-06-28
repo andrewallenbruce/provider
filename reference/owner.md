@@ -109,6 +109,8 @@ containing the search results.
 ## Examples
 
 ``` r
+owner(count = TRUE)
+#> ◼ owner | 526,704 rows | 109 pages
 owner(city = "Valdosta", state = "GA")
 #> ✔ owner returned 13 results
 #> ✔ Retrieving 4 pages

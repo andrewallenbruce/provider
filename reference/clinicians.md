@@ -130,6 +130,8 @@ A Clinician or Group must have:
 ## Examples
 
 ``` r
+clinicians(count = TRUE)
+#> ◼ clinicians | 3,364,553 rows | 2,244 pages
 clinicians(first = "Etan")
 #> ✔ clinicians returned 12 results
 #> ✔ Retrieving 1 page

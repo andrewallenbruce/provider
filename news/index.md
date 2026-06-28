@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9276 (2026-06-28)
+
+- reworking `nppes` output form
+
 ## provider 0.0.1.9275 (2026-06-28)
 
 - retooling of key-chain-link

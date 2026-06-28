@@ -190,6 +190,8 @@ complexity:
 ## Examples
 
 ``` r
+clia(count = TRUE)
+#> ◼ clia | 676,051 rows | 136 pages
 clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results
 #> ✔ Retrieving 1 page

@@ -111,6 +111,8 @@ containing the search results.
 ## Examples
 
 ``` r
+facility(count = TRUE)
+#> ◼ facility | 48,592 rows | 13 pages
 facility(city = "Valdosta", state = "GA")
 #> ✔ facility returned 12 results
 #> ✔ Retrieving 4 pages

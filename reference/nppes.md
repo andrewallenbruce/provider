@@ -163,8 +163,8 @@ nppes(
   c(1851713903, 1174270805, 1225701881,
     1588817837, 1982059275, 1255782751,
     1255877502, 1841008505, 1003826272))
-#> $type_1
-#> $type_1$base
+#> $ind
+#> $ind$base
 #> # A tibble: 7 × 17
 #>         npi entity first last  cred  sub_type id_code id_issuer id_state tx_code
 #>       <int>  <int> <chr> <chr> <chr> <chr>    <chr>   <chr>     <chr>    <chr>  
@@ -178,7 +178,7 @@ nppes(
 #> # ℹ 7 more variables: tx_lic <chr>, tx_prim <int>, tx_state <chr>,
 #> #   tx_grp <chr>, enum_date <date>, last_update <date>, cert_date <date>
 #> 
-#> $type_1$address
+#> $ind$address
 #> # A tibble: 10 × 6
 #>           npi address                     loc_type  city        state zip      
 #>         <int> <chr>                       <chr>     <chr>       <chr> <chr>    
@@ -194,8 +194,8 @@ nppes(
 #> 10 1003826272 6255 W SUNSET BLVD FL 21    mailing   LOS ANGELES CA    900287422
 #> 
 #> 
-#> $type_2
-#> $type_2$base
+#> $org
+#> $org$base
 #> # A tibble: 5 × 16
 #>          npi entity org_name    org_par org_dba first last  cred  tx_code tx_lic
 #>        <int>  <int> <chr>       <chr>   <chr>   <chr> <chr> <chr> <chr>   <chr> 
@@ -207,7 +207,7 @@ nppes(
 #> # ℹ 6 more variables: tx_prim <int>, tx_state <chr>, tx_grp <chr>,
 #> #   cert_date <date>, enum_date <date>, last_update <date>
 #> 
-#> $type_2$address
+#> $org$address
 #> # A tibble: 5 × 6
 #>          npi address                     loc_type city         state zip      
 #>        <int> <chr>                       <chr>    <chr>        <chr> <chr>    
