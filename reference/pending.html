@@ -13,7 +13,7 @@ been processed by CMS contractors."><meta property="og:image" content="https://a
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9272</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9273</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,14 +99,25 @@ been processed by CMS contractors.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">pending</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">14,216</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">4</span> pages</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">pending</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">14,519</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">4</span> pages</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pending</span><span class="op">(</span>first <span class="op">=</span> <span class="fu"><a href="modifier.html">starts</a></span><span class="op">(</span><span class="st">"V"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="color: #BBBB00; font-weight: bold;">204</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">pending</span> returned <span style="color: #BBBB00; font-weight: bold;">208</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">2</span> pages</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string):</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `httr2::resp_body_string()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> `resp` must be an HTTP response object, not a &lt;httr2_failure&gt; object.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 208 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    prov_type        npi first    last       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Physician <span style="text-decoration: underline;">1</span>932<span style="text-decoration: underline;">839</span>230 VA       SI         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Physician <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">652</span>463 VADIM    DOLGOV     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Physician <span style="text-decoration: underline;">1</span>144<span style="text-decoration: underline;">512</span>724 VADIN    LALL DASS  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Physician <span style="text-decoration: underline;">1</span>700<span style="text-decoration: underline;">451</span>846 VAGHARSH ANTANESIAN </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Physician <span style="text-decoration: underline;">1</span>073<span style="text-decoration: underline;">202</span>859 VAHE     KHACHATRYAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Physician <span style="text-decoration: underline;">1</span>932<span style="text-decoration: underline;">895</span>539 VAHE     MARTIKIAN  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Physician <span style="text-decoration: underline;">1</span>194<span style="text-decoration: underline;">614</span>206 VAHID    HARBI      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Physician <span style="text-decoration: underline;">1</span>447<span style="text-decoration: underline;">190</span>517 VAIDEHI  KOTHARI    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Physician <span style="text-decoration: underline;">1</span>871<span style="text-decoration: underline;">107</span>623 VAIDEHI  SHAH       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Physician <span style="text-decoration: underline;">1</span>770<span style="text-decoration: underline;">420</span>010 VALBERTO SANHA      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 198 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

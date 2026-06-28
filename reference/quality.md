@@ -121,9 +121,9 @@ quality(year = c(2021, 2024), state = "GA", count = TRUE)
 quality(npi = c(1003026055, 1316939655))
 #> ✔ quality returned 10 results
 #> ✔ Retrieving 6 pages
-#> Error in purrr::map(httr2::req_perform_parallel(purrr::map(flatten_cms(u,     x@query), httr2::request), on_error = "continue"), parse_string): ℹ In index: 1.
-#> Caused by error in `httr2::resp_body_string()`:
-#> ! `resp` must be an HTTP response object, not a <httr2_failure> object.
+#> Error in purrr::map(c(2017, 2022, 2023), function(year) quality_get(x,     year)): ℹ In index: 3.
+#> Caused by error in `names(X) <- nam`:
+#> ! attempt to set an attribute on NULL
 
 metrics()
 #> # A tibble: 32 × 4

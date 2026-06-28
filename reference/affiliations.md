@@ -82,7 +82,7 @@ containing the search results.
 affiliations(ccn = 331302)
 #> ✔ affiliations returned 329 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 10 × 7
+#> # A tibble: 329 × 7
 #>    first   last                  npi pac        fac_type ccn    parent_ccn
 #>    <chr>   <chr>               <int> <chr>      <chr>    <chr>  <chr>     
 #>  1 STACI   CARTER-KELLY   1003029125 6204824378 Hospital 331302 NA        
@@ -95,6 +95,7 @@ affiliations(ccn = 331302)
 #>  8 BARDIA  BARIMANI       1013793736 9436503646 Hospital 331302 NA        
 #>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371 Hospital 331302 NA        
 #> 10 LINDSEY WILHELM        1023377843 6901115278 Hospital 331302 NA        
+#> # ℹ 319 more rows
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 6 results
 #> ✔ Retrieving 1 page

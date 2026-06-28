@@ -1,4 +1,4 @@
-# Hospitals Enrolled in Medicare
+# Hospital Subgroups
 
 Hospitals currently enrolled in Medicare. Data includes the hospital's
 sub-group types, legal business name, doing-business-as name,
@@ -11,6 +11,22 @@ hospital rating.
 ## Usage
 
 ``` r
+subgroups(
+  acute = NULL,
+  drug = NULL,
+  child = NULL,
+  general = NULL,
+  long = NULL,
+  short = NULL,
+  psych = NULL,
+  rehab = NULL,
+  swing = NULL,
+  psych_unit = NULL,
+  rehab_unit = NULL,
+  specialty = NULL,
+  other = NULL
+)
+
 hospitals(
   npi = NULL,
   ccn = NULL,
@@ -58,6 +74,58 @@ hospitals2(
   Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 
 ## Arguments
+
+- acute:
+
+  `<lgl>` Acute/Short Term Care Hospital
+
+- drug:
+
+  `<lgl>` Alcohol/Drug Treatment
+
+- child:
+
+  `<lgl>` Children's Hospital
+
+- general:
+
+  `<lgl>` General Hospital
+
+- long:
+
+  `<lgl>` Long-Term Care
+
+- short:
+
+  `<lgl>` Short-Term Care
+
+- psych:
+
+  `<lgl>` Psychiatric
+
+- rehab:
+
+  `<lgl>` Rehabilitation
+
+- swing:
+
+  `<lgl>` Swing-Bed Approved
+
+- psych_unit:
+
+  `<lgl>` Psychiatric Unit
+
+- rehab_unit:
+
+  `<lgl>` Rehabilitation Unit
+
+- specialty:
+
+  `<lgl>` Specialty Hospital
+
+- other:
+
+  `<lgl>` Unlisted on CMS form
 
 - npi:
 
@@ -141,8 +209,7 @@ hospitals2(
 
 - subgroup:
 
-  `<subgroups>` Hospital’s subgroup/unit. See
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
+  `<subgroups>` Hospital’s subgroup/unit. See `subgroups()`.
 
 - count:
 
@@ -206,6 +273,8 @@ hospitals2(
 
 ## Value
 
+A `<Subgroups>` object
+
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 containing the search results.
 
@@ -215,6 +284,14 @@ containing the search results.
 ## Examples
 
 ``` r
+subgroups(acute = TRUE, rehab = FALSE)
+#> <Subgroups[2]>
+#> • SUBGROUP %2D ACUTE CARE     : Y
+#> • SUBGROUP %2D REHABILITATION : N
+
+subgroups()
+#> <Subgroups[0]>
+
 hospitals(
   prov_type = "cah",
   state = "GA"
@@ -227,14 +304,14 @@ hospitals(
 #>    org_name    org_dba enid     npi multi ccn   pac   inc_date   org_type status
 #>    <chr>       <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
 #>  1 BROOKS COU… ARCHBO… O200… 1.58e9     0 11Z3… 1557… NA         Other: … Non-P…
-#>  2 HOSPITAL A… ARCHBO… O200… 1.70e9     0 1113… 6002… NA         Other: … Non-P…
+#>  2 HOSPITAL A… ARCHBO… O200… 1.70e9     0 1113… 6002… NA         Other: … Gover…
 #>  3 HOSPITAL A… ARCHBO… O200… 1.44e9     0 11Z3… 6002… NA         Other: … Non-P…
 #>  4 PUTNAM GEN… PUTNAM… O200… 1.39e9     0 1113… 4688… 1968-03-01 Other: … Gover…
 #>  5 PUTNAM GEN… PUTNAM… O200… 1.55e9     0 11Z3… 4688… 1968-03-01 Other: … For-P…
 #>  6 THE HOSPIT… MILLER… O200… 1.11e9     0 1113… 0244… NA         Other: … Gover…
 #>  7 THE HOSPIT… MILLER… O200… 1.29e9     0 11Z3… 0244… NA         Other: … Non-P…
-#>  8 PROFESSION… MOUNTA… O200… 1.33e9     0 1113… 1052… 2004-12-17 LLC      For-P…
-#>  9 HOSPITAL A… WILLS … O200… 1.62e9     0 1113… 8628… NA         Other: … Non-P…
+#>  8 PROFESSION… MOUNTA… O200… 1.33e9     0 1113… 1052… 2004-12-17 LLC      Propr…
+#>  9 HOSPITAL A… WILLS … O200… 1.62e9     0 1113… 8628… NA         Other: … Gover…
 #> 10 HOSPITAL A… WILLS … O200… 1.48e9     0 11Z3… 8628… NA         Other: … Non-P…
 #> # ℹ 55 more rows
 #> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,

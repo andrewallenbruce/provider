@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9273 (2026-06-28)
+
+- `cms_temporal()` rewrite
+- cleaning up
+
 ## provider 0.0.1.9272 (2026-06-26)
 
 - simplify httr2 request creation
@@ -998,7 +1003,7 @@
 
 - rebuild readme, documentation
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)’
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   helper now exported
 - `cli_hybrid` for calls to different APIs within one function
 
@@ -1108,7 +1113,7 @@
 ## provider 0.0.1.9027 (2026-03-10)
 
 - added
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   helper
 - added `cdc_labs` CLIA example dataset
 

@@ -19,8 +19,7 @@ dialysis(
   state = NULL,
   zip = NULL,
   county = NULL,
-  count = FALSE,
-  set = FALSE
+  count = FALSE
 )
 ```
 
