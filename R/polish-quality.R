@@ -55,7 +55,7 @@ quality_get <- function(x, y) {
 
 #' @noRd
 S7::method(polish, s3_quality) <- function(x) {
-  x <- c(2017, 2022, 2023) |>
+  x <- c(2017, 2022:2023) |>
     purrr::map(\(year) quality_get(x, year)) |>
     collapse::rowbind(fill = TRUE) |>
     add_class("quality")
