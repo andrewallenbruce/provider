@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9279 (2026-06-29)
+
+* fixed `nppes()` error
+
+
 # provider 0.0.1.9278 (2026-06-29)
 
 * more `nppes()` work
