@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9279 (2026-06-29)
+
+- fixed
+  [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  error
+
 ## provider 0.0.1.9278 (2026-06-29)
 
 - more
