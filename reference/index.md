@@ -12,13 +12,11 @@
   : Dialysis Facilities
 - [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
   : Facilities
-- [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
   [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  : Hospital Subgroups
+  : Hospitals Enrolled in Medicare
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
-  [`nppes2()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
-  : National Registry of Health Care Providers
+  : NPPES: National Registry of Health Care Providers
 - [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
   : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
@@ -36,6 +34,8 @@
   : Reassignment of Benefits
 - [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
   : Revoked Providers & Suppliers
+- [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
+  : Hospital Subgroups
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)

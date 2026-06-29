@@ -78,7 +78,7 @@ subgroups(
 
 ## Value
 
-A `<Subgroups>` object
+An S7 `<Subgroups>` object
 
 ## Examples
 
@@ -87,7 +87,6 @@ subgroups(acute = TRUE, rehab = FALSE)
 #> <Subgroups[2]>
 #> • SUBGROUP %2D ACUTE CARE     : Y
 #> • SUBGROUP %2D REHABILITATION : N
-
 subgroups()
 #> <Subgroups[0]>
 ```

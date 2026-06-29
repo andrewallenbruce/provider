@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9278 (2026-06-29)
+
+- more
+  [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+  work
+
 ## provider 0.0.1.9277 (2026-06-29)
 
 - rewrite of nppes polish
@@ -1019,7 +1025,7 @@
 
 - rebuild readme, documentation
 - [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)’
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
   helper now exported
 - `cli_hybrid` for calls to different APIs within one function
 
@@ -1129,7 +1135,7 @@
 ## provider 0.0.1.9027 (2026-03-10)
 
 - added
-  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
   helper
 - added `cdc_labs` CLIA example dataset
 

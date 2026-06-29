@@ -1,4 +1,4 @@
-# Hospital Subgroups
+# Hospitals Enrolled in Medicare
 
 Hospitals currently enrolled in Medicare. Data includes the hospital's
 sub-group types, legal business name, doing-business-as name,
@@ -11,22 +11,6 @@ hospital rating.
 ## Usage
 
 ``` r
-subgroups(
-  acute = NULL,
-  drug = NULL,
-  child = NULL,
-  general = NULL,
-  long = NULL,
-  short = NULL,
-  psych = NULL,
-  rehab = NULL,
-  swing = NULL,
-  psych_unit = NULL,
-  rehab_unit = NULL,
-  specialty = NULL,
-  other = NULL
-)
-
 hospitals(
   npi = NULL,
   ccn = NULL,
@@ -74,58 +58,6 @@ hospitals2(
   Dictionary](https://data.cms.gov/provider-data/dataset/xubh-q36u#data-dictionary)
 
 ## Arguments
-
-- acute:
-
-  `<lgl>` Acute/Short Term Care Hospital
-
-- drug:
-
-  `<lgl>` Alcohol/Drug Treatment
-
-- child:
-
-  `<lgl>` Children's Hospital
-
-- general:
-
-  `<lgl>` General Hospital
-
-- long:
-
-  `<lgl>` Long-Term Care
-
-- short:
-
-  `<lgl>` Short-Term Care
-
-- psych:
-
-  `<lgl>` Psychiatric
-
-- rehab:
-
-  `<lgl>` Rehabilitation
-
-- swing:
-
-  `<lgl>` Swing-Bed Approved
-
-- psych_unit:
-
-  `<lgl>` Psychiatric Unit
-
-- rehab_unit:
-
-  `<lgl>` Rehabilitation Unit
-
-- specialty:
-
-  `<lgl>` Specialty Hospital
-
-- other:
-
-  `<lgl>` Unlisted on CMS form
 
 - npi:
 
@@ -209,7 +141,8 @@ hospitals2(
 
 - subgroup:
 
-  `<subgroups>` Hospital’s subgroup/unit. See `subgroups()`.
+  `<subgroups>` Hospital’s subgroup/unit. See
+  [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md).
 
 - count:
 
@@ -273,8 +206,6 @@ hospitals2(
 
 ## Value
 
-A `<Subgroups>` object
-
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 containing the search results.
 
@@ -284,14 +215,6 @@ containing the search results.
 ## Examples
 
 ``` r
-subgroups(acute = TRUE, rehab = FALSE)
-#> <Subgroups[2]>
-#> • SUBGROUP %2D ACUTE CARE     : Y
-#> • SUBGROUP %2D REHABILITATION : N
-
-subgroups()
-#> <Subgroups[0]>
-
 hospitals(count = TRUE)
 #> ◼ hospitals | 9,175 rows | 2 pages
 
