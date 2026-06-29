@@ -164,58 +164,112 @@ nppes(
     1588817837, 1982059275, 1255782751,
     1255877502, 1841008505, 1003826272))
 #> $ind
-#> $ind$base
-#> # A tibble: 7 × 17
-#>         npi entity first last  cred  sub_type id_code id_issuer id_state tx_code
-#>       <int>  <int> <chr> <chr> <chr> <chr>    <chr>   <chr>     <chr>    <chr>  
-#> 1    1.85e9      1 JOSE… DANW… MSW   Sole Pr… NA      NA        NA       225400…
-#> 2    1.59e9      1 JOSE… DAPA… RN    NA       NA      NA        NA       163W00…
-#> 3    1.26e9      1 JOSE… DAVIS MD    NA       NA      NA        NA       207Q00…
-#> 4    1.26e9      1 JOSE… DE L… M.A.… NA       27-038… Californ… CA       103K00…
-#> 5    1.84e9      1 JOSIE DAVI… ALC,… Sole Pr… NA      NA        NA       101YM0…
-#> 6    1.00e9      1 JO    DEAL  MD    NA       000183… Medicaid  MS       207RI0…
-#> 7    1.00e9      1 JO    DEAL  MD    NA       P01065… Railroad… MS       207RI0…
-#> # ℹ 7 more variables: tx_lic <chr>, tx_prim <int>, tx_state <chr>,
-#> #   tx_grp <chr>, enum_date <date>, last_update <date>, cert_date <date>
+#> $ind$basic
+#> # A tibble: 6 × 10
+#>       npi entity cred  first last  sex   sole  enum_date  last_update cert_date 
+#>     <int>  <int> <chr> <chr> <chr> <chr> <chr> <date>     <date>      <date>    
+#> 1  1.00e9      1 MD    JO    DEAL  F     NO    2006-08-09 2024-05-07  2024-05-07
+#> 2  1.26e9      1 MD    JOSE… DAVIS F     NO    2016-06-26 2019-10-31  NA        
+#> 3  1.26e9      1 M.A.… JOSE… DE L… F     NO    2017-01-10 2018-03-27  NA        
+#> 4  1.59e9      1 RN    JOSE… DAPA… F     NO    2008-10-30 2008-10-30  NA        
+#> 5  1.84e9      1 ALC,… JOSIE DAVI… F     YES   2024-12-26 2024-12-26  2024-12-26
+#> 6  1.85e9      1 MSW   JOSE… DANW… F     YES   2014-01-08 2014-01-16  NA        
 #> 
-#> $ind$address
-#> # A tibble: 10 × 6
-#>           npi address                     loc_type  city        state zip      
-#>         <int> <chr>                       <chr>     <chr>       <chr> <chr>    
-#>  1 1851713903 18302 WESTLAWN ST           primary   HESPERIA    CA    923456923
-#>  2 1588817837 2160 BOLTON ST              primary   BRONX       NY    104621364
-#>  3 1255782751 2140 JUNCTION AVE           primary   STURGIS     SD    577852358
-#>  4 1255782751 983075 NEBRASKA MEDICAL CTR secondary OMAHA       NE    681983075
-#>  5 1255877502 1233 N NEPTUNE AVE          primary   WILMINGTON  CA    907443134
-#>  6 1255877502 3752 ATLANTIC AVE           mailing   LONG BEACH  CA    908076667
-#>  7 1841008505 574 AZALEA RD STE 105       primary   MOBILE      AL    366091517
-#>  8 1841008505 6517 BUGGY WHIP CT          mailing   MOBILE      AL    366953100
-#>  9 1003826272 766 LAKELAND DR # A         primary   JACKSON     MS    392164610
-#> 10 1003826272 6255 W SUNSET BLVD FL 21    mailing   LOS ANGELES CA    900287422
+#> $ind$other
+#> # A tibble: 6 × 3
+#>          npi entity other                 
+#> *      <int>  <int> <chr>                 
+#> 1 1851713903      1 NA                    
+#> 2 1588817837      1 NA                    
+#> 3 1255782751      1 JOSEPHINE V KERK: MD  
+#> 4 1255877502      1 NA                    
+#> 5 1841008505      1 JOSIE BRANUM: ALC, NCC
+#> 6 1003826272      1 JO P WILSON           
+#> 
+#> $ind$id
+#> # A tibble: 7 × 5
+#>          npi entity id_code    id_issuer            id_state
+#>        <int>  <int> <chr>      <chr>                <chr>   
+#> 1 1851713903      1 NA         NA                   NA      
+#> 2 1588817837      1 NA         NA                   NA      
+#> 3 1255782751      1 NA         NA                   NA      
+#> 4 1255877502      1 27-0383738 California Psychcare CA      
+#> 5 1841008505      1 NA         NA                   NA      
+#> 6 1003826272      1 00018389   Medicaid             MS      
+#> 7 1003826272      1 P01065367  Railroad Medicare    MS      
+#> 
+#> $ind$tax
+#> # A tibble: 6 × 7
+#>          npi entity tx_code                       tx_lic tx_prim tx_state tx_grp
+#> *      <int>  <int> <chr>                         <chr>    <int> <chr>    <chr> 
+#> 1 1851713903      1 225400000X - Rehabilitation … NA           1 NA       NA    
+#> 2 1588817837      1 163W00000X - Registered Nurse 552550       1 NY       NA    
+#> 3 1255782751      1 207Q00000X - Family Medicine  7744         1 NE       NA    
+#> 4 1255877502      1 103K00000X - Behavior Analyst 1-17-…       1 CA       NA    
+#> 5 1841008505      1 101YM0800X - Counselor, Ment… ALC04…       1 AL       19340…
+#> 6 1003826272      1 207RI0200X - Internal Medici… 10460        1 MS       NA    
+#> 
+#> $ind$loc
+#> # A tibble: 10 × 7
+#>           npi entity address                     loc_type  city      zip   state
+#>         <int>  <int> <chr>                       <chr>     <chr>     <chr> <chr>
+#>  1 1851713903      1 18302 WESTLAWN ST           primary   HESPERIA  9234… CA   
+#>  2 1588817837      1 2160 BOLTON ST              primary   BRONX     1046… NY   
+#>  3 1255782751      1 2140 JUNCTION AVE           primary   STURGIS   5778… SD   
+#>  4 1255782751      1 983075 NEBRASKA MEDICAL CTR secondary OMAHA     6819… NE   
+#>  5 1255877502      1 1233 N NEPTUNE AVE          primary   WILMINGT… 9074… CA   
+#>  6 1255877502      1 3752 ATLANTIC AVE           mailing   LONG BEA… 9080… CA   
+#>  7 1841008505      1 574 AZALEA RD STE 105       primary   MOBILE    3660… AL   
+#>  8 1841008505      1 6517 BUGGY WHIP CT          mailing   MOBILE    3669… AL   
+#>  9 1003826272      1 766 LAKELAND DR # A         primary   JACKSON   3921… MS   
+#> 10 1003826272      1 6255 W SUNSET BLVD FL 21    mailing   LOS ANGE… 9002… CA   
 #> 
 #> 
 #> $org
-#> $org$base
-#> # A tibble: 5 × 16
-#>          npi entity org_name    org_par org_dba first last  cred  tx_code tx_lic
-#>        <int>  <int> <chr>       <chr>   <chr>   <chr> <chr> <chr> <chr>   <chr> 
-#> 1 1174270805      2 PEACH STAT… NA      KINDBO… FAHI… SASAN DO F… 207VE0… NA    
-#> 2 1174270805      2 PEACH STAT… NA      KINDBO… FAHI… SASAN DO F… 207VG0… NA    
-#> 3 1225701881      2 VIOS FERTI… NA      NA      KATR… MARS… Dir … 207VE0… NA    
-#> 4 1982059275      2 VIOS FERTI… NA      NA      HANN… JOHN… Dire… 207VE0… 336.0…
-#> 5 1982059275      2 VIOS FERTI… NA      NA      HANN… JOHN… Dire… 207VE0… 336.0…
-#> # ℹ 6 more variables: tx_prim <int>, tx_state <chr>, tx_grp <chr>,
-#> #   cert_date <date>, enum_date <date>, last_update <date>
+#> $org$basic
+#> # A tibble: 3 × 11
+#>          npi entity cred  first   last     title  org_name org_parent cert_date 
+#>        <int>  <int> <chr> <chr>   <chr>    <chr>  <chr>    <chr>      <date>    
+#> 1 1174270805      2 DO    FAHIMEH SASAN    Found… PEACH S… NA         2024-05-20
+#> 2 1225701881      2 NA    KATRINA MARSHALL Dir I… VIOS FE… NA         2024-02-12
+#> 3 1982059275      2 NA    HANNAH  JOHNSON  Direc… VIOS FE… NA         NA        
+#> # ℹ 2 more variables: enum_date <date>, last_update <date>
 #> 
-#> $org$address
-#> # A tibble: 5 × 6
-#>          npi address                     loc_type city         state zip      
-#>        <int> <chr>                       <chr>    <chr>        <chr> <chr>    
-#> 1 1174270805 1414 WALNUT ST              primary  PHILADELPHIA PA    191023824
-#> 2 1174270805 333 S DESPLAINES ST STE 201 mailing  CHICAGO      IL    606615514
-#> 3 1225701881 26400 W 12 MILE RD STE 140  primary  SOUTHFIELD   MI    480341753
-#> 4 1982059275 1455 N MILWAUKEE AVE        primary  CHICAGO      IL    606222015
-#> 5 1982059275 2516 WAUKEGAN RD            mailing  GLENVIEW     IL    600251774
+#> $org$other
+#> # A tibble: 3 × 3
+#>          npi entity org_dba                            
+#> *      <int>  <int> <chr>                              
+#> 1 1174270805      2 KINDBODY OF PA MEDICAL PRACTICE, PC
+#> 2 1225701881      2 NA                                 
+#> 3 1982059275      2 NA                                 
+#> 
+#> $org$id
+#> # A tibble: 3 × 2
+#>          npi entity
+#>        <int>  <int>
+#> 1 1174270805      2
+#> 2 1225701881      2
+#> 3 1982059275      2
+#> 
+#> $org$tax
+#> # A tibble: 5 × 7
+#>          npi entity tx_code                       tx_lic tx_prim tx_state tx_grp
+#>        <int>  <int> <chr>                         <chr>    <int> <chr>    <chr> 
+#> 1 1174270805      2 207VE0102X - Obstetrics & Gy… NA           1 NA       19320…
+#> 2 1174270805      2 207VG0400X - Obstetrics & Gy… NA           0 NA       19320…
+#> 3 1225701881      2 207VE0102X - Obstetrics & Gy… NA           1 NA       19340…
+#> 4 1982059275      2 207VE0102X - Obstetrics & Gy… 336.0…       0 IL       19340…
+#> 5 1982059275      2 207VE0102X - Obstetrics & Gy… 336.0…       1 IL       19340…
+#> 
+#> $org$loc
+#> # A tibble: 5 × 7
+#>          npi entity address                     loc_type city        zip   state
+#>        <int>  <int> <chr>                       <chr>    <chr>       <chr> <chr>
+#> 1 1174270805      2 1414 WALNUT ST              primary  PHILADELPH… 1910… PA   
+#> 2 1174270805      2 333 S DESPLAINES ST STE 201 mailing  CHICAGO     6066… IL   
+#> 3 1225701881      2 26400 W 12 MILE RD STE 140  primary  SOUTHFIELD  4803… MI   
+#> 4 1982059275      2 1455 N MILWAUKEE AVE        primary  CHICAGO     6062… IL   
+#> 5 1982059275      2 2516 WAUKEGAN RD            mailing  GLENVIEW    6002… IL   
 #> 
 #> 
 ```
