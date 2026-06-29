@@ -26,17 +26,13 @@ S7::method(polish, s3_nppes) <- function(x) {
 
 #' @noRd
 nppes_sections <- function(x, type) {
-  x <- collapse::ss(
-    x,
-    x[["entity"]] %==% type,
-    check = FALSE
-  )
+  x <- ss_(x, i = x[["entity"]] %==% type)
 
   if (collapse::fnrow(x) == 0L) {
     return(NULL)
   }
 
-  k <- collapse::ss(x, j = c("npi", "entity"), check = FALSE)
+  k <- ss_(x, j = c("npi", "entity"))
 
   list(
     basic = nppes_basic(x, k),
@@ -49,10 +45,7 @@ nppes_sections <- function(x, type) {
 
 #' @noRd
 nppes_basic <- function(x, key) {
-  x <- rlang::set_names(
-    x[["basic"]],
-    x[["npi"]]
-  ) |>
+  x <- rlang::set_names(x[["basic"]], x[["npi"]]) |>
     collapse::unlist2d(c("npi", "var"))
 
   if (collapse::fnrow(x) == 0L) {
@@ -79,9 +72,9 @@ nppes_basic <- function(x, key) {
     set = TRUE
   )
 
-  x <- collapse::ss(
+  x <- ss_(
     x,
-    x[["var"]] %!iin%
+    j = x[["var"]] %!iin%
       c(
         "status",
         "name_prefix",
@@ -92,8 +85,7 @@ nppes_basic <- function(x, key) {
         "authorized_official_middle_name",
         "authorized_official_telephone_number",
         "subpart"
-      ),
-    check = FALSE
+      )
   ) |>
     collapse::pivot(
       ids = "npi",
@@ -129,10 +121,7 @@ nppes_basic <- function(x, key) {
 # 5 = Other
 #' @noRd
 nppes_other <- function(x, key, type) {
-  x <- rlang::set_names(
-    x[["other"]],
-    x[["npi"]]
-  ) |>
+  x <- rlang::set_names(x[["other"]], x[["npi"]]) |>
     cheapr::list_drop_null()
 
   if (rlang::is_empty(x)) {
@@ -154,7 +143,7 @@ nppes_other <- function(x, key, type) {
 
   collapse::settransformv(x, "npi", as.integer)
   i <- c("npi", "first", "middle", "last", "cred", "org_dba")
-  x <- collapse::ss(x, j = colnames(x) %iin% i, check = FALSE)
+  x <- ss_(x, j = colnames(x) %iin% i)
 
   if (type == 1L) {
     x <- rc_combine(x, "first", "middle", sep = " ")
@@ -168,10 +157,7 @@ nppes_other <- function(x, key, type) {
 
 #' @noRd
 nppes_identifier <- function(x, key) {
-  x <- rlang::set_names(
-    x[["id"]],
-    x[["npi"]]
-  ) |>
+  x <- rlang::set_names(x[["id"]], x[["npi"]]) |>
     cheapr::list_drop_null()
 
   if (rlang::is_empty(x)) {
@@ -180,11 +166,7 @@ nppes_identifier <- function(x, key) {
 
   x <- rowbind2(x, "npi", fill = TRUE) |>
     collapse::recode_char("--" = NA_character_) |>
-    collapse::rnm(
-      "code" = "type",
-      "identifier" = "code",
-      .nse = FALSE
-    ) |>
+    collapse::rnm("code" = "type", "identifier" = "code", .nse = FALSE) |>
     collapse::gv(c("npi", "code", "issuer", "state")) |>
     collapse::add_stub(stub = "id_", cols = -1)
 
@@ -195,10 +177,7 @@ nppes_identifier <- function(x, key) {
 
 #' @noRd
 nppes_taxonomy <- function(x, key) {
-  x <- rlang::set_names(
-    x[["taxonomy"]],
-    x[["npi"]]
-  ) |>
+  x <- rlang::set_names(x[["taxonomy"]], x[["npi"]]) |>
     cheapr::list_drop_null()
 
   if (rlang::is_empty(x)) {

@@ -2,54 +2,17 @@
 % Please edit documentation in R/end-nppes.R
 \name{nppes}
 \alias{nppes}
-\alias{nppes2}
-\title{National Registry of Health Care Providers}
+\title{NPPES: National Registry of Health Care Providers}
+\source{
+\itemize{
+\item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API}
+}
+}
 \usage{
 nppes(npi)
-
-nppes2(
-  npi = NULL,
-  entity = NULL,
-  specialty = NULL,
-  ind_type = NULL,
-  first = NULL,
-  use_alias = NULL,
-  last = NULL,
-  org_name = NULL,
-  add_type = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  country = NULL
-)
 }
 \arguments{
-\item{npi}{\verb{<int>} National Provider Identifier}
-
-\item{entity}{\verb{<chr>} Entity type; \code{1} (Individual) or \code{2} (Organization)}
-
-\item{specialty}{\verb{<chr>} Provider's specialty}
-
-\item{ind_type}{\verb{<chr>} Type of individual \code{first}/\code{last} refers to:
-\code{AO} (Authorized Official) or \code{Provider} (Individual Provider).}
-
-\item{first, last}{\verb{<chr>} \strong{WC} Individual provider's name}
-
-\item{use_alias}{\verb{<lgl>} Use first name alias}
-
-\item{org_name}{\verb{<chr>} \strong{WC} Organization's name}
-
-\item{add_type}{\verb{<enum>} Address type}
-
-\item{city}{\verb{<chr>} City; For military addresses, search \code{"APO"}/\code{"FPO"}.}
-
-\item{state}{\verb{<chr>} State abbreviation. If the only input, one other
-parameter besides \code{entity} or \code{country} is required.}
-
-\item{zip}{\verb{<chr>} \strong{WC} 5-9 digit zip code, no hyphen.}
-
-\item{country}{\verb{<chr>} Country abbreviation. Can be the only input if
-it \emph{is not} \code{"US"}.}
+\item{npi}{\verb{<int>} vector of National Provider Identifiers}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -58,19 +21,18 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 Search the National Plan and Provider Enumeration System (NPPES)
 NPI Registry, a free directory of all active NPI records.
 }
-\section{\strong{National Provider Identifier (NPI)}}{
+\section{National Provider Identifier (NPI)}{
  Healthcare providers acquire
 their unique 10-digit NPIs to identify themselves in a standard way
 throughout their industry. Once CMS supplies an NPI, they publish the parts
 of the NPI record that have public relevance, including the provider’s
 name, taxonomy and practice address.
+\subsection{Entity Type: Two categories of health care providers exist for NPI}{
+
+enumeration purposes:
+\itemize{
+\item \strong{Type 1}: \strong{Individual} providers may get an NPI as \emph{Entity Type 1}.
 }
-
-\section{\strong{Entity/Enumeration Type}}{
- Two categories of health care providers
-exist for NPI enumeration purposes:
-
-\strong{Type 1}: Individual providers may get an NPI as \emph{Entity Type 1}.
 
 \emph{Sole Proprietorship} A sole proprietor is one who does not conduct
 business as a corporation and, thus, \strong{is not} an incorporated individual.
@@ -79,16 +41,17 @@ An \strong{incorporated individual} is an individual provider who forms and
 conducts business under a corporation. This provider may have a Type 1 NPI
 while the corporation has its own Type 2 NPI.
 
-A solo practitioner is not necessarily a sole proprietor, and vice versa.
+A solo practitioner is not necessarily a sole proprietor, and vice-versa.
 The following factors do not affect whether a sole proprietor is a Type 1
 entity:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{ * Multiple office locations
- * Having employees
- * Having an EIN
-}\if{html}{\out{</div>}}
-
-\strong{Type 2}: Organizational providers are eligible for \emph{Entity Type 2} NPIs.
+\itemize{
+\item Multiple office locations
+\item Having employees
+\item Having an EIN
+}
+\itemize{
+\item \strong{Type 2}: \strong{Organizational} providers are eligible for an \emph{Entity Type 2} NPI.
+}
 
 Organizational or Group providers may have a single employee or thousands
 of employees. An example is an \strong{incorporated individual} who is an
@@ -102,12 +65,12 @@ themselves legal entities but are part of the organization health care
 provider (which is a legal entity).
 
 The NPI Final Rule refers to the parts and locations as sub-parts. An
-organization health care provider can get its sub-parts their own NPIs.
-If a sub-part conducts any HIPAA standard transactions on its own
-(separately from its parent), it must get its own NPI. Sub-part
-determination makes sure that entities within a covered organization are
-uniquely identified in HIPAA standard transactions they conduct with
-Medicare and other covered entities.
+organization health care provider can get its sub-parts their own NPIs. If
+a sub-part conducts any HIPAA standard transactions on its own (separately
+from its parent), it must get its own NPI. Sub-part determination makes
+sure that entities within a covered organization are uniquely identified in
+HIPAA standard transactions they conduct with Medicare and other covered
+entities.
 
 For example, a hospital offers acute care, laboratory, pharmacy, and
 rehabilitation services. Each of these sub-parts may need its own NPI
@@ -116,14 +79,14 @@ plans. Sub-part delegation doesn't affect Entity Type 1 health care
 providers. As individuals, these health care providers can't choose
 sub-parts and are not sub-parts.
 
-\strong{Authorized Official} \if{html}{\out{<br>}}
-An appointed official (e.g., chief executive officer, chief financial
-officer, general partner, chairman of the board, or direct owner) to whom
-the organization has granted the legal authority to enroll it in the
-Medicare program, to make changes or updates to the organization's status
-in the Medicare program, and to commit the organization to fully abide by
-the statutes, regulations, and program instructions of the Medicare
-program.
+\strong{Authorized Official}: An appointed official (e.g., chief executive officer,
+chief financial officer, general partner, chairman of the board, or direct
+owner) to whom the organization has granted the legal authority to enroll
+it in the Medicare program, to make changes or updates to the
+organization's status in the Medicare program, and to commit the
+organization to fully abide by the statutes, regulations, and program
+instructions of the Medicare program.
+}
 }
 
 \examples{
@@ -133,9 +96,4 @@ nppes(
     1588817837, 1982059275, 1255782751,
     1255877502, 1841008505, 1003826272))
 \dontshow{\}) # examplesIf}
-}
-\references{
-\itemize{
-\item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API}
-}
 }

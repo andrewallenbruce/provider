@@ -33,7 +33,10 @@ is_unique <- function(x) {
 
 #' @noRd
 vec_na <- function(x, type = "character") {
-  cheapr::na_init(vector(mode = type), collapse::fnrow(x))
+  cheapr::na_init(
+    vector(mode = type),
+    collapse::fnrow(x)
+  )
 }
 
 #' @noRd
@@ -157,6 +160,11 @@ set_args <- function(fn, ...) {
 #' @noRd
 set_names2 <- function(x, y, ...) {
   rlang::set_names(x, nm = rlang::names2(y), ...)
+}
+
+#' @noRd
+ss_ <- function(x, ...) {
+  collapse::ss(x = x, ..., check = FALSE)
 }
 
 #' @noRd

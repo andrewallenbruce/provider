@@ -1,9 +1,52 @@
 #' @noRd
 Subgroups <- S7::new_class(
-  "Subgroups",
-  S7::class_list,
+  name = "Subgroups",
+  parent = S7::class_list,
   package = NULL
 )
+
+#' @noRd
+is_subgroups <- function(x) {
+  S7::S7_inherits(x, Subgroups)
+}
+
+#' @noRd
+check_subgroups <- function(
+  x,
+  arg = rlang::caller_arg(x),
+  call = rlang::caller_env()
+) {
+  if (is_subgroups(x)) {
+    return(invisible(NULL))
+  }
+  cli::cli_abort(
+    c(
+      "{.arg {arg}} must be a {.cls Subgroups} object, not a {.obj_type_friendly {x}}",
+      "i" = "Use {.fn provider::subgroups} to create one"
+    ),
+    arg = arg,
+    call = call
+  )
+}
+
+#' @noRd
+S7::method(print, Subgroups) <- function(x, ...) {
+  x <- S7::S7_data(x)
+  n <- cheapr::unlisted_length(x)
+
+  cli::cli_text(cli::col_cyan("<Subgroups[{n}]>"))
+  if (length(x)) {
+    cli::cat_bullet(
+      paste0(
+        cli::col_yellow(left(names(x))),
+        cli::col_silver(" : "),
+        left(mark(unname(x)))
+      ),
+      bullet_col = "silver"
+    )
+  }
+  invisible(x)
+}
 
 #' Hospital Subgroups
 #'
@@ -20,14 +63,10 @@ Subgroups <- S7::new_class(
 #' @param rehab_unit `<lgl>` Rehabilitation Unit
 #' @param specialty `<lgl>` Specialty Hospital
 #' @param other `<lgl>` Unlisted on CMS form
-#'
-#' @returns A `<Subgroups>` object
-#' @rdname hospitals
+#' @returns An S7 `<Subgroups>` object
 #' @examples
 #' subgroups(acute = TRUE, rehab = FALSE)
-#'
 #' subgroups()
-#'
 #' @export
 subgroups <- function(
   acute = NULL,
@@ -78,38 +117,4 @@ subgroups <- function(
   )
 
   Subgroups(params(!!!x))
-}
-
-#' @noRd
-is_subgroups <- function(x) {
-  S7::S7_inherits(x, Subgroups)
-}
-
-#' @noRd
-check_subgroups <- function(x) {
-  if (!is_subgroups(x)) {
-    cli::cli_abort(c(
-      "{.arg subgroup} must be a {.cls Subgroups} object, not a {.cls {class(x)}}",
-      "i" = "Use the {.fn subgroups} helper function"
-    ))
-  }
-}
-
-#' @noRd
-S7::method(print, Subgroups) <- function(x, ...) {
-  x <- S7::S7_data(x)
-  n <- cheapr::unlisted_length(x)
-
-  cli::cli_text(cli::col_cyan("<Subgroups[{n}]>"))
-  if (length(x)) {
-    cli::cat_bullet(
-      paste0(
-        cli::col_yellow(left(names(x))),
-        cli::col_silver(" : "),
-        left(mark(unname(x)))
-      ),
-      bullet_col = "silver"
-    )
-  }
-  invisible(x)
 }
