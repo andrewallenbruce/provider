@@ -26,21 +26,30 @@ S7::method(polish, s3_nppes) <- function(x) {
 
 #' @noRd
 nppes_sections <- function(x, type) {
-  x <- collapse::ss(x, x[["entity"]] %==% type, check = FALSE)
+  x <- collapse::ss(
+    x,
+    x[["entity"]] %==% type,
+    check = FALSE
+  )
 
   if (collapse::fnrow(x) == 0L) {
     return(NULL)
   }
 
   k <- collapse::ss(x, j = c("npi", "entity"), check = FALSE)
+  n <- nppes_basic(x, k)
+
+  if (!is.null(nppes_other(x, type))) {
+    n <- join2(n, nppes_other(x, type), "npi")
+  }
 
   list(
-    basic = nppes_basic(x, k),
-    other = nppes_other(x, type),
-    id = nppes_identifier(x),
-    tax = nppes_taxonomy(x),
-    loc = nppes_address(x)
-  )
+    basic = n,
+    taxonomy = nppes_taxonomy(x),
+    identifier = nppes_identifier(x),
+    location = nppes_address(x)
+  ) |>
+    cheapr::list_drop_null()
 }
 
 #' @noRd

@@ -14,6 +14,26 @@ is_modifier <- function(x) {
   S7::S7_inherits(x, Modifier)
 }
 
+# S7::method(print, Modifier) <- function(x, ...) {
+#   cli::cli_text("<Modifier[{cli::col_yellow(S7::S7_data(x))}]>")
+#   cli::cat_bullet(
+#     c(
+#       cli::col_yellow(S7::prop(x, "operator")),
+#       cli::col_cyan(toString(S7::props(x)$value))
+#     ),
+#     bullet_col = "dodgerblue",
+#     bullet = "arrow_right"
+#   )
+#   cli::cli_text(
+#     "{.strong {.var var}} {.emph is} ",
+#     cli::col_yellow(S7::prop(x, "operator")),
+#     "(",
+#     "{.field {cli::col_cyan(toString(S7::props(x)$value))}}",
+#     ")"
+#   )
+#   invisible(x)
+# }
+
 #' Query Modifiers
 #'
 #' @description Helpers for use in constructing conditions in queries.

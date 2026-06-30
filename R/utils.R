@@ -163,11 +163,6 @@ set_names2 <- function(x, y, ...) {
 }
 
 #' @noRd
-ss_ <- function(x, ...) {
-  collapse::ss(x = x, ..., check = FALSE)
-}
-
-#' @noRd
 rowbind2 <- function(x, nm = NULL, fill = FALSE) {
   collapse::rowbind(
     x,
