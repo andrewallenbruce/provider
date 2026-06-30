@@ -45,7 +45,7 @@ nppes_sections <- function(x, type) {
   cheapr::list_drop_null(list(
     basic = nppes_basic(x, k, type),
     taxonomy = nppes_taxonomy(x),
-    identifier = nppes_identifier(x),
+    # identifier = nppes_identifier(x),
     location = nppes_address(x)
   ))
 }
@@ -149,8 +149,13 @@ nppes_other <- function(x, type) {
     return(NULL)
   }
 
-  x <- rowbind2(x, "npi", fill = TRUE) |>
-    collapse::recode_char("--" = NA_character_)
+  x <- rowbind2(x, "npi", fill = TRUE)
+
+  collapse::recode_char(
+    x,
+    "--" = NA_character_,
+    set = TRUE
+  )
 
   collapse::recode_char(
     colnames(x),
@@ -189,15 +194,26 @@ nppes_identifier <- function(x) {
     return(NULL)
   }
 
-  x <- rowbind2(x, "npi", fill = TRUE) |>
-    collapse::recode_char("--" = NA_character_) |>
-    collapse::rnm("code" = "type", "identifier" = "code", .nse = FALSE) |>
-    collapse::gv(c("npi", "code", "issuer", "state"))
+  x <- rowbind2(x, "npi", fill = TRUE)
+
+  collapse::recode_char(
+    x,
+    "--" = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    colnames(x),
+    "npi" = "npi",
+    "identifier" = "id",
+    "issuer" = "issuer",
+    "state" = "state",
+    set = TRUE
+  )
 
   collapse::settransformv(x, "npi", as.integer)
   collapse::setv(x[["issuer"]], NA, "Medicaid")
-
-  return(x)
+  collapse::gv(x, c("npi", "id", "issuer", "state"))
 }
 
 #' @noRd
@@ -213,27 +229,49 @@ nppes_taxonomy <- function(x) {
     return(NULL)
   }
 
-  x <- rowbind2(x, "npi", fill = TRUE) |>
-    collapse::recode_char("--" = NA_character_) |>
-    replace_nz() |>
-    rc_trim() |>
-    collapse::rnm("group" = "taxonomy_group", "order" = "primary", .nse = FALSE)
+  x <- rowbind2(x, "npi", fill = TRUE) |> rc_trim()
+  replace_nz(x)
+
+  collapse::recode_char(
+    colnames(x),
+    "npi" = "npi",
+    "primary" = "order",
+    "code" = "code",
+    "desc" = "desc",
+    "taxonomy_group" = "group",
+    "license" = "license",
+    "state" = "state",
+    set = TRUE
+  )
 
   collapse::settransformv(x, "order", as.integer)
   collapse::setv(x[["order"]], 0, 2)
   collapse::settransformv(x, "npi", as.integer)
-  collapse::gv(x, "desc") <- NULL
+  collapse::gv(x, c("desc", "license", "state")) <- NULL
 
   x[["group"]] <- purrr::map_chr(
     strsplit(x[["group"]], " - ", fixed = TRUE),
     function(x) purrr::pluck(x, 1L)
   )
 
-  x <- rc_combine(x, "code", "group", sep = ":")
+  i <- cheapr::which_not_na(x[["group"]])
+  g <- cheapr::col_c(
+    npi = x[["npi"]][i],
+    code = x[["group"]][i],
+    order = 0L
+  )
 
-  collapse::roworderv(x, c("npi", "order")) |>
+  x <- cheapr::c_(x, collapse::funique(g))
+
+  collapse::gv(x, c("group")) <- NULL
+
+  collapse::roworderv(
+    x,
+    c("npi", "order"),
+    decreasing = c(TRUE, FALSE)
+  ) |>
     collapse::colorderv(c("npi", "order")) |>
-    collapse::funique(cols = c("npi", "code", "license", "state"))
+    collapse::funique(cols = c("npi", "code"))
 }
 
 #' @noRd
@@ -249,14 +287,17 @@ nppes_location <- function(x) {
     return(NULL)
   }
 
-  x <- rowbind2(x, "npi", fill = TRUE) |>
-    collapse::recode_char("--" = NA_character_) |>
-    collapse::gvr("^npi$|^address_[1p]|^city$|^state$|postal")
+  x <- rowbind2(x, "npi", fill = TRUE)
+
+  x <- collapse::ss(
+    x,
+    j = c("npi", "address_1", "city", "state", "postal_code"),
+    check = FALSE
+  )
 
   collapse::setrename(
     x,
     "address" = "address_1",
-    "loc" = "address_purpose",
     "zip" = "postal_code",
     .nse = FALSE
   )
@@ -275,21 +316,27 @@ nppes_address <- function(x, key) {
 
   loc <- nppes_location(x)
 
-  x <- rlang::set_names(
-    x[["address"]],
-    x[["npi"]]
-  ) |>
-    cheapr::list_drop_null() |>
-    rowbind2("npi", fill = TRUE)
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["address"]],
+      x[["npi"]]
+    )
+  )
 
-  if (collapse::fnrow(x) == 0L) {
+  if (rlang::is_empty(x)) {
     if (rlang::is_empty(loc)) {
       return(NULL)
     }
     return(loc)
   }
 
-  x <- collapse::gvr(x, "^npi$|^address_[1p]|^city$|^state$|postal")
+  x <- rowbind2(x, "npi", fill = TRUE)
+
+  x <- collapse::ss(
+    x,
+    j = c("npi", "address_1", "address_purpose", "city", "state", "postal_code"),
+    check = FALSE
+  )
 
   collapse::setrename(
     x,
@@ -301,10 +348,6 @@ nppes_address <- function(x, key) {
 
   collapse::settfmv(x, "npi", as.integer)
   collapse::settfmv(x, "loc", tolower)
-
-  x <- collapse::roworderv(x, c("npi", "loc")) |>
-    collapse::funique(cols = c("npi", "address", "city", "state", "zip"))
-
   collapse::setv(x[["loc"]], "location", "primary")
 
   if (!rlang::is_empty(loc)) {
@@ -313,7 +356,9 @@ nppes_address <- function(x, key) {
 
   x[["loc"]] <- loc_rank(x[["loc"]])
 
-  return(x)
+  collapse::roworderv(x, c("npi", "loc")) |>
+    collapse::funique(cols = c("npi", "address", "city", "state", "zip")) |>
+    collapse::colorderv(c("npi", "loc", "city", "state"))
 }
 
 #' @noRd
