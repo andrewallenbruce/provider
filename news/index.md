@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9281 (2026-06-30)
+
+- nppes taxonomy refinement
+
 ## provider 0.0.1.9280 (2026-06-30)
 
 - nppes reworking

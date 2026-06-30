@@ -111,26 +111,26 @@ nppes(x)
 #> $ind
 #> $ind$basic
 #> # A tibble: 6 × 11
-#>       npi entity cred  first last  sex   sole  cert_date  enum_date  last_update
-#> *   <int>  <int> <chr> <chr> <chr> <chr> <chr> <date>     <date>     <date>     
-#> 1  1.00e9      1 MD    JO    DEAL  F     NO    2024-05-07 2006-08-09 2024-05-07 
-#> 2  1.26e9      1 MD    JOSE… DAVIS F     NO    NA         2016-06-26 2019-10-31 
-#> 3  1.26e9      1 M.A.… JOSE… DE L… F     NO    NA         2017-01-10 2018-03-27 
-#> 4  1.59e9      1 RN    JOSE… DAPA… F     NO    NA         2008-10-30 2008-10-30 
-#> 5  1.84e9      1 ALC,… JOSIE DAVI… F     YES   2024-12-26 2024-12-26 2024-12-26 
-#> 6  1.85e9      1 MSW   JOSE… DANW… F     YES   NA         2014-01-08 2014-01-16 
-#> # ℹ 1 more variable: other <chr>
+#>          npi entity cred     first last  sex   sole  other cert_date  enum_date 
+#>        <int>  <int> <chr>    <chr> <chr> <chr> <chr> <chr> <date>     <date>    
+#> 1 1003826272      1 MD       JO    DEAL  F     NO    JO P… 2024-05-07 2006-08-09
+#> 2 1255782751      1 MD       JOSE… DAVIS F     NO    JOSE… NA         2016-06-26
+#> 3 1255877502      1 M.A. BC… JOSE… DE L… F     NO    NA    NA         2017-01-10
+#> 4 1588817837      1 RN       JOSE… DAPA… F     NO    NA    NA         2008-10-30
+#> 5 1841008505      1 ALC, NCC JOSIE DAVI… F     YES   JOSI… 2024-12-26 2024-12-26
+#> 6 1851713903      1 MSW      JOSE… DANW… F     YES   NA    NA         2014-01-08
+#> # ℹ 1 more variable: last_update <date>
 #> 
 #> $ind$taxonomy
-#> # A tibble: 6 × 7
-#>          npi code       desc                           license  prim state group
-#>        <int> <chr>      <chr>                          <chr>   <int> <chr> <chr>
-#> 1 1003826272 207RI0200X Internal Medicine, Infectious… 10460       1 MS    NA   
-#> 2 1255782751 207Q00000X Family Medicine                7744        1 NE    NA   
-#> 3 1255877502 103K00000X Behavior Analyst               1-17-2…     1 CA    NA   
-#> 4 1588817837 163W00000X Registered Nurse               552550      1 NY    NA   
-#> 5 1841008505 101YM0800X Counselor, Mental Health       ALC045…     1 AL    1934…
-#> 6 1851713903 225400000X Rehabilitation Practitioner    NA          1 NA    NA   
+#> # A tibble: 6 × 5
+#>          npi order code                  license    state
+#> *      <int> <int> <chr>                 <chr>      <chr>
+#> 1 1003826272     1 207RI0200X            10460      MS   
+#> 2 1255782751     1 207Q00000X            7744       NE   
+#> 3 1255877502     1 103K00000X            1-17-29529 CA   
+#> 4 1588817837     1 163W00000X            552550     NY   
+#> 5 1841008505     1 101YM0800X:193400000X ALC04512   AL   
+#> 6 1851713903     1 225400000X            NA         NA   
 #> 
 #> $ind$identifier
 #> # A tibble: 3 × 4
@@ -144,73 +144,73 @@ nppes(x)
 #> # A tibble: 10 × 6
 #>           npi address                       loc city        zip       state
 #>         <int> <chr>                       <int> <chr>       <chr>     <chr>
-#>  1 1003826272 766 LAKELAND DR # A             0 JACKSON     392164610 MS   
-#>  2 1003826272 6255 W SUNSET BLVD FL 21        9 LOS ANGELES 900287422 CA   
-#>  3 1255782751 2140 JUNCTION AVE               0 STURGIS     577852358 SD   
-#>  4 1255877502 1233 N NEPTUNE AVE              0 WILMINGTON  907443134 CA   
-#>  5 1255877502 3752 ATLANTIC AVE               9 LONG BEACH  908076667 CA   
-#>  6 1588817837 2160 BOLTON ST                  0 BRONX       104621364 NY   
-#>  7 1841008505 574 AZALEA RD STE 105           0 MOBILE      366091517 AL   
-#>  8 1841008505 6517 BUGGY WHIP CT              9 MOBILE      366953100 AL   
-#>  9 1851713903 18302 WESTLAWN ST               0 HESPERIA    923456923 CA   
-#> 10 1255782751 983075 NEBRASKA MEDICAL CTR     1 OMAHA       681983075 NE   
+#>  1 1003826272 766 LAKELAND DR # A             1 JACKSON     392164610 MS   
+#>  2 1003826272 6255 W SUNSET BLVD FL 21        3 LOS ANGELES 900287422 CA   
+#>  3 1255782751 2140 JUNCTION AVE               1 STURGIS     577852358 SD   
+#>  4 1255877502 1233 N NEPTUNE AVE              1 WILMINGTON  907443134 CA   
+#>  5 1255877502 3752 ATLANTIC AVE               3 LONG BEACH  908076667 CA   
+#>  6 1588817837 2160 BOLTON ST                  1 BRONX       104621364 NY   
+#>  7 1841008505 574 AZALEA RD STE 105           1 MOBILE      366091517 AL   
+#>  8 1841008505 6517 BUGGY WHIP CT              3 MOBILE      366953100 AL   
+#>  9 1851713903 18302 WESTLAWN ST               1 HESPERIA    923456923 CA   
+#> 10 1255782751 983075 NEBRASKA MEDICAL CTR     2 OMAHA       681983075 NE   
 #> 
 #> 
 #> $org
 #> $org$basic
 #> # A tibble: 18 × 12
-#>           npi entity cred  first    last    title org_name org_parent cert_date 
-#>  *      <int>  <int> <chr> <chr>    <chr>   <chr> <chr>    <chr>      <date>    
-#>  1 1013647569      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#>  2 1023473279      2 MD    JULIE    RHEE    Medi… VIOS FE… NA         2024-02-12
-#>  3 1083295638      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#>  4 1174270805      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#>  5 1225701881      2 NA    KATRINA  MARSHA… Dir … VIOS FE… NA         2024-02-12
-#>  6 1235702796      2 NA    MARIANNE DEBENE… SVP,… VIOS FE… NA         2025-04-21
-#>  7 1275117269      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#>  8 1306500665      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#>  9 1548743511      2 DO    FAHIMEH  SASAN   Owne… EMPIRE … NA         NA        
-#> 10 1689182859      2 RMC   KATRINA  MARSHA… Dire… VIOS FE… VIOS FERT… 2023-05-03
-#> 11 1841967825      2 DO    FAHIMEH  SASAN   Foun… PEACH S… NA         2024-05-20
-#> 12 1861857013      2 MD    AMBER    COOPER  Medi… CENTERS… NA         2024-02-12
-#> 13 1891355863      2 NA    SHILPA   PATEL   Chie… FAHIMEH… KBI SERVI… 2020-02-21
-#> 14 1891390084      2 DO    FAHIMEH  SASAN   Foun… PEACH S… KBI SERVI… 2024-05-20
-#> 15 1962116806      2 DO    FAHIMEH  SASAN   Foun… PEACH S… PEACH STA… 2024-05-20
-#> 16 1982059275      2 NA    HANNAH   JOHNSON Dire… VIOS FE… NA         NA        
-#> 17 1982296737      2 DO    FAHIMEH  SASAN   Foun… KINDBOD… NA         2021-02-03
-#> 18 1992338701      2 NA    SHILPA   PATEL   Chie… GARDEN … KBI SERVI… 2020-02-20
-#> # ℹ 3 more variables: enum_date <date>, last_update <date>, org_dba <chr>
+#>           npi entity cred  first last  title org_name org_par org_dba cert_date 
+#>         <int>  <int> <chr> <chr> <chr> <chr> <chr>    <chr>   <chr>   <date>    
+#>  1 1013647569      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#>  2 1023473279      2 MD    JULIE RHEE  Medi… VIOS FE… NA      NA      2024-02-12
+#>  3 1083295638      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#>  4 1174270805      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#>  5 1225701881      2 NA    KATR… MARS… Dir … VIOS FE… NA      NA      2024-02-12
+#>  6 1235702796      2 NA    MARI… DEBE… SVP,… VIOS FE… NA      NA      2025-04-21
+#>  7 1275117269      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#>  8 1306500665      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#>  9 1548743511      2 DO    FAHI… SASAN Owne… EMPIRE … NA      NA      NA        
+#> 10 1689182859      2 RMC   KATR… MARS… Dire… VIOS FE… VIOS F… VIOS F… 2023-05-03
+#> 11 1841967825      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2024-05-20
+#> 12 1861857013      2 MD    AMBER COOP… Medi… CENTERS… NA      NA      2024-02-12
+#> 13 1891355863      2 NA    SHIL… PATEL Chie… FAHIMEH… KBI SE… KINDBO… 2020-02-21
+#> 14 1891390084      2 DO    FAHI… SASAN Foun… PEACH S… KBI SE… KINDBO… 2024-05-20
+#> 15 1962116806      2 DO    FAHI… SASAN Foun… PEACH S… PEACH … KINDBO… 2024-05-20
+#> 16 1982059275      2 NA    HANN… JOHN… Dire… VIOS FE… NA      NA      NA        
+#> 17 1982296737      2 DO    FAHI… SASAN Foun… KINDBOD… NA      NA      2021-02-03
+#> 18 1992338701      2 NA    SHIL… PATEL Chie… GARDEN … KBI SE… KINDBO… 2020-02-20
+#> # ℹ 2 more variables: enum_date <date>, last_update <date>
 #> 
 #> $org$taxonomy
-#> # A tibble: 30 × 7
-#>           npi code       desc                          license  prim state group
-#>         <int> <chr>      <chr>                         <chr>   <int> <chr> <chr>
-#>  1 1013647569 207V00000X Obstetrics & Gynecology       NA          0 NA    1932…
-#>  2 1013647569 207VE0102X Obstetrics & Gynecology, Rep… NA          1 NA    1932…
-#>  3 1023473279 207VE0102X Obstetrics & Gynecology, Rep… 036139…     1 MO    1934…
-#>  4 1083295638 261QA0006X Clinic/Center, Ambulatory Fe… NA          1 NA    NA   
-#>  5 1083295638 261QF0050X Clinic/Center, Family Planni… NA          0 NA    NA   
-#>  6 1174270805 207VE0102X Obstetrics & Gynecology, Rep… NA          1 NA    1932…
-#>  7 1174270805 207VG0400X Obstetrics & Gynecology, Gyn… NA          0 NA    1932…
-#>  8 1225701881 207VE0102X Obstetrics & Gynecology, Rep… NA          1 NA    1934…
-#>  9 1235702796 207VE0102X Obstetrics & Gynecology, Rep… NA          1 NA    1934…
-#> 10 1275117269 207V00000X Obstetrics & Gynecology       NA          0 NA    1932…
+#> # A tibble: 30 × 5
+#>           npi order code                  license   state
+#>  *      <int> <int> <chr>                 <chr>     <chr>
+#>  1 1013647569     1 207VE0102X:193200000X NA        NA   
+#>  2 1013647569     2 207V00000X:193200000X NA        NA   
+#>  3 1023473279     1 207VE0102X:193400000X 036139011 MO   
+#>  4 1083295638     1 261QA0006X            NA        NA   
+#>  5 1083295638     2 261QF0050X            NA        NA   
+#>  6 1174270805     1 207VE0102X:193200000X NA        NA   
+#>  7 1174270805     2 207VG0400X:193200000X NA        NA   
+#>  8 1225701881     1 207VE0102X:193400000X NA        NA   
+#>  9 1235702796     1 207VE0102X:193400000X NA        NA   
+#> 10 1275117269     1 207VE0102X:193200000X NA        NA   
 #> # ℹ 20 more rows
 #> 
 #> $org$location
 #> # A tibble: 37 × 6
 #>           npi address                          loc city         zip       state
 #>         <int> <chr>                          <int> <chr>        <chr>     <chr>
-#>  1 1013647569 2203 S PROMENADE BLVD STE 5185     0 ROGERS       727588722 AR   
-#>  2 1013647569 333 S DESPLAINES ST STE 201        9 CHICAGO      606615514 IL   
-#>  3 1023473279 347 N LINDBERGH BLVD               0 CREVE COEUR  631417811 MO   
-#>  4 1023473279 621 S NEW BALLAS RD                9 SAINT LOUIS  631418232 MO   
-#>  5 1083295638 100 COLORADO ST                    0 AUSTIN       787014147 TX   
-#>  6 1083295638 333 S DESPLAINES ST STE 201        9 CHICAGO      606615514 IL   
-#>  7 1174270805 1414 WALNUT ST                     0 PHILADELPHIA 191023824 PA   
-#>  8 1174270805 333 S DESPLAINES ST STE 201        9 CHICAGO      606615514 IL   
-#>  9 1225701881 26400 W 12 MILE RD STE 140         0 SOUTHFIELD   480341753 MI   
-#> 10 1235702796 2501 NE 134TH ST STE 100           0 VANCOUVER    986863027 WA   
+#>  1 1013647569 2203 S PROMENADE BLVD STE 5185     1 ROGERS       727588722 AR   
+#>  2 1013647569 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
+#>  3 1023473279 347 N LINDBERGH BLVD               1 CREVE COEUR  631417811 MO   
+#>  4 1023473279 621 S NEW BALLAS RD                3 SAINT LOUIS  631418232 MO   
+#>  5 1083295638 100 COLORADO ST                    1 AUSTIN       787014147 TX   
+#>  6 1083295638 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
+#>  7 1174270805 1414 WALNUT ST                     1 PHILADELPHIA 191023824 PA   
+#>  8 1174270805 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
+#>  9 1225701881 26400 W 12 MILE RD STE 140         1 SOUTHFIELD   480341753 MI   
+#> 10 1235702796 2501 NE 134TH ST STE 100           1 VANCOUVER    986863027 WA   
 #> # ℹ 27 more rows
 #> 
 #> 
