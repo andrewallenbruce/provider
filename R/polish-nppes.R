@@ -36,25 +36,28 @@ nppes_sections <- function(x, type) {
     return(NULL)
   }
 
-  k <- collapse::ss(x, j = c("npi", "entity"), check = FALSE)
-  n <- nppes_basic(x, k)
+  k <- collapse::ss(
+    x,
+    j = c("npi", "entity"),
+    check = FALSE
+  )
 
-  if (!is.null(nppes_other(x, type))) {
-    n <- join2(n, nppes_other(x, type), "npi")
-  }
-
-  list(
-    basic = n,
+  cheapr::list_drop_null(list(
+    basic = nppes_basic(x, k, type),
     taxonomy = nppes_taxonomy(x),
     identifier = nppes_identifier(x),
     location = nppes_address(x)
-  ) |>
-    cheapr::list_drop_null()
+  ))
 }
 
 #' @noRd
-nppes_basic <- function(x, key) {
-  x <- rlang::set_names(x[["basic"]], x[["npi"]]) |>
+nppes_basic <- function(x, key, type) {
+  o <- nppes_other(x, type)
+
+  x <- rlang::set_names(
+    x[["basic"]],
+    x[["npi"]]
+  ) |>
     collapse::unlist2d(c("npi", "var"))
 
   if (collapse::fnrow(x) == 0L) {
@@ -77,7 +80,7 @@ nppes_basic <- function(x, key) {
     "authorized_official_last_name" = "last",
     "organization_name" = "org_name",
     "organizational_subpart" = "subpart",
-    "parent_organization_legal_business_name" = "org_parent",
+    "parent_organization_legal_business_name" = "org_par",
     set = TRUE
   )
 
@@ -111,9 +114,13 @@ nppes_basic <- function(x, key) {
   key <- join2(key, x, "npi")
 
   if (all2(key[["entity"]] == 2L)) {
-    if ("org_parent" %!in_% colnames(key)) {
-      key <- add_empty(key, "org_parent")
+    if ("org_par" %!in_% colnames(key)) {
+      key <- add_empty(key, "org_par")
     }
+  }
+
+  if (!is.null(o)) {
+    key <- join2(key, o, "npi")
   }
 
   cheapr::col_c(
@@ -124,15 +131,19 @@ nppes_basic <- function(x, key) {
     collapse::roworderv(c("npi"))
 }
 
-# TBL 3: OTHER NAMES
+# OTHER NAMES
 # 1 = Former
 # 2 = Professional
 # 3 = Doing Business As
 # 5 = Other
 #' @noRd
 nppes_other <- function(x, type) {
-  x <- rlang::set_names(x[["other"]], x[["npi"]]) |>
-    cheapr::list_drop_null()
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["other"]],
+      x[["npi"]]
+    )
+  )
 
   if (rlang::is_empty(x)) {
     return(NULL)
@@ -167,11 +178,12 @@ nppes_other <- function(x, type) {
 
 #' @noRd
 nppes_identifier <- function(x) {
-  x <- rlang::set_names(
-    x[["id"]],
-    x[["npi"]]
-  ) |>
-    cheapr::list_drop_null()
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["id"]],
+      x[["npi"]]
+    )
+  )
 
   if (rlang::is_empty(x)) {
     return(NULL)
@@ -179,11 +191,7 @@ nppes_identifier <- function(x) {
 
   x <- rowbind2(x, "npi", fill = TRUE) |>
     collapse::recode_char("--" = NA_character_) |>
-    collapse::rnm(
-      "code" = "type",
-      "identifier" = "code",
-      .nse = FALSE
-    ) |>
+    collapse::rnm("code" = "type", "identifier" = "code", .nse = FALSE) |>
     collapse::gv(c("npi", "code", "issuer", "state"))
 
   collapse::settransformv(x, "npi", as.integer)
@@ -194,11 +202,12 @@ nppes_identifier <- function(x) {
 
 #' @noRd
 nppes_taxonomy <- function(x) {
-  x <- rlang::set_names(
-    x[["taxonomy"]],
-    x[["npi"]]
-  ) |>
-    cheapr::list_drop_null()
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["taxonomy"]],
+      x[["npi"]]
+    )
+  )
 
   if (rlang::is_empty(x)) {
     return(NULL)
@@ -208,27 +217,33 @@ nppes_taxonomy <- function(x) {
     collapse::recode_char("--" = NA_character_) |>
     replace_nz() |>
     rc_trim() |>
-    collapse::rnm(
-      "group" = "taxonomy_group",
-      "prim" = "primary",
-      .nse = FALSE
-    )
+    collapse::rnm("group" = "taxonomy_group", "order" = "primary", .nse = FALSE)
 
-  collapse::settransformv(x, "prim", as.integer)
+  collapse::settransformv(x, "order", as.integer)
+  collapse::setv(x[["order"]], 0, 2)
   collapse::settransformv(x, "npi", as.integer)
+  collapse::gv(x, "desc") <- NULL
 
-  # x <- rc_combine(x, "code", "desc", sep = " - ")
+  x[["group"]] <- purrr::map_chr(
+    strsplit(x[["group"]], " - ", fixed = TRUE),
+    function(x) purrr::pluck(x, 1L)
+  )
 
-  return(x)
+  x <- rc_combine(x, "code", "group", sep = ":")
+
+  collapse::roworderv(x, c("npi", "order")) |>
+    collapse::colorderv(c("npi", "order")) |>
+    collapse::funique(cols = c("npi", "code", "license", "state"))
 }
 
 #' @noRd
 nppes_location <- function(x) {
-  x <- rlang::set_names(
-    x[["location"]],
-    x[["npi"]]
-  ) |>
-    cheapr::list_drop_null()
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["location"]],
+      x[["npi"]]
+    )
+  )
 
   if (rlang::is_empty(x)) {
     return(NULL)
@@ -305,10 +320,10 @@ nppes_address <- function(x, key) {
 loc_rank <- function(x) {
   cheapr::val_match(
     x,
-    "primary" ~ 0L,
-    "secondary" ~ 1L,
-    "mailing" ~ 9L,
-    .default = NA
+    "primary" ~ 1L,
+    "secondary" ~ 2L,
+    "mailing" ~ 3L,
+    .default = NA_integer_
   ) |>
     as.integer()
 }
