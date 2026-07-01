@@ -122,38 +122,31 @@ nppes(x)
 #> # ℹ 1 more variable: last_update <date>
 #> 
 #> $ind$taxonomy
-#> # A tibble: 6 × 5
-#>          npi order code                  license    state
-#> *      <int> <int> <chr>                 <chr>      <chr>
-#> 1 1003826272     1 207RI0200X            10460      MS   
-#> 2 1255782751     1 207Q00000X            7744       NE   
-#> 3 1255877502     1 103K00000X            1-17-29529 CA   
-#> 4 1588817837     1 163W00000X            552550     NY   
-#> 5 1841008505     1 101YM0800X:193400000X ALC04512   AL   
-#> 6 1851713903     1 225400000X            NA         NA   
-#> 
-#> $ind$identifier
-#> # A tibble: 3 × 4
-#>          npi code       issuer               state
-#>        <int> <chr>      <chr>                <chr>
-#> 1 1003826272 00018389   Medicaid             MS   
-#> 2 1003826272 P01065367  Railroad Medicare    MS   
-#> 3 1255877502 27-0383738 California Psychcare CA   
+#> # A tibble: 7 × 3
+#>          npi order code      
+#> *      <int> <int> <chr>     
+#> 1 1851713903     1 225400000X
+#> 2 1841008505     0 193400000X
+#> 3 1841008505     1 101YM0800X
+#> 4 1588817837     1 163W00000X
+#> 5 1255877502     1 103K00000X
+#> 6 1255782751     1 207Q00000X
+#> 7 1003826272     1 207RI0200X
 #> 
 #> $ind$location
 #> # A tibble: 10 × 6
-#>           npi address                       loc city        zip       state
-#>         <int> <chr>                       <int> <chr>       <chr>     <chr>
-#>  1 1003826272 766 LAKELAND DR # A             1 JACKSON     392164610 MS   
-#>  2 1003826272 6255 W SUNSET BLVD FL 21        3 LOS ANGELES 900287422 CA   
-#>  3 1255782751 2140 JUNCTION AVE               1 STURGIS     577852358 SD   
-#>  4 1255877502 1233 N NEPTUNE AVE              1 WILMINGTON  907443134 CA   
-#>  5 1255877502 3752 ATLANTIC AVE               3 LONG BEACH  908076667 CA   
-#>  6 1588817837 2160 BOLTON ST                  1 BRONX       104621364 NY   
-#>  7 1841008505 574 AZALEA RD STE 105           1 MOBILE      366091517 AL   
-#>  8 1841008505 6517 BUGGY WHIP CT              3 MOBILE      366953100 AL   
-#>  9 1851713903 18302 WESTLAWN ST               1 HESPERIA    923456923 CA   
-#> 10 1255782751 983075 NEBRASKA MEDICAL CTR     2 OMAHA       681983075 NE   
+#>           npi   loc city        state address                     zip      
+#>  *      <int> <int> <chr>       <chr> <chr>                       <chr>    
+#>  1 1003826272     1 JACKSON     MS    766 LAKELAND DR # A         392164610
+#>  2 1003826272     3 LOS ANGELES CA    6255 W SUNSET BLVD FL 21    900287422
+#>  3 1255782751     1 STURGIS     SD    2140 JUNCTION AVE           577852358
+#>  4 1255782751     2 OMAHA       NE    983075 NEBRASKA MEDICAL CTR 681983075
+#>  5 1255877502     1 WILMINGTON  CA    1233 N NEPTUNE AVE          907443134
+#>  6 1255877502     3 LONG BEACH  CA    3752 ATLANTIC AVE           908076667
+#>  7 1588817837     1 BRONX       NY    2160 BOLTON ST              104621364
+#>  8 1841008505     1 MOBILE      AL    574 AZALEA RD STE 105       366091517
+#>  9 1841008505     3 MOBILE      AL    6517 BUGGY WHIP CT          366953100
+#> 10 1851713903     1 HESPERIA    CA    18302 WESTLAWN ST           923456923
 #> 
 #> 
 #> $org
@@ -182,35 +175,35 @@ nppes(x)
 #> # ℹ 2 more variables: enum_date <date>, last_update <date>
 #> 
 #> $org$taxonomy
-#> # A tibble: 30 × 5
-#>           npi order code                  license   state
-#>  *      <int> <int> <chr>                 <chr>     <chr>
-#>  1 1013647569     1 207VE0102X:193200000X NA        NA   
-#>  2 1013647569     2 207V00000X:193200000X NA        NA   
-#>  3 1023473279     1 207VE0102X:193400000X 036139011 MO   
-#>  4 1083295638     1 261QA0006X            NA        NA   
-#>  5 1083295638     2 261QF0050X            NA        NA   
-#>  6 1174270805     1 207VE0102X:193200000X NA        NA   
-#>  7 1174270805     2 207VG0400X:193200000X NA        NA   
-#>  8 1225701881     1 207VE0102X:193400000X NA        NA   
-#>  9 1235702796     1 207VE0102X:193400000X NA        NA   
-#> 10 1275117269     1 207VE0102X:193200000X NA        NA   
-#> # ℹ 20 more rows
+#> # A tibble: 46 × 3
+#>           npi order code      
+#>         <int> <int> <chr>     
+#>  1 1992338701     0 193200000X
+#>  2 1992338701     1 207VE0102X
+#>  3 1992338701     2 207V00000X
+#>  4 1982296737     0 193200000X
+#>  5 1982296737     1 207V00000X
+#>  6 1982296737     2 207VE0102X
+#>  7 1982059275     0 193400000X
+#>  8 1982059275     1 207VE0102X
+#>  9 1962116806     0 193200000X
+#> 10 1962116806     1 207VE0102X
+#> # ℹ 36 more rows
 #> 
 #> $org$location
 #> # A tibble: 37 × 6
-#>           npi address                          loc city         zip       state
-#>         <int> <chr>                          <int> <chr>        <chr>     <chr>
-#>  1 1013647569 2203 S PROMENADE BLVD STE 5185     1 ROGERS       727588722 AR   
-#>  2 1013647569 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
-#>  3 1023473279 347 N LINDBERGH BLVD               1 CREVE COEUR  631417811 MO   
-#>  4 1023473279 621 S NEW BALLAS RD                3 SAINT LOUIS  631418232 MO   
-#>  5 1083295638 100 COLORADO ST                    1 AUSTIN       787014147 TX   
-#>  6 1083295638 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
-#>  7 1174270805 1414 WALNUT ST                     1 PHILADELPHIA 191023824 PA   
-#>  8 1174270805 333 S DESPLAINES ST STE 201        3 CHICAGO      606615514 IL   
-#>  9 1225701881 26400 W 12 MILE RD STE 140         1 SOUTHFIELD   480341753 MI   
-#> 10 1235702796 2501 NE 134TH ST STE 100           1 VANCOUVER    986863027 WA   
+#>           npi   loc city         state address                        zip      
+#>  *      <int> <int> <chr>        <chr> <chr>                          <chr>    
+#>  1 1013647569     1 ROGERS       AR    2203 S PROMENADE BLVD STE 5185 727588722
+#>  2 1013647569     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
+#>  3 1023473279     1 CREVE COEUR  MO    347 N LINDBERGH BLVD           631417811
+#>  4 1023473279     3 SAINT LOUIS  MO    621 S NEW BALLAS RD            631418232
+#>  5 1083295638     1 AUSTIN       TX    100 COLORADO ST                787014147
+#>  6 1083295638     2 HOUSTON      TX    1111 UPTOWN PARK BLVD STE 2    770563224
+#>  7 1083295638     2 DALLAS       TX    8041 WALNUT HILL LN STE 870    752310954
+#>  8 1083295638     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
+#>  9 1174270805     1 PHILADELPHIA PA    1414 WALNUT ST                 191023824
+#> 10 1174270805     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
 #> # ℹ 27 more rows
 #> 
 #> 
