@@ -21,7 +21,7 @@ aggregated by year."><meta property="og:image" content="https://andrewallenbruce
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9283</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9284</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@ aggregated by year.</p>
 <span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -99,6 +99,27 @@ aggregated by year.</p>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">services</span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  avg_charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  avg_allowed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  avg_payment <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -114,7 +135,7 @@ aggregated by year.</p>
 <dd><p><code>&lt;int&gt;</code> 10-digit national provider identifier</p></dd>
 
 
-<dt id="arg-first-last">first, last<a class="anchor" aria-label="anchor" href="#arg-first-last"></a></dt>
+<dt id="arg-first-last-org">first, last_org<a class="anchor" aria-label="anchor" href="#arg-first-last-org"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Individual/Organizational provider's name</p></dd>
 
 
@@ -206,6 +227,40 @@ zip code, as reported in NPPES.</p></dd>
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
+
+<dt id="arg-hcpcs-code">hcpcs_code<a class="anchor" aria-label="anchor" href="#arg-hcpcs-code"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
+
+
+<dt id="arg-hcpcs-desc">hcpcs_desc<a class="anchor" aria-label="anchor" href="#arg-hcpcs-desc"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
+
+
+<dt id="arg-hcpcs-drug">hcpcs_drug<a class="anchor" aria-label="anchor" href="#arg-hcpcs-drug"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Total number of unique HCPCS codes</p></dd>
+
+
+<dt id="arg-pos">pos<a class="anchor" aria-label="anchor" href="#arg-pos"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
+
+
+<dt id="arg-avg-charge">avg_charge<a class="anchor" aria-label="anchor" href="#arg-avg-charge"></a></dt>
+<dd><p><code>&lt;int&gt;</code> The total charges that the provider submitted for all
+services</p></dd>
+
+
+<dt id="arg-avg-allowed">avg_allowed<a class="anchor" aria-label="anchor" href="#arg-avg-allowed"></a></dt>
+<dd><p><code>&lt;dbl&gt;</code> The Medicare allowed amount for all provider services.
+This figure is the sum of the amount Medicare pays, the deductible and
+coinsurance amounts that the beneficiary is responsible for paying, and any
+amounts that a third party is responsible for paying.</p></dd>
+
+
+<dt id="arg-avg-payment">avg_payment<a class="anchor" aria-label="anchor" href="#arg-avg-payment"></a></dt>
+<dd><p><code>&lt;dbl&gt;</code> Total amount that Medicare paid after deductible and
+coinsurance amounts have been deducted for all the provider's line item
+services.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -245,6 +300,35 @@ zip code, as reported in NPPES.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: par &lt;int&gt;, hcpcs &lt;int&gt;, patients &lt;int&gt;, services &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   charges &lt;int&gt;, allowed &lt;dbl&gt;, payment &lt;dbl&gt;, avg_age &lt;int&gt;, avg_risk &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dual &lt;int&gt;, ndual &lt;int&gt;</span></span>
+<span class="r-in"><span><span class="fu">services</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">services</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">116,297,407</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">23,267</span> pages</span>
+<span class="r-in"><span><span class="fu">services</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">services</span> returned <span style="color: #BBBB00; font-weight: bold;">41</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">12</span> pages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> services [41 × 23] (S3: services/tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year        : int [1:41] 2013 2013 2013 2013 2014 2014 2014 2015 2015 2015 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi         : int [1:41] 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ first       : chr [1:41] "Jennifer" "Jennifer" "Jennifer" "Jennifer" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ last        : chr [1:41] "Velotta" "Velotta" "Velotta" "Velotta" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cred        : chr [1:41] "M.D." "M.D." "M.D." "M.D." ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ entity      : chr [1:41] "I" "I" "I" "I" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address     : chr [1:41] "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city        : chr [1:41] "Cleveland" "Cleveland" "Cleveland" "Cleveland" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state       : chr [1:41] "OH" "OH" "OH" "OH" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip         : chr [1:41] "44106" "44106" "44106" "44106" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ specialty   : chr [1:41] "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ par         : int [1:41] 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_code  : chr [1:41] "81002" "99213" "G0101" "Q0091" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_desc  : chr [1:41] "Urinalysis, manual test" "Established patient office or other outpatient visit, typically 15 minutes" "Cervical or vaginal cancer screening; pelvic and clinical breast examination" "Screening papanicolaou smear; obtaining, preparing and conveyance of cervical or vaginal smear to laboratory" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_drug  : chr [1:41] "N" "N" "N" "N" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pos         : chr [1:41] "O" "O" "O" "O" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ patients    : int [1:41] 16 25 29 20 17 22 13 12 25 14 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ services    : int [1:41] 18 32 29 20 20 22 13 15 25 14 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ day_services: int [1:41] 18 32 29 20 20 22 13 15 25 14 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_charge  : int [1:41] 10 90 80 40 90 80 40 90 80 40 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_allowed : num [1:41] 3.2 68.6 36.3 39.6 67.8 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_payment : num [1:41] 3.2 51.4 36.3 39.6 51.5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_standard: num [1:41] 3.52 55.2 38.11 45.93 55.27 ...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

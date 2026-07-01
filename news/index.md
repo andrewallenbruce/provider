@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9284 (2026-07-01)
+
+- initial impl of
+  [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  services section
+
 ## provider 0.0.1.9283 (2026-07-01)
 
 - nppes polish v1.0 complete

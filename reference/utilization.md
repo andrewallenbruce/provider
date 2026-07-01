@@ -17,7 +17,7 @@ utilization(
   year = NULL,
   npi = NULL,
   first = NULL,
-  last = NULL,
+  last_org = NULL,
   cred = NULL,
   entity = NULL,
   specialty = NULL,
@@ -38,6 +38,27 @@ utilization(
   zip = NULL,
   count = FALSE
 )
+
+services(
+  year = NULL,
+  npi = NULL,
+  entity = NULL,
+  first = NULL,
+  last_org = NULL,
+  cred = NULL,
+  specialty = NULL,
+  par = NULL,
+  hcpcs_code = NULL,
+  hcpcs_desc = NULL,
+  hcpcs_drug = NULL,
+  pos = NULL,
+  patients = NULL,
+  services = NULL,
+  avg_charge = NULL,
+  avg_allowed = NULL,
+  avg_payment = NULL,
+  count = FALSE
+)
 ```
 
 ## Arguments
@@ -50,7 +71,7 @@ utilization(
 
   `<int>` 10-digit national provider identifier
 
-- first, last:
+- first, last_org:
 
   `<chr>` Individual/Organizational provider's name
 
@@ -143,6 +164,39 @@ utilization(
 
   `<lgl>` Return the total row count
 
+- hcpcs_code:
+
+  `<chr>` Total number of unique HCPCS codes
+
+- hcpcs_desc:
+
+  `<chr>` Total number of unique HCPCS codes
+
+- hcpcs_drug:
+
+  `<lgl>` Total number of unique HCPCS codes
+
+- pos:
+
+  `<chr>` Total number of unique HCPCS codes
+
+- avg_charge:
+
+  `<int>` The total charges that the provider submitted for all services
+
+- avg_allowed:
+
+  `<dbl>` The Medicare allowed amount for all provider services. This
+  figure is the sum of the amount Medicare pays, the deductible and
+  coinsurance amounts that the beneficiary is responsible for paying,
+  and any amounts that a third party is responsible for paying.
+
+- avg_payment:
+
+  `<dbl>` Total amount that Medicare paid after deductible and
+  coinsurance amounts have been deducted for all the provider's line
+  item services.
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -185,4 +239,33 @@ utilization(npi = 1003000423)
 #> # ℹ 11 more variables: par <int>, hcpcs <int>, patients <int>, services <int>,
 #> #   charges <int>, allowed <dbl>, payment <dbl>, avg_age <int>, avg_risk <dbl>,
 #> #   dual <int>, ndual <int>
+services(count = TRUE)
+#> ◼ services | 116,297,407 rows | 23,267 pages
+services(npi = 1003000423) |> str()
+#> ✔ services returned 41 results
+#> ✔ Retrieving 12 pages
+#> services [41 × 23] (S3: services/tbl_df/tbl/data.frame)
+#>  $ year        : int [1:41] 2013 2013 2013 2013 2014 2014 2014 2015 2015 2015 ...
+#>  $ npi         : int [1:41] 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 ...
+#>  $ first       : chr [1:41] "Jennifer" "Jennifer" "Jennifer" "Jennifer" ...
+#>  $ last        : chr [1:41] "Velotta" "Velotta" "Velotta" "Velotta" ...
+#>  $ cred        : chr [1:41] "M.D." "M.D." "M.D." "M.D." ...
+#>  $ entity      : chr [1:41] "I" "I" "I" "I" ...
+#>  $ address     : chr [1:41] "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" ...
+#>  $ city        : chr [1:41] "Cleveland" "Cleveland" "Cleveland" "Cleveland" ...
+#>  $ state       : chr [1:41] "OH" "OH" "OH" "OH" ...
+#>  $ zip         : chr [1:41] "44106" "44106" "44106" "44106" ...
+#>  $ specialty   : chr [1:41] "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" ...
+#>  $ par         : int [1:41] 1 1 1 1 1 1 1 1 1 1 ...
+#>  $ hcpcs_code  : chr [1:41] "81002" "99213" "G0101" "Q0091" ...
+#>  $ hcpcs_desc  : chr [1:41] "Urinalysis, manual test" "Established patient office or other outpatient visit, typically 15 minutes" "Cervical or vaginal cancer screening; pelvic and clinical breast examination" "Screening papanicolaou smear; obtaining, preparing and conveyance of cervical or vaginal smear to laboratory" ...
+#>  $ hcpcs_drug  : chr [1:41] "N" "N" "N" "N" ...
+#>  $ pos         : chr [1:41] "O" "O" "O" "O" ...
+#>  $ patients    : int [1:41] 16 25 29 20 17 22 13 12 25 14 ...
+#>  $ services    : int [1:41] 18 32 29 20 20 22 13 15 25 14 ...
+#>  $ day_services: int [1:41] 18 32 29 20 20 22 13 15 25 14 ...
+#>  $ avg_charge  : int [1:41] 10 90 80 40 90 80 40 90 80 40 ...
+#>  $ avg_allowed : num [1:41] 3.2 68.6 36.3 39.6 67.8 ...
+#>  $ avg_payment : num [1:41] 3.2 51.4 36.3 39.6 51.5 ...
+#>  $ avg_standard: num [1:41] 3.52 55.2 38.11 45.93 55.27 ...
 ```
