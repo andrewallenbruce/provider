@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9286 (2026-07-01)
+
+- [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md):
+  minimal cli messaging
+
 ## provider 0.0.1.9285 (2026-07-01)
 
 - [`services()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
