@@ -102,5 +102,7 @@ x = c(
 nppes(x)
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
+
+nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
 \dontshow{\}) # examplesIf}
 }

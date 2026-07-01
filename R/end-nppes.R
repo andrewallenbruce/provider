@@ -83,21 +83,64 @@
 #'
 #' nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #'
+#' nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
+#'
 #' @export
 nppes <- function(npi) {
   check_numeric(npi)
+  npi <- uq(npi)
+
+  inform_search_nppes(npi)
 
   x <- purrr::map(npi, \(N) {
     httr2::request("https://npiregistry.cms.hhs.gov/api") |>
-      httr2::req_url_query(
-        version = "2.1",
-        number = N
-      )
-  }) |>
-    httr2::req_perform_parallel(on_error = "continue") |>
+      httr2::req_url_query(version = "2.1", number = N)
+  })
+
+  x <- httr2::req_perform_parallel(x, on_error = "continue") |>
     purrr::map(\(x) parse_string(x, query = "results")) |>
     collapse::rowbind() |>
     add_class("nppes")
 
+  inform_count_nppes(x)
+
   polish(x)
+}
+
+#' @noRd
+inform_search_nppes <- function(x) {
+  N <- length(x)
+  E <- "nppes"
+
+  msg <- cli::format_inline(
+    "{.strong {E}} searching ",
+    "{.strong {cli::col_yellow(mark(N))}} ",
+    "{cli::qty(N)}NPI{?s}"
+  )
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+    withr::defer_parent(cli::cli_progress_cleanup(), priority = "last")
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
+}
+
+#' @noRd
+inform_count_nppes <- function(x) {
+  N <- length(x[["number"]])
+  E <- "nppes"
+
+  msg <- cli::format_inline(
+    "{.strong {E}} returned ",
+    "{.strong {cli::col_yellow(mark(N))}} ",
+    "{cli::qty(N)}result{?s}"
+  )
+
+  if (rlang::is_interactive()) {
+    cli::cli_progress_step(msg = msg)
+    withr::defer_parent(cli::cli_progress_cleanup(), priority = "last")
+  } else {
+    cli::cli_alert_success(text = msg)
+  }
 }

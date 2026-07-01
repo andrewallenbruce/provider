@@ -173,6 +173,15 @@ rowbind2 <- function(x, nm = NULL, fill = FALSE) {
   )
 }
 
+#' Remove duplicates and NAs
+#' @param x vector
+#' @keywords internal
+#' @export
+uq <- function(x) {
+  collapse::funique(collapse::na_rm(x))
+}
+
+
 #' @noRd
 sum2 <- function(x, ...) {
   collapse::fsum(x, na.rm = TRUE, ...)
