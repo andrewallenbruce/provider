@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9284 (2026-07-01)
+
+* initial impl of `utilization()` services section
+
+
 # provider 0.0.1.9283 (2026-07-01)
 
 * nppes polish v1.0 complete
