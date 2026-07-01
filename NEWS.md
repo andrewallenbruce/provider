@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9286 (2026-07-01)
+
+* `nppes()`: minimal cli messaging
+
+
 # provider 0.0.1.9285 (2026-07-01)
 
 * `services()` reduction
