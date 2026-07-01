@@ -77,7 +77,7 @@ url_cms_list <- function(x) {
     ),
     quality = cms_temporal("^Quality"),
     utilization = cms_temporal("Practitioners - by Provider :"),
-    service = cms_temporal("Practitioners - by Provider and Service :"),
+    services = cms_temporal("Practitioners - by Provider and Service :"),
     geography = cms_temporal("Practitioners - by Geography and Service :"),
     cli::cli_abort(
       "{.strong {.pkg CMS LIST} Endpoint} `{.field {x}}` not found."

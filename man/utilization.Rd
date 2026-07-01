@@ -2,13 +2,14 @@
 % Please edit documentation in R/end-utilization.R
 \name{utilization}
 \alias{utilization}
+\alias{services}
 \title{Provider Utilization by Year}
 \usage{
 utilization(
   year = NULL,
   npi = NULL,
   first = NULL,
-  last = NULL,
+  last_org = NULL,
   cred = NULL,
   entity = NULL,
   specialty = NULL,
@@ -29,13 +30,34 @@ utilization(
   zip = NULL,
   count = FALSE
 )
+
+services(
+  year = NULL,
+  npi = NULL,
+  entity = NULL,
+  first = NULL,
+  last_org = NULL,
+  cred = NULL,
+  specialty = NULL,
+  par = NULL,
+  hcpcs_code = NULL,
+  hcpcs_desc = NULL,
+  hcpcs_drug = NULL,
+  pos = NULL,
+  patients = NULL,
+  services = NULL,
+  avg_charge = NULL,
+  avg_allowed = NULL,
+  avg_payment = NULL,
+  count = FALSE
+)
 }
 \arguments{
 \item{year}{\verb{<int>} Year data was reported}
 
 \item{npi}{\verb{<int>} 10-digit national provider identifier}
 
-\item{first, last}{\verb{<chr>} Individual/Organizational provider's name}
+\item{first, last_org}{\verb{<chr>} Individual/Organizational provider's name}
 
 \item{cred}{\verb{<chr>} Individual provider's credentials}
 
@@ -93,6 +115,26 @@ partial) in the given calendar year.}
 zip code, as reported in NPPES.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{hcpcs_code}{\verb{<chr>} Total number of unique HCPCS codes}
+
+\item{hcpcs_desc}{\verb{<chr>} Total number of unique HCPCS codes}
+
+\item{hcpcs_drug}{\verb{<lgl>} Total number of unique HCPCS codes}
+
+\item{pos}{\verb{<chr>} Total number of unique HCPCS codes}
+
+\item{avg_charge}{\verb{<int>} The total charges that the provider submitted for all
+services}
+
+\item{avg_allowed}{\verb{<dbl>} The Medicare allowed amount for all provider services.
+This figure is the sum of the amount Medicare pays, the deductible and
+coinsurance amounts that the beneficiary is responsible for paying, and any
+amounts that a third party is responsible for paying.}
+
+\item{avg_payment}{\verb{<dbl>} Total amount that Medicare paid after deductible and
+coinsurance amounts have been deducted for all the provider's line item
+services.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -121,5 +163,7 @@ aggregated by year.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 utilization(count = TRUE)
 utilization(npi = 1003000423)
+services(count = TRUE)
+services(npi = 1003000423) |> str()
 \dontshow{\}) # examplesIf}
 }

@@ -112,3 +112,5 @@ s3_revocations <- S7::new_S3_class("revocations")
 s3_transparency <- S7::new_S3_class("transparency")
 #' @noRd
 s3_utilization <- S7::new_S3_class("utilization")
+#' @noRd
+s3_services <- S7::new_S3_class("services")

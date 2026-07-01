@@ -7,10 +7,18 @@ S7::method(polish, S7::class_integer | Endpoint) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, S7::class_list) <- function(x) {
+  cli::cli_alert_warning("Using default {.cls polish.list} method")
+  x <- collapse::rowbind(x, fill = TRUE)
+  polish(x)
+}
+
+
+#' @noRd
 S7::method(polish, S7::class_data.frame) <- function(x) {
-  cli::cli_alert_warning("Using default {.cls polish} method")
-  add_class(x) |>
-    replace_nz()
+  cli::cli_alert_warning("Using default {.cls polish.data.frame} method")
+  replace_nz(x)
+  add_class(x)
 }
 
 #' @noRd
@@ -212,6 +220,40 @@ S7::method(polish, s3_utilization) <- function(x) {
       "Bene_Avg_Risk_Scre",
       "Tot_Mdcr_Alowd_Amt",
       "Tot_Mdcr_Pymt_Amt"
+    ),
+    as.double
+  )
+
+  set_rename(x)
+  get_columns(x) |>
+    rc_bin("par") |>
+    rc_combine("address", "add_2") |>
+    collapse::roworderv(c("year", "npi"))
+}
+
+#' @noRd
+S7::method(polish, s3_services) <- function(x) {
+  x <- rowbind2(x, "year", fill = TRUE) |>
+    add_class("services")
+
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "Rndrng_NPI",
+      "Tot_Benes",
+      "Tot_Srvcs",
+      "Tot_Bene_Day_Srvcs",
+      "Avg_Sbmtd_Chrg"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "Avg_Mdcr_Alowd_Amt",
+      "Avg_Mdcr_Pymt_Amt",
+      "Avg_Mdcr_Stdzd_Amt"
     ),
     as.double
   )

@@ -379,6 +379,32 @@ RE_NAME = list(
     Bene_Dual_Cnt = "dual",
     Bene_Ndual_Cnt = "ndual"
   ),
+  services = list(
+    year = "year",
+    Rndrng_NPI = "npi",
+    Rndrng_Prvdr_First_Name = "first",
+    Rndrng_Prvdr_Last_Org_Name = "last",
+    Rndrng_Prvdr_Crdntls = "cred",
+    Rndrng_Prvdr_Ent_Cd = "entity",
+    Rndrng_Prvdr_St1 = "address",
+    Rndrng_Prvdr_St2 = "add_2",
+    Rndrng_Prvdr_City = "city",
+    Rndrng_Prvdr_State_Abrvtn = "state",
+    Rndrng_Prvdr_Zip5 = "zip",
+    Rndrng_Prvdr_Type = "specialty",
+    Rndrng_Prvdr_Mdcr_Prtcptg_Ind = "par",
+    HCPCS_Cd = "hcpcs_code",
+    HCPCS_Desc = "hcpcs_desc",
+    HCPCS_Drug_Ind = "hcpcs_drug",
+    Place_Of_Srvc = "pos",
+    Tot_Benes = "patients",
+    Tot_Srvcs = "services",
+    Tot_Bene_Day_Srvcs = "day_services",
+    Avg_Sbmtd_Chrg = "avg_charge",
+    Avg_Mdcr_Alowd_Amt = "avg_allowed",
+    Avg_Mdcr_Pymt_Amt = "avg_payment",
+    Avg_Mdcr_Stdzd_Amt = "avg_standard"
+  ),
   owner = c(
     fac_type = "fac_type",
     RE_OWNER
