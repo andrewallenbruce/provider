@@ -81,6 +81,8 @@
 #'
 #' nppes(x)
 #'
+#' nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
+#'
 #' @export
 nppes <- function(npi) {
   check_numeric(npi)

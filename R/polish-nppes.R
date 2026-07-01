@@ -18,41 +18,34 @@ S7::method(polish, s3_nppes) <- function(x) {
     set = TRUE
   )
 
-  list(
+  cheapr::list_drop_null(list(
     ind = nppes_sections(x, 1L),
     org = nppes_sections(x, 2L)
-  )
+  ))
 }
 
 #' @noRd
 nppes_sections <- function(x, type) {
-  x <- collapse::ss(
-    x,
-    x[["entity"]] %==% type,
-    check = FALSE
-  )
+  x <- collapse::ss(x, x[["entity"]] %==% type, check = FALSE)
 
   if (collapse::fnrow(x) == 0L) {
     return(NULL)
   }
 
-  k <- collapse::ss(
-    x,
-    j = c("npi", "entity"),
-    check = FALSE
-  )
+  k <- collapse::ss(x, j = c("npi", "entity"), check = FALSE)
 
-  cheapr::list_drop_null(list(
-    basic = nppes_basic(x, k, type),
-    taxonomy = nppes_taxonomy(x),
-    # identifier = nppes_identifier(x),
-    location = nppes_address(x)
-  ))
+  cheapr::list_drop_null(
+    list(
+      basic = nppes_basic(x, k, type),
+      taxonomy = nppes_taxonomy(x),
+      location = nppes_address(x)
+    )
+  )
 }
 
 #' @noRd
-nppes_basic <- function(x, key, type) {
-  o <- nppes_other(x, type)
+nppes_basic <- function(x, key, ind = TRUE) {
+  o <- nppes_other(x, ind)
 
   x <- rlang::set_names(
     x[["basic"]],
@@ -132,12 +125,12 @@ nppes_basic <- function(x, key, type) {
 }
 
 # OTHER NAMES
-# 1 = Former
-# 2 = Professional
-# 3 = Doing Business As
-# 5 = Other
+# 1 [Former]
+# 2 [Professional]
+# 3 [Doing Business As]
+# 5 [Other]
 #' @noRd
-nppes_other <- function(x, type) {
+nppes_other <- function(x, ind = TRUE) {
   x <- cheapr::list_drop_null(
     rlang::set_names(
       x[["other"]],
@@ -171,49 +164,14 @@ nppes_other <- function(x, type) {
   i <- c("npi", "first", "middle", "last", "cred", "org_dba")
   x <- collapse::ss(x, j = colnames(x) %iin% i, check = FALSE)
 
-  if (type == 1L) {
+  if (ind) {
     x <- rc_combine(x, "first", "middle", sep = " ")
     x <- rc_combine(x, "first", "last", sep = " ")
-    x <- rc_combine(x, "first", "cred", sep = ": ")
+    x <- rc_combine(x, "first", "cred")
     x <- rlang::set_names(x, c("npi", "other"))
   }
 
   return(x)
-}
-
-#' @noRd
-nppes_identifier <- function(x) {
-  x <- cheapr::list_drop_null(
-    rlang::set_names(
-      x[["id"]],
-      x[["npi"]]
-    )
-  )
-
-  if (rlang::is_empty(x)) {
-    return(NULL)
-  }
-
-  x <- rowbind2(x, "npi", fill = TRUE)
-
-  collapse::recode_char(
-    x,
-    "--" = NA_character_,
-    set = TRUE
-  )
-
-  collapse::recode_char(
-    colnames(x),
-    "npi" = "npi",
-    "identifier" = "id",
-    "issuer" = "issuer",
-    "state" = "state",
-    set = TRUE
-  )
-
-  collapse::settransformv(x, "npi", as.integer)
-  collapse::setv(x[["issuer"]], NA, "Medicaid")
-  collapse::gv(x, c("npi", "id", "issuer", "state"))
 }
 
 #' @noRd
@@ -229,7 +187,8 @@ nppes_taxonomy <- function(x) {
     return(NULL)
   }
 
-  x <- rowbind2(x, "npi", fill = TRUE) |> rc_trim()
+  x <- rowbind2(x, "npi", fill = TRUE)
+  x <- rc_trim(x)
   replace_nz(x)
 
   collapse::recode_char(
@@ -245,7 +204,7 @@ nppes_taxonomy <- function(x) {
   )
 
   collapse::settransformv(x, "order", as.integer)
-  collapse::setv(x[["order"]], 0, 2)
+  collapse::setv(x[["order"]], 0L, 2L)
   collapse::settransformv(x, "npi", as.integer)
   collapse::gv(x, c("desc", "license", "state")) <- NULL
 
@@ -288,12 +247,8 @@ nppes_location <- function(x) {
   }
 
   x <- rowbind2(x, "npi", fill = TRUE)
-
-  x <- collapse::ss(
-    x,
-    j = c("npi", "address_1", "city", "state", "postal_code"),
-    check = FALSE
-  )
+  i <- c("npi", "address_1", "city", "state", "postal_code")
+  x <- collapse::ss(x, j = i, check = FALSE)
 
   collapse::setrename(
     x,
@@ -331,12 +286,8 @@ nppes_address <- function(x, key) {
   }
 
   x <- rowbind2(x, "npi", fill = TRUE)
-
-  x <- collapse::ss(
-    x,
-    j = c("npi", "address_1", "address_purpose", "city", "state", "postal_code"),
-    check = FALSE
-  )
+  i <- c("npi", "address_1", "address_purpose", "city", "state", "postal_code")
+  x <- collapse::ss(x, j = i, check = FALSE)
 
   collapse::setrename(
     x,
@@ -371,4 +322,39 @@ loc_rank <- function(x) {
     .default = NA_integer_
   ) |>
     as.integer()
+}
+
+#' @noRd
+nppes_identifier <- function(x) {
+  x <- cheapr::list_drop_null(
+    rlang::set_names(
+      x[["id"]],
+      x[["npi"]]
+    )
+  )
+
+  if (rlang::is_empty(x)) {
+    return(NULL)
+  }
+
+  x <- rowbind2(x, "npi", fill = TRUE)
+
+  collapse::recode_char(
+    x,
+    "--" = NA_character_,
+    set = TRUE
+  )
+
+  collapse::recode_char(
+    colnames(x),
+    "npi" = "npi",
+    "identifier" = "id",
+    "issuer" = "issuer",
+    "state" = "state",
+    set = TRUE
+  )
+
+  collapse::settransformv(x, "npi", as.integer)
+  collapse::setv(x[["issuer"]], NA, "Medicaid")
+  collapse::gv(x, c("npi", "id", "issuer", "state"))
 }
