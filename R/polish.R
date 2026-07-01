@@ -259,8 +259,25 @@ S7::method(polish, s3_services) <- function(x) {
   )
 
   set_rename(x)
-  get_columns(x) |>
-    rc_bin("par") |>
-    rc_combine("address", "add_2") |>
-    collapse::roworderv(c("year", "npi"))
+  collapse::gv(
+    x,
+    c(
+      "year",
+      "npi",
+      "hcpcs",
+      "description",
+      "drug",
+      "pos",
+      "patients",
+      "services",
+      "charge",
+      "allowed",
+      "payment"
+    )
+  ) |>
+    rc_bin("drug") |>
+    collapse::roworderv(
+      c("hcpcs", "year"),
+      decreasing = c(TRUE, FALSE)
+    )
 }

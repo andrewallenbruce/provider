@@ -6,13 +6,13 @@
 
    1. Dataset API endpoints have this structure:
 
-      ```json
+      ```yaml
       https://data.cms.gov/data-api/v1/dataset/{{dataset_id}}/data
       ```
 
    2. The system uses the [JSONAPI](https://jsonapi.org/) query syntax:
 
-      ```json
+      ```yaml
       ?filter[field_name]=value&filter[field_other]=value
       ```
 

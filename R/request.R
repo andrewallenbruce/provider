@@ -45,29 +45,6 @@ parse_string <- function(resp, query = NULL) {
 }
 # nocov end
 
-# base_request <- function(url, query = NULL) {
-#   httr2::request(url) |>
-#     httr2::req_perform() |>
-#     parse_string(query = query)
-# }
-
-# parallel_request <- function(x, query = NULL) {
-#   purrr::map(x, httr2::request) |>
-#     httr2::req_perform_parallel(on_error = "continue") |>
-#     httr2::resps_successes() |>
-#     httr2::resps_data(function(resp) parse_string(resp, query = query))
-# }
-
-# base_parallel <- function(url, n, limit, query = NULL) {
-#   offset2(url, n, limit) |>
-#     parallel_request(query = query)
-# }
-
-# multi_count <- function(url, nm, query = NULL) {
-#   purrr::map_int(url, base_request, query = query) |>
-#     set_names2(nm)
-# }
-
 #' @noRd
 count <- S7::new_generic("count", "x")
 

@@ -164,6 +164,6 @@ aggregated by year.
 utilization(count = TRUE)
 utilization(npi = 1003000423)
 services(count = TRUE)
-services(npi = 1003000423) |> str()
+services(npi = c(1003000423, 1003826272))
 \dontshow{\}) # examplesIf}
 }

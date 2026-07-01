@@ -44,8 +44,8 @@ nppes_sections <- function(x, type) {
 }
 
 #' @noRd
-nppes_basic <- function(x, key, ind = TRUE) {
-  o <- nppes_other(x, ind)
+nppes_basic <- function(x, key, type) {
+  o <- nppes_other(x, type)
 
   x <- rlang::set_names(
     x[["basic"]],
@@ -89,7 +89,8 @@ nppes_basic <- function(x, key, ind = TRUE) {
         "authorized_official_name_suffix",
         "authorized_official_middle_name",
         "authorized_official_telephone_number",
-        "subpart"
+        "subpart",
+        "cert_date"
       ),
     check = FALSE
   ) |>
@@ -100,7 +101,7 @@ nppes_basic <- function(x, key, ind = TRUE) {
       values = "V1",
       check.dups = TRUE
     ) |>
-    rc_ymd(c("enum_date", "cert_date", "last_update"))
+    rc_ymd(c("enum_date", "last_update"))
 
   collapse::settransformv(x, "npi", as.integer)
 
@@ -116,12 +117,17 @@ nppes_basic <- function(x, key, ind = TRUE) {
     key <- join2(key, o, "npi")
   }
 
-  cheapr::col_c(
+  x <- cheapr::col_c(
     collapse::num_vars(key),
     collapse::get_vars(key, is.character),
     collapse::date_vars(key)
   ) |>
     collapse::roworderv(c("npi"))
+
+  if ("sole" %in_% colnames(x)) {
+    x <- rc_bin(x, "sole")
+  }
+  return(x)
 }
 
 # OTHER NAMES
@@ -130,7 +136,7 @@ nppes_basic <- function(x, key, ind = TRUE) {
 # 3 [Doing Business As]
 # 5 [Other]
 #' @noRd
-nppes_other <- function(x, ind = TRUE) {
+nppes_other <- function(x, type) {
   x <- cheapr::list_drop_null(
     rlang::set_names(
       x[["other"]],
@@ -164,7 +170,7 @@ nppes_other <- function(x, ind = TRUE) {
   i <- c("npi", "first", "middle", "last", "cred", "org_dba")
   x <- collapse::ss(x, j = colnames(x) %iin% i, check = FALSE)
 
-  if (ind) {
+  if (type == 1L) {
     x <- rc_combine(x, "first", "middle", sep = " ")
     x <- rc_combine(x, "first", "last", sep = " ")
     x <- rc_combine(x, "first", "cred")
