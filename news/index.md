@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9285 (2026-07-01)
+
+- [`services()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  reduction
+- `nppes_other` fix
+
 ## provider 0.0.1.9284 (2026-07-01)
 
 - initial impl of

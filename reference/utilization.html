@@ -21,7 +21,7 @@ aggregated by year."><meta property="og:image" content="https://andrewallenbruce
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9284</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9285</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -302,33 +302,24 @@ services.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dual &lt;int&gt;, ndual &lt;int&gt;</span></span>
 <span class="r-in"><span><span class="fu">services</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">services</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">116,297,407</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">23,267</span> pages</span>
-<span class="r-in"><span><span class="fu">services</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">services</span> returned <span style="color: #BBBB00; font-weight: bold;">41</span> results</span>
+<span class="r-in"><span><span class="fu">services</span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003000423</span>, <span class="fl">1003826272</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">services</span> returned <span style="color: #BBBB00; font-weight: bold;">209</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">12</span> pages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> services [41 × 23] (S3: services/tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ year        : int [1:41] 2013 2013 2013 2013 2014 2014 2014 2015 2015 2015 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ npi         : int [1:41] 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 1003000423 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ first       : chr [1:41] "Jennifer" "Jennifer" "Jennifer" "Jennifer" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ last        : chr [1:41] "Velotta" "Velotta" "Velotta" "Velotta" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cred        : chr [1:41] "M.D." "M.D." "M.D." "M.D." ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ entity      : chr [1:41] "I" "I" "I" "I" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ address     : chr [1:41] "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" "11100 Euclid Ave" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ city        : chr [1:41] "Cleveland" "Cleveland" "Cleveland" "Cleveland" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ state       : chr [1:41] "OH" "OH" "OH" "OH" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ zip         : chr [1:41] "44106" "44106" "44106" "44106" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ specialty   : chr [1:41] "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" "Obstetrics/Gynecology" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ par         : int [1:41] 1 1 1 1 1 1 1 1 1 1 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_code  : chr [1:41] "81002" "99213" "G0101" "Q0091" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_desc  : chr [1:41] "Urinalysis, manual test" "Established patient office or other outpatient visit, typically 15 minutes" "Cervical or vaginal cancer screening; pelvic and clinical breast examination" "Screening papanicolaou smear; obtaining, preparing and conveyance of cervical or vaginal smear to laboratory" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ hcpcs_drug  : chr [1:41] "N" "N" "N" "N" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pos         : chr [1:41] "O" "O" "O" "O" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ patients    : int [1:41] 16 25 29 20 17 22 13 12 25 14 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ services    : int [1:41] 18 32 29 20 20 22 13 15 25 14 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ day_services: int [1:41] 18 32 29 20 20 22 13 15 25 14 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_charge  : int [1:41] 10 90 80 40 90 80 40 90 80 40 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_allowed : num [1:41] 3.2 68.6 36.3 39.6 67.8 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_payment : num [1:41] 3.2 51.4 36.3 39.6 51.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ avg_standard: num [1:41] 3.52 55.2 38.11 45.93 55.27 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 209 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     year      npi hcpcs description  drug pos   patients services charge allowed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>013   1.00<span style="color: #949494;">e</span>9 Q2038 Influenza …     1 O           32       32     16  11.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>014   1.00<span style="color: #949494;">e</span>9 Q2038 Influenza …     1 O           26       26     16  11.3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>015   1.00<span style="color: #949494;">e</span>9 Q2038 Influenza …     1 O           40       42     16  11.8  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017   1.00<span style="color: #949494;">e</span>9 Q2035 Influenza …     1 O           22       22     20  17.3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>023   1.00<span style="color: #949494;">e</span>9 Q0138 Injection,…     1 O           66    <span style="text-decoration: underline;">55</span>080      4   0.495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>024   1.00<span style="color: #949494;">e</span>9 Q0138 Injection,…     1 O           28    <span style="text-decoration: underline;">24</span>481      4   0.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>013   1.00<span style="color: #949494;">e</span>9 Q0091 Screening …     0 O           20       20     40  39.6  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>014   1.00<span style="color: #949494;">e</span>9 Q0091 Screening …     0 O           13       13     40  39.2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>015   1.00<span style="color: #949494;">e</span>9 Q0091 Screening …     0 O           14       14     40  39.2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>016   1.00<span style="color: #949494;">e</span>9 Q0091 Screening …     0 O           20       20     40  39.2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 199 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: payment &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

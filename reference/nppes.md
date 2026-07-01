@@ -108,28 +108,124 @@ x = c(
 )
 
 nppes(x)
-#> Error in nppes_other(x, ind): `middle` is not a column in `x`.
+#> $ind
+#> $ind$basic
+#> # A tibble: 6 × 10
+#>          npi entity cred    first last  sex    sole other enum_date  last_update
+#>        <int>  <int> <chr>   <chr> <chr> <chr> <int> <chr> <date>     <date>     
+#> 1 1003826272      1 MD      JO    DEAL  F         0 JO P… 2006-08-09 2024-05-07 
+#> 2 1255782751      1 MD      JOSE… DAVIS F         0 JOSE… 2016-06-26 2019-10-31 
+#> 3 1255877502      1 M.A. B… JOSE… DE L… F         0 NA    2017-01-10 2018-03-27 
+#> 4 1588817837      1 RN      JOSE… DAPA… F         0 NA    2008-10-30 2008-10-30 
+#> 5 1841008505      1 ALC, N… JOSIE DAVI… F         1 JOSI… 2024-12-26 2024-12-26 
+#> 6 1851713903      1 MSW     JOSE… DANW… F         1 NA    2014-01-08 2014-01-16 
+#> 
+#> $ind$taxonomy
+#> # A tibble: 7 × 3
+#>          npi order code      
+#> *      <int> <int> <chr>     
+#> 1 1851713903     1 225400000X
+#> 2 1841008505     0 193400000X
+#> 3 1841008505     1 101YM0800X
+#> 4 1588817837     1 163W00000X
+#> 5 1255877502     1 103K00000X
+#> 6 1255782751     1 207Q00000X
+#> 7 1003826272     1 207RI0200X
+#> 
+#> $ind$location
+#> # A tibble: 10 × 6
+#>           npi   loc city        state address                     zip      
+#>  *      <int> <int> <chr>       <chr> <chr>                       <chr>    
+#>  1 1003826272     1 JACKSON     MS    766 LAKELAND DR # A         392164610
+#>  2 1003826272     3 LOS ANGELES CA    6255 W SUNSET BLVD FL 21    900287422
+#>  3 1255782751     1 STURGIS     SD    2140 JUNCTION AVE           577852358
+#>  4 1255782751     2 OMAHA       NE    983075 NEBRASKA MEDICAL CTR 681983075
+#>  5 1255877502     1 WILMINGTON  CA    1233 N NEPTUNE AVE          907443134
+#>  6 1255877502     3 LONG BEACH  CA    3752 ATLANTIC AVE           908076667
+#>  7 1588817837     1 BRONX       NY    2160 BOLTON ST              104621364
+#>  8 1841008505     1 MOBILE      AL    574 AZALEA RD STE 105       366091517
+#>  9 1841008505     3 MOBILE      AL    6517 BUGGY WHIP CT          366953100
+#> 10 1851713903     1 HESPERIA    CA    18302 WESTLAWN ST           923456923
+#> 
+#> 
+#> $org
+#> $org$basic
+#> # A tibble: 18 × 11
+#>           npi entity cred  first last  title org_name org_par org_dba enum_date 
+#>         <int>  <int> <chr> <chr> <chr> <chr> <chr>    <chr>   <chr>   <date>    
+#>  1 1013647569      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2022-06-15
+#>  2 1023473279      2 MD    JULIE RHEE  Medi… VIOS FE… NA      NA      2015-12-15
+#>  3 1083295638      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2021-04-15
+#>  4 1174270805      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2022-03-02
+#>  5 1225701881      2 NA    KATR… MARS… Dir … VIOS FE… NA      NA      2021-07-29
+#>  6 1235702796      2 NA    MARI… DEBE… SVP,… VIOS FE… NA      NA      2021-07-22
+#>  7 1275117269      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2021-05-06
+#>  8 1306500665      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2021-10-23
+#>  9 1548743511      2 DO    FAHI… SASAN Owne… EMPIRE … NA      NA      2018-09-14
+#> 10 1689182859      2 RMC   KATR… MARS… Dire… VIOS FE… VIOS F… VIOS F… 2018-01-22
+#> 11 1841967825      2 DO    FAHI… SASAN Foun… PEACH S… NA      KINDBO… 2021-08-26
+#> 12 1861857013      2 MD    AMBER COOP… Medi… CENTERS… NA      NA      2015-12-15
+#> 13 1891355863      2 NA    SHIL… PATEL Chie… FAHIMEH… KBI SE… KINDBO… 2019-06-20
+#> 14 1891390084      2 DO    FAHI… SASAN Foun… PEACH S… KBI SE… KINDBO… 2020-12-03
+#> 15 1962116806      2 DO    FAHI… SASAN Foun… PEACH S… PEACH … KINDBO… 2023-01-05
+#> 16 1982059275      2 NA    HANN… JOHN… Dire… VIOS FE… NA      NA      2016-04-25
+#> 17 1982296737      2 DO    FAHI… SASAN Foun… KINDBOD… NA      NA      2021-02-03
+#> 18 1992338701      2 NA    SHIL… PATEL Chie… GARDEN … KBI SE… KINDBO… 2020-02-20
+#> # ℹ 1 more variable: last_update <date>
+#> 
+#> $org$taxonomy
+#> # A tibble: 46 × 3
+#>           npi order code      
+#>         <int> <int> <chr>     
+#>  1 1992338701     0 193200000X
+#>  2 1992338701     1 207VE0102X
+#>  3 1992338701     2 207V00000X
+#>  4 1982296737     0 193200000X
+#>  5 1982296737     1 207V00000X
+#>  6 1982296737     2 207VE0102X
+#>  7 1982059275     0 193400000X
+#>  8 1982059275     1 207VE0102X
+#>  9 1962116806     0 193200000X
+#> 10 1962116806     1 207VE0102X
+#> # ℹ 36 more rows
+#> 
+#> $org$location
+#> # A tibble: 37 × 6
+#>           npi   loc city         state address                        zip      
+#>  *      <int> <int> <chr>        <chr> <chr>                          <chr>    
+#>  1 1013647569     1 ROGERS       AR    2203 S PROMENADE BLVD STE 5185 727588722
+#>  2 1013647569     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
+#>  3 1023473279     1 CREVE COEUR  MO    347 N LINDBERGH BLVD           631417811
+#>  4 1023473279     3 SAINT LOUIS  MO    621 S NEW BALLAS RD            631418232
+#>  5 1083295638     1 AUSTIN       TX    100 COLORADO ST                787014147
+#>  6 1083295638     2 HOUSTON      TX    1111 UPTOWN PARK BLVD STE 2    770563224
+#>  7 1083295638     2 DALLAS       TX    8041 WALNUT HILL LN STE 870    752310954
+#>  8 1083295638     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
+#>  9 1174270805     1 PHILADELPHIA PA    1414 WALNUT ST                 191023824
+#> 10 1174270805     3 CHICAGO      IL    333 S DESPLAINES ST STE 201    606615514
+#> # ℹ 27 more rows
+#> 
+#> 
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
 #> ✔ Retrieving 1 page
 #> $ind
 #> $ind$basic
-#> # A tibble: 134 × 11
-#>           npi entity cred  first   last  sex   sole  other cert_date  enum_date 
-#>         <int>  <int> <chr> <chr>   <chr> <chr> <chr> <chr> <date>     <date>    
-#>  1 1013227818      1 LCSW  JENNIF… SMITH F     NO    JENN… 2023-09-26 2010-10-14
-#>  2 1013239268      1 LMFT  JENNIF… SMITH F     YES   JENN… 2023-11-22 2010-02-15
-#>  3 1013467240      1 PA-C  JENNIF… SMITH F     NO    NA    NA         2016-10-12
-#>  4 1013988013      1 DO    JENNIF… SMITH F     NO    NA    2021-05-12 2006-01-28
-#>  5 1023408291      1 NA    JENNIF… SMITH F     NO    NA    2026-01-20 2015-01-27
-#>  6 1033486725      1 NA    JENNIF… SMITH F     NO    NA    2025-09-17 2011-11-22
-#>  7 1033553219      1 M.S.  JENNIF… SMITH F     YES   NA    NA         2013-04-18
-#>  8 1053340471      1 PA    JENNIF… SMITH F     NO    NA    NA         2006-06-30
-#>  9 1053842450      1 D.O.  JENNIF… SMITH F     NO    NA    2022-07-27 2017-03-27
-#> 10 1063080125      1 NP    JENNIF… SMITH F     NO    NA    2020-12-17 2021-06-15
+#> # A tibble: 134 × 10
+#>           npi entity cred  first  last  sex    sole other enum_date  last_update
+#>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
+#>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
+#>  2 1013239268      1 LMFT  JENNI… SMITH F         1 JENN… 2010-02-15 2023-11-22 
+#>  3 1013467240      1 PA-C  JENNI… SMITH F         0 NA    2016-10-12 2016-10-12 
+#>  4 1013988013      1 DO    JENNI… SMITH F         0 NA    2006-01-28 2021-05-12 
+#>  5 1023408291      1 NA    JENNI… SMITH F         0 NA    2015-01-27 2026-01-20 
+#>  6 1033486725      1 NA    JENNI… SMITH F         0 NA    2011-11-22 2025-09-17 
+#>  7 1033553219      1 M.S.  JENNI… SMITH F         1 NA    2013-04-18 2013-04-18 
+#>  8 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
+#>  9 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
+#> 10 1063080125      1 NP    JENNI… SMITH F         0 NA    2021-06-15 2021-06-15 
 #> # ℹ 124 more rows
-#> # ℹ 1 more variable: last_update <date>
 #> 
 #> $ind$taxonomy
 #> # A tibble: 174 × 3
