@@ -208,6 +208,8 @@ nppes(x)
 #> # ℹ 27 more rows
 #> 
 #> 
+#> attr(,"class")
+#> [1] "nppes" "list" 
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
@@ -264,12 +266,15 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> # ℹ 219 more rows
 #> 
 #> 
+#> attr(,"class")
+#> [1] "nppes" "list" 
 
 nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
 #> ✔ clinicians returned 12 results
 #> ✔ Retrieving 1 page
 #> ✔ providers returned 29 results
 #> ✔ Retrieving 1 page
-#> Error: <Key> object is invalid:
-#> - Underlying data must be <character> not <integer>
+#> ✔ nppes searching 26 NPIs
+#> ✔ nppes returned 26 results
+#> Error in x@df: no applicable method for `@` applied to an object of class "providers"
 ```

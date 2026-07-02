@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9288 (2026-07-02)
+
+- [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
+  now joins the primary taxonomy automatically, via a chain with
+  [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
+
 ## provider 0.0.1.9287 (2026-07-01)
 
 - providers \<-\> nppes chain

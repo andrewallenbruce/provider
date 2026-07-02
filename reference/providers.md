@@ -84,6 +84,7 @@ providers(count = TRUE, org_name = not_blank())
 providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> ✔ providers returned 231 results
 #> ✔ Retrieving 1 page
-#> Error: <Key> object is invalid:
-#> - Underlying data must be <character> not <integer>
+#> ✔ nppes searching 219 NPIs
+#> ✔ nppes returned 219 results
+#> Error in x@df: no applicable method for `@` applied to an object of class "providers"
 ```
