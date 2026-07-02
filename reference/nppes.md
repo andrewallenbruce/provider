@@ -270,57 +270,6 @@ nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
 #> ✔ Retrieving 1 page
 #> ✔ providers returned 29 results
 #> ✔ Retrieving 1 page
-#> ✔ nppes searching 26 NPIs
-#> ✔ nppes returned 26 results
-#> $org
-#> $org$basic
-#> # A tibble: 26 × 11
-#>           npi entity first last  title org_name org_par cred  org_dba enum_date 
-#>         <int>  <int> <chr> <chr> <chr> <chr>    <chr>   <chr> <chr>   <date>    
-#>  1 1013967827      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2006-05-11
-#>  2 1033578364      2 COLL… SWIN… Dire… KAISER … KAISER… NA    WOODLA… 2016-02-15
-#>  3 1043378656      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2006-12-05
-#>  4 1073678637      2 COLL… SWIN… Dire… KAISER … KAISER… NA    TYSONS… 2006-12-26
-#>  5 1083872535      2 AMY   DECL… Dire… LEAVITT… LEAVIT… NA    ADVANC… 2008-05-30
-#>  6 1104876622      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2006-05-12
-#>  7 1114677572      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2022-03-28
-#>  8 1285101808      2 BENJ… DOMB  Pres… AMERICA… NA      MD    NA      2018-11-01
-#>  9 1295279586      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2016-12-06
-#> 10 1306596770      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2022-03-28
-#> # ℹ 16 more rows
-#> # ℹ 1 more variable: last_update <date>
-#> 
-#> $org$taxonomy
-#> # A tibble: 64 × 3
-#>           npi order code      
-#>  *      <int> <int> <chr>     
-#>  1 1962108753     1 261QE0700X
-#>  2 1952461816     0 193200000X
-#>  3 1952461816     1 302R00000X
-#>  4 1952461816     2 207RG0100X
-#>  5 1952461816     2 207K00000X
-#>  6 1952461816     2 2085R0202X
-#>  7 1952461816     2 207Q00000X
-#>  8 1952461816     2 207RS0012X
-#>  9 1952461816     2 133N00000X
-#> 10 1952461816     2 207X00000X
-#> # ℹ 54 more rows
-#> 
-#> $org$location
-#> # A tibble: 47 × 6
-#>           npi   loc city        state address                           zip     
-#>  *      <int> <int> <chr>       <chr> <chr>                             <chr>   
-#>  1 1013967827     1 MIAMI       FL    1611 NW 12TH AVE                  3313610…
-#>  2 1033578364     1 BALTIMORE   MD    7141 SECURITY BLVD                2124418…
-#>  3 1033578364     3 HYATTSVILLE MD    4000 GARDEN CITY DR               2078524…
-#>  4 1043378656     1 HALETHORPE  MD    KAISER PERMANENTE-SOUTH BALTIMORE 2122735…
-#>  5 1043378656     3 HYATTSVILLE MD    4000 GARDEN CITY DRIVE            2078524…
-#>  6 1073678637     1 MC LEAN     VA    8008 WESTPARK DR                  2210231…
-#>  7 1073678637     3 HYATTSVILLE MD    4000 GARDEN CITY DR               2078524…
-#>  8 1083872535     1 SEBASTIAN   FL    484 US HIGHWAY 1                  3295884…
-#>  9 1083872535     3 MAITLAND    FL    151 SOUTHHALL LN                  3275171…
-#> 10 1104876622     1 MIAMI       FL    1611 NW 12TH AVE                  3313610…
-#> # ℹ 37 more rows
-#> 
-#> 
+#> Error: <Key> object is invalid:
+#> - Underlying data must be <character> not <integer>
 ```

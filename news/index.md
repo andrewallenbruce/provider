@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9287 (2026-07-01)
+
+- providers \<-\> nppes chain
+
 ## provider 0.0.1.9286 (2026-07-01)
 
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md):
