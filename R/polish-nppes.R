@@ -18,10 +18,13 @@ S7::method(polish, s3_nppes) <- function(x) {
     set = TRUE
   )
 
-  cheapr::list_drop_null(list(
+  x <- cheapr::list_drop_null(list(
     ind = nppes_sections(x, 1L),
     org = nppes_sections(x, 2L)
   ))
+
+  class(x) <- c("nppes", "list")
+  return(x)
 }
 
 #' @noRd

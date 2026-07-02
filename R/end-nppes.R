@@ -87,7 +87,6 @@
 #'
 #' @export
 nppes <- function(npi) {
-  check_numeric(npi)
   npi <- uq(npi)
 
   inform_search_nppes(npi)

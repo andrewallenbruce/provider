@@ -7,13 +7,16 @@ Result <- S7::new_class(
   package = NULL,
   properties = list(
     df = S7::new_S3_class("tbl_df"),
-    key = S7::new_property(Key | S7::class_character)
+    key = S7::new_property(Key | S7::class_atomic)
   )
 )
 
 #' @noRd
 as_result <- function(x) {
-  Result(df = x, key = shave(x))
+  Result(
+    df = x,
+    key = shave(x)
+  )
 }
 
 #' @noRd
@@ -72,6 +75,12 @@ S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
 #' @noRd
 S7::method(link, list(s3_providers, s3_nppes)) <- function(x, y) {
   y <- cheapr::c_(y[["ind"]][["taxonomy"]], y[["org"]][["taxonomy"]])
-  y <- rlang::set_names(y, c("npi", "order", "taxonomy"))
-  join2(x, y, "npi")
+  colnames(y) <- c("npi", "order", "taxonomy")
+  y <- collapse::ss(y, y[["order"]] %==% 1L)
+  collapse::gv(y, "order") <- NULL
+  collapse::colorderv(
+    join2(x@df, y, "npi"),
+    c("prov_type", "taxonomy"),
+    pos = "after"
+  )
 }

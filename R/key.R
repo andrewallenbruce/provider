@@ -68,7 +68,14 @@ check_key <- function(
 
 #' @noRd
 as_key <- function(x, size = 150L) {
-  x <- Key(uq(x), size = size)
+  x <- uq(x)
+
+  if (!is.character(x)) {
+    x <- as.character(x)
+  }
+
+  x <- Key(x, size = size)
+
   if (x@length == 0L) {
     return(NULL)
   }
@@ -89,7 +96,8 @@ S7::method(shave, s3_opt_out) <- function(x) {
     j = "npi",
     check = FALSE
   )
-  x <- as.character(unlist_(x))
+
+  x <- unlist_(x)
   as_key(x, 150L)
 }
 
@@ -100,5 +108,5 @@ S7::method(shave, s3_hospitals) <- function(x) {
 
 #' @noRd
 S7::method(shave, s3_providers) <- function(x) {
-  as_key(x[["npi"]], 150L)
+  x[["npi"]]
 }
