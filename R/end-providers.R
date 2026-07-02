@@ -57,6 +57,13 @@ providers <- function(
   )
 
   x <- execute(x)
+  x <- polish(x)
 
-  polish(x)
+  if (count) {
+    return(invisible(x))
+  }
+
+  x <- as_result(x)
+
+  chain(x, keychain$nppes)
 }

@@ -68,10 +68,7 @@ check_key <- function(
 
 #' @noRd
 as_key <- function(x, size = 150L) {
-  x <- Key(
-    collapse::funique(collapse::na_rm(x)),
-    size = size
-  )
+  x <- Key(uq(x), size = size)
   if (x@length == 0L) {
     return(NULL)
   }
@@ -99,4 +96,9 @@ S7::method(shave, s3_opt_out) <- function(x) {
 #' @noRd
 S7::method(shave, s3_hospitals) <- function(x) {
   as_key(x[["ccn"]], 200L)
+}
+
+#' @noRd
+S7::method(shave, s3_providers) <- function(x) {
+  as_key(x[["npi"]], 150L)
 }
