@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9289 (2026-07-02)
+
+- provider - taxonomy chain method
+
 ## provider 0.0.1.9288 (2026-07-02)
 
 - [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)

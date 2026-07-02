@@ -219,18 +219,18 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> $ind
 #> $ind$basic
 #> # A tibble: 134 × 10
-#>           npi entity cred  first  last  sex    sole other enum_date  last_update
-#>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
-#>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
-#>  2 1013239268      1 LMFT  JENNI… SMITH F         1 JENN… 2010-02-15 2023-11-22 
-#>  3 1013467240      1 PA-C  JENNI… SMITH F         0 NA    2016-10-12 2016-10-12 
-#>  4 1013988013      1 DO    JENNI… SMITH F         0 NA    2006-01-28 2021-05-12 
-#>  5 1023408291      1 NA    JENNI… SMITH F         0 NA    2015-01-27 2026-01-20 
-#>  6 1033486725      1 NA    JENNI… SMITH F         0 NA    2011-11-22 2025-09-17 
-#>  7 1033553219      1 M.S.  JENNI… SMITH F         1 NA    2013-04-18 2013-04-18 
-#>  8 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
-#>  9 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
-#> 10 1063080125      1 NP    JENNI… SMITH F         0 NA    2021-06-15 2021-06-15 
+#>           npi entity first  last  sex    sole cred  other enum_date  last_update
+#>         <int>  <int> <chr>  <chr> <chr> <int> <chr> <chr> <date>     <date>     
+#>  1 1013227818      1 JENNI… SMITH F         0 LCSW  JENN… 2010-10-14 2023-09-26 
+#>  2 1013239268      1 JENNI… SMITH F         1 LMFT  JENN… 2010-02-15 2023-11-22 
+#>  3 1013467240      1 JENNI… SMITH F         0 PA-C  NA    2016-10-12 2016-10-12 
+#>  4 1013988013      1 JENNI… SMITH F         0 DO    NA    2006-01-28 2021-05-12 
+#>  5 1023408291      1 JENNI… SMITH F         0 NA    NA    2015-01-27 2026-01-20 
+#>  6 1033486725      1 JENNI… SMITH F         0 NA    NA    2011-11-22 2025-09-17 
+#>  7 1033553219      1 JENNI… SMITH F         1 M.S.  NA    2013-04-18 2013-04-18 
+#>  8 1053340471      1 JENNI… SMITH F         0 PA    NA    2006-06-30 2013-09-30 
+#>  9 1053842450      1 JENNI… SMITH F         0 D.O.  NA    2017-03-27 2022-07-27 
+#> 10 1063080125      1 JENNI… SMITH F         0 NP    NA    2021-06-15 2021-06-15 
 #> # ℹ 124 more rows
 #> 
 #> $ind$taxonomy
@@ -276,5 +276,59 @@ nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
 #> ✔ Retrieving 1 page
 #> ✔ nppes searching 26 NPIs
 #> ✔ nppes returned 26 results
-#> Error in x@df: no applicable method for `@` applied to an object of class "providers"
+#> ✔ nppes searching 26 NPIs
+#> ✔ nppes returned 26 results
+#> $org
+#> $org$basic
+#> # A tibble: 26 × 11
+#>           npi entity first last  title org_name org_par cred  org_dba enum_date 
+#>         <int>  <int> <chr> <chr> <chr> <chr>    <chr>   <chr> <chr>   <date>    
+#>  1 1013967827      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2006-05-11
+#>  2 1033578364      2 COLL… SWIN… Dire… KAISER … KAISER… NA    WOODLA… 2016-02-15
+#>  3 1043378656      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2006-12-05
+#>  4 1073678637      2 COLL… SWIN… Dire… KAISER … KAISER… NA    TYSONS… 2006-12-26
+#>  5 1083872535      2 AMY   DECL… Dire… LEAVITT… LEAVIT… NA    ADVANC… 2008-05-30
+#>  6 1104876622      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2006-05-12
+#>  7 1114677572      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2022-03-28
+#>  8 1285101808      2 BENJ… DOMB  Pres… AMERICA… NA      MD    NA      2018-11-01
+#>  9 1295279586      2 CESIA SANC… Prov… UNIVERS… NA      NA    UMIAMI… 2016-12-06
+#> 10 1306596770      2 COLL… SWIN… Dire… KAISER … KAISER… NA    KAISER… 2022-03-28
+#> # ℹ 16 more rows
+#> # ℹ 1 more variable: last_update <date>
+#> 
+#> $org$taxonomy
+#> # A tibble: 64 × 3
+#>           npi order code      
+#>  *      <int> <int> <chr>     
+#>  1 1962108753     1 261QE0700X
+#>  2 1952461816     0 193200000X
+#>  3 1952461816     1 302R00000X
+#>  4 1952461816     2 207RG0100X
+#>  5 1952461816     2 207K00000X
+#>  6 1952461816     2 2085R0202X
+#>  7 1952461816     2 207Q00000X
+#>  8 1952461816     2 207RS0012X
+#>  9 1952461816     2 133N00000X
+#> 10 1952461816     2 207X00000X
+#> # ℹ 54 more rows
+#> 
+#> $org$location
+#> # A tibble: 47 × 6
+#>           npi   loc city        state address                           zip     
+#>  *      <int> <int> <chr>       <chr> <chr>                             <chr>   
+#>  1 1013967827     1 MIAMI       FL    1611 NW 12TH AVE                  3313610…
+#>  2 1033578364     1 BALTIMORE   MD    7141 SECURITY BLVD                2124418…
+#>  3 1033578364     3 HYATTSVILLE MD    4000 GARDEN CITY DR               2078524…
+#>  4 1043378656     1 HALETHORPE  MD    KAISER PERMANENTE-SOUTH BALTIMORE 2122735…
+#>  5 1043378656     3 HYATTSVILLE MD    4000 GARDEN CITY DRIVE            2078524…
+#>  6 1073678637     1 MC LEAN     VA    8008 WESTPARK DR                  2210231…
+#>  7 1073678637     3 HYATTSVILLE MD    4000 GARDEN CITY DR               2078524…
+#>  8 1083872535     1 SEBASTIAN   FL    484 US HIGHWAY 1                  3295884…
+#>  9 1083872535     3 MAITLAND    FL    151 SOUTHHALL LN                  3275171…
+#> 10 1104876622     1 MIAMI       FL    1611 NW 12TH AVE                  3313610…
+#> # ℹ 37 more rows
+#> 
+#> 
+#> attr(,"class")
+#> [1] "nppes" "list" 
 ```
