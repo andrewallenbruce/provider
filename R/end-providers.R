@@ -63,7 +63,16 @@ providers <- function(
     return(invisible(x))
   }
 
-  x <- as_result(x)
+  y <- nppes(npi = uq(x[["npi"]]))
 
-  chain(x, keychain$nppes)
+  y <- cheapr::row_c(y[["ind"]][["taxonomy"]], y[["org"]][["taxonomy"]])
+  y <- collapse::ss(y, y[["order"]] %==% 1L)
+  collapse::setrename(y, "code" = "taxonomy", .nse = FALSE)
+  collapse::gv(y, "order") <- NULL
+  x <- join2(x, y, "npi")
+  collapse::colorderv(
+    collapse::qTBL(x),
+    c("prov_type", "taxonomy"),
+    pos = "after"
+  )
 }

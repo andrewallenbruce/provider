@@ -108,5 +108,5 @@ S7::method(shave, s3_hospitals) <- function(x) {
 
 #' @noRd
 S7::method(shave, s3_providers) <- function(x) {
-  x[["npi"]]
+  uq(x[["npi"]])
 }
