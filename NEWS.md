@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9289 (2026-07-02)
+
+* provider - taxonomy chain method
+
+
 # provider 0.0.1.9288 (2026-07-02)
 
 * `providers()` now joins the primary taxonomy automatically, via a chain with `nppes()`
