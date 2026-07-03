@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9290 (2026-07-03)
+
+* chain of `providers` to `nppes` is now working properly
+
+
 # provider 0.0.1.9289 (2026-07-02)
 
 * provider - taxonomy chain method
