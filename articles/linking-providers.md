@@ -10,34 +10,16 @@ library(provider)
 ``` r
 
 x <- affiliations(pac = 7810891009)
-#> ✔ affiliations returned 5 results
-#> ✔ Retrieving 1 page
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
   organization = hospitals(ccn = x$ccn))
-#> ✔ hospitals returned 5 results
-#> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 5 results
-#> ✔ Retrieving 1 page
+#> Error:
+#> ! object 'x' not found
 x
-#> $individual
-#>               V1
-#> first       MARK
-#> last        FUNG
-#> npi   1043245657
-#> pac   7810891009
-#> 
-#> $organization
-#> # A tibble: 5 × 18
-#>   org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
-#>   <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-#> 1 CHAMPLAIN V… THE UN… O201… 1.03e9     0 3302… 2769… 1926-01-01 Corpora… Volun…
-#> 2 ALICE HYDE … THE UN… O202… 1.11e9     0 3313… 4082… 1905-04-13 Corpora… Volun…
-#> 3 CENTRAL VER… NA      O200… 1.51e9     0 4700… 9335… 1984-03-01 Corpora… Volun…
-#> 4 UNIVERSITY … UNIVER… O200… 1.57e9     0 4700… 3779… 1995-01-01 Corpora… Volun…
-#> 5 PORTER HOSP… NA      O200… 1.74e9     1 4713… 1850… 1986-11-14 Corpora… Volun…
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> Error:
+#> ! object 'x' not found
 
 reassignments(pac = 7810891009) |> str()
 #> ✔ reassignments returned 1 result
@@ -58,26 +40,8 @@ reassignments(pac = 7810891009) |> str()
 #>  $ org_state  : chr "VT"
 
 clinicians(pac = 7810891009) |> str()
-#> ✔ clinicians returned 1 result
-#> ✔ Retrieving 1 page
-#> clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
-#>  $ first    : chr "MARK"
-#>  $ last     : chr "FUNG"
-#>  $ gender   : chr "M"
-#>  $ cred     : chr "MD"
-#>  $ school   : chr "UNIVERSITY OF ALABAMA SCHOOL OF MEDICINE"
-#>  $ year     : int 1999
-#>  $ specialty: chr "PATHOLOGY"
-#>  $ npi      : int 1043245657
-#>  $ pac      : chr "7810891009"
-#>  $ enid     : chr "I20031120000251"
-#>  $ org_name : chr "UNIVERSITY OF VERMONT MEDICAL CENTER INC"
-#>  $ org_pac  : chr "3779491071"
-#>  $ members  : int 1194
-#>  $ address  : chr "111 COLCHESTER AVE"
-#>  $ city     : chr "BURLINGTON"
-#>  $ state    : chr "VT"
-#>  $ zip      : chr "054011473"
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 ```
 
 #### Organizational Provider
@@ -91,47 +55,12 @@ hospitals(org_name = x) |> str()
 #> ✔ Retrieving 1 page
 #> ✔ hospitals2 returned 1 result
 #> ✔ Retrieving 1 page
-#> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
-#>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
-#>  $ org_dba  : chr [1:2] NA NA
-#>  $ enid     : chr [1:2] "O20101110000259" "O20220827000145"
-#>  $ npi      : int [1:2] 1891785184 1407061591
-#>  $ multi    : int [1:2] 1 0
-#>  $ ccn      : chr [1:2] "331302" "33Z302"
-#>  $ pac      : chr [1:2] "3577554138" "3577554138"
-#>  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"
-#>  $ org_type : chr [1:2] "Corporation" "Corporation"
-#>  $ status   : chr [1:2] "Voluntary non-profit - Private" "Non-Profit"
-#>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
-#>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
-#>  $ state    : chr [1:2] "NY" "NY"
-#>  $ zip      : chr [1:2] "129322300" "129322300"
-#>  $ loc_type : chr [1:2] "Other" "Other"
-#>  $ sub_group: chr [1:2] "CAH" "CAH"
-#>  $ rating   : int [1:2] 4 NA
-#>  $ county   : chr [1:2] "ESSEX" NA
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 
 clinicians(org_name = x) |> str()
-#> ✔ clinicians returned 78 results
-#> ✔ Retrieving 1 page
-#> clinicns [78 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
-#>  $ first    : chr [1:78] "GAVIN" "JOSEPH" "BENJAMIN" "DMITRIY" ...
-#>  $ last     : chr [1:78] "NOBLE" "PEKALA" "SAWATZKY" "AKSELROD" ...
-#>  $ gender   : chr [1:78] "M" "M" "M" "M" ...
-#>  $ cred     : chr [1:78] "MD" "MD" "MD" "MD" ...
-#>  $ school   : chr [1:78] "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" "OTHER" "TEMPLE UNIVERSITY SCHOOL OF MEDICINE" "STATE UNIVERSITY OF NY UPSTATE MEDICAL UNIVERSITY" ...
-#>  $ year     : int [1:78] 1999 1999 2014 2007 2009 2009 1992 2023 2014 1996 ...
-#>  $ specialty: chr [1:78] "CARDIOVASCULAR DISEASE (CARDIOLOGY), INTERNAL MEDICINE" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" "DIAGNOSTIC RADIOLOGY" ...
-#>  $ npi      : int [1:78] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 ...
-#>  $ pac      : chr [1:78] "6002861804" "3274579073" "0345559357" "4385805696" ...
-#>  $ enid     : chr [1:78] "I20200824000234" "I20050701000411" "I20200715002569" "I20170524000768" ...
-#>  $ org_name : chr [1:78] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL" ...
-#>  $ org_pac  : chr [1:78] "3577554138" "3577554138" "3577554138" "3577554138" ...
-#>  $ members  : int [1:78] 54 54 54 54 54 54 54 54 54 54 ...
-#>  $ address  : chr [1:78] "101 ADIRONDACK DR, SUITE 1" "108 PRESTON RD" "119 BRADLEY LN" "1355 CHURCH HILL RD" ...
-#>  $ city     : chr [1:78] "TICONDEROGA" "LYME" "WILLISTON" "CHARLOTTE" ...
-#>  $ state    : chr [1:78] "NY" "NH" "VT" "VT" ...
-#>  $ zip      : chr [1:78] "128839334" "037683508" "054957007" "054459594" ...
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 
 reassignments(org_name = x)
 #> ✔ reassignments returned 398 results
@@ -165,31 +94,18 @@ providers practicing at this hospital. First, the all-numeric CCN
 x <- affiliations(ccn = 331302)
 #> ✔ affiliations returned 329 results
 #> ✔ Retrieving 1 page
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))),
   individual = unique(x[1:4]))
 #> $organization
-#>                  V1
-#> fac_type   Hospital
-#> ccn          331302
-#> parent_ccn     <NA>
+#>     V1
+#> 1 <NA>
 #> 
 #> $individual
-#> # A tibble: 329 × 4
-#>    first   last                  npi pac       
-#>    <chr>   <chr>               <int> <chr>     
-#>  1 STACI   CARTER-KELLY   1003029125 6204824378
-#>  2 DYLAN   ESTES          1003278144 6608167523
-#>  3 ARMIN   AFSAR KESHMIRI 1003815184 4082693676
-#>  4 LAURA   GREENE         1003845272 1759384035
-#>  5 DEBORAH KAMPSCHROR     1013141860 8022069558
-#>  6 NAROD   VASSILIAN      1013539584 9133544109
-#>  7 EMILY   TRIPLETT       1013595560 3375947401
-#>  8 BARDIA  BARIMANI       1013793736 9436503646
-#>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371
-#> 10 LINDSEY WILHELM        1023377843 6901115278
-#> # ℹ 319 more rows
+#> [1] "Elizabethtown Community Hospital" NA
 ```
 
 That returns individual providers affiliated with the hospital. Now to
@@ -198,28 +114,18 @@ search the alphanumeric CCN (`33Z302`):
 ``` r
 
 x <- affiliations(ccn = "33Z302")
-#> ✔ affiliations returned 6 results
-#> ✔ Retrieving 1 page
+#> Error in `httr2::req_perform()`:
+#> ! HTTP 503 Service Unavailable.
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))), 
   individual = unique(x[1:4]))
 #> $organization
-#>                V1
-#> fac_type       NH
-#> ccn        33Z302
-#> parent_ccn 331302
+#>     V1
+#> 1 <NA>
 #> 
 #> $individual
-#> # A tibble: 6 × 4
-#>   first   last            npi pac       
-#>   <chr>   <chr>         <int> <chr>     
-#> 1 JEFFREY KLOTZ    1073258398 3870095805
-#> 2 CARLOS  MARTINEZ 1154332062 5890739734
-#> 3 MARY    HALLORAN 1396989059 8921259557
-#> 4 IL      CHON     1538173869 0547299091
-#> 5 DRAGOS  BANU     1558659367 6709004682
-#> 6 JOSHUA  WARNER   1760167712 8123473469
+#> [1] "Elizabethtown Community Hospital" NA
 ```
 
 That returns more affiliated individual providers that practice in the
