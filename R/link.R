@@ -13,10 +13,7 @@ Result <- S7::new_class(
 
 #' @noRd
 as_result <- function(x) {
-  Result(
-    df = x,
-    key = shave(x)
-  )
+  Result(df = x, key = shave(x))
 }
 
 #' @noRd
@@ -74,13 +71,17 @@ S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
 
 #' @noRd
 S7::method(link, list(s3_providers, s3_nppes)) <- function(x, y) {
-  y <- cheapr::c_(y[["ind"]][["taxonomy"]], y[["org"]][["taxonomy"]])
-  colnames(y) <- c("npi", "order", "taxonomy")
-  y <- collapse::ss(y, y[["order"]] %==% 1L)
-  collapse::gv(y, "order") <- NULL
-  collapse::colorderv(
-    join2(x@df, y, "npi"),
-    c("prov_type", "taxonomy"),
-    pos = "after"
-  )
+  y <- collapse::get_elem(y, "taxonomy")
+
+  if (!rlang::is_empty(collapse::list_elem(y))) {
+    y <- collapse::rowbind(y)
+  }
+
+  y <- collapse::ss(y, y[["order"]] %==% 1L, c("npi", "code"), check = FALSE)
+
+  collapse::setrename(y, "code" = "taxonomy", .nse = TRUE)
+
+  x <- join2(x, y, "npi")
+
+  collapse::colorderv(x, c("prov_type", "taxonomy"), pos = "after")
 }

@@ -1,9 +1,17 @@
+#' (to - from) / by
+#' cheapr::seq_size(from = 1L, to = 500, by = 150)
+#'
+#' @param id `<int>` Vector of identifiers, i.e., NPIs, CCNs. ENIDs, PACs
+#' @param threshold `<int>` Length at which `id` should repeatedly split into chunk
+#' @param length `<int>` Number of elements in `id` vector
+#' @param chunks `<int>` Number of chunks `id` vector will be split into
 #' @noRd
-chunk <- function(x, chunks, size, length) {
-  idx <- cheapr::rep_each_(seq_len(chunks), size) |>
-    cheapr::sset(seq_len(length))
+chunk <- function(id, threshold, length, chunks) {
+  i <- seq_len(chunks)
+  i <- cheapr::rep_each_(i, threshold)
+  i <- cheapr::sset(i, seq_len(length))
 
-  vctrs::vec_split(cheapr::attrs_rm(x), idx)$val
+  vctrs::vec_split(cheapr::attrs_rm(id), i)$val
 }
 
 #' @noRd
@@ -12,7 +20,7 @@ Key <- S7::new_class(
   S7::class_character,
   package = NULL,
   properties = list(
-    size = S7::new_property(
+    threshold = S7::new_property(
       S7::class_integer,
       default = 150L
     ),
@@ -26,7 +34,10 @@ Key <- S7::new_class(
         if (self@length == 0L) {
           return(0L)
         }
-        cheapr::seq_size(1L, self@length, self@size)
+        if (self@length <= self@threshold) {
+          return(1L)
+        }
+        cheapr::seq_size(1L, self@length, self@threshold)
       }
     ),
     split = S7::new_property(
@@ -35,12 +46,7 @@ Key <- S7::new_class(
         if (self@chunks <= 1L) {
           return()
         }
-        chunk(
-          self,
-          self@chunks,
-          self@size,
-          self@length
-        )
+        chunk(self, self@chunks, self@threshold, self@length)
       }
     )
   )
@@ -67,14 +73,14 @@ check_key <- function(
 }
 
 #' @noRd
-as_key <- function(x, size = 150L) {
+as_key <- function(x, threshold = 150L) {
   x <- uq(x)
 
   if (!is.character(x)) {
     x <- as.character(x)
   }
 
-  x <- Key(x, size = size)
+  x <- Key(x, threshold = threshold)
 
   if (x@length == 0L) {
     return(NULL)
