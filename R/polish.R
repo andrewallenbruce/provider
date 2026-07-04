@@ -281,3 +281,57 @@ S7::method(polish, s3_services) <- function(x) {
       decreasing = c(TRUE, FALSE)
     )
 }
+
+#' @noRd
+S7::method(polish, s3_geography) <- function(x) {
+  x <- rowbind2(x, "year", fill = TRUE) |>
+    add_class("geography")
+
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "Tot_Rndrng_Prvdrs",
+      "Tot_Benes",
+      "Tot_Srvcs"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "Avg_Sbmtd_Chrg",
+      "Avg_Mdcr_Alowd_Amt",
+      "Avg_Mdcr_Pymt_Amt"
+    ),
+    as.double
+  )
+
+  set_rename(x)
+
+  x$state[cheapr::which_(x$state == "National")] <- NA_character_
+
+  collapse::gv(
+    x,
+    c(
+      "year",
+      "level",
+      "state",
+      "hcpcs",
+      "description",
+      "drug",
+      "pos",
+      "providers",
+      "patients",
+      "services",
+      "charge",
+      "allowed",
+      "payment"
+    )
+  ) |>
+    rc_bin("drug") |>
+    collapse::roworderv(
+      c("level", "year"),
+      decreasing = c(FALSE, TRUE)
+    )
+}

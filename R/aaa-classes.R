@@ -114,3 +114,5 @@ s3_transparency <- S7::new_S3_class("transparency")
 s3_utilization <- S7::new_S3_class("utilization")
 #' @noRd
 s3_services <- S7::new_S3_class("services")
+#' @noRd
+s3_geography <- S7::new_S3_class("geography")

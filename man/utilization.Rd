@@ -3,6 +3,7 @@
 \name{utilization}
 \alias{utilization}
 \alias{services}
+\alias{geography}
 \title{Provider Utilization by Year}
 \usage{
 utilization(
@@ -41,6 +42,21 @@ services(
   hcpcs = NULL,
   drug = NULL,
   pos = NULL,
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  count = FALSE
+)
+
+geography(
+  year = NULL,
+  level = NULL,
+  hcpcs = NULL,
+  drug = NULL,
+  pos = NULL,
+  providers = NULL,
   patients = NULL,
   services = NULL,
   charge = NULL,
@@ -113,6 +129,10 @@ partial) in the given calendar year.}
 \item{drug}{\verb{<lgl>} Total number of unique HCPCS codes}
 
 \item{pos}{\verb{<chr>} Total number of unique HCPCS codes}
+
+\item{level}{\verb{<chr>} National or State}
+
+\item{providers}{\verb{<int>} Total}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -141,7 +161,11 @@ aggregated by year.
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 utilization(count = TRUE)
 utilization(npi = 1003000423)
+
 services(count = TRUE)
 services(npi = c(1003000423, 1003826272))
+
+geography(count = TRUE)
+geography(hcpcs = 99215)
 \dontshow{\}) # examplesIf}
 }

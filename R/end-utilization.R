@@ -34,6 +34,8 @@
 #' @param hcpcs `<int/chr>` Total number of unique HCPCS codes
 #' @param drug `<lgl>` Total number of unique HCPCS codes
 #' @param pos `<chr>` Total number of unique HCPCS codes
+#' @param level `<chr>` National or State
+#' @param providers `<int>` Total
 #' @param patients `<int>` Total Medicare beneficiaries receiving services from
 #'   the provider
 #' @param services `<int>` Total provider services
@@ -63,8 +65,13 @@
 #' @examplesIf httr2::is_online()
 #' utilization(count = TRUE)
 #' utilization(npi = 1003000423)
+#'
 #' services(count = TRUE)
 #' services(npi = c(1003000423, 1003826272))
+#'
+#' geography(count = TRUE)
+#' geography(hcpcs = 99215)
+#'
 #' @export
 utilization <- function(
   year = NULL,
@@ -179,6 +186,43 @@ services <- function(
     HCPCS_Cd = hcpcs,
     HCPCS_Drug_Ind = tag_bool(drug),
     Place_Of_Srvc = pos,
+    Tot_Benes = patients,
+    Tot_Srvcs = services,
+    Avg_Sbmtd_Chrg = charge,
+    Avg_Mdcr_Alowd_Amt = allowed,
+    Avg_Mdcr_Pymt_Amt = payment
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' @rdname utilization
+#' @export
+geography <- function(
+  year = NULL,
+  level = NULL,
+  hcpcs = NULL,
+  drug = NULL,
+  pos = NULL,
+  providers = NULL,
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  count = FALSE
+) {
+  x <- end_cmslist(
+    count = count,
+    set = FALSE,
+    select = year,
+    Rndrng_Prvdr_Geo_Lvl = level,
+    HCPCS_Cd = hcpcs,
+    HCPCS_Drug_Ind = tag_bool(drug),
+    Place_Of_Srvc = pos,
+    Tot_Rndrng_Prvdrs = providers,
     Tot_Benes = patients,
     Tot_Srvcs = services,
     Avg_Sbmtd_Chrg = charge,
