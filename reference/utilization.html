@@ -21,7 +21,7 @@ aggregated by year."><meta property="og:image" content="https://andrewallenbruce
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9292</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9293</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,6 +111,21 @@ aggregated by year.</p>
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  payment <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geography</span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  providers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -229,6 +244,14 @@ partial) in the given calendar year.</p></dd>
 <dt id="arg-pos">pos<a class="anchor" aria-label="anchor" href="#arg-pos"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
 
+
+<dt id="arg-level">level<a class="anchor" aria-label="anchor" href="#arg-level"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> National or State</p></dd>
+
+
+<dt id="arg-providers">providers<a class="anchor" aria-label="anchor" href="#arg-providers"></a></dt>
+<dd><p><code>&lt;int&gt;</code> Total</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -268,6 +291,7 @@ partial) in the given calendar year.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: charges &lt;int&gt;, allowed &lt;dbl&gt;, payment &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_age &lt;int&gt;, avg_risk &lt;dbl&gt;, dual &lt;int&gt;, ndual &lt;int&gt;, address &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">services</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">services</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">116,297,407</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">23,267</span> pages</span>
 <span class="r-in"><span><span class="fu">services</span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003000423</span>, <span class="fl">1003826272</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -288,6 +312,27 @@ partial) in the given calendar year.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>016   1.00<span style="color: #949494;">e</span>9 Q0091 Screening …     0 O           20       20     40  39.2  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 199 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: payment &lt;dbl&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">geography</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">geography</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">3,228,031</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">650</span> pages</span>
+<span class="r-in"><span><span class="fu">geography</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fl">99215</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">geography</span> returned <span style="color: #BBBB00; font-weight: bold;">1,378</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">12</span> pages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,378 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     year level   state hcpcs description  drug pos   providers patients services</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>024 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 F        <span style="text-decoration: underline;">101</span>163  1<span style="text-decoration: underline;">259</span>226  2<span style="text-decoration: underline;">595</span>818</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>024 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 O        <span style="text-decoration: underline;">340</span>863  5<span style="text-decoration: underline;">280</span>156 10<span style="text-decoration: underline;">326</span>407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>023 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 F         <span style="text-decoration: underline;">97</span>208  1<span style="text-decoration: underline;">186</span>849  2<span style="text-decoration: underline;">432</span>569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>023 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 O        <span style="text-decoration: underline;">320</span>488  5<span style="text-decoration: underline;">098</span>798  9<span style="text-decoration: underline;">710</span>835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>022 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 F        <span style="text-decoration: underline;">101</span>817  1<span style="text-decoration: underline;">133</span>234  2<span style="text-decoration: underline;">249</span>809</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>022 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 O        <span style="text-decoration: underline;">306</span>692  4<span style="text-decoration: underline;">914</span>072  9<span style="text-decoration: underline;">078</span>994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 F         <span style="text-decoration: underline;">98</span>767  1<span style="text-decoration: underline;">089</span>127  2<span style="text-decoration: underline;">132</span>747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 O        <span style="text-decoration: underline;">300</span>443  4<span style="text-decoration: underline;">848</span>612  8<span style="text-decoration: underline;">763</span>759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>020 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 F         <span style="text-decoration: underline;">89</span>793   <span style="text-decoration: underline;">873</span>298  1<span style="text-decoration: underline;">582</span>440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>020 Nation… <span style="color: #BB0000;">NA</span>    99215 Establishe…     0 O        <span style="text-decoration: underline;">259</span>521  4<span style="text-decoration: underline;">150</span>032  7<span style="text-decoration: underline;">103</span>762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,368 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: charge &lt;dbl&gt;, allowed &lt;dbl&gt;, payment &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

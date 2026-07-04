@@ -9,7 +9,7 @@ NPI Registry, a free directory of all active NPI records."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9292</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9293</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,44 +84,44 @@ their unique 10-digit NPIs to identify themselves in a standard way
 throughout their industry. Once CMS supplies an NPI, they publish the parts
 of the NPI record that have public relevance, including the provider’s
 name, taxonomy and practice address.</p><div class="section">
-<h3 id="entity-type-two-categories-of-health-care-providers-exist-for-npi">Entity Type: Two categories of health care providers exist for NPI<a class="anchor" aria-label="anchor" href="#entity-type-two-categories-of-health-care-providers-exist-for-npi"></a></h3>
+<h3 id="entity-type">Entity Type<a class="anchor" aria-label="anchor" href="#entity-type"></a></h3>
 
 
-<p>enumeration purposes:</p><ul><li><p><strong>Type 1</strong>: <strong>Individual</strong> providers may get an NPI as <em>Entity Type 1</em>.</p></li>
-</ul><p><em>Sole Proprietorship</em> A sole proprietor is one who does not conduct
-business as a corporation and, thus, <strong>is not</strong> an incorporated individual.</p>
-<p>An <strong>incorporated individual</strong> is an individual provider who forms and
+<p>Two categories of health care providers exist for NPI enumeration purposes.</p>
+<p><strong>Individual</strong> providers may get an NPI as <em>Entity Type 1</em>.</p><ul><li><p><em>Sole Proprietorship</em> A sole proprietor is one who does not conduct
+business as a corporation and, thus, <strong>is not</strong> an incorporated individual.</p></li>
+<li><p>An <strong>incorporated individual</strong> is an individual provider who forms and
 conducts business under a corporation. This provider may have a Type 1 NPI
-while the corporation has its own Type 2 NPI.</p>
-<p>A solo practitioner is not necessarily a sole proprietor, and vice-versa.
+while the corporation has its own Type 2 NPI.</p></li>
+<li><p>A solo practitioner is not necessarily a sole proprietor, and vice-versa.
 The following factors do not affect whether a sole proprietor is a Type 1
-entity:</p><ul><li><p>Multiple office locations</p></li>
+entity:</p></li>
+</ul><ol><li><p>Multiple office locations</p></li>
 <li><p>Having employees</p></li>
 <li><p>Having an EIN</p></li>
-</ul><ul><li><p><strong>Type 2</strong>: <strong>Organizational</strong> providers are eligible for an <em>Entity Type 2</em> NPI.</p></li>
-</ul><p>Organizational or Group providers may have a single employee or thousands
+</ol><p><strong>Organizational</strong> providers are eligible for an <em>Entity Type 2</em> NPI.</p><ul><li><p>Organizational or Group providers may have a single employee or thousands
 of employees. An example is an <strong>incorporated individual</strong> who is an
-organization's only employee.</p>
-<p>Some organization health care providers are made up of parts that work
+organization's only employee.</p></li>
+<li><p>Some organization health care providers are made up of parts that work
 somewhat independently from their parent organization. These parts may
 offer different types of health care or offer health care in separate
 physical locations. These parts and their physical locations aren't
 themselves legal entities but are part of the organization health care
-provider (which is a legal entity).</p>
-<p>The NPI Final Rule refers to the parts and locations as sub-parts. An
+provider (which is a legal entity).</p></li>
+<li><p>The NPI Final Rule refers to the parts and locations as sub-parts. An
 organization health care provider can get its sub-parts their own NPIs. If
 a sub-part conducts any HIPAA standard transactions on its own (separately
 from its parent), it must get its own NPI. Sub-part determination makes
 sure that entities within a covered organization are uniquely identified in
 HIPAA standard transactions they conduct with Medicare and other covered
-entities.</p>
-<p>For example, a hospital offers acute care, laboratory, pharmacy, and
+entities.</p></li>
+<li><p>For example, a hospital offers acute care, laboratory, pharmacy, and
 rehabilitation services. Each of these sub-parts may need its own NPI
 because each sends its own standard transactions to one or more health
 plans. Sub-part delegation doesn't affect Entity Type 1 health care
 providers. As individuals, these health care providers can't choose
-sub-parts and are not sub-parts.</p>
-<p><strong>Authorized Official</strong>: An appointed official (e.g., chief executive officer,
+sub-parts and are not sub-parts.</p></li>
+</ul><p><strong>Authorized Official</strong>: An appointed official (e.g., chief executive officer,
 chief financial officer, general partner, chairman of the board, or direct
 owner) to whom the organization has granted the legal authority to enroll
 it in the Medicare program, to make changes or updates to the
@@ -135,10 +135,11 @@ instructions of the Medicare program.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fl">1003826272</span>, <span class="fl">1013647569</span>, <span class="fl">1023473279</span>, <span class="fl">1083295638</span>, <span class="fl">1174270805</span>,</span></span>
-<span class="r-in"><span>  <span class="fl">1225701881</span>, <span class="fl">1235702796</span>, <span class="fl">1255782751</span>, <span class="fl">1255877502</span>, <span class="fl">1275117269</span>,</span></span>
-<span class="r-in"><span>  <span class="fl">1306500665</span>, <span class="fl">1548743511</span>, <span class="fl">1588817837</span>, <span class="fl">1689182859</span>, <span class="fl">1841008505</span>,</span></span>
-<span class="r-in"><span>  <span class="fl">1841967825</span>, <span class="fl">1851713903</span>, <span class="fl">1861857013</span>, <span class="fl">1891355863</span>, <span class="fl">1891390084</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1003826272</span>, <span class="fl">1013647569</span>, <span class="fl">1023473279</span>, <span class="fl">1083295638</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1174270805</span>, <span class="fl">1225701881</span>, <span class="fl">1235702796</span>, <span class="fl">1255782751</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1255877502</span>, <span class="fl">1275117269</span>, <span class="fl">1306500665</span>, <span class="fl">1548743511</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1588817837</span>, <span class="fl">1689182859</span>, <span class="fl">1841008505</span>, <span class="fl">1841967825</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1851713903</span>, <span class="fl">1861857013</span>, <span class="fl">1891355863</span>, <span class="fl">1891390084</span>,</span></span>
 <span class="r-in"><span>  <span class="fl">1962116806</span>, <span class="fl">1982059275</span>, <span class="fl">1982296737</span>, <span class="fl">1992338701</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

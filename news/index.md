@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9293 (2026-07-04)
+
+- added
+  [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  geography endpoint
+
 ## provider 0.0.1.9292 (2026-07-03)
 
 - arg clean up

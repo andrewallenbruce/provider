@@ -56,6 +56,21 @@ services(
   payment = NULL,
   count = FALSE
 )
+
+geography(
+  year = NULL,
+  level = NULL,
+  hcpcs = NULL,
+  drug = NULL,
+  pos = NULL,
+  providers = NULL,
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  count = FALSE
+)
 ```
 
 ## Arguments
@@ -165,6 +180,14 @@ services(
 
   `<chr>` Total number of unique HCPCS codes
 
+- level:
+
+  `<chr>` National or State
+
+- providers:
+
+  `<int>` Total
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -207,6 +230,7 @@ utilization(npi = 1003000423)
 #> # ℹ 11 more variables: charges <int>, allowed <dbl>, payment <dbl>,
 #> #   avg_age <int>, avg_risk <dbl>, dual <int>, ndual <int>, address <chr>,
 #> #   city <chr>, state <chr>, zip <chr>
+
 services(count = TRUE)
 #> ◼ services | 116,297,407 rows | 23,267 pages
 services(npi = c(1003000423, 1003826272))
@@ -227,4 +251,25 @@ services(npi = c(1003000423, 1003826272))
 #> 10  2016   1.00e9 Q0091 Screening …     0 O           20       20     40  39.2  
 #> # ℹ 199 more rows
 #> # ℹ 1 more variable: payment <dbl>
+
+geography(count = TRUE)
+#> ◼ geography | 3,228,031 rows | 650 pages
+geography(hcpcs = 99215)
+#> ✔ geography returned 1,378 results
+#> ✔ Retrieving 12 pages
+#> # A tibble: 1,378 × 13
+#>     year level   state hcpcs description  drug pos   providers patients services
+#>    <int> <chr>   <chr> <chr> <chr>       <int> <chr>     <int>    <int>    <int>
+#>  1  2024 Nation… NA    99215 Establishe…     0 F        101163  1259226  2595818
+#>  2  2024 Nation… NA    99215 Establishe…     0 O        340863  5280156 10326407
+#>  3  2023 Nation… NA    99215 Establishe…     0 F         97208  1186849  2432569
+#>  4  2023 Nation… NA    99215 Establishe…     0 O        320488  5098798  9710835
+#>  5  2022 Nation… NA    99215 Establishe…     0 F        101817  1133234  2249809
+#>  6  2022 Nation… NA    99215 Establishe…     0 O        306692  4914072  9078994
+#>  7  2021 Nation… NA    99215 Establishe…     0 F         98767  1089127  2132747
+#>  8  2021 Nation… NA    99215 Establishe…     0 O        300443  4848612  8763759
+#>  9  2020 Nation… NA    99215 Establishe…     0 F         89793   873298  1582440
+#> 10  2020 Nation… NA    99215 Establishe…     0 O        259521  4150032  7103762
+#> # ℹ 1,368 more rows
+#> # ℹ 3 more variables: charge <dbl>, allowed <dbl>, payment <dbl>
 ```
