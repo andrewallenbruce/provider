@@ -222,23 +222,23 @@ utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
-#>     year        npi first last  cred  entity address city  state zip   specialty
-#>    <int>      <int> <chr> <chr> <chr> <chr>  <chr>   <chr> <chr> <chr> <chr>    
-#>  1  2013 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  2  2014 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  3  2015 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  4  2016 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  5  2017 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  6  2018 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  7  2019 1003000423 JENN… VELO… M.D.  I      11100 … CLEV… OH    44106 Obstetri…
-#>  8  2020 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#>  9  2021 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 10  2022 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 11  2023 1003000423 Jenn… Velo… M.D.  I      11100 … Clev… OH    44106 Obstetri…
-#> 12  2024 1003000423 Jenn… Velo… M.D.  I      8300 T… Ment… OH    44060 Obstetri…
-#> # ℹ 11 more variables: par <int>, hcpcs <int>, patients <int>, services <int>,
-#> #   charges <int>, allowed <dbl>, payment <dbl>, avg_age <int>, avg_risk <dbl>,
-#> #   dual <int>, ndual <int>
+#>     year    npi first last  cred  entity specialty   par hcpcs patients services
+#>    <int>  <int> <chr> <chr> <chr> <chr>  <chr>     <int> <int>    <int>    <int>
+#>  1  2013 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    33       63      320
+#>  2  2014 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    29       57      293
+#>  3  2015 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    31       56      117
+#>  4  2016 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    26       82      163
+#>  5  2017 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    29       71      155
+#>  6  2018 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    20       73      283
+#>  7  2019 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    24       74      897
+#>  8  2020 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    21       56      571
+#>  9  2021 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    19       69      738
+#> 10  2022 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    16       59      111
+#> 11  2023 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    16       63      119
+#> 12  2024 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    18       75      140
+#> # ℹ 11 more variables: charges <int>, allowed <dbl>, payment <dbl>,
+#> #   avg_age <int>, avg_risk <dbl>, dual <int>, ndual <int>, address <chr>,
+#> #   city <chr>, state <chr>, zip <chr>
 services(count = TRUE)
 #> ◼ services | 116,297,407 rows | 23,267 pages
 services(npi = c(1003000423, 1003826272))

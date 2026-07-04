@@ -73,7 +73,23 @@ containing the search results.
 
 ``` r
 dialysis(count = TRUE)
-#> Error in httr2::req_perform(httr2::request(flatten_pdc(S7::prop(x, "url"),     S7::prop(x, "query"), results = "false"))): HTTP 503 Service Unavailable.
+#> ◼ dialysis | 7,557 rows | 6 pages
 dialysis(org_name = "DaVita", state = "GA")
-#> Error in httr2::req_perform(httr2::request(flatten_pdc(S7::prop(x, "url"),     S7::prop(x, "query"), results = "false"))): HTTP 503 Service Unavailable.
+#> ✔ dialysis returned 139 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 139 × 12
+#>    ccn    name     rating network status org_name cert_date  address city  state
+#>    <chr>  <chr>     <int>   <int> <chr>  <chr>    <date>     <chr>   <chr> <chr>
+#>  1 112505 DaVita …      3       6 Profit DaVita   1976-09-01 20 Riv… ROME  GA   
+#>  2 112513 DaVita …      1       6 Profit DaVita   1977-07-18 1747 L… Watk… GA   
+#>  3 112514 DaVita …      3       6 Profit DaVita   1977-07-14 53 SCR… BRUN… GA   
+#>  4 112515 DaVita …      2       6 Profit DaVita   1977-09-26 2704 N… VALD… GA   
+#>  5 112517 DaVita …      3       6 Profit DaVita   1979-04-09 1595 S… Jone… GA   
+#>  6 112523 DaVita …      1       6 Profit DaVita   1981-06-24 3620 M… ATLA… GA   
+#>  7 112526 DaVita …      2       6 Profit DaVita   1982-10-04 3899 L… DOUG… GA   
+#>  8 112528 DaVita …      1       6 Profit DaVita   1983-02-11 227 N … AMER… GA   
+#>  9 112532 DaVita …      3       6 Profit DaVita   1984-05-08 301 PE… JESUP GA   
+#> 10 112535 DaVita …      2       6 Profit DaVita   1985-02-13 190 WE… DOUG… GA   
+#> # ℹ 129 more rows
+#> # ℹ 2 more variables: zip <chr>, county <chr>
 ```

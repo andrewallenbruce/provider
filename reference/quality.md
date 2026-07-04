@@ -135,7 +135,7 @@ quality(npi = 1003026055)
 #> 6  2020 1.00e9 FL        7 Endocrin…    10     1244     8160  719152        95.5
 #> 7  2021 1.00e9 FL        9 Endocrin…    11     1181     7068  698003        60  
 #> # ℹ 15 more variables: adjustment <dbl>, pi_score <int>, qa_score <dbl>,
-#> #   complex_bonus <dbl>, participation <chr>, qi_score <dbl>, ia_score <int>,
+#> #   complex_bonus <dbl>, partype <chr>, qi_score <dbl>, ia_score <int>,
 #> #   cost_score <dbl>, indicators <chr>, cred <chr>, dual_ratio <dbl>,
 #> #   small_bonus <int>, reporting <chr>, mvp <chr>, ci_score <dbl>
 

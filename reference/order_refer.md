@@ -95,17 +95,17 @@ order_refer(first = "Jennifer", last = "Smith")
 #> ✔ order_refer returned 135 results
 #> ✔ Retrieving 1 page
 #> # A tibble: 135 × 8
-#>    first    last         npi ptb_ind dme_ind hha_ind pmd_ind hsp_ind
-#>    <chr>    <chr>      <int>   <int>   <int>   <int>   <int>   <int>
-#>  1 JENNIFER SMITH 1992162556       1       1       0       0       0
-#>  2 JENNIFER SMITH 1982026100       1       1       0       0       0
-#>  3 JENNIFER SMITH 1336189257       1       1       1       1       0
-#>  4 JENNIFER SMITH 1750494886       1       1       1       0       1
-#>  5 JENNIFER SMITH 1811218712       1       1       1       1       1
-#>  6 JENNIFER SMITH 1134344286       1       1       1       1       1
-#>  7 JENNIFER SMITH 1215468897       1       1       1       1       0
-#>  8 JENNIFER SMITH 1922290519       1       1       1       1       1
-#>  9 JENNIFER SMITH 1790243723       1       1       1       1       0
-#> 10 JENNIFER SMITH 1396366811       1       1       1       1       1
+#>           npi first    last  ptb_ind dme_ind hha_ind pmd_ind hsp_ind
+#>         <int> <chr>    <chr>   <int>   <int>   <int>   <int>   <int>
+#>  1 1992162556 JENNIFER SMITH       1       1       0       0       0
+#>  2 1982026100 JENNIFER SMITH       1       1       0       0       0
+#>  3 1336189257 JENNIFER SMITH       1       1       1       1       0
+#>  4 1750494886 JENNIFER SMITH       1       1       1       0       1
+#>  5 1811218712 JENNIFER SMITH       1       1       1       1       1
+#>  6 1134344286 JENNIFER SMITH       1       1       1       1       1
+#>  7 1215468897 JENNIFER SMITH       1       1       1       1       0
+#>  8 1922290519 JENNIFER SMITH       1       1       1       1       1
+#>  9 1790243723 JENNIFER SMITH       1       1       1       1       0
+#> 10 1396366811 JENNIFER SMITH       1       1       1       1       1
 #> # ℹ 125 more rows
 ```

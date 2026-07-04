@@ -9,7 +9,7 @@ services the facility provides."><meta property="og:image" content="https://andr
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9290</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9291</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,13 +61,12 @@ services the facility provides.</p>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clia <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cert_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  acr_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  certificate <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  accrediting <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  chows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  active <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  eligible <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -101,7 +100,7 @@ services the facility provides.</p>
 <dd><p><code>&lt;chr&gt;</code> 6-digit CMS Certification Number</p></dd>
 
 
-<dt id="arg-cert-type">cert_type<a class="anchor" aria-label="anchor" href="#arg-cert-type"></a></dt>
+<dt id="arg-certificate">certificate<a class="anchor" aria-label="anchor" href="#arg-certificate"></a></dt>
 <dd><p><code>&lt;enum&gt;</code> CLIA certificate type (see Details):</p><ul><li><p><code>"wav"</code> = Waiver</p></li>
 <li><p><code>"ppm"</code> = Provider-Performed Microscopy (PPM)</p></li>
 <li><p><code>"reg"</code> = Registration</p></li>
@@ -110,7 +109,7 @@ services the facility provides.</p>
 </ul></dd>
 
 
-<dt id="arg-acr-org">acr_org<a class="anchor" aria-label="anchor" href="#arg-acr-org"></a></dt>
+<dt id="arg-accrediting">accrediting<a class="anchor" aria-label="anchor" href="#arg-accrediting"></a></dt>
 <dd><p><code>&lt;enum&gt;</code> CLIA accrediting organization (see Details):</p><ul><li><p><code>"a2la"</code> = American Association for Laboratory Accreditation</p></li>
 <li><p><code>"aabb"</code> = Association for the Advancement of Blood &amp; Biotherapies</p></li>
 <li><p><code>"aoa"</code> = American Osteopathic Association</p></li>
@@ -131,10 +130,6 @@ services the facility provides.</p>
 
 <dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Lab city, state, zip</p></dd>
-
-
-<dt id="arg-chows">chows<a class="anchor" aria-label="anchor" href="#arg-chows"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Number of times there has been a Change of Ownership.</p></dd>
 
 
 <dt id="arg-active">active<a class="anchor" aria-label="anchor" href="#arg-active"></a></dt>
@@ -199,43 +194,42 @@ laboratory is accredited by one of the CMS-approved organizations:</p><ul><li><p
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">clia</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">676,051</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">136</span> pages</span>
-<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>cert_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acr"</span>, <span class="st">"reg"</span><span class="op">)</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>certificate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acr"</span>, <span class="st">"reg"</span><span class="op">)</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="color: #BBBB00; font-weight: bold;">18</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 21</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    fac_name        ccn   clia  chows  labs sites address city  state zip   term </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SGMC HEALTH     11D0… 1101…     0     1     0 2501 N… VALD… GA    31602 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SGMC- SMITH NO… 11D0… 1100…     0     1     0 4280 N… VALD… GA    31602 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SMITH &amp; DENNAR… 11D0… 2546…     0     0     0 2910 N… VALD… GA    31602 Unco…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> QUEST DIAGNOST… 11D0… 11L0…     0     2     0 341 NO… VALD… GA    31602 Unco…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SOUTH GA MED C… 11D0… 1101…     0     0     0 2501 N… VALD… GA    31602 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> NORTHSIDE MEDI… 11D0… <span style="color: #BB0000;">NA</span>        0     0     0 201 PE… VALD… GA    31602 Vol …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SOUTH GEORGIA … 11D0… <span style="color: #BB0000;">NA</span>        0     0     0 201 PE… VALD… GA    31602 Unco…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SOUTHERN PHYSI… 11D0… <span style="color: #BB0000;">NA</span>        0     0     0 2740 M… VALD… GA    31604 Nonp…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> VALDOSTA CBOC   11D1… <span style="color: #BB0000;">NA</span>        0    15     0 2841 N… VALD… GA    31602 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ALLEGIANT SOLU… 11D1… <span style="color: #BB0000;">NA</span>        0     4     0 5101 N… VALD… GA    31605 Vol …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> CARE MEDICAL C… 11D2… <span style="color: #BB0000;">NA</span>        0     1     0 2804-C… VALD… GA    31602 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> GULF COAST DER… 11D2… <span style="color: #BB0000;">NA</span>        0     0     0 2804 N… VALD… GA    31602 Vol …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> BPC PLASMA, IN… 11D2… <span style="color: #BB0000;">NA</span>        0     1     0 311 N … VALD… GA    31601 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> SOUTH GEORGIA … 11D2… <span style="color: #BB0000;">NA</span>        0     2     0 3312 N… VALD… GA    31605 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> SGMC POINT OF … 11D2… <span style="color: #BB0000;">NA</span>        0     2     0 2501 N… VALD… GA    31602 Vol …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> SGMC FAMILY PR… 11D2… <span style="color: #BB0000;">NA</span>        0     2     0 3386 G… VALD… GA    31605 Vol …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> OCTAPHARMA PLA… 11D2… <span style="color: #BB0000;">NA</span>        0     0     0 1713 N… VALD… GA    31601 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> VEEDHATA OM LL… 11D2… <span style="color: #BB0000;">NA</span>        0     3     0 3386 G… VALD… GA    31605 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, owner &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   action &lt;chr&gt;, cert_date &lt;date&gt;, eff_date &lt;date&gt;, term_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eligible &lt;int&gt;, multi &lt;chr&gt;, acr_org &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>acr_org <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cap"</span>, <span class="st">"cola"</span>, <span class="st">"jcaho"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    name        ccn   clia  status  labs sites certificate address fac_type owner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SGMC HEALTH 11D0… 1101… Active     1     0 Accreditat… 2501 N… Hospital [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SGMC- SMIT… 11D0… 1100… Active     1     0 Accreditat… 4280 N… ASC      [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SMITH &amp; DE… 11D0… 2546… Uncon…     0     0 Registrati… 2910 N… Phys     Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> QUEST DIAG… 11D0… 11L0… Uncon…     2     0 Accreditat… 341 NO… Ind      Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SOUTH GA M… 11D0… 1101… Active     0     0 Accreditat… 2501 N… Other    [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> NORTHSIDE … 11D0… <span style="color: #BB0000;">NA</span>    Vol T…     0     0 Accreditat… 201 PE… Phys     Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SOUTH GEOR… 11D0… <span style="color: #BB0000;">NA</span>    Uncon…     0     0 Registrati… 201 PE… Phys     Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SOUTHERN P… 11D0… <span style="color: #BB0000;">NA</span>    Nonpa…     0     0 Registrati… 2740 M… Phys     Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> VALDOSTA C… 11D1… <span style="color: #BB0000;">NA</span>    Active    15     0 Accreditat… 2841 N… Comm     [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ALLEGIANT … 11D1… <span style="color: #BB0000;">NA</span>    Vol T…     4     0 Accreditat… 5101 N… Ind      Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> CARE MEDIC… 11D2… <span style="color: #BB0000;">NA</span>    Active     1     0 Accreditat… 2804-C… Other    Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> GULF COAST… 11D2… <span style="color: #BB0000;">NA</span>    Vol T…     0     0 Registrati… 2804 N… Phys     Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> BPC PLASMA… 11D2… <span style="color: #BB0000;">NA</span>    Active     1     0 Accreditat… 311 N … Other    Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> SOUTH GEOR… 11D2… <span style="color: #BB0000;">NA</span>    Active     2     0 Accreditat… 3312 N… Ind      Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> SGMC POINT… 11D2… <span style="color: #BB0000;">NA</span>    Vol T…     2     0 Accreditat… 2501 N… Hospital [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> SGMC FAMIL… 11D2… <span style="color: #BB0000;">NA</span>    Vol T…     2     0 Accreditat… 3386 G… Phys     [GOV…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> OCTAPHARMA… 11D2… <span style="color: #BB0000;">NA</span>    Active     0     0 Accreditat… 1713 N… Other    Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> VEEDHATA O… 11D2… <span style="color: #BB0000;">NA</span>    Active     3     0 Accreditat… 3386 G… Ind      Prop…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: action &lt;chr&gt;, cert_date &lt;date&gt;, eff_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   term_date &lt;date&gt;, elig &lt;int&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multi &lt;chr&gt;, accredit &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">clia</span><span class="op">(</span>accrediting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cap"</span>, <span class="st">"cola"</span>, <span class="st">"jcaho"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clia</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 21</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   fac_name         ccn   clia  chows  labs sites address city  state zip   term </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> LEXINGTON MEDIC… 42D0… 4200…     0     1     0 2720 S… WEST… SC    29169 Acti…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: cert_type &lt;chr&gt;, fac_type &lt;chr&gt;, owner &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   action &lt;chr&gt;, cert_date &lt;date&gt;, eff_date &lt;date&gt;, term_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   eligible &lt;int&gt;, multi &lt;chr&gt;, acr_org &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name  ccn   clia  status  labs sites certificate address fac_type owner action</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> LEXI… 42D0… 4200… Active     1     0 Accreditat… 2720 S… Hospital [GOV… <span style="color: #BB0000;">NA</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: cert_date &lt;date&gt;, eff_date &lt;date&gt;, term_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   elig &lt;int&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, multi &lt;chr&gt;, accredit &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
