@@ -60,6 +60,7 @@ services(
 geography(
   year = NULL,
   level = NULL,
+  state = NULL,
   hcpcs = NULL,
   drug = NULL,
   pos = NULL,
@@ -209,67 +210,71 @@ containing the search results.
 ``` r
 utilization(count = TRUE)
 #> ◼ utilization | 13,528,933 rows | 2,712 pages
+services(count = TRUE)
+#> ◼ services | 116,297,407 rows | 23,267 pages
+geography(count = TRUE)
+#> ◼ geography | 3,228,031 rows | 650 pages
+
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
-#>     year    npi first last  cred  entity specialty   par hcpcs patients services
-#>    <int>  <int> <chr> <chr> <chr> <chr>  <chr>     <int> <int>    <int>    <int>
-#>  1  2013 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    33       63      320
-#>  2  2014 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    29       57      293
-#>  3  2015 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    31       56      117
-#>  4  2016 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    26       82      163
-#>  5  2017 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    29       71      155
-#>  6  2018 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    20       73      283
-#>  7  2019 1.00e9 JENN… VELO… M.D.  I      Obstetri…     1    24       74      897
-#>  8  2020 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    21       56      571
-#>  9  2021 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    19       69      738
-#> 10  2022 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    16       59      111
-#> 11  2023 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    16       63      119
-#> 12  2024 1.00e9 Jenn… Velo… M.D.  I      Obstetri…     1    18       75      140
-#> # ℹ 11 more variables: charges <int>, allowed <dbl>, payment <dbl>,
-#> #   avg_age <int>, avg_risk <dbl>, dual <int>, ndual <int>, address <chr>,
+#>     year        npi entity   par hcpcs patients services charges allowed payment
+#>    <int>      <int> <chr>  <int> <int>    <int>    <int>   <int>   <dbl>   <dbl>
+#>  1  2013 1003000423 I          1    33       63      320   31637  13176.  10320.
+#>  2  2014 1003000423 I          1    29       57      293   24148  12029.   9492.
+#>  3  2015 1003000423 I          1    31       56      117   20414  10542.   8558.
+#>  4  2016 1003000423 I          1    26       82      163   25862  12894.  10519.
+#>  5  2017 1003000423 I          1    29       71      155   33700  14115.  11245.
+#>  6  2018 1003000423 I          1    20       73      283   16773   8496.   6857.
+#>  7  2019 1003000423 I          1    24       74      897   23150  11090.   9007.
+#>  8  2020 1003000423 I          1    21       56      571   23680   9012.   7224.
+#>  9  2021 1003000423 I          1    19       69      738   21300   8018.   6736.
+#> 10  2022 1003000423 I          1    16       59      111    9918   5136.   4335.
+#> 11  2023 1003000423 I          1    16       63      119   13785   6388.   5231.
+#> 12  2024 1003000423 I          1    18       75      140   22015   8709.   7134.
+#> # ℹ 12 more variables: avg_age <int>, avg_risk <dbl>, dual <int>, ndual <int>,
+#> #   first <chr>, last <chr>, cred <chr>, specialty <chr>, address <chr>,
 #> #   city <chr>, state <chr>, zip <chr>
 
-services(count = TRUE)
-#> ◼ services | 116,297,407 rows | 23,267 pages
-services(npi = c(1003000423, 1003826272))
-#> ✔ services returned 209 results
+services(npi = 1003000423)
+#> ✔ services returned 41 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 209 × 11
+#> # A tibble: 41 × 11
 #>     year      npi hcpcs description  drug pos   patients services charge allowed
 #>    <int>    <int> <chr> <chr>       <int> <chr>    <int>    <int>  <int>   <dbl>
-#>  1  2013   1.00e9 Q2038 Influenza …     1 O           32       32     16  11.8  
-#>  2  2014   1.00e9 Q2038 Influenza …     1 O           26       26     16  11.3  
-#>  3  2015   1.00e9 Q2038 Influenza …     1 O           40       42     16  11.8  
-#>  4  2017   1.00e9 Q2035 Influenza …     1 O           22       22     20  17.3  
-#>  5  2023   1.00e9 Q0138 Injection,…     1 O           66    55080      4   0.495
-#>  6  2024   1.00e9 Q0138 Injection,…     1 O           28    24481      4   0.350
-#>  7  2013   1.00e9 Q0091 Screening …     0 O           20       20     40  39.6  
-#>  8  2014   1.00e9 Q0091 Screening …     0 O           13       13     40  39.2  
-#>  9  2015   1.00e9 Q0091 Screening …     0 O           14       14     40  39.2  
-#> 10  2016   1.00e9 Q0091 Screening …     0 O           20       20     40  39.2  
-#> # ℹ 199 more rows
+#>  1  2013   1.00e9 Q0091 Screening …     0 O           20       20     40    39.6
+#>  2  2014   1.00e9 Q0091 Screening …     0 O           13       13     40    39.2
+#>  3  2015   1.00e9 Q0091 Screening …     0 O           14       14     40    39.2
+#>  4  2016   1.00e9 Q0091 Screening …     0 O           20       20     40    39.2
+#>  5  2017   1.00e9 Q0091 Screening …     0 O           20       20     41    38.9
+#>  6  2018   1.00e9 Q0091 Screening …     0 O           18       18     50    41.6
+#>  7  2019   1.00e9 Q0091 Screening …     0 O           16       16     50    41.0
+#>  8  2020   1.00e9 Q0091 Screening …     0 O           15       15     51    41.0
+#>  9  2021   1.00e9 Q0091 Screening …     0 O           20       20     60    41.5
+#> 10  2022   1.00e9 Q0091 Screening …     0 O           15       15     60    40.9
+#> # ℹ 31 more rows
 #> # ℹ 1 more variable: payment <dbl>
 
-geography(count = TRUE)
-#> ◼ geography | 3,228,031 rows | 650 pages
-geography(hcpcs = 99215)
-#> ✔ geography returned 1,378 results
+geography(
+  hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),
+  pos = "O",
+  state = c("National", "Ohio"))
+#> ✔ geography returned 168 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 1,378 × 13
-#>     year level   state hcpcs description  drug pos   providers patients services
-#>    <int> <chr>   <chr> <chr> <chr>       <int> <chr>     <int>    <int>    <int>
-#>  1  2024 Nation… NA    99215 Establishe…     0 F        101163  1259226  2595818
-#>  2  2024 Nation… NA    99215 Establishe…     0 O        340863  5280156 10326407
-#>  3  2023 Nation… NA    99215 Establishe…     0 F         97208  1186849  2432569
-#>  4  2023 Nation… NA    99215 Establishe…     0 O        320488  5098798  9710835
-#>  5  2022 Nation… NA    99215 Establishe…     0 F        101817  1133234  2249809
-#>  6  2022 Nation… NA    99215 Establishe…     0 O        306692  4914072  9078994
-#>  7  2021 Nation… NA    99215 Establishe…     0 F         98767  1089127  2132747
-#>  8  2021 Nation… NA    99215 Establishe…     0 O        300443  4848612  8763759
-#>  9  2020 Nation… NA    99215 Establishe…     0 F         89793   873298  1582440
-#> 10  2020 Nation… NA    99215 Establishe…     0 O        259521  4150032  7103762
-#> # ℹ 1,368 more rows
-#> # ℹ 3 more variables: charge <dbl>, allowed <dbl>, payment <dbl>
+#> # A tibble: 168 × 12
+#>     year state  hcpcs description  drug pos   providers patients services charge
+#>    <int> <chr>  <chr> <chr>       <int> <chr>     <int>    <int>    <int>  <dbl>
+#>  1  2024 Natio… 76830 Ultrasound…     0 O         26009   224170   269595  349. 
+#>  2  2024 Ohio   76830 Ultrasound…     0 O           837     5548     6201  274. 
+#>  3  2024 Natio… 81002 Urinalysis…     0 O         94006  1459105  2205580   15.0
+#>  4  2024 Ohio   81002 Urinalysis…     0 O          5041    60373    88101   14.6
+#>  5  2024 Natio… 99203 New patien…     0 O        388139  6537424  8070604  267. 
+#>  6  2024 Ohio   99203 New patien…     0 O         15545   229830   268676  238. 
+#>  7  2024 Natio… 99212 Establishe…     0 O        319826  3989238  6241712  118. 
+#>  8  2024 Ohio   99212 Establishe…     0 O         13534   145434   203859  107. 
+#>  9  2024 Natio… 99213 Establishe…     0 O        631995 18637816 64778139  189. 
+#> 10  2024 Ohio   99213 Establishe…     0 O         25987   750987  2223611  177. 
+#> # ℹ 158 more rows
+#> # ℹ 2 more variables: allowed <dbl>, payment <dbl>
 ```

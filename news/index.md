@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9294 (2026-07-04)
+
+- [`geography()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
+  refinement
+
 ## provider 0.0.1.9293 (2026-07-04)
 
 - added
