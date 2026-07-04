@@ -15,7 +15,6 @@ clia(
   multi = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
   active = NULL,
   eligible = NULL,
   count = FALSE
@@ -102,9 +101,9 @@ clia(
 
   - `"temp"` = Lab with multiple temporary testing sites
 
-- city, state, zip:
+- city, state:
 
-  `<chr>` Lab city, state, zip
+  `<chr>` Lab city, state
 
 - active:
 

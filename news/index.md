@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9292 (2026-07-03)
+
+- arg clean up
+
 ## provider 0.0.1.9291 (2026-07-03)
 
 - enums

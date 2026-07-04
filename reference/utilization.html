@@ -21,7 +21,7 @@ aggregated by year."><meta property="og:image" content="https://andrewallenbruce
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9291</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9292</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@ aggregated by year.</p>
 <span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -87,17 +87,15 @@ aggregated by year.</p>
 <span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  charges <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  allowed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  payment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  avg_age <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  avg_risk <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dual <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ndual <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -106,19 +104,18 @@ aggregated by year.</p>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entity <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hcpcs_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  patients <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  services <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  avg_charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  avg_allowed <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  avg_payment <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  charge <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  payment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -135,7 +132,7 @@ aggregated by year.</p>
 <dd><p><code>&lt;int&gt;</code> 10-digit national provider identifier</p></dd>
 
 
-<dt id="arg-first-last-org">first, last_org<a class="anchor" aria-label="anchor" href="#arg-first-last-org"></a></dt>
+<dt id="arg-first-last">first, last<a class="anchor" aria-label="anchor" href="#arg-first-last"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Individual/Organizational provider's name</p></dd>
 
 
@@ -144,9 +141,8 @@ aggregated by year.</p>
 
 
 <dt id="arg-entity">entity<a class="anchor" aria-label="anchor" href="#arg-entity"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Type of entity reported in NPPES. An entity code of <code>I</code>
-identifies providers registered as individuals and an entity type code of
-<code>O</code> identifies providers registered as organizations.</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Type of entity reported in NPPES. <code>I</code> identifies
+individual providers and <code>O</code> identifies those registered as organizations.</p></dd>
 
 
 <dt id="arg-specialty">specialty<a class="anchor" aria-label="anchor" href="#arg-specialty"></a></dt>
@@ -155,17 +151,16 @@ claims submitted</p></dd>
 
 
 <dt id="arg-par">par<a class="anchor" aria-label="anchor" href="#arg-par"></a></dt>
-<dd><p><code>&lt;lgl&gt;</code> Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts. The value
-will be <code>Y</code> for any provider that had at least one claim identifying the
-provider as participating in Medicare or accepting assignment of Medicare
-allowed amounts within HCPCS code and place of service. A non-participating
-provider may elect to accept Medicare allowed amounts for some services and
-not accept Medicare allowed amounts for other services.</p></dd>
+<dd><p><code>&lt;lgl&gt;</code> Identifies a provider <em>with at least one claim</em>
+identifying them as <em>participating</em> in Medicare or accepting assignment of
+Medicare allowed amounts within HCPCS code and place of service. A
+<em>non-participating</em> provider is one that may elect to accept Medicare
+allowed amounts for some services and not accept Medicare allowed amounts
+for other services.</p></dd>
 
 
 <dt id="arg-hcpcs">hcpcs<a class="anchor" aria-label="anchor" href="#arg-hcpcs"></a></dt>
-<dd><p><code>&lt;int&gt;</code> Total number of unique HCPCS codes</p></dd>
+<dd><p><code>&lt;int/chr&gt;</code> Total number of unique HCPCS codes</p></dd>
 
 
 <dt id="arg-patients">patients<a class="anchor" aria-label="anchor" href="#arg-patients"></a></dt>
@@ -177,7 +172,7 @@ the provider</p></dd>
 <dd><p><code>&lt;int&gt;</code> Total provider services</p></dd>
 
 
-<dt id="arg-charges">charges<a class="anchor" aria-label="anchor" href="#arg-charges"></a></dt>
+<dt id="arg-charge">charge<a class="anchor" aria-label="anchor" href="#arg-charge"></a></dt>
 <dd><p><code>&lt;int&gt;</code> The total charges that the provider submitted for all
 services</p></dd>
 
@@ -219,47 +214,20 @@ entitlement if they received zero months of any Medicaid benefits (full or
 partial) in the given calendar year.</p></dd>
 
 
-<dt id="arg-address-city-state-zip">address, city, state, zip<a class="anchor" aria-label="anchor" href="#arg-address-city-state-zip"></a></dt>
-<dd><p>The provider's street address, city, state and
-zip code, as reported in NPPES.</p></dd>
+<dt id="arg-city-state">city, state<a class="anchor" aria-label="anchor" href="#arg-city-state"></a></dt>
+<dd><p><code>&lt;chr&gt;</code> The provider's city and state, as reported in NPPES.</p></dd>
 
 
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
 
-<dt id="arg-hcpcs-code">hcpcs_code<a class="anchor" aria-label="anchor" href="#arg-hcpcs-code"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
-
-
-<dt id="arg-hcpcs-desc">hcpcs_desc<a class="anchor" aria-label="anchor" href="#arg-hcpcs-desc"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
-
-
-<dt id="arg-hcpcs-drug">hcpcs_drug<a class="anchor" aria-label="anchor" href="#arg-hcpcs-drug"></a></dt>
+<dt id="arg-drug">drug<a class="anchor" aria-label="anchor" href="#arg-drug"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Total number of unique HCPCS codes</p></dd>
 
 
 <dt id="arg-pos">pos<a class="anchor" aria-label="anchor" href="#arg-pos"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> Total number of unique HCPCS codes</p></dd>
-
-
-<dt id="arg-avg-charge">avg_charge<a class="anchor" aria-label="anchor" href="#arg-avg-charge"></a></dt>
-<dd><p><code>&lt;int&gt;</code> The total charges that the provider submitted for all
-services</p></dd>
-
-
-<dt id="arg-avg-allowed">avg_allowed<a class="anchor" aria-label="anchor" href="#arg-avg-allowed"></a></dt>
-<dd><p><code>&lt;dbl&gt;</code> The Medicare allowed amount for all provider services.
-This figure is the sum of the amount Medicare pays, the deductible and
-coinsurance amounts that the beneficiary is responsible for paying, and any
-amounts that a third party is responsible for paying.</p></dd>
-
-
-<dt id="arg-avg-payment">avg_payment<a class="anchor" aria-label="anchor" href="#arg-avg-payment"></a></dt>
-<dd><p><code>&lt;dbl&gt;</code> Total amount that Medicare paid after deductible and
-coinsurance amounts have been deducted for all the provider's line item
-services.</p></dd>
 
 </dl></div>
     <div class="section level2">
