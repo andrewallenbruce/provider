@@ -18,46 +18,32 @@
 #'
 #' @param year `<int>` Year data was reported
 #' @param npi `<int>` 10-digit national provider identifier
-#' @param first,last_org `<chr>` Individual/Organizational provider's name
+#' @param first,last `<chr>` Individual/Organizational provider's name
 #' @param cred `<chr>` Individual provider's credentials
-#' @param entity `<chr>` Type of entity reported in NPPES. An entity code of `I`
-#'   identifies providers registered as individuals and an entity type code of
-#'   `O` identifies providers registered as organizations.
-#' @param address,city,state,zip The provider's street address, city, state and
-#'   zip code, as reported in NPPES.
+#' @param entity `<chr>` Type of entity reported in NPPES. `I` identifies
+#'   individual providers and `O` identifies those registered as organizations.
+#' @param city,state `<chr>` The provider's city and state, as reported in NPPES.
 #' @param specialty `<chr>` Provider specialty reported on the largest number of
 #'   claims submitted
-#' @param par `<lgl>` Identifies whether the provider participates in
-#'   Medicare and/or accepts assignment of Medicare allowed amounts. The value
-#'   will be `Y` for any provider that had at least one claim identifying the
-#'   provider as participating in Medicare or accepting assignment of Medicare
-#'   allowed amounts within HCPCS code and place of service. A non-participating
-#'   provider may elect to accept Medicare allowed amounts for some services and
-#'   not accept Medicare allowed amounts for other services.
-#' @param hcpcs `<int>` Total number of unique HCPCS codes
-#' @param hcpcs_code `<chr>` Total number of unique HCPCS codes
-#' @param hcpcs_desc `<chr>` Total number of unique HCPCS codes
-#' @param hcpcs_drug `<lgl>` Total number of unique HCPCS codes
+#' @param par `<lgl>` Identifies a provider *with at least one claim*
+#'   identifying them as *participating* in Medicare or accepting assignment of
+#'   Medicare allowed amounts within HCPCS code and place of service. A
+#'   *non-participating* provider is one that may elect to accept Medicare
+#'   allowed amounts for some services and not accept Medicare allowed amounts
+#'   for other services.
+#' @param hcpcs `<int/chr>` Total number of unique HCPCS codes
+#' @param drug `<lgl>` Total number of unique HCPCS codes
 #' @param pos `<chr>` Total number of unique HCPCS codes
 #' @param patients `<int>` Total Medicare beneficiaries receiving services from
 #'   the provider
 #' @param services `<int>` Total provider services
-#' @param charges `<int>` The total charges that the provider submitted for all
-#'   services
-#' @param avg_charge  `<int>` The total charges that the provider submitted for all
+#' @param charge `<int>` The total charges that the provider submitted for all
 #'   services
 #' @param allowed `<dbl>` The Medicare allowed amount for all provider services.
 #'   This figure is the sum of the amount Medicare pays, the deductible and
 #'   coinsurance amounts that the beneficiary is responsible for paying, and any
 #'   amounts that a third party is responsible for paying.
-#' @param avg_allowed `<dbl>` The Medicare allowed amount for all provider services.
-#'   This figure is the sum of the amount Medicare pays, the deductible and
-#'   coinsurance amounts that the beneficiary is responsible for paying, and any
-#'   amounts that a third party is responsible for paying.
 #' @param payment `<dbl>` Total amount that Medicare paid after deductible and
-#'   coinsurance amounts have been deducted for all the provider's line item
-#'   services.
-#' @param avg_payment `<dbl>` Total amount that Medicare paid after deductible and
 #'   coinsurance amounts have been deducted for all the provider's line item
 #'   services.
 #' @param avg_age `<dbl>` Average age of beneficiaries. Beneficiary age is
@@ -84,7 +70,7 @@ utilization <- function(
   year = NULL,
   npi = NULL,
   first = NULL,
-  last_org = NULL,
+  last = NULL,
   cred = NULL,
   entity = NULL,
   specialty = NULL,
@@ -92,17 +78,15 @@ utilization <- function(
   hcpcs = NULL,
   patients = NULL,
   services = NULL,
-  charges = NULL,
+  charge = NULL,
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
   avg_risk = NULL,
   dual = NULL,
   ndual = NULL,
-  address = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
   count = FALSE
 ) {
   check_numeric(year)
@@ -110,7 +94,7 @@ utilization <- function(
   check_numeric(hcpcs)
   check_numeric(patients)
   check_numeric(services)
-  check_numeric(charges)
+  check_numeric(charge)
   check_numeric(allowed)
   check_numeric(payment)
   check_numeric(avg_age)
@@ -136,19 +120,17 @@ utilization <- function(
     select = year,
     Rndrng_NPI = npi,
     Rndrng_Prvdr_First_Name = first,
-    Rndrng_Prvdr_Last_Org_Name = last_org,
+    Rndrng_Prvdr_Last_Org_Name = last,
     Rndrng_Prvdr_Crdntls = cred,
     Rndrng_Prvdr_Ent_Cd = entity,
-    Rndrng_Prvdr_St1 = address,
     Rndrng_Prvdr_City = city,
     Rndrng_Prvdr_State_Abrvtn = state,
-    Rndrng_Prvdr_Zip5 = zip,
     Rndrng_Prvdr_Type = specialty,
     Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(par),
     Tot_HCPCS_Cds = hcpcs,
     Tot_Benes = patients,
     Tot_Srvcs = services,
-    Tot_Sbmtd_Chrg = charges,
+    Tot_Sbmtd_Chrg = charge,
     Tot_Mdcr_Alowd_Amt = allowed,
     Tot_Mdcr_Pymt_Amt = payment,
     Bene_Avg_Age = avg_age,
@@ -169,19 +151,18 @@ services <- function(
   npi = NULL,
   entity = NULL,
   first = NULL,
-  last_org = NULL,
+  last = NULL,
   cred = NULL,
   specialty = NULL,
   par = NULL,
-  hcpcs_code = NULL,
-  hcpcs_desc = NULL,
-  hcpcs_drug = NULL,
+  hcpcs = NULL,
+  drug = NULL,
   pos = NULL,
   patients = NULL,
   services = NULL,
-  avg_charge = NULL,
-  avg_allowed = NULL,
-  avg_payment = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
   count = FALSE
 ) {
   x <- end_cmslist(
@@ -190,20 +171,19 @@ services <- function(
     select = year,
     Rndrng_NPI = npi,
     Rndrng_Prvdr_First_Name = first,
-    Rndrng_Prvdr_Last_Org_Name = last_org,
+    Rndrng_Prvdr_Last_Org_Name = last,
     Rndrng_Prvdr_Crdntls = cred,
     Rndrng_Prvdr_Ent_Cd = entity,
     Rndrng_Prvdr_Type = specialty,
     Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(par),
-    HCPCS_Cd = hcpcs_code,
-    HCPCS_Desc = hcpcs_desc,
-    HCPCS_Drug_Ind = tag_bool(hcpcs_drug),
+    HCPCS_Cd = hcpcs,
+    HCPCS_Drug_Ind = tag_bool(drug),
     Place_Of_Srvc = pos,
     Tot_Benes = patients,
     Tot_Srvcs = services,
-    Avg_Sbmtd_Chrg = avg_charge,
-    Avg_Mdcr_Alowd_Amt = avg_allowed,
-    Avg_Mdcr_Pymt_Amt = avg_payment
+    Avg_Sbmtd_Chrg = charge,
+    Avg_Mdcr_Alowd_Amt = allowed,
+    Avg_Mdcr_Pymt_Amt = payment
   )
 
   x <- execute(x)

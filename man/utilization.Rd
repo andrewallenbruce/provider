@@ -9,7 +9,7 @@ utilization(
   year = NULL,
   npi = NULL,
   first = NULL,
-  last_org = NULL,
+  last = NULL,
   cred = NULL,
   entity = NULL,
   specialty = NULL,
@@ -17,17 +17,15 @@ utilization(
   hcpcs = NULL,
   patients = NULL,
   services = NULL,
-  charges = NULL,
+  charge = NULL,
   allowed = NULL,
   payment = NULL,
   avg_age = NULL,
   avg_risk = NULL,
   dual = NULL,
   ndual = NULL,
-  address = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
   count = FALSE
 )
 
@@ -36,19 +34,18 @@ services(
   npi = NULL,
   entity = NULL,
   first = NULL,
-  last_org = NULL,
+  last = NULL,
   cred = NULL,
   specialty = NULL,
   par = NULL,
-  hcpcs_code = NULL,
-  hcpcs_desc = NULL,
-  hcpcs_drug = NULL,
+  hcpcs = NULL,
+  drug = NULL,
   pos = NULL,
   patients = NULL,
   services = NULL,
-  avg_charge = NULL,
-  avg_allowed = NULL,
-  avg_payment = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
   count = FALSE
 )
 }
@@ -57,33 +54,31 @@ services(
 
 \item{npi}{\verb{<int>} 10-digit national provider identifier}
 
-\item{first, last_org}{\verb{<chr>} Individual/Organizational provider's name}
+\item{first, last}{\verb{<chr>} Individual/Organizational provider's name}
 
 \item{cred}{\verb{<chr>} Individual provider's credentials}
 
-\item{entity}{\verb{<chr>} Type of entity reported in NPPES. An entity code of \code{I}
-identifies providers registered as individuals and an entity type code of
-\code{O} identifies providers registered as organizations.}
+\item{entity}{\verb{<chr>} Type of entity reported in NPPES. \code{I} identifies
+individual providers and \code{O} identifies those registered as organizations.}
 
 \item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of
 claims submitted}
 
-\item{par}{\verb{<lgl>} Identifies whether the provider participates in
-Medicare and/or accepts assignment of Medicare allowed amounts. The value
-will be \code{Y} for any provider that had at least one claim identifying the
-provider as participating in Medicare or accepting assignment of Medicare
-allowed amounts within HCPCS code and place of service. A non-participating
-provider may elect to accept Medicare allowed amounts for some services and
-not accept Medicare allowed amounts for other services.}
+\item{par}{\verb{<lgl>} Identifies a provider \emph{with at least one claim}
+identifying them as \emph{participating} in Medicare or accepting assignment of
+Medicare allowed amounts within HCPCS code and place of service. A
+\emph{non-participating} provider is one that may elect to accept Medicare
+allowed amounts for some services and not accept Medicare allowed amounts
+for other services.}
 
-\item{hcpcs}{\verb{<int>} Total number of unique HCPCS codes}
+\item{hcpcs}{\verb{<int/chr>} Total number of unique HCPCS codes}
 
 \item{patients}{\verb{<int>} Total Medicare beneficiaries receiving services from
 the provider}
 
 \item{services}{\verb{<int>} Total provider services}
 
-\item{charges}{\verb{<int>} The total charges that the provider submitted for all
+\item{charge}{\verb{<int>} The total charges that the provider submitted for all
 services}
 
 \item{allowed}{\verb{<dbl>} The Medicare allowed amount for all provider services.
@@ -111,30 +106,13 @@ Medicare only benefits. Beneficiaries are classified as Medicare only
 entitlement if they received zero months of any Medicaid benefits (full or
 partial) in the given calendar year.}
 
-\item{address, city, state, zip}{The provider's street address, city, state and
-zip code, as reported in NPPES.}
+\item{city, state}{\verb{<chr>} The provider's city and state, as reported in NPPES.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
-\item{hcpcs_code}{\verb{<chr>} Total number of unique HCPCS codes}
-
-\item{hcpcs_desc}{\verb{<chr>} Total number of unique HCPCS codes}
-
-\item{hcpcs_drug}{\verb{<lgl>} Total number of unique HCPCS codes}
+\item{drug}{\verb{<lgl>} Total number of unique HCPCS codes}
 
 \item{pos}{\verb{<chr>} Total number of unique HCPCS codes}
-
-\item{avg_charge}{\verb{<int>} The total charges that the provider submitted for all
-services}
-
-\item{avg_allowed}{\verb{<dbl>} The Medicare allowed amount for all provider services.
-This figure is the sum of the amount Medicare pays, the deductible and
-coinsurance amounts that the beneficiary is responsible for paying, and any
-amounts that a third party is responsible for paying.}
-
-\item{avg_payment}{\verb{<dbl>} Total amount that Medicare paid after deductible and
-coinsurance amounts have been deducted for all the provider's line item
-services.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

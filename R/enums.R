@@ -24,7 +24,12 @@ tag_enum <- function(x = NULL, call = rlang::caller_env()) {
     error_call = call
   )
 
-  unlist_(ENUM[x])
+  x <- unlist_(ENUM[x])
+
+  if (VAR %!in_% c("accrediting", "multi")) {
+    return(x)
+  }
+  rlang::set_names(as.list(rep.int("Y", length(x))), x)
 }
 
 #' @noRd

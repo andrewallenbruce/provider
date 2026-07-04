@@ -46,7 +46,7 @@
 #'    - `"campus"` = Hospital with several labs on single hospital campus
 #'    - `"non"` = Multiple sites with non-profit, federal, state or local government status (limited public health testing)
 #'    - `"temp"` = Lab with multiple temporary testing sites
-#' @param city,state,zip `<chr>` Lab city, state, zip
+#' @param city,state `<chr>` Lab city, state
 #' @param active `<lgl>` Return only active labs
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
@@ -66,8 +66,6 @@ clia <- function(
   multi = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
-  # chows = NULL,
   active = NULL,
   eligible = NULL,
   count = FALSE
@@ -86,12 +84,10 @@ clia <- function(
     CRTFCT_TYPE_CD = tag_enum(certificate),
     CITY_NAME = city,
     STATE_CD = state,
-    ZIP_CD = zip,
-    # CHOW_CNT = chows,
     PGM_TRMNTN_CD = tag_active(active),
     ELGBLTY_SW = tag_bool(eligible),
-    !!!tag_acr_org(accrediting),
-    !!!tag_multi(multi)
+    !!!tag_enum(accrediting),
+    !!!tag_enum(multi)
   )
 
   x <- execute(x)
@@ -107,22 +103,18 @@ tag_active <- function(x = NULL) {
   if (x) "00" else not("00")
 }
 
-#' @noRd
-tag_acr_org <- function(accrediting) {
-  if (is.null(accrediting)) {
-    return(NULL)
-  }
-  x <- tag_enum(accrediting)
-  rlang::set_names(as.list(rep.int("Y", length(x))), x)
-}
+# tag_accrediting <- function(accrediting) {
+#   if (is.null(accrediting)) {
+#     return(NULL)
+#   }
+#   x <- tag_enum(accrediting)
+#   rlang::set_names(as.list(rep.int("Y", length(x))), x)
+# }
 
-#' @noRd
-tag_multi <- function(multi) {
-  if (is.null(multi)) {
-    return(NULL)
-  }
-  x <- tag_enum(multi)
-  rlang::set_names(as.list(rep.int("Y", length(x))), x)
-}
-
-# @param chows `<int>` Number of times there has been a Change of Ownership.
+# tag_multi <- function(multi) {
+#   if (is.null(multi)) {
+#     return(NULL)
+#   }
+#   x <- tag_enum(multi)
+#   rlang::set_names(as.list(rep.int("Y", length(x))), x)
+# }

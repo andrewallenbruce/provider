@@ -24,7 +24,6 @@ clia(
   multi = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
   active = NULL,
   eligible = NULL,
   count = FALSE
@@ -65,7 +64,7 @@ clia(
 \item \code{"temp"} = Lab with multiple temporary testing sites
 }}
 
-\item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
+\item{city, state}{\verb{<chr>} Lab city, state}
 
 \item{active}{\verb{<lgl>} Return only active labs}
 

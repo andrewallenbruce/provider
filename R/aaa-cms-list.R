@@ -1,5 +1,5 @@
 #' @noRd
-cms_temporal <- function(rex = NULL) {
+cms_temporal <- function(rex = NULL, as_list = TRUE) {
   x <- RcppSimdJson::fload(
     json = "https://data.cms.gov/data.json",
     query = "/dataset"
@@ -44,6 +44,10 @@ cms_temporal <- function(rex = NULL) {
       function(x) purrr::pluck(x, 1)
     )
     return(collapse::qTBL(x))
+  }
+
+  if (!as_list) {
+    return(x)
   }
 
   rlang::set_names(
