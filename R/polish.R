@@ -309,13 +309,10 @@ S7::method(polish, s3_geography) <- function(x) {
 
   set_rename(x)
 
-  x$state[cheapr::which_(x$state == "National")] <- NA_character_
-
   collapse::gv(
     x,
     c(
       "year",
-      "level",
       "state",
       "hcpcs",
       "description",
@@ -331,7 +328,7 @@ S7::method(polish, s3_geography) <- function(x) {
   ) |>
     rc_bin("drug") |>
     collapse::roworderv(
-      c("level", "year"),
-      decreasing = c(FALSE, TRUE)
+      c("year", "hcpcs"),
+      decreasing = c(TRUE, FALSE)
     )
 }

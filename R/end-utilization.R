@@ -64,13 +64,17 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' utilization(count = TRUE)
+#' services(count = TRUE)
+#' geography(count = TRUE)
+#'
 #' utilization(npi = 1003000423)
 #'
-#' services(count = TRUE)
-#' services(npi = c(1003000423, 1003826272))
+#' services(npi = 1003000423)
 #'
-#' geography(count = TRUE)
-#' geography(hcpcs = 99215)
+#' geography(
+#'   hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),
+#'   pos = "O",
+#'   state = c("National", "Ohio"))
 #'
 #' @export
 utilization <- function(
@@ -114,11 +118,7 @@ utilization <- function(
   check_bool_(par)
 
   if (!is.null(entity)) {
-    entity <- rlang::arg_match(
-      entity,
-      c("I", "O"),
-      multiple = TRUE
-    )
+    entity <- rlang::arg_match(entity, c("I", "O"))
   }
 
   x <- end_cmslist(
@@ -172,6 +172,23 @@ services <- function(
   payment = NULL,
   count = FALSE
 ) {
+  check_numeric(year)
+  check_numeric(npi)
+  check_numeric(patients)
+  check_numeric(services)
+  check_numeric(charge)
+  check_numeric(allowed)
+  check_numeric(payment)
+  check_char_(specialty)
+  check_bool_(par)
+
+  if (!is.null(entity)) {
+    entity <- rlang::arg_match(entity, c("I", "O"))
+  }
+
+  if (!is.null(pos)) {
+    pos <- rlang::arg_match(pos, c("F", "O"))
+  }
   x <- end_cmslist(
     count = count,
     set = FALSE,
@@ -203,6 +220,7 @@ services <- function(
 geography <- function(
   year = NULL,
   level = NULL,
+  state = NULL,
   hcpcs = NULL,
   drug = NULL,
   pos = NULL,
@@ -214,11 +232,34 @@ geography <- function(
   payment = NULL,
   count = FALSE
 ) {
+  check_numeric(year)
+  check_numeric(providers)
+  check_numeric(patients)
+  check_numeric(services)
+  check_numeric(charge)
+  check_numeric(allowed)
+  check_numeric(payment)
+
+  if (!is.null(pos)) {
+    pos <- rlang::arg_match(pos, c("F", "O"))
+  }
+
+  rlang::check_exclusive(level, state, .require = FALSE)
+
+  if (!is.null(level)) {
+    level <- rlang::arg_match(level, c("National", "State"))
+  }
+
+  if (!is.null(state)) {
+    state <- rlang::arg_match(state, c("National", state.name), multiple = TRUE)
+  }
+
   x <- end_cmslist(
     count = count,
     set = FALSE,
     select = year,
     Rndrng_Prvdr_Geo_Lvl = level,
+    Rndrng_Prvdr_Geo_Desc = state,
     HCPCS_Cd = hcpcs,
     HCPCS_Drug_Ind = tag_bool(drug),
     Place_Of_Srvc = pos,

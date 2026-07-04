@@ -53,6 +53,7 @@ services(
 geography(
   year = NULL,
   level = NULL,
+  state = NULL,
   hcpcs = NULL,
   drug = NULL,
   pos = NULL,
@@ -160,12 +161,16 @@ aggregated by year.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 utilization(count = TRUE)
+services(count = TRUE)
+geography(count = TRUE)
+
 utilization(npi = 1003000423)
 
-services(count = TRUE)
-services(npi = c(1003000423, 1003826272))
+services(npi = 1003000423)
 
-geography(count = TRUE)
-geography(hcpcs = 99215)
+geography(
+  hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),
+  pos = "O",
+  state = c("National", "Ohio"))
 \dontshow{\}) # examplesIf}
 }
