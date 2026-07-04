@@ -36,7 +36,7 @@ enumerations <- function(
   switch(
     x,
     # <clia>
-    acr_org = list(
+    accrediting = list(
       a2la = "A2LA_ACRDTD_Y_MATCH_SW",
       aabb = "AABB_ACRDTD_Y_MATCH_SW",
       aoa = "AOA_ACRDTD_Y_MATCH_SW",
@@ -45,7 +45,7 @@ enumerations <- function(
       cola = "COLA_ACRDTD_Y_MATCH_SW",
       jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
     ),
-    cert_type = list(
+    certificate = list(
       cmp = 1,
       wav = 2,
       acr = 3,

@@ -119,27 +119,27 @@ pivot_multi_site <- function(x) {
 }
 
 #' @noRd
-pivot_acr_org <- function(x) {
-  y <- pivot2(x, "ccn", "^acr_", "acr_org")
+pivot_accredit <- function(x) {
+  y <- pivot2(x, "ccn", "^acr_", "accredit")
 
   collapse::gvr(x, "^acr_") <- NULL
 
   if (no_rows(y)) {
-    return(add_empty(x, "acr_org"))
+    return(add_empty(x, "accredit"))
   }
 
   y <- collapse::ss(
     y,
-    j = c("ccn", "acr_org"),
+    j = c("ccn", "accredit"),
     check = FALSE
   )
 
   if (no_rows(y)) {
-    return(add_empty(x, "acr_org"))
+    return(add_empty(x, "accredit"))
   }
 
   collapse::recode_char(
-    y[["acr_org"]],
+    y[["accredit"]],
     "acr_a2la_date" = "A2LA",
     "acr_aabb_date" = "AABB",
     "acr_aoa_date" = "AOA",
@@ -155,7 +155,7 @@ pivot_acr_org <- function(x) {
     return(join2(x, y, "ccn"))
   }
 
-  join2(x, collapse_rows(y, "ccn", "acr_org"), "ccn")
+  join2(x, collapse_rows(y, "ccn", "accredit"), "ccn")
 }
 
 #' @noRd

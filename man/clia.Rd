@@ -19,13 +19,12 @@ clia(
   name = NULL,
   ccn = NULL,
   clia = NULL,
-  cert_type = NULL,
-  acr_org = NULL,
+  certificate = NULL,
+  accrediting = NULL,
   multi = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  chows = NULL,
   active = NULL,
   eligible = NULL,
   count = FALSE
@@ -38,7 +37,7 @@ clia(
 
 \item{clia}{\verb{<chr>} 6-digit CMS Certification Number}
 
-\item{cert_type}{\verb{<enum>} CLIA certificate type (see Details):
+\item{certificate}{\verb{<enum>} CLIA certificate type (see Details):
 \itemize{
 \item \code{"wav"} = Waiver
 \item \code{"ppm"} = Provider-Performed Microscopy (PPM)
@@ -47,7 +46,7 @@ clia(
 \item \code{"acr"} = Accreditation
 }}
 
-\item{acr_org}{\verb{<enum>} CLIA accrediting organization (see Details):
+\item{accrediting}{\verb{<enum>} CLIA accrediting organization (see Details):
 \itemize{
 \item \code{"a2la"} = American Association for Laboratory Accreditation
 \item \code{"aabb"} = Association for the Advancement of Blood & Biotherapies
@@ -67,8 +66,6 @@ clia(
 }}
 
 \item{city, state, zip}{\verb{<chr>} Lab city, state, zip}
-
-\item{chows}{\verb{<int>} Number of times there has been a Change of Ownership.}
 
 \item{active}{\verb{<lgl>} Return only active labs}
 
@@ -130,7 +127,7 @@ laboratory is accredited by one of the CMS-approved organizations:
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 clia(count = TRUE)
-clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
-clia(acr_org = c("cap", "cola", "jcaho"))
+clia(certificate = c("acr", "reg"), city = "Valdosta", state = "GA")
+clia(accrediting = c("cap", "cola", "jcaho"))
 \dontshow{\}) # examplesIf}
 }

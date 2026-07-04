@@ -27,13 +27,13 @@
 #' @param name `<chr>` Provider/Laboratory name
 #' @param ccn `<chr>` 10-digit CMS Certification Number
 #' @param clia `<chr>` 6-digit CMS Certification Number
-#' @param cert_type `<enum>` CLIA certificate type (see Details):
+#' @param certificate `<enum>` CLIA certificate type (see Details):
 #'    - `"wav"` = Waiver
 #'    - `"ppm"` = Provider-Performed Microscopy (PPM)
 #'    - `"reg"` = Registration
 #'    - `"cmp"` = Compliance
 #'    - `"acr"` = Accreditation
-#' @param acr_org `<enum>` CLIA accrediting organization (see Details):
+#' @param accrediting `<enum>` CLIA accrediting organization (see Details):
 #'    - `"a2la"` = American Association for Laboratory Accreditation
 #'    - `"aabb"` = Association for the Advancement of Blood & Biotherapies
 #'    - `"aoa"` = American Osteopathic Association
@@ -47,7 +47,6 @@
 #'    - `"non"` = Multiple sites with non-profit, federal, state or local government status (limited public health testing)
 #'    - `"temp"` = Lab with multiple temporary testing sites
 #' @param city,state,zip `<chr>` Lab city, state, zip
-#' @param chows `<int>` Number of times there has been a Change of Ownership.
 #' @param active `<lgl>` Return only active labs
 #' @param eligible `<lgl>` Indicates lab is eligible to participate in
 #'   Medicare/Medicaid.
@@ -55,26 +54,26 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' clia(count = TRUE)
-#' clia(cert_type = c("acr", "reg"), city = "Valdosta", state = "GA")
-#' clia(acr_org = c("cap", "cola", "jcaho"))
+#' clia(certificate = c("acr", "reg"), city = "Valdosta", state = "GA")
+#' clia(accrediting = c("cap", "cola", "jcaho"))
 #' @export
 clia <- function(
   name = NULL,
   ccn = NULL,
   clia = NULL,
-  cert_type = NULL,
-  acr_org = NULL,
+  certificate = NULL,
+  accrediting = NULL,
   multi = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  chows = NULL,
+  # chows = NULL,
   active = NULL,
   eligible = NULL,
   count = FALSE
 ) {
-  check_char_(cert_type)
-  check_char_(acr_org)
+  check_char_(certificate)
+  check_char_(accrediting)
   check_bool_(active)
   check_bool_(eligible)
 
@@ -84,14 +83,14 @@ clia <- function(
     FAC_NAME = name,
     PRVDR_NUM = ccn,
     CLIA_MDCR_NUM = clia,
-    CRTFCT_TYPE_CD = tag_enum(cert_type),
+    CRTFCT_TYPE_CD = tag_enum(certificate),
     CITY_NAME = city,
     STATE_CD = state,
     ZIP_CD = zip,
-    CHOW_CNT = chows,
+    # CHOW_CNT = chows,
     PGM_TRMNTN_CD = tag_active(active),
     ELGBLTY_SW = tag_bool(eligible),
-    !!!tag_acr_org(acr_org),
+    !!!tag_acr_org(accrediting),
     !!!tag_multi(multi)
   )
 
@@ -109,12 +108,12 @@ tag_active <- function(x = NULL) {
 }
 
 #' @noRd
-tag_acr_org <- function(acr_org) {
-  if (is.null(acr_org)) {
+tag_acr_org <- function(accrediting) {
+  if (is.null(accrediting)) {
     return(NULL)
   }
-  x <- tag_enum(acr_org)
-  set_names(as.list(rep.int("Y", length(x))), x)
+  x <- tag_enum(accrediting)
+  rlang::set_names(as.list(rep.int("Y", length(x))), x)
 }
 
 #' @noRd
@@ -123,5 +122,7 @@ tag_multi <- function(multi) {
     return(NULL)
   }
   x <- tag_enum(multi)
-  set_names(as.list(rep.int("Y", length(x))), x)
+  rlang::set_names(as.list(rep.int("Y", length(x))), x)
 }
+
+# @param chows `<int>` Number of times there has been a Change of Ownership.

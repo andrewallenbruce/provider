@@ -46,12 +46,12 @@ S7::method(polish, s3_clia) <- function(x) {
   recode(x)
   set_rename(x)
   get_columns(x) |>
-    rc_bin(collapse::gvr(x, "eligible$|_multi$", return = 2L)) |>
+    rc_bin(collapse::gvr(x, "elig$|_multi$", return = 2L)) |>
     rc_ymd2(collapse::gvr(x, "_date$", return = 2L)) |>
     rc_combine("address", "add_2") |>
-    rc_combine("fac_name", "fac_2") |>
+    rc_combine("name", "fac_2") |>
     pivot_multi_site() |>
-    pivot_acr_org()
+    pivot_accredit()
 }
 
 #' @noRd
