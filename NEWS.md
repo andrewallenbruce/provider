@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9294 (2026-07-04)
+
+* `geography()` refinement
+
+
 # provider 0.0.1.9293 (2026-07-04)
 
 * added `utilization()` geography endpoint
