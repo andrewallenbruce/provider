@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9296 (2026-07-05)
+
+- renamed functions:
+
+## provider 0.0.1.9295 (2026-07-05)
+
+- renamed functions:
+
 ## provider 0.0.1.9294 (2026-07-04)
 
 - [`geography()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
@@ -200,11 +208,7 @@
 
 ## provider 0.0.1.9249 (2026-06-15)
 
-- added
-  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  -\>
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  chain
+- added `hospitals()` -\> `hospitals2()` chain
 
 ## provider 0.0.1.9248 (2026-06-15)
 
@@ -296,8 +300,7 @@
 
 ## provider 0.0.1.9230 (2026-06-10)
 
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  polishing
+- `hospitals()` polishing
 
 ## provider 0.0.1.9229 (2026-06-10)
 
@@ -519,8 +522,7 @@
 
 ## provider 0.0.1.9182 (2026-05-18)
 
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  polish/pivot reworking
+- `hospitals()` polish/pivot reworking
 
 ## provider 0.0.1.9181 (2026-05-17)
 
@@ -897,8 +899,7 @@
 
 ## provider 0.0.1.9097 (2026-04-24)
 
-- added enums to
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- added enums to `hospitals2()`
 - added `rc_integer_supp` (as.integer with suppressed NA conversion)
 
 ## provider 0.0.1.9096 (2026-04-24)
@@ -986,8 +987,7 @@
 
 ## provider 0.0.1.9076 (2026-04-15)
 
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  fixes
+- `hospitals()` fixes
 
 ## provider 0.0.1.9075 (2026-04-15)
 
@@ -1048,9 +1048,7 @@
 
 ## provider 0.0.1.9062 (2026-03-23)
 
-- added
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  endpoint
+- added `hospitals2()` endpoint
 
 ## provider 0.0.1.9061 (2026-03-20)
 
@@ -1081,8 +1079,7 @@
 ## provider 0.0.1.9055 (2026-03-18)
 
 - refactored query formatting
-- added arguments to
-  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- added arguments to `hospitals()`
 
 ## provider 0.0.1.9054 (2026-03-17)
 
@@ -1100,7 +1097,7 @@
 ## provider 0.0.1.9051 (2026-03-17)
 
 - rebuild readme, documentation
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)’
+- `hospitals()`’
   [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
   helper now exported
 - `cli_hybrid` for calls to different APIs within one function
@@ -1175,9 +1172,7 @@
 
 ## provider 0.0.1.9035 (2026-03-12)
 
-- added
-  [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
-  endpoint
+- added `revocations()` endpoint
 
 ## provider 0.0.1.9034 (2026-03-12)
 
@@ -1226,8 +1221,7 @@
 
 ## provider 0.0.1.9024 (2026-03-10)
 
-- refactored
-  [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- refactored `hospitals()`
 
 ## provider 0.0.1.9023 (2026-03-09)
 
@@ -1243,8 +1237,7 @@
 
 ## provider 0.0.1.9020 (2026-03-09)
 
-- refactored
-  [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
+- refactored `reassignments()`
 - added Provider Type Code Reference dataset
 
 ## provider 0.0.1.9019 (2026-03-08)
@@ -1281,8 +1274,7 @@
 
 ## provider 0.0.1.9012 (2026-03-06)
 
-- refactored
-  [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
+- refactored `clinicians()`
 
 ## provider 0.0.1.9011 (2026-03-06)
 

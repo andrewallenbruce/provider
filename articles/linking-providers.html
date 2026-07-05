@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9294</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9296</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,10 +99,10 @@
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  individual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  organization <span class="op">=</span> <span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
+<span>  organization <span class="op">=</span> <span class="fu"><a href="../reference/hospital.html">hospital</a></span><span class="op">(</span>ccn <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">ccn</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospital</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospital2</span> returned <span style="color: #BBBB00; font-weight: bold;">5</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; $individual</span></span>
@@ -124,10 +124,10 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   loc_type &lt;chr&gt;, sub_group &lt;chr&gt;, rating &lt;int&gt;, county &lt;chr&gt;</span></span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
+<span><span class="fu"><a href="../reference/reassigned.html">reassigned</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassigned</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; rssgnmnt [1 × 13] (S3: reassignments/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; reassgnd [1 × 13] (S3: reassigned/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ npi        : int 1043245657</span></span>
 <span><span class="co">#&gt;  $ pac        : chr "7810891009"</span></span>
 <span><span class="co">#&gt;  $ enid       : chr "I20031120000251"</span></span>
@@ -142,10 +142,10 @@
 <span><span class="co">#&gt;  $ members    : int 1585</span></span>
 <span><span class="co">#&gt;  $ org_state  : chr "VT"</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
+<span><span class="fu"><a href="../reference/clinician.html">clinician</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinician</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; clinicin [1 × 17] (S3: clinician/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ npi      : int 1043245657</span></span>
 <span><span class="co">#&gt;  $ pac      : chr "7810891009"</span></span>
 <span><span class="co">#&gt;  $ enid     : chr "I20031120000251"</span></span>
@@ -170,12 +170,12 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="st">"Elizabethtown Community Hospital"</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals</span> returned <span style="color: #BBBB00; font-weight: bold;">2</span> results</span></span>
+<span><span class="fu"><a href="../reference/hospital.html">hospital</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospital</span> returned <span style="color: #BBBB00; font-weight: bold;">2</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospitals2</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">hospital2</span> returned <span style="color: #BBBB00; font-weight: bold;">1</span> result</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; hospital [2 × 18] (S3: hospital/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"</span></span>
 <span><span class="co">#&gt;  $ org_dba  : chr [1:2] NA NA</span></span>
 <span><span class="co">#&gt;  $ ccn      : chr [1:2] "331302" "33Z302"</span></span>
@@ -195,10 +195,10 @@
 <span><span class="co">#&gt;  $ rating   : int [1:2] 4 NA</span></span>
 <span><span class="co">#&gt;  $ county   : chr [1:2] "ESSEX" NA</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinicians</span> returned <span style="color: #BBBB00; font-weight: bold;">78</span> results</span></span>
+<span><span class="fu"><a href="../reference/clinician.html">clinician</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">clinician</span> returned <span style="color: #BBBB00; font-weight: bold;">78</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
-<span><span class="co">#&gt; clinicns [78 × 17] (S3: clinicians/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; clinicin [78 × 17] (S3: clinician/tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ npi      : int [1:78] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 ...</span></span>
 <span><span class="co">#&gt;  $ pac      : chr [1:78] "6002861804" "3274579073" "0345559357" "4385805696" ...</span></span>
 <span><span class="co">#&gt;  $ enid     : chr [1:78] "I20200824000234" "I20050701000411" "I20200715002569" "I20170524000768" ...</span></span>
@@ -217,8 +217,8 @@
 <span><span class="co">#&gt;  $ state    : chr [1:78] "NY" "NH" "VT" "VT" ...</span></span>
 <span><span class="co">#&gt;  $ zip      : chr [1:78] "128839334" "037683508" "054957007" "054459594" ...</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/reassignments.html">reassignments</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassignments</span> returned <span style="color: #BBBB00; font-weight: bold;">398</span> results</span></span>
+<span><span class="fu"><a href="../reference/reassigned.html">reassigned</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">reassigned</span> returned <span style="color: #BBBB00; font-weight: bold;">398</span> results</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 398 × 13</span></span></span>
 <span><span class="co">#&gt;         npi pac   enid  first last  state specialty memberships org_pac org_enid</span></span>

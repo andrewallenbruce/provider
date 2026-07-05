@@ -6,14 +6,13 @@
   : Provider-Facility Affiliations
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)
   : Clinical Laboratories
-- [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md)
+- [`clinician()`](https://andrewallenbruce.github.io/provider/reference/clinician.md)
   : Clinician Demographics
 - [`dialysis()`](https://andrewallenbruce.github.io/provider/reference/dialysis.md)
   : Dialysis Facilities
 - [`facility()`](https://andrewallenbruce.github.io/provider/reference/facility.md)
   : Facilities
-- [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
-  [`hospitals2()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md)
+- [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
   : Hospitals Enrolled in Medicare
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : NPPES: National Registry of Health Care Providers
@@ -30,12 +29,10 @@
 - [`quality()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
   [`metrics()`](https://andrewallenbruce.github.io/provider/reference/quality.md)
   : Quality Payment Program
-- [`reassignments()`](https://andrewallenbruce.github.io/provider/reference/reassignments.md)
+- [`reassigned()`](https://andrewallenbruce.github.io/provider/reference/reassigned.md)
   : Reassignment of Benefits
-- [`revocations()`](https://andrewallenbruce.github.io/provider/reference/revocations.md)
+- [`revoked()`](https://andrewallenbruce.github.io/provider/reference/revoked.md)
   : Revoked Providers & Suppliers
-- [`subgroups()`](https://andrewallenbruce.github.io/provider/reference/subgroups.md)
-  : Hospital Subgroups
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)

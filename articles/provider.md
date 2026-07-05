@@ -48,10 +48,7 @@ The system operates as a linear pipeline that transforms user intent
 into tidy data frames.
 
 1.  **User-Facing API Layer**: This layer consists of exported functions
-    like
-    [`clinicians()`](https://andrewallenbruce.github.io/provider/reference/clinicians.md),
-    [`hospitals()`](https://andrewallenbruce.github.io/provider/reference/hospitals.md),
-    and
+    like `clinicians()`, `hospitals()`, and
     [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md).
     These functions perform input validation using the check\_\* family
     of functions and capture user arguments into S7 classes (`arg_cms`

@@ -14,10 +14,10 @@ x <- affiliations(pac = 7810891009)
 #> ✔ Retrieving 1 page
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
-  organization = hospitals(ccn = x$ccn))
-#> ✔ hospitals returned 5 results
+  organization = hospital(ccn = x$ccn))
+#> ✔ hospital returned 5 results
 #> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 5 results
+#> ✔ hospital2 returned 5 results
 #> ✔ Retrieving 1 page
 x
 #> $individual
@@ -39,10 +39,10 @@ x
 #> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
 #> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
 
-reassignments(pac = 7810891009) |> str()
-#> ✔ reassignments returned 1 result
+reassigned(pac = 7810891009) |> str()
+#> ✔ reassigned returned 1 result
 #> ✔ Retrieving 1 page
-#> rssgnmnt [1 × 13] (S3: reassignments/tbl_df/tbl/data.frame)
+#> reassgnd [1 × 13] (S3: reassigned/tbl_df/tbl/data.frame)
 #>  $ npi        : int 1043245657
 #>  $ pac        : chr "7810891009"
 #>  $ enid       : chr "I20031120000251"
@@ -57,10 +57,10 @@ reassignments(pac = 7810891009) |> str()
 #>  $ members    : int 1585
 #>  $ org_state  : chr "VT"
 
-clinicians(pac = 7810891009) |> str()
-#> ✔ clinicians returned 1 result
+clinician(pac = 7810891009) |> str()
+#> ✔ clinician returned 1 result
 #> ✔ Retrieving 1 page
-#> clinicns [1 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
+#> clinicin [1 × 17] (S3: clinician/tbl_df/tbl/data.frame)
 #>  $ npi      : int 1043245657
 #>  $ pac      : chr "7810891009"
 #>  $ enid     : chr "I20031120000251"
@@ -86,12 +86,12 @@ clinicians(pac = 7810891009) |> str()
 
 x <- "Elizabethtown Community Hospital"
 
-hospitals(org_name = x) |> str()
-#> ✔ hospitals returned 2 results
+hospital(org_name = x) |> str()
+#> ✔ hospital returned 2 results
 #> ✔ Retrieving 1 page
-#> ✔ hospitals2 returned 1 result
+#> ✔ hospital2 returned 1 result
 #> ✔ Retrieving 1 page
-#> hospitls [2 × 18] (S3: hospitals/tbl_df/tbl/data.frame)
+#> hospital [2 × 18] (S3: hospital/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
 #>  $ org_dba  : chr [1:2] NA NA
 #>  $ ccn      : chr [1:2] "331302" "33Z302"
@@ -111,10 +111,10 @@ hospitals(org_name = x) |> str()
 #>  $ rating   : int [1:2] 4 NA
 #>  $ county   : chr [1:2] "ESSEX" NA
 
-clinicians(org_name = x) |> str()
-#> ✔ clinicians returned 78 results
+clinician(org_name = x) |> str()
+#> ✔ clinician returned 78 results
 #> ✔ Retrieving 1 page
-#> clinicns [78 × 17] (S3: clinicians/tbl_df/tbl/data.frame)
+#> clinicin [78 × 17] (S3: clinician/tbl_df/tbl/data.frame)
 #>  $ npi      : int [1:78] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1760167712 1922491349 1871698019 ...
 #>  $ pac      : chr [1:78] "6002861804" "3274579073" "0345559357" "4385805696" ...
 #>  $ enid     : chr [1:78] "I20200824000234" "I20050701000411" "I20200715002569" "I20170524000768" ...
@@ -133,8 +133,8 @@ clinicians(org_name = x) |> str()
 #>  $ state    : chr [1:78] "NY" "NH" "VT" "VT" ...
 #>  $ zip      : chr [1:78] "128839334" "037683508" "054957007" "054459594" ...
 
-reassignments(org_name = x)
-#> ✔ reassignments returned 398 results
+reassigned(org_name = x)
+#> ✔ reassigned returned 398 results
 #> ✔ Retrieving 1 page
 #> # A tibble: 398 × 13
 #>         npi pac   enid  first last  state specialty memberships org_pac org_enid
