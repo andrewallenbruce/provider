@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9296 (2026-07-05)
+
+* renamed functions:
+
+
 # provider 0.0.1.9295 (2026-07-05)
 
 * renamed functions:
