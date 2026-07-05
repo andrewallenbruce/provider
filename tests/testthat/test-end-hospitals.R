@@ -4,7 +4,7 @@ describe("subgroups()", {
     expect_s7_class(x, Subgroups)
     expect_true(is_subgroups(x))
     expect_equal(
-      S7_data(x),
+      S7::S7_data(x),
       list(
         `SUBGROUP %2D ACUTE CARE` = "Y",
         `SUBGROUP %2D OTHER` = "N"
@@ -25,14 +25,3 @@ describe("subgroups()", {
     expect_error(subgroups(cute = TRUE)) # incorrect argument
   })
 })
-
-# test_that("hospitals()", {
-#   vcr::local_vcr_configure_log(file = stdout())
-#   vcr::local_cassette("hospitals")
-#   x <- hospitals(
-#     city = "Atlanta",
-#     state = "GA",
-#     subgroup = subgroups(acute = FALSE, psych = TRUE)
-#   )
-#   expect_s3_class(x, "hospitals")
-# })

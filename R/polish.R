@@ -55,7 +55,7 @@ S7::method(polish, s3_clia) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_clinicians) <- function(x) {
+S7::method(polish, s3_clinician) <- function(x) {
   collapse::settfmv(x, c("npi", "grd_yr", "num_org_mem"), as.integer)
   set_rename(x)
   get_columns(x) |>
@@ -88,7 +88,7 @@ S7::method(polish, s3_facility) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_hospitals) <- function(x) {
+S7::method(polish, s3_hospital) <- function(x) {
   recode(x)
   set_rename(x)
   get_columns(x) |>
@@ -102,7 +102,7 @@ S7::method(polish, s3_hospitals) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_hospitals2) <- function(x) {
+S7::method(polish, s3_hospital2) <- function(x) {
   collapse::setv(x[["hospital_overall_rating"]], "Not Available", NA)
   collapse::settfmv(x, "hospital_overall_rating", as.integer)
   set_rename(x)

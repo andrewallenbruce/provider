@@ -190,7 +190,7 @@ S7::method(recode, s3_clia) <- function(x) {
 }
 
 #' @noRd
-S7::method(recode, s3_hospitals) <- function(x) {
+S7::method(recode, s3_hospital) <- function(x) {
   recast(x, "NPI", as.integer)
   collapse::recode_char(
     x[["PROVIDER TYPE CODE"]],

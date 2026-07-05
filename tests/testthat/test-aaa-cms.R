@@ -4,7 +4,7 @@ describe("url_cms()", {
       purrr::map_chr(
         c(
           "clia",
-          "hospitals",
+          "hospital",
           "opt_out",
           "order_refer",
           "providers",

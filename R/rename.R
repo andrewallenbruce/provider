@@ -138,7 +138,7 @@ RE_NAME = list(
     STATE_CD = "state",
     ZIP_CD = "zip"
   ),
-  clinicians = list(
+  clinician = list(
     npi = "npi",
     ind_pac_id = "pac",
     ind_enrl_id = "enid",
@@ -193,7 +193,7 @@ RE_NAME = list(
     STATE = "state",
     `ZIP CODE` = "zip"
   ),
-  hospitals = list(
+  hospital = list(
     `ORGANIZATION NAME` = "org_name",
     `DOING BUSINESS AS NAME` = "org_dba",
     CCN = "ccn",
@@ -229,7 +229,7 @@ RE_NAME = list(
     `SUBGROUP - OTHER` = "other_ind",
     `SUBGROUP - OTHER TEXT` = "other_otxt"
   ),
-  hospitals2 = list(
+  hospital2 = list(
     facility_id = "ccn",
     facility_name = "org_name",
     hospital_type = "prov_type",

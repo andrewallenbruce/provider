@@ -46,7 +46,7 @@ S7::method(chain, list(Result, S7::class_function)) <- function(x, end) {
 #' @noRd
 keychain <- list(
   order_refer = rlang::as_function(~ order_refer(npi = .x)),
-  hospitals2 = rlang::as_function(~ hospitals2(ccn = .x)),
+  hospital2 = rlang::as_function(~ hospital2(ccn = .x)),
   nppes = rlang::as_function(~ nppes(npi = .x))
 )
 
@@ -62,7 +62,7 @@ S7::method(link, list(s3_opt_out, s3_order_refer)) <- function(x, y) {
 }
 
 #' @noRd
-S7::method(link, list(s3_hospitals, s3_hospitals2)) <- function(x, y) {
+S7::method(link, list(s3_hospital, s3_hospital2)) <- function(x, y) {
   i <- c("ccn", "rating", "county", "status")
   y <- collapse::ss(y, j = i, check = FALSE)
   x <- join2(x, y, on = "ccn")

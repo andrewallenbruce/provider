@@ -39,18 +39,18 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' hospitals(count = TRUE)
+#' hospital(count = TRUE)
 #'
-#' hospitals(prov_type = "cah", state = "GA")
+#' hospital(prov_type = "cah", state = "GA")
 #'
-#' hospitals(
+#' hospital(
 #'   city = "Atlanta",
 #'   state = "GA",
 #'   subgroup = subgroups(acute = FALSE)
 #' )
 #'
 #' @export
-hospitals <- function(
+hospital <- function(
   npi = NULL,
   ccn = NULL,
   pac = NULL,
@@ -104,7 +104,7 @@ hospitals <- function(
 
   x <- as_result(x)
 
-  chain(x, keychain$hospitals2)
+  chain(x, keychain$hospital2)
 }
 
 #' Hospital General Information
@@ -143,9 +143,9 @@ hospitals <- function(
 #' @param rating `<int>` Hospital rating; 1-5 or "Not Available"
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
-#' @rdname hospitals
+#' @keywords internal
 #' @export
-hospitals2 <- function(
+hospital2 <- function(
   ccn = NULL,
   org_name = NULL,
   city = NULL,
@@ -245,6 +245,7 @@ S7::method(print, Subgroups) <- function(x, ...) {
 #' @examples
 #' subgroups(acute = TRUE, rehab = FALSE)
 #' subgroups()
+#' @keywords internal
 #' @export
 subgroups <- function(
   acute = NULL,

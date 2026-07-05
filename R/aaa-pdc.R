@@ -45,8 +45,8 @@ url_pdc <- function(x) {
     switch(
       x,
       affiliations = "27ea-46a8",
-      clinicians = "mj5m-pzi6",
-      hospitals2 = "xubh-q36u",
+      clinician = "mj5m-pzi6",
+      hospital2 = "xubh-q36u",
       dialysis = "23ew-n7w9",
       cli::cli_abort("{.strong {.pkg PDC} Endpoint} `{.field {x}}` not found.")
     ),

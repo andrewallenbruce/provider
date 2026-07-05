@@ -38,7 +38,7 @@ describe("url_pdc()", {
   it("succeeds with valid input", {
     expect_equal(
       purrr::map_chr(
-        c("affiliations", "clinicians", "hospitals2", "dialysis"),
+        c("affiliations", "clinician", "hospital2", "dialysis"),
         url_pdc
       ),
       c(

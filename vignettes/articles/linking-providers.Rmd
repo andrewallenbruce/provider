@@ -30,12 +30,12 @@ library(provider)
 x <- affiliations(pac = 7810891009)
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
-  organization = hospitals(ccn = x$ccn))
+  organization = hospital(ccn = x$ccn))
 x
 
 reassignments(pac = 7810891009) |> str()
 
-clinicians(pac = 7810891009) |> str()
+clinician(pac = 7810891009) |> str()
 ```
 
 #### Organizational Provider
@@ -43,9 +43,9 @@ clinicians(pac = 7810891009) |> str()
 ```{r}
 x <- "Elizabethtown Community Hospital"
 
-hospitals(org_name = x) |> str()
+hospital(org_name = x) |> str()
 
-clinicians(org_name = x) |> str()
+clinician(org_name = x) |> str()
 
 reassignments(org_name = x)
 ```

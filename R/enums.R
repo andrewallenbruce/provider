@@ -84,13 +84,13 @@ enumerations <- function(
       hospice = "Hospice",
       esrd = "Dialysis facility"
     ),
-    # <hospitals>
+    # <hospital>
     prov_type = list(
       hospital = "00-09",
       reh = "00-24",
       cah = "00-85"
     ),
-    # <hospitals>
+    # <hospital>
     loc_type = list(
       other = "OTHER HOSPITAL PRACTICE LOCATION",
       main = "MAIN/PRIMARY HOSPITAL LOCATION",
@@ -99,7 +99,7 @@ enumerations <- function(
       swing = "HOSPITAL SWING-BED UNIT",
       ext = "OPT EXTENSION SITE"
     ),
-    # <hospitals>
+    # <hospital>
     # <facility>
     org_type = list(
       corp = "CORPORATION",
@@ -108,7 +108,7 @@ enumerations <- function(
       part = "PARTNERSHIP",
       sole = "SOLE PROPRIETOR"
     ),
-    # <hospitals2>
+    # <hospital2>
     own_type = list(
       dod = "Department of Defense",
       profit = "Proprietary",

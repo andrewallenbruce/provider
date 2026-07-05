@@ -108,7 +108,7 @@ S7::method(shave, s3_opt_out) <- function(x) {
 }
 
 #' @noRd
-S7::method(shave, s3_hospitals) <- function(x) {
+S7::method(shave, s3_hospital) <- function(x) {
   as_key(x[["ccn"]], 200L)
 }
 

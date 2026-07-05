@@ -81,15 +81,15 @@ s3_affiliations <- S7::new_S3_class("affiliations")
 #' @noRd
 s3_clia <- S7::new_S3_class("clia")
 #' @noRd
-s3_clinicians <- S7::new_S3_class("clinicians")
+s3_clinician <- S7::new_S3_class("clinician")
 #' @noRd
 s3_dialysis <- S7::new_S3_class("dialysis")
 #' @noRd
 s3_facility <- S7::new_S3_class("facility")
 #' @noRd
-s3_hospitals <- S7::new_S3_class("hospitals")
+s3_hospital <- S7::new_S3_class("hospital")
 #' @noRd
-s3_hospitals2 <- S7::new_S3_class("hospitals2")
+s3_hospital2 <- S7::new_S3_class("hospital2")
 #' @noRd
 s3_nppes <- S7::new_S3_class("nppes")
 #' @noRd
