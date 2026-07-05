@@ -9,8 +9,8 @@ url_cms <- function(x) {
       opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
       order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",
       providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
-      reassignments = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
-      revocations = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
+      reassigned = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",
+      revoked = "a6496a7d-4e19-479a-a9ad-d4c0a49e07c3",
       transparency = "6a3aa708-3c9d-411a-a1a4-e046d3ade7ef",
       cli::cli_abort("{.strong {.pkg CMS} Endpoint} `{.field {x}}` not found.")
     ),

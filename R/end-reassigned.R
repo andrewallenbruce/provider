@@ -25,10 +25,10 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' reassignments(count = TRUE)
-#' reassignments(org_enid = starts("I"), members = greater(50, equal = TRUE))
+#' reassigned(count = TRUE)
+#' reassigned(org_enid = starts("I"), members = greater(50, equal = TRUE))
 #' @export
-reassignments <- function(
+reassigned <- function(
   npi = NULL,
   pac = NULL,
   enid = NULL,

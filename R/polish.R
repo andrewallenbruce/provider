@@ -161,7 +161,7 @@ S7::method(polish, s3_providers) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_reassignments) <- function(x) {
+S7::method(polish, s3_reassigned) <- function(x) {
   collapse::settfmv(
     x,
     c(
@@ -176,7 +176,7 @@ S7::method(polish, s3_reassignments) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_revocations) <- function(x) {
+S7::method(polish, s3_revoked) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>

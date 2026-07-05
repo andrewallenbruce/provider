@@ -33,7 +33,7 @@ x <- list(
   organization = hospital(ccn = x$ccn))
 x
 
-reassignments(pac = 7810891009) |> str()
+reassigned(pac = 7810891009) |> str()
 
 clinician(pac = 7810891009) |> str()
 ```
@@ -47,7 +47,7 @@ hospital(org_name = x) |> str()
 
 clinician(org_name = x) |> str()
 
-reassignments(org_name = x)
+reassigned(org_name = x)
 ```
 
 The **Hospital Enrollment** API includes only Medicare Part A (hospital)

@@ -102,19 +102,3 @@ tag_active <- function(x = NULL) {
   }
   if (x) "00" else not("00")
 }
-
-# tag_accrediting <- function(accrediting) {
-#   if (is.null(accrediting)) {
-#     return(NULL)
-#   }
-#   x <- tag_enum(accrediting)
-#   rlang::set_names(as.list(rep.int("Y", length(x))), x)
-# }
-
-# tag_multi <- function(multi) {
-#   if (is.null(multi)) {
-#     return(NULL)
-#   }
-#   x <- tag_enum(multi)
-#   rlang::set_names(as.list(rep.int("Y", length(x))), x)
-# }

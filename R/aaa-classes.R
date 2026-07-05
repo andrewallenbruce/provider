@@ -105,9 +105,9 @@ s3_providers <- S7::new_S3_class("providers")
 #' @noRd
 s3_quality <- S7::new_S3_class("quality")
 #' @noRd
-s3_reassignments <- S7::new_S3_class("reassignments")
+s3_reassigned <- S7::new_S3_class("reassigned")
 #' @noRd
-s3_revocations <- S7::new_S3_class("revocations")
+s3_revoked <- S7::new_S3_class("revoked")
 #' @noRd
 s3_transparency <- S7::new_S3_class("transparency")
 #' @noRd

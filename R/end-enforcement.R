@@ -31,14 +31,14 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' revocations(count = TRUE)
+#' revoked(count = TRUE)
 #'
-#' revocations(org_name = not_blank(), count = TRUE)
+#' revoked(org_name = not_blank(), count = TRUE)
 #'
-#' revocations(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
+#' revoked(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #'
 #' @export
-revocations <- function(
+revoked <- function(
   npi = NULL,
   enid = NULL,
   first = NULL,

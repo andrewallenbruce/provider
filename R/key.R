@@ -10,8 +10,8 @@ chunk <- function(id, threshold, length, chunks) {
   i <- seq_len(chunks)
   i <- cheapr::rep_each_(i, threshold)
   i <- cheapr::sset(i, seq_len(length))
-
-  vctrs::vec_split(cheapr::attrs_rm(id), i)$val
+  i <- vctrs::vec_split(cheapr::attrs_rm(id), i)
+  i[["val"]]
 }
 
 #' @noRd

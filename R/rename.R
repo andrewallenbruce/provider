@@ -316,7 +316,7 @@ RE_NAME = list(
       )
     )
   ),
-  reassignments = list(
+  reassigned = list(
     `Individual NPI` = "npi",
     `Individual PAC ID` = "pac",
     `Individual Enrollment ID` = "enid",
@@ -331,7 +331,7 @@ RE_NAME = list(
     `Group Reassignments and Physician Assistants` = "members",
     `Group State Code` = "org_state"
   ),
-  revocations = list(
+  revoked = list(
     ORG_NAME = "org",
     FIRST_NAME = "first",
     LAST_NAME = "last",

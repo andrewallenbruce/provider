@@ -123,6 +123,7 @@ enumerations <- function(
       state = "Government - State",
       vha = "Veterans Health Administration"
     ),
+    # <hospital2>
     hosp_type = list(
       acute = "Acute Care Hospitals",
       cah = "Critical Access Hospitals",

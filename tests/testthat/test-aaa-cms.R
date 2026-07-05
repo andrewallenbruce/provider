@@ -8,8 +8,8 @@ describe("url_cms()", {
           "opt_out",
           "order_refer",
           "providers",
-          "reassignments",
-          "revocations",
+          "reassigned",
+          "revoked",
           "transparency"
         ),
         url_cms

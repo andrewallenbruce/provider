@@ -86,10 +86,10 @@ reference:
   contents:
   - affiliations
   - clia
-  - clinicians
+  - clinician
   - dialysis
   - facility
-  - hospitals
+  - hospital
   - nppes
   - opt_out
   - order_refer
@@ -97,9 +97,8 @@ reference:
   - pending
   - providers
   - quality
-  - reassignments
-  - revocations
-  - subgroups
+  - reassigned
+  - revoked
   - transparency
   - utilization
   - modifier
