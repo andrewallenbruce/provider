@@ -137,7 +137,7 @@ quality(npi = 1003026055)
 #> # ℹ 15 more variables: adjustment <dbl>, pi_score <int>, qa_score <dbl>,
 #> #   complex_bonus <dbl>, partype <chr>, qi_score <dbl>, ia_score <int>,
 #> #   cost_score <dbl>, indicators <chr>, cred <chr>, dual_ratio <dbl>,
-#> #   small_bonus <int>, reporting <chr>, mvp <chr>, ci_score <dbl>
+#> #   small_bonus <int>, reportype <chr>, mvp <chr>, ci_score <dbl>
 
 metrics()
 #> # A tibble: 32 × 4

@@ -85,6 +85,9 @@ providers(org_name = starts("AB"), state = c("TX", "CA"))
 #> ✔ providers returned 231 results
 #> ✔ Retrieving 1 page
 #> ✔ nppes searching 219 NPIs
+#> [working] (137 + 0) -> 10 -> 72 | ■■■■■■■■■■■                       33%
+#> [working] (127 + 0) -> 10 -> 82 | ■■■■■■■■■■■■                      37%
+#> [working] (0 + 0) -> 0 -> 219 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> ✔ nppes returned 219 results
 #> # A tibble: 231 × 11
 #>          npi pac   enid  prov_type taxonomy prov_desc org_name first last  state
