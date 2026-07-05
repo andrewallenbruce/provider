@@ -45,7 +45,7 @@ quality_get <- function(x, y) {
   if (y %in% c("2017", "2022")) {
     x <- collapse::av(
       x,
-      reporting = vec_na(x),
+      reportype = vec_na(x),
       mvp = vec_na(x),
       ci_score = vec_na(x, "double")
     )

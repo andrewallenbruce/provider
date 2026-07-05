@@ -23,7 +23,7 @@ Imports:
     memoise (>= 2.0.1),
     purrr (>= 1.2.2),
     RcppSimdJson (>= 0.1.15),
-    rlang (>= 1.2.0),
+    rlang (>= 1.3.0),
     S7 (>= 0.2.2),
     stringr (>= 1.6.0),
     vctrs (>= 0.7.3)
@@ -56,9 +56,9 @@ Collate:
     'end-clia.R'
     'end-clinicians.R'
     'end-dialysis.R'
+    'end-enforcement.R'
     'end-facility.R'
     'end-hospitals.R'
-    'end-hospitals2.R'
     'end-nppes.R'
     'end-opt_out.R'
     'end-order_refer.R'
@@ -67,9 +67,6 @@ Collate:
     'end-providers.R'
     'end-quality.R'
     'end-reassignment.R'
-    'end-revocations.R'
-    'end-subgroup.R'
-    'end-transparency.R'
     'end-utilization.R'
     'enums.R'
     'execute.R'

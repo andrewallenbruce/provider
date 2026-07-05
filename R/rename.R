@@ -75,7 +75,7 @@ qpp_ALL = list(
 #' @noRd
 qpp_22 = list(
   `clinician type` = "cred",
-  `participation option` = "participation",
+  `participation option` = "partype",
   `dual eligibility ratio` = "dual_ratio",
   `quality improvement score` = "qi_score",
   `small practice bonus` = "small_bonus",
