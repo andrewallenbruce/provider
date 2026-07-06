@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9297 (2026-07-06)
+
+- renamed function: `opt_out` -\> `opted_out`
+
 ## provider 0.0.1.9296 (2026-07-05)
 
 - renamed functions:
@@ -260,9 +264,7 @@
 
 ## provider 0.0.1.9238 (2026-06-13)
 
-- fixed bug in
-  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
-  chunking method
+- fixed bug in `opt_out()` chunking method
   ([\#103](https://github.com/andrewallenbruce/provider/issues/103))
 - re-rendered README
 
@@ -482,13 +484,11 @@
 
 ## provider 0.0.1.9190 (2026-05-27)
 
-- simplify
-  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- simplify `opt_out()`
 
 ## provider 0.0.1.9189 (2026-05-27)
 
-- [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md) -
-  `start_year` arg
+- `opt_out()` - `start_year` arg
 
 ## provider 0.0.1.9188 (2026-05-27)
 
@@ -571,14 +571,12 @@
 
 ## provider 0.0.1.9171 (2026-05-15)
 
-- fixed `count` bug in
-  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- fixed `count` bug in `opt_out()`
 - streamlined `rc_clia` columns method
 
 ## provider 0.0.1.9170 (2026-05-15)
 
-- quick fix for
-  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- quick fix for `opt_out()`
   ([\#103](https://github.com/andrewallenbruce/provider/issues/103))
 
 ## provider 0.0.1.9169 (2026-05-15)
@@ -1242,8 +1240,7 @@
 
 ## provider 0.0.1.9019 (2026-03-08)
 
-- refactored
-  [`opt_out()`](https://andrewallenbruce.github.io/provider/reference/opt_out.md)
+- refactored `opt_out()`
 - added `modifier` class
 
 ## provider 0.0.1.9018 (2026-03-08)

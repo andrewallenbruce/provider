@@ -80,9 +80,9 @@ hospital(
 
   - `corp` = Corporation
 
-  - `other` = Other
-
   - `llc` = LLC
+
+  - `other` = Other
 
   - `part` = Partnership
 

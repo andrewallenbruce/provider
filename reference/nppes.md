@@ -264,7 +264,4 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> 
 #> attr(,"class")
 #> [1] "nppes" "list" 
-
-nppes(uq(providers(pac = uq(clinicians(first = "Etan")$org_pac))$npi))
-#> Error in clinicians(first = "Etan"): could not find function "clinicians"
 ```
