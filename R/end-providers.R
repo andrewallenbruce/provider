@@ -63,7 +63,7 @@ providers <- function(
     return(invisible(x))
   }
 
-  x <- as_result(x)
+  x <- as_keyframe(x)
 
-  chain(x, keychain$nppes)
+  chain(x, KeyChain$nppes)
 }

@@ -93,7 +93,7 @@ s3_hospital2 <- S7::new_S3_class("hospital2")
 #' @noRd
 s3_nppes <- S7::new_S3_class("nppes")
 #' @noRd
-s3_opt_out <- S7::new_S3_class("opt_out")
+s3_opted_out <- S7::new_S3_class("opted_out")
 #' @noRd
 s3_order_refer <- S7::new_S3_class("order_refer")
 #' @noRd

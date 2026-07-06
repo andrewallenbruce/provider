@@ -20,8 +20,8 @@
 #'    - `N` = Non-Profit
 #' @param org_type `<enum>` Organization structure type
 #'    - `corp` = Corporation
-#'    - `other` = Other
 #'    - `llc` = LLC
+#'    - `other` = Other
 #'    - `part` = Partnership
 #'    - `sole` = Sole Proprietor
 #' @param prov_type `<enum>` Provider type:
@@ -102,9 +102,9 @@ hospital <- function(
     return(invisible(x))
   }
 
-  x <- as_result(x)
+  x <- as_keyframe(x)
 
-  chain(x, keychain$hospital2)
+  chain(x, KeyChain$hospital2)
 }
 
 #' Hospital General Information

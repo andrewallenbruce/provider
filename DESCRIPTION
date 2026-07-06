@@ -59,7 +59,7 @@ Collate:
     'end-facility.R'
     'end-hospital.R'
     'end-nppes.R'
-    'end-opt_out.R'
+    'end-opted_out.R'
     'end-order_refer.R'
     'end-owner.R'
     'end-pending.R'

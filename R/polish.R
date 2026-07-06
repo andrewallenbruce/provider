@@ -110,7 +110,7 @@ S7::method(polish, s3_hospital2) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_opt_out) <- function(x) {
+S7::method(polish, s3_opted_out) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
   get_columns(x) |>

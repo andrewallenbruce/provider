@@ -38,13 +38,12 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' opt_out(count = TRUE)
+#' opted_out(count = TRUE)
 #'
-#' opt_out(state = "GA",
-#'         specialty = contains("Psych"))
+#' opted_out(state = "GA", specialty = contains("Psych"))
 #'
 #' @export
-opt_out <- function(
+opted_out <- function(
   npi = NULL,
   first = NULL,
   last = NULL,
@@ -92,7 +91,7 @@ opt_out <- function(
     return(x)
   }
 
-  x <- as_result(x)
+  x <- as_keyframe(x)
 
-  chain(x, keychain$order_refer)
+  chain(x, KeyChain$order_refer)
 }

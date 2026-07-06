@@ -54,8 +54,8 @@ hospital(
 \item{org_type}{\verb{<enum>} Organization structure type
 \itemize{
 \item \code{corp} = Corporation
-\item \code{other} = Other
 \item \code{llc} = LLC
+\item \code{other} = Other
 \item \code{part} = Partnership
 \item \code{sole} = Sole Proprietor
 }}

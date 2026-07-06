@@ -91,7 +91,7 @@ reference:
   - facility
   - hospital
   - nppes
-  - opt_out
+  - opted_out
   - order_refer
   - owner
   - pending

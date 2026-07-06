@@ -10,7 +10,7 @@ chunk <- function(id, threshold, length, chunks) {
   i <- seq_len(chunks)
   i <- cheapr::rep_each_(i, threshold)
   i <- cheapr::sset(i, seq_len(length))
-  i <- vctrs::vec_split(cheapr::attrs_rm(id), i)
+  i <- vctrs::vec_split(x = cheapr::attrs_rm(id), by = i)
   i[["val"]]
 }
 
@@ -58,26 +58,15 @@ is_key <- function(x) {
 }
 
 #' @noRd
-check_key <- function(
-  x,
-  arg = rlang::caller_arg(x),
-  call = rlang::caller_env()
-) {
-  if (!is_key(x)) {
-    cli::cli_abort(
-      "{.arg {arg}} must be a {.cls {Key}} object, not {.obj_type_friendly {x}}",
-      arg = arg,
-      call = call
-    )
-  }
-}
-
-#' @noRd
 as_key <- function(x, threshold = 150L) {
   x <- uq(x)
 
   if (!is.character(x)) {
     x <- as.character(x)
+  }
+
+  if (threshold == 1L) {
+    return(x)
   }
 
   x <- Key(x, threshold = threshold)
@@ -92,27 +81,21 @@ as_key <- function(x, threshold = 150L) {
 }
 
 #' @noRd
-shave <- S7::new_generic("shave", "x")
+carve <- S7::new_generic("carve", "x")
 
 #' @noRd
-S7::method(shave, s3_opt_out) <- function(x) {
-  x <- collapse::ss(
-    x = x,
-    i = x[["order_refer"]] %==% 1L,
-    j = "npi",
-    check = FALSE
-  )
-
-  x <- unlist_(x)
-  as_key(x, 150L)
+S7::method(carve, s3_opted_out) <- function(x) {
+  x <- collapse::ss(x, x[["order_refer"]] %==% 1L, check = FALSE)
+  as_key(x[["npi"]], 150L)
 }
 
 #' @noRd
-S7::method(shave, s3_hospital) <- function(x) {
+S7::method(carve, s3_hospital) <- function(x) {
   as_key(x[["ccn"]], 200L)
 }
 
 #' @noRd
-S7::method(shave, s3_providers) <- function(x) {
+S7::method(carve, s3_providers) <- function(x) {
+  # as_key(x[["npi"]], 1L)
   uq(x[["npi"]])
 }

@@ -241,7 +241,7 @@ RE_NAME = list(
     zip_code = "zip",
     countyparish = "county"
   ),
-  opt_out = list(
+  opted_out = list(
     NPI = "npi",
     `First Name` = "first",
     `Last Name` = "last",
