@@ -128,11 +128,7 @@ pivot_accredit <- function(x) {
     return(add_empty(x, "accredit"))
   }
 
-  y <- collapse::ss(
-    y,
-    j = c("ccn", "accredit"),
-    check = FALSE
-  )
+  y <- ss_cols(y, c("ccn", "accredit"))
 
   if (no_rows(y)) {
     return(add_empty(x, "accredit"))
