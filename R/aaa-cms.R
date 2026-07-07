@@ -6,7 +6,7 @@ url_cms <- function(x) {
       x,
       clia = "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
       hospital = "f6f6505c-e8b0-4d57-b258-e2b94133aaf2",
-      opt_out = "9887a515-7552-4693-bf58-735c77af46d7",
+      opted_out = "9887a515-7552-4693-bf58-735c77af46d7",
       order_refer = "c99b5865-1119-4436-bb80-c5af2773ea1f",
       providers = "2457ea29-fc82-48b0-86ec-3b0755de7515",
       reassigned = "20f51cff-4137-4f3a-b6b7-bfc9ad57983b",

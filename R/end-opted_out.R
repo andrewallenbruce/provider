@@ -91,7 +91,7 @@ opted_out <- function(
     return(x)
   }
 
-  x <- as_keyframe(x)
+  x <- as_keyframe(x, "npi", 150L)
 
   chain(x, KeyChain$order_refer)
 }

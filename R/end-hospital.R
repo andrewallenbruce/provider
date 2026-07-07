@@ -102,7 +102,7 @@ hospital <- function(
     return(invisible(x))
   }
 
-  x <- as_keyframe(x)
+  x <- as_keyframe(x, "ccn", 200L)
 
   chain(x, KeyChain$hospital2)
 }

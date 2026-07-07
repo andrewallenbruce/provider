@@ -9,19 +9,18 @@ Medicare
 \usage{
 owner(
   fac_type = NULL,
-  org_enid = NULL,
-  org_pac = NULL,
-  org_name = NULL,
-  pac = NULL,
-  owner = NULL,
-  dba = NULL,
-  percent = NULL,
-  role = NULL,
-  entity = NULL,
-  first = NULL,
-  last = NULL,
-  title = NULL,
-  address = NULL,
+  fac_enid = NULL,
+  fac_pac = NULL,
+  fac_name = NULL,
+  own_pac = NULL,
+  own_org = NULL,
+  own_dba = NULL,
+  own_pct = NULL,
+  own_role = NULL,
+  own_entity = NULL,
+  own_first = NULL,
+  own_last = NULL,
+  own_title = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -39,31 +38,31 @@ owner(
 \item \code{Hospital} = Hospital
 }}
 
-\item{org_enid}{\verb{<chr>} National Provider Identifier}
+\item{own_pac}{\verb{<chr>} Provider's name}
 
-\item{org_pac}{\verb{<chr>} Provider's name}
+\item{own_org}{\verb{<chr>} Provider's name}
 
-\item{org_name}{\verb{<chr>} Provider's name}
+\item{own_dba}{\verb{<chr>} Provider's name}
+
+\item{own_pct}{\verb{<dbl>} Provider's name}
+
+\item{own_role}{\verb{<chr>} Provider's name}
+
+\item{own_entity}{\verb{<enum>} Provider's name}
+
+\item{own_first, own_last}{\verb{<chr>} Provider's name}
+
+\item{own_title}{\verb{<chr>} Provider's name}
+
+\item{city, state, zip}{\verb{<chr>} Provider's name}
+
+\item{count}{\verb{<lgl>} Return the total row count}
+
+\item{enid}{\verb{<chr>} National Provider Identifier}
 
 \item{pac}{\verb{<chr>} Provider's name}
 
-\item{owner}{\verb{<chr>} Provider's name}
-
-\item{dba}{\verb{<chr>} Provider's name}
-
-\item{percent}{\verb{<dbl>} Provider's name}
-
-\item{role}{\verb{<chr>} Provider's name}
-
-\item{entity}{\verb{<enum>} Provider's name}
-
-\item{first, last}{\verb{<chr>} Provider's name}
-
-\item{title}{\verb{<chr>} Provider's name}
-
-\item{address, city, state, zip}{\verb{<chr>} Provider's name}
-
-\item{count}{\verb{<lgl>} Return the total row count}
+\item{org_name}{\verb{<chr>} Provider's name}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

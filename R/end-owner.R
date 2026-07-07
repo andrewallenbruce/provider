@@ -13,18 +13,18 @@
 #'    - `SNF` = Skilled Nursing Facility
 #'    - `Hospice` = Hospice
 #'    - `Hospital` = Hospital
-#' @param org_enid `<chr>` National Provider Identifier
-#' @param org_pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
+#' @param enid `<chr>` National Provider Identifier
 #' @param pac `<chr>` Provider's name
-#' @param owner `<chr>` Provider's name
-#' @param dba `<chr>` Provider's name
-#' @param percent `<dbl>` Provider's name
-#' @param role `<chr>` Provider's name
-#' @param entity `<enum>` Provider's name
-#' @param title `<chr>` Provider's name
-#' @param first,last `<chr>` Provider's name
-#' @param address,city,state,zip `<chr>` Provider's name
+#' @param org_name `<chr>` Provider's name
+#' @param own_pac `<chr>` Provider's name
+#' @param own_org `<chr>` Provider's name
+#' @param own_dba `<chr>` Provider's name
+#' @param own_pct `<dbl>` Provider's name
+#' @param own_role `<chr>` Provider's name
+#' @param own_entity `<enum>` Provider's name
+#' @param own_title `<chr>` Provider's name
+#' @param own_first,own_last `<chr>` Provider's name
+#' @param city,state,zip `<chr>` Provider's name
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
@@ -33,19 +33,18 @@
 #' @export
 owner <- function(
   fac_type = NULL,
-  org_enid = NULL,
-  org_pac = NULL,
-  org_name = NULL,
-  pac = NULL,
-  owner = NULL,
-  dba = NULL,
-  percent = NULL,
-  role = NULL,
-  entity = NULL,
-  first = NULL,
-  last = NULL,
-  title = NULL,
-  address = NULL,
+  fac_enid = NULL,
+  fac_pac = NULL,
+  fac_name = NULL,
+  own_pac = NULL,
+  own_org = NULL,
+  own_dba = NULL,
+  own_pct = NULL,
+  own_role = NULL,
+  own_entity = NULL,
+  own_first = NULL,
+  own_last = NULL,
+  own_title = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -63,19 +62,18 @@ owner <- function(
     count = count,
     set = FALSE,
     select = fac_type,
-    `ENROLLMENT ID` = org_enid,
-    `ASSOCIATE ID` = org_pac,
-    `ORGANIZATION NAME` = org_name,
-    `ASSOCIATE ID - OWNER` = pac,
-    `ORGANIZATION NAME - OWNER` = owner,
-    `DOING BUSINESS AS NAME - OWNER` = dba,
-    `PERCENTAGE OWNERSHIP` = percent,
-    `ROLE CODE - OWNER` = role,
-    `TYPE - OWNER` = entity,
-    `FIRST NAME - OWNER` = first,
-    `LAST NAME - OWNER` = last,
-    `TITLE - OWNER` = title,
-    `ADDRESS LINE 1 - OWNER` = address,
+    `ENROLLMENT ID` = fac_enid,
+    `ASSOCIATE ID` = fac_pac,
+    `ORGANIZATION NAME` = fac_name,
+    `ASSOCIATE ID - OWNER` = own_pac,
+    `ORGANIZATION NAME - OWNER` = own_org,
+    `DOING BUSINESS AS NAME - OWNER` = own_dba,
+    `PERCENTAGE OWNERSHIP` = own_pct,
+    `ROLE CODE - OWNER` = own_role,
+    `TYPE - OWNER` = own_entity,
+    `FIRST NAME - OWNER` = own_first,
+    `LAST NAME - OWNER` = own_last,
+    `TITLE - OWNER` = own_title,
     `CITY - OWNER` = city,
     `STATE - OWNER` = state,
     `ZIP CODE - OWNER` = zip

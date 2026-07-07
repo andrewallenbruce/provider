@@ -1,4 +1,4 @@
-#' NPPES: National Registry of Health Care Providers
+#' National Registry of Health Care Providers
 #'
 #' @description Search the National Plan and Provider Enumeration System (NPPES)
 #' NPI Registry, a free directory of all active NPI records.

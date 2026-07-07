@@ -2,7 +2,7 @@
 % Please edit documentation in R/end-nppes.R
 \name{nppes}
 \alias{nppes}
-\title{NPPES: National Registry of Health Care Providers}
+\title{National Registry of Health Care Providers}
 \source{
 \itemize{
 \item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API}

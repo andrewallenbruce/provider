@@ -12,8 +12,15 @@ KeyFrame <- S7::new_class(
 )
 
 #' @noRd
-as_keyframe <- function(x) {
-  KeyFrame(frame = x, key = carve(x))
+as_keyframe <- function(x, key, threshold) {
+  KeyFrame(
+    frame = x,
+    key = carve(
+      x = x,
+      key = key,
+      threshold = threshold
+      )
+    )
 }
 
 #' @noRd

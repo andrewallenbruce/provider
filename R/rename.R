@@ -10,50 +10,6 @@ get_columns <- function(x) {
 }
 
 #' @noRd
-RE_OWNER = list(
-  `ENROLLMENT ID` = "org_enid",
-  `ASSOCIATE ID` = "org_pac",
-  `ORGANIZATION NAME` = "org_name",
-  `ASSOCIATE ID - OWNER` = "pac",
-  `ROLE CODE - OWNER` = "role",
-  `ASSOCIATION DATE - OWNER` = "asc_date",
-  `ORGANIZATION NAME - OWNER` = "own_name",
-  `DOING BUSINESS AS NAME - OWNER` = "own_dba",
-  `PERCENTAGE OWNERSHIP` = "percent",
-  `TITLE - OWNER` = "title",
-  `FIRST NAME - OWNER` = "first",
-  `LAST NAME - OWNER` = "last",
-  `ADDRESS LINE 1 - OWNER` = "address",
-  `ADDRESS LINE 2 - OWNER` = "add_2",
-  `CITY - OWNER` = "city",
-  `STATE - OWNER` = "state",
-  `ZIP CODE - OWNER` = "zip",
-  `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
-  `CORPORATION - OWNER` = "corp_ind",
-  `LLC - OWNER` = "llc_ind",
-  `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
-  `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
-  `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
-  `HOLDING COMPANY - OWNER` = "hld_ind",
-  `INVESTMENT FIRM - OWNER` = "inv_ind",
-  `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
-  `CONSULTING FIRM - OWNER` = "con_ind",
-  `FOR PROFIT - OWNER` = "fp_ind",
-  `NON PROFIT - OWNER` = "np_ind",
-  `OTHER TYPE - OWNER` = "oth_ind",
-  `OTHER TYPE TEXT - OWNER` = "own_otxt"
-)
-
-#' @noRd
-RE_OWNER2 = c(
-  RE_OWNER,
-  `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
-  `REIT - OWNER` = "reit_ind",
-  `CHAIN HOME OFFICE - OWNER` = "cho_ind",
-  `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
-)
-
-#' @noRd
 qpp_ALL = list(
   year = "year",
   npi = "npi",
@@ -416,30 +372,60 @@ RE_NAME = list(
     Tot_Rndrng_Prvdrs = "providers",
     Tot_Benes = "patients",
     Tot_Srvcs = "services",
-    # Tot_Bene_Day_Srvcs = "day_services",
     Avg_Sbmtd_Chrg = "charge",
     Avg_Mdcr_Alowd_Amt = "allowed",
     Avg_Mdcr_Pymt_Amt = "payment",
     Avg_Mdcr_Stdzd_Amt = "avg_standard"
   ),
-  owner = c(
+  owner = list(
+    `ORGANIZATION NAME` = "fac_name",
     fac_type = "fac_type",
-    RE_OWNER
+    `ASSOCIATE ID` = "fac_pac",
+    `ENROLLMENT ID` = "fac_enid",
+    `ORGANIZATION NAME - OWNER` = "own_org",
+    `DOING BUSINESS AS NAME - OWNER` = "own_dba",
+    `ASSOCIATION DATE - OWNER` = "own_date",
+    `ASSOCIATE ID - OWNER` = "own_pac",
+    `TITLE - OWNER` = "own_title",
+    `FIRST NAME - OWNER` = "own_first",
+    `LAST NAME - OWNER` = "own_last",
+    `PERCENTAGE OWNERSHIP` = "own_pct",
+    `ROLE CODE - OWNER` = "own_role",
+    `ADDRESS LINE 1 - OWNER` = "address",
+    `ADDRESS LINE 2 - OWNER` = "add_2",
+    `CITY - OWNER` = "city",
+    `STATE - OWNER` = "state",
+    `ZIP CODE - OWNER` = "zip",
+    `CREATED FOR ACQUISITION - OWNER` = "acq_ind",
+    `CORPORATION - OWNER` = "corp_ind",
+    `LLC - OWNER` = "llc_ind",
+    `MEDICAL PROVIDER SUPPLIER - OWNER` = "mps_ind",
+    `MANAGEMENT SERVICES COMPANY - OWNER` = "msr_ind",
+    `MEDICAL STAFFING COMPANY - OWNER` = "mst_ind",
+    `HOLDING COMPANY - OWNER` = "hld_ind",
+    `INVESTMENT FIRM - OWNER` = "inv_ind",
+    `FINANCIAL INSTITUTION - OWNER` = "fin_ind",
+    `CONSULTING FIRM - OWNER` = "con_ind",
+    `FOR PROFIT - OWNER` = "fp_ind",
+    `NON PROFIT - OWNER` = "np_ind",
+    `OTHER TYPE - OWNER` = "oth_ind",
+    `OTHER TYPE TEXT - OWNER` = "own_otxt"
   )
 )
 
-# fqhc_enroll = RE_ENROLL,
-# hha_enroll = RE_ENROLL,
-# hospice_enroll = RE_ENROLL,
-# rhc_enroll = RE_ENROLL,
 # snf_enroll = c(
-#   RE_ENROLL,
+#   facility,
 #   `NURSING HOME PROVIDER NAME` = "nhp_name",
 #   `AFFILIATION ENTITY NAME` = "aff_name"
-# ),
-# fqhc_owner = RE_OWNER2,
-# hha_owner = RE_OWNER2,
-# hospice_owner = RE_OWNER2,
-# rhc_owner = RE_OWNER2,
-# hospital_owner = RE_OWNER,
-# snf_owner = RE_OWNER
+# )
+
+# RE_OWNER2 = c(
+#   owner,
+#   `PRIVATE EQUITY COMPANY - OWNER` = "pe_ind",
+#   `REIT - OWNER` = "reit_ind",
+#   `CHAIN HOME OFFICE - OWNER` = "cho_ind",
+#   `OWNED BY ANOTHER ORG OR IND - OWNER` = "ano_ind"
+# )
+#
+# fqhc_owner, hha_owner, hospice_owner,
+# rhc_owner, hospital_owner, snf_owner

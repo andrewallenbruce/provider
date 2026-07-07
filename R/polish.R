@@ -137,7 +137,7 @@ S7::method(polish, s3_owner) <- function(x) {
   get_columns(x) |>
     rc_combine("address", "add_2") |>
     rc_bin(collapse::gvr(x, "_ind$", return = 2L)) |>
-    rc_ymd("asc_date") |>
+    rc_ymd("own_date") |>
     pivot_owner()
 }
 

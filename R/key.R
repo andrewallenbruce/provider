@@ -58,7 +58,7 @@ is_key <- function(x) {
 }
 
 #' @noRd
-as_key <- function(x, threshold = 150L) {
+as_key <- function(x, threshold) {
   x <- uq(x)
 
   if (!is.character(x)) {
@@ -84,18 +84,20 @@ as_key <- function(x, threshold = 150L) {
 carve <- S7::new_generic("carve", "x")
 
 #' @noRd
-S7::method(carve, s3_opted_out) <- function(x) {
+S7::method(carve, s3_opted_out) <- function(x, key, threshold) {
   x <- collapse::ss(x, x[["order_refer"]] %==% 1L, check = FALSE)
-  as_key(x[["npi"]], 150L)
+  key <- rlang::arg_match0(key, c("npi"))
+  as_key(x[[key]], threshold = threshold)
 }
 
 #' @noRd
-S7::method(carve, s3_hospital) <- function(x) {
-  as_key(x[["ccn"]], 200L)
+S7::method(carve, s3_hospital) <- function(x, key, threshold) {
+  key <- rlang::arg_match0(key, c("ccn", "npi", "pac", "enid"))
+  as_key(x[[key]], threshold = threshold)
 }
 
 #' @noRd
-S7::method(carve, s3_providers) <- function(x) {
-  # as_key(x[["npi"]], 1L)
-  uq(x[["npi"]])
+S7::method(carve, s3_providers) <- function(x, key, threshold) {
+  key <- rlang::arg_match0(key, c("npi", "pac", "enid"))
+  as_key(x[[key]], threshold = threshold)
 }

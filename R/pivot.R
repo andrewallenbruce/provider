@@ -156,7 +156,7 @@ pivot_accredit <- function(x) {
 
 #' @noRd
 pivot_owner <- function(x) {
-  y <- pivot2(x, "pac", "_ind$", "own_type", "own_otxt")
+  y <- pivot2(x, "own_pac", "_ind$", "own_type", "own_otxt")
 
   collapse::gvr(x, "_ind$|own_otxt") <- NULL
 
@@ -164,7 +164,7 @@ pivot_owner <- function(x) {
     return(add_empty(x, "own_type"))
   }
 
-  y <- ss_ind(y, c("pac", "own_type", "own_otxt"))
+  y <- ss_ind(y, c("own_pac", "own_type", "own_otxt"))
 
   if (no_rows(y)) {
     return(add_empty(x, "own_type"))
@@ -196,11 +196,11 @@ pivot_owner <- function(x) {
   y <- rc_other(y, "own_type", "own_otxt")
   y <- collapse::funique(y)
 
-  if (is_unique(y[["pac"]])) {
-    return(join2(x, y, "pac"))
+  if (is_unique(y[["own_pac"]])) {
+    return(join2(x, y, "own_pac"))
   }
 
-  join2(x, collapse_rows(y, "pac", "own_type"), "pac")
+  join2(x, collapse_rows(y, "own_pac", "own_type"), "own_pac")
 }
 
 #' @noRd
