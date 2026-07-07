@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9298 (2026-07-07)
+
+* choosing from a set of keys is now possible
+* added IRF/Inpatient/Outpatient Hospital links for future implementation
+
+
 # provider 0.0.1.9297 (2026-07-06)
 
 * renamed function: `opt_out` -> `opted_out`
