@@ -1,4 +1,4 @@
-# NPPES: National Registry of Health Care Providers
+# National Registry of Health Care Providers
 
 Search the National Plan and Provider Enumeration System (NPPES) NPI
 Registry, a free directory of all active NPI records.
@@ -211,24 +211,24 @@ nppes(x)
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
 #> ✔ Retrieving 1 page
-#> [working] (66 + 0) -> 10 -> 59 | ■■■■■■■■■■■■■■                    44%
+#> [working] (0 + 0) -> 4 -> 131 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    97%
 #> [working] (0 + 0) -> 0 -> 135 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> ✔ nppes returned 134/135 results
 #> $ind
 #> $ind$basic
 #> # A tibble: 134 × 10
-#>           npi entity first  last  sex    sole cred  other enum_date  last_update
-#>         <int>  <int> <chr>  <chr> <chr> <int> <chr> <chr> <date>     <date>     
-#>  1 1013227818      1 JENNI… SMITH F         0 LCSW  JENN… 2010-10-14 2023-09-26 
-#>  2 1013239268      1 JENNI… SMITH F         1 LMFT  JENN… 2010-02-15 2023-11-22 
-#>  3 1013467240      1 JENNI… SMITH F         0 PA-C  NA    2016-10-12 2016-10-12 
-#>  4 1013988013      1 JENNI… SMITH F         0 DO    NA    2006-01-28 2021-05-12 
-#>  5 1023408291      1 JENNI… SMITH F         0 NA    NA    2015-01-27 2026-01-20 
-#>  6 1033486725      1 JENNI… SMITH F         0 NA    NA    2011-11-22 2025-09-17 
-#>  7 1033553219      1 JENNI… SMITH F         1 M.S.  NA    2013-04-18 2013-04-18 
-#>  8 1053340471      1 JENNI… SMITH F         0 PA    NA    2006-06-30 2013-09-30 
-#>  9 1053842450      1 JENNI… SMITH F         0 D.O.  NA    2017-03-27 2022-07-27 
-#> 10 1063080125      1 JENNI… SMITH F         0 NP    NA    2021-06-15 2021-06-15 
+#>           npi entity cred  first  last  sex    sole other enum_date  last_update
+#>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
+#>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
+#>  2 1013239268      1 LMFT  JENNI… SMITH F         1 JENN… 2010-02-15 2023-11-22 
+#>  3 1013467240      1 PA-C  JENNI… SMITH F         0 NA    2016-10-12 2016-10-12 
+#>  4 1013988013      1 DO    JENNI… SMITH F         0 NA    2006-01-28 2021-05-12 
+#>  5 1023408291      1 NA    JENNI… SMITH F         0 NA    2015-01-27 2026-01-20 
+#>  6 1033486725      1 NA    JENNI… SMITH F         0 NA    2011-11-22 2025-09-17 
+#>  7 1033553219      1 M.S.  JENNI… SMITH F         1 NA    2013-04-18 2013-04-18 
+#>  8 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
+#>  9 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
+#> 10 1063080125      1 NP    JENNI… SMITH F         0 NA    2021-06-15 2021-06-15 
 #> # ℹ 124 more rows
 #> 
 #> $ind$taxonomy
