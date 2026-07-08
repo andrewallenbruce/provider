@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9300 (2026-07-08)
+
+- added new pdc uuids
+
 ## provider 0.0.1.9299 (2026-07-07)
 
 - added
