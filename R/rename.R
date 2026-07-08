@@ -461,7 +461,7 @@ RE_NAME = list(
     survey_response_rate_percent = "response",
     patients_rating_of_the_facility_linear_mean_score = "rating"
   ),
-  longterm = list(
+  long_term = list(
     cms_certification_number_ccn = "ccn",
     provider_name = "name",
     address_line_1 = "address",

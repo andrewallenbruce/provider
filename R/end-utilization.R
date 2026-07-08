@@ -118,7 +118,7 @@ utilization <- function(
   check_bool_(par)
 
   if (!is.null(entity)) {
-    entity <- rlang::arg_match(entity, c("I", "O"))
+    entity <- rlang::arg_match0(entity, c("I", "O"))
   }
 
   x <- end_cmslist(
@@ -183,11 +183,11 @@ services <- function(
   check_bool_(par)
 
   if (!is.null(entity)) {
-    entity <- rlang::arg_match(entity, c("I", "O"))
+    entity <- rlang::arg_match0(entity, c("I", "O"))
   }
 
   if (!is.null(pos)) {
-    pos <- rlang::arg_match(pos, c("F", "O"))
+    pos <- rlang::arg_match0(pos, c("F", "O"))
   }
   x <- end_cmslist(
     count = count,
@@ -241,13 +241,13 @@ geography <- function(
   check_numeric(payment)
 
   if (!is.null(pos)) {
-    pos <- rlang::arg_match(pos, c("F", "O"))
+    pos <- rlang::arg_match0(pos, c("F", "O"))
   }
 
   rlang::check_exclusive(level, state, .require = FALSE)
 
   if (!is.null(level)) {
-    level <- rlang::arg_match(level, c("National", "State"))
+    level <- rlang::arg_match0(level, c("National", "State"))
   }
 
   if (!is.null(state)) {

@@ -64,6 +64,5 @@ providers <- function(
   }
 
   x <- as_keyframe(x, "npi", 1L)
-
   chain(x, KeyChain$nppes)
 }

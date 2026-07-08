@@ -49,7 +49,7 @@ url_pdc <- function(x) {
       clinician = "mj5m-pzi6",
       dialysis = "23ew-n7w9",
       hospital2 = "xubh-q36u",
-      longterm = "azum-44iv", # Long-Term Care Hospital - General Information
+      long_term = "azum-44iv", # Long-Term Care Hospital - General Information
       mspb = "rrqw-56er", # Medicare Spending Per Beneficiary - Hospital
       msbc = "nrth-mfg3", # Medicare Hospital Spending by Claim
       nursing = "4pq5-n9py", # Nursing Homes Provider Information

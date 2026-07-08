@@ -37,6 +37,15 @@ S7::method(polish, s3_ambulatory) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_long_term) <- function(x) {
+  collapse::settfmv(x, "total_number_of_beds", as.integer)
+  set_rename(x)
+  get_columns(x) |>
+    rc_combine("address", "add_2") |>
+    rc_mdy("cert_date")
+}
+
+#' @noRd
 S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::recode_char(

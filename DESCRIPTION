@@ -53,7 +53,7 @@ Collate:
     'combine.R'
     'data.R'
     'end-affiliation.R'
-    'end-asc.R'
+    'end-ambulatory.R'
     'end-clia.R'
     'end-clinician.R'
     'end-enforcement.R'

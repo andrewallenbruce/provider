@@ -29,7 +29,7 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' owner(count = TRUE)
-#' owner(city = "Valdosta", state = "GA")
+#' owner(city = "Valdosta", state = "GA", fac_type = "Hospital")
 #' @export
 owner <- function(
   fac_type = NULL,
@@ -56,6 +56,10 @@ owner <- function(
       c("HHA", "RHC", "FQHC", "SNF", "Hospice", "Hospital"),
       multiple = TRUE
     )
+  }
+
+  if (!is.null(own_entity)) {
+    own_entity <- rlang::arg_match0(own_entity, c("I", "O"))
   }
 
   x <- end_cmslist(

@@ -73,6 +73,6 @@ Owners of facilities enrolled in Medicare.
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 owner(count = TRUE)
-owner(city = "Valdosta", state = "GA")
+owner(city = "Valdosta", state = "GA", fac_type = "Hospital")
 \dontshow{\}) # examplesIf}
 }
