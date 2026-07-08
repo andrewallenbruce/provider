@@ -19,8 +19,8 @@ as_keyframe <- function(x, key, threshold) {
       x = x,
       key = key,
       threshold = threshold
-      )
     )
+  )
 }
 
 #' @noRd

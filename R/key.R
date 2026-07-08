@@ -1,7 +1,11 @@
 #' (to - from) / by
 #' cheapr::seq_size(from = 1L, to = 500, by = 150)
 #'
-#' @param id `<int>` Vector of identifiers, i.e., NPIs, CCNs. ENIDs, PACs
+#'
+#' # Error: `x` and `by` must have the same size.
+#' Key(LETTERS, 15L)
+#'
+#' @param id `<chr>` Vector of identifiers, i.e., NPIs, CCNs. ENIDs, PACs
 #' @param threshold `<int>` Length at which `id` should repeatedly split into chunk
 #' @param length `<int>` Number of elements in `id` vector
 #' @param chunks `<int>` Number of chunks `id` vector will be split into

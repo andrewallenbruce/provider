@@ -45,9 +45,18 @@ url_pdc <- function(x) {
     switch(
       x,
       affiliations = "27ea-46a8",
+      ambulatory = "48nr-hqxx", # OAS CAHPS survey for ambulatory surgical centers - Facility
       clinician = "mj5m-pzi6",
-      hospital2 = "xubh-q36u",
       dialysis = "23ew-n7w9",
+      hospital2 = "xubh-q36u",
+      longterm = "azum-44iv", # Long-Term Care Hospital - General Information
+      mspb = "rrqw-56er", # Medicare Spending Per Beneficiary - Hospital
+      msbc = "nrth-mfg3", # Medicare Hospital Spending by Claim
+      nursing = "4pq5-n9py", # Nursing Homes Provider Information
+      psych = "q9vs-r7wp", # Inpatient Psychiatric Facility Quality Measure Data - by Facility
+      rehab = "7t8x-u3ir", # Inpatient Rehabilitation Facility - General Information
+      supplier = "ct36-nrcq", # Medical Equipment Suppliers
+      veteran = "uyx4-5s7f", # Veterans Health Administration Provider Level Data
       cli::cli_abort("{.strong {.pkg PDC} Endpoint} `{.field {x}}` not found.")
     ),
     "/0?"
