@@ -2,6 +2,8 @@
 
 ## Endpoints
 
+- [`ambulatory()`](https://andrewallenbruce.github.io/provider/reference/ambulatory.md)
+  : Ambulatory Surgical Centers
 - [`affiliations()`](https://andrewallenbruce.github.io/provider/reference/affiliations.md)
   : Provider-Facility Affiliations
 - [`clia()`](https://andrewallenbruce.github.io/provider/reference/clia.md)

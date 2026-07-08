@@ -88,19 +88,19 @@ outpatient(state = "GA", city = "Valdosta")
 #> ✔ outpatient returned 442 results
 #> ✔ Retrieving 10 pages
 #> # A tibble: 442 × 16
-#>     year ccn    org_name    address city  state zip   apc_code apc_desc patients
-#>    <int> <chr>  <chr>       <chr>   <chr> <chr> <chr> <chr>    <chr>       <int>
-#>  1  2015 110122 South Geor… 2501 N… Vald… GA    31603 0039     Level I…       11
-#>  2  2015 110122 South Geor… 2501 N… Vald… GA    31603 0061     Level I…       NA
-#>  3  2015 110122 South Geor… 2501 N… Vald… GA    31603 0083     Level I…      102
-#>  4  2015 110122 South Geor… 2501 N… Vald… GA    31603 0089     Level I…       72
-#>  5  2015 110122 South Geor… 2501 N… Vald… GA    31603 0090     Level I…       17
-#>  6  2015 110122 South Geor… 2501 N… Vald… GA    31603 0107     Level I…       NA
-#>  7  2015 110122 South Geor… 2501 N… Vald… GA    31603 0108     Level I…       14
-#>  8  2015 110122 South Geor… 2501 N… Vald… GA    31603 0202     Level V…       NA
-#>  9  2015 110122 South Geor… 2501 N… Vald… GA    31603 0229     Level I…      125
-#> 10  2015 110122 South Geor… 2501 N… Vald… GA    31603 0318     Level I…       32
+#>     year ccn    org_name address city  state zip   apc   desc  patients services
+#>    <int> <chr>  <chr>    <chr>   <chr> <chr> <chr> <chr> <chr>    <int>    <int>
+#>  1  2015 110122 South G… 2501 N… Vald… GA    31603 0039  Leve…       11       12
+#>  2  2015 110122 South G… 2501 N… Vald… GA    31603 0061  Leve…       NA       NA
+#>  3  2015 110122 South G… 2501 N… Vald… GA    31603 0083  Leve…      102      150
+#>  4  2015 110122 South G… 2501 N… Vald… GA    31603 0089  Leve…       72       72
+#>  5  2015 110122 South G… 2501 N… Vald… GA    31603 0090  Leve…       17       17
+#>  6  2015 110122 South G… 2501 N… Vald… GA    31603 0107  Leve…       NA       NA
+#>  7  2015 110122 South G… 2501 N… Vald… GA    31603 0108  Leve…       14       14
+#>  8  2015 110122 South G… 2501 N… Vald… GA    31603 0202  Leve…       NA       NA
+#>  9  2015 110122 South G… 2501 N… Vald… GA    31603 0229  Leve…      125      131
+#> 10  2015 110122 South G… 2501 N… Vald… GA    31603 0318  Leve…       32       32
 #> # ℹ 432 more rows
-#> # ℹ 6 more variables: services <int>, charge <dbl>, allowed <dbl>,
-#> #   payment <dbl>, outliers <int>, avg_out <dbl>
+#> # ℹ 5 more variables: outliers <int>, charge <dbl>, allowed <dbl>,
+#> #   payment <dbl>, outpay <dbl>
 ```

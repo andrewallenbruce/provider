@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9301 (2026-07-08)
+
+- new
+  [`ambulatory()`](https://andrewallenbruce.github.io/provider/reference/ambulatory.md)
+  lookup
+
 ## provider 0.0.1.9300 (2026-07-08)
 
 - added new pdc uuids

@@ -103,20 +103,20 @@ inpatient(state = "GA", city = "Valdosta")
 #> ✔ inpatient returned 12 results
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 18
-#>     year ccn    org_name       address city  zip   state patients charge payment
-#>    <int> <chr>  <chr>          <chr>   <chr> <chr> <chr>    <int>  <dbl>   <dbl>
-#>  1  2013 110122 SOUTH GEORGIA… 2501 N… VALD… 31603 GA        3564 1.63e8  4.99e7
-#>  2  2014 110122 SOUTH GEORGIA… 2501 N… VALD… 31603 GA        3249 1.67e8  4.65e7
-#>  3  2015 110122 SOUTH GEORGIA… 2501 N… VALD… 31603 GA        3139 1.83e8  4.79e7
-#>  4  2016 110122 SOUTH GEORGIA… 2501 N… VALD… 31603 GA        3061 1.86e8  4.83e7
-#>  5  2017 110122 SOUTH GEORGIA… 2501 N… VALD… 31602 GA        3105 1.80e8  4.68e7
-#>  6  2018 110122 SOUTH GEORGIA… 2501 N… VALD… 31602 GA        3162 1.96e8  5.29e7
-#>  7  2019 110122 SOUTH GEORGIA… 2501 N… VALD… 31602 GA        3010 1.89e8  5.40e7
-#>  8  2020 110122 SOUTH GEORGIA… 2501 N… VALD… 31602 GA        2696 1.70e8  5.35e7
-#>  9  2021 110122 SOUTH GEORGIA… 2501 N… VALD… 31602 GA        2648 1.75e8  5.36e7
-#> 10  2022 110122 South Georgia… 2501 N… Vald… 31602 GA        2276 1.49e8  4.41e7
-#> 11  2023 110122 Sgmc Health    2501 N… Vald… 31602 GA        2297 1.46e8  4.17e7
-#> 12  2024 110122 Sgmc Health    2501 N… Vald… 31602 GA        2229 1.53e8  4.33e7
-#> # ℹ 8 more variables: medicare <dbl>, discharges <int>, covered <int>,
-#> #   days <int>, dual <int>, ndual <int>, avg_age <dbl>, avg_risk <dbl>
+#>     year ccn    org_name     address city  state zip   patients discharges  days
+#>    <int> <chr>  <chr>        <chr>   <chr> <chr> <chr>    <int>      <int> <int>
+#>  1  2013 110122 SOUTH GEORG… 2501 N… VALD… GA    31603     3564       5172 27467
+#>  2  2014 110122 SOUTH GEORG… 2501 N… VALD… GA    31603     3249       4685 23852
+#>  3  2015 110122 SOUTH GEORG… 2501 N… VALD… GA    31603     3139       4493 23808
+#>  4  2016 110122 SOUTH GEORG… 2501 N… VALD… GA    31603     3061       4385 23621
+#>  5  2017 110122 SOUTH GEORG… 2501 N… VALD… GA    31602     3105       4236 22772
+#>  6  2018 110122 SOUTH GEORG… 2501 N… VALD… GA    31602     3162       4552 26145
+#>  7  2019 110122 SOUTH GEORG… 2501 N… VALD… GA    31602     3010       4452 23835
+#>  8  2020 110122 SOUTH GEORG… 2501 N… VALD… GA    31602     2696       3851 21038
+#>  9  2021 110122 SOUTH GEORG… 2501 N… VALD… GA    31602     2648       3754 21481
+#> 10  2022 110122 South Georg… 2501 N… Vald… GA    31602     2276       3204 18019
+#> 11  2023 110122 Sgmc Health  2501 N… Vald… GA    31602     2297       3355 16328
+#> 12  2024 110122 Sgmc Health  2501 N… Vald… GA    31602     2229       3339 16160
+#> # ℹ 8 more variables: covered <int>, charge <dbl>, payment <dbl>, mdcpay <dbl>,
+#> #   avg_age <dbl>, avg_risk <dbl>, dual <int>, ndual <int>
 ```

@@ -240,21 +240,7 @@ utilization(npi = 1003000423)
 services(npi = 1003000423)
 #> ✔ services returned 41 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 41 × 11
-#>     year      npi hcpcs description  drug pos   patients services charge allowed
-#>    <int>    <int> <chr> <chr>       <int> <chr>    <int>    <int>  <int>   <dbl>
-#>  1  2013   1.00e9 Q0091 Screening …     0 O           20       20     40    39.6
-#>  2  2014   1.00e9 Q0091 Screening …     0 O           13       13     40    39.2
-#>  3  2015   1.00e9 Q0091 Screening …     0 O           14       14     40    39.2
-#>  4  2016   1.00e9 Q0091 Screening …     0 O           20       20     40    39.2
-#>  5  2017   1.00e9 Q0091 Screening …     0 O           20       20     41    38.9
-#>  6  2018   1.00e9 Q0091 Screening …     0 O           18       18     50    41.6
-#>  7  2019   1.00e9 Q0091 Screening …     0 O           16       16     50    41.0
-#>  8  2020   1.00e9 Q0091 Screening …     0 O           15       15     51    41.0
-#>  9  2021   1.00e9 Q0091 Screening …     0 O           20       20     60    41.5
-#> 10  2022   1.00e9 Q0091 Screening …     0 O           15       15     60    40.9
-#> # ℹ 31 more rows
-#> # ℹ 1 more variable: payment <dbl>
+#> Error in ckmatch(cols, nam): Unknown columns: description
 
 geography(
   hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),
@@ -262,19 +248,5 @@ geography(
   state = c("National", "Ohio"))
 #> ✔ geography returned 168 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 168 × 12
-#>     year state  hcpcs description  drug pos   providers patients services charge
-#>    <int> <chr>  <chr> <chr>       <int> <chr>     <int>    <int>    <int>  <dbl>
-#>  1  2024 Natio… 76830 Ultrasound…     0 O         26009   224170   269595  349. 
-#>  2  2024 Ohio   76830 Ultrasound…     0 O           837     5548     6201  274. 
-#>  3  2024 Natio… 81002 Urinalysis…     0 O         94006  1459105  2205580   15.0
-#>  4  2024 Ohio   81002 Urinalysis…     0 O          5041    60373    88101   14.6
-#>  5  2024 Natio… 99203 New patien…     0 O        388139  6537424  8070604  267. 
-#>  6  2024 Ohio   99203 New patien…     0 O         15545   229830   268676  238. 
-#>  7  2024 Natio… 99212 Establishe…     0 O        319826  3989238  6241712  118. 
-#>  8  2024 Ohio   99212 Establishe…     0 O         13534   145434   203859  107. 
-#>  9  2024 Natio… 99213 Establishe…     0 O        631995 18637816 64778139  189. 
-#> 10  2024 Ohio   99213 Establishe…     0 O         25987   750987  2223611  177. 
-#> # ℹ 158 more rows
-#> # ℹ 2 more variables: allowed <dbl>, payment <dbl>
+#> Error in ckmatch(cols, nam): Unknown columns: description
 ```
