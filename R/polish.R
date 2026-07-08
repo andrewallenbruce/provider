@@ -283,22 +283,7 @@ S7::method(polish, s3_services) <- function(x) {
   )
 
   set_rename(x)
-  collapse::gv(
-    x,
-    c(
-      "year",
-      "npi",
-      "hcpcs",
-      "description",
-      "drug",
-      "pos",
-      "patients",
-      "services",
-      "charge",
-      "allowed",
-      "payment"
-    )
-  ) |>
+  get_columns(x) |>
     rc_bin("drug") |>
     collapse::roworderv(
       c("hcpcs", "year"),
@@ -332,24 +317,7 @@ S7::method(polish, s3_geography) <- function(x) {
   )
 
   set_rename(x)
-
-  collapse::gv(
-    x,
-    c(
-      "year",
-      "state",
-      "hcpcs",
-      "description",
-      "drug",
-      "pos",
-      "providers",
-      "patients",
-      "services",
-      "charge",
-      "allowed",
-      "payment"
-    )
-  ) |>
+  get_columns(x) |>
     rc_bin("drug") |>
     collapse::roworderv(
       c("year", "hcpcs"),

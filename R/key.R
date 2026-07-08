@@ -5,6 +5,9 @@
 #' # Error: `x` and `by` must have the same size.
 #' Key(LETTERS, 15L)
 #'
+#' # Works
+#' chunk(LETTERS, 15L, 26L, 6L)
+#'
 #' @param id `<chr>` Vector of identifiers, i.e., NPIs, CCNs. ENIDs, PACs
 #' @param threshold `<int>` Length at which `id` should repeatedly split into chunk
 #' @param length `<int>` Number of elements in `id` vector
@@ -50,7 +53,7 @@ Key <- S7::new_class(
         if (self@chunks <= 1L) {
           return()
         }
-        chunk(self, self@chunks, self@threshold, self@length)
+        chunk(self, self@threshold, self@length, self@chunks)
       }
     )
   )
@@ -82,6 +85,7 @@ as_key <- function(x, threshold) {
     return(S7::S7_data(x))
   }
   return(x)
+  # chunk(S7::S7_data(x), x@chunks, x@threshold, self@length)
 }
 
 #' @noRd
