@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9303 (2026-07-08)
+
+- fixed bug in key chunking
+
 ## provider 0.0.1.9302 (2026-07-08)
 
 - added
