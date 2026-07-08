@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9304 (2026-07-08)
+
+- added
+  [`supplier()`](https://andrewallenbruce.github.io/provider/reference/supplier.md)
+  endpoint
+
 ## provider 0.0.1.9303 (2026-07-08)
 
 - fixed bug in key chunking
