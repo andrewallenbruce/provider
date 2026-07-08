@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9299 (2026-07-07)
+
+* added `inpatient()` & `outpatient()`
+* fixed failing test
+
+
 # provider 0.0.1.9298 (2026-07-07)
 
 * choosing from a set of keys is now possible
