@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9302 (2026-07-08)
+
+- added
+  [`long_term()`](https://andrewallenbruce.github.io/provider/reference/long_term.md)
+  endpoint
+
 ## provider 0.0.1.9301 (2026-07-08)
 
 - new

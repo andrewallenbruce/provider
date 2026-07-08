@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9301</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9302</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -154,28 +154,22 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">owner</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">526,704</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">109</span> pages</span>
-<span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">owner</span> returned <span style="color: #BBBB00; font-weight: bold;">13</span> results</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">4</span> pages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    name           type  pac   enid  own_pac own_org own_dba own_date   own_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> GHHS HEALTHCA… HHA   3173… O201… 286065… LJP ME… <span style="color: #BB0000;">NA</span>      2011-06-23 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> GHHS HEALTHCA… HHA   3173… O201… 286065… LJP ME… <span style="color: #BB0000;">NA</span>      2011-06-23 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> HOSPITAL AUTH… SNF   1355… O201… 135533… HOSPIT… SOUTH … 2014-05-04 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SOUTH GEORGIA… SNF   1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SOUTH GEORGIA… Hosp… 1355… O200… 135535… SOUTH … HOSPIC… 2006-07-07 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> HOSPITAL AUTH… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> HOSPITAL AUTH… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> HOSPITAL AUTH… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> HOSPITAL AUTH… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: own_first &lt;chr&gt;, own_last &lt;chr&gt;, own_pct &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   own_role &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   own_type &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">owner</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, fac_type <span class="op">=</span> <span class="st">"Hospital"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">owner</span> returned <span style="color: #BBBB00; font-weight: bold;">8</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name  type  pac   enid  own_pac own_org own_dba own_date   own_title own_first</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> HOSP… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> HOSP… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> HOSP… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> HOSP… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: own_last &lt;chr&gt;, own_pct &lt;dbl&gt;, own_role &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, own_type &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

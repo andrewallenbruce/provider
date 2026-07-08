@@ -16,6 +16,8 @@
   : Facilities
 - [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
   : Hospitals Enrolled in Medicare
+- [`long_term()`](https://andrewallenbruce.github.io/provider/reference/long_term.md)
+  : Long-Term Care Hospitals
 - [`inpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
   : Inpatient Hospitals
 - [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)

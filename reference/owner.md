@@ -110,26 +110,20 @@ containing the search results.
 ``` r
 owner(count = TRUE)
 #> ◼ owner | 526,704 rows | 109 pages
-owner(city = "Valdosta", state = "GA")
-#> ✔ owner returned 13 results
-#> ✔ Retrieving 4 pages
-#> # A tibble: 13 × 18
-#>    name           type  pac   enid  own_pac own_org own_dba own_date   own_title
-#>  * <chr>          <chr> <chr> <chr> <chr>   <chr>   <chr>   <date>     <chr>    
-#>  1 GHHS HEALTHCA… HHA   3173… O201… 286065… LJP ME… NA      2011-06-23 NA       
-#>  2 GHHS HEALTHCA… HHA   3173… O201… 286065… LJP ME… NA      2011-06-23 NA       
-#>  3 HOSPITAL AUTH… SNF   1355… O201… 135533… HOSPIT… SOUTH … 2014-05-04 NA       
-#>  4 SOUTH GEORGIA… SNF   1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA       
-#>  5 SOUTH GEORGIA… Hosp… 1355… O200… 135535… SOUTH … HOSPIC… 2006-07-07 NA       
-#>  6 HOSPITAL AUTH… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 NA       
-#>  7 HOSPITAL AUTH… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 NA       
-#>  8 HOSPITAL AUTH… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 NA       
-#>  9 HOSPITAL AUTH… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 NA       
-#> 10 SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA       
-#> 11 SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA       
-#> 12 SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA       
-#> 13 SOUTH GEORGIA… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA       
-#> # ℹ 9 more variables: own_first <chr>, own_last <chr>, own_pct <dbl>,
-#> #   own_role <chr>, address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   own_type <chr>
+owner(city = "Valdosta", state = "GA", fac_type = "Hospital")
+#> ✔ owner returned 8 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 8 × 18
+#>   name  type  pac   enid  own_pac own_org own_dba own_date   own_title own_first
+#> * <chr> <chr> <chr> <chr> <chr>   <chr>   <chr>   <date>     <chr>     <chr>    
+#> 1 HOSP… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 NA        NA       
+#> 2 HOSP… Hosp… 1355… O200… 135533… HOSPIT… SOUTH … 2014-07-25 NA        NA       
+#> 3 HOSP… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 NA        NA       
+#> 4 HOSP… Hosp… 1355… O201… 135533… HOSPIT… SOUTH … 2014-05-01 NA        NA       
+#> 5 SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA        NA       
+#> 6 SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA        NA       
+#> 7 SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA        NA       
+#> 8 SOUT… Hosp… 1052… O202… 105276… SOUTH … SGMC H… 2023-11-01 NA        NA       
+#> # ℹ 8 more variables: own_last <chr>, own_pct <dbl>, own_role <chr>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, own_type <chr>
 ```
