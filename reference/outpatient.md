@@ -1,24 +1,24 @@
-# Outpatient Hospitals Enrolled in Medicare
+# Outpatient Hospitals
 
-Outpatient Hospitals Enrolled in Medicare
+Outpatient Hospitals
 
 ## Usage
 
 ``` r
 outpatient(
-  year,
+  year = NULL,
   ccn = NULL,
-  organization = NULL,
-  street = NULL,
+  org_name = NULL,
   city = NULL,
   state = NULL,
-  fips = NULL,
   zip = NULL,
-  ruca = NULL,
-  apc = NULL,
-  tidy = TRUE,
-  na.rm = TRUE,
-  ...
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  outliers = NULL,
+  count = FALSE
 )
 ```
 
@@ -26,77 +26,81 @@ outpatient(
 
 - year:
 
-  \< *integer* \> // **required** Year data was reported, in `YYYY`
-  format. Run
-  [`out_years()`](https://andrewallenbruce.github.io/provider/reference/years.md)
-  to return a vector of the years currently available.
+  `<int>` Year data was reported
 
 - ccn:
 
-  \< *integer* \> 6-digit CMS Certification Number
+  `<int>` 10-digit national provider identifier
 
-- organization:
+- org_name:
 
-  \< *character* \> Organization's name
+  `<chr>` Individual/Organizational provider's name
 
-- street:
+- city, state, zip:
 
-  \< *character* \> Street where provider is located
+  `<chr>` The provider's city and state, as reported in NPPES.
 
-- city:
+- patients:
 
-  \< *character* \> City where provider is located
+  `<int>` Total Medicare beneficiaries receiving services from the
+  provider
 
-- state:
+- services:
 
-  \< *character* \> State where provider is located
+  `<int>` Total provider services
 
-- fips:
+- charge:
 
-  \< *character* \> Provider's state FIPS code
+  `<int>` The total charges that the provider submitted for all services
 
-- zip:
+- allowed:
 
-  \< *character* \> Provider’s zip code
+  `<dbl>` The Medicare allowed amount for all provider services. This
+  figure is the sum of the amount Medicare pays, the deductible and
+  coinsurance amounts that the beneficiary is responsible for paying,
+  and any amounts that a third party is responsible for paying.
 
-- ruca:
+- payment:
 
-  \< *character* \> Provider’s RUCA code
+  `<dbl>` Total amount that Medicare paid after deductible and
+  coinsurance amounts have been deducted for all the provider's line
+  item services.
 
-- apc:
+- outliers:
 
-  \< *character* \> comprehensive ambulatory payment classification code
+  description
 
-- tidy:
+- count:
 
-  \< *boolean* \> // **default:** `TRUE` Tidy output
+  `<lgl>` Return the total row count
 
-- na.rm:
+## Value
 
-  \< *boolean* \> // **default:** `TRUE` Remove empty rows and columns
-
-- ...:
-
-  Empty
-
-## Note
-
-State/FIP values are restricted to 49 of the United States and the
-District of Columbia where hospitals are subjected to Medicare's
-Outpatient Prospective Payment System (OPPS). Maryland and US territory
-hospitals are excluded.
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
 
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
-outpatient(year = 2021, ccn = "110122")
-
-outpatient(year = 2021, state = "GA")
-
-out_years() |>
-map(\(x) outpatient(year = x,
-                    ccn = "110122")) |>
-                    list_rbind()
-}
+outpatient(count = TRUE)
+#> ◼ outpatient | 1,008,975 rows | 208 pages
+outpatient(state = "GA", city = "Valdosta")
+#> ✔ outpatient returned 442 results
+#> ✔ Retrieving 10 pages
+#> # A tibble: 442 × 16
+#>     year ccn    org_name    address city  state zip   apc_code apc_desc patients
+#>    <int> <chr>  <chr>       <chr>   <chr> <chr> <chr> <chr>    <chr>       <int>
+#>  1  2015 110122 South Geor… 2501 N… Vald… GA    31603 0039     Level I…       11
+#>  2  2015 110122 South Geor… 2501 N… Vald… GA    31603 0061     Level I…       NA
+#>  3  2015 110122 South Geor… 2501 N… Vald… GA    31603 0083     Level I…      102
+#>  4  2015 110122 South Geor… 2501 N… Vald… GA    31603 0089     Level I…       72
+#>  5  2015 110122 South Geor… 2501 N… Vald… GA    31603 0090     Level I…       17
+#>  6  2015 110122 South Geor… 2501 N… Vald… GA    31603 0107     Level I…       NA
+#>  7  2015 110122 South Geor… 2501 N… Vald… GA    31603 0108     Level I…       14
+#>  8  2015 110122 South Geor… 2501 N… Vald… GA    31603 0202     Level V…       NA
+#>  9  2015 110122 South Geor… 2501 N… Vald… GA    31603 0229     Level I…      125
+#> 10  2015 110122 South Geor… 2501 N… Vald… GA    31603 0318     Level I…       32
+#> # ℹ 432 more rows
+#> # ℹ 6 more variables: services <int>, charge <dbl>, allowed <dbl>,
+#> #   payment <dbl>, outliers <int>, avg_out <dbl>
 ```

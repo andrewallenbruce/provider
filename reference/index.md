@@ -14,6 +14,10 @@
   : Facilities
 - [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
   : Hospitals Enrolled in Medicare
+- [`inpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
+  : Inpatient Hospitals
+- [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)
+  : Outpatient Hospitals
 - [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
   : National Registry of Health Care Providers
 - [`opted_out()`](https://andrewallenbruce.github.io/provider/reference/opted_out.md)

@@ -1,5 +1,13 @@
 # Changelog
 
+## provider 0.0.1.9299 (2026-07-07)
+
+- added
+  [`inpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
+  &
+  [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)
+- fixed failing test
+
 ## provider 0.0.1.9298 (2026-07-07)
 
 - choosing from a set of keys is now possible
