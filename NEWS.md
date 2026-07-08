@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9302 (2026-07-08)
+
+* added `long_term()` endpoint
+
+
 # provider 0.0.1.9301 (2026-07-08)
 
 * new `ambulatory()` lookup
