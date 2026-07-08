@@ -84,6 +84,7 @@ navbar:
 reference:
 - title: Endpoints
   contents:
+  - ambulatory
   - affiliations
   - clia
   - clinician

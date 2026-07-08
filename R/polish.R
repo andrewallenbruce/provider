@@ -22,6 +22,21 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_ambulatory) <- function(x) {
+  collapse::settfmv(
+    x,
+    c(
+      "number_of_sampled_patients",
+      "number_of_completed_surveys",
+      "patients_rating_of_the_facility_linear_mean_score"
+    ),
+    as.integer
+  )
+  set_rename(x)
+  get_columns(x)
+}
+
+#' @noRd
 S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::recode_char(

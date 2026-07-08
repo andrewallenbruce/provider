@@ -77,6 +77,8 @@ EndpointPDC <- S7::new_class(
 )
 
 #' @noRd
+s3_ambulatory <- S7::new_S3_class("ambulatory")
+#' @noRd
 s3_affiliations <- S7::new_S3_class("affiliations")
 #' @noRd
 s3_clia <- S7::new_S3_class("clia")
