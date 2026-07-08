@@ -5,7 +5,7 @@ describe("url_cms()", {
         c(
           "clia",
           "hospital",
-          "opt_out",
+          "opted_out",
           "order_refer",
           "providers",
           "reassigned",

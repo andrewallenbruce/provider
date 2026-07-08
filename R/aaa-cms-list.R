@@ -80,7 +80,6 @@ url_cms_list <- function(x) {
       Hospital = "60625dc8-b621-45f0-9423-077fd133b13e"
     ),
     quality = cms_temporal("^Quality"),
-    rehab = cms_temporal("Inpatient Rehabilitation Facility :"),
     inpatient = cms_temporal("Inpatient Hospitals - by Provider :"),
     outpatient = cms_temporal("Outpatient Hospitals - by Provider"),
     utilization = cms_temporal("Practitioners - by Provider :"),

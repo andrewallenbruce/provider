@@ -332,3 +332,69 @@ S7::method(polish, s3_geography) <- function(x) {
       decreasing = c(TRUE, FALSE)
     )
 }
+
+#' @noRd
+S7::method(polish, s3_inpatient) <- function(x) {
+  x <- rowbind2(x, "year", fill = TRUE) |>
+    add_class("inpatient")
+
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "Tot_Benes",
+      "Tot_Dschrgs",
+      "Tot_Cvrd_Days",
+      "Tot_Days",
+      "Bene_Dual_Cnt",
+      "Bene_Ndual_Cnt"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "Bene_Avg_Age",
+      "Bene_Avg_Risk_Scre",
+      "Tot_Submtd_Cvrd_Chrg",
+      "Tot_Pymt_Amt",
+      "Tot_Mdcr_Pymt_Amt"
+    ),
+    as.double
+  )
+
+  set_rename(x)
+  get_columns(x) |>
+    collapse::roworderv(c("year", "ccn"))
+}
+
+#' @noRd
+S7::method(polish, s3_outpatient) <- function(x) {
+  x <- rowbind2(x, "year", fill = TRUE) |>
+    add_class("outpatient")
+
+  collapse::settfmv(
+    x,
+    c(
+      "year",
+      "Bene_Cnt",
+      "CAPC_Srvcs",
+      "Outlier_Srvcs"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "Avg_Tot_Sbmtd_Chrgs",
+      "Avg_Mdcr_Pymt_Amt",
+      "Avg_Mdcr_Alowd_Amt",
+      "Avg_Mdcr_Outlier_Amt"
+    ),
+    as.double
+  )
+
+  set_rename(x)
+  get_columns(x) |>
+    collapse::roworderv(c("year", "ccn"))
+}

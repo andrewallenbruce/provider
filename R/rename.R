@@ -363,7 +363,6 @@ RE_NAME = list(
   geography = list(
     year = "year",
     # Rndrng_Prvdr_Geo_Lvl = "level",
-    # Rndrng_Prvdr_Geo_Cd = "code",
     Rndrng_Prvdr_Geo_Desc = "state",
     HCPCS_Cd = "hcpcs",
     HCPCS_Desc = "description",
@@ -410,6 +409,44 @@ RE_NAME = list(
     `NON PROFIT - OWNER` = "np_ind",
     `OTHER TYPE - OWNER` = "oth_ind",
     `OTHER TYPE TEXT - OWNER` = "own_otxt"
+  ),
+  inpatient = list(
+    year = "year",
+    Rndrng_Prvdr_CCN = "ccn",
+    Rndrng_Prvdr_Org_Name = "org_name",
+    Rndrng_Prvdr_St = "address",
+    Rndrng_Prvdr_City = "city",
+    Rndrng_Prvdr_Zip5 = "zip",
+    Rndrng_Prvdr_State_Abrvtn = "state",
+    Tot_Benes = "patients",
+    Tot_Submtd_Cvrd_Chrg = "charge",
+    Tot_Pymt_Amt = "payment",
+    Tot_Mdcr_Pymt_Amt = "medicare",
+    Tot_Dschrgs = "discharges",
+    Tot_Cvrd_Days = "covered",
+    Tot_Days = "days",
+    Bene_Dual_Cnt = "dual",
+    Bene_Ndual_Cnt = "ndual",
+    Bene_Avg_Age = "avg_age",
+    Bene_Avg_Risk_Scre = "avg_risk"
+  ),
+  outpatient = list(
+    year = "year",
+    Rndrng_Prvdr_CCN = "ccn",
+    Rndrng_Prvdr_Org_Name = "org_name",
+    Rndrng_Prvdr_St = "address",
+    Rndrng_Prvdr_City = "city",
+    Rndrng_Prvdr_State_Abrvtn = "state",
+    Rndrng_Prvdr_Zip5 = "zip",
+    APC_Cd = "apc_code",
+    APC_Desc = "apc_desc",
+    Bene_Cnt = "patients",
+    CAPC_Srvcs = "services",
+    Avg_Tot_Sbmtd_Chrgs = "charge",
+    Avg_Mdcr_Alowd_Amt = "allowed",
+    Avg_Mdcr_Pymt_Amt = "payment",
+    Outlier_Srvcs = "outliers",
+    Avg_Mdcr_Outlier_Amt = "avg_out"
   )
 )
 

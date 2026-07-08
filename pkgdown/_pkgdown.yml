@@ -90,6 +90,8 @@ reference:
   - dialysis
   - facility
   - hospital
+  - inpatient
+  - outpatient
   - nppes
   - opted_out
   - order_refer

@@ -71,6 +71,7 @@ Collate:
     'execute.R'
     'import-standalone-obj-type.R'
     'import-standalone-types-check.R'
+    'iopatient.R'
     'key.R'
     'link.R'
     'modifier.R'

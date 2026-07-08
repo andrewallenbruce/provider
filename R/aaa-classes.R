@@ -116,3 +116,7 @@ s3_utilization <- S7::new_S3_class("utilization")
 s3_services <- S7::new_S3_class("services")
 #' @noRd
 s3_geography <- S7::new_S3_class("geography")
+#' @noRd
+s3_inpatient <- S7::new_S3_class("inpatient")
+#' @noRd
+s3_outpatient <- S7::new_S3_class("outpatient")
