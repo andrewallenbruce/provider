@@ -62,7 +62,6 @@ Collate:
     'end-in_outpatient.R'
     'end-nppes.R'
     'end-opted_out.R'
-    'end-order_refer.R'
     'end-owner.R'
     'end-pending.R'
     'end-providers.R'

@@ -46,6 +46,17 @@ S7::method(polish, s3_long_term) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_supplier) <- function(x) {
+  collapse::settfmv(x, "provider_id", as.integer)
+  collapse::settfmv(x, c("latitude", "longitude"), as.double)
+  set_rename(x)
+  get_columns(x) |>
+    rc_bin(c("par", "cba")) |>
+    rc_combine("address", "add_2") |>
+    rc_ymd("start_date")
+}
+
+#' @noRd
 S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::recode_char(

@@ -95,3 +95,78 @@ opted_out <- function(
 
   chain(x, KeyChain$order_refer)
 }
+
+#' Order and Refer Eligibility
+#'
+#' @description
+#' Eligibility to order and refer within Medicare
+#'
+#' @section Criteria:
+#'    - *Individual* NPI
+#'    - Medicare enrollment with *Approved* or *Opt-Out* status
+#'    - Eligible *specialty* type
+#'
+#' @section Types:
+#'    - *Ordering*: can order non-physician services for patients.
+#'    - *Referring/Certifying*: can request items/services Medicare may reimburse.
+#'    - *Opt-Out*: can enroll solely to order and refer.
+#'
+#' @section Services:
+#'    - *Medicare Part B*: Clinical Labs, Imaging
+#'    - *Medicare Part A*: Home Health
+#'    - *DMEPOS*: Durable medical equipment, prosthetics, orthotics, & supplies
+#'
+#' @references
+#'    - [API: Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+#'    - [CMS: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
+#'
+#' @param npi `<int>` National Provider Identifier
+#' @param first,last `<chr>` Individual provider's first/last name
+#' @param ptb,dme,hha,pmd,hospice `<lgl>` Eligibility for:
+#'    - `ptb`: Medicare Part B
+#'    - `dme`: Durable Medical Equipment
+#'    - `hha`: Home Health Agency
+#'    - `pmd`: Power Mobility Devices
+#'    - `hospice`: Hospice
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf httr2::is_online()
+#' order_refer(count = TRUE)
+#'
+#' order_refer(first = "Jennifer", last = "Smith")
+#'
+#' @export
+order_refer <- function(
+  npi = NULL,
+  first = NULL,
+  last = NULL,
+  ptb = NULL,
+  dme = NULL,
+  hha = NULL,
+  pmd = NULL,
+  hospice = NULL,
+  count = FALSE
+) {
+  check_bool_(ptb)
+  check_bool_(dme)
+  check_bool_(hha)
+  check_bool_(pmd)
+  check_bool_(hospice)
+
+  x <- end_cms(
+    count = count,
+    set = FALSE,
+    NPI = npi,
+    FIRST_NAME = first,
+    LAST_NAME = last,
+    PARTB = tag_bool(ptb),
+    DME = tag_bool(dme),
+    HHA = tag_bool(hha),
+    PMD = tag_bool(pmd),
+    HOSPICE = tag_bool(hospice)
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
