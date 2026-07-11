@@ -37,6 +37,36 @@ S7::method(polish, s3_ambulatory) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_nursing) <- function(x) {
+  collapse::settfmv(
+    x,
+    c(
+      "number_of_certified_beds",
+      "number_of_facilities_in_chain",
+      "overall_rating",
+      "number_of_fines",
+      "number_of_payment_denials",
+      "total_number_of_penalties"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "average_number_of_residents_per_day",
+      "chain_average_overall_5star_rating",
+      "total_amount_of_fines_in_dollars",
+      "latitude",
+      "longitude"
+    ),
+    as.double
+  )
+  set_rename(x)
+  get_columns(x) |>
+    rc_ymd("cert_date")
+}
+
+#' @noRd
 S7::method(polish, s3_long_term) <- function(x) {
   collapse::settfmv(x, "total_number_of_beds", as.integer)
   set_rename(x)
