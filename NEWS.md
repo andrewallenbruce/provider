@@ -1,5 +1,13 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9306 (2026-07-11)
+
+* added `psych()` endpoint
+* added `rehab()` endpoint
+* added `veteran()` endpoint
+* `providers()` renamed to `enrolled()`
+
+
 # provider 0.0.1.9305 (2026-07-11)
 
 * added `nursing()` endpoint
