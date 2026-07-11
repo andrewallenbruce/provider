@@ -63,14 +63,6 @@ url_pdc <- function(x) {
   )
 }
 
-#' @include aaa-classes.R
-#' @noRd
-param_pdc <- function(...) {
-  x <- ParamPDC(params(...))
-  check_named(x)
-  return(x)
-}
-
 #' @noRd
 end_pdc <- function(
   count = FALSE,

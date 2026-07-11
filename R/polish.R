@@ -275,6 +275,7 @@ S7::method(polish, s3_transparency) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_veteran) <- function(x) {
+  collapse::setv(x[["hospital_overall_rating"]], "Not Available", NA)
   collapse::settfmv(x, "hospital_overall_rating", as.integer)
   set_rename(x)
   get_columns(x) |>

@@ -19,14 +19,14 @@
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' providers(count = TRUE)
+#' enrolled(count = TRUE)
 #'
-#' providers(count = TRUE, org_name = not_blank())
+#' enrolled(count = TRUE, org_name = not_blank())
 #'
-#' providers(org_name = starts("AB"), state = "GA")
+#' enrolled(org_name = starts("AB"), state = "GA")
 #'
 #' @export
-providers <- function(
+enrolled <- function(
   npi = NULL,
   pac = NULL,
   enid = NULL,

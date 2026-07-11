@@ -2,7 +2,21 @@
 ParamCMS <- S7::new_class("ParamCMS", S7::class_list, package = NULL)
 
 #' @noRd
+param_cms <- function(...) {
+  x <- ParamCMS(params(...))
+  check_named(x)
+  return(x)
+}
+
+#' @noRd
 ParamPDC <- S7::new_class("ParamPDC", S7::class_list, package = NULL)
+
+#' @noRd
+param_pdc <- function(...) {
+  x <- ParamPDC(params(...))
+  check_named(x)
+  return(x)
+}
 
 #' @noRd
 Endpoint <- S7::new_class(
