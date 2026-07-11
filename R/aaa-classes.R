@@ -77,16 +77,19 @@ EndpointPDC <- S7::new_class(
 )
 
 #' @noRd
-s3_nursing <- S7::new_S3_class("nursing")
+s3_msbc <- S7::new_S3_class("msbc")
 #' @noRd
+s3_mspb <- S7::new_S3_class("mspb")
 #' @noRd
-s3_supplier <- S7::new_S3_class("supplier")
+s3_psych <- S7::new_S3_class("psych")
 #' @noRd
-s3_long_term <- S7::new_S3_class("long_term")
+s3_rehab <- S7::new_S3_class("rehab")
 #' @noRd
-s3_ambulatory <- S7::new_S3_class("ambulatory")
+s3_veteran <- S7::new_S3_class("veteran")
 #' @noRd
 s3_affiliations <- S7::new_S3_class("affiliations")
+#' @noRd
+s3_ambulatory <- S7::new_S3_class("ambulatory")
 #' @noRd
 s3_clia <- S7::new_S3_class("clia")
 #' @noRd
@@ -94,23 +97,31 @@ s3_clinician <- S7::new_S3_class("clinician")
 #' @noRd
 s3_dialysis <- S7::new_S3_class("dialysis")
 #' @noRd
+s3_enrolled <- S7::new_S3_class("enrolled")
+#' @noRd
 s3_facility <- S7::new_S3_class("facility")
 #' @noRd
 s3_hospital <- S7::new_S3_class("hospital")
 #' @noRd
 s3_hospital2 <- S7::new_S3_class("hospital2")
 #' @noRd
+s3_inpatient <- S7::new_S3_class("inpatient")
+#' @noRd
+s3_long_term <- S7::new_S3_class("long_term")
+#' @noRd
 s3_nppes <- S7::new_S3_class("nppes")
+#' @noRd
+s3_nursing <- S7::new_S3_class("nursing")
 #' @noRd
 s3_opted_out <- S7::new_S3_class("opted_out")
 #' @noRd
 s3_order_refer <- S7::new_S3_class("order_refer")
 #' @noRd
+s3_outpatient <- S7::new_S3_class("outpatient")
+#' @noRd
 s3_owner <- S7::new_S3_class("owner")
 #' @noRd
 s3_pending <- S7::new_S3_class("pending")
-#' @noRd
-s3_providers <- S7::new_S3_class("providers")
 #' @noRd
 s3_quality <- S7::new_S3_class("quality")
 #' @noRd
@@ -120,12 +131,10 @@ s3_revoked <- S7::new_S3_class("revoked")
 #' @noRd
 s3_transparency <- S7::new_S3_class("transparency")
 #' @noRd
+s3_supplier <- S7::new_S3_class("supplier")
+#' @noRd
 s3_utilization <- S7::new_S3_class("utilization")
 #' @noRd
 s3_services <- S7::new_S3_class("services")
 #' @noRd
 s3_geography <- S7::new_S3_class("geography")
-#' @noRd
-s3_inpatient <- S7::new_S3_class("inpatient")
-#' @noRd
-s3_outpatient <- S7::new_S3_class("outpatient")

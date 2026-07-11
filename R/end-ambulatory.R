@@ -43,7 +43,7 @@ ambulatory <- function(
   polish(x)
 }
 
-#' Long-Term Care Hospitals
+#' Inpatient Psychiatric Facilities
 #'
 #' @description Access information concerning individual providers'
 #'    affiliations with organizations/facilities.
@@ -54,145 +54,118 @@ ambulatory <- function(
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc
 #' @param city,state,zip,county `<chr>` desc
-#' @param own_type description
-#' @param beds `<int>` desc
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
-#' long_term(count = TRUE)
-#' long_term(state = "GA")
+#' psych(count = TRUE)
+#' psych(state = "GA")
 #' @export
-long_term <- function(
+psych <- function(
   ccn = NULL,
   name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   county = NULL,
-  own_type = NULL,
-  beds = NULL,
-  count = FALSE
-) {
-  x <- end_pdc(
-    count = count,
-    set = FALSE,
-    cms_certification_number_ccn = ccn,
-    provider_name = name,
-    citytown = city,
-    state = state,
-    zip_code = zip,
-    countyparish = county,
-    ownership_type = own_type,
-    total_number_of_beds = beds
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' Medical Equipment Suppliers
-#'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
-#'
-#' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-#'
-#' @param id `<chr>` provider identifier
-#' @param par `<lgl>` description
-#' @param org_dba `<chr>` desc
-#' @param org_name `<chr>` desc
-#' @param city,state,zip `<chr>` desc
-#' @param specialty description
-#' @param prov_type description
-#' @param supplies `<int>` desc
-#' @param count `<lgl>` Return the total row count
-#' @returns A [tibble][tibble::tibble-package] containing the search results.
-#' @examplesIf httr2::is_online()
-#' supplier(count = TRUE)
-#' supplier(state = "GA")
-#' @export
-supplier <- function(
-  id = NULL,
-  par = NULL,
-  org_dba = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  specialty = NULL,
-  prov_type = NULL,
-  supplies = NULL,
-  count = FALSE
-) {
-  x <- end_pdc(
-    count = count,
-    set = FALSE,
-    provider_id = id,
-    acceptsassignement = tag_bool(par),
-    businessname = org_dba,
-    practicename = org_name,
-    practicecity = city,
-    practicestate = state,
-    practicezip9code = zip,
-    specialitieslist = specialty,
-    providertypelist = prov_type,
-    supplieslist = supplies
-  )
-
-  x <- execute(x)
-
-  polish(x)
-}
-
-#' Nursing Homes
-#'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
-#'
-#' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-#'
-#' @param ccn `<chr>` provider identifier
-#' @param name `<chr>` description
-#' @param org_name `<chr>` desc
-#' @param org_dba `<chr>` desc
-#' @param city,state,zip,county `<chr>` desc
-#' @param beds `<int>` description
-#' @param rating `<int>` description
-#' @param count `<lgl>` Return the total row count
-#' @returns A [tibble][tibble::tibble-package] containing the search results.
-#' @examplesIf httr2::is_online()
-#' nursing(count = TRUE)
-#' nursing(state = "GA")
-#' @export
-nursing <- function(
-  ccn = NULL,
-  name = NULL,
-  org_dba = NULL,
-  org_name = NULL,
-  city = NULL,
-  state = NULL,
-  zip = NULL,
-  county = NULL,
-  beds = NULL,
   rating = NULL,
   count = FALSE
 ) {
   x <- end_pdc(
     count = count,
     set = FALSE,
-    cms_certification_number_ccn = ccn,
-    provider_name = name,
-    chain_name = org_name,
-    legal_business_name = org_dba,
-    number_of_certified_beds = beds,
-    overall_rating = rating,
+    facility_id = ccn,
+    facility_name = name,
     citytown = city,
     state = state,
     zip_code = zip,
     countyparish = county
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' Inpatient Rehabilitation Facilities
+#'
+#' @description Access information concerning individual providers'
+#'    affiliations with organizations/facilities.
+#'
+#' @source
+#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'
+#' @param ccn `<chr>` desc
+#' @param name `<chr>` desc
+#' @param city,state,zip,county `<chr>` desc
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf httr2::is_online()
+#' rehab(count = TRUE)
+#' rehab(state = "GA")
+#' @export
+rehab <- function(
+  ccn = NULL,
+  name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  count = FALSE
+) {
+  x <- end_pdc(
+    count = count,
+    set = FALSE,
+    cms_certification_number_ccn = ccn,
+    provider_name = name,
+    citytown = city,
+    state = state,
+    zip_code = zip,
+    countyparish = county
+  )
+
+  x <- execute(x)
+
+  polish(x)
+}
+
+#' Veterans Health Administration Providers
+#'
+#' @description Access information concerning individual providers'
+#'    affiliations with organizations/facilities.
+#'
+#' @source
+#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'
+#' @param ccn `<chr>` desc
+#' @param name `<chr>` desc
+#' @param city,state,zip,county `<chr>` desc
+#' @param rating `<int>` desc
+#' @param count `<lgl>` Return the total row count
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf httr2::is_online()
+#' veteran(count = TRUE)
+#' veteran(state = "GA")
+#' @export
+veteran <- function(
+  ccn = NULL,
+  name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  county = NULL,
+  rating = NULL,
+  count = FALSE
+) {
+  x <- end_pdc(
+    count = count,
+    set = FALSE,
+    facility_id = ccn,
+    facility_name = name,
+    citytown = city,
+    state = state,
+    zip_code = zip,
+    countyparish = county,
+    hospital_overall_rating = rating
   )
 
   x <- execute(x)

@@ -72,11 +72,15 @@ S7::method(link, list(s3_opted_out, s3_order_refer)) <- function(x, y) {
 S7::method(link, list(s3_hospital, s3_hospital2)) <- function(x, y) {
   y <- ss_cols(y, c("ccn", "rating", "county", "status"))
   x <- join2(x, y, on = "ccn")
-  rc_replace(x, "status", "status_y")
+  rc_replace(x, "status", "status_y") |>
+    collapse::colorderv(
+      c("address", "city", "state", "zip", "county"),
+      pos = "end"
+    )
 }
 
 #' @noRd
-S7::method(link, list(s3_providers, s3_nppes)) <- function(x, y) {
+S7::method(link, list(s3_enrolled, s3_nppes)) <- function(x, y) {
   y <- collapse::get_elem(y, "taxonomy")
 
   if (!rlang::is_empty(collapse::list_elem(y))) {

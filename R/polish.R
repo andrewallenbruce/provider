@@ -22,71 +22,6 @@ S7::method(polish, S7::class_data.frame) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_ambulatory) <- function(x) {
-  collapse::settfmv(
-    x,
-    c(
-      "number_of_sampled_patients",
-      "number_of_completed_surveys",
-      "patients_rating_of_the_facility_linear_mean_score"
-    ),
-    as.integer
-  )
-  set_rename(x)
-  get_columns(x)
-}
-
-#' @noRd
-S7::method(polish, s3_nursing) <- function(x) {
-  collapse::settfmv(
-    x,
-    c(
-      "number_of_certified_beds",
-      "number_of_facilities_in_chain",
-      "overall_rating",
-      "number_of_fines",
-      "number_of_payment_denials",
-      "total_number_of_penalties"
-    ),
-    as.integer
-  )
-  collapse::settfmv(
-    x,
-    c(
-      "average_number_of_residents_per_day",
-      "chain_average_overall_5star_rating",
-      "total_amount_of_fines_in_dollars",
-      "latitude",
-      "longitude"
-    ),
-    as.double
-  )
-  set_rename(x)
-  get_columns(x) |>
-    rc_ymd("cert_date")
-}
-
-#' @noRd
-S7::method(polish, s3_long_term) <- function(x) {
-  collapse::settfmv(x, "total_number_of_beds", as.integer)
-  set_rename(x)
-  get_columns(x) |>
-    rc_combine("address", "add_2") |>
-    rc_mdy("cert_date")
-}
-
-#' @noRd
-S7::method(polish, s3_supplier) <- function(x) {
-  collapse::settfmv(x, "provider_id", as.integer)
-  collapse::settfmv(x, c("latitude", "longitude"), as.double)
-  set_rename(x)
-  get_columns(x) |>
-    rc_bin(c("par", "cba")) |>
-    rc_combine("address", "add_2") |>
-    rc_ymd("start_date")
-}
-
-#' @noRd
 S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::recode_char(
@@ -101,6 +36,21 @@ S7::method(polish, s3_affiliations) <- function(x) {
     "Skilled nursing facility" = "SNF",
     default = NA_character_,
     set = TRUE
+  )
+  set_rename(x)
+  get_columns(x)
+}
+
+#' @noRd
+S7::method(polish, s3_ambulatory) <- function(x) {
+  collapse::settfmv(
+    x,
+    c(
+      "number_of_sampled_patients",
+      "number_of_completed_surveys",
+      "patients_rating_of_the_facility_linear_mean_score"
+    ),
+    as.integer
   )
   set_rename(x)
   get_columns(x)
@@ -138,6 +88,14 @@ S7::method(polish, s3_dialysis) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_enrolled) <- function(x) {
+  collapse::settfmv(x, "NPI", as.integer)
+  set_rename(x)
+  get_columns(x) |>
+    rc_bin("multi")
+}
+
+#' @noRd
 S7::method(polish, s3_facility) <- function(x) {
   x <- rowbind2(x, "fac_type", fill = TRUE) |>
     add_class("facility")
@@ -172,6 +130,45 @@ S7::method(polish, s3_hospital2) <- function(x) {
   collapse::settfmv(x, "hospital_overall_rating", as.integer)
   set_rename(x)
   get_columns(x)
+}
+
+#' @noRd
+S7::method(polish, s3_long_term) <- function(x) {
+  collapse::settfmv(x, "total_number_of_beds", as.integer)
+  set_rename(x)
+  get_columns(x) |>
+    rc_combine("address", "add_2") |>
+    rc_mdy("cert_date")
+}
+
+#' @noRd
+S7::method(polish, s3_nursing) <- function(x) {
+  collapse::settfmv(
+    x,
+    c(
+      "number_of_certified_beds",
+      "number_of_facilities_in_chain",
+      "overall_rating",
+      "number_of_fines",
+      "number_of_payment_denials",
+      "total_number_of_penalties"
+    ),
+    as.integer
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "average_number_of_residents_per_day",
+      "chain_average_overall_5star_rating",
+      "total_amount_of_fines_in_dollars",
+      "latitude",
+      "longitude"
+    ),
+    as.double
+  )
+  set_rename(x)
+  get_columns(x) |>
+    rc_ymd("cert_date")
 }
 
 #' @noRd
@@ -218,11 +215,9 @@ S7::method(polish, s3_pending) <- function(x) {
 }
 
 #' @noRd
-S7::method(polish, s3_providers) <- function(x) {
-  collapse::settfmv(x, "NPI", as.integer)
+S7::method(polish, s3_psych) <- function(x) {
   set_rename(x)
-  get_columns(x) |>
-    rc_bin("multi")
+  get_columns(x)
 }
 
 #' @noRd
@@ -241,6 +236,14 @@ S7::method(polish, s3_reassigned) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_rehab) <- function(x) {
+  set_rename(x)
+  get_columns(x) |>
+    rc_combine("address", "add_2") |>
+    rc_mdy("cert_date")
+}
+
+#' @noRd
 S7::method(polish, s3_revoked) <- function(x) {
   collapse::settfmv(x, "NPI", as.integer)
   set_rename(x)
@@ -251,12 +254,31 @@ S7::method(polish, s3_revoked) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_supplier) <- function(x) {
+  collapse::settfmv(x, "provider_id", as.integer)
+  collapse::settfmv(x, c("latitude", "longitude"), as.double)
+  set_rename(x)
+  get_columns(x) |>
+    rc_bin(c("par", "cba")) |>
+    rc_combine("address", "add_2") |>
+    rc_ymd("start_date")
+}
+
+#' @noRd
 S7::method(polish, s3_transparency) <- function(x) {
   collapse::settfmv(x, "Case_ID", as.integer)
   set_rename(x)
   get_columns(x) |>
     rc_ymd("action_date") |>
     rc_trim()
+}
+
+#' @noRd
+S7::method(polish, s3_veteran) <- function(x) {
+  collapse::settfmv(x, "hospital_overall_rating", as.integer)
+  set_rename(x)
+  get_columns(x) |>
+    rc_bin("emergency")
 }
 
 #' @noRd

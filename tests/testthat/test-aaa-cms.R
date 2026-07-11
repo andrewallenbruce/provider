@@ -7,7 +7,7 @@ describe("url_cms()", {
           "hospital",
           "opted_out",
           "order_refer",
-          "providers",
+          "enrolled",
           "reassigned",
           "revoked",
           "transparency"

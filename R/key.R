@@ -85,7 +85,6 @@ as_key <- function(x, threshold) {
     return(S7::S7_data(x))
   }
   return(x)
-  # chunk(S7::S7_data(x), x@chunks, x@threshold, self@length)
 }
 
 #' @noRd
@@ -101,11 +100,14 @@ S7::method(carve, s3_opted_out) <- function(x, key, threshold) {
 #' @noRd
 S7::method(carve, s3_hospital) <- function(x, key, threshold) {
   key <- rlang::arg_match0(key, c("ccn", "npi", "pac", "enid"))
+  if (key == "ccn") {
+    as_key(x[[key]][is_numeric(x[[key]])], threshold = threshold)
+  }
   as_key(x[[key]], threshold = threshold)
 }
 
 #' @noRd
-S7::method(carve, s3_providers) <- function(x, key, threshold) {
+S7::method(carve, s3_enrolled) <- function(x, key, threshold) {
   key <- rlang::arg_match0(key, c("npi", "pac", "enid"))
   as_key(x[[key]], threshold = threshold)
 }

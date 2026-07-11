@@ -89,22 +89,25 @@ reference:
   - clia
   - clinician
   - dialysis
+  - enrolled
   - facility
   - hospital
-  - long_term
   - inpatient
-  - outpatient
+  - long_term
   - nppes
+  - nursing
   - opted_out
   - order_refer
+  - outpatient
   - owner
   - pending
-  - providers
+  - psych
   - quality
   - reassigned
+  - rehab
   - revoked
   - supplier
-  - nursing
   - transparency
   - utilization
+  - veteran
   - modifier
