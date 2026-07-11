@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9305 (2026-07-11)
+
+* added `nursing()` endpoint
+
+
 # provider 0.0.1.9304 (2026-07-08)
 
 * added `supplier()` endpoint
