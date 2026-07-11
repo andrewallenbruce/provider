@@ -141,7 +141,7 @@ hospital(prov_type = "cah", state = "GA")
 #> ✔ Retrieving 1 page
 #> # A tibble: 65 × 18
 #>    org_name    org_dba ccn      npi pac   enid  multi inc_date   org_type status
-#>    <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
+#>  * <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #>  1 BROOKS COU… ARCHBO… 11Z3… 1.58e9 1557… O200…     0 NA         Other: … Non-P…
 #>  2 HOSPITAL A… ARCHBO… 1113… 1.70e9 6002… O200…     0 NA         Other: … Gover…
 #>  3 HOSPITAL A… ARCHBO… 11Z3… 1.44e9 6002… O200…     0 NA         Other: … Non-P…
@@ -153,8 +153,8 @@ hospital(prov_type = "cah", state = "GA")
 #>  9 HOSPITAL A… WILLS … 1113… 1.62e9 8628… O200…     0 NA         Other: … Gover…
 #> 10 HOSPITAL A… WILLS … 11Z3… 1.48e9 8628… O200…     0 NA         Other: … Non-P…
 #> # ℹ 55 more rows
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 
 hospital(
   city = "Atlanta",
@@ -167,7 +167,7 @@ hospital(
 #> ✔ Retrieving 1 page
 #> # A tibble: 12 × 18
 #>    org_name    org_dba ccn      npi pac   enid  multi inc_date   org_type status
-#>    <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
+#>  * <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #>  1 SCOTTISH R… CHILDR… 1133… 1.92e9 4981… O200…     0 1915-04-10 Corpora… Volun…
 #>  2 PIEDMONT H… NA      1100… 1.96e9 8628… O200…     0 1940-06-26 Corpora… Gover…
 #>  3 EMORY UNIV… EMORY … 11S0… 1.44e9 3173… O200…     1 1994-03-04 Corpora… Non-P…
@@ -180,6 +180,6 @@ hospital(
 #> 10 ES REHABIL… EMORY … 1130… 1.55e9 1254… O201…     0 2013-10-15 LLC      For-P…
 #> 11 SELECT SPE… SELECT… 1120… 1.24e9 6305… O201…     0 NA         LLC      For-P…
 #> 12 REHABILITA… REHABI… 1130… 1.54e9 5698… O202…     0 2020-10-16 LLC      For-P…
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 ```

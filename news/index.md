@@ -1,5 +1,19 @@
 # Changelog
 
+## provider 0.0.1.9306 (2026-07-11)
+
+- added
+  [`psych()`](https://andrewallenbruce.github.io/provider/reference/psych.md)
+  endpoint
+- added
+  [`rehab()`](https://andrewallenbruce.github.io/provider/reference/rehab.md)
+  endpoint
+- added
+  [`veteran()`](https://andrewallenbruce.github.io/provider/reference/veteran.md)
+  endpoint
+- `providers()` renamed to
+  [`enrolled()`](https://andrewallenbruce.github.io/provider/reference/enrolled.md)
+
 ## provider 0.0.1.9305 (2026-07-11)
 
 - added
@@ -87,8 +101,8 @@
 
 ## provider 0.0.1.9288 (2026-07-02)
 
-- [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
-  now joins the primary taxonomy automatically, via a chain with
+- `providers()` now joins the primary taxonomy automatically, via a
+  chain with
   [`nppes()`](https://andrewallenbruce.github.io/provider/reference/nppes.md)
 
 ## provider 0.0.1.9287 (2026-07-01)
@@ -1308,8 +1322,7 @@
 
 ## provider 0.0.1.9014 (2026-03-07)
 
-- refactored
-  [`providers()`](https://andrewallenbruce.github.io/provider/reference/providers.md)
+- refactored `providers()`
 
 ## provider 0.0.1.9013 (2026-03-06)
 

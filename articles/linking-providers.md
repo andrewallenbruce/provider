@@ -30,14 +30,14 @@ x
 #> $organization
 #> # A tibble: 5 × 18
 #>   org_name     org_dba ccn      npi pac   enid  multi inc_date   org_type status
-#>   <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
+#> * <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #> 1 CHAMPLAIN V… THE UN… 3302… 1.03e9 2769… O201…     0 1926-01-01 Corpora… Volun…
 #> 2 ALICE HYDE … THE UN… 3313… 1.11e9 4082… O202…     0 1905-04-13 Corpora… Volun…
 #> 3 CENTRAL VER… NA      4700… 1.51e9 9335… O200…     0 1984-03-01 Corpora… Volun…
 #> 4 UNIVERSITY … UNIVER… 4700… 1.57e9 3779… O200…     0 1995-01-01 Corpora… Volun…
 #> 5 PORTER HOSP… NA      4713… 1.74e9 1850… O200…     1 1986-11-14 Corpora… Volun…
-#> # ℹ 8 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#> #   loc_type <chr>, sub_group <chr>, rating <int>, county <chr>
+#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 
 reassigned(pac = 7810891009) |> str()
 #> ✔ reassigned returned 1 result
@@ -102,13 +102,13 @@ hospital(org_name = x) |> str()
 #>  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"
 #>  $ org_type : chr [1:2] "Corporation" "Corporation"
 #>  $ status   : chr [1:2] "Voluntary non-profit - Private" "Non-Profit"
+#>  $ loc_type : chr [1:2] "Other" "Other"
+#>  $ sub_group: chr [1:2] "CAH" "CAH"
+#>  $ rating   : int [1:2] 4 NA
 #>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
 #>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
 #>  $ state    : chr [1:2] "NY" "NY"
 #>  $ zip      : chr [1:2] "129322300" "129322300"
-#>  $ loc_type : chr [1:2] "Other" "Other"
-#>  $ sub_group: chr [1:2] "CAH" "CAH"
-#>  $ rating   : int [1:2] 4 NA
 #>  $ county   : chr [1:2] "ESSEX" NA
 
 clinician(org_name = x) |> str()
