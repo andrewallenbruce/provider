@@ -211,10 +211,10 @@ nppes(x)
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
 #> ✔ Retrieving 1 page
-#> ✔ nppes returned 134/135 results
+#> ✔ nppes returned 135/135 results
 #> $ind
 #> $ind$basic
-#> # A tibble: 134 × 10
+#> # A tibble: 135 × 10
 #>           npi entity cred  first  last  sex    sole other enum_date  last_update
 #>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
 #>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
@@ -224,13 +224,13 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  5 1023408291      1 NA    JENNI… SMITH F         0 NA    2015-01-27 2026-01-20 
 #>  6 1033486725      1 NA    JENNI… SMITH F         0 NA    2011-11-22 2025-09-17 
 #>  7 1033553219      1 M.S.  JENNI… SMITH F         1 NA    2013-04-18 2013-04-18 
-#>  8 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
-#>  9 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
-#> 10 1063080125      1 NP    JENNI… SMITH F         0 NA    2021-06-15 2021-06-15 
-#> # ℹ 124 more rows
+#>  8 1033811211      1 NA    JENNI… SMITH F         0 NA    2023-03-20 2026-06-24 
+#>  9 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
+#> 10 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
+#> # ℹ 125 more rows
 #> 
 #> $ind$taxonomy
-#> # A tibble: 174 × 3
+#> # A tibble: 175 × 3
 #>           npi order code      
 #>         <int> <int> <chr>     
 #>  1 1992396162     1 103TC0700X
@@ -243,10 +243,10 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1972332542     1 363LF0000X
 #>  9 1962707042     1 363L00000X
 #> 10 1952775413     1 363LF0000X
-#> # ℹ 164 more rows
+#> # ℹ 165 more rows
 #> 
 #> $ind$location
-#> # A tibble: 229 × 6
+#> # A tibble: 232 × 6
 #>           npi   loc city         state address                     zip      
 #>  *      <int> <int> <chr>        <chr> <chr>                       <chr>    
 #>  1 1013227818     1 COTTONTOWN   TN    250 OLD HIGHWAY 31 W        370484639
@@ -259,7 +259,7 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033486725     1 NASHVILLE    TN    3601 THE VANDERBILT CLINIC  372320001
 #>  9 1033486725     2 ALAMOGORDO   NM    2539 MEDICAL DR STE 104     883108720
 #> 10 1033486725     3 NASHVILLE    TN    3841 GREEN HILLS VILLAGE DR 372152691
-#> # ℹ 219 more rows
+#> # ℹ 222 more rows
 #> 
 #> 
 #> attr(,"class")

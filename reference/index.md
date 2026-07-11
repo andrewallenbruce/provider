@@ -43,6 +43,8 @@
   : Revoked Providers & Suppliers
 - [`supplier()`](https://andrewallenbruce.github.io/provider/reference/supplier.md)
   : Medical Equipment Suppliers
+- [`nursing()`](https://andrewallenbruce.github.io/provider/reference/nursing.md)
+  : Nursing Homes
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)
   : Hospital Transparency Enforcement
 - [`utilization()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)

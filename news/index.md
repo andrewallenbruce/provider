@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9305 (2026-07-11)
+
+- added
+  [`nursing()`](https://andrewallenbruce.github.io/provider/reference/nursing.md)
+  endpoint
+
 ## provider 0.0.1.9304 (2026-07-08)
 
 - added

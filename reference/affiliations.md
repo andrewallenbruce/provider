@@ -80,11 +80,11 @@ containing the search results.
 
 ``` r
 affiliations(count = TRUE)
-#> ◼ affiliations | 2,239,952 rows | 1,494 pages
+#> ◼ affiliations | 2,260,193 rows | 1,507 pages
 affiliations(ccn = 331302)
-#> ✔ affiliations returned 329 results
+#> ✔ affiliations returned 340 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 329 × 7
+#> # A tibble: 340 × 7
 #>    first   last                  npi pac        fac_type ccn    parent_ccn
 #>    <chr>   <chr>               <int> <chr>      <chr>    <chr>  <chr>     
 #>  1 STACI   CARTER-KELLY   1003029125 6204824378 Hospital 331302 NA        
@@ -97,17 +97,18 @@ affiliations(ccn = 331302)
 #>  8 BARDIA  BARIMANI       1013793736 9436503646 Hospital 331302 NA        
 #>  9 JOSE    ACOSTAMADIEDO  1013910256 5890719371 Hospital 331302 NA        
 #> 10 LINDSEY WILHELM        1023377843 6901115278 Hospital 331302 NA        
-#> # ℹ 319 more rows
+#> # ℹ 330 more rows
 affiliations(parent_ccn = 331302)
-#> ✔ affiliations returned 6 results
+#> ✔ affiliations returned 7 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 6 × 7
-#>   first   last            npi pac        fac_type ccn    parent_ccn
-#>   <chr>   <chr>         <int> <chr>      <chr>    <chr>  <chr>     
-#> 1 JEFFREY KLOTZ    1073258398 3870095805 NH       33Z302 331302    
-#> 2 CARLOS  MARTINEZ 1154332062 5890739734 NH       33Z302 331302    
-#> 3 MARY    HALLORAN 1396989059 8921259557 NH       33Z302 331302    
-#> 4 IL      CHON     1538173869 0547299091 NH       33Z302 331302    
-#> 5 DRAGOS  BANU     1558659367 6709004682 NH       33Z302 331302    
-#> 6 JOSHUA  WARNER   1760167712 8123473469 NH       33Z302 331302    
+#> # A tibble: 7 × 7
+#>   first   last                 npi pac        fac_type ccn    parent_ccn
+#>   <chr>   <chr>              <int> <chr>      <chr>    <chr>  <chr>     
+#> 1 JEFFREY KLOTZ         1073258398 3870095805 NH       33Z302 331302    
+#> 2 CARLOS  MARTINEZ      1154332062 5890739734 NH       33Z302 331302    
+#> 3 GABRIEL CREVIER-SORBO 1154946978 2264892017 NH       33Z302 331302    
+#> 4 MARY    HALLORAN      1396989059 8921259557 NH       33Z302 331302    
+#> 5 IL      CHON          1538173869 0547299091 NH       33Z302 331302    
+#> 6 DRAGOS  BANU          1558659367 6709004682 NH       33Z302 331302    
+#> 7 JOSHUA  WARNER        1760167712 8123473469 NH       33Z302 331302    
 ```
