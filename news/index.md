@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9309 (2026-07-12)
+
+- added `hospital` -\> `spending` keychain
+
 ## provider 0.0.1.9308 (2026-07-12)
 
 - documentation for new endpoints

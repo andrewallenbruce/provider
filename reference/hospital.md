@@ -139,7 +139,9 @@ hospital(prov_type = "cah", state = "GA")
 #> ✔ Retrieving 1 page
 #> ✔ hospital2 returned 31 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 65 × 18
+#> ✔ spending returned 31 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 65 × 19
 #>    org_name    org_dba ccn      npi pac   enid  multi inc_date   org_type status
 #>  * <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #>  1 BROOKS COU… ARCHBO… 11Z3… 1.58e9 1557… O200…     0 NA         Other: … Non-P…
@@ -153,8 +155,8 @@ hospital(prov_type = "cah", state = "GA")
 #>  9 HOSPITAL A… WILLS … 1113… 1.62e9 8628… O200…     0 NA         Other: … Gover…
 #> 10 HOSPITAL A… WILLS … 11Z3… 1.48e9 8628… O200…     0 NA         Other: … Non-P…
 #> # ℹ 55 more rows
-#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+#> # ℹ 9 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   mspb <dbl>, address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 
 hospital(
   city = "Atlanta",
@@ -165,7 +167,9 @@ hospital(
 #> ✔ Retrieving 1 page
 #> ✔ hospital2 returned 5 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 12 × 18
+#> ✔ spending returned 3 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 12 × 19
 #>    org_name    org_dba ccn      npi pac   enid  multi inc_date   org_type status
 #>  * <chr>       <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #>  1 SCOTTISH R… CHILDR… 1133… 1.92e9 4981… O200…     0 1915-04-10 Corpora… Volun…
@@ -180,6 +184,6 @@ hospital(
 #> 10 ES REHABIL… EMORY … 1130… 1.55e9 1254… O201…     0 2013-10-15 LLC      For-P…
 #> 11 SELECT SPE… SELECT… 1120… 1.24e9 6305… O201…     0 NA         LLC      For-P…
 #> 12 REHABILITA… REHABI… 1130… 1.54e9 5698… O202…     0 2020-10-16 LLC      For-P…
-#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+#> # ℹ 9 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   mspb <dbl>, address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 ```

@@ -77,6 +77,8 @@ supplier(count = TRUE)
 supplier(state = "GA")
 #> ✔ supplier returned 1,834 results
 #> ✔ Retrieving 2 pages
+#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
+#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> # A tibble: 1,834 × 15
 #>      provid   par start_date org_dba org_name specialty prov_type supplies   cba
 #>       <int> <int> <date>     <chr>   <chr>    <chr>     <chr>     <chr>    <int>

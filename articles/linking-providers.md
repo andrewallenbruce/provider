@@ -19,6 +19,8 @@ x <- list(
 #> ✔ Retrieving 1 page
 #> ✔ hospital2 returned 5 results
 #> ✔ Retrieving 1 page
+#> ✔ spending returned 5 results
+#> ✔ Retrieving 1 page
 x
 #> $individual
 #>               V1
@@ -28,7 +30,7 @@ x
 #> pac   7810891009
 #> 
 #> $organization
-#> # A tibble: 5 × 18
+#> # A tibble: 5 × 19
 #>   org_name     org_dba ccn      npi pac   enid  multi inc_date   org_type status
 #> * <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
 #> 1 CHAMPLAIN V… THE UN… 3302… 1.03e9 2769… O201…     0 1926-01-01 Corpora… Volun…
@@ -36,8 +38,8 @@ x
 #> 3 CENTRAL VER… NA      4700… 1.51e9 9335… O200…     0 1984-03-01 Corpora… Volun…
 #> 4 UNIVERSITY … UNIVER… 4700… 1.57e9 3779… O200…     0 1995-01-01 Corpora… Volun…
 #> 5 PORTER HOSP… NA      4713… 1.74e9 1850… O200…     1 1986-11-14 Corpora… Volun…
-#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
-#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+#> # ℹ 9 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   mspb <dbl>, address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
 
 reassigned(pac = 7810891009) |> str()
 #> ✔ reassigned returned 1 result
@@ -91,7 +93,9 @@ hospital(org_name = x) |> str()
 #> ✔ Retrieving 1 page
 #> ✔ hospital2 returned 1 result
 #> ✔ Retrieving 1 page
-#> hospital [2 × 18] (S3: hospital/tbl_df/tbl/data.frame)
+#> ✔ spending returned 1 result
+#> ✔ Retrieving 1 page
+#> hospital [2 × 19] (S3: hospital/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
 #>  $ org_dba  : chr [1:2] NA NA
 #>  $ ccn      : chr [1:2] "331302" "33Z302"
@@ -105,6 +109,7 @@ hospital(org_name = x) |> str()
 #>  $ loc_type : chr [1:2] "Other" "Other"
 #>  $ sub_group: chr [1:2] "CAH" "CAH"
 #>  $ rating   : int [1:2] 4 NA
+#>  $ mspb     : num [1:2] NA NA
 #>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
 #>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
 #>  $ state    : chr [1:2] "NY" "NY"
