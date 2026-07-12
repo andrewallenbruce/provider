@@ -139,18 +139,18 @@ rehab <- function(
   polish(x)
 }
 
-#' Veterans Health Administration Providers
+#' Veterans Health Administration Hospitals
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description
+#' A list of all VHA hospitals. The list includes addresses and phone numbers.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Veterans Health Administration Provider Level Data](https://data.cms.gov/provider-data/dataset/uyx4-5s7f)
 #'
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc
-#' @param city,state,zip,county `<chr>` desc
 #' @param rating `<int>` desc
+#' @param city,state,zip,county `<chr>` desc
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()

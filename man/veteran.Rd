@@ -2,10 +2,10 @@
 % Please edit documentation in R/end-ambulatory.R
 \name{veteran}
 \alias{veteran}
-\title{Veterans Health Administration Providers}
+\title{Veterans Health Administration Hospitals}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/uyx4-5s7f}{API: Veterans Health Administration Provider Level Data}
 }
 }
 \usage{
@@ -35,8 +35,7 @@ veteran(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+A list of all VHA hospitals. The list includes addresses and phone numbers.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

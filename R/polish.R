@@ -489,4 +489,18 @@ S7::method(polish, s3_outpatient) <- function(x) {
   set_rename(x)
   get_columns(x) |>
     collapse::roworderv(c("year", "ccn"))
+
+  # x |>
+  #   collapse::gby(c("year", "ccn", "org_name", "address", "city", "state", "zip")) |>
+  #   collapse::fsummarise(
+  #     "patients" = collapse::fsum(patients),
+  #     "services" = collapse::fsum(services),
+  #     "outliers" = collapse::fsum(outliers),
+  #     "charge" = collapse::fsum(charge),
+  #     "allowed" = collapse::fsum(allowed),
+  #     "payment" = collapse::fsum(payment),
+  #     "outpay" = collapse::fsum(outpay),
+  #     keep.group_vars = TRUE
+  #   )
+
 }

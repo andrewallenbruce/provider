@@ -2,7 +2,17 @@
 % Please edit documentation in R/end-in_outpatient.R
 \name{inpatient}
 \alias{inpatient}
+\alias{outpatient}
 \title{Inpatient Hospitals}
+\source{
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/uyx4-5s7f}{API: Medicare Inpatient Hospitals - by Provider}
+}
+
+\itemize{
+\item \href{https://data.cms.gov/provider-data/dataset/uyx4-5s7f}{API: Medicare Outpatient Hospitals - by Provider and Service}
+}
+}
 \usage{
 inpatient(
   year = NULL,
@@ -21,30 +31,50 @@ inpatient(
   ndual = NULL,
   count = FALSE
 )
+
+outpatient(
+  year = NULL,
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  outliers = NULL,
+  count = FALSE
+)
 }
 \arguments{
 \item{year}{\verb{<int>} Year data was reported}
 
-\item{ccn}{\verb{<int>} 10-digit national provider identifier}
+\item{ccn}{\verb{<int>} The CMS Certification Number (CCN) of the provider billing
+for outpatient hospital services.}
 
-\item{org_name}{\verb{<chr>} Individual/Organizational provider's name}
+\item{org_name}{\verb{<chr>} Organizational provider's name}
 
-\item{city, state, zip}{\verb{<chr>} The provider's city and state, as reported in NPPES.}
+\item{city, state, zip}{\verb{<chr>} The provider's city and state, as reported in
+NPPES.}
 
-\item{patients}{\verb{<int>} Total Medicare beneficiaries receiving services from
-the provider}
+\item{patients}{\verb{<int>} The number of Medicare fee-for-service beneficiaries
+receiving outpatient hospital services.}
 
-\item{discharges}{description}
+\item{discharges}{\verb{<int>} The number of discharges billed by the provider for
+inpatient hospital services.}
 
-\item{charge}{\verb{<int>} The total charges that the provider submitted for all
-services}
+\item{charge}{\verb{<int>} The provider's average estimated submitted charge for
+services covered by Medicare for the Ambulatory Payment Classification
+(APC).}
 
-\item{payment}{\verb{<dbl>} Total amount that Medicare paid after deductible and
-coinsurance amounts have been deducted for all the provider's line item
-services.}
+\item{payment}{\verb{<dbl>} The average of total regular payments the provider
+receives directly from Medicare. It excludes special outlier payments which
+is reported in a separate column.}
 
-\item{avg_age}{\verb{<dbl>} Average age of beneficiaries. Beneficiary age is
-calculated at the end of the calendar year or at the time of death}
+\item{avg_age}{\verb{<dbl>} The average age of Medicare enrollees who used a
+covered health care or medical service from the provider.}
 
 \item{avg_risk}{\verb{<dbl>} Average Hierarchical Condition Category (HCC) risk
 score of beneficiaries}
@@ -60,16 +90,41 @@ entitlement if they received zero months of any Medicaid benefits (full or
 partial) in the given calendar year.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{services}{\verb{<int>} The number of primary HCPCS services billed by the
+provider for outpatient hospital services.}
+
+\item{allowed}{\verb{<dbl>} The average of total regular payments the provider
+receives for the APC. It includes both Medicare direct provider payments as
+well as beneficiaries’ co-payment and deductible payments. It excludes
+special outlier payments which is reported in a separate column.}
+
+\item{outliers}{\verb{<int>} The number of comprehensive APC services with outlier
+payments.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
+
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Inpatient Hospitals
+\subsection{Outlier Payments}{
+}
+}
+\details{
+OPPS APC payment amounts are based on the average costs for a set of
+services. In the event that a hospital’s costs for these services exceed a
+given threshold tied to the average APC payment, CMS must issue an outlier
+payment to the hospital to that service to compensate for the costly
+provision of service.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
 inpatient(count = TRUE)
 inpatient(state = "GA", city = "Valdosta")
+\dontshow{\}) # examplesIf}
+\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+outpatient(count = TRUE)
+outpatient(state = "GA", city = "Valdosta")
 \dontshow{\}) # examplesIf}
 }
