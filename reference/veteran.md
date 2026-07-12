@@ -1,7 +1,7 @@
-# Veterans Health Administration Providers
+# Veterans Health Administration Hospitals
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+A list of all VHA hospitals. The list includes addresses and phone
+numbers.
 
 ## Usage
 
@@ -20,8 +20,8 @@ veteran(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Veterans Health Administration Provider Level
+  Data](https://data.cms.gov/provider-data/dataset/uyx4-5s7f)
 
 ## Arguments
 

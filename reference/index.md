@@ -19,6 +19,7 @@
 - [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
   : Hospitals Enrolled in Medicare
 - [`inpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
+  [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
   : Inpatient Hospitals
 - [`long_term()`](https://andrewallenbruce.github.io/provider/reference/long_term.md)
   : Long-Term Care Hospitals
@@ -30,8 +31,6 @@
   : Opt-Out Providers
 - [`order_refer()`](https://andrewallenbruce.github.io/provider/reference/order_refer.md)
   : Order and Refer Eligibility
-- [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)
-  : Outpatient Hospitals
 - [`owner()`](https://andrewallenbruce.github.io/provider/reference/owner.md)
   : Owners
 - [`pending()`](https://andrewallenbruce.github.io/provider/reference/pending.md)
@@ -59,7 +58,7 @@
   [`geography()`](https://andrewallenbruce.github.io/provider/reference/utilization.md)
   : Provider Utilization by Year
 - [`veteran()`](https://andrewallenbruce.github.io/provider/reference/veteran.md)
-  : Veterans Health Administration Providers
+  : Veterans Health Administration Hospitals
 - [`excludes()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`contains()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)
   [`starts()`](https://andrewallenbruce.github.io/provider/reference/modifier.md)

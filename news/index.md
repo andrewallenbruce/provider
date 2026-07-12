@@ -61,7 +61,7 @@
 - added
   [`inpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
   &
-  [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/outpatient.md)
+  [`outpatient()`](https://andrewallenbruce.github.io/provider/reference/inpatient.md)
 - fixed failing test
 
 ## provider 0.0.1.9298 (2026-07-07)

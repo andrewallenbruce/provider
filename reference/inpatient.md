@@ -1,6 +1,6 @@
 # Inpatient Hospitals
 
-Inpatient Hospitals
+### Outlier Payments
 
 ## Usage
 
@@ -22,7 +22,33 @@ inpatient(
   ndual = NULL,
   count = FALSE
 )
+
+outpatient(
+  year = NULL,
+  ccn = NULL,
+  org_name = NULL,
+  city = NULL,
+  state = NULL,
+  zip = NULL,
+  patients = NULL,
+  services = NULL,
+  charge = NULL,
+  allowed = NULL,
+  payment = NULL,
+  outliers = NULL,
+  count = FALSE
+)
 ```
+
+## Source
+
+- [API: Medicare Inpatient Hospitals - by
+  Provider](https://data.cms.gov/provider-data/dataset/uyx4-5s7f)
+
+&nbsp;
+
+- [API: Medicare Outpatient Hospitals - by Provider and
+  Service](https://data.cms.gov/provider-data/dataset/uyx4-5s7f)
 
 ## Arguments
 
@@ -32,11 +58,12 @@ inpatient(
 
 - ccn:
 
-  `<int>` 10-digit national provider identifier
+  `<int>` The CMS Certification Number (CCN) of the provider billing for
+  outpatient hospital services.
 
 - org_name:
 
-  `<chr>` Individual/Organizational provider's name
+  `<chr>` Organizational provider's name
 
 - city, state, zip:
 
@@ -44,27 +71,29 @@ inpatient(
 
 - patients:
 
-  `<int>` Total Medicare beneficiaries receiving services from the
-  provider
+  `<int>` The number of Medicare fee-for-service beneficiaries receiving
+  outpatient hospital services.
 
 - discharges:
 
-  description
+  `<int>` The number of discharges billed by the provider for inpatient
+  hospital services.
 
 - charge:
 
-  `<int>` The total charges that the provider submitted for all services
+  `<int>` The provider's average estimated submitted charge for services
+  covered by Medicare for the Ambulatory Payment Classification (APC).
 
 - payment:
 
-  `<dbl>` Total amount that Medicare paid after deductible and
-  coinsurance amounts have been deducted for all the provider's line
-  item services.
+  `<dbl>` The average of total regular payments the provider receives
+  directly from Medicare. It excludes special outlier payments which is
+  reported in a separate column.
 
 - avg_age:
 
-  `<dbl>` Average age of beneficiaries. Beneficiary age is calculated at
-  the end of the calendar year or at the time of death
+  `<dbl>` The average age of Medicare enrollees who used a covered
+  health care or medical service from the provider.
 
 - avg_risk:
 
@@ -89,10 +118,38 @@ inpatient(
 
   `<lgl>` Return the total row count
 
+- services:
+
+  `<int>` The number of primary HCPCS services billed by the provider
+  for outpatient hospital services.
+
+- allowed:
+
+  `<dbl>` The average of total regular payments the provider receives
+  for the APC. It includes both Medicare direct provider payments as
+  well as beneficiaries’ co-payment and deductible payments. It excludes
+  special outlier payments which is reported in a separate column.
+
+- outliers:
+
+  `<int>` The number of comprehensive APC services with outlier
+  payments.
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 containing the search results.
+
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+containing the search results.
+
+## Details
+
+OPPS APC payment amounts are based on the average costs for a set of
+services. In the event that a hospital’s costs for these services exceed
+a given threshold tied to the average APC payment, CMS must issue an
+outlier payment to the hospital to that service to compensate for the
+costly provision of service.
 
 ## Examples
 
@@ -119,4 +176,25 @@ inpatient(state = "GA", city = "Valdosta")
 #> 12  2024 110122 Sgmc Health  2501 N… Vald… GA    31602     2229       3339 16160
 #> # ℹ 8 more variables: covered <int>, charge <dbl>, payment <dbl>, mdcpay <dbl>,
 #> #   avg_age <dbl>, avg_risk <dbl>, dual <int>, ndual <int>
+outpatient(count = TRUE)
+#> ◼ outpatient | 1,008,975 rows | 208 pages
+outpatient(state = "GA", city = "Valdosta")
+#> ✔ outpatient returned 442 results
+#> ✔ Retrieving 10 pages
+#> # A tibble: 442 × 16
+#>     year ccn    org_name address city  state zip   apc   desc  patients services
+#>    <int> <chr>  <chr>    <chr>   <chr> <chr> <chr> <chr> <chr>    <int>    <int>
+#>  1  2015 110122 South G… 2501 N… Vald… GA    31603 0039  Leve…       11       12
+#>  2  2015 110122 South G… 2501 N… Vald… GA    31603 0061  Leve…       NA       NA
+#>  3  2015 110122 South G… 2501 N… Vald… GA    31603 0083  Leve…      102      150
+#>  4  2015 110122 South G… 2501 N… Vald… GA    31603 0089  Leve…       72       72
+#>  5  2015 110122 South G… 2501 N… Vald… GA    31603 0090  Leve…       17       17
+#>  6  2015 110122 South G… 2501 N… Vald… GA    31603 0107  Leve…       NA       NA
+#>  7  2015 110122 South G… 2501 N… Vald… GA    31603 0108  Leve…       14       14
+#>  8  2015 110122 South G… 2501 N… Vald… GA    31603 0202  Leve…       NA       NA
+#>  9  2015 110122 South G… 2501 N… Vald… GA    31603 0229  Leve…      125      131
+#> 10  2015 110122 South G… 2501 N… Vald… GA    31603 0318  Leve…       32       32
+#> # ℹ 432 more rows
+#> # ℹ 5 more variables: outliers <int>, charge <dbl>, allowed <dbl>,
+#> #   payment <dbl>, outpay <dbl>
 ```
