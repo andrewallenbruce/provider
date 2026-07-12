@@ -47,6 +47,9 @@
   : Inpatient Rehabilitation Facilities
 - [`revoked()`](https://andrewallenbruce.github.io/provider/reference/revoked.md)
   : Revoked Providers & Suppliers
+- [`spending()`](https://andrewallenbruce.github.io/provider/reference/spending.md)
+  [`spending2()`](https://andrewallenbruce.github.io/provider/reference/spending.md)
+  : Medicare Spending Per Beneficiary - Hospital
 - [`supplier()`](https://andrewallenbruce.github.io/provider/reference/supplier.md)
   : Medical Equipment Suppliers
 - [`transparency()`](https://andrewallenbruce.github.io/provider/reference/transparency.md)

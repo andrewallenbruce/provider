@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9307 (2026-07-11)
+
+- added
+  [`spending()`](https://andrewallenbruce.github.io/provider/reference/spending.md)
+  endpoints
+
 ## provider 0.0.1.9306 (2026-07-11)
 
 - added
