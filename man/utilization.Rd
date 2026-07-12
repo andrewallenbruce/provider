@@ -9,10 +9,10 @@
 utilization(
   year = NULL,
   npi = NULL,
+  entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
-  entity = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -36,7 +36,7 @@ services(
   entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -71,12 +71,12 @@ geography(
 
 \item{npi}{\verb{<int>} 10-digit national provider identifier}
 
+\item{entity}{\verb{<int>} Type of entity reported in NPPES. \code{1} identifies
+individual providers and \code{2} identifies those registered as organizations.}
+
 \item{first, last}{\verb{<chr>} Individual/Organizational provider's name}
 
-\item{cred}{\verb{<chr>} Individual provider's credentials}
-
-\item{entity}{\verb{<chr>} Type of entity reported in NPPES. \code{I} identifies
-individual providers and \code{O} identifies those registered as organizations.}
+\item{credential}{\verb{<chr>} Individual provider's credentials}
 
 \item{specialty}{\verb{<chr>} Provider specialty reported on the largest number of
 claims submitted}
@@ -127,13 +127,13 @@ partial) in the given calendar year.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 
-\item{drug}{\verb{<lgl>} Total number of unique HCPCS codes}
+\item{drug}{\verb{<lgl>} Identifies a HCPCS code that is represents a drug}
 
-\item{pos}{\verb{<chr>} Total number of unique HCPCS codes}
+\item{pos}{\verb{<chr>} Place of service; one of \code{F} (Facility) or \code{O} (Physician's Office)}
 
-\item{level}{\verb{<chr>} National or State}
+\item{level}{\verb{<chr>} \code{National} or \code{State}}
 
-\item{providers}{\verb{<int>} Total}
+\item{providers}{\verb{<int>} Total providers}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

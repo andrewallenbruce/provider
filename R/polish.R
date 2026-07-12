@@ -263,9 +263,13 @@ S7::method(polish, s3_spending) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_spending2) <- function(x) {
-  x[["percent_of_spndg_hospital"]] <- rm_percent(x[["percent_of_spndg_hospital"]])
+  x[["percent_of_spndg_hospital"]] <- rm_percent(x[[
+    "percent_of_spndg_hospital"
+  ]])
   x[["percent_of_spndg_state"]] <- rm_percent(x[["percent_of_spndg_state"]])
-  x[["percent_of_spndg_national"]] <- rm_percent(x[["percent_of_spndg_national"]])
+  x[["percent_of_spndg_national"]] <- rm_percent(x[[
+    "percent_of_spndg_national"
+  ]])
   collapse::settfmv(
     x,
     c(
@@ -323,11 +327,15 @@ S7::method(polish, s3_utilization) <- function(x) {
   x <- rowbind2(x, "year", fill = TRUE) |>
     add_class("utilization")
 
+  collapse::setv(x[["Rndrng_Prvdr_Ent_Cd"]], "I", "1")
+  collapse::setv(x[["Rndrng_Prvdr_Ent_Cd"]], "O", "2")
+
   collapse::settfmv(
     x,
     c(
       "year",
       "Rndrng_NPI",
+      "Rndrng_Prvdr_Ent_Cd",
       "Tot_HCPCS_Cds",
       "Tot_Benes",
       "Tot_Srvcs",
@@ -360,11 +368,15 @@ S7::method(polish, s3_services) <- function(x) {
   x <- rowbind2(x, "year", fill = TRUE) |>
     add_class("services")
 
+  collapse::setv(x[["Rndrng_Prvdr_Ent_Cd"]], "I", "1")
+  collapse::setv(x[["Rndrng_Prvdr_Ent_Cd"]], "O", "2")
+
   collapse::settfmv(
     x,
     c(
       "year",
       "Rndrng_NPI",
+      "Rndrng_Prvdr_Ent_Cd",
       "Tot_Benes",
       "Tot_Srvcs",
       "Tot_Bene_Day_Srvcs",
@@ -420,8 +432,8 @@ S7::method(polish, s3_geography) <- function(x) {
   get_columns(x) |>
     rc_bin("drug") |>
     collapse::roworderv(
-      c("year", "hcpcs"),
-      decreasing = c(TRUE, FALSE)
+      c("hcpcs", "state", "year"),
+      decreasing = c(TRUE, FALSE, FALSE)
     )
 }
 
@@ -502,5 +514,4 @@ S7::method(polish, s3_outpatient) <- function(x) {
   #     "outpay" = collapse::fsum(outpay),
   #     keep.group_vars = TRUE
   #   )
-
 }

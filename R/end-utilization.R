@@ -19,9 +19,9 @@
 #' @param year `<int>` Year data was reported
 #' @param npi `<int>` 10-digit national provider identifier
 #' @param first,last `<chr>` Individual/Organizational provider's name
-#' @param cred `<chr>` Individual provider's credentials
-#' @param entity `<chr>` Type of entity reported in NPPES. `I` identifies
-#'   individual providers and `O` identifies those registered as organizations.
+#' @param credential `<chr>` Individual provider's credentials
+#' @param entity `<int>` Type of entity reported in NPPES. `1` identifies
+#'   individual providers and `2` identifies those registered as organizations.
 #' @param city,state `<chr>` The provider's city and state, as reported in NPPES.
 #' @param specialty `<chr>` Provider specialty reported on the largest number of
 #'   claims submitted
@@ -32,10 +32,10 @@
 #'   allowed amounts for some services and not accept Medicare allowed amounts
 #'   for other services.
 #' @param hcpcs `<int/chr>` Total number of unique HCPCS codes
-#' @param drug `<lgl>` Total number of unique HCPCS codes
-#' @param pos `<chr>` Total number of unique HCPCS codes
-#' @param level `<chr>` National or State
-#' @param providers `<int>` Total
+#' @param drug `<lgl>` Identifies a HCPCS code that is represents a drug
+#' @param pos `<chr>` Place of service; one of `F` (Facility) or `O` (Physician's Office)
+#' @param level `<chr>` `National` or `State`
+#' @param providers `<int>` Total providers
 #' @param patients `<int>` Total Medicare beneficiaries receiving services from
 #'   the provider
 #' @param services `<int>` Total provider services
@@ -80,10 +80,10 @@
 utilization <- function(
   year = NULL,
   npi = NULL,
+  entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
-  entity = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -117,19 +117,15 @@ utilization <- function(
   check_char_(specialty)
   check_bool_(par)
 
-  if (!is.null(entity)) {
-    entity <- rlang::arg_match0(entity, c("I", "O"))
-  }
-
   x <- end_cmslist(
     count = count,
     set = FALSE,
     select = year,
     Rndrng_NPI = npi,
-    Rndrng_Prvdr_Ent_Cd = entity,
+    Rndrng_Prvdr_Ent_Cd = tag_enum(entity),
     Rndrng_Prvdr_First_Name = first,
     Rndrng_Prvdr_Last_Org_Name = last,
-    Rndrng_Prvdr_Crdntls = cred,
+    Rndrng_Prvdr_Crdntls = credential,
     Rndrng_Prvdr_City = city,
     Rndrng_Prvdr_State_Abrvtn = state,
     Rndrng_Prvdr_Type = specialty,
@@ -159,7 +155,7 @@ services <- function(
   entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -180,15 +176,9 @@ services <- function(
   check_numeric(allowed)
   check_numeric(payment)
   check_char_(specialty)
+  check_char_(hcpcs)
   check_bool_(par)
 
-  if (!is.null(entity)) {
-    entity <- rlang::arg_match0(entity, c("I", "O"))
-  }
-
-  if (!is.null(pos)) {
-    pos <- rlang::arg_match0(pos, c("F", "O"))
-  }
   x <- end_cmslist(
     count = count,
     set = FALSE,
@@ -196,13 +186,13 @@ services <- function(
     Rndrng_NPI = npi,
     Rndrng_Prvdr_First_Name = first,
     Rndrng_Prvdr_Last_Org_Name = last,
-    Rndrng_Prvdr_Crdntls = cred,
-    Rndrng_Prvdr_Ent_Cd = entity,
+    Rndrng_Prvdr_Crdntls = credential,
+    Rndrng_Prvdr_Ent_Cd = tag_enum(entity),
     Rndrng_Prvdr_Type = specialty,
     Rndrng_Prvdr_Mdcr_Prtcptg_Ind = tag_bool(par),
     HCPCS_Cd = hcpcs,
     HCPCS_Drug_Ind = tag_bool(drug),
-    Place_Of_Srvc = pos,
+    Place_Of_Srvc = tag_enum(pos),
     Tot_Benes = patients,
     Tot_Srvcs = services,
     Avg_Sbmtd_Chrg = charge,
@@ -240,10 +230,6 @@ geography <- function(
   check_numeric(allowed)
   check_numeric(payment)
 
-  if (!is.null(pos)) {
-    pos <- rlang::arg_match0(pos, c("F", "O"))
-  }
-
   rlang::check_exclusive(level, state, .require = FALSE)
 
   if (!is.null(level)) {
@@ -262,7 +248,7 @@ geography <- function(
     Rndrng_Prvdr_Geo_Desc = state,
     HCPCS_Cd = hcpcs,
     HCPCS_Drug_Ind = tag_bool(drug),
-    Place_Of_Srvc = pos,
+    Place_Of_Srvc = tag_enum(pos),
     Tot_Rndrng_Prvdrs = providers,
     Tot_Benes = patients,
     Tot_Srvcs = services,

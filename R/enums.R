@@ -134,6 +134,15 @@ enumerations <- function(
       reh = "Rural Emergency Hospital",
       vha = "Acute Care - Veterans Administration"
     ),
+    # <utilization>
+    entity = list(
+      `1` = "I",
+      `2` = "O"
+    ),
+    pos = list(
+      "F" = "F",
+      "O" = "O"
+    ),
     cli::cli_abort(
       "{.val {arg}} is not an {.cls enum}",
       arg = arg,
