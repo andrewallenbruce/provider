@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9307 (2026-07-11)
+
+* added `spending()` endpoints
+
+
 # provider 0.0.1.9306 (2026-07-11)
 
 * added `psych()` endpoint
