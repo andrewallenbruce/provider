@@ -474,7 +474,7 @@ RE_NAME = list(
     certification_date = "cert_date",
     total_number_of_beds = "beds"
   ),
-  mspb = list(
+  spending = list(
     facility_id = "ccn",
     facility_name = "name",
     score = "score",
@@ -484,12 +484,12 @@ RE_NAME = list(
     zip_code = "zip",
     countyparish = "county"
   ),
-  msbc = list(
+  spending2 = list(
     facility_id = "ccn",
     facility_name = "name",
     state = "state",
-    period = "period",
     claim_type = "claim",
+    period = "period",
     avg_spndg_per_ep_hospital = "avg_hosp",
     avg_spndg_per_ep_state = "avg_state",
     avg_spndg_per_ep_national = "avg_natl",

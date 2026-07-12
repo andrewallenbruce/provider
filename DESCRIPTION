@@ -69,6 +69,7 @@ Collate:
     'end-pending.R'
     'end-quality.R'
     'end-reassigned.R'
+    'end-spending.R'
     'end-supplier.R'
     'end-utilization.R'
     'enums.R'

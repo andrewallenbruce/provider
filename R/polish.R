@@ -254,6 +254,57 @@ S7::method(polish, s3_revoked) <- function(x) {
 }
 
 #' @noRd
+S7::method(polish, s3_spending) <- function(x) {
+  collapse::setv(x[["score"]], "Not Available", NA)
+  collapse::settfmv(x, "score", as.double)
+  set_rename(x)
+  get_columns(x)
+}
+
+#' @noRd
+S7::method(polish, s3_spending2) <- function(x) {
+  x[["percent_of_spndg_hospital"]] <- gsub(
+    "%",
+    "",
+    x[["percent_of_spndg_hospital"]],
+    fixed = TRUE
+  )
+  x[["percent_of_spndg_state"]] <- gsub(
+    "%",
+    "",
+    x[["percent_of_spndg_state"]],
+    fixed = TRUE
+  )
+  x[["percent_of_spndg_national"]] <- gsub(
+    "%",
+    "",
+    x[["percent_of_spndg_national"]],
+    fixed = TRUE
+  )
+  collapse::settfmv(
+    x,
+    c(
+      "percent_of_spndg_hospital",
+      "percent_of_spndg_state",
+      "percent_of_spndg_national"
+    ),
+    as.double
+  )
+
+  collapse::settfmv(
+    x,
+    c(
+      "avg_spndg_per_ep_hospital",
+      "avg_spndg_per_ep_state",
+      "avg_spndg_per_ep_national"
+    ),
+    as.integer
+  )
+  set_rename(x)
+  get_columns(x)
+}
+
+#' @noRd
 S7::method(polish, s3_supplier) <- function(x) {
   collapse::settfmv(x, "provider_id", as.integer)
   collapse::settfmv(x, c("latitude", "longitude"), as.double)

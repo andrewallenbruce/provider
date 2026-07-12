@@ -50,8 +50,8 @@ url_pdc <- function(x) {
       dialysis = "23ew-n7w9",
       hospital2 = "xubh-q36u",
       long_term = "azum-44iv", # Long-Term Care Hospital - General Information
-      mspb = "rrqw-56er", # Medicare Spending Per Beneficiary - Hospital
-      msbc = "nrth-mfg3", # Medicare Hospital Spending by Claim
+      spending = "rrqw-56er", # Medicare Spending Per Beneficiary - Hospital
+      spending2 = "nrth-mfg3", # Medicare Hospital Spending by Claim
       nursing = "4pq5-n9py", # Nursing Homes Provider Information
       psych = "q9vs-r7wp", # Inpatient Psychiatric Facility Quality Measure Data - by Facility
       rehab = "7t8x-u3ir", # Inpatient Rehabilitation Facility - General Information

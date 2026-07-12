@@ -91,9 +91,9 @@ EndpointPDC <- S7::new_class(
 )
 
 #' @noRd
-s3_msbc <- S7::new_S3_class("msbc")
+s3_spending <- S7::new_S3_class("spending")
 #' @noRd
-s3_mspb <- S7::new_S3_class("mspb")
+s3_spending2 <- S7::new_S3_class("spending2")
 #' @noRd
 s3_psych <- S7::new_S3_class("psych")
 #' @noRd
