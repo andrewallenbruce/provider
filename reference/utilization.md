@@ -16,10 +16,10 @@ aggregated by year.
 utilization(
   year = NULL,
   npi = NULL,
+  entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
-  entity = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -43,7 +43,7 @@ services(
   entity = NULL,
   first = NULL,
   last = NULL,
-  cred = NULL,
+  credential = NULL,
   specialty = NULL,
   par = NULL,
   hcpcs = NULL,
@@ -84,18 +84,18 @@ geography(
 
   `<int>` 10-digit national provider identifier
 
+- entity:
+
+  `<int>` Type of entity reported in NPPES. `1` identifies individual
+  providers and `2` identifies those registered as organizations.
+
 - first, last:
 
   `<chr>` Individual/Organizational provider's name
 
-- cred:
+- credential:
 
   `<chr>` Individual provider's credentials
-
-- entity:
-
-  `<chr>` Type of entity reported in NPPES. `I` identifies individual
-  providers and `O` identifies those registered as organizations.
 
 - specialty:
 
@@ -175,19 +175,20 @@ geography(
 
 - drug:
 
-  `<lgl>` Total number of unique HCPCS codes
+  `<lgl>` Identifies a HCPCS code that is represents a drug
 
 - pos:
 
-  `<chr>` Total number of unique HCPCS codes
+  `<chr>` Place of service; one of `F` (Facility) or `O` (Physician's
+  Office)
 
 - level:
 
-  `<chr>` National or State
+  `<chr>` `National` or `State`
 
 - providers:
 
-  `<int>` Total
+  `<int>` Total providers
 
 ## Value
 
@@ -220,19 +221,19 @@ utilization(npi = 1003000423)
 #> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
 #>     year        npi entity   par hcpcs patients services charges allowed payment
-#>    <int>      <int> <chr>  <int> <int>    <int>    <int>   <int>   <dbl>   <dbl>
-#>  1  2013 1003000423 I          1    33       63      320   31637  13176.  10320.
-#>  2  2014 1003000423 I          1    29       57      293   24148  12029.   9492.
-#>  3  2015 1003000423 I          1    31       56      117   20414  10542.   8558.
-#>  4  2016 1003000423 I          1    26       82      163   25862  12894.  10519.
-#>  5  2017 1003000423 I          1    29       71      155   33700  14115.  11245.
-#>  6  2018 1003000423 I          1    20       73      283   16773   8496.   6857.
-#>  7  2019 1003000423 I          1    24       74      897   23150  11090.   9007.
-#>  8  2020 1003000423 I          1    21       56      571   23680   9012.   7224.
-#>  9  2021 1003000423 I          1    19       69      738   21300   8018.   6736.
-#> 10  2022 1003000423 I          1    16       59      111    9918   5136.   4335.
-#> 11  2023 1003000423 I          1    16       63      119   13785   6388.   5231.
-#> 12  2024 1003000423 I          1    18       75      140   22015   8709.   7134.
+#>    <int>      <int>  <int> <int> <int>    <int>    <int>   <int>   <dbl>   <dbl>
+#>  1  2013 1003000423      1     1    33       63      320   31637  13176.  10320.
+#>  2  2014 1003000423      1     1    29       57      293   24148  12029.   9492.
+#>  3  2015 1003000423      1     1    31       56      117   20414  10542.   8558.
+#>  4  2016 1003000423      1     1    26       82      163   25862  12894.  10519.
+#>  5  2017 1003000423      1     1    29       71      155   33700  14115.  11245.
+#>  6  2018 1003000423      1     1    20       73      283   16773   8496.   6857.
+#>  7  2019 1003000423      1     1    24       74      897   23150  11090.   9007.
+#>  8  2020 1003000423      1     1    21       56      571   23680   9012.   7224.
+#>  9  2021 1003000423      1     1    19       69      738   21300   8018.   6736.
+#> 10  2022 1003000423      1     1    16       59      111    9918   5136.   4335.
+#> 11  2023 1003000423      1     1    16       63      119   13785   6388.   5231.
+#> 12  2024 1003000423      1     1    18       75      140   22015   8709.   7134.
 #> # ℹ 12 more variables: avg_age <int>, avg_risk <dbl>, dual <int>, ndual <int>,
 #> #   first <chr>, last <chr>, cred <chr>, specialty <chr>, address <chr>,
 #> #   city <chr>, state <chr>, zip <chr>
@@ -240,20 +241,23 @@ utilization(npi = 1003000423)
 services(npi = 1003000423)
 #> ✔ services returned 41 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 41 × 11
-#>     year    npi hcpcs desc   drug pos   patients services charge allowed payment
-#>    <int>  <int> <chr> <chr> <int> <chr>    <int>    <int>  <int>   <dbl>   <dbl>
-#>  1  2013 1.00e9 Q0091 Scre…     0 O           20       20     40    39.6    39.6
-#>  2  2014 1.00e9 Q0091 Scre…     0 O           13       13     40    39.2    39.2
-#>  3  2015 1.00e9 Q0091 Scre…     0 O           14       14     40    39.2    39.2
-#>  4  2016 1.00e9 Q0091 Scre…     0 O           20       20     40    39.2    39.2
-#>  5  2017 1.00e9 Q0091 Scre…     0 O           20       20     41    38.9    38.9
-#>  6  2018 1.00e9 Q0091 Scre…     0 O           18       18     50    41.6    41.6
-#>  7  2019 1.00e9 Q0091 Scre…     0 O           16       16     50    41.0    41.0
-#>  8  2020 1.00e9 Q0091 Scre…     0 O           15       15     51    41.0    41.0
-#>  9  2021 1.00e9 Q0091 Scre…     0 O           20       20     60    41.5    41.5
-#> 10  2022 1.00e9 Q0091 Scre…     0 O           15       15     60    40.9    40.9
+#> # A tibble: 41 × 22
+#>     year       npi entity par   hcpcs desc   drug pos   patients services charge
+#>    <int>     <int>  <int> <chr> <chr> <chr> <int> <chr>    <int>    <int>  <int>
+#>  1  2013    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     40
+#>  2  2014    1.00e9      1 Y     Q0091 Scre…     0 O           13       13     40
+#>  3  2015    1.00e9      1 Y     Q0091 Scre…     0 O           14       14     40
+#>  4  2016    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     40
+#>  5  2017    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     41
+#>  6  2018    1.00e9      1 Y     Q0091 Scre…     0 O           18       18     50
+#>  7  2019    1.00e9      1 Y     Q0091 Scre…     0 O           16       16     50
+#>  8  2020    1.00e9      1 Y     Q0091 Scre…     0 O           15       15     51
+#>  9  2021    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     60
+#> 10  2022    1.00e9      1 Y     Q0091 Scre…     0 O           15       15     60
 #> # ℹ 31 more rows
+#> # ℹ 11 more variables: allowed <dbl>, payment <dbl>, first <chr>, last <chr>,
+#> #   cred <chr>, specialty <chr>, address <chr>, add_2 <chr>, city <chr>,
+#> #   state <chr>, zip <chr>
 
 geography(
   hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),
@@ -261,19 +265,19 @@ geography(
   state = c("National", "Ohio"))
 #> ✔ geography returned 168 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 168 × 12
-#>     year state    hcpcs desc       drug pos   providers patients services charge
-#>    <int> <chr>    <chr> <chr>     <int> <chr>     <int>    <int>    <int>  <dbl>
-#>  1  2024 National 76830 Ultrasou…     0 O         26009   224170   269595  349. 
-#>  2  2024 Ohio     76830 Ultrasou…     0 O           837     5548     6201  274. 
-#>  3  2024 National 81002 Urinalys…     0 O         94006  1459105  2205580   15.0
-#>  4  2024 Ohio     81002 Urinalys…     0 O          5041    60373    88101   14.6
-#>  5  2024 National 99203 New pati…     0 O        388139  6537424  8070604  267. 
-#>  6  2024 Ohio     99203 New pati…     0 O         15545   229830   268676  238. 
-#>  7  2024 National 99212 Establis…     0 O        319826  3989238  6241712  118. 
-#>  8  2024 Ohio     99212 Establis…     0 O         13534   145434   203859  107. 
-#>  9  2024 National 99213 Establis…     0 O        631995 18637816 64778139  189. 
-#> 10  2024 Ohio     99213 Establis…     0 O         25987   750987  2223611  177. 
+#> # A tibble: 168 × 13
+#>     year level  state hcpcs desc   drug pos   providers patients services charge
+#>    <int> <chr>  <chr> <chr> <chr> <int> <chr>     <int>    <int>    <int>  <dbl>
+#>  1  2013 Natio… Nati… Q0091 Scre…     0 O         61931   765792   765875   67.2
+#>  2  2014 Natio… Nati… Q0091 Scre…     0 O         58311   681376   681445   70.2
+#>  3  2015 Natio… Nati… Q0091 Scre…     0 O         54977   635611   635683   72.8
+#>  4  2016 Natio… Nati… Q0091 Scre…     0 O         55719   623706   623784   75.6
+#>  5  2017 Natio… Nati… Q0091 Scre…     0 O         53929   580115   580185   78.3
+#>  6  2018 Natio… Nati… Q0091 Scre…     0 O         51816   545498   545554   80.7
+#>  7  2019 Natio… Nati… Q0091 Scre…     0 O         50380   516118   516179   83.9
+#>  8  2020 Natio… Nati… Q0091 Scre…     0 O         43181   400534   400557   85.8
+#>  9  2021 Natio… Nati… Q0091 Scre…     0 O         44034   451584   451619   90.3
+#> 10  2022 Natio… Nati… Q0091 Scre…     0 O         41510   398093   398143   93.5
 #> # ℹ 158 more rows
 #> # ℹ 2 more variables: allowed <dbl>, payment <dbl>
 ```
