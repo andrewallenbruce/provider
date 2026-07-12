@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9308 (2026-07-12)
+
+- documentation for new endpoints
+
 ## provider 0.0.1.9307 (2026-07-11)
 
 - added

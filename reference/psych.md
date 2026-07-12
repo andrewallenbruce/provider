@@ -1,7 +1,13 @@
 # Inpatient Psychiatric Facilities
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+This dataset includes provider-level data for quality measures included
+under the IPFQR program, including HBIPS, SUB, TOB, Transition Record
+(TR), Screening for Metabolic Disorders (SMD), FAPH, IMM, Readmissions
+(READM), and Medication Continuation (MedCont, formerly known as
+MedCoPsy). Psychiatric facilities that are eligible for the Inpatient
+Psychiatric Facility Quality Reporting (IPFQR) program are required to
+meet all program requirements, otherwise their Medicare payments may be
+reduced.
 
 ## Usage
 
@@ -20,8 +26,8 @@ psych(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Inpatient Psychiatric Facility Quality Measure Data - by
+  Facility](https://data.cms.gov/provider-data/dataset/q9vs-r7wp)
 
 ## Arguments
 

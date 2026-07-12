@@ -1,7 +1,9 @@
 # Nursing Homes
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+General information on currently active nursing homes, including number
+of certified beds, quality measure scores, staffing and other
+information used in the Five-Star Rating System. Data are presented as
+one row per nursing home.
 
 ## Usage
 
@@ -23,26 +25,28 @@ nursing(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Nursing Home Provider
+  Information](https://data.cms.gov/provider-data/dataset/4pq5-n9py)
 
 ## Arguments
 
 - ccn:
 
-  `<chr>` provider identifier
+  `<chr>` CMS Certification Number
 
 - name:
 
-  `<chr>` description
+  `<chr>` Provider Name
 
 - org_dba:
 
-  `<chr>` desc
+  `<chr>` Legal Business Name
 
 - org_name:
 
-  `<chr>` desc
+  `<chr>` Unique name identifying a group of nursing homes that share at
+  least one individual or organizational owner, officer, or entity with
+  operational/managerial control
 
 - city, state, zip, county:
 
@@ -50,11 +54,11 @@ nursing(
 
 - beds:
 
-  `<int>` description
+  `<int>` Number of Federally Certified Beds
 
 - rating:
 
-  `<int>` description
+  `<int>` Overall Rating (1-5)
 
 - count:
 

@@ -1,7 +1,7 @@
 # Inpatient Rehabilitation Facilities
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+This dataset shows characteristics of the inpatient rehabilitation
+facilities that are shown on Inpatient Rehabilitation Facility Compare.
 
 ## Usage
 
@@ -19,8 +19,8 @@ rehab(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Inpatient Rehabilitation Facility - General
+  Information](https://data.cms.gov/provider-data/dataset/7t8x-u3ir)
 
 ## Arguments
 

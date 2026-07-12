@@ -1,7 +1,7 @@
 # Long-Term Care Hospitals
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
+A list of long-term care hospitals with information such as address,
+phone number, ownership data and more.
 
 ## Usage
 
@@ -21,30 +21,32 @@ long_term(
 
 ## Source
 
-- [API: Physician Facility
-  Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+- [API: Long-Term Care Hospital - General
+  Information](https://data.cms.gov/provider-data/dataset/azum-44iv)
 
 ## Arguments
 
 - ccn:
 
-  `<chr>` desc
+  `<chr>` The CMS Certification Number (CCN) is used to identify the
+  facility listed
 
 - name:
 
-  `<chr>` desc
+  `<chr>` Name of the facility
 
 - city, state, zip, county:
 
-  `<chr>` desc
+  `<chr>` Facility’s city, state, zip, county
 
 - own_type:
 
-  description
+  Facility’s ownership type: For Profit, Non-profit, Government,
+  Physician, Tribal
 
 - beds:
 
-  `<int>` desc
+  `<int>` The total number of beds in the facility
 
 - count:
 
