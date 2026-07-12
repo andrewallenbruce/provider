@@ -103,8 +103,9 @@ hospital <- function(
   }
 
   x <- as_keyframe(x, "ccn", 200L)
-
-  chain(x, KeyChain$hospital2)
+  x <- chain(x, KeyChain$hospital2)
+  x <- as_keyframe(x, "ccn", 200L)
+  chain(x, KeyChain$spending)
 }
 
 #' Hospital General Information

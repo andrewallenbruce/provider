@@ -54,6 +54,7 @@ S7::method(chain, list(KeyFrame, S7::class_function)) <- function(x, end) {
 KeyChain <- list(
   order_refer = rlang::as_function(~ order_refer(npi = .x)),
   hospital2 = rlang::as_function(~ hospital2(ccn = .x)),
+  spending = rlang::as_function(~ spending(ccn = .x)),
   nppes = rlang::as_function(~ nppes(npi = .x))
 )
 
@@ -73,6 +74,17 @@ S7::method(link, list(s3_hospital, s3_hospital2)) <- function(x, y) {
   y <- ss_cols(y, c("ccn", "rating", "county", "status"))
   x <- join2(x, y, on = "ccn")
   rc_replace(x, "status", "status_y") |>
+    collapse::colorderv(
+      c("address", "city", "state", "zip", "county"),
+      pos = "end"
+    )
+}
+
+#' @noRd
+S7::method(link, list(s3_hospital, s3_spending)) <- function(x, y) {
+  y <- ss_cols(y, c("ccn", "score"))
+  collapse::setrename(y, "score" = "mspb", .nse = TRUE)
+  join2(x, y, on = "ccn") |>
     collapse::colorderv(
       c("address", "city", "state", "zip", "county"),
       pos = "end"
