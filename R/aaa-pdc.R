@@ -49,6 +49,7 @@ url_pdc <- function(x) {
       clinician = "mj5m-pzi6",
       dialysis = "23ew-n7w9",
       hospital2 = "xubh-q36u",
+      hospice = "yc9t-dgbk", # Hospice - General Information
       long_term = "azum-44iv", # Long-Term Care Hospital - General Information
       spending = "rrqw-56er", # Medicare Spending Per Beneficiary - Hospital
       spending2 = "nrth-mfg3", # Medicare Hospital Spending by Claim

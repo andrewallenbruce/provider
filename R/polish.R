@@ -263,24 +263,9 @@ S7::method(polish, s3_spending) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_spending2) <- function(x) {
-  x[["percent_of_spndg_hospital"]] <- gsub(
-    "%",
-    "",
-    x[["percent_of_spndg_hospital"]],
-    fixed = TRUE
-  )
-  x[["percent_of_spndg_state"]] <- gsub(
-    "%",
-    "",
-    x[["percent_of_spndg_state"]],
-    fixed = TRUE
-  )
-  x[["percent_of_spndg_national"]] <- gsub(
-    "%",
-    "",
-    x[["percent_of_spndg_national"]],
-    fixed = TRUE
-  )
+  x[["percent_of_spndg_hospital"]] <- rm_percent(x[["percent_of_spndg_hospital"]])
+  x[["percent_of_spndg_state"]] <- rm_percent(x[["percent_of_spndg_state"]])
+  x[["percent_of_spndg_national"]] <- rm_percent(x[["percent_of_spndg_national"]])
   collapse::settfmv(
     x,
     c(

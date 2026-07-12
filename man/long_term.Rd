@@ -5,7 +5,7 @@
 \title{Long-Term Care Hospitals}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/azum-44iv}{API: Long-Term Care Hospital - General Information}
 }
 }
 \usage{
@@ -22,15 +22,15 @@ long_term(
 )
 }
 \arguments{
-\item{ccn}{\verb{<chr>} desc}
+\item{ccn}{\verb{<chr>} The CMS Certification Number (CCN) is used to identify the facility listed}
 
-\item{name}{\verb{<chr>} desc}
+\item{name}{\verb{<chr>} Name of the facility}
 
-\item{city, state, zip, county}{\verb{<chr>} desc}
+\item{city, state, zip, county}{\verb{<chr>} Facility’s city, state, zip, county}
 
-\item{own_type}{description}
+\item{own_type}{Facility’s ownership type: For Profit, Non-profit, Government, Physician, Tribal}
 
-\item{beds}{\verb{<int>} desc}
+\item{beds}{\verb{<int>} The total number of beds in the facility}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
@@ -38,8 +38,8 @@ long_term(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+A list of long-term care hospitals with information such as
+address, phone number, ownership data and more.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

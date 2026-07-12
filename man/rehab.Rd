@@ -5,7 +5,7 @@
 \title{Inpatient Rehabilitation Facilities}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/7t8x-u3ir}{API: Inpatient Rehabilitation Facility - General Information}
 }
 }
 \usage{
@@ -32,8 +32,9 @@ rehab(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+This dataset shows characteristics of the inpatient
+rehabilitation facilities that are shown on Inpatient Rehabilitation
+Facility Compare.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

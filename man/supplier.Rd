@@ -5,7 +5,7 @@
 \title{Medical Equipment Suppliers}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/ct36-nrcq}{API: Medical Equipment Suppliers}
 }
 }
 \usage{
@@ -46,8 +46,8 @@ supplier(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+A list of Suppliers that indicates the supplies carried at that
+location and the supplier's Medicare participation status.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

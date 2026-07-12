@@ -1,10 +1,11 @@
 #' @noRd
-recode <- S7::new_generic("recode", "x")
+rm_period <- function(x) {
+  gsub(".", "", x, fixed = TRUE)
+}
 
 #' @noRd
-rm_period <- function(x, col = "cred") {
-  x[[col]] <- gsub(".", "", x[[col]], fixed = TRUE)
-  return(x)
+rm_percent <- function(x) {
+  gsub("%", "", x, fixed = TRUE)
 }
 
 #' @noRd
@@ -76,6 +77,9 @@ recast <- function(.data, ...) {
   assign(name, res, envir = parent.frame(3L))
   invisible(res)
 }
+
+#' @noRd
+recode <- S7::new_generic("recode", "x")
 
 #' @noRd
 S7::method(recode, s3_clia) <- function(x) {
@@ -274,14 +278,14 @@ S7::method(recode, s3_quality) <- function(x) {
   collapse::tfmv(
     x,
     c(
-      "adjustment",
       "final_score",
-      "complex_bonus",
       "qa_score",
       "cost_score",
       "qi_score",
-      "dual_ratio",
-      "ci_score"
+      "ci_score",
+      "adjustment",
+      "complex_bonus",
+      "dual_ratio"
     ),
     as.double
   )

@@ -1,18 +1,22 @@
 #' Nursing Homes
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description General information on currently active nursing homes, including
+#'   number of certified beds, quality measure scores, staffing and other
+#'   information used in the Five-Star Rating System. Data are presented as one
+#'   row per nursing home.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Nursing Home Provider Information](https://data.cms.gov/provider-data/dataset/4pq5-n9py)
 #'
-#' @param ccn `<chr>` provider identifier
-#' @param name `<chr>` description
-#' @param org_name `<chr>` desc
-#' @param org_dba `<chr>` desc
+#' @param ccn `<chr>` CMS Certification Number
+#' @param name `<chr>` Provider Name
+#' @param org_name `<chr>` Unique name identifying a group of nursing homes that
+#'   share at least one individual or organizational owner, officer, or entity
+#'   with operational/managerial control
+#' @param org_dba `<chr>` Legal Business Name
 #' @param city,state,zip,county `<chr>` desc
-#' @param beds `<int>` description
-#' @param rating `<int>` description
+#' @param beds `<int>` Number of Federally Certified Beds
+#' @param rating `<int>` Overall Rating (1-5)
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()

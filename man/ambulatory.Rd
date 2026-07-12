@@ -5,7 +5,7 @@
 \title{Ambulatory Surgical Centers}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/48nr-hqxx}{API: OAS CAHPS Survey for Ambulatory Surgical Centers - Facility}
 }
 }
 \usage{
@@ -35,8 +35,13 @@ ambulatory(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+A list of ambulatory surgical center ratings for the Outpatient
+and Ambulatory Surgery Consumer Assessment of Healthcare Providers and
+Systems (OAS CAHPS) survey. The OAS CAHPS survey collects information about
+patients' experiences of care in hospital outpatient departments (HOPDs)
+and ambulatory surgical centers (ASCs). The data are updated and reported
+each quarter with data from the most recently completed quarter replacing
+the oldest quarter of data.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

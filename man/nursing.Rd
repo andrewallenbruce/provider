@@ -5,7 +5,7 @@
 \title{Nursing Homes}
 \source{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{API: Physician Facility Affiliations}
+\item \href{https://data.cms.gov/provider-data/dataset/4pq5-n9py}{API: Nursing Home Provider Information}
 }
 }
 \usage{
@@ -24,19 +24,21 @@ nursing(
 )
 }
 \arguments{
-\item{ccn}{\verb{<chr>} provider identifier}
+\item{ccn}{\verb{<chr>} CMS Certification Number}
 
-\item{name}{\verb{<chr>} description}
+\item{name}{\verb{<chr>} Provider Name}
 
-\item{org_dba}{\verb{<chr>} desc}
+\item{org_dba}{\verb{<chr>} Legal Business Name}
 
-\item{org_name}{\verb{<chr>} desc}
+\item{org_name}{\verb{<chr>} Unique name identifying a group of nursing homes that
+share at least one individual or organizational owner, officer, or entity
+with operational/managerial control}
 
 \item{city, state, zip, county}{\verb{<chr>} desc}
 
-\item{beds}{\verb{<int>} description}
+\item{beds}{\verb{<int>} Number of Federally Certified Beds}
 
-\item{rating}{\verb{<int>} description}
+\item{rating}{\verb{<int>} Overall Rating (1-5)}
 
 \item{count}{\verb{<lgl>} Return the total row count}
 }
@@ -44,8 +46,10 @@ nursing(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Access information concerning individual providers'
-affiliations with organizations/facilities.
+General information on currently active nursing homes, including
+number of certified beds, quality measure scores, staffing and other
+information used in the Five-Star Rating System. Data are presented as one
+row per nursing home.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

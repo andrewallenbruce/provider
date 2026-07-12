@@ -1,10 +1,15 @@
 #' Ambulatory Surgical Centers
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description A list of ambulatory surgical center ratings for the Outpatient
+#'   and Ambulatory Surgery Consumer Assessment of Healthcare Providers and
+#'   Systems (OAS CAHPS) survey. The OAS CAHPS survey collects information about
+#'   patients' experiences of care in hospital outpatient departments (HOPDs)
+#'   and ambulatory surgical centers (ASCs). The data are updated and reported
+#'   each quarter with data from the most recently completed quarter replacing
+#'   the oldest quarter of data.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: OAS CAHPS Survey for Ambulatory Surgical Centers - Facility](https://data.cms.gov/provider-data/dataset/48nr-hqxx)
 #'
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc
@@ -45,11 +50,16 @@ ambulatory <- function(
 
 #' Inpatient Psychiatric Facilities
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description This dataset includes provider-level data for quality measures
+#'   included under the IPFQR program, including HBIPS, SUB, TOB, Transition
+#'   Record (TR), Screening for Metabolic Disorders (SMD), FAPH, IMM,
+#'   Readmissions (READM), and Medication Continuation (MedCont, formerly known
+#'   as MedCoPsy). Psychiatric facilities that are eligible for the Inpatient
+#'   Psychiatric Facility Quality Reporting (IPFQR) program are required to meet
+#'   all program requirements, otherwise their Medicare payments may be reduced.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Inpatient Psychiatric Facility Quality Measure Data - by Facility](https://data.cms.gov/provider-data/dataset/q9vs-r7wp)
 #'
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc
@@ -88,11 +98,12 @@ psych <- function(
 
 #' Inpatient Rehabilitation Facilities
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description This dataset shows characteristics of the inpatient
+#'   rehabilitation facilities that are shown on Inpatient Rehabilitation
+#'   Facility Compare.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Inpatient Rehabilitation Facility - General Information](https://data.cms.gov/provider-data/dataset/7t8x-u3ir)
 #'
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc

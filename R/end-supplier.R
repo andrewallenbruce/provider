@@ -1,10 +1,10 @@
 #' Medical Equipment Suppliers
 #'
-#' @description Access information concerning individual providers'
-#'    affiliations with organizations/facilities.
+#' @description A list of Suppliers that indicates the supplies carried at that
+#'   location and the supplier's Medicare participation status.
 #'
 #' @source
-#'    * [API: Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'    * [API: Medical Equipment Suppliers](https://data.cms.gov/provider-data/dataset/ct36-nrcq)
 #'
 #' @param id `<chr>` provider identifier
 #' @param par `<lgl>` description
