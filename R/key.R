@@ -101,7 +101,8 @@ S7::method(carve, s3_opted_out) <- function(x, key, threshold) {
 S7::method(carve, s3_hospital) <- function(x, key, threshold) {
   key <- rlang::arg_match0(key, c("ccn", "npi", "pac", "enid"))
   if (key == "ccn") {
-    as_key(x[[key]][is_numeric(x[[key]])], threshold = threshold)
+    x <- x[[key]][is_numeric(x[[key]])]
+    return(as_key(x, threshold = threshold))
   }
   as_key(x[[key]], threshold = threshold)
 }

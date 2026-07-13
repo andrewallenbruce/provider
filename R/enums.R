@@ -50,6 +50,7 @@ enumerations <- function(
       cola = "COLA_ACRDTD_Y_MATCH_SW",
       jcaho = "JCAHO_ACRDTD_Y_MATCH_SW"
     ),
+    # <clia>
     certificate = list(
       cmp = 1,
       wav = 2,
@@ -57,6 +58,7 @@ enumerations <- function(
       ppm = 4,
       reg = 9
     ),
+    # <clia>
     multi = list(
       applied = "MLT_SITE_EXCPTN_SW",
       campus = "HOSP_LAB_EXCPTN_SW",
@@ -139,6 +141,7 @@ enumerations <- function(
       `1` = "I",
       `2` = "O"
     ),
+    # <utilization>
     pos = list(
       "F" = "F",
       "O" = "O"
