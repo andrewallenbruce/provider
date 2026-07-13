@@ -1,5 +1,11 @@
 # Changelog
 
+## provider 0.0.1.9310 (2026-07-13)
+
+- fix
+  [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
+  `as_key` method
+
 ## provider 0.0.1.9309 (2026-07-12)
 
 - added `hospital` -\> `spending` keychain
