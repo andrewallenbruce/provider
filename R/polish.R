@@ -26,14 +26,14 @@ S7::method(polish, s3_affiliations) <- function(x) {
   collapse::settfmv(x, "npi", as.integer)
   collapse::recode_char(
     x[["facility_type"]],
-    "Dialysis facility" = "ESRD",
-    "Home health agency" = "HHA",
+    "Dialysis facility" = "Dialysis Facility",
+    "Home health agency" = "Home Health Agency",
     "Hospice" = "Hospice",
     "Hospital" = "Hospital",
-    "Inpatient rehabilitation facility" = "IRF",
-    "Long-term care hospital" = "LTCH",
-    "Nursing home" = "NH",
-    "Skilled nursing facility" = "SNF",
+    "Inpatient rehabilitation facility" = "Inpatient Rehabilitation Facility",
+    "Long-term care hospital" = "Long-Term Care Hospital",
+    "Nursing home" = "Nursing Home",
+    "Skilled nursing facility" = "Skilled Nursing Facility",
     default = NA_character_,
     set = TRUE
   )
@@ -396,7 +396,8 @@ S7::method(polish, s3_services) <- function(x) {
 
   set_rename(x)
   get_columns(x) |>
-    rc_bin("drug") |>
+    rc_bin(c("par", "drug")) |>
+    rc_combine("address", "add_2") |>
     collapse::roworderv(
       c("hcpcs", "year"),
       decreasing = c(TRUE, FALSE)
