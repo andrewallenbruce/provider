@@ -241,23 +241,23 @@ utilization(npi = 1003000423)
 services(npi = 1003000423)
 #> ✔ services returned 41 results
 #> ✔ Retrieving 12 pages
-#> # A tibble: 41 × 22
-#>     year       npi entity par   hcpcs desc   drug pos   patients services charge
-#>    <int>     <int>  <int> <chr> <chr> <chr> <int> <chr>    <int>    <int>  <int>
-#>  1  2013    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     40
-#>  2  2014    1.00e9      1 Y     Q0091 Scre…     0 O           13       13     40
-#>  3  2015    1.00e9      1 Y     Q0091 Scre…     0 O           14       14     40
-#>  4  2016    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     40
-#>  5  2017    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     41
-#>  6  2018    1.00e9      1 Y     Q0091 Scre…     0 O           18       18     50
-#>  7  2019    1.00e9      1 Y     Q0091 Scre…     0 O           16       16     50
-#>  8  2020    1.00e9      1 Y     Q0091 Scre…     0 O           15       15     51
-#>  9  2021    1.00e9      1 Y     Q0091 Scre…     0 O           20       20     60
-#> 10  2022    1.00e9      1 Y     Q0091 Scre…     0 O           15       15     60
+#> # A tibble: 41 × 21
+#>     year       npi entity   par hcpcs desc   drug pos   patients services charge
+#>    <int>     <int>  <int> <int> <chr> <chr> <int> <chr>    <int>    <int>  <int>
+#>  1  2013    1.00e9      1     1 Q0091 Scre…     0 O           20       20     40
+#>  2  2014    1.00e9      1     1 Q0091 Scre…     0 O           13       13     40
+#>  3  2015    1.00e9      1     1 Q0091 Scre…     0 O           14       14     40
+#>  4  2016    1.00e9      1     1 Q0091 Scre…     0 O           20       20     40
+#>  5  2017    1.00e9      1     1 Q0091 Scre…     0 O           20       20     41
+#>  6  2018    1.00e9      1     1 Q0091 Scre…     0 O           18       18     50
+#>  7  2019    1.00e9      1     1 Q0091 Scre…     0 O           16       16     50
+#>  8  2020    1.00e9      1     1 Q0091 Scre…     0 O           15       15     51
+#>  9  2021    1.00e9      1     1 Q0091 Scre…     0 O           20       20     60
+#> 10  2022    1.00e9      1     1 Q0091 Scre…     0 O           15       15     60
 #> # ℹ 31 more rows
-#> # ℹ 11 more variables: allowed <dbl>, payment <dbl>, first <chr>, last <chr>,
-#> #   cred <chr>, specialty <chr>, address <chr>, add_2 <chr>, city <chr>,
-#> #   state <chr>, zip <chr>
+#> # ℹ 10 more variables: allowed <dbl>, payment <dbl>, first <chr>, last <chr>,
+#> #   cred <chr>, specialty <chr>, address <chr>, city <chr>, state <chr>,
+#> #   zip <chr>
 
 geography(
   hcpcs = c("Q0091", "G0101", "99213", "99212", "99203", "81002", "76830"),

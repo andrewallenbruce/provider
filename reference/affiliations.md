@@ -102,13 +102,13 @@ affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 7 results
 #> ✔ Retrieving 1 page
 #> # A tibble: 7 × 7
-#>   first   last                 npi pac        fac_type ccn    parent_ccn
-#>   <chr>   <chr>              <int> <chr>      <chr>    <chr>  <chr>     
-#> 1 JEFFREY KLOTZ         1073258398 3870095805 NH       33Z302 331302    
-#> 2 CARLOS  MARTINEZ      1154332062 5890739734 NH       33Z302 331302    
-#> 3 GABRIEL CREVIER-SORBO 1154946978 2264892017 NH       33Z302 331302    
-#> 4 MARY    HALLORAN      1396989059 8921259557 NH       33Z302 331302    
-#> 5 IL      CHON          1538173869 0547299091 NH       33Z302 331302    
-#> 6 DRAGOS  BANU          1558659367 6709004682 NH       33Z302 331302    
-#> 7 JOSHUA  WARNER        1760167712 8123473469 NH       33Z302 331302    
+#>   first   last                 npi pac        fac_type     ccn    parent_ccn
+#>   <chr>   <chr>              <int> <chr>      <chr>        <chr>  <chr>     
+#> 1 JEFFREY KLOTZ         1073258398 3870095805 Nursing Home 33Z302 331302    
+#> 2 CARLOS  MARTINEZ      1154332062 5890739734 Nursing Home 33Z302 331302    
+#> 3 GABRIEL CREVIER-SORBO 1154946978 2264892017 Nursing Home 33Z302 331302    
+#> 4 MARY    HALLORAN      1396989059 8921259557 Nursing Home 33Z302 331302    
+#> 5 IL      CHON          1538173869 0547299091 Nursing Home 33Z302 331302    
+#> 6 DRAGOS  BANU          1558659367 6709004682 Nursing Home 33Z302 331302    
+#> 7 JOSHUA  WARNER        1760167712 8123473469 Nursing Home 33Z302 331302    
 ```

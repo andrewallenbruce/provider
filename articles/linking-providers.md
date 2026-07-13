@@ -210,10 +210,10 @@ list(
   organization = as.data.frame(t(unique(x[5:7]))), 
   individual = unique(x[1:4]))
 #> $organization
-#>                V1
-#> fac_type       NH
-#> ccn        33Z302
-#> parent_ccn 331302
+#>                      V1
+#> fac_type   Nursing Home
+#> ccn              33Z302
+#> parent_ccn       331302
 #> 
 #> $individual
 #> # A tibble: 7 × 4

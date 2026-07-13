@@ -211,8 +211,6 @@ nppes(x)
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
 #> ✔ Retrieving 1 page
-#> [working] (66 + 0) -> 10 -> 59 | ■■■■■■■■■■■■■■                    44%
-#> [working] (0 + 0) -> 0 -> 135 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
 #> ✔ nppes returned 135/135 results
 #> $ind
 #> $ind$basic
@@ -248,7 +246,7 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> # ℹ 165 more rows
 #> 
 #> $ind$location
-#> # A tibble: 232 × 6
+#> # A tibble: 233 × 6
 #>           npi   loc city         state address                     zip      
 #>  *      <int> <int> <chr>        <chr> <chr>                       <chr>    
 #>  1 1013227818     1 COTTONTOWN   TN    250 OLD HIGHWAY 31 W        370484639
@@ -261,7 +259,7 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033486725     1 NASHVILLE    TN    3601 THE VANDERBILT CLINIC  372320001
 #>  9 1033486725     2 ALAMOGORDO   NM    2539 MEDICAL DR STE 104     883108720
 #> 10 1033486725     3 NASHVILLE    TN    3841 GREEN HILLS VILLAGE DR 372152691
-#> # ℹ 222 more rows
+#> # ℹ 223 more rows
 #> 
 #> 
 #> attr(,"class")
