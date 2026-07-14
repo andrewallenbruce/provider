@@ -19,7 +19,7 @@ the oldest quarter of data."><meta property="og:image" content="https://andrewal
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9310</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9311</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,6 @@ the oldest quarter of data.</p>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rating <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -101,7 +100,7 @@ the oldest quarter of data.</p>
 <dd><p><code>&lt;chr&gt;</code> desc</p></dd>
 
 
-<dt id="arg-city-state-zip-county">city, state, zip, county<a class="anchor" aria-label="anchor" href="#arg-city-state-zip-county"></a></dt>
+<dt id="arg-city-state-zip">city, state, zip<a class="anchor" aria-label="anchor" href="#arg-city-state-zip"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> desc</p></dd>
 
 
@@ -125,19 +124,19 @@ the oldest quarter of data.</p>
 <span class="r-in"><span><span class="fu">ambulatory</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">ambulatory</span> returned <span style="color: #BBBB00; font-weight: bold;">244</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 244 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn   name  address city  state zip   county patients surveys response rating</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11C0… ARC … 3215 S… BRUN… GA    31520 <span style="color: #BB0000;">NA</span>          192      42 22           94</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11C0… ATLA… 5730 G… ATLA… GA    30328 <span style="color: #BB0000;">NA</span>         <span style="text-decoration: underline;">2</span>525     493 20           92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11C0… MARI… 780 CA… MARI… GA    30060 <span style="color: #BB0000;">NA</span>          518     110 21           93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11C0… EMOR… 1365 C… ATLA… GA    30322 <span style="color: #BB0000;">NA</span>         <span style="text-decoration: underline;">1</span>954     396 20           96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11C0… MEDI… 1429 O… MACON GA    31201 <span style="color: #BB0000;">NA</span>          553     181 33           95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11C0… COLU… 915 RU… AUGU… GA    30904 <span style="color: #BB0000;">NA</span>          962     309 32           96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11C0… GWIN… 2131 F… SNEL… GA    30078 <span style="color: #BB0000;">NA</span>          970     241 25           96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11C0… SURG… 16 JOH… ROME  GA    30165 <span style="color: #BB0000;">NA</span>         <span style="text-decoration: underline;">2</span>574     791 31           97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11C0… NOVA… 3200 D… ATLA… GA    30327 <span style="color: #BB0000;">NA</span>          407      90 22           93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11C0… THE … 11 JOH… ROME  GA    30165 <span style="color: #BB0000;">NA</span>          371     108 29           96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 244 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ccn        name                              address city  state zip   rating</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 11C0001002 ARC OF GEORGIA LLC                3215 S… BRUN… GA    31520     94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11C0001003 ATLANTA SURGERY CENTER LTD        5730 G… ATLA… GA    30328     92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 11C0001004 MARIETTA OUTPATIENT SURGERY LTD   780 CA… MARI… GA    30060     93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 11C0001006 EMORY HEALTHCARE                  1365 C… ATLA… GA    30322     96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 11C0001008 MEDICAL EYE ASSOCIATES INC        1429 O… MACON GA    31201     95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 11C0001009 COLUMBIA SURGICARE OF AUGUSTA LTD 915 RU… AUGU… GA    30904     96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 11C0001012 GWINNETT CENTER FOR OUTPATIENT S… 2131 F… SNEL… GA    30078     96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 11C0001015 SURGERY CENTER OF ROME LP         16 JOH… ROME  GA    30165     97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 11C0001017 NOVAMED MANAGEMENT SERVICES LLC   3200 D… ATLA… GA    30327     93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 11C0001027 THE ROME ENDOSCOPY CENTER         11 JOH… ROME  GA    30165     96</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 234 more rows</span></span>
 </code></pre></div>
     </div>

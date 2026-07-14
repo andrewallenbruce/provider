@@ -17,7 +17,6 @@ ambulatory(
   city = NULL,
   state = NULL,
   zip = NULL,
-  county = NULL,
   rating = NULL,
   count = FALSE
 )
@@ -38,7 +37,7 @@ ambulatory(
 
   `<chr>` desc
 
-- city, state, zip, county:
+- city, state, zip:
 
   `<chr>` desc
 
@@ -63,18 +62,18 @@ ambulatory(count = TRUE)
 ambulatory(state = "GA")
 #> ✔ ambulatory returned 244 results
 #> ✔ Retrieving 1 page
-#> # A tibble: 244 × 11
-#>    ccn   name  address city  state zip   county patients surveys response rating
-#>    <chr> <chr> <chr>   <chr> <chr> <chr> <chr>     <int>   <int> <chr>     <int>
-#>  1 11C0… ARC … 3215 S… BRUN… GA    31520 NA          192      42 22           94
-#>  2 11C0… ATLA… 5730 G… ATLA… GA    30328 NA         2525     493 20           92
-#>  3 11C0… MARI… 780 CA… MARI… GA    30060 NA          518     110 21           93
-#>  4 11C0… EMOR… 1365 C… ATLA… GA    30322 NA         1954     396 20           96
-#>  5 11C0… MEDI… 1429 O… MACON GA    31201 NA          553     181 33           95
-#>  6 11C0… COLU… 915 RU… AUGU… GA    30904 NA          962     309 32           96
-#>  7 11C0… GWIN… 2131 F… SNEL… GA    30078 NA          970     241 25           96
-#>  8 11C0… SURG… 16 JOH… ROME  GA    30165 NA         2574     791 31           97
-#>  9 11C0… NOVA… 3200 D… ATLA… GA    30327 NA          407      90 22           93
-#> 10 11C0… THE … 11 JOH… ROME  GA    30165 NA          371     108 29           96
+#> # A tibble: 244 × 7
+#>    ccn        name                              address city  state zip   rating
+#>    <chr>      <chr>                             <chr>   <chr> <chr> <chr>  <int>
+#>  1 11C0001002 ARC OF GEORGIA LLC                3215 S… BRUN… GA    31520     94
+#>  2 11C0001003 ATLANTA SURGERY CENTER LTD        5730 G… ATLA… GA    30328     92
+#>  3 11C0001004 MARIETTA OUTPATIENT SURGERY LTD   780 CA… MARI… GA    30060     93
+#>  4 11C0001006 EMORY HEALTHCARE                  1365 C… ATLA… GA    30322     96
+#>  5 11C0001008 MEDICAL EYE ASSOCIATES INC        1429 O… MACON GA    31201     95
+#>  6 11C0001009 COLUMBIA SURGICARE OF AUGUSTA LTD 915 RU… AUGU… GA    30904     96
+#>  7 11C0001012 GWINNETT CENTER FOR OUTPATIENT S… 2131 F… SNEL… GA    30078     96
+#>  8 11C0001015 SURGERY CENTER OF ROME LP         16 JOH… ROME  GA    30165     97
+#>  9 11C0001017 NOVAMED MANAGEMENT SERVICES LLC   3200 D… ATLA… GA    30327     93
+#> 10 11C0001027 THE ROME ENDOSCOPY CENTER         11 JOH… ROME  GA    30165     96
 #> # ℹ 234 more rows
 ```
