@@ -455,10 +455,6 @@ RE_NAME = list(
     citytown = "city",
     state = "state",
     zip_code = "zip",
-    countyparish = "county",
-    number_of_sampled_patients = "patients",
-    number_of_completed_surveys = "surveys",
-    survey_response_rate_percent = "response",
     patients_rating_of_the_facility_linear_mean_score = "rating"
   ),
   long_term = list(

@@ -59,7 +59,7 @@ enrolled <- function(
   x <- execute(x)
   x <- polish(x)
 
-  if (count) {
+  if (count || rlang::is_integerish(x, n = 1)) {
     return(invisible(x))
   }
 

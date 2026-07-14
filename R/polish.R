@@ -45,11 +45,7 @@ S7::method(polish, s3_affiliations) <- function(x) {
 S7::method(polish, s3_ambulatory) <- function(x) {
   collapse::settfmv(
     x,
-    c(
-      "number_of_sampled_patients",
-      "number_of_completed_surveys",
-      "patients_rating_of_the_facility_linear_mean_score"
-    ),
+    "patients_rating_of_the_facility_linear_mean_score",
     as.integer
   )
   set_rename(x)

@@ -15,7 +15,6 @@ ambulatory(
   city = NULL,
   state = NULL,
   zip = NULL,
-  county = NULL,
   rating = NULL,
   count = FALSE
 )
@@ -25,7 +24,7 @@ ambulatory(
 
 \item{name}{\verb{<chr>} desc}
 
-\item{city, state, zip, county}{\verb{<chr>} desc}
+\item{city, state, zip}{\verb{<chr>} desc}
 
 \item{rating}{\verb{<int>} desc}
 

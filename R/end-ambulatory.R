@@ -13,7 +13,7 @@
 #'
 #' @param ccn `<chr>` desc
 #' @param name `<chr>` desc
-#' @param city,state,zip,county `<chr>` desc
+#' @param city,state,zip `<chr>` desc
 #' @param rating `<int>` desc
 #' @param count `<lgl>` Return the total row count
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
@@ -27,7 +27,6 @@ ambulatory <- function(
   city = NULL,
   state = NULL,
   zip = NULL,
-  county = NULL,
   rating = NULL,
   count = FALSE
 ) {
@@ -39,7 +38,6 @@ ambulatory <- function(
     citytown = city,
     state = state,
     zip_code = zip,
-    countyparish = county,
     patients_rating_of_the_facility_linear_mean_score = rating
   )
 
