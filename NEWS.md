@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9311 (2026-07-14)
+
+* fixed bug in chained calls when the API returns no results.
+
+
 # provider 0.0.1.9310 (2026-07-13)
 
 * fix `hospital()` `as_key` method
