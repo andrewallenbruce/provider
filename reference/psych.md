@@ -58,5 +58,20 @@ containing the search results.
 psych(count = TRUE)
 #> ◼ psych | 1,424 rows | 1 pages
 psych(state = "GA")
-#> Error in httr2::req_perform(httr2::request(flatten_pdc(S7::prop(x, "url"),     S7::prop(x, "query"), results = "false"))): HTTP 503 Service Unavailable.
+#> ✔ psych returned 41 results
+#> ✔ Retrieving 1 page
+#> # A tibble: 41 × 7
+#>    ccn    name                                  address city  state zip   county
+#>    <chr>  <chr>                                 <chr>   <chr> <chr> <chr> <chr> 
+#>  1 110002 UPSON REGIONAL MEDICAL CENTER         801 W … THOM… GA    30286 UPSON 
+#>  2 110003 Memorial Satilla Health               1900 T… WAYC… GA    31501 WARE  
+#>  3 110007 PHOEBE PUTNEY MEMORIAL HOSPITAL       417 TH… ALBA… GA    31703 DOUGH…
+#>  4 110015 TANNER MEDICAL CENTER VILLA RICA      601 DA… VILL… GA    30180 CARRO…
+#>  5 110029 NORTHEAST GEORGIA MEDICAL CENTER, INC 743 SP… GAIN… GA    30501 HALL  
+#>  6 110038 ARCHBOLD MEMORIAL HOSPITAL            915 GO… THOM… GA    31792 THOMAS
+#>  7 110054 ATRIUM HEALTH FLOYD MEDICAL CENTER    304 TU… ROME  GA    30162 FLOYD 
+#>  8 110071 APPLING HEALTHCARE                    163 E … BAXL… GA    31513 APPLI…
+#>  9 110073 DORMINY MEDICAL CENTER                200 PE… FITZ… GA    31750 BEN H…
+#> 10 110079 GRADY MEMORIAL HOSPITAL               80 JES… ATLA… GA    30303 FULTON
+#> # ℹ 31 more rows
 ```

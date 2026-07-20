@@ -73,7 +73,7 @@ containing the search results.
 
 ``` r
 dialysis(count = TRUE)
-#> ◼ dialysis | 7,557 rows | 6 pages
+#> ◼ dialysis | 7,490 rows | 5 pages
 dialysis(org_name = "DaVita", state = "GA")
 #> ✔ dialysis returned 139 results
 #> ✔ Retrieving 1 page

@@ -73,24 +73,26 @@ containing the search results.
 
 ``` r
 supplier(count = TRUE)
-#> ◼ supplier | 57,197 rows | 39 pages
+#> ◼ supplier | 57,176 rows | 39 pages
 supplier(state = "GA")
-#> ✔ supplier returned 1,834 results
+#> ✔ supplier returned 1,831 results
 #> ✔ Retrieving 2 pages
-#> # A tibble: 1,834 × 15
+#> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
+#> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
+#> # A tibble: 1,831 × 15
 #>      provid   par start_date org_dba org_name specialty prov_type supplies   cba
 #>       <int> <int> <date>     <chr>   <chr>    <chr>     <chr>     <chr>    <int>
-#>  1 34362943     1 2026-03-20 MEDICA… MEDICAL… Medical … NA        Orthose…     0
-#>  2 34362817     1 2025-12-04 PEACHT… PEACHTR… Certifie… NA        Epoetin…     0
-#>  3 34362619     0 2025-11-28 CRESCE… CRESCEN… Pharmacy  NA        Epoetin…     0
-#>  4 34361935     1 2025-10-01 MA MED… MA MED … Medical … NA        Blood G…     0
-#>  5 34361731     0 2025-09-15 TWIST … TWIST N… Medical … NA        Blood G…     0
-#>  6 34362859     1 2026-02-27 VITA P… VITA PA… Medical … NA        Commode…     0
-#>  7 34362853     1 2026-02-27 HEALTH… HEALTHY… MSC With… NA        Hospita…     0
-#>  8 21609063     0 2026-01-01 CARMIC… CARMICH… Pharmacy  NA        Epoetin…     0
-#>  9 34362557     1 2026-01-26 INFUSI… INFUSIO… Certifie… NA        Epoetin…     0
-#> 10 20505233     0 2026-01-01 LILY'S… LILY'S … Pharmacy  NA        Epoetin…     0
-#> # ℹ 1,824 more rows
+#>  1 34362765     0 2025-11-28 CRESCE… CRESCEN… Pharmacy  NA        Epoetin…     0
+#>  2 34362557     1 2026-01-26 INFUSI… INFUSIO… Certifie… NA        Epoetin…     0
+#>  3 34361985     1 2025-08-14 FOOT S… FOOT SO… NA        CERTIFIE… Limb Pr…     0
+#>  4 34362759     1 2025-04-12 MAGNOL… MAGNOLI… NA        NURSE PR… Contrac…     0
+#>  5 20685137     0 2025-03-31 DENTAL… DENTAL … Orthotic… ORAL SUR… Facial …     0
+#>  6 34361175     1 2025-06-24 SOUTHE… SOUTHER… NA        NURSE PR… Commode…     0
+#>  7 34361459     1 2025-08-29 BROWNS… BROWNS … Medical … NA        Commode…     0
+#>  8 34361477     1 2025-08-13 A PLUS… A PLUS … Medical … NA        Orthose…     0
+#>  9 34361315     1 2025-08-04 CARE M… CARE ME… Medical … NA        Commode…     0
+#> 10 20684837     1 2025-03-24 EMPOWE… EMPOWER… Medical … NA        Commode…     0
+#> # ℹ 1,821 more rows
 #> # ℹ 6 more variables: lat <dbl>, lon <dbl>, address <chr>, city <chr>,
 #> #   state <chr>, zip <chr>
 ```

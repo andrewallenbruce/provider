@@ -9,7 +9,7 @@ location and the supplier's Medicare participation status."><meta property="og:i
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9311</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9312</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,24 +125,26 @@ location and the supplier's Medicare participation status.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">supplier</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">supplier</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">57,197</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">39</span> pages</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">supplier</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">57,176</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">39</span> pages</span>
 <span class="r-in"><span><span class="fu">supplier</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">supplier</span> returned <span style="color: #BBBB00; font-weight: bold;">1,834</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">supplier</span> returned <span style="color: #BBBB00; font-weight: bold;">1,831</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">2</span> pages</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,834 × 15</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [working] (0 + 0) -&gt; 1 -&gt; 1 | <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50%</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> [working] (0 + 0) -&gt; 0 -&gt; 2 | <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,831 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      provid   par start_date org_dba org_name specialty prov_type supplies   cba</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 34<span style="text-decoration: underline;">362</span>943     1 2026-03-20 MEDICA… MEDICAL… Medical … <span style="color: #BB0000;">NA</span>        Orthose…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 34<span style="text-decoration: underline;">362</span>817     1 2025-12-04 PEACHT… PEACHTR… Certifie… <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 34<span style="text-decoration: underline;">362</span>619     0 2025-11-28 CRESCE… CRESCEN… Pharmacy  <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 34<span style="text-decoration: underline;">361</span>935     1 2025-10-01 MA MED… MA MED … Medical … <span style="color: #BB0000;">NA</span>        Blood G…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 34<span style="text-decoration: underline;">361</span>731     0 2025-09-15 TWIST … TWIST N… Medical … <span style="color: #BB0000;">NA</span>        Blood G…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 34<span style="text-decoration: underline;">362</span>859     1 2026-02-27 VITA P… VITA PA… Medical … <span style="color: #BB0000;">NA</span>        Commode…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 34<span style="text-decoration: underline;">362</span>853     1 2026-02-27 HEALTH… HEALTHY… MSC With… <span style="color: #BB0000;">NA</span>        Hospita…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 21<span style="text-decoration: underline;">609</span>063     0 2026-01-01 CARMIC… CARMICH… Pharmacy  <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 34<span style="text-decoration: underline;">362</span>557     1 2026-01-26 INFUSI… INFUSIO… Certifie… <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 20<span style="text-decoration: underline;">505</span>233     0 2026-01-01 LILY'S… LILY'S … Pharmacy  <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,824 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 34<span style="text-decoration: underline;">362</span>765     0 2025-11-28 CRESCE… CRESCEN… Pharmacy  <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 34<span style="text-decoration: underline;">362</span>557     1 2026-01-26 INFUSI… INFUSIO… Certifie… <span style="color: #BB0000;">NA</span>        Epoetin…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 34<span style="text-decoration: underline;">361</span>985     1 2025-08-14 FOOT S… FOOT SO… <span style="color: #BB0000;">NA</span>        CERTIFIE… Limb Pr…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 34<span style="text-decoration: underline;">362</span>759     1 2025-04-12 MAGNOL… MAGNOLI… <span style="color: #BB0000;">NA</span>        NURSE PR… Contrac…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 20<span style="text-decoration: underline;">685</span>137     0 2025-03-31 DENTAL… DENTAL … Orthotic… ORAL SUR… Facial …     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 34<span style="text-decoration: underline;">361</span>175     1 2025-06-24 SOUTHE… SOUTHER… <span style="color: #BB0000;">NA</span>        NURSE PR… Commode…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 34<span style="text-decoration: underline;">361</span>459     1 2025-08-29 BROWNS… BROWNS … Medical … <span style="color: #BB0000;">NA</span>        Commode…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 34<span style="text-decoration: underline;">361</span>477     1 2025-08-13 A PLUS… A PLUS … Medical … <span style="color: #BB0000;">NA</span>        Orthose…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 34<span style="text-decoration: underline;">361</span>315     1 2025-08-04 CARE M… CARE ME… Medical … <span style="color: #BB0000;">NA</span>        Commode…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 20<span style="text-decoration: underline;">684</span>837     1 2025-03-24 EMPOWE… EMPOWER… Medical … <span style="color: #BB0000;">NA</span>        Commode…     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,821 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: lat &lt;dbl&gt;, lon &lt;dbl&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
 </code></pre></div>

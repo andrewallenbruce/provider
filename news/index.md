@@ -1,5 +1,9 @@
 # Changelog
 
+## provider 0.0.1.9312 (2026-07-19)
+
+- exported `psych`, `rehab`, `veterans`
+
 ## provider 0.0.1.9311 (2026-07-14)
 
 - fixed bug in chained calls when the API returns no results.

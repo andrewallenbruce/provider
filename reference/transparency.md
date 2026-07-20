@@ -109,10 +109,10 @@ containing the search results.
 
 ``` r
 transparency(count = TRUE)
-#> ◼ transparency | 12,334 rows | 3 pages
+#> ◼ transparency | 12,819 rows | 3 pages
 
 transparency(count = TRUE, action = "met")
-#> ✔ transparency returned 3,506 results
+#> ✔ transparency returned 3,546 results
 
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result
