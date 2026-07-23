@@ -100,5 +100,8 @@ hospital(
   state = "GA",
   subgroup = subgroups(acute = FALSE)
 )
+
+hospital(ccn = ends("F"))
+hospital(ccn = ends("E"))
 \dontshow{\}) # examplesIf}
 }

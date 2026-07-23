@@ -49,6 +49,8 @@
 #'   subgroup = subgroups(acute = FALSE)
 #' )
 #'
+#' hospital(ccn = ends("F"))
+#' hospital(ccn = ends("E"))
 #' @export
 hospital <- function(
   npi = NULL,

@@ -91,24 +91,27 @@ as_key <- function(x, threshold) {
 carve <- S7::new_generic("carve", "x")
 
 #' @noRd
-S7::method(carve, s3_opted_out) <- function(x, key, threshold) {
+S7::method(carve, s3_opted_out) <- function(x, key_name, threshold) {
   x <- collapse::ss(x, x[["order_refer"]] %==% 1L, check = FALSE)
-  key <- rlang::arg_match0(key, c("npi"))
-  as_key(x[[key]], threshold = threshold)
+  key_name <- rlang::arg_match0(key_name, c("npi"))
+  as_key(x[[key_name]], threshold = threshold)
 }
 
 #' @noRd
-S7::method(carve, s3_hospital) <- function(x, key, threshold) {
-  key <- rlang::arg_match0(key, c("ccn", "npi", "pac", "enid"))
-  if (key == "ccn") {
-    x <- x[[key]][is_numeric(x[[key]])]
-    return(as_key(x, threshold = threshold))
-  }
-  as_key(x[[key]], threshold = threshold)
+S7::method(carve, s3_hospital) <- function(x, key_name, threshold) {
+  key_name <- rlang::arg_match0(key_name, c("ccn", "npi", "pac", "enid"))
+  # if (key_name == "ccn") {
+  #   x <- x[[key_name]][is_numeric(x[[key_name]])]
+  #   if (rlang::is_empty(x)) {
+  #     return(invisible(NULL))
+  #   }
+  #   return(as_key(x, threshold = threshold))
+  # }
+  as_key(x[[key_name]], threshold = threshold)
 }
 
 #' @noRd
-S7::method(carve, s3_enrolled) <- function(x, key, threshold) {
-  key <- rlang::arg_match0(key, c("npi", "pac", "enid"))
-  as_key(x[[key]], threshold = threshold)
+S7::method(carve, s3_enrolled) <- function(x, key_name, threshold) {
+  key_name <- rlang::arg_match0(key_name, c("npi", "pac", "enid"))
+  as_key(x[[key_name]], threshold = threshold)
 }

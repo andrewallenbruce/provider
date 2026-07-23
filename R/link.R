@@ -12,12 +12,12 @@ KeyFrame <- S7::new_class(
 )
 
 #' @noRd
-as_keyframe <- function(x, key, threshold) {
+as_keyframe <- function(x, key_name, threshold) {
   KeyFrame(
     frame = x,
     key = carve(
       x = x,
-      key = key,
+      key_name = key_name,
       threshold = threshold
     )
   )
@@ -34,7 +34,7 @@ S7::method(chain, list(KeyFrame, S7::class_function)) <- function(x, end) {
     }
     y <- end(x@key)
 
-    if (no_rows(y)) {
+    if (rlang::is_integerish(y, n = 1)) {
       return(x@frame)
     }
 
@@ -43,7 +43,8 @@ S7::method(chain, list(KeyFrame, S7::class_function)) <- function(x, end) {
 
   y <- rowbind2(purrr::map(x@key@split, end))
 
-  if (no_rows(y)) {
+  # list(x@frame, 0L) |> rowbind2()
+  if (collapse::fnrow(y) == 0L) {
     return(x@frame)
   }
 
