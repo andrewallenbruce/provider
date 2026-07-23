@@ -49,12 +49,12 @@ containing the search results.
 
 ``` r
 pending(count = TRUE)
-#> ◼ pending | 14,372 rows | 4 pages
+#> ◼ pending | 14,171 rows | 4 pages
 
 pending(first = starts("V"))
-#> ✔ pending returned 199 results
+#> ✔ pending returned 191 results
 #> ✔ Retrieving 2 pages
-#> # A tibble: 199 × 4
+#> # A tibble: 191 × 4
 #>    prov_type        npi first     last     
 #>    <chr>          <int> <chr>     <chr>    
 #>  1 Physician 1932839230 VA        SI       
@@ -62,10 +62,10 @@ pending(first = starts("V"))
 #>  3 Physician 1144512724 VADIN     LALL DASS
 #>  4 Physician 1194614206 VAHID     HARBI    
 #>  5 Physician 1104512912 VAISHNAVI PARCHURI 
-#>  6 Physician 1164162343 VAISHNAVI WARRIER  
-#>  7 Physician 1205765161 VALANDRA  SIERRA   
-#>  8 Physician 1770420010 VALBERTO  SANHA    
-#>  9 Physician 1245899301 VALEDA    YONG     
-#> 10 Physician 1043151368 VALENTINA TESTA    
-#> # ℹ 189 more rows
+#>  6 Physician 1205765161 VALANDRA  SIERRA   
+#>  7 Physician 1770420010 VALBERTO  SANHA    
+#>  8 Physician 1245899301 VALEDA    YONG     
+#>  9 Physician 1154292712 VALERIA   SILVA    
+#> 10 Physician 1629728308 VALERIE   HARDOON  
+#> # ℹ 181 more rows
 ```

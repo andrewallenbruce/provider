@@ -186,4 +186,29 @@ hospital(
 #> 12 REHABILITA… REHABI… 1130… 1.54e9 5698… O202…     0 2020-10-16 LLC      For-P…
 #> # ℹ 9 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
 #> #   mspb <dbl>, address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+
+hospital(ccn = ends("F"))
+#> ✔ hospital returned 1 result
+#> ✔ Retrieving 1 page
+#> ✔ hospital2 returned 1 result
+#> ✔ Retrieving 1 page
+#> ✔ spending returned 0 results
+#> # A tibble: 1 × 18
+#>   org_name     org_dba ccn      npi pac   enid  multi inc_date org_type   status
+#> * <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>   <chr>      <chr> 
+#> 1 BROOKE ARMY… NA      4506… 1.92e9 4587… O200…     0 NA       Other: DE… Depar…
+#> # ℹ 8 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
+#> #   address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+hospital(ccn = ends("E"))
+#> ✔ hospital returned 2 results
+#> ✔ Retrieving 1 page
+#> ✔ hospital2 returned 0 results
+#> ✔ spending returned 0 results
+#> # A tibble: 2 × 16
+#>   org_name     org_dba ccn      npi pac   enid  multi inc_date org_type   status
+#> * <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>   <chr>      <chr> 
+#> 1 DEPARTMENT … PATTON… 0512… 1.04e9 9638… O200…     0 NA       Other: ST… Non-P…
+#> 2 DEPARTMENT … ATASCA… 0512… 1.17e9 9638… O200…     0 NA       Other: FE… Non-P…
+#> # ℹ 6 more variables: loc_type <chr>, address <chr>, city <chr>, state <chr>,
+#> #   zip <chr>, sub_group <chr>
 ```

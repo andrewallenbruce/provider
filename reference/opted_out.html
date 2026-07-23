@@ -139,14 +139,14 @@ fee-for-service (Part B).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opted_out</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">opted_out</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">56,300</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">12</span> pages</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">opted_out</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">57,209</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">12</span> pages</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">opted_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, specialty <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"Psych"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">opted_out</span> returned <span style="color: #BBBB00; font-weight: bold;">226</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">opted_out</span> returned <span style="color: #BBBB00; font-weight: bold;">227</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="color: #BBBB00; font-weight: bold;">128</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">order_refer</span> returned <span style="color: #BBBB00; font-weight: bold;">129</span> results</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 226 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 227 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         npi first last  specialty start_date end_date   updated    address city </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   1.88<span style="color: #949494;">e</span>9 Ana   Adel… Clinical… 2012-07-01 2026-07-01 2024-08-15 675 SE… ATLA…</span>
@@ -159,7 +159,7 @@ fee-for-service (Part B).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   1.88<span style="color: #949494;">e</span>9 Barb… Da V… Psychiat… 2012-07-01 2026-07-01 2024-08-15 143 FO… ST S…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   1.29<span style="color: #949494;">e</span>9 Matt… Norm… Psychiat… 2012-10-01 2026-10-01 2024-11-15 3495 P… ATLA…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   1.30<span style="color: #949494;">e</span>9 Linda Ande… Clinical… 2013-01-01 2027-01-01 2025-01-15 4675 N… ATLA…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 216 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 217 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: state &lt;chr&gt;, zip &lt;chr&gt;, order_refer &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>

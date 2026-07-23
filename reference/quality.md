@@ -147,10 +147,10 @@ metrics()
 #>  2  2019 Group      Dual Eligible Ratio 0.216
 #>  3  2020 Group      Dual Eligible Ratio 0.210
 #>  4  2021 Group      Dual Eligible Ratio 0.208
-#>  5  2022 Group      Dual Eligible Ratio 0.211
-#>  6  2023 Group      Dual Eligible Ratio 0.206
-#>  7  2024 Group      Dual Eligible Ratio 0.202
-#>  8  2025 Group      Dual Eligible Ratio 0.202
+#>  5  2022 Group      Dual Eligible Ratio 0.469
+#>  6  2023 Group      Dual Eligible Ratio 0.469
+#>  7  2024 Group      Dual Eligible Ratio 0.469
+#>  8  2025 Group      Dual Eligible Ratio 0.469
 #>  9  2018 Individual Dual Eligible Ratio 0.288
 #> 10  2019 Individual Dual Eligible Ratio 0.269
 #> # ℹ 22 more rows
