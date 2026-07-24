@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9313 (2026-07-24)
+
+* added `chains` switch
+* fixed bug in `hospital()` chaining method
+
+
 # provider 0.0.1.9312 (2026-07-19)
 
 * exported `psych`, `rehab`, `veterans`
