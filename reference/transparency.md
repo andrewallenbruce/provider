@@ -116,7 +116,6 @@ transparency(count = TRUE, action = "met")
 
 transparency(state = "GA", city = "Valdosta")
 #> ✔ transparency returned 1 result
-#> ✔ Retrieving 1 page
 #> # A tibble: 1 × 7
 #>    case name             address             city     state action   action_date
 #>   <int> <chr>            <chr>               <chr>    <chr> <chr>    <date>     

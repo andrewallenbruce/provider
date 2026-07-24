@@ -188,7 +188,6 @@ clia(count = TRUE)
 #> ◼ clia | 681,059 rows | 137 pages
 clia(certificate = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 18 × 20
 #>    name        ccn   clia  status  labs sites certificate address fac_type owner
 #>  * <chr>       <chr> <chr> <chr>  <int> <int> <chr>       <chr>   <chr>    <chr>
@@ -215,7 +214,6 @@ clia(certificate = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> #   multi <chr>, accredit <chr>
 clia(accrediting = c("cap", "cola", "jcaho"))
 #> ✔ clia returned 1 result
-#> ✔ Retrieving 1 page
 #> # A tibble: 1 × 20
 #>   name  ccn   clia  status  labs sites certificate address fac_type owner action
 #> * <chr> <chr> <chr> <chr>  <int> <int> <chr>       <chr>   <chr>    <chr> <chr> 

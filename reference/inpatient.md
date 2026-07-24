@@ -158,7 +158,6 @@ inpatient(count = TRUE)
 #> ◼ inpatient | 38,594 rows | 12 pages
 inpatient(state = "GA", city = "Valdosta")
 #> ✔ inpatient returned 12 results
-#> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 18
 #>     year ccn    org_name     address city  state zip   patients discharges  days
 #>    <int> <chr>  <chr>        <chr>   <chr> <chr> <chr>    <int>      <int> <int>
@@ -180,7 +179,6 @@ outpatient(count = TRUE)
 #> ◼ outpatient | 1,008,975 rows | 208 pages
 outpatient(state = "GA", city = "Valdosta")
 #> ✔ outpatient returned 442 results
-#> ✔ Retrieving 10 pages
 #> # A tibble: 442 × 16
 #>     year ccn    org_name address city  state zip   apc   desc  patients services
 #>    <int> <chr>  <chr>    <chr>   <chr> <chr> <chr> <chr> <chr>    <int>    <int>

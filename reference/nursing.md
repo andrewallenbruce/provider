@@ -76,7 +76,6 @@ nursing(count = TRUE)
 #> ◼ nursing | 14,695 rows | 10 pages
 nursing(state = "GA")
 #> ✔ nursing returned 356 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 356 × 23
 #>    ccn    name       address city  state zip   county own_type prov_type org_dba
 #>    <chr>  <chr>      <chr>   <chr> <chr> <chr> <chr>  <chr>    <chr>     <chr>  

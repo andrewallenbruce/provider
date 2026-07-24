@@ -53,7 +53,6 @@ pending(count = TRUE)
 
 pending(first = starts("V"))
 #> ✔ pending returned 191 results
-#> ✔ Retrieving 2 pages
 #> # A tibble: 191 × 4
 #>    prov_type        npi first     last     
 #>    <chr>          <int> <chr>     <chr>    

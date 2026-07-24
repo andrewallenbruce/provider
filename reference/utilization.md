@@ -218,7 +218,6 @@ geography(count = TRUE)
 
 utilization(npi = 1003000423)
 #> ✔ utilization returned 12 results
-#> ✔ Retrieving 12 pages
 #> # A tibble: 12 × 22
 #>     year        npi entity   par hcpcs patients services charges allowed payment
 #>    <int>      <int>  <int> <int> <int>    <int>    <int>   <int>   <dbl>   <dbl>
@@ -240,7 +239,6 @@ utilization(npi = 1003000423)
 
 services(npi = 1003000423)
 #> ✔ services returned 41 results
-#> ✔ Retrieving 12 pages
 #> # A tibble: 41 × 21
 #>     year       npi entity   par hcpcs desc   drug pos   patients services charge
 #>    <int>     <int>  <int> <int> <chr> <chr> <int> <chr>    <int>    <int>  <int>
@@ -264,7 +262,6 @@ geography(
   pos = "O",
   state = c("National", "Ohio"))
 #> ✔ geography returned 168 results
-#> ✔ Retrieving 12 pages
 #> # A tibble: 168 × 13
 #>     year level  state hcpcs desc   drug pos   providers patients services charge
 #>    <int> <chr>  <chr> <chr> <chr> <int> <chr>     <int>    <int>    <int>  <dbl>

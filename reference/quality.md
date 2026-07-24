@@ -123,7 +123,6 @@ quality(count = TRUE, year = c(2021, 2024), state = "GA")
 
 quality(npi = 1003026055)
 #> ✔ quality returned 7 results
-#> ✔ Retrieving 5 pages
 #> # A tibble: 7 × 25
 #>    year    npi state  size specialty years patients services charges final_score
 #>   <int>  <int> <chr> <int> <chr>     <int>    <int>    <int>   <int>       <dbl>

@@ -115,7 +115,6 @@ facility(count = TRUE)
 #> ◼ facility | 48,592 rows | 13 pages
 facility(city = "Valdosta", state = "GA")
 #> ✔ facility returned 12 results
-#> ✔ Retrieving 4 pages
 #> # A tibble: 12 × 15
 #>    fac_type ccn       npi pac   enid  multi org_name org_dba inc_date   org_type
 #>    <chr>    <chr>   <int> <chr> <chr> <int> <chr>    <chr>   <date>     <chr>   

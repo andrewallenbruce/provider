@@ -100,7 +100,6 @@ reassigned(count = TRUE)
 #> ◼ reassigned | 3,567,599 rows | 714 pages
 reassigned(org_enid = starts("I"), members = greater(50, equal = TRUE))
 #> ✔ reassigned returned 51 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 51 × 13
 #>         npi pac   enid  first last  state specialty memberships org_pac org_enid
 #>       <int> <chr> <chr> <chr> <chr> <chr> <chr>           <int> <chr>   <chr>   

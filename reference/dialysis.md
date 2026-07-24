@@ -76,7 +76,6 @@ dialysis(count = TRUE)
 #> ◼ dialysis | 7,490 rows | 5 pages
 dialysis(org_name = "DaVita", state = "GA")
 #> ✔ dialysis returned 139 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 139 × 12
 #>    ccn    name     rating network status org_name cert_date  address city  state
 #>    <chr>  <chr>     <int>   <int> <chr>  <chr>    <date>     <chr>   <chr> <chr>

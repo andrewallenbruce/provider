@@ -98,9 +98,7 @@ opted_out(count = TRUE)
 
 opted_out(state = "GA", specialty = contains("Psych"))
 #> ✔ opted_out returned 227 results
-#> ✔ Retrieving 1 page
 #> ✔ order_refer returned 129 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 227 × 12
 #>         npi first last  specialty start_date end_date   updated    address city 
 #>  *    <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>

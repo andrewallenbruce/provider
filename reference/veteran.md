@@ -57,7 +57,6 @@ veteran(count = TRUE)
 #> ◼ veteran | 132 rows | 1 pages
 veteran(state = "GA")
 #> ✔ veteran returned 3 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 3 × 11
 #>   ccn    name      address city  state zip   county prov_type own_type emergency
 #>   <chr>  <chr>     <chr>   <chr> <chr> <chr> <chr>  <chr>     <chr>        <int>

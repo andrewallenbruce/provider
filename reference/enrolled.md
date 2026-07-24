@@ -17,7 +17,8 @@ enrolled(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  chains = FALSE
 )
 ```
 
@@ -59,6 +60,10 @@ enrolled(
 
   `<lgl>` Return the total row count
 
+- chains:
+
+  `<lgl>` Add search chains
+
 ## Value
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
@@ -83,11 +88,9 @@ enrolled(count = TRUE, org_name = not_blank())
 
 enrolled(org_name = starts("AB"), state = "GA")
 #> ✔ enrolled returned 19 results
-#> ✔ Retrieving 1 page
-#> ✔ nppes returned 19/19 results
-#> # A tibble: 19 × 11
+#> # A tibble: 19 × 10
 #>           npi pac     enid  prov_type prov_desc org_name first last  state multi
-#>  *      <int> <chr>   <chr> <chr>     <chr>     <chr>    <chr> <chr> <chr> <int>
+#>         <int> <chr>   <chr> <chr>     <chr>     <chr>    <chr> <chr> <chr> <int>
 #>  1 1033973854 317305… O202… 53-D1     MDPP SUP… ABUNDAN… NA    NA    GA        0
 #>  2 1063481505 539586… O201… 30-56     DME SUPP… ABLE PR… NA    NA    GA        0
 #>  3 1083151997 024451… O201… 12-70     PART B S… ABLE PE… NA    NA    GA        0
@@ -107,5 +110,4 @@ enrolled(org_name = starts("AB"), state = "GA")
 #> 17 1942207154 307241… O202… 12-70     PART B S… ABERCRO… NA    NA    GA        0
 #> 18 1952782799 670919… O201… 12-70     PART B S… ABIGAIL… NA    NA    GA        0
 #> 19 1972750503 640603… O201… 12-70     PART B S… ABOVE P… NA    NA    GA        0
-#> # ℹ 1 more variable: taxonomy <chr>
 ```

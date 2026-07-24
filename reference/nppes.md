@@ -210,7 +210,6 @@ nppes(x)
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #> ✔ order_refer returned 135 results
-#> ✔ Retrieving 1 page
 #> ✔ nppes returned 135/135 results
 #> $ind
 #> $ind$basic

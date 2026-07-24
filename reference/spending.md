@@ -86,7 +86,6 @@ spending(count = TRUE)
 #> ◼ spending | 4,628 rows | 4 pages
 spending(state = "GA")
 #> ✔ spending returned 130 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 130 × 8
 #>    ccn    name                            score address city  state zip   county
 #>    <chr>  <chr>                           <dbl> <chr>   <chr> <chr> <chr> <chr> 
@@ -105,7 +104,6 @@ spending2(count = TRUE)
 #> ◼ spending2 | 63,646 rows | 43 pages
 spending2(name = starts("SGMC"), state = "GA")
 #> ✔ spending2 returned 22 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 22 × 11
 #>    ccn    name      state claim_type period avg_hosp avg_state avg_natl pct_hosp
 #>    <chr>  <chr>     <chr> <chr>      <chr>     <int>     <int>    <int>    <dbl>

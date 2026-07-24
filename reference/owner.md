@@ -112,7 +112,6 @@ owner(count = TRUE)
 #> ◼ owner | 526,704 rows | 109 pages
 owner(city = "Valdosta", state = "GA", fac_type = "Hospital")
 #> ✔ owner returned 8 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 8 × 18
 #>   name  type  pac   enid  own_pac own_org own_dba own_date   own_title own_first
 #> * <chr> <chr> <chr> <chr> <chr>   <chr>   <chr>   <date>     <chr>     <chr>    

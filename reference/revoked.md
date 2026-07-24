@@ -170,7 +170,6 @@ revoked(org_name = not_blank(), count = TRUE)
 
 revoked(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #> ✔ revoked returned 45 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 45 × 11
 #>    org   first   last      enid      npi multi state prov_desc reason start_date
 #>    <chr> <chr>   <chr>     <chr>   <int> <int> <chr> <chr>     <chr>  <date>    

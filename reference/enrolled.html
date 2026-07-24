@@ -9,7 +9,7 @@ actively approved to bill Medicare."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9312</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9313</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,8 @@ actively approved to bill Medicare.</p>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  multi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  count <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  count <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  chains <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -111,6 +112,10 @@ actively approved to bill Medicare.</p>
 <dt id="arg-count">count<a class="anchor" aria-label="anchor" href="#arg-count"></a></dt>
 <dd><p><code>&lt;lgl&gt;</code> Return the total row count</p></dd>
 
+
+<dt id="arg-chains">chains<a class="anchor" aria-label="anchor" href="#arg-chains"></a></dt>
+<dd><p><code>&lt;lgl&gt;</code> Add search chains</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -133,11 +138,9 @@ actively approved to bill Medicare.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">enrolled</span><span class="op">(</span>org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">starts</a></span><span class="op">(</span><span class="st">"AB"</span><span class="op">)</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">enrolled</span> returned <span style="color: #BBBB00; font-weight: bold;">19</span> results</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Retrieving <span style="color: #BBBB00; font-weight: bold;">1</span> page</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">nppes</span> returned <span style="color: #BBBB00; font-weight: bold;">19</span><span style="font-weight: bold;">/</span><span style="color: #BBBB00; font-weight: bold;">19</span> results</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           npi pac     enid  prov_type prov_desc org_name first last  state multi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">1</span>033<span style="text-decoration: underline;">973</span>854 317305… O202… 53-D1     MDPP SUP… ABUNDAN… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">1</span>063<span style="text-decoration: underline;">481</span>505 539586… O201… 30-56     DME SUPP… ABLE PR… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">1</span>083<span style="text-decoration: underline;">151</span>997 024451… O201… 12-70     PART B S… ABLE PE… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
@@ -157,7 +160,6 @@ actively approved to bill Medicare.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> <span style="text-decoration: underline;">1</span>942<span style="text-decoration: underline;">207</span>154 307241… O202… 12-70     PART B S… ABERCRO… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> <span style="text-decoration: underline;">1</span>952<span style="text-decoration: underline;">782</span>799 670919… O201… 12-70     PART B S… ABIGAIL… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> <span style="text-decoration: underline;">1</span>972<span style="text-decoration: underline;">750</span>503 640603… O201… 12-70     PART B S… ABOVE P… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    GA        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: taxonomy &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

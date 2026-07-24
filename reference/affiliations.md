@@ -83,7 +83,6 @@ affiliations(count = TRUE)
 #> ◼ affiliations | 2,260,193 rows | 1,507 pages
 affiliations(ccn = 331302)
 #> ✔ affiliations returned 340 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 340 × 7
 #>    first   last                  npi pac        fac_type ccn    parent_ccn
 #>    <chr>   <chr>               <int> <chr>      <chr>    <chr>  <chr>     
@@ -100,7 +99,6 @@ affiliations(ccn = 331302)
 #> # ℹ 330 more rows
 affiliations(parent_ccn = 331302)
 #> ✔ affiliations returned 7 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 7 × 7
 #>   first   last                 npi pac        fac_type     ccn    parent_ccn
 #>   <chr>   <chr>              <int> <chr>      <chr>        <chr>  <chr>     

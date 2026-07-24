@@ -64,7 +64,6 @@ long_term(count = TRUE)
 #> ◼ long_term | 311 rows | 1 pages
 long_term(state = "GA")
 #> ✔ long_term returned 10 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 10 × 10
 #>    ccn    name        address city  state zip   county own_type cert_date   beds
 #>    <chr>  <chr>       <chr>   <chr> <chr> <chr> <chr>  <chr>    <date>     <int>

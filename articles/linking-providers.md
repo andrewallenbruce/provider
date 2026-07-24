@@ -11,16 +11,10 @@ library(provider)
 
 x <- affiliations(pac = 7810891009)
 #> ✔ affiliations returned 5 results
-#> ✔ Retrieving 1 page
 x <- list(
   individual = as.data.frame(t(unique(x[1:4]))),
   organization = hospital(ccn = x$ccn))
 #> ✔ hospital returned 5 results
-#> ✔ Retrieving 1 page
-#> ✔ hospital2 returned 5 results
-#> ✔ Retrieving 1 page
-#> ✔ spending returned 5 results
-#> ✔ Retrieving 1 page
 x
 #> $individual
 #>               V1
@@ -30,20 +24,19 @@ x
 #> pac   7810891009
 #> 
 #> $organization
-#> # A tibble: 5 × 19
+#> # A tibble: 5 × 16
 #>   org_name     org_dba ccn      npi pac   enid  multi inc_date   org_type status
-#> * <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
-#> 1 CHAMPLAIN V… THE UN… 3302… 1.03e9 2769… O201…     0 1926-01-01 Corp     Volun…
-#> 2 ALICE HYDE … THE UN… 3313… 1.11e9 4082… O202…     0 1905-04-13 Corp     Volun…
-#> 3 CENTRAL VER… NA      4700… 1.51e9 9335… O200…     0 1984-03-01 Corp     Volun…
-#> 4 UNIVERSITY … UNIVER… 4700… 1.57e9 3779… O200…     0 1995-01-01 Corp     Volun…
-#> 5 PORTER HOSP… NA      4713… 1.74e9 1850… O200…     1 1986-11-14 Corp     Volun…
-#> # ℹ 9 more variables: loc_type <chr>, sub_group <chr>, rating <int>,
-#> #   mspb <dbl>, address <chr>, city <chr>, state <chr>, zip <chr>, county <chr>
+#>   <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
+#> 1 CHAMPLAIN V… THE UN… 3302… 1.03e9 2769… O201…     0 1926-01-01 Corp     Non-P…
+#> 2 ALICE HYDE … THE UN… 3313… 1.11e9 4082… O202…     0 1905-04-13 Corp     Non-P…
+#> 3 CENTRAL VER… NA      4700… 1.51e9 9335… O200…     0 1984-03-01 Corp     Non-P…
+#> 4 UNIVERSITY … UNIVER… 4700… 1.57e9 3779… O200…     0 1995-01-01 Corp     Non-P…
+#> 5 PORTER HOSP… NA      4713… 1.74e9 1850… O200…     1 1986-11-14 Corp     Non-P…
+#> # ℹ 6 more variables: loc_type <chr>, address <chr>, city <chr>, state <chr>,
+#> #   zip <chr>, sub_group <chr>
 
 reassigned(pac = 7810891009) |> str()
 #> ✔ reassigned returned 1 result
-#> ✔ Retrieving 1 page
 #> reassgnd [1 × 13] (S3: reassigned/tbl_df/tbl/data.frame)
 #>  $ npi        : int 1043245657
 #>  $ pac        : chr "7810891009"
@@ -61,7 +54,6 @@ reassigned(pac = 7810891009) |> str()
 
 clinician(pac = 7810891009) |> str()
 #> ✔ clinician returned 1 result
-#> ✔ Retrieving 1 page
 #> clinicin [1 × 17] (S3: clinician/tbl_df/tbl/data.frame)
 #>  $ npi      : int 1043245657
 #>  $ pac      : chr "7810891009"
@@ -90,12 +82,7 @@ x <- "Elizabethtown Community Hospital"
 
 hospital(org_name = x) |> str()
 #> ✔ hospital returned 2 results
-#> ✔ Retrieving 1 page
-#> ✔ hospital2 returned 1 result
-#> ✔ Retrieving 1 page
-#> ✔ spending returned 1 result
-#> ✔ Retrieving 1 page
-#> hospital [2 × 19] (S3: hospital/tbl_df/tbl/data.frame)
+#> hospital [2 × 16] (S3: hospital/tbl_df/tbl/data.frame)
 #>  $ org_name : chr [1:2] "ELIZABETHTOWN COMMUNITY HOSPITAL" "ELIZABETHTOWN COMMUNITY HOSPITAL"
 #>  $ org_dba  : chr [1:2] NA NA
 #>  $ ccn      : chr [1:2] "331302" "33Z302"
@@ -105,20 +92,16 @@ hospital(org_name = x) |> str()
 #>  $ multi    : int [1:2] 1 0
 #>  $ inc_date : Date[1:2], format: "1926-05-08" "1926-05-08"
 #>  $ org_type : chr [1:2] "Corp" "Corp"
-#>  $ status   : chr [1:2] "Voluntary non-profit - Private" "Non-Profit"
+#>  $ status   : chr [1:2] "Non-Profit" "Non-Profit"
 #>  $ loc_type : chr [1:2] "Other" "Other"
-#>  $ sub_group: chr [1:2] "CAH" "CAH"
-#>  $ rating   : int [1:2] 4 NA
-#>  $ mspb     : num [1:2] NA NA
 #>  $ address  : chr [1:2] "75 PARK ST" "75 PARK ST"
 #>  $ city     : chr [1:2] "ELIZABETHTOWN" "ELIZABETHTOWN"
 #>  $ state    : chr [1:2] "NY" "NY"
 #>  $ zip      : chr [1:2] "129322300" "129322300"
-#>  $ county   : chr [1:2] "ESSEX" NA
+#>  $ sub_group: chr [1:2] "CAH" "CAH"
 
 clinician(org_name = x) |> str()
 #> ✔ clinician returned 85 results
-#> ✔ Retrieving 1 page
 #> clinicin [85 × 17] (S3: clinician/tbl_df/tbl/data.frame)
 #>  $ npi      : int [1:85] 1750335014 1366468951 1235549247 1629241336 1356579171 1770725467 1154411882 1275762551 1760167712 1922491349 ...
 #>  $ pac      : chr [1:85] "6002861804" "3274579073" "0345559357" "4385805696" ...
@@ -140,7 +123,6 @@ clinician(org_name = x) |> str()
 
 reassigned(org_name = x)
 #> ✔ reassigned returned 413 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 413 × 13
 #>         npi pac   enid  first last  state specialty memberships org_pac org_enid
 #>       <int> <chr> <chr> <chr> <chr> <chr> <chr>           <int> <chr>   <chr>   
@@ -169,7 +151,6 @@ providers practicing at this hospital. First, the all-numeric CCN
 
 x <- affiliations(ccn = 331302)
 #> ✔ affiliations returned 340 results
-#> ✔ Retrieving 1 page
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))),
@@ -204,7 +185,6 @@ search the alphanumeric CCN (`33Z302`):
 
 x <- affiliations(ccn = "33Z302")
 #> ✔ affiliations returned 7 results
-#> ✔ Retrieving 1 page
 
 list(
   organization = as.data.frame(t(unique(x[5:7]))), 

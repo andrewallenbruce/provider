@@ -61,7 +61,6 @@ ambulatory(count = TRUE)
 #> ◼ ambulatory | 4,633 rows | 4 pages
 ambulatory(state = "GA")
 #> ✔ ambulatory returned 244 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 244 × 7
 #>    ccn        name                              address city  state zip   rating
 #>    <chr>      <chr>                             <chr>   <chr> <chr> <chr>  <int>

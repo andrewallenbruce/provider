@@ -52,7 +52,6 @@ rehab(count = TRUE)
 #> ◼ rehab | 1,222 rows | 1 pages
 rehab(state = "GA")
 #> ✔ rehab returned 34 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 34 × 9
 #>    ccn    name              address city  state zip   county own_type cert_date 
 #>    <chr>  <chr>             <chr>   <chr> <chr> <chr> <chr>  <chr>    <date>    

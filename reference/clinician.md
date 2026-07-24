@@ -134,7 +134,6 @@ clinician(count = TRUE)
 #> ◼ clinician | 3,387,942 rows | 2,259 pages
 clinician(first = "Etan")
 #> ✔ clinician returned 14 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 14 × 17
 #>         npi pac   enid  first last  gender cred  school  year specialty org_name
 #>       <int> <chr> <chr> <chr> <chr> <chr>  <chr> <chr>  <int> <chr>     <chr>   
@@ -156,7 +155,6 @@ clinician(first = "Etan")
 #> #   state <chr>, zip <chr>
 clinician(year = greater(2030))
 #> ✔ clinician returned 10 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 10 × 17
 #>         npi pac   enid  first last  gender cred  school  year specialty org_name
 #>       <int> <chr> <chr> <chr> <chr> <chr>  <chr> <chr>  <int> <chr>     <chr>   

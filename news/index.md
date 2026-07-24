@@ -1,5 +1,12 @@
 # Changelog
 
+## provider 0.0.1.9313 (2026-07-24)
+
+- added `chains` switch
+- fixed bug in
+  [`hospital()`](https://andrewallenbruce.github.io/provider/reference/hospital.md)
+  chaining method
+
 ## provider 0.0.1.9312 (2026-07-19)
 
 - exported `psych`, `rehab`, `veterans`

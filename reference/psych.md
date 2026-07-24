@@ -59,7 +59,6 @@ psych(count = TRUE)
 #> ◼ psych | 1,424 rows | 1 pages
 psych(state = "GA")
 #> ✔ psych returned 41 results
-#> ✔ Retrieving 1 page
 #> # A tibble: 41 × 7
 #>    ccn    name                                  address city  state zip   county
 #>    <chr>  <chr>                                 <chr>   <chr> <chr> <chr> <chr> 
