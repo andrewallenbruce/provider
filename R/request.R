@@ -151,7 +151,9 @@ request_single <- S7::new_generic("request_single", "x")
 #' @noRd
 S7::method(request_single, EndpointCMS) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   flatten_cms(
     S7::prop(x, "url"),
@@ -166,7 +168,9 @@ S7::method(request_single, EndpointCMS) <- function(x) {
 #' @noRd
 S7::method(request_single, EndpointPDC) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   flatten_pdc(
     S7::prop(x, "url"),
@@ -181,7 +185,9 @@ S7::method(request_single, EndpointPDC) <- function(x) {
 #' @noRd
 S7::method(request_single, EndpointCMSList) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   u <- S7::prop(x, "url")[rlang::names2(S7::prop(x, "count") > 0L)]
 
@@ -199,7 +205,9 @@ request_multi <- S7::new_generic("request_multi", "x")
 #' @noRd
 S7::method(request_multi, EndpointCMS) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   flatten_cms(
     S7::prop(x, "url"),
@@ -220,7 +228,9 @@ S7::method(request_multi, EndpointCMS) <- function(x) {
 #' @noRd
 S7::method(request_multi, EndpointPDC) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   flatten_pdc(
     S7::prop(x, "url"),
@@ -241,7 +251,9 @@ S7::method(request_multi, EndpointPDC) <- function(x) {
 #' @noRd
 S7::method(request_multi, EndpointCMSList) <- function(x) {
   inform_count(x)
-  inform_pages(x)
+  if (rlang::is_interactive()) {
+    inform_pages(x)
+  }
 
   i <- rlang::names2(S7::prop(x, "count") > 0L)
   N <- unname(S7::prop(x, "count")[i])

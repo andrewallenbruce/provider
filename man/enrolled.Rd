@@ -15,7 +15,8 @@ enrolled(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  chains = FALSE
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ enrolled(
 \item{multi}{\verb{<lgl>} Provider has multiple NPIs}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{chains}{\verb{<lgl>} Add search chains}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

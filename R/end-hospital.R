@@ -37,6 +37,7 @@
 #'    - `other` = Other Hospital Practice Location
 #' @param subgroup `<subgroups>` Hospital’s subgroup/unit. See [subgroups()].
 #' @param count `<lgl>` Return the total row count
+#' @param chains `<lgl>` Add search chains
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' hospital(count = TRUE)
@@ -68,7 +69,8 @@ hospital <- function(
   prov_type = NULL,
   loc_type = NULL,
   subgroup = subgroups(),
-  count = FALSE
+  count = FALSE,
+  chains = FALSE
 ) {
   check_subgroups(subgroup)
   check_bool_(multi)
@@ -76,6 +78,7 @@ hospital <- function(
   check_char_(org_type)
   check_char_(loc_type)
   check_char_(prov_type)
+  rlang::check_bool(chains)
 
   x <- end_cms(
     count = count,
@@ -102,6 +105,10 @@ hospital <- function(
 
   if (count || rlang::is_integerish(x, n = 1)) {
     return(invisible(x))
+  }
+
+  if (!chains) {
+    return(x)
   }
 
   x <- as_keyframe(x, "ccn", 200L)

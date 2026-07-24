@@ -25,7 +25,8 @@ hospital(
   prov_type = NULL,
   loc_type = NULL,
   subgroup = subgroups(),
-  count = FALSE
+  count = FALSE,
+  chains = FALSE
 )
 }
 \arguments{
@@ -80,6 +81,8 @@ hospital(
 \item{subgroup}{\verb{<subgroups>} Hospital’s subgroup/unit. See \code{\link[=subgroups]{subgroups()}}.}
 
 \item{count}{\verb{<lgl>} Return the total row count}
+
+\item{chains}{\verb{<lgl>} Add search chains}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

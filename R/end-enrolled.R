@@ -17,6 +17,7 @@
 #' @param org_name `<chr>` Organizational provider's name
 #' @param multi `<lgl>` Provider has multiple NPIs
 #' @param count `<lgl>` Return the total row count
+#' @param chains `<lgl>` Add search chains
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf httr2::is_online()
 #' enrolled(count = TRUE)
@@ -37,7 +38,8 @@ enrolled <- function(
   state = NULL,
   org_name = NULL,
   multi = NULL,
-  count = FALSE
+  count = FALSE,
+  chains = FALSE
 ) {
   check_bool_(multi)
 
@@ -61,6 +63,10 @@ enrolled <- function(
 
   if (count || rlang::is_integerish(x, n = 1)) {
     return(invisible(x))
+  }
+
+  if (!chains) {
+    return(x)
   }
 
   x <- as_keyframe(x, "npi", 1L)
