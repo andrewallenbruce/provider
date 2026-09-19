@@ -5,7 +5,7 @@
 #' @importFrom cheapr %in_% %!in_%
 #' @importFrom collapse %==% %!=%
 #' @importFrom collapse %!iin% %iin%
-#' @import rlang
+#' @import rlang, except = ":="
 #' @import S7
 ## usethis namespace: end
 NULL
