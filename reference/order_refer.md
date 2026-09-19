@@ -89,22 +89,22 @@ containing the search results.
 
 ``` r
 order_refer(count = TRUE)
-#> ◼ order_refer | 2,015,687 rows | 404 pages
+#> ◼ order_refer | 2,036,207 rows | 408 pages
 
 order_refer(first = "Jennifer", last = "Smith")
-#> ✔ order_refer returned 135 results
-#> # A tibble: 135 × 8
+#> ✔ order_refer returned 133 results
+#> # A tibble: 133 × 8
 #>           npi first    last  ptb_ind dme_ind hha_ind pmd_ind hsp_ind
 #>         <int> <chr>    <chr>   <int>   <int>   <int>   <int>   <int>
-#>  1 1750494886 JENNIFER SMITH       1       1       1       0       1
-#>  2 1811218712 JENNIFER SMITH       1       1       1       1       1
-#>  3 1134344286 JENNIFER SMITH       1       1       1       1       1
-#>  4 1215468897 JENNIFER SMITH       1       1       1       1       0
-#>  5 1154778181 JENNIFER SMITH       1       1       1       1       1
-#>  6 1033811211 JENNIFER SMITH       1       1       1       1       1
-#>  7 1588849350 JENNIFER SMITH       1       1       1       1       0
-#>  8 1396366811 JENNIFER SMITH       1       1       1       1       1
-#>  9 1790243723 JENNIFER SMITH       1       1       1       1       0
-#> 10 1407630973 JENNIFER SMITH       1       1       0       0       0
-#> # ℹ 125 more rows
+#>  1 1699184895 JENNIFER SMITH       1       1       1       1       0
+#>  2 1215919170 JENNIFER SMITH       1       1       1       1       1
+#>  3 1053842450 JENNIFER SMITH       1       1       1       1       1
+#>  4 1477127207 JENNIFER SMITH       1       1       0       0       0
+#>  5 1598994923 JENNIFER SMITH       1       1       1       1       0
+#>  6 1467884627 JENNIFER SMITH       1       1       0       0       0
+#>  7 1184142903 JENNIFER SMITH       1       1       1       1       0
+#>  8 1952073652 JENNIFER SMITH       1       1       1       1       0
+#>  9 1821069931 JENNIFER SMITH       1       1       1       1       0
+#> 10 1790063832 JENNIFER SMITH       1       1       1       1       1
+#> # ℹ 123 more rows
 ```

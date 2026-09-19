@@ -209,11 +209,11 @@ nppes(x)
 #> [1] "nppes" "list" 
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
-#> ✔ order_refer returned 135 results
-#> ✔ nppes returned 135/135 results
+#> ✔ order_refer returned 133 results
+#> ✔ nppes returned 133/133 results
 #> $ind
 #> $ind$basic
-#> # A tibble: 135 × 10
+#> # A tibble: 133 × 10
 #>           npi entity cred  first  last  sex    sole other enum_date  last_update
 #>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
 #>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
@@ -226,10 +226,10 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033811211      1 NA    JENNI… SMITH F         0 NA    2023-03-20 2026-06-24 
 #>  9 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
 #> 10 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
-#> # ℹ 125 more rows
+#> # ℹ 123 more rows
 #> 
 #> $ind$taxonomy
-#> # A tibble: 175 × 3
+#> # A tibble: 172 × 3
 #>           npi order code      
 #>         <int> <int> <chr>     
 #>  1 1992396162     1 103TC0700X
@@ -242,10 +242,10 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1972332542     1 363LF0000X
 #>  9 1962707042     1 363L00000X
 #> 10 1952775413     1 363LF0000X
-#> # ℹ 165 more rows
+#> # ℹ 162 more rows
 #> 
 #> $ind$location
-#> # A tibble: 233 × 6
+#> # A tibble: 257 × 6
 #>           npi   loc city         state address                     zip      
 #>  *      <int> <int> <chr>        <chr> <chr>                       <chr>    
 #>  1 1013227818     1 COTTONTOWN   TN    250 OLD HIGHWAY 31 W        370484639
@@ -258,7 +258,7 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033486725     1 NASHVILLE    TN    3601 THE VANDERBILT CLINIC  372320001
 #>  9 1033486725     2 ALAMOGORDO   NM    2539 MEDICAL DR STE 104     883108720
 #> 10 1033486725     3 NASHVILLE    TN    3841 GREEN HILLS VILLAGE DR 372152691
-#> # ℹ 223 more rows
+#> # ℹ 247 more rows
 #> 
 #> 
 #> attr(,"class")

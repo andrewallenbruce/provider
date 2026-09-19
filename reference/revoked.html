@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">provider</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9313</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9314</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -176,14 +176,14 @@ gathered from the <em>Provider Enrollment, Chain and Ownership System (PECOS)</e
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">revoked</span><span class="op">(</span>count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">revoked</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">7,059</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">2</span> pages</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">◼</span> <span style="font-weight: bold;">revoked</span><span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">8,136</span> rows<span style="color: #555555; font-weight: bold;"> | </span><span style="color: #BBBB00;">2</span> pages</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revoked</span><span class="op">(</span>org_name <span class="op">=</span> <span class="fu"><a href="modifier.html">not_blank</a></span><span class="op">(</span><span class="op">)</span>, count <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revoked</span> returned <span style="color: #BBBB00; font-weight: bold;">3,876</span> results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revoked</span> returned <span style="color: #BBBB00; font-weight: bold;">4,739</span> results</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revoked</span><span class="op">(</span>prov_desc <span class="op">=</span> <span class="fu"><a href="modifier.html">contains</a></span><span class="op">(</span><span class="st">"CARDIO"</span><span class="op">)</span>, state <span class="op">=</span> <span class="fu"><a href="modifier.html">excludes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GA"</span>, <span class="st">"OH"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revoked</span> returned <span style="color: #BBBB00; font-weight: bold;">45</span> results</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 45 × 11</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> <span style="font-weight: bold;">revoked</span> returned <span style="color: #BBBB00; font-weight: bold;">44</span> results</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 44 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    org   first   last      enid      npi multi state prov_desc reason start_date</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #BB0000;">NA</span>    JUAN    KURDI     I2003… 1.57<span style="color: #949494;">e</span>9     0 TX    PRACTITI… 424.5… 2023-09-28</span>
@@ -196,7 +196,7 @@ gathered from the <em>Provider Enrollment, Chain and Ownership System (PECOS)</e
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #BB0000;">NA</span>    BRYAN   PERRY     I2004… 1.24<span style="color: #949494;">e</span>9     0 OK    PRACTITI… 424.5… 2020-05-21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #BB0000;">NA</span>    KLAUS   RENTROP   I2005… 1.19<span style="color: #949494;">e</span>9     0 NY    PRACTITI… 424.5… 2023-09-15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #BB0000;">NA</span>    JOHN    MCCLURE   I2005… 1.43<span style="color: #949494;">e</span>9     0 MI    PRACTITI… 424.5… 2022-11-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 35 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 34 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: end_date &lt;date&gt;</span></span>
 </code></pre></div>
     </div>

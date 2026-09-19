@@ -81,33 +81,32 @@ containing the search results.
 
 ``` r
 enrolled(count = TRUE)
-#> ◼ enrolled | 2,981,799 rows | 597 pages
+#> ◼ enrolled | 2,978,925 rows | 596 pages
 
 enrolled(count = TRUE, org_name = not_blank())
-#> ✔ enrolled returned 433,496 results
+#> ✔ enrolled returned 432,233 results
 
 enrolled(org_name = starts("AB"), state = "GA")
-#> ✔ enrolled returned 19 results
-#> # A tibble: 19 × 10
+#> ✔ enrolled returned 18 results
+#> # A tibble: 18 × 10
 #>           npi pac     enid  prov_type prov_desc org_name first last  state multi
 #>         <int> <chr>   <chr> <chr>     <chr>     <chr>    <chr> <chr> <chr> <int>
-#>  1 1033973854 317305… O202… 53-D1     MDPP SUP… ABUNDAN… NA    NA    GA        0
-#>  2 1063481505 539586… O201… 30-56     DME SUPP… ABLE PR… NA    NA    GA        0
-#>  3 1083151997 024451… O201… 12-70     PART B S… ABLE PE… NA    NA    GA        0
-#>  4 1144436007 579994… O201… 12-70     PART B S… ABERTH … NA    NA    GA        0
-#>  5 1164848396 519395… O201… 00-18     PART A P… ABERCOR… NA    NA    GA        0
-#>  6 1477876589 923426… O201… 12-70     PART B S… ABSOLUT… NA    NA    GA        0
-#>  7 1528837788 832531… O202… 12-70     PART B S… ABODE C… NA    NA    GA        0
-#>  8 1548504319 206266… O201… 12-70     PART B S… ABBINGH… NA    NA    GA        0
-#>  9 1578361689 004279… O202… 12-70     PART B S… ABUNDAN… NA    NA    GA        0
-#> 10 1619644077 488008… O202… 30-54     DME SUPP… ABLETEC… NA    NA    GA        0
-#> 11 1679032205 509205… O201… 12-70     PART B S… ABOVE &… NA    NA    GA        0
-#> 12 1679875173 731537… O202… 12-70     PART B S… ABUNDAN… NA    NA    GA        0
-#> 13 1750392130 387060… O201… 30-54     DME SUPP… ABSOLUT… NA    NA    GA        0
-#> 14 1760579981 802208… O200… 12-70     PART B S… ABDUL B… NA    NA    GA        0
-#> 15 1851894588 377984… O201… 12-70     PART B S… ABSOLUT… NA    NA    GA        0
-#> 16 1942195300 963867… O202… 12-70     PART B S… ABOUT T… NA    NA    GA        0
-#> 17 1942207154 307241… O202… 12-70     PART B S… ABERCRO… NA    NA    GA        0
-#> 18 1952782799 670919… O201… 12-70     PART B S… ABIGAIL… NA    NA    GA        0
-#> 19 1972750503 640603… O201… 12-70     PART B S… ABOVE P… NA    NA    GA        0
+#>  1 1760579981 802208… O200… 12-70     PART B S… ABDUL B… NA    NA    GA        0
+#>  2 1477876589 923426… O201… 12-70     PART B S… ABSOLUT… NA    NA    GA        0
+#>  3 1750392130 387060… O201… 30-54     DME SUPP… ABSOLUT… NA    NA    GA        0
+#>  4 1063481505 539586… O201… 30-56     DME SUPP… ABLE PR… NA    NA    GA        0
+#>  5 1972750503 640603… O201… 12-70     PART B S… ABOVE P… NA    NA    GA        0
+#>  6 1144436007 579994… O201… 12-70     PART B S… ABERTH … NA    NA    GA        0
+#>  7 1548504319 206266… O201… 12-70     PART B S… ABBINGH… NA    NA    GA        0
+#>  8 1164848396 519395… O201… 00-18     PART A P… ABERCOR… NA    NA    GA        0
+#>  9 1952782799 670919… O201… 12-70     PART B S… ABIGAIL… NA    NA    GA        0
+#> 10 1083151997 024451… O201… 12-70     PART B S… ABLE PE… NA    NA    GA        0
+#> 11 1851894588 377984… O201… 12-70     PART B S… ABSOLUT… NA    NA    GA        0
+#> 12 1679032205 509205… O201… 12-70     PART B S… ABOVE &… NA    NA    GA        0
+#> 13 1679875173 731537… O202… 12-70     PART B S… ABUNDAN… NA    NA    GA        0
+#> 14 1619644077 488008… O202… 30-54     DME SUPP… ABLETEC… NA    NA    GA        0
+#> 15 1528837788 832531… O202… 12-70     PART B S… ABODE C… NA    NA    GA        0
+#> 16 1942207154 307241… O202… 12-70     PART B S… ABERCRO… NA    NA    GA        0
+#> 17 1942195300 963867… O202… 12-70     PART B S… ABOUT T… NA    NA    GA        0
+#> 18 1578361689 004279… O202… 12-70     PART B S… ABUNDAN… NA    NA    GA        0
 ```

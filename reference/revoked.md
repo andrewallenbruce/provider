@@ -163,14 +163,14 @@ Regulations](https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-
 
 ``` r
 revoked(count = TRUE)
-#> ◼ revoked | 7,059 rows | 2 pages
+#> ◼ revoked | 8,136 rows | 2 pages
 
 revoked(org_name = not_blank(), count = TRUE)
-#> ✔ revoked returned 3,876 results
+#> ✔ revoked returned 4,739 results
 
 revoked(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
-#> ✔ revoked returned 45 results
-#> # A tibble: 45 × 11
+#> ✔ revoked returned 44 results
+#> # A tibble: 44 × 11
 #>    org   first   last      enid      npi multi state prov_desc reason start_date
 #>    <chr> <chr>   <chr>     <chr>   <int> <int> <chr> <chr>     <chr>  <date>    
 #>  1 NA    JUAN    KURDI     I2003… 1.57e9     0 TX    PRACTITI… 424.5… 2023-09-28
@@ -183,6 +183,6 @@ revoked(prov_desc = contains("CARDIO"), state = excludes(c("GA", "OH")))
 #>  8 NA    BRYAN   PERRY     I2004… 1.24e9     0 OK    PRACTITI… 424.5… 2020-05-21
 #>  9 NA    KLAUS   RENTROP   I2005… 1.19e9     0 NY    PRACTITI… 424.5… 2023-09-15
 #> 10 NA    JOHN    MCCLURE   I2005… 1.43e9     0 MI    PRACTITI… 424.5… 2022-11-02
-#> # ℹ 35 more rows
+#> # ℹ 34 more rows
 #> # ℹ 1 more variable: end_date <date>
 ```

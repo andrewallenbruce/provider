@@ -83,7 +83,7 @@ containing the search results.
 
 ``` r
 spending(count = TRUE)
-#> ◼ spending | 4,628 rows | 4 pages
+#> ◼ spending | 4,626 rows | 4 pages
 spending(state = "GA")
 #> ✔ spending returned 130 results
 #> # A tibble: 130 × 8

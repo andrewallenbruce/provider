@@ -56,7 +56,7 @@ containing the search results.
 
 ``` r
 psych(count = TRUE)
-#> ◼ psych | 1,424 rows | 1 pages
+#> ◼ psych | 1,410 rows | 1 pages
 psych(state = "GA")
 #> ✔ psych returned 41 results
 #> # A tibble: 41 × 7

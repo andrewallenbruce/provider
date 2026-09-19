@@ -112,15 +112,15 @@ containing the search results.
 
 ``` r
 facility(count = TRUE)
-#> ◼ facility | 48,592 rows | 13 pages
+#> ◼ facility | 48,456 rows | 13 pages
 facility(city = "Valdosta", state = "GA")
 #> ✔ facility returned 12 results
 #> # A tibble: 12 × 15
 #>    fac_type ccn       npi pac   enid  multi org_name org_dba inc_date   org_type
 #>    <chr>    <chr>   <int> <chr> <chr> <int> <chr>    <chr>   <date>     <chr>   
-#>  1 HHA      117009 1.29e9 6002… O201…     0 PUBLIC … NA      1994-03-07 CORPORA…
-#>  2 HHA      117058 1.11e9 3173… O201…     0 GHHS HE… GEORGI… NA         LLC     
-#>  3 FQHC     111098 1.64e9 1951… O201…     0 SOUTH C… NORTHS… 1992-06-19 CORPORA…
+#>  1 HHA      117114 1.72e9 2264… O200…     0 AMEDISY… AMEDIS… 2002-08-01 LLC     
+#>  2 HHA      117009 1.29e9 6002… O201…     0 PUBLIC … NA      1994-03-07 CORPORA…
+#>  3 HHA      117058 1.11e9 3173… O201…     0 GHHS HE… GEORGI… NA         LLC     
 #>  4 FQHC     C21012 1.47e9 1951… O202…     0 SOUTH C… SOUTH … 2024-02-01 CORPORA…
 #>  5 SNF      115385 1.06e9 9032… O202…     0 PRUITTH… PRUITT… NA         LLC     
 #>  6 SNF      115373 1.88e9 8022… O202…     0 PRUITTH… PRUITT… 2020-04-22 LLC     
