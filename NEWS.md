@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9314 (2026-09-19)
+
+* updated dependencies
+
+
 # provider 0.0.1.9313 (2026-07-24)
 
 * added `chains` switch
