@@ -41,7 +41,7 @@ cms_temporal <- function(rex = NULL, as_list = TRUE) {
         split = " : ",
         fixed = TRUE
       ),
-      function(x) purrr::pluck(x, 1)
+      function(x) purrr::pluck(x, 1L)
     )
     return(collapse::qTBL(x))
   }

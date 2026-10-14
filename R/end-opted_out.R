@@ -87,7 +87,7 @@ opted_out <- function(
   }
 
   if (!is.null(order_refer) && !order_refer) {
-    collapse::gv(x, "order_refer") <- NA_character_
+    x[["order_refer"]] <- NA_character_
     return(x)
   }
 

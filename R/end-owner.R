@@ -1,10 +1,6 @@
 #' Owners
 #'
-#' @description
 #' Owners of facilities enrolled in Medicare.
-#'
-#' @source
-#' Medicare
 #'
 #' @param fac_type `<enum>` Facility type; if NULL (default), will search all:
 #'    - `HHA` = Home Health Agency
@@ -13,9 +9,9 @@
 #'    - `SNF` = Skilled Nursing Facility
 #'    - `Hospice` = Hospice
 #'    - `Hospital` = Hospital
-#' @param enid `<chr>` National Provider Identifier
-#' @param pac `<chr>` Provider's name
-#' @param org_name `<chr>` Provider's name
+#' @param fac_enid `<chr>` National Provider Identifier
+#' @param fac_pac `<chr>` Provider's name
+#' @param fac_name `<chr>` Provider's name
 #' @param own_pac `<chr>` Provider's name
 #' @param own_org `<chr>` Provider's name
 #' @param own_dba `<chr>` Provider's name

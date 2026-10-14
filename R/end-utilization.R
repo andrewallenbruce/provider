@@ -237,7 +237,7 @@ geography <- function(
   }
 
   if (!is.null(state)) {
-    state <- rlang::arg_match(state, c("National", state.name), multiple = TRUE)
+    state <- rlang::arg_match(state, c("National", datasets::state.name), multiple = TRUE)
   }
 
   x <- end_cmslist(

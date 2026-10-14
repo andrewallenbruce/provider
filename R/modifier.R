@@ -1,8 +1,6 @@
 #' @noRd
-Modifier <- S7::new_class(
-  "Modifier",
+Modifier := S7::new_class(
   S7::class_character,
-  package = NULL,
   properties = list(
     operator = S7::class_character,
     value = S7::class_atomic

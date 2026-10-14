@@ -3,9 +3,6 @@
 \name{owner}
 \alias{owner}
 \title{Owners}
-\source{
-Medicare
-}
 \usage{
 owner(
   fac_type = NULL,
@@ -38,6 +35,12 @@ owner(
 \item \code{Hospital} = Hospital
 }}
 
+\item{fac_enid}{\verb{<chr>} National Provider Identifier}
+
+\item{fac_pac}{\verb{<chr>} Provider's name}
+
+\item{fac_name}{\verb{<chr>} Provider's name}
+
 \item{own_pac}{\verb{<chr>} Provider's name}
 
 \item{own_org}{\verb{<chr>} Provider's name}
@@ -57,12 +60,6 @@ owner(
 \item{city, state, zip}{\verb{<chr>} Provider's name}
 
 \item{count}{\verb{<lgl>} Return the total row count}
-
-\item{enid}{\verb{<chr>} National Provider Identifier}
-
-\item{pac}{\verb{<chr>} Provider's name}
-
-\item{org_name}{\verb{<chr>} Provider's name}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -1,6 +1,8 @@
-# nocov start
-.onLoad <- function(libname, pkgname) {
-  cms_temporal <<- memoise::memoise(cms_temporal)
-  S7::methods_register()
+.onLoad <- function(...) {
   requireNamespace("pillar", quietly = TRUE)
-} # nocov end
+  S7::S7_on_load()
+}
+.onUnload <- function(...) {
+  S7::S7_on_unload()
+}
+S7::S7_on_build()

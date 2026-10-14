@@ -71,91 +71,78 @@ affiliations(last = "Bruce")
 
 ```{r}
 #| label: reassignment
-reassignments(
+reassigned(
   org_enid = starts("I"), 
-  members = greater(50, equal = TRUE))
+  members = greater(50, equal = TRUE)
+)
 ```
 
 #### :-1: Revoked Medicare Providers
 
 ```{r}
 #| label: revoked
-revocations(
-  state = "GA", 
-  org_name = not_blank())
+revoked(state = "GA", org_name = not_blank())
 ```
 
 #### :identification_card: Clinician Demographics
 
 ```{r}
 #| label: clinician
-clinicians(
+clinician(
   state = "GA", 
   school = not("OTHER"), 
   org_name = not_blank(),
-  year = 2025)
+  year = 2025
+)
 ```
 
 ##### :outbox_tray: Opt-Out Affidavits
 
 ```{r}
 #| label: opted_out
-opt_out(city = "Atlanta", state = "GA")
+opted_out(state = "GA", order_refer = FALSE)
 ```
 
 ##### :receipt: Order & Referral Eligibility
 
 ```{r}
 #| label: order_refer
-order_refer(
-  first = "Jennifer", 
-  last = "Smith",
-  ptb = FALSE)
+order_refer(first = "Jennifer", last = "Smith")
 ```
 
 ##### :health_worker: Medicare Provider Enrollments
 
 ```{r}
 #| label: enrolled
-providers(
-  state = "GA", 
-  org_name = contains("West"))
+enrolled(state = "GA", org_name = contains("West"))
 ```
 
 ##### :calendar: Pending Enrollments
 
 ```{r}
 #| label: pending
-pending(
-  first = starts("E"), 
-  last = ends("A"))
+pending(first = starts("E"), last = ends("A"))
 ```
 
 ##### :hospital: Medicare Hospitals
 
 ```{r}
 #| label: hospital
-hospitals(
-  city = "Valdosta", 
-  state = "GA")
+hospital(city = "Valdosta", state = "GA")
 ```
 
 ##### :test_tube: CLIA Laboratories
 
 ```{r}
 #| label: clia
-clia(
-  fac_name = starts("SGMC"), 
-  state = "GA")
+clia(name = starts("SGMC"), state = "GA")
 ```
 
 ##### :mag_right: Hospital Transparency Enforcement
 
 ```{r}
 #| label: transparency
-transparency(
-  action = "cap", 
-  state = "GA")
+transparency(action = "cap", state = "GA")
 ```
 
 ------------------------------------------------------------------------------

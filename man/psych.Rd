@@ -27,19 +27,21 @@ psych(
 
 \item{city, state, zip, county}{\verb{<chr>} desc}
 
+\item{rating}{description}
+
 \item{count}{\verb{<lgl>} Return the total row count}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-This dataset includes provider-level data for quality measures
-included under the IPFQR program, including HBIPS, SUB, TOB, Transition
-Record (TR), Screening for Metabolic Disorders (SMD), FAPH, IMM,
-Readmissions (READM), and Medication Continuation (MedCont, formerly known
-as MedCoPsy). Psychiatric facilities that are eligible for the Inpatient
-Psychiatric Facility Quality Reporting (IPFQR) program are required to meet
-all program requirements, otherwise their Medicare payments may be reduced.
+This dataset includes provider-level data for quality measures included under
+the IPFQR program, including HBIPS, SUB, TOB, Transition Record (TR),
+Screening for Metabolic Disorders (SMD), FAPH, IMM, Readmissions (READM), and
+Medication Continuation (MedCont, formerly known as MedCoPsy). Psychiatric
+facilities that are eligible for the Inpatient Psychiatric Facility Quality
+Reporting (IPFQR) program are required to meet all program requirements,
+otherwise their Medicare payments may be reduced.
 }
 \examples{
 \dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}

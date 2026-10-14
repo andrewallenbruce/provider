@@ -108,10 +108,6 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\subsection{Outlier Payments}{
-}
-}
-\details{
 OPPS APC payment amounts are based on the average costs for a set of
 services. In the event that a hospital’s costs for these services exceed a
 given threshold tied to the average APC payment, CMS must issue an outlier

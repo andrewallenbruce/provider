@@ -1,5 +1,5 @@
 #' @noRd
-ParamCMS <- S7::new_class("ParamCMS", S7::class_list, package = NULL)
+ParamCMS := S7::new_class(S7::class_list)
 
 #' @noRd
 param_cms <- function(...) {
@@ -9,7 +9,7 @@ param_cms <- function(...) {
 }
 
 #' @noRd
-ParamPDC <- S7::new_class("ParamPDC", S7::class_list, package = NULL)
+ParamPDC := S7::new_class(S7::class_list)
 
 #' @noRd
 param_pdc <- function(...) {
@@ -19,9 +19,8 @@ param_pdc <- function(...) {
 }
 
 #' @noRd
-Endpoint <- S7::new_class(
-  "Endpoint",
-  package = NULL,
+Endpoint := S7::new_class(
+  abstract = TRUE,
   properties = list(
     end = S7::class_character,
     url = S7::class_character | S7::class_list,
@@ -31,7 +30,10 @@ Endpoint <- S7::new_class(
       getter = function(self) nchar(self@query)
     ),
     action = S7::class_character,
-    count = S7::new_property(S7::class_integer, default = 0L),
+    count = S7::new_property(
+      S7::class_integer,
+      default = 0L
+    ),
     pages = S7::new_property(
       S7::class_integer,
       getter = function(self) {
@@ -45,10 +47,8 @@ Endpoint <- S7::new_class(
 )
 
 #' @noRd
-EndpointCMS <- S7::new_class(
-  "EndpointCMS",
-  Endpoint,
-  package = NULL,
+EndpointCMS := S7::new_class(
+  parent = Endpoint,
   properties = list(
     limit = S7::new_property(
       S7::class_integer,
@@ -58,11 +58,13 @@ EndpointCMS <- S7::new_class(
 )
 
 #' @noRd
-EndpointCMSList <- S7::new_class(
-  "EndpointCMSList",
-  EndpointCMS,
-  package = NULL,
+EndpointCMSList := S7::new_class(
+  parent = Endpoint,
   properties = list(
+    limit = S7::new_property(
+      S7::class_integer,
+      getter = function(self) 5000L
+    ),
     pages = S7::new_property(
       S7::class_integer,
       getter = function(self) {
@@ -78,10 +80,8 @@ EndpointCMSList <- S7::new_class(
 )
 
 #' @noRd
-EndpointPDC <- S7::new_class(
-  "EndpointPDC",
-  Endpoint,
-  package = NULL,
+EndpointPDC := S7::new_class(
+  parent = Endpoint,
   properties = list(
     limit = S7::new_property(
       S7::class_integer,
