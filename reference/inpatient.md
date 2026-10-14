@@ -1,6 +1,10 @@
 # Inpatient Hospitals
 
-### Outlier Payments
+OPPS APC payment amounts are based on the average costs for a set of
+services. In the event that a hospital’s costs for these services exceed
+a given threshold tied to the average APC payment, CMS must issue an
+outlier payment to the hospital to that service to compensate for the
+costly provision of service.
 
 ## Usage
 
@@ -142,14 +146,6 @@ containing the search results.
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 containing the search results.
-
-## Details
-
-OPPS APC payment amounts are based on the average costs for a set of
-services. In the event that a hospital’s costs for these services exceed
-a given threshold tied to the average APC payment, CMS must issue an
-outlier payment to the hospital to that service to compensate for the
-costly provision of service.
 
 ## Examples
 

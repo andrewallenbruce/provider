@@ -94,12 +94,12 @@ fee-for-service (Part B).
 
 ``` r
 opted_out(count = TRUE)
-#> ◼ opted_out | 57,530 rows | 12 pages
+#> ◼ opted_out | 57,780 rows | 12 pages
 
 opted_out(state = "GA", specialty = contains("Psych"))
-#> ✔ opted_out returned 228 results
-#> ✔ order_refer returned 129 results
-#> # A tibble: 228 × 12
+#> ✔ opted_out returned 225 results
+#> ✔ order_refer returned 128 results
+#> # A tibble: 225 × 12
 #>         npi first last  specialty start_date end_date   updated    address city 
 #>  *    <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
 #>  1   1.88e9 Ana   Adel… Clinical… 2012-07-01 2028-07-01 2026-08-14 675 SE… ATLA…
@@ -112,6 +112,6 @@ opted_out(state = "GA", specialty = contains("Psych"))
 #>  8   1.88e9 Barb… Da V… Psychiat… 2012-07-01 2028-07-01 2026-08-14 143 FO… ST S…
 #>  9   1.29e9 Matt… Norm… Psychiat… 2012-10-01 2026-10-01 2024-11-15 3495 P… ATLA…
 #> 10   1.30e9 Linda Ande… Clinical… 2013-01-01 2027-01-01 2025-01-15 4675 N… ATLA…
-#> # ℹ 218 more rows
+#> # ℹ 215 more rows
 #> # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```

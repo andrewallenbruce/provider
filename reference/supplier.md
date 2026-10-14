@@ -73,25 +73,25 @@ containing the search results.
 
 ``` r
 supplier(count = TRUE)
-#> ◼ supplier | 56,898 rows | 38 pages
+#> ◼ supplier | 56,962 rows | 38 pages
 supplier(state = "GA")
-#> ✔ supplier returned 1,800 results
+#> ✔ supplier returned 1,806 results
 #> [working] (0 + 0) -> 1 -> 1 | ■■■■■■■■■■■■■■■■                  50%
 #> [working] (0 + 0) -> 0 -> 2 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
-#> # A tibble: 1,800 × 15
+#> # A tibble: 1,806 × 15
 #>      provid   par start_date org_dba org_name specialty prov_type supplies   cba
 #>       <int> <int> <date>     <chr>   <chr>    <chr>     <chr>     <chr>    <int>
-#>  1 34363005     1 2025-12-23 RAPID … RAPID S… Medical … NA        Commode…     0
-#>  2 34362765     0 2025-11-28 CRESCE… CRESCEN… Pharmacy  NA        Epoetin…     0
-#>  3 20505233     0 2026-01-01 LILY'S… LILY'S … Pharmacy  NA        Epoetin…     0
-#>  4 34360635     1 2025-05-05 RADIAN… RADIANT… Medical … NA        Commode…     0
-#>  5 34361985     1 2025-08-14 FOOT S… FOOT SO… NA        CERTIFIE… Limb Pr…     0
-#>  6 20547527     1 2026-01-01 REHAB … REHAB M… Medical … NA        Hospita…     0
-#>  7 34362759     1 2025-04-12 MAGNOL… MAGNOLI… NA        NURSE PR… Contrac…     0
-#>  8 20685137     0 2025-03-31 DENTAL… DENTAL … Orthotic… ORAL SUR… Orthose…     0
-#>  9 34360703     1 2025-02-05 ORTHOX… ORTHOXP… NA        PHYSICIA… Canes a…     0
-#> 10 34362817     1 2025-12-04 PEACHT… PEACHTR… Certifie… NA        Epoetin…     0
-#> # ℹ 1,790 more rows
+#>  1 34362830     1 2026-01-23 VISION… VISION … Optometr… NA        Prosthe…     0
+#>  2 34363460     1 2026-01-20 LIFELI… LIFELIN… Medical … NA        Blood G…     0
+#>  3 20575007     1 2026-01-01 REHAB … REHAB M… Medical … NA        Hospita…     0
+#>  4 34362054     0 2025-10-06 KABAFU… KABAFUS… Pharmacy  NA        Infusio…     0
+#>  5 34360632     0 2025-05-30 ATLANT… ATLANTA… Medical … NA        Commode…     0
+#>  6 34360638     1 2025-05-27 EASE E… EASE EQ… Medical … NA        Blood G…     0
+#>  7 34360656     1 2025-05-14 ON TIM… ON TIME… Medical … INDEPEND… Urologi…     0
+#>  8 34360668     1 2025-05-14 RJ MED… RJ MEDI… Medical … NA        Blood G…     0
+#>  9 34362146     1 2025-10-01 SV ORT… SV ORTH… MSC With… NA        Orthose…     0
+#> 10 34360652     1 2025-05-14 ATLANT… ATLANTA… Medical … NA        Commode…     0
+#> # ℹ 1,796 more rows
 #> # ℹ 6 more variables: lat <dbl>, lon <dbl>, address <chr>, city <chr>,
 #> #   state <chr>, zip <chr>
 ```

@@ -63,8 +63,9 @@ containing the search results.
 long_term(count = TRUE)
 #> ◼ long_term | 311 rows | 1 pages
 long_term(state = "GA")
-#> ✔ long_term returned 10 results
-#> # A tibble: 10 × 10
+#> ✔ long_term returned 11 results
+#> Warning: NAs introduced by coercion
+#> # A tibble: 11 × 10
 #>    ccn    name        address city  state zip   county own_type cert_date   beds
 #>    <chr>  <chr>       <chr>   <chr> <chr> <chr> <chr>  <chr>    <date>     <int>
 #>  1 112000 WELLSTAR R… 6135 R… WARM… GA    31830 Meriw… Governm… 1974-07-01    32
@@ -77,4 +78,5 @@ long_term(state = "GA")
 #>  8 112013 SELECT SPE… 1537 W… AUGU… GA    30904 Richm… For pro… 2004-04-01    30
 #>  9 112016 REGENCY HO… 535 CO… MACON GA    31217 Bibb   Non-pro… 2004-11-01    34
 #> 10 112017 LANDMARK H… 775 SU… ATHE… GA    30606 Clarke For pro… 2009-02-01    42
+#> 11 112019 SOUTH GEOR… 2000 P… ALBA… GA    31701 Dough… For pro… 2025-10-01    NA
 ```

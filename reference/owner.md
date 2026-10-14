@@ -26,10 +26,6 @@ owner(
 )
 ```
 
-## Source
-
-Medicare
-
 ## Arguments
 
 - fac_type:
@@ -47,6 +43,18 @@ Medicare
   - `Hospice` = Hospice
 
   - `Hospital` = Hospital
+
+- fac_enid:
+
+  `<chr>` National Provider Identifier
+
+- fac_pac:
+
+  `<chr>` Provider's name
+
+- fac_name:
+
+  `<chr>` Provider's name
 
 - own_pac:
 
@@ -87,18 +95,6 @@ Medicare
 - count:
 
   `<lgl>` Return the total row count
-
-- enid:
-
-  `<chr>` National Provider Identifier
-
-- pac:
-
-  `<chr>` Provider's name
-
-- org_name:
-
-  `<chr>` Provider's name
 
 ## Value
 

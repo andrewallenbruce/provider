@@ -43,6 +43,10 @@ psych(
 
   `<chr>` desc
 
+- rating:
+
+  description
+
 - count:
 
   `<lgl>` Return the total row count

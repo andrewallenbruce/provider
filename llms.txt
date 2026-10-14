@@ -32,261 +32,241 @@ library(provider)
 
 ``` r
 affiliations(last = "Bruce")
-✔ affiliations returned 327 results
-✔ Retrieving 1 page
-# A tibble: 327 × 7
-   first    last         npi pac        fac_type fac_ccn parent_ccn
-   <chr>    <chr>      <int> <chr>      <chr>    <chr>   <chr>     
- 1 SIDNEY   BRUCE 1003044520 2466795406 Hospital 150173  <NA>      
- 2 SIDNEY   BRUCE 1003044520 2466795406 Hospital 151312  <NA>      
- 3 SIDNEY   BRUCE 1003044520 2466795406 Hospital 151316  <NA>      
- 4 MARGARET BRUCE 1003444332 0840619235 Hospital 500016  <NA>      
- 5 LAUREN   BRUCE 1003863192 4385530377 Hospital 390331  <NA>      
- 6 TIMOTHY  BRUCE 1013228907 7315239902 Hospital 520008  <NA>      
- 7 SARAH    BRUCE 1023571882 8224498597 Hospital 390111  <NA>      
- 8 SARAH    BRUCE 1023571882 8224498597 Hospital 450018  <NA>      
- 9 DAVID    BRUCE 1043213069 6406929694 Hospital 190036  <NA>      
-10 DAVID    BRUCE 1043634017 0840422127 Hospital 110107  <NA>      
-# ℹ 317 more rows
+✔ affiliations returned 330 results
+# A tibble: 330 × 7
+   first    last         npi pac        fac_type ccn    parent_ccn
+   <chr>    <chr>      <int> <chr>      <chr>    <chr>  <chr>     
+ 1 SIDNEY   BRUCE 1003044520 2466795406 Hospital 150173 <NA>      
+ 2 SIDNEY   BRUCE 1003044520 2466795406 Hospital 151312 <NA>      
+ 3 SIDNEY   BRUCE 1003044520 2466795406 Hospital 151316 <NA>      
+ 4 MARGARET BRUCE 1003444332 0840619235 Hospital 500016 <NA>      
+ 5 LAUREN   BRUCE 1003863192 4385530377 Hospital 390331 <NA>      
+ 6 TIMOTHY  BRUCE 1013228907 7315239902 Hospital 520008 <NA>      
+ 7 TIMOTHY  BRUCE 1013228907 7315239902 Hospital 520051 <NA>      
+ 8 SARAH    BRUCE 1023571882 8224498597 Hospital 390111 <NA>      
+ 9 ROBERT   BRUCE 1033799341 1456825231 Hospital 470003 <NA>      
+10 ROBERT   BRUCE 1033799341 1456825231 Hospital 471307 <NA>      
+# ℹ 320 more rows
 ```
 
 #### 🤝 Reassignment of Benefits
 
 ``` r
-reassignments(
+reassigned(
   org_enid = starts("I"), 
-  members = greater(50, equal = TRUE))
-✔ reassignments returned 52 results
-✔ Retrieving 1 page
-# A tibble: 52 × 13
-   first   last  state specialty memberships    npi pac   enid  org_name members
-   <chr>   <chr> <chr> <chr>           <int>  <int> <chr> <chr> <chr>      <int>
- 1 Hilario Alva… TX    Family P…           2 1.83e9 6103… I201… <NA>          52
- 2 James   Bagg… TX    Emergenc…           2 1.92e9 9638… I200… <NA>          52
- 3 Todd    Baker TX    Family P…           2 1.37e9 5799… I200… <NA>          52
- 4 Ami     Besh… TX    Family P…           2 1.84e9 5193… I200… <NA>          52
- 5 Dennis  Bish… TX    Emergenc…           7 1.86e9 2567… I201… <NA>          52
- 6 Cristi… Blej… TX    Family P…           2 1.32e9 3452… I201… <NA>          52
- 7 James   Bugg  TX    Family P…           2 1.84e9 3274… I201… <NA>          52
- 8 Richard Camp… TX    Emergenc…           2 1.89e9 5092… I200… <NA>          52
- 9 John    Cantu TX    Family P…           2 1.01e9 8820… I200… <NA>          52
-10 David   Cart… TX    Family P…           5 1.82e9 7416… I201… <NA>          52
-# ℹ 42 more rows
-# ℹ 3 more variables: org_pac <chr>, org_enid <chr>, org_state <chr>
+  members = greater(50, equal = TRUE)
+)
+✔ reassigned returned 51 results
+# A tibble: 51 × 13
+        npi pac   enid  first last  state specialty memberships org_pac org_enid
+      <int> <chr> <chr> <chr> <chr> <chr> <chr>           <int> <chr>   <chr>   
+ 1   1.83e9 6103… I201… Hila… Alva… TX    Family P…           2 175932… I201208…
+ 2   1.92e9 9638… I200… James Bagg… TX    Emergenc…           2 175932… I201208…
+ 3   1.37e9 5799… I200… Todd  Baker TX    Family P…           2 175932… I201208…
+ 4   1.84e9 5193… I200… Ami   Besh… TX    Family P…           2 175932… I201208…
+ 5   1.86e9 2567… I201… Denn… Bish… TX    Emergenc…           6 175932… I201208…
+ 6   1.32e9 3452… I201… Cris… Blej… TX    Family P…           2 175932… I201208…
+ 7   1.84e9 3274… I201… James Bugg  TX    Family P…           2 175932… I201208…
+ 8   1.89e9 5092… I200… Rich… Camp… TX    Emergenc…           2 175932… I201208…
+ 9   1.01e9 8820… I200… John  Cantu TX    Family P…           2 175932… I201208…
+10   1.82e9 7416… I201… David Cart… TX    Family P…           5 175932… I201208…
+# ℹ 41 more rows
+# ℹ 3 more variables: org_name <chr>, members <int>, org_state <chr>
 ```
 
 #### 👎 Revoked Medicare Providers
 
 ``` r
-revocations(
-  state = "GA", 
-  org_name = not_blank())
-✔ revocations returned 108 results
-✔ Retrieving 1 page
-# A tibble: 108 × 11
-   org_name    first last  enid      npi multi state prov_desc reason start_date
+revoked(state = "GA", org_name = not_blank())
+✔ revoked returned 142 results
+# A tibble: 142 × 11
+   org         first last  enid      npi multi state prov_desc reason start_date
    <chr>       <chr> <chr> <chr>   <int> <int> <chr> <chr>     <chr>  <date>    
- 1 EMMANUEL O… <NA>  <NA>  O200…  1.34e9     0 GA    PART B S… 424.5… 2022-09-20
- 2 COMPREHENS… <NA>  <NA>  O200…  1.13e9     0 GA    PART B S… 424.5… 2018-06-07
- 3 RIVERSIDE … <NA>  <NA>  O200…  1.31e9     0 GA    PART B S… 424.5… 2017-03-08
- 4 PAIN MANAG… <NA>  <NA>  O200…  1.54e9     0 GA    PART B S… 424.5… 2024-03-01
- 5 DEEP SOUTH… <NA>  <NA>  O200…  1.07e9     0 GA    PART B S… 424.5… 2025-01-05
- 6 SIGHT SAVE… <NA>  <NA>  O200… NA          0 GA    PART B S… 424.5… 2019-06-12
- 7 SENIOR PSY… <NA>  <NA>  O200…  1.23e9     0 GA    PART B S… 424.5… 2023-03-04
- 8 WALLACE ST… <NA>  <NA>  O200…  1.98e9     0 GA    PART B S… 424.5… 2022-06-30
- 9 FULGHUM DR… <NA>  <NA>  O200…  1.41e9     1 GA    PART B S… 424.5… 2019-07-31
-10 AGAPE PRES… <NA>  <NA>  O200…  1.47e9     0 GA    PART B S… 424.5… 2019-10-29
-# ℹ 98 more rows
+ 1 PROGRESSIV… <NA>  <NA>  O200… NA          0 GA    PART B S… 424.5… 2024-06-20
+ 2 EMMANUEL O… <NA>  <NA>  O200…  1.34e9     0 GA    PART B S… 424.5… 2022-09-20
+ 3 COMPREHENS… <NA>  <NA>  O200…  1.13e9     0 GA    PART B S… 424.5… 2018-06-07
+ 4 RIVERSIDE … <NA>  <NA>  O200…  1.31e9     0 GA    PART B S… 424.5… 2017-03-08
+ 5 PAIN MANAG… <NA>  <NA>  O200…  1.54e9     0 GA    PART B S… 424.5… 2024-03-01
+ 6 DEEP SOUTH… <NA>  <NA>  O200…  1.07e9     0 GA    PART B S… 424.5… 2025-01-05
+ 7 SIGHT SAVE… <NA>  <NA>  O200… NA          0 GA    PART B S… 424.5… 2019-06-12
+ 8 SENIOR PSY… <NA>  <NA>  O200…  1.23e9     0 GA    PART B S… 424.5… 2023-03-04
+ 9 WALLACE ST… <NA>  <NA>  O200…  1.98e9     0 GA    PART B S… 424.5… 2022-06-30
+10 FULGHUM DR… <NA>  <NA>  O200…  1.41e9     1 GA    PART B S… 424.5… 2019-07-31
+# ℹ 132 more rows
 # ℹ 1 more variable: end_date <date>
 ```
 
 #### 🪪 Clinician Demographics
 
 ``` r
-clinicians(
+clinician(
   state = "GA", 
   school = not("OTHER"), 
   org_name = not_blank(),
-  year = 2025)
-✔ clinicians returned 163 results
-✔ Retrieving 1 page
-# A tibble: 163 × 17
-   first    last    gender cred  school   grad_year specialty    npi pac   enid 
-   <chr>    <chr>   <chr>  <chr> <chr>        <int> <chr>      <int> <chr> <chr>
- 1 SUWARO   GASSAMA M      CNA   BAYLOR …      2025 CERTIFIE… 1.97e9 3274… I202…
- 2 BRITTANY STENTO  F      <NA>  MERCER …      2025 PHYSICIA… 1.04e9 7214… I202…
- 3 BRITTANY STENTO  F      <NA>  MERCER …      2025 PHYSICIA… 1.04e9 7214… I202…
- 4 FOREST   HARDMAN M      <NA>  EDWARD …      2025 ANESTHES… 1.27e9 4880… I202…
- 5 WESLEY   LONG    M      CNA   UNIVERS…      2025 CERTIFIE… 1.82e9 9638… I202…
- 6 COLE     STUART  M      DC    LIFE CH…      2025 CHIROPRA… 1.54e9 6709… I202…
- 7 NICHOLAS HADLEY  M      <NA>  UNIVERS…      2025 PHYSICAL… 1.19e9 3971… I202…
- 8 JORDON   WALES   M      PT    MERCER …      2025 PHYSICAL… 1.85e9 8729… I202…
- 9 REX      WALLACE M      NP    UNIVERS…      2025 FAMILY P… 1.63e9 9133… I202…
-10 TYLER    FISHER  M      OD    SOUTHER…      2025 OPTOMETRY 1.42e9 1254… I202…
-# ℹ 153 more rows
-# ℹ 7 more variables: org_name <chr>, org_pac <chr>, members <int>,
-#   address <chr>, city <chr>, state <chr>, zip <chr>
+  year = 2025
+)
+✔ clinician returned 228 results
+# A tibble: 228 × 17
+        npi pac   enid  first last  gender cred  school  year specialty org_name
+      <int> <chr> <chr> <chr> <chr> <chr>  <chr> <chr>  <int> <chr>     <chr>   
+ 1   1.26e9 9830… I202… LUIS  RAMI… M      <NA>  UNIVE…  2025 NURSE PR… APPALAC…
+ 2   1.97e9 3274… I202… SUWA… GASS… M      CNA   BAYLO…  2025 CERTIFIE… HOSPITA…
+ 3   1.74e9 7517… I202… NUPUR MISH… F      MD    SOUTH…  2025 INTERNAL… PIEDMON…
+ 4   1.04e9 7214… I202… BRIT… STEN… F      <NA>  MERCE…  2025 PHYSICIA… NORTHSI…
+ 5   1.73e9 3375… I202… NEO   SANS… M      <NA>  EMORY…  2025 ANESTHES… NORTH A…
+ 6   1.04e9 7214… I202… BRIT… STEN… F      <NA>  MERCE…  2025 PHYSICIA… NORTHSI…
+ 7   1.27e9 4880… I202… FORE… HARD… M      <NA>  EDWAR…  2025 ANESTHES… NORTH A…
+ 8   1.82e9 9638… I202… WESL… LONG  M      CNA   UNIVE…  2025 CERTIFIE… NORTH A…
+ 9   1.97e9 2163… I202… STEF… SHINE F      <NA>  SOUTH…  2025 OPTOMETRY EUGENE …
+10   1.54e9 6709… I202… COLE  STUA… M      DC    LIFE …  2025 CHIROPRA… WHITEHA…
+# ℹ 218 more rows
+# ℹ 6 more variables: org_pac <chr>, members <int>, address <chr>, city <chr>,
+#   state <chr>, zip <chr>
 ```
 
 ##### 📤 Opt-Out Affidavits
 
 ``` r
-opt_out(city = "Atlanta", state = "GA")
-✔ opt_out returned 352 results
-✔ Retrieving 1 page
-✔ order_refer returned 150 results
-✔ Retrieving 1 page
-✔ order_refer returned 58 results
-✔ Retrieving 1 page
-# A tibble: 352 × 12
+opted_out(state = "GA", order_refer = FALSE)
+✔ opted_out returned 638 results
+# A tibble: 638 × 12
         npi first last  specialty start_date end_date   updated    address city 
- *    <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
- 1   1.88e9 Ana   Adel… Clinical… 2012-07-01 2026-07-01 2024-08-15 675 SE… ATLA…
- 2   1.68e9 Sher… Born… Clinical… 2012-04-01 2028-04-01 2026-04-16 990 HA… ATLA…
- 3   1.70e9 Nich… Hume  Clinical… 2018-07-01 2026-07-01 2024-08-15 693 MO… ATLA…
- 4   1.31e9 Keri… Anas… Nurse Pr… 2012-07-01 2026-07-01 2024-08-15 5780 P… ATLA…
- 5   1.60e9 Carol Kran… Psychiat… 2012-01-01 2028-01-01 2026-01-15 3133 M… ATLA…
- 6   1.12e9 Lawr… Gius… Psychiat… 2012-07-01 2026-07-01 2024-08-15 1945 C… ATLA…
- 7   1.39e9 Ceana Nezh… Obstetri… 2012-10-01 2026-10-01 2024-11-15 5555 P… ATLA…
- 8   1.07e9 Frank Mata… Integrat… 2018-04-11 2028-04-11 2026-05-15 2296 H… ATLA…
- 9   1.07e9 Vikt… Bouq… General … 2012-10-01 2026-10-01 2024-11-15 4646 N… ATLA…
-10   1.79e9 Will… Oven  Clinical… 2017-01-23 2027-01-23 2025-02-15 2801 B… ATLA…
-# ℹ 342 more rows
+      <int> <chr> <chr> <chr>     <date>     <date>     <date>     <chr>   <chr>
+ 1   1.88e9 Ana   Adel… Clinical… 2012-07-01 2028-07-01 2026-08-14 675 SE… ATLA…
+ 2   1.98e9 Joan  Mill… Clinical… 2014-07-01 2028-07-01 2026-08-14 2520 W… MARI…
+ 3   1.70e9 Nich… Hume  Clinical… 2018-07-01 2028-07-01 2026-08-14 693 MO… ATLA…
+ 4   1.51e9 Mich… Fish… General … 2012-04-01 2028-04-01 2026-04-16 5448 Y… ATLA…
+ 5   1.48e9 Clem… Hsiao Obstetri… 2012-07-01 2028-07-01 2026-08-14 3180 N… ALPH…
+ 6   1.88e9 Barb… Da V… Psychiat… 2012-07-01 2028-07-01 2026-08-14 143 FO… ST S…
+ 7   1.95e9 Mich… Milt… Family P… 2013-07-01 2027-07-01 2025-08-15 6030 B… CUMM…
+ 8   1.31e9 Chri… Reck… Internal… 2013-10-01 2027-10-01 2025-11-14 2350 L… GAIN…
+ 9   1.71e9 Jerry Will… Neurology 2018-07-06 2028-07-06 2026-08-14 1004 M… SAVA…
+10   1.82e9 Mich… Swag… Clinical… 2013-10-01 2027-10-01 2025-11-14 1150 S… ATHE…
+# ℹ 628 more rows
 # ℹ 3 more variables: state <chr>, zip <chr>, order_refer <chr>
 ```
 
 ##### 🧾 Order & Referral Eligibility
 
 ``` r
-order_refer(
-  first = "Jennifer", 
-  last = "Smith",
-  ptb = FALSE)
-✔ order_refer returned 3 results
-✔ Retrieving 1 page
-# A tibble: 3 × 8
-  first    last         npi ptb_ind dme_ind hha_ind pmd_ind hsp_ind
-  <chr>    <chr>      <int>   <int>   <int>   <int>   <int>   <int>
-1 JENNIFER SMITH 1265417687       0       1       0       1       0
-2 JENNIFER SMITH 1538521992       0       1       0       0       0
-3 JENNIFER SMITH 1306024922       0       1       0       0       0
+order_refer(first = "Jennifer", last = "Smith")
+✔ order_refer returned 136 results
+# A tibble: 136 × 8
+          npi first    last  ptb_ind dme_ind hha_ind pmd_ind hsp_ind
+        <int> <chr>    <chr>   <int>   <int>   <int>   <int>   <int>
+ 1 1124421995 JENNIFER SMITH       1       1       1       1       0
+ 2 1134344286 JENNIFER SMITH       1       1       1       1       1
+ 3 1811218712 JENNIFER SMITH       1       1       1       1       1
+ 4 1215468897 JENNIFER SMITH       1       1       1       1       0
+ 5 1053340471 JENNIFER SMITH       1       1       1       1       0
+ 6 1154778181 JENNIFER SMITH       1       1       1       1       1
+ 7 1982792206 JENNIFER SMITH       1       1       1       1       0
+ 8 1336652726 JENNIFER SMITH       1       1       1       1       0
+ 9 1407299431 JENNIFER SMITH       1       1       1       1       1
+10 1962707042 JENNIFER SMITH       1       1       1       1       0
+# ℹ 126 more rows
 ```
 
 ##### 🧑‍⚕️ Medicare Provider Enrollments
 
 ``` r
-providers(
-  state = "GA", 
-  org_name = contains("West"))
-✔ providers returned 144 results
-✔ Retrieving 1 page
-# A tibble: 144 × 10
-   org_name       first last  state prov_type prov_desc    npi multi pac   enid 
-   <chr>          <chr> <chr> <chr> <chr>     <chr>      <int> <int> <chr> <chr>
- 1 WEST GEORGIA … <NA>  <NA>  GA    12-70     PART B S… 1.01e9     0 2961… O200…
- 2 WEST GEORGIA … <NA>  <NA>  GA    30-48     DME SUPP… 1.01e9     0 2961… O201…
- 3 WESTSIDE SURG… <NA>  <NA>  GA    12-49     PART B S… 1.01e9     0 8224… O200…
- 4 WEST GEORGIA … <NA>  <NA>  GA    12-49     PART B S… 1.02e9     0 8224… O202…
- 5 RADIOLOGY ASS… <NA>  <NA>  GA    12-70     PART B S… 1.03e9     0 0941… O201…
- 6 CANTON WEST C… <NA>  <NA>  GA    12-70     PART B S… 1.04e9     0 1850… O202…
- 7 HEALTHQWEST F… <NA>  <NA>  GA    12-D5     PART B S… 1.04e9     1 7416… O202…
- 8 NORTHWEST GEO… <NA>  <NA>  GA    12-70     PART B S… 1.05e9     0 7315… O200…
- 9 ATLANTA WEST … <NA>  <NA>  GA    12-70     PART B S… 1.05e9     0 5597… O201…
-10 GEORGIA WEST … <NA>  <NA>  GA    12-70     PART B S… 1.08e9     0 3577… O200…
-# ℹ 134 more rows
+enrolled(state = "GA", org_name = contains("West"))
+✔ enrolled returned 142 results
+# A tibble: 142 × 10
+          npi pac     enid  prov_type prov_desc org_name first last  state multi
+        <int> <chr>   <chr> <chr>     <chr>     <chr>    <chr> <chr> <chr> <int>
+ 1 1982631321 599161… O200… 00-17     PART A P… TMC WES… <NA>  <NA>  GA        0
+ 2 1417048885 539565… O200… 12-65     PART B S… WEST CO… <NA>  <NA>  GA        0
+ 3 1114075694 206231… O200… 12-70     PART B S… WEST GE… <NA>  <NA>  GA        0
+ 4 1992756894 206231… O200… 12-70     PART B S… SOUTHWE… <NA>  <NA>  GA        0
+ 5 1861461790 276937… O200… 00-03     PART A P… SOUTHWE… <NA>  <NA>  GA        0
+ 6 1710946900 276937… O200… 00-03     PART A P… SOUTHWE… <NA>  <NA>  GA        0
+ 7 1386635852 670977… O200… 12-70     PART B S… PRIMARY… <NA>  <NA>  GA        0
+ 8 1295704138 276937… O200… 00-03     PART A P… SOUTHWE… <NA>  <NA>  GA        0
+ 9 1982701124 660876… O200… 12-70     PART B S… WEST GE… <NA>  <NA>  GA        0
+10 1730158775 276937… O200… 00-03     PART A P… SOUTHWE… <NA>  <NA>  GA        0
+# ℹ 132 more rows
 ```
 
 ##### 📆 Pending Enrollments
 
 ``` r
-pending(
-  first = starts("E"), 
-  last = ends("A"))
-✔ pending returned 40 results
-✔ Retrieving 2 pages
-# A tibble: 40 × 4
-   prov_type first         last                  npi
-   <chr>     <chr>         <chr>               <int>
- 1 Physician EDGAR         PASTORA        1477255677
- 2 Physician EDWIN MICHAEL SIA            1114949575
- 3 Physician EIJIRO        YAMASHITA      1932893799
- 4 Physician EILEEN        SANTA          1952440083
- 5 Physician EKIN          SIMWATACHELA   1053057851
- 6 Physician ELIAS         SALAMA         1508660655
- 7 Physician ELIZABETH     PERAZZA        1942230891
- 8 Physician ELYSSA        MOLINA         1508624891
- 9 Physician EMANUEL       SALCEDO DAVILA 1104521640
-10 Physician EMILY         ZONA           1194667014
-# ℹ 30 more rows
+pending(first = starts("E"), last = ends("A"))
+✔ pending returned 47 results
+# A tibble: 47 × 4
+   prov_type        npi first        last            
+   <chr>          <int> <chr>        <chr>           
+ 1 Physician 1225925753 EANAS        ABUTAHA         
+ 2 Physician 1730882564 EDMUNDO      ESPARZA         
+ 3 Physician 1952440083 EILEEN       SANTA           
+ 4 Physician 1306478979 ELENA        BENZAQUEN GARCIA
+ 5 Physician 1508660655 ELIAS        SALAMA          
+ 6 Physician 1942230891 ELIZABETH    PERAZZA         
+ 7 Physician 1467253393 EMILY        SIERRA          
+ 8 Physician 1386497477 ENRIQUE      SANTANA VELA    
+ 9 Physician 1245915321 ERIC         GRAULOU RIVERA  
+10 Physician 1134049760 ERICHA MARLA GEVERA          
+# ℹ 37 more rows
 ```
 
 ##### 🏥 Medicare Hospitals
 
 ``` r
-hospitals(
-  city = "Valdosta", 
-  state = "GA")
-✔ hospitals returned 3 results
-✔ Retrieving 1 page
+hospital(city = "Valdosta", state = "GA")
+✔ hospital returned 3 results
 # A tibble: 3 × 16
-  org_name     org_dba enid     npi multi ccn   pac   inc_date   org_type status
-* <chr>        <chr>   <chr>  <int> <int> <chr> <chr> <date>     <chr>    <chr> 
-1 GREENLEAF C… GREENL… O201… 1.54e9     0 1140… 7416… 2012-07-13 LLC      For-P…
-2 SOUTH GEORG… SGMC H… O202… 1.14e9     0 1101… 1052… 2021-11-09 Corpora… Non-P…
-3 SOUTH GEORG… <NA>    O202… 1.60e9     0 11T1… 1052… 2021-11-09 Corpora… Non-P…
-# ℹ 6 more variables: address <chr>, city <chr>, state <chr>, zip <chr>,
-#   loc_type <chr>, sub_group <chr>
+  org_name     org_dba ccn      npi pac   enid  multi inc_date   org_type status
+* <chr>        <chr>   <chr>  <int> <chr> <chr> <int> <date>     <chr>    <chr> 
+1 GREENLEAF C… GREENL… 1140… 1.54e9 7416… O201…     0 2012-07-13 LLC      For-P…
+2 SOUTH GEORG… SGMC H… 1101… 1.14e9 1052… O202…     0 2021-11-09 Corp     Non-P…
+3 SOUTH GEORG… <NA>    11T1… 1.60e9 1052… O202…     0 2021-11-09 Corp     Non-P…
+# ℹ 6 more variables: loc_type <chr>, address <chr>, city <chr>, state <chr>,
+#   zip <chr>, sub_group <chr>
 ```
 
 ##### 🧪 CLIA Laboratories
 
 ``` r
-clia(
-  fac_name = starts("SGMC"), 
-  state = "GA")
+clia(name = starts("SGMC"), state = "GA")
 ✔ clia returned 32 results
-✔ Retrieving 1 page
-# A tibble: 32 × 21
-   fac_name   fac_ccn clia_ccn chows  labs sites address city  state zip   term 
- * <chr>      <chr>   <chr>    <int> <int> <int> <chr>   <chr> <chr> <chr> <chr>
- 1 SGMC HEAL… 11D002… 110122       0     1     0 2501 N… VALD… GA    31602 Acti…
- 2 SGMC- SMI… 11D002… 110037       0     1     0 4280 N… VALD… GA    31602 Acti…
- 3 SGMC WOME… 11D026… <NA>         0     0     0 3312 N… VALD… GA    31605 Acti…
- 4 SGMC VALD… 11D026… 2585892…     0     2     0 3207 C… VALD… GA    31605 Acti…
- 5 SGMC- LAN… 11D026… 110097       0     3     2 116 WE… LAKE… GA    31635 Acti…
- 6 SGMC-BERR… 11D026… 11-0112      0     8     0 1221 E… NASH… GA    31639 Acti…
- 7 SGMC PRIM… 11D069… 2568644…     0     0     0 410 CO… VALD… GA    31602 Acti…
- 8 SGMC HEAL… 11D091… <NA>         0     0     0 138 WE… LAKE… GA    31635 Acti…
- 9 SGMC PRIM… 11D093… <NA>         0     1     0 4370 K… VALD… GA    31602 Acti…
-10 SGMC FAMI… 11D094… <NA>         0     0     0 1225 E… NASH… GA    31639 Acti…
+# A tibble: 32 × 20
+   name        ccn   clia  status  labs sites certificate address fac_type owner
+ * <chr>       <chr> <chr> <chr>  <int> <int> <chr>       <chr>   <chr>    <chr>
+ 1 SGMC HEALTH 11D0… <NA>  Active     1     0 Accreditat… 2501 N… Hospital [GOV…
+ 2 SGMC- SMIT… 11D0… <NA>  Active     1     0 Accreditat… 4280 N… ASC      [GOV…
+ 3 SGMC WOMEN… 11D0… <NA>  Active     0     0 Waiver      3312 N… Physici… Other
+ 4 SGMC VALDO… 11D0… <NA>  Active     2     0 Waiver      3207 C… Physici… Other
+ 5 SGMC- LANI… 11D0… <NA>  Active     3     2 Accreditat… 116 WE… Hospital Priv…
+ 6 SGMC-BERRI… 11D0… <NA>  Active     8     0 Accreditat… 1221 E… Hospital Other
+ 7 SGMC PRIMA… 11D0… <NA>  Active     0     0 Waiver      410 CO… Physici… Other
+ 8 SGMC HEALT… 11D0… <NA>  Active     0     0 Waiver      138 WE… SNF      Other
+ 9 SGMC PRIMA… 11D0… <NA>  Active     1     0 Waiver      4370 K… Physici… Other
+10 SGMC FAMIL… 11D0… <NA>  Active     0     0 Waiver      1225 E… SNF      Other
 # ℹ 22 more rows
-# ℹ 10 more variables: cert_type <chr>, fac_type <chr>, owner <chr>,
-#   action <chr>, cert_date <date>, eff_date <date>, term_date <date>,
-#   eligible <int>, multi <chr>, acr_org <chr>
+# ℹ 10 more variables: action <chr>, cert_date <date>, eff_date <date>,
+#   term_date <date>, elig <int>, city <chr>, state <chr>, zip <chr>,
+#   multi <chr>, accredit <chr>
 ```
 
 ##### 🔎 Hospital Transparency Enforcement
 
 ``` r
-transparency(
-  action = "cap", 
-  state = "GA")
-✔ transparency returned 56 results
-✔ Retrieving 1 page
-# A tibble: 56 × 7
-    case fac_name                         address city  state action action_date
+transparency(action = "cap", state = "GA")
+✔ transparency returned 60 results
+# A tibble: 60 × 7
+    case name                             address city  state action action_date
    <int> <chr>                            <chr>   <chr> <chr> <chr>  <date>     
- 1  7056 Jeff Davis Hospital              163 S … Hazl… GA    CAP R… 2026-05-22 
- 2  6976 Coffee Regional Medical Center   1101 O… Doug… GA    CAP R… 2026-05-14 
- 3  6968 Childrens Healthcare Of Atlanta… 1001 J… Atla… GA    CAP R… 2026-05-13 
- 4  6776 Colquitt Regional Medical Center 3131 S… Moul… GA    CAP R… 2026-05-06 
- 5  6790 Emory HealthCare & Houston Heal… 1601 W… Warn… GA    CAP R… 2026-04-20 
- 6  6782 Blue Ridge Medical Center        2855 O… Blue… GA    CAP R… 2026-04-15 
- 7  6794 Flint River Hospital             509 Su… Mont… GA    CAP R… 2026-04-15 
- 8  6776 Colquitt Regional Medical Center 3131 S… Moul… GA    CAP R… 2026-04-10 
- 9  6997 Dorminy Medical Center           200 Pe… Fitz… GA    CAP R… 2026-04-01 
-10  7157 Phoebe Putney Memorial Hospital… 2000 P… Alba… GA    CAP R… 2026-03-05 
-# ℹ 46 more rows
+ 1  2672 Jefferson Hospital               1067 P… Loui… GA    CAP R… 2025-03-26 
+ 2  6440 Willingway Hospital              311 Jo… Stat… GA    CAP R… 2025-12-19 
+ 3    42 Northside Hospital Atlanta       1000 J… Atla… GA    CAP R… 2021-09-30 
+ 4    68 Wellstar Kennestone Regional Me… 677 Ch… Mari… GA    CAP R… 2021-09-30 
+ 5    75 Northeast Georgia Medical Cente… 743 Sp… Gain… GA    CAP R… 2021-09-30 
+ 6    99 Northside Hospital - Cherokee    450 No… Cant… GA    CAP R… 2021-10-27 
+ 7   116 Wellstar Atlanta Medical Center  303 Pa… Atla… GA    CAP R… 2021-09-30 
+ 8   117 Tift Regional Medical Center     901 18… Tift… GA    CAP R… 2023-06-06 
+ 9   136 Piedmont Columbus Regional Midt… 710 Ce… Colu… GA    CAP R… 2021-09-30 
+10   256 Coffee Regional Medical Center   1101 O… Doug… GA    CAP R… 2023-06-15 
+# ℹ 50 more rows
 ```
 
 ------------------------------------------------------------------------

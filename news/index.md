@@ -1,5 +1,10 @@
 # Changelog
 
+## provider 0.0.1.9315 (2026-10-13)
+
+- bumped dependencies (S7, RcppSimdJson)
+- Updated S7 code in preparation for it’s upcoming release
+
 ## provider 0.0.1.9314 (2026-09-19)
 
 - updated dependencies

@@ -11,9 +11,6 @@ median (or midpoint) hospital. This measure takes into account important
 factors like patient age and health status (risk adjustment) and
 geographic payment differences (payment-standardization).
 
-Access information concerning individual providers' affiliations with
-organizations/facilities.
-
 ## Usage
 
 ``` r
@@ -36,8 +33,6 @@ spending2(ccn = NULL, name = NULL, state = NULL, claim = NULL, count = FALSE)
 - [API: Medicare Spending Per Beneficiary -
   Hospital](https://data.cms.gov/provider-data/dataset/rrqw-56er)
 
-&nbsp;
-
 - [API: Physician Facility
   Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 
@@ -55,10 +50,6 @@ spending2(ccn = NULL, name = NULL, state = NULL, claim = NULL, count = FALSE)
 
   `<chr>` desc
 
-- state:
-
-  `<chr>` desc
-
 - score:
 
   `<dbl>` desc
@@ -72,9 +63,6 @@ spending2(ccn = NULL, name = NULL, state = NULL, claim = NULL, count = FALSE)
   `<chr>` desc
 
 ## Value
-
-A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
-containing the search results.
 
 A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 containing the search results.

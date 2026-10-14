@@ -49,7 +49,7 @@ reassigned(pac = 7810891009) |> str()
 #>  $ org_pac    : chr "3779491071"
 #>  $ org_enid   : chr "O20040406001047"
 #>  $ org_name   : chr "University Of Vermont Medical Center Inc"
-#>  $ members    : int 1617
+#>  $ members    : int 1643
 #>  $ org_state  : chr "VT"
 
 clinician(pac = 7810891009) |> str()
@@ -122,8 +122,8 @@ clinician(org_name = x) |> str()
 #>  $ zip      : chr [1:85] "128839334" "054957007" "054459594" "054619697" ...
 
 reassigned(org_name = x)
-#> ✔ reassigned returned 423 results
-#> # A tibble: 423 × 13
+#> ✔ reassigned returned 434 results
+#> # A tibble: 434 × 13
 #>         npi pac   enid  first last  state specialty memberships org_pac org_enid
 #>       <int> <chr> <chr> <chr> <chr> <chr> <chr>           <int> <chr>   <chr>   
 #>  1   1.34e9 5294… I202… Nath… Abis… NY    Family P…           1 357755… O200405…
@@ -136,7 +136,7 @@ reassigned(org_name = x)
 #>  8   1.72e9 3678… I201… Anel  Alex… NY    Emergenc…           6 357755… O201011…
 #>  9   1.77e9 1658… I201… Loren Allen NY    Nurse Pr…           2 357755… O200405…
 #> 10   1.24e9 8628… I202… Nich… Also… NY    Emergenc…           5 357755… O200405…
-#> # ℹ 413 more rows
+#> # ℹ 424 more rows
 #> # ℹ 3 more variables: org_name <chr>, members <int>, org_state <chr>
 ```
 
