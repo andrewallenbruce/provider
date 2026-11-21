@@ -105,7 +105,7 @@ containing the search results.
 
 ``` r
 owner(count = TRUE)
-#> ◼ owner | 531,531 rows | 109 pages
+#> ◼ owner | 536,786 rows | 110 pages
 owner(city = "Valdosta", state = "GA", fac_type = "Hospital")
 #> ✔ owner returned 8 results
 #> # A tibble: 8 × 18

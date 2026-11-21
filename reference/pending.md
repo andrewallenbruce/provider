@@ -49,22 +49,22 @@ containing the search results.
 
 ``` r
 pending(count = TRUE)
-#> ◼ pending | 12,214 rows | 3 pages
+#> ◼ pending | 11,768 rows | 3 pages
 
 pending(first = starts("V"))
-#> ✔ pending returned 169 results
-#> # A tibble: 169 × 4
-#>    prov_type        npi first     last          
-#>    <chr>          <int> <chr>     <chr>         
-#>  1 Physician 1164110664 VADIM     KASHTELYAN    
-#>  2 Physician 1144512724 VADIN     LALL DASS     
-#>  3 Physician 1104404466 VAISHNAVI ARYAPADI      
-#>  4 Physician 1619545423 VALERIE   REEVE         
-#>  5 Physician 1578982013 VALERIE   WEISS         
-#>  6 Physician 1982509188 VALESHKA  AVILES CANTING
-#>  7 Physician 1508396284 VAN       TRUONG        
-#>  8 Physician 1912587676 VANDANA   DODA          
-#>  9 Physician 1700645272 VANESSA   MILAN         
-#> 10 Physician 1558244814 VANESSA   OCON          
-#> # ℹ 159 more rows
+#> ✔ pending returned 159 results
+#> # A tibble: 159 × 4
+#>    prov_type        npi first   last          
+#>    <chr>          <int> <chr>   <chr>         
+#>  1 Physician 1144512724 VADIN   LALL DASS     
+#>  2 Physician 1316700214 VALERIA MIDGETTE      
+#>  3 Physician 1649776824 VALERIE LUKS          
+#>  4 Physician 1134880628 VALERIE MARQUEZ RIVERA
+#>  5 Physician 1619545423 VALERIE REEVE         
+#>  6 Physician 1043012446 VALERIE SHAY          
+#>  7 Physician 1215825310 VALERIE SOTO          
+#>  8 Physician 1174214688 VANESSA MAHROU        
+#>  9 Physician 1700645272 VANESSA MILAN         
+#> 10 Physician 1588552053 VANESSA PAQUETTE      
+#> # ℹ 149 more rows
 ```

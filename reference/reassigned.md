@@ -97,7 +97,7 @@ containing the search results.
 
 ``` r
 reassigned(count = TRUE)
-#> ◼ reassigned | 3,634,486 rows | 727 pages
+#> ◼ reassigned | 3,672,532 rows | 735 pages
 reassigned(org_enid = starts("I"), members = greater(50, equal = TRUE))
 #> ✔ reassigned returned 51 results
 #> # A tibble: 51 × 13

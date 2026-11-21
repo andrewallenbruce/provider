@@ -209,11 +209,13 @@ nppes(x)
 #> [1] "nppes" "list" 
 
 nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
-#> ✔ order_refer returned 136 results
-#> ✔ nppes returned 136/136 results
+#> ✔ order_refer returned 138 results
+#> [working] (60 + 0) -> 10 -> 68 | ■■■■■■■■■■■■■■■■                  49%
+#> [working] (0 + 0) -> 0 -> 138 | ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100%
+#> ✔ nppes returned 138/138 results
 #> $ind
 #> $ind$basic
-#> # A tibble: 136 × 10
+#> # A tibble: 138 × 10
 #>           npi entity cred  first  last  sex    sole other enum_date  last_update
 #>         <int>  <int> <chr> <chr>  <chr> <chr> <int> <chr> <date>     <date>     
 #>  1 1013227818      1 LCSW  JENNI… SMITH F         0 JENN… 2010-10-14 2023-09-26 
@@ -226,10 +228,10 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033811211      1 NA    JENNI… SMITH F         0 NA    2023-03-20 2026-06-24 
 #>  9 1053340471      1 PA    JENNI… SMITH F         0 NA    2006-06-30 2013-09-30 
 #> 10 1053842450      1 D.O.  JENNI… SMITH F         0 NA    2017-03-27 2022-07-27 
-#> # ℹ 126 more rows
+#> # ℹ 128 more rows
 #> 
 #> $ind$taxonomy
-#> # A tibble: 175 × 3
+#> # A tibble: 176 × 3
 #>           npi order code      
 #>         <int> <int> <chr>     
 #>  1 1992396162     1 103TC0700X
@@ -242,10 +244,10 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1972332542     1 363LF0000X
 #>  9 1962707042     1 363L00000X
 #> 10 1952775413     1 363LF0000X
-#> # ℹ 165 more rows
+#> # ℹ 166 more rows
 #> 
 #> $ind$location
-#> # A tibble: 262 × 6
+#> # A tibble: 266 × 6
 #>           npi   loc city         state address                     zip      
 #>  *      <int> <int> <chr>        <chr> <chr>                       <chr>    
 #>  1 1013227818     1 COTTONTOWN   TN    250 OLD HIGHWAY 31 W        370484639
@@ -258,7 +260,7 @@ nppes(npi = order_refer(first = "Jennifer", last = "Smith")$npi)
 #>  8 1033486725     1 NASHVILLE    TN    3601 THE VANDERBILT CLINIC  372320001
 #>  9 1033486725     3 NASHVILLE    TN    3841 GREEN HILLS VILLAGE DR 372152691
 #> 10 1033553219     1 LYNN         MA    95 PLEASANT ST              019011524
-#> # ℹ 252 more rows
+#> # ℹ 256 more rows
 #> 
 #> 
 #> attr(,"class")

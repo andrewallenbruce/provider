@@ -71,10 +71,10 @@ containing the search results.
 
 ``` r
 spending(count = TRUE)
-#> ◼ spending | 4,626 rows | 4 pages
+#> ◼ spending | 4,623 rows | 4 pages
 spending(state = "GA")
-#> ✔ spending returned 130 results
-#> # A tibble: 130 × 8
+#> ✔ spending returned 129 results
+#> # A tibble: 129 × 8
 #>    ccn    name                            score address city  state zip   county
 #>    <chr>  <chr>                           <dbl> <chr>   <chr> <chr> <chr> <chr> 
 #>  1 110001 HAMILTON MEDICAL CENTER          0.94 1200 M… DALT… GA    30720 WHITF…
@@ -87,7 +87,7 @@ spending(state = "GA")
 #>  8 110010 EMORY UNIVERSITY HOSPITAL        0.94 1364 C… ATLA… GA    30322 DE KA…
 #>  9 110011 TANNER MEDICAL CENTER - CARROL…  1.05 705 DI… CARR… GA    30117 CARRO…
 #> 10 110015 TANNER MEDICAL CENTER VILLA RI…  1.01 601 DA… VILL… GA    30180 CARRO…
-#> # ℹ 120 more rows
+#> # ℹ 119 more rows
 spending2(count = TRUE)
 #> ◼ spending2 | 63,646 rows | 43 pages
 spending2(name = starts("SGMC"), state = "GA")

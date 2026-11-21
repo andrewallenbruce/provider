@@ -73,22 +73,22 @@ containing the search results.
 
 ``` r
 dialysis(count = TRUE)
-#> ◼ dialysis | 7,490 rows | 5 pages
+#> ◼ dialysis | 7,471 rows | 5 pages
 dialysis(org_name = "DaVita", state = "GA")
 #> ✔ dialysis returned 139 results
 #> # A tibble: 139 × 12
-#>    ccn    name     rating network status org_name cert_date  address city  state
-#>    <chr>  <chr>     <int>   <int> <chr>  <chr>    <date>     <chr>   <chr> <chr>
-#>  1 112505 DaVita …      3       6 Profit DaVita   1976-09-01 20 Riv… ROME  GA   
-#>  2 112513 DaVita …      1       6 Profit DaVita   1977-07-18 1747 L… Watk… GA   
-#>  3 112514 DaVita …      3       6 Profit DaVita   1977-07-14 53 SCR… BRUN… GA   
-#>  4 112515 DaVita …      2       6 Profit DaVita   1977-09-26 2704 N… VALD… GA   
-#>  5 112517 DaVita …      3       6 Profit DaVita   1979-04-09 1595 S… Jone… GA   
-#>  6 112523 DaVita …      1       6 Profit DaVita   1981-06-24 3620 M… ATLA… GA   
-#>  7 112526 DaVita …      2       6 Profit DaVita   1982-10-04 3899 L… DOUG… GA   
-#>  8 112528 DaVita …      1       6 Profit DaVita   1983-02-11 227 N … AMER… GA   
-#>  9 112532 DaVita …      3       6 Profit DaVita   1984-05-08 301 PE… JESUP GA   
-#> 10 112535 DaVita …      2       6 Profit DaVita   1985-02-13 190 WE… DOUG… GA   
+#>    ccn    name     rating network status org_name cert_date address  city  state
+#>    <chr>  <chr>     <int>   <int> <chr>  <chr>    <date>    <chr>    <chr> <chr>
+#>  1 112505 DaVita …      3       6 Profit DaVita   NA        20 Rive… ROME  GA   
+#>  2 112513 DaVita …      1       6 Profit DaVita   NA        1747 LA… Watk… GA   
+#>  3 112514 DaVita …      3       6 Profit DaVita   NA        53 SCRA… BRUN… GA   
+#>  4 112515 DaVita …      2       6 Profit DaVita   NA        2704 N … VALD… GA   
+#>  5 112517 DaVita …      3       6 Profit DaVita   NA        1595 St… Jone… GA   
+#>  6 112523 DaVita …      1       6 Profit DaVita   NA        3620 MA… ATLA… GA   
+#>  7 112526 DaVita …      2       6 Profit DaVita   NA        3899 LO… DOUG… GA   
+#>  8 112528 DaVita …      1       6 Profit DaVita   NA        227 N L… AMER… GA   
+#>  9 112532 DaVita …      3       6 Profit DaVita   NA        301 PEA… JESUP GA   
+#> 10 112535 DaVita …      2       6 Profit DaVita   NA        190 WES… DOUG… GA   
 #> # ℹ 129 more rows
 #> # ℹ 2 more variables: zip <chr>, county <chr>
 ```

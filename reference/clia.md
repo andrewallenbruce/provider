@@ -185,7 +185,7 @@ complexity:
 
 ``` r
 clia(count = TRUE)
-#> ◼ clia | 681,059 rows | 137 pages
+#> ◼ clia | 686,058 rows | 138 pages
 clia(certificate = c("acr", "reg"), city = "Valdosta", state = "GA")
 #> ✔ clia returned 18 results
 #> # A tibble: 18 × 20
