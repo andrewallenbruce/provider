@@ -38,7 +38,7 @@ ambulatory <- function(
     citytown = city,
     state = state,
     zip_code = zip,
-    patients_rating_of_the_facility_linear_mean_score = rating
+    oas_cahps_linear_mean_value = rating
   )
 
   x <- execute(x)

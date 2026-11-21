@@ -88,7 +88,8 @@ A Clinician or Group must have:
 }
 
 \examples{
-\dontshow{if (httr2::is_online()) withAutoprint(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+# httr2::is_online()
 clinician(count = TRUE)
 clinician(first = "Etan")
 clinician(year = greater(2030))

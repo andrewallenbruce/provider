@@ -43,11 +43,25 @@ S7::method(polish, s3_affiliations) <- function(x) {
 
 #' @noRd
 S7::method(polish, s3_ambulatory) <- function(x) {
-  collapse::settfmv(
-    x,
-    "patients_rating_of_the_facility_linear_mean_score",
-    as.integer
+  suppressWarnings({
+    collapse::setv(x[["oas_cahps_answer_percent"]], "Not Available", NA)
+    collapse::settfmv(
+      x,
+      c("oas_cahps_linear_mean_value", "oas_cahps_answer_percent"),
+      as.double
+    )
+    collapse::setop(x[["oas_cahps_answer_percent"]], "/", 100)
+  })
+
+  dblquote <- \(x) gsub('\"', "'", x, perl = TRUE)
+
+  collapse::gv(x, "oas_cahps_question") <- dblquote(
+    unlist_(collapse::gv(x, "oas_cahps_question"))
   )
+  collapse::gv(x, "oas_cahps_answer_description") <- dblquote(
+    unlist_(collapse::gv(x, "oas_cahps_answer_description"))
+  )
+
   set_rename(x)
   get_columns(x)
 }

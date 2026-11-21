@@ -14,16 +14,16 @@ URL: https://andrewallenbruce.github.io/provider/,
     https://github.com/andrewallenbruce/provider
 BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
-    R (>= 4.3.0)
+    R (>= 4.4.0)
 Imports: 
     cheapr (>= 1.5.2),
     cli (>= 3.6.6),
-    collapse (>= 2.1.8),
+    collapse (>= 2.1.9),
     httr2 (>= 1.3.0),
     purrr (>= 1.2.2),
-    RcppSimdJson (>= 0.1.16),
+    RcppSimdJson (>= 0.1.17),
     rlang (>= 1.3.0),
-    S7 (>= 0.2.2.9000),
+    S7 (>= 1.0.0),
     stringr (>= 1.6.0),
     vctrs (>= 0.7.3)
 Suggests: 
@@ -32,8 +32,6 @@ Suggests:
     testthat (>= 3.3.2),
     tibble (>= 3.3.1),
     withr (>= 3.0.3)
-Remotes:
-    RConsortium/S7
 VignetteBuilder: 
     knitr
 Config/Needs/website: tibble
