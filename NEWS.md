@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.1.9316 (2026-11-20)
+
+* Updated to S7 1.0.0
+* Fix: `opted_out()`'s API made  several lower-to-uppercase-letter column name changes that would cause an error
+* Fix: `ambulatory()`'s API also made several column name changes that would result in an error
+
+
 # provider 0.0.1.9315 (2026-10-13)
 
 * bumped dependencies (S7, RcppSimdJson)
